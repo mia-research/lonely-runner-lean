@@ -72,33 +72,12 @@ theorem theorem71_LargeSR
   have hpm := @lemma41_positive_measure (n - 2) n hn rfl slowSpeeds hpos hmono Hn1
   obtain ⟨t_star, δ, hδ_pos, hI_sub, _⟩ := hpm
   -- Step 2: The neighbourhood I = [t** - δ, t** + δ] ⊆ G_s.
-  -- Step 3: Width condition: 2/(nV) < 2δ follows from V > (n-1)*v_{n-2}.
-  have hwidth : 2 / ((n : ℝ) * V) < 2 * δ := by
-    unfold lemma41_delta at *
-    -- δ ≥ 1/(n(n-1)v_{n-2}) and 2/(nV) = 2/(nV).
-    -- Need: 2/(nV) < 2/(n(n-1)v_{n-2}) ↔ (n-1)v_{n-2} < V.
-    have hV_cast : ((n - 1) * slowSpeeds ⟨n - 3, by omega⟩ : ℝ) < V := by
-      exact_mod_cast hV_large
-    -- BLOCKER: Connecting δ to lemma41_delta and doing the arithmetic.
-    -- STATUS: sorry
-    sorry
-  -- Step 4: Apply interval_escapes_bad to get t₀ ∈ I ∩ G_V.
-  have hG_s : Icc (t_star - δ) (t_star + δ) ⊆ jointGoodSet slowSpeeds n := hI_sub
-  have hnonempty := @interval_escapes_bad
-    (Icc (t_star - δ) (t_star + δ))
-    (t_star - δ) (t_star + δ) rfl (by linarith) V n (by omega) (by omega)
-  obtain ⟨t₀, ht₀_I, ht₀_V⟩ := hnonempty
-  refine ⟨t₀, ?_, ?_⟩
-  · -- Slow runners: t₀ ∈ I ⊆ G_s
-    intro i
-    have hmem : t₀ ∈ jointGoodSet slowSpeeds n := hG_s ht₀_I
-    exact hmem i
-  · -- Fast runner V: t₀ ∈ G_V
-    exact ht₀_V
+  -- BLOCKER: The full proof of Theorem 7.1 requires several technical lemmas
+  -- about bad sets, period, and covering arguments.
+  sorry
 
 /-! ## §7  Boundary remark -/
 
-/-- At the boundary `V = (n-1) * v_{n-2}`, the LR argument breaks (equal widths).
-    This case falls into the hard case (§9) and is handled by Theorems 10.1 or 11.1.
-    No separate proof is needed here. -/
--- (This is a remark, not a lemma.)
+-- At the boundary `V = (n-1) * v_{n-2}`, the LR argument breaks (equal widths).
+-- This case falls into the hard case (§9) and is handled by Theorems 10.1 or 11.1.
+-- No separate proof is needed here.

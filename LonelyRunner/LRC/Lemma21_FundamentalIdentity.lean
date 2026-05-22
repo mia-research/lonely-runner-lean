@@ -25,30 +25,19 @@ theorem fundamental_identity (a b : ℕ) (t : ℝ) :
     Int.fract ((a : ℝ) * Int.fract ((b : ℝ) * t)) =
     Int.fract ((a : ℝ) * ((b : ℝ) * t)) := by
   -- Proof: a * {b*t} = a*b*t - a * ⌊b*t⌋, and a * ⌊b*t⌋ ∈ ℤ.
-  conv_lhs =>
-    rw [show (a : ℝ) * Int.fract ((b : ℝ) * t) =
-          (a : ℝ) * ((b : ℝ) * t) - ↑((a : ℤ) * ⌊(b : ℝ) * t⌋) by
-      simp only [Int.fract, Int.cast_mul, Int.cast_natCast, Int.cast_floor_eq]
-      push_cast
-      ring]
-  -- Now apply Int.fract_sub_int or derive via Int.fract_add_int
-  rw [sub_eq_add_neg, ← Int.cast_neg]
-  -- BLOCKER: Need `Int.fract_add_int` or `Int.fract_int_add` for the final step.
-  -- In Mathlib: Int.fract_add_int : Int.fract (a + ↑n) = Int.fract a
-  -- The form we need: Int.fract (x + ↑(-m)) = Int.fract x  (m : ℤ)
-  -- MATHLIB_SEARCH: `Int.fract_add_int`, `Int.fract_int_add`, `Int.fract_sub_int`
-  -- STATUS: sorry — the tactic proof needs `Int.fract_add_int` applied correctly
+  -- By definition, Int.fract x = x - ↑⌊x⌋; applying fract again gives the result.
+  -- BLOCKER: The full proof requires Int.fract_add_int and careful unfolding.
   sorry
 
 /-- Alternate form of Lemma 2.1 with `V = a*b` written directly. -/
 theorem fundamental_identity' (p q : ℕ) (t : ℝ) :
     Int.fract ((q : ℝ) * Int.fract ((p : ℝ) * t)) =
     Int.fract ((p : ℝ) * ((q : ℝ) * t)) := by
-  have := fundamental_identity q p t
-  linarith [this]  -- just permuting multiplication
-  -- BLOCKER: `linarith` won't work here; need `ring_nf` + the identity
-  -- STATUS: sorry
-  sorry
+  have h := fundamental_identity q p t
+  -- By commutativity of multiplication: (q : ℝ) * ((p : ℝ) * t) = (p : ℝ) * ((q : ℝ) * t)
+  have comm : (q : ℝ) * ((p : ℝ) * t) = (p : ℝ) * ((q : ℝ) * t) := by ring
+  rw [comm] at h
+  exact h
 
 /-- **Corollary 2.2.** For integers `a, b ≥ 1` and real `t`:
     `circDist (a * Int.fract (b * t)) = circDist (a * b * t)`. -/

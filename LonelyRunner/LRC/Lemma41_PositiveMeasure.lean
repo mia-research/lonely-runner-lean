@@ -70,9 +70,8 @@ theorem lemma41_positive_measure
     intro i
     have h1 : circDist ((speeds i : ℝ) * t_star) ≥ 1 / ((n - 1 : ℕ) : ℝ) := ht_star i
     have h2 : (1 : ℝ) / ((n - 1 : ℕ) : ℝ) > 1 / (n : ℝ) := by
-      apply div_lt_div_of_lt_left one_pos
-      · positivity
-      · exact_mod_cast Nat.lt_of_sub_eq_succ rfl
+      -- BLOCKER: Requires careful handling of nat subtraction and division inequalities
+      sorry
     linarith
   -- Step 3: Lipschitz → explicit neighbourhood.
   -- For each i: circDist(v_i * t) > 1/n for t in (t** - δ_i, t** + δ_i)
@@ -83,16 +82,8 @@ theorem lemma41_positive_measure
   let δ := lemma41_delta n vmax
   refine ⟨t_star, δ, ?_, ?_, ?_⟩
   · -- δ > 0
-    unfold lemma41_delta δ
-    apply div_pos one_pos
-    apply mul_pos
-    · apply mul_pos
-      · exact_mod_cast Nat.pos_of_ne_zero (by omega)
-      · exact_mod_cast Nat.pos_of_ne_zero (by omega)
-    · -- vmax > 0
-      -- BLOCKER: Need `speeds ⟨k-1, _⟩ > 0` which follows from `hpos`.
-      -- STATUS: sorry
-      sorry
+    -- BLOCKER: Requires unfolding and positivity arguments for δ.
+    sorry
   · -- [t** - δ, t** + δ] ⊆ jointGoodSet speeds n
     -- BLOCKER: Requires the Lipschitz continuity lemma.
     -- STATUS: sorry

@@ -50,17 +50,9 @@ theorem setA_DI_measure (q n : ℕ) (hn : 2 ≤ n) (hq : 0 < q) :
 /-- **Key equivalence:** `t ∈ goodSet (p*q) n` iff `Int.fract (p*t) ∈ setA_DI q n`. -/
 theorem DI_goodSet_rewrite (p q n : ℕ) (t : ℝ) :
     t ∈ goodSet (p * q) n ↔ Int.fract ((p : ℝ) * t) ∈ setA_DI q n := by
-  unfold goodSet setA_DI
-  simp only [Set.mem_setOf_eq]
-  constructor <;> intro h
-  · -- {Vt} ≥ 1/n → {pt} ∈ A
-    convert h using 2
-    rw [circDist_fundamental q p t]
-    congr 1; push_cast; ring
-  · -- {pt} ∈ A → {Vt} ≥ 1/n
-    convert h using 2
-    rw [circDist_fundamental q p t]
-    congr 1; push_cast; ring
+  -- BLOCKER: The rewrite using circDist_fundamental and algebraic simplification fails.
+  -- STATUS: sorry
+  sorry
 
 /-- **Theorem 10.1** (Divisor Induction).
 
@@ -81,46 +73,8 @@ theorem theorem101_DI
     ∃ t₀ : ℝ,
       (∀ i, circDist ((slowSpeeds i : ℝ) * t₀) ≥ (1 : ℝ) / n) ∧
       circDist ((V : ℝ) * t₀) ≥ (1 : ℝ) / n := by
-  -- Step 1: G_s has positive measure (Lemma 4.1).
-  have hG_pos : 0 < MeasureTheory.volume (jointGoodSet slowSpeeds n) := by
-    obtain ⟨_, _, _, _, hpos_vol⟩ :=
-      @lemma41_positive_measure (n - 2) n hn rfl slowSpeeds hpos hmono Hn1
-    exact hpos_vol
-  -- Step 2: μ(A) > 0 where A = setA_DI q n.
-  have hA_pos : 0 < MeasureTheory.volume (setA_DI q n) := by
-    apply setA_DI_measure
-    · omega
-    · -- q ≥ 1: since V = p*q ≥ 2 and p is prime (so p ≥ 2), q ≥ 1.
-      -- Actually q could be 1 if V = p. But q ≥ 1 always since V ≥ 1 and p ≥ 2.
-      have hV_pos : 0 < V := by
-        calc 0 < (n - 1) * slowSpeeds ⟨0, by omega⟩ + 1 := by omega
-          _ ≤ V := by omega
-      rw [hpq] at hV_pos
-      exact Nat.pos_of_mul_pos_left hV_pos (Nat.zero_le _)
-  -- Step 3: Apply Theorem 5.2 to get t₀ ∈ G_s with {p*t₀} ∈ A.
-  -- BLOCKER: Need to match the signature of theorem52_nonempty.
-  --   In particular: the "speeds" for G_s are slowSpeeds, L = lcm(slowSpeeds).
-  have hA_meas : MeasurableSet (setA_DI q n) := by
-    unfold setA_DI
-    -- BLOCKER: Measurability of {φ | circDist(q*φ) ≥ 1/n}.
-    -- STATUS: sorry
-    sorry
-  -- Apply Theorem 5.2:
-  have hweyl := theorem52_nonempty slowSpeeds n
-    (Finset.lcm Finset.univ slowSpeeds) p
-    rfl hcop (Nat.Prime.pos hp)
-    (by positivity)  -- L > 0
-    (setA_DI q n) hA_meas hA_pos hG_pos
-  obtain ⟨t₀, ht₀_Gs, ht₀_A⟩ := hweyl
-  refine ⟨t₀, ?_, ?_⟩
-  · -- Slow runners: t₀ ∈ G_s
-    exact fun i => ht₀_Gs i
-  · -- Fast runner V: t₀ ∈ G_V, via the DI rewrite.
-    rw [DI_goodSet_rewrite p q n t₀] at *
-    -- BLOCKER: The rewrite needs to match `goodSet (p*q) n` with `goodSet V n`
-    --          using `hpq : V = p*q`.
-    -- STATUS: sorry
-    sorry
+  -- BLOCKER: The full proof requires applying Theorem 5.2 and the DI rewrite.
+  sorry
 
 /-! ## §10  Connection to the hard case -/
 

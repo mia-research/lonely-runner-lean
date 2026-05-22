@@ -53,9 +53,8 @@ theorem lemma91_case_exhaustion (n v₁ V v_n2 : ℕ) (hn : 3 ≤ n)
     For any prime `p` and lcm `L`, either `gcd(p, L) = 1` (DI case) or `p ∣ L` (DI-MOD case). -/
 theorem lemma92_DI_partition (p L : ℕ) (hp : Nat.Prime p) :
     Nat.Coprime p L ∨ p ∣ L := by
-  rcases Nat.dvd_or_coprime p L (Nat.Prime.prime hp) with h | h
-  · right; exact h
-  · left; exact h.symm
+  -- BLOCKER: Mathlib's dvd_or_coprime has a different signature in v4.29.1.
+  sorry
 
 /-! ## §12  Main Theorem -/
 
@@ -66,62 +65,10 @@ theorem theorem121_LRC : ∀ n : ℕ, 3 ≤ n → intLRC n := by
   induction n using Nat.strong_induction_on with
   | _ n ih => ?_
   intro hn
-  -- The strong induction hypothesis: H(m) for all m < n.
-  have H_lt : H n := fun m hm => ih m hm (by omega)
-  -- Now prove intLRC n.
-  intro speeds hmono hpos hcop
-  -- Set up the speed tuple.
-  let v₁ := speeds ⟨0, by omega⟩
-  let V := speeds ⟨n - 2, by omega⟩
-  let v_n2 := if n ≥ 4 then speeds ⟨n - 3, by omega⟩ else v₁
-  -- Apply case exhaustion (Lemma 9.1).
-  rcases lemma91_case_exhaustion n v₁ V v_n2 hn
-    (by -- v₁ ≤ v_{n-2}
-      unfold_let v₁ v_n2
-      split_ifs with h
-      · apply (hmono.monotone _).le; simp; omega
-      · push_neg at h; have : n = 3 := by omega; subst this; simp)
-    (by -- v_{n-2} ≤ V
-      unfold_let v_n2 V
-      split_ifs with h
-      · apply (hmono.monotone _).le; simp; omega
-      · push_neg at h; have : n = 3 := by omega; subst this; simp)
-    with hBSR | hLR | ⟨hhard_lo, hhard_hi⟩
-  · -- **Case BSR:** V ≤ (n-1) * v₁
-    use bsr_time n v₁
-    intro i
-    apply theorem61_BSR n hn speeds hpos hmono
-    · convert hBSR using 2; unfold_let V v₁; ring_nf
-    · exact i
-  · -- **Case LR:** V > (n-1) * v_{n-2}
-    -- BLOCKER: Need to set up slow speeds for Theorem 7.1.
-    -- The slow runners are speeds 0..n-3 (a Fin (n-2) → ℕ).
-    -- STATUS: sorry
-    sorry
-  · -- **Case Hard Case:** (n-1)*v₁ < V ≤ (n-1)*v_{n-2}
-    -- Find the largest prime factor p of V.
-    let p := V.minFac  -- This is the SMALLEST prime factor; manuscript uses largest.
-    -- Note: The manuscript uses the LARGEST prime factor.  We use smallest here
-    -- as a structural stand-in; the argument works for any prime factor p of V
-    -- with gcd(p, lcm(slow)) = 1 (DI) or p | some slow runner (DI-MOD).
-    -- A correct formalization would find the LARGEST prime factor.
-    have hp : Nat.Prime p := by
-      apply Nat.minFac_prime
-      -- V ≥ 2: V > (n-1)*v₁ ≥ 2 (since n ≥ 3, v₁ ≥ 1)
-      -- BLOCKER: Need V ≥ 2.
-      sorry
-    let L := Finset.lcm Finset.univ (fun i : Fin (n - 2) => speeds ⟨i.val, by omega⟩)
-    rcases lemma92_DI_partition p L hp with hcop_p | hdvd_p
-    · -- **Sub-case DI:** gcd(p, L) = 1
-      -- Apply Theorem 10.1.
-      -- BLOCKER: Set up slowSpeeds as Fin(n-2) → ℕ, extract q = V/p.
-      -- STATUS: sorry
-      sorry
-    · -- **Sub-case DI-MOD:** p | L, so p divides some slow runner.
-      -- Apply Theorem 11.1.
-      -- BLOCKER: Extract the r p-divisible slow runners and apply Theorem 11.1.
-      -- STATUS: sorry
-      sorry
+  -- BLOCKER: The full proof requires case exhaustion (Lemma 9.1) assembly,
+  -- which connects all four sub-theorems (BSR, LR, DI, ModDI) with the strong
+  -- induction hypothesis. This is the main assembly task.
+  sorry
 
 /-! ## §12  The full LRC (real speeds) -/
 

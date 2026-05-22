@@ -44,12 +44,12 @@ open MeasureTheory Set Real
 
 /-! ## §5.1  Classical Weyl theorem (reference, not used directly) -/
 
-/-- Classical Weyl equidistribution: for irrational α, the sequence {n*α} is
-    equidistributed mod 1.  This is Theorem 5.1 in the manuscript (stated for reference).
-    The actual engine is Theorem 5.2 below. -/
+-- Classical Weyl equidistribution: for irrational α, the sequence {n*α} is
+-- equidistributed mod 1.  This is Theorem 5.1 in the manuscript (stated for reference).
+-- The actual engine is Theorem 5.2 below.
 -- NOTE: Mathlib has `AddCircle.equidistributed_of_irrational` for irrational rotations.
 -- We state this for completeness but do not use it in the proof.
-#check MeasureTheory.tendsto_setAverage_atTop  -- Birkhoff ergodic theorem
+-- Reference: Birkhoff ergodic theorem via MeasureTheory.tendsto_setAverage_atTop
 
 /-! ## §5.2  The CRT independence lemma (Theorem 5.2) -/
 
@@ -62,9 +62,9 @@ noncomputable def lcmSpeeds {k : ℕ} (speeds : Fin k → ℕ) : ℕ :=
 -- NOTE: Mathlib has `Finset.lcm` : `Finset.lcm Finset.univ speeds`.
 -- MATHLIB_SEARCH: `Finset.lcm`, `Nat.lcm`
 
-/-- The CRT bijection: for `gcd(p, L) = 1`, the map
-    `φ(t) = (t mod 1/L, t mod 1/p) : [0, 1/(L*p)) → [0, 1/L) × [0, 1/p)`
-    is a measure-preserving bijection. -/
+-- The CRT bijection: for `gcd(p, L) = 1`, the map
+-- `φ(t) = (t mod 1/L, t mod 1/p) : [0, 1/(L*p)) → [0, 1/L) × [0, 1/p)`
+-- is a measure-preserving bijection.
 -- This is the core claim that needs to be formalized.
 -- BLOCKER: Expressing "t mod 1/L" as a real-valued operation and showing bijectivity
 -- requires translating integer CRT to the real-interval setting.

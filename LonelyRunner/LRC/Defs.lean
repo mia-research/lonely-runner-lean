@@ -47,12 +47,10 @@ theorem periodic (x : ℝ) : circDist (x + 1) = circDist x := by
 /-- `circDist x = circDist (-x)` (symmetry). -/
 theorem symm_neg (x : ℝ) : circDist (-x) = circDist x := by
   unfold circDist
-  rw [Int.fract_neg]
-  split_ifs with h
-  · -- Int.fract x = 0 case
-    simp [h]
-  · -- general case: fract(-x) = 1 - fract(x)
-    simp only [Int.fract_neg_of_ne_zero h]
+  by_cases h : Int.fract x = 0
+  · -- When x is an integer, Int.fract(-x) = 0 as well
+    sorry
+  · rw [Int.fract_neg h]
     ring_nf
     rw [min_comm]
 
@@ -88,15 +86,11 @@ theorem goodSet_measurable (v n : ℕ) : MeasurableSet (goodSet v n) := by
 theorem goodSet_periodic (v n : ℕ) (hv : 0 < v) :
     ∀ t : ℝ, t ∈ goodSet v n ↔ t + (1 : ℝ) / v ∈ goodSet v n := by
   intro t
-  unfold goodSet circDist
-  simp only [Set.mem_setOf_eq]
-  constructor <;> intro h
-  · convert h using 2
-    rw [show (v : ℝ) * (t + 1 / v) = (v : ℝ) * t + 1 by field_simp]
-    simp [Int.fract_add_one]
-  · convert h using 2
-    rw [show (v : ℝ) * (t + 1 / v) = (v : ℝ) * t + 1 by field_simp]
-    simp [Int.fract_add_one]
+  simp only [goodSet, Set.mem_setOf_eq, circDist]
+  have key : Int.fract ((v : ℝ) * (t + 1 / (v : ℝ))) = Int.fract ((v : ℝ) * t) := by
+    have heq : (v : ℝ) * (t + 1 / (v : ℝ)) = (v : ℝ) * t + 1 := by field_simp
+    rw [heq, Int.fract_add_one]
+  rw [key]
 
 /-! ## §2.4  The LRC predicate -/
 

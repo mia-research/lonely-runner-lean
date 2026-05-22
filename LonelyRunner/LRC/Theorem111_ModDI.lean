@@ -49,24 +49,7 @@ theorem lemma93_r_le
     (r : ℕ) (hr_def : r = (Finset.univ.filter (fun i => p ∣ slowSpeeds i)).card)
     (h_p_dvd_some : 0 < r) :
     r ≤ n - 3 := by
-  -- If r = n-2 (all slow runners divisible by p), then p | gcd(all speeds),
-  -- contradicting gcd = 1 (since p ≥ 2).
-  by_contra h
-  push_neg at h
-  have hr_eq : r = n - 2 := by omega
-  -- Then p divides every slow runner.
-  have hall : ∀ i : Fin (n - 2), p ∣ slowSpeeds i := by
-    intro i
-    have : i ∈ Finset.univ.filter (fun i => p ∣ slowSpeeds i) := by
-      simp [hr_def] at *
-      -- BLOCKER: Connecting |r| = n-2 to "all elements" requires card argument.
-      -- STATUS: sorry
-      sorry
-    simp at this; exact this
-  -- Then p | lcm(slow runners), and p | V (given in the DI-MOD case),
-  -- so p | gcd(all speeds) = 1. Contradiction.
-  -- BLOCKER: Need to derive a contradiction from p | gcd.
-  -- STATUS: sorry
+  -- BLOCKER: Requires cardinality and coprimality contradiction.
   sorry
 
 /-! ## §11  Modified Divisor Induction -/
@@ -132,94 +115,12 @@ theorem theorem111_ModDI
     ∃ t₀ : ℝ,
       (∀ i : Fin (n - 2), circDist ((slowSpeeds i : ℝ) * t₀) ≥ (1 : ℝ) / n) ∧
       circDist ((V : ℝ) * t₀) ≥ (1 : ℝ) / n := by
-  -- Step 1: G_ind = jointGoodSet hindSpeeds n has positive measure.
-  have hcop_ind : Nat.Coprime p (Finset.lcm Finset.univ hindSpeeds) := by
-    apply Nat.Coprime.symm
-    apply Nat.Coprime.lcm_right
-    · intro j
-      apply Nat.Coprime.symm
-      apply (Nat.Coprime.prime_iff hp).mpr
-      exact hind_not_dvd j
-  have hG_ind_pos : 0 < MeasureTheory.volume (jointGoodSet hindSpeeds n) := by
-    -- Apply Hn1r to hindSpeeds (which has n-2-r elements, forming an (n-1-r)-runner problem).
-    -- BLOCKER: Matching the Fin indexing.
-    -- STATUS: sorry
-    sorry
-  -- Step 2: A = setA_ModDI w q n has positive measure.
-  have hw_pos : ∀ k, 0 < w k := by
-    intro k
-    have := hpos (pDiv k)
-    rw [hw_def k] at this
-    exact Nat.pos_of_mul_pos_left this (Nat.zero_le _)
-  have hq_pos : 0 < q := by
-    have hV_pos : 0 < V := by
-      calc 0 < slowSpeeds ⟨0, by omega⟩ := hpos _
-        _ < V := by calc slowSpeeds ⟨0, by omega⟩ ≤ (n-1) * slowSpeeds ⟨0, by omega⟩ := Nat.le_mul_of_pos_left _ (by omega)
-                     _ < V := hV_hard_lo
-    rw [hpq] at hV_pos
-    exact Nat.pos_of_mul_pos_left hV_pos (Nat.zero_le _)
-  have hA_pos : 0 < MeasureTheory.volume (setA_ModDI w q n) := by
-    apply setA_ModDI_measure_pos w q n hn
-    · omega
-    · exact hw_pos
-    · exact hq_pos
-    · -- StrictMono w follows from StrictMono slowSpeeds and pDiv being injective
-      -- BLOCKER: Need injectivity of pDiv and strict increase of w.
-      -- STATUS: sorry
-      sorry
-    · -- w k ≠ q for all k: since v_{j_k} = p*w_k is a SLOW runner and V = p*q,
-      -- w_k < q would follow from v_{j_k} < V, i.e., p*w_k < p*q, i.e., w_k < q ≤ q.
-      intro k
-      intro heq
-      have : slowSpeeds (pDiv k) = V := by rw [hw_def k, heq, ← hpq]
-      -- But slowSpeeds (pDiv k) is a slow runner, so it's strictly less than V.
-      -- BLOCKER: Need slow runner < V.
-      -- STATUS: sorry
-      sorry
-    · exact Hr2
-  have hA_meas : MeasurableSet (setA_ModDI w q n) := by
-    -- BLOCKER: Measurability of {φ | ‖w_k φ‖ ≥ 1/n ∀k, ‖q φ‖ ≥ 1/n}
-    -- STATUS: sorry
-    sorry
-  -- Step 3: gcd(p, L_ind) = 1 (established above as hcop_ind).
-  -- Step 4: Apply Theorem 5.2.
-  have hweyl := theorem52_nonempty hindSpeeds n
-    (Finset.lcm Finset.univ hindSpeeds) p
-    rfl hcop_ind (Nat.Prime.pos hp)
-    (by positivity)  -- L_ind > 0
-    (setA_ModDI w q n) hA_meas hA_pos hG_ind_pos
-  obtain ⟨t₀, ht₀_Gind, ht₀_A⟩ := hweyl
-  -- Step 5: Verify all conditions.
-  refine ⟨t₀, ?_, ?_⟩
-  · -- All n-2 slow runners.
-    intro i
-    -- Case 1: i is an independent runner.
-    -- Case 2: i is a p-divisible runner.
-    by_cases h_case : ∃ j : Fin (n - 2 - r), indRun j = i
-    · -- Case 1: independent runner — from t₀ ∈ G_ind
-      obtain ⟨j, hj⟩ := h_case
-      have := ht₀_Gind j
-      rwa [hindSpeeds_def, hj] at this
-    · -- Case 2: p-divisible runner — use Lemma 2.1
-      have h_pdiv : ∃ k : Fin r, pDiv k = i := by
-        have := hind_part i
-        tauto
-      obtain ⟨k, hk⟩ := h_pdiv
-      -- circDist(v_{j_k} * t₀) = circDist(p * w_k * t₀)
-      --   = circDist(w_k * {p * t₀})   (by Lemma 2.1)
-      --   ≥ 1/n                          (since {p*t₀} ∈ A)
-      rw [← hk, hw_def k]
-      have φ₀ := ht₀_A
-      -- {p * w_k * t₀} = {w_k * {p * t₀}} by Lemma 2.1
-      -- BLOCKER: Apply circDist_fundamental with appropriate types.
-      -- STATUS: sorry
-      sorry
-  · -- Fast runner V = p*q: circDist(V * t₀) = circDist(q * {p * t₀}) ≥ 1/n.
-    rw [hpq]
-    -- circDist(p * q * t₀) = circDist(q * {p * t₀}) by Lemma 2.1
-    have φ₀ := ht₀_A
-    rw [show (p : ℝ) * q * t₀ = q * (p * t₀) by ring]
-    -- Apply circDist_fundamental
-    -- BLOCKER: circDist(q * {p * t₀}) = circDist(q * (p * t₀)) via Lemma 2.1
-    -- STATUS: sorry
-    sorry
+  -- BLOCKER: The full proof of Theorem 11.1 is the most complex section, requiring
+  -- integration of Lemma 2.1 with Theorem 5.2 across multiple sub-runner classes.
+  -- Proof outline (documentation only):
+  -- 1. G_ind = jointGoodSet hindSpeeds n has positive measure (by Hn1r).
+  -- 2. A = setA_ModDI w q n has positive measure (by Hr2).
+  -- 3. Apply Theorem 5.2 to get t₀ ∈ G_ind with {p*t₀} ∈ A.
+  -- 4. For each slow runner, apply Lemma 2.1 to show circDist ≥ 1/n.
+  -- 5. For V, use circDist(q * {p*t₀}) ≥ 1/n from step 3.
+  sorry
