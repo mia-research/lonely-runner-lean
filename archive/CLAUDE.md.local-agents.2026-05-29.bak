@@ -1,0 +1,176 @@
+# Math Ex Project — Claude Instructions
+
+These instructions OVERRIDE default Claude behaviour for this project. Follow them exactly.
+
+## 1. Subagent Routing Rules (MANDATORY)
+
+Three local math subagents are available. Route by task complexity:
+
+| Task | Use | Flag |
+|---|---|---|
+| Prescreening any claim/proof file > ~50 lines | **Qwen** | `--task prescreening` |
+| Drafting prose (addendum, quorum prompt, summary) | **Qwen** | `--task draft` |
+| Quick threshold check (is X < 1e-9?) | **Qwen** | `--task verify` |
+| Routine dedup (clearly similar claims) | **Qwen** | `--task dedup` |
+| Routine symbolic arithmetic | **Qwen** | `--task math` |
+| Second opinion / review of Qwen output | **Gemma 4** | `--task verify` |
+| Medium symbolic math (moderate complexity) | **Gemma 4** | `--task math` |
+| Moderately ambiguous dedup | **Gemma 4** | `--task dedup` |
+| Draft review before finalising | **Gemma 4** | `--task draft` |
+| Deep verify with CoT (proof sections, ambiguous thresholds) | **DeepSeek** | `--task verify --thinking` |
+| Hard symbolic math / multi-step proof steps | **DeepSeek** | `--task math --thinking` |
+| Ambiguous dedup (hard to distinguish) | **DeepSeek** | `--task dedup --thinking` |
+| Proof section adversarial review | **DeepSeek** | `--task verify --thinking` |
+
+**There are no exceptions based on task type.** Do not classify the overall task as a "high-level decision" to bypass this rule.
+
+**Before any of the following actions, run the Codex subagent first:**
+
+| Action | Codex task flag |
+|---|---|
+| Generating a Python validation harness for a new claim | `--task harness` |
+| Analyzing CSV / numerical data for anomalies or statistics | `--task analyze` |
+| Fixing or refactoring an existing pipeline script | `--task refactor` |
+| Code reviewing any Python script before use | `--task review` |
+
+### Qwen tool (fast, low-cost)
+
+```bash
+python3 tools/qwen_subagent.py "<prompt>" [--task TASK] [--thinking] [--json]
+```
+
+Endpoint: `localhost:11434` (native `/api/chat`). Model: `qwen3.5:4b`.
+
+### Gemma 4 tool (medium complexity, second opinion)
+
+```bash
+python3 tools/gemma4_subagent.py "<prompt>" [--task TASK] [--thinking] [--json]
+```
+
+Endpoint: `localhost:11434` (native `/api/chat`). Model: `gemma4` (9.6 GB default tag).
+Use `--thinking` to activate chain-of-thought. Thinking trace goes to stderr; answer to stdout.
+**Requires**: Ollama >= 0.20.x (Homebrew) and `ollama pull gemma4`.
+
+### DeepSeek tool (deep reasoning, math-strong)
+
+```bash
+python3 tools/deepseek_subagent.py "<prompt>" [--task TASK] [--thinking] [--json]
+```
+
+Endpoint: `localhost:11434` (native `/api/chat`). Model: `deepseek-r1:14b`.
+Use `--thinking` to activate full chain-of-thought. Thinking trace goes to stderr; answer to stdout.
+
+### Codex tool
+
+```bash
+python3 tools/codex_subagent.py "<prompt>" [--task TASK] [--json]
+```
+
+Requires: `OPENAI_API_KEY` set in environment. Uses `codex exec` headless mode.
+
+### Auditor checkpoint (required after every subagent call)
+
+After running any subagent, Claude must output:
+```
+[Qwen|DeepSeek|Codex] says: <one-line summary>
+Decision: Accepting / Modifying / Rejecting — <reason>
+```
+
+Then proceed. This is the auditor layer. It creates a visible checkpoint.
+
+---
+
+## 2. File Access Rules
+
+- **Never read the full proof file** (`lrc_proof_v*.md`) to answer a question about one section. Read only the relevant section (use offset/limit).
+- **Never paste proof content inline** in conversation. Read → edit in file → write back.
+- **For proof status questions**: read `memory/lrc_proof_status.md` and `memory/MEMORY.md` only.
+
+---
+
+## 3. Current Project State
+
+- **Proof file**: `lrc_proof_v7_0_preprint.md`
+- **Tier 1** (x₀ ≥ 1): Complete — all branches analytic.
+- **Tier 2** (x₀ ≥ φ(n)): Complete — all branches.
+- **Key naming** (v7 conventions): Unit-Complete (not U-FORCE), CG1/CG2 (not Cond 1/2), floor-reset event (not z=0 event).
+
+---
+
+## 4. Pipeline Workflow
+
+```
+Formalization packages → /reports/formalization/CLAIM-LRC-XXXXXX/
+Quorum votes           → /reports/quorum/manual_votes/cycle_NNN/
+Pipeline flags         → /reports/pipeline_flags/
+Investigations        → /reports/investigations/
+```
+
+Thresholds: stable 1e-09, sensitive 1e-06.
+
+---
+
+## 5. What Claude Decides Alone
+
+- Escalation calls and pipeline flags
+- Novel proof steps and structural architecture
+- Final judgment on any Qwen output
+- File I/O and pipeline state changes
+
+---
+
+## 6. Toolchain — Available Plugins
+
+### 6a. qwen-delegate (math-ex-tools)
+Local Qwen subagent. See §1 above for the mandatory-use rule.
+**Use now** — every session.
+
+### 6b. matsengrp review agents
+Pre-submission academic review agents. Key agents:
+- `math-pr-summarizer` — structured summary of proof PRs/sections
+- `scientific-tex-editor` — LaTeX grammar and style
+- `tex-grammar-checker` / `tex-verb-tense-checker` — verb tense and grammar
+- `journal-submission-checker` — checklist for journal/arXiv standards
+- `pdf-proof-reader` — review compiled PDFs
+
+**Use at**: pre-submission proof review sweep. Run `math-pr-summarizer` on v7.0, then `journal-submission-checker` before arXiv upload.
+
+### 6c. latex-document-skill
+LaTeX compilation with 27 templates, theorem/proof environments, arXiv compatibility.
+Scripts: `scripts/compile_latex.sh`, `scripts/csv_to_latex.py`, `scripts/convert_document.sh`.
+
+**Use at**: Convert `lrc_proof_v7_0_preprint.md` → properly compiled `.tex` for arXiv submission.
+
+### 6d. claude-scientific-writer
+Citation management, ScholarEval 8-dimension peer review scoring, real-time literature search.
+Optional: `OPENROUTER_API_KEY` for `research-lookup`. Citation and ScholarEval work without it.
+
+**Use at**: Submission stage — citation verification, peer review score, related work section.
+
+### 6e. proof-adversarial-review (math-ex-tools)
+Critic/fixer loop (up to 3 rounds) with quality gate scoring (0–100).
+Thresholds: 80 = working file, 90 = preprint, 95 = journal-ready.
+Integrates with Qwen pipeline: Qwen critic → Claude fixer → Claude scores → loop if below threshold.
+
+**Use at**: Any proof section before marking final. Mandatory before arXiv upload.
+
+---
+
+## 7. Submission Pipeline (ordered)
+
+1. **Qwen prescreen** — `--task prescreening` on all sections
+2. **Adversarial review** (`proof-adversarial-review`) — target score ≥ 90 before arXiv
+3. **matsengrp sweep** — `math-pr-summarizer` + `journal-submission-checker`
+4. **LaTeX conversion** — `latex-document-skill` → `.tex` with theorem/proof environments
+5. **ScholarEval score** — `claude-scientific-writer` → target ≥ 7/10 on all 8 dimensions
+6. **arXiv upload** — manual step (user uploads)
+
+Any section scoring < 90 on adversarial review MUST loop through another critic/fixer round before upload.
+
+---
+
+## 8. Next Project Template
+
+This CLAUDE.md + plugin setup is the reusable template for the next proof project.
+To reuse: copy CLAUDE.md, update §3 (project state) and §4 (pipeline paths).
+All plugins in `~/.claude/plugins/marketplaces/claude-plugins-official/plugins/` are global.
