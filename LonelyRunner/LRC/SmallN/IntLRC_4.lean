@@ -2,6 +2,7 @@ import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.Theorem61_BSR
 import LonelyRunner.LRC.Theorem71_LargeSR
 import LonelyRunner.LRC.SmallN.IntLRC_3
+import LonelyRunner.LRC.SmallN.IntLRC_4_Bienia
 
 /-!
 # `intLRC 4` — Lonely Runner Conjecture for n = 4
@@ -100,9 +101,10 @@ theorem intLRC_four : intLRC 4 := by
         rw [heq]; exact ht₀_V
     · push_neg at hLR
       -- Hard Case: 3·v_1 < V ≤ 3·v_2
-      -- TODO: classical argument (Bienia–Goddyn–Gvozdjak–Sebő–Tarsi 1998, or
-      -- Renault 2004 congruence-classes-mod-4, or Chen elementary case analysis).
-      -- Source-paper access needed; see memory/lean_smalln_2026_05_29.md for
-      -- candidate references. This is the only sorry in this file; the case
-      -- split itself (BSR/LR/Hard) and the H 4 induction premise are fully proved.
-      sorry
+      -- Apply Bienia's case split: all-odd vs. else.
+      by_cases hall_odd : ∀ i, Odd (speeds i)
+      · -- All three speeds odd: Bienia §3 step 1, t = 1/2.
+        exact intLRC_four_all_odd speeds hall_odd
+      · -- Not all odd: pre-jump reduction + T-interval main argument.
+        -- TODO: implement Bienia §3 steps 2-3 (see memory/bienia_n4_proof.md).
+        sorry
