@@ -61,17 +61,58 @@ theorem bhk_case_v1_small_generic (speeds : Fin 5 → ℕ) (hmono : StrictMono s
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
+/-- **Arithmetic kernel for BHK §8.1.1.** From the three structural
+    inequalities derived in BHK p46:
+
+    * (65)  `5 v_1 < v_5`         (i.e. `5 x_5 < x_1`)
+    * (70b) `5 v_4 < 19 v_1`      (i.e. `5 x_1 < 19 x_4`)
+    * (71b) `29 v_5 < 37 v_4`     (i.e. `29 x_4 < 37 x_5`)
+
+    derive a numerical contradiction.
+
+    Arithmetic chain:
+
+    * From (65) and (71b): `29 · 5 v_1 < 29 v_5 < 37 v_4`, i.e. `145 v_1 < 37 v_4`.
+      Multiply by 5: `725 v_1 < 185 v_4`.
+    * From (70b) × 37: `185 v_4 < 703 v_1`.
+    * Chain: `725 v_1 < 185 v_4 < 703 v_1`, divide by `v_1 > 0`: `725 < 703`. False. -/
+lemma bhk_case_8_1_1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (h65  : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h70b : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 19 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h71b : 29 * (speeds ⟨4, by omega⟩ : ℤ) < 37 * (speeds ⟨3, by omega⟩ : ℤ)) :
+    False := by
+  have hv1 : (0 : ℤ) < (speeds ⟨0, by omega⟩ : ℤ) := by exact_mod_cast hpos ⟨0, by omega⟩
+  nlinarith [h65, h70b, h71b, hv1]
+
 /-- **BHK §8.1.1.** Sub-case of `x_1 ≤ 3` with `x_4 > 5/7` (de-normalised:
     `5 v_3 < 7 v_2`, since BHK uses `x_3 = 1`, i.e. `5 * speeds ⟨3⟩ < 7 * speeds ⟨2⟩`)
     AND `13 x_4 ≤ 7 x_2` (de-normalised: `13 v_2 ≤ 7 v_4`, i.e.
-    `13 * speeds ⟨1⟩ ≤ 7 * speeds ⟨3⟩`). See BHK p46. -/
+    `13 * speeds ⟨1⟩ ≤ 7 * speeds ⟨3⟩`). See BHK p46.
+
+    Proof structure: assume for contradiction no lonely `t` exists. BHK then
+    derives three structural inequalities via three gap analyses:
+
+    * 1234-gap analysis → (65) `5 x_5 < x_1`
+    * 123-gap `[13/6, 5 x_1/6]` → (70) `5 x_1 < 19 x_4`
+    * 1235-gap `[37 x_5/6, 23/6]` → (71) `29 x_4 < 37 x_5`
+
+    These three contradict via `bhk_case_8_1_1_kernel`. -/
 theorem bhk_case_8_1_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hlarge : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩)
     (h81 : 5 * speeds ⟨3, by omega⟩ < 7 * speeds ⟨2, by omega⟩)
     (h811 : 13 * speeds ⟨1, by omega⟩ ≤ 7 * speeds ⟨3, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  by_contra h_no_lonely
+  push_neg at h_no_lonely
+  -- STRUCTURAL SORRY: from h_no_lonely + case hypotheses, derive BHK's
+  -- (65), (70b), (71b) — the three gap analyses on p46.
+  obtain ⟨h65, h70b, h71b⟩ :
+      (5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ)) ∧
+      (5 * (speeds ⟨3, by omega⟩ : ℤ) < 19 * (speeds ⟨0, by omega⟩ : ℤ)) ∧
+      (29 * (speeds ⟨4, by omega⟩ : ℤ) < 37 * (speeds ⟨3, by omega⟩ : ℤ)) := by
+    sorry
+  exact bhk_case_8_1_1_kernel speeds hpos h65 h70b h71b
 
 /-- **BHK §8.1.2.** Sub-case of `x_1 ≤ 3` with `x_4 > 5/7` (de-normalised:
     `5 * speeds ⟨3⟩ < 7 * speeds ⟨2⟩`) AND `7 x_2 < 13 x_4` (de-normalised:
@@ -84,16 +125,76 @@ theorem bhk_case_8_1_2 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
+/-- **Arithmetic kernel for BHK §8.2.1.** Given the existence of an integer
+    `j ≥ 2` satisfying the BHK `j`-conditions
+    `(6j-1) v_4 < 7 v_5` and `5 v_5 < (6j+1) v_3`, together with the case
+    hypotheses `5 v_1 < v_4` (§8.2.1) and `v_3 ≤ 3 v_1` (§8 entry),
+    derive a contradiction.
+
+    Arithmetic chain (BHK p48):
+
+    * `5 v_1 < v_4`            gives `5 (6j-1) v_1 < (6j-1) v_4 < 7 v_5`.
+    * `v_3 ≤ 3 v_1`            gives `5 v_5 < (6j+1) v_3 ≤ 3 (6j+1) v_1`.
+    * Multiply by 5 and 7 to get `25 (6j-1) v_1 < 35 v_5 < 21 (6j+1) v_1`.
+    * Cancel `v_1 > 0`: `25 (6j-1) < 21 (6j+1)`, i.e. `24 j < 46`.
+    * `j ≥ 2` gives `24 j ≥ 48 > 46`, contradiction.
+
+    This is BHK's "j > 1" derivation from §8.2.1; the bound
+    `x_1 > 25(6j-1)/(7(6j+1)) ≥ 275/91 > 3` exactly mirrors `24 j < 46`
+    contradicting `j ≥ 2`. -/
+lemma bhk_case_8_2_1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h821 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨3, by omega⟩ : ℤ))
+    (j : ℤ) (hj : 2 ≤ j)
+    (hjL : (6 * j - 1) * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨4, by omega⟩ : ℤ))
+    (hjR : 5 * (speeds ⟨4, by omega⟩ : ℤ) < (6 * j + 1) * (speeds ⟨2, by omega⟩ : ℤ)) :
+    False := by
+  have hv1 : (0 : ℤ) < (speeds ⟨0, by omega⟩ : ℤ) := by exact_mod_cast hpos ⟨0, by omega⟩
+  have h6jm1_pos : 0 < 6 * j - 1 := by linarith
+  have h6jp1_pos : 0 < 6 * j + 1 := by linarith
+  have stepA : (6 * j - 1) * (5 * (speeds ⟨0, by omega⟩ : ℤ)) <
+                (6 * j - 1) * (speeds ⟨3, by omega⟩ : ℤ) :=
+    mul_lt_mul_of_pos_left h821 h6jm1_pos
+  have stepB : (6 * j + 1) * (speeds ⟨2, by omega⟩ : ℤ) ≤
+                (6 * j + 1) * (3 * (speeds ⟨0, by omega⟩ : ℤ)) :=
+    mul_le_mul_of_nonneg_left hlarge (le_of_lt h6jp1_pos)
+  nlinarith [stepA, stepB, hjL, hjR, hv1, hj]
+
 /-- **BHK §8.2.1.** Sub-case of `x_1 ≤ 3` with `x_4 ≤ 5/7` (de-normalised:
     `7 * speeds ⟨2⟩ ≤ 5 * speeds ⟨3⟩`) AND `5 x_4 < x_1` (de-normalised:
-    `5 * speeds ⟨0⟩ < speeds ⟨3⟩`). See BHK p47. -/
+    `5 * speeds ⟨0⟩ < speeds ⟨3⟩`). See BHK p47–48.
+
+    Proof structure: assume for contradiction no lonely `t` exists. The
+    123-gap `[x_1/6, 5/6]` (complement of `B_1 ∪ B_2 ∪ B_3` in this region)
+    must be covered by `B_4 ∪ B_5`. Under §8.2.1's `5 x_4 < x_1`, the
+    sub-interval `[7 x_4/6, 5/6]` is covered by `B_5` alone. This forces
+    an integer `j ≥ 2` with `(6j-1) v_4 < 7 v_5` and `5 v_5 < (6j+1) v_3`.
+    Then `bhk_case_8_2_1_kernel` closes via arithmetic. -/
 theorem bhk_case_8_2_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hlarge : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩)
     (h82 : 7 * speeds ⟨2, by omega⟩ ≤ 5 * speeds ⟨3, by omega⟩)
     (h821 : 5 * speeds ⟨0, by omega⟩ < speeds ⟨3, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  by_contra h_no_lonely
+  push_neg at h_no_lonely
+  -- h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6
+  -- i.e. every time is unsafe for some runner. ⋃ᵢ unsafeOf i = ℝ.
+  -- STRUCTURAL SORRY: derive the integer j with BHK §8.2.1 j-conditions
+  -- from the covering ⋃ unsafeOf = ℝ (specifically from
+  -- [7 x_4 / 6, 5/6] ⊆ B_5 = unsafeOf 5).
+  obtain ⟨j, hj, hjL, hjR⟩ : ∃ j : ℤ, 2 ≤ j ∧
+      (6 * j - 1) * (speeds ⟨3, by omega⟩ : ℤ) <
+        7 * (speeds ⟨4, by omega⟩ : ℤ) ∧
+      5 * (speeds ⟨4, by omega⟩ : ℤ) <
+        (6 * j + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by
+    sorry
+  -- Apply the arithmetic kernel.
+  have hlarge_int : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ) := by
+    exact_mod_cast hlarge
+  have h821_int : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by
+    exact_mod_cast h821
+  exact bhk_case_8_2_1_kernel speeds hpos hlarge_int h821_int j hj hjL hjR
 
 /-- **BHK §8.2.2.** Sub-case of `x_1 ≤ 3` with `x_4 ≤ 5/7` (de-normalised:
     `7 * speeds ⟨2⟩ ≤ 5 * speeds ⟨3⟩`) AND `x_1 ≤ 5 x_4` (de-normalised:
