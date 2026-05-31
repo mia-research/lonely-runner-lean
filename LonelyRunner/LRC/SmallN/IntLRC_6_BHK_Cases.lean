@@ -98,6 +98,97 @@ lemma bhk_8_1_step1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
   nlinarith [step81, step_large, hjL, hjR, hv1, hj, h6jp1_pos,
              mul_le_mul_of_nonneg_left step_large (le_of_lt h6jp1_pos)]
 
+/-- **§8.1 step 1 derivation of BHK (65) from 1234-gap inclusion.** From the
+    BHK §8.1 inclusion `[1/(6 v_1), 5/(6 v_4)] ⊆ unsafeOf speeds ⟨4⟩` (the
+    1234-gap covered by 5-blocks alone), derive BHK's (65):
+
+    * `5 v_1 < v_5`         (i.e. `5 x_5 < x_1`)
+    * `5 v_5 < 7 v_4`        (i.e. `5 x_4 < 7 x_5`)
+
+    Strategy:
+    1. `block_containment` gives an integer `k` with `(6k-1) v_1 < v_5` and
+       `5 v_5 < (6k+1) v_4`.
+    2. Positivity arguments (using `hmono : v_4 < v_5`) force `k ≥ 1`.
+    3. `bhk_8_1_step1_kernel` rules out `k ≥ 2`.
+    4. So `k = 1` exactly, and substitution gives (65).
+
+    Combined with the §8.1.1 kernel (and similar find-lemmas for (70b),
+    (71b)) this gives a path to fully decompose §8.1.1. -/
+lemma bhk_8_1_step1_find_65 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h81 : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h_incl : Set.Icc (1 / (6 * (speeds ⟨0, by omega⟩ : ℝ)))
+                       (5 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+              ⊆ unsafeOf speeds ⟨4, by omega⟩) :
+    (5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ)) ∧
+    (5 * (speeds ⟨4, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ)) := by
+  have hv1 : 0 < speeds ⟨0, by omega⟩ := hpos _
+  have hv4 : 0 < speeds ⟨3, by omega⟩ := hpos _
+  have hv5 : 0 < speeds ⟨4, by omega⟩ := hpos _
+  have hv1R : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hv1
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hv4
+  have h6v1R : (0 : ℝ) < 6 * (speeds ⟨0, by omega⟩ : ℝ) := by positivity
+  have h6v4R : (0 : ℝ) < 6 * (speeds ⟨3, by omega⟩ : ℝ) := by positivity
+  set a : ℝ := 1 / (6 * (speeds ⟨0, by omega⟩ : ℝ)) with ha_def
+  set b : ℝ := 5 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) with hb_def
+  -- a ≤ b ⟺ v_4 ≤ 5 v_1, which follows from h81 + hlarge:
+  -- h81: 5 v_4 < 7 v_3, hlarge: v_3 ≤ 3 v_1, so 5 v_4 < 21 v_1 < 25 v_1 = 5(5 v_1).
+  have hab : a ≤ b := by
+    rw [ha_def, hb_def, div_le_div_iff₀ h6v1R h6v4R]
+    have h81R : (5 : ℝ) * (speeds ⟨3, by omega⟩ : ℝ) < 7 * (speeds ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast h81
+    have hlargeNat : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩ := by
+      exact_mod_cast hlarge
+    have hlargeR : (speeds ⟨2, by omega⟩ : ℝ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℝ) := by
+      exact_mod_cast hlargeNat
+    nlinarith [h81R, hlargeR]
+  obtain ⟨k, hk_lo, hk_hi⟩ := block_containment speeds ⟨4, by omega⟩ hv5 a b hab h_incl
+  have hva_eq : (speeds ⟨4, by omega⟩ : ℝ) * a =
+                (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+    rw [ha_def]; ring
+  have hvb_eq : (speeds ⟨4, by omega⟩ : ℝ) * b =
+                5 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+    rw [hb_def]; ring
+  rw [hva_eq] at hk_lo
+  rw [hvb_eq] at hk_hi
+  have hjL_R : (6 * (k : ℝ) - 1) * (speeds ⟨0, by omega⟩ : ℝ) <
+               (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hmul := mul_lt_mul_of_pos_right hk_lo h6v1R
+    have hclear : ((speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ))) *
+                  (6 * (speeds ⟨0, by omega⟩ : ℝ)) = (speeds ⟨4, by omega⟩ : ℝ) := by
+      field_simp
+    nlinarith [hmul, hclear]
+  have hjR_R : 5 * (speeds ⟨4, by omega⟩ : ℝ) <
+               (6 * (k : ℝ) + 1) * (speeds ⟨3, by omega⟩ : ℝ) := by
+    have hmul := mul_lt_mul_of_pos_right hk_hi h6v4R
+    have hclear : (5 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ))) *
+                  (6 * (speeds ⟨3, by omega⟩ : ℝ)) = 5 * (speeds ⟨4, by omega⟩ : ℝ) := by
+      field_simp
+    nlinarith [hmul, hclear]
+  have hjL : (6 * k - 1) * (speeds ⟨0, by omega⟩ : ℤ) <
+             (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast hjL_R
+  have hjR : 5 * (speeds ⟨4, by omega⟩ : ℤ) <
+             (6 * k + 1) * (speeds ⟨3, by omega⟩ : ℤ) := by exact_mod_cast hjR_R
+  -- k ≥ 1: if k ≤ 0, hjR gives 5 v_5 < (6k+1) v_4 ≤ v_4 < v_5 (hmono), impossible.
+  have hv4_int : (0 : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by exact_mod_cast hv4
+  have hv5_int : (0 : ℤ) < (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast hv5
+  have hv45 : (speeds ⟨3, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ) := by
+    have hflt : (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  have hk_ge_1 : 1 ≤ k := by nlinarith [hjR, hv45, hv4_int, hv5_int]
+  -- k ≤ 1: §8.1 step 1 kernel rules out k ≥ 2.
+  have hk_le_1 : k ≤ 1 := by
+    by_contra hk_gt
+    push_neg at hk_gt
+    exact bhk_8_1_step1_kernel speeds hpos hlarge h81 k hk_gt hjL hjR
+  have hk_eq_1 : k = 1 := le_antisymm hk_le_1 hk_ge_1
+  subst hk_eq_1
+  refine ⟨?_, ?_⟩
+  · linarith [hjL]
+  · linarith [hjR]
+
 /-- **Arithmetic kernel for BHK §8.1.1.** From the three structural
     inequalities derived in BHK p46:
 
