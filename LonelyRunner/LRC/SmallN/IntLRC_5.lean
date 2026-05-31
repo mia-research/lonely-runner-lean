@@ -2,6 +2,7 @@ import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.Theorem61_BSR
 import LonelyRunner.LRC.Theorem71_LargeSR
 import LonelyRunner.LRC.SmallN.IntLRC_4
+import LonelyRunner.LRC.SmallN.IntLRC_5_Bienia
 
 /-!
 # `intLRC 5` — Lonely Runner Conjecture for n = 5
@@ -11,12 +12,12 @@ Four moving runners + observer, target gap `1/5`. Literature `n = 4`
 using the Prime Filtering Lemma with prime `p = 5`).
 
 Structure mirrors `IntLRC_4.lean`: BSR and LR cases discharge via
-`theorem61_BSR` / `theorem71_LargeSR`; Hard Case `4·v_1 < V ≤ 4·v_3` is the
-residual sorry. The LR case transitively depends on the `intLRC_4` Hard Case
-through `H_5`; when `intLRC_4` is fixed the LR branch of `intLRC_5`
-automatically becomes sorry-free.
+`theorem61_BSR` / `theorem71_LargeSR`; Hard Case `4·v_1 < V ≤ 4·v_3` is closed
+via `intLRC_five_residual` (Bienia §4) in `IntLRC_5_Bienia.lean`, covering
+`|D| ∈ {1,2,3}` (the `|D| = 1` crux is Bienia's doubling argument).
 
-**Sorry budget:** 1 (the Hard Case body); `H_5` is fully proved.
+**Sorry budget:** 0 — `intLRC_five` is sorry-free
+(`#print axioms` = `propext, Classical.choice, Quot.sound`).
 -/
 
 open MeasureTheory Set
@@ -44,8 +45,33 @@ theorem H_five : H 5 := by
   · exact intLRC_three speeds hmono hpos hgcd
   · exact intLRC_four speeds hmono hpos hgcd
 
-/-- **Main result for n = 5** (Hard Case sorry'd).  `speeds : Fin 4 → ℕ`.
-    BSR `V ≤ 4·v_1`; LR `4·v_3 < V`; Hard `4·v_1 < V ≤ 4·v_3`. -/
+/-- **Prime trick (p = 5).** If `5 ∤ v`, then at `t = 1/5` runner `v` sits at a
+    nonzero multiple of `1/5` (its residue `v mod 5 ∈ {1,2,3,4}`), so
+    `circDist (v·(1/5)) ≥ 1/5`.  This discharges the entire "no speed divisible
+    by 5" subcase of the Hard Case in one shot. -/
+lemma circDist_fifth_of_not_dvd (v : ℕ) (h : ¬ (5 ∣ v)) :
+    circDist ((v : ℝ) * (1 / 5)) ≥ 1 / 5 := by
+  have hr0 : v % 5 ≠ 0 := fun hh => h (Nat.dvd_of_mod_eq_zero hh)
+  have hrlt : v % 5 < 5 := Nat.mod_lt v (by norm_num)
+  have hr1R : (1 : ℝ) ≤ (↑(v % 5) : ℝ) := by exact_mod_cast (by omega : 1 ≤ v % 5)
+  have hr4R : (↑(v % 5) : ℝ) ≤ 4 := by exact_mod_cast (by omega : v % 5 ≤ 4)
+  have hsplit : (v : ℝ) * (1 / 5) = (↑(v % 5) : ℝ) / 5 + (↑(v / 5) : ℝ) := by
+    have hvR : (v : ℝ) = 5 * (↑(v / 5) : ℝ) + (↑(v % 5) : ℝ) := by
+      exact_mod_cast (Nat.div_add_mod v 5).symm
+    rw [hvR]; ring
+  rw [hsplit]
+  unfold circDist
+  rw [Int.fract_add_natCast]
+  have hfr : Int.fract ((↑(v % 5) : ℝ) / 5) = (↑(v % 5) : ℝ) / 5 :=
+    Int.fract_eq_self.mpr ⟨by positivity, by rw [div_lt_one (by norm_num)]; linarith⟩
+  rw [hfr, ge_iff_le, le_min_iff]
+  exact ⟨by linarith, by linarith⟩
+
+/-- **Main result for n = 5** (sorry-free).  `speeds : Fin 4 → ℕ`.
+    BSR `V ≤ 4·v_1`; LR `4·v_3 < V`; Hard `4·v_1 < V ≤ 4·v_3`.  The Hard Case
+    further splits on divisibility by the prime `5`: if no speed is divisible
+    by `5`, then `t = 1/5` works (`circDist_fifth_of_not_dvd`); the residual
+    (some speed `≡ 0 mod 5`) is closed by `intLRC_five_residual` (Bienia §4). -/
 theorem intLRC_five : intLRC 5 := by
   intro speeds hmono hpos hgcd
   let V : ℕ := speeds ⟨3, by omega⟩
@@ -82,7 +108,11 @@ theorem intLRC_five : intLRC 5 := by
           congr 2; exact Fin.ext hi3
         rw [heq]; exact ht₀_V
     · push_neg at hLR
-      -- Hard Case: 4·v_1 < V ≤ 4·v_3
-      -- TODO: Barajas-Serra 2008 §3 |D|=4 case, using Prime Filtering Lemma
-      -- with prime p=5. See memory/lean_smalln_2026_05_29.md.
-      sorry
+      -- Hard Case: 4·v_1 < V ≤ 4·v_3.  Split on divisibility by the prime 5.
+      by_cases h5 : ∃ i, 5 ∣ speeds i
+      · -- Hard residual: some speed ≡ 0 mod 5.  Bienia §4 (`intLRC_five_residual`):
+        -- `|D| ∈ {1,2,3}` all closed via `lemma3` (|D|=1 uses Bienia's doubling).
+        exact intLRC_five_residual speeds hmono hpos hgcd h5
+      · -- Easy subcase: no speed divisible by 5 → t = 1/5 witnesses all distant.
+        push_neg at h5
+        exact ⟨1 / 5, fun i => circDist_fifth_of_not_dvd (speeds i) (h5 i)⟩
