@@ -2,6 +2,7 @@ import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.Theorem61_BSR
 import LonelyRunner.LRC.Theorem71_LargeSR
 import LonelyRunner.LRC.SmallN.IntLRC_5
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK
 
 /-!
 # `intLRC 6` — Lonely Runner Conjecture for n = 6
@@ -72,5 +73,5 @@ theorem intLRC_six : intLRC 6 := by
         rw [heq]; exact ht₀_V
     · push_neg at hLR
       -- Hard Case: 5·v_1 < V ≤ 5·v_4
-      -- TODO: BHK 2001 geometric covering argument
-      sorry
+      -- BHK 2001 geometric covering argument — decomposed in IntLRC_6_BHK.lean.
+      exact intLRC_six_hard speeds hmono hpos hgcd
