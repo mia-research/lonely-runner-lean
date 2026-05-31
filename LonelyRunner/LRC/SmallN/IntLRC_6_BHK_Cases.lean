@@ -372,6 +372,7 @@ lemma bhk_case_8_2_1_find_j (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     nlinarith [hjR, h82_int, hv34, hv3_pos_int]
   exact ⟨k, hk_ge_2, hjL, hjR⟩
 
+set_option maxHeartbeats 1000000 in
 /-- **BHK §8.2.1.** Sub-case of `x_1 ≤ 3` with `x_4 ≤ 5/7` (de-normalised:
     `7 * speeds ⟨2⟩ ≤ 5 * speeds ⟨3⟩`) AND `5 x_4 < x_1` (de-normalised:
     `5 * speeds ⟨0⟩ < speeds ⟨3⟩`). See BHK p47–48.
@@ -393,13 +394,198 @@ theorem bhk_case_8_2_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   by_contra h_no_lonely
   push_neg at h_no_lonely
-  -- STRUCTURAL SORRY (now narrowed): the BHK §8.2.1 geometric inclusion
-  -- [7/(6 v_4), 5/(6 v_3)] ⊆ unsafeOf 5, derived from h_no_lonely + 123-gap
-  -- argument + case 8.2.1's `5 x_4 < x_1` ruling out 4-block coverage.
+  -- BHK §8.2.1 geometric inclusion [7/(6 v_4), 5/(6 v_3)] ⊆ unsafeOf 5.
+  -- Strategy:
+  --   (1) From h_no_lonely + monotonicity, establish 123-gap inclusion
+  --       [1/(6 v_1), 5/(6 v_3)] ⊆ unsafeOf 3 ∪ unsafeOf 4.
+  --   (2) Apply bhk_lemma_4 to get 5/(6 v_3) - 1/(6 v_1) < 2/(3 v_4), then
+  --       derive v_4 < 2 v_3 (the structural fact BHK uses).
+  --   (3) On the smaller interval [7/(6 v_4), 5/(6 v_3)], rule out runners
+  --       0, 1, 2, 3 (using v_4 < 2 v_3 to handle runner 3 at k=1), forcing
+  --       membership in unsafeOf 4.
+  -- Abbreviations and basic facts.
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v4 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv4_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv4_pos : 0 < v4 := by rw [hv4_def]; exact_mod_cast hpos _
+  have hv5_pos : 0 < v5 := by rw [hv5_def]; exact_mod_cast hpos _
+  have hv1_le_v2 : v1 ≤ v2 := by
+    rw [hv1_def, hv2_def]; exact_mod_cast Nat.le_of_lt (hmono (Fin.mk_lt_mk.mpr (by omega)))
+  have hv1_le_v3 : v1 ≤ v3 := by
+    rw [hv1_def, hv3_def]; exact_mod_cast Nat.le_of_lt (hmono (Fin.mk_lt_mk.mpr
+      (show (0:ℕ) < 2 by omega)))
+  have hv2_le_v3 : v2 ≤ v3 := by
+    rw [hv2_def, hv3_def]; exact_mod_cast Nat.le_of_lt (hmono (Fin.mk_lt_mk.mpr
+      (show (1:ℕ) < 2 by omega)))
+  have hv3_le_v4 : v3 ≤ v4 := by
+    rw [hv3_def, hv4_def]; exact_mod_cast Nat.le_of_lt (hmono (Fin.mk_lt_mk.mpr
+      (show (2:ℕ) < 3 by omega)))
+  have hv4_le_v5 : v4 ≤ v5 := by
+    rw [hv4_def, hv5_def]; exact_mod_cast Nat.le_of_lt (hmono (Fin.mk_lt_mk.mpr
+      (show (3:ℕ) < 4 by omega)))
+  -- Real-cast versions of the case hypotheses.
+  have hlargeR : v3 ≤ 3 * v1 := by
+    rw [hv1_def, hv3_def]; exact_mod_cast hlarge
+  have h82R : 7 * v3 ≤ 5 * v4 := by
+    rw [hv3_def, hv4_def]; exact_mod_cast h82
+  have h821R : 5 * v1 < v4 := by
+    rw [hv1_def, hv4_def]; exact_mod_cast h821
+  -- (1) 123-gap inclusion: [1/(6 v_1), 5/(6 v_3)] ⊆ unsafeOf 3 ∪ unsafeOf 4.
+  have h_123_incl : Set.Icc (1 / (6 * v1)) (5 / (6 * v3)) ⊆
+      unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ht
+    obtain ⟨htL, htR⟩ := ht
+    -- 1/(6 v_1) ≤ t ≤ 5/(6 v_3); from h_no_lonely, some runner i is unsafe.
+    obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+    rw [← mem_unsafeOf_iff] at hi_unsafe
+    -- Rule out i = 0, 1, 2 (gap arguments at k=0).
+    have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+              rw [hv1_def] at hv1_le_v3 hv1_pos
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v3, hv1_pos, hv3_pos]
+    have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨1, by omega⟩ : ℝ))
+            ≤ 1 / (6 * v1) := by
+              rw [hv2_def] at hv1_le_v2
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v2, hv1_pos, hv2_pos]
+          _ ≤ t := by rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨1, by omega⟩ : ℝ)) := by
+              rw [hv2_def] at hv2_le_v3
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv2_le_v3, hv2_pos, hv3_pos]
+    have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ))
+            ≤ 1 / (6 * v1) := by
+              rw [hv3_def] at hv1_le_v3
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v3, hv1_pos, hv3_pos]
+          _ ≤ t := by rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        rw [hv3_def] at htR; exact htR
+    -- So i ∈ {3, 4}.
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact absurd hi_unsafe hnot1
+    · exact absurd hi_unsafe hnot2
+    · exact Or.inl hi_unsafe
+    · exact Or.inr hi_unsafe
+  -- (2) Apply bhk_lemma_4 to derive v_4 < 2 v_3.
+  -- First, need: 1/(6 v_1) ≤ 5/(6 v_3), i.e., v_3 ≤ 5 v_1. Follows from hlarge.
+  have h_a_le_b : 1 / (6 * v1) ≤ 5 / (6 * v3) := by
+    rw [div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [hlargeR, hv1_pos, hv3_pos]
+  have h_len_bd : 5 / (6 * v3) - 1 / (6 * v1) < 2 / (3 * v4) := by
+    have h := bhk_lemma_4 speeds hmono hpos (1 / (6 * v1)) (5 / (6 * v3)) h_a_le_b
+      (by intro t ht; exact h_123_incl ht)
+    -- The conclusion of bhk_lemma_4 uses (speeds ⟨3⟩ : ℝ) which equals v4.
+    rw [hv4_def]; exact h
+  -- Now derive v_4 < 2 v_3.
+  have hv4_lt_2v3 : v4 < 2 * v3 := by
+    -- 5/(6 v_3) - 1/(6 v_1) ≥ (5 v_1 - v_3)/(6 v_1 v_3) ≥ (5 v_1 - 3 v_1)/(6 v_1 v_3)
+    --                       = 2 v_1 / (6 v_1 v_3) = 1/(3 v_3). So 1/(3 v_3) < 2/(3 v_4).
+    have hbd : 1 / (3 * v3) ≤ 5 / (6 * v3) - 1 / (6 * v1) := by
+      have key : (5 / (6 * v3) - 1 / (6 * v1)) * (6 * v3 * v1) = 5 * v1 - v3 := by
+        field_simp
+      have key2 : 1 / (3 * v3) * (6 * v3 * v1) = 2 * v1 := by
+        field_simp; ring
+      nlinarith [key, key2, hlargeR, hv1_pos, hv3_pos, mul_pos hv1_pos hv3_pos]
+    have hlt : 1 / (3 * v3) < 2 / (3 * v4) := lt_of_le_of_lt hbd h_len_bd
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hlt
+    linarith
+  -- Precomputed bounds: v_4 < 6 v_i for i=1,2,3 to feed linarith chains below.
+  have hv4_lt_6v1 : v4 < 6 * v1 := by linarith [hv4_lt_2v3, hlargeR]
+  have hv4_lt_6v2 : v4 < 6 * v2 := by linarith [hv4_lt_6v1, hv1_le_v2]
+  have hv4_lt_6v3 : v4 < 6 * v3 := by linarith [hv4_lt_2v3, hv3_pos]
+  -- (3) Build target inclusion.
   have h_incl : Set.Icc (7 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
                          (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
                 ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
-    sorry
+    intro t ht
+    -- Rewrite to use v3, v4 abbreviations.
+    rw [show (speeds ⟨3, by omega⟩ : ℝ) = v4 from hv4_def,
+        show (speeds ⟨2, by omega⟩ : ℝ) = v3 from hv3_def] at ht
+    obtain ⟨htL, htR⟩ := ht
+    -- From h_no_lonely.
+    obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+    rw [← mem_unsafeOf_iff] at hi_unsafe
+    -- Establish t ≤ 5/(6 v_3) and 7/(6 v_4) ≤ t for use below.
+    -- Rule out runner 0 (k=0). Bounds: 7/(6 v_4) ≤ t ≤ 5/(6 v_3), and we
+    -- need 1/(6 v_1) ≤ t ≤ 5/(6 v_1).
+    have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ))
+            ≤ 7 / (6 * v4) := by
+              rw [← hv1_def, div_le_div_iff₀ (by positivity) (by positivity)]
+              linarith [hv4_lt_6v1, hv1_pos]
+          _ ≤ t := htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+              rw [← hv1_def]
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v3, hv1_pos, hv3_pos]
+    -- Rule out runner 1 (k=0). Bounds need 1/(6 v_2) ≤ t ≤ 5/(6 v_2).
+    have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨1, by omega⟩ : ℝ))
+            ≤ 7 / (6 * v4) := by
+              rw [← hv2_def, div_le_div_iff₀ (by positivity) (by positivity)]
+              linarith [hv4_lt_6v2, hv2_pos]
+          _ ≤ t := htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨1, by omega⟩ : ℝ)) := by
+              rw [← hv2_def]
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv2_le_v3, hv2_pos, hv3_pos]
+    -- Rule out runner 2 (k=0). Bounds need 1/(6 v_3) ≤ t ≤ 5/(6 v_3).
+    have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ))
+            ≤ 7 / (6 * v4) := by
+              rw [← hv3_def, div_le_div_iff₀ (by positivity) (by positivity)]
+              linarith [hv4_lt_6v3, hv3_pos]
+          _ ≤ t := htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        rw [hv3_def] at htR; exact htR
+    -- Rule out runner 3 (k=1). Bounds: 7/(6 v_4) ≤ t ≤ 11/(6 v_4).
+    have hnot3 : t ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) 1 t
+      · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div]
+        rw [hv4_def] at htL; exact htL
+      · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 11 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+              rw [← hv4_def, div_le_div_iff₀ (by positivity) (by positivity)]
+              linarith [hv4_lt_2v3, hv3_pos, hv4_pos]
+    -- So i = 4.
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact absurd hi_unsafe hnot1
+    · exact absurd hi_unsafe hnot2
+    · exact absurd hi_unsafe hnot3
+    · exact hi_unsafe
   obtain ⟨j, hj, hjL, hjR⟩ := bhk_case_8_2_1_find_j speeds hmono hpos h82 h_incl
   have hlarge_int : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ) := by
     exact_mod_cast hlarge
