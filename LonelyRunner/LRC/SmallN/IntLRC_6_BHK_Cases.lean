@@ -197,6 +197,90 @@ lemma bhk_case_8_2_1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i
     mul_le_mul_of_nonneg_left hlarge (le_of_lt h6jp1_pos)
   nlinarith [stepA, stepB, hjL, hjR, hv1, hj]
 
+/-- **§8.2.1 `j`-derivation from BHK geometric inclusion.** From the BHK §8.2.1
+    inclusion `[7/(6 v_4), 5/(6 v_3)] ⊆ unsafeOf speeds ⟨4⟩` (i.e. the
+    sub-interval is covered by 5-blocks), together with `h82` and monotonicity,
+    derive `∃ j ≥ 2` satisfying the BHK `j`-conditions.
+
+    Uses `block_containment` to extract the integer (the interval must lie in
+    a SINGLE 5-block). Then `h82 + hmono` force `j ≥ 2`. Combined with
+    `bhk_case_8_2_1_kernel`, this reduces §8.2.1 to just the geometric
+    inclusion — the only remaining structural step. -/
+lemma bhk_case_8_2_1_find_j (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (h82 : 7 * speeds ⟨2, by omega⟩ ≤ 5 * speeds ⟨3, by omega⟩)
+    (h_incl : Set.Icc (7 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                       (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              ⊆ unsafeOf speeds ⟨4, by omega⟩) :
+    ∃ j : ℤ, 2 ≤ j ∧
+      (6 * j - 1) * (speeds ⟨3, by omega⟩ : ℤ) <
+        7 * (speeds ⟨4, by omega⟩ : ℤ) ∧
+      5 * (speeds ⟨4, by omega⟩ : ℤ) <
+        (6 * j + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by
+  have hv3 : 0 < speeds ⟨2, by omega⟩ := hpos _
+  have hv4 : 0 < speeds ⟨3, by omega⟩ := hpos _
+  have hv5 : 0 < speeds ⟨4, by omega⟩ := hpos _
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hv3
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hv4
+  have h6v3R : (0 : ℝ) < 6 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+  have h6v4R : (0 : ℝ) < 6 * (speeds ⟨3, by omega⟩ : ℝ) := by positivity
+  -- Endpoint setup. a = 7/(6 v_4), b = 5/(6 v_3).
+  set a : ℝ := 7 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) with ha_def
+  set b : ℝ := 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) with hb_def
+  -- a ≤ b ⟺ 7/(6 v_4) ≤ 5/(6 v_3) ⟺ 7 v_3 ≤ 5 v_4 (h82).
+  have hab : a ≤ b := by
+    rw [ha_def, hb_def, div_le_div_iff₀ h6v4R h6v3R]
+    have h82R : 7 * (speeds ⟨2, by omega⟩ : ℝ) ≤ 5 * (speeds ⟨3, by omega⟩ : ℝ) := by
+      exact_mod_cast h82
+    linarith
+  -- Apply block_containment.
+  obtain ⟨k, hk_lo, hk_hi⟩ := block_containment speeds ⟨4, by omega⟩ hv5 a b hab h_incl
+  -- Convert v_5 * a and v_5 * b to clean forms.
+  have hva_eq : (speeds ⟨4, by omega⟩ : ℝ) * a =
+                7 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+    rw [ha_def]; ring
+  have hvb_eq : (speeds ⟨4, by omega⟩ : ℝ) * b =
+                5 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [hb_def]; ring
+  rw [hva_eq] at hk_lo
+  rw [hvb_eq] at hk_hi
+  -- hk_lo : (k : ℝ) - 1/6 < 7 v_5 / (6 v_4)
+  -- hk_hi : 5 v_5 / (6 v_3) < (k : ℝ) + 1/6
+  -- Convert to (6k - 1) v_4 < 7 v_5 in ℝ.
+  have hjL_R : (6 * (k : ℝ) - 1) * (speeds ⟨3, by omega⟩ : ℝ) <
+               7 * (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hmul := mul_lt_mul_of_pos_right hk_lo h6v4R
+    have hclear : (7 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ))) *
+                  (6 * (speeds ⟨3, by omega⟩ : ℝ)) = 7 * (speeds ⟨4, by omega⟩ : ℝ) := by
+      field_simp
+    nlinarith [hmul, hclear]
+  -- Convert to 5 v_5 < (6k + 1) v_3 in ℝ.
+  have hjR_R : 5 * (speeds ⟨4, by omega⟩ : ℝ) <
+               (6 * (k : ℝ) + 1) * (speeds ⟨2, by omega⟩ : ℝ) := by
+    have hmul := mul_lt_mul_of_pos_right hk_hi h6v3R
+    have hclear : (5 * (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ))) *
+                  (6 * (speeds ⟨2, by omega⟩ : ℝ)) = 5 * (speeds ⟨4, by omega⟩ : ℝ) := by
+      field_simp
+    nlinarith [hmul, hclear]
+  -- Cast to ℤ.
+  have hjL : (6 * k - 1) * (speeds ⟨3, by omega⟩ : ℤ) <
+             7 * (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast hjL_R
+  have hjR : 5 * (speeds ⟨4, by omega⟩ : ℤ) <
+             (6 * k + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hjR_R
+  -- Derive k ≥ 2 from h82, hmono, hjR.
+  -- 7 v_3 ≤ 5 v_4 ≤ 5 v_5 < (6k+1) v_3, so 7 < 6k+1, k > 1.
+  have hk_ge_2 : 2 ≤ k := by
+    have hv34 : (speeds ⟨3, by omega⟩ : ℤ) ≤ (speeds ⟨4, by omega⟩ : ℤ) := by
+      have hflt : (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ :=
+        Fin.mk_lt_mk.mpr (by omega)
+      have h : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ := hmono hflt
+      exact_mod_cast Nat.le_of_lt h
+    have h82_int : 7 * (speeds ⟨2, by omega⟩ : ℤ) ≤ 5 * (speeds ⟨3, by omega⟩ : ℤ) := by
+      exact_mod_cast h82
+    have hv3_pos_int : (0 : ℤ) < (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hv3
+    nlinarith [hjR, h82_int, hv34, hv3_pos_int]
+  exact ⟨k, hk_ge_2, hjL, hjR⟩
+
 /-- **BHK §8.2.1.** Sub-case of `x_1 ≤ 3` with `x_4 ≤ 5/7` (de-normalised:
     `7 * speeds ⟨2⟩ ≤ 5 * speeds ⟨3⟩`) AND `5 x_4 < x_1` (de-normalised:
     `5 * speeds ⟨0⟩ < speeds ⟨3⟩`). See BHK p47–48.
@@ -204,9 +288,12 @@ lemma bhk_case_8_2_1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i
     Proof structure: assume for contradiction no lonely `t` exists. The
     123-gap `[x_1/6, 5/6]` (complement of `B_1 ∪ B_2 ∪ B_3` in this region)
     must be covered by `B_4 ∪ B_5`. Under §8.2.1's `5 x_4 < x_1`, the
-    sub-interval `[7 x_4/6, 5/6]` is covered by `B_5` alone. This forces
-    an integer `j ≥ 2` with `(6j-1) v_4 < 7 v_5` and `5 v_5 < (6j+1) v_3`.
-    Then `bhk_case_8_2_1_kernel` closes via arithmetic. -/
+    sub-interval `[7 x_4/6, 5/6]` is covered by `B_5` alone. `find_j` then
+    extracts `j ≥ 2`, and `bhk_case_8_2_1_kernel` closes via arithmetic.
+
+    The remaining structural step is the inclusion
+    `[7/(6 v_4), 5/(6 v_3)] ⊆ unsafeOf speeds ⟨4⟩` — the BHK §8.2.1 geometric
+    derivation that the sub-interval is in `B_5` alone. -/
 theorem bhk_case_8_2_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hlarge : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩)
@@ -215,18 +302,14 @@ theorem bhk_case_8_2_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   by_contra h_no_lonely
   push_neg at h_no_lonely
-  -- h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6
-  -- i.e. every time is unsafe for some runner. ⋃ᵢ unsafeOf i = ℝ.
-  -- STRUCTURAL SORRY: derive the integer j with BHK §8.2.1 j-conditions
-  -- from the covering ⋃ unsafeOf = ℝ (specifically from
-  -- [7 x_4 / 6, 5/6] ⊆ B_5 = unsafeOf 5).
-  obtain ⟨j, hj, hjL, hjR⟩ : ∃ j : ℤ, 2 ≤ j ∧
-      (6 * j - 1) * (speeds ⟨3, by omega⟩ : ℤ) <
-        7 * (speeds ⟨4, by omega⟩ : ℤ) ∧
-      5 * (speeds ⟨4, by omega⟩ : ℤ) <
-        (6 * j + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by
+  -- STRUCTURAL SORRY (now narrowed): the BHK §8.2.1 geometric inclusion
+  -- [7/(6 v_4), 5/(6 v_3)] ⊆ unsafeOf 5, derived from h_no_lonely + 123-gap
+  -- argument + case 8.2.1's `5 x_4 < x_1` ruling out 4-block coverage.
+  have h_incl : Set.Icc (7 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                         (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+                ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
     sorry
-  -- Apply the arithmetic kernel.
+  obtain ⟨j, hj, hjL, hjR⟩ := bhk_case_8_2_1_find_j speeds hmono hpos h82 h_incl
   have hlarge_int : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ) := by
     exact_mod_cast hlarge
   have h821_int : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by

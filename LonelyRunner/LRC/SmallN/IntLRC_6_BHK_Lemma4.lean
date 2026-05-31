@@ -94,6 +94,46 @@ lemma block_length_bound (speeds : Fin 5 → ℕ) (i : Fin 5) (hv : 0 < speeds i
   have h5 : (k : ℝ) + 1 ≤ (k' : ℝ) := by exact_mod_cast h4
   linarith
 
+/-- **Block containment.** Refinement of `block_length_bound`. If a closed
+    interval `[a, b]` is contained in `unsafeOf speeds i`, then there exists
+    a single integer `k` such that
+    `k - 1/6 < v_i · a` and `v_i · b < k + 1/6`. I.e., `[a, b]` is
+    contained in the single "i-block" centred at `k / v_i`. The integer `k`
+    is exactly the integer closest to `v_i · a` (and equivalently to
+    `v_i · b`). -/
+lemma block_containment (speeds : Fin 5 → ℕ) (i : Fin 5) (hv : 0 < speeds i)
+    (a b : ℝ) (hab : a ≤ b)
+    (hsub : Set.Icc a b ⊆ unsafeOf speeds i) :
+    ∃ k : ℤ, (k : ℝ) - 1/6 < (speeds i : ℝ) * a ∧
+              (speeds i : ℝ) * b < (k : ℝ) + 1/6 := by
+  have hvR : (0 : ℝ) < (speeds i : ℝ) := by exact_mod_cast hv
+  have ha_mem : a ∈ unsafeOf speeds i := hsub ⟨le_refl a, hab⟩
+  rw [mem_unsafeOf_iff_bhkB] at ha_mem
+  obtain ⟨k, hk⟩ := ha_mem
+  have ha_gt : (k : ℝ) - 1 / 6 < (speeds i : ℝ) * a := by
+    have := neg_lt_of_abs_lt hk; linarith
+  refine ⟨k, ha_gt, ?_⟩
+  by_contra hcontra
+  push_neg at hcontra
+  set t_star : ℝ := ((k : ℝ) + 1 / 6) / (speeds i : ℝ) with ht_star
+  have ha_lt : (speeds i : ℝ) * a < (k : ℝ) + 1 / 6 := by
+    have := lt_of_abs_lt hk; linarith
+  have ht_a : a ≤ t_star := by
+    rw [ht_star, le_div_iff₀ hvR]; linarith
+  have ht_b : t_star ≤ b := by
+    rw [ht_star, div_le_iff₀ hvR]; linarith
+  have ht_mem : t_star ∈ unsafeOf speeds i := hsub ⟨ht_a, ht_b⟩
+  rw [mem_unsafeOf_iff_bhkB] at ht_mem
+  obtain ⟨k', hk'⟩ := ht_mem
+  have ht_eval : (speeds i : ℝ) * t_star = (k : ℝ) + 1 / 6 := by
+    rw [ht_star]; field_simp
+  rw [ht_eval] at hk'
+  have h1 : (k' : ℝ) > (k : ℝ) := by
+    have := lt_of_abs_lt hk'; linarith
+  have h3 : (k : ℤ) < k' := by exact_mod_cast h1
+  have h5 : (k : ℝ) + 1 ≤ (k' : ℝ) := by exact_mod_cast (h3 : k + 1 ≤ k')
+  have := neg_lt_of_abs_lt hk'; linarith
+
 /-- **Helper: characterising "not in `unsafeOf i`" via integer gaps.**
     `t ∉ unsafeOf speeds i` iff `v_i · t ∈ [k + 1/6, k + 5/6]` for some integer
     `k`. The complement of the open U3-components is exactly the union of
