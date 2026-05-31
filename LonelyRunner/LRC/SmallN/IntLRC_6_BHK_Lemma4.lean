@@ -187,14 +187,451 @@ lemma gap_piece_bound (speeds : Fin 5 → ℕ)
     · exact h
   exact block_length_bound speeds ⟨4, by omega⟩ hv4pos sL sR hsLR hsub_U4
 
+/-- **BHK Lemma 4 — Case C residual.** This is the genuine BHK "k ≥ 2" case,
+    where `fract(v_3 · a) ∈ [1/2, 5/6)`. The two gap-pieces (left and right of
+    the full 3-block contained in J) sum to `1/(3 v_3)` in t-coords; each is
+    `< 1/(3 v_4)` by `gap_piece_bound`. So `1/(3 v_3) < 2/(3 v_4)`, i.e.,
+    `v_4 < 2 v_3`. This is NOT a contradiction with `hmono` (only `v_3 < v_4`).
+    BHK closes this by showing a 5-gap (length `2/(3 v_5)`) fits inside the
+    4-block (length `1/(3 v_4)`), forcing `2 v_4 ≤ v_5`. The Lean version of
+    this argument requires modular alignment analysis and is left as the open
+    residual.
+
+    Stated here as a standalone `sorry` so that all other cases of
+    `bhk_lemma_4` are unconditionally proved. -/
+theorem bhk_lemma_4_case_C (speeds : Fin 5 → ℕ) (_hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (a b : ℝ) (hab : a ≤ b)
+    (hI : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩)
+    (_hcontra : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ b - a) :
+    False := by
+  -- Provide unused let-bindings so the parameters are not flagged
+  let _ := hpos
+  let _ := hab
+  let _ := hI
+  sorry
+
 /-- **BHK Lemma 4.** Any closed interval `[a, b]` contained in
-    `unsafeOf 3 ∪ unsafeOf 4` has length `< 2 / (3 v_4)`. -/
+    `unsafeOf 3 ∪ unsafeOf 4` has length `< 2 / (3 v_4)`.
+
+    **Proof outline (partial — full closure pending):**
+
+    Suppose for contradiction `b - a ≥ 2/(3 v_4)`. Consider
+    `J = [a, a + 2/(3 v_4)] ⊆ [a, b]` and let `s = fract (v_4 · a)`.
+    In `v_4`-coordinates, J is `[s, s + 2/3]`.
+
+    * **Case A** (`s ∈ [0, 1/6] ∪ [5/6, 1)`): `a` lies in a 4-block. The 4-gap
+      portion of J has length `≥ 1/2` in `v_4`-coords, so `≥ 1/(2 v_4)` in
+      `t`-coords. This is one connected sub-interval ⊆ `unsafeOf 4`. By
+      `block_length_bound`, length `< 1/(3 v_5)`. Hence `v_5 < 2 v_4 / 3 < v_4`,
+      contradicting `hmono`.
+
+    * **Case B1** (`s ∈ (1/6, 5/6)` with `s + 2/3 ≤ 5/6`, i.e. `s ≤ 1/6`):
+      vacuous (forces `s = 1/6`).
+
+    * **Case B2** (`s ∈ (1/6, 5/6)` with `s + 2/3 > 5/6`): J crosses from
+      4-gap into 4-block (and possibly into the next 4-gap).
+      - Subcase `s ∈ (1/6, 1/2]`: single gap-piece `[s, 5/6]` of length
+        `5/6 - s ≥ 1/3` in `v_4`-coords. By `gap_piece_bound`,
+        `(5/6 - s)/v_4 < 1/(3 v_5) < 1/(3 v_4)`, so `5/6 - s < 1/3`,
+        i.e. `s > 1/2` — contradiction.
+      - Subcase `s ∈ (1/2, 5/6)`: J covers gap-piece + full 4-block + next
+        gap-piece. Gap-pieces sum to `1/3` in `v_4`-coords = `1/(3 v_4)` in
+        `t`-coords. Each gap-piece `< 1/(3 v_5)` by `gap_piece_bound`; sum
+        `< 2/(3 v_5)`. Hence `v_5 < 2 v_4`.
+
+        **This is BHK's "k ≥ 2" structural derivation** (5-gap ⊆ 4-block
+        forces `v_5 > 2 v_4`). To close it in Lean, we need: the full
+        4-block of length `1/(3 v_4)` contained in `[a, b]` contains a
+        5-gap (closed interval of length `2/(3 v_5)`). This depends on
+        modular alignment of `v_5/v_4` and is the genuine residual.
+
+    Helpers `block_length_bound`, `not_mem_unsafeOf_iff_in_gap`,
+    `not_mem_unsafeOf_of_in_gap`, `gap_piece_bound` are in scope. -/
 theorem bhk_lemma_4 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (a b : ℝ) (hab : a ≤ b)
     (hI : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩) :
     b - a < 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
-  sorry
+  -- Abbreviations and basic positivity
+  have hv3pos : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4pos : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3_lt_v4 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hmlt : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ :=
+      hmono (show (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ by decide)
+    exact_mod_cast hmlt
+  set v3 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv3def
+  set v4 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv4def
+  -- Proof by contradiction
+  by_contra hcontra
+  push_neg at hcontra
+  -- hcontra : 2 / (3 * v3) ≤ b - a
+  -- Restrict to J = [a, a + 2/(3 v3)] ⊆ [a, b]
+  set L : ℝ := 2 / (3 * v3) with hLdef
+  have hL_pos : 0 < L := by positivity
+  set b' : ℝ := a + L with hb'def
+  have hb'_le_b : b' ≤ b := by rw [hb'def]; linarith
+  have hab' : a ≤ b' := by rw [hb'def]; linarith
+  have hJ_sub : Set.Icc a b' ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪
+                                unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ⟨ht1, ht2⟩
+    exact hI ⟨ht1, le_trans ht2 hb'_le_b⟩
+  -- Set m = ⌊v3 · a⌋ so that v3 · a = m + s with s = fract(v3 · a) ∈ [0, 1).
+  set m : ℤ := ⌊v3 * a⌋ with hmdef
+  set s : ℝ := Int.fract (v3 * a) with hsdef
+  have hs_nonneg : 0 ≤ s := Int.fract_nonneg _
+  have hs_lt_one : s < 1 := Int.fract_lt_one _
+  have hva_eq : v3 * a = (m : ℝ) + s := by
+    rw [hsdef, hmdef]
+    have := Int.floor_add_fract (v3 * a)
+    linarith
+  -- We will derive a contradiction by case analysis on s.
+  -- The bound we want is `v_4 < v_3` (contradiction with hmono) from a single
+  -- gap-piece of v3-coord length ≥ 1/3.
+  -- KEY LEMMA: if (sL, sR) is a 3-gap-piece in [a, b'] of v3-coord length ≥ 1/3,
+  -- then 1/(3 v3) ≤ sR - sL < 1/(3 v4), so v4 < v3, contradicting hmono.
+  -- Cases A (s ∈ [0, 1/6]), B (s ∈ (1/6, 1/2]), D (s ∈ [5/6, 1))
+  -- all yield a single gap-piece of v3-coord length ≥ 1/3.
+  -- Case C (s ∈ (1/2, 5/6)) is the BHK-residual; we use a different argument.
+  rcases lt_or_ge s (1/2) with hs_half | hs_half
+  · -- s < 1/2: cases A (s ≤ 1/6) and B (1/6 < s < 1/2)
+    -- In both, use the single gap-piece [max(a, (m+1/6)/v3), (m+5/6)/v3]
+    -- = [(m+1/6)/v3, (m+5/6)/v3] when s ≤ 1/6 (=case A, gap fully in J)
+    --   has length (m + 5/6 - (m + 1/6))/v3 = 2/3 / v3 ≥ 1/3 / v3
+    -- = [(m+s)/v3, (m+5/6)/v3] when 1/6 < s < 1/2 (=case B, gap starts at a)
+    --   wait, but (m+s)/v3 = a only if a is in the 3-gap, i.e., s ≥ 1/6
+    --
+    -- Let's define sL, sR carefully:
+    -- sL = max(a, (m+1/6)/v3), sR = min(b', (m+5/6)/v3)
+    -- For s ∈ [0, 1/2): we want sR - sL ≥ 1/(3 v3).
+    set sL : ℝ := max a ((↑m + 1/6) / v3) with hsLdef
+    set sR : ℝ := min b' ((↑m + 5/6) / v3) with hsRdef
+    -- Need: a ≤ sL, sR ≤ b', sL ≤ sR, and gap conditions.
+    have hsL_ge_a : a ≤ sL := le_max_left _ _
+    have hsR_le_b' : sR ≤ b' := min_le_left _ _
+    have hsL_ge_gap : ((↑m : ℝ) + 1/6) / v3 ≤ sL := le_max_right _ _
+    have hsR_le_gap : sR ≤ ((↑m : ℝ) + 5/6) / v3 := min_le_right _ _
+    -- Compute sL and sR explicitly:
+    -- a = (m+s)/v3, so a vs (m+1/6)/v3: a ≤ (m+1/6)/v3 ⟺ m + s ≤ m + 1/6 ⟺ s ≤ 1/6
+    -- Case A (s ≤ 1/6): sL = (m+1/6)/v3.
+    -- Case B (1/6 < s < 1/2): sL = a = (m+s)/v3.
+    -- b' = a + 2/(3 v3) = (m+s)/v3 + 2/(3 v3) = (m + s + 2/3)/v3
+    -- b' vs (m+5/6)/v3: b' ≤ (m+5/6)/v3 ⟺ m + s + 2/3 ≤ m + 5/6 ⟺ s ≤ 1/6
+    -- Case A: sR = b' = (m+s+2/3)/v3, length = (s+2/3-1/6)/v3 = (s+1/2)/v3 ≥ 1/2/v3
+    -- Case B: sR = (m+5/6)/v3, length = (5/6-s)/v3 ≥ 1/3/v3 (since s ≤ 1/2 ⇒ 5/6-s ≥ 1/3)
+    have ha_eq : a = ((↑m : ℝ) + s) / v3 := by
+      rw [eq_div_iff (ne_of_gt hv3pos)]; linarith [hva_eq]
+    have hb'_eq : b' = ((↑m : ℝ) + s + 2/3) / v3 := by
+      rw [hb'def, hLdef, ha_eq]
+      field_simp
+    have hsLR : sL ≤ sR := by
+      rw [hsLdef, hsRdef]
+      rw [ha_eq, hb'_eq]
+      -- max ((m+s)/v3) ((m+1/6)/v3) ≤ min ((m+s+2/3)/v3) ((m+5/6)/v3)
+      apply max_le
+      · apply le_min
+        · have : (↑m : ℝ) + s ≤ (↑m : ℝ) + s + 2/3 := by linarith
+          exact div_le_div_of_nonneg_right this (le_of_lt hv3pos)
+        · -- (m+s)/v3 ≤ (m+5/6)/v3 ⟺ s ≤ 5/6, which holds since s < 1/2
+          have : (↑m : ℝ) + s ≤ (↑m : ℝ) + 5/6 := by linarith
+          exact div_le_div_of_nonneg_right this (le_of_lt hv3pos)
+      · apply le_min
+        · -- (m+1/6)/v3 ≤ (m+s+2/3)/v3 ⟺ 1/6 ≤ s + 2/3 ⟺ s ≥ -1/2 ✓
+          have : (↑m : ℝ) + 1/6 ≤ (↑m : ℝ) + s + 2/3 := by linarith
+          exact div_le_div_of_nonneg_right this (le_of_lt hv3pos)
+        · have : (↑m : ℝ) + 1/6 ≤ (↑m : ℝ) + 5/6 := by linarith
+          exact div_le_div_of_nonneg_right this (le_of_lt hv3pos)
+    -- Apply gap_piece_bound
+    have hgap : sR - sL < 1 / (3 * v4) := by
+      have := gap_piece_bound speeds hpos a b' hab' hJ_sub m sL sR
+        hsL_ge_a hsR_le_b' hsLR hsL_ge_gap hsR_le_gap
+      exact this
+    -- Now bound sR - sL ≥ 1/(3 v3) in both cases A and B
+    have hgap_len_ge : 1 / (3 * v3) ≤ sR - sL := by
+      rw [hsLdef, hsRdef]
+      have ha_eq : a = ((↑m : ℝ) + s) / v3 := by
+        field_simp; linarith [hva_eq]
+      have hb'_eq : b' = ((↑m : ℝ) + s + 2/3) / v3 := by
+        rw [hb'def, hLdef]
+        field_simp; linarith [hva_eq]
+      rw [ha_eq, hb'_eq]
+      -- min ((m+s+2/3)/v3) ((m+5/6)/v3) - max ((m+s)/v3) ((m+1/6)/v3) ≥ 1/(3v3)
+      -- Numerator: min(m+s+2/3, m+5/6) - max(m+s, m+1/6)
+      -- = m + min(s+2/3, 5/6) - m - max(s, 1/6)
+      -- = min(s+2/3, 5/6) - max(s, 1/6)
+      -- Case A (s ≤ 1/6): min = s+2/3 (≤ 5/6 iff s ≤ 1/6), max = 1/6.
+      --   Numerator = s + 2/3 - 1/6 = s + 1/2 ≥ 1/2 ≥ 1/3
+      -- Case B (s > 1/6): min = 5/6, max = s.
+      --   Numerator = 5/6 - s ≥ 1/3 (since s ≤ 1/2 ⇒ 5/6 - s ≥ 1/3)
+      have hmin_max : min ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) -
+                       max ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) ≥ 1/3 := by
+        rcases le_or_gt s (1/6) with hsA | hsA
+        · -- Case A: min = m+s+2/3 (since s+2/3 ≤ 5/6), max = m+1/6
+          rw [min_eq_left (by linarith), max_eq_right (by linarith)]
+          linarith
+        · -- Case B: min = m+5/6 (since s+2/3 ≥ 5/6 iff s ≥ 1/6), max = m+s
+          rw [min_eq_right (by linarith), max_eq_left (by linarith)]
+          linarith
+      -- min ((m+s+2/3)/v3) ((m+5/6)/v3) = min (m+s+2/3, m+5/6) / v3
+      have hmin_div : min (((↑m : ℝ) + s + 2/3) / v3) (((↑m : ℝ) + 5/6) / v3)
+                      = min ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) / v3 := by
+        rcases le_or_gt ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) with h | h
+        · rw [min_eq_left h, min_eq_left (div_le_div_of_nonneg_right h (le_of_lt hv3pos))]
+        · rw [min_eq_right (le_of_lt h),
+              min_eq_right (div_le_div_of_nonneg_right (le_of_lt h) (le_of_lt hv3pos))]
+      have hmax_div : max (((↑m : ℝ) + s) / v3) (((↑m : ℝ) + 1/6) / v3)
+                      = max ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) / v3 := by
+        rcases le_or_gt ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) with h | h
+        · rw [max_eq_right h, max_eq_right (div_le_div_of_nonneg_right h (le_of_lt hv3pos))]
+        · rw [max_eq_left (le_of_lt h),
+              max_eq_left (div_le_div_of_nonneg_right (le_of_lt h) (le_of_lt hv3pos))]
+      rw [hmin_div, hmax_div]
+      rw [div_sub_div_same, le_div_iff₀ hv3pos]
+      have : 1 / (3 * v3) * v3 = 1/3 := by field_simp
+      rw [this]
+      linarith
+    -- 1/(3 v3) ≤ sR - sL < 1/(3 v4) ⇒ 1/(3 v3) < 1/(3 v4) ⇒ v4 < v3
+    have hcontr : 1 / (3 * v3) < 1 / (3 * v4) := lt_of_le_of_lt hgap_len_ge hgap
+    have hv4_lt_v3 : v4 < v3 := by
+      rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hcontr
+      linarith
+    linarith
+  · -- s ≥ 1/2: cases C (1/2 ≤ s < 5/6) and D (s ≥ 5/6)
+    rcases lt_or_ge s (5/6) with hs_56 | hs_56
+    · -- Case C (residual): s ∈ [1/2, 5/6). The genuine BHK k ≥ 2 case.
+      -- Two gap-pieces summing to 1/(3 v3), each < 1/(3 v4), gives v4 < 2 v3.
+      -- Without extra hypothesis, this is the open residual.
+      -- TODO: close using BHK's 5-gap-in-4-block argument or
+      -- additional structural fact.
+      exact bhk_lemma_4_case_C speeds hmono hpos a b hab hI hcontra
+    · -- Case D: s ∈ [5/6, 1). Gap-piece at m+1 has v3-coord length ≥ 1/3.
+      -- sL = (m+1+1/6)/v3 = (m+7/6)/v3, sR = b' = a + 2/(3v3) = (m+s+2/3)/v3
+      -- length = (s+2/3 - 7/6)/v3 = (s - 1/2)/v3 ≥ 1/3/v3 (since s ≥ 5/6)
+      have ha_eq : a = ((↑m : ℝ) + s) / v3 := by
+        rw [eq_div_iff (ne_of_gt hv3pos)]; linarith [hva_eq]
+      have hb'_eq : b' = ((↑m : ℝ) + s + 2/3) / v3 := by
+        rw [hb'def, hLdef, ha_eq]
+        field_simp
+      set sL : ℝ := ((↑m : ℝ) + 7/6) / v3 with hsLdef
+      let sR : ℝ := b'
+      have hsR_eq : sR = ((↑m : ℝ) + s + 2/3) / v3 := hb'_eq
+      have hsL_ge_a : a ≤ sL := by
+        rw [hsLdef, ha_eq]
+        apply div_le_div_of_nonneg_right _ (le_of_lt hv3pos)
+        linarith
+      have hsR_le_b' : sR ≤ b' := le_refl _
+      have hsLR : sL ≤ sR := by
+        change sL ≤ b'
+        rw [hsLdef, hb'_eq]
+        apply div_le_div_of_nonneg_right _ (le_of_lt hv3pos)
+        linarith
+      have hsL_ge_gap : ((↑(m + 1) : ℝ) + 1/6) / v3 ≤ sL := by
+        rw [hsLdef]
+        push_cast
+        apply div_le_div_of_nonneg_right _ (le_of_lt hv3pos)
+        linarith
+      have hsR_le_gap : sR ≤ ((↑(m + 1) : ℝ) + 5/6) / v3 := by
+        change b' ≤ _
+        rw [hb'_eq]
+        push_cast
+        apply div_le_div_of_nonneg_right _ (le_of_lt hv3pos)
+        linarith
+      have hgap : sR - sL < 1 / (3 * v4) :=
+        gap_piece_bound speeds hpos a b' hab' hJ_sub (m+1) sL sR
+          hsL_ge_a hsR_le_b' hsLR hsL_ge_gap hsR_le_gap
+      have hgap_len_ge : 1 / (3 * v3) ≤ sR - sL := by
+        change 1 / (3 * v3) ≤ b' - sL
+        rw [hsLdef, hb'_eq]
+        rw [div_sub_div_same, le_div_iff₀ hv3pos]
+        have : 1 / (3 * v3) * v3 = 1/3 := by field_simp
+        rw [this]
+        linarith
+      have hcontr : 1 / (3 * v3) < 1 / (3 * v4) := lt_of_le_of_lt hgap_len_ge hgap
+      have hv4_lt_v3 : v4 < v3 := by
+        rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hcontr
+        linarith
+      linarith
+
+/-- **BHK Lemma 4 — weak version under BHK regime.** Same statement as
+    `bhk_lemma_4` but with the extra hypothesis `2 v_3 ≤ v_4` (the BHK speed-
+    ratio regime). This closes Case C unconditionally and gives a clean proof.
+
+    Under `2 v_3 ≤ v_4`, the two gap-pieces in Case C (sum `= 1/(3 v_3)` each
+    `< 1/(3 v_4)`) yield `1/(3 v_3) < 2/(3 v_4) ≤ 1/(3 v_3)`, contradiction. -/
+theorem bhk_lemma_4_weak (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hbhk : 2 * (speeds ⟨3, by omega⟩ : ℝ) ≤ (speeds ⟨4, by omega⟩ : ℝ))
+    (a b : ℝ) (_hab : a ≤ b)
+    (hI : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩) :
+    b - a < 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+  have hv3pos : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4pos : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3_lt_v4 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hmlt : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ :=
+      hmono (show (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ by decide)
+    exact_mod_cast hmlt
+  set v3 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv3def
+  set v4 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv4def
+  by_contra hcontra
+  push_neg at hcontra
+  set L : ℝ := 2 / (3 * v3) with hLdef
+  have hL_pos : 0 < L := by positivity
+  set b' : ℝ := a + L with hb'def
+  have hb'_le_b : b' ≤ b := by rw [hb'def]; linarith
+  have hab' : a ≤ b' := by rw [hb'def]; linarith
+  have hJ_sub : Set.Icc a b' ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪
+                                unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ⟨ht1, ht2⟩
+    exact hI ⟨ht1, le_trans ht2 hb'_le_b⟩
+  set m : ℤ := ⌊v3 * a⌋ with hmdef
+  set s : ℝ := Int.fract (v3 * a) with hsdef
+  have hs_nonneg : 0 ≤ s := Int.fract_nonneg _
+  have hs_lt_one : s < 1 := Int.fract_lt_one _
+  have hva_eq : v3 * a = (m : ℝ) + s := by
+    rw [hsdef, hmdef]
+    have := Int.floor_add_fract (v3 * a)
+    linarith
+  have ha_eq : a = ((↑m : ℝ) + s) / v3 := by
+    rw [eq_div_iff (ne_of_gt hv3pos)]; linarith [hva_eq]
+  have hb'_eq : b' = ((↑m : ℝ) + s + 2/3) / v3 := by
+    rw [hb'def, hLdef, ha_eq]
+    field_simp
+  -- Case split on s
+  rcases lt_or_ge s (1/2) with hs_half | hs_half
+  · -- Cases A and B: single gap-piece argument
+    set sL : ℝ := max a ((↑m + 1/6) / v3) with hsLdef
+    set sR : ℝ := min b' ((↑m + 5/6) / v3) with hsRdef
+    have hsL_ge_a : a ≤ sL := le_max_left _ _
+    have hsR_le_b' : sR ≤ b' := min_le_left _ _
+    have hsL_ge_gap : ((↑m : ℝ) + 1/6) / v3 ≤ sL := le_max_right _ _
+    have hsR_le_gap : sR ≤ ((↑m : ℝ) + 5/6) / v3 := min_le_right _ _
+    have hsLR : sL ≤ sR := by
+      rw [hsLdef, hsRdef, ha_eq, hb'_eq]
+      apply max_le
+      · apply le_min
+        · exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+        · exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      · apply le_min
+        · exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+        · exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+    have hgap : sR - sL < 1 / (3 * v4) :=
+      gap_piece_bound speeds hpos a b' hab' hJ_sub m sL sR
+        hsL_ge_a hsR_le_b' hsLR hsL_ge_gap hsR_le_gap
+    have hgap_len_ge : 1 / (3 * v3) ≤ sR - sL := by
+      rw [hsLdef, hsRdef, ha_eq, hb'_eq]
+      have hmin_max : min ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) -
+                       max ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) ≥ 1/3 := by
+        rcases le_or_gt s (1/6) with hsA | hsA
+        · rw [min_eq_left (by linarith), max_eq_right (by linarith)]
+          linarith
+        · rw [min_eq_right (by linarith), max_eq_left (by linarith)]
+          linarith
+      have hmin_div : min (((↑m : ℝ) + s + 2/3) / v3) (((↑m : ℝ) + 5/6) / v3)
+                      = min ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) / v3 := by
+        rcases le_or_gt ((↑m : ℝ) + s + 2/3) ((↑m : ℝ) + 5/6) with h | h
+        · rw [min_eq_left h, min_eq_left (div_le_div_of_nonneg_right h (le_of_lt hv3pos))]
+        · rw [min_eq_right (le_of_lt h),
+              min_eq_right (div_le_div_of_nonneg_right (le_of_lt h) (le_of_lt hv3pos))]
+      have hmax_div : max (((↑m : ℝ) + s) / v3) (((↑m : ℝ) + 1/6) / v3)
+                      = max ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) / v3 := by
+        rcases le_or_gt ((↑m : ℝ) + s) ((↑m : ℝ) + 1/6) with h | h
+        · rw [max_eq_right h, max_eq_right (div_le_div_of_nonneg_right h (le_of_lt hv3pos))]
+        · rw [max_eq_left (le_of_lt h),
+              max_eq_left (div_le_div_of_nonneg_right (le_of_lt h) (le_of_lt hv3pos))]
+      rw [hmin_div, hmax_div, div_sub_div_same, le_div_iff₀ hv3pos]
+      have : 1 / (3 * v3) * v3 = 1/3 := by field_simp
+      rw [this]
+      linarith
+    have hcontr : 1 / (3 * v3) < 1 / (3 * v4) := lt_of_le_of_lt hgap_len_ge hgap
+    have hv4_lt_v3 : v4 < v3 := by
+      rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hcontr
+      linarith
+    linarith
+  · rcases lt_or_ge s (5/6) with hs_56 | hs_56
+    · -- Case C closed using hypothesis 2 v_3 ≤ v_4
+      -- Two gap-pieces: left [a, (m+5/6)/v3], right [(m+7/6)/v3, b']
+      -- Each in U4 (by gap_piece_bound), each < 1/(3 v_4)
+      -- Sum = 1/(3 v_3). So 1/(3 v_3) < 2/(3 v_4) ≤ 1/(3 v_3) under hbhk.
+      -- Left gap-piece: sL1=a, sR1=(m+5/6)/v3, length (5/6-s)/v3
+      have hLeft_le_b' : ((↑m : ℝ) + 5/6) / v3 ≤ b' := by
+        rw [hb'_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hLeft_a_le_sR : a ≤ ((↑m : ℝ) + 5/6) / v3 := by
+        rw [ha_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hLeft_gap_le_a : ((↑m : ℝ) + 1/6) / v3 ≤ a := by
+        rw [ha_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hgap1 : ((↑m : ℝ) + 5/6) / v3 - a < 1 / (3 * v4) :=
+        gap_piece_bound speeds hpos a b' hab' hJ_sub m a (((↑m : ℝ) + 5/6) / v3)
+          (le_refl _) hLeft_le_b' hLeft_a_le_sR hLeft_gap_le_a (le_refl _)
+      -- Right gap-piece: sL2=(m+7/6)/v3, sR2=b', length (b' - (m+7/6))/v3 = (s-1/2)/v3
+      have hRight_a_le_sL : a ≤ ((↑m : ℝ) + 7/6) / v3 := by
+        rw [ha_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hRight_sL_le_b' : ((↑m : ℝ) + 7/6) / v3 ≤ b' := by
+        rw [hb'_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hRight_gap_le_sL : ((↑(m + 1) : ℝ) + 1/6) / v3 ≤ ((↑m : ℝ) + 7/6) / v3 := by
+        push_cast
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hRight_b'_le_gap : b' ≤ ((↑(m + 1) : ℝ) + 5/6) / v3 := by
+        rw [hb'_eq]; push_cast
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hgap2 : b' - ((↑m : ℝ) + 7/6) / v3 < 1 / (3 * v4) :=
+        gap_piece_bound speeds hpos a b' hab' hJ_sub (m+1) (((↑m : ℝ) + 7/6) / v3) b'
+          hRight_a_le_sL (le_refl _) hRight_sL_le_b' hRight_gap_le_sL hRight_b'_le_gap
+      -- Sum: ((m+5/6)/v3 - a) + (b' - (m+7/6)/v3) = (m+5/6)/v3 - a + b' - (m+7/6)/v3
+      --    = b' - a + (5/6 - 7/6)/v3 = 2/(3v3) - 1/(3v3) = 1/(3v3)
+      have hsum_eq : (((↑m : ℝ) + 5/6) / v3 - a) + (b' - ((↑m : ℝ) + 7/6) / v3)
+                       = 1 / (3 * v3) := by
+        rw [ha_eq, hb'_eq]
+        field_simp
+        ring
+      have hsum_lt : (((↑m : ℝ) + 5/6) / v3 - a) + (b' - ((↑m : ℝ) + 7/6) / v3)
+                       < 2 / (3 * v4) := by
+        have hadd := add_lt_add hgap1 hgap2
+        have heq : 1 / (3 * v4) + 1 / (3 * v4) = 2 / (3 * v4) := by ring
+        linarith
+      rw [hsum_eq] at hsum_lt
+      -- 1/(3 v3) < 2/(3 v4), and hbhk : 2 v3 ≤ v4
+      -- 2/(3 v4) ≤ 2/(3 · 2 v3) = 1/(3 v3)
+      have h2v4 : 2 / (3 * v4) ≤ 1 / (3 * v3) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [hbhk, hv3pos]
+      linarith
+    · -- Case D
+      set sL : ℝ := ((↑m : ℝ) + 7/6) / v3 with hsLdef
+      let sR : ℝ := b'
+      have hsL_ge_a : a ≤ sL := by
+        rw [hsLdef, ha_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hsR_le_b' : sR ≤ b' := le_refl _
+      have hsLR : sL ≤ sR := by
+        change sL ≤ b'
+        rw [hsLdef, hb'_eq]
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hsL_ge_gap : ((↑(m + 1) : ℝ) + 1/6) / v3 ≤ sL := by
+        rw [hsLdef]; push_cast
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hsR_le_gap : sR ≤ ((↑(m + 1) : ℝ) + 5/6) / v3 := by
+        change b' ≤ _
+        rw [hb'_eq]; push_cast
+        exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+      have hgap : sR - sL < 1 / (3 * v4) :=
+        gap_piece_bound speeds hpos a b' hab' hJ_sub (m+1) sL sR
+          hsL_ge_a hsR_le_b' hsLR hsL_ge_gap hsR_le_gap
+      have hgap_len_ge : 1 / (3 * v3) ≤ sR - sL := by
+        change 1 / (3 * v3) ≤ b' - sL
+        rw [hsLdef, hb'_eq, div_sub_div_same, le_div_iff₀ hv3pos]
+        have : 1 / (3 * v3) * v3 = 1/3 := by field_simp
+        rw [this]
+        linarith
+      have hcontr : 1 / (3 * v3) < 1 / (3 * v4) := lt_of_le_of_lt hgap_len_ge hgap
+      have hv4_lt_v3 : v4 < v3 := by
+        rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hcontr
+        linarith
+      linarith
 
 /-- **BHK Corollary 5.** If a closed interval `[a, b]` is contained in the
     complement of `unsafeOf 0 ∪ unsafeOf 1 ∪ unsafeOf 2` (a 123-gap) and has
