@@ -61,6 +61,43 @@ theorem bhk_case_v1_small_generic (speeds : Fin 5 → ℕ) (hmono : StrictMono s
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
+/-- **Arithmetic kernel for BHK §8.1 step 1 (1234-gap forces `j = 1`).**
+    Given an integer `j ≥ 2` satisfying the 1234-gap conditions
+    `(6j-1) v_1 < v_5` and `5 v_5 < (6j+1) v_4` (existence of such a `j`
+    is the structural part), together with `h81 : 5 v_4 < 7 v_3`
+    (§8.1 entry condition `x_4 > 5/7`) and `hlarge : v_3 ≤ 3 v_1` (§8 entry
+    `x_1 ≤ 3`), derive a contradiction.
+
+    This rules out `j ≥ 2`. A structural lemma showing `j > 0` then forces
+    `j = 1`, yielding BHK's (65): `5 v_1 < v_5` and `5 v_5 < 7 v_4`.
+
+    Arithmetic chain (identical structure to `bhk_case_8_2_1_kernel`):
+
+    * `(6j-1) v_1 < v_5` × 5 + chain with `5 v_5 < (6j+1) v_4`:
+      `5(6j-1) v_1 < (6j+1) v_4`.
+    * `h81` × `(6j+1)`: `5 (6j+1) v_4 < 7 (6j+1) v_3`.
+    * Combine: `25 (6j-1) v_1 < 7 (6j+1) v_3`.
+    * `hlarge` × `7 (6j+1)`: `7 (6j+1) v_3 ≤ 21 (6j+1) v_1`.
+    * Chain → `25 (6j-1) < 21 (6j+1)`, i.e. `24 j < 46`. Contradicts `j ≥ 2`. -/
+lemma bhk_8_1_step1_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h81 : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨2, by omega⟩ : ℤ))
+    (j : ℤ) (hj : 2 ≤ j)
+    (hjL : (6 * j - 1) * (speeds ⟨0, by omega⟩ : ℤ) <
+              (speeds ⟨4, by omega⟩ : ℤ))
+    (hjR : 5 * (speeds ⟨4, by omega⟩ : ℤ) <
+              (6 * j + 1) * (speeds ⟨3, by omega⟩ : ℤ)) :
+    False := by
+  have hv1 : (0 : ℤ) < (speeds ⟨0, by omega⟩ : ℤ) := by exact_mod_cast hpos ⟨0, by omega⟩
+  have h6jp1_pos : 0 < 6 * j + 1 := by linarith
+  have step81 : (6 * j + 1) * (5 * (speeds ⟨3, by omega⟩ : ℤ)) <
+                (6 * j + 1) * (7 * (speeds ⟨2, by omega⟩ : ℤ)) :=
+    mul_lt_mul_of_pos_left h81 h6jp1_pos
+  have step_large : 7 * (speeds ⟨2, by omega⟩ : ℤ) ≤
+                    7 * (3 * (speeds ⟨0, by omega⟩ : ℤ)) := by linarith
+  nlinarith [step81, step_large, hjL, hjR, hv1, hj, h6jp1_pos,
+             mul_le_mul_of_nonneg_left step_large (le_of_lt h6jp1_pos)]
+
 /-- **Arithmetic kernel for BHK §8.1.1.** From the three structural
     inequalities derived in BHK p46:
 
