@@ -492,6 +492,122 @@ theorem bhk_lemma_4 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         linarith
       linarith
 
+/-- **§8 structural fact `v_4 < 2 v_3`.** Under failure of loneliness
+    (`h_no_lonely`) and the §8 entry condition `hlarge : v_3 ≤ 3 v_1`,
+    apply `bhk_lemma_4` to the 123-gap `[1/(6 v_1), 5/(6 v_3)]` to derive
+    `v_4 < 2 v_3`.
+
+    Strategy (mirrors `bhk_case_8_2_1`'s opening derivation):
+    1. The 123-gap `[1/(6 v_1), 5/(6 v_3)]` is in `unsafeOf ⟨3⟩ ∪ unsafeOf ⟨4⟩`
+       because for any `t` in the gap, `h_no_lonely` gives some runner `i`,
+       and runners 0, 1, 2 are ruled out by their `k=0` block-gap arguments
+       (using `hlarge` and monotonicity to compare `1/(6 v_i) ≤ 1/(6 v_1)`
+       and `5/(6 v_3) ≤ 5/(6 v_i)`).
+    2. `bhk_lemma_4` gives the length bound `5/(6 v_3) - 1/(6 v_1) < 2/(3 v_4)`.
+    3. `hlarge` gives the length lower bound `1/(3 v_3) ≤ 5/(6 v_3) - 1/(6 v_1)`
+       (because `5 v_1 - v_3 ≥ 2 v_1`).
+    4. Chain: `1/(3 v_3) < 2/(3 v_4)`, so `v_4 < 2 v_3`.
+
+    Reusable across §8 sub-cases. -/
+lemma bhk_8_v4_lt_2v3 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩)
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    (speeds ⟨3, by omega⟩ : ℝ) < 2 * (speeds ⟨2, by omega⟩ : ℝ) := by
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v4 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv4_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv4_pos : 0 < v4 := by rw [hv4_def]; exact_mod_cast hpos _
+  have hv1_le_v2 : v1 ≤ v2 := by
+    rw [hv1_def, hv2_def]
+    exact_mod_cast Nat.le_of_lt
+      (hmono (Fin.mk_lt_mk.mpr (show (0:ℕ) < 1 by omega)))
+  have hv1_le_v3 : v1 ≤ v3 := by
+    rw [hv1_def, hv3_def]
+    exact_mod_cast Nat.le_of_lt
+      (hmono (Fin.mk_lt_mk.mpr (show (0:ℕ) < 2 by omega)))
+  have hv2_le_v3 : v2 ≤ v3 := by
+    rw [hv2_def, hv3_def]
+    exact_mod_cast Nat.le_of_lt
+      (hmono (Fin.mk_lt_mk.mpr (show (1:ℕ) < 2 by omega)))
+  have hlargeR : v3 ≤ 3 * v1 := by
+    rw [hv1_def, hv3_def]; exact_mod_cast hlarge
+  -- (1) 123-gap inclusion `[1/(6 v_1), 5/(6 v_3)] ⊆ unsafeOf ⟨3⟩ ∪ unsafeOf ⟨4⟩`.
+  have h_123_incl : Set.Icc (1 / (6 * v1)) (5 / (6 * v3)) ⊆
+      unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ht
+    obtain ⟨htL, htR⟩ := ht
+    obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+    rw [← mem_unsafeOf_iff] at hi_unsafe
+    have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+              rw [hv1_def] at hv1_le_v3 hv1_pos
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v3, hv1_pos, hv3_pos]
+    have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨1, by omega⟩ : ℝ))
+            ≤ 1 / (6 * v1) := by
+              rw [hv2_def] at hv1_le_v2
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v2, hv1_pos, hv2_pos]
+          _ ≤ t := by rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        calc t ≤ 5 / (6 * v3) := htR
+          _ ≤ 5 / (6 * (speeds ⟨1, by omega⟩ : ℝ)) := by
+              rw [hv2_def] at hv2_le_v3
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv2_le_v3, hv2_pos, hv3_pos]
+    have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 0 t
+      · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+        calc (1 : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ))
+            ≤ 1 / (6 * v1) := by
+              rw [hv3_def] at hv1_le_v3
+              apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+              nlinarith [hv1_le_v3, hv1_pos, hv3_pos]
+          _ ≤ t := by rw [hv1_def] at htL; exact htL
+      · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+        rw [hv3_def] at htR; exact htR
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact absurd hi_unsafe hnot1
+    · exact absurd hi_unsafe hnot2
+    · exact Or.inl hi_unsafe
+    · exact Or.inr hi_unsafe
+  -- (2) `a ≤ b`: `1/(6 v_1) ≤ 5/(6 v_3)` from hlarge (`v_3 ≤ 3 v_1 ≤ 5 v_1`).
+  have h_a_le_b : 1 / (6 * v1) ≤ 5 / (6 * v3) := by
+    rw [div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [hlargeR, hv1_pos, hv3_pos]
+  -- (3) bhk_lemma_4 gives `5/(6 v_3) - 1/(6 v_1) < 2/(3 v_4)`.
+  have h_len_bd : 5 / (6 * v3) - 1 / (6 * v1) < 2 / (3 * v4) := by
+    have h := bhk_lemma_4 speeds hmono hpos
+      (1 / (6 * v1)) (5 / (6 * v3)) h_a_le_b
+      (by intro t ht; exact h_123_incl ht)
+    rw [hv4_def]; exact h
+  -- (4) `1/(3 v_3) ≤ 5/(6 v_3) - 1/(6 v_1)` from hlarge (`5 v_1 - v_3 ≥ 2 v_1`).
+  have hbd : 1 / (3 * v3) ≤ 5 / (6 * v3) - 1 / (6 * v1) := by
+    have key : (5 / (6 * v3) - 1 / (6 * v1)) * (6 * v3 * v1) = 5 * v1 - v3 := by
+      field_simp
+    have key2 : 1 / (3 * v3) * (6 * v3 * v1) = 2 * v1 := by
+      field_simp; ring
+    nlinarith [key, key2, hlargeR, hv1_pos, hv3_pos,
+               mul_pos hv1_pos hv3_pos]
+  -- (5) Chain: `1/(3 v_3) < 2/(3 v_4)`, hence `v_4 < 2 v_3`.
+  have hlt : 1 / (3 * v3) < 2 / (3 * v4) := lt_of_le_of_lt hbd h_len_bd
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hlt
+  linarith
+
 /-- **BHK Lemma 4 — weak version under BHK regime.** Same statement as
     `bhk_lemma_4` but with the extra hypothesis `2 v_3 ≤ v_4` (the BHK speed-
     ratio regime). This closes Case C unconditionally and gives a clean proof.
