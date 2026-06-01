@@ -469,14 +469,15 @@ theorem bhk_case_8_1_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   obtain ⟨h65, h5v5_lt_7v4⟩ :=
     bhk_8_1_step1_find_65 speeds hmono hpos hlarge_int h81_int h_1234_incl
   -- Structural fact: `v_4 < 2 v_3` via the §8 helper (123-gap + bhk_lemma_4).
-  -- Will be load-bearing for the residual closure (1235-gap inclusion needs a
-  -- tighter `v_4 < 31 v_3 / 23` for k=5 fit; `v_4 < 2 v_3` is a precursor).
-  have hv4_lt_2v3 : (speeds ⟨3, by omega⟩ : ℝ) < 2 * (speeds ⟨2, by omega⟩ : ℝ) :=
+  -- Reusable structural fact, not directly load-bearing for §8.1.1's
+  -- residual but available for downstream use.
+  have _hv4_lt_2v3 : (speeds ⟨3, by omega⟩ : ℝ) < 2 * (speeds ⟨2, by omega⟩ : ℝ) :=
     bhk_8_v4_lt_2v3 speeds hmono hpos hlarge h_no_lonely
   -- Residual structural sorry: derive (70b) `5 v_4 < 19 v_1` and the 1235-gap
   -- inclusion `[37/(6 v_5), 23/(6 v_3)] ⊆ unsafeOf speeds ⟨3⟩` (BHK p46).
-  -- `hv4_lt_2v3` is in scope; the inclusion needs to refine it to
-  -- `23 v_4 < 31 v_3` (for runner 4's k=5 block to span the gap right side).
+  -- The 1235-gap inclusion's geometric proof requires `11 v_5 < 19 v_3` (BHK
+  -- (68)), which itself requires the §8.1 cascade: 13-gap → 1345-gap → (66),
+  -- (67); → 1234-gap → (68). Each is its own block_containment + arithmetic.
   obtain ⟨h70b, h_1235_incl⟩ :
       (5 * (speeds ⟨3, by omega⟩ : ℤ) < 19 * (speeds ⟨0, by omega⟩ : ℤ)) ∧
       Set.Icc (37 / (6 * (speeds ⟨4, by omega⟩ : ℝ)))
