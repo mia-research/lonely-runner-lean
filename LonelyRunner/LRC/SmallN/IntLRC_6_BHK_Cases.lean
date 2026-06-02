@@ -1079,6 +1079,125 @@ lemma bhk_8_1_1_left_sub_incl (speeds : Fin 5 → ℕ) (hmono : StrictMono speed
   · exact hi_unsafe
   · exact absurd hi_unsafe hnot4
 
+/-- **§8.1.1 right sub-interval inclusion.** The interval
+    `[25/(6 v_5), 5/(6 v_1)]` (right piece of the 123-gap, after runner 5's
+    k=4 unsafe block) is contained in `unsafeOf ⟨3⟩` (runner 4 must be unsafe).
+
+    Geometry: runners 1, 2, 3, 5 safe on the interval (runner 1 in k=0,
+    runner 2 in k=1, runner 3 in k=2, runner 5 in k=4 safe gaps). Bounds:
+    * Runner 1: `1/(6v_1) ≤ 25/(6v_5)` ⟺ `v_5 ≤ 25 v_1`, from
+      `h68 + hlarge` chain (`11 v_5 < 19 v_3 ≤ 57 v_1`).
+    * Runner 2 left edge: `7/(6v_2) ≤ 25/(6v_5)` ⟺ `7 v_5 ≤ 25 v_2`,
+      from `h68 + h66` chain.
+    * Runner 2 right edge: `5/(6v_1) ≤ 11/(6v_2)` ⟺ `5 v_2 < 11 v_1`,
+      from BHK (69) `17 v_2 < 7 v_5` + `h68 + hlarge` chain
+      (yields `187 v_2 < 133 v_3 ≤ 399 v_1`, hence `5 v_2 < 11 v_1`).
+      This bound is NOT derivable without (69) (h66+h67+h81+hlarge gives
+      only the loose `5 v_2 < 13.36 v_1`).
+    * Runner 3: needs `13 v_5 ≤ 25 v_3` (left, from h68) and
+      `5 v_3 ≤ 17 v_1` (right, from hlarge).
+    * Runner 5: needs `5 v_5 ≤ 29 v_1` (right edge of k=4 safe gap),
+      from `h68 + hlarge` chain (`5·11 v_5 < 5·19 v_3 ≤ 5·57 v_1`). -/
+lemma bhk_8_1_1_right_sub_incl (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h65 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h69 : 17 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨4, by omega⟩ : ℤ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    Set.Icc (25 / (6 * (speeds ⟨4, by omega⟩ : ℝ)))
+            (5 / (6 * (speeds ⟨0, by omega⟩ : ℝ)))
+    ⊆ unsafeOf speeds ⟨3, by omega⟩ := by
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv5_pos : 0 < v5 := by rw [hv5_def]; exact_mod_cast hpos _
+  have hlarge_R : v3 ≤ 3 * v1 := by rw [hv3_def, hv1_def]; exact_mod_cast hlarge
+  have h65_R : 5 * v1 < v5 := by rw [hv1_def, hv5_def]; exact_mod_cast h65
+  have h66_R : 25 * v3 < 39 * v2 := by rw [hv3_def, hv2_def]; exact_mod_cast h66
+  have h68_R : 11 * v5 < 19 * v3 := by rw [hv5_def, hv3_def]; exact_mod_cast h68
+  have h69_R : 17 * v2 < 7 * v5 := by rw [hv2_def, hv5_def]; exact_mod_cast h69
+  intro t ht
+  obtain ⟨htL, htR⟩ := ht
+  obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+  rw [← mem_unsafeOf_iff] at hi_unsafe
+  -- Runner 1: k=0 safe gap [1/(6 v_1), 5/(6 v_1)].
+  have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 t
+    · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+      -- 1/(6 v_1) ≤ 25/(6 v_5): need v_5 ≤ 25 v_1.
+      -- From h68 (11 v_5 < 19 v_3) + hlarge (v_3 ≤ 3 v_1): 11 v_5 < 57 v_1 < 275 v_1.
+      have hbound : 1 / (6 * v1) ≤ 25 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hlarge_R, hv1_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+      exact htR
+  -- Runner 2: k=1 safe gap [7/(6 v_2), 11/(6 v_2)].
+  have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 1 t
+    · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div]
+      -- 7/(6 v_2) ≤ 25/(6 v_5): need 7 v_5 ≤ 25 v_2.
+      -- From h68 (11 v_5 < 19 v_3) + h66 (25 v_3 < 39 v_2):
+      --   275 v_5 < 19·25 v_3 < 19·39 v_2 = 741 v_2 ⟹ 7·275 v_5 < 7·741 v_2,
+      --   i.e. 1925 v_5 < 5187 v_2. Want 175 v_5 ≤ 625 v_2, i.e. 1925 v_5 ≤ 6875 v_2.
+      have hbound : 7 / (6 * v2) ≤ 25 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, h66_R, hv2_pos, hv3_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div]
+      -- 5/(6 v_1) ≤ 11/(6 v_2): need 5 v_2 < 11 v_1.
+      -- From h69 (17 v_2 < 7 v_5) + h68 (11 v_5 < 19 v_3) + hlarge (v_3 ≤ 3 v_1):
+      --   11·17 v_2 < 11·7 v_5 < 7·19 v_3 ⟹ 187 v_2 < 133 v_3 ≤ 399 v_1.
+      --   So 5·187 v_2 < 5·399 v_1 = 1995 v_1 < 2057 v_1 = 11·187 v_1.
+      --   Hence 5 v_2 < 11 v_1.
+      have hbound : 5 / (6 * v1) ≤ 11 / (6 * v2) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h69_R, h68_R, hlarge_R, hv1_pos, hv2_pos, hv3_pos, hv5_pos]
+      linarith [htR, hbound]
+  -- Runner 3: k=2 safe gap [13/(6 v_3), 17/(6 v_3)].
+  have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 2 t
+    · rw [show ((2:ℤ):ℝ) + 1/6 = 13/6 from by norm_num, div_div]
+      -- 13/(6 v_3) ≤ 25/(6 v_5): need 13 v_5 ≤ 25 v_3.
+      -- From h68 (11 v_5 < 19 v_3): 11·13 v_5 < 11·25 v_3 ⟹ 143 v_5 < 275 v_3
+      --   ⟸ 13·11 v_5 < 13·19 v_3 = 247 v_3 < 275 v_3 (clean from h68).
+      have hbound : 13 / (6 * v3) ≤ 25 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hv3_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((2:ℤ):ℝ) + 5/6 = 17/6 from by norm_num, div_div]
+      -- 5/(6 v_1) ≤ 17/(6 v_3): need 5 v_3 ≤ 17 v_1.
+      -- From hlarge: v_3 ≤ 3 v_1 ⟹ 5 v_3 ≤ 15 v_1 < 17 v_1.
+      have hbound : 5 / (6 * v1) ≤ 17 / (6 * v3) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [hlarge_R, hv1_pos, hv3_pos]
+      linarith [htR, hbound]
+  -- Runner 5: k=4 safe gap [25/(6 v_5), 29/(6 v_5)].
+  have hnot4 : t ∉ unsafeOf speeds ⟨4, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) 4 t
+    · rw [show ((4:ℤ):ℝ) + 1/6 = 25/6 from by norm_num, div_div]
+      exact htL
+    · rw [show ((4:ℤ):ℝ) + 5/6 = 29/6 from by norm_num, div_div]
+      -- 5/(6 v_1) ≤ 29/(6 v_5): need 5 v_5 ≤ 29 v_1.
+      -- From h68 (11 v_5 < 19 v_3) + hlarge (v_3 ≤ 3 v_1):
+      --   11 v_5 < 19·3 v_1 = 57 v_1 ⟹ 5·11 v_5 < 5·57 v_1 = 285 v_1 < 319 v_1 = 11·29 v_1.
+      have hbound : 5 / (6 * v1) ≤ 29 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hlarge_R, hv1_pos, hv3_pos, hv5_pos]
+      linarith [htR, hbound]
+  fin_cases i
+  · exact absurd hi_unsafe hnot0
+  · exact absurd hi_unsafe hnot1
+  · exact absurd hi_unsafe hnot2
+  · exact hi_unsafe
+  · exact absurd hi_unsafe hnot4
+
 /-- **Arithmetic kernel for BHK §8.1.1 step 3 (1235-gap forces `k ≥ 5`).**
     From `23 v_4 < (6k+1) v_3` (the right side of `block_containment` applied
     to the 1235-gap), together with `hlarge`, `h65` (`5 v_1 < v_5`), and
