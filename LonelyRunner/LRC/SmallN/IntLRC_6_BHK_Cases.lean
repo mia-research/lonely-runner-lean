@@ -1263,6 +1263,551 @@ lemma bhk_8_1_1_find_69 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         rw [lt_div_iff₀ hv2_pos_R] at hB; linarith
       exact_mod_cast h17v2_lt_7v5_R
 
+set_option maxHeartbeats 1200000 in
+/-- **§8.1.2 derivation of BHK (72) `17 v_4 < 13 v_5` from 1234-gap-B + h812.**
+
+    Mirrors `bhk_8_1_1_find_69` but for §8.1.2's case condition
+    `h812 : 7 v_4 < 13 v_2`. The (68) lower-bound disjunction
+    `17 v_4 < 13 v_5 ∨ 17 v_2 < 7 v_5` always entails (72) under h812.
+
+    Strategy:
+
+    * **Empty case** `11 v_4 < 13 v_3`: 55 v_4 < 65 v_3 (h_empty × 5), and
+      h65 + hlarge give 5 v_3 < 3 v_5 ⟹ 65 v_3 < 39 v_5 ⟹ 55 v_4 < 39 v_5.
+      Multiply by 17: 935 v_4 < 663 v_5 < 715 v_5 = 55·13 v_5, hence
+      17 v_4 < 13 v_5.
+
+    * **Non-empty case** `13 v_3 ≤ 11 v_4`: block_containment on runner 5
+      forces k = 3. At k = 3, lower bound gives the disjunction
+      `17 v_4 < 13 v_5 ∨ 17 v_2 < 7 v_5`. Dispatch on h812:
+      - Case A `17 v_4 < 13 v_5`: direct.
+      - Case B `17 v_2 < 7 v_5`: combined with h812 `7 v_4 < 13 v_2`,
+        7·17 v_4 < 7·13 v_2 = 91 v_2 (wait: 7 v_4 < 13 v_2 ⟹ 17·7 v_4 < 17·13 v_2 = 221 v_2),
+        and 13·17 v_2 < 13·7 v_5 = 91 v_5, so 221 v_2 < 91 v_5;
+        thus 119 v_4 < 221 v_2 < 91 v_5 ⟹ 17 v_4 < 13 v_5 (divide by 7). -/
+lemma bhk_8_1_2_find_72 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h81 : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h65 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h5v5_lt_7v4 : 5 * (speeds ⟨4, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h67 : 11 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h812 : 7 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h_incl : Set.Icc (max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                            (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ))))
+                       (11 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              ⊆ unsafeOf speeds ⟨4, by omega⟩) :
+    17 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨4, by omega⟩ : ℤ) := by
+  have hv1_int : (0 : ℤ) < (speeds ⟨0, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv2_int : (0 : ℤ) < (speeds ⟨1, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv3_int : (0 : ℤ) < (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv4_int : (0 : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv5_int : (0 : ℤ) < (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  by_cases h_empty : 11 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨2, by omega⟩ : ℤ)
+  · -- Empty case: 11 v_4 < 13 v_3 + h65 + hlarge ⟹ 17 v_4 < 13 v_5.
+    -- 55 v_4 < 65 v_3; 65 v_3 < 39 v_5 (from 5 v_3 < 3 v_5 via h65+hlarge ×13); hence
+    -- 55 v_4 < 39 v_5 ⟹ 935 v_4 < 663 v_5 < 715 v_5 = 55·13 v_5 ⟹ 17 v_4 < 13 v_5.
+    nlinarith [h_empty, h65, hlarge, hv1_int, hv3_int, hv4_int, hv5_int]
+  · push_neg at h_empty -- 13 v_3 ≤ 11 v_4
+    have hv1_pos_R : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hv1_int
+    have hv2_pos_R : (0 : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hv2_int
+    have hv3_pos_R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hv3_int
+    have hv4_pos_R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hv4_int
+    have hv5_pos_R : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hv5_int
+    have h_empty_R : 13 * (speeds ⟨2, by omega⟩ : ℝ) ≤ 11 * (speeds ⟨3, by omega⟩ : ℝ) := by
+      exact_mod_cast h_empty
+    have h66_R : 25 * (speeds ⟨2, by omega⟩ : ℝ) < 39 * (speeds ⟨1, by omega⟩ : ℝ) := by
+      exact_mod_cast h66
+    have h65_R : 5 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+      exact_mod_cast h65
+    have h5v5_lt_7v4_R : 5 * (speeds ⟨4, by omega⟩ : ℝ) < 7 * (speeds ⟨3, by omega⟩ : ℝ) := by
+      exact_mod_cast h5v5_lt_7v4
+    have hlarge_R : (speeds ⟨2, by omega⟩ : ℝ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℝ) := by
+      exact_mod_cast hlarge
+    have h81_R : 5 * (speeds ⟨3, by omega⟩ : ℝ) < 7 * (speeds ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast h81
+    -- Non-emptiness: max ≤ 11/(6 v_3).
+    have hab1 : 13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) ≤
+                11 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h_empty_R, hv2_pos_R, hv3_pos_R]
+    have hab2 : 7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)) ≤
+                11 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h66_R, hv1_pos_R, hv2_pos_R]
+    have hab : max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                   (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ))) ≤
+               11 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := max_le hab1 hab2
+    obtain ⟨k, hk_lo, hk_hi⟩ :=
+      block_containment speeds ⟨4, by omega⟩ (hpos _) _ _ hab h_incl
+    -- Upper bound: 11 v_5 < (6k+1) v_3.
+    have h6v3R : (0 : ℝ) < 6 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+    have hk_hi' : 11 * (speeds ⟨4, by omega⟩ : ℝ) <
+                  (6 * (k : ℝ) + 1) * (speeds ⟨2, by omega⟩ : ℝ) := by
+      have hmul := mul_lt_mul_of_pos_right hk_hi h6v3R
+      have hclear : ((speeds ⟨4, by omega⟩ : ℝ) * (11 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))) *
+                    (6 * (speeds ⟨2, by omega⟩ : ℝ)) =
+                    11 * (speeds ⟨4, by omega⟩ : ℝ) := by field_simp
+      nlinarith [hmul, hclear]
+    have hk_hi_int : 11 * (speeds ⟨4, by omega⟩ : ℤ) <
+                     (6 * k + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hk_hi'
+    -- Force k ≥ 3 (same as find_68).
+    have hk_ge_3 : 3 ≤ k := by
+      by_contra hk_lt
+      push_neg at hk_lt
+      have hk_le_2 : k ≤ 2 := by omega
+      have h6kp1_le : 6 * k + 1 ≤ 13 := by linarith
+      have h11v5_lt_13v3 : 11 * (speeds ⟨4, by omega⟩ : ℤ) <
+                            13 * (speeds ⟨2, by omega⟩ : ℤ) := by
+        calc 11 * (speeds ⟨4, by omega⟩ : ℤ)
+            < (6 * k + 1) * (speeds ⟨2, by omega⟩ : ℤ) := hk_hi_int
+          _ ≤ 13 * (speeds ⟨2, by omega⟩ : ℤ) := by
+              apply mul_le_mul_of_nonneg_right h6kp1_le (le_of_lt hv3_int)
+      linarith [h65, hlarge, h11v5_lt_13v3, hv1_int]
+    -- Force k ≤ 3 (same as find_68).
+    have hk_le_3 : k ≤ 3 := by
+      by_contra hk_gt
+      push_neg at hk_gt
+      have hk_ge_4 : 4 ≤ k := hk_gt
+      have h23_lt : (23 : ℝ) < 6 * ((speeds ⟨4, by omega⟩ : ℝ) *
+                     max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                         (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)))) := by
+        have h6mul : 6 * ((k : ℝ) - 1/6) < 6 *
+                     ((speeds ⟨4, by omega⟩ : ℝ) *
+                       max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                           (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)))) :=
+          mul_lt_mul_of_pos_left hk_lo (by norm_num)
+        have h6km1_simp : 6 * ((k : ℝ) - 1/6) = 6 * (k : ℝ) - 1 := by ring
+        rw [h6km1_simp] at h6mul
+        have h6km1_ge : (23 : ℝ) ≤ 6 * (k : ℝ) - 1 := by
+          exact_mod_cast (by linarith : (23 : ℤ) ≤ 6 * k - 1)
+        linarith
+      have hmax_eq : 6 * ((speeds ⟨4, by omega⟩ : ℝ) *
+                   max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                       (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)))) =
+                   max (13 * (speeds ⟨4, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ))
+                       (7 * (speeds ⟨4, by omega⟩ : ℝ) / (speeds ⟨1, by omega⟩ : ℝ)) := by
+        rw [mul_max_of_nonneg _ _ (by positivity : (0:ℝ) ≤ (speeds ⟨4, by omega⟩ : ℝ))]
+        rw [mul_max_of_nonneg _ _ (by norm_num : (0:ℝ) ≤ 6)]
+        congr 1
+        · field_simp
+        · field_simp
+      rw [hmax_eq] at h23_lt
+      rcases lt_max_iff.mp h23_lt with hcase1 | hcase2
+      · have h23v4_lt_13v5 : 23 * (speeds ⟨3, by omega⟩ : ℝ) <
+                              13 * (speeds ⟨4, by omega⟩ : ℝ) := by
+          rw [lt_div_iff₀ hv4_pos_R] at hcase1; linarith
+        nlinarith [h23v4_lt_13v5, h5v5_lt_7v4_R, hv4_pos_R, hv5_pos_R]
+      · have h23v2_lt_7v5 : 23 * (speeds ⟨1, by omega⟩ : ℝ) <
+                             7 * (speeds ⟨4, by omega⟩ : ℝ) := by
+          rw [lt_div_iff₀ hv2_pos_R] at hcase2; linarith
+        nlinarith [h23v2_lt_7v5, h66_R, h5v5_lt_7v4_R, h81_R,
+                   hv2_pos_R, hv3_pos_R, hv4_pos_R, hv5_pos_R]
+    have hk_eq_3 : k = 3 := le_antisymm hk_le_3 hk_ge_3
+    subst hk_eq_3
+    -- At k = 3, derive lower bound disjunction `17 v_4 < 13 v_5 ∨ 17 v_2 < 7 v_5`.
+    have h17_lt : (17 : ℝ) < 6 * ((speeds ⟨4, by omega⟩ : ℝ) *
+                   max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                       (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)))) := by
+      have h6mul := mul_lt_mul_of_pos_left hk_lo (by norm_num : (0 : ℝ) < 6)
+      have : 6 * (((3 : ℤ) : ℝ) - 1/6) = 17 := by push_cast; norm_num
+      linarith [h6mul, this]
+    have hmax_eq : 6 * ((speeds ⟨4, by omega⟩ : ℝ) *
+                 max (13 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+                     (7 / (6 * (speeds ⟨1, by omega⟩ : ℝ)))) =
+                 max (13 * (speeds ⟨4, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ))
+                     (7 * (speeds ⟨4, by omega⟩ : ℝ) / (speeds ⟨1, by omega⟩ : ℝ)) := by
+      rw [mul_max_of_nonneg _ _ (by positivity : (0:ℝ) ≤ (speeds ⟨4, by omega⟩ : ℝ))]
+      rw [mul_max_of_nonneg _ _ (by norm_num : (0:ℝ) ≤ 6)]
+      congr 1
+      · field_simp
+      · field_simp
+    rw [hmax_eq] at h17_lt
+    rcases lt_max_iff.mp h17_lt with hA | hB
+    · -- Case A: 17 v_4 < 13 v_5. Directly the goal.
+      have h17v4_lt_13v5_R : 17 * (speeds ⟨3, by omega⟩ : ℝ) <
+                             13 * (speeds ⟨4, by omega⟩ : ℝ) := by
+        rw [lt_div_iff₀ hv4_pos_R] at hA; linarith
+      exact_mod_cast h17v4_lt_13v5_R
+    · -- Case B: 17 v_2 < 7 v_5. Combine with h812 (7 v_4 < 13 v_2) to get 17 v_4 < 13 v_5.
+      -- 17·7 v_4 < 17·13 v_2 = 221 v_2 (from h812 × 17).
+      -- 13·17 v_2 < 13·7 v_5 = 91 v_5 (from Case B × 13), so 221 v_2 < 91 v_5.
+      -- Chain: 119 v_4 < 221 v_2 < 91 v_5 ⟹ 17 v_4 < 13 v_5 (divide by 7).
+      have h17v2_lt_7v5_R : 17 * (speeds ⟨1, by omega⟩ : ℝ) <
+                            7 * (speeds ⟨4, by omega⟩ : ℝ) := by
+        rw [lt_div_iff₀ hv2_pos_R] at hB; linarith
+      have h17v2_lt_7v5 : 17 * (speeds ⟨1, by omega⟩ : ℤ) <
+                          7 * (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast h17v2_lt_7v5_R
+      nlinarith [h812, h17v2_lt_7v5, hv5_int]
+
+/-- **§8.1.2 structural fact `2057 v_2 < 1729 v_3`.** From h66 + h67 + (72) + h68
+    via the chain `187 v_2 < 119 v_4 < 91 v_5` (h67 × 17, then (72) × 7),
+    and `1001 v_5 < 1729 v_3` (h68 × 91):
+
+    * h67 × 17: 187 v_2 < 119 v_4
+    * (72) × 7: 119 v_4 < 91 v_5
+    * combine + × 11: 2057 v_2 < 1001 v_5
+    * h68 × 91: 1001 v_5 < 1729 v_3
+    * chain: 2057 v_2 < 1729 v_3.
+
+    Used downstream to derive `13 v_2 < 11 v_3` (runner 2 safety at t = 13/(6 v_3))
+    and `21 v_2 < 20 v_3` (the 2-gap distance contradiction). -/
+lemma bhk_8_1_2_2057v2_lt_1729v3 (speeds : Fin 5 → ℕ)
+    (hpos : ∀ i, 0 < speeds i)
+    (h67 : 11 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h72 : 17 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨4, by omega⟩ : ℤ)) :
+    2057 * (speeds ⟨1, by omega⟩ : ℤ) < 1729 * (speeds ⟨2, by omega⟩ : ℤ) := by
+  have hv4_int : (0 : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv5_int : (0 : ℤ) < (speeds ⟨4, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  nlinarith [h67, h68, h72, hv4_int, hv5_int]
+
+/-- **§8.1.2 corollary: `13 v_2 < 11 v_3`.** Follows from
+    `bhk_8_1_2_2057v2_lt_1729v3` via 13·2057 v_2 < 13·1729 v_3 = 22477 v_3 <
+    22627 v_3 = 11·2057 v_3. Required for runner 2 safety at t = 13/(6 v_3). -/
+lemma bhk_8_1_2_13v2_lt_11v3 (speeds : Fin 5 → ℕ)
+    (hpos : ∀ i, 0 < speeds i)
+    (h67 : 11 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h72 : 17 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨4, by omega⟩ : ℤ)) :
+    13 * (speeds ⟨1, by omega⟩ : ℤ) < 11 * (speeds ⟨2, by omega⟩ : ℤ) := by
+  have hv3_int : (0 : ℤ) < (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have h2057 := bhk_8_1_2_2057v2_lt_1729v3 speeds hpos h67 h68 h72
+  linarith
+
+set_option maxHeartbeats 1200000 in
+/-- **§8.1.2 derivation of BHK (73) `17 v_3 < 13 v_4` via t = 13/(6 v_3) point.**
+
+    BHK p47: at t = 13/(6 v_3), runners 1, 2, 3, 5 are all safe. Hence
+    runner 4 must be unsafe (h_no_lonely), forcing 13 v_4/v_3 within 1/6
+    of an integer. With h81 ruling out k ≥ 4 and monotonicity ruling out
+    k ≤ 2, the integer is forced to k = 3, yielding (73).
+
+    Runner safety at t = 13/(6 v_3):
+    * Runner 1 in k=0 gap [1/(6 v_1), 5/(6 v_1)]: left from hlarge
+      (v_3 ≤ 3 v_1 ⟹ v_3 < 13 v_1); right from h65 + h68
+      (55 v_1 < 11 v_5 < 19 v_3 ⟹ 13 v_1 < 5 v_3).
+    * Runner 2 in k=1 gap [7/(6 v_2), 11/(6 v_2)]: left from h66
+      (7·39 v_3 = 273 v_3 < 325 v_3 < 507 v_2 = 13·39 v_2 ⟹ 7 v_3 < 13 v_2);
+      right from `bhk_8_1_2_13v2_lt_11v3` (h66 + h67 + h68 + h72).
+    * Runner 3 in k=2 gap [13/(6 v_3), 17/(6 v_3)]: t = 13/(6 v_3) is the
+      LEFT boundary; safe since unsafe is strict `< 1/6` (closed gap).
+    * Runner 5 in k=3 gap [19/(6 v_5), 23/(6 v_5)]: left from h65 + hlarge
+      (5 v_3 < 3 v_5 ⟹ 19 v_3 < 13 v_5); right from h68 (13 v_5 < 23 v_3).
+
+    Then `mem_unsafeOf_iff_bhkB` gives k_0 with |k_0 - 13 v_4/(6 v_3)| < 1/6.
+    Rule out k_0 ≤ 2: forces v_4 < v_3, contradicts hmono.
+    Rule out k_0 ≥ 4: 13 v_4 > 23 v_3; from h81 (5 v_4 < 7 v_3): 13 v_4 < 91 v_3/5 < 23 v_3.
+    So k_0 = 3 ⟹ (73). -/
+lemma bhk_8_1_2_find_73 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h81 : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h65 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h67 : 11 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h72 : 17 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨4, by omega⟩ : ℤ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    17 * (speeds ⟨2, by omega⟩ : ℤ) < 13 * (speeds ⟨3, by omega⟩ : ℤ) := by
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v4 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv4_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv4_pos : 0 < v4 := by rw [hv4_def]; exact_mod_cast hpos _
+  have hv5_pos : 0 < v5 := by rw [hv5_def]; exact_mod_cast hpos _
+  have hlarge_R : v3 ≤ 3 * v1 := by rw [hv3_def, hv1_def]; exact_mod_cast hlarge
+  have h81_R : 5 * v4 < 7 * v3 := by rw [hv4_def, hv3_def]; exact_mod_cast h81
+  have h65_R : 5 * v1 < v5 := by rw [hv1_def, hv5_def]; exact_mod_cast h65
+  have h66_R : 25 * v3 < 39 * v2 := by rw [hv3_def, hv2_def]; exact_mod_cast h66
+  have h68_R : 11 * v5 < 19 * v3 := by rw [hv5_def, hv3_def]; exact_mod_cast h68
+  have h_13v2_lt_11v3 := bhk_8_1_2_13v2_lt_11v3 speeds hpos h67 h68 h72
+  have h_13v2_lt_11v3_R : 13 * v2 < 11 * v3 := by
+    rw [hv2_def, hv3_def]; exact_mod_cast h_13v2_lt_11v3
+  -- The point t = 13/(6 v_3).
+  set t : ℝ := 13 / (6 * v3) with ht_def
+  have ht_pos : 0 < t := by rw [ht_def]; positivity
+  obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+  rw [← mem_unsafeOf_iff] at hi_unsafe
+  -- Runner 1: k=0 gap [1/(6 v_1), 5/(6 v_1)].
+  have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 t
+    · rw [show ((0:ℤ):ℝ) + 1/6 = 1/6 from by norm_num, div_div]
+      -- 1/(6 v_1) ≤ 13/(6 v_3): needs v_3 ≤ 13 v_1.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [hlarge_R, hv1_pos]
+    · rw [show ((0:ℤ):ℝ) + 5/6 = 5/6 from by norm_num, div_div]
+      -- 13/(6 v_3) ≤ 5/(6 v_1): needs 13 v_1 ≤ 5 v_3.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h65_R, h68_R, hv1_pos, hv3_pos, hv5_pos]
+  -- Runner 2: k=1 gap [7/(6 v_2), 11/(6 v_2)].
+  have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 1 t
+    · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div]
+      -- 7/(6 v_2) ≤ 13/(6 v_3): needs 7 v_3 ≤ 13 v_2, from h66.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h66_R, hv2_pos, hv3_pos]
+    · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div]
+      -- 13/(6 v_3) ≤ 11/(6 v_2): needs 13 v_2 ≤ 11 v_3.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h_13v2_lt_11v3_R, hv2_pos, hv3_pos]
+  -- Runner 3: k=2 gap [13/(6 v_3), 17/(6 v_3)]. t = 13/(6 v_3) is left boundary.
+  have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 2 t
+    · rw [show ((2:ℤ):ℝ) + 1/6 = 13/6 from by norm_num, div_div, ht_def]
+    · rw [show ((2:ℤ):ℝ) + 5/6 = 17/6 from by norm_num, div_div, ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      linarith [hv3_pos]
+  -- Runner 5: k=3 gap [19/(6 v_5), 23/(6 v_5)].
+  have hnot4 : t ∉ unsafeOf speeds ⟨4, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) 3 t
+    · rw [show ((3:ℤ):ℝ) + 1/6 = 19/6 from by norm_num, div_div]
+      -- 19/(6 v_5) ≤ 13/(6 v_3): needs 19 v_3 ≤ 13 v_5, from h65 + hlarge.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h65_R, hlarge_R, hv1_pos, hv3_pos, hv5_pos]
+    · rw [show ((3:ℤ):ℝ) + 5/6 = 23/6 from by norm_num, div_div]
+      -- 13/(6 v_3) ≤ 23/(6 v_5): needs 13 v_5 ≤ 23 v_3, from h68.
+      rw [ht_def]
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h68_R, hv3_pos, hv5_pos]
+  -- Hence runner 4 (= i = 3) must be unsafe at t.
+  have hi_eq_3 : i = ⟨3, by omega⟩ := by
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact absurd hi_unsafe hnot1
+    · exact absurd hi_unsafe hnot2
+    · rfl
+    · exact absurd hi_unsafe hnot4
+  rw [hi_eq_3] at hi_unsafe
+  rw [mem_unsafeOf_iff_bhkB] at hi_unsafe
+  obtain ⟨k, hk⟩ := hi_unsafe
+  -- hk : |v_4 · t - k| < 1/6 where t = 13/(6 v_3).
+  -- Extract: (6k - 1) v_3 < 13 v_4 and 13 v_4 < (6k + 1) v_3.
+  have hk_lo_R : ((k : ℝ) - 1/6) < v4 * t := by
+    have := neg_lt_of_abs_lt hk; linarith
+  have hk_hi_R : v4 * t < ((k : ℝ) + 1/6) := by
+    have := lt_of_abs_lt hk; linarith
+  have hv4t_eq : v4 * t = 13 * v4 / (6 * v3) := by rw [ht_def]; ring
+  rw [hv4t_eq] at hk_lo_R hk_hi_R
+  have h6v3_pos : (0 : ℝ) < 6 * v3 := by positivity
+  -- Convert to (6k - 1) v_3 < 13 v_4 in ℝ.
+  have hkL_R : (6 * (k : ℝ) - 1) * v3 < 13 * v4 := by
+    have hmul := mul_lt_mul_of_pos_right hk_lo_R h6v3_pos
+    have hclear : (13 * v4 / (6 * v3)) * (6 * v3) = 13 * v4 := by field_simp
+    nlinarith [hmul, hclear]
+  -- Convert to 13 v_4 < (6k + 1) v_3 in ℝ.
+  have hkR_R : 13 * v4 < (6 * (k : ℝ) + 1) * v3 := by
+    have hmul := mul_lt_mul_of_pos_right hk_hi_R h6v3_pos
+    have hclear : (13 * v4 / (6 * v3)) * (6 * v3) = 13 * v4 := by field_simp
+    nlinarith [hmul, hclear]
+  -- Cast to ℤ.
+  have hkL : (6 * k - 1) * (speeds ⟨2, by omega⟩ : ℤ) <
+             13 * (speeds ⟨3, by omega⟩ : ℤ) := by
+    have := hkL_R; rw [hv3_def, hv4_def] at this; exact_mod_cast this
+  have hkR : 13 * (speeds ⟨3, by omega⟩ : ℤ) <
+             (6 * k + 1) * (speeds ⟨2, by omega⟩ : ℤ) := by
+    have := hkR_R; rw [hv3_def, hv4_def] at this; exact_mod_cast this
+  have hv3_int : (0 : ℤ) < (speeds ⟨2, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv4_int : (0 : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by exact_mod_cast hpos _
+  have hv34 : (speeds ⟨2, by omega⟩ : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by
+    have hflt : (⟨2, by omega⟩ : Fin 5) < ⟨3, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  -- Force k ≥ 3: if k ≤ 2 then 13 v_4 < 13 v_3 ⟹ v_4 < v_3, contradicts hv34.
+  have hk_ge_3 : 3 ≤ k := by
+    by_contra hk_lt
+    push_neg at hk_lt
+    have hk_le_2 : k ≤ 2 := by omega
+    have h6kp1_le : 6 * k + 1 ≤ 13 := by linarith
+    have h_13v4_lt_13v3 : 13 * (speeds ⟨3, by omega⟩ : ℤ) <
+                          13 * (speeds ⟨2, by omega⟩ : ℤ) := by
+      calc 13 * (speeds ⟨3, by omega⟩ : ℤ)
+          < (6 * k + 1) * (speeds ⟨2, by omega⟩ : ℤ) := hkR
+        _ ≤ 13 * (speeds ⟨2, by omega⟩ : ℤ) :=
+            mul_le_mul_of_nonneg_right h6kp1_le (le_of_lt hv3_int)
+    linarith [hv34, h_13v4_lt_13v3, hv3_int]
+  -- Force k ≤ 3: if k ≥ 4 then 23 v_3 < 13 v_4; with h81 (5 v_4 < 7 v_3): 13 v_4 < 91 v_3/5 < 23 v_3.
+  have hk_le_3 : k ≤ 3 := by
+    by_contra hk_gt
+    push_neg at hk_gt
+    have hk_ge_4 : 4 ≤ k := hk_gt
+    have h6km1_ge : 23 ≤ 6 * k - 1 := by linarith
+    have h_23v3_lt_13v4 : 23 * (speeds ⟨2, by omega⟩ : ℤ) <
+                          13 * (speeds ⟨3, by omega⟩ : ℤ) := by
+      calc 23 * (speeds ⟨2, by omega⟩ : ℤ)
+          ≤ (6 * k - 1) * (speeds ⟨2, by omega⟩ : ℤ) :=
+            mul_le_mul_of_nonneg_right h6km1_ge (le_of_lt hv3_int)
+        _ < 13 * (speeds ⟨3, by omega⟩ : ℤ) := hkL
+    -- h81: 5 v_4 < 7 v_3 ⟹ 13 v_4 < 13·7/5 v_3 = 91/5 v_3. Multiply by 5:
+    -- 5·13 v_4 < 5·91/5 v_3 = 91 v_3. So 65 v_4 < 91 v_3.
+    -- Want: 23 v_3 < 13 v_4 ⟹ 23·5 v_3 < 13·5 v_4 = 65 v_4 < 91 v_3 ⟹ 115 v_3 < 91 v_3, false.
+    linarith [h81, h_23v3_lt_13v4, hv3_int]
+  have hk_eq_3 : k = 3 := le_antisymm hk_le_3 hk_ge_3
+  subst hk_eq_3
+  -- At k = 3: (6·3 - 1) v_3 = 17 v_3 < 13 v_4.
+  linarith [hkL]
+
+set_option maxHeartbeats 1200000 in
+/-- **§8.1.2 two-point coverage: runner 2 is unsafe at both `t_a = 109/(30 v_3)`
+    and `t_b = 26/(6 v_3)`.** BHK p47: at each point, runners 1, 3, 4, 5
+    are in safe gaps; h_no_lonely forces runner 2 unsafe.
+
+    Runner k-assignments:
+
+    | Runner | t_a = 109/(30 v_3) | t_b = 26/(6 v_3) |
+    |--------|-------------------|------------------|
+    | 1      | k=1 [7..11]/(6v_1) | k=1 [7..11]/(6v_1) |
+    | 3      | k=3 [19..23]/(6v_3) | k=4 [25..29]/(6v_3) |
+    | 4      | k=4 [25..29]/(6v_4) | k=5 [31..35]/(6v_4) |
+    | 5      | k=6 [37..41]/(6v_5) | k=7 [43..47]/(6v_5) |
+
+    All bounds are simple algebraic chains over `hlarge, h65, h66, h68, h72,
+    h73` (full §8.1.2 cascade). -/
+lemma bhk_8_1_2_two_point_unsafe_2 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h65 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h72 : 17 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨4, by omega⟩ : ℤ))
+    (h73 : 17 * (speeds ⟨2, by omega⟩ : ℤ) < 13 * (speeds ⟨3, by omega⟩ : ℤ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ)) ∈ unsafeOf speeds ⟨1, by omega⟩) ∧
+    (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) ∈ unsafeOf speeds ⟨1, by omega⟩) := by
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v4 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv4_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv4_pos : 0 < v4 := by rw [hv4_def]; exact_mod_cast hpos _
+  have hv5_pos : 0 < v5 := by rw [hv5_def]; exact_mod_cast hpos _
+  have hlarge_R : v3 ≤ 3 * v1 := by rw [hv3_def, hv1_def]; exact_mod_cast hlarge
+  have h65_R : 5 * v1 < v5 := by rw [hv1_def, hv5_def]; exact_mod_cast h65
+  have h66_R : 25 * v3 < 39 * v2 := by rw [hv3_def, hv2_def]; exact_mod_cast h66
+  have h68_R : 11 * v5 < 19 * v3 := by rw [hv5_def, hv3_def]; exact_mod_cast h68
+  have h72_R : 17 * v4 < 13 * v5 := by rw [hv4_def, hv5_def]; exact_mod_cast h72
+  have h73_R : 17 * v3 < 13 * v4 := by rw [hv3_def, hv4_def]; exact_mod_cast h73
+  -- Helper: derive `187 v_4 < 247 v_3` (from h68 + h72).
+  have h187v4_lt_247v3 : 187 * v4 < 247 * v3 := by
+    nlinarith [h68_R, h72_R, hv3_pos, hv4_pos, hv5_pos]
+  refine ⟨?_, ?_⟩
+  · -- t_a = 109/(30 v_3): runner 2 unsafe.
+    set ta : ℝ := 109 / (30 * v3) with hta_def
+    obtain ⟨i, hi_unsafe⟩ := h_no_lonely ta
+    rw [← mem_unsafeOf_iff] at hi_unsafe
+    -- Runner 1: k=1 gap.
+    have hnot0 : ta ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 1 ta
+      · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [hlarge_R, hv1_pos]
+      · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h65_R, h68_R, hv1_pos, hv3_pos, hv5_pos]
+    -- Runner 3: k=3 gap (trivial, since v_3 cancels).
+    have hnot2 : ta ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 3 ta
+      · rw [show ((3:ℤ):ℝ) + 1/6 = 19/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        linarith [hv3_pos]
+      · rw [show ((3:ℤ):ℝ) + 5/6 = 23/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        linarith [hv3_pos]
+    -- Runner 4: k=4 gap [25/(6 v_4), 29/(6 v_4)].
+    have hnot3 : ta ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) 4 ta
+      · rw [show ((4:ℤ):ℝ) + 1/6 = 25/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 25·30 v_3 ≤ 109·6 v_4 ⟺ 125 v_3 ≤ 109 v_4; from h73.
+        nlinarith [h73_R, hv3_pos, hv4_pos]
+      · rw [show ((4:ℤ):ℝ) + 5/6 = 29/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 109 v_4 ≤ 145 v_3; from 187 v_4 < 247 v_3.
+        nlinarith [h187v4_lt_247v3, hv3_pos, hv4_pos]
+    -- Runner 5: k=6 gap [37/(6 v_5), 41/(6 v_5)].
+    have hnot4 : ta ∉ unsafeOf speeds ⟨4, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) 6 ta
+      · rw [show ((6:ℤ):ℝ) + 1/6 = 37/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 185 v_3 ≤ 109 v_5; from h65 + hlarge.
+        nlinarith [h65_R, hlarge_R, hv1_pos, hv3_pos, hv5_pos]
+      · rw [show ((6:ℤ):ℝ) + 5/6 = 41/6 from by norm_num, div_div, hta_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 109 v_5 ≤ 205 v_3; from h68.
+        nlinarith [h68_R, hv3_pos, hv5_pos]
+    -- Force i = 1 (runner 2).
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact hi_unsafe
+    · exact absurd hi_unsafe hnot2
+    · exact absurd hi_unsafe hnot3
+    · exact absurd hi_unsafe hnot4
+  · -- t_b = 26/(6 v_3): runner 2 unsafe.
+    set tb : ℝ := 26 / (6 * v3) with htb_def
+    obtain ⟨i, hi_unsafe⟩ := h_no_lonely tb
+    rw [← mem_unsafeOf_iff] at hi_unsafe
+    -- Runner 1: k=1 gap [7/(6 v_1), 11/(6 v_1)].
+    have hnot0 : tb ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 1 tb
+      · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 7 v_3 ≤ 26 v_1; from hlarge (v_3 ≤ 3 v_1 ⟹ 7 v_3 ≤ 21 v_1 < 26 v_1).
+        nlinarith [hlarge_R, hv1_pos]
+      · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 26 v_1 ≤ 11 v_3; from h65 + h68.
+        nlinarith [h65_R, h68_R, hv1_pos, hv3_pos, hv5_pos]
+    -- Runner 3: k=4 gap (trivial).
+    have hnot2 : tb ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 4 tb
+      · rw [show ((4:ℤ):ℝ) + 1/6 = 25/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        linarith [hv3_pos]
+      · rw [show ((4:ℤ):ℝ) + 5/6 = 29/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        linarith [hv3_pos]
+    -- Runner 4: k=5 gap [31/(6 v_4), 35/(6 v_4)].
+    have hnot3 : tb ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) 5 tb
+      · rw [show ((5:ℤ):ℝ) + 1/6 = 31/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 31 v_3 ≤ 26 v_4; from h73.
+        nlinarith [h73_R, hv3_pos, hv4_pos]
+      · rw [show ((5:ℤ):ℝ) + 5/6 = 35/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 26 v_4 ≤ 35 v_3; from 187 v_4 < 247 v_3.
+        nlinarith [h187v4_lt_247v3, hv3_pos, hv4_pos]
+    -- Runner 5: k=7 gap [43/(6 v_5), 47/(6 v_5)].
+    have hnot4 : tb ∉ unsafeOf speeds ⟨4, by omega⟩ := by
+      apply not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) 7 tb
+      · rw [show ((7:ℤ):ℝ) + 1/6 = 43/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 43 v_3 ≤ 26 v_5; from h65 + hlarge.
+        nlinarith [h65_R, hlarge_R, hv1_pos, hv3_pos, hv5_pos]
+      · rw [show ((7:ℤ):ℝ) + 5/6 = 47/6 from by norm_num, div_div, htb_def]
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        -- 26 v_5 ≤ 47 v_3; from h68.
+        nlinarith [h68_R, hv3_pos, hv5_pos]
+    fin_cases i
+    · exact absurd hi_unsafe hnot0
+    · exact hi_unsafe
+    · exact absurd hi_unsafe hnot2
+    · exact absurd hi_unsafe hnot3
+    · exact absurd hi_unsafe hnot4
+
 /-- **§8.1.1 right sub-interval inclusion.** The interval
     `[25/(6 v_5), 5/(6 v_1)]` (right piece of the 123-gap, after runner 5's
     k=4 unsafe block) is contained in `unsafeOf ⟨3⟩` (runner 4 must be unsafe).
@@ -1492,6 +2037,122 @@ lemma bhk_8_1_1_find_70b (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   -- At k = 3: 5 v_4 < (6·3 + 1) v_1 = 19 v_1.
   linarith [hkR]
 
+set_option maxHeartbeats 1200000 in
+/-- **§8.1.1 1235-gap inclusion (BHK p47).** Under (65) `5 v_1 < v_5`,
+    (66) `25 v_3 < 39 v_2`, (68) `11 v_5 < 19 v_3`, (69) `17 v_2 < 7 v_5`
+    plus `hlarge : v_3 ≤ 3 v_1`, the interval `[37/(6 v_5), 23/(6 v_3)]`
+    is contained in `unsafeOf speeds ⟨3⟩` (i.e. covered by runner 4 alone).
+
+    Geometry — each of runners 1, 2, 3, 5 lies in a single safe k-gap on
+    the interval:
+
+    * Runner 1 in k=1 gap `[7/(6 v_1), 11/(6 v_1)]`.
+      - Left `7 v_5 < 37 v_1` via `h68 + hlarge`
+        (`77 v_5 < 133 v_3 ≤ 399 v_1 < 407 v_1 = 11·37 v_1`).
+      - Right `23 v_1 < 11 v_3` via `h65 + h68`
+        (`437 v_1 < 605 v_1 < 11·19 v_3 / 11 ·11 = 209 v_3`).
+    * Runner 2 in k=2 gap `[13/(6 v_2), 17/(6 v_2)]`.
+      - Left `13 v_5 < 37 v_2` via `h68 + h66`
+        (`275 v_5 < 475 v_3 < 741 v_2`).
+      - Right `23 v_2 < 17 v_3` via `h69 + h68`
+        (`187 v_2 < 77 v_5 < 133 v_3`; then `23·187 v_2 < 3059 v_3 < 3179 v_3 = 17·187 v_3`).
+    * Runner 3 in k=3 gap `[19/(6 v_3), 23/(6 v_3)]` (right end trivial).
+      - Left `19 v_5 < 37 v_3` via `h68`
+        (`209 v_5 < 361 v_3 < 407 v_3 = 11·37 v_3`).
+    * Runner 5 in k=6 gap `[37/(6 v_5), 41/(6 v_5)]` (left end trivial).
+      - Right `23 v_5 < 41 v_3` via `h68`
+        (`253 v_5 < 437 v_3 < 451 v_3 = 11·41 v_3`).
+
+    The same hypothesis bundle as `bhk_8_1_1_right_sub_incl`; no fresh
+    structural fact is required (in particular (70a)/(70b)/h81 are not
+    needed for the inclusion — they only enter the kernel via `find_71b`). -/
+lemma bhk_8_1_1_1235_gap_incl (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hlarge : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ))
+    (h65 : 5 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨4, by omega⟩ : ℤ))
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h68 : 11 * (speeds ⟨4, by omega⟩ : ℤ) < 19 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h69 : 17 * (speeds ⟨1, by omega⟩ : ℤ) < 7 * (speeds ⟨4, by omega⟩ : ℤ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    Set.Icc (37 / (6 * (speeds ⟨4, by omega⟩ : ℝ)))
+            (23 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+    ⊆ unsafeOf speeds ⟨3, by omega⟩ := by
+  set v1 : ℝ := (speeds ⟨0, by omega⟩ : ℝ) with hv1_def
+  set v2 : ℝ := (speeds ⟨1, by omega⟩ : ℝ) with hv2_def
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hv1_pos : 0 < v1 := by rw [hv1_def]; exact_mod_cast hpos _
+  have hv2_pos : 0 < v2 := by rw [hv2_def]; exact_mod_cast hpos _
+  have hv3_pos : 0 < v3 := by rw [hv3_def]; exact_mod_cast hpos _
+  have hv5_pos : 0 < v5 := by rw [hv5_def]; exact_mod_cast hpos _
+  have hlarge_R : v3 ≤ 3 * v1 := by rw [hv3_def, hv1_def]; exact_mod_cast hlarge
+  have h65_R : 5 * v1 < v5 := by rw [hv1_def, hv5_def]; exact_mod_cast h65
+  have h66_R : 25 * v3 < 39 * v2 := by rw [hv3_def, hv2_def]; exact_mod_cast h66
+  have h68_R : 11 * v5 < 19 * v3 := by rw [hv5_def, hv3_def]; exact_mod_cast h68
+  have h69_R : 17 * v2 < 7 * v5 := by rw [hv2_def, hv5_def]; exact_mod_cast h69
+  intro t ht
+  obtain ⟨htL, htR⟩ := ht
+  obtain ⟨i, hi_unsafe⟩ := h_no_lonely t
+  rw [← mem_unsafeOf_iff] at hi_unsafe
+  -- Runner 1 (speeds ⟨0⟩): k=1 gap [7/(6 v_1), 11/(6 v_1)].
+  have hnot0 : t ∉ unsafeOf speeds ⟨0, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 1 t
+    · rw [show ((1:ℤ):ℝ) + 1/6 = 7/6 from by norm_num, div_div]
+      -- 7/(6 v_1) ≤ 37/(6 v_5): needs 7 v_5 ≤ 37 v_1.
+      have hbound : 7 / (6 * v1) ≤ 37 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hlarge_R, hv1_pos, hv3_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((1:ℤ):ℝ) + 5/6 = 11/6 from by norm_num, div_div]
+      -- 23/(6 v_3) ≤ 11/(6 v_1): needs 23 v_1 ≤ 11 v_3.
+      have hbound : 23 / (6 * v3) ≤ 11 / (6 * v1) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h65_R, h68_R, hv1_pos, hv3_pos, hv5_pos]
+      linarith [htR, hbound]
+  -- Runner 2 (speeds ⟨1⟩): k=2 gap [13/(6 v_2), 17/(6 v_2)].
+  have hnot1 : t ∉ unsafeOf speeds ⟨1, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 2 t
+    · rw [show ((2:ℤ):ℝ) + 1/6 = 13/6 from by norm_num, div_div]
+      -- 13/(6 v_2) ≤ 37/(6 v_5): needs 13 v_5 ≤ 37 v_2.
+      have hbound : 13 / (6 * v2) ≤ 37 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h66_R, h68_R, hv2_pos, hv3_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((2:ℤ):ℝ) + 5/6 = 17/6 from by norm_num, div_div]
+      -- 23/(6 v_3) ≤ 17/(6 v_2): needs 23 v_2 ≤ 17 v_3.
+      have hbound : 23 / (6 * v3) ≤ 17 / (6 * v2) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, h69_R, hv2_pos, hv3_pos, hv5_pos]
+      linarith [htR, hbound]
+  -- Runner 3 (speeds ⟨2⟩): k=3 gap [19/(6 v_3), 23/(6 v_3)].
+  have hnot2 : t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 3 t
+    · rw [show ((3:ℤ):ℝ) + 1/6 = 19/6 from by norm_num, div_div]
+      -- 19/(6 v_3) ≤ 37/(6 v_5): needs 19 v_5 ≤ 37 v_3.
+      have hbound : 19 / (6 * v3) ≤ 37 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hv3_pos, hv5_pos]
+      linarith [htL, hbound]
+    · rw [show ((3:ℤ):ℝ) + 5/6 = 23/6 from by norm_num, div_div]
+      exact htR
+  -- Runner 5 (speeds ⟨4⟩): k=6 gap [37/(6 v_5), 41/(6 v_5)].
+  have hnot4 : t ∉ unsafeOf speeds ⟨4, by omega⟩ := by
+    apply not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) 6 t
+    · rw [show ((6:ℤ):ℝ) + 1/6 = 37/6 from by norm_num, div_div]
+      exact htL
+    · rw [show ((6:ℤ):ℝ) + 5/6 = 41/6 from by norm_num, div_div]
+      -- 23/(6 v_3) ≤ 41/(6 v_5): needs 23 v_5 ≤ 41 v_3.
+      have hbound : 23 / (6 * v3) ≤ 41 / (6 * v5) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [h68_R, hv3_pos, hv5_pos]
+      linarith [htR, hbound]
+  fin_cases i
+  · exact absurd hi_unsafe hnot0
+  · exact absurd hi_unsafe hnot1
+  · exact absurd hi_unsafe hnot2
+  · exact hi_unsafe
+  · exact absurd hi_unsafe hnot4
+
 /-- **Arithmetic kernel for BHK §8.1.1 step 3 (1235-gap forces `k ≥ 5`).**
     From `23 v_4 < (6k+1) v_3` (the right side of `block_containment` applied
     to the 1235-gap), together with `hlarge`, `h65` (`5 v_1 < v_5`), and
@@ -1698,13 +2359,11 @@ theorem bhk_case_8_1_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     bhk_8_1_1_right_sub_incl speeds hmono hpos hlarge_int h65 h66 h68 h69 h_no_lonely
   have h70b := bhk_8_1_1_find_70b speeds hmono hpos hlarge_int h81_int h65 h5v5_lt_7v4
                                    h_right_incl
-  -- 1235-gap inclusion remains residual (separate geometric sub-proof; needs
-  -- h68 to bound runner 5's k=6-to-k=7 safety inside [37/(6 v_5), 23/(6 v_3)]
-  -- and runner 2 in k=2 safe gap).
-  have h_1235_incl : Set.Icc (37 / (6 * (speeds ⟨4, by omega⟩ : ℝ)))
-                              (23 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
-                     ⊆ unsafeOf speeds ⟨3, by omega⟩ := by
-    sorry
+  -- 1235-gap inclusion (closed via `bhk_8_1_1_1235_gap_incl`): same
+  -- hypothesis bundle as `bhk_8_1_1_right_sub_incl` — only (65), (66),
+  -- (68), (69), `hlarge` are needed.
+  have h_1235_incl :=
+    bhk_8_1_1_1235_gap_incl speeds hmono hpos hlarge_int h65 h66 h68 h69 h_no_lonely
   -- Apply find_71b to derive (71b) `29 v_5 < 37 v_4` from the inclusion.
   have h71b := bhk_8_1_step3_find_71b speeds hmono hpos hlarge_int h65
                                        h5v5_lt_7v4 h_1235_incl
