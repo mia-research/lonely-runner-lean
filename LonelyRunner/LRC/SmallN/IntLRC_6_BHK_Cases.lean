@@ -2369,16 +2369,150 @@ theorem bhk_case_8_1_1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
                                        h5v5_lt_7v4 h_1235_incl
   exact bhk_case_8_1_1_kernel speeds hpos h65 h70b h71b
 
+/-- **Arithmetic kernel for BHK §8.1.2 (two-point block-width contradiction).**
+
+    From the §8.1.2 cascade bounds (`h66`, `h2057`) and the two-point
+    runner-2 unsafe pair at `t_a = 109/(30 v_3)` and `t_b = 26/(6 v_3) =
+    130/(30 v_3)`, derive a contradiction via the 2-block-width vs
+    2-gap-length argument.
+
+    Arithmetic chain (BHK p47):
+
+    * `t_b - t_a = 21/(30 v_3) = 7/(10 v_3)`.
+    * `v_2 (t_b - t_a) = 7 v_2/(10 v_3)`.
+    * From `h66` (`25 v_3 < 39 v_2`): `21·25 v_3 < 21·39 v_2 ⟹
+      525 v_3 < 819 v_2`. Hence `390 v_3 < 525 v_3 < 819 v_2`, so
+      `10 v_3 < 21 v_2`, i.e. `7 v_2/(10 v_3) > 1/3`.
+    * From `h2057` (`2057 v_2 < 1729 v_3`, =`bhk_8_1_2_2057v2_lt_1729v3`):
+      `21·2057 v_2 < 21·1729 v_3 ⟹ 43197 v_2 < 36309 v_3 < 41140 v_3
+      = 2057·20 v_3`, so `21 v_2 < 20 v_3`, i.e. `7 v_2/(10 v_3) < 2/3`.
+    * Each unsafe gives integer `k_a, k_b` with `|v_2 t_a - k_a| < 1/6` and
+      `|v_2 t_b - k_b| < 1/6`. Triangle inequality:
+      `|(k_b - k_a) - 7 v_2/(10 v_3)| < 1/3`. Hence
+      `0 < k_b - k_a < 1` strictly, contradicting integer arithmetic. -/
+lemma bhk_case_8_1_2_kernel (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (h66 : 25 * (speeds ⟨2, by omega⟩ : ℤ) < 39 * (speeds ⟨1, by omega⟩ : ℤ))
+    (h2057 : 2057 * (speeds ⟨1, by omega⟩ : ℤ) < 1729 * (speeds ⟨2, by omega⟩ : ℤ))
+    (h_two_points :
+      (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ)) ∈ unsafeOf speeds ⟨1, by omega⟩) ∧
+      (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) ∈ unsafeOf speeds ⟨1, by omega⟩)) :
+    False := by
+  obtain ⟨ha, hb⟩ := h_two_points
+  rw [mem_unsafeOf_iff_bhkB] at ha hb
+  obtain ⟨k_a, hka⟩ := ha
+  obtain ⟨k_b, hkb⟩ := hb
+  have hv2_pos : (0 : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos ⟨1, by omega⟩
+  have hv3_pos : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos ⟨2, by omega⟩
+  have h66_R : 25 * (speeds ⟨2, by omega⟩ : ℝ) < 39 * (speeds ⟨1, by omega⟩ : ℝ) := by
+    exact_mod_cast h66
+  have h2057_R : 2057 * (speeds ⟨1, by omega⟩ : ℝ) < 1729 * (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast h2057
+  -- Bounds on `7 v_2/(10 v_3)`.
+  have h_lower : (1 : ℝ)/3 < 7 * (speeds ⟨1, by omega⟩ : ℝ) / (10 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [lt_div_iff₀ (by positivity)]
+    nlinarith [h66_R, hv2_pos, hv3_pos]
+  have h_upper : 7 * (speeds ⟨1, by omega⟩ : ℝ) / (10 * (speeds ⟨2, by omega⟩ : ℝ)) < 2/3 := by
+    rw [div_lt_iff₀ (by positivity)]
+    nlinarith [h2057_R, hv2_pos, hv3_pos]
+  -- Algebraic identity: v_2 · (26/(6 v_3) - 109/(30 v_3)) = 7 v_2/(10 v_3).
+  have h_diff_eq :
+      (speeds ⟨1, by omega⟩ : ℝ) * (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) -
+      (speeds ⟨1, by omega⟩ : ℝ) * (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ))) =
+      7 * (speeds ⟨1, by omega⟩ : ℝ) / (10 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    have hv3_ne : (speeds ⟨2, by omega⟩ : ℝ) ≠ 0 := ne_of_gt hv3_pos
+    field_simp
+    ring
+  -- Triangle inequality: |(k_b - k_a) - 7 v_2/(10 v_3)| < 1/3.
+  have h_triangle :
+      |((k_b : ℝ) - k_a) -
+       7 * (speeds ⟨1, by omega⟩ : ℝ) / (10 * (speeds ⟨2, by omega⟩ : ℝ))| < 1/3 := by
+    have h_rearr :
+        ((k_b : ℝ) - k_a) -
+          7 * (speeds ⟨1, by omega⟩ : ℝ) / (10 * (speeds ⟨2, by omega⟩ : ℝ)) =
+        -((speeds ⟨1, by omega⟩ : ℝ) * (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) - k_b) +
+        ((speeds ⟨1, by omega⟩ : ℝ) * (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ))) - k_a) := by
+      rw [← h_diff_eq]; ring
+    rw [h_rearr]
+    calc |-((speeds ⟨1, by omega⟩ : ℝ) * (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) - k_b) +
+          ((speeds ⟨1, by omega⟩ : ℝ) * (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ))) - k_a)|
+        ≤ |-((speeds ⟨1, by omega⟩ : ℝ) * (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) - k_b)| +
+          |((speeds ⟨1, by omega⟩ : ℝ) * (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ))) - k_a)| :=
+          abs_add_le _ _
+      _ = |(speeds ⟨1, by omega⟩ : ℝ) * (26 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) - k_b| +
+          |(speeds ⟨1, by omega⟩ : ℝ) * (109 / (30 * (speeds ⟨2, by omega⟩ : ℝ))) - k_a| := by
+          rw [abs_neg]
+      _ < 1/6 + 1/6 := by linarith [hka, hkb]
+      _ = 1/3 := by norm_num
+  -- Extract k_b - k_a bounds.
+  rcases abs_lt.mp h_triangle with ⟨h_diff_lb, h_diff_ub⟩
+  -- 7 v_2/(10 v_3) > 1/3 ⟹ k_b - k_a > 0.
+  have hdiff_pos : (0 : ℝ) < (k_b : ℝ) - k_a := by linarith
+  -- 7 v_2/(10 v_3) < 2/3 ⟹ k_b - k_a < 1.
+  have hdiff_lt_1 : (k_b : ℝ) - k_a < 1 := by linarith
+  -- Integer impossibility: 0 < k_b - k_a < 1.
+  have hkb_gt_ka : k_a < k_b := by
+    have h_int : (0 : ℤ) < k_b - k_a := by exact_mod_cast hdiff_pos
+    omega
+  have hkb_lt_ka_plus_1 : k_b < k_a + 1 := by
+    have : (k_b : ℝ) < (k_a : ℝ) + 1 := by linarith
+    exact_mod_cast this
+  omega
+
 /-- **BHK §8.1.2.** Sub-case of `x_1 ≤ 3` with `x_4 > 5/7` (de-normalised:
     `5 * speeds ⟨3⟩ < 7 * speeds ⟨2⟩`) AND `7 x_2 < 13 x_4` (de-normalised:
-    `7 * speeds ⟨3⟩ < 13 * speeds ⟨1⟩`). See BHK p46–47. -/
+    `7 * speeds ⟨3⟩ < 13 * speeds ⟨1⟩`). See BHK p46–47.
+
+    Proof structure: assume for contradiction no lonely `t` exists. BHK p47:
+
+    1. §8.1 cascade: 1234-gap → (65); 1345-gap → (66), (67); 1234-gap-B → (68).
+    2. §8.1.2-specific: 1234-gap-B + h812 → (72) `17 v_4 < 13 v_5`;
+       t = 13/(6 v_3) point → (73) `17 v_3 < 13 v_4`.
+    3. Two-point argument: t_a = 109/(30 v_3) and t_b = 26/(6 v_3) both
+       in 1345-gaps, hence runner 2 covers both. But the distance
+       7/(10 v_3) is > runner-2 2-block width 13/25 and < runner-2 2-gap
+       length 4114/5187 — contradiction via `bhk_case_8_1_2_kernel`. -/
 theorem bhk_case_8_1_2 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hlarge : speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨0, by omega⟩)
     (h81 : 5 * speeds ⟨3, by omega⟩ < 7 * speeds ⟨2, by omega⟩)
     (h812 : 7 * speeds ⟨3, by omega⟩ < 13 * speeds ⟨1, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  by_contra h_no_lonely
+  push_neg at h_no_lonely
+  -- Cast hypotheses to ℤ.
+  have hlarge_int : (speeds ⟨2, by omega⟩ : ℤ) ≤ 3 * (speeds ⟨0, by omega⟩ : ℤ) := by
+    exact_mod_cast hlarge
+  have h81_int : 5 * (speeds ⟨3, by omega⟩ : ℤ) < 7 * (speeds ⟨2, by omega⟩ : ℤ) := by
+    exact_mod_cast h81
+  have h812_int : 7 * (speeds ⟨3, by omega⟩ : ℤ) < 13 * (speeds ⟨1, by omega⟩ : ℤ) := by
+    exact_mod_cast h812
+  -- §8.1 cascade.
+  have h_1234_incl := bhk_8_1_1234_gap_incl speeds hmono hpos h_no_lonely
+  obtain ⟨h65, h5v5_lt_7v4⟩ :=
+    bhk_8_1_step1_find_65 speeds hmono hpos hlarge_int h81_int h_1234_incl
+  have h_1345_incl :=
+    bhk_8_1_1345_gap_incl speeds hmono hpos hlarge_int h65 h5v5_lt_7v4 h_no_lonely
+  obtain ⟨h66, h67⟩ :=
+    bhk_8_1_step2_find_66_67 speeds hmono hpos hlarge_int h81_int h65 h5v5_lt_7v4 h_1345_incl
+  have h_1234B_incl :=
+    bhk_8_1_1234_gap_B_incl speeds hmono hpos hlarge_int h81_int h65 h5v5_lt_7v4 h_no_lonely
+  have h68 := bhk_8_1_step3_find_68 speeds hmono hpos hlarge_int h81_int h65 h5v5_lt_7v4
+                                     h66 h67 h_1234B_incl
+  -- §8.1.2: (72) via find_72 + h812.
+  have h72 := bhk_8_1_2_find_72 speeds hmono hpos hlarge_int h81_int h65 h5v5_lt_7v4
+                                 h66 h67 h812_int h_1234B_incl
+  -- (73) via t = 13/(6 v_3) point analysis.
+  have h73 := bhk_8_1_2_find_73 speeds hmono hpos hlarge_int h81_int h65
+                                 h66 h67 h68 h72 h_no_lonely
+  -- Two-point unsafe at t_a = 109/(30 v_3), t_b = 26/(6 v_3).
+  have h_two_points := bhk_8_1_2_two_point_unsafe_2 speeds hmono hpos hlarge_int h65
+                                                     h66 h68 h72 h73 h_no_lonely
+  -- 2057 v_2 < 1729 v_3 (from h67 + h68 + h72).
+  have h2057 := bhk_8_1_2_2057v2_lt_1729v3 speeds hpos h67 h68 h72
+  -- Apply kernel.
+  exact bhk_case_8_1_2_kernel speeds hpos h66 h2057 h_two_points
 
 /-- **Arithmetic kernel for BHK §8.2.1.** Given the existence of an integer
     `j ≥ 2` satisfying the BHK `j`-conditions
