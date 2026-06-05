@@ -105,6 +105,6 @@ theorem intLRC_four : intLRC 4 := by
       by_cases hall_odd : ∀ i, Odd (speeds i)
       · -- All three speeds odd: Bienia §3 step 1, t = 1/2.
         exact intLRC_four_all_odd speeds hall_odd
-      · -- Not all odd: pre-jump reduction + T-interval main argument.
-        -- TODO: implement Bienia §3 steps 2-3 (see memory/bienia_n4_proof.md).
-        sorry
+      · -- Not all odd: pre-jump reduction (Path A, proved) +
+        -- T-interval main argument (Path B, residual sorry inside the lemma).
+        exact intLRC_four_not_all_odd speeds hmono hpos hgcd hall_odd
