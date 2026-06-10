@@ -1,21 +1,23 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Lemma4
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_MainLemma
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section7
 
 /-!
 # BHK §§5–8 — Case branches of the Six Lonely Runners proof
 
 Four case branches dispatched by the main theorem (`bhk_theorem_2`):
 
-* §5: `{v_1 t_0} = 0`              ⟶ `bhk_case_v1t0_zero`
-* §6: `{t_0} = 0`                  ⟶ `bhk_case_t0_zero`
-* §7: `3 ≤ x_1 < 4` (both ≠ 0)     ⟶ `bhk_case_v1_small_generic`
+* §5: `{v_1 t_0} = 0`                ⟶ `bhk_case_v1t0_zero`
+* §6: `{v_3 t_0} = 0`, `{v_1 t_0} ≠ 0` ⟶ `bhk_case_t0_zero`
+* §§2+7: both `≠ 0`                  ⟶ `bhk_case_v1_small_generic`
 * §8: `x_1 ≤ 3` (i.e. `v_3 ≤ 3 v_1`) ⟶ `bhk_case_v1_large`
 
 where `t_0 := 1 / (v_3 - v_2)` is the elementary period (runner 3 passing
-runner 2) and `x_i := 1 / v_i`.
+runner 2) and `x_i := 1 / v_i`. BHK's normalised `{t_0}` (runner 3's
+position at a meeting time) is `fract (v_3 · t_0)` for integer speeds.
 
-The main theorem dispatches: `v_3 ≤ 3 v_1` → §8; else split on `{t_0}`,
-`{v_1 t_0}` zero/nonzero.
+The main theorem dispatches: `v_3 ≤ 3 v_1` → §8; else split on
+`{v_3 t_0}`, `{v_1 t_0}` zero/nonzero.
 
 ## Source
 
@@ -38,28 +40,46 @@ theorem bhk_case_v1t0_zero (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
-/-- **BHK §6.** Case `{t_0} = 0` under "small `v_1`" (`3 v_1 < v_3`).
+/-- **BHK §6.** Case `{v_3 t_0} = 0` under "small `v_1`" (`3 v_1 < v_3`).
     Applies the Main Lemma to a specific rectangle constructed from the
-    23-gap geometry. -/
+    23-gap geometry.
+
+    NOTE on faithfulness: BHK's `{t_0}` is runner 3's position at the
+    meeting time `t_0` in their `v_3 = 1` normalisation; with integer
+    speeds and `t_0 = 1/(v_3 - v_2)` it is `fract (v_3 · t_0)` — runner 3
+    (equivalently runner 2) sits at the origin whenever runners 2 and 3
+    meet, i.e. `(v_3 - v_2) ∣ v_3`. The earlier statement used
+    `fract t_0 = 0`, which forces `v_3 = v_2 + 1` and made this branch
+    unreachable from the dispatcher. -/
 theorem bhk_case_t0_zero (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
-    (ht0 : Int.fract ((1 : ℝ) / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩)) = 0) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
-
-/-- **BHK §7.** Case `3 ≤ x_1 < 4` (i.e. `v_3 / 4 ≤ v_1` and `3 v_1 < v_3`)
-    with both `{t_0} ≠ 0` and `{v_1 t_0} ≠ 0`. Direct Main Lemma application
-    to the standard `2/3 × 2/9` rectangle inside `P`, plus 12 exceptional
-    pair cases (BHK Table 10). -/
-theorem bhk_case_v1_small_generic (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
-    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
-    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
-    (ht0 : Int.fract ((1 : ℝ) / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩)) ≠ 0)
+    (ht0 : Int.fract ((speeds ⟨2, by omega⟩ : ℝ) *
+              (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) = 0)
     (hv1t0 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) *
               (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) ≠ 0) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
+
+/-- **BHK §§2+7.** Generic case: `3 v_1 < v_3` with both `{v_3 t_0} ≠ 0` and
+    `{v_1 t_0} ≠ 0` (the torus subgroup `G = ⟨({v_3 t_0}, {v_1 t_0})⟩` is not
+    contained in either axis). Covers BHK §2 (`x_1 ≥ 4`) and §7
+    (`3 ≤ x_1 < 4`) together: Corollary 6 applied to the `2/3 × 2/9`
+    rectangle `[1/6, 5/6] × [7/18, 11/18] ⊆ P`, plus the exceptional pair
+    cases (BHK §2 cases 2.1–2.3, Tables 9 and 10, and the two exceptional
+    groups `G_4`, `G_7`).
+
+    NOTE on faithfulness: `{t_0}` here means `fract (v_3 · t_0)` — see the
+    docstring of `bhk_case_t0_zero`. -/
+theorem bhk_case_v1_small_generic (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (ht0 : Int.fract ((speeds ⟨2, by omega⟩ : ℝ) *
+              (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) ≠ 0)
+    (hv1t0 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) *
+              (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) ≠ 0) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 :=
+  bhk_s7_main speeds hmono hpos hgcd hsmall ht0 hv1t0
 
 /-- **Arithmetic kernel for BHK §8.1 step 1 (1234-gap forces `j = 1`).**
     Given an integer `j ≥ 2` satisfying the 1234-gap conditions
@@ -3603,8 +3623,8 @@ theorem bhk_theorem_2 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     set t₀ : ℝ := 1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩) with ht₀_def
     by_cases hv1t0 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) * t₀) = 0
     · exact bhk_case_v1t0_zero speeds hmono hpos hgcd hlarge hv1t0
-    · by_cases ht0 : Int.fract t₀ = 0
-      · exact bhk_case_t0_zero speeds hmono hpos hgcd hlarge ht0
+    · by_cases ht0 : Int.fract ((speeds ⟨2, by omega⟩ : ℝ) * t₀) = 0
+      · exact bhk_case_t0_zero speeds hmono hpos hgcd hlarge ht0 hv1t0
       · exact bhk_case_v1_small_generic speeds hmono hpos hgcd hlarge ht0 hv1t0
 
 end BHK
