@@ -12,7 +12,11 @@ The bound holds for all sub-intervals, so the original "45-block" form is
 the special case where `[a, b]` is maximal.
 
 **BHK Corollary 5.** Any 123-gap of length `≥ 2 / (3 v_3)` contains a lonely
-time. Proved here modulo Lemma 4.
+time.
+
+Both are fully proved (sorry-free). Case C of Lemma 4 (the BHK "k ≥ 2"
+case) is closed by a two-5-block separation count in place of BHK's
+5-gap-in-4-block alignment argument.
 
 ## Source
 
@@ -227,34 +231,158 @@ lemma gap_piece_bound (speeds : Fin 5 → ℕ)
     · exact h
   exact block_length_bound speeds ⟨4, by omega⟩ hv4pos sL sR hsLR hsub_U4
 
-/-- **BHK Lemma 4 — Case C residual.** This is the genuine BHK "k ≥ 2" case,
-    where `fract(v_3 · a) ∈ [1/2, 5/6)`. The two gap-pieces (left and right of
-    the full 3-block contained in J) sum to `1/(3 v_3)` in t-coords; each is
-    `< 1/(3 v_4)` by `gap_piece_bound`. So `1/(3 v_3) < 2/(3 v_4)`, i.e.,
-    `v_4 < 2 v_3`. This is NOT a contradiction with `hmono` (only `v_3 < v_4`).
-    BHK closes this by showing a 5-gap (length `2/(3 v_5)`) fits inside the
-    4-block (length `1/(3 v_4)`), forcing `2 v_4 ≤ v_5`. The Lean version of
-    this argument requires modular alignment analysis and is left as the open
-    residual.
+/-- **BHK Lemma 4 — Case C (`fract(v_4 · a) ∈ [1/2, 5/6)`).** The genuine
+    BHK "k ≥ 2" case. In `v_4`-coordinates, `J = [m+s, m+s+2/3]`
+    decomposes as gap-piece + full 4-block + gap-piece:
+    `[m+s, m+5/6] ∪ [m+5/6, m+7/6] ∪ [m+7/6, m+s+2/3]`.
 
-    Stated here as a standalone `sorry` so that all other cases of
-    `bhk_lemma_4` are unconditionally proved. -/
-theorem bhk_lemma_4_case_C (speeds : Fin 5 → ℕ) (_hmono : StrictMono speeds)
+    1. The two gap-pieces are closed intervals inside `unsafeOf 4`
+       (4-safe times in `J` are 5-unsafe), so each is `< 1/(3 v_5)` by
+       `gap_piece_bound`; their lengths sum to exactly `1/(3 v_4)`,
+       giving `v_5 < 2 v_4`.
+    2. `block_containment` pins each gap-piece inside a *single*
+       5-block: integers `k₁, k₂` with each piece within `1/6` of `k_i`
+       in `v_5`-coordinates.
+    3. The `v_5`-distance between the two facing endpoints is exactly
+       `d = v_5/(3 v_4) ∈ (1/3, 2/3)` (left end strict from
+       `v_4 < v_5`, right end strict from step 1). Containment forces
+       `k₂ - k₁ - 1/3 < d < k₂ - k₁ + 1/3`, i.e. `0 < k₂ - k₁ < 1` —
+       no such integer. This replaces BHK's 5-gap-in-4-block
+       alignment argument with a purely local two-block separation
+       count. -/
+theorem bhk_lemma_4_case_C (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
-    (a b : ℝ) (hab : a ≤ b)
+    (a b : ℝ) (_hab : a ≤ b)
     (hI : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩)
-    (_hcontra : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ b - a) :
+    (hcontra : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ b - a)
+    (hs_half : 1/2 ≤ Int.fract ((speeds ⟨3, by omega⟩ : ℝ) * a))
+    (hs_56 : Int.fract ((speeds ⟨3, by omega⟩ : ℝ) * a) < 5/6) :
     False := by
-  -- Provide unused let-bindings so the parameters are not flagged
-  let _ := hpos
-  let _ := hab
-  let _ := hI
-  sorry
+  have hv3pos : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4pos : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3_lt_v4 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hmlt : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ :=
+      hmono (show (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ by decide)
+    exact_mod_cast hmlt
+  set v3 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv3def
+  set v4 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv4def
+  set m : ℤ := ⌊v3 * a⌋ with hmdef
+  set s : ℝ := Int.fract (v3 * a) with hsdef
+  have hs_lt_one : s < 1 := Int.fract_lt_one _
+  have hva_eq : v3 * a = (m : ℝ) + s := by
+    rw [hsdef, hmdef]
+    have := Int.floor_add_fract (v3 * a)
+    linarith
+  -- J = [a, b'] ⊆ [a, b]
+  set b' : ℝ := a + 2 / (3 * v3) with hb'def
+  have hb'_le_b : b' ≤ b := by rw [hb'def]; linarith
+  have hab' : a ≤ b' := by
+    have : (0 : ℝ) < 2 / (3 * v3) := by positivity
+    rw [hb'def]
+    linarith
+  have hJ_sub : Set.Icc a b' ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪
+                                unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ⟨ht1, ht2⟩
+    exact hI ⟨ht1, le_trans ht2 hb'_le_b⟩
+  have ha_eq : a = ((m : ℝ) + s) / v3 := by
+    rw [eq_div_iff (ne_of_gt hv3pos)]; linarith [hva_eq]
+  have hb'_eq : b' = ((m : ℝ) + s + 2/3) / v3 := by
+    rw [hb'def, ha_eq]
+    field_simp
+  -- The facing endpoints of the two gap-pieces.
+  set e₁ : ℝ := ((m : ℝ) + 5/6) / v3 with he₁def
+  set e₂ : ℝ := ((m : ℝ) + 7/6) / v3 with he₂def
+  -- Ordering.
+  have h_a_e₁ : a ≤ e₁ := by
+    rw [ha_eq, he₁def]
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  have h_e₁_e₂ : e₁ ≤ e₂ := by
+    rw [he₁def, he₂def]
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  have h_e₂_b' : e₂ ≤ b' := by
+    rw [he₂def, hb'_eq]
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  have h_e₁_b' : e₁ ≤ b' := le_trans h_e₁_e₂ h_e₂_b'
+  -- Gap conditions for the left piece [a, e₁] (3-gap at m).
+  have hgapL₁ : ((m : ℝ) + 1/6) / v3 ≤ a := by
+    rw [ha_eq]
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  have hgapR₁ : e₁ ≤ ((m : ℝ) + 5/6) / v3 := he₁def.le
+  -- Gap conditions for the right piece [e₂, b'] (3-gap at m+1).
+  have hgapL₂ : ((↑(m + 1) : ℝ) + 1/6) / v3 ≤ e₂ := by
+    rw [he₂def]
+    push_cast
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  have hgapR₂ : b' ≤ ((↑(m + 1) : ℝ) + 5/6) / v3 := by
+    rw [hb'_eq]
+    push_cast
+    exact div_le_div_of_nonneg_right (by linarith) (le_of_lt hv3pos)
+  -- Step 1: each gap-piece is < 1/(3 v4); the pieces sum to 1/(3 v3).
+  have hgp₁ : e₁ - a < 1 / (3 * v4) :=
+    gap_piece_bound speeds hpos a b' hab' hJ_sub m a e₁
+      le_rfl h_e₁_b' h_a_e₁ hgapL₁ hgapR₁
+  have hgp₂ : b' - e₂ < 1 / (3 * v4) :=
+    gap_piece_bound speeds hpos a b' hab' hJ_sub (m + 1) e₂ b'
+      (le_trans h_a_e₁ h_e₁_e₂) le_rfl h_e₂_b' hgapL₂ hgapR₂
+  have hv4_lt_2v3 : v4 < 2 * v3 := by
+    have hsum : (e₁ - a) + (b' - e₂) = 1 / (3 * v3) := by
+      rw [he₁def, he₂def, ha_eq, hb'_eq]
+      field_simp
+      ring
+    have htwo : 2 / (3 * v4) = 1 / (3 * v4) + 1 / (3 * v4) := by ring
+    have h2 : 1 / (3 * v3) < 2 / (3 * v4) := by
+      rw [htwo]
+      linarith
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at h2
+    linarith
+  -- Step 2: each gap-piece lies in unsafeOf 4, hence in a single 5-block.
+  have hP₁_sub : Set.Icc a e₁ ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ⟨ht1, ht2⟩
+    have h_not3 : t ∉ unsafeOf speeds ⟨3, by omega⟩ :=
+      not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) m t
+        (le_trans hgapL₁ ht1) (le_trans ht2 hgapR₁)
+    rcases hJ_sub ⟨ht1, le_trans ht2 h_e₁_b'⟩ with h | h
+    · exact absurd h h_not3
+    · exact h
+  have hP₂_sub : Set.Icc e₂ b' ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ⟨ht1, ht2⟩
+    have h_not3 : t ∉ unsafeOf speeds ⟨3, by omega⟩ :=
+      not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) (m + 1) t
+        (le_trans hgapL₂ ht1) (le_trans ht2 hgapR₂)
+    rcases hJ_sub ⟨le_trans (le_trans h_a_e₁ h_e₁_e₂) ht1, ht2⟩ with h | h
+    · exact absurd h h_not3
+    · exact h
+  obtain ⟨k₁, hk₁l, hk₁r⟩ :=
+    block_containment speeds ⟨4, by omega⟩ (hpos _) a e₁ h_a_e₁ hP₁_sub
+  obtain ⟨k₂, hk₂l, hk₂r⟩ :=
+    block_containment speeds ⟨4, by omega⟩ (hpos _) e₂ b' h_e₂_b' hP₂_sub
+  -- Step 3: the v4-distance between the facing endpoints is v4/(3 v3),
+  -- strictly between 1/3 and 2/3 — incompatible with two 5-blocks.
+  have hd_eq : v4 * e₂ - v4 * e₁ = v4 / (3 * v3) := by
+    rw [he₁def, he₂def]
+    field_simp
+    ring
+  have hd_lo : 1/3 < v4 * e₂ - v4 * e₁ := by
+    rw [hd_eq, lt_div_iff₀ (by positivity)]
+    linarith
+  have hd_hi : v4 * e₂ - v4 * e₁ < 2/3 := by
+    rw [hd_eq, div_lt_iff₀ (by positivity)]
+    linarith
+  have h₁ : v4 * a ≤ v4 * e₁ := mul_le_mul_of_nonneg_left h_a_e₁ (le_of_lt hv4pos)
+  have h₂ : v4 * e₂ ≤ v4 * b' := mul_le_mul_of_nonneg_left h_e₂_b' (le_of_lt hv4pos)
+  -- 0 < k₂ - k₁ < 1 over ℝ, hence over ℤ: contradiction.
+  have h_int_lo : k₁ < k₂ := by
+    have : (k₁ : ℝ) < (k₂ : ℝ) := by linarith
+    exact_mod_cast this
+  have h_int_hi : k₂ < k₁ + 1 := by
+    have : (k₂ : ℝ) < (k₁ : ℝ) + 1 := by linarith
+    exact_mod_cast this
+  omega
 
 /-- **BHK Lemma 4.** Any closed interval `[a, b]` contained in
     `unsafeOf 3 ∪ unsafeOf 4` has length `< 2 / (3 v_4)`.
 
-    **Proof outline (partial — full closure pending):**
+    **Proof outline (fully proved, sorry-free):**
 
     Suppose for contradiction `b - a ≥ 2/(3 v_4)`. Consider
     `J = [a, a + 2/(3 v_4)] ⊆ [a, b]` and let `s = fract (v_4 · a)`.
@@ -280,11 +408,12 @@ theorem bhk_lemma_4_case_C (speeds : Fin 5 → ℕ) (_hmono : StrictMono speeds)
         `t`-coords. Each gap-piece `< 1/(3 v_5)` by `gap_piece_bound`; sum
         `< 2/(3 v_5)`. Hence `v_5 < 2 v_4`.
 
-        **This is BHK's "k ≥ 2" structural derivation** (5-gap ⊆ 4-block
-        forces `v_5 > 2 v_4`). To close it in Lean, we need: the full
-        4-block of length `1/(3 v_4)` contained in `[a, b]` contains a
-        5-gap (closed interval of length `2/(3 v_5)`). This depends on
-        modular alignment of `v_5/v_4` and is the genuine residual.
+        **This is BHK's "k ≥ 2" structural case**, closed in
+        `bhk_lemma_4_case_C` by a two-5-block separation count: the
+        two gap-pieces each sit inside a single 5-block, but their
+        facing endpoints are `v_5/(3 v_4) ∈ (1/3, 2/3)` apart in
+        `v_5`-coordinates — too far for the same block, too near for
+        distinct blocks.
 
     Helpers `block_length_bound`, `not_mem_unsafeOf_iff_in_gap`,
     `not_mem_unsafeOf_of_in_gap`, `gap_piece_bound` are in scope. -/
@@ -438,12 +567,10 @@ theorem bhk_lemma_4 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     linarith
   · -- s ≥ 1/2: cases C (1/2 ≤ s < 5/6) and D (s ≥ 5/6)
     rcases lt_or_ge s (5/6) with hs_56 | hs_56
-    · -- Case C (residual): s ∈ [1/2, 5/6). The genuine BHK k ≥ 2 case.
-      -- Two gap-pieces summing to 1/(3 v3), each < 1/(3 v4), gives v4 < 2 v3.
-      -- Without extra hypothesis, this is the open residual.
-      -- TODO: close using BHK's 5-gap-in-4-block argument or
-      -- additional structural fact.
-      exact bhk_lemma_4_case_C speeds hmono hpos a b hab hI hcontra
+    · -- Case C: s ∈ [1/2, 5/6). The genuine BHK k ≥ 2 case — gap-piece +
+      -- 4-block + gap-piece decomposition, closed by the two-5-block
+      -- separation count in `bhk_lemma_4_case_C`.
+      exact bhk_lemma_4_case_C speeds hmono hpos a b hab hI hcontra hs_half hs_56
     · -- Case D: s ∈ [5/6, 1). Gap-piece at m+1 has v3-coord length ≥ 1/3.
       -- sL = (m+1+1/6)/v3 = (m+7/6)/v3, sR = b' = a + 2/(3v3) = (m+s+2/3)/v3
       -- length = (s+2/3 - 7/6)/v3 = (s - 1/2)/v3 ≥ 1/3/v3 (since s ≥ 5/6)
