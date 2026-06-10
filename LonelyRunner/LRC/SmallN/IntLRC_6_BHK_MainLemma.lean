@@ -6,6 +6,7 @@ import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 import Mathlib.Algebra.Module.ZLattice.Basic
 import Mathlib.Algebra.Module.ZLattice.Covolume
 import Mathlib.Analysis.SpecialFunctions.PolarCoord
+import Mathlib.NumberTheory.DiophantineApproximation.Basic
 
 /-!
 # BHK §3 — Main Lemma and Corollary 6 (2-torus subgroup ↔ rectangle)
@@ -43,9 +44,12 @@ The proof uses a Minkowski-style covering argument on the 2-torus:
      spaced points; if none have `y`-coord in the rectangle's vertical
      window, then `β - j(2i - αn)/(in) < 1/i`, equivalent to (12).
 
-This file decomposes the proof into named helper lemmas. The hardest
-pieces (Minkowski covering, equally-spaced line arguments) remain as
-documented sorries.
+This file decomposes the proof into named helper lemmas. The Minkowski
+covering (`bhk_main_lemma_existence`), minimality refinement, and
+Corollary 6 (via a Dirichlet-pigeonhole witness replacing BHK's
+half-open box) are fully proved; the equally-spaced line-segment
+argument (`bhk_main_lemma_rectangle_minimal`) remains the single
+documented sorry.
 -/
 
 open MeasureTheory Set
@@ -878,19 +882,341 @@ lemma bhk_corollary_6_case_C_helper
     apply h_sub_ne
     exact Subtype.ext h_val_zero
 
+/-- **Generator membership for subgroups of `ZMod n`.** Any subgroup
+    `X ≤ ZMod n` contains the residue `n / |X|` (its canonical generator).
+
+    Proof: every element of `X` is `|X|`-torsion, so `X` lies inside the
+    `|X|`-torsion subgroup `⟨n/|X|⟩`; both have `|X|` elements, hence are
+    equal, and the generator belongs to `X`. -/
+lemma bhk_zmod_div_card_mem (n : ℕ) (hn : 0 < n) (X : AddSubgroup (ZMod n)) :
+    ((n / Nat.card X : ℕ) : ZMod n) ∈ X := by
+  haveI : NeZero n := ⟨hn.ne'⟩
+  set m : ℕ := Nat.card X with hm_def
+  have hm_pos : 0 < m := Nat.card_pos
+  have hm_dvd : m ∣ n := by
+    have h := AddSubgroup.card_addSubgroup_dvd_card X
+    rwa [Nat.card_zmod] at h
+  set d : ℕ := n / m with hd_def
+  have hdm : d * m = n := Nat.div_mul_cancel hm_dvd
+  have hd_pos : 0 < d := Nat.div_pos (Nat.le_of_dvd hn hm_dvd) hm_pos
+  have hd_dvd : d ∣ n := ⟨m, hdm.symm⟩
+  -- Every element of X is m-torsion.
+  have h_torsion : ∀ x ∈ X, ((m : ℕ) : ZMod n) * x = 0 := by
+    intro x hx
+    have h1 : m • (⟨x, hx⟩ : X) = 0 := by
+      rw [hm_def]; exact card_nsmul_eq_zero'
+    have h2 := congrArg (X.subtype) h1
+    rw [map_nsmul, map_zero] at h2
+    simp only [AddSubgroup.subtype_apply] at h2
+    rwa [nsmul_eq_mul] at h2
+  -- Hence X is contained in the m-torsion subgroup ⟨(d : ZMod n)⟩.
+  have h_le : X ≤ AddSubgroup.zmultiples ((d : ℕ) : ZMod n) := by
+    intro x hx
+    have h_zero : ((m * x.val : ℕ) : ZMod n) = 0 := by
+      push_cast
+      rw [ZMod.natCast_zmod_val]
+      exact h_torsion x hx
+    have h_n_dvd : n ∣ m * x.val := by
+      have h3 : ((m * x.val : ℕ) : ZMod n) = ((0 : ℕ) : ZMod n) := by
+        rw [h_zero]; norm_num
+      exact (Nat.modEq_zero_iff_dvd).mp ((ZMod.natCast_eq_natCast_iff _ _ _).mp h3)
+    have h_d_dvd : d ∣ x.val := by
+      obtain ⟨t, ht⟩ := h_n_dvd
+      refine ⟨t, ?_⟩
+      have hmx : m * x.val = m * (d * t) := by
+        rw [ht, ← hdm]; ring
+      exact Nat.eq_of_mul_eq_mul_left hm_pos hmx
+    obtain ⟨t, ht⟩ := h_d_dvd
+    rw [AddSubgroup.mem_zmultiples_iff]
+    refine ⟨(t : ℤ), ?_⟩
+    have hx_eq : ((x.val : ℕ) : ZMod n) = x := ZMod.natCast_zmod_val x
+    rw [← hx_eq, ht, zsmul_eq_mul]
+    push_cast
+    ring
+  -- Card comparison: |⟨d⟩| = m = |X| forces equality.
+  have h_card_z : Nat.card (AddSubgroup.zmultiples ((d : ℕ) : ZMod n)) = m := by
+    rw [Nat.card_zmultiples, ZMod.addOrderOf_coe d hn.ne', Nat.gcd_eq_right hd_dvd,
+        ← hdm, Nat.mul_div_cancel_left m hd_pos]
+  have h_eq : X = AddSubgroup.zmultiples ((d : ℕ) : ZMod n) :=
+    AddSubgroup.eq_of_le_of_card_ge h_le (by rw [h_card_z, hm_def])
+  rw [h_eq]
+  exact AddSubgroup.mem_zmultiples _
+
+/-- **Column structure of an order-`n` subgroup of `(ZMod n)²`.**
+
+    Any `H ≤ (ZMod n)²` with `|H| = n` determines positive integers
+    `e, f` with `e * f = n` and a residue `c` such that `(e, c) ∈ H` and
+    `(0, f) ∈ H`:
+
+    * `f` generates the kernel column `{y : (0, y) ∈ H}` (order `n/f`);
+    * `e` generates the first-coordinate image `π₁(H)` (order `n/e`).
+
+    The identity `e · f = n` is the first isomorphism theorem
+    `|H| = |im π₁| · |ker π₁|` combined with `|H| = n`. -/
+lemma bhk_subgroup_column_structure (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n)) (hH_card : Nat.card H = n) :
+    ∃ e f c : ℕ, 0 < e ∧ 0 < f ∧ e * f = n ∧
+      (((e : ℕ) : ZMod n), ((c : ℕ) : ZMod n)) ∈ H ∧
+      ((0 : ZMod n), ((f : ℕ) : ZMod n)) ∈ H := by
+  haveI : NeZero n := ⟨by omega⟩
+  haveI : Finite H := Nat.finite_of_card_ne_zero (by rw [hH_card]; omega)
+  -- First-coordinate projection of H.
+  set π : H →+ ZMod n := (AddMonoidHom.fst (ZMod n) (ZMod n)).comp H.subtype
+    with hπ_def
+  -- First isomorphism theorem: |range π| · |ker π| = n.
+  have h_iso : Nat.card (H ⧸ π.ker) = Nat.card π.range :=
+    Nat.card_congr (QuotientAddGroup.quotientKerEquivRange π).toEquiv
+  have h_lagrange := AddSubgroup.card_eq_card_quotient_mul_card_addSubgroup π.ker
+  have h_prod : Nat.card π.range * Nat.card π.ker = n := by
+    rw [← h_iso, ← h_lagrange, hH_card]
+  -- The kernel column as a subgroup of ZMod n.
+  set Y : AddSubgroup (ZMod n) :=
+    { carrier := {y : ZMod n | ((0 : ZMod n), y) ∈ H}
+      zero_mem' := H.zero_mem
+      add_mem' := by
+        intro a b ha hb
+        have h := H.add_mem ha hb
+        simpa using h
+      neg_mem' := by
+        intro a ha
+        have h := H.neg_mem ha
+        simpa using h } with hY_def
+  have hY_mem_iff : ∀ y : ZMod n, y ∈ Y ↔ ((0 : ZMod n), y) ∈ H := by
+    intro y; rfl
+  -- Y is (equinumerous with) the kernel of π.
+  have h_card_Y : Nat.card Y = Nat.card π.ker := by
+    refine Nat.card_congr (Equiv.symm ?_)
+    refine Equiv.ofBijective
+      (fun k => (⟨(k.val.val).2, ?_⟩ : Y)) ⟨?_, ?_⟩
+    · -- membership: (0, k.val.val.2) ∈ H
+      have hk_mem : k.val.val ∈ H := k.val.prop
+      have hk_fst : (k.val.val).1 = 0 := by
+        have hk := k.prop
+        rw [AddMonoidHom.mem_ker] at hk
+        exact hk
+      have h_pair : k.val.val = ((0 : ZMod n), (k.val.val).2) :=
+        Prod.ext hk_fst rfl
+      rw [hY_mem_iff, ← h_pair]
+      exact hk_mem
+    · -- injective
+      intro k₁ k₂ h_eq
+      have h_snd : (k₁.val.val).2 = (k₂.val.val).2 := congrArg Subtype.val h_eq
+      have h_fst : (k₁.val.val).1 = (k₂.val.val).1 := by
+        have h1 := k₁.prop
+        have h2 := k₂.prop
+        rw [AddMonoidHom.mem_ker] at h1 h2
+        rw [show ((k₁.val.val).1 : ZMod n) = π k₁.val from rfl, h1,
+            show ((k₂.val.val).1 : ZMod n) = π k₂.val from rfl, h2]
+      exact Subtype.ext (Subtype.ext (Prod.ext h_fst h_snd))
+    · -- surjective
+      intro y
+      have hy_mem : ((0 : ZMod n), y.val) ∈ H := (hY_mem_iff y.val).mp y.prop
+      have h_in_ker : (⟨((0 : ZMod n), y.val), hy_mem⟩ : H) ∈ π.ker := by
+        rw [AddMonoidHom.mem_ker]
+        rfl
+      exact ⟨⟨⟨((0 : ZMod n), y.val), hy_mem⟩, h_in_ker⟩, Subtype.ext rfl⟩
+  -- Extract e from the image, f from the kernel column.
+  have h_e_mem := bhk_zmod_div_card_mem n (by omega) π.range
+  have h_f_mem := bhk_zmod_div_card_mem n (by omega) Y
+  set mX : ℕ := Nat.card π.range with hmX_def
+  set mY : ℕ := Nat.card Y with hmY_def
+  have hmX_pos : 0 < mX := Nat.card_pos
+  have hmY_pos : 0 < mY := Nat.card_pos
+  have h_prod' : mX * mY = n := by rw [h_card_Y]; exact h_prod
+  -- e = n / mX and f = n / mY multiply back to n.
+  have he_eq : n / mX = mY := by
+    rw [← h_prod', Nat.mul_div_cancel_left mY hmX_pos]
+  have hf_eq : n / mY = mX := by
+    have h2 : mY * mX = n := by rw [mul_comm]; exact h_prod'
+    rw [← h2, Nat.mul_div_cancel_left mX hmY_pos]
+  -- Unpack the image membership: some h₁ ∈ H has first coordinate e.
+  obtain ⟨h₁, hπh₁⟩ := AddMonoidHom.mem_range.mp h_e_mem
+  refine ⟨n / mX, n / mY, ((h₁.val).2).val, ?_, ?_, ?_, ?_, ?_⟩
+  · -- 0 < e
+    rw [he_eq]; exact hmY_pos
+  · -- 0 < f
+    rw [hf_eq]; exact hmX_pos
+  · -- e * f = n
+    rw [he_eq, hf_eq, mul_comm]; exact h_prod'
+  · -- ((e : ZMod n), (c : ZMod n)) ∈ H
+    have h_fst : (h₁.val).1 = ((n / mX : ℕ) : ZMod n) := by
+      rw [← hπh₁]; rfl
+    have h_snd : ((((h₁.val).2).val : ℕ) : ZMod n) = (h₁.val).2 :=
+      ZMod.natCast_zmod_val _
+    have h_pair : (((n / mX : ℕ) : ZMod n), ((((h₁.val).2).val : ℕ) : ZMod n)) =
+        h₁.val := by
+      refine Prod.ext ?_ ?_
+      · exact h_fst.symm
+      · exact h_snd
+    rw [h_pair]
+    exact h₁.prop
+  · -- ((0 : ZMod n), (f : ZMod n)) ∈ H
+    exact (hY_mem_iff _).mp h_f_mem
+
+/-- **Small-`i` witness for Corollary 6 (Cases A & B).**
+
+    A nonzero integer pair `(i, j)` reducing into `H`, with `|i| ≤ B` for
+    some bound `B` *strictly* below `1/β`, and `|j| ≤ βn`.
+
+    This replaces the closed-box Minkowski step: the closed box
+    `[-1/β, 1/β] × [-βn, βn]` has area exactly `4n`, so Minkowski only
+    yields the non-strict `|i| ≤ 1/β`, with a genuine boundary case
+    `|i| = 1/β` possible when `1/β ∈ ℤ`. BHK (p10) instead take the box
+    half-open in `x` and argue "although it is only half-closed, n
+    translates of it cannot be disjoint" — a measure-density argument
+    that is awkward to formalize. We avoid both via the column structure
+    of `H` and Dirichlet's approximation theorem:
+
+    * if `eβ ≥ 1`, the column point `(0, f)` works since `f = n/e ≤ βn`;
+    * if `eβ < 1`, Dirichlet with `κ = ⌈1/(βe)⌉ ≥ 2` gives `1 ≤ k ≤ κ-1`
+      and `j` with `|k·c - j·f| ≤ f/κ ≤ βn`; the witness is
+      `(k·e, k·c - j·f)` with `|k·e| ≤ (κ-1)·e < 1/β`. -/
+lemma bhk_corollary_6_small_i_witness (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n)) (hH_card : Nat.card H = n)
+    (β : ℝ) (hβ : 0 < β) :
+    ∃ B : ℝ, 0 ≤ B ∧ B < 1 / β ∧ ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+      ((ij.1 : ZMod n), (ij.2 : ZMod n)) ∈ H ∧
+      |(ij.1 : ℝ)| ≤ B ∧ |(ij.2 : ℝ)| ≤ β * n := by
+  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem⟩ :=
+    bhk_subgroup_column_structure n hn H hH_card
+  have hn_pos_R : (0 : ℝ) < n := by exact_mod_cast (by omega : 0 < n)
+  have he_pos_R : (0 : ℝ) < e := by exact_mod_cast he_pos
+  have hf_pos_R : (0 : ℝ) < f := by exact_mod_cast hf_pos
+  have hef_R : (e : ℝ) * f = n := by exact_mod_cast hef
+  have h_1β_pos : (0 : ℝ) < 1 / β := by positivity
+  by_cases h_eβ : 1 ≤ (e : ℝ) * β
+  · -- Case `eβ ≥ 1`: vertical witness (0, f), B = 0.
+    refine ⟨0, le_refl 0, h_1β_pos, ((0 : ℤ), (f : ℤ)), ?_, ?_, ?_, ?_⟩
+    · -- (0, f) ≠ (0, 0)
+      intro h_eq
+      have h2 : ((f : ℕ) : ℤ) = 0 := congrArg Prod.snd h_eq
+      have : f = 0 := by exact_mod_cast h2
+      omega
+    · -- membership, modulo ℤ-vs-ℕ casts
+      have h_fst : (((0 : ℤ) : ZMod n)) = (0 : ZMod n) := by push_cast; ring
+      have h_snd : ((((f : ℕ) : ℤ) : ZMod n)) = ((f : ℕ) : ZMod n) := by
+        push_cast; ring
+      rw [show ((((0 : ℤ), (f : ℤ)) : ℤ × ℤ).1 : ZMod n) = (0 : ZMod n) from h_fst,
+          show ((((0 : ℤ), (f : ℤ)) : ℤ × ℤ).2 : ZMod n) = ((f : ℕ) : ZMod n) from h_snd]
+      exact h_0f_mem
+    · simp
+    · -- |f| ≤ βn: from βe ≥ 1, βn = (βe)·f ≥ f.
+      have h_abs : |(((f : ℕ) : ℤ) : ℝ)| = (f : ℝ) := by
+        rw [abs_of_nonneg (by positivity : (0 : ℝ) ≤ (((f : ℕ) : ℤ) : ℝ))]
+        push_cast
+        ring
+      rw [show ((((0 : ℤ), (f : ℤ)) : ℤ × ℤ).2 : ℝ) = (((f : ℕ) : ℤ) : ℝ) from rfl,
+          h_abs]
+      have h_expand : ((e : ℝ) * β - 1) * f = β * n - f := by
+        rw [← hef_R]; ring
+      have h_nonneg : (0 : ℝ) ≤ ((e : ℝ) * β - 1) * f :=
+        mul_nonneg (by linarith) hf_pos_R.le
+      linarith
+  · -- Case `eβ < 1`: Dirichlet pigeonhole on the column slope c/f.
+    push_neg at h_eβ
+    have h_βe_pos : (0 : ℝ) < β * e := by positivity
+    set κ : ℕ := ⌈1 / (β * (e : ℝ))⌉₊ with hκ_def
+    have hκ_ge : 1 / (β * (e : ℝ)) ≤ (κ : ℝ) := Nat.le_ceil _
+    have hκ_lt : (κ : ℝ) < 1 / (β * e) + 1 := by
+      rw [hκ_def]
+      exact Nat.ceil_lt_add_one (by positivity)
+    have hκ_gt_one : 1 < κ := by
+      rw [hκ_def, Nat.lt_ceil]
+      push_cast
+      rw [lt_div_iff₀ h_βe_pos]
+      nlinarith
+    have hκ_pos_R : (0 : ℝ) < κ := by
+      exact_mod_cast (by omega : 0 < κ)
+    have hκ_pred : 0 < κ - 1 := by omega
+    obtain ⟨j, k, hk_pos, hk_le, h_dir⟩ :=
+      Real.exists_int_int_abs_mul_sub_le ((c : ℝ) / f) hκ_pred
+    have hκ_cast : ((κ - 1 : ℕ) : ℝ) = (κ : ℝ) - 1 := by
+      have h1 : (1 : ℕ) ≤ κ := by omega
+      push_cast [h1]
+      ring
+    have h_dir' : |(k : ℝ) * ((c : ℝ) / f) - (j : ℝ)| ≤ 1 / κ := by
+      have h1 : ((κ - 1 : ℕ) : ℝ) + 1 = κ := by rw [hκ_cast]; ring
+      rwa [h1] at h_dir
+    have hk_le_R : (k : ℝ) ≤ (κ : ℝ) - 1 := by
+      rw [← hκ_cast]; exact_mod_cast hk_le
+    have hk_pos_R : (0 : ℝ) < k := by exact_mod_cast hk_pos
+    -- The witness pair (k·e, k·c - j·f).
+    refine ⟨((κ : ℝ) - 1) * e, by nlinarith, ?_,
+        ((k * (e : ℕ) : ℤ), (k * (c : ℕ) - j * (f : ℕ) : ℤ)), ?_, ?_, ?_, ?_⟩
+    · -- B < 1/β: (κ-1)·e < (1/(βe))·e = 1/β.
+      have h1 : (κ : ℝ) - 1 < 1 / (β * e) := by linarith
+      calc ((κ : ℝ) - 1) * e < (1 / (β * e)) * e :=
+            mul_lt_mul_of_pos_right h1 he_pos_R
+        _ = 1 / β := by field_simp
+    · -- nonzero: first coordinate k·e > 0.
+      intro h_eq
+      have h1 : (k * (e : ℕ) : ℤ) = 0 := congrArg Prod.fst h_eq
+      have he_int : (0 : ℤ) < ((e : ℕ) : ℤ) := by exact_mod_cast he_pos
+      nlinarith
+    · -- membership: the pair is k•(e, c) - j•(0, f) in (ZMod n)².
+      have h_pair_eq :
+          (((k * (e : ℕ) : ℤ) : ZMod n), ((k * (c : ℕ) - j * (f : ℕ) : ℤ) : ZMod n)) =
+            k • (((e : ℕ) : ZMod n), ((c : ℕ) : ZMod n)) -
+            j • ((0 : ZMod n), ((f : ℕ) : ZMod n)) := by
+        refine Prod.ext ?_ ?_
+        · show ((k * (e : ℕ) : ℤ) : ZMod n) =
+              k • ((e : ℕ) : ZMod n) - j • (0 : ZMod n)
+          rw [smul_zero, sub_zero, zsmul_eq_mul]
+          push_cast
+          ring
+        · show ((k * (c : ℕ) - j * (f : ℕ) : ℤ) : ZMod n) =
+              k • ((c : ℕ) : ZMod n) - j • ((f : ℕ) : ZMod n)
+          rw [zsmul_eq_mul, zsmul_eq_mul]
+          push_cast
+          ring
+      rw [show ((((k * (e : ℕ) : ℤ), (k * (c : ℕ) - j * (f : ℕ) : ℤ)) : ℤ × ℤ).1 : ZMod n) =
+            (((k * (e : ℕ) : ℤ)) : ZMod n) from rfl]
+      rw [show ((((k * (e : ℕ) : ℤ), (k * (c : ℕ) - j * (f : ℕ) : ℤ)) : ℤ × ℤ).2 : ZMod n) =
+            (((k * (c : ℕ) - j * (f : ℕ) : ℤ)) : ZMod n) from rfl]
+      rw [show ((((k * (e : ℕ) : ℤ)) : ZMod n), (((k * (c : ℕ) - j * (f : ℕ) : ℤ)) : ZMod n)) =
+            k • (((e : ℕ) : ZMod n), ((c : ℕ) : ZMod n)) -
+            j • ((0 : ZMod n), ((f : ℕ) : ZMod n)) from h_pair_eq]
+      exact H.sub_mem (H.zsmul_mem h_ec_mem k) (H.zsmul_mem h_0f_mem j)
+    · -- |k·e| ≤ (κ-1)·e.
+      have h_pos : (0 : ℝ) < (k : ℝ) * (e : ℕ) := by
+        nlinarith
+      rw [show (((k * (e : ℕ) : ℤ)) : ℝ) = (k : ℝ) * ((e : ℕ) : ℝ) from by push_cast; ring,
+          abs_of_pos h_pos]
+      nlinarith
+    · -- |k·c - j·f| = |k·(c/f) - j|·f ≤ f/κ ≤ (βe)·f = βn.
+      have h_abs_eq : |((k * (c : ℕ) - j * (f : ℕ) : ℤ) : ℝ)| =
+          |(k : ℝ) * ((c : ℝ) / f) - (j : ℝ)| * f := by
+        have h1 : ((k * (c : ℕ) - j * (f : ℕ) : ℤ) : ℝ) =
+            ((k : ℝ) * ((c : ℝ) / f) - (j : ℝ)) * f := by
+          push_cast
+          field_simp
+        rw [h1, abs_mul, abs_of_pos hf_pos_R]
+      rw [show (((k * (c : ℕ) - j * (f : ℕ) : ℤ)) : ℝ) =
+            ((k * (c : ℕ) - j * (f : ℕ) : ℤ) : ℝ) from rfl, h_abs_eq]
+      have h_1κ_le : (1 : ℝ) / κ ≤ β * e := by
+        rw [div_le_iff₀ hκ_pos_R]
+        calc (1 : ℝ) = (1 / (β * e)) * (β * e) := by field_simp
+          _ ≤ (κ : ℝ) * (β * e) := mul_le_mul_of_nonneg_right hκ_ge h_βe_pos.le
+          _ = β * e * κ := by ring
+      calc |(k : ℝ) * ((c : ℝ) / f) - (j : ℝ)| * f ≤ (1 / κ) * f :=
+            mul_le_mul_of_nonneg_right h_dir' hf_pos_R.le
+        _ ≤ (β * e) * f := mul_le_mul_of_nonneg_right h_1κ_le hf_pos_R.le
+        _ = β * n := by rw [mul_assoc, hef_R]
+
 /-- **BHK Corollary 6.** Either `G` intersects every `α × β` rectangle,
     or there exists `(i, j) ∈ bhkCor6Region α β` with `(i/n, j/n) ∈ G`.
 
     Proof (BHK §3.2, p10–11): three cases on `n` vs `1/(αβ)` and `1/β`.
 
-    * **Case A** `n ≥ 2/(αβ)` (so `αβ ≥ 2/n`): direct application of
-      Main Lemma. The resulting `(i, j)` with
-      `β|i| + α|j| - (2/n)|i||j| < 1` lies in the box
-      `(-1/β, 1/β) × (-1/α, 1/α)`. WLOG `i ≥ 0` by group symmetry;
-      this gives `(i, j) ∈ X`.
-
-    * **Case B** `1/β ≤ n < 2/(αβ)`: apply Main Lemma with appropriate
-      `K`. The unified Lean statement subsumes both cases.
+    * **Cases A & B** `n ≥ 1/β` (unified): a pigeonhole witness
+      (`bhk_corollary_6_small_i_witness`, replacing BHK's half-open-box
+      Minkowski argument) gives a nonzero `(i, j)` in `H`-coords with
+      `|i| ≤ B < 1/β` *strictly* and `|j| ≤ βn`. Refine to a minimal
+      representative (`bhk_main_lemma_minimality`, with `α' := B/n`, so
+      the strict bound is inherited), then `rectangle_minimal` gives the
+      BHK (12) bound, from which the cone bounds on `j` follow since
+      `|j| ≤ βn`. WLOG `i ≥ 0` by group symmetry; this gives
+      `(i, j) ∈ X`.
 
     * **Case C** `n < 1/β`: `X` contains the set `{0,...,n-1} × {-1,0,1}
       \ {(0,0)}` (since `n < 1/β` and `α < 1` imply `n-1 < 1/β` and
@@ -901,7 +1227,8 @@ lemma bhk_corollary_6_case_C_helper
 theorem bhk_corollary_6
     (G : Set (ℝ × ℝ)) (n : ℕ) (hn : 1 < n)
     (hG_lift : IsBHKLift G n)
-    (α β : ℝ) (hα : 0 < α) (hα' : α < 1) (hβ : 0 < β) (hβ' : β < 1) :
+    (α β : ℝ) (hα : 0 < α) (hα' : α < 1) (hβ : 0 < β) (hβ' : β < 1)
+    (hαβ : α * β ≥ 1 / (n : ℝ)) :
     (∀ x₁ x₂, (G ∩ bhkRectangle x₁ x₂ α β).Nonempty) ∨
     (∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
       ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G ∧
@@ -979,7 +1306,233 @@ theorem bhk_corollary_6
         linarith [h_pos, h_neg_form]
       · show ((1 : ℤ) : ℝ) < 1/α + β/α * ((ab.1.val : ℤ) : ℝ)
         push_cast; linarith
-  · -- ===== Cases A & B: `n ≥ 1/β`. Future work (apply Main Lemma). =====
-    sorry
+  · -- ===== Cases A & B: `n ≥ 1/β`. Apply Main Lemma with the small K =====
+    push_neg at h_n_lt_1_β  -- h_n_lt_1_β : 1/β ≤ ↑n
+    have hn_pos : (0 : ℝ) < n := by exact_mod_cast (by omega : (0 : ℕ) < n)
+    have h_1β_pos : (0 : ℝ) < 1/β := one_div_pos.mpr hβ
+    have hβn_pos : (0 : ℝ) < β * n := mul_pos hβ hn_pos
+    have hβn_nn : (0 : ℝ) ≤ β * n := hβn_pos.le
+    -- αβn ≥ 1 (from hαβ : αβ ≥ 1/n), hence 1/β ≤ αn.
+    have hαβn_ge_one : (1 : ℝ) ≤ α * β * n := by
+      have := hαβ
+      rw [ge_iff_le, div_le_iff₀ hn_pos] at this
+      linarith
+    have h_1β_le_αn : (1 : ℝ) / β ≤ α * n := by
+      rw [div_le_iff₀ hβ]; linarith
+    -- Classical disjunction
+    by_cases h_all_hit : ∀ x₁ x₂, (G ∩ bhkRectangle x₁ x₂ α β).Nonempty
+    · exact Or.inl h_all_hit
+    refine Or.inr ?_
+    push_neg at h_all_hit
+    obtain ⟨x₁, x₂, h_miss_eq⟩ := h_all_hit
+    have h_miss : ¬ (G ∩ bhkRectangle x₁ x₂ α β).Nonempty := by
+      rw [Set.not_nonempty_iff_eq_empty]; exact h_miss_eq
+    -- Unpack the lift once (a copy survives for the Main Lemma applications).
+    obtain ⟨H, hH_card, hG_iff⟩ := id hG_lift
+    haveI : NeZero n := ⟨by omega⟩
+    have hn_ne_real : (n : ℝ) ≠ 0 := ne_of_gt hn_pos
+    -- Integer-coordinate characterization of G-membership.
+    have hG_int_iff : ∀ a b : ℤ, ((a : ℝ) / n, (b : ℝ) / n) ∈ G ↔
+        ((a : ZMod n), (b : ZMod n)) ∈ H := by
+      intro a b
+      constructor
+      · intro hab
+        rw [hG_iff] at hab
+        obtain ⟨h, hh_in, k, l, heq⟩ := hab
+        have h_a_eq : (a : ℝ) = (h.1.val : ℝ) + (n : ℝ) * (k : ℝ) := by
+          have h1 := congr_arg Prod.fst heq
+          field_simp at h1
+          linarith
+        have h_b_eq : (b : ℝ) = (h.2.val : ℝ) + (n : ℝ) * (l : ℝ) := by
+          have h2 := congr_arg Prod.snd heq
+          field_simp at h2
+          linarith
+        have h_a_int : a = (h.1.val : ℤ) + (n : ℤ) * k := by
+          have h_rhs : (h.1.val : ℝ) + (n : ℝ) * (k : ℝ) =
+              (((h.1.val : ℤ) + (n : ℤ) * k : ℤ) : ℝ) := by push_cast; ring
+          rw [h_rhs] at h_a_eq
+          exact_mod_cast h_a_eq
+        have h_b_int : b = (h.2.val : ℤ) + (n : ℤ) * l := by
+          have h_rhs : (h.2.val : ℝ) + (n : ℝ) * (l : ℝ) =
+              (((h.2.val : ℤ) + (n : ℤ) * l : ℤ) : ℝ) := by push_cast; ring
+          rw [h_rhs] at h_b_eq
+          exact_mod_cast h_b_eq
+        have h_a_zmod : (a : ZMod n) = h.1 := by
+          rw [h_a_int]; push_cast; simp [ZMod.natCast_val]
+        have h_b_zmod : (b : ZMod n) = h.2 := by
+          rw [h_b_int]; push_cast; simp [ZMod.natCast_val]
+        have h_pair : ((a : ZMod n), (b : ZMod n)) = (h : ZMod n × ZMod n) := by
+          ext
+          · exact h_a_zmod
+          · exact h_b_zmod
+        rw [h_pair]; exact hh_in
+      · intro hab
+        rw [hG_iff]
+        refine ⟨((a : ZMod n), (b : ZMod n)), hab, ?_⟩
+        have ha_dvd : (n : ℤ) ∣ (a - ((a : ZMod n).val : ℤ)) := by
+          have : ((a - ((a : ZMod n).val : ℤ) : ℤ) : ZMod n) = 0 := by
+            push_cast; rw [ZMod.natCast_zmod_val]; ring
+          exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp this
+        have hb_dvd : (n : ℤ) ∣ (b - ((b : ZMod n).val : ℤ)) := by
+          have : ((b - ((b : ZMod n).val : ℤ) : ℤ) : ZMod n) = 0 := by
+            push_cast; rw [ZMod.natCast_zmod_val]; ring
+          exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp this
+        obtain ⟨k, hk⟩ := ha_dvd
+        obtain ⟨l, hl⟩ := hb_dvd
+        refine ⟨k, l, ?_⟩
+        have h_a_real : (a : ℝ) = ((a : ZMod n).val : ℝ) + (n : ℝ) * (k : ℝ) := by
+          have : (a : ℤ) = ((a : ZMod n).val : ℤ) + (n : ℤ) * k := by linarith [hk]
+          exact_mod_cast this
+        have h_b_real : (b : ℝ) = ((b : ZMod n).val : ℝ) + (n : ℝ) * (l : ℝ) := by
+          have : (b : ℤ) = ((b : ZMod n).val : ℤ) + (n : ℤ) * l := by linarith [hl]
+          exact_mod_cast this
+        refine Prod.ext ?_ ?_
+        · show (a : ℝ) / n = ((a : ZMod n).val : ℝ) / n + k
+          rw [h_a_real]; field_simp
+        · show (b : ℝ) / n = ((b : ZMod n).val : ℝ) / n + l
+          rw [h_b_real]; field_simp
+    -- Pigeonhole witness: nonzero (i,j) in H-coords with |i| ≤ B < 1/β, |j| ≤ βn.
+    -- (Strictness of B < 1/β is what the closed-box Minkowski step cannot give.)
+    obtain ⟨B, hB_nn, hB_lt, ij₀, hij₀_ne, hij₀_H, hij₀_B, hij₀_β⟩ :=
+      bhk_corollary_6_small_i_witness n hn H hH_card β hβ
+    -- Feed it to minimality with α' := B/n (so that α'·n = B).
+    have h_Bn_eq : (B / n) * (n : ℝ) = B := div_mul_cancel₀ B hn_ne_real
+    have h_Bn_nn : (0 : ℝ) ≤ (B / n) * (n : ℝ) := by rw [h_Bn_eq]; exact hB_nn
+    have hij₀_ex : ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+        ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G ∧
+        |(ij.1 : ℝ)| ≤ (B / n) * n ∧ |(ij.2 : ℝ)| ≤ β * n := by
+      refine ⟨ij₀, hij₀_ne, (hG_int_iff ij₀.1 ij₀.2).mpr hij₀_H, ?_, hij₀_β⟩
+      rw [h_Bn_eq]; exact hij₀_B
+    obtain ⟨ij', hij'_ne, hij'_G, hij'_α', hij'_β, hij'_min⟩ :=
+      bhk_main_lemma_minimality G n hn (B / n) β h_Bn_nn hβn_nn hij₀_ex
+    -- Strict bound |i| < 1/β, inherited from B < 1/β.
+    have hij'_i_lt : |(ij'.1 : ℝ)| < 1 / β := by
+      rw [h_Bn_eq] at hij'_α'
+      exact lt_of_le_of_lt hij'_α' hB_lt
+    have hij'_box_αn : |(ij'.1 : ℝ)| ≤ α * n := le_trans hij'_i_lt.le h_1β_le_αn
+    -- Apply rectangle_minimal to get the BHK (12) bound on (i,j).
+    have h_bound := bhk_main_lemma_rectangle_minimal G n hn hG_lift α β
+      hα hα' hβ hβ' ij'.1 ij'.2 hij'_ne ⟨hij'_box_αn, hij'_β⟩ hij'_G hij'_min
+      ⟨x₁, x₂, h_miss⟩
+    -- WLOG ij'.1 ≥ 0 via G-negation symmetry (G is the ℤ²-lift of H closed under neg).
+    -- G-negation: from (a/n, b/n) ∈ G derive (-a/n, -b/n) ∈ G.
+    have hG_neg : ∀ a b : ℤ, ((a : ℝ) / n, (b : ℝ) / n) ∈ G →
+        (((-a : ℤ) : ℝ) / n, ((-b : ℤ) : ℝ) / n) ∈ G := by
+      intro a b hab
+      have h_in_H : ((a : ZMod n), (b : ZMod n)) ∈ H := (hG_int_iff a b).mp hab
+      apply (hG_int_iff (-a) (-b)).mpr
+      have : (((-a : ℤ) : ZMod n), ((-b : ℤ) : ZMod n)) =
+              -((a : ZMod n), (b : ZMod n)) := by
+        ext
+        · push_cast; simp
+        · push_cast; simp
+      rw [this]; exact H.neg_mem h_in_H
+    -- Step 2: WLOG ij'.1 ≥ 0.
+    -- Helper proof for the j bound and the (|j| < 1/α + β/α·|i|) bound — works for either sign.
+    -- From h_bound + |ij'.2| ≤ βn, derive α·|j| < 1 + β·|i|.
+    have h_j_alpha_bound : α * |(ij'.2 : ℝ)| < 1 + β * |(ij'.1 : ℝ)| := by
+      -- β·|i| + α·|j| - 2/n·|i||j| < 1
+      -- α·|j| < 1 - β·|i| + 2/n·|i||j|
+      -- α·|j| - β·|i| < 1 + 2·|i|·(|j|/n - β); and |j| ≤ βn, so |j|/n ≤ β.
+      have h_abs_i_nn : (0 : ℝ) ≤ |(ij'.1 : ℝ)| := abs_nonneg _
+      have h_jn_le_β : |(ij'.2 : ℝ)| / n ≤ β := by
+        rw [div_le_iff₀ hn_pos]; linarith [hij'_β]
+      -- Equivalently: 2/n · |i| · |j| ≤ 2β · |i|.
+      have h_key : 2 / (n : ℝ) * |(ij'.1 : ℝ)| * |(ij'.2 : ℝ)| ≤
+                   2 * β * |(ij'.1 : ℝ)| := by
+        have h_abs_j_nn : (0 : ℝ) ≤ |(ij'.2 : ℝ)| := abs_nonneg _
+        have h_step : (2 / (n : ℝ)) * |(ij'.2 : ℝ)| ≤ 2 * β := by
+          rw [div_mul_eq_mul_div]
+          rw [div_le_iff₀ hn_pos]
+          linarith [hij'_β]
+        nlinarith [h_step, h_abs_i_nn]
+      linarith [h_bound, h_key]
+    -- Now the case split. The new (i, j) is (ij'.1, ij'.2) or (-ij'.1, -ij'.2)
+    -- depending on sign of ij'.1.
+    by_cases h_pos : 0 ≤ ij'.1
+    swap
+    · -- Case: ij'.1 < 0. Use (-ij'.1, -ij'.2).
+      have h_neg_i : ij'.1 < 0 := by omega
+      refine ⟨(-ij'.1, -ij'.2), ?_, ?_, by omega, ?_, ?_, ?_⟩
+      · -- (-ij'.1, -ij'.2) ≠ (0, 0)
+        intro h_eq
+        apply hij'_ne
+        ext
+        · have h1 : (-ij'.1, -ij'.2).1 = (0 : ℤ × ℤ).1 := congr_arg Prod.fst h_eq
+          simp at h1; omega
+        · have h2 : (-ij'.1, -ij'.2).2 = (0 : ℤ × ℤ).2 := congr_arg Prod.snd h_eq
+          simp at h2; omega
+      · -- ((-ij'.1 : ℝ)/n, (-ij'.2 : ℝ)/n) ∈ G via G-negation.
+        have := hG_neg ij'.1 ij'.2 hij'_G
+        convert this using 2 <;> push_cast <;> ring
+      · -- (-ij'.1 : ℝ) < 1/β: strict, since |ij'.1| < 1/β.
+        have h_i_abs : |(ij'.1 : ℝ)| = -(ij'.1 : ℝ) :=
+          abs_of_neg (by exact_mod_cast h_neg_i)
+        push_cast
+        linarith [hij'_i_lt]
+      · -- -1/α - β/α·(-ij'.1) < -ij'.2
+        have h_α_pos : (0 : ℝ) < α := hα
+        have h_i_abs : |(ij'.1 : ℝ)| = -(ij'.1 : ℝ) := abs_of_neg (by exact_mod_cast h_neg_i)
+        have h_j_le : (ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := le_abs_self _
+        have h_α_j_le : α * (ij'.2 : ℝ) ≤ α * |(ij'.2 : ℝ)| :=
+          mul_le_mul_of_nonneg_left h_j_le h_α_pos.le
+        have h_total : α * (ij'.2 : ℝ) < 1 + β * (-(ij'.1 : ℝ)) := by
+          rw [show β * (-(ij'.1 : ℝ)) = β * |(ij'.1 : ℝ)| from by rw [h_i_abs]]
+          linarith [h_j_alpha_bound, h_α_j_le]
+        have h_div : (ij'.2 : ℝ) < (1 + β * (-(ij'.1 : ℝ))) / α :=
+          (lt_div_iff₀ h_α_pos).mpr (by linarith)
+        have h_eq : (-1 : ℝ)/α - β/α * ((-ij'.1 : ℤ) : ℝ) =
+                    -((1 + β * (-(ij'.1 : ℝ))) / α) := by
+          push_cast; field_simp; ring
+        push_cast at h_eq ⊢
+        linarith [h_div, h_eq]
+      · -- (-ij'.2 : ℝ) < 1/α + β/α·(-ij'.1)
+        have h_α_pos : (0 : ℝ) < α := hα
+        have h_i_abs : |(ij'.1 : ℝ)| = -(ij'.1 : ℝ) := abs_of_neg (by exact_mod_cast h_neg_i)
+        have h_j_abs_ge : -(ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := neg_le_abs _
+        have h_α_j_lt : α * (-(ij'.2 : ℝ)) ≤ α * |(ij'.2 : ℝ)| :=
+          mul_le_mul_of_nonneg_left h_j_abs_ge h_α_pos.le
+        have h_total : α * (-(ij'.2 : ℝ)) < 1 + β * (-(ij'.1 : ℝ)) := by
+          rw [show β * (-(ij'.1 : ℝ)) = β * |(ij'.1 : ℝ)| from by rw [h_i_abs]]
+          linarith [h_j_alpha_bound, h_α_j_lt]
+        have h_div : -(ij'.2 : ℝ) < (1 + β * (-(ij'.1 : ℝ))) / α :=
+          (lt_div_iff₀ h_α_pos).mpr (by linarith)
+        have h_eq : (1 : ℝ)/α + β/α * ((-ij'.1 : ℤ) : ℝ) =
+                    (1 + β * (-(ij'.1 : ℝ))) / α := by
+          push_cast; field_simp
+        push_cast at h_eq ⊢
+        linarith [h_div, h_eq]
+    · -- Case: ij'.1 ≥ 0. Use (ij'.1, ij'.2).
+      refine ⟨ij', hij'_ne, hij'_G, h_pos, ?_, ?_, ?_⟩
+      · -- ij'.1 < 1/β: strict, since |ij'.1| < 1/β.
+        have h_i_abs : |(ij'.1 : ℝ)| = (ij'.1 : ℝ) := abs_of_nonneg (by exact_mod_cast h_pos)
+        linarith [hij'_i_lt]
+      · -- -1/α - β/α·ij'.1 < ij'.2
+        have h_α_pos : (0 : ℝ) < α := hα
+        have h_i_abs : |(ij'.1 : ℝ)| = (ij'.1 : ℝ) := abs_of_nonneg (by exact_mod_cast h_pos)
+        have h_j_abs_ge : -(ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := neg_le_abs _
+        have h_α_j_lt : α * (-(ij'.2 : ℝ)) ≤ α * |(ij'.2 : ℝ)| :=
+          mul_le_mul_of_nonneg_left h_j_abs_ge h_α_pos.le
+        have h_total : α * (-(ij'.2 : ℝ)) < 1 + β * (ij'.1 : ℝ) := by
+          rw [← h_i_abs]; linarith [h_j_alpha_bound, h_α_j_lt]
+        -- α · (-j) < 1 + β·i  ⟹  -j < (1 + β·i)/α  ⟹  j > -(1 + β·i)/α = -1/α - β/α·i
+        have h_div : -(ij'.2 : ℝ) < (1 + β * (ij'.1 : ℝ)) / α :=
+          (lt_div_iff₀ h_α_pos).mpr (by linarith)
+        have h_eq : (-1 : ℝ)/α - β/α * (ij'.1 : ℝ) = -((1 + β * (ij'.1 : ℝ)) / α) := by
+          field_simp; ring
+        linarith [h_div, h_eq]
+      · -- ij'.2 < 1/α + β/α·ij'.1
+        have h_α_pos : (0 : ℝ) < α := hα
+        have h_i_abs : |(ij'.1 : ℝ)| = (ij'.1 : ℝ) := abs_of_nonneg (by exact_mod_cast h_pos)
+        have h_j_le : (ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := le_abs_self _
+        have h_α_j_le : α * (ij'.2 : ℝ) ≤ α * |(ij'.2 : ℝ)| :=
+          mul_le_mul_of_nonneg_left h_j_le h_α_pos.le
+        have h_total : α * (ij'.2 : ℝ) < 1 + β * (ij'.1 : ℝ) := by
+          rw [← h_i_abs]; linarith [h_j_alpha_bound, h_α_j_le]
+        have h_div : (ij'.2 : ℝ) < (1 + β * (ij'.1 : ℝ)) / α :=
+          (lt_div_iff₀ h_α_pos).mpr (by linarith)
+        have h_eq : (1 : ℝ)/α + β/α * (ij'.1 : ℝ) = (1 + β * (ij'.1 : ℝ)) / α := by
+          field_simp
+        linarith [h_div, h_eq]
 
 end BHK
