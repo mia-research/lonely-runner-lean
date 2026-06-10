@@ -44,12 +44,15 @@ The proof uses a Minkowski-style covering argument on the 2-torus:
      spaced points; if none have `y`-coord in the rectangle's vertical
      window, then `β - j(2i - αn)/(in) < 1/i`, equivalent to (12).
 
-This file decomposes the proof into named helper lemmas. The Minkowski
-covering (`bhk_main_lemma_existence`), minimality refinement, and
-Corollary 6 (via a Dirichlet-pigeonhole witness replacing BHK's
-half-open box) are fully proved; the equally-spaced line-segment
-argument (`bhk_main_lemma_rectangle_minimal`) remains the single
-documented sorry.
+This file decomposes the proof into named helper lemmas. All are fully
+proved (sorry-free): the Minkowski covering (`bhk_main_lemma_existence`),
+minimality refinement, Corollary 6 (via a Dirichlet-pigeonhole witness
+replacing BHK's half-open box), and the equally-spaced line-segment
+argument (`bhk_main_lemma_rectangle_minimal`), the latter via a fully
+discrete sliding-window form of BHK's parallel-segment argument
+(`bhk_rectangle_minimal_core_hit`): column-basis decomposition,
+minimality-as-coprimality, a Bézout companion point with determinant
+`n`, and two interval catches whose feasibility is exactly ¬(12).
 -/
 
 open MeasureTheory Set
@@ -771,6 +774,19 @@ lemma bhk_lift_int_mem_iff (G : Set (ℝ × ℝ)) (n : ℕ) (hn : 1 < n)
     · show (b : ℝ) / n = ((b : ZMod n).val : ℝ) / n + l
       rw [h_b_real]; field_simp
 
+/-- **Closed interval catches a spaced progression.** Any arithmetic
+    progression `y₀ + ℤ·s` (step `0 < s`) meets any closed interval
+    `[a, a + L]` with `L ≥ s`: take `k = ⌈(a - y₀)/s⌉`. -/
+lemma bhk_interval_catch (y₀ s a L : ℝ) (hs : 0 < s) (hsL : s ≤ L) :
+    ∃ k : ℤ, a ≤ y₀ + (k : ℝ) * s ∧ y₀ + (k : ℝ) * s ≤ a + L := by
+  refine ⟨⌈(a - y₀) / s⌉, ?_, ?_⟩
+  · have h1 := mul_le_mul_of_nonneg_right (Int.le_ceil ((a - y₀) / s)) hs.le
+    rw [div_mul_cancel₀ _ hs.ne'] at h1
+    linarith
+  · have h1 := mul_lt_mul_of_pos_right (Int.ceil_lt_add_one ((a - y₀) / s)) hs
+    rw [add_mul, div_mul_cancel₀ _ hs.ne', one_mul] at h1
+    linarith
+
 /-- **Closed window catches a spaced coset.** Any arithmetic progression
     `y₀ + ℤ·s` (step `0 < s`) meets the fract-window
     `{y | Int.fract (y - x) ≤ L}` whenever `s ≤ L < 1`: take
@@ -872,7 +888,9 @@ lemma bhk_subgroup_column_structure (n : ℕ) (hn : 1 < n)
       (((e : ℕ) : ZMod n), ((c : ℕ) : ZMod n)) ∈ H ∧
       ((0 : ZMod n), ((f : ℕ) : ZMod n)) ∈ H ∧
       (∀ y : ZMod n, ((0 : ZMod n), y) ∈ H →
-        y ∈ AddSubgroup.zmultiples (((f : ℕ) : ℕ) : ZMod n)) := by
+        y ∈ AddSubgroup.zmultiples (((f : ℕ) : ℕ) : ZMod n)) ∧
+      (∀ p : ZMod n × ZMod n, p ∈ H →
+        p.1 ∈ AddSubgroup.zmultiples (((e : ℕ) : ℕ) : ZMod n)) := by
   haveI : NeZero n := ⟨by omega⟩
   haveI : Finite H := Nat.finite_of_card_ne_zero (by rw [hH_card]; omega)
   -- First-coordinate projection of H.
@@ -934,6 +952,7 @@ lemma bhk_subgroup_column_structure (n : ℕ) (hn : 1 < n)
   have h_e_mem := bhk_zmod_div_card_mem n (by omega) π.range
   have h_f_mem := bhk_zmod_div_card_mem n (by omega) Y
   have h_Y_eq := bhk_zmod_div_card_eq n (by omega) Y
+  have h_X_eq := bhk_zmod_div_card_eq n (by omega) π.range
   set mX : ℕ := Nat.card π.range with hmX_def
   set mY : ℕ := Nat.card Y with hmY_def
   have hmX_pos : 0 < mX := Nat.card_pos
@@ -947,7 +966,7 @@ lemma bhk_subgroup_column_structure (n : ℕ) (hn : 1 < n)
     rw [← h2, Nat.mul_div_cancel_left mX hmY_pos]
   -- Unpack the image membership: some h₁ ∈ H has first coordinate e.
   obtain ⟨h₁, hπh₁⟩ := AddMonoidHom.mem_range.mp h_e_mem
-  refine ⟨n / mX, n / mY, ((h₁.val).2).val, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨n / mX, n / mY, ((h₁.val).2).val, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · -- 0 < e
     rw [he_eq]; exact hmY_pos
   · -- 0 < f
@@ -973,6 +992,11 @@ lemma bhk_subgroup_column_structure (n : ℕ) (hn : 1 < n)
     have hy_Y : y ∈ Y := (hY_mem_iff y).mpr hy
     rw [h_Y_eq] at hy_Y
     exact hy_Y
+  · -- e generates the first-coordinate image.
+    intro p hp
+    have hp1 : p.1 ∈ π.range := AddMonoidHom.mem_range.mpr ⟨⟨p, hp⟩, rfl⟩
+    rw [h_X_eq] at hp1
+    exact hp1
 
 /-- **Row structure of an order-`n` subgroup of `(ZMod n)²`** — the
     coordinate swap of `bhk_subgroup_column_structure`: `e·f = n` with
@@ -1001,7 +1025,7 @@ lemma bhk_subgroup_row_structure (n : ℕ) (hn : 1 < n)
         ← Nat.card_congr (AddSubgroup.equivMapOfInjective H σ.toAddMonoidHom
           (AddEquiv.injective σ)).toEquiv]
     exact hH_card
-  obtain ⟨e, f, c, he, hf, hef, h_ec, h_0f, h_gen⟩ :=
+  obtain ⟨e, f, c, he, hf, hef, h_ec, h_0f, h_gen, -⟩ :=
     bhk_subgroup_column_structure n hn H' hH'_card
   refine ⟨e, f, c, he, hf, hef, ?_, ?_, ?_⟩
   · exact (hH'_mem _).mp h_ec
@@ -1040,7 +1064,7 @@ lemma bhk_rectangle_minimal_vertical_axis
   have hn_pos : (0 : ℝ) < n := by exact_mod_cast (by omega : (0 : ℕ) < n)
   obtain ⟨H, hH_card, hG_iff⟩ := hG_lift
   have h_bridge := bhk_lift_int_mem_iff G n hn H hG_iff
-  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem, h_gen⟩ :=
+  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem, h_gen, -⟩ :=
     bhk_subgroup_column_structure n hn H hH_card
   have he_pos_R : (0 : ℝ) < e := by exact_mod_cast he_pos
   have hf_pos_R : (0 : ℝ) < f := by exact_mod_cast hf_pos
@@ -1341,6 +1365,490 @@ lemma bhk_rectangle_minimal_horizontal_axis
     rw [h_y_eq]
     exact hm
 
+/-- **ℤ-linear combinations of two `H`-pairs reduce into `H`.** -/
+lemma bhk_int_comb_mem (n : ℕ) (H : AddSubgroup (ZMod n × ZMod n))
+    (p₁ p₂ q₁ q₂ : ℤ)
+    (hp : ((p₁ : ZMod n), (p₂ : ZMod n)) ∈ H)
+    (hq : ((q₁ : ZMod n), (q₂ : ZMod n)) ∈ H) (A B : ℤ) :
+    (((A * p₁ + B * q₁ : ℤ) : ZMod n), ((A * p₂ + B * q₂ : ℤ) : ZMod n)) ∈ H := by
+  have h_pair :
+      (((A * p₁ + B * q₁ : ℤ) : ZMod n), ((A * p₂ + B * q₂ : ℤ) : ZMod n)) =
+        A • ((p₁ : ZMod n), (p₂ : ZMod n)) + B • ((q₁ : ZMod n), (q₂ : ZMod n)) := by
+    refine Prod.ext ?_ ?_
+    · show ((A * p₁ + B * q₁ : ℤ) : ZMod n) = A • (p₁ : ZMod n) + B • (q₁ : ZMod n)
+      rw [zsmul_eq_mul, zsmul_eq_mul]
+      push_cast
+      ring
+    · show ((A * p₂ + B * q₂ : ℤ) : ZMod n) = A • (p₂ : ZMod n) + B • (q₂ : ZMod n)
+      rw [zsmul_eq_mul, zsmul_eq_mul]
+      push_cast
+      ring
+  rw [h_pair]
+  exact H.add_mem (H.zsmul_mem hp A) (H.zsmul_mem hq B)
+
+/-- **From `(x : ZMod n) ∈ ⟨g⟩` with `g ∣ n`, conclude `g ∣ x` over ℤ.** -/
+lemma bhk_zmultiples_int_dvd (n : ℕ) (hn : 0 < n) (g : ℕ)
+    (hg_dvd : (g : ℤ) ∣ (n : ℤ)) (x : ℤ)
+    (hx : (x : ZMod n) ∈ AddSubgroup.zmultiples ((g : ℕ) : ZMod n)) :
+    (g : ℤ) ∣ x := by
+  haveI : NeZero n := ⟨hn.ne'⟩
+  rw [AddSubgroup.mem_zmultiples_iff] at hx
+  obtain ⟨m, hm⟩ := hx
+  have h_zero : ((x - m * (g : ℕ) : ℤ) : ZMod n) = 0 := by
+    push_cast
+    rw [show ((x : ZMod n) : ZMod n) = m • ((g : ℕ) : ZMod n) from hm.symm,
+        zsmul_eq_mul]
+    ring
+  have h_n_dvd : (n : ℤ) ∣ (x - m * (g : ℕ)) :=
+    (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp h_zero
+  obtain ⟨t, ht⟩ := h_n_dvd
+  obtain ⟨w, hw⟩ := hg_dvd
+  refine ⟨m + w * t, ?_⟩
+  have h_x_eq : x = m * (g : ℕ) + (n : ℤ) * t := by linarith [ht]
+  rw [h_x_eq, hw]
+  ring
+
+/-- **Integer basis decomposition for an `H`-pair.** Given the column
+    structure data `(e, c)`, `(0, f)` of `H` with the generator
+    properties, every integer pair reducing into `H` decomposes as
+    `(u, v) = k·(e, c) + l·(0, f)` over ℤ — i.e. the two column
+    generators form a ℤ-basis of the lifted lattice. -/
+lemma bhk_int_pair_basis (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n))
+    (e f c : ℕ) (he_pos : 0 < e) (hf_pos : 0 < f) (hef : e * f = n)
+    (h_ec_mem : (((e : ℕ) : ZMod n), ((c : ℕ) : ZMod n)) ∈ H)
+    (h_kergen : ∀ y : ZMod n, ((0 : ZMod n), y) ∈ H →
+        y ∈ AddSubgroup.zmultiples (((f : ℕ) : ℕ) : ZMod n))
+    (h_imggen : ∀ p : ZMod n × ZMod n, p ∈ H →
+        p.1 ∈ AddSubgroup.zmultiples (((e : ℕ) : ℕ) : ZMod n))
+    (u v : ℤ) (h_uv : ((u : ZMod n), (v : ZMod n)) ∈ H) :
+    ∃ k l : ℤ, u = k * e ∧ v = k * c + l * f := by
+  haveI : NeZero n := ⟨by omega⟩
+  have he_dvd_n : ((e : ℕ) : ℤ) ∣ (n : ℤ) := ⟨(f : ℤ), by exact_mod_cast hef.symm⟩
+  have hf_dvd_n : ((f : ℕ) : ℤ) ∣ (n : ℤ) := ⟨(e : ℤ), by
+    have : (f : ℤ) * e = (n : ℤ) := by
+      have := hef
+      push_cast [← this]
+      ring
+    exact this.symm⟩
+  -- e ∣ u from the image generator property.
+  have h_e_dvd : ((e : ℕ) : ℤ) ∣ u :=
+    bhk_zmultiples_int_dvd n (by omega) e he_dvd_n u
+      (h_imggen ((u : ZMod n), (v : ZMod n)) h_uv)
+  obtain ⟨k, hk⟩ := h_e_dvd
+  -- (0, v - k·c) reduces into H.
+  have h_col : ((0 : ZMod n), ((v - k * c : ℤ) : ZMod n)) ∈ H := by
+    have h_comb := bhk_int_comb_mem n H u v (e : ℕ) (c : ℕ)
+      h_uv (by push_cast; exact h_ec_mem) 1 (-k)
+    have h_fst : ((1 * u + (-k) * (e : ℕ) : ℤ) : ZMod n) = (0 : ZMod n) := by
+      rw [show (1 * u + (-k) * (e : ℕ) : ℤ) = u - k * e from by ring, hk]
+      push_cast
+      ring
+    have h_snd : ((1 * v + (-k) * (c : ℕ) : ℤ) : ZMod n) =
+        ((v - k * c : ℤ) : ZMod n) := by
+      congr 1
+      ring
+    rwa [h_fst, h_snd] at h_comb
+  -- f ∣ (v - k·c) from the kernel generator property.
+  have h_f_dvd : ((f : ℕ) : ℤ) ∣ (v - k * c) :=
+    bhk_zmultiples_int_dvd n (by omega) f hf_dvd_n (v - k * c)
+      (h_kergen _ h_col)
+  obtain ⟨l, hl⟩ := h_f_dvd
+  exact ⟨k, l, by linarith [hk], by linarith [hl]⟩
+
+set_option maxHeartbeats 1000000 in
+/-- **Core case of the rectangle-minimal bound (`i, j > 0`): hit
+    construction.** If `(i, j)` (both positive, inside the
+    `[αn] × [βn]` box) reduces into `H`, is minimal, and the BHK (12)
+    bound *fails* (`n ≤ βn·i + αn·j - 2ij`), then every `α × β`
+    rectangle contains a point of the lift.
+
+    Discrete form of BHK's parallel-segment argument (p10): write
+    `(i, j) = d·(e, c) + t·(0, f)` in the column basis; minimality says
+    exactly `gcd(d, t) = 1`; Bézout yields `B ∈ M` with
+    `i·B₂ - j·B₁ = n`, so `{(i, j), B}` is a ℤ-basis of the lattice
+    and the parallel lines of BHK are the `b`-fibres `a ↦ a(i,j) + bB`.
+    The rectangle hit reduces to a sliding-window overlap (windows of
+    lengths `αn` and `i·βn/j`, sliding at step `n/j`), whose
+    feasibility is *exactly* the failed (12); two interval catches
+    finish. -/
+lemma bhk_rectangle_minimal_core_hit (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n)) (hH_card : Nat.card H = n)
+    (α β : ℝ) (hα' : α < 1) (hβ' : β < 1)
+    (i j : ℤ) (hi : 0 < i) (hj : 0 < j)
+    (hi_box : (i : ℝ) ≤ α * n) (hj_box : (j : ℝ) ≤ β * n)
+    (hij_H : ((i : ZMod n), (j : ZMod n)) ∈ H)
+    (hij_min_H : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+      ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H → (i, j) ≠ (k * i₀, k * j₀))
+    (h12 : (n : ℝ) ≤ β * n * i + α * n * j - 2 * i * j)
+    (x₁ x₂ : ℝ) :
+    ∃ u v : ℤ, ((u : ZMod n), (v : ZMod n)) ∈ H ∧
+      Int.fract ((u : ℝ) / n - x₁) ≤ α ∧ Int.fract ((v : ℝ) / n - x₂) ≤ β := by
+  haveI : NeZero n := ⟨by omega⟩
+  have hn_pos : (0 : ℝ) < n := by exact_mod_cast (by omega : (0 : ℕ) < n)
+  have hi_R : (0 : ℝ) < i := by exact_mod_cast hi
+  have hj_R : (0 : ℝ) < j := by exact_mod_cast hj
+  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem, h_kergen, h_imggen⟩ :=
+    bhk_subgroup_column_structure n hn H hH_card
+  have hef_Z : ((e : ℕ) : ℤ) * ((f : ℕ) : ℤ) = (n : ℤ) := by exact_mod_cast hef
+  -- ℤ-cast forms of the two generators' memberships.
+  have h_ec_Z : ((((e : ℕ) : ℤ) : ZMod n), (((c : ℕ) : ℤ) : ZMod n)) ∈ H := by
+    push_cast
+    exact h_ec_mem
+  have h_0f_Z : ((((0 : ℕ) : ℤ) : ZMod n), (((f : ℕ) : ℤ) : ZMod n)) ∈ H := by
+    push_cast
+    exact h_0f_mem
+  -- Basis decomposition of the minimal point: (i, j) = d·(e, c) + t·(0, f).
+  obtain ⟨d, t, hd_eq, ht_eq⟩ := bhk_int_pair_basis n hn H e f c he_pos hf_pos hef
+    h_ec_mem h_kergen h_imggen i j hij_H
+  have he_Z_pos : (0 : ℤ) < (e : ℕ) := by exact_mod_cast he_pos
+  have hd_pos : 0 < d := by
+    rcases lt_trichotomy d 0 with h | h | h
+    · nlinarith [hd_eq]
+    · rw [h, zero_mul] at hd_eq
+      omega
+    · exact h
+  -- Minimality in basis coordinates is coprimality.
+  have h_gcd : Int.gcd d t = 1 := by
+    by_contra h_ne
+    have hg_ne : Int.gcd d t ≠ 0 := by
+      rw [Ne, Int.gcd_eq_zero_iff]
+      rintro ⟨h0, -⟩
+      omega
+    have hg_ge_2 : 2 ≤ Int.gcd d t := by omega
+    obtain ⟨d', hd'⟩ := Int.gcd_dvd_left (a := d) (b := t)
+    obtain ⟨t', ht'⟩ := Int.gcd_dvd_right (a := d) (b := t)
+    have h_cand := bhk_int_comb_mem n H ((e : ℕ) : ℤ) ((c : ℕ) : ℤ)
+      ((0 : ℕ) : ℤ) ((f : ℕ) : ℤ) h_ec_Z h_0f_Z d' t'
+    apply hij_min_H (d' * (e : ℕ)) (d' * (c : ℕ) + t' * (f : ℕ))
+      (Int.gcd d t) (by exact_mod_cast hg_ge_2) (by
+        have h_fst : (d' * ((e : ℕ) : ℤ) + t' * ((0 : ℕ) : ℤ) : ℤ) =
+            d' * (e : ℕ) := by push_cast; ring
+        rwa [h_fst] at h_cand)
+    refine Prod.ext ?_ ?_
+    · show i = (Int.gcd d t : ℤ) * (d' * (e : ℕ))
+      linear_combination hd_eq + ((e : ℕ) : ℤ) * hd'
+    · show j = (Int.gcd d t : ℤ) * (d' * (c : ℕ) + t' * (f : ℕ))
+      linear_combination ht_eq + ((c : ℕ) : ℤ) * hd' + ((f : ℕ) : ℤ) * ht'
+  -- Bézout: ν·d - μ·t = 1.
+  obtain ⟨ν, μ', h_bez⟩ := (Int.isCoprime_iff_gcd_eq_one.mpr h_gcd)
+  set μ : ℤ := -μ' with hμ_def
+  have h_unim : d * ν - t * μ = 1 := by
+    rw [hμ_def]
+    linarith [h_bez]
+  -- The Bézout companion point B with i·B₂ - j·B₁ = n.
+  set B₁ : ℤ := μ * (e : ℕ) with hB₁_def
+  set B₂ : ℤ := μ * (c : ℕ) + ν * (f : ℕ) with hB₂_def
+  have hB_mem : ((B₁ : ZMod n), (B₂ : ZMod n)) ∈ H := by
+    have h_comb := bhk_int_comb_mem n H ((e : ℕ) : ℤ) ((c : ℕ) : ℤ)
+      ((0 : ℕ) : ℤ) ((f : ℕ) : ℤ) h_ec_Z h_0f_Z μ ν
+    have h_fst : (μ * ((e : ℕ) : ℤ) + ν * ((0 : ℕ) : ℤ) : ℤ) = B₁ := by
+      rw [hB₁_def]
+      all_goals push_cast; ring
+    have h_snd : (μ * ((c : ℕ) : ℤ) + ν * ((f : ℕ) : ℤ) : ℤ) = B₂ := by
+      rw [hB₂_def]
+      all_goals push_cast; ring
+    rwa [h_fst, h_snd] at h_comb
+  have h_det : i * B₂ - j * B₁ = (n : ℤ) := by
+    have h_expand : i * B₂ - j * B₁ =
+        (((e : ℕ) : ℤ) * ((f : ℕ) : ℤ)) * (d * ν - t * μ) := by
+      rw [hd_eq, ht_eq, hB₁_def, hB₂_def]
+      ring
+    rw [h_expand, h_unim, mul_one, hef_Z]
+  -- ===== Sliding-window selection of the line index b =====
+  -- Window 1: u ∈ [n·x₁, n·x₁ + αn].  Window 2 (line b): u such that
+  -- the line height lands in the y-window — slides at step n/j.
+  have h_sL : (n : ℝ) / j ≤ (α * n + (i : ℝ) * (β * n) / j - 2 * i) := by
+    rw [div_le_iff₀ hj_R]
+    have h_expand : (α * n + (i : ℝ) * (β * n) / j - 2 * i) * j =
+        α * n * j + i * (β * n) - 2 * i * j := by
+      field_simp
+      try ring
+    rw [h_expand]
+    linarith [h12]
+  obtain ⟨kb, hkb₁, hkb₂⟩ := bhk_interval_catch
+    ((i : ℝ) * (n * x₂) / j - n * x₁) ((n : ℝ) / j)
+    ((i : ℝ) - (i : ℝ) * (β * n) / j)
+    (α * n + (i : ℝ) * (β * n) / j - 2 * i)
+    (by positivity) h_sL
+  set b : ℤ := -kb with hb_def
+  set y : ℝ := (i : ℝ) * (n * x₂) / j - n * x₁ + (kb : ℝ) * ((n : ℝ) / j)
+    with hy_def
+  -- y-range: i - i·βn/j ≤ y ≤ αn - i.
+  have hy_lo : (i : ℝ) - (i : ℝ) * (β * n) / j ≤ y := hkb₁
+  have hy_hi : y ≤ α * n - (i : ℝ) := by
+    linarith [hkb₂]
+  -- The window-2 left endpoint P, and its product identity P·j = i·n·x₂ - b·n.
+  set P : ℝ := y + n * x₁ with hP_def
+  have hP_j : P * j = (i : ℝ) * (n * x₂) - (b : ℝ) * n := by
+    rw [hP_def, hy_def, hb_def]
+    push_cast
+    field_simp
+    ring
+  -- ===== Catch u inside the overlap =====
+  set cc : ℝ := n * x₁ + max 0 y with hcc_def
+  obtain ⟨ka, hka₁, hka₂⟩ := bhk_interval_catch
+    ((b : ℝ) * (B₁ : ℝ)) (i : ℝ) cc (i : ℝ) hi_R le_rfl
+  set u : ℤ := b * B₁ + ka * i with hu_def
+  have hu_cast : (u : ℝ) = (b : ℝ) * (B₁ : ℝ) + (ka : ℝ) * i := by
+    rw [hu_def]
+    push_cast
+    ring
+  -- u lies in window 1: n·x₁ ≤ u ≤ n·x₁ + αn.
+  have hu_w1_lo : n * x₁ ≤ (u : ℝ) := by
+    rw [hu_cast]
+    have h_max : (0 : ℝ) ≤ max 0 y := le_max_left 0 y
+    have : cc ≥ n * x₁ := by rw [hcc_def]; linarith
+    linarith [hka₁]
+  have hu_w1_hi : (u : ℝ) ≤ n * x₁ + α * n := by
+    rw [hu_cast]
+    rcases le_total 0 y with hy0 | hy0
+    · have h_max : max 0 y = y := max_eq_right hy0
+      have hcc_eq : cc = n * x₁ + y := by rw [hcc_def, h_max]
+      have := hka₂
+      rw [hcc_eq] at this
+      linarith [hy_hi]
+    · have h_max : max 0 y = 0 := max_eq_left hy0
+      have hcc_eq : cc = n * x₁ := by rw [hcc_def, h_max]; ring
+      have := hka₂
+      rw [hcc_eq] at this
+      linarith [hi_box]
+  -- u lies in window 2: P ≤ u ≤ P + i·βn/j.
+  have hu_w2_lo : P ≤ (u : ℝ) := by
+    rw [hu_cast, hP_def]
+    rcases le_total 0 y with hy0 | hy0
+    · have h_max : max 0 y = y := max_eq_right hy0
+      have hcc_eq : cc = n * x₁ + y := by rw [hcc_def, h_max]
+      have := hka₁
+      rw [hcc_eq] at this
+      linarith
+    · have h_max : max 0 y = 0 := max_eq_left hy0
+      have hcc_eq : cc = n * x₁ := by rw [hcc_def, h_max]; ring
+      have := hka₁
+      rw [hcc_eq] at this
+      linarith
+  have hu_w2_hi : (u : ℝ) ≤ P + (i : ℝ) * (β * n) / j := by
+    rw [hu_cast, hP_def]
+    have h_ij_le : (i : ℝ) ≤ (i : ℝ) * (β * n) / j := by
+      rw [le_div_iff₀ hj_R]
+      nlinarith [hj_box, hi_R.le]
+    rcases le_total 0 y with hy0 | hy0
+    · have h_max : max 0 y = y := max_eq_right hy0
+      have hcc_eq : cc = n * x₁ + y := by rw [hcc_def, h_max]
+      have := hka₂
+      rw [hcc_eq] at this
+      linarith
+    · have h_max : max 0 y = 0 := max_eq_left hy0
+      have hcc_eq : cc = n * x₁ := by rw [hcc_def, h_max]; ring
+      have := hka₂
+      rw [hcc_eq] at this
+      linarith [hy_lo]
+  -- ===== Assemble the hit point =====
+  set v : ℤ := b * B₂ + ka * j with hv_def
+  have h_iv : i * v = b * (n : ℤ) + u * j := by
+    rw [hv_def, hu_def]
+    linear_combination b * h_det
+  -- y-window for v: n·x₂ ≤ v ≤ n·x₂ + βn.
+  have h_uj_lo : (i : ℝ) * (n * x₂) ≤ (b : ℝ) * n + (u : ℝ) * j := by
+    have h1 := mul_le_mul_of_nonneg_right hu_w2_lo hj_R.le
+    rw [hP_j] at h1
+    linarith
+  have h_uj_hi : (b : ℝ) * n + (u : ℝ) * j ≤ (i : ℝ) * (n * x₂) + (i : ℝ) * (β * n) := by
+    have h1 := mul_le_mul_of_nonneg_right hu_w2_hi hj_R.le
+    rw [add_mul, hP_j, div_mul_cancel₀ _ hj_R.ne'] at h1
+    linarith
+  have h_iv_R : (i : ℝ) * (v : ℝ) = (b : ℝ) * n + (u : ℝ) * j := by
+    exact_mod_cast congrArg (Int.cast : ℤ → ℝ) h_iv
+  have hv_lo : n * x₂ ≤ (v : ℝ) := by
+    have h1 : (i : ℝ) * (n * x₂) ≤ (i : ℝ) * (v : ℝ) := by rw [h_iv_R]; linarith
+    exact le_of_mul_le_mul_left h1 hi_R
+  have hv_hi : (v : ℝ) ≤ n * x₂ + β * n := by
+    have h1 : (i : ℝ) * (v : ℝ) ≤ (i : ℝ) * (n * x₂ + β * n) := by
+      rw [h_iv_R, mul_add]
+      linarith
+    exact le_of_mul_le_mul_left h1 hi_R
+  -- Membership of (u, v).
+  have h_uv_mem : ((u : ZMod n), (v : ZMod n)) ∈ H := by
+    have h_comb := bhk_int_comb_mem n H B₁ B₂ i j hB_mem hij_H b ka
+    have h_fst : (b * B₁ + ka * i : ℤ) = u := by rw [hu_def]
+    have h_snd : (b * B₂ + ka * j : ℤ) = v := by rw [hv_def]
+    rwa [h_fst, h_snd] at h_comb
+  -- α, β are positive (from the box and positivity of i, j).
+  have hα_pos : (0 : ℝ) < α := by nlinarith [hi_box, hi_R, hn_pos]
+  have hβ_pos : (0 : ℝ) < β := by nlinarith [hj_box, hj_R, hn_pos]
+  -- The fract conditions.
+  refine ⟨u, v, h_uv_mem, ?_, ?_⟩
+  · have h_arg : (u : ℝ) / n - x₁ = ((u : ℝ) - n * x₁) / n := by
+      field_simp
+    rw [h_arg]
+    have h_in : 0 ≤ ((u : ℝ) - n * x₁) / n ∧ ((u : ℝ) - n * x₁) / n ≤ α := by
+      constructor
+      · apply div_nonneg _ hn_pos.le
+        linarith
+      · rw [div_le_iff₀ hn_pos]
+        linarith [hu_w1_hi]
+    rw [Int.fract_eq_self.mpr ⟨h_in.1, lt_of_le_of_lt h_in.2 hα'⟩]
+    exact h_in.2
+  · have h_arg : (v : ℝ) / n - x₂ = ((v : ℝ) - n * x₂) / n := by
+      field_simp
+    rw [h_arg]
+    have h_in : 0 ≤ ((v : ℝ) - n * x₂) / n ∧ ((v : ℝ) - n * x₂) / n ≤ β := by
+      constructor
+      · apply div_nonneg _ hn_pos.le
+        linarith
+      · rw [div_le_iff₀ hn_pos]
+        linarith [hv_hi]
+    rw [Int.fract_eq_self.mpr ⟨h_in.1, lt_of_le_of_lt h_in.2 hβ'⟩]
+    exact h_in.2
+
+/-- **Fract reflection.** If the fractional position of `w` relative to
+    the reflected target `-x - γ` is within `γ`, then the fractional
+    position of `-w` relative to `x` is within `γ`. Pure `Int.fract`
+    algebra: transports a rectangle hit through the coordinate
+    reflection `w ↦ -w`. -/
+lemma bhk_fract_reflect (w x γ : ℝ) (hγ : 0 ≤ γ) (hγ' : γ < 1)
+    (h : Int.fract (w - (-x - γ)) ≤ γ) : Int.fract (-w - x) ≤ γ := by
+  have hs0 : 0 ≤ Int.fract (w + x + γ) := Int.fract_nonneg _
+  have hsγ : Int.fract (w + x + γ) ≤ γ := by
+    have harg : w - (-x - γ) = w + x + γ := by ring
+    rwa [harg] at h
+  have hfr : Int.fract (w + x + γ) = (w + x + γ) - (⌊w + x + γ⌋ : ℤ) := rfl
+  have hkey : -w - x =
+      (γ - Int.fract (w + x + γ)) - ((⌊w + x + γ⌋ : ℤ) : ℝ) := by
+    rw [hfr]
+    ring
+  rw [hkey, Int.fract_sub_intCast,
+    Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  linarith
+
+/-- **Sign handling for the core hit, step 1: `i > 0`, `j ≠ 0`.**
+
+    The case `j < 0` is transported through the `y`-reflection
+    automorphism `σ : (x, y) ↦ (x, -y)` of `(ZMod n)²`: the reflected
+    subgroup `H' = σ(H)` has the same order, `(i, -j)` lies in `H'`
+    positively and minimally, and a hit for `H'` at the reflected
+    target `(x₁, -x₂ - β)` reflects back to a hit for `H` at
+    `(x₁, x₂)` via `bhk_fract_reflect`. -/
+lemma bhk_rectangle_minimal_core_hit_pos_i (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n)) (hH_card : Nat.card H = n)
+    (α β : ℝ) (hα' : α < 1) (hβ : 0 ≤ β) (hβ' : β < 1)
+    (i j : ℤ) (hi : 0 < i) (hj : j ≠ 0)
+    (hi_box : (i : ℝ) ≤ α * n) (hj_box : |(j : ℝ)| ≤ β * n)
+    (hij_H : ((i : ZMod n), (j : ZMod n)) ∈ H)
+    (hij_min_H : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+      ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H → (i, j) ≠ (k * i₀, k * j₀))
+    (h12 : (n : ℝ) ≤ β * n * i + α * n * |(j : ℝ)| - 2 * i * |(j : ℝ)|)
+    (x₁ x₂ : ℝ) :
+    ∃ u v : ℤ, ((u : ZMod n), (v : ZMod n)) ∈ H ∧
+      Int.fract ((u : ℝ) / n - x₁) ≤ α ∧ Int.fract ((v : ℝ) / n - x₂) ≤ β := by
+  rcases lt_or_gt_of_ne hj with hj_neg | hj_pos
+  · -- j < 0: reflect the second coordinate.
+    set σ : (ZMod n × ZMod n) ≃+ (ZMod n × ZMod n) :=
+      (AddEquiv.refl (ZMod n)).prodCongr (AddEquiv.neg (ZMod n)) with hσ_def
+    set H' : AddSubgroup (ZMod n × ZMod n) := H.map σ.toAddMonoidHom with hH'_def
+    -- Membership characterisation of H' on integer casts.
+    have h_mem' : ∀ u v : ℤ, ((u : ZMod n), (v : ZMod n)) ∈ H' ↔
+        ((u : ZMod n), ((-v : ℤ) : ZMod n)) ∈ H := by
+      intro u v
+      have hcast : ((-v : ℤ) : ZMod n) = -((v : ℤ) : ZMod n) := by
+        push_cast; ring
+      rw [hH'_def, AddSubgroup.mem_map_equiv, hcast]
+      rfl
+    have hH'_card : Nat.card H' = n := by
+      have hcongr : Nat.card (H.map σ.toAddMonoidHom) = Nat.card H :=
+        (Nat.card_congr
+          (AddSubgroup.equivMapOfInjective H σ.toAddMonoidHom σ.injective).toEquiv).symm
+      rw [hH'_def]
+      exact hcongr.trans hH_card
+    -- (i, -j) ∈ H', positively.
+    have hij_H' : ((i : ZMod n), ((-j : ℤ) : ZMod n)) ∈ H' := by
+      rw [h_mem' i (-j)]
+      simpa using hij_H
+    -- Minimality transports through the reflection.
+    have hij_min' : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+        ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H' → (i, -j) ≠ (k * i₀, k * j₀) := by
+      intro i₀ j₀ k hk h₀ h_eq
+      have h₀H : ((i₀ : ZMod n), ((-j₀ : ℤ) : ZMod n)) ∈ H := (h_mem' i₀ j₀).mp h₀
+      apply hij_min_H i₀ (-j₀) k hk h₀H
+      have h1 : i = k * i₀ := congrArg Prod.fst h_eq
+      have h2 : -j = k * j₀ := congrArg Prod.snd h_eq
+      refine Prod.ext h1 ?_
+      show j = k * -j₀
+      linear_combination -h2
+    have habs : |(j : ℝ)| = -(j : ℝ) := abs_of_neg (by exact_mod_cast hj_neg)
+    -- Core hit for H' at the reflected target.
+    obtain ⟨u, v, h_uv', hu, hv⟩ := bhk_rectangle_minimal_core_hit n hn H' hH'_card
+      α β hα' hβ' i (-j) hi (by omega)
+      hi_box (by push_cast; linarith [hj_box, habs.symm.le, habs.le])
+      hij_H' hij_min'
+      (by push_cast; rw [habs] at h12; linarith) x₁ (-x₂ - β)
+    -- Reflect the hit back.
+    refine ⟨u, -v, (h_mem' u v).mp h_uv', hu, ?_⟩
+    have harg : (((-v : ℤ) : ℝ)) / n - x₂ = -((v : ℝ) / n) - x₂ := by
+      push_cast; ring
+    rw [harg]
+    exact bhk_fract_reflect ((v : ℝ) / n) x₂ β hβ hβ' hv
+  · -- j > 0: direct.
+    have habs : |(j : ℝ)| = (j : ℝ) := abs_of_pos (by exact_mod_cast hj_pos)
+    exact bhk_rectangle_minimal_core_hit n hn H hH_card α β hα' hβ' i j hi hj_pos
+      hi_box (habs ▸ hj_box) hij_H hij_min_H (habs ▸ h12) x₁ x₂
+
+/-- **Sign handling for the core hit, step 2: `i ≠ 0`, `j ≠ 0`.**
+
+    The case `i < 0` is handled by negating the point: `(-i, -j) ∈ H`
+    with `-i > 0`, minimality and the box/(12) data transport (all are
+    stated in `|i|`, `|j|` form) — and the conclusion does not mention
+    `(i, j)`, so the hit needs no transport at all. -/
+lemma bhk_rectangle_minimal_core_hit_signed (n : ℕ) (hn : 1 < n)
+    (H : AddSubgroup (ZMod n × ZMod n)) (hH_card : Nat.card H = n)
+    (α β : ℝ) (hα' : α < 1) (hβ : 0 ≤ β) (hβ' : β < 1)
+    (i j : ℤ) (hi : i ≠ 0) (hj : j ≠ 0)
+    (hi_box : |(i : ℝ)| ≤ α * n) (hj_box : |(j : ℝ)| ≤ β * n)
+    (hij_H : ((i : ZMod n), (j : ZMod n)) ∈ H)
+    (hij_min_H : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+      ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H → (i, j) ≠ (k * i₀, k * j₀))
+    (h12 : (n : ℝ) ≤ β * n * |(i : ℝ)| + α * n * |(j : ℝ)| -
+      2 * |(i : ℝ)| * |(j : ℝ)|)
+    (x₁ x₂ : ℝ) :
+    ∃ u v : ℤ, ((u : ZMod n), (v : ZMod n)) ∈ H ∧
+      Int.fract ((u : ℝ) / n - x₁) ≤ α ∧ Int.fract ((v : ℝ) / n - x₂) ≤ β := by
+  rcases lt_or_gt_of_ne hi with hi_neg | hi_pos
+  · -- i < 0: negate the point inside the same H.
+    have habs_i : |(i : ℝ)| = -(i : ℝ) := abs_of_neg (by exact_mod_cast hi_neg)
+    have h_neg_mem : (((-i : ℤ) : ZMod n), ((-j : ℤ) : ZMod n)) ∈ H := by
+      push_cast
+      simpa using H.neg_mem hij_H
+    have h_neg_min : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+        ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H → (-i, -j) ≠ (k * i₀, k * j₀) := by
+      intro i₀ j₀ k hk h₀ h_eq
+      have h₀' : (((-i₀ : ℤ) : ZMod n), ((-j₀ : ℤ) : ZMod n)) ∈ H := by
+        push_cast
+        simpa using H.neg_mem h₀
+      apply hij_min_H (-i₀) (-j₀) k hk h₀'
+      have h1 : -i = k * i₀ := congrArg Prod.fst h_eq
+      have h2 : -j = k * j₀ := congrArg Prod.snd h_eq
+      refine Prod.ext ?_ ?_
+      · show i = k * -i₀
+        linear_combination -h1
+      · show j = k * -j₀
+        linear_combination -h2
+    have habs_negi : ((-i : ℤ) : ℝ) = |(i : ℝ)| := by
+      push_cast
+      rw [habs_i]
+    have habs_negj : |((-j : ℤ) : ℝ)| = |(j : ℝ)| := by
+      push_cast
+      rw [abs_neg]
+    exact bhk_rectangle_minimal_core_hit_pos_i n hn H hH_card α β hα' hβ hβ'
+      (-i) (-j) (by omega) (by omega)
+      (habs_negi ▸ hi_box) (habs_negj ▸ hj_box)
+      h_neg_mem h_neg_min
+      (by rw [habs_negi, habs_negj]; exact h12) x₁ x₂
+  · -- i > 0: feed directly.
+    have habs_i : |(i : ℝ)| = (i : ℝ) := abs_of_pos (by exact_mod_cast hi_pos)
+    exact bhk_rectangle_minimal_core_hit_pos_i n hn H hH_card α β hα' hβ hβ'
+      i j hi_pos hj
+      (habs_i ▸ hi_box) hj_box hij_H hij_min_H (habs_i ▸ h12) x₁ x₂
+
 /-- **BHK Main Lemma — rectangle-missing implies (12) for minimal (i,j).**
 
     If `G` misses some `α × β` rectangle `R` in `T`, then any *minimal*
@@ -1361,12 +1869,14 @@ lemma bhk_rectangle_minimal_horizontal_axis
       `i` equally distributed points; if none falls in the y-range,
       `β - j(2i - αn)/(in) < 1/i`, equivalent to (12).
 
-    **Status:** the axis cases `i = 0` and `j = 0` are fully proved
-    (`bhk_rectangle_minimal_vertical_axis` /
-    `bhk_rectangle_minimal_horizontal_axis`, via the column/row
-    structure of `H` and coset catching). The remaining sorry is the
-    `i ≠ 0 ∧ j ≠ 0` core: the equally-spaced line-segment family
-    parallel to `L_g`. -/
+    **Status:** fully proved. The axis cases `i = 0` and `j = 0` go
+    through `bhk_rectangle_minimal_vertical_axis` /
+    `bhk_rectangle_minimal_horizontal_axis` (column/row structure of
+    `H` and coset catching). The `i ≠ 0 ∧ j ≠ 0` core goes through
+    `bhk_rectangle_minimal_core_hit_signed`, the discrete
+    sliding-window form of the line-segment family argument, with
+    signs handled by point negation and the `y`-reflection
+    automorphism of `(ZMod n)²`. -/
 theorem bhk_main_lemma_rectangle_minimal
     (G : Set (ℝ × ℝ)) (n : ℕ) (hn : 1 < n)
     (hG_lift : IsBHKLift G n)
@@ -1396,11 +1906,33 @@ theorem bhk_main_lemma_rectangle_minimal
       i hi0 hij_in_box.1 hij_in_G hij_minimal h_misses
     simp only [Int.cast_zero, abs_zero, mul_zero, zero_mul, sub_zero, add_zero]
     linarith
-  · -- i ≠ 0 ∧ j ≠ 0: the line-segment family argument (BHK p10).
-    -- TODO: circle L_g generated by g = (i/n, j/n) has horizontal period
-    -- i/n by minimality; the family ℒ of parallel segments crosses the
-    -- rectangle edge at i equally spaced points. Residual core.
-    sorry
+  · -- i ≠ 0 ∧ j ≠ 0: the discrete line-segment family argument
+    -- (`bhk_rectangle_minimal_core_hit_signed`): if (12) failed, the
+    -- sliding-window construction would hit the missed rectangle.
+    by_contra h_ge
+    push_neg at h_ge
+    obtain ⟨x₁, x₂, h_miss⟩ := h_misses
+    haveI : NeZero n := ⟨by omega⟩
+    have hn_pos : (0 : ℝ) < n := by exact_mod_cast (by omega : (0 : ℕ) < n)
+    obtain ⟨H, hH_card, hG_iff⟩ := hG_lift
+    have h_bridge := bhk_lift_int_mem_iff G n hn H hG_iff
+    have hij_H : ((i : ZMod n), (j : ZMod n)) ∈ H := (h_bridge i j).mp hij_in_G
+    have hij_min_H : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+        ((i₀ : ZMod n), (j₀ : ZMod n)) ∈ H → (i, j) ≠ (k * i₀, k * j₀) :=
+      fun i₀ j₀ k hk h₀ => hij_minimal i₀ j₀ k hk ((h_bridge i₀ j₀).mpr h₀)
+    -- ¬(12) in the n-scaled form needed by the core hit.
+    have h12 : (n : ℝ) ≤ β * n * |(i : ℝ)| + α * n * |(j : ℝ)| -
+        2 * |(i : ℝ)| * |(j : ℝ)| := by
+      have hkey := mul_le_mul_of_nonneg_right h_ge hn_pos.le
+      have hdiv : 2 / (n : ℝ) * |(i : ℝ)| * |(j : ℝ)| * n =
+          2 * |(i : ℝ)| * |(j : ℝ)| := by
+        field_simp
+      nlinarith [hkey, hdiv]
+    obtain ⟨u, v, h_uv, hu, hv⟩ := bhk_rectangle_minimal_core_hit_signed n hn
+      H hH_card α β hα' hβ.le hβ' i j hi0 hj0 hij_in_box.1 hij_in_box.2
+      hij_H hij_min_H h12 x₁ x₂
+    exact h_miss ⟨((u : ℝ) / n, (v : ℝ) / n), (h_bridge u v).mpr h_uv,
+      Int.fract_nonneg _, hu, Int.fract_nonneg _, hv⟩
 
 /-! ## Main statement (BHK Main Lemma) -/
 
@@ -1572,7 +2104,7 @@ lemma bhk_corollary_6_small_i_witness (n : ℕ) (hn : 1 < n)
     ∃ B : ℝ, 0 ≤ B ∧ B < 1 / β ∧ ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
       ((ij.1 : ZMod n), (ij.2 : ZMod n)) ∈ H ∧
       |(ij.1 : ℝ)| ≤ B ∧ |(ij.2 : ℝ)| ≤ β * n := by
-  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem, -⟩ :=
+  obtain ⟨e, f, c, he_pos, hf_pos, hef, h_ec_mem, h_0f_mem, -, -⟩ :=
     bhk_subgroup_column_structure n hn H hH_card
   have hn_pos_R : (0 : ℝ) < n := by exact_mod_cast (by omega : 0 < n)
   have he_pos_R : (0 : ℝ) < e := by exact_mod_cast he_pos
