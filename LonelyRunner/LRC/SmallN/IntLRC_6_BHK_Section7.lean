@@ -1815,13 +1815,31 @@ lemma bhk_s7_exc_table9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
-/-- **Pair `(2, ±1)` (OPEN — BHK Table 10).** For `n ≥ 12` the segment
-    length suffices; `8 ≤ n ≤ 11` have explicit witness multiples;
-    `n = 7` with class `(2, 1)` is the exceptional group
-    `G₇ = ⟨(4/7, 2/7)⟩`, handled by the analogue of the `G₄` covering
-    argument (`J = [kt₀ - 5/14, kt₀ + 11/42]` is a 123-gap; flanking
-    forces `13/28 < x₅ < 1/2`, `13/14 < x₄ < 1`; `[2/3, 65/84]` then
-    contains a lonely time). -/
+/-- **BHK exceptional group `G₇` (OPEN).** `n = 7`, pair `(2, 1)`,
+    `v₃ < 4 v₁`: the group `⟨(2/7, 1/7)⟩ = ⟨(4/7, 2/7)⟩` misses the open
+    parallelogram `P`. BHK p. 45: pick `k` with `{v₃kt₀} = 4/7`,
+    `{v₁kt₀} = 2/7`; `J = [kt₀ - 5/14, kt₀ + 11/42]` (normalized by `v₃`)
+    is a 123-gap; covering `J` forces a 4-block flanked by two consecutive
+    5-blocks, yielding `13/28 < x₅ < 1/2`, `13/14 < x₄ < 1`, under which
+    `[2/3, 65/84]` contains a lonely time. Analogue of `bhk_s7_g4_hard`
+    (the helpers `bhk_g4_single_block` and the flanking pattern reuse). -/
+lemma bhk_s7_g7_hard (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (h41 : speeds ⟨2, by omega⟩ < 4 * speeds ⟨0, by omega⟩)
+    (c₃ c₁ g k₀ : ℕ) (hgpos : 0 < g)
+    (hd : g * 7 = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hc3 : g * c₃ = speeds ⟨2, by omega⟩)
+    (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (ha : c₃ * k₀ % 7 = 2) (hb : c₁ * k₀ % 7 = 1) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  sorry
+
+/-- **Pair `(2, ±1)` (BHK Table 10).** `(2, -1)` closes for every `n ≥ 7`
+    with the witness multiple `m = ⌈4n/15⌉`; `(2, 1)` closes for `n ≥ 8`
+    with `m = ⌈n/3⌉`. The residual `n = 7`, `(2, 1)` splits on the ratio:
+    `4 v₁ ≤ v₃` admits the exact-window witness at `(4/7, 2/7)` (`k = 2k₀`),
+    and `v₃ < 4 v₁` is the exceptional group `G₇` (`bhk_s7_g7_hard`). -/
 lemma bhk_s7_exc_21 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1833,7 +1851,73 @@ lemma bhk_s7_exc_21 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hc3_ne : ¬ n ∣ c₃) (hc1_ne : ¬ n ∣ c₁)
     (ha : c₃ * k₀ % n = 2) (hb : c₁ * k₀ % n = 1 ∨ c₁ * k₀ % n = n - 1) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  have Wn := bhk_s7_witness_num speeds hmono hpos hsmall
+  rcases hb with hb | hb
+  · -- (2, 1).
+    rcases Nat.lt_or_ge n 8 with hn8 | hn8
+    · -- n = 7.
+      have hn_eq : n = 7 := by omega
+      subst hn_eq
+      by_cases h41 : speeds ⟨2, by omega⟩ < 4 * speeds ⟨0, by omega⟩
+      · exact bhk_s7_g7_hard speeds hmono hpos hsmall h41 c₃ c₁ g k₀ hgpos
+          hd hc3 hc1 ha hb
+      · -- 4 v₁ ≤ v₃: exact-ratio witness at (4/7, 2/7) with k = 2k₀.
+        push_neg at h41
+        have hV3Rpos : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+          exact_mod_cast hpos _
+        have hV1nn : (0 : ℝ) ≤ (speeds ⟨0, by omega⟩ : ℝ) := by positivity
+        have h14R : 4 * (speeds ⟨0, by omega⟩ : ℝ) ≤ (speeds ⟨2, by omega⟩ : ℝ) := by
+          exact_mod_cast h41
+        have hm3 : c₃ * (2 * k₀) % 7 = 4 := by
+          rw [bhk_s7_mul_mod, ha]
+        have hm1 : c₁ * (2 * k₀) % 7 = 2 := by
+          rw [bhk_s7_mul_mod, hb]
+        apply bhk_s7_witness speeds hmono hpos 7 c₃ c₁ g (by norm_num) hgpos
+          hd hc3 hc1 (2 * k₀)
+        · rw [hm3]; norm_num
+        · rw [hm3]; norm_num
+        · rw [hm3, hm1]
+          have h4c : ((4 : ℕ) : ℝ) = 4 := by norm_num
+          have h2c : ((2 : ℕ) : ℝ) = 2 := by norm_num
+          rw [h4c, h2c]
+          have hkey : ((4 : ℝ)/7 - 1/6) * (speeds ⟨0, by omega⟩ : ℝ) /
+              (speeds ⟨2, by omega⟩ : ℝ) ≤ 5/42 := by
+            rw [div_le_iff₀ hV3Rpos]
+            nlinarith
+          linarith
+        · rw [hm3, hm1]
+          have h4c : ((4 : ℕ) : ℝ) = 4 := by norm_num
+          have h2c : ((2 : ℕ) : ℝ) = 2 := by norm_num
+          rw [h4c, h2c]
+          have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) <
+              (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+          have hkey : ((5 : ℝ)/6 - 4/7) * (speeds ⟨0, by omega⟩ : ℝ) /
+              (speeds ⟨2, by omega⟩ : ℝ) ≤ 23/42 := by
+            rw [div_le_iff₀ hV3Rpos]
+            nlinarith
+          linarith
+    · -- n ≥ 8: m = ⌈n/3⌉.
+      set m : ℕ := (n + 2) / 3 with hm_def
+      have h2mlt : 2 * m < n := by omega
+      have hmod3 : c₃ * (m * k₀) % n = 2 * m := by
+        rw [bhk_s7_mul_mod, ha, Nat.mod_eq_of_lt h2mlt]
+      have hmod1 : c₁ * (m * k₀) % n = m := by
+        rw [bhk_s7_mul_mod, hb, one_mul, Nat.mod_eq_of_lt (by omega : m < n)]
+      exact Wn n c₃ c₁ g (m * k₀) (by omega) hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+  · -- (2, -1): m = ⌈4n/15⌉ works for every n ≥ 7.
+    set m : ℕ := (4 * n + 14) / 15 with hm_def
+    have h2mlt : 2 * m < n := by omega
+    have hmod3 : c₃ * (m * k₀) % n = 2 * m := by
+      rw [bhk_s7_mul_mod, ha, Nat.mod_eq_of_lt h2mlt]
+    have hmod1 : c₁ * (m * k₀) % n = n - m := by
+      rw [bhk_s7_mul_mod, hb,
+          bhk_s7_neg_mod n 1 m (by omega) (by omega) (by omega : 1 * m < n),
+          one_mul]
+    exact Wn n c₃ c₁ g (m * k₀) (by omega) hgpos hd hc3 hc1
+      (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+      (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
 
 /-- **BHK §§2+7 exceptional pairs (dispatcher).** When Corollary 6 returns a
     minimal pair `(i, j) ≠ (0, 0)` with `0 ≤ i < 9/2` and
