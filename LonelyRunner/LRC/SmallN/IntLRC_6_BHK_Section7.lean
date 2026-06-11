@@ -525,6 +525,284 @@ lemma bhk_s7_int_neg_mod (n r : ℕ) (hr : 0 < r) (hrn : r < n) :
   rw [show (-(r : ℤ)) = ((n : ℤ) - r) + (n : ℤ) * (-1) from by ring,
       Int.add_mul_emod_self_left, Int.emod_eq_of_lt (by omega) (by omega)]
 
+/-! ## (13)-minimal selection (BHK §3.3) -/
+
+/-- **Minimal-element selection.** From any nonzero `G`-element in the box
+    `[-B, B] × [-C, C]`, produce one that is additionally *(13)-minimal*:
+    no other nonzero `G`-element lies in its centered box
+    `[-|i|, |i|] × [-|j|, |j|]` except the four corners `(±i, ±j)`.
+
+    Proof: descend on the measure `(|i|+1)·(|j|+1)` — any (13)-violator is
+    strictly smaller in measure and stays in the outer box. -/
+lemma bhk_s7_minimal_select (G : Set (ℝ × ℝ)) (n : ℕ) (B C : ℝ)
+    (h_ex : ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+      ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G ∧
+      |(ij.1 : ℝ)| ≤ B ∧ |(ij.2 : ℝ)| ≤ C) :
+    ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+      ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G ∧
+      |(ij.1 : ℝ)| ≤ B ∧ |(ij.2 : ℝ)| ≤ C ∧
+      ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
+        ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
+        ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ G := by
+  obtain ⟨ij₀, h₀⟩ := h_ex
+  -- Descend on the measure m = (|i|+1)(|j|+1).
+  suffices key : ∀ m : ℕ, ∀ ij : ℤ × ℤ,
+      (ij.1.natAbs + 1) * (ij.2.natAbs + 1) ≤ m →
+      ij ≠ (0, 0) → ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G →
+      |(ij.1 : ℝ)| ≤ B → |(ij.2 : ℝ)| ≤ C →
+      ∃ ij' : ℤ × ℤ, ij' ≠ (0, 0) ∧
+        ((ij'.1 : ℝ) / n, (ij'.2 : ℝ) / n) ∈ G ∧
+        |(ij'.1 : ℝ)| ≤ B ∧ |(ij'.2 : ℝ)| ≤ C ∧
+        ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij'.1| → |kl.2| ≤ |ij'.2| →
+          ¬(|kl.1| = |ij'.1| ∧ |kl.2| = |ij'.2|) →
+          ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ G by
+    exact key ((ij₀.1.natAbs + 1) * (ij₀.2.natAbs + 1)) ij₀ le_rfl
+      h₀.1 h₀.2.1 h₀.2.2.1 h₀.2.2.2
+  intro m
+  induction m with
+  | zero =>
+    intro ij hm _ _ _ _
+    have hpos : 0 < (ij.1.natAbs + 1) * (ij.2.natAbs + 1) :=
+      Nat.mul_pos (by omega) (by omega)
+    omega
+  | succ m ih =>
+    intro ij hm hne hmem hB hC
+    by_cases hmin : ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| →
+        |kl.2| ≤ |ij.2| → ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
+        ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ G
+    · exact ⟨ij, hne, hmem, hB, hC, hmin⟩
+    · push_neg at hmin
+      obtain ⟨kl, hkl_ne, hkl_i, hkl_j, hkl_corner, hkl_mem⟩ := hmin
+      -- The violator is strictly smaller in measure and stays in the box.
+      have habs_i : kl.1.natAbs ≤ ij.1.natAbs := by
+        rw [Int.abs_eq_natAbs, Int.abs_eq_natAbs] at hkl_i
+        exact_mod_cast hkl_i
+      have habs_j : kl.2.natAbs ≤ ij.2.natAbs := by
+        rw [Int.abs_eq_natAbs, Int.abs_eq_natAbs] at hkl_j
+        exact_mod_cast hkl_j
+      have habs_ne : kl.1.natAbs ≠ ij.1.natAbs ∨ kl.2.natAbs ≠ ij.2.natAbs := by
+        by_contra hcon
+        push_neg at hcon
+        have h1 : |kl.1| = |ij.1| := by
+          rw [Int.abs_eq_natAbs, Int.abs_eq_natAbs]
+          exact_mod_cast hcon.1
+        have h2 : |kl.2| = |ij.2| := by
+          rw [Int.abs_eq_natAbs, Int.abs_eq_natAbs]
+          exact_mod_cast hcon.2
+        exact hkl_corner h1 h2
+      have hmeas : (kl.1.natAbs + 1) * (kl.2.natAbs + 1)
+          < (ij.1.natAbs + 1) * (ij.2.natAbs + 1) := by
+        rcases habs_ne with h | h
+        · exact Nat.mul_lt_mul_of_lt_of_le (by omega) (by omega) (by omega)
+        · exact Nat.mul_lt_mul_of_le_of_lt (by omega) (by omega) (by omega)
+      have hkl_B : |(kl.1 : ℝ)| ≤ B := by
+        refine le_trans ?_ hB
+        rw [← Int.cast_abs, ← Int.cast_abs]
+        exact_mod_cast hkl_i
+      have hkl_C : |(kl.2 : ℝ)| ≤ C := by
+        refine le_trans ?_ hC
+        rw [← Int.cast_abs, ← Int.cast_abs]
+        exact_mod_cast hkl_j
+      exact ih kl (by omega) hkl_ne hkl_mem hkl_B hkl_C
+
+/-- **Corollary 6 with (13)-minimality (BHK §3.3).** Either `G` hits every
+    `α × β` rectangle, or there is a nonzero `(i, j)` in the cone (10) that
+    is additionally *(13)-minimal*: no nonzero `G`-element lies in
+    `[-|i|, |i|] × [-|j|, |j|]` other than the corners `(±i, ±j)`. This is
+    the form needed for Lemma 7's order bound (14) and the Table-9
+    circle-period analysis. Requires `n ≥ 1/β` (Cases A & B only; our
+    application has `n ≥ 7 > 9/2 = 1/β`). -/
+theorem bhk_s7_corollary_6_minimal
+    (G : Set (ℝ × ℝ)) (n : ℕ) (hn : 1 < n)
+    (hG_lift : IsBHKLift G n)
+    (α β : ℝ) (hα : 0 < α) (hα' : α < 1) (hβ : 0 < β) (hβ' : β < 1)
+    (hαβ : α * β ≥ 1 / (n : ℝ)) (h_nβ : 1 / β ≤ (n : ℝ)) :
+    (∀ x₁ x₂, (G ∩ bhkRectangle x₁ x₂ α β).Nonempty) ∨
+    (∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+      ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ G ∧
+      0 ≤ ij.1 ∧ (ij.1 : ℝ) < 1 / β ∧
+      -1 / α - β / α * ij.1 < (ij.2 : ℝ) ∧
+      (ij.2 : ℝ) < 1 / α + β / α * ij.1 ∧
+      (∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
+        ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
+        ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ G)) := by
+  have hn_pos : (0 : ℝ) < n := by exact_mod_cast (by omega : (0 : ℕ) < n)
+  have h_1β_pos : (0 : ℝ) < 1/β := one_div_pos.mpr hβ
+  have hβn_pos : (0 : ℝ) < β * n := mul_pos hβ hn_pos
+  have h_1β_le_αn : (1 : ℝ) / β ≤ α * n := by
+    have hαβn_ge_one : (1 : ℝ) ≤ α * β * n := by
+      have h := hαβ
+      rw [ge_iff_le, div_le_iff₀ hn_pos] at h
+      linarith
+    rw [div_le_iff₀ hβ]
+    nlinarith
+  by_cases h_all_hit : ∀ x₁ x₂, (G ∩ bhkRectangle x₁ x₂ α β).Nonempty
+  · exact Or.inl h_all_hit
+  refine Or.inr ?_
+  push_neg at h_all_hit
+  obtain ⟨x₁, x₂, h_miss_eq⟩ := h_all_hit
+  have h_miss : ¬ (G ∩ bhkRectangle x₁ x₂ α β).Nonempty := by
+    rw [Set.not_nonempty_iff_eq_empty]; exact h_miss_eq
+  obtain ⟨H, hH_card, hG_iff⟩ := id hG_lift
+  haveI : NeZero n := ⟨by omega⟩
+  have hn_ne_real : (n : ℝ) ≠ 0 := ne_of_gt hn_pos
+  have hG_int_iff : ∀ a b : ℤ, ((a : ℝ) / n, (b : ℝ) / n) ∈ G ↔
+      ((a : ZMod n), (b : ZMod n)) ∈ H :=
+    fun a b => bhk_lift_int_mem_iff G n hn H hG_iff a b
+  obtain ⟨B, hB_nn, hB_lt, ij₀, hij₀_ne, hij₀_H, hij₀_B, hij₀_β⟩ :=
+    bhk_corollary_6_small_i_witness n hn H hH_card β hβ
+  -- (13)-minimal selection within the box [-B, B] × [-βn, βn].
+  obtain ⟨ij', hij'_ne, hij'_G, hij'_B, hij'_β, hij'_min⟩ :=
+    bhk_s7_minimal_select G n B (β * n)
+      ⟨ij₀, hij₀_ne, (hG_int_iff ij₀.1 ij₀.2).mpr hij₀_H, hij₀_B, hij₀_β⟩
+  have hij'_i_lt : |(ij'.1 : ℝ)| < 1 / β := lt_of_le_of_lt hij'_B hB_lt
+  have hij'_box_αn : |(ij'.1 : ℝ)| ≤ α * n := le_trans hij'_i_lt.le h_1β_le_αn
+  -- (13)-minimality implies the multiple-minimality `rectangle_minimal` needs.
+  have hij'_mult_min : ∀ i₀ j₀ : ℤ, ∀ k : ℤ, 1 < k →
+      ((i₀ : ℝ) / n, (j₀ : ℝ) / n) ∈ G → (ij'.1, ij'.2) ≠ (k * i₀, k * j₀) := by
+    intro i₀ j₀ k hk h₀_G heq
+    have hi_eq : ij'.1 = k * i₀ := congr_arg Prod.fst heq
+    have hj_eq : ij'.2 = k * j₀ := congr_arg Prod.snd heq
+    have hk1 : (1 : ℤ) ≤ |k| := by
+      rw [abs_of_pos (by omega : (0:ℤ) < k)]; omega
+    have hk2 : (2 : ℤ) ≤ |k| := by
+      rw [abs_of_pos (by omega : (0:ℤ) < k)]; omega
+    have hne₀ : (i₀, j₀) ≠ ((0 : ℤ), (0 : ℤ)) := by
+      intro h00
+      have hi₀ : i₀ = 0 := congr_arg Prod.fst h00
+      have hj₀ : j₀ = 0 := congr_arg Prod.snd h00
+      apply hij'_ne
+      exact Prod.ext (by rw [hi_eq, hi₀, mul_zero])
+        (by rw [hj_eq, hj₀, mul_zero])
+    have habs_i : |i₀| ≤ |ij'.1| := by
+      rw [hi_eq, abs_mul]
+      exact le_mul_of_one_le_left (abs_nonneg _) hk1
+    have habs_j : |j₀| ≤ |ij'.2| := by
+      rw [hj_eq, abs_mul]
+      exact le_mul_of_one_le_left (abs_nonneg _) hk1
+    have hcorner : ¬(|i₀| = |ij'.1| ∧ |j₀| = |ij'.2|) := by
+      rintro ⟨h1, h2⟩
+      rw [hi_eq, abs_mul] at h1
+      rw [hj_eq, abs_mul] at h2
+      have hmul_i : 2 * |i₀| ≤ |k| * |i₀| :=
+        mul_le_mul_of_nonneg_right hk2 (abs_nonneg i₀)
+      have hmul_j : 2 * |j₀| ≤ |k| * |j₀| :=
+        mul_le_mul_of_nonneg_right hk2 (abs_nonneg j₀)
+      have hi0 : i₀ = 0 := by
+        have := abs_nonneg i₀
+        have h_le : |i₀| ≤ 0 := by linarith
+        have : |i₀| = 0 := le_antisymm h_le (abs_nonneg i₀)
+        exact abs_eq_zero.mp this
+      have hj0 : j₀ = 0 := by
+        have := abs_nonneg j₀
+        have h_le : |j₀| ≤ 0 := by linarith
+        have : |j₀| = 0 := le_antisymm h_le (abs_nonneg j₀)
+        exact abs_eq_zero.mp this
+      exact hne₀ (by rw [hi0, hj0])
+    exact hij'_min (i₀, j₀) hne₀ habs_i habs_j hcorner h₀_G
+  -- BHK (12) for the minimal element.
+  have h_bound := bhk_main_lemma_rectangle_minimal G n hn hG_lift α β hα hα'
+    hβ hβ' ij'.1 ij'.2 (by exact hij'_ne) ⟨hij'_box_αn, hij'_β⟩
+    (by exact hij'_G) hij'_mult_min ⟨x₁, x₂, h_miss⟩
+  -- G-negation symmetry for the sign normalization.
+  have hG_neg : ∀ a b : ℤ, ((a : ℝ) / n, (b : ℝ) / n) ∈ G →
+      (((-a : ℤ) : ℝ) / n, ((-b : ℤ) : ℝ) / n) ∈ G := by
+    intro a b hab
+    have h_in_H : ((a : ZMod n), (b : ZMod n)) ∈ H := (hG_int_iff a b).mp hab
+    rw [hG_int_iff]
+    have : (((-a : ℤ) : ZMod n), ((-b : ℤ) : ZMod n)) =
+        -((a : ZMod n), (b : ZMod n)) := by
+      ext
+      · push_cast; simp
+      · push_cast; simp
+    rw [this]; exact H.neg_mem h_in_H
+  -- From (12) + |j| ≤ βn: α·|j| < 1 + β·|i|.
+  have h_j_alpha_bound : α * |(ij'.2 : ℝ)| < 1 + β * |(ij'.1 : ℝ)| := by
+    have h_abs_i_nn : (0 : ℝ) ≤ |(ij'.1 : ℝ)| := abs_nonneg _
+    have h_key : 2 / (n : ℝ) * |(ij'.1 : ℝ)| * |(ij'.2 : ℝ)| ≤
+        2 * β * |(ij'.1 : ℝ)| := by
+      have h_abs_j_nn : (0 : ℝ) ≤ |(ij'.2 : ℝ)| := abs_nonneg _
+      have h_step : (2 / (n : ℝ)) * |(ij'.2 : ℝ)| ≤ 2 * β := by
+        rw [div_mul_eq_mul_div, div_le_iff₀ hn_pos]
+        linarith [hij'_β]
+      nlinarith [h_step, h_abs_i_nn]
+    linarith [h_bound, h_key]
+  by_cases h_pos : 0 ≤ ij'.1
+  swap
+  · -- ij'.1 < 0: use (-ij'.1, -ij'.2).
+    have h_neg_i : ij'.1 < 0 := by omega
+    have h_i_abs : |(ij'.1 : ℝ)| = -(ij'.1 : ℝ) :=
+      abs_of_neg (by exact_mod_cast h_neg_i)
+    refine ⟨(-ij'.1, -ij'.2), ?_, ?_, by omega, ?_, ?_, ?_, ?_⟩
+    · intro h_eq
+      apply hij'_ne
+      have h1 : -ij'.1 = 0 := congr_arg Prod.fst h_eq
+      have h2 : -ij'.2 = 0 := congr_arg Prod.snd h_eq
+      exact Prod.ext (by omega) (by omega)
+    · have := hG_neg ij'.1 ij'.2 hij'_G
+      convert this using 2 <;> push_cast <;> ring
+    · push_cast
+      linarith [hij'_i_lt]
+    · have h_j_abs_ge : (ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := le_abs_self _
+      have h_α_j_le : α * (ij'.2 : ℝ) ≤ α * |(ij'.2 : ℝ)| :=
+        mul_le_mul_of_nonneg_left h_j_abs_ge hα.le
+      have h_total : α * (ij'.2 : ℝ) < 1 + β * (-(ij'.1 : ℝ)) := by
+        rw [show β * (-(ij'.1 : ℝ)) = β * |(ij'.1 : ℝ)| from by rw [h_i_abs]]
+        linarith [h_j_alpha_bound, h_α_j_le]
+      have h_div : (ij'.2 : ℝ) < (1 + β * (-(ij'.1 : ℝ))) / α :=
+        (lt_div_iff₀ hα).mpr (by linarith)
+      have h_eq : (-1 : ℝ)/α - β/α * ((-ij'.1 : ℤ) : ℝ) =
+          -((1 + β * (-(ij'.1 : ℝ))) / α) := by
+        push_cast; field_simp; ring
+      push_cast at h_eq ⊢
+      linarith [h_div, h_eq]
+    · have h_j_abs_ge : -(ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := neg_le_abs _
+      have h_α_j_lt : α * (-(ij'.2 : ℝ)) ≤ α * |(ij'.2 : ℝ)| :=
+        mul_le_mul_of_nonneg_left h_j_abs_ge hα.le
+      have h_total : α * (-(ij'.2 : ℝ)) < 1 + β * (-(ij'.1 : ℝ)) := by
+        rw [show β * (-(ij'.1 : ℝ)) = β * |(ij'.1 : ℝ)| from by rw [h_i_abs]]
+        linarith [h_j_alpha_bound, h_α_j_lt]
+      have h_div : -(ij'.2 : ℝ) < (1 + β * (-(ij'.1 : ℝ))) / α :=
+        (lt_div_iff₀ hα).mpr (by linarith)
+      have h_eq : (1 : ℝ)/α + β/α * ((-ij'.1 : ℤ) : ℝ) =
+          (1 + β * (-(ij'.1 : ℝ))) / α := by
+        push_cast; field_simp
+      push_cast at h_eq ⊢
+      linarith [h_div, h_eq]
+    · -- minimality is invariant under negation.
+      intro kl hkl hk1 hk2 hcorner
+      refine hij'_min kl hkl ?_ ?_ ?_
+      · simpa [abs_neg] using hk1
+      · simpa [abs_neg] using hk2
+      · simpa [abs_neg] using hcorner
+  · -- ij'.1 ≥ 0: use ij' itself.
+    have h_i_abs : |(ij'.1 : ℝ)| = (ij'.1 : ℝ) :=
+      abs_of_nonneg (by exact_mod_cast h_pos)
+    refine ⟨ij', hij'_ne, hij'_G, h_pos, ?_, ?_, ?_, hij'_min⟩
+    · linarith [hij'_i_lt]
+    · have h_j_abs_ge : -(ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := neg_le_abs _
+      have h_α_j_lt : α * (-(ij'.2 : ℝ)) ≤ α * |(ij'.2 : ℝ)| :=
+        mul_le_mul_of_nonneg_left h_j_abs_ge hα.le
+      have h_total : α * (-(ij'.2 : ℝ)) < 1 + β * (ij'.1 : ℝ) := by
+        rw [← h_i_abs]; linarith [h_j_alpha_bound, h_α_j_lt]
+      have h_div : -(ij'.2 : ℝ) < (1 + β * (ij'.1 : ℝ)) / α :=
+        (lt_div_iff₀ hα).mpr (by linarith)
+      have h_eq : (-1 : ℝ)/α - β/α * (ij'.1 : ℝ) =
+          -((1 + β * (ij'.1 : ℝ)) / α) := by
+        field_simp; ring
+      linarith [h_div, h_eq]
+    · have h_j_le : (ij'.2 : ℝ) ≤ |(ij'.2 : ℝ)| := le_abs_self _
+      have h_α_j_le : α * (ij'.2 : ℝ) ≤ α * |(ij'.2 : ℝ)| :=
+        mul_le_mul_of_nonneg_left h_j_le hα.le
+      have h_total : α * (ij'.2 : ℝ) < 1 + β * (ij'.1 : ℝ) := by
+        rw [← h_i_abs]; linarith [h_j_alpha_bound, h_α_j_le]
+      have h_div : (ij'.2 : ℝ) < (1 + β * (ij'.1 : ℝ)) / α :=
+        (lt_div_iff₀ hα).mpr (by linarith)
+      have h_eq : (1 : ℝ)/α + β/α * (ij'.1 : ℝ) =
+          (1 + β * (ij'.1 : ℝ)) / α := by
+        field_simp
+      linarith [h_div, h_eq]
+
 /-! ## Rectangle hit ⟹ lonely time (extracted bridge) -/
 
 /-- **Rectangle hit ⟹ lonely time.** If the lifted group hits every
@@ -668,7 +946,10 @@ lemma bhk_s7_exceptional (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hij_mem : ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ bhkS7Group n c₃ c₁)
     (hi_lo : 0 ≤ ij.1) (hi_hi : (ij.1 : ℝ) < 1 / (2/9 : ℝ))
     (hj_lo : -1 / (2/3 : ℝ) - (2/9 : ℝ) / (2/3 : ℝ) * ij.1 < (ij.2 : ℝ))
-    (hj_hi : (ij.2 : ℝ) < 1 / (2/3 : ℝ) + (2/9 : ℝ) / (2/3 : ℝ) * ij.1) :
+    (hj_hi : (ij.2 : ℝ) < 1 / (2/3 : ℝ) + (2/9 : ℝ) / (2/3 : ℝ) * ij.1)
+    (hij_min : ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
+      ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
+      ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ bhkS7Group n c₃ c₁) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
@@ -1009,9 +1290,15 @@ theorem bhk_s7_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       rw [ge_iff_le, div_le_iff₀ hnR]
       have h7 : (7 : ℝ) ≤ n := by exact_mod_cast hn7
       nlinarith
-    rcases bhk_corollary_6 (bhkS7Group n c₃ c₁) n hn1 (bhk_s7_lift n c₃ c₁ hn1 hg1)
-        (2/3) (2/9) (by norm_num) (by norm_num) (by norm_num) (by norm_num) hαβ with
-      hAll | ⟨ij, hij_ne, hij_mem, hi_lo, hi_hi, hj_lo, hj_hi⟩
+    have h_nβ : 1 / (2/9 : ℝ) ≤ (n : ℝ) := by
+      have h7 : (7 : ℝ) ≤ n := by exact_mod_cast hn7
+      norm_num
+      linarith
+    rcases bhk_s7_corollary_6_minimal (bhkS7Group n c₃ c₁) n hn1
+        (bhk_s7_lift n c₃ c₁ hn1 hg1)
+        (2/3) (2/9) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        hαβ h_nβ with
+      hAll | ⟨ij, hij_ne, hij_mem, hi_lo, hi_hi, hj_lo, hj_hi, hij_min⟩
     · -- Rectangle branch: hit at anchor (1/6, 7/18), convert to lonely time.
       obtain ⟨p, hpG, hpR⟩ := hAll (1/6) (7/18)
       obtain ⟨k, hk1, hk2⟩ := bhk_s7_extract n c₃ c₁ hn1 p hpG
@@ -1083,6 +1370,7 @@ theorem bhk_s7_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       exact bhk_s7_window_lonely speeds hmono hpos τ hu_lo hu_hi h2eq hw_lo hw_hi
     · exact bhk_s7_exceptional speeds hmono hpos hgcd hsmall n c₃ c₁ g hn1 hgpos
         hgn hgc3 hgc1 hg1 hc3_ne hc1_ne ij hij_ne hij_mem hi_lo hi_hi hj_lo hj_hi
+        hij_min
   · exact bhk_s7_small_n speeds hmono hpos hgcd hsmall n c₃ c₁ g hn1 (by omega)
       hgpos hgn hgc3 hgc1 hg1 hc3_ne hc1_ne
 
