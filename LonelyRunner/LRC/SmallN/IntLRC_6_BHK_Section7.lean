@@ -900,6 +900,177 @@ lemma bhk_s7_rect_hit_lonely (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds
     linarith
   exact bhk_s7_window_lonely speeds hmono hpos τ hu_lo hu_hi h2eq hw_lo hw_hi
 
+/-! ## The exceptional group `G₄` — covering analysis (BHK pp. 43–44)
+
+Point-based reconstruction of BHK's "4-block flanked by two consecutive
+5-blocks" argument. All block bookkeeping goes through
+`block_containment` / `block_length_bound` / `not_mem_unsafeOf_of_in_gap`
+from `IntLRC_6_BHK_Lemma4.lean`; no measure theory. -/
+
+/-- **Single 4-block dichotomy.** If `[a, b]` is covered by `U₄ ∪ U₅` then
+    either no point of `[a, b]` is 4-unsafe, or all its 4-unsafe points lie
+    in one 4-block `(m - 1/6, m + 1/6)` (in `v₄`-coordinates), witnessed by
+    at least one point. Otherwise the full 4-gap between two distinct
+    occupied 4-blocks sits inside `[a, b]`, is 4-safe hence ⊆ `U₅`, and
+    `block_length_bound` forces `2 v₅ < v₄` — impossible. -/
+lemma bhk_g4_single_block (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (a b : ℝ)
+    (hI : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩) :
+    (∀ t ∈ Set.Icc a b, t ∉ unsafeOf speeds ⟨3, by omega⟩) ∨
+    ∃ m : ℤ, (∃ t₀ ∈ Set.Icc a b, t₀ ∈ unsafeOf speeds ⟨3, by omega⟩) ∧
+      ∀ t ∈ Set.Icc a b, t ∈ unsafeOf speeds ⟨3, by omega⟩ →
+        (m : ℝ) - 1/6 < (speeds ⟨3, by omega⟩ : ℝ) * t ∧
+        (speeds ⟨3, by omega⟩ : ℝ) * t < (m : ℝ) + 1/6 := by
+  have hv4pos : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5pos : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hflt : (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  by_cases hne4 : ∃ t₀ ∈ Set.Icc a b, t₀ ∈ unsafeOf speeds ⟨3, by omega⟩
+  · right
+    obtain ⟨t₀, ht₀I, ht₀U⟩ := hne4
+    have ht₀U' := ht₀U
+    rw [mem_unsafeOf_iff_bhkB] at ht₀U'
+    obtain ⟨m, hm⟩ := ht₀U'
+    refine ⟨m, ⟨t₀, ht₀I, ht₀U⟩, ?_⟩
+    intro t htI htU
+    have htU' := htU
+    rw [mem_unsafeOf_iff_bhkB] at htU'
+    obtain ⟨m', hm'⟩ := htU'
+    -- If m' = m we are done; otherwise derive `2 v₅ < v₄`, a contradiction.
+    rcases eq_or_ne m' m with rfl | hne
+    · exact ⟨by have := neg_lt_of_abs_lt hm'; linarith,
+             by have := lt_of_abs_lt hm'; linarith⟩
+    exfalso
+    -- Order the two blocks: (mℓ, tℓ) low block/point, (mh, th) high.
+    obtain ⟨mℓ, mh, tℓ, th, hmlh, hℓ, hh, htℓI, hthI⟩ :
+        ∃ (mℓ mh : ℤ) (tℓ th : ℝ), mℓ < mh ∧
+          |(speeds ⟨3, by omega⟩ : ℝ) * tℓ - mℓ| < 1/6 ∧
+          |(speeds ⟨3, by omega⟩ : ℝ) * th - mh| < 1/6 ∧
+          tℓ ∈ Set.Icc a b ∧ th ∈ Set.Icc a b := by
+      rcases lt_or_gt_of_ne hne with h | h
+      · exact ⟨m', m, t, t₀, h, hm', hm, htI, ht₀I⟩
+      · exact ⟨m, m', t₀, t, h, hm, hm', ht₀I, htI⟩
+    -- The 4-gap after block mℓ lies between tℓ and th, hence inside [a, b].
+    set gL : ℝ := ((mℓ : ℝ) + 1/6) / (speeds ⟨3, by omega⟩ : ℝ) with hgL_def
+    set gR : ℝ := ((mℓ : ℝ) + 5/6) / (speeds ⟨3, by omega⟩ : ℝ) with hgR_def
+    have hmh : (mℓ : ℝ) + 1 ≤ (mh : ℝ) := by exact_mod_cast hmlh
+    have htℓ_lt : tℓ < gL := by
+      rw [hgL_def, lt_div_iff₀ hv4pos]
+      have := lt_of_abs_lt hℓ; linarith
+    have hth_gt : gR < th := by
+      rw [hgR_def, div_lt_iff₀ hv4pos]
+      have := neg_lt_of_abs_lt hh; linarith
+    have hgLR : gL ≤ gR := by
+      rw [hgL_def, hgR_def, div_le_div_iff₀ hv4pos hv4pos]
+      nlinarith
+    -- The closed gap [gL, gR] is 4-safe and inside [a, b], hence ⊆ U₅.
+    have hgap_sub : Set.Icc gL gR ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+      intro s hs
+      have hsI : s ∈ Set.Icc a b :=
+        ⟨le_trans htℓI.1 (le_trans htℓ_lt.le hs.1),
+         le_trans hs.2 (le_trans hth_gt.le hthI.2)⟩
+      have hs4 : s ∉ unsafeOf speeds ⟨3, by omega⟩ :=
+        not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) mℓ s hs.1 hs.2
+      rcases hI hsI with h | h
+      · exact absurd h hs4
+      · exact h
+    have hlen := block_length_bound speeds ⟨4, by omega⟩ (hpos _) gL gR hgLR hgap_sub
+    -- gR - gL = (2/3)/v₄ < 1/(3 v₅) ⟹ 2 v₅ < v₄ < v₅: contradiction.
+    have hglen : gR - gL = (2/3) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [hgR_def, hgL_def]
+      field_simp
+      ring
+    rw [hglen, div_lt_div_iff₀ hv4pos (by positivity)] at hlen
+    nlinarith
+  · left
+    intro t htI htU
+    exact hne4 ⟨t, htI, htU⟩
+
+/-- **Covering `t* = 1/(6 v₁)` forces `5 v₁ < v₅`** (BHK: "in order to cover
+    the point `t = x₁/6` we must have `x₅ < x₁/5`"). At `t*` runners 1–3 are
+    safe by `3 v₁ < v₃ < 4 v₁`, runner 4 by `7 v₄ < 8 v₃`; so runner 5 covers
+    `t*`, and its block index forces `v₅/(6 v₁) > 5/6`. -/
+lemma bhk_g4_five_v1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (h41 : speeds ⟨2, by omega⟩ < 4 * speeds ⟨0, by omega⟩)
+    (h74 : 7 * (speeds ⟨3, by omega⟩ : ℝ) < 8 * (speeds ⟨2, by omega⟩ : ℝ))
+    (hne : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    5 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+  have hv1pos : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv12 : (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by
+    have hflt : (⟨0, by omega⟩ : Fin 5) < ⟨1, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  have hv23 : (speeds ⟨1, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    have hflt : (⟨1, by omega⟩ : Fin 5) < ⟨2, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  have hv34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have hflt : (⟨2, by omega⟩ : Fin 5) < ⟨3, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  have hv45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have hflt : (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩ :=
+      Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast hmono hflt
+  have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsmall
+  have h41R : (speeds ⟨2, by omega⟩ : ℝ) < 4 * (speeds ⟨0, by omega⟩ : ℝ) := by
+    exact_mod_cast h41
+  set tstar : ℝ := 1 / (6 * (speeds ⟨0, by omega⟩ : ℝ)) with htstar_def
+  obtain ⟨i, hi⟩ := hne tstar
+  have hi_unsafe : tstar ∈ unsafeOf speeds i := (mem_unsafeOf_iff speeds i tstar).mpr hi
+  -- Runners 1–4 are all in their k = 0 safe gap at t*.
+  have hsafe : ∀ j : Fin 5, (speeds ⟨0, by omega⟩ : ℝ) ≤ (speeds j : ℝ) →
+      (speeds j : ℝ) ≤ 5 * (speeds ⟨0, by omega⟩ : ℝ) →
+      tstar ∉ unsafeOf speeds j := by
+    intro j hjlo hjhi
+    have hvjpos : (0 : ℝ) < (speeds j : ℝ) := by exact_mod_cast hpos _
+    apply not_mem_unsafeOf_of_in_gap speeds j (hpos _) 0 tstar
+    · rw [htstar_def, div_le_div_iff₀ hvjpos (by positivity)]
+      have h0 : speeds (0 : Fin 5) = speeds ⟨0, by omega⟩ := rfl
+      push_cast [h0]
+      linarith
+    · rw [htstar_def, div_le_div_iff₀ (by positivity) hvjpos]
+      have h0 : speeds (0 : Fin 5) = speeds ⟨0, by omega⟩ := rfl
+      push_cast [h0]
+      linarith
+  have hi4 : i = ⟨4, by omega⟩ := by
+    fin_cases i
+    · exact absurd hi_unsafe (hsafe _ le_rfl (by linarith))
+    · exact absurd hi_unsafe (hsafe _ hv12.le (by linarith))
+    · exact absurd hi_unsafe (hsafe _ (by linarith) (by linarith))
+    · exact absurd hi_unsafe (hsafe _ (by linarith) (by linarith))
+    · rfl
+  rw [hi4, mem_unsafeOf_iff_bhkB] at hi_unsafe
+  obtain ⟨m, hm⟩ := hi_unsafe
+  have hv5tstar : (speeds ⟨4, by omega⟩ : ℝ) * tstar =
+      (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+    rw [htstar_def]; ring
+  rw [hv5tstar] at hm
+  have hv5_half : 1/2 < (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+    rw [lt_div_iff₀ (by positivity)]
+    linarith
+  have hm1 : 1 ≤ m := by
+    by_contra hm0
+    push_neg at hm0
+    have hm0R : (m : ℝ) ≤ 0 := by
+      have : m ≤ 0 := by omega
+      exact_mod_cast this
+    have := neg_lt_of_abs_lt hm
+    have := lt_of_abs_lt hm
+    linarith
+  have hm1R : (1 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm1
+  have hlow := neg_lt_of_abs_lt hm
+  -- v₅/(6 v₁) > m - 1/6 ≥ 5/6 ⟹ v₅ > 5 v₁.
+  have h56 : 5/6 < (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+    linarith
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)] at h56
+  linarith
+
 /-! ## Open residuals -/
 
 /-- **BHK exceptional group `G₄` (OPEN).** `n = 4` with generator class
