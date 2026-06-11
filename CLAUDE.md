@@ -147,11 +147,18 @@ Source integrity: SHA-256 every claim.
 
 ## 8. Current project state
 
-- **Canonical proof file**: `lrc_proof_v11_9.md` (Slot-Residue Theorem,
-  unconditional; SR-H conjecture residual closure work ongoing).
-- **n=11 paper**: FROZEN at v30, preprinted Zenodo 2026-03-27 — do not modify.
-- **Lean tree**: builds clean (2485 jobs). 3 sorries remain — see
-  `memory/MEMORY.md` for breakdown.
+- **Canonical general-n manuscript**: `lrc_proof_allN_v11_8.md` (latest on
+  disk). The v11.9 Slot-Residue Theorem work lives in
+  `lrc_v11_9_sr_proof_to_verify.md` + memory topic files — NOT yet folded
+  into a manuscript version (no `lrc_proof_allN_v11_9.md` exists).
+- **n=11 paper**: `lrc_n11_ap_paper_v30.md` FROZEN, preprinted Zenodo
+  2026-03-27 — do not modify. The journal-submission LaTeX lineage
+  (`eleven_lonely_runners_v3*.tex/md`, `ct-submission-v50/`) is separate
+  and post-dates the freeze.
+- **Lean tree**: builds clean (2485 jobs). 7 source sorries (audited
+  2026-06-11) — see "Lean Formalization Status" in `memory/MEMORY.md`:
+  Weyl fine-cell, real-speeds reduction, n=7 hard case, and 4 n=6 BHK
+  residuals (§5, §6, G₄, exceptional pairs).
 - **Naming conventions (v7+)**: Unit-Complete (not U-FORCE), CG1/CG2 (not Cond
   1/2), floor-reset event (not z=0 event).
 
