@@ -1549,14 +1549,15 @@ lemma bhk_g4_flanking (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
 
 /-! ## Open residuals -/
 
-/-- **BHK exceptional group `G₄` (OPEN).** `n = 4` with generator class
+/-- **BHK exceptional group `G₄` (PROVED).** `n = 4` with generator class
     `±(2, 1)`: the group `{(0,0), (2,1), (0,2), (2,3)}/4` misses the open
     parallelogram `P` exactly when `v₃ < 4 v₁` (i.e. `3 < x₁ < 4`).
-    BHK pp. 43–44: pick `k` with `{v₃kt₀} = 1/2`, `{v₁kt₀} = 1/4`; the
-    interval `I = [kt₀ - x₁/12, kt₀ + 1/3]` (normalized) is a 123-gap;
-    covering `I` forces a 4-block flanked by two consecutive 5-blocks,
-    yielding `7/16 < x₅ < 1/2`, `7/8 < x₄ < 1`, under which
-    `[2/3, 35/48]` is uncovered — contradiction, so a lonely time exists. -/
+    BHK pp. 44–45: pick `k` with `{v₃kt₀} = 1/2`, `{v₁kt₀} = 1/4`
+    (`k ∈ {1, 3}` by `c₁ ≡ ±1 (mod 4)`); `[kt₀ - 1/(12v₁), kt₀ + 1/(3v₃)]`
+    is a 123-gap (`bhk_g4_123_gap`); if no lonely time exists it is covered
+    by `U₄ ∪ U₅`, and `bhk_g4_five_v1` + `bhk_g4_flanking` force
+    `2 v₄ < v₅` and `7 v₅ < 16 v₃`, under which `t = 2/(3 v₃)` is lonely —
+    contradiction. -/
 lemma bhk_s7_g4_hard (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1567,7 +1568,112 @@ lemma bhk_s7_g4_hard (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
     (hm3 : c₃ % 4 = 2) (hm1 : c₁ % 4 = 1 ∨ c₁ % 4 = 3) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  by_contra hcon
+  push_neg at hcon
+  -- Real-valued speed facts.
+  have hv1pos : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3pos : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv12R : (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega : (0:ℕ) < 1))
+  have hv23R : (speeds ⟨1, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega : (1:ℕ) < 2))
+  have hv34R : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega : (2:ℕ) < 3))
+  have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsmall
+  have h41R : (speeds ⟨2, by omega⟩ : ℝ) < 4 * (speeds ⟨0, by omega⟩ : ℝ) := by
+    exact_mod_cast h41
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hgpos
+  -- Step 1: choose the multiplier k with c₁k ≡ 1, c₃k ≡ 2 (mod 4).
+  obtain ⟨k, hk1, hk3⟩ : ∃ k : ℕ, (c₁ * k) % 4 = 1 ∧ (c₃ * k) % 4 = 2 := by
+    rcases hm1 with h | h
+    · exact ⟨1, by omega, by omega⟩
+    · exact ⟨3, by omega, by omega⟩
+  -- Step 2: the anchor time τ = k/(4g) and its fract data.
+  have hv1cast : ((speeds ⟨0, by omega⟩ : ℕ) : ℝ) = (g : ℝ) * (c₁ : ℝ) := by
+    exact_mod_cast hc1.symm
+  have hv3cast : ((speeds ⟨2, by omega⟩ : ℕ) : ℝ) = (g : ℝ) * (c₃ : ℝ) := by
+    exact_mod_cast hc3.symm
+  have hfrac1 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) *
+      ((k : ℝ) / (4 * (g : ℝ)))) = 1/4 := by
+    have hprod : (speeds ⟨0, by omega⟩ : ℝ) * ((k : ℝ) / (4 * (g : ℝ))) =
+        ((c₁ * k : ℕ) : ℝ) / ((4 : ℕ) : ℝ) := by
+      rw [hv1cast]
+      push_cast
+      field_simp
+    rw [hprod, bhk_fract_nat_div (c₁ * k) 4 (by omega), hk1]
+    norm_num
+  have hfrac3 : Int.fract ((speeds ⟨2, by omega⟩ : ℝ) *
+      ((k : ℝ) / (4 * (g : ℝ)))) = 1/2 := by
+    have hprod : (speeds ⟨2, by omega⟩ : ℝ) * ((k : ℝ) / (4 * (g : ℝ))) =
+        ((c₃ * k : ℕ) : ℝ) / ((4 : ℕ) : ℝ) := by
+      rw [hv3cast]
+      push_cast
+      field_simp
+    rw [hprod, bhk_fract_nat_div (c₃ * k) 4 (by omega), hk3]
+    norm_num
+  have hfrac2 : Int.fract ((speeds ⟨1, by omega⟩ : ℝ) *
+      ((k : ℝ) / (4 * (g : ℝ)))) = 1/2 := by
+    have hv2le : speeds ⟨1, by omega⟩ ≤ speeds ⟨2, by omega⟩ :=
+      le_of_lt (hmono (Fin.mk_lt_mk.mpr (by omega : (1:ℕ) < 2)))
+    have hv2cast : ((speeds ⟨1, by omega⟩ : ℕ) : ℝ) =
+        ((speeds ⟨2, by omega⟩ : ℕ) : ℝ) - 4 * (g : ℝ) := by
+      have hdR : (g : ℝ) * 4 = ((speeds ⟨2, by omega⟩ : ℕ) : ℝ) -
+          ((speeds ⟨1, by omega⟩ : ℕ) : ℝ) := by
+        rw [← Nat.cast_sub hv2le]
+        exact_mod_cast hd
+      linarith
+    have hprod : (speeds ⟨1, by omega⟩ : ℝ) * ((k : ℝ) / (4 * (g : ℝ))) =
+        (speeds ⟨2, by omega⟩ : ℝ) * ((k : ℝ) / (4 * (g : ℝ))) - ((k : ℕ) : ℝ) := by
+      rw [hv2cast]
+      field_simp
+    rw [hprod, Int.fract_sub_natCast]
+    exact hfrac3
+  -- Step 3: the 123-gap interval is covered by runners 4 and 5.
+  have hsub : Set.Icc ((k : ℝ) / (4 * (g : ℝ)) -
+        1/(12 * (speeds ⟨0, by omega⟩ : ℝ)))
+      ((k : ℝ) / (4 * (g : ℝ)) + 1/(3 * (speeds ⟨2, by omega⟩ : ℝ))) ⊆
+      unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro s hs
+    obtain ⟨i, hi⟩ := hcon s
+    have hiU : s ∈ unsafeOf speeds i := (mem_unsafeOf_iff speeds i s).mpr hi
+    obtain ⟨h1, h2, h3⟩ := bhk_g4_123_gap speeds hmono hpos hsmall h41
+      ((k : ℝ) / (4 * (g : ℝ))) hfrac1 hfrac2 hfrac3 s hs
+    fin_cases i
+    · exact absurd hiU h1
+    · exact absurd hiU h2
+    · exact absurd hiU h3
+    · exact Or.inl hiU
+    · exact Or.inr hiU
+  -- Step 4: the t* argument and the flanking bounds.
+  have hv15 := bhk_g4_five_v1 speeds hmono hpos hcon
+  obtain ⟨h2v45, h7v5⟩ := bhk_g4_flanking speeds hmono hpos hsmall hv15
+    ((k : ℝ) / (4 * (g : ℝ)) - 1/(12 * (speeds ⟨0, by omega⟩ : ℝ)))
+    ((k : ℝ) / (4 * (g : ℝ)) + 1/(3 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (by ring) hsub
+  -- Step 5: with 2 v₄ < v₅ < 16 v₃ / 7, the time t = 2/(3 v₃) is lonely.
+  have hsafe : ∀ j : Fin 5, ∀ kk : ℤ,
+      ((kk : ℝ) + 1/6) * (3 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ 2 * (speeds j : ℝ) →
+      2 * (speeds j : ℝ) ≤ ((kk : ℝ) + 5/6) * (3 * (speeds ⟨2, by omega⟩ : ℝ)) →
+      (2 / (3 * (speeds ⟨2, by omega⟩ : ℝ))) ∉ unsafeOf speeds j := by
+    intro j kk hlo hhi
+    have hvj : (0 : ℝ) < (speeds j : ℝ) := by exact_mod_cast hpos _
+    apply not_mem_unsafeOf_of_in_gap speeds j (hpos _) kk
+    · rw [div_le_div_iff₀ hvj (by positivity)]
+      linarith
+    · rw [div_le_div_iff₀ (by positivity) hvj]
+      linarith
+  obtain ⟨i, hi⟩ := hcon (2 / (3 * (speeds ⟨2, by omega⟩ : ℝ)))
+  have hiU : (2 / (3 * (speeds ⟨2, by omega⟩ : ℝ))) ∈ unsafeOf speeds i :=
+    (mem_unsafeOf_iff speeds i _).mpr hi
+  have h0c : ((0 : ℤ) : ℝ) = 0 := by norm_num
+  have h1c : ((1 : ℤ) : ℝ) = 1 := by norm_num
+  fin_cases i
+  · exact hsafe _ 0 (by rw [h0c]; linarith) (by rw [h0c]; linarith) hiU
+  · exact hsafe _ 0 (by rw [h0c]; linarith) (by rw [h0c]; linarith) hiU
+  · exact hsafe _ 0 (by rw [h0c]; linarith) (by rw [h0c]; linarith) hiU
+  · exact hsafe _ 0 (by rw [h0c]; linarith) (by rw [h0c]; linarith) hiU
+  · exact hsafe _ 1 (by rw [h1c]; linarith) (by rw [h1c]; linarith) hiU
 
 /-- **BHK §§2+7 exceptional pairs (OPEN).** When Corollary 6 returns a
     minimal pair `(i, j) ≠ (0, 0)` with `0 ≤ i < 9/2` and
