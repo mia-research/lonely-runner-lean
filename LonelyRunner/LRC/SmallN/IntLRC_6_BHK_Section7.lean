@@ -30,8 +30,8 @@ valid for `n ≥ 7`) either hits `R` or produces an exceptional minimal pair
 * `bhk_s7_card`              — `|⟨(c_3, c_1)⟩| = n` when `gcd(n, c_3, c_1) = 1`
 * `bhk_s7_lift`              — `IsBHKLift (bhkS7Group n c₃ c₁) n`
 * `bhk_s7_extract`           — `p ∈ bhkS7Group` → fract coords are `{c·k/n}`
-* `bhk_s7_exceptional`       — Tables 9/10 + `G_4`/`G_7` (OPEN, sorry)
-* `bhk_s7_small_n`           — ad hoc `2 ≤ n ≤ 6` analysis (OPEN, sorry)
+* `bhk_s7_exceptional`       — Tables 9/10 + `G_4`/`G_7` (PROVED)
+* `bhk_s7_small_n`           — ad hoc `2 ≤ n ≤ 6` analysis (PROVED)
 * `bhk_s7_main`              — assembly, called from `IntLRC_6_BHK_Cases.lean`
 
 ## Source
@@ -524,6 +524,171 @@ lemma bhk_s7_int_neg_mod (n r : ℕ) (hr : 0 < r) (hrn : r < n) :
     (-(r : ℤ)) % (n : ℤ) = (n : ℤ) - r := by
   rw [show (-(r : ℤ)) = ((n : ℤ) - r) + (n : ℤ) * (-1) from by ring,
       Int.add_mul_emod_self_left, Int.emod_eq_of_lt (by omega) (by omega)]
+
+/-- **Window form of mod.** If `q·n ≤ x < (q+1)·n` then `x % n = x − q·n`. -/
+lemma bhk_s7_mod_window (x q n : ℕ) (h1 : q * n ≤ x) (h2 : x < (q + 1) * n) :
+    x % n = x - q * n := by
+  have h3 : (q + 1) * n = q * n + n := by ring
+  conv_lhs => rw [show x = (x - q * n) + q * n from by omega]
+  rw [Nat.add_mul_mod_self_right]
+  exact Nat.mod_eq_of_lt (by omega)
+
+/-- **Bezout witness mod `n`.** For every `c` there is a `t` with
+    `c·t ≡ gcd(n, c) (mod n)`. -/
+lemma bhk_s7_bezout_mod (n c : ℕ) (hn : 0 < n) :
+    ∃ t : ℕ, c * t % n = Nat.gcd n c % n := by
+  have hB : (Nat.gcd n c : ℤ) = n * Nat.gcdA n c + c * Nat.gcdB n c :=
+    Nat.gcd_eq_gcd_ab n c
+  set b : ℤ := Nat.gcdB n c with hb_def
+  have hnZ : (0 : ℤ) < n := by exact_mod_cast hn
+  refine ⟨(b % n).toNat, ?_⟩
+  have hbt : (((b % n).toNat : ℕ) : ℤ) = b % n :=
+    Int.toNat_of_nonneg (Int.emod_nonneg b hnZ.ne')
+  have key : ((c * (b % n).toNat : ℕ) : ℤ) % n = ((Nat.gcd n c : ℕ) : ℤ) % n := by
+    push_cast
+    rw [hbt]
+    have h2 : ((c : ℤ) * (b % n)) % n = ((c : ℤ) * b) % n := by
+      conv_lhs => rw [Int.mul_emod, Int.emod_emod_of_dvd _ dvd_rfl, ← Int.mul_emod]
+    have h1 : (c : ℤ) * b = (Nat.gcd n c : ℤ) - n * Nat.gcdA n c := by
+      rw [hB]; ring
+    rw [h2, h1, Int.sub_mul_emod_self_left]
+  have keyN : (((c * (b % n).toNat) % n : ℕ) : ℤ) = ((Nat.gcd n c % n : ℕ) : ℤ) := by
+    push_cast
+    exact key
+  exact_mod_cast keyN
+
+/-- **Gcd is determined by residues.**
+    `gcd(n, gcd(a mod n, b mod n)) = gcd(n, gcd(a, b))`. -/
+lemma bhk_s7_gcd_mod (n a b : ℕ) :
+    Nat.gcd n (Nat.gcd (a % n) (b % n)) = Nat.gcd n (Nat.gcd a b) := by
+  apply Nat.dvd_antisymm
+  · apply Nat.dvd_gcd (Nat.gcd_dvd_left _ _)
+    have hn := Nat.gcd_dvd_left n (Nat.gcd (a % n) (b % n))
+    have ha := (Nat.gcd_dvd_right n _).trans (Nat.gcd_dvd_left (a % n) (b % n))
+    have hb := (Nat.gcd_dvd_right n _).trans (Nat.gcd_dvd_right (a % n) (b % n))
+    exact Nat.dvd_gcd ((Nat.dvd_mod_iff hn).mp ha) ((Nat.dvd_mod_iff hn).mp hb)
+  · apply Nat.dvd_gcd (Nat.gcd_dvd_left _ _)
+    have hn := Nat.gcd_dvd_left n (Nat.gcd a b)
+    have ha := (Nat.gcd_dvd_right n _).trans (Nat.gcd_dvd_left a b)
+    have hb := (Nat.gcd_dvd_right n _).trans (Nat.gcd_dvd_right a b)
+    exact Nat.dvd_gcd ((Nat.dvd_mod_iff hn).mpr ha) ((Nat.dvd_mod_iff hn).mpr hb)
+
+/-- **Membership from a multiple.** The torus point of the `k`-th multiple
+    of the generator, shifted by any integer offsets, lies in
+    `bhkS7Group n c₃ c₁`. -/
+lemma bhk_s7_mem_mul (n c₃ c₁ k : ℕ) (hn : 0 < n) (zi zj : ℤ) :
+    ((((c₃ * k % n : ℕ) : ℝ) / n + (zi : ℝ), ((c₁ * k % n : ℕ) : ℝ) / n + (zj : ℝ))
+      : ℝ × ℝ) ∈ bhkS7Group n c₃ c₁ := by
+  haveI : NeZero n := ⟨hn.ne'⟩
+  refine ⟨(k : ℤ) • ((c₃ : ZMod n), (c₁ : ZMod n)),
+    AddSubgroup.mem_zmultiples_iff.mpr ⟨(k : ℤ), rfl⟩, zi, zj, ?_⟩
+  have hfst : ((k : ℤ) • ((c₃ : ZMod n), (c₁ : ZMod n))).1.val = c₃ * k % n := by
+    have h1 : ((k : ℤ) • ((c₃ : ZMod n), (c₁ : ZMod n))).1 = ((c₃ * k : ℕ) : ZMod n) := by
+      show (k : ℤ) • (c₃ : ZMod n) = _
+      rw [zsmul_eq_mul]
+      push_cast
+      ring
+    rw [h1, ZMod.val_natCast]
+  have hsnd : ((k : ℤ) • ((c₃ : ZMod n), (c₁ : ZMod n))).2.val = c₁ * k % n := by
+    have h1 : ((k : ℤ) • ((c₃ : ZMod n), (c₁ : ZMod n))).2 = ((c₁ * k : ℕ) : ZMod n) := by
+      show (k : ℤ) • (c₁ : ZMod n) = _
+      rw [zsmul_eq_mul]
+      push_cast
+      ring
+    rw [h1, ZMod.val_natCast]
+  rw [hfst, hsnd]
+
+/-- **Torus membership with small nonnegative coordinates.** Specialisation
+    of `bhk_s7_mem_mul` with zero integer shifts, for instantiating the
+    (13)-minimality hypothesis at explicit violators. -/
+lemma bhk_s7_mem_pos (n c₃ c₁ k x y : ℕ) (hn : 0 < n)
+    (hres3 : c₃ * k % n = x) (hres1 : c₁ * k % n = y) :
+    (((x : ℕ) : ℝ) / n, ((y : ℕ) : ℝ) / n) ∈ bhkS7Group n c₃ c₁ := by
+  have h := bhk_s7_mem_mul n c₃ c₁ k hn 0 0
+  rw [hres3, hres1] at h
+  simpa using h
+
+/-- **Torus membership, negative second coordinate.** The residue `n − y`
+    shifted by `−1` represents the integer point `−y/n`. -/
+lemma bhk_s7_mem_negsnd (n c₃ c₁ k x y : ℕ) (hn : 0 < n)
+    (hy : 0 < y) (hyn : y ≤ n)
+    (hres3 : c₃ * k % n = x) (hres1 : c₁ * k % n = n - y) :
+    (((x : ℕ) : ℝ) / n, ((-(y : ℤ) : ℤ) : ℝ) / n) ∈ bhkS7Group n c₃ c₁ := by
+  have h := bhk_s7_mem_mul n c₃ c₁ k hn 0 (-1)
+  rw [hres3, hres1] at h
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
+  have hkey : ((n - y : ℕ) : ℝ) / n + ((-1 : ℤ) : ℝ)
+      = ((-(y : ℤ) : ℤ) : ℝ) / n := by
+    rw [Nat.cast_sub hyn]
+    push_cast
+    field_simp
+    ring
+  rw [hkey] at h
+  simpa using h
+
+/-- **Congruence-solver kernel.** If `a·m = q·n + Δ` with `Δ < n` then
+    `a·m ≡ Δ (mod n)`. -/
+lemma bhk_s7_solve_aux (n a m q Δ : ℕ) (hΔ : Δ < n)
+    (key : a * m = q * n + Δ) :
+    a * m % n = Δ := by
+  rw [key, Nat.add_comm, Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt hΔ]
+
+/-- Solve `2m ≡ Δ (mod n)` when `Δ` is even or `n` is odd. -/
+lemma bhk_s7_solve2 (n Δ : ℕ) (hΔ : Δ < n) (h : Δ % 2 = 0 ∨ n % 2 = 1) :
+    ∃ m : ℕ, 2 * m % n = Δ := by
+  rcases h with h | h
+  · exact ⟨Δ / 2, by
+      rw [show 2 * (Δ / 2) = Δ from by omega, Nat.mod_eq_of_lt hΔ]⟩
+  · refine ⟨Δ * ((n + 1) / 2), bhk_s7_solve_aux n 2 _ Δ Δ hΔ ?_⟩
+    have he : 2 * ((n + 1) / 2) = n + 1 := by omega
+    calc 2 * (Δ * ((n + 1) / 2)) = Δ * (2 * ((n + 1) / 2)) := by ring
+      _ = Δ * (n + 1) := by rw [he]
+      _ = Δ * n + Δ := by ring
+
+/-- Solve `3m ≡ Δ (mod n)` when `3 ∣ Δ` or `3 ∤ n`. -/
+lemma bhk_s7_solve3 (n Δ : ℕ) (hΔ : Δ < n) (h : Δ % 3 = 0 ∨ n % 3 ≠ 0) :
+    ∃ m : ℕ, 3 * m % n = Δ := by
+  rcases h with h | h
+  · exact ⟨Δ / 3, by
+      rw [show 3 * (Δ / 3) = Δ from by omega, Nat.mod_eq_of_lt hΔ]⟩
+  · rcases (by omega : n % 3 = 1 ∨ n % 3 = 2) with h3 | h3
+    · refine ⟨Δ * ((2 * n + 1) / 3), bhk_s7_solve_aux n 3 _ (2 * Δ) Δ hΔ ?_⟩
+      have he : 3 * ((2 * n + 1) / 3) = 2 * n + 1 := by omega
+      calc 3 * (Δ * ((2 * n + 1) / 3)) = Δ * (3 * ((2 * n + 1) / 3)) := by ring
+        _ = Δ * (2 * n + 1) := by rw [he]
+        _ = 2 * Δ * n + Δ := by ring
+    · refine ⟨Δ * ((n + 1) / 3), bhk_s7_solve_aux n 3 _ Δ Δ hΔ ?_⟩
+      have he : 3 * ((n + 1) / 3) = n + 1 := by omega
+      calc 3 * (Δ * ((n + 1) / 3)) = Δ * (3 * ((n + 1) / 3)) := by ring
+        _ = Δ * (n + 1) := by rw [he]
+        _ = Δ * n + Δ := by ring
+
+/-- Solve `4m ≡ Δ (mod n)` when `4 ∣ Δ`, or `n` is odd, or
+    `n ≡ 2 (mod 4)` and `Δ` is even. -/
+lemma bhk_s7_solve4 (n Δ : ℕ) (hΔ : Δ < n)
+    (h : Δ % 4 = 0 ∨ n % 2 = 1 ∨ (n % 4 = 2 ∧ Δ % 2 = 0)) :
+    ∃ m : ℕ, 4 * m % n = Δ := by
+  rcases h with h | h | ⟨h4, hΔ2⟩
+  · exact ⟨Δ / 4, by
+      rw [show 4 * (Δ / 4) = Δ from by omega, Nat.mod_eq_of_lt hΔ]⟩
+  · rcases (by omega : n % 4 = 1 ∨ n % 4 = 3) with h4 | h4
+    · refine ⟨Δ * ((3 * n + 1) / 4), bhk_s7_solve_aux n 4 _ (3 * Δ) Δ hΔ ?_⟩
+      have he : 4 * ((3 * n + 1) / 4) = 3 * n + 1 := by omega
+      calc 4 * (Δ * ((3 * n + 1) / 4)) = Δ * (4 * ((3 * n + 1) / 4)) := by ring
+        _ = Δ * (3 * n + 1) := by rw [he]
+        _ = 3 * Δ * n + Δ := by ring
+    · refine ⟨Δ * ((n + 1) / 4), bhk_s7_solve_aux n 4 _ Δ Δ hΔ ?_⟩
+      have he : 4 * ((n + 1) / 4) = n + 1 := by omega
+      calc 4 * (Δ * ((n + 1) / 4)) = Δ * (4 * ((n + 1) / 4)) := by ring
+        _ = Δ * (n + 1) := by rw [he]
+        _ = Δ * n + Δ := by ring
+  · refine ⟨Δ / 2 * ((n + 2) / 4), bhk_s7_solve_aux n 4 _ (Δ / 2) Δ hΔ ?_⟩
+    have he : 4 * ((n + 2) / 4) = n + 2 := by omega
+    have hΔ' : 2 * (Δ / 2) = Δ := by omega
+    calc 4 * (Δ / 2 * ((n + 2) / 4)) = Δ / 2 * (4 * ((n + 2) / 4)) := by ring
+      _ = Δ / 2 * (n + 2) := by rw [he]
+      _ = Δ / 2 * n + 2 * (Δ / 2) := by ring
+      _ = Δ / 2 * n + Δ := by rw [hΔ']
 
 /-! ## (13)-minimal selection (BHK §3.3) -/
 
@@ -1774,11 +1939,132 @@ lemma bhk_s7_exc_diag (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       (by rw [hmod3]; omega) (by rw [hmod3]; omega)
       (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
 
-/-- **Pair `(2, 0)` (OPEN — BHK §2 case 2.1).** The fibre `{(c₃j/n, c₁j/n)}`
-    over the fixed second coordinate must be combined with the generator:
-    elements `(1 + m·k₀)·gen` have first coordinate stepping by `2/n` and
-    second coordinate frozen at `c₁ mod n`; BHK's §2 argument places one of
-    them in `P` after a case analysis on `c₁ mod n`. -/
+/-- **Axis-pair witness (BHK §2, pairs `(2,0)`, `(3,0)`, `(4,0)`).**
+    If a group multiple `k₀` has residues `(iv, 0)` with `iv ∈ {2,3,4}`, a
+    witness in the sufficient window always exists, for every `n ≥ 7`:
+
+    * Bezout reaches a second coordinate `w` that is a multiple of
+      `g' := gcd(n, c₁) < n` lying deep in the window — `w = g'` when
+      `n ∈ {2g', 3g'}`, otherwise the first multiple of `g'` past
+      `(n + 3(⌈n/6⌉+3))/9` (possible since `9g' ≤ 9n/4 < 4n`).
+    * Adding `m·k₀` steps the first coordinate by `iv` without moving the
+      second; the congruence `iv·m ≡ Δ (mod n)` is solved explicitly
+      (`bhk_s7_solve2/3/4`), steering `u` into `[⌈n/6⌉, ⌈n/6⌉+3]`. -/
+lemma bhk_s7_exc_axis_hit (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (n c₃ c₁ g k₀ iv : ℕ) (hn7 : 7 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hc3 : g * c₃ = speeds ⟨2, by omega⟩)
+    (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc1_ne : ¬ n ∣ c₁)
+    (hiv : iv = 2 ∨ iv = 3 ∨ iv = 4)
+    (ha : c₃ * k₀ % n = iv) (hb : c₁ * k₀ % n = 0) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  have hnpos : 0 < n := by omega
+  have Wn := bhk_s7_witness_num speeds hmono hpos hsmall
+  set c : ℕ := (n + 5) / 6 with hc_def
+  -- Stage 1: a reachable deep second coordinate.
+  obtain ⟨l, w, hw_res, hw_lt, hWlo, hWhi⟩ :
+      ∃ l w, c₁ * l % n = w ∧ w < n ∧ n + 3 * (c + 3) ≤ 9 * w ∧
+        9 * w ≤ 5 * n + 3 * c := by
+    have hg'_dvd : Nat.gcd n c₁ ∣ n := Nat.gcd_dvd_left _ _
+    have hg'_pos : 0 < Nat.gcd n c₁ := Nat.gcd_pos_of_pos_left _ hnpos
+    have hg'_lt : Nat.gcd n c₁ < n := by
+      rcases lt_or_eq_of_le (Nat.le_of_dvd hnpos hg'_dvd) with h | h
+      · exact h
+      · exact absurd (h ▸ Nat.gcd_dvd_right n c₁) hc1_ne
+    obtain ⟨t₁, ht₁⟩ := bhk_s7_bezout_mod n c₁ hnpos
+    have ht₁' : c₁ * t₁ % n = Nat.gcd n c₁ := by
+      rw [ht₁, Nat.mod_eq_of_lt hg'_lt]
+    set g' := Nat.gcd n c₁ with hg'_def
+    obtain ⟨d, hdn⟩ := hg'_dvd
+    have hd2 : 2 ≤ d := by
+      rcases d with _ | _ | d
+      · simp at hdn; omega
+      · simp at hdn; omega
+      · omega
+    rcases (by omega : d = 2 ∨ d = 3 ∨ 4 ≤ d) with rfl | rfl | hd4
+    · exact ⟨t₁, g', ht₁', hg'_lt, by omega, by omega⟩
+    · exact ⟨t₁, g', ht₁', hg'_lt, by omega, by omega⟩
+    · have h4 : 4 * g' ≤ n := by
+        calc 4 * g' ≤ d * g' := Nat.mul_le_mul_right _ hd4
+          _ = n := by rw [hdn, Nat.mul_comm]
+      set M := n + 3 * (c + 3) with hM_def
+      set q₀ := M / (9 * g') with hq₀_def
+      obtain ⟨P, hP1, hP2, hP9⟩ :
+          ∃ P, P ≤ M ∧ M < P + 9 * g' ∧ 9 * (g' * (q₀ + 1)) = P + 9 * g' := by
+        refine ⟨9 * g' * q₀, ?_, ?_, by ring⟩
+        · calc 9 * g' * q₀ ≤ 9 * g' * q₀ + M % (9 * g') := Nat.le_add_right _ _
+            _ = M := Nat.div_add_mod M (9 * g')
+        · conv_lhs => rw [← Nat.div_add_mod M (9 * g')]
+          exact Nat.add_lt_add_left (Nat.mod_lt _ (by omega)) _
+      have hWlt : g' * (q₀ + 1) < n := by omega
+      refine ⟨(q₀ + 1) * t₁, g' * (q₀ + 1), ?_, hWlt, by omega, by omega⟩
+      rw [bhk_s7_mul_mod, ht₁', Nat.mod_eq_of_lt hWlt]
+  -- Stage 2: steer the first coordinate into `[c, c+3]` by multiples of k₀.
+  set u₀ := c₃ * l % n with hu₀_def
+  have hu₀_lt : u₀ < n := Nat.mod_lt _ hnpos
+  have step : ∀ m Δ u : ℕ, iv * m % n = Δ → (u₀ + Δ) % n = u →
+      c₃ * (l + m * k₀) % n = u ∧ c₁ * (l + m * k₀) % n = w := by
+    intro m Δ u hm hsum
+    constructor
+    · rw [show c₃ * (l + m * k₀) = c₃ * l + c₃ * (m * k₀) from by ring,
+          Nat.add_mod, bhk_s7_mul_mod, ha, hm, ← hu₀_def, hsum]
+    · rw [show c₁ * (l + m * k₀) = c₁ * l + c₁ * (m * k₀) from by ring,
+          Nat.add_mod, bhk_s7_mul_mod, hb, Nat.zero_mul, Nat.zero_mod,
+          hw_res, Nat.add_zero, Nat.mod_eq_of_lt hw_lt]
+  obtain ⟨k, u, hk3, hk1, hu_lo, hu_hi⟩ :
+      ∃ k u, c₃ * k % n = u ∧ c₁ * k % n = w ∧ c ≤ u ∧ u ≤ c + 3 := by
+    rcases hiv with rfl | rfl | rfl
+    · -- iv = 2
+      set u := c + (u₀ + 2 * n - c) % 2 with hu_def
+      have hu_lt : u < n := by omega
+      rcases (Nat.lt_or_ge u u₀).symm with hle | hlt
+      · obtain ⟨m, hm⟩ := bhk_s7_solve2 n (u - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u - u₀) u hm
+          (by rw [show u₀ + (u - u₀) = u from by omega,
+                  Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+      · obtain ⟨m, hm⟩ := bhk_s7_solve2 n (u + n - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u + n - u₀) u hm
+          (by rw [show u₀ + (u + n - u₀) = u + n from by omega,
+                  Nat.add_mod_right, Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+    · -- iv = 3
+      set u := c + (u₀ + 3 * n - c) % 3 with hu_def
+      have hu_lt : u < n := by omega
+      rcases (Nat.lt_or_ge u u₀).symm with hle | hlt
+      · obtain ⟨m, hm⟩ := bhk_s7_solve3 n (u - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u - u₀) u hm
+          (by rw [show u₀ + (u - u₀) = u from by omega,
+                  Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+      · obtain ⟨m, hm⟩ := bhk_s7_solve3 n (u + n - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u + n - u₀) u hm
+          (by rw [show u₀ + (u + n - u₀) = u + n from by omega,
+                  Nat.add_mod_right, Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+    · -- iv = 4
+      set u := c + (u₀ + 4 * n - c) % 4 with hu_def
+      have hu_lt : u < n := by omega
+      rcases (Nat.lt_or_ge u u₀).symm with hle | hlt
+      · obtain ⟨m, hm⟩ := bhk_s7_solve4 n (u - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u - u₀) u hm
+          (by rw [show u₀ + (u - u₀) = u from by omega,
+                  Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+      · obtain ⟨m, hm⟩ := bhk_s7_solve4 n (u + n - u₀) (by omega) (by omega)
+        obtain ⟨h1, h2⟩ := step m (u + n - u₀) u hm
+          (by rw [show u₀ + (u + n - u₀) = u + n from by omega,
+                  Nat.add_mod_right, Nat.mod_eq_of_lt hu_lt])
+        exact ⟨_, u, h1, h2, by omega, by omega⟩
+  exact Wn n c₃ c₁ g k hnpos hgpos hd hc3 hc1
+    (by rw [hk3]; omega) (by rw [hk3]; omega)
+    (by rw [hk3, hk1]; omega) (by rw [hk3, hk1]; omega)
+
+/-- **Pair `(2, 0)` (BHK §2 case 2.1).** Closed by the axis-pair witness
+    `bhk_s7_exc_axis_hit` — no minimality needed. -/
 lemma bhk_s7_exc_20 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1793,14 +2079,44 @@ lemma bhk_s7_exc_20 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hij_min : ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
       ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
       ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ bhkS7Group n c₃ c₁) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 :=
+  bhk_s7_exc_axis_hit speeds hmono hpos hsmall n c₃ c₁ g k₀ 2 hn7 hgpos
+    hd hc3 hc1 hc1_ne (Or.inl rfl) ha hb
 
-/-- **Table 9 pairs `(3, j)`, `(4, j)`, `|j| ≤ 2` (OPEN).** BHK's
-    circle-period counting: the circle through the generator parallel to
-    the minimal direction `(i, j)/n` meets `P` in a segment at least as
-    long as the period `i/n`, valid for `n` above the per-column bound
-    (6–14); minimality of `(i, j)` supplies the bound via BHK (14). -/
+/-- **Direct pair witness.** If the `k₀`-residues are `(A, B)` and an
+    explicit multiple `m` puts `(A·m mod n, B·m mod n)` in the sufficient
+    window, then `m·k₀` is a witness. For literal `n` the window checks
+    are decidable. -/
+lemma bhk_s7_pair_witness (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (n c₃ c₁ g k₀ A B m : ℕ) (hnpos : 0 < n) (hgpos : 0 < g)
+    (hd : g * n = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hc3 : g * c₃ = speeds ⟨2, by omega⟩)
+    (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hA : c₃ * k₀ % n = A) (hB : c₁ * k₀ % n = B)
+    (w1 : n ≤ 6 * (A * m % n)) (w2 : 6 * (A * m % n) ≤ 5 * n)
+    (w3 : n + 3 * (A * m % n) ≤ 9 * (B * m % n))
+    (w4 : 9 * (B * m % n) ≤ 5 * n + 3 * (A * m % n)) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  have hmod3 : c₃ * (m * k₀) % n = A * m % n := by rw [bhk_s7_mul_mod, hA]
+  have hmod1 : c₁ * (m * k₀) % n = B * m % n := by rw [bhk_s7_mul_mod, hB]
+  exact bhk_s7_witness_num speeds hmono hpos hsmall n c₃ c₁ g (m * k₀) hnpos
+    hgpos hd hc3 hc1 (by rw [hmod3]; exact w1) (by rw [hmod3]; exact w2)
+    (by rw [hmod3, hmod1]; exact w3) (by rw [hmod3, hmod1]; exact w4)
+
+/-- **Table 9 pairs `(3, j)`, `(4, j)`, `|j| ≤ 2` (BHK §2).** Dispatch on
+    the second residue:
+
+    * `j = 0` — axis-pair witness (`bhk_s7_exc_axis_hit`);
+    * `j ≠ 0` — an explicit multiple `m·k₀` of the pair lands in the
+      sufficient window, uniformly in `n` (per-column ceiling formulas:
+      `⌈7n/18⌉` for `(3,±1)`, `⌈7n/24⌉` for `(4,1)`, `⌈n/3⌉` for `(4,-1)`,
+      `⌈13n/18⌉` for `(3,2)`, `⌈4n/27⌉` for `(3,-2)`, `⌈n/6⌉` for `(4,2)`,
+      `⌈2n/15⌉` for `(4,-2)`), except finitely many small `n` in the
+      `(3,-2)`, `(4,±2)` columns: those close by per-`n` witnesses
+      (`bhk_s7_pair_witness`), by residue enumeration at `n ∈ {8, 14}`
+      (`decide`), or — at `n = 7` — by a (13)-minimality contradiction. -/
 lemma bhk_s7_exc_table9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1812,12 +2128,273 @@ lemma bhk_s7_exc_table9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hc3_ne : ¬ n ∣ c₃) (hc1_ne : ¬ n ∣ c₁)
     (ij : ℤ × ℤ)
     (hi34 : ij.1 = 3 ∨ ij.1 = 4) (hj2 : |ij.2| ≤ 2)
-    (hij_mem : ((ij.1 : ℝ) / n, (ij.2 : ℝ) / n) ∈ bhkS7Group n c₃ c₁)
+    (hresA : ij.1 = ((c₃ * k₀ % n : ℕ) : ℤ))
+    (hresB : ij.2 = ((c₁ * k₀ % n : ℕ) : ℤ) ∨
+             ij.2 + (n : ℤ) = ((c₁ * k₀ % n : ℕ) : ℤ))
     (hij_min : ∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
       ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
       ((kl.1 : ℝ) / n, (kl.2 : ℝ) / n) ∉ bhkS7Group n c₃ c₁) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  have hnpos : 0 < n := by omega
+  have Wn := bhk_s7_witness_num speeds hmono hpos hsmall
+  rw [abs_le] at hj2
+  have hBlt : c₁ * k₀ % n < n := Nat.mod_lt _ hnpos
+  have hA : c₃ * k₀ % n = 3 ∨ c₃ * k₀ % n = 4 := by
+    rcases hi34 with h | h <;> omega
+  have hB5 : c₁ * k₀ % n = 0 ∨ c₁ * k₀ % n = 1 ∨ c₁ * k₀ % n = 2 ∨
+      c₁ * k₀ % n = n - 1 ∨ c₁ * k₀ % n = n - 2 := by
+    rcases hresB with h | h <;> omega
+  rcases hB5 with hB | hB | hB | hB | hB
+  · -- `j = 0`: axis-pair witness.
+    rcases hA with hA | hA
+    · exact bhk_s7_exc_axis_hit speeds hmono hpos hsmall n c₃ c₁ g k₀ 3 hn7
+        hgpos hd hc3 hc1 hc1_ne (Or.inr (Or.inl rfl)) hA hB
+    · exact bhk_s7_exc_axis_hit speeds hmono hpos hsmall n c₃ c₁ g k₀ 4 hn7
+        hgpos hd hc3 hc1 hc1_ne (Or.inr (Or.inr rfl)) hA hB
+  · -- `j = 1`.
+    rcases hA with hA | hA
+    · -- `(3, 1)`: `m = ⌈7n/18⌉`, one wrap.
+      set m : ℕ := (7 * n + 17) / 18 with hm_def
+      have hmod3 : c₃ * (m * k₀) % n = 3 * m - n := by
+        rw [bhk_s7_mul_mod, hA,
+            bhk_s7_mod_window (3 * m) 1 n (by omega) (by omega), one_mul]
+      have hmod1 : c₁ * (m * k₀) % n = m := by
+        rw [bhk_s7_mul_mod, hB, one_mul, Nat.mod_eq_of_lt (by omega : m < n)]
+      exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+    · -- `(4, 1)`: `m = ⌈7n/24⌉`, one wrap.
+      set m : ℕ := (7 * n + 23) / 24 with hm_def
+      have hmod3 : c₃ * (m * k₀) % n = 4 * m - n := by
+        rw [bhk_s7_mul_mod, hA,
+            bhk_s7_mod_window (4 * m) 1 n (by omega) (by omega), one_mul]
+      have hmod1 : c₁ * (m * k₀) % n = m := by
+        rw [bhk_s7_mul_mod, hB, one_mul, Nat.mod_eq_of_lt (by omega : m < n)]
+      exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+  · -- `j = 2`.
+    rcases hA with hA | hA
+    · -- `(3, 2)`: `m = ⌈13n/18⌉`, two wraps / one wrap.
+      set m : ℕ := (13 * n + 17) / 18 with hm_def
+      have hmod3 : c₃ * (m * k₀) % n = 3 * m - 2 * n := by
+        rw [bhk_s7_mul_mod, hA,
+            bhk_s7_mod_window (3 * m) 2 n (by omega) (by omega)]
+      have hmod1 : c₁ * (m * k₀) % n = 2 * m - n := by
+        rw [bhk_s7_mul_mod, hB,
+            bhk_s7_mod_window (2 * m) 1 n (by omega) (by omega), one_mul]
+      exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+    · -- `(4, 2)`.
+      rcases Nat.lt_or_ge n 24 with hn24 | hn24
+      · -- `7 ≤ n ≤ 23`: finitely many cases.
+        rcases (by omega : n = 7 ∨ n = 8 ∨ n = 9 ∨ n = 10 ∨ n = 11 ∨
+            n = 12 ∨ n = 13 ∨ n = 14 ∨ n = 15 ∨ n = 16 ∨ n = 17 ∨ n = 18 ∨
+            n = 19 ∨ n = 20 ∨ n = 21 ∨ n = 22 ∨ n = 23) with
+          rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl |
+          rfl | rfl | rfl | rfl | rfl | rfl
+        · -- `n = 7`: (13)-minimality contradiction at `3k₀ ↦ (-2, -1)`.
+          have h3 : c₃ * (3 * k₀) % 7 = 5 := by rw [bhk_s7_mul_mod, hA]
+          have h1 : c₁ * (3 * k₀) % 7 = 6 := by rw [bhk_s7_mul_mod, hB]
+          have hmem := bhk_s7_mem_mul 7 c₃ c₁ (3 * k₀) (by norm_num) (-1) (-1)
+          rw [h3, h1] at hmem
+          have hij1' : ij.1 = 4 := by omega
+          have hij2' : ij.2 = 2 := by rcases hresB with h | h <;> omega
+          refine absurd ?_ (hij_min (-2, -1) (by decide)
+            (by rw [hij1']; decide) (by rw [hij2']; decide)
+            (by rw [hij1', hij2']; decide))
+          convert hmem using 2 <;> norm_num
+        · -- `n = 8`: residue enumeration.
+          set_option synthInstance.maxSize 512 in
+          have key : ∀ A' < 8, ∀ B' < 8, ∀ K < 8,
+              (A' * K % 8 = 4 ∧ B' * K % 8 = 2 ∧
+                Nat.gcd 8 (Nat.gcd A' B') = 1) →
+              ∃ t, t < 8 ∧ 8 ≤ 6 * (A' * t % 8) ∧ 6 * (A' * t % 8) ≤ 40 ∧
+                8 + 3 * (A' * t % 8) ≤ 9 * (B' * t % 8) ∧
+                9 * (B' * t % 8) ≤ 40 + 3 * (A' * t % 8) := by decide
+          obtain ⟨t, htlt, w1, w2, w3, w4⟩ :=
+            key (c₃ % 8) (Nat.mod_lt _ (by norm_num)) (c₁ % 8)
+              (Nat.mod_lt _ (by norm_num)) (k₀ % 8) (Nat.mod_lt _ (by norm_num))
+              ⟨by rw [← Nat.mul_mod]; exact hA, by rw [← Nat.mul_mod]; exact hB,
+               by rw [bhk_s7_gcd_mod]; exact hg1⟩
+          have e3 : c₃ * t % 8 = c₃ % 8 * t % 8 := by
+            rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+          have e1 : c₁ * t % 8 = c₁ % 8 * t % 8 := by
+            rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+          exact Wn 8 c₃ c₁ g t (by norm_num) hgpos hd hc3 hc1
+            (by rw [e3]; omega) (by rw [e3]; omega)
+            (by rw [e3, e1]; omega) (by rw [e3, e1]; omega)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 9 c₃ c₁ g k₀ 4 2 3
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 10 c₃ c₁ g k₀ 4 2 2
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 11 c₃ c₁ g k₀ 4 2 2
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 12 c₃ c₁ g k₀ 4 2 2
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 13 c₃ c₁ g k₀ 4 2 4
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · -- `n = 14`: residue enumeration.
+          set_option synthInstance.maxSize 512 in
+          have key : ∀ A' < 14, ∀ B' < 14, ∀ K < 14,
+              (A' * K % 14 = 4 ∧ B' * K % 14 = 2 ∧
+                Nat.gcd 14 (Nat.gcd A' B') = 1) →
+              ∃ t, t < 14 ∧ 14 ≤ 6 * (A' * t % 14) ∧ 6 * (A' * t % 14) ≤ 70 ∧
+                14 + 3 * (A' * t % 14) ≤ 9 * (B' * t % 14) ∧
+                9 * (B' * t % 14) ≤ 70 + 3 * (A' * t % 14) := by decide
+          obtain ⟨t, htlt, w1, w2, w3, w4⟩ :=
+            key (c₃ % 14) (Nat.mod_lt _ (by norm_num)) (c₁ % 14)
+              (Nat.mod_lt _ (by norm_num)) (k₀ % 14)
+              (Nat.mod_lt _ (by norm_num))
+              ⟨by rw [← Nat.mul_mod]; exact hA, by rw [← Nat.mul_mod]; exact hB,
+               by rw [bhk_s7_gcd_mod]; exact hg1⟩
+          have e3 : c₃ * t % 14 = c₃ % 14 * t % 14 := by
+            rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+          have e1 : c₁ * t % 14 = c₁ % 14 * t % 14 := by
+            rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+          exact Wn 14 c₃ c₁ g t (by norm_num) hgpos hd hc3 hc1
+            (by rw [e3]; omega) (by rw [e3]; omega)
+            (by rw [e3, e1]; omega) (by rw [e3, e1]; omega)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 15 c₃ c₁ g k₀ 4 2 3
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 16 c₃ c₁ g k₀ 4 2 3
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 17 c₃ c₁ g k₀ 4 2 3
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 18 c₃ c₁ g k₀ 4 2 3
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 19 c₃ c₁ g k₀ 4 2 6
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 20 c₃ c₁ g k₀ 4 2 4
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 21 c₃ c₁ g k₀ 4 2 4
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 22 c₃ c₁ g k₀ 4 2 4
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+        · exact bhk_s7_pair_witness speeds hmono hpos hsmall 23 c₃ c₁ g k₀ 4 2 4
+            (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+            (by norm_num) (by norm_num)
+      · -- `n ≥ 24`: `m = ⌈n/6⌉`, no wraps.
+        set m : ℕ := (n + 5) / 6 with hm_def
+        have hmod3 : c₃ * (m * k₀) % n = 4 * m := by
+          rw [bhk_s7_mul_mod, hA, Nat.mod_eq_of_lt (by omega : 4 * m < n)]
+        have hmod1 : c₁ * (m * k₀) % n = 2 * m := by
+          rw [bhk_s7_mul_mod, hB, Nat.mod_eq_of_lt (by omega : 2 * m < n)]
+        exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+          (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+          (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+  · -- `j = -1`.
+    rcases hA with hA | hA
+    · -- `(3, -1)`: `m = ⌈7n/18⌉`.
+      set m : ℕ := (7 * n + 17) / 18 with hm_def
+      have hmod3 : c₃ * (m * k₀) % n = 3 * m - n := by
+        rw [bhk_s7_mul_mod, hA,
+            bhk_s7_mod_window (3 * m) 1 n (by omega) (by omega), one_mul]
+      have hmod1 : c₁ * (m * k₀) % n = n - m := by
+        rw [bhk_s7_mul_mod, hB,
+            bhk_s7_neg_mod n 1 m (by omega) (by omega) (by omega : 1 * m < n),
+            one_mul]
+      exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+    · -- `(4, -1)`: `m = ⌈n/3⌉`.
+      set m : ℕ := (n + 2) / 3 with hm_def
+      have hmod3 : c₃ * (m * k₀) % n = 4 * m - n := by
+        rw [bhk_s7_mul_mod, hA,
+            bhk_s7_mod_window (4 * m) 1 n (by omega) (by omega), one_mul]
+      have hmod1 : c₁ * (m * k₀) % n = n - m := by
+        rw [bhk_s7_mul_mod, hB,
+            bhk_s7_neg_mod n 1 m (by omega) (by omega) (by omega : 1 * m < n),
+            one_mul]
+      exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+        (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+        (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+  · -- `j = -2`.
+    rcases hA with hA | hA
+    · -- `(3, -2)`.
+      rcases (by omega : n = 7 ∨ 8 ≤ n) with rfl | hn8
+      · -- `n = 7`: (13)-minimality contradiction at `3k₀ ↦ (2, 1)`.
+        have h3 : c₃ * (3 * k₀) % 7 = 2 := by rw [bhk_s7_mul_mod, hA]
+        have h1 : c₁ * (3 * k₀) % 7 = 1 := by rw [bhk_s7_mul_mod, hB]
+        have hmem := bhk_s7_mem_pos 7 c₃ c₁ (3 * k₀) 2 1 (by norm_num) h3 h1
+        have hij1' : ij.1 = 3 := by omega
+        have hij2' : ij.2 = -2 := by rcases hresB with h | h <;> omega
+        refine absurd ?_ (hij_min (2, 1) (by decide)
+          (by rw [hij1']; decide) (by rw [hij2']; decide)
+          (by rw [hij1', hij2']; decide))
+        convert hmem using 2 <;> norm_num
+      · -- `n ≥ 8`: `m = ⌈4n/27⌉`, no wrap.
+        set m : ℕ := (4 * n + 26) / 27 with hm_def
+        have hmod3 : c₃ * (m * k₀) % n = 3 * m := by
+          rw [bhk_s7_mul_mod, hA, Nat.mod_eq_of_lt (by omega : 3 * m < n)]
+        have hmod1 : c₁ * (m * k₀) % n = n - 2 * m := by
+          rw [bhk_s7_mul_mod, hB,
+              bhk_s7_neg_mod n 2 m (by omega) (by omega) (by omega : 2 * m < n)]
+        exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+          (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+          (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
+    · -- `(4, -2)`.
+      rcases (by omega : n = 8 ∨ n = 7 ∨ n = 9 ∨ n = 10 ∨ n = 11 ∨ n = 12 ∨
+          13 ≤ n) with rfl | rfl | rfl | rfl | rfl | rfl | hn13
+      · -- `n = 8`: residue enumeration.
+        set_option synthInstance.maxSize 512 in
+        have key : ∀ A' < 8, ∀ B' < 8, ∀ K < 8,
+            (A' * K % 8 = 4 ∧ B' * K % 8 = 6 ∧
+              Nat.gcd 8 (Nat.gcd A' B') = 1) →
+            ∃ t, t < 8 ∧ 8 ≤ 6 * (A' * t % 8) ∧ 6 * (A' * t % 8) ≤ 40 ∧
+              8 + 3 * (A' * t % 8) ≤ 9 * (B' * t % 8) ∧
+              9 * (B' * t % 8) ≤ 40 + 3 * (A' * t % 8) := by decide
+        obtain ⟨t, htlt, w1, w2, w3, w4⟩ :=
+          key (c₃ % 8) (Nat.mod_lt _ (by norm_num)) (c₁ % 8)
+            (Nat.mod_lt _ (by norm_num)) (k₀ % 8) (Nat.mod_lt _ (by norm_num))
+            ⟨by rw [← Nat.mul_mod]; exact hA, by rw [← Nat.mul_mod]; exact hB,
+             by rw [bhk_s7_gcd_mod]; exact hg1⟩
+        have e3 : c₃ * t % 8 = c₃ % 8 * t % 8 := by
+          rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+        have e1 : c₁ * t % 8 = c₁ % 8 * t % 8 := by
+          rw [Nat.mul_mod, Nat.mod_eq_of_lt htlt]
+        exact Wn 8 c₃ c₁ g t (by norm_num) hgpos hd hc3 hc1
+          (by rw [e3]; omega) (by rw [e3]; omega)
+          (by rw [e3, e1]; omega) (by rw [e3, e1]; omega)
+      · exact bhk_s7_pair_witness speeds hmono hpos hsmall 7 c₃ c₁ g k₀ 4 5 1
+          (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+          (by norm_num) (by norm_num)
+      · exact bhk_s7_pair_witness speeds hmono hpos hsmall 9 c₃ c₁ g k₀ 4 7 3
+          (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+          (by norm_num) (by norm_num)
+      · exact bhk_s7_pair_witness speeds hmono hpos hsmall 10 c₃ c₁ g k₀ 4 8 2
+          (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+          (by norm_num) (by norm_num)
+      · exact bhk_s7_pair_witness speeds hmono hpos hsmall 11 c₃ c₁ g k₀ 4 9 2
+          (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+          (by norm_num) (by norm_num)
+      · exact bhk_s7_pair_witness speeds hmono hpos hsmall 12 c₃ c₁ g k₀ 4 10 2
+          (by norm_num) hgpos hd hc3 hc1 hA hB (by norm_num) (by norm_num)
+          (by norm_num) (by norm_num)
+      · -- `n ≥ 13`: `m = ⌈2n/15⌉`, no wrap.
+        set m : ℕ := (2 * n + 14) / 15 with hm_def
+        have hmod3 : c₃ * (m * k₀) % n = 4 * m := by
+          rw [bhk_s7_mul_mod, hA, Nat.mod_eq_of_lt (by omega : 4 * m < n)]
+        have hmod1 : c₁ * (m * k₀) % n = n - 2 * m := by
+          rw [bhk_s7_mul_mod, hB,
+              bhk_s7_neg_mod n 2 m (by omega) (by omega) (by omega : 2 * m < n)]
+        exact Wn n c₃ c₁ g (m * k₀) hnpos hgpos hd hc3 hc1
+          (by rw [hmod3]; omega) (by rw [hmod3]; omega)
+          (by rw [hmod3, hmod1]; omega) (by rw [hmod3, hmod1]; omega)
 
 /-- **The `G₇` 123-gap.** If at time `τ` the fractional positions are
     `{v₁τ} = 2/7`, `{v₂τ} = {v₃τ} = 4/7`, then on the whole interval
@@ -2272,11 +2849,11 @@ lemma bhk_s7_exceptional (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     · -- (3, j): Table 9.
       exact bhk_s7_exc_table9 speeds hmono hpos hsmall n c₃ c₁ g k₀ hn7 hgpos
         hd hc3 hc1 hg1 hc3_ne hc1_ne ij (Or.inl (by omega))
-        (by rw [abs_le]; omega) hij_mem hij_min
+        (by rw [abs_le]; omega) hi_eq (Or.inl hj_eq) hij_min
     · -- (4, j): Table 9.
       exact bhk_s7_exc_table9 speeds hmono hpos hsmall n c₃ c₁ g k₀ hn7 hgpos
         hd hc3 hc1 hg1 hc3_ne hc1_ne ij (Or.inr (by omega))
-        (by rw [abs_le]; omega) hij_mem hij_min
+        (by rw [abs_le]; omega) hi_eq (Or.inl hj_eq) hij_min
   · -- j < 0: ij.2 + n = c₁k₀ mod n, with ij.2 ∈ {-1, -2}.
     have hj_eq : ij.2 + n = ((c₁ * k₀ % n : ℕ) : ℤ) := by
       have hjm2 : -2 ≤ ij.2 := by omega
@@ -2320,11 +2897,11 @@ lemma bhk_s7_exceptional (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     · -- (3, j): Table 9.
       exact bhk_s7_exc_table9 speeds hmono hpos hsmall n c₃ c₁ g k₀ hn7 hgpos
         hd hc3 hc1 hg1 hc3_ne hc1_ne ij (Or.inl (by omega))
-        (by rw [abs_le]; omega) hij_mem hij_min
+        (by rw [abs_le]; omega) hi_eq (Or.inr hj_eq) hij_min
     · -- (4, j): Table 9.
       exact bhk_s7_exc_table9 speeds hmono hpos hsmall n c₃ c₁ g k₀ hn7 hgpos
         hd hc3 hc1 hg1 hc3_ne hc1_ne ij (Or.inr (by omega))
-        (by rw [abs_le]; omega) hij_mem hij_min
+        (by rw [abs_le]; omega) hi_eq (Or.inr hj_eq) hij_min
 
 /-- **BHK §§2+7 small group order.** When `2 ≤ n ≤ 6` the rectangle
     `2/3 × 2/9` is too small for Corollary 6 (`αβ = 4/27 < 1/n`); handle
