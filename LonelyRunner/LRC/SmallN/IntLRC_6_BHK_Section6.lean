@@ -1104,13 +1104,148 @@ lemma bhk_s6_case_652 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         nlinarith
       linarith
 
-/-- **BHK Case 6.2** (OPEN — BHK pp. 41–42). `(1/n, 1/n) ∈ G`, `n ≥ 2`:
-    the ad hoc argument. Pick `j` with
-    `γ = {v₁jt₀} = {v₄jt₀} ∈ [1/3, 1/2]`; sub-cases `v₂ = v₃/2`
-    (Lemma 23: `[7/6, 10/6]/v₃ ⊄ B₄ ∪ B₅`, then `m = 2`,
-    `v₄ = v₃ + v₁`, runner 5 cannot cover both `jt₀ + 5/(6v₃)` and
-    `jt₀ + 7/(6v₃)`) and `2v₂ ≥ 3v₃/2` (a `[jt₀ + 1/(4v₃), jt₀ + 5/(6v₃)]`
-    123-gap, `8v₄ > 7v₃`, flanked 4-block, `n = 2` endgame). -/
+/-- **§6.2 γ-index (BHK p. 41).** From `(1,1) ∈ ⟨(c₁, c₄)⟩` and `n ≥ 2`
+    there is an index `k` whose two orbit coordinates agree and lie in
+    `[1/3, 1/2]`: `a := c₁k mod n = c₄k mod n` with `n ≤ 3a` and
+    `2a ≤ n`. (Witness `a = ⌈n/3⌉`.) -/
+lemma bhk_s6_62_gamma (n c₁ c₄ : ℕ) (hn : 2 ≤ n)
+    (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    ∃ k a : ℕ, c₁ * k % n = a ∧ c₄ * k % n = a ∧ n ≤ 3 * a ∧ 2 * a ≤ n := by
+  set a : ℕ := (n + 2) / 3 with ha_def
+  have ha_lt : a < n := by omega
+  have hpair : (((a : ℕ) : ZMod n), ((a : ℕ) : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n)) := by
+    have h := bhk_s6_pair_mul n c₁ c₄ (1 : ZMod n) hmem a
+    rwa [mul_one] at h
+  obtain ⟨k, hk1, hk4⟩ := bhk_s6_mem_k n c₁ c₄ (by omega) a a hpair
+  rw [Nat.mod_eq_of_lt ha_lt] at hk1 hk4
+  exact ⟨k, a, hk1, hk4, by omega, by omega⟩
+
+/-- **§6.2: the orbit generator coordinates agree.** `(1,1) ∈ ⟨(c₁, c₄)⟩`
+    forces `c₁ ≡ c₄ (mod n)`: the multiplier `z` with `z c₁ = z c₄ = 1`
+    is a unit. -/
+lemma bhk_s6_62_c1_eq_c4 (n c₁ c₄ : ℕ)
+    (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    (c₁ : ZMod n) = (c₄ : ZMod n) := by
+  obtain ⟨z, hz⟩ := AddSubgroup.mem_zmultiples_iff.mp hmem
+  have h1 : (z : ZMod n) * (c₁ : ZMod n) = 1 := by
+    have := congr_arg Prod.fst hz
+    simpa [zsmul_eq_mul] using this
+  have h4 : (z : ZMod n) * (c₄ : ZMod n) = 1 := by
+    have := congr_arg Prod.snd hz
+    simpa [zsmul_eq_mul] using this
+  calc (c₁ : ZMod n) = c₁ * ((z : ZMod n) * c₄) := by rw [h4, mul_one]
+    _ = c₄ * ((z : ZMod n) * c₁) := by ring
+    _ = c₄ := by rw [h1, mul_one]
+
+/-- **§6.2.1 speed relation (BHK p. 42).** With `K = 2` (`v₃ = 2D`,
+    `v₂ = D`) the §6 structure forces `v₄ = v₁ + v₃`: from `c₁ ≡ c₄`
+    we get `D ∣ v₄ − v₁`, and the bounds `3v₁ < v₃ < v₄`, `3v₄ < 4v₃`
+    pin the multiplier `m = (v₄ − v₁)/D` to exactly `2`. -/
+lemma bhk_s6_62_v4_eq (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D : ℕ) (hD2 : 2 ≤ D)
+    (hv3 : speeds ⟨2, by omega⟩ = 2 * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (hc14 : (c₁ : ZMod n) = (c₄ : ZMod n)) :
+    speeds ⟨3, by omega⟩ = speeds ⟨0, by omega⟩ + speeds ⟨2, by omega⟩ := by
+  have hv34 : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ :=
+    hmono (Fin.mk_lt_mk.mpr (by omega))
+  have hv1pos : 0 < speeds ⟨0, by omega⟩ := hpos _
+  -- D ∣ v₄ − v₁ in ℤ.
+  have hn_dvd : (n : ℤ) ∣ (c₄ : ℤ) - (c₁ : ℤ) := by
+    have hmod : c₁ ≡ c₄ [MOD n] := (ZMod.natCast_eq_natCast_iff c₁ c₄ n).mp hc14
+    exact hmod.dvd
+  have hD_dvd : (D : ℤ) ∣ (speeds ⟨3, by omega⟩ : ℤ) - (speeds ⟨0, by omega⟩ : ℤ) := by
+    have heq : (speeds ⟨3, by omega⟩ : ℤ) - (speeds ⟨0, by omega⟩ : ℤ)
+        = (g : ℤ) * ((c₄ : ℤ) - (c₁ : ℤ)) := by
+      rw [← hc4, ← hc1]; push_cast; ring
+    rw [heq, show ((D : ℕ) : ℤ) = (g : ℤ) * (n : ℤ) from by exact_mod_cast hd.symm]
+    exact mul_dvd_mul_left _ hn_dvd
+  obtain ⟨m, hm⟩ := hD_dvd
+  have hDposZ : (0 : ℤ) < (D : ℤ) := by exact_mod_cast (by omega : 0 < D)
+  have hv3Z : (speeds ⟨2, by omega⟩ : ℤ) = 2 * (D : ℤ) := by exact_mod_cast hv3
+  have hsmallZ : 3 * (speeds ⟨0, by omega⟩ : ℤ) < (speeds ⟨2, by omega⟩ : ℤ) := by
+    exact_mod_cast hsmall
+  have h43Z : 3 * (speeds ⟨3, by omega⟩ : ℤ) < 4 * (speeds ⟨2, by omega⟩ : ℤ) := by
+    exact_mod_cast h43
+  have hv34Z : (speeds ⟨2, by omega⟩ : ℤ) < (speeds ⟨3, by omega⟩ : ℤ) := by
+    exact_mod_cast hv34
+  have hv1Z : (1 : ℤ) ≤ (speeds ⟨0, by omega⟩ : ℤ) := by exact_mod_cast hv1pos
+  -- 4D < 3·(v₄ − v₁) = 3Dm and 3Dm < 8D pin m = 2.
+  have hm_lo : 4 * (D : ℤ) < (D : ℤ) * (3 * m) := by
+    have : 4 * (D : ℤ) < 3 * ((speeds ⟨3, by omega⟩ : ℤ) - (speeds ⟨0, by omega⟩ : ℤ)) := by
+      linarith [hv34Z, hsmallZ, hv3Z]
+    rw [hm] at this; linarith
+  have hm_hi : (D : ℤ) * (3 * m) < 8 * (D : ℤ) := by
+    have : 3 * ((speeds ⟨3, by omega⟩ : ℤ) - (speeds ⟨0, by omega⟩ : ℤ)) < 8 * (D : ℤ) := by
+      linarith [h43Z, hv3Z, hv1Z]
+    rw [hm] at this; linarith
+  have hm_lo' : 4 < 3 * m := lt_of_mul_lt_mul_left (by linarith [hm_lo]) (le_of_lt hDposZ)
+  have hm_hi' : 3 * m < 8 := lt_of_mul_lt_mul_left (by linarith [hm_hi]) (le_of_lt hDposZ)
+  have hm2 : m = 2 := by omega
+  rw [hm2] at hm
+  have : (speeds ⟨3, by omega⟩ : ℤ) = (speeds ⟨0, by omega⟩ : ℤ)
+      + (speeds ⟨2, by omega⟩ : ℤ) := by
+    rw [hv3Z]; linarith [hm]
+  exact_mod_cast this
+
+/-- **BHK Case 6.2.1** (OPEN — BHK p. 42). `(1/n, 1/n) ∈ G`, `K = 2`
+    (`v₂ = v₃/2`): Lemma 23 (`[7/6, 10/6]/v₃ ⊄ B₄ ∪ B₅`, else
+    `10/13 < x₄ < 13x₅/11 < 91/121`), so `B₁` meets the interval and
+    `7v₁ < v₃`. With `γ = {c₁j/n} ∈ [1/3, 1/2]` (via
+    `bhk_s6_62_gamma`) and `v₄ = v₁ + v₃` (via `bhk_s6_62_v4_eq`),
+    the consecutive-4-block argument gives `8x₄ + 4x₅ > 10`, hence
+    `x₅ > 1/2` (`v₅ < 2v₃`); runner 4 covers neither `jt₀ + 5/(6v₃)`
+    nor `jt₀ + 7/(6v₃)`, and runner 5 cannot cover both (its blocks are
+    too short for one and too far apart for two). -/
+lemma bhk_s6_case_621 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D : ℕ) (hD2 : 2 ≤ D)
+    (hv3 : speeds ⟨2, by omega⟩ = 2 * D)
+    (hv2 : speeds ⟨1, by omega⟩ = D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hn : 2 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  sorry
+
+/-- **BHK Case 6.2.2** (OPEN — BHK pp. 42–43). `(1/n, 1/n) ∈ G`,
+    `K ≥ 3` (`v₂ ≥ 2v₃/3`): the interval `[jt₀ + 1/(4v₃), jt₀ + 5/(6v₃)]`
+    is in a 123-gap; Lemma 4 gives `7v₄ < 8v₃`; the endpoints exclude
+    runner 4, so the covering 45-block is a 4-block flanked by 5-blocks
+    and `v₅ > 2v₄`. For `n > 2` pick `k` with
+    `{c₁k/n} = {c₄k/n} ∈ [1/6, 1/3]`: a 1234-gap of length `≥ 1/(6v₄)`
+    that runner 5 cannot cover. For `n = 2`, `{v₁t₀} = 1/2` and
+    `[t₀ + 2/(3v₄), t₀ + 5/(6v₃)]` is the 1234-gap. -/
+lemma bhk_s6_case_622 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK3 : 3 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hn : 2 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  sorry
+
+/-- **BHK Case 6.2 (dispatcher).** `(1/n, 1/n) ∈ G`, `n ≥ 2`: split on
+    `K = 2` (Case 6.2.1, `v₂ = v₃/2`) versus `K ≥ 3` (Case 6.2.2,
+    `v₂ ≥ 2v₃/3`). -/
 lemma bhk_s6_case_62 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1124,7 +1259,14 @@ lemma bhk_s6_case_62 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
       AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  rcases eq_or_lt_of_le hK2 with hK | hK3
+  · -- K = 2: Case 6.2.1.
+    subst hK
+    exact bhk_s6_case_621 speeds hmono hpos hsmall D hD2
+      hv3 (by rw [hv2]; norm_num) h43 n c₁ c₄ g hn hgpos hd hc1 hc4 hmem
+  · -- K ≥ 3: Case 6.2.2.
+    exact bhk_s6_case_622 speeds hmono hpos hsmall D K hD2 hK3
+      hv3 hv2 h43 n c₁ c₄ g hn hgpos hd hc1 hc4 hmem
 
 /-- **§6.5.1 1234-gap inclusion.** Under failure of loneliness, the
     interval `[1/(6 v₁), 5/(6 v₄)]` is covered by runner 5 alone: it lies
