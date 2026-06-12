@@ -232,23 +232,27 @@ theorem bhk_s6_lemma_22 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       by linarith⟩
 
 set_option maxHeartbeats 1000000 in
-/-- **The §6 123-gap `I_j` (PROVED).** Under the §6 arithmetic structure
-    there is a 123-gap of length exactly `1/(2 v₃)`: pick `j` with
-    `{v₁ j/D}` in the (59)-window via `bhk_s6_find_j`; then on
-    `[j/D + 1/(3v₃), j/D + 5/(6v₃)]` runners 2 and 3 (integer positions
-    at `j/D`, ratio `v₂/v₃ = (k−1)/k ∈ [1/2, 1)`) and runner 1 (window
-    condition) all stay in `[1/6, 5/6]`. -/
-lemma bhk_s6_123_gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+/-- **The §6 123-gap at a given index (PROVED).** If `{v₁ j/D}` satisfies
+    the (59)-window, then `[j/D + 1/(3v₃), j/D + 5/(6v₃)]` is a 123-gap:
+    runners 2 and 3 have integer positions at `j/D` (ratio
+    `v₂/v₃ = (k−1)/k ∈ [1/2, 1)`) and runner 1 stays in `[1/6, 5/6]` by
+    the window condition. -/
+lemma bhk_s6_123_gap_at (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
     (D k : ℕ) (hD2 : 2 ≤ D) (hk2 : 2 ≤ k)
     (hv3 : speeds ⟨2, by omega⟩ = k * D)
     (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
-    (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩) :
-    ∃ a b : ℝ, a ≤ b ∧ b - a = 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ∧
-      Set.Icc a b ⊆ (unsafeOf speeds ⟨0, by omega⟩ ∪
-                     unsafeOf speeds ⟨1, by omega⟩ ∪
-                     unsafeOf speeds ⟨2, by omega⟩)ᶜ := by
+    (j : ℕ)
+    (hj_lo : 1 / 6 - (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩)
+      ≤ Int.fract (((speeds ⟨0, by omega⟩ * j : ℕ) : ℝ) / D))
+    (hj_hi : Int.fract (((speeds ⟨0, by omega⟩ * j : ℕ) : ℝ) / D)
+      ≤ 5 / 6 - 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)) :
+    Set.Icc ((j : ℝ) / D + 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ)))
+            ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ (unsafeOf speeds ⟨0, by omega⟩ ∪
+         unsafeOf speeds ⟨1, by omega⟩ ∪
+         unsafeOf speeds ⟨2, by omega⟩)ᶜ := by
   -- Replace `k` by `k' + 1` to avoid ℕ-subtraction.
   obtain ⟨k', rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
   have hk'1 : 1 ≤ k' := by omega
@@ -276,38 +280,7 @@ lemma bhk_s6_123_gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       _ = 2 * (k' * D) := by ring
     exact_mod_cast hN
   have hV2R_lt : (V2 : ℝ) < V3 := by exact_mod_cast hV23
-  -- The (59)-window for runner 1.
-  have hwin_lo : 0 ≤ 1 / 6 - (V1 : ℝ) / (3 * V3) := by
-    rw [sub_nonneg, div_le_iff₀ (by positivity)]
-    nlinarith
-  have hwin_hi : 5 / 6 - 5 * (V1 : ℝ) / (6 * V3) < 1 := by
-    have hp : 0 < 5 * (V1 : ℝ) / (6 * V3) := by positivity
-    linarith
-  have hwin_gap : 1 / 2 ≤ (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
-      - (1 / 6 - (V1 : ℝ) / (3 * V3)) := by
-    have h1 : 5 * (V1 : ℝ) / (6 * V3) - (V1 : ℝ) / (3 * V3)
-        = (V1 : ℝ) / (2 * V3) := by
-      field_simp
-      ring
-    have h2 : (V1 : ℝ) / (2 * V3) ≤ 1 / 6 := by
-      rw [div_le_div_iff₀ (by positivity) (by norm_num)]
-      nlinarith
-    linarith
-  obtain ⟨j, hj_lo, hj_hi⟩ := bhk_s6_find_j V1 D hDpos hndvd
-    (1 / 6 - (V1 : ℝ) / (3 * V3)) (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
-    hwin_lo hwin_hi hwin_gap
-  -- The gap around `τ = j/D`.
   set τ : ℝ := (j : ℝ) / D with hτ_def
-  have hab : τ + 1 / (3 * (V3 : ℝ)) ≤ τ + 5 / (6 * V3) := by
-    have h2 : 1 / (3 * (V3 : ℝ)) ≤ 5 / (6 * V3) := by
-      rw [div_le_div_iff₀ (by positivity) (by positivity)]
-      nlinarith
-    linarith
-  have hblen : (τ + 5 / (6 * (V3 : ℝ))) - (τ + 1 / (3 * V3))
-      = 1 / (2 * (V3 : ℝ)) := by
-    field_simp
-    ring
-  refine ⟨τ + 1 / (3 * V3), τ + 5 / (6 * V3), hab, hblen, ?_⟩
   intro s hs
   obtain ⟨hsa, hsb⟩ := Set.mem_Icc.mp hs
   have hδlo : 1 / (3 * (V3 : ℝ)) ≤ s - τ := by linarith
@@ -404,6 +377,375 @@ lemma bhk_s6_123_gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   · exact hsafe _ h1safe.1 h1safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
   · exact hsafe _ h2safe.1 h2safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
   · exact hsafe _ h3safe.1 h3safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
+
+/-- **The §6 123-gap `I_j` (PROVED).** Under the §6 arithmetic structure
+    there is a 123-gap of length exactly `1/(2 v₃)`: pick `j` with
+    `{v₁ j/D}` in the (59)-window via `bhk_s6_find_j`, then apply
+    `bhk_s6_123_gap_at`. -/
+lemma bhk_s6_123_gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D k : ℕ) (hD2 : 2 ≤ D) (hk2 : 2 ≤ k)
+    (hv3 : speeds ⟨2, by omega⟩ = k * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
+    (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩) :
+    ∃ a b : ℝ, a ≤ b ∧ b - a = 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ∧
+      Set.Icc a b ⊆ (unsafeOf speeds ⟨0, by omega⟩ ∪
+                     unsafeOf speeds ⟨1, by omega⟩ ∪
+                     unsafeOf speeds ⟨2, by omega⟩)ᶜ := by
+  have hV1pos : 0 < speeds ⟨0, by omega⟩ := hpos _
+  set V1 : ℕ := speeds ⟨0, by omega⟩ with hV1_def
+  set V3 : ℕ := speeds ⟨2, by omega⟩ with hV3_def
+  have hDpos : 0 < D := by omega
+  have hv1R : (0 : ℝ) < V1 := by exact_mod_cast hV1pos
+  have hv3R : (0 : ℝ) < V3 := by
+    exact_mod_cast (show 0 < V3 from by
+      rw [hv3]; exact Nat.mul_pos (by omega) (by omega))
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hDpos
+  have hsmallR : 3 * (V1 : ℝ) < V3 := by exact_mod_cast hsmall
+  -- The (59)-window for runner 1.
+  have hwin_lo : 0 ≤ 1 / 6 - (V1 : ℝ) / (3 * V3) := by
+    rw [sub_nonneg, div_le_iff₀ (by positivity)]
+    nlinarith
+  have hwin_hi : 5 / 6 - 5 * (V1 : ℝ) / (6 * V3) < 1 := by
+    have hp : 0 < 5 * (V1 : ℝ) / (6 * V3) := by positivity
+    linarith
+  have hwin_gap : 1 / 2 ≤ (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
+      - (1 / 6 - (V1 : ℝ) / (3 * V3)) := by
+    have h1 : 5 * (V1 : ℝ) / (6 * V3) - (V1 : ℝ) / (3 * V3)
+        = (V1 : ℝ) / (2 * V3) := by
+      field_simp
+      ring
+    have h2 : (V1 : ℝ) / (2 * V3) ≤ 1 / 6 := by
+      rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+      nlinarith
+    linarith
+  obtain ⟨j, hj_lo, hj_hi⟩ := bhk_s6_find_j V1 D hDpos hndvd
+    (1 / 6 - (V1 : ℝ) / (3 * V3)) (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
+    hwin_lo hwin_hi hwin_gap
+  have hab : (j : ℝ) / D + 1 / (3 * (V3 : ℝ)) ≤ (j : ℝ) / D + 5 / (6 * V3) := by
+    have h2 : 1 / (3 * (V3 : ℝ)) ≤ 5 / (6 * V3) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith
+    linarith
+  have hblen : ((j : ℝ) / D + 5 / (6 * (V3 : ℝ)))
+      - ((j : ℝ) / D + 1 / (3 * V3)) = 1 / (2 * (V3 : ℝ)) := by
+    field_simp
+    ring
+  exact ⟨(j : ℝ) / D + 1 / (3 * V3), (j : ℝ) / D + 5 / (6 * V3), hab, hblen,
+    bhk_s6_123_gap_at speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 j hj_lo hj_hi⟩
+
+/-- **Condition (60) ⟹ opposite point (PROVED).** If `p := {v₄ j/D}`
+    avoids the arc `(1/2 − v₄/(3v₃), 3/2 − 5v₄/(6v₃))` — i.e. satisfies
+    BHK (60) — then runner 4 passes exactly opposite the origin at some
+    time in the `I_j` gap `[j/D + 1/(3v₃), j/D + 5/(6v₃)]`: during the
+    gap runner 4 sweeps an arc of length `v₄/(2v₃) > 1/2` starting at
+    `p + v₄/(3v₃)`, and (60) places the half-point inside that sweep. -/
+lemma bhk_s6_opposite (V3 V4 D : ℕ) (hD : 0 < D) (hv3pos : 0 < V3)
+    (hv34 : V3 < V4) (h43 : 3 * V4 < 4 * V3) (j : ℕ)
+    (h60 : Int.fract (((V4 * j : ℕ) : ℝ) / D) ≤ 1/2 - (V4 : ℝ) / (3 * V3) ∨
+           3/2 - 5 * (V4 : ℝ) / (6 * V3) ≤ Int.fract (((V4 * j : ℕ) : ℝ) / D)) :
+    ∃ t ∈ Set.Icc ((j : ℝ) / D + 1 / (3 * (V3 : ℝ)))
+                  ((j : ℝ) / D + 5 / (6 * (V3 : ℝ))),
+      Int.fract ((V4 : ℝ) * t) = 1 / 2 := by
+  have hv3R : (0 : ℝ) < V3 := by exact_mod_cast hv3pos
+  have hv4R : (0 : ℝ) < V4 := by exact_mod_cast (by omega : 0 < V4)
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hD
+  have h34R : (V3 : ℝ) < V4 := by exact_mod_cast hv34
+  have h43R : 3 * (V4 : ℝ) < 4 * V3 := by exact_mod_cast h43
+  set p : ℝ := Int.fract (((V4 * j : ℕ) : ℝ) / D) with hp_def
+  have hp0 : 0 ≤ p := Int.fract_nonneg _
+  have hp1 : p < 1 := Int.fract_lt_one _
+  have hsplit : (V4 : ℝ) * ((j : ℝ) / D)
+      = p + (⌊((V4 * j : ℕ) : ℝ) / D⌋ : ℝ) := by
+    rw [hp_def, Int.fract]
+    push_cast
+    field_simp
+    ring
+  rcases h60 with h | h
+  · -- Left branch: `t = j/D + (1/2 − p)/v₄`.
+    refine ⟨(j : ℝ) / D + (1/2 - p) / V4, ⟨?_, ?_⟩, ?_⟩
+    · have key : (V4 : ℝ) / (3 * V3) ≤ 1/2 - p := by linarith
+      have h1 : 1 / (3 * (V3 : ℝ)) ≤ (1/2 - p) / V4 := by
+        rw [div_le_div_iff₀ (by positivity) hv4R]
+        have := mul_le_mul_of_nonneg_right key (le_of_lt (by positivity :
+          (0 : ℝ) < 3 * V3))
+        calc 1 * (V4 : ℝ) = V4 := by ring
+        _ = (V4 : ℝ) / (3 * V3) * (3 * V3) := by field_simp
+        _ ≤ (1/2 - p) * (3 * V3) := by
+            exact mul_le_mul_of_nonneg_right key (by positivity)
+      linarith
+    · have key : 1/2 - p ≤ 5 * (V4 : ℝ) / (6 * V3) := by
+        have h12 : (1 : ℝ)/2 ≤ 5 * (V4 : ℝ) / (6 * V3) := by
+          rw [div_le_div_iff₀ (by norm_num) (by positivity)]
+          nlinarith
+        linarith
+      have h1 : (1/2 - p) / V4 ≤ 5 / (6 * (V3 : ℝ)) := by
+        rw [div_le_div_iff₀ hv4R (by positivity)]
+        calc (1/2 - p) * (6 * (V3 : ℝ))
+            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) := by
+              exact mul_le_mul_of_nonneg_right key (by positivity)
+        _ = 5 * (V4 : ℝ) := by field_simp
+        _ = 5 * V4 := by ring
+      linarith
+    · have heq : (V4 : ℝ) * ((j : ℝ) / D + (1/2 - p) / V4)
+          = 1/2 + (⌊((V4 * j : ℕ) : ℝ) / D⌋ : ℝ) := by
+        rw [mul_add, hsplit, mul_div_cancel₀ _ hv4R.ne']
+        ring
+      rw [heq, Int.fract_add_intCast]
+      norm_num [Int.fract_eq_self]
+  · -- Right branch: `t = j/D + (3/2 − p)/v₄`.
+    refine ⟨(j : ℝ) / D + (3/2 - p) / V4, ⟨?_, ?_⟩, ?_⟩
+    · have key : (V4 : ℝ) / (3 * V3) ≤ 3/2 - p := by
+        have h12 : (V4 : ℝ) / (3 * V3) ≤ 1/2 := by
+          rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+          nlinarith
+        linarith
+      have h1 : 1 / (3 * (V3 : ℝ)) ≤ (3/2 - p) / V4 := by
+        rw [div_le_div_iff₀ (by positivity) hv4R]
+        calc 1 * (V4 : ℝ) = (V4 : ℝ) / (3 * V3) * (3 * V3) := by field_simp
+        _ ≤ (3/2 - p) * (3 * V3) := by
+            exact mul_le_mul_of_nonneg_right key (by positivity)
+      linarith
+    · have key : 3/2 - p ≤ 5 * (V4 : ℝ) / (6 * V3) := by linarith
+      have h1 : (3/2 - p) / V4 ≤ 5 / (6 * (V3 : ℝ)) := by
+        rw [div_le_div_iff₀ hv4R (by positivity)]
+        calc (3/2 - p) * (6 * (V3 : ℝ))
+            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) := by
+              exact mul_le_mul_of_nonneg_right key (by positivity)
+        _ = 5 * V4 := by field_simp
+      linarith
+    · have heq : (V4 : ℝ) * ((j : ℝ) / D + (3/2 - p) / V4)
+          = 1/2 + ((⌊((V4 * j : ℕ) : ℝ) / D⌋ + 1 : ℤ) : ℝ) := by
+        rw [mul_add, hsplit, mul_div_cancel₀ _ hv4R.ne']
+        push_cast
+        ring
+      rw [heq, Int.fract_add_intCast]
+      norm_num [Int.fract_eq_self]
+
+/-- **The §6 witness bridge (PROVED).** An index `j` satisfying (59) and
+    (60) yields a lonely time: `I_j` is a 123-gap of length
+    `1/(2v₃) ≥ 1/(3v₃)` containing a time with `{v₄ t} = 1/2`, so
+    Lemma 22 applies. -/
+lemma bhk_s6_j_lonely (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D k : ℕ) (hD2 : 2 ≤ D) (hk2 : 2 ≤ k)
+    (hv3 : speeds ⟨2, by omega⟩ = k * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (j : ℕ)
+    (h59lo : 1/6 - (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩)
+      ≤ Int.fract (((speeds ⟨0, by omega⟩ * j : ℕ) : ℝ) / D))
+    (h59hi : Int.fract (((speeds ⟨0, by omega⟩ * j : ℕ) : ℝ) / D)
+      ≤ 5/6 - 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩))
+    (h60 : Int.fract (((speeds ⟨3, by omega⟩ * j : ℕ) : ℝ) / D)
+        ≤ 1/2 - (speeds ⟨3, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩) ∨
+      3/2 - 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)
+        ≤ Int.fract (((speeds ⟨3, by omega⟩ * j : ℕ) : ℝ) / D)) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  have hD : 0 < D := by omega
+  have hv34 : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ :=
+    hmono (Fin.mk_lt_mk.mpr (by omega))
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h123 := bhk_s6_123_gap_at speeds hmono hpos hsmall D k hD2 hk2
+    hv3 hv2 j h59lo h59hi
+  obtain ⟨t, ht, h4⟩ := bhk_s6_opposite (speeds ⟨2, by omega⟩)
+    (speeds ⟨3, by omega⟩) D hD (hpos _) hv34 h43 j h60
+  have hab : (j : ℝ) / D + 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ))
+      ≤ (j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    have h2 : 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ))
+        ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith
+    linarith
+  have hlen : 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ))
+      ≤ ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+        - ((j : ℝ) / D + 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ))) := by
+    have heq : ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+        - ((j : ℝ) / D + 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ)))
+        = 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      field_simp
+      ring
+    rw [heq, div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith
+  exact bhk_s6_lemma_22 speeds hmono hpos _ _ hab h123 hlen t ht h4
+
+/-! ## The §6 witness stack
+
+The reduced group data is `(n, c₁, c₄, g)` with `g·n = D`, `g·c₁ = v₁`,
+`g·c₄ = v₄` (`g := gcd(D, gcd(v₁, v₄))`). Points of the §6 orbit group
+have fractional coordinates `({c₁k/n}, {c₄k/n})`; an index `k` whose
+coordinates satisfy (59) and (60) yields a lonely time via the bridge. -/
+
+/-- **Membership ⟹ index (PROVED).** A `ZMod`-pair in the cyclic group
+    `⟨(c₁, c₄)⟩ ⊆ (ZMod n)²` is hit by a ℕ-multiple. -/
+lemma bhk_s6_mem_k (n c₁ c₄ : ℕ) (hn : 0 < n) (a b : ℕ)
+    (hmem : (((a : ℕ) : ZMod n), ((b : ℕ) : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    ∃ k : ℕ, c₁ * k % n = a % n ∧ c₄ * k % n = b % n := by
+  haveI : NeZero n := ⟨by omega⟩
+  obtain ⟨z, hz⟩ := AddSubgroup.mem_zmultiples_iff.mp hmem
+  set k : ℕ := (z % (n : ℤ)).toNat with hk_def
+  have hk_cast : ((k : ℕ) : ℤ) = z % (n : ℤ) :=
+    Int.toNat_of_nonneg (Int.emod_nonneg z (by exact_mod_cast (by omega : n ≠ 0)))
+  have hzk : ((z : ℤ) : ZMod n) = ((k : ℕ) : ZMod n) := by
+    rw [show ((k : ℕ) : ZMod n) = (((k : ℕ) : ℤ) : ZMod n) from by push_cast; rfl,
+        hk_cast, ZMod.intCast_mod]
+  refine ⟨k, ?_, ?_⟩
+  · have h1 : ((a : ℕ) : ZMod n) = z • (c₁ : ZMod n) := by
+      have := congr_arg Prod.fst hz
+      simpa using this.symm
+    have h2 : ((c₁ * k : ℕ) : ZMod n) = ((a : ℕ) : ZMod n) := by
+      rw [h1, zsmul_eq_mul, hzk]
+      push_cast
+      ring
+    have := congr_arg ZMod.val h2
+    rwa [ZMod.val_natCast, ZMod.val_natCast] at this
+  · have h1 : ((b : ℕ) : ZMod n) = z • (c₄ : ZMod n) := by
+      have := congr_arg Prod.snd hz
+      simpa using this.symm
+    have h2 : ((c₄ * k : ℕ) : ZMod n) = ((b : ℕ) : ZMod n) := by
+      rw [h1, zsmul_eq_mul, hzk]
+      push_cast
+      ring
+    have := congr_arg ZMod.val h2
+    rwa [ZMod.val_natCast, ZMod.val_natCast] at this
+
+/-- **Real-window witness (PROVED).** An index `k` whose orbit coordinates
+    `((c₁k mod n)/n, (c₄k mod n)/n)` satisfy the exact (59)/(60) windows
+    yields a lonely time. -/
+lemma bhk_s6_witness_real (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK2 : 2 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hnpos : 0 < n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (k : ℕ)
+    (h59lo : 1 / 6 - (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩)
+      ≤ ((c₁ * k % n : ℕ) : ℝ) / n)
+    (h59hi : ((c₁ * k % n : ℕ) : ℝ) / n
+      ≤ 5 / 6 - 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩))
+    (h60 : ((c₄ * k % n : ℕ) : ℝ) / n
+        ≤ 1 / 2 - (speeds ⟨3, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩) ∨
+      3 / 2 - 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)
+        ≤ ((c₄ * k % n : ℕ) : ℝ) / n) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hgpos
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hnpos
+  have hDpos : 0 < D := by omega
+  have hfr : ∀ V c : ℕ, g * c = V →
+      Int.fract (((V * k : ℕ) : ℝ) / D) = ((c * k % n : ℕ) : ℝ) / n := by
+    intro V c hVc
+    have hcast : ((V * k : ℕ) : ℝ) / D = ((c * k : ℕ) : ℝ) / n := by
+      rw [← hVc, ← hd]
+      push_cast
+      rw [show (g : ℝ) * c * k / (g * n) = (c : ℝ) * k / n * (g / g) from by ring,
+          div_self hgR.ne', mul_one]
+    rw [hcast, bhk_fract_nat_div _ _ hnpos]
+  exact bhk_s6_j_lonely speeds hmono hpos hsmall D K hD2 hK2 hv3 hv2 h43 k
+    (by rw [hfr _ _ hc1]; exact h59lo)
+    (by rw [hfr _ _ hc1]; exact h59hi)
+    (by rw [hfr _ _ hc4]; exact h60)
+
+/-- **Sufficient ℕ-window witness (PROVED).** Via BHK (61), the fixed
+    sub-rectangle `[1/6, 5/9] × ([2/3, 1) ∪ {0})` lies inside the true
+    (59)/(60) windows for all admissible speeds; with `a := c₁k mod n`,
+    `b := c₄k mod n` the conditions become the ℕ-inequalities
+    `n ≤ 6a`, `9a ≤ 5n`, `2n ≤ 3b ∨ b = 0` — `omega`-friendly. -/
+lemma bhk_s6_witness_num (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK2 : 2 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hnpos : 0 < n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (k : ℕ)
+    (h_alo : n ≤ 6 * (c₁ * k % n)) (h_ahi : 9 * (c₁ * k % n) ≤ 5 * n)
+    (h_b : 2 * n ≤ 3 * (c₄ * k % n) ∨ c₄ * k % n = 0) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hnpos
+  have hV1R : (0 : ℝ) < speeds ⟨0, by omega⟩ := by exact_mod_cast hpos _
+  have hV3R : (0 : ℝ) < speeds ⟨2, by omega⟩ := by exact_mod_cast hpos _
+  have hV4R : (0 : ℝ) < speeds ⟨3, by omega⟩ := by exact_mod_cast hpos _
+  have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) < speeds ⟨2, by omega⟩ := by
+    exact_mod_cast hsmall
+  have h43R : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * speeds ⟨2, by omega⟩ := by
+    exact_mod_cast h43
+  have h34R : (speeds ⟨2, by omega⟩ : ℝ) < speeds ⟨3, by omega⟩ := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega))
+  have h_aloR : (n : ℝ) ≤ 6 * ((c₁ * k % n : ℕ) : ℝ) := by exact_mod_cast h_alo
+  have h_ahiR : 9 * ((c₁ * k % n : ℕ) : ℝ) ≤ 5 * n := by exact_mod_cast h_ahi
+  apply bhk_s6_witness_real speeds hmono hpos hsmall D K hD2 hK2 hv3 hv2 h43
+    n c₁ c₄ g hnpos hgpos hd hc1 hc4 k
+  · -- `1/6 ≤ a/n` suffices since the (59) lower end is below `1/6`.
+    have h1 : (1 : ℝ) / 6 ≤ ((c₁ * k % n : ℕ) : ℝ) / n := by
+      rw [le_div_iff₀ hnR]; linarith
+    have h2 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩) := by
+      positivity
+    linarith
+  · -- `a/n ≤ 5/9` suffices since the (59) upper end is above `5/9`.
+    have h1 : ((c₁ * k % n : ℕ) : ℝ) / n ≤ 5 / 9 := by
+      rw [div_le_iff₀ hnR]; linarith
+    have h2 : 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)
+        ≤ 5 / 18 := by
+      rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+      nlinarith
+    linarith
+  · rcases h_b with h | h
+    · -- `b/n ≥ 2/3` suffices since the (60) lower end is below `2/3`.
+      refine Or.inr ?_
+      have h1 : (2 : ℝ) / 3 ≤ ((c₄ * k % n : ℕ) : ℝ) / n := by
+        rw [le_div_iff₀ hnR]
+        have : (2 : ℝ) * n ≤ 3 * ((c₄ * k % n : ℕ) : ℝ) := by exact_mod_cast h
+        linarith
+      have h2 : 3 / 2 - 5 * (speeds ⟨3, by omega⟩ : ℝ)
+          / (6 * speeds ⟨2, by omega⟩) ≤ 2 / 3 := by
+        have key : (5 : ℝ) / 6 ≤ 5 * (speeds ⟨3, by omega⟩ : ℝ)
+            / (6 * speeds ⟨2, by omega⟩) := by
+          rw [div_le_div_iff₀ (by norm_num) (by positivity)]
+          nlinarith
+        linarith
+      linarith
+    · -- `b = 0` lies in the wrapped part of the (60) window.
+      refine Or.inl ?_
+      have h1 : ((c₄ * k % n : ℕ) : ℝ) / n = 0 := by rw [h]; simp
+      have h2 : (speeds ⟨3, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩)
+          ≤ 1 / 2 := by
+        rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith
+      linarith
+
+/-- **Hit ⟹ lonely (PROVED).** A `ZMod`-pair `(a, b)` of the cyclic
+    group satisfying the sufficient ℕ-window yields a lonely time. -/
+lemma bhk_s6_hit_num (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK2 : 2 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hnpos : 0 < n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (a b : ℕ) (ha : a < n) (hb : b < n)
+    (hmem : (((a : ℕ) : ZMod n), ((b : ℕ) : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n)))
+    (h_alo : n ≤ 6 * a) (h_ahi : 9 * a ≤ 5 * n)
+    (h_b : 2 * n ≤ 3 * b ∨ b = 0) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  obtain ⟨k, hk1, hk4⟩ := bhk_s6_mem_k n c₁ c₄ hnpos a b hmem
+  rw [Nat.mod_eq_of_lt ha] at hk1
+  rw [Nat.mod_eq_of_lt hb] at hk4
+  exact bhk_s6_witness_num speeds hmono hpos hsmall D K hD2 hK2 hv3 hv2 h43
+    n c₁ c₄ g hnpos hgpos hd hc1 hc4 k (by omega) (by omega) (by omega)
 
 /-- **BHK §6 hard core** (OPEN — BHK pp. 41–43). The §6 structure plus
     `3 v₄ < 4 v₃` (BHK's `x₄ > 3/4`, forced by Lemma 4 on the `I_j`
