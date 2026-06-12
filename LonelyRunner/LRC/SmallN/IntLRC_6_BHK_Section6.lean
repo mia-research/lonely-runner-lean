@@ -231,12 +231,204 @@ theorem bhk_s6_lemma_22 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
                              by have := hs.2; linarith⟩,
       by linarith⟩
 
-/-- **BHK §6 analytic core** (OPEN — BHK pp. 40–43). Integer speeds with
+set_option maxHeartbeats 1000000 in
+/-- **The §6 123-gap `I_j` (PROVED).** Under the §6 arithmetic structure
+    there is a 123-gap of length exactly `1/(2 v₃)`: pick `j` with
+    `{v₁ j/D}` in the (59)-window via `bhk_s6_find_j`; then on
+    `[j/D + 1/(3v₃), j/D + 5/(6v₃)]` runners 2 and 3 (integer positions
+    at `j/D`, ratio `v₂/v₃ = (k−1)/k ∈ [1/2, 1)`) and runner 1 (window
+    condition) all stay in `[1/6, 5/6]`. -/
+lemma bhk_s6_123_gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D k : ℕ) (hD2 : 2 ≤ D) (hk2 : 2 ≤ k)
+    (hv3 : speeds ⟨2, by omega⟩ = k * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
+    (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩) :
+    ∃ a b : ℝ, a ≤ b ∧ b - a = 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ∧
+      Set.Icc a b ⊆ (unsafeOf speeds ⟨0, by omega⟩ ∪
+                     unsafeOf speeds ⟨1, by omega⟩ ∪
+                     unsafeOf speeds ⟨2, by omega⟩)ᶜ := by
+  -- Replace `k` by `k' + 1` to avoid ℕ-subtraction.
+  obtain ⟨k', rfl⟩ : ∃ k', k = k' + 1 := ⟨k - 1, by omega⟩
+  have hk'1 : 1 ≤ k' := by omega
+  have hV1pos : 0 < speeds ⟨0, by omega⟩ := hpos _
+  have hV12 : speeds ⟨0, by omega⟩ < speeds ⟨1, by omega⟩ :=
+    hmono (Fin.mk_lt_mk.mpr (by omega))
+  have hV23 : speeds ⟨1, by omega⟩ < speeds ⟨2, by omega⟩ :=
+    hmono (Fin.mk_lt_mk.mpr (by omega))
+  set V1 : ℕ := speeds ⟨0, by omega⟩ with hV1_def
+  set V2 : ℕ := speeds ⟨1, by omega⟩ with hV2_def
+  set V3 : ℕ := speeds ⟨2, by omega⟩ with hV3_def
+  have hv2' : V2 = k' * D := by simpa using hv2
+  have hv3' : V3 = (k' + 1) * D := hv3
+  have hDpos : 0 < D := by omega
+  have hv1R : (0 : ℝ) < V1 := by exact_mod_cast hV1pos
+  have hv2R : (0 : ℝ) < V2 := by exact_mod_cast (by omega : 0 < V2)
+  have hv3R : (0 : ℝ) < V3 := by exact_mod_cast (by omega : 0 < V3)
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hDpos
+  have hsmallR : 3 * (V1 : ℝ) < V3 := by exact_mod_cast hsmall
+  have h2V2 : (V3 : ℝ) ≤ 2 * V2 := by
+    have hN : V3 ≤ 2 * V2 := by
+      rw [hv3', hv2']
+      have hkk : k' + 1 ≤ 2 * k' := by omega
+      calc (k' + 1) * D ≤ 2 * k' * D := Nat.mul_le_mul_right D hkk
+      _ = 2 * (k' * D) := by ring
+    exact_mod_cast hN
+  have hV2R_lt : (V2 : ℝ) < V3 := by exact_mod_cast hV23
+  -- The (59)-window for runner 1.
+  have hwin_lo : 0 ≤ 1 / 6 - (V1 : ℝ) / (3 * V3) := by
+    rw [sub_nonneg, div_le_iff₀ (by positivity)]
+    nlinarith
+  have hwin_hi : 5 / 6 - 5 * (V1 : ℝ) / (6 * V3) < 1 := by
+    have hp : 0 < 5 * (V1 : ℝ) / (6 * V3) := by positivity
+    linarith
+  have hwin_gap : 1 / 2 ≤ (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
+      - (1 / 6 - (V1 : ℝ) / (3 * V3)) := by
+    have h1 : 5 * (V1 : ℝ) / (6 * V3) - (V1 : ℝ) / (3 * V3)
+        = (V1 : ℝ) / (2 * V3) := by
+      field_simp
+      ring
+    have h2 : (V1 : ℝ) / (2 * V3) ≤ 1 / 6 := by
+      rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+      nlinarith
+    linarith
+  obtain ⟨j, hj_lo, hj_hi⟩ := bhk_s6_find_j V1 D hDpos hndvd
+    (1 / 6 - (V1 : ℝ) / (3 * V3)) (5 / 6 - 5 * (V1 : ℝ) / (6 * V3))
+    hwin_lo hwin_hi hwin_gap
+  -- The gap around `τ = j/D`.
+  set τ : ℝ := (j : ℝ) / D with hτ_def
+  have hab : τ + 1 / (3 * (V3 : ℝ)) ≤ τ + 5 / (6 * V3) := by
+    have h2 : 1 / (3 * (V3 : ℝ)) ≤ 5 / (6 * V3) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith
+    linarith
+  have hblen : (τ + 5 / (6 * (V3 : ℝ))) - (τ + 1 / (3 * V3))
+      = 1 / (2 * (V3 : ℝ)) := by
+    field_simp
+    ring
+  refine ⟨τ + 1 / (3 * V3), τ + 5 / (6 * V3), hab, hblen, ?_⟩
+  intro s hs
+  obtain ⟨hsa, hsb⟩ := Set.mem_Icc.mp hs
+  have hδlo : 1 / (3 * (V3 : ℝ)) ≤ s - τ := by linarith
+  have hδhi : s - τ ≤ 5 / (6 * (V3 : ℝ)) := by linarith
+  -- Runner 1: window condition (59).
+  have hfr1 : Int.fract ((V1 : ℝ) * τ) = Int.fract (((V1 * j : ℕ) : ℝ) / D) := by
+    rw [hτ_def]
+    congr 1
+    push_cast
+    ring
+  have hγ_lo : 1 / 6 - (V1 : ℝ) / (3 * V3) ≤ Int.fract ((V1 : ℝ) * τ) := by
+    rw [hfr1]; exact hj_lo
+  have hγ_hi : Int.fract ((V1 : ℝ) * τ) ≤ 5 / 6 - 5 * (V1 : ℝ) / (6 * V3) := by
+    rw [hfr1]; exact hj_hi
+  have h1safe : 1 / 6 ≤ Int.fract ((V1 : ℝ) * s) ∧
+      Int.fract ((V1 : ℝ) * s) ≤ 5 / 6 := by
+    have hm_lo : (V1 : ℝ) / (3 * V3) ≤ (V1 : ℝ) * (s - τ) := by
+      have h := mul_le_mul_of_nonneg_left hδlo hv1R.le
+      rw [show (V1 : ℝ) * (1 / (3 * V3)) = (V1 : ℝ) / (3 * V3) from by ring] at h
+      linarith
+    have hm_hi : (V1 : ℝ) * (s - τ) ≤ 5 * (V1 : ℝ) / (6 * V3) := by
+      have h := mul_le_mul_of_nonneg_left hδhi hv1R.le
+      rw [show (V1 : ℝ) * (5 / (6 * V3)) = 5 * (V1 : ℝ) / (6 * V3) from by
+        ring] at h
+      linarith
+    have h0 : 0 ≤ Int.fract ((V1 : ℝ) * τ) + (V1 : ℝ) * (s - τ) := by
+      have hfn := Int.fract_nonneg ((V1 : ℝ) * τ)
+      have hpos' : (0 : ℝ) < (V1 : ℝ) / (3 * V3) := by positivity
+      linarith
+    have h1 : Int.fract ((V1 : ℝ) * τ) + (V1 : ℝ) * (s - τ) < 1 := by
+      linarith
+    have hfs := bhk_fract_translate (V1 : ℝ) τ (s - τ) h0 h1
+    rw [show τ + (s - τ) = s from by ring] at hfs
+    rw [hfs]
+    exact ⟨by linarith, by linarith⟩
+  -- Runners 2 and 3: integer position at `τ`, linear motion inside `[0,1)`.
+  have hint : ∀ (V M : ℕ), (V : ℝ) * τ = (M : ℝ) →
+      1 / 6 ≤ (V : ℝ) * (s - τ) → (V : ℝ) * (s - τ) ≤ 5 / 6 →
+      1 / 6 ≤ Int.fract ((V : ℝ) * s) ∧ Int.fract ((V : ℝ) * s) ≤ 5 / 6 := by
+    intro V M hMτ hlo' hhi'
+    have hsplit : (V : ℝ) * s = (V : ℝ) * (s - τ) + ((M : ℤ) : ℝ) := by
+      rw [Int.cast_natCast, ← hMτ]
+      ring
+    rw [hsplit, Int.fract_add_intCast,
+        Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    exact ⟨hlo', hhi'⟩
+  have hmulτ : ∀ c : ℕ, ((c * D : ℕ) : ℝ) * τ = ((c * j : ℕ) : ℝ) := by
+    intro c
+    rw [hτ_def]
+    push_cast
+    field_simp
+  have h3τ : (V3 : ℝ) * τ = (((k' + 1) * j : ℕ) : ℝ) := by
+    rw [show (V3 : ℝ) = (((k' + 1) * D : ℕ) : ℝ) from by rw [hv3']]
+    exact hmulτ (k' + 1)
+  have h2τ : (V2 : ℝ) * τ = ((k' * j : ℕ) : ℝ) := by
+    rw [show (V2 : ℝ) = ((k' * D : ℕ) : ℝ) from by rw [hv2']]
+    exact hmulτ k'
+  have h3safe := hint V3 ((k' + 1) * j) h3τ
+    (by
+      have h := mul_le_mul_of_nonneg_left hδlo hv3R.le
+      rw [show (V3 : ℝ) * (1 / (3 * V3)) = 1 / 3 from by field_simp] at h
+      linarith)
+    (by
+      have h := mul_le_mul_of_nonneg_left hδhi hv3R.le
+      rw [show (V3 : ℝ) * (5 / (6 * V3)) = 5 / 6 from by field_simp] at h
+      linarith)
+  have h2safe := hint V2 (k' * j) h2τ
+    (by
+      have h := mul_le_mul_of_nonneg_left hδlo hv2R.le
+      rw [show (V2 : ℝ) * (1 / (3 * V3)) = (V2 : ℝ) / (3 * V3) from by
+        ring] at h
+      have h6 : 1 / 6 ≤ (V2 : ℝ) / (3 * V3) := by
+        rw [div_le_div_iff₀ (by norm_num) (by positivity)]
+        linarith
+      linarith)
+    (by
+      have h := mul_le_mul_of_nonneg_left hδhi hv2R.le
+      rw [show (V2 : ℝ) * (5 / (6 * V3)) = 5 * (V2 : ℝ) / (6 * V3) from by
+        ring] at h
+      have h6 : 5 * (V2 : ℝ) / (6 * V3) ≤ 5 / 6 := by
+        rw [div_le_div_iff₀ (by positivity) (by norm_num)]
+        linarith
+      linarith)
+  -- Convert fract-safety to non-membership in the three unsafe sets.
+  rw [Set.mem_compl_iff]
+  intro hmem
+  have hsafe : ∀ x : ℝ, 1 / 6 ≤ Int.fract x → Int.fract x ≤ 5 / 6 →
+      ¬ circDist x < 1 / 6 := by
+    intro x hx1 hx2
+    rw [not_lt]
+    unfold circDist
+    exact le_min hx1 (by linarith)
+  rcases hmem with (h | h) | h
+  · exact hsafe _ h1safe.1 h1safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
+  · exact hsafe _ h2safe.1 h2safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
+  · exact hsafe _ h3safe.1 h3safe.2 ((mem_unsafeOf_iff _ _ _).mp h)
+
+/-- **BHK §6 hard core** (OPEN — BHK pp. 41–43). The §6 structure plus
+    `3 v₄ < 4 v₃` (BHK's `x₄ > 3/4`, forced by Lemma 4 on the `I_j`
+    gap). The remaining pipeline: condition (60) + Lemma 22, else
+    Corollary 6 on `G = ⟨({v₁t₀}, {v₄t₀})⟩` with the rectangle
+    `R ⊇ [1/6, 5/9] × [2/3, 1]`, then Cases 6.1–6.5 (see module
+    docstring). -/
+theorem bhk_s6_hard (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D k : ℕ) (hD2 : 2 ≤ D) (hk2 : 2 ≤ k)
+    (hv3 : speeds ⟨2, by omega⟩ = k * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
+    (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  sorry
+
+/-- **BHK §6 analytic core (PROVED dispatcher).** Integer speeds with
     the §6 arithmetic structure exposed: `D := v₃ - v₂ ≥ 2` divides both
     `v₂` and `v₃` (`v₃ = k·D`, `v₂ = (k−1)·D`, `k ≥ 2`) but not `v₁`,
-    and `3 v₁ < v₃`. Concludes a lonely time exists. The proof is the
-    Lemma 22 / Corollary 6 / Cases 6.1–6.5 pipeline described in the
-    module docstring. -/
+    and `3 v₁ < v₃`. The `I_j` gap of length `1/(2v₃)` either directly
+    contains a lonely time, or (via Lemma 4: a 45-covered interval is
+    shorter than `2/(3v₄)`) forces `3 v₄ < 4 v₃` and hands off to
+    `bhk_s6_hard`. -/
 theorem bhk_s6_reduced (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -245,7 +437,41 @@ theorem bhk_s6_reduced (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hv2 : speeds ⟨1, by omega⟩ = (k - 1) * D)
     (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  obtain ⟨a, b, hab, hlen, h123gap⟩ :=
+    bhk_s6_123_gap speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 hndvd
+  rcases Classical.em (∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t)
+      ≥ (1 : ℝ) / 6) with h | hno
+  · exact h
+  -- No lonely time: the gap is covered by runners 4 and 5; Lemma 4
+  -- bounds its length, forcing `3 v₄ < 4 v₃`.
+  have hcover : Set.Icc a b ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪
+                              unsafeOf speeds ⟨4, by omega⟩ := by
+    intro t ht
+    push_neg at hno
+    obtain ⟨i, hi⟩ := hno t
+    have h123 := h123gap ht
+    have ht_unsafe : t ∈ unsafeOf speeds i :=
+      (mem_unsafeOf_iff speeds i t).mpr hi
+    fin_cases i
+    · exact absurd (Or.inl (Or.inl ht_unsafe)) h123
+    · exact absurd (Or.inl (Or.inr ht_unsafe)) h123
+    · exact absurd (Or.inr ht_unsafe) h123
+    · exact Or.inl ht_unsafe
+    · exact Or.inr ht_unsafe
+  have hbnd : b - a < 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) :=
+    bhk_lemma_4 speeds hmono hpos a b hab hcover
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos (⟨2, by omega⟩ : Fin 5)
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos (⟨3, by omega⟩ : Fin 5)
+  have h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩ := by
+    have hR : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [hlen] at hbnd
+      rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hbnd
+      nlinarith
+    exact_mod_cast hR
+  exact bhk_s6_hard speeds hmono hpos hgcd hsmall D k hD2 hk2 hv3 hv2
+    hndvd h43
 
 /-- **BHK §6 reduction (PROVED).** The fract hypotheses of the §6 case
     branch yield the arithmetic structure required by `bhk_s6_reduced`:
