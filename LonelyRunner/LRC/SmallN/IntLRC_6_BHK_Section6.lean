@@ -1147,6 +1147,27 @@ lemma bhk_s6_case_651 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
+/-- **Wrapped rectangle window.** For `ρ ∈ [0, 1)` and an anchored window
+    `[c, c + L]` with `0 ≤ c < 1` that may wrap past `1`:
+    `{ρ - c} ≤ L` forces `c ≤ ρ` or `ρ ≤ c + L - 1`. -/
+lemma bhk_s6_fract_window_wrap (ρ c L : ℝ) (hρ0 : 0 ≤ ρ) (hρ1 : ρ < 1)
+    (hc0 : 0 ≤ c) (hc1 : c < 1) (h : Int.fract (ρ - c) ≤ L) :
+    c ≤ ρ ∨ ρ ≤ c + L - 1 := by
+  rcases le_or_gt c ρ with hge | hlt
+  · exact Or.inl hge
+  · refine Or.inr ?_
+    have hin : Int.fract (ρ - c) = ρ - c + 1 := by
+      rw [show ρ - c = (ρ - c + 1) + ((-1 : ℤ) : ℝ) from by push_cast; ring,
+          Int.fract_add_intCast,
+          Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+      push_cast
+      ring
+    rw [hin] at h
+    linarith
+
+set_option maxHeartbeats 2000000 in
+-- The dispatcher below is a single long case analysis (gcd reduction,
+-- Corollary 6, seven cone cases); it exceeds the default budget.
 /-- **BHK §6 hard core** (OPEN — BHK pp. 41–43). The §6 structure plus
     `3 v₄ < 4 v₃` (BHK's `x₄ > 3/4`, forced by Lemma 4 on the `I_j`
     gap). The remaining pipeline: condition (60) + Lemma 22, else
@@ -1162,7 +1183,380 @@ theorem bhk_s6_hard (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hndvd : ¬ D ∣ speeds ⟨0, by omega⟩)
     (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  set V1 : ℕ := speeds ⟨0, by omega⟩ with hV1_def
+  set V3 : ℕ := speeds ⟨2, by omega⟩ with hV3_def
+  set V4 : ℕ := speeds ⟨3, by omega⟩ with hV4_def
+  have hV1pos : 0 < V1 := hpos _
+  have hV3pos : 0 < V3 := hpos _
+  have hV4pos : 0 < V4 := hpos _
+  have hDpos : 0 < D := by omega
+  -- Reduce the orbit group: `g := gcd(D, gcd(v₁, v₄))`, `n := D/g`.
+  set g : ℕ := Nat.gcd D (Nat.gcd V1 V4) with hg_def
+  have hgpos : 0 < g := Nat.gcd_pos_of_pos_left _ hDpos
+  obtain ⟨n, hn_eq⟩ : g ∣ D := Nat.gcd_dvd_left _ _
+  obtain ⟨c₁, hc1_eq⟩ : g ∣ V1 :=
+    (Nat.gcd_dvd_right _ _).trans (Nat.gcd_dvd_left _ _)
+  obtain ⟨c₄, hc4_eq⟩ : g ∣ V4 :=
+    (Nat.gcd_dvd_right _ _).trans (Nat.gcd_dvd_right _ _)
+  have hnpos : 0 < n := by
+    rcases Nat.eq_zero_or_pos n with h0 | h
+    · rw [h0, mul_zero] at hn_eq; omega
+    · exact h
+  have hcop : Nat.gcd n (Nat.gcd c₁ c₄) = 1 := by
+    have key : Nat.gcd D (Nat.gcd V1 V4) = g * Nat.gcd n (Nat.gcd c₁ c₄) := by
+      rw [hn_eq, hc1_eq, hc4_eq, Nat.gcd_mul_left g c₁ c₄,
+          Nat.gcd_mul_left g n (Nat.gcd c₁ c₄)]
+    rw [← hg_def] at key
+    exact (Nat.eq_of_mul_eq_mul_left hgpos
+      (by rw [mul_one, ← key] : g * 1 = g * Nat.gcd n (Nat.gcd c₁ c₄))).symm
+  have hndvd1 : ¬ n ∣ c₁ := by
+    rintro ⟨q, hq⟩
+    exact hndvd ⟨q, by rw [hc1_eq, hq, hn_eq]; ring⟩
+  have hn1 : 1 < n := by
+    rcases (by omega : n = 1 ∨ 1 < n) with rfl | h
+    · exact absurd (one_dvd c₁) hndvd1
+    · exact h
+  -- Case 6.1 first: `n ∣ c₄`.
+  by_cases hdvd4 : n ∣ c₄
+  · exact bhk_s6_case_61 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+      n c₁ c₄ g hn1 hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm hcop hdvd4
+  have hc1m0 : c₁ % n ≠ 0 := fun h => hndvd1 (Nat.dvd_of_mod_eq_zero h)
+  have hc4m0 : c₄ % n ≠ 0 := fun h => hdvd4 (Nat.dvd_of_mod_eq_zero h)
+  rcases (by omega : n = 2 ∨ n = 3 ∨ 4 ≤ n) with rfl | rfl | hn4
+  · -- `n = 2`: both `c₁`, `c₄` odd, so `(1, 1) ∈ H` — Case 6.2.
+    have e1 : ((c₁ : ℕ) : ZMod 2) = 1 := by
+      rw [← ZMod.natCast_mod, (by omega : c₁ % 2 = 1), Nat.cast_one]
+    have e4 : ((c₄ : ℕ) : ZMod 2) = 1 := by
+      rw [← ZMod.natCast_mod, (by omega : c₄ % 2 = 1), Nat.cast_one]
+    have hmem : ((1 : ZMod 2), (1 : ZMod 2)) ∈
+        AddSubgroup.zmultiples ((c₁ : ZMod 2), (c₄ : ZMod 2)) := by
+      rw [show ((1 : ZMod 2), (1 : ZMod 2)) = ((c₁ : ZMod 2), (c₄ : ZMod 2))
+        from by rw [e1, e4]]
+      exact AddSubgroup.mem_zmultiples _
+    exact bhk_s6_case_62 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+      2 c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm hmem
+  · -- `n = 3`: `(c₁, c₄) mod 3` lies in `{1,2}²` — Case 6.2 or 6.3.
+    have hgen : (((c₁ % 3 : ℕ) : ZMod 3), ((c₄ % 3 : ℕ) : ZMod 3)) ∈
+        AddSubgroup.zmultiples ((c₁ : ZMod 3), (c₄ : ZMod 3)) := by
+      rw [show (((c₁ % 3 : ℕ) : ZMod 3), ((c₄ % 3 : ℕ) : ZMod 3))
+          = ((c₁ : ZMod 3), (c₄ : ZMod 3)) from by
+        rw [ZMod.natCast_mod, ZMod.natCast_mod]]
+      exact AddSubgroup.mem_zmultiples _
+    have hgen_neg : (-(((c₁ % 3 : ℕ) : ZMod 3), ((c₄ % 3 : ℕ) : ZMod 3))) ∈
+        AddSubgroup.zmultiples ((c₁ : ZMod 3), (c₄ : ZMod 3)) :=
+      AddSubgroup.neg_mem _ hgen
+    rcases (by omega : c₁ % 3 = 1 ∧ c₄ % 3 = 1 ∨ c₁ % 3 = 2 ∧ c₄ % 3 = 2 ∨
+        c₁ % 3 = 1 ∧ c₄ % 3 = 2 ∨ c₁ % 3 = 2 ∧ c₄ % 3 = 1) with
+      ⟨h1, h4⟩ | ⟨h1, h4⟩ | ⟨h1, h4⟩ | ⟨h1, h4⟩
+    · rw [h1, h4] at hgen
+      exact bhk_s6_case_62 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+        3 c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+        (by rw [show ((1 : ZMod 3), (1 : ZMod 3))
+              = (((1 : ℕ) : ZMod 3), ((1 : ℕ) : ZMod 3)) from by decide]
+            exact hgen)
+    · rw [h1, h4] at hgen_neg
+      exact bhk_s6_case_62 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+        3 c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+        (by rw [show ((1 : ZMod 3), (1 : ZMod 3))
+              = -(((2 : ℕ) : ZMod 3), ((2 : ℕ) : ZMod 3)) from by decide]
+            exact hgen_neg)
+    · rw [h1, h4] at hgen
+      exact bhk_s6_case_63 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+        3 c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+        (by rw [show ((1 : ZMod 3), (-1 : ZMod 3))
+              = (((1 : ℕ) : ZMod 3), ((2 : ℕ) : ZMod 3)) from by decide]
+            exact hgen)
+    · rw [h1, h4] at hgen_neg
+      exact bhk_s6_case_63 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2 h43
+        3 c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+        (by rw [show ((1 : ZMod 3), (-1 : ZMod 3))
+              = -(((2 : ℕ) : ZMod 3), ((1 : ℕ) : ZMod 3)) from by decide]
+            exact hgen_neg)
+  -- `n ≥ 4`: apply Corollary 6 with (13)-minimality.
+  have hV1R : (0 : ℝ) < V1 := by exact_mod_cast hV1pos
+  have hV3R : (0 : ℝ) < V3 := by exact_mod_cast hV3pos
+  have hV4R : (0 : ℝ) < V4 := by exact_mod_cast hV4pos
+  have hsmallR : 3 * (V1 : ℝ) < V3 := by exact_mod_cast hsmall
+  have h43R : 3 * (V4 : ℝ) < 4 * V3 := by exact_mod_cast h43
+  have h34R : (V3 : ℝ) < V4 := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega))
+  have hG_int : ∀ a b : ℤ,
+      ((a : ℝ) / n, (b : ℝ) / n) ∈ bhkS7Group n c₁ c₄ ↔
+      ((a : ZMod n), (b : ZMod n)) ∈
+        AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n)) :=
+    fun a b => bhk_lift_int_mem_iff _ n hn1 _ (fun _ => Iff.rfl) a b
+  set α : ℝ := 2 / 3 - (V1 : ℝ) / (2 * V3) with hα_def
+  set β : ℝ := (V4 : ℝ) / (2 * V3) with hβ_def
+  have hα_lo : 1 / 2 < α := by
+    have h16 : (V1 : ℝ) / (2 * V3) < 1 / 6 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]
+      nlinarith
+    rw [hα_def]
+    linarith
+  have hα_hi : α < 1 := by
+    have hp : (0 : ℝ) < (V1 : ℝ) / (2 * V3) := by positivity
+    rw [hα_def]
+    linarith
+  have hβ_lo : 1 / 2 < β := by
+    rw [hβ_def, lt_div_iff₀ (by positivity)]
+    linarith
+  have hβ_hi : β < 2 / 3 := by
+    rw [hβ_def, div_lt_div_iff₀ (by positivity) (by norm_num)]
+    nlinarith
+  have hαβ : α * β ≥ 1 / (n : ℝ) := by
+    have hnR : (0 : ℝ) < n := by exact_mod_cast hnpos
+    have h4n : (4 : ℝ) ≤ n := by exact_mod_cast hn4
+    have h14 : 1 / (n : ℝ) ≤ 1 / 4 :=
+      one_div_le_one_div_of_le (by norm_num) h4n
+    nlinarith
+  have h_nβ : 1 / β ≤ (n : ℝ) := by
+    have h2 : 1 / β < 2 := by
+      rw [div_lt_iff₀ (by linarith)]
+      linarith
+    have h2n : (2 : ℝ) ≤ n := by exact_mod_cast (by omega : 2 ≤ n)
+    linarith
+  rcases bhk_s7_corollary_6_minimal (bhkS7Group n c₁ c₄) n hn1
+      (bhk_s7_lift n c₁ c₄ hn1 hcop) α β (by linarith) hα_hi (by linarith)
+      (by linarith) hαβ h_nβ with
+    hAll | ⟨⟨i, j⟩, hij_ne, hij_G, hi_nonneg, hi_lt, hj_lo, hj_hi, hmin⟩
+  · -- All rectangles hit: extract a meeting index for the true windows.
+    obtain ⟨p, hpG, hpR⟩ := hAll (1 / 6 - (V1 : ℝ) / (3 * V3))
+      (3 / 2 - 5 * (V4 : ℝ) / (6 * V3))
+    obtain ⟨kk, hk1, hk4⟩ := bhk_s7_extract n c₁ c₄ hn1 p hpG
+    obtain ⟨hpR1a, hpR1b, hpR2a, hpR2b⟩ := hpR
+    have hshift : ∀ x c : ℝ,
+        Int.fract (x - c) = Int.fract (Int.fract x - c) := by
+      intro x c
+      conv_lhs => rw [← Int.fract_add_floor x]
+      rw [show Int.fract x + (⌊x⌋ : ℝ) - c
+            = Int.fract x - c + (⌊x⌋ : ℤ) from by push_cast; ring,
+          Int.fract_add_intCast]
+    have hx₁0 : 0 ≤ 1 / 6 - (V1 : ℝ) / (3 * V3) := by
+      have h19 : (V1 : ℝ) / (3 * V3) < 1 / 9 := by
+        rw [div_lt_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith
+      linarith
+    have hx₁α : (1 / 6 - (V1 : ℝ) / (3 * V3)) + α < 1 := by
+      have hp : (0 : ℝ) < (V1 : ℝ) / (3 * V3) := by positivity
+      have hp2 : (0 : ℝ) < (V1 : ℝ) / (2 * V3) := by positivity
+      rw [hα_def]
+      linarith
+    have hwin1 := bhk_fract_window (Int.fract p.1)
+      (1 / 6 - (V1 : ℝ) / (3 * V3)) α (Int.fract_nonneg _)
+      (Int.fract_lt_one _) hx₁0 hx₁α (by rw [← hshift]; exact hpR1b)
+    have hx₂0 : 0 ≤ 3 / 2 - 5 * (V4 : ℝ) / (6 * V3) := by
+      have h109 : 5 * (V4 : ℝ) / (6 * V3) < 10 / 9 := by
+        rw [div_lt_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith
+      linarith
+    have hx₂1 : 3 / 2 - 5 * (V4 : ℝ) / (6 * V3) < 1 := by
+      have h56 : (5 : ℝ) / 6 < 5 * (V4 : ℝ) / (6 * V3) := by
+        rw [div_lt_div_iff₀ (by norm_num) (by positivity)]
+        nlinarith
+      linarith
+    have hwin4 := bhk_s6_fract_window_wrap (Int.fract p.2)
+      (3 / 2 - 5 * (V4 : ℝ) / (6 * V3)) β (Int.fract_nonneg _)
+      (Int.fract_lt_one _) hx₂0 hx₂1 (by rw [← hshift]; exact hpR2b)
+    have hfr1 : Int.fract p.1 = ((c₁ * kk % n : ℕ) : ℝ) / n := by
+      rw [hk1, bhk_fract_nat_div _ _ hnpos]
+    have hfr4 : Int.fract p.2 = ((c₄ * kk % n : ℕ) : ℝ) / n := by
+      rw [hk4, bhk_fract_nat_div _ _ hnpos]
+    apply bhk_s6_witness_real speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+      h43 n c₁ c₄ g hnpos hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm kk
+    · rw [← hfr1]
+      exact hwin1.1
+    · have hsum : (1 / 6 - (V1 : ℝ) / (3 * V3)) + α
+          = 5 / 6 - 5 * (V1 : ℝ) / (6 * V3) := by
+        rw [hα_def]
+        field_simp
+        ring
+      rw [← hfr1]
+      linarith [hwin1.2]
+    · have hsum : (3 / 2 - 5 * (V4 : ℝ) / (6 * V3)) + β - 1
+          = 1 / 2 - (V4 : ℝ) / (3 * V3) := by
+        rw [hβ_def]
+        field_simp
+        ring
+      rw [← hfr4]
+      rcases hwin4 with h | h
+      · exact Or.inr h
+      · exact Or.inl (by linarith)
+  · -- Cone element `(i, j)`: `i ∈ {0, 1}`, `|j| ≤ 3`.
+    have hβ_inv : 1 / β < 2 := by
+      rw [div_lt_iff₀ (by linarith)]
+      linarith
+    have hα_inv : 1 / α < 2 := by
+      rw [div_lt_iff₀ (by linarith)]
+      linarith
+    have hβα : β / α < 4 / 3 := by
+      rw [div_lt_div_iff₀ (by linarith) (by norm_num)]
+      nlinarith
+    have hβα0 : 0 ≤ β / α := by positivity
+    have hi2 : i < 2 := by
+      have : (i : ℝ) < 2 := lt_trans hi_lt hβ_inv
+      exact_mod_cast this
+    have hi0 : 0 ≤ i := hi_nonneg
+    have hiR1 : (i : ℝ) ≤ 1 := by
+      exact_mod_cast (by omega : i ≤ 1)
+    have hiR0 : (0 : ℝ) ≤ (i : ℝ) := by exact_mod_cast hi0
+    have hj4 : j < 4 := by
+      have hR : (j : ℝ) < 4 := by
+        have h1 : (j : ℝ) < 1 / α + β / α * i := hj_hi
+        nlinarith
+      exact_mod_cast hR
+    have hjm4 : -4 < j := by
+      have hR : (-4 : ℝ) < (j : ℝ) := by
+        have h1 : -1 / α - β / α * i < (j : ℝ) := hj_lo
+        have hprod : β / α * (i : ℝ) ≤ β / α * 1 :=
+          mul_le_mul_of_nonneg_left hiR1 hβα0
+        have hneg : (-1 : ℝ) / α - β / α * (i : ℝ)
+            = -(1 / α + β / α * (i : ℝ)) := by ring
+        rw [hneg] at h1
+        linarith
+      exact_mod_cast hR
+    rcases (by omega : i = 0 ∨ i = 1) with rfl | rfl
+    · -- `i = 0`: `j = ±1` and `(0, ±1/n) ∈ G` forces `n ∣ c₁` — absurd.
+      exfalso
+      have hj_ne : j ≠ 0 := by
+        rintro rfl
+        exact hij_ne rfl
+      have hcast0 : ((0 : ℤ) : ℝ) = 0 := by norm_num
+      have hj1 : j = 1 ∨ j = -1 := by
+        have hhi : (j : ℝ) < 1 / α := by
+          have := hj_hi
+          rw [hcast0, mul_zero, add_zero] at this
+          exact this
+        have hlo : -1 / α < (j : ℝ) := by
+          have := hj_lo
+          rw [hcast0, mul_zero, sub_zero] at this
+          exact this
+        have h2 : (j : ℝ) < 2 := lt_trans hhi hα_inv
+        have hm2 : (-2 : ℝ) < (j : ℝ) := by
+          have : -1 / α = -(1 / α) := by ring
+          rw [this] at hlo
+          linarith
+        have hj2 : j < 2 := by exact_mod_cast h2
+        have hjm2 : -2 < j := by exact_mod_cast hm2
+        omega
+      have hmem' := (hG_int 0 j).mp hij_G
+      rw [Int.cast_zero] at hmem'
+      obtain ⟨z, hz⟩ := AddSubgroup.mem_zmultiples_iff.mp hmem'
+      have hz1 : (z : ZMod n) * (c₁ : ZMod n) = 0 := by
+        have := congr_arg Prod.fst hz
+        simpa [zsmul_eq_mul] using this
+      have hz4 : (z : ZMod n) * (c₄ : ZMod n) = ((j : ℤ) : ZMod n) := by
+        have := congr_arg Prod.snd hz
+        simpa [zsmul_eq_mul] using this
+      have hkey : ((c₁ : ℕ) : ZMod n) * ((j : ℤ) : ZMod n) = 0 := by
+        calc ((c₁ : ℕ) : ZMod n) * ((j : ℤ) : ZMod n)
+            = (c₄ : ZMod n) * ((z : ZMod n) * (c₁ : ZMod n)) := by
+              rw [← hz4]; ring
+          _ = 0 := by rw [hz1, mul_zero]
+      have hc10 : ((c₁ : ℕ) : ZMod n) = 0 := by
+        rcases hj1 with rfl | rfl
+        · simpa using hkey
+        · rw [show (((-1 : ℤ)) : ZMod n) = -1 from by push_cast; ring,
+              mul_neg, mul_one, neg_eq_zero] at hkey
+          exact hkey
+      exact hndvd1 ((ZMod.natCast_eq_zero_iff c₁ n).mp hc10)
+    · -- `i = 1`: dispatch on `j ∈ {−3, …, 3}`.
+      have hmemH : (((1 : ℤ) : ZMod n), ((j : ℤ) : ZMod n)) ∈
+          AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n)) :=
+        (hG_int 1 j).mp hij_G
+      rw [Int.cast_one] at hmemH
+      rcases (by omega : j = 0 ∨ j = 1 ∨ j = -1 ∨ j = 2 ∨ j = -2 ∨
+          j = 3 ∨ j = -3) with rfl | rfl | rfl | rfl | rfl | rfl | rfl
+      · -- `j = 0` would give `n ∣ c₄` — already excluded.
+        exfalso
+        obtain ⟨z, hz⟩ := AddSubgroup.mem_zmultiples_iff.mp hmemH
+        have hz1 : (z : ZMod n) * (c₁ : ZMod n) = 1 := by
+          have := congr_arg Prod.fst hz
+          simpa [zsmul_eq_mul] using this
+        have hz4 : (z : ZMod n) * (c₄ : ZMod n) = 0 := by
+          have := congr_arg Prod.snd hz
+          simpa [zsmul_eq_mul] using this
+        have hkey : ((c₄ : ℕ) : ZMod n) = 0 := by
+          calc ((c₄ : ℕ) : ZMod n)
+              = (c₄ : ZMod n) * ((z : ZMod n) * (c₁ : ZMod n)) := by
+                rw [hz1, mul_one]
+            _ = (c₁ : ZMod n) * ((z : ZMod n) * (c₄ : ZMod n)) := by ring
+            _ = 0 := by rw [hz4, mul_zero]
+        exact hdvd4 ((ZMod.natCast_eq_zero_iff c₄ n).mp hkey)
+      · -- `j = 1`: Case 6.2.
+        rw [Int.cast_one] at hmemH
+        exact bhk_s6_case_62 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+          h43 n c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+          hmemH
+      · -- `j = −1`: Case 6.3.
+        rw [show (((-1 : ℤ)) : ZMod n) = -1 from by push_cast; ring] at hmemH
+        exact bhk_s6_case_63 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+          h43 n c₁ c₄ g (by omega) hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+          hmemH
+      · -- `j = 2`: Case 6.4.
+        rw [show (((2 : ℤ)) : ZMod n) = 2 from by push_cast; ring] at hmemH
+        exact bhk_s6_case_64 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+          h43 n c₁ c₄ g hn4 hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm hmemH
+      · -- `j = −2`: Cases 6.5 / 6.5.1 / 6.5.2.
+        rw [show (((-2 : ℤ)) : ZMod n) = -2 from by push_cast; ring] at hmemH
+        rcases (by omega : n = 5 ∨ n = 7 ∨ (n % 2 = 0 ∨ 9 ≤ n)) with
+          rfl | rfl | hn'
+        · exact bhk_s6_case_651 speeds hmono hpos hsmall D k hD2 hk2 hv3
+            hv2 h43 c₁ c₄ g hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm hmemH
+        · exact bhk_s6_case_652 speeds hmono hpos hsmall D k hD2 hk2 hv3
+            hv2 h43 c₁ c₄ g hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm hmemH
+        · exact bhk_s6_case_65 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+            h43 n c₁ c₄ g hn4 hn' hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+            hmemH
+      · -- `j = 3`: (13)-minimality forces `n ≥ 6`, then the `(1, 3)` case.
+        have hn6 : 6 ≤ n := by
+          by_contra h'
+          have hn5 : n = 4 ∨ n = 5 := by omega
+          have habs : |(3 - (n : ℤ))| ≤ |(3 : ℤ)| := by
+            rcases hn5 with rfl | rfl <;> decide
+          have hcorner : ¬(|((1 : ℤ))| = |(1 : ℤ)| ∧
+              |(3 - (n : ℤ))| = |(3 : ℤ)|) := by
+            rintro ⟨-, h2⟩
+            rcases hn5 with rfl | rfl <;> exact absurd h2 (by decide)
+          have hG_mem : (((1 : ℤ) : ℝ) / n, ((3 - (n : ℤ) : ℤ) : ℝ) / n) ∈
+              bhkS7Group n c₁ c₄ := by
+            rw [hG_int]
+            rw [show ((3 - (n : ℤ) : ℤ) : ZMod n) = ((3 : ℤ) : ZMod n) from by
+              rw [Int.cast_sub, Int.cast_natCast, ZMod.natCast_self,
+                  sub_zero]]
+            push_cast
+            push_cast at hmemH
+            exact hmemH
+          exact hmin (1, 3 - (n : ℤ)) (by simp) (le_refl _) habs hcorner
+            hG_mem
+        rw [show (((3 : ℤ)) : ZMod n) = ((3 : ℤ) : ZMod n) from rfl] at hmemH
+        exact bhk_s6_case_66 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+          h43 n c₁ c₄ g hn6 hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+          3 (Or.inl rfl) hmemH
+      · -- `j = −3`: symmetric minimality bound, then the `(1, −3)` case.
+        have hn6 : 6 ≤ n := by
+          by_contra h'
+          have hn5 : n = 4 ∨ n = 5 := by omega
+          have habs : |((n : ℤ) - 3)| ≤ |(-3 : ℤ)| := by
+            rcases hn5 with rfl | rfl <;> decide
+          have hcorner : ¬(|((1 : ℤ))| = |(1 : ℤ)| ∧
+              |((n : ℤ) - 3)| = |(-3 : ℤ)|) := by
+            rintro ⟨-, h2⟩
+            rcases hn5 with rfl | rfl <;> exact absurd h2 (by decide)
+          have hG_mem : (((1 : ℤ) : ℝ) / n, (((n : ℤ) - 3 : ℤ) : ℝ) / n) ∈
+              bhkS7Group n c₁ c₄ := by
+            rw [hG_int]
+            rw [show (((n : ℤ) - 3 : ℤ) : ZMod n) = ((-3 : ℤ) : ZMod n)
+              from by
+              rw [Int.cast_sub, Int.cast_natCast, ZMod.natCast_self,
+                  zero_sub, Int.cast_neg]]
+            push_cast
+            push_cast at hmemH
+            exact hmemH
+          exact hmin (1, (n : ℤ) - 3) (by simp) (le_refl _) habs hcorner
+            hG_mem
+        exact bhk_s6_case_66 speeds hmono hpos hsmall D k hD2 hk2 hv3 hv2
+          h43 n c₁ c₄ g hn6 hgpos hn_eq.symm hc1_eq.symm hc4_eq.symm
+          (-3) (Or.inr rfl) hmemH
 
 /-- **BHK §6 analytic core (PROVED dispatcher).** Integer speeds with
     the §6 arithmetic structure exposed: `D := v₃ - v₂ ≥ 2` divides both
