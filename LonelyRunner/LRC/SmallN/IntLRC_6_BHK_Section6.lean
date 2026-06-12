@@ -1126,12 +1126,35 @@ lemma bhk_s6_case_62 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
-/-- **BHK Case 6.5.1, `n = 5`** (OPEN — BHK p. 43, (62)–(64)).
-    `(1/5, −2/5) ∈ G`: forced `27 v₃ < 25 ... ` bounds (62)/(63), the
+/-- **BHK Case 6.5.1 kernel** (OPEN — BHK p. 43, (62)–(64)). The hard
+    core of the `n = 5`, `(1/5, −2/5)` case, with the forced bounds
+    (62) `25 v₄ < 27 v₃` and (63) `7 v₃ < 25 v₁` as hypotheses: the
     `[x₁/6, 5x₄/6]` 1234-gap, `j = 1` in BHK's gap chain, the chain
     (64), then the `t = 7/(6v₃)` 2-block and the 5-block
     `(11x₅/6, 13x₅/6)` covering `7x₂/6`, leaving `t = 13x₅/6`
     uncovered. -/
+lemma bhk_s6_case_651_kernel (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK2 : 2 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (c₁ c₄ g : ℕ) (hgpos : 0 < g)
+    (hd : g * 5 = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (hmem : ((1 : ZMod 5), (-2 : ZMod 5)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod 5), (c₄ : ZMod 5)))
+    (h62 : 25 * speeds ⟨3, by omega⟩ < 27 * speeds ⟨2, by omega⟩)
+    (h63 : 7 * speeds ⟨2, by omega⟩ < 25 * speeds ⟨0, by omega⟩) :
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  sorry
+
+/-- **BHK Case 6.5.1, `n = 5`** (BHK p. 43). `(1/5, −2/5) ∈ G`: the
+    orbit is `{(0,0), (1,3), (2,1), (3,4), (4,2)}` (fifths). The point
+    `(1/5, 3/5)` lies in the true (59)/(60) window when
+    `27 v₃ ≤ 25 v₄`; the point `(3/5, 4/5)` when `25 v₁ ≤ 7 v₃`.
+    Otherwise the forced bounds (62)/(63) hold and the kernel applies. -/
 lemma bhk_s6_case_651 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1145,7 +1168,83 @@ lemma bhk_s6_case_651 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hmem : ((1 : ZMod 5), (-2 : ZMod 5)) ∈
       AddSubgroup.zmultiples ((c₁ : ZMod 5), (c₄ : ZMod 5))) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  have hV1R : (0 : ℝ) < speeds ⟨0, by omega⟩ := by exact_mod_cast hpos _
+  have hV3R : (0 : ℝ) < speeds ⟨2, by omega⟩ := by exact_mod_cast hpos _
+  have hV4R : (0 : ℝ) < speeds ⟨3, by omega⟩ := by exact_mod_cast hpos _
+  have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) < speeds ⟨2, by omega⟩ := by
+    exact_mod_cast hsmall
+  have h34R : (speeds ⟨2, by omega⟩ : ℝ) < speeds ⟨3, by omega⟩ := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega))
+  rcases le_or_gt (27 * (speeds ⟨2, by omega⟩ : ℝ))
+    (25 * speeds ⟨3, by omega⟩) with h62 | h62
+  · -- `27 v₃ ≤ 25 v₄`: the point `(1/5, 3/5)`.
+    have hpair : (((1 : ℕ) : ZMod 5), ((3 : ℕ) : ZMod 5)) ∈
+        AddSubgroup.zmultiples ((c₁ : ZMod 5), (c₄ : ZMod 5)) := by
+      have : (((1 : ℕ) : ZMod 5), ((3 : ℕ) : ZMod 5))
+          = ((1 : ZMod 5), (-2 : ZMod 5)) := by decide
+      rw [this]
+      exact hmem
+    obtain ⟨k, hk1, hk4⟩ := bhk_s6_mem_k 5 c₁ c₄ (by omega) 1 3 hpair
+    have hcast1 : ((1 % 5 : ℕ) : ℝ) / ((5 : ℕ) : ℝ) = 1 / 5 := by norm_num
+    have hcast3 : ((3 % 5 : ℕ) : ℝ) / ((5 : ℕ) : ℝ) = 3 / 5 := by norm_num
+    apply bhk_s6_witness_real speeds hmono hpos hsmall D K hD2 hK2 hv3 hv2
+      h43 5 c₁ c₄ g (by omega) hgpos hd hc1 hc4 k
+    · rw [hk1, hcast1]
+      have hb : (0 : ℝ)
+          ≤ (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩) := by
+        positivity
+      linarith
+    · rw [hk1, hcast1]
+      have hb : 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)
+          ≤ 5 / 18 := by
+        rw [div_le_iff₀ (by positivity)]
+        nlinarith
+      linarith
+    · refine Or.inr ?_
+      rw [hk4, hcast3]
+      have hb : (9 : ℝ) / 10
+          ≤ 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩) := by
+        rw [le_div_iff₀ (by positivity)]
+        nlinarith
+      linarith
+  · rcases le_or_gt (25 * (speeds ⟨0, by omega⟩ : ℝ))
+      (7 * speeds ⟨2, by omega⟩) with h63 | h63
+    · -- `25 v₁ ≤ 7 v₃`: the point `(3/5, 4/5)`.
+      have hpair : (((3 : ℕ) : ZMod 5), ((4 : ℕ) : ZMod 5)) ∈
+          AddSubgroup.zmultiples ((c₁ : ZMod 5), (c₄ : ZMod 5)) := by
+        have h3 := bhk_s6_pair_mul 5 c₁ c₄ (-2 : ZMod 5) hmem 3
+        have : (((3 : ℕ) : ZMod 5), ((4 : ℕ) : ZMod 5))
+            = (((3 : ℕ) : ZMod 5), ((3 : ℕ) : ZMod 5) * (-2 : ZMod 5)) := by
+          decide
+        rw [this]
+        exact h3
+      obtain ⟨k, hk1, hk4⟩ := bhk_s6_mem_k 5 c₁ c₄ (by omega) 3 4 hpair
+      have hcast3 : ((3 % 5 : ℕ) : ℝ) / ((5 : ℕ) : ℝ) = 3 / 5 := by norm_num
+      have hcast4 : ((4 % 5 : ℕ) : ℝ) / ((5 : ℕ) : ℝ) = 4 / 5 := by norm_num
+      apply bhk_s6_witness_real speeds hmono hpos hsmall D K hD2 hK2 hv3 hv2
+        h43 5 c₁ c₄ g (by omega) hgpos hd hc1 hc4 k
+      · rw [hk1, hcast3]
+        have hb : (0 : ℝ)
+            ≤ (speeds ⟨0, by omega⟩ : ℝ) / (3 * speeds ⟨2, by omega⟩) := by
+          positivity
+        linarith
+      · rw [hk1, hcast3]
+        have hb : 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩)
+            ≤ 7 / 30 := by
+          rw [div_le_iff₀ (by positivity)]
+          nlinarith
+        linarith
+      · refine Or.inr ?_
+        rw [hk4, hcast4]
+        have hb : (7 : ℝ) / 10
+            ≤ 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * speeds ⟨2, by omega⟩) := by
+          rw [le_div_iff₀ (by positivity)]
+          nlinarith
+        linarith
+    · -- Forced bounds (62)/(63): the ad hoc kernel.
+      exact bhk_s6_case_651_kernel speeds hmono hpos hsmall D K hD2 hK2
+        hv3 hv2 h43 c₁ c₄ g hgpos hd hc1 hc4 hmem
+        (by exact_mod_cast h62) (by exact_mod_cast h63)
 
 /-- **Wrapped rectangle window.** For `ρ ∈ [0, 1)` and an anchored window
     `[c, c + L]` with `0 ≤ c < 1` that may wrap past `1`:
