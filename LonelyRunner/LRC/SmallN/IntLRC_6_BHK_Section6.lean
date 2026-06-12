@@ -60,6 +60,70 @@ open MeasureTheory Set
 
 namespace BHK
 
+/-- **BHK §6 orbit lemma (PROVED).** If `D ∤ V₁` then the orbit
+    `{V₁·j/D}` (j ∈ ℕ) has step `g/D ≤ 1/2` (`g := gcd(D, V₁) ≤ D/2`),
+    so it hits every window `[lo, hi] ⊆ [0, 1)` of length `≥ 1/2`. This
+    is the "since `{v₁t₀} ≠ 0`, there exists a `j` satisfying (59)"
+    step of BHK §6 (the 1-D version of observation (11)). -/
+lemma bhk_s6_find_j (V1 D : ℕ) (hD : 0 < D) (hndvd : ¬ D ∣ V1)
+    (lo hi : ℝ) (hlo : 0 ≤ lo) (hhi : hi < 1) (hgap : 1 / 2 ≤ hi - lo) :
+    ∃ j : ℕ, lo ≤ Int.fract (((V1 * j : ℕ) : ℝ) / D) ∧
+      Int.fract (((V1 * j : ℕ) : ℝ) / D) ≤ hi := by
+  set g : ℕ := Nat.gcd D V1 with hg_def
+  have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ hD
+  have hgD : g ∣ D := Nat.gcd_dvd_left D V1
+  have hg_lt : g < D := by
+    rcases lt_or_eq_of_le (Nat.le_of_dvd hD hgD) with h | h
+    · exact h
+    · exact absurd (h ▸ Nat.gcd_dvd_right D V1) hndvd
+  -- `D = g·D'` with `D' ≥ 2`, so `2g ≤ D`.
+  obtain ⟨D', hD'⟩ := hgD
+  have hD'2 : 2 ≤ D' := by
+    rcases (by omega : D' = 0 ∨ D' = 1 ∨ 2 ≤ D') with rfl | rfl | h
+    · rw [mul_zero] at hD'; omega
+    · rw [mul_one] at hD'; omega
+    · exact h
+  have h2g : 2 * g ≤ D := by
+    calc 2 * g = g * 2 := by ring
+    _ ≤ g * D' := Nat.mul_le_mul_left g hD'2
+    _ = D := hD'.symm
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hD
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg_pos
+  -- Target residue: the smallest multiple of `g` at or above `lo·D`.
+  set m : ℕ := ⌈lo * (D : ℝ) / g⌉₊ with hm_def
+  have hm_ge : lo * (D : ℝ) / g ≤ m := Nat.le_ceil _
+  have hm_lt : (m : ℝ) < lo * (D : ℝ) / g + 1 :=
+    Nat.ceil_lt_add_one (by positivity)
+  have hmg_ge : lo * (D : ℝ) ≤ (m : ℝ) * g := by
+    rw [div_le_iff₀ hgR] at hm_ge; linarith
+  have hmg_le : (m : ℝ) * g ≤ hi * D := by
+    have h1 : (m : ℝ) * g < lo * (D : ℝ) + g := by
+      have h := mul_lt_mul_of_pos_right hm_lt hgR
+      rwa [add_mul, one_mul, div_mul_cancel₀ _ hgR.ne'] at h
+    have h2 : (g : ℝ) ≤ (hi - lo) * D := by
+      have h2g' : (2 : ℝ) * g ≤ D := by exact_mod_cast h2g
+      have h3 := mul_le_mul_of_nonneg_right hgap hDR.le
+      linarith
+    nlinarith
+  have hmg_lt_D : m * g < D := by
+    have hreal : ((m * g : ℕ) : ℝ) < (D : ℝ) := by
+      push_cast
+      have : hi * (D : ℝ) < D := by nlinarith
+      linarith
+    exact_mod_cast hreal
+  -- Bezout: `V₁·t ≡ g (mod D)`; then `j := t·m` lands on `m·g/D`.
+  obtain ⟨t, ht⟩ := bhk_s7_bezout_mod D V1 hD
+  rw [show Nat.gcd D V1 % D = g from by rw [← hg_def, Nat.mod_eq_of_lt hg_lt]]
+    at ht
+  refine ⟨t * m, ?_⟩
+  have hmod : V1 * (t * m) % D = m * g := by
+    rw [show t * m = m * t from mul_comm t m, bhk_s7_mul_mod V1 t m D, ht,
+        show g * m = m * g from mul_comm g m, Nat.mod_eq_of_lt hmg_lt_D]
+  rw [bhk_fract_nat_div _ D hD, hmod]
+  constructor
+  · rw [le_div_iff₀ hDR]; push_cast; linarith
+  · rw [div_le_iff₀ hDR]; push_cast; linarith
+
 /-- **BHK §6, Lemma 22 (PROVED).** If `[a, b]` is a 123-gap of length at
     least `1/(3 v₃)` (BHK's `|I| ≥ 1/3` in the `v₃ = 1` normalisation)
     containing a time `t` at which runner 4 sits exactly opposite the
