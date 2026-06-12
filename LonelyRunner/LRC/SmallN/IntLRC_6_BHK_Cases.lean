@@ -1,5 +1,6 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Lemma4
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_MainLemma
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section5
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section7
 
 /-!
@@ -37,8 +38,8 @@ theorem bhk_case_v1t0_zero (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
     (ht0 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) *
               (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) = 0) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 :=
+  bhk_s5_main speeds hmono hpos hgcd hsmall ht0
 
 /-- **BHK §6.** Case `{v_3 t_0} = 0` under "small `v_1`" (`3 v_1 < v_3`).
     Applies the Main Lemma to a specific rectangle constructed from the
