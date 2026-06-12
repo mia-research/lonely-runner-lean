@@ -60,6 +60,113 @@ open MeasureTheory Set
 
 namespace BHK
 
+/-- **BHK §6, Lemma 22 (PROVED).** If `[a, b]` is a 123-gap of length at
+    least `1/(3 v₃)` (BHK's `|I| ≥ 1/3` in the `v₃ = 1` normalisation)
+    containing a time `t` at which runner 4 sits exactly opposite the
+    origin (`{v₄ t} = 1/2`), then a lonely time exists.
+
+    Proof: runner 4 is safe on `W = [t − 1/(3v₄), t + 1/(3v₄)]`. One of
+    `[t, t + 1/(3v₄)]`, `[t − 1/(3v₄), t]`, `[a, b]` lies inside both
+    `[a, b]` and `W` and is longer than one 5-block (`1/(3 v₅)`), so it
+    contains a 5-safe point, which is then safe for all five runners. -/
+theorem bhk_s6_lemma_22 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (a b : ℝ) (hab : a ≤ b)
+    (h123gap : Set.Icc a b ⊆ (unsafeOf speeds ⟨0, by omega⟩ ∪
+                              unsafeOf speeds ⟨1, by omega⟩ ∪
+                              unsafeOf speeds ⟨2, by omega⟩)ᶜ)
+    (hlen : 1 / (3 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ b - a)
+    (t : ℝ) (ht : t ∈ Set.Icc a b)
+    (h4 : Int.fract ((speeds ⟨3, by omega⟩ : ℝ) * t) = 1 / 2) :
+    ∃ t' : ℝ, ∀ i, circDist ((speeds i : ℝ) * t') ≥ (1 : ℝ) / 6 := by
+  have hv3pos : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos _
+  have hv4pos : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos _
+  have hv5pos : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hpos _
+  have hv34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega))
+  have hv45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (by omega))
+  set v3 : ℝ := (speeds ⟨2, by omega⟩ : ℝ) with hv3_def
+  set v4 : ℝ := (speeds ⟨3, by omega⟩ : ℝ) with hv4_def
+  set v5 : ℝ := (speeds ⟨4, by omega⟩ : ℝ) with hv5_def
+  have hw_pos : (0 : ℝ) < 1 / (3 * v4) := by positivity
+  -- Runner 4 is safe throughout `W = [t − 1/(3v₄), t + 1/(3v₄)]`.
+  have h4safe : ∀ s ∈ Set.Icc (t - 1 / (3 * v4)) (t + 1 / (3 * v4)),
+      s ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+    intro s hs hmem
+    have hδlo : -(1 / (3 * v4)) ≤ s - t := by
+      have := hs.1; linarith
+    have hδhi : s - t ≤ 1 / (3 * v4) := by
+      have := hs.2; linarith
+    have hself : v4 * (1 / (3 * v4)) = 1 / 3 := by field_simp
+    have hmlo : -(1 / 3 : ℝ) ≤ v4 * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hδlo hv4pos.le
+      rw [mul_neg, hself] at h
+      linarith
+    have hmhi : v4 * (s - t) ≤ 1 / 3 := by
+      have h := mul_le_mul_of_nonneg_left hδhi hv4pos.le
+      rw [hself] at h
+      linarith
+    have h0 : 0 ≤ Int.fract (v4 * t) + v4 * (s - t) := by
+      rw [h4]; linarith
+    have h1 : Int.fract (v4 * t) + v4 * (s - t) < 1 := by
+      rw [h4]; linarith
+    have hfs := bhk_fract_translate v4 t (s - t) h0 h1
+    rw [show t + (s - t) = s from by ring] at hfs
+    rw [mem_unsafeOf_iff] at hmem
+    unfold circDist at hmem
+    rw [hfs, h4] at hmem
+    rcases min_lt_iff.mp hmem with h | h <;> linarith
+  -- A sub-interval of `[a, b] ∩ W` longer than one 5-block.
+  have h45len : 1 / (3 * v5) < 1 / (3 * v4) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  have h35len : 1 / (3 * v5) < 1 / (3 * v3) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  suffices key : ∃ c d : ℝ, c ≤ d ∧ Set.Icc c d ⊆ Set.Icc a b ∧
+      (∀ s ∈ Set.Icc c d, s ∉ unsafeOf speeds ⟨3, by omega⟩) ∧
+      1 / (3 * v5) < d - c by
+    obtain ⟨c, d, hcd, hsubI, h4safe', hlength⟩ := key
+    by_cases h5 : ∀ s ∈ Set.Icc c d, s ∈ unsafeOf speeds ⟨4, by omega⟩
+    · have hbnd := block_length_bound speeds ⟨4, by omega⟩ (hpos _) c d hcd
+        (fun s hs => h5 s hs)
+      rw [← hv5_def] at hbnd
+      linarith
+    · push_neg at h5
+      obtain ⟨s, hsI, hs5⟩ := h5
+      refine ⟨s, fun i => ?_⟩
+      have hs123 := h123gap (hsubI hsI)
+      have hs4 := h4safe' s hsI
+      have hnot : s ∉ unsafeOf speeds i →
+          circDist ((speeds i : ℝ) * s) ≥ 1 / 6 := fun hn =>
+        not_lt.mp (fun hlt => hn ((mem_unsafeOf_iff speeds i s).mpr hlt))
+      fin_cases i
+      · exact hnot (fun h => hs123 (Or.inl (Or.inl h)))
+      · exact hnot (fun h => hs123 (Or.inl (Or.inr h)))
+      · exact hnot (fun h => hs123 (Or.inr h))
+      · exact hnot hs4
+      · exact hnot hs5
+  by_cases hb : t + 1 / (3 * v4) ≤ b
+  · -- Right half-window fits: `[t, t + 1/(3v₄)]`.
+    refine ⟨t, t + 1 / (3 * v4), by linarith,
+      Set.Icc_subset_Icc ht.1 hb,
+      fun s hs => h4safe s ⟨by have := hs.1; linarith, hs.2⟩,
+      by linarith⟩
+  by_cases ha : a ≤ t - 1 / (3 * v4)
+  · -- Left half-window fits: `[t − 1/(3v₄), t]`.
+    refine ⟨t - 1 / (3 * v4), t, by linarith,
+      Set.Icc_subset_Icc ha ht.2,
+      fun s hs => h4safe s ⟨hs.1, by have := hs.2; linarith⟩,
+      by linarith⟩
+  · -- `[a, b] ⊆ W` entirely.
+    push_neg at hb ha
+    refine ⟨a, b, hab, subset_rfl,
+      fun s hs => h4safe s ⟨by have := hs.1; linarith,
+                             by have := hs.2; linarith⟩,
+      by linarith⟩
+
 /-- **BHK §6 analytic core** (OPEN — BHK pp. 40–43). Integer speeds with
     the §6 arithmetic structure exposed: `D := v₃ - v₂ ≥ 2` divides both
     `v₂` and `v₃` (`v₃ = k·D`, `v₂ = (k−1)·D`, `k ≥ 2`) but not `v₁`,
