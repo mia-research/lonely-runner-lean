@@ -1,6 +1,7 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Lemma4
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_MainLemma
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section5
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section6
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section7
 
 /-!
@@ -59,8 +60,8 @@ theorem bhk_case_t0_zero (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
               (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) = 0)
     (hv1t0 : Int.fract ((speeds ⟨0, by omega⟩ : ℝ) *
               (1 / ((speeds ⟨2, by omega⟩ : ℝ) - speeds ⟨1, by omega⟩))) ≠ 0) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 :=
+  bhk_s6_main speeds hmono hpos hgcd hsmall ht0 hv1t0
 
 /-- **BHK §§2+7.** Generic case: `3 v_1 < v_3` with both `{v_3 t_0} ≠ 0` and
     `{v_1 t_0} ≠ 0` (the torus subgroup `G = ⟨({v_3 t_0}, {v_1 t_0})⟩` is not

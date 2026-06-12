@@ -164,7 +164,8 @@ theorem bhk_s5_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         have hwi : w i = D := by
           show (if i.val = 0 then D else speeds i) = D
           exact if_pos hi
-        have h1j : (⟨1, by omega⟩ : Fin 5) ≤ j := Fin.le_def.mpr (by omega)
+        have h1j : (⟨1, by omega⟩ : Fin 5) ≤ j :=
+          Fin.le_def.mpr (show 1 ≤ j.val by omega)
         rw [hwi, hw_ne j hj]
         exact lt_of_lt_of_le hDV2 (hmono.monotone h1j)
       · have hj : j.val ≠ 0 := by omega
@@ -209,7 +210,6 @@ theorem bhk_s5_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     · rw [show ((speeds i : ℕ) : ℝ) = ((w i : ℕ) : ℝ) from by rw [hw_ne i hi]]
       exact hwin i
   · -- `k ≥ 3`: Case 5.1.
-    exact bhk_s5_k_ge_3 speeds hmono hpos hgcd hsmall k D hk3 hD_def
-      (by rw [mul_comm] at hkD; exact hkD)
+    exact bhk_s5_k_ge_3 speeds hmono hpos hgcd hsmall k D hk3 hD_def hkD
 
 end BHK
