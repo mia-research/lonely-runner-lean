@@ -1220,14 +1220,618 @@ lemma bhk_s6_case_621 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
   sorry
 
-/-- **BHK Case 6.2.2** (OPEN — BHK pp. 42–43). `(1/n, 1/n) ∈ G`,
+/-- **§6.2 orbit-coordinate gap test.** For `t = j/D + s` and a runner of
+    speed `g·c` (with `D = g·n`), if `(c·j mod n)/n + v·s` lies in the
+    unit window `[off + 1/6, off + 5/6]`, then `t` is in the runner's
+    safe gap with index `c·j div n + off`. -/
+lemma bhk_s6_622_in_gap (speeds : Fin 5 → ℕ) (i : Fin 5)
+    (hpos : ∀ i, 0 < speeds i)
+    (n c g D : ℕ) (hn : 0 < n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc : g * c = speeds i) (j : ℕ) (s : ℝ) (off : ℤ)
+    (hlo : (off : ℝ) + 1/6 ≤ ((c * j % n : ℕ) : ℝ) / n + (speeds i : ℝ) * s)
+    (hhi : ((c * j % n : ℕ) : ℝ) / n + (speeds i : ℝ) * s ≤ (off : ℝ) + 5/6) :
+    ((j : ℝ) / D + s) ∉ unsafeOf speeds i := by
+  have hDpos : 0 < D := hd ▸ Nat.mul_pos hgpos hn
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hgpos
+  have hVR : (0 : ℝ) < (speeds i : ℝ) := by exact_mod_cast hpos i
+  have hcoord : (speeds i : ℝ) * ((j : ℝ) / D) = ((c * j : ℕ) : ℝ) / n := by
+    rw [← hc, ← hd]
+    push_cast
+    rw [show (g : ℝ) * c * ((j : ℝ) / ((g : ℝ) * n)) = (c : ℝ) * j / n * (g / g) from
+          by ring,
+        div_self hgR.ne', mul_one]
+  have hdm : ((c * j / n : ℕ) : ℝ) * n + ((c * j % n : ℕ) : ℝ) = ((c * j : ℕ) : ℝ) := by
+    exact_mod_cast Nat.div_add_mod' (c * j) n
+  have hsplit : ((c * j : ℕ) : ℝ) / n
+      = ((c * j / n : ℕ) : ℝ) + ((c * j % n : ℕ) : ℝ) / n := by
+    rw [← hdm, add_div, mul_div_assoc, div_self hnR.ne', mul_one]
+  have hVt : (speeds i : ℝ) * ((j : ℝ) / D + s)
+      = ((c * j / n : ℕ) : ℝ) + (((c * j % n : ℕ) : ℝ) / n + (speeds i : ℝ) * s) := by
+    rw [mul_add, hcoord, hsplit]; ring
+  apply not_mem_unsafeOf_of_in_gap speeds i (hpos i) (((c * j / n : ℕ) : ℤ) + off)
+  · rw [div_le_iff₀ hVR, Int.cast_add, Int.cast_natCast]
+    nlinarith [hVt, hlo]
+  · rw [le_div_iff₀ hVR, Int.cast_add, Int.cast_natCast]
+    nlinarith [hVt, hhi]
+
+/-- **§6.2.2 123-exclusion (BHK p. 42).** With `K ≥ 3` and a γ-index
+    `j` whose first coordinate `a/n` lies in `[1/6, 1/2]`, every `t` in
+    `[j/D + 1/(4v₃), j/D + 5/(6v₃)]` is safe for runners 1, 2, 3. -/
+lemma bhk_s6_622_excl123 (speeds : Fin 5 → ℕ)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK3 : 3 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (n c₁ g : ℕ) (hn : 2 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (j a : ℕ) (hk1 : c₁ * j % n = a) (ha_lo : n ≤ 6 * a) (ha_hi : 2 * a ≤ n)
+    (t : ℝ)
+    (ht_lo : (j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ t)
+    (ht_hi : t ≤ (j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    t ∉ unsafeOf speeds ⟨0, by omega⟩ ∧ t ∉ unsafeOf speeds ⟨1, by omega⟩ ∧
+    t ∉ unsafeOf speeds ⟨2, by omega⟩ := by
+  have hv1R : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv2R : (0 : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hnR : (0 : ℝ) < n := by exact_mod_cast (by omega : 0 < n)
+  have hsmallR : 3 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsmall
+  have h32 : 2 * speeds ⟨2, by omega⟩ ≤ 3 * speeds ⟨1, by omega⟩ := by
+    rw [hv3, hv2]
+    calc 2 * (K * D) = (2 * K) * D := by ring
+      _ ≤ (3 * (K - 1)) * D := Nat.mul_le_mul_right D (by omega)
+      _ = 3 * ((K - 1) * D) := by ring
+  have h32R : 2 * (speeds ⟨2, by omega⟩ : ℝ) ≤ 3 * (speeds ⟨1, by omega⟩ : ℝ) := by
+    exact_mod_cast h32
+  have h23 : speeds ⟨1, by omega⟩ ≤ speeds ⟨2, by omega⟩ := by
+    rw [hv3, hv2]
+    exact Nat.mul_le_mul_right D (by omega)
+  have h23R : (speeds ⟨1, by omega⟩ : ℝ) ≤ (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast h23
+  set s : ℝ := t - (j : ℝ) / D with hs_def
+  have hts : t = (j : ℝ) / D + s := by rw [hs_def]; ring
+  have hs_lo : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ s := by
+    rw [hs_def]; linarith
+  have hs_hi : s ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [hs_def]; linarith
+  have hs_pos : 0 < s := lt_of_lt_of_le (by positivity) hs_lo
+  have ha_loR : (1 : ℝ) / 6 ≤ (a : ℝ) / n := by
+    rw [le_div_iff₀ hnR]
+    have : (n : ℝ) ≤ 6 * a := by exact_mod_cast ha_lo
+    linarith
+  have ha_hiR : (a : ℝ) / n ≤ 1 / 2 := by
+    rw [div_le_iff₀ hnR]
+    have : 2 * (a : ℝ) ≤ n := by exact_mod_cast ha_hi
+    linarith
+  refine ⟨?_, ?_, ?_⟩ <;> rw [hts]
+  · -- Runner 1: window [1/6, 5/6] via a/n ∈ [1/6, 1/2], v₁s ∈ (0, 5/18].
+    apply bhk_s6_622_in_gap speeds ⟨0, by omega⟩ hpos n c₁ g D (by omega) hgpos
+      hd hc1 j s 0
+    · rw [hk1, Int.cast_zero]
+      have h2 : 0 ≤ (speeds ⟨0, by omega⟩ : ℝ) * s :=
+        mul_nonneg (le_of_lt hv1R) (le_of_lt hs_pos)
+      linarith
+    · rw [hk1, Int.cast_zero]
+      have hsa : (speeds ⟨0, by omega⟩ : ℝ) * s
+          ≤ (speeds ⟨0, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hs_hi (le_of_lt hv1R)
+      have hb : (speeds ⟨0, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ 5 / 18 := by
+        rw [show (speeds ⟨0, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = 5 * (speeds ⟨0, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            div_le_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith [hsmallR]
+      linarith
+  · -- Runner 2: mod term vanishes; window via 2v₃ ≤ 3v₂ and v₂ ≤ v₃.
+    apply bhk_s6_622_in_gap speeds ⟨1, by omega⟩ hpos n (n * (K - 1)) g D (by omega)
+      hgpos hd (by rw [hv2, ← hd]; ring) j s 0
+    all_goals rw [show n * (K - 1) * j % n = 0 from
+      by rw [mul_assoc]; exact Nat.mul_mod_right n ((K - 1) * j)]
+    · rw [Int.cast_zero, Nat.cast_zero, zero_div]
+      have hsa : (speeds ⟨1, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ (speeds ⟨1, by omega⟩ : ℝ) * s :=
+        mul_le_mul_of_nonneg_left hs_lo (le_of_lt hv2R)
+      have hb : (1 : ℝ) / 6
+          ≤ (speeds ⟨1, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))) := by
+        rw [show (speeds ⟨1, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = (speeds ⟨1, by omega⟩ : ℝ) / (4 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            le_div_iff₀ (by positivity)]
+        nlinarith [h32R]
+      linarith
+    · rw [Int.cast_zero, Nat.cast_zero, zero_div]
+      have hsa : (speeds ⟨1, by omega⟩ : ℝ) * s
+          ≤ (speeds ⟨1, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hs_hi (le_of_lt hv2R)
+      have hb : (speeds ⟨1, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ 5 / 6 := by
+        rw [show (speeds ⟨1, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = 5 * (speeds ⟨1, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            div_le_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith [h23R, hv3R]
+      linarith
+  · -- Runner 3: mod term vanishes; v₃s ∈ [1/4, 5/6] exactly.
+    apply bhk_s6_622_in_gap speeds ⟨2, by omega⟩ hpos n (n * K) g D (by omega)
+      hgpos hd (by rw [hv3, ← hd]; ring) j s 0
+    all_goals rw [show n * K * j % n = 0 from
+      by rw [mul_assoc]; exact Nat.mul_mod_right n (K * j)]
+    · rw [Int.cast_zero, Nat.cast_zero, zero_div]
+      have hsa : (speeds ⟨2, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ (speeds ⟨2, by omega⟩ : ℝ) * s :=
+        mul_le_mul_of_nonneg_left hs_lo (le_of_lt hv3R)
+      have hb : (speeds ⟨2, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+          = 1 / 4 := by field_simp
+      linarith
+    · rw [Int.cast_zero, Nat.cast_zero, zero_div]
+      have hsa : (speeds ⟨2, by omega⟩ : ℝ) * s
+          ≤ (speeds ⟨2, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hs_hi (le_of_lt hv3R)
+      have hb : (speeds ⟨2, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+          = 5 / 6 := by field_simp
+      linarith
+
+/-- **§6.2.2 β-index.** For `n ≥ 3`, an index with both coordinates equal
+    to some `b/n ∈ [1/6, 1/3]` (witness `b = ⌈n/6⌉`). -/
+lemma bhk_s6_622_beta (n c₁ c₄ : ℕ) (hn : 3 ≤ n)
+    (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
+    ∃ k b : ℕ, c₁ * k % n = b ∧ c₄ * k % n = b ∧ n ≤ 6 * b ∧ 3 * b ≤ n := by
+  set b : ℕ := (n + 5) / 6 with hb_def
+  have hb_lt : b < n := by omega
+  have hpair : (((b : ℕ) : ZMod n), ((b : ℕ) : ZMod n)) ∈
+      AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n)) := by
+    have h := bhk_s6_pair_mul n c₁ c₄ (1 : ZMod n) hmem b
+    rwa [mul_one] at h
+  obtain ⟨k, hk1, hk4⟩ := bhk_s6_mem_k n c₁ c₄ (by omega) b b hpair
+  rw [Nat.mod_eq_of_lt hb_lt] at hk1 hk4
+  exact ⟨k, b, hk1, hk4, by omega, by omega⟩
+
+-- Large sequential coverage proof; the default heartbeat budget is
+-- exceeded by the per-runner window checks and block extraction.
+set_option maxHeartbeats 1000000 in
+/-- **§6.2.2 flanking bound (BHK p. 42): `2v₄ < v₅`.** Both endpoints of
+    the 123-gap `[j/D + 1/(4v₃), j/D + 5/(6v₃)]` exclude runner 4, so
+    they land in distinct 5-blocks; the stretch between consecutive
+    5-blocks must then be covered by runner 4 alone, and
+    `block_containment` bounds its length `(2/3)/v₅` by `1/(3v₄)`. -/
+lemma bhk_s6_622_flank (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK3 : 3 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hn : 2 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (j a : ℕ) (hk1 : c₁ * j % n = a) (hk4 : c₄ * j % n = a)
+    (ha_lo : n ≤ 3 * a) (ha_hi : 2 * a ≤ n)
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    2 * (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5R : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hnR : (0 : ℝ) < n := by exact_mod_cast (by omega : 0 < n)
+  have h43R : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast h43
+  have hv34R : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+  have hv35R : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 4 by omega))
+  have ha_loR : (1 : ℝ) / 3 ≤ (a : ℝ) / n := by
+    rw [le_div_iff₀ hnR]
+    have : (n : ℝ) ≤ 3 * a := by exact_mod_cast ha_lo
+    linarith
+  have ha_hiR : (a : ℝ) / n ≤ 1 / 2 := by
+    rw [div_le_iff₀ hnR]
+    have : 2 * (a : ℝ) ≤ n := by exact_mod_cast ha_hi
+    linarith
+  -- Endpoint P := j/D + 1/(4v₃) is covered only by runner 5.
+  obtain ⟨iP, hiP⟩ := h_no_lonely
+    ((j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+  rw [← mem_unsafeOf_iff] at hiP
+  obtain ⟨hP0, hP1, hP2⟩ := bhk_s6_622_excl123 speeds hpos hsmall D K hD2 hK3
+    hv3 hv2 n c₁ g hn hgpos hd hc1 j a hk1 (by omega) ha_hi _ (le_refl _)
+    (by
+      have : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))
+          ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [hv3R]
+      linarith)
+  have hP3 : ((j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+    apply bhk_s6_622_in_gap speeds ⟨3, by omega⟩ hpos n c₄ g D (by omega) hgpos
+      hd hc4 j _ 0
+    · rw [hk4, Int.cast_zero]
+      have h2 : (0 : ℝ) ≤ (speeds ⟨3, by omega⟩ : ℝ)
+          * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))) := by positivity
+      linarith
+    · rw [hk4, Int.cast_zero]
+      have hb : (speeds ⟨3, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ 1 / 3 := by
+        rw [show (speeds ⟨3, by omega⟩ : ℝ) * (1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = (speeds ⟨3, by omega⟩ : ℝ) / (4 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            div_le_iff₀ (by positivity)]
+        nlinarith [h43R]
+      linarith
+  have hiP4 : iP = ⟨4, by omega⟩ := by
+    fin_cases iP
+    · exact absurd hiP hP0
+    · exact absurd hiP hP1
+    · exact absurd hiP hP2
+    · exact absurd hiP hP3
+    · rfl
+  rw [hiP4, mem_unsafeOf_iff_bhkB] at hiP
+  obtain ⟨kP, hkP⟩ := hiP
+  -- Endpoint Q := j/D + 5/(6v₃) is covered only by runner 5.
+  obtain ⟨iQ, hiQ⟩ := h_no_lonely
+    ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+  rw [← mem_unsafeOf_iff] at hiQ
+  obtain ⟨hQ0, hQ1, hQ2⟩ := bhk_s6_622_excl123 speeds hpos hsmall D K hD2 hK3
+    hv3 hv2 n c₁ g hn hgpos hd hc1 j a hk1 (by omega) ha_hi _
+    (by
+      have : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))
+          ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+        rw [div_le_div_iff₀ (by positivity) (by positivity)]
+        nlinarith [hv3R]
+      linarith)
+    (le_refl _)
+  have hQ3 : ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+    apply bhk_s6_622_in_gap speeds ⟨3, by omega⟩ hpos n c₄ g D (by omega) hgpos
+      hd hc4 j _ 1
+    · rw [hk4, Int.cast_one]
+      have hb : (5 : ℝ) / 6 ≤ (speeds ⟨3, by omega⟩ : ℝ)
+          * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) := by
+        rw [show (speeds ⟨3, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            le_div_iff₀ (by positivity)]
+        nlinarith [hv34R]
+      linarith
+    · rw [hk4, Int.cast_one]
+      have hb : (speeds ⟨3, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+          ≤ 10 / 9 := by
+        rw [show (speeds ⟨3, by omega⟩ : ℝ) * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+              = 5 * (speeds ⟨3, by omega⟩ : ℝ) / (6 * (speeds ⟨2, by omega⟩ : ℝ)) from
+              by ring,
+            div_le_div_iff₀ (by positivity) (by norm_num)]
+        nlinarith [h43R]
+      linarith
+  have hiQ4 : iQ = ⟨4, by omega⟩ := by
+    fin_cases iQ
+    · exact absurd hiQ hQ0
+    · exact absurd hiQ hQ1
+    · exact absurd hiQ hQ2
+    · exact absurd hiQ hQ3
+    · rfl
+  rw [hiQ4, mem_unsafeOf_iff_bhkB] at hiQ
+  obtain ⟨kQ, hkQ⟩ := hiQ
+  -- v₅·(Q − P) = 7v₅/(12v₃) > 7/12, so kQ ≥ kP + 1.
+  have hkP_lo := neg_lt_of_abs_lt hkP
+  have hkP_hi := lt_of_abs_lt hkP
+  have hkQ_lo := neg_lt_of_abs_lt hkQ
+  have hkQ_hi := lt_of_abs_lt hkQ
+  have hQPdiff : (speeds ⟨4, by omega⟩ : ℝ)
+        * ((j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+      - (speeds ⟨4, by omega⟩ : ℝ)
+        * ((j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)))
+      = 7 * (speeds ⟨4, by omega⟩ : ℝ) / (12 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    field_simp
+    ring
+  have hQPgt : (7 : ℝ) / 12
+      < 7 * (speeds ⟨4, by omega⟩ : ℝ) / (12 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [div_lt_div_iff₀ (by norm_num) (by positivity)]
+    nlinarith [hv35R]
+  have hkPQ : kP + 1 ≤ kQ := by
+    have h1 : (kP : ℝ) + 1 / 4 < (kQ : ℝ) := by linarith
+    have h2 : kP < kQ := by exact_mod_cast (by linarith : (kP : ℝ) < (kQ : ℝ))
+    omega
+  -- The stretch between 5-blocks kP and kP+1 lies in [P, Q] and must be
+  -- covered by runner 4 alone.
+  have hsub : Set.Icc (((kP : ℝ) + 1/6) / (speeds ⟨4, by omega⟩ : ℝ))
+                       (((kP : ℝ) + 5/6) / (speeds ⟨4, by omega⟩ : ℝ))
+      ⊆ unsafeOf speeds ⟨3, by omega⟩ := by
+    intro u hu
+    obtain ⟨huL, huR⟩ := hu
+    have huP : (j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ u := by
+      refine le_trans ?_ huL
+      rw [le_div_iff₀ hv5R, mul_comm]
+      linarith
+    have huQ : u ≤ (j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      refine le_trans huR ?_
+      rw [div_le_iff₀ hv5R, mul_comm]
+      have : ((kP : ℝ) + 1) - 1/6 ≤ (kQ : ℝ) - 1/6 := by
+        have : (kP : ℝ) + 1 ≤ kQ := by exact_mod_cast hkPQ
+        linarith
+      linarith
+    obtain ⟨iu, hiu⟩ := h_no_lonely u
+    rw [← mem_unsafeOf_iff] at hiu
+    obtain ⟨hu0, hu1, hu2⟩ := bhk_s6_622_excl123 speeds hpos hsmall D K hD2 hK3
+      hv3 hv2 n c₁ g hn hgpos hd hc1 j a hk1 (by omega) ha_hi u huP huQ
+    have hu4 : u ∉ unsafeOf speeds ⟨4, by omega⟩ :=
+      not_mem_unsafeOf_of_in_gap speeds ⟨4, by omega⟩ (hpos _) kP u huL huR
+    fin_cases iu
+    · exact absurd hiu hu0
+    · exact absurd hiu hu1
+    · exact absurd hiu hu2
+    · exact hiu
+    · exact absurd hiu hu4
+  have hLR : ((kP : ℝ) + 1/6) / (speeds ⟨4, by omega⟩ : ℝ)
+      ≤ ((kP : ℝ) + 5/6) / (speeds ⟨4, by omega⟩ : ℝ) := by
+    rw [div_le_div_iff₀ hv5R hv5R]
+    nlinarith [hv5R]
+  obtain ⟨m, hm_lo, hm_hi⟩ := block_containment speeds ⟨3, by omega⟩ (hpos _)
+    _ _ hLR hsub
+  -- v₄ · (stretch length) < 1/3 with stretch length (2/3)/v₅.
+  have hstretch : (speeds ⟨3, by omega⟩ : ℝ)
+        * (((kP : ℝ) + 5/6) / (speeds ⟨4, by omega⟩ : ℝ))
+      - (speeds ⟨3, by omega⟩ : ℝ)
+        * (((kP : ℝ) + 1/6) / (speeds ⟨4, by omega⟩ : ℝ))
+      = (2/3) * (speeds ⟨3, by omega⟩ : ℝ) / (speeds ⟨4, by omega⟩ : ℝ) := by
+    field_simp
+    ring
+  have hlen : (2/3) * (speeds ⟨3, by omega⟩ : ℝ) / (speeds ⟨4, by omega⟩ : ℝ)
+      < 1/3 := by linarith
+  rw [div_lt_iff₀ hv5R] at hlen
+  linarith
+
+-- Large sequential coverage proof; the default heartbeat budget is
+-- exceeded by the per-runner window checks and block extraction.
+set_option maxHeartbeats 1000000 in
+/-- **§6.2.2 final contradiction, `n ≥ 3` (BHK pp. 42–43).** With the
+    β-index (`b/n ∈ [1/6, 1/3]`) and the flanking bound `2v₄ < v₅`, the
+    interval `[k/D + 1/(4v₃), k/D + (5/6 − b/n)/v₄]` is a 1234-gap of
+    length `≥ 1/(6v₄) > 1/(3v₅)`, which runner 5 cannot cover. -/
+lemma bhk_s6_622_final (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK3 : 3 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hn : 2 ≤ n) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (k b : ℕ) (hk1 : c₁ * k % n = b) (hk4 : c₄ * k % n = b)
+    (hb_lo : n ≤ 6 * b) (hb_hi : 3 * b ≤ n)
+    (h45 : 2 * (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    False := by
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5R : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hnR : (0 : ℝ) < n := by exact_mod_cast (by omega : 0 < n)
+  have h43R : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast h43
+  have hv34R : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+  have hb_loR : (1 : ℝ) / 6 ≤ (b : ℝ) / n := by
+    rw [le_div_iff₀ hnR]
+    have : (n : ℝ) ≤ 6 * b := by exact_mod_cast hb_lo
+    linarith
+  have hb_hiR : (b : ℝ) / n ≤ 1 / 3 := by
+    rw [div_le_iff₀ hnR]
+    have : 3 * (b : ℝ) ≤ n := by exact_mod_cast hb_hi
+    linarith
+  set A : ℝ := (k : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) with hA_def
+  set B : ℝ := (k : ℝ) / D
+      + (5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ) with hB_def
+  have hAB : A ≤ B := by
+    rw [hA_def, hB_def]
+    have : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))
+        ≤ (5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ (by positivity) hv4R]
+      nlinarith [hb_hiR, h43R, hv3R]
+    linarith
+  have hBQ : B ≤ (k : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [hB_def]
+    have : (5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ)
+        ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ hv4R (by positivity)]
+      nlinarith [hb_loR, hv34R, hv3R]
+    linarith
+  have hsub : Set.Icc A B ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro u hu
+    obtain ⟨huL, huR⟩ := hu
+    obtain ⟨iu, hiu⟩ := h_no_lonely u
+    rw [← mem_unsafeOf_iff] at hiu
+    obtain ⟨hu0, hu1, hu2⟩ := bhk_s6_622_excl123 speeds hpos hsmall D K hD2 hK3
+      hv3 hv2 n c₁ g hn hgpos hd hc1 k b hk1 hb_lo (by omega) u
+      (by rw [hA_def] at huL; exact huL) (le_trans huR hBQ)
+    have hsR_lo : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ u - (k : ℝ) / D := by
+      rw [hA_def] at huL; linarith
+    have hsR_hi : u - (k : ℝ) / D
+        ≤ (5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [hB_def] at huR; linarith
+    have hu3 : u ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+      have h := bhk_s6_622_in_gap speeds ⟨3, by omega⟩ hpos n c₄ g D (by omega)
+        hgpos hd hc4 k (u - (k : ℝ) / D) 0
+        (by
+          rw [hk4, Int.cast_zero]
+          have h2 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) * (u - (k : ℝ) / D) :=
+            mul_pos hv4R (lt_of_lt_of_le (by positivity) hsR_lo)
+          linarith)
+        (by
+          rw [hk4, Int.cast_zero]
+          have hcancel : (speeds ⟨3, by omega⟩ : ℝ)
+              * ((5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ))
+              = 5/6 - (b : ℝ) / n := by field_simp
+          have hsa : (speeds ⟨3, by omega⟩ : ℝ) * (u - (k : ℝ) / D)
+              ≤ (speeds ⟨3, by omega⟩ : ℝ)
+                * ((5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ)) :=
+            mul_le_mul_of_nonneg_left hsR_hi (le_of_lt hv4R)
+          linarith)
+      rwa [show (k : ℝ) / D + (u - (k : ℝ) / D) = u from by ring] at h
+    fin_cases iu
+    · exact absurd hiu hu0
+    · exact absurd hiu hu1
+    · exact absurd hiu hu2
+    · exact absurd hiu hu3
+    · exact hiu
+  obtain ⟨m, hm_lo, hm_hi⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    A B hAB hsub
+  -- Length contradiction: v₅(B − A) < 1/3 but B − A ≥ 1/(6v₄) > 1/(3v₅).
+  have hBA : 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ B - A := by
+    rw [hA_def, hB_def]
+    have e1 : (5/6 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ)
+        - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+        = (2/3 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      field_simp
+      ring
+    have e2 : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))
+        ≤ (2/3 - (b : ℝ) / n) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ (by positivity) hv4R]
+      nlinarith [hb_hiR, h43R, hv3R]
+    linarith
+  have hlen : (speeds ⟨4, by omega⟩ : ℝ) * B - (speeds ⟨4, by omega⟩ : ℝ) * A
+      < 1/3 := by linarith
+  have hgt : (speeds ⟨4, by omega⟩ : ℝ) * (B - A)
+      ≥ (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))) :=
+    mul_le_mul_of_nonneg_left hBA (le_of_lt hv5R)
+  have hfinal : (1 : ℝ) / 3
+      < (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))) := by
+    rw [show (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+          = (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ)) from
+          by ring,
+        lt_div_iff₀ (by positivity)]
+    nlinarith [h45]
+  nlinarith [hlen, hgt, hfinal]
+
+-- Large sequential coverage proof; the default heartbeat budget is
+-- exceeded by the per-runner window checks and block extraction.
+set_option maxHeartbeats 1000000 in
+/-- **§6.2.2 final contradiction, `n = 2` (BHK p. 43).** Here the γ-index
+    has `a/n = 1/2`; with `2v₄ < v₅` the interval
+    `[j/D + 2/(3v₄), j/D + 5/(6v₃)]` is a 1234-gap of length `≥ 1/(6v₄)`
+    that runner 5 cannot cover. -/
+lemma bhk_s6_622_final_n2 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (D K : ℕ) (hD2 : 2 ≤ D) (hK3 : 3 ≤ K)
+    (hv3 : speeds ⟨2, by omega⟩ = K * D)
+    (hv2 : speeds ⟨1, by omega⟩ = (K - 1) * D)
+    (h43 : 3 * speeds ⟨3, by omega⟩ < 4 * speeds ⟨2, by omega⟩)
+    (n c₁ c₄ g : ℕ) (hn2 : n = 2) (hgpos : 0 < g)
+    (hd : g * n = D) (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
+    (hc4 : g * c₄ = speeds ⟨3, by omega⟩)
+    (j : ℕ) (hk1 : c₁ * j % n = 1) (hk4 : c₄ * j % n = 1)
+    (h45 : 2 * (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ))
+    (h_no_lonely : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1/6) :
+    False := by
+  subst hn2
+  have hv3R : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4R : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5R : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h43R : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast h43
+  have hv34R : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+  set A : ℝ := (j : ℝ) / D + 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) with hA_def
+  set B : ℝ := (j : ℝ) / D + 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) with hB_def
+  have hPA : (j : ℝ) / D + 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ A := by
+    rw [hA_def]
+    have : 1 / (4 * (speeds ⟨2, by omega⟩ : ℝ))
+        ≤ 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h43R, hv3R]
+    linarith
+  have hAB : A ≤ B := by
+    rw [hA_def, hB_def]
+    have : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ))
+        ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [h43R, hv3R, hv34R]
+    linarith
+  have hsub : Set.Icc A B ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+    intro u hu
+    obtain ⟨huL, huR⟩ := hu
+    obtain ⟨iu, hiu⟩ := h_no_lonely u
+    rw [← mem_unsafeOf_iff] at hiu
+    obtain ⟨hu0, hu1, hu2⟩ := bhk_s6_622_excl123 speeds hpos hsmall D K hD2 hK3
+      hv3 hv2 2 c₁ g (le_refl 2) hgpos hd hc1 j 1 hk1 (by omega) (by omega) u
+      (le_trans hPA huL) (by rw [hB_def] at huR; exact huR)
+    have hsR_lo : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ u - (j : ℝ) / D := by
+      rw [hA_def] at huL; linarith
+    have hsR_hi : u - (j : ℝ) / D ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [hB_def] at huR; linarith
+    have hu3 : u ∉ unsafeOf speeds ⟨3, by omega⟩ := by
+      have h := bhk_s6_622_in_gap speeds ⟨3, by omega⟩ hpos 2 c₄ g D (by omega)
+        hgpos hd hc4 j (u - (j : ℝ) / D) 1
+        (by
+          rw [hk4, Int.cast_one,
+              show ((1 : ℕ) : ℝ) / ((2 : ℕ) : ℝ) = 1/2 from by norm_num]
+          have hcancel : (speeds ⟨3, by omega⟩ : ℝ)
+              * (2 / (3 * (speeds ⟨3, by omega⟩ : ℝ))) = 2/3 := by field_simp
+          have hsa : (speeds ⟨3, by omega⟩ : ℝ)
+                * (2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)))
+              ≤ (speeds ⟨3, by omega⟩ : ℝ) * (u - (j : ℝ) / D) :=
+            mul_le_mul_of_nonneg_left hsR_lo (le_of_lt hv4R)
+          linarith)
+        (by
+          rw [hk4, Int.cast_one,
+              show ((1 : ℕ) : ℝ) / ((2 : ℕ) : ℝ) = 1/2 from by norm_num]
+          have hsa : (speeds ⟨3, by omega⟩ : ℝ) * (u - (j : ℝ) / D)
+              ≤ (speeds ⟨3, by omega⟩ : ℝ)
+                * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) :=
+            mul_le_mul_of_nonneg_left hsR_hi (le_of_lt hv4R)
+          have hb : (speeds ⟨3, by omega⟩ : ℝ)
+              * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ))) ≤ 10/9 := by
+            rw [show (speeds ⟨3, by omega⟩ : ℝ)
+                  * (5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)))
+                  = 5 * (speeds ⟨3, by omega⟩ : ℝ)
+                    / (6 * (speeds ⟨2, by omega⟩ : ℝ)) from by ring,
+                div_le_div_iff₀ (by positivity) (by norm_num)]
+            nlinarith [h43R]
+          linarith)
+      rwa [show (j : ℝ) / D + (u - (j : ℝ) / D) = u from by ring] at h
+    fin_cases iu
+    · exact absurd hiu hu0
+    · exact absurd hiu hu1
+    · exact absurd hiu hu2
+    · exact absurd hiu hu3
+    · exact hiu
+  obtain ⟨m, hm_lo, hm_hi⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    A B hAB hsub
+  have hBA : 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ B - A := by
+    rw [hA_def, hB_def]
+    have e1 : 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ))
+        + 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+        = 5 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+      field_simp
+      ring
+    have e2 : 5 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+        ≤ 5 / (6 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]
+      nlinarith [hv34R]
+    linarith
+  have hlen : (speeds ⟨4, by omega⟩ : ℝ) * B - (speeds ⟨4, by omega⟩ : ℝ) * A
+      < 1/3 := by linarith
+  have hgt : (speeds ⟨4, by omega⟩ : ℝ) * (B - A)
+      ≥ (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))) :=
+    mul_le_mul_of_nonneg_left hBA (le_of_lt hv5R)
+  have hfinal : (1 : ℝ) / 3
+      < (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))) := by
+    rw [show (speeds ⟨4, by omega⟩ : ℝ) * (1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+          = (speeds ⟨4, by omega⟩ : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ)) from
+          by ring,
+        lt_div_iff₀ (by positivity)]
+    nlinarith [h45]
+  nlinarith [hlen, hgt, hfinal]
+
+/-- **BHK Case 6.2.2 (PROVED — BHK pp. 42–43).** `(1/n, 1/n) ∈ G`,
     `K ≥ 3` (`v₂ ≥ 2v₃/3`): the interval `[jt₀ + 1/(4v₃), jt₀ + 5/(6v₃)]`
-    is in a 123-gap; Lemma 4 gives `7v₄ < 8v₃`; the endpoints exclude
-    runner 4, so the covering 45-block is a 4-block flanked by 5-blocks
-    and `v₅ > 2v₄`. For `n > 2` pick `k` with
-    `{c₁k/n} = {c₄k/n} ∈ [1/6, 1/3]`: a 1234-gap of length `≥ 1/(6v₄)`
-    that runner 5 cannot cover. For `n = 2`, `{v₁t₀} = 1/2` and
-    `[t₀ + 2/(3v₄), t₀ + 5/(6v₃)]` is the 1234-gap. -/
+    is a 123-gap whose endpoints exclude runner 4, so the inter-5-block
+    stretch must be covered by runner 4 alone, giving `v₅ > 2v₄`
+    (flanking). For `n > 2` the β-index (`b/n ∈ [1/6, 1/3]`) yields a
+    1234-gap of length `≥ 1/(6v₄)` that runner 5 cannot cover; for
+    `n = 2` the γ-index has `a/n = 1/2` and
+    `[jt₀ + 2/(3v₄), jt₀ + 5/(6v₃)]` is the 1234-gap. -/
 lemma bhk_s6_case_622 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1241,7 +1845,22 @@ lemma bhk_s6_case_622 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hmem : ((1 : ZMod n), (1 : ZMod n)) ∈
       AddSubgroup.zmultiples ((c₁ : ZMod n), (c₄ : ZMod n))) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  by_contra hno
+  push_neg at hno
+  obtain ⟨j, a, hk1, hk4, ha_lo, ha_hi⟩ := bhk_s6_62_gamma n c₁ c₄ hn hmem
+  have h45 := bhk_s6_622_flank speeds hmono hpos hsmall D K hD2 hK3 hv3 hv2
+    h43 n c₁ c₄ g hn hgpos hd hc1 hc4 j a hk1 hk4 ha_lo ha_hi hno
+  rcases eq_or_lt_of_le hn with hn2 | hn3
+  · -- n = 2: the γ-index has a = 1.
+    have ha1 : a = 1 := by omega
+    subst ha1
+    exact bhk_s6_622_final_n2 speeds hmono hpos hsmall D K hD2 hK3 hv3 hv2
+      h43 n c₁ c₄ g hn2.symm hgpos hd hc1 hc4 j hk1 hk4 h45 hno
+  · -- n ≥ 3: the β-index.
+    obtain ⟨k, b, hkb1, hkb4, hb_lo, hb_hi⟩ :=
+      bhk_s6_622_beta n c₁ c₄ (by omega) hmem
+    exact bhk_s6_622_final speeds hmono hpos hsmall D K hD2 hK3 hv3 hv2
+      h43 n c₁ c₄ g hn hgpos hd hc1 hc4 k b hkb1 hkb4 hb_lo hb_hi h45 hno
 
 /-- **BHK Case 6.2 (dispatcher).** `(1/n, 1/n) ∈ G`, `n ≥ 2`: split on
     `K = 2` (Case 6.2.1, `v₂ = v₃/2`) versus `K ≥ 3` (Case 6.2.2,
