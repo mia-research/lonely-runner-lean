@@ -191,6 +191,72 @@ lemma bhk_prop11_gap_covered (w : Fin 5 → ℕ)
   · exact Or.inl ((mem_unsafeOf_iff w _ s).mpr hi)
   · exact Or.inr ((mem_unsafeOf_iff w _ s).mpr hi)
 
+/-- **BHK §5 Part 2 — Corollary 15 (witness half-integer time), coprime case.**
+    If `gcd(w₀, w₂) = 1` and `w₂ ≥ 6`, there is a time `t` at which runner 3 sits
+    at the half-way point (`{w₂t} = 1/2`) and runner 1 lies in `[1/6, 1/3]`. This
+    is the finite-equidistribution input to Corollary 16: among the candidate
+    times `t_m = (2m+1)/(2w₂)` the positions `{w₀ t_m}` form `w₂` points spaced
+    `1/w₂ ≤ 1/6`, so one lands in `[1/6, 1/3]`. Witness: `k = (w₂ - 3w₀ + 5)/6`
+    (giving `w₂ ≤ 6k + 3w₀ < 2w₂`) and `m` solving `w₀ m ≡ k (mod w₂)`. -/
+lemma bhk_prop11_witness_time (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcop : Nat.Coprime (w ⟨0, by omega⟩) (w ⟨2, by omega⟩))
+    (hn6 : 6 ≤ w ⟨2, by omega⟩) :
+    ∃ t : ℝ, Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2 ∧
+      1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ∧
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3 := by
+  set a := w ⟨0, by omega⟩ with ha
+  set n := w ⟨2, by omega⟩ with hn
+  have ha0 : 0 < a := hpos _
+  have hn0 : 0 < n := by omega
+  haveI : NeZero n := ⟨by omega⟩
+  set k : ℕ := (n - 3 * a + 5) / 6 with hk
+  have hklo : n ≤ 6 * k + 3 * a := by omega
+  have hkhi : 6 * k + 3 * a < n + 6 := by omega
+  have hkn : k < n := by omega
+  -- solve  a * m ≡ k  (mod n)  via the modular inverse of a
+  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (a * m) % n = k % n := by
+    set u := ZMod.unitOfCoprime a hcop with hu
+    refine ⟨(((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (k : ZMod n)).val, ?_⟩
+    have hcast : ((a * (((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (k : ZMod n)).val : ℕ) : ZMod n)
+        = ((k : ℕ) : ZMod n) := by
+      push_cast
+      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime a hcop, ← hu,
+        ← mul_assoc]
+      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+  have hmk : (a * m) % n = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
+  set j : ℕ := (a * m) / n with hj
+  have hamj : a * m = n * j + k := by
+    rw [hj, ← hmk]; exact (Nat.div_add_mod (a * m) n).symm
+  -- the witness time
+  have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
+  have hcast2n : (6 : ℝ) * k + 3 * a < 2 * n := by
+    have : 6 * k + 3 * a < 2 * n := by omega
+    exact_mod_cast this
+  have hcastlo : (n : ℝ) ≤ 6 * k + 3 * a := by exact_mod_cast hklo
+  -- runner 1's fractional position at the witness time
+  have haknn : (0 : ℝ) ≤ (k : ℝ) := by positivity
+  have haann : (0 : ℝ) ≤ (a : ℝ) := by positivity
+  have hfr : Int.fract ((a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n)))
+      = (2 * (k : ℝ) + a) / (2 * n) := by
+    have hamR : (a : ℝ) * (m : ℝ) = (n : ℝ) * j + k := by exact_mod_cast hamj
+    have hae : (a : ℝ) * (2 * (m : ℝ) + 1) = 2 * n * j + (2 * k + a) := by
+      linear_combination 2 * hamR
+    have hstep : (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n))
+        = (j : ℝ) + (2 * (k : ℝ) + a) / (2 * n) := by
+      rw [← mul_div_assoc, hae]; field_simp
+    rw [hstep, show (j : ℝ) = ((j : ℤ) : ℝ) from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by positivity, ?_⟩]
+    rw [div_lt_one (by positivity)]; linarith
+  refine ⟨(2 * (m : ℝ) + 1) / (2 * n), ?_, ?_, ?_⟩
+  · have hhalf : (n : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n)) = (m : ℝ) + 1 / 2 := by
+      field_simp
+    rw [hhalf, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  · rw [hfr, le_div_iff₀ (by positivity)]; linarith
+  · rw [hfr, div_le_iff₀ (by positivity)]; linarith
+
 /-- **BHK §5 Part 2 — Corollary 16 (`v₄ < 2`), conditional on a witness time.**
     Given a half-integer time `t` (runner 3 at `1/2`) with runner 1 in
     `[1/6, 1/3]`, the indirect covering assumption forces `w₃ < 2 w₂`
@@ -219,6 +285,22 @@ lemma bhk_prop11_v4_lt_2v3_of_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
     linarith
   rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hkey
   linarith
+
+/-- **BHK §5 Part 2 — Corollary 16 (`v₄ < 2`).** Combining the witness-time
+    existence (`bhk_prop11_witness_time`) with the conditional bound: under the
+    covering assumption, `gcd(w₀, w₂) = 1` and `w₂ ≥ 6` force `w₃ < 2 w₂`. The
+    coprimality and `w₂ ≥ 6` are the remaining structural facts (BHK Lemma 13
+    `q ≥ 5` plus the lowest-terms normalisation). -/
+lemma bhk_prop11_v4_lt_2v3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hcop : Nat.Coprime (w ⟨0, by omega⟩) (w ⟨2, by omega⟩))
+    (hn6 : 6 ≤ w ⟨2, by omega⟩) :
+    (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
+  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hcop hn6
+  exact bhk_prop11_v4_lt_2v3_of_time w hmono hpos hsum hsmall hcover t h3 h1lo h1hi
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
