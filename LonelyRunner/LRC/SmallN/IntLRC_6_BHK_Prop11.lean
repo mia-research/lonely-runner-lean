@@ -81,6 +81,41 @@ lemma bhk_prop11_fict_window {x : ℝ}
   rw [hrw, abs_lt]
   constructor <;> linarith
 
+/-- `circDist` is invariant under integer shifts. -/
+lemma bhk_prop11_circDist_add_int (x : ℝ) (n : ℤ) :
+    circDist (x + (n : ℝ)) = circDist x := by
+  unfold circDist; rw [Int.fract_add_intCast]
+
+/-- **BHK §5 Part 2 — periodicity (the engine of Lemma 12).** A runner whose
+    speed `v` is divisible by `g` has period `1/g`: its circle position repeats
+    after `1/g`. With `g = gcd(w₀, w₂)` this applies to runners 1, 2, 3 (since
+    `g ∣ w₀, w₁, w₂`), so every 0123-gap `I` translates to a 0123-gap `I + 1/g`
+    — BHK's "`I + iq` is again a 0123-gap". -/
+lemma bhk_prop11_period (v g : ℕ) (hg : 0 < g) (hdvd : g ∣ v) (t : ℝ) :
+    circDist ((v : ℝ) * (t + 1 / g)) = circDist ((v : ℝ) * t) := by
+  obtain ⟨c, hc⟩ := hdvd
+  have hgR : (g : ℝ) ≠ 0 := by exact_mod_cast hg.ne'
+  have heq : (v : ℝ) * (t + 1 / (g : ℝ)) = (v : ℝ) * t + ((c : ℤ) : ℝ) := by
+    rw [hc]; push_cast; field_simp
+  rw [heq, bhk_prop11_circDist_add_int]
+
+/-- **0123-gap translation.** If `g` divides the speeds of runners 1, 2, 3 then
+    any 123-gap `[a, b]` translates to the 123-gap `[a + 1/g, b + 1/g]`. With
+    `g = gcd(w₀, w₂)` this is BHK's "`I + iq` is again a 0123-gap". -/
+lemma bhk_prop11_gap123_translate (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
+    (hdvd : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩)
+    {a b : ℝ}
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s)) :
+    ∀ s ∈ Set.Icc (a + 1 / g) (b + 1 / g), ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  intro s hs i
+  obtain ⟨hsl, hsu⟩ := hs
+  have hkey := hgap (s - 1 / g) ⟨by linarith, by linarith⟩ i
+  have hper := bhk_prop11_period (w ⟨i.val, by omega⟩) g hg (hdvd i) (s - 1 / g)
+  rw [show s - 1 / (g : ℝ) + 1 / (g : ℝ) = s from by ring] at hper
+  rw [hper]; exact hkey
+
 /-- **No-wrap helper.** If `Int.fract x + b ∈ [0, 1)` then
     `Int.fract (x + b) = Int.fract x + b` — advancing a fractional position by a
     small nonnegative amount that does not cross the next integer. -/
