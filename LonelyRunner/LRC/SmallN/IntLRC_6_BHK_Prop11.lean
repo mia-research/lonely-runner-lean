@@ -1309,6 +1309,88 @@ theorem bhk_prop11_lemma13 (w : Fin 5 → ℕ) (hmono : StrictMono w)
       have : s < 9 := by exact_mod_cast this
       omega
 
+/-- **Corollary 16, unconditional.** `v₄ < 2` (`w₃ < 2 w₂`), now that Lemma 13
+    discharges the `q ≥ 5` side condition. -/
+theorem bhk_prop11_v4_lt_2v3_uncond (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6) :
+    (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) :=
+  bhk_prop11_v4_lt_2v3 w hmono hpos hsum hsmall hcover
+    (bhk_prop11_lemma13 w hmono hpos hsum hsmall hcover)
+
+/-- **Lemma 17, unconditional.** `v₄ = r/q` and `v₅ = s/q` (`g ∣ w₃ ∧ g ∣ w₄`
+    for `g = gcd(w₀,w₂)`), with the `q ≥ 5` side condition discharged by
+    Lemma 13. This is the rational structure Part 3 feeds to the main lemma. -/
+theorem bhk_prop11_lemma17_uncond (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6) :
+    Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨3, by omega⟩ ∧
+      Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨4, by omega⟩ :=
+  bhk_prop11_lemma17 w hmono hpos hsum hsmall hcover
+    (bhk_prop11_lemma13 w hmono hpos hsum hsmall hcover)
+
+/-- **BHK §5 Part 3 — the no-good-time fact (eq. (36)–(37)).** Under the
+    covering assumption, there is *no* half-integer time `t` (`{w₂ t} = 1/2`)
+    with runner 1 in `[1/6, 1/3]` *and* runner 4 in `[1/6, 1/2]`. Such a `t`
+    would extend the `123`-gap `[t, t + 1/(3w₂)]` to a `1234`-gap
+    `[t, t + 1/(3w₃)]` (runner 4 stays within `[1/6, 5/6]` across it), which
+    runner 5 cannot cover (`bhk_prop11_gap1234_b5span` would force `w₄ < w₃`).
+    Equivalently: the set `S = {({v₄(l+½)}, {v₁(l+½)})}` avoids the `1/3 × 1/6`
+    rectangle `R`, the hypothesis of the main-lemma application. -/
+theorem bhk_prop11_no_good_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3)
+    (h4lo : 1 / 6 ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h4hi : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) ≤ 1 / 2) :
+    False := by
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw23 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega))
+  have hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+  have hgap2 := bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi
+  set b3 : ℝ := t + 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) with hb3
+  have hab3 : t ≤ b3 := by rw [hb3]; exact le_add_of_nonneg_right (by positivity)
+  have hlen_le : 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) :=
+    one_div_le_one_div_of_le (by positivity) (by linarith)
+  -- The `123`-gap restricted to the shorter interval.
+  have hgap_sub : ∀ s ∈ Set.Icc t b3, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    exact hgap2 s ⟨hs.1, by rw [hb3] at hs; linarith [hs.2]⟩ i
+  -- Runner 4 stays safe across `[t, b3]`.
+  have h4safe : ∀ s ∈ Set.Icc t b3, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t := by linarith [hs.1]
+    have hdu : (w ⟨3, by omega⟩ : ℝ) * (s - t) ≤ 1 / 3 := by
+      have h1 : (w ⟨3, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨3, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left (by rw [hb3] at hs; linarith [hs.2]) hw3pos.le
+      have h2 : (w ⟨3, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) = 1 / 3 := by
+        field_simp
+      linarith [h1, h2]
+    have hbnn : 0 ≤ (w ⟨3, by omega⟩ : ℝ) * (s - t) := mul_nonneg hw3pos.le hd0
+    have hfs : Int.fract ((w ⟨3, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) + (w ⟨3, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨3, by omega⟩ : ℝ) * s
+            = (w ⟨3, by omega⟩ : ℝ) * t + (w ⟨3, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab3 hgap_sub h4safe
+  rw [hb3, add_sub_cancel_left, mul_one_div, div_lt_iff₀ (by positivity)] at hspan
+  -- hspan : w₄ < 1/3 * (3 * w₃) = w₃, contradicting w₃ < w₄.
+  nlinarith [hspan, hw34]
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
