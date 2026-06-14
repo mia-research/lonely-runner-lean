@@ -845,6 +845,470 @@ lemma bhk_prop11_lemma17 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ 
   · exact absurd hc hn5
   · exact hc
 
+/-- **Runner safe on an interval (window form).** If runner `i`'s position
+    `v · t` stays in a single integer's safe window `[k+1/6, k+5/6]` across all of
+    `[a,b]`, then `circDist (v · t) ≥ 1/6` throughout. The workhorse for the
+    explicit `q = 4` gaps `I₁, I₂` of BHK Lemma 13 (no half-integer time, so the
+    `gap123`/`witness_time` machinery — which needs `q ≥ 5` — does not apply). -/
+lemma bhk_prop11_safe_on_Icc (v : ℝ) (k : ℤ) {a b : ℝ}
+    (hlo : (k : ℝ) + 1 / 6 ≤ v * a) (hhi : v * b ≤ (k : ℝ) + 5 / 6) (hv : 0 ≤ v) :
+    ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist (v * s) := by
+  intro s hs
+  obtain ⟨hsl, hsu⟩ := hs
+  have hva : v * a ≤ v * s := mul_le_mul_of_nonneg_left hsl hv
+  have hvb : v * s ≤ v * b := mul_le_mul_of_nonneg_left hsu hv
+  have h1 : (k : ℝ) + 1 / 6 ≤ v * s := le_trans hlo hva
+  have h2 : v * s ≤ (k : ℝ) + 5 / 6 := le_trans hvb hhi
+  have hfr : Int.fract (v * s) = v * s - (k : ℝ) := by
+    conv_lhs => rw [show v * s = (k : ℝ) + (v * s - (k : ℝ)) from by ring]
+    rw [Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  simp only [circDist]; rw [hfr]
+  exact le_min (by linarith) (by linarith)
+
+/-- **Assemble a `123`-gap** from the three per-runner safety facts. Packages
+    `∀ i : Fin 3` so the gap lemmas can consume it. -/
+lemma bhk_prop11_mk123 (w : Fin 5 → ℕ) {a b : ℝ}
+    (h0 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s))
+    (h1 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s))
+    (h2 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)) :
+    ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  intro s hs i; fin_cases i
+  · exact h0 s hs
+  · exact h1 s hs
+  · exact h2 s hs
+
+/-- **`1234`-gap span bound.** A `1234`-gap (runners 1,2,3,4 all `≥ 1/6`) is,
+    under the covering assumption, contained in `B₅`, so `block_containment`
+    bounds the span of runner 5: `w₄ · (b - a) < 1/3`. The engine of every
+    `r`-case of BHK Lemma 13. -/
+lemma bhk_prop11_gap1234_b5span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    {a b : ℝ} (hab : a ≤ b)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h4safe : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s)) :
+    (w ⟨4, by omega⟩ : ℝ) * (b - a) < 1 / 3 := by
+  have hcov45 := bhk_prop11_gap_covered w hcover hgap
+  have hsub5 : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩ := by
+    intro s hs
+    rcases hcov45 hs with h | h
+    · exact absurd ((mem_unsafeOf_iff w _ s).mp h) (not_lt.mpr (h4safe s hs))
+    · exact h
+  obtain ⟨k, hk1, hk2⟩ := block_containment w ⟨4, by omega⟩ (hpos _) a b hab hsub5
+  rw [mul_sub]; linarith
+
+/-- **Sixth-multiple covering.** If a runner sitting at `n/6` (mod 1) is within
+    `1/6` of the origin then `6 ∣ n`: the only sixth landing in the bad arc is the
+    integer one. Used for BHK Lemma 13's observation at time `t = 2/3`. -/
+lemma bhk_prop11_dvd_six_of_circDist {n : ℕ} (h : circDist ((n : ℝ) / 6) < 1 / 6) :
+    6 ∣ n := by
+  by_contra hnd
+  have hmod : n % 6 ≠ 0 := fun hh => hnd (Nat.dvd_of_mod_eq_zero hh)
+  have hmlt : n % 6 < 6 := Nat.mod_lt _ (by norm_num)
+  have hge1 : 1 ≤ n % 6 := by omega
+  have key : (n : ℝ) = 6 * ((n / 6 : ℕ) : ℝ) + ((n % 6 : ℕ) : ℝ) := by
+    exact_mod_cast (Nat.div_add_mod n 6).symm
+  have hsplit : (n : ℝ) / 6 = ((n % 6 : ℕ) : ℝ) / 6 + ((n / 6 : ℕ) : ℝ) := by
+    rw [key]; ring
+  have hfr : Int.fract ((n : ℝ) / 6) = ((n % 6 : ℕ) : ℝ) / 6 := by
+    rw [hsplit, Int.fract_add_natCast]
+    refine Int.fract_eq_self.mpr ⟨by positivity, ?_⟩
+    rw [div_lt_one (by norm_num)]; exact_mod_cast hmlt
+  have h1 : (1 : ℝ) ≤ ((n % 6 : ℕ) : ℝ) := by exact_mod_cast hge1
+  have h5 : ((n % 6 : ℕ) : ℝ) ≤ 5 := by exact_mod_cast (by omega : n % 6 ≤ 5)
+  have hsafe : (1 : ℝ) / 6 ≤ circDist ((n : ℝ) / 6) := by
+    simp only [circDist]; rw [hfr]; exact le_min (by linarith) (by linarith)
+  linarith
+
+/-- **BHK Lemma 13 (`q ≥ 5`).** Under the indirect covering assumption, the
+    reduced denominator `q = w₂ / gcd(w₀,w₂)` is at least `5`; equivalently the
+    case `v₁ = 1/4` (`q = 4`) cannot occur. BHK rule this out via the explicit
+    `123`-gaps `I₁ = [2/3, 5/6]` and `I₂ = [13/6, 44/18]` (in normalised time,
+    i.e. `[1/(6w₀), 5/(24w₀)]` and `[13/(24w₀), 11/(18w₀)]` here since `w₂ = 4w₀`)
+    together with Lemma 4 and the orbit-divisibility Lemma 12. -/
+theorem bhk_prop11_lemma13 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6) :
+    5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) := by
+  by_contra hq
+  push_neg at hq
+  -- ## Step 0 — reduce to `q = 4`, `p = 1`, hence `w₂ = 4 w₀`.
+  set w0 : ℕ := w ⟨0, by omega⟩ with hw0_def
+  set w2 : ℕ := w ⟨2, by omega⟩ with hw2_def
+  set g : ℕ := Nat.gcd w0 w2 with hg_def
+  have hw0pos : 0 < w0 := hpos _
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ hw0pos
+  have hgw0 : g ∣ w0 := by rw [hg_def]; exact Nat.gcd_dvd_left w0 w2
+  have hgw2 : g ∣ w2 := by rw [hg_def]; exact Nat.gcd_dvd_right w0 w2
+  obtain ⟨p, hp⟩ := hgw0
+  obtain ⟨q, hqe⟩ := hgw2
+  have hqval : w2 / g = q := by rw [hqe, Nat.mul_div_cancel_left _ hg0]
+  rw [hqval] at hq
+  have hppos : 0 < p := by
+    rcases Nat.eq_zero_or_pos p with h | h
+    · rw [h, mul_zero] at hp; omega
+    · exact h
+  have h3pq : 3 * p < q := by
+    have key : g * (3 * p) < g * q := by
+      have h := hsmall; rw [hp, hqe] at h
+      calc g * (3 * p) = 3 * (g * p) := by ring
+        _ < g * q := h
+    exact Nat.lt_of_mul_lt_mul_left key
+  have hq4 : q = 4 := by omega
+  have hp1 : p = 1 := by omega
+  have hgw0_eq : g = w0 := by rw [hp, hp1, mul_one]
+  have hw2_eq : w2 = 4 * w0 := by rw [hqe, hq4, hgw0_eq]; ring
+  -- ## Step 1 — real-valued setup and the explicit gap `I₂ = [a, b]`.
+  have hw0R : (0 : ℝ) < (w0 : ℝ) := by exact_mod_cast hw0pos
+  have hw1_eq : w ⟨1, by omega⟩ = 3 * w0 := by omega
+  have hw1R : ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) := by rw [hw1_eq]; push_cast; ring
+  have hw2R : ((w2 : ℕ) : ℝ) = 4 * (w0 : ℝ) := by exact_mod_cast hw2_eq
+  set a : ℝ := 13 / (24 * (w0 : ℝ)) with ha_def
+  set b : ℝ := 11 / (18 * (w0 : ℝ)) with hb_def
+  have e0a : (w0 : ℝ) * a = 13 / 24 := by rw [ha_def]; field_simp
+  have e0b : (w0 : ℝ) * b = 11 / 18 := by rw [hb_def]; field_simp
+  have e1a : (3 * (w0 : ℝ)) * a = 13 / 8 := by rw [ha_def]; field_simp; ring
+  have e1b : (3 * (w0 : ℝ)) * b = 11 / 6 := by rw [hb_def]; field_simp; ring
+  have e2a : (4 * (w0 : ℝ)) * a = 13 / 6 := by rw [ha_def]; field_simp; ring
+  have e2b : (4 * (w0 : ℝ)) * b = 22 / 9 := by rw [hb_def]; field_simp; ring
+  have hab : a ≤ b := by
+    have h : (w0 : ℝ) * a ≤ (w0 : ℝ) * b := by rw [e0a, e0b]; norm_num
+    exact le_of_mul_le_mul_left h hw0R
+  -- `I₂` is a 123-gap: runners 1, 2, 3 (Lean indices 0, 1, 2) stay `≥ 1/6`.
+  have hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    fin_cases i
+    · change (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s)
+      exact bhk_prop11_safe_on_Icc (w0 : ℝ) 0 (by rw [e0a]; norm_num)
+        (by rw [e0b]; norm_num) hw0R.le s hs
+    · change (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s)
+      rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+      exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 1 (by rw [e1a]; norm_num)
+        (by rw [e1b]; norm_num) (by positivity) s hs
+    · change (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)
+      rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+      exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 2 (by rw [e2a]; norm_num)
+        (by rw [e2b]; norm_num) (by positivity) s hs
+  -- The gap is covered by runners 4 and 5.
+  have hcov45 : Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∪ unsafeOf w ⟨4, by omega⟩ :=
+    bhk_prop11_gap_covered w hcover hgap
+  -- ## Step 2 — BHK (35): `I₂ ⊄ B₄` and `I₂ ⊄ B₅`.
+  -- If `[a,b] ⊆ unsafeOf i` then `block_containment` traps it in one block
+  -- `m`; since `wᵢ > 4 w₀` the block index is `m ≥ 3`, which together with the
+  -- span bound `wᵢ (b-a) < 1/3` is contradictory.
+  have h35 : ∀ i : Fin 5, 4 * w0 < w i → ¬ Set.Icc a b ⊆ unsafeOf w i := by
+    intro i hwi hsub
+    have hwi0 : 0 < w i := by omega
+    have hwiR : 4 * (w0 : ℝ) < (w i : ℝ) := by exact_mod_cast hwi
+    obtain ⟨m, hm1, hm2⟩ := block_containment w i hwi0 a b hab hsub
+    have hva : (w i : ℝ) * a = 13 / 24 * ((w i : ℝ) / (w0 : ℝ)) := by rw [ha_def]; ring
+    have hvb : (w i : ℝ) * b = 11 / 18 * ((w i : ℝ) / (w0 : ℝ)) := by rw [hb_def]; ring
+    set ρ : ℝ := (w i : ℝ) / (w0 : ℝ) with hρ
+    have hρ4 : 4 < ρ := by rw [hρ, lt_div_iff₀ hw0R]; linarith
+    rw [hva] at hm1; rw [hvb] at hm2
+    have hm3 : (3 : ℤ) ≤ m := by
+      by_contra h; push_neg at h
+      have hm2' : (m : ℝ) ≤ 2 := by exact_mod_cast (by omega : m ≤ 2)
+      linarith [hm2, hρ4, hm2']
+    have hm3R : (3 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm3
+    linarith [hm1, hm2, hρ4, hm3R]
+  have hw3gt : 4 * w0 < w ⟨3, by omega⟩ := by
+    have h := hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega) :
+      (⟨2, by omega⟩ : Fin 5) < ⟨3, by omega⟩); omega
+  have hw4gt : 4 * w0 < w ⟨4, by omega⟩ := by
+    have h := hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega) :
+      (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩); omega
+  have hn4 := h35 ⟨3, by omega⟩ hw3gt
+  have hn5 := h35 ⟨4, by omega⟩ hw4gt
+  -- ## Step 3 — Lemma 12 ⟹ `w₀ ∣ w₃` and `w₀ ∣ w₄` (`v₄ = r/4`, `v₅ = s/4`).
+  have hd0 : w0 ∣ w ⟨0, by omega⟩ := ⟨1, by rw [mul_one]⟩
+  have hd1 : w0 ∣ w ⟨1, by omega⟩ := ⟨3, by rw [hw1_eq]; ring⟩
+  have hd2 : w0 ∣ w ⟨2, by omega⟩ := ⟨4, by rw [← hw2_def, hw2_eq]; ring⟩
+  have hdvd012 : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩ := by
+    rw [hgw0_eq]; intro i; fin_cases i
+    · exact hd0
+    · exact hd1
+    · exact hd2
+  rcases bhk_prop11_lemma12 w g hg0 hdvd012 hcover hgap with hc | hc | hc
+  · exact hn4 hc
+  · exact hn5 hc
+  · obtain ⟨hgw3, hgw4⟩ := hc
+    rw [hgw0_eq] at hgw3 hgw4
+    obtain ⟨r, hr⟩ := hgw3
+    obtain ⟨s, hseq⟩ := hgw4
+    have hrR : ((w ⟨3, by omega⟩ : ℕ) : ℝ) = (w0 : ℝ) * (r : ℝ) := by rw [hr]; push_cast; ring
+    have hseqR : ((w ⟨4, by omega⟩ : ℕ) : ℝ) = (w0 : ℝ) * (s : ℝ) := by
+      rw [hseq]; push_cast; ring
+    -- ## Step 4 — bounds: `5 ≤ r ≤ 9`, `r < s`, and `6 ∣ r ∨ 6 ∣ s`.
+    have hr5 : 5 ≤ r := by
+      rcases Nat.lt_or_ge r 5 with h | h
+      · exfalso
+        have hmul : w0 * r ≤ w0 * 4 := Nat.mul_le_mul le_rfl (by omega)
+        omega
+      · exact h
+    have hsr : r < s := by
+      have h34 := hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega) :
+        (⟨3, by omega⟩ : Fin 5) < ⟨4, by omega⟩)
+      rw [hr, hseq] at h34
+      exact Nat.lt_of_mul_lt_mul_left h34
+    have hbaW : (w0 : ℝ) * (b - a) = 5 / 72 := by rw [mul_sub, e0b, e0a]; norm_num
+    have hr9 : r ≤ 9 := by
+      have hl4 := bhk_lemma_4 w hmono hpos a b hab hcov45
+      rw [hrR] at hl4
+      have hrpos : (0 : ℝ) < (r : ℝ) := by exact_mod_cast (show 0 < r by omega)
+      have hD : (0 : ℝ) < 3 * ((w0 : ℝ) * (r : ℝ)) := by positivity
+      rw [lt_div_iff₀ hD] at hl4
+      have hexp : (b - a) * (3 * ((w0 : ℝ) * (r : ℝ))) = 5 * (r : ℝ) / 24 := by
+        have e : (b - a) * (3 * ((w0 : ℝ) * (r : ℝ)))
+            = 3 * (r : ℝ) * ((w0 : ℝ) * (b - a)) := by ring
+        rw [e, hbaW]; ring
+      rw [hexp] at hl4
+      have : (r : ℝ) < 10 := by linarith
+      have : r < 10 := by exact_mod_cast this
+      omega
+    have hobs : 6 ∣ r ∨ 6 ∣ s := by
+      set t0 : ℝ := 1 / (6 * (w0 : ℝ)) with ht0
+      have et1 : (w0 : ℝ) * t0 = 1 / 6 := by rw [ht0]; field_simp
+      have et2 : 3 * (w0 : ℝ) * t0 = 1 / 2 := by rw [ht0]; field_simp; ring
+      have et3 : 4 * (w0 : ℝ) * t0 = 2 / 3 := by rw [ht0]; field_simp; ring
+      have p3 : (w ⟨3, by omega⟩ : ℝ) * t0 = (r : ℝ) / 6 := by
+        rw [hrR, ht0]; field_simp
+      have p4 : (w ⟨4, by omega⟩ : ℝ) * t0 = (s : ℝ) / 6 := by
+        rw [hseqR, ht0]; field_simp
+      have ht0mem : t0 ∈ Set.Icc t0 t0 := ⟨le_refl t0, le_refl t0⟩
+      obtain ⟨i, hi⟩ := hcover t0
+      fin_cases i
+      · exact absurd hi (not_lt.mpr (bhk_prop11_safe_on_Icc (w0 : ℝ) 0
+          (by rw [et1]; norm_num) (by rw [et1]; norm_num) hw0R.le t0 ht0mem))
+      · refine absurd hi (not_lt.mpr ?_)
+        rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+        exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 0
+          (by rw [et2]; norm_num) (by rw [et2]; norm_num) (by positivity) t0 ht0mem
+      · refine absurd hi (not_lt.mpr ?_)
+        rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+        exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 0
+          (by rw [et3]; norm_num) (by rw [et3]; norm_num) (by positivity) t0 ht0mem
+      · exact Or.inl (bhk_prop11_dvd_six_of_circDist (by rw [← p3]; exact hi))
+      · exact Or.inr (bhk_prop11_dvd_six_of_circDist (by rw [← p4]; exact hi))
+    -- ## Step 5 — casework on `r ∈ {5,…,9}`.
+    interval_cases r
+    · -- r = 5: the gap `[13/(24w₀), 17/(30w₀)]` (= `[13/6, 68/30]`) is a 1234-gap,
+      -- bounding `s ≤ 13`; with `6 ∣ s` this gives `s ∈ {6, 12}`. For both, the
+      -- explicit time `t = 13/(30 w₀)` (runner positions `{1,3,4,5,s}·13/30`) is
+      -- lonely, contradicting the covering assumption.
+      set a5 : ℝ := 13 / (24 * (w0 : ℝ)) with ha5
+      set b5 : ℝ := 17 / (30 * (w0 : ℝ)) with hb5
+      have f0a : (w0 : ℝ) * a5 = 13 / 24 := by rw [ha5]; field_simp
+      have f0b : (w0 : ℝ) * b5 = 17 / 30 := by rw [hb5]; field_simp
+      have f1a : 3 * (w0 : ℝ) * a5 = 13 / 8 := by rw [ha5]; field_simp; ring
+      have f1b : 3 * (w0 : ℝ) * b5 = 17 / 10 := by rw [hb5]; field_simp; ring
+      have f2a : 4 * (w0 : ℝ) * a5 = 13 / 6 := by rw [ha5]; field_simp; ring
+      have f2b : 4 * (w0 : ℝ) * b5 = 34 / 15 := by rw [hb5]; field_simp; ring
+      have f3a : 5 * (w0 : ℝ) * a5 = 65 / 24 := by rw [ha5]; field_simp; ring
+      have f3b : 5 * (w0 : ℝ) * b5 = 17 / 6 := by rw [hb5]; field_simp; ring
+      have hab5 : a5 ≤ b5 := by
+        have h : (w0 : ℝ) * a5 ≤ (w0 : ℝ) * b5 := by rw [f0a, f0b]; norm_num
+        exact le_of_mul_le_mul_left h hw0R
+      have hg5 : ∀ s ∈ Set.Icc a5 b5, ∀ i : Fin 3,
+          (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+        intro s hs i; fin_cases i
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s)
+          exact bhk_prop11_safe_on_Icc (w0 : ℝ) 0 (by rw [f0a]; norm_num)
+            (by rw [f0b]; norm_num) hw0R.le s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+          exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 1 (by rw [f1a]; norm_num)
+            (by rw [f1b]; norm_num) (by positivity) s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+          exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 2 (by rw [f2a]; norm_num)
+            (by rw [f2b]; norm_num) (by positivity) s hs
+      have h4safe : ∀ s ∈ Set.Icc a5 b5, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+        intro s hs
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 5 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        exact bhk_prop11_safe_on_Icc (5 * (w0 : ℝ)) 2 (by rw [f3a]; norm_num)
+          (by rw [f3b]; norm_num) (by positivity) s hs
+      have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab5 hg5 h4safe
+      have hba5W : (w0 : ℝ) * (b5 - a5) = 1 / 40 := by rw [mul_sub, f0b, f0a]; norm_num
+      have hc : (w0 : ℝ) * (s : ℝ) * (b5 - a5) = (s : ℝ) * ((w0 : ℝ) * (b5 - a5)) := by ring
+      rw [hseqR, hc, hba5W] at hspan
+      have hsR : (s : ℝ) < 14 := by linarith
+      have hsle13 : s ≤ 13 := by
+        have : s < 14 := by exact_mod_cast hsR
+        omega
+      have hs612 : s = 6 ∨ s = 12 := by omega
+      -- The lonely time `t = 13/(30 w₀)`.
+      set tW : ℝ := 13 / (30 * (w0 : ℝ)) with htW
+      have gw0 : (w0 : ℝ) * tW = 13 / 30 := by rw [htW]; field_simp
+      have gw1 : 3 * (w0 : ℝ) * tW = 13 / 10 := by rw [htW]; field_simp; ring
+      have gw2 : 4 * (w0 : ℝ) * tW = 26 / 15 := by rw [htW]; field_simp; ring
+      have gw3 : 5 * (w0 : ℝ) * tW = 13 / 6 := by rw [htW]; field_simp; ring
+      have gw46 : 6 * (w0 : ℝ) * tW = 13 / 5 := by rw [htW]; field_simp; ring
+      have gw412 : 12 * (w0 : ℝ) * tW = 26 / 5 := by rw [htW]; field_simp; ring
+      have htWmem : tW ∈ Set.Icc tW tW := ⟨le_refl _, le_refl _⟩
+      obtain ⟨i, hi⟩ := hcover tW
+      fin_cases i
+      · exact absurd hi (not_lt.mpr (bhk_prop11_safe_on_Icc (w0 : ℝ) 0
+          (by rw [gw0]; norm_num) (by rw [gw0]; norm_num) hw0R.le tW htWmem))
+      · refine absurd hi (not_lt.mpr ?_)
+        rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+        exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 1 (by rw [gw1]; norm_num)
+          (by rw [gw1]; norm_num) (by positivity) tW htWmem
+      · refine absurd hi (not_lt.mpr ?_)
+        rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+        exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 1 (by rw [gw2]; norm_num)
+          (by rw [gw2]; norm_num) (by positivity) tW htWmem
+      · refine absurd hi (not_lt.mpr ?_)
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 5 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        exact bhk_prop11_safe_on_Icc (5 * (w0 : ℝ)) 2 (by rw [gw3]; norm_num)
+          (by rw [gw3]; norm_num) (by positivity) tW htWmem
+      · refine absurd hi (not_lt.mpr ?_)
+        rcases hs612 with rfl | rfl
+        · rw [show ((w ⟨4, by omega⟩ : ℕ) : ℝ) = 6 * (w0 : ℝ) from by rw [hseqR]; push_cast; ring]
+          exact bhk_prop11_safe_on_Icc (6 * (w0 : ℝ)) 2 (by rw [gw46]; norm_num)
+            (by rw [gw46]; norm_num) (by positivity) tW htWmem
+        · rw [show ((w ⟨4, by omega⟩ : ℕ) : ℝ) = 12 * (w0 : ℝ) from by rw [hseqR]; push_cast; ring]
+          exact bhk_prop11_safe_on_Icc (12 * (w0 : ℝ)) 5 (by rw [gw412]; norm_num)
+            (by rw [gw412]; norm_num) (by positivity) tW htWmem
+    · -- r = 6: runner 4 = `6 w₀` is also safe on `I₂`, making it a 1234-gap.
+      have h4safe : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+        intro s hs
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 6 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        refine bhk_prop11_safe_on_Icc (6 * (w0 : ℝ)) 3 ?_ ?_ (by positivity) s hs
+        · rw [show 6 * (w0 : ℝ) * a = 6 * ((w0 : ℝ) * a) from by ring, e0a]; norm_num
+        · rw [show 6 * (w0 : ℝ) * b = 6 * ((w0 : ℝ) * b) from by ring, e0b]; norm_num
+      have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab hgap h4safe
+      have hc : (w0 : ℝ) * (s : ℝ) * (b - a) = (s : ℝ) * ((w0 : ℝ) * (b - a)) := by ring
+      rw [hseqR, hc, hbaW] at hspan
+      have hsR : (s : ℝ) < 5 := by linarith
+      have : s < 5 := by exact_mod_cast hsR
+      omega
+    · -- r = 7: `I₁ = [1/(6w₀), 5/(24w₀)]` is a 1234-gap (runner 4 = `7 w₀`).
+      set a1 : ℝ := 1 / (6 * (w0 : ℝ)) with ha1
+      set b1 : ℝ := 5 / (24 * (w0 : ℝ)) with hb1
+      have f0a : (w0 : ℝ) * a1 = 1 / 6 := by rw [ha1]; field_simp
+      have f0b : (w0 : ℝ) * b1 = 5 / 24 := by rw [hb1]; field_simp
+      have f1a : 3 * (w0 : ℝ) * a1 = 1 / 2 := by rw [ha1]; field_simp; ring
+      have f1b : 3 * (w0 : ℝ) * b1 = 5 / 8 := by rw [hb1]; field_simp; ring
+      have f2a : 4 * (w0 : ℝ) * a1 = 2 / 3 := by rw [ha1]; field_simp; ring
+      have f2b : 4 * (w0 : ℝ) * b1 = 5 / 6 := by rw [hb1]; field_simp; ring
+      have f3a : 7 * (w0 : ℝ) * a1 = 7 / 6 := by rw [ha1]; field_simp
+      have f3b : 7 * (w0 : ℝ) * b1 = 35 / 24 := by rw [hb1]; field_simp; ring
+      have hab1 : a1 ≤ b1 := by
+        have h : (w0 : ℝ) * a1 ≤ (w0 : ℝ) * b1 := by rw [f0a, f0b]; norm_num
+        exact le_of_mul_le_mul_left h hw0R
+      have hg1 : ∀ s ∈ Set.Icc a1 b1, ∀ i : Fin 3,
+          (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+        intro s hs i; fin_cases i
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s)
+          exact bhk_prop11_safe_on_Icc (w0 : ℝ) 0 (by rw [f0a]; norm_num)
+            (by rw [f0b]; norm_num) hw0R.le s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+          exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 0 (by rw [f1a]; norm_num)
+            (by rw [f1b]; norm_num) (by positivity) s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+          exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 0 (by rw [f2a]; norm_num)
+            (by rw [f2b]; norm_num) (by positivity) s hs
+      have h4safe : ∀ s ∈ Set.Icc a1 b1, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+        intro s hs
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 7 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        exact bhk_prop11_safe_on_Icc (7 * (w0 : ℝ)) 1 (by rw [f3a]; norm_num)
+          (by rw [f3b]; norm_num) (by positivity) s hs
+      have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab1 hg1 h4safe
+      have hba1W : (w0 : ℝ) * (b1 - a1) = 1 / 24 := by rw [mul_sub, f0b, f0a]; norm_num
+      have hc : (w0 : ℝ) * (s : ℝ) * (b1 - a1) = (s : ℝ) * ((w0 : ℝ) * (b1 - a1)) := by ring
+      rw [hseqR, hc, hba1W] at hspan
+      have : (s : ℝ) < 8 := by linarith
+      have : s < 8 := by exact_mod_cast this
+      omega
+    · -- r = 8: as r = 7 but runner 4 = `8 w₀` (window `k = 1`).
+      set a1 : ℝ := 1 / (6 * (w0 : ℝ)) with ha1
+      set b1 : ℝ := 5 / (24 * (w0 : ℝ)) with hb1
+      have f0a : (w0 : ℝ) * a1 = 1 / 6 := by rw [ha1]; field_simp
+      have f0b : (w0 : ℝ) * b1 = 5 / 24 := by rw [hb1]; field_simp
+      have f1a : 3 * (w0 : ℝ) * a1 = 1 / 2 := by rw [ha1]; field_simp; ring
+      have f1b : 3 * (w0 : ℝ) * b1 = 5 / 8 := by rw [hb1]; field_simp; ring
+      have f2a : 4 * (w0 : ℝ) * a1 = 2 / 3 := by rw [ha1]; field_simp; ring
+      have f2b : 4 * (w0 : ℝ) * b1 = 5 / 6 := by rw [hb1]; field_simp; ring
+      have f3a : 8 * (w0 : ℝ) * a1 = 4 / 3 := by rw [ha1]; field_simp; ring
+      have f3b : 8 * (w0 : ℝ) * b1 = 5 / 3 := by rw [hb1]; field_simp; ring
+      have hab1 : a1 ≤ b1 := by
+        have h : (w0 : ℝ) * a1 ≤ (w0 : ℝ) * b1 := by rw [f0a, f0b]; norm_num
+        exact le_of_mul_le_mul_left h hw0R
+      have hg1 : ∀ s ∈ Set.Icc a1 b1, ∀ i : Fin 3,
+          (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+        intro s hs i; fin_cases i
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s)
+          exact bhk_prop11_safe_on_Icc (w0 : ℝ) 0 (by rw [f0a]; norm_num)
+            (by rw [f0b]; norm_num) hw0R.le s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+          exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 0 (by rw [f1a]; norm_num)
+            (by rw [f1b]; norm_num) (by positivity) s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+          exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 0 (by rw [f2a]; norm_num)
+            (by rw [f2b]; norm_num) (by positivity) s hs
+      have h4safe : ∀ s ∈ Set.Icc a1 b1, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+        intro s hs
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 8 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        exact bhk_prop11_safe_on_Icc (8 * (w0 : ℝ)) 1 (by rw [f3a]; norm_num)
+          (by rw [f3b]; norm_num) (by positivity) s hs
+      have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab1 hg1 h4safe
+      have hba1W : (w0 : ℝ) * (b1 - a1) = 1 / 24 := by rw [mul_sub, f0b, f0a]; norm_num
+      have hc : (w0 : ℝ) * (s : ℝ) * (b1 - a1) = (s : ℝ) * ((w0 : ℝ) * (b1 - a1)) := by ring
+      rw [hseqR, hc, hba1W] at hspan
+      have : (s : ℝ) < 8 := by linarith
+      have : s < 8 := by exact_mod_cast this
+      omega
+    · -- r = 9: the gap `[1/(6w₀), 11/(54w₀)]` (= `[2/3, 44/54]`) is a 1234-gap.
+      set a9 : ℝ := 1 / (6 * (w0 : ℝ)) with ha9
+      set b9 : ℝ := 11 / (54 * (w0 : ℝ)) with hb9
+      have f0a : (w0 : ℝ) * a9 = 1 / 6 := by rw [ha9]; field_simp
+      have f0b : (w0 : ℝ) * b9 = 11 / 54 := by rw [hb9]; field_simp
+      have f1a : 3 * (w0 : ℝ) * a9 = 1 / 2 := by rw [ha9]; field_simp; ring
+      have f1b : 3 * (w0 : ℝ) * b9 = 11 / 18 := by rw [hb9]; field_simp; ring
+      have f2a : 4 * (w0 : ℝ) * a9 = 2 / 3 := by rw [ha9]; field_simp; ring
+      have f2b : 4 * (w0 : ℝ) * b9 = 22 / 27 := by rw [hb9]; field_simp; ring
+      have f3a : 9 * (w0 : ℝ) * a9 = 3 / 2 := by rw [ha9]; field_simp; ring
+      have f3b : 9 * (w0 : ℝ) * b9 = 11 / 6 := by rw [hb9]; field_simp; ring
+      have hab9 : a9 ≤ b9 := by
+        have h : (w0 : ℝ) * a9 ≤ (w0 : ℝ) * b9 := by rw [f0a, f0b]; norm_num
+        exact le_of_mul_le_mul_left h hw0R
+      have hg9 : ∀ s ∈ Set.Icc a9 b9, ∀ i : Fin 3,
+          (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+        intro s hs i; fin_cases i
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s)
+          exact bhk_prop11_safe_on_Icc (w0 : ℝ) 0 (by rw [f0a]; norm_num)
+            (by rw [f0b]; norm_num) hw0R.le s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨1, by omega⟩ : ℕ) : ℝ) = 3 * (w0 : ℝ) from hw1R]
+          exact bhk_prop11_safe_on_Icc (3 * (w0 : ℝ)) 0 (by rw [f1a]; norm_num)
+            (by rw [f1b]; norm_num) (by positivity) s hs
+        · change (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)
+          rw [show ((w ⟨2, by omega⟩ : ℕ) : ℝ) = 4 * (w0 : ℝ) from hw2R]
+          exact bhk_prop11_safe_on_Icc (4 * (w0 : ℝ)) 0 (by rw [f2a]; norm_num)
+            (by rw [f2b]; norm_num) (by positivity) s hs
+      have h4safe : ∀ s ∈ Set.Icc a9 b9, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+        intro s hs
+        rw [show ((w ⟨3, by omega⟩ : ℕ) : ℝ) = 9 * (w0 : ℝ) from by rw [hrR]; push_cast; ring]
+        exact bhk_prop11_safe_on_Icc (9 * (w0 : ℝ)) 1 (by rw [f3a]; norm_num)
+          (by rw [f3b]; norm_num) (by positivity) s hs
+      have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab9 hg9 h4safe
+      have hba9W : (w0 : ℝ) * (b9 - a9) = 1 / 27 := by rw [mul_sub, f0b, f0a]; norm_num
+      have hc : (w0 : ℝ) * (s : ℝ) * (b9 - a9) = (s : ℝ) * ((w0 : ℝ) * (b9 - a9)) := by ring
+      rw [hseqR, hc, hba9W] at hspan
+      have : (s : ℝ) < 9 := by linarith
+      have : s < 9 := by exact_mod_cast this
+      omega
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
