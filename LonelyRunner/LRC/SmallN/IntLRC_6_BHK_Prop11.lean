@@ -116,6 +116,19 @@ lemma bhk_prop11_gap123_translate (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
   rw [show s - 1 / (g : ℝ) + 1 / (g : ℝ) = s from by ring] at hper
   rw [hper]; exact hkey
 
+/-- **A long interval is in no single runner block.** A closed interval longer
+    than `1/(3 wᵢ)` (the width of one `Bᵢ` block) cannot be contained in
+    `unsafeOf wᵢ`: `block_containment` would force its length `< 1/(3 wᵢ)`. -/
+lemma bhk_prop11_not_subset_unsafeOf (w : Fin 5 → ℕ) (i : Fin 5) (hi : 0 < w i)
+    {a b : ℝ} (hab : a ≤ b) (hlong : 1 / (3 * (w i : ℝ)) < b - a) :
+    ¬ Set.Icc a b ⊆ unsafeOf w i := by
+  intro hsub
+  have hwi : (0 : ℝ) < (w i : ℝ) := by exact_mod_cast hi
+  obtain ⟨k, hk1, hk2⟩ := block_containment w i hi a b hab hsub
+  have hkey : (w i : ℝ) * (b - a) < 1 / 3 := by rw [mul_sub]; linarith
+  rw [div_lt_iff₀ (by positivity)] at hlong
+  nlinarith [hkey, hlong, hwi]
+
 /-- **No-wrap helper.** If `Int.fract x + b ∈ [0, 1)` then
     `Int.fract (x + b) = Int.fract x + b` — advancing a fractional position by a
     small nonnegative amount that does not cross the next integer. -/
