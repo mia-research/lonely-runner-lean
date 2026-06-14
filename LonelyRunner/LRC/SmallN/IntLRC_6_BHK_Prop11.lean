@@ -796,6 +796,55 @@ lemma bhk_prop11_lemma12 (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
         rw [bhk_prop11_circDist_orbit_dvd _ g hg h4']; exact hp5
       linarith
 
+/-- **BHK §5 Part 2 — Lemma 17 (`v₄ = r/q`, `v₅ = s/q`).** Conditional on
+    `q = w₂ / gcd(w₀,w₂) ≥ 5` (BHK Lemma 13), the denominators of runners 4 and 5
+    both divide `q`: `g ∣ w₃ ∧ g ∣ w₄` with `g = gcd(w₀,w₂)`. Corollary 15
+    (`bhk_prop11_witness_time`) produces a `0123`-gap of length `1/(3 w₂)`; since
+    `w₃, w₄ > w₂` this exceeds both block widths, so the gap lies in neither `B₄`
+    nor `B₅`, and Lemma 12 leaves only the divisibility conclusion. -/
+lemma bhk_prop11_lemma17 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨3, by omega⟩ ∧
+      Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨4, by omega⟩ := by
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgdvd0 : g ∣ w ⟨0, by omega⟩ := by rw [hgdef]; exact Nat.gcd_dvd_left _ _
+  have hgdvd2 : g ∣ w ⟨2, by omega⟩ := by rw [hgdef]; exact Nat.gcd_dvd_right _ _
+  have hgdvd1 : g ∣ w ⟨1, by omega⟩ := by
+    have he : w ⟨1, by omega⟩ = w ⟨2, by omega⟩ - w ⟨0, by omega⟩ := by omega
+    rw [he]; exact Nat.dvd_sub hgdvd2 hgdvd0
+  have hdvd012 : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩ := by
+    intro i; fin_cases i
+    · exact hgdvd0
+    · exact hgdvd1
+    · exact hgdvd2
+  -- Corollary 15 + the 0123-gap construction.
+  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
+  have hgap := bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi
+  -- The gap (length `1/(3 w₂)`) is too long to fit in `B₄` or `B₅`.
+  have hw2 : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos ⟨2, by omega⟩
+  have hgaplen : ∀ (j : Fin 5), w ⟨2, by omega⟩ < w j →
+      (1 : ℝ) / (3 * (w j : ℝ)) < (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t := by
+    intro j hj
+    rw [add_sub_cancel_left]
+    have hwj : (w ⟨2, by omega⟩ : ℝ) < (w j : ℝ) := by exact_mod_cast hj
+    exact one_div_lt_one_div_of_lt (by linarith) (by linarith)
+  have hn4 : ¬ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) ⊆ unsafeOf w ⟨3, by omega⟩ :=
+    bhk_prop11_not_subset_unsafeOf w ⟨3, by omega⟩ (hpos _)
+      (le_add_of_nonneg_right (by positivity))
+      (hgaplen ⟨3, by omega⟩ (hmono (Fin.mk_lt_mk.mpr (by omega))))
+  have hn5 : ¬ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) ⊆ unsafeOf w ⟨4, by omega⟩ :=
+    bhk_prop11_not_subset_unsafeOf w ⟨4, by omega⟩ (hpos _)
+      (le_add_of_nonneg_right (by positivity))
+      (hgaplen ⟨4, by omega⟩ (hmono (Fin.mk_lt_mk.mpr (by omega))))
+  rcases bhk_prop11_lemma12 w g hg0 hdvd012 hcover hgap with hc | hc | hc
+  · exact absurd hc hn4
+  · exact absurd hc hn5
+  · exact hc
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
