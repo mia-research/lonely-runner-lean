@@ -141,6 +141,26 @@ lemma bhk_isBHKLift_gen (r p q : ℕ) (hq : 0 < q) (hcop : Nat.gcd p q = 1) :
     rw [Int.fract_add_intCast, hh2, bhk_fract_val_div q hq]
     congr 1; push_cast; ring
 
+/-- Fractional part absorbs the integer part of the first summand. -/
+lemma bhk_fract_add_fract (x c : ℝ) :
+    Int.fract (x + c) = Int.fract (Int.fract x + c) := by
+  conv_lhs => rw [← Int.floor_add_fract x]
+  rw [add_assoc, Int.fract_intCast_add]
+
+/-- **Window from a `fract`.** If a torus value `S ∈ [0,1)` has
+    `fract (S - 1/6) ≤ β` with `β < 5/6`, then `S ∈ [1/6, 1/6 + β]`. (The
+    `S < 1/6` branch is impossible since then `fract (S - 1/6) = S + 5/6 ≥ 5/6`.) -/
+lemma bhk_window_from_fract {S β : ℝ} (hS0 : 0 ≤ S) (hS1 : S < 1)
+    (hβ : β < 5 / 6) (hb : Int.fract (S - 1 / 6) ≤ β) : 1 / 6 ≤ S ∧ S ≤ 1 / 6 + β := by
+  by_cases h : 1 / 6 ≤ S
+  · refine ⟨h, ?_⟩
+    rw [Int.fract_eq_self.2 ⟨by linarith, by linarith⟩] at hb; linarith
+  · push_neg at h
+    exfalso
+    rw [show S - 1 / 6 = (S + 5 / 6) + ((-1 : ℤ) : ℝ) from by push_cast; ring,
+      Int.fract_add_intCast, Int.fract_eq_self.2 ⟨by linarith, by linarith⟩] at hb
+    linarith
+
 /-- **Lattice from subgroup.** From `H ⊆ (ZMod n)²` a subgroup of order `n`,
     construct the sub-lattice `M ⊆ ℝ²` of integer points whose mod-`n`
     reduction lies in `H`, with a fundamental domain `F` of volume `n`.
@@ -2572,5 +2592,70 @@ theorem bhk_corollary_6
         have h_eq : (1 : ℝ)/α + β/α * (ij'.1 : ℝ) = (1 + β * (ij'.1 : ℝ)) / α := by
           field_simp
         linarith [h_div, h_eq]
+
+/-- **BHK §5 Part 3 — extraction of an exceptional pair (`q ≥ 18`).** Given the
+    "no good time" fact (the set `S = {({v₄(l+½)}, {v₁(l+½)})}` avoids the
+    `1/3 × 1/6` rectangle `R`, phrased as `h_nogood`), the main lemma
+    (`bhk_corollary_6`) forces the generator `(r/q, p/q)` to land in a finite
+    *exceptional* region: there is a nonzero `(i, j)` with `(i/q, j/q)` a multiple
+    of `(r/q, p/q)` on the torus, `0 ≤ i < 6`, and `|j| < 3 + i/2`.
+
+    The bridge: `S` avoids `R` ⟺ the lift `G` of `⟨(↑r,↑p)⟩` misses the rectangle
+    anchored at `(1/6 − r/(2q), 1/6 − p/(2q))` (the `½`-offset), so the
+    "hits every rectangle" disjunct of Corollary 6 fails. -/
+theorem bhk_part3_exceptional (r p q : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.gcd p q = 1)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+      (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
+                Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
+      0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
+      -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) := by
+  have hq0 : 0 < q := by omega
+  obtain ⟨G, hGlift, hGmem⟩ := bhk_isBHKLift_gen r p q hq0 hcop
+  set x₁ : ℝ := 1 / 6 - (r : ℝ) / (2 * q) with hx1def
+  set x₂ : ℝ := 1 / 6 - (p : ℝ) / (2 * q) with hx2def
+  have hmiss : ¬ ∀ a b, (G ∩ bhkRectangle a b (1 / 3) (1 / 6)).Nonempty := by
+    intro hall
+    obtain ⟨g, hgG, hgR⟩ := hall x₁ x₂
+    obtain ⟨k, hk1, hk2⟩ := hGmem g hgG
+    rw [bhkRectangle, Set.mem_setOf_eq] at hgR
+    obtain ⟨_, hg1u, _, hg2u⟩ := hgR
+    have hb1 : Int.fract (Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 3 := by
+      rw [show Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6
+            = Int.fract (g.1 + (r : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
+          ← bhk_fract_add_fract,
+          show g.1 + (r : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.1 - x₁ from by rw [hx1def]; ring]
+      exact hg1u
+    have hwin1 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
+      (by norm_num : (1 : ℝ) / 3 < 5 / 6) hb1
+    have hSeq1 : Int.fract (g.1 + (r : ℝ) / (2 * q))
+        = Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
+      rw [bhk_fract_add_fract g.1, hk1, ← bhk_fract_add_fract]; congr 1; ring
+    rw [hSeq1] at hwin1
+    have hb2 : Int.fract (Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 6 := by
+      rw [show Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6
+            = Int.fract (g.2 + (p : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
+          ← bhk_fract_add_fract,
+          show g.2 + (p : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.2 - x₂ from by rw [hx2def]; ring]
+      exact hg2u
+    have hwin2 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
+      (by norm_num : (1 : ℝ) / 6 < 5 / 6) hb2
+    have hSeq2 : Int.fract (g.2 + (p : ℝ) / (2 * q))
+        = Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
+      rw [bhk_fract_add_fract g.2, hk2, ← bhk_fract_add_fract]; congr 1; ring
+    rw [hSeq2] at hwin2
+    exact h_nogood k ⟨⟨hwin1.1, by linarith [hwin1.2]⟩, ⟨hwin2.1, by linarith [hwin2.2]⟩⟩
+  rcases bhk_corollary_6 G q (by omega) hGlift (1 / 3) (1 / 6) (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+      (by rw [show (1 : ℝ) / 3 * (1 / 6) = 1 / 18 from by norm_num]
+          exact one_div_le_one_div_of_le (by norm_num) (by exact_mod_cast hq18)) with
+    hhit | ⟨ij, hne, hmemij, h0, h1β, hc1, hc2⟩
+  · exact absurd hhit hmiss
+  · refine ⟨ij, hne, hGmem _ hmemij, h0, ?_, ?_, ?_⟩
+    · norm_num at h1β; exact h1β
+    · norm_num at hc1; linarith [hc1]
+    · norm_num at hc2; linarith [hc2]
 
 end BHK
