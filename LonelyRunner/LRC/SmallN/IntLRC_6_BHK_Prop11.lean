@@ -525,6 +525,176 @@ lemma bhk_prop11_dvd_of_orbit_covered (w g : ℕ) (hg : 0 < g) (x₀ : ℝ)
   obtain ⟨i, hi⟩ := bhk_prop11_orbit_escape w g hg hndvd x₀
   exact absurd (hcov i) (not_lt.mpr hi)
 
+/-- **Half-shift escapes the bad arc.** If `y` is covered (`circDist y < 1/6`) and
+    `s ∈ [1/2, 2/3]` then `y + s` is safe (`circDist (y + s) ≥ 1/6`). Shifting a
+    point of the bad arc `(−1/6, 1/6)` by roughly a half-turn lands it solidly in
+    the safe region `[1/6, 5/6]`. This is the geometric heart of the counting
+    bound (34): the shift injects covered times into safe times. -/
+lemma bhk_prop11_shift_safe (y s : ℝ) (hb : circDist y < 1 / 6)
+    (hs1 : 1 / 2 ≤ s) (hs2 : s ≤ 2 / 3) : (1 : ℝ) / 6 ≤ circDist (y + s) := by
+  have hfr : Int.fract (y + s) = Int.fract (Int.fract y + s) := by
+    conv_lhs => rw [← Int.floor_add_fract y]
+    rw [show (⌊y⌋ : ℝ) + Int.fract y + s = (Int.fract y + s) + ((⌊y⌋ : ℤ) : ℝ) from by
+      ring, Int.fract_add_intCast]
+  have hfy0 : 0 ≤ Int.fract y := Int.fract_nonneg y
+  have hfy1 : Int.fract y < 1 := Int.fract_lt_one y
+  unfold circDist at hb ⊢
+  rw [hfr]
+  rcases min_lt_iff.mp hb with hlt | hlt
+  · -- `Int.fract y < 1/6`: `y + s` lands in `[1/2, 5/6)`.
+    rw [Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    exact le_min (by linarith) (by linarith)
+  · -- `1 - Int.fract y < 1/6` (i.e. `Int.fract y > 5/6`): lands in `(1/3, 2/3)`.
+    rw [show Int.fract y + s = (Int.fract y + s - 1) + ((1 : ℤ) : ℝ) from by push_cast; ring,
+      Int.fract_add_intCast, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    exact le_min (by linarith) (by linarith)
+
+/-- **Existence of a half-turn shift.** If `g ∤ w` then some translate index `δ`
+    advances runner `w`'s circle position by an amount in `[1/2, 2/3]` (mod 1):
+    `Int.fract (δ · (w/g)) ∈ [1/2, 2/3]`. With `n = g / gcd(w,g) ≥ 2` the position
+    advances in steps of `1/n ≤ 1/2`, so the target window `[1/2, 2/3]` is hit by
+    `Δ = ⌈n/2⌉` steps (realised via `bhk_prop11_residue_solve`). -/
+lemma bhk_prop11_exists_half_shift (w g : ℕ) (hg : 0 < g) (hndvd : ¬ g ∣ w) :
+    ∃ δ : ℕ, (1 : ℝ) / 2 ≤ Int.fract ((δ : ℝ) * ((w : ℝ) / g))
+      ∧ Int.fract ((δ : ℝ) * ((w : ℝ) / g)) ≤ 2 / 3 := by
+  have hd0 : 0 < Nat.gcd w g := Nat.gcd_pos_of_pos_right w hg
+  have hdg : Nat.gcd w g ∣ g := Nat.gcd_dvd_right w g
+  have hdw : Nat.gcd w g ∣ w := Nat.gcd_dvd_left w g
+  have hcop : Nat.Coprime (w / Nat.gcd w g) (g / Nat.gcd w g) :=
+    Nat.coprime_div_gcd_div_gcd hd0
+  set d : ℕ := Nat.gcd w g with hd
+  set n : ℕ := g / d with hndef
+  set w' : ℕ := w / d with hw'def
+  have hdlt : d < g := lt_of_le_of_ne (Nat.le_of_dvd hg hdg) (fun h => hndvd (h ▸ hdw))
+  have hgdn : g = d * n := (Nat.mul_div_cancel' hdg).symm
+  have hn2 : 2 ≤ n := by
+    rcases Nat.lt_or_ge n 2 with h | h
+    · exfalso; interval_cases n <;> omega
+    · exact h
+  have hn0 : 0 < n := by omega
+  have hdR : (0 : ℝ) < (d : ℝ) := by exact_mod_cast hd0
+  have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
+  have hwf : (w : ℝ) = (d : ℝ) * (w' : ℝ) := by
+    rw [hw'def, ← Nat.cast_mul, Nat.mul_div_cancel' hdw]
+  have hgf : (g : ℝ) = (d : ℝ) * (n : ℝ) := by
+    rw [hndef, ← Nat.cast_mul, Nat.mul_div_cancel' hdg]
+  have hratio : (w : ℝ) / g = (w' : ℝ) / n := by
+    rw [hwf, hgf, mul_div_mul_left _ _ hdR.ne']
+  -- `Δ = ⌈n/2⌉` steps land in `[1/2, 2/3]`.
+  set Δ : ℕ := (n + 1) / 2 with hΔdef
+  have hΔn : Δ < n := by omega
+  have hΔlo : n ≤ 2 * Δ := by omega
+  have hΔhi : 3 * Δ ≤ 2 * n := by omega
+  obtain ⟨δ, hδ⟩ := bhk_prop11_residue_solve w' n hn0 hcop Δ
+  rw [Nat.mod_eq_of_lt hΔn] at hδ
+  set Q : ℕ := (w' * δ) / n with hQ
+  have hdivmod : w' * δ = n * Q + Δ := by
+    rw [hQ, ← hδ]; exact (Nat.div_add_mod (w' * δ) n).symm
+  have hfract : Int.fract ((δ : ℝ) * ((w : ℝ) / g)) = (Δ : ℝ) / n := by
+    rw [hratio]
+    have hstep : (δ : ℝ) * ((w' : ℝ) / n) = (Q : ℝ) + (Δ : ℝ) / n := by
+      rw [show (δ : ℝ) * ((w' : ℝ) / n) = ((δ * w' : ℕ) : ℝ) / n from by push_cast; ring,
+        show δ * w' = n * Q + Δ from by rw [Nat.mul_comm]; exact hdivmod]
+      push_cast; field_simp
+    rw [hstep, show (Q : ℝ) = ((Q : ℤ) : ℝ) from by push_cast; ring, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by positivity, by rw [div_lt_one hnR]; exact_mod_cast hΔn⟩
+  refine ⟨δ, ?_, ?_⟩
+  · rw [hfract, le_div_iff₀ hnR]
+    have : (n : ℝ) ≤ 2 * Δ := by exact_mod_cast hΔlo
+    linarith
+  · rw [hfract, div_le_iff₀ hnR]
+    have : 3 * (Δ : ℝ) ≤ 2 * n := by exact_mod_cast hΔhi
+    linarith
+
+/-- **BHK §5 Part 2 — counting bound (34).** Over one period `Finset.range g` of the
+    period-`1/g` translation, runner `w` (with `g ∤ w`) covers *at most half* the
+    times: `2 · #{covered i} ≤ g`. The half-turn shift `i ↦ (i + δ) % g`
+    (`bhk_prop11_exists_half_shift`) injects covered times into safe times
+    (`bhk_prop11_shift_safe`), so the covered set is no larger than its complement.
+    This is the density input to BHK's "`∃ a, n_a = 1`" step in Lemma 12. -/
+lemma bhk_prop11_orbit_half (w g : ℕ) (hg : 0 < g) (hndvd : ¬ g ∣ w) (x₀ : ℝ) :
+    2 * ((Finset.range g).filter
+        (fun i : ℕ => circDist (x₀ + (i : ℝ) * ((w : ℝ) / g)) < 1 / 6)).card ≤ g := by
+  obtain ⟨δ, hs1, hs2⟩ := bhk_prop11_exists_half_shift w g hg hndvd
+  set s : ℝ := Int.fract ((δ : ℝ) * ((w : ℝ) / g)) with hsdef
+  have hgR : (g : ℝ) ≠ 0 := by exact_mod_cast hg.ne'
+  set Bad : Finset ℕ := (Finset.range g).filter
+    (fun i : ℕ => circDist (x₀ + (i : ℝ) * ((w : ℝ) / g)) < 1 / 6) with hBaddef
+  have hsub : Bad ⊆ Finset.range g := Finset.filter_subset _ _
+  -- The half-turn shift injects `Bad` into its complement `range g \ Bad`.
+  have hcard : Bad.card ≤ (Finset.range g \ Bad).card := by
+    apply Finset.card_le_card_of_injOn (fun i => (i + δ) % g)
+    · intro i hi
+      simp only [Finset.mem_coe, hBaddef, Finset.mem_filter, Finset.mem_range] at hi
+      obtain ⟨hilt, hbad⟩ := hi
+      simp only [Finset.mem_coe, Finset.mem_sdiff, Finset.mem_range, hBaddef, Finset.mem_filter]
+      refine ⟨Nat.mod_lt _ hg, fun hcontra => ?_⟩
+      set m : ℕ := (i + δ) % g with hm
+      set c : ℕ := (i + δ) / g with hc
+      have hcm : i + δ = g * c + m := by rw [hm, hc]; exact (Nat.div_add_mod (i + δ) g).symm
+      have hcmR : (m : ℝ) = (i : ℝ) + δ - (g : ℝ) * c := by
+        have h := congrArg (Nat.cast (R := ℝ)) hcm
+        push_cast at h; linarith
+      have hsR : s = (δ : ℝ) * ((w : ℝ) / g) - (⌊(δ : ℝ) * ((w : ℝ) / g)⌋ : ℝ) := by
+        rw [hsdef, Int.fract]
+      have hKid : x₀ + (m : ℝ) * ((w : ℝ) / g)
+          = (x₀ + (i : ℝ) * ((w : ℝ) / g) + s)
+            + (((⌊(δ : ℝ) * ((w : ℝ) / g)⌋ - (c : ℤ) * (w : ℤ)) : ℤ) : ℝ) := by
+        rw [hcmR, hsR]; push_cast; field_simp; ring
+      have hsafe : (1 : ℝ) / 6 ≤ circDist (x₀ + (m : ℝ) * ((w : ℝ) / g)) := by
+        rw [hKid, bhk_prop11_circDist_add_int]
+        exact bhk_prop11_shift_safe _ s hbad hs1 hs2
+      exact absurd hcontra.2 (not_lt.mpr hsafe)
+    · intro i₁ h₁ i₂ h₂ heq
+      have hi1 : i₁ < g := Finset.mem_range.mp (hsub (Finset.mem_coe.mp h₁))
+      have hi2 : i₂ < g := Finset.mem_range.mp (hsub (Finset.mem_coe.mp h₂))
+      simp only at heq
+      have e : (i₁ + δ) ≡ (i₂ + δ) [MOD g] := heq
+      have h12 : i₁ ≡ i₂ [MOD g] := Nat.ModEq.add_right_cancel' δ e
+      calc i₁ = i₁ % g := (Nat.mod_eq_of_lt hi1).symm
+        _ = i₂ % g := h12
+        _ = i₂ := Nat.mod_eq_of_lt hi2
+  have hsd : (Finset.range g \ Bad).card = g - Bad.card := by
+    rw [Finset.card_sdiff, Finset.card_range, Finset.inter_eq_left.mpr hsub]
+  omega
+
+/-- **BHK §5 Part 2 — Lemma 12 "use (1)".** Two runners `wa, wb`, each with an
+    order-`≥ 2` orbit (`g ∤ wa`, `g ∤ wb`), cannot jointly cover every period-`1/g`
+    translate of a point at which they *both* cover (`circDist xa, xb < 1/6`).
+    Each covers at most half the period (`bhk_prop11_orbit_half`), so together they
+    cover at most all of it — but the shared cover at `i = 0` makes the union fall
+    strictly short. This is BHK's "`∃ a ∈ {4,5}, n_a = 1`": at least one runner's
+    orbit must collapse (`g ∣ w_a`). -/
+lemma bhk_prop11_no_double (g : ℕ) (hg : 0 < g) (wa wb : ℕ)
+    (hna : ¬ g ∣ wa) (hnb : ¬ g ∣ wb) (xa xb : ℝ)
+    (hua : circDist xa < 1 / 6) (hub : circDist xb < 1 / 6)
+    (hcov : ∀ i : ℕ, circDist (xa + (i : ℝ) * ((wa : ℝ) / g)) < 1 / 6
+        ∨ circDist (xb + (i : ℝ) * ((wb : ℝ) / g)) < 1 / 6) : False := by
+  have hAhalf := bhk_prop11_orbit_half wa g hg hna xa
+  have hBhalf := bhk_prop11_orbit_half wb g hg hnb xb
+  set A : Finset ℕ := (Finset.range g).filter
+    (fun i : ℕ => circDist (xa + (i : ℝ) * ((wa : ℝ) / g)) < 1 / 6) with hA
+  set B : Finset ℕ := (Finset.range g).filter
+    (fun i : ℕ => circDist (xb + (i : ℝ) * ((wb : ℝ) / g)) < 1 / 6) with hB
+  have hAsub : A ⊆ Finset.range g := Finset.filter_subset _ _
+  have hBsub : B ⊆ Finset.range g := Finset.filter_subset _ _
+  have hunion : A ∪ B = Finset.range g := by
+    apply Finset.Subset.antisymm (Finset.union_subset hAsub hBsub)
+    intro i hi
+    rw [Finset.mem_range] at hi
+    simp only [Finset.mem_union, hA, hB, Finset.mem_filter, Finset.mem_range]
+    rcases hcov i with h | h
+    · exact Or.inl ⟨hi, h⟩
+    · exact Or.inr ⟨hi, h⟩
+  have h0 : (0 : ℕ) ∈ A ∩ B := by
+    simp only [Finset.mem_inter, hA, hB, Finset.mem_filter, Finset.mem_range, Nat.cast_zero,
+      zero_mul, add_zero]
+    exact ⟨⟨hg, hua⟩, ⟨hg, hub⟩⟩
+  have hinter : 1 ≤ (A ∩ B).card := Finset.card_pos.mpr ⟨0, h0⟩
+  have hkey := Finset.card_union_add_card_inter A B
+  rw [hunion, Finset.card_range] at hkey
+  omega
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
