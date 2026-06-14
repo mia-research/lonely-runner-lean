@@ -695,6 +695,107 @@ lemma bhk_prop11_no_double (g : ℕ) (hg : 0 < g) (wa wb : ℕ)
   rw [hunion, Finset.card_range] at hkey
   omega
 
+/-- **Orbit periodicity for a divisor speed.** If `g ∣ v` then runner `v`'s
+    position is unchanged by the period-`1/g` translation: `circDist (v·u + i·(v/g))
+    = circDist (v·u)`, since `v/g` is an integer. Used to propagate `0123`-safety
+    (and, in Lemma 12's "use (2)", a divisor runner's safety) to every translate. -/
+lemma bhk_prop11_circDist_orbit_dvd (v g : ℕ) (hg : 0 < g) (hdvd : g ∣ v) (u : ℝ) (i : ℕ) :
+    circDist ((v : ℝ) * u + (i : ℝ) * ((v : ℝ) / g)) = circDist ((v : ℝ) * u) := by
+  obtain ⟨c, hc⟩ := hdvd
+  have hgR : (g : ℝ) ≠ 0 := by exact_mod_cast hg.ne'
+  have hstep : (i : ℝ) * ((v : ℝ) / g) = ((i * c : ℕ) : ℝ) := by
+    have hvR : (v : ℝ) = (g : ℝ) * (c : ℝ) := by rw [hc]; push_cast; ring
+    rw [hvR]; push_cast; field_simp
+  rw [hstep, show ((i * c : ℕ) : ℝ) = (((i * c : ℕ) : ℤ) : ℝ) from by push_cast; ring,
+    bhk_prop11_circDist_add_int]
+
+/-- **BHK §5 Part 2 — Lemma 12.** For a `0123`-gap `[a,b]` (runners 1,2,3 safe
+    throughout) under the indirect covering assumption, with `g` dividing the
+    speeds of runners 1,2,3: either runner 4 covers the whole gap, or runner 5
+    does, or *both* `v₄ = r/q` and `v₅ = s/q` (`g ∣ w₃ ∧ g ∣ w₄`). Use (1)
+    (`bhk_prop11_no_double`) forces one denominator to divide `g`; use (2)
+    (`bhk_prop11_dvd_of_orbit_covered`) then forces the other. -/
+lemma bhk_prop11_lemma12 (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
+    (hdvd012 : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    {a b : ℝ} (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s)) :
+    Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∨ Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩
+      ∨ (g ∣ w ⟨3, by omega⟩ ∧ g ∣ w ⟨4, by omega⟩) := by
+  by_cases h4 : Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩
+  · exact Or.inl h4
+  by_cases h5 : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩
+  · exact Or.inr (Or.inl h5)
+  refine Or.inr (Or.inr ?_)
+  have hcov45 := bhk_prop11_gap_covered w hcover hgap
+  obtain ⟨u, huIcc, hu4, hu5⟩ := bhk_prop11_overlap w hcov45 h4 h5
+  -- Translates of any 0123-safe point are covered by runner 4 or 5.
+  have htrans : ∀ (p : ℝ), p ∈ Set.Icc a b → ∀ i : ℕ,
+      circDist ((w ⟨3, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)) < 1 / 6 ∨
+      circDist ((w ⟨4, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)) < 1 / 6 := by
+    intro p hp i
+    obtain ⟨k, hk⟩ := hcover (p + (i : ℝ) * (1 / g))
+    -- runners 1,2,3 stay safe at the translate
+    have hsafe012 : ∀ j : Fin 3,
+        (1 : ℝ) / 6 ≤ circDist ((w ⟨j.val, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g))) := by
+      intro j
+      have hjexp : (w ⟨j.val, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g))
+          = (w ⟨j.val, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨j.val, by omega⟩ : ℝ) / g) := by
+        ring
+      rw [hjexp, bhk_prop11_circDist_orbit_dvd _ g hg (hdvd012 j)]
+      exact hgap p hp j
+    -- so the covering runner k is 4 or 5
+    fin_cases k
+    · exact absurd hk (not_lt.mpr (hsafe012 0))
+    · exact absurd hk (not_lt.mpr (hsafe012 1))
+    · exact absurd hk (not_lt.mpr (hsafe012 2))
+    · left
+      rw [show (w ⟨3, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)
+            = (w ⟨3, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g)) from by ring]
+      exact hk
+    · right
+      rw [show (w ⟨4, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)
+            = (w ⟨4, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g)) from by ring]
+      exact hk
+  -- use (1): at least one of runners 4, 5 has its orbit collapse (g ∣ w_a).
+  have hua : circDist ((w ⟨3, by omega⟩ : ℝ) * u) < 1 / 6 := (mem_unsafeOf_iff w _ u).mp hu4
+  have hub : circDist ((w ⟨4, by omega⟩ : ℝ) * u) < 1 / 6 := (mem_unsafeOf_iff w _ u).mp hu5
+  have hor : g ∣ w ⟨3, by omega⟩ ∨ g ∣ w ⟨4, by omega⟩ := by
+    by_contra hcon
+    rw [not_or] at hcon
+    exact bhk_prop11_no_double g hg _ _ hcon.1 hcon.2 _ _ hua hub (htrans u huIcc)
+  -- use (2): a point where runner `a` is also safe forces runner `b` to cover all
+  -- translates, collapsing its orbit too.
+  rcases hor with h3 | h4'
+  · -- `g ∣ w₃`; pick a point where runner 4 (`w₃`) is also safe, forcing runner 5.
+    refine ⟨h3, ?_⟩
+    rw [Set.not_subset] at h4
+    obtain ⟨p, hpIcc, hp4⟩ := h4
+    rw [mem_unsafeOf_iff, not_lt] at hp4
+    apply bhk_prop11_dvd_of_orbit_covered _ g hg ((w ⟨4, by omega⟩ : ℝ) * p)
+    intro i
+    rcases htrans p hpIcc i with h | h
+    · exfalso
+      have hsafe3 : (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * p
+          + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)) := by
+        rw [bhk_prop11_circDist_orbit_dvd _ g hg h3]; exact hp4
+      linarith
+    · exact h
+  · -- `g ∣ w₄`; pick a point where runner 5 (`w₄`) is also safe, forcing runner 4.
+    refine ⟨?_, h4'⟩
+    rw [Set.not_subset] at h5
+    obtain ⟨p, hpIcc, hp5⟩ := h5
+    rw [mem_unsafeOf_iff, not_lt] at hp5
+    apply bhk_prop11_dvd_of_orbit_covered _ g hg ((w ⟨3, by omega⟩ : ℝ) * p)
+    intro i
+    rcases htrans p hpIcc i with h | h
+    · exact h
+    · exfalso
+      have hsafe4 : (1 : ℝ) / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * p
+          + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)) := by
+        rw [bhk_prop11_circDist_orbit_dvd _ g hg h4']; exact hp5
+      linarith
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
