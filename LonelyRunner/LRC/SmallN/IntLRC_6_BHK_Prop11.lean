@@ -174,6 +174,52 @@ lemma bhk_prop11_gap123 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
         bhk_prop11_fract_add (by rw [h3]; linarith) (by rw [h3]; linarith)]
     simp only [circDist]; rw [hfs, h3]; exact le_min (by linarith) (by linarith)
 
+/-- **Covering of a 123-gap.** Under the indirect covering assumption, every
+    123-gap (runners 1, 2, 3 safe) must be covered by runners 4 and 5. -/
+lemma bhk_prop11_gap_covered (w : Fin 5 → ℕ)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    {a b : ℝ}
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s)) :
+    Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∪ unsafeOf w ⟨4, by omega⟩ := by
+  intro s hs
+  obtain ⟨i, hi⟩ := hcover s
+  fin_cases i
+  · exact absurd hi (not_lt.mpr (hgap s hs 0))
+  · exact absurd hi (not_lt.mpr (hgap s hs 1))
+  · exact absurd hi (not_lt.mpr (hgap s hs 2))
+  · exact Or.inl ((mem_unsafeOf_iff w _ s).mpr hi)
+  · exact Or.inr ((mem_unsafeOf_iff w _ s).mpr hi)
+
+/-- **BHK §5 Part 2 — Corollary 16 (`v₄ < 2`), conditional on a witness time.**
+    Given a half-integer time `t` (runner 3 at `1/2`) with runner 1 in
+    `[1/6, 1/3]`, the indirect covering assumption forces `w₃ < 2 w₂`
+    (`v₄ < 2 v₃`). The witness-time existence (BHK Corollary 15, via finite
+    equidistribution of the `w₂` half-integer positions of runner 1) is the
+    remaining ingredient. Proof: `bhk_prop11_gap123` gives a 123-gap of length
+    `1/(3 w₂)`; `bhk_lemma_4` bounds that length by `2/(3 w₃)`. -/
+lemma bhk_prop11_v4_lt_2v3_of_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3) :
+    (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3R : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hcov := bhk_prop11_gap_covered w hcover
+    (bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi)
+  have hab : t ≤ t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+    have : (0 : ℝ) ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) hab hcov
+  have hkey : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by
+    linarith
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hkey
+  linarith
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
