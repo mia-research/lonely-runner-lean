@@ -81,6 +81,99 @@ lemma bhk_prop11_fict_window {x : ℝ}
   rw [hrw, abs_lt]
   constructor <;> linarith
 
+/-- **No-wrap helper.** If `Int.fract x + b ∈ [0, 1)` then
+    `Int.fract (x + b) = Int.fract x + b` — advancing a fractional position by a
+    small nonnegative amount that does not cross the next integer. -/
+lemma bhk_prop11_fract_add {x b : ℝ} (hlo : 0 ≤ Int.fract x + b)
+    (hhi : Int.fract x + b < 1) : Int.fract (x + b) = Int.fract x + b := by
+  have hxe : x + b = (⌊x⌋ : ℝ) + (Int.fract x + b) := by rw [Int.fract]; ring
+  rw [hxe, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨hlo, hhi⟩]
+
+/-- **BHK §5 Part 2 — Lemma 14 (the 0123-gap construction, `ρ = 0`).** At a time
+    `t` where runner 3 is at the half-way point (`{w₂t} = 1/2`) and runner 1 is
+    in `[1/6, 1/3]`, the forward interval `[t, t + 1/(3 w₂)]` is a 123-gap:
+    runners 1, 2, 3 are all `≥ 1/6` from the origin throughout. (Runner 2 sits at
+    `1/2 - {w₁t}` since `w₀ + w₁ = w₂`.) This is the geometric input to the
+    `block_containment` arguments of Corollaries 15–16 and Lemma 18. -/
+lemma bhk_prop11_gap123 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3) :
+    ∀ s ∈ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  have hw0R : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1R : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  have hw1cast : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    have : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    linarith
+  -- runner 2 sits at 1/2 - {w₁t}
+  have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+      = 1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+    have h0 : (w ⟨1, by omega⟩ : ℝ) * t
+        = ((⌊(w ⟨2, by omega⟩ : ℝ) * t⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t⌋ : ℤ) : ℝ)
+          + (1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) := by
+      have e2 := Int.floor_add_fract ((w ⟨2, by omega⟩ : ℝ) * t)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      rw [h3] at e2
+      rw [hw1cast, sub_mul, Int.cast_sub]; linarith [e2, e0]
+    rw [h0, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  intro s hs i
+  obtain ⟨hsl, hsu⟩ := hs
+  have hd0 : 0 ≤ s - t := by linarith
+  have hdu : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith
+  fin_cases i
+  · -- runner 1 (w₀): {w₀s} = {w₀t} + w₀(s-t) ∈ [1/6, 4/9]
+    have hbnn : 0 ≤ (w ⟨0, by omega⟩ : ℝ) * (s - t) := mul_nonneg hw0R.le hd0
+    have hb : (w ⟨0, by omega⟩ : ℝ) * (s - t) < 1 / 9 := by
+      have h1 : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hdu hw0R.le
+      have h2 : (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) < 1 / 9 := by
+        rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [hsmallR]
+      linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  · -- runner 2 (w₁): {w₁s} = (1/2 - {w₀t}) + w₁(s-t) ∈ [1/6, 5/6]
+    have hbnn : 0 ≤ (w ⟨1, by omega⟩ : ℝ) * (s - t) := mul_nonneg hw1R.le hd0
+    have hb : (w ⟨1, by omega⟩ : ℝ) * (s - t) < 1 / 3 := by
+      have h1 : (w ⟨1, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨1, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hdu hw1R.le
+      have h2 : (w ⟨1, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) < 1 / 3 := by
+        rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [hw0R, hw1cast]
+      linarith
+    have hfs : Int.fract ((w ⟨1, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) + (w ⟨1, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨1, by omega⟩ : ℝ) * s
+            = (w ⟨1, by omega⟩ : ℝ) * t + (w ⟨1, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by rw [hf1]; linarith) (by rw [hf1]; linarith)]
+    simp only [circDist]; rw [hfs, hf1]; exact le_min (by linarith) (by linarith)
+  · -- runner 3 (w₂): {w₂s} = 1/2 + w₂(s-t) ∈ [1/2, 5/6]
+    have hbnn : 0 ≤ (w ⟨2, by omega⟩ : ℝ) * (s - t) := mul_nonneg hw2R.le hd0
+    have hb : (w ⟨2, by omega⟩ : ℝ) * (s - t) ≤ 1 / 3 := by
+      have h1 : (w ⟨2, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨2, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hdu hw2R.le
+      rw [mul_one_div] at h1
+      rw [show (w ⟨2, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) = 1 / 3 from by
+        field_simp] at h1
+      linarith
+    have hfs : Int.fract ((w ⟨2, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) + (w ⟨2, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨2, by omega⟩ : ℝ) * s
+            = (w ⟨2, by omega⟩ : ℝ) * t + (w ⟨2, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by rw [h3]; linarith) (by rw [h3]; linarith)]
+    simp only [circDist]; rw [hfs, h3]; exact le_min (by linarith) (by linarith)
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
