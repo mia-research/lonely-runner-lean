@@ -65,6 +65,22 @@ open MeasureTheory Set
 
 namespace BHK
 
+/-- **BHK §5 Part 1 — the fictional runner 0.** A runner of speed `2 v₁` sits
+    within `1/6` of the origin whenever runner 1 is in the window `(5/12, 7/12)`
+    (i.e. near the half-way point). This is the inclusion `½B₁ ⊆ B₀` that lets
+    the part-2 core (`bhk_prop11_core2`) fold its `{w₀t} ∈ (5/12,7/12)` window
+    into an ordinary covering by the six runners `2w₀, w₀, w₁, w₂, w₃, w₄`. -/
+lemma bhk_prop11_fict_window {x : ℝ}
+    (hx : Int.fract x ∈ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    circDist (2 * x) < 1 / 6 := by
+  rw [← mem_bhkB_iff]
+  refine ⟨2 * ⌊x⌋ + 1, ?_⟩
+  obtain ⟨h1, h2⟩ := hx
+  have hrw : 2 * x - ((2 * ⌊x⌋ + 1 : ℤ) : ℝ) = 2 * Int.fract x - 1 := by
+    rw [Int.fract]; push_cast; ring
+  rw [hrw, abs_lt]
+  constructor <;> linarith
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
