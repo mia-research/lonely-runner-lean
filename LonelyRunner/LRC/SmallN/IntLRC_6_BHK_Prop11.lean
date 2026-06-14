@@ -408,6 +408,123 @@ lemma bhk_prop11_v4_lt_2v3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
   obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
   exact bhk_prop11_v4_lt_2v3_of_time w hmono hpos hsum hsmall hcover t h3 h1lo h1hi
 
+/-- **Residue realization.** For coprime `w'` and `n > 0`, every residue class mod
+    `n` is hit by some multiple `w' · i`. (The `ZMod` unit-inverse construction of
+    `bhk_prop11_residue_hit`, extracted for reuse in the orbit argument.) -/
+lemma bhk_prop11_residue_solve (w' n : ℕ) (hn : 0 < n) (hcop : Nat.Coprime w' n)
+    (r : ℕ) : ∃ i : ℕ, (w' * i) % n = r % n := by
+  haveI : NeZero n := ⟨hn.ne'⟩
+  set u := ZMod.unitOfCoprime w' hcop with hu
+  refine ⟨(((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (r : ZMod n)).val, ?_⟩
+  have hcast : ((w' * (((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (r : ZMod n)).val : ℕ) : ZMod n)
+      = ((r : ℕ) : ZMod n) := by
+    push_cast
+    rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime w' hcop, ← hu,
+      ← mul_assoc]
+    rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+  exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+
+/-- **BHK §5 Part 2 — orbit escape (the kernel of Lemma 12, bound (34)).** If
+    `g ∤ w` then the orbit of runner `w` under the period-`1/g` translation cannot
+    stay within `1/6` of the origin: some translate `x₀ + i·(w/g)` has
+    `circDist ≥ 1/6`. Equivalently, a cyclic orbit of order `≥ 2` on the circle
+    escapes the bad arc `(−1/6, 1/6)`. This is the contrapositive of BHK's "the
+    positions … are equidistributed, so there can be only one [if all are
+    covered]": if every translate of a `0123a`-gap point were covered by runner
+    `b`, then `b`'s orbit would lie in the bad arc, forcing `g ∣ w_b`. -/
+lemma bhk_prop11_orbit_escape (w g : ℕ) (hg : 0 < g) (hndvd : ¬ g ∣ w) (x₀ : ℝ) :
+    ∃ i : ℕ, (1 : ℝ) / 6 ≤ circDist (x₀ + (i : ℝ) * ((w : ℝ) / g)) := by
+  -- Reduce by `d = gcd w g`: the orbit has order `n = g / d ≥ 2`.
+  have hd0 : 0 < Nat.gcd w g := Nat.gcd_pos_of_pos_right w hg
+  have hdg : Nat.gcd w g ∣ g := Nat.gcd_dvd_right w g
+  have hdw : Nat.gcd w g ∣ w := Nat.gcd_dvd_left w g
+  have hcop : Nat.Coprime (w / Nat.gcd w g) (g / Nat.gcd w g) :=
+    Nat.coprime_div_gcd_div_gcd hd0
+  set d : ℕ := Nat.gcd w g with hd
+  set n : ℕ := g / d with hndef
+  set w' : ℕ := w / d with hw'def
+  have hdlt : d < g := lt_of_le_of_ne (Nat.le_of_dvd hg hdg) (fun h => hndvd (h ▸ hdw))
+  have hgdn : g = d * n := (Nat.mul_div_cancel' hdg).symm
+  have hn2 : 2 ≤ n := by
+    rcases Nat.lt_or_ge n 2 with h | h
+    · exfalso; interval_cases n <;> omega
+    · exact h
+  have hn0 : 0 < n := by omega
+  -- Real bridge: `(w : ℝ) / g = w' / n`.
+  have hdR : (0 : ℝ) < (d : ℝ) := by exact_mod_cast hd0
+  have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
+  have hwf : (w : ℝ) = (d : ℝ) * (w' : ℝ) := by
+    rw [hw'def, ← Nat.cast_mul, Nat.mul_div_cancel' hdw]
+  have hgf : (g : ℝ) = (d : ℝ) * (n : ℝ) := by
+    rw [hndef, ← Nat.cast_mul, Nat.mul_div_cancel' hdg]
+  have hratio : (w : ℝ) / g = (w' : ℝ) / n := by
+    rw [hwf, hgf, mul_div_mul_left _ _ hdR.ne']
+  -- Choose the residue `r` putting `fract (x₀ + r/n)` near `1/2`.
+  set j₀ : ℤ := round ((n : ℝ) * (1 / 2 - Int.fract x₀)) with hj0
+  have hround : |(n : ℝ) * (1 / 2 - Int.fract x₀) - (j₀ : ℝ)| ≤ 1 / 2 := by
+    rw [hj0]; exact abs_sub_round _
+  set r : ℕ := (j₀ % (n : ℤ)).toNat with hrdef
+  have hr_emod : (r : ℤ) = j₀ % (n : ℤ) := by
+    rw [hrdef]
+    exact Int.toNat_of_nonneg (Int.emod_nonneg j₀ (by exact_mod_cast hn0.ne'))
+  have hrlt : r < n := by
+    have h : (r : ℤ) < (n : ℤ) := by
+      rw [hr_emod]; exact Int.emod_lt_of_pos j₀ (by exact_mod_cast hn0)
+    exact_mod_cast h
+  have hr_real : (r : ℝ) = (j₀ : ℝ) - (n : ℝ) * ((j₀ / (n : ℤ) : ℤ) : ℝ) := by
+    have h1 : (r : ℤ) = j₀ - (n : ℤ) * (j₀ / (n : ℤ)) := by rw [hr_emod, Int.emod_def]
+    exact_mod_cast h1
+  -- Realize residue `r`: `∃ i, (w' · i) % n = r`.
+  obtain ⟨i, hi⟩ := bhk_prop11_residue_solve w' n hn0 hcop r
+  rw [Nat.mod_eq_of_lt hrlt] at hi
+  set Q : ℕ := (w' * i) / n with hQ
+  have hdivmod : w' * i = n * Q + r := by
+    rw [hQ, ← hi]; exact (Nat.div_add_mod (w' * i) n).symm
+  have hiwR : (i : ℝ) * (w' : ℝ) = (n : ℝ) * (Q : ℝ) + (r : ℝ) := by
+    have h : i * w' = n * Q + r := by rw [Nat.mul_comm]; exact hdivmod
+    exact_mod_cast h
+  have hiw : (i : ℝ) * ((w : ℝ) / g) = (i : ℝ) * (w' : ℝ) / n := by rw [hratio]; ring
+  -- The orbit point equals `(fract x₀ + j₀/n)` shifted by an integer `K`.
+  set K : ℤ := ⌊x₀⌋ + (Q : ℤ) - j₀ / (n : ℤ) with hKdef
+  have hK : x₀ + (i : ℝ) * ((w : ℝ) / g)
+      = (Int.fract x₀ + (j₀ : ℝ) / (n : ℝ)) + (K : ℝ) := by
+    rw [hiw, hiwR, hr_real, hKdef]
+    push_cast
+    rw [Int.fract]
+    field_simp
+    ring
+  -- Bounds: `fract x₀ + j₀/n ∈ [1/4, 3/4]`.
+  have hn2R : (2 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn2
+  have hdiff : (1 : ℝ) / 2 - (Int.fract x₀ + (j₀ : ℝ) / n)
+      = ((n : ℝ) * (1 / 2 - Int.fract x₀) - j₀) / n := by
+    field_simp; ring
+  have habs : |(1 : ℝ) / 2 - (Int.fract x₀ + (j₀ : ℝ) / n)| ≤ 1 / 4 := by
+    rw [hdiff, abs_div, abs_of_pos hnR, div_le_iff₀ hnR]
+    calc |(n : ℝ) * (1 / 2 - Int.fract x₀) - j₀| ≤ 1 / 2 := hround
+      _ ≤ 1 / 4 * n := by linarith [hn2R]
+  have hb := abs_le.mp habs
+  have hlo : (1 : ℝ) / 4 ≤ Int.fract x₀ + (j₀ : ℝ) / n := by linarith [hb.2]
+  have hhi : Int.fract x₀ + (j₀ : ℝ) / n ≤ 3 / 4 := by linarith [hb.1]
+  refine ⟨i, ?_⟩
+  have hF : Int.fract (x₀ + (i : ℝ) * ((w : ℝ) / g)) = Int.fract x₀ + (j₀ : ℝ) / (n : ℝ) := by
+    rw [hK, Int.fract_add_intCast]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  unfold circDist
+  rw [hF]
+  exact le_min (by linarith) (by linarith)
+
+/-- **BHK §5 Part 2 — divisibility from full coverage (Lemma 12, "use (2)").** If a
+    single runner `w` covers *every* period-`1/g` translate of a base point
+    (`circDist (x₀ + i·(w/g)) < 1/6` for all `i`), then its orbit collapses to one
+    point: `g ∣ w`. This is the contrapositive of `bhk_prop11_orbit_escape`, and is
+    exactly how BHK forces the denominator of `v_b` to divide `q` once runner `b`
+    is the only available cover at a `0123a`-gap point. -/
+lemma bhk_prop11_dvd_of_orbit_covered (w g : ℕ) (hg : 0 < g) (x₀ : ℝ)
+    (hcov : ∀ i : ℕ, circDist (x₀ + (i : ℝ) * ((w : ℝ) / g)) < 1 / 6) : g ∣ w := by
+  by_contra hndvd
+  obtain ⟨i, hi⟩ := bhk_prop11_orbit_escape w g hg hndvd x₀
+  exact absurd (hcov i) (not_lt.mpr hi)
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
