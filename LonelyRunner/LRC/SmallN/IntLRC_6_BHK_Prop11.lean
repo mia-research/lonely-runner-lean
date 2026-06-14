@@ -129,6 +129,33 @@ lemma bhk_prop11_not_subset_unsafeOf (w : Fin 5 → ℕ) (i : Fin 5) (hi : 0 < w
   rw [div_lt_iff₀ (by positivity)] at hlong
   nlinarith [hkey, hlong, hwi]
 
+/-- `unsafeOf` is open (preimage of the open set `bhkB` under `t ↦ wᵢ·t`). -/
+lemma bhk_prop11_isOpen_unsafeOf (w : Fin 5 → ℕ) (i : Fin 5) :
+    IsOpen (unsafeOf w i) := by
+  have hbo : IsOpen bhkB := by
+    rw [bhkB_eq_iUnion_Ioo]; exact isOpen_iUnion fun _ => isOpen_Ioo
+  exact hbo.preimage (continuous_const.mul continuous_id)
+
+/-- **BHK §5 Part 2 — the overlap point of Lemma 12.** A 123-gap `[a,b]` that is
+    covered by runners 4, 5 but contained in *neither* `B₄` nor `B₅` must, being
+    connected, contain a time `u` covered by *both* runners 4 and 5. (This is
+    BHK's `u ∈ I ∩ B₄ ∩ B₅`, the start of the equidistribution argument.) -/
+lemma bhk_prop11_overlap (w : Fin 5 → ℕ) {a b : ℝ}
+    (hsub : Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∪ unsafeOf w ⟨4, by omega⟩)
+    (hn4 : ¬ Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩)
+    (hn5 : ¬ Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩) :
+    ∃ u ∈ Set.Icc a b, u ∈ unsafeOf w ⟨3, by omega⟩ ∧ u ∈ unsafeOf w ⟨4, by omega⟩ := by
+  have hne4 : (Set.Icc a b ∩ unsafeOf w ⟨3, by omega⟩).Nonempty := by
+    rw [Set.not_subset] at hn5; obtain ⟨p, hpJ, hpn5⟩ := hn5
+    exact ⟨p, hpJ, (hsub hpJ).resolve_right hpn5⟩
+  have hne5 : (Set.Icc a b ∩ unsafeOf w ⟨4, by omega⟩).Nonempty := by
+    rw [Set.not_subset] at hn4; obtain ⟨p, hpJ, hpn4⟩ := hn4
+    exact ⟨p, hpJ, (hsub hpJ).resolve_left hpn4⟩
+  obtain ⟨u, huJ, hu4, hu5⟩ :=
+    isPreconnected_Icc _ _ (bhk_prop11_isOpen_unsafeOf w _)
+      (bhk_prop11_isOpen_unsafeOf w _) hsub hne4 hne5
+  exact ⟨u, huJ, hu4, hu5⟩
+
 /-- **No-wrap helper.** If `Int.fract x + b ∈ [0, 1)` then
     `Int.fract (x + b) = Int.fract x + b` — advancing a fractional position by a
     small nonnegative amount that does not cross the next integer. -/
