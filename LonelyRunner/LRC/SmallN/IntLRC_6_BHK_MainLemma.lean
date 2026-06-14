@@ -95,6 +95,52 @@ lemma bhk_card_zmultiples_gen (r p q : ℕ) (hq : 0 < q) (hcop : Nat.gcd p q = 1
     Nat.card (AddSubgroup.zmultiples ((↑r, ↑p) : ZMod q × ZMod q)) = q := by
   rw [Nat.card_zmultiples]; exact bhk_addOrderOf_gen r p q hq hcop
 
+/-- **Fractional-part bridge.** The canonical representative `(m : ZMod q).val`
+    and the integer `m` have the same `fract` after dividing by `q`: they differ
+    by the integer `m / q`. Lets abstract `IsBHKLift` membership (phrased via
+    `.val`) be read off directly from the generator multiple `m`. -/
+lemma bhk_fract_val_div (q : ℕ) (hq : 0 < q) (m : ℤ) :
+    Int.fract ((((m : ZMod q)).val : ℝ) / (q : ℝ)) = Int.fract ((m : ℝ) / (q : ℝ)) := by
+  haveI : NeZero q := ⟨by omega⟩
+  have hqR : (q : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
+  have hval : (((m : ZMod q)).val : ℤ) = m % q := ZMod.val_intCast m
+  have hmod : q * (m / q) + m % q = m := Int.ediv_add_emod m q
+  have key : (m : ℝ) / q = ((m / q : ℤ) : ℝ) + (((m : ZMod q)).val : ℝ) / q := by
+    have e1 : (((m : ZMod q)).val : ℝ) = ((m % q : ℤ) : ℝ) := by exact_mod_cast hval
+    have hmodR : (m : ℝ) = (q : ℝ) * ((m / q : ℤ) : ℝ) + ((m % q : ℤ) : ℝ) := by
+      exact_mod_cast hmod.symm
+    rw [e1, hmodR]; field_simp
+  rw [key, Int.fract_intCast_add]
+
+/-- **The Part-3 lift `G`.** The ℤ²-periodic lift of the order-`q` cyclic group
+    `⟨(↑r, ↑p)⟩`. It satisfies `IsBHKLift G q`, and every point's torus
+    coordinates are read off the generator: `fract x.1 = fract(k r / q)`,
+    `fract x.2 = fract(k p / q)` for some `k : ℤ`. (BHK §5 Part 3, `q ≥ 18`.) -/
+lemma bhk_isBHKLift_gen (r p q : ℕ) (hq : 0 < q) (hcop : Nat.gcd p q = 1) :
+    ∃ G : Set (ℝ × ℝ), IsBHKLift G q ∧
+      ∀ x ∈ G, ∃ k : ℤ,
+        Int.fract x.1 = Int.fract ((k : ℝ) * r / q) ∧
+        Int.fract x.2 = Int.fract ((k : ℝ) * p / q) := by
+  refine ⟨{x | ∃ h ∈ AddSubgroup.zmultiples (((r : ZMod q), (p : ZMod q))), ∃ i j : ℤ,
+      x = ((h.1.val : ℝ) / q + i, (h.2.val : ℝ) / q + j)},
+    ⟨AddSubgroup.zmultiples _, bhk_card_zmultiples_gen r p q hq hcop, fun _ => Iff.rfl⟩, ?_⟩
+  rintro x ⟨h, hh, i, j, rfl⟩
+  rw [AddSubgroup.mem_zmultiples_iff] at hh
+  obtain ⟨k, hk⟩ := hh
+  have hh1 : h.1 = ((k * (r : ℤ) : ℤ) : ZMod q) := by
+    rw [← hk]; show k • (r : ZMod q) = ((k * (r : ℤ) : ℤ) : ZMod q)
+    rw [zsmul_eq_mul]; push_cast; ring
+  have hh2 : h.2 = ((k * (p : ℤ) : ℤ) : ZMod q) := by
+    rw [← hk]; show k • (p : ZMod q) = ((k * (p : ℤ) : ℤ) : ZMod q)
+    rw [zsmul_eq_mul]; push_cast; ring
+  refine ⟨k, ?_, ?_⟩
+  · show Int.fract ((h.1.val : ℝ) / q + (i : ℝ)) = Int.fract ((k : ℝ) * r / q)
+    rw [Int.fract_add_intCast, hh1, bhk_fract_val_div q hq]
+    congr 1; push_cast; ring
+  · show Int.fract ((h.2.val : ℝ) / q + (j : ℝ)) = Int.fract ((k : ℝ) * p / q)
+    rw [Int.fract_add_intCast, hh2, bhk_fract_val_div q hq]
+    congr 1; push_cast; ring
+
 /-- **Lattice from subgroup.** From `H ⊆ (ZMod n)²` a subgroup of order `n`,
     construct the sub-lattice `M ⊆ ℝ²` of integer points whose mod-`n`
     reduction lies in `H`, with a fundamental domain `F` of volume `n`.
