@@ -1,4 +1,5 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section7
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Prop11
 
 /-!
 # BHK §5 — the case `{v₁ t₀} = 0` (skeleton + dispatcher)
@@ -45,7 +46,10 @@ theorem bhk_prop11_part1 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩) :
     ∃ t : ℝ, ∀ i, circDist ((w i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+  -- Indirect: a covering of every time contradicts `bhk_prop11_core`.
+  by_contra hcon
+  push_neg at hcon
+  exact bhk_prop11_core w hmono hpos hsum hsmall hcon
 
 /-- **BHK Proposition 11, part 2** (OPEN — BHK pp. 17–40). Under the
     stronger hypothesis `6 w₀ < w₂` (`v₁ < 1/6`), the time can be chosen
@@ -56,7 +60,16 @@ theorem bhk_prop11_part2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩) :
     ∃ t : ℝ, (∀ i, circDist ((w i : ℝ) * t) ≥ (1 : ℝ) / 6) ∧
       Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ∉ Set.Ioo (5/12 : ℝ) (7/12) := by
-  sorry
+  -- Indirect: split each time into "some runner near origin" or
+  -- "runner 1 in (5/12, 7/12)", then apply `bhk_prop11_core2`.
+  by_contra hcon
+  push_neg at hcon
+  refine bhk_prop11_core2 w hmono hpos hsum hsmall6 (fun t => ?_)
+  by_cases hall : ∀ i, (1 : ℝ) / 6 ≤ circDist ((w i : ℝ) * t)
+  · exact Or.inr (hcon t hall)
+  · push_neg at hall
+    obtain ⟨i, hi⟩ := hall
+    exact Or.inl ⟨i, hi⟩
 
 /-- **BHK §5, Case 5.1** (OPEN). `v₁ = k·D` with `k ≥ 3`, `D = v₃ - v₂`:
     the "triple configuration" analysis — two or more nearby 123-gaps of
