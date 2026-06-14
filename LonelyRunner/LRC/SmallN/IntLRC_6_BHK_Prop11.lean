@@ -191,17 +191,67 @@ lemma bhk_prop11_gap_covered (w : Fin 5 → ℕ)
   · exact Or.inl ((mem_unsafeOf_iff w _ s).mpr hi)
   · exact Or.inr ((mem_unsafeOf_iff w _ s).mpr hi)
 
-/-- **BHK §5 Part 2 — Corollary 15 (witness half-integer time), coprime case.**
-    If `gcd(w₀, w₂) = 1` and `w₂ ≥ 6`, there is a time `t` at which runner 3 sits
-    at the half-way point (`{w₂t} = 1/2`) and runner 1 lies in `[1/6, 1/3]`. This
-    is the finite-equidistribution input to Corollary 16: among the candidate
-    times `t_m = (2m+1)/(2w₂)` the positions `{w₀ t_m}` form `w₂` points spaced
-    `1/w₂ ≤ 1/6`, so one lands in `[1/6, 1/3]`. Witness: `k = (w₂ - 3w₀ + 5)/6`
-    (giving `w₂ ≤ 6k + 3w₀ < 2w₂`) and `m` solving `w₀ m ≡ k (mod w₂)`. -/
+/-- **Residue hit (the equidistribution kernel).** For coprime `a, b` with
+    `3a < b` and `b ≥ 5`, some odd-multiple time `(2m+1)/(2b)` puts `a` in the
+    window `[1/6, 1/3]` mod 1. Witness: `k = (b - 3a + 5)/6` (so `b ≤ 6k+3a < 2b`)
+    and `m` solving `a m ≡ k (mod b)` via the `ZMod` unit inverse of `a`. -/
+lemma bhk_prop11_residue_hit (a b : ℕ) (ha : 0 < a) (h3a : 3 * a < b) (hb5 : 5 ≤ b)
+    (hcop : Nat.Coprime a b) :
+    ∃ m : ℕ, Int.fract ((a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * b)))
+      ∈ Set.Icc (1 / 6 : ℝ) (1 / 3) := by
+  have hb0 : 0 < b := by omega
+  haveI : NeZero b := ⟨by omega⟩
+  set k : ℕ := (b - 3 * a + 5) / 6 with hk
+  have hklo : b ≤ 6 * k + 3 * a := by omega
+  have hkhi : 6 * k + 3 * a < b + 6 := by omega
+  have hkn : k < b := by omega
+  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (a * m) % b = k % b := by
+    set u := ZMod.unitOfCoprime a hcop with hu
+    refine ⟨(((u⁻¹ : (ZMod b)ˣ) : ZMod b) * (k : ZMod b)).val, ?_⟩
+    have hcast : ((a * (((u⁻¹ : (ZMod b)ˣ) : ZMod b) * (k : ZMod b)).val : ℕ) : ZMod b)
+        = ((k : ℕ) : ZMod b) := by
+      push_cast
+      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime a hcop, ← hu,
+        ← mul_assoc]
+      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+  have hmk : (a * m) % b = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
+  set j : ℕ := (a * m) / b with hj
+  have hamj : a * m = b * j + k := by
+    rw [hj, ← hmk]; exact (Nat.div_add_mod (a * m) b).symm
+  have hbR : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb0
+  have hcast2b : (6 : ℝ) * k + 3 * a < 2 * b := by
+    have : 6 * k + 3 * a < 2 * b := by omega
+    exact_mod_cast this
+  have hcastlo : (b : ℝ) ≤ 6 * k + 3 * a := by exact_mod_cast hklo
+  refine ⟨m, Set.mem_Icc.mpr ?_⟩
+  have hfr : Int.fract ((a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * b)))
+      = (2 * (k : ℝ) + a) / (2 * b) := by
+    have hamR : (a : ℝ) * (m : ℝ) = (b : ℝ) * j + k := by exact_mod_cast hamj
+    have hae : (a : ℝ) * (2 * (m : ℝ) + 1) = 2 * b * j + (2 * k + a) := by
+      linear_combination 2 * hamR
+    have hstep : (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * b))
+        = (j : ℝ) + (2 * (k : ℝ) + a) / (2 * b) := by
+      rw [← mul_div_assoc, hae]; field_simp
+    rw [hstep, show (j : ℝ) = ((j : ℤ) : ℝ) from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by positivity, ?_⟩]
+    rw [div_lt_one (by positivity)]; linarith
+  rw [hfr]
+  refine ⟨?_, ?_⟩
+  · rw [le_div_iff₀ (by positivity)]; linarith
+  · rw [div_le_iff₀ (by positivity)]; linarith
+
+/-- **BHK §5 Part 2 — Corollary 15 (witness half-integer time).** Let
+    `q = w₂ / gcd(w₀, w₂)` be the reduced denominator of `v₁ = w₀/w₂`. If `q ≥ 5`
+    there is a time `t` at which runner 3 sits at the half-way point
+    (`{w₂t} = 1/2`) and runner 1 lies in `[1/6, 1/3]`. The `{w₀ t_m}` over the
+    candidate times `t_m = (2m+1)/(2w₂)` form `q` points spaced `1/q`; for
+    `q ≥ 5` (`q = 5` forces `a' = 1`, hitting `3/10`)
+    one lands in `[1/6, 1/3]` (reduces to `bhk_prop11_residue_hit` on the coprime
+    pair `w₀/g, w₂/g`). -/
 lemma bhk_prop11_witness_time (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
-    (hcop : Nat.Coprime (w ⟨0, by omega⟩) (w ⟨2, by omega⟩))
-    (hn6 : 6 ≤ w ⟨2, by omega⟩) :
+    (hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
     ∃ t : ℝ, Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2 ∧
       1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ∧
       Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3 := by
@@ -209,53 +259,36 @@ lemma bhk_prop11_witness_time (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
   set n := w ⟨2, by omega⟩ with hn
   have ha0 : 0 < a := hpos _
   have hn0 : 0 < n := by omega
-  haveI : NeZero n := ⟨by omega⟩
-  set k : ℕ := (n - 3 * a + 5) / 6 with hk
-  have hklo : n ≤ 6 * k + 3 * a := by omega
-  have hkhi : 6 * k + 3 * a < n + 6 := by omega
-  have hkn : k < n := by omega
-  -- solve  a * m ≡ k  (mod n)  via the modular inverse of a
-  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (a * m) % n = k % n := by
-    set u := ZMod.unitOfCoprime a hcop with hu
-    refine ⟨(((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (k : ZMod n)).val, ?_⟩
-    have hcast : ((a * (((u⁻¹ : (ZMod n)ˣ) : ZMod n) * (k : ZMod n)).val : ℕ) : ZMod n)
-        = ((k : ℕ) : ZMod n) := by
-      push_cast
-      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime a hcop, ← hu,
-        ← mul_assoc]
-      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
-    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
-  have hmk : (a * m) % n = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
-  set j : ℕ := (a * m) / n with hj
-  have hamj : a * m = n * j + k := by
-    rw [hj, ← hmk]; exact (Nat.div_add_mod (a * m) n).symm
-  -- the witness time
+  set g : ℕ := Nat.gcd a n with hgdef
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ ha0
+  have hga : g ∣ a := Nat.gcd_dvd_left a n
+  have hgn : g ∣ n := Nat.gcd_dvd_right a n
+  have ha'0 : 0 < a / g := Nat.div_pos (Nat.le_of_dvd ha0 hga) hg0
+  have h3a' : 3 * (a / g) < n / g := by
+    have hmul : 3 * (a / g) * g < n / g * g := by
+      calc 3 * (a / g) * g = 3 * a := by rw [mul_assoc, Nat.div_mul_cancel hga]
+        _ < n := hsmall
+        _ = n / g * g := (Nat.div_mul_cancel hgn).symm
+    exact lt_of_mul_lt_mul_right hmul (Nat.zero_le g)
+  have hcop' : Nat.Coprime (a / g) (n / g) := Nat.coprime_div_gcd_div_gcd hg0
+  obtain ⟨m, hm⟩ := bhk_prop11_residue_hit (a / g) (n / g) ha'0 h3a' hq5 hcop'
   have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
-  have hcast2n : (6 : ℝ) * k + 3 * a < 2 * n := by
-    have : 6 * k + 3 * a < 2 * n := by omega
-    exact_mod_cast this
-  have hcastlo : (n : ℝ) ≤ 6 * k + 3 * a := by exact_mod_cast hklo
-  -- runner 1's fractional position at the witness time
-  have haknn : (0 : ℝ) ≤ (k : ℝ) := by positivity
-  have haann : (0 : ℝ) ≤ (a : ℝ) := by positivity
-  have hfr : Int.fract ((a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n)))
-      = (2 * (k : ℝ) + a) / (2 * n) := by
-    have hamR : (a : ℝ) * (m : ℝ) = (n : ℝ) * j + k := by exact_mod_cast hamj
-    have hae : (a : ℝ) * (2 * (m : ℝ) + 1) = 2 * n * j + (2 * k + a) := by
-      linear_combination 2 * hamR
-    have hstep : (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n))
-        = (j : ℝ) + (2 * (k : ℝ) + a) / (2 * n) := by
-      rw [← mul_div_assoc, hae]; field_simp
-    rw [hstep, show (j : ℝ) = ((j : ℤ) : ℝ) from by push_cast; ring,
-      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by positivity, ?_⟩]
-    rw [div_lt_one (by positivity)]; linarith
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg0
+  have hb'R : (0 : ℝ) < ((n / g : ℕ) : ℝ) := by exact_mod_cast (by omega : 0 < n / g)
+  have haf : (a : ℝ) = (g : ℝ) * ((a / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hga]
+  have hnf : (n : ℝ) = (g : ℝ) * ((n / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hgn]
+  have heq : (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n))
+      = ((a / g : ℕ) : ℝ) * ((2 * (m : ℝ) + 1) / (2 * ((n / g : ℕ) : ℝ))) := by
+    rw [haf, hnf]; field_simp
   refine ⟨(2 * (m : ℝ) + 1) / (2 * n), ?_, ?_, ?_⟩
   · have hhalf : (n : ℝ) * ((2 * (m : ℝ) + 1) / (2 * n)) = (m : ℝ) + 1 / 2 := by
       field_simp
     rw [hhalf, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
       Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
-  · rw [hfr, le_div_iff₀ (by positivity)]; linarith
-  · rw [hfr, div_le_iff₀ (by positivity)]; linarith
+  · rw [heq]; exact (Set.mem_Icc.mp hm).1
+  · rw [heq]; exact (Set.mem_Icc.mp hm).2
 
 /-- **BHK §5 Part 2 — Corollary 16 (`v₄ < 2`), conditional on a witness time.**
     Given a half-integer time `t` (runner 3 at `1/2`) with runner 1 in
@@ -288,18 +321,16 @@ lemma bhk_prop11_v4_lt_2v3_of_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
 
 /-- **BHK §5 Part 2 — Corollary 16 (`v₄ < 2`).** Combining the witness-time
     existence (`bhk_prop11_witness_time`) with the conditional bound: under the
-    covering assumption, `gcd(w₀, w₂) = 1` and `w₂ ≥ 6` force `w₃ < 2 w₂`. The
-    coprimality and `w₂ ≥ 6` are the remaining structural facts (BHK Lemma 13
-    `q ≥ 5` plus the lowest-terms normalisation). -/
+    covering assumption, `q = w₂/gcd(w₀,w₂) ≥ 5` forces `w₃ < 2 w₂`. This `q ≥ 5`
+    is exactly BHK Lemma 13 — the only remaining structural fact for Cor 16. -/
 lemma bhk_prop11_v4_lt_2v3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
     (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
-    (hcop : Nat.Coprime (w ⟨0, by omega⟩) (w ⟨2, by omega⟩))
-    (hn6 : 6 ≤ w ⟨2, by omega⟩) :
+    (hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
     (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
-  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hcop hn6
+  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
   exact bhk_prop11_v4_lt_2v3_of_time w hmono hpos hsum hsmall hcover t h3 h1lo h1hi
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
