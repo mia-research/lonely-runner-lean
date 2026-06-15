@@ -321,6 +321,56 @@ lemma bhk_s5_case51_x4_from_I1 (speeds : Fin 5 → ℕ) (hmono : StrictMono spee
   rw [div_lt_div_iff₀ (mul_pos (by norm_num) hv2) (mul_pos (by norm_num) hv3)] at hlen
   linarith
 
+/-! ## Claim 10 tiling infrastructure
+
+A **1234-gap** — an interval on which runners 1, 2, 3, 4 are all `≥ 1/6` from the
+origin — is, under the covering hypothesis, covered by runner 5 *alone* (no other
+runner can be near), hence lies in a single 5-block and is short (`< 1/(3 v₅)`).
+This is the runner-5 analogue of `bhk_prop11_gap_covered`, and the basic counting
+unit of Claim 10 (BHK p. 15). -/
+
+/-- A 1234-gap (runners 1–4 all safe on `[a,b]`) is `⊆ B₅` under the covering
+    hypothesis: every time is covered by some runner, and runners 1–4 are
+    excluded, so runner 5 covers it. -/
+lemma bhk_s5_case51_gap1234_subset (speeds : Fin 5 → ℕ)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    {a b : ℝ}
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 4,
+      (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    Set.Icc a b ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+  intro s hs
+  obtain ⟨i, hi⟩ := hcover s
+  fin_cases i
+  · exact absurd hi (not_lt.mpr (hgap s hs 0))
+  · exact absurd hi (not_lt.mpr (hgap s hs 1))
+  · exact absurd hi (not_lt.mpr (hgap s hs 2))
+  · exact absurd hi (not_lt.mpr (hgap s hs 3))
+  · exact (mem_unsafeOf_iff speeds _ s).mpr hi
+
+/-- **The 1234-gap length bound.**  A 1234-gap has length `< 1/(3 v₅)`: being
+    `⊆ B₅`, it lies in a single 5-block (`block_length_bound`).  The runner-5
+    analogue of `bhk_lemma_4` for `B₄ ∪ B₅`. -/
+lemma bhk_s5_case51_gap1234_short (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    {a b : ℝ} (hab : a ≤ b)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 4,
+      (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    b - a < 1 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) :=
+  block_length_bound speeds ⟨4, by omega⟩ (hpos _) a b hab
+    (bhk_s5_case51_gap1234_subset speeds hcover hgap)
+
+/-- **Runner 4 is safe on a 4-gap.**  If `t` lies in the `k`-th runner-4 gap
+    `[(k+1/6)/v₄, (k+5/6)/v₄]`, then `circDist (v₄ t) ≥ 1/6`.  Used to upgrade a
+    123-gap to a 1234-gap on the parts flanking a 4-block. -/
+lemma bhk_s5_case51_runner4_safe_on_gap (speeds : Fin 5 → ℕ)
+    (hv4 : 0 < speeds ⟨3, by omega⟩) (k : ℤ) (t : ℝ)
+    (h1 : ((k : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ≤ t)
+    (h2 : t ≤ ((k : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) :
+    (1 : ℝ) / 6 ≤ circDist ((speeds ⟨3, by omega⟩ : ℝ) * t) := by
+  have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ hv4 k t h1 h2
+  rw [mem_unsafeOf_iff] at hnot
+  exact not_lt.mp hnot
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
