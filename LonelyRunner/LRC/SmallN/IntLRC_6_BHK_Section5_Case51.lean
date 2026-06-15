@@ -572,6 +572,26 @@ lemma bhk_s5_case51_claim10_5gap (speeds : Fin 5 → ℕ) (hmono : StrictMono sp
   have h2v4v5 : 2 * v4 < v5 := by rw [lt_div_iff₀ (by positivity)] at h23; linarith
   rw [div_lt_div_iff₀ (by positivity) (by positivity)]; linarith
 
+/-- **BHK eqn (24) ⟹ `1/4 < x₅ < 1/2`.**  From the two inequalities of eqn (24)
+    (`2/(3v₅) < 1/(3v₄)` and `1/(2v₃) < 2/(3v₅) + 1/(3v₄)`) together with `x₄ < 1`
+    (`v₃ < v₄`), the runner-5 reciprocal `x₅ = v₃/v₅` satisfies `x₅ < 1/2`
+    (`2v₃ < v₅`) and `x₅ > 1/4` (`v₅ < 4v₃`). -/
+lemma bhk_s5_case51_x5_bounds (v3 v4 v5 : ℝ) (hv3 : 0 < v3) (hv5 : 0 < v5) (h34 : v3 < v4)
+    (h24a : 2 / (3 * v5) < 1 / (3 * v4))
+    (h24b : 1 / (2 * v3) < 2 / (3 * v5) + 1 / (3 * v4)) :
+    2 * v3 < v5 ∧ v5 < 4 * v3 := by
+  have hv4 : 0 < v4 := lt_trans hv3 h34
+  have hb : (1 : ℝ) / (3 * v4) < 1 / (3 * v3) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  refine ⟨?_, ?_⟩
+  · -- `x₅ < 1/2`: `2/(3v₅) < 1/(3v₄) < 1/(3v₃)`.
+    have h : (2 : ℝ) / (3 * v5) < 1 / (3 * v3) := lt_trans h24a hb
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at h; linarith
+  · -- `x₅ > 1/4`: `2/(3v₅) > 1/(2v₃) − 1/(3v₄) > 1/(6v₃)`.
+    have e : (1 : ℝ) / (2 * v3) - 1 / (3 * v3) = 1 / (6 * v3) := by field_simp; ring
+    have hlow : (1 : ℝ) / (6 * v3) < 2 / (3 * v5) := by linarith [h24b, hb, e]
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hlow; linarith
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
