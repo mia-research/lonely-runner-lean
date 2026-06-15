@@ -286,6 +286,23 @@ lemma bhk_s5_case51_x4_incompatible (x₄ : ℝ) (i l : ℕ) (hil : i ≤ l)
     rw [div_le_div_iff₀ d2 d1]; nlinarith [hl, hi0]
   linarith
 
+/-- **BHK eqn (30) extraction.**  A multiple configuration of `l+1` gaps spanned
+    by runner-4 blocks gives `(l + 2/3)·x₄ > l + 1/2` (eqn (29) arithmetic);
+    hence `x₄ > (6l+3)/(6l+4)`.  This is the bound fed to
+    `bhk_s5_case51_x4_incompatible`.  (`l = 1` recovers eqn (27), `x₄ > 9/10`.) -/
+lemma bhk_s5_case51_eqn30 (x₄ : ℝ) (l : ℕ)
+    (h : (l + 2 / 3) * x₄ > (l : ℝ) + 1 / 2) :
+    (6 * (l : ℝ) + 3) / (6 * l + 4) < x₄ := by
+  rw [div_lt_iff₀ (by positivity)]; nlinarith [h]
+
+/-- **BHK eqn (33) extraction.**  The configuration's placement (`t = i + 1/3`)
+    gives `(i + 1/2)·x₄ < i + 1/3`; hence `x₄ < (6i+2)/(6i+3)`.  The upper bound
+    fed to `bhk_s5_case51_x4_incompatible`. -/
+lemma bhk_s5_case51_eqn33 (x₄ : ℝ) (i : ℕ)
+    (h : (i + 1 / 2) * x₄ < (i : ℝ) + 1 / 3) :
+    x₄ < (6 * (i : ℝ) + 2) / (6 * i + 3) := by
+  rw [lt_div_iff₀ (by positivity)]; nlinarith [h]
+
 /-- **BHK eqn (22).**  If a 123-gap `I₁` of length `1/(2 v₃)` (BHK's normalised
     `1/2`) is covered by runners 4 and 5, then `x₄ > 3/4`, i.e. `3 v₄ < 4 v₃`.
     Direct from `bhk_lemma_4` (`|I₁| < 2/(3 v₄)`). -/
