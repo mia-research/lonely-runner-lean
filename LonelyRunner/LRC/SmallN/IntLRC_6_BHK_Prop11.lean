@@ -427,6 +427,52 @@ lemma bhk_prop11_fract_odd_mul (p q : ℕ) (hq : 0 < q) (hcop : Nat.Coprime p q)
   have : (2 : ℝ) * k + p < 2 * q := by exact_mod_cast hwrap
   linarith
 
+/-- **Even-`β` read-off.** For `r = 2q - γp`, runner `r`'s coordinate on the
+    half-integer time `(2m+1)/(2q)` is `1 - γ·A` (where `A = {p·(2m+1)/(2q)}`),
+    provided `0 < γ·A < 1`. Drives the `j = -1` pairs `(γ, -1)`. -/
+lemma bhk_prop11_readoff_even (p q r γ m : ℕ) (hq0 : 0 < q)
+    (hr : (r : ℝ) = 2 * (q : ℝ) - (γ : ℝ) * p)
+    (hA0 : 0 < (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) < 1) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 1 - (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (2 * (m : ℝ) + 1) - (γ : ℝ) * Z := by
+    rw [hZdef, hr]; field_simp
+  rw [ht1, show (2 * (m : ℝ) + 1) - (γ : ℝ) * Z
+        = (-(γ : ℝ) * A) + ((2 * (m : ℤ) + 1 - γ * ⌊Z⌋ : ℤ) : ℝ) from by
+        nth_rewrite 1 [hAz]; push_cast; ring,
+      Int.fract_add_intCast]
+  have hfloor : ⌊-(γ : ℝ) * A⌋ = -1 := by
+    rw [Int.floor_eq_iff]; exact ⟨by push_cast; linarith, by push_cast; linarith⟩
+  rw [Int.fract, hfloor]; push_cast; ring
+
+/-- **Odd-`β` read-off.** For `r = q + γp`, runner `r`'s coordinate on the
+    half-integer time `(2m+1)/(2q)` is `γ·A - 1/2` (where `A = {p·(2m+1)/(2q)}`),
+    provided `1/2 ≤ γ·A < 3/2`. Drives the `j = 1` pairs `(γ, 1)`. -/
+lemma bhk_prop11_readoff_odd (p q r γ m : ℕ) (hq0 : 0 < q)
+    (hr : (r : ℝ) = (q : ℝ) + (γ : ℝ) * p)
+    (hA0 : 1 / 2 ≤ (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) < 3 / 2) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = (γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) - 1 / 2 := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = ((m : ℝ) + 1 / 2) + (γ : ℝ) * Z := by
+    rw [hZdef, hr]; field_simp
+  rw [ht1, show ((m : ℝ) + 1 / 2) + (γ : ℝ) * Z
+        = ((γ : ℝ) * A - 1 / 2) + ((m : ℤ) + γ * ⌊Z⌋ + 1 : ℤ) from by
+        nth_rewrite 1 [hAz]; push_cast; ring,
+      Int.fract_add_intCast]
+  have hfloor : ⌊(γ : ℝ) * A - 1 / 2⌋ = 0 := by
+    rw [Int.floor_eq_iff]; exact ⟨by push_cast; linarith, by push_cast; linarith⟩
+  rw [Int.fract, hfloor]; push_cast; ring
+
 /-- **BHK §5 Part 5 — the pair `(2, -1)` (witness branch).** When `q/4 < p`, the
     relation pins `r = 2q - 2p`. Then on the half-integer time `(2m+1)/(2q)` with
     `{p·(2m+1)/(2q)} ∈ [1/4, 1/3]` (achievable since the window has width
@@ -2103,6 +2149,77 @@ lemma bhk_prop11_exc_3_1 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q
   have hr : r = q + 3 * p := by omega
   have h6p : 6 * p < q := by omega
   exact bhk_prop11_exc_3_1_hit p q r hq18 hcop hp h6p hr h_nogood
+
+/-- **BHK §5 Part 5 — the pair `(3, -1)` (witness branch).** When `q < 6p`, the
+    relation pins `r = 2q - 3p`. Aiming `{p·(2m+1)/(2q)} ∈ [1/6, 5/18]`, runner `r`
+    reads off (via `bhk_prop11_readoff_even`, `γ = 3`) as `1 - 3A ∈ [1/6, 1/2]` and
+    runner `p` lands `[1/6, 1/3]` — a good time, contradicting `h_nogood`. -/
+lemma bhk_prop11_exc_3_neg1_hit (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h6p : q < 6 * p) (h3p : 3 * p < q) (hr : r = 2 * q - 3 * p)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hrR : (r : ℝ) = 2 * (q : ℝ) - 3 * (p : ℝ) := by
+    rw [hr, Nat.cast_sub (by omega)]; push_cast; ring
+  set k : ℕ := (q - 3 * p + 5) / 6 with hkdef
+  have hkn : k < q := by omega
+  have hwrap : 2 * k + p < 2 * q := by omega
+  obtain ⟨m, hm⟩ := bhk_prop11_fract_odd_mul p q hq0 hcop k hkn hwrap
+  set A : ℝ := (2 * (k : ℝ) + p) / (2 * q) with hAdef
+  have hpeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = A := by
+    rw [← hm]; congr 1; field_simp
+  have hA_lo : 1 / 6 ≤ A := by
+    rw [hAdef, le_div_iff₀ (by positivity)]
+    have : (q : ℝ) ≤ 3 * (2 * k + p) := by
+      have : q ≤ 3 * (2 * k + p) := by omega
+      exact_mod_cast this
+    linarith
+  have hA_hi : A ≤ 5 / 18 := by
+    rw [hAdef, div_le_iff₀ (by positivity)]
+    have : (9 : ℝ) * (2 * k + p) ≤ 5 * q := by
+      have : 9 * (2 * k + p) ≤ 5 * q := by omega
+      exact_mod_cast this
+    linarith
+  have hreadoff := bhk_prop11_readoff_even p q r 3 m hq0 hrR
+    (by rw [hpeq]; push_cast; linarith) (by rw [hpeq]; push_cast; linarith)
+  rw [hpeq] at hreadoff
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hreadoff]; push_cast; linarith
+  · rw [hmcast, hreadoff]; push_cast; linarith
+  · rw [hmcast, hpeq]; linarith
+  · rw [hmcast, hpeq]; linarith
+
+/-- **BHK §5 Part 5 — the pair `(3, -1)` (full readout form).** From the readout
+    the relation gives `q ∣ (3p + r)`; with `q < r`, `2r < 3q`, `3p < q` we have
+    `q < 3p + r < 5q/2`, so `3p + r = 2q`, i.e. `r = 2q - 3p` (whence `q < 6p`).
+    The witness `bhk_prop11_exc_3_neg1_hit` then closes it. -/
+lemma bhk_prop11_exc_3_neg1 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hk1 : Int.fract (((3 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-1 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq0 3 (-1) k hk1 hk2
+  have hdvdZ : (q : ℤ) ∣ (3 * (p : ℤ) + r) := by
+    have h := Int.modEq_iff_dvd.mp hrel
+    rw [show (-1 : ℤ) * (r : ℤ) - 3 * (p : ℤ) = -(3 * (p : ℤ) + r) from by ring] at h
+    exact dvd_neg.mp h
+  have hdvd : q ∣ (3 * p + r) := by exact_mod_cast hdvdZ
+  have hrr : 3 * p + r = 2 * q := by
+    rcases lt_trichotomy (3 * p + r) (2 * q) with hlt | heq | hgt
+    · exact absurd hdvd (bhk_prop11_no_strict_mult 1 (by omega) (by omega))
+    · exact heq
+    · exact absurd hdvd (bhk_prop11_no_strict_mult 2 (by omega) (by omega))
+  have hr : r = 2 * q - 3 * p := by omega
+  have h6p : q < 6 * p := by omega
+  exact bhk_prop11_exc_3_neg1_hit p q r hq18 hcop hp h6p h3p hr h_nogood
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
