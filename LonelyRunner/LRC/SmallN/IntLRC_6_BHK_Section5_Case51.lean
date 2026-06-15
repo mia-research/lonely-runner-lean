@@ -371,6 +371,75 @@ lemma bhk_s5_case51_runner4_safe_on_gap (speeds : Fin 5 → ℕ)
   rw [mem_unsafeOf_iff] at hnot
   exact not_lt.mp hnot
 
+/-- **Claim 10, eqn (24) — the `I₁` decomposition.**  If the 123-gap
+    `I₁ = [t, t+1/(2v₃)]` contains a runner-4 block `[(j−1/6)/v₄, (j+1/6)/v₄]`
+    (eqn (23)), then — under covering and `3v₄ < 4v₃` — the two pieces of `I₁`
+    flanking the 4-block are 1234-gaps (each `< 1/(3v₅)`), so
+    `1/(2v₃) < 2/(3v₅) + 1/(3v₄)`.  This is the second inequality of BHK eqn (24);
+    it is the first assembly of the 1234-gap machinery. -/
+lemma bhk_s5_case51_claim10_decomp (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgap123 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (hjt : t ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hjt' : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      < 2 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) + 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  set v3 := (speeds ⟨2, by omega⟩ : ℝ) with hv3def
+  set v4 := (speeds ⟨3, by omega⟩ : ℝ) with hv4def
+  set v5 := (speeds ⟨4, by omega⟩ : ℝ) with hv5def
+  have h12v3 : (1 : ℝ) / (2 * v3) ≤ 1 / v4 := one_div_le_one_div_of_le hv4 (by linarith)
+  have hjj : ((j : ℝ) - 1 / 6) / v4 ≤ ((j : ℝ) + 1 / 6) / v4 := by
+    rw [div_le_div_iff₀ hv4 hv4]; nlinarith [hv4]
+  have hI1bound : ((j : ℝ) - 1 / 6) / v4 ≤ t + 1 / (2 * v3) := le_trans hjj hjt'
+  have htj1 : t ≤ ((j : ℝ) + 1 / 6) / v4 := le_trans hjt hjj
+  -- Positioning: block j-1 is left of I₁, block j+1 is right of I₁ (uses `3v₄<4v₃`).
+  have hF1 : ((j : ℝ) - 5 / 6) / v4 ≤ t := by
+    have e : ((j : ℝ) - 5 / 6) / v4 = ((j : ℝ) + 1 / 6) / v4 - 1 / v4 := by
+      field_simp; ring
+    linarith [hjt', h12v3, e]
+  have hF2 : t + 1 / (2 * v3) ≤ ((j : ℝ) + 5 / 6) / v4 := by
+    have e : ((j : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 + 1 / v4 := by
+      field_simp; ring
+    linarith [hjt, h12v3, e]
+  -- The left flank [t, (j-1/6)/v₄] is a 1234-gap.
+  have hLshort : ((j : ℝ) - 1 / 6) / v4 - t < 1 / (3 * v5) := by
+    apply bhk_s5_case51_gap1234_short speeds hpos hcover hjt
+    intro s hs i
+    fin_cases i
+    · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 0
+    · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 1
+    · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 2
+    · apply bhk_s5_case51_runner4_safe_on_gap speeds (hpos ⟨3, by omega⟩) (j - 1) s
+      · rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / v4 = ((j : ℝ) - 5 / 6) / v4 from by
+            push_cast; ring]
+        linarith [hF1, hs.1]
+      · rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 from by
+            push_cast; ring]
+        exact hs.2
+  -- The right flank [(j+1/6)/v₄, t+1/(2v₃)] is a 1234-gap.
+  have hRshort : (t + 1 / (2 * v3)) - ((j : ℝ) + 1 / 6) / v4 < 1 / (3 * v5) := by
+    apply bhk_s5_case51_gap1234_short speeds hpos hcover hjt'
+    intro s hs i
+    fin_cases i
+    · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 0
+    · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 1
+    · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 2
+    · apply bhk_s5_case51_runner4_safe_on_gap speeds (hpos ⟨3, by omega⟩) j s
+      · exact hs.1
+      · exact le_trans hs.2 hF2
+  -- Sum the two flank lengths.
+  have hsum : (((j : ℝ) - 1 / 6) / v4 - t) + ((t + 1 / (2 * v3)) - ((j : ℝ) + 1 / 6) / v4)
+      = 1 / (2 * v3) - 1 / (3 * v4) := by field_simp; ring
+  have htwo : (1 : ℝ) / (3 * v5) + 1 / (3 * v5) = 2 / (3 * v5) := by ring
+  linarith [hLshort, hRshort, hsum, htwo]
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
