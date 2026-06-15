@@ -132,6 +132,42 @@ existence (how triple/multiple configurations arise from `k ≥ 3`, eqns
 counting (27)/(30) plus the two explicit sub-cases (5.1.1, 5.1.2) go here.
 -/
 
+/-- **The (30)/(33) incompatibility — BHK's contradiction.**  A multiple
+    configuration with `l ≥ i` forces `x₄ > (6l+3)/(6l+4)` (eqn (30)); the
+    configuration's origin (eqn (33)) forces `x₄ < (6i+2)/(6i+3)`.  Since
+    `(6i+2)/(6i+3) ≤ (6l+3)/(6l+4)` whenever `i ≤ l` (the difference of
+    cross-products is `6(l−i)+1 > 0`), the two bounds on `x₄ = v₃/v₄` are
+    contradictory.  This is the logical climax of Case 5.1: every multiple
+    configuration with `l ≥ i` is impossible. -/
+lemma bhk_s5_case51_x4_incompatible (x₄ : ℝ) (i l : ℕ) (hil : i ≤ l)
+    (h30 : (6 * (l : ℝ) + 3) / (6 * l + 4) < x₄)
+    (h33 : x₄ < (6 * (i : ℝ) + 2) / (6 * i + 3)) : False := by
+  have hl : (i : ℝ) ≤ l := by exact_mod_cast hil
+  have hi0 : (0 : ℝ) ≤ i := Nat.cast_nonneg i
+  have d1 : (0 : ℝ) < 6 * (l : ℝ) + 4 := by positivity
+  have d2 : (0 : ℝ) < 6 * (i : ℝ) + 3 := by positivity
+  have hkey : (6 * (i : ℝ) + 2) / (6 * i + 3) ≤ (6 * (l : ℝ) + 3) / (6 * l + 4) := by
+    rw [div_le_div_iff₀ d2 d1]; nlinarith [hl, hi0]
+  linarith
+
+/-- **BHK eqn (22).**  If a 123-gap `I₁` of length `1/(2 v₃)` (BHK's normalised
+    `1/2`) is covered by runners 4 and 5, then `x₄ > 3/4`, i.e. `3 v₄ < 4 v₃`.
+    Direct from `bhk_lemma_4` (`|I₁| < 2/(3 v₄)`). -/
+lemma bhk_s5_case51_x4_from_I1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) {a : ℝ}
+    (hI : Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩) :
+    3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) := by
+  have hv2 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hab : a ≤ a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) :=
+    le_add_of_nonneg_right (by positivity)
+  have hlen := bhk_lemma_4 speeds hmono hpos a
+    (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) hab hI
+  rw [add_sub_cancel_left] at hlen
+  rw [div_lt_div_iff₀ (mul_pos (by norm_num) hv2) (mul_pos (by norm_num) hv3)] at hlen
+  linarith
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
@@ -144,6 +180,28 @@ theorem bhk_s5_case51_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
     (hkD : speeds ⟨0, by omega⟩ = D * k) :
     ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
+  -- Indirect form: suppose the runners cover every time within `1/6` of the
+  -- origin, and derive a contradiction (BHK's `B₀ = ℝ⁺`).
+  by_contra hcon
+  push_neg at hcon
+  -- `hcon : ∀ t, ∃ i, circDist (vᵢ t) < 1/6`  — the covering assumption, in the
+  -- exact shape consumed by `bhk_prop11_gap_covered`.
+  --
+  -- REMAINING ROADMAP (BHK §5, Case 5.1, pp. 14–16):
+  --  1. Configuration existence (eqns (31)–(32)): from `k ≥ 3` and the
+  --     runner-1 period `1/D` (`bhk_s5_case51_period1`) plus 2,3-closeness
+  --     (`bhk_s5_case51_runner3_close`), produce, for suitable `i ≤ l`, a
+  --     *multiple configuration* — `l+1` consecutive 123-gaps of length
+  --     `≥ 1/(2 v₃)` starting near time `i`.  Each 123-gap is forced into
+  --     `B₄ ∪ B₅` by `bhk_prop11_gap_covered hcon`.
+  --  2. Claims 9–10 + eqn (26)/(27)/(30): the covered configuration forces
+  --     `x₄ > (6l+3)/(6l+4)` (no 4-block fits `I₂`, `I₁`, `I₃`).
+  --  3. eqn (33): the configuration's placement forces `x₄ < (6i+2)/(6i+3)`
+  --     (via `bhk_s5_case51_x4_from_I1`-style `bhk_lemma_4` bounds).
+  --  4. `bhk_s5_case51_x4_incompatible` closes the generic case (`i ≤ l`).
+  --  5. Sub-cases 5.1.1 (`k ≥ 3 ∧ x₁ < 14/3`) and 5.1.2 (`k = 3 ∧ 8 < x₁ < 26/3`)
+  --     handle the four narrow `x₁`-windows where no `l ≥ i` configuration
+  --     exists, by explicit 1234-gap / margin arguments.
   sorry
 
 end BHK
