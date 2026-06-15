@@ -440,6 +440,138 @@ lemma bhk_s5_case51_claim10_decomp (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < s
   have htwo : (1 : ℝ) / (3 * v5) + 1 / (3 * v5) = 2 / (3 * v5) := by ring
   linarith [hLshort, hRshort, hsum, htwo]
 
+/-- The left flank `[t, (j−1/6)/v₄]` of a 4-block in the 123-gap `I₁` is a
+    1234-gap, hence `⊆ B₅`.  (Helper for eqn (24)'s distinct-5-blocks argument.) -/
+lemma bhk_s5_case51_flank_left_subset (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgap123 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (hjt' : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    Set.Icc t (((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+      ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h12v3 : (1 : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ 1 / (speeds ⟨3, by omega⟩ : ℝ) :=
+    one_div_le_one_div_of_le hv4 (by linarith)
+  have hjj : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    rw [div_le_div_iff₀ hv4 hv4]; nlinarith [hv4]
+  have hI1bound : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := le_trans hjj hjt'
+  have hF1 : ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ≤ t := by
+    have e : ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) - 1 / (speeds ⟨3, by omega⟩ : ℝ) := by
+      field_simp; ring
+    linarith [hjt', h12v3, e]
+  apply bhk_s5_case51_gap1234_subset speeds hcover
+  intro s hs i
+  fin_cases i
+  · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 0
+  · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 1
+  · exact hgap123 s ⟨hs.1, le_trans hs.2 hI1bound⟩ 2
+  · apply bhk_s5_case51_runner4_safe_on_gap speeds (hpos ⟨3, by omega⟩) (j - 1) s
+    · rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          = ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) from by push_cast; ring]
+      linarith [hF1, hs.1]
+    · rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          = ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) from by push_cast; ring]
+      exact hs.2
+
+/-- The right flank `[(j+1/6)/v₄, t+1/(2v₃)]` of a 4-block in `I₁` is a 1234-gap,
+    hence `⊆ B₅`. -/
+lemma bhk_s5_case51_flank_right_subset (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgap123 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (hjt : t ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) :
+    Set.Icc (((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+        (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ unsafeOf speeds ⟨4, by omega⟩ := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h12v3 : (1 : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ 1 / (speeds ⟨3, by omega⟩ : ℝ) :=
+    one_div_le_one_div_of_le hv4 (by linarith)
+  have hjj : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    rw [div_le_div_iff₀ hv4 hv4]; nlinarith [hv4]
+  have htj1 : t ≤ ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := le_trans hjt hjj
+  have hF2 : t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      ≤ ((j : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    have e : ((j : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) + 1 / (speeds ⟨3, by omega⟩ : ℝ) := by
+      field_simp; ring
+    linarith [hjt, h12v3, e]
+  apply bhk_s5_case51_gap1234_subset speeds hcover
+  intro s hs i
+  fin_cases i
+  · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 0
+  · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 1
+  · exact hgap123 s ⟨le_trans htj1 hs.1, hs.2⟩ 2
+  · apply bhk_s5_case51_runner4_safe_on_gap speeds (hpos ⟨3, by omega⟩) j s
+    · exact hs.1
+    · exact le_trans hs.2 hF2
+
+/-- **Claim 10, eqn (24), first inequality** (`2x₅/3 < x₄/3`).  A 4-block
+    `[(j−1/6)/v₄, (j+1/6)/v₄] ⊆ I₁` splits the 123-gap `I₁` into two 1234-gaps.
+    Each lies in a single 5-block (`block_containment`), and the two 5-blocks are
+    *distinct* (`I₁` is longer than one 5-block since `v₅ > v₃`); the 5-gap
+    between them therefore lies inside the 4-block, forcing `2/(3v₅) < 1/(3v₄)`. -/
+lemma bhk_s5_case51_claim10_5gap (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgap123 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (hjt : t ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hjt' : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    2 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) < 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have h34 : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    have h45 : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    have : speeds ⟨2, by omega⟩ < speeds ⟨4, by omega⟩ := lt_trans h34 h45
+    exact_mod_cast this
+  -- Each flank is ⊆ B₅; pin it inside a single 5-block.
+  have hLsub := bhk_s5_case51_flank_left_subset speeds hpos hcover t hgap123 h22 j hjt'
+  have hRsub := bhk_s5_case51_flank_right_subset speeds hpos hcover t hgap123 h22 j hjt
+  obtain ⟨k1, hk1a, hk1b⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _) t
+    (((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) hjt hLsub
+  obtain ⟨k2, hk2a, hk2b⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    (((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) hjt' hRsub
+  set v3 := (speeds ⟨2, by omega⟩ : ℝ) with hv3def
+  set v4 := (speeds ⟨3, by omega⟩ : ℝ) with hv4def
+  set v5 := (speeds ⟨4, by omega⟩ : ℝ) with hv5def
+  -- The two 5-blocks `k1, k2` are distinct: I₁ is longer than one 5-block.
+  have hv5_2v3 : (1 : ℝ) / 2 < v5 / (2 * v3) := by
+    rw [lt_div_iff₀ (by positivity)]; linarith
+  have hexp : v5 * (t + 1 / (2 * v3)) = v5 * t + v5 / (2 * v3) := by ring
+  have hk12 : (k1 : ℝ) < (k2 : ℝ) := by linarith [hk1a, hk2b, hexp, hv5_2v3]
+  have hk1k2R : (k1 : ℝ) + 1 ≤ (k2 : ℝ) := by
+    have h1 : k1 < k2 := by exact_mod_cast hk12
+    have h2 : k1 + 1 ≤ k2 := by omega
+    exact_mod_cast h2
+  -- The 5-gap between blocks k1, k2 lies inside the 4-block ⇒ width bound.
+  have key : ((k2 : ℝ) - 1 / 6) - ((k1 : ℝ) + 1 / 6)
+      < v5 * (((j : ℝ) + 1 / 6) / v4) - v5 * (((j : ℝ) - 1 / 6) / v4) := by
+    linarith [hk1b, hk2a]
+  have hdiff : v5 * (((j : ℝ) + 1 / 6) / v4) - v5 * (((j : ℝ) - 1 / 6) / v4)
+      = v5 / (3 * v4) := by field_simp; ring
+  have h23 : (2 : ℝ) / 3 < v5 / (3 * v4) := by rw [← hdiff]; linarith [key, hk1k2R]
+  have h2v4v5 : 2 * v4 < v5 := by rw [lt_div_iff₀ (by positivity)] at h23; linarith
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)]; linarith
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
