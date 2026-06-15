@@ -1770,6 +1770,37 @@ lemma bhk_prop11_exc_1_neg1 (p q r : ℕ) (hq : 0 < q) (hp : 0 < p) (h3p : 3 * p
       (Nat.zero_le q)
   omega
 
+/-- **BHK §5 Part 5 — the anti-diagonal family `(i, -i)`.** For `1 ≤ i` with
+    `gcd(i, q) = 1`, the relation `i·p ≡ -i·r (mod q)` gives `q ∣ i·(p + r)`,
+    hence `q ∣ (p + r)` by coprimality; but `q < p + r < 2q`, so no multiple of
+    `q` fits. Generalises `(1, -1)` and kills `(2,-2), (3,-3), (4,-4), (5,-5)`
+    whenever the respective `gcd(i, q) = 1` (e.g. `(2,-2), (4,-4)` for odd `q`,
+    `(3,-3)` for `3 ∤ q`, `(5,-5)` for `5 ∤ q`). -/
+lemma bhk_prop11_exc_anti_diag (p q r : ℕ) (hq : 0 < q) (hp : 0 < p) (h3p : 3 * p < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (i : ℤ) (_hi1 : 1 ≤ i)
+    (hcopi : IsCoprime (q : ℤ) i) (k : ℤ)
+    (hk1 : Int.fract ((i : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-i : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    False := by
+  have hrel := bhk_prop11_exc_relation p q r hq i (-i) k hk1 hk2
+  -- `i·p ≡ -i·r (mod q)`, i.e. `q ∣ i·(p + r)`.
+  have hdvdiZ : (q : ℤ) ∣ i * ((p : ℤ) + r) := by
+    have h := Int.modEq_iff_dvd.mp hrel
+    rw [show (-i) * (r : ℤ) - i * (p : ℤ) = -(i * ((p : ℤ) + r)) from by ring] at h
+    exact dvd_neg.mp h
+  have hdvdZ : (q : ℤ) ∣ ((p : ℤ) + r) := hcopi.dvd_of_dvd_mul_left hdvdiZ
+  have hdvd : q ∣ (p + r) := by exact_mod_cast hdvdZ
+  obtain ⟨m, hm⟩ := hdvd
+  have hlo : q < p + r := by omega
+  have hhi : p + r < 2 * q := by omega
+  rw [hm] at hlo hhi
+  have h1m : 1 < m :=
+    lt_of_mul_lt_mul_left (a := q) (by rwa [mul_one]) (Nat.zero_le q)
+  have hm2 : m < 2 :=
+    lt_of_mul_lt_mul_left (a := q) (show q * m < q * 2 by rw [mul_comm q 2]; exact hhi)
+      (Nat.zero_le q)
+  omega
+
 /-- **BHK §5 Part 5 — Case 5.2.1 (the `j = 0` family).** An exceptional generator
     pair with second coordinate `0` collapses to `(0,0)`: `j = 0` forces `q ∣ k·p`,
     hence `q ∣ k` (`gcd(p,q) = 1`), hence `q ∣ i`, hence `i = 0` (`0 ≤ i < 6 ≤ q`).
@@ -1802,6 +1833,46 @@ lemma bhk_prop11_exc_j_zero (p q r : ℕ) (hq6 : 6 ≤ q) (hcop : Nat.gcd p q = 
     omega
   have hz : i % (q : ℤ) = 0 := Int.emod_eq_zero_of_dvd hqi
   rwa [Int.emod_eq_of_lt hi0 hiq] at hz
+
+/-- **No strict multiple.** A natural number lying strictly between the
+    consecutive multiples `a·q` and `(a+1)·q` is not divisible by `q`. The
+    arithmetic engine behind the `i = 0` exceptional family. -/
+lemma bhk_prop11_no_strict_mult {q v : ℕ} (a : ℕ) (hlo : a * q < v)
+    (hhi : v < (a + 1) * q) : ¬ q ∣ v := by
+  rintro ⟨c, rfl⟩
+  have h1 : a < c :=
+    lt_of_mul_lt_mul_left (show q * a < q * c by rw [mul_comm q a]; exact hlo) (Nat.zero_le q)
+  have h2 : c < a + 1 :=
+    lt_of_mul_lt_mul_left (show q * c < q * (a + 1) by rw [mul_comm q (a + 1)]; exact hhi)
+      (Nat.zero_le q)
+  omega
+
+/-- **BHK §5 Part 5 — the `i = 0` family.** With first coordinate `0`, the
+    relation `i·p ≡ j·r (mod q)` collapses to `q ∣ j·r`. But the cone for
+    `i = 0` is `-3 < j < 3`, so `|j| ∈ {1, 2}`, while `q < r < 3q/2` puts
+    `|j·r| = |j|·r` in `(q, 3q/2) ∪ (2q, 3q)` — strictly between consecutive
+    multiples of `q`, hence no multiple. Rules out `(0, ±1)` and `(0, ±2)`. -/
+lemma bhk_prop11_exc_i_zero (p q r : ℕ) (hq : 0 < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (j k : ℤ)
+    (hjne : j ≠ 0) (hjlo : -3 < j) (hjhi : j < 3)
+    (hk1 : Int.fract ((0 : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract ((j : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    False := by
+  have hrel := bhk_prop11_exc_relation p q r hq 0 j k (by simpa using hk1) hk2
+  rw [zero_mul] at hrel
+  -- `0 ≡ j·r (mod q)`, i.e. `q ∣ j·r`.
+  have hdvdZ : (q : ℤ) ∣ j * (r : ℤ) := by simpa using Int.modEq_iff_dvd.mp hrel
+  -- Transport to `q ∣ |j|·r` in ℕ via `natAbs`.
+  have hdvdN : q ∣ j.natAbs * r := by
+    have h := Int.natAbs_dvd_natAbs.mpr hdvdZ
+    simpa [Int.natAbs_mul, Int.natAbs_natCast] using h
+  have hj1 : 1 ≤ j.natAbs := Int.natAbs_pos.mpr hjne
+  have hj2 : j.natAbs ≤ 2 := by omega
+  set m := j.natAbs with hm
+  interval_cases m
+  · have hd : q ∣ r := by simpa using hdvdN
+    exact bhk_prop11_no_strict_mult 1 (by omega) (by omega) hd
+  · exact bhk_prop11_no_strict_mult 2 (by omega) (by omega) hdvdN
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
