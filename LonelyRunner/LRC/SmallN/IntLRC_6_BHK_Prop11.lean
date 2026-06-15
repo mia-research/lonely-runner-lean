@@ -473,6 +473,22 @@ lemma bhk_prop11_readoff_odd (p q r γ m : ℕ) (hq0 : 0 < q)
     rw [Int.floor_eq_iff]; exact ⟨by push_cast; linarith, by push_cast; linarith⟩
   rw [Int.fract, hfloor]; push_cast; ring
 
+/-- **Zero-`β` read-off.** For `r = γp`, runner `r`'s coordinate on the
+    half-integer time `(2m+1)/(2q)` is `{γ·A}` (where `A = {p·(2m+1)/(2q)}`). The
+    caller resolves the outer `Int.fract` from the chosen `A`-window. Drives the
+    `j = ±1` pairs whose relation pins `r = γp` (e.g. `(4,1)`'s `p > q/4` branch). -/
+lemma bhk_prop11_readoff_zero (p q r γ m : ℕ) (hq0 : 0 < q) (hr : (r : ℝ) = (γ : ℝ) * p) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = Int.fract ((γ : ℝ) * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2))) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (γ : ℝ) * Z := by rw [hZdef, hr]; ring
+  rw [ht1, show (γ : ℝ) * Z = (γ : ℝ) * A + ((γ * ⌊Z⌋ : ℤ) : ℝ) from by
+        nth_rewrite 1 [hAz]; push_cast; ring,
+      Int.fract_add_intCast]
+
 /-- **BHK §5 Part 5 — the pair `(2, -1)` (witness branch).** When `q/4 < p`, the
     relation pins `r = 2q - 2p`. Then on the half-integer time `(2m+1)/(2q)` with
     `{p·(2m+1)/(2q)} ∈ [1/4, 1/3]` (achievable since the window has width
