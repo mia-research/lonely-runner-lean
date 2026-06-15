@@ -1694,6 +1694,67 @@ theorem bhk_prop11_exceptional_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     bhk_part3_exceptional r p q (by omega) hcop h_nogood
   exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2⟩
 
+/-- **Readout bridge.** Integer multiples of `1/q` have equal fractional part iff
+    congruent mod `q`. Turns the `bhk_corollary_6` generator readout
+    `fract(i/q) = fract(k·r/q)` into the congruence `i ≡ k·r (mod q)` — the
+    arithmetic interface for the Part 4–6 exceptional-pair case analysis. -/
+lemma bhk_prop11_fract_modEq (q : ℕ) (hq : 0 < q) (a b : ℤ) :
+    Int.fract ((a : ℝ) / (q : ℝ)) = Int.fract ((b : ℝ) / (q : ℝ)) ↔ a ≡ b [ZMOD (q : ℤ)] := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  have hqz : ((q : ℕ) : ℤ) ≠ 0 := by exact_mod_cast hq.ne'
+  have hmod : ∀ c : ℤ, Int.fract ((c : ℝ) / (q : ℝ)) = ((c % (q : ℤ) : ℤ) : ℝ) / (q : ℝ) := by
+    intro c
+    have h0 : c % (q : ℤ) + (q : ℤ) * (c / (q : ℤ)) = c := Int.emod_add_ediv c q
+    have hsplit : (c : ℝ) / (q : ℝ)
+        = ((c % (q : ℤ) : ℤ) : ℝ) / (q : ℝ) + ((c / (q : ℤ) : ℤ) : ℝ) := by
+      have hcast : (c : ℝ) = ((c % (q : ℤ) : ℤ) : ℝ) + (q : ℝ) * ((c / (q : ℤ) : ℤ) : ℝ) := by
+        exact_mod_cast h0.symm
+      rw [hcast]; field_simp
+    rw [hsplit, Int.fract_add_intCast]
+    refine Int.fract_eq_self.mpr ⟨?_, ?_⟩
+    · exact div_nonneg (by exact_mod_cast Int.emod_nonneg c hqz) hqR.le
+    · rw [div_lt_one hqR]; exact_mod_cast Int.emod_lt_of_pos c (by exact_mod_cast hq)
+  rw [hmod a, hmod b]
+  rw [show (a ≡ b [ZMOD (q : ℤ)]) ↔ a % (q : ℤ) = b % (q : ℤ) from Iff.rfl]
+  constructor
+  · intro h
+    exact_mod_cast mul_right_cancel₀ hqR.ne' ((div_eq_div_iff hqR.ne' hqR.ne').mp h)
+  · intro h
+    rw [show ((a % (q : ℤ) : ℤ) : ℝ) = ((b % (q : ℤ) : ℤ) : ℝ) from by exact_mod_cast h]
+
+/-- **BHK §5 Part 5 — Case 5.2.1 (the `j = 0` family).** An exceptional generator
+    pair with second coordinate `0` collapses to `(0,0)`: `j = 0` forces `q ∣ k·p`,
+    hence `q ∣ k` (`gcd(p,q) = 1`), hence `q ∣ i`, hence `i = 0` (`0 ≤ i < 6 ≤ q`).
+    Rules out `(1,0), …, (5,0)` at one stroke. -/
+lemma bhk_prop11_exc_j_zero (p q r : ℕ) (hq6 : 6 ≤ q) (hcop : Nat.gcd p q = 1)
+    (i k : ℤ) (hi0 : 0 ≤ i) (hi6 : i < 6)
+    (hk1 : Int.fract ((i : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract ((0 : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    i = 0 := by
+  have hq0 : 0 < q := by omega
+  -- normalise readout RHSs to (integer)/q form
+  have hr1 : (k : ℝ) * r / (q : ℝ) = ((k * (r : ℤ) : ℤ) : ℝ) / (q : ℝ) := by push_cast; ring
+  have hr2 : (k : ℝ) * p / (q : ℝ) = ((k * (p : ℤ) : ℤ) : ℝ) / (q : ℝ) := by push_cast; ring
+  have h0c : (0 : ℝ) / (q : ℝ) = (((0 : ℤ)) : ℝ) / (q : ℝ) := by norm_num
+  have hic : (i : ℝ) / (q : ℝ) = ((i : ℤ) : ℝ) / (q : ℝ) := by norm_num
+  rw [hic, hr1] at hk1
+  rw [h0c, hr2] at hk2
+  have hcong1 := (bhk_prop11_fract_modEq q hq0 i (k * r)).mp hk1
+  have hcong2 := (bhk_prop11_fract_modEq q hq0 0 (k * p)).mp hk2
+  have hdvdkp : (q : ℤ) ∣ k * (p : ℤ) := by simpa using Int.modEq_iff_dvd.mp hcong2
+  have hcopZ : IsCoprime ((q : ℤ)) ((p : ℤ)) := by
+    rw [Int.isCoprime_iff_gcd_eq_one]; simpa [Int.gcd_natCast_natCast, Nat.gcd_comm] using hcop
+  have hqk : (q : ℤ) ∣ k := hcopZ.dvd_of_dvd_mul_right hdvdkp
+  have hqi : (q : ℤ) ∣ i := by
+    have hd : (q : ℤ) ∣ (k * (r : ℤ) - i) := Int.modEq_iff_dvd.mp hcong1
+    have hkr : (q : ℤ) ∣ k * (r : ℤ) := hqk.mul_right _
+    simpa using dvd_sub hkr hd
+  have hiq : i < (q : ℤ) := by
+    have : (6 : ℤ) ≤ (q : ℤ) := by exact_mod_cast hq6
+    omega
+  have hz : i % (q : ℤ) = 0 := Int.emod_eq_zero_of_dvd hqi
+  rwa [Int.emod_eq_of_lt hi0 hiq] at hz
+
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
     runners cannot cover every time within `1/6` of the origin. This is BHK's
