@@ -124,6 +124,33 @@ lemma bhk_s5_case51_runner3_close (speeds : Fin 5 → ℕ) (hmono : StrictMono s
     ((speeds ⟨1, by omega⟩ : ℝ) * t)
   rwa [hkey] at h
 
+/-- **Claim 9 arithmetic core (main case).**  The flanking pieces of `I₁`, `I₃`
+    around a 4-block in `I₂` sum to `5/(3v₄) − 1/(2v₃)` and are each `< 1/(3v₅)`,
+    so `5/(3v₄) − 1/(2v₃) < 2/(3v₅)`; with `v₄ < v₅` and `3v₄ < 4v₃` (eqn (22))
+    this is impossible. -/
+lemma bhk_s5_case51_claim9_arithA (v3 v4 v5 : ℝ) (hv3 : 0 < v3) (hv4 : 0 < v4)
+    (h45 : v4 < v5) (h22 : 3 * v4 < 4 * v3)
+    (h : 5 / (3 * v4) - 1 / (2 * v3) < 2 / (3 * v5)) : False := by
+  have step1 : (2 : ℝ) / (3 * v5) ≤ 2 / (3 * v4) := by gcongr
+  have h2 : 5 / (3 * v4) - 1 / (2 * v3) < 2 / (3 * v4) := by linarith
+  have hpos : (0 : ℝ) < 6 * v3 * v4 := by positivity
+  have e : (5 / (3 * v4) - 1 / (2 * v3)) * (6 * v3 * v4) = 10 * v3 - 3 * v4 := by
+    field_simp; ring
+  have e2 : (2 / (3 * v4)) * (6 * v3 * v4) = 4 * v3 := by field_simp; ring
+  have h3 : 10 * v3 - 3 * v4 < 4 * v3 := by
+    nlinarith [mul_lt_mul_of_pos_right h2 hpos, e, e2]
+  linarith
+
+/-- **Claim 9 arithmetic core (degenerate case).**  If a whole flank (`I₁` or
+    `I₃`, length `1/(2v₃)`) lies in `B₅`, then `1/(2v₃) < 1/(3v₅)`, impossible
+    since `v₃ < v₅`. -/
+lemma bhk_s5_case51_claim9_arithBC (v3 v5 : ℝ) (hv3 : 0 < v3) (h35 : v3 < v5)
+    (h : 1 / (2 * v3) < 1 / (3 * v5)) : False := by
+  have step : (1 : ℝ) / (3 * v5) ≤ 1 / (3 * v3) := by gcongr
+  have step2 : (1 : ℝ) / (3 * v3) < 1 / (2 * v3) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  linarith
+
 /-! ## The configuration counting (BHK Claims 9–10, eqns (26)–(33))
 
 These are the heart of Case 5.1 and remain to be formalised.  The configuration
@@ -131,6 +158,115 @@ existence (how triple/multiple configurations arise from `k ≥ 3`, eqns
 (31)–(33)), Claims 9–10 (no 4-block in `I₂`, `I₁`, `I₃`, giving (26)), and the
 counting (27)/(30) plus the two explicit sub-cases (5.1.1, 5.1.2) go here.
 -/
+
+/-- **BHK Claim 9.**  If the flanks `I₁ = [t, t+1/(2v₃)]` and
+    `I₃ = [t+1/v₃, t+3/(2v₃)]` are covered by runners 4,5 and `3v₄ < 4v₃`
+    (eqn (22)), then no runner-4 block fits strictly inside
+    `I₂ = (t+1/(2v₃), t+1/v₃)`: there is no integer `j` with both
+    `(j±1/6)/v₄ ∈ I₂`.  (BHK p. 14.)  The runner-4 block in `I₂` would force the
+    flanking gap-pieces of `I₁`, `I₃` into `B₅`, and their lengths are too long
+    for `bhk_lemma_4`/`gap_piece_bound`. -/
+lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (t : ℝ)
+    (hI1 : Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩)
+    (hI3 : Set.Icc (t + 1 / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + 3 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (hjL : t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      < ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hjR : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) :
+    False := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast this
+  have h45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast this
+  set v3 := (speeds ⟨2, by omega⟩ : ℝ) with hv3def
+  set v4 := (speeds ⟨3, by omega⟩ : ℝ) with hv4def
+  set v5 := (speeds ⟨4, by omega⟩ : ℝ) with hv5def
+  have h35 : v3 < v5 := lt_trans h34 h45
+  -- Block centre relative to `t`; this makes `t` cancel in all the algebra.
+  set u := (j : ℝ) / v4 - t with hu
+  have hu_lo : 1 / (2 * v3) + 1 / (6 * v4) < u := by
+    have e : ((j : ℝ) - 1 / 6) / v4 = u + t - 1 / (6 * v4) := by rw [hu]; field_simp; ring
+    rw [e] at hjL; linarith
+  have hu_hi : u < 1 / v3 - 1 / (6 * v4) := by
+    have e : ((j : ℝ) + 1 / 6) / v4 = u + t + 1 / (6 * v4) := by rw [hu]; field_simp; ring
+    rw [e] at hjR; linarith
+  -- Cleared monotonicity facts (all reduce to `v₄ < 2v₃`, from eqn (22)).
+  have hkey1 : (1 : ℝ) / v3 - 1 / (6 * v4) ≤ 1 / (2 * v3) + 5 / (6 * v4) := by
+    rw [div_sub_div _ _ (ne_of_gt hv3) (by positivity),
+      div_add_div _ _ (by positivity) (by positivity),
+      div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_pos (mul_pos hv3 hv4) (show (0 : ℝ) < 2 * v3 - v4 by linarith)]
+  have hkey2 : (1 : ℝ) / v3 - 5 / (6 * v4) ≤ 1 / (2 * v3) + 1 / (6 * v4) := by
+    rw [div_sub_div _ _ (ne_of_gt hv3) (by positivity),
+      div_add_div _ _ (by positivity) (by positivity),
+      div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_pos (mul_pos hv3 hv4) (show (0 : ℝ) < 2 * v3 - v4 by linarith)]
+  -- The "always" facts: the inner ends of the two gap-pieces lie inside I₁, I₃.
+  have hF1 : ((j : ℝ) - 5 / 6) / v4 ≤ t + 1 / (2 * v3) := by
+    have e : ((j : ℝ) - 5 / 6) / v4 = u + t - 5 / (6 * v4) := by rw [hu]; field_simp; ring
+    rw [e]; have := lt_of_lt_of_le hu_hi hkey1; linarith
+  have hF2 : t + 1 / v3 ≤ ((j : ℝ) + 5 / 6) / v4 := by
+    have e : ((j : ℝ) + 5 / 6) / v4 = u + t + 5 / (6 * v4) := by rw [hu]; field_simp; ring
+    rw [e]; have := lt_of_le_of_lt hkey2 hu_lo; linarith
+  have hab1 : t ≤ t + 1 / (2 * v3) := by
+    have : (0 : ℝ) < 1 / (2 * v3) := by positivity
+    linarith
+  have hab3 : t + 1 / v3 ≤ t + 3 / (2 * v3) := by
+    have : (1 : ℝ) / v3 ≤ 3 / (2 * v3) := by
+      rw [div_le_div_iff₀ hv3 (by positivity)]; nlinarith [hv3]
+    linarith
+  by_cases hB : ((j : ℝ) - 5 / 6) / v4 < t
+  · -- I₁ lies entirely in the runner-4 gap `(j-1)` ⇒ I₁ ⊆ B₅.
+    have hbnd : (t + 1 / (2 * v3)) - t < 1 / (3 * v5) :=
+      gap_piece_bound speeds hpos t (t + 1 / (2 * v3)) hab1 hI1 (j - 1) t (t + 1 / (2 * v3))
+        (le_refl t) (le_refl _) hab1
+        (by rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / v4 = ((j : ℝ) - 5 / 6) / v4 from by
+              push_cast; ring]; exact le_of_lt hB)
+        (by rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 from by
+              push_cast; ring]; exact le_of_lt hjL)
+    exact bhk_s5_case51_claim9_arithBC v3 v5 hv3 h35 (by linarith)
+  · push_neg at hB
+    by_cases hC : t + 3 / (2 * v3) < ((j : ℝ) + 5 / 6) / v4
+    · -- I₃ lies entirely in the runner-4 gap `j` ⇒ I₃ ⊆ B₅.
+      have hbnd : (t + 3 / (2 * v3)) - (t + 1 / v3) < 1 / (3 * v5) :=
+        gap_piece_bound speeds hpos (t + 1 / v3) (t + 3 / (2 * v3)) hab3 hI3 j
+          (t + 1 / v3) (t + 3 / (2 * v3)) (le_refl _) (le_refl _) hab3
+          (le_of_lt hjR) (le_of_lt hC)
+      refine bhk_s5_case51_claim9_arithBC v3 v5 hv3 h35 ?_
+      have : (t + 3 / (2 * v3)) - (t + 1 / v3) = 1 / (2 * v3) := by field_simp; ring
+      linarith [hbnd, this]
+    · push_neg at hC
+      -- Both gap-pieces are valid: piece₁ ⊆ I₁, piece₂ ⊆ I₃, each < 1/(3v₅).
+      have hp1 : (t + 1 / (2 * v3)) - ((j : ℝ) - 5 / 6) / v4 < 1 / (3 * v5) :=
+        gap_piece_bound speeds hpos t (t + 1 / (2 * v3)) hab1 hI1 (j - 1)
+          (((j : ℝ) - 5 / 6) / v4) (t + 1 / (2 * v3)) hB (le_refl _) hF1
+          (by rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / v4 = ((j : ℝ) - 5 / 6) / v4 from by
+                push_cast; ring])
+          (by rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 from by
+                push_cast; ring]; exact le_of_lt hjL)
+      have hp2 : ((j : ℝ) + 5 / 6) / v4 - (t + 1 / v3) < 1 / (3 * v5) :=
+        gap_piece_bound speeds hpos (t + 1 / v3) (t + 3 / (2 * v3)) hab3 hI3 j
+          (t + 1 / v3) (((j : ℝ) + 5 / 6) / v4) (le_refl _) hC hF2
+          (le_of_lt hjR) (le_refl _)
+      refine bhk_s5_case51_claim9_arithA v3 v4 v5 hv3 hv4 h45 h22 ?_
+      have hsum : ((t + 1 / (2 * v3)) - ((j : ℝ) - 5 / 6) / v4)
+          + (((j : ℝ) + 5 / 6) / v4 - (t + 1 / v3)) = 5 / (3 * v4) - 1 / (2 * v3) := by
+        field_simp; ring
+      have htwo : (1 : ℝ) / (3 * v5) + 1 / (3 * v5) = 2 / (3 * v5) := by ring
+      linarith [hp1, hp2, hsum, htwo]
 
 /-- **The (30)/(33) incompatibility — BHK's contradiction.**  A multiple
     configuration with `l ≥ i` forces `x₄ > (6l+3)/(6l+4)` (eqn (30)); the
