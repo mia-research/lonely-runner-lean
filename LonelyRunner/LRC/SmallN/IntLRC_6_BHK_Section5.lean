@@ -1,5 +1,6 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section7
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Prop11
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Section5_Case51
 
 /-!
 # BHK §5 — the case `{v₁ t₀} = 0` (skeleton + dispatcher)
@@ -80,8 +81,10 @@ theorem bhk_s5_k_ge_3 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (k D : ℕ) (hk3 : 3 ≤ k)
     (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
     (hkD : speeds ⟨0, by omega⟩ = D * k) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  sorry
+    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 :=
+  -- The triple/multiple-configuration argument (BHK §5, Case 5.1) is developed in
+  -- `IntLRC_6_BHK_Section5_Case51.lean`.
+  bhk_s5_case51_main speeds hmono hpos hgcd hsmall k D hk3 hD hkD
 
 /-- **Window extraction.** `circDist x ≥ 1/6` gives the fract window. -/
 lemma bhk_fract_of_circDist {x : ℝ} (h : (1 : ℝ)/6 ≤ circDist x) :
