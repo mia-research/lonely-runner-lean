@@ -592,6 +592,159 @@ lemma bhk_s5_case51_x5_bounds (v3 v4 v5 : ℝ) (hv3 : 0 < v3) (hv5 : 0 < v5) (h3
     have hlow : (1 : ℝ) / (6 * v3) < 2 / (3 * v5) := by linarith [h24b, hb, e]
     rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hlow; linarith
 
+/-- **BHK: `x₄/3 + x₅/3 < 1/2`.**  From `x₅ < 1/2` (`2v₃ < v₅`) and `x₄ < 1`
+    (`v₃ < v₄`): `1/(3v₄) + 1/(3v₅) < 1/(3v₃) + 1/(6v₃) = 1/(2v₃)`.  This is the
+    bound that forces a 4-block into `I₃` (eqn (25)). -/
+lemma bhk_s5_case51_x45_sum (v3 v4 v5 : ℝ) (hv3 : 0 < v3) (h34 : v3 < v4)
+    (h2v3v5 : 2 * v3 < v5) :
+    1 / (3 * v4) + 1 / (3 * v5) < 1 / (2 * v3) := by
+  have hb1 : (1 : ℝ) / (3 * v4) < 1 / (3 * v3) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  have hb2 : (1 : ℝ) / (3 * v5) < 1 / (6 * v3) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  have e : (1 : ℝ) / (3 * v3) + 1 / (6 * v3) = 1 / (2 * v3) := by field_simp; ring
+  linarith [hb1, hb2, e]
+
+/-- **Claim 10, steps D/E — the consecutive-5-blocks counting core (BHK p. 15).**
+    The pure-arithmetic heart of Claim 10's contradiction.  Inputs are the
+    runner-5 block indices `a₁, a₂, a₃` containing the three relevant 1234-gaps —
+    the two flanks `g₁ = [t, (j−1/6)/v₄]`, `g₂ = [(j+1/6)/v₄, t+1/(2v₃)]` of `I₁`
+    and the left flank `g₃ = [t+1/v₃, (j+5/6)/v₄]` of `I₃` — each pinned inside a
+    single 5-block by `block_containment` (`hG·a` = left edge below the scaled
+    left end, `hG·b` = scaled right end below the right edge), together with the
+    upper `x₅` bound (`v₅ < 4v₃`, BHK `x₅ > 1/4`) and eqn (24a) (`2v₄ < v₅`); the
+    lower bound `2v₃ < v₅` (BHK `x₅ < 1/2`) is implied by `2v₄ < v₅` and `v₃ < v₄`.
+
+    *Step D*: `g₁, g₂` lie in **consecutive** 5-blocks (`a₂ = a₁+1`) — no 5-block
+    fits the 4-block, since `v₅ < 4v₃ < 4v₄`.  The two consecutive blocks span the
+    length-`1/(2v₃)` gap `I₁`, giving `v₅ < 8v₃/3` (BHK `4x₅/3 > 1/2`).
+    *Step E*: that bound forces `g₂, g₃` into consecutive 5-blocks (`a₃ = a₂+1`) —
+    no 5-block fits `I₂` — and the 4-gap between the two 4-blocks, spanned by the
+    two consecutive 5-blocks, gives `v₅ < 2v₄` (BHK `4x₅/3 > 2x₄/3`), contradicting
+    eqn (24a) `2v₄ < v₅`. -/
+lemma bhk_s5_case51_claim10_count
+    (v3 v4 v5 t : ℝ) (j a1 a2 a3 : ℤ)
+    (hv3 : 0 < v3) (hv4 : 0 < v4)
+    (hv54v3 : v5 < 4 * v3)
+    (h34 : v3 < v4) (h24a : 2 * v4 < v5)
+    (hG1a : (a1 : ℝ) - 1 / 6 < v5 * t)
+    (hG1b : v5 * (((j : ℝ) - 1 / 6) / v4) < (a1 : ℝ) + 1 / 6)
+    (hG2a : (a2 : ℝ) - 1 / 6 < v5 * (((j : ℝ) + 1 / 6) / v4))
+    (hG2b : v5 * (t + 1 / (2 * v3)) < (a2 : ℝ) + 1 / 6)
+    (hG3a : (a3 : ℝ) - 1 / 6 < v5 * (t + 1 / v3))
+    (hG3b : v5 * (((j : ℝ) + 5 / 6) / v4) < (a3 : ℝ) + 1 / 6) :
+    False := by
+  have hv3' : v3 ≠ 0 := hv3.ne'
+  have hv4' : v4 ≠ 0 := hv4.ne'
+  have hv5 : 0 < v5 := by linarith
+  -- Field bridges relating the scaled block edges.
+  have hbrBlock : v5 * (((j : ℝ) + 1 / 6) / v4) - v5 * (((j : ℝ) - 1 / 6) / v4)
+      = v5 / (3 * v4) := by field_simp; ring
+  have hbrGap : v5 * (((j : ℝ) + 5 / 6) / v4) - v5 * (((j : ℝ) + 1 / 6) / v4)
+      = 2 * v5 / (3 * v4) := by field_simp; ring
+  have hbrI1 : v5 * (t + 1 / (2 * v3)) - v5 * t = v5 / (2 * v3) := by field_simp; ring
+  have hbrI2 : v5 * (t + 1 / v3) - v5 * (t + 1 / (2 * v3)) = v5 / (2 * v3) := by
+    field_simp; ring
+  -- Magnitude bounds on the scaled block-edge gaps.
+  have hBlockLt : v5 / (3 * v4) < 4 / 3 := by
+    rw [div_lt_iff₀ (by positivity)]; nlinarith
+  have hI1Gt : (1 : ℝ) < v5 / (2 * v3) := by
+    rw [lt_div_iff₀ (by positivity)]; nlinarith
+  have hGapGt : (2 : ℝ) / 3 < 2 * v5 / (3 * v4) := by
+    rw [lt_div_iff₀ (by positivity)]; nlinarith
+  -- Step D: `a₂ = a₁ + 1` (the I₁ flanks lie in consecutive 5-blocks).
+  have hlow12 : (2 : ℝ) / 3 < (a2 : ℝ) - (a1 : ℝ) := by
+    linarith [hG1a, hG2b, hbrI1, hI1Gt]
+  have hupp12 : (a2 : ℝ) - (a1 : ℝ) < 2 := by
+    linarith [hG1b, hG2a, hbrBlock, hBlockLt]
+  have ha12 : a2 = a1 + 1 := by
+    have hltz : a1 < a2 := by exact_mod_cast (by linarith : (a1 : ℝ) < a2)
+    have hubz : a2 < a1 + 2 := by exact_mod_cast (by linarith : (a2 : ℝ) < a1 + 2)
+    omega
+  have ha2eq : (a2 : ℝ) = (a1 : ℝ) + 1 := by exact_mod_cast ha12
+  -- Step D output: `v₅ < 8 v₃ / 3` (BHK `4x₅/3 > 1/2`), the I₁ two-block span.
+  have hStepD : v5 / (2 * v3) < 4 / 3 := by linarith [hG1a, hG2b, hbrI1, ha2eq]
+  -- Step E: `a₃ = a₂ + 1` (g₂, g₃ lie in consecutive 5-blocks).
+  have hlow23 : (1 : ℝ) / 3 < (a3 : ℝ) - (a2 : ℝ) := by
+    linarith [hG2a, hG3b, hbrGap, hGapGt]
+  have hupp23 : (a3 : ℝ) - (a2 : ℝ) < 2 := by
+    linarith [hG2b, hG3a, hbrI2, hStepD]
+  have ha23 : a3 = a2 + 1 := by
+    have hltz : a2 < a3 := by exact_mod_cast (by linarith : (a2 : ℝ) < a3)
+    have hubz : a3 < a2 + 2 := by exact_mod_cast (by linarith : (a3 : ℝ) < a2 + 2)
+    omega
+  have ha3eq : (a3 : ℝ) = (a2 : ℝ) + 1 := by exact_mod_cast ha23
+  -- Step E output: the 4-gap spanned by the two consecutive 5-blocks ⇒ `v₅ < 2 v₄`,
+  -- contradicting eqn (24a) (`2 v₄ < v₅`).
+  have hStepE : 2 * v5 / (3 * v4) < 4 / 3 := by linarith [hG2a, hG3b, hbrGap, ha3eq]
+  have hv52v4 : v5 < 2 * v4 := by
+    rw [div_lt_iff₀ (by positivity)] at hStepE; linarith
+  linarith [h24a, hv52v4]
+
+/-- **Claim 10 — no 4-block in `I₁` together with one in `I₃` (BHK p. 15).**
+    The geometric wrapper of the D/E counting core.  Given the triple
+    configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃, t+3/(2v₃)]` are
+    123-gaps, both `⊆ B₄ ∪ B₅` via the covering `hcover`), a 4-block in `I₁`
+    (eqn (23): `h23a`/`h23b`) and the forced 4-block in `I₃` (eqn (25):
+    `h25a`/`h25b`) are contradictory.  We extract the runner-5 blocks of the two
+    `I₁` flanks (`flank_left/right_subset` + `block_containment`) and of the left
+    `I₃` flank (`flank_left_subset` re-used at `t' = t+1/v₃`, `j' = j+1`), then
+    invoke `bhk_s5_case51_claim10_count`.  This is the `(23) ∧ (25) ⇒ False` half
+    of Claim 10; deriving (25) from (23) (eqn (25) geometry) is the separate
+    `x₄/3 + x₅/3 < 1/2` step (`bhk_s5_case51_x45_sum`). -/
+lemma bhk_s5_case51_claim10_contra (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgapI1 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (hgapI3 : ∀ s ∈ Set.Icc (t + 1 / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (h23a : t ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (h23b : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (h25a : t + 1 / (speeds ⟨2, by omega⟩ : ℝ) ≤ ((j : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (h25b : ((j : ℝ) + 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    False := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  -- eqn (24) and the `x₅` bounds `2v₃ < v₅ < 4v₃`.
+  have h24a := bhk_s5_case51_claim10_5gap speeds hmono hpos hcover t hgapI1 h22 j h23a h23b
+  have h24b := bhk_s5_case51_claim10_decomp speeds hpos hcover t hgapI1 h22 j h23a h23b
+  obtain ⟨_, hv54v3⟩ := bhk_s5_case51_x5_bounds _ _ _ hv3 hv5 h34 h24a h24b
+  -- eqn (24a) in the form `2 v₄ < v₅`.
+  have h24a' : 2 * (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at h24a; linarith
+  -- The two `I₁` flanks are 1234-gaps `⊆ B₅`; pin each in a single 5-block.
+  have hL1 := bhk_s5_case51_flank_left_subset speeds hpos hcover t hgapI1 h22 j h23b
+  have hR1 := bhk_s5_case51_flank_right_subset speeds hpos hcover t hgapI1 h22 j h23a
+  obtain ⟨a1, hG1a, hG1b⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _) t
+    (((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) h23a hL1
+  obtain ⟨a2, hG2a, hG2b⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    (((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) h23b hR1
+  -- The left `I₃` flank: re-use `flank_left_subset` at `t' = t+1/v₃`, `j' = j+1`.
+  have hL3 := bhk_s5_case51_flank_left_subset speeds hpos hcover
+    (t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) hgapI3 h22 (j + 1)
+    (by rw [show (((j + 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          = ((j : ℝ) + 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ) from by push_cast; ring]; exact h25b)
+  rw [show (((j + 1 : ℤ) : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) from by push_cast; ring] at hL3
+  obtain ⟨a3, hG3a, hG3b⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    (t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) (((j : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    h25a hL3
+  exact bhk_s5_case51_claim10_count (speeds ⟨2, by omega⟩ : ℝ) (speeds ⟨3, by omega⟩ : ℝ)
+    (speeds ⟨4, by omega⟩ : ℝ) t j a1 a2 a3 hv3 hv4 hv54v3 h34 h24a'
+    hG1a hG1b hG2a hG2b hG3a hG3b
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
