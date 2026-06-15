@@ -376,6 +376,119 @@ lemma bhk_prop11_residue_hit_narrow (p q : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
     rw [e, div_le_div_iff₀ (by positivity) (by positivity)]
     nlinarith [mul_le_mul_of_nonneg_left hkhiR hqR.le]
 
+/-- **Universal odd-multiple identity (the `mul_mod` bridge).** For any speed `a`
+    and modulus `q`, the half-integer time `(2m+1)/(2q)` puts `a` at fractional
+    position `{(2·(a·m mod q) + a)/(2q)}`. This is the §5 analogue of
+    `bhk_s7_mul_mod`: it reduces `{a·(2m+1)/(2q)}` to arithmetic in the residue
+    `a·m mod q`, valid for `a > q` (runner `r`) as well as `a < q` (runner `p`). -/
+lemma bhk_prop11_fract_odd (a q m : ℕ) (hq : 0 < q) :
+    Int.fract ((a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * (q : ℝ))))
+      = Int.fract (((2 * (a * m % q) + a : ℕ) : ℝ) / (2 * (q : ℝ))) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  set d : ℕ := a * m / q with hd
+  set s : ℕ := a * m % q with hs
+  have hsplit : a * m = q * d + s := by rw [hd, hs]; exact (Nat.div_add_mod (a * m) q).symm
+  have hamR : (a : ℝ) * (m : ℝ) = (q : ℝ) * d + s := by exact_mod_cast hsplit
+  have hnum : (a : ℝ) * (2 * (m : ℝ) + 1) = 2 * (q : ℝ) * d + (2 * s + a) := by
+    linear_combination 2 * hamR
+  rw [show (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * (q : ℝ))) = a * (2 * (m : ℝ) + 1) / (2 * q)
+        from by ring, hnum,
+      show (2 * (q : ℝ) * d + (2 * s + a)) / (2 * q) = (d : ℝ) + (2 * s + a) / (2 * q)
+        from by field_simp,
+      show (d : ℝ) = ((d : ℤ) : ℝ) from by push_cast; ring, Int.fract_intCast_add]
+  congr 1
+  push_cast; ring
+
+/-- **Residue realisation kernel.** For coprime `p, q` (`q > 0`) and any target
+    residue `k < q` with `2k + p < 2q` (no wrap), there is an `m` whose
+    half-integer time `(2m+1)/(2q)` puts `p` at exactly `(2k+p)/(2q)`. The guts of
+    `bhk_prop11_residue_hit`, exposed so survivor pairs can aim the *second*
+    coordinate `{p·(2m+1)/(2q)}` at an arbitrary `1/q`-wide sub-window. -/
+lemma bhk_prop11_fract_odd_mul (p q : ℕ) (hq : 0 < q) (hcop : Nat.Coprime p q)
+    (k : ℕ) (hkn : k < q) (hwrap : 2 * k + p < 2 * q) :
+    ∃ m : ℕ, Int.fract ((p : ℝ) * ((2 * (m : ℝ) + 1) / (2 * (q : ℝ))))
+      = (2 * (k : ℝ) + p) / (2 * q) := by
+  haveI : NeZero q := ⟨by omega⟩
+  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (p * m) % q = k % q := by
+    set u := ZMod.unitOfCoprime p hcop with hu
+    refine ⟨(((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val, ?_⟩
+    have hcast : ((p * (((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val : ℕ) : ZMod q)
+        = ((k : ℕ) : ZMod q) := by
+      push_cast
+      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime p hcop, ← hu, ← mul_assoc]
+      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+  have hmk : (p * m) % q = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
+  refine ⟨m, ?_⟩
+  rw [bhk_prop11_fract_odd p q m hq, hmk,
+      show (((2 * k + p : ℕ) : ℝ)) = 2 * (k : ℝ) + p from by push_cast; ring]
+  refine Int.fract_eq_self.mpr ⟨by positivity, ?_⟩
+  rw [div_lt_one (by positivity)]
+  have : (2 : ℝ) * k + p < 2 * q := by exact_mod_cast hwrap
+  linarith
+
+/-- **BHK §5 Part 5 — the pair `(2, -1)` (witness branch).** When `q/4 < p`, the
+    relation pins `r = 2q - 2p`. Then on the half-integer time `(2m+1)/(2q)` with
+    `{p·(2m+1)/(2q)} ∈ [1/4, 1/3]` (achievable since the window has width
+    `1/12 ≥ 1/q`), runner `r` lands at `1 - 2·{p·…} ∈ [1/3, 1/2]` and runner `p`
+    in `[1/6, 1/3]` — a good time, contradicting `h_nogood`. The template for the
+    surviving exceptional pairs: aim the `p`-coordinate, read off the `r`-coordinate
+    via the pinned linear relation. -/
+lemma bhk_prop11_exc_2_neg1_hit (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp4 : q < 4 * p) (h3p : 3 * p < q) (hr : r = 2 * q - 2 * p)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hp0 : 0 < p := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hrR : (r : ℝ) = 2 * (q : ℝ) - 2 * (p : ℝ) := by
+    rw [hr, Nat.cast_sub (by omega)]; push_cast; ring
+  -- The aiming residue: `k = ⌈(q-2p)/4⌉` lands `(2k+p)/(2q) ∈ [1/4, 1/3]`.
+  set k : ℕ := (q - 2 * p + 3) / 4 with hkdef
+  have hkn : k < q := by omega
+  have hwrap : 2 * k + p < 2 * q := by omega
+  obtain ⟨m, hm⟩ := bhk_prop11_fract_odd_mul p q hq0 hcop k hkn hwrap
+  -- Bridge `{p·(2m+1)/(2q)}` to the `h_nogood` form and bound it in `[1/4, 1/3]`.
+  set A : ℝ := (2 * (k : ℝ) + p) / (2 * q) with hAdef
+  have hpeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = A := by
+    rw [← hm]; congr 1; field_simp
+  have hA_lo : 1 / 4 ≤ A := by
+    rw [hAdef, le_div_iff₀ (by positivity)]
+    have : (q : ℝ) ≤ 4 * k + 2 * p := by
+      have : q ≤ 4 * k + 2 * p := by omega
+      exact_mod_cast this
+    linarith
+  have hA_hi : A ≤ 1 / 3 := by
+    rw [hAdef, div_le_iff₀ (by positivity)]
+    have : (3 : ℝ) * (2 * k + p) ≤ 2 * q := by
+      have : 3 * (2 * k + p) ≤ 2 * q := by omega
+      exact_mod_cast this
+    linarith
+  -- Runner `r` reads off as `1 - 2A`.
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  have hpeqZ : Int.fract Z = A := hpeq
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (2 * (m : ℝ) + 1) - 2 * Z := by
+    rw [hZdef, hrR]; field_simp
+  have hreq : Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2)) = 1 - 2 * A := by
+    have hAz : (Z : ℝ) = A + (⌊Z⌋ : ℝ) := by rw [← hpeqZ, Int.fract]; ring
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+        = -2 * A + ((2 * (m : ℤ) + 1 - 2 * ⌊Z⌋ : ℤ) : ℝ) := by
+      rw [ht1]; nth_rewrite 1 [hAz]; push_cast; ring
+    rw [key, Int.fract_add_intCast]
+    have hfloor : ⌊-2 * A⌋ = -1 := by
+      rw [Int.floor_eq_iff]
+      exact ⟨by push_cast; linarith, by push_cast; linarith⟩
+    rw [Int.fract, hfloor]; push_cast; ring
+  -- Both coordinates land in the rectangle, contradicting `h_nogood`.
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hreq]; linarith
+  · rw [hmcast, hreq]; linarith
+  · rw [hmcast, hpeq]; linarith
+  · rw [hmcast, hpeq]; linarith
+
 /-- **BHK §5 Part 2 — Corollary 15 (witness half-integer time).** Let
     `q = w₂ / gcd(w₀, w₂)` be the reduced denominator of `v₁ = w₀/w₂`. If `q ≥ 5`
     there is a time `t` at which runner 3 sits at the half-way point
