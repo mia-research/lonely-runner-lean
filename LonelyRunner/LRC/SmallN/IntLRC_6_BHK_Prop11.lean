@@ -1,4 +1,5 @@
 import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_Lemma4
+import LonelyRunner.LRC.SmallN.IntLRC_6_BHK_MainLemma
 
 /-!
 # BHK §5 — Proposition 11 (the long core, pp. 17–40)
@@ -1390,6 +1391,75 @@ theorem bhk_prop11_no_good_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
   rw [hb3, add_sub_cancel_left, mul_one_div, div_lt_iff₀ (by positivity)] at hspan
   -- hspan : w₄ < 1/3 * (3 * w₃) = w₃, contradicting w₃ < w₄.
   nlinarith [hspan, hw34]
+
+/-- **BHK §5 Part 3 — the exceptional pair (`q ≥ 18` branch).** Wiring the
+    no-good-time fact into the main-lemma application. Writing `g = gcd(w₀,w₂)`,
+    `p = w₀/g`, `q = w₂/g`, `r = w₃/g`, `s = w₄/g` (Lemma 17 gives `g ∣ w₃, w₄`),
+    the set `S = {({v₄(l+½)}, {v₁(l+½)})}` avoids the `1/3 × 1/6` rectangle `R`,
+    so `bhk_corollary_6` (its hypothesis `αβ = 1/18 ≥ 1/q` holding iff `q ≥ 18`)
+    yields a nonzero *exceptional generator pair* `(i,j)` in the cone
+    `0 ≤ i < 6`, `|j| < 3 + i/2`. Parts 4–6 then rule out every such pair. -/
+theorem bhk_prop11_exceptional_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    ∃ g p q r s : ℕ, 0 < g ∧
+      w ⟨0, by omega⟩ = g * p ∧ w ⟨2, by omega⟩ = g * q ∧
+      w ⟨3, by omega⟩ = g * r ∧ w ⟨4, by omega⟩ = g * s ∧
+      Nat.gcd p q = 1 ∧ 18 ≤ q ∧
+      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
+                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
+        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
+        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) := by
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgw0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
+  have hgw2 : g ∣ w ⟨2, by omega⟩ := Nat.gcd_dvd_right _ _
+  obtain ⟨hgw3, hgw4⟩ := bhk_prop11_lemma17_uncond w hmono hpos hsum hsmall hcover
+  set p : ℕ := w ⟨0, by omega⟩ / g with hpdef
+  set q : ℕ := w ⟨2, by omega⟩ / g with hqdef
+  set r : ℕ := w ⟨3, by omega⟩ / g with hrdef
+  set s : ℕ := w ⟨4, by omega⟩ / g with hsdef
+  have hp : w ⟨0, by omega⟩ = g * p := (Nat.mul_div_cancel' hgw0).symm
+  have hq : w ⟨2, by omega⟩ = g * q := (Nat.mul_div_cancel' hgw2).symm
+  have hr : w ⟨3, by omega⟩ = g * r := (Nat.mul_div_cancel' hgw3).symm
+  have hs : w ⟨4, by omega⟩ = g * s := (Nat.mul_div_cancel' hgw4).symm
+  have hcop : Nat.gcd p q = 1 := Nat.coprime_div_gcd_div_gcd hg_pos
+  have hqpos : 0 < q := by omega
+  -- Cast helpers.
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg_pos
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hqpos
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hqne : (q : ℝ) ≠ 0 := hqR.ne'
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hp
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hq
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hr
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+  -- The no-good-time fact transported to `(r/q, p/q)` ratios.
+  have h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) := by
+    intro k hk
+    obtain ⟨hrmem, hpmem⟩ := hk
+    set t : ℝ := ((k : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (k : ℝ) + 1 / 2 := by
+      rw [htdef]; field_simp
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((k : ℝ) + 1 / 2) := by
+      rw [htdef, c0, c2]; field_simp
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((k : ℝ) + 1 / 2) := by
+      rw [htdef, c3, c2]; field_simp
+    refine bhk_prop11_no_good_time w hmono hpos hsum hsmall hcover t ?_ ?_ ?_ ?_ ?_
+    · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+    · rw [e0]; exact hpmem.1
+    · rw [e0]; exact hpmem.2
+    · rw [e3]; exact hrmem.1
+    · rw [e3]; exact hrmem.2
+  obtain ⟨ij, hne, hmem, h0, h1β, hc1, hc2⟩ :=
+    bhk_part3_exceptional r p q (by omega) hcop h_nogood
+  exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2⟩
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
