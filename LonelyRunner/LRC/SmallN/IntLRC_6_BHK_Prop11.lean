@@ -317,6 +317,65 @@ lemma bhk_prop11_residue_hit (a b : ℕ) (ha : 0 < a) (h3a : 3 * a < b) (hb5 : 5
   · rw [le_div_iff₀ (by positivity)]; linarith
   · rw [div_le_iff₀ (by positivity)]; linarith
 
+/-- **Narrow-window residue hit (the Lemma 18 equidistribution kernel).** For
+    coprime `p, q` with `3p < q` and `q ≥ 18`, some odd-multiple time
+    `(2m+1)/(2q)` puts `p` in the *narrow* window
+    `[1/6 + p/(9q), 1/3 - (q-p)/(9q)]` (width exactly `1/18 ≥ 1/q`). Witness:
+    `k = ⌈(3q - 7p)/18⌉` (so `3q ≤ 18k + 7p ≤ 4q`) and `m` solving
+    `p · m ≡ k (mod q)`. This is the `ρ = 1/9` strengthening of
+    `bhk_prop11_residue_hit`, used to launch Lemma 18 (`v₄ ≤ 3/2`). -/
+lemma bhk_prop11_residue_hit_narrow (p q : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
+    (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q) :
+    ∃ m : ℕ, Int.fract ((p : ℝ) * ((2 * (m : ℝ) + 1) / (2 * q)))
+      ∈ Set.Icc (1 / 6 + (p : ℝ) / (9 * q)) (1 / 3 - ((q : ℝ) - p) / (9 * q)) := by
+  have hq0 : 0 < q := by omega
+  haveI : NeZero q := ⟨by omega⟩
+  set k : ℕ := (3 * q + 17 - 7 * p) / 18 with hk
+  have hklo : 3 * q ≤ 18 * k + 7 * p := by omega
+  have hkhi : 18 * k + 7 * p ≤ 4 * q := by omega
+  have hkn : k < q := by omega
+  have hpq : p < q := by omega
+  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (p * m) % q = k % q := by
+    set u := ZMod.unitOfCoprime p hcop with hu
+    refine ⟨(((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val, ?_⟩
+    have hcast : ((p * (((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val : ℕ) : ZMod q)
+        = ((k : ℕ) : ZMod q) := by
+      push_cast
+      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime p hcop, ← hu,
+        ← mul_assoc]
+      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+  have hmk : (p * m) % q = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
+  set j : ℕ := (p * m) / q with hj
+  have hpmj : p * m = q * j + k := by
+    rw [hj, ← hmk]; exact (Nat.div_add_mod (p * m) q).symm
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hkloR : (3 : ℝ) * q ≤ 18 * k + 7 * p := by exact_mod_cast hklo
+  have hkhiR : (18 : ℝ) * k + 7 * p ≤ 4 * q := by exact_mod_cast hkhi
+  have hpqR : (p : ℝ) < q := by exact_mod_cast hpq
+  refine ⟨m, Set.mem_Icc.mpr ?_⟩
+  have hfr : Int.fract ((p : ℝ) * ((2 * (m : ℝ) + 1) / (2 * q)))
+      = (2 * (k : ℝ) + p) / (2 * q) := by
+    have hpmR : (p : ℝ) * (m : ℝ) = (q : ℝ) * j + k := by exact_mod_cast hpmj
+    have hpe : (p : ℝ) * (2 * (m : ℝ) + 1) = 2 * q * j + (2 * k + p) := by
+      linear_combination 2 * hpmR
+    have hstep : (p : ℝ) * ((2 * (m : ℝ) + 1) / (2 * q))
+        = (j : ℝ) + (2 * (k : ℝ) + p) / (2 * q) := by
+      rw [← mul_div_assoc, hpe]; field_simp
+    rw [hstep, show (j : ℝ) = ((j : ℤ) : ℝ) from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by positivity, ?_⟩]
+    rw [div_lt_one (by positivity)]; nlinarith [hkhiR, hpqR, hqR]
+  rw [hfr]
+  refine ⟨?_, ?_⟩
+  · have e : (1 : ℝ) / 6 + (p : ℝ) / (9 * q) = (3 * q + 2 * p) / (18 * q) := by
+      field_simp; ring
+    rw [e, div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_le_mul_of_nonneg_left hkloR hqR.le]
+  · have e : (1 : ℝ) / 3 - ((q : ℝ) - p) / (9 * q) = (2 * q + p) / (9 * q) := by
+      field_simp; ring
+    rw [e, div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_le_mul_of_nonneg_left hkhiR hqR.le]
+
 /-- **BHK §5 Part 2 — Corollary 15 (witness half-integer time).** Let
     `q = w₂ / gcd(w₀, w₂)` be the reduced denominator of `v₁ = w₀/w₂`. If `q ≥ 5`
     there is a time `t` at which runner 3 sits at the half-way point
@@ -408,6 +467,180 @@ lemma bhk_prop11_v4_lt_2v3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
   obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
   exact bhk_prop11_v4_lt_2v3_of_time w hmono hpos hsum hsmall hcover t h3 h1lo h1hi
+
+/-- **BHK §5 Part 2 — Lemma 14 (the `ρ = 1/9` instance), the long 0123-gap.**
+    A half-integer time `t` (`{w₂t} = 1/2`) with runner 1 in the *narrow* window
+    `[1/6 + w₀/(9w₂), 1/3 - w₁/(9w₂)]` yields a 123-gap on
+    `[t - 1/(9w₂), t + 1/(3w₂)]` — time-length `4/(9w₂)`, i.e. BHK length `4/9`.
+    The extra `1/(9w₂)` backward slack is exactly the room left by runners 1 and 2
+    (which are `≥ 1/6 + slack` from the origin at `t`) still being `≥ 1/6` just
+    before `t`; runner 3, at `1/2` at `t`, has plenty of room on both sides. This
+    is the gap that Lemma 18 feeds to Lemma 4 to get `v₄ ≤ 3/2`. -/
+lemma bhk_prop11_gap123_long (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 + (w ⟨0, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - (w ⟨1, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))) :
+    ∀ s ∈ Set.Icc (t - 1 / (9 * (w ⟨2, by omega⟩ : ℝ)))
+        (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  have hw0R : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1R : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  -- slack terms are nonnegative
+  have hsl0 : (0 : ℝ) ≤ (w ⟨0, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+  have hsl1 : (0 : ℝ) ≤ (w ⟨1, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+  have hw1cast : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    have : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    linarith
+  -- runner 2 sits at 1/2 - {w₀t}
+  have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+      = 1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+    have h0 : (w ⟨1, by omega⟩ : ℝ) * t
+        = ((⌊(w ⟨2, by omega⟩ : ℝ) * t⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t⌋ : ℤ) : ℝ)
+          + (1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) := by
+      have e2 := Int.floor_add_fract ((w ⟨2, by omega⟩ : ℝ) * t)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      rw [h3] at e2
+      rw [hw1cast, sub_mul, Int.cast_sub]; linarith [e2, e0]
+    rw [h0, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  intro s hs i
+  obtain ⟨hsl, hsu⟩ := hs
+  have hd_lo : -(1 / (9 * (w ⟨2, by omega⟩ : ℝ))) ≤ s - t := by linarith
+  have hd_hi : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith
+  fin_cases i
+  · -- runner 1 (w₀): {w₀s} = {w₀t} + w₀(s-t) ∈ [1/6, 4/9]
+    have hub : (w ⟨0, by omega⟩ : ℝ) * (s - t) ≤ (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw0R.le
+      rwa [mul_one_div] at h
+    have hlb : -((w ⟨0, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))) ≤ (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw0R.le
+      rwa [show (w ⟨0, by omega⟩ : ℝ) * -(1 / (9 * (w ⟨2, by omega⟩ : ℝ)))
+            = -((w ⟨0, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))) from by ring] at h
+    have hfrac : (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 9 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  · -- runner 2 (w₁): {w₁s} = (1/2 - {w₀t}) + w₁(s-t) ∈ [1/6, 2/3]
+    have hw1t_lo : 1 / 6 + (w ⟨1, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))
+        ≤ Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) := by rw [hf1]; linarith
+    have hw1t_hi : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+        ≤ 1 / 3 - (w ⟨0, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ)) := by rw [hf1]; linarith
+    have hub : (w ⟨1, by omega⟩ : ℝ) * (s - t) ≤ (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw1R.le
+      rwa [mul_one_div] at h
+    have hlb : -((w ⟨1, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))) ≤ (w ⟨1, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw1R.le
+      rwa [show (w ⟨1, by omega⟩ : ℝ) * -(1 / (9 * (w ⟨2, by omega⟩ : ℝ)))
+            = -((w ⟨1, by omega⟩ : ℝ) / (9 * (w ⟨2, by omega⟩ : ℝ))) from by ring] at h
+    have hfrac : (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 3 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; linarith
+    have hfs : Int.fract ((w ⟨1, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) + (w ⟨1, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨1, by omega⟩ : ℝ) * s
+            = (w ⟨1, by omega⟩ : ℝ) * t + (w ⟨1, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  · -- runner 3 (w₂): {w₂s} = 1/2 + w₂(s-t) ∈ [7/18, 5/6]
+    have hub : (w ⟨2, by omega⟩ : ℝ) * (s - t) ≤ 1 / 3 := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw2R.le
+      rwa [show (w ⟨2, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) = 1 / 3 from by
+        field_simp] at h
+    have hlb : -(1 / 9 : ℝ) ≤ (w ⟨2, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw2R.le
+      rwa [show (w ⟨2, by omega⟩ : ℝ) * -(1 / (9 * (w ⟨2, by omega⟩ : ℝ))) = -(1 / 9 : ℝ) from by
+        field_simp] at h
+    have hfs : Int.fract ((w ⟨2, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) + (w ⟨2, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨2, by omega⟩ : ℝ) * s
+            = (w ⟨2, by omega⟩ : ℝ) * t + (w ⟨2, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by rw [h3]; linarith) (by rw [h3]; linarith)]
+    simp only [circDist]; rw [hfs, h3]; exact le_min (by linarith) (by linarith)
+
+/-- **BHK §5 Part 2 — Lemma 18 (`q ≥ 18` part): `v₄ ≤ 3/2`.** The sharpening of
+    Corollary 16 (`v₄ < 2`). For `q = w₂/gcd(w₀,w₂) ≥ 18`, `bhk_prop11_residue_hit_narrow`
+    produces a half-integer time launching (via `bhk_prop11_gap123_long`) a
+    0123-gap of time-length `4/(9w₂)` (BHK length `4/9`); `bhk_lemma_4` converts
+    the length into `2 w₃ < 3 w₂`. (BHK states `≤ 3/2`; the denominator-`q`
+    refinement and the per-`(p,q)` Table 1 entries are only needed in the
+    complementary `q < 18` branch.) -/
+lemma bhk_prop11_v4_le_3_2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < 3 * (w ⟨2, by omega⟩ : ℝ) := by
+  set a := w ⟨0, by omega⟩ with ha
+  set n := w ⟨2, by omega⟩ with hn
+  have ha0 : 0 < a := hpos _
+  have hn0 : 0 < n := by omega
+  set g : ℕ := Nat.gcd a n with hgdef
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ ha0
+  have hga : g ∣ a := Nat.gcd_dvd_left a n
+  have hgn : g ∣ n := Nat.gcd_dvd_right a n
+  have ha'0 : 0 < a / g := Nat.div_pos (Nat.le_of_dvd ha0 hga) hg0
+  have h3a' : 3 * (a / g) < n / g := by
+    have hmul : 3 * (a / g) * g < n / g * g := by
+      calc 3 * (a / g) * g = 3 * a := by rw [mul_assoc, Nat.div_mul_cancel hga]
+        _ < n := hsmall
+        _ = n / g * g := (Nat.div_mul_cancel hgn).symm
+    exact lt_of_mul_lt_mul_right hmul (Nat.zero_le g)
+  have hcop' : Nat.Coprime (a / g) (n / g) := Nat.coprime_div_gcd_div_gcd hg0
+  obtain ⟨m, hm⟩ := bhk_prop11_residue_hit_narrow (a / g) (n / g) ha'0 h3a' hq18 hcop'
+  have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg0
+  have hb'R : (0 : ℝ) < ((n / g : ℕ) : ℝ) := by exact_mod_cast (by omega : 0 < n / g)
+  have haf : (a : ℝ) = (g : ℝ) * ((a / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hga]
+  have hnf : (n : ℝ) = (g : ℝ) * ((n / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hgn]
+  set t : ℝ := (2 * (m : ℝ) + 1) / (2 * (n : ℝ)) with ht
+  have heq : (a : ℝ) * t
+      = ((a / g : ℕ) : ℝ) * ((2 * (m : ℝ) + 1) / (2 * ((n / g : ℕ) : ℝ))) := by
+    rw [ht, haf, hnf]; field_simp
+  have hw1 : (w ⟨1, by omega⟩ : ℝ) = (n : ℝ) - (a : ℝ) := by
+    have : (a : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (n : ℝ) := by exact_mod_cast hsum
+    linarith
+  -- runner 3 at the half-way point
+  have h3half : Int.fract ((n : ℝ) * t) = 1 / 2 := by
+    have hh : (n : ℝ) * t = (m : ℝ) + 1 / 2 := by rw [ht]; field_simp
+    rw [hh, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  -- endpoint bridges p/(9q) = a/(9n), (q-p)/(9q) = (n-a)/(9n)
+  have hep1 : ((a / g : ℕ) : ℝ) / (9 * ((n / g : ℕ) : ℝ)) = (a : ℝ) / (9 * n) := by
+    rw [haf, hnf]; field_simp
+  have hep2 : (((n / g : ℕ) : ℝ) - ((a / g : ℕ) : ℝ)) / (9 * ((n / g : ℕ) : ℝ))
+      = ((n : ℝ) - a) / (9 * n) := by rw [haf, hnf]; field_simp
+  have hbridge : Int.fract ((a : ℝ) * t)
+      = Int.fract (((a / g : ℕ) : ℝ) * ((2 * (m : ℝ) + 1) / (2 * ((n / g : ℕ) : ℝ)))) := by
+    rw [heq]
+  have hwlo : 1 / 6 + (a : ℝ) / (9 * n) ≤ Int.fract ((a : ℝ) * t) := by
+    rw [hbridge, ← hep1]; exact (Set.mem_Icc.mp hm).1
+  have hwhi : Int.fract ((a : ℝ) * t) ≤ 1 / 3 - (w ⟨1, by omega⟩ : ℝ) / (9 * n) := by
+    rw [hbridge, hw1, ← hep2]; exact (Set.mem_Icc.mp hm).2
+  have hgap := bhk_prop11_gap123_long w hpos hsum hsmall t h3half hwlo hwhi
+  have hcov := bhk_prop11_gap_covered w hcover hgap
+  have hab : t - 1 / (9 * n) ≤ t + 1 / (3 * n) := by
+    have h1 : (0 : ℝ) < 1 / (9 * n) := by positivity
+    have h2 : (0 : ℝ) < 1 / (3 * n) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos (t - 1 / (9 * n)) (t + 1 / (3 * n)) hab hcov
+  have hw3R : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have key : 1 / (3 * (n : ℝ)) + 1 / (9 * n) < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by
+    linarith [hlen]
+  have hcomb : 1 / (3 * (n : ℝ)) + 1 / (9 * n) = 4 / (9 * n) := by field_simp; ring
+  rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
+  linarith [key]
 
 /-- **Residue realization.** For coprime `w'` and `n > 0`, every residue class mod
     `n` is hit by some multiple `w' · i`. (The `ZMod` unit-inverse construction of
