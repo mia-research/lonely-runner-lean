@@ -1722,6 +1722,54 @@ lemma bhk_prop11_fract_modEq (q : ℕ) (hq : 0 < q) (a b : ℤ) :
   · intro h
     rw [show ((a % (q : ℤ) : ℤ) : ℝ) = ((b % (q : ℤ) : ℤ) : ℝ) from by exact_mod_cast h]
 
+/-- **The exceptional-pair relation `i·p ≡ j·r (mod q)`.** From the two readout
+    congruences `i ≡ k·r` and `j ≡ k·p (mod q)`: multiplying the first by `p` and
+    the second by `r` gives `i·p ≡ k·r·p ≡ k·p·r ≡ j·r`. This single congruence,
+    together with `1 < r/q < 3/2` (Cor 16 + Lemma 18) and `0 < p/q < 1/3`, drives
+    the entire Part 4–6 case analysis. -/
+lemma bhk_prop11_exc_relation (p q r : ℕ) (hq : 0 < q) (i j k : ℤ)
+    (hk1 : Int.fract ((i : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract ((j : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    i * (p : ℤ) ≡ j * (r : ℤ) [ZMOD (q : ℤ)] := by
+  have hr1 : (k : ℝ) * r / (q : ℝ) = ((k * (r : ℤ) : ℤ) : ℝ) / (q : ℝ) := by push_cast; ring
+  have hr2 : (k : ℝ) * p / (q : ℝ) = ((k * (p : ℤ) : ℤ) : ℝ) / (q : ℝ) := by push_cast; ring
+  have hic : (i : ℝ) / (q : ℝ) = ((i : ℤ) : ℝ) / (q : ℝ) := by norm_num
+  have hjc : (j : ℝ) / (q : ℝ) = ((j : ℤ) : ℝ) / (q : ℝ) := by norm_num
+  rw [hic, hr1] at hk1
+  rw [hjc, hr2] at hk2
+  have hc1 := (bhk_prop11_fract_modEq q hq i (k * r)).mp hk1
+  have hc2 := (bhk_prop11_fract_modEq q hq j (k * p)).mp hk2
+  have step1 : i * (p : ℤ) ≡ (k * r) * (p : ℤ) [ZMOD (q : ℤ)] := hc1.mul_right _
+  have step2 : (k * (p : ℤ)) * (r : ℤ) ≡ j * (r : ℤ) [ZMOD (q : ℤ)] := (hc2.mul_right _).symm
+  rw [show (k * (r : ℤ)) * (p : ℤ) = (k * (p : ℤ)) * (r : ℤ) from by ring] at step1
+  exact step1.trans step2
+
+/-- **BHK §5 Part 5 — the pair `(1, -1)` (an `N` case).** Impossible: the relation
+    gives `p ≡ -r (mod q)`, i.e. `q ∣ (p + r)`; but `q < p + r < 2q`
+    (`r > q`, and `p + r < q/3 + 3q/2 < 2q`), so no multiple of `q` fits. -/
+lemma bhk_prop11_exc_1_neg1 (p q r : ℕ) (hq : 0 < q) (hp : 0 < p) (h3p : 3 * p < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hk1 : Int.fract ((1 : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-1 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    False := by
+  have hrel := bhk_prop11_exc_relation p q r hq 1 (-1) k (by simpa using hk1) hk2
+  rw [one_mul, neg_one_mul] at hrel
+  have hdvdZ : (q : ℤ) ∣ ((p : ℤ) + r) := by
+    have h := Int.modEq_iff_dvd.mp hrel
+    rw [show (-(r : ℤ) - (p : ℤ)) = -((p : ℤ) + (r : ℤ)) from by ring] at h
+    exact dvd_neg.mp h
+  have hdvd : q ∣ (p + r) := by exact_mod_cast hdvdZ
+  obtain ⟨m, hm⟩ := hdvd
+  have hlo : q < p + r := by omega
+  have hhi : p + r < 2 * q := by omega
+  rw [hm] at hlo hhi
+  have h1m : 1 < m :=
+    lt_of_mul_lt_mul_left (a := q) (by rwa [mul_one]) (Nat.zero_le q)
+  have hm2 : m < 2 :=
+    lt_of_mul_lt_mul_left (a := q) (show q * m < q * 2 by rw [mul_comm q 2]; exact hhi)
+      (Nat.zero_le q)
+  omega
+
 /-- **BHK §5 Part 5 — Case 5.2.1 (the `j = 0` family).** An exceptional generator
     pair with second coordinate `0` collapses to `(0,0)`: `j = 0` forces `q ∣ k·p`,
     hence `q ∣ k` (`gcd(p,q) = 1`), hence `q ∣ i`, hence `i = 0` (`0 ≤ i < 6 ≤ q`).
