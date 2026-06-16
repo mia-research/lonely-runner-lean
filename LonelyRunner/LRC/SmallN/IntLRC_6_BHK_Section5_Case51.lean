@@ -1468,6 +1468,88 @@ lemma bhk_s5_case51_block_fully_in_gap_absurd (speeds : Fin 5 → ℕ)
     · rw [hcast, hτ]; exact hfullL
     · rw [hcast, hτ]; exact hfullR
 
+/-- **The bad alignment of eqn (29) is impossible (drift-window argument).**
+    In a multiple configuration (`1 ≤ l`, every `G_m = [t+m/v₃, t+m/v₃+1/(2v₃)]`
+    a 123-gap), the negation of eqn (29)'s disjunction — block `j` does *not* poke
+    left of `G_0` (`t ≤ (j-1/6)/v₄`, i.e. `ψ_0 ≥ B`) *and* block `j+l` does *not*
+    poke right of `G_l` (`(j+l+1/6)/v₄ ≤ t+l/v₃+1/(2v₃)`, i.e. `ψ_l ≤ T`) — forces,
+    under `(22)`, some block `j+m` fully inside `G_m`, contradicting Claim 10.
+    The drift sequence `ψ_m = (j+m)/v₄ − (t+m/v₃)` decreases by the fixed step
+    `S = 1/v₃ − 1/v₄ > 0`; the window `[B,T]` (block `j+m ⊆ G_m`) has width
+    `W = T − B = 1/(2v₃) − 1/(3v₄)`, and `(22)` is *exactly* `S < W`, so `ψ`
+    cannot skip the window between `ψ_0 ≥ B` and `ψ_l ≤ T` (`drift_crossing`). -/
+lemma bhk_s5_case51_bad_case_absurd (speeds : Fin 5 → ℕ)
+    (hmono : StrictMono speeds) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (t : ℝ) (l : ℕ) (hl : 1 ≤ l)
+    (hgaps : ∀ m : ℕ, m ≤ l →
+      ∀ s ∈ Set.Icc (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (j : ℤ)
+    (hbad0 : t ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hbadl : ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    False := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h3ne : (speeds ⟨2, by omega⟩ : ℝ) ≠ 0 := hv3.ne'
+  have h4ne : (speeds ⟨3, by omega⟩ : ℝ) ≠ 0 := hv4.ne'
+  -- drift sequence `ψ_m = (j+m)/v₄ − (t + m/v₃)`.
+  set ψ : ℕ → ℝ := fun m =>
+    ((j : ℝ) + (m : ℝ)) / (speeds ⟨3, by omega⟩ : ℝ)
+      - (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)) with hψdef
+  -- step `ψ (m+1) = ψ m − S`, `S = 1/v₃ − 1/v₄`.
+  have hstep : ∀ m, ψ (m + 1)
+      = ψ m - (1 / (speeds ⟨2, by omega⟩ : ℝ) - 1 / (speeds ⟨3, by omega⟩ : ℝ)) := by
+    intro m; simp only [hψdef]; push_cast; field_simp; ring
+  -- `ψ 0 ≥ B`, `B = 1/(6v₄)` (block `j` does not poke left of `G_0`).
+  have h0 : (1 : ℝ) / (6 * (speeds ⟨3, by omega⟩ : ℝ)) ≤ ψ 0 := by
+    simp only [hψdef, Nat.cast_zero, add_zero, zero_div]
+    rw [show ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = (j : ℝ) / (speeds ⟨3, by omega⟩ : ℝ) - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+      from by field_simp] at hbad0
+    linarith
+  -- `ψ l ≤ T`, `T = 1/(2v₃) − 1/(6v₄)` (block `j+l` does not poke right of `G_l`).
+  have hlT : ψ l ≤ 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+    simp only [hψdef]
+    rw [show ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + (l : ℝ)) / (speeds ⟨3, by omega⟩ : ℝ)
+          + 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+      from by field_simp] at hbadl
+    linarith
+  -- `S < W = T − B` ⟺ `(22)` (`3v₄ < 4v₃`).
+  have hSW : 1 / (speeds ⟨2, by omega⟩ : ℝ) - 1 / (speeds ⟨3, by omega⟩ : ℝ)
+      < (1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+        - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+    rw [show (1 : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) - 1 / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((speeds ⟨3, by omega⟩ : ℝ) - (speeds ⟨2, by omega⟩ : ℝ))
+          / ((speeds ⟨2, by omega⟩ : ℝ) * (speeds ⟨3, by omega⟩ : ℝ))
+      from by field_simp,
+      show (1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ)))
+            - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+        = (3 * (speeds ⟨3, by omega⟩ : ℝ) - 2 * (speeds ⟨2, by omega⟩ : ℝ))
+          / (6 * ((speeds ⟨2, by omega⟩ : ℝ) * (speeds ⟨3, by omega⟩ : ℝ)))
+      from by field_simp; ring,
+      div_lt_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_pos (mul_pos hv3 hv4) (sub_pos.mpr h22), mul_pos hv3 hv4, hv3, hv4]
+  obtain ⟨m, hml, hmB, hmT⟩ := drift_crossing ψ _ _ _ l hstep h0 hlT hSW
+  simp only [hψdef] at hmB hmT
+  refine bhk_s5_case51_block_fully_in_gap_absurd speeds hmono hpos hcover h22 t l hl
+    hgaps j m hml ?_ ?_
+  · rw [show ((j : ℝ) + (m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + (m : ℝ)) / (speeds ⟨3, by omega⟩ : ℝ)
+          - 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+      from by field_simp]
+    linarith
+  · rw [show ((j : ℝ) + (m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + (m : ℝ)) / (speeds ⟨3, by omega⟩ : ℝ)
+          + 1 / (6 * (speeds ⟨3, by omega⟩ : ℝ))
+      from by field_simp]
+    linarith
+
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
     t+3/(2v₃)]` are 123-gaps `⊆ B₄ ∪ B₅`), `9 v₄ < 10 v₃`.  Proof by contradiction:
