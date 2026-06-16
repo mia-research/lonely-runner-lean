@@ -1869,11 +1869,73 @@ lemma bhk_s5_case51_span_l1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         linarith [hjt_lo, bC, h_10v3]
       linarith [hsafe, hlong, h_v45]
 
+/-- **BHK generic case: the `l ≥ i` multiple configuration and its bounds.**
+    When none of BHK conditions 1–4 hold — here `14/3 ≤ x₁` (`x₁ = v₃/v₁`) *and*
+    not (`k = 3 ∧ 8 < x₁ < 26/3`) — eqn (32) yields integers `i ≤ l` realising a
+    multiple configuration at `t = i + 1/3`.  The span (eqns (29)/(30), `span_l`)
+    gives `x₄ > (6l+3)/(6l+4)` and the placement (eqn (33)) gives
+    `x₄ < (6i+2)/(6i+3)` (`x₄ = v₃/v₄`); together with `i ≤ l` this is the
+    contradiction `bhk_s5_case51_x4_incompatible`.  *Configuration construction
+    (eqns (31)/(32) from `period1` + `runner3_close`, and the placement eqn (33))
+    under construction.* -/
+lemma bhk_s5_case51_config_bounds (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (hcon : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (k D : ℕ) (hk3 : 3 ≤ k)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k)
+    (h511 : 14 / 3 ≤ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
+    (h512 : ¬(k = 3 ∧ 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ)
+      ∧ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3)) :
+    ∃ i l : ℕ, i ≤ l ∧
+      (6 * (l : ℝ) + 3) / (6 * l + 4)
+        < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+      (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ)
+        < (6 * (i : ℝ) + 2) / (6 * i + 3) := by
+  sorry
+
+/-- **BHK Case 5.1.1 (`k ≥ 3`, `x₁ < 14/3`).**  Covers BHK conditions 1, 3, 4
+    (their `x₁`-bounds `14/3, 14/4, 17/5` all satisfy `x₁ < 14/3`).  No `l ≥ i`
+    configuration exists; BHK argues directly (p. 16): `v₂ > 8/9`, so `[21/16,
+    11/6]` (BHK normalised) is a 123-gap forcing `x₄`/`x₅` bounds; then `[21/16,
+    121/78]` (or `[13x₄/6, 11/6]`) is a 1234-gap runner 5 cannot cover — for
+    `i ∈ {2,3}`, `(i−1/6)x₅ < 21/16` and `121/78 < (i+1/6)x₅` fails "by the
+    narrowest of margins".  *Proof under construction.* -/
+lemma bhk_s5_case51_subcase_511 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (hcon : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (k D : ℕ) (hk3 : 3 ≤ k)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k)
+    (hx1 : (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 14 / 3) :
+    False := by
+  sorry
+
+/-- **BHK Case 5.1.2 (`k = 3`, `8 < x₁ < 26/3`).**  BHK condition 2.  A triple
+    configuration exists at `t = 14/6` (`l = 1`), so `x₄ > 9/10` (eqn (27),
+    `span_l1`); with `v₂ > 23/24` this puts `[52/23, 51/20]` in a 1234-gap that
+    runner 5 cannot cover (no `i ≥ 3` with `(i−1/6)x₅ < 52/23` and
+    `(i+1/6)x₅ > 51/20`).  *Proof under construction.* -/
+lemma bhk_s5_case51_subcase_512 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (hcon : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (k D : ℕ) (hk3 : 3 ≤ k)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k)
+    (hk : k = 3) (hx1 : 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
+    (hx1' : (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3) :
+    False := by
+  sorry
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
-    is `≥ 1/6` from the origin.  *Argument under construction* — the
-    configuration counting (Claims 9–10, eqns (26)–(33)) and the two explicit
-    sub-cases (5.1.1, 5.1.2) remain. -/
+    is `≥ 1/6` from the origin.  Dispatches on `x₁ = v₃/v₁`: the generic
+    `l ≥ i` configuration (`config_bounds` → `x4_incompatible`) when no
+    exceptional condition holds, else the explicit sub-cases 5.1.1 (`x₁ < 14/3`,
+    conditions 1/3/4) and 5.1.2 (`k = 3 ∧ 8 < x₁ < 26/3`, condition 2). -/
 theorem bhk_s5_case51_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1885,24 +1947,20 @@ theorem bhk_s5_case51_main (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   -- origin, and derive a contradiction (BHK's `B₀ = ℝ⁺`).
   by_contra hcon
   push_neg at hcon
-  -- `hcon : ∀ t, ∃ i, circDist (vᵢ t) < 1/6`  — the covering assumption, in the
-  -- exact shape consumed by `bhk_prop11_gap_covered`.
-  --
-  -- REMAINING ROADMAP (BHK §5, Case 5.1, pp. 14–16):
-  --  1. Configuration existence (eqns (31)–(32)): from `k ≥ 3` and the
-  --     runner-1 period `1/D` (`bhk_s5_case51_period1`) plus 2,3-closeness
-  --     (`bhk_s5_case51_runner3_close`), produce, for suitable `i ≤ l`, a
-  --     *multiple configuration* — `l+1` consecutive 123-gaps of length
-  --     `≥ 1/(2 v₃)` starting near time `i`.  Each 123-gap is forced into
-  --     `B₄ ∪ B₅` by `bhk_prop11_gap_covered hcon`.
-  --  2. Claims 9–10 + eqn (26)/(27)/(30): the covered configuration forces
-  --     `x₄ > (6l+3)/(6l+4)` (no 4-block fits `I₂`, `I₁`, `I₃`).
-  --  3. eqn (33): the configuration's placement forces `x₄ < (6i+2)/(6i+3)`
-  --     (via `bhk_s5_case51_x4_from_I1`-style `bhk_lemma_4` bounds).
-  --  4. `bhk_s5_case51_x4_incompatible` closes the generic case (`i ≤ l`).
-  --  5. Sub-cases 5.1.1 (`k ≥ 3 ∧ x₁ < 14/3`) and 5.1.2 (`k = 3 ∧ 8 < x₁ < 26/3`)
-  --     handle the four narrow `x₁`-windows where no `l ≥ i` configuration
-  --     exists, by explicit 1234-gap / margin arguments.
-  sorry
+  -- `hcon : ∀ t, ∃ i, circDist (vᵢ t) < 1/6` — the covering assumption.
+  -- Dispatch on `x₁ = v₃/v₁` (BHK conditions 1–4 vs the generic `l ≥ i` config).
+  by_cases h511 : (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 14 / 3
+  · -- Case 5.1.1 (covers conditions 1, 3, 4).
+    exact bhk_s5_case51_subcase_511 speeds hmono hpos hgcd hsmall hcon k D hk3 hD hkD h511
+  · push_neg at h511
+    by_cases h512 : k = 3 ∧ 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ)
+        ∧ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3
+    · -- Case 5.1.2 (condition 2).
+      exact bhk_s5_case51_subcase_512 speeds hmono hpos hgcd hsmall hcon k D hk3 hD hkD
+        h512.1 h512.2.1 h512.2.2
+    · -- Generic case: an `l ≥ i` configuration exists; `x4_incompatible` closes it.
+      obtain ⟨i, l, hil, h30, h33⟩ := bhk_s5_case51_config_bounds speeds hmono hpos hgcd
+        hsmall hcon k D hk3 hD hkD h511 h512
+      exact bhk_s5_case51_x4_incompatible _ i l hil h30 h33
 
 end BHK
