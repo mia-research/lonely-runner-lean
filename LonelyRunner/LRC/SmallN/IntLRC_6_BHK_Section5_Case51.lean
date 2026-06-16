@@ -1869,6 +1869,33 @@ lemma bhk_s5_case51_span_l1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         linarith [hjt_lo, bC, h_10v3]
       linarith [hsafe, hlong, h_v45]
 
+/-- **Runner 3 is automatically safe on a config window.**  On the `m`-th window
+    `[(i+m+1/3)/v₃, (i+m+5/6)/v₃]` (placement `t₀ = (i+1/3)/v₃`), `v₃ s` lies in
+    `[(i+m)+1/3, (i+m)+5/6] ⊆` the `(i+m)`-th runner-3 gap `[(i+m)+1/6, (i+m)+5/6]`,
+    so `circDist (v₃ s) ≥ 1/6`.  The clean third of the 123-gap condition for
+    `config_exists` (runners 1, 2 need slowness / 2,3-closeness). -/
+lemma bhk_s5_case51_runner3_safe_window (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (i m : ℕ) (s : ℝ)
+    (hs1 : ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) ≤ s)
+    (hs2 : s ≤ ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    (1 : ℝ) / 6 ≤ circDist ((speeds ⟨2, by omega⟩ : ℝ) * s) := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h3ne : (speeds ⟨2, by omega⟩ : ℝ) ≠ 0 := hv3.ne'
+  rw [← add_div, div_le_iff₀ hv3] at hs1
+  rw [show ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+        + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      = ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨2, by omega⟩ : ℝ) from by field_simp; ring,
+    le_div_iff₀ hv3] at hs2
+  have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos ⟨2, by omega⟩)
+    ((i : ℤ) + (m : ℤ)) s ?_ ?_
+  · rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · rw [show (((i : ℤ) + (m : ℤ) : ℤ) : ℝ) = (i : ℝ) + (m : ℝ) from by push_cast; ring,
+      div_le_iff₀ hv3]; linarith
+  · rw [show (((i : ℤ) + (m : ℤ) : ℤ) : ℝ) = (i : ℝ) + (m : ℝ) from by push_cast; ring,
+      le_div_iff₀ hv3]; linarith
+
 /-- **BHK configuration existence (eqns (31)/(32)) — the number-theoretic core.**
     In the generic case (`14/3 ≤ x₁`, not (`k=3 ∧ 8<x₁<26/3`)), there are integers
     `1 ≤ i ≤ l` such that the `l+1` windows `G_m = [(i+m+1/3)/v₃, (i+m+5/6)/v₃]`
