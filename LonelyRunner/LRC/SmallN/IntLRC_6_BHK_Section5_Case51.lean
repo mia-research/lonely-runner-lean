@@ -1112,6 +1112,81 @@ lemma bhk_s5_case51_gap_meets_block (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < 
   rw [add_sub_cancel_left, div_lt_div_iff₀ (by positivity) (by positivity)] at hlen
   linarith
 
+/-- **A covered 123-gap with no full 4-block has a *straddling* block.**  By
+    `gap_meets_block` some block `m` overlaps `G = [a, a+1/(2v₃)]`; since `G`
+    contains no full 4-block (`hnofull`), block `m` must extend past one endpoint
+    of `G` (left edge `< a`, or right edge `> a+1/(2v₃)`).  This pins the block at
+    an end of the gap — step 1–2 of the span bound (29)/(30). -/
+lemma bhk_s5_case51_gap_straddle (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (a : ℝ)
+    (hgap : ∀ s ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ))
+    (hnofull : ∀ m : ℤ, ¬ (a ≤ ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+      ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        ≤ a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))) :
+    ∃ m : ℤ, a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+      ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ∧
+      (((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < a ∨
+        a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+          < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) := by
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  obtain ⟨p, hpG, hpB⟩ := bhk_s5_case51_gap_meets_block speeds hpos hcover a hgap h35
+  rw [mem_unsafeOf_iff_bhkB] at hpB
+  obtain ⟨m, hm⟩ := hpB
+  have habs := abs_lt.mp hm
+  have hpl : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < p := by
+    rw [div_lt_iff₀ hv4]; nlinarith [habs.1]
+  have hpr : p < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    rw [lt_div_iff₀ hv4]; nlinarith [habs.2]
+  refine ⟨m, by linarith [hpG.1, hpr], by linarith [hpl, hpG.2], ?_⟩
+  by_contra hcon
+  push_neg at hcon
+  exact hnofull m ⟨hcon.1, hcon.2⟩
+
+/-- **At most one 4-block overlaps a length-`1/(2v₃)` gap.**  Two blocks `m < m'`
+    both overlapping `[a, a+1/(2v₃)]` would have
+    `(m'−1/6)/v₄ − (m+1/6)/v₄ < 1/(2v₃)`, but `m'−m ≥ 1` makes that difference
+    `≥ (2/3)/v₄ > 1/(2v₃)` (eqn 22, `3v₄ < 4v₃`) — impossible.  So the straddling
+    block from `gap_straddle` is *the* block meeting the gap. -/
+lemma bhk_s5_case51_block_unique (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ)) (a : ℝ)
+    (m m' : ℤ)
+    (hm : a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hm2 : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (hm' : a < ((m' : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hm'2 : ((m' : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    m = m' := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  -- Helper: `p < q` (integers) is impossible for two overlapping blocks.
+  have key : ∀ p q : ℤ, p < q → a < ((p : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) →
+      ((q : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        → False := by
+    intro p q hpq hp hq
+    have hpq' : (p : ℝ) + 1 ≤ q := by exact_mod_cast hpq
+    have h1 : a * (speeds ⟨3, by omega⟩ : ℝ) < (p : ℝ) + 1 / 6 := (lt_div_iff₀ hv4).mp hp
+    have h2 : (q : ℝ) - 1 / 6 < (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+        * (speeds ⟨3, by omega⟩ : ℝ) := (div_lt_iff₀ hv4).mp hq
+    have h2' : (q : ℝ) - 1 / 6 < a * (speeds ⟨3, by omega⟩ : ℝ)
+        + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      have he : (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) * (speeds ⟨3, by omega⟩ : ℝ)
+          = a * (speeds ⟨3, by omega⟩ : ℝ)
+            + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+        field_simp
+      linarith [h2, he]
+    have h3 : (2 : ℝ) / 3 < (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      linarith [h1, h2', hpq']
+    rw [lt_div_iff₀ (by positivity)] at h3
+    linarith
+  rcases lt_trichotomy m m' with h | h | h
+  · exact absurd (key m m' h hm hm'2) (by simp)
+  · exact h
+  · exact absurd (key m' m h hm' hm2) (by simp)
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
