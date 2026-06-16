@@ -1317,6 +1317,91 @@ lemma bhk_s5_case51_block_succ (speeds : Fin 5 → ℕ) (hmono : StrictMono spee
     exact bhk_s5_case51_claim9 speeds hmono hpos a hsubA hsubB h22 (p + 1)
       (le_of_lt hmidL) (le_of_lt hmidR)
 
+/-- **A covered 123-gap overlaps a 4-block — extracting the block index.**
+    `gap_straddle` without the straddle/`hnofull` part: a covered 123-gap
+    `[a, a+1/(2v₃)]` meets some 4-block `m` (`a < (m+1/6)/v₄` and
+    `(m−1/6)/v₄ < a+1/(2v₃)`).  The existence half feeding the consecutiveness
+    induction `span_consec`. -/
+lemma bhk_s5_case51_gap_block_idx (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (a : ℝ)
+    (hgap : ∀ s ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    ∃ m : ℤ, a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+      ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  obtain ⟨p, hpG, hpB⟩ := bhk_s5_case51_gap_meets_block speeds hpos hcover a hgap h35
+  rw [mem_unsafeOf_iff_bhkB] at hpB
+  obtain ⟨m, hm⟩ := hpB
+  have habs := abs_lt.mp hm
+  have hpl : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < p := by
+    rw [div_lt_iff₀ hv4]; nlinarith [habs.1]
+  have hpr : p < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    rw [lt_div_iff₀ hv4]; nlinarith [habs.2]
+  exact ⟨m, by linarith [hpG.1, hpr], by linarith [hpl, hpG.2]⟩
+
+/-- **Consecutiveness across a multiple configuration (BHK eqn (29) skeleton).**
+    Given `l+1` covered 123-gaps `G_m = [t+m/v₃, t+m/v₃+1/(2v₃)]` (`m ≤ l`), there
+    is a block index `j` such that block `j` meets `G_0` *and* block `j+l` meets
+    `G_l`.  Induction on `l`: existence of a meeting block is `gap_block_idx`; the
+    step `j+m ↦ j+(m+1)` is `block_succ` (consecutive gaps ⟹ consecutive blocks).
+    This is the consecutiveness backbone of the span bound (29)/(30): it carries
+    the *outer two* blocks to the configuration's ends, where the endpoint
+    extraction (covering of the end-flanks) then yields the eqn (29) bounds. -/
+lemma bhk_s5_case51_span_consec (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (t : ℝ) (l : ℕ)
+    (hgaps : ∀ m : ℕ, m ≤ l →
+      ∀ s ∈ Set.Icc (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    ∃ j : ℤ,
+      (t < ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+        ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          < t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) ∧
+      (t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+          < ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+        ((j : ℝ) + (l : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          < t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) := by
+  revert hgaps
+  induction l with
+  | zero =>
+    intro hgaps
+    obtain ⟨j, hjL, hjR⟩ := bhk_s5_case51_gap_block_idx speeds hmono hpos hcover t
+      (by have h := hgaps 0 (le_refl 0); simpa only [Nat.cast_zero, zero_div, add_zero] using h)
+    exact ⟨j, ⟨hjL, hjR⟩,
+      by simpa only [Nat.cast_zero, zero_div, add_zero] using hjL,
+      by simpa only [Nat.cast_zero, zero_div, add_zero] using hjR⟩
+  | succ n ih =>
+    intro hgaps
+    obtain ⟨j, ⟨hj0L, hj0R⟩, hjnL, hjnR⟩ := ih (fun m hm => hgaps m (by omega))
+    have hbr : t + (n : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+        = t + ((n + 1 : ℕ) : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by push_cast; ring
+    obtain ⟨p, hqL, hqR⟩ := bhk_s5_case51_gap_block_idx speeds hmono hpos hcover
+      (t + ((n + 1 : ℕ) : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)) (hgaps (n + 1) (le_refl _))
+    have hcast : (((j + (n : ℤ)) : ℤ) : ℝ) = (j : ℝ) + (n : ℝ) := by push_cast; ring
+    have hstep : p = j + (n : ℤ) + 1 := by
+      refine bhk_s5_case51_block_succ speeds hmono hpos hcover
+        (t + (n : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)) (hgaps n (by omega)) ?_ h22
+        (j + (n : ℤ)) p ?_ ?_ ?_ ?_
+      · rw [hbr]; exact hgaps (n + 1) (le_refl _)
+      · rw [hcast]; exact hjnL
+      · rw [hcast]; exact hjnR
+      · rw [hbr]; exact hqL
+      · rw [hbr]; exact hqR
+    refine ⟨j, ⟨hj0L, hj0R⟩, ?_, ?_⟩
+    · rw [show (j : ℝ) + ((n + 1 : ℕ) : ℝ) = (p : ℝ) from by rw [hstep]; push_cast; ring]
+      exact hqL
+    · rw [show (j : ℝ) + ((n + 1 : ℕ) : ℝ) = (p : ℝ) from by rw [hstep]; push_cast; ring]
+      exact hqR
+
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
     t+3/(2v₃)]` are 123-gaps `⊆ B₄ ∪ B₅`), `9 v₄ < 10 v₃`.  Proof by contradiction:
