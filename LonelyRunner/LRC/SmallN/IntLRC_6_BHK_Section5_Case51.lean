@@ -1550,6 +1550,96 @@ lemma bhk_s5_case51_bad_case_absurd (speeds : Fin 5 → ℕ)
       from by field_simp]
     linarith
 
+/-- **eqn (29a.right): the gap after block `j+l` reaches past `G_l` (covering).**
+    If block `j+l` meets `G_l` on its right (`t+l/v₃ < (j+l+1/6)/v₄`), then the
+    1234-gap centre `(j+l+1/2)/v₄` lies *past* `G_l`'s right end.  Otherwise the
+    4-safe stretch `[(j+l+1/6)/v₄, (j+l+1/2)/v₄] ⊆ G_l ⊆ B₄∪B₅` would be a 1234-gap
+    of length `1/(3v₄)`, but `I3_4safe_short` bounds such gaps by `1/(3v₅) < 1/(3v₄)`
+    (`v₄ < v₅`).  This is the always-true right half of eqn (29)'s branch 1. -/
+lemma bhk_s5_case51_endpoint_right_covering (speeds : Fin 5 → ℕ)
+    (hmono : StrictMono speeds) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ) (l : ℕ) (j : ℤ)
+    (hgapl : ∀ s ∈ Set.Icc (t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (hmeetR : t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+      < ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) :
+    t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      < ((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ) := by
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have h : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  have hjl : (((j + (l : ℤ)) : ℤ) : ℝ) = (j : ℝ) + (l : ℝ) := by push_cast; ring
+  by_contra hcon
+  push_neg at hcon
+  have hbridge : t + ((l : ℝ) - 1) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+      = t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by field_simp; ring
+  have hshort := bhk_s5_case51_I3_4safe_short speeds hpos hcover
+    (t + ((l : ℝ) - 1) / (speeds ⟨2, by omega⟩ : ℝ))
+    (by rw [hbridge]; exact hgapl) (j + (l : ℤ))
+    (((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ))
+    (by rw [← sub_nonneg, show ((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+          - ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by field_simp; ring]; positivity)
+    (by rw [hbridge]; exact le_of_lt hmeetR)
+    (by rw [hbridge]; exact hcon) (le_of_eq (by rw [hjl]))
+    (by rw [hjl, ← sub_nonneg, show ((j : ℝ) + (l : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          - ((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+          = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by field_simp; ring]; positivity)
+  have hba : ((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+      - ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by field_simp; ring
+  rw [hba] at hshort
+  have hlt : 1 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) < 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  linarith
+
+/-- **eqn (29b.left): the gap before block `j` reaches before `G_0` (covering).**
+    Mirror of `endpoint_right_covering`: if block `j` meets `G_0` on its left
+    (`(j-1/6)/v₄ < t+1/(2v₃)`), then the 1234-gap centre `(j-1/2)/v₄` lies *before*
+    `G_0`'s left end `t`.  Otherwise `[(j-1/2)/v₄, (j-1/6)/v₄] ⊆ G_0` is a 1234-gap
+    of length `1/(3v₄) > 1/(3v₅)` (`I1_4safe_short`).  The always-true left half of
+    eqn (29)'s branch 2. -/
+lemma bhk_s5_case51_endpoint_left_covering (speeds : Fin 5 → ℕ)
+    (hmono : StrictMono speeds) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ) (j : ℤ)
+    (hgap0 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (hmeetL : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ) < t := by
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h45 : (speeds ⟨3, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have h : speeds ⟨3, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  have hjl : (((j - 1 : ℤ)) : ℝ) = (j : ℝ) - 1 := by push_cast; ring
+  by_contra hcon
+  push_neg at hcon
+  have hshort := bhk_s5_case51_I1_4safe_short speeds hpos hcover t hgap0 (j - 1)
+    (((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ))
+    (((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (by rw [← sub_nonneg, show ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          - ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+          = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by field_simp; ring]; positivity)
+    hcon (le_of_lt hmeetL)
+    (by rw [hjl, ← sub_nonneg, show ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+          - ((j : ℝ) - 1 + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by field_simp; ring]; positivity)
+    (le_of_eq (by rw [hjl]; ring))
+  have hba : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      - ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+      = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by field_simp; ring
+  rw [hba] at hshort
+  have hlt : 1 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) < 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) :=
+    one_div_lt_one_div_of_lt (by positivity) (by linarith)
+  linarith
+
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
     t+3/(2v₃)]` are 123-gaps `⊆ B₄ ∪ B₅`), `9 v₄ < 10 v₃`.  Proof by contradiction:
