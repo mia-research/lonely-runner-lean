@@ -745,6 +745,28 @@ lemma bhk_s5_case51_claim10_contra (speeds : Fin 5 → ℕ) (hmono : StrictMono 
     (speeds ⟨4, by omega⟩ : ℝ) t j a1 a2 a3 hv3 hv4 hv54v3 h34 h24a'
     hG1a hG1b hG2a hG2b hG3a hG3b
 
+/-- **A 4-safe sub-interval of `I₁` is a short 1234-gap.**  Companion to
+    `bhk_s5_case51_I3_4safe_short` for the gap `I₁ = [t, t+1/(2v₃)]`: if
+    `[a,b] ⊆ I₁` lies in the `k`-th runner-4 gap `[(k+1/6)/v₄, (k+5/6)/v₄]`, then
+    `[a,b]` is a 1234-gap, so `b−a < 1/(3v₅)` (`gap1234_short`). -/
+lemma bhk_s5_case51_I1_4safe_short (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgapI1 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (k : ℤ) (a b : ℝ) (hab : a ≤ b)
+    (ha : t ≤ a) (hb : b ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (hg1 : ((k : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ≤ a)
+    (hg2 : b ≤ ((k : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) :
+    b - a < 1 / (3 * (speeds ⟨4, by omega⟩ : ℝ)) := by
+  apply bhk_s5_case51_gap1234_short speeds hpos hcover hab
+  intro s hs i
+  fin_cases i
+  · exact hgapI1 s ⟨le_trans ha hs.1, le_trans hs.2 hb⟩ 0
+  · exact hgapI1 s ⟨le_trans ha hs.1, le_trans hs.2 hb⟩ 1
+  · exact hgapI1 s ⟨le_trans ha hs.1, le_trans hs.2 hb⟩ 2
+  · exact bhk_s5_case51_runner4_safe_on_gap speeds (hpos ⟨3, by omega⟩) k s
+      (le_trans hg1 hs.1) (le_trans hs.2 hg2)
+
 /-- **Helper for eqn (25): a 4-safe sub-interval of `I₃` is a short 1234-gap.**
     If `[a,b] ⊆ I₃ = [t+1/v₃, t+3/(2v₃)]` lies in the `k`-th runner-4 gap
     `[(k+1/6)/v₄, (k+5/6)/v₄]`, then `[a,b]` is a 1234-gap, so `b−a < 1/(3v₅)`
