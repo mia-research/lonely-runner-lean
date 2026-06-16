@@ -1869,6 +1869,34 @@ lemma bhk_s5_case51_span_l1 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         linarith [hjt_lo, bC, h_10v3]
       linarith [hsafe, hlong, h_v45]
 
+/-- **BHK configuration existence (eqns (31)/(32)) — the number-theoretic core.**
+    In the generic case (`14/3 ≤ x₁`, not (`k=3 ∧ 8<x₁<26/3`)), there are integers
+    `1 ≤ i ≤ l` such that the `l+1` windows `G_m = [(i+m+1/3)/v₃, (i+m+5/6)/v₃]`
+    (`m ≤ l`, BHK placement `t = i+1/3`) are all 123-gaps.  Runner 3 is automatically
+    safe (`{v₃ s} ∈ [1/3,5/6]`); runner 2 follows by 2,3-closeness `{D t} ≤ 1/6`
+    (`runner3_close`), which holds across all `m` by eqn (32); runner 1 is safe by
+    slowness (`x₁ > 3`).  Feasibility of `i ≤ l` (eqn (32)) is exactly what fails in
+    conditions 1–4, excluded by `h511`/`h512`.  *Under construction* — the runner-1 /
+    runner-`D` window number theory (via `period1`). -/
+lemma bhk_s5_case51_config_exists (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
+    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
+    (hcon : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (k D : ℕ) (hk3 : 3 ≤ k)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k)
+    (h511 : 14 / 3 ≤ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
+    (h512 : ¬(k = 3 ∧ 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ)
+      ∧ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3)) :
+    ∃ i l : ℕ, 1 ≤ i ∧ i ≤ l ∧
+      ∀ m : ℕ, m ≤ l →
+        ∀ s ∈ Set.Icc (((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+            + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+          (((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+            + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+        ∀ r : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨r.val, by omega⟩ : ℝ) * s) := by
+  sorry
+
 /-- **BHK generic case: the `l ≥ i` multiple configuration and its bounds.**
     When none of BHK conditions 1–4 hold — here `14/3 ≤ x₁` (`x₁ = v₃/v₁`) *and*
     not (`k = 3 ∧ 8 < x₁ < 26/3`) — eqn (32) yields integers `i ≤ l` realising a
@@ -1893,7 +1921,51 @@ lemma bhk_s5_case51_config_bounds (speeds : Fin 5 → ℕ) (hmono : StrictMono s
         < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ) ∧
       (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ)
         < (6 * (i : ℝ) + 2) / (6 * i + 3) := by
-  sorry
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  obtain ⟨i, l, hi1, hil, hgaps⟩ :=
+    bhk_s5_case51_config_exists speeds hmono hpos hgcd hsmall hcon k D hk3 hD hkD h511 h512
+  have hl : 1 ≤ l := le_trans hi1 hil
+  set t₀ : ℝ := ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ) with ht0def
+  -- `G₀` is a covered 123-gap, giving eqn (22) `3v₄ < 4v₃`.
+  have hgap0 : ∀ s ∈ Set.Icc t₀ (t₀ + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ r : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨r.val, by omega⟩ : ℝ) * s) := by
+    simpa only [Nat.cast_zero, zero_div, add_zero] using hgaps 0 (by omega)
+  have h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) :=
+    bhk_s5_case51_x4_from_I1 speeds hmono hpos (bhk_prop11_gap_covered speeds hcon hgap0)
+  refine ⟨i, l, hil, ?_, ?_⟩
+  · -- eqn (30) via `span_l`.
+    have hspan := bhk_s5_case51_span_l speeds hmono hpos hcon h22 t₀ l hl hgaps
+    rw [div_lt_div_iff₀ (by positivity) hv4]; nlinarith [hspan]
+  · -- eqn (33): `span_consec` gives `j ≥ i+1`; `endpoint_left_covering` gives
+    -- `(j-1/2)/v₄ < t₀`, so `(i+1/2)/v₄ < (i+1/3)/v₃`.
+    obtain ⟨j, ⟨hm0L, hm0R⟩, _, _⟩ :=
+      bhk_s5_case51_span_consec speeds hmono hpos hcon h22 t₀ l hgaps
+    have hblock_i : ((i : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < t₀ := by
+      rw [ht0def, div_lt_div_iff₀ hv4 hv3]
+      nlinarith [mul_nonneg (Nat.cast_nonneg i : (0:ℝ) ≤ i) (sub_nonneg.mpr h34.le), h34, hv3]
+    have hlt_div : ((i : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        < ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := lt_trans hblock_i hm0L
+    rw [div_lt_div_iff₀ hv4 hv4] at hlt_div
+    have h2 : (i : ℝ) + 1 / 6 < (j : ℝ) + 1 / 6 := lt_of_mul_lt_mul_right hlt_div (le_of_lt hv4)
+    have hij : (i : ℤ) + 1 ≤ j := by
+      have : (i : ℤ) < j := by exact_mod_cast (by linarith : (i : ℝ) < (j : ℝ))
+      omega
+    have hij' : (i : ℝ) + 1 ≤ (j : ℝ) := by exact_mod_cast hij
+    have hleft := bhk_s5_case51_endpoint_left_covering speeds hmono hpos hcon t₀ j hgap0 hm0R
+    have hge : ((i : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+        ≤ ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ hv4 hv4]
+      nlinarith [mul_nonneg (by linarith : (0:ℝ) ≤ (j:ℝ) - i - 1) (le_of_lt hv4)]
+    have hcomb : ((i : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ) < t₀ :=
+      lt_of_le_of_lt hge hleft
+    rw [ht0def, div_lt_div_iff₀ hv4 hv3] at hcomb
+    apply bhk_s5_case51_eqn33 ((speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨3, by omega⟩ : ℝ)) i
+    rw [← mul_div_assoc, div_lt_iff₀ hv4]; nlinarith [hcomb]
 
 /-- **BHK Case 5.1.1 (`k ≥ 3`, `x₁ < 14/3`).**  Covers BHK conditions 1, 3, 4
     (their `x₁`-bounds `14/3, 14/4, 17/5` all satisfy `x₁ < 14/3`).  No `l ≥ i`
