@@ -1896,15 +1896,148 @@ lemma bhk_s5_case51_runner3_safe_window (speeds : Fin 5 → ℕ) (hpos : ∀ i, 
   · rw [show (((i : ℤ) + (m : ℤ) : ℤ) : ℝ) = (i : ℝ) + (m : ℝ) from by push_cast; ring,
       le_div_iff₀ hv3]; linarith
 
-/-- **BHK configuration existence (eqns (31)/(32)) — the number-theoretic core.**
+/-- **Runner 1 is safe on a config window.**  On window `m ≤ l`, `s` lies in the
+    global config span `[(i+1/3)/v₃, (i+l+5/6)/v₃]`, so `v₁ s ∈ [1/6, 5/6]` (the
+    `0`-th runner-1 gap) by eqn (32)'s outer bounds `hA` (`v₃ ≤ v₁(6i+2)`) and `hC`
+    (`v₁(6i+6l+5) ≤ 5v₃`).  Runner 1 stays in its first safe stretch. -/
+lemma bhk_s5_case51_runner1_safe_window (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (i l m : ℕ) (s : ℝ) (hml : m ≤ l)
+    (hA : (speeds ⟨2, by omega⟩ : ℝ) ≤ (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 2))
+    (hC : (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 5)
+      ≤ 5 * (speeds ⟨2, by omega⟩ : ℝ))
+    (hs1 : ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) ≤ s)
+    (hs2 : s ≤ ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    (1 : ℝ) / 6 ≤ circDist ((speeds ⟨0, by omega⟩ : ℝ) * s) := by
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hml' : (m : ℝ) ≤ (l : ℝ) := by exact_mod_cast hml
+  have hslo : (1 : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) ≤ s := by
+    have h1 : (1 : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ))
+        ≤ ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ (by positivity) hv3]; nlinarith [hA]
+    have h2 : (0 : ℝ) ≤ (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+    linarith
+  have hshi : s ≤ (5 : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+    have heq : ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+        + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        = ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨2, by omega⟩ : ℝ) := by
+      field_simp; ring
+    have h2 : ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨2, by omega⟩ : ℝ)
+        ≤ (5 : ℝ) / (6 * (speeds ⟨0, by omega⟩ : ℝ)) := by
+      rw [div_le_div_iff₀ hv3 (by positivity)]
+      nlinarith [hC, mul_nonneg (sub_nonneg.mpr hml') hv1.le]
+    rw [heq] at hs2; linarith [hs2, h2]
+  have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos ⟨0, by omega⟩) 0 s ?_ ?_
+  · rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · rw [show ((0 : ℤ) : ℝ) + 1 / 6 = 1 / 6 from by norm_num, div_div]; exact hslo
+  · rw [show ((0 : ℤ) : ℝ) + 5 / 6 = 5 / 6 from by norm_num, div_div]; exact hshi
+
+/-- **Runner 2 is safe on a config window.**  On window `m ≤ l`, `2,3`-closeness
+    (`{D s} ≤ 1/6`, BHK eqn (31)) keeps `v₂ s` in the `(i+m)`-th runner-2 gap
+    `[(i+m)+1/6, (i+m)+5/6]`: the lower edge uses eqn (32)'s `hB` (`D(6i+6l+2) ≤ v₃`,
+    so `v₂ ≥ D(6i+6l+1)`), the upper edge uses `v₂ < v₃`. -/
+lemma bhk_s5_case51_runner2_safe_window (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (i l m : ℕ) (s : ℝ) (hml : m ≤ l)
+    (D : ℕ) (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hB : (D : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 2) ≤ (speeds ⟨2, by omega⟩ : ℝ))
+    (hs1 : ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) ≤ s)
+    (hs2 : s ≤ ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+      + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    (1 : ℝ) / 6 ≤ circDist ((speeds ⟨1, by omega⟩ : ℝ) * s) := by
+  have hv2 : (0 : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv2le3 : (speeds ⟨1, by omega⟩ : ℝ) ≤ (speeds ⟨2, by omega⟩ : ℝ) := by
+    have : speeds ⟨1, by omega⟩ ≤ speeds ⟨2, by omega⟩ := by
+      apply le_of_lt; apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast this
+  have hDR : (0 : ℝ) < (D : ℝ) := by exact_mod_cast bhk_s5_case51_D_pos speeds hmono D hD
+  have hv3eq : (speeds ⟨2, by omega⟩ : ℝ) = (speeds ⟨1, by omega⟩ : ℝ) + (D : ℝ) := by
+    have := bhk_s5_case51_D_cast speeds hmono D hD; linarith
+  have hml' : (m : ℝ) ≤ (l : ℝ) := by exact_mod_cast hml
+  have hv2lo : (D : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 1) ≤ (speeds ⟨1, by omega⟩ : ℝ) := by
+    nlinarith [hB, hv3eq]
+  have hslo2 : ((i : ℝ) + (m : ℝ) + 1 / 6) / (speeds ⟨1, by omega⟩ : ℝ) ≤ s := by
+    have step1 : ((i : ℝ) + (m : ℝ) + 1 / 6) / (speeds ⟨1, by omega⟩ : ℝ)
+        ≤ ((i : ℝ) + (m : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ hv2 hv3, hv3eq]
+      nlinarith [hv2lo, mul_nonneg (sub_nonneg.mpr hml') hDR.le]
+    have hwl : ((i : ℝ) + (m : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+        = ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+          + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by field_simp; ring
+    rw [hwl] at step1; linarith [step1, hs1]
+  have hshi2 : s ≤ ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨1, by omega⟩ : ℝ) := by
+    have hwr : ((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+        + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        = ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨2, by omega⟩ : ℝ) := by field_simp; ring
+    have step : ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨2, by omega⟩ : ℝ)
+        ≤ ((i : ℝ) + (m : ℝ) + 5 / 6) / (speeds ⟨1, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ hv3 hv2]
+      nlinarith [mul_nonneg (by positivity : (0 : ℝ) ≤ (i : ℝ) + (m : ℝ) + 5 / 6)
+        (sub_nonneg.mpr hv2le3)]
+    rw [hwr] at hs2; linarith [hs2, step]
+  have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos ⟨1, by omega⟩)
+    ((i : ℤ) + (m : ℤ)) s ?_ ?_
+  · rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · rw [show (((i : ℤ) + (m : ℤ) : ℤ) : ℝ) = (i : ℝ) + (m : ℝ) from by push_cast; ring]
+    exact hslo2
+  · rw [show (((i : ℤ) + (m : ℤ) : ℤ) : ℝ) = (i : ℝ) + (m : ℝ) from by push_cast; ring]
+    exact hshi2
+
+/-- **A multiple configuration is a sequence of 123-gaps.**  Given `i, l` and the
+    three eqn-(32) bounds `hA`/`hB`/`hC`, every window
+    `G_m = [(i+m+1/3)/v₃, (i+m+5/6)/v₃]` (`m ≤ l`) is a 123-gap: runner 3 is
+    auto-safe (`runner3_safe_window`), runner 1 stays in `[1/6,5/6]`, runner 2
+    follows by `2,3`-closeness. -/
+lemma bhk_s5_case51_config_window_safe (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (i l D : ℕ)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hA : (speeds ⟨2, by omega⟩ : ℝ) ≤ (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 2))
+    (hB : (D : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 2) ≤ (speeds ⟨2, by omega⟩ : ℝ))
+    (hC : (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 5)
+      ≤ 5 * (speeds ⟨2, by omega⟩ : ℝ)) :
+    ∀ m : ℕ, m ≤ l →
+      ∀ s ∈ Set.Icc (((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+          + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
+          + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+        ∀ r : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨r.val, by omega⟩ : ℝ) * s) := by
+  intro m hml s hs r
+  obtain ⟨hs1, hs2⟩ := hs
+  fin_cases r
+  · exact bhk_s5_case51_runner1_safe_window speeds hpos i l m s hml hA hC hs1 hs2
+  · exact bhk_s5_case51_runner2_safe_window speeds hmono hpos i l m s hml D hD hB hs1 hs2
+  · exact bhk_s5_case51_runner3_safe_window speeds hpos i m s hs1 hs2
+
+/-- **BHK configuration feasibility (eqn (32) integer existence).**  Given the
+    generic-case exclusions (`14/3 ≤ x₁`, not (`k=3 ∧ 8<x₁<26/3`)), there exist
+    `1 ≤ i ≤ l` (BHK takes `i = l = ⌈(x₁-2)/6⌉`) satisfying the three eqn-(32)
+    speed bounds `hA`/`hB`/`hC`.  This is BHK's "a multiple configuration with
+    `l ≥ i` exists unless conditions 1–4 hold" — the number-theoretic feasibility.
+    *Under construction.* -/
+lemma bhk_s5_case51_config_feasible (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (k D : ℕ) (hk3 : 3 ≤ k)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k)
+    (h511 : 14 / 3 ≤ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
+    (h512 : ¬(k = 3 ∧ 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ)
+      ∧ (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3)) :
+    ∃ i l : ℕ, 1 ≤ i ∧ i ≤ l ∧
+      (speeds ⟨2, by omega⟩ : ℝ) ≤ (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 2) ∧
+      (D : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 2) ≤ (speeds ⟨2, by omega⟩ : ℝ) ∧
+      (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 5)
+        ≤ 5 * (speeds ⟨2, by omega⟩ : ℝ) := by
+  sorry
+
+/-- **BHK configuration existence (eqns (31)/(32)) — the multiple configuration.**
     In the generic case (`14/3 ≤ x₁`, not (`k=3 ∧ 8<x₁<26/3`)), there are integers
     `1 ≤ i ≤ l` such that the `l+1` windows `G_m = [(i+m+1/3)/v₃, (i+m+5/6)/v₃]`
-    (`m ≤ l`, BHK placement `t = i+1/3`) are all 123-gaps.  Runner 3 is automatically
-    safe (`{v₃ s} ∈ [1/3,5/6]`); runner 2 follows by 2,3-closeness `{D t} ≤ 1/6`
-    (`runner3_close`), which holds across all `m` by eqn (32); runner 1 is safe by
-    slowness (`x₁ > 3`).  Feasibility of `i ≤ l` (eqn (32)) is exactly what fails in
-    conditions 1–4, excluded by `h511`/`h512`.  *Under construction* — the runner-1 /
-    runner-`D` window number theory (via `period1`). -/
+    (`m ≤ l`, BHK placement `t = i+1/3`) are all 123-gaps.  Assembled from
+    `config_feasible` (eqn (32) integer existence) and `config_window_safe`
+    (the three eqn-(32) bounds force runners 1, 2, 3 safe on every window). -/
 lemma bhk_s5_case51_config_exists (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -1922,7 +2055,10 @@ lemma bhk_s5_case51_config_exists (speeds : Fin 5 → ℕ) (hmono : StrictMono s
           (((i : ℝ) + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)
             + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
         ∀ r : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨r.val, by omega⟩ : ℝ) * s) := by
-  sorry
+  obtain ⟨i, l, hi1, hil, hA, hB, hC⟩ :=
+    bhk_s5_case51_config_feasible speeds hmono hpos k D hk3 hD hkD h511 h512
+  exact ⟨i, l, hi1, hil,
+    bhk_s5_case51_config_window_safe speeds hmono hpos i l D hD hA hB hC⟩
 
 /-- **BHK generic case: the `l ≥ i` multiple configuration and its bounds.**
     When none of BHK conditions 1–4 hold — here `14/3 ≤ x₁` (`x₁ = v₃/v₁`) *and*
