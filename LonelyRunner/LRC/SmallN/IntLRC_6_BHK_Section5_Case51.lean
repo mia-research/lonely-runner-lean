@@ -1402,6 +1402,26 @@ lemma bhk_s5_case51_span_consec (speeds : Fin 5 → ℕ) (hmono : StrictMono spe
     · rw [show (j : ℝ) + ((n + 1 : ℕ) : ℝ) = (p : ℝ) from by rw [hstep]; push_cast; ring]
       exact hqR
 
+/-- **Discrete drift crossing.**  A real sequence `ψ` that decreases by a fixed
+    step `S` per index (`ψ (m+1) = ψ m - S`), starts at `ψ 0 ≥ B`, ends at
+    `ψ l ≤ T`, and whose step is smaller than the window (`S < T - B`), must land
+    inside `[B, T]` at some index `m ≤ l`.  (Used with the eqn-(22) identity
+    `S < W` to force a 4-block fully inside a gap, contradicting Claim 10: the
+    block cannot "jump over" the window in a single step.) -/
+lemma drift_crossing (ψ : ℕ → ℝ) (B T S : ℝ) (l : ℕ)
+    (hstep : ∀ m, ψ (m + 1) = ψ m - S) (h0 : B ≤ ψ 0) (hl : ψ l ≤ T)
+    (hSW : S < T - B) : ∃ m, m ≤ l ∧ B ≤ ψ m ∧ ψ m ≤ T := by
+  classical
+  have hex : ∃ m, ψ m ≤ T := ⟨l, hl⟩
+  refine ⟨Nat.find hex, Nat.find_le hl, ?_, Nat.find_spec hex⟩
+  rcases Nat.eq_zero_or_pos (Nat.find hex) with hz | hpos
+  · rw [hz]; exact h0
+  · obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero hpos.ne'
+    have hkmin : ¬ ψ k ≤ T := Nat.find_min hex (by omega)
+    push_neg at hkmin
+    have hstepf : ψ (Nat.find hex) = ψ k - S := by rw [hk]; exact hstep k
+    rw [hstepf]; linarith
+
 /-- **A 4-block fully inside a gap of a multiple configuration is impossible.**
     For a multiple configuration `G_0, …, G_l` (`1 ≤ l`, each `G_m =
     [t+m/v₃, t+m/v₃+1/(2v₃)]` a 123-gap), if the `(j+m)`-th runner-4 block lies
