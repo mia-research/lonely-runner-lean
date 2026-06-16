@@ -1402,6 +1402,52 @@ lemma bhk_s5_case51_span_consec (speeds : Fin 5 → ℕ) (hmono : StrictMono spe
     · rw [show (j : ℝ) + ((n + 1 : ℕ) : ℝ) = (p : ℝ) from by rw [hstep]; push_cast; ring]
       exact hqR
 
+/-- **A 4-block fully inside a gap of a multiple configuration is impossible.**
+    For a multiple configuration `G_0, …, G_l` (`1 ≤ l`, each `G_m =
+    [t+m/v₃, t+m/v₃+1/(2v₃)]` a 123-gap), if the `(j+m)`-th runner-4 block lies
+    *fully inside* `G_m` for some `m ≤ l` then `False`.  Dispatches on position:
+    an initial/middle gap (`m < l`) is an `I₁` with partner `I₃ = G_{m+1}`
+    (`claim10_no4block_I1`); the final gap (`m = l`) is an `I₃` with partner
+    `I₁ = G_{l-1}` (the mirror `claim10_no4block_I3`).  This is the leaf consumed
+    by the drift-window bad-case argument for eqn (29). -/
+lemma bhk_s5_case51_block_fully_in_gap_absurd (speeds : Fin 5 → ℕ)
+    (hmono : StrictMono speeds) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (t : ℝ) (l : ℕ) (hl : 1 ≤ l)
+    (hgaps : ∀ m : ℕ, m ≤ l →
+      ∀ s ∈ Set.Icc (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (j : ℤ) (m : ℕ) (hm : m ≤ l)
+    (hfullL : t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+      ≤ (((j : ℝ) + (m : ℝ)) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hfullR : (((j : ℝ) + (m : ℝ)) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    False := by
+  have hcast : (((j + (m : ℤ)) : ℤ) : ℝ) = (j : ℝ) + (m : ℝ) := by push_cast; ring
+  rcases lt_or_eq_of_le hm with hlt | heq
+  · -- `m < l`: block `j+m` is fully inside `G_m = I₁`; partner `I₃ = G_{m+1}`.
+    have hbr : t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+        = t + ((m + 1 : ℕ) : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by push_cast; ring
+    refine bhk_s5_case51_claim10_no4block_I1 speeds hmono hpos hcover
+      (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)) (hgaps m hm) ?_ h22 (j + (m : ℤ)) ?_ ?_
+    · rw [hbr]; exact hgaps (m + 1) (by omega)
+    · rw [hcast]; exact hfullL
+    · rw [hcast]; exact hfullR
+  · -- `m = l`: block `j+m` is fully inside `G_m = I₃`; partner `I₁ = G_{m-1}`.
+    have hm1 : 1 ≤ m := by omega
+    have hτ : t + ((m - 1 : ℕ) : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+          + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+        = t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [Nat.cast_sub hm1]; push_cast; field_simp; ring
+    refine bhk_s5_case51_claim10_no4block_I3 speeds hmono hpos hcover
+      (t + ((m - 1 : ℕ) : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)) (hgaps (m - 1) (by omega)) ?_ h22
+      (j + (m : ℤ)) ?_ ?_
+    · rw [hτ]; exact hgaps m hm
+    · rw [hcast, hτ]; exact hfullL
+    · rw [hcast, hτ]; exact hfullR
+
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
     t+3/(2v₃)]` are 123-gaps `⊆ B₄ ∪ B₅`), `9 v₄ < 10 v₃`.  Proof by contradiction:
