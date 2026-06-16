@@ -894,6 +894,107 @@ lemma bhk_s5_case51_eqn25 (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
       rw [hlen, div_lt_div_iff₀ (by positivity) (by positivity)] at h
       linarith
 
+/-- **BHK eqn (25), reflected: the forced 4-block in `I₁`.**  Mirror of
+    `bhk_s5_case51_eqn25` under the left↔right symmetry of the triple
+    configuration: a 4-block in `I₃` (the `j`-th) together with the covered
+    123-gap `I₁ = [t, t+1/(2v₃)]` forces the `(j−1)`-th 4-block inside `I₁`.
+    The `j`-th block is right of `I₁` and the `(j−2)`-th is left of it (P1'/P2'),
+    so `(j−1)` is the only candidate; the same length accounting (`h45sum`,
+    `h2v3v5`) rules out every non-contained position. -/
+lemma bhk_s5_case51_eqn25' (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgapI1 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ))
+    (j : ℤ)
+    (h23a : t + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+      ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (h23b : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (h2v3v5 : 2 * (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ))
+    (h45sum : 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) + 1 / (3 * (speeds ⟨4, by omega⟩ : ℝ))
+      < 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    t ≤ ((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
+      ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        ≤ t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hpos2 : (0 : ℝ) < 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by positivity
+  -- P1': the j-th 4-block left edge is at/right of I₁'s right end.
+  have hP1 : t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : (1 : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ 1 / (speeds ⟨2, by omega⟩ : ℝ) :=
+      one_div_le_one_div_of_le hv3 (by linarith)
+    linarith [h23a, h]
+  -- P2': the (j-2)-th 4-block right edge is left of I₁'s left end.
+  have hP2 : ((j : ℝ) - 11 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ≤ t := by
+    have e : ((j : ℝ) - 11 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) - 2 / (speeds ⟨3, by omega⟩ : ℝ) := by
+      field_simp; ring
+    have h32 : 3 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ≤ 2 / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [div_le_div_iff₀ (by positivity) (by positivity)]; linarith
+    have e2 : (1 : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        = 3 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by field_simp; ring
+    linarith [h23b, e, h32, e2]
+  have hlen : (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) - t
+      = 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by ring
+  have hblk : ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      - ((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ) = 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+    field_simp; ring
+  have ecast1 : (((j - 2 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 11 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have ecast2 : (((j - 2 : ℤ) : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have ecast3 : (((j - 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have ecast4 : (((j - 1 : ℤ) : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  rcases le_or_gt t (((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) with hbl | hbl
+  · rcases le_or_gt (((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+      (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) with hbr | hbr
+    · exact ⟨hbl, hbr⟩
+    · exfalso
+      rcases le_or_gt (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+        (((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) with hmiss | hstr
+      · -- (j-1)-th block right of I₁: I₁ ⊆ left 4-gap (k = j-2) ⊆ B₅, too long.
+        have hI1 := bhk_s5_case51_I1_4safe_short speeds hpos hcover t hgapI1 (j - 2)
+          t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+          (by linarith) (le_refl _) (le_refl _)
+          (by rw [ecast1]; exact hP2) (by rw [ecast2]; exact hmiss)
+        rw [hlen, div_lt_div_iff₀ (by positivity) (by positivity)] at hI1
+        linarith
+      · -- (j-1)-th block straddles I₁'s right end: I₁ = (left flank, k=j-2) + (block part).
+        have hL := bhk_s5_case51_I1_4safe_short speeds hpos hcover t hgapI1 (j - 2)
+          t (((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+          hbl (le_refl _) (le_of_lt hstr) (by rw [ecast1]; exact hP2) ecast2.symm.le
+        linarith [hL, hblk, hbr, h45sum]
+  · rcases le_or_gt (((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+      (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) with hbr | hbr
+    · exfalso
+      rcases le_or_gt (((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) t with hmiss | hstr
+      · -- (j-1)-th block left of I₁: I₁ ⊆ right 4-gap (k = j-1) ⊆ B₅, too long.
+        have hI1 := bhk_s5_case51_I1_4safe_short speeds hpos hcover t hgapI1 (j - 1)
+          t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+          (by linarith) (le_refl _) (le_refl _)
+          (by rw [ecast3]; exact hmiss) (by rw [ecast4]; exact hP1)
+        rw [hlen, div_lt_div_iff₀ (by positivity) (by positivity)] at hI1
+        linarith
+      · -- (j-1)-th block straddles I₁'s left end: I₁ = (block part) + (right flank, k=j-1).
+        have hR := bhk_s5_case51_I1_4safe_short speeds hpos hcover t hgapI1 (j - 1)
+          (((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+          (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+          hbr (le_of_lt hstr) (le_refl _) ecast3.le (by rw [ecast4]; exact hP1)
+        linarith [hR, hblk, hbl, h45sum]
+    · -- (j-1)-th block ⊇ I₁: impossible since |block| = 1/(3v₄) < 1/(2v₃) = |I₁|.
+      exfalso
+      have h : (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) - t
+          < 1 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+        linarith [hblk, hbl, hbr]
+      rw [hlen, div_lt_div_iff₀ (by positivity) (by positivity)] at h
+      linarith
+
 /-- **Claim 10 (BHK p. 15): no 4-block is contained in `I₁`.**  In the triple
     configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃, t+3/(2v₃)]` are
     123-gaps `⊆ B₄ ∪ B₅` under the covering `hcover`), a 4-block in `I₁`
@@ -931,6 +1032,56 @@ lemma bhk_s5_case51_claim10_no4block_I1 (speeds : Fin 5 → ℕ) (hmono : Strict
     bhk_s5_case51_eqn25 speeds hpos hcover t hgapI3 h22 h34 j h23a h23b h2v3v5 h45sum
   exact bhk_s5_case51_claim10_contra speeds hmono hpos hcover t hgapI1 hgapI3 h22 j
     h23a h23b h25a h25b
+
+/-- **Claim 10 (BHK p. 15): no 4-block is contained in `I₃`.**  The left↔right
+    mirror of `bhk_s5_case51_claim10_no4block_I1`: a 4-block in `I₃` (the `j`-th)
+    is contradictory.  Eqn (24)/`x5_bounds`/`x45_sum` (applied to the `I₃` block)
+    feed the reflected `eqn25'`, which forces the `(j−1)`-th block into `I₁`;
+    `claim10_contra` (at index `j−1`) then closes it.  Together with the `I₁`
+    lemma this is the full Claim 10. -/
+lemma bhk_s5_case51_claim10_no4block_I3 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (t : ℝ)
+    (hgapI1 : ∀ s ∈ Set.Icc t (t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (hgapI3 : ∀ s ∈ Set.Icc (t + 1 / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (j : ℤ)
+    (h23a : t + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+      ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (h23b : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      ≤ t + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    False := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  -- eqn (24) and the `x₅` bounds, from the `I₃` 4-block (gap start `t+1/v₃`).
+  have h24a := bhk_s5_case51_claim10_5gap speeds hmono hpos hcover
+    (t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) hgapI3 h22 j h23a h23b
+  have h24b := bhk_s5_case51_claim10_decomp speeds hpos hcover
+    (t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) hgapI3 h22 j h23a h23b
+  obtain ⟨h2v3v5, _⟩ := bhk_s5_case51_x5_bounds _ _ _ hv3 hv5 h34 h24a h24b
+  have h45sum := bhk_s5_case51_x45_sum _ _ _ hv3 h34 h2v3v5
+  -- Reflected eqn (25): the `(j-1)`-th 4-block lies in `I₁`.
+  obtain ⟨h25a, h25b⟩ :=
+    bhk_s5_case51_eqn25' speeds hpos hcover t hgapI1 h22 h34 j h23a h23b h2v3v5 h45sum
+  -- `claim10_contra` at index `j-1`: the `I₁` block `(j-1)` and the `I₃` block `j`.
+  have c1 : (((j - 1 : ℤ) : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have c2 : (((j - 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have c3 : (((j - 1 : ℤ) : ℝ) + 5 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  have c4 : (((j - 1 : ℤ) : ℝ) + 7 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      = ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by push_cast; ring
+  exact bhk_s5_case51_claim10_contra speeds hmono hpos hcover t hgapI1 hgapI3 h22 (j - 1)
+    (by rw [c1]; exact h25a) (by rw [c2]; exact h25b)
+    (by rw [c3]; exact h23a) (by rw [c4]; exact h23b)
 
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
