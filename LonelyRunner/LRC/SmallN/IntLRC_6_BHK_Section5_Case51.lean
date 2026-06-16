@@ -2030,7 +2030,72 @@ lemma bhk_s5_case51_config_feasible (speeds : Fin 5 → ℕ) (hmono : StrictMono
       (D : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 2) ≤ (speeds ⟨2, by omega⟩ : ℝ) ∧
       (speeds ⟨0, by omega⟩ : ℝ) * (6 * (i : ℝ) + 6 * (l : ℝ) + 5)
         ≤ 5 * (speeds ⟨2, by omega⟩ : ℝ) := by
-  sorry
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hkR3 : (3 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hk3
+  have hkR : (0 : ℝ) < (k : ℝ) := by linarith
+  have hDR : (0 : ℝ) < (D : ℝ) := by exact_mod_cast bhk_s5_case51_D_pos speeds hmono D hD
+  set x₁ := (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) with hx1def
+  have hx1pos : (0 : ℝ) < x₁ := by rw [hx1def]; exact div_pos hv3 hv1
+  have hx1v1 : x₁ * (speeds ⟨0, by omega⟩ : ℝ) = (speeds ⟨2, by omega⟩ : ℝ) := by
+    rw [hx1def]; field_simp
+  have hkDr : (speeds ⟨0, by omega⟩ : ℝ) = (D : ℝ) * (k : ℝ) := by
+    rw [hkD]; push_cast; ring
+  -- BHK's index `i = l = ⌈(x₁-2)/6⌉`, the smallest `i` with `x₁/6 ≤ i+1/3`.
+  obtain ⟨i, hP1, hP2, hP3⟩ : ∃ i : ℕ,
+      x₁ ≤ 6 * (i : ℝ) + 2 ∧ 6 * (i : ℝ) - 4 < x₁ ∧ 1 ≤ i := by
+    have hapos : (0 : ℝ) < (x₁ - 2) / 6 := by linarith [h511]
+    refine ⟨⌈(x₁ - 2) / 6⌉₊, ?_, ?_, ?_⟩
+    · have := Nat.le_ceil ((x₁ - 2) / 6); linarith
+    · have := Nat.ceil_lt_add_one hapos.le; linarith
+    · have := Nat.ceil_pos.mpr hapos; omega
+  -- eqn (32) condition (B), `x₁`-form: `12 i + 2 ≤ k x₁` (runner 2 closeness).
+  have hBx1 : 12 * (i : ℝ) + 2 ≤ (k : ℝ) * x₁ := by
+    rcases Nat.lt_or_ge i 2 with hi1 | hi2
+    · have hi1' : i = 1 := by omega
+      subst hi1'; push_cast
+      nlinarith [h511, mul_nonneg (by linarith : (0 : ℝ) ≤ (k : ℝ) - 3) hx1pos.le]
+    · have hi2R : (2 : ℝ) ≤ (i : ℝ) := by exact_mod_cast hi2
+      rcases Nat.lt_or_ge k 4 with hk4 | hk4
+      · have hk3' : k = 3 := by omega
+        subst hk3'; push_cast
+        rcases Nat.lt_or_ge i 3 with hi3 | hi3
+        · have hi2' : i = 2 := by omega
+          subst hi2'; push_cast
+          have hx8 : (8 : ℝ) < x₁ := by push_cast at hP2; linarith [hP2]
+          have hge : (26 : ℝ) / 3 ≤ x₁ := by
+            by_contra hlt; push_neg at hlt
+            exact h512 ⟨rfl, hx8, hlt⟩
+          linarith [hge]
+        · have hi3R : (3 : ℝ) ≤ (i : ℝ) := by exact_mod_cast hi3
+          nlinarith [hP2, hi3R]
+      · have hk4R : (4 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hk4
+        nlinarith [hP2, hi2R,
+          mul_nonneg (by linarith : (0 : ℝ) ≤ (k : ℝ) - 4) hx1pos.le]
+  -- eqn (32) condition (C), `x₁`-form: `12 i + 5 ≤ 5 x₁` (runner 1 upper bound).
+  have hCx1 : 12 * (i : ℝ) + 5 ≤ 5 * x₁ := by
+    rcases Nat.lt_or_ge i 2 with hi1 | hi2
+    · have hi1' : i = 1 := by omega
+      subst hi1'; push_cast; linarith [h511]
+    · have hi2R : (2 : ℝ) ≤ (i : ℝ) := by exact_mod_cast hi2
+      nlinarith [hP2, hi2R]
+  refine ⟨i, i, hP3, le_refl i, ?_, ?_, ?_⟩
+  · -- hA: `v₃ ≤ v₁(6i+2)` ⟸ `x₁ ≤ 6i+2`.
+    rw [← hx1v1]; nlinarith [hP1, hv1]
+  · -- hB: `D(12i+2) ≤ v₃` ⟸ `12i+2 ≤ k x₁` (via `v₁ = Dk`, `x₁ v₁ = v₃`).
+    have h1 : (D : ℝ) * (12 * (i : ℝ) + 2) ≤ (D : ℝ) * ((k : ℝ) * x₁) :=
+      mul_le_mul_of_nonneg_left hBx1 hDR.le
+    have h2 : (D : ℝ) * ((k : ℝ) * x₁) = (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [show (D : ℝ) * ((k : ℝ) * x₁) = ((D : ℝ) * (k : ℝ)) * x₁ from by ring,
+        ← hkDr, ← hx1v1]; ring
+    nlinarith [h1, h2]
+  · -- hC: `v₁(12i+5) ≤ 5 v₃` ⟸ `12i+5 ≤ 5 x₁`.
+    have h1 : (speeds ⟨0, by omega⟩ : ℝ) * (12 * (i : ℝ) + 5)
+        ≤ (speeds ⟨0, by omega⟩ : ℝ) * (5 * x₁) :=
+      mul_le_mul_of_nonneg_left hCx1 hv1.le
+    have h2 : (speeds ⟨0, by omega⟩ : ℝ) * (5 * x₁) = 5 * (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [← hx1v1]; ring
+    nlinarith [h1, h2]
 
 /-- **BHK configuration existence (eqns (31)/(32)) — the multiple configuration.**
     In the generic case (`14/3 ≤ x₁`, not (`k=3 ∧ 8<x₁<26/3`)), there are integers
