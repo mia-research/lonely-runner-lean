@@ -1640,6 +1640,66 @@ lemma bhk_s5_case51_endpoint_left_covering (speeds : Fin 5 → ℕ)
     one_div_lt_one_div_of_lt (by positivity) (by linarith)
   linarith
 
+/-- **BHK eqns (29)+(30): the general-`l` span bound `(6l+3)v₄ < (6l+4)v₃`.**
+    For a multiple configuration of `l+1` gaps (`1 ≤ l`, every `G_m` a 123-gap),
+    `span_consec` pins the straddling blocks to `j, …, j+l`.  The covering gives
+    the always-true endpoint facts `29a.right`/`29b.left`
+    (`endpoint_right`/`left_covering`); a case split on which end pokes (block `j`
+    left, or block `j+l` right) supplies the matching half of eqn (29), and the
+    bad alignment (neither) is excluded by `bad_case_absurd`.  Subtracting eqn
+    (29)'s two inequalities (`(l+2/3)/v₄ > (l+1/2)/v₃` in both branches) gives the
+    bound.  (`l = 1` recovers `span_l1`'s `9v₄ < 10v₃`; here general `l`.) -/
+lemma bhk_s5_case51_span_l (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (t : ℝ) (l : ℕ) (hl : 1 ≤ l)
+    (hgaps : ∀ m : ℕ, m ≤ l →
+      ∀ s ∈ Set.Icc (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ))
+        (t + (m : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    (6 * (l : ℝ) + 3) * (speeds ⟨3, by omega⟩ : ℝ)
+      < (6 * (l : ℝ) + 4) * (speeds ⟨2, by omega⟩ : ℝ) := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hU : (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+      = (2 * (l : ℝ) + 1) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by field_simp
+  -- both eqn-(29) branches reduce to this single inequality, then clear denominators.
+  have finish : (2 * (l : ℝ) + 1) / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        < ((l : ℝ) + 2 / 3) / (speeds ⟨3, by omega⟩ : ℝ) →
+      (6 * (l : ℝ) + 3) * (speeds ⟨3, by omega⟩ : ℝ)
+        < (6 * (l : ℝ) + 4) * (speeds ⟨2, by omega⟩ : ℝ) := by
+    intro hstep
+    rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hstep
+    nlinarith [hstep]
+  obtain ⟨j, ⟨_, hm0R⟩, hmlL, _⟩ :=
+    bhk_s5_case51_span_consec speeds hmono hpos hcover h22 t l hgaps
+  have h29aR := bhk_s5_case51_endpoint_right_covering speeds hmono hpos hcover t l j
+    (hgaps l (le_refl l)) hmlL
+  have h29bL := bhk_s5_case51_endpoint_left_covering speeds hmono hpos hcover t j
+    (by simpa only [Nat.cast_zero, zero_div, add_zero] using hgaps 0 (by omega)) hm0R
+  by_cases h29aL : ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < t
+  · -- branch 1: block `j` pokes left (`29a.left`) + `29a.right`.
+    apply finish
+    have hBC : ((j : ℝ) + (l : ℝ) + 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+        - ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        = ((l : ℝ) + 2 / 3) / (speeds ⟨3, by omega⟩ : ℝ) := by field_simp; ring
+    rw [← hU, ← hBC]; linarith [h29aR, h29aL]
+  · push_neg at h29aL
+    by_cases h29bR : t + (l : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+        + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        < ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+    · -- branch 2: block `j+l` pokes right (`29b.right`) + `29b.left`.
+      apply finish
+      have hBC : ((j : ℝ) + (l : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+          - ((j : ℝ) - 1 / 2) / (speeds ⟨3, by omega⟩ : ℝ)
+          = ((l : ℝ) + 2 / 3) / (speeds ⟨3, by omega⟩ : ℝ) := by field_simp; ring
+      rw [← hU, ← hBC]; linarith [h29bR, h29bL]
+    · -- bad alignment: neither poke — impossible.
+      push_neg at h29bR
+      exact (bhk_s5_case51_bad_case_absurd speeds hmono hpos hcover h22 t l hl hgaps j
+        h29aL h29bR).elim
+
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
     t+3/(2v₃)]` are 123-gaps `⊆ B₄ ∪ B₅`), `9 v₄ < 10 v₃`.  Proof by contradiction:
