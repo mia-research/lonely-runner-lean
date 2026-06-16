@@ -1187,6 +1187,68 @@ lemma bhk_s5_case51_block_unique (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < spe
   · exact h
   · exact absurd (key m' m h hm' hm2) (by simp)
 
+/-- **The blocks of adjacent gaps differ by 1 or 2.**  If block `m` overlaps a
+    gap `G = [a, a+1/(2v₃)]` and block `m'` overlaps the next gap
+    `G' = [a+1/v₃, a+1/v₃+1/(2v₃)]`, then `m+1 ≤ m' ≤ m+2`.  The gaps are `1/v₃`
+    apart and the block period is `1/v₄ ∈ (3/(4v₃), 1/v₃)`, so the index advances
+    by 1 or 2 — Claim 9 (no full block in the middle) later forces it to exactly
+    1 (consecutiveness, for the span). -/
+lemma bhk_s5_case51_block_step (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ)) (a : ℝ) (m m' : ℤ)
+    (hmL : a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hmR : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (hm'L : a + 1 / (speeds ⟨2, by omega⟩ : ℝ) < ((m' : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hm'R : ((m' : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    m + 1 ≤ m' ∧ m' ≤ m + 2 := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have e1 : a * (speeds ⟨3, by omega⟩ : ℝ) < (m : ℝ) + 1 / 6 := (lt_div_iff₀ hv4).mp hmL
+  have e2 : (m : ℝ) - 1 / 6
+      < a * (speeds ⟨3, by omega⟩ : ℝ)
+        + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    have h := (div_lt_iff₀ hv4).mp hmR
+    have x : (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) * (speeds ⟨3, by omega⟩ : ℝ)
+        = a * (speeds ⟨3, by omega⟩ : ℝ)
+          + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by field_simp
+    linarith [h, x]
+  have e3 : a * (speeds ⟨3, by omega⟩ : ℝ) + (speeds ⟨3, by omega⟩ : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+      < (m' : ℝ) + 1 / 6 := by
+    have h := (lt_div_iff₀ hv4).mp hm'L
+    have x : (a + 1 / (speeds ⟨2, by omega⟩ : ℝ)) * (speeds ⟨3, by omega⟩ : ℝ)
+        = a * (speeds ⟨3, by omega⟩ : ℝ)
+          + (speeds ⟨3, by omega⟩ : ℝ) / (speeds ⟨2, by omega⟩ : ℝ) := by
+      field_simp
+    linarith [h, x]
+  have e4 : (m' : ℝ) - 1 / 6
+      < a * (speeds ⟨3, by omega⟩ : ℝ)
+        + 3 * (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    have h := (div_lt_iff₀ hv4).mp hm'R
+    have x : (a + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+          * (speeds ⟨3, by omega⟩ : ℝ)
+        = a * (speeds ⟨3, by omega⟩ : ℝ)
+          + 3 * (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+      field_simp; ring
+    linarith [h, x]
+  have r1 : (speeds ⟨3, by omega⟩ : ℝ) / (speeds ⟨2, by omega⟩ : ℝ)
+      = 2 * ((speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ))) := by
+    field_simp
+  have hbig : (1 : ℝ) / 2 < (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [lt_div_iff₀ (by positivity)]; linarith
+  have hsml : 3 * (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) < 2 := by
+    rw [div_lt_iff₀ (by positivity)]; linarith
+  refine ⟨?_, ?_⟩
+  · by_contra hc
+    push_neg at hc
+    have hmm : (m' : ℝ) ≤ m := by exact_mod_cast (by omega : m' ≤ m)
+    linarith [e2, e3, hmm, r1, hbig]
+  · by_contra hc
+    push_neg at hc
+    have hmm : (m : ℝ) + 3 ≤ m' := by exact_mod_cast (by omega : m + 3 ≤ m')
+    linarith [e1, e4, hmm, hsml]
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
