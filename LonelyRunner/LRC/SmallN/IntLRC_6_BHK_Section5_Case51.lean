@@ -1083,6 +1083,35 @@ lemma bhk_s5_case51_claim10_no4block_I3 (speeds : Fin 5 → ℕ) (hmono : Strict
     (by rw [c1]; exact h25a) (by rw [c2]; exact h25b)
     (by rw [c3]; exact h23a) (by rw [c4]; exact h23b)
 
+/-- **A covered 123-gap meets a 4-block.**  The length-`1/(2v₃)` gap
+    `I = [a, a+1/(2v₃)]` (123-safe, so `⊆ B₄ ∪ B₅` under covering) cannot be
+    4-safe throughout — that would make it a 1234-gap of length `1/(2v₃)`, but
+    `gap1234_short` bounds 1234-gaps by `1/(3v₅) < 1/(2v₃)` (`v₅ > v₃`).  So some
+    point of `I` lies in a runner-4 block.  Foundational for the span bound
+    (29)/(30): each gap of a multiple configuration meets a 4-block. -/
+lemma bhk_s5_case51_gap_meets_block (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (a : ℝ)
+    (hgap : ∀ s ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ)) :
+    ∃ p ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      p ∈ unsafeOf speeds ⟨3, by omega⟩ := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsub := bhk_prop11_gap_covered speeds hcover hgap
+  by_contra hcon
+  push_neg at hcon
+  -- Every point of `I` avoids `B₄`, so `I ⊆ B₅`.
+  have hsub5 : Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+      ⊆ unsafeOf speeds ⟨4, by omega⟩ := fun p hp => (hsub hp).resolve_left (hcon p hp)
+  have hab : a ≤ a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    have : (0 : ℝ) < 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by positivity
+    linarith
+  have hlen := block_length_bound speeds ⟨4, by omega⟩ (hpos _) a
+    (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) hab hsub5
+  rw [add_sub_cancel_left, div_lt_div_iff₀ (by positivity) (by positivity)] at hlen
+  linarith
+
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
     is `≥ 1/6` from the origin.  *Argument under construction* — the
