@@ -176,9 +176,9 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
     (j : ℤ)
     (hjL : t + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
-      < ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+      ≤ ((j : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
     (hjR : ((j : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
-      < t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) :
+      ≤ t + 1 / (speeds ⟨2, by omega⟩ : ℝ)) :
     False := by
   have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
   have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
@@ -197,10 +197,10 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   have h35 : v3 < v5 := lt_trans h34 h45
   -- Block centre relative to `t`; this makes `t` cancel in all the algebra.
   set u := (j : ℝ) / v4 - t with hu
-  have hu_lo : 1 / (2 * v3) + 1 / (6 * v4) < u := by
+  have hu_lo : 1 / (2 * v3) + 1 / (6 * v4) ≤ u := by
     have e : ((j : ℝ) - 1 / 6) / v4 = u + t - 1 / (6 * v4) := by rw [hu]; field_simp; ring
     rw [e] at hjL; linarith
-  have hu_hi : u < 1 / v3 - 1 / (6 * v4) := by
+  have hu_hi : u ≤ 1 / v3 - 1 / (6 * v4) := by
     have e : ((j : ℝ) + 1 / 6) / v4 = u + t + 1 / (6 * v4) := by rw [hu]; field_simp; ring
     rw [e] at hjR; linarith
   -- Cleared monotonicity facts (all reduce to `v₄ < 2v₃`, from eqn (22)).
@@ -217,10 +217,10 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   -- The "always" facts: the inner ends of the two gap-pieces lie inside I₁, I₃.
   have hF1 : ((j : ℝ) - 5 / 6) / v4 ≤ t + 1 / (2 * v3) := by
     have e : ((j : ℝ) - 5 / 6) / v4 = u + t - 5 / (6 * v4) := by rw [hu]; field_simp; ring
-    rw [e]; have := lt_of_lt_of_le hu_hi hkey1; linarith
+    rw [e]; have := le_trans hu_hi hkey1; linarith
   have hF2 : t + 1 / v3 ≤ ((j : ℝ) + 5 / 6) / v4 := by
     have e : ((j : ℝ) + 5 / 6) / v4 = u + t + 5 / (6 * v4) := by rw [hu]; field_simp; ring
-    rw [e]; have := lt_of_le_of_lt hkey2 hu_lo; linarith
+    rw [e]; have := le_trans hkey2 hu_lo; linarith
   have hab1 : t ≤ t + 1 / (2 * v3) := by
     have : (0 : ℝ) < 1 / (2 * v3) := by positivity
     linarith
@@ -236,7 +236,7 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
         (by rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / v4 = ((j : ℝ) - 5 / 6) / v4 from by
               push_cast; ring]; exact le_of_lt hB)
         (by rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 from by
-              push_cast; ring]; exact le_of_lt hjL)
+              push_cast; ring]; exact hjL)
     exact bhk_s5_case51_claim9_arithBC v3 v5 hv3 h35 (by linarith)
   · push_neg at hB
     by_cases hC : t + 3 / (2 * v3) < ((j : ℝ) + 5 / 6) / v4
@@ -244,7 +244,7 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
       have hbnd : (t + 3 / (2 * v3)) - (t + 1 / v3) < 1 / (3 * v5) :=
         gap_piece_bound speeds hpos (t + 1 / v3) (t + 3 / (2 * v3)) hab3 hI3 j
           (t + 1 / v3) (t + 3 / (2 * v3)) (le_refl _) (le_refl _) hab3
-          (le_of_lt hjR) (le_of_lt hC)
+          hjR (le_of_lt hC)
       refine bhk_s5_case51_claim9_arithBC v3 v5 hv3 h35 ?_
       have : (t + 3 / (2 * v3)) - (t + 1 / v3) = 1 / (2 * v3) := by field_simp; ring
       linarith [hbnd, this]
@@ -256,11 +256,11 @@ lemma bhk_s5_case51_claim9 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
           (by rw [show (((j - 1 : ℤ) : ℝ) + 1 / 6) / v4 = ((j : ℝ) - 5 / 6) / v4 from by
                 push_cast; ring])
           (by rw [show (((j - 1 : ℤ) : ℝ) + 5 / 6) / v4 = ((j : ℝ) - 1 / 6) / v4 from by
-                push_cast; ring]; exact le_of_lt hjL)
+                push_cast; ring]; exact hjL)
       have hp2 : ((j : ℝ) + 5 / 6) / v4 - (t + 1 / v3) < 1 / (3 * v5) :=
         gap_piece_bound speeds hpos (t + 1 / v3) (t + 3 / (2 * v3)) hab3 hI3 j
           (t + 1 / v3) (((j : ℝ) + 5 / 6) / v4) (le_refl _) hC hF2
-          (le_of_lt hjR) (le_refl _)
+          hjR (le_refl _)
       refine bhk_s5_case51_claim9_arithA v3 v4 v5 hv3 hv4 h45 h22 ?_
       have hsum : ((t + 1 / (2 * v3)) - ((j : ℝ) - 5 / 6) / v4)
           + (((j : ℝ) + 5 / 6) / v4 - (t + 1 / v3)) = 5 / (3 * v4) - 1 / (2 * v3) := by
@@ -1248,6 +1248,74 @@ lemma bhk_s5_case51_block_step (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speed
     push_neg at hc
     have hmm : (m : ℝ) + 3 ≤ m' := by exact_mod_cast (by omega : m + 3 ≤ m')
     linarith [e1, e4, hmm, hsml]
+
+/-- **Consecutive gaps have consecutive blocks (`p' = p + 1`).**  If block `p`
+    meets a covered 123-gap `G = [a, a+1/(2v₃)]` and block `p'` meets the next
+    gap `G' = [a+1/v₃, a+1/v₃+1/(2v₃)]`, then `p' = p + 1`.  `block_step` gives
+    `p+1 ≤ p' ≤ p+2`; the skip `p' = p+2` traps block `p+1` strictly inside the
+    middle `(a+1/(2v₃), a+1/v₃)` — its left edge `> a+1/(2v₃)` (from `hpL` and the
+    block period `1/v₄ > 3/(4v₃)`, i.e. (22)) and its right edge `< a+1/v₃` (from
+    `hp'R` and (22)) — contradicting Claim 9 (no 4-block in `I₂`).  The
+    consecutiveness step of the span bound (29)/(30). -/
+lemma bhk_s5_case51_block_succ (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (a : ℝ)
+    (hgapA : ∀ s ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (hgapB : ∀ s ∈ Set.Icc (a + 1 / (speeds ⟨2, by omega⟩ : ℝ))
+        (a + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
+    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ))
+    (p p' : ℤ)
+    (hpL : a < ((p : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hpR : ((p : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+    (hp'L : a + 1 / (speeds ⟨2, by omega⟩ : ℝ)
+      < ((p' : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
+    (hp'R : ((p' : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+      < a + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
+    p' = p + 1 := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3' : (speeds ⟨2, by omega⟩ : ℝ) ≠ 0 := ne_of_gt hv3
+  have h34 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  obtain ⟨hstep1, hstep2⟩ :=
+    bhk_s5_case51_block_step speeds hpos h22 h34 a p p' hpL hpR hp'L hp'R
+  rcases (show p' = p + 1 ∨ p' = p + 2 by omega) with h | h
+  · exact h
+  · exfalso
+    subst h
+    -- The two gaps in the `⊆ B₄ ∪ B₅` form Claim 9 consumes.
+    have hsubA := bhk_prop11_gap_covered speeds hcover hgapA
+    have hsubB : Set.Icc (a + 1 / (speeds ⟨2, by omega⟩ : ℝ))
+        (a + 3 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
+        ⊆ unsafeOf speeds ⟨3, by omega⟩ ∪ unsafeOf speeds ⟨4, by omega⟩ := by
+      rw [show a + 3 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+            = a + 1 / (speeds ⟨2, by omega⟩ : ℝ) + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+            from by field_simp; ring]
+      exact bhk_prop11_gap_covered speeds hcover hgapB
+    -- The shared `1/(2v₃) < 2/(3v₄)` slack (eqn (22): `3v₄ < 4v₃`).
+    have hslack : 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) < 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) := by
+      rw [div_lt_div_iff₀ (by positivity) (by positivity)]; linarith
+    -- Block `p+1`'s left edge is strictly right of `I₁`'s end.
+    have hmidL : a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
+        < (((p + 1 : ℤ) : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
+      rw [show (((p + 1 : ℤ) : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+            = ((p : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+              + 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by push_cast; field_simp; ring]
+      linarith [hpL, hslack]
+    -- Block `p+1`'s right edge is strictly left of `I₃`'s start.
+    have hmidR : (((p + 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+        < a + 1 / (speeds ⟨2, by omega⟩ : ℝ) := by
+      rw [show (((p + 1 : ℤ) : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+            = (((p + 2 : ℤ) : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
+              - 2 / (3 * (speeds ⟨3, by omega⟩ : ℝ)) from by push_cast; field_simp; ring]
+      linarith [hp'R, hslack]
+    exact bhk_s5_case51_claim9 speeds hmono hpos a hsubA hsubB h22 (p + 1)
+      (le_of_lt hmidL) (le_of_lt hmidR)
 
 /-- **BHK eqn (27): `x₄ > 9/10` (= `9 v₄ < 10 v₃`), the `l = 1` span bound.**
     For a triple configuration (`I₁ = [t, t+1/(2v₃)]` and `I₃ = [t+1/v₃,
