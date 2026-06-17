@@ -2213,11 +2213,176 @@ lemma bhk_s5_case51_subcase_511 (speeds : Fin 5 → ℕ) (hmono : StrictMono spe
     False := by
   sorry
 
+/-- **Case 5.1.2, the `v₂` lower bound.**  With `k = 3` and `x₁ > 8`
+    (`8 v₁ < v₃`), BHK's `v₂ = 1 − v₁/3 > 23/24`, i.e. `23 v₃ < 24 v₂`. -/
+lemma bhk_s5_case51_512_v2_lb (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i) (k D : ℕ)
+    (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k) (hk : k = 3)
+    (hx1 : 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ)) :
+    23 * (speeds ⟨2, by omega⟩ : ℝ) < 24 * (speeds ⟨1, by omega⟩ : ℝ) := by
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hDc : (D : ℝ) = (speeds ⟨2, by omega⟩ : ℝ) - (speeds ⟨1, by omega⟩ : ℝ) :=
+    bhk_s5_case51_D_cast speeds hmono D hD
+  have hV1 : (speeds ⟨0, by omega⟩ : ℝ) = (D : ℝ) * 3 := by rw [hkD, hk]; push_cast; ring
+  rw [lt_div_iff₀ hv1] at hx1
+  linarith [hDc, hV1]
+
+/-- **Case 5.1.2, the `x₄` upper bound (`x₄ > 9/10`).**  With `k = 3` and
+    `8 < x₁ < 26/3`, the eqn-(32) bounds hold for `i = 2`, `l = 1`, so
+    `config_window_safe` yields the triple configuration `I₁`, `I₃` (123-gaps at
+    `t₀ = (2+1/3)/v₃`); `span_l1` then gives `9 v₄ < 10 v₃`. -/
+lemma bhk_s5_case51_512_x4_ub (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (k D : ℕ) (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
+    (hkD : speeds ⟨0, by omega⟩ = D * k) (hk : k = 3)
+    (hx1 : 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
+    (hx1' : (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3) :
+    9 * (speeds ⟨3, by omega⟩ : ℝ) < 10 * (speeds ⟨2, by omega⟩ : ℝ) := by
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hDc : (D : ℝ) = (speeds ⟨2, by omega⟩ : ℝ) - (speeds ⟨1, by omega⟩ : ℝ) :=
+    bhk_s5_case51_D_cast speeds hmono D hD
+  have hV1 : (speeds ⟨0, by omega⟩ : ℝ) = (D : ℝ) * 3 := by rw [hkD, hk]; push_cast; ring
+  rw [lt_div_iff₀ hv1] at hx1
+  rw [div_lt_iff₀ hv1] at hx1'
+  have hsafe := bhk_s5_case51_config_window_safe speeds hmono hpos 2 1 D hD
+    (by simp only [Nat.cast_ofNat]; nlinarith [hx1', hv1])
+    (by simp only [Nat.cast_ofNat, Nat.cast_one]; nlinarith [hx1, hV1, hDc])
+    (by simp only [Nat.cast_ofNat, Nat.cast_one]; nlinarith [hx1])
+  simp only [Nat.cast_ofNat] at hsafe
+  have hgapI1 := hsafe 0 (by norm_num)
+  have hgapI3 := hsafe 1 (by norm_num)
+  simp only [Nat.cast_zero, zero_div, add_zero] at hgapI1
+  simp only [Nat.cast_one] at hgapI3
+  have h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ) :=
+    bhk_s5_case51_x4_from_I1 speeds hmono hpos
+      (bhk_prop11_gap_covered speeds hcover hgapI1)
+  exact bhk_s5_case51_span_l1 speeds hmono hpos hcover
+    ((2 + 1 / 3) / (speeds ⟨2, by omega⟩ : ℝ)) hgapI1 hgapI3 h22
+
+/-- **Case 5.1.2, the 1234-gap.**  The bounds `23 v₃ < 24 v₂` (v₂ > 23/24),
+    `9 v₄ < 10 v₃` (x₄ > 9/10) and `8 v₁ < v₃ < (26/3) v₁` (8 < x₁ < 26/3) make
+    runners 1, 2, 3, 4 all safe on `[52/(23 v₃), 51/(20 v₃)]` (BHK `[52/23,
+    51/20]`): runner 1 lies in 1-gap `k = 0`, runners 2, 3, 4 in their `k = 2`
+    gaps. -/
+lemma bhk_s5_case51_512_gap1234 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hv2 : 23 * (speeds ⟨2, by omega⟩ : ℝ) < 24 * (speeds ⟨1, by omega⟩ : ℝ))
+    (hv4 : 9 * (speeds ⟨3, by omega⟩ : ℝ) < 10 * (speeds ⟨2, by omega⟩ : ℝ))
+    (hx1lo : 8 * (speeds ⟨0, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ))
+    (hx1hi : 3 * (speeds ⟨2, by omega⟩ : ℝ) < 26 * (speeds ⟨0, by omega⟩ : ℝ)) :
+    ∀ s ∈ Set.Icc (52 / (23 * (speeds ⟨2, by omega⟩ : ℝ)))
+        (51 / (20 * (speeds ⟨2, by omega⟩ : ℝ))), ∀ i : Fin 4,
+      (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s) := by
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv2p : (0 : ℝ) < (speeds ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv4p : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h23 : (0 : ℝ) < 23 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+  have h20 : (0 : ℝ) < 20 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+  have h12 : (speeds ⟨1, by omega⟩ : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by
+    have h : speeds ⟨1, by omega⟩ < speeds ⟨2, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  have h23m : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨3, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  intro s hs i
+  obtain ⟨hs1, hs2⟩ := hs
+  fin_cases i
+  · -- runner 1 (index 0): 1-gap `k = 0`
+    have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨0, by omega⟩ (hpos _) 0 s
+      (le_trans (by
+        rw [div_le_div_iff₀ hv1 h23, Int.cast_zero]; nlinarith [hx1hi, hv1]) hs1)
+      (le_trans hs2 (by
+        rw [div_le_div_iff₀ h20 hv1, Int.cast_zero]; nlinarith [hx1lo, hv1]))
+    rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · -- runner 2 (index 1): 2-gap `k = 2`
+    have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨1, by omega⟩ (hpos _) 2 s
+      (le_trans (by
+        rw [div_le_div_iff₀ hv2p h23, Int.cast_ofNat]; nlinarith [hv2, hv2p, hv3]) hs1)
+      (le_trans hs2 (by
+        rw [div_le_div_iff₀ h20 hv2p, Int.cast_ofNat]; nlinarith [h12, hv2p, hv3]))
+    rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · -- runner 3 (index 2): 2-gap `k = 2`
+    have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨2, by omega⟩ (hpos _) 2 s
+      (le_trans (by
+        rw [div_le_div_iff₀ hv3 h23, Int.cast_ofNat]; nlinarith [hv3]) hs1)
+      (le_trans hs2 (by
+        rw [div_le_div_iff₀ h20 hv3, Int.cast_ofNat]; nlinarith [hv3]))
+    rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+  · -- runner 4 (index 3): 2-gap `k = 2`
+    have hnot := not_mem_unsafeOf_of_in_gap speeds ⟨3, by omega⟩ (hpos _) 2 s
+      (le_trans (by
+        rw [div_le_div_iff₀ hv4p h23, Int.cast_ofNat]; nlinarith [h23m, hv4p, hv3]) hs1)
+      (le_trans hs2 (by
+        rw [div_le_div_iff₀ h20 hv4p, Int.cast_ofNat]; nlinarith [hv4, hv4p, hv3]))
+    rw [mem_unsafeOf_iff] at hnot; exact not_lt.mp hnot
+
+/-- **Case 5.1.2, runner 5 cannot cover the gap.**  The 1234-gap `[52/(23 v₃),
+    51/(20 v₃)]` (BHK `[52/23, 51/20]`), being `⊆ B₅`, lies in a single 5-block
+    `[(k−1/6)/v₅, (k+1/6)/v₅]`.  Subtracting the block edges gives the width bound
+    `399 v₅ < 460 v₃`; the right end then forces `k ≥ 3` (via `v₃ < v₅`) while the
+    left end forces `k ≤ 2` — no such integer exists.  (Only `v₃ < v₅`, i.e.
+    `x₅ < 1`, is used, not BHK's conditional `x₅ < 1/2`.) -/
+lemma bhk_s5_case51_512_no_cover (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
+    (hpos : ∀ i, 0 < speeds i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6)
+    (hgap : ∀ s ∈ Set.Icc (52 / (23 * (speeds ⟨2, by omega⟩ : ℝ)))
+        (51 / (20 * (speeds ⟨2, by omega⟩ : ℝ))), ∀ i : Fin 4,
+      (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s)) :
+    False := by
+  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hv5 : (0 : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ) := by
+    have h : speeds ⟨2, by omega⟩ < speeds ⟨4, by omega⟩ := by
+      apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
+    exact_mod_cast h
+  have h23 : (0 : ℝ) < 23 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+  have h20 : (0 : ℝ) < 20 * (speeds ⟨2, by omega⟩ : ℝ) := by positivity
+  have hab : (52 : ℝ) / (23 * (speeds ⟨2, by omega⟩ : ℝ))
+      ≤ 51 / (20 * (speeds ⟨2, by omega⟩ : ℝ)) := by
+    rw [div_le_div_iff₀ h23 h20]; nlinarith [hv3]
+  have hsub : Set.Icc (52 / (23 * (speeds ⟨2, by omega⟩ : ℝ)))
+      (51 / (20 * (speeds ⟨2, by omega⟩ : ℝ))) ⊆ unsafeOf speeds ⟨4, by omega⟩ :=
+    bhk_s5_case51_gap1234_subset speeds hcover hgap
+  obtain ⟨k, hkL, hkR⟩ := block_containment speeds ⟨4, by omega⟩ (hpos _)
+    (52 / (23 * (speeds ⟨2, by omega⟩ : ℝ))) (51 / (20 * (speeds ⟨2, by omega⟩ : ℝ))) hab hsub
+  have hVa : (speeds ⟨4, by omega⟩ : ℝ) * (52 / (23 * (speeds ⟨2, by omega⟩ : ℝ)))
+      = 52 * (speeds ⟨4, by omega⟩ : ℝ) / (23 * (speeds ⟨2, by omega⟩ : ℝ)) := by ring
+  have hVb : (speeds ⟨4, by omega⟩ : ℝ) * (51 / (20 * (speeds ⟨2, by omega⟩ : ℝ)))
+      = 51 * (speeds ⟨4, by omega⟩ : ℝ) / (20 * (speeds ⟨2, by omega⟩ : ℝ)) := by ring
+  rw [hVa, lt_div_iff₀ h23] at hkL
+  rw [hVb, div_lt_iff₀ h20] at hkR
+  -- hkL : ((k:ℝ) - 1/6) * (23 v₃) < 52 v₅ ;  hkR : 51 v₅ < ((k:ℝ) + 1/6) * (20 v₃)
+  have width : 399 * (speeds ⟨4, by omega⟩ : ℝ) < 460 * (speeds ⟨2, by omega⟩ : ℝ) := by
+    nlinarith [hkL, hkR]
+  have hk_lo : (143 : ℝ) / 3 < 20 * (k : ℝ) := by
+    have step : (143 : ℝ) / 3 * (speeds ⟨2, by omega⟩ : ℝ)
+        < 20 * (k : ℝ) * (speeds ⟨2, by omega⟩ : ℝ) := by nlinarith [hkR, h35]
+    exact lt_of_mul_lt_mul_right step (le_of_lt hv3)
+  have hk3 : (3 : ℤ) ≤ k := by
+    by_contra h; push_neg at h
+    have hk2r : (k : ℝ) ≤ 2 := by exact_mod_cast (by omega : k ≤ 2)
+    linarith [hk_lo]
+  have hk_hi : 23 * (k : ℝ) < 64 := by
+    have step : 23 * (k : ℝ) * (speeds ⟨2, by omega⟩ : ℝ)
+        < 64 * (speeds ⟨2, by omega⟩ : ℝ) := by nlinarith [hkL, width, hv3]
+    exact lt_of_mul_lt_mul_right step (le_of_lt hv3)
+  have hk2 : k ≤ (2 : ℤ) := by
+    by_contra h; push_neg at h
+    have hk3r : (3 : ℝ) ≤ (k : ℝ) := by exact_mod_cast (by omega : (3 : ℤ) ≤ k)
+    linarith [hk_hi]
+  omega
+
 /-- **BHK Case 5.1.2 (`k = 3`, `8 < x₁ < 26/3`).**  BHK condition 2.  A triple
     configuration exists at `t = 14/6` (`l = 1`), so `x₄ > 9/10` (eqn (27),
     `span_l1`); with `v₂ > 23/24` this puts `[52/23, 51/20]` in a 1234-gap that
     runner 5 cannot cover (no `i ≥ 3` with `(i−1/6)x₅ < 52/23` and
-    `(i+1/6)x₅ > 51/20`).  *Proof under construction.* -/
+    `(i+1/6)x₅ > 51/20`). -/
 lemma bhk_s5_case51_subcase_512 (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
     (hpos : ∀ i, 0 < speeds i) (hgcd : Finset.univ.gcd speeds = 1)
     (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
@@ -2228,7 +2393,15 @@ lemma bhk_s5_case51_subcase_512 (speeds : Fin 5 → ℕ) (hmono : StrictMono spe
     (hk : k = 3) (hx1 : 8 < (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ))
     (hx1' : (speeds ⟨2, by omega⟩ : ℝ) / (speeds ⟨0, by omega⟩ : ℝ) < 26 / 3) :
     False := by
-  sorry
+  have hv2lb := bhk_s5_case51_512_v2_lb speeds hmono hpos k D hD hkD hk hx1
+  have hx4ub := bhk_s5_case51_512_x4_ub speeds hmono hpos hcon k D hD hkD hk hx1 hx1'
+  have hv1 : (0 : ℝ) < (speeds ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  rw [lt_div_iff₀ hv1] at hx1
+  rw [div_lt_iff₀ hv1] at hx1'
+  have hx1hi : 3 * (speeds ⟨2, by omega⟩ : ℝ) < 26 * (speeds ⟨0, by omega⟩ : ℝ) := by
+    linarith [hx1']
+  have hgap := bhk_s5_case51_512_gap1234 speeds hmono hpos hv2lb hx4ub hx1 hx1hi
+  exact bhk_s5_case51_512_no_cover speeds hmono hpos hcon hgap
 
 /-- **Case 5.1 main argument.**  For Case-5.1 speeds (`v₁ = k·D`, `k ≥ 3`,
     `D = v₃ − v₂`, `3 v₁ < v₃`, `gcd = 1`), there is a time at which every runner
