@@ -1796,6 +1796,306 @@ theorem bhk_prop11_lemma17_uncond (w : Fin 5 → ℕ) (hmono : StrictMono w)
   bhk_prop11_lemma17 w hmono hpos hsum hsmall hcover
     (bhk_prop11_lemma13 w hmono hpos hsum hsmall hcover)
 
+/-- **BHK §5 Part 3 — Pentagon `P` expansion: the delayed-start safety atom.**
+    A runner of (real) speed `v ≥ 0` that has reached `1/6` by the gap-start `a`
+    (`{v t} + v(a−t) ≥ 1/6`) and has not yet overshot `5/6` by the gap-end `b`
+    (`{v t} + v(b−t) ≤ 5/6`) stays `≥ 1/6` from the origin throughout `[a, b]`.
+    This is the shared geometry behind BHK's pentagon conditions (39)–(42): each
+    of runners 4, 1, 2 may be *behind* `1/6` at the half-integer time `t` (so the
+    1234-gap starts only at `a = t + (1 − x₅)/3`), but the conditions guarantee
+    arrival at `1/6` by `a` and no overshoot of `5/6` before the gap ends — the
+    monotone advance keeps `{v s}` in `[1/6, 5/6]` without wrapping. Specialised
+    with the rectangle bounds (`a = t`) it recovers the `h4safe`/`gap123` windows;
+    with `a = t + (1 − x₅)/3` it yields the longer pentagon gap. -/
+lemma bhk_prop11_pent_delayed_safe (v t a b : ℝ) (hv : 0 ≤ v)
+    (hlo : 1 / 6 ≤ Int.fract (v * t) + v * (a - t))
+    (hhi : Int.fract (v * t) + v * (b - t) ≤ 5 / 6) :
+    ∀ s ∈ Set.Icc a b, 1 / 6 ≤ circDist (v * s) := by
+  intro s hs
+  obtain ⟨hsa, hsb⟩ := hs
+  have h1 : v * (a - t) ≤ v * (s - t) := mul_le_mul_of_nonneg_left (by linarith) hv
+  have h2 : v * (s - t) ≤ v * (b - t) := mul_le_mul_of_nonneg_left (by linarith) hv
+  have hfs : Int.fract (v * s) = Int.fract (v * t) + v * (s - t) := by
+    rw [show v * s = v * t + v * (s - t) from by ring,
+      bhk_prop11_fract_add (by linarith) (by linarith)]
+  simp only [circDist]
+  rw [hfs]
+  exact le_min (by linarith) (by linarith)
+
+/-- **Pentagon `P`: the wrap-aware delayed-start safety atom.** As
+    `bhk_prop11_pent_delayed_safe` but allowing the runner to have wrapped the
+    circle `k` times: if `{v t} + v(s−t)` stays in the band `[k + 1/6, k + 5/6]`
+    across `[a, b]` (it does, by monotone advance from the endpoint bounds), then
+    `circDist (v s) ≥ 1/6` there. Needed for runner 2, which the pentagon may
+    place in `(5/6, 1)` at `t` (`k = 1`), wrapping through the origin to reach
+    `1/6`. The `k = 0` instance is `bhk_prop11_pent_delayed_safe`. -/
+lemma bhk_prop11_pent_delayed_safe_k (v t a b : ℝ) (k : ℤ) (hv : 0 ≤ v)
+    (hlo : (k : ℝ) + 1 / 6 ≤ Int.fract (v * t) + v * (a - t))
+    (hhi : Int.fract (v * t) + v * (b - t) ≤ (k : ℝ) + 5 / 6) :
+    ∀ s ∈ Set.Icc a b, 1 / 6 ≤ circDist (v * s) := by
+  intro s hs
+  obtain ⟨hsa, hsb⟩ := hs
+  have h1 : v * (a - t) ≤ v * (s - t) := mul_le_mul_of_nonneg_left (by linarith) hv
+  have h2 : v * (s - t) ≤ v * (b - t) := mul_le_mul_of_nonneg_left (by linarith) hv
+  have hXlo : (k : ℝ) + 1 / 6 ≤ Int.fract (v * t) + v * (s - t) := by linarith
+  have hXhi : Int.fract (v * t) + v * (s - t) ≤ (k : ℝ) + 5 / 6 := by linarith
+  have hfs : Int.fract (v * s) = (Int.fract (v * t) + v * (s - t)) - (k : ℝ) := by
+    have hvs : v * s = ((⌊v * t⌋ : ℤ) : ℝ) + (Int.fract (v * t) + v * (s - t)) := by
+      have h := Int.floor_add_fract (v * t)
+      have hvs' : v * s = v * t + v * (s - t) := by ring
+      rw [hvs']; linarith [h]
+    rw [hvs, Int.fract_intCast_add]
+    conv_lhs => rw [show Int.fract (v * t) + v * (s - t)
+          = (k : ℝ) + ((Int.fract (v * t) + v * (s - t)) - (k : ℝ)) by ring]
+    rw [Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  simp only [circDist]
+  rw [hfs]
+  exact le_min (by linarith) (by linarith)
+
+/-- **BHK §5 Part 3 — Pentagon `P`: runner 1 (`w₀`) safe across the delayed gap.**
+    From the relaxed pentagon bounds (40) (lower) and (41) (upper) on `{w₀t}`,
+    runner 1 reaches `1/6` by the gap-start `a = t + (1−x₅)/(3w₂)` and has not
+    overshot `5/6` by `t + 1/(3w₂)` (total advance `< 1/9` since `3w₀ < w₂`,
+    and `{w₀t} ≤ 1/3 + slack < 2/3` keeps it below `5/6`), so it stays `≥ 1/6`
+    from the origin throughout. No wrap (`{w₀ s} ∈ (0,1)`); the `k = 0` case. -/
+lemma bhk_prop11_pent_runner1_safe (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hmono : StrictMono w) (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩) (t : ℝ)
+    (h40 : 1 / 6 - (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) :
+    ∀ s ∈ Set.Icc (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+            / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+          (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) := by
+  have hw0 : (0:ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0:ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h12 : (w ⟨1, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (1:ℕ) < 2 by omega))
+  have h24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 4 by omega))
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  have hS1 : (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) < 1 / 3 := by
+    rw [div_lt_iff₀ (by positivity)]
+    nlinarith [mul_lt_mul_of_pos_right h12
+      (show (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ) by linarith), mul_pos hw2 hw2]
+  have hS0 : (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 9 := by
+    rw [div_lt_iff₀ (by positivity)]; linarith
+  apply bhk_prop11_pent_delayed_safe (w ⟨0, by omega⟩ : ℝ) t _ _ hw0.le
+  · have e : (w ⟨0, by omega⟩ : ℝ) * ((t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) - t)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) := by ring
+    rw [e]; linarith
+  · have e : (w ⟨0, by omega⟩ : ℝ) * ((t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t)
+        = (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by ring
+    rw [e]; linarith [h41, hS1, hS0]
+
+/-- **BHK §5 Part 3 — Pentagon `P`: runner 3 (`w₂`) safe across the delayed gap.**
+    Runner 3 sits at `1/2` at the half-integer time `t` and advances to `5/6` by
+    `t + 1/(3w₂)`; across `[a, t + 1/(3w₂)]` it stays in `[1/2, 5/6]`, hence
+    `≥ 1/6` from the origin. No wrap; the `k = 0` case. -/
+lemma bhk_prop11_pent_runner3_safe (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hmono : StrictMono w) (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2) :
+    ∀ s ∈ Set.Icc (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+            / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+          (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s) := by
+  have hw2 : (0:ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 4 by omega))
+  apply bhk_prop11_pent_delayed_safe (w ⟨2, by omega⟩ : ℝ) t _ _ hw2.le
+  · rw [h3]
+    have hge : (0:ℝ) ≤ (w ⟨2, by omega⟩ : ℝ) * ((t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) - t) := by
+      have e : (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) - t
+          = ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) := by ring
+      rw [e]; exact mul_nonneg hw2.le (div_nonneg (by linarith) (by positivity))
+    linarith
+  · rw [h3]
+    have e : (w ⟨2, by omega⟩ : ℝ) * ((t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t) = 1 / 3 := by
+      rw [show (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t = 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) by ring]
+      field_simp
+    rw [e]; norm_num
+
+/-- **BHK §5 Part 3 — Pentagon `P`: runner 2 (`w₁`) safe across the delayed gap.**
+    Runner 2 sits at `{w₁t} = frac(1/2 − {w₀t})` (since `w₀ + w₁ = w₂` and
+    `{w₂t} = 1/2`). The relaxed bound (41) `{w₀t} ≤ 1/3 + (v₂/3)(1−x₅)` may push
+    `{w₀t}` past `1/2`, so we split: when `{w₀t} ≤ 1/2` runner 2 is at
+    `1/2 − {w₀t} ∈ [0,1/2]` (`k = 0`); when `{w₀t} > 1/2` it is at
+    `3/2 − {w₀t} ∈ (5/6,1)` and **wraps** through the origin (`k = 1`). Either
+    way it reaches `1/6` by `a` and stays below `5/6 (+1)` by `t + 1/(3w₂)`. -/
+lemma bhk_prop11_pent_runner2_safe (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hmono : StrictMono w) (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) :
+    ∀ s ∈ Set.Icc (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+            / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+          (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s) := by
+  have hw1 : (0:ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0:ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h12 : (w ⟨1, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (1:ℕ) < 2 by omega))
+  have h24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 4 by omega))
+  have hf0 : (0:ℝ) ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := Int.fract_nonneg _
+  have hf0' : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) < 1 := Int.fract_lt_one _
+  have hw1cast : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    linarith
+  have hbase : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+      = Int.fract (1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) := by
+    have h0 : (w ⟨1, by omega⟩ : ℝ) * t
+        = ((⌊(w ⟨2, by omega⟩ : ℝ) * t⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t⌋ : ℤ) : ℝ)
+          + (1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) := by
+      have e2 := Int.floor_add_fract ((w ⟨2, by omega⟩ : ℝ) * t)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      rw [h3] at e2
+      rw [hw1cast, sub_mul, Int.cast_sub]; linarith [e2, e0]
+    rw [h0, Int.fract_intCast_add]
+  have hT1 : (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) < 1 / 3 := by
+    rw [div_lt_iff₀ (by positivity)]
+    nlinarith [mul_lt_mul_of_pos_right h12
+      (show (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ) by linarith), mul_pos hw2 hw2]
+  have hv2 : (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 3 := by
+    rw [div_lt_iff₀ (by positivity)]; linarith
+  have ea : (w ⟨1, by omega⟩ : ℝ) * ((t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) - t)
+        = (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) := by ring
+  have eb : (w ⟨1, by omega⟩ : ℝ) * ((t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t)
+        = (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by ring
+  by_cases hle : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 2
+  · have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) = 1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+      rw [hbase]; exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+    apply bhk_prop11_pent_delayed_safe_k (w ⟨1, by omega⟩ : ℝ) t _ _ 0 hw1.le
+    · rw [hf1, ea]; simp only [Int.cast_zero, zero_add]; linarith [h41]
+    · rw [hf1, eb]; simp only [Int.cast_zero, zero_add]; linarith [hv2, hf0]
+  · have hgt : 1 / 2 < Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := not_le.mp hle
+    have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) = 3 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+      rw [hbase, show (1:ℝ) / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            = ((-1 : ℤ) : ℝ) + (3 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) by push_cast; ring,
+          Int.fract_intCast_add]
+      exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+    apply bhk_prop11_pent_delayed_safe_k (w ⟨1, by omega⟩ : ℝ) t _ _ 1 hw1.le
+    · rw [hf1, ea]; simp only [Int.cast_one]; linarith [h41]
+    · rw [hf1, eb]; simp only [Int.cast_one]; linarith [hv2, hgt]
+
+/-- **BHK §5 Part 3 — Pentagon `P`: the relaxed 123-gap.** Bundles runners 1, 2,
+    3 (`w₀, w₁, w₂`): under the pentagon bounds (40)/(41) on runner 1 (and
+    `{w₂t} = 1/2`), all three are `≥ 1/6` from the origin throughout the delayed
+    gap `[t + (1−x₅)/(3w₂), t + 1/(3w₂)]`. This is the `Fin 3` input that
+    `bhk_prop11_gap1234_b5span` consumes; adding runner 4 (from (39)+(42)) makes
+    it a 1234-gap of length `≥ 1/(3w₄)`, which runner 5 cannot cover. -/
+lemma bhk_prop11_pent_gap123 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hmono : StrictMono w) (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩) (t : ℝ)
+    (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h40 : 1 / 6 - (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) :
+    ∀ s ∈ Set.Icc (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+            / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+          (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, 1 / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  intro s hs i
+  fin_cases i
+  · exact bhk_prop11_pent_runner1_safe w hpos hmono hsmall t h40 h41 s hs
+  · exact bhk_prop11_pent_runner2_safe w hpos hmono hsum t h3 h41 s hs
+  · exact bhk_prop11_pent_runner3_safe w hpos hmono t h3 s hs
+
+/-- **BHK §5 Part 3 — Pentagon `P`: runner 4 (`w₃`), the runner-3-ends case.**
+    From the lower bound (39) `{w₃t} ≥ 1/6 − (v₄/3)(1−x₅)` and the upper bound
+    `{w₃t} ≤ 5/6 − v₄/3` — the sub-case where runner 4 does *not* reach `5/6`
+    before runner 3 does, so the 1234-gap ends at `t + 1/(3w₂)` — runner 4 stays
+    `≥ 1/6` from the origin throughout `[a, t + 1/(3w₂)]`. No wrap (`k = 0`); both
+    endpoint bounds are exact. The complementary `{w₃t} > 5/6 − v₄/3`
+    (runner-4-ends) case is BHK's full (42) `min`-expression. -/
+lemma bhk_prop11_pent_runner4_safe (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i) (t : ℝ)
+    (h39 : 1 / 6 - (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h42 : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)
+            ≤ 5 / 6 - (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ))) :
+    ∀ s ∈ Set.Icc (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+            / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+          (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+  have hw3 : (0:ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  apply bhk_prop11_pent_delayed_safe (w ⟨3, by omega⟩ : ℝ) t _ _ hw3.le
+  · have e : (w ⟨3, by omega⟩ : ℝ) * ((t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))) - t)
+        = (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) := by ring
+    rw [e]; linarith [h39]
+  · have e : (w ⟨3, by omega⟩ : ℝ) * ((t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t)
+        = (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by ring
+    rw [e]; linarith [h42]
+
+/-- **BHK §5 Part 3 — Pentagon `P` no-good-time, runner-3-ends sub-region.** No
+    half-integer time `t` (`{w₂t} = 1/2`) satisfies the relaxed pentagon bounds
+    (39),(40),(41) on runners 4,1,2 *and* `{w₃t} ≤ 5/6 − v₄/3`: such a `t` makes
+    `[t + (1−x₅)/(3w₂), t + 1/(3w₂)]` a 1234-gap of length exactly `1/(3w₄)`,
+    forcing `w₄·(b−a) < 1/3` by `bhk_prop11_gap1234_b5span` — but `w₄·(b−a) =
+    1/3`. This is the runner-3-ends half of `C ∩ P = ∅`; the runner-4-ends half
+    needs BHK's full (42) bound. The lower bounds (39)/(40) and upper (41) are
+    the genuine pentagon expansion (they permit `{w₃t} < 1/6`, `{w₀t} < 1/6` and
+    `{w₀t} > 1/3`), strengthening the rectangle `bhk_prop11_no_good_time`. -/
+theorem bhk_prop11_no_good_time_P_r3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i) (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h40 : 1 / 6 - (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+    (h39 : 1 / 6 - (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h42 : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)
+            ≤ 5 / 6 - (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ))) :
+    False := by
+  have hw2 : (0:ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hba : (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)))
+        - (t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+        = 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) := by
+    field_simp
+    ring
+  have hab : t + ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+        / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+      ≤ t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+    have h0 : (0:ℝ) ≤ 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) := by positivity
+    linarith [hba]
+  have hgap := bhk_prop11_pent_gap123 w hpos hmono hsum hsmall t h3 h40 h41
+  have h4safe := bhk_prop11_pent_runner4_safe w hpos t h39 h42
+  have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab hgap h4safe
+  rw [hba] at hspan
+  have heq : (w ⟨4, by omega⟩ : ℝ) * (1 / (3 * (w ⟨4, by omega⟩ : ℝ))) = 1 / 3 := by
+    field_simp
+  rw [heq] at hspan
+  exact absurd hspan (lt_irrefl _)
+
 /-- **BHK §5 Part 3 — the no-good-time fact (eq. (36)–(37)).** Under the
     covering assumption, there is *no* half-integer time `t` (`{w₂ t} = 1/2`)
     with runner 1 in `[1/6, 1/3]` *and* runner 4 in `[1/6, 1/2]`. Such a `t`
