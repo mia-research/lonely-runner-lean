@@ -2112,6 +2112,226 @@ theorem bhk_prop11_no_good_time_P_r3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
   have h4safe := bhk_prop11_pent_runner4_safe w hpos t h39 h42
   exact bhk_prop11_long_gap_absurd w hpos hcover _ _ hab (le_of_eq hba.symm) hgap h4safe
 
+/-- **Pentagon `P`: runner safety from a reach-time.** If runner `v` reaches the
+    safe boundary `k + 1/6` at time `τ ≤ a'` (`hval`) and has not exceeded
+    `k + 5/6` by `b'` (`hupper`), it is `≥ 1/6` from the origin throughout
+    `[a', b']`. The per-runner workhorse for the runner-4-ends gap, where the gap
+    start `a'` is the latest of the four reach-times. -/
+lemma bhk_prop11_pent_reach_safe (v t a' b' : ℝ) (k : ℤ) (τ : ℝ) (hv : 0 ≤ v)
+    (hτ : τ ≤ a') (hval : Int.fract (v * t) + v * (τ - t) = (k : ℝ) + 1 / 6)
+    (hupper : Int.fract (v * t) + v * (b' - t) ≤ (k : ℝ) + 5 / 6) :
+    ∀ s ∈ Set.Icc a' b', 1 / 6 ≤ circDist (v * s) := by
+  apply bhk_prop11_pent_delayed_safe_k v t a' b' k hv
+  · have hmul : v * (τ - t) ≤ v * (a' - t) := mul_le_mul_of_nonneg_left (by linarith) hv
+    linarith [hval, hmul]
+  · exact hupper
+
+-- Large multi-runner geometric case analysis (four reach-time runners + wrap
+-- split); the default heartbeat budget is insufficient.
+set_option maxHeartbeats 800000 in
+/-- **BHK §5 Part 3 — Pentagon `P` no-good-time, runner-4-ends sub-region.** The
+    complementary half of `C ∩ P = ∅`: when runner 4 reaches `5/6` *before* runner
+    3 (`hr4 : 5/6 − v₄/3 ≤ {w₃t}`), the 1234-gap ends at `b' = t + (5/6−{w₃t})/w₃`.
+    Its start is the *latest* of the four reach-`1/6` times
+    `τ₁,τ₂,τ₃,τ₄` (runners `w₀,w₁,w₂,w₃`); BHK's (42) — here split into the two
+    consequences `h42a` (`b'−τ₁ ≥ x₅/3`) and `h42b` (`b'−τ₂ ≥ x₅/3`) — together
+    with `b'−τ₃,b'−τ₄ ≥ x₅/3` (the latter `= 2/(3w₃)`, automatic from `w₃ < w₄`)
+    make the gap `[a', b']` a 1234-gap of length `≥ 1/(3w₄)`, killed by
+    `bhk_prop11_long_gap_absurd`. Using `a' = max(τ₁,τ₂,τ₃,τ₄)` and bounding each
+    `b'−τᵢ` separately avoids BHK's three-way "who was last at `1/6`" split. -/
+theorem bhk_prop11_no_good_time_P_r4 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i) (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+    (hxle : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) ≤ 5 / 6)
+    (hr4 : 5 / 6 - (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h42a : 1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+            ≤ (5 / 6 - Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)) / (w ⟨3, by omega⟩ : ℝ)
+              + (Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) - 1 / 6) / (w ⟨0, by omega⟩ : ℝ))
+    (h42b : 1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+            ≤ (5 / 6 - Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)) / (w ⟨3, by omega⟩ : ℝ)
+              + (1 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) / (w ⟨1, by omega⟩ : ℝ)) :
+    False := by
+  have hw0 : (0:ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1 : (0:ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0:ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3 : (0:ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h12 : (w ⟨1, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (1:ℕ) < 2 by omega))
+  have h23 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+  have h34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (3:ℕ) < 4 by omega))
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsum
+  set w0 : ℝ := (w ⟨0, by omega⟩ : ℝ) with hw0d
+  set w1 : ℝ := (w ⟨1, by omega⟩ : ℝ) with hw1d
+  set w2 : ℝ := (w ⟨2, by omega⟩ : ℝ) with hw2d
+  set w3 : ℝ := (w ⟨3, by omega⟩ : ℝ) with hw3d
+  set w4 : ℝ := (w ⟨4, by omega⟩ : ℝ) with hw4d
+  have h24 : w2 < w4 := lt_trans h23 h34
+  have hw0' : w0 ≠ 0 := ne_of_gt hw0
+  have hw1' : w1 ≠ 0 := ne_of_gt hw1
+  have hw2' : w2 ≠ 0 := ne_of_gt hw2
+  have hw3' : w3 ≠ 0 := ne_of_gt hw3
+  set y : ℝ := Int.fract (w0 * t) with hyd
+  set x : ℝ := Int.fract (w3 * t) with hxd
+  have hf0 : (0:ℝ) ≤ y := Int.fract_nonneg _
+  have hf0' : y < 1 := Int.fract_lt_one _
+  have hslack : w1 * (w4 - w2) / (3 * w2 * w4) < 1 / 3 := by
+    rw [div_lt_iff₀ (by positivity)]
+    nlinarith [mul_lt_mul_of_pos_right h12 (show (0:ℝ) < w4 - w2 by linarith), mul_pos hw2 hw2]
+  have hy23 : y < 2 / 3 := by linarith [h41, hslack]
+  have hsm0 : w0 / (3 * w2) < 1 / 9 := by rw [div_lt_iff₀ (by positivity)]; linarith
+  have hsm1 : w1 / (3 * w2) < 1 / 3 := by rw [div_lt_iff₀ (by positivity)]; linarith
+  have hsm2 : w2 / (3 * w2) = 1 / 3 := by field_simp
+  have hbt : (5 / 6 - x) / w3 ≤ 1 / (3 * w2) := by
+    rw [div_le_iff₀ hw3, show (1:ℝ) / (3 * w2) * w3 = w3 / (3 * w2) from by ring]; linarith [hr4]
+  have hbtpos : (0:ℝ) ≤ (5 / 6 - x) / w3 := div_nonneg (by linarith [hxle]) hw3.le
+  have key : ∀ v : ℝ, 0 ≤ v → v * ((5 / 6 - x) / w3) ≤ v / (3 * w2) := by
+    intro v hv
+    calc v * ((5 / 6 - x) / w3) ≤ v * (1 / (3 * w2)) := mul_le_mul_of_nonneg_left hbt hv
+      _ = v / (3 * w2) := by ring
+  have h1w : 1 / (3 * w4) ≤ 1 / (3 * w2) :=
+    one_div_le_one_div_of_le (by positivity) (by linarith)
+  set b' : ℝ := t + (5 / 6 - x) / w3 with hb'd
+  have hb't : b' - t = (5 / 6 - x) / w3 := by rw [hb'd]; ring
+  set a' : ℝ := max (t + (1 / 6 - y) / w0)
+      (max (t + (y - 1 / 3) / w1) (max (t - 1 / (3 * w2)) (t + (1 / 6 - x) / w3))) with ha'd
+  have hb1 : t + (1 / 6 - y) / w0 ≤ b' - 1 / (3 * w4) := by
+    have e : b' - (t + (1 / 6 - y) / w0) = (5 / 6 - x) / w3 + (y - 1 / 6) / w0 := by rw [hb'd]; ring
+    linarith [h42a, e]
+  have hb2 : t + (y - 1 / 3) / w1 ≤ b' - 1 / (3 * w4) := by
+    have e : b' - (t + (y - 1 / 3) / w1) = (5 / 6 - x) / w3 + (1 / 3 - y) / w1 := by rw [hb'd]; ring
+    linarith [h42b, e]
+  have hb3 : t - 1 / (3 * w2) ≤ b' - 1 / (3 * w4) := by
+    have e : b' - (t - 1 / (3 * w2)) = (5 / 6 - x) / w3 + 1 / (3 * w2) := by rw [hb'd]; ring
+    linarith [hbtpos, h1w, e]
+  have hb4 : t + (1 / 6 - x) / w3 ≤ b' - 1 / (3 * w4) := by
+    have e : b' - (t + (1 / 6 - x) / w3) = (2 / 3) / w3 := by rw [hb'd]; ring
+    have h2w : 1 / (3 * w4) ≤ (2 / 3) / w3 := by
+      rw [le_div_iff₀ hw3, show (1:ℝ) / (3 * w4) * w3 = w3 / (3 * w4) from by ring,
+        div_le_iff₀ (show (0:ℝ) < 3 * w4 by positivity)]
+      linarith
+    linarith [h2w, e]
+  have ha'le : a' ≤ b' - 1 / (3 * w4) := by
+    rw [ha'd]; exact max_le hb1 (max_le hb2 (max_le hb3 hb4))
+  have hlen : 1 / (3 * w4) ≤ b' - a' := by linarith [ha'le]
+  have hab' : a' ≤ b' := by
+    have h0 : (0:ℝ) < 1 / (3 * w4) := by positivity
+    linarith [ha'le]
+  have hτ1 : t + (1 / 6 - y) / w0 ≤ a' := by rw [ha'd]; exact le_max_left _ _
+  have hτ2 : t + (y - 1 / 3) / w1 ≤ a' := by
+    rw [ha'd]; exact le_trans (le_max_left _ _) (le_max_right _ _)
+  have hτ3 : t - 1 / (3 * w2) ≤ a' := by
+    rw [ha'd]; exact le_trans (le_max_left _ _) (le_trans (le_max_right _ _) (le_max_right _ _))
+  have hτ4 : t + (1 / 6 - x) / w3 ≤ a' := by
+    rw [ha'd]; exact le_trans (le_max_right _ _) (le_trans (le_max_right _ _) (le_max_right _ _))
+  have hw1cast : w1 = w2 - w0 := by linarith [hsumR]
+  have hf1base : Int.fract (w1 * t) = Int.fract (1 / 2 - y) := by
+    have h0 : w1 * t = ((⌊w2 * t⌋ - ⌊w0 * t⌋ : ℤ) : ℝ) + (1 / 2 - y) := by
+      have e2 := Int.floor_add_fract (w2 * t)
+      have e0 := Int.floor_add_fract (w0 * t)
+      rw [h3] at e2
+      rw [hw1cast, sub_mul, Int.cast_sub]; linarith [e2, e0]
+    rw [h0, Int.fract_intCast_add]
+  -- runner 1 (w₀): reaches 1/6 at τ₁, k = 0
+  have safe0 : ∀ s ∈ Set.Icc a' b', 1 / 6 ≤ circDist (w0 * s) :=
+    bhk_prop11_pent_reach_safe w0 t a' b' 0 (t + (1 / 6 - y) / w0) hw0.le hτ1
+      (by have e : w0 * ((t + (1 / 6 - y) / w0) - t) = 1 / 6 - y := by
+            rw [show (t + (1 / 6 - y) / w0) - t = (1 / 6 - y) / w0 from by ring]; field_simp
+          rw [e]; push_cast; ring)
+      (by rw [hb't]; push_cast; have hk := key w0 hw0.le; linarith [hk, hsm0, hy23])
+  -- runner 3 (w₂): at 1/2, reached 1/6 at τ₃ = t − 1/(3w₂), k = 0
+  have safe2 : ∀ s ∈ Set.Icc a' b', 1 / 6 ≤ circDist (w2 * s) :=
+    bhk_prop11_pent_reach_safe w2 t a' b' 0 (t - 1 / (3 * w2)) hw2.le hτ3
+      (by rw [h3]
+          have e : w2 * ((t - 1 / (3 * w2)) - t) = -(1 / 3) := by
+            rw [show (t - 1 / (3 * w2)) - t = -(1 / (3 * w2)) from by ring]; field_simp
+          rw [e]; push_cast; ring)
+      (by rw [h3, hb't]; push_cast; have hk := key w2 hw2.le; rw [hsm2] at hk; linarith [hk])
+  -- runner 4 (w₃): at x, reaches 1/6 at τ₄, reaches 5/6 at b', k = 0
+  have safe3 : ∀ s ∈ Set.Icc a' b', 1 / 6 ≤ circDist (w3 * s) :=
+    bhk_prop11_pent_reach_safe w3 t a' b' 0 (t + (1 / 6 - x) / w3) hw3.le hτ4
+      (by have e : w3 * ((t + (1 / 6 - x) / w3) - t) = 1 / 6 - x := by
+            rw [show (t + (1 / 6 - x) / w3) - t = (1 / 6 - x) / w3 from by ring]; field_simp
+          rw [e]; push_cast; ring)
+      (by rw [hb't]
+          have e : w3 * ((5 / 6 - x) / w3) = 5 / 6 - x := by field_simp
+          rw [e]; push_cast; linarith)
+  -- runner 2 (w₁): position frac(1/2 − y); k = 0 if y ≤ 1/2, k = 1 (wrap) otherwise
+  have safe1 : ∀ s ∈ Set.Icc a' b', 1 / 6 ≤ circDist (w1 * s) := by
+    by_cases hle : y ≤ 1 / 2
+    · have hf1 : Int.fract (w1 * t) = 1 / 2 - y := by
+        rw [hf1base]; exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+      exact bhk_prop11_pent_reach_safe w1 t a' b' 0 (t + (y - 1 / 3) / w1) hw1.le hτ2
+        (by rw [hf1]
+            have e : w1 * ((t + (y - 1 / 3) / w1) - t) = y - 1 / 3 := by
+              rw [show (t + (y - 1 / 3) / w1) - t = (y - 1 / 3) / w1 from by ring]; field_simp
+            rw [e]; push_cast; ring)
+        (by rw [hf1, hb't]; push_cast; have hk := key w1 hw1.le; linarith [hk, hsm1, hf0])
+    · have hgt : 1 / 2 < y := not_le.mp hle
+      have hf1 : Int.fract (w1 * t) = 3 / 2 - y := by
+        rw [hf1base, show (1:ℝ) / 2 - y = ((-1 : ℤ) : ℝ) + (3 / 2 - y) from by push_cast; ring,
+          Int.fract_intCast_add]
+        exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+      exact bhk_prop11_pent_reach_safe w1 t a' b' 1 (t + (y - 1 / 3) / w1) hw1.le hτ2
+        (by rw [hf1]
+            have e : w1 * ((t + (y - 1 / 3) / w1) - t) = y - 1 / 3 := by
+              rw [show (t + (y - 1 / 3) / w1) - t = (y - 1 / 3) / w1 from by ring]; field_simp
+            rw [e]; push_cast; ring)
+        (by rw [hf1, hb't]; push_cast; have hk := key w1 hw1.le; linarith [hk, hsm1, hgt])
+  have hgap : ∀ s ∈ Set.Icc a' b', ∀ i : Fin 3, 1 / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    fin_cases i
+    · exact safe0 s hs
+    · exact safe1 s hs
+    · exact safe2 s hs
+  exact bhk_prop11_long_gap_absurd w hpos hcover a' b' hab' hlen hgap safe3
+
+/-- **BHK §5 Part 3 — Pentagon `P` no-good-time (`C ∩ P = ∅`).** Combines the two
+    gap-end sub-cases: no half-integer time `t` (`{w₂t} = 1/2`) satisfies the
+    pentagon lower bounds (39) (`h39`), (40) (`h40`), the upper bound (41)
+    (`h41`), the bound `{w₃t} ≤ 5/6` (`hxle`), and (42) — supplied as its two
+    consequences `h42a`, `h42b` (`b'−τ₁, b'−τ₂ ≥ x₅/3`). Dispatches on whether
+    runner 3 or runner 4 reaches `5/6` first (`{w₃t} ≶ 5/6 − v₄/3`) to the
+    `_r3` / `_r4` halves. This is the full pentagon strengthening of the
+    rectangle `bhk_prop11_no_good_time`. -/
+theorem bhk_prop11_no_good_time_P (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i) (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h39 : 1 / 6 - (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h40 : 1 / 6 - (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+            ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h41 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+            ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+              / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)))
+    (hxle : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) ≤ 5 / 6)
+    (h42a : 1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+            ≤ (5 / 6 - Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)) / (w ⟨3, by omega⟩ : ℝ)
+              + (Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) - 1 / 6) / (w ⟨0, by omega⟩ : ℝ))
+    (h42b : 1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+            ≤ (5 / 6 - Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)) / (w ⟨3, by omega⟩ : ℝ)
+              + (1 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) / (w ⟨1, by omega⟩ : ℝ)) :
+    False := by
+  by_cases hx : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t)
+      ≤ 5 / 6 - (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ))
+  · exact bhk_prop11_no_good_time_P_r3 w hmono hpos hsum hsmall hcover t h3 h40 h41 h39 hx
+  · exact bhk_prop11_no_good_time_P_r4 w hmono hpos hsum hsmall hcover t h3 h41 hxle
+      (le_of_lt (not_le.mp hx)) h42a h42b
+
 /-- **BHK §5 Part 3 — the no-good-time fact (eq. (36)–(37)).** Under the
     covering assumption, there is *no* half-integer time `t` (`{w₂ t} = 1/2`)
     with runner 1 in `[1/6, 1/3]` *and* runner 4 in `[1/6, 1/2]`. Such a `t`
