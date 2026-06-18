@@ -2048,6 +2048,27 @@ lemma bhk_prop11_pent_runner4_safe (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i) (
         = (w ⟨3, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by ring
     rw [e]; linarith [h42]
 
+/-- **BHK §5 Part 3 — Pentagon `P`: the long-gap contradiction engine.** Any
+    1234-gap `[a, b]` (runners `w₀, w₁, w₂` safe via `hgap`, runner `w₃` via
+    `h4safe`) of length `≥ 1/(3w₄) = x₅/3` is impossible under the covering
+    assumption: `bhk_prop11_gap1234_b5span` forces `w₄·(b−a) < 1/3`, while
+    `1/(3w₄) ≤ b−a` gives `w₄·(b−a) ≥ 1/3`. Every gap-end sub-case (runner-3
+    ends, runner-4 ends) terminates here once its gap length is bounded below. -/
+lemma bhk_prop11_long_gap_absurd (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (a b : ℝ) (hab : a ≤ b)
+    (hlen : 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) ≤ b - a)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3, 1 / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h4safe : ∀ s ∈ Set.Icc a b, 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s)) :
+    False := by
+  have hw4 : (0:ℝ) < (w ⟨4, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab hgap h4safe
+  have hmul : (w ⟨4, by omega⟩ : ℝ) * (1 / (3 * (w ⟨4, by omega⟩ : ℝ)))
+      ≤ (w ⟨4, by omega⟩ : ℝ) * (b - a) := mul_le_mul_of_nonneg_left hlen hw4.le
+  have heq : (w ⟨4, by omega⟩ : ℝ) * (1 / (3 * (w ⟨4, by omega⟩ : ℝ))) = 1 / 3 := by field_simp
+  rw [heq] at hmul
+  linarith [hspan, hmul]
+
 /-- **BHK §5 Part 3 — Pentagon `P` no-good-time, runner-3-ends sub-region.** No
     half-integer time `t` (`{w₂t} = 1/2`) satisfies the relaxed pentagon bounds
     (39),(40),(41) on runners 4,1,2 *and* `{w₃t} ≤ 5/6 − v₄/3`: such a `t` makes
@@ -2089,12 +2110,7 @@ theorem bhk_prop11_no_good_time_P_r3 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     linarith [hba]
   have hgap := bhk_prop11_pent_gap123 w hpos hmono hsum hsmall t h3 h40 h41
   have h4safe := bhk_prop11_pent_runner4_safe w hpos t h39 h42
-  have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab hgap h4safe
-  rw [hba] at hspan
-  have heq : (w ⟨4, by omega⟩ : ℝ) * (1 / (3 * (w ⟨4, by omega⟩ : ℝ))) = 1 / 3 := by
-    field_simp
-  rw [heq] at hspan
-  exact absurd hspan (lt_irrefl _)
+  exact bhk_prop11_long_gap_absurd w hpos hcover _ _ hab (le_of_eq hba.symm) hgap h4safe
 
 /-- **BHK §5 Part 3 — the no-good-time fact (eq. (36)–(37)).** Under the
     covering assumption, there is *no* half-integer time `t` (`{w₂ t} = 1/2`)
