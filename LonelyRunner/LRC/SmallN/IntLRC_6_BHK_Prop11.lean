@@ -3306,7 +3306,9 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       omega
     interval_cases j
     · sorry -- (2,-3)
-    · sorry -- (2,-2) — anti-diagonal
+    · by_cases hc : IsCoprime (q : ℤ) 2
+      · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 2 (by norm_num) hc k hk1 hk2
+      · sorry -- (2,-2) gcd(2,q) > 1 — needs grid q < 12
     · exact bhk_prop11_exc_2_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (2 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 2 k (by norm_num) (by norm_num) hk1
@@ -3326,7 +3328,9 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       omega
     interval_cases j
     · sorry -- (3,-4)
-    · sorry -- (3,-3) — anti-diagonal
+    · by_cases hc : IsCoprime (q : ℤ) 3
+      · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 3 (by norm_num) hc k hk1 hk2
+      · sorry -- (3,-3) gcd(3,q) > 1 — needs grid q < 18
     · sorry -- (3,-2)
     · exact bhk_prop11_exc_3_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (3 : ℤ) = 0 :=
@@ -3347,7 +3351,9 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       have h' : j < (5 : ℤ) := by exact_mod_cast h
       omega
     interval_cases j
-    · sorry -- (4,-4) — anti-diagonal
+    · by_cases hc : IsCoprime (q : ℤ) 4
+      · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 4 (by norm_num) hc k hk1 hk2
+      · sorry -- (4,-4) gcd(4,q) > 1 — needs grid q < 24
     · sorry -- (4,-3)
     · sorry -- (4,-2)
     · by_cases hq24 : 24 ≤ q
@@ -3373,7 +3379,9 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       have h' : 2 * j < (11 : ℤ) := by exact_mod_cast h
       omega
     interval_cases j
-    · sorry -- (5,-5) — anti-diagonal
+    · by_cases hc : IsCoprime (q : ℤ) 5
+      · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 5 (by norm_num) hc k hk1 hk2
+      · sorry -- (5,-5) gcd(5,q) > 1 — needs grid q < 30
     · sorry -- (5,-4)
     · sorry -- (5,-3)
     · sorry -- (5,-2)
