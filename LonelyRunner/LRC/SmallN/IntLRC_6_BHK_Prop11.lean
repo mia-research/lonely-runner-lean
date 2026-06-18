@@ -3246,6 +3246,26 @@ lemma bhk_prop11_exc_4_neg1 (p q r : ℕ) (hq24 : 24 ≤ q) (hcop : Nat.Coprime 
     omega
   exact bhk_prop11_exc_4_neg1_hit p q r hq24 hcop hp h3p hr2q4p h_nogood
 
+/-- **BHK §5 Case 5.2.2 — the anti-diagonal grid geometry (TO FILL).** For an
+    anti-diagonal exceptional generator `(i, -i)` with `i ∈ {3,4,5}` and
+    `gcd(q, i) > 1`: BHK pp. 26–28 show that both `Lᵢⱼ` and `L'ᵢⱼ` (the systems of
+    slope-`-1` segments carrying `G` and the half-shifted coset `C`) contain a
+    segment whose intersection with `R` has *full vertical length `1/6`*. The
+    coset points on it are spaced `i/q` vertically, so `C ∩ R = ∅` (`h_nogood`)
+    forces `q < 6i` by the `bhk_prop11_grid_avoid` pigeonhole; the non-coprimality
+    forces `i ∣ q`. This is the one page of `Lᵢⱼ` segment geometry BHK glosses —
+    the remaining Part-4 obligation feeding `bhk_prop11_antidiag_contra`. -/
+lemma bhk_prop11_antidiag_geom (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (i k : ℤ) (hi : i = 3 ∨ i = 4 ∨ i = 5) (hncop : ¬ IsCoprime (q : ℤ) i)
+    (hk1 : Int.fract ((i : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-i : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    i.natAbs ∣ q ∧ q < 6 * i.natAbs := by
+  sorry
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -3330,7 +3350,10 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     · sorry -- (3,-4)
     · by_cases hc : IsCoprime (q : ℤ) 3
       · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 3 (by norm_num) hc k hk1 hk2
-      · sorry -- (3,-3) gcd(3,q) > 1 — needs grid q < 18
+      · obtain ⟨hdvd, h6⟩ := bhk_prop11_antidiag_geom p q r hq18 hcop hp h3p hrq hr32 3 k
+          (by norm_num) hc hk1 hk2 h_nogood
+        exact bhk_prop11_antidiag_contra 3 q (by norm_num) (by norm_num) hq18
+          (by have h := h14 (by decide) (by decide); omega) (by omega) (by omega)
     · sorry -- (3,-2)
     · exact bhk_prop11_exc_3_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (3 : ℤ) = 0 :=
@@ -3353,7 +3376,14 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     interval_cases j
     · by_cases hc : IsCoprime (q : ℤ) 4
       · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 4 (by norm_num) hc k hk1 hk2
-      · sorry -- (4,-4) gcd(4,q) > 1 — needs grid q < 24
+      · obtain ⟨hdvd, h6⟩ := bhk_prop11_antidiag_geom p q r hq18 hcop hp h3p hrq hr32 4 k
+          (by norm_num) hc hk1 hk2 h_nogood
+        rw [show (4 : ℤ).natAbs = 4 from by decide] at hdvd h6
+        exact bhk_prop11_antidiag_contra 4 q (by norm_num) (by norm_num) hq18
+          (by have h := h14 (by decide) (by decide)
+              rw [show (4 : ℤ).natAbs = 4 from by decide,
+                show (-4 : ℤ).natAbs = 4 from by decide] at h
+              omega) h6 hdvd
     · sorry -- (4,-3)
     · sorry -- (4,-2)
     · by_cases hq24 : 24 ≤ q
@@ -3381,7 +3411,14 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     interval_cases j
     · by_cases hc : IsCoprime (q : ℤ) 5
       · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 5 (by norm_num) hc k hk1 hk2
-      · sorry -- (5,-5) gcd(5,q) > 1 — needs grid q < 30
+      · obtain ⟨hdvd, h6⟩ := bhk_prop11_antidiag_geom p q r hq18 hcop hp h3p hrq hr32 5 k
+          (by norm_num) hc hk1 hk2 h_nogood
+        rw [show (5 : ℤ).natAbs = 5 from by decide] at hdvd h6
+        exact bhk_prop11_antidiag_contra 5 q (by norm_num) (by norm_num) hq18
+          (by have h := h14 (by decide) (by decide)
+              rw [show (5 : ℤ).natAbs = 5 from by decide,
+                show (-5 : ℤ).natAbs = 5 from by decide] at h
+              omega) h6 hdvd
     · sorry -- (5,-4)
     · sorry -- (5,-3)
     · sorry -- (5,-2)
