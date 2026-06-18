@@ -2390,6 +2390,123 @@ theorem bhk_prop11_no_good_time (w : Fin 5 → ℕ) (hmono : StrictMono w)
   -- hspan : w₄ < 1/3 * (3 * w₃) = w₃, contradicting w₃ < w₄.
   nlinarith [hspan, hw34]
 
+/-- **BHK §5 Part 3 — extraction of a *minimal* exceptional pair (`q ≥ 18`).**  As
+    `bhk_part3_exceptional`, but using the (13)-strengthened Corollary 6
+    (`bhk_s7_corollary_6_minimal`): the returned cone pair `(i, j)` is additionally
+    a **minimal** element of the group `G` (no nonzero `(k, l) ∈ Z_{|i|,|j|}` lies in
+    `G`).  This minimality is what `bhk_lemma7` consumes to obtain the order bound
+    `q ≥ (|i|+1)(|j|+1) − 2` (BHK (14)), the tool needed for the high-`|j|` and
+    `gcd(i, q) > 1` anti-diagonal cases (5.2.2/5.2.3) that the pure-congruence kills
+    cannot reach.  The lift `G` is returned so the bound is directly applicable. -/
+theorem bhk_part3_exceptional_minimal (r p q : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.gcd p q = 1)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    ∃ G : Set (ℝ × ℝ), IsBHKLift G q ∧
+      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
+                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
+        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
+        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
+        (∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
+          ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
+          ((kl.1 : ℝ) / q, (kl.2 : ℝ) / q) ∉ G) := by
+  have hq0 : 0 < q := by omega
+  obtain ⟨G, hGlift, hGmem⟩ := bhk_isBHKLift_gen r p q hq0 hcop
+  have hmiss : ¬ ∀ a b, (G ∩ bhkRectangle a b (1 / 3) (1 / 6)).Nonempty := by
+    set x₁ : ℝ := 1 / 6 - (r : ℝ) / (2 * q) with hx1def
+    set x₂ : ℝ := 1 / 6 - (p : ℝ) / (2 * q) with hx2def
+    intro hall
+    obtain ⟨g, hgG, hgR⟩ := hall x₁ x₂
+    obtain ⟨k, hk1, hk2⟩ := hGmem g hgG
+    rw [bhkRectangle, Set.mem_setOf_eq] at hgR
+    obtain ⟨_, hg1u, _, hg2u⟩ := hgR
+    have hb1 : Int.fract (Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 3 := by
+      rw [show Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6
+            = Int.fract (g.1 + (r : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
+          ← bhk_fract_add_fract,
+          show g.1 + (r : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.1 - x₁ from by rw [hx1def]; ring]
+      exact hg1u
+    have hwin1 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
+      (by norm_num : (1 : ℝ) / 3 < 5 / 6) hb1
+    have hSeq1 : Int.fract (g.1 + (r : ℝ) / (2 * q))
+        = Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
+      rw [bhk_fract_add_fract g.1, hk1, ← bhk_fract_add_fract]; congr 1; ring
+    rw [hSeq1] at hwin1
+    have hb2 : Int.fract (Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 6 := by
+      rw [show Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6
+            = Int.fract (g.2 + (p : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
+          ← bhk_fract_add_fract,
+          show g.2 + (p : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.2 - x₂ from by rw [hx2def]; ring]
+      exact hg2u
+    have hwin2 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
+      (by norm_num : (1 : ℝ) / 6 < 5 / 6) hb2
+    have hSeq2 : Int.fract (g.2 + (p : ℝ) / (2 * q))
+        = Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
+      rw [bhk_fract_add_fract g.2, hk2, ← bhk_fract_add_fract]; congr 1; ring
+    rw [hSeq2] at hwin2
+    exact h_nogood k ⟨⟨hwin1.1, by linarith [hwin1.2]⟩, ⟨hwin2.1, by linarith [hwin2.2]⟩⟩
+  rcases bhk_s7_corollary_6_minimal G q (by omega) hGlift (1 / 3) (1 / 6) (by norm_num)
+      (by norm_num) (by norm_num) (by norm_num)
+      (by rw [show (1 : ℝ) / 3 * (1 / 6) = 1 / 18 from by norm_num]
+          exact one_div_le_one_div_of_le (by norm_num) (by exact_mod_cast hq18))
+      (by rw [one_div_one_div]; exact_mod_cast (show (6 : ℕ) ≤ q by omega)) with
+    hhit | ⟨ij, hne, hmemij, h0, h1β, hc1, hc2, hmin⟩
+  · exact absurd hhit hmiss
+  · refine ⟨G, hGlift, ij, hne, hGmem _ hmemij, h0, ?_, ?_, ?_, hmin⟩
+    · norm_num at h1β; exact h1β
+    · norm_num at hc1; linarith [hc1]
+    · norm_num at hc2; linarith [hc2]
+
+/-- **BHK §5 Part 3 — minimal exceptional pair with the order bound (14).**  Combines
+    `bhk_part3_exceptional_minimal` with `bhk_lemma7`: the extracted minimal cone pair
+    `(i, j)`, when off both axes, satisfies BHK's order bound
+    `q ≥ (|i|+1)(|j|+1) − 2`.  (The cone forces `|i|, |j| ≤ 5 < 18 ≤ q`, so the box
+    embeds and Lemma 7 applies.)  This is the form the Case 5.2.2/5.2.3 dispatch
+    consumes: paired with the geometric `q < 6|j|` bound it eliminates the
+    anti-diagonal and high-`|j|` pairs. -/
+theorem bhk_part3_exceptional_minimal_bound (r p q : ℕ) (hq18 : 18 ≤ q)
+    (hcop : Nat.gcd p q = 1)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    ∃ G : Set (ℝ × ℝ), IsBHKLift G q ∧
+      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
+                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
+        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
+        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
+        (∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
+          ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) → ((kl.1 : ℝ) / q, (kl.2 : ℝ) / q) ∉ G) ∧
+        (ij.1 ≠ 0 → ij.2 ≠ 0 → (ij.1.natAbs + 1) * (ij.2.natAbs + 1) - 2 ≤ q) := by
+  obtain ⟨G, hGlift, ij, hne, hread, h0, h1β, hc1, hc2, hmin⟩ :=
+    bhk_part3_exceptional_minimal r p q hq18 hcop h_nogood
+  refine ⟨G, hGlift, ij, hne, hread, h0, h1β, hc1, hc2, hmin, ?_⟩
+  intro hi0 hj0
+  -- The cone forces |ij.1|, |ij.2| < 6 ≤ q, so the box embeds and Lemma 7 applies.
+  have hi_lt : ij.1 < 6 := by exact_mod_cast h1β
+  have hj_lt : (ij.2 : ℝ) < 6 := by linarith
+  have hj_gt : (-6 : ℝ) < (ij.2 : ℝ) := by linarith
+  have hi_nat : ij.1.natAbs < q := by omega
+  have hj_nat : ij.2.natAbs < q := by
+    have h1 : ij.2 < 6 := by exact_mod_cast hj_lt
+    have h2 : (-6 : ℤ) < ij.2 := by exact_mod_cast hj_gt
+    omega
+  exact bhk_lemma7 G q (by omega) hGlift ij.1 ij.2 hi0 hj0 hi_nat hj_nat hmin
+
+/-- **BHK §5 Case 5.2.2 — the `(14)` + `q < 6i` contradiction (anti-diagonal).**
+    For a minimal anti-diagonal pair `(i, ±i)` with `i = 3, 4, 5`, the order bound
+    `(14)` `q ≥ (i+1)² − 2` (from `bhk_lemma7`), the geometric `q < 6i` (a segment
+    of `L_{i,±i}` meets `R` with full height `1/6`), and `i ∣ q` are jointly
+    contradictory.  This discharges the order/divisibility arithmetic of Case 5.2.2,
+    isolating it to the two Part-4 facts `q < 6i` and `i ∣ q`.  (`i = 3`: already
+    `q < 18 ≤ q`; `i = 4`: forces `q = 23`, not divisible by 4; `i = 5`: `q ≥ 34`
+    contradicts `q < 30`.) -/
+lemma bhk_prop11_antidiag_contra (i q : ℕ) (hi3 : 3 ≤ i) (hi5 : i ≤ 5)
+    (hq18 : 18 ≤ q) (hbound : (i + 1) * (i + 1) - 2 ≤ q) (h6 : q < 6 * i)
+    (hdvd : i ∣ q) : False := by
+  interval_cases i <;> omega
+
 /-- **BHK §5 Part 3 — the exceptional pair (`q ≥ 18` branch).** Wiring the
     no-good-time fact into the main-lemma application. Writing `g = gcd(w₀,w₂)`,
     `p = w₀/g`, `q = w₂/g`, `r = w₃/g`, `s = w₄/g` (Lemma 17 gives `g ∣ w₃, w₄`),
@@ -2411,7 +2528,8 @@ theorem bhk_prop11_exceptional_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w)
         (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
                   Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
         0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
-        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) := by
+        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
+        (ij.1 ≠ 0 → ij.2 ≠ 0 → (ij.1.natAbs + 1) * (ij.2.natAbs + 1) - 2 ≤ q) := by
   set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
   have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
   have hgw0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
@@ -2455,9 +2573,10 @@ theorem bhk_prop11_exceptional_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     · rw [e0]; exact hpmem.2
     · rw [e3]; exact hrmem.1
     · rw [e3]; exact hrmem.2
-  obtain ⟨ij, hne, hmem, h0, h1β, hc1, hc2⟩ :=
-    bhk_part3_exceptional r p q (by omega) hcop h_nogood
-  exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2⟩
+  obtain ⟨_G, _hGlift, ij, hne, hmem, h0, h1β, hc1, hc2, _hmin, h14⟩ :=
+    bhk_part3_exceptional_minimal_bound r p q (by omega) hcop h_nogood
+  exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2,
+    h14⟩
 
 /-- **Readout bridge.** Integer multiples of `1/q` have equal fractional part iff
     congruent mod `q`. Turns the `bhk_corollary_6` generator readout
@@ -3143,7 +3262,8 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     (hk2 : Int.fract ((j : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
     (h_nogood : ∀ l : ℤ,
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
-         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
+    (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q) :
     False := by
   have hi_lt : i < 6 := by exact_mod_cast hi6
   interval_cases i
@@ -3281,7 +3401,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
     (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
     (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) : False := by
   obtain ⟨g, p, q, r, s, hg_pos, hgp, hgq, hgr, hgs, hcop, hq18', ⟨i, j⟩, hne,
-      ⟨k, hk1, hk2⟩, h0, h1β, hc1, hc2⟩ :=
+      ⟨k, hk1, hk2⟩, h0, h1β, hc1, hc2, h14⟩ :=
     bhk_prop11_exceptional_q18 w hmono hpos hsum hsmall hcover hq18
   have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hgp
   have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hgq
@@ -3326,7 +3446,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
     · rw [e3]; exact hrmem.1
     · rw [e3]; exact hrmem.2
   exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-    hk1 hk2 h_nogood
+    hk1 hk2 h_nogood h14
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
@@ -3366,122 +3486,5 @@ theorem bhk_prop11_core2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
         Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ∈ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
     False := by
   sorry
-
-/-- **BHK §5 Part 3 — extraction of a *minimal* exceptional pair (`q ≥ 18`).**  As
-    `bhk_part3_exceptional`, but using the (13)-strengthened Corollary 6
-    (`bhk_s7_corollary_6_minimal`): the returned cone pair `(i, j)` is additionally
-    a **minimal** element of the group `G` (no nonzero `(k, l) ∈ Z_{|i|,|j|}` lies in
-    `G`).  This minimality is what `bhk_lemma7` consumes to obtain the order bound
-    `q ≥ (|i|+1)(|j|+1) − 2` (BHK (14)), the tool needed for the high-`|j|` and
-    `gcd(i, q) > 1` anti-diagonal cases (5.2.2/5.2.3) that the pure-congruence kills
-    cannot reach.  The lift `G` is returned so the bound is directly applicable. -/
-theorem bhk_part3_exceptional_minimal (r p q : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.gcd p q = 1)
-    (h_nogood : ∀ k : ℤ,
-      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
-         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
-    ∃ G : Set (ℝ × ℝ), IsBHKLift G q ∧
-      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
-        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
-                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
-        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
-        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
-        (∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
-          ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) →
-          ((kl.1 : ℝ) / q, (kl.2 : ℝ) / q) ∉ G) := by
-  have hq0 : 0 < q := by omega
-  obtain ⟨G, hGlift, hGmem⟩ := bhk_isBHKLift_gen r p q hq0 hcop
-  have hmiss : ¬ ∀ a b, (G ∩ bhkRectangle a b (1 / 3) (1 / 6)).Nonempty := by
-    set x₁ : ℝ := 1 / 6 - (r : ℝ) / (2 * q) with hx1def
-    set x₂ : ℝ := 1 / 6 - (p : ℝ) / (2 * q) with hx2def
-    intro hall
-    obtain ⟨g, hgG, hgR⟩ := hall x₁ x₂
-    obtain ⟨k, hk1, hk2⟩ := hGmem g hgG
-    rw [bhkRectangle, Set.mem_setOf_eq] at hgR
-    obtain ⟨_, hg1u, _, hg2u⟩ := hgR
-    have hb1 : Int.fract (Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 3 := by
-      rw [show Int.fract (g.1 + (r : ℝ) / (2 * q)) - 1 / 6
-            = Int.fract (g.1 + (r : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
-          ← bhk_fract_add_fract,
-          show g.1 + (r : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.1 - x₁ from by rw [hx1def]; ring]
-      exact hg1u
-    have hwin1 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
-      (by norm_num : (1 : ℝ) / 3 < 5 / 6) hb1
-    have hSeq1 : Int.fract (g.1 + (r : ℝ) / (2 * q))
-        = Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
-      rw [bhk_fract_add_fract g.1, hk1, ← bhk_fract_add_fract]; congr 1; ring
-    rw [hSeq1] at hwin1
-    have hb2 : Int.fract (Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6) ≤ 1 / 6 := by
-      rw [show Int.fract (g.2 + (p : ℝ) / (2 * q)) - 1 / 6
-            = Int.fract (g.2 + (p : ℝ) / (2 * q)) + (-(1 / 6) : ℝ) from by ring,
-          ← bhk_fract_add_fract,
-          show g.2 + (p : ℝ) / (2 * q) + (-(1 / 6) : ℝ) = g.2 - x₂ from by rw [hx2def]; ring]
-      exact hg2u
-    have hwin2 := bhk_window_from_fract (Int.fract_nonneg _) (Int.fract_lt_one _)
-      (by norm_num : (1 : ℝ) / 6 < 5 / 6) hb2
-    have hSeq2 : Int.fract (g.2 + (p : ℝ) / (2 * q))
-        = Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) := by
-      rw [bhk_fract_add_fract g.2, hk2, ← bhk_fract_add_fract]; congr 1; ring
-    rw [hSeq2] at hwin2
-    exact h_nogood k ⟨⟨hwin1.1, by linarith [hwin1.2]⟩, ⟨hwin2.1, by linarith [hwin2.2]⟩⟩
-  rcases bhk_s7_corollary_6_minimal G q (by omega) hGlift (1 / 3) (1 / 6) (by norm_num)
-      (by norm_num) (by norm_num) (by norm_num)
-      (by rw [show (1 : ℝ) / 3 * (1 / 6) = 1 / 18 from by norm_num]
-          exact one_div_le_one_div_of_le (by norm_num) (by exact_mod_cast hq18))
-      (by rw [one_div_one_div]; exact_mod_cast (show (6 : ℕ) ≤ q by omega)) with
-    hhit | ⟨ij, hne, hmemij, h0, h1β, hc1, hc2, hmin⟩
-  · exact absurd hhit hmiss
-  · refine ⟨G, hGlift, ij, hne, hGmem _ hmemij, h0, ?_, ?_, ?_, hmin⟩
-    · norm_num at h1β; exact h1β
-    · norm_num at hc1; linarith [hc1]
-    · norm_num at hc2; linarith [hc2]
-
-/-- **BHK §5 Part 3 — minimal exceptional pair with the order bound (14).**  Combines
-    `bhk_part3_exceptional_minimal` with `bhk_lemma7`: the extracted minimal cone pair
-    `(i, j)`, when off both axes, satisfies BHK's order bound
-    `q ≥ (|i|+1)(|j|+1) − 2`.  (The cone forces `|i|, |j| ≤ 5 < 18 ≤ q`, so the box
-    embeds and Lemma 7 applies.)  This is the form the Case 5.2.2/5.2.3 dispatch
-    consumes: paired with the geometric `q < 6|j|` bound it eliminates the
-    anti-diagonal and high-`|j|` pairs. -/
-theorem bhk_part3_exceptional_minimal_bound (r p q : ℕ) (hq18 : 18 ≤ q)
-    (hcop : Nat.gcd p q = 1)
-    (h_nogood : ∀ k : ℤ,
-      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
-         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
-    ∃ G : Set (ℝ × ℝ), IsBHKLift G q ∧
-      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
-        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
-                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
-        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
-        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
-        (∀ kl : ℤ × ℤ, kl ≠ (0, 0) → |kl.1| ≤ |ij.1| → |kl.2| ≤ |ij.2| →
-          ¬(|kl.1| = |ij.1| ∧ |kl.2| = |ij.2|) → ((kl.1 : ℝ) / q, (kl.2 : ℝ) / q) ∉ G) ∧
-        (ij.1 ≠ 0 → ij.2 ≠ 0 → (ij.1.natAbs + 1) * (ij.2.natAbs + 1) - 2 ≤ q) := by
-  obtain ⟨G, hGlift, ij, hne, hread, h0, h1β, hc1, hc2, hmin⟩ :=
-    bhk_part3_exceptional_minimal r p q hq18 hcop h_nogood
-  refine ⟨G, hGlift, ij, hne, hread, h0, h1β, hc1, hc2, hmin, ?_⟩
-  intro hi0 hj0
-  -- The cone forces |ij.1|, |ij.2| < 6 ≤ q, so the box embeds and Lemma 7 applies.
-  have hi_lt : ij.1 < 6 := by exact_mod_cast h1β
-  have hj_lt : (ij.2 : ℝ) < 6 := by linarith
-  have hj_gt : (-6 : ℝ) < (ij.2 : ℝ) := by linarith
-  have hi_nat : ij.1.natAbs < q := by omega
-  have hj_nat : ij.2.natAbs < q := by
-    have h1 : ij.2 < 6 := by exact_mod_cast hj_lt
-    have h2 : (-6 : ℤ) < ij.2 := by exact_mod_cast hj_gt
-    omega
-  exact bhk_lemma7 G q (by omega) hGlift ij.1 ij.2 hi0 hj0 hi_nat hj_nat hmin
-
-/-- **BHK §5 Case 5.2.2 — the `(14)` + `q < 6i` contradiction (anti-diagonal).**
-    For a minimal anti-diagonal pair `(i, ±i)` with `i = 3, 4, 5`, the order bound
-    `(14)` `q ≥ (i+1)² − 2` (from `bhk_lemma7`), the geometric `q < 6i` (a segment
-    of `L_{i,±i}` meets `R` with full height `1/6`), and `i ∣ q` are jointly
-    contradictory.  This discharges the order/divisibility arithmetic of Case 5.2.2,
-    isolating it to the two Part-4 facts `q < 6i` and `i ∣ q`.  (`i = 3`: already
-    `q < 18 ≤ q`; `i = 4`: forces `q = 23`, not divisible by 4; `i = 5`: `q ≥ 34`
-    contradicts `q < 30`.) -/
-lemma bhk_prop11_antidiag_contra (i q : ℕ) (hi3 : 3 ≤ i) (hi5 : i ≤ 5)
-    (hq18 : 18 ≤ q) (hbound : (i + 1) * (i + 1) - 2 ≤ q) (h6 : q < 6 * i)
-    (hdvd : i ∣ q) : False := by
-  interval_cases i <;> omega
 
 end BHK
