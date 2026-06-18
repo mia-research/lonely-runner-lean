@@ -3138,13 +3138,137 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
     (i j k : ℤ) (hi0 : 0 ≤ i) (hi6 : (i : ℝ) < 6)
     (hjlo : -3 - 1 / 2 * (i : ℝ) < (j : ℝ)) (hjhi : (j : ℝ) < 3 + 1 / 2 * (i : ℝ))
+    (hij : (i, j) ≠ (0, 0))
     (hk1 : Int.fract ((i : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
     (hk2 : Int.fract ((j : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
     (h_nogood : ∀ l : ℤ,
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
     False := by
-  sorry
+  have hi_lt : i < 6 := by exact_mod_cast hi6
+  interval_cases i
+  · -- i = 0: the `i = 0` family, `q ∣ j·r` has no multiple in range (Part 5, j = ±1, ±2)
+    have hjne : j ≠ 0 := by rintro rfl; exact hij rfl
+    have hjlo' : (-3 : ℤ) < j := by have h := hjlo; norm_num at h; exact_mod_cast h
+    have hjhi' : j < 3 := by have h := hjhi; norm_num at h; exact_mod_cast h
+    have hk1' : Int.fract ((0 : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)) := by
+      rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk1
+    exact bhk_prop11_exc_i_zero p q r (by omega) hrq hr32 j k hjne hjlo' hjhi' hk1' hk2
+  · -- i = 1: cone j ∈ {-3,…,3}; kills (1,-1) and (1,0)
+    have hjl : -3 ≤ j := by
+      have h : (-7 : ℝ) < 2 * ↑j := by have h := hjlo; norm_num at h; linarith
+      have h' : (-7 : ℤ) < 2 * j := by exact_mod_cast h
+      omega
+    have hjh : j ≤ 3 := by
+      have h : 2 * (↑j : ℝ) < 7 := by have h := hjhi; norm_num at h; linarith
+      have h' : 2 * j < (7 : ℤ) := by exact_mod_cast h
+      omega
+    interval_cases j
+    · sorry -- (1,-3)
+    · sorry -- (1,-2)
+    · exact bhk_prop11_exc_1_neg1 p q r (by omega) hp h3p hrq hr32 k
+        (by rw [show (1 : ℝ) = ((1 : ℤ) : ℝ) from by norm_num]; exact hk1) hk2
+    · have hI0 : (1 : ℤ) = 0 :=
+        bhk_prop11_exc_j_zero p q r (by omega) hcop 1 k (by norm_num) (by norm_num) hk1
+          (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
+      norm_num at hI0
+    · sorry -- (1,1) — Part 6
+    · sorry -- (1,2)
+    · sorry -- (1,3)
+  · -- i = 2: cone j ∈ {-3,…,3}; kills (2,-1) and (2,0)
+    have hjl : -3 ≤ j := by
+      have h : (-4 : ℝ) < ↑j := by have h := hjlo; norm_num at h; linarith
+      have h' : (-4 : ℤ) < j := by exact_mod_cast h
+      omega
+    have hjh : j ≤ 3 := by
+      have h : (↑j : ℝ) < 4 := by have h := hjhi; norm_num at h; linarith
+      have h' : j < (4 : ℤ) := by exact_mod_cast h
+      omega
+    interval_cases j
+    · sorry -- (2,-3)
+    · sorry -- (2,-2) — anti-diagonal
+    · exact bhk_prop11_exc_2_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+    · have hI0 : (2 : ℤ) = 0 :=
+        bhk_prop11_exc_j_zero p q r (by omega) hcop 2 k (by norm_num) (by norm_num) hk1
+          (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
+      norm_num at hI0
+    · sorry -- (2,1)
+    · sorry -- (2,2)
+    · sorry -- (2,3)
+  · -- i = 3: cone j ∈ {-4,…,4}; kills (3,-1), (3,1) and (3,0)
+    have hjl : -4 ≤ j := by
+      have h : (-9 : ℝ) < 2 * ↑j := by have h := hjlo; norm_num at h; linarith
+      have h' : (-9 : ℤ) < 2 * j := by exact_mod_cast h
+      omega
+    have hjh : j ≤ 4 := by
+      have h : 2 * (↑j : ℝ) < 9 := by have h := hjhi; norm_num at h; linarith
+      have h' : 2 * j < (9 : ℤ) := by exact_mod_cast h
+      omega
+    interval_cases j
+    · sorry -- (3,-4)
+    · sorry -- (3,-3) — anti-diagonal
+    · sorry -- (3,-2)
+    · exact bhk_prop11_exc_3_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+    · have hI0 : (3 : ℤ) = 0 :=
+        bhk_prop11_exc_j_zero p q r (by omega) hcop 3 k (by norm_num) (by norm_num) hk1
+          (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
+      norm_num at hI0
+    · exact bhk_prop11_exc_3_1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+    · sorry -- (3,2)
+    · sorry -- (3,3) — anti-diagonal
+    · sorry -- (3,4)
+  · -- i = 4: cone j ∈ {-4,…,4}; kills (4,0); (4,±1) for q ≥ 24 (else sliver)
+    have hjl : -4 ≤ j := by
+      have h : (-5 : ℝ) < ↑j := by have h := hjlo; norm_num at h; linarith
+      have h' : (-5 : ℤ) < j := by exact_mod_cast h
+      omega
+    have hjh : j ≤ 4 := by
+      have h : (↑j : ℝ) < 5 := by have h := hjhi; norm_num at h; linarith
+      have h' : j < (5 : ℤ) := by exact_mod_cast h
+      omega
+    interval_cases j
+    · sorry -- (4,-4) — anti-diagonal
+    · sorry -- (4,-3)
+    · sorry -- (4,-2)
+    · by_cases hq24 : 24 ≤ q
+      · exact bhk_prop11_exc_4_neg1 p q r hq24 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+      · sorry -- (4,-1) sliver q ∈ [18,24)
+    · have hI0 : (4 : ℤ) = 0 :=
+        bhk_prop11_exc_j_zero p q r (by omega) hcop 4 k (by norm_num) (by norm_num) hk1
+          (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
+      norm_num at hI0
+    · by_cases hq24 : 24 ≤ q
+      · exact bhk_prop11_exc_4_1 p q r hq24 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+      · sorry -- (4,1) sliver q ∈ [18,24)
+    · sorry -- (4,2)
+    · sorry -- (4,3)
+    · sorry -- (4,4)
+  · -- i = 5: cone j ∈ {-5,…,5}; kills (5,0); (5,1) for q ≥ 30 (else sliver)
+    have hjl : -5 ≤ j := by
+      have h : (-11 : ℝ) < 2 * ↑j := by have h := hjlo; norm_num at h; linarith
+      have h' : (-11 : ℤ) < 2 * j := by exact_mod_cast h
+      omega
+    have hjh : j ≤ 5 := by
+      have h : 2 * (↑j : ℝ) < 11 := by have h := hjhi; norm_num at h; linarith
+      have h' : 2 * j < (11 : ℤ) := by exact_mod_cast h
+      omega
+    interval_cases j
+    · sorry -- (5,-5) — anti-diagonal
+    · sorry -- (5,-4)
+    · sorry -- (5,-3)
+    · sorry -- (5,-2)
+    · sorry -- (5,-1)
+    · have hI0 : (5 : ℤ) = 0 :=
+        bhk_prop11_exc_j_zero p q r (by omega) hcop 5 k (by norm_num) (by norm_num) hk1
+          (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
+      norm_num at hI0
+    · by_cases hq30 : 30 ≤ q
+      · exact bhk_prop11_exc_5_1 p q r hq30 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
+      · sorry -- (5,1) sliver q ∈ [18,30)
+    · sorry -- (5,2)
+    · sorry -- (5,3)
+    · sorry -- (5,4)
+    · sorry -- (5,5)
 
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
@@ -3156,7 +3280,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
     (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
     (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) : False := by
-  obtain ⟨g, p, q, r, s, hg_pos, hgp, hgq, hgr, hgs, hcop, hq18', ij, hne,
+  obtain ⟨g, p, q, r, s, hg_pos, hgp, hgq, hgr, hgs, hcop, hq18', ⟨i, j⟩, hne,
       ⟨k, hk1, hk2⟩, h0, h1β, hc1, hc2⟩ :=
     bhk_prop11_exceptional_q18 w hmono hpos hsum hsmall hcover hq18
   have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hgp
@@ -3201,7 +3325,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
     · rw [e0]; exact hpmem.2
     · rw [e3]; exact hrmem.1
     · rw [e3]; exact hrmem.2
-  exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 ij.1 ij.2 k h0 h1β hc1 hc2
+  exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
     hk1 hk2 h_nogood
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
