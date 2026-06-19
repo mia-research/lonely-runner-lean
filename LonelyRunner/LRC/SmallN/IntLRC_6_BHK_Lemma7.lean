@@ -252,4 +252,65 @@ lemma bhk_prop11_grid_avoid (m q : ℕ) (hm : 0 < m) (hq : 0 < q) (hmdvd : m ∣
   obtain ⟨t, ht⟩ := bhk_prop11_grid_hit m q hm hq hmdvd y hy0 hy1'
   exact havoid t ⟨ht.1, le_trans ht.2 (by linarith)⟩
 
+/-- **Coset grid pigeonhole.**  A `1/e`-spaced coset `{ b + t/e : t ∈ ℤ }` meets every
+closed window `[y, y + w]` of length `w ≥ 1/e` lying inside `[0, 1]`.  This is the coset
+form of `bhk_prop11_grid_hit` needed for the anti-diagonal Case 5.2.2: on a slope-`-1`
+circle of `L_{i,-i}` the coset's second coordinates are `1/e`-spaced (`e = gcd(r+p, q)`),
+so any crossing of `R` of vertical length `≥ 1/e` contains one. -/
+lemma bhk_prop11_grid_hit_coset (e : ℕ) (he : 0 < e) (b y w : ℝ)
+    (hw : 1 / (e : ℝ) ≤ w) (hy0 : 0 ≤ y) (hy1 : y + w ≤ 1) :
+    ∃ t : ℤ, Int.fract (b + (t : ℝ) / e) ∈ Set.Icc y (y + w) := by
+  have heR : (0 : ℝ) < e := by exact_mod_cast he
+  refine ⟨⌈(y - b) * (e : ℝ)⌉, ?_⟩
+  have hlo : y ≤ b + ((⌈(y - b) * (e : ℝ)⌉ : ℤ) : ℝ) / e := by
+    have h : y - b ≤ ((⌈(y - b) * (e : ℝ)⌉ : ℤ) : ℝ) / e :=
+      (le_div_iff₀ heR).mpr (Int.le_ceil _)
+    linarith
+  have hhi0 : ((⌈(y - b) * (e : ℝ)⌉ : ℤ) : ℝ) / e < (y - b) + 1 / e := by
+    rw [div_lt_iff₀ heR, show ((y - b) + 1 / (e : ℝ)) * e = (y - b) * e + 1 from by field_simp]
+    exact Int.ceil_lt_add_one _
+  have hhi : b + ((⌈(y - b) * (e : ℝ)⌉ : ℤ) : ℝ) / e < y + w := by linarith
+  rw [Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  exact ⟨hlo, le_of_lt hhi⟩
+
+/-- **Coprime-step coset grid pigeonhole.**  When `gcd(c, e) = 1`, the coset
+`{ b + t·c/e : t ∈ ℤ }` equals the plain `1/e`-coset, so it too meets every window of
+length `≥ 1/e` in `[0,1]`.  On a slope-`-1` circle of `L_{i,-i}` the second coordinate
+advances by `p/e` per step (with `gcd(p,e) = 1`), so this is the form the anti-diagonal
+witness search consumes. -/
+lemma bhk_prop11_grid_hit_coset_step (e : ℕ) (he : 0 < e) (c : ℕ) (hc : Nat.Coprime c e)
+    (b y w : ℝ) (hw : 1 / (e : ℝ) ≤ w) (hy0 : 0 ≤ y) (hy1 : y + w ≤ 1) :
+    ∃ t : ℤ, Int.fract (b + (t : ℝ) * c / e) ∈ Set.Icc y (y + w) := by
+  obtain ⟨t', ht'⟩ := bhk_prop11_grid_hit_coset e he b y w hw hy0 hy1
+  have hcop : IsCoprime (c : ℤ) (e : ℤ) := by
+    rw [Int.isCoprime_iff_gcd_eq_one]; simpa [Int.gcd] using hc
+  obtain ⟨a, b', hab⟩ := hcop
+  have hab' : (a : ℝ) * c + b' * e = 1 := by exact_mod_cast hab
+  have he0 : (e : ℝ) ≠ 0 := by positivity
+  refine ⟨t' * a, ?_⟩
+  have heq : b + ((t' * a : ℤ) : ℝ) * (c : ℝ) / e
+      = (b + (t' : ℝ) / e) + ((-(t' * b') : ℤ) : ℝ) := by
+    push_cast; field_simp; linear_combination (t' : ℝ) * hab'
+  rw [heq, Int.fract_add_intCast]
+  exact ht'
+
+/-- **Anti-diagonal divisibility.**  If `q ∣ i·m` then `q / gcd(i,q)` divides `m` and so
+is `≤ gcd(m, q)`.  Applied with `m = r + p` and the exceptional relation `q ∣ i·(r+p)` of
+the pair `(i, -i)`: the slope-`-1` circles of `L_{i,-i}` carry the coset on a
+`1/gcd(r+p,q)`-spaced grid, and `gcd(r+p,q) ≥ q/gcd(i,q) ≥ 6` once `q ≥ 6·gcd(i,q)`. -/
+lemma bhk_prop11_antidiag_arith (i q m : ℕ) (hi : 0 < i) (hq : 0 < q) (hdvd : q ∣ i * m) :
+    (q / Nat.gcd i q) ∣ m ∧ q / Nat.gcd i q ≤ Nat.gcd m q := by
+  have hgpos : 0 < Nat.gcd i q := Nat.gcd_pos_of_pos_left q hi
+  set d := Nat.gcd i q with hd
+  have hdi : d ∣ i := Nat.gcd_dvd_left i q
+  have hdq : d ∣ q := Nat.gcd_dvd_right i q
+  have hcop : Nat.Coprime (q / d) (i / d) := (Nat.coprime_div_gcd_div_gcd hgpos).symm
+  have key : (q / d) ∣ (i / d) * m := by
+    have e1 : d * (q / d) ∣ d * ((i / d) * m) := by
+      rw [Nat.mul_div_cancel' hdq, ← mul_assoc, Nat.mul_div_cancel' hdi]; exact hdvd
+    exact (Nat.mul_dvd_mul_iff_left hgpos).mp e1
+  have hm : (q / d) ∣ m := hcop.dvd_of_dvd_mul_left key
+  exact ⟨hm, Nat.le_of_dvd (Nat.gcd_pos_of_pos_right m hq)
+    (Nat.dvd_gcd hm ⟨d, (Nat.div_mul_cancel hdq).symm⟩)⟩
+
 end BHK
