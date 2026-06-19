@@ -2332,6 +2332,57 @@ theorem bhk_prop11_no_good_time_P (w : Fin 5 → ℕ) (hmono : StrictMono w)
   · exact bhk_prop11_no_good_time_P_r4 w hmono hpos hsum hsmall hcover t h3 h41 hxle
       (le_of_lt (not_le.mp hx)) h42a h42b
 
+/-- **Pentagon avoidance in reduced coordinates (`C ∩ P = ∅`).** Transports
+    `bhk_prop11_no_good_time_P` to the coset coordinates: at no half-integer index
+    `l` does the C-point `(X,Y) = ({v₄(l+½)}, {v₁(l+½)}) = (fract(r/q(l+½)),
+    fract(p/q(l+½)))` lie in the pentagon `P` (the six conditions h39/h40/h41/hxle/
+    h42a/h42b, correction terms kept in `w`-form since `w₁`/`w₄` need no reduction).
+    This is the pentagon analog of the `h_nogood` fact built in `core_q18`; the
+    Case 5.2.3 / `(1,±2)` kills exhibit an `l` *in* `P`, contradicting it. -/
+theorem bhk_prop11_pent_no_good (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r : ℕ) (hgpos : 0 < g) (hqpos : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) :
+    ∀ l : ℤ, ¬ (
+      1 / 6 - (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+        ≤ Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∧
+      1 / 6 - (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ))
+        ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∧
+      Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))
+        ≤ 1 / 3 + (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+          / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) ∧
+      Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 5 / 6 ∧
+      1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+        ≤ (5 / 6 - Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2))) / (w ⟨3, by omega⟩ : ℝ)
+          + (Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) - 1 / 6) / (w ⟨0, by omega⟩ : ℝ) ∧
+      1 / (3 * (w ⟨4, by omega⟩ : ℝ))
+        ≤ (5 / 6 - Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2))) / (w ⟨3, by omega⟩ : ℝ)
+          + (1 / 3 - Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))) / (w ⟨1, by omega⟩ : ℝ)) := by
+  intro l hl
+  obtain ⟨h39, h40, h41, hxle, h42a, h42b⟩ := hl
+  have hgR : (g : ℝ) ≠ 0 := by exact_mod_cast hgpos.ne'
+  have hqR : (q : ℝ) ≠ 0 := by exact_mod_cast hqpos.ne'
+  set t : ℝ := ((l : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; exact mul_ne_zero hgR hqR
+  have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (l : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+  have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+    rw [htdef, c0, c2]; field_simp
+  have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+    rw [htdef, c3, c2]; field_simp
+  refine bhk_prop11_no_good_time_P w hmono hpos hsum hsmall hcover t ?_ ?_ ?_ ?_ ?_ ?_ ?_
+  · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  · rw [e3]; exact h39
+  · rw [e0]; exact h40
+  · rw [e0]; exact h41
+  · rw [e3]; exact hxle
+  · rw [e3, e0]; exact h42a
+  · rw [e3, e0]; exact h42b
+
 /-- **BHK §5 Part 3 — the no-good-time fact (eq. (36)–(37)).** Under the
     covering assumption, there is *no* half-integer time `t` (`{w₂ t} = 1/2`)
     with runner 1 in `[1/6, 1/3]` *and* runner 4 in `[1/6, 1/2]`. Such a `t`
