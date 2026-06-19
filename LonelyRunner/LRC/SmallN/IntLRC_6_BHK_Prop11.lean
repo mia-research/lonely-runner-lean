@@ -3246,6 +3246,98 @@ lemma bhk_prop11_exc_4_neg1 (p q r : ℕ) (hq24 : 24 ≤ q) (hcop : Nat.Coprime 
     omega
   exact bhk_prop11_exc_4_neg1_hit p q r hq24 hcop hp h3p hr2q4p h_nogood
 
+/-- **BHK §5 Case 5.2.2 — the circle witness (keystone of the anti-diagonal grid).**
+    On the slope-`-1` circle through the base point `m₀` (an odd S-point index), the
+    coset's second coordinates are a `1/e`-spaced grid (`e = gcd(r+p, q)`); when that
+    circle's crossing of `R` admits a window `[yl, yl + 1/e]` mapping into `R` (the
+    `hYlo/hYhi/hXlo/hXhi` bounds, with `c₀ := {(r+p)·m₀/2q}` the circle), the
+    `bhk_prop11_grid_hit_coset_step` pigeonhole lands an S-point in `R` — negating
+    `h_nogood`. The witness index `m = m₀ + t·f` stays odd because the step `f = 2q/e`
+    is even (`e ∣ q`), and `X = c₀ - Y` with no wraparound since a point of `R` has
+    `X + Y ∈ [1/3, 5/6] < 1`. This is the page of `L_{i,-i}` geometry BHK glosses. -/
+theorem bhk_prop11_antidiag_circle_witness (p q r e f g : ℕ) (m₀ : ℤ) (yl : ℝ)
+    (hp : 0 < p) (hq : 0 < q) (hcop : Nat.Coprime p q)
+    (he6 : 6 ≤ e) (heq : e ∣ q) (hf : e * f = 2 * q) (hfev : Even f)
+    (hg : e * g = r + p) (hodd : Odd m₀)
+    (hYlo : 1 / 6 ≤ yl) (hYhi : yl + 1 / (e : ℝ) ≤ 1 / 3)
+    (hXlo : 1 / 6 ≤ Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) - (yl + 1 / e))
+    (hXhi : Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) - yl ≤ 1 / 2) :
+    ∃ l : ℤ, Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+             Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3) := by
+  have hepos : 0 < e := by omega
+  have heR : (e : ℝ) ≠ 0 := by exact_mod_cast hepos.ne'
+  have hqR : (q : ℝ) ≠ 0 := by exact_mod_cast hq.ne'
+  have hpe : Nat.Coprime p e := Nat.Coprime.coprime_dvd_right heq hcop
+  have hfpos : 0 < f := by
+    rcases Nat.eq_zero_or_pos f with h | h
+    · rw [h, Nat.mul_zero] at hf; omega
+    · exact h
+  have hfR : (f : ℝ) ≠ 0 := by exact_mod_cast hfpos.ne'
+  have h2q : (2 * (q : ℝ)) = (e : ℝ) * f := by exact_mod_cast hf.symm
+  have hgR : ((r : ℝ) + p) = (e : ℝ) * g := by exact_mod_cast hg.symm
+  obtain ⟨t, ht⟩ := bhk_prop11_grid_hit_coset_step e hepos p hpe ((p : ℝ) * m₀ / (2 * q)) yl (1 / e)
+    (le_refl _) (by linarith) (by linarith)
+  set m : ℤ := m₀ + t * f with hm
+  have hmodd : Odd m := by
+    obtain ⟨kk, hkk⟩ := hodd; obtain ⟨j, hj⟩ := hfev
+    exact ⟨kk + t * j, by rw [hm, hkk, hj]; push_cast; ring⟩
+  obtain ⟨k, hk⟩ := hmodd
+  have hidx : (((m - 1) / 2 : ℤ) : ℝ) + 1 / 2 = (m : ℝ) / 2 := by
+    have hmk : (m - 1) / 2 = k := by omega
+    rw [hmk]; have hmr : (m : ℝ) = 2 * k + 1 := by exact_mod_cast hk
+    rw [hmr]; ring
+  have hB : (p : ℝ) * m / (2 * q) = (p : ℝ) * m₀ / (2 * q) + (t : ℝ) * p / e := by
+    rw [hm]; push_cast; rw [h2q]; field_simp
+  have hAcirc : Int.fract (((r : ℝ) + p) * m / (2 * q))
+      = Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) := by
+    have key : ((r : ℝ) + p) * m / (2 * q)
+        = ((r : ℝ) + p) * m₀ / (2 * q) + ((t * g : ℤ) : ℝ) := by
+      rw [hm]; push_cast; rw [h2q, hgR]; field_simp
+    rw [key, Int.fract_add_intCast]
+  have hYval : Int.fract ((p : ℝ) * m / (2 * q)) ∈ Set.Icc yl (yl + 1 / e) := by rw [hB]; exact ht
+  have hcarry : Int.fract (((r : ℝ) + p) * m / (2 * q))
+      = Int.fract (Int.fract ((r : ℝ) * m / (2 * q)) + Int.fract ((p : ℝ) * m / (2 * q))) := by
+    rw [show ((r : ℝ) + p) * m / (2 * q)
+          = (r : ℝ) * m / (2 * q) + (p : ℝ) * m / (2 * q) from by ring]
+    conv_lhs => rw [← Int.floor_add_fract ((r : ℝ) * m / (2 * q)),
+                    ← Int.floor_add_fract ((p : ℝ) * m / (2 * q))]
+    rw [show (↑⌊(r : ℝ) * m / (2 * q)⌋ + Int.fract ((r : ℝ) * m / (2 * q)))
+          + (↑⌊(p : ℝ) * m / (2 * q)⌋ + Int.fract ((p : ℝ) * m / (2 * q)))
+          = ((⌊(r : ℝ) * m / (2 * q)⌋ + ⌊(p : ℝ) * m / (2 * q)⌋ : ℤ) : ℝ)
+            + (Int.fract ((r : ℝ) * m / (2 * q)) + Int.fract ((p : ℝ) * m / (2 * q)))
+          from by push_cast; ring]
+    rw [Int.fract_intCast_add]
+  set X : ℝ := Int.fract ((r : ℝ) * m / (2 * q)) with hXdef
+  set Y : ℝ := Int.fract ((p : ℝ) * m / (2 * q)) with hYdef
+  set c₀ : ℝ := Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) with hc0def
+  have hXnn : 0 ≤ X := Int.fract_nonneg _
+  have hYnn : 0 ≤ Y := Int.fract_nonneg _
+  have hc0XY : c₀ = Int.fract (X + Y) := by rw [← hAcirc, hcarry]
+  have hXlt1 : X < 1 := Int.fract_lt_one _
+  have hYle : Y ≤ 1 / 3 := le_trans hYval.2 hYhi
+  have he1 : (0 : ℝ) < 1 / e := by positivity
+  have hc0_gt : (1 : ℝ) / 3 < c₀ := by linarith [hXlo, hYlo, he1]
+  have hSlt : X + Y < 4 / 3 := by linarith
+  have hXY : X + Y = c₀ := by
+    rcases lt_or_ge (X + Y) 1 with hlt1 | hge1
+    · rw [hc0XY, Int.fract_eq_self.mpr ⟨by linarith, hlt1⟩]
+    · exfalso
+      have hf2 : Int.fract (X + Y) = (X + Y) - 1 := by
+        conv_lhs => rw [show X + Y = ((X + Y) - 1) + ((1 : ℤ) : ℝ) from by push_cast; ring]
+        rw [Int.fract_add_intCast, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+      rw [hf2] at hc0XY
+      linarith [hc0_gt, hSlt, hc0XY]
+  have hXeq : X = c₀ - Y := by linarith [hXY]
+  refine ⟨(m - 1) / 2, ?_, ?_⟩
+  · have hxe : (r : ℝ) / q * ((m : ℝ) / 2) = (r : ℝ) * m / (2 * q) := by
+      rw [div_mul_div_comm, mul_comm (q : ℝ) 2]
+    rw [hidx, hxe, ← hXdef, hXeq]
+    exact ⟨by linarith [hYval.2, hXlo], by linarith [hYval.1, hXhi]⟩
+  · have hye : (p : ℝ) / q * ((m : ℝ) / 2) = (p : ℝ) * m / (2 * q) := by
+      rw [div_mul_div_comm, mul_comm (q : ℝ) 2]
+    rw [hidx, hye, ← hYdef]
+    exact ⟨le_trans hYlo hYval.1, hYle⟩
+
 /-- **BHK §5 Case 5.2.2 — the anti-diagonal grid geometry (TO FILL).** For an
     anti-diagonal exceptional generator `(i, -i)` with `i ∈ {3,4,5}` and
     `gcd(q, i) > 1`: BHK pp. 26–28 show that both `Lᵢⱼ` and `L'ᵢⱼ` (the systems of
