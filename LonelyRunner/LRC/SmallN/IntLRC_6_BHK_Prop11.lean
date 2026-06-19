@@ -3338,6 +3338,130 @@ theorem bhk_prop11_antidiag_circle_witness (p q r e f g : ℕ) (m₀ : ℤ) (yl 
     rw [hidx, hye, ← hYdef]
     exact ⟨le_trans hYlo hYval.1, hYle⟩
 
+/-- **Full-crossing driver for the circle witness.**  When the base circle `c₀`
+    lies in `[1/2, 2/3]` (full vertical crossing of `R`), `yl = 1/6` and the window
+    `[1/6, 1/6 + 1/e]` maps into `R`; feeds `bhk_prop11_antidiag_circle_witness`. -/
+theorem bhk_prop11_antidiag_full (p q r e f g : ℕ) (m₀ : ℤ) (v : ℝ)
+    (hp : 0 < p) (hq : 0 < q) (hcop : Nat.Coprime p q) (he6 : 6 ≤ e) (heq : e ∣ q)
+    (hf : e * f = 2 * q) (hfev : Even f) (hg : e * g = r + p) (hodd : Odd m₀)
+    (hc0 : Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) = v) (hvlo : 1 / 2 ≤ v) (hvhi : v ≤ 2 / 3) :
+    ∃ l : ℤ, Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+             Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3) := by
+  have h1e : (1 : ℝ) / e ≤ 1 / 6 := by
+    apply one_div_le_one_div_of_le (by norm_num); exact_mod_cast he6
+  exact bhk_prop11_antidiag_circle_witness p q r e f g m₀ (1 / 6) hp hq hcop he6 heq hf hfev hg hodd
+    (by norm_num) (by linarith) (by rw [hc0]; linarith) (by rw [hc0]; linarith)
+
+/-- **Partial-crossing driver (`c₀ = 3/4`).**  Used for `(d,s) = (2,3), (4,6)` where
+    no full crossing exists; needs the finer spacing `e ≥ 12` so the window
+    `[1/4, 1/4 + 1/e]` still maps into `R`. -/
+theorem bhk_prop11_antidiag_partial (p q r e f g : ℕ) (m₀ : ℤ)
+    (hp : 0 < p) (hq : 0 < q) (hcop : Nat.Coprime p q) (he12 : 12 ≤ e) (heq : e ∣ q)
+    (hf : e * f = 2 * q) (hfev : Even f) (hg : e * g = r + p) (hodd : Odd m₀)
+    (hc0 : Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) = 3 / 4) :
+    ∃ l : ℤ, Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+             Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3) := by
+  have h1e : (1 : ℝ) / e ≤ 1 / 12 := by
+    apply one_div_le_one_div_of_le (by norm_num); exact_mod_cast he12
+  exact bhk_prop11_antidiag_circle_witness p q r e f g m₀ (1 / 4) hp hq hcop (by omega) heq hf hfev
+    hg hodd (by norm_num) (by linarith) (by rw [hc0]; linarith) (by rw [hc0]; linarith)
+
+/-- **BHK §5 Case 5.2.2 — the covering for `d = gcd(i,q) ∈ {3,4,5}`.**  In the
+    `by_contra` branch `6d ≤ q`, the coset's coordinates on the slope-`-1` circle
+    `c₀ = {s·m₀/(2d)}` (`s = (r+p)/(q/d) ∈ (d, 11d/6)`) hit `R` for an explicitly
+    chosen base `m₀` per `(d,s)` — eight full crossings plus the partial `(4,6)`.
+    This drives `bhk_prop11_antidiag_circle_witness` against `h_nogood`, closing the
+    geometric obligation BHK glosses (without bound (50) or the pentagon). -/
+theorem bhk_prop11_antidiag_cover (p q r d : ℕ)
+    (hp : 0 < p) (hcop : Nat.Coprime p q) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hd3 : 3 ≤ d) (hd5 : d ≤ 5) (hd_dvd : d ∣ q) (h6d : 6 * d ≤ q) (hQrp : (q / d) ∣ (r + p))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) : False := by
+  have hqpos : 0 < q := by omega
+  have hdpos : 0 < d := by omega
+  obtain ⟨Q, hqQ⟩ := hd_dvd
+  have hQpos : 0 < Q := by
+    rcases Nat.eq_zero_or_pos Q with h | h
+    · rw [h, Nat.mul_zero] at hqQ; omega
+    · exact h
+  have hQR : (Q : ℝ) ≠ 0 := by positivity
+  have hdR : (d : ℝ) ≠ 0 := by positivity
+  have hQdvd : Q ∣ (r + p) := by rwa [hqQ, Nat.mul_div_cancel_left _ hdpos] at hQrp
+  obtain ⟨s, hrps⟩ := hQdvd
+  have hQ6 : 6 ≤ Q := by nlinarith [h6d, hqQ]
+  have hdlt : d < s := by nlinarith [hrq, hp, hqQ, hrps, hQpos]
+  have h6s : 6 * s < 11 * d := by nlinarith [h3p, hr32, hqQ, hrps, hQpos]
+  have he_eq : Nat.gcd (r + p) q = Q * Nat.gcd s d := by
+    rw [hrps, hqQ, Nat.mul_comm d Q, Nat.gcd_mul_left]
+  set e := Nat.gcd (r + p) q with hedef
+  have heq : e ∣ q := Nat.gcd_dvd_right _ _
+  have hepos : 0 < e := by rw [hedef]; exact Nat.gcd_pos_of_pos_right _ hqpos
+  have he6 : 6 ≤ e := by
+    rw [he_eq]; exact le_trans hQ6 (Nat.le_mul_of_pos_right _ (Nat.gcd_pos_of_pos_right s hdpos))
+  obtain ⟨g, hg⟩ : e ∣ (r + p) := Nat.gcd_dvd_left _ _
+  obtain ⟨f, hf⟩ : e ∣ 2 * q := Dvd.dvd.mul_left heq 2
+  have hfev : Even f := by
+    have hq'' : q = e * (q / e) := (Nat.mul_div_cancel' heq).symm
+    refine ⟨q / e, ?_⟩
+    have : e * f = e * (q / e + q / e) := by rw [← hf]; nlinarith [hq'']
+    exact Nat.eq_of_mul_eq_mul_left hepos this
+  have hcred : ∀ m₀ : ℤ,
+      Int.fract (((r : ℝ) + p) * m₀ / (2 * q)) = Int.fract ((s : ℝ) * m₀ / (2 * d)) := by
+    intro m₀; congr 1
+    have hrpR : ((r : ℝ) + p) = (Q : ℝ) * s := by exact_mod_cast hrps
+    have hqR2 : (q : ℝ) = d * Q := by exact_mod_cast hqQ
+    rw [hrpR, hqR2]; field_simp
+  interval_cases d
+  · have hsu : s < 6 := by omega
+    interval_cases s
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 1 (2/3) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨0, by ring⟩ (by rw [hcred 1,
+          show (((4:ℕ):ℝ)*((1:ℤ):ℝ)/(2*((3:ℕ):ℝ))) = 2/3 from by push_cast; norm_num,
+          Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]) (by norm_num) (by norm_num)).choose_spec
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 3 (1/2) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨1, by ring⟩ (by rw [hcred 3,
+          show (((5:ℕ):ℝ)*((3:ℤ):ℝ)/(2*((3:ℕ):ℝ))) = (2:ℤ)+1/2 from by push_cast; norm_num,
+          Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+          (by norm_num) (by norm_num)).choose_spec
+  · have hsu : s < 8 := by omega
+    interval_cases s
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 1 (5/8) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨0, by ring⟩ (by rw [hcred 1,
+          show (((5:ℕ):ℝ)*((1:ℤ):ℝ)/(2*((4:ℕ):ℝ))) = 5/8 from by push_cast; norm_num,
+          Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]) (by norm_num) (by norm_num)).choose_spec
+    · have he12 : 12 ≤ e := by rw [he_eq, show Nat.gcd 6 4 = 2 from by decide]; omega
+      exact h_nogood _ (bhk_prop11_antidiag_partial p q r e f g 1 hp hqpos hcop he12 heq hf.symm
+        hfev hg.symm ⟨0, by ring⟩ (by rw [hcred 1,
+          show (((6:ℕ):ℝ)*((1:ℤ):ℝ)/(2*((4:ℕ):ℝ))) = 3/4 from by push_cast; norm_num,
+          Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])).choose_spec
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 3 (5/8) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨1, by ring⟩ (by rw [hcred 3,
+          show (((7:ℕ):ℝ)*((3:ℤ):ℝ)/(2*((4:ℕ):ℝ))) = (2:ℤ)+5/8 from by push_cast; norm_num,
+          Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+          (by norm_num) (by norm_num)).choose_spec
+  · have hsu : s < 10 := by omega
+    interval_cases s
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 1 (3/5) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨0, by ring⟩ (by rw [hcred 1,
+          show (((6:ℕ):ℝ)*((1:ℤ):ℝ)/(2*((5:ℕ):ℝ))) = 3/5 from by push_cast; norm_num,
+          Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]) (by norm_num) (by norm_num)).choose_spec
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 5 (1/2) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨2, by ring⟩ (by rw [hcred 5,
+          show (((7:ℕ):ℝ)*((5:ℤ):ℝ)/(2*((5:ℕ):ℝ))) = (3:ℤ)+1/2 from by push_cast; norm_num,
+          Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+          (by norm_num) (by norm_num)).choose_spec
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 7 (3/5) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨3, by ring⟩ (by rw [hcred 7,
+          show (((8:ℕ):ℝ)*((7:ℤ):ℝ)/(2*((5:ℕ):ℝ))) = (5:ℤ)+3/5 from by push_cast; norm_num,
+          Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+          (by norm_num) (by norm_num)).choose_spec
+    · exact h_nogood _ (bhk_prop11_antidiag_full p q r e f g 5 (1/2) hp hqpos hcop he6 heq hf.symm
+        hfev hg.symm ⟨2, by ring⟩ (by rw [hcred 5,
+          show (((9:ℕ):ℝ)*((5:ℤ):ℝ)/(2*((5:ℕ):ℝ))) = (4:ℤ)+1/2 from by push_cast; norm_num,
+          Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+          (by norm_num) (by norm_num)).choose_spec
+
 /-- **BHK §5 Case 5.2.2 — the anti-diagonal grid geometry (TO FILL).** For an
     anti-diagonal exceptional generator `(i, -i)` with `i ∈ {3,4,5}` and
     `gcd(q, i) > 1`: BHK pp. 26–28 show that both `Lᵢⱼ` and `L'ᵢⱼ` (the systems of
@@ -3356,7 +3480,57 @@ lemma bhk_prop11_antidiag_geom (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Copri
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
     i.natAbs ∣ q ∧ q < 6 * i.natAbs := by
-  sorry
+  have hqpos : 0 < q := by omega
+  have hipos : 0 < i := by rcases hi with rfl | rfl | rfl <;> norm_num
+  have hin : 0 < i.natAbs := Int.natAbs_pos.mpr hipos.ne'
+  have hrel : i * (p : ℤ) ≡ (-i) * r [ZMOD (q : ℤ)] :=
+    bhk_prop11_exc_relation p q r hqpos i (-i) k hk1 hk2
+  have hdvdN : q ∣ i.natAbs * (r + p) := by
+    have hz : (q : ℤ) ∣ i * ((r : ℤ) + p) := by
+      have h := Int.ModEq.dvd hrel
+      have he : (-i) * (r : ℤ) - i * p = -(i * ((r : ℤ) + p)) := by ring
+      rw [he] at h; exact (dvd_neg).mp h
+    have hia : (i.natAbs : ℤ) = i := Int.natAbs_of_nonneg hipos.le
+    have : (q : ℤ) ∣ ((i.natAbs * (r + p) : ℕ) : ℤ) := by push_cast [hia]; exact hz
+    exact_mod_cast this
+  obtain ⟨hrp_dvd, -⟩ := bhk_prop11_antidiag_arith i.natAbs q (r + p) hin hqpos hdvdN
+  rcases hi with rfl | rfl | rfl
+  · -- i = 3 (prime ⟹ d = 3)
+    have hgcdInt : Int.gcd (q : ℤ) 3 = Nat.gcd q 3 := by simp [Int.gcd, Int.natAbs_natCast]
+    have hdvd3 : (3 : ℕ) ∣ q := by
+      by_contra hnd; apply hncop
+      rw [Int.isCoprime_iff_gcd_eq_one, hgcdInt, Nat.gcd_comm]
+      exact (Nat.Prime.coprime_iff_not_dvd (by decide : Nat.Prime 3)).mpr hnd
+    rw [show (3 : ℤ).natAbs = 3 from rfl]
+    refine ⟨hdvd3, ?_⟩
+    by_contra hge; push_neg at hge
+    refine bhk_prop11_antidiag_cover p q r 3 hp hcop h3p hrq hr32 (by norm_num) (by norm_num) hdvd3
+      (by omega) ?_ h_nogood
+    rw [show (3 : ℤ).natAbs = 3 from rfl, Nat.gcd_eq_left hdvd3] at hrp_dvd; exact hrp_dvd
+  · -- i = 4 (d ∈ {2, 4})
+    rw [show (4 : ℤ).natAbs = 4 from rfl]
+    rw [show (4 : ℤ).natAbs = 4 from rfl] at hrp_dvd
+    by_cases hq4 : 4 ∣ q
+    · refine ⟨hq4, ?_⟩
+      by_contra hge; push_neg at hge
+      refine bhk_prop11_antidiag_cover p q r 4 hp hcop h3p hrq hr32 (by norm_num) (by norm_num) hq4
+        (by omega) ?_ h_nogood
+      rw [Nat.gcd_eq_left hq4] at hrp_dvd; exact hrp_dvd
+    · -- ¬ 4 ∣ q, so gcd(4,q) = 2: the conclusion's `4 ∣ q` is false, derive False
+      exfalso
+      sorry
+  · -- i = 5 (prime ⟹ d = 5)
+    have hgcdInt : Int.gcd (q : ℤ) 5 = Nat.gcd q 5 := by simp [Int.gcd, Int.natAbs_natCast]
+    have hdvd5 : (5 : ℕ) ∣ q := by
+      by_contra hnd; apply hncop
+      rw [Int.isCoprime_iff_gcd_eq_one, hgcdInt, Nat.gcd_comm]
+      exact (Nat.Prime.coprime_iff_not_dvd (by decide : Nat.Prime 5)).mpr hnd
+    rw [show (5 : ℤ).natAbs = 5 from rfl]
+    refine ⟨hdvd5, ?_⟩
+    by_contra hge; push_neg at hge
+    refine bhk_prop11_antidiag_cover p q r 5 hp hcop h3p hrq hr32 (by norm_num) (by norm_num) hdvd5
+      (by omega) ?_ h_nogood
+    rw [show (5 : ℤ).natAbs = 5 from rfl, Nat.gcd_eq_left hdvd5] at hrp_dvd; exact hrp_dvd
 
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
