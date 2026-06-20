@@ -4904,6 +4904,61 @@ lemma bhk_prop11_part6_p1 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     rw [hw4, hw2, hw0, hsqueeze]; ring
   exact bhk_prop11_part6_claim21_lonely w hpos hcover hsum hdiag hs g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
 
+/-- **BHK Part 6 — diagonal case `w₃ = w₀ + w₂` (`r = p + q`).** Closes every diagonal
+    exceptional config. Claim 19 always gives `w₄ < 2w₃`; the matching lower bound
+    contradicts it. The `p`-split: `p ≥ 3` → `claim20` (`2w₃ < w₄`); `p = 2` (so `q`, hence
+    `r = q+2`, odd from `Coprime 2 q`) → `claim20` via the two-point `witness_p2`; `p = 1` →
+    `part6_p1` (`2w₂ < w₄` + the `s = 2q+1` lonely exclusion). -/
+lemma bhk_prop11_part6 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p q r s : ℕ) (hg : 0 < g) (hp_pos : 0 < p) (hq18 : 18 ≤ q)
+    (hgp : w ⟨0, by omega⟩ = g * p) (hgq : w ⟨2, by omega⟩ = g * q)
+    (hgr : w ⟨3, by omega⟩ = g * r) (hgs : w ⟨4, by omega⟩ = g * s)
+    (hcop : Nat.Coprime p q) : False := by
+  -- diagonal ⟹ r = p + q
+  have hrpq : r = p + q := by
+    have h : g * r = g * (p + q) := by rw [← hgr, hdiag, hgp, hgq]; ring
+    exact Nat.eq_of_mul_eq_mul_left hg h
+  have hr12 : 12 ≤ r := by omega
+  have hcopr : Nat.Coprime p r := by
+    show Nat.gcd p r = 1
+    rw [hrpq, Nat.add_comm p q, Nat.gcd_add_self_right]; exact hcop
+  -- Claim 19 (always): w₄ < 2w₃
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19 w hpos hcover hsum hdiag g p r hg hp_pos hr12 hgp hgr hcopr
+  have h19R : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast h19
+  -- w₂ < w₄ (for the p = 1 branch)
+  have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ := by rw [hgq, hgr, hrpq]; nlinarith [hg, hp_pos]
+  have hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    lt_trans (by exact_mod_cast hw23) hw34
+  rcases lt_or_ge p 3 with hp3 | hp3
+  · interval_cases p
+    · -- p = 1
+      have hw0g : w ⟨0, by omega⟩ = g := by omega
+      exact bhk_prop11_part6_p1 w hpos hcover hsum hdiag hw24 g q s hg (by omega) hw0g hgq hgs
+    · -- p = 2  (q, r odd)
+      have hqodd : q % 2 = 1 := by
+        have h2 : ¬ (2 ∣ q) := by
+          intro hdvd
+          have hg2 : Nat.gcd 2 q = 2 := Nat.gcd_eq_left hdvd
+          have hc1 : Nat.gcd 2 q = 1 := hcop
+          omega
+        omega
+      have hrodd : r % 2 = 1 := by omega
+      obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness_p2 w g r hg hrodd hgp hgr
+      have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+        bhk_prop11_part6_claim20_gap w hpos hcover hsum hdiag hsmall hw34 t N m h0 hm
+      linarith
+  · -- p ≥ 3
+    have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+      bhk_prop11_part6_claim20 w hpos hcover hsum hdiag hsmall hw34 g p r hg hp3 (by omega)
+        hgp hgr hcopr
+    linarith
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
@@ -4959,8 +5014,17 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
     · rw [e0]; exact hpmem.2
     · rw [e3]; exact hrmem.1
     · rw [e3]; exact hrmem.2
-  exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-    hk1 hk2 h_nogood h14
+  -- diagonal configs (`w₃ = w₀ + w₂`, i.e. `r = p + q`) route to Part 6; the rest to the
+  -- residual exceptional-pair dispatch.
+  by_cases hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩
+  · have hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+      have h34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+        hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+      exact_mod_cast h34
+    exact bhk_prop11_part6 w hpos hcover hsum hsmall hdiag hw34 g p q r s hg_pos hp_pos hq18'
+      hgp hgq hgr hgs hcop
+  · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+      hk1 hk2 h_nogood h14
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
