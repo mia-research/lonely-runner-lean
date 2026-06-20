@@ -3980,6 +3980,30 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     · sorry -- (5,4)
     · sorry -- (5,5)
 
+/-- **BHK Part 6 — Claim 19 conclusion (the `v₅ < 2v₄` span bound).** A `1234`-gap
+    `[a,b]` (runners `w₀,w₁,w₂` via `Fin 3` and `w₃` all safe) of length at least
+    `x₄/6 = 1/(6 w₃)` forces `w₄ < 2 w₃`: runner 5 must cover the gap
+    (`gap1234_b5span` gives `w₄·(b-a) < 1/3`), and `b - a ≥ 1/(6 w₃)` then pins
+    `w₄ < 2 w₃`. This is the free half of BHK's Claim 19 (Part 6); the gap
+    construction at `t = x₁(k+1/6)` is the remaining work. -/
+lemma bhk_prop11_part6_claim19_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    {a b : ℝ} (hab : a ≤ b)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h4safe : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s))
+    (hlen : 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) ≤ b - a) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  have hspan := bhk_prop11_gap1234_b5span w hpos hcover hab hgap h4safe
+  have hw4 : (0 : ℝ) ≤ (w ⟨4, by omega⟩ : ℝ) := by positivity
+  have hstep : (w ⟨4, by omega⟩ : ℝ) * (1 / (6 * (w ⟨3, by omega⟩ : ℝ))) < 1 / 3 :=
+    lt_of_le_of_lt (mul_le_mul_of_nonneg_left hlen hw4) hspan
+  have hw3 : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h6 : (0 : ℝ) < 6 * (w ⟨3, by omega⟩ : ℝ) := by positivity
+  rw [mul_one_div, div_lt_iff₀ h6] at hstep
+  have hreal : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by linarith [hstep]
+  exact_mod_cast hreal
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
