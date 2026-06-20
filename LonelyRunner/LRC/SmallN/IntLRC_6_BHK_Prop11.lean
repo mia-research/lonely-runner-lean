@@ -4331,24 +4331,21 @@ lemma bhk_prop11_part6_claim19 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     bhk_prop11_part6_claim19_witness w g p r hg hp hr hw0 hw3 hcop
   exact bhk_prop11_part6_claim19_gap w hpos hcover hsum hdiag t0 h3 hlo hhi
 
-/-- **BHK Part 6 — Claim 20 (`v₅ > 2v₄`), lower-bound engine.** The dual of
-    `gap1234_b5span`. Let `[p, q]` be the closure of a `4`-block (runner 4 within
-    `1/6`), so its width is exactly `q − p = 1/(3w₃)` and at each edge runner 4 sits
-    at `circDist = 1/6` (safe). If both edges are also `123`-safe (runners 1,2,3
-    `≥ 1/6`) — i.e. the `4`-block lies in a `0123`-gap — then both edges are
-    `1234`-safe, so the covering assumption forces **runner 5** unsafe at `p` and `q`.
-    Hence `w₄p` and `w₄q` each lie within `1/6` of an integer, so their difference
-    `D = w₄(q−p) = w₄/(3w₃)` lies within `1/3` of the integer `k₂ − k₁`. Since
-    `v₅ > v₄` gives `D > 1/3`, that integer must be `≥ 1`, forcing `D > 2/3`, i.e.
-    `2w₃ < w₄`. With Claim 19's `w₄ < 2w₃` this is the Part-6 contradiction. -/
-lemma bhk_prop11_part6_claim20_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+/-- **BHK Part 6 — generic lower-bound engine.** Abstracts `part6_claim20_span` over the
+    block speed `b` (the runner whose `1/(3b)`-wide block sits inside a `0123`-gap). If the
+    interval `[p, q]` has width `q − p = 1/(3b)` with both endpoints `1234`-safe (runners
+    `0,1,2,3` all `≥ 1/6`), then the covering assumption forces **runner 5** unsafe at both
+    `p` and `q`. Hence `w₄p`, `w₄q` each lie within `1/6` of an integer, so their difference
+    `D = w₄(q−p) = w₄/(3b)` lies within `1/3` of the integer `k₂ − k₁`. With `b < w₄` we get
+    `D > 1/3`, so that integer is `≥ 1`, forcing `D > 2/3`, i.e. `2b < w₄`. Claim 20
+    instantiates `b = w₃`; Claim 21 instantiates `b = w₂`. -/
+lemma bhk_prop11_part6_lower_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
-    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
-    (p q : ℝ) (hpq : q - p = 1 / (3 * (w ⟨3, by omega⟩ : ℝ)))
+    (b : ℝ) (hbpos : 0 < b) (hbw4 : b < (w ⟨4, by omega⟩ : ℝ))
+    (p q : ℝ) (hpq : q - p = 1 / (3 * b))
     (hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * p))
     (hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * q)) :
-    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
-  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+    2 * b < (w ⟨4, by omega⟩ : ℝ) := by
   -- runner 5 (`w₄`) is the only runner that can witness the cover at the edges
   have hp5 : circDist ((w ⟨4, by omega⟩ : ℝ) * p) < 1 / 6 := by
     obtain ⟨i, hi⟩ := hcover p
@@ -4372,25 +4369,42 @@ lemma bhk_prop11_part6_claim20_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
   obtain ⟨k₂, hk₂⟩ : ∃ k : ℤ, |(w ⟨4, by omega⟩ : ℝ) * q - (k : ℝ)| < 1 / 6 :=
     (mem_bhkB_iff _).mpr hq5
   rw [abs_lt] at hk₁ hk₂
-  -- the displacement `D = w₄(q − p) = w₄/(3w₃)`
   have hDeq : (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
-      = (w ⟨4, by omega⟩ : ℝ) / (3 * (w ⟨3, by omega⟩ : ℝ)) := by
+      = (w ⟨4, by omega⟩ : ℝ) / (3 * b) := by
     rw [show (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
         = (w ⟨4, by omega⟩ : ℝ) * (q - p) from by ring, hpq]; ring
   have hDpos : (1 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
     rw [hDeq, lt_div_iff₀ (by positivity)]; linarith
-  -- the integer `k₂ − k₁` is `≥ 1` (else `D` would be within `1/3` of `0`)
   have hd1 : (1 : ℤ) ≤ k₂ - k₁ := by
     have hpos' : (0 : ℝ) < ((k₂ - k₁ : ℤ) : ℝ) := by
       push_cast; linarith [hk₁.1, hk₂.2, hDpos]
     have : (0 : ℤ) < k₂ - k₁ := by exact_mod_cast hpos'
     omega
-  -- so `D > (k₂ − k₁) − 1/3 ≥ 2/3`
   have hD23 : (2 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
     have hdR : (1 : ℝ) ≤ ((k₂ - k₁ : ℤ) : ℝ) := by exact_mod_cast hd1
     push_cast at hdR; linarith [hk₁.2, hk₂.1]
   rw [hDeq, lt_div_iff₀ (by positivity)] at hD23
   linarith
+
+/-- **BHK Part 6 — Claim 20 (`v₅ > 2v₄`), lower-bound engine.** The dual of
+    `gap1234_b5span`. Let `[p, q]` be the closure of a `4`-block (runner 4 within
+    `1/6`), so its width is exactly `q − p = 1/(3w₃)` and at each edge runner 4 sits
+    at `circDist = 1/6` (safe). If both edges are also `123`-safe (runners 1,2,3
+    `≥ 1/6`) — i.e. the `4`-block lies in a `0123`-gap — then both edges are
+    `1234`-safe, so the covering assumption forces **runner 5** unsafe at `p` and `q`.
+    Hence `w₄p` and `w₄q` each lie within `1/6` of an integer, so their difference
+    `D = w₄(q−p) = w₄/(3w₃)` lies within `1/3` of the integer `k₂ − k₁`. Since
+    `v₅ > v₄` gives `D > 1/3`, that integer must be `≥ 1`, forcing `D > 2/3`, i.e.
+    `2w₃ < w₄`. With Claim 19's `w₄ < 2w₃` this is the Part-6 contradiction. -/
+lemma bhk_prop11_part6_claim20_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (p q : ℝ) (hpq : q - p = 1 / (3 * (w ⟨3, by omega⟩ : ℝ)))
+    (hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * p))
+    (hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * q)) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+  bhk_prop11_part6_lower_span w hpos hcover (w ⟨3, by omega⟩ : ℝ)
+    (by exact_mod_cast hpos _) hw34 p q hpq hp hq
 
 /-- **Edge-position arithmetic for Claim 20's gap construction.** Stated over bare
     reals (`a = w₀`, `d = w₃`) so the heavy `Fin`-indexed speed casts never reach
@@ -4615,6 +4629,280 @@ lemma bhk_prop11_part6_claim20_witness_p2 (w : Fin 5 → ℕ) (g r : ℕ)
     rw [key1]; exact_mod_cast bhk_prop11_round_sixth (4 * r) (by omega)
   · refine ⟨(1 / 3) / (w ⟨0, by omega⟩ : ℝ), 0, (((r + 3) / 6 : ℕ) : ℤ), h0proof0, ?_⟩
     rw [key0]; exact_mod_cast bhk_prop11_round_sixth r (by omega)
+
+/-- **BHK Part 6 — Claim 21 (`p = 1`), edge safety.** At a `(57)`-witness time `t` (runner 2
+    at the integer block centre `m`, `w₂t = m`, with `w₀t ∈ [1/3+1/(6q), 5/12−1/(6q)]`), the
+    `w₂`-block `[pe, qe]` (`pe = (m−1/6)/w₂`, `qe = (m+1/6)/w₂`) lies in a `0123`-gap. The
+    `p = 1` reduction `w₀ = g`, `w₂ = gq` gives drift `w₀/(6w₂) = 1/(6q)`, so the runner-0
+    images at the edges are `w₀t ∓ 1/(6q) ∈ [1/3, 2/3]`. With `w₁ = w₂ − w₀`, `w₃ = w₂ + w₀`
+    (`hsum`, `hdiag`), runners `1, 3` reduce to `w₂`-images `∓` the runner-0 image, staying
+    `≥ 1/6` (block-indices `0`, `m−1`, `m` via `safe_on_Icc`); runner `2` sits at
+    `circDist = 1/6` at each edge. -/
+lemma bhk_prop11_part6_claim21_edges (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (g q : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ)))
+    (pe qe : ℝ)
+    (hpe : (w ⟨2, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6)
+    (hqe : (w ⟨2, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6) :
+    (∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * pe)) ∧
+      (∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * qe)) := by
+  have hw0pos : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1pos : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := hw2pos.ne'
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) := by exact_mod_cast hw0
+  have hw2R : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hw2
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  have hδ : (0 : ℝ) < 1 / (6 * (q : ℝ)) := one_div_pos.mpr (by linarith)
+  have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsum
+  have hdiagR : (w ⟨3, by omega⟩ : ℝ) = (w ⟨0, by omega⟩ : ℝ) + (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hdiag
+  have hw1eq : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by linarith
+  -- runner-0 images at the edges:  w₀·pe = w₀·t − 1/(6q),  w₀·qe = w₀·t + 1/(6q)
+  have e_pe0 : (w ⟨0, by omega⟩ : ℝ) * pe = (w ⟨0, by omega⟩ : ℝ) * t - 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * pe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * pe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t - 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          - (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hpe, hbt, hw0R, hw2R]; field_simp
+  have e_qe0 : (w ⟨0, by omega⟩ : ℝ) * qe = (w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * qe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * qe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          + (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hqe, hbt, hw0R, hw2R]; field_simp
+  -- runner-0 brackets [1/3, 2/3]
+  have hpe0_lo : (1 : ℝ) / 3 ≤ (w ⟨0, by omega⟩ : ℝ) * pe := by rw [e_pe0]; linarith
+  have hpe0_hi : (w ⟨0, by omega⟩ : ℝ) * pe ≤ 2 / 3 := by rw [e_pe0]; linarith
+  have hqe0_lo : (1 : ℝ) / 3 ≤ (w ⟨0, by omega⟩ : ℝ) * qe := by rw [e_qe0]; linarith
+  have hqe0_hi : (w ⟨0, by omega⟩ : ℝ) * qe ≤ 2 / 3 := by rw [e_qe0]; linarith
+  -- runner 0 safe (block 0)
+  have safe0 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) :=
+    bhk_prop11_safe_on_Icc (w ⟨0, by omega⟩ : ℝ) 0
+      (le_trans (by norm_num) hpe0_lo) (le_trans hqe0_hi (by norm_num)) hw0pos.le
+  -- runner 1 = w₂ − w₀ safe (block m − 1)
+  have safe1 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_safe_on_Icc (w ⟨1, by omega⟩ : ℝ) (m - 1) ?_ ?_ hw1pos.le
+    · have hval : (w ⟨1, by omega⟩ : ℝ) * pe = ((m : ℝ) - 1 / 6) - (w ⟨0, by omega⟩ : ℝ) * pe := by
+        rw [hw1eq]; linear_combination hpe
+      rw [show (((m - 1 : ℤ)) : ℝ) = (m : ℝ) - 1 from by push_cast; ring, hval]; linarith
+    · have hval : (w ⟨1, by omega⟩ : ℝ) * qe = ((m : ℝ) + 1 / 6) - (w ⟨0, by omega⟩ : ℝ) * qe := by
+        rw [hw1eq]; linear_combination hqe
+      rw [show (((m - 1 : ℤ)) : ℝ) = (m : ℝ) - 1 from by push_cast; ring, hval]; linarith
+  -- runner 3 = w₂ + w₀ safe (block m)
+  have safe3 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_safe_on_Icc (w ⟨3, by omega⟩ : ℝ) m ?_ ?_ hw3pos.le
+    · have hval : (w ⟨3, by omega⟩ : ℝ) * pe = ((m : ℝ) - 1 / 6) + (w ⟨0, by omega⟩ : ℝ) * pe := by
+        rw [hdiagR]; linear_combination hpe
+      rw [hval]; linarith
+    · have hval : (w ⟨3, by omega⟩ : ℝ) * qe = ((m : ℝ) + 1 / 6) + (w ⟨0, by omega⟩ : ℝ) * qe := by
+        rw [hdiagR]; linear_combination hqe
+      rw [hval]; linarith
+  -- runner 2 sits at circDist = 1/6 at each edge
+  have hfrpe : Int.fract ((m : ℝ) - 1 / 6) = 5 / 6 := by
+    rw [show ((m : ℝ) - 1 / 6) = ((m - 1 : ℤ) : ℝ) + 5 / 6 from by push_cast; ring,
+      Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩
+  have hfrqe : Int.fract ((m : ℝ) + 1 / 6) = 1 / 6 := by
+    rw [show ((m : ℝ) + 1 / 6) = ((m : ℤ) : ℝ) + 1 / 6 from by push_cast; ring,
+      Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩
+  have safe2pe : (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * pe) := by
+    rw [hpe]; simp only [circDist]; rw [hfrpe]; exact le_min (by norm_num) (by norm_num)
+  have safe2qe : (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * qe) := by
+    rw [hqe]; simp only [circDist]; rw [hfrqe]; exact le_min (by norm_num) (by norm_num)
+  have hpeqe : pe ≤ qe := by
+    have key : (w ⟨2, by omega⟩ : ℝ) * pe ≤ (w ⟨2, by omega⟩ : ℝ) * qe := by rw [hpe, hqe]; linarith
+    exact le_of_mul_le_mul_left key hw2pos
+  refine ⟨?_, ?_⟩
+  · intro i; fin_cases i
+    · exact safe0 pe ⟨le_refl _, hpeqe⟩
+    · exact safe1 pe ⟨le_refl _, hpeqe⟩
+    · exact safe2pe
+    · exact safe3 pe ⟨le_refl _, hpeqe⟩
+  · intro i; fin_cases i
+    · exact safe0 qe ⟨hpeqe, le_refl _⟩
+    · exact safe1 qe ⟨hpeqe, le_refl _⟩
+    · exact safe2qe
+    · exact safe3 qe ⟨hpeqe, le_refl _⟩
+
+/-- **BHK Part 6 — Claim 21 (`p = 1`), `(57)`-witness.** For `q ≥ 16` the window
+    `[1/3+1/(6q), 5/12−1/(6q)]` has length `1/12 − 1/(3q) ≥ 1/q`, so the `1/q`-grid meets it:
+    one `grid_hit_coset_step` (`e = q`, `c = 1`) gives an integer `tt` with
+    `{tt/q} ∈ [1/3+1/(6q), 5/12−1/(6q)]`. Taking `t = {tt/q}/w₀` and `m = tt − q⌊tt/q⌋` gives
+    `w₀t = {tt/q}` (the `(57)` value) and `w₂t = q·{tt/q} = m`. -/
+lemma bhk_prop11_part6_claim21_witness (w : Fin 5 → ℕ) (g q : ℕ)
+    (hg : 0 < g) (hq16 : 16 ≤ q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q) :
+    ∃ (t : ℝ) (m : ℤ), (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ) ∧
+      (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t ∧
+      (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ)) := by
+  have hq0 : 0 < q := by omega
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hq16R : (16 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq16
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) := by exact_mod_cast hw0
+  have hw2R : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hw2
+  have hw0ne : (w ⟨0, by omega⟩ : ℝ) ≠ 0 := by rw [hw0R]; positivity
+  have hδ : (0 : ℝ) < 1 / (6 * (q : ℝ)) := one_div_pos.mpr (by linarith)
+  -- the window has length ≥ 1/q
+  have hkey : (1 : ℝ) / (q : ℝ) + 1 / (3 * (q : ℝ)) ≤ 1 / 12 := by
+    have e : (1 : ℝ) / (q : ℝ) + 1 / (3 * (q : ℝ)) = 4 / (3 * (q : ℝ)) := by field_simp; ring
+    rw [e, div_le_iff₀ (by positivity)]; linarith
+  have hwin : (1 : ℝ) / (q : ℝ) ≤
+      (5 / 12 - 1 / (6 * (q : ℝ))) - (1 / 3 + 1 / (6 * (q : ℝ))) := by
+    have e2 : (5 / 12 - 1 / (6 * (q : ℝ))) - (1 / 3 + 1 / (6 * (q : ℝ)))
+        = 1 / 12 - 1 / (3 * (q : ℝ)) := by field_simp; ring
+    rw [e2]; linarith
+  obtain ⟨tt, htt⟩ := bhk_prop11_grid_hit_coset_step q hq0 1 (Nat.coprime_one_left q) 0
+    (1 / 3 + 1 / (6 * (q : ℝ))) ((5 / 12 - 1 / (6 * (q : ℝ))) - (1 / 3 + 1 / (6 * (q : ℝ))))
+    hwin (by positivity) (by linarith)
+  simp only [Nat.cast_one, mul_one, zero_add] at htt
+  obtain ⟨httlo, htthi⟩ := Set.mem_Icc.mp htt
+  have hcancel : (w ⟨0, by omega⟩ : ℝ) * (Int.fract ((tt : ℝ) / (q : ℝ)) / (w ⟨0, by omega⟩ : ℝ))
+      = Int.fract ((tt : ℝ) / (q : ℝ)) := by field_simp
+  refine ⟨Int.fract ((tt : ℝ) / (q : ℝ)) / (w ⟨0, by omega⟩ : ℝ), tt - q * ⌊(tt : ℝ) / (q : ℝ)⌋,
+    ?_, ?_, ?_⟩
+  · rw [hw0R, hw2R]; push_cast; simp only [Int.fract]; field_simp
+  · rw [hcancel]; exact httlo
+  · rw [hcancel]; linarith
+
+/-- **BHK Part 6 — Claim 21 (`p = 1`), lower bound `2w₂ < w₄`.** With the `(57)`-witness the
+    `w₂`-block edges are `1234`-safe (`claim21_edges`), so the generic engine
+    `part6_lower_span` with `b = w₂` forces `2w₂ < w₄`. -/
+lemma bhk_prop11_part6_claim21_lower (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) :
+    2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := hw2pos.ne'
+  set pe : ℝ := ((m : ℝ) - 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hpedef
+  set qe : ℝ := ((m : ℝ) + 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hqedef
+  have hpe : (w ⟨2, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6 := by rw [hpedef]; field_simp
+  have hqe : (w ⟨2, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6 := by rw [hqedef]; field_simp
+  have hpq : qe - pe = 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by rw [hpedef, hqedef]; field_simp; ring
+  obtain ⟨hsafeP, hsafeQ⟩ := bhk_prop11_part6_claim21_edges w hpos hsum hdiag g q hg hq hw0 hw2
+    t m hbt h0lo h0hi pe qe hpe hqe
+  exact bhk_prop11_part6_lower_span w hpos hcover (w ⟨2, by omega⟩ : ℝ) hw2pos hw24 pe qe hpq
+    hsafeP hsafeQ
+
+/-- **BHK Part 6 — Claim 21 (`p = 1`), `s = 2q+1` lonely exclusion.** Given `w₄ = 2w₂ + w₀`
+    (the squeeze `2w₂ < w₄ < 2w₃ = 2w₂ + 2w₀` forces this for `p = 1`), the `(57)`-witness's
+    right edge `qe` is a lonely time: runners `0,1,2,3` are safe (`claim21_edges`) and runner
+    `4 = 2w₂ + w₀` sits at `circDist = 2/3 − w₀t − 1/(6q) ≥ 1/4 > 1/6`. This contradicts the
+    cover. -/
+lemma bhk_prop11_part6_claim21_lonely (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩)
+    (g q : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) : False := by
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := hw2pos.ne'
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) := by exact_mod_cast hw0
+  have hw2R : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hw2
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  have hδ : (0 : ℝ) < 1 / (6 * (q : ℝ)) := one_div_pos.mpr (by linarith)
+  have hsR : (w ⟨4, by omega⟩ : ℝ)
+      = 2 * (w ⟨2, by omega⟩ : ℝ) + (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hs
+  set pe : ℝ := ((m : ℝ) - 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hpedef
+  set qe : ℝ := ((m : ℝ) + 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hqedef
+  have hpe : (w ⟨2, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6 := by rw [hpedef]; field_simp
+  have hqe : (w ⟨2, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6 := by rw [hqedef]; field_simp
+  obtain ⟨_, hsafeQ⟩ := bhk_prop11_part6_claim21_edges w hpos hsum hdiag g q hg hq hw0 hw2
+    t m hbt h0lo h0hi pe qe hpe hqe
+  -- runner 0 at qe:  w₀·qe = w₀·t + 1/(6q)
+  have e_qe0 : (w ⟨0, by omega⟩ : ℝ) * qe = (w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * qe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * qe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          + (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hqe, hbt, hw0R, hw2R]; field_simp
+  -- runner 4 = 2w₂ + w₀ is ALSO safe at qe
+  have hw4qe : (w ⟨4, by omega⟩ : ℝ) * qe
+      = ((2 * m : ℤ) : ℝ) + (1 / 3 + ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))) := by
+    rw [hsR]
+    have hdistr : (2 * (w ⟨2, by omega⟩ : ℝ) + (w ⟨0, by omega⟩ : ℝ)) * qe
+        = 2 * ((w ⟨2, by omega⟩ : ℝ) * qe) + (w ⟨0, by omega⟩ : ℝ) * qe := by ring
+    rw [hdistr, hqe, e_qe0]; push_cast; ring
+  have hfr : Int.fract ((w ⟨4, by omega⟩ : ℝ) * qe)
+      = 1 / 3 + ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ))) := by
+    rw [hw4qe, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have safe4qe : (1 : ℝ) / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * qe) := by
+    simp only [circDist]; rw [hfr]; exact le_min (by linarith) (by linarith)
+  obtain ⟨i, hi⟩ := hcover qe
+  fin_cases i
+  · exact absurd hi (not_lt.mpr (hsafeQ 0))
+  · exact absurd hi (not_lt.mpr (hsafeQ 1))
+  · exact absurd hi (not_lt.mpr (hsafeQ 2))
+  · exact absurd hi (not_lt.mpr (hsafeQ 3))
+  · exact absurd hi (not_lt.mpr safe4qe)
+
+/-- **BHK Part 6 — `p = 1` diagonal case.** Combines Claim 19 (`w₄ < 2w₃`), Claim 21's lower
+    bound (`2w₂ < w₄`), and the `s = 2q+1` lonely exclusion. The squeeze
+    `2w₂ < w₄ < 2w₃ = 2w₂ + 2w₀` plus the `p = 1` structure (`w₀ = g`, `w₂ = gq`, `w₄ = gs`)
+    forces `w₄ = 2w₂ + w₀`, which `claim21_lonely` rules out. -/
+lemma bhk_prop11_part6_p1 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q s : ℕ) (hg : 0 < g) (hq16 : 16 ≤ q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hq0 : 0 < q := by omega
+  obtain ⟨t, m, hbt, h0lo, h0hi⟩ := bhk_prop11_part6_claim21_witness w g q hg hq16 hw0 hw2
+  -- Claim 19:  w₄ < 2w₃  (p = 1, r = q+1 ≥ 12)
+  have hw0' : w ⟨0, by omega⟩ = g * 1 := by omega
+  have hw3' : w ⟨3, by omega⟩ = g * (q + 1) := by rw [hdiag, hw0, hw2]; ring
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19 w hpos hcover hsum hdiag g 1 (q + 1) hg (by norm_num) (by omega)
+      hw0' hw3' (Nat.coprime_one_left _)
+  -- Claim 21:  2w₂ < w₄
+  have h21 : 2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    bhk_prop11_part6_claim21_lower w hpos hcover hsum hdiag hw24 g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+  -- squeeze:  w₄ = 2w₂ + w₀
+  have h21n : 2 * w ⟨2, by omega⟩ < w ⟨4, by omega⟩ := by exact_mod_cast h21
+  have hsqueeze : s = 2 * q + 1 := by
+    have a1 : 2 * q < s := by
+      have h := h21n
+      rw [hw2, hw4] at h
+      have h' : g * (2 * q) = 2 * (g * q) := by ring
+      exact lt_of_mul_lt_mul_left (h'.trans_lt h) (Nat.zero_le g)
+    have a2 : s < 2 * q + 2 := by
+      have h := h19
+      rw [hw4, hw3'] at h
+      have h' : 2 * (g * (q + 1)) = g * (2 * q + 2) := by ring
+      exact lt_of_mul_lt_mul_left (h.trans_le h'.le) (Nat.zero_le g)
+    omega
+  have hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩ := by
+    rw [hw4, hw2, hw0, hsqueeze]; ring
+  exact bhk_prop11_part6_claim21_lonely w hpos hcover hsum hdiag hs g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
 
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
