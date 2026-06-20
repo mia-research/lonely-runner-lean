@@ -4569,6 +4569,53 @@ lemma bhk_prop11_part6_claim20 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
   obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness w g p r hg hp hr hw0 hw3 hcop
   exact bhk_prop11_part6_claim20_gap w hpos hcover hsum hdiag hsmall hw34 t N m h0 hm
 
+/-- For `M % 6 ∈ {0, 1, 5}`, `M/6` lies within `1/6` of the rounding `(M+3)/6`. The
+    arithmetic core of the `p = 2` (56)-witness, where `{w₃t} ∈ {M/6}` for `M ∈ {r, 4r}`. -/
+private lemma bhk_prop11_round_sixth (M : ℕ) (hM : M % 6 = 0 ∨ M % 6 = 1 ∨ M % 6 = 5) :
+    |(M : ℝ) / 6 - (((M + 3) / 6 : ℕ) : ℝ)| ≤ 1 / 6 := by
+  have hdm : (M : ℝ) = 6 * ((M / 6 : ℕ) : ℝ) + ((M % 6 : ℕ) : ℝ) := by
+    exact_mod_cast (Nat.div_add_mod M 6).symm
+  rcases hM with h | h | h
+  · have hq : (M + 3) / 6 = M / 6 := by omega
+    have hr : ((M % 6 : ℕ) : ℝ) = 0 := by rw [h]; norm_num
+    rw [hq, abs_le]; constructor <;> linarith
+  · have hq : (M + 3) / 6 = M / 6 := by omega
+    have hr : ((M % 6 : ℕ) : ℝ) = 1 := by rw [h]; norm_num
+    rw [hq, abs_le]; constructor <;> linarith
+  · have hq : (M + 3) / 6 = M / 6 + 1 := by omega
+    have hr : ((M % 6 : ℕ) : ℝ) = 5 := by rw [h]; norm_num
+    rw [hq]; push_cast; rw [abs_le]; constructor <;> linarith
+
+/-- **BHK Part 6 — Claim 20 (56)-witness, `p = 2`.** Here `q` is odd, so `r = q + 2` is
+    odd. The two `(56)`-points are `{w₃t} ∈ {r/6, 4r/6}` (`j = 0, 1`); one always falls in
+    the arc `[5/6,1)∪[0,1/6]` (`circDist ≤ 1/6`): `j = 0` for `r ≡ 1, 5 (mod 6)`, `j = 1`
+    for `r ≡ 3`. The rounding bound is `round_sixth`. -/
+lemma bhk_prop11_part6_claim20_witness_p2 (w : Fin 5 → ℕ) (g r : ℕ)
+    (hg : 0 < g) (hrodd : r % 2 = 1)
+    (hw0 : w ⟨0, by omega⟩ = g * 2) (hw3 : w ⟨3, by omega⟩ = g * r) :
+    ∃ (t : ℝ) (N m : ℤ), (w ⟨0, by omega⟩ : ℝ) * t = (N : ℝ) + 1 / 3 ∧
+      |(w ⟨3, by omega⟩ : ℝ) * t - (m : ℝ)| ≤ 1 / 6 := by
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * 2 := by exact_mod_cast hw0
+  have hw3R : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hw3
+  have hw0ne : (w ⟨0, by omega⟩ : ℝ) ≠ 0 := by rw [hw0R]; positivity
+  have key0 : (w ⟨3, by omega⟩ : ℝ) * ((1 / 3) / (w ⟨0, by omega⟩ : ℝ)) = (r : ℝ) / 6 := by
+    rw [hw3R, hw0R]; field_simp; ring
+  have key1 : (w ⟨3, by omega⟩ : ℝ) * ((4 / 3) / (w ⟨0, by omega⟩ : ℝ))
+      = ((4 * r : ℕ) : ℝ) / 6 := by rw [hw3R, hw0R]; push_cast; field_simp; ring
+  have h0proof0 : (w ⟨0, by omega⟩ : ℝ) * ((1 / 3) / (w ⟨0, by omega⟩ : ℝ)) = ((0 : ℤ) : ℝ) + 1 / 3 := by
+    rw [mul_div_cancel₀ _ hw0ne]; norm_num
+  have h0proof1 : (w ⟨0, by omega⟩ : ℝ) * ((4 / 3) / (w ⟨0, by omega⟩ : ℝ)) = ((1 : ℤ) : ℝ) + 1 / 3 := by
+    rw [mul_div_cancel₀ _ hw0ne]; norm_num
+  rcases (show r % 6 = 1 ∨ r % 6 = 3 ∨ r % 6 = 5 from by omega) with h | h | h
+  · refine ⟨(1 / 3) / (w ⟨0, by omega⟩ : ℝ), 0, (((r + 3) / 6 : ℕ) : ℤ), h0proof0, ?_⟩
+    rw [key0]; exact_mod_cast bhk_prop11_round_sixth r (by omega)
+  · refine ⟨(4 / 3) / (w ⟨0, by omega⟩ : ℝ), 1, (((4 * r + 3) / 6 : ℕ) : ℤ), h0proof1, ?_⟩
+    rw [key1]; exact_mod_cast bhk_prop11_round_sixth (4 * r) (by omega)
+  · refine ⟨(1 / 3) / (w ⟨0, by omega⟩ : ℝ), 0, (((r + 3) / 6 : ℕ) : ℤ), h0proof0, ?_⟩
+    rw [key0]; exact_mod_cast bhk_prop11_round_sixth r (by omega)
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
