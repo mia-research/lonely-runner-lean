@@ -4004,6 +4004,106 @@ lemma bhk_prop11_part6_claim19_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
   have hreal : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by linarith [hstep]
   exact_mod_cast hreal
 
+/-- **BHK Part 6 — Claim 19 (`v₅ < 2v₄`), gap construction.** In the diagonal
+    case `w₃ = w₀ + w₂` (`v₄ = 1 + v₁`): if at some time `t₀` runner 4 (`w₃`) is at
+    `2/3` and runner 1 (`w₀`) lies in `[1/6, 1/4]` — BHK's (55), the realised
+    `{w₀t₀} = 1/6 + (w₀/w₃)δ` with `δ ≤ 1/12 + q/(12p) = w₃/(12w₀)` — then
+    `w₄ < 2w₃`. Using `w₂ = w₃ − w₀` and `w₁ = w₃ − 2w₀` (from `hsum` + `hdiag`),
+    the four runner positions at `t₀` are `{w₀t₀} ∈ [1/6,1/4]`,
+    `{w₁t₀} = 2/3 − 2{w₀t₀} ∈ [1/6,1/3]`, `{w₂t₀} = 2/3 − {w₀t₀} ∈ [5/12,1/2]`,
+    `{w₃t₀} = 2/3`; each advances `< 1/6` across `[t₀, t₀ + 1/(6w₃)]`, making it a
+    `1234`-gap of length `1/(6w₃)`. `part6_claim19_span` then forces `w₄ < 2w₃`.
+    The existence of such a `t₀` (the (55) pigeonhole) is supplied separately. -/
+lemma bhk_prop11_part6_claim19_gap (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (t0 : ℝ)
+    (h3 : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t0) = 2 / 3)
+    (h0lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0))
+    (h0hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) ≤ 1 / 4) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  have hw0 : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1 : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3 : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsum
+  have hdiagR : (w ⟨3, by omega⟩ : ℝ) = (w ⟨0, by omega⟩ : ℝ) + (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hdiag
+  have hw1_eq : (w ⟨1, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - 2 * (w ⟨0, by omega⟩ : ℝ) := by
+    linarith
+  have hw2_eq : (w ⟨2, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    linarith
+  have hw0lt : (w ⟨0, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  have hw1lt : (w ⟨1, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  have hw2lt : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  -- runner positions at t₀, via the integer relations w₂ = w₃ − w₀ and w₁ = w₃ − 2w₀
+  have hf2 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t0)
+      = 2 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) := by
+    have key : (w ⟨2, by omega⟩ : ℝ) * t0
+        = ((⌊(w ⟨3, by omega⟩ : ℝ) * t0⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋ : ℤ) : ℝ)
+          + (2 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0)) := by
+      have e3 := Int.floor_add_fract ((w ⟨3, by omega⟩ : ℝ) * t0)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t0)
+      rw [h3] at e3
+      rw [hw2_eq, sub_mul, Int.cast_sub]
+      linarith [e3, e0]
+    rw [key, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t0)
+      = 2 / 3 - 2 * Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) := by
+    have key : (w ⟨1, by omega⟩ : ℝ) * t0
+        = ((⌊(w ⟨3, by omega⟩ : ℝ) * t0⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋
+              - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋ : ℤ) : ℝ)
+          + (2 / 3 - 2 * Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0)) := by
+      have e3 := Int.floor_add_fract ((w ⟨3, by omega⟩ : ℝ) * t0)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t0)
+      rw [h3] at e3
+      rw [hw1_eq, sub_mul, mul_assoc, Int.cast_sub, Int.cast_sub]
+      linarith [e3, e0]
+    rw [key, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  -- the gap interval [t₀, b], b = t₀ + 1/(6 w₃)
+  set b : ℝ := t0 + 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) with hb
+  have hbt : b - t0 = 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) := by rw [hb]; ring
+  have hab : t0 ≤ b := by rw [hb]; have : (0:ℝ) < 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) := by positivity
+                          linarith
+  have h6w3 : (0 : ℝ) < 6 * (w ⟨3, by omega⟩ : ℝ) := by positivity
+  have hadv0 : (w ⟨0, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv1 : (w ⟨1, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv2 : (w ⟨2, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv3 : (w ⟨3, by omega⟩ : ℝ) * (b - t0) = 1 / 6 := by
+    rw [hbt, mul_one_div, div_eq_iff h6w3.ne']; ring
+  -- each runner is ≥ 1/6 from the origin throughout [t₀, b]
+  have safe0 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨0, by omega⟩ : ℝ) t0 t0 b hw0.le
+    · rw [sub_self, mul_zero, add_zero]; exact h0lo
+    · linarith
+  have safe1 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨1, by omega⟩ : ℝ) t0 t0 b hw1.le
+    · rw [hf1, sub_self, mul_zero, add_zero]; linarith
+    · rw [hf1]; linarith
+  have safe2 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨2, by omega⟩ : ℝ) t0 t0 b hw2.le
+    · rw [hf2, sub_self, mul_zero, add_zero]; linarith
+    · rw [hf2]; linarith
+  have safe3 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨3, by omega⟩ : ℝ) t0 t0 b hw3.le
+    · rw [sub_self, mul_zero, add_zero, h3]; norm_num
+    · rw [h3]; linarith
+  have hgap : ∀ s ∈ Set.Icc t0 b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    fin_cases i
+    · exact safe0 s hs
+    · exact safe1 s hs
+    · exact safe2 s hs
+  exact bhk_prop11_part6_claim19_span w hpos hcover hab hgap safe3 (le_of_eq hbt.symm)
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
