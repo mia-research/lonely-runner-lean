@@ -4331,6 +4331,67 @@ lemma bhk_prop11_part6_claim19 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     bhk_prop11_part6_claim19_witness w g p r hg hp hr hw0 hw3 hcop
   exact bhk_prop11_part6_claim19_gap w hpos hcover hsum hdiag t0 h3 hlo hhi
 
+/-- **BHK Part 6 — Claim 20 (`v₅ > 2v₄`), lower-bound engine.** The dual of
+    `gap1234_b5span`. Let `[p, q]` be the closure of a `4`-block (runner 4 within
+    `1/6`), so its width is exactly `q − p = 1/(3w₃)` and at each edge runner 4 sits
+    at `circDist = 1/6` (safe). If both edges are also `123`-safe (runners 1,2,3
+    `≥ 1/6`) — i.e. the `4`-block lies in a `0123`-gap — then both edges are
+    `1234`-safe, so the covering assumption forces **runner 5** unsafe at `p` and `q`.
+    Hence `w₄p` and `w₄q` each lie within `1/6` of an integer, so their difference
+    `D = w₄(q−p) = w₄/(3w₃)` lies within `1/3` of the integer `k₂ − k₁`. Since
+    `v₅ > v₄` gives `D > 1/3`, that integer must be `≥ 1`, forcing `D > 2/3`, i.e.
+    `2w₃ < w₄`. With Claim 19's `w₄ < 2w₃` this is the Part-6 contradiction. -/
+lemma bhk_prop11_part6_claim20_span (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (p q : ℝ) (hpq : q - p = 1 / (3 * (w ⟨3, by omega⟩ : ℝ)))
+    (hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * p))
+    (hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * q)) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  -- runner 5 (`w₄`) is the only runner that can witness the cover at the edges
+  have hp5 : circDist ((w ⟨4, by omega⟩ : ℝ) * p) < 1 / 6 := by
+    obtain ⟨i, hi⟩ := hcover p
+    fin_cases i
+    · exact absurd hi (not_lt.mpr (hp 0))
+    · exact absurd hi (not_lt.mpr (hp 1))
+    · exact absurd hi (not_lt.mpr (hp 2))
+    · exact absurd hi (not_lt.mpr (hp 3))
+    · exact hi
+  have hq5 : circDist ((w ⟨4, by omega⟩ : ℝ) * q) < 1 / 6 := by
+    obtain ⟨i, hi⟩ := hcover q
+    fin_cases i
+    · exact absurd hi (not_lt.mpr (hq 0))
+    · exact absurd hi (not_lt.mpr (hq 1))
+    · exact absurd hi (not_lt.mpr (hq 2))
+    · exact absurd hi (not_lt.mpr (hq 3))
+    · exact hi
+  -- each `w₄`-image lies within `1/6` of an integer
+  obtain ⟨k₁, hk₁⟩ : ∃ k : ℤ, |(w ⟨4, by omega⟩ : ℝ) * p - (k : ℝ)| < 1 / 6 :=
+    (mem_bhkB_iff _).mpr hp5
+  obtain ⟨k₂, hk₂⟩ : ∃ k : ℤ, |(w ⟨4, by omega⟩ : ℝ) * q - (k : ℝ)| < 1 / 6 :=
+    (mem_bhkB_iff _).mpr hq5
+  rw [abs_lt] at hk₁ hk₂
+  -- the displacement `D = w₄(q − p) = w₄/(3w₃)`
+  have hDeq : (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
+      = (w ⟨4, by omega⟩ : ℝ) / (3 * (w ⟨3, by omega⟩ : ℝ)) := by
+    rw [show (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
+        = (w ⟨4, by omega⟩ : ℝ) * (q - p) from by ring, hpq]; ring
+  have hDpos : (1 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
+    rw [hDeq, lt_div_iff₀ (by positivity)]; linarith
+  -- the integer `k₂ − k₁` is `≥ 1` (else `D` would be within `1/3` of `0`)
+  have hd1 : (1 : ℤ) ≤ k₂ - k₁ := by
+    have hpos' : (0 : ℝ) < ((k₂ - k₁ : ℤ) : ℝ) := by
+      push_cast; linarith [hk₁.1, hk₂.2, hDpos]
+    have : (0 : ℤ) < k₂ - k₁ := by exact_mod_cast hpos'
+    omega
+  -- so `D > (k₂ − k₁) − 1/3 ≥ 2/3`
+  have hD23 : (2 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
+    have hdR : (1 : ℝ) ≤ ((k₂ - k₁ : ℤ) : ℝ) := by exact_mod_cast hd1
+    push_cast at hdR; linarith [hk₁.2, hk₂.1]
+  rw [hDeq, lt_div_iff₀ (by positivity)] at hD23
+  linarith
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
