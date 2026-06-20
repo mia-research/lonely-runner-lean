@@ -4520,6 +4520,55 @@ lemma bhk_prop11_part6_claim20_gap (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     · exact safe3qe
   exact bhk_prop11_part6_claim20_span w hpos hcover hw34 pe qe hpq hp hq
 
+/-- **BHK Part 6 — Claim 20 (56)-witness, `p ≥ 3`.** The `(56)`-condition: there is a
+    time `t` with runner 1 at `1/3` (`w₀t = N + 1/3`, take `t = (n+1/3)/w₀`) and runner 4
+    inside a `4`-block (`|w₃t − m| ≤ 1/6`). With `w₀ = g·p`, `w₃ = g·r` (`gcd(p,r)=1`),
+    `w₃t + 1/6 = r/(3p) + 1/6 + n·(r/p)` is an `r/p`-step (i.e. `1/p`-spaced) coset; it meets
+    the length-`1/3` window `[0, 1/3]` (so `{w₃t} ∈ [5/6,1)∪[0,1/6]`) once `1/p ≤ 1/3`, i.e.
+    `p ≥ 3` — one `grid_hit_coset_step`. (BHK handles `p = 1, 2` separately; here `p ≥ 3`.) -/
+lemma bhk_prop11_part6_claim20_witness (w : Fin 5 → ℕ) (g p r : ℕ)
+    (hg : 0 < g) (hp : 3 ≤ p) (hr : 0 < r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    ∃ (t : ℝ) (N m : ℤ), (w ⟨0, by omega⟩ : ℝ) * t = (N : ℝ) + 1 / 3 ∧
+      |(w ⟨3, by omega⟩ : ℝ) * t - (m : ℝ)| ≤ 1 / 6 := by
+  have hp_pos : 0 < p := by omega
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg
+  have hpR : (0 : ℝ) < (p : ℝ) := by exact_mod_cast hp_pos
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hw0
+  have hw3R : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hw3
+  have hw0pos : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by rw [hw0R]; positivity
+  have hw0ne : (w ⟨0, by omega⟩ : ℝ) ≠ 0 := hw0pos.ne'
+  obtain ⟨n, hn⟩ := bhk_prop11_grid_hit_coset_step p hp_pos r hcop.symm
+    ((r : ℝ) / (3 * (p : ℝ)) + 1 / 6) 0 (1 / 3)
+    (one_div_le_one_div_of_le (by norm_num) (by exact_mod_cast hp)) (le_refl 0) (by norm_num)
+  refine ⟨((n : ℝ) + 1 / 3) / (w ⟨0, by omega⟩ : ℝ), n,
+    ⌊(w ⟨3, by omega⟩ : ℝ) * (((n : ℝ) + 1 / 3) / (w ⟨0, by omega⟩ : ℝ)) + 1 / 6⌋, ?_, ?_⟩
+  · field_simp
+  · set W : ℝ := (w ⟨3, by omega⟩ : ℝ) * (((n : ℝ) + 1 / 3) / (w ⟨0, by omega⟩ : ℝ)) with hW
+    have heqW : W + 1 / 6 = (r : ℝ) / (3 * (p : ℝ)) + 1 / 6 + (n : ℝ) * (r : ℝ) / (p : ℝ) := by
+      rw [hW, hw3R, hw0R]; field_simp; ring
+    have hfractW : Int.fract (W + 1 / 6) ∈ Set.Icc (0 : ℝ) (0 + 1 / 3) := by rw [heqW]; exact hn
+    obtain ⟨hlo, hhi⟩ := hfractW
+    have hflo := Int.floor_add_fract (W + 1 / 6)
+    rw [abs_le]
+    exact ⟨by linarith, by linarith⟩
+
+/-- **BHK Part 6 — Claim 20 (`v₅ > 2v₄`), `p ≥ 3` case.** Combines the `(56)`-witness with
+    the gap construction: the diagonal config with `p ≥ 3` forces `2w₃ < w₄`. -/
+lemma bhk_prop11_part6_claim20 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p r : ℕ) (hg : 0 < g) (hp : 3 ≤ p) (hr : 0 < r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness w g p r hg hp hr hw0 hw3 hcop
+  exact bhk_prop11_part6_claim20_gap w hpos hcover hsum hdiag hsmall hw34 t N m h0 hm
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
