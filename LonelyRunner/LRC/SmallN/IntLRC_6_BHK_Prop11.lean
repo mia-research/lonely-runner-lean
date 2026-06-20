@@ -4104,6 +4104,59 @@ lemma bhk_prop11_part6_claim19_gap (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
     · exact safe2 s hs
   exact bhk_prop11_part6_claim19_span w hpos hcover hab hgap safe3 (le_of_eq hbt.symm)
 
+/-- **BHK Part 6 — Claim 19 (55)-witness existence.** The times at which runner 4
+    (`w₃ = g·r`) is at `2/3` are `t₀ = (n + 2/3)/w₃`, `n ∈ ℤ`; at such a time runner 1
+    (`w₀ = g·p`) sits at `{(w₀/w₃)(n + 2/3)} = {2p/(3r) + n·p/r}`, a `1/r`-spaced coset
+    (`gcd(p,r) = 1`). Since `r ≥ 12`, that coset meets the window `[1/6, 1/4]` of length
+    `1/12 ≥ 1/r` (`grid_hit_coset_step`), producing a `t₀` satisfying the hypotheses of
+    `part6_claim19_gap`. Unlike BHK's `t = x₁(k+1/6)` parametrisation (which forces a
+    `p = 1/2/≥3` split), searching all of runner 4's `2/3`-times needs no such split. -/
+lemma bhk_prop11_part6_claim19_witness (w : Fin 5 → ℕ) (g p r : ℕ)
+    (hg : 0 < g) (hp : 0 < p) (hr : 12 ≤ r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    ∃ t0 : ℝ, Int.fract ((w ⟨3, by omega⟩ : ℝ) * t0) = 2 / 3 ∧
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) ∈ Set.Icc (1 / 6 : ℝ) (1 / 4) := by
+  have hr0 : 0 < r := by omega
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hw0
+  have hw3R : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hw3
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg
+  have hrR : (0 : ℝ) < (r : ℝ) := by exact_mod_cast hr0
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by rw [hw3R]; positivity
+  have hw3ne : (w ⟨3, by omega⟩ : ℝ) ≠ 0 := hw3pos.ne'
+  obtain ⟨n, hn⟩ := bhk_prop11_grid_hit_coset_step r hr0 p hcop
+    (2 * (p : ℝ) / (3 * (r : ℝ))) (1 / 6) (1 / 12)
+    (one_div_le_one_div_of_le (by norm_num) (by exact_mod_cast hr)) (by norm_num) (by norm_num)
+  refine ⟨((n : ℝ) + 2 / 3) / (w ⟨3, by omega⟩ : ℝ), ?_, ?_⟩
+  · have e : (w ⟨3, by omega⟩ : ℝ) * (((n : ℝ) + 2 / 3) / (w ⟨3, by omega⟩ : ℝ))
+        = (n : ℝ) + 2 / 3 := by field_simp
+    rw [e, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩
+  · have e : (w ⟨0, by omega⟩ : ℝ) * (((n : ℝ) + 2 / 3) / (w ⟨3, by omega⟩ : ℝ))
+        = 2 * (p : ℝ) / (3 * (r : ℝ)) + (n : ℝ) * (p : ℝ) / (r : ℝ) := by
+      rw [hw0R, hw3R]; field_simp; ring
+    rw [e]
+    obtain ⟨hlo, hhi⟩ := Set.mem_Icc.mp hn
+    exact Set.mem_Icc.mpr ⟨hlo, by linarith [hhi, show (1:ℝ) / 6 + 1 / 12 = 1 / 4 from by norm_num]⟩
+
+/-- **BHK Part 6 — Claim 19 (full): `v₅ < 2v₄` in the diagonal case.** Combines the
+    (55)-witness existence (`part6_claim19_witness`) with the gap construction
+    (`part6_claim19_gap`): under `hsum`, `hdiag : w₃ = w₀ + w₂`, and the reduced
+    structure `w₀ = g·p`, `w₃ = g·r` with `gcd(p,r) = 1` and `r ≥ 12` (always true here,
+    `r = p + q ≥ q ≥ 18`), the covering runners force `w₄ < 2w₃`. This is the upper half
+    of BHK's Part 6 squeeze; the lower half (`2w₃ < w₄`, Claim 20) is separate. -/
+lemma bhk_prop11_part6_claim19 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (g p r : ℕ) (hg : 0 < g) (hp : 0 < p) (hr : 12 ≤ r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  obtain ⟨t0, h3, hlo, hhi⟩ :=
+    bhk_prop11_part6_claim19_witness w g p r hg hp hr hw0 hw3 hcop
+  exact bhk_prop11_part6_claim19_gap w hpos hcover hsum hdiag t0 h3 hlo hhi
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
