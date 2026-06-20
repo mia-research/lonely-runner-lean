@@ -3675,6 +3675,142 @@ lemma bhk_prop11_antidiag_geom (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Copri
       (by omega) ?_ h_nogood
     rw [show (5 : ℤ).natAbs = 5 from rfl, Nat.gcd_eq_left hdvd5] at hrp_dvd; exact hrp_dvd
 
+/-- **BHK §5 Case 5.2.2 — the anti-diagonal pair `(2, -2)` with `gcd(2, q) > 1`.**
+    The remaining gcd-`> 1` anti-diagonal not covered by `antidiag_geom` (`i ∈
+    {3,4,5}`). Since `2 ∣ q`, the relation `2 p ≡ -2 r (mod q)` forces `(q/2) ∣
+    (r+p)`, hence `r + p = 3q/2` (`s = 3`) and `e = gcd(r+p, q) = q/2`. The slope-`-1`
+    circle has `c₀ = 3/4` (partial crossing): the partial driver applies for `q ≥ 24`
+    (`e ≥ 12`), and `q ∈ {18, 20, 22}` get explicit `R`-witnesses. This is structurally
+    the `i = 4`, `gcd = 2` branch of `antidiag_geom` plus the `q = 20` case. -/
+lemma bhk_prop11_exc_2_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hncop : ¬ IsCoprime (q : ℤ) 2)
+    (hk1 : Int.fract (((2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hqpos : 0 < q := by omega
+  have hrel : (2 : ℤ) * (p : ℤ) ≡ (-2) * r [ZMOD (q : ℤ)] :=
+    bhk_prop11_exc_relation p q r hqpos 2 (-2) k hk1 hk2
+  have hdvdN : q ∣ 2 * (r + p) := by
+    have hz : (q : ℤ) ∣ 2 * ((r : ℤ) + p) := by
+      have h := Int.ModEq.dvd hrel
+      have he : (-2) * (r : ℤ) - 2 * p = -(2 * ((r : ℤ) + p)) := by ring
+      rw [he] at h; exact (dvd_neg).mp h
+    exact_mod_cast hz
+  have h2dvd : 2 ∣ q := by
+    by_contra hnd
+    apply hncop
+    rw [Int.isCoprime_iff_gcd_eq_one]
+    have hgcdInt : Int.gcd (q : ℤ) 2 = Nat.gcd q 2 := by simp [Int.gcd, Int.natAbs_natCast]
+    rw [hgcdInt, Nat.gcd_comm]
+    exact (Nat.Prime.coprime_iff_not_dvd (by decide : Nat.Prime 2)).mpr hnd
+  have hgcd2 : Nat.gcd 2 q = 2 := Nat.gcd_eq_left h2dvd
+  obtain ⟨hrp_dvd, -⟩ := bhk_prop11_antidiag_arith 2 q (r + p) (by norm_num) hqpos hdvdN
+  rw [hgcd2] at hrp_dvd
+  by_cases hq24 : 24 ≤ q
+  · -- partial crossing: `e = q/2 ≥ 12`, `c₀ = 3/4`
+    obtain ⟨Q, hqQ⟩ := h2dvd
+    have hQpos : 0 < Q := by omega
+    have hQdvd : Q ∣ (r + p) := by rwa [hqQ, Nat.mul_div_cancel_left _ (by norm_num)] at hrp_dvd
+    obtain ⟨s, hrps⟩ := hQdvd
+    have hs3 : s = 3 := by
+      have h1 : 2 < s := by nlinarith [hrq, hp, hqQ, hrps, hQpos]
+      have h2 : 6 * s < 22 := by nlinarith [h3p, hr32, hqQ, hrps, hQpos]
+      omega
+    subst hs3
+    have he_eq : Nat.gcd (r + p) q = Q := by
+      rw [hrps, hqQ, Nat.mul_comm 2 Q, Nat.gcd_mul_left]; norm_num
+    set e := Nat.gcd (r + p) q with hedef
+    have heq : e ∣ q := Nat.gcd_dvd_right _ _
+    have hepos : 0 < e := by rw [hedef]; exact Nat.gcd_pos_of_pos_right _ hqpos
+    have he12 : 12 ≤ e := by rw [he_eq]; omega
+    obtain ⟨g, hg⟩ : e ∣ (r + p) := Nat.gcd_dvd_left _ _
+    obtain ⟨f, hf⟩ : e ∣ 2 * q := Dvd.dvd.mul_left heq 2
+    have hfev : Even f := by
+      have hq'' : q = e * (q / e) := (Nat.mul_div_cancel' heq).symm
+      refine ⟨q / e, ?_⟩
+      have : e * f = e * (q / e + q / e) := by rw [← hf]; nlinarith [hq'']
+      exact Nat.eq_of_mul_eq_mul_left hepos this
+    refine h_nogood _ (bhk_prop11_antidiag_partial p q r e f g 1 hp hqpos hcop he12 heq hf.symm
+      hfev hg.symm ⟨0, by ring⟩ ?_).choose_spec
+    have hrpR : ((r : ℝ) + p) = (Q : ℝ) * 3 := by exact_mod_cast hrps
+    have hqR2 : (q : ℝ) = 2 * Q := by exact_mod_cast hqQ
+    have hQR : (Q : ℝ) ≠ 0 := by positivity
+    rw [show (((r : ℝ) + p) * ((1 : ℤ) : ℝ) / (2 * q)) = 3 / 4 from by
+          rw [hrpR, hqR2]; push_cast; field_simp; ring,
+      Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  · -- explicit small-`q` witnesses: `q ∈ {18, 20, 22}` (grid too coarse, `e = q/2 < 12`)
+    interval_cases q
+    · -- q = 18
+      have hrp27 : r + p = 27 := by omega
+      have hp6 : p < 6 := by omega
+      interval_cases p <;> [skip; (exact absurd hcop (by decide)); (exact absurd hcop (by decide));
+        (exact absurd hcop (by decide)); skip]
+      · have hr : r = 26 := by omega
+        subst hr
+        exact h_nogood 4 ⟨by rw [show ((26:ℕ):ℝ)/((18:ℕ):ℝ)*(((4:ℤ):ℝ)+1/2) = (6:ℤ)+1/2 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((1:ℕ):ℝ)/((18:ℕ):ℝ)*(((4:ℤ):ℝ)+1/2) = 1/4 from by push_cast; norm_num,
+            Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+      · have hr : r = 22 := by omega
+        subst hr
+        exact h_nogood 4 ⟨by rw [show ((22:ℕ):ℝ)/((18:ℕ):ℝ)*(((4:ℤ):ℝ)+1/2) = (5:ℤ)+1/2 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((5:ℕ):ℝ)/((18:ℕ):ℝ)*(((4:ℤ):ℝ)+1/2) = (1:ℤ)+1/4 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+    · exact absurd h2dvd (by decide)
+    · -- q = 20
+      have hrp30 : r + p = 30 := by omega
+      have hp7 : p < 7 := by omega
+      interval_cases p <;> [skip; (exact absurd hcop (by decide)); skip;
+        (exact absurd hcop (by decide)); (exact absurd hcop (by decide)); (exact absurd hcop (by decide))]
+      · have hr : r = 29 := by omega
+        subst hr
+        exact h_nogood 6 ⟨by rw [show ((29:ℕ):ℝ)/((20:ℕ):ℝ)*(((6:ℤ):ℝ)+1/2) = (9:ℤ)+17/40 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((1:ℕ):ℝ)/((20:ℕ):ℝ)*(((6:ℤ):ℝ)+1/2) = 13/40 from by push_cast; norm_num,
+            Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+      · have hr : r = 27 := by omega
+        subst hr
+        exact h_nogood 8 ⟨by rw [show ((27:ℕ):ℝ)/((20:ℕ):ℝ)*(((8:ℤ):ℝ)+1/2) = (11:ℤ)+19/40 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((3:ℕ):ℝ)/((20:ℕ):ℝ)*(((8:ℤ):ℝ)+1/2) = (1:ℤ)+11/40 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+    · exact absurd h2dvd (by decide)
+    · -- q = 22
+      have hrp33 : r + p = 33 := by omega
+      have hp8 : p < 8 := by omega
+      interval_cases p <;> [skip; (exact absurd hcop (by decide)); skip;
+        (exact absurd hcop (by decide)); skip; (exact absurd hcop (by decide)); skip]
+      · have hr : r = 32 := by omega
+        subst hr
+        exact h_nogood 6 ⟨by rw [show ((32:ℕ):ℝ)/((22:ℕ):ℝ)*(((6:ℤ):ℝ)+1/2) = (9:ℤ)+5/11 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((1:ℕ):ℝ)/((22:ℕ):ℝ)*(((6:ℤ):ℝ)+1/2) = 13/44 from by push_cast; norm_num,
+            Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+      · have hr : r = 30 := by omega
+        subst hr
+        exact h_nogood 16 ⟨by rw [show ((30:ℕ):ℝ)/((22:ℕ):ℝ)*(((16:ℤ):ℝ)+1/2) = (22:ℤ)+1/2 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((3:ℕ):ℝ)/((22:ℕ):ℝ)*(((16:ℤ):ℝ)+1/2) = (2:ℤ)+1/4 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+      · have hr : r = 28 := by omega
+        subst hr
+        exact h_nogood 14 ⟨by rw [show ((28:ℕ):ℝ)/((22:ℕ):ℝ)*(((14:ℤ):ℝ)+1/2) = (18:ℤ)+5/11 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((5:ℕ):ℝ)/((22:ℕ):ℝ)*(((14:ℤ):ℝ)+1/2) = (3:ℤ)+13/44 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+      · have hr : r = 26 := by omega
+        subst hr
+        exact h_nogood 16 ⟨by rw [show ((26:ℕ):ℝ)/((22:ℕ):ℝ)*(((16:ℤ):ℝ)+1/2) = (19:ℤ)+1/2 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num,
+          by rw [show ((7:ℕ):ℝ)/((22:ℕ):ℝ)*(((16:ℤ):ℝ)+1/2) = (5:ℤ)+1/4 from by push_cast; norm_num,
+            Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
+    · exact absurd h2dvd (by decide)
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -3737,7 +3873,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     · sorry -- (2,-3)
     · by_cases hc : IsCoprime (q : ℤ) 2
       · exact bhk_prop11_exc_anti_diag p q r (by omega) hp h3p hrq hr32 2 (by norm_num) hc k hk1 hk2
-      · sorry -- (2,-2) gcd(2,q) > 1 — needs grid q < 12
+      · exact bhk_prop11_exc_2_neg2 p q r hq18 hcop hp h3p hrq hr32 k hc hk1 hk2 h_nogood
     · exact bhk_prop11_exc_2_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (2 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 2 k (by norm_num) (by norm_num) hk1
