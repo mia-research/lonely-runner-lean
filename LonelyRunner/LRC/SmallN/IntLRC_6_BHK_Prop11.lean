@@ -4302,12 +4302,13 @@ lemma bhk_prop11_exc_1_2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos :
 
 -- grid-witness on a slant-bound window: large rational-arithmetic proof
 set_option maxHeartbeats 3200000 in
-/-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, `q ≥ 25`.** Rigidity `2r+p=3q` puts the
-    cone points on the line `Y={3/2-2X}` (branch `X∈(1/4,3/4)`), a `1/q`-grid in `X`. The two
-    *slants* of `P` bind (not the box); their linear-in-`X` cuts `Xlo` (h42b) and `Xhi` (h42a)
-    span width `r(5s-4r)/(36qs) ≥ 1/q` (⟺ `5rs-4r²-36s ≥ 0`, holding for `q≥25` since then
-    `r≥34, s≥r+1`). A grid point in `[Xlo,Xhi] ⊆ P` contradicts `pent_no_good`. The narrow tail
-    `q∈{19,21,23}` (where the window `< 1/q`) is handled by `bhk_prop11_exc_1_neg2_small`. -/
+/-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, wide window (`hwb : 36s ≤ r(5s-4r)`).**
+    Rigidity `2r+p=3q` puts the cone points on the line `Y={3/2-2X}` (branch `X∈(1/4,3/4)`), a
+    `1/q`-grid in `X`. The two *slants* of `P` bind (not the box); their linear-in-`X` cuts `Xlo`
+    (h42b) and `Xhi` (h42a) span width `r(5s-4r)/(36qs)`, which is `≥ 1/q` exactly when
+    `5rs-4r²-36s ≥ 0` (the hypothesis `hwb`). A grid point in `[Xlo,Xhi] ⊆ P` contradicts
+    `pent_no_good`. `hwb` holds whenever `q ≥ 25` (then `r≥34, s≥r+1`); the finite set of
+    instances with `36s > r(5s-4r)` (`q∈{19,21,23}`) goes to `bhk_prop11_exc_1_neg2_small`. -/
 lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
@@ -4316,7 +4317,8 @@ lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) 
     (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
     (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
     (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
-    (hrs : r < s) (hq25 : 25 ≤ q) (hrig : 2 * r + p = 3 * q) : False := by
+    (hrs : r < s) (hwb : 36 * (s : ℝ) ≤ (r : ℝ) * (5 * s - 4 * r))
+    (hrig : 2 * r + p = 3 * q) : False := by
   have hpent := bhk_prop11_pent_no_good w hmono hpos hsum hsmall hcover g p q r hg hq c0 c2 c3
   have hqR : (0:ℝ) < q := by exact_mod_cast hq
   have hsR : (0:ℝ) < (s:ℝ) := by exact_mod_cast (show 0 < s by omega)
@@ -4332,9 +4334,6 @@ lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) 
   have hp0 : (p:ℝ) ≠ 0 := hpR0.ne'
   have hqp : (0:ℝ) < (q:ℝ) - p := by linarith [hpq]
   have hqp0 : ((q:ℝ) - p) ≠ 0 := hqp.ne'
-  -- regime facts: q≥25 ⟹ r≥34 (since 6r ≥ 8q+1), and s ≥ r+1
-  have hr34 : 34 ≤ r := by omega
-  have hr34R : (34:ℝ) ≤ r := by exact_mod_cast hr34
   have hsr1R : (r:ℝ) + 1 ≤ s := by exact_mod_cast (show r + 1 ≤ s by omega)
   have hrrR : (p:ℝ) = 3 * q - 2 * r := by
     have h : (2:ℝ) * r + p = 3 * q := by exact_mod_cast hrig
@@ -4377,13 +4376,10 @@ lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) 
     have e1 : (p:ℝ) + 2*r = 3*q := by rw [hrrR]; ring
     have e2 : 2*(r:ℝ) - ((q:ℝ)-p) = 2*q := by rw [hrrR]; ring
     rw [e1, e2, hrrR]; field_simp; ring
-  -- 1/q ≤ width  ⟺  5rs - 4r² - 36s ≥ 0  (q≥25 ⟹ r≥34, s≥r+1)
-  have hnum : 36 * (s:ℝ) ≤ (r:ℝ) * (5*s - 4*r) := by
-    nlinarith [hr34R, hsr1R, mul_nonneg (show (0:ℝ) ≤ s - (r+1) by linarith)
-      (show (0:ℝ) ≤ 5*(r:ℝ) - 36 by linarith), sq_nonneg ((r:ℝ) - 34)]
+  -- 1/q ≤ width  ⟺  5rs - 4r² - 36s ≥ 0  (the hypothesis `hwb`)
   have hw : 1 / (q:ℝ) ≤ Xhi - Xlo := by
     rw [hwidth, div_le_div_iff₀ hqR (by positivity)]
-    nlinarith [hnum, hqR, hsR, hrR]
+    nlinarith [hwb, hqR, hsR, hrR]
   -- 4r > 3q and p < 2r and 3r < 7q (regime), used for the endpoint locations
   have h4r3q : 3*(q:ℝ) < 4*r := by
     have : (8:ℝ)*q + 1 ≤ 6*r := by exact_mod_cast (show 8*q + 1 ≤ 6*r by omega)
