@@ -4300,8 +4300,8 @@ lemma bhk_prop11_exc_1_2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos :
     exact bhk_prop11_exc_1_2_pentkill w hmono hpos hsum hsmall hcover g p q r s hg hq
       c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hq18 hrig (by omega)
 
--- grid-witness on a slant-bound window: heavy rational-arithmetic proof
-set_option maxHeartbeats 1600000 in
+-- grid-witness on a slant-bound window: large rational-arithmetic proof
+set_option maxHeartbeats 3200000 in
 /-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, `q ≥ 25`.** Rigidity `2r+p=3q` puts the
     cone points on the line `Y={3/2-2X}` (branch `X∈(1/4,3/4)`), a `1/q`-grid in `X`. The two
     *slants* of `P` bind (not the box); their linear-in-`X` cuts `Xlo` (h42b) and `Xhi` (h42a)
@@ -4414,14 +4414,90 @@ lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) 
       linarith [h1, h2]
     rw [hXlo, lt_div_iff₀ hDbpos]; linarith [hpos']
   have hXloXhi : Xlo ≤ Xhi := by linarith [hw, one_div_pos.mpr hqR]
-  -- STAGE 2 (TODO, ports from `bhk_prop11_exc_1_2_pentkill`):
-  --   • grid_hit_coset_step q hcop_rq r (r/(2q)) Xlo (Xhi-Xlo) hw → X ∈ [Xlo, Xhi]
-  --   • X ∈ (1/4, 3/4) from hXlo14/hXhi34, hence Y = 3/2 - 2X
-  --     (p = 3q-2r ⟹ fract(p·m/2q) = fract(1/2 - 2·fract(r·m/2q)); wrap +1 on (1/4,3/4))
-  --   • box bounds  Xhi ≤ 2/3 + p·M/2  and  Xlo ≥ 7/12 - (q-p)·M/2  (slant window ⊆ box)
-  --   • six pent_no_good conditions: h39/hxle from X∈(1/4,3/4); h40/h41 from the box bounds;
-  --     slants h42a ⟺ X ≤ Xhi (key_a: Da·X ≤ Da·Xhi = Na), h42b ⟺ X ≥ Xlo (key_b: Db·Xlo = Nb)
-  sorry
+  -- box bounds: the slant window [Xlo,Xhi] sits inside the box (factored numerators)
+  have hbox_hi : Xhi ≤ 2/3 + (p:ℝ)*M/2 := by
+    have hkey : (2:ℝ)/3 + (p:ℝ)*M/2 - Xhi = ((p:ℝ)*(2*s+2*r-3*q)) / (18*q*s) := by
+      rw [hXhi_eq, hM, show (6:ℝ)*s*((p:ℝ)+2*r) = 18*q*s from by rw [hrrR]; ring, hrrR]
+      field_simp; ring
+    have hnn : 0 ≤ ((p:ℝ)*(2*s+2*r-3*q)) / (18*q*s) := by
+      apply div_nonneg (mul_nonneg hpR0.le (by nlinarith [hsr1R, h4r3q])) (by positivity)
+    linarith [hkey, hnn]
+  have hbox_lo : 7/12 - ((q:ℝ)-p)*M/2 ≤ Xlo := by
+    have hkey : Xlo - (7/12 - ((q:ℝ)-p)*M/2) = (((r:ℝ)-q)*(4*r-4*q+s)) / (12*q*s) := by
+      rw [hXlo_eq, hM, show (6:ℝ)*s*(2*(r:ℝ)-((q:ℝ)-p)) = 12*q*s from by rw [hrrR]; ring, hrrR]
+      field_simp; ring
+    have hnn : 0 ≤ (((r:ℝ)-q)*(4*r-4*q+s)) / (12*q*s) := by
+      apply div_nonneg (mul_nonneg (by linarith [hrgtq]) (by nlinarith [hrgtq, hsR])) (by positivity)
+    linarith [hkey, hnn]
+  -- the reduced pentagon margins
+  have hmw3 : (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = (r : ℝ) * M := by
+    rw [c2, c3, c4, hM]; field_simp
+  have hmw0 : (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = (p : ℝ) * M := by
+    rw [c0, c2, c4, hM]; field_simp
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) - p) := by
+    have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    have hs1 : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by linarith
+    rw [hs1, c0, c2]; ring
+  have hmw1 : (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = ((q : ℝ) - p) * M := by
+    rw [c1, c2, c4, hM]; field_simp
+  -- place a grid point in the slant window [Xlo, Xhi]
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq r hcop_rq
+    ((r : ℝ) / (2 * q)) Xlo (Xhi - Xlo) hw (by linarith [hXlo14]) (by linarith [hXhi34])
+  have harg : (r : ℝ) / (2 * q) + (l : ℝ) * (r : ℝ) / (q : ℝ)
+      = (r : ℝ) / q * ((l : ℝ) + 1 / 2) := by field_simp; ring
+  rw [harg] at hl
+  set X : ℝ := Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) with hXdef
+  have hX_lo : Xlo ≤ X := hl.1
+  have hX_hi : X ≤ Xhi := by have h := hl.2; linarith
+  have hX14 : 1/4 < X := lt_of_lt_of_le hXlo14 hX_lo
+  have hX34 : X < 3/4 := lt_of_le_of_lt hX_hi hXhi34
+  -- Y = {3/2 - 2X} on the branch X ∈ (1/4, 3/4)
+  set Y : ℝ := Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) with hYdef
+  have hYeq : Y = 3/2 - 2*X := by
+    have hYarg : (p : ℝ) / q * ((l : ℝ) + 1 / 2)
+        = ((3*l + 1 : ℤ) : ℝ) + (1/2 - 2*((r : ℝ) / q * ((l : ℝ) + 1 / 2))) := by
+      rw [hrrR]; push_cast; field_simp; ring
+    rw [hYdef, hYarg, Int.fract_intCast_add]
+    have hsplit : (1:ℝ)/2 - 2*((r : ℝ) / q * ((l : ℝ) + 1 / 2))
+        = ((-2*⌊(r : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ : ℤ) : ℝ) + (1/2 - 2*X) := by
+      have hfa := Int.floor_add_fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2))
+      rw [hXdef]; push_cast; linarith [hfa]
+    rw [hsplit, Int.fract_intCast_add,
+        show (1:ℝ)/2 - 2*X = (3/2 - 2*X) + ((-1 : ℤ) : ℝ) from by push_cast; ring,
+        Int.fract_add_intCast]
+    exact Int.fract_eq_self.mpr ⟨by linarith [hX34], by linarith [hX14]⟩
+  -- reduced slant conditions, via Da·Xhi = Na (h42a) and Db·Xlo = Nb (h42b)
+  have key_a : 1/(3*(s:ℝ)) ≤ (5/6 - X)/r + (Y - 1/6)/p := by
+    rw [hYeq]
+    have h2 : Da * Xhi = Na := by rw [hXhi]; field_simp [hDapos.ne']
+    have h3 : Na - Da*X = (5/6 - X)/r + (3/2 - 2*X - 1/6)/p - 1/(3*s) := by rw [hNa, hDa]; ring
+    nlinarith [mul_le_mul_of_nonneg_left hX_hi hDapos.le, h2, h3]
+  have key_b : 1/(3*(s:ℝ)) ≤ (5/6 - X)/r + (1/3 - Y)/((q:ℝ) - p) := by
+    rw [hYeq]
+    have h2 : Db * Xlo = Nb := by rw [hXlo]; field_simp [hDbpos.ne']
+    have h3 : Db*X - Nb = (5/6 - X)/r + (1/3 - (3/2 - 2*X))/((q:ℝ) - p) - 1/(3*s) := by
+      rw [hNb, hDb]; field_simp; ring
+    nlinarith [mul_le_mul_of_nonneg_left hX_lo hDbpos.le, h2, h3]
+  -- bridge w-form to reduced form (× 1/g)
+  have e5 : (5/6 - X)/((g:ℝ)*r) + (Y - 1/6)/((g:ℝ)*p)
+      = (1/(g:ℝ)) * ((5/6 - X)/r + (Y - 1/6)/p) := by field_simp
+  have e6 : (5/6 - X)/((g:ℝ)*r) + (1/3 - Y)/((g:ℝ)*((q:ℝ)-p))
+      = (1/(g:ℝ)) * ((5/6 - X)/r + (1/3 - Y)/((q:ℝ)-p)) := by field_simp
+  have egs : (1:ℝ)/(3*((g:ℝ)*s)) = (1/(g:ℝ)) * (1/(3*s)) := by field_simp
+  -- discharge the six pentagon conditions
+  refine hpent l ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [hmw3, ← hXdef]; linarith [hX14, mul_nonneg hrR.le hMpos.le]
+  · rw [hmw0, ← hYdef, hYeq]; linarith [hX_hi, hbox_hi]
+  · rw [hmw1, ← hYdef, hYeq]; linarith [hX_lo, hbox_lo]
+  · rw [← hXdef]; linarith [hX34]
+  · rw [← hXdef, ← hYdef, c4, c3, c0, e5, egs]
+    exact mul_le_mul_of_nonneg_left key_a (by positivity)
+  · rw [← hXdef, ← hYdef, c4, c3, c1, e6, egs]
+    exact mul_le_mul_of_nonneg_left key_b (by positivity)
 
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
