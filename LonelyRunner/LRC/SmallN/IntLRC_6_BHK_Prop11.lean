@@ -4212,6 +4212,63 @@ lemma bhk_prop11_exc_1_2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hp
   · rw [← hXdef, ← hYdef, hYeq, c4, c3, c1, e6, egs]
     exact mul_le_mul_of_nonneg_left key6 (by positivity)
 
+/-- **BHK §5 Case 5.2.11 — `(1, 2)U` special case `p = 2` (`s = q + 2`, `r = q + 1`).**
+    Here the horizontal pigeonhole fails (`H = 1/(q+2) < 1/q`); BHK's direct witness
+    applies instead. With speeds `2, q−2, q, q+1, q+2` (times `g`), pick an odd `m` with
+    `1/6 ≤ m/q ≤ 1/3` (exists for `q ≥ 9`) and set `t = m/(2qg)`; then every
+    `circDist(wᵢ t) ≥ 1/6` (a `012345`-gap), contradicting the covering assumption. -/
+lemma bhk_prop11_exc_1_2_special (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g q : ℕ) (hg : 0 < g) (hq9 : 9 ≤ q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * 2)
+    (c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) - 2))
+    (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) + 1))
+    (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) + 2)) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hqR : (0 : ℝ) < q := by exact_mod_cast (show 0 < q by omega)
+  have hg0 : (g : ℝ) ≠ 0 := hgR.ne'
+  have hq0 : (q : ℝ) ≠ 0 := hqR.ne'
+  -- an odd `m` with `1/6 ≤ m/q ≤ 1/3`
+  obtain ⟨m, hmodd, hm6, hm3⟩ : ∃ m : ℕ, Odd m ∧ q ≤ 6 * m ∧ 3 * m ≤ q := by
+    rcases Nat.even_or_odd (q / 6 + 1) with ⟨k, hk⟩ | ho
+    · exact ⟨q / 6 + 2, ⟨k, by omega⟩, by omega, by omega⟩
+    · exact ⟨q / 6 + 1, ho, by omega, by omega⟩
+  obtain ⟨j, hj⟩ := hmodd
+  have hmjR : (m : ℝ) = 2 * (j : ℝ) + 1 := by exact_mod_cast hj
+  have hm6R : (q : ℝ) ≤ 6 * m := by exact_mod_cast hm6
+  have hm3R : 3 * (m : ℝ) ≤ q := by exact_mod_cast hm3
+  have hmq_lo : (1 : ℝ) / 6 ≤ (m : ℝ) / q := by rw [le_div_iff₀ hqR]; linarith
+  have hmq_hi : (m : ℝ) / q ≤ 1 / 3 := by rw [div_le_iff₀ hqR]; linarith
+  set t : ℝ := (m : ℝ) / (2 * q * g) with htdef
+  -- fract in [1/6,5/6] ⟹ circDist ≥ 1/6, after stripping the integer part `n`
+  have key : ∀ (W y : ℝ) (n : ℤ), W = (n : ℝ) + y → 1 / 6 ≤ y → y ≤ 5 / 6 →
+      1 / 6 ≤ circDist W := by
+    intro W y n hW hlo hhi
+    have hyfr : Int.fract y = y := Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+    have hWeq : W = y + (n : ℝ) := by rw [hW]; ring
+    rw [hWeq, bhk_prop11_circDist_add_int]
+    unfold circDist; rw [le_min_iff, hyfr]; exact ⟨hlo, by linarith⟩
+  -- the five runner positions at `t`
+  have e0 : (w ⟨0, by omega⟩ : ℝ) * t = ((0 : ℤ) : ℝ) + (m : ℝ) / q := by
+    rw [c0, htdef]; push_cast; field_simp; ring
+  have e1 : (w ⟨1, by omega⟩ : ℝ) * t = ((j : ℤ) : ℝ) + (1 / 2 - (m : ℝ) / q) := by
+    rw [c1, htdef, hmjR]; push_cast; field_simp; ring
+  have e2 : (w ⟨2, by omega⟩ : ℝ) * t = ((j : ℤ) : ℝ) + 1 / 2 := by
+    rw [c2, htdef, hmjR]; push_cast; field_simp
+  have e3 : (w ⟨3, by omega⟩ : ℝ) * t = ((j : ℤ) : ℝ) + (1 / 2 + (m : ℝ) / q / 2) := by
+    rw [c3, htdef, hmjR]; push_cast; field_simp; ring
+  have e4 : (w ⟨4, by omega⟩ : ℝ) * t = ((j : ℤ) : ℝ) + (1 / 2 + (m : ℝ) / q) := by
+    rw [c4, htdef, hmjR]; push_cast; field_simp; ring
+  obtain ⟨i, hi⟩ := hcover t
+  refine absurd hi (not_lt.mpr ?_)
+  fin_cases i
+  · exact key _ _ 0 e0 hmq_lo (by linarith [hmq_hi])
+  · exact key _ _ (j : ℤ) e1 (by linarith [hmq_hi]) (by linarith [hmq_lo])
+  · exact key _ _ (j : ℤ) e2 (by norm_num) (by norm_num)
+  · exact key _ _ (j : ℤ) e3 (by linarith [hmq_lo]) (by linarith [hmq_hi])
+  · exact key _ _ (j : ℤ) e4 (by linarith [hmq_lo]) (by linarith [hmq_hi])
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
