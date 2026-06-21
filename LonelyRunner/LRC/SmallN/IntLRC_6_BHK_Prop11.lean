@@ -4300,6 +4300,129 @@ lemma bhk_prop11_exc_1_2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos :
     exact bhk_prop11_exc_1_2_pentkill w hmono hpos hsum hsmall hcover g p q r s hg hq
       c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hq18 hrig (by omega)
 
+-- grid-witness on a slant-bound window: heavy rational-arithmetic proof
+set_option maxHeartbeats 1600000 in
+/-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, `q ≥ 25`.** Rigidity `2r+p=3q` puts the
+    cone points on the line `Y={3/2-2X}` (branch `X∈(1/4,3/4)`), a `1/q`-grid in `X`. The two
+    *slants* of `P` bind (not the box); their linear-in-`X` cuts `Xlo` (h42b) and `Xhi` (h42a)
+    span width `r(5s-4r)/(36qs) ≥ 1/q` (⟺ `5rs-4r²-36s ≥ 0`, holding for `q≥25` since then
+    `r≥34, s≥r+1`). A grid point in `[Xlo,Xhi] ⊆ P` contradicts `pent_no_good`. The narrow tail
+    `q∈{19,21,23}` (where the window `< 1/q`) is handled by `bhk_prop11_exc_1_neg2_small`. -/
+lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq25 : 25 ≤ q) (hrig : 2 * r + p = 3 * q) : False := by
+  have hpent := bhk_prop11_pent_no_good w hmono hpos hsum hsmall hcover g p q r hg hq c0 c2 c3
+  have hqR : (0:ℝ) < q := by exact_mod_cast hq
+  have hsR : (0:ℝ) < (s:ℝ) := by exact_mod_cast (show 0 < s by omega)
+  have hrR : (0:ℝ) < (r:ℝ) := by exact_mod_cast (show 0 < r by omega)
+  have hpR0 : (0:ℝ) < p := by exact_mod_cast hp
+  have hgR : (0:ℝ) < g := by exact_mod_cast hg
+  have hpq : (p:ℝ) < q := by exact_mod_cast (show p < q by omega)
+  have hsq : (q:ℝ) < s := by exact_mod_cast (show q < s by omega)
+  have hg0 : (g:ℝ) ≠ 0 := hgR.ne'
+  have hq0 : (q:ℝ) ≠ 0 := hqR.ne'
+  have hs0 : (s:ℝ) ≠ 0 := hsR.ne'
+  have hr0 : (r:ℝ) ≠ 0 := hrR.ne'
+  have hp0 : (p:ℝ) ≠ 0 := hpR0.ne'
+  have hqp : (0:ℝ) < (q:ℝ) - p := by linarith [hpq]
+  have hqp0 : ((q:ℝ) - p) ≠ 0 := hqp.ne'
+  -- regime facts: q≥25 ⟹ r≥34 (since 6r ≥ 8q+1), and s ≥ r+1
+  have hr34 : 34 ≤ r := by omega
+  have hr34R : (34:ℝ) ≤ r := by exact_mod_cast hr34
+  have hsr1R : (r:ℝ) + 1 ≤ s := by exact_mod_cast (show r + 1 ≤ s by omega)
+  have hrrR : (p:ℝ) = 3 * q - 2 * r := by
+    have h : (2:ℝ) * r + p = 3 * q := by exact_mod_cast hrig
+    linarith
+  have hqpR : (q:ℝ) - p = 2 * ((r:ℝ) - q) := by rw [hrrR]; ring
+  have hrgtq : (q:ℝ) < r := by exact_mod_cast hrq
+  -- gcd(r,q)=1
+  have hcop_rq : Nat.Coprime r q := by
+    have h1 : Nat.gcd r q ∣ r := Nat.gcd_dvd_left r q
+    have h2 : Nat.gcd r q ∣ q := Nat.gcd_dvd_right r q
+    have h2r : Nat.gcd r q ∣ 2 * r := h1.mul_left 2
+    have h2rp : Nat.gcd r q ∣ 2 * r + p := by rw [hrig]; exact h2.mul_left 3
+    have hd : Nat.gcd r q ∣ p := (Nat.dvd_add_right h2r).mp h2rp
+    have hg1 : Nat.gcd r q ∣ 1 := hcop ▸ Nat.dvd_gcd hd (Nat.gcd_dvd_right r q)
+    exact Nat.dvd_one.mp hg1
+  -- pentagon box margin and slant-cut endpoints (roots of the slants with Y=3/2-2X)
+  set M : ℝ := ((s:ℝ) - q) / (3 * (q:ℝ) * (s:ℝ)) with hM
+  have hMpos : 0 < M := by
+    rw [hM]; exact div_pos (by linarith) (mul_pos (mul_pos (by norm_num) hqR) hsR)
+  set Da : ℝ := 1/(r:ℝ) + 2/(p:ℝ) with hDa
+  set Na : ℝ := 5/(6*(r:ℝ)) + 4/(3*(p:ℝ)) - 1/(3*(s:ℝ)) with hNa
+  set Db : ℝ := 2/((q:ℝ)-p) - 1/(r:ℝ) with hDb
+  set Nb : ℝ := 1/(3*(s:ℝ)) - 5/(6*(r:ℝ)) + 7/(6*((q:ℝ)-p)) with hNb
+  have hDapos : 0 < Da := by rw [hDa]; exact add_pos (div_pos one_pos hrR) (div_pos (by norm_num) hpR0)
+  have hDbpos : 0 < Db := by
+    rw [hDb, sub_pos, div_lt_div_iff₀ hrR hqp]; rw [hqpR]; nlinarith [hrgtq, hrR]
+  set Xhi : ℝ := Na / Da with hXhi
+  set Xlo : ℝ := Nb / Db with hXlo
+  -- the width simplifies to r(5s-4r)/(36 q s) (sympy-verified identity, uses p=3q-2r)
+  -- collapse Xhi, Xlo to single fractions (pure identities), then use p+2r = 3q
+  have hpp2r : (0:ℝ) < (p:ℝ) + 2*r := by linarith [hpR0, hrR]
+  have h2rqp : (0:ℝ) < 2*(r:ℝ) - ((q:ℝ)-p) := by
+    have h := hDbpos; rw [hDb, sub_pos, div_lt_div_iff₀ hrR hqp] at h; linarith [h]
+  have hXhi_eq : Xhi = (5*(p:ℝ)*s + 8*r*s - 2*r*p) / (6*s*((p:ℝ)+2*r)) := by
+    rw [hXhi, hNa, hDa]; field_simp; ring
+  have hXlo_eq : Xlo = (2*(r:ℝ)*((q:ℝ)-p) - 5*s*((q:ℝ)-p) + 7*r*s) / (6*s*(2*(r:ℝ)-((q:ℝ)-p))) := by
+    rw [hXlo, hNb, hDb]; field_simp; ring
+  have hwidth : Xhi - Xlo = (r:ℝ) * (5*s - 4*r) / (36 * q * s) := by
+    rw [hXhi_eq, hXlo_eq]
+    have e1 : (p:ℝ) + 2*r = 3*q := by rw [hrrR]; ring
+    have e2 : 2*(r:ℝ) - ((q:ℝ)-p) = 2*q := by rw [hrrR]; ring
+    rw [e1, e2, hrrR]; field_simp; ring
+  -- 1/q ≤ width  ⟺  5rs - 4r² - 36s ≥ 0  (q≥25 ⟹ r≥34, s≥r+1)
+  have hnum : 36 * (s:ℝ) ≤ (r:ℝ) * (5*s - 4*r) := by
+    nlinarith [hr34R, hsr1R, mul_nonneg (show (0:ℝ) ≤ s - (r+1) by linarith)
+      (show (0:ℝ) ≤ 5*(r:ℝ) - 36 by linarith), sq_nonneg ((r:ℝ) - 34)]
+  have hw : 1 / (q:ℝ) ≤ Xhi - Xlo := by
+    rw [hwidth, div_le_div_iff₀ hqR (by positivity)]
+    nlinarith [hnum, hqR, hsR, hrR]
+  -- 4r > 3q and p < 2r and 3r < 7q (regime), used for the endpoint locations
+  have h4r3q : 3*(q:ℝ) < 4*r := by
+    have : (8:ℝ)*q + 1 ≤ 6*r := by exact_mod_cast (show 8*q + 1 ≤ 6*r by omega)
+    linarith
+  have hp2r : (p:ℝ) < 2*r := by rw [hrrR]; linarith [h4r3q]
+  have h3r7q : 3*(r:ℝ) < 7*q := by
+    have : (2:ℝ)*r < 3*q := by exact_mod_cast hr32
+    linarith
+  -- endpoint location: 1/4 < Xlo ≤ Xhi < 3/4 (so X is on the Y=3/2-2X branch)
+  have hXhi34 : Xhi < 3/4 := by
+    have hid : (3:ℝ)/4 * Da - Na = 1/(3*s) - 1/(12*r) + 1/(6*p) := by
+      rw [hNa, hDa]; field_simp; ring
+    have hpos' : 0 < (3:ℝ)/4 * Da - Na := by
+      rw [hid]
+      have h1 : 1/(12*(r:ℝ)) < 1/(6*p) := by
+        rw [div_lt_div_iff₀ (by linarith [hrR]) (by linarith [hpR0])]; nlinarith [hp2r]
+      have h2 : (0:ℝ) < 1/(3*s) := by positivity
+      linarith [h1, h2]
+    rw [hXhi, div_lt_iff₀ hDapos]; linarith [hpos']
+  have hXlo14 : 1/4 < Xlo := by
+    have hid : Nb - (1:ℝ)/4 * Db = 1/(3*s) - 7/(12*r) + 2/(3*((q:ℝ)-p)) := by
+      rw [hNb, hDb]; field_simp; ring
+    have hpos' : 0 < Nb - (1:ℝ)/4 * Db := by
+      rw [hid]
+      have h1 : 7/(12*(r:ℝ)) < 2/(3*((q:ℝ)-p)) := by
+        rw [div_lt_div_iff₀ (by linarith [hrR]) (by linarith [hqp]), hqpR]; nlinarith [h3r7q]
+      have h2 : (0:ℝ) < 1/(3*s) := by positivity
+      linarith [h1, h2]
+    rw [hXlo, lt_div_iff₀ hDbpos]; linarith [hpos']
+  have hXloXhi : Xlo ≤ Xhi := by linarith [hw, one_div_pos.mpr hqR]
+  -- STAGE 2 (TODO, ports from `bhk_prop11_exc_1_2_pentkill`):
+  --   • grid_hit_coset_step q hcop_rq r (r/(2q)) Xlo (Xhi-Xlo) hw → X ∈ [Xlo, Xhi]
+  --   • X ∈ (1/4, 3/4) from hXlo14/hXhi34, hence Y = 3/2 - 2X
+  --     (p = 3q-2r ⟹ fract(p·m/2q) = fract(1/2 - 2·fract(r·m/2q)); wrap +1 on (1/4,3/4))
+  --   • box bounds  Xhi ≤ 2/3 + p·M/2  and  Xlo ≥ 7/12 - (q-p)·M/2  (slant window ⊆ box)
+  --   • six pent_no_good conditions: h39/hxle from X∈(1/4,3/4); h40/h41 from the box bounds;
+  --     slants h42a ⟺ X ≤ Xhi (key_a: Da·X ≤ Da·Xhi = Na), h42b ⟺ X ≥ Xlo (key_b: Db·Xlo = Nb)
+  sorry
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
