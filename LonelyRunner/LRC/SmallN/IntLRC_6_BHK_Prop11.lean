@@ -4269,6 +4269,37 @@ lemma bhk_prop11_exc_1_2_special (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
   · exact key _ _ (j : ℤ) e3 (by linarith [hmq_lo]) (by linarith [hmq_hi])
   · exact key _ _ (j : ℤ) e4 (by linarith [hmq_lo]) (by linarith [hmq_hi])
 
+/-- **BHK §5 Case 5.2.11 — `(1, 2)U` dispatcher.** Splits on `s`: the special
+    `s = q + 2` (forcing `r = q + 1`, `p = 2`; `bhk_prop11_exc_1_2_special`) versus the
+    generic `s ≥ q + 3` horizontal pigeonhole (`bhk_prop11_exc_1_2_pentkill`). -/
+lemma bhk_prop11_exc_1_2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq18 : 18 ≤ q) (hrig : 2 * r = 2 * q + p) : False := by
+  rcases Nat.lt_or_ge s (q + 3) with hs2 | hs3
+  · -- special branch: s = q + 2 forces r = q + 1, p = 2
+    have hsq2 : s = q + 2 := by omega
+    have hr1 : r = q + 1 := by omega
+    have hp2 : p = 2 := by omega
+    have c0' : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * 2 := by rw [c0, hp2]; push_cast; ring
+    have c1' : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) - 2) := by
+      have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+        exact_mod_cast hsum
+      have hs1 : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+        linarith
+      rw [hs1, c0, c2, hp2]; push_cast; ring
+    have c3' : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) + 1) := by rw [c3, hr1]; push_cast; ring
+    have c4' : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) + 2) := by rw [c4, hsq2]; push_cast; ring
+    exact bhk_prop11_exc_1_2_special w hpos hcover g q hg (by omega) c0' c1' c2 c3' c4'
+  · -- generic branch: s ≥ q + 3
+    exact bhk_prop11_exc_1_2_pentkill w hmono hpos hsum hsmall hcover g p q r s hg hq
+      c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hq18 hrig (by omega)
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -4286,7 +4317,8 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     (h_nogood : ∀ l : ℤ,
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
-    (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q) :
+    (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q)
+    (hne12 : ¬(i = 1 ∧ j = 2)) :
     False := by
   have hi_lt : i < 6 := by exact_mod_cast hi6
   interval_cases i
@@ -4316,7 +4348,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
     · sorry -- (1,1) — Part 6
-    · sorry -- (1,2)
+    · exact absurd ⟨rfl, rfl⟩ hne12
     · sorry -- (1,3)
   · -- i = 2: cone j ∈ {-3,…,3}; kills (2,-1) and (2,0)
     have hjl : -3 ≤ j := by
@@ -5309,8 +5341,22 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
       exact_mod_cast h34
     exact bhk_prop11_part6 w hpos hcover hsum hsmall hdiag hw34 g p q r s hg_pos hp_pos hq18'
       hgp hgq hgr hgs hcop
-  · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-      hk1 hk2 h_nogood h14
+  · by_cases h12 : i = 1 ∧ j = 2
+    · -- (1, 2)U exceptional pair: peel to the dedicated dispatcher (needs the speeds)
+      obtain ⟨hi1, hj2⟩ := h12
+      subst hi1; subst hj2
+      have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+      have hrs : r < s := by
+        have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+          hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+        have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+        exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+      have hrig : 2 * r = 2 * q + p :=
+        bhk_prop11_exc_1_2 p q r hp_pos h3p hrq hr32 k hk1 hk2
+      exact bhk_prop11_exc_1_2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
+        (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
+    · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+        hk1 hk2 h_nogood h14 h12
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
