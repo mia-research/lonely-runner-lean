@@ -4300,6 +4300,68 @@ lemma bhk_prop11_exc_1_2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos :
     exact bhk_prop11_exc_1_2_pentkill w hmono hpos hsum hsmall hcover g p q r s hg hq
       c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hq18 hrig (by omega)
 
+/-- **`pent_no_good` in reduced coordinates.** The six pentagon conditions written in terms of
+    `p, q, r, s` (with `w₀=g·p, w₂=g·q, w₃=g·r, w₄=g·s`, margin `M=(s-q)/(3qs)`), bridged to
+    the `w`-form of `bhk_prop11_pent_no_good` (the slants `×1/g`). -/
+lemma bhk_prop11_pent_no_good_red (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q) (hp : 0 < p) (hr : 0 < r) (hs : 0 < s)
+    (hpqlt : p < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (l : ℤ)
+    (h39 : 1/6 - (r:ℝ)*(((s:ℝ)-q)/(3*q*s)) ≤ Int.fract ((r:ℝ)/q*((l:ℝ)+1/2)))
+    (h40 : 1/6 - (p:ℝ)*(((s:ℝ)-q)/(3*q*s)) ≤ Int.fract ((p:ℝ)/q*((l:ℝ)+1/2)))
+    (h41 : Int.fract ((p:ℝ)/q*((l:ℝ)+1/2)) ≤ 1/3 + ((q:ℝ)-p)*(((s:ℝ)-q)/(3*q*s)))
+    (hxle : Int.fract ((r:ℝ)/q*((l:ℝ)+1/2)) ≤ 5/6)
+    (h42a : 1/(3*(s:ℝ)) ≤ (5/6 - Int.fract ((r:ℝ)/q*((l:ℝ)+1/2)))/r
+        + (Int.fract ((p:ℝ)/q*((l:ℝ)+1/2)) - 1/6)/p)
+    (h42b : 1/(3*(s:ℝ)) ≤ (5/6 - Int.fract ((r:ℝ)/q*((l:ℝ)+1/2)))/r
+        + (1/3 - Int.fract ((p:ℝ)/q*((l:ℝ)+1/2)))/((q:ℝ)-p)) : False := by
+  have hqR : (0:ℝ) < q := by exact_mod_cast hq
+  have hsR : (0:ℝ) < (s:ℝ) := by exact_mod_cast hs
+  have hrR : (0:ℝ) < (r:ℝ) := by exact_mod_cast hr
+  have hpR0 : (0:ℝ) < p := by exact_mod_cast hp
+  have hgR : (0:ℝ) < g := by exact_mod_cast hg
+  have hg0 : (g:ℝ) ≠ 0 := hgR.ne'
+  have hq0 : (q:ℝ) ≠ 0 := hqR.ne'
+  have hs0 : (s:ℝ) ≠ 0 := hsR.ne'
+  have hr0 : (r:ℝ) ≠ 0 := hrR.ne'
+  have hp0 : (p:ℝ) ≠ 0 := hpR0.ne'
+  have hpqR : (p:ℝ) < q := by exact_mod_cast hpqlt
+  have hqp : (0:ℝ) < (q:ℝ) - p := by linarith
+  set X : ℝ := Int.fract ((r:ℝ)/q*((l:ℝ)+1/2)) with hXdef
+  set Y : ℝ := Int.fract ((p:ℝ)/q*((l:ℝ)+1/2)) with hYdef
+  have hmw3 : (w ⟨3, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = (r:ℝ)*(((s:ℝ)-q)/(3*q*s)) := by
+    rw [c2, c3, c4]; field_simp
+  have hmw0 : (w ⟨0, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = (p:ℝ)*(((s:ℝ)-q)/(3*q*s)) := by
+    rw [c0, c2, c4]; field_simp
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g:ℝ) * ((q:ℝ) - p) := by
+    have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    have hs1 : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by linarith
+    rw [hs1, c0, c2]; ring
+  have hmw1 : (w ⟨1, by omega⟩ : ℝ) * ((w ⟨4, by omega⟩ : ℝ) - (w ⟨2, by omega⟩ : ℝ))
+      / (3 * (w ⟨2, by omega⟩ : ℝ) * (w ⟨4, by omega⟩ : ℝ)) = ((q:ℝ)-p)*(((s:ℝ)-q)/(3*q*s)) := by
+    rw [c1, c2, c4]; field_simp
+  have e5 : (5/6 - X)/((g:ℝ)*r) + (Y - 1/6)/((g:ℝ)*p)
+      = (1/(g:ℝ)) * ((5/6 - X)/r + (Y - 1/6)/p) := by field_simp
+  have e6 : (5/6 - X)/((g:ℝ)*r) + (1/3 - Y)/((g:ℝ)*((q:ℝ)-p))
+      = (1/(g:ℝ)) * ((5/6 - X)/r + (1/3 - Y)/((q:ℝ)-p)) := by field_simp
+  have egs : (1:ℝ)/(3*((g:ℝ)*s)) = (1/(g:ℝ)) * (1/(3*s)) := by field_simp
+  refine bhk_prop11_pent_no_good w hmono hpos hsum hsmall hcover g p q r hg hq c0 c2 c3 l
+    ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [hmw3]; exact h39
+  · rw [hmw0]; exact h40
+  · rw [hmw1]; exact h41
+  · exact hxle
+  · rw [c4, c3, c0, e5, egs]; exact mul_le_mul_of_nonneg_left h42a (by positivity)
+  · rw [c4, c3, c1, e6, egs]; exact mul_le_mul_of_nonneg_left h42b (by positivity)
+
 -- grid-witness on a slant-bound window: large rational-arithmetic proof
 set_option maxHeartbeats 3200000 in
 /-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, wide window (`hwb : 36s ≤ r(5s-4r)`).**
