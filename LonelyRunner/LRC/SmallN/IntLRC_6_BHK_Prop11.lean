@@ -3983,6 +3983,65 @@ lemma bhk_prop11_exc_2_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime 
             Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]; constructor <;> norm_num⟩
     · exact absurd h2dvd (by decide)
 
+/-- **BHK §5 Case 5.2.11 rigidity — `(1, 2)` forces `2r = 2q + p`.** The relation
+    `1·p ≡ 2·r (mod q)` gives `q ∣ (2r − p)`; with `q < r`, `2r < 3q`, `3p < q` we
+    have `2r − p ∈ (q, 3q)`, so the only multiple of `q` is `2q`. Equivalently
+    `v₄ = (2q+p)/2q = 1 + v₁/2` — the unshifted `(1,2)_U` line `y = 2x`. (The
+    shifted `(1,2)_S` would need `2r − p = 3q`, i.e. `r ≥ 3q/2`, impossible under
+    `2r < 3q`; so the regime forces `U`.) -/
+lemma bhk_prop11_exc_1_2 (p q r : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hk1 : Int.fract (((1 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    2 * r = 2 * q + p := by
+  have hq : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq 1 2 k hk1 hk2
+  rw [one_mul] at hrel
+  have hdvd : (q : ℤ) ∣ (2 * (r : ℤ) - (p : ℤ)) := Int.modEq_iff_dvd.mp hrel
+  obtain ⟨m, hm⟩ := hdvd
+  have hpz : (p : ℤ) < q := by exact_mod_cast (show p < q by omega)
+  have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+  have hrz : (q : ℤ) < r := by exact_mod_cast hrq
+  have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+  have hqz : (0 : ℤ) ≤ q := by positivity
+  have h1 : (q : ℤ) * 1 < q * m := by rw [mul_one, ← hm]; omega
+  have h2 : (q : ℤ) * m < q * 3 := by rw [← hm]; omega
+  have hm1 : 1 < m := lt_of_mul_lt_mul_left h1 hqz
+  have hm3 : m < 3 := lt_of_mul_lt_mul_left h2 hqz
+  have hmeq : m = 2 := by omega
+  have hZ : 2 * (r : ℤ) = 2 * q + p := by rw [hmeq] at hm; omega
+  exact_mod_cast hZ
+
+/-- **BHK §5 Case 5.2.9 rigidity — `(1, -2)` forces `2r + p = 3q`.** The relation
+    `1·p ≡ −2·r (mod q)` gives `q ∣ (2r + p)`; with `q < r`, `2r < 3q`, `3p < q`
+    we have `2r + p ∈ (2q, 4q)`, so the only multiple of `q` is `3q`. Equivalently
+    `v₄ = (3q−p)/2q = 3/2 − v₁/2` — the shifted `(1,-2)_S` line `y = 1 − 2x`. -/
+lemma bhk_prop11_exc_1_neg2 (p q r : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hk1 : Int.fract (((1 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    2 * r + p = 3 * q := by
+  have hq : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq 1 (-2) k hk1 hk2
+  rw [one_mul] at hrel
+  have hdvd : (q : ℤ) ∣ ((-2) * (r : ℤ) - (p : ℤ)) := Int.modEq_iff_dvd.mp hrel
+  have hdvd2 : (q : ℤ) ∣ (2 * (r : ℤ) + (p : ℤ)) := by
+    have h := (dvd_neg (α := ℤ)).mpr hdvd
+    rwa [show -((-2) * (r : ℤ) - (p : ℤ)) = 2 * r + p from by ring] at h
+  obtain ⟨m, hm⟩ := hdvd2
+  have hpz : (p : ℤ) < q := by exact_mod_cast (show p < q by omega)
+  have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+  have hrz : (q : ℤ) < r := by exact_mod_cast hrq
+  have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+  have hqz : (0 : ℤ) ≤ q := by positivity
+  have h1 : (q : ℤ) * 2 < q * m := by rw [← hm]; omega
+  have h2 : (q : ℤ) * m < q * 4 := by rw [← hm]; omega
+  have hm2 : 2 < m := lt_of_mul_lt_mul_left h1 hqz
+  have hm4 : m < 4 := lt_of_mul_lt_mul_left h2 hqz
+  have hmeq : m = 3 := by omega
+  have hZ : 2 * (r : ℤ) + p = 3 * q := by rw [hmeq] at hm; omega
+  exact_mod_cast hZ
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
