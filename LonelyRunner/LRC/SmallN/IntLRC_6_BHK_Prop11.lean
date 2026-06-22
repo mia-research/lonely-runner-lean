@@ -2993,6 +2993,98 @@ lemma bhk_prop11_exc_3_neg1 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime 
   have h6p : q < 6 * p := by omega
   exact bhk_prop11_exc_3_neg1_hit p q r hq18 hcop hp h6p h3p hr h_nogood
 
+/-- **BHK §5 Case 5.2.2 — diagonal pair `(3,3)`, non-diagonal branch (witness).** On the
+    non-diagonal multiple `3(r−p) = 4q` (so `3 ∣ q`, `q = 3·qp`, `r = p + 4·qp`), the cone
+    point at `l = 3m+1` has `{r·t} = {p·t}` (the offset `(r−p)/q' = 4/3` makes the slope-`1`
+    shift an integer there). Aiming `{p·t} ∈ [1/6, 1/3]` on the coprime `1/qp`-grid (window
+    width `1/6 ≥ 1/qp` since `qp ≥ 6`) lands both coordinates in `R`, contradicting
+    `h_nogood`. -/
+lemma bhk_prop11_exc_3_3_hit (p q qp r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (hr32 : 2 * r < 3 * q) (hq3 : q = 3 * qp) (hr : r = p + 4 * qp)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hqp6 : 6 ≤ qp := by omega
+  have hp_lt : 2 * p < qp := by omega
+  have hcop' : Nat.Coprime p qp :=
+    Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd (Nat.gcd_dvd_left p qp)
+      (by rw [hq3]; exact (Nat.gcd_dvd_right p qp).mul_left 3))
+  obtain ⟨m, hm⟩ := bhk_prop11_fract_odd_mul p qp (by omega) hcop'
+    ((qp - 3 * p + 5) / 6) (by omega) (by omega)
+  have hqpR : (0 : ℝ) < (qp : ℝ) := by exact_mod_cast (show 0 < qp by omega)
+  set A : ℝ := (2 * (((qp - 3 * p + 5) / 6 : ℕ) : ℝ) + p) / (2 * qp) with hAdef
+  have hpeq : Int.fract ((p : ℝ) / qp * ((m : ℝ) + 1 / 2)) = A := by
+    rw [← hm]; congr 1; field_simp
+  have hA_lo : 1 / 6 ≤ A := by
+    rw [hAdef, le_div_iff₀ (by positivity)]
+    have : (qp : ℝ) ≤ 3 * (2 * ((qp - 3 * p + 5) / 6 : ℕ) + p) := by
+      exact_mod_cast (show qp ≤ 3 * (2 * ((qp - 3 * p + 5) / 6) + p) by omega)
+    push_cast at this ⊢; linarith
+  have hA_hi : A ≤ 1 / 3 := by
+    rw [hAdef, div_le_iff₀ (by positivity)]
+    have : (3 : ℝ) * (2 * ((qp - 3 * p + 5) / 6 : ℕ) + p) ≤ 2 * qp := by
+      exact_mod_cast (show 3 * (2 * ((qp - 3 * p + 5) / 6) + p) ≤ 2 * qp by omega)
+    push_cast at this ⊢; linarith
+  have hqR : (q : ℝ) = 3 * (qp : ℝ) := by rw [hq3]; push_cast; ring
+  have hrR : (r : ℝ) = (p : ℝ) + 4 * (qp : ℝ) := by rw [hr]; push_cast; ring
+  have hq0R : (q : ℝ) ≠ 0 := by rw [hqR]; positivity
+  have hqp0R : (qp : ℝ) ≠ 0 := hqpR.ne'
+  have hY : Int.fract ((p : ℝ) / q * (((3 * (m : ℤ) + 1 : ℤ) : ℝ) + 1 / 2)) = A := by
+    rw [show (p : ℝ) / q * (((3 * (m : ℤ) + 1 : ℤ) : ℝ) + 1 / 2)
+          = (p : ℝ) / qp * ((m : ℝ) + 1 / 2) from by rw [hqR]; push_cast; field_simp; ring]
+    exact hpeq
+  have hX : Int.fract ((r : ℝ) / q * (((3 * (m : ℤ) + 1 : ℤ) : ℝ) + 1 / 2)) = A := by
+    rw [show (r : ℝ) / q * (((3 * (m : ℤ) + 1 : ℤ) : ℝ) + 1 / 2)
+          = (p : ℝ) / qp * ((m : ℝ) + 1 / 2) + ((2 * (2 * (m : ℤ) + 1) : ℤ) : ℝ) from by
+        rw [hrR, hqR]; push_cast; field_simp; ring, Int.fract_add_intCast]
+    exact hpeq
+  refine h_nogood (3 * (m : ℤ) + 1) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hX]; linarith
+  · rw [hX]; linarith
+  · rw [hY]; linarith
+  · rw [hY]; linarith
+
+/-- **BHK §5 Case 5.2.2 — the diagonal pair `(3,3)`.** The relation `3p ≡ 3r (mod q)` gives
+    `q ∣ 3(r−p)`; with `q < r`, `2r < 3q`, `3p < q` we have `2q < 3(r−p) < 9q/2`, so
+    `3(r−p) ∈ {3q, 4q}`. The `3q` branch is `r = p + q` (diagonal), excluded by `hndiag`
+    (routed to Part 6 in `core_q18`); the `4q` branch (`3 ∣ q`) is closed by the witness
+    `bhk_prop11_exc_3_3_hit`. -/
+lemma bhk_prop11_exc_3_3 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q) (hndiag : r ≠ p + q)
+    (k : ℤ)
+    (hk1 : Int.fract (((3 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((3 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq0 3 3 k hk1 hk2
+  have hdvdZ : (q : ℤ) ∣ (3 * (r : ℤ) - 3 * p) := Int.modEq_iff_dvd.mp hrel
+  have h3rp : 3 * p ≤ 3 * r := by omega
+  have hdvd : q ∣ (3 * r - 3 * p) := by
+    have hcast : ((3 * r - 3 * p : ℕ) : ℤ) = 3 * (r : ℤ) - 3 * p := by
+      rw [Nat.cast_sub h3rp]; push_cast; ring
+    have hd : (q : ℤ) ∣ ((3 * r - 3 * p : ℕ) : ℤ) := by rw [hcast]; exact hdvdZ
+    exact_mod_cast hd
+  obtain ⟨c, hc⟩ := hdvd
+  have hb1 : 2 * q < 3 * r - 3 * p := by omega
+  have hb2 : 3 * r - 3 * p < 5 * q := by omega
+  rw [hc] at hb1 hb2
+  have hc3 : 2 < c := by
+    by_contra h; push_neg at h
+    exact absurd hb1 (by have : q * c ≤ q * 2 := Nat.mul_le_mul (le_refl q) h; omega)
+  have hc5 : c < 5 := by
+    by_contra h; push_neg at h
+    exact absurd hb2 (by have : q * 5 ≤ q * c := Nat.mul_le_mul (le_refl q) h; omega)
+  have hcval : c = 3 ∨ c = 4 := by omega
+  rcases hcval with rfl | rfl
+  · exact absurd (show r = p + q by omega) hndiag
+  · have hq3dvd : (3 : ℕ) ∣ q := by omega
+    obtain ⟨qp, hqp⟩ := hq3dvd
+    exact bhk_prop11_exc_3_3_hit p q qp r hq18 hcop hp hr32 hqp (by omega) h_nogood
+
 /-- **BHK §5 Part 5 — the pair `(4, 1)`, `r = q + 4p` branch.** When `8p < q`, the
     relation pins `r = q + 4p`. On the half-integer time `(2m+1)/(2q)` with
     `{p·(2m+1)/(2q)} ∈ [1/6, 1/4]` (window width `1/12 ≥ 1/q`), runner `r` reads off
@@ -5060,7 +5152,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       norm_num at hI0
     · exact bhk_prop11_exc_3_1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · sorry -- (3,2)
-    · sorry -- (3,3) — anti-diagonal
+    · exact bhk_prop11_exc_3_3 p q r hq18 hcop hp h3p hrq hr32 hndiag k hk1 hk2 h_nogood
     · sorry -- (3,4)
   · -- i = 4: cone j ∈ {-4,…,4}; kills (4,0); (4,±1) for q ≥ 24 (else sliver)
     have hjl : -4 ≤ j := by
