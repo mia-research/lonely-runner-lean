@@ -429,6 +429,33 @@ lemma bhk_prop11_fract_odd_mul (p q : ℕ) (hq : 0 < q) (hcop : Nat.Coprime p q)
   have : (2 : ℝ) * k + p < 2 * q := by exact_mod_cast hwrap
   linarith
 
+/-- **Residue realisation kernel, with the residue exposed.** As `fract_odd_mul`, but the
+    witness `m` also satisfies `(p·m) % q = k`. The extra fact pins the parity of
+    `m - ⌊p(m+½)/q⌋` (from `p·m = q·⌊p·m/q⌋ + k` with `p, q` odd), which the half-slope
+    `|j| = 2` pairs with an odd readoff base need to land on the right line. -/
+lemma bhk_prop11_fract_odd_mul_mod (p q : ℕ) (hq : 0 < q) (hcop : Nat.Coprime p q)
+    (k : ℕ) (hkn : k < q) (hwrap : 2 * k + p < 2 * q) :
+    ∃ m : ℕ, Int.fract ((p : ℝ) * ((2 * (m : ℝ) + 1) / (2 * (q : ℝ))))
+      = (2 * (k : ℝ) + p) / (2 * q) ∧ (p * m) % q = k := by
+  haveI : NeZero q := ⟨by omega⟩
+  obtain ⟨m, hm_mod⟩ : ∃ m : ℕ, (p * m) % q = k % q := by
+    set u := ZMod.unitOfCoprime p hcop with hu
+    refine ⟨(((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val, ?_⟩
+    have hcast : ((p * (((u⁻¹ : (ZMod q)ˣ) : ZMod q) * (k : ZMod q)).val : ℕ) : ZMod q)
+        = ((k : ℕ) : ZMod q) := by
+      push_cast
+      rw [ZMod.natCast_val, ZMod.cast_id, ← ZMod.coe_unitOfCoprime p hcop, ← hu, ← mul_assoc]
+      rw [← Units.val_mul, mul_inv_cancel, Units.val_one, one_mul]
+    exact (ZMod.natCast_eq_natCast_iff _ _ _).mp hcast
+  have hmk : (p * m) % q = k := by rw [hm_mod, Nat.mod_eq_of_lt hkn]
+  refine ⟨m, ?_, hmk⟩
+  rw [bhk_prop11_fract_odd p q m hq, hmk,
+      show (((2 * k + p : ℕ) : ℝ)) = 2 * (k : ℝ) + p from by push_cast; ring]
+  refine Int.fract_eq_self.mpr ⟨by positivity, ?_⟩
+  rw [div_lt_one (by positivity)]
+  have : (2 : ℝ) * k + p < 2 * q := by exact_mod_cast hwrap
+  linarith
+
 /-- **Even-`β` read-off.** For `r = 2q - γp`, runner `r`'s coordinate on the
     half-integer time `(2m+1)/(2q)` is `1 - γ·A` (where `A = {p·(2m+1)/(2q)}`),
     provided `0 < γ·A < 1`. Drives the `j = -1` pairs `(γ, -1)`. -/
@@ -5253,6 +5280,99 @@ lemma bhk_prop11_exc_3_2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q
   · rw [hmcast, hA']; linarith
   · rw [hmcast, hA']; linarith
 
+/-- **Half-slope read-off for `2r = 3q - 3p` (the `(3,-2)` form).** On the half-integer time
+    `(2m+1)/(2q)`, runner `r`'s coordinate is `3/4 - (3/2)·A` (`A = {p(m+½)/q} ∈ [1/6,1/3]`),
+    *provided* `m - ⌊p(m+½)/q⌋` is even (`= 2s`). The parity selects the correct line; it holds
+    when `(p·m) % q` is even (with `p, q` odd). -/
+lemma bhk_prop11_readoff_3q3p (p q r m : ℕ) (d s : ℤ) (hq0 : 0 < q)
+    (hr2 : 2 * r = 3 * q - 3 * p) (hpq : p ≤ q)
+    (hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = d) (hs : (m : ℤ) - d = 2 * s)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 1 / 3) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 3 / 4 - 3 / 2 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (d : ℝ) := by
+    have hAfd : A = Z - (d : ℝ) := by rw [hAdef, Int.fract, hd]
+    linarith
+  have hr2R : 2 * (r : ℝ) = 3 * q - 3 * p := by
+    have hc : ((2 * r : ℕ) : ℝ) = ((3 * q - 3 * p : ℕ) : ℝ) := by exact_mod_cast hr2
+    rw [Nat.cast_sub (by omega)] at hc; push_cast at hc ⊢; linarith
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (3 / 4 - 3 / 2 * A) + ((3 * s : ℤ) : ℝ) := by
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 3 / 2 * ((m : ℝ) + 1 / 2) - 3 / 2 * Z := by
+      rw [hZdef, show (r : ℝ) = (3 * (q : ℝ) - 3 * p) / 2 from by linarith [hr2R]]
+      field_simp
+    rw [key, hAz]
+    have hsR : (m : ℝ) - d = 2 * s := by exact_mod_cast hs
+    push_cast; linarith [hsR]
+  rw [ht1, Int.fract_add_intCast]
+  exact Int.fract_eq_self.mpr ⟨by linarith [hA0], by linarith [hA1]⟩
+
+/-- **BHK §5 — the half-slope pair `(3, -2)`.** The relation `3p ≡ -2r (mod q)` pins
+    `2r = 3q - 3p` (so `p, q` odd). With the *odd* base `p`, the `r`-readoff lands on the good
+    line only on the parity `(p·m) % q` even, so place `A = {p(m+½)/q} = (2kk+p)/(2q) ∈
+    [1/6, 1/3]` with `kk` **even** (`pm = q·d + kk`, `p,q` odd ⟹ `m - d ≡ kk ≡ 0 (mod 2)`).
+    Then `X = {r(m+½)/q} = 3/4 - (3/2)A ∈ [1/4, 1/2]`, so `(X, A) ∈ R`, contradicting
+    `h_nogood`. -/
+lemma bhk_prop11_exc_3_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr2 : 2 * r = 3 * q - 3 * p)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hpodd : p % 2 = 1 := by
+    rcases Nat.even_or_odd p with ⟨a, ha⟩ | ⟨b, hb⟩
+    · exfalso
+      have h2p : 2 ∣ p := ⟨a, by omega⟩
+      have h2q : 2 ∣ q := by omega
+      exact absurd (hcop ▸ Nat.dvd_gcd h2p h2q : (2 : ℕ) ∣ 1) (by decide)
+    · omega
+  have hqodd : q % 2 = 1 := by omega
+  set kk : ℕ := 2 * ((2 * q - 6 * p + 23) / 24) with hkkdef
+  have hkkn : kk < q := by omega
+  have hwrap : 2 * kk + p < 2 * q := by omega
+  obtain ⟨m, hm, hmod⟩ := bhk_prop11_fract_odd_mul_mod p q hq0 hcop kk hkkn hwrap
+  set Ap : ℝ := (2 * (kk : ℝ) + p) / (2 * q) with hApdef
+  have hAeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+    rw [← hm]; congr 1; field_simp
+  have hAp_lo : 1 / 6 ≤ Ap := by
+    rw [hApdef, le_div_iff₀ (by positivity)]
+    have h2 : (q : ℝ) ≤ 3 * (2 * kk + p) := by
+      exact_mod_cast (show q ≤ 3 * (2 * kk + p) by omega)
+    linarith
+  have hAp_hi : Ap ≤ 1 / 3 := by
+    rw [hApdef, div_le_iff₀ (by positivity)]
+    have h2 : (3 : ℝ) * (2 * kk + p) ≤ 2 * q := by
+      exact_mod_cast (show 3 * (2 * kk + p) ≤ 2 * q by omega)
+    linarith
+  set d : ℕ := p * m / q with hddef
+  have hpmd : p * m = q * d + kk := by rw [hddef, ← hmod]; exact (Nat.div_add_mod (p * m) q).symm
+  have hZval : (p : ℝ) / q * ((m : ℝ) + 1 / 2) = Ap + d := by
+    have hpmdR : (p : ℝ) * m = q * d + kk := by exact_mod_cast hpmd
+    rw [hApdef]; field_simp; linarith [hpmdR]
+  have hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = (d : ℤ) := by
+    rw [hZval, Int.floor_eq_iff]; constructor
+    · push_cast; linarith [hAp_lo]
+    · push_cast; linarith [hAp_hi]
+  have hmd_even : (m + d) % 2 = 0 := by
+    have hpm2 : (p * m) % 2 = m % 2 := by rw [Nat.mul_mod, hpodd, one_mul, Nat.mod_mod]
+    have hqd2 : (q * d) % 2 = d % 2 := by rw [Nat.mul_mod, hqodd, one_mul, Nat.mod_mod]
+    omega
+  obtain ⟨s, hs⟩ : ∃ s : ℤ, (m : ℤ) - d = 2 * s := ⟨((m : ℤ) - d) / 2, by omega⟩
+  have hX := bhk_prop11_readoff_3q3p p q r m d s hq0 hr2 (by omega) hd hs
+    (by rw [hAeq]; exact hAp_lo) (by rw [hAeq]; exact hAp_hi)
+  rw [hAeq] at hX
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hAeq]; linarith
+  · rw [hmcast, hAeq]; linarith
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -5377,7 +5497,29 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
           (by norm_num) hc hk1 hk2 h_nogood
         exact bhk_prop11_antidiag_contra 3 q (by norm_num) (by norm_num) hq18
           (by have h := h14 (by decide) (by decide); omega) (by omega) (by omega)
-    · sorry -- (3,-2)
+    · -- (3,-2): the relation `3p ≡ -2r (mod q)` pins `2r + 3p = 3q`
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 3 (-2) k hk1 hk2
+      have hdvd : (q : ℤ) ∣ (-2 * r - 3 * p) := Int.modEq_iff_dvd.mp hrel
+      have hdvd2 : (q : ℤ) ∣ (2 * r + 3 * p) := by
+        have h := (dvd_neg (α := ℤ)).mpr hdvd
+        rwa [show -(-2 * (r : ℤ) - 3 * p) = 2 * r + 3 * p from by ring] at h
+      obtain ⟨c, hc⟩ := hdvd2
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      have hrqz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have h1 : (q : ℤ) * 2 < q * c := by rw [← hc]; omega
+      have h2 : (q : ℤ) * c < q * 4 := by rw [← hc]; omega
+      have hc2 := lt_of_mul_lt_mul_left h1 hqz
+      have hc4 := lt_of_mul_lt_mul_left h2 hqz
+      have hr2N : 2 * r + 3 * p = 3 * q := by
+        have hZ : (2 : ℤ) * r + 3 * p = 3 * q := by
+          have hceq : c = 3 := by omega
+          rw [hceq] at hc; omega
+        exact_mod_cast hZ
+      have hr2 : 2 * r = 3 * q - 3 * p := by omega
+      exact bhk_prop11_exc_3_neg2 p q r hq18 hcop hp h3p hr2 h_nogood
     · exact bhk_prop11_exc_3_neg1 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (3 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 3 k (by norm_num) (by norm_num) hk1
