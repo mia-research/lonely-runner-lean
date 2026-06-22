@@ -5015,7 +5015,25 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
     · sorry -- (2,1)
-    · sorry -- (2,2)
+    · -- (2,2): the relation forces r = p + q (the diagonal config), contradicting `hndiag`
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 2 2 k hk1 hk2
+      have hdvd : (q : ℤ) ∣ ((2 : ℤ) * r - 2 * p) := Int.modEq_iff_dvd.mp hrel
+      rw [show (2 : ℤ) * r - 2 * p = 2 * ((r : ℤ) - p) from by ring] at hdvd
+      obtain ⟨m, hm⟩ := hdvd
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have hrz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      -- 2(r−p) = q·m with 4q/3 < 2(r−p) < 3q forces m = 2, i.e. r − p = q
+      have h1 : (q : ℤ) * 1 < q * m := by rw [mul_one, ← hm]; linarith [hrz, h3pz, hpz0]
+      have h2 : (q : ℤ) * m < q * 3 := by rw [← hm]; linarith [hr32z, hpz0]
+      have hm1 : 1 < m := lt_of_mul_lt_mul_left h1 hqz
+      have hm3 : m < 3 := lt_of_mul_lt_mul_left h2 hqz
+      have hm2 : m = 2 := by omega
+      rw [hm2] at hm
+      have hrpq : (r : ℤ) = p + q := by omega
+      exact absurd (by exact_mod_cast hrpq : r = p + q) hndiag
     · sorry -- (2,3)
   · -- i = 3: cone j ∈ {-4,…,4}; kills (3,-1), (3,1) and (3,0)
     have hjl : -4 ≤ j := by
