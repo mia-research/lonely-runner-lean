@@ -3327,7 +3327,7 @@ lemma bhk_s6_651_final (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
   · exact absurd hi_unsafe hnot3
   · exact absurd hi_unsafe hnot4
 
-/-- **BHK Case 6.5.1 kernel (PROVED — BHK p. 43, (62)–(64)).** The hard
+/-- **BHK Case 6.5.1 kernel (PROVED — BHK p. 43, (62)–(64)).** The
     core of the `n = 5`, `(1/5, −2/5)` case, with the forced bounds
     (62) `25 v₄ < 27 v₃` and (63) `7 v₃ < 25 v₁` as hypotheses. By
     contradiction: the `[1/(6v₁), 5/(6v₄)]` 1234-gap must lie in a single
