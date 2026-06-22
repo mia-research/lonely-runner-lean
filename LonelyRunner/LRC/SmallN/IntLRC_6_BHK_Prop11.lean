@@ -5373,6 +5373,111 @@ lemma bhk_prop11_exc_3_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime 
   · rw [hmcast, hAeq]; linarith
   · rw [hmcast, hAeq]; linarith
 
+/-- **Half-slope read-off for `2r = 3q - 4p` (the `(4,-2)` `c = 3` branch).** On the
+    half-integer time `(2m+1)/(2q)` with `m` even (`m = 2s`), runner `r`'s coordinate is
+    `3/4 - 2·A` (`A = {p(m+½)/q} ∈ [1/6, 7/24]`). With `q` even and `p` odd, `m ≡ kk (mod 2)`,
+    so choosing `kk` even gives `m` even (the line selector). -/
+lemma bhk_prop11_readoff_3q4p (p q r m : ℕ) (s : ℤ) (hq0 : 0 < q)
+    (hr2 : 2 * r = 3 * q - 4 * p) (hpq : 2 * p ≤ q) (hms : (m : ℤ) = 2 * s)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 7 / 24) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 3 / 4 - 2 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hr2R : 2 * (r : ℝ) = 3 * q - 4 * p := by
+    have hc : ((2 * r : ℕ) : ℝ) = ((3 * q - 4 * p : ℕ) : ℝ) := by exact_mod_cast hr2
+    rw [Nat.cast_sub (by omega)] at hc; push_cast at hc ⊢; linarith
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+      = (3 / 4 - 2 * A) + ((3 * s - 2 * ⌊Z⌋ : ℤ) : ℝ) := by
+    have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 3 / 2 * ((m : ℝ) + 1 / 2) - 2 * Z := by
+      rw [hZdef, show (r : ℝ) = (3 * (q : ℝ) - 4 * p) / 2 from by linarith [hr2R]]
+      field_simp; ring
+    rw [key]; conv_lhs => rw [hAz]
+    have hmsR : (m : ℝ) = 2 * s := by exact_mod_cast hms
+    push_cast; linarith [hmsR]
+  rw [ht1, Int.fract_add_intCast]
+  exact Int.fract_eq_self.mpr ⟨by linarith [hA1], by linarith [hA0]⟩
+
+/-- **BHK §5 Case 5.2.6 — the half-slope pair `(4, -2)`.** The relation `4p ≡ -2r (mod q)`
+    gives `q ∣ (2r + 4p)`; the cone bounds force `2r + 4p ∈ {3q, 4q}`. `4q` is `r = 2q − 2p`
+    (`q < 4p`), closed by `bhk_prop11_exc_2_neg1_hit`. `3q` forces `q` even (`2r = 3q − 4p`,
+    `4p < q`); choosing `kk` even gives `m` even, and `readoff_3q4p` lands `X = 3/4 − 2A`. -/
+lemma bhk_prop11_exc_4_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (k : ℤ)
+    (hk1 : Int.fract (((4 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((-2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq0 4 (-2) k hk1 hk2
+  have hdvdZ : (q : ℤ) ∣ (2 * (r : ℤ) + 4 * p) := by
+    have h := Int.modEq_iff_dvd.mp hrel
+    rw [show (-2 : ℤ) * (r : ℤ) - 4 * p = -(2 * r + 4 * p) from by ring] at h
+    exact dvd_neg.mp h
+  have hdvd : q ∣ (2 * r + 4 * p) := by exact_mod_cast hdvdZ
+  obtain ⟨c, hc⟩ := hdvd
+  have hb1 : 2 * q < 2 * r + 4 * p := by omega
+  have hb2 : 2 * r + 4 * p < 5 * q := by omega
+  rw [hc] at hb1 hb2
+  have hc2 : 2 < c := by
+    by_contra h; push_neg at h
+    exact absurd hb1 (by have : q * c ≤ q * 2 := Nat.mul_le_mul (le_refl q) h; omega)
+  have hc5 : c < 5 := by
+    by_contra h; push_neg at h
+    exact absurd hb2 (by have : q * 5 ≤ q * c := Nat.mul_le_mul (le_refl q) h; omega)
+  have hcval : c = 3 ∨ c = 4 := by omega
+  rcases hcval with rfl | rfl
+  · -- c = 3: 2r + 4p = 3q ⟹ q even, 2r = 3q − 4p, 4p < q
+    have hqeven : 2 ∣ q := by omega
+    have hr2 : 2 * r = 3 * q - 4 * p := by omega
+    have hpodd : p % 2 = 1 := by
+      rcases Nat.even_or_odd p with hpe | hpo
+      · exfalso; obtain ⟨a, ha⟩ := hpe
+        exact absurd (hcop ▸ Nat.dvd_gcd ⟨a, by omega⟩ hqeven : (2 : ℕ) ∣ 1) (by decide)
+      · obtain ⟨b, hb⟩ := hpo; omega
+    set kk : ℕ := 2 * ((q - 3 * p + 11) / 12) with hkkdef
+    have hkkn : kk < q := by omega
+    have hwrap : 2 * kk + p < 2 * q := by omega
+    obtain ⟨m, hm, hmod⟩ := bhk_prop11_fract_odd_mul_mod p q hq0 hcop kk hkkn hwrap
+    set Ap : ℝ := (2 * (kk : ℝ) + p) / (2 * q) with hApdef
+    have hAeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+      rw [← hm]; congr 1; field_simp
+    have hAp_lo : 1 / 6 ≤ Ap := by
+      rw [hApdef, le_div_iff₀ (by positivity)]
+      have : (q : ℝ) ≤ 3 * (2 * kk + p) := by exact_mod_cast (show q ≤ 3 * (2 * kk + p) by omega)
+      linarith
+    have hAp_hi : Ap ≤ 7 / 24 := by
+      rw [hApdef, div_le_iff₀ (by positivity)]
+      have : (12 : ℝ) * (2 * kk + p) ≤ 7 * q := by
+        exact_mod_cast (show 12 * (2 * kk + p) ≤ 7 * q by omega)
+      linarith
+    obtain ⟨D, hD⟩ : ∃ D, p * m = q * D + kk :=
+      ⟨p * m / q, by rw [← hmod]; exact (Nat.div_add_mod (p * m) q).symm⟩
+    have hmeven : (m : ℤ) = 2 * ((m : ℤ) / 2) := by
+      have h1 : (p * m) % 2 = m % 2 := by rw [Nat.mul_mod, hpodd, one_mul, Nat.mod_mod]
+      have hqD : (q * D) % 2 = 0 := by
+        rw [Nat.mul_mod, show q % 2 = 0 from by omega, Nat.zero_mul, Nat.zero_mod]
+      have hkke : kk % 2 = 0 := by omega
+      omega
+    have hX := bhk_prop11_readoff_3q4p p q r m ((m : ℤ) / 2) hq0 hr2 (by omega) hmeven
+      (by rw [hAeq]; exact hAp_lo) (by rw [hAeq]; exact hAp_hi)
+    rw [hAeq] at hX
+    have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+    refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+    · rw [hmcast, hX]; linarith [hAp_hi]
+    · rw [hmcast, hX]; linarith [hAp_lo]
+    · rw [hmcast, hAeq]; linarith [hAp_lo]
+    · rw [hmcast, hAeq]; linarith [hAp_hi, show (7 : ℝ) / 24 ≤ 1 / 3 from by norm_num]
+  · -- c = 4: 2r + 4p = 4q ⟹ r = 2q − 2p
+    have hr2 : r = 2 * q - 2 * p := by omega
+    exact bhk_prop11_exc_2_neg1_hit p q r hq18 hcop (by omega) h3p hr2 h_nogood
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -5568,7 +5673,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
                 show (-4 : ℤ).natAbs = 4 from by decide] at h
               omega) h6 hdvd
     · sorry -- (4,-3)
-    · sorry -- (4,-2)
+    · exact bhk_prop11_exc_4_neg2 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · by_cases hq24 : 24 ≤ q
       · exact bhk_prop11_exc_4_neg1 p q r hq24 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
       · sorry -- (4,-1) sliver q ∈ [18,24)
