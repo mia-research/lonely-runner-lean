@@ -4557,6 +4557,187 @@ lemma bhk_prop11_exc_1_neg2_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) 
   · rw [← hXdef, ← hYdef, c4, c3, c1, e6, egs]
     exact mul_le_mul_of_nonneg_left key_b (by positivity)
 
+/-- **Pentagon grid-witness applicator.** Given a witness index `l` whose cone point
+    `(X, Y) = ({r(l+½)/q}, {p(l+½)/q})` is supplied in closed rational form (`hX`, `hY`),
+    discharge the six `pent_no_good_red` conditions (rewritten from `Int.fract` to `X, Y`).
+    Used by the ten explicit narrow-window `(1,-2)` instances. -/
+lemma bhk_prop11_exc_1_neg2_witness (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q) (hp : 0 < p) (hr : 0 < r) (hs : 0 < s)
+    (hpqlt : p < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (l : ℤ) (X Y : ℝ)
+    (hX : Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) = X)
+    (hY : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = Y)
+    (h39 : 1 / 6 - (r : ℝ) * (((s : ℝ) - q) / (3 * q * s)) ≤ X)
+    (h40 : 1 / 6 - (p : ℝ) * (((s : ℝ) - q) / (3 * q * s)) ≤ Y)
+    (h41 : Y ≤ 1 / 3 + ((q : ℝ) - p) * (((s : ℝ) - q) / (3 * q * s)))
+    (hxle : X ≤ 5 / 6)
+    (h42a : 1 / (3 * (s : ℝ)) ≤ (5 / 6 - X) / r + (Y - 1 / 6) / p)
+    (h42b : 1 / (3 * (s : ℝ)) ≤ (5 / 6 - X) / r + (1 / 3 - Y) / ((q : ℝ) - p)) : False := by
+  refine bhk_prop11_pent_no_good_red w hmono hpos hsum hsmall hcover g p q r s hg hq hp hr hs
+    hpqlt c0 c2 c3 c4 l ?_ ?_ ?_ ?_ ?_ ?_
+  · rw [hX]; exact h39
+  · rw [hY]; exact h40
+  · rw [hY]; exact h41
+  · rw [hX]; exact hxle
+  · rw [hX, hY]; exact h42a
+  · rw [hX, hY]; exact h42b
+
+-- finite narrow-window enumeration: `interval_cases` over `q, r, p` (≈600 leaves, each
+-- closed by `omega`/`decide`) followed by ten explicit grid-witness `norm_num` checks
+set_option maxHeartbeats 4000000 in
+/-- **BHK §5 Case 5.2.9 — `(1,-2)S` narrow-window tail.** The finite complement of the
+    wide-window `pentkill`: instances with `r(5s-4r) < 36s`. The narrow inequality forces
+    `r ≤ 32` (since `r² < 31r + 36`) hence `q ≤ 23`; with `q` odd (even `q` fail coprimality)
+    this pins `(q, r, p, s)` to one of ten tuples (`q ∈ {19,21,23}`). Each is killed by an
+    explicit grid witness `l` placing a cone point in the pentagon `P`
+    (`bhk_prop11_exc_1_neg2_witness` → `bhk_prop11_pent_no_good_red`). -/
+lemma bhk_prop11_exc_1_neg2_small (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq18 : 18 ≤ q) (hnar : (r : ℝ) * (5 * s - 4 * r) < 36 * s)
+    (hrig : 2 * r + p = 3 * q) : False := by
+  -- nat form of the narrow inequality (5s > 4r since s > r)
+  have hnar_nat : 5 * r * s < 4 * r * r + 36 * s := by
+    have hsr : (r : ℝ) + 1 ≤ s := by exact_mod_cast (show r + 1 ≤ s by omega)
+    have hR : ((5 * r * s : ℕ) : ℝ) < ((4 * r * r + 36 * s : ℕ) : ℝ) := by
+      push_cast; nlinarith [hnar]
+    exact_mod_cast hR
+  have h4q3r : 4 * q < 3 * r := by omega
+  -- r ≤ 32 (narrow forces r² < 31r + 36), hence q ≤ 23
+  have hr_ub : r ≤ 32 := by
+    by_contra h
+    have h33 : 33 ≤ r := by omega
+    have hrR : (33 : ℝ) ≤ r := by exact_mod_cast h33
+    have hsR : (r : ℝ) + 1 ≤ s := by exact_mod_cast (show r + 1 ≤ s by omega)
+    nlinarith [hnar, mul_nonneg (show (0 : ℝ) ≤ (s : ℝ) - ((r : ℝ) + 1) by linarith)
+        (show (0 : ℝ) ≤ 5 * (r : ℝ) - 36 by linarith),
+      mul_nonneg (show (0 : ℝ) ≤ (r : ℝ) - 33 by linarith) (show (0 : ℝ) ≤ (r : ℝ) by positivity)]
+  have hq_ub : q ≤ 23 := by omega
+  have hp_ub : p ≤ 7 := by omega
+  -- enumerate q, r, p; impossible leaves die by arithmetic (omega) or coprimality (decide)
+  interval_cases q <;> interval_cases r <;> interval_cases p <;>
+    (first | omega | (revert hcop; decide) | skip)
+  -- the seven surviving coprime triples (q, r, p); the witness (l, X, Y) is shared across s
+  · -- (19, 26, 5): s ∈ {27, 28}
+    have hs_ub : s ≤ 28 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 5 19 26 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-26) (2 / 19) (11 / 38)
+        (by rw [show ((26 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-26 : ℤ) : ℝ) + 1 / 2)
+                = ((-35 : ℤ) : ℝ) + 2 / 19 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((5 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-26 : ℤ) : ℝ) + 1 / 2)
+                = ((-7 : ℤ) : ℝ) + 11 / 38 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (19, 27, 3): s ∈ {28, 29}
+    have hs_ub : s ≤ 29 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 3 19 27 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-37) (5 / 38) (9 / 38)
+        (by rw [show ((27 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-37 : ℤ) : ℝ) + 1 / 2)
+                = ((-52 : ℤ) : ℝ) + 5 / 38 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((3 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-37 : ℤ) : ℝ) + 1 / 2)
+                = ((-6 : ℤ) : ℝ) + 9 / 38 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (19, 28, 1): s ∈ {29, 30}
+    have hs_ub : s ≤ 30 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 1 19 28 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-35) (3 / 19) (7 / 38)
+        (by rw [show ((28 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-35 : ℤ) : ℝ) + 1 / 2)
+                = ((-51 : ℤ) : ℝ) + 3 / 19 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((1 : ℕ) : ℝ) / ((19 : ℕ) : ℝ) * (((-35 : ℤ) : ℝ) + 1 / 2)
+                = ((-2 : ℤ) : ℝ) + 7 / 38 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (21, 29, 5): s = 30
+    have hs_ub : s ≤ 30 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 5 21 29 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-33) (5 / 42) (11 / 42)
+        (by rw [show ((29 : ℕ) : ℝ) / ((21 : ℕ) : ℝ) * (((-33 : ℤ) : ℝ) + 1 / 2)
+                = ((-45 : ℤ) : ℝ) + 5 / 42 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((5 : ℕ) : ℝ) / ((21 : ℕ) : ℝ) * (((-33 : ℤ) : ℝ) + 1 / 2)
+                = ((-8 : ℤ) : ℝ) + 11 / 42 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (21, 31, 1): s = 32
+    have hs_ub : s ≤ 32 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 1 21 31 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-37) (5 / 42) (11 / 42)
+        (by rw [show ((31 : ℕ) : ℝ) / ((21 : ℕ) : ℝ) * (((-37 : ℤ) : ℝ) + 1 / 2)
+                = ((-54 : ℤ) : ℝ) + 5 / 42 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((1 : ℕ) : ℝ) / ((21 : ℕ) : ℝ) * (((-37 : ℤ) : ℝ) + 1 / 2)
+                = ((-2 : ℤ) : ℝ) + 11 / 42 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (23, 31, 7): s = 32
+    have hs_ub : s ≤ 32 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 7 23 31 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-39) (5 / 46) (13 / 46)
+        (by rw [show ((31 : ℕ) : ℝ) / ((23 : ℕ) : ℝ) * (((-39 : ℤ) : ℝ) + 1 / 2)
+                = ((-52 : ℤ) : ℝ) + 5 / 46 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((7 : ℕ) : ℝ) / ((23 : ℕ) : ℝ) * (((-39 : ℤ) : ℝ) + 1 / 2)
+                = ((-12 : ℤ) : ℝ) + 13 / 46 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · -- (23, 32, 5): s = 33
+    have hs_ub : s ≤ 33 := by omega
+    interval_cases s <;>
+      exact bhk_prop11_exc_1_neg2_witness w hmono hpos hsum hsmall hcover g 5 23 32 _
+        hg (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+        c0 c2 c3 c4 (-27) (3 / 23) (11 / 46)
+        (by rw [show ((32 : ℕ) : ℝ) / ((23 : ℕ) : ℝ) * (((-27 : ℤ) : ℝ) + 1 / 2)
+                = ((-37 : ℤ) : ℝ) + 3 / 23 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by rw [show ((5 : ℕ) : ℝ) / ((23 : ℕ) : ℝ) * (((-27 : ℤ) : ℝ) + 1 / 2)
+                = ((-6 : ℤ) : ℝ) + 11 / 46 by push_cast; norm_num,
+              Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩])
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+/-- **BHK §5 Case 5.2.9 — `(1,-2)S` dispatcher.** Splits on the slant width bound:
+    `36s ≤ r(5s-4r)` (wide, any `q`) → `bhk_prop11_exc_1_neg2_pentkill`; its complement
+    (narrow, `q ∈ {19,21,23}`) → `bhk_prop11_exc_1_neg2_small`. -/
+lemma bhk_prop11_exc_1_neg2_kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq18 : 18 ≤ q) (hrig : 2 * r + p = 3 * q) : False := by
+  by_cases hwb : 36 * (s : ℝ) ≤ (r : ℝ) * (5 * s - 4 * r)
+  · exact bhk_prop11_exc_1_neg2_pentkill w hmono hpos hsum hsmall hcover g p q r s hg hq
+      c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hwb hrig
+  · exact bhk_prop11_exc_1_neg2_small w hmono hpos hsum hsmall hcover g p q r s hg hq
+      c0 c2 c3 c4 hcop hp h3p hrq hr32 hrs hq18 (not_le.mp hwb) hrig
+
 /-- **BHK §5 Parts 4–6 — the open exceptional-pair obligation (`q ≥ 18`).** Every
     cone pair `(i, j)` (`0 ≤ i < 6`, `-3 - i/2 < j < 3 + i/2`) returned by
     `exceptional_q18` is contradictory. The pairs killed by the existing `exc_*`
@@ -4575,7 +4756,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
     (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q)
-    (hne12 : ¬(i = 1 ∧ j = 2)) :
+    (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) :
     False := by
   have hi_lt : i < 6 := by exact_mod_cast hi6
   interval_cases i
@@ -4597,7 +4778,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       omega
     interval_cases j
     · sorry -- (1,-3)
-    · sorry -- (1,-2)
+    · exact absurd ⟨rfl, rfl⟩ hne1n2 -- (1,-2): peeled to core_q18 (needs the speeds)
     · exact bhk_prop11_exc_1_neg1 p q r (by omega) hp h3p hrq hr32 k
         (by rw [show (1 : ℝ) = ((1 : ℤ) : ℝ) from by norm_num]; exact hk1) hk2
     · have hI0 : (1 : ℤ) = 0 :=
@@ -5612,8 +5793,22 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
         bhk_prop11_exc_1_2 p q r hp_pos h3p hrq hr32 k hk1 hk2
       exact bhk_prop11_exc_1_2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
         (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
-    · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-        hk1 hk2 h_nogood h14 h12
+    · by_cases h1n2 : i = 1 ∧ j = -2
+      · -- (1,-2)S exceptional pair: peel to the dedicated dispatcher (needs the speeds)
+        obtain ⟨hi1, hjn2⟩ := h1n2
+        subst hi1; subst hjn2
+        have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+        have hrs : r < s := by
+          have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+            hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+          have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+          exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+        have hrig : 2 * r + p = 3 * q :=
+          bhk_prop11_exc_1_neg2 p q r hp_pos h3p hrq hr32 k hk1 hk2
+        exact bhk_prop11_exc_1_neg2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
+          (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
+      · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+          hk1 hk2 h_nogood h14 h12 h1n2
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
