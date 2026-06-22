@@ -4946,7 +4946,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
     (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q)
-    (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) :
+    (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) (hndiag : r ≠ p + q) :
     False := by
   have hi_lt : i < 6 := by exact_mod_cast hi6
   interval_cases i
@@ -4975,7 +4975,24 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
         bhk_prop11_exc_j_zero p q r (by omega) hcop 1 k (by norm_num) (by norm_num) hk1
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
-    · sorry -- (1,1) — Part 6
+    · -- (1,1): the relation forces r = p + q (the diagonal config), contradicting `hndiag`
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 1 1 k hk1 hk2
+      have hdvd : (q : ℤ) ∣ ((1 : ℤ) * r - 1 * p) := Int.modEq_iff_dvd.mp hrel
+      rw [show (1 : ℤ) * r - 1 * p = (r : ℤ) - p from by ring] at hdvd
+      obtain ⟨m, hm⟩ := hdvd
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have hrz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hpz : (p : ℤ) < q := by exact_mod_cast (show p < q by omega)
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h1 : (q : ℤ) * 0 < q * m := by rw [mul_zero, ← hm]; omega
+      have h2 : (q : ℤ) * m < q * 2 := by nlinarith [hm, hr32z, hpz0]
+      have hm0 : 0 < m := lt_of_mul_lt_mul_left h1 hqz
+      have hm2 : m < 2 := lt_of_mul_lt_mul_left h2 hqz
+      have hm1 : m = 1 := by omega
+      rw [hm1] at hm
+      have hrpq : (r : ℤ) = p + q := by omega
+      exact absurd (by exact_mod_cast hrpq : r = p + q) hndiag
     · exact absurd ⟨rfl, rfl⟩ hne12
     · exact bhk_prop11_exc_1_3 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
   · -- i = 2: cone j ∈ {-3,…,3}; kills (2,-1) and (2,0)
@@ -5998,7 +6015,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
         exact bhk_prop11_exc_1_neg2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
           (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
       · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-          hk1 hk2 h_nogood h14 h12 h1n2
+          hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
 
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
