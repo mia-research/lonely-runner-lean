@@ -3085,6 +3085,163 @@ lemma bhk_prop11_exc_3_3 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q
     obtain ⟨qp, hqp⟩ := hq3dvd
     exact bhk_prop11_exc_3_3_hit p q qp r hq18 hcop hp hr32 hqp (by omega) h_nogood
 
+set_option maxHeartbeats 800000 in
+/-- **BHK §5 Case 5.2.2 — diagonal `(i,i)` non-diagonal branch, offset-coset witness.**
+    With `q = i·qp`, `r = p + cc·qp` (the non-diagonal multiple), on the sub-grid
+    `l = i·m + ρ` the cone point's `p`-coordinate `{p·t}` is a value `Y` of the coprime
+    `1/qp`-coset, and its `r`-coordinate is `{r·t} = Y + δ` where `δ = dRem/(2i)` and
+    `cc(2ρ+1) = 2i·dInt + dRem` (the slope-`1` shift `cc·m + cc(2ρ+1)/(2i)` contributes the
+    integer `cc·m + dInt` plus the offset `δ`). Aiming `Y ∈ [1/6, 1/3]` (window `1/6 ≥ 1/qp`
+    since `qp ≥ 6`) with `δ ≤ 1/6` puts `(Y+δ, Y) ∈ R`, contradicting `h_nogood`. -/
+lemma bhk_prop11_exc_diag_coset_hit (p q qp r i cc rho dInt dRem : ℕ)
+    (hi : 0 < i) (hqp6 : 6 ≤ qp) (hcop' : Nat.Coprime p qp) (hp : 0 < p)
+    (hq_eq : q = i * qp) (hr_eq : r = p + cc * qp)
+    (hdrem : cc * (2 * rho + 1) = 2 * i * dInt + dRem) (hδ6 : 3 * dRem ≤ i)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hqp0 : 0 < qp := by omega
+  have hiR : (0 : ℝ) < i := by exact_mod_cast hi
+  have hqpR : (0 : ℝ) < qp := by exact_mod_cast hqp0
+  set b : ℝ := (p : ℝ) * (2 * rho + 1) / (2 * i * qp) with hbdef
+  have hw : 1 / (qp : ℝ) ≤ 1 / 6 := by
+    rw [div_le_div_iff₀ hqpR (by norm_num)]
+    have : (6 : ℝ) ≤ qp := by exact_mod_cast hqp6
+    linarith
+  obtain ⟨m, hm⟩ := bhk_prop11_grid_hit_coset_step qp hqp0 p hcop' b (1 / 6) (1 / 6) hw
+    (by norm_num) (by norm_num)
+  set Z : ℝ := b + (m : ℝ) * p / qp with hZdef
+  set Y : ℝ := Int.fract Z with hYdef
+  have hYmem : Y ∈ Set.Icc (1 / 6 : ℝ) (1 / 3) := by
+    have h := hm; rw [show (1 / 6 : ℝ) + 1 / 6 = 1 / 3 from by norm_num] at h; exact h
+  set δ : ℝ := (dRem : ℝ) / (2 * i) with hδdef
+  have hδ0 : 0 ≤ δ := by rw [hδdef]; positivity
+  have hδle : δ ≤ 1 / 6 := by
+    rw [hδdef, div_le_div_iff₀ (by positivity) (by norm_num)]
+    have : (6 : ℝ) * dRem ≤ 2 * i := by exact_mod_cast (show 6 * dRem ≤ 2 * i by omega)
+    linarith
+  have hqR : (q : ℝ) = i * qp := by rw [hq_eq]; push_cast; ring
+  have hrR : (r : ℝ) = p + cc * qp := by rw [hr_eq]; push_cast; ring
+  have hq0R : (q : ℝ) ≠ 0 := by rw [hqR]; positivity
+  have hccr : (cc : ℝ) * (2 * (rho : ℝ) + 1) / (2 * i) = (dInt : ℝ) + δ := by
+    have hccR : (cc : ℝ) * (2 * (rho : ℝ) + 1) = 2 * (i : ℝ) * dInt + dRem := by
+      exact_mod_cast hdrem
+    rw [hccR, hδdef]; field_simp
+  have hYarg : (p : ℝ) / q * (((i * (m : ℤ) + rho : ℤ) : ℝ) + 1 / 2) = Z := by
+    rw [hqR, hZdef, hbdef]; push_cast; field_simp; ring
+  have hXarg : (r : ℝ) / q * (((i * (m : ℤ) + rho : ℤ) : ℝ) + 1 / 2)
+      = Z + (cc : ℝ) * m + (cc : ℝ) * (2 * (rho : ℝ) + 1) / (2 * i) := by
+    rw [hrR, hqR, hZdef, hbdef]; push_cast; field_simp; ring
+  rw [hccr] at hXarg
+  have hY : Int.fract ((p : ℝ) / q * (((i * (m : ℤ) + rho : ℤ) : ℝ) + 1 / 2)) = Y := by
+    rw [hYarg]
+  have hX : Int.fract ((r : ℝ) / q * (((i * (m : ℤ) + rho : ℤ) : ℝ) + 1 / 2)) = Y + δ := by
+    rw [hXarg, show Z + (cc : ℝ) * m + ((dInt : ℝ) + δ)
+          = (Y + δ) + ((cc * (m : ℤ) + dInt + ⌊Z⌋ : ℤ) : ℝ) from by
+        have hf : Y + (⌊Z⌋ : ℝ) = Z := by rw [hYdef]; exact Int.fract_add_floor Z
+        push_cast; linarith [hf],
+      Int.fract_add_intCast,
+      Int.fract_eq_self.mpr ⟨by linarith [hYmem.1, hδ0], by linarith [hYmem.2, hδle]⟩]
+  refine h_nogood (i * (m : ℤ) + rho) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hX]; linarith [hYmem.1, hδ0]
+  · rw [hX]; linarith [hYmem.2, hδle]
+  · rw [hY]; exact hYmem.1
+  · rw [hY]; exact hYmem.2
+
+/-- **BHK §5 Case 5.2.2 — the diagonal pair `(4,4)`.** `4p ≡ 4r (mod q)` ⟹ `q ∣ 4(r−p)`;
+    the cone bounds force `4(r−p) ∈ {3q, 4q, 5q}`. `4q` is `r = p+q` (diagonal, `hndiag`);
+    `3q`/`5q` force `4 ∣ q` and are closed by the `δ = 1/8` offset-coset witness. The `(14)`
+    bound `q ≥ 23` gives `qp = q/4 ≥ 6`, so the `1/qp`-grid window `1/6 ≥ 1/qp`. -/
+lemma bhk_prop11_exc_4_4 (p q r : ℕ) (hq18 : 18 ≤ q) (hq23 : 23 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q) (hndiag : r ≠ p + q)
+    (k : ℤ)
+    (hk1 : Int.fract (((4 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((4 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq0 4 4 k hk1 hk2
+  have hdvdZ : (q : ℤ) ∣ (4 * (r : ℤ) - 4 * p) := Int.modEq_iff_dvd.mp hrel
+  have h4rp : 4 * p ≤ 4 * r := by omega
+  have hdvd : q ∣ (4 * r - 4 * p) := by
+    have hcast : ((4 * r - 4 * p : ℕ) : ℤ) = 4 * (r : ℤ) - 4 * p := by
+      rw [Nat.cast_sub h4rp]; push_cast; ring
+    have hd : (q : ℤ) ∣ ((4 * r - 4 * p : ℕ) : ℤ) := by rw [hcast]; exact hdvdZ
+    exact_mod_cast hd
+  obtain ⟨c, hc⟩ := hdvd
+  have hb1 : 2 * q < 4 * r - 4 * p := by omega
+  have hb2 : 4 * r - 4 * p < 6 * q := by omega
+  rw [hc] at hb1 hb2
+  have hc2 : 2 < c := by
+    by_contra h; push_neg at h
+    exact absurd hb1 (by have : q * c ≤ q * 2 := Nat.mul_le_mul (le_refl q) h; omega)
+  have hc6 : c < 6 := by
+    by_contra h; push_neg at h
+    exact absurd hb2 (by have : q * 6 ≤ q * c := Nat.mul_le_mul (le_refl q) h; omega)
+  have hcop_q : ∀ qp, q = 4 * qp → Nat.Coprime p qp := fun qp hqp =>
+    Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd (Nat.gcd_dvd_left p qp)
+      (by rw [hqp]; exact (Nat.gcd_dvd_right p qp).mul_left 4))
+  have hcval : c = 3 ∨ c = 4 ∨ c = 5 := by omega
+  rcases hcval with rfl | rfl | rfl
+  · obtain ⟨qp, hqp⟩ : (4 : ℕ) ∣ q := by omega
+    exact bhk_prop11_exc_diag_coset_hit p q qp r 4 3 1 1 1 (by norm_num) (by omega)
+      (hcop_q qp hqp) hp hqp (by omega) (by norm_num) (by norm_num) h_nogood
+  · exact absurd (show r = p + q by omega) hndiag
+  · obtain ⟨qp, hqp⟩ : (4 : ℕ) ∣ q := by omega
+    exact bhk_prop11_exc_diag_coset_hit p q qp r 4 5 2 3 1 (by norm_num) (by omega)
+      (hcop_q qp hqp) hp hqp (by omega) (by norm_num) (by norm_num) h_nogood
+
+/-- **BHK §5 Case 5.2.2 — the diagonal pair `(5,5)`.** `5p ≡ 5r (mod q)` ⟹ `q ∣ 5(r−p)`;
+    the cone bounds force `5(r−p) ∈ {4q, 5q, 6q, 7q}`. `5q` is `r = p+q` (diagonal, `hndiag`);
+    `4q`/`6q` (`δ = 0`) and `7q` (`δ = 1/10`) force `5 ∣ q` and are closed by the offset-coset
+    witness. The `(14)` bound `q ≥ 34` gives `qp = q/5 ≥ 7 ≥ 6`. -/
+lemma bhk_prop11_exc_5_5 (p q r : ℕ) (hq18 : 18 ≤ q) (hq34 : 34 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q) (hndiag : r ≠ p + q)
+    (k : ℤ)
+    (hk1 : Int.fract (((5 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((5 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ)))
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq0 5 5 k hk1 hk2
+  have hdvdZ : (q : ℤ) ∣ (5 * (r : ℤ) - 5 * p) := Int.modEq_iff_dvd.mp hrel
+  have h5rp : 5 * p ≤ 5 * r := by omega
+  have hdvd : q ∣ (5 * r - 5 * p) := by
+    have hcast : ((5 * r - 5 * p : ℕ) : ℤ) = 5 * (r : ℤ) - 5 * p := by
+      rw [Nat.cast_sub h5rp]; push_cast; ring
+    have hd : (q : ℤ) ∣ ((5 * r - 5 * p : ℕ) : ℤ) := by rw [hcast]; exact hdvdZ
+    exact_mod_cast hd
+  obtain ⟨c, hc⟩ := hdvd
+  have hb1 : 3 * q < 5 * r - 5 * p := by omega
+  have hb2 : 5 * r - 5 * p < 8 * q := by omega
+  rw [hc] at hb1 hb2
+  have hc3 : 3 < c := by
+    by_contra h; push_neg at h
+    exact absurd hb1 (by have : q * c ≤ q * 3 := Nat.mul_le_mul (le_refl q) h; omega)
+  have hc8 : c < 8 := by
+    by_contra h; push_neg at h
+    exact absurd hb2 (by have : q * 8 ≤ q * c := Nat.mul_le_mul (le_refl q) h; omega)
+  have hcop_q : ∀ qp, q = 5 * qp → Nat.Coprime p qp := fun qp hqp =>
+    Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd (Nat.gcd_dvd_left p qp)
+      (by rw [hqp]; exact (Nat.gcd_dvd_right p qp).mul_left 5))
+  have hcval : c = 4 ∨ c = 5 ∨ c = 6 ∨ c = 7 := by omega
+  rcases hcval with rfl | rfl | rfl | rfl
+  · obtain ⟨qp, hqp⟩ : (5 : ℕ) ∣ q := by omega
+    exact bhk_prop11_exc_diag_coset_hit p q qp r 5 4 2 2 0 (by norm_num) (by omega)
+      (hcop_q qp hqp) hp hqp (by omega) (by norm_num) (by norm_num) h_nogood
+  · exact absurd (show r = p + q by omega) hndiag
+  · obtain ⟨qp, hqp⟩ : (5 : ℕ) ∣ q := by omega
+    exact bhk_prop11_exc_diag_coset_hit p q qp r 5 6 2 3 0 (by norm_num) (by omega)
+      (hcop_q qp hqp) hp hqp (by omega) (by norm_num) (by norm_num) h_nogood
+  · obtain ⟨qp, hqp⟩ : (5 : ℕ) ∣ q := by omega
+    exact bhk_prop11_exc_diag_coset_hit p q qp r 5 7 1 2 1 (by norm_num) (by omega)
+      (hcop_q qp hqp) hp hqp (by omega) (by norm_num) (by norm_num) h_nogood
+
 /-- **BHK §5 Part 5 — the pair `(4, 1)`, `r = q + 4p` branch.** When `8p < q`, the
     relation pins `r = q + 4p`. On the half-integer time `(2m+1)/(2q)` with
     `{p·(2m+1)/(2q)} ∈ [1/6, 1/4]` (window width `1/12 ≥ 1/q`), runner `r` reads off
@@ -5188,7 +5345,10 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
       · sorry -- (4,1) sliver q ∈ [18,24)
     · sorry -- (4,2)
     · sorry -- (4,3)
-    · sorry -- (4,4)
+    · exact bhk_prop11_exc_4_4 p q r hq18
+        (by have h := h14 (by decide) (by decide)
+            rw [show (4 : ℤ).natAbs = 4 from by decide] at h; omega)
+        hcop hp h3p hrq hr32 hndiag k hk1 hk2 h_nogood
   · -- i = 5: cone j ∈ {-5,…,5}; kills (5,0); (5,1) for q ≥ 30 (else sliver)
     have hjl : -5 ≤ j := by
       have h : (-11 : ℝ) < 2 * ↑j := by have h := hjlo; norm_num at h; linarith
@@ -5225,7 +5385,10 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     · sorry -- (5,2)
     · sorry -- (5,3)
     · sorry -- (5,4)
-    · sorry -- (5,5)
+    · exact bhk_prop11_exc_5_5 p q r hq18
+        (by have h := h14 (by decide) (by decide)
+            rw [show (5 : ℤ).natAbs = 5 from by decide] at h; omega)
+        hcop hp h3p hrq hr32 hndiag k hk1 hk2 h_nogood
 
 /-- **BHK Part 6 — Claim 19 conclusion (the `v₅ < 2v₄` span bound).** A `1234`-gap
     `[a,b]` (runners `w₀,w₁,w₂` via `Fin 3` and `w₃` all safe) of length at least
