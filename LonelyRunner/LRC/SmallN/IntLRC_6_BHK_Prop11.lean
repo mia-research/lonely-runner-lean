@@ -7996,6 +7996,591 @@ theorem bhk_prop11_exceptional_q18_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
   exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2,
     h14⟩
 
+/-! ### BHK Part 6, windowed (`core2`, fictional-runner 0123-gap)
+
+The part-1 Part 6 family (`part6_claim19/20/21`, `part6`) proves the diagonal
+case `w₃ = w₀ + w₂` (cone pair `(1,1)`) using the *five*-runner covering. In
+`core2` we only have the *six*-runner covering `hcov6` (the fictional runner
+`2w₀`, since `v₁ < 1/6`). The windowed analogs below thread `h0safe`
+(`{w₀s} ∉ (5/12, 7/12)`) through the runner-5 engines so the fictional branch is
+killed by `bhk_prop11_fict_window_safe`. Every Part 6 gap is **window-free**:
+the Claim 19 gap keeps `{w₀s} ≤ 5/12` (advance `< 1/6`), and with the stronger
+`6w₀ < w₂ < w₃` the Claim 20 `4`-block edges keep `{w₀ qe} ≤ 7/18 < 5/12` (the
+"tighter edge-position" bound the part-1 `edge_arith` does not give). -/
+
+/-- **Windowed Claim 19 span engine.** The `gap1234_b5span2` analog of
+    `part6_claim19_span`: a `1234`-gap `[a,b]` of length `≥ 1/(6w₃)` that is also
+    runner-1 window-free (`h0safe`) forces `w₄ < 2w₃` under the six-runner cover. -/
+lemma bhk_prop11_part6_claim19_span2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    {a b : ℝ} (hab : a ≤ b)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h0safe : ∀ s ∈ Set.Icc a b,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12))
+    (h4safe : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s))
+    (hlen : 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) ≤ b - a) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  have hspan := bhk_prop11_gap1234_b5span2 w hpos hcov6 hab hgap h0safe h4safe
+  have hw4 : (0 : ℝ) ≤ (w ⟨4, by omega⟩ : ℝ) := by positivity
+  have hstep : (w ⟨4, by omega⟩ : ℝ) * (1 / (6 * (w ⟨3, by omega⟩ : ℝ))) < 1 / 3 :=
+    lt_of_le_of_lt (mul_le_mul_of_nonneg_left hlen hw4) hspan
+  have hw3 : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h6 : (0 : ℝ) < 6 * (w ⟨3, by omega⟩ : ℝ) := by positivity
+  rw [mul_one_div, div_lt_iff₀ h6] at hstep
+  have hreal : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by linarith [hstep]
+  exact_mod_cast hreal
+
+/-- **Windowed lower-bound engine** (the `core2` analog of `part6_lower_span`).
+    If `[p,q]` has width `1/(3b)` with both endpoints `1234`-safe (`hp`/`hq`) and
+    runner-1 window-free (`h0p`/`h0q`), then the six-runner cover forces runner 5
+    unsafe at both endpoints (the fictional branch is killed by window-freeness),
+    so `2b < w₄`. Claim 20 uses `b = w₃`, Claim 21 uses `b = w₂`. -/
+lemma bhk_prop11_part6_lower_span2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (b : ℝ) (hbpos : 0 < b) (hbw4 : b < (w ⟨4, by omega⟩ : ℝ))
+    (p q : ℝ) (hpq : q - p = 1 / (3 * b))
+    (hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * p))
+    (hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * q))
+    (h0p : Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12))
+    (h0q : Int.fract ((w ⟨0, by omega⟩ : ℝ) * q) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    2 * b < (w ⟨4, by omega⟩ : ℝ) := by
+  have hp5 : circDist ((w ⟨4, by omega⟩ : ℝ) * p) < 1 / 6 := by
+    rcases hcov6 p with ⟨i, hi⟩ | hfict
+    · fin_cases i
+      · exact absurd hi (not_lt.mpr (hp 0))
+      · exact absurd hi (not_lt.mpr (hp 1))
+      · exact absurd hi (not_lt.mpr (hp 2))
+      · exact absurd hi (not_lt.mpr (hp 3))
+      · exact hi
+    · exfalso
+      have hr0 : (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * p) := hp 0
+      have h1 : (1 : ℝ) / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) := by
+        have := hr0; unfold circDist at this; exact le_trans this (min_le_left _ _)
+      have h2 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) ≤ 5 / 6 := by
+        have := hr0; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
+      exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 h0p))
+  have hq5 : circDist ((w ⟨4, by omega⟩ : ℝ) * q) < 1 / 6 := by
+    rcases hcov6 q with ⟨i, hi⟩ | hfict
+    · fin_cases i
+      · exact absurd hi (not_lt.mpr (hq 0))
+      · exact absurd hi (not_lt.mpr (hq 1))
+      · exact absurd hi (not_lt.mpr (hq 2))
+      · exact absurd hi (not_lt.mpr (hq 3))
+      · exact hi
+    · exfalso
+      have hr0 : (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * q) := hq 0
+      have h1 : (1 : ℝ) / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * q) := by
+        have := hr0; unfold circDist at this; exact le_trans this (min_le_left _ _)
+      have h2 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * q) ≤ 5 / 6 := by
+        have := hr0; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
+      exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 h0q))
+  obtain ⟨k₁, hk₁⟩ : ∃ k : ℤ, |(w ⟨4, by omega⟩ : ℝ) * p - (k : ℝ)| < 1 / 6 :=
+    (mem_bhkB_iff _).mpr hp5
+  obtain ⟨k₂, hk₂⟩ : ∃ k : ℤ, |(w ⟨4, by omega⟩ : ℝ) * q - (k : ℝ)| < 1 / 6 :=
+    (mem_bhkB_iff _).mpr hq5
+  rw [abs_lt] at hk₁ hk₂
+  have hDeq : (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
+      = (w ⟨4, by omega⟩ : ℝ) / (3 * b) := by
+    rw [show (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p
+        = (w ⟨4, by omega⟩ : ℝ) * (q - p) from by ring, hpq]; ring
+  have hDpos : (1 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
+    rw [hDeq, lt_div_iff₀ (by positivity)]; linarith
+  have hd1 : (1 : ℤ) ≤ k₂ - k₁ := by
+    have hpos' : (0 : ℝ) < ((k₂ - k₁ : ℤ) : ℝ) := by
+      push_cast; linarith [hk₁.1, hk₂.2, hDpos]
+    have : (0 : ℤ) < k₂ - k₁ := by exact_mod_cast hpos'
+    omega
+  have hD23 : (2 : ℝ) / 3 < (w ⟨4, by omega⟩ : ℝ) * q - (w ⟨4, by omega⟩ : ℝ) * p := by
+    have hdR : (1 : ℝ) ≤ ((k₂ - k₁ : ℤ) : ℝ) := by exact_mod_cast hd1
+    push_cast at hdR; linarith [hk₁.2, hk₂.1]
+  rw [hDeq, lt_div_iff₀ (by positivity)] at hD23
+  linarith
+
+/-- **Windowed Claim 20 span engine** = `lower_span2` at `b = w₃`. -/
+lemma bhk_prop11_part6_claim20_span2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (p q : ℝ) (hpq : q - p = 1 / (3 * (w ⟨3, by omega⟩ : ℝ)))
+    (hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * p))
+    (hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * q))
+    (h0p : Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12))
+    (h0q : Int.fract ((w ⟨0, by omega⟩ : ℝ) * q) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+  bhk_prop11_part6_lower_span2 w hpos hcov6 (w ⟨3, by omega⟩ : ℝ)
+    (by exact_mod_cast hpos _) hw34 p q hpq hp hq h0p h0q
+
+/-- **Windowed Claim 19 gap construction** (the `core2` analog of
+    `part6_claim19_gap`). Same `1234`-gap `[t₀, t₀+1/(6w₃)]`; the runner-1 drift
+    `< 1/6` keeps `{w₀s} ≤ 5/12`, so the gap is window-free. -/
+lemma bhk_prop11_part6_claim19_gap2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (t0 : ℝ)
+    (h3 : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t0) = 2 / 3)
+    (h0lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0))
+    (h0hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) ≤ 1 / 4) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  have hw0 : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1 : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3 : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsum
+  have hdiagR : (w ⟨3, by omega⟩ : ℝ) = (w ⟨0, by omega⟩ : ℝ) + (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hdiag
+  have hw1_eq : (w ⟨1, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - 2 * (w ⟨0, by omega⟩ : ℝ) := by
+    linarith
+  have hw2_eq : (w ⟨2, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    linarith
+  have hw0lt : (w ⟨0, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  have hf2 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t0)
+      = 2 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) := by
+    have key : (w ⟨2, by omega⟩ : ℝ) * t0
+        = ((⌊(w ⟨3, by omega⟩ : ℝ) * t0⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋ : ℤ) : ℝ)
+          + (2 / 3 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0)) := by
+      have e3 := Int.floor_add_fract ((w ⟨3, by omega⟩ : ℝ) * t0)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t0)
+      rw [h3] at e3
+      rw [hw2_eq, sub_mul, Int.cast_sub]
+      linarith [e3, e0]
+    rw [key, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t0)
+      = 2 / 3 - 2 * Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) := by
+    have key : (w ⟨1, by omega⟩ : ℝ) * t0
+        = ((⌊(w ⟨3, by omega⟩ : ℝ) * t0⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋
+              - ⌊(w ⟨0, by omega⟩ : ℝ) * t0⌋ : ℤ) : ℝ)
+          + (2 / 3 - 2 * Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0)) := by
+      have e3 := Int.floor_add_fract ((w ⟨3, by omega⟩ : ℝ) * t0)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t0)
+      rw [h3] at e3
+      rw [hw1_eq, sub_mul, mul_assoc, Int.cast_sub, Int.cast_sub]
+      linarith [e3, e0]
+    rw [key, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  set b : ℝ := t0 + 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) with hb
+  have hbt : b - t0 = 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) := by rw [hb]; ring
+  have hab : t0 ≤ b := by rw [hb]; have : (0:ℝ) < 1 / (6 * (w ⟨3, by omega⟩ : ℝ)) := by positivity
+                          linarith
+  have h6w3 : (0 : ℝ) < 6 * (w ⟨3, by omega⟩ : ℝ) := by positivity
+  have hadv0 : (w ⟨0, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv1 : (w ⟨1, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv2 : (w ⟨2, by omega⟩ : ℝ) * (b - t0) ≤ 1 / 6 := by
+    rw [hbt, mul_one_div, div_le_iff₀ h6w3]; linarith
+  have hadv3 : (w ⟨3, by omega⟩ : ℝ) * (b - t0) = 1 / 6 := by
+    rw [hbt, mul_one_div, div_eq_iff h6w3.ne']; ring
+  have safe0 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨0, by omega⟩ : ℝ) t0 t0 b hw0.le
+    · rw [sub_self, mul_zero, add_zero]; exact h0lo
+    · linarith
+  have safe1 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨1, by omega⟩ : ℝ) t0 t0 b hw1.le
+    · rw [hf1, sub_self, mul_zero, add_zero]; linarith
+    · rw [hf1]; linarith
+  have safe2 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨2, by omega⟩ : ℝ) t0 t0 b hw2.le
+    · rw [hf2, sub_self, mul_zero, add_zero]; linarith
+    · rw [hf2]; linarith
+  have safe3 : ∀ s ∈ Set.Icc t0 b, 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_pent_delayed_safe (w ⟨3, by omega⟩ : ℝ) t0 t0 b hw3.le
+    · rw [sub_self, mul_zero, add_zero, h3]; norm_num
+    · rw [h3]; linarith
+  have hgap : ∀ s ∈ Set.Icc t0 b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    fin_cases i
+    · exact safe0 s hs
+    · exact safe1 s hs
+    · exact safe2 s hs
+  -- the gap is window-free for runner 1:  {w₀ s} ≤ 1/4 + 1/6 = 5/12
+  have h0safe : ∀ s ∈ Set.Icc t0 b,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t0 := by linarith [hs.1]
+    have hadvs : (w ⟨0, by omega⟩ : ℝ) * (s - t0) ≤ 1 / 6 := by
+      have hmono' : (w ⟨0, by omega⟩ : ℝ) * (s - t0) ≤ (w ⟨0, by omega⟩ : ℝ) * (b - t0) :=
+        mul_le_mul_of_nonneg_left (by linarith [hs.2]) hw0.le
+      linarith [hmono', hadv0]
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t0) + (w ⟨0, by omega⟩ : ℝ) * (s - t0) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t0 + (w ⟨0, by omega⟩ : ℝ) * (s - t0) from by ring,
+        bhk_prop11_fract_add (add_nonneg (Int.fract_nonneg _) (mul_nonneg hw0.le hd0))
+          (by linarith [h0hi, hadvs])]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith [h0hi, hadvs]
+  exact bhk_prop11_part6_claim19_span2 w hpos hcov6 hab hgap h0safe safe3 (le_of_eq hbt.symm)
+
+/-- **Windowed Claim 19** (the `core2` analog of `part6_claim19`). The (55)-witness
+    (cover-agnostic) plus the windowed gap construction give `w₄ < 2w₃`. -/
+lemma bhk_prop11_part6_claim19_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (g p r : ℕ) (hg : 0 < g) (hp : 0 < p) (hr : 12 ≤ r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ := by
+  obtain ⟨t0, h3, hlo, hhi⟩ :=
+    bhk_prop11_part6_claim19_witness w g p r hg hp hr hw0 hw3 hcop
+  exact bhk_prop11_part6_claim19_gap2 w hpos hcov6 hsum hdiag t0 h3 hlo hhi
+
+set_option maxHeartbeats 1000000 in
+/-- **Windowed Claim 20 gap construction** (the `core2` analog of
+    `part6_claim20_gap`). The `4`-block `[pe,qe]` is window-free: at `pe`,
+    `{w₀ pe} ≤ 1/3`; at `qe`, with `6w₀ < w₂ < w₃` the drift is `< 1/18` so
+    `{w₀ qe} ≤ 1/3 + 1/18 = 7/18 < 5/12`. -/
+lemma bhk_prop11_part6_claim20_gap2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (t : ℝ) (N m : ℤ)
+    (h0 : (w ⟨0, by omega⟩ : ℝ) * t = (N : ℝ) + 1 / 3)
+    (hm : |(w ⟨3, by omega⟩ : ℝ) * t - (m : ℝ)| ≤ 1 / 6) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  have hw0 : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1 : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3 : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3ne : (w ⟨3, by omega⟩ : ℝ) ≠ 0 := hw3.ne'
+  have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hsum
+  have hdiagR : (w ⟨3, by omega⟩ : ℝ) = (w ⟨0, by omega⟩ : ℝ) + (w ⟨2, by omega⟩ : ℝ) := by
+    exact_mod_cast hdiag
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  have hsmall6R : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall6
+  have hw1eq : (w ⟨1, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - 2 * (w ⟨0, by omega⟩ : ℝ) := by
+    linarith
+  have hw2eq : (w ⟨2, by omega⟩ : ℝ) = (w ⟨3, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by linarith
+  have h4w0 : 4 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  have h6w0w3 : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  obtain ⟨hmlo, hmhi⟩ := abs_le.mp hm
+  set pe : ℝ := ((m : ℝ) - 1 / 6) / (w ⟨3, by omega⟩ : ℝ) with hpe
+  set qe : ℝ := ((m : ℝ) + 1 / 6) / (w ⟨3, by omega⟩ : ℝ) with hqe
+  have hw3pe : (w ⟨3, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6 := by rw [hpe]; field_simp
+  have hw3qe : (w ⟨3, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6 := by rw [hqe]; field_simp
+  have hpq : qe - pe = 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by rw [hpe, hqe]; field_simp; ring
+  have hpeqe : pe ≤ qe := by
+    have h0lt : (0 : ℝ) < qe - pe := by rw [hpq]; positivity
+    linarith
+  obtain ⟨hw0pe_lo, hw0pe_hi, hw0qe_lo, hw0qe_hi⟩ :=
+    bhk_prop11_part6_edge_arith (w ⟨0, by omega⟩ : ℝ) (w ⟨3, by omega⟩ : ℝ) hw0 hw3 h4w0
+      t N m h0 hmlo hmhi pe qe hw3pe hw3qe
+  have safe0 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) :=
+    bhk_prop11_safe_on_Icc (w ⟨0, by omega⟩ : ℝ) N hw0pe_lo hw0qe_hi hw0.le
+  have safe2 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_safe_on_Icc (w ⟨2, by omega⟩ : ℝ) (m - N - 1) ?_ ?_ hw2.le
+    · have hcast : ((m - N - 1 : ℤ) : ℝ) = (m : ℝ) - (N : ℝ) - 1 := by push_cast; ring
+      have hval : (w ⟨2, by omega⟩ : ℝ) * pe = ((m : ℝ) - 1 / 6) - (w ⟨0, by omega⟩ : ℝ) * pe := by
+        rw [hw2eq, ← hw3pe]; ring
+      rw [hcast, hval]; linarith [hw0pe_hi]
+    · have hcast : ((m - N - 1 : ℤ) : ℝ) = (m : ℝ) - (N : ℝ) - 1 := by push_cast; ring
+      have hval : (w ⟨2, by omega⟩ : ℝ) * qe = ((m : ℝ) + 1 / 6) - (w ⟨0, by omega⟩ : ℝ) * qe := by
+        rw [hw2eq, ← hw3qe]; ring
+      rw [hcast, hval]; linarith [hw0qe_lo]
+  have safe1 : ∀ s ∈ Set.Icc pe qe, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s) := by
+    apply bhk_prop11_safe_on_Icc (w ⟨1, by omega⟩ : ℝ) (m - 2 * N - 1) ?_ ?_ hw1.le
+    · have hcast : ((m - 2 * N - 1 : ℤ) : ℝ) = (m : ℝ) - 2 * (N : ℝ) - 1 := by push_cast; ring
+      have hval : (w ⟨1, by omega⟩ : ℝ) * pe
+          = ((m : ℝ) - 1 / 6) - 2 * ((w ⟨0, by omega⟩ : ℝ) * pe) := by rw [hw1eq, ← hw3pe]; ring
+      rw [hcast, hval]; linarith [hw0pe_hi]
+    · have hcast : ((m - 2 * N - 1 : ℤ) : ℝ) = (m : ℝ) - 2 * (N : ℝ) - 1 := by push_cast; ring
+      have hval : (w ⟨1, by omega⟩ : ℝ) * qe
+          = ((m : ℝ) + 1 / 6) - 2 * ((w ⟨0, by omega⟩ : ℝ) * qe) := by rw [hw1eq, ← hw3qe]; ring
+      rw [hcast, hval]; linarith [hw0qe_lo]
+  have hfrpe : Int.fract ((m : ℝ) - 1 / 6) = 5 / 6 := by
+    rw [show ((m : ℝ) - 1 / 6) = ((m - 1 : ℤ) : ℝ) + 5 / 6 from by push_cast; ring,
+      Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩
+  have hfrqe : Int.fract ((m : ℝ) + 1 / 6) = 1 / 6 := by
+    rw [show ((m : ℝ) + 1 / 6) = ((m : ℤ) : ℝ) + 1 / 6 from by push_cast; ring,
+      Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩
+  have safe3pe : (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * pe) := by
+    rw [hw3pe]; simp only [circDist]; rw [hfrpe]; exact le_min (by norm_num) (by norm_num)
+  have safe3qe : (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * qe) := by
+    rw [hw3qe]; simp only [circDist]; rw [hfrqe]; exact le_min (by norm_num) (by norm_num)
+  have hp : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * pe) := by
+    intro i; fin_cases i
+    · exact safe0 pe ⟨le_refl _, hpeqe⟩
+    · exact safe1 pe ⟨le_refl _, hpeqe⟩
+    · exact safe2 pe ⟨le_refl _, hpeqe⟩
+    · exact safe3pe
+  have hq : ∀ i : Fin 4, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * qe) := by
+    intro i; fin_cases i
+    · exact safe0 qe ⟨hpeqe, le_refl _⟩
+    · exact safe1 qe ⟨hpeqe, le_refl _⟩
+    · exact safe2 qe ⟨hpeqe, le_refl _⟩
+    · exact safe3qe
+  -- window-freeness at the two edges
+  have h0p : Int.fract ((w ⟨0, by omega⟩ : ℝ) * pe) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    have hfr : Int.fract ((w ⟨0, by omega⟩ : ℝ) * pe) = (w ⟨0, by omega⟩ : ℝ) * pe - (N : ℝ) := by
+      conv_lhs => rw [show (w ⟨0, by omega⟩ : ℝ) * pe
+            = ((N : ℤ) : ℝ) + ((w ⟨0, by omega⟩ : ℝ) * pe - (N : ℝ)) from by push_cast; ring]
+      rw [Int.fract_intCast_add,
+        Int.fract_eq_self.mpr ⟨by linarith [hw0pe_lo], by linarith [hw0pe_hi]⟩]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]; left; rw [hfr]; linarith [hw0pe_hi]
+  have hw3qet : (w ⟨3, by omega⟩ : ℝ) * (qe - t) = ((m : ℝ) + 1 / 6) - (w ⟨3, by omega⟩ : ℝ) * t := by
+    rw [mul_sub, hw3qe]
+  have hqet_nn : 0 ≤ qe - t := by
+    have hge : 0 ≤ (w ⟨3, by omega⟩ : ℝ) * (qe - t) := by rw [hw3qet]; linarith [hmhi]
+    exact le_of_mul_le_mul_left (by rw [mul_zero]; exact hge) hw3
+  have hw0qet : (w ⟨0, by omega⟩ : ℝ) * (qe - t) ≤ 1 / 18 := by
+    have h6 : 6 * ((w ⟨0, by omega⟩ : ℝ) * (qe - t)) ≤ (w ⟨3, by omega⟩ : ℝ) * (qe - t) := by
+      nlinarith [mul_nonneg (show (0 : ℝ) ≤ (w ⟨3, by omega⟩ : ℝ) - 6 * (w ⟨0, by omega⟩ : ℝ)
+        from by linarith [h6w0w3]) hqet_nn]
+    have hle : (w ⟨3, by omega⟩ : ℝ) * (qe - t) ≤ 1 / 3 := by rw [hw3qet]; linarith [hmlo]
+    linarith [h6, hle]
+  have hw0qe_hi' : (w ⟨0, by omega⟩ : ℝ) * qe ≤ (N : ℝ) + 7 / 18 := by
+    have he : (w ⟨0, by omega⟩ : ℝ) * qe
+        = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (qe - t) := by ring
+    rw [he, h0]; linarith [hw0qet]
+  have h0q : Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    have hfr : Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) = (w ⟨0, by omega⟩ : ℝ) * qe - (N : ℝ) := by
+      conv_lhs => rw [show (w ⟨0, by omega⟩ : ℝ) * qe
+            = ((N : ℤ) : ℝ) + ((w ⟨0, by omega⟩ : ℝ) * qe - (N : ℝ)) from by push_cast; ring]
+      rw [Int.fract_intCast_add,
+        Int.fract_eq_self.mpr ⟨by linarith [hw0qe_lo], by linarith [hw0qe_hi']⟩]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]; left; rw [hfr]; linarith [hw0qe_hi']
+  exact bhk_prop11_part6_claim20_span2 w hpos hcov6 hw34 pe qe hpq hp hq h0p h0q
+
+/-- **Windowed Claim 20** (`p ≥ 3`, the `core2` analog of `part6_claim20`). -/
+lemma bhk_prop11_part6_claim20_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p r : ℕ) (hg : 0 < g) (hp : 3 ≤ p) (hr : 0 < r)
+    (hw0 : w ⟨0, by omega⟩ = g * p) (hw3 : w ⟨3, by omega⟩ = g * r)
+    (hcop : Nat.Coprime p r) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness w g p r hg hp hr hw0 hw3 hcop
+  exact bhk_prop11_part6_claim20_gap2 w hpos hcov6 hsum hdiag hsmall hsmall6 hw34 t N m h0 hm
+
+/-- **Windowed Claim 21 lower bound** (`p = 1`, the `core2` analog of
+    `part6_claim21_lower`). The `w₂`-block edges have `{w₀·} ∈ [1/3, 5/12]`
+    (window-free), so `lower_span2` with `b = w₂` gives `2w₂ < w₄`. -/
+lemma bhk_prop11_part6_claim21_lower2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) :
+    2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := hw2pos.ne'
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) := by exact_mod_cast hw0
+  have hw2R : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hw2
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  have hδ : (0 : ℝ) < 1 / (6 * (q : ℝ)) := one_div_pos.mpr (by linarith)
+  set pe : ℝ := ((m : ℝ) - 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hpedef
+  set qe : ℝ := ((m : ℝ) + 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hqedef
+  have hpe : (w ⟨2, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6 := by rw [hpedef]; field_simp
+  have hqe : (w ⟨2, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6 := by rw [hqedef]; field_simp
+  have hpq : qe - pe = 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by rw [hpedef, hqedef]; field_simp; ring
+  obtain ⟨hsafeP, hsafeQ⟩ := bhk_prop11_part6_claim21_edges w hpos hsum hdiag g q hg hq hw0 hw2
+    t m hbt h0lo h0hi pe qe hpe hqe
+  have e_pe0 : (w ⟨0, by omega⟩ : ℝ) * pe = (w ⟨0, by omega⟩ : ℝ) * t - 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * pe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * pe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t - 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          - (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hpe, hbt, hw0R, hw2R]; field_simp
+  have e_qe0 : (w ⟨0, by omega⟩ : ℝ) * qe = (w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * qe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * qe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          + (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hqe, hbt, hw0R, hw2R]; field_simp
+  have h0p : Int.fract ((w ⟨0, by omega⟩ : ℝ) * pe) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    have hhi' : (w ⟨0, by omega⟩ : ℝ) * pe ≤ 5 / 12 := by rw [e_pe0]; linarith [h0hi, hδ]
+    have hlo' : (0 : ℝ) ≤ (w ⟨0, by omega⟩ : ℝ) * pe := by rw [e_pe0]; linarith [h0lo, hδ]
+    rw [Int.fract_eq_self.mpr ⟨hlo', by linarith [hhi']⟩]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]; left; exact hhi'
+  have h0q : Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    have hhi' : (w ⟨0, by omega⟩ : ℝ) * qe ≤ 5 / 12 := by rw [e_qe0]; linarith [h0hi, hδ]
+    have hlo' : (0 : ℝ) ≤ (w ⟨0, by omega⟩ : ℝ) * qe := by rw [e_qe0]; linarith [h0lo, hδ]
+    rw [Int.fract_eq_self.mpr ⟨hlo', by linarith [hhi']⟩]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]; left; exact hhi'
+  exact bhk_prop11_part6_lower_span2 w hpos hcov6 (w ⟨2, by omega⟩ : ℝ) hw2pos hw24 pe qe hpq
+    hsafeP hsafeQ h0p h0q
+
+/-- **Windowed Claim 21 lonely exclusion** (`p = 1`, the `core2` analog of
+    `part6_claim21_lonely`). With `w₄ = 2w₂ + w₀`, runner 4 is safe at the right
+    edge `qe` and runner 1 is window-free there, so the six-runner cover fails. -/
+lemma bhk_prop11_part6_claim21_lonely2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩)
+    (g q : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) : False := by
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := hw2pos.ne'
+  have hw0R : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) := by exact_mod_cast hw0
+  have hw2R : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hw2
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq
+  have hδ : (0 : ℝ) < 1 / (6 * (q : ℝ)) := one_div_pos.mpr (by linarith)
+  have hsR : (w ⟨4, by omega⟩ : ℝ)
+      = 2 * (w ⟨2, by omega⟩ : ℝ) + (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hs
+  set pe : ℝ := ((m : ℝ) - 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hpedef
+  set qe : ℝ := ((m : ℝ) + 1 / 6) / (w ⟨2, by omega⟩ : ℝ) with hqedef
+  have hpe : (w ⟨2, by omega⟩ : ℝ) * pe = (m : ℝ) - 1 / 6 := by rw [hpedef]; field_simp
+  have hqe : (w ⟨2, by omega⟩ : ℝ) * qe = (m : ℝ) + 1 / 6 := by rw [hqedef]; field_simp
+  obtain ⟨_, hsafeQ⟩ := bhk_prop11_part6_claim21_edges w hpos hsum hdiag g q hg hq hw0 hw2
+    t m hbt h0lo h0hi pe qe hpe hqe
+  have e_qe0 : (w ⟨0, by omega⟩ : ℝ) * qe = (w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)) := by
+    apply mul_left_cancel₀ hw2ne
+    have l : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * qe)
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * qe) := by ring
+    have r : (w ⟨2, by omega⟩ : ℝ) * ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))
+        = (w ⟨0, by omega⟩ : ℝ) * ((w ⟨2, by omega⟩ : ℝ) * t)
+          + (w ⟨2, by omega⟩ : ℝ) / (6 * (q : ℝ)) := by ring
+    rw [l, r, hqe, hbt, hw0R, hw2R]; field_simp
+  have hw4qe : (w ⟨4, by omega⟩ : ℝ) * qe
+      = ((2 * m : ℤ) : ℝ) + (1 / 3 + ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ)))) := by
+    rw [hsR]
+    have hdistr : (2 * (w ⟨2, by omega⟩ : ℝ) + (w ⟨0, by omega⟩ : ℝ)) * qe
+        = 2 * ((w ⟨2, by omega⟩ : ℝ) * qe) + (w ⟨0, by omega⟩ : ℝ) * qe := by ring
+    rw [hdistr, hqe, e_qe0]; push_cast; ring
+  have hfr : Int.fract ((w ⟨4, by omega⟩ : ℝ) * qe)
+      = 1 / 3 + ((w ⟨0, by omega⟩ : ℝ) * t + 1 / (6 * (q : ℝ))) := by
+    rw [hw4qe, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have safe4qe : (1 : ℝ) / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * qe) := by
+    simp only [circDist]; rw [hfr]; exact le_min (by linarith) (by linarith)
+  rcases hcov6 qe with ⟨i, hi⟩ | hfict
+  · fin_cases i
+    · exact absurd hi (not_lt.mpr (hsafeQ 0))
+    · exact absurd hi (not_lt.mpr (hsafeQ 1))
+    · exact absurd hi (not_lt.mpr (hsafeQ 2))
+    · exact absurd hi (not_lt.mpr (hsafeQ 3))
+    · exact absurd hi (not_lt.mpr safe4qe)
+  · have hr0 : (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * qe) := hsafeQ 0
+    have h1 : (1 : ℝ) / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) := by
+      have := hr0; unfold circDist at this; exact le_trans this (min_le_left _ _)
+    have h2 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) ≤ 5 / 6 := by
+      have := hr0; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
+    have h0qsafe : Int.fract ((w ⟨0, by omega⟩ : ℝ) * qe) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+      have hhi' : (w ⟨0, by omega⟩ : ℝ) * qe ≤ 5 / 12 := by rw [e_qe0]; linarith [h0hi, hδ]
+      have hlo' : (0 : ℝ) ≤ (w ⟨0, by omega⟩ : ℝ) * qe := by rw [e_qe0]; linarith [h0lo, hδ]
+      rw [Int.fract_eq_self.mpr ⟨hlo', by linarith [hhi']⟩]
+      simp only [Set.mem_Ioo, not_and_or, not_lt]; left; exact hhi'
+    exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 h0qsafe))
+
+/-- **Windowed Part 6, `p = 1`** (the `core2` analog of `part6_p1`). -/
+lemma bhk_prop11_part6_p1_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q s : ℕ) (hg : 0 < g) (hq16 : 16 ≤ q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hq0 : 0 < q := by omega
+  obtain ⟨t, m, hbt, h0lo, h0hi⟩ := bhk_prop11_part6_claim21_witness w g q hg hq16 hw0 hw2
+  have hw0' : w ⟨0, by omega⟩ = g * 1 := by omega
+  have hw3' : w ⟨3, by omega⟩ = g * (q + 1) := by rw [hdiag, hw0, hw2]; ring
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19_w w hpos hcov6 hsum hdiag g 1 (q + 1) hg (by norm_num) (by omega)
+      hw0' hw3' (Nat.coprime_one_left _)
+  have h21 : 2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    bhk_prop11_part6_claim21_lower2 w hpos hcov6 hsum hdiag hw24 g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+  have h21n : 2 * w ⟨2, by omega⟩ < w ⟨4, by omega⟩ := by exact_mod_cast h21
+  have hsqueeze : s = 2 * q + 1 := by
+    have a1 : 2 * q < s := by
+      have h := h21n
+      rw [hw2, hw4] at h
+      have h' : g * (2 * q) = 2 * (g * q) := by ring
+      exact lt_of_mul_lt_mul_left (h'.trans_lt h) (Nat.zero_le g)
+    have a2 : s < 2 * q + 2 := by
+      have h := h19
+      rw [hw4, hw3'] at h
+      have h' : 2 * (g * (q + 1)) = g * (2 * q + 2) := by ring
+      exact lt_of_mul_lt_mul_left (h.trans_le h'.le) (Nat.zero_le g)
+    omega
+  have hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩ := by
+    rw [hw4, hw2, hw0, hsqueeze]; ring
+  exact bhk_prop11_part6_claim21_lonely2 w hpos hcov6 hsum hdiag hs g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+
+/-- **Windowed Part 6 — diagonal case `w₃ = w₀ + w₂`** (the `core2` analog of
+    `part6`). Closes the `(1,1)` diagonal config under the six-runner covering. -/
+lemma bhk_prop11_part6_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p q r s : ℕ) (hg : 0 < g) (hp_pos : 0 < p) (hq18 : 18 ≤ q)
+    (hgp : w ⟨0, by omega⟩ = g * p) (hgq : w ⟨2, by omega⟩ = g * q)
+    (hgr : w ⟨3, by omega⟩ = g * r) (hgs : w ⟨4, by omega⟩ = g * s)
+    (hcop : Nat.Coprime p q) : False := by
+  have hrpq : r = p + q := by
+    have h : g * r = g * (p + q) := by rw [← hgr, hdiag, hgp, hgq]; ring
+    exact Nat.eq_of_mul_eq_mul_left hg h
+  have hr12 : 12 ≤ r := by omega
+  have hcopr : Nat.Coprime p r := by
+    show Nat.gcd p r = 1
+    rw [hrpq, Nat.add_comm p q, Nat.gcd_add_self_right]; exact hcop
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19_w w hpos hcov6 hsum hdiag g p r hg hp_pos hr12 hgp hgr hcopr
+  have h19R : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast h19
+  have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ := by rw [hgq, hgr, hrpq]; nlinarith [hg, hp_pos]
+  have hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    lt_trans (by exact_mod_cast hw23) hw34
+  rcases lt_or_ge p 3 with hp3 | hp3
+  · interval_cases p
+    · have hw0g : w ⟨0, by omega⟩ = g := by omega
+      exact bhk_prop11_part6_p1_w w hpos hcov6 hsum hdiag hw24 g q s hg (by omega) hw0g hgq hgs
+    · have hqodd : q % 2 = 1 := by
+        have h2 : ¬ (2 ∣ q) := by
+          intro hdvd
+          have hg2 : Nat.gcd 2 q = 2 := Nat.gcd_eq_left hdvd
+          have hc1 : Nat.gcd 2 q = 1 := hcop
+          omega
+        omega
+      have hrodd : r % 2 = 1 := by omega
+      obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness_p2 w g r hg hrodd hgp hgr
+      have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+        bhk_prop11_part6_claim20_gap2 w hpos hcov6 hsum hdiag hsmall hsmall6 hw34 t N m h0 hm
+      linarith
+  · have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+      bhk_prop11_part6_claim20_w w hpos hcov6 hsum hdiag hsmall hsmall6 hw34 g p r hg hp3 (by omega)
+        hgp hgr hcopr
+    linarith
+
 /-- **core2, `q ≥ 18` dispatch.** Mirror of `bhk_prop11_core_q18` for the
     six-runner (windowed) covering: extract a minimal exceptional pair
     (`exceptional_q18_w`), build the rectangle no-good-time (`no_good_time2`) and
@@ -8058,9 +8643,12 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
     · rw [e3]; exact hrmem.1
     · rw [e3]; exact hrmem.2
   by_cases hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩
-  · -- Part 6 (diagonal `w₃ = w₀ + w₂`, pair `(1,1)`): needs the windowed Part 6
-    -- (Claims 19–21 with the fictional 0123-gap). TO FILL.
-    sorry
+  · -- Part 6 (diagonal `w₃ = w₀ + w₂`, pair `(1,1)`): the windowed Part 6
+    -- (Claims 19–21 with the fictional 0123-gap).
+    have hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+      exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+    exact bhk_prop11_part6_w w hpos hcov6 hsum hsmall hsmall6 hdiag hw34 g p q r s hg_pos hp_pos
+      hq18' hgp hgq hgr hgs hcop
   · by_cases h12 : i = 1 ∧ j = 2
     · -- `(1,2)` pentagon kill: needs the windowed pentagon. TO FILL.
       sorry
