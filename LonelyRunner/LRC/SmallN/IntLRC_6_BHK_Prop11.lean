@@ -1138,6 +1138,62 @@ lemma bhk_prop11_v4_bound_witness (w : Fin 5 → ℕ) (hmono : StrictMono w) (hp
   rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
   nlinarith [key]
 
+/-- **Reusable Lemma-18 exclusion kill (`q < 18`).** A maximizing half-integer
+    witness `m` with slack `ρ` (runner 1 at `{p(m+½)/q} ∈ [1/6+ρp/q, 1/3-ρ(q-p)/q]`)
+    forces `v₄ < 2/(1+3ρ)` via `bhk_prop11_v4_bound_witness`; if the candidate `r`
+    has `2q ≤ (1+3ρ)r` (i.e. `r/q ≥ 2/(1+3ρ)`), that is a contradiction. For a
+    concrete triple the window facts `h1lo/h1hi` and the bound `hrb` are `norm_num`
+    goals. Excludes the large-`v₄` triples (BHK Table 1 / Lemma 18). -/
+lemma bhk_prop11_exc_v4kill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r m : ℕ) (ρ : ℝ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (hρ0 : 0 < ρ) (hρ6 : ρ ≤ 1 / 6)
+    (h1lo : 1 / 6 + ρ * (p : ℝ) / q ≤ (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ))
+    (h1hi : (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)
+        ≤ 1 / 3 - ρ * ((q : ℝ) - p) / q)
+    (hrb : 2 * (q : ℝ) ≤ (1 + 3 * ρ) * r) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+  have hw0w2 : (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) = (p : ℝ) / q := by
+    rw [c0, c2]; rw [mul_div_mul_left _ _ hgR.ne']
+  have hw1w2 : (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) = ((q : ℝ) - p) / q := by
+    have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) - p) := by
+      have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+        exact_mod_cast hsum
+      rw [show (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) from by
+        linarith, c0, c2]; ring
+    rw [c1, c2, mul_div_mul_left _ _ hgR.ne']
+  set t : ℝ := ((m : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+  have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+  have h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2 := by
+    rw [e2, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
+        Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  have e0t : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((m : ℝ) + 1 / 2) := by
+    rw [htdef, c0, c2]; field_simp
+  have hCp : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      = (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) := by
+    rw [e0t, bhk_prop11_Cpoint_eval p q m hq]
+  have hwlo : 1 / 6 + ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+    rw [hCp, show ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+          = ρ * ((w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring, hw0w2,
+        show ρ * ((p : ℝ) / q) = ρ * (p : ℝ) / q from by ring]
+    exact h1lo
+  have hwhi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by
+    rw [hCp, show ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+          = ρ * ((w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring, hw1w2,
+        show ρ * (((q : ℝ) - p) / q) = ρ * ((q : ℝ) - p) / q from by ring]
+    exact h1hi
+  have hb := bhk_prop11_v4_bound_witness w hmono hpos hsum hsmall hcover ρ hρ0 hρ6 t h3 hwlo hwhi
+  -- hb : (1 + 3ρ) * w₃ < 2 * w₂; with c2,c3 and hrb : 2q ≤ (1+3ρ)r → contradiction
+  rw [c2, c3] at hb
+  nlinarith [hb, hrb, hgR, mul_pos hgR hqR]
+
 /-- **Residue realization.** For coprime `w'` and `n > 0`, every residue class mod
     `n` is hit by some multiple `w' · i`. (The `ZMod` unit-inverse construction of
     `bhk_prop11_residue_hit`, extracted for reuse in the orbit argument.) -/
