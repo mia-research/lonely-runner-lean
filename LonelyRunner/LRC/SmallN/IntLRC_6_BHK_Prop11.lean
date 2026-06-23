@@ -5401,6 +5401,34 @@ lemma bhk_prop11_readoff_3q4p (p q r m : ℕ) (s : ℤ) (hq0 : 0 < q)
   rw [ht1, Int.fract_add_intCast]
   exact Int.fract_eq_self.mpr ⟨by linarith [hA1], by linarith [hA0]⟩
 
+/-- **Quarter-slope read-off — the `c = 4` line of `(5, 4)` (BHK Case 5.2.3).**
+    For `4r = 5p + 4q` (which forces `p ≡ 0 (mod 4)`), and the coset selector
+    `⌊p/q·(m+½)⌋ = 4d + 2` (i.e. `⌊p·t⌋ ≡ 2 (mod 4)`, the `β = 0` line), runner `r`'s
+    coordinate at the half-integer time is `(5/4)·A` (`A = {p·(m+½)/q}`), provided
+    `1/6 ≤ A ≤ 1/3` — so the read-off value lands in `[5/24, 5/12] ⊂ [1/6, 1/2]`
+    while `A ∈ [1/6, 1/3]`, giving a point of `R`. -/
+lemma bhk_prop11_readoff_5p4q_c4 (p q r m : ℕ) (d : ℤ) (hq0 : 0 < q)
+    (hr4 : 4 * r = 5 * p + 4 * q)
+    (hD : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = 4 * d + 2)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 1 / 3) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 5 / 4 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hr4R : 4 * (r : ℝ) = 5 * p + 4 * q := by exact_mod_cast hr4
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+      = (5 / 4 * A) + ((5 * d + (m : ℤ) + 3 : ℤ) : ℝ) := by
+    have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 5 / 4 * Z + ((m : ℝ) + 1 / 2) := by
+      rw [hZdef, show (r : ℝ) = (5 * (p : ℝ) + 4 * q) / 4 from by linarith [hr4R]]
+      field_simp
+    rw [key]; conv_lhs => rw [hAz]
+    rw [hD]; push_cast; ring
+  rw [ht1, Int.fract_add_intCast]
+  refine Int.fract_eq_self.mpr ⟨by linarith [hA0], by linarith [hA1]⟩
+
 /-- **BHK §5 Case 5.2.6 — the half-slope pair `(4, -2)`.** The relation `4p ≡ -2r (mod q)`
     gives `q ∣ (2r + 4p)`; the cone bounds force `2r + 4p ∈ {3q, 4q}`. `4q` is `r = 2q − 2p`
     (`q < 4p`), closed by `bhk_prop11_exc_2_neg1_hit`. `3q` forces `q` even (`2r = 3q − 4p`,
