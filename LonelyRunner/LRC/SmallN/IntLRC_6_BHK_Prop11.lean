@@ -6656,11 +6656,109 @@ theorem bhk_prop11_core (w : Fin 5 → ℕ) (hmono : StrictMono w)
   · exact bhk_prop11_core_q18 w hmono hpos hsum hsmall hcover hq
   · exact bhk_prop11_core_q_lt_18 w hmono hpos hsum hsmall hcover (not_le.mp hq)
 
+/-- **Fictional-runner safety** (the converse of `bhk_prop11_fict_window`). If
+    `{x} ∈ [1/6, 5/6]` (runner safe) and `{x} ∉ (5/12, 7/12)` (outside the
+    half-way window) then the doubled point `2x` is *also* `≥ 1/6` from the
+    origin: the fictional runner of speed `2 v₁` covers a 0123-gap point only
+    when runner 1 sits in `(5/12, 7/12)`. (Local copy of the `Section5`
+    `bhk_s5_double_window`, which `Prop11` cannot import without a cycle.) -/
+lemma bhk_prop11_fict_window_safe {x : ℝ} (h1 : 1 / 6 ≤ Int.fract x)
+    (h2 : Int.fract x ≤ 5 / 6) (h3 : Int.fract x ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    (1 : ℝ) / 6 ≤ circDist (2 * x) := by
+  have hsplit : Int.fract (2 * x) = Int.fract (2 * Int.fract x) := by
+    conv_lhs => rw [← Int.fract_add_floor x]
+    rw [show 2 * (Int.fract x + (⌊x⌋ : ℝ))
+          = 2 * Int.fract x + ((2 * ⌊x⌋ : ℤ) : ℝ) from by push_cast; ring,
+        Int.fract_add_intCast]
+  simp only [Set.mem_Ioo, not_and_or, not_lt] at h3
+  unfold circDist
+  rw [hsplit]
+  rcases h3 with h3 | h3
+  · have hf : Int.fract (2 * Int.fract x) = 2 * Int.fract x :=
+      Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+    rw [hf]; exact le_min (by linarith) (by linarith)
+  · have hf : Int.fract (2 * Int.fract x) = 2 * Int.fract x - 1 := by
+      conv_lhs => rw [show 2 * Int.fract x
+            = (2 * Int.fract x - 1) + ((1 : ℤ) : ℝ) from by push_cast; ring]
+      rw [Int.fract_add_intCast]
+      exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+    rw [hf]; exact le_min (by linarith) (by linarith)
+
+/-- **Gap covering with the fictional runner 0** (the windowed analog of
+    `bhk_prop11_gap_covered`). On a **0123-gap** `[a, b]` — runners 1,2,3
+    (`w₀, w₁, w₂`) safe (`hgap`) *and* runner 1 outside the half-way window
+    `(5/12, 7/12)` (`h0safe`, so the fictional runner `2 w₀` is also safe) — the
+    six-runner covering `hcov6` forces every point to be covered by runner 4 or
+    runner 5. This is the *single* point at which the windowed covering enters
+    the Part-2–6 pipeline: with it, the runner-5 engines
+    (`bhk_prop11_gap1234_b5span` / `bhk_prop11_long_gap_absurd`) and hence the
+    no-good-time facts transfer to `core2`, provided the gaps are kept window-free
+    (automatic for the rectangle, where `{w₀t} ≤ 1/3 < 5/12`). -/
+lemma bhk_prop11_gap_covered2 (w : Fin 5 → ℕ)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    {a b : ℝ}
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h0safe : ∀ s ∈ Set.Icc a b,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∪ unsafeOf w ⟨4, by omega⟩ := by
+  intro s hs
+  rcases hcov6 s with ⟨i, hi⟩ | hfict
+  · fin_cases i
+    · exact absurd hi (not_lt.mpr (hgap s hs 0))
+    · exact absurd hi (not_lt.mpr (hgap s hs 1))
+    · exact absurd hi (not_lt.mpr (hgap s hs 2))
+    · exact Or.inl ((mem_unsafeOf_iff w _ s).mpr hi)
+    · exact Or.inr ((mem_unsafeOf_iff w _ s).mpr hi)
+  · exfalso
+    have hr0 : (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s) := hgap s hs 0
+    have h1 : (1 : ℝ) / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) := by
+      have := hr0; unfold circDist at this; exact le_trans this (min_le_left _ _)
+    have h2 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ≤ 5 / 6 := by
+      have := hr0; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
+    exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 (h0safe s hs)))
+
+/-- **Proposition 11, part 2 — the 6-runner core** (BHK Parts 2–6 with the
+    fictional runner 0 prepended). The genuinely-hard content of
+    `bhk_prop11_core2`: under `6 w₀ < w₂`, the **six** runners
+    `w₀, 2w₀, w₁, w₂, w₃, w₄` (the five real runners together with the fictional
+    runner 0 of speed `2 w₀`) cannot cover every time within `1/6`. The covering
+    hypothesis `hcov6` is the disjunction "some real runner is near the origin,
+    *or* the fictional runner `2 w₀` is" — exactly `B₀ = ℝ⁺` in BHK's notation.
+
+    This mirrors `bhk_prop11_core_q18`/`core_q_lt_18`, with the fictional runner
+    refining 123-gaps to 0123-gaps. The covering enters the Part-2–6 pipeline at a
+    single point — the runner-5 gap engine (`bhk_prop11_gap1234_b5span` /
+    `bhk_prop11_long_gap_absurd`): on a 0123-gap (where additionally runner 1
+    avoids `(5/12, 7/12)`, so the fictional runner is *also* safe) the windowed
+    covering forces runner 5 to cover, bounding the gap length. Decomposition:
+    `core2_v4_le_3_2` (Cor 16/Lemma 18, `2 r < 3 q`), `core2_exceptional`
+    (Parts 2–4, the cone pair `(i, j)` via the rectangle no-good-time, which
+    transfers verbatim from the windowed covering since the rectangle's
+    `{w₀t} ∈ [1/6,1/3] < 5/12` keeps the gap below the window), and the pentagon
+    `core2_pent_no_good` + Part-5/6 dispatch (where the fictional runner genuinely
+    supplies the 0123-gap that the runner-end argument of `no_good_time_P` cannot).
+    TO DECOMPOSE. -/
+theorem bhk_prop11_core2_cover6 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6) :
+    False := by
+  sorry
+
 /-- **Proposition 11 — indirect core (part 2).** As `bhk_prop11_core`, but with
     the stronger `6 w₀ < w₂` (`v₁ < 1/6`) and the fictional-runner-0 window:
     no time is simultaneously runner-safe *and* outside `(5/12, 7/12)` for
     runner 1. Equivalently (Part 1's `B₀ = B ∪ ½B₁`), the six runners
-    `2w₀, w₀, w₁, w₂, w₃, w₄` cover every time. OPEN. -/
+    `2w₀, w₀, w₁, w₂, w₃, w₄` cover every time.
+
+    Reduced to `bhk_prop11_core2_cover6` via the fictional runner 0: the window
+    escape `{w₀t} ∈ (5/12, 7/12)` is exactly `circDist (2 w₀ t) < 1/6`
+    (`bhk_prop11_fict_window`), so the part-2 covering is a covering by the six
+    runners. -/
 theorem bhk_prop11_core2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
@@ -6668,6 +6766,8 @@ theorem bhk_prop11_core2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hcover : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
         Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ∈ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
     False := by
-  sorry
+  -- Fictional runner 0 (speed `2 w₀`): the window escape is a covering by `2 w₀`.
+  refine bhk_prop11_core2_cover6 w hmono hpos hsum hsmall6 (fun t => ?_)
+  exact (hcover t).imp_right (fun hwin => bhk_prop11_fict_window hwin)
 
 end BHK
