@@ -4830,6 +4830,73 @@ lemma bhk_prop11_pent_no_good_red (w : Fin 5 → ℕ) (hmono : StrictMono w) (hp
   · rw [c4, c3, c0, e5, egs]; exact mul_le_mul_of_nonneg_left h42a (by positivity)
   · rw [c4, c3, c1, e6, egs]; exact mul_le_mul_of_nonneg_left h42b (by positivity)
 
+set_option maxHeartbeats 400000 in
+/-- **Reusable P-witness kill (`q < 18`, `s`-free).** A witness index `m` whose
+    explicit C-coordinates `(X, Y)` lie in the pentagon `P` for *every* valid
+    runner-5 speed `s > r` contradicts `bhk_prop11_pent_no_good_red`. The pentagon
+    conditions depend on `s` through the margin `(s-q)/(3qs)` and the slant slack
+    `1/(3s)`, both monotone in `s`, so it suffices to verify them at the worst case
+    `s = r+1`: the six hypotheses `h39w…h42bw` are `s`-free rational inequalities
+    closed by `norm_num` for a concrete triple. Handles the 33 P-killable
+    Table-4/6/8 small-`q` cases. -/
+lemma bhk_prop11_exc_Pkill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s m : ℕ) (hg : 0 < g) (hq : 0 < q) (hp : 0 < p) (hpqlt : p < q)
+    (hrq : q < r) (hrs : r < s)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (h39w : 1 / 6 - (r : ℝ) * (((r : ℝ) + 1 - q) / (3 * q * ((r : ℝ) + 1)))
+        ≤ (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ))
+    (h40w : 1 / 6 - (p : ℝ) * (((r : ℝ) + 1 - q) / (3 * q * ((r : ℝ) + 1)))
+        ≤ (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ))
+    (h41w : (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)
+        ≤ 1 / 3 + ((q : ℝ) - p) * (((r : ℝ) + 1 - q) / (3 * q * ((r : ℝ) + 1))))
+    (hxlew : (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) ≤ 5 / 6)
+    (h42aw : 1 / (3 * ((r : ℝ) + 1))
+        ≤ (5 / 6 - (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)) / r
+          + ((((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) - 1 / 6) / p)
+    (h42bw : 1 / (3 * ((r : ℝ) + 1))
+        ≤ (5 / 6 - (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)) / r
+          + (1 / 3 - (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)) / ((q : ℝ) - p)) :
+    False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hrR : (0 : ℝ) < r := by exact_mod_cast (by omega : 0 < r)
+  have hsR : (0 : ℝ) < s := by exact_mod_cast (by omega : 0 < s)
+  have hr0 : 0 < r := by omega
+  have hs0 : 0 < s := by omega
+  have hr1R : (0 : ℝ) < (r : ℝ) + 1 := by positivity
+  have hrsR : (r : ℝ) + 1 ≤ (s : ℝ) := by exact_mod_cast (by omega : r + 1 ≤ s)
+  have hqpR : (0 : ℝ) ≤ (q : ℝ) - p := by
+    have : (p : ℝ) < q := by exact_mod_cast hpqlt
+    linarith
+  -- the two monotonicity facts (margin and slant slack are worst at s = r+1)
+  have hcorr : ((r : ℝ) + 1 - q) / (3 * q * ((r : ℝ) + 1)) ≤ ((s : ℝ) - q) / (3 * q * s) := by
+    rw [div_le_div_iff₀ (by positivity) (by positivity)]
+    nlinarith [mul_nonneg (mul_nonneg hqR.le hqR.le) (show (0 : ℝ) ≤ (s : ℝ) - ((r : ℝ) + 1) from by linarith)]
+  have hrecip : 1 / (3 * (s : ℝ)) ≤ 1 / (3 * ((r : ℝ) + 1)) :=
+    one_div_le_one_div_of_le (by positivity) (by linarith)
+  -- rewrite the C-coordinates to explicit rationals
+  have hXrw : Int.fract ((r : ℝ) / q * (((m : ℤ) : ℝ) + 1 / 2))
+      = (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) := by
+    rw [show ((m : ℤ) : ℝ) = ((m : ℕ) : ℝ) from by push_cast; ring,
+        bhk_prop11_Cpoint_eval r q m hq]
+  have hYrw : Int.fract ((p : ℝ) / q * (((m : ℤ) : ℝ) + 1 / 2))
+      = (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) := by
+    rw [show ((m : ℤ) : ℝ) = ((m : ℕ) : ℝ) from by push_cast; ring,
+        bhk_prop11_Cpoint_eval p q m hq]
+  refine bhk_prop11_pent_no_good_red w hmono hpos hsum hsmall hcover g p q r s hg hq hp hr0 hs0
+    hpqlt c0 c2 c3 c4 (m : ℤ) ?_ ?_ ?_ ?_ ?_ ?_
+  · rw [hXrw]; nlinarith [h39w, mul_le_mul_of_nonneg_left hcorr hrR.le]
+  · rw [hYrw]
+    have hp0R : (0 : ℝ) ≤ (p : ℝ) := by positivity
+    nlinarith [h40w, mul_le_mul_of_nonneg_left hcorr hp0R]
+  · rw [hYrw]; nlinarith [h41w, mul_le_mul_of_nonneg_left hcorr hqpR]
+  · rw [hXrw]; exact hxlew
+  · rw [hXrw, hYrw]; linarith [h42aw, hrecip]
+  · rw [hXrw, hYrw]; linarith [h42bw, hrecip]
+
 -- grid-witness on a slant-bound window: large rational-arithmetic proof
 set_option maxHeartbeats 3200000 in
 /-- **BHK §5 Case 5.2.9 — `(1,-2)S` pentagon kill, wide window (`hwb : 36s ≤ r(5s-4r)`).**
