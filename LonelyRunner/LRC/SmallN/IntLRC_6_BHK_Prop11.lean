@@ -418,6 +418,25 @@ lemma bhk_prop11_Cpoint_eval (a q m : ℕ) (hq : 0 < q) :
   rw [e, bhk_prop11_fract_odd a q m hq, hc]
   exact Int.fract_div_natCast_eq_div_natCast_mod
 
+/-- **Reusable R-witness kill (`q < 18`).** A witness index `m` whose explicit
+    reduced C-coordinates `(X, Y)` land in the rectangle `R = [1/6,1/2]×[1/6,1/3]`
+    contradicts the rectangle no-good-time fact `h_nogood`. For a concrete triple
+    `(p, q, r)` the two membership obligations are closed by `norm_num [Set.mem_Icc]`,
+    so each of the 55 R-killable Table-4/6 small-`q` cases is a single application. -/
+lemma bhk_prop11_exc_Rkill (p q r m : ℕ) (hq : 0 < q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
+    (hX : (((2 * (r * m % q) + r) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)
+            ∈ Set.Icc (1 / 6 : ℝ) (1 / 2))
+    (hY : (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)
+            ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) : False := by
+  refine h_nogood (m : ℤ) ⟨?_, ?_⟩
+  · rw [show ((m : ℤ) : ℝ) = ((m : ℕ) : ℝ) from by push_cast; ring,
+        bhk_prop11_Cpoint_eval r q m hq]; exact hX
+  · rw [show ((m : ℤ) : ℝ) = ((m : ℕ) : ℝ) from by push_cast; ring,
+        bhk_prop11_Cpoint_eval p q m hq]; exact hY
+
 /-- **Residue realisation kernel.** For coprime `p, q` (`q > 0`) and any target
     residue `k < q` with `2k + p < 2q` (no wrap), there is an `m` whose
     half-integer time `(2m+1)/(2q)` puts `p` at exactly `(2k+p)/(2q)`. The guts of
