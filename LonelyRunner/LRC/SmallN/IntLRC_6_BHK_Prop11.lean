@@ -6719,6 +6719,110 @@ lemma bhk_prop11_gap_covered2 (w : Fin 5 → ℕ)
       have := hr0; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
     exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 (h0safe s hs)))
 
+/-- **Runner-5 span engine, windowed** (the `gap_covered2` analog of
+    `bhk_prop11_gap1234_b5span`). On a 0123-gap `[a, b]` — runners 1,2,3 safe
+    (`hgap`), runner 1 window-free (`h0safe`), runner 4 safe (`h4safe`) — the
+    six-runner covering forces runner 5 to cover, so `w₄ · (b − a) < 1/3`. -/
+lemma bhk_prop11_gap1234_b5span2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    {a b : ℝ} (hab : a ≤ b)
+    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h0safe : ∀ s ∈ Set.Icc a b,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12))
+    (h4safe : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s)) :
+    (w ⟨4, by omega⟩ : ℝ) * (b - a) < 1 / 3 := by
+  have hcov45 := bhk_prop11_gap_covered2 w hcov6 hgap h0safe
+  have hsub5 : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩ := by
+    intro s hs
+    rcases hcov45 hs with h | h
+    · exact absurd ((mem_unsafeOf_iff w _ s).mp h) (not_lt.mpr (h4safe s hs))
+    · exact h
+  obtain ⟨k, hk1, hk2⟩ := block_containment w ⟨4, by omega⟩ (hpos _) a b hab hsub5
+  rw [mul_sub]; linarith
+
+/-- **No-good-time (rectangle), windowed** (the `core2` analog of
+    `bhk_prop11_no_good_time`). Under `6 w₀ < w₂` and the six-runner covering, no
+    half-integer time `t` (`{w₂t} = 1/2`) has `{w₀t} ∈ [1/6,1/3]` *and*
+    `{w₃t} ∈ [1/6,1/2]`. The rectangle's gap `[t, t + 1/(3w₃)]` is automatically
+    **window-free** — `{w₀t} ≤ 1/3` and `w₀(s−t) ≤ w₀/(3w₃) < 1/18` (as
+    `4 w₀ < w₃`), so `{w₀s} < 5/12` — hence the windowed runner-5 engine applies
+    exactly as in part 1. This is the rectangle no-good-time that transfers
+    verbatim to `core2`; the *pentagon* strengthening genuinely needs the
+    fictional 0123-gap. -/
+theorem bhk_prop11_no_good_time2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) ≤ 1 / 3)
+    (h4lo : 1 / 6 ≤ Int.fract ((w ⟨3, by omega⟩ : ℝ) * t))
+    (h4hi : Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) ≤ 1 / 2) :
+    False := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  have hw0pos : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw23 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega))
+  have hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+    exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+  have hsmall6R : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall6
+  have h4w0 : 4 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by linarith
+  have hgap2 := bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi
+  set b3 : ℝ := t + 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) with hb3
+  have hab3 : t ≤ b3 := by rw [hb3]; exact le_add_of_nonneg_right (by positivity)
+  have hlen_le : 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) :=
+    one_div_le_one_div_of_le (by positivity) (by linarith)
+  have hgap_sub : ∀ s ∈ Set.Icc t b3, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+    intro s hs i
+    exact hgap2 s ⟨hs.1, by rw [hb3] at hs; linarith [hs.2]⟩ i
+  -- The shorter gap `[t, b3]` is window-free for runner 1.
+  have h0safe : ∀ s ∈ Set.Icc t b3,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t := by linarith [hs.1]
+    have hsu : s - t ≤ 1 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by rw [hb3] at hs; linarith [hs.2]
+    have hb : (w ⟨0, by omega⟩ : ℝ) * (s - t) < 1 / 12 := by
+      have h1 : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hsu hw0pos.le
+      have h2 : (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) < 1 / 12 := by
+        rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [h4w0]
+      linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by nlinarith [mul_nonneg hw0pos.le hd0]) (by linarith)]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith
+  have h4safe : ∀ s ∈ Set.Icc t b3, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * s) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t := by linarith [hs.1]
+    have hdu : (w ⟨3, by omega⟩ : ℝ) * (s - t) ≤ 1 / 3 := by
+      have h1 : (w ⟨3, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨3, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left (by rw [hb3] at hs; linarith [hs.2]) hw3pos.le
+      have h2 : (w ⟨3, by omega⟩ : ℝ) * (1 / (3 * (w ⟨3, by omega⟩ : ℝ))) = 1 / 3 := by
+        field_simp
+      linarith [h1, h2]
+    have hbnn : 0 ≤ (w ⟨3, by omega⟩ : ℝ) * (s - t) := mul_nonneg hw3pos.le hd0
+    have hfs : Int.fract ((w ⟨3, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨3, by omega⟩ : ℝ) * t) + (w ⟨3, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨3, by omega⟩ : ℝ) * s
+            = (w ⟨3, by omega⟩ : ℝ) * t + (w ⟨3, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  have hspan := bhk_prop11_gap1234_b5span2 w hpos hcov6 hab3 hgap_sub h0safe h4safe
+  rw [hb3, add_sub_cancel_left, mul_one_div, div_lt_iff₀ (by positivity)] at hspan
+  nlinarith [hspan, hw34]
+
 /-- **Proposition 11, part 2 — the 6-runner core** (BHK Parts 2–6 with the
     fictional runner 0 prepended). The genuinely-hard content of
     `bhk_prop11_core2`: under `6 w₀ < w₂`, the **six** runners
