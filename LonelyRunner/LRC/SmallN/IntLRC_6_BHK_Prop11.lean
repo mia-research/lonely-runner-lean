@@ -7240,6 +7240,7 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
       · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
           hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
 
+set_option maxHeartbeats 12000000 in
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
     Lemma 18 / Table 1 for `q ∈ {5,…,17}` (`q ≥ 5` from `bhk_prop11_lemma13`).
@@ -7326,7 +7327,463 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
   -- v4_bound_witness. Witnesses tabulated in experiments/core_q_lt_18_*.py.
   clear_value g p q r s
   clear hgdef hpdef hqdef hrdef hsdef hgw0 hgw2 hgw3 hgw4
-  sorry
+  by_cases hdiag : r = p + q
+  · -- DIAGONAL (handled separately below)
+    sorry
+  · -- NON-DIAGONAL: q ∈ {5..17}, q < r < 2q, r ≠ p+q → R / P / v4 exclusion
+    interval_cases q
+    · -- q = 5
+      have hpb : p ≤ 1 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=6=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 5 7 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=7 P
+        · exact bhk_prop11_exc_Rkill 1 5 8 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=8 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 5 9 1 (1/24 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=9 v4 excl
+    · -- q = 6
+      have hpb : p ≤ 1 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=7=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 6 8 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=8 P
+        · exact bhk_prop11_exc_Rkill 1 6 9 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=9 R
+        · exact bhk_prop11_exc_Rkill 1 6 10 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=10 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 6 11 1 (1/10 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=11 v4 excl
+    · -- q = 7
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=8=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 7 9 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=9 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 7 10 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=10 P
+        · exact bhk_prop11_exc_Rkill 1 7 11 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=11 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 7 12 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=12 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 7 13 1 (5/36 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=13 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 7 8 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=8 P
+        · omega  -- r=9=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 7 10 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=10 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 7 11 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=11 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 7 12 4 (1/15 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=12 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 7 13 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+    · -- q = 8
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=9=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 8 10 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=10 P
+        · exact bhk_prop11_exc_Rkill 1 8 11 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=11 R
+        · exact bhk_prop11_exc_Rkill 1 8 12 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=12 R
+        · exact bhk_prop11_exc_Rkill 1 8 13 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+        · exact bhk_prop11_exc_Rkill 1 8 14 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 8 15 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+      · exact absurd hcop (by decide)  -- p=2, gcd>1
+    · -- q = 9
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=10=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 9 11 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=11 P
+        · exact bhk_prop11_exc_Rkill 1 9 12 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=12 R
+        · exact bhk_prop11_exc_Rkill 1 9 13 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+        · exact bhk_prop11_exc_Rkill 1 9 14 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Rkill 1 9 15 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_Rkill 1 9 16 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 9 17 2 (1/16 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 9 10 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=10 P
+        · omega  -- r=11=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 9 12 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=12 R
+        · exact bhk_prop11_exc_Rkill 2 9 13 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+        · exact bhk_prop11_exc_Rkill 2 9 14 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Rkill 2 9 15 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 9 16 5 (1/7 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 9 17 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+    · -- q = 10
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=11=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 10 12 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=12 P
+        · exact bhk_prop11_exc_Rkill 1 10 13 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+        · exact bhk_prop11_exc_Rkill 1 10 14 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 10 15 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 10 16 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 P
+        · exact bhk_prop11_exc_Rkill 1 10 17 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 1 10 18 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 10 19 2 (5/54 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 v4 excl
+      · exact absurd hcop (by decide)  -- p=2, gcd>1
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 3 10 11 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=11 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 10 12 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=12 P
+        · omega  -- r=13=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 3 10 14 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Rkill 3 10 15 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 10 16 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 10 17 7 (5/42 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 v4 excl
+        · exact bhk_prop11_exc_Rkill 3 10 18 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 3 10 19 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+    · -- q = 11
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=12=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 11 13 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=13 P
+        · exact bhk_prop11_exc_Rkill 1 11 14 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Rkill 1 11 15 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 11 16 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 P
+        · exact bhk_prop11_exc_Rkill 1 11 17 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 11 18 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=18 P
+        · exact bhk_prop11_exc_Rkill 1 11 19 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 1 11 20 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 11 21 2 (7/60 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 11 12 s 7 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=12 P
+        · omega  -- r=13=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 11 14 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 11 15 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+        · exact bhk_prop11_exc_Rkill 2 11 16 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Rkill 2 11 17 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 2 11 18 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 2 11 19 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 11 20 6 (1/12 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=20 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 11 21 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 3 11 12 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=12 R
+        · exact bhk_prop11_exc_Rkill 3 11 13 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=13 R
+        · omega  -- r=14=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 11 15 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+        · exact bhk_prop11_exc_Rkill 3 11 16 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 11 17 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 P
+        · exact bhk_prop11_exc_Rkill 3 11 18 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 11 19 4 (7/48 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 v4 excl
+        · exact bhk_prop11_exc_Rkill 3 11 20 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 3 11 21 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+    · -- q = 12
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=13=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 12 14 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=14 P
+        · exact bhk_prop11_exc_Rkill 1 12 15 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_Rkill 1 12 16 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 12 17 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 P
+        · exact bhk_prop11_exc_Rkill 1 12 18 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 12 19 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 P
+        · exact bhk_prop11_exc_Rkill 1 12 20 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 1 12 21 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 1 12 22 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 12 23 2 (3/22 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=23 v4 excl
+      · exact absurd hcop (by decide)  -- p=2, gcd>1
+      · exact absurd hcop (by decide)  -- p=3, gcd>1
+    · -- q = 13
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=14=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 13 15 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+        · exact bhk_prop11_exc_Rkill 1 13 16 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Rkill 1 13 17 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 1 13 18 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 13 19 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 P
+        · exact bhk_prop11_exc_Rkill 1 13 20 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 13 21 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 P
+        · exact bhk_prop11_exc_Rkill 1 13 22 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 1 13 23 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 1 13 24 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 13 25 2 (11/72 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=25 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 13 14 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=14 P
+        · omega  -- r=15=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 13 16 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 13 17 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 13 18 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=18 P
+        · exact bhk_prop11_exc_Rkill 2 13 19 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 2 13 20 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 2 13 21 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 2 13 22 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 13 23 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=23 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 13 24 1 (4/33 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=24 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 13 25 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 3 13 14 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Rkill 3 13 15 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · omega  -- r=16=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 3 13 17 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 13 18 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=18 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 13 19 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 P
+        · exact bhk_prop11_exc_Rkill 3 13 20 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 3 13 21 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 3 13 22 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 13 23 9 (1/9 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=23 v4 excl
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 13 24 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=24 P
+        · exact bhk_prop11_exc_Rkill 3 13 25 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+      · -- p = 4
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 4 13 14 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=14 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 4 13 15 s 10 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=15 P
+        · exact bhk_prop11_exc_Rkill 4 13 16 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · omega  -- r=17=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 4 13 18 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 4 13 19 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 4 13 20 s 7 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=20 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 4 13 21 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 4 13 22 10 (4/27 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=22 v4 excl
+        · exact bhk_prop11_exc_Rkill 4 13 23 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 4 13 24 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 4 13 25 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+    · -- q = 14
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=15=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 14 16 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 P
+        · exact bhk_prop11_exc_Rkill 1 14 17 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 1 14 18 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 1 14 19 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 1 14 20 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 1 14 21 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 1 14 22 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 1 14 23 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 1 14 24 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 1 14 25 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 1 14 26 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 14 27 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+      · exact absurd hcop (by decide)  -- p=2, gcd>1
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 3 14 15 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=15 R
+        · exact bhk_prop11_exc_Rkill 3 14 16 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · omega  -- r=17=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 3 14 18 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 3 14 19 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 14 20 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=20 P
+        · exact bhk_prop11_exc_Rkill 3 14 21 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 3 14 22 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 3 14 23 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 3 14 24 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 14 25 10 (7/66 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=25 v4 excl
+        · exact bhk_prop11_exc_Rkill 3 14 26 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 3 14 27 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+      · exact absurd hcop (by decide)  -- p=4, gcd>1
+    · -- q = 15
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=16=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 15 17 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 P
+        · exact bhk_prop11_exc_Rkill 1 15 18 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 1 15 19 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 1 15 20 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 1 15 21 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 15 22 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=22 P
+        · exact bhk_prop11_exc_Rkill 1 15 23 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 1 15 24 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 1 15 25 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 1 15 26 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 1 15 27 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_Rkill 1 15 28 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 15 29 3 (3/28 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=29 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 15 16 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=16 P
+        · omega  -- r=17=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 15 18 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 2 15 19 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 2 15 20 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 2 15 21 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 2 15 22 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 2 15 23 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 2 15 24 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 2 15 25 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 2 15 26 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 2 15 27 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 15 28 1 (2/13 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=28 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 15 29 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+      · exact absurd hcop (by decide)  -- p=3, gcd>1
+      · -- p = 4
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 4 15 16 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=16 R
+        · exact bhk_prop11_exc_Rkill 4 15 17 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 4 15 18 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · omega  -- r=19=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 4 15 20 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 4 15 21 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 4 15 22 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 4 15 23 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 4 15 24 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 4 15 25 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 4 15 26 4 (1/8 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=26 v4 excl
+        · exact bhk_prop11_exc_Rkill 4 15 27 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_Rkill 4 15 28 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 4 15 29 8 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+    · -- q = 16
+      have hpb : p ≤ 5 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=17=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 16 18 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=18 P
+        · exact bhk_prop11_exc_Rkill 1 16 19 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 1 16 20 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 16 21 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 P
+        · exact bhk_prop11_exc_Rkill 1 16 22 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 1 16 23 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 1 16 24 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 1 16 25 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 1 16 26 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 16 27 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 16 28 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=28 P
+        · exact bhk_prop11_exc_Rkill 1 16 29 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_Rkill 1 16 30 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 16 31 3 (11/90 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=31 v4 excl
+      · exact absurd hcop (by decide)  -- p=2, gcd>1
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 17 s 12 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=17 P
+        · exact bhk_prop11_exc_Rkill 3 16 18 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · omega  -- r=19=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 20 s 6 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=20 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 21 s 6 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 22 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=22 P
+        · exact bhk_prop11_exc_Rkill 3 16 23 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 3 16 24 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 3 16 25 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 3 16 26 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 27 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+        · exact bhk_prop11_exc_Rkill 3 16 28 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 16 29 6 (11/78 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=29 v4 excl
+        · exact bhk_prop11_exc_Rkill 3 16 30 6 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 16 31 s 6 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=31 P
+      · exact absurd hcop (by decide)  -- p=4, gcd>1
+      · -- p = 5
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 5 16 17 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=17 R
+        · exact bhk_prop11_exc_Rkill 5 16 18 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 5 16 19 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 16 20 s 7 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=20 P
+        · omega  -- r=21=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 5 16 22 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 5 16 23 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 5 16 24 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 5 16 25 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 16 26 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=26 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 16 27 s 13 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+        · exact bhk_prop11_exc_Rkill 5 16 28 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 5 16 29 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_Rkill 5 16 30 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_Rkill 5 16 31 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=31 R
+    · -- q = 17
+      have hpb : p ≤ 5 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · omega  -- r=18=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 17 19 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 P
+        · exact bhk_prop11_exc_Rkill 1 17 20 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 1 17 21 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 17 22 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=22 P
+        · exact bhk_prop11_exc_Rkill 1 17 23 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 1 17 24 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 17 25 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=25 P
+        · exact bhk_prop11_exc_Rkill 1 17 26 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 17 27 s 3 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+        · exact bhk_prop11_exc_Rkill 1 17 28 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 1 17 29 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_Rkill 1 17 30 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_Rkill 1 17 31 3 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=31 R
+        · exact bhk_prop11_exc_Rkill 1 17 32 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=32 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 1 17 33 3 (13/96 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=33 v4 excl
+      · -- p = 2
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 17 18 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=18 P
+        · omega  -- r=19=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 2 17 20 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 17 21 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=21 P
+        · exact bhk_prop11_exc_Rkill 2 17 22 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 2 17 23 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 17 24 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=24 P
+        · exact bhk_prop11_exc_Rkill 2 17 25 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 2 17 26 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 2 17 27 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_Rkill 2 17 28 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 2 17 29 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_Rkill 2 17 30 2 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 2 17 31 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=31 P
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 2 17 32 10 (1/9 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=32 v4 excl
+        · exact bhk_prop11_exc_Rkill 2 17 33 10 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=33 R
+      · -- p = 3
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 3 17 18 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 3 17 19 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · omega  -- r=20=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 3 17 21 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · exact bhk_prop11_exc_Rkill 3 17 22 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 17 23 s 7 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=23 P
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 17 24 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=24 P
+        · exact bhk_prop11_exc_Rkill 3 17 25 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 3 17 26 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 3 17 27 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_Rkill 3 17 28 1 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 3 17 29 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_Rkill 3 17 30 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 3 17 31 12 (13/84 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=31 v4 excl
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 3 17 32 s 6 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=32 P
+        · exact bhk_prop11_exc_Rkill 3 17 33 12 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=33 R
+      · -- p = 4
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 4 17 18 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 4 17 19 s 5 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=19 P
+        · exact bhk_prop11_exc_Rkill 4 17 20 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · omega  -- r=21=p+q diagonal
+        · exact bhk_prop11_exc_Rkill 4 17 22 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=22 R
+        · exact bhk_prop11_exc_Rkill 4 17 23 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=23 R
+        · exact bhk_prop11_exc_Rkill 4 17 24 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 4 17 25 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=25 P
+        · exact bhk_prop11_exc_Rkill 4 17 26 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Rkill 4 17 27 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=27 R
+        · exact bhk_prop11_exc_Rkill 4 17 28 13 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_Rkill 4 17 29 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=29 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 4 17 30 9 (5/39 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=30 v4 excl
+        · exact bhk_prop11_exc_Rkill 4 17 31 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=31 R
+        · exact bhk_prop11_exc_Rkill 4 17 32 5 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=32 R
+        · exact bhk_prop11_exc_Rkill 4 17 33 9 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=33 R
+      · -- p = 5
+        interval_cases r
+        · exact bhk_prop11_exc_Rkill 5 17 18 14 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=18 R
+        · exact bhk_prop11_exc_Rkill 5 17 19 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=19 R
+        · exact bhk_prop11_exc_Rkill 5 17 20 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=20 R
+        · exact bhk_prop11_exc_Rkill 5 17 21 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=21 R
+        · omega  -- r=22=p+q diagonal
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 17 23 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=23 P
+        · exact bhk_prop11_exc_Rkill 5 17 24 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=24 R
+        · exact bhk_prop11_exc_Rkill 5 17 25 14 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=25 R
+        · exact bhk_prop11_exc_Rkill 5 17 26 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=26 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 17 27 s 4 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=27 P
+        · exact bhk_prop11_exc_Rkill 5 17 28 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=28 R
+        · exact bhk_prop11_exc_v4kill w hmono hpos hsum hsmall hcover g 5 17 29 7 (2/15 : ℝ) hg_pos (by norm_num) c0 c2 c3 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=29 v4 excl
+        · exact bhk_prop11_exc_Rkill 5 17 30 7 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=30 R
+        · exact bhk_prop11_exc_Rkill 5 17 31 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=31 R
+        · exact bhk_prop11_exc_Rkill 5 17 32 4 (by norm_num) h_nogood (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])  -- r=32 R
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 5 17 33 s 7 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- r=33 P
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
     for integer speeds `w₀ < ⋯ < w₄` with `w₀ + w₁ = w₂` and `3 w₀ < w₂`, the
