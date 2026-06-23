@@ -7164,6 +7164,91 @@ theorem bhk_prop11_exceptional_q18_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
   exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2,
     h14⟩
 
+/-- **core2, `q ≥ 18` dispatch.** Mirror of `bhk_prop11_core_q18` for the
+    six-runner (windowed) covering: extract a minimal exceptional pair
+    (`exceptional_q18_w`), build the rectangle no-good-time (`no_good_time2`) and
+    `2r < 3q` (`v4_le_3_2_w`), then dispatch. The bulk `exc_open` branch is
+    *covering-agnostic* — it is reused verbatim, so the other session's
+    transversal fills close it automatically. The three pentagon-dependent
+    branches (Part 6 diagonal, `(1,2)`, `(1,-2)`) need the *windowed pentagon*
+    (the fictional 0123-gap) and remain as the residual `core2` sorries. -/
+theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) : False := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  obtain ⟨g, p, q, r, s, hg_pos, hgp, hgq, hgr, hgs, hcop, hq18', ⟨i, j⟩, hne,
+      ⟨k, hk1, hk2⟩, h0, h1β, hc1, hc2, h14⟩ :=
+    bhk_prop11_exceptional_q18_w w hmono hpos hsum hsmall6 hcov6 hq18
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hgp
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hgq
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hgr
+  have hp_pos : 0 < p := by
+    rcases Nat.eq_zero_or_pos p with h | h
+    · rw [h, Nat.mul_zero] at hgp
+      have h0' := hpos ⟨0, by omega⟩
+      omega
+    · exact h
+  have h3p : 3 * p < q := by
+    have h : g * (3 * p) < g * q := by
+      rw [show g * (3 * p) = 3 * (g * p) from by ring, ← hgp, ← hgq]; exact hsmall
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have hrq : q < r := by
+    have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ :=
+      hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+    have h : g * q < g * r := by rw [← hgq, ← hgr]; exact hw23
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have hr32 : 2 * r < 3 * q := by
+    have hreal := bhk_prop11_v4_le_3_2_w w hmono hpos hsum hsmall6 hcov6 hq18
+    have hgR : (0:ℝ) < (g : ℝ) := by exact_mod_cast hg_pos
+    rw [c3, c2] at hreal
+    have hcancel : (g : ℝ) * (2 * (r : ℝ)) < (g : ℝ) * (3 * (q : ℝ)) := by nlinarith [hreal]
+    have hR : (2 * (r : ℝ)) < 3 * (q : ℝ) := lt_of_mul_lt_mul_left hcancel hgR.le
+    exact_mod_cast hR
+  have h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) := by
+    intro l hl
+    obtain ⟨hrmem, hpmem⟩ := hl
+    set t : ℝ := ((l : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+    have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (l : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c0, c2]; field_simp
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c3, c2]; field_simp
+    refine bhk_prop11_no_good_time2 w hmono hpos hsum hsmall6 hcov6 t ?_ ?_ ?_ ?_ ?_
+    · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+    · rw [e0]; exact hpmem.1
+    · rw [e0]; exact hpmem.2
+    · rw [e3]; exact hrmem.1
+    · rw [e3]; exact hrmem.2
+  by_cases hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩
+  · -- Part 6 (diagonal `w₃ = w₀ + w₂`, pair `(1,1)`): needs the windowed Part 6
+    -- (Claims 19–21 with the fictional 0123-gap). TO FILL.
+    sorry
+  · by_cases h12 : i = 1 ∧ j = 2
+    · -- `(1,2)` pentagon kill: needs the windowed pentagon. TO FILL.
+      sorry
+    · by_cases h1n2 : i = 1 ∧ j = -2
+      · -- `(1,-2)` pentagon kill: needs the windowed pentagon. TO FILL.
+        sorry
+      · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+          hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+
+/-- **core2, `q < 18` dispatch.** The complementary finite case for part 2; the
+    six-runner analog of `bhk_prop11_core_q_lt_18` (BHK Lemma 18 / Table 1 for
+    `q ∈ {5,…,17}`). TO FILL. -/
+theorem bhk_prop11_core2_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hq : w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) < 18) : False := by
+  sorry
+
 /-- **Proposition 11, part 2 — the 6-runner core** (BHK Parts 2–6 with the
     fictional runner 0 prepended). The genuinely-hard content of
     `bhk_prop11_core2`: under `6 w₀ < w₂`, the **six** runners
@@ -7184,7 +7269,9 @@ theorem bhk_prop11_exceptional_q18_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
     `{w₀t} ∈ [1/6,1/3] < 5/12` keeps the gap below the window), and the pentagon
     `core2_pent_no_good` + Part-5/6 dispatch (where the fictional runner genuinely
     supplies the 0123-gap that the runner-end argument of `no_good_time_P` cannot).
-    TO DECOMPOSE. -/
+    Splits on `q = w₂/gcd(w₀,w₂)`: `q ≥ 18` → `bhk_prop11_core2_q18` (extraction +
+    `exc_open` reuse + the three pentagon residuals), `q < 18` →
+    `bhk_prop11_core2_q_lt_18`. -/
 theorem bhk_prop11_core2_cover6 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
@@ -7192,7 +7279,9 @@ theorem bhk_prop11_core2_cover6 (w : Fin 5 → ℕ) (hmono : StrictMono w)
     (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
         circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6) :
     False := by
-  sorry
+  by_cases hq : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)
+  · exact bhk_prop11_core2_q18 w hmono hpos hsum hsmall6 hcov6 hq
+  · exact bhk_prop11_core2_q_lt_18 w hmono hpos hsum hsmall6 hcov6 (not_le.mp hq)
 
 /-- **Proposition 11 — indirect core (part 2).** As `bhk_prop11_core`, but with
     the stronger `6 w₀ < w₂` (`v₁ < 1/6`) and the fictional-runner-0 window:
