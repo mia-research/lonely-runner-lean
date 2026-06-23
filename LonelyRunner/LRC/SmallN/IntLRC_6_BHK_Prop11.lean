@@ -5401,13 +5401,31 @@ lemma bhk_prop11_readoff_3q4p (p q r m : ℕ) (s : ℤ) (hq0 : 0 < q)
   rw [ht1, Int.fract_add_intCast]
   exact Int.fract_eq_self.mpr ⟨by linarith [hA1], by linarith [hA0]⟩
 
+/-- **`pt/4`-window pin.** If `{G} ∈ [13/24, 7/12]` then `⌊4G⌋ = 4⌊G⌋ + 2` (so
+    `⌊4G⌋ ≡ 2 mod 4`) and `{4G} = 4{G} - 2 ∈ [1/6, 1/3]`. Applied with `4G = p·t`
+    (`G = {p·t}/4`-grid point), this is the single window that simultaneously pins
+    the `β = 0` coset (`⌊p·t⌋ ≡ 2 mod 4`) and the `Y`-window for the `(5,4)` kill. -/
+lemma bhk_prop11_quarter_window (G : ℝ)
+    (hG0 : 13 / 24 ≤ Int.fract G) (hG1 : Int.fract G ≤ 7 / 12) :
+    ⌊4 * G⌋ = 4 * ⌊G⌋ + 2 ∧ Int.fract (4 * G) = 4 * Int.fract G - 2 := by
+  have hfloor4 : ⌊(4 : ℝ) * Int.fract G⌋ = 2 := by
+    rw [Int.floor_eq_iff]; constructor <;> push_cast <;> linarith [hG0, hG1]
+  have hsplit : (4 : ℝ) * G = 4 * Int.fract G + ((4 * ⌊G⌋ : ℤ) : ℝ) := by
+    have h := Int.floor_add_fract G
+    push_cast; linarith [h]
+  refine ⟨?_, ?_⟩
+  · rw [hsplit, Int.floor_add_intCast, hfloor4]; ring
+  · rw [hsplit, Int.fract_add_intCast]
+    have h := Int.floor_add_fract ((4 : ℝ) * Int.fract G)
+    rw [hfloor4] at h; push_cast at h; linarith [h]
+
 /-- **Quarter-slope read-off — the `c = 4` line of `(5, 4)` (BHK Case 5.2.3).**
     For `4r = 5p + 4q` (which forces `p ≡ 0 (mod 4)`), and the coset selector
     `⌊p/q·(m+½)⌋ = 4d + 2` (i.e. `⌊p·t⌋ ≡ 2 (mod 4)`, the `β = 0` line), runner `r`'s
     coordinate at the half-integer time is `(5/4)·A` (`A = {p·(m+½)/q}`), provided
     `1/6 ≤ A ≤ 1/3` — so the read-off value lands in `[5/24, 5/12] ⊂ [1/6, 1/2]`
     while `A ∈ [1/6, 1/3]`, giving a point of `R`. -/
-lemma bhk_prop11_readoff_5p4q_c4 (p q r m : ℕ) (d : ℤ) (hq0 : 0 < q)
+lemma bhk_prop11_readoff_5p4q_c4 (p q r : ℕ) (m d : ℤ) (hq0 : 0 < q)
     (hr4 : 4 * r = 5 * p + 4 * q)
     (hD : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = 4 * d + 2)
     (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
@@ -5419,7 +5437,7 @@ lemma bhk_prop11_readoff_5p4q_c4 (p q r m : ℕ) (d : ℤ) (hq0 : 0 < q)
   set A : ℝ := Int.fract Z with hAdef
   have hr4R : 4 * (r : ℝ) = 5 * p + 4 * q := by exact_mod_cast hr4
   have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
-      = (5 / 4 * A) + ((5 * d + (m : ℤ) + 3 : ℤ) : ℝ) := by
+      = (5 / 4 * A) + ((5 * d + m + 3 : ℤ) : ℝ) := by
     have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
     have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 5 / 4 * Z + ((m : ℝ) + 1 / 2) := by
       rw [hZdef, show (r : ℝ) = (5 * (p : ℝ) + 4 * q) / 4 from by linarith [hr4R]]
@@ -5428,6 +5446,50 @@ lemma bhk_prop11_readoff_5p4q_c4 (p q r m : ℕ) (d : ℤ) (hq0 : 0 < q)
     rw [hD]; push_cast; ring
   rw [ht1, Int.fract_add_intCast]
   refine Int.fract_eq_self.mpr ⟨by linarith [hA0], by linarith [hA1]⟩
+
+/-- **BHK §5 Case 5.2.3 — the `c = 4` branch of `(5, 4)`.** Given `4r = 5p + 4q`
+    (so `p ≡ 0 mod 4`, `q` odd) and `q ≥ 24`, a good time exists, contradicting
+    `h_nogood`. The selector is a single `grid_hit_coset_step` on the `p·t/4`-grid:
+    pick `l` with `{p'·(2l+1)/(2q)} ∈ [13/24, 7/12]` (`p = 4p'`, spacing `1/q ≤ 1/24`);
+    `quarter_window` turns this into `⌊p·t⌋ ≡ 2 mod 4` and `{p·t} ∈ [1/6, 1/3]`, then
+    `readoff_5p4q_c4` reads off `{r·t} = (5/4)·{p·t} ∈ [5/24, 5/12] ⊂ [1/6, 1/2]`. -/
+lemma bhk_prop11_exc_5_4_c4 (p q r : ℕ) (hq24 : 24 ≤ q) (hcop : Nat.Coprime p q)
+    (hr4 : 4 * r = 5 * p + 4 * q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  -- `p ≡ 0 (mod 4)` from `5p = 4(r - q)`.
+  have h54 : 4 ∣ 5 * p := ⟨r - q, by omega⟩
+  have hp4 : 4 ∣ p := Nat.Coprime.dvd_of_dvd_mul_left (by decide) h54
+  obtain ⟨p', hp'⟩ := hp4
+  have hcop' : Nat.Coprime p' q :=
+    Nat.Coprime.coprime_dvd_left ⟨4, by omega⟩ hcop
+  -- Selector: hit the `[13/24, 7/12]` window of the `p'/q`-coset.
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq0 p' hcop'
+    ((p' : ℝ) / (2 * (q : ℝ))) (13 / 24) (1 / 24)
+    (by have h24 : (24 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq24
+        exact one_div_le_one_div_of_le (by norm_num) h24)
+    (by norm_num) (by norm_num)
+  set G : ℝ := (p' : ℝ) / (2 * (q : ℝ)) + (l : ℝ) * (p' : ℝ) / (q : ℝ) with hGdef
+  rw [Set.mem_Icc] at hl
+  have hGfr0 : 13 / 24 ≤ Int.fract G := hl.1
+  have hGfr1 : Int.fract G ≤ 7 / 12 := by linarith [hl.2]
+  have hZ4G : (p : ℝ) / q * ((l : ℝ) + 1 / 2) = 4 * G := by
+    rw [hGdef, hp']; push_cast; field_simp; ring
+  obtain ⟨hfl, hfr⟩ := bhk_prop11_quarter_window G hGfr0 hGfr1
+  have hD : ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ = 4 * ⌊G⌋ + 2 := by rw [hZ4G]; exact hfl
+  have hAval : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = 4 * Int.fract G - 2 := by
+    rw [hZ4G]; exact hfr
+  have hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := by
+    rw [hAval]; linarith [hGfr0]
+  have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 3 := by
+    rw [hAval]; linarith [hGfr1]
+  have hX := bhk_prop11_readoff_5p4q_c4 p q r l ⌊G⌋ hq0 hr4 hD hA0 hA1
+  exact h_nogood l ⟨Set.mem_Icc.mpr ⟨by rw [hX]; linarith [hA0], by rw [hX]; linarith [hA1]⟩,
+    Set.mem_Icc.mpr ⟨hA0, hA1⟩⟩
 
 /-- **BHK §5 Case 5.2.6 — the half-slope pair `(4, -2)`.** The relation `4p ≡ -2r (mod q)`
     gives `q ∣ (2r + 4p)`; the cone bounds force `2r + 4p ∈ {3q, 4q}`. `4q` is `r = 2q − 2p`
