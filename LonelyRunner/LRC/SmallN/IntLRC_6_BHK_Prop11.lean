@@ -7140,12 +7140,89 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
     Lemma 18 / Table 1 for `q ∈ {5,…,17}` (`q ≥ 5` from `bhk_prop11_lemma13`).
-    TO FILL. -/
+
+    The extraction (`g, p, q, r, s` via Lemma 17, `q ∈ [5,17]`, `3p < q`,
+    `gcd(p,q)=1`, `q < r < 2q` via Cor 16, `r < s`, the rectangle `h_nogood`) is
+    complete; the residual `sorry` is the finite `(p,q,r)` dispatch. Every triple
+    `(p,q,r)` with `q ∈ {5..17}`, `q < r < 2q` falls into exactly one of:
+    diagonal `r = p+q` → `bhk_prop11_part6`; coset hits `R` → `bhk_prop11_exc_Rkill`
+    (witness `m` from `experiments/core_q_lt_18_derisk_v2.py`); coset hits `P` →
+    `bhk_prop11_exc_Pkill` (witness from `..._pkill_design_v2.py`); or `v₄` exceeds
+    the Lemma-18 bound → `bhk_prop11_v4_bound_witness` (per-`(p,q)` `ρ`, witness from
+    `..._table1_check_v1.py`). De-risk confirms 0 residual cases (no `gcd(r,q)=1`
+    needed). -/
 theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
     (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
     (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
     (hq : w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) < 18) : False := by
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgw0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
+  have hgw2 : g ∣ w ⟨2, by omega⟩ := Nat.gcd_dvd_right _ _
+  obtain ⟨hgw3, hgw4⟩ := bhk_prop11_lemma17_uncond w hmono hpos hsum hsmall hcover
+  set p : ℕ := w ⟨0, by omega⟩ / g with hpdef
+  set q : ℕ := w ⟨2, by omega⟩ / g with hqdef
+  set r : ℕ := w ⟨3, by omega⟩ / g with hrdef
+  set s : ℕ := w ⟨4, by omega⟩ / g with hsdef
+  have hgp : w ⟨0, by omega⟩ = g * p := (Nat.mul_div_cancel' hgw0).symm
+  have hgq : w ⟨2, by omega⟩ = g * q := (Nat.mul_div_cancel' hgw2).symm
+  have hgr : w ⟨3, by omega⟩ = g * r := (Nat.mul_div_cancel' hgw3).symm
+  have hgs : w ⟨4, by omega⟩ = g * s := (Nat.mul_div_cancel' hgw4).symm
+  have hcop : Nat.Coprime p q := Nat.coprime_div_gcd_div_gcd hg_pos
+  have hq5 : 5 ≤ q := bhk_prop11_lemma13 w hmono hpos hsum hsmall hcover
+  have hq17 : q < 18 := hq
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hgp
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hgq
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hgr
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+  have hp_pos : 0 < p := by
+    rcases Nat.eq_zero_or_pos p with h | h
+    · rw [h, Nat.mul_zero] at hgp; have h0' := hpos ⟨0, by omega⟩; omega
+    · exact h
+  have h3p : 3 * p < q := by
+    have h : g * (3 * p) < g * q := by
+      rw [show g * (3 * p) = 3 * (g * p) from by ring, ← hgp, ← hgq]; exact hsmall
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have hrq : q < r := by
+    have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ :=
+      hmono (Fin.mk_lt_mk.mpr (show (2:ℕ) < 3 by omega))
+    have h : g * q < g * r := by rw [← hgq, ← hgr]; exact hw23
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have hr2q : r < 2 * q := by
+    have hreal := bhk_prop11_v4_lt_2v3_uncond w hmono hpos hsum hsmall hcover
+    have hgR : (0:ℝ) < (g : ℝ) := by exact_mod_cast hg_pos
+    rw [c3, c2] at hreal
+    have hcancel : (g : ℝ) * (r : ℝ) < (g : ℝ) * (2 * (q : ℝ)) := by nlinarith [hreal]
+    have hR : (r : ℝ) < 2 * (q : ℝ) := lt_of_mul_lt_mul_left hcancel hgR.le
+    exact_mod_cast hR
+  have hrs : r < s := by
+    have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+      hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+    have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) := by
+    intro l hl
+    obtain ⟨hrmem, hpmem⟩ := hl
+    set t : ℝ := ((l : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+    have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (l : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c0, c2]; field_simp
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c3, c2]; field_simp
+    refine bhk_prop11_no_good_time w hmono hpos hsum hsmall hcover t ?_ ?_ ?_ ?_ ?_
+    · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+    · rw [e0]; exact hpmem.1
+    · rw [e0]; exact hpmem.2
+    · rw [e3]; exact hrmem.1
+    · rw [e3]; exact hrmem.2
+  -- Finite `(p,q,r)` dispatch (q ∈ {5..17}, q < r < 2q): part6 / exc_Rkill / exc_Pkill /
+  -- v4_bound_witness. Witnesses tabulated in experiments/core_q_lt_18_*.py.
+  clear_value g p q r s
+  clear hgdef hpdef hqdef hrdef hsdef hgw0 hgw2 hgw3 hgw4
   sorry
 
 /-- **Proposition 11 — indirect core (part 1).** The `B₀ = ℝ⁺` contradiction:
