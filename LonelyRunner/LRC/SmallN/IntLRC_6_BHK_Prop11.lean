@@ -6823,6 +6823,347 @@ theorem bhk_prop11_no_good_time2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
   rw [hb3, add_sub_cancel_left, mul_one_div, div_lt_iff₀ (by positivity)] at hspan
   nlinarith [hspan, hw34]
 
+/-- **Lemma 12, windowed** (the `core2` analog of `bhk_prop11_lemma12`). Same
+    orbit-divisibility trichotomy, from the six-runner covering on a 0123-gap. The
+    covering is used twice — once via `gap_covered2`, once on the translates
+    `p + i/g`. At a translate the fictional runner has the *same* fractional part
+    as at `p` (since `g ∣ 2 w₀`, the orbit shift `i·(2w₀/g)` is an integer), so
+    the gap's window-freeness (`h0safe`) plus `fict_window_safe` rules out the
+    fictional cover there too. -/
+lemma bhk_prop11_lemma12_w (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
+    (hdvd012 : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    {a b : ℝ} (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
+      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s))
+    (h0safe : ∀ s ∈ Set.Icc a b,
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12)) :
+    Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩ ∨ Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩
+      ∨ (g ∣ w ⟨3, by omega⟩ ∧ g ∣ w ⟨4, by omega⟩) := by
+  have hg0w : g ∣ w ⟨0, by omega⟩ := hdvd012 0
+  by_cases h4 : Set.Icc a b ⊆ unsafeOf w ⟨3, by omega⟩
+  · exact Or.inl h4
+  by_cases h5 : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩
+  · exact Or.inr (Or.inl h5)
+  refine Or.inr (Or.inr ?_)
+  have hcov45 := bhk_prop11_gap_covered2 w hcov6 hgap h0safe
+  obtain ⟨u, huIcc, hu4, hu5⟩ := bhk_prop11_overlap w hcov45 h4 h5
+  have htrans : ∀ (p : ℝ), p ∈ Set.Icc a b → ∀ i : ℕ,
+      circDist ((w ⟨3, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)) < 1 / 6 ∨
+      circDist ((w ⟨4, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)) < 1 / 6 := by
+    intro p hp i
+    have hsafe012 : ∀ j : Fin 3,
+        (1 : ℝ) / 6 ≤ circDist ((w ⟨j.val, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g))) := by
+      intro j
+      have hjexp : (w ⟨j.val, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g))
+          = (w ⟨j.val, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨j.val, by omega⟩ : ℝ) / g) := by ring
+      rw [hjexp, bhk_prop11_circDist_orbit_dvd _ g hg (hdvd012 j)]
+      exact hgap p hp j
+    rcases hcov6 (p + (i : ℝ) * (1 / g)) with ⟨k, hk⟩ | hfict
+    · fin_cases k
+      · exact absurd hk (not_lt.mpr (hsafe012 0))
+      · exact absurd hk (not_lt.mpr (hsafe012 1))
+      · exact absurd hk (not_lt.mpr (hsafe012 2))
+      · left
+        rw [show (w ⟨3, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)
+              = (w ⟨3, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g)) from by ring]
+        exact hk
+      · right
+        rw [show (w ⟨4, by omega⟩ : ℝ) * p + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)
+              = (w ⟨4, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g)) from by ring]
+        exact hk
+    · exfalso
+      have hredf : circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g))))
+          = circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * p)) := by
+        have hform : 2 * ((w ⟨0, by omega⟩ : ℝ) * (p + (i : ℝ) * (1 / g)))
+            = ((2 * w ⟨0, by omega⟩ : ℕ) : ℝ) * p
+              + (i : ℝ) * (((2 * w ⟨0, by omega⟩ : ℕ) : ℝ) / g) := by push_cast; ring
+        rw [hform, bhk_prop11_circDist_orbit_dvd (2 * w ⟨0, by omega⟩) g hg
+          (Dvd.dvd.mul_left hg0w 2)]
+        congr 1; push_cast; ring
+      rw [hredf] at hfict
+      have h0p : (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * p) := hgap p hp 0
+      have h1 : (1 : ℝ) / 6 ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) := by
+        have := h0p; unfold circDist at this; exact le_trans this (min_le_left _ _)
+      have h2 : Int.fract ((w ⟨0, by omega⟩ : ℝ) * p) ≤ 5 / 6 := by
+        have := h0p; unfold circDist at this; linarith [le_trans this (min_le_right _ _)]
+      exact absurd hfict (not_lt.mpr (bhk_prop11_fict_window_safe h1 h2 (h0safe p hp)))
+  have hua : circDist ((w ⟨3, by omega⟩ : ℝ) * u) < 1 / 6 := (mem_unsafeOf_iff w _ u).mp hu4
+  have hub : circDist ((w ⟨4, by omega⟩ : ℝ) * u) < 1 / 6 := (mem_unsafeOf_iff w _ u).mp hu5
+  have hor : g ∣ w ⟨3, by omega⟩ ∨ g ∣ w ⟨4, by omega⟩ := by
+    by_contra hcon
+    rw [not_or] at hcon
+    exact bhk_prop11_no_double g hg _ _ hcon.1 hcon.2 _ _ hua hub (htrans u huIcc)
+  rcases hor with h3 | h4'
+  · refine ⟨h3, ?_⟩
+    rw [Set.not_subset] at h4
+    obtain ⟨p, hpIcc, hp4⟩ := h4
+    rw [mem_unsafeOf_iff, not_lt] at hp4
+    apply bhk_prop11_dvd_of_orbit_covered _ g hg ((w ⟨4, by omega⟩ : ℝ) * p)
+    intro i
+    rcases htrans p hpIcc i with h | h
+    · exfalso
+      have hsafe3 : (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * p
+          + (i : ℝ) * ((w ⟨3, by omega⟩ : ℝ) / g)) := by
+        rw [bhk_prop11_circDist_orbit_dvd _ g hg h3]; exact hp4
+      linarith
+    · exact h
+  · refine ⟨?_, h4'⟩
+    rw [Set.not_subset] at h5
+    obtain ⟨p, hpIcc, hp5⟩ := h5
+    rw [mem_unsafeOf_iff, not_lt] at hp5
+    apply bhk_prop11_dvd_of_orbit_covered _ g hg ((w ⟨3, by omega⟩ : ℝ) * p)
+    intro i
+    rcases htrans p hpIcc i with h | h
+    · exact h
+    · exfalso
+      have hsafe4 : (1 : ℝ) / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * p
+          + (i : ℝ) * ((w ⟨4, by omega⟩ : ℝ) / g)) := by
+        rw [bhk_prop11_circDist_orbit_dvd _ g hg h4']; exact hp5
+      linarith
+
+/-- **Lemma 17, windowed** (the `core2` analog of `bhk_prop11_lemma17`). The
+    denominators of runners 4 and 5 both divide `g = gcd(w₀,w₂)`. Corollary 15's
+    witness gap `[t, t+1/(3w₂)]` (with `{w₀t} ∈ [1/6,1/3]`) is window-free under
+    `6 w₀ < w₂` (`{w₀s} < 1/3 + 1/18 < 5/12`), so `lemma12_w` applies; the gap is
+    too long for a single `B₄`/`B₅` block, leaving only divisibility. -/
+lemma bhk_prop11_lemma17_w (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨3, by omega⟩ ∧
+      Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) ∣ w ⟨4, by omega⟩ := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgdvd0 : g ∣ w ⟨0, by omega⟩ := by rw [hgdef]; exact Nat.gcd_dvd_left _ _
+  have hgdvd2 : g ∣ w ⟨2, by omega⟩ := by rw [hgdef]; exact Nat.gcd_dvd_right _ _
+  have hgdvd1 : g ∣ w ⟨1, by omega⟩ := by
+    have he : w ⟨1, by omega⟩ = w ⟨2, by omega⟩ - w ⟨0, by omega⟩ := by omega
+    rw [he]; exact Nat.dvd_sub hgdvd2 hgdvd0
+  have hdvd012 : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩ := by
+    intro i; fin_cases i
+    · exact hgdvd0
+    · exact hgdvd1
+    · exact hgdvd2
+  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
+  have hgap := bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi
+  have hw0pos : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2 : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos ⟨2, by omega⟩
+  have hsmall6R : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall6
+  have h4w0 : 4 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by linarith
+  -- The witness gap is window-free for runner 1.
+  have h0safe : ∀ s ∈ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t := by linarith [hs.1]
+    have hsu : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith [hs.2]
+    have hb : (w ⟨0, by omega⟩ : ℝ) * (s - t) < 1 / 12 := by
+      have h1 : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hsu hw0pos.le
+      have h2 : (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) < 1 / 12 := by
+        rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [h4w0]
+      linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by nlinarith [mul_nonneg hw0pos.le hd0]) (by linarith)]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith
+  have hgaplen : ∀ (j : Fin 5), w ⟨2, by omega⟩ < w j →
+      (1 : ℝ) / (3 * (w j : ℝ)) < (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) - t := by
+    intro j hj
+    rw [add_sub_cancel_left]
+    have hwj : (w ⟨2, by omega⟩ : ℝ) < (w j : ℝ) := by exact_mod_cast hj
+    exact one_div_lt_one_div_of_lt (by linarith) (by linarith)
+  have hn4 : ¬ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) ⊆ unsafeOf w ⟨3, by omega⟩ :=
+    bhk_prop11_not_subset_unsafeOf w ⟨3, by omega⟩ (hpos _)
+      (le_add_of_nonneg_right (by positivity))
+      (hgaplen ⟨3, by omega⟩ (hmono (Fin.mk_lt_mk.mpr (by omega))))
+  have hn5 : ¬ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) ⊆ unsafeOf w ⟨4, by omega⟩ :=
+    bhk_prop11_not_subset_unsafeOf w ⟨4, by omega⟩ (hpos _)
+      (le_add_of_nonneg_right (by positivity))
+      (hgaplen ⟨4, by omega⟩ (hmono (Fin.mk_lt_mk.mpr (by omega))))
+  rcases bhk_prop11_lemma12_w w g hg0 hdvd012 hcov6 hgap h0safe with hc | hc | hc
+  · exact absurd hc hn4
+  · exact absurd hc hn5
+  · exact hc
+
+/-- **Lemma 18 (`v₄ ≤ 3/2`), windowed** (the `core2` analog of
+    `bhk_prop11_v4_le_3_2`). The `bhk_prop11_gap123_long` gap
+    `[t − 1/(9w₂), t + 1/(3w₂)]` is window-free under `6 w₀ < w₂` — `{w₀s} ≥ 1/6`
+    (left endpoint cancels the `+a/(9n)` margin) and `{w₀s} < 1/3 + 1/18 < 5/12` —
+    so `gap_covered2` applies and `bhk_lemma_4` yields `2 w₃ < 3 w₂`. -/
+lemma bhk_prop11_v4_le_3_2_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    2 * (w ⟨3, by omega⟩ : ℝ) < 3 * (w ⟨2, by omega⟩ : ℝ) := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  set a := w ⟨0, by omega⟩ with ha
+  set n := w ⟨2, by omega⟩ with hn
+  have ha0 : 0 < a := hpos _
+  have hn0 : 0 < n := by omega
+  set g : ℕ := Nat.gcd a n with hgdef
+  have hg0 : 0 < g := Nat.gcd_pos_of_pos_left _ ha0
+  have hga : g ∣ a := Nat.gcd_dvd_left a n
+  have hgn : g ∣ n := Nat.gcd_dvd_right a n
+  have ha'0 : 0 < a / g := Nat.div_pos (Nat.le_of_dvd ha0 hga) hg0
+  have h3a' : 3 * (a / g) < n / g := by
+    have hmul : 3 * (a / g) * g < n / g * g := by
+      calc 3 * (a / g) * g = 3 * a := by rw [mul_assoc, Nat.div_mul_cancel hga]
+        _ < n := hsmall
+        _ = n / g * g := (Nat.div_mul_cancel hgn).symm
+    exact lt_of_mul_lt_mul_right hmul (Nat.zero_le g)
+  have hcop' : Nat.Coprime (a / g) (n / g) := Nat.coprime_div_gcd_div_gcd hg0
+  obtain ⟨m, hm⟩ := bhk_prop11_residue_hit_narrow (a / g) (n / g) ha'0 h3a' hq18 hcop'
+  have hnR : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg0
+  have hb'R : (0 : ℝ) < ((n / g : ℕ) : ℝ) := by exact_mod_cast (by omega : 0 < n / g)
+  have haf : (a : ℝ) = (g : ℝ) * ((a / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hga]
+  have hnf : (n : ℝ) = (g : ℝ) * ((n / g : ℕ) : ℝ) := by
+    rw [← Nat.cast_mul, Nat.mul_div_cancel' hgn]
+  set t : ℝ := (2 * (m : ℝ) + 1) / (2 * (n : ℝ)) with ht
+  have heq : (a : ℝ) * t
+      = ((a / g : ℕ) : ℝ) * ((2 * (m : ℝ) + 1) / (2 * ((n / g : ℕ) : ℝ))) := by
+    rw [ht, haf, hnf]; field_simp
+  have hw1 : (w ⟨1, by omega⟩ : ℝ) = (n : ℝ) - (a : ℝ) := by
+    have : (a : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (n : ℝ) := by exact_mod_cast hsum
+    linarith
+  have h3half : Int.fract ((n : ℝ) * t) = 1 / 2 := by
+    have hh : (n : ℝ) * t = (m : ℝ) + 1 / 2 := by rw [ht]; field_simp
+    rw [hh, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
+      Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  have hep1 : ((a / g : ℕ) : ℝ) / (9 * ((n / g : ℕ) : ℝ)) = (a : ℝ) / (9 * n) := by
+    rw [haf, hnf]; field_simp
+  have hep2 : (((n / g : ℕ) : ℝ) - ((a / g : ℕ) : ℝ)) / (9 * ((n / g : ℕ) : ℝ))
+      = ((n : ℝ) - a) / (9 * n) := by rw [haf, hnf]; field_simp
+  have hbridge : Int.fract ((a : ℝ) * t)
+      = Int.fract (((a / g : ℕ) : ℝ) * ((2 * (m : ℝ) + 1) / (2 * ((n / g : ℕ) : ℝ)))) := by
+    rw [heq]
+  have hwlo : 1 / 6 + (a : ℝ) / (9 * n) ≤ Int.fract ((a : ℝ) * t) := by
+    rw [hbridge, ← hep1]; exact (Set.mem_Icc.mp hm).1
+  have hwhi : Int.fract ((a : ℝ) * t) ≤ 1 / 3 - (w ⟨1, by omega⟩ : ℝ) / (9 * n) := by
+    rw [hbridge, hw1, ← hep2]; exact (Set.mem_Icc.mp hm).2
+  have hgap := bhk_prop11_gap123_long w hpos hsum hsmall t h3half hwlo hwhi
+  -- The (long) gap is window-free for runner 1.
+  have ha0R : (0 : ℝ) < (a : ℝ) := by exact_mod_cast ha0
+  have h6a : 6 * (a : ℝ) < (n : ℝ) := by exact_mod_cast hsmall6
+  have h0safe : ∀ s ∈ Set.Icc (t - 1 / (9 * n)) (t + 1 / (3 * n)),
+      Int.fract ((a : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    have hub : (a : ℝ) * (s - t) ≤ (a : ℝ) / (3 * n) := by
+      have h : s - t ≤ 1 / (3 * (n : ℝ)) := by linarith [hs.2]
+      calc (a : ℝ) * (s - t) ≤ (a : ℝ) * (1 / (3 * n)) := mul_le_mul_of_nonneg_left h ha0R.le
+        _ = (a : ℝ) / (3 * n) := by ring
+    have hlb : -((a : ℝ) / (9 * n)) ≤ (a : ℝ) * (s - t) := by
+      have h : -(1 / (9 * (n : ℝ))) ≤ s - t := by linarith [hs.1]
+      have hh := mul_le_mul_of_nonneg_left h ha0R.le
+      calc -((a : ℝ) / (9 * n)) = (a : ℝ) * (-(1 / (9 * n))) := by ring
+        _ ≤ (a : ℝ) * (s - t) := hh
+    have ha3n : (a : ℝ) / (3 * n) < 1 / 18 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [h6a]
+    have hsumlo : (1 : ℝ) / 6 ≤ Int.fract ((a : ℝ) * t) + (a : ℝ) * (s - t) := by
+      linarith [hwlo, hlb]
+    have hsumhi : Int.fract ((a : ℝ) * t) + (a : ℝ) * (s - t) ≤ 5 / 12 := by
+      have hw1nn : (0 : ℝ) ≤ (w ⟨1, by omega⟩ : ℝ) / (9 * n) := by positivity
+      linarith [hwhi, hub, hw1nn, ha3n]
+    have hfs : Int.fract ((a : ℝ) * s) = Int.fract ((a : ℝ) * t) + (a : ℝ) * (s - t) := by
+      rw [show (a : ℝ) * s = (a : ℝ) * t + (a : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith [hsumlo]) (by linarith [hsumhi])]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith [hsumhi]
+  have hcov := bhk_prop11_gap_covered2 w hcov6 hgap h0safe
+  have hab : t - 1 / (9 * n) ≤ t + 1 / (3 * n) := by
+    have h1 : (0 : ℝ) < 1 / (9 * n) := by positivity
+    have h2 : (0 : ℝ) < 1 / (3 * n) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos (t - 1 / (9 * n)) (t + 1 / (3 * n)) hab hcov
+  have hw3R : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have key : 1 / (3 * (n : ℝ)) + 1 / (9 * n) < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by
+    linarith [hlen]
+  have hcomb : 1 / (3 * (n : ℝ)) + 1 / (9 * n) = 4 / (9 * n) := by field_simp; ring
+  rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
+  linarith [key]
+
+/-- **Exceptional-pair extraction, windowed** (the `core2` analog of
+    `bhk_prop11_exceptional_q18`). From the six-runner covering and `q ≥ 18`,
+    produce the rational structure `g, p, q, r, s` and a minimal exceptional cone
+    pair `(i, j)` with the BHK (14) order bound. The only covering-dependent
+    inputs are `lemma17_w` (denominators) and the rectangle `no_good_time2`; the
+    pair itself comes from the pure-arithmetic `bhk_part3_exceptional_minimal_bound`. -/
+theorem bhk_prop11_exceptional_q18_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hq18 : 18 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩)) :
+    ∃ g p q r s : ℕ, 0 < g ∧
+      w ⟨0, by omega⟩ = g * p ∧ w ⟨2, by omega⟩ = g * q ∧
+      w ⟨3, by omega⟩ = g * r ∧ w ⟨4, by omega⟩ = g * s ∧
+      Nat.gcd p q = 1 ∧ 18 ≤ q ∧
+      ∃ ij : ℤ × ℤ, ij ≠ (0, 0) ∧
+        (∃ k : ℤ, Int.fract ((ij.1 : ℝ) / q) = Int.fract ((k : ℝ) * r / q) ∧
+                  Int.fract ((ij.2 : ℝ) / q) = Int.fract ((k : ℝ) * p / q)) ∧
+        0 ≤ ij.1 ∧ (ij.1 : ℝ) < 6 ∧
+        -3 - 1 / 2 * (ij.1 : ℝ) < (ij.2 : ℝ) ∧ (ij.2 : ℝ) < 3 + 1 / 2 * (ij.1 : ℝ) ∧
+        (ij.1 ≠ 0 → ij.2 ≠ 0 → (ij.1.natAbs + 1) * (ij.2.natAbs + 1) - 2 ≤ q) := by
+  have hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) := by omega
+  obtain ⟨hgw3, hgw4⟩ := bhk_prop11_lemma17_w w hmono hpos hsum hsmall6 hcov6 hq5
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgw0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
+  have hgw2 : g ∣ w ⟨2, by omega⟩ := Nat.gcd_dvd_right _ _
+  set p : ℕ := w ⟨0, by omega⟩ / g with hpdef
+  set q : ℕ := w ⟨2, by omega⟩ / g with hqdef
+  set r : ℕ := w ⟨3, by omega⟩ / g with hrdef
+  set s : ℕ := w ⟨4, by omega⟩ / g with hsdef
+  have hp : w ⟨0, by omega⟩ = g * p := (Nat.mul_div_cancel' hgw0).symm
+  have hq : w ⟨2, by omega⟩ = g * q := (Nat.mul_div_cancel' hgw2).symm
+  have hr : w ⟨3, by omega⟩ = g * r := (Nat.mul_div_cancel' hgw3).symm
+  have hs : w ⟨4, by omega⟩ = g * s := (Nat.mul_div_cancel' hgw4).symm
+  have hcop : Nat.gcd p q = 1 := Nat.coprime_div_gcd_div_gcd hg_pos
+  have hqpos : 0 < q := by omega
+  have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg_pos
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hqpos
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hqne : (q : ℝ) ≠ 0 := hqR.ne'
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hp
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hq
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hr
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+  have h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) := by
+    intro k hk
+    obtain ⟨hrmem, hpmem⟩ := hk
+    set t : ℝ := ((k : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (k : ℝ) + 1 / 2 := by
+      rw [htdef]; field_simp
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((k : ℝ) + 1 / 2) := by
+      rw [htdef, c0, c2]; field_simp
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((k : ℝ) + 1 / 2) := by
+      rw [htdef, c3, c2]; field_simp
+    refine bhk_prop11_no_good_time2 w hmono hpos hsum hsmall6 hcov6 t ?_ ?_ ?_ ?_ ?_
+    · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+    · rw [e0]; exact hpmem.1
+    · rw [e0]; exact hpmem.2
+    · rw [e3]; exact hrmem.1
+    · rw [e3]; exact hrmem.2
+  obtain ⟨_G, _hGlift, ij, hne, hmem, h0, h1β, hc1, hc2, _hmin, h14⟩ :=
+    bhk_part3_exceptional_minimal_bound r p q (by omega) hcop h_nogood
+  exact ⟨g, p, q, r, s, hg_pos, hp, hq, hr, hs, hcop, by omega, ij, hne, hmem, h0, h1β, hc1, hc2,
+    h14⟩
+
 /-- **Proposition 11, part 2 — the 6-runner core** (BHK Parts 2–6 with the
     fictional runner 0 prepended). The genuinely-hard content of
     `bhk_prop11_core2`: under `6 w₀ < w₂`, the **six** runners
