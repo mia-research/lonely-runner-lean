@@ -1006,6 +1006,138 @@ lemma bhk_prop11_v4_le_3_2 (w : Fin 5 → ℕ) (hmono : StrictMono w)
   rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
   linarith [key]
 
+/-- **Parametric `0123`-gap (Lemma 14 with explicit `ρ`).** As `bhk_prop11_gap123_long`
+    but with the slack `ρ ∈ (0, 1/6]` a parameter instead of the hard-wired `1/9`.
+    A half-integer time `t` (`{w₂ t} = 1/2`) with runner 1 in the window
+    `[1/6 + ρ·v₁, 1/3 − ρ·v₂]` launches a `0123`-gap on `[t − ρ/w₂, t + 1/(3w₂)]`
+    (BHK normalized length `1/3 + ρ`). The `q < 18` Table-1 bounds use this with the
+    per-`(p,q)` maximal `ρ`; `bhk_prop11_gap123_long` is the `ρ = 1/9` instance. -/
+lemma bhk_prop11_gap123_long_rho (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (ρ : ℝ) (hρ0 : 0 < ρ) (hρ6 : ρ ≤ 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 + ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) :
+    ∀ s ∈ Set.Icc (t - ρ / (w ⟨2, by omega⟩ : ℝ))
+        (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
+  have hw0R : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw1R : (0 : ℝ) < (w ⟨1, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsmallR : 3 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall
+  have hsl0 : (0 : ℝ) ≤ ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by positivity
+  have hsl1 : (0 : ℝ) ≤ ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by positivity
+  have hw1cast : (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) := by
+    have : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+      exact_mod_cast hsum
+    linarith
+  have hf1 : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+      = 1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+    have h0 : (w ⟨1, by omega⟩ : ℝ) * t
+        = ((⌊(w ⟨2, by omega⟩ : ℝ) * t⌋ - ⌊(w ⟨0, by omega⟩ : ℝ) * t⌋ : ℤ) : ℝ)
+          + (1 / 2 - Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)) := by
+      have e2 := Int.floor_add_fract ((w ⟨2, by omega⟩ : ℝ) * t)
+      have e0 := Int.floor_add_fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      rw [h3] at e2
+      rw [hw1cast, sub_mul, Int.cast_sub]; linarith [e2, e0]
+    rw [h0, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+  intro s hs i
+  obtain ⟨hsl, hsu⟩ := hs
+  have hd_lo : -(ρ / (w ⟨2, by omega⟩ : ℝ)) ≤ s - t := by linarith
+  have hd_hi : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith
+  fin_cases i
+  · -- runner 1 (w₀)
+    have hub : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+        ≤ (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw0R.le
+      rwa [mul_one_div] at h
+    have hlb : -(ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw0R.le
+      rwa [show (w ⟨0, by omega⟩ : ℝ) * -(ρ / (w ⟨2, by omega⟩ : ℝ))
+            = -(ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring] at h
+    have hfrac : (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 9 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  · -- runner 2 (w₁)
+    have hw1t_lo : 1 / 6 + ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+        ≤ Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) := by rw [hf1]; linarith
+    have hw1t_hi : Int.fract ((w ⟨1, by omega⟩ : ℝ) * t)
+        ≤ 1 / 3 - ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by rw [hf1]; linarith
+    have hub : (w ⟨1, by omega⟩ : ℝ) * (s - t)
+        ≤ (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw1R.le
+      rwa [mul_one_div] at h
+    have hlb : -(ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) ≤ (w ⟨1, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw1R.le
+      rwa [show (w ⟨1, by omega⟩ : ℝ) * -(ρ / (w ⟨2, by omega⟩ : ℝ))
+            = -(ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring] at h
+    have hfrac : (w ⟨1, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 3 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; linarith
+    have hfs : Int.fract ((w ⟨1, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨1, by omega⟩ : ℝ) * t) + (w ⟨1, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨1, by omega⟩ : ℝ) * s
+            = (w ⟨1, by omega⟩ : ℝ) * t + (w ⟨1, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith) (by linarith)]
+    simp only [circDist]; rw [hfs]; exact le_min (by linarith) (by linarith)
+  · -- runner 3 (w₂)
+    have hub : (w ⟨2, by omega⟩ : ℝ) * (s - t) ≤ 1 / 3 := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw2R.le
+      rwa [show (w ⟨2, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) = 1 / 3 from by
+        field_simp] at h
+    have hlb : -ρ ≤ (w ⟨2, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw2R.le
+      rwa [show (w ⟨2, by omega⟩ : ℝ) * -(ρ / (w ⟨2, by omega⟩ : ℝ)) = -ρ from by
+        field_simp] at h
+    have hfs : Int.fract ((w ⟨2, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) + (w ⟨2, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨2, by omega⟩ : ℝ) * s
+            = (w ⟨2, by omega⟩ : ℝ) * t + (w ⟨2, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by rw [h3]; linarith) (by rw [h3]; linarith)]
+    simp only [circDist]; rw [hfs, h3]; exact le_min (by linarith) (by linarith)
+
+/-- **Lemma 18 / Table 1 bound from an explicit witness (`q < 18`).** Given a
+    half-integer time `t` whose runner-1 position lies in the parametric window
+    `[1/6 + ρ·v₁, 1/3 − ρ·v₂]`, the resulting `0123`-gap of length `(1/3 + ρ)/w₂`
+    (a `45`-block by the covering) forces, via `bhk_lemma_4`, the bound
+    `(1 + 3ρ)·w₃ < 2·w₂` — i.e. `v₄ < 2/(1 + 3ρ)`. With `ρ = 1/9` this is
+    `v₄ ≤ 3/2`; the per-`(p,q)` Table-1 entries are the maximal-`ρ` instances used
+    to exclude the large-`v₄` triples in `core_q_lt_18`. -/
+lemma bhk_prop11_v4_bound_witness (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (ρ : ℝ) (hρ0 : 0 < ρ) (hρ6 : ρ ≤ 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 + ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) :
+    (1 + 3 * ρ) * (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3R : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hgap := bhk_prop11_gap123_long_rho w hpos hsum hsmall ρ hρ0 hρ6 t h3 h1lo h1hi
+  have hcov := bhk_prop11_gap_covered w hcover hgap
+  have hab : t - ρ / (w ⟨2, by omega⟩ : ℝ) ≤ t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+    have h1 : (0 : ℝ) < ρ / (w ⟨2, by omega⟩ : ℝ) := by positivity
+    have h2 : (0 : ℝ) < 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos _ _ hab hcov
+  -- hlen : (t + 1/(3w₂)) - (t - ρ/w₂) < 2/(3 w₃)
+  have key : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) + ρ / (w ⟨2, by omega⟩ : ℝ)
+      < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by linarith [hlen]
+  have hcomb : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) + ρ / (w ⟨2, by omega⟩ : ℝ)
+      = (1 + 3 * ρ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by field_simp
+  rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
+  nlinarith [key]
+
 /-- **Residue realization.** For coprime `w'` and `n > 0`, every residue class mod
     `n` is hit by some multiple `w' · i`. (The `ZMod` unit-inverse construction of
     `bhk_prop11_residue_hit`, extracted for reuse in the orbit argument.) -/
