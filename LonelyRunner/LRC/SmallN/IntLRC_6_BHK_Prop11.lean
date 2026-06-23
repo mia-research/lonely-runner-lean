@@ -401,6 +401,23 @@ lemma bhk_prop11_fract_odd (a q m : ℕ) (hq : 0 < q) :
   congr 1
   push_cast; ring
 
+/-- **Explicit C-point evaluation (the `q < 18` witness bridge).** At the
+    half-integer index `m`, runner `a`'s reduced coordinate
+    `{a/q·(m+½)} = {a·(2m+1)/(2q)}` equals the explicit rational
+    `((2·(a·m mod q) + a) mod 2q) / (2q)`. Combines `bhk_prop11_fract_odd`
+    (residue reduction) with `Int.fract_div_natCast_eq_div_natCast_mod`. For a
+    concrete triple `(p, q, r)` and explicit witness `m`, both the right side and
+    the rectangle/pentagon memberships it feeds become `norm_num` goals — the tool
+    that discharges every Table-4/6/8 witness in the `core_q_lt_18` finite analysis. -/
+lemma bhk_prop11_Cpoint_eval (a q m : ℕ) (hq : 0 < q) :
+    Int.fract ((a : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = (((2 * (a * m % q) + a) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) := by
+  have e : (a : ℝ) / q * ((m : ℝ) + 1 / 2) = (a : ℝ) * ((2 * (m : ℝ) + 1) / (2 * q)) := by
+    field_simp
+  have hc : (2 * (q : ℝ)) = ((2 * q : ℕ) : ℝ) := by norm_cast
+  rw [e, bhk_prop11_fract_odd a q m hq, hc]
+  exact Int.fract_div_natCast_eq_div_natCast_mod
+
 /-- **Residue realisation kernel.** For coprime `p, q` (`q > 0`) and any target
     residue `k < q` with `2k + p < 2q` (no wrap), there is an `m` whose
     half-integer time `(2m+1)/(2q)` puts `p` at exactly `(2k+p)/(2q)`. The guts of
@@ -5587,6 +5604,88 @@ lemma bhk_prop11_exc_5_4_c3 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime 
   have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 3 / 10 := by
     rw [hAval]; linarith [hGfr1]
   have hX := bhk_prop11_readoff_5p4q_c3 p q r l ⌊G'⌋ hq0 hr4 hD hA0 hA1
+  exact h_nogood l ⟨Set.mem_Icc.mpr ⟨by rw [hX]; linarith [hA0], by rw [hX]; linarith [hA1]⟩,
+    Set.mem_Icc.mpr ⟨hA0, by linarith [hA1]⟩⟩
+
+/-- **Quarter-slope read-off — the `c = 5` line of `(5, 4)` (also the `β = 1/8` line).**
+    For `4r = 5p + 5q` and the coset selector `⌊p/q·(m+½)⌋ = 4d + 2 - m` (i.e.
+    `⌊p·t⌋ + m ≡ 2 mod 4`), runner `r`'s coordinate is `(5/4)·A + 1/8`, for
+    `1/6 ≤ A ≤ 3/10`. -/
+lemma bhk_prop11_readoff_5p4q_c5 (p q r : ℕ) (m d : ℤ) (hq0 : 0 < q)
+    (hr4 : 4 * r = 5 * p + 5 * q)
+    (hD : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = 4 * d + 2 - m)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 3 / 10) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 5 / 4 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) + 1 / 8 := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hr4R : 4 * (r : ℝ) = 5 * p + 5 * q := by exact_mod_cast hr4
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+      = (5 / 4 * A + 1 / 8) + ((5 * d + 3 : ℤ) : ℝ) := by
+    have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 5 / 4 * Z + 5 / 4 * ((m : ℝ) + 1 / 2) := by
+      rw [hZdef, show (r : ℝ) = (5 * (p : ℝ) + 5 * q) / 4 from by linarith [hr4R]]
+      field_simp
+    rw [key]; conv_lhs => rw [hAz]
+    rw [hD]; push_cast; ring
+  rw [ht1, Int.fract_add_intCast]
+  refine Int.fract_eq_self.mpr ⟨by linarith [hA0], by linarith [hA1]⟩
+
+/-- **BHK §5 Case 5.2.3 — the `c = 5` branch of `(5, 4)`.** Given `4r = 5p + 5q`
+    (so `5 ∣ r`, `σ = r/5`, `p + q = 4σ` with `σ` coprime to `q`) and `q ≥ 30`, a
+    good time exists. Selector: `grid_hit_coset_step` on the `σ/q`-coset hits
+    `{G''} ∈ [13/24, 23/40]` where `4G'' = p·t + l`; `quarter_window … 2` pins
+    `⌊p·t⌋ ≡ 2 - l (mod 4)` and `{p·t} ∈ [1/6, 3/10]`, then `readoff_5p4q_c5`. -/
+lemma bhk_prop11_exc_5_4_c5 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hr4 : 4 * r = 5 * p + 5 * q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have h54 : 5 ∣ 4 * r := ⟨p + q, by omega⟩
+  have h5r : 5 ∣ r := Nat.Coprime.dvd_of_dvd_mul_left (by decide) h54
+  obtain ⟨σ, hσ⟩ := h5r
+  have hpq4 : p + q = 4 * σ := by omega
+  have hcopσ : Nat.Coprime σ q := by
+    have h2 : Nat.gcd σ q ∣ q := Nat.gcd_dvd_right _ _
+    have hd : Nat.gcd σ q ∣ p := by
+      have h4 : Nat.gcd σ q ∣ 4 * σ := (Nat.gcd_dvd_left _ _).mul_left 4
+      have hq' : Nat.gcd σ q ∣ p + q := by rw [hpq4]; exact h4
+      exact (Nat.dvd_add_right h2).mp (by rwa [Nat.add_comm] at hq')
+    exact Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd hd h2)
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq0 σ hcopσ
+    (-(1 : ℝ) / 8 + (σ : ℝ) / (2 * (q : ℝ))) (13 / 24) (1 / 30)
+    (by have h30 : (30 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq30
+        exact one_div_le_one_div_of_le (by norm_num) h30)
+    (by norm_num) (by norm_num)
+  set G'' : ℝ := -(1 : ℝ) / 8 + (σ : ℝ) / (2 * (q : ℝ)) + (l : ℝ) * (σ : ℝ) / (q : ℝ) with hG''def
+  rw [Set.mem_Icc] at hl
+  have hGfr0 : 13 / 24 ≤ Int.fract G'' := hl.1
+  have hGfr1 : Int.fract G'' ≤ 23 / 40 := by linarith [hl.2]
+  have hpq4R : (p : ℝ) + q = 4 * σ := by exact_mod_cast hpq4
+  have h4G : 4 * G'' = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + (l : ℝ) := by
+    rw [hG''def, show (p : ℝ) = 4 * (σ : ℝ) - q from by linarith [hpq4R]]
+    field_simp; ring
+  obtain ⟨hfl, hfr⟩ := bhk_prop11_quarter_window G'' 2
+    (by push_cast; linarith [hGfr0]) (by push_cast; linarith [hGfr1])
+  have hD : ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ = 4 * ⌊G''⌋ + 2 - l := by
+    have h1 : ⌊4 * G''⌋ = ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + l := by
+      rw [h4G, Int.floor_add_intCast]
+    omega
+  have hAval : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = 4 * Int.fract G'' - 2 := by
+    have heq : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = Int.fract (4 * G'') := by
+      rw [h4G, Int.fract_add_intCast]
+    rw [heq, hfr]; push_cast; ring
+  have hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := by
+    rw [hAval]; linarith [hGfr0]
+  have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 3 / 10 := by
+    rw [hAval]; linarith [hGfr1]
+  have hX := bhk_prop11_readoff_5p4q_c5 p q r l ⌊G''⌋ hq0 hr4 hD hA0 hA1
   exact h_nogood l ⟨Set.mem_Icc.mpr ⟨by rw [hX]; linarith [hA0], by rw [hX]; linarith [hA1]⟩,
     Set.mem_Icc.mpr ⟨hA0, by linarith [hA1]⟩⟩
 
