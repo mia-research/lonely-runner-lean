@@ -7042,6 +7042,53 @@ lemma bhk_prop11_part6 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
         hgp hgr hcopr
     linarith
 
+/-- **BHK Part 6 — diagonal case, `q`-free form (`p ≥ 2`, `r = p+q ≥ 12`).** The
+    `p ≥ 2` branches of `bhk_prop11_part6` use `q ≥ 18` only to get `r ≥ 12` (the
+    hypothesis of Claim 19); Claim 20 needs only `r > 0`. Taking `r ≥ 12` directly
+    lifts the `q ≥ 18` restriction, closing every diagonal `(p,q)` with `p ≥ 2` and
+    `p + q ≥ 12` — including the `q < 18` ones. (The `p = 1` diagonals still go
+    through `part6_p1`, which genuinely needs `q ≥ 16` for `claim21_lonely`.) -/
+lemma bhk_prop11_part6_ge12 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p q r s : ℕ) (hg : 0 < g) (hp2 : 2 ≤ p) (hr12 : 12 ≤ r)
+    (hgp : w ⟨0, by omega⟩ = g * p) (hgq : w ⟨2, by omega⟩ = g * q)
+    (hgr : w ⟨3, by omega⟩ = g * r) (hgs : w ⟨4, by omega⟩ = g * s)
+    (hcop : Nat.Coprime p q) : False := by
+  have hp_pos : 0 < p := by omega
+  have hrpq : r = p + q := by
+    have h : g * r = g * (p + q) := by rw [← hgr, hdiag, hgp, hgq]; ring
+    exact Nat.eq_of_mul_eq_mul_left hg h
+  have hcopr : Nat.Coprime p r := by
+    show Nat.gcd p r = 1
+    rw [hrpq, Nat.add_comm p q, Nat.gcd_add_self_right]; exact hcop
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19 w hpos hcover hsum hdiag g p r hg hp_pos hr12 hgp hgr hcopr
+  have h19R : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast h19
+  rcases lt_or_ge p 3 with hp3 | hp3
+  · interval_cases p
+    · -- p = 2  (q, r odd)
+      have hqodd : q % 2 = 1 := by
+        have h2 : ¬ (2 ∣ q) := by
+          intro hdvd
+          have hg2 : Nat.gcd 2 q = 2 := Nat.gcd_eq_left hdvd
+          have hc1 : Nat.gcd 2 q = 1 := hcop
+          omega
+        omega
+      have hrodd : r % 2 = 1 := by omega
+      obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness_p2 w g r hg hrodd hgp hgr
+      have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+        bhk_prop11_part6_claim20_gap w hpos hcover hsum hdiag hsmall hw34 t N m h0 hm
+      linarith
+  · -- p ≥ 3
+    have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+      bhk_prop11_part6_claim20 w hpos hcover hsum hdiag hsmall hw34 g p r hg hp3 (by omega)
+        hgp hgr hcopr
+    linarith
+
 /-- **Proposition 11 — indirect core, `q ≥ 18` branch.** Extracts the exceptional
     cone pair (`exceptional_q18`), reconstructs the readout bounds and no-good-time
     fact the `exc_*` kills consume, and dispatches. (Stage 1: routes the whole
