@@ -7328,8 +7328,468 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
   clear_value g p q r s
   clear hgdef hpdef hqdef hrdef hsdef hgw0 hgw2 hgw3 hgw4
   by_cases hdiag : r = p + q
-  · -- DIAGONAL (handled separately below)
-    sorry
+  · -- DIAGONAL: r = p+q. part6_ge12 (p≥2,r≥12) / part6_p1 (p=1,q≥16) / exc_Pkill / explicit
+    have hdiagw : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩ := by
+      rw [hgr, hgp, hgq, hdiag]; ring
+    have hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+      exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+    have hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) := by
+      have h23 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by
+        exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega))
+      linarith
+    interval_cases q
+    · -- q = 5
+      have hpb : p ≤ 1 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,5,6)
+        · omega  -- r=7 non-diagonal, excluded by hdiag
+        · omega  -- r=8 non-diagonal, excluded by hdiag
+        · omega  -- r=9 non-diagonal, excluded by hdiag
+    · -- q = 6
+      have hpb : p ≤ 1 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,6,7)
+        · omega  -- r=8 non-diagonal, excluded by hdiag
+        · omega  -- r=9 non-diagonal, excluded by hdiag
+        · omega  -- r=10 non-diagonal, excluded by hdiag
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+    · -- q = 7
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,7,8)
+        · omega  -- r=9 non-diagonal, excluded by hdiag
+        · omega  -- r=10 non-diagonal, excluded by hdiag
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=8 non-diagonal, excluded by hdiag
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (2,7,9)
+        · omega  -- r=10 non-diagonal, excluded by hdiag
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+    · -- q = 8
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 8 9 s 1 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- diag P
+        · omega  -- r=10 non-diagonal, excluded by hdiag
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+    · -- q = 9
+      have hpb : p ≤ 2 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,9,10)
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=10 non-diagonal, excluded by hdiag
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (2,9,11)
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+    · -- q = 10
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,10,11)
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=11 non-diagonal, excluded by hdiag
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 10 13 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+    · -- q = 11
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,11,12)
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 2 11 13 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=12 non-diagonal, excluded by hdiag
+        · omega  -- r=13 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 11 14 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+    · -- q = 12
+      have hpb : p ≤ 3 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,12,13)
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · exact absurd hcop (by decide)
+    · -- q = 13
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,13,14)
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 2 13 15 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 13 16 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+      · -- p = 4
+        interval_cases r
+        · omega  -- r=14 non-diagonal, excluded by hdiag
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 4 13 17 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+    · -- q = 14
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · exact bhk_prop11_exc_Pkill w hmono hpos hsum hsmall hcover g 1 14 15 s 2 hg_pos (by norm_num) (by norm_num) (by norm_num) hrq hrs c0 c2 c3 c4 (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)  -- diag P
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=15 non-diagonal, excluded by hdiag
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 14 17 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+    · -- q = 15
+      have hpb : p ≤ 4 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,15,16)
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 2 15 17 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · -- p = 4
+        interval_cases r
+        · omega  -- r=16 non-diagonal, excluded by hdiag
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 4 15 19 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+    · -- q = 16
+      have hpb : p ≤ 5 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · exact bhk_prop11_part6_p1 w hpos hcover hsum hdiagw hw24 g 16 s hg_pos (by norm_num) (by omega) hgq hgs  -- diag part6_p1
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 16 19 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+      · exact absurd hcop (by decide)
+      · -- p = 5
+        interval_cases r
+        · omega  -- r=17 non-diagonal, excluded by hdiag
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 5 16 21 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+    · -- q = 17
+      have hpb : p ≤ 5 := by omega
+      interval_cases p
+      · -- p = 1
+        interval_cases r
+        · exact bhk_prop11_part6_p1 w hpos hcover hsum hdiagw hw24 g 17 s hg_pos (by norm_num) (by omega) hgq hgs  -- diag part6_p1
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+        · omega  -- r=32 non-diagonal, excluded by hdiag
+        · omega  -- r=33 non-diagonal, excluded by hdiag
+      · -- p = 2
+        interval_cases r
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 2 17 19 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+        · omega  -- r=32 non-diagonal, excluded by hdiag
+        · omega  -- r=33 non-diagonal, excluded by hdiag
+      · -- p = 3
+        interval_cases r
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 3 17 20 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+        · omega  -- r=32 non-diagonal, excluded by hdiag
+        · omega  -- r=33 non-diagonal, excluded by hdiag
+      · -- p = 4
+        interval_cases r
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 4 17 21 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=22 non-diagonal, excluded by hdiag
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+        · omega  -- r=32 non-diagonal, excluded by hdiag
+        · omega  -- r=33 non-diagonal, excluded by hdiag
+      · -- p = 5
+        interval_cases r
+        · omega  -- r=18 non-diagonal, excluded by hdiag
+        · omega  -- r=19 non-diagonal, excluded by hdiag
+        · omega  -- r=20 non-diagonal, excluded by hdiag
+        · omega  -- r=21 non-diagonal, excluded by hdiag
+        · exact bhk_prop11_part6_ge12 w hpos hcover hsum hsmall hdiagw hw34 g 5 17 22 s hg_pos (by norm_num) (by norm_num) hgp hgq hgr hgs hcop  -- diag part6_ge12
+        · omega  -- r=23 non-diagonal, excluded by hdiag
+        · omega  -- r=24 non-diagonal, excluded by hdiag
+        · omega  -- r=25 non-diagonal, excluded by hdiag
+        · omega  -- r=26 non-diagonal, excluded by hdiag
+        · omega  -- r=27 non-diagonal, excluded by hdiag
+        · omega  -- r=28 non-diagonal, excluded by hdiag
+        · omega  -- r=29 non-diagonal, excluded by hdiag
+        · omega  -- r=30 non-diagonal, excluded by hdiag
+        · omega  -- r=31 non-diagonal, excluded by hdiag
+        · omega  -- r=32 non-diagonal, excluded by hdiag
+        · omega  -- r=33 non-diagonal, excluded by hdiag
   · -- NON-DIAGONAL: q ∈ {5..17}, q < r < 2q, r ≠ p+q → R / P / v4 exclusion
     interval_cases q
     · -- q = 5
