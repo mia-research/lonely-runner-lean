@@ -12672,6 +12672,96 @@ lemma bhk_prop11_part6_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
         hgp hgr hcopr
     linarith
 
+/-- **Part 6 diagonal, six-runner, `p ≥ 2`, `r ≥ 12`** (`part6_w` with the `q ≥ 18`
+    requirement relaxed to `r ≥ 12`, valid for the `p ≥ 2` branch only). Closes the
+    `p ≥ 2` diagonals `(2,13,15)`, `(2,15,17)`, `(2,17,19)` in `core2_q_lt_18`. -/
+lemma bhk_prop11_part6_ge12_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw34 : (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g p q r s : ℕ) (hg : 0 < g) (hp2 : 2 ≤ p) (hr12 : 12 ≤ r)
+    (hgp : w ⟨0, by omega⟩ = g * p) (hgq : w ⟨2, by omega⟩ = g * q)
+    (hgr : w ⟨3, by omega⟩ = g * r) (hgs : w ⟨4, by omega⟩ = g * s)
+    (hcop : Nat.Coprime p q) : False := by
+  have hrpq : r = p + q := by
+    have h : g * r = g * (p + q) := by rw [← hgr, hdiag, hgp, hgq]; ring
+    exact Nat.eq_of_mul_eq_mul_left hg h
+  have hp_pos : 0 < p := by omega
+  have hcopr : Nat.Coprime p r := by
+    show Nat.gcd p r = 1
+    rw [hrpq, Nat.add_comm p q, Nat.gcd_add_self_right]; exact hcop
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19_w w hpos hcov6 hsum hdiag g p r hg hp_pos hr12 hgp hgr hcopr
+  have h19R : (w ⟨4, by omega⟩ : ℝ) < 2 * (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast h19
+  have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ := by rw [hgq, hgr, hrpq]; nlinarith [hg, hp_pos]
+  have hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    lt_trans (by exact_mod_cast hw23) hw34
+  rcases lt_or_ge p 3 with hp3 | hp3
+  · interval_cases p
+    · -- p = 2
+      have hqodd : q % 2 = 1 := by
+        have h2 : ¬ (2 ∣ q) := by
+          intro hdvd
+          have hg2 : Nat.gcd 2 q = 2 := Nat.gcd_eq_left hdvd
+          have hc1 : Nat.gcd 2 q = 1 := hcop
+          omega
+        omega
+      have hrodd : r % 2 = 1 := by omega
+      obtain ⟨t, N, m, h0, hm⟩ := bhk_prop11_part6_claim20_witness_p2 w g r hg hrodd hgp hgr
+      have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+        bhk_prop11_part6_claim20_gap2 w hpos hcov6 hsum hdiag hsmall hsmall6 hw34 t N m h0 hm
+      linarith
+  · have h20 : 2 * (w ⟨3, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+      bhk_prop11_part6_claim20_w w hpos hcov6 hsum hdiag hsmall hsmall6 hw34 g p r hg hp3 (by omega)
+        hgp hgr hcopr
+    linarith
+
+/-- **Part 6 diagonal, six-runner, `p = 1`, explicit `(57)`-witness** (`part6_p1_w`
+    with the `q ≥ 16` grid relaxed to an explicit witness `m`, valid for `q ≥ 11`).
+    Combines Claim 19 (`w₄ < 2w₃`), Claim 21's lower bound and the `s = 2q+1`
+    exclusion. Closes the `p = 1`, `r ≥ 12`, grid-present diagonals. -/
+lemma bhk_prop11_part6_p1_wit_w (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q s : ℕ) (hg : 0 < g) (hq11 : 11 ≤ q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (hw4 : w ⟨4, by omega⟩ = g * s)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) : False := by
+  have hq0 : 0 < q := by omega
+  have hw0' : w ⟨0, by omega⟩ = g * 1 := by omega
+  have hw3' : w ⟨3, by omega⟩ = g * (q + 1) := by rw [hdiag, hw0, hw2]; ring
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19_w w hpos hcov6 hsum hdiag g 1 (q + 1) hg (by norm_num) (by omega)
+      hw0' hw3' (Nat.coprime_one_left _)
+  have h21 : 2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    bhk_prop11_part6_claim21_lower2 w hpos hcov6 hsum hdiag hw24 g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+  have h21n : 2 * w ⟨2, by omega⟩ < w ⟨4, by omega⟩ := by exact_mod_cast h21
+  have hsqueeze : s = 2 * q + 1 := by
+    have a1 : 2 * q < s := by
+      have h := h21n
+      rw [hw2, hw4] at h
+      have h' : g * (2 * q) = 2 * (g * q) := by ring
+      exact lt_of_mul_lt_mul_left (h'.trans_lt h) (Nat.zero_le g)
+    have a2 : s < 2 * q + 2 := by
+      have h := h19
+      rw [hw4, hw3'] at h
+      have h' : 2 * (g * (q + 1)) = g * (2 * q + 2) := by ring
+      exact lt_of_mul_lt_mul_left (h.trans_le h'.le) (Nat.zero_le g)
+    omega
+  have hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩ := by
+    rw [hw4, hw2, hw0, hsqueeze]; ring
+  exact bhk_prop11_part6_claim21_lonely2 w hpos hcov6 hsum hdiag hs g q hg hq0 hw0 hw2 t m hbt
+    h0lo h0hi
+
 set_option maxHeartbeats 1000000 in
 /-- **Windowed P-witness kill (`q < 18`/`[18,30)`, six-runner part 2).** As
     `bhk_prop11_exc_Pkill` but for the fictional-runner covering `hcov6`: it uses the
@@ -13778,6 +13868,81 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
           exact bhk_prop11_exc_q_18_30_2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos hq18'
             (by omega) hcop hp_pos h3p hrq hr32 hrs
             (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
+
+/-- **Affine no-wrap band for a real speed `v`** (the `bhk_away_band` generalization
+    used for the fictional runner `2w₀`). -/
+lemma bhk_away_band_v (v a b : ℝ) (hv : 0 ≤ v) (hab : a ≤ b) (K : ℤ) (fa fb : ℝ)
+    (hA : v * a = (K : ℝ) + fa) (hB : v * b = (K : ℝ) + fb) (hfa : 1 / 6 ≤ fa)
+    (hfb : fb ≤ 5 / 6) : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist (v * τ) := by
+  intro τ hτ
+  obtain ⟨hτa, hτb⟩ := hτ
+  have hm1 : v * a ≤ v * τ := mul_le_mul_of_nonneg_left hτa hv
+  have hm2 : v * τ ≤ v * b := mul_le_mul_of_nonneg_left hτb hv
+  have hlo : (K : ℝ) ≤ v * τ := by rw [hA] at hm1; linarith
+  have hhi : v * τ < (K : ℝ) + 1 := by rw [hB] at hm2; linarith
+  have hfloor : ⌊v * τ⌋ = K := by rw [Int.floor_eq_iff]; exact ⟨hlo, hhi⟩
+  have hfr : Int.fract (v * τ) = v * τ - (K : ℝ) := by rw [Int.fract, hfloor]
+  have hfrlo : 1 / 6 ≤ v * τ - (K : ℝ) := by rw [hA] at hm1; linarith
+  have hfrhi : v * τ - (K : ℝ) ≤ 5 / 6 := by rw [hB] at hm2; linarith
+  rw [circDist, hfr]; exact le_min hfrlo (by linarith)
+
+/-- **Diagonal `s`-upper-bound engine, six-runner** (`bhk_diag_sbound` with the
+    fictional runner `2w₀`). The `0123`-gap `[a,b]` (runners `0,1,2,3` safe and the
+    fictional runner `2w₀` safe via `hfic`) is forced into `unsafeOf w₄` by `hcov6`. -/
+lemma bhk_diag_sbound2 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6) (a b : ℝ) (hab : a ≤ b)
+    (h0 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * τ))
+    (h1 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * τ))
+    (h2 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * τ))
+    (h3 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * τ))
+    (hfic : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * τ))) :
+    b - a ≤ 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) := by
+  by_contra hcon
+  push_neg at hcon
+  have hsub : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩ := by
+    intro τ hτ
+    rw [mem_unsafeOf_iff]
+    rcases hcov6 τ with ⟨i, hi⟩ | hfict
+    · fin_cases i
+      · exact absurd hi (not_lt.mpr (h0 τ hτ))
+      · exact absurd hi (not_lt.mpr (h1 τ hτ))
+      · exact absurd hi (not_lt.mpr (h2 τ hτ))
+      · exact absurd hi (not_lt.mpr (h3 τ hτ))
+      · exact hi
+    · exact absurd hfict (not_lt.mpr (hfic τ hτ))
+  exact (bhk_prop11_not_subset_unsafeOf w ⟨4, by omega⟩ (hpos _) hab hcon) hsub
+
+/-- **Lonely-time contradiction, six-runner** (`bhk_lonely5` plus the fictional
+    runner `2w₀` safe at `τ`, hypothesis `hfic`). -/
+lemma bhk_lonely6 (w : Fin 5 → ℕ)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6) (τ : ℝ)
+    (f0 f1 f2 f3 f4 : ℝ) (K0 K1 K2 K3 K4 : ℤ)
+    (e0 : (w ⟨0, by omega⟩ : ℝ) * τ = (K0 : ℝ) + f0)
+    (e1 : (w ⟨1, by omega⟩ : ℝ) * τ = (K1 : ℝ) + f1)
+    (e2 : (w ⟨2, by omega⟩ : ℝ) * τ = (K2 : ℝ) + f2)
+    (e3 : (w ⟨3, by omega⟩ : ℝ) * τ = (K3 : ℝ) + f3)
+    (e4 : (w ⟨4, by omega⟩ : ℝ) * τ = (K4 : ℝ) + f4)
+    (h0 : f0 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h1 : f1 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
+    (h2 : f2 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h3 : f3 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
+    (h4 : f4 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
+    (hfic : (1 : ℝ) / 6 ≤ circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * τ))) : False := by
+  have key : ∀ (j : Fin 5) (K : ℤ) (f : ℝ), (w j : ℝ) * τ = (K : ℝ) + f →
+      f ∈ Set.Icc (1 / 6 : ℝ) (5 / 6) → 1 / 6 ≤ circDist ((w j : ℝ) * τ) := by
+    intro j K f he hf
+    obtain ⟨hl, hh⟩ := hf
+    have hfr : Int.fract ((w j : ℝ) * τ) = f := by
+      rw [he, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    rw [circDist, hfr]; exact le_min hl (by linarith)
+  rcases hcov6 τ with ⟨i, hi⟩ | hfict
+  · fin_cases i
+    · exact absurd hi (not_lt.mpr (key ⟨0, by omega⟩ K0 f0 e0 h0))
+    · exact absurd hi (not_lt.mpr (key ⟨1, by omega⟩ K1 f1 e1 h1))
+    · exact absurd hi (not_lt.mpr (key ⟨2, by omega⟩ K2 f2 e2 h2))
+    · exact absurd hi (not_lt.mpr (key ⟨3, by omega⟩ K3 f3 e3 h3))
+    · exact absurd hi (not_lt.mpr (key ⟨4, by omega⟩ K4 f4 e4 h4))
+  · exact absurd hfict (not_lt.mpr hfic)
 
 /-- **Lemma 18 bound from a witness, six-runner** (the `core2` analog of
     `bhk_prop11_v4_bound_witness`). The `gap123_long_rho` gap `[t − ρ/w₂, t + 1/(3w₂)]`
