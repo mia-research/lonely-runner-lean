@@ -8568,6 +8568,696 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
             (by omega) hcop hp_pos h3p hrq hr32 hrs
             (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
+/-- **Affine no-wrap band.** If runner `i`'s position is `Kᵢ + fa` at `a` and
+    `Kᵢ + fb` at `b` (same integer part `K`, fractional ends `fa ≤ … ≤ fb` inside
+    `[1/6, 5/6]`), then `circDist (wᵢ τ) ≥ 1/6` for all `τ ∈ [a, b]`: the position
+    sweeps monotonically from `fa` to `fb` without crossing an integer. -/
+lemma bhk_away_band (w : Fin 5 → ℕ) (i : Fin 5) (a b : ℝ) (hab : a ≤ b)
+    (K : ℤ) (fa fb : ℝ) (hA : (w i : ℝ) * a = (K : ℝ) + fa)
+    (hB : (w i : ℝ) * b = (K : ℝ) + fb) (hfa : 1 / 6 ≤ fa) (hfb : fb ≤ 5 / 6) :
+    ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w i : ℝ) * τ) := by
+  intro τ hτ
+  obtain ⟨hτa, hτb⟩ := hτ
+  have hwi : (0 : ℝ) ≤ (w i : ℝ) := by positivity
+  have hm1 : (w i : ℝ) * a ≤ (w i : ℝ) * τ := mul_le_mul_of_nonneg_left hτa hwi
+  have hm2 : (w i : ℝ) * τ ≤ (w i : ℝ) * b := mul_le_mul_of_nonneg_left hτb hwi
+  have hlo : (K : ℝ) ≤ (w i : ℝ) * τ := by rw [hA] at hm1; linarith
+  have hhi : (w i : ℝ) * τ < (K : ℝ) + 1 := by rw [hB] at hm2; linarith
+  have hfloor : ⌊(w i : ℝ) * τ⌋ = K := by rw [Int.floor_eq_iff]; exact ⟨hlo, hhi⟩
+  have hfr : Int.fract ((w i : ℝ) * τ) = (w i : ℝ) * τ - (K : ℝ) := by rw [Int.fract, hfloor]
+  have hfrlo : 1 / 6 ≤ (w i : ℝ) * τ - (K : ℝ) := by rw [hA] at hm1; linarith
+  have hfrhi : (w i : ℝ) * τ - (K : ℝ) ≤ 5 / 6 := by rw [hB] at hm2; linarith
+  rw [circDist, hfr]; exact le_min hfrlo (by linarith)
+
+/-- **Diagonal `s`-upper-bound engine (BHK 5.2.12 "Step A").** If `[a, b]` is a
+    `0123`-gap (runners `0,1,2,3` all `≥ 1/6` from the origin throughout), then the
+    covering assumption forces `[a, b] ⊆ unsafeOf w₄`, and `not_subset_unsafeOf`
+    bounds the gap length: `b - a ≤ 1/(3 w₄)`. -/
+lemma bhk_diag_sbound (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6) (a b : ℝ) (hab : a ≤ b)
+    (h0 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * τ))
+    (h1 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * τ))
+    (h2 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * τ))
+    (h3 : ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * τ)) :
+    b - a ≤ 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) := by
+  by_contra hcon
+  push_neg at hcon
+  have hsub : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩ := by
+    intro τ hτ
+    rw [mem_unsafeOf_iff]
+    obtain ⟨i, hi⟩ := hcover τ
+    fin_cases i
+    · exact absurd hi (not_lt.mpr (h0 τ hτ))
+    · exact absurd hi (not_lt.mpr (h1 τ hτ))
+    · exact absurd hi (not_lt.mpr (h2 τ hτ))
+    · exact absurd hi (not_lt.mpr (h3 τ hτ))
+    · exact hi
+  exact (bhk_prop11_not_subset_unsafeOf w ⟨4, by omega⟩ (hpos _) hab hcon) hsub
+
+/-- **Lonely-time contradiction (5 runners, BHK 5.2.12 "Step B").** If at a single
+    time `τ` every runner sits in `[1/6, 5/6]` of the circle (`wᵢτ = Kᵢ + fᵢ`,
+    `fᵢ ∈ [1/6, 5/6]`), then `circDist (wᵢτ) ≥ 1/6` for all `i`, contradicting the
+    covering assumption. -/
+lemma bhk_lonely5 (w : Fin 5 → ℕ)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6) (τ : ℝ)
+    (f0 f1 f2 f3 f4 : ℝ) (K0 K1 K2 K3 K4 : ℤ)
+    (e0 : (w ⟨0, by omega⟩ : ℝ) * τ = (K0 : ℝ) + f0)
+    (e1 : (w ⟨1, by omega⟩ : ℝ) * τ = (K1 : ℝ) + f1)
+    (e2 : (w ⟨2, by omega⟩ : ℝ) * τ = (K2 : ℝ) + f2)
+    (e3 : (w ⟨3, by omega⟩ : ℝ) * τ = (K3 : ℝ) + f3)
+    (e4 : (w ⟨4, by omega⟩ : ℝ) * τ = (K4 : ℝ) + f4)
+    (h0 : f0 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h1 : f1 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
+    (h2 : f2 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h3 : f3 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
+    (h4 : f4 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) : False := by
+  have key : ∀ (j : Fin 5) (K : ℤ) (f : ℝ), (w j : ℝ) * τ = (K : ℝ) + f →
+      f ∈ Set.Icc (1 / 6 : ℝ) (5 / 6) → 1 / 6 ≤ circDist ((w j : ℝ) * τ) := by
+    intro j K f he hf
+    obtain ⟨hl, hh⟩ := hf
+    have hfr : Int.fract ((w j : ℝ) * τ) = f := by
+      rw [he, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    rw [circDist, hfr]; exact le_min hl (by linarith)
+  obtain ⟨i, hi⟩ := hcover τ
+  fin_cases i
+  · exact absurd hi (not_lt.mpr (key ⟨0, by omega⟩ K0 f0 e0 h0))
+  · exact absurd hi (not_lt.mpr (key ⟨1, by omega⟩ K1 f1 e1 h1))
+  · exact absurd hi (not_lt.mpr (key ⟨2, by omega⟩ K2 f2 e2 h2))
+  · exact absurd hi (not_lt.mpr (key ⟨3, by omega⟩ K3 f3 e3 h3))
+  · exact absurd hi (not_lt.mpr (key ⟨4, by omega⟩ K4 f4 e4 h4))
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12.3 — the diagonal `(p, q, r) = (1, 7, 8)`.** Speeds
+    `w₀ = g, w₁ = 6g, w₂ = 7g, w₃ = 8g, w₄ = sg`, diagonal `v₄ = 8/7`.
+    **Step A (`s ≤ 9`):** the interval `[7/(36g), 11/(48g)]` (BHK's
+    `[7/6 + x₂/6, 7/6 + x₄/2]` in `t = w₂τ` time) is a `0123`-gap — runners
+    `0,1,2,3` stay in `[1/6, 5/6]` throughout — so the cover forces it into
+    `unsafeOf w₄`; `not_subset_unsafeOf` bounds its length `5/(144g) ≤ 1/(3·gs)`,
+    i.e. `s ≤ 9`. With `s > r = 8` this pins `s = 9`. **Step B:** `τ₁ = 1/(5g)` is
+    then a lonely time (positions `1/5, 1/5, 2/5, 3/5, 4/5`), contradicting cover. -/
+lemma bhk_prop11_exc_diag_1_7 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 8 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 7)
+    (hw3 : w ⟨3, by omega⟩ = g * 8) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 6 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 6 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 7 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 8 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  -- ===== Step A: s ≤ 9 via the 0123-gap interval [a, b] =====
+  set a : ℝ := (7 : ℝ) / (36 * (g : ℝ)) with ha
+  set b : ℝ := (11 : ℝ) / (48 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (11 : ℝ) / (48 * g) - 7 / (36 * g) = 5 / (144 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  -- generic "runner i stays in [1/6, 5/6] on [a, b]" via affine no-wrap
+  have away : ∀ (i : Fin 5) (K : ℤ) (fa fb : ℝ),
+      (w i : ℝ) * a = (K : ℝ) + fa → (w i : ℝ) * b = (K : ℝ) + fb →
+      1 / 6 ≤ fa → fb ≤ 5 / 6 → fa ≤ fb →
+      ∀ τ ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w i : ℝ) * τ) := by
+    intro i K fa fb hA hB hfa hfb _ τ hτ
+    obtain ⟨hτa, hτb⟩ := hτ
+    have hwi : (0 : ℝ) ≤ (w i : ℝ) := by positivity
+    have hm1 : (w i : ℝ) * a ≤ (w i : ℝ) * τ := mul_le_mul_of_nonneg_left hτa hwi
+    have hm2 : (w i : ℝ) * τ ≤ (w i : ℝ) * b := mul_le_mul_of_nonneg_left hτb hwi
+    have hlo : (K : ℝ) ≤ (w i : ℝ) * τ := by rw [hA] at hm1; linarith
+    have hhi : (w i : ℝ) * τ < (K : ℝ) + 1 := by rw [hB] at hm2; linarith
+    have hfloor : ⌊(w i : ℝ) * τ⌋ = K := by rw [Int.floor_eq_iff]; exact ⟨hlo, hhi⟩
+    have hfr : Int.fract ((w i : ℝ) * τ) = (w i : ℝ) * τ - (K : ℝ) := by
+      rw [Int.fract, hfloor]
+    have hfrlo : 1 / 6 ≤ (w i : ℝ) * τ - (K : ℝ) := by rw [hA] at hm1; linarith
+    have hfrhi : (w i : ℝ) * τ - (K : ℝ) ≤ 5 / 6 := by rw [hB] at hm2; linarith
+    rw [circDist, hfr]; exact le_min hfrlo (by linarith)
+  have aw0 := away ⟨0, by omega⟩ 0 (7 / 36) (11 / 48)
+    (by rw [c0, ha]; push_cast; field_simp <;> ring) (by rw [c0, hb]; push_cast; field_simp <;> ring)
+    (by norm_num) (by norm_num) (by norm_num)
+  have aw1 := away ⟨1, by omega⟩ 1 (1 / 6) (3 / 8)
+    (by rw [c1, ha]; push_cast; field_simp <;> ring) (by rw [c1, hb]; push_cast; field_simp <;> ring)
+    (by norm_num) (by norm_num) (by norm_num)
+  have aw2 := away ⟨2, by omega⟩ 1 (13 / 36) (29 / 48)
+    (by rw [c2, ha]; push_cast; field_simp <;> ring) (by rw [c2, hb]; push_cast; field_simp <;> ring)
+    (by norm_num) (by norm_num) (by norm_num)
+  have aw3 := away ⟨3, by omega⟩ 1 (5 / 9) (5 / 6)
+    (by rw [c3, ha]; push_cast; field_simp <;> ring) (by rw [c3, hb]; push_cast; field_simp <;> ring)
+    (by norm_num) (by norm_num) (by norm_num)
+  have hsub : Set.Icc a b ⊆ unsafeOf w ⟨4, by omega⟩ := by
+    intro τ hτ
+    rw [mem_unsafeOf_iff]
+    obtain ⟨i, hi⟩ := hcover τ
+    fin_cases i
+    · exact absurd hi (not_lt.mpr (aw0 τ hτ))
+    · exact absurd hi (not_lt.mpr (aw1 τ hτ))
+    · exact absurd hi (not_lt.mpr (aw2 τ hτ))
+    · exact absurd hi (not_lt.mpr (aw3 τ hτ))
+    · exact hi
+  have hs9 : s ≤ 9 := by
+    by_contra hcon
+    have hs10 : (10 : ℝ) ≤ s := by exact_mod_cast (by omega : 10 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    have hlong : 1 / (3 * (w ⟨4, by omega⟩ : ℝ)) < b - a := by
+      rw [c4]
+      have hba : b - a = 5 / (144 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+      rw [hba, ← sub_pos]
+      have hid : (5 : ℝ) / (144 * g) - 1 / (3 * (g * s)) = (15 * s - 144) / (432 * g * s) := by
+        field_simp <;> ring
+      rw [hid]; apply div_pos (by nlinarith [hs10]) (by positivity)
+    exact (bhk_prop11_not_subset_unsafeOf w ⟨4, by omega⟩ (hpos _) hab hlong) hsub
+  have hs9eq : s = 9 := by omega
+  subst hs9eq
+  -- ===== Step B: τ₁ = 1/(5g) is lonely (positions 1/5, 1/5, 2/5, 3/5, 4/5) =====
+  have cdfr : ∀ (x f : ℝ), Int.fract x = f → 1 / 6 ≤ f → f ≤ 5 / 6 → 1 / 6 ≤ circDist x := by
+    intro x f hf hlo hhi; rw [circDist, hf]; exact le_min hlo (by linarith)
+  have mkfr : ∀ (x f : ℝ) (n : ℤ), x = (n : ℝ) + f → 0 ≤ f → f < 1 → Int.fract x = f := by
+    intro x f n hx h0 h1; rw [hx, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨h0, h1⟩]
+  set τ₁ : ℝ := 1 / (5 * (g : ℝ)) with hτ₁
+  have e0 : (w ⟨0, by omega⟩ : ℝ) * τ₁ = 1 / 5 := by rw [c0, hτ₁]; field_simp <;> ring
+  have e1 : (w ⟨1, by omega⟩ : ℝ) * τ₁ = 6 / 5 := by rw [c1, hτ₁]; field_simp <;> ring
+  have e2 : (w ⟨2, by omega⟩ : ℝ) * τ₁ = 7 / 5 := by rw [c2, hτ₁]; field_simp <;> ring
+  have e3 : (w ⟨3, by omega⟩ : ℝ) * τ₁ = 8 / 5 := by rw [c3, hτ₁]; field_simp <;> ring
+  have e4 : (w ⟨4, by omega⟩ : ℝ) * τ₁ = 9 / 5 := by rw [c4, hτ₁]; field_simp <;> ring
+  have d0 : 1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * τ₁) :=
+    cdfr _ (1 / 5) (by rw [e0]; exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩)
+      (by norm_num) (by norm_num)
+  have d1 : 1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * τ₁) :=
+    cdfr _ (1 / 5) (mkfr _ (1 / 5) 1 (by rw [e1]; norm_num) (by norm_num) (by norm_num))
+      (by norm_num) (by norm_num)
+  have d2 : 1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * τ₁) :=
+    cdfr _ (2 / 5) (mkfr _ (2 / 5) 1 (by rw [e2]; norm_num) (by norm_num) (by norm_num))
+      (by norm_num) (by norm_num)
+  have d3 : 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * τ₁) :=
+    cdfr _ (3 / 5) (mkfr _ (3 / 5) 1 (by rw [e3]; norm_num) (by norm_num) (by norm_num))
+      (by norm_num) (by norm_num)
+  have d4 : 1 / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * τ₁) :=
+    cdfr _ (4 / 5) (mkfr _ (4 / 5) 1 (by rw [e4]; norm_num) (by norm_num) (by norm_num))
+      (by norm_num) (by norm_num)
+  obtain ⟨i, hi⟩ := hcover τ₁
+  fin_cases i
+  · exact absurd hi (not_lt.mpr d0)
+  · exact absurd hi (not_lt.mpr d1)
+  · exact absurd hi (not_lt.mpr d2)
+  · exact absurd hi (not_lt.mpr d3)
+  · exact absurd hi (not_lt.mpr d4)
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12.5 — the diagonal `(p, q, r) = (1, 12, 13)`.** Speeds
+    `w₀ = g, w₁ = 11g, w₂ = 12g, w₃ = 13g, w₄ = sg`, `v₄ = 13/12`. **Step A:** the
+    `0123`-gap `[13/(66g), 17/(78g)]` (BHK's `[2 + x₂/3, 2 + 2x₄/3]`) bounds
+    `s ≤ 15`; with `s > r = 13` this leaves `s ∈ {14, 15}`. **Step B:** `τ₁ = 1/(5g)`
+    is lonely for `s = 14` (positions `1/5,1/5,2/5,3/5,4/5`); `τ₁ = 3/(14g)` for
+    `s = 15` (positions `3/14,5/14,4/7,11/14,3/14`). -/
+lemma bhk_prop11_exc_diag_1_12 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 13 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 12)
+    (hw3 : w ⟨3, by omega⟩ = g * 13) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 11 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 11 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 12 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 13 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (66 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (78 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (78 * g) - 13 / (66 * g) = 3 / (143 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 66) (17 / 78)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (1 / 6) (31 / 78)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 2 (4 / 11) (8 / 13)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 2 (37 / 66) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs15 : s ≤ 15 := by
+    by_contra hcon
+    have hs16 : (16 : ℝ) ≤ s := by exact_mod_cast (by omega : 16 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 3 / (143 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (3 : ℝ) / (143 * g) - 1 / (3 * (g * s)) = (9 * s - 143) / (429 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 3 / (143 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs16]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely5 w hcover (1 / (5 * (g : ℝ))) (1 / 5) (1 / 5) (2 / 5) (3 / 5) (4 / 5)
+      0 2 2 2 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (3 / (14 * (g : ℝ))) (3 / 14) (5 / 14) (4 / 7) (11 / 14) (3 / 14)
+      0 2 2 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12.1 — the diagonal `(p, q, r) = (1, 5, 6)`.** Speeds
+    `w₀ = g, w₁ = 4g, w₂ = 5g, w₃ = 6g, w₄ = sg`, `v₄ = 6/5`. **Step A:** the
+    `0123`-gap `[13/(24g), 17/(30g)]` (BHK's `[5/2 + x₂/6, 5/2 + 1/3]`) bounds
+    `s ≤ 13`; with `s > r = 6` this leaves `s ∈ {7,…,13}`. **Step B:** each value
+    has an explicit lonely time (`τ₁ = 4/(11g), 4/(9g), 3/(10g)` cyclically). -/
+lemma bhk_prop11_exc_diag_1_5 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 6 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 5)
+    (hw3 : w ⟨3, by omega⟩ = g * 6) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 4 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 4 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 5 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 6 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (24 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (30 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (30 * g) - 13 / (24 * g) = 1 / (40 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 24) (17 / 30)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (1 / 6) (4 / 15)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 2 (17 / 24) (5 / 6)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 3 (1 / 4) (2 / 5)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs13 : s ≤ 13 := by
+    by_contra hcon
+    have hs14 : (14 : ℝ) ≤ s := by exact_mod_cast (by omega : 14 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 1 / (40 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (1 : ℝ) / (40 * g) - 1 / (3 * (g * s)) = (3 * s - 40) / (120 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 1 / (40 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs14]) (by positivity)
+    linarith
+  interval_cases s
+  · -- s = 7, τ₁ = 4/(11g)
+    exact bhk_lonely5 w hcover (4 / (11 * (g : ℝ))) (4 / 11) (5 / 11) (9 / 11) (2 / 11) (6 / 11)
+      0 1 1 2 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 8, τ₁ = 4/(9g)
+    exact bhk_lonely5 w hcover (4 / (9 * (g : ℝ))) (4 / 9) (7 / 9) (2 / 9) (2 / 3) (5 / 9)
+      0 1 2 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 9, τ₁ = 3/(10g)
+    exact bhk_lonely5 w hcover (3 / (10 * (g : ℝ))) (3 / 10) (1 / 5) (1 / 2) (4 / 5) (7 / 10)
+      0 1 1 1 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 10, τ₁ = 4/(9g)
+    exact bhk_lonely5 w hcover (4 / (9 * (g : ℝ))) (4 / 9) (7 / 9) (2 / 9) (2 / 3) (4 / 9)
+      0 1 2 2 4 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 11, τ₁ = 3/(10g)
+    exact bhk_lonely5 w hcover (3 / (10 * (g : ℝ))) (3 / 10) (1 / 5) (1 / 2) (4 / 5) (3 / 10)
+      0 1 1 1 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 12, τ₁ = 4/(9g)
+    exact bhk_lonely5 w hcover (4 / (9 * (g : ℝ))) (4 / 9) (7 / 9) (2 / 9) (2 / 3) (1 / 3)
+      0 1 2 2 5 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · -- s = 13, τ₁ = 4/(9g)
+    exact bhk_lonely5 w hcover (4 / (9 * (g : ℝ))) (4 / 9) (7 / 9) (2 / 9) (2 / 3) (7 / 9)
+      0 1 2 2 5 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12.2 — the diagonal `(p, q, r) = (1, 6, 7)`.** Speeds
+    `w₀ = g, w₁ = 5g, w₂ = 6g, w₃ = 7g, w₄ = sg`. `0123`-gap `[7/(30g), 11/(42g)]`
+    bounds `s ≤ 11`; `s > r = 7` leaves `s ∈ {8,…,11}`, each with a lonely time. -/
+lemma bhk_prop11_exc_diag_1_6 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 7 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 6)
+    (hw3 : w ⟨3, by omega⟩ = g * 7) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 5 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 5 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 6 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 7 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (7 : ℝ) / (30 * (g : ℝ)) with ha
+  set b : ℝ := (11 : ℝ) / (42 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (11 : ℝ) / (42 * g) - 7 / (30 * g) = 1 / (35 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (7 / 30) (11 / 42)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 1 (1 / 6) (13 / 42)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 1 (2 / 5) (4 / 7)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 1 (19 / 30) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs11 : s ≤ 11 := by
+    by_contra hcon
+    have hs12 : (12 : ℝ) ≤ s := by exact_mod_cast (by omega : 12 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 1 / (35 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (1 : ℝ) / (35 * g) - 1 / (3 * (g * s)) = (3 * s - 35) / (105 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 1 / (35 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs12]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely5 w hcover (5 / (11 * (g : ℝ))) (5 / 11) (3 / 11) (8 / 11) (2 / 11) (7 / 11)
+      0 2 2 3 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 4)
+      0 1 1 1 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 2)
+      0 1 1 1 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (3 / 4)
+      0 1 1 1 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12 `(p, q, r) = (2, 7, 9)`** (the `p = 2`, `q = 7` diagonal).
+    Speeds `w₀ = 2g, w₁ = 5g, w₂ = 7g, w₃ = 9g, w₄ = sg`. `0123`-gap
+    `[13/(54g), 11/(42g)]` bounds `s ≤ 15`; `s > r = 9` leaves `s ∈ {10,…,15}`,
+    each with a lonely time. -/
+lemma bhk_prop11_exc_diag_2_7 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 9 < s)
+    (hw0 : w ⟨0, by omega⟩ = g * 2) (hw2 : w ⟨2, by omega⟩ = g * 7)
+    (hw3 : w ⟨3, by omega⟩ = g * 9) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 5 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * 2 := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 5 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 7 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (54 * (g : ℝ)) with ha
+  set b : ℝ := (11 : ℝ) / (42 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (11 : ℝ) / (42 * g) - 13 / (54 * g) = 4 / (189 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 27) (11 / 21)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 1 (11 / 54) (13 / 42)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 1 (37 / 54) (5 / 6)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 2 (1 / 6) (5 / 14)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs15 : s ≤ 15 := by
+    by_contra hcon
+    have hs16 : (16 : ℝ) ≤ s := by exact_mod_cast (by omega : 16 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 4 / (189 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (4 : ℝ) / (189 * g) - 1 / (3 * (g * s)) = (4 * s - 63) / (189 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 4 / (189 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs16]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 2) (1 / 4) (3 / 4) (1 / 4) (1 / 2)
+      0 1 1 2 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 2) (1 / 4) (3 / 4) (1 / 4) (3 / 4)
+      0 1 1 2 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (4 / (11 * (g : ℝ))) (8 / 11) (9 / 11) (6 / 11) (3 / 11) (4 / 11)
+      0 1 2 3 4 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 2) (1 / 4) (3 / 4) (1 / 4) (1 / 4)
+      0 1 1 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 2) (1 / 4) (3 / 4) (1 / 4) (1 / 2)
+      0 1 1 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 2) (1 / 4) (3 / 4) (1 / 4) (3 / 4)
+      0 1 1 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12 `(p, q, r) = (2, 9, 11)`** (the `p = 2`, `q = 9` diagonal).
+    Speeds `w₀ = 2g, w₁ = 7g, w₂ = 9g, w₃ = 11g, w₄ = sg`. `0123`-gap
+    `[25/(66g), 17/(42g)]` bounds `s ≤ 12`; `s > r = 11` forces `s = 12`, lonely at
+    `τ₁ = 1/(5g)`. -/
+lemma bhk_prop11_exc_diag_2_9 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 11 < s)
+    (hw0 : w ⟨0, by omega⟩ = g * 2) (hw2 : w ⟨2, by omega⟩ = g * 9)
+    (hw3 : w ⟨3, by omega⟩ = g * 11) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 7 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * 2 := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 7 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 11 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (25 : ℝ) / (66 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (42 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (42 * g) - 25 / (66 * g) = 2 / (77 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (25 / 33) (17 / 21)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (43 / 66) (5 / 6)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 3 (9 / 22) (9 / 14)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 4 (1 / 6) (19 / 42)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs12 : s ≤ 12 := by
+    by_contra hcon
+    have hs13 : (13 : ℝ) ≤ s := by exact_mod_cast (by omega : 13 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 2 / (77 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (2 : ℝ) / (77 * g) - 1 / (3 * (g * s)) = (6 * s - 77) / (231 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 2 / (77 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs13]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely5 w hcover (1 / (5 * (g : ℝ))) (2 / 5) (2 / 5) (4 / 5) (1 / 5) (2 / 5)
+      0 1 1 2 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12 `(p, q, r) = (1, 10, 11)`** (`p = 1`, `q = 10`; BHK closes
+    this `q ∈ {10,13,15}` value via Claims 19/21). Speeds
+    `w₀ = g, w₁ = 9g, w₂ = 10g, w₃ = 11g, w₄ = sg`. `0123`-gap `[13/(54g), 17/(66g)]`
+    bounds `s ≤ 19`; `s > r = 11` leaves `s ∈ {12,…,19}`, each with a lonely time. -/
+lemma bhk_prop11_exc_diag_1_10 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 11 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 10)
+    (hw3 : w ⟨3, by omega⟩ = g * 11) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 9 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 10 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 11 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (54 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (66 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (66 * g) - 13 / (54 * g) = 5 / (297 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound w hpos hcover a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 54) (17 / 66)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (1 / 6) (7 / 22)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 2 (11 / 27) (19 / 33)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 2 (35 / 54) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+  have hs19 : s ≤ 19 := by
+    by_contra hcon
+    have hs20 : (20 : ℝ) ≤ s := by exact_mod_cast (by omega : 20 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 5 / (297 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (5 : ℝ) / (297 * g) - 1 / (3 * (g * s)) = (15 * s - 297) / (891 * g * s) := by
+      field_simp <;> ring
+    have hd : (0 : ℝ) < 5 / (297 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hs20]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely5 w hcover (8 / (17 * (g : ℝ))) (8 / 17) (4 / 17) (12 / 17) (3 / 17) (11 / 17)
+      0 4 4 5 5 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 4)
+      0 2 2 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 2)
+      0 2 2 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (3 / 4)
+      0 2 2 2 3 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (6 * (g : ℝ))) (1 / 6) (1 / 2) (2 / 3) (5 / 6) (2 / 3)
+      0 1 1 1 2 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 4)
+      0 2 2 2 4 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 2)
+      0 2 2 2 4 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely5 w hcover (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (3 / 4)
+      0 2 2 2 4 (by rw [c0]; push_cast; field_simp <;> ring)
+      (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring)
+      (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+
 set_option maxHeartbeats 1600000 in
 /-- **BHK Case 5.2.12.4 — the diagonal `(p, q, r) = (1, 9, 10)`.** Speeds
     `w₀ = g, w₁ = 8g, w₂ = 9g, w₃ = 10g, w₄ = sg` with `v₄ = 10/9` (diagonal) and
@@ -8790,7 +9480,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,5,6)
+        · exact bhk_prop11_exc_diag_1_5 w hpos hcover hsum g s hg_pos (by omega) (by omega)
+            hgq hgr hgs
         · omega  -- r=7 non-diagonal, excluded by hdiag
         · omega  -- r=8 non-diagonal, excluded by hdiag
         · omega  -- r=9 non-diagonal, excluded by hdiag
@@ -8799,7 +9490,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,6,7)
+        · exact bhk_prop11_exc_diag_1_6 w hpos hcover hsum g s hg_pos (by omega) (by omega)
+            hgq hgr hgs
         · omega  -- r=8 non-diagonal, excluded by hdiag
         · omega  -- r=9 non-diagonal, excluded by hdiag
         · omega  -- r=10 non-diagonal, excluded by hdiag
@@ -8809,7 +9501,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,7,8)
+        · exact bhk_prop11_exc_diag_1_7 w hpos hcover hsum g s hg_pos (by omega) (by omega)
+            hgq hgr hgs
         · omega  -- r=9 non-diagonal, excluded by hdiag
         · omega  -- r=10 non-diagonal, excluded by hdiag
         · omega  -- r=11 non-diagonal, excluded by hdiag
@@ -8818,7 +9511,7 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       · -- p = 2
         interval_cases r
         · omega  -- r=8 non-diagonal, excluded by hdiag
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (2,7,9)
+        · exact bhk_prop11_exc_diag_2_7 w hpos hcover hsum g s hg_pos (by omega) hgp hgq hgr hgs
         · omega  -- r=10 non-diagonal, excluded by hdiag
         · omega  -- r=11 non-diagonal, excluded by hdiag
         · omega  -- r=12 non-diagonal, excluded by hdiag
@@ -8853,7 +9546,7 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       · -- p = 2
         interval_cases r
         · omega  -- r=10 non-diagonal, excluded by hdiag
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (2,9,11)
+        · exact bhk_prop11_exc_diag_2_9 w hpos hcover hsum g s hg_pos (by omega) hgp hgq hgr hgs
         · omega  -- r=12 non-diagonal, excluded by hdiag
         · omega  -- r=13 non-diagonal, excluded by hdiag
         · omega  -- r=14 non-diagonal, excluded by hdiag
@@ -8865,7 +9558,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,10,11)
+        · exact bhk_prop11_exc_diag_1_10 w hpos hcover hsum g s hg_pos (by omega) (by omega)
+            hgq hgr hgs
         · omega  -- r=12 non-diagonal, excluded by hdiag
         · omega  -- r=13 non-diagonal, excluded by hdiag
         · omega  -- r=14 non-diagonal, excluded by hdiag
@@ -8940,7 +9634,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,12,13)
+        · exact bhk_prop11_exc_diag_1_12 w hpos hcover hsum g s hg_pos (by omega) (by omega)
+            hgq hgr hgs
         · omega  -- r=14 non-diagonal, excluded by hdiag
         · omega  -- r=15 non-diagonal, excluded by hdiag
         · omega  -- r=16 non-diagonal, excluded by hdiag
