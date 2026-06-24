@@ -13779,15 +13779,152 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
             (by omega) hcop hp_pos h3p hrq hr32 hrs
             (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
+/-- **Corollary 16 (`v₄ < 2`), six-runner/unconditional** (the `core2` analog of
+    `bhk_prop11_v4_lt_2v3_uncond`). Under `6 w₀ < w₂` and the six-runner cover, the
+    witness-time `0123`-gap is covered only by runners 4, 5 (`gap_covered2`,
+    window-free from `6 w₀ < w₂`), and `bhk_lemma_4` yields `w₃ < 2 w₂`. The `q ≥ 5`
+    side condition is free from `6 w₀ < w₂` (`q > 6 p ≥ 6`). -/
+theorem bhk_prop11_v4_lt_2v3_uncond_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
+    (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6) :
+    (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  have hq5 : 5 ≤ w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) := by
+    set g := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+    have hg : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+    have hd0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
+    have hd2 : g ∣ w ⟨2, by omega⟩ := Nat.gcd_dvd_right _ _
+    have e0 : g * (w ⟨0, by omega⟩ / g) = w ⟨0, by omega⟩ := Nat.mul_div_cancel' hd0
+    have e2 : g * (w ⟨2, by omega⟩ / g) = w ⟨2, by omega⟩ := Nat.mul_div_cancel' hd2
+    have hp0 : 0 < w ⟨0, by omega⟩ / g := Nat.div_pos (Nat.le_of_dvd (hpos _) hd0) hg
+    have h6 : 6 * (w ⟨0, by omega⟩ / g) < w ⟨2, by omega⟩ / g := by
+      have hmul : g * (6 * (w ⟨0, by omega⟩ / g)) < g * (w ⟨2, by omega⟩ / g) := by
+        rw [show g * (6 * (w ⟨0, by omega⟩ / g)) = 6 * (g * (w ⟨0, by omega⟩ / g)) from by ring,
+          e0, e2]; exact hsmall6
+      exact lt_of_mul_lt_mul_left hmul (Nat.zero_le g)
+    omega
+  obtain ⟨t, h3, h1lo, h1hi⟩ := bhk_prop11_witness_time w hpos hsmall hq5
+  have hgap := bhk_prop11_gap123 w hpos hsum hsmall t h3 h1lo h1hi
+  have hw0pos : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2pos : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3pos : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have h4w0 : 4 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by
+    have : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall6
+    linarith
+  have h0safe : ∀ s ∈ Set.Icc t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    have hd0 : 0 ≤ s - t := by linarith [hs.1]
+    have hsu : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith [hs.2]
+    have hb : (w ⟨0, by omega⟩ : ℝ) * (s - t) < 1 / 12 := by
+      have h1 : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+          ≤ (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) :=
+        mul_le_mul_of_nonneg_left hsu hw0pos.le
+      have h2 : (w ⟨0, by omega⟩ : ℝ) * (1 / (3 * (w ⟨2, by omega⟩ : ℝ))) < 1 / 12 := by
+        rw [mul_one_div, div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith [h4w0]
+      linarith
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by nlinarith [mul_nonneg hw0pos.le hd0]) (by linarith)]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith
+  have hcov := bhk_prop11_gap_covered2 w hcov6 hgap h0safe
+  have hab : t ≤ t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+    have : (0 : ℝ) ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos t (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))) hab hcov
+  have hkey : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by linarith
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hkey
+  linarith
+
 /-- **core2, `q < 18` dispatch.** The complementary finite case for part 2; the
-    six-runner analog of `bhk_prop11_core_q_lt_18` (BHK Lemma 18 / Table 1 for
-    `q ∈ {5,…,17}`). TO FILL. -/
+    six-runner analog of `bhk_prop11_core_q_lt_18`. Extraction (`lemma17_w`,
+    `q ∈ [7,17]` from `6 p < q < 18`, `q < r < 2q` via `v4_lt_2v3_uncond_w`,
+    `h_nogood` via `no_good_time2`) complete; residual `sorry` is the finite
+    `(p, q, r)` dispatch (`p ∈ {1,2}`). The non-diagonal cases reuse the abstract
+    `exc_Rkill`/`exc_v4kill` (same `h_nogood` rectangle) and `exc_Pkill2`; the
+    diagonals `r = p + q` reuse `part6_w`. -/
 theorem bhk_prop11_core2_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
     (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
     (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
     (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
         circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
     (hq : w ⟨2, by omega⟩ / Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) < 18) : False := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  set g : ℕ := Nat.gcd (w ⟨0, by omega⟩) (w ⟨2, by omega⟩) with hgdef
+  have hg_pos : 0 < g := Nat.gcd_pos_of_pos_left _ (hpos _)
+  have hgw0 : g ∣ w ⟨0, by omega⟩ := Nat.gcd_dvd_left _ _
+  have hgw2 : g ∣ w ⟨2, by omega⟩ := Nat.gcd_dvd_right _ _
+  set p : ℕ := w ⟨0, by omega⟩ / g with hpdef
+  set q : ℕ := w ⟨2, by omega⟩ / g with hqdef
+  have hgp : w ⟨0, by omega⟩ = g * p := (Nat.mul_div_cancel' hgw0).symm
+  have hgq : w ⟨2, by omega⟩ = g * q := (Nat.mul_div_cancel' hgw2).symm
+  have hcop : Nat.Coprime p q := Nat.coprime_div_gcd_div_gcd hg_pos
+  have hp_pos : 0 < p := by
+    rcases Nat.eq_zero_or_pos p with h | h
+    · rw [h, Nat.mul_zero] at hgp; have h0' := hpos ⟨0, by omega⟩; omega
+    · exact h
+  have h6p : 6 * p < q := by
+    have h : g * (6 * p) < g * q := by
+      rw [show g * (6 * p) = 6 * (g * p) from by ring, ← hgp, ← hgq]; exact hsmall6
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have h3p : 3 * p < q := by omega
+  have hq7 : 7 ≤ q := by omega
+  have hq17 : q < 18 := hq
+  obtain ⟨hgw3, hgw4⟩ :=
+    bhk_prop11_lemma17_w w hmono hpos hsum hsmall6 hcov6 (by rw [← hgdef, ← hqdef]; omega)
+  set r : ℕ := w ⟨3, by omega⟩ / g with hrdef
+  set s : ℕ := w ⟨4, by omega⟩ / g with hsdef
+  have hgr : w ⟨3, by omega⟩ = g * r := (Nat.mul_div_cancel' hgw3).symm
+  have hgs : w ⟨4, by omega⟩ = g * s := (Nat.mul_div_cancel' hgw4).symm
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * (p : ℝ) := by exact_mod_cast hgp
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * (q : ℝ) := by exact_mod_cast hgq
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * (r : ℝ) := by exact_mod_cast hgr
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+  have hrq : q < r := by
+    have hw23 : w ⟨2, by omega⟩ < w ⟨3, by omega⟩ :=
+      hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega))
+    have h : g * q < g * r := by rw [← hgq, ← hgr]; exact hw23
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have hr2q : r < 2 * q := by
+    have hreal := bhk_prop11_v4_lt_2v3_uncond_w w hmono hpos hsum hsmall6 hcov6
+    have hgR : (0 : ℝ) < (g : ℝ) := by exact_mod_cast hg_pos
+    rw [c3, c2] at hreal
+    have hcancel : (g : ℝ) * (r : ℝ) < (g : ℝ) * (2 * (q : ℝ)) := by nlinarith [hreal]
+    have hR : (r : ℝ) < 2 * (q : ℝ) := lt_of_mul_lt_mul_left hcancel hgR.le
+    exact_mod_cast hR
+  have hrs : r < s := by
+    have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+      hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+    have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+    exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+  have h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)) := by
+    intro l hl
+    obtain ⟨hrmem, hpmem⟩ := hl
+    set t : ℝ := ((l : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+    have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (l : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c0, c2]; field_simp
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * t = (r : ℝ) / q * ((l : ℝ) + 1 / 2) := by
+      rw [htdef, c3, c2]; field_simp
+    refine bhk_prop11_no_good_time2 w hmono hpos hsum hsmall6 hcov6 t ?_ ?_ ?_ ?_ ?_
+    · rw [e2, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+    · rw [e0]; exact hpmem.1
+    · rw [e0]; exact hpmem.2
+    · rw [e3]; exact hrmem.1
+    · rw [e3]; exact hrmem.2
+  clear_value g p q r s
+  clear hgdef hpdef hqdef hrdef hsdef hgw0 hgw2 hgw3 hgw4
+  -- Finite `(p,q,r)` dispatch: `p ∈ {1,2}`, `q ∈ [7,17]`, `q < r < 2q`. Non-diagonal
+  -- reuse abstract `exc_Rkill`/`exc_v4kill` + `exc_Pkill2`; diagonal `r = p+q` via `part6_w`.
   sorry
 
 /-- **Proposition 11, part 2 — the 6-runner core** (BHK Parts 2–6 with the
