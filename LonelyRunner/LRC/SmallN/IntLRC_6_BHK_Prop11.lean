@@ -7283,6 +7283,124 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
       · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
           hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
 
+set_option maxHeartbeats 1600000 in
+/-- **BHK Case 5.2.12.4 — the diagonal `(p, q, r) = (1, 9, 10)`.** Speeds
+    `w₀ = g, w₁ = 8g, w₂ = 9g, w₃ = 10g, w₄ = sg` with `v₄ = 10/9` (diagonal) and
+    `s > 10`. **Step A:** at `τ = 1/(6g)` (BHK's `t = 3/2`) runners 0–3 sit at
+    `1/6, 1/3, 1/2, 2/3` (all `circDist ≥ 1/6`), so the cover forces runner 4 near
+    the origin, `circDist(s/6) < 1/6`, i.e. `6 ∣ s`. **Step B:** then
+    `τ₁ = (s+1)/(6sg)` is a lonely time — runner 4 sits at `(s+1)/6`, which has
+    fractional part `1/6` exactly (as `6 ∣ s`), and the other four are bounded away
+    using `s ≥ 12`. No upper bound on `s` is needed (sharper than BHK's gap). -/
+lemma bhk_prop11_exc_diag_1_9 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 10 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 9)
+    (hw3 : w ⟨3, by omega⟩ = g * 10) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hsR : (0 : ℝ) < s := by exact_mod_cast (by omega : 0 < s)
+  have hw1 : w ⟨1, by omega⟩ = g * 8 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 8 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 10 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  have cdfr : ∀ (x f : ℝ), Int.fract x = f → 1 / 6 ≤ f → f ≤ 5 / 6 → 1 / 6 ≤ circDist x := by
+    intro x f hf hlo hhi; rw [circDist, hf]; exact le_min hlo (by linarith)
+  have mkfr : ∀ (x f : ℝ) (n : ℤ), x = (n : ℝ) + f → 0 ≤ f → f < 1 → Int.fract x = f := by
+    intro x f n hx h0 h1; rw [hx, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨h0, h1⟩]
+  -- ===== Step A: 6 ∣ s =====
+  have h6s : s % 6 = 0 := by
+    set τ : ℝ := 1 / (6 * (g : ℝ)) with hτ
+    have e0 : (w ⟨0, by omega⟩ : ℝ) * τ = 1 / 6 := by rw [c0, hτ]; field_simp
+    have e1 : (w ⟨1, by omega⟩ : ℝ) * τ = 4 / 3 := by rw [c1, hτ]; field_simp; ring
+    have e2 : (w ⟨2, by omega⟩ : ℝ) * τ = 3 / 2 := by rw [c2, hτ]; field_simp; ring
+    have e3 : (w ⟨3, by omega⟩ : ℝ) * τ = 5 / 3 := by rw [c3, hτ]; field_simp; ring
+    have e4 : (w ⟨4, by omega⟩ : ℝ) * τ = (s : ℝ) / 6 := by rw [c4, hτ]; field_simp
+    have s0 : 1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * τ) :=
+      cdfr _ (1 / 6) (by rw [e0]; exact Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩)
+        (by norm_num) (by norm_num)
+    have s1 : 1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * τ) :=
+      cdfr _ (1 / 3) (mkfr _ (1 / 3) 1 (by rw [e1]; norm_num) (by norm_num) (by norm_num))
+        (by norm_num) (by norm_num)
+    have s2 : 1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * τ) :=
+      cdfr _ (1 / 2) (mkfr _ (1 / 2) 1 (by rw [e2]; norm_num) (by norm_num) (by norm_num))
+        (by norm_num) (by norm_num)
+    have s3 : 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * τ) :=
+      cdfr _ (2 / 3) (mkfr _ (2 / 3) 1 (by rw [e3]; norm_num) (by norm_num) (by norm_num))
+        (by norm_num) (by norm_num)
+    have hcd4 : circDist ((w ⟨4, by omega⟩ : ℝ) * τ) < 1 / 6 := by
+      obtain ⟨i, hi⟩ := hcover τ
+      fin_cases i
+      · exact absurd hi (not_lt.mpr s0)
+      · exact absurd hi (not_lt.mpr s1)
+      · exact absurd hi (not_lt.mpr s2)
+      · exact absurd hi (not_lt.mpr s3)
+      · exact hi
+    rw [e4] at hcd4
+    have hfr : Int.fract ((s : ℝ) / 6) = ((s % 6 : ℕ) : ℝ) / 6 := by
+      rw [show (6 : ℝ) = ((6 : ℕ) : ℝ) from by norm_num]
+      exact Int.fract_div_natCast_eq_div_natCast_mod
+    rw [circDist, hfr] at hcd4
+    have hk6 : s % 6 < 6 := Nat.mod_lt _ (by norm_num)
+    rcases min_lt_iff.mp hcd4 with h | h
+    · have h1 : ((s % 6 : ℕ) : ℝ) < 1 := by linarith
+      have : s % 6 < 1 := by exact_mod_cast h1
+      omega
+    · have h1 : (5 : ℝ) < ((s % 6 : ℕ) : ℝ) := by linarith
+      have : 5 < s % 6 := by exact_mod_cast h1
+      omega
+  -- ===== Step B: τ₁ = (s+1)/(6sg) is lonely =====
+  obtain ⟨m, hm⟩ : 6 ∣ s := Nat.dvd_of_mod_eq_zero h6s
+  have hs12 : 12 ≤ s := by omega
+  have hs12R : (12 : ℝ) ≤ s := by exact_mod_cast hs12
+  have hmR : (s : ℝ) = 6 * (m : ℝ) := by exact_mod_cast hm
+  set τ₁ : ℝ := ((s : ℝ) + 1) / (6 * (s : ℝ) * (g : ℝ)) with hτ₁
+  have d0 : 1 / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * τ₁) := by
+    refine cdfr _ (((s : ℝ) + 1) / (6 * s)) (mkfr _ _ 0 ?_ ?_ ?_) ?_ ?_
+    · rw [c0, hτ₁]; push_cast; field_simp; ring
+    · positivity
+    · rw [div_lt_one (by positivity)]; nlinarith [hsR]
+    · rw [le_div_iff₀ (by positivity)]; nlinarith [hsR]
+    · rw [div_le_iff₀ (by positivity)]; nlinarith [hsR]
+  have d1 : 1 / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * τ₁) := by
+    refine cdfr _ (((s : ℝ) + 4) / (3 * s)) (mkfr _ _ 1 ?_ ?_ ?_) ?_ ?_
+    · rw [c1, hτ₁]; push_cast; field_simp; ring
+    · positivity
+    · rw [div_lt_one (by positivity)]; nlinarith [hsR]
+    · rw [le_div_iff₀ (by positivity)]; nlinarith [hsR]
+    · rw [div_le_iff₀ (by positivity)]; nlinarith [hsR, hs12R]
+  have d2 : 1 / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * τ₁) := by
+    refine cdfr _ (((s : ℝ) + 3) / (2 * s)) (mkfr _ _ 1 ?_ ?_ ?_) ?_ ?_
+    · rw [c2, hτ₁]; push_cast; field_simp; ring
+    · positivity
+    · rw [div_lt_one (by positivity)]; nlinarith [hsR]
+    · rw [le_div_iff₀ (by positivity)]; nlinarith [hsR]
+    · rw [div_le_iff₀ (by positivity)]; nlinarith [hsR, hs12R]
+  have d3 : 1 / 6 ≤ circDist ((w ⟨3, by omega⟩ : ℝ) * τ₁) := by
+    refine cdfr _ ((2 * (s : ℝ) + 5) / (3 * s)) (mkfr _ _ 1 ?_ ?_ ?_) ?_ ?_
+    · rw [c3, hτ₁]; push_cast; field_simp; ring
+    · positivity
+    · rw [div_lt_one (by positivity)]; nlinarith [hsR]
+    · rw [le_div_iff₀ (by positivity)]; nlinarith [hsR]
+    · rw [div_le_iff₀ (by positivity)]; nlinarith [hsR, hs12R]
+  have d4 : 1 / 6 ≤ circDist ((w ⟨4, by omega⟩ : ℝ) * τ₁) := by
+    have hmne : (m : ℝ) ≠ 0 := by
+      have : 0 < m := by omega
+      positivity
+    refine cdfr _ (1 / 6) (mkfr _ (1 / 6) (m : ℤ) ?_ (by norm_num) (by norm_num))
+      (by norm_num) (by norm_num)
+    rw [c4, hτ₁, hmR]; push_cast; field_simp
+  obtain ⟨i, hi⟩ := hcover τ₁
+  fin_cases i
+  · exact absurd hi (not_lt.mpr d0)
+  · exact absurd hi (not_lt.mpr d1)
+  · exact absurd hi (not_lt.mpr d2)
+  · exact absurd hi (not_lt.mpr d3)
+  · exact absurd hi (not_lt.mpr d4)
+
 set_option maxHeartbeats 12000000 in
 /-- **Proposition 11 — indirect core, `q < 18` branch.** The complementary finite
     case `q = w₂/gcd(w₀,w₂) < 18`: closed by the per-`(p,q)` analysis of BHK's
@@ -7438,7 +7556,8 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,9,10)
+        · -- (1,9,10) diagonal: BHK Case 5.2.12.4
+          exact bhk_prop11_exc_diag_1_9 w hpos hcover hsum g s hg_pos hrs (by omega) hgq hgr hgs
         · omega  -- r=11 non-diagonal, excluded by hdiag
         · omega  -- r=12 non-diagonal, excluded by hdiag
         · omega  -- r=13 non-diagonal, excluded by hdiag
