@@ -13927,7 +13927,8 @@ lemma bhk_lonely6 (w : Fin 5 → ℕ)
     (h0 : f0 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h1 : f1 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
     (h2 : f2 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) (h3 : f3 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
     (h4 : f4 ∈ Set.Icc (1 / 6 : ℝ) (5 / 6))
-    (hfic : (1 : ℝ) / 6 ≤ circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * τ))) : False := by
+    (ffic : ℝ) (Kfic : ℤ) (efic : 2 * ((w ⟨0, by omega⟩ : ℝ) * τ) = (Kfic : ℝ) + ffic)
+    (hficmem : ffic ∈ Set.Icc (1 / 6 : ℝ) (5 / 6)) : False := by
   have key : ∀ (j : Fin 5) (K : ℤ) (f : ℝ), (w j : ℝ) * τ = (K : ℝ) + f →
       f ∈ Set.Icc (1 / 6 : ℝ) (5 / 6) → 1 / 6 ≤ circDist ((w j : ℝ) * τ) := by
     intro j K f he hf
@@ -13942,7 +13943,10 @@ lemma bhk_lonely6 (w : Fin 5 → ℕ)
     · exact absurd hi (not_lt.mpr (key ⟨2, by omega⟩ K2 f2 e2 h2))
     · exact absurd hi (not_lt.mpr (key ⟨3, by omega⟩ K3 f3 e3 h3))
     · exact absurd hi (not_lt.mpr (key ⟨4, by omega⟩ K4 f4 e4 h4))
-  · exact absurd hfict (not_lt.mpr hfic)
+  · obtain ⟨hl, hh⟩ := hficmem
+    have hfr : Int.fract (2 * ((w ⟨0, by omega⟩ : ℝ) * τ)) = ffic := by
+      rw [efic, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩]
+    exact absurd hfict (not_lt.mpr (by rw [circDist, hfr]; exact le_min hl (by linarith)))
 
 /-- **Lemma 18 bound from a witness, six-runner** (the `core2` analog of
     `bhk_prop11_v4_bound_witness`). The `gap123_long_rho` gap `[t − ρ/w₂, t + 1/(3w₂)]`
@@ -14120,6 +14124,312 @@ theorem bhk_prop11_v4_lt_2v3_uncond_w (w : Fin 5 → ℕ) (hmono : StrictMono w)
   have hkey : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by linarith
   rw [div_lt_div_iff₀ (by positivity) (by positivity)] at hkey
   linarith
+
+set_option maxHeartbeats 1600000 in
+/-- **core2 diagonal `(1,7,8)`** (explicit, six-runner). -/
+lemma bhk_prop11_exc_diag2_1_7 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 8 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 7)
+    (hw3 : w ⟨3, by omega⟩ = g * 8) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 6 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 6 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 7 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 8 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (7 : ℝ) / (36 * (g : ℝ)) with ha
+  set b : ℝ := (11 : ℝ) / (48 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (11 : ℝ) / (48 * g) - 7 / (36 * g) = 5 / (144 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound2 w hpos hcov6 a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (7 / 36) (11 / 48)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 1 (1 / 6) (3 / 8)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 1 (13 / 36) (29 / 48)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 1 (5 / 9) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (fun τ hτ => by
+      have h := bhk_away_band_v (2 * (w ⟨0, by omega⟩ : ℝ)) a b (by positivity) hab 0 (7 / 18) (11 / 24)
+        (by rw [c0, ha]; push_cast; field_simp <;> ring)
+        (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num) τ hτ
+      rwa [mul_assoc] at h)
+  have hsb : s ≤ 9 := by
+    by_contra hcon
+    have hsT : (10 : ℝ) ≤ s := by exact_mod_cast (by omega : 10 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 5 / (144 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (5 : ℝ) / (144 * g) - 1 / (3 * (g * s)) = (15 * s - 144) / (432 * g * s) := by field_simp <;> ring
+    have hd : (0 : ℝ) < 5 / (144 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hsT]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely6 w hcov6 (1 / (5 * (g : ℝ))) (1 / 5) (1 / 5) (2 / 5) (3 / 5) (4 / 5) 0 1 1 1 1
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (2 / 5) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **core2 diagonal `(1,9,10)`** (explicit, six-runner). -/
+lemma bhk_prop11_exc_diag2_1_9 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 10 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 9)
+    (hw3 : w ⟨3, by omega⟩ = g * 10) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 8 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 8 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 10 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (1 : ℝ) / (6 * (g : ℝ)) with ha
+  set b : ℝ := (11 : ℝ) / (60 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (11 : ℝ) / (60 * g) - 1 / (6 * g) = 1 / (60 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound2 w hpos hcov6 a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (1 / 6) (11 / 60)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 1 (1 / 3) (7 / 15)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 1 (1 / 2) (13 / 20)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 1 (2 / 3) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (fun τ hτ => by
+      have h := bhk_away_band_v (2 * (w ⟨0, by omega⟩ : ℝ)) a b (by positivity) hab 0 (1 / 3) (11 / 30)
+        (by rw [c0, ha]; push_cast; field_simp <;> ring)
+        (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num) τ hτ
+      rwa [mul_assoc] at h)
+  have hsb : s ≤ 20 := by
+    by_contra hcon
+    have hsT : (21 : ℝ) ≤ s := by exact_mod_cast (by omega : 21 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 1 / (60 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (1 : ℝ) / (60 * g) - 1 / (3 * (g * s)) = (s - 20) / (60 * g * s) := by field_simp <;> ring
+    have hd : (0 : ℝ) < 1 / (60 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hsT]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (5 / 6) 0 1 1 1 1
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (2 / (11 * (g : ℝ))) (2 / 11) (5 / 11) (7 / 11) (9 / 11) (2 / 11) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (4 / 11) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (1 / 6) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (1 / 3) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (1 / 2) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (2 / 3) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (5 / 6) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (2 / (11 * (g : ℝ))) (2 / 11) (5 / 11) (7 / 11) (9 / 11) (3 / 11) 0 1 1 1 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (4 / 11) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (1 / 6) 0 1 1 1 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 3) (1 / 2) (2 / 3) (1 / 3) 0 1 1 1 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **core2 diagonal `(1,10,11)`** (explicit, six-runner). -/
+lemma bhk_prop11_exc_diag2_1_10 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 11 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 10)
+    (hw3 : w ⟨3, by omega⟩ = g * 11) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 9 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 9 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 10 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 11 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (54 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (66 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (66 * g) - 13 / (54 * g) = 5 / (297 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound2 w hpos hcov6 a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 54) (17 / 66)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (1 / 6) (7 / 22)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 2 (11 / 27) (19 / 33)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 2 (35 / 54) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (fun τ hτ => by
+      have h := bhk_away_band_v (2 * (w ⟨0, by omega⟩ : ℝ)) a b (by positivity) hab 0 (13 / 27) (17 / 33)
+        (by rw [c0, ha]; push_cast; field_simp <;> ring)
+        (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num) τ hτ
+      rwa [mul_assoc] at h)
+  have hsb : s ≤ 19 := by
+    by_contra hcon
+    have hsT : (20 : ℝ) ≤ s := by exact_mod_cast (by omega : 20 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 5 / (297 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (5 : ℝ) / (297 * g) - 1 / (3 * (g * s)) = (15 * s - 297) / (891 * g * s) := by field_simp <;> ring
+    have hd : (0 : ℝ) < 5 / (297 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hsT]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely6 w hcov6 (8 / (21 * (g : ℝ))) (8 / 21) (3 / 7) (17 / 21) (4 / 21) (4 / 7) 0 3 3 4 4
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (16 / 21) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 4) 0 2 2 2 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 2) 0 2 2 2 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (3 / 4) 0 2 2 2 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (6 * (g : ℝ))) (1 / 6) (1 / 2) (2 / 3) (5 / 6) (2 / 3) 0 1 1 1 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 3) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 4) 0 2 2 2 4
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (1 / 2) 0 2 2 2 4
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (1 / (4 * (g : ℝ))) (1 / 4) (1 / 4) (1 / 2) (3 / 4) (3 / 4) 0 2 2 2 4
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (1 / 2) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+
+set_option maxHeartbeats 1600000 in
+/-- **core2 diagonal `(1,12,13)`** (explicit, six-runner). -/
+lemma bhk_prop11_exc_diag2_1_12 (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (g s : ℕ) (hg : 0 < g) (hs : 13 < s)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * 12)
+    (hw3 : w ⟨3, by omega⟩ = g * 13) (hw4 : w ⟨4, by omega⟩ = g * s) : False := by
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hgne : (g : ℝ) ≠ 0 := hgR.ne'
+  have hw1 : w ⟨1, by omega⟩ = g * 11 := by omega
+  have c0 : (w ⟨0, by omega⟩ : ℝ) = g := by exact_mod_cast hw0
+  have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * 11 := by exact_mod_cast hw1
+  have c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * 12 := by exact_mod_cast hw2
+  have c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * 13 := by exact_mod_cast hw3
+  have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s := by exact_mod_cast hw4
+  set a : ℝ := (13 : ℝ) / (66 * (g : ℝ)) with ha
+  set b : ℝ := (17 : ℝ) / (78 * (g : ℝ)) with hb
+  have hab : a ≤ b := by
+    rw [ha, hb, ← sub_nonneg]
+    have hid : (17 : ℝ) / (78 * g) - 13 / (66 * g) = 3 / (143 * g) := by field_simp <;> ring
+    rw [hid]; positivity
+  have hbnd := bhk_diag_sbound2 w hpos hcov6 a b hab
+    (bhk_away_band w ⟨0, by omega⟩ a b hab 0 (13 / 66) (17 / 78)
+      (by rw [c0, ha]; push_cast; field_simp <;> ring)
+      (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨1, by omega⟩ a b hab 2 (1 / 6) (31 / 78)
+      (by rw [c1, ha]; push_cast; field_simp <;> ring)
+      (by rw [c1, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨2, by omega⟩ a b hab 2 (4 / 11) (8 / 13)
+      (by rw [c2, ha]; push_cast; field_simp <;> ring)
+      (by rw [c2, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (bhk_away_band w ⟨3, by omega⟩ a b hab 2 (37 / 66) (5 / 6)
+      (by rw [c3, ha]; push_cast; field_simp <;> ring)
+      (by rw [c3, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num))
+    (fun τ hτ => by
+      have h := bhk_away_band_v (2 * (w ⟨0, by omega⟩ : ℝ)) a b (by positivity) hab 0 (13 / 33) (17 / 39)
+        (by rw [c0, ha]; push_cast; field_simp <;> ring)
+        (by rw [c0, hb]; push_cast; field_simp <;> ring) (by norm_num) (by norm_num) τ hτ
+      rwa [mul_assoc] at h)
+  have hsb : s ≤ 15 := by
+    by_contra hcon
+    have hsT : (16 : ℝ) ≤ s := by exact_mod_cast (by omega : 16 ≤ s)
+    have hsR : (0 : ℝ) < s := by linarith
+    have hsne : (s : ℝ) ≠ 0 := hsR.ne'
+    rw [c4] at hbnd
+    have hba : b - a = 3 / (143 * (g : ℝ)) := by rw [ha, hb]; field_simp <;> ring
+    rw [hba] at hbnd
+    have hid : (3 : ℝ) / (143 * g) - 1 / (3 * (g * s)) = (9 * s - 143) / (429 * g * s) := by field_simp <;> ring
+    have hd : (0 : ℝ) < 3 / (143 * g) - 1 / (3 * (g * s)) := by
+      rw [hid]; exact div_pos (by nlinarith [hsT]) (by positivity)
+    linarith
+  interval_cases s
+  · exact bhk_lonely6 w hcov6 (1 / (5 * (g : ℝ))) (1 / 5) (1 / 5) (2 / 5) (3 / 5) (4 / 5) 0 2 2 2 2
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (2 / 5) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+  · exact bhk_lonely6 w hcov6 (3 / (14 * (g : ℝ))) (3 / 14) (5 / 14) (4 / 7) (11 / 14) (3 / 14) 0 2 2 2 3
+      (by rw [c0]; push_cast; field_simp <;> ring) (by rw [c1]; push_cast; field_simp <;> ring) (by rw [c2]; push_cast; field_simp <;> ring) (by rw [c3]; push_cast; field_simp <;> ring) (by rw [c4]; push_cast; field_simp <;> ring)
+      (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc]) (by norm_num [Set.mem_Icc])
+      (3 / 7) 0 (by rw [c0]; push_cast; field_simp <;> ring) (by norm_num [Set.mem_Icc])
+
+
 
 /-- **core2, `q < 18` dispatch.** The complementary finite case for part 2; the
     six-runner analog of `bhk_prop11_core_q_lt_18`. Extraction (`lemma17_w`,
