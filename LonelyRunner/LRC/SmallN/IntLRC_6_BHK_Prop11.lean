@@ -5743,6 +5743,240 @@ lemma bhk_prop11_readoff_3q4p (p q r m : ℕ) (s : ℤ) (hq0 : 0 < q)
   rw [ht1, Int.fract_add_intCast]
   exact Int.fract_eq_self.mpr ⟨by linarith [hA1], by linarith [hA0]⟩
 
+/-- **Half-slope read-off for `2r = q + 5p` (the `(5,2)` `c = 1` branch).** On the
+    half-integer time `(2m+1)/(2q)` with `m - ⌊p(m+½)/q⌋` *odd* (`= 2s+1`), runner `r`'s
+    coordinate is `(5/2)·A − 1/4` (`A = {p(m+½)/q} ∈ [1/6, 3/10]`). With `p, q` odd, the
+    parity `m - d ≡ (p·m) % q (mod 2)`, so choosing `(p·m) % q` odd lands on this line. -/
+lemma bhk_prop11_readoff_q5p (p q r m : ℕ) (d s : ℤ) (hq0 : 0 < q)
+    (hr2 : 2 * r = q + 5 * p) (hpq : p ≤ q)
+    (hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = d) (hs : (m : ℤ) - d = 2 * s + 1)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 3 / 10) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 5 / 2 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) - 1 / 4 := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (d : ℝ) := by
+    have hAfd : A = Z - (d : ℝ) := by rw [hAdef, Int.fract, hd]
+    linarith
+  have hr2R : 2 * (r : ℝ) = q + 5 * p := by exact_mod_cast hr2
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (5 / 2 * A - 1 / 4) + ((3 * d + s + 1 : ℤ) : ℝ) := by
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 1 / 2 * ((m : ℝ) + 1 / 2) + 5 / 2 * Z := by
+      rw [hZdef, show (r : ℝ) = ((q : ℝ) + 5 * p) / 2 from by linarith [hr2R]]
+      field_simp
+    rw [key, hAz]
+    have hsR : (m : ℝ) - d = 2 * s + 1 := by exact_mod_cast hs
+    push_cast; linarith [hsR]
+  rw [ht1, Int.fract_add_intCast]
+  exact Int.fract_eq_self.mpr ⟨by linarith [hA0], by linarith [hA1]⟩
+
+/-- **Half-slope read-off for `2r = 3q - 5p` (the `(5,-2)` `c = 3` branch).** On the
+    half-integer time `(2m+1)/(2q)` with `m - ⌊p(m+½)/q⌋` *even* (`= 2s`), runner `r`'s
+    coordinate is `3/4 - (5/2)·A` (`A = {p(m+½)/q} ∈ [1/6, 7/30]`). With `p, q` odd, the
+    parity `m - d ≡ (p·m) % q (mod 2)`, so choosing `(p·m) % q` even lands on this line. -/
+lemma bhk_prop11_readoff_3q5p (p q r m : ℕ) (d s : ℤ) (hq0 : 0 < q)
+    (hr2 : 2 * r = 3 * q - 5 * p) (hpq : 5 * p ≤ 3 * q)
+    (hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = d) (hs : (m : ℤ) - d = 2 * s)
+    (hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)))
+    (hA1 : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) ≤ 7 / 30) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = 3 / 4 - 5 / 2 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) := by
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (d : ℝ) := by
+    have hAfd : A = Z - (d : ℝ) := by rw [hAdef, Int.fract, hd]
+    linarith
+  have hr2R : 2 * (r : ℝ) = 3 * q - 5 * p := by
+    have hc : ((2 * r : ℕ) : ℝ) = ((3 * q - 5 * p : ℕ) : ℝ) := by exact_mod_cast hr2
+    rw [Nat.cast_sub (by omega)] at hc; push_cast at hc ⊢; linarith
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = (3 / 4 - 5 / 2 * A) + ((3 * s - d : ℤ) : ℝ) := by
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2) = 3 / 2 * ((m : ℝ) + 1 / 2) - 5 / 2 * Z := by
+      rw [hZdef, show (r : ℝ) = (3 * (q : ℝ) - 5 * p) / 2 from by linarith [hr2R]]
+      field_simp
+    rw [key, hAz]
+    have hsR : (m : ℝ) - d = 2 * s := by exact_mod_cast hs
+    push_cast; linarith [hsR]
+  rw [ht1, Int.fract_add_intCast]
+  exact Int.fract_eq_self.mpr ⟨by linarith [hA1], by linarith [hA0]⟩
+
+/-- **`(5,2)` half-slope read-off, `c = 1` branch (`2r = q + 5p`).** Forces `p, q` odd;
+    placing `A = {p(m+½)/q} = (2kk+p)/(2q) ∈ [1/6, 3/10]` with `(p·m) % q = kk` *odd*
+    (so `m - ⌊p(m+½)/q⌋` is odd) gives runner-`r` coordinate `(5/2)A − 1/4 ∈ [1/6, 1/2]`
+    and runner-`p` coordinate `A ∈ [1/6, 1/3]`, both in `R`. -/
+lemma bhk_prop11_exc_5_2_c1 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr2 : 2 * r = q + 5 * p)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hpodd : p % 2 = 1 := by
+    rcases Nat.even_or_odd p with ⟨a, ha⟩ | ⟨b, hb⟩
+    · exfalso
+      have h2p : 2 ∣ p := ⟨a, by omega⟩
+      have h2q : 2 ∣ q := by omega
+      exact absurd (hcop ▸ Nat.dvd_gcd h2p h2q : (2 : ℕ) ∣ 1) (by decide)
+    · omega
+  have hqodd : q % 2 = 1 := by omega
+  set kk : ℕ := 2 * ((q - 3 * p + 5) / 12) + 1 with hkkdef
+  have hkkn : kk < q := by omega
+  have hwrap : 2 * kk + p < 2 * q := by omega
+  obtain ⟨m, hm, hmod⟩ := bhk_prop11_fract_odd_mul_mod p q hq0 hcop kk hkkn hwrap
+  set Ap : ℝ := (2 * (kk : ℝ) + p) / (2 * q) with hApdef
+  have hAeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+    rw [← hm]; congr 1; field_simp
+  have hAp_lo : 1 / 6 ≤ Ap := by
+    rw [hApdef, le_div_iff₀ (by positivity)]
+    have h2 : (q : ℝ) ≤ 3 * (2 * kk + p) := by
+      exact_mod_cast (show q ≤ 3 * (2 * kk + p) by omega)
+    linarith
+  have hAp_hi : Ap ≤ 3 / 10 := by
+    rw [hApdef, div_le_iff₀ (by positivity)]
+    have h2 : (5 : ℝ) * (2 * kk + p) ≤ 3 * q := by
+      exact_mod_cast (show 5 * (2 * kk + p) ≤ 3 * q by omega)
+    linarith
+  set d : ℕ := p * m / q with hddef
+  have hpmd : p * m = q * d + kk := by rw [hddef, ← hmod]; exact (Nat.div_add_mod (p * m) q).symm
+  have hZval : (p : ℝ) / q * ((m : ℝ) + 1 / 2) = Ap + d := by
+    have hpmdR : (p : ℝ) * m = q * d + kk := by exact_mod_cast hpmd
+    rw [hApdef]; field_simp; linarith [hpmdR]
+  have hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = (d : ℤ) := by
+    rw [hZval, Int.floor_eq_iff]; constructor
+    · push_cast; linarith [hAp_lo]
+    · push_cast; linarith [hAp_hi]
+  have hmd_odd : (m + d) % 2 = 1 := by
+    have hpm2 : (p * m) % 2 = m % 2 := by rw [Nat.mul_mod, hpodd, one_mul, Nat.mod_mod]
+    have hqd2 : (q * d) % 2 = d % 2 := by rw [Nat.mul_mod, hqodd, one_mul, Nat.mod_mod]
+    have hkk2 : kk % 2 = 1 := by omega
+    omega
+  obtain ⟨s, hs⟩ : ∃ s : ℤ, (m : ℤ) - d = 2 * s + 1 := ⟨((m : ℤ) - d - 1) / 2, by omega⟩
+  have hX := bhk_prop11_readoff_q5p p q r m (d : ℤ) s hq0 hr2 (by omega) hd hs
+    (by rw [hAeq]; exact hAp_lo) (by rw [hAeq]; exact hAp_hi)
+  rw [hAeq] at hX
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hAeq]; linarith
+  · rw [hmcast, hAeq]; linarith
+
+/-- **`(5,-2)` half-slope read-off, `c = 3` branch (`2r + 5p = 3q`).** Forces `p, q` odd;
+    placing `A = {p(m+½)/q} = (2kk+p)/(2q) ∈ [1/6, 7/30]` with `(p·m) % q = kk` *even*
+    (so `m - ⌊p(m+½)/q⌋` is even) gives runner-`r` coordinate `3/4 − (5/2)A ∈ [1/6, 1/3]`
+    and runner-`p` coordinate `A ∈ [1/6, 1/3]`, both in `R`. -/
+lemma bhk_prop11_exc_5_neg2_c3 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr2 : 2 * r + 5 * p = 3 * q)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hr2' : 2 * r = 3 * q - 5 * p := by omega
+  have hpodd : p % 2 = 1 := by
+    rcases Nat.even_or_odd p with ⟨a, ha⟩ | ⟨b, hb⟩
+    · exfalso
+      have h2p : 2 ∣ p := ⟨a, by omega⟩
+      have h2q : 2 ∣ q := by omega
+      exact absurd (hcop ▸ Nat.dvd_gcd h2p h2q : (2 : ℕ) ∣ 1) (by decide)
+    · omega
+  have hqodd : q % 2 = 1 := by omega
+  set kk : ℕ := 2 * ((2 * q - 6 * p + 23) / 24) with hkkdef
+  have hkkn : kk < q := by omega
+  have hwrap : 2 * kk + p < 2 * q := by omega
+  obtain ⟨m, hm, hmod⟩ := bhk_prop11_fract_odd_mul_mod p q hq0 hcop kk hkkn hwrap
+  set Ap : ℝ := (2 * (kk : ℝ) + p) / (2 * q) with hApdef
+  have hAeq : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+    rw [← hm]; congr 1; field_simp
+  have hAp_lo : 1 / 6 ≤ Ap := by
+    rw [hApdef, le_div_iff₀ (by positivity)]
+    have h2 : (q : ℝ) ≤ 3 * (2 * kk + p) := by
+      exact_mod_cast (show q ≤ 3 * (2 * kk + p) by omega)
+    linarith
+  have hAp_hi : Ap ≤ 7 / 30 := by
+    rw [hApdef, div_le_iff₀ (by positivity)]
+    have h2 : (15 : ℝ) * (2 * kk + p) ≤ 7 * q := by
+      exact_mod_cast (show 15 * (2 * kk + p) ≤ 7 * q by omega)
+    linarith
+  set d : ℕ := p * m / q with hddef
+  have hpmd : p * m = q * d + kk := by rw [hddef, ← hmod]; exact (Nat.div_add_mod (p * m) q).symm
+  have hZval : (p : ℝ) / q * ((m : ℝ) + 1 / 2) = Ap + d := by
+    have hpmdR : (p : ℝ) * m = q * d + kk := by exact_mod_cast hpmd
+    rw [hApdef]; field_simp; linarith [hpmdR]
+  have hd : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = (d : ℤ) := by
+    rw [hZval, Int.floor_eq_iff]; constructor
+    · push_cast; linarith [hAp_lo]
+    · push_cast; linarith [hAp_hi]
+  have hmd_even : (m + d) % 2 = 0 := by
+    have hpm2 : (p * m) % 2 = m % 2 := by rw [Nat.mul_mod, hpodd, one_mul, Nat.mod_mod]
+    have hqd2 : (q * d) % 2 = d % 2 := by rw [Nat.mul_mod, hqodd, one_mul, Nat.mod_mod]
+    have hkk2 : kk % 2 = 0 := by omega
+    omega
+  obtain ⟨s, hs⟩ : ∃ s : ℤ, (m : ℤ) - d = 2 * s := ⟨((m : ℤ) - d) / 2, by omega⟩
+  have hX := bhk_prop11_readoff_3q5p p q r m (d : ℤ) s hq0 hr2' (by omega) hd hs
+    (by rw [hAeq]; exact hAp_lo) (by rw [hAeq]; exact hAp_hi)
+  rw [hAeq] at hX
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hX]; linarith
+  · rw [hmcast, hAeq]; linarith
+  · rw [hmcast, hAeq]; linarith
+
+/-- **`(5,-2)` read-off, `c = 4` branch (`2r + 5p = 4q`).** Forces `p` even
+    (`p = 2pp`, `r = 2q − 5pp`); placing `A' = {pp(m+½)/q} ∈ [1/10, 1/6]` (reachable for
+    `q ≥ 30`) gives runner-`r` coordinate `1 − 5A' ∈ [1/6, 1/2]` (`readoff_even`, `γ = 5`)
+    and runner-`p` coordinate `2A' ∈ [1/5, 1/3]`, both in `R`. -/
+lemma bhk_prop11_exc_5_neg2_c4 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr2 : 2 * r + 5 * p = 4 * q)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  obtain ⟨pp, hpp⟩ : 2 ∣ p := by omega
+  have h6pp : 6 * pp < q := by omega
+  have hr_pp : r = 2 * q - 5 * pp := by omega
+  have hcop' : Nat.Coprime pp q := by
+    rw [hpp] at hcop; exact Nat.Coprime.coprime_dvd_left (dvd_mul_left pp 2) hcop
+  set kk : ℕ := (q - 5 * pp + 9) / 10 with hkkdef
+  have hkkn : kk < q := by omega
+  have hwrap : 2 * kk + pp < 2 * q := by omega
+  obtain ⟨m, hm⟩ := bhk_prop11_fract_odd_mul pp q hq0 hcop' kk hkkn hwrap
+  set Ap : ℝ := (2 * (kk : ℝ) + pp) / (2 * q) with hApdef
+  have hppeq : Int.fract ((pp : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+    rw [← hm]; congr 1; field_simp
+  have hAp_lo : 1 / 10 ≤ Ap := by
+    rw [hApdef, le_div_iff₀ (by positivity)]
+    have h2 : (q : ℝ) ≤ 5 * (2 * kk + pp) := by
+      exact_mod_cast (show q ≤ 5 * (2 * kk + pp) by omega)
+    linarith
+  have hAp_hi : Ap ≤ 1 / 6 := by
+    rw [hApdef, div_le_iff₀ (by positivity)]
+    have h2 : (3 : ℝ) * (2 * kk + pp) ≤ q := by
+      exact_mod_cast (show 3 * (2 * kk + pp) ≤ q by omega)
+    linarith
+  have hrR : (r : ℝ) = 2 * (q : ℝ) - 5 * pp := by
+    rw [hr_pp, Nat.cast_sub (by omega)]; push_cast; ring
+  have hX := bhk_prop11_readoff_even pp q r 5 m hq0 hrR
+    (by rw [hppeq]; push_cast; linarith) (by rw [hppeq]; push_cast; linarith)
+  rw [hppeq] at hX
+  have hpR : (p : ℝ) = 2 * pp := by rw [hpp]; push_cast; ring
+  have hA := bhk_prop11_readoff_zero pp q p 2 m hq0 hpR
+  rw [hppeq] at hA
+  have hA' : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = 2 * Ap := by
+    rw [hA]; push_cast; exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hX]; push_cast; linarith
+  · rw [hmcast, hX]; push_cast; linarith
+  · rw [hmcast, hA']; linarith
+  · rw [hmcast, hA']; linarith
+
 /-- **`·/4`-window pin (general residue `j`).** If `j ≤ 4·{G} < j + 1` then
     `⌊4G⌋ = 4⌊G⌋ + j` (so `⌊4G⌋ ≡ j mod 4`) and `{4G} = 4·{G} - j`. Applied with
     `4G` a runner coordinate and `j` the `β`-coset residue, this pins both the
@@ -6322,14 +6556,59 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p 
               omega) h6 hdvd
     · sorry -- (5,-4)
     · sorry -- (5,-3)
-    · sorry -- (5,-2)
+    · -- (5,-2): relation `5p ≡ -2r (mod q)` pins `2r + 5p = cq`, c ∈ {3,4}
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 5 (-2) k hk1 hk2
+      have hdvd : (q : ℤ) ∣ (-2 * r - 5 * p) := Int.modEq_iff_dvd.mp hrel
+      have hdvd2 : (q : ℤ) ∣ (2 * r + 5 * p) := by
+        have h := (dvd_neg (α := ℤ)).mpr hdvd
+        rwa [show -(-2 * (r : ℤ) - 5 * p) = 2 * r + 5 * p from by ring] at h
+      obtain ⟨c, hc⟩ := hdvd2
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      have hrqz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have h1 : (q : ℤ) * 2 < q * c := by rw [← hc]; omega
+      have h2 : (q : ℤ) * c < q * 5 := by rw [← hc]; omega
+      have hc2 := lt_of_mul_lt_mul_left h1 hqz
+      have hc5 := lt_of_mul_lt_mul_left h2 hqz
+      interval_cases c
+      · have hr2 : 2 * r + 5 * p = 3 * q := by
+          have : (2 : ℤ) * r + 5 * p = 3 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_neg2_c3 p q r hq30 hcop hp h3p hr2 h_nogood
+      · have hr2 : 2 * r + 5 * p = 4 * q := by
+          have : (2 : ℤ) * r + 5 * p = 4 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_neg2_c4 p q r hq30 hcop hp h3p hr2 h_nogood
     · exact bhk_prop11_exc_5_neg1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (5 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 5 k (by norm_num) (by norm_num) hk1
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
     · exact bhk_prop11_exc_5_1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-    · sorry -- (5,2)
+    · -- (5,2): relation `5p ≡ 2r (mod q)` pins `2r = 5p + cq`, c ∈ {1,2}
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 5 2 k hk1 hk2
+      have hdvd : (q : ℤ) ∣ (2 * r - 5 * p) := Int.modEq_iff_dvd.mp hrel
+      obtain ⟨c, hc⟩ := hdvd
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      have hrqz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have h1 : (q : ℤ) * 0 < q * c := by rw [← hc]; omega
+      have h2 : (q : ℤ) * c < q * 3 := by rw [← hc]; omega
+      have hc0 := lt_of_mul_lt_mul_left h1 hqz
+      have hc3 := lt_of_mul_lt_mul_left h2 hqz
+      interval_cases c
+      · have hr2 : 2 * r = q + 5 * p := by
+          have : (2 : ℤ) * r = q + 5 * p := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_2_c1 p q r hq30 hcop hp h3p hr2 h_nogood
+      · have hr2 : 2 * r = 5 * p + 2 * q := by
+          have : (2 : ℤ) * r = 5 * p + 2 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_2_c2 p q r hq30 hcop hp h3p hr2 h_nogood
     · sorry -- (5,3)
     · -- (5,4): relation 5p ≡ 4r pins 4r = 5p + cq, c ∈ {3,4,5}
       have hrel := bhk_prop11_exc_relation p q r (by omega) 5 4 k hk1 hk2
