@@ -13779,6 +13779,120 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
             (by omega) hcop hp_pos h3p hrq hr32 hrs
             (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
+/-- **Lemma 18 bound from a witness, six-runner** (the `core2` analog of
+    `bhk_prop11_v4_bound_witness`). The `gap123_long_rho` gap `[t − ρ/w₂, t + 1/(3w₂)]`
+    is window-free under `6 w₀ < w₂` (`{w₀s} ∈ [1/6, 7/18] ⊆ [1/6, 5/12)`), so
+    `gap_covered2` applies and `bhk_lemma_4` yields `(1 + 3ρ)·w₃ < 2·w₂`. -/
+lemma bhk_prop11_v4_bound_witness2 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (ρ : ℝ) (hρ0 : 0 < ρ) (hρ6 : ρ ≤ 1 / 6)
+    (t : ℝ) (h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2)
+    (h1lo : 1 / 6 + ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t))
+    (h1hi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) :
+    (1 + 3 * ρ) * (w ⟨3, by omega⟩ : ℝ) < 2 * (w ⟨2, by omega⟩ : ℝ) := by
+  have hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩ := by omega
+  have hw0R : (0 : ℝ) < (w ⟨0, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw2R : (0 : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hw3R : (0 : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
+  have hsmall6R : 6 * (w ⟨0, by omega⟩ : ℝ) < (w ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hsmall6
+  have hgap := bhk_prop11_gap123_long_rho w hpos hsum hsmall ρ hρ0 hρ6 t h3 h1lo h1hi
+  have h0safe : ∀ s ∈ Set.Icc (t - ρ / (w ⟨2, by omega⟩ : ℝ))
+        (t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ))),
+      Int.fract ((w ⟨0, by omega⟩ : ℝ) * s) ∉ Set.Ioo (5 / 12 : ℝ) (7 / 12) := by
+    intro s hs
+    obtain ⟨hsl, hsu⟩ := hs
+    have hd_lo : -(ρ / (w ⟨2, by omega⟩ : ℝ)) ≤ s - t := by linarith
+    have hd_hi : s - t ≤ 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by linarith
+    have hub : (w ⟨0, by omega⟩ : ℝ) * (s - t)
+        ≤ (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+      have h := mul_le_mul_of_nonneg_left hd_hi hw0R.le; rwa [mul_one_div] at h
+    have hub2 : (w ⟨0, by omega⟩ : ℝ) / (3 * (w ⟨2, by omega⟩ : ℝ)) < 1 / 18 := by
+      rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; linarith
+    have hlb : -(ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ))
+        ≤ (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      have h := mul_le_mul_of_nonneg_left hd_lo hw0R.le
+      rwa [show (w ⟨0, by omega⟩ : ℝ) * -(ρ / (w ⟨2, by omega⟩ : ℝ))
+            = -(ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring] at h
+    have hsl1 : (0 : ℝ) ≤ ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by positivity
+    have hfs : Int.fract ((w ⟨0, by omega⟩ : ℝ) * s)
+        = Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) + (w ⟨0, by omega⟩ : ℝ) * (s - t) := by
+      rw [show (w ⟨0, by omega⟩ : ℝ) * s
+            = (w ⟨0, by omega⟩ : ℝ) * t + (w ⟨0, by omega⟩ : ℝ) * (s - t) from by ring,
+        bhk_prop11_fract_add (by linarith [h1lo, hlb]) (by linarith [h1hi, hub, hub2, hsl1])]
+    simp only [Set.mem_Ioo, not_and_or, not_lt]
+    left; rw [hfs]; linarith [h1hi, hub, hub2, hsl1]
+  have hcov := bhk_prop11_gap_covered2 w hcov6 hgap h0safe
+  have hab : t - ρ / (w ⟨2, by omega⟩ : ℝ) ≤ t + 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by
+    have h1 : (0 : ℝ) < ρ / (w ⟨2, by omega⟩ : ℝ) := by positivity
+    have h2 : (0 : ℝ) < 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) := by positivity
+    linarith
+  have hlen := bhk_lemma_4 w hmono hpos _ _ hab hcov
+  have key : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) + ρ / (w ⟨2, by omega⟩ : ℝ)
+      < 2 / (3 * (w ⟨3, by omega⟩ : ℝ)) := by linarith [hlen]
+  have hcomb : 1 / (3 * (w ⟨2, by omega⟩ : ℝ)) + ρ / (w ⟨2, by omega⟩ : ℝ)
+      = (1 + 3 * ρ) / (3 * (w ⟨2, by omega⟩ : ℝ)) := by field_simp
+  rw [hcomb, div_lt_div_iff₀ (by positivity) (by positivity)] at key
+  nlinarith [key]
+
+/-- **Lemma-18 exclusion kill, six-runner** (`exc_v4kill` with `gap_covered2`). A
+    maximizing half-integer witness `m` with slack `ρ` forces `v₄ < 2/(1 + 3ρ)`; if
+    `2q ≤ (1 + 3ρ)r` that is a contradiction. Excludes the large-`v₄` triples in
+    `core2_q_lt_18`. -/
+lemma bhk_prop11_exc_v4kill2 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (g p q r m : ℕ) (ρ : ℝ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (hρ0 : 0 < ρ) (hρ6 : ρ ≤ 1 / 6)
+    (h1lo : 1 / 6 + ρ * (p : ℝ) / q ≤ (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ))
+    (h1hi : (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ)
+        ≤ 1 / 3 - ρ * ((q : ℝ) - p) / q)
+    (hrb : 2 * (q : ℝ) ≤ (1 + 3 * ρ) * r) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hgR : (0 : ℝ) < g := by exact_mod_cast hg
+  have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+  have hw0w2 : (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) = (p : ℝ) / q := by
+    rw [c0, c2]; rw [mul_div_mul_left _ _ hgR.ne']
+  have hw1w2 : (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) = ((q : ℝ) - p) / q := by
+    have c1 : (w ⟨1, by omega⟩ : ℝ) = (g : ℝ) * ((q : ℝ) - p) := by
+      have hsumR : (w ⟨0, by omega⟩ : ℝ) + (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) := by
+        exact_mod_cast hsum
+      rw [show (w ⟨1, by omega⟩ : ℝ) = (w ⟨2, by omega⟩ : ℝ) - (w ⟨0, by omega⟩ : ℝ) from by
+        linarith, c0, c2]; ring
+    rw [c1, c2, mul_div_mul_left _ _ hgR.ne']
+  set t : ℝ := ((m : ℝ) + 1 / 2) / (w ⟨2, by omega⟩ : ℝ) with htdef
+  have e2 : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ) + 1 / 2 := by rw [htdef]; field_simp
+  have h3 : Int.fract ((w ⟨2, by omega⟩ : ℝ) * t) = 1 / 2 := by
+    rw [e2, show (m : ℝ) + 1 / 2 = ((m : ℤ) : ℝ) + 1 / 2 from by push_cast; ring,
+        Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨by norm_num, by norm_num⟩]
+  have e0t : (w ⟨0, by omega⟩ : ℝ) * t = (p : ℝ) / q * ((m : ℝ) + 1 / 2) := by
+    rw [htdef, c0, c2]; field_simp
+  have hCp : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      = (((2 * (p * m % q) + p) % (2 * q) : ℕ) : ℝ) / ((2 * q : ℕ) : ℝ) := by
+    rw [e0t, bhk_prop11_Cpoint_eval p q m hq]
+  have hwlo : 1 / 6 + ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+      ≤ Int.fract ((w ⟨0, by omega⟩ : ℝ) * t) := by
+    rw [hCp, show ρ * (w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+          = ρ * ((w ⟨0, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring, hw0w2,
+        show ρ * ((p : ℝ) / q) = ρ * (p : ℝ) / q from by ring]
+    exact h1lo
+  have hwhi : Int.fract ((w ⟨0, by omega⟩ : ℝ) * t)
+      ≤ 1 / 3 - ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ) := by
+    rw [hCp, show ρ * (w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)
+          = ρ * ((w ⟨1, by omega⟩ : ℝ) / (w ⟨2, by omega⟩ : ℝ)) from by ring, hw1w2,
+        show ρ * (((q : ℝ) - p) / q) = ρ * ((q : ℝ) - p) / q from by ring]
+    exact h1hi
+  have hb := bhk_prop11_v4_bound_witness2 w hmono hpos hsum hsmall6 hcov6 ρ hρ0 hρ6 t h3 hwlo hwhi
+  rw [c2, c3] at hb
+  nlinarith [hb, hrb, hgR, mul_pos hgR hqR]
+
 /-- **Corollary 16 (`v₄ < 2`), six-runner/unconditional** (the `core2` analog of
     `bhk_prop11_v4_lt_2v3_uncond`). Under `6 w₀ < w₂` and the six-runner cover, the
     witness-time `0123`-gap is covered only by runners 4, 5 (`gap_covered2`,
