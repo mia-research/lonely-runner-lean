@@ -5571,6 +5571,57 @@ lemma bhk_prop11_exc_3_2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q
   · rw [hmcast, hA']; linarith
   · rw [hmcast, hA']; linarith
 
+
+/-- **`(5,2)U` half-slope read-off, `c = 2` branch (`2r = 5p + 2q`).** Forces `p` even
+    (`p = 2pp`, `r = q + 5pp`); placing `Ap' = {pp(m+½)/q} ∈ [2/15, 1/6]` (reachable for
+    `q ≥ 30`) gives runner-`r` coordinate `5·Ap' − 1/2 ∈ [1/6, 1/3]` (`readoff_odd`,
+    `γ = 5`) and runner-`p` coordinate `2·Ap' ∈ [4/15, 1/3]`, both in `R`. -/
+lemma bhk_prop11_exc_5_2_c2 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr2 : 2 * r = 5 * p + 2 * q)
+    (h_nogood : ∀ k : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((k : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  obtain ⟨pp, hpp⟩ : 2 ∣ p := by omega
+  have h6pp : 6 * pp < q := by omega
+  have hr_pp : r = q + 5 * pp := by omega
+  have hcop' : Nat.Coprime pp q := by
+    rw [hpp] at hcop; exact Nat.Coprime.coprime_dvd_left (dvd_mul_left pp 2) hcop
+  set kk : ℕ := (4 * q - 15 * pp + 29) / 30 with hkkdef
+  have hkkn : kk < q := by omega
+  have hwrap : 2 * kk + pp < 2 * q := by omega
+  obtain ⟨m, hm⟩ := bhk_prop11_fract_odd_mul pp q hq0 hcop' kk hkkn hwrap
+  set Ap : ℝ := (2 * (kk : ℝ) + pp) / (2 * q) with hApdef
+  have hppeq : Int.fract ((pp : ℝ) / q * ((m : ℝ) + 1 / 2)) = Ap := by
+    rw [← hm]; congr 1; field_simp
+  have hAp_lo : 2 / 15 ≤ Ap := by
+    rw [hApdef, le_div_iff₀ (by positivity)]
+    have h2 : (4 : ℝ) * q ≤ 15 * (2 * kk + pp) := by
+      exact_mod_cast (show 4 * q ≤ 15 * (2 * kk + pp) by omega)
+    linarith
+  have hAp_hi : Ap ≤ 1 / 6 := by
+    rw [hApdef, div_le_iff₀ (by positivity)]
+    have h2 : (6 : ℝ) * (2 * kk + pp) ≤ 2 * q := by
+      exact_mod_cast (show 6 * (2 * kk + pp) ≤ 2 * q by omega)
+    linarith
+  have hrR : (r : ℝ) = (q : ℝ) + 5 * pp := by rw [hr_pp]; push_cast; ring
+  have hX := bhk_prop11_readoff_odd pp q r 5 m hq0 hrR
+    (by rw [hppeq]; push_cast; linarith) (by rw [hppeq]; push_cast; linarith)
+  rw [hppeq] at hX
+  have hpR : (p : ℝ) = 2 * pp := by rw [hpp]; push_cast; ring
+  have hA := bhk_prop11_readoff_zero pp q p 2 m hq0 hpR
+  rw [hppeq] at hA
+  have hA' : Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) = 2 * Ap := by
+    rw [hA]; push_cast; exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
+  have hmcast : (((m : ℤ)) : ℝ) = (m : ℝ) := by push_cast; ring
+  refine h_nogood (m : ℤ) ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨?_, ?_⟩⟩
+  · rw [hmcast, hX]; push_cast; linarith
+  · rw [hmcast, hX]; push_cast; linarith
+  · rw [hmcast, hA']; linarith
+  · rw [hmcast, hA']; linarith
+
 /-- **Half-slope read-off for `2r = 3q - 3p` (the `(3,-2)` form).** On the half-integer time
     `(2m+1)/(2q)`, runner `r`'s coordinate is `3/4 - (3/2)·A` (`A = {p(m+½)/q} ∈ [1/6,1/3]`),
     *provided* `m - ⌊p(m+½)/q⌋` is even (`= 2s`). The parity selects the correct line; it holds
