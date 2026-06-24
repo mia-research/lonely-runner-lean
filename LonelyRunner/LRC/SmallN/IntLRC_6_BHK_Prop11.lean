@@ -6248,6 +6248,52 @@ lemma bhk_prop11_exc_5_4_c5 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime 
   exact h_nogood l ⟨Set.mem_Icc.mpr ⟨by rw [hX]; linarith [hA0], by rw [hX]; linarith [hA1]⟩,
     Set.mem_Icc.mpr ⟨hA0, by linarith [hA1]⟩⟩
 
+/-- **Third-slope window selector.** If `3·{G} ∈ [j, j+1)` then `⌊3G⌋ = 3⌊G⌋ + j`
+    and `{3G} = 3{G} − j`. (The `N = 3` analog of `quarter_window`.) -/
+lemma bhk_prop11_third_window (G : ℝ) (j : ℤ)
+    (hlo : (j : ℝ) ≤ 3 * Int.fract G) (hhi : 3 * Int.fract G < (j : ℝ) + 1) :
+    ⌊3 * G⌋ = 3 * ⌊G⌋ + j ∧ Int.fract (3 * G) = 3 * Int.fract G - j := by
+  have hfloor3 : ⌊(3 : ℝ) * Int.fract G⌋ = j := by
+    rw [Int.floor_eq_iff]; constructor <;> push_cast <;> linarith [hlo, hhi]
+  have hsplit : (3 : ℝ) * G = 3 * Int.fract G + ((3 * ⌊G⌋ : ℤ) : ℝ) := by
+    have h := Int.floor_add_fract G; push_cast; linarith [h]
+  refine ⟨?_, ?_⟩
+  · rw [hsplit, Int.floor_add_intCast, hfloor3]; ring
+  · rw [hsplit, Int.fract_add_intCast]
+    have h := Int.floor_add_fract ((3 : ℝ) * Int.fract G)
+    rw [hfloor3] at h; linarith [h]
+
+/-- **General third-slope read-off engine.** For `3r = ι·p + γ·q`, a selector
+    `⌊p·t⌋ = 3d + ρ + κ·m` with `ι·κ + γ = 3e` and `2ι·ρ + γ = 6·sh + βN`, runner `r`'s
+    half-integer coordinate is `(ι/3)·A + βN/6` (provided that value is in `[0, 1)`). -/
+lemma bhk_prop11_readoff_third_gen (p q r : ℕ) (iota gamma rho kappa e betaN sh : ℤ)
+    (m d : ℤ) (hq0 : 0 < q)
+    (hr : (3 : ℝ) * r = (iota : ℝ) * p + (gamma : ℝ) * q)
+    (hke : iota * kappa + gamma = 3 * e)
+    (hbeta : 2 * iota * rho + gamma = 6 * sh + betaN)
+    (hD : ⌊(p : ℝ) / q * ((m : ℝ) + 1 / 2)⌋ = 3 * d + rho + kappa * m)
+    (hlo : (0 : ℝ) ≤ (iota : ℝ) / 3 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) + (betaN : ℝ) / 6)
+    (hhi : (iota : ℝ) / 3 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) + (betaN : ℝ) / 6 < 1) :
+    Int.fract ((r : ℝ) / q * ((m : ℝ) + 1 / 2))
+      = (iota : ℝ) / 3 * Int.fract ((p : ℝ) / q * ((m : ℝ) + 1 / 2)) + (betaN : ℝ) / 6 := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq0
+  set Z : ℝ := (p : ℝ) / q * ((m : ℝ) + 1 / 2) with hZdef
+  set A : ℝ := Int.fract Z with hAdef
+  have hAz : Z = A + (⌊Z⌋ : ℝ) := by rw [hAdef, Int.fract]; ring
+  have hDR : (⌊Z⌋ : ℝ) = 3 * (d : ℝ) + rho + kappa * m := by rw [hZdef, hD]; push_cast; ring
+  have hkeR : (iota : ℝ) * kappa + gamma = 3 * e := by exact_mod_cast hke
+  have hbetaR : 2 * (iota : ℝ) * rho + gamma = 6 * sh + betaN := by exact_mod_cast hbeta
+  have ht1 : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+      = ((iota : ℝ) / 3 * A + (betaN : ℝ) / 6) + ((iota * d + e * m + sh : ℤ) : ℝ) := by
+    have key : (r : ℝ) / q * ((m : ℝ) + 1 / 2)
+        = (iota : ℝ) / 3 * Z + (gamma : ℝ) / 3 * ((m : ℝ) + 1 / 2) := by
+      rw [hZdef, show (r : ℝ) = ((iota : ℝ) * p + (gamma : ℝ) * q) / 3 from by linarith [hr]]
+      field_simp
+    rw [key, hAz, hDR]; push_cast
+    linear_combination ((m : ℝ) / 3) * hkeR + (1 / 6) * hbetaR
+  rw [ht1, Int.fract_add_intCast]
+  exact Int.fract_eq_self.mpr ⟨hlo, hhi⟩
+
 /-- **General quarter-slope read-off engine.** For `4r = ι·p + γ·q`, a selector
     `⌊p·t⌋ = 4d + ρ + κ·m` with `ι·κ + γ = 4e` (the `m`-term vanishes) and
     `2ι·ρ + γ = 8·sh + βN`, runner `r`'s half-integer coordinate is `(ι/4)·A + βN/8`
@@ -6695,6 +6741,164 @@ lemma bhk_prop11_exc_5_neg4_c6 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Copri
   · rw [hX]; push_cast; linarith [hA1]
   · rw [hX]; push_cast; linarith [hA0]
 
+/-- **`(5,-3)` third-slope, `c = 4` branch (`3r + 5p = 4q`).** `X = (−5/3)A + 2/3`. -/
+lemma bhk_prop11_exc_5_neg3_c4 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr3 : 3 * r + 5 * p = 4 * q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hrR : (3 : ℝ) * r = ((-5 : ℤ) : ℝ) * p + ((4 : ℤ) : ℝ) * q := by
+    have h : (3 : ℝ) * r + 5 * p = 4 * q := by exact_mod_cast hr3
+    push_cast; linarith
+  set w' : ℕ := (p + q) / 3 with hw'def
+  have h4w : p + q = 3 * w' := by omega
+  have hwq : w' < q := by omega
+  have hcopw : Nat.Coprime w' q := by
+    have h2 : Nat.gcd w' q ∣ q := Nat.gcd_dvd_right _ _
+    have hd : Nat.gcd w' q ∣ p := by
+      have ha : Nat.gcd w' q ∣ q + p := by
+        rw [show q + p = 3 * w' from by omega]; exact (Nat.gcd_dvd_left _ _).mul_left 3
+      exact (Nat.dvd_add_right h2).mp ha
+    exact Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd hd h2)
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq0 w' hcopw
+    ((p : ℝ) / (6 * q)) (1 / 18) (2 / 45)
+    (by have h30 : (30 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq30
+        exact le_trans (one_div_le_one_div_of_le (by norm_num) h30) (by norm_num)) (by norm_num) (by norm_num)
+  set G : ℝ := (p : ℝ) / (6 * q) + (l : ℝ) * (w' : ℝ) / (q : ℝ) with hGdef
+  rw [Set.mem_Icc] at hl
+  have hGfr0 : 1 / 18 ≤ Int.fract G := hl.1
+  have hGfr1 : Int.fract G ≤ 1 / 10 := by linarith [hl.2]
+  have hw3R : 3 * (w' : ℝ) = (p : ℝ) + q := by exact_mod_cast h4w.symm
+  have h3G : 3 * G = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + (l : ℝ) := by
+    rw [hGdef, show (w' : ℝ) = ((p : ℝ) + q) / 3 from by linarith [hw3R]]; field_simp; ring
+  obtain ⟨hfl, hfr⟩ := bhk_prop11_third_window G 0
+    (by push_cast; linarith [hGfr0]) (by push_cast; linarith [hGfr1])
+  have hflr : ⌊3 * G⌋ = ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + l := by
+    rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + (l : ℝ)
+      = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((l : ℤ) : ℝ) from by push_cast; ring, Int.floor_add_intCast]
+  have hD : ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ = 3 * ⌊G⌋ + 0 + (-1) * l := by omega
+  have hAval : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = 3 * Int.fract G - 0 := by
+    have heq : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = Int.fract (3 * G) := by
+      rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + (l : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((l : ℤ) : ℝ) from by push_cast; ring, Int.fract_add_intCast]
+    rw [heq, hfr]; push_cast; ring
+  have hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := by rw [hAval]; linarith [hGfr0]
+  have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 3 / 10 := by rw [hAval]; linarith [hGfr1]
+  have hX := bhk_prop11_readoff_third_gen p q r (-5) 4 0 (-1) 3 4 0 l ⌊G⌋ hq0 hrR
+    (by norm_num) (by norm_num) hD (by push_cast; linarith [hA0, hA1]) (by push_cast; linarith [hA0, hA1])
+  refine h_nogood l ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨hA0, by linarith [hA1]⟩⟩
+  · rw [hX]; push_cast; linarith [hA1]
+  · rw [hX]; push_cast; linarith [hA0]
+
+/-- **`(5,-3)` third-slope, `c = 5` branch (`3r + 5p = 5q`).** `X = (−5/3)A + 5/6`,
+    `A ∈ [1/5, 1/3]`. -/
+lemma bhk_prop11_exc_5_neg3_c5 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr3 : 3 * r + 5 * p = 5 * q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hrR : (3 : ℝ) * r = ((-5 : ℤ) : ℝ) * p + ((5 : ℤ) : ℝ) * q := by
+    have h : (3 : ℝ) * r + 5 * p = 5 * q := by exact_mod_cast hr3
+    push_cast; linarith
+  set w' : ℕ := (p + 2 * q) / 3 with hw'def
+  have h4w : p + 2 * q = 3 * w' := by omega
+  have hwq : w' < q := by omega
+  have hcopw : Nat.Coprime w' q := by
+    have h2 : Nat.gcd w' q ∣ q := Nat.gcd_dvd_right _ _
+    have hd : Nat.gcd w' q ∣ p := by
+      have hb : Nat.gcd w' q ∣ 2 * q := h2.mul_left 2
+      have ha : Nat.gcd w' q ∣ 2 * q + p := by
+        rw [show 2 * q + p = 3 * w' from by omega]; exact (Nat.gcd_dvd_left _ _).mul_left 3
+      exact (Nat.dvd_add_right hb).mp ha
+    exact Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd hd h2)
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq0 w' hcopw
+    ((p : ℝ) / (6 * q)) (1 / 15) (2 / 45)
+    (by have h30 : (30 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq30
+        exact le_trans (one_div_le_one_div_of_le (by norm_num) h30) (by norm_num)) (by norm_num) (by norm_num)
+  set G : ℝ := (p : ℝ) / (6 * q) + (l : ℝ) * (w' : ℝ) / (q : ℝ) with hGdef
+  rw [Set.mem_Icc] at hl
+  have hGfr0 : 1 / 15 ≤ Int.fract G := hl.1
+  have hGfr1 : Int.fract G ≤ 1 / 9 := by linarith [hl.2]
+  have hw3R : 3 * (w' : ℝ) = (p : ℝ) + 2 * q := by exact_mod_cast h4w.symm
+  have h3G : 3 * G = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 2 * (l : ℝ) := by
+    rw [hGdef, show (w' : ℝ) = ((p : ℝ) + 2 * q) / 3 from by linarith [hw3R]]; field_simp; ring
+  obtain ⟨hfl, hfr⟩ := bhk_prop11_third_window G 0
+    (by push_cast; linarith [hGfr0]) (by push_cast; linarith [hGfr1])
+  have hflr : ⌊3 * G⌋ = ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + 2 * l := by
+    rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 2 * (l : ℝ)
+      = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((2 * l : ℤ) : ℝ) from by push_cast; ring, Int.floor_add_intCast]
+  have hD : ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ = 3 * ⌊G⌋ + 0 + (-2) * l := by omega
+  have hAval : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = 3 * Int.fract G - 0 := by
+    have heq : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = Int.fract (3 * G) := by
+      rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 2 * (l : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((2 * l : ℤ) : ℝ) from by push_cast; ring, Int.fract_add_intCast]
+    rw [heq, hfr]; push_cast; ring
+  have hA0 : 1 / 5 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := by rw [hAval]; linarith [hGfr0]
+  have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 3 := by rw [hAval]; linarith [hGfr1]
+  have hX := bhk_prop11_readoff_third_gen p q r (-5) 5 0 (-2) 5 5 0 l ⌊G⌋ hq0 hrR
+    (by norm_num) (by norm_num) hD (by push_cast; linarith [hA0, hA1]) (by push_cast; linarith [hA0, hA1])
+  refine h_nogood l ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨by linarith [hA0], hA1⟩⟩
+  · rw [hX]; push_cast; linarith [hA1]
+  · rw [hX]; push_cast; linarith [hA0]
+
+/-- **`(5,-3)` third-slope, `c = 6` branch (`3r + 5p = 6q`, `3 ∣ p`).** `X = (−5/3)A + 2/3`. -/
+lemma bhk_prop11_exc_5_neg3_c6 (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
+    (hp : 0 < p) (h3p : 3 * p < q) (hr3 : 3 * r + 5 * p = 6 * q)
+    (h_nogood : ∀ l : ℤ,
+      ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
+         Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3))) :
+    False := by
+  have hq0 : 0 < q := by omega
+  have hqR : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
+  have hrR : (3 : ℝ) * r = ((-5 : ℤ) : ℝ) * p + ((6 : ℤ) : ℝ) * q := by
+    have h : (3 : ℝ) * r + 5 * p = 6 * q := by exact_mod_cast hr3
+    push_cast; linarith
+  set w' : ℕ := (p + 3 * q) / 3 with hw'def
+  have h4w : p + 3 * q = 3 * w' := by omega
+  have hcopw : Nat.Coprime w' q := by
+    have h2 : Nat.gcd w' q ∣ q := Nat.gcd_dvd_right _ _
+    have hd : Nat.gcd w' q ∣ p := by
+      have hb : Nat.gcd w' q ∣ 3 * q := h2.mul_left 3
+      have ha : Nat.gcd w' q ∣ 3 * q + p := by
+        rw [show 3 * q + p = 3 * w' from by omega]; exact (Nat.gcd_dvd_left _ _).mul_left 3
+      exact (Nat.dvd_add_right hb).mp ha
+    exact Nat.dvd_one.mp (hcop ▸ Nat.dvd_gcd hd h2)
+  obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq0 w' hcopw
+    ((p : ℝ) / (6 * q)) (13 / 18) (2 / 45)
+    (by have h30 : (30 : ℝ) ≤ (q : ℝ) := by exact_mod_cast hq30
+        exact le_trans (one_div_le_one_div_of_le (by norm_num) h30) (by norm_num)) (by norm_num) (by norm_num)
+  set G : ℝ := (p : ℝ) / (6 * q) + (l : ℝ) * (w' : ℝ) / (q : ℝ) with hGdef
+  rw [Set.mem_Icc] at hl
+  have hGfr0 : 13 / 18 ≤ Int.fract G := hl.1
+  have hGfr1 : Int.fract G ≤ 23 / 30 := by linarith [hl.2]
+  have hw3R : 3 * (w' : ℝ) = (p : ℝ) + 3 * q := by exact_mod_cast h4w.symm
+  have h3G : 3 * G = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 3 * (l : ℝ) := by
+    rw [hGdef, show (w' : ℝ) = ((p : ℝ) + 3 * q) / 3 from by linarith [hw3R]]; field_simp; ring
+  obtain ⟨hfl, hfr⟩ := bhk_prop11_third_window G 2
+    (by push_cast; linarith [hGfr0]) (by push_cast; linarith [hGfr1])
+  have hflr : ⌊3 * G⌋ = ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + 3 * l := by
+    rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 3 * (l : ℝ)
+      = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((3 * l : ℤ) : ℝ) from by push_cast; ring, Int.floor_add_intCast]
+  have hD : ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ = 3 * ⌊G⌋ + 2 + (-3) * l := by omega
+  have hAval : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = 3 * Int.fract G - 2 := by
+    have heq : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) = Int.fract (3 * G) := by
+      rw [h3G, show (p : ℝ) / q * ((l : ℝ) + 1 / 2) + 3 * (l : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) + ((3 * l : ℤ) : ℝ) from by push_cast; ring, Int.fract_add_intCast]
+    rw [heq, hfr]; push_cast; ring
+  have hA0 : 1 / 6 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := by rw [hAval]; linarith [hGfr0]
+  have hA1 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 3 / 10 := by rw [hAval]; linarith [hGfr1]
+  have hX := bhk_prop11_readoff_third_gen p q r (-5) 6 2 (-3) 7 4 (-3) l ⌊G⌋ hq0 hrR
+    (by norm_num) (by norm_num) hD (by push_cast; linarith [hA0, hA1]) (by push_cast; linarith [hA0, hA1])
+  refine h_nogood l ⟨Set.mem_Icc.mpr ⟨?_, ?_⟩, Set.mem_Icc.mpr ⟨hA0, by linarith [hA1]⟩⟩
+  · rw [hX]; push_cast; linarith [hA1]
+  · rw [hX]; push_cast; linarith [hA0]
+
 /-- **BHK §5 Case 5.2.6 — the half-slope pair `(4, -2)`.** The relation `4p ≡ -2r (mod q)`
     gives `q ∣ (2r + 4p)`; the cone bounds force `2r + 4p ∈ {3q, 4q}`. `4q` is `r = 2q − 2p`
     (`q < 4p`), closed by `bhk_prop11_exc_2_neg1_hit`. `3q` forces `q` even (`2r = 3q − 4p`,
@@ -7075,7 +7279,35 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p 
           have : (4 : ℤ) * r + 5 * p = 7 * q := by omega
           exact_mod_cast this
         exact bhk_prop11_exc_5_neg4_c7 p q r hq30 hcop hp h3p hr4 h_nogood
-    · sorry -- (5,-3)
+    · -- (5,-3): relation `-3r ≡ 5p (mod q)` pins `3r + 5p = cq`, `c ∈ {4,5,6}`
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 5 (-3) k hk1 hk2
+      have hdvd : (q : ℤ) ∣ (-3 * r - 5 * p) := Int.modEq_iff_dvd.mp hrel
+      have hdvd2 : (q : ℤ) ∣ (3 * r + 5 * p) := by
+        have h := (dvd_neg (α := ℤ)).mpr hdvd
+        rwa [show -(-3 * (r : ℤ) - 5 * p) = 3 * r + 5 * p from by ring] at h
+      obtain ⟨c, hc⟩ := hdvd2
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      have hrqz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have h1 : (q : ℤ) * 3 < q * c := by rw [← hc]; omega
+      have h2 : (q : ℤ) * c < q * 7 := by rw [← hc]; omega
+      have hc3 := lt_of_mul_lt_mul_left h1 hqz
+      have hc7 := lt_of_mul_lt_mul_left h2 hqz
+      interval_cases c
+      · have hr3 : 3 * r + 5 * p = 4 * q := by
+          have : (3 : ℤ) * r + 5 * p = 4 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_neg3_c4 p q r hq30 hcop hp h3p hr3 h_nogood
+      · have hr3 : 3 * r + 5 * p = 5 * q := by
+          have : (3 : ℤ) * r + 5 * p = 5 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_neg3_c5 p q r hq30 hcop hp h3p hr3 h_nogood
+      · have hr3 : 3 * r + 5 * p = 6 * q := by
+          have : (3 : ℤ) * r + 5 * p = 6 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_neg3_c6 p q r hq30 hcop hp h3p hr3 h_nogood
     · -- (5,-2): relation `5p ≡ -2r (mod q)` pins `2r + 5p = cq`, c ∈ {3,4}
       have hrel := bhk_prop11_exc_relation p q r (by omega) 5 (-2) k hk1 hk2
       have hdvd : (q : ℤ) ∣ (-2 * r - 5 * p) := Int.modEq_iff_dvd.mp hrel
