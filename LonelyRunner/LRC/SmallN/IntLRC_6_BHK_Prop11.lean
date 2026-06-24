@@ -6047,7 +6047,7 @@ lemma bhk_prop11_exc_4_neg2 (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime 
     *open* pairs — the transversal `|j| ≥ 2` family, the diagonal `(1,1)` (Part 6),
     and the low-`q` slivers of `(4,±1)`/`(5,1)`. TO FILL via pentagon
     P-witnesses (`bhk_prop11_no_good_time_P`) and Part 6. -/
-lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p q)
+lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p q)
     (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
     (i j k : ℤ) (hi0 : 0 ≤ i) (hi6 : (i : ℝ) < 6)
     (hjlo : -3 - 1 / 2 * (i : ℝ) < (j : ℝ)) (hjhi : (j : ℝ) < 3 + 1 / 2 * (i : ℝ))
@@ -6060,6 +6060,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q)
     (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) (hndiag : r ≠ p + q) :
     False := by
+  have hq18 : 18 ≤ q := by omega
   have hi_lt : i < 6 := by exact_mod_cast hi6
   interval_cases i
   · -- i = 0: the `i = 0` family, `q ∣ j·r` has no multiple in range (Part 5, j = ±1, ±2)
@@ -6236,16 +6237,12 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
               omega) h6 hdvd
     · sorry -- (4,-3)
     · exact bhk_prop11_exc_4_neg2 p q r hq18 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-    · by_cases hq24 : 24 ≤ q
-      · exact bhk_prop11_exc_4_neg1 p q r hq24 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-      · sorry -- (4,-1) sliver q ∈ [18,24)
+    · exact bhk_prop11_exc_4_neg1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (4 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 4 k (by norm_num) (by norm_num) hk1
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
-    · by_cases hq24 : 24 ≤ q
-      · exact bhk_prop11_exc_4_1 p q r hq24 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-      · sorry -- (4,1) sliver q ∈ [18,24)
+    · exact bhk_prop11_exc_4_1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · sorry -- (4,2)
     · sorry -- (4,3)
     · exact bhk_prop11_exc_4_4 p q r hq18
@@ -6275,16 +6272,12 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq18 : 18 ≤ q) (hcop : Nat.Coprime p 
     · sorry -- (5,-4)
     · sorry -- (5,-3)
     · sorry -- (5,-2)
-    · by_cases hq30 : 30 ≤ q
-      · exact bhk_prop11_exc_5_neg1 p q r hq30 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-      · sorry -- (5,-1) sliver q ∈ [18,30)
+    · exact bhk_prop11_exc_5_neg1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · have hI0 : (5 : ℤ) = 0 :=
         bhk_prop11_exc_j_zero p q r (by omega) hcop 5 k (by norm_num) (by norm_num) hk1
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
-    · by_cases hq30 : 30 ≤ q
-      · exact bhk_prop11_exc_5_1 p q r hq30 hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
-      · sorry -- (5,1) sliver q ∈ [18,30)
+    · exact bhk_prop11_exc_5_1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · sorry -- (5,2)
     · sorry -- (5,3)
     · sorry -- (5,4)
@@ -8207,8 +8200,18 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
           bhk_prop11_exc_1_neg2 p q r hp_pos h3p hrq hr32 k hk1 hk2
         exact bhk_prop11_exc_1_neg2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
           (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
-      · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-          hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+      · by_cases hq30 : 30 ≤ q
+        · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+            hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+        · have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+          have hrs : r < s := by
+            have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+              hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+            have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+            exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+          exact bhk_prop11_exc_q_18_30 w hmono hpos hsum hsmall hcover g p q r s hg_pos hq18'
+            (by omega) hcop hp_pos h3p hrq hr32 hrs
+            (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
 set_option maxHeartbeats 1600000 in
 /-- **BHK Case 5.2.12.4 — the diagonal `(p, q, r) = (1, 9, 10)`.** Speeds
@@ -11723,8 +11726,11 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
           exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
         exact bhk_prop11_exc_1_neg2_kill2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos
           (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hsmall6N hrig
-      · exact bhk_prop11_exc_open p q r hq18' hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-          hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+      · by_cases hq30 : 30 ≤ q
+        · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+            hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+        · -- q ∈ [18,30): windowed finite R/P dispatch (TODO: exc_q_18_30_2)
+          sorry
 
 /-- **core2, `q < 18` dispatch.** The complementary finite case for part 2; the
     six-runner analog of `bhk_prop11_core_q_lt_18` (BHK Lemma 18 / Table 1 for
