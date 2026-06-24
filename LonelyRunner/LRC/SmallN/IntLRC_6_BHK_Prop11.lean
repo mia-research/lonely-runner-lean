@@ -6280,7 +6280,32 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p 
     · exact bhk_prop11_exc_5_1 p q r (by omega) hcop hp h3p hrq hr32 k hk1 hk2 h_nogood
     · sorry -- (5,2)
     · sorry -- (5,3)
-    · sorry -- (5,4)
+    · -- (5,4): relation 5p ≡ 4r pins 4r = 5p + cq, c ∈ {3,4,5}
+      have hrel := bhk_prop11_exc_relation p q r (by omega) 5 4 k hk1 hk2
+      have hdvd : (q : ℤ) ∣ (4 * r - 5 * p) := Int.modEq_iff_dvd.mp hrel
+      obtain ⟨c, hc⟩ := hdvd
+      have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+      have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+      have hrqz : (q : ℤ) < r := by exact_mod_cast hrq
+      have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+      have hqz : (0 : ℤ) ≤ q := by positivity
+      have h1 : (q : ℤ) * 2 < q * c := by rw [← hc]; omega
+      have h2 : (q : ℤ) * c < q * 6 := by rw [← hc]; omega
+      have hc2 := lt_of_mul_lt_mul_left h1 hqz
+      have hc6 := lt_of_mul_lt_mul_left h2 hqz
+      interval_cases c
+      · have hr4 : 4 * r = 5 * p + 3 * q := by
+          have : (4 : ℤ) * r = 5 * p + 3 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_4_c3 p q r hq30 hcop hp h3p hrq hr32 hr4 h_nogood
+      · have hr4 : 4 * r = 5 * p + 4 * q := by
+          have : (4 : ℤ) * r = 5 * p + 4 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_4_c4 p q r (by omega) hcop hr4 h_nogood
+      · have hr4 : 4 * r = 5 * p + 5 * q := by
+          have : (4 : ℤ) * r = 5 * p + 5 * q := by omega
+          exact_mod_cast this
+        exact bhk_prop11_exc_5_4_c5 p q r hq30 hcop hp h3p hrq hr32 hr4 h_nogood
     · exact bhk_prop11_exc_5_5 p q r hq18
         (by have h := h14 (by decide) (by decide)
             rw [show (5 : ℤ).natAbs = 5 from by decide] at h; omega)
