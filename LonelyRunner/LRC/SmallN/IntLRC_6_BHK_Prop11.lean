@@ -7002,6 +7002,49 @@ lemma bhk_prop11_part6_claim21_lonely (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i
   · exact absurd hi (not_lt.mpr (hsafeQ 3))
   · exact absurd hi (not_lt.mpr safe4qe)
 
+/-- **BHK Part 6 — Claim 21 (`p = 1`) with the `(57)`-witness supplied explicitly.** Same
+    as `bhk_prop11_part6_p1` but takes the half-integer `(57)`-witness `(t, m)` as a
+    hypothesis instead of constructing it via the `q ≥ 16` grid argument
+    (`claim21_witness`). This handles the small-`q` diagonals `(1, q)` with
+    `q ∈ {11, 13, 15}` (where the `1/q`-grid still meets the window `[1/3+1/(6q),
+    5/12−1/(6q)]` even though its length dips below `1/q`), needing only `q ≥ 11` for
+    Claim 19's `r = q+1 ≥ 12`. -/
+lemma bhk_prop11_part6_p1_wit (w : Fin 5 → ℕ) (hpos : ∀ i, 0 < w i)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hdiag : w ⟨3, by omega⟩ = w ⟨0, by omega⟩ + w ⟨2, by omega⟩)
+    (hw24 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ))
+    (g q s : ℕ) (hg : 0 < g) (hq11 : 11 ≤ q)
+    (hw0 : w ⟨0, by omega⟩ = g) (hw2 : w ⟨2, by omega⟩ = g * q)
+    (hw4 : w ⟨4, by omega⟩ = g * s)
+    (t : ℝ) (m : ℤ) (hbt : (w ⟨2, by omega⟩ : ℝ) * t = (m : ℝ))
+    (h0lo : (1 : ℝ) / 3 + 1 / (6 * (q : ℝ)) ≤ (w ⟨0, by omega⟩ : ℝ) * t)
+    (h0hi : (w ⟨0, by omega⟩ : ℝ) * t ≤ 5 / 12 - 1 / (6 * (q : ℝ))) : False := by
+  have hq0 : 0 < q := by omega
+  have hw0' : w ⟨0, by omega⟩ = g * 1 := by omega
+  have hw3' : w ⟨3, by omega⟩ = g * (q + 1) := by rw [hdiag, hw0, hw2]; ring
+  have h19 : w ⟨4, by omega⟩ < 2 * w ⟨3, by omega⟩ :=
+    bhk_prop11_part6_claim19 w hpos hcover hsum hdiag g 1 (q + 1) hg (by norm_num) (by omega)
+      hw0' hw3' (Nat.coprime_one_left _)
+  have h21 : 2 * (w ⟨2, by omega⟩ : ℝ) < (w ⟨4, by omega⟩ : ℝ) :=
+    bhk_prop11_part6_claim21_lower w hpos hcover hsum hdiag hw24 g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+  have h21n : 2 * w ⟨2, by omega⟩ < w ⟨4, by omega⟩ := by exact_mod_cast h21
+  have hsqueeze : s = 2 * q + 1 := by
+    have a1 : 2 * q < s := by
+      have h := h21n
+      rw [hw2, hw4] at h
+      have h' : g * (2 * q) = 2 * (g * q) := by ring
+      exact lt_of_mul_lt_mul_left (h'.trans_lt h) (Nat.zero_le g)
+    have a2 : s < 2 * q + 2 := by
+      have h := h19
+      rw [hw4, hw3'] at h
+      have h' : 2 * (g * (q + 1)) = g * (2 * q + 2) := by ring
+      exact lt_of_mul_lt_mul_left (h.trans_le h'.le) (Nat.zero_le g)
+    omega
+  have hs : w ⟨4, by omega⟩ = 2 * w ⟨2, by omega⟩ + w ⟨0, by omega⟩ := by
+    rw [hw4, hw2, hw0, hsqueeze]; ring
+  exact bhk_prop11_part6_claim21_lonely w hpos hcover hsum hdiag hs g q hg hq0 hw0 hw2 t m hbt h0lo h0hi
+
 /-- **BHK Part 6 — `p = 1` diagonal case.** Combines Claim 19 (`w₄ < 2w₃`), Claim 21's lower
     bound (`2w₂ < w₄`), and the `s = 2q+1` lonely exclusion. The squeeze
     `2w₂ < w₄ < 2w₃ = 2w₂ + 2w₀` plus the `p = 1` structure (`w₀ = g`, `w₂ = gq`, `w₄ = gs`)
@@ -7337,6 +7380,7 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       have h23 : (w ⟨2, by omega⟩ : ℝ) < (w ⟨3, by omega⟩ : ℝ) := by
         exact_mod_cast hmono (Fin.mk_lt_mk.mpr (show (2 : ℕ) < 3 by omega))
       linarith
+    have hgne : (g : ℝ) ≠ 0 := by exact_mod_cast hg_pos.ne'
     interval_cases q
     · -- q = 5
       have hpb : p ≤ 1 := by omega
@@ -7443,7 +7487,17 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,11,12)
+        · -- (1,11,12) diagonal via part6_p1_wit, (57)-witness m=4
+          refine bhk_prop11_part6_p1_wit w hpos hcover hsum hdiagw hw24 g 11 s hg_pos (by norm_num)
+            (by omega) hgq hgs ((4 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) 4 ?_ ?_ ?_
+          · have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+            field_simp; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((4 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (4 : ℝ) / 11 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((4 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (4 : ℝ) / 11 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
         · omega  -- r=13 non-diagonal, excluded by hdiag
         · omega  -- r=14 non-diagonal, excluded by hdiag
         · omega  -- r=15 non-diagonal, excluded by hdiag
@@ -7500,7 +7554,17 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,13,14)
+        · -- (1,13,14) diagonal via part6_p1_wit, (57)-witness m=5
+          refine bhk_prop11_part6_p1_wit w hpos hcover hsum hdiagw hw24 g 13 s hg_pos (by norm_num)
+            (by omega) hgq hgs ((5 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) 5 ?_ ?_ ?_
+          · have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+            field_simp; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((5 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (5 : ℝ) / 13 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((5 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (5 : ℝ) / 13 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
         · omega  -- r=15 non-diagonal, excluded by hdiag
         · omega  -- r=16 non-diagonal, excluded by hdiag
         · omega  -- r=17 non-diagonal, excluded by hdiag
@@ -7594,7 +7658,17 @@ theorem bhk_prop11_core_q_lt_18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos
       interval_cases p
       · -- p = 1
         interval_cases r
-        · sorry  -- diag EXPLICIT (BHK 5.2.12.x): (1,15,16)
+        · -- (1,15,16) diagonal via part6_p1_wit, (57)-witness m=6
+          refine bhk_prop11_part6_p1_wit w hpos hcover hsum hdiagw hw24 g 15 s hg_pos (by norm_num)
+            (by omega) hgq hgs ((6 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) 6 ?_ ?_ ?_
+          · have hw2ne : (w ⟨2, by omega⟩ : ℝ) ≠ 0 := by rw [c2]; positivity
+            field_simp; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((6 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (6 : ℝ) / 15 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
+          · have hwt : (w ⟨0, by omega⟩ : ℝ) * ((6 : ℝ) / (w ⟨2, by omega⟩ : ℝ)) = (6 : ℝ) / 15 := by
+              rw [c0, c2]; field_simp; ring
+            rw [hwt]; norm_num
         · omega  -- r=17 non-diagonal, excluded by hdiag
         · omega  -- r=18 non-diagonal, excluded by hdiag
         · omega  -- r=19 non-diagonal, excluded by hdiag
