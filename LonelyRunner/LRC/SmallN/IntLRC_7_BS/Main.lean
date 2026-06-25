@@ -1,5 +1,6 @@
 import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Defs
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Reduction
 
 /-!
 # n = 7 (Barajas–Serra) — assembly + discrete→real bridge
@@ -46,30 +47,6 @@ theorem bs_discrete_to_real
   have hrw : (D i : ℝ) * ((lam : ℝ) / N) = ((lam * D i : ℝ) / N) := by ring
   rw [hrw]
   exact hd i
-
-/-- **Discrete Barajas–Serra core, residue-band form (n = 7).** For six positive,
-distinct integers with `gcd = 1`, there is a level `m` and a multiplier `lam`
-sending every residue `(lam · d)_N` into the central band `[7^m, 6·7^m]` (with
-`N = 7^(m+1)`) — equivalently `|lam·d|_N ≥ N/7`.
-
-This is the *purely arithmetic* heart of Barajas–Serra 2008 §2–§6: Prime
-Filtering (Lemma 2) + Corollary 3 + the §4 reduction to `|A| ∈ {4,5}`,
-`(A)₇ ⊂ {1,2,4}`, then the finite mod-7 analysis of §5 (`|A|=4`) and §6 (`|A|=5`).
-
-The band is **inclusive** at both ends: filtered elements (`d ∈ D\D₇(m)`) land in
-the open arcs `q ∈ {1,…,5}` ⊂ `[7^m, 6·7^m)`, while `D₇(m)` elements are only
-guaranteed `|d|_N ≥ N/7`, which may sit on the boundary `6·7^m`. See the analysis
-in `ROADMAP.md` (this is why the target is the residue band, not `q ∉ {0,6}`).
-
-**This is the single remaining `sorry` for n = 7.** Everything above it
-(`bs_discrete`, the bridge, `IntLRC_7`) is closed. In the paper `m = max ν₇(D)`. -/
-theorem bs_discrete_q
-    (D : Fin 6 → ℕ) (hpos : ∀ i, 0 < D i)
-    (hinj : Function.Injective D) (hgcd : Finset.univ.gcd D = 1) :
-    ∃ (m : ℕ) (lam : ℤ), ∀ i,
-      (7 ^ m : ℤ) ≤ (lam * (D i : ℤ)) % (7 ^ (m + 1) : ℤ) ∧
-      (lam * (D i : ℤ)) % (7 ^ (m + 1) : ℤ) ≤ 6 * 7 ^ m := by
-  sorry
 
 /-- **Discrete Barajas–Serra core (n = 7).** For six positive, distinct integers
 with `gcd = 1`, there exist a positive integer modulus `N` (a power of `7`) and a
