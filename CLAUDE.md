@@ -98,6 +98,23 @@ and lose less to compaction. Whole-proof autoformalize attempts burn tokens.
 
 ## 5. Math research workflow (n-LR proof work)
 
+**Source-first. Read the paper's argument for THIS step before anything else.**
+We are *verifying a published proof* (BHK 2001 = `/tmp/bhk.txt` / `bhk_2001.pdf`;
+Bienia, Renault, Barajas-Serra likewise). The argument for the exact lemma/case
+is in the paper — find it (grep the Case/Lemma/Table number, read it, transcribe
+it) and try it BEFORE any empirical de-risk, investigation, or invention. Three
+separate times a "hard/research-grade" obstacle dissolved the moment the paper's
+own treatment was read (e.g. (1,±2) → BHK Cases 5.2.9/5.2.11, a plain pigeonhole).
+De-risk scripts and structural sweeps come AFTER the source, and only for the
+gaps the source genuinely glosses — not as the first move.
+
+**No editorializing — state facts, not difficulty verdicts.** Do not label steps
+"research-grade", "hardest piece", "biggest chunk", "huge", "great news", or rank
+difficulty before (or after) doing them. Those value judgments are predictions
+dressed as facts; they have repeatedly been wrong and they distort the
+perspective on the actual work. Report only what the source says and what a build
+/ script / `#print axioms` actually verified.
+
 **Plan-first for non-trivial proof steps.** Enter plan mode (`Esc` → plan
 mode), let the Plan subagent gather context, draft the approach, edit it with
 Ctrl+G if needed, then exit and implement.
@@ -107,9 +124,11 @@ section "Understand Exceptions + Apply Translation Lens" is load-bearing — rea
 it at the start of any proof session. The two compounding failure modes
 (sharpen-and-narrow; direct-only check) cost us the v11.7→v11.9 cascade.
 
-**Empirical-first ordering.** Before drafting a general-n analytical proof,
-run a diverse-sampled empirical sweep to identify the structural order needed
-(pairwise / k-wise). Lexicographic iteration biases — shuffle + per-G caps.
+**Empirical ordering — AFTER the source.** Once the paper's argument is in hand,
+if a general-n structural question remains, run a diverse-sampled empirical sweep
+to identify the order needed (pairwise / k-wise). Lexicographic iteration
+biases — shuffle + per-G caps. Empirical sweeps confirm or fill the source; they
+do not replace reading it.
 
 **Adversarial review at section level.** Before promoting a proof section
 ("draft" → "proved"), spawn an independent subagent with only that section and
@@ -155,10 +174,13 @@ Source integrity: SHA-256 every claim.
   2026-03-27 — do not modify. The journal-submission LaTeX lineage
   (`eleven_lonely_runners_v3*.tex/md`, `ct-submission-v50/`) is separate
   and post-dates the freeze.
-- **Lean tree**: builds clean (2485 jobs). 7 source sorries (audited
-  2026-06-11) — see "Lean Formalization Status" in `memory/MEMORY.md`:
-  Weyl fine-cell, real-speeds reduction, n=7 hard case, and 4 n=6 BHK
-  residuals (§5, §6, G₄, exceptional pairs).
+- **Lean tree**: builds clean (2703 jobs). **✅ n=6 LRC COMPLETE
+  (2026-06-25)** — `#print axioms intLRC_six` = `[propext, Classical.choice,
+  Quot.sound]`, zero `sorry`; the entire n=6 BHK proof (incl. `exc_open` and
+  both Prop 11 cores) is formally verified, axiom-clean. The remaining Lean
+  sorries (Weyl fine-cell, real-speeds reduction, n=7 hard case) are the
+  general-n / other-small-n frontier and were never part of the n=6 work —
+  see "Lean Formalization Status" in `memory/MEMORY.md`.
 - **Naming conventions (v7+)**: Unit-Complete (not U-FORCE), CG1/CG2 (not Cond
   1/2), floor-reset event (not z=0 event).
 
