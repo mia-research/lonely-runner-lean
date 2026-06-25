@@ -4536,6 +4536,34 @@ lemma bhk_prop11_exc_1_2 (p q r : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
   have hZ : 2 * (r : ℤ) = 2 * q + p := by rw [hmeq] at hm; omega
   exact_mod_cast hZ
 
+/-- **BHK §5 rigidity — `(2, 1)` forces `r = 2p + q`.** The relation `2·p ≡ 1·r (mod q)`
+    gives `q ∣ (r − 2p)`; with `q < r`, `2r < 3q`, `3p < q` we have
+    `r − 2p ∈ (q/3, 3q/2)`, so the only multiple of `q` is `q`. Equivalently
+    `v₄ = (2p+q)/q = 1 + 2v₁` — the line `x = {2y + 1/2}`. -/
+lemma bhk_prop11_exc_2_1 (p q r : ℕ) (hp : 0 < p) (h3p : 3 * p < q)
+    (hrq : q < r) (hr32 : 2 * r < 3 * q) (k : ℤ)
+    (hk1 : Int.fract (((2 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * r / (q : ℝ)))
+    (hk2 : Int.fract (((1 : ℤ) : ℝ) / (q : ℝ)) = Int.fract ((k : ℝ) * p / (q : ℝ))) :
+    r = 2 * p + q := by
+  have hq : 0 < q := by omega
+  have hrel := bhk_prop11_exc_relation p q r hq 2 1 k hk1 hk2
+  have hdvd : (q : ℤ) ∣ ((1 : ℤ) * r - 2 * p) := Int.modEq_iff_dvd.mp hrel
+  rw [one_mul] at hdvd
+  obtain ⟨m, hm⟩ := hdvd
+  have hpz : (p : ℤ) < q := by exact_mod_cast (show p < q by omega)
+  have hpz0 : (0 : ℤ) < p := by exact_mod_cast hp
+  have hrz : (q : ℤ) < r := by exact_mod_cast hrq
+  have hr32z : 2 * (r : ℤ) < 3 * q := by exact_mod_cast hr32
+  have h3pz : 3 * (p : ℤ) < q := by exact_mod_cast h3p
+  have hqz : (0 : ℤ) ≤ q := by positivity
+  have h1 : (q : ℤ) * 0 < q * m := by rw [← hm]; omega
+  have h2 : (q : ℤ) * m < q * 2 := by rw [← hm]; omega
+  have hm0 : 0 < m := lt_of_mul_lt_mul_left h1 hqz
+  have hm2 : m < 2 := lt_of_mul_lt_mul_left h2 hqz
+  have hmeq : m = 1 := by omega
+  have hZ : (r : ℤ) = 2 * p + q := by rw [hmeq] at hm; omega
+  exact_mod_cast hZ
+
 /-- **BHK §5 Case 5.2.9 rigidity — `(1, -2)` forces `2r + p = 3q`.** The relation
     `1·p ≡ −2·r (mod q)` gives `q ∣ (2r + p)`; with `q < r`, `2r < 3q`, `3p < q`
     we have `2r + p ∈ (2q, 4q)`, so the only multiple of `q` is `3q`. Equivalently
@@ -4885,6 +4913,158 @@ lemma bhk_prop11_pent_no_good_red (w : Fin 5 → ℕ) (hmono : StrictMono w) (hp
   · exact hxle
   · rw [c4, c3, c0, e5, egs]; exact mul_le_mul_of_nonneg_left h42a (by positivity)
   · rw [c4, c3, c1, e6, egs]; exact mul_le_mul_of_nonneg_left h42b (by positivity)
+
+set_option maxHeartbeats 800000 in
+/-- **`(2,1)/(4,2)` pentagon six-condition discharge.** Given a grid index `l` whose
+    `p`-coordinate `Y = {p/q(l+½)}` lies in `[1/4, 5/12)` with `Y ≥ 1/3 − rM/2` (h39, passed
+    folded as `h39Y`) and `Y ≤ 1/3 + (q−p)M` (h41), the cone point `({r/q(l+½)}, Y)` lies in
+    the pentagon `P`: rigidity `r = 2p+q` folds `X = {r/q(l+½)} = {2Y+½} = 2Y − 1/2`, and the
+    remaining four conditions (`h40`, `hxle`, `h42a`, `h42b`) follow from `X < 1/3` and
+    `Y ≥ 1/4`. Contradicts `bhk_prop11_pent_no_good_red`. -/
+lemma bhk_prop11_pent_six_from_Y (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q) (hp : 0 < p) (hr : 0 < r) (hs : 0 < s)
+    (hpqlt : p < q) (hr32 : 2 * r < 3 * q) (hrs : r < s)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hrig : r = 2 * p + q) (l : ℤ)
+    (hYlo : 1 / 4 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)))
+    (hYhi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) < 5 / 12)
+    (h39Y : 1 / 6 - (r : ℝ) * (((s : ℝ) - q) / (3 * q * s))
+        ≤ 2 * Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) - 1 / 2)
+    (h41 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))
+        ≤ 1 / 3 + ((q : ℝ) - p) * (((s : ℝ) - q) / (3 * q * s))) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hsR : (0 : ℝ) < (s : ℝ) := by exact_mod_cast hs
+  have hrR : (0 : ℝ) < (r : ℝ) := by exact_mod_cast hr
+  have hpR0 : (0 : ℝ) < p := by exact_mod_cast hp
+  have hpqR : (p : ℝ) < q := by exact_mod_cast hpqlt
+  have hqp : (0 : ℝ) < (q : ℝ) - p := by linarith
+  have hp0 : (p : ℝ) ≠ 0 := hpR0.ne'
+  have hrigR : (r : ℝ) = 2 * (p : ℝ) + q := by exact_mod_cast hrig
+  have hrsR : (r : ℝ) < s := by exact_mod_cast hrs
+  have hr32R : 2 * (r : ℝ) < 3 * q := by exact_mod_cast hr32
+  set Y : ℝ := Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) with hYdef
+  set X : ℝ := Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) with hXdef
+  -- fold X = 2Y − 1/2 (rigidity r = 2p+q ⟹ r/q(l+½) = 2·(p/q(l+½)) + (l+½))
+  have hXeq : X = 2 * Y - 1 / 2 := by
+    have hXarg : (r : ℝ) / q * ((l : ℝ) + 1 / 2)
+        = 2 * ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) + ((l : ℤ) : ℝ) + 1 / 2 := by
+      rw [hrigR]; push_cast; field_simp; ring
+    rw [hXdef, hXarg]
+    have hfa := Int.floor_add_fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))
+    have hsplit : 2 * ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) + ((l : ℤ) : ℝ) + 1 / 2
+        = ((2 * ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + l + 1 : ℤ) : ℝ) + (2 * Y - 1 / 2) := by
+      rw [hYdef] at *; push_cast; linarith [hfa]
+    rw [hsplit, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith [hYlo], by linarith [hYhi]⟩
+  have hX13 : X < 1 / 3 := by rw [hXeq]; linarith [hYhi]
+  have hsq : (q : ℝ) < s := by linarith [hrsR, hrigR, hpR0]
+  have hEpos : 0 < ((s : ℝ) - q) / (3 * q * s) := div_pos (by linarith [hsq]) (by positivity)
+  have ht1 : 1 / (3 * (s : ℝ)) ≤ (5 / 6 - X) / r := by
+    rw [div_le_div_iff₀ (by positivity) hrR]
+    nlinarith [hrsR, hsR, mul_pos (show (0 : ℝ) < 1 / 3 - X by linarith [hX13]) hsR]
+  have htq : 1 / (3 * (q : ℝ)) ≤ (5 / 6 - X) / r := by
+    rw [div_le_div_iff₀ (by positivity) hrR]
+    nlinarith [hr32R, hqR, mul_pos (show (0 : ℝ) < 1 / 3 - X by linarith [hX13]) hqR]
+  have hMq : 1 / (3 * (s : ℝ)) + ((s : ℝ) - q) / (3 * q * s) = 1 / (3 * (q : ℝ)) := by
+    field_simp; ring
+  refine bhk_prop11_pent_no_good_red w hmono hpos hsum hsmall hcover g p q r s hg hq hp hr hs
+    hpqlt c0 c2 c3 c4 l ?_ ?_ ?_ ?_ ?_ ?_
+  · rw [← hXdef, hXeq]; exact h39Y
+  · rw [← hYdef]; nlinarith [hYlo, hEpos, mul_nonneg (le_of_lt hpR0) (le_of_lt hEpos)]
+  · rw [← hYdef]; exact h41
+  · rw [← hXdef, hXeq]; linarith [hYhi]
+  · rw [← hXdef, ← hYdef]
+    have h2 : 0 ≤ (Y - 1 / 6) / p := div_nonneg (by linarith [hYlo]) hpR0.le
+    linarith [ht1, h2]
+  · rw [← hXdef, ← hYdef]
+    rcases le_total Y (1 / 3) with hc | hc
+    · have h2 : 0 ≤ (1 / 3 - Y) / ((q : ℝ) - p) := div_nonneg (by linarith) hqp.le
+      linarith [ht1, h2]
+    · have hub : Y - 1 / 3 ≤ ((q : ℝ) - p) * (((s : ℝ) - q) / (3 * q * s)) := by linarith [h41]
+      have hle : (Y - 1 / 3) / ((q : ℝ) - p) ≤ ((s : ℝ) - q) / (3 * q * s) := by
+        rw [div_le_iff₀ hqp]; linarith [hub, mul_comm ((q : ℝ) - p) (((s : ℝ) - q) / (3 * q * s))]
+      have hterm : -(((s : ℝ) - q) / (3 * q * s)) ≤ (1 / 3 - Y) / ((q : ℝ) - p) := by
+        rw [show (1 : ℝ) / 3 - Y = -(Y - 1 / 3) by ring, neg_div]; linarith [hle]
+      linarith [htq, hterm, hMq]
+
+set_option maxHeartbeats 800000 in
+/-- **BHK §5 `(2,1)` (and `(4,2)` c=2) pentagon kill.** Rigidity `r = 2p+q` puts the cone
+    points `({r/q(l+½)}, {p/q(l+½)})` on the line `X = {2Y+½}` (a `1/q`-grid in `Y`, as
+    `gcd(p,q)=1`). The pentagon segment splits into two regimes by `rM ⋛ 1/6`
+    (`M = (s−q)/(3qs)`): for `rM ≤ 1/6` the window `[1/3−rM/2, +1/q]` (the box bottom h39
+    to top h41, width `(s−q)/(2s) ≥ 1/q` since `s ≥ q+3`); for `rM > 1/6` the window
+    `[1/4, +1/q]` (anchored at the X-branch cutoff). A grid `Y` in either window lands the
+    cone point in `P` via `bhk_prop11_pent_six_from_Y`. -/
+lemma bhk_prop11_exc_2_1_pentkill (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall : 3 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcover : ∀ t : ℝ, ∃ i, circDist ((w i : ℝ) * t) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq18 : 18 ≤ q) (hrig : r = 2 * p + q) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hsR : (0 : ℝ) < (s : ℝ) := by exact_mod_cast (show 0 < s by omega)
+  have hrR : (0 : ℝ) < (r : ℝ) := by exact_mod_cast (show 0 < r by omega)
+  have hpR0 : (0 : ℝ) < p := by exact_mod_cast hp
+  have hpqlt : p < q := by omega
+  have hs3 : q + 3 ≤ s := by omega
+  have hq18R : (18 : ℝ) ≤ q := by exact_mod_cast hq18
+  have h1q18 : 1 / (q : ℝ) ≤ 1 / 18 := by
+    rw [div_le_div_iff₀ hqR (by norm_num)]; linarith
+  have hrigR : (r : ℝ) = 2 * (p : ℝ) + q := by exact_mod_cast hrig
+  have hsq : (q : ℝ) < s := by
+    have hrsR : (r : ℝ) < s := by exact_mod_cast hrs
+    linarith [hrsR, hrigR, hpR0]
+  set M : ℝ := ((s : ℝ) - q) / (3 * q * s) with hM
+  have hMpos : 0 < M := by
+    rw [hM]; exact div_pos (by linarith [hsq]) (by positivity)
+  have hwin : 1 / (q : ℝ) ≤ ((s : ℝ) - q) / (2 * s) := by
+    rw [div_le_div_iff₀ hqR (by linarith [hsR])]
+    have hs3R : (q : ℝ) + 3 ≤ s := by exact_mod_cast hs3
+    nlinarith [mul_nonneg (show (0 : ℝ) ≤ (s : ℝ) - (q + 3) by linarith)
+      (show (0 : ℝ) ≤ (q : ℝ) - 2 by linarith)]
+  have hid : ((q : ℝ) - p) * M + (r : ℝ) * M / 2 = ((s : ℝ) - q) / (2 * s) := by
+    rw [hM, hrigR]; field_simp; ring
+  by_cases hreg : (r : ℝ) * M ≤ 1 / 6
+  · -- regime A: window [1/3 − rM/2, +1/q]
+    obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq p hcop
+      ((p : ℝ) / (2 * q)) (1 / 3 - (r : ℝ) * M / 2) (1 / q) (le_refl _)
+      (by linarith [hreg]) (by nlinarith [hMpos, hrR, h1q18])
+    have harg : (p : ℝ) / (2 * q) + (l : ℝ) * (p : ℝ) / (q : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by field_simp; ring
+    rw [harg] at hl
+    have hY_lo : 1 / 3 - (r : ℝ) * M / 2 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := hl.1
+    have hY_hi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 3 - (r : ℝ) * M / 2 + 1 / q := by
+      have := hl.2; linarith
+    exact bhk_prop11_pent_six_from_Y w hmono hpos hsum hsmall hcover g p q r s hg hq hp
+      (by omega) (by omega) hpqlt hr32 hrs c0 c2 c3 c4 hrig l
+      (by linarith [hY_lo, hreg])
+      (by linarith [hY_hi, mul_pos hrR hMpos, h1q18])
+      (by rw [← hM]; linarith [hY_lo])
+      (by rw [← hM]; linarith [hY_hi, hwin, hid])
+  · -- regime B: window [1/4, +1/q]
+    have hreg' : 1 / 6 < (r : ℝ) * M := not_le.mp hreg
+    obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq p hcop
+      ((p : ℝ) / (2 * q)) (1 / 4) (1 / q) (le_refl _)
+      (by norm_num) (by linarith [h1q18])
+    have harg : (p : ℝ) / (2 * q) + (l : ℝ) * (p : ℝ) / (q : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by field_simp; ring
+    rw [harg] at hl
+    have hY_lo : 1 / 4 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := hl.1
+    have hY_hi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 4 + 1 / q := by
+      have := hl.2; linarith
+    exact bhk_prop11_pent_six_from_Y w hmono hpos hsum hsmall hcover g p q r s hg hq hp
+      (by omega) (by omega) hpqlt hr32 hrs c0 c2 c3 c4 hrig l
+      hY_lo
+      (by linarith [hY_hi, h1q18])
+      (by rw [← hM]; linarith [hY_lo, hreg'])
+      (by rw [← hM]; nlinarith [hY_hi, h1q18, hMpos, mul_nonneg (show (0:ℝ) ≤ (q:ℝ) - p by linarith [show (p:ℝ)<q from by exact_mod_cast hpqlt]) hMpos.le])
 
 set_option maxHeartbeats 400000 in
 /-- **Reusable P-witness kill (`q < 18`, `s`-free).** A witness index `m` whose
@@ -7150,7 +7330,8 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p 
       ¬ (Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 2) ∧
          Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ∈ Set.Icc (1 / 6 : ℝ) (1 / 3)))
     (h14 : i ≠ 0 → j ≠ 0 → (i.natAbs + 1) * (j.natAbs + 1) - 2 ≤ q)
-    (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) (hndiag : r ≠ p + q) :
+    (hne12 : ¬(i = 1 ∧ j = 2)) (hne1n2 : ¬(i = 1 ∧ j = -2)) (hne21 : ¬(i = 2 ∧ j = 1))
+    (hndiag : r ≠ p + q) :
     False := by
   have hq18 : 18 ≤ q := by omega
   have hi_lt : i < 6 := by exact_mod_cast hi6
@@ -7219,7 +7400,7 @@ lemma bhk_prop11_exc_open (p q r : ℕ) (hq30 : 30 ≤ q) (hcop : Nat.Coprime p 
         bhk_prop11_exc_j_zero p q r (by omega) hcop 2 k (by norm_num) (by norm_num) hk1
           (by rw [show (0 : ℝ) = ((0 : ℤ) : ℝ) from by norm_num]; exact hk2)
       norm_num at hI0
-    · sorry -- (2,1)
+    · exact absurd ⟨rfl, rfl⟩ hne21 -- (2,1): peeled to core_q18 (needs the speeds)
     · -- (2,2): the relation forces r = p + q (the diagonal config), contradicting `hndiag`
       have hrel := bhk_prop11_exc_relation p q r (by omega) 2 2 k hk1 hk2
       have hdvd : (q : ℤ) ∣ ((2 : ℤ) * r - 2 * p) := Int.modEq_iff_dvd.mp hrel
@@ -9488,18 +9669,32 @@ theorem bhk_prop11_core_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : �
           bhk_prop11_exc_1_neg2 p q r hp_pos h3p hrq hr32 k hk1 hk2
         exact bhk_prop11_exc_1_neg2_kill w hmono hpos hsum hsmall hcover g p q r s hg_pos
           (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
-      · by_cases hq30 : 30 ≤ q
-        · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-            hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
-        · have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+      · by_cases h21 : i = 2 ∧ j = 1
+        · -- (2,1) exceptional pair: peel to the pentagon kill (needs the speeds)
+          obtain ⟨hi2, hj1⟩ := h21
+          subst hi2; subst hj1
+          have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
           have hrs : r < s := by
             have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
               hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
             have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
             exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
-          exact bhk_prop11_exc_q_18_30 w hmono hpos hsum hsmall hcover g p q r s hg_pos hq18'
-            (by omega) hcop hp_pos h3p hrq hr32 hrs
-            (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
+          have hrig : r = 2 * p + q :=
+            bhk_prop11_exc_2_1 p q r hp_pos h3p hrq hr32 k hk1 hk2
+          exact bhk_prop11_exc_2_1_pentkill w hmono hpos hsum hsmall hcover g p q r s hg_pos
+            (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hrig
+        · by_cases hq30 : 30 ≤ q
+          · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+              hk1 hk2 h_nogood h14 h12 h1n2 h21 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+          · have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+            have hrs : r < s := by
+              have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+                hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+              have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+              exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+            exact bhk_prop11_exc_q_18_30 w hmono hpos hsum hsmall hcover g p q r s hg_pos hq18'
+              (by omega) hcop hp_pos h3p hrq hr32 hrs
+              (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
 /-- **Affine no-wrap band.** If runner `i`'s position is `Kᵢ + fa` at `a` and
     `Kᵢ + fb` at `b` (same integer part `K`, fractional ends `fa ≤ … ≤ fb` inside
@@ -11997,6 +12192,173 @@ lemma bhk_prop11_pent_no_good_red2 (w : Fin 5 → ℕ) (hmono : StrictMono w) (h
   · rw [c4, c3, c0, e5, egs]; exact mul_le_mul_of_nonneg_left h42a (by positivity)
   · rw [c4, c3, c1, e6, egs]; exact mul_le_mul_of_nonneg_left h42b (by positivity)
   · rw [hbr]; exact h43r
+
+set_option maxHeartbeats 800000 in
+/-- **`(2,1)/(4,2)` pentagon six-condition discharge, windowed** (`core2` analog of
+    `bhk_prop11_pent_six_from_Y`). Same fold `X = 2Y − 1/2` and box/slant conditions, plus the
+    `(43)` constraint `Y ≤ 5/12 − p/(3q)` passed as `h43r`; targets `pent_no_good_red2`. -/
+lemma bhk_prop11_pent_six_from_Y2 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q) (hp : 0 < p) (hr : 0 < r) (hs : 0 < s)
+    (hpqlt : p < q) (hr32 : 2 * r < 3 * q) (hrs : r < s)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hrig : r = 2 * p + q) (l : ℤ)
+    (hYlo : 1 / 4 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)))
+    (hYhi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) < 5 / 12)
+    (h39Y : 1 / 6 - (r : ℝ) * (((s : ℝ) - q) / (3 * q * s))
+        ≤ 2 * Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) - 1 / 2)
+    (h41 : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))
+        ≤ 1 / 3 + ((q : ℝ) - p) * (((s : ℝ) - q) / (3 * q * s)))
+    (h43r : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 5 / 12 - (p : ℝ) / (3 * q)) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hsR : (0 : ℝ) < (s : ℝ) := by exact_mod_cast hs
+  have hrR : (0 : ℝ) < (r : ℝ) := by exact_mod_cast hr
+  have hpR0 : (0 : ℝ) < p := by exact_mod_cast hp
+  have hpqR : (p : ℝ) < q := by exact_mod_cast hpqlt
+  have hqp : (0 : ℝ) < (q : ℝ) - p := by linarith
+  have hp0 : (p : ℝ) ≠ 0 := hpR0.ne'
+  have hrigR : (r : ℝ) = 2 * (p : ℝ) + q := by exact_mod_cast hrig
+  have hrsR : (r : ℝ) < s := by exact_mod_cast hrs
+  have hr32R : 2 * (r : ℝ) < 3 * q := by exact_mod_cast hr32
+  set Y : ℝ := Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) with hYdef
+  set X : ℝ := Int.fract ((r : ℝ) / q * ((l : ℝ) + 1 / 2)) with hXdef
+  have hXeq : X = 2 * Y - 1 / 2 := by
+    have hXarg : (r : ℝ) / q * ((l : ℝ) + 1 / 2)
+        = 2 * ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) + ((l : ℤ) : ℝ) + 1 / 2 := by
+      rw [hrigR]; push_cast; field_simp; ring
+    rw [hXdef, hXarg]
+    have hfa := Int.floor_add_fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2))
+    have hsplit : 2 * ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) + ((l : ℤ) : ℝ) + 1 / 2
+        = ((2 * ⌊(p : ℝ) / q * ((l : ℝ) + 1 / 2)⌋ + l + 1 : ℤ) : ℝ) + (2 * Y - 1 / 2) := by
+      rw [hYdef] at *; push_cast; linarith [hfa]
+    rw [hsplit, Int.fract_intCast_add]
+    exact Int.fract_eq_self.mpr ⟨by linarith [hYlo], by linarith [hYhi]⟩
+  have hX13 : X < 1 / 3 := by rw [hXeq]; linarith [hYhi]
+  have hsq : (q : ℝ) < s := by linarith [hrsR, hrigR, hpR0]
+  have hEpos : 0 < ((s : ℝ) - q) / (3 * q * s) := div_pos (by linarith [hsq]) (by positivity)
+  have ht1 : 1 / (3 * (s : ℝ)) ≤ (5 / 6 - X) / r := by
+    rw [div_le_div_iff₀ (by positivity) hrR]
+    nlinarith [hrsR, hsR, mul_pos (show (0 : ℝ) < 1 / 3 - X by linarith [hX13]) hsR]
+  have htq : 1 / (3 * (q : ℝ)) ≤ (5 / 6 - X) / r := by
+    rw [div_le_div_iff₀ (by positivity) hrR]
+    nlinarith [hr32R, hqR, mul_pos (show (0 : ℝ) < 1 / 3 - X by linarith [hX13]) hqR]
+  have hMq : 1 / (3 * (s : ℝ)) + ((s : ℝ) - q) / (3 * q * s) = 1 / (3 * (q : ℝ)) := by
+    field_simp; ring
+  refine bhk_prop11_pent_no_good_red2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg hq hp hr hs
+    hpqlt c0 c2 c3 c4 l ?_ ?_ ?_ ?_ ?_ ?_ ?_
+  · rw [← hXdef, hXeq]; exact h39Y
+  · rw [← hYdef]; nlinarith [hYlo, hEpos, mul_nonneg (le_of_lt hpR0) (le_of_lt hEpos)]
+  · rw [← hYdef]; exact h41
+  · rw [← hXdef, hXeq]; linarith [hYhi]
+  · rw [← hXdef, ← hYdef]
+    have h2 : 0 ≤ (Y - 1 / 6) / p := div_nonneg (by linarith [hYlo]) hpR0.le
+    linarith [ht1, h2]
+  · rw [← hXdef, ← hYdef]
+    rcases le_total Y (1 / 3) with hc | hc
+    · have h2 : 0 ≤ (1 / 3 - Y) / ((q : ℝ) - p) := div_nonneg (by linarith) hqp.le
+      linarith [ht1, h2]
+    · have hub : Y - 1 / 3 ≤ ((q : ℝ) - p) * (((s : ℝ) - q) / (3 * q * s)) := by linarith [h41]
+      have hle : (Y - 1 / 3) / ((q : ℝ) - p) ≤ ((s : ℝ) - q) / (3 * q * s) := by
+        rw [div_le_iff₀ hqp]; linarith [hub, mul_comm ((q : ℝ) - p) (((s : ℝ) - q) / (3 * q * s))]
+      have hterm : -(((s : ℝ) - q) / (3 * q * s)) ≤ (1 / 3 - Y) / ((q : ℝ) - p) := by
+        rw [show (1 : ℝ) / 3 - Y = -(Y - 1 / 3) by ring, neg_div]; linarith [hle]
+      linarith [htq, hterm, hMq]
+  · rw [← hYdef]; exact h43r
+
+set_option maxHeartbeats 800000 in
+/-- **BHK §5 `(2,1)` pentagon kill, windowed** (`core2` analog of
+    `bhk_prop11_exc_2_1_pentkill`). Same two-regime window construction targeting the `P'`
+    pentagon (extra `(43)` constraint); `q ≥ 2p+6` (from `6p < q`, `q ≥ 18`) keeps both
+    windows under `5/12 − p/(3q)`. -/
+lemma bhk_prop11_exc_2_1_pentkill2 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : ∀ i, 0 < w i)
+    (hsum : w ⟨0, by omega⟩ + w ⟨1, by omega⟩ = w ⟨2, by omega⟩)
+    (hsmall6 : 6 * w ⟨0, by omega⟩ < w ⟨2, by omega⟩)
+    (hcov6 : ∀ t : ℝ, (∃ i, circDist ((w i : ℝ) * t) < 1 / 6) ∨
+        circDist (2 * ((w ⟨0, by omega⟩ : ℝ) * t)) < 1 / 6)
+    (g p q r s : ℕ) (hg : 0 < g) (hq : 0 < q)
+    (c0 : (w ⟨0, by omega⟩ : ℝ) = (g : ℝ) * p) (c2 : (w ⟨2, by omega⟩ : ℝ) = (g : ℝ) * q)
+    (c3 : (w ⟨3, by omega⟩ : ℝ) = (g : ℝ) * r) (c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * s)
+    (hcop : Nat.Coprime p q) (hp : 0 < p) (h3p : 3 * p < q) (hrq : q < r) (hr32 : 2 * r < 3 * q)
+    (hrs : r < s) (hq18 : 18 ≤ q) (h6p : 6 * p < q) (hrig : r = 2 * p + q) : False := by
+  have hqR : (0 : ℝ) < q := by exact_mod_cast hq
+  have hsR : (0 : ℝ) < (s : ℝ) := by exact_mod_cast (show 0 < s by omega)
+  have hrR : (0 : ℝ) < (r : ℝ) := by exact_mod_cast (show 0 < r by omega)
+  have hpR0 : (0 : ℝ) < p := by exact_mod_cast hp
+  have hpqlt : p < q := by omega
+  have hs3 : q + 3 ≤ s := by omega
+  have hq18R : (18 : ℝ) ≤ q := by exact_mod_cast hq18
+  have h6pR : 6 * (p : ℝ) < q := by exact_mod_cast h6p
+  have hs3R : (q : ℝ) + 3 ≤ s := by exact_mod_cast hs3
+  have h1q18 : 1 / (q : ℝ) ≤ 1 / 18 := by
+    rw [div_le_div_iff₀ hqR (by norm_num)]; linarith
+  set M : ℝ := ((s : ℝ) - q) / (3 * q * s) with hM
+  have hMpos : 0 < M := by
+    rw [hM]; exact div_pos (by linarith [hsR]) (by positivity)
+  have hrigR : (r : ℝ) = 2 * (p : ℝ) + q := by exact_mod_cast hrig
+  have hwin : 1 / (q : ℝ) ≤ ((s : ℝ) - q) / (2 * s) := by
+    rw [div_le_div_iff₀ hqR (by linarith [hsR])]
+    nlinarith [mul_nonneg (show (0 : ℝ) ≤ (s : ℝ) - (q + 3) by linarith)
+      (show (0 : ℝ) ≤ (q : ℝ) - 2 by linarith)]
+  have hid : ((q : ℝ) - p) * M + (r : ℝ) * M / 2 = ((s : ℝ) - q) / (2 * s) := by
+    rw [hM, hrigR]; field_simp; ring
+  -- (43): regime-A box top stays under 5/12 − p/(3q)
+  have h43A : (1 : ℝ) / 3 - (r : ℝ) * M / 2 + 1 / q ≤ 5 / 12 - (p : ℝ) / (3 * q) := by
+    have key : (0 : ℝ) ≤ (s : ℝ) * (3 * q - 12) - (4 * p * q + 2 * q ^ 2) := by
+      nlinarith [mul_nonneg (show (0 : ℝ) ≤ (s : ℝ) - (q + 3) by linarith)
+        (show (0 : ℝ) ≤ 3 * (q : ℝ) - 12 by linarith), h6pR, hq18R,
+        sq_nonneg ((q : ℝ) - 9),
+        mul_nonneg (show (0 : ℝ) ≤ (q : ℝ) - 6 * p by linarith) (show (0 : ℝ) ≤ (q : ℝ) by positivity)]
+    rw [hM, hrigR, ← sub_nonneg]
+    have hfrac : 5 / 12 - (p : ℝ) / (3 * q)
+          - (1 / 3 - (2 * (p : ℝ) + q) * (((s : ℝ) - q) / (3 * q * s)) / 2 + 1 / q)
+        = ((s : ℝ) * (3 * q - 12) - (4 * p * q + 2 * q ^ 2)) / (12 * q * s) := by
+      field_simp; ring
+    rw [hfrac]; exact div_nonneg key (by positivity)
+  have h43B : (1 : ℝ) / 4 + 1 / q ≤ 5 / 12 - (p : ℝ) / (3 * q) := by
+    rw [← sub_nonneg]
+    have hfrac : 5 / 12 - (p : ℝ) / (3 * q) - (1 / 4 + 1 / q) = ((q : ℝ) - 2 * p - 6) / (6 * q) := by
+      field_simp; ring
+    rw [hfrac]; apply div_nonneg _ (by positivity)
+    have : (2 * (p : ℝ) + 6) ≤ q := by exact_mod_cast (show 2 * p + 6 ≤ q by omega)
+    linarith
+  by_cases hreg : (r : ℝ) * M ≤ 1 / 6
+  · obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq p hcop
+      ((p : ℝ) / (2 * q)) (1 / 3 - (r : ℝ) * M / 2) (1 / q) (le_refl _)
+      (by linarith [hreg]) (by nlinarith [hMpos, hrR, h1q18])
+    have harg : (p : ℝ) / (2 * q) + (l : ℝ) * (p : ℝ) / (q : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by field_simp; ring
+    rw [harg] at hl
+    have hY_lo : 1 / 3 - (r : ℝ) * M / 2 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := hl.1
+    have hY_hi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 3 - (r : ℝ) * M / 2 + 1 / q := by
+      have := hl.2; linarith
+    exact bhk_prop11_pent_six_from_Y2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg hq hp
+      (by omega) (by omega) hpqlt hr32 hrs c0 c2 c3 c4 hrig l
+      (by linarith [hY_lo, hreg])
+      (by linarith [hY_hi, mul_pos hrR hMpos, h1q18])
+      (by rw [← hM]; linarith [hY_lo])
+      (by rw [← hM]; linarith [hY_hi, hwin, hid])
+      (by linarith [hY_hi, h43A])
+  · have hreg' : 1 / 6 < (r : ℝ) * M := not_le.mp hreg
+    obtain ⟨l, hl⟩ := bhk_prop11_grid_hit_coset_step q hq p hcop
+      ((p : ℝ) / (2 * q)) (1 / 4) (1 / q) (le_refl _)
+      (by norm_num) (by linarith [h1q18])
+    have harg : (p : ℝ) / (2 * q) + (l : ℝ) * (p : ℝ) / (q : ℝ)
+        = (p : ℝ) / q * ((l : ℝ) + 1 / 2) := by field_simp; ring
+    rw [harg] at hl
+    have hY_lo : 1 / 4 ≤ Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) := hl.1
+    have hY_hi : Int.fract ((p : ℝ) / q * ((l : ℝ) + 1 / 2)) ≤ 1 / 4 + 1 / q := by
+      have := hl.2; linarith
+    exact bhk_prop11_pent_six_from_Y2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg hq hp
+      (by omega) (by omega) hpqlt hr32 hrs c0 c2 c3 c4 hrig l
+      hY_lo
+      (by linarith [hY_hi, h1q18])
+      (by rw [← hM]; linarith [hY_lo, hreg'])
+      (by rw [← hM]; nlinarith [hY_hi, h1q18, hMpos, mul_nonneg (show (0:ℝ) ≤ (q:ℝ) - p by linarith [show (p:ℝ)<q from by exact_mod_cast hpqlt]) hMpos.le])
+      (by linarith [hY_hi, h43B])
 
 /-- **Cut-width inequality for the `(1,-2)` windowed pentagon kill.** With the
     rigidity `2r+p=3q`, the slant window's right end `Xhi = (5ps+8rs-2rp)/(18qs)`
@@ -14788,19 +15150,37 @@ theorem bhk_prop11_core2_q18 (w : Fin 5 → ℕ) (hmono : StrictMono w) (hpos : 
           exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
         exact bhk_prop11_exc_1_neg2_kill2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos
           (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hsmall6N hrig
-      · by_cases hq30 : 30 ≤ q
-        · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
-            hk1 hk2 h_nogood h14 h12 h1n2 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
-        · -- q ∈ [18,30): windowed finite R/P dispatch
+      · by_cases h21 : i = 2 ∧ j = 1
+        · -- (2,1) exceptional pair: peel to the six-runner pentagon kill
+          obtain ⟨hi2, hj1⟩ := h21
+          subst hi2; subst hj1
           have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
           have hrs : r < s := by
             have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
               hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
             have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
             exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
-          exact bhk_prop11_exc_q_18_30_2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos hq18'
-            (by omega) hcop hp_pos h3p hrq hr32 hrs
-            (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
+          have hsmall6N : 6 * p < q := by
+            have h : g * (6 * p) < g * q := by
+              rw [show g * (6 * p) = 6 * (g * p) from by ring, ← hgp, ← hgq]; exact hsmall6
+            exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+          have hrig : r = 2 * p + q :=
+            bhk_prop11_exc_2_1 p q r hp_pos h3p hrq hr32 k hk1 hk2
+          exact bhk_prop11_exc_2_1_pentkill2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos
+            (by omega) c0 c2 c3 c4 hcop hp_pos h3p hrq hr32 hrs hq18' hsmall6N hrig
+        · by_cases hq30 : 30 ≤ q
+          · exact bhk_prop11_exc_open p q r hq30 hcop hp_pos h3p hrq hr32 i j k h0 h1β hc1 hc2 hne
+              hk1 hk2 h_nogood h14 h12 h1n2 h21 (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring))
+          · -- q ∈ [18,30): windowed finite R/P dispatch
+            have c4 : (w ⟨4, by omega⟩ : ℝ) = (g : ℝ) * (s : ℝ) := by exact_mod_cast hgs
+            have hrs : r < s := by
+              have hw34 : w ⟨3, by omega⟩ < w ⟨4, by omega⟩ :=
+                hmono (Fin.mk_lt_mk.mpr (show (3 : ℕ) < 4 by omega))
+              have h : g * r < g * s := by rw [← hgr, ← hgs]; exact hw34
+              exact lt_of_mul_lt_mul_left h (Nat.zero_le g)
+            exact bhk_prop11_exc_q_18_30_2 w hmono hpos hsum hsmall6 hcov6 g p q r s hg_pos hq18'
+              (by omega) hcop hp_pos h3p hrq hr32 hrs
+              (fun h => hdiag (by rw [hgr, hgp, hgq, h]; ring)) c0 c2 c3 c4 h_nogood
 
 /-- **Affine no-wrap band for a real speed `v`** (the `bhk_away_band` generalization
     used for the fictional runner `2w₀`). -/
