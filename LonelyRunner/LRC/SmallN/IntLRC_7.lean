@@ -2,6 +2,7 @@ import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.Theorem61_BSR
 import LonelyRunner.LRC.Theorem71_LargeSR
 import LonelyRunner.LRC.SmallN.IntLRC_6
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Main
 
 /-!
 # `intLRC 7` — Lonely Runner Conjecture for n = 7
@@ -73,6 +74,9 @@ theorem intLRC_seven : intLRC 7 := by
           congr 2; exact Fin.ext hi5
         rw [heq]; exact ht₀_V
     · push_neg at hLR
-      -- Hard Case: 6·v_1 < V ≤ 6·v_5
-      -- TODO: Barajas-Serra 2008 main result, Prime Filtering Lemma with p=7
-      sorry
+      -- Hard Case: 6·v_1 < V ≤ 6·v_5.
+      -- Barajas–Serra 2008 proves intLRC 7 unconditionally (gcd = 1 + positivity);
+      -- the hard-case bounds are not needed. The single remaining `sorry` is the
+      -- discrete core `IntLRC7BS.bs_discrete`.
+      have h := IntLRC7BS.barajas_serra_seven speeds hmono hpos hgcd
+      simpa using h
