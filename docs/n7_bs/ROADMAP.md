@@ -77,30 +77,33 @@ effective thinking budget high and lose less to compaction).
 6. `Main` — assemble → rewrite `IntLRC_7.lean`'s `sorry` → confirm
    `#print axioms intLRC_seven` = `[propext, Classical.choice, Quot.sound]`.
 
-## OPEN: hard-branch §4 reduction (study before formalizing)
+## Hard branch — architecture (PDF re-read 2026-06-26, comprehension RESOLVED)
 
-The lone `sorry` (`Reduction.bs_discrete_q`, hard branch) needs the §4 reduction,
-whose transcription in `sources_barajas_serra_2008.txt` (L246–261) is unclear and
-must be studied carefully (check the published PDF + companion paper [1], the
-`|D|=4` Prime-Filtering characterization) before formalizing — a wrong reduction
-would poison §5/§6.
+The lone `sorry` is `Reduction.bs_discrete_q` (hard branch). PDF
+`barajas-serra-lonelyseven.pdf` pp.5–11 resolved the transcription:
 
-**Case counts already derived for `|D| = 6, gcd = 1` (hard branch = ∃ j<m,
-|D₇(j)| ≥ 4).** At most one level can have ≥4 elements (two would need ≥8 > 6).
-Let `i₁ < m` be that level; `D₇(0) ≠ ∅` (gcd=1) and `D₇(m) ≠ ∅` (def of m).
-- `i₁ > 0`: forces `|D₇(i₁)| = 4` (|D₇(i₁)|=5 ⟹ |D₇(0)|=0, contra gcd=1), with
-  exactly `|D₇(0)| = 1`, `|D₇(m)| = 1` (so config `1 / 4 / 1` over levels `0 / i₁ / m`).
-- `i₁ = 0`: `|D₇(0)| ∈ {4,5}`; if 5 then one element at level `m` (`5/1`); if 4 then
-  two elements at higher levels.
+- **§4 reduction** (p.6): `D' = {d/7^{i₀} : d ∈ D\D₇(0)}`, `N' = N/7^{i₀}`. Used
+  ONLY for an **interior** big level (`i₁ = i₀`, `0 < i₁ < m`): there the config is
+  `1/4/1` over levels `0/i₁/m`, so `D\D₇(0)` sits entirely at levels `≥ i₀` and
+  `d/7^{i₀}` is integral. It maps to `|D'|=5, |D'₇(0)|=4` (= §5). Lift: any `λ'`
+  solving `D'` lifts to `λ` with `(λ)_N = (λ')_{N'}`, good on levels `≥ i₀`; Cor 3
+  finishes levels `< i₀`.
+- **§5 (`|A|=4`)** = `|D₇(0)|=4`, `|D|=6`: `A=D₇(0)` (4) `+ d₅∈D₇(i₀)` (the one
+  interior extra) `+` any `D₇(m)` elements, which are **preserved** (`|λd|_N≥N/7`,
+  eq (8)) — so it covers the 6th element for free. Three subcases on `|A_s|`
+  (most-popular mod-7 class) ∈ {4,3,2}, each a finite `q`-value chase via (9)/(10).
+- **§6 (`|A|=5, m>1`)** = `|D₇(0)|=5`, `|D|=6` (1 extra at level `m`). LARGE:
+  `e/ẽ` (13), Lemmas 4–9 (compression tools), then cases 6.1–6.6 (Lemmas 10–12).
+  `|A|=5, m≤1` is a separate small case to locate.
 
-**Confusion to resolve:** §5 (`|A|=4`) describes `A=D₇(0)` (4 elts) `+ d₅∈D₇(i₀)`
-= only 5 elements, but our `|D|=6`. So either (a) §4's divide-by-`7^{i₀}` reduces
-`|D|` first, or (b) the `|A|=4` case only arises in a reduced sub-problem. Resolve
-this mapping first. Candidate cleaner architecture (avoids the divide reduction):
-a "modified Cor 3" that compresses the one big level `i₁` via §5/§6 multipliers
-(`Λ_{i₁}`, independent of other levels by `qz_lambda`) while `prime_filtering`
-handles the ≤3 levels — needs the big-level compression stated as
-`∃ λ (product of Λ_{i₁}, Λ₀ elts), q(λ·D₇(i₁)) ∩ {0,6} = ∅`.
+**Case counts (`|D|=6, gcd=1`, hard = ∃ j<m |D₇(j)|≥4):** ≤1 big level (two ⟹ ≥8>6);
+big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D₇(0)|∈{4,5}`.
+
+**Suggested order:** structural facts (unique big level + counts; needs level
+counting over `DZ`) → §5 (moderate, self-contained `q`-chases) → §4 interior
+reduction (or generalize §5 to level `i₁` via `Λ_{i₁}`, `qz_lambda` is level-agnostic)
+→ §6 (the big multi-lemma block). Everything is now expressible in the proven
+`qz` / `single_level_avoid` / `prime_filtering` / `corollary3` language.
 
 ## Verification bar (the `/goal`)
 
