@@ -2,3 +2,16 @@
 __pycache__/
 .DS_Store
 *.egg-info/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+
+# Large generated data (regenerable from scripts)
+prime_power_*_actual_speeds.csv
+
+# Lean build output
+LonelyRunner/.lake/
+**/.lake/

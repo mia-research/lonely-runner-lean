@@ -183,6 +183,10 @@ Source integrity: SHA-256 every claim.
   see "Lean Formalization Status" in `memory/MEMORY.md`.
 - **Naming conventions (v7+)**: Unit-Complete (not U-FORCE), CG1/CG2 (not Cond
   1/2), floor-reset event (not z=0 event).
+- **✅ ACTIVE FRONTIER — n=7 (2026-06-25):** verifying Barajas–Serra 2008 (prime
+  filtering, `p=7`), NOT BHK. `IntLRC_7.lean` reduction is wired; the single
+  `sorry` is the Hard Case `6·v₁ < V ≤ 6·v₅`. Module skeleton in
+  `SmallN/IntLRC_7_BS/`; live status board `docs/n7_bs/ROADMAP.md`. See §11.
 
 ## 9. Decisions Claude makes alone (no need to ask)
 
@@ -197,3 +201,27 @@ Source integrity: SHA-256 every claim.
 - `git push`, force-pushes, branch deletions
 - Modifying the Lean tree's `lakefile.lean` or mathlib pin
 - Deleting files outside `archive/` or `logs/`
+
+## 11. n=7 (Barajas–Serra) project
+
+**Source = Barajas–Serra 2008**, *The Lonely Runner with Seven Runners*, EJC 15
+R48 — on disk `sources_barajas_serra_2008.txt` (SHA-256 in
+`docs/n7_bs/source_integrity.md`). This is a **Prime Filtering** argument with
+`p=7` (7-adic valuation `ν`, position `q`/`r`, multiplier sets `Λ_j`) — a finite
+residue-chasing proof, **structurally unrelated to BHK 2001**. Do NOT try to
+reuse the n=6 BHK geometry; it does not transfer.
+
+- **Live status board: `docs/n7_bs/ROADMAP.md`** — read it at session start;
+  update its status table as files land.
+- **The whole task = discharge ONE `sorry`.** `IntLRC_7.lean` already wires
+  `intLRC_seven` → BSR (`theorem61_BSR`) + Large-SR (`theorem71_LargeSR`) +
+  Hard Case `6·v₁ < V ≤ 6·v₅` (the lone `sorry` = Barajas–Serra main result).
+- **Module skeleton:** `SmallN/IntLRC_7_BS/{Defs,PrimeFiltering,Reduction,
+  Lemmas,Case_A4,Case_A5,Main}.lean`. Edit Lean in place, commit per change,
+  keep files ≤ ~300 lines.
+- **Done-check (the `/goal`):** `cd LonelyRunner && lake build` exits 0 AND
+  `#print axioms intLRC_seven` = `[propext, Classical.choice, Quot.sound]`,
+  zero `sorry`.
+- **No local LLM agents** (restates §0): `delegate`/`gemini`/`proof-check`/
+  `model-status` skills exist in this environment but are FORBIDDEN — Claude Code
+  primitives + the lean4 plugin only.
