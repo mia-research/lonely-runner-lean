@@ -199,4 +199,125 @@ theorem case1_compresses (a : Fin 4 → ZMod 7)
     rw [hfun] at h3
     exact (fits4_translate _ (3 * c)).mp h3
 
+/-! ### Case 2: |A_s| = 3 (three elements with residue `s`, one with `2s` or `4s`)
+
+`A_s = {d₁,d₂,d₃}` (residue `s`) plus `d₄` with residue `2s` or `4s`. The
+compression target is the tighter `ℓ(λ'·A_s) ≤ 4` (window of 4), which leaves
+**two** valid shift positions for `A_s`. Under the `k·s` shift (eq (10), `s` a
+unit, `t := k·s`), `A_s` shifts by `t` and `d₄` by `c·t` with `c = r(d₄)·s⁻¹ ∈ {2,4}`.
+The two shift positions for `A_s` move `d₄` by amounts differing by `2` (or `4`),
+so they cannot both land `d₄` in `{0,6}` — one shift handles all four elements.
+
+Verified computationally (`scratchpad/verify_case2_steps.py`, `verify_case2_avoid.py`):
+steps 1–3 compress to window-4 (0/7³ fails); and for any window-4 `A_s`, any `d₄`
+value, and `c ∈ {2,4}`, some `t` avoids `{0,6}` everywhere (0 fails).
+-/
+
+/-- Window-4 predicate on a 3-tuple (`ℓ ≤ 4`): all coordinates within `{a,…,a+3}`. -/
+def fits3 (q : Fin 3 → ZMod 7) : Prop := ∃ a : ZMod 7, ∀ i, (q i - a).val ≤ 3
+
+instance : DecidablePred fits3 := fun q => by unfold fits3; infer_instance
+
+/-- Translation invariance of `fits3`. -/
+theorem fits3_translate (q : Fin 3 → ZMod 7) (c : ZMod 7) :
+    fits3 (fun i => q i + c) ↔ fits3 q := by
+  constructor
+  · rintro ⟨a, ha⟩
+    refine ⟨a - c, fun i => ?_⟩
+    have h := ha i
+    rw [show q i - (a - c) = q i + c - a by ring]
+    exact h
+  · rintro ⟨a, ha⟩
+    refine ⟨a + c, fun i => ?_⟩
+    have h := ha i
+    show ((q i + c) - (a + c)).val ≤ 3
+    rw [show q i + c - (a + c) = q i - a by ring]
+    exact h
+
+/-- One deterministic carry step on a 3-tuple. -/
+def carryStep3 (a : Fin 3 → ZMod 7) (b : Fin 3 → Bool) (Q : Fin 3 → ZMod 7) :
+    Fin 3 → ZMod 7 :=
+  fun i => Q i + a i + (if b i then 1 else 0)
+
+-- `decide` over the 49 × 64 representatives needs a raised heartbeat budget.
+set_option maxHeartbeats 1000000 in
+/-- **Case 2 compression (representative).** With `a 0 = 0` (`a = ![0,x,y]`), one of
+steps 1, 2, 3 compresses `A_s` to a window of 4. -/
+theorem case2_compress_decide (x y : ZMod 7) (b2 b3 : Fin 3 → Bool) :
+    fits3 ![0, x, y] ∨
+    fits3 (fun i => 2 * (![0, x, y] : Fin 3 → ZMod 7) i + (if b2 i then 1 else 0)) ∨
+    fits3 (fun i => 3 * (![0, x, y] : Fin 3 → ZMod 7) i
+      + (if b2 i then 1 else 0) + (if b3 i then 1 else 0)) := by
+  revert x y b2 b3
+  decide
+
+/-- **Case 2 compression.** The correlated carry sequence for `A_s` (3 elements,
+same residue) reaches a window of 4 by step ≤ 3. Mirror of `case1_compresses`. -/
+theorem case2_compresses (a : Fin 3 → ZMod 7)
+    (Q : ℕ → Fin 3 → ZMod 7) (hQ1 : Q 1 = a)
+    (hstep : ∀ j, 1 ≤ j → ∃ b : Fin 3 → Bool, Q (j + 1) = carryStep3 a b (Q j)) :
+    ∃ j, 1 ≤ j ∧ j ≤ 3 ∧ fits3 (Q j) := by
+  obtain ⟨b2, hb2⟩ := hstep 1 le_rfl
+  obtain ⟨b3, hb3⟩ := hstep 2 (by norm_num)
+  set c : ZMod 7 := - a 0 with hc
+  have ha0 : a 0 + c = 0 := by rw [hc]; ring
+  have hrep : ∀ i, (![0, a 1 + c, a 2 + c] : Fin 3 → ZMod 7) i = a i + c := by
+    intro i; fin_cases i <;> simp [ha0]
+  have hQ2 : Q 2 = fun i => a i + a i + (if b2 i then (1 : ZMod 7) else 0) := by
+    rw [hb2, hQ1]; funext i; simp [carryStep3]
+  have hQ3 : Q 3 = fun i =>
+      a i + a i + (if b2 i then (1 : ZMod 7) else 0) + a i
+        + (if b3 i then (1 : ZMod 7) else 0) := by
+    rw [hb3, hQ2]; funext i; simp [carryStep3]
+  rcases case2_compress_decide (a 1 + c) (a 2 + c) b2 b3 with h1 | h2 | h3
+  · refine ⟨1, le_rfl, by norm_num, ?_⟩
+    rw [hQ1, ← fits3_translate a c]
+    have : (fun i => a i + c) = (![0, a 1 + c, a 2 + c] : Fin 3 → ZMod 7) := by
+      funext i; rw [hrep]
+    rw [this]; exact h1
+  · refine ⟨2, by norm_num, by norm_num, ?_⟩
+    rw [hQ2]
+    have hfun : (fun i => 2 * (![0, a 1 + c, a 2 + c] : Fin 3 → ZMod 7) i
+          + (if b2 i then (1 : ZMod 7) else 0))
+        = (fun i => (a i + a i + (if b2 i then (1 : ZMod 7) else 0)) + 2 * c) := by
+      funext i; rw [hrep]; ring
+    rw [hfun] at h2
+    exact (fits3_translate _ (2 * c)).mp h2
+  · refine ⟨3, by norm_num, by norm_num, ?_⟩
+    rw [hQ3]
+    have hfun : (fun i => 3 * (![0, a 1 + c, a 2 + c] : Fin 3 → ZMod 7) i
+          + (if b2 i then (1 : ZMod 7) else 0) + (if b3 i then (1 : ZMod 7) else 0))
+        = (fun i => (a i + a i + (if b2 i then (1 : ZMod 7) else 0) + a i
+            + (if b3 i then (1 : ZMod 7) else 0)) + 3 * c) := by
+      funext i; rw [hrep]; ring
+    rw [hfun] at h3
+    exact (fits3_translate _ (3 * c)).mp h3
+
+-- `decide` over A : Fin 3 → ZMod 7 (343) × B × c needs raised heartbeats + recursion.
+set_option maxHeartbeats 2000000 in
+set_option maxRecDepth 2000 in
+/-- **Case 2 avoidance.** If `A_s` fits a window of 4, then for any `d₄` value `B`
+and coefficient `c ∈ {2,4}`, some shift `t` places `A_s + t` and `B + c·t` all
+outside `{0,6}`. The window-4 freedom (two shift positions) plus `c ∈ {2,4}` is
+what defeats `d₄`. -/
+theorem case2_avoid_decide (A : Fin 3 → ZMod 7) (B c : ZMod 7)
+    (hA : fits3 A) (hc : c = 2 ∨ c = 4) :
+    ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B + c * t) := by
+  have key : ∀ (A : Fin 3 → ZMod 7) (B c : ZMod 7), fits3 A → (c = 2 ∨ c = 4) →
+      ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B + c * t) := by decide
+  exact key A B c hA hc
+
+/-- **§5 Case 2 (assembly).** For the same-residue triple `A_s` (carry sequence `Q`)
+and the extra element `d₄` (q-values `B`, coefficient `c ∈ {2,4}`), some step
+`j ∈ {1,2,3}` and shift `t` send all four elements outside `{0,6}`. -/
+theorem case2_avoids (a : Fin 3 → ZMod 7)
+    (Q : ℕ → Fin 3 → ZMod 7) (hQ1 : Q 1 = a)
+    (hstep : ∀ j, 1 ≤ j → ∃ b : Fin 3 → Bool, Q (j + 1) = carryStep3 a b (Q j))
+    (B : ℕ → ZMod 7) (c : ZMod 7) (hc : c = 2 ∨ c = 4) :
+    ∃ j, 1 ≤ j ∧ j ≤ 3 ∧ ∃ t : ZMod 7,
+      (∀ i, avoids06 (Q j i + t)) ∧ avoids06 (B j + c * t) := by
+  obtain ⟨j, hj1, hj3, hfit⟩ := case2_compresses a Q hQ1 hstep
+  obtain ⟨t, ht⟩ := case2_avoid_decide (Q j) (B j) c hfit hc
+  exact ⟨j, hj1, hj3, t, ht⟩
+
 end IntLRC7BS
