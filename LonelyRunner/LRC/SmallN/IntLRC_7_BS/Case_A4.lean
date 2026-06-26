@@ -76,6 +76,54 @@ theorem avoidance_of_fitsWindow5 (q : Fin 4 → ZMod 7)
     (by obtain ⟨a, ha⟩ := h; exact ⟨a, ha⟩)
   exact ⟨t, fun i => ht (q i) (Finset.mem_image_of_mem q (Finset.mem_univ i))⟩
 
+/-- Tuple form of `fitsWindow5` (no `Finset`, so kernel-`decide`-friendly): the
+four coordinates `q i` lie in a common window of 5. -/
+def fits4 (q : Fin 4 → ZMod 7) : Prop := ∃ a : ZMod 7, ∀ i, (q i - a).val ≤ 4
+
+instance : DecidablePred fits4 := fun q => by unfold fits4; infer_instance
+
+/-- `fits4` agrees with `fitsWindow5` on the image of a 4-tuple. -/
+theorem fits4_iff (q : Fin 4 → ZMod 7) :
+    fits4 q ↔ fitsWindow5 (Finset.image q Finset.univ) := by
+  constructor
+  · rintro ⟨a, ha⟩
+    refine ⟨a, fun x hx => ?_⟩
+    obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hx
+    exact ha i
+  · rintro ⟨a, ha⟩
+    exact ⟨a, fun i => ha (q i) (Finset.mem_image_of_mem q (Finset.mem_univ i))⟩
+
+/-- **Translation invariance.** Shifting every coordinate by a constant `c`
+preserves `fits4` (the window center moves by `c`). -/
+theorem fits4_translate (q : Fin 4 → ZMod 7) (c : ZMod 7) :
+    fits4 (fun i => q i + c) ↔ fits4 q := by
+  constructor
+  · rintro ⟨a, ha⟩
+    refine ⟨a - c, fun i => ?_⟩
+    have h := ha i
+    rw [show q i - (a - c) = q i + c - a by ring]
+    exact h
+  · rintro ⟨a, ha⟩
+    refine ⟨a + c, fun i => ?_⟩
+    have h := ha i
+    show ((q i + c) - (a + c)).val ≤ 4
+    rw [show q i + c - (a + c) = q i - a by ring]
+    exact h
+
+-- `decide` over the 343 × 256 representatives needs a raised heartbeat budget.
+set_option maxHeartbeats 1000000 in
+/-- **Case 1 finite core (translation representative).** With the base normalized
+to `a 0 = 0` (so `a = ![0, x, y, z]`), one of steps 1, 2, 3 compresses to a window
+of 5, for every choice of carry bits. Proved by `decide` over the `7³ × 2⁴ × 2⁴`
+representatives (the full `7⁴` space is recovered by `fits4_translate`). -/
+theorem case1_decide (x y z : ZMod 7) (b2 b3 : Fin 4 → Bool) :
+    fits4 ![0, x, y, z] ∨
+    fits4 (fun i => 2 * (![0, x, y, z] : Fin 4 → ZMod 7) i + (if b2 i then 1 else 0)) ∨
+    fits4 (fun i => 3 * (![0, x, y, z] : Fin 4 → ZMod 7) i
+      + (if b2 i then 1 else 0) + (if b3 i then 1 else 0)) := by
+  revert x y z b2 b3
+  decide
+
 /-! ### Case 1: |A_s| = 4 (all same residue `s`)
 
 `q(λ'_j · d_i)` evolves by the correlated carry recurrence (Barajas–Serra eq (9),
@@ -107,6 +155,48 @@ theorem case1_compresses (a : Fin 4 → ZMod 7)
     (Q : ℕ → Fin 4 → ZMod 7) (hQ1 : Q 1 = a)
     (hstep : ∀ j, 1 ≤ j → ∃ b : Fin 4 → Bool, Q (j + 1) = carryStep a b (Q j)) :
     ∃ j, 1 ≤ j ∧ j ≤ 5 ∧ fitsWindow5 (Finset.image (Q j) Finset.univ) := by
-  sorry
+  classical
+  obtain ⟨b2, hb2⟩ := hstep 1 le_rfl
+  obtain ⟨b3, hb3⟩ := hstep 2 (by norm_num)
+  -- translation constant normalizing `a 0` to `0`
+  set c : ZMod 7 := - a 0 with hc
+  have ha0 : a 0 + c = 0 := by rw [hc]; ring
+  -- representative: `(fun i => a i + c) = ![0, a 1 + c, a 2 + c, a 3 + c]`
+  have hrep : ∀ i, (![0, a 1 + c, a 2 + c, a 3 + c] : Fin 4 → ZMod 7) i = a i + c := by
+    intro i; fin_cases i <;> simp [ha0]
+  -- explicit values at steps 2 and 3 (carry recurrence)
+  have hQ2 : Q 2 = fun i => a i + a i + (if b2 i then (1 : ZMod 7) else 0) := by
+    rw [hb2, hQ1]; funext i; simp [carryStep]
+  have hQ3 : Q 3 = fun i =>
+      a i + a i + (if b2 i then (1 : ZMod 7) else 0) + a i
+        + (if b3 i then (1 : ZMod 7) else 0) := by
+    rw [hb3, hQ2]; funext i; simp [carryStep]
+  -- the finite compression fact for the representative
+  rcases case1_decide (a 1 + c) (a 2 + c) (a 3 + c) b2 b3 with h1 | h2 | h3
+  · -- step 1
+    refine ⟨1, le_rfl, by norm_num, ?_⟩
+    rw [← fits4_iff, hQ1, ← fits4_translate a c]
+    have : (fun i => a i + c) = (![0, a 1 + c, a 2 + c, a 3 + c] : Fin 4 → ZMod 7) := by
+      funext i; rw [hrep]
+    rw [this]; exact h1
+  · -- step 2
+    refine ⟨2, by norm_num, by norm_num, ?_⟩
+    rw [← fits4_iff, hQ2]
+    have hfun : (fun i => 2 * (![0, a 1 + c, a 2 + c, a 3 + c] : Fin 4 → ZMod 7) i
+          + (if b2 i then (1 : ZMod 7) else 0))
+        = (fun i => (a i + a i + (if b2 i then (1 : ZMod 7) else 0)) + 2 * c) := by
+      funext i; rw [hrep]; ring
+    rw [hfun] at h2
+    exact (fits4_translate _ (2 * c)).mp h2
+  · -- step 3
+    refine ⟨3, by norm_num, by norm_num, ?_⟩
+    rw [← fits4_iff, hQ3]
+    have hfun : (fun i => 3 * (![0, a 1 + c, a 2 + c, a 3 + c] : Fin 4 → ZMod 7) i
+          + (if b2 i then (1 : ZMod 7) else 0) + (if b3 i then (1 : ZMod 7) else 0))
+        = (fun i => (a i + a i + (if b2 i then (1 : ZMod 7) else 0) + a i
+            + (if b3 i then (1 : ZMod 7) else 0)) + 3 * c) := by
+      funext i; rw [hrep]; ring
+    rw [hfun] at h3
+    exact (fits4_translate _ (3 * c)).mp h3
 
 end IntLRC7BS
