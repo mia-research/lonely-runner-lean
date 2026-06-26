@@ -178,10 +178,10 @@ theorem circDist_ge_of_qval (m : ℕ) (x : ℤ)
   have hRhi : R ≤ 6 * (7 ^ m : ℤ) := by linarith [hdm, hsP, hPq5]
   exact circDist_ge_of_residue m x hRlo hRhi
 
-/-- **Carry lemma.** For non-negative integers, `qz m (x + y)` is either
-`qz m x + qz m y` or `qz m x + qz m y + 1` in `ZMod 7`. This is the
-formalization of equation (9)'s carry term. -/
-theorem qz_add_carry (m : ℕ) (x y : ℤ) (hx : 0 ≤ x) (hy : 0 ≤ y) :
+/-- **Carry lemma.** `qz m (x + y)` is either `qz m x + qz m y` or
+`qz m x + qz m y + 1` in `ZMod 7`, for **any** integers (Euclidean `ediv`
+always yields `0 ≤ remainder < 7^m`). Formalizes equation (9)'s carry term. -/
+theorem qz_add_carry (m : ℕ) (x y : ℤ) :
     qz m (x + y) = qz m x + qz m y ∨
     qz m (x + y) = qz m x + qz m y + 1 := by
   have hP : (0 : ℤ) < 7 ^ m := by positivity
@@ -189,8 +189,8 @@ theorem qz_add_carry (m : ℕ) (x y : ℤ) (hx : 0 ≤ x) (hy : 0 ≤ y) :
   -- Write x = P·qx + rx, y = P·qy + ry (Euclidean)
   set P := (7 : ℤ) ^ m
   set qx := x / P; set qy := y / P
-  have hxe : P * qx + x % P = x := Int.ediv_add_emod x P
-  have hye : P * qy + y % P = y := Int.ediv_add_emod y P
+  have hxe : P * qx + x % P = x := Int.mul_ediv_add_emod x P
+  have hye : P * qy + y % P = y := Int.mul_ediv_add_emod y P
   have hrx0 : 0 ≤ x % P := Int.emod_nonneg x hPne
   have hry0 : 0 ≤ y % P := Int.emod_nonneg y hPne
   have hrxP : x % P < P := Int.emod_lt_of_pos x hP
@@ -217,5 +217,28 @@ theorem qz_add_carry (m : ℕ) (x y : ℤ) (hx : 0 ≤ x) (hy : 0 ≤ y) :
       rw [Int.add_mul_ediv_left _ _ hPne]
       rw [Int.ediv_eq_zero_of_lt (by omega) hlt2, zero_add]
     unfold qz; rw [hq]; push_cast; ring
+
+/-- **Multiplicative carry bound — equation (9) engine.** For `n ≥ 1` and a
+non-negative integer `x`, `qz m (n·x) = n · qz m x + c` in `ZMod 7`, where the
+carry `c` is the cast of a natural number `cn < n`.
+
+This is Barajas–Serra (9) in multiplicative form: since `λ'_j · d = j · (λ'_1 · d)`,
+applying it with `x = λ'_1 · d` gives `q(λ'_j·d) ∈ j·q(λ'_1·d) + {0,…,j-1}`. -/
+theorem qz_mul_carry (m : ℕ) (n : ℕ) (hn : 1 ≤ n) (x : ℤ) :
+    ∃ cn : ℕ, cn < n ∧ qz m ((n : ℤ) * x) = (n : ZMod 7) * qz m x + (cn : ZMod 7) := by
+  induction n, hn using Nat.le_induction with
+  | base =>
+    exact ⟨0, by norm_num, by push_cast; ring_nf⟩
+  | succ k hk ih =>
+    obtain ⟨cn, hcnlt, hcneq⟩ := ih
+    have hsplit : ((k + 1 : ℕ) : ℤ) * x = (k : ℤ) * x + x := by push_cast; ring
+    rw [hsplit]
+    rcases qz_add_carry m ((k : ℤ) * x) x with h | h
+    · -- no carry: same cn
+      refine ⟨cn, by omega, ?_⟩
+      rw [h, hcneq]; push_cast; ring
+    · -- carry of 1: cn + 1
+      refine ⟨cn + 1, by omega, ?_⟩
+      rw [h, hcneq]; push_cast; ring
 
 end IntLRC7BS
