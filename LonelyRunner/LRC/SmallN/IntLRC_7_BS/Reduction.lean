@@ -51,8 +51,19 @@ theorem bs_discrete_q
     obtain ⟨lam, _hlam, hband⟩ := corollary3 m DZ hmax hsmall
     exact ⟨m, lam, fun i =>
       hband (D i : ℤ) (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i))⟩
-  · -- hard branch: some level `j < m` has `≥ 4` elements ⟹ `|D₇(0)| ∈ {4,5}`.
-    -- The §4 reduction (divide by `7^{i₀}`) + §5/§6 case analysis. TODO.
-    sorry
+  · -- hard branch: some level `j₀ < m` has `≥ 4` elements.
+    push_neg at hsmall
+    obtain ⟨j₀, hj₀m, hj₀big⟩ := hsmall
+    have hj₀card : 4 ≤ (DZ.filter (fun d => (7 : ℤ) ^ j₀ ∣ d ∧
+        ¬ (7 : ℤ) ^ (j₀ + 1) ∣ d)).card := by omega
+    -- Case split: j₀ = 0 (big level at bottom → §5/§6 directly)
+    --         vs  j₀ > 0 (interior big level → §4 reduction → §5)
+    rcases eq_or_ne j₀ 0 with rfl | hj₀ne
+    · -- j₀ = 0: |D₇(0)| ≥ 4, i.e. ≥ 4 elements not divisible by 7.
+      -- With |D| = 6, |D₇(0)| ∈ {4, 5, 6}. §5 handles 4, §6 handles 5.
+      sorry
+    · -- j₀ > 0: interior big level. §4 reduction divides by 7^{j₀},
+      -- reducing to |D'₇(0)| = |D₇(j₀)| ≥ 4 with fewer total elements.
+      sorry
 
 end IntLRC7BS

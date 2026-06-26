@@ -178,4 +178,44 @@ theorem circDist_ge_of_qval (m : ℕ) (x : ℤ)
   have hRhi : R ≤ 6 * (7 ^ m : ℤ) := by linarith [hdm, hsP, hPq5]
   exact circDist_ge_of_residue m x hRlo hRhi
 
+/-- **Carry lemma.** For non-negative integers, `qz m (x + y)` is either
+`qz m x + qz m y` or `qz m x + qz m y + 1` in `ZMod 7`. This is the
+formalization of equation (9)'s carry term. -/
+theorem qz_add_carry (m : ℕ) (x y : ℤ) (hx : 0 ≤ x) (hy : 0 ≤ y) :
+    qz m (x + y) = qz m x + qz m y ∨
+    qz m (x + y) = qz m x + qz m y + 1 := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have hPne : (7 : ℤ) ^ m ≠ 0 := ne_of_gt hP
+  -- Write x = P·qx + rx, y = P·qy + ry (Euclidean)
+  set P := (7 : ℤ) ^ m
+  set qx := x / P; set qy := y / P
+  have hxe : P * qx + x % P = x := Int.ediv_add_emod x P
+  have hye : P * qy + y % P = y := Int.ediv_add_emod y P
+  have hrx0 : 0 ≤ x % P := Int.emod_nonneg x hPne
+  have hry0 : 0 ≤ y % P := Int.emod_nonneg y hPne
+  have hrxP : x % P < P := Int.emod_lt_of_pos x hP
+  have hryP : y % P < P := Int.emod_lt_of_pos y hP
+  -- x + y = P·(qx + qy) + (rx + ry); the remainder may overflow
+  have hsum : x + y = P * (qx + qy) + (x % P + y % P) := by linarith
+  rcases le_or_gt (x % P + y % P) (P - 1) with hlt | hge
+  · -- no carry: rx + ry < P
+    left
+    have hlt' : x % P + y % P < P := by omega
+    have hq : (x + y) / P = qx + qy := by
+      rw [hsum, show P * (qx + qy) + (x % P + y % P)
+            = x % P + y % P + P * (qx + qy) by ring]
+      rw [Int.add_mul_ediv_left _ _ hPne]
+      rw [Int.ediv_eq_zero_of_lt (by linarith) hlt', zero_add]
+    unfold qz; rw [hq]; push_cast; ring
+  · -- carry: rx + ry ≥ P
+    right
+    have hge' : P ≤ x % P + y % P := by omega
+    have hlt2 : x % P + y % P - P < P := by omega
+    have hq : (x + y) / P = qx + qy + 1 := by
+      rw [hsum, show P * (qx + qy) + (x % P + y % P)
+            = (x % P + y % P - P) + P * (qx + qy + 1) by ring]
+      rw [Int.add_mul_ediv_left _ _ hPne]
+      rw [Int.ediv_eq_zero_of_lt (by omega) hlt2, zero_add]
+    unfold qz; rw [hq]; push_cast; ring
+
 end IntLRC7BS
