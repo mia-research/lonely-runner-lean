@@ -241,4 +241,26 @@ theorem qz_mul_carry (m : ℕ) (n : ℕ) (hn : 1 ≤ n) (x : ℤ) :
       refine ⟨cn + 1, by omega, ?_⟩
       rw [h, hcneq]; push_cast; ring
 
+/-- **Additive carry across multiplier steps (the `hadd` provider).** For the
+q-sequence `Q j := qz m (j·x)`, any split `j + l` satisfies the carry relation
+`Q(j+l) ∈ {Q j + Q l, +1}`, since `(j+l)·x = j·x + l·x` and `qz_add_carry` applies.
+This is exactly the hypothesis consumed by the §5 Case 1/2/3 compression lemmas. -/
+theorem qz_seq_hadd (m : ℕ) (x : ℤ) (j l : ℕ) :
+    qz m (((j + l : ℕ) : ℤ) * x) = qz m ((j : ℤ) * x) + qz m ((l : ℤ) * x)
+      ∨ qz m (((j + l : ℕ) : ℤ) * x) = qz m ((j : ℤ) * x) + qz m ((l : ℤ) * x) + 1 := by
+  have hsplit : ((j + l : ℕ) : ℤ) * x = (j : ℤ) * x + (l : ℤ) * x := by push_cast; ring
+  rw [hsplit]
+  exact qz_add_carry m ((j : ℤ) * x) ((l : ℤ) * x)
+
+/-- **Equation (10) — the `Λ₀` shift.** The multiplier `1 + k·7^m` shifts the arc
+index of `y` by `k · r(y)` where `r(y) = (y : ZMod 7)`:
+`q((1 + k·7^m)·y) = q(y) + k·(y : ZMod 7)`. This is `qz_lambda` at level `j = 0`.
+For the §5 assembly: applied to `y = j·x`, the shift `k·(j·x mod 7)` is uniform
+across a residue class and ranges over all of `ZMod 7` (since `j·x mod 7` is a unit),
+so the abstract `∃ t` (the case lemmas) becomes the integer multiplier `∃ k`. -/
+theorem qz_shift0 (m : ℕ) (k y : ℤ) :
+    qz m ((1 + k * 7 ^ m) * y) = qz m y + (k : ZMod 7) * (y : ZMod 7) := by
+  have h := qz_lambda m 0 (Nat.zero_le m) k y (one_dvd y)
+  simpa using h
+
 end IntLRC7BS
