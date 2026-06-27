@@ -320,4 +320,147 @@ theorem case2_avoids (a : Fin 3 → ZMod 7)
   obtain ⟨t, ht⟩ := case2_avoid_decide (Q j) (B j) c hfit hc
   exact ⟨j, hj1, hj3, t, ht⟩
 
+/-! ### Case 3: |A_s| = 2 (two elements with residue `s`, two more with `2s`/`4s`)
+
+The compression target is the tightest `ℓ(λ'·A_s) ≤ 2` (window of 2), giving
+**four** valid shift positions. The simple consecutive-carry recurrence is too
+weak here (Case 3 fails it); the faithful structure is `cn_j = ⌊j·φ⌋` for one
+`φ ∈ [0,1)`, which is exactly the **superadditive** constraints from `qz_add_carry`
+on the splits `1+1, 2+1, 3+1, 2+2, 4+1, 2+3`. These pin the 10 real carry patterns,
+and compression to window-2 needs all of steps 1–5.
+
+The two extra elements have coefficients `(c₁,c₂) ∈ {(2,2),(2,4),(4,2)}` — NOT
+`(4,4)` (which would tie `4s` as most-popular). The window-2 freedom plus this
+exclusion gives `∃ t`. All verified computationally (`verify_case3_*.py`).
+-/
+
+/-- Window-2 predicate on a pair (`ℓ ≤ 2`): both coordinates within `{a, a+1}`. -/
+def fits2 (q : Fin 2 → ZMod 7) : Prop := ∃ a : ZMod 7, ∀ i, (q i - a).val ≤ 1
+
+instance : DecidablePred fits2 := fun q => by unfold fits2; infer_instance
+
+/-- Carry bit as a `ZMod 7` value. -/
+def cbit (b : Bool) : ZMod 7 := if b then 1 else 0
+
+/-- Step-2 q-values from base `a` and carry bit `d2`. -/
+def s3v2 (a : Fin 2 → ZMod 7) (d2 : Fin 2 → Bool) : Fin 2 → ZMod 7 :=
+  fun i => 2 * a i + cbit (d2 i)
+/-- Step-3 q-values. -/
+def s3v3 (a : Fin 2 → ZMod 7) (d2 d3 : Fin 2 → Bool) : Fin 2 → ZMod 7 :=
+  fun i => s3v2 a d2 i + a i + cbit (d3 i)
+/-- Step-4 q-values. -/
+def s3v4 (a : Fin 2 → ZMod 7) (d2 d3 d4 : Fin 2 → Bool) : Fin 2 → ZMod 7 :=
+  fun i => s3v3 a d2 d3 i + a i + cbit (d4 i)
+/-- Step-5 q-values. -/
+def s3v5 (a : Fin 2 → ZMod 7) (d2 d3 d4 d5 : Fin 2 → Bool) : Fin 2 → ZMod 7 :=
+  fun i => s3v4 a d2 d3 d4 i + a i + cbit (d5 i)
+
+-- `decide` over 49 × 4⁴ representatives needs raised heartbeats + recursion depth.
+set_option maxHeartbeats 2000000 in
+set_option maxRecDepth 4000 in
+/-- **Case 3 compression (finite core).** With the consecutive carry bits
+`d2,…,d5` and the two superadditive consistency constraints (`Q₄ = 2Q₂ + {0,1}`
+from split `2+2`, `Q₅ = Q₂+Q₃ + {0,1}` from split `2+3`), one of steps 1–5
+compresses the pair to a window of 2. -/
+theorem case3_compress_decide (a : Fin 2 → ZMod 7) (d2 d3 d4 d5 : Fin 2 → Bool)
+    (hc4 : ∀ i, s3v4 a d2 d3 d4 i = s3v2 a d2 i + s3v2 a d2 i
+        ∨ s3v4 a d2 d3 d4 i = s3v2 a d2 i + s3v2 a d2 i + 1)
+    (hc5 : ∀ i, s3v5 a d2 d3 d4 d5 i = s3v2 a d2 i + s3v3 a d2 d3 i
+        ∨ s3v5 a d2 d3 d4 d5 i = s3v2 a d2 i + s3v3 a d2 d3 i + 1) :
+    fits2 a ∨ fits2 (s3v2 a d2) ∨ fits2 (s3v3 a d2 d3) ∨
+      fits2 (s3v4 a d2 d3 d4) ∨ fits2 (s3v5 a d2 d3 d4 d5) := by
+  revert a d2 d3 d4 d5
+  decide
+
+/-- Extract a carry bit from a `x = base ∨ x = base + 1` disjunction. -/
+private lemma extract_bit (x base : ZMod 7) (h : x = base ∨ x = base + 1) :
+    ∃ b : Bool, x = base + cbit b := by
+  rcases h with h | h
+  · exact ⟨false, by rw [h, cbit]; simp⟩
+  · exact ⟨true, by rw [h, cbit]; simp⟩
+
+/-- **Case 3 compression.** For the same-residue pair `A_s` (q-values `Q`) whose
+multiplier q-values satisfy the additive carry relation (`qz_add_carry` on every
+split), some step `j ∈ {1,…,5}` compresses `A_s` to a window of 2. -/
+theorem case3_compresses (a : Fin 2 → ZMod 7)
+    (Q : ℕ → Fin 2 → ZMod 7) (hQ1 : Q 1 = a)
+    (hadd : ∀ j k, 1 ≤ j → 1 ≤ k → ∀ i,
+      Q (j + k) i = Q j i + Q k i ∨ Q (j + k) i = Q j i + Q k i + 1) :
+    ∃ j, 1 ≤ j ∧ j ≤ 5 ∧ fits2 (Q j) := by
+  classical
+  -- extract consecutive carry bits via the splits 1+1, 2+1, 3+1, 4+1
+  choose d2 hd2 using fun i =>
+    extract_bit (Q 2 i) (Q 1 i + Q 1 i) (hadd 1 1 (by norm_num) (by norm_num) i)
+  choose d3 hd3 using fun i =>
+    extract_bit (Q 3 i) (Q 2 i + Q 1 i) (hadd 2 1 (by norm_num) (by norm_num) i)
+  choose d4 hd4 using fun i =>
+    extract_bit (Q 4 i) (Q 3 i + Q 1 i) (hadd 3 1 (by norm_num) (by norm_num) i)
+  choose d5 hd5 using fun i =>
+    extract_bit (Q 5 i) (Q 4 i + Q 1 i) (hadd 4 1 (by norm_num) (by norm_num) i)
+  -- identify the q-values at each step with the parametrized step functions
+  have hQ2 : Q 2 = s3v2 a d2 := by
+    funext i; simp only [s3v2, hd2, hQ1]; ring
+  have hQ3 : Q 3 = s3v3 a d2 d3 := by
+    funext i; simp only [s3v3, s3v2, hd3, hd2, hQ1]; ring
+  have hQ4 : Q 4 = s3v4 a d2 d3 d4 := by
+    funext i; simp only [s3v4, s3v3, s3v2, hd4, hd3, hd2, hQ1]; ring
+  have hQ5 : Q 5 = s3v5 a d2 d3 d4 d5 := by
+    funext i; simp only [s3v5, s3v4, s3v3, s3v2, hd5, hd4, hd3, hd2, hQ1]; ring
+  -- the two superadditive consistency constraints (splits 2+2 and 2+3)
+  have hc4 : ∀ i, s3v4 a d2 d3 d4 i = s3v2 a d2 i + s3v2 a d2 i
+      ∨ s3v4 a d2 d3 d4 i = s3v2 a d2 i + s3v2 a d2 i + 1 := by
+    intro i; rw [← hQ4, ← hQ2]; exact hadd 2 2 (by norm_num) (by norm_num) i
+  have hc5 : ∀ i, s3v5 a d2 d3 d4 d5 i = s3v2 a d2 i + s3v3 a d2 d3 i
+      ∨ s3v5 a d2 d3 d4 d5 i = s3v2 a d2 i + s3v3 a d2 d3 i + 1 := by
+    intro i; rw [← hQ5, ← hQ2, ← hQ3]; exact hadd 2 3 (by norm_num) (by norm_num) i
+  -- apply the finite compression core
+  rcases case3_compress_decide a d2 d3 d4 d5 hc4 hc5 with h | h | h | h | h
+  · exact ⟨1, by norm_num, by norm_num, by rw [hQ1]; exact h⟩
+  · exact ⟨2, by norm_num, by norm_num, by rw [hQ2]; exact h⟩
+  · exact ⟨3, by norm_num, by norm_num, by rw [hQ3]; exact h⟩
+  · exact ⟨4, by norm_num, by norm_num, by rw [hQ4]; exact h⟩
+  · exact ⟨5, by norm_num, by norm_num, by rw [hQ5]; exact h⟩
+
+-- three per-config `decide`s over A (49) × B₁ × B₂ (7 each); raised budgets.
+set_option maxHeartbeats 2000000 in
+set_option maxRecDepth 2000 in
+/-- **Case 3 avoidance.** If `A_s` fits a window of 2, then for the two extra
+elements (q-values `B₁,B₂`, coefficients `(c₁,c₂) ∈ {(2,2),(2,4),(4,2)}` — the
+`(4,4)` config is excluded since `A_s` is most-popular), some shift `t` places all
+four outside `{0,6}`. -/
+theorem case3_avoid_decide (A : Fin 2 → ZMod 7) (B1 B2 c1 c2 : ZMod 7)
+    (hA : fits2 A)
+    (hconfig : (c1 = 2 ∧ c2 = 2) ∨ (c1 = 2 ∧ c2 = 4) ∨ (c1 = 4 ∧ c2 = 2)) :
+    ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B1 + c1 * t)
+      ∧ avoids06 (B2 + c2 * t) := by
+  have key22 : ∀ (A : Fin 2 → ZMod 7) (B1 B2 : ZMod 7), fits2 A →
+      ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B1 + 2 * t)
+        ∧ avoids06 (B2 + 2 * t) := by decide
+  have key24 : ∀ (A : Fin 2 → ZMod 7) (B1 B2 : ZMod 7), fits2 A →
+      ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B1 + 2 * t)
+        ∧ avoids06 (B2 + 4 * t) := by decide
+  have key42 : ∀ (A : Fin 2 → ZMod 7) (B1 B2 : ZMod 7), fits2 A →
+      ∃ t : ZMod 7, (∀ i, avoids06 (A i + t)) ∧ avoids06 (B1 + 4 * t)
+        ∧ avoids06 (B2 + 2 * t) := by decide
+  rcases hconfig with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · subst h1 h2; exact key22 A B1 B2 hA
+  · subst h1 h2; exact key24 A B1 B2 hA
+  · subst h1 h2; exact key42 A B1 B2 hA
+
+/-- **§5 Case 3 (assembly).** For the same-residue pair `A_s` (q-values `Q`, additive
+carry relation) and the two extra elements (q-values `B₁,B₂`, coefficients `c₁,c₂`
+in the valid configs), some step `j ∈ {1,…,5}` and shift `t` send all four elements
+outside `{0,6}`. -/
+theorem case3_avoids (a : Fin 2 → ZMod 7)
+    (Q : ℕ → Fin 2 → ZMod 7) (hQ1 : Q 1 = a)
+    (hadd : ∀ j k, 1 ≤ j → 1 ≤ k → ∀ i,
+      Q (j + k) i = Q j i + Q k i ∨ Q (j + k) i = Q j i + Q k i + 1)
+    (B1 B2 : ℕ → ZMod 7) (c1 c2 : ZMod 7)
+    (hconfig : (c1 = 2 ∧ c2 = 2) ∨ (c1 = 2 ∧ c2 = 4) ∨ (c1 = 4 ∧ c2 = 2)) :
+    ∃ j, 1 ≤ j ∧ j ≤ 5 ∧ ∃ t : ZMod 7,
+      (∀ i, avoids06 (Q j i + t)) ∧ avoids06 (B1 j + c1 * t) ∧ avoids06 (B2 j + c2 * t) := by
+  obtain ⟨j, hj1, hj5, hfit⟩ := case3_compresses a Q hQ1 hadd
+  obtain ⟨t, ht⟩ := case3_avoid_decide (Q j) (B1 j) (B2 j) c1 c2 hfit hconfig
+  exact ⟨j, hj1, hj5, t, ht⟩
+
 end IntLRC7BS
