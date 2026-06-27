@@ -79,6 +79,21 @@ theorem lam_unit (m : ℕ) (hm : 0 < m) (k : ℤ) (j : ℕ) (hj1 : 1 ≤ j) (hj5
   · have : (j : ℤ) % 7 = 0 := Int.emod_eq_zero_of_dvd h2
     omega
 
+/-- The multiplier `(1+k·7^m)·j` avoids `{0,6}` as a `ZMod 7` value:
+`(1+k·7^m : ZMod 7) = 1` (for `m ≥ 1`), so `(lam : ZMod 7) = (j : ZMod 7) ∈ {1,...,5}`. -/
+theorem lam_avoids06 (m : ℕ) (hm : 0 < m) (k : ℤ) (j : ℕ) (hj1 : 1 ≤ j) (hj5 : j ≤ 5) :
+    avoids06 (((1 + k * 7 ^ m) * (j : ℤ) : ℤ) : ZMod 7) := by
+  have hlam : (((1 + k * 7 ^ m) * (j : ℤ) : ℤ) : ZMod 7) = (j : ZMod 7) := by
+    have : ((7 : ℤ) : ZMod 7) = 0 := by decide
+    push_cast
+    rw [show (7 : ZMod 7) ^ m = 0 from by rw [show (7 : ZMod 7) = 0 from by decide]; exact zero_pow (by omega)]
+    ring
+  rw [hlam]
+  refine ⟨?_, ?_⟩
+  · rw [Ne, ZMod.natCast_eq_zero_iff]; omega
+  · have key : ∀ n : ℕ, 1 ≤ n → n ≤ 5 → (n : ZMod 7) ≠ 6 := by decide
+    exact key j hj1 hj5
+
 /-! ### Band symmetry under negation -/
 
 /-- The central residue band is symmetric: `band(x) ⟺ band(-x)`. -/
@@ -123,7 +138,7 @@ Proof: `case1_compresses` → `avoidance_of_fitsWindow5` → `qz_shift0`. -/
 theorem case1_int_avoid (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
     (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hsame : ∀ i, (d i : ZMod 7) = (d 0 : ZMod 7)) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ avoids06 ((lam : ℤ) : ZMod 7) ∧
       ∀ i, avoids06 (qz m (lam * d i)) := by
   classical
   set a : Fin 4 → ZMod 7 := fun i => qz m (d i)
@@ -149,7 +164,7 @@ theorem case1_int_avoid (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
   -- integer lift
   set k_int : ℤ := (k.val : ℤ)
   set lam : ℤ := (1 + k_int * 7 ^ m) * (j : ℤ)
-  refine ⟨lam, lam_unit m hm k_int j hj1 hj5, fun i => ?_⟩
+  refine ⟨lam, lam_unit m hm k_int j hj1 hj5, lam_avoids06 m hm k_int j hj1 hj5, fun i => ?_⟩
   -- qz m (lam * d i) = Q j i + t
   have hrw : lam * d i = (1 + k_int * 7 ^ m) * ((j : ℤ) * d i) := by ring
   rw [hrw, qz_shift0]
@@ -173,7 +188,7 @@ theorem case2_int_avoid (m : ℕ) (hm : 0 < m)
     (hsame : ∀ i, (d_s i : ZMod 7) = (d_s 0 : ZMod 7))
     (hc : (d_e : ZMod 7) * ((d_s 0 : ZMod 7))⁻¹ = 2 ∨
            (d_e : ZMod 7) * ((d_s 0 : ZMod 7))⁻¹ = 4) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ avoids06 ((lam : ℤ) : ZMod 7) ∧
       (∀ i, avoids06 (qz m (lam * d_s i))) ∧
       avoids06 (qz m (lam * d_e)) := by
   classical
@@ -200,7 +215,7 @@ theorem case2_int_avoid (m : ℕ) (hm : 0 < m)
   set lam : ℤ := (1 + k_int * 7 ^ m) * (j : ℤ)
   have hk_cast : ((k_int : ℤ) : ZMod 7) = k :=
     show ((k.val : ℕ) : ZMod 7) = k from ZMod.natCast_rightInverse k
-  refine ⟨lam, lam_unit m hm k_int j hj1 hj5, fun i => ?_, ?_⟩
+  refine ⟨lam, lam_unit m hm k_int j hj1 hj5, lam_avoids06 m hm k_int j hj1 hj5, fun i => ?_, ?_⟩
   · -- A_s element
     have hrw : lam * d_s i = (1 + k_int * 7 ^ m) * ((j : ℤ) * d_s i) := by ring
     rw [hrw, qz_shift0, hk_cast]
@@ -229,7 +244,7 @@ theorem case3_int_avoid (m : ℕ) (hm : 0 < m)
     (hcfg : let c1 := (d_e1 : ZMod 7) * ((d_s 0 : ZMod 7))⁻¹
             let c2 := (d_e2 : ZMod 7) * ((d_s 0 : ZMod 7))⁻¹
             (c1 = 2 ∧ c2 = 2) ∨ (c1 = 2 ∧ c2 = 4) ∨ (c1 = 4 ∧ c2 = 2)) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ avoids06 ((lam : ℤ) : ZMod 7) ∧
       (∀ i, avoids06 (qz m (lam * d_s i))) ∧
       avoids06 (qz m (lam * d_e1)) ∧ avoids06 (qz m (lam * d_e2)) := by
   classical
@@ -268,7 +283,7 @@ theorem case3_int_avoid (m : ℕ) (hm : 0 < m)
       rw [hcx, mul_assoc, inv_mul_cancel₀ hs_ne, mul_one]
     rw [hcast, hde, show (j : ZMod 7) * (cx * s) = cx * slope from by ring,
       show k * (cx * slope) = cx * (k * slope) from by ring, hkt]
-  refine ⟨lam, lam_unit m hm k_int j hj1 hj5', fun i => ?_, ?_, ?_⟩
+  refine ⟨lam, lam_unit m hm k_int j hj1 hj5', lam_avoids06 m hm k_int j hj1 hj5', fun i => ?_, ?_, ?_⟩
   · rw [show lam * d_s i = (1 + k_int * 7 ^ m) * ((j : ℤ) * d_s i) from by ring, qz_shift0, hk_cast]
     have : (((j : ℤ) * d_s i : ℤ) : ZMod 7) = slope := by
       push_cast; congr 1; exact_mod_cast hsame i
