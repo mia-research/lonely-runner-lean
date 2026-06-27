@@ -116,8 +116,30 @@ big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D�
 (|A|=5, 5th level-0 element). Both j₀=0 and j₀>0 branches complete modulo §6.
 When |D₇(0)|=4 (or |D₇(j₀)|=4 in the j₀>0 config): the proof is COMPLETE.
 
-**Next step:**
-1. §6 (Case_A5.lean, |A|=5): the big block (Lemmas 4–12, cases 6.1–6.6).
+**Next step — §6 (|A|=5):**
+The 3 remaining sorries all need a `five_band` theorem (5 coprime-to-7 elements →
+∃ multiplier with band). This requires Lemmas 4–12 (§3–§4, supporting tools) +
+Cases 6.1–6.6 (the actual case analysis) + §7 (m=1 exhaustive search, 969 cases).
+Dependency chain: Lemmas.lean → Case_A5.lean.
+
+Target interface:
+```lean
+theorem five_band (m : ℕ) (hm : 1 < m) (d : Fin 5 → ℤ)
+    (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+      (7 ^ m : ℤ) ≤ (lam * d i) % 7 ^ (m + 1) ∧
+      (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m
+```
+Plus `five_band_m1` for m=1 (§7 exhaustive search).
+
+§6 source: lines 507–805 (~300 lines). Key building blocks:
+- Lemma 5 (`ℓ(A₁)+ℓ(A₂)+ℓ(A₄) ≤ 5` → avoidance): Λ₀ pigeonhole
+- Lemma 6 (stronger form with ẽ conditions): case analysis
+- Lemma 7 (ẽ control via `ν(2d-d')` structure): key tool for subcases
+- Lemma 9 (3-element compression via B=A₁): foundational
+- Lemma 10 (|A₁|≥4 classification): coloring/numbering
+- Lemma 11 (|A₁|=3 classification): coloring/numbering
+- Lemma 12 (|A₁|=3, |A₂|=2 sufficient conditions): compression
 
 ## Verification bar (the `/goal`)
 
