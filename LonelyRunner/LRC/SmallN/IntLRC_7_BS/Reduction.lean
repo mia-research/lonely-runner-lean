@@ -206,8 +206,140 @@ theorem bs_discrete_q
               exact absurd (le_trans h3card (Finset.card_le_card h3)) (by omega)
             exact band_top m lam (D i : ℤ) hlam_unit him
               (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
-    · -- j₀ > 0: interior big level. §4 reduction divides by 7^{j₀},
-      -- reducing to |D'₇(0)| = |D₇(j₀)| ≥ 4 with fewer total elements.
-      sorry
+    · -- j₀ > 0: interior big level (§4 reduction).
+      -- Config is 1/4/1: extract 4 level-j₀ elements, divide by 7^{j₀}.
+      -- Level-0 of D: single_level_avoid at level m.
+      have hj₀pos : 0 < j₀ := Nat.pos_of_ne_zero hj₀ne
+      have hmpos : 0 < m := by omega
+      -- Extract level-j₀ elements (as Fin 6 indices)
+      set Sj := Finset.univ.filter (fun i : Fin 6 =>
+          (7 : ℤ) ^ j₀ ∣ (D i : ℤ) ∧ ¬ (7 : ℤ) ^ (j₀ + 1) ∣ (D i : ℤ)) with hSj_def
+      have hSj_card : 4 ≤ Sj.card := by
+        have hDZ_inj : Set.InjOn (fun i : Fin 6 => (D i : ℤ))
+            (↑(Finset.univ : Finset (Fin 6))) :=
+          fun a _ b _ h => hinj (Nat.cast_injective h)
+        have : (DZ.filter (fun d => (7 : ℤ) ^ j₀ ∣ d ∧ ¬ (7 : ℤ) ^ (j₀ + 1) ∣ d)).card
+            = Sj.card := by
+          rw [hDZ, hSj_def, Finset.filter_image]
+          exact Finset.card_image_of_injOn
+            (Set.InjOn.mono (fun x hx => Finset.mem_filter.mp hx |>.1) hDZ_inj)
+        linarith
+      obtain ⟨Tj, hTjS, hTj4⟩ := Finset.exists_subset_card_eq hSj_card
+      set fj : Fin 4 → Fin 6 := fun k => (Tj.orderIsoOfFin hTj4 k).val
+      have hfj_mem : ∀ k, fj k ∈ Sj := fun k => hTjS ((Tj.orderIsoOfFin hTj4 k).prop)
+      have hfj_dvd : ∀ k, (7 : ℤ) ^ j₀ ∣ (D (fj k) : ℤ) := fun k => by
+        have := hfj_mem k; simp only [hSj_def, Finset.mem_filter] at this; exact this.2.1
+      have hfj_ndvd : ∀ k, ¬ (7 : ℤ) ^ (j₀ + 1) ∣ (D (fj k) : ℤ) := fun k => by
+        have := hfj_mem k; simp only [hSj_def, Finset.mem_filter] at this; exact this.2.2
+      -- Divide by 7^{j₀}: get coprime-to-7 values
+      set d4 : Fin 4 → ℤ := fun k => (D (fj k) : ℤ) / (7 : ℤ) ^ j₀
+      have hd4_ndvd : ∀ k, ¬ (7 : ℤ) ∣ d4 k := fun k => by
+        intro h7
+        exact hfj_ndvd k (by
+          rw [show (7 : ℤ) ^ (j₀ + 1) = 7 * 7 ^ j₀ from by ring]
+          exact mul_dvd_mul h7 dvd_rfl |>.mp (by
+            rw [show 7 * 7 ^ j₀ * ((D (fj k) : ℤ) / 7 ^ j₀) =
+                7 * (7 ^ j₀ * ((D (fj k) : ℤ) / 7 ^ j₀)) from by ring]
+            rw [Int.mul_ediv_cancel' (hfj_dvd k)]
+            exact dvd_mul_of_dvd_right h7 7))
+      -- Apply four_band at level m' = m - j₀
+      set m' := m - j₀
+      have hm'pos : 0 < m' := by omega
+      have hm'eq : j₀ + m' = m := by omega
+      obtain ⟨lam', hlam'_unit, _, _, hband'⟩ := four_band m' hm'pos d4 hd4_ndvd
+      -- Apply single_level_avoid at level m for the level-0 element.
+      -- The (1+k·7^m) factor shifts qz at level m; inert for 7-divisible elements.
+      -- Only the coprime-to-7 elements constrain k. With |D₇(0)| ≤ 2 and
+      -- |F_i| = 2 per element, ∑|F| ≤ 4 ≤ 6, so single_level_avoid works.
+      set S0 := Finset.univ.filter (fun i : Fin 6 => ¬ (7 : ℤ) ∣ (D i : ℤ)) with hS0_def
+      have hS0_sum : ∑ i ∈ S0, ({(0 : ZMod 7), 6} : Finset (ZMod 7)).card ≤ 6 := by
+        simp only [Finset.card_pair (by decide : (0 : ZMod 7) ≠ 6)]
+        have : S0.card ≤ 6 := Finset.card_le_card (Finset.filter_subset _ _) |>.trans
+          (by simp [Finset.card_univ, Fintype.card_fin])
+        omega
+      have hS0_r : ∀ i ∈ S0, ((D i : ℤ) : ZMod 7) ≠ 0 := fun i hi => by
+        simp only [hS0_def, Finset.mem_filter] at hi
+        exact_mod_cast (show ¬ (7 : ℤ) ∣ (D i : ℤ) from hi.2) ∘
+          (ZMod.intCast_zmod_eq_zero_iff_dvd (D i : ℤ) 7).mp
+      obtain ⟨kz, hkz⟩ := single_level_avoid S0
+        (fun i => qz m (lam' * (D i : ℤ)))
+        (fun i => ((D i : ℤ) : ZMod 7))
+        (fun _ => {0, 6}) hS0_r hS0_sum
+      set lam := (1 + (kz.val : ℤ) * (7 : ℤ) ^ m) * lam'
+      have hlam_unit : ¬ (7 : ℤ) ∣ lam := by
+        exact mt (Prime.dvd_mul (by norm_num : Prime (7 : ℤ)) |>.mp)
+          (by simp [lambda0_coprime m hmpos, hlam'_unit])
+      refine ⟨m, lam, fun i => ?_⟩
+      by_cases h7i : (7 : ℤ) ∣ (D i : ℤ)
+      · -- 7 ∣ D i: the (1+k·7^m) factor is inert
+        have hinert : (lam * (D i : ℤ)) % (7 : ℤ) ^ (m + 1) =
+            (lam' * (D i : ℤ)) % (7 : ℤ) ^ (m + 1) := by
+          show ((1 + (kz.val : ℤ) * (7 : ℤ) ^ m) * lam' * (D i : ℤ)) % _ = _
+          exact lambda0_inert m _ lam' _ h7i
+        rw [hinert]
+        by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
+        · exact band_top m lam' (D i : ℤ) hlam'_unit him
+            (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+        · -- Level j₀: lift band from m' to m
+          have hdvd_j : (7 : ℤ) ^ j₀ ∣ (D i : ℤ) := by
+            have hvi : padicValNat 7 (D i) ≥ j₀ := by
+              by_contra hlt; push_neg at hlt
+              have : ¬ (7 : ℤ) ^ j₀ ∣ (D i : ℤ) := by
+                rw [show (7 : ℤ) ^ j₀ = ((7 ^ j₀ : ℕ) : ℤ) from by push_cast; ring,
+                  Int.natCast_dvd_natCast]
+                exact fun h => absurd ((padicValNat_dvd_iff_le (hpos i).ne').mp h) (by omega)
+              exact absurd h7i (by
+                rwa [show (7 : ℤ) = (7 : ℤ) ^ 1 from by norm_num,
+                  show (7 : ℤ) ^ 1 = ((7 ^ 1 : ℕ) : ℤ) from by push_cast; ring,
+                  Int.natCast_dvd_natCast] at h7i
+                have : (7 : ℕ) ^ 1 ∣ D i := by exact_mod_cast h7i
+                exact absurd ((padicValNat_dvd_iff_le (hpos i).ne').mp this) (by omega))
+            rw [show (7 : ℤ) ^ j₀ = ((7 ^ j₀ : ℕ) : ℤ) from by push_cast; ring,
+              Int.natCast_dvd_natCast]
+            exact (padicValNat_dvd_iff_le (hpos i).ne').mpr hvi
+          -- i must be at level j₀ (same level as the 4 extracted elements).
+          -- D i = 7^{j₀} · d' where d' = D i / 7^{j₀}, coprime to 7.
+          have hdi' : (D i : ℤ) = (7 : ℤ) ^ j₀ * ((D i : ℤ) / (7 : ℤ) ^ j₀) :=
+            (Int.mul_ediv_cancel' hdvd_j).symm
+          -- i must be in Sj (level j₀). Extract which Fin 4 index it corresponds to,
+          -- or it's the 5th element → sorry (§6).
+          by_cases hiSj : i ∈ Sj
+          · -- i is one of the level-j₀ elements
+            by_cases hiTj : i ∈ Tj
+            · have ⟨ki, hki⟩ : ∃ ki : Fin 4, (Tj.orderIsoOfFin hTj4 ki).val = i := by
+                have := (Tj.orderIsoOfFin hTj4).surjective ⟨i, hiTj⟩
+                exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+              have hdi_eq : (D i : ℤ) / (7 : ℤ) ^ j₀ = d4 ki := by
+                simp only [d4, fj, hki]
+              have hband_ki := hband' ki
+              rw [show d4 ki = (D i : ℤ) / (7 : ℤ) ^ j₀ from hdi_eq.symm] at hband_ki
+              rw [hdi']
+              exact band_lift j₀ m' lam' _ (by rwa [hm'eq])
+            · sorry -- 5th level-j₀ element: needs §6 (|A|=5, unreachable with 1/4/1 config)
+          · -- i ∉ Sj but 7∣D i and ¬7^m∣D i: intermediate level
+            -- With config 1/4/1, this can't happen
+            exfalso
+            have := him
+            simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and, not_and,
+              not_not] at hiSj
+            exact him (hiSj hdvd_j)
+      · -- ¬7 ∣ D i: level-0 element. Use qz avoidance.
+        have hiS0 : i ∈ S0 := by simp [hS0_def, h7i]
+        have havoid := hkz i hiS0
+        have hqz_shift : qz m (lam * (D i : ℤ)) =
+            qz m (lam' * (D i : ℤ)) + (kz.val : ZMod 7) * ((D i : ℤ) : ZMod 7) := by
+          show qz m ((1 + (kz.val : ℤ) * (7 : ℤ) ^ (m - 0)) * (lam' * (D i : ℤ))) = _
+          rw [Nat.sub_zero]
+          exact qz_step m 0 (by omega) (kz.val : ℤ) lam' (D i : ℤ) (one_dvd _)
+        rw [show qz m (lam' * (D i : ℤ)) + (kz.val : ZMod 7) * ((D i : ℤ) : ZMod 7) =
+            qz m (lam' * (D i : ℤ)) + (kz : ZMod 7) * ((D i : ℤ) : ZMod 7) from by
+              congr 1; congr 1; exact (ZMod.natCast_zmod_eq_zero_iff_dvd _ 7 ▸ rfl).symm ▸ rfl]
+            at hqz_shift
+        have h0 : qz m (lam * (D i : ℤ)) ≠ 0 := by
+          rw [hqz_shift]; exact fun h => havoid (by rw [← h]; exact Finset.mem_insert_self 0 _)
+        have h6 : qz m (lam * (D i : ℤ)) ≠ 6 := by
+          rw [hqz_shift]; exact fun h => havoid (by rw [← h]; exact Finset.mem_insert.mpr
+            (Or.inr (Finset.mem_singleton.mpr rfl)))
+        exact band_of_qz_ne m _ h0 h6
 
 end IntLRC7BS
