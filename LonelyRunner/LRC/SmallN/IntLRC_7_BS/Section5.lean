@@ -79,6 +79,40 @@ theorem lam_unit (m : ℕ) (hm : 0 < m) (k : ℤ) (j : ℕ) (hj1 : 1 ≤ j) (hj5
   · have : (j : ℤ) % 7 = 0 := Int.emod_eq_zero_of_dvd h2
     omega
 
+/-! ### Band symmetry under negation -/
+
+/-- The central residue band is symmetric: `band(x) ⟺ band(-x)`. -/
+theorem band_neg (m : ℕ) (x : ℤ) :
+    ((7 ^ m : ℤ) ≤ x % 7 ^ (m + 1) ∧ x % 7 ^ (m + 1) ≤ 6 * 7 ^ m) ↔
+    ((7 ^ m : ℤ) ≤ (-x) % 7 ^ (m + 1) ∧ (-x) % 7 ^ (m + 1) ≤ 6 * 7 ^ m) := by
+  set N := (7 : ℤ) ^ (m + 1) with hN_def
+  have hN : 0 < N := by positivity
+  have hNne : N ≠ 0 := ne_of_gt hN
+  have hN7 : N = 7 * 7 ^ m := by ring
+  set R := x % N; set R' := (-x) % N
+  have hR0 : 0 ≤ R := Int.emod_nonneg x hNne
+  have hRN : R < N := Int.emod_lt_of_pos x hN
+  have hR'0 : 0 ≤ R' := Int.emod_nonneg (-x) hNne
+  have hR'N : R' < N := Int.emod_lt_of_pos (-x) hN
+  have hmod0 : (R + R') % N = 0 := by
+    show (x % N + (-x) % N) % N = 0
+    rw [← Int.add_emod, Int.add_right_neg, Int.zero_emod]
+  have hdvd : N ∣ R + R' := Int.dvd_of_emod_eq_zero hmod0
+  obtain ⟨c, hc⟩ := hdvd
+  have hc0 : 0 ≤ c := by nlinarith
+  have hc1 : c ≤ 1 := by nlinarith
+  rcases eq_or_lt_of_le hc0 with hc_zero | hc_pos
+  · -- c = 0: R = R' = 0, both sides fail
+    have hR_z : R = 0 := by nlinarith
+    have hR'_z : R' = 0 := by nlinarith
+    simp only [hR_z, hR'_z]
+  · -- c = 1: R' = N - R
+    have hc1' : c = 1 := by omega
+    have hR'eq : R' = N - R := by subst hc1'; linarith
+    rw [hR'eq, hN7]; constructor
+    · intro ⟨hlo, hhi⟩; exact ⟨by nlinarith, by nlinarith⟩
+    · intro ⟨hlo, hhi⟩; exact ⟨by nlinarith, by nlinarith⟩
+
 /-! ### §5 core: Case 1 (same residue) integer assembly -/
 
 /-- **§5 Case 1 integer assembly.** Four integers not divisible by 7, all with the
@@ -246,17 +280,21 @@ theorem case3_int_avoid (m : ℕ) (hm : 0 < m)
 
 /-! ### §5 master: all 4 level-0 elements (any residues) -/
 
-/-- **§5 avoidance (4 level-0 elements, arbitrary residues).** For any 4 integers
-not divisible by 7, ∃ multiplier coprime to 7 with all qz-values avoiding {0,6}.
+/-- **§5 avoidance (4 level-0 elements, band form).** For any 4 integers not
+divisible by 7, ∃ multiplier coprime to 7 with all elements in the central band.
 
-Uses residue normalization to `{1,2,4}` (via band symmetry under negation), then
-dispatches on `|A_s|` to Case 1/2/3 integer assemblies.
+Proof: normalize residues to `{1,2,4}` by per-element negation (band is symmetric
+under negation via `band_neg`), classify by most-popular class via pigeonhole,
+dispatch to `case1/2/3_int_avoid`, convert avoids06 to band via `band_of_qz_ne`.
 
-**Status:** sorry — residue classification dispatch pending. -/
-theorem four_avoid (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
+**Status:** sorry — residue classification + dispatch pending. The three
+`case*_int_avoid` lemmas and `band_neg` are proven; the remaining work is
+extracting sub-tuples for the dispatch. -/
+theorem four_band (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
     (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
-      ∀ i, avoids06 (qz m (lam * d i)) := by
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+      (7 ^ m : ℤ) ≤ (lam * d i) % 7 ^ (m + 1) ∧
+      (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
   sorry
 
 end IntLRC7BS
