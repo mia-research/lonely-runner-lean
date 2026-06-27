@@ -1,5 +1,4 @@
-import LonelyRunner.LRC.SmallN.IntLRC_7_BS.PrimeFiltering
-import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case_A4
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5b
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
@@ -60,9 +59,58 @@ theorem bs_discrete_q
     -- Case split: j₀ = 0 (big level at bottom → §5/§6 directly)
     --         vs  j₀ > 0 (interior big level → §4 reduction → §5)
     rcases eq_or_ne j₀ 0 with rfl | hj₀ne
-    · -- j₀ = 0: |D₇(0)| ≥ 4, i.e. ≥ 4 elements not divisible by 7.
-      -- With |D| = 6, |D₇(0)| ∈ {4, 5, 6}. §5 handles 4, §6 handles 5.
-      sorry
+    · -- j₀ = 0: |D₇(0)| ≥ 4.
+      -- Convert the DZ filter to a Fin 6 filter.
+      set S := Finset.univ.filter (fun i : Fin 6 => ¬ (7 : ℤ) ∣ (D i : ℤ)) with hS_def
+      have hS_card : 4 ≤ S.card := by
+        have hDZ_inj : Set.InjOn (fun i : Fin 6 => (D i : ℤ)) (↑(Finset.univ : Finset (Fin 6))) :=
+          fun a _ b _ h => hinj (Nat.cast_injective h)
+        rw [show (7 : ℤ) ^ 0 = 1 from by norm_num,
+          show (7 : ℤ) ^ (0 + 1) = 7 from by norm_num] at hj₀card
+        simp only [one_dvd, true_and] at hj₀card
+        have : (DZ.filter (fun d => ¬ (7 : ℤ) ∣ d)).card
+            = (Finset.univ.filter (fun i : Fin 6 => ¬ (7 : ℤ) ∣ (D i : ℤ))).card := by
+          rw [hDZ]
+          rw [Finset.filter_image]
+          exact Finset.card_image_of_injOn
+            (Set.InjOn.mono (fun x hx => Finset.mem_filter.mp hx |>.1) hDZ_inj)
+        linarith
+      -- Extract 4 level-0 indices
+      obtain ⟨T, hTS, hT4⟩ := Finset.exists_subset_card_eq hS_card
+      set f : Fin 4 → Fin 6 := fun k => (T.orderIsoOfFin hT4 k).val
+      have hf_inj : Function.Injective f :=
+        fun a b h => (T.orderIsoOfFin hT4).injective (Subtype.val_injective h)
+      have hf_mem : ∀ k, f k ∈ S := fun k => hTS ((T.orderIsoOfFin hT4 k).prop)
+      have hf_ndvd : ∀ k, ¬ (7 : ℤ) ∣ (D (f k) : ℤ) := fun k => by
+        have := hf_mem k; simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and] at this
+        exact this
+      -- Apply four_band to the 4 level-0 elements
+      set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
+      obtain ⟨lam, hlam_unit, hband4⟩ := four_band m hj₀m d4 hf_ndvd
+      -- Extend to all 6 elements
+      refine ⟨m, lam, fun i => ?_⟩
+      by_cases hi : i ∈ S
+      · -- Level-0 element: if in T (chosen 4), band follows from hband4.
+        by_cases hiT : i ∈ T
+        · -- i is one of the chosen 4 level-0 elements
+          have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
+            have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
+            exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+          have := hband4 k; simp only [d4, f, hk] at this; exact this
+        · -- 5th level-0 element (|D₇(0)| ≥ 5): needs §6 (|A|=5)
+          sorry
+      · -- Higher-level element
+        rw [hS_def, Finset.mem_filter, not_and_or] at hi
+        rcases hi with hi | hi
+        · exact absurd (Finset.mem_univ i) hi
+        · -- 7 ∣ D i: element at level > 0
+          push_neg at hi
+          -- If at level m: band_top. If interior: sorry (needs u₀).
+          by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
+          · exact band_top m lam (D i : ℤ) hlam_unit him
+              (hmax (D i : ℤ) (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+          · -- Interior element (0 < ν₇ < m): needs u₀ construction
+            sorry
     · -- j₀ > 0: interior big level. §4 reduction divides by 7^{j₀},
       -- reducing to |D'₇(0)| = |D₇(j₀)| ≥ 4 with fewer total elements.
       sorry
