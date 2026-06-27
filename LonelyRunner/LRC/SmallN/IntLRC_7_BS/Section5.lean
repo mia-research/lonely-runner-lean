@@ -278,23 +278,53 @@ theorem case3_int_avoid (m : ℕ) (hm : 0 < m)
   · rw [show lam * d_e2 = (1 + k_int * 7 ^ m) * ((j : ℤ) * d_e2) from by ring, qz_shift0, hk_cast,
       extra_shift d_e2 c2 rfl]; exact ht_e2
 
-/-! ### §5 master: all 4 level-0 elements (any residues) -/
+/-! ### Normalization: residues to {1,2,4} -/
 
-/-- **§5 avoidance (4 level-0 elements, band form).** For any 4 integers not
-divisible by 7, ∃ multiplier coprime to 7 with all elements in the central band.
+/-- Normalize an integer to have ZMod 7 residue in {1,2,4}: negate if in {3,5,6}. -/
+noncomputable def normalize7 (x : ℤ) : ℤ :=
+  if (x : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)) then x else -x
 
-Proof: normalize residues to `{1,2,4}` by per-element negation (band is symmetric
-under negation via `band_neg`), classify by most-popular class via pigeonhole,
-dispatch to `case1/2/3_int_avoid`, convert avoids06 to band via `band_of_qz_ne`.
+private theorem neg_in_124 : ∀ r : ZMod 7, r ≠ 0 →
+    r ∉ ({1, 2, 4} : Finset (ZMod 7)) → -r ∈ ({1, 2, 4} : Finset (ZMod 7)) := by decide
 
-**Status:** sorry — residue classification + dispatch pending. The three
-`case*_int_avoid` lemmas and `band_neg` are proven; the remaining work is
-extracting sub-tuples for the dispatch. -/
+theorem normalize7_res (x : ℤ) (hx : ¬ (7 : ℤ) ∣ x) :
+    (normalize7 x : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)) := by
+  unfold normalize7; split_ifs with h
+  · exact h
+  · rw [Int.cast_neg]
+    exact neg_in_124 _ (by rwa [Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]) h
+
+theorem normalize7_ndvd (x : ℤ) (hx : ¬ (7 : ℤ) ∣ x) : ¬ (7 : ℤ) ∣ normalize7 x := by
+  unfold normalize7; split_ifs
+  · exact hx
+  · rwa [Int.dvd_neg]
+
+theorem normalize7_band (m : ℕ) (lam x : ℤ) :
+    ((7 ^ m : ℤ) ≤ (lam * normalize7 x) % 7 ^ (m + 1) ∧
+     (lam * normalize7 x) % 7 ^ (m + 1) ≤ 6 * 7 ^ m) →
+    ((7 ^ m : ℤ) ≤ (lam * x) % 7 ^ (m + 1) ∧
+     (lam * x) % 7 ^ (m + 1) ≤ 6 * 7 ^ m) := by
+  unfold normalize7; split_ifs with h
+  · exact id
+  · rw [mul_neg]; exact (band_neg m (lam * x)).mpr
+
 theorem four_band (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
     (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       (7 ^ m : ℤ) ≤ (lam * d i) % 7 ^ (m + 1) ∧
       (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
+  -- normalize residues to {1,2,4}
+  set d' : Fin 4 → ℤ := fun i => normalize7 (d i)
+  have hd'_ndvd : ∀ i, ¬ (7 : ℤ) ∣ d' i := fun i => normalize7_ndvd _ (hnotdvd i)
+  -- get lam for normalized elements, then lift via band symmetry
+  suffices h : ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+      (7 ^ m : ℤ) ≤ (lam * d' i) % 7 ^ (m + 1) ∧
+      (lam * d' i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m by
+    obtain ⟨lam, hlam, hband⟩ := h
+    exact ⟨lam, hlam, fun i => normalize7_band m lam (d i) (hband i)⟩
+  -- Now d' has residues in {1,2,4}. Dispatch on the residue pattern.
+  -- Pigeonhole: 4 elements in 3 classes {1,2,4} → ∃ class with ≥ 2.
+  -- TODO: classify residues, extract sub-tuples, dispatch to case1/2/3_int_avoid
   sorry
 
 end IntLRC7BS
