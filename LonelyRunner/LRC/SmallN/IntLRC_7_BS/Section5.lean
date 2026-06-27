@@ -308,23 +308,7 @@ theorem normalize7_band (m : ℕ) (lam x : ℤ) :
   · exact id
   · rw [mul_neg]; exact (band_neg m (lam * x)).mpr
 
-theorem four_band (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
-    (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      (7 ^ m : ℤ) ≤ (lam * d i) % 7 ^ (m + 1) ∧
-      (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
-  -- normalize residues to {1,2,4}
-  set d' : Fin 4 → ℤ := fun i => normalize7 (d i)
-  have hd'_ndvd : ∀ i, ¬ (7 : ℤ) ∣ d' i := fun i => normalize7_ndvd _ (hnotdvd i)
-  -- get lam for normalized elements, then lift via band symmetry
-  suffices h : ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      (7 ^ m : ℤ) ≤ (lam * d' i) % 7 ^ (m + 1) ∧
-      (lam * d' i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m by
-    obtain ⟨lam, hlam, hband⟩ := h
-    exact ⟨lam, hlam, fun i => normalize7_band m lam (d i) (hband i)⟩
-  -- Now d' has residues in {1,2,4}. Dispatch on the residue pattern.
-  -- Pigeonhole: 4 elements in 3 classes {1,2,4} → ∃ class with ≥ 2.
-  -- TODO: classify residues, extract sub-tuples, dispatch to case1/2/3_int_avoid
-  sorry
+-- `four_band` is defined in `Section5b.lean` (which imports this file)
+-- to keep each file under 300 lines.
 
 end IntLRC7BS
