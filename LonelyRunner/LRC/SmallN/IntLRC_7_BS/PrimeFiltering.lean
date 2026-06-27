@@ -238,7 +238,7 @@ theorem prime_filtering (m : ℕ) (D : Finset ℤ) (F : ℤ → Finset (ZMod 7))
 
 /-- A top-level element (`7^m ∥ d`) multiplied by a unit lands in the central
 band: `(lam·d)_N = 7^m·((lam·u) mod 7)` with `(lam·u) mod 7 ∈ {1,…,6}`. -/
-private lemma band_top (m : ℕ) (lam d : ℤ) (hlam : ¬ (7 : ℤ) ∣ lam)
+theorem band_top (m : ℕ) (lam d : ℤ) (hlam : ¬ (7 : ℤ) ∣ lam)
     (hd : (7 : ℤ) ^ m ∣ d) (hnd : ¬ (7 : ℤ) ^ (m + 1) ∣ d) :
     (7 : ℤ) ^ m ≤ (lam * d) % 7 ^ (m + 1) ∧ (lam * d) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
   obtain ⟨u, hu⟩ := hd
