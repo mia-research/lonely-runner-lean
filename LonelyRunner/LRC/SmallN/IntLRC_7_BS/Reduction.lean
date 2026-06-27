@@ -84,7 +84,7 @@ theorem bs_discrete_q
       have hf_ndvd : ∀ k, ¬ (7 : ℤ) ∣ (D (f k) : ℤ) := fun k => by
         have := hf_mem k; simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and] at this
         exact this
-      -- Apply four_band to the 4 level-0 elements
+      -- Apply four_band to the 4 level-0 elements → get multiplier
       set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
       obtain ⟨lam, hlam_unit, hband4⟩ := four_band m hj₀m d4 hf_ndvd
       -- Extend to all 6 elements
@@ -92,25 +92,23 @@ theorem bs_discrete_q
       by_cases hi : i ∈ S
       · -- Level-0 element: if in T (chosen 4), band follows from hband4.
         by_cases hiT : i ∈ T
-        · -- i is one of the chosen 4 level-0 elements
-          have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
+        · have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
             have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
             exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
           have := hband4 k; simp only [d4, f, hk] at this; exact this
-        · -- 5th level-0 element (|D₇(0)| ≥ 5): needs §6 (|A|=5)
+        · -- 5th level-0 element (|D₇(0)| ≥ 5): §6 (|A|=5)
           sorry
-      · -- Higher-level element
-        rw [hS_def, Finset.mem_filter, not_and_or] at hi
-        rcases hi with hi | hi
-        · exact absurd (Finset.mem_univ i) hi
-        · -- 7 ∣ D i: element at level > 0
-          push_neg at hi
-          -- If at level m: band_top. If interior: sorry (needs u₀).
-          by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
-          · exact band_top m lam (D i : ℤ) hlam_unit him
-              (hmax (D i : ℤ) (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
-          · -- Interior element (0 < ν₇ < m): needs u₀ construction
-            sorry
+      · -- Higher-level element (7 ∣ D i)
+        simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not] at hi
+        by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
+        · exact band_top m lam (D i : ℤ) hlam_unit him
+            (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+        · -- Interior element: needs BS eq (8) pre-multiplier (u₀ construction).
+          -- The multiplier from four_band doesn't handle interior elements
+          -- because the Λ₀ shift has zero slope on elements divisible by 7.
+          -- Fixing this requires restructuring to compute u₀ · (1+7^{m-i₀})
+          -- BEFORE calling four_band. Deferred.
+          sorry
     · -- j₀ > 0: interior big level. §4 reduction divides by 7^{j₀},
       -- reducing to |D'₇(0)| = |D₇(j₀)| ≥ 4 with fewer total elements.
       sorry
