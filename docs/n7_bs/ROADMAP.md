@@ -57,10 +57,11 @@ checkpoint`. Source line refs are into `sources_barajas_serra_2008.txt`.
 |---|---|---|---|
 | `Defs.lean` | 7-adic apparatus: `ν`, `q`/`r`, `Λ_j`, `D₇(i)`, `A_s` residue classes, length `ℓ(X)`. Reuse `LRC/Defs.lean` (circDist, badSet, intLRC). | 40–128, 239–264 | **q-apparatus DONE (axiom-clean):** `qval`, `qz` (ZMod 7 arc idx), `qz_lambda` (**eq (3) engine**), `qz_eq_qval`, `band_of_qz_ne`, `circDist_ge_of_residue`/`_of_qval`. `nu` def'd. **NEW: `qz_add_carry` (carry lemma for §5)**. `r`/`Λ`/`D₇` level sets pending |
 | `PrimeFiltering.lean` | **Lemma 2 (Prime Filtering)** + **Corollary 3** — the reduction engine, conceptual core. | 129–169 | **✅ DONE, ALL axiom-clean:** `single_level_avoid` (pigeonhole, ∑\|F\|≤6), `single_level_avoid_excl` (top level, ∑\|F\|≤5), **`prime_filtering` (Lemma 2, full general-`m` level induction)**, `band_top`, **`corollary3` (i₀=m form)** |
-| `Reduction.lean` | §4 overview: `|D₇(i)| ≤ 3 ⟹ Cor 3`; reduce to `|D₇(0)| ∈ {4,5}`, `(A)₇ ⊂ {1,2,4}`; eqn (7). | 237–264 | **EASY branch DONE axiom-clean. Hard branch decomposed:** `j₀=0` sorry (§5/§6 direct) + `j₀>0` sorry (§4 interior reduction). Carry lemma + Phase 2 built in Defs/Case_A4. |
+| `Reduction.lean` | §4 overview: `|D₇(i)| ≤ 3 ⟹ Cor 3`; hard branch dispatch. | 237–264 | **EASY branch DONE. j₀=0 WIRED** via `four_band` + `band_top`. **3 narrow sorries:** (1) 5th level-0 el (§6), (2) interior el (eq 8/u₀), (3) j₀>0 (§4 reduction). |
 | `Lemmas.lean` | Supporting Lemmas 4–9 (multiplier existence / `ν`-coloring). | 364–505 | not started |
 | `Case_A4.lean` | §5 `|A| = 4`: Case 1 `|A_s|=4` (L287), Case 2 `|A_s|=3` (L299), Case 3 `|A_s|=2` (L319). Finite mod-7 chase (eqns 7–12), candidates for `interval_cases`/`decide`/`omega`. | 267–363 | **ALL THREE §5 CASES PROVEN AXIOM-CLEAN.** |
-| `Section5.lean` | §5 integer assembly: bridges abstract case lemmas to integer band conditions via `qz_shift0`. | 265–346 | **Integer assemblies axiom-clean:** `case1/2/3_int_avoid` (qz→band bridge), `band_neg`, `normalize7` (residue→{1,2,4}). **1 sorry: `four_band` (residue classification dispatch).** |
+| `Section5.lean` | §5 integer assembly: carry packaging, case assemblies, normalization. | 265–346 | **✅ ALL AXIOM-CLEAN, 0 sorry.** `case1/2/3_int_avoid`, `band_neg`, `normalize7`. |
+| `Section5b.lean` | §5 dispatch: residue classification + `four_band` master theorem. | 265–346 | **✅ `four_band` PROVEN axiom-clean.** Fin 3 pigeonhole, (4,4) relabeling, sub-tuple dispatch. |
 | `Case_A5.lean` | §6 `|A| = 5`: 6.1 `|A₁|=5` + Lemma 10 (L509); 6.2 `|A₁|=4` (L547); 6.3 `|A₁|=3,|A₂|=1,|A₄|=1` + Lemma 11 (L569); 6.4 `|A₁|=3,|A₂|=2` + Lemma 12 (L667); 6.5 `|A₁|=3,|A₄|=2` (L698); 6.6 `|A₁|=2` (L743). Likely splits further. | 507–830 | not started |
 | `Main.lean` | Assemble into the Hard-Case lemma; rewrite the `sorry` in `IntLRC_7.lean`. | — | **bridge + `bs_discrete` + `barajas_serra_seven` done; wired into `IntLRC_7`. Holds the lone `sorry` `bs_discrete_q`** |
 
@@ -100,20 +101,22 @@ The lone `sorry` is `Reduction.bs_discrete_q` (hard branch). PDF
 **Case counts (`|D|=6, gcd=1`, hard = ∃ j<m |D₇(j)|≥4):** ≤1 big level (two ⟹ ≥8>6);
 big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D₇(0)|∈{4,5}`.
 
-**Current sorry chain (2026-06-27):**
-`intLRC_seven` → `bs_discrete_q` (Reduction) → j₀=0 sorry + j₀>0 sorry.
-j₀=0 needs `four_band` (Section5, 1 sorry: residue dispatch to case1/2/3_int_avoid)
-+ sub-tuple extraction from Fin 6 + band_top for level-m elements.
-j₀>0 needs §4 interior reduction (divide by 7^{j₀}).
-Both feed into §6 (|A|=5, Case_A5.lean, not started).
+**Current sorry chain (2026-06-27, end of session):**
+`intLRC_seven` → `bs_discrete_q` (Reduction) → 3 sub-sorries:
+1. 5th level-0 element (`i ∈ S\T`): |D₇(0)|≥5 → §6 (Case_A5, not started)
+2. Interior element (`7∣d, 7^m∤d`): BS eq (8) u₀ modular-inverse construction
+3. j₀>0: §4 interior reduction (divide by 7^{j₀} → §5/§6 at lower level)
 
-**Immediate next steps:**
-1. Fill `four_band` sorry: pigeonhole classification of 4 normalized residues in
-   {1,2,4}, sub-tuple extraction, dispatch to case1/2/3_int_avoid.
-2. Wire j₀=0 sorry: extract 4 level-0 indices from Fin 6, apply `four_band`,
-   handle level-m via `band_top`, interior via eq (8) / u₀ construction.
-3. j₀>0 sorry: §4 divide-by-7^{j₀} reduction.
-4. §6 (Case_A5.lean): the |A|=5 block (Lemmas 4–12, cases 6.1–6.6).
+**What's proven (all sorry-free, axiom-clean):** §5 full chain from abstract case
+lemmas through integer assembly to `four_band` (4 level-0 elements, any residues,
+band form). j₀=0 wiring: Fin 6 extraction + band_top. When |D₇(0)|=4 and no
+interior elements, the proof is COMPLETE.
+
+**Next steps (in priority order):**
+1. Interior elements (eq 8 / u₀): ~50-80 lines of modular arithmetic; closes
+   the |D₇(0)|=4 case fully.
+2. j₀>0 (§4): divide-by-7^{j₀} reduction, maps to §5/§6 at lower m.
+3. §6 (Case_A5.lean, |A|=5): the big block (Lemmas 4–12, cases 6.1–6.6).
 
 ## Verification bar (the `/goal`)
 
