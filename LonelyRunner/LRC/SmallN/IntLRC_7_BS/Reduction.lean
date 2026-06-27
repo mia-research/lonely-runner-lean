@@ -86,7 +86,8 @@ theorem bs_discrete_q
         exact this
       -- Apply four_band to the 4 level-0 elements → get multiplier
       set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
-      obtain ⟨lam, hlam_unit, hband4⟩ := four_band m hj₀m d4 hf_ndvd
+      obtain ⟨lam, hlam_unit, _hlam06, ⟨j_step, hj1, hj5, hcongr⟩, hband4⟩ :=
+        four_band m hj₀m d4 hf_ndvd
       -- Extend to all 6 elements
       refine ⟨m, lam, fun i => ?_⟩
       by_cases hi : i ∈ S
@@ -103,11 +104,13 @@ theorem bs_discrete_q
         by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
         · exact band_top m lam (D i : ℤ) hlam_unit him
             (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
-        · -- Interior element: needs BS eq (8) pre-multiplier (u₀ construction).
-          -- The multiplier from four_band doesn't handle interior elements
-          -- because the Λ₀ shift has zero slope on elements divisible by 7.
-          -- Fixing this requires restructuring to compute u₀ · (1+7^{m-i₀})
-          -- BEFORE calling four_band. Deferred.
+        · -- Interior element (0 < ν₇ < m): BS eq (8).
+          -- lam ≡ j_step (mod 7^m) with j_step ∈ {1,...,5}.
+          -- lam * D i ≡ j_step * D i (mod 7^{m+1}) since 7 ∣ D i.
+          -- So (lam * D i) % N = (j_step * D i) % N.
+          -- Since ν₇(D i) = some v with 0 < v < m:
+          -- j_step * D i has ν₇ = v, and band holds by direct computation.
+          -- TODO: formalize the congruence + band argument.
           sorry
     · -- j₀ > 0: interior big level. §4 reduction divides by 7^{j₀},
       -- reducing to |D'₇(0)| = |D₇(j₀)| ≥ 4 with fewer total elements.
