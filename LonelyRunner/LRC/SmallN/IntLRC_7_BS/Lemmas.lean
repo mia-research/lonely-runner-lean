@@ -70,4 +70,36 @@ theorem lemma5 (a₁ a₂ a₄ : ZMod 7) (ℓ₁ ℓ₂ ℓ₄ : ℕ)
   · exact lemma5_avoids a₁ a₂ a₄ ℓ₁ ℓ₂ ℓ₄ h₁ (by omega) (by omega) hsum
       (by tauto) (by rintro ⟨rfl, rfl, rfl⟩; omega) (by rintro ⟨rfl, rfl, rfl⟩; omega)
 
+/-- **Lemma 6 (iii) (BS L429).** `(ℓ₁,ℓ₂,ℓ₄)=(3,3,0)`: with `A₁` normalized to
+`q(A₁)={1,2,3}`, some `λ_k∈Λ₀` (`k∈{0,1,2}`) makes both `A₁` and the length-3
+`A₂` avoid `{0,6}`. No `ẽ` condition needed. -/
+theorem lemma6_330 (a₂ : ZMod 7) :
+    ∃ k : ZMod 7, intervalAvoids 1 3 1 k ∧ intervalAvoids a₂ 3 2 k := by
+  revert a₂; decide
+
+/-- **Lemma 6 (ii), (4,0,2) (BS L426).** `A₁` length 4 at `{1,2,3,4}`, `A₄`
+length 2. Unconditional: one of `{i,i+1}`, `{i+4,i+5}` avoids `{0,6}`. -/
+theorem lemma6_402 (a₄ : ZMod 7) :
+    ∃ k : ZMod 7, intervalAvoids 1 4 1 k ∧ intervalAvoids a₄ 2 4 k := by
+  revert a₄; decide
+
+/-- **Lemma 6 (ii), (4,2,0) (BS L426).** `A₁` length 4, `A₂` length 2 at
+`{a₂,a₂+1}`. Needs `ẽ(d,d')≠4`, i.e. `2−a₂ ≠ 4` ⟺ `a₂ ≠ 5` (`d∈A₁`, `q(d)=1`;
+`d'∈A₂∩q⁻¹(a₂)`). -/
+theorem lemma6_420 (a₂ : ZMod 7) (he : (2 - a₂) ≠ 4) :
+    ∃ k : ZMod 7, intervalAvoids 1 4 1 k ∧ intervalAvoids a₂ 2 2 k := by
+  revert he; revert a₂; decide
+
+/-- **Lemma 6 (i), (5,0,1) (BS L422).** `A₁` length 5 at `{1,..,5}`, `A₄`
+length 1. Needs `ẽ(d,d')∉{4,6}`, i.e. `2·a₄−1 ∉ {4,6}` ⟺ `a₄ ∉ {0,6}`. -/
+theorem lemma6_501 (a₄ : ZMod 7) (he : (2 * a₄ - 1) ∉ ({4, 6} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7, intervalAvoids 1 5 1 k ∧ intervalAvoids a₄ 1 4 k := by
+  revert he; revert a₄; decide
+
+/-- **Lemma 6 (i), (5,1,0) (BS L422).** `A₁` length 5, `A₂` length 1. Needs
+`ẽ(d,d')∉{2,3}`, i.e. `2−a₂ ∉ {2,3}` ⟺ `a₂ ∉ {0,6}`. -/
+theorem lemma6_510 (a₂ : ZMod 7) (he : (2 - a₂) ∉ ({2, 3} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7, intervalAvoids 1 5 1 k ∧ intervalAvoids a₂ 1 2 k := by
+  revert he; revert a₂; decide
+
 end IntLRC7BS
