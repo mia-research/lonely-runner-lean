@@ -360,6 +360,38 @@ theorem qz_retarget (m h : ℕ) (hhm : h < m) (x : ℤ)
       simpa using this
     norm_num at h1
 
+/-- **Top-level q-retargeting (BS `Λ_m`, one element).** For `x` with `ν₇(x) = m`,
+a constant multiplier `j` (coprime to 7) sends the arc index `q(x) = x/7^m mod 7`
+to ANY NONZERO target `t`: `q(j·x) = j·(x/7^m)` and `x/7^m` is a unit. (Unlike
+`qz_retarget` this is the level-`m` mechanism — multiply by a constant, not a
+`Λ_h` element — and `0` is unreachable since `j·unit ≠ 0`.) -/
+theorem qz_retarget_top (m : ℕ) (x : ℤ) (hx : (7 : ℤ) ^ m ∣ x)
+    (hx' : ¬ (7 : ℤ) ^ (m + 1) ∣ x) (t : ZMod 7) (ht : t ≠ 0) :
+    ∃ j : ℤ, ¬ (7 : ℤ) ∣ j ∧ qz m (j * x) = t := by
+  haveI : Fact (Nat.Prime 7) := ⟨by decide⟩
+  obtain ⟨u, hu⟩ := id hx
+  have hxdiv : x / 7 ^ m = u := by rw [hu]; exact Int.mul_ediv_cancel_left u (by positivity)
+  set r : ZMod 7 := ((x / 7 ^ m : ℤ) : ZMod 7) with hr_def
+  have hr_ne : r ≠ 0 := by
+    rw [hr_def, hxdiv, Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]
+    intro ⟨c, hc⟩; exact hx' ⟨c, by rw [hu, hc, pow_succ]; ring⟩
+  have hr6 : r ^ 6 = 1 := ZMod.pow_card_sub_one_eq_one hr_ne
+  have hjcast : (((t * r ^ 5).val : ℤ) : ZMod 7) = t * r ^ 5 := by
+    rw [Int.cast_natCast, ZMod.natCast_val, ZMod.cast_id]
+  refine ⟨(t * r ^ 5).val, ?_, ?_⟩
+  · intro hdvd
+    have hz : (((t * r ^ 5).val : ℤ) : ZMod 7) = 0 := by
+      rw [ZMod.intCast_zmod_eq_zero_iff_dvd]; exact_mod_cast hdvd
+    rw [hjcast] at hz
+    exact (mul_ne_zero ht (pow_ne_zero 5 hr_ne)) hz
+  · show qz m (((t * r ^ 5).val : ℤ) * x) = t
+    unfold qz
+    rw [show ((t * r ^ 5).val : ℤ) * x = 7 ^ m * ((t * r ^ 5).val * u) from by rw [hu]; ring,
+      Int.mul_ediv_cancel_left _ (pow_ne_zero m (by norm_num : (7 : ℤ) ≠ 0))]
+    have hu_r : ((u : ℤ) : ZMod 7) = r := by rw [hr_def, hxdiv]
+    push_cast [hjcast]
+    rw [hu_r, mul_assoc, show r ^ 5 * r = r ^ 6 from by ring, hr6, mul_one]
+
 /-- **`Λ_j` is inert on higher-level elements.** If `7^{j+1} ∣ x` (i.e. `ν(x) > j`),
 the multiplier `1 + k·7^{m-j}` leaves the arc index `q(x)` unchanged: its slope
 `x/7^j ≡ 0 (mod 7)`. This is what lets retargeting at a low level not disturb the
