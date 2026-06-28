@@ -38,7 +38,8 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 |---|---|---|---|
 | L5 | `ℓ₁+ℓ₂+ℓ₄ ≤ 5` ⇒ avoid {0,6} (exc. (3,1,1)+ẽ) | decide | **DONE** (`lemma5`, `lemma5_avoids`, `_311`) |
 | L4(ii) | `\|ẽ−q(e)\|≤1` carry bound | int-floor | **DONE** (`qz_2xsuby_carry`, `qz_subxy_carry` in Defs) |
-| L4(i) | ẽ invariance under Λ_h (r(y)=2r(x)) | qz_lambda | **DONE** (`lemma4_i`) |
+| L4(i) | ẽ invariance under Λ_h (all 3 eq-13 cases) | qz_lambda | **DONE** — general `qz_lin_invariant` (a·q(λx)+b·q(λy) inv. when a·rx+b·ry=0); `lemma4_i` = (2,-1) instance |
+| fitsInterval API | ℓ≤L monotone in L | — | **DONE** (`fitsInterval_mono`) |
 | Rmk8(ii) | `⊂{0,1,5,6}` ⇒ ℓ(X)≤3 | decide (3-elt) | **DONE** (`remark8_ii_core3`, `fitsInterval`) |
 | Rmk8(i) k=1 | `q(X−X)⊂{0,6}` ⇒ ℓ(X)≤2 | decide (3-elt) | **DONE** (`remark8_i_core3`) |
 | Rmk8(i) k≥2 | ℓ(kX)≤k+1 | int-level (q(kX) multiples) | TODO |
