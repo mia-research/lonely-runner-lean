@@ -360,4 +360,52 @@ theorem qz_retarget (m h : ℕ) (hhm : h < m) (x : ℤ)
       simpa using this
     norm_num at h1
 
+/-- **`Λ_j` is inert on higher-level elements.** If `7^{j+1} ∣ x` (i.e. `ν(x) > j`),
+the multiplier `1 + k·7^{m-j}` leaves the arc index `q(x)` unchanged: its slope
+`x/7^j ≡ 0 (mod 7)`. This is what lets retargeting at a low level not disturb the
+q-values already set at higher levels. -/
+theorem qz_higher_inert (m j : ℕ) (hjm : j ≤ m) (k x : ℤ) (hx : (7 : ℤ) ^ (j + 1) ∣ x) :
+    qz m ((1 + k * 7 ^ (m - j)) * x) = qz m x := by
+  rw [qz_lambda m j hjm k x (dvd_trans (pow_dvd_pow 7 (Nat.le_succ j)) hx)]
+  have hz : ((x / 7 ^ j : ℤ) : ZMod 7) = 0 := by
+    rw [ZMod.intCast_zmod_eq_zero_iff_dvd]
+    obtain ⟨c, hc⟩ := hx
+    refine ⟨c, ?_⟩
+    push_cast
+    rw [hc, pow_succ, show 7 ^ j * 7 * c = 7 ^ j * (7 * c) from by ring,
+      Int.mul_ediv_cancel_left _ (pow_ne_zero j (by norm_num))]
+  rw [hz, mul_zero, add_zero]
+
+/-- **Two-level simultaneous q-retargeting.** Two elements `x, y` at distinct
+levels `h₂ < h₁ < m` can have BOTH arc indices set to arbitrary targets `s, t`
+by one unit multiplier: retarget the higher level first (`qz_retarget` on `x`),
+then the lower (`qz_retarget` on `λ₁·y`); the lower-level factor is inert on `x`
+(`qz_higher_inert`). The engine for Lemma 9 and the multi-element §6 cases. -/
+theorem qz_retarget_two (m h₁ h₂ : ℕ) (hh₁ : h₁ < m) (hlt : h₂ < h₁)
+    (x y : ℤ) (hx : (7 : ℤ) ^ h₁ ∣ x) (hx' : ¬ (7 : ℤ) ^ (h₁ + 1) ∣ x)
+    (hy : (7 : ℤ) ^ h₂ ∣ y) (hy' : ¬ (7 : ℤ) ^ (h₂ + 1) ∣ y) (s t : ZMod 7) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ qz m (lam * x) = s ∧ qz m (lam * y) = t := by
+  have hp7 : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+  obtain ⟨k₁, hk₁x, hk₁u⟩ := qz_retarget m h₁ hh₁ x hx hx' s
+  set lam1 : ℤ := 1 + k₁ * 7 ^ (m - h₁) with hlam1_def
+  -- ν(lam1·y) = h₂ still (lam1 is a unit)
+  have hl1y_dvd : (7 : ℤ) ^ h₂ ∣ lam1 * y := Dvd.dvd.mul_left hy lam1
+  have hl1y_ndvd : ¬ (7 : ℤ) ^ (h₂ + 1) ∣ lam1 * y := by
+    intro hdvd
+    refine hy' ?_
+    have hcop : IsCoprime ((7 : ℤ) ^ (h₂ + 1)) lam1 :=
+      IsCoprime.pow_left ((Prime.coprime_iff_not_dvd hp7).mpr hk₁u)
+    exact hcop.dvd_of_dvd_mul_left hdvd
+  obtain ⟨k₂, hk₂y, hk₂u⟩ := qz_retarget m h₂ (by omega) (lam1 * y) hl1y_dvd hl1y_ndvd t
+  set lam2 : ℤ := 1 + k₂ * 7 ^ (m - h₂) with hlam2_def
+  refine ⟨lam2 * lam1, ?_, ?_, ?_⟩
+  · exact mt (Prime.dvd_mul hp7 |>.mp) (by tauto)
+  · -- lam2 inert on lam1·x (ν(lam1·x) = h₁ > h₂)
+    have hl1x_high : (7 : ℤ) ^ (h₂ + 1) ∣ lam1 * x :=
+      Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hx) lam1
+    rw [show lam2 * lam1 * x = lam2 * (lam1 * x) from by ring, hlam2_def,
+      qz_higher_inert m h₂ (by omega) k₂ (lam1 * x) hl1x_high]
+    exact hk₁x
+  · rw [show lam2 * lam1 * y = lam2 * (lam1 * y) from by ring, hlam2_def, hk₂y]
+
 end IntLRC7BS
