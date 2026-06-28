@@ -79,5 +79,15 @@ leaf layer they consume.
 ## Leaf layer COMPLETE (as of this session)
 `lemma5*`, `lemma6_*` (compression endpoints), `qz_2xsuby_carry`/`qz_subxy_carry`
 (L4(ii) carry), `remark8_ii_core3` + `fitsInterval`. All axiom-clean.
-**Next:** Remark 8(i) (int-level multiples), then Lemma 9 (structural — needs
-Λ_h multiplier construction via Lemma 2 + L4 + Rmk8), then L7, L10–12, cases.
+
+## `five_band` WIRED (as of this session)
+`Case_A5.lean`: `five_band` (5-elt analogue of `four_band`) PROVEN modulo
+`five_avoid` (normalize → `band_of_qz_ne`). Reduction.lean's 3 sorries are CLOSED:
+no-interior |S|=5 → `five_band`; interior + j₀>0 5th-element cases proven
+UNREACHABLE by cardinality. **`five_avoid` is now the SOLE sorry in all of n=7.**
+
+`five_avoid (m) (hm : 1 ≤ m) (d : Fin 5 → ℤ) (hndvd) (hres : dᵢ ∈ {1,2,4}) :`
+`∃ lam, ¬7∣lam ∧ ∀ i, qz m (lam·dᵢ) ≠ 0 ∧ ≠ 6`. m≥1; split m=1 (§7) vs m≥2 (§6).
+
+**Next:** prove `five_avoid`. Remark 8(i), Lemma 9 (structural — Λ_h construction
+via Lemma 2 + L4 + Rmk8), L7, L10–12, cases 6.1–6.6, §7 (m=1).
