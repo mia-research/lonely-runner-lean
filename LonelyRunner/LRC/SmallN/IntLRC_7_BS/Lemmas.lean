@@ -193,6 +193,24 @@ theorem lemma4_i (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
   have := qz_lin_invariant m h hhm k x y 2 (-1) hx hy (by rw [hr]; ring)
   linear_combination this
 
+/-- **Lemma 4 (i), `r(x)=2r(y)` case.** `ẽ(x,y)=2q(y)−q(x)` invariant under `Λ_h`. -/
+theorem lemma4_i_half (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
+    (hx : (7 : ℤ) ^ h ∣ x) (hy : (7 : ℤ) ^ h ∣ y)
+    (hr : ((x / 7 ^ h : ℤ) : ZMod 7) = 2 * ((y / 7 ^ h : ℤ) : ZMod 7)) :
+    2 * qz m ((1 + k * 7 ^ (m - h)) * y) - qz m ((1 + k * 7 ^ (m - h)) * x)
+      = 2 * qz m y - qz m x := by
+  have := qz_lin_invariant m h hhm k x y (-1) 2 hx hy (by rw [hr]; ring)
+  linear_combination this
+
+/-- **Lemma 4 (i), `r(y)=r(x)` case.** `ẽ(x,y)=q(x)−q(y)` invariant under `Λ_h`. -/
+theorem lemma4_i_eq (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
+    (hx : (7 : ℤ) ^ h ∣ x) (hy : (7 : ℤ) ^ h ∣ y)
+    (hr : ((y / 7 ^ h : ℤ) : ZMod 7) = ((x / 7 ^ h : ℤ) : ZMod 7)) :
+    qz m ((1 + k * 7 ^ (m - h)) * x) - qz m ((1 + k * 7 ^ (m - h)) * y)
+      = qz m x - qz m y := by
+  have := qz_lin_invariant m h hhm k x y 1 (-1) hx hy (by rw [hr]; ring)
+  linear_combination this
+
 /-- **Lemma 9 (i) (BS L482), `h < m` form.** Three integers `b₁,b₂,b₃` whose
 differences `b₁−b₃`, `b₂−b₃` have DISTINCT valuations `< m`: there is a unit
 multiplier `lam` compressing `q(lam·B)` into a length-2 arithmetic progression
