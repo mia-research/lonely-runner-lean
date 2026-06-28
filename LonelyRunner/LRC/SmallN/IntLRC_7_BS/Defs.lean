@@ -440,4 +440,35 @@ theorem qz_retarget_two (m h₁ h₂ : ℕ) (hh₁ : h₁ < m) (hlt : h₂ < h�
     exact hk₁x
   · rw [show lam2 * lam1 * y = lam2 * (lam1 * y) from by ring, hlam2_def, hk₂y]
 
+/-- **Two-level retargeting with one element at the top level `m`.** `x` at level
+`m` (target `s ≠ 0`) and `y` at level `h < m` (target `t`, any): one unit
+multiplier hits both. Retarget `x` with a constant `j` (`qz_retarget_top`), then
+`y` with a `Λ_h` factor on `j·y`; the `Λ_h` factor is inert on `j·x` (level
+`m > h`). The `ν=m` analogue of `qz_retarget_two`, for the `ν=m` edges of §6. -/
+theorem qz_retarget_two_top (m h : ℕ) (hh : h < m) (x y : ℤ)
+    (hx : (7 : ℤ) ^ m ∣ x) (hx' : ¬ (7 : ℤ) ^ (m + 1) ∣ x)
+    (hy : (7 : ℤ) ^ h ∣ y) (hy' : ¬ (7 : ℤ) ^ (h + 1) ∣ y)
+    (s t : ZMod 7) (hs : s ≠ 0) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ qz m (lam * x) = s ∧ qz m (lam * y) = t := by
+  have hp7 : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+  obtain ⟨j, hju, hjx⟩ := qz_retarget_top m x hx hx' s hs
+  have hjy_dvd : (7 : ℤ) ^ h ∣ j * y := Dvd.dvd.mul_left hy j
+  have hjy_ndvd : ¬ (7 : ℤ) ^ (h + 1) ∣ j * y := by
+    intro hdvd
+    refine hy' ?_
+    have hcop : IsCoprime ((7 : ℤ) ^ (h + 1)) j :=
+      IsCoprime.pow_left ((Prime.coprime_iff_not_dvd hp7).mpr hju)
+    exact hcop.dvd_of_dvd_mul_left hdvd
+  obtain ⟨k, hky, hku⟩ := qz_retarget m h hh (j * y) hjy_dvd hjy_ndvd t
+  set lam2 : ℤ := 1 + k * 7 ^ (m - h) with hlam2_def
+  refine ⟨lam2 * j, ?_, ?_, ?_⟩
+  · exact mt (Prime.dvd_mul hp7 |>.mp) (by tauto)
+  · -- lam2 inert on j·x (ν(j·x) = m > h)
+    have hjx_high : (7 : ℤ) ^ (h + 1) ∣ j * x :=
+      Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hx) j
+    rw [show lam2 * j * x = lam2 * (j * x) from by ring, hlam2_def,
+      qz_higher_inert m h (by omega) k (j * x) hjx_high]
+    exact hjx
+  · rw [show lam2 * j * y = lam2 * (j * y) from by ring, hlam2_def, hky]
+
 end IntLRC7BS
