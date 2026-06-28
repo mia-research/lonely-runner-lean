@@ -40,4 +40,15 @@ theorem lemma5_avoids (a₁ a₂ a₄ : ZMod 7) (ℓ₁ ℓ₂ ℓ₄ : ℕ)
     simp_all (config := { decide := true }) [intervalAvoids] <;>
     revert a₁ a₂ a₄ <;> decide
 
+/-- **Lemma 5 exceptional triple (3,1,1).** BS shows the `(ℓ₁,ℓ₂,ℓ₄)=(3,1,1)`
+case fails only when `ẽ(d,d') = 2i - j ∈ {2,4}` (where `i = q(A₂)`, `j = q(A₄)`).
+With that exception ruled out (`2·a₂ - a₄ ∉ {2,4}`), the avoidance holds. -/
+theorem lemma5_avoids_311 (a₁ a₂ a₄ : ZMod 7)
+    (hexc : (2 * a₂ - a₄) ∉ ({2, 4} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7,
+      intervalAvoids a₁ 3 1 k ∧
+      intervalAvoids a₂ 1 2 k ∧
+      intervalAvoids a₄ 1 4 k := by
+  revert hexc; revert a₁ a₂ a₄; decide
+
 end IntLRC7BS
