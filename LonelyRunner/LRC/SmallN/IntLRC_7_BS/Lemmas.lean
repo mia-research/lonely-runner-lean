@@ -133,4 +133,55 @@ theorem remark8_i_core3 (v₁ v₂ v₃ : ZMod 7)
     ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 2 := by
   revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
 
+/-- **Lemma 9 (i) (BS L482), `h < m` form.** Three integers `b₁,b₂,b₃` whose
+differences `b₁−b₃`, `b₂−b₃` have DISTINCT valuations `< m`: there is a unit
+multiplier `lam` compressing `q(lam·B)` into a length-2 arithmetic progression
+(`ℓ(lam·B) ≤ 2`). Proof: `qz_retarget_two` sends both `q(lam(b₁−b₃))` and
+`q(lam(b₂−b₃))` to `0`; the three carry bridges (`qz_subxy_carry`) then force all
+pairwise `q`-differences into `{−1,0,1}`, and `remark8_i_core3` concludes.
+
+(BS's `ν(B)={0}` / equal-residue context is not needed for this conclusion — only
+the difference valuations matter. The `ν=m` edge case of BS's 9(i) is separate.) -/
+theorem lemma9_i (m hx hy : ℕ) (b₁ b₂ b₃ : ℤ)
+    (hxm : hx < m) (hym : hy < m) (hne : hx ≠ hy)
+    (hxd : (7 : ℤ) ^ hx ∣ (b₁ - b₃)) (hxd' : ¬ (7 : ℤ) ^ (hx + 1) ∣ (b₁ - b₃))
+    (hyd : (7 : ℤ) ^ hy ∣ (b₂ - b₃)) (hyd' : ¬ (7 : ℤ) ^ (hy + 1) ∣ (b₂ - b₃)) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ a : ZMod 7,
+      fitsInterval ({qz m (lam * b₁), qz m (lam * b₂), qz m (lam * b₃)}
+        : Finset (ZMod 7)) a 2 := by
+  -- retarget both differences to q = 0
+  obtain ⟨lam, hlam, hq1, hq2⟩ : ∃ lam, ¬ (7 : ℤ) ∣ lam ∧
+      qz m (lam * (b₁ - b₃)) = 0 ∧ qz m (lam * (b₂ - b₃)) = 0 := by
+    rcases lt_or_gt_of_ne hne with h | h
+    · obtain ⟨lam, hu, hqy, hqx⟩ :=
+        qz_retarget_two m hy hx hym h (b₂ - b₃) (b₁ - b₃) hyd hyd' hxd hxd' 0 0
+      exact ⟨lam, hu, hqx, hqy⟩
+    · obtain ⟨lam, hu, hqx, hqy⟩ :=
+        qz_retarget_two m hx hy hxm h (b₁ - b₃) (b₂ - b₃) hxd hxd' hyd hyd' 0 0
+      exact ⟨lam, hu, hqx, hqy⟩
+  refine ⟨lam, hlam, ?_⟩
+  set v₁ := qz m (lam * b₁) with hv₁
+  set v₂ := qz m (lam * b₂) with hv₂
+  set v₃ := qz m (lam * b₃) with hv₃
+  -- v₁ − v₃ = −c with c ∈ {0,6}, so ∈ {0,1}
+  have e13 : v₁ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
+    obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m (lam * b₁) (lam * b₃)
+    rw [show lam * b₁ - lam * b₃ = lam * (b₁ - b₃) from by ring, hq1] at hcq
+    have hv : v₁ - v₃ = -c := by linear_combination -hcq
+    rw [hv]; rcases hc with rfl | rfl <;> decide
+  have e23 : v₂ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
+    obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m (lam * b₂) (lam * b₃)
+    rw [show lam * b₂ - lam * b₃ = lam * (b₂ - b₃) from by ring, hq2] at hcq
+    have hv : v₂ - v₃ = -c := by linear_combination -hcq
+    rw [hv]; rcases hc with rfl | rfl <;> decide
+  have e12 : v₁ - v₂ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
+    obtain ⟨c', hc', hcq'⟩ := qz_subxy_carry m (lam * (b₁ - b₃)) (lam * (b₂ - b₃))
+    rw [hq1, hq2, show lam * (b₁ - b₃) - lam * (b₂ - b₃) = lam * (b₁ - b₂) from by ring] at hcq'
+    obtain ⟨c'', hc'', hcq''⟩ := qz_subxy_carry m (lam * b₁) (lam * b₂)
+    rw [show lam * b₁ - lam * b₂ = lam * (b₁ - b₂) from by ring] at hcq''
+    have hv : v₁ - v₂ = c' - c'' := by linear_combination hcq' - hcq''
+    rw [hv]; rcases hc' with rfl | rfl <;> rcases hc'' with rfl | rfl <;> decide
+  obtain ⟨a, ha⟩ := remark8_i_core3 v₁ v₂ v₃ e12 e13 e23
+  exact ⟨a, ha⟩
+
 end IntLRC7BS
