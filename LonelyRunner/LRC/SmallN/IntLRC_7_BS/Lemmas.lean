@@ -133,6 +133,47 @@ theorem remark8_i_core3 (v₁ v₂ v₃ : ZMod 7)
     ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 2 := by
   revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
 
+/-- Carry bridge: if `q(u−v) ∈ {0,6}` then `q(u) − q(v) ∈ {0,1,6}` (= `{−1,0,1}`).
+From `qz_subxy_carry` (`q(u−v) = q(u) − q(v) + c`, `c ∈ {0,6}`). -/
+theorem qz_diff_mem_06 (m : ℕ) (u v : ℤ) (h : qz m (u - v) ∈ ({0, 6} : Finset (ZMod 7))) :
+    qz m u - qz m v ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
+  obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m u v
+  have hd : qz m u - qz m v = qz m (u - v) - c := by linear_combination -hcq
+  rw [hd]
+  simp only [Finset.mem_insert, Finset.mem_singleton] at h
+  rcases h with h | h <;> rw [h] <;> rcases hc with rfl | rfl <;> decide
+
+/-- Carry bridge: if `q(u−v) ∈ {0,1,5,6}` then `q(u) − q(v) ∈ {0,1,2,5,6}` (`= {−2,…,2}`). -/
+theorem qz_diff_mem_0156 (m : ℕ) (u v : ℤ)
+    (h : qz m (u - v) ∈ ({0, 1, 5, 6} : Finset (ZMod 7))) :
+    qz m u - qz m v ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)) := by
+  obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m u v
+  have hd : qz m u - qz m v = qz m (u - v) - c := by linear_combination -hcq
+  rw [hd]
+  simp only [Finset.mem_insert, Finset.mem_singleton] at h
+  rcases h with h | h | h | h <;> rw [h] <;> rcases hc with rfl | rfl <;> decide
+
+/-- **Remark 8 (i) on integers (`k=1`).** If `q(bᵢ−bⱼ) ⊂ {0,6}` for the three
+pairwise differences, then `ℓ({q(b₁),q(b₂),q(b₃)}) ≤ 2`. The integer-difference
+form actually used by the §6 cases (after a multiplier sends `q(B−B) ⊂ {0,6}`). -/
+theorem remark8_i_int (m : ℕ) (b₁ b₂ b₃ : ℤ)
+    (h12 : qz m (b₁ - b₂) ∈ ({0, 6} : Finset (ZMod 7)))
+    (h13 : qz m (b₁ - b₃) ∈ ({0, 6} : Finset (ZMod 7)))
+    (h23 : qz m (b₂ - b₃) ∈ ({0, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, fitsInterval ({qz m b₁, qz m b₂, qz m b₃} : Finset (ZMod 7)) a 2 :=
+  remark8_i_core3 _ _ _ (qz_diff_mem_06 m _ _ h12) (qz_diff_mem_06 m _ _ h13)
+    (qz_diff_mem_06 m _ _ h23)
+
+/-- **Remark 8 (ii) on integers.** If `q(bᵢ−bⱼ) ⊂ {0,1,5,6}` for the three pairwise
+differences, then `ℓ({q(b₁),q(b₂),q(b₃)}) ≤ 3`. -/
+theorem remark8_ii_int (m : ℕ) (b₁ b₂ b₃ : ℤ)
+    (h12 : qz m (b₁ - b₂) ∈ ({0, 1, 5, 6} : Finset (ZMod 7)))
+    (h13 : qz m (b₁ - b₃) ∈ ({0, 1, 5, 6} : Finset (ZMod 7)))
+    (h23 : qz m (b₂ - b₃) ∈ ({0, 1, 5, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, fitsInterval ({qz m b₁, qz m b₂, qz m b₃} : Finset (ZMod 7)) a 3 :=
+  remark8_ii_core3 _ _ _ (qz_diff_mem_0156 m _ _ h12) (qz_diff_mem_0156 m _ _ h13)
+    (qz_diff_mem_0156 m _ _ h23)
+
 /-- **Lemma 4 (i) (BS L366), `r(y)=2r(x)` case.** The quantity `ẽ(x,y)=2q(x)−q(y)`
 is invariant under a level-`h` multiplier `1+k·7^{m-h}`, provided `x,y` share level
 `h` with `r(y)=2r(x)` (here as `(y/7^h) = 2·(x/7^h)` in `ZMod 7`). Immediate from
@@ -170,29 +211,12 @@ theorem lemma9_i (m hx hy : ℕ) (b₁ b₂ b₃ : ℤ)
     · obtain ⟨lam, hu, hqx, hqy⟩ :=
         qz_retarget_two m hx hy hxm h (b₁ - b₃) (b₂ - b₃) hxd hxd' hyd hyd' 0 0
       exact ⟨lam, hu, hqx, hqy⟩
-  refine ⟨lam, hlam, ?_⟩
-  set v₁ := qz m (lam * b₁) with hv₁
-  set v₂ := qz m (lam * b₂) with hv₂
-  set v₃ := qz m (lam * b₃) with hv₃
-  -- v₁ − v₃ = −c with c ∈ {0,6}, so ∈ {0,1}
-  have e13 : v₁ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
-    obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m (lam * b₁) (lam * b₃)
-    rw [show lam * b₁ - lam * b₃ = lam * (b₁ - b₃) from by ring, hq1] at hcq
-    have hv : v₁ - v₃ = -c := by linear_combination -hcq
-    rw [hv]; rcases hc with rfl | rfl <;> decide
-  have e23 : v₂ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
-    obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m (lam * b₂) (lam * b₃)
-    rw [show lam * b₂ - lam * b₃ = lam * (b₂ - b₃) from by ring, hq2] at hcq
-    have hv : v₂ - v₃ = -c := by linear_combination -hcq
-    rw [hv]; rcases hc with rfl | rfl <;> decide
-  have e12 : v₁ - v₂ ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
-    obtain ⟨c', hc', hcq'⟩ := qz_subxy_carry m (lam * (b₁ - b₃)) (lam * (b₂ - b₃))
-    rw [hq1, hq2, show lam * (b₁ - b₃) - lam * (b₂ - b₃) = lam * (b₁ - b₂) from by ring] at hcq'
-    obtain ⟨c'', hc'', hcq''⟩ := qz_subxy_carry m (lam * b₁) (lam * b₂)
-    rw [show lam * b₁ - lam * b₂ = lam * (b₁ - b₂) from by ring] at hcq''
-    have hv : v₁ - v₂ = c' - c'' := by linear_combination hcq' - hcq''
-    rw [hv]; rcases hc' with rfl | rfl <;> rcases hc'' with rfl | rfl <;> decide
-  obtain ⟨a, ha⟩ := remark8_i_core3 v₁ v₂ v₃ e12 e13 e23
-  exact ⟨a, ha⟩
+  refine ⟨lam, hlam, remark8_i_int m (lam * b₁) (lam * b₂) (lam * b₃) ?_ ?_ ?_⟩
+  · -- q(lam·b₁ − lam·b₂) ∈ {0,6}: carry of the two retargeted zeros
+    obtain ⟨c, hc, hcq⟩ := qz_subxy_carry m (lam * (b₁ - b₃)) (lam * (b₂ - b₃))
+    rw [hq1, hq2, show lam * (b₁ - b₃) - lam * (b₂ - b₃) = lam * b₁ - lam * b₂ from by ring] at hcq
+    rw [hcq]; rcases hc with rfl | rfl <;> decide
+  · rw [show lam * b₁ - lam * b₃ = lam * (b₁ - b₃) from by ring, hq1]; decide
+  · rw [show lam * b₂ - lam * b₃ = lam * (b₂ - b₃) from by ring, hq2]; decide
 
 end IntLRC7BS
