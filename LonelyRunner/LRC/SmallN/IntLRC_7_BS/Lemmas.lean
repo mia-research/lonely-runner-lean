@@ -51,4 +51,23 @@ theorem lemma5_avoids_311 (a₁ a₂ a₄ : ZMod 7)
       intervalAvoids a₄ 1 4 k := by
   revert hexc; revert a₁ a₂ a₄; decide
 
+/-- **Lemma 5 (BS L388), faithful form.** `A₁` is the most popular class, so
+`ℓ₂ ≤ ℓ₁` and `ℓ₄ ≤ ℓ₁`; this rules out the spurious `(1,3,1)`/`(1,1,3)` triples,
+leaving `(3,1,1)` as the only exception. Folding in its `ẽ ∉ {2,4}` carve-out
+(`lemma5_avoids_311`) gives the unconditional avoidance BS states. -/
+theorem lemma5 (a₁ a₂ a₄ : ZMod 7) (ℓ₁ ℓ₂ ℓ₄ : ℕ)
+    (h₁ : ℓ₁ ≤ 5) (hsum : ℓ₁ + ℓ₂ + ℓ₄ ≤ 5)
+    (h21 : ℓ₂ ≤ ℓ₁) (h41 : ℓ₄ ≤ ℓ₁)
+    (hexc : ℓ₁ = 3 ∧ ℓ₂ = 1 ∧ ℓ₄ = 1 → (2 * a₂ - a₄) ∉ ({2, 4} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7,
+      intervalAvoids a₁ ℓ₁ 1 k ∧
+      intervalAvoids a₂ ℓ₂ 2 k ∧
+      intervalAvoids a₄ ℓ₄ 4 k := by
+  by_cases h311 : ℓ₁ = 3 ∧ ℓ₂ = 1 ∧ ℓ₄ = 1
+  · obtain ⟨e₁, e₂, e₄⟩ := h311
+    subst e₁; subst e₂; subst e₄
+    exact lemma5_avoids_311 a₁ a₂ a₄ (hexc ⟨rfl, rfl, rfl⟩)
+  · exact lemma5_avoids a₁ a₂ a₄ ℓ₁ ℓ₂ ℓ₄ h₁ (by omega) (by omega) hsum
+      (by tauto) (by rintro ⟨rfl, rfl, rfl⟩; omega) (by rintro ⟨rfl, rfl, rfl⟩; omega)
+
 end IntLRC7BS
