@@ -102,4 +102,24 @@ theorem lemma6_510 (a₂ : ZMod 7) (he : (2 - a₂) ∉ ({2, 3} : Finset (ZMod 7
     ∃ k : ZMod 7, intervalAvoids 1 5 1 k ∧ intervalAvoids a₂ 1 2 k := by
   revert he; revert a₂; decide
 
+/-- `S ⊆ {a, a+1, ..., a+L-1}` in `ZMod 7` — represents `ℓ(S) ≤ L`, i.e. `q(S)`
+fits in a difference-1 arithmetic progression of length `L`. -/
+def fitsInterval (S : Finset (ZMod 7)) (a : ZMod 7) (L : ℕ) : Prop :=
+  ∀ x ∈ S, ∃ j : Fin L, x = a + (j.val : ZMod 7)
+
+instance (S : Finset (ZMod 7)) (a : ZMod 7) (L : ℕ) : Decidable (fitsInterval S a L) :=
+  inferInstanceAs (Decidable (∀ x ∈ S, _))
+
+/-- **Remark 8 (ii) combinatorial core (BS L478).** Three values in `ZMod 7` whose
+pairwise differences all lie in `{0,1,2,5,6} = {−2,…,2}` fit in a length-3 AP.
+(Max clique in the `{±1,±2}` Cayley graph on `ZMod 7` is a 3-term interval.)
+Stated for 3 explicit elements — matches `B = {b₁,b₂,b₃}` in Lemma 9. -/
+set_option maxRecDepth 4000 in
+theorem remark8_ii_core3 (v₁ v₂ v₃ : ZMod 7)
+    (h₁₂ : v₁ - v₂ ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)))
+    (h₁₃ : v₁ - v₃ ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)))
+    (h₂₃ : v₂ - v₃ ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 3 := by
+  revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
+
 end IntLRC7BS
