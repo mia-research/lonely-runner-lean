@@ -38,7 +38,7 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 |---|---|---|---|
 | L5 | `ℓ₁+ℓ₂+ℓ₄ ≤ 5` ⇒ avoid {0,6} (exc. (3,1,1)+ẽ) | decide | **DONE** (`lemma5`, `lemma5_avoids`, `_311`) |
 | L4(ii) | `\|ẽ−q(e)\|≤1` carry bound | int-floor | **DONE** (`qz_2xsuby_carry`, `qz_subxy_carry` in Defs) |
-| L4(i) | ẽ invariance under Λ_{≤j} | qz_lambda | TODO |
+| L4(i) | ẽ invariance under Λ_h (r(y)=2r(x)) | qz_lambda | **DONE** (`lemma4_i`) |
 | Rmk8(ii) | `⊂{0,1,5,6}` ⇒ ℓ(X)≤3 | decide (3-elt) | **DONE** (`remark8_ii_core3`, `fitsInterval`) |
 | Rmk8(i) k=1 | `q(X−X)⊂{0,6}` ⇒ ℓ(X)≤2 | decide (3-elt) | **DONE** (`remark8_i_core3`) |
 | Rmk8(i) k≥2 | ℓ(kX)≤k+1 | int-level (q(kX) multiples) | TODO |
@@ -46,7 +46,9 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 | retarget | single-elt q→any target via Λ_h | qz_lambda + Fermat | **DONE** (`qz_retarget`, Defs) |
 | retarget² | two elts (distinct levels) → targets, one unit λ | composition | **DONE** (`qz_retarget_two`, `qz_higher_inert`) |
 | L7 | ẽ control via Λ_h, `ν(2d−d')` structure (needs m>1) | carry lemmas | TODO (hard) |
-| L9 | 3-elt compression B=A₁, equal residues | retarget² + Rmk8 | TODO (next — tools ready) |
+| L9(i) | 3-elt compression, ν(x)≠ν(y), both <m ⇒ ℓ≤2 | retarget² + Rmk8(i) | **DONE** (`lemma9_i`) |
+| L9(ii) | ν(x)=ν(y)=h<m, r(y)=jr(x) ⇒ q(λy)∈{0,5,6}, ℓ≤j | L4(i) + retarget + e(x,y) | TODO (next) |
+| L9 ν=m edge | 9(i) with one valuation =m (Λ_m const retarget) | Λ_m mult | TODO |
 | L10 | \|A₁\|≥4 numbering (ν-coloring of E) | finite | TODO |
 | L11 | \|A₁\|=3 numbering | finite | TODO |
 | L12 | \|A₁\|=3,\|A₂\|=2 sufficient conds | L5-style | TODO |
