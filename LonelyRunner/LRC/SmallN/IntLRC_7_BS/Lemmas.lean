@@ -110,6 +110,13 @@ def fitsInterval (S : Finset (ZMod 7)) (a : ZMod 7) (L : ℕ) : Prop :=
 instance (S : Finset (ZMod 7)) (a : ZMod 7) (L : ℕ) : Decidable (fitsInterval S a L) :=
   inferInstanceAs (Decidable (∀ x ∈ S, _))
 
+/-- `ℓ(S) ≤ L` is monotone in `L`: a length-`L` AP fit is also a length-`L'` fit
+for `L ≤ L'`. Lets the differing length bounds (Lemma 9(i): `ℓ≤2`, 9(ii): `ℓ≤3`)
+be combined uniformly. -/
+theorem fitsInterval_mono {S : Finset (ZMod 7)} {a : ZMod 7} {L L' : ℕ}
+    (hLL' : L ≤ L') (h : fitsInterval S a L) : fitsInterval S a L' :=
+  fun x hx => let ⟨j, hj⟩ := h x hx; ⟨⟨j.val, lt_of_lt_of_le j.isLt hLL'⟩, hj⟩
+
 /-- **Remark 8 (ii) combinatorial core (BS L478).** Three values in `ZMod 7` whose
 pairwise differences all lie in `{0,1,2,5,6} = {−2,…,2}` fit in a length-3 AP.
 (Max clique in the `{±1,±2}` Cayley graph on `ZMod 7` is a 3-term interval.)
@@ -183,7 +190,8 @@ theorem lemma4_i (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
     (hr : ((y / 7 ^ h : ℤ) : ZMod 7) = 2 * ((x / 7 ^ h : ℤ) : ZMod 7)) :
     2 * qz m ((1 + k * 7 ^ (m - h)) * x) - qz m ((1 + k * 7 ^ (m - h)) * y)
       = 2 * qz m x - qz m y := by
-  rw [qz_lambda m h hhm k x hx, qz_lambda m h hhm k y hy, hr]; ring
+  have := qz_lin_invariant m h hhm k x y 2 (-1) hx hy (by rw [hr]; ring)
+  linear_combination this
 
 /-- **Lemma 9 (i) (BS L482), `h < m` form.** Three integers `b₁,b₂,b₃` whose
 differences `b₁−b₃`, `b₂−b₃` have DISTINCT valuations `< m`: there is a unit

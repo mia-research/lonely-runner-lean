@@ -392,6 +392,20 @@ theorem qz_retarget_top (m : ℕ) (x : ℤ) (hx : (7 : ℤ) ^ m ∣ x)
     push_cast [hjcast]
     rw [hu_r, mul_assoc, show r ^ 5 * r = r ^ 6 from by ring, hr6, mul_one]
 
+/-- **General `ẽ`-invariance (BS Lemma 4(i), master form).** Any `ZMod 7`-linear
+combination `a·q(x) + b·q(y)` is invariant under a level-`h` multiplier
+`1 + k·7^{m-h}`, provided the corresponding combination of slopes vanishes:
+`a·(x/7^h) + b·(y/7^h) = 0`. The three cases of `ẽ` in BS eq (13) are the
+instances `(a,b) = (2,-1)`, `(-1,2)`, `(1,-1)` under the residue relations
+`r(y)=2r(x)`, `r(x)=2r(y)`, `r(y)=r(x)`. -/
+theorem qz_lin_invariant (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ) (a b : ZMod 7)
+    (hx : (7 : ℤ) ^ h ∣ x) (hy : (7 : ℤ) ^ h ∣ y)
+    (hab : a * ((x / 7 ^ h : ℤ) : ZMod 7) + b * ((y / 7 ^ h : ℤ) : ZMod 7) = 0) :
+    a * qz m ((1 + k * 7 ^ (m - h)) * x) + b * qz m ((1 + k * 7 ^ (m - h)) * y)
+      = a * qz m x + b * qz m y := by
+  rw [qz_lambda m h hhm k x hx, qz_lambda m h hhm k y hy]
+  linear_combination (k : ZMod 7) * hab
+
 /-- **`Λ_j` is inert on higher-level elements.** If `7^{j+1} ∣ x` (i.e. `ν(x) > j`),
 the multiplier `1 + k·7^{m-j}` leaves the arc index `q(x)` unchanged: its slope
 `x/7^j ≡ 0 (mod 7)`. This is what lets retargeting at a low level not disturb the
