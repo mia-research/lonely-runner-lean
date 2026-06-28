@@ -37,9 +37,11 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 | Lemma | Content | Method | Status |
 |---|---|---|---|
 | L5 | `ℓ₁+ℓ₂+ℓ₄ ≤ 5` ⇒ avoid {0,6} (exc. (3,1,1)+ẽ) | decide | **DONE** (`lemma5`, `lemma5_avoids`, `_311`) |
-| L4 | `ν(x)=ν(y)=j<m`: ẽ invariance under Λ_{≤j}; \|ẽ−q(e)\|≤1 | arith on qz | TODO |
-| Rmk8 | `q(X−X)⊂{0,6}` ⇒ ℓ(kX)≤k+1; `⊂{0,1,5,6}` ⇒ ℓ(X)≤3 | combinatorial | TODO |
-| L6 | (5,0,1)/(5,1,0)/(4,*,*)/(3,3,0) endpoints w/ ẽ conds | decide | TODO (next) |
+| L4(ii) | `\|ẽ−q(e)\|≤1` carry bound | int-floor | **DONE** (`qz_2xsuby_carry`, `qz_subxy_carry` in Defs) |
+| L4(i) | ẽ invariance under Λ_{≤j} | qz_lambda | TODO |
+| Rmk8(ii) | `⊂{0,1,5,6}` ⇒ ℓ(X)≤3 | decide (3-elt) | **DONE** (`remark8_ii_core3`, `fitsInterval`) |
+| Rmk8(i) | `q(X−X)⊂{0,6}` ⇒ ℓ(kX)≤k+1 | int-level (NOT pure ZMod 7) | TODO — needs q(kX) multiples reasoning |
+| L6 | (5,0,1)/(5,1,0)/(4,*,*)/(3,3,0) endpoints w/ ẽ conds | decide | **DONE** (`lemma6_330/402/420/501/510`) |
 | L7 | ẽ control via Λ_h, `ν(2d−d')` structure (needs m>1) | carry lemmas | TODO (hard) |
 | L9 | 3-elt compression B=A₁, equal residues | Λ_h + L4 | TODO (hard) |
 | L10 | \|A₁\|≥4 numbering (ν-coloring of E) | finite | TODO |
@@ -47,6 +49,11 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 | L12 | \|A₁\|=3,\|A₂\|=2 sufficient conds | L5-style | TODO |
 | 6.1–6.6 | case analysis by (\|A₁\|,\|A₂\|,\|A₄\|) | weave above | TODO |
 | §7 | m=1: 969 + 32×6 exhaustive search | decide (RISK) | TODO |
+
+**Next-session unit:** define `fitsInterval S a L` (representing `ℓ(S) ≤ L`),
+prove its API, then **Remark 8** + **Lemma 9** (the first structural
+multiplier-existence lemma). L4(ii) carry bounds + L5/L6 endpoints are the
+leaf layer they consume.
 
 ## Execution order (this multi-session push)
 
@@ -64,3 +71,13 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 - **Lemma 7 (ii)** explicitly requires m>1; the m=1 path MUST route to §7.
 - `ẽ`/`e` only defined on residue-related pairs — partial functions; formalize as
   total functions with a residue-relation hypothesis where used.
+- **`decide` over `∀ S : Finset (ZMod 7)` silently falls back to `sorryAx`**
+  (max recursion depth) — a `lake build` "success" that is actually a sorry.
+  ALWAYS `#print axioms` after a heavy `decide`. Use explicit-element forms
+  (3-tuple, not arbitrary Finset) to keep `decide` tractable + honest.
+
+## Leaf layer COMPLETE (as of this session)
+`lemma5*`, `lemma6_*` (compression endpoints), `qz_2xsuby_carry`/`qz_subxy_carry`
+(L4(ii) carry), `remark8_ii_core3` + `fitsInterval`. All axiom-clean.
+**Next:** Remark 8(i) (int-level multiples), then Lemma 9 (structural — needs
+Λ_h multiplier construction via Lemma 2 + L4 + Rmk8), then L7, L10–12, cases.
