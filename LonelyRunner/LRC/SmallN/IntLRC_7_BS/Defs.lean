@@ -1,6 +1,7 @@
 import LonelyRunner.LRC.Defs
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 import Mathlib.Data.ZMod.Basic
+import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # n = 7 (Barajas–Serra 2008) — `p = 7` apparatus
@@ -329,5 +330,34 @@ theorem qz_subxy_carry (m : ℕ) (x y : ℤ) :
     · right; decide
     · left; decide
   · unfold qz; rw [hdecomp]; push_cast; ring
+
+/-- **Single-element q-retargeting (BS Lemma 2, one element).** For `x` with
+`ν₇(x) = h < m`, a multiplier `1 + k·7^{m-h} ∈ Λ_h` sends the arc index `q(x)` to
+ANY target `t ∈ ZMod 7`: the slope `x/7^h` is a unit, so `q(λx) = q(x) + k·(x/7^h)`
+is surjective in `k`. The multiplier is coprime to 7. This is the engine behind
+every "by Lemma 2 we may assume `q(λx) = …`" step of the §6 case analysis. -/
+theorem qz_retarget (m h : ℕ) (hhm : h < m) (x : ℤ)
+    (hx : (7 : ℤ) ^ h ∣ x) (hx' : ¬ (7 : ℤ) ^ (h + 1) ∣ x) (t : ZMod 7) :
+    ∃ k : ℤ, qz m ((1 + k * 7 ^ (m - h)) * x) = t ∧ ¬ (7 : ℤ) ∣ (1 + k * 7 ^ (m - h)) := by
+  haveI : Fact (Nat.Prime 7) := ⟨by decide⟩
+  obtain ⟨d, hd⟩ := id hx
+  have hxdiv : x / 7 ^ h = d := by rw [hd]; exact Int.mul_ediv_cancel_left d (by positivity)
+  set r : ZMod 7 := ((x / 7 ^ h : ℤ) : ZMod 7) with hr_def
+  have hr_ne : r ≠ 0 := by
+    rw [hr_def, hxdiv, Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]
+    intro ⟨c, hc⟩; exact hx' ⟨c, by rw [hd, hc, pow_succ]; ring⟩
+  -- In ZMod 7, r⁻¹ = r^5 (Fermat: r^6 = 1), so we use r^5 and avoid inverses.
+  have hr6 : r ^ 6 = 1 := ZMod.pow_card_sub_one_eq_one hr_ne
+  refine ⟨((t - qz m x) * r ^ 5).val, ?_, ?_⟩
+  · rw [qz_lambda m h (le_of_lt hhm) _ x hx, ← hr_def]
+    have hk : (((((t - qz m x) * r ^ 5).val : ℤ)) : ZMod 7) = (t - qz m x) * r ^ 5 := by
+      rw [Int.cast_natCast, ZMod.natCast_val, ZMod.cast_id]
+    rw [hk, mul_assoc, show r ^ 5 * r = r ^ 6 from by ring, hr6, mul_one, add_sub_cancel]
+  · intro hdvd
+    have h7 : (7 : ℤ) ∣ 7 ^ (m - h) := dvd_pow_self 7 (by omega : m - h ≠ 0)
+    have h1 : (7 : ℤ) ∣ 1 := by
+      have := dvd_sub hdvd (Dvd.dvd.mul_left h7 (((t - qz m x) * r ^ 5).val : ℤ))
+      simpa using this
+    norm_num at h1
 
 end IntLRC7BS

@@ -122,4 +122,15 @@ theorem remark8_ii_core3 (v₁ v₂ v₃ : ZMod 7)
     ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 3 := by
   revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
 
+/-- **Remark 8 (i) combinatorial core, `k = 1` (BS L476).** Three `ZMod 7` values
+whose pairwise differences all lie in `{0,1,6} = {−1,0,1}` fit in a length-2 AP.
+(Used via `qz_subxy_carry`: `q(X−X)⊂{0,6}` ⇒ pairwise `qz`-diffs ∈ `{−1,0,1}`.) -/
+set_option maxRecDepth 4000 in
+theorem remark8_i_core3 (v₁ v₂ v₃ : ZMod 7)
+    (h₁₂ : v₁ - v₂ ∈ ({0, 1, 6} : Finset (ZMod 7)))
+    (h₁₃ : v₁ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)))
+    (h₂₃ : v₂ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 2 := by
+  revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
+
 end IntLRC7BS
