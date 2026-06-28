@@ -103,19 +103,27 @@ The lone `sorry` is `Reduction.bs_discrete_q` (hard branch). PDF
 **Case counts (`|D|=6, gcd=1`, hard = ∃ j<m |D₇(j)|≥4):** ≤1 big level (two ⟹ ≥8>6);
 big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D₇(0)|∈{4,5}`.
 
-**Current sorry chain (2026-06-28) — ONE sorry left in all of n=7:**
-`intLRC_seven` → `bs_discrete_q` (Reduction, ✅ sorry-free) → `five_band`
-(Case_A5, ✅ proven) → **`five_avoid`** (the §6/§7 |A|=5 case analysis, OPEN).
+**Current sorry chain (2026-06-28 updated) — sorry count:**
+`intLRC_seven` → `bs_discrete_q` (✅) → `five_band` (✅) → `five_avoid` → {
+  `five_compress` (§6, m≥2, structured skeleton): **OPEN**
+  `five_avoid_m1` (§7, m=1): **OPEN — statement needs redraft (see below)**
+}
+Lemmas7_9.lean: `lemma7_i` ✅, `lemma9_ii_j3` ✅, `lemma7_ii` OPEN, `lemma9_ii_j2` OPEN.
 
-All of §4/§5 is sorry-free. The j₀=0 branch dispatches |S|=4 (`four_band`) vs
-|S|=5 (`five_band`); the interior and j₀>0 "5th-element" cases were proven
-UNREACHABLE by cardinality (two distinct non-level elements force |·|=4).
+**§7 (m=1) architectural issue (2026-06-28):**
+`five_avoid_m1` as stated is FALSE: three exceptional 5-element sets
+`{1,4,11,39,43}`, `{1,4,18,22,29}`, `{1,4,18,44,46}` (ZMod 49, up to dilation)
+have no unit multiplier. BS resolves them via the 6th element d₆ = 7k (the
+level-1 element in the full 6-element speed set D) at N'=98: the remaining bad
+(set, d₆) combinations all have `gcd(D) ≥ 2`, contradicting LRC's `gcd(D) = 1`.
+**Required fix**: either (a) thread d₆ and gcd=1 into `five_avoid_m1`, or (b)
+handle m=1 |A|=5 jointly at the `bs_discrete_q` dispatch level with all 6 elements.
 
-**Next step — §6 (|A|=5):**
-The 3 remaining sorries all need a `five_band` theorem (5 coprime-to-7 elements →
-∃ multiplier with band). This requires Lemmas 4–12 (§3–§4, supporting tools) +
-Cases 6.1–6.6 (the actual case analysis) + §7 (m=1 exhaustive search, 969 cases).
-Dependency chain: Lemmas.lean → Case_A5.lean.
+**Next step — §6 (|A|=5, m≥2):**
+`five_compress` needs Lemmas 10–12 (not yet in Lean) + Cases 6.1–6.6.
+`lemma9_ii_j2` needs a two-target carry combinator in Defs.lean.
+Dependency chain: Defs.lean (new combinator) → Lemmas7_9.lean → Lemmas.lean
+(L10–12) → Case_A5.lean (`five_compress`).
 
 Target interface:
 ```lean
