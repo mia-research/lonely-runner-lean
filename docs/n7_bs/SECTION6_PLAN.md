@@ -45,10 +45,13 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 | L6 | (5,0,1)/(5,1,0)/(4,*,*)/(3,3,0) endpoints w/ ẽ conds | decide | **DONE** (`lemma6_330/402/420/501/510`) |
 | retarget | single-elt q→any target via Λ_h | qz_lambda + Fermat | **DONE** (`qz_retarget`, Defs) |
 | retarget² | two elts (distinct levels) → targets, one unit λ | composition | **DONE** (`qz_retarget_two`, `qz_higher_inert`) |
+| retarget_top | level-m elt → any NONZERO target via const mult | Fermat | **DONE** (`qz_retarget_top`) |
+| retarget²_top | level-m + level-h<m → both targets, one unit λ | composition | **DONE** (`qz_retarget_two_top`) |
+| Rmk8 int wrappers | q(B−B)⊂{0,6}/{0,1,5,6} on integer diffs ⇒ ℓ≤2/3 | qz_subxy_carry | **DONE** (`remark8_i_int`, `remark8_ii_int`, `qz_diff_mem_06/0156`) |
 | L7 | ẽ control via Λ_h, `ν(2d−d')` structure (needs m>1) | carry lemmas | TODO (hard) |
 | L9(i) | 3-elt compression, ν(x)≠ν(y), both <m ⇒ ℓ≤2 | retarget² + Rmk8(i) | **DONE** (`lemma9_i`) |
 | L9(ii) | ν(x)=ν(y)=h<m, r(y)=jr(x) ⇒ q(λy)∈{0,5,6}, ℓ≤j | L4(i) + retarget + e(x,y) | TODO (next) |
-| L9 ν=m edge | 9(i) with one valuation =m (Λ_m const retarget) | Λ_m mult | TODO |
+| L9 ν=m edge | 9(i) with one valuation =m | `qz_retarget_two_top` ready | TODO — SUBTLE (see below) |
 | L10 | \|A₁\|≥4 numbering (ν-coloring of E) | finite | TODO |
 | L11 | \|A₁\|=3 numbering | finite | TODO |
 | L12 | \|A₁\|=3,\|A₂\|=2 sufficient conds | L5-style | TODO |
@@ -105,3 +108,11 @@ pinned to `{0,6}` by the ±1 carry bound alone (`0−6+c = {0,1}`, the `1` is ba
 BS must be using the PRECISE carry value, not the bound. Resolve by reading BS's
 exact argument (the q-tables / Remark 8(i) application) — do NOT assume the carry
 bound suffices. This is the load-bearing gap for L9(ii).
+
+### Lemma 9(i) ν=m edge SUBTLETY
+`qz_retarget_top` only reaches NONZERO targets, so the level-m difference can be
+set to `q=1` (BS "λx=N/7"), NOT `0`. Then `v₁−v₃ = 1−c ∈ {1,2}` (c∈{0,6}) —
+`2 ∉ {0,1,6}`, so `remark8_i_core3` does NOT directly apply. BS's `λx=N/7` likely
+means the EXACT residue `7^m` (boundary), and the `q(λ(b₁−b₂))∈{0,6}` claim uses
+that exact-residue structure, not just `q=1`. Read BS L487–489 carefully before
+formalizing. Tool `qz_retarget_two_top` is ready; the ARGUMENT is the open part.
