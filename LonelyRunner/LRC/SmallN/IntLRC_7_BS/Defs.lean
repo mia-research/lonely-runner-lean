@@ -263,4 +263,71 @@ theorem qz_shift0 (m : ℕ) (k y : ℤ) :
   have h := qz_lambda m 0 (Nat.zero_le m) k y (one_dvd y)
   simpa using h
 
+/-- **Lemma 4 (ii) carry bound, `e = 2x − y` (BS L368).** The arc index of the
+combination `2x − y` agrees with `2·q(x) − q(y)` up to a carry `c ∈ {−1,0,1}`
+(here `6 = −1` in `ZMod 7`). Pure integer-floor fact: the carry is
+`⌊(2·(x%7^m) − y%7^m)/7^m⌋`, and `2·rx − ry ∈ (−7^m, 2·7^m)`. -/
+theorem qz_2xsuby_carry (m : ℕ) (x y : ℤ) :
+    ∃ c : ZMod 7, (c = 0 ∨ c = 1 ∨ c = 6) ∧
+      qz m (2 * x - y) = 2 * qz m x - qz m y + c := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have hPne : (7 : ℤ) ^ m ≠ 0 := ne_of_gt hP
+  set P := (7 : ℤ) ^ m
+  set rx := x % P; set ry := y % P
+  have hrx0 : 0 ≤ rx := Int.emod_nonneg x hPne
+  have hry0 : 0 ≤ ry := Int.emod_nonneg y hPne
+  have hrxP : rx < P := Int.emod_lt_of_pos x hP
+  have hryP : ry < P := Int.emod_lt_of_pos y hP
+  set s : ℤ := (2 * rx - ry) / P with hs_def
+  -- s ∈ {−1,0,1}
+  have hs_hi : s ≤ 1 := by
+    have : s < 2 := by rw [hs_def, Int.ediv_lt_iff_lt_mul hP]; linarith
+    omega
+  have hs_lo : -1 ≤ s := by
+    rw [hs_def, Int.le_ediv_iff_mul_le hP]; linarith
+  -- (2x − y)/P = 2(x/P) − (y/P) + s
+  have hdecomp : (2 * x - y) / P = 2 * (x / P) - y / P + s := by
+    have ex : (rx : ℤ) = x - P * (x / P) := Int.emod_def x P
+    have ey : (ry : ℤ) = y - P * (y / P) := Int.emod_def y P
+    have hcomb : 2 * x - y = (2 * rx - ry) + P * (2 * (x / P) - y / P) := by
+      rw [ex, ey]; ring
+    rw [hcomb, Int.add_mul_ediv_left _ _ hPne, ← hs_def]; ring
+  refine ⟨((s : ZMod 7)), ?_, ?_⟩
+  · interval_cases s
+    · right; right; decide
+    · left; decide
+    · right; left; decide
+  · unfold qz; rw [hdecomp]; push_cast; ring
+
+/-- **Lemma 4 (ii) carry bound, `e = x − y` (BS L368).** For equal-residue pairs
+`r(x) = r(y)`, the arc index of `x − y` agrees with `q(x) − q(y)` up to a carry
+`c ∈ {−1,0}` (`6 = −1`): `x − y = P·(qx−qy) + (rx−ry)` with `rx−ry ∈ (−P,P)`. -/
+theorem qz_subxy_carry (m : ℕ) (x y : ℤ) :
+    ∃ c : ZMod 7, (c = 0 ∨ c = 6) ∧
+      qz m (x - y) = qz m x - qz m y + c := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have hPne : (7 : ℤ) ^ m ≠ 0 := ne_of_gt hP
+  set P := (7 : ℤ) ^ m
+  set rx := x % P; set ry := y % P
+  have hrx0 : 0 ≤ rx := Int.emod_nonneg x hPne
+  have hry0 : 0 ≤ ry := Int.emod_nonneg y hPne
+  have hrxP : rx < P := Int.emod_lt_of_pos x hP
+  have hryP : ry < P := Int.emod_lt_of_pos y hP
+  set s : ℤ := (rx - ry) / P with hs_def
+  have hs_hi : s ≤ 0 := by
+    have : s < 1 := by rw [hs_def, Int.ediv_lt_iff_lt_mul hP]; linarith
+    omega
+  have hs_lo : -1 ≤ s := by
+    rw [hs_def, Int.le_ediv_iff_mul_le hP]; linarith
+  have hdecomp : (x - y) / P = x / P - y / P + s := by
+    have ex : (rx : ℤ) = x - P * (x / P) := Int.emod_def x P
+    have ey : (ry : ℤ) = y - P * (y / P) := Int.emod_def y P
+    have hcomb : x - y = (rx - ry) + P * (x / P - y / P) := by rw [ex, ey]; ring
+    rw [hcomb, Int.add_mul_ediv_left _ _ hPne, ← hs_def]; ring
+  refine ⟨((s : ZMod 7)), ?_, ?_⟩
+  · interval_cases s
+    · right; decide
+    · left; decide
+  · unfold qz; rw [hdecomp]; push_cast; ring
+
 end IntLRC7BS
