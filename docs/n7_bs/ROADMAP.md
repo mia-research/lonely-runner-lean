@@ -59,7 +59,7 @@ checkpoint`. Source line refs are into `sources_barajas_serra_2008.txt`.
 | `PrimeFiltering.lean` | **Lemma 2 (Prime Filtering)** + **Corollary 3** — the reduction engine, conceptual core. | 129–169 | **✅ DONE, ALL axiom-clean:** `single_level_avoid` (pigeonhole, ∑\|F\|≤6), `single_level_avoid_excl` (top level, ∑\|F\|≤5), **`prime_filtering` (Lemma 2, full general-`m` level induction)**, `band_top`, **`corollary3` (i₀=m form)** |
 | `Reduction.lean` | §4 overview: `|D₇(i)| ≤ 3 ⟹ Cor 3`; hard branch dispatch. | 237–264 | **FULL DISPATCH WIRED.** Easy + j₀=0 + j₀>0 all done. **3 sorries** all = "5th level-0 element → §6". |
 | `Section5c.lean` | §5 interior element handling (BS eq 8). | 269–273 | **✅ ALL AXIOM-CLEAN.** `interior_in_band`, `exists_pre_congr` (modular inverse + congruence). |
-| `Lemmas.lean` | Supporting Lemmas 4–9 (multiplier existence / `ν`-coloring). | 364–505 | not started |
+| `Lemmas.lean` | Supporting Lemmas 4–9 (multiplier existence / `ν`-coloring). | 364–505 | **Lemma 5 (`lemma5_avoids`) PROVEN axiom-clean** — interval avoidance pigeonhole via `decide`. Lemmas 4,6,7,9 not started. |
 | `Case_A4.lean` | §5 `|A| = 4`: Case 1 `|A_s|=4` (L287), Case 2 `|A_s|=3` (L299), Case 3 `|A_s|=2` (L319). Finite mod-7 chase (eqns 7–12), candidates for `interval_cases`/`decide`/`omega`. | 267–363 | **ALL THREE §5 CASES PROVEN AXIOM-CLEAN.** |
 | `Section5.lean` | §5 integer assembly: carry packaging, case assemblies, normalization. | 265–346 | **✅ ALL AXIOM-CLEAN, 0 sorry.** `case1/2/3_int_avoid`, `band_neg`, `normalize7`. |
 | `Section5b.lean` | §5 dispatch: residue classification + `four_band` master theorem. | 265–346 | **✅ `four_band` PROVEN axiom-clean.** Fin 3 pigeonhole, (4,4) relabeling, sub-tuple dispatch. |
