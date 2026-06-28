@@ -96,3 +96,12 @@ UNREACHABLE by cardinality. **`five_avoid` is now the SOLE sorry in all of n=7.*
 
 **Next:** prove `five_avoid`. Remark 8(i), Lemma 9 (structural — Λ_h construction
 via Lemma 2 + L4 + Rmk8), L7, L10–12, cases 6.1–6.6, §7 (m=1).
+
+### Lemma 9(ii) SUBTLETY (read BS L491–505 carefully before formalizing)
+The j=2 construction: retarget `e=2x−y` to `q(λe)=0` (ν(e)>h since r(e)=0), get
+`ẽ(λx,λy)∈{0,1,6}` via L4(ii), then λ'∈Λ_h sets `q(λ'λx)∈{0,6}`. For `ẽ=1` this
+yields the MIXED pair `(q(λ'λx),q(λ'λy))=(0,6)`, and then `q(λ'λ(x−y))` is NOT
+pinned to `{0,6}` by the ±1 carry bound alone (`0−6+c = {0,1}`, the `1` is bad).
+BS must be using the PRECISE carry value, not the bound. Resolve by reading BS's
+exact argument (the q-tables / Remark 8(i) application) — do NOT assume the carry
+bound suffices. This is the load-bearing gap for L9(ii).
