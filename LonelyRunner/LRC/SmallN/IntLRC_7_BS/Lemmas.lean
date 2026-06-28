@@ -133,6 +133,17 @@ theorem remark8_i_core3 (v₁ v₂ v₃ : ZMod 7)
     ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 2 := by
   revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
 
+/-- **Lemma 4 (i) (BS L366), `r(y)=2r(x)` case.** The quantity `ẽ(x,y)=2q(x)−q(y)`
+is invariant under a level-`h` multiplier `1+k·7^{m-h}`, provided `x,y` share level
+`h` with `r(y)=2r(x)` (here as `(y/7^h) = 2·(x/7^h)` in `ZMod 7`). Immediate from
+`qz_lambda`: the two shifts `k·r(x)`, `k·r(y)=2k·r(x)` cancel in `2q(λx)−q(λy)`. -/
+theorem lemma4_i (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
+    (hx : (7 : ℤ) ^ h ∣ x) (hy : (7 : ℤ) ^ h ∣ y)
+    (hr : ((y / 7 ^ h : ℤ) : ZMod 7) = 2 * ((x / 7 ^ h : ℤ) : ZMod 7)) :
+    2 * qz m ((1 + k * 7 ^ (m - h)) * x) - qz m ((1 + k * 7 ^ (m - h)) * y)
+      = 2 * qz m x - qz m y := by
+  rw [qz_lambda m h hhm k x hx, qz_lambda m h hhm k y hy, hr]; ring
+
 /-- **Lemma 9 (i) (BS L482), `h < m` form.** Three integers `b₁,b₂,b₃` whose
 differences `b₁−b₃`, `b₂−b₃` have DISTINCT valuations `< m`: there is a unit
 multiplier `lam` compressing `q(lam·B)` into a length-2 arithmetic progression
