@@ -1,5 +1,6 @@
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5b
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5c
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case_A5
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
@@ -15,8 +16,9 @@ dispatch:
   proven `corollary3` produces the multiplier directly.
 - **Hard branch** — some level `j < m` has `≥ 4` elements. With `|D| = 6` at most
   one level can be that large; the §4 reduction (divide by `7^{i₀}`) moves it to
-  the bottom, leaving `|D₇(0)| ∈ {4,5}` for the §5/§6 analysis. **This is the lone
-  remaining `sorry`.**
+  the bottom, leaving `|D₇(0)| ∈ {4,5}` for the §5/§6 analysis. `|·| = 4` uses
+  `four_band`; `|·| = 5` uses `five_band` (§6, `Case_A5.lean`). All three
+  sub-dispatches are wired; the only open leaf is `five_avoid` (`Case_A5.lean`).
 -/
 
 open Finset
@@ -25,7 +27,8 @@ namespace IntLRC7BS
 
 /-- **Discrete Barajas–Serra core, residue-band form (n = 7).** See `Main` for the
 statement context. Proved by the §4 dispatch into `corollary3` (easy branch) and
-the §5/§6 case analysis (hard branch, still `sorry`). -/
+the §5/§6 case analysis (hard branch). Fully wired; the only open leaf in the
+import closure is `five_avoid` (the §6 |A|=5 case analysis, `Case_A5.lean`). -/
 theorem bs_discrete_q
     (D : Fin 6 → ℕ) (hpos : ∀ i, 0 < D i)
     (hinj : Function.Injective D) (hgcd : Finset.univ.gcd D = 1) :
@@ -89,19 +92,54 @@ theorem bs_discrete_q
       -- If no: four_band on d4 directly; non-level-0 = level-m → band_top.
       -- If yes: pre-multiplier from exists_pre_congr; four_band on pre·d4.
       by_cases hnointerior : ∀ i : Fin 6, i ∉ S → (7 : ℤ) ^ m ∣ (D i : ℤ)
-      · -- No interior: all non-level-0 are level-m
-        set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
-        obtain ⟨lam, hlam_unit, _, _, hband4⟩ := four_band m hj₀m d4 hf_ndvd
-        refine ⟨m, lam, fun i => ?_⟩
-        by_cases hi : i ∈ S
-        · by_cases hiT : i ∈ T
-          · have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
+      · -- No interior: all non-level-0 are level-m. |S| ∈ {4,5}.
+        -- A level-m element exists (m ≥ 1 = max valuation), so it is ∉ S ⇒ |S| ≤ 5.
+        obtain ⟨i_m, -, hi_m⟩ := Finset.exists_mem_eq_sup Finset.univ
+          ⟨0, Finset.mem_univ 0⟩ (fun i => padicValNat 7 (D i))
+        have hi_m_pos : 0 < padicValNat 7 (D i_m) := by rw [hm] at hj₀m; omega
+        have hi_m_notS : i_m ∉ S := by
+          simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not]
+          have : (7 : ℕ) ∣ D i_m := by
+            have := (padicValNat_dvd_iff_le (hpos i_m).ne').mpr (by omega : 1 ≤ padicValNat 7 (D i_m))
+            simpa using this
+          exact_mod_cast this
+        have hScard5 : S.card ≤ 5 := by
+          have hsub : S ⊆ Finset.univ.erase i_m :=
+            fun x hx => Finset.mem_erase.mpr ⟨fun h => hi_m_notS (h ▸ hx), Finset.mem_univ x⟩
+          calc S.card ≤ (Finset.univ.erase i_m).card := Finset.card_le_card hsub
+            _ = 5 := by rw [Finset.card_erase_of_mem (Finset.mem_univ _)]; simp
+        by_cases hS5 : 5 ≤ S.card
+        · -- |S| = 5: five_band on the five level-0 elements
+          have hScard_eq : S.card = 5 := le_antisymm hScard5 hS5
+          set g : Fin 5 → Fin 6 := fun k => (S.orderIsoOfFin hScard_eq k).val with hg_def
+          have hg_mem : ∀ k, g k ∈ S := fun k => (S.orderIsoOfFin hScard_eq k).prop
+          have hg_ndvd : ∀ k, ¬ (7 : ℤ) ∣ (D (g k) : ℤ) := fun k => by
+            have := hg_mem k
+            simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and] at this; exact this
+          set d5 : Fin 5 → ℤ := fun k => (D (g k) : ℤ)
+          obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd
+          refine ⟨m, lam, fun i => ?_⟩
+          by_cases hi : i ∈ S
+          · have ⟨k, hk⟩ : ∃ k : Fin 5, (S.orderIsoOfFin hScard_eq k).val = i := by
+              have := (S.orderIsoOfFin hScard_eq).surjective ⟨i, hi⟩
+              exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+            have := hband5 k; simp only [d5, g, hk] at this; exact this
+          · exact band_top m lam (D i : ℤ) hlam_unit (hnointerior i hi)
+              (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+        · -- |S| = 4: four_band suffices (S = T, no 5th level-0 element)
+          have hScard_eq : S.card = 4 := le_antisymm (by omega) hS_card
+          have hST : T = S := Finset.eq_of_subset_of_card_le hTS (by rw [hScard_eq, hT4])
+          set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
+          obtain ⟨lam, hlam_unit, _, _, hband4⟩ := four_band m hj₀m d4 hf_ndvd
+          refine ⟨m, lam, fun i => ?_⟩
+          by_cases hi : i ∈ S
+          · have hiT : i ∈ T := hST ▸ hi
+            have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
               have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
               exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
             have := hband4 k; simp only [d4, f, hk] at this; exact this
-          · sorry -- 5th level-0 element: §6
-        · exact band_top m lam (D i : ℤ) hlam_unit (hnointerior i hi)
-            (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+          · exact band_top m lam (D i : ℤ) hlam_unit (hnointerior i hi)
+              (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
       · -- Interior element exists: pre-multiplier construction (BS eq 8)
         push_neg at hnointerior
         obtain ⟨e_int, he_notS, he_ndvd⟩ := hnointerior
@@ -123,17 +161,45 @@ theorem bs_discrete_q
         have hlam_unit : ¬ (7 : ℤ) ∣ lam := by
           exact mt (Prime.dvd_mul (by norm_num : Prime (7 : ℤ)) |>.mp)
             (by simp [hlam'_unit, hpre_unit])
+        -- |S| = 4 here: the interior element `e_int` and a level-m element are two
+        -- distinct elements of `Sᶜ`, so |S| ≤ 4; with `hS_card` (≥4), `S = T`.
+        have hScard_eq : S.card = 4 := by
+          obtain ⟨i_m, -, hi_m⟩ := Finset.exists_mem_eq_sup Finset.univ
+            ⟨0, Finset.mem_univ 0⟩ (fun i => padicValNat 7 (D i))
+          have hi_m_pos : 0 < padicValNat 7 (D i_m) := by rw [hm] at hj₀m; omega
+          have hi_m_notS : i_m ∉ S := by
+            simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not]
+            have h7 : (7 : ℕ) ∣ D i_m := by
+              have := (padicValNat_dvd_iff_le (hpos i_m).ne').mpr
+                (by omega : 1 ≤ padicValNat 7 (D i_m))
+              simpa using this
+            exact_mod_cast h7
+          have he_int_val : padicValNat 7 (D e_int) < m :=
+            lt_of_not_le fun h => hndvd_nat ((padicValNat_dvd_iff_le (hpos e_int).ne').mpr h)
+          have hne : i_m ≠ e_int := by
+            intro h; subst h
+            rw [hm] at hi_m; omega
+          have hsub : S ⊆ (Finset.univ.erase i_m).erase e_int := fun x hx =>
+            Finset.mem_erase.mpr ⟨fun h => he_notS (h ▸ hx),
+              Finset.mem_erase.mpr ⟨fun h => hi_m_notS (h ▸ hx), Finset.mem_univ x⟩⟩
+          have hle : S.card ≤ 4 := by
+            calc S.card ≤ ((Finset.univ.erase i_m).erase e_int).card :=
+                  Finset.card_le_card hsub
+              _ = 4 := by
+                  rw [Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨Ne.symm hne, Finset.mem_univ _⟩),
+                    Finset.card_erase_of_mem (Finset.mem_univ _)]; simp
+          omega
+        have hST : T = S := Finset.eq_of_subset_of_card_le hTS (by rw [hScard_eq, hT4])
         refine ⟨m, lam, fun i => ?_⟩
         by_cases hi : i ∈ S
-        · by_cases hiT : i ∈ T
-          · have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
-              have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
-              exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
-            have := hband4 k; simp only [d4, f, hk, show lam = lam' * pre from rfl,
-              show lam' * pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ) =
-                lam' * (pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ)) from by ring] at this ⊢
-            exact this
-          · sorry -- 5th level-0 element: §6
+        · have hiT : i ∈ T := hST ▸ hi
+          have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
+            have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
+            exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+          have := hband4 k; simp only [d4, f, hk, show lam = lam' * pre from rfl,
+            show lam' * pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ) =
+              lam' * (pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ)) from by ring] at this ⊢
+          exact this
         · -- Non-level-0 element
           simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not] at hi
           by_cases hi_eq : i = e_int
@@ -224,7 +290,42 @@ theorem bs_discrete_q
           exact Finset.card_image_of_injOn
             (Set.InjOn.mono (fun x hx => Finset.mem_filter.mp hx |>.1) hDZ_inj)
         linarith
+      -- |Sj| = 4: a level-0 element (gcd=1) and a level-m element are distinct and
+      -- both ∉ Sj (valuations 0 and m ≠ j₀), so |Sj| ≤ 4; with hSj_card, = 4.
+      have hSj_eq : Sj.card = 4 := by
+        obtain ⟨i0, hi0⟩ : ∃ i, ¬ (7 : ℕ) ∣ D i := by
+          by_contra h; push_neg at h
+          have : (7 : ℕ) ∣ Finset.univ.gcd D := Finset.dvd_gcd (fun i _ => h i)
+          rw [hgcd] at this; norm_num at this
+        have hi0Z : ¬ (7 : ℤ) ∣ (D i0 : ℤ) := by exact_mod_cast hi0
+        obtain ⟨i_m, -, hi_m⟩ := Finset.exists_mem_eq_sup Finset.univ
+          ⟨0, Finset.mem_univ 0⟩ (fun i => padicValNat 7 (D i))
+        have hi0_notSj : i0 ∉ Sj := by
+          simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and]
+          rintro ⟨hd, -⟩
+          exact hi0Z (dvd_trans (dvd_pow_self 7 (by omega : j₀ ≠ 0)) hd)
+        have him_dvd : (7 : ℤ) ^ (j₀ + 1) ∣ (D i_m : ℤ) := by
+          rw [show (7 : ℤ) ^ (j₀ + 1) = ((7 ^ (j₀ + 1) : ℕ) : ℤ) from by push_cast; ring,
+            Int.natCast_dvd_natCast]
+          exact (padicValNat_dvd_iff_le (hpos i_m).ne').mpr (by rw [hm] at hj₀m; omega)
+        have him_notSj : i_m ∉ Sj := by
+          simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and]
+          rintro ⟨-, hnd⟩; exact hnd him_dvd
+        have hne : i0 ≠ i_m := by
+          rintro rfl
+          have h0 : padicValNat 7 (D i0) = 0 := padicValNat.eq_zero_of_not_dvd hi0
+          rw [← hi_m, ← hm] at h0; omega
+        have hsub : Sj ⊆ (Finset.univ.erase i0).erase i_m := fun x hx =>
+          Finset.mem_erase.mpr ⟨fun h => him_notSj (h ▸ hx),
+            Finset.mem_erase.mpr ⟨fun h => hi0_notSj (h ▸ hx), Finset.mem_univ x⟩⟩
+        have hle : Sj.card ≤ 4 := by
+          calc Sj.card ≤ ((Finset.univ.erase i0).erase i_m).card := Finset.card_le_card hsub
+            _ = 4 := by
+                rw [Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨Ne.symm hne, Finset.mem_univ _⟩),
+                  Finset.card_erase_of_mem (Finset.mem_univ _)]; simp
+        omega
       obtain ⟨Tj, hTjS, hTj4⟩ := Finset.exists_subset_card_eq hSj_card
+      have hSjTj : Tj = Sj := Finset.eq_of_subset_of_card_le hTjS (by rw [hSj_eq, hTj4])
       set fj : Fin 4 → Fin 6 := fun k => (Tj.orderIsoOfFin hTj4 k).val
       have hfj_mem : ∀ k, fj k ∈ Sj := fun k => hTjS ((Tj.orderIsoOfFin hTj4 k).prop)
       have hfj_dvd : ∀ k, (7 : ℤ) ^ j₀ ∣ (D (fj k) : ℤ) := fun k => by
@@ -301,21 +402,19 @@ theorem bs_discrete_q
           -- D i = 7^{j₀} · d' where d' = D i / 7^{j₀}, coprime to 7.
           have hdi' : (D i : ℤ) = (7 : ℤ) ^ j₀ * ((D i : ℤ) / (7 : ℤ) ^ j₀) :=
             (Int.mul_ediv_cancel' hdvd_j).symm
-          -- i must be in Sj (level j₀). Extract which Fin 4 index it corresponds to,
-          -- or it's the 5th element → sorry (§6).
+          -- i must be in Sj (level j₀). Since |Sj| = 4 (config 1/4/1), Sj = Tj.
           by_cases hiSj : i ∈ Sj
-          · -- i is one of the level-j₀ elements
-            by_cases hiTj : i ∈ Tj
-            · have ⟨ki, hki⟩ : ∃ ki : Fin 4, (Tj.orderIsoOfFin hTj4 ki).val = i := by
-                have := (Tj.orderIsoOfFin hTj4).surjective ⟨i, hiTj⟩
-                exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
-              have hdi_eq : (D i : ℤ) / (7 : ℤ) ^ j₀ = d4 ki := by
-                simp only [d4, fj, hki]
-              have hband_ki := hband' ki
-              rw [show d4 ki = (D i : ℤ) / (7 : ℤ) ^ j₀ from hdi_eq.symm] at hband_ki
-              rw [hdi']
-              exact band_lift j₀ m' lam' _ (by rwa [hm'eq])
-            · sorry -- 5th level-j₀ element: needs §6 (|A|=5, unreachable with 1/4/1 config)
+          · -- i is one of the level-j₀ elements (Sj = Tj since |Sj| = 4)
+            have hiTj : i ∈ Tj := hSjTj ▸ hiSj
+            have ⟨ki, hki⟩ : ∃ ki : Fin 4, (Tj.orderIsoOfFin hTj4 ki).val = i := by
+              have := (Tj.orderIsoOfFin hTj4).surjective ⟨i, hiTj⟩
+              exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+            have hdi_eq : (D i : ℤ) / (7 : ℤ) ^ j₀ = d4 ki := by
+              simp only [d4, fj, hki]
+            have hband_ki := hband' ki
+            rw [show d4 ki = (D i : ℤ) / (7 : ℤ) ^ j₀ from hdi_eq.symm] at hband_ki
+            rw [hdi']
+            exact band_lift j₀ m' lam' _ (by rwa [hm'eq])
           · -- i ∉ Sj but 7∣D i and ¬7^m∣D i: intermediate level
             -- With config 1/4/1, this can't happen
             exfalso
