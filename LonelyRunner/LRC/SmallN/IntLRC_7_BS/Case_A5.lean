@@ -1,6 +1,7 @@
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5b
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas7_9
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas10_12
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case_A5_Lambda0
 
 /-!
@@ -162,7 +163,7 @@ private theorem case_62a (hm : 2 ≤ m)
       qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := sorry
 
 /-- **Case 6.2 `(4,0,1)`** (BS L547). `|A₁| = 4`, `d₅ ∈ A₄`. Labeling via Lemma 10;
-`ℓ(A₁) ≤ 4` then Lemma 6(i) `lemma6_501` with `ẽ(d₄,d₅) ∉ {4,6}` from Lemma 7. -/
+`ℓ(A₁) ≤ 4` then Lemma 5 with `(4,0,1)` partition. -/
 private theorem case_62b (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
@@ -171,7 +172,59 @@ private theorem case_62b (hm : 2 ≤ m)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 0)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := sorry
+      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+  classical
+  -- Extract S₁ (4 elements, residue 1) and S₄ (1 element, residue 4).
+  set S₁ := univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1) with hS₁_def
+  set S₄ := univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4) with hS₄_def
+  -- Enumerate A₁ via orderIsoOfFin; b₁ is the A₁-restriction.
+  set g₁ : Fin 4 → Fin 5 := fun k => (S₁.orderIsoOfFin hC₁ k).val
+  have hg₁_res : ∀ k, (d (g₁ k) : ZMod 7) = 1 := fun k => by
+    have := (S₁.orderIsoOfFin hC₁ k).prop
+    simp only [hS₁_def, mem_filter, mem_univ, true_and] at this; exact this
+  have hg₁_inj : Function.Injective g₁ :=
+    fun a b h => (S₁.orderIsoOfFin hC₁).injective (Subtype.val_injective h)
+  set b₁ : Fin 4 → ℤ := fun k => d (g₁ k)
+  have hb₁_inj : Function.Injective b₁ := fun a b h => hg₁_inj (hinj h)
+  -- Extract the unique A₄-element i₄.
+  obtain ⟨i₄, hS₄sing⟩ := Finset.card_eq_one.mp hC₄
+  have hi₄_res : (d i₄ : ZMod 7) = 4 := by
+    have : i₄ ∈ S₄ := by rw [hS₄sing]; exact mem_singleton_self _
+    simp only [hS₄_def, mem_filter, mem_univ, true_and] at this; exact this
+  -- Every d i of residue 1 is b₁ k for some k.
+  have hA₁_cover : ∀ i : Fin 5, (d i : ZMod 7) = 1 → ∃ k : Fin 4, g₁ k = i :=
+    fun i hi =>
+      ⟨(S₁.orderIsoOfFin hC₁).symm ⟨i, by simp [hS₁_def, hi]⟩,
+       congr_arg Subtype.val
+         ((S₁.orderIsoOfFin hC₁).right_inv ⟨i, by simp [hS₁_def, hi]⟩)⟩
+  -- Apply Lemma 10 to b₁ : Fin 4 → ℤ.
+  obtain ⟨e₁, e₂, e₃, e₄, hperm, h_struct⟩ := lemma10 b₁ hb₁_inj
+  -- hperm: ∀ f, {f e₁,..,f e₄} = {f (b₁ 0),..,f (b₁ 3)}  (so arcs of e's = arcs of A₁)
+  rcases h_struct with
+      -- (i) e₂−e₁ and e₃−e₁ at DISTINCT 7-adic levels h₁ ≠ h₂
+      ⟨h₁, h₂, hne, hd2, hd2', hd3, hd3'⟩ |
+      -- (ii) all three differences at the SAME level h; r₃ = 2r₂; r₄ ∈ {3r₂, 4r₂}
+      ⟨h, hd2, hd2', hd3, hd3', hd4, hd4', hr32, hr41⟩
+  · -- ── Branch (i): L9(i) dispatch compresses {e₁,e₂,e₃} to ℓ(B) ≤ 2.
+    -- BS §6.2 L547–L553: q(e₄) ≠ 3 → ℓ(A₁) ≤ 4; q(e₄) = 3 → ×2 → ℓ ≤ 4.
+    -- In both cases five_lambda0 (4,0,1) closes.
+    obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
+      lemma9_i_dispatch m h₁ h₂ e₂ e₃ e₁ hne hd2 hd2' hd3 hd3'
+    -- hB_fit : fitsInterval {q(lam₀·e₂), q(lam₀·e₃), q(lam₀·e₁)} a 2
+    -- TODO: extend via hperm to show ℓ(A₁) ≤ 4 after handling e₄, then five_lambda0.
+    sorry
+  · -- ── Branch (ii): same level h; ratio 2 for e₃-e₁; ratio 3 or 4 for e₄-e₁.
+    rcases hr41 with hr3 | hr4
+    · -- (ii.1) ratio 3: r(e₄-e₁) = 3·r(e₂-e₁).
+      -- h = m (ν(E)={m}): affine const-mult by r⁻¹ → arcs of A₁ ⊂ {a,a+1,a+2,a+3}.
+      --   With A₄ at q₄: five_lambda0 (4,0,1) via place_window5 style.
+      -- h < m (ν(E)≠{m}): lemma9_ii_j3 compresses {e₁,e₂,e₃} to ℓ≤3, e₄ tracks by
+      --   linear map, giving ℓ(A₁)≤4; then five_lambda0 (4,0,1). TODO.
+      sorry
+    · -- (ii.2) ratio 4: r(e₄-e₁) = 4·r(e₂-e₁).
+      -- h = m (ν(E)={m}): Λ_m + Lemma 7 → ẽ(e₄,d_i₄) ∉ {4,6} → lemma6_501.
+      -- h < m (ν(E)≠{m}): ℓ(A₁) ≤ 5 via L9(ii) j=4; five_lambda0 (4,0,1). TODO.
+      sorry
 
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11
 (6 subcases + q-tables), Lemma 7(i) securing the `(3,1,1)` `ẽ ∉ {2,4}` carve-out
