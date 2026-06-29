@@ -245,4 +245,156 @@ theorem lemma9_i (m hx hy : ℕ) (b₁ b₂ b₃ : ℤ)
   · rw [show lam * b₁ - lam * b₃ = lam * (b₁ - b₃) from by ring, hq1]; decide
   · rw [show lam * b₂ - lam * b₃ = lam * (b₂ - b₃) from by ring, hq2]; decide
 
+/-- **Lemma 9 (i), ν=m edge (BS L487).** When one difference is at the TOP level
+`m`, the standard two-target retarget (`qz_retarget_two`) is unavailable (it needs
+both levels `< m`). Instead: retarget the level-`m` difference `x = b₁−b₃` to
+`q = 1` and the level-`hy` difference `y = b₂−b₃` to `q = 0` via
+`qz_retarget_two_top`. Then:
+- `qz(λ·b₁) = qz(λ·b₃) + 1` (EXACT — `λ·x` is a multiple of `7^m`, so
+  `qz_add_mul_pow` applies with no carry ambiguity);
+- `qz(λ·b₂) ∈ {qz(λ·b₃), qz(λ·b₃)+1}` (standard `qz_add_carry`).
+So `q(λ·B) ⊂ {c, c+1}` and `ℓ(λ·B) ≤ 2`. -/
+theorem lemma9_i_top (m hy : ℕ) (hym : hy < m) (b₁ b₂ b₃ : ℤ)
+    (hxd : (7 : ℤ) ^ m ∣ (b₁ - b₃)) (hxd' : ¬ (7 : ℤ) ^ (m + 1) ∣ (b₁ - b₃))
+    (hyd : (7 : ℤ) ^ hy ∣ (b₂ - b₃)) (hyd' : ¬ (7 : ℤ) ^ (hy + 1) ∣ (b₂ - b₃)) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ a : ZMod 7,
+      fitsInterval ({qz m (lam * b₁), qz m (lam * b₂), qz m (lam * b₃)}
+        : Finset (ZMod 7)) a 2 := by
+  obtain ⟨lam, hlam, hqx, hqy⟩ :=
+    qz_retarget_two_top m hy hym (b₁ - b₃) (b₂ - b₃) hxd hxd' hyd hyd' 1 0 (by decide)
+  refine ⟨lam, hlam, qz m (lam * b₃), fun v hv => ?_⟩
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+  rcases hv with rfl | rfl | rfl
+  · -- v = qz m (lam * b₁): exact shift by 1 via qz_sub_mul_pow (with negation)
+    obtain ⟨u, hu⟩ := hxd
+    have hPne : (7 : ℤ) ^ m ≠ 0 := pow_ne_zero m (by norm_num)
+    have hlin : lam * b₁ = lam * b₃ - (7 : ℤ) ^ m * (-(lam * u)) := by
+      have : b₁ = b₃ + 7 ^ m * u := by linarith
+      rw [this]; ring
+    have hcu : (↑(lam * u) : ZMod 7) = (1 : ZMod 7) := by
+      have hqu := hqx
+      rw [hu, show lam * (7 ^ m * u) = (lam * u) * 7 ^ m from by ring] at hqu
+      unfold qz at hqu
+      rwa [Int.mul_ediv_cancel _ hPne] at hqu
+    rw [hlin, qz_sub_mul_pow]
+    exact ⟨⟨1, by omega⟩, by simp only [Fin.val_mk, Nat.cast_one, Int.cast_neg, sub_neg_eq_add,
+      hcu]⟩
+  · -- v = qz m (lam * b₂): carry ∈ {0, 1} via qz_add_carry
+    have hlin : lam * b₂ = lam * b₃ + lam * (b₂ - b₃) := by ring
+    rw [hlin]
+    rcases qz_add_carry m (lam * b₃) (lam * (b₂ - b₃)) with h | h
+    · rw [h, hqy, add_zero]; exact ⟨⟨0, by omega⟩, by simp only [Fin.val_mk, Nat.cast_zero,
+        add_zero]⟩
+    · rw [h, hqy, add_zero]; exact ⟨⟨1, by omega⟩, by simp only [Fin.val_mk, Nat.cast_one]⟩
+  · -- v = qz m (lam * b₃)
+    exact ⟨⟨0, by omega⟩, by simp only [Fin.val_mk, Nat.cast_zero, add_zero]⟩
+
+/-- **Lemma 9 (i) full dispatch.** Three elements `b₁, b₂, b₃` whose pairwise
+differences `x = b₁−b₃`, `y = b₂−b₃` have DISTINCT valuations: there exists a
+unit multiplier compressing `ℓ(λ·B) ≤ 2`. Dispatches over all valuation
+configurations:
+- both `< m` → `lemma9_i` (two-target retarget, Remark 8)
+- one `= m`, other `< m` → `lemma9_i_top` (exact 7^m shift + carry)
+- one `> m` → q-equivalence (`qz_eq_of_high_dvd`) reduces to ≤ 2 elements -/
+theorem lemma9_i_dispatch (m h₁ h₂ : ℕ) (b₁ b₂ b₃ : ℤ) (hne : h₁ ≠ h₂)
+    (hxd : (7 : ℤ) ^ h₁ ∣ (b₁ - b₃)) (hxd' : ¬ (7 : ℤ) ^ (h₁ + 1) ∣ (b₁ - b₃))
+    (hyd : (7 : ℤ) ^ h₂ ∣ (b₂ - b₃)) (hyd' : ¬ (7 : ℤ) ^ (h₂ + 1) ∣ (b₂ - b₃)) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ a : ZMod 7,
+      fitsInterval ({qz m (lam * b₁), qz m (lam * b₂), qz m (lam * b₃)}
+        : Finset (ZMod 7)) a 2 := by
+  -- Helper: element with 7^(m+1)-divisible difference is q-equivalent to b₃
+  have qeq_b1 : (7 : ℤ) ^ (m + 1) ∣ (b₁ - b₃) → ∀ l : ℤ,
+      qz m (l * b₁) = qz m (l * b₃) := fun h l => qz_eq_of_high_dvd m b₁ b₃ l h
+  have qeq_b2 : (7 : ℤ) ^ (m + 1) ∣ (b₂ - b₃) → ∀ l : ℤ,
+      qz m (l * b₂) = qz m (l * b₃) := fun h l => qz_eq_of_high_dvd m b₂ b₃ l h
+  -- Helper: level-m retarget gives exact shift → fitsInterval at j=1
+  have shift1 : ∀ j x : ℤ, (7 : ℤ) ^ m ∣ x → qz m (j * x) = 1 →
+      ∃ jj : Fin 2, qz m (j * b₃ + j * x) = qz m (j * b₃) + (jj.val : ZMod 7) := by
+    intro j x hdvd hqj
+    obtain ⟨u, hu⟩ := hdvd
+    have hPne : (7 : ℤ) ^ m ≠ 0 := pow_ne_zero m (by norm_num)
+    have hcu : (↑(j * u) : ZMod 7) = (1 : ZMod 7) := by
+      rw [hu, show j * (7 ^ m * u) = (j * u) * 7 ^ m from by ring] at hqj
+      unfold qz at hqj; rwa [Int.mul_ediv_cancel _ hPne] at hqj
+    have hlin : j * b₃ + j * x = j * b₃ - (7 : ℤ) ^ m * (-(j * u)) := by
+      rw [hu]; ring
+    rw [hlin, qz_sub_mul_pow]
+    exact ⟨⟨1, by omega⟩, by simp only [Fin.val_mk, Nat.cast_one, Int.cast_neg,
+      sub_neg_eq_add, hcu]⟩
+  rcases lt_or_ge h₁ m with h1m | h1m <;> rcases lt_or_ge h₂ m with h2m | h2m
+  · -- Both < m
+    exact lemma9_i m h₁ h₂ b₁ b₂ b₃ h1m h2m hne hxd hxd' hyd hyd'
+  · -- h₁ < m, h₂ ≥ m
+    rcases h2m.eq_or_lt with heq | h2gt
+    · -- h₂ = m: swap roles
+      subst heq
+      obtain ⟨lam, hlam, a, ha⟩ := lemma9_i_top m h₁ h1m b₂ b₁ b₃ hyd hyd' hxd hxd'
+      exact ⟨lam, hlam, a, by rwa [show ({qz m (lam * b₁), qz m (lam * b₂), qz m (lam * b₃)}
+        : Finset (ZMod 7)) = {qz m (lam * b₂), qz m (lam * b₁), qz m (lam * b₃)} from by
+          ext x; simp [or_comm, or_left_comm]]⟩
+    · -- h₂ > m: b₂ q-equiv to b₃
+      have hhi := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₂)) hyd
+      obtain ⟨k, hk, hku⟩ := qz_retarget m h₁ h1m (b₁ - b₃) hxd hxd' 0
+      set l := 1 + k * 7 ^ (m - h₁) with hl_def
+      refine ⟨l, hku, qz m (l * b₃), fun v hv => ?_⟩
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+      rcases hv with rfl | rfl | rfl
+      · rw [show l * b₁ = l * b₃ + l * (b₁ - b₃) from by ring]
+        rcases qz_add_carry m (l * b₃) (l * (b₁ - b₃)) with h | h
+        · rw [h, hk, add_zero]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+        · rw [h, hk, add_zero]; exact ⟨⟨1, by omega⟩, by simp [Fin.val]⟩
+      · rw [qeq_b2 hhi]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+      · exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+  · -- h₁ ≥ m, h₂ < m
+    rcases h1m.eq_or_lt with heq | h1gt
+    · subst heq; exact lemma9_i_top m h₂ h2m b₁ b₂ b₃ hxd hxd' hyd hyd'
+    · -- h₁ > m: b₁ q-equiv to b₃
+      have hhi := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₁)) hxd
+      obtain ⟨k, hk, hku⟩ := qz_retarget m h₂ h2m (b₂ - b₃) hyd hyd' 0
+      set l := 1 + k * 7 ^ (m - h₂) with hl_def
+      refine ⟨l, hku, qz m (l * b₃), fun v hv => ?_⟩
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+      rcases hv with rfl | rfl | rfl
+      · rw [qeq_b1 hhi]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+      · rw [show l * b₂ = l * b₃ + l * (b₂ - b₃) from by ring]
+        rcases qz_add_carry m (l * b₃) (l * (b₂ - b₃)) with h | h
+        · rw [h, hk, add_zero]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+        · rw [h, hk, add_zero]; exact ⟨⟨1, by omega⟩, by simp [Fin.val]⟩
+      · exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+  · -- Both ≥ m
+    rcases h1m.eq_or_lt with heq | h1gt
+    · -- h₁ = m, h₂ > m
+      subst heq
+      have h2gt : m < h₂ := lt_of_le_of_ne h2m hne
+      have hhi := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₂)) hyd
+      obtain ⟨j, hju, hjx⟩ := qz_retarget_top m (b₁ - b₃) hxd hxd' 1 (by decide)
+      refine ⟨j, hju, qz m (j * b₃), fun v hv => ?_⟩
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+      rcases hv with rfl | rfl | rfl
+      · rw [show j * b₁ = j * b₃ + j * (b₁ - b₃) from by ring]
+        exact (shift1 j _ hxd hjx).elim fun jj hj => ⟨jj, hj⟩
+      · rw [qeq_b2 hhi]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+      · exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+    · rcases h2m.eq_or_lt with heq | h2gt
+      · -- h₂ = m, h₁ > m
+        subst heq
+        have hhi := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₁)) hxd
+        obtain ⟨j, hju, hjy⟩ := qz_retarget_top m (b₂ - b₃) hyd hyd' 1 (by decide)
+        refine ⟨j, hju, qz m (j * b₃), fun v hv => ?_⟩
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+        rcases hv with rfl | rfl | rfl
+        · rw [qeq_b1 hhi]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+        · rw [show j * b₂ = j * b₃ + j * (b₂ - b₃) from by ring]
+          exact (shift1 j _ hyd hjy).elim fun jj hj => ⟨jj, hj⟩
+        · exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+      · -- Both > m: all q-equivalent
+        have hhi1 := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₁)) hxd
+        have hhi2 := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h₂)) hyd
+        refine ⟨1, by decide, qz m (1 * b₃), fun v hv => ?_⟩
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hv
+        rcases hv with rfl | rfl | rfl
+        · rw [qeq_b1 hhi1]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+        · rw [qeq_b2 hhi2]; exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+        · exact ⟨⟨0, by omega⟩, by simp [Fin.val]⟩
+
 end IntLRC7BS

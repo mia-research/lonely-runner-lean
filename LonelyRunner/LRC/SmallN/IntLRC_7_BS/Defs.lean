@@ -657,4 +657,22 @@ theorem qz_combined_carry (m : ℕ) (x y : ℤ) :
     · exact absurd h (by decide)
     · rw [himp1 rfl]; decide
 
+/-- **q-equivalence under high divisibility.** If `7^(m+1) ∣ (a − b)`, then
+`qz m (λ·a) = qz m (λ·b)` for ALL `λ`: the elements `a, b` are indistinguishable
+at resolution `m`. Proof: `a − b = 7·c · 7^m`, so `qz_sub_mul_pow` gives
+`qz(λa) − qz(λb) = (7·λc : ZMod 7) = 0`. -/
+theorem qz_eq_of_high_dvd (m : ℕ) (a b lam : ℤ) (h : (7 : ℤ) ^ (m + 1) ∣ (a - b)) :
+    qz m (lam * a) = qz m (lam * b) := by
+  obtain ⟨k, hk⟩ := h
+  have hPne : (7 : ℤ) ^ m ≠ 0 := pow_ne_zero m (by norm_num)
+  have hlin : lam * a = lam * b - (7 : ℤ) ^ m * (-(7 * lam * k)) := by
+    have : a = b + 7 ^ (m + 1) * k := by linarith
+    rw [this, pow_succ]; ring
+  rw [hlin, qz_sub_mul_pow]
+  simp only [Int.cast_neg, sub_neg_eq_add]
+  suffices h : (↑(7 * lam * k) : ZMod 7) = 0 by rw [h, add_zero]
+  push_cast
+  have h7 : (7 : ZMod 7) = 0 := by decide
+  rw [h7]; ring
+
 end IntLRC7BS
