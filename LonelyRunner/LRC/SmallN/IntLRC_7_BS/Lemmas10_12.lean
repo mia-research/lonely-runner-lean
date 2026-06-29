@@ -582,4 +582,52 @@ theorem qz_mem06_iff (m : ℕ) (z : ℤ) :
       have hgt5 : 5 < qval m z := by nlinarith [hmul.2, h, hP]
       omega
 
+/-- **Cluster ⇒ conclusion.** If all `xᵢ` lie in one `7^m`-window above `t`
+(`(xᵢ−t) mod 7^(m+1) < 7^m`), then `q(3xᵢ)` all lie in the length-4 window above
+`q(3t)`. Carry decomposition: `3xᵢ ≡ 3t + 3sᵢ`, `3sᵢ = 7^m·cᵢ + dᵢ` with
+`cᵢ∈{0,1,2}`, and the `dᵢ`-add carries one more, so `q(3xᵢ) = q(3t) + cᵢ + εᵢ`,
+`εᵢ∈{0,1}`. -/
+theorem rmk8_concl {ι : Type*} (m : ℕ) (t : ℤ) (x : ι → ℤ)
+    (hcl : ∀ i, (x i - t) % 7 ^ (m + 1) < 7 ^ m) :
+    ∀ i, (qz m (3 * x i) - qz m (3 * t)).val ≤ 3 := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  intro i
+  set s : ℤ := (x i - t) % 7 ^ (m + 1) with hs_def
+  have hs0 : 0 ≤ s := Int.emod_nonneg _ (by positivity)
+  have hslt : s < 7 ^ m := hcl i
+  have hxi : x i = t + s + 7 ^ (m + 1) * ((x i - t) / 7 ^ (m + 1)) := by
+    have h := Int.emod_add_ediv (x i - t) (7 ^ (m + 1)); rw [← hs_def] at h; linarith
+  have hper : qz m (3 * x i) = qz m (3 * t + 3 * s) := by
+    conv_lhs => rw [hxi]
+    rw [show 3 * (t + s + 7 ^ (m + 1) * ((x i - t) / 7 ^ (m + 1)))
+        = (3 * t + 3 * s) + (21 * ((x i - t) / 7 ^ (m + 1))) * 7 ^ m from by
+      rw [pow_succ]; ring, qz_add_mul_pow]
+    have h21 : ((21 : ℤ) : ZMod 7) = 0 := by decide
+    have : ((21 * ((x i - t) / 7 ^ (m + 1)) : ℤ) : ZMod 7) = 0 := by
+      rw [Int.cast_mul, h21, zero_mul]
+    rw [this, add_zero]
+  rw [hper]
+  set c : ℤ := 3 * s / 7 ^ m with hc_def
+  set d : ℤ := 3 * s % 7 ^ m with hd_def
+  have h3s : 3 * s = 7 ^ m * c + d := by
+    rw [hc_def, hd_def]; have := Int.mul_ediv_add_emod (3 * s) (7 ^ m); linarith
+  have hd0 : 0 ≤ d := Int.emod_nonneg _ (by positivity)
+  have hdlt : d < 7 ^ m := Int.emod_lt_of_pos _ hP
+  have hc0 : 0 ≤ c := Int.ediv_nonneg (by linarith) (le_of_lt hP)
+  have hclt : c < 3 := by
+    rw [hc_def]
+    nlinarith [Int.mul_ediv_add_emod (3 * s) (7 ^ m),
+      Int.emod_nonneg (3 * s) (by positivity : (7 : ℤ) ^ m ≠ 0), hslt, hP]
+  have hqd0 : qz m d = 0 := by
+    unfold qz; rw [Int.ediv_eq_zero_of_lt hd0 hdlt]; simp
+  have hsplit : qz m (3 * t + 3 * s) = qz m (3 * t + d) + (c : ZMod 7) := by
+    rw [show 3 * t + 3 * s = (3 * t + d) + c * 7 ^ m from by rw [h3s]; ring, qz_add_mul_pow]
+  rcases qz_add_carry m (3 * t) d with hcr | hcr
+  · rw [hsplit, hcr, hqd0, show qz m (3 * t) + 0 + (c : ZMod 7) - qz m (3 * t) = (c : ZMod 7) from by
+      ring]
+    interval_cases c <;> decide
+  · rw [hsplit, hcr, hqd0, show qz m (3 * t) + 0 + 1 + (c : ZMod 7) - qz m (3 * t)
+      = 1 + (c : ZMod 7) from by ring]
+    interval_cases c <;> decide
+
 end IntLRC7BS
