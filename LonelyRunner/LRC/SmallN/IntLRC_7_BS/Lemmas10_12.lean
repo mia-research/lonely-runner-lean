@@ -224,4 +224,139 @@ theorem lemma10_select (g : Fin 4 → ZMod 7) (hg : Function.Injective g) :
       (g l - g i = 3 * (g j - g i) ∨ g l - g i = 4 * (g j - g i)) := by
   revert hg; revert g; decide
 
+/-- Four `Fin 4` indices that cover all of `Fin 4` are pairwise distinct. -/
+theorem cover_distinct (i j k l : Fin 4)
+    (hc : ∀ x : Fin 4, x = i ∨ x = j ∨ x = k ∨ x = l) :
+    i ≠ j ∧ i ≠ k ∧ i ≠ l ∧ j ≠ k ∧ j ≠ l ∧ k ≠ l := by
+  revert hc; revert i j k l; decide
+
+/-- **Lemma 10 (BS L509).** A `4`-element class `A₁` (`b : Fin 4 → ℤ`, injective)
+admits a labeling `(d₁,d₂,d₃,d₄)` — a permutation of the inputs (certified by
+`hperm`) — with one of:
+
+* **(i)** `ν(e₂₁) ≠ ν(e₃₁)` (distinct apex-valuations → `lemma9_i` on `{d₁,d₂,d₃}`);
+* **(ii)** all of `e₂₁,e₃₁,e₄₁` at one level `h` with `r(e₃₁)=2·r(e₂₁)` and
+  `r(e₄₁) ∈ {3,4}·r(e₂₁)` (→ `lemma9_ii_j2` on `{d₁,d₂,d₃}`, with `d₄` controlled).
+
+Apex convention `d₁` (differences `dᵢ − d₁`). Proof: a connectivity cascade on the
+difference-valuations gives a strict-max adjacent pair (→ i) unless all six
+pairwise differences share a level, in which case the leading residues are four
+distinct `ZMod 7` values and `lemma10_select` produces the (ii) labeling. -/
+theorem lemma10 (b : Fin 4 → ℤ) (hinj : Function.Injective b) :
+    ∃ d₁ d₂ d₃ d₄ : ℤ,
+      (∀ f : ℤ → ZMod 7,
+        ({f d₁, f d₂, f d₃, f d₄} : Finset (ZMod 7)) = {f (b 0), f (b 1), f (b 2), f (b 3)}) ∧
+      ((∃ h₁ h₂ : ℕ, h₁ ≠ h₂ ∧
+          (7 : ℤ) ^ h₁ ∣ (d₂ - d₁) ∧ ¬ (7 : ℤ) ^ (h₁ + 1) ∣ (d₂ - d₁) ∧
+          (7 : ℤ) ^ h₂ ∣ (d₃ - d₁) ∧ ¬ (7 : ℤ) ^ (h₂ + 1) ∣ (d₃ - d₁)) ∨
+        (∃ h : ℕ,
+          (7 : ℤ) ^ h ∣ (d₂ - d₁) ∧ ¬ (7 : ℤ) ^ (h + 1) ∣ (d₂ - d₁) ∧
+          (7 : ℤ) ^ h ∣ (d₃ - d₁) ∧ ¬ (7 : ℤ) ^ (h + 1) ∣ (d₃ - d₁) ∧
+          (7 : ℤ) ^ h ∣ (d₄ - d₁) ∧ ¬ (7 : ℤ) ^ (h + 1) ∣ (d₄ - d₁) ∧
+          (((d₃ - d₁) / 7 ^ h : ℤ) : ZMod 7) = 2 * (((d₂ - d₁) / 7 ^ h : ℤ) : ZMod 7) ∧
+          ((((d₄ - d₁) / 7 ^ h : ℤ) : ZMod 7) = 3 * (((d₂ - d₁) / 7 ^ h : ℤ) : ZMod 7) ∨
+           (((d₄ - d₁) / 7 ^ h : ℤ) : ZMod 7) = 4 * (((d₂ - d₁) / 7 ^ h : ℤ) : ZMod 7)))) := by
+  have n10 : b 1 - b 0 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n20 : b 2 - b 0 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n30 : b 3 - b 0 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n12 : b 1 - b 2 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n13 : b 1 - b 3 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n23 : b 2 - b 3 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  obtain ⟨v1, hv1, hv1'⟩ := exists_val7 _ n10
+  obtain ⟨v2, hv2, hv2'⟩ := exists_val7 _ n20
+  obtain ⟨v3, hv3, hv3'⟩ := exists_val7 _ n30
+  by_cases e12 : v1 = v2
+  · by_cases e13 : v1 = v3
+    · -- v1 = v2 = v3 : all differences-from-`b 0` share level `v1`
+      subst e12; subst e13
+      by_cases s12 : (7 : ℤ) ^ (v1 + 1) ∣ (b 1 - b 2)
+      · -- ν(e₁₂) > v1 : apex switch to b 1; output (b1, b2, b0, b3)
+        obtain ⟨w, hw, hw'⟩ := exists_val7 _ n12
+        have hwv : w ≠ v1 := fun h => hw' (h ▸ s12)
+        refine ⟨b 1, b 2, b 0, b 3, ?_, Or.inl ⟨w, v1, hwv, dvd_sub_comm.mpr hw,
+          fun h => hw' (dvd_sub_comm.mp h), dvd_sub_comm.mpr hv1,
+          fun h => hv1' (dvd_sub_comm.mp h)⟩⟩
+        intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+      · by_cases s13 : (7 : ℤ) ^ (v1 + 1) ∣ (b 1 - b 3)
+        · -- ν(e₁₃) > v1 : apex 1; output (b1, b3, b0, b2)
+          obtain ⟨w, hw, hw'⟩ := exists_val7 _ n13
+          have hwv : w ≠ v1 := fun h => hw' (h ▸ s13)
+          refine ⟨b 1, b 3, b 0, b 2, ?_, Or.inl ⟨w, v1, hwv, dvd_sub_comm.mpr hw,
+            fun h => hw' (dvd_sub_comm.mp h), dvd_sub_comm.mpr hv1,
+            fun h => hv1' (dvd_sub_comm.mp h)⟩⟩
+          intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · by_cases s23 : (7 : ℤ) ^ (v1 + 1) ∣ (b 2 - b 3)
+          · -- ν(e₂₃) > v1 : apex 2; output (b2, b3, b0, b1)
+            obtain ⟨w, hw, hw'⟩ := exists_val7 _ n23
+            have hwv : w ≠ v1 := fun h => hw' (h ▸ s23)
+            refine ⟨b 2, b 3, b 0, b 1, ?_, Or.inl ⟨w, v1, hwv, dvd_sub_comm.mpr hw,
+              fun h => hw' (dvd_sub_comm.mp h), dvd_sub_comm.mpr hv2,
+              fun h => hv2' (dvd_sub_comm.mp h)⟩⟩
+            intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+          · -- all six differences at level v1 : the residue-selection case (ii)
+            obtain ⟨gw1, hgw1⟩ := hv1
+            obtain ⟨gw2, hgw2⟩ := hv2
+            obtain ⟨gw3, hgw3⟩ := hv3
+            set gw : Fin 4 → ℤ := ![0, gw1, gw2, gw3] with hgw_def
+            have hbsub : ∀ x : Fin 4, b x - b 0 = 7 ^ v1 * gw x := by
+              intro x; fin_cases x
+              · simp [hgw_def]
+              · simpa [hgw_def] using hgw1
+              · simpa [hgw_def] using hgw2
+              · simpa [hgw_def] using hgw3
+            have hbdiff : ∀ x y : Fin 4, b x - b y = 7 ^ v1 * (gw x - gw y) := by
+              intro x y; rw [mul_sub, ← hbsub x, ← hbsub y]; ring
+            have hallnd : ∀ x y : Fin 4, x ≠ y → ¬ (7 : ℤ) ^ (v1 + 1) ∣ (b x - b y) := by
+              intro x y hxy
+              fin_cases x <;> fin_cases y <;>
+                first
+                | exact absurd rfl hxy
+                | exact hv1' | exact hv2' | exact hv3' | exact s12 | exact s13 | exact s23
+                | exact fun h => hv1' (dvd_sub_comm.mp h)
+                | exact fun h => hv2' (dvd_sub_comm.mp h)
+                | exact fun h => hv3' (dvd_sub_comm.mp h)
+                | exact fun h => s12 (dvd_sub_comm.mp h)
+                | exact fun h => s13 (dvd_sub_comm.mp h)
+                | exact fun h => s23 (dvd_sub_comm.mp h)
+            have hg_inj : Function.Injective (fun x : Fin 4 => (gw x : ZMod 7)) := by
+              intro x y h
+              by_contra hxy
+              refine hallnd x y hxy ?_
+              have hb : (gw x : ZMod 7) = (gw y : ZMod 7) := h
+              have hz : ((gw x - gw y : ℤ) : ZMod 7) = 0 := by push_cast; rw [hb]; ring
+              have h7 : (7 : ℤ) ∣ (gw x - gw y) := by
+                exact_mod_cast (ZMod.intCast_zmod_eq_zero_iff_dvd _ 7).mp hz
+              obtain ⟨c, hc⟩ := h7
+              exact ⟨c, by rw [hbdiff x y, hc, pow_succ]; ring⟩
+            obtain ⟨i, j, k, l, hcover, hr2, hr34⟩ := lemma10_select _ hg_inj
+            obtain ⟨hij, hik, hil, _, _, _⟩ := cover_distinct i j k l hcover
+            refine ⟨b i, b j, b k, b l, ?_, Or.inr ⟨v1, ⟨gw j - gw i, hbdiff j i⟩,
+              hallnd j i (Ne.symm hij), ⟨gw k - gw i, hbdiff k i⟩, hallnd k i (Ne.symm hik),
+              ⟨gw l - gw i, hbdiff l i⟩, hallnd l i (Ne.symm hil), ?_, ?_⟩⟩
+            · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton]
+              constructor
+              · rintro (rfl | rfl | rfl | rfl)
+                · fin_cases i <;> simp
+                · fin_cases j <;> simp
+                · fin_cases k <;> simp
+                · fin_cases l <;> simp
+              · rintro (rfl | rfl | rfl | rfl)
+                · rcases hcover 0 with h | h | h | h <;> rw [← h] <;> simp
+                · rcases hcover 1 with h | h | h | h <;> rw [← h] <;> simp
+                · rcases hcover 2 with h | h | h | h <;> rw [← h] <;> simp
+                · rcases hcover 3 with h | h | h | h <;> rw [← h] <;> simp
+            · rw [res_eq (hbdiff k i), res_eq (hbdiff j i)]; push_cast
+              push_cast at hr2; linear_combination hr2
+            · rcases hr34 with h | h
+              · left; rw [res_eq (hbdiff l i), res_eq (hbdiff j i)]; push_cast
+                push_cast at h; linear_combination h
+              · right; rw [res_eq (hbdiff l i), res_eq (hbdiff j i)]; push_cast
+                push_cast at h; linear_combination h
+    · -- v1 = v2, v1 ≠ v3 : (i), apex b 0, pair (1,3); output (b0, b1, b3, b2)
+      refine ⟨b 0, b 1, b 3, b 2, ?_, Or.inl ⟨v1, v3, e13, hv1, hv1', hv3, hv3'⟩⟩
+      intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+  · -- v1 ≠ v2 : (i), apex b 0, pair (1,2); output (b0, b1, b2, b3)
+    refine ⟨b 0, b 1, b 2, b 3, ?_, Or.inl ⟨v1, v2, e12, hv1, hv1', hv2, hv2'⟩⟩
+    intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+
 end IntLRC7BS
