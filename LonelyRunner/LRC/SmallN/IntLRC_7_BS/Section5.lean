@@ -326,6 +326,25 @@ theorem normalize7_ndvd (x : ℤ) (hx : ¬ (7 : ℤ) ∣ x) : ¬ (7 : ℤ) ∣ n
   · exact hx
   · rwa [Int.dvd_neg]
 
+/-- `normalize7` only ever flips sign, so it preserves absolute value. -/
+theorem normalize7_natAbs (x : ℤ) : (normalize7 x).natAbs = x.natAbs := by
+  unfold normalize7; split_ifs <;> simp [Int.natAbs_neg]
+
+/-- **`normalize7` is injective on positive integers.** Since it preserves `|·|`
+and positives are determined by their absolute value, no two distinct positives
+(in particular no `±`-pair, which positivity already excludes) collide. This lifts
+the call-site injectivity of the speed tuple through the `{1,2,4}`-normalization,
+so the §6 case theorems may assume their (normalized) tuple is injective. -/
+theorem normalize7_injOn_pos {ι : Type*} (d : ι → ℤ) (hpos : ∀ i, 0 < d i)
+    (hinj : Function.Injective d) : Function.Injective (fun i => normalize7 (d i)) := by
+  intro a b h
+  apply hinj
+  have hab : (d a).natAbs = (d b).natAbs := by
+    simpa [normalize7_natAbs] using congrArg Int.natAbs h
+  rcases Int.natAbs_eq_natAbs_iff.mp hab with h1 | h1
+  · exact h1
+  · exact absurd h1 (by have := hpos a; have := hpos b; omega)
+
 theorem normalize7_band (m : ℕ) (lam x : ℤ) :
     ((7 ^ m : ℤ) ≤ (lam * normalize7 x) % 7 ^ (m + 1) ∧
      (lam * normalize7 x) % 7 ^ (m + 1) ≤ 6 * 7 ^ m) →

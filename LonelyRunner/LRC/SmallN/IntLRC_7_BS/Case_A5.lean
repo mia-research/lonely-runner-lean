@@ -58,7 +58,8 @@ over a finite search space (968 valid + 3 resolved-by-gcd cases).
 See `docs/n7_bs/SECTION6_PLAN.md` for details. -/
 theorem five_avoid_m1 (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
-    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7))) :
+    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
+    (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       qz 1 (lam * d i) ≠ 0 ∧ qz 1 (lam * d i) ≠ 6 := by
   sorry
@@ -112,6 +113,11 @@ private theorem mul_ndvd (d : Fin 5 → ℤ) (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d 
   · exact hu h7
   · exact hndvd i h7
 
+/-- A nonzero dilation preserves injectivity: `dᵢ` distinct ⇒ `u·dᵢ` distinct. -/
+private theorem mul_inj (d : Fin 5 → ℤ) (hinj : Function.Injective d)
+    (u : ℤ) (hu : u ≠ 0) : Function.Injective (fun i => u * d i) :=
+  fun _ _ h => hinj (mul_left_cancel₀ hu h)
+
 /-- The residue set `{1,2,4}` is closed under dilation by `2` or `4` (the order-3
 subgroup of `(ZMod 7)*`). -/
 private theorem mul_res_mem (d : Fin 5 → ℤ)
@@ -136,7 +142,8 @@ variable (m : ℕ) (d : Fin 5 → ℤ)
 private theorem case_61 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 5)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =5)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 0)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 0) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -147,7 +154,8 @@ private theorem case_61 (hm : 2 ≤ m)
 private theorem case_62a (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 4)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =4)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 1)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 0) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -158,7 +166,8 @@ private theorem case_62a (hm : 2 ≤ m)
 private theorem case_62b (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 4)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =4)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 0)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -170,7 +179,8 @@ of Lemma 5. -/
 private theorem case_63 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 3)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =3)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 1)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -181,7 +191,8 @@ Lemma 12; `lemma6_330` endpoint. -/
 private theorem case_64 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 3)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =3)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 2)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 0) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -192,7 +203,8 @@ private theorem case_64 (hm : 2 ≤ m)
 private theorem case_65 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 3)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =3)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 0)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 2) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -204,7 +216,8 @@ use the explicit `(a)/(b)` q-tables. -/
 private theorem case_66 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = 2)
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =2)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 2)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
@@ -219,6 +232,7 @@ by `hpop₂/hpop₄`. -/
 private theorem five_compress_repr (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
+    (hinj : Function.Injective d)
     (n₁ n₂ n₄ : ℕ) (hpart : n₁ + n₂ + n₄ = 5) (hpop₂ : n₂ ≤ n₁) (hpop₄ : n₄ ≤ n₁)
     (hC₁ : (Finset.univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card = n₁)
     (hC₂ : (Finset.univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = n₂)
@@ -231,17 +245,18 @@ private theorem five_compress_repr (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
   interval_cases n₁ <;> interval_cases n₂ <;> interval_cases n₄ <;>
     first
     | (exfalso; omega)
-    | exact case_61 m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_62a m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_62b m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_63 m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_64 m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_65 m d hm hndvd hres hC₁ hC₂ hC₄
-    | exact case_66 m d hm hndvd hres hC₁ hC₂ hC₄
+    | exact case_61 m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_62a m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_62b m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_63 m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_64 m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_65 m d hm hndvd hres hinj hC₁ hC₂ hC₄
+    | exact case_66 m d hm hndvd hres hinj hC₁ hC₂ hC₄
     -- `(2,1,2)` ties C₁=C₄ at max; a max-preserving ×2 dilation sends it to the
     -- canonical `(2,2,1)` (BS Case 6.6). new (C₁,C₂,C₄) = old (C₄,C₁,C₂) = (2,2,1).
     | (apply five_compress_relabel m d 2 (by decide)
        exact case_66 m _ hm (mul_ndvd d hndvd 2 (by decide)) (mul_res_mem d hres 2 (Or.inl rfl))
+         (mul_inj d hinj 2 (by decide))
          ((mul_res_perm d hres 2 1 4 (by decide)).trans hC₄)
          ((mul_res_perm d hres 2 2 1 (by decide)).trans hC₁)
          ((mul_res_perm d hres 2 4 2 (by decide)).trans hC₂))
@@ -256,7 +271,8 @@ to make the residue-1 class `C₁` the most popular, then dispatches to
 `n₁ ≥ n₂, n₄` (BS §6 cases 6.1–6.6). -/
 theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
-    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7))) :
+    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
+    (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
   classical
@@ -285,16 +301,19 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
   have hres_u : ∀ u : ℤ, u = 2 ∨ u = 4 →
       ∀ i, ((u * d i : ℤ) : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)) :=
     fun u hu => mul_res_mem d hres u hu
+  have hinj_u : ∀ u : ℤ, u ≠ 0 → Function.Injective (fun i => u * d i) :=
+    fun u hu => mul_inj d hinj u hu
   -- WLOG: dilate to make C₁ the most popular class.
   -- ×2: (n₁,n₂,n₄) → (n₄,n₁,n₂);  ×4: (n₁,n₂,n₄) → (n₂,n₄,n₁)
   by_cases h₁₂ : C₂.card ≤ C₁.card <;> by_cases h₁₄ : C₄.card ≤ C₁.card
   · -- C₁ dominant: no dilation
-    exact five_compress_repr m hm d hndvd hres C₁.card C₂.card C₄.card hpart h₁₂ h₁₄ rfl rfl rfl
+    exact five_compress_repr m hm d hndvd hres hinj C₁.card C₂.card C₄.card hpart h₁₂ h₁₄
+      rfl rfl rfl
   · -- C₄ > C₁ ≥ C₂: dilate by 2
     push_neg at h₁₄
     apply five_compress_relabel m d 2 (by decide)
     exact five_compress_repr m hm _ (hndvd_u 2 (by decide)) (hres_u 2 (Or.inl rfl))
-      C₄.card C₁.card C₂.card (by omega) (by omega) (by omega)
+      (hinj_u 2 (by decide)) C₄.card C₁.card C₂.card (by omega) (by omega) (by omega)
       (mul_res_perm d hres 2 1 4 (by decide))
       (mul_res_perm d hres 2 2 1 (by decide))
       (mul_res_perm d hres 2 4 2 (by decide))
@@ -302,7 +321,7 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     push_neg at h₁₂
     apply five_compress_relabel m d 4 (by decide)
     exact five_compress_repr m hm _ (hndvd_u 4 (by decide)) (hres_u 4 (Or.inr rfl))
-      C₂.card C₄.card C₁.card (by omega) (by omega) (by omega)
+      (hinj_u 4 (by decide)) C₂.card C₄.card C₁.card (by omega) (by omega) (by omega)
       (mul_res_perm d hres 4 1 2 (by decide))
       (mul_res_perm d hres 4 2 4 (by decide))
       (mul_res_perm d hres 4 4 1 (by decide))
@@ -312,7 +331,7 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     · -- C₂ ≥ C₄ > C₁: dilate by 4
       apply five_compress_relabel m d 4 (by decide)
       exact five_compress_repr m hm _ (hndvd_u 4 (by decide)) (hres_u 4 (Or.inr rfl))
-        C₂.card C₄.card C₁.card (by omega) h₂₄ (by omega)
+        (hinj_u 4 (by decide)) C₂.card C₄.card C₁.card (by omega) h₂₄ (by omega)
         (mul_res_perm d hres 4 1 2 (by decide))
         (mul_res_perm d hres 4 2 4 (by decide))
         (mul_res_perm d hres 4 4 1 (by decide))
@@ -320,7 +339,7 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
       push_neg at h₂₄
       apply five_compress_relabel m d 2 (by decide)
       exact five_compress_repr m hm _ (hndvd_u 2 (by decide)) (hres_u 2 (Or.inl rfl))
-        C₄.card C₁.card C₂.card (by omega) (by omega) (by omega)
+        (hinj_u 2 (by decide)) C₄.card C₁.card C₂.card (by omega) (by omega) (by omega)
         (mul_res_perm d hres 2 1 4 (by decide))
         (mul_res_perm d hres 2 2 1 (by decide))
         (mul_res_perm d hres 2 4 2 (by decide))
@@ -332,13 +351,14 @@ arc index `q(lam·dᵢ)` outside `{0,6}`. This is the entire `|A|=5` case analys
 `five_compress` (§6); the Λ₀ assembly bridge is `five_lambda0`. -/
 theorem five_avoid (m : ℕ) (hm : 1 ≤ m) (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
-    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7))) :
+    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
+    (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
   rcases Nat.lt_or_ge 1 m with hm2 | hm1
-  · exact five_compress m (by omega) d hndvd hres
+  · exact five_compress m (by omega) d hndvd hres hinj
   · interval_cases m
-    · exact five_avoid_m1 d hndvd hres
+    · exact five_avoid_m1 d hndvd hres hinj
 
 /-- **Master `|A| = 5` theorem (5-element analogue of `four_band`).** Five integers
 coprime to 7 admit a unit multiplier `lam` placing every residue `(lam·dᵢ)_N` in
@@ -346,12 +366,14 @@ the central band `[7^m, 6·7^m]`. Proved by normalizing to residues `{1,2,4}` an
 applying `band_of_qz_ne` to `five_avoid`. The single level-`m` element of `D₇` is
 handled separately by `band_top` (any unit `lam` keeps it in band). -/
 theorem five_band (m : ℕ) (hm : 1 ≤ m) (d : Fin 5 → ℤ)
-    (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) :
+    (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) (hpos : ∀ i, 0 < d i)
+    (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       (7 ^ m : ℤ) ≤ (lam * d i) % 7 ^ (m + 1) ∧
       (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
   set d' : Fin 5 → ℤ := fun i => normalize7 (d i) with hd'_def
   have hd'_ndvd : ∀ i, ¬ (7 : ℤ) ∣ d' i := fun i => normalize7_ndvd _ (hnotdvd i)
+  have hd'_inj : Function.Injective d' := normalize7_injOn_pos d hpos hinj
   -- It suffices to band the normalized elements (normalize7_band transports back).
   suffices h : ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       (7 ^ m : ℤ) ≤ (lam * d' i) % 7 ^ (m + 1) ∧
@@ -360,7 +382,7 @@ theorem five_band (m : ℕ) (hm : 1 ≤ m) (d : Fin 5 → ℤ)
     exact ⟨lam, hlam, fun i => normalize7_band m lam (d i) (hband i)⟩
   have hd'_res : ∀ i, (d' i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)) :=
     fun i => normalize7_res _ (hnotdvd i)
-  obtain ⟨lam, hlam, havoid⟩ := five_avoid m hm d' hd'_ndvd hd'_res
+  obtain ⟨lam, hlam, havoid⟩ := five_avoid m hm d' hd'_ndvd hd'_res hd'_inj
   exact ⟨lam, hlam, fun i => band_of_qz_ne m (lam * d' i) (havoid i).1 (havoid i).2⟩
 
 end IntLRC7BS

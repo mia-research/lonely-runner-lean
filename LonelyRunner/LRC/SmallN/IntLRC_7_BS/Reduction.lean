@@ -117,7 +117,11 @@ theorem bs_discrete_q
             have := hg_mem k
             simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and] at this; exact this
           set d5 : Fin 5 → ℤ := fun k => (D (g k) : ℤ)
-          obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd
+          have hpos_d5 : ∀ k, 0 < d5 k := fun k => by exact_mod_cast hpos (g k)
+          have hinj_d5 : Function.Injective d5 := fun a b h => by
+            have hDgab : D (g a) = D (g b) := by exact_mod_cast h
+            exact (S.orderIsoOfFin hScard_eq).injective (Subtype.val_injective (hinj hDgab))
+          obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd hpos_d5 hinj_d5
           refine ⟨m, lam, fun i => ?_⟩
           by_cases hi : i ∈ S
           · have ⟨k, hk⟩ : ∃ k : Fin 5, (S.orderIsoOfFin hScard_eq k).val = i := by
