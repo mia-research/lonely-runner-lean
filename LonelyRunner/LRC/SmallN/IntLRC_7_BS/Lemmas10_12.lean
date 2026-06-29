@@ -520,4 +520,66 @@ theorem dichotomy_core (p q : ZMod 7)
       (0 - a).val ≤ 4 ∧ (6 - a).val ≤ 4 ∧ (p - a).val ≤ 4 ∧ (q - a).val ≤ 4 := by
   revert hpq; revert p q; decide
 
+/-- `q·7^m + r` decomposition of `z mod 7^(m+1)` with `q = qval`, `r ∈ [0,7^m)`. -/
+theorem qval_decomp (m : ℕ) (z : ℤ) :
+    7 ^ m * qval m z + (z % 7 ^ (m + 1)) % 7 ^ m = z % 7 ^ (m + 1) ∧
+    0 ≤ (z % 7 ^ (m + 1)) % 7 ^ m ∧ (z % 7 ^ (m + 1)) % 7 ^ m < 7 ^ m := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  refine ⟨?_, Int.emod_nonneg _ (by positivity), Int.emod_lt_of_pos _ hP⟩
+  have := Int.mul_ediv_add_emod (z % 7 ^ (m + 1)) (7 ^ m); simpa [qval] using this
+
+/-- `qval` lies in `{0,…,6}`. -/
+theorem qval_range (m : ℕ) (z : ℤ) : 0 ≤ qval m z ∧ qval m z < 7 := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have h1 : 0 ≤ z % 7 ^ (m + 1) := Int.emod_nonneg z (by positivity)
+  obtain ⟨hdm, hmodlo, hmodhi⟩ := qval_decomp m z
+  have h2 : z % 7 ^ (m + 1) < 7 ^ m * 7 := by
+    have := Int.emod_lt_of_pos z (show (0 : ℤ) < 7 ^ (m + 1) by positivity)
+    rw [pow_succ] at this; exact this
+  exact ⟨by nlinarith [hdm, hmodhi, h1, hP], by nlinarith [hdm, hmodlo, h2, hP]⟩
+
+/-- **Interval bridge.** `q(z) ∈ {0,6}` exactly when the `N`-reduced value
+`z mod 7^(m+1)` lies in the bottom or top arc, `[0,7^m) ∪ [6·7^m, 7^(m+1))`. -/
+theorem qz_mem06_iff (m : ℕ) (z : ℤ) :
+    qz m z ∈ ({0, 6} : Finset (ZMod 7)) ↔
+      z % 7 ^ (m + 1) < 7 ^ m ∨ 6 * 7 ^ m ≤ z % 7 ^ (m + 1) := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  obtain ⟨hqv0, hqv7⟩ := qval_range m z
+  obtain ⟨hdm, hmodlo, hmodhi⟩ := qval_decomp m z
+  have hmul : 7 ^ m * qval m z ≤ z % 7 ^ (m + 1) ∧
+      z % 7 ^ (m + 1) < 7 ^ m * (qval m z + 1) := by
+    refine ⟨by linarith, ?_⟩
+    rw [show (7 : ℤ) ^ m * (qval m z + 1) = 7 ^ m * qval m z + 7 ^ m from by ring]; linarith
+  rw [qz_eq_qval]
+  simp only [Finset.mem_insert, Finset.mem_singleton]
+  -- reduce the `ZMod 7` membership to an integer statement `qval ∈ {0,6}`
+  have hcast : ((qval m z : ℤ) : ZMod 7) = 0 ∨ ((qval m z : ℤ) : ZMod 7) = 6 ↔
+      qval m z = 0 ∨ qval m z = 6 := by
+    constructor
+    · rintro (h | h)
+      · left
+        rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at h
+        have : (7 : ℤ) ∣ qval m z := by exact_mod_cast h
+        omega
+      · right
+        have h6 : (((qval m z - 6 : ℤ)) : ZMod 7) = 0 := by push_cast; rw [h]; ring
+        rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at h6
+        have : (7 : ℤ) ∣ (qval m z - 6) := by exact_mod_cast h6
+        omega
+    · rintro (h | h)
+      · rw [h]; left; rfl
+      · rw [h]; right; decide
+  rw [hcast]
+  constructor
+  · rintro (h | h)
+    · left; rw [h] at hmul; simp only [mul_zero, zero_add, mul_one] at hmul; exact hmul.2
+    · right; rw [h] at hmul; linarith [hmul.1]
+  · rintro (h | h)
+    · left
+      have hlt1 : qval m z < 1 := by nlinarith [hmul.1, h, hP]
+      omega
+    · right
+      have hgt5 : 5 < qval m z := by nlinarith [hmul.2, h, hP]
+      omega
+
 end IntLRC7BS
