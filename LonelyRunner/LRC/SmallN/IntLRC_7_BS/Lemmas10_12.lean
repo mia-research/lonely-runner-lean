@@ -424,4 +424,58 @@ theorem affine_place (c : Fin 5 → ZMod 7) (hc : Function.Injective c) :
   · have hciq : c i = q := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hq6]))
     exact hqc (hciq ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
 
+/-- **Case 6.1, `ν(E) = {m}` branch.** Five level-`0` elements, all `≡ 1 mod 7`,
+whose pairwise differences are all at level exactly `m` (so the leading
+coefficients `cᵢ = (dᵢ − d₀)/7^m` are distinct), admit a unit multiplier sending
+every arc index outside `{0,6}`. The multiplier is `(1 + k·7^m)·u` with `u` the
+unit from `affine_place` and `k` the `Λ₀` shift placing the base: by
+`qz_top_affine` then `qz_shift0`, `q(λ·dᵢ) = q(u·d₀) + k·u + u·cᵢ`, and `k` is
+chosen so `q(u·d₀) + k·u = A`, giving `q(λ·dᵢ) = A + u·cᵢ ∉ {0,6}`. -/
+theorem case_61_top (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ)
+    (hres1 : ∀ i, (d i : ZMod 7) = 1)
+    (htop : ∀ i, (7 : ℤ) ^ m ∣ (d i - d 0))
+    (hdist : Function.Injective (fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7))) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i, qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+  set c : Fin 5 → ZMod 7 := fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7) with hc_def
+  obtain ⟨u, A, hu, havoid⟩ := affine_place c hdist
+  set u_int : ℤ := (u.val : ℤ) with hu_def
+  have hu_cast : ((u_int : ℤ) : ZMod 7) = u := by
+    rw [hu_def]; push_cast; exact ZMod.natCast_rightInverse u
+  have hu_ndvd : ¬ (7 : ℤ) ∣ u_int := by
+    intro h; apply hu
+    rw [← hu_cast]; exact (ZMod.intCast_zmod_eq_zero_iff_dvd u_int 7).mpr (by exact_mod_cast h)
+  set qb : ZMod 7 := qz m (u_int * d 0) with hqb
+  set k : ZMod 7 := (A - qb) * u⁻¹ with hk_def
+  have hku : k * u = A - qb := by rw [hk_def, mul_assoc, inv_mul_cancel₀ hu, mul_one]
+  set k_int : ℤ := (k.val : ℤ) with hk_int_def
+  have hk_cast : ((k_int : ℤ) : ZMod 7) = k := by
+    rw [hk_int_def]; push_cast; exact ZMod.natCast_rightInverse k
+  set lam : ℤ := (1 + k_int * 7 ^ m) * u_int with hlam_def
+  have hlam_ndvd : ¬ (7 : ℤ) ∣ lam := by
+    rw [hlam_def]
+    have hp : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+    have h1m : ¬ (7 : ℤ) ∣ (1 + k_int * 7 ^ m) := by
+      intro h
+      have hd7m : (7 : ℤ) ∣ k_int * 7 ^ m :=
+        Dvd.dvd.mul_left (dvd_pow_self 7 (by omega : m ≠ 0)) k_int
+      have h1 : (7 : ℤ) ∣ 1 := by have := dvd_sub h hd7m; simpa using this
+      exact absurd h1 (by norm_num)
+    intro h
+    rcases hp.dvd_mul.mp h with h1 | h2
+    · exact h1m h1
+    · exact hu_ndvd h2
+  refine ⟨lam, hlam_ndvd, fun i => ?_⟩
+  have key : qz m (lam * d i) = A + u * c i := by
+    have hrw : lam * d i = (1 + k_int * 7 ^ m) * (u_int * d i) := by rw [hlam_def]; ring
+    rw [hrw, qz_shift0, hk_cast]
+    have hres_i : ((u_int * d i : ℤ) : ZMod 7) = u := by
+      push_cast; rw [hu_cast, hres1 i]; ring
+    rw [hres_i]
+    have haff : qz m (u_int * d i) = qb + u * c i := by
+      rw [hqb, qz_top_affine m u_int (d i) (d 0) (htop i), hu_cast, hc_def]
+    rw [haff]
+    have : qb + u * c i + k * u = A + u * c i := by rw [hku]; ring
+    linear_combination this
+  rw [key]; exact havoid i
+
 end IntLRC7BS
