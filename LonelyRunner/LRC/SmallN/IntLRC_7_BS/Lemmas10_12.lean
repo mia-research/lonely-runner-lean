@@ -211,4 +211,17 @@ theorem lemma11 (b : Fin 3 → ℤ) (hinj : Function.Injective b) :
     · exact dvd_sub_comm.mpr hvc
     · exact fun h => hvc' (dvd_sub_comm.mp h)
 
+set_option maxHeartbeats 4000000 in
+set_option maxRecDepth 100000 in
+/-- **Lemma 10 (ii) residue selection (BS L583–593, `|A₁| ≥ 4` case).** Four
+elements with all pairwise differences at a common level `h` correspond (via the
+leading parts `gᵢ = (dᵢ − d₀)/7^h`) to four *distinct* `ZMod 7` residues. Among
+them there is always a relabeling `(i,j,k,l)` (apex `i`) with `r(e_{ki}) = 2·r(e_{ji})`
+and `r(e_{li}) ∈ {3,4}·r(e_{ji})`. Exhaustive over injective `Fin 4 → ZMod 7`. -/
+theorem lemma10_select (g : Fin 4 → ZMod 7) (hg : Function.Injective g) :
+    ∃ i j k l : Fin 4, (∀ x : Fin 4, x = i ∨ x = j ∨ x = k ∨ x = l) ∧
+      g k - g i = 2 * (g j - g i) ∧
+      (g l - g i = 3 * (g j - g i) ∨ g l - g i = 4 * (g j - g i)) := by
+  revert hg; revert g; decide
+
 end IntLRC7BS
