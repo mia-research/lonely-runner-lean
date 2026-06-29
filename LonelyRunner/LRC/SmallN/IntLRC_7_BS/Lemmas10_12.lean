@@ -359,4 +359,69 @@ theorem lemma10 (b : Fin 4 → ℤ) (hinj : Function.Injective b) :
     refine ⟨b 0, b 1, b 2, b 3, ?_, Or.inl ⟨v1, v2, e12, hv1, hv1', hv2, hv2'⟩⟩
     intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
 
+/-! ### Λ_m top-digit apparatus (the `ν(E) = {m}` engine)
+
+For the case branches where every pairwise difference of `A₁` sits at the top
+level `m`, a *constant* unit multiplier `u` acts affinely on the arc indices. The
+foundation is that adding a multiple of `7^m` shifts the arc index by that
+multiple (no carry, since `c·7^m ≡ 0 mod 7^m`). -/
+
+/-- Adding `c·7^m` shifts the arc index by `c`: `q(x + c·7^m) = q(x) + c`. -/
+theorem qz_add_mul_pow (m : ℕ) (x c : ℤ) :
+    qz m (x + c * 7 ^ m) = qz m x + (c : ZMod 7) := by
+  unfold qz
+  rw [show x + c * 7 ^ m = x + 7 ^ m * c from by ring,
+    Int.add_mul_ediv_left x c (by positivity : (7 : ℤ) ^ m ≠ 0)]
+  push_cast; ring
+
+/-- **Constant-multiplier top-digit affine action.** For level-0 elements `x, y`
+whose difference is at level `≥ m` (`7^m ∣ x − y`), a constant multiplier `u`
+shifts the arc index affinely: `q(u·x) = q(u·y) + u · r`, where `r = (x−y)/7^m`
+is the leading coefficient of the difference. This is the engine of the
+`ν(E) = {m}` branches (BS's `(i−j)⁻¹` multiplier). -/
+theorem qz_top_affine (m : ℕ) (u x y : ℤ) (h : (7 : ℤ) ^ m ∣ (x - y)) :
+    qz m (u * x) = qz m (u * y) + (u : ZMod 7) * (((x - y) / 7 ^ m : ℤ) : ZMod 7) := by
+  obtain ⟨c, hc⟩ := h
+  have hux : u * x = u * y + (u * c) * 7 ^ m := by
+    have hxy : x = y + 7 ^ m * c := by linarith [hc]
+    rw [hxy]; ring
+  rw [hux, qz_add_mul_pow]
+  congr 1
+  have hcdiv : (x - y) / 7 ^ m = c := by
+    rw [hc]; exact Int.mul_ediv_cancel_left c (by positivity)
+  rw [hcdiv]; push_cast; ring
+
+/-- Any two distinct residues `p ≠ q` are sent to `0` and `6` by an affine unit
+map `x ↦ A + u·x` (exhaustive `decide`). -/
+theorem affine_place_pair (p q : ZMod 7) (hpq : p ≠ q) :
+    ∃ u A : ZMod 7, u ≠ 0 ∧ A + u * p = 0 ∧ A + u * q = 6 := by
+  revert hpq; revert p q; decide
+
+/-- **`|A₁| = 5`, `ν(E) = {m}` placement core.** Five distinct `ZMod 7` residues
+(the leading coefficients of five level-`0` elements whose pairwise differences are
+all at level `m`) admit an affine unit map `x ↦ A + u·x` sending all of them
+outside `{0,6}` — i.e. into the central band `{1,…,5}`. (BS's `(i−j)⁻¹`
+multiplier: map the two *missing* residues to `{0,6}`; the unit map then bijects
+the remaining five onto `{1,…,5}`.) -/
+theorem affine_place (c : Fin 5 → ZMod 7) (hc : Function.Injective c) :
+    ∃ u A : ZMod 7, u ≠ 0 ∧ ∀ i, A + u * c i ≠ 0 ∧ A + u * c i ≠ 6 := by
+  classical
+  set S : Finset (ZMod 7) := Finset.image c Finset.univ with hS
+  have hScard : S.card = 5 := by
+    rw [hS, Finset.card_image_of_injective _ hc, Finset.card_univ, Fintype.card_fin]
+  have hcompl : Sᶜ.card = 2 := by rw [Finset.card_compl, hScard]; decide
+  obtain ⟨p, q, hpq, hSc⟩ := Finset.card_eq_two.mp hcompl
+  obtain ⟨u, A, hu, hp0, hq6⟩ := affine_place_pair p q hpq
+  have hpc : p ∉ S := by
+    have : p ∈ Sᶜ := by rw [hSc]; exact Finset.mem_insert_self p {q}
+    exact Finset.mem_compl.mp this
+  have hqc : q ∉ S := by
+    have : q ∈ Sᶜ := by rw [hSc]; exact Finset.mem_insert_of_mem (Finset.mem_singleton_self q)
+    exact Finset.mem_compl.mp this
+  refine ⟨u, A, hu, fun i => ⟨fun h => ?_, fun h => ?_⟩⟩
+  · have hcip : c i = p := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hp0]))
+    exact hpc (hcip ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
+  · have hciq : c i = q := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hq6]))
+    exact hqc (hciq ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
+
 end IntLRC7BS
