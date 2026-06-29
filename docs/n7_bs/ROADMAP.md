@@ -103,12 +103,41 @@ The lone `sorry` is `Reduction.bs_discrete_q` (hard branch). PDF
 **Case counts (`|D|=6, gcd=1`, hard = ∃ j<m |D₇(j)|≥4):** ≤1 big level (two ⟹ ≥8>6);
 big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D₇(0)|∈{4,5}`.
 
-**Current sorry chain (2026-06-28 updated) — sorry count:**
+**Current sorry chain (2026-06-30 updated) — 8 sorries, all in `Case_A5.lean`:**
 `intLRC_seven` → `bs_discrete_q` (✅) → `five_band` (✅) → `five_avoid` → {
-  `five_compress` (§6, m≥2, structured skeleton): **OPEN**
+  `five_compress` (§6, m≥2) → `five_compress_repr` → **7 case sorries**
+     `case_61`, `case_62a`, `case_63`, `case_64`, `case_65`, `case_66`: **OPEN**
+     `case_62b` (4,0,1): **STRUCTURED SKELETON** — A₁/A₄ extraction wired
+       (orderIsoOfFin + card_eq_one), lemma10 applied, branch dispatch:
+       • branch (i): lemma9_i_dispatch called → sorry for 5-elt placement
+       • branch (ii) ratio 3: sorry (h=m: affine+lemma5_401_gen; h<m: L9(ii)j=3)
+       • branch (ii) ratio 4: sorry (h=m: L7+lemma6_501; h<m: L9(ii)j=4)
   `five_avoid_m1` (§7, m=1): **OPEN — statement needs redraft (see below)**
 }
-Lemmas7_9.lean: `lemma7_i` ✅, `lemma9_ii_j3` ✅, `lemma7_ii` OPEN, `lemma9_ii_j2` OPEN.
+Compression toolkit (`Lemmas7_9.lean`): `lemma7_i`/`lemma7_ii`/`lemma9_i`/`lemma9_ii_j2`/`lemma9_ii_j3` ALL ✅ axiom-clean.
+**ν=m edge RESOLVED** (`Lemmas.lean`, 2026-06-29): `lemma9_i_top` (exact 7^m shift via
+  `qz_sub_mul_pow`, no carry) + `lemma9_i_dispatch` (unified dispatch: both<m / one=m /
+  one>m all handled). `qz_eq_of_high_dvd` (Defs) for the q-equivalence trivialization.
+  All ✅ axiom-clean. THIS WAS THE GATING BLOCKER — all §6 case ν(E)≠{m} branches now
+  have the compression tool they need.
+Labeling layer (`Lemmas10_12.lean`, NEW 2026-06-29): **`lemma11` (|A₁|=3) AND `lemma10`
+  (|A₁|≥4) both ✅ axiom-clean** + helpers `exists_val7` (7-adic valuation extraction),
+  `ultra_add` (ultrametric), `ratio_two_three`/`lemma10_select`/`cover_distinct` (finite
+  decides), `res_eq`/`unit_res`. **Only L12 (|A₁|=3,|A₂|=2) still TODO in the labeling layer.**
+Λ_m apparatus (`Lemmas10_12.lean`, 2026-06-29): **`qz_top_affine` + `qz_add_mul_pow`
+  (engine) + `affine_place` (|A₁|=5 ν(E)={m} placement) all ✅ axiom-clean.** Composes
+  with `qz_shift0`. (qz_* primitives to relocate to Defs.lean; file to split — debt.)
+Case 6.1 progress (`Lemmas10_12.lean`, 2026-06-29): **`case_61_top` (ν(E)={m} branch)
+  ✅ axiom-clean.** For ν(E)≠{m}: **`place_window5`** (residue-agnostic final placement),
+  **`dichotomy_core`** ({0,6,p,q} fits ℓ≤5 unless {p,q}={2,4}), and **`rmk8_i_k3`
+  (multiplicative Remark 8(i): ℓ(X)≤2 ⇒ ℓ(3X)≤4) ✅ axiom-clean** (via `qz_mem06_iff`
+  bridge + `cluster3` + `rmk8_concl`) — the {2,4} 3·-sub-case engine. Remaining for
+  the ν≠{m} close: **`lemma9_i` ν=m edge** (subtle exact-residue compression, SECTION6
+  TODO — the gating blocker), the **Fin-5 labeling**, and the multi-multiplier
+  composition. (Back-half dichotomy/3·/place ready; front-half compression gated on
+  the ν=m edge. See `memory/lean_n7_bs_case61_wiring_2026_06_29.md`.)
+Note: a stale `mul_ndvd` in `Case_A5.lean` used a non-existent `Int.prime_iff_natAbs_prime`;
+fixed to `Nat.prime_iff_prime_int.mp (by decide)` (the tree-wide idiom) — Case_A5 now builds.
 
 **§7 (m=1) architectural issue (2026-06-28):**
 `five_avoid_m1` as stated is FALSE: three exceptional 5-element sets
