@@ -117,11 +117,11 @@ theorem fitsInterval_mono {S : Finset (ZMod 7)} {a : ZMod 7} {L L' : ℕ}
     (hLL' : L ≤ L') (h : fitsInterval S a L) : fitsInterval S a L' :=
   fun x hx => let ⟨j, hj⟩ := h x hx; ⟨⟨j.val, lt_of_lt_of_le j.isLt hLL'⟩, hj⟩
 
+set_option maxRecDepth 4000 in
 /-- **Remark 8 (ii) combinatorial core (BS L478).** Three values in `ZMod 7` whose
 pairwise differences all lie in `{0,1,2,5,6} = {−2,…,2}` fit in a length-3 AP.
 (Max clique in the `{±1,±2}` Cayley graph on `ZMod 7` is a 3-term interval.)
 Stated for 3 explicit elements — matches `B = {b₁,b₂,b₃}` in Lemma 9. -/
-set_option maxRecDepth 4000 in
 theorem remark8_ii_core3 (v₁ v₂ v₃ : ZMod 7)
     (h₁₂ : v₁ - v₂ ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)))
     (h₁₃ : v₁ - v₃ ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)))
@@ -129,10 +129,10 @@ theorem remark8_ii_core3 (v₁ v₂ v₃ : ZMod 7)
     ∃ a : ZMod 7, fitsInterval ({v₁, v₂, v₃} : Finset (ZMod 7)) a 3 := by
   revert h₁₂ h₁₃ h₂₃; revert v₁ v₂ v₃; decide
 
+set_option maxRecDepth 4000 in
 /-- **Remark 8 (i) combinatorial core, `k = 1` (BS L476).** Three `ZMod 7` values
 whose pairwise differences all lie in `{0,1,6} = {−1,0,1}` fit in a length-2 AP.
 (Used via `qz_subxy_carry`: `q(X−X)⊂{0,6}` ⇒ pairwise `qz`-diffs ∈ `{−1,0,1}`.) -/
-set_option maxRecDepth 4000 in
 theorem remark8_i_core3 (v₁ v₂ v₃ : ZMod 7)
     (h₁₂ : v₁ - v₂ ∈ ({0, 1, 6} : Finset (ZMod 7)))
     (h₁₃ : v₁ - v₃ ∈ ({0, 1, 6} : Finset (ZMod 7)))

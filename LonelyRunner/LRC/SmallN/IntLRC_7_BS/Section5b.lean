@@ -160,7 +160,8 @@ theorem four_band (m : ℕ) (hm : 0 < m) (d : Fin 4 → ℤ)
       (lam * d i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m := by
   set d' : Fin 4 → ℤ := fun i => normalize7 (d i)
   have hd'_ndvd : ∀ i, ¬ (7 : ℤ) ∣ d' i := fun i => normalize7_ndvd _ (hnotdvd i)
-  suffices h : ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ avoids06 ((lam : ℤ) : ZMod 7) ∧ ∀ i,
+  suffices h : ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ avoids06 ((lam : ℤ) : ZMod 7) ∧
+      (∃ j_step : ℕ, 1 ≤ j_step ∧ j_step ≤ 5 ∧ (7 : ℤ) ^ m ∣ (lam - j_step)) ∧ ∀ i,
       (7 ^ m : ℤ) ≤ (lam * d' i) % 7 ^ (m + 1) ∧
       (lam * d' i) % 7 ^ (m + 1) ≤ 6 * 7 ^ m by
     obtain ⟨lam, hlam, hlam06, hcongr, hband⟩ := h

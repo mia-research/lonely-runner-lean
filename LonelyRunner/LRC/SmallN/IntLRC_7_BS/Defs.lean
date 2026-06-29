@@ -485,4 +485,176 @@ theorem qz_retarget_two_top (m h : ℕ) (hh : h < m) (x y : ℤ)
     exact hjx
   · rw [show lam2 * j * y = lam2 * (j * y) from by ring, hlam2_def, hky]
 
+/-- **Subtracting a multiple of `7^m` shifts `qz` by the multiplier.** Since
+`qz m x = (x / 7^m : ZMod 7)`, subtracting `7^m · w` from `x` shifts the integer
+quotient by exactly `w`. This is the key to the carry analysis in Lemma 7(ii). -/
+theorem qz_sub_mul_pow (m : ℕ) (a w : ℤ) :
+    qz m (a - (7 : ℤ) ^ m * w) = qz m a - (w : ZMod 7) := by
+  simp only [qz]
+  have h7 : (7 : ℤ) ^ m ≠ 0 := pow_ne_zero m (show (7:ℤ) ≠ 0 by decide)
+  have heq : a - (7 : ℤ) ^ m * w = a + (-w) * (7 : ℤ) ^ m := by ring
+  rw [heq, Int.add_mul_ediv_right _ _ h7]
+  push_cast; ring
+
+/-- **No doubling carry when `q(7a) = 0`.** If the top 7-ary digit of `7a` is 0,
+the low part of `a` is `< 7^{m-1}`, so doubling stays below `7^m` and the carry
+vanishes: `q(2a) = 2·q(a)`. -/
+theorem qz_double_no_carry (m : ℕ) (a : ℤ) (h : qz m (7 * a) = 0) :
+    qz m (2 * a) = 2 * qz m a := by
+  rcases Nat.eq_zero_or_pos m with rfl | hm
+  · simp only [qz, pow_zero, Int.ediv_one]; push_cast; ring
+  simp only [qz] at *
+  have h7m : (7 : ℤ) ^ m = 7 * 7 ^ (m - 1) := by
+    cases m with | zero => omega | succ n => simp [pow_succ']
+  rw [h7m, Int.mul_ediv_mul_of_pos a ((7 : ℤ) ^ (m - 1)) (by norm_num : (0:ℤ) < 7)] at h
+  rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at h
+  have hdvd : (7 : ℤ) ∣ a / (7 : ℤ) ^ (m - 1) := by exact_mod_cast h
+  obtain ⟨c, hc⟩ := hdvd
+  set P := (7 : ℤ) ^ m
+  set Pm1 := (7 : ℤ) ^ (m - 1)
+  have hPm1_pos : (0 : ℤ) < Pm1 := pow_pos (by norm_num : (0:ℤ) < 7) _
+  have hP_pos : (0 : ℤ) < P := pow_pos (by norm_num : (0:ℤ) < 7) _
+  have hPeq : P = 7 * Pm1 := h7m
+  have hrm1 : 0 ≤ a % Pm1 := Int.emod_nonneg a (ne_of_gt hPm1_pos)
+  have hrm1P : a % Pm1 < Pm1 := Int.emod_lt_of_pos a hPm1_pos
+  have ha_decomp : a = P * c + a % Pm1 := by
+    have h1 : Pm1 * (a / Pm1) + a % Pm1 = a := Int.ediv_add_emod a Pm1
+    have h2 : Pm1 * (7 * c) = P * c := by rw [hPeq]; ring
+    rw [hc] at h1; linarith
+  have h2r_nn : 0 ≤ 2 * (a % Pm1) := by linarith
+  have h2r_lt : 2 * (a % Pm1) < P := by nlinarith [hPeq]
+  have h2adiv : 2 * a / P = 2 * c := by
+    have h2a : 2 * a = 2 * (a % Pm1) + P * (2 * c) := by linarith [ha_decomp]
+    rw [h2a, Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+      Int.ediv_eq_zero_of_lt h2r_nn h2r_lt, zero_add]
+  have hadiv : a / P = c := by
+    have ha2 : a = a % Pm1 + P * c := by linarith [ha_decomp]
+    rw [ha2, Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+      Int.ediv_eq_zero_of_lt hrm1 (by linarith [hPeq]), zero_add]
+  rw [h2adiv, hadiv]; push_cast; ring
+
+/-- **Doubling carry = 1 when `q(7a) = 6`.** If the top 7-ary digit of `7a` is 6,
+the low part of `a` is `≥ 6·7^{m-1}`, so doubling overflows by exactly `7^m`:
+`q(2a) = 2·q(a) + 1`. -/
+theorem qz_double_carry_one (m : ℕ) (hm : 1 ≤ m) (a : ℤ) (h : qz m (7 * a) = 6) :
+    qz m (2 * a) = 2 * qz m a + 1 := by
+  simp only [qz] at *
+  have h7m : (7 : ℤ) ^ m = 7 * 7 ^ (m - 1) := by
+    cases m with | zero => omega | succ n => simp [pow_succ']
+  rw [h7m, Int.mul_ediv_mul_of_pos a ((7 : ℤ) ^ (m - 1)) (by norm_num : (0:ℤ) < 7)] at h
+  set P := (7 : ℤ) ^ m
+  set Pm1 := (7 : ℤ) ^ (m - 1)
+  have hPm1_pos : (0 : ℤ) < Pm1 := pow_pos (by norm_num : (0:ℤ) < 7) _
+  have hP_pos : (0 : ℤ) < P := pow_pos (by norm_num : (0:ℤ) < 7) _
+  have hPeq : P = 7 * Pm1 := h7m
+  set Q := a / Pm1
+  have hQmod : Q % 7 = 6 := by
+    have := ZMod.intCast_zmod_eq_zero_iff_dvd (Q - 6) 7
+    simp only [Int.cast_sub, h] at this
+    obtain ⟨k, hk⟩ := this.mp rfl; omega
+  have eQ : Q = 7 * (Q / 7) + 6 := by omega
+  have hrm1 : 0 ≤ a % Pm1 := Int.emod_nonneg a (ne_of_gt hPm1_pos)
+  have hrm1P : a % Pm1 < Pm1 := Int.emod_lt_of_pos a hPm1_pos
+  have h1 : Pm1 * Q + a % Pm1 = a := Int.ediv_add_emod a Pm1
+  set r := 6 * Pm1 + a % Pm1 with hr_def
+  have ha_decomp : a = P * (Q / 7) + r := by
+    have h2 : Pm1 * (7 * (Q / 7) + 6) = P * (Q / 7) + 6 * Pm1 := by rw [hPeq]; ring
+    rw [eQ] at h1; linarith
+  have hr_nn : 0 ≤ r := by linarith [hr_def]
+  have hr_lt : r < P := by linarith [hr_def, hPeq]
+  have h2r_ge : P ≤ 2 * r := by linarith [hr_def, hPeq]
+  have h2adiv : 2 * a / P = 2 * (Q / 7) + 1 := by
+    have h2a : 2 * a = (2 * r - P) + P * (2 * (Q / 7) + 1) := by linarith [ha_decomp]
+    rw [h2a, Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+      Int.ediv_eq_zero_of_lt (by linarith) (by linarith), zero_add]
+  have hadiv : a / P = Q / 7 := by
+    have ha2 : a = r + P * (Q / 7) := by linarith [ha_decomp]
+    rw [ha2, Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+      Int.ediv_eq_zero_of_lt hr_nn hr_lt, zero_add]
+  rw [h2adiv, hadiv]; push_cast; ring
+
+/-- **Combined carry with the `2x−y` ⇒ `x−y` implication (BS L368, refined).**
+Produces BOTH the `2x−y` carry `c₃ ∈ {−1,0,1}` and the `x−y` carry `c₁ ∈ {−1,0}`
+on the SAME pair `(x,y)`, together with the integer-forced links
+`c₃ = −1 ⇒ c₁ = −1` and `c₃ = 1 ⇒ c₁ = 0` (`6 = −1` in `ZMod 7`). The links are
+honest facts about the shared low parts `rx = x%7^m`, `ry = y%7^m ∈ [0,7^m)`:
+`2rx < ry ⇒ rx ≤ 2rx < ry ⇒ rx < ry`, and `2rx ≥ ry+7^m > 2ry ⇒ rx > ry`. These
+links are exactly what lets the `j=2` length-2 compression (`lemma9_ii_j2`) close:
+a single carry pair cannot, but the implication rules out the bad `(c₃,c₁)` combos. -/
+theorem qz_combined_carry (m : ℕ) (x y : ℤ) :
+    ∃ c₃ c₁ : ZMod 7,
+      (c₃ = 0 ∨ c₃ = 1 ∨ c₃ = 6) ∧ (c₁ = 0 ∨ c₁ = 6) ∧
+      qz m (2 * x - y) = 2 * qz m x - qz m y + c₃ ∧
+      qz m (x - y) = qz m x - qz m y + c₁ ∧
+      (c₃ = 6 → c₁ = 6) ∧ (c₃ = 1 → c₁ = 0) := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have hPne : (7 : ℤ) ^ m ≠ 0 := ne_of_gt hP
+  set P := (7 : ℤ) ^ m
+  set rx := x % P; set ry := y % P
+  have hrx0 : 0 ≤ rx := Int.emod_nonneg x hPne
+  have hry0 : 0 ≤ ry := Int.emod_nonneg y hPne
+  have hrxP : rx < P := Int.emod_lt_of_pos x hP
+  have hryP : ry < P := Int.emod_lt_of_pos y hP
+  set s₃ : ℤ := (2 * rx - ry) / P with hs3_def
+  have hs3_hi : s₃ ≤ 1 := by
+    have : s₃ < 2 := by rw [hs3_def, Int.ediv_lt_iff_lt_mul hP]; linarith
+    omega
+  have hs3_lo : -1 ≤ s₃ := by rw [hs3_def, Int.le_ediv_iff_mul_le hP]; linarith
+  have hdecomp3 : (2 * x - y) / P = 2 * (x / P) - y / P + s₃ := by
+    have ex : (rx : ℤ) = x - P * (x / P) := Int.emod_def x P
+    have ey : (ry : ℤ) = y - P * (y / P) := Int.emod_def y P
+    have hcomb : 2 * x - y = (2 * rx - ry) + P * (2 * (x / P) - y / P) := by rw [ex, ey]; ring
+    rw [hcomb, Int.add_mul_ediv_left _ _ hPne, ← hs3_def]; ring
+  set s₁ : ℤ := (rx - ry) / P with hs1_def
+  have hs1_hi : s₁ ≤ 0 := by
+    have : s₁ < 1 := by rw [hs1_def, Int.ediv_lt_iff_lt_mul hP]; linarith
+    omega
+  have hs1_lo : -1 ≤ s₁ := by rw [hs1_def, Int.le_ediv_iff_mul_le hP]; linarith
+  have hdecomp1 : (x - y) / P = x / P - y / P + s₁ := by
+    have ex : (rx : ℤ) = x - P * (x / P) := Int.emod_def x P
+    have ey : (ry : ℤ) = y - P * (y / P) := Int.emod_def y P
+    have hcomb : x - y = (rx - ry) + P * (x / P - y / P) := by rw [ex, ey]; ring
+    rw [hcomb, Int.add_mul_ediv_left _ _ hPne, ← hs1_def]; ring
+  -- integer carry links
+  have himp6 : s₃ = -1 → s₁ = -1 := by
+    intro _h3
+    have h2 : 2 * rx - ry < 0 := by
+      by_contra hc; rw [not_lt] at hc
+      have : 0 ≤ s₃ := by rw [hs3_def]; exact Int.ediv_nonneg hc (le_of_lt hP)
+      omega
+    have hlt : rx - ry < 0 := by linarith
+    have hneg : s₁ < 0 := by rw [hs1_def]; exact Int.ediv_neg_of_neg_of_pos hlt hP
+    omega
+  have himp1 : s₃ = 1 → s₁ = 0 := by
+    intro h3
+    have h2 : P ≤ 2 * rx - ry := by
+      have hmod := Int.emod_add_mul_ediv (2 * rx - ry) P
+      have hnn : 0 ≤ (2 * rx - ry) % P := Int.emod_nonneg _ hPne
+      rw [← hs3_def] at hmod; nlinarith [hmod, hnn]
+    have hge : 0 ≤ rx - ry := by linarith
+    have : 0 ≤ s₁ := by rw [hs1_def]; exact Int.ediv_nonneg hge (le_of_lt hP)
+    omega
+  have hq3 : qz m (2 * x - y) = 2 * qz m x - qz m y + (s₃ : ZMod 7) := by
+    unfold qz; rw [hdecomp3]; push_cast; ring
+  have hq1 : qz m (x - y) = qz m x - qz m y + (s₁ : ZMod 7) := by
+    unfold qz; rw [hdecomp1]; push_cast; ring
+  refine ⟨(s₃ : ZMod 7), (s₁ : ZMod 7), ?_, ?_, hq3, hq1, ?_, ?_⟩
+  · interval_cases s₃
+    · right; right; decide
+    · left; decide
+    · right; left; decide
+  · interval_cases s₁
+    · right; decide
+    · left; decide
+  · intro h
+    interval_cases s₃
+    · rw [himp6 rfl]; decide
+    · exact absurd h (by decide)
+    · exact absurd h (by decide)
+  · intro h
+    interval_cases s₃
+    · exact absurd h (by decide)
+    · exact absurd h (by decide)
+    · rw [himp1 rfl]; decide
+
 end IntLRC7BS
