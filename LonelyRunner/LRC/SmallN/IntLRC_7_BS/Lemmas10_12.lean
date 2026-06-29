@@ -630,4 +630,58 @@ theorem rmk8_concl {ι : Type*} (m : ℕ) (t : ℤ) (x : ι → ℤ)
       = 1 + (c : ZMod 7) from by ring]
     interval_cases c <;> decide
 
+/-- **3-element cluster.** Three integers with all pairwise `q(xᵢ−xⱼ) ∈ {0,6}` lie
+in one common `7^m`-window: some `xₖ` has every `(xᵢ−xₖ) mod 7^(m+1) < 7^m`. (The
+pairwise "within one arc" relation is an acyclic tournament on 3 points, so it has
+a source.) -/
+theorem cluster3 (m : ℕ) (x : Fin 3 → ℤ)
+    (hdiff : ∀ i j, qz m (x i - x j) ∈ ({0, 6} : Finset (ZMod 7))) :
+    ∃ k : Fin 3, ∀ i, (x i - x k) % 7 ^ (m + 1) < 7 ^ m := by
+  have hP : (0 : ℤ) < 7 ^ m := by positivity
+  have hNP : (7 : ℤ) ^ (m + 1) = 7 * 7 ^ m := by rw [pow_succ]; ring
+  have hrrange : ∀ i, 0 ≤ x i % 7 ^ (m + 1) ∧ x i % 7 ^ (m + 1) < 7 ^ (m + 1) :=
+    fun i => ⟨Int.emod_nonneg _ (by positivity), Int.emod_lt_of_pos _ (by positivity)⟩
+  have hbr : ∀ i j, (x i - x j) % 7 ^ (m + 1) < 7 ^ m ∨
+      6 * 7 ^ m ≤ (x i - x j) % 7 ^ (m + 1) := fun i j => (qz_mem06_iff m _).mp (hdiff i j)
+  have hrep : ∀ i j, (x i - x j) % 7 ^ (m + 1)
+        = x i % 7 ^ (m + 1) - x j % 7 ^ (m + 1) ∨
+      (x i - x j) % 7 ^ (m + 1)
+        = x i % 7 ^ (m + 1) - x j % 7 ^ (m + 1) + 7 ^ (m + 1) := by
+    intro i j
+    rw [Int.sub_emod]
+    obtain ⟨_, _⟩ := hrrange i; obtain ⟨_, _⟩ := hrrange j
+    by_cases h : 0 ≤ (x i % 7 ^ (m + 1) - x j % 7 ^ (m + 1))
+    · left; exact Int.emod_eq_of_lt h (by omega)
+    · right
+      push_neg at h
+      rw [← Int.add_emod_right]; exact Int.emod_eq_of_lt (by omega) (by omega)
+  have hdiag : ∀ i, (x i - x i) % 7 ^ (m + 1) = 0 := by intro i; simp
+  have R0 := hrrange 0; have R1 := hrrange 1; have R2 := hrrange 2
+  have key : ((x 1 - x 0) % 7 ^ (m + 1) < 7 ^ m ∧ (x 2 - x 0) % 7 ^ (m + 1) < 7 ^ m) ∨
+      ((x 0 - x 1) % 7 ^ (m + 1) < 7 ^ m ∧ (x 2 - x 1) % 7 ^ (m + 1) < 7 ^ m) ∨
+      ((x 0 - x 2) % 7 ^ (m + 1) < 7 ^ m ∧ (x 1 - x 2) % 7 ^ (m + 1) < 7 ^ m) := by
+    have b10 := hbr 1 0; have b20 := hbr 2 0; have b01 := hbr 0 1
+    have b21 := hbr 2 1; have b02 := hbr 0 2; have b12 := hbr 1 2
+    have e10 := hrep 1 0; have e20 := hrep 2 0; have e01 := hrep 0 1
+    have e21 := hrep 2 1; have e02 := hrep 0 2; have e12 := hrep 1 2
+    omega
+  rcases key with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · refine ⟨0, fun i => ?_⟩
+    have h0 : (x 0 - x 0) % 7 ^ (m + 1) < 7 ^ m := by rw [hdiag 0]; exact hP
+    fin_cases i <;> assumption
+  · refine ⟨1, fun i => ?_⟩
+    have h0 : (x 1 - x 1) % 7 ^ (m + 1) < 7 ^ m := by rw [hdiag 1]; exact hP
+    fin_cases i <;> assumption
+  · refine ⟨2, fun i => ?_⟩
+    have h0 : (x 2 - x 2) % 7 ^ (m + 1) < 7 ^ m := by rw [hdiag 2]; exact hP
+    fin_cases i <;> assumption
+
+/-- **Multiplicative Remark 8(i), `k = 3`.** If `q(xᵢ−xⱼ) ∈ {0,6}` for all pairs of
+a 3-set, then `ℓ(3·X) ≤ 4`: the arc indices `q(3xᵢ)` fit a length-4 window. -/
+theorem rmk8_i_k3 (m : ℕ) (x : Fin 3 → ℤ)
+    (hdiff : ∀ i j, qz m (x i - x j) ∈ ({0, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, ∀ i, (qz m (3 * x i) - a).val ≤ 3 := by
+  obtain ⟨k, hk⟩ := cluster3 m x hdiff
+  exact ⟨qz m (3 * x k), rmk8_concl m (x k) x hk⟩
+
 end IntLRC7BS
