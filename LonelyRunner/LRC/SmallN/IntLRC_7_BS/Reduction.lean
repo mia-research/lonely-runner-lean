@@ -117,9 +117,11 @@ theorem bs_discrete_q
             have := hg_mem k
             simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and] at this; exact this
           set d5 : Fin 5 → ℤ := fun k => (D (g k) : ℤ)
-          have hpos_d5 : ∀ k, 0 < d5 k := fun k => by exact_mod_cast hpos (g k)
+          have hpos_d5 : ∀ k, 0 < d5 k := fun k => by
+            show (0 : ℤ) < (D (g k) : ℤ); exact_mod_cast hpos (g k)
           have hinj_d5 : Function.Injective d5 := fun a b h => by
-            have hDgab : D (g a) = D (g b) := by exact_mod_cast h
+            have hDgab : D (g a) = D (g b) := by
+              have : (D (g a) : ℤ) = D (g b) := h; exact_mod_cast this
             exact (S.orderIsoOfFin hScard_eq).injective (Subtype.val_injective (hinj hDgab))
           obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd hpos_d5 hinj_d5
           refine ⟨m, lam, fun i => ?_⟩
@@ -179,10 +181,11 @@ theorem bs_discrete_q
               simpa using this
             exact_mod_cast h7
           have he_int_val : padicValNat 7 (D e_int) < m :=
-            lt_of_not_le fun h => hndvd_nat ((padicValNat_dvd_iff_le (hpos e_int).ne').mpr h)
+            Nat.lt_of_not_le fun h => hndvd_nat ((padicValNat_dvd_iff_le (hpos e_int).ne').mpr h)
           have hne : i_m ≠ e_int := by
             intro h; subst h
-            rw [hm] at hi_m; omega
+            exact hndvd_nat ((padicValNat_dvd_iff_le (hpos i_m).ne').mpr
+              (by rw [hm]; exact le_of_eq hi_m))
           have hsub : S ⊆ (Finset.univ.erase i_m).erase e_int := fun x hx =>
             Finset.mem_erase.mpr ⟨fun h => he_notS (h ▸ hx),
               Finset.mem_erase.mpr ⟨fun h => hi_m_notS (h ▸ hx), Finset.mem_univ x⟩⟩
@@ -200,35 +203,40 @@ theorem bs_discrete_q
           have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
             have := (T.orderIsoOfFin hT4).surjective ⟨i, hiT⟩
             exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
-          have := hband4 k; simp only [d4, f, hk, show lam = lam' * pre from rfl,
-            show lam' * pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ) =
-              lam' * (pre * (D ((T.orderIsoOfFin hT4 k).val) : ℤ)) from by ring] at this ⊢
+          have := hband4 k; simp only [d4, f, hk] at this
+          simp only [show lam = lam' * pre from rfl, mul_assoc]
           exact this
         · -- Non-level-0 element
           simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not] at hi
           by_cases hi_eq : i = e_int
           · -- THE interior element: use pre-multiplier + interior_in_band
             subst hi_eq
+            -- After subst, e_int → i
             obtain ⟨c', hc'⟩ := hcongr'
             obtain ⟨w, hw⟩ := hpre_congr
-            have hrw : lam * (D e_int : ℤ) =
-                (j_step : ℤ) * pre * (D e_int : ℤ) +
-                (7 : ℤ) ^ (m + 1) * (c' * pre * (D e_int : ℤ)) := by
-              show lam' * pre * (D e_int : ℤ) = _
-              rw [show lam' = (j_step : ℤ) + (7 : ℤ) ^ m * c' from by linarith]; ring
-            have hmod_eq : (lam * (D e_int : ℤ)) % (7 : ℤ) ^ (m + 1) =
+            -- lam * Di = lam' * pre * Di ≡ j_step * (7^i₀ + 7^m) (mod 7^(m+1))
+            have hmod_eq : (lam * (D i : ℤ)) % (7 : ℤ) ^ (m + 1) =
                 ((j_step : ℤ) * ((7 : ℤ) ^ i₀ + (7 : ℤ) ^ m)) % (7 : ℤ) ^ (m + 1) := by
-              rw [hrw, Int.add_mul_emod_self_left]
-              congr 1
-              have : (j_step : ℤ) * pre * (D e_int : ℤ) -
-                  (j_step : ℤ) * ((7 : ℤ) ^ i₀ + (7 : ℤ) ^ m) =
-                  (j_step : ℤ) * (pre * (D e_int : ℤ) -
-                    ((7 : ℤ) ^ i₀ + (7 : ℤ) ^ m)) := by ring
-              have hdvd : (7 : ℤ) ^ (m + 1) ∣ ((j_step : ℤ) * pre * (D e_int : ℤ) -
-                  (j_step : ℤ) * ((7 : ℤ) ^ i₀ + (7 : ℤ) ^ m)) := by
-                rw [this]; exact dvd_mul_of_dvd_right hpre_congr _
-              exact (Int.emod_eq_emod_iff_emod_sub_eq_zero _ _ _).mpr
-                (Int.dvd_emod_sub_self hdvd |>.symm ▸ Int.zero_emod _)
+              apply Int.emod_eq_emod_iff_emod_sub_eq_zero.mpr
+              apply Int.emod_eq_zero_of_dvd
+              have hlam' : lam' = (j_step : ℤ) + (7 : ℤ) ^ m * c' := by linarith
+              have hpD : pre * (D i : ℤ) = (7 : ℤ) ^ i₀ + (7 : ℤ) ^ m + (7 : ℤ) ^ (m + 1) * w :=
+                by linarith
+              -- witness: j_step*w + c'*7^(i₀-1) + c'*7^(m-1) + 7^m*c'*w
+              -- relies on: 7^m * 7^i₀ = 7^(m+1) * 7^(i₀-1) and 7^m * 7^m = 7^(m+1) * 7^(m-1)
+              refine ⟨(j_step : ℤ) * w + c' * (7 : ℤ) ^ (i₀ - 1) +
+                c' * (7 : ℤ) ^ (m - 1) + (7 : ℤ) ^ m * c' * w, ?_⟩
+              have hfact : lam * (D i : ℤ) =
+                  ((j_step : ℤ) + (7 : ℤ) ^ m * c') * ((7 : ℤ) ^ i₀ + (7 : ℤ) ^ m +
+                    (7 : ℤ) ^ (m + 1) * w) := by
+                calc lam * (D i : ℤ) = lam' * (pre * (D i : ℤ)) := by ring
+                  _ = _ := by rw [hlam', hpD]
+              have hi₀_eq : (7 : ℤ) ^ m * (7 : ℤ) ^ i₀ = (7 : ℤ) ^ (m + 1) * (7 : ℤ) ^ (i₀ - 1) := by
+                rw [← pow_add, ← pow_add]; norm_cast; congr 1; omega
+              have hm_eq : (7 : ℤ) ^ m * (7 : ℤ) ^ m = (7 : ℤ) ^ (m + 1) * (7 : ℤ) ^ (m - 1) := by
+                rw [← pow_add, ← pow_add]; norm_cast; congr 1; omega
+              linear_combination hfact - (j_step : ℤ) * (7 : ℤ) ^ i₀ -
+                (j_step : ℤ) * (7 : ℤ) ^ m + c' * hi₀_eq + c' * hm_eq
             obtain ⟨hlo, hhi, hlt, hnn⟩ := interior_in_band j_step i₀ m hj1 hj5 hi₀_1 hi₀_m
             rw [hmod_eq, Int.emod_eq_of_lt hnn hlt]
             exact ⟨hlo, hhi⟩
@@ -240,12 +248,17 @@ theorem bs_discrete_q
               haveI : Fact (Nat.Prime 7) := ⟨by decide⟩
               have hSc_le : (Finset.univ.filter (fun j : Fin 6 =>
                   j ∉ S)).card ≤ 2 := by
-                have := Finset.filter_card_add_filter_neg_card_eq_card
+                have hpart := Finset.filter_card_add_filter_neg_card_eq_card
                   (s := Finset.univ) (p := fun j => j ∈ S)
-                simp only [Finset.card_univ, Fintype.card_fin] at this
+                simp only [Finset.card_univ, Fintype.card_fin] at hpart
+                have hfilt : (Finset.univ.filter (fun j : Fin 6 => j ∈ S)).card = 4 := by
+                  convert hScard_eq using 1
+                  congr 1; ext x; simp
                 omega
-              have hmem_i : i ∈ Finset.univ.filter (fun j : Fin 6 => j ∉ S) := by
-                simp [hi, Finset.mem_filter]
+              have hmem_i : i ∈ Finset.univ.filter (fun j : Fin 6 => j ∉ S) :=
+                Finset.mem_filter.mpr ⟨Finset.mem_univ _, by
+                  simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not]
+                  exact hi⟩
               have hmem_e : e_int ∈ Finset.univ.filter (fun j : Fin 6 =>
                   j ∉ S) := by simp [he_notS, Finset.mem_filter]
               -- m-achieving element
@@ -254,7 +267,8 @@ theorem bs_discrete_q
               have hj_dvd : (7 : ℤ) ^ m ∣ (D j_max : ℤ) := by
                 rw [show (7 : ℤ) ^ m = ((7 ^ m : ℕ) : ℤ) from by push_cast; ring,
                   Int.natCast_dvd_natCast]
-                exact (padicValNat_dvd_iff_le (hpos j_max).ne').mpr (by rw [← hj_eq]; rfl)
+                exact (padicValNat_dvd_iff_le (hpos j_max).ne').mpr
+                  (by rw [hm]; exact Finset.sup_le (fun i _ => hj_eq i (Finset.mem_univ i)))
               have hj_notS : j_max ∉ S := by
                 simp only [hS_def, Finset.mem_filter, Finset.mem_univ, true_and, not_not]
                 exact dvd_trans (dvd_pow_self 7 (by omega : m ≠ 0)) (by exact_mod_cast hj_dvd)
@@ -270,7 +284,7 @@ theorem bs_discrete_q
                 Finset.insert_subset_iff.mpr ⟨hmem_i,
                   Finset.insert_subset_iff.mpr ⟨hmem_e, Finset.singleton_subset_iff.mpr hmem_j⟩⟩
               have h3card : 3 ≤ ({i, e_int, j_max} : Finset (Fin 6)).card := by
-                simp [Finset.card_insert_of_not_mem, hi_eq, hne_ij,
+                simp [Finset.card_insert_of_notMem, hi_eq, hne_ij,
                   show e_int ≠ j_max from hne_ej,
                   show e_int ≠ i from Ne.symm hi_eq]
               exact absurd (le_trans h3card (Finset.card_le_card h3)) (by omega)
@@ -341,12 +355,10 @@ theorem bs_discrete_q
       have hd4_ndvd : ∀ k, ¬ (7 : ℤ) ∣ d4 k := fun k => by
         intro h7
         exact hfj_ndvd k (by
-          rw [show (7 : ℤ) ^ (j₀ + 1) = 7 * 7 ^ j₀ from by ring]
-          exact mul_dvd_mul h7 dvd_rfl |>.mp (by
-            rw [show 7 * 7 ^ j₀ * ((D (fj k) : ℤ) / 7 ^ j₀) =
-                7 * (7 ^ j₀ * ((D (fj k) : ℤ) / 7 ^ j₀)) from by ring]
-            rw [Int.mul_ediv_cancel' (hfj_dvd k)]
-            exact dvd_mul_of_dvd_right h7 7))
+          rw [show (7 : ℤ) ^ (j₀ + 1) = 7 ^ j₀ * 7 from by ring]
+          have hkey : (7 : ℤ) ^ j₀ * d4 k = (D (fj k) : ℤ) :=
+            Int.mul_ediv_cancel' (hfj_dvd k)
+          exact hkey ▸ mul_dvd_mul dvd_rfl h7)
       -- Apply four_band at level m' = m - j₀
       set m' := m - j₀
       have hm'pos : 0 < m' := by omega
@@ -359,16 +371,29 @@ theorem bs_discrete_q
       set S0 := Finset.univ.filter (fun i : Fin 6 => ¬ (7 : ℤ) ∣ (D i : ℤ)) with hS0_def
       have hS0_sum : ∑ i ∈ S0, ({(0 : ZMod 7), 6} : Finset (ZMod 7)).card ≤ 6 := by
         simp only [Finset.card_pair (by decide : (0 : ZMod 7) ≠ 6)]
-        have : S0.card ≤ 6 := Finset.card_le_card (Finset.filter_subset _ _) |>.trans
-          (by simp [Finset.card_univ, Fintype.card_fin])
+        have hS0_Sj_disj : Disjoint S0 Sj := by
+          simp only [Finset.disjoint_left, hS0_def, hSj_def, Finset.mem_filter,
+            Finset.mem_univ, true_and]
+          intro i hi ⟨hdvd, _⟩
+          exact hi (dvd_trans (dvd_pow_self 7 hj₀ne) hdvd)
+        have hS0_card : S0.card ≤ 2 := by
+          have hunion := Finset.card_union_of_disjoint hS0_Sj_disj
+          have hle : (S0 ∪ Sj).card ≤ 6 := (Finset.card_le_card
+            (Finset.union_subset (Finset.filter_subset _ _) (Finset.filter_subset _ _))).trans
+            (by simp [Finset.card_univ, Fintype.card_fin])
+          omega
+        have hsum_eq : ∑ i ∈ S0, (2 : ℕ) = S0.card * 2 :=
+          Finset.sum_const_nat (fun _ _ => rfl)
         omega
-      have hS0_r : ∀ i ∈ S0, ((D i : ℤ) : ZMod 7) ≠ 0 := fun i hi => by
+      have hS0_r : ∀ i ∈ S0, ((lam' * (D i : ℤ) : ℤ) : ZMod 7) ≠ 0 := fun i hi => by
         simp only [hS0_def, Finset.mem_filter] at hi
-        exact_mod_cast (show ¬ (7 : ℤ) ∣ (D i : ℤ) from hi.2) ∘
-          (ZMod.intCast_zmod_eq_zero_iff_dvd (D i : ℤ) 7).mp
+        push_cast
+        apply mul_ne_zero
+        · exact_mod_cast mt (ZMod.intCast_zmod_eq_zero_iff_dvd lam' 7).mp hlam'_unit
+        · exact_mod_cast mt (ZMod.intCast_zmod_eq_zero_iff_dvd (D i : ℤ) 7).mp hi.2
       obtain ⟨kz, hkz⟩ := single_level_avoid S0
         (fun i => qz m (lam' * (D i : ℤ)))
-        (fun i => ((D i : ℤ) : ZMod 7))
+        (fun i => ((lam' * (D i : ℤ) : ℤ) : ZMod 7))
         (fun _ => {0, 6}) hS0_r hS0_sum
       set lam := (1 + (kz.val : ℤ) * (7 : ℤ) ^ m) * lam'
       have hlam_unit : ¬ (7 : ℤ) ∣ lam := by
@@ -385,31 +410,15 @@ theorem bs_discrete_q
         by_cases him : (7 : ℤ) ^ m ∣ (D i : ℤ)
         · exact band_top m lam' (D i : ℤ) hlam'_unit him
             (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
-        · -- Level j₀: lift band from m' to m
-          have hdvd_j : (7 : ℤ) ^ j₀ ∣ (D i : ℤ) := by
-            have hvi : padicValNat 7 (D i) ≥ j₀ := by
-              by_contra hlt; push_neg at hlt
-              have : ¬ (7 : ℤ) ^ j₀ ∣ (D i : ℤ) := by
-                rw [show (7 : ℤ) ^ j₀ = ((7 ^ j₀ : ℕ) : ℤ) from by push_cast; ring,
-                  Int.natCast_dvd_natCast]
-                exact fun h => absurd ((padicValNat_dvd_iff_le (hpos i).ne').mp h) (by omega)
-              exact absurd h7i (by
-                rwa [show (7 : ℤ) = (7 : ℤ) ^ 1 from by norm_num,
-                  show (7 : ℤ) ^ 1 = ((7 ^ 1 : ℕ) : ℤ) from by push_cast; ring,
-                  Int.natCast_dvd_natCast] at h7i
-                have : (7 : ℕ) ^ 1 ∣ D i := by exact_mod_cast h7i
-                exact absurd ((padicValNat_dvd_iff_le (hpos i).ne').mp this) (by omega))
-            rw [show (7 : ℤ) ^ j₀ = ((7 ^ j₀ : ℕ) : ℤ) from by push_cast; ring,
-              Int.natCast_dvd_natCast]
-            exact (padicValNat_dvd_iff_le (hpos i).ne').mpr hvi
-          -- i must be at level j₀ (same level as the 4 extracted elements).
-          -- D i = 7^{j₀} · d' where d' = D i / 7^{j₀}, coprime to 7.
-          have hdi' : (D i : ℤ) = (7 : ℤ) ^ j₀ * ((D i : ℤ) / (7 : ℤ) ^ j₀) :=
-            (Int.mul_ediv_cancel' hdvd_j).symm
-          -- i must be in Sj (level j₀). Since |Sj| = 4 (config 1/4/1), Sj = Tj.
+        · -- Level j₀: lift band from m' to m. First show i ∈ Sj.
+          -- Case split immediately on i ∈ Sj; the ∉ case gives cardinality contradiction.
           by_cases hiSj : i ∈ Sj
           · -- i is one of the level-j₀ elements (Sj = Tj since |Sj| = 4)
             have hiTj : i ∈ Tj := hSjTj ▸ hiSj
+            have hdvd_j : (7 : ℤ) ^ j₀ ∣ (D i : ℤ) := by
+              have := (Finset.mem_filter.mp hiSj).2; simp [hSj_def] at this; exact this.1
+            have hdi' : (D i : ℤ) = (7 : ℤ) ^ j₀ * ((D i : ℤ) / (7 : ℤ) ^ j₀) :=
+              (Int.mul_ediv_cancel' hdvd_j).symm
             have ⟨ki, hki⟩ : ∃ ki : Fin 4, (Tj.orderIsoOfFin hTj4 ki).val = i := by
               have := (Tj.orderIsoOfFin hTj4).surjective ⟨i, hiTj⟩
               exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
@@ -418,31 +427,77 @@ theorem bs_discrete_q
             have hband_ki := hband' ki
             rw [show d4 ki = (D i : ℤ) / (7 : ℤ) ^ j₀ from hdi_eq.symm] at hband_ki
             rw [hdi']
-            exact band_lift j₀ m' lam' _ (by rwa [hm'eq])
-          · -- i ∉ Sj but 7∣D i and ¬7^m∣D i: intermediate level
-            -- With config 1/4/1, this can't happen
+            exact hm'eq ▸ band_lift j₀ m' lam' _ hband_ki
+          · -- i ∉ Sj but 7∣D i and ¬7^m∣D i: impossible by 1/4/1 cardinality.
+            -- With |Sj|=4, a level-0 element (from gcd=1), a level-m achiever, and i itself,
+            -- we have 7 distinct elements in Fin 6 — contradiction.
             exfalso
-            have := him
-            simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and, not_and,
-              not_not] at hiSj
-            exact him (hiSj hdvd_j)
+            obtain ⟨i0, hi0⟩ : ∃ i0 : Fin 6, ¬ (7 : ℕ) ∣ D i0 := by
+              by_contra h; push_neg at h
+              have : (7 : ℕ) ∣ Finset.univ.gcd D := Finset.dvd_gcd (fun i _ => h i)
+              rw [hgcd] at this; norm_num at this
+            have hi0_notSj : i0 ∉ Sj := by
+              simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and]
+              rintro ⟨hd, -⟩
+              exact hi0 (by exact_mod_cast dvd_trans (dvd_pow_self 7 hj₀ne) hd)
+            obtain ⟨i_m, -, hi_m⟩ := Finset.exists_mem_eq_sup Finset.univ
+              ⟨0, Finset.mem_univ 0⟩ (fun i => padicValNat 7 (D i))
+            have him_dvd : (7 : ℤ) ^ m ∣ (D i_m : ℤ) := by
+              rw [show (7 : ℤ) ^ m = ((7 ^ m : ℕ) : ℤ) from by push_cast; ring,
+                Int.natCast_dvd_natCast]
+              exact (padicValNat_dvd_iff_le (hpos i_m).ne').mpr
+                (by rw [hm]; exact le_of_eq hi_m)
+            have him_notSj : i_m ∉ Sj := by
+              simp only [hSj_def, Finset.mem_filter, Finset.mem_univ, true_and]
+              rintro ⟨-, hnd⟩
+              exact hnd (dvd_trans (pow_dvd_pow 7 (by omega : j₀ + 1 ≤ m)) him_dvd)
+            have hineqm : i ≠ i_m := fun h => him (h ▸ him_dvd)
+            have hi0nei : i0 ≠ i := fun h => by
+              simp only [h] at hi0
+              exact hi0 (by exact_mod_cast (show (7 : ℤ) ∣ (D i : ℤ) from h7i))
+            have hi0nem : i0 ≠ i_m := fun h => by
+              simp only [h] at hi0
+              exact hi0 (by
+                have : (7 : ℤ) ^ m ∣ (D i_m : ℤ) := him_dvd
+                have h7 : (7 : ℕ) ^ m ∣ D i_m := by exact_mod_cast this
+                exact dvd_trans (dvd_pow_self 7 (by omega : m ≠ 0)) h7)
+            -- {i0, i, i_m} are 3 distinct elements outside Sj (card 4) ⊆ Fin 6 (card 6)
+            have hdisj : Disjoint ({i0, i, i_m} : Finset (Fin 6)) Sj :=
+              Finset.disjoint_left.mpr (fun x hx =>
+                Finset.mem_insert.mp hx |>.elim (fun h => h ▸ hi0_notSj)
+                  (Finset.mem_insert.mp · |>.elim (fun h => h ▸ hiSj)
+                    (Finset.mem_singleton.mp · ▸ him_notSj)))
+            have h3card : ({i0, i, i_m} : Finset (Fin 6)).card = 3 := by
+              have hnem : i ∉ ({i_m} : Finset (Fin 6)) := by simp [hineqm]
+              have hne0 : i0 ∉ ({i, i_m} : Finset (Fin 6)) := by simp [hi0nei, hi0nem]
+              rw [Finset.card_insert_of_notMem hne0, Finset.card_insert_of_notMem hnem,
+                Finset.card_singleton]
+            have hcard7 : (({i0, i, i_m} : Finset (Fin 6)) ∪ Sj).card = 7 := by
+              rw [Finset.card_union_of_disjoint hdisj, h3card, hSj_eq]
+            have hle : (({i0, i, i_m} : Finset (Fin 6)) ∪ Sj).card ≤ 6 :=
+              (Finset.card_le_card (Finset.subset_univ _)).trans (by simp)
+            omega
       · -- ¬7 ∣ D i: level-0 element. Use qz avoidance.
         have hiS0 : i ∈ S0 := by simp [hS0_def, h7i]
         have havoid := hkz i hiS0
+        -- havoid : qz m (lam' * Di) + kz * (lam' * Di : ZMod 7) ∉ {0, 6}
         have hqz_shift : qz m (lam * (D i : ℤ)) =
-            qz m (lam' * (D i : ℤ)) + (kz.val : ZMod 7) * ((D i : ℤ) : ZMod 7) := by
-          show qz m ((1 + (kz.val : ℤ) * (7 : ℤ) ^ (m - 0)) * (lam' * (D i : ℤ))) = _
-          rw [Nat.sub_zero]
-          exact qz_step m 0 (by omega) (kz.val : ℤ) lam' (D i : ℤ) (one_dvd _)
-        rw [show qz m (lam' * (D i : ℤ)) + (kz.val : ZMod 7) * ((D i : ℤ) : ZMod 7) =
-            qz m (lam' * (D i : ℤ)) + (kz : ZMod 7) * ((D i : ℤ) : ZMod 7) from by
-              congr 1; congr 1; exact (ZMod.natCast_zmod_eq_zero_iff_dvd _ 7 ▸ rfl).symm ▸ rfl]
-            at hqz_shift
+            qz m (lam' * (D i : ℤ)) + (kz : ZMod 7) * ((lam' * (D i : ℤ) : ℤ) : ZMod 7) := by
+          have heq : lam * (D i : ℤ) = (1 + (kz.val : ℤ) * (7 : ℤ) ^ m) * (lam' * (D i : ℤ)) :=
+            by ring
+          rw [heq, qz_shift0]; congr 1; congr 1
+          have : ((kz.val : ℤ) : ZMod 7) = kz := by
+            have h1 := ZMod.natCast_val (R := ZMod 7) kz
+            rw [ZMod.cast_id] at h1; exact_mod_cast h1
+          push_cast; exact this
+        -- havoid : qz m (lam' * Di) + kz * (lam' * Di : ZMod 7) ∉ {0, 6}
+        -- hqz_shift : qz m (lam * Di) = qz m (lam' * Di) + kz * (lam' * Di : ZMod 7)
+        have havoid' : qz m (lam * (D i : ℤ)) ∉ ({0, 6} : Finset (ZMod 7)) := by
+          rwa [hqz_shift]
         have h0 : qz m (lam * (D i : ℤ)) ≠ 0 := by
-          rw [hqz_shift]; exact fun h => havoid (by rw [← h]; exact Finset.mem_insert_self 0 _)
+          intro h; apply havoid'; simp [h]
         have h6 : qz m (lam * (D i : ℤ)) ≠ 6 := by
-          rw [hqz_shift]; exact fun h => havoid (by rw [← h]; exact Finset.mem_insert.mpr
-            (Or.inr (Finset.mem_singleton.mpr rfl)))
+          intro h; apply havoid'; simp [h]
         exact band_of_qz_ne m _ h0 h6
 
 end IntLRC7BS
