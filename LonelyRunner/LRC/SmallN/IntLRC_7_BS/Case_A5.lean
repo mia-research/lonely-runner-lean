@@ -482,8 +482,116 @@ private theorem case_62b (hm : 2 ≤ m)
             simp only [Fin.val_zero, Nat.cast_zero, add_zero] at h_aux
             exact h_aux
           · subst hi; rw [hi₄_res, mul_comm s' 4]; exact hs'_A₄
-    · -- (ii.2) ratio 4: r(e₄-e₁) = 4·r(e₂-e₁). TODO.
-      sorry
+    · -- (ii.2) ratio 4: r(e₄-e₁) = 4·r(e₂-e₁).
+      -- h<m and h>m: IDENTICAL to (ii.1) h≠m (lemma9_ii_j2 uses only the ratio-2
+      -- pair {e₂,e₃,e₁}; e₄ with ratio-4 is handled by avoid_62b_branch_i).
+      -- h=m: arcs at {a_m,a_m+1,a_m+2,a_m+4} (length-5 window, not contiguous);
+      --       need Lemma 7 applied to (2d₄, d₅) pair + lemma6_501 to close.
+      by_cases hheq : h = m
+      · -- h = m, ratio 4: TODO (requires Lemma 7 for ẽ(d4,d5) control + lemma6_501).
+        sorry
+      · -- h ≠ m: split h < m (lemma9_ii_j2 route) vs h > m (all arcs coincide).
+        -- Proof is IDENTICAL to branch (ii.1) h≠m — ratio-4 only differs at h=m.
+        rcases lt_or_gt_of_ne hheq with hlt | hgt
+        · -- h < m: lemma9_ii_j2 on B={e₂,e₃,e₁} with ratio-2 → 2-window.
+          have hb₁_all_1 : ∀ k : Fin 4, (b₁ k : ZMod 7) = 1 := hg₁_res
+          have he_res_aux : ∀ x : ZMod 7, x ∈ ({(b₁ 0:ZMod 7),(b₁ 1:ZMod 7),(b₁ 2:ZMod 7),(b₁ 3:ZMod 7)} : Finset _) → x = 1 := by
+            intro x hx
+            simp only [hb₁_all_1 0, hb₁_all_1 1, hb₁_all_1 2, hb₁_all_1 3,
+                       Finset.mem_insert, Finset.mem_singleton] at hx
+            rcases hx with h | h | h | h <;> exact h
+          have he₁_res : (e₁ : ZMod 7) = 1 := he_res_aux _ (by
+            rw [← hperm (fun x => (x : ZMod 7))]; simp)
+          have he₂_res : (e₂ : ZMod 7) = 1 := he_res_aux _ (by
+            rw [← hperm (fun x => (x : ZMod 7))]; simp)
+          have he₃_res : (e₃ : ZMod 7) = 1 := he_res_aux _ (by
+            rw [← hperm (fun x => (x : ZMod 7))]; simp)
+          obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
+            lemma9_ii_j2 m h hlt e₂ e₃ e₁
+              (he₂_res.trans he₁_res.symm) (he₃_res.trans he₁_res.symm)
+              hd2 hd2' hd3 hd3' hr32
+          obtain ⟨k', hka, hka1, hkv₄, hkq₄⟩ :=
+            avoid_62b_branch_i a (qz m (lam₀ * e₄)) (qz m (lam₀ * d i₄))
+          have hr₀_ne : (lam₀ : ZMod 7) ≠ 0 := by
+            intro hr₀; apply hlam₀
+            rw [← show ((7 : ℕ) : ℤ) = (7 : ℤ) from by norm_num,
+                ← ZMod.intCast_zmod_eq_zero_iff_dvd]
+            exact hr₀
+          refine five_compress_relabel m d lam₀ hlam₀ ?_
+          refine lambda0_lift m (by omega) (fun i => lam₀ * d i)
+              (k' * (lam₀ : ZMod 7)⁻¹) (fun i => ?_)
+          have hcast : ((lam₀ * d i : ℤ) : ZMod 7) = (lam₀ : ZMod 7) * (d i : ZMod 7) := by
+            push_cast; ring
+          have halg : (k' * (lam₀ : ZMod 7)⁻¹) * ((lam₀ * d i : ℤ) : ZMod 7) =
+              k' * (d i : ZMod 7) := by
+            rw [hcast,
+              show (k' * (lam₀ : ZMod 7)⁻¹) * ((lam₀ : ZMod 7) * (d i : ZMod 7))
+                  = k' * ((lam₀ : ZMod 7)⁻¹ * (lam₀ : ZMod 7)) * (d i : ZMod 7) from by ring,
+              inv_mul_cancel₀ hr₀_ne]; ring
+          rw [halg]
+          rcases hi_dichotomy i with ⟨k₀, hk₀⟩ | hi
+          · subst hk₀; rw [hg₁_res k₀, mul_one]
+            show qz m (lam₀ * b₁ k₀) + k' ∉ ({0, 6} : Finset (ZMod 7))
+            have hmem : qz m (lam₀ * b₁ k₀) ∈
+                ({qz m (lam₀ * e₁), qz m (lam₀ * e₂), qz m (lam₀ * e₃), qz m (lam₀ * e₄)}
+                  : Finset (ZMod 7)) := by
+              rw [hperm (fun x => qz m (lam₀ * x))]; fin_cases k₀ <;> simp
+            simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+            have hfit_aux : ∀ v : ZMod 7, v ∈ ({qz m (lam₀*e₂), qz m (lam₀*e₃), qz m (lam₀*e₁)} : Finset _) →
+                v = a ∨ v = a + 1 := by
+              intro v hv
+              obtain ⟨j, hj⟩ := hB_fit v hv
+              fin_cases j
+              · exact Or.inl (by simpa using hj)
+              · exact Or.inr hj
+            have he1 : qz m (lam₀ * e₁) = a ∨ qz m (lam₀ * e₁) = a + 1 :=
+              hfit_aux _ (by simp)
+            have he2 : qz m (lam₀ * e₂) = a ∨ qz m (lam₀ * e₂) = a + 1 :=
+              hfit_aux _ (by simp)
+            have he3 : qz m (lam₀ * e₃) = a ∨ qz m (lam₀ * e₃) = a + 1 :=
+              hfit_aux _ (by simp)
+            rcases hmem with h1 | h2 | h3 | h4
+            · rcases he1 with h | h <;> rw [h1, h] <;> [exact hka; exact hka1]
+            · rcases he2 with h | h <;> rw [h2, h] <;> [exact hka; exact hka1]
+            · rcases he3 with h | h <;> rw [h3, h] <;> [exact hka; exact hka1]
+            · rw [h4]; exact hkv₄
+          · subst hi; rw [hi₄_res, mul_comm k' 4]; exact hkq₄
+        · -- h > m: all A₁ arcs coincide at qz m e₁ (7^(m+1) ∣ all differences).
+          have hqe_eq : ∀ j : ℤ, (7 : ℤ) ^ h ∣ (j - e₁) → qz m j = qz m e₁ := by
+            intro j hjdvd
+            have hd_m : (7 : ℤ) ^ m ∣ (j - e₁) :=
+              dvd_trans (pow_dvd_pow 7 (by omega : m ≤ h)) hjdvd
+            have hcoeff0 : (((j - e₁) / (7 : ℤ) ^ m : ℤ) : ZMod 7) = 0 := by
+              rw [ZMod.intCast_zmod_eq_zero_iff_dvd]
+              obtain ⟨c, hc⟩ := dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ h)) hjdvd
+              refine ⟨c, ?_⟩
+              have hc' : j - e₁ = (7 : ℤ) ^ m * (7 * c) := by rw [hc, pow_succ]; ring
+              calc (j - e₁) / (7 : ℤ) ^ m
+                  = ((7 : ℤ) ^ m * (7 * c)) / (7 : ℤ) ^ m := by rw [hc']
+                _ = 7 * c := Int.mul_ediv_cancel_left _ (pow_ne_zero m (by norm_num))
+            have heq := qz_top_affine m 1 j e₁ hd_m
+            simp only [one_mul, Int.cast_one, hcoeff0, mul_zero, add_zero] at heq
+            exact heq
+          have hqe2 : qz m e₂ = qz m e₁ := hqe_eq e₂ hd2
+          have hqe3 : qz m e₃ = qz m e₁ := hqe_eq e₃ hd3
+          have hqe4 : qz m e₄ = qz m e₁ := hqe_eq e₄ hd4
+          have hbk_arc : ∀ k : Fin 4, qz m (d (g₁ k)) = qz m e₁ := fun k => by
+            have hmem : qz m (d (g₁ k)) ∈
+                ({qz m e₁, qz m e₂, qz m e₃, qz m e₄} : Finset (ZMod 7)) := by
+              rw [hperm (fun x => qz m x)]
+              fin_cases k <;>
+                simp [show (b₁ : Fin 4 → ℤ) = fun k => d (g₁ k) from rfl]
+            rw [hqe2, hqe3, hqe4] at hmem
+            simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+            rcases hmem with h | h | h | h <;> exact h
+          obtain ⟨s', hs'_A₁, hs'_A₄⟩ := avoid_62b_branch_ii_m (qz m e₁) (qz m (d i₄))
+          refine lambda0_lift m (by omega) d s' (fun i => ?_)
+          rcases hi_dichotomy i with ⟨k₀, hk₀⟩ | hi
+          · subst hk₀; rw [hg₁_res k₀, mul_one, hbk_arc k₀]
+            have h_aux := hs'_A₁ (0 : Fin 4)
+            simp only [Fin.val_zero, Nat.cast_zero, add_zero] at h_aux
+            exact h_aux
+          · subst hi; rw [hi₄_res, mul_comm s' 4]; exact hs'_A₄
 
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11
 (6 subcases + q-tables), Lemma 7(i) securing the `(3,1,1)` `ẽ ∉ {2,4}` carve-out
