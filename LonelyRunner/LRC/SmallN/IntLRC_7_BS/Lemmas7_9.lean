@@ -45,13 +45,15 @@ theorem lemma7_i (m h : ℕ) (hh : h < m) (d d' : ℤ)
     (hr : (d' : ZMod 7) = 2 * (d : ZMod 7))
     (X : Finset (ZMod 7)) (hX : ∃ a, fitsInterval X a 4)
     (hν : (7 : ℤ) ^ h ∣ (2 * d - d')) (hν' : ¬ (7 : ℤ) ^ (h + 1) ∣ (2 * d - d')) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ (lam : ZMod 7) = 1 ∧
       (2 * qz m (lam * d) - qz m (lam * d')) ∉ X := by
   obtain ⟨a, ha⟩ := hX
   -- Retarget e = 2d - d' so that q(λ e) = a - 2.
   obtain ⟨k, hqe, hk⟩ := qz_retarget m h hh (2 * d - d') hν hν' (a - 2)
   set lam : ℤ := 1 + k * 7 ^ (m - h) with hlam_def
-  refine ⟨lam, hk, ?_⟩
+  have hlam_res : (lam : ZMod 7) = 1 := by
+    simp [hlam_def, show (7 : ZMod 7) = 0 from by decide, zero_pow (show m - h ≠ 0 from by omega)]
+  refine ⟨lam, hk, hlam_res, ?_⟩
   -- Carry bound: q(λ(2d-d')) = 2 q(λd) - q(λd') + c, c ∈ {0,1,6}.
   obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (lam * d) (lam * d')
   -- Rewrite λ(2d-d') = 2(λd) - (λd').
@@ -86,7 +88,7 @@ theorem lemma7_ii (m h : ℕ) (hm : 1 < m) (d d' : ℤ)
     (X : Finset (ZMod 7))
     (hν : (7 : ℤ) ^ m ∣ (2 * d - d'))
     (hXX : qz m (2 * d - d') ∉ (X ∩ (X.image (· + 1)))) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ (lam : ZMod 7) = 1 ∧
       (2 * qz m (lam * d) - qz m (lam * d')) ∉ X := by
   set e := 2 * d - d' with he_def
   set qe := qz m e with hqe_def
@@ -131,7 +133,9 @@ theorem lemma7_ii (m h : ℕ) (hm : 1 < m) (d d' : ℤ)
   · -- Case 1: qe ∉ X. Retarget 7d to q = 0 (no doubling carry).
     obtain ⟨k, hqk, hku⟩ := qz_retarget m 1 (by omega) (7 * d) h7d_dvd h7d_ndvd 0
     set lam := 1 + k * 7 ^ (m - 1) with hlam_def
-    refine ⟨lam, hku, ?_⟩
+    have hlam_res : (lam : ZMod 7) = 1 := by
+      simp [hlam_def, show (7 : ZMod 7) = 0 from by decide, zero_pow (show m - 1 ≠ 0 from by omega)]
+    refine ⟨lam, hku, hlam_res, ?_⟩
     rw [etilde_eq k]
     -- q(7*(lam*d)) = q(lam*(7*d)) = 0
     have hq7 : qz m (7 * (lam * d)) = 0 := by
@@ -146,7 +150,9 @@ theorem lemma7_ii (m h : ℕ) (hm : 1 < m) (d d' : ℤ)
       exact hcase2 (Finset.mem_image.mpr ⟨qe - 1, hmem, by ring⟩)
     obtain ⟨k, hqk, hku⟩ := qz_retarget m 1 (by omega) (7 * d) h7d_dvd h7d_ndvd 6
     set lam := 1 + k * 7 ^ (m - 1) with hlam_def
-    refine ⟨lam, hku, ?_⟩
+    have hlam_res : (lam : ZMod 7) = 1 := by
+      simp [hlam_def, show (7 : ZMod 7) = 0 from by decide, zero_pow (show m - 1 ≠ 0 from by omega)]
+    refine ⟨lam, hku, hlam_res, ?_⟩
     rw [etilde_eq k]
     -- q(7*(lam*d)) = 6
     have hq7 : qz m (7 * (lam * d)) = 6 := by

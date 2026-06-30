@@ -96,6 +96,14 @@ theorem lemma6_501 (a₄ : ZMod 7) (he : (2 * a₄ - 1) ∉ ({4, 6} : Finset (ZM
     ∃ k : ZMod 7, intervalAvoids 1 5 1 k ∧ intervalAvoids a₄ 1 4 k := by
   revert he; revert a₄; decide
 
+/-- **Lemma 6 (i), (5,0,1) general start (BS L422).** Like `lemma6_501` but with
+arbitrary `A₁` window start `a_m` (after r⁻¹ normalization). Needs
+`ẽ(d_ref,d')∉{4,6}`, i.e. `2·a₄−a_m ∉ {4,6}`. -/
+theorem lemma6_501_gen (a_m a₄ : ZMod 7)
+    (he : (2 * a₄ - a_m) ∉ ({4, 6} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7, intervalAvoids a_m 5 1 k ∧ intervalAvoids a₄ 1 4 k := by
+  revert he; revert a_m a₄; decide
+
 /-- **Lemma 6 (i), (5,1,0) (BS L422).** `A₁` length 5, `A₂` length 1. Needs
 `ẽ(d,d')∉{2,3}`, i.e. `2−a₂ ∉ {2,3}` ⟺ `a₂ ∉ {0,6}`. -/
 theorem lemma6_510 (a₂ : ZMod 7) (he : (2 - a₂) ∉ ({2, 3} : Finset (ZMod 7))) :
