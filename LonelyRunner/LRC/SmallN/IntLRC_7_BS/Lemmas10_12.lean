@@ -684,4 +684,21 @@ theorem rmk8_i_k3 (m : ℕ) (x : Fin 3 → ℤ)
   obtain ⟨k, hk⟩ := cluster3 m x hdiff
   exact ⟨qz m (3 * x k), rmk8_concl m (x k) x hk⟩
 
+/-- **Lemma 12 (i) (BS L676).** `|A₁|=3, |A₂|=2`: ℓ(A₁)≤3 guarantees 3 good Λ₀
+multipliers; each A₂ element blocks at most one, leaving one good for all 5. -/
+theorem lemma12_i (a₁ α β : ZMod 7) :
+    ∃ k : ZMod 7, intervalAvoids a₁ 3 1 k ∧
+      intervalAvoids α 1 2 k ∧ intervalAvoids β 1 2 k := by
+  revert a₁ α β; decide
+
+set_option maxHeartbeats 800000 in
+/-- **Lemma 12 (ii) (BS L679).** `|A₁|=3, |A₂|=2`: ℓ(A₁)=4 with
+`ẽ(d,d₄) = 2·q(d)−q(d₄) ∈ {0,1,6}` (where `d` is the A₁ start-of-window anchor):
+the two Λ₀ good multipliers for A₁ survive at least one after d₄,d₅ each block at most one. -/
+theorem lemma12_ii (a₁ α β : ZMod 7)
+    (he : 2 * a₁ - α ∈ ({0, 1, 6} : Finset (ZMod 7))) :
+    ∃ k : ZMod 7, intervalAvoids a₁ 4 1 k ∧
+      intervalAvoids α 1 2 k ∧ intervalAvoids β 1 2 k := by
+  revert he; revert a₁ α β; decide
+
 end IntLRC7BS
