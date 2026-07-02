@@ -1321,19 +1321,6 @@ private theorem case_62b (hm : 2 ≤ m)
             exact h_aux
           · subst hi; rw [hi₄_res, mul_comm s' 4]; exact hs'_A₄
 
-/-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11
-(6 subcases + q-tables), Lemma 7(i) securing the `(3,1,1)` `ẽ ∉ {2,4}` carve-out
-of Lemma 5. -/
-private theorem case_63 (hm : 2 ≤ m)
-    (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
-    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hinj : Function.Injective d)
-    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =3)
-    (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 1)
-    (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := sorry
-
 /-- **A₁ (3-element) extraction + relabeling data.** Shared setup for the `|A₁|=3`
 cases (6.3, 6.4, 6.5): enumerate the residue-1 class as `b₁ : Fin 3 → ℤ`, extract
 the covering/residue/injectivity facts, and apply Lemma 11 for the labeling. -/
@@ -1358,6 +1345,215 @@ private def mkA1three (m : ℕ) (d : Fin 5 → ℤ)
       ⟨(S₁.orderIsoOfFin hC₁).symm ⟨i, by simp [S₁, hi]⟩,
        congr_arg Subtype.val
          ((S₁.orderIsoOfFin hC₁).right_inv ⟨i, by simp [S₁, hi]⟩)⟩ }
+
+/-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11;
+endgame is `lemma5` on the `(ℓ₁,1,1)` partition (the `(3,1,1)` exception carved by
+`ẽ(d₄,d₅) ∉ {2,4}`). Branch map: (i)/(ii.1) `h<m` → `lemma9` gives `ℓ(A₁)≤2`;
+`h>m` → arcs coincide (`ℓ=1`); (ii.2.a) `h<m` (`ν(e₄₅)≠h`) → `j3_control`;
+(ii.1) `h=m` → `r⁻¹`-frame + Lemma 7; (ii.2.b)/(ii.2) `h=m` → finite tables. -/
+private theorem case_63 (hm : 2 ≤ m)
+    (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
+    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
+    (hinj : Function.Injective d)
+    (hC₁ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1)).card =3)
+    (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 1)
+    (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 1) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+  classical
+  obtain ⟨g₁, hg₁_res, hg₁_inj, hA₁_cover⟩ := mkA1three m d hC₁
+  set b₁ : Fin 3 → ℤ := fun k => d (g₁ k) with hb₁_def
+  have hb₁_inj : Function.Injective b₁ := fun a b h => hg₁_inj (hinj h)
+  -- Extract the unique A₂-element i₄ (residue 2) and A₄-element i₅ (residue 4).
+  set S₂ := univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2) with hS₂_def
+  set S₄ := univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4) with hS₄_def
+  obtain ⟨i₄, hS₂sing⟩ := Finset.card_eq_one.mp hC₂
+  obtain ⟨i₅, hS₄sing⟩ := Finset.card_eq_one.mp hC₄
+  have hi₄_res : (d i₄ : ZMod 7) = 2 := by
+    have : i₄ ∈ S₂ := by rw [hS₂sing]; exact mem_singleton_self _
+    simp only [hS₂_def, mem_filter, mem_univ, true_and] at this; exact this
+  have hi₅_res : (d i₅ : ZMod 7) = 4 := by
+    have : i₅ ∈ S₄ := by rw [hS₄sing]; exact mem_singleton_self _
+    simp only [hS₄_def, mem_filter, mem_univ, true_and] at this; exact this
+  -- Every index is an A₁-element or i₄ or i₅ (the three classes partition Fin 5).
+  have hi_tri : ∀ i : Fin 5, (∃ k₀ : Fin 3, g₁ k₀ = i) ∨ i = i₄ ∨ i = i₅ := by
+    intro i
+    have hri := hres i
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hri
+    rcases hri with h1 | h2 | h4
+    · exact Or.inl (hA₁_cover i h1)
+    · refine Or.inr (Or.inl ?_)
+      have hi_mem : i ∈ S₂ := by simp only [hS₂_def, mem_filter, mem_univ, true_and]; exact h2
+      rwa [hS₂sing, Finset.mem_singleton] at hi_mem
+    · refine Or.inr (Or.inr ?_)
+      have hi_mem : i ∈ S₄ := by simp only [hS₄_def, mem_filter, mem_univ, true_and]; exact h4
+      rwa [hS₄sing, Finset.mem_singleton] at hi_mem
+  -- ── Endgame: A₁ fits a length-`L` window (L ≤ 3), A₂ at coeff 2, A₄ at coeff 4;
+  --    `lemma5` on the `(L,1,1)` partition closes (the `(3,1,1)` carve = ẽ(d₄,d₅)∉{2,4}). ──
+  have close_l5 : ∀ (lam₀ : ℤ), ¬ (7 : ℤ) ∣ lam₀ → ∀ (a₁ : ZMod 7) (L : ℕ), 1 ≤ L → L ≤ 3 →
+      (∀ k₀ : Fin 3, ∃ j : Fin L, qz m (lam₀ * b₁ k₀) = a₁ + (j.val : ZMod 7)) →
+      (L = 3 → (2 * qz m (lam₀ * d i₄) - qz m (lam₀ * d i₅)) ∉ ({2, 4} : Finset (ZMod 7))) →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+        qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+    intro lam₀ hlam₀ a₁ L hL1 hL3 hfitA₁ hcarve
+    obtain ⟨k, hk1, hk2, hk4⟩ :=
+      lemma5 a₁ (qz m (lam₀ * d i₄)) (qz m (lam₀ * d i₅)) L 1 1
+        (by omega) (by omega) (by omega) (by omega) (fun h => hcarve h.1)
+    refine lift_shift m (by omega) d lam₀ hlam₀ k (fun i => ?_)
+    rcases hi_tri i with ⟨k₀, hk₀⟩ | hi | hi
+    · subst hk₀; rw [hg₁_res k₀, mul_one]
+      obtain ⟨j, hj⟩ := hfitA₁ k₀
+      rw [show d (g₁ k₀) = b₁ k₀ from rfl, hj]
+      have := hk1 j
+      simpa [intervalAvoids, mul_one] using this
+    · subst hi; rw [hi₄_res]
+      have := hk2 ⟨0, by omega⟩
+      simpa [intervalAvoids, mul_comm] using this
+    · subst hi; rw [hi₅_res]
+      have := hk4 ⟨0, by omega⟩
+      simpa [intervalAvoids, mul_comm] using this
+  -- Bridge: a fitsInterval on the b₁-arc set feeds `close_l5`.
+  have fit_of_set : ∀ (lam₀ : ℤ) (a : ZMod 7) (L : ℕ),
+      fitsInterval ({qz m (lam₀ * b₁ 0), qz m (lam₀ * b₁ 1), qz m (lam₀ * b₁ 2)}
+        : Finset (ZMod 7)) a L →
+      ∀ k₀ : Fin 3, ∃ j : Fin L, qz m (lam₀ * b₁ k₀) = a + (j.val : ZMod 7) := by
+    intro lam₀ a L hfit k₀
+    exact hfit _ (by fin_cases k₀ <;> simp)
+  -- Apply Lemma 11 to label A₁.
+  obtain ⟨d₁, d₂, d₃, hperm, h_struct⟩ := lemma11 b₁ hb₁_inj
+  have hset_eq : ∀ (lam₀ : ℤ),
+      ({qz m (lam₀ * b₁ 0), qz m (lam₀ * b₁ 1), qz m (lam₀ * b₁ 2)} : Finset (ZMod 7))
+      = {qz m (lam₀ * d₁), qz m (lam₀ * d₂), qz m (lam₀ * d₃)} := fun lam₀ =>
+    (hperm (fun x => qz m (lam₀ * x))).symm
+  -- Closer for the ν(E) > m sub-branch: all A₁ arcs coincide, ℓ(A₁)=1.
+  have close_hgt : ∀ (e₁ e₂ e₃ : ℤ),
+      (∀ f : ℤ → ZMod 7, ({f e₁, f e₂, f e₃} : Finset (ZMod 7)) = {f (b₁ 0), f (b₁ 1), f (b₁ 2)}) →
+      (7 : ℤ) ^ (m + 1) ∣ (e₁ - e₃) → (7 : ℤ) ^ (m + 1) ∣ (e₂ - e₃) →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+        qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+    intro e₁ e₂ e₃ hperm' hdv1 hdv2
+    refine close_l5 1 (by norm_num) (qz m (1 * e₃)) 1 (le_refl 1) (by omega)
+      (fun k₀ => ⟨⟨0, by omega⟩, ?_⟩) (fun h => absurd h (by decide))
+    simp only [Fin.val_zero, Nat.cast_zero, add_zero]
+    have hmem : qz m (1 * b₁ k₀) ∈
+        ({qz m (1 * e₁), qz m (1 * e₂), qz m (1 * e₃)} : Finset (ZMod 7)) := by
+      rw [hperm' (fun x => qz m (1 * x))]; fin_cases k₀ <;> simp
+    rw [qz_eq_of_high_dvd m e₁ e₃ 1 hdv1, qz_eq_of_high_dvd m e₂ e₃ 1 hdv2] at hmem
+    simp only [Finset.mem_insert, Finset.mem_singleton, or_self] at hmem
+    exact hmem
+  -- Residues of the labels (all ≡ 1).
+  have hb₁_all_1 : ∀ k : Fin 3, (b₁ k : ZMod 7) = 1 := hg₁_res
+  have he_res_aux : ∀ x : ZMod 7,
+      x ∈ ({(b₁ 0 : ZMod 7), (b₁ 1 : ZMod 7), (b₁ 2 : ZMod 7)} : Finset _) → x = 1 := by
+    intro x hx
+    simp only [hb₁_all_1 0, hb₁_all_1 1, hb₁_all_1 2, Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with h | h | h <;> exact h
+  have he₁_res : (d₁ : ZMod 7) = 1 := he_res_aux _ (by rw [← hperm (fun x => (x : ZMod 7))]; simp)
+  have he₂_res : (d₂ : ZMod 7) = 1 := he_res_aux _ (by rw [← hperm (fun x => (x : ZMod 7))]; simp)
+  have he₃_res : (d₃ : ZMod 7) = 1 := he_res_aux _ (by rw [← hperm (fun x => (x : ZMod 7))]; simp)
+  rcases h_struct with
+      ⟨h₁, h₂, hlt, hd1, hd1', hd2, hd2'⟩ |
+      ⟨h, hd1, hd1', hd2, hd2', hr⟩
+  · -- ── (i) distinct valuations: lemma9_i_dispatch → ℓ(A₁) ≤ 2. ──
+    obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
+      lemma9_i_dispatch m h₁ h₂ d₁ d₂ d₃ (ne_of_lt hlt).symm hd1 hd1' hd2 hd2'
+    refine close_l5 lam₀ hlam₀ a 2 (by omega) (by omega) ?_ (fun h => absurd h (by decide))
+    exact fit_of_set lam₀ a 2 (by rw [hset_eq lam₀]; exact hB_fit)
+  · rcases hr with hr2 | hr3
+    · -- ── (ii.1) ratio 2 ──
+      by_cases hheq : h = m
+      · -- (ii.1) h = m: r⁻¹-frame ℓ(A₁)=3 + Lemma 7 forces ẽ(d₄,d₅)∉{2,4}.
+        sorry
+      · rcases lt_or_gt_of_ne hheq with hlt | hgt
+        · -- h < m: lemma9_ii_j2 → ℓ(A₁) ≤ 2.
+          obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
+            lemma9_ii_j2 m h hlt d₁ d₂ d₃
+              (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm) hd1 hd1' hd2 hd2' hr2
+          refine close_l5 lam₀ hlam₀ a 2 (by omega) (by omega) ?_ (fun h => absurd h (by decide))
+          exact fit_of_set lam₀ a 2 (by rw [hset_eq lam₀]; exact hB_fit)
+        · -- h > m: arcs coincide, ℓ(A₁)=1.
+          exact close_hgt d₁ d₂ d₃ hperm
+            (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd1)
+            (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd2)
+    · -- ── (ii.2) ratio 3 ──
+      by_cases hheq : h = m
+      · -- (ii.2) h = m: eight-bad-pairs (r⁻¹ frame {a,a+1,a+3} + Lemma 7 on (d₃,d₄)).
+        sorry
+      · rcases lt_or_gt_of_ne hheq with hlt | hgt
+        · -- h < m: split on ν(e₄₅) vs h — (ii.2.a) j3_control / (ii.2.b) ũ-table.
+          set e45 : ℤ := 2 * d i₄ - d i₅ with he45_def
+          -- carve helper: q(λ·e₄₅) = 6 ⟹ ẽ(d₄,d₅) = 2q(λd₄)−q(λd₅) ∉ {2,4}.
+          have carve_of : ∀ (lam : ℤ), qz m (lam * e45) = 6 →
+              (2 * qz m (lam * d i₄) - qz m (lam * d i₅)) ∉ ({2, 4} : Finset (ZMod 7)) := by
+            intro lam hq
+            obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (lam * d i₄) (lam * d i₅)
+            rw [show lam * e45 = 2 * (lam * d i₄) - lam * d i₅ from by rw [he45_def]; ring,
+                hcarry] at hq
+            rw [show 2 * qz m (lam * d i₄) - qz m (lam * d i₅) = 6 - c from by linear_combination hq]
+            rcases hc with rfl | rfl | rfl <;> decide
+          by_cases he0 : e45 = 0
+          · -- e₄₅ = 0: ẽ(d₄,d₅) ∈ {0,1,6} automatically; compress A₁ via lemma9_ii_j3.
+            obtain ⟨lam₀, hlam₀, ⟨a, hB_fit⟩, _, _⟩ := lemma9_ii_j3 m h hlt d₁ d₂ d₃
+              (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm) hd1 hd1' hd2 hd2' hr3
+            refine close_l5 lam₀ hlam₀ a 3 (by omega) (by omega)
+              (fit_of_set lam₀ a 3 (by rw [hset_eq lam₀]; exact hB_fit)) (fun _ => ?_)
+            obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (lam₀ * d i₄) (lam₀ * d i₅)
+            have hqz : qz m (lam₀ * e45) = 0 := by rw [he0, mul_zero]; simp [qz]
+            rw [show lam₀ * e45 = 2 * (lam₀ * d i₄) - lam₀ * d i₅ from by rw [he45_def]; ring,
+                hcarry] at hqz
+            rw [show 2 * qz m (lam₀ * d i₄) - qz m (lam₀ * d i₅) = -c from by linear_combination hqz]
+            rcases hc with rfl | rfl | rfl <;> decide
+          · obtain ⟨ν, hνd, hνd'⟩ := exists_val7 e45 he0
+            by_cases hνh : ν = h
+            · -- (ii.2.b) ν(e₄₅) = ν(e₁₃) = h: BS ũ-table (L611–635).
+              sorry
+            · by_cases hνm : ν < m
+              · -- (ii.2.a) ν(e₄₅) ≠ h and < m: two-level composition sets q(λ·e₄₅)=6.
+                obtain ⟨lam, hlam, ⟨a, hfit⟩, hqe45⟩ :=
+                  j3_control m h ν hlt hνm (Ne.symm hνh) d₁ d₂ d₃
+                    (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm)
+                    hd1 hd1' hd2 hd2' hr3 e45 hνd hνd' 6
+                exact close_l5 lam hlam a 3 (by omega) (by omega)
+                  (fit_of_set lam a 3 (by rw [hset_eq lam]; exact hfit)) (fun _ => carve_of lam hqe45)
+              · -- ν(e₄₅) ≥ m: auto-zero (ν>m) or top-retarget (ν=m), then compress.
+                have hmν : m ≤ ν := by omega
+                by_cases htop : (7 : ℤ) ^ (m + 1) ∣ e45
+                · -- ν(e₄₅) > m: qz(λ·e₄₅) = 0 via inertness ⟹ ẽ ∈ {0,1,6}.
+                  obtain ⟨lam₀, hlam₀, ⟨a, hB_fit⟩, _, hinert⟩ := lemma9_ii_j3 m h hlt d₁ d₂ d₃
+                    (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm) hd1 hd1' hd2 hd2' hr3
+                  refine close_l5 lam₀ hlam₀ a 3 (by omega) (by omega)
+                    (fit_of_set lam₀ a 3 (by rw [hset_eq lam₀]; exact hB_fit)) (fun _ => ?_)
+                  obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (lam₀ * d i₄) (lam₀ * d i₅)
+                  have hqz : qz m (lam₀ * e45) = 0 := by
+                    rw [hinert e45 (dvd_trans (pow_dvd_pow 7 (by omega : h + 1 ≤ m + 1)) htop)]
+                    obtain ⟨w, hw⟩ := htop
+                    have hval : qz m e45 = ((7 * w : ℤ) : ZMod 7) := by
+                      simp only [qz, hw,
+                        show (7 : ℤ) ^ (m + 1) * w = 7 ^ m * (7 * w) from by rw [pow_succ]; ring]
+                      rw [Int.mul_ediv_cancel_left _ (pow_ne_zero m (by norm_num : (7 : ℤ) ≠ 0))]
+                    rw [hval]; push_cast; rw [seven_eq_zero_z7]; ring
+                  rw [show lam₀ * e45 = 2 * (lam₀ * d i₄) - lam₀ * d i₅ from by rw [he45_def]; ring,
+                      hcarry] at hqz
+                  rw [show 2 * qz m (lam₀ * d i₄) - qz m (lam₀ * d i₅) = -c from by
+                    linear_combination hqz]
+                  rcases hc with rfl | rfl | rfl <;> decide
+                · -- ν(e₄₅) = m: `j3_control_top` retargets q(λ·e₄₅)=6, then compresses.
+                  have hνeqm : ν = m := by
+                    have hνle : ν ≤ m := by
+                      by_contra hgt; push_neg at hgt
+                      exact htop (dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ ν)) hνd)
+                    omega
+                  subst hνeqm
+                  obtain ⟨lam, hlam, ⟨a, hfit⟩, hqe45⟩ :=
+                    j3_control_top m h hlt d₁ d₂ d₃
+                      (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm)
+                      hd1 hd1' hd2 hd2' hr3 e45 hνd htop 6 (by decide)
+                  exact close_l5 lam hlam a 3 (by omega) (by omega)
+                    (fit_of_set lam a 3 (by rw [hset_eq lam]; exact hfit)) (fun _ => carve_of lam hqe45)
+        · -- h > m: arcs coincide, ℓ(A₁)=1.
+          exact close_hgt d₁ d₂ d₃ hperm
+            (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd1)
+            (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd2)
 
 /-- **Case 6.4 `(3,2,0)`** (BS L665). `|A₁|=3, |A₂|=2`. Labeling via Lemma 11 +
 Lemma 12; `lemma6_330` endpoint. -/

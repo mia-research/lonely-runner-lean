@@ -468,4 +468,50 @@ theorem j3_control (m h μ : ℕ) (hh : h < m) (hμ : μ < m) (hne : h ≠ μ)
       exact hf23
     · rw [show lam0 * lam1 * f = lam0 * (lam1 * f) from by ring]; exact hqf
 
+/-- **Two-level control, top-level target (`μ = m`).** The `μ = m` boundary of
+`j3_control`: compress a ratio-3 triple `B` to `ℓ ≤ 3` while forcing `q(λ·f) = t`
+for a combination `f` at the *top* level `m`. Since `m > h`, retarget `f` first
+(via `qz_retarget_top`, which needs `t ≠ 0`), then compress `B`; the compression
+(`Λ_h`) is inert on `f` (level `m ≥ h+1`), preserving `q(λ·f)`. -/
+theorem j3_control_top (m h : ℕ) (hh : h < m) (b₁ b₂ b₃ : ℤ)
+    (hs1 : (b₁ : ZMod 7) = (b₃ : ZMod 7)) (hs2 : (b₂ : ZMod 7) = (b₃ : ZMod 7))
+    (hx : (7 : ℤ) ^ h ∣ (b₁ - b₃)) (hx' : ¬ (7 : ℤ) ^ (h + 1) ∣ (b₁ - b₃))
+    (hy : (7 : ℤ) ^ h ∣ (b₂ - b₃)) (hy' : ¬ (7 : ℤ) ^ (h + 1) ∣ (b₂ - b₃))
+    (hr : (((b₂ - b₃) / 7 ^ h : ℤ) : ZMod 7) = 3 * (((b₁ - b₃) / 7 ^ h : ℤ) : ZMod 7))
+    (f : ℤ) (hf : (7 : ℤ) ^ m ∣ f) (hf' : ¬ (7 : ℤ) ^ (m + 1) ∣ f) (t : ZMod 7) (ht : t ≠ 0) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ (∃ a : ZMod 7,
+      fitsInterval ({qz m (lam * b₁), qz m (lam * b₂), qz m (lam * b₃)}
+        : Finset (ZMod 7)) a 3) ∧ qz m (lam * f) = t := by
+  have hp7 : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+  have hcop : ∀ (u z : ℤ) (n : ℕ), ¬ (7 : ℤ) ∣ u → ¬ (7 : ℤ) ^ n ∣ z → ¬ (7 : ℤ) ^ n ∣ (u * z) :=
+    fun u z n hu hz hdvd =>
+      hz ((hp7.irreducible.coprime_pow_of_not_dvd n hu).symm.dvd_of_dvd_mul_left hdvd)
+  obtain ⟨j, hj, hqf⟩ := qz_retarget_top m f hf hf' t ht
+  have hs1' : ((j * b₁ : ℤ) : ZMod 7) = ((j * b₃ : ℤ) : ZMod 7) := by push_cast; rw [hs1]
+  have hs2' : ((j * b₂ : ℤ) : ZMod 7) = ((j * b₃ : ℤ) : ZMod 7) := by push_cast; rw [hs2]
+  have hx_t : (7 : ℤ) ^ h ∣ (j * b₁ - j * b₃) := by
+    rw [show j * b₁ - j * b₃ = j * (b₁ - b₃) from by ring]; exact hx.mul_left j
+  have hx_t' : ¬ (7 : ℤ) ^ (h + 1) ∣ (j * b₁ - j * b₃) := by
+    rw [show j * b₁ - j * b₃ = j * (b₁ - b₃) from by ring]; exact hcop j (b₁ - b₃) (h + 1) hj hx'
+  have hy_t : (7 : ℤ) ^ h ∣ (j * b₂ - j * b₃) := by
+    rw [show j * b₂ - j * b₃ = j * (b₂ - b₃) from by ring]; exact hy.mul_left j
+  have hy_t' : ¬ (7 : ℤ) ^ (h + 1) ∣ (j * b₂ - j * b₃) := by
+    rw [show j * b₂ - j * b₃ = j * (b₂ - b₃) from by ring]; exact hcop j (b₂ - b₃) (h + 1) hj hy'
+  have hr_t : (((j * b₂ - j * b₃) / 7 ^ h : ℤ) : ZMod 7)
+      = 3 * (((j * b₁ - j * b₃) / 7 ^ h : ℤ) : ZMod 7) := by
+    rw [show j * b₂ - j * b₃ = j * (b₂ - b₃) from by ring,
+        show j * b₁ - j * b₃ = j * (b₁ - b₃) from by ring,
+        Int.mul_ediv_assoc j hy, Int.mul_ediv_assoc j hx]
+    push_cast; rw [hr]; ring
+  obtain ⟨lam1, hlam1, ⟨a, hfit⟩, _, hinert⟩ :=
+    lemma9_ii_j3 m h hh (j * b₁) (j * b₂) (j * b₃) hs1' hs2' hx_t hx_t' hy_t hy_t' hr_t
+  refine ⟨lam1 * j, ?_, ⟨a, ?_⟩, ?_⟩
+  · intro hdvd; rcases hp7.dvd_mul.mp hdvd with h' | h'
+    · exact hlam1 h'
+    · exact hj h'
+  · simpa only [mul_assoc] using hfit
+  · rw [show lam1 * j * f = lam1 * (j * f) from by ring,
+        hinert (j * f) (dvd_trans (pow_dvd_pow 7 (by omega : h + 1 ≤ m)) (hf.mul_left j))]
+    exact hqf
+
 end IntLRC7BS
