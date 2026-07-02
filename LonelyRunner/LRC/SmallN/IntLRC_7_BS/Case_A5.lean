@@ -36,6 +36,15 @@ private theorem two_ne_zero_z7 : (2 : ZMod 7) ≠ 0 := by decide
 /-- `(7 : ZMod 7) = 0` (hoisted: local `Fact (Nat.Prime 7)` instances block `decide`). -/
 private theorem seven_eq_zero_z7 : (7 : ZMod 7) = 0 := by decide
 
+/-- `(4 : ZMod 7) ≠ 0` (hoisted so `decide` runs in a `Fact`-free context). -/
+private theorem four_ne_zero_z7 : (4 : ZMod 7) ≠ 0 := by decide
+
+/-- `{2,4} ∩ ({2,4}+1) = ∅` — the empty `ν=m` gap of `lemma7_ii` with the tight
+`X = {2,4}`. Since `{2,4}+1 = {3,5}` is disjoint from `{2,4}`, controlling
+`ẽ ∉ {2,4}` at the top level needs no doubling fallback. -/
+private theorem inter24_empty :
+    (({2, 4} : Finset (ZMod 7)) ∩ (({2, 4} : Finset (ZMod 7)).image (· + 1))) = ∅ := by decide
+
 /-- Complement of `{2,3,4,5}` in `ZMod 7` is `{0,1,6}` (the `ẽ ∈ {0,1,6}` carve-out). -/
 private theorem mem_016_of_notmem_2345 (w : ZMod 7)
     (hw : w ∉ ({2, 3, 4, 5} : Finset (ZMod 7))) : w ∈ ({0, 1, 6} : Finset (ZMod 7)) := by
@@ -1462,8 +1471,99 @@ private theorem case_63 (hm : 2 ≤ m)
   · rcases hr with hr2 | hr3
     · -- ── (ii.1) ratio 2 ──
       by_cases hheq : h = m
-      · -- (ii.1) h = m: r⁻¹-frame ℓ(A₁)=3 + Lemma 7 forces ẽ(d₄,d₅)∉{2,4}.
-        sorry
+      · -- (ii.1) h = m: r⁻¹-frame ℓ(A₁)=3 + Lemma 7 (tight X={2,4}) forces ẽ(d₄,d₅)∉{2,4}.
+        rw [hheq] at hd1 hd1' hd2 hr2
+        set r : ZMod 7 := (((d₁ - d₃) / (7 : ℤ) ^ m : ℤ) : ZMod 7) with hr_def
+        have hr_ne : r ≠ 0 := by
+          obtain ⟨c, hc⟩ := hd1
+          have hdiv : (d₁ - d₃) / (7 : ℤ) ^ m = c := by
+            rw [hc]; exact Int.mul_ediv_cancel_left c (by positivity)
+          rw [hr_def, hdiv, Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]
+          intro ⟨w, hw⟩; exact hd1' ⟨w, by rw [hc, hw, pow_succ]; ring⟩
+        set u_int : ℤ := ((r⁻¹ : ZMod 7).val : ℤ) with hu_int_def
+        have hu_cast : (u_int : ZMod 7) = r⁻¹ := by simp [hu_int_def, ZMod.natCast_val]
+        have hu_ndvd : ¬ (7 : ℤ) ∣ u_int := by
+          intro hdvd
+          have h1 : (u_int : ZMod 7) = 0 := (ZMod.intCast_zmod_eq_zero_iff_dvd u_int 7).mpr hdvd
+          exact hr_ne (inv_eq_zero.mp (hu_cast ▸ h1))
+        haveI h7p : Fact (Nat.Prime 7) := ⟨by decide⟩
+        -- Closer: any frame `w` with residue r⁻¹ places A₁ at {a,a+1,a+2}; carve ⟹ done.
+        have close_b5 : ∀ (w : ℤ), ¬ (7 : ℤ) ∣ w → (w : ZMod 7) = r⁻¹ →
+            (2 * qz m (w * d i₄) - qz m (w * d i₅)) ∉ ({2, 4} : Finset (ZMod 7)) →
+            ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+              qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+          intro w hw hw_res hcarve
+          set a_m : ZMod 7 := qz m (w * d₃) with ha_def
+          have hqd1 : qz m (w * d₁) = a_m + 1 := by
+            rw [ha_def, qz_top_affine m w d₁ d₃ hd1, hw_res, ← hr_def, inv_mul_cancel₀ hr_ne]
+          have hqd2 : qz m (w * d₂) = a_m + 2 := by
+            rw [ha_def, qz_top_affine m w d₂ d₃ hd2, hw_res, hr2]
+            congr 1
+            rw [show r⁻¹ * (2 * r) = 2 * (r⁻¹ * r) from by ring, inv_mul_cancel₀ hr_ne, mul_one]
+          refine close_l5 w hw a_m 3 (by omega) (by omega) (fun k₀ => ?_) (fun _ => hcarve)
+          have hmem : qz m (w * b₁ k₀) ∈
+              ({qz m (w * d₁), qz m (w * d₂), qz m (w * d₃)} : Finset (ZMod 7)) := by
+            rw [← hset_eq w]; fin_cases k₀ <;> simp
+          rw [hqd1, hqd2, ← ha_def] at hmem
+          simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+          rcases hmem with h' | h' | h'
+          · exact ⟨⟨1, by omega⟩, by rw [h']; simp⟩
+          · exact ⟨⟨2, by omega⟩, by rw [h']; simp⟩
+          · exact ⟨⟨0, by omega⟩, by rw [h']; simp⟩
+        -- Lemma 7 on the pair (u·d₄, u·d₅) with the tight target X = {2,4}.
+        have hr_L7 : ((u_int * d i₅ : ℤ) : ZMod 7) = 2 * ((u_int * d i₄ : ℤ) : ZMod 7) := by
+          push_cast; rw [hu_cast, hi₄_res, hi₅_res]; ring
+        have hd4_nd : ¬ (7 : ℤ) ∣ (u_int * d i₄) := by
+          intro hdvd
+          have h1 : (u_int : ZMod 7) * (d i₄ : ZMod 7) = 0 := by
+            have := (ZMod.intCast_zmod_eq_zero_iff_dvd (u_int * d i₄) 7).mpr hdvd
+            push_cast at this; exact this
+          rcases mul_eq_zero.mp h1 with hh | hh
+          · exact hu_ndvd ((ZMod.intCast_zmod_eq_zero_iff_dvd u_int 7).mp hh)
+          · rw [hi₄_res] at hh; exact two_ne_zero_z7 hh
+        have hd5_nd : ¬ (7 : ℤ) ∣ (u_int * d i₅) := by
+          intro hdvd
+          have h1 : (u_int : ZMod 7) * (d i₅ : ZMod 7) = 0 := by
+            have := (ZMod.intCast_zmod_eq_zero_iff_dvd (u_int * d i₅) 7).mpr hdvd
+            push_cast at this; exact this
+          rcases mul_eq_zero.mp h1 with hh | hh
+          · exact hu_ndvd ((ZMod.intCast_zmod_eq_zero_iff_dvd u_int 7).mp hh)
+          · rw [hi₅_res] at hh; exact four_ne_zero_z7 hh
+        set e45u : ℤ := 2 * (u_int * d i₄) - (u_int * d i₅) with he45u_def
+        obtain ⟨lam₁, hl1_ndvd, hl1_res, hetal⟩ :
+            ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ (lam : ZMod 7) = 1 ∧
+              (2 * qz m (lam * (u_int * d i₄)) - qz m (lam * (u_int * d i₅))) ∉
+                ({2, 4} : Finset (ZMod 7)) := by
+          have hX24 : ∃ a : ZMod 7, fitsInterval ({2, 4} : Finset (ZMod 7)) a 4 :=
+            ⟨1, fun x hx => by
+              simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+              rcases hx with rfl | rfl
+              · exact ⟨⟨1, by omega⟩, by norm_num⟩
+              · exact ⟨⟨3, by omega⟩, by norm_num⟩⟩
+          by_cases hm_dvd : (7 : ℤ) ^ m ∣ e45u
+          · exact lemma7_ii m 0 (by omega) (u_int * d i₄) (u_int * d i₅)
+              hd4_nd hd5_nd hr_L7 {2, 4} hm_dvd (by rw [inter24_empty]; exact Finset.notMem_empty _)
+          · have he_ne : e45u ≠ 0 := fun heq => hm_dvd (heq ▸ dvd_zero _)
+            set ν := padicValInt 7 e45u with hν_def
+            have hν_lt_m : ν < m := by
+              by_contra hge; push_neg at hge
+              exact hm_dvd ((padicValInt_dvd_iff m e45u).mpr (Or.inr hge))
+            have hν_ndvd : ¬ (7 : ℤ) ^ (ν + 1) ∣ e45u := by
+              intro hh
+              have hle : ν + 1 ≤ padicValInt 7 e45u :=
+                ((padicValInt_dvd_iff (ν + 1) e45u).mp hh).resolve_left he_ne
+              omega
+            exact lemma7_i m ν hν_lt_m (u_int * d i₄) (u_int * d i₅)
+                hd4_nd hd5_nd hr_L7 {2, 4} hX24 (padicValInt_dvd e45u) hν_ndvd
+        refine close_b5 (lam₁ * u_int) ?_ ?_ ?_
+        · intro hdvd
+          rcases (Nat.prime_iff_prime_int.mp (by decide : Nat.Prime 7)).dvd_mul.mp hdvd with hh | hh
+          · exact hl1_ndvd hh
+          · exact hu_ndvd hh
+        · push_cast; rw [hl1_res, hu_cast, one_mul]
+        · rw [show (lam₁ * u_int) * d i₄ = lam₁ * (u_int * d i₄) from by ring,
+              show (lam₁ * u_int) * d i₅ = lam₁ * (u_int * d i₅) from by ring]
+          exact hetal
       · rcases lt_or_gt_of_ne hheq with hlt | hgt
         · -- h < m: lemma9_ii_j2 → ℓ(A₁) ≤ 2.
           obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
