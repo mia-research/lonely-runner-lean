@@ -1857,9 +1857,10 @@ private theorem case_64 (hm : 2 ≤ m)
         · -- ν(e₄) < m: control i₄ via lemma7_i (vacuous hXX).
           exact close_via_L7 i₄ i₅ hi₄_res hi₅_res htri45 (hXX_vac i₄ hd4)
       · rcases lt_or_gt_of_ne hheq with hlt | hgt
-        · obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
+        · obtain ⟨lam₀, hlam₀, hrest⟩ :=
             lemma9_ii_j3 m h hlt d₁ d₂ d₃
               (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm) hd1 hd1' hd2 hd2' hr3
+          obtain ⟨a, hB_fit⟩ := hrest.1
           refine close3 lam₀ hlam₀ a (fit_of_set lam₀ a 3 (by omega) ?_)
           rw [hset_eq lam₀]; exact hB_fit
         · -- h > m: all A₁ arcs coincide; ℓ(A₁)=1.

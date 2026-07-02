@@ -219,6 +219,25 @@ theorem lemma4_i_eq (m h : ℕ) (hhm : h ≤ m) (k x y : ℤ)
   have := qz_lin_invariant m h hhm k x y 1 (-1) hx hy (by rw [hr]; ring)
   linear_combination this
 
+/-- **BS Lemma 4 (i), full form (all levels `i ≤ j`).** `qz_lin_invariant` only
+covers a multiplier at the *exact* level `j = ν(x) = ν(y)`; BS's Lemma 4 (i)
+asserts invariance for every `λ ∈ Λ_i` with `i ≤ j`. This folds in the `i < j`
+case via `qz_higher_inert` (both `x, y` sit at level `≥ i+1`, so a `Λ_i`
+multiplier leaves their arcs — hence any linear combination — unchanged). The
+linear-combination hypothesis `a·r_j(x) + b·r_j(y) = 0` is only consumed at the
+boundary `i = j`; it is vacuously respected below. Choosing `(a,b) = (2,-1)`,
+`(-1,2)`, `(1,-1)` recovers the three `ẽ` branches of (13). -/
+theorem lemma4_i_le (m i j : ℕ) (hij : i ≤ j) (hjm : j ≤ m) (k x y : ℤ) (a b : ZMod 7)
+    (hx : (7 : ℤ) ^ j ∣ x) (hy : (7 : ℤ) ^ j ∣ y)
+    (hab : a * ((x / 7 ^ j : ℤ) : ZMod 7) + b * ((y / 7 ^ j : ℤ) : ZMod 7) = 0) :
+    a * qz m ((1 + k * 7 ^ (m - i)) * x) + b * qz m ((1 + k * 7 ^ (m - i)) * y)
+      = a * qz m x + b * qz m y := by
+  rcases eq_or_lt_of_le hij with rfl | hlt
+  · exact qz_lin_invariant m i hjm k x y a b hx hy hab
+  · have him : i ≤ m := le_trans (le_of_lt hlt) hjm
+    rw [qz_higher_inert m i him k x (dvd_trans (pow_dvd_pow 7 (by omega)) hx),
+        qz_higher_inert m i him k y (dvd_trans (pow_dvd_pow 7 (by omega)) hy)]
+
 /-- **Lemma 9 (i) (BS L482), `h < m` form.** Three integers `b₁,b₂,b₃` whose
 differences `b₁−b₃`, `b₂−b₃` have DISTINCT valuations `< m`: there is a unit
 multiplier `lam` compressing `q(lam·B)` into a length-2 arithmetic progression
