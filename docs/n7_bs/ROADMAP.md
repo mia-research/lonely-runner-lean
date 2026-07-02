@@ -103,17 +103,32 @@ The lone `sorry` is `Reduction.bs_discrete_q` (hard branch). PDF
 **Case counts (`|D|=6, gcd=1`, hard = ∃ j<m |D₇(j)|≥4):** ≤1 big level (two ⟹ ≥8>6);
 big level `i₁<m`; `i₁>0 ⟹ |D₇(i₁)|=4`, config `1/4/1`; `i₁=0 ⟹ |D₇(0)|∈{4,5}`.
 
-**Current sorry chain (2026-06-30 updated) — 8 sorries, all in `Case_A5.lean`:**
+**Current sorry chain (2026-07-02 updated) — 5 sorries, all in `Case_A5.lean`:**
 `intLRC_seven` → `bs_discrete_q` (✅) → `five_band` (✅) → `five_avoid` → {
-  `five_compress` (§6, m≥2) → `five_compress_repr` → **7 case sorries**
-     `case_61`, `case_62a`, `case_63`, `case_64`, `case_65`, `case_66`: **OPEN**
-     `case_62b` (4,0,1): **STRUCTURED SKELETON** — A₁/A₄ extraction wired
-       (orderIsoOfFin + card_eq_one), lemma10 applied, branch dispatch:
-       • branch (i): lemma9_i_dispatch called → sorry for 5-elt placement
-       • branch (ii) ratio 3: sorry (h=m: affine+lemma5_401_gen; h<m: L9(ii)j=3)
-       • branch (ii) ratio 4: sorry (h=m: L7+lemma6_501; h<m: L9(ii)j=4)
-  `five_avoid_m1` (§7, m=1): **OPEN — statement needs redraft (see below)**
+  `five_compress` (§6, m≥2) → `five_compress_repr` → **case sorries**
+     `case_62b` (4,0,1): ✅ **ALL BRANCHES AXIOM-CLEAN**
+     `case_64` (3,2,0): ✅ **AXIOM-CLEAN** (2026-07-02; fallback L693–696 closed via
+        `fallback_64_choice` decide + Λ₁ doubling-carry pin; `lemma12_i`/`lemma12_ii`)
+     `case_62a` (4,1,0): ✅ **AXIOM-CLEAN** (2026-07-02; 2-window/4-window/holed-window
+        decides `avoid_62a_*`; branch (i)/h≠m ×2-antipode; (ii.2) h=m holed {0,1,2,4}
+        + Lemma 7 `ẽ(d₁,d₅)∉{2,3}`, `qz(e)=3` carve-out via frame doubling)
+     `case_61` (5,0,0): **OPEN** — `case_61_top` (ν(E)={m}) ✅ done; ν(E)≠{m} branch needs
+        Lemma 10 on a 4-subset + 5th elt, `lemma9` compression, then `place_window5` /
+        `dichotomy_core` endgame with the `3·`-remultiply (`rmk8_i_k3`) for `{p,q}={2,4}`.
+     `case_63` (3,1,1): **OPEN** — endgame decides verified (ℓ≤2 free; ℓ=3 needs
+        `ẽ34∉{2,3,4,5}` via Lemma 7 on (d₃,d₄), d₅ free). Blocker = composing Lemma 7
+        ẽ-control with `lemma9_ii_j3` compression in the ratio-3 h<m branch (BS's
+        ν(e₄₅)-vs-ν(e₁₃) dance); the ν(e34)=m fallback is a single-carry pin (verified).
+     `case_65` (3,0,2): **OPEN** — (14)/(16) analysis, symmetric to 6.4.
+     `case_66` (2,2,1): **OPEN** — self-contained; (a)/(b) q-tables, two-carry ẽ pin.
+  `five_avoid_m1` (§7, m=1): **OPEN — statement needs redraft (d₆ + gcd=1)**
 }
+**Session 2026-07-02 (Fable 5):** closed `case_64` fallback + full `case_62a`. Build
+green (2485 jobs). Endgame decides for `case_63` all verified numerically in
+`experiments/` scratch; the remaining blocker is multiplier composition, not the
+finite combinatorics.
+**Lemma 12 (`Lemmas10_12.lean`, 2026-07-01):** `lemma12_i` (ℓ(A₁)≤3) and `lemma12_ii`
+  (ℓ(A₁)=4 with ẽ∈{0,1,6}) both ✅ axiom-clean via `decide`. Used by case_64/65.
 Compression toolkit (`Lemmas7_9.lean`): `lemma7_i`/`lemma7_ii`/`lemma9_i`/`lemma9_ii_j2`/`lemma9_ii_j3` ALL ✅ axiom-clean.
 **ν=m edge RESOLVED** (`Lemmas.lean`, 2026-06-29): `lemma9_i_top` (exact 7^m shift via
   `qz_sub_mul_pow`, no carry) + `lemma9_i_dispatch` (unified dispatch: both<m / one=m /
