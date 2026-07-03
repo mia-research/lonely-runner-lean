@@ -1376,6 +1376,27 @@ private theorem avoid_63_r3hm (a p q : ZMod 7)
       q + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) := by
   revert he; revert a p q; decide
 
+set_option maxHeartbeats 3200000 in
+/-- **`(3,1,1)` ratio-3 h<m, `ν(e₄₅)=ν(e₁₃)` diff-arc decide** (BS L607–632, `+`-sign).
+Everything is at level `h`, so a `Λ_h` shift `k` moves the four diff-arcs linearly:
+`X=q(e₁₃)↦X+3k`, `Y=q(e₂₃)↦Y+k`, `Z=q(e₁₂)↦Z+2k`, `W=q(e₄₅)↦W+3k`. The
+`f=e₄₅−e₁₃` retarget pins `ẽ' = q(e₁₃)−q(e₄₅) ∈ {0,1}` (so `W ∈ {X, X−1}`), and
+`Z ∈ {X−Y, X−Y+6}` (the `q(e₁₂)` carry). Except at BS's exceptional `ũ=3∧ẽ'=0`
+(`3X+5Y=3 ∧ W=X`), some `k` lands either all three `A₁` diff-arcs in `{0,6}`
+(`ℓ(A₁)≤2`, Lemma 5 needs no carve) or in `{0,1,5,6}` with `W+3k∈{0,6}` (`ℓ≤3` and
+`ẽ(d₄,d₅)∉{2,4}`). -/
+private theorem ii2b_shift (X Y Z W : ZMod 7)
+    (hZ : Z = X - Y ∨ Z = X - Y + 6) (hW : W = X ∨ W = X - 1)
+    (hexc : ¬ (3 * X + 5 * Y = 3 ∧ W = X)) :
+    ∃ k : ZMod 7,
+      (X + 3 * k ∈ ({0, 6} : Finset (ZMod 7)) ∧ Y + k ∈ ({0, 6} : Finset (ZMod 7)) ∧
+        Z + 2 * k ∈ ({0, 6} : Finset (ZMod 7))) ∨
+      (X + 3 * k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
+        Y + k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
+        Z + 2 * k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
+        W + 3 * k ∈ ({0, 6} : Finset (ZMod 7))) := by
+  revert hZ hW hexc; revert X Y Z W; decide
+
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11;
 endgame is `lemma5` on the `(ℓ₁,1,1)` partition (the `(3,1,1)` exception carved by
 `ẽ(d₄,d₅) ∉ {2,4}`). Branch map: (i)/(ii.1) `h<m` → `lemma9` gives `ℓ(A₁)≤2`;
