@@ -573,6 +573,81 @@ theorem qz_double_carry_one (m : ℕ) (hm : 1 ≤ m) (a : ℤ) (h : qz m (7 * a)
       Int.ediv_eq_zero_of_lt hr_nn hr_lt, zero_add]
   rw [h2adiv, hadiv]; push_cast; ring
 
+/-- **Two-carry cascade from `q(7b)` (BS L659, the `q(7d₃)=4ε₁+2ε₂` pin).** Setting
+the level-`(m−1)` digit `q(7b)` to the *even* value `4ε₁+2ε₂` (`ε₁,ε₂ ∈ {0,1}`)
+pins both the doubling carry of `b` (`= ε₁`) and the quadrupling carry
+(`= 2ε₁+ε₂`): `q(2b)=2q(b)+ε₁` and `q(4b)=4q(b)+2ε₁+ε₂`. (Even `q(7b)` keeps `2R`
+and `4R` inside one `7^m`-block as the lower digits vary, pinning the carries.)
+One `Λ₁` retarget thus controls both the `d₃`- and `d₄`-doubling carries in the
+§6.3 eight-bad-pairs endgame. -/
+theorem qz_double_quad_carry (m : ℕ) (hm : 1 ≤ m) (b : ℤ) (e1 e2 : ℕ)
+    (he1 : e1 ≤ 1) (he2 : e2 ≤ 1)
+    (h : qz m (7 * b) = ((4 * e1 + 2 * e2 : ℕ) : ZMod 7)) :
+    qz m (2 * b) = 2 * qz m b + (e1 : ZMod 7) ∧
+      qz m (4 * b) = 4 * qz m b + ((2 * e1 + e2 : ℕ) : ZMod 7) := by
+  simp only [qz] at h ⊢
+  set P := (7 : ℤ) ^ m with hP_def
+  set Pm1 := (7 : ℤ) ^ (m - 1) with hPm1_def
+  have hP_pos : (0 : ℤ) < P := by positivity
+  have hPm1_pos : (0 : ℤ) < Pm1 := by positivity
+  have hPeq : P = 7 * Pm1 := by rw [hP_def, hPm1_def, ← pow_succ']; congr 1; omega
+  set Q := b / P with hQ_def
+  set R := b % P with hR_def
+  have hRnn : 0 ≤ R := Int.emod_nonneg b (ne_of_gt hP_pos)
+  have hRlt : R < P := Int.emod_lt_of_pos b hP_pos
+  have hbdecomp : b = R + P * Q := by
+    have := Int.ediv_add_emod b P; rw [← hQ_def, ← hR_def] at this; linarith
+  set D₁ := R / Pm1 with hD_def
+  set r0 := R % Pm1 with hr0_def
+  have hr0nn : 0 ≤ r0 := Int.emod_nonneg R (ne_of_gt hPm1_pos)
+  have hr0lt : r0 < Pm1 := Int.emod_lt_of_pos R hPm1_pos
+  have hRexp : R = r0 + Pm1 * D₁ := by
+    have := Int.ediv_add_emod R Pm1; rw [← hD_def, ← hr0_def] at this; linarith
+  have hD_nn : 0 ≤ D₁ := Int.ediv_nonneg hRnn (le_of_lt hPm1_pos)
+  have hD_lt : D₁ < 7 := by
+    rw [hD_def, Int.ediv_lt_iff_lt_mul hPm1_pos]; nlinarith [hRlt, hPeq]
+  have he1z : (e1 : ℤ) ≤ 1 := by exact_mod_cast he1
+  have he2z : (e2 : ℤ) ≤ 1 := by exact_mod_cast he2
+  -- `q(7b) = (D₁ : ZMod 7)`, hence `D₁ = 4e1 + 2e2` as integers.
+  have h7bP : (7 * b) / P = D₁ + 7 * Q := by
+    rw [show (7 : ℤ) * b = (7 * r0) + P * (D₁ + 7 * Q) from by
+          rw [hbdecomp, hRexp, hPeq]; ring,
+        Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+        Int.ediv_eq_zero_of_lt (by linarith) (by rw [hPeq]; linarith), zero_add]
+  have hD1val : D₁ = 4 * (e1 : ℤ) + 2 * (e2 : ℤ) := by
+    have key : (((D₁ - (4 * (e1 : ℤ) + 2 * (e2 : ℤ))) : ℤ) : ZMod 7) = 0 := by
+      rw [h7bP] at h
+      have h7z : (7 : ZMod 7) = 0 := by decide
+      push_cast at h ⊢
+      rw [h7z] at h; rw [← h]; ring
+    rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at key
+    obtain ⟨k, hk⟩ := key; omega
+  -- Doubling carry `(2R)/P = e1`.
+  have hc2 : (2 * R) / P = (e1 : ℤ) := by
+    rw [show 2 * R = (2 * r0 + (e1 + 4 * e2) * Pm1) + (e1 : ℤ) * P from by
+          rw [hRexp, hPeq, hD1val]; push_cast; ring,
+        Int.add_mul_ediv_right _ _ (ne_of_gt hP_pos),
+        Int.ediv_eq_zero_of_lt (by positivity)
+          (by rw [hPeq]; nlinarith [hr0lt, hPm1_pos, he1z, he2z]),
+        zero_add]
+  -- Quadrupling carry `(4R)/P = 2e1 + e2`.
+  have hc4 : (4 * R) / P = 2 * (e1 : ℤ) + (e2 : ℤ) := by
+    rw [show 4 * R = (4 * r0 + (2 * e1 + e2) * Pm1) + (2 * (e1 : ℤ) + e2) * P from by
+          rw [hRexp, hPeq, hD1val]; push_cast; ring,
+        Int.add_mul_ediv_right _ _ (ne_of_gt hP_pos),
+        Int.ediv_eq_zero_of_lt (by positivity)
+          (by rw [hPeq]; nlinarith [hr0lt, hPm1_pos, he1z, he2z]),
+        zero_add]
+  have h2bP : (2 * b) / P = (e1 : ℤ) + 2 * Q := by
+    rw [show 2 * b = 2 * R + P * (2 * Q) from by rw [hbdecomp]; ring,
+        Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos), hc2]
+  have h4bP : (4 * b) / P = (2 * (e1 : ℤ) + e2) + 4 * Q := by
+    rw [show 4 * b = 4 * R + P * (4 * Q) from by rw [hbdecomp]; ring,
+        Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos), hc4]
+  refine ⟨?_, ?_⟩
+  · rw [h2bP]; push_cast; ring
+  · rw [h4bP]; push_cast; ring
+
 /-- **Combined carry with the `2x−y` ⇒ `x−y` implication (BS L368, refined).**
 Produces BOTH the `2x−y` carry `c₃ ∈ {−1,0,1}` and the `x−y` carry `c₁ ∈ {−1,0}`
 on the SAME pair `(x,y)`, together with the integer-forced links
