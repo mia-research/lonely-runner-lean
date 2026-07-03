@@ -1376,7 +1376,25 @@ private theorem avoid_63_r3hm (a p q : ZMod 7)
       q + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) := by
   revert he; revert a p q; decide
 
+set_option maxHeartbeats 1600000 in
+/-- **`(3,1,1)` ratio-3 h=m 2-carry fallback endgame** (BS L656–661). When
+`ẽ34 ∈ {2,3,4,5}` and `ν(e₃₄)=ν(e₄₅)=m`, the `Λ₁` pin `q(7·d₃)=4ε₁+2ε₂` controls
+BOTH doubling carries (`qz_double_quad_carry`). For any `T34 ∈ {3,4,5}` and any
+`T45`, some `(ε₁,ε₂,Atar)` places `A₁` at `{Atar,Atar+1,Atar+3}`, `d₄` at
+`2·Atar−(T34−ε₁)` (coeff 2), `d₅` at `4·Atar−2(T34−ε₁)−(T45−ε₂)` (coeff 4), all
+avoiding `{0,6}`. Matches BS's eight-bad-pairs table exactly. -/
+private theorem fallback_63_choice (T34 T45 : ZMod 7)
+    (hT34 : T34 ∈ ({3, 4, 5} : Finset (ZMod 7))) :
+    ∃ e1 e2 Atar : ZMod 7, (e1 = 0 ∨ e1 = 1) ∧ (e2 = 0 ∨ e2 = 1) ∧
+      Atar ∉ ({0, 6} : Finset (ZMod 7)) ∧
+      Atar + 1 ∉ ({0, 6} : Finset (ZMod 7)) ∧
+      Atar + 3 ∉ ({0, 6} : Finset (ZMod 7)) ∧
+      2 * Atar - (T34 - e1) ∉ ({0, 6} : Finset (ZMod 7)) ∧
+      4 * Atar - 2 * (T34 - e1) - (T45 - e2) ∉ ({0, 6} : Finset (ZMod 7)) := by
+  revert hT34; revert T34 T45; decide
+
 set_option maxHeartbeats 3200000 in
+set_option maxRecDepth 4000 in
 /-- **`(3,1,1)` ratio-3 h<m, `ν(e₄₅)=ν(e₁₃)` diff-arc decide** (BS L607–632, `+`-sign).
 Everything is at level `h`, so a `Λ_h` shift `k` moves the four diff-arcs linearly:
 `X=q(e₁₃)↦X+3k`, `Y=q(e₂₃)↦Y+k`, `Z=q(e₁₂)↦Z+2k`, `W=q(e₄₅)↦W+3k`. The
@@ -1395,7 +1413,8 @@ private theorem ii2b_shift (X Y Z W : ZMod 7)
         Y + k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
         Z + 2 * k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
         W + 3 * k ∈ ({0, 6} : Finset (ZMod 7))) := by
-  revert hZ hW hexc; revert X Y Z W; decide
+  -- Split `Z,W` off first (`decide`'s instance synthesis chokes on the full 4-∀ nesting).
+  rcases hZ with rfl | rfl <;> rcases hW with hw | hw <;> subst W <;> revert hexc X Y <;> decide
 
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11;
 endgame is `lemma5` on the `(ℓ₁,1,1)` partition (the `(3,1,1)` exception carved by
@@ -1702,8 +1721,125 @@ private theorem case_63 (hm : 2 ≤ m)
             exact hetal
         by_cases hmdvd : (7 : ℤ) ^ m ∣ e34u
         · by_cases hgap : qz m e34u ∈ ({3, 4, 5} : Finset (ZMod 7))
-          · -- FALLBACK: ν(e34)=ν(e45)=m ∧ qz(e34)∈{3,4,5}. BS 2-carry pin (L656–661).
-            sorry
+          · -- FALLBACK: ν(e34)=m ∧ qz(e34)∈{3,4,5}. First test if the plain `u`-frame
+            -- already has ẽ34∉{2,3,4,5}; else 2-carry pin (ν(e45)≥m) or Lemma 7 (ν(e45)<m).
+            by_cases hetil34 :
+                (2 * qz m (u_int * d₃) - qz m (u_int * d i₄)) ∈ ({2, 3, 4, 5} : Finset (ZMod 7))
+            · -- ẽ34∈{2,3,4,5}: control both carries.
+              set e45u : ℤ := u_int * (2 * d i₄ - d i₅) with he45u_def
+              by_cases h45 : (7 : ℤ) ^ m ∣ e45u
+              · -- ν(e₄₅) ≥ m: the two-carry pin `q(7·d₃)=4ε₁+2ε₂`.
+                have hp7 : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+                obtain ⟨e1, e2, Atar, he1, he2, hA0, hA1, hA3, hd4a, hd5a⟩ :=
+                  fallback_63_choice (qz m e34u) (qz m e45u) hgap
+                obtain ⟨e1n, he1n_le, he1n_cast⟩ : ∃ n : ℕ, n ≤ 1 ∧ ((n : ℕ) : ZMod 7) = e1 := by
+                  rcases he1 with rfl | rfl
+                  · exact ⟨0, by omega, by simp⟩
+                  · exact ⟨1, le_refl _, by simp⟩
+                obtain ⟨e2n, he2n_le, he2n_cast⟩ : ∃ n : ℕ, n ≤ 1 ∧ ((n : ℕ) : ZMod 7) = e2 := by
+                  rcases he2 with rfl | rfl
+                  · exact ⟨0, by omega, by simp⟩
+                  · exact ⟨1, le_refl _, by simp⟩
+                -- Λ₁ retarget pins q(7·u·d₃) = 4ε₁+2ε₂.
+                have h7d3_dvd : (7 : ℤ) ^ 1 ∣ 7 * (u_int * d₃) := ⟨u_int * d₃, by ring⟩
+                have h7d3_ndvd : ¬ (7 : ℤ) ^ (1 + 1) ∣ 7 * (u_int * d₃) := by
+                  rintro ⟨cc, hcc⟩
+                  refine hd3_nd ⟨cc, mul_left_cancel₀ (show (7 : ℤ) ≠ 0 by norm_num) ?_⟩
+                  rw [hcc]; ring
+                obtain ⟨k₂, hqk₂, hk₂u⟩ := qz_retarget m 1 (by omega) (7 * (u_int * d₃))
+                  h7d3_dvd h7d3_ndvd ((4 * e1n + 2 * e2n : ℕ) : ZMod 7)
+                set w' : ℤ := (1 + k₂ * 7 ^ (m - 1)) * u_int with hw'_def
+                have hw'_res : (w' : ZMod 7) = r⁻¹ := by
+                  rw [hw'_def]; push_cast
+                  rw [seven_eq_zero_z7, zero_pow (show m - 1 ≠ 0 by omega), mul_zero, add_zero,
+                    hu_cast, one_mul]
+                have hw'_ndvd : ¬ (7 : ℤ) ∣ w' := by
+                  rw [hw'_def]; intro hdvd
+                  rcases hp7.dvd_mul.mp hdvd with hh | hh
+                  · exact hk₂u hh
+                  · exact hu_ndvd hh
+                set A₀ : ZMod 7 := qz m (w' * d₃) with hA₀_def
+                have hpin : qz m (7 * (w' * d₃)) = ((4 * e1n + 2 * e2n : ℕ) : ZMod 7) := by
+                  rw [show 7 * (w' * d₃) = (1 + k₂ * 7 ^ (m - 1)) * (7 * (u_int * d₃)) from by
+                    rw [hw'_def]; ring]
+                  exact hqk₂
+                obtain ⟨hdbl, hquad⟩ :=
+                  qz_double_quad_carry m (by omega) (w' * d₃) e1n e2n he1n_le he2n_le hpin
+                have hlam2_res : ((1 + k₂ * 7 ^ (m - 1) : ℤ) : ZMod 7) = 1 := by
+                  push_cast
+                  rw [seven_eq_zero_z7, zero_pow (show m - 1 ≠ 0 by omega), mul_zero, add_zero]
+                rw [he1n_cast] at hdbl
+                have hquad' : qz m (4 * (w' * d₃)) = 4 * qz m (w' * d₃) + (2 * e1 + e2) := by
+                  rw [hquad]; push_cast; rw [he1n_cast, he2n_cast]
+                -- A₁ arcs {A₀, A₀+1, A₀+3}.
+                have harc₁ : qz m (w' * d₁) = A₀ + 1 := by
+                  rw [hA₀_def, qz_top_affine m w' d₁ d₃ hd1, hw'_res, ← hr_def,
+                    inv_mul_cancel₀ hr_ne]
+                have harc₂ : qz m (w' * d₂) = A₀ + 3 := by
+                  rw [hA₀_def, qz_top_affine m w' d₂ d₃ hd2, hw'_res, hr3]
+                  congr 1
+                  rw [show r⁻¹ * (3 * r) = 3 * (r⁻¹ * r) from by ring, inv_mul_cancel₀ hr_ne, mul_one]
+                -- d₄ arc = 2A₀+ε₁−T34 via e₃₄ = 2d₃−d₄ at level m.
+                obtain ⟨γ, hγ⟩ := hmdvd
+                have hkey34 : (7 : ℤ) ^ m * γ = 2 * (u_int * d₃) - u_int * d i₄ :=
+                  hγ.symm.trans he34u_def
+                have hd4split : w' * d i₄ = 2 * (w' * d₃) - 7 ^ m * ((1 + k₂ * 7 ^ (m - 1)) * γ) := by
+                  rw [hw'_def]; linear_combination (1 + k₂ * 7 ^ (m - 1)) * hkey34
+                have hqγ : qz m e34u = (γ : ZMod 7) := by
+                  rw [hγ]; simp only [qz]
+                  rw [Int.mul_ediv_cancel_left _ (pow_ne_zero m (by norm_num : (7 : ℤ) ≠ 0))]
+                have hT34cast : (((1 + k₂ * 7 ^ (m - 1)) * γ : ℤ) : ZMod 7) = qz m e34u := by
+                  rw [Int.cast_mul, hlam2_res, one_mul]; exact hqγ.symm
+                have harc₄ : qz m (w' * d i₄) = 2 * A₀ + e1 - qz m e34u := by
+                  rw [hd4split, qz_sub_mul_pow, hdbl, hT34cast]
+                -- d₅ arc = 4A₀+2ε₁+ε₂−2T34−T45 via e₄₅ = 2d₄−d₅ at level m.
+                obtain ⟨δ, hδ⟩ := h45
+                have hkey45 : (7 : ℤ) ^ m * δ = u_int * (2 * d i₄ - d i₅) :=
+                  hδ.symm.trans he45u_def
+                have hd5split : w' * d i₅
+                    = 2 * (w' * d i₄) - 7 ^ m * ((1 + k₂ * 7 ^ (m - 1)) * δ) := by
+                  rw [hw'_def]; linear_combination (1 + k₂ * 7 ^ (m - 1)) * hkey45
+                have hqδ : qz m e45u = (δ : ZMod 7) := by
+                  rw [hδ]; simp only [qz]
+                  rw [Int.mul_ediv_cancel_left _ (pow_ne_zero m (by norm_num : (7 : ℤ) ≠ 0))]
+                have hT45cast : (((1 + k₂ * 7 ^ (m - 1)) * δ : ℤ) : ZMod 7) = qz m e45u := by
+                  rw [Int.cast_mul, hlam2_res, one_mul]; exact hqδ.symm
+                have h2d4 : qz m (2 * (w' * d i₄)) = 4 * A₀ + 2 * e1 + e2 - 2 * qz m e34u := by
+                  have hsplit2 : 2 * (w' * d i₄)
+                      = 4 * (w' * d₃) - 7 ^ m * (2 * ((1 + k₂ * 7 ^ (m - 1)) * γ)) := by
+                    rw [hd4split]; ring
+                  rw [hsplit2, qz_sub_mul_pow, hquad',
+                    show ((2 * ((1 + k₂ * 7 ^ (m - 1)) * γ) : ℤ) : ZMod 7) = 2 * qz m e34u from by
+                      rw [Int.cast_mul, hT34cast]; norm_num]
+                  ring
+                have harc₅ : qz m (w' * d i₅) = 4 * A₀ + 2 * e1 + e2 - 2 * qz m e34u - qz m e45u := by
+                  rw [hd5split, qz_sub_mul_pow, h2d4, hT45cast]
+                -- Λ_m base shift to `Atar` and final assembly via `lift_shift`.
+                refine lift_shift m (by omega) d w' hw'_ndvd (Atar - A₀) (fun i => ?_)
+                rcases hi_tri i with ⟨k₀, hk₀⟩ | hi | hi
+                · subst hk₀; rw [hg₁_res k₀, mul_one, show d (g₁ k₀) = b₁ k₀ from rfl]
+                  have hmem : qz m (w' * b₁ k₀) ∈
+                      ({qz m (w' * d₁), qz m (w' * d₂), qz m (w' * d₃)} : Finset (ZMod 7)) := by
+                    rw [← hset_eq w']; fin_cases k₀ <;> simp
+                  rw [harc₁, harc₂, ← hA₀_def] at hmem
+                  simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+                  rcases hmem with h' | h' | h'
+                  · rw [h', show A₀ + 1 + (Atar - A₀) = Atar + 1 from by ring]; exact hA1
+                  · rw [h', show A₀ + 3 + (Atar - A₀) = Atar + 3 from by ring]; exact hA3
+                  · rw [h', show A₀ + (Atar - A₀) = Atar from by ring]; exact hA0
+                · subst hi
+                  rw [hi₄_res, harc₄,
+                    show 2 * A₀ + e1 - qz m e34u + (Atar - A₀) * 2 = 2 * Atar - (qz m e34u - e1)
+                      from by ring]
+                  exact hd4a
+                · subst hi
+                  rw [hi₅_res, harc₅,
+                    show 4 * A₀ + 2 * e1 + e2 - 2 * qz m e34u - qz m e45u + (Atar - A₀) * 4
+                      = 4 * Atar - 2 * (qz m e34u - e1) - (qz m e45u - e2) from by ring]
+                  exact hd5a
+              · -- ν(e₄₅) < m: control ẽ45 via Lemma 7 on (d₄,d₅) (target depends on ẽ34).
+                sorry
+            · exact close_r3hm u_int hu_ndvd hu_cast hetil34
           · obtain ⟨lam₁, hl1nd, hl1res, hetal⟩ :=
               lemma7_ii m 0 (by omega) (u_int * d₃) (u_int * d i₄) hd3_nd hd4_nd hr_L7
                 {2, 3, 4, 5} hmdvd (by rw [inter2345_eq]; exact hgap)
@@ -1794,7 +1930,7 @@ private theorem case_63 (hm : 2 ≤ m)
                       by_contra hgt; push_neg at hgt
                       exact htop (dvd_trans (pow_dvd_pow 7 (by omega : m + 1 ≤ ν)) hνd)
                     omega
-                  subst hνeqm
+                  rw [hνeqm] at hνd
                   obtain ⟨lam, hlam, ⟨a, hfit⟩, hqe45⟩ :=
                     j3_control_top m h hlt d₁ d₂ d₃
                       (he₁_res.trans he₃_res.symm) (he₂_res.trans he₃_res.symm)
