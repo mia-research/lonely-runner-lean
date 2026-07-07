@@ -573,6 +573,94 @@ theorem qz_double_carry_one (m : ℕ) (hm : 1 ≤ m) (a : ℤ) (h : qz m (7 * a)
       Int.ediv_eq_zero_of_lt hr_nn hr_lt, zero_add]
   rw [h2adiv, hadiv]; push_cast; ring
 
+/-- **Doubling carry with one-sided pins from `q(7b)`.** The doubling carry
+`ε ∈ {0,1}` at level `m` always satisfies `q(2b) = 2·q(b) + ε`, and the
+level-`(m−1)` digit `q(7b)` pins it one-sidedly: `q(7b) ∈ {0,1,2}` forces
+`ε = 0` (low part `< 3·7^{m−1}`, doubling stays under `7^m`), `q(7b) ∈ {4,5,6}`
+forces `ε = 1` (low part `≥ 4·7^{m−1}`, doubling overflows). Only `q(7b) = 3`
+is ambiguous — six usable pin values for one `Λ₁` knob, vs two for
+`qz_double_no_carry`/`qz_double_carry_one`. This closes the `ν(e₄₅)=1` knob
+collision in the §6.3 fallback (`fallback_63_l1`). -/
+theorem qz_double_pin (m : ℕ) (hm : 1 ≤ m) (b : ℤ) :
+    ∃ ε : ZMod 7, (ε = 0 ∨ ε = 1) ∧ qz m (2 * b) = 2 * qz m b + ε ∧
+      ((qz m (7 * b) = 0 ∨ qz m (7 * b) = 1 ∨ qz m (7 * b) = 2) → ε = 0) ∧
+      ((qz m (7 * b) = 4 ∨ qz m (7 * b) = 5 ∨ qz m (7 * b) = 6) → ε = 1) := by
+  simp only [qz]
+  set P := (7 : ℤ) ^ m with hP_def
+  set Pm1 := (7 : ℤ) ^ (m - 1) with hPm1_def
+  have hP_pos : (0 : ℤ) < P := by positivity
+  have hPm1_pos : (0 : ℤ) < Pm1 := by positivity
+  have hPeq : P = 7 * Pm1 := by rw [hP_def, hPm1_def, ← pow_succ']; congr 1; omega
+  set Q := b / P with hQ_def
+  set R := b % P with hR_def
+  have hRnn : 0 ≤ R := Int.emod_nonneg b (ne_of_gt hP_pos)
+  have hRlt : R < P := Int.emod_lt_of_pos b hP_pos
+  have hbdecomp : b = R + P * Q := by
+    have := Int.ediv_add_emod b P; rw [← hQ_def, ← hR_def] at this; linarith
+  set D₁ := R / Pm1 with hD_def
+  set r0 := R % Pm1 with hr0_def
+  have hr0nn : 0 ≤ r0 := Int.emod_nonneg R (ne_of_gt hPm1_pos)
+  have hr0lt : r0 < Pm1 := Int.emod_lt_of_pos R hPm1_pos
+  have hRexp : R = r0 + Pm1 * D₁ := by
+    have := Int.ediv_add_emod R Pm1; rw [← hD_def, ← hr0_def] at this; linarith
+  have hD_nn : 0 ≤ D₁ := Int.ediv_nonneg hRnn (le_of_lt hPm1_pos)
+  have hD_lt : D₁ < 7 := by
+    rw [hD_def, Int.ediv_lt_iff_lt_mul hPm1_pos]; nlinarith [hRlt, hPeq]
+  set s := 2 * R / P with hs_def
+  have hs_nn : 0 ≤ s := Int.ediv_nonneg (by linarith) (le_of_lt hP_pos)
+  have hs_lt : s < 2 := by rw [hs_def, Int.ediv_lt_iff_lt_mul hP_pos]; linarith
+  have h2bP : 2 * b / P = s + 2 * Q := by
+    rw [show 2 * b = 2 * R + P * (2 * Q) from by rw [hbdecomp]; ring,
+      Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos), hs_def]
+  have h7bP : 7 * b / P = D₁ + 7 * Q := by
+    rw [show (7 : ℤ) * b = (7 * r0) + P * (D₁ + 7 * Q) from by
+          rw [hbdecomp, hRexp, hPeq]; ring,
+        Int.add_mul_ediv_left _ _ (ne_of_gt hP_pos),
+        Int.ediv_eq_zero_of_lt (by linarith) (by rw [hPeq]; linarith), zero_add]
+  have hD1_lit : ∀ c : ℤ, 0 ≤ c → c < 7 →
+      ((7 * b / P : ℤ) : ZMod 7) = ((c : ℤ) : ZMod 7) → D₁ = c := by
+    intro c hc0 hc7 hcast
+    have key : ((D₁ - c : ℤ) : ZMod 7) = 0 := by
+      rw [h7bP] at hcast
+      have h7z : (7 : ZMod 7) = 0 := by decide
+      push_cast at hcast ⊢
+      rw [h7z] at hcast
+      rw [← hcast]; ring
+    rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at key
+    obtain ⟨k, hk⟩ := key
+    omega
+  have hs_low : D₁ ≤ 2 → s = 0 := by
+    intro hD2
+    rw [hs_def]
+    apply Int.ediv_eq_zero_of_lt (by linarith)
+    rw [hRexp, hPeq]
+    nlinarith [mul_le_mul_of_nonneg_left hD2 (le_of_lt hPm1_pos)]
+  have hs_high : 4 ≤ D₁ → s = 1 := by
+    intro hD4
+    have h1 : 1 ≤ s := by
+      rw [hs_def, Int.le_ediv_iff_mul_le hP_pos, one_mul, hRexp, hPeq]
+      nlinarith [mul_le_mul_of_nonneg_left hD4 (le_of_lt hPm1_pos)]
+    omega
+  refine ⟨(s : ZMod 7), ?_, ?_, ?_, ?_⟩
+  · interval_cases s
+    · left; decide
+    · right; decide
+  · rw [h2bP]; push_cast; ring
+  · intro h
+    have hD : D₁ ≤ 2 := by
+      rcases h with h | h | h
+      · have := hD1_lit 0 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+      · have := hD1_lit 1 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+      · have := hD1_lit 2 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+    rw [hs_low hD]; decide
+  · intro h
+    have hD : 4 ≤ D₁ := by
+      rcases h with h | h | h
+      · have := hD1_lit 4 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+      · have := hD1_lit 5 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+      · have := hD1_lit 6 (by norm_num) (by norm_num) (by rw [h]; norm_num); omega
+    rw [hs_high hD]; decide
+
 /-- **Two-carry cascade from `q(7b)` (BS L659, the `q(7d₃)=4ε₁+2ε₂` pin).** Setting
 the level-`(m−1)` digit `q(7b)` to the *even* value `4ε₁+2ε₂` (`ε₁,ε₂ ∈ {0,1}`)
 pins both the doubling carry of `b` (`= ε₁`) and the quadrupling carry

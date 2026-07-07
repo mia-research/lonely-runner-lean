@@ -1411,6 +1411,33 @@ private theorem fallback_63_lo (et34 cc : ZMod 7)
   revert het hcc; revert et34 cc; decide
 
 set_option maxHeartbeats 3200000 in
+/-- **`(3,1,1)` ratio-3 h=m, `ν(e₄₅)=1` seven-pin endgame** (BS L652–661 edge).
+At `ν(e₄₅)=1` the single `Λ₁` knob moves the `d₃`-doubling pin `p = q(7·d₃)`
+and `q(e₄₅) = e0 + p·rho` (slope `rho ≠ 0`) in lockstep, so neither can be set
+independently. But pins `{0,1,2}` force doubling carry `ε₁ = 0` and pins
+`{4,5,6}` force `ε₁ = 1` (`qz_double_pin`); at `p = 3` either carry may occur
+and the pin chosen below wins for both. For every `(T34, e0, rho)` some pin `p`
+admits a base `Atar` placing `A₁` at `{Atar,Atar+1,Atar+3}`, `d₄` at
+`2·Atar+ε₁−T34`, and the `d₅` BASE `4·Atar+2·ε₁−2·T34−(e0+p·rho)` inside
+`{2,3,4}` — so the uncontrolled `qz_2xsuby` carry `cc ∈ {0,1,6}` keeps `d₅`
+inside `{1,…,5}`. Verified: `experiments/c63_nu1_pin7_decide_v1.py` (126 cfgs),
+`experiments/c63_nu1_pin7_intsim_v1.py` (6000 integer cfgs end-to-end). -/
+private theorem fallback_63_l1 (T34 e0 rho : ZMod 7)
+    (hT34 : T34 ∈ ({3, 4, 5} : Finset (ZMod 7))) (hrho : rho ≠ 0) :
+    ∃ p : ZMod 7, ∀ e1 : ZMod 7, (e1 = 0 ∨ e1 = 1) →
+      ((p = 0 ∨ p = 1 ∨ p = 2) → e1 = 0) →
+      ((p = 4 ∨ p = 5 ∨ p = 6) → e1 = 1) →
+      ∃ Atar : ZMod 7,
+        Atar ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        Atar + 1 ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        Atar + 3 ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        2 * Atar + e1 - T34 ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        (4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 2 ∨
+          4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 3 ∨
+          4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 4) := by
+  revert hT34 hrho; revert T34 e0 rho; decide
+
+set_option maxHeartbeats 3200000 in
 set_option maxRecDepth 4000 in
 /-- **`(3,1,1)` ratio-3 h<m, `ν(e₄₅)=ν(e₁₃)` diff-arc decide** (BS L607–632, `+`-sign).
 Everything is at level `h`, so a `Λ_h` shift `k` moves the four diff-arcs linearly:
@@ -1948,8 +1975,125 @@ private theorem case_63 (hm : 2 ≤ m)
                         = 4 * Atar - 2 * et34 + cc from by rw [← het34eq]; ring]
                     exact hd5a
                 by_cases hν1 : ν45 = 1
-                · -- ν(e₄₅)=1: e₄₅ and the d₃-doubling collide at level 1. OPEN.
-                  sorry
+                · -- ν(e₄₅)=1: e₄₅ and the d₃-doubling share the single Λ₁ knob. The
+                  -- knob moves the pin p := q(7·w·d₃) and q(w·e₄₅) = e0p + p·rho in
+                  -- lockstep; `qz_double_pin` reads the doubling carry off SIX of the
+                  -- seven pin values (only p = 3 is ambiguous, and there either carry
+                  -- wins), and `fallback_63_l1` picks a winning pin.
+                  have hpow : (7 : ℤ) ^ (m - 1) * 7 = 7 ^ m := by
+                    rw [← pow_succ]; congr 1; omega
+                  obtain ⟨se, hse⟩ := h7_e45u
+                  have hse_ne : ((se : ℤ) : ZMod 7) ≠ 0 := by
+                    intro h0
+                    obtain ⟨t, ht⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd se 7).mp h0
+                    refine hν45_ndvd ?_
+                    rw [hν1]
+                    exact ⟨t, by rw [hse, ht]; ring⟩
+                  set rho : ZMod 7 := r * ((se : ℤ) : ZMod 7) with hrho_def
+                  have hrho_ne : rho ≠ 0 := mul_ne_zero hr_ne hse_ne
+                  set P0 : ZMod 7 := qz m (7 * (u_int * d₃)) with hP0_def
+                  set e0p : ZMod 7 := qz m e45u - P0 * rho with he0p_def
+                  obtain ⟨p, hp_prop⟩ := fallback_63_l1 (qz m e34u) e0p rho hgap hrho_ne
+                  -- Λ₁ retarget realizing the chosen pin: q(7·w·d₃) = p.
+                  have h7d3_dvd : (7 : ℤ) ^ 1 ∣ 7 * (u_int * d₃) := ⟨u_int * d₃, by ring⟩
+                  have h7d3_ndvd : ¬ (7 : ℤ) ^ (1 + 1) ∣ 7 * (u_int * d₃) := by
+                    rintro ⟨c2, hc2⟩
+                    refine hd3_nd ⟨c2, mul_left_cancel₀ (show (7 : ℤ) ≠ 0 by norm_num) ?_⟩
+                    rw [hc2]; ring
+                  obtain ⟨k₂, hqk₂, hk₂u⟩ :=
+                    qz_retarget m 1 (by omega) (7 * (u_int * d₃)) h7d3_dvd h7d3_ndvd p
+                  set w : ℤ := (1 + k₂ * 7 ^ (m - 1)) * u_int with hw_def
+                  have hw_res : (w : ZMod 7) = r⁻¹ := by
+                    rw [hw_def]; push_cast
+                    rw [seven_eq_zero_z7, zero_pow (show m - 1 ≠ 0 by omega), mul_zero,
+                      add_zero, hu_cast, one_mul]
+                  have hw_ndvd : ¬ (7 : ℤ) ∣ w := by
+                    rw [hw_def]; intro hdvd
+                    rcases hp7.dvd_mul.mp hdvd with hh | hh
+                    · exact hk₂u hh
+                    · exact hu_ndvd hh
+                  have hpin : qz m (7 * (w * d₃)) = p := by
+                    rw [show 7 * (w * d₃) = (1 + k₂ * 7 ^ (m - 1)) * (7 * (u_int * d₃)) from by
+                      rw [hw_def]; ring]
+                    exact hqk₂
+                  -- Knob residue: κ·r⁻¹ = p − P0 (exact level-m shift, no carry).
+                  have hP0p : P0 = p - (k₂ : ZMod 7) * r⁻¹ := by
+                    have hsplit7 : 7 * (u_int * d₃)
+                        = 7 * (w * d₃) - 7 ^ m * (k₂ * (u_int * d₃)) := by
+                      rw [hw_def, ← hpow]; ring
+                    rw [hP0_def, hsplit7, qz_sub_mul_pow, hpin]
+                    push_cast
+                    rw [hu_cast, he₃_res]; ring
+                  -- q(w·e₄₅) = e0p + p·rho (the lockstep shift of the level-1 e₄₅).
+                  have hEval : qz m (w * (2 * d i₄ - d i₅)) = e0p + p * rho := by
+                    have hsplit : e45u = w * (2 * d i₄ - d i₅) - 7 ^ m * (k₂ * se) := by
+                      have h1 : w * (2 * d i₄ - d i₅) = e45u + k₂ * 7 ^ (m - 1) * e45u := by
+                        rw [hw_def, he45u_def]; ring
+                      rw [h1, hse, ← hpow]; ring
+                    have h2 := qz_sub_mul_pow m (w * (2 * d i₄ - d i₅)) (k₂ * se)
+                    rw [← hsplit] at h2
+                    have hκ : (k₂ : ZMod 7) = (p - P0) * r := by
+                      have h3 : (k₂ : ZMod 7) * r⁻¹ = p - P0 := by rw [hP0p]; ring
+                      calc (k₂ : ZMod 7) = (k₂ : ZMod 7) * r⁻¹ * r := by
+                            rw [mul_assoc, inv_mul_cancel₀ hr_ne, mul_one]
+                        _ = (p - P0) * r := by rw [h3]
+                    rw [he0p_def, hrho_def]
+                    push_cast at h2
+                    rw [hκ] at h2
+                    linear_combination -h2
+                  -- Doubling carry of w·d₃, pinned one-sidedly by p.
+                  obtain ⟨ε, hε01, hdbl, hεlow, hεhigh⟩ := qz_double_pin m (by omega) (w * d₃)
+                  obtain ⟨Atar, hA0, hA1, hA3, hd4a, hd5base⟩ :=
+                    hp_prop ε hε01
+                      (fun hp => hεlow (by rw [hpin]; exact hp))
+                      (fun hp => hεhigh (by rw [hpin]; exact hp))
+                  -- A₁ arcs {A₀, A₀+1, A₀+3}; d₄ via e₃₄ (level m); d₅ via the carry.
+                  set A₀ : ZMod 7 := qz m (w * d₃) with hA₀_def
+                  have harc₁ : qz m (w * d₁) = A₀ + 1 := by
+                    rw [hA₀_def, qz_top_affine m w d₁ d₃ hd1, hw_res, ← hr_def,
+                      inv_mul_cancel₀ hr_ne]
+                  have harc₂ : qz m (w * d₂) = A₀ + 3 := by
+                    rw [hA₀_def, qz_top_affine m w d₂ d₃ hd2, hw_res, hr3]
+                    congr 1
+                    rw [show r⁻¹ * (3 * r) = 3 * (r⁻¹ * r) from by ring,
+                      inv_mul_cancel₀ hr_ne, mul_one]
+                  have hd4split : w * d i₄ = 2 * (w * d₃) - 7 ^ m * (w * γ') := by
+                    linear_combination -w * hγ'
+                  have hqγ' : ((w * γ' : ℤ) : ZMod 7) = qz m e34u := by
+                    push_cast; rw [hw_res, hT34γ', ← mul_assoc, inv_mul_cancel₀ hr_ne, one_mul]
+                  have harc₄ : qz m (w * d i₄) = 2 * A₀ + ε - qz m e34u := by
+                    rw [hd4split, qz_sub_mul_pow, hdbl, hqγ']
+                  obtain ⟨cc, hcc, hccarry⟩ := qz_2xsuby_carry m (w * d i₄) (w * d i₅)
+                  rw [show 2 * (w * d i₄) - w * d i₅ = w * (2 * d i₄ - d i₅) from by ring,
+                    hEval] at hccarry
+                  have harc₅ : qz m (w * d i₅)
+                      = 4 * A₀ + 2 * ε - 2 * qz m e34u - (e0p + p * rho) + cc := by
+                    rw [harc₄] at hccarry
+                    linear_combination hccarry
+                  -- Λ_m base shift to Atar and final assembly.
+                  refine lift_shift m (by omega) d w hw_ndvd (Atar - A₀) (fun i => ?_)
+                  rcases hi_tri i with ⟨k₀, hk₀⟩ | hi | hi
+                  · subst hk₀; rw [hg₁_res k₀, mul_one, show d (g₁ k₀) = b₁ k₀ from rfl]
+                    have hmem : qz m (w * b₁ k₀) ∈
+                        ({qz m (w * d₁), qz m (w * d₂), qz m (w * d₃)} : Finset (ZMod 7)) := by
+                      rw [← hset_eq w]; fin_cases k₀ <;> simp
+                    rw [harc₁, harc₂, ← hA₀_def] at hmem
+                    simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+                    rcases hmem with h' | h' | h'
+                    · rw [h', show A₀ + 1 + (Atar - A₀) = Atar + 1 from by ring]; exact hA1
+                    · rw [h', show A₀ + 3 + (Atar - A₀) = Atar + 3 from by ring]; exact hA3
+                    · rw [h', show A₀ + (Atar - A₀) = Atar from by ring]; exact hA0
+                  · subst hi
+                    rw [hi₄_res, harc₄,
+                      show 2 * A₀ + ε - qz m e34u + (Atar - A₀) * 2
+                        = 2 * Atar + ε - qz m e34u from by ring]
+                    exact hd4a
+                  · subst hi
+                    rw [hi₅_res, harc₅,
+                      show 4 * A₀ + 2 * ε - 2 * qz m e34u - (e0p + p * rho) + cc + (Atar - A₀) * 4
+                        = (4 * Atar + 2 * ε - 2 * qz m e34u - (e0p + p * rho)) + cc from by ring]
+                    rcases hd5base with hb | hb | hb <;> rw [hb] <;>
+                      rcases hcc with rfl | rfl | rfl <;> decide
                 · have hν45_ge2 : 2 ≤ ν45 := by omega
                   obtain ⟨k_r, hqr, hk_ru⟩ :=
                     qz_retarget m ν45 hν45_lt e45u hν45_dvd hν45_ndvd 0
