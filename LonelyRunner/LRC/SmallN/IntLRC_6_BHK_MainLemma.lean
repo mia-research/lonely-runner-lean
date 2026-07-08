@@ -2162,10 +2162,7 @@ lemma bhk_corollary_6_case_C_helper
       have hk : f (a - b) = 0 := by
         rw [map_sub, hfab, sub_self]
       simpa [f] using hk
-    refine ⟨(a - b).val, h_sub_in, ?_, Or.inl h_sub_proj⟩
-    intro h_val_zero
-    apply h_sub_ne
-    exact Subtype.ext h_val_zero
+    exact ⟨(a - b).val, h_sub_in, fun h => h_sub_ne (Subtype.ext h), Or.inl h_sub_proj⟩
 
 /-- **Small-`i` witness for Corollary 6 (Cases A & B).**
 

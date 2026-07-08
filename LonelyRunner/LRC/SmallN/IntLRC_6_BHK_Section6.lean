@@ -472,8 +472,7 @@ lemma bhk_s6_opposite (V3 V4 D : ℕ) (hD : 0 < D) (hv3pos : 0 < V3)
           (0 : ℝ) < 3 * V3))
         calc 1 * (V4 : ℝ) = V4 := by ring
         _ = (V4 : ℝ) / (3 * V3) * (3 * V3) := by field_simp
-        _ ≤ (1/2 - p) * (3 * V3) := by
-            exact mul_le_mul_of_nonneg_right key (by positivity)
+        _ ≤ (1/2 - p) * (3 * V3) := mul_le_mul_of_nonneg_right key (by positivity)
       linarith
     · have key : 1/2 - p ≤ 5 * (V4 : ℝ) / (6 * V3) := by
         have h12 : (1 : ℝ)/2 ≤ 5 * (V4 : ℝ) / (6 * V3) := by
@@ -483,8 +482,8 @@ lemma bhk_s6_opposite (V3 V4 D : ℕ) (hD : 0 < D) (hv3pos : 0 < V3)
       have h1 : (1/2 - p) / V4 ≤ 5 / (6 * (V3 : ℝ)) := by
         rw [div_le_div_iff₀ hv4R (by positivity)]
         calc (1/2 - p) * (6 * (V3 : ℝ))
-            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) := by
-              exact mul_le_mul_of_nonneg_right key (by positivity)
+            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) :=
+              mul_le_mul_of_nonneg_right key (by positivity)
         _ = 5 * (V4 : ℝ) := by field_simp
         _ = 5 * V4 := by ring
       linarith
@@ -504,15 +503,14 @@ lemma bhk_s6_opposite (V3 V4 D : ℕ) (hD : 0 < D) (hv3pos : 0 < V3)
       have h1 : 1 / (3 * (V3 : ℝ)) ≤ (3/2 - p) / V4 := by
         rw [div_le_div_iff₀ (by positivity) hv4R]
         calc 1 * (V4 : ℝ) = (V4 : ℝ) / (3 * V3) * (3 * V3) := by field_simp
-        _ ≤ (3/2 - p) * (3 * V3) := by
-            exact mul_le_mul_of_nonneg_right key (by positivity)
+        _ ≤ (3/2 - p) * (3 * V3) := mul_le_mul_of_nonneg_right key (by positivity)
       linarith
     · have key : 3/2 - p ≤ 5 * (V4 : ℝ) / (6 * V3) := by linarith
       have h1 : (3/2 - p) / V4 ≤ 5 / (6 * (V3 : ℝ)) := by
         rw [div_le_div_iff₀ hv4R (by positivity)]
         calc (3/2 - p) * (6 * (V3 : ℝ))
-            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) := by
-              exact mul_le_mul_of_nonneg_right key (by positivity)
+            ≤ 5 * (V4 : ℝ) / (6 * V3) * (6 * V3) :=
+              mul_le_mul_of_nonneg_right key (by positivity)
         _ = 5 * V4 := by field_simp
       linarith
     · have heq : (V4 : ℝ) * ((j : ℝ) / D + (3/2 - p) / V4)

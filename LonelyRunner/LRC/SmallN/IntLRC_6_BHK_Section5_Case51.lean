@@ -42,46 +42,6 @@ lemma circDist_le_abs_sub_int (x : ℝ) (m : ℤ) : circDist x ≤ |x - (m : ℝ
   rw [circDist_eq_infDist, ← Real.dist_eq]
   exact Metric.infDist_le_dist_of_mem ⟨m, rfl⟩
 
-/-- `circDist` is realised by an integer: `∃ m, circDist x = |x − m|`.  The
-    nearest integer is `⌊x⌋` (when `{x} ≤ 1/2`) or `⌊x⌋ + 1` (otherwise). -/
-lemma circDist_exists_int (x : ℝ) : ∃ m : ℤ, circDist x = |x - (m : ℝ)| := by
-  have hfr0 : 0 ≤ Int.fract x := Int.fract_nonneg x
-  have hfr1 : Int.fract x < 1 := Int.fract_lt_one x
-  by_cases h : Int.fract x ≤ 1 / 2
-  · refine ⟨⌊x⌋, ?_⟩
-    have hxe : x - (⌊x⌋ : ℝ) = Int.fract x := by rw [Int.fract]
-    rw [hxe, abs_of_nonneg hfr0]
-    unfold circDist
-    rw [min_eq_left (show Int.fract x ≤ 1 - Int.fract x by linarith)]
-  · rw [not_le] at h
-    refine ⟨⌊x⌋ + 1, ?_⟩
-    have hxe : x - ((⌊x⌋ + 1 : ℤ) : ℝ) = -(1 - Int.fract x) := by
-      rw [Int.fract]; push_cast; ring
-    rw [hxe, abs_neg, abs_of_nonneg (by linarith)]
-    unfold circDist
-    rw [min_eq_right (show 1 - Int.fract x ≤ Int.fract x by linarith)]
-
-/-- **Triangle inequality for `circDist`** (the circle is a metric space):
-    `circDist a ≤ circDist b + circDist (a − b)`. -/
-lemma circDist_triangle (a b : ℝ) :
-    circDist a ≤ circDist b + circDist (a - b) := by
-  obtain ⟨m, hm⟩ := circDist_exists_int b
-  obtain ⟨k, hk⟩ := circDist_exists_int (a - b)
-  calc circDist a ≤ |a - ((m + k : ℤ) : ℝ)| := circDist_le_abs_sub_int a (m + k)
-    _ = |(b - (m : ℝ)) + ((a - b) - (k : ℝ))| := by push_cast; ring_nf
-    _ ≤ |b - (m : ℝ)| + |(a - b) - (k : ℝ)| := abs_add_le _ _
-    _ = circDist b + circDist (a - b) := by rw [hm, hk]
-
-/-- Lower-bound form: `circDist a ≥ circDist b − circDist (a − b)`.  If runner
-    `b` is safe with margin exceeding the closeness `circDist (a − b)`, runner
-    `a` is safe too. -/
-lemma circDist_ge_sub (a b : ℝ) :
-    circDist a ≥ circDist b - circDist (a - b) := by
-  have h := circDist_triangle b a
-  have hsymm : circDist (b - a) = circDist (a - b) := by
-    rw [show b - a = -(a - b) from by ring, circDist.symm_neg]
-  rw [hsymm] at h; linarith
-
 /-! ## Case 5.1 specific structure -/
 
 /-- In Case 5.1, `D = v₃ − v₂ > 0`. -/
@@ -98,31 +58,6 @@ lemma bhk_s5_case51_D_cast (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds) 
   have h12 : speeds ⟨1, by omega⟩ ≤ speeds ⟨2, by omega⟩ := by
     apply le_of_lt; apply hmono; exact Fin.mk_lt_mk.mpr (by omega)
   rw [hD, Nat.cast_sub h12]
-
-/-- **Runner 1 has period `1/D`.**  Since `v₁ = k·D`, `D ∣ v₁`, so advancing
-    time by `1/D` leaves runner 1's circle-distance unchanged. -/
-lemma bhk_s5_case51_period1 (speeds : Fin 5 → ℕ) (k D : ℕ) (hDpos : 0 < D)
-    (hkD : speeds ⟨0, by omega⟩ = D * k) (t : ℝ) :
-    circDist ((speeds ⟨0, by omega⟩ : ℝ) * (t + 1 / D))
-      = circDist ((speeds ⟨0, by omega⟩ : ℝ) * t) := by
-  have hdvd : D ∣ speeds ⟨0, by omega⟩ := ⟨k, hkD⟩
-  exact bhk_prop11_period (speeds ⟨0, by omega⟩) D hDpos hdvd t
-
-/-- **2,3-closeness (BHK eqn (31)).**  Runner 3's circle distance is at least
-    runner 2's minus the runner-`D` closeness:
-    `circDist (v₃ t) ≥ circDist (v₂ t) − circDist (D t)`.  When `circDist (D t)`
-    is small (the window `{D·t} ≤ 1/6`), a safe runner 2 with margin forces a
-    safe runner 3, which is what lengthens the 23-gap in Case 5.1. -/
-lemma bhk_s5_case51_runner3_close (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
-    (D : ℕ) (hD : D = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩) (t : ℝ) :
-    circDist ((speeds ⟨2, by omega⟩ : ℝ) * t)
-      ≥ circDist ((speeds ⟨1, by omega⟩ : ℝ) * t) - circDist ((D : ℝ) * t) := by
-  have hDcast := bhk_s5_case51_D_cast speeds hmono D hD
-  have hkey : (speeds ⟨2, by omega⟩ : ℝ) * t - (speeds ⟨1, by omega⟩ : ℝ) * t
-      = (D : ℝ) * t := by rw [hDcast]; ring
-  have h := circDist_ge_sub ((speeds ⟨2, by omega⟩ : ℝ) * t)
-    ((speeds ⟨1, by omega⟩ : ℝ) * t)
-  rwa [hkey] at h
 
 /-- **Claim 9 arithmetic core (main case).**  The flanking pieces of `I₁`, `I₃`
     around a 4-block in `I₂` sum to `5/(3v₄) − 1/(2v₃)` and are each `< 1/(3v₅)`,
@@ -285,15 +220,6 @@ lemma bhk_s5_case51_x4_incompatible (x₄ : ℝ) (i l : ℕ) (hil : i ≤ l)
   have hkey : (6 * (i : ℝ) + 2) / (6 * i + 3) ≤ (6 * (l : ℝ) + 3) / (6 * l + 4) := by
     rw [div_le_div_iff₀ d2 d1]; nlinarith [hl, hi0]
   linarith
-
-/-- **BHK eqn (30) extraction.**  A multiple configuration of `l+1` gaps spanned
-    by runner-4 blocks gives `(l + 2/3)·x₄ > l + 1/2` (eqn (29) arithmetic);
-    hence `x₄ > (6l+3)/(6l+4)`.  This is the bound fed to
-    `bhk_s5_case51_x4_incompatible`.  (`l = 1` recovers eqn (27), `x₄ > 9/10`.) -/
-lemma bhk_s5_case51_eqn30 (x₄ : ℝ) (l : ℕ)
-    (h : (l + 2 / 3) * x₄ > (l : ℝ) + 1 / 2) :
-    (6 * (l : ℝ) + 3) / (6 * l + 4) < x₄ := by
-  rw [div_lt_iff₀ (by positivity)]; nlinarith [h]
 
 /-- **BHK eqn (33) extraction.**  The configuration's placement (`t = i + 1/3`)
     gives `(i + 1/2)·x₄ < i + 1/3`; hence `x₄ < (6i+2)/(6i+3)`.  The upper bound
@@ -1111,81 +1037,6 @@ lemma bhk_s5_case51_gap_meets_block (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < 
     (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) hab hsub5
   rw [add_sub_cancel_left, div_lt_div_iff₀ (by positivity) (by positivity)] at hlen
   linarith
-
-/-- **A covered 123-gap with no full 4-block has a *straddling* block.**  By
-    `gap_meets_block` some block `m` overlaps `G = [a, a+1/(2v₃)]`; since `G`
-    contains no full 4-block (`hnofull`), block `m` must extend past one endpoint
-    of `G` (left edge `< a`, or right edge `> a+1/(2v₃)`).  This pins the block at
-    an end of the gap — step 1–2 of the span bound (29)/(30). -/
-lemma bhk_s5_case51_gap_straddle (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
-    (hcover : ∀ t : ℝ, ∃ i, circDist ((speeds i : ℝ) * t) < 1 / 6) (a : ℝ)
-    (hgap : ∀ s ∈ Set.Icc a (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))),
-      ∀ i : Fin 3, (1 : ℝ) / 6 ≤ circDist ((speeds ⟨i.val, by omega⟩ : ℝ) * s))
-    (h35 : (speeds ⟨2, by omega⟩ : ℝ) < (speeds ⟨4, by omega⟩ : ℝ))
-    (hnofull : ∀ m : ℤ, ¬ (a ≤ ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
-      ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
-        ≤ a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))) :
-    ∃ m : ℤ, a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) ∧
-      ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
-        < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)) ∧
-      (((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < a ∨
-        a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
-          < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)) := by
-  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
-  obtain ⟨p, hpG, hpB⟩ := bhk_s5_case51_gap_meets_block speeds hpos hcover a hgap h35
-  rw [mem_unsafeOf_iff_bhkB] at hpB
-  obtain ⟨m, hm⟩ := hpB
-  have habs := abs_lt.mp hm
-  have hpl : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < p := by
-    rw [div_lt_iff₀ hv4]; nlinarith [habs.1]
-  have hpr : p < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) := by
-    rw [lt_div_iff₀ hv4]; nlinarith [habs.2]
-  refine ⟨m, by linarith [hpG.1, hpr], by linarith [hpl, hpG.2], ?_⟩
-  by_contra hcon
-  push_neg at hcon
-  exact hnofull m ⟨hcon.1, hcon.2⟩
-
-/-- **At most one 4-block overlaps a length-`1/(2v₃)` gap.**  Two blocks `m < m'`
-    both overlapping `[a, a+1/(2v₃)]` would have
-    `(m'−1/6)/v₄ − (m+1/6)/v₄ < 1/(2v₃)`, but `m'−m ≥ 1` makes that difference
-    `≥ (2/3)/v₄ > 1/(2v₃)` (eqn 22, `3v₄ < 4v₃`) — impossible.  So the straddling
-    block from `gap_straddle` is *the* block meeting the gap. -/
-lemma bhk_s5_case51_block_unique (speeds : Fin 5 → ℕ) (hpos : ∀ i, 0 < speeds i)
-    (h22 : 3 * (speeds ⟨3, by omega⟩ : ℝ) < 4 * (speeds ⟨2, by omega⟩ : ℝ)) (a : ℝ)
-    (m m' : ℤ)
-    (hm : a < ((m : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
-    (hm2 : ((m : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
-      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
-    (hm' : a < ((m' : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ))
-    (hm'2 : ((m' : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ)
-      < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) :
-    m = m' := by
-  have hv3 : (0 : ℝ) < (speeds ⟨2, by omega⟩ : ℝ) := by exact_mod_cast hpos _
-  have hv4 : (0 : ℝ) < (speeds ⟨3, by omega⟩ : ℝ) := by exact_mod_cast hpos _
-  -- Helper: `p < q` (integers) is impossible for two overlapping blocks.
-  have key : ∀ p q : ℤ, p < q → a < ((p : ℝ) + 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) →
-      ((q : ℝ) - 1 / 6) / (speeds ⟨3, by omega⟩ : ℝ) < a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))
-        → False := by
-    intro p q hpq hp hq
-    have hpq' : (p : ℝ) + 1 ≤ q := by exact_mod_cast hpq
-    have h1 : a * (speeds ⟨3, by omega⟩ : ℝ) < (p : ℝ) + 1 / 6 := (lt_div_iff₀ hv4).mp hp
-    have h2 : (q : ℝ) - 1 / 6 < (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ)))
-        * (speeds ⟨3, by omega⟩ : ℝ) := (div_lt_iff₀ hv4).mp hq
-    have h2' : (q : ℝ) - 1 / 6 < a * (speeds ⟨3, by omega⟩ : ℝ)
-        + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
-      have he : (a + 1 / (2 * (speeds ⟨2, by omega⟩ : ℝ))) * (speeds ⟨3, by omega⟩ : ℝ)
-          = a * (speeds ⟨3, by omega⟩ : ℝ)
-            + (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
-        field_simp
-      linarith [h2, he]
-    have h3 : (2 : ℝ) / 3 < (speeds ⟨3, by omega⟩ : ℝ) / (2 * (speeds ⟨2, by omega⟩ : ℝ)) := by
-      linarith [h1, h2', hpq']
-    rw [lt_div_iff₀ (by positivity)] at h3
-    linarith
-  rcases lt_trichotomy m m' with h | h | h
-  · exact absurd (key m m' h hm hm'2) (by simp)
-  · exact h
-  · exact absurd (key m' m h hm' hm2) (by simp)
 
 /-- **The blocks of adjacent gaps differ by 1 or 2.**  If block `m` overlaps a
     gap `G = [a, a+1/(2v₃)]` and block `m'` overlaps the next gap

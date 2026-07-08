@@ -89,36 +89,6 @@ lemma bhk_prop11_circDist_add_int (x : ℝ) (n : ℤ) :
     circDist (x + (n : ℝ)) = circDist x := by
   unfold circDist; rw [Int.fract_add_intCast]
 
-/-- **BHK §5 Part 2 — periodicity (the engine of Lemma 12).** A runner whose
-    speed `v` is divisible by `g` has period `1/g`: its circle position repeats
-    after `1/g`. With `g = gcd(w₀, w₂)` this applies to runners 1, 2, 3 (since
-    `g ∣ w₀, w₁, w₂`), so every 0123-gap `I` translates to a 0123-gap `I + 1/g`
-    — BHK's "`I + iq` is again a 0123-gap". -/
-lemma bhk_prop11_period (v g : ℕ) (hg : 0 < g) (hdvd : g ∣ v) (t : ℝ) :
-    circDist ((v : ℝ) * (t + 1 / g)) = circDist ((v : ℝ) * t) := by
-  obtain ⟨c, hc⟩ := hdvd
-  have hgR : (g : ℝ) ≠ 0 := by exact_mod_cast hg.ne'
-  have heq : (v : ℝ) * (t + 1 / (g : ℝ)) = (v : ℝ) * t + ((c : ℤ) : ℝ) := by
-    rw [hc]; push_cast; field_simp
-  rw [heq, bhk_prop11_circDist_add_int]
-
-/-- **0123-gap translation.** If `g` divides the speeds of runners 1, 2, 3 then
-    any 123-gap `[a, b]` translates to the 123-gap `[a + 1/g, b + 1/g]`. With
-    `g = gcd(w₀, w₂)` this is BHK's "`I + iq` is again a 0123-gap". -/
-lemma bhk_prop11_gap123_translate (w : Fin 5 → ℕ) (g : ℕ) (hg : 0 < g)
-    (hdvd : ∀ i : Fin 3, g ∣ w ⟨i.val, by omega⟩)
-    {a b : ℝ}
-    (hgap : ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
-      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s)) :
-    ∀ s ∈ Set.Icc (a + 1 / g) (b + 1 / g), ∀ i : Fin 3,
-      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
-  intro s hs i
-  obtain ⟨hsl, hsu⟩ := hs
-  have hkey := hgap (s - 1 / g) ⟨by linarith, by linarith⟩ i
-  have hper := bhk_prop11_period (w ⟨i.val, by omega⟩) g hg (hdvd i) (s - 1 / g)
-  rw [show s - 1 / (g : ℝ) + 1 / (g : ℝ) = s from by ring] at hper
-  rw [hper]; exact hkey
-
 /-- **A long interval is in no single runner block.** A closed interval longer
     than `1/(3 wᵢ)` (the width of one `Bᵢ` block) cannot be contained in
     `unsafeOf wᵢ`: `block_containment` would force its length `< 1/(3 wᵢ)`. -/
@@ -1651,19 +1621,6 @@ lemma bhk_prop11_safe_on_Icc (v : ℝ) (k : ℤ) {a b : ℝ}
     exact Int.fract_eq_self.mpr ⟨by linarith, by linarith⟩
   simp only [circDist]; rw [hfr]
   exact le_min (by linarith) (by linarith)
-
-/-- **Assemble a `123`-gap** from the three per-runner safety facts. Packages
-    `∀ i : Fin 3` so the gap lemmas can consume it. -/
-lemma bhk_prop11_mk123 (w : Fin 5 → ℕ) {a b : ℝ}
-    (h0 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨0, by omega⟩ : ℝ) * s))
-    (h1 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨1, by omega⟩ : ℝ) * s))
-    (h2 : ∀ s ∈ Set.Icc a b, (1 : ℝ) / 6 ≤ circDist ((w ⟨2, by omega⟩ : ℝ) * s)) :
-    ∀ s ∈ Set.Icc a b, ∀ i : Fin 3,
-      (1 : ℝ) / 6 ≤ circDist ((w ⟨i.val, by omega⟩ : ℝ) * s) := by
-  intro s hs i; fin_cases i
-  · exact h0 s hs
-  · exact h1 s hs
-  · exact h2 s hs
 
 /-- **`1234`-gap span bound.** A `1234`-gap (runners 1,2,3,4 all `≥ 1/6`) is,
     under the covering assumption, contained in `B₅`, so `block_containment`

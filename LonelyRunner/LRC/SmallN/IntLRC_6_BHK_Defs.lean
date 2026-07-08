@@ -90,24 +90,6 @@ theorem bhkB_eq_iUnion_Ioo :
     refine ⟨k, ?_⟩
     rw [abs_lt]; exact ⟨by linarith, by linarith⟩
 
-/-- Single-interval inclusion: each unit-shift of `(-1/6, 1/6)` is contained
-    in `bhkB`. -/
-theorem Ioo_subset_bhkB (k : ℤ) :
-    Ioo ((k : ℝ) - 1 / 6) ((k : ℝ) + 1 / 6) ⊆ bhkB := by
-  intro x hx
-  rw [bhkB_eq_iUnion_Ioo]
-  exact mem_iUnion.mpr ⟨k, hx⟩
-
-/-- A point at `circDist ≥ 1/6` lies *outside* `bhkB`. The contrapositive of
-    `mem_bhkB_iff`, useful for showing safe times. -/
-theorem not_mem_bhkB_of_circDist_ge {x : ℝ} (hx : (1 : ℝ) / 6 ≤ circDist x) :
-    x ∉ bhkB := by
-  rw [mem_bhkB_iff]; linarith
-
-/-- Symmetric: `circDist ≥ 1/6` is exactly the safety condition outside `bhkB`. -/
-theorem not_mem_bhkB_iff (x : ℝ) : x ∉ bhkB ↔ (1 : ℝ) / 6 ≤ circDist x := by
-  rw [mem_bhkB_iff, not_lt]
-
 /-- `unsafeOf i` rescaled: `t ∈ unsafeOf i` iff `(v_i · t) ∈ bhkB`. -/
 theorem mem_unsafeOf_iff_bhkB (speeds : Fin 5 → ℕ) (i : Fin 5) (t : ℝ) :
     t ∈ unsafeOf speeds i ↔ (speeds i : ℝ) * t ∈ bhkB := Iff.rfl

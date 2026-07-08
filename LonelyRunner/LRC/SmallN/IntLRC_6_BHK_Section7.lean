@@ -494,37 +494,6 @@ lemma bhk_s7_neg_mod (n r m : ℕ) (hr : 0 < r) (hm : 0 < m) (hrm : r * m < n) :
     ring
   rw [h1, Nat.mul_add_mod, Nat.mod_eq_of_lt (Nat.sub_lt hn0 hppos)]
 
-/-- **Fract-to-residue conversion.** If `{a/n} = x/n` with `x < n` natural,
-    then `x = a mod n` (as integers). -/
-lemma bhk_s7_fract_int_eq (n : ℕ) (hn : 0 < n) (a : ℤ) (x : ℕ) (hx : x < n)
-    (h : Int.fract ((a : ℝ) / n) = (x : ℝ) / n) :
-    (x : ℤ) = a % n := by
-  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
-  have hnz : ((n : ℕ) : ℤ) ≠ 0 := by exact_mod_cast hn.ne'
-  have hmod : Int.fract ((a : ℝ) / n) = ((a % n : ℤ) : ℝ) / n := by
-    have h0 : a % (n : ℤ) + (n : ℤ) * (a / (n : ℤ)) = a := Int.emod_add_ediv a n
-    have hsplit : (a : ℝ) / n = ((a % n : ℤ) : ℝ) / n + ((a / (n : ℤ) : ℤ) : ℝ) := by
-      have hcast : (a : ℝ) = ((a % n : ℤ) : ℝ) + (n : ℝ) * ((a / (n : ℤ) : ℤ) : ℝ) := by
-        exact_mod_cast h0.symm
-      rw [hcast]
-      field_simp
-    rw [hsplit, Int.fract_add_intCast]
-    refine Int.fract_eq_self.mpr ⟨?_, ?_⟩
-    · exact div_nonneg (by exact_mod_cast Int.emod_nonneg a hnz) hnR.le
-    · rw [div_lt_one hnR]
-      exact_mod_cast Int.emod_lt_of_pos a (by exact_mod_cast hn)
-  rw [hmod] at h
-  rw [div_eq_div_iff hnR.ne' hnR.ne'] at h
-  have hcast : ((a % n : ℤ) : ℝ) = (x : ℝ) := mul_right_cancel₀ hnR.ne' h
-  exact_mod_cast hcast.symm
-
-/-- **Negative residues mod `n` over ℤ.** For `0 < r < n`:
-    `(−r) mod n = n − r`. -/
-lemma bhk_s7_int_neg_mod (n r : ℕ) (hr : 0 < r) (hrn : r < n) :
-    (-(r : ℤ)) % (n : ℤ) = (n : ℤ) - r := by
-  rw [show (-(r : ℤ)) = ((n : ℤ) - r) + (n : ℤ) * (-1) from by ring,
-      Int.add_mul_emod_self_left, Int.emod_eq_of_lt (by omega) (by omega)]
-
 /-- **Window form of mod.** If `q·n ≤ x < (q+1)·n` then `x % n = x − q·n`. -/
 lemma bhk_s7_mod_window (x q n : ℕ) (h1 : q * n ≤ x) (h2 : x < (q + 1) * n) :
     x % n = x - q * n := by
@@ -606,24 +575,6 @@ lemma bhk_s7_mem_pos (n c₃ c₁ k x y : ℕ) (hn : 0 < n)
     (((x : ℕ) : ℝ) / n, ((y : ℕ) : ℝ) / n) ∈ bhkS7Group n c₃ c₁ := by
   have h := bhk_s7_mem_mul n c₃ c₁ k hn 0 0
   rw [hres3, hres1] at h
-  simpa using h
-
-/-- **Torus membership, negative second coordinate.** The residue `n − y`
-    shifted by `−1` represents the integer point `−y/n`. -/
-lemma bhk_s7_mem_negsnd (n c₃ c₁ k x y : ℕ) (hn : 0 < n)
-    (hy : 0 < y) (hyn : y ≤ n)
-    (hres3 : c₃ * k % n = x) (hres1 : c₁ * k % n = n - y) :
-    (((x : ℕ) : ℝ) / n, ((-(y : ℤ) : ℤ) : ℝ) / n) ∈ bhkS7Group n c₃ c₁ := by
-  have h := bhk_s7_mem_mul n c₃ c₁ k hn 0 (-1)
-  rw [hres3, hres1] at h
-  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
-  have hkey : ((n - y : ℕ) : ℝ) / n + ((-1 : ℤ) : ℝ)
-      = ((-(y : ℤ) : ℤ) : ℝ) / n := by
-    rw [Nat.cast_sub hyn]
-    push_cast
-    field_simp
-    ring
-  rw [hkey] at h
   simpa using h
 
 /-- **Congruence-solver kernel.** If `a·m = q·n + Δ` with `Δ < n` then
@@ -969,101 +920,6 @@ theorem bhk_s7_corollary_6_minimal
       linarith [h_div, h_eq]
 
 /-! ## Rectangle hit ⟹ lonely time (extracted bridge) -/
-
-/-- **Rectangle hit ⟹ lonely time.** If the lifted group hits every
-    `2/3 × 2/9` rectangle — in particular the anchored rectangle
-    `[1/6, 5/6] × [7/18, 11/18]` — the §2 bridge produces a lonely time.
-    Extracted from the Corollary-6 branch of `bhk_s7_main` so the
-    exceptional-pair analysis (BHK (12) contrapositive) can reuse it. -/
-lemma bhk_s7_rect_hit_lonely (speeds : Fin 5 → ℕ) (hmono : StrictMono speeds)
-    (hpos : ∀ i, 0 < speeds i)
-    (hsmall : 3 * speeds ⟨0, by omega⟩ < speeds ⟨2, by omega⟩)
-    (n c₃ c₁ g : ℕ) (hn1 : 1 < n) (hgpos : 0 < g)
-    (hd : g * n = speeds ⟨2, by omega⟩ - speeds ⟨1, by omega⟩)
-    (hc3 : g * c₃ = speeds ⟨2, by omega⟩)
-    (hc1 : g * c₁ = speeds ⟨0, by omega⟩)
-    (hAll : ∀ x₁ x₂,
-      (bhkS7Group n c₃ c₁ ∩ bhkRectangle x₁ x₂ (2/3) (2/9)).Nonempty) :
-    ∃ t : ℝ, ∀ i, circDist ((speeds i : ℝ) * t) ≥ (1 : ℝ) / 6 := by
-  set V1 : ℕ := speeds ⟨0, by omega⟩ with hV1_def
-  set V2 : ℕ := speeds ⟨1, by omega⟩ with hV2_def
-  set V3 : ℕ := speeds ⟨2, by omega⟩ with hV3_def
-  have hV23 : V2 < V3 := hmono (Fin.mk_lt_mk.mpr (by omega))
-  have hV1pos : 0 < V1 := hpos _
-  have hV3pos : 0 < V3 := hpos _
-  set D : ℕ := V3 - V2 with hD_def
-  have hDpos : 0 < D := by omega
-  have hD_cast : ((D : ℕ) : ℝ) = (V3 : ℝ) - V2 := by
-    rw [hD_def, Nat.cast_sub hV23.le]
-  have hnpos : 0 < n := by omega
-  obtain ⟨p, hpG, hpR⟩ := hAll (1/6) (7/18)
-  obtain ⟨k, hk1, hk2⟩ := bhk_s7_extract n c₃ c₁ hn1 p hpG
-  obtain ⟨hpR1a, hpR1b, hpR2a, hpR2b⟩ := hpR
-  -- Anchored fract conditions transfer to {p.1}, {p.2}.
-  have hshift : ∀ x c : ℝ, Int.fract (x - c) = Int.fract (Int.fract x - c) := by
-    intro x c
-    conv_lhs => rw [← Int.fract_add_floor x]
-    rw [show Int.fract x + (⌊x⌋ : ℝ) - c = Int.fract x - c + (⌊x⌋ : ℤ) from by
-      push_cast; ring, Int.fract_add_intCast]
-  have hu_win := bhk_fract_window (Int.fract p.1) (1/6) (2/3)
-    (Int.fract_nonneg _) (Int.fract_lt_one _) (by norm_num) (by norm_num)
-    (by rw [← hshift]; exact hpR1b)
-  have hw_win := bhk_fract_window (Int.fract p.2) (7/18) (2/9)
-    (Int.fract_nonneg _) (Int.fract_lt_one _) (by norm_num) (by norm_num)
-    (by rw [← hshift]; exact hpR2b)
-  -- The meeting time.
-  set τ : ℝ := (k : ℝ) / D with hτ_def
-  have hgR : (0 : ℝ) < g := by exact_mod_cast hgpos
-  have hDR_pos : (0 : ℝ) < D := by exact_mod_cast hDpos
-  have hDR : ((D : ℕ) : ℝ) = (g : ℝ) * n := by exact_mod_cast hd.symm
-  have hV3R : ((V3 : ℕ) : ℝ) = (g : ℝ) * c₃ := by exact_mod_cast hc3.symm
-  have hV1R : ((V1 : ℕ) : ℝ) = (g : ℝ) * c₁ := by exact_mod_cast hc1.symm
-  have e3 : (V3 : ℝ) * τ = ((c₃ * k : ℕ) : ℝ) / n := by
-    rw [hτ_def, hV3R, hDR]
-    push_cast
-    field_simp
-  have e1 : (V1 : ℝ) * τ = ((c₁ * k : ℕ) : ℝ) / n := by
-    rw [hτ_def, hV1R, hDR]
-    push_cast
-    field_simp
-  have hu3 : Int.fract ((V3 : ℝ) * τ) = Int.fract p.1 := by rw [e3, hk1]
-  have hw1 : Int.fract ((V1 : ℝ) * τ) = Int.fract p.2 := by rw [e1, hk2]
-  have e2 : (V2 : ℝ) * τ = (V3 : ℝ) * τ - ((k : ℤ) : ℝ) := by
-    have hV2R : (V2 : ℝ) = (V3 : ℝ) - D := by rw [hD_cast]; ring
-    rw [hV2R, hτ_def]
-    field_simp
-    push_cast
-    ring
-  have h2eq : Int.fract ((V2 : ℝ) * τ) = Int.fract ((V3 : ℝ) * τ) := by
-    rw [e2, Int.fract_sub_intCast]
-  -- Window conditions (6) from the rectangle bounds and 3 V₁ < V₃.
-  have hsmallR : 3 * (V1 : ℝ) < V3 := by exact_mod_cast hsmall
-  have hV1Rpos : (0 : ℝ) < V1 := by exact_mod_cast hV1pos
-  have hV3Rpos : (0 : ℝ) < V3 := by exact_mod_cast hV3pos
-  have hu_lo : 1/6 ≤ Int.fract ((V3 : ℝ) * τ) := by rw [hu3]; exact hu_win.1
-  have hu_hi : Int.fract ((V3 : ℝ) * τ) ≤ 5/6 := by
-    rw [hu3]; have := hu_win.2; linarith
-  have hterm_lo : (Int.fract ((V3 : ℝ) * τ) - 1/6) * (V1 : ℝ) / (V3 : ℝ) ≤ 2/9 := by
-    rw [div_le_iff₀ hV3Rpos]
-    have hb := mul_le_mul_of_nonneg_right
-      (show Int.fract ((V3 : ℝ) * τ) - 1/6 ≤ 2/3 by linarith) hV1Rpos.le
-    linarith
-  have hterm_hi : (5/6 - Int.fract ((V3 : ℝ) * τ)) * (V1 : ℝ) / (V3 : ℝ) ≤ 2/9 := by
-    rw [div_le_iff₀ hV3Rpos]
-    have hb := mul_le_mul_of_nonneg_right
-      (show 5/6 - Int.fract ((V3 : ℝ) * τ) ≤ 2/3 by linarith) hV1Rpos.le
-    linarith
-  have hw_lo : 1/6 + (Int.fract ((V3 : ℝ) * τ) - 1/6) * (V1 : ℝ) / (V3 : ℝ)
-      ≤ Int.fract ((V1 : ℝ) * τ) := by
-    rw [hw1]
-    have := hw_win.1
-    linarith
-  have hw_hi : Int.fract ((V1 : ℝ) * τ)
-      ≤ 5/6 - (5/6 - Int.fract ((V3 : ℝ) * τ)) * (V1 : ℝ) / (V3 : ℝ) := by
-    rw [hw1]
-    have := hw_win.2
-    linarith
-  exact bhk_s7_window_lonely speeds hmono hpos τ hu_lo hu_hi h2eq hw_lo hw_hi
 
 /-! ## The exceptional group `G₄` — covering analysis (BHK pp. 43–44)
 
