@@ -28,7 +28,7 @@ else
 fi
 
 echo "== [1] lake build =="
-lake build LonelyRunner.LRC.SmallN.IntLRC_7 LonelyRunner.LRC.SmallN.IntLRC_6 LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section7_M1 > "$LOG" 2>&1
+lake build LonelyRunner.LRC.SmallN.IntLRC_7 LonelyRunner.LRC.SmallN.IntLRC_6 LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section7_M1 LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case66_Tables > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -3 "$LOG"
 if [ $BUILD_EXIT -ne 0 ]; then
