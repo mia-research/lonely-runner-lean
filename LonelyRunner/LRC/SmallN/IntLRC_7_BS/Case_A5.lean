@@ -1599,7 +1599,26 @@ private theorem fallback_63_lo (et34 cc : ZMod 7)
       4 * Atar - 2 * et34 + cc ∉ ({0, 6} : Finset (ZMod 7)) := by
   revert het hcc; revert et34 cc; decide
 
-set_option maxHeartbeats 3200000 in
+set_option maxRecDepth 100000 in
+/-- Finset-free core of `fallback_63_l1`. Stating every `{0,6}` membership as
+explicit (in)equalities lets `Decidable` instance synthesis go through under the
+binders, so the finite check closes by kernel `decide` (~2s) instead of
+`native_decide`. -/
+private theorem fallback_63_l1_core (T34 e0 rho : ZMod 7)
+    (hT34 : T34 = 3 ∨ T34 = 4 ∨ T34 = 5) (hrho : rho ≠ 0) :
+    ∃ p : ZMod 7, ∀ e1 : ZMod 7, (e1 = 0 ∨ e1 = 1) →
+      ((p = 0 ∨ p = 1 ∨ p = 2) → e1 = 0) →
+      ((p = 4 ∨ p = 5 ∨ p = 6) → e1 = 1) →
+      ∃ Atar : ZMod 7,
+        (Atar ≠ 0 ∧ Atar ≠ 6) ∧
+        (Atar + 1 ≠ 0 ∧ Atar + 1 ≠ 6) ∧
+        (Atar + 3 ≠ 0 ∧ Atar + 3 ≠ 6) ∧
+        (2 * Atar + e1 - T34 ≠ 0 ∧ 2 * Atar + e1 - T34 ≠ 6) ∧
+        (4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 2 ∨
+          4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 3 ∨
+          4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 4) := by
+  revert hT34 hrho; revert T34 e0 rho; decide
+
 /-- **`(3,1,1)` ratio-3 h=m, `ν(e₄₅)=1` seven-pin endgame** (BS L652–661 edge).
 At `ν(e₄₅)=1` the single `Λ₁` knob moves the `d₃`-doubling pin `p = q(7·d₃)`
 and `q(e₄₅) = e0 + p·rho` (slope `rho ≠ 0`) in lockstep, so neither can be set
@@ -1624,15 +1643,17 @@ private theorem fallback_63_l1 (T34 e0 rho : ZMod 7)
         (4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 2 ∨
           4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 3 ∨
           4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 4) := by
-  have hcases : rho = 1 ∨ rho = 2 ∨ rho = 3 ∨ rho = 4 ∨ rho = 5 ∨ rho = 6 := by
-    revert hrho; revert rho; decide
-  have hTcases : T34 = 3 ∨ T34 = 4 ∨ T34 = 5 := by
-    revert hT34; revert T34; decide
-  have he0cases : e0 = 0 ∨ e0 = 1 ∨ e0 = 2 ∨ e0 = 3 ∨ e0 = 4 ∨ e0 = 5 ∨ e0 = 6 := by
-    revert e0; decide
-  rcases hcases with rfl | rfl | rfl | rfl | rfl | rfl <;>
-    rcases hTcases with rfl | rfl | rfl <;>
-      rcases he0cases with rfl | rfl | rfl | rfl | rfl | rfl | rfl <;> native_decide
+  have hT : T34 = 3 ∨ T34 = 4 ∨ T34 = 5 := by
+    simpa [Finset.mem_insert, Finset.mem_singleton] using hT34
+  obtain ⟨p, hp⟩ := fallback_63_l1_core T34 e0 rho hT hrho
+  refine ⟨p, fun e1 h1 h2 h3 => ?_⟩
+  obtain ⟨A, hA1, hA2, hA3, hA4, hA5⟩ := hp e1 h1 h2 h3
+  exact ⟨A,
+    by simp [Finset.mem_insert, Finset.mem_singleton, hA1.1, hA1.2],
+    by simp [Finset.mem_insert, Finset.mem_singleton, hA2.1, hA2.2],
+    by simp [Finset.mem_insert, Finset.mem_singleton, hA3.1, hA3.2],
+    by simp [Finset.mem_insert, Finset.mem_singleton, hA4.1, hA4.2],
+    hA5⟩
 
 private theorem reflect_fit_63 (x y z a : ZMod 7) (L : ℕ)
     (hL : L = 2 ∨ L = 3)
