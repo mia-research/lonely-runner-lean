@@ -1,0 +1,98 @@
+{
+  "reduction_statement": [
+    "phase-sum fixedpoint",
+    "phasewise asymmetry constancy"
+  ],
+  "reduced_exact_check": {
+    "rows": [
+      {
+        "d": 23,
+        "period3_count": 10,
+        "ok_count": 10
+      },
+      {
+        "d": 25,
+        "period3_count": 21,
+        "ok_count": 21
+      },
+      {
+        "d": 27,
+        "period3_count": 39,
+        "ok_count": 39
+      },
+      {
+        "d": 29,
+        "period3_count": 66,
+        "ok_count": 66
+      }
+    ],
+    "bad_count": 0,
+    "bad_examples": []
+  },
+  "boundary_tail_check": {
+    "checked": 20,
+    "bad_count": 0,
+    "bad_examples": []
+  },
+  "sampled_global_check": {
+    "rows": [
+      {
+        "d": 19,
+        "distinct_period3_seen": 1,
+        "bad_count": 0
+      },
+      {
+        "d": 21,
+        "distinct_period3_seen": 4,
+        "bad_count": 0
+      },
+      {
+        "d": 23,
+        "distinct_period3_seen": 10,
+        "bad_count": 0
+      },
+      {
+        "d": 25,
+        "distinct_period3_seen": 21,
+        "bad_count": 0
+      },
+      {
+        "d": 27,
+        "distinct_period3_seen": 39,
+        "bad_count": 0
+      },
+      {
+        "d": 29,
+        "distinct_period3_seen": 66,
+        "bad_count": 0
+      },
+      {
+        "d": 31,
+        "distinct_period3_seen": 105,
+        "bad_count": 0
+      },
+      {
+        "d": 33,
+        "distinct_period3_seen": 159,
+        "bad_count": 0
+      },
+      {
+        "d": 39,
+        "distinct_period3_seen": 416,
+        "bad_count": 0
+      },
+      {
+        "d": 45,
+        "distinct_period3_seen": 812,
+        "bad_count": 0
+      },
+      {
+        "d": 55,
+        "distinct_period3_seen": 1658,
+        "bad_count": 0
+      }
+    ],
+    "bad_count": 0,
+    "bad_examples": []
+  }
+}

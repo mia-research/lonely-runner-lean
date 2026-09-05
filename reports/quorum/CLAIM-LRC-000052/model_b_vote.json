@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLAIM-LRC-000052",
+  "task_id": "QRM-LRC-0002",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:34:12Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.73,
+  "rationale": [
+    "Reproducibility evidence is strong: ladder status is stable and relative errors are far below thresholds.",
+    "Measurement metric and notation both pass, and extraction was not truncated across 54,967 values.",
+    "Dossier-level reproducibility verdict is stable with readiness marked ready.",
+    "The current claim statement is malformed/truncated CSV text rather than a clean, explicit proposition."
+  ],
+  "critical_risks": [
+    "Claim semantics are ambiguous because the short statement/excerpt appears truncated and duplicated.",
+    "Assumptions are still pending extraction review, leaving interpretation risk.",
+    "Validation snapshot still records needs_human_review with medium float risk."
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Promotable after claim text normalization and explicit assumption extraction sign-off; numeric reproducibility itself looks robust. | fallback_used_for_lane_provider=gemini"
+}

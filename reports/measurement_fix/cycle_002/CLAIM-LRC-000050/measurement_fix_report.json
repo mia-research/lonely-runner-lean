@@ -1,0 +1,10 @@
+{
+  "family": "residue_error_pack",
+  "rows": 10,
+  "checks_passed": 11,
+  "checks_failed": 0,
+  "precision_invariance_ok": true,
+  "max_rel_float_vs_mpmath": 4.888364258418e-16,
+  "max_rel_decimal_vs_mpmath": 1.277659313389e-33,
+  "status": "resolved_pass"
+}

@@ -1,0 +1,46 @@
+================================================================================================
+CHEAP isotype-pure readout d-spectral concentration -- pre-registered R_orb / orbit-perm null
+================================================================================================
+curves (p,n,K): [(211, 199, 33), (349, 313, 52), (547, 547, 91), (733, 691, 115), (823, 829, 138)]  B= 10000
+
+=== p=211 n=199 K=33  λ=92 β=196  x_λd=βx_d err=0 (0)  p%9=4(≠1⇒β noncube) ===
+  (1,+) chi3         meas(w,s)=(1,+) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.1648 null[0.123,q=0.233] p=0.1047 -> null
+  (2,+) chi3^2       meas(w,s)=(2,+) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.1648 null[0.123,q=0.233] p=0.1014 -> null
+  (0,+) Legendre     meas(w,s)=(0,+) pur=0.0e+00 | planted φ1 R_orb=0.970 | obs R_orb=0.1297 null[0.175,q=0.347] p=0.8248 -> null
+  (0,-) sign(y)      meas(w,s)=(0,-) pur=0.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.1748 null[0.174,q=0.344] p=0.4089 -> null
+  (1,-) chi3.sgn     meas(w,s)=(1,-) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.1082 null[0.125,q=0.234] p=0.6623 -> null
+  (2,-) chi3^2.sgn   meas(w,s)=(2,-) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.1082 null[0.126,q=0.232] p=0.6712 -> null
+
+=== p=349 n=313 K=52  λ=98 β=226  x_λd=βx_d err=0 (0)  p%9=7(≠1⇒β noncube) ===
+  (1,+) chi3         meas(w,s)=(1,+) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.1101 null[0.087,q=0.158] p=0.1286 -> null
+  (2,+) chi3^2       meas(w,s)=(2,+) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.1101 null[0.087,q=0.160] p=0.1268 -> null
+  (0,+) Legendre     meas(w,s)=(0,+) pur=0.0e+00 | planted φ1 R_orb=0.981 | obs R_orb=0.0703 null[0.127,q=0.250] p=0.9920 -> null
+  (0,-) sign(y)      meas(w,s)=(0,-) pur=0.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.1527 null[0.128,q=0.253] p=0.2092 -> null
+  (1,-) chi3.sgn     meas(w,s)=(1,-) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0818 null[0.088,q=0.162] p=0.5554 -> null
+  (2,-) chi3^2.sgn   meas(w,s)=(2,-) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0818 null[0.088,q=0.160] p=0.5452 -> null
+
+=== p=547 n=547 K=91  λ=40 β=506  x_λd=βx_d err=0 (0)  p%9=7(≠1⇒β noncube) ===
+  (1,+) chi3         meas(w,s)=(1,+) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0542 null[0.056,q=0.102] p=0.4750 -> null
+  (2,+) chi3^2       meas(w,s)=(2,+) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0542 null[0.056,q=0.099] p=0.4794 -> null
+  (0,+) Legendre     meas(w,s)=(0,+) pur=0.0e+00 | planted φ1 R_orb=0.989 | obs R_orb=0.0440 null[0.083,q=0.159] p=0.9984 -> null
+  (0,-) sign(y)      meas(w,s)=(0,-) pur=0.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.0659 null[0.083,q=0.159] p=0.7782 -> null
+  (1,-) chi3.sgn     meas(w,s)=(1,-) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0537 null[0.056,q=0.098] p=0.5108 -> null
+  (2,-) chi3^2.sgn   meas(w,s)=(2,-) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0537 null[0.056,q=0.100] p=0.5101 -> null
+
+=== p=733 n=691 K=115  λ=253 β=307  x_λd=βx_d err=0 (0)  p%9=4(≠1⇒β noncube) ===
+  (1,+) chi3         meas(w,s)=(1,+) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0545 null[0.047,q=0.081] p=0.1958 -> null
+  (2,+) chi3^2       meas(w,s)=(2,+) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0545 null[0.047,q=0.081] p=0.1948 -> null
+  (0,+) Legendre     meas(w,s)=(0,+) pur=0.0e+00 | planted φ1 R_orb=0.991 | obs R_orb=0.0339 null[0.069,q=0.129] p=0.9998 -> null
+  (0,-) sign(y)      meas(w,s)=(0,-) pur=2.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.0488 null[0.070,q=0.131] p=0.9279 -> null
+  (1,-) chi3.sgn     meas(w,s)=(1,-) pur=2.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.0352 null[0.046,q=0.082] p=0.9053 -> null
+  (2,-) chi3^2.sgn   meas(w,s)=(2,-) pur=2.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.0352 null[0.046,q=0.082] p=0.9009 -> null
+
+=== p=823 n=829 K=138  λ=125 β=174  x_λd=βx_d err=0 (0)  p%9=4(≠1⇒β noncube) ===
+  (1,+) chi3         meas(w,s)=(1,+) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0465 null[0.040,q=0.067] p=0.1862 -> null
+  (2,+) chi3^2       meas(w,s)=(2,+) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0465 null[0.040,q=0.068] p=0.1894 -> null
+  (0,+) Legendre     meas(w,s)=(0,+) pur=0.0e+00 | planted φ1 R_orb=0.993 | obs R_orb=0.0272 null[0.060,q=0.113] p=1.0000 -> null
+  (0,-) sign(y)      meas(w,s)=(0,-) pur=0.0e+00 | planted φ1 R_orb=1.000 | obs R_orb=0.1037 null[0.060,q=0.112] p=0.0156 -> null
+  (1,-) chi3.sgn     meas(w,s)=(1,-) pur=5.7e-16 | planted φ1 R_orb=1.000 | obs R_orb=0.0505 null[0.040,q=0.068] p=0.1065 -> null
+  (2,-) chi3^2.sgn   meas(w,s)=(2,-) pur=1.0e-15 | planted φ1 R_orb=1.000 | obs R_orb=0.0505 null[0.040,q=0.068] p=0.1094 -> null
+
+[done]

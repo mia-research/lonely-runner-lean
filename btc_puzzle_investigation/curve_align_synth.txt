@@ -1,0 +1,14 @@
+# CURVE-ALIGNED leak test  data=synthetic  keys=2000  min_bits=40  features=64 (int+curve)  shuffles=2000
+CONTROLS
+  POS_strong  obs_upper_count=    0/2000  corr_p=0.0005  FIRES
+  POS_f0.10   obs_upper_count=    0/2000  corr_p=0.0005  FIRES
+  NEGATIVE: 0/8 fired
+INTEGER BASELINE targets
+  n_parity    obs_upper_count=   12/2000  corr_p=0.2734  null
+  k_parity    obs_upper_count=  112/2000  corr_p=0.9430  null
+CURVE-ALIGNED targets (residual point D*G, and k*G)
+  Ry_par      obs_upper_count=    5/2000  corr_p=0.1274  null
+  Rx_qr       obs_upper_count=  171/2000  corr_p=0.9890  null
+  Rx_m7       obs_upper_count=    0/2000  corr_p=0.0005  FIRES
+  kGy_par     obs_upper_count=    1/2000  corr_p=0.0260  FIRES
+  kGx_qr      obs_upper_count=   36/2000  corr_p=0.6112  null

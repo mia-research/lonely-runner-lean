@@ -1,0 +1,8 @@
+Exact exhaustive n=6 search (integer speed tuples, gcd-normalized, v_i<=50)
+FINAL
+max_v 50
+tested_tuples 2061046
+counterexample None
+total_runner_checks 12366276
+elapsed_s 1045.34
+completed_jobs 46/46

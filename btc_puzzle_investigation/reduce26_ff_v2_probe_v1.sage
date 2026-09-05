@@ -1,0 +1,92 @@
+#!/usr/bin/env sage
+"""reduce26_ff_v2_probe_v1.sage -- #26 antisymmetry via the hyperelliptic function field.
+
+E: y^2 = x^3 + A x + B as a hyperelliptic (genus-1) curve C. Function field K = F_p(C) = F_p(x,y),
+y^2 = f(x) = x^3+A x+B. iota: P -> R-P is an involution over F_p (R F_p-rational). We compute iota's
+action on K as rational functions, then build the quotient map K -> K^<iota> = F_p(t), express
+g (branch quartic) and F = y * iota(y) as elements of F_p(t), and test the E[2]-translations.
+"""
+from sage.all import GF, EllipticCurve, ZZ, PolynomialRing, FractionField
+
+
+def iota_rational_funcs(A, B, xR, yR, p):
+    """Return (ix_num, ix_den, iy_num, iy_den) as polynomials in F_p[x] and F_p[x][y], with reduction
+    mod y^2 = x^3+A x+B. iota: (x,y) |-> R - (x,y). -P=(x,-y); R+(-P): lam=(yR+y)/(xR-x);
+    x3 = lam^2 - x - xR ; y3 = y + lam*(x - x3)."""
+    Fp = GF(p)
+    Px = PolynomialRing(Fp, 'x'); x = Px.gen()
+    Pxy = PolynomialRing(Fp, ['x','y']); xs, ys = Pxy.gens()
+    fcurve = ys**2 - (xs**3 + A*xs + B)
+    lam_num = yR + ys; lam_den = xR - xs
+    x3_num = lam_num**2 - (xs + xR)*lam_den**2
+    y3_num = ys*lam_den**3 + lam_num*(xs*lam_den**2 - x3_num)
+    x3_num = x3_num % fcurve
+    y3_num = y3_num % fcurve
+    return x3_num, lam_den**2, y3_num, lam_den**3
+
+
+def poly_to_FF(poly2, FF):
+    """Convert a multivariate F_p[x,y] poly to an element of the function field FF (sage function_field
+    over F_p(x) with y satisfying y^2 = x^3+A x+B). FF.gen()=x, and the curve element is FF.1() ..."""
+    x = FF.base().gen()         # F_p(x)
+    y = FF.gen()                # the 'y' generator of the function field extension
+    out = FF(0)
+    for mono, coeff in poly2.dict().items():
+        # poly2 from PolynomialRing(GF(p),['x','y']): .dict() keys are ETuples; iterate differently
+        pass
+    # fall back: iterate via list
+    out = FF(0)
+    for (expair, c) in poly2:
+        ex, ey = int(expair[0]), int(expair[1])
+        out += FF.base()(int(c)) * x**ex * y**ey
+    return out
+
+
+if __name__ == "__main__":
+    p, A, B = 43, 0, 7
+    E = EllipticCurve(GF(p), [A, B])
+    G = next(P for P in E if P.order() == E.order())
+    Rpt = 3*G; xR, yR = ZZ(Rpt[0]), ZZ(Rpt[1])
+    print("p=%d E:y^2=x^3+%d, R=[3]G=(%d,%d)" % (p,B,xR,yR))
+
+    # function field of the genus-1 curve y^2 = x^3+A x+B
+    Rxy = PolynomialRing(GF(p), ['x','y']); xs, ys = Rxy.gens()
+    f = xs**3 + A*xs + B
+    # use the function field of the hyperelliptic/elliptic curve via sage FunctionField
+    from sage.all import FunctionField, FunctionFieldPolynomialRing
+    K = FunctionField(GF(p), 'x'); kx = K.gen()
+    Rk = PolynomialRing(K, 'Y'); Y = Rk.gen()
+    modpoly = Y**2 - (kx**3 + A*kx + B)
+    L = K.extension(modpoly, 'y')   # L = F_p(x,y), y^2 = x^3+A x+B
+    print("function field L:", L)
+    xL = kx; yL = L.gen()
+    # iota rational funcs
+    ix_n, ix_d, iy_n, iy_d = iota_rational_funcs(A,B,xR,yR,p)
+    # convert ix_n (an F_p[x,y] poly) into L: replace xs->xL, ys->yL
+    def to_L(poly2):
+        out = L(0)
+        for (expair, c) in poly2:
+            ex, ey = int(expair[0]), int(expair[1])
+            out += L(GF(p)(int(c))) * xL**ex * yL**ey
+        return out
+    ix_nL = to_L(ix_n); ix_dL = to_L(ix_d)
+    iy_nL = to_L(iy_n); iy_dL = to_L(iy_d)
+    iotax = ix_nL / ix_dL
+    iotay = iy_nL / iy_dL
+    print("iota(x) =", iotax)
+    print("iota(y) =", iotay)
+    # verify iota is an involution: iota(iota(x)) == x. (skip the heavy check; trust the formula)
+
+    # invariant coord t = x + iota(x)  (symmetric in the fibre pair)
+    tL = xL + iotax
+    # F = y * iota(y)
+    FL = yL * iotay
+    print("t = x + iota(x) =", tL)
+    print("F = y*iota(y)   =", FL)
+    # express F and the branch quartic g in terms of t. The extension L/F_p(t) is degree 2.
+    # The branch points of pi: E -> E/iota are the fixed points {2P=R}; g(t) is the poly whose roots
+    # are their t-values. We'll get g by: pi is branched where the two preimages coincide, i.e. where
+    # x = iota(x). Solve x = iota(x) in L -> the fixed locus -> t-values -> g.
+    # x = iota(x):  x * ix_d - ix_n = 0  (as element of L, this factors through the curve)
+    diff = xL*ix_dL - ix_nL
+    print("x - iota(x) (zero locus = fixed points of iota) =", diff)

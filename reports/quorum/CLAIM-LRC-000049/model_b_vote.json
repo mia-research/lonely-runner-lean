@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000049",
+  "task_id": "QRM4-LRC-0008",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:51:09Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.36,
+  "rationale": [
+    "Meta-signals are strong (high review_score, stable ladder status, metric match pass).",
+    "No substantive dossier content was provided to assess mathematical correctness.",
+    "Conservative publication gating requires direct verification of assumptions, derivations, and evidence."
+  ],
+  "critical_risks": [
+    "Claim statement and proof details are missing, preventing validity adjudication.",
+    "Reproducibility cannot be checked without methods, data, or computational artifacts.",
+    "Potential hidden dependency on unstated assumptions or benchmark leakage."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Insufficient technical dossier excerpt to issue an approval decision; request full claim text, derivation/proof, and reproducibility package for adjudication. | fallback_used_for_lane_provider=gemini"
+}

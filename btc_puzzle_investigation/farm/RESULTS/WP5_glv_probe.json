@@ -1,0 +1,40 @@
+{
+  "wp": "WP5_glv_probe",
+  "model": "haiku",
+  "n_samples": 100023,
+  "bit_range": [
+    1,
+    160
+  ],
+  "attack_valid": false,
+  "probe_type": "structure_diagnostic",
+  "positive_control": {
+    "test": "GLV split correctness verification",
+    "detected": true,
+    "verified_count": 100,
+    "sample_size": 100,
+    "note": "Uses known d (not an attack); verifies d1\u00b7G + d2\u00b7\u03c6(G) == d\u00b7G"
+  },
+  "primary_result": {
+    "d1_mod_n": {
+      "MI_observed": 0.0,
+      "MI_raw_observed": 0.0,
+      "MI_null": 0.0,
+      "MI_raw_null": 0.0,
+      "delta_MI": 0.0
+    },
+    "d2_mod_n": {
+      "MI_observed": 0.1217010830987845,
+      "MI_raw_observed": 0.6556290217554366,
+      "MI_null": 0.18918294104353883,
+      "MI_raw_null": 1.0152177966742981,
+      "delta_MI": -0.06748185794475434
+    },
+    "vs_matched_null": {
+      "null_sample_size": 34023,
+      "conclusion": "potential signal (see delta_MI)"
+    }
+  },
+  "conditional_reading": "The GLV split coefficients (d1 mod n, d2 mod n) do not cluster relative to n across the dataset (normalized MI \u2248 matched null). This suggests the small-n rational structure does not leave a detectable imprint on the GLV endomorphism coordinates. Positive control (split verification) FIRED; test is powered.",
+  "runtime_sec": 318.1707000732422
+}

@@ -1,0 +1,19 @@
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "provider": "manual_quorum_vote",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.92,
+  "rationale": [
+    "Reproducibility verified with max relative error 2.84e-15 for float64 and 7.72e-33 for decimal128, well below stable threshold.",
+    "Metric match and notation match both pass; 3456 usable values successfully extracted.",
+    "Prior needs_human_review status resolved by strong numeric stability.",
+    "Claim statement is presented as tabular data; for promotion, the mathematical claim should be articulated clearly."
+  ],
+  "critical_risks": [
+    "Claim statement lacks a clear, concise mathematical formulation; potential for misinterpretation.",
+    "Float risk noted as medium, though actual errors are minimal; further testing in edge cases may be warranted."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Recommend promotion to claim dossier review board with note to clarify the claim statement.",
+  "submitted_utc": "2026-02-28T13:15:00Z"
+}

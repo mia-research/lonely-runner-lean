@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000052",
+  "task_id": "QRM-LRC-0002",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:34:12Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.82,
+  "rationale": [
+    "Reproducibility evidence is strong: ladder status is stable and cross-precision relative errors vs mpmath are very low.",
+    "Measurement metric and notation checks pass, with no required fixes listed.",
+    "Extraction volume is large (54,967 values) and not truncated, which supports numeric robustness.",
+    "Despite numeric strength, the claim text is not in a clearly adjudicable mathematical form."
+  ],
+  "critical_risks": [
+    "Claim statement appears malformed/truncated CSV content rather than a precise mathematical proposition.",
+    "Assumptions are explicitly marked as pending extraction review, so scope and validity conditions are underspecified.",
+    "Validation snapshot still reports needs_human_review with a moderate adjudication score (0.480).",
+    "Float risk is medium, indicating potential sensitivity in edge cases despite strong aggregate agreement."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Do not reject on novelty grounds; numeric reproducibility looks strong. Escalation is for semantic normalization of the claim and explicit assumptions before publication gating."
+}

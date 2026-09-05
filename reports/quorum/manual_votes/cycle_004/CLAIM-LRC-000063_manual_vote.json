@@ -1,0 +1,35 @@
+{
+  "claim_id": "CLAIM-LRC-000063",
+  "provider": "pipeline_audit",
+  "status_class": "escalate",
+  "confidence": 1.0,
+  "rationale": [
+    "CLAIM-LRC-000063 and CLAIM-LRC-000058 share identical SHA-256 hash (e7553c19ce9061048af54fc64ecbabc704e0658a281cfe522cd4d78f1ea84e42).",
+    "Source file sizes are identical (499 bytes); usable_values, token counts, float error metrics, and review scores are all identical.",
+    "Data values are byte-for-byte identical across both dossiers; no independent claim content exists to adjudicate.",
+    "The only differences are filename (Detector___per-family_summary.csv vs detector_summary_by_family.csv), claim ID, and promotion ID (PROMO-LRC-0018 vs PROMO-LRC-0022).",
+    "Manual adjudication of identical content would not constitute an independent quorum vote."
+  ],
+  "critical_risks": [
+    "Pipeline duplicate: two distinct claim IDs and promotion IDs assigned to the same underlying dataset.",
+    "Quorum integrity risk: counting votes on CLAIM-LRC-000063 independently would inflate the quorum signal without adding new evidence.",
+    "Provenance ambiguity: unclear whether the two filenames represent genuinely distinct experimental runs that were incorrectly deduplicated, or a pipeline bookkeeping error.",
+    "PROMO-LRC-0018 and PROMO-LRC-0022 may propagate independently through the review board without the duplicate relationship being flagged."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Do not adjudicate independently. Escalate to pipeline maintainer for deduplication review. Required actions: (1) confirm whether detector_summary_by_family.csv and Detector___per-family_summary.csv are intentionally distinct experimental outputs or the same file saved under two names; (2) if duplicate, retire CLAIM-LRC-000063 and merge promotion record PROMO-LRC-0022 into PROMO-LRC-0018; (3) if distinct (e.g., different experimental runs producing identical output), document the provenance difference explicitly and regenerate dossiers with distinguishing metadata before re-queuing for adjudication. The CLAIM-LRC-000058 vote (Kimi, hold, confidence 0.78) stands as the sole quorum vote for this dataset.",
+  "duplicate_of": "CLAIM-LRC-000058",
+  "duplicate_evidence": {
+    "sha256_match": "e7553c19ce9061048af54fc64ecbabc704e0658a281cfe522cd4d78f1ea84e42",
+    "source_bytes_match": 499,
+    "usable_values_match": 30,
+    "float64_vs_mpmath_match": "2.893847498596e-16",
+    "decimal128_vs_mpmath_match": "1.522700642965e-34",
+    "review_score_match": 96.277,
+    "filename_000058": "Detector___per-family_summary.csv",
+    "filename_000063": "detector_summary_by_family.csv",
+    "promotion_id_000058": "PROMO-LRC-0018",
+    "promotion_id_000063": "PROMO-LRC-0022"
+  },
+  "submitted_utc": "2026-02-28T00:00:00Z"
+}

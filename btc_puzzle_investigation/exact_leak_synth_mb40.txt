@@ -1,0 +1,30 @@
+# EXACT leak test  data=synthetic  keys=12000  min_bits=40  features=42  shuffles=800
+CONTROLS
+  POS_strong   obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  POS_f0.05    obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  POS_f0.10    obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  POS_f0.20    obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  NEGATIVE: 0/8 fired (family-wise FPR check)
+TARGETS (exact; incl. low-bit D / d_terms / deep CF that float destroyed)
+  d%2          obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  d%3          obs_upper_count=   12/800  corr_p=0.3945  null
+  d%5          obs_upper_count=    0/800  corr_p=0.0012  FIRES
+  d%7          obs_upper_count=   67/800  corr_p=0.9351  null
+  d%11         obs_upper_count=   10/800  corr_p=0.3596  null
+  d%13         obs_upper_count=    8/800  corr_p=0.2859  null
+  bit_mid      obs_upper_count=    3/800  corr_p=0.1211  null
+  bit_top2     obs_upper_count=    8/800  corr_p=0.2809  null
+  pos_bin8     obs_upper_count=   27/800  corr_p=0.6642  null
+  n_parity     obs_upper_count=   14/800  corr_p=0.4469  null
+  k_parity     obs_upper_count=    4/800  corr_p=0.1548  null
+  Dterms       obs_upper_count=   41/800  corr_p=0.8065  null
+  D_par        obs_upper_count=   12/800  corr_p=0.3995  null
+  D_bit1       obs_upper_count=   42/800  corr_p=0.8040  null
+  D_bit4       obs_upper_count=    1/800  corr_p=0.0474  FIRES
+  D_sign       obs_upper_count=    5/800  corr_p=0.1810  null
+  q1_par       obs_upper_count=   51/800  corr_p=0.8851  null
+  q2_par       obs_upper_count=    8/800  corr_p=0.2984  null
+  q3_par       obs_upper_count=    3/800  corr_p=0.1261  null
+  cflen_par    obs_upper_count=  800/800  corr_p=1.0000  null
+n/k CHANNEL (nmax search priced in)
+  max over feature x nmax: obs_upper_count=0/800  corr_p=0.0012  FIRES

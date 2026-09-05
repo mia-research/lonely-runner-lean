@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000046",
+  "task_id": "QRM-LRC-0009",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:37:09Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.78,
+  "rationale": [
+    "Reproducibility status is stable with strict thresholds met.",
+    "Measurement metric and notation both pass with no required fixes.",
+    "Cross-precision error bounds are extremely small (binary64 and decimal128 vs mpmath).",
+    "Dossier tier and recommendation indicate strong verified evidence."
+  ],
+  "critical_risks": [
+    "Claim statement is malformed/tabular and not yet distilled into a precise natural-language proposition.",
+    "Assumptions are marked as pending extraction review.",
+    "Adjudication snapshot flags needs_human_review with moderate score (0.480).",
+    "Float-risk is labeled medium despite current stability."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Promote with caveats: require a concise claim rewrite and explicit assumptions in the publication packet, and include precision-risk disclosure. | fallback_used_for_lane_provider=gemini"
+}

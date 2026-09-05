@@ -1,0 +1,32 @@
+{
+  "claim_id": "CLAIM-LRC-000020",
+  "task_id": "QRM-LRC-0005",
+  "model_lane": "human_operator",
+  "execution_mode": "manual_human",
+  "external_api_called": true,
+  "provider": "claude",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.81,
+  "rationale": [
+    "Source is a structured boundary set analysis report (not raw CSV), suggesting better semantic quality than bulk validation data",
+    "Numeric stability is excellent: max_rel float64 vs mpmath = 2.90e-16, near machine epsilon \u2014 float_risk LOW",
+    "Both metric_match and notation_match pass; clean measurement profile",
+    "101 values appropriate for a summary boundary-set report; extraction_truncated=False",
+    "LRC satisfaction data with explicit boundary counts and isolation results is directly relevant to the conjecture scope"
+  ],
+  "critical_risks": [
+    "Gemini adjudicator voted escalate (0.78) \u2014 the escalation rationale should be reviewed before advancing",
+    "101 values is a small sample \u2014 conclusions are summary-level; underlying trial provenance should be verified",
+    "Explicit assumptions pending extraction \u2014 velocity regime and boundary conditions not formally stated",
+    "adjudication_score 0.480 triggers human review flag",
+    "float_risk low but clustering and LRC satisfaction metrics should be formally defined before publication"
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "NOTE: ChatGPT voted approve_with_caveats (0.73) while Gemini voted escalate (0.78). This claim has the best float precision profile of the batch (2.9e-16, LOW risk) and uses a structured report format that is semantically richer than the raw CSV claims. I vote approve_with_caveats. The Gemini escalation may relate to sample size or semantic completeness \u2014 both valid concerns that should be addressed in claim reformulation.",
+  "submitted_utc": "2026-02-27T00:00:00Z",
+  "source_ref": "claude_code_adjudication_cycle_003_quorum_supplementary",
+  "operator_lane": "Lane_A",
+  "generated_utc": "2026-02-28T04:13:21Z"
+}

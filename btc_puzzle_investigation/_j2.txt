@@ -1,0 +1,16 @@
+# TEST J2  PAIRED jump-selection   W=2^22, 300 paired instances
+#   dp_bits=6 (DP mask), K=max(8,B//2+2) -> selector ~4 bits.
+#   A overlaps the DP mask; B,C are disjoint. sqrt(W)=2048.
+
+  A_lowbits   solved 300/300  mean=  2539.5 +/- SE  61.6  median=  2551.5  unsolved(hit cap)=0
+  B_highbits  solved 300/300  mean=  2533.3 +/- SE  59.7  median=  2465.0  unsolved(hit cap)=0
+  C_higher    solved 300/300  mean=  2797.6 +/- SE  71.7  median=  3016.0  unsolved(hit cap)=0
+
+  paired differences (positive => second rule is FASTER):
+    A_lowbits - B_highbits:      +6.3 +/-  27.5  (n=300)  = +0.23 sigma
+    A_lowbits - C_higher:    -258.0 +/-  32.7  (n=300)  = -7.89 sigma
+    B_highbits - C_higher:    -264.3 +/-  36.1  (n=300)  = -7.33 sigma
+
+  read: A-B and A-C strongly positive (>3 sigma) AND B-C ~0  => confirmed:
+        low-bit selector overlapping the DP mask costs a real constant factor;
+        fix = pick jump index from bits disjoint from dp_mask. Else => noise.

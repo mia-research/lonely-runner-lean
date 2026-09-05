@@ -1,0 +1,3994 @@
+[
+ {
+  "doc": "ANALYSIS_destructive_interference_frame_v1.md",
+  "claim": "Origin: user's recurring intuition \u2014 *\"all these null / within-noise results. I keep thinking of",
+  "scripts": [
+   "spectral_matched_filter_v1.py",
+   "angular_interference_scaling_v1.py",
+   "coord_interference_v1.py"
+  ],
+  "present": [
+   "spectral_matched_filter_v1.py",
+   "angular_interference_scaling_v1.py",
+   "coord_interference_v1.py"
+  ],
+  "script": "spectral_matched_filter_v1.py",
+  "sha": "175c0ad96df4",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "ANALYSIS_idea_improvements_and_nogo_relook_v1.md",
+  "claim": "test*, not a result. Each carries its readout, matched null, firing control, scope, and the grade its",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "ANALYSIS_interval_charsum_generic_prediction_v1.md",
+  "claim": "# The generic prediction for the interval character sum \u2014 committed BEFORE the L=80000 row",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "ANALYSIS_island_twist_sextic_q2q3_v1.md",
+  "claim": "Q3 `[structural null \u2014 island determines \u03c0_n but does not display the symbol]`.** Date 2026-08-17. Follows",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "ANALYSIS_mu6_solving_degree_m4m5_mechanism_v1.md",
+  "claim": "# ANALYSIS \u2014 the m=4/5 mechanism: does the \u03c9-symmetry lower the S\u2085/S\u2086 solving degree? The isotypic-block channel is argued-null at ALL m; the residual open piece is isolated",
+  "scripts": [
+   "m4_mechanism_check.py"
+  ],
+  "present": [],
+  "script": "m4_mechanism_check.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "ANALYSIS_p0prime_excess_structure_v1.md",
+  "claim": "`[RETRACTED]` claim failed its firing control; `[OPEN]` live thread.",
+  "scripts": [
+   "p0prime_s5_localization_v1.py",
+   "p0prime_ap_law_v1.py",
+   "p0prime_freq_sextic_v1.py"
+  ],
+  "present": [
+   "p0prime_s5_localization_v1.py",
+   "p0prime_ap_law_v1.py",
+   "p0prime_freq_sextic_v1.py"
+  ],
+  "script": "p0prime_s5_localization_v1.py",
+  "sha": "3d6a6f882c20",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "ANALYSIS_semaev_cm_yield_mechanism_v1.md",
+  "claim": "> (prime-field summation-poly index calculus is non-competitive with generic \u221ap to begin with). **\u00a74 is",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "claim": "reports magnitudes; it may **not** convert a magnitude into a verdict (\"safe / generic / bounded /",
+  "scripts": [
+   "_anomaly_drill_ct_split_v1.py",
+   "_anomaly_drill_ct_split_v2.py"
+  ],
+  "present": [
+   "_anomaly_drill_ct_split_v1.py",
+   "_anomaly_drill_ct_split_v2.py"
+  ],
+  "script": "_anomaly_drill_ct_split_v1.py",
+  "sha": "033efd8d7234",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "claim": "**Grade:** `[PROOF + EMPIRICAL \u2014 NULL, source ERRATA]`",
+  "scripts": [
+   "farey-coprimality-filament-sieve-p135.py",
+   "farey-coprimality-filament-sieve-p140.py",
+   "eisenstein-core-gate-real-keys.py"
+  ],
+  "present": [
+   "audit_d2_bridge_reduction_v1.py",
+   "btc_puzzle_investigation/audit_d2_bridge_reduction_v1.py"
+  ],
+  "script": "audit_d2_bridge_reduction_v1.py",
+  "sha": "9a6e7c1ecdde",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_ks_backstop_and_joint_readout_v1.md",
+  "claim": "- Claimed: `[VERIFIED-scope NULL]`, bounded by Cor B1 `[PROVED given KS]`, coupling \u2264 2\u207b\u00b9\u00b2\u2078.",
+  "scripts": [
+   "AUDIT_secp_singlefeature_null_v1.py",
+   "AUDIT_chi2y_dmod5_bothsets_v2.py",
+   "int1_frame_operator_v1.py"
+  ],
+  "present": [
+   "AUDIT_secp_singlefeature_null_v1.py",
+   "AUDIT_chi2y_dmod5_bothsets_v2.py",
+   "int1_frame_operator_v1.py"
+  ],
+  "script": "AUDIT_secp_singlefeature_null_v1.py",
+  "sha": "83b09e59e165",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_m25_n15_null_conversions_v1.md",
+  "claim": "# AUDIT \u2014 the M25 & N15 null-conversions: are they fired-surrogate-established, or assumed-away?",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "AUDIT_m25_n15_null_conversions_v2.md",
+  "claim": "surfaces** \u2014 v18's one-line flag row (`M25 | [A\u2212] | [null \u2026]`, accurate for the H1 leg it names) and",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "AUDIT_m25_n15_null_conversions_v3.md",
+  "claim": "# AUDIT \u2014 M25 & N15 null-conversions (v3): the external review ran the two remainders, and both close",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "AUDIT_mu3_subspace_residual_v1.md",
+  "claim": "**Posture:** self-audit, adversarial. The counter-prior binds symmetrically \u2014 a null is audited",
+  "scripts": [
+   "mu3_subspace_residual_v1.py",
+   "mu3_subspace_residual_v2.py",
+   "verify_tie_handling_v1.py"
+  ],
+  "present": [
+   "mu3_subspace_residual_v1.py",
+   "mu3_subspace_residual_v2.py",
+   "verify_tie_handling_v1.py"
+  ],
+  "script": "mu3_subspace_residual_v1.py",
+  "sha": "c28b60676e19",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_mu_m_vanishing_law_run_v1.md",
+  "claim": "`RESULT_..._v1.md` is **superseded**; its headline is withdrawn pending the rerun under",
+  "scripts": [
+   "mu_m_vanishing_law_v1.sage",
+   "audit_mu_m_missing_controls_v1.sage"
+  ],
+  "present": [
+   "mu_m_vanishing_law_v1.sage",
+   "audit_mu_m_missing_controls_v1.sage"
+  ],
+  "script": "mu_m_vanishing_law_v1.sage",
+  "sha": "2b0f398c9de0",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "AUDIT_negative_bias_session2to4_v1.md",
+  "claim": "sector and it came back generic \u2026 isolated to one decidable lattice-counting statement\"* as a revert",
+  "scripts": [
+   "_audit_Sy_structure_v1.py",
+   "_audit_ct_and_xy_v1.py"
+  ],
+  "present": [
+   "_audit_Sy_structure_v1.py",
+   "_audit_ct_and_xy_v1.py"
+  ],
+  "script": "_audit_Sy_structure_v1.py",
+  "sha": "5a7390e2a914",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_prereg_incomplete_shortscalar_SELFAUDIT_v1.md",
+  "claim": "*2026-07-29. **THIS IS NOT THE GATE.** `experiment-designer` was launched twice and failed both times",
+  "scripts": [
+   "tdev_calib.py",
+   "diag.py"
+  ],
+  "present": [],
+  "script": "tdev_calib.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "claim": "relation-yield lever was an artifact; H1 null; H2 x-closure fires\"). Audited in **both** directions \u2014",
+  "scripts": [
+   "semaev_cm_relation_yield_v4.py",
+   "audit_isolation_B1.py"
+  ],
+  "present": [
+   "semaev_cm_relation_yield_v4.py",
+   "audit_isolation_B1.py"
+  ],
+  "script": "semaev_cm_relation_yield_v4.py",
+  "sha": "c15f4d8300a8",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "claim": "# AUDIT \u2014 the proposed `shortscalar_glv_interval_harness_v1.py`: the test is null by construction",
+  "scripts": [
+   "shortscalar_glv_interval_harness_v1.py",
+   "AUDIT_shortscalar_glv_interval_harness_v1.py"
+  ],
+  "present": [
+   "AUDIT_shortscalar_glv_interval_harness_v1.py"
+  ],
+  "script": "AUDIT_shortscalar_glv_interval_harness_v1.py",
+  "sha": "a20c2470a3ba",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "COMPENDIUM_mu6_lever_v1.md",
+  "claim": "### 4. Characters index the orbits \u2014 `[EMPIRICAL \u2014 real skew]` + boundary null",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "CONFIRMED_k3_phase_channel_weierstrass_v1.md",
+  "claim": "**Grade: EMPIRICAL / VERIFIED-scope** \u2014 survives a *negation-parity-matched* permutation null",
+  "scripts": [
+   "scratchpad/k3_fixed.py",
+   "k3_parity_control.py",
+   "k3_map.py"
+  ],
+  "present": [],
+  "script": "k3_fixed.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "claim": "# CONSEQUENCES \u2014 intersections of the \u03bc\u2083-subspace null with the broader programme",
+  "scripts": [
+   "pointwise_inversion_2p128_item5_v1.py",
+   "mu3_subspace_residual_v1/v2.py",
+   "cside_orbitlevel_v1.py"
+  ],
+  "present": [
+   "pointwise_inversion_2p128_item5_v1.py",
+   "cside_orbitlevel_v1.py",
+   "cside_nonalgebraic_correlation_v1.py"
+  ],
+  "script": "pointwise_inversion_2p128_item5_v1.py",
+  "sha": "24417b03c19a",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "CORRECTION_26_branch_locus_8point_v1.md",
+  "claim": "**Superseded by:** `RESULT_26_PROVED_weil_restriction_v1.md`. **Grade of the correction:** `[PROVED]`.",
+  "scripts": [
+   "tors2_fp3_symmetry_v2.py",
+   "jac26_zeta_and_branch_v2.sage"
+  ],
+  "present": [
+   "tors2_fp3_symmetry_v2.py",
+   "jac26_zeta_and_branch_v2.sage"
+  ],
+  "script": "tors2_fp3_symmetry_v2.py",
+  "sha": "cbd3be4338d3",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "CORRECTION_cside_v1_null_underdispersion_v1.md",
+  "claim": "# CORRECTION \u2014 `RESULT_cside_nonalgebraic_correlation_v1.md`: the null was under-dispersed by \u221a2",
+  "scripts": [
+   "cside_orbitlevel_v1.py"
+  ],
+  "present": [
+   "cside_orbitlevel_v1.py"
+  ],
+  "script": "cside_orbitlevel_v1.py",
+  "sha": "28c9d64962af",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "CORRECTION_e3_cmvanishing_interaction_reading_v1.md",
+  "claim": "# \u2298 SCOPE-WITHDRAWN \u2014 CORRECTION \u2014 the E3 curve-swap establishes a key-set \u00d7 curve INTERACTION",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "EXACT_RERUN_FINDINGS_v1.md",
+  "claim": "finding holds, changes, or was a float artifact. Integer / Fraction / exact cyclotomic only. This",
+  "scripts": [
+   "coord_interference_v1.py",
+   "coord_exact.py",
+   "intensity_parseval_orbit_null_v1.py"
+  ],
+  "present": [
+   "coord_interference_v1.py",
+   "intensity_parseval_orbit_null_v1.py"
+  ],
+  "script": "coord_interference_v1.py",
+  "sha": "a19c2cc6c379",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "claim": "**Current status (under review):** `[null \u2014 cofactor / sampling artifact, mechanism identified, model scale]`.",
+  "scripts": [
+   "h5_followup_run_v1.py",
+   "analyze_h5_mechanism_v1.py",
+   "n15_readout_confinement_runner_v1.py"
+  ],
+  "present": [
+   "h5_followup_run_v1.py",
+   "analyze_h5_mechanism_v1.py",
+   "n15_readout_confinement_runner_v1.py"
+  ],
+  "script": "h5_followup_run_v1.py",
+  "sha": "1d64a5b2fb41",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "KNOWN_FACTS_secp256k1_and_keys_v5.1.md",
+  "claim": "or tags changed \u2014 correcting places where the body prose stated a *null* or an",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "KNOWN_FACTS_secp256k1_and_keys_v5.md",
+  "claim": "numbers, or tags changed). v5 corrects places where the body prose stated a *null*",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "LEAK_HUNT_LEDGER_2026_08_11_v1.md",
+  "claim": "to find *how* it leaks. \"ECDLP is secure / nothing here / generic\" is the training reflex this project",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T5",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_brick_e_lead_rung_and_instruments_v1.md",
+  "claim": "# NOTE \u2014 Brick E opened: instruments located, I1 covariance verified exactly, p=43 LEAD rung reads GENERIC (D=4); the powered ladder run is the defined next session",
+  "scripts": [
+   "lbe_dlog.sage",
+   "scratchpad/session_2026-08-11/lbe_dlog.sage",
+   ".sage.py"
+  ],
+  "present": [
+   "brick_e_degree_fitter_v1.py"
+  ],
+  "script": "brick_e_degree_fitter_v1.py",
+  "sha": "73fddc54f34c",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "NOTE_carry_readout_leak_nulls_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 scoped null, firing controls fire; small scale n=967]`.** Date 2026-08-17. Active",
+  "scripts": [
+   "scratchpad/eps_leak.py",
+   "carry_fourier.py",
+   "eps_pair.py"
+  ],
+  "present": [],
+  "script": "eps_leak.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_menu_move2_monodromy_N7_refuted_v1.md",
+  "claim": "**Grade:** `[VERIFIED-scope \u2014 named mechanism refuted by an on-disk at-scale artifact]`, model",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T5",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_n7_xy_axis_localization_v1.md",
+  "claim": "`PREREG_subrayleigh_deficit_scaling_v1.md` (\"report D restricted to strata {b=0},{c=0},{b=c},generic",
+  "scripts": [
+   "scratchpad/cubic_coherence/probes12_v1.py"
+  ],
+  "present": [],
+  "script": "probes12_v1.py",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_n8_branch_confinement_v1.md",
+  "claim": "| identity FAILS at `m = \u22122` (\u00a73) | **`[VERIFIED \u2014 exact, 4 primes, group-indexed]`** |",
+  "scripts": [
+   "n8_branch_confinement_v1.py",
+   "n8_hypothesis_discriminator_v1.py"
+  ],
+  "present": [
+   "n8_branch_confinement_v1.py",
+   "n8_hypothesis_discriminator_v1.py"
+  ],
+  "script": "n8_branch_confinement_v1.py",
+  "sha": "79872643c5ae",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 1
+ },
+ {
+  "doc": "NOTE_n8_mu3_structure_v1.md",
+  "claim": "> # \u26a0 WITHDRAWN 2026-09-04 \u2014 DUPLICATIVE, AND ITS CENTRAL EXPLANATION IS WRONG",
+  "scripts": [
+   "check_ledger.py",
+   "n8_twist_reduction_v1.py"
+  ],
+  "present": [
+   "check_ledger.py",
+   "n8_twist_reduction_v1.py"
+  ],
+  "script": "check_ledger.py",
+  "sha": "46e847595f56",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_n8_pointwise_convolution_v1.md",
+  "claim": "> # \u26a0 STATUS 2026-09-04 \u2014 this note is **M38** in `CLAIMS.md` `[VERIFIED \u2014 exact]`. It is NOT withdrawn.",
+  "scripts": [
+   "n8_pointwise_convolution_v1.py",
+   "audit_n1_vsign_v2_core.py"
+  ],
+  "present": [
+   "n8_pointwise_convolution_v1.py",
+   "audit_n1_vsign_v2_core.py"
+  ],
+  "script": "n8_pointwise_convolution_v1.py",
+  "sha": "79872643c5ae",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_n8_twist_reduction_v1.md",
+  "claim": "> # \u26a0 WITHDRAWN 2026-09-04 \u2014 DUPLICATIVE, AND ITS CENTRAL EXPLANATION IS WRONG",
+  "scripts": [
+   "check_ledger.py",
+   "n8_twist_reduction_v1.py"
+  ],
+  "present": [
+   "check_ledger.py",
+   "n8_twist_reduction_v1.py"
+  ],
+  "script": "check_ledger.py",
+  "sha": "46e847595f56",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NOTE_v15_draft_three_frontiers_grounded_out_v1.md",
+  "claim": "all three. **Each grounds out \u2014 as tested-null, object-obstructed, or classical-known \u2014 for a NAMED",
+  "scripts": [
+   "..._v2.py"
+  ],
+  "present": [],
+  "script": "..._v2.py",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "NULL_RETEST_MASTER_v1.md",
+  "claim": "| 1.1 | `AUDIT_ks_backstop_and_joint_readout_v1.md` | - Claimed: `[VERIFIED-scope NULL]`, bounded by Cor B1 `[PROVED given KS]`, coupling \u2264 2\u207b\u00b9\u00b2\u2078. | `AUDIT_secp_singlefeature_null_v1.py` | Y | \u00b7 | \u00b7 |",
+  "scripts": [
+   "scratchpad/build_master.py",
+   "AUDIT_secp_singlefeature_null_v1.py",
+   "h5_followup_run_v1.py"
+  ],
+  "present": [
+   "AUDIT_secp_singlefeature_null_v1.py",
+   "h5_followup_run_v1.py",
+   "n15_readout_confinement_runner_v1.py"
+  ],
+  "script": "AUDIT_secp_singlefeature_null_v1.py",
+  "sha": "83b09e59e165",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "OPEN_d2_congruence_law_v1.md",
+  "claim": "**Status: CLOSED \u2014 NULL (structural finding, public evaluation channel absent).** Source: `~/Downloads/d2-lang-torsor-twist-bridge-v1.md`.",
+  "scripts": [
+   "scratchpad/session_2026-08-11/test_d2_bridge2.sage",
+   "d2_carry_shadow_probe_v1.sage"
+  ],
+  "present": [
+   "d2_carry_shadow_probe_v1.sage"
+  ],
+  "script": "d2_carry_shadow_probe_v1.sage",
+  "sha": "2f6aa70abc3a",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PLAN_interval_charsum_realbranch_characterization_v1.md",
+  "claim": "# Real-branch characterization plan \u2014 what to run IF L=80000 refutes the generic prediction",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PLAN_representation_boundary_program_v1.md",
+  "claim": "**Date:** 2026-08-13. Follows `ANALYSIS_public_gate_glv_carry_circularity_v1.md` (which failed the",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "POSITIVE_FINDINGS_MASTER_v17.md",
+  "claim": "1. **N15 (open since v11) \u2014 TESTED, scoped null.** `[VERIFIED-scope \u2014 scoped null]` No cheap predictor",
+  "scripts": [
+   "n15_readout_confinement_runner_v1.py",
+   "cm_jointset_ho_v1.py"
+  ],
+  "present": [
+   "n15_readout_confinement_runner_v1.py",
+   "cm_jointset_ho_v1.py"
+  ],
+  "script": "n15_readout_confinement_runner_v1.py",
+  "sha": "2a6bbe9eb7d5",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "POSITIVE_FINDINGS_MASTER_v18.md",
+  "claim": "> `|V_y|\u22642\u221ap`** is `[PROVED \u2014 symbolic]` only MODULO the Weil-II purity citation (N31, failed",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_anew_supersingularity_reaudit_v3.md",
+  "claim": "v2's run is void: control **C4 fired** (7/18 primes). Session rule 2 forbids rescuing it and marks",
+  "scripts": [
+   "supersingular_mu4_mechanism_v1.py"
+  ],
+  "present": [
+   "supersingular_mu4_mechanism_v1.py"
+  ],
+  "script": "supersingular_mu4_mechanism_v1.py",
+  "sha": "8445fe1b669c",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_brick_e_cd_degree_v1.md",
+  "claim": "pre-registration. Time-order preserved: the statistic, matched null, firing controls, and falsification",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_brick_e_cd_degree_v1_GATE_REVIEW_R2.md",
+  "claim": "adjudicated on the merits (not pre-decided):** is the \u03bc\u2083-null MATCHED on the QR-half, i.e. was R1's",
+  "scripts": [
+   "brick_e_anew_Lpoly_v1.sage"
+  ],
+  "present": [
+   "brick_e_anew_Lpoly_v1.sage"
+  ],
+  "script": "brick_e_anew_Lpoly_v1.sage",
+  "sha": "08ff32b2288e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_brick_e_cd_degree_v2.md",
+  "claim": "it**: the QR-half scalar arm with a \u03bc\u2083-matched null resolves both R1 frame defects (F1 null-mismatch, F2",
+  "scripts": [
+   "lbe_dlog.sage",
+   "brick_e_anew_Lpoly_v1.sage",
+   "brick_e_degree_fitter_v1.py"
+  ],
+  "present": [
+   "brick_e_anew_Lpoly_v1.sage",
+   "brick_e_degree_fitter_v1.py"
+  ],
+  "script": "brick_e_anew_Lpoly_v1.sage",
+  "sha": "08ff32b2288e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_brick_e_cd_degree_v2_GATE_REVIEW.md",
+  "claim": "adjudicated on the merits (not pre-decided):** is the \u03bc\u2083-null MATCHED on the QR-half, i.e. was R1's",
+  "scripts": [
+   "brick_e_anew_Lpoly_v1.sage"
+  ],
+  "present": [
+   "brick_e_anew_Lpoly_v1.sage"
+  ],
+  "script": "brick_e_anew_Lpoly_v1.sage",
+  "sha": "08ff32b2288e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_bridge_dichotomy_v1_DEVIATIONS.md",
+  "claim": "`D = \u22127, \u22128, \u221215, \u221220` gave `< 40` instances in v1. This was **not** treated as a null: the cause",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_bridge_mechanism_isolation_v1_DEVIATIONS.md",
+  "claim": "1. **H-constant's sub-claim (iii) failed and the hypothesis was repaired post-hoc.** The prereg's",
+  "scripts": [
+   "cubic_bridge_v1.py"
+  ],
+  "present": [],
+  "script": "cubic_bridge_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_c2_grouplaw_diffset_v1.md",
+  "claim": "difference `x(P\u1d62\u2212P\u2c7c)` \u2026 never read because the run mis-tagged them [parity-void].\"* Unblocked by the",
+  "scripts": [
+   "shortscalar_cneg_recalibration_v1.py"
+  ],
+  "present": [
+   "shortscalar_cneg_recalibration_v1.py"
+  ],
+  "script": "shortscalar_cneg_recalibration_v1.py",
+  "sha": "2737ffb084b1",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_c2_grouplaw_diffset_v2.md",
+  "claim": "Supersedes v1, which the gate FAILED with 2 blocking defects (retained as the record). Executes",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_decomposition_count_PROVISIONAL_v1.md",
+  "claim": "> **\u26d4 SUPERSEDED (2026-08-09) \u2014 DO NOT RUN.** Written on session-resume without awareness that",
+  "scripts": [
+   "scratchpad/grounding_cm_curves_v1.py"
+  ],
+  "present": [],
+  "script": "grounding_cm_curves_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_hecke_grossencharacter_vertical_v1.md",
+  "claim": "the object, the single decidable artifact, the anti-tautology construction, the matched/firing",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_jointset_excess_v1.md",
+  "claim": "statistic computed in this task.** Decidable artifact. Designed by the context-isolated",
+  "scripts": [
+   "cm_jointset_excess_v1.py"
+  ],
+  "present": [],
+  "script": "cm_jointset_excess_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_jointset_excess_v1_DEVIATIONS.md",
+  "claim": "is dated, states the change, the reason, and the impact on statistic/null/power/scope.",
+  "scripts": [
+   "model_curve_infra_v1.py"
+  ],
+  "present": [
+   "model_curve_infra_v1.py"
+  ],
+  "script": "model_curve_infra_v1.py",
+  "sha": "44b595d99c08",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_jointset_excess_v3.md",
+  "claim": "disjointness ruling, primary statistic `\u00ce_prim`, matched null, PC-SEM/PC-GRADE, power, exactness, and",
+  "scripts": [
+   "cm_jointset_excess_v3.py",
+   "model_curve_infra_v1.py"
+  ],
+  "present": [
+   "cm_jointset_excess_v3.py",
+   "model_curve_infra_v1.py"
+  ],
+  "script": "cm_jointset_excess_v3.py",
+  "sha": "182e53aaa784",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_jointset_higherorder_v1.md",
+  "claim": "null]`, `RESULT_cm_jointset_excess_v3.md`). This document pre-registers the SIX channels the v3 RESULT",
+  "scripts": [
+   "cm_jointset_ho_v1.py",
+   "model_curve_infra_v1.py",
+   "cm_jointset_excess_v3.py"
+  ],
+  "present": [
+   "cm_jointset_ho_v1.py",
+   "model_curve_infra_v1.py",
+   "cm_jointset_excess_v3.py"
+  ],
+  "script": "cm_jointset_ho_v1.py",
+  "sha": "07e5f11983d4",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cm_jointset_semaev_r5_v1_DEVIATIONS.md",
+  "claim": "null, plants, exactness rule, and falsification table are UNCHANGED. One RATIONALE correction (D1),",
+  "scripts": [
+   "cm_jointset_semaev_r5_v1.py"
+  ],
+  "present": [
+   "cm_jointset_semaev_r5_v1.py"
+  ],
+  "script": "cm_jointset_semaev_r5_v1.py",
+  "sha": "2d5148c87fae",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_cside_replication_v1.md",
+  "claim": "OOS AND-gate. **In-scope:** the null is orbit-label permutation (curve-intrinsic), not a generator pool",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_deflation_120deg_generic_j_v1.md",
+  "claim": "# PRE-REGISTRATION \u2014 is the 120\u00b0 law generic to odd-order cyclic elliptic curves, or specific to `j=0`?",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_deflation_120deg_generic_j_v1_DEVIATIONS.md",
+  "claim": "**Date:** 2026-08-01. **Status of the spec: WITHDRAWN BEFORE DATA. The run was never executed.**",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_diffset_cubic_beta2_characterization_v1.md",
+  "claim": "decomposition \u2014 **no reject/accept verdict**; every sub-slice carries its own matched null.",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_diffset_cubic_secondcontrol_v1.md",
+  "claim": "**Status:** rule + interpretation FROZEN before the new null is built. Reproduction of the fired",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_e3_owed_measurement_v1.md",
+  "claim": "# PREREG \u2014 E3 (A-1d) owed measurement: structural-null reframe + FWER + OOS + curve-class discriminator",
+  "scripts": [
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "present": [
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "script": "c2_grouplaw_diffset_curve_v1.py",
+  "sha": "0a96c309ea4b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_e3_owed_measurement_v2.md",
+  "claim": "# PREREG v2 (FROZEN) \u2014 E3 (A-1d) owed measurement: structural-null reframe + FWER + OOS + curve-class",
+  "scripts": [
+   "c2_grouplaw_diffset_curve_v1.py",
+   "e3_repro_prep_v1.py",
+   "e3_owed_measurement_v1.py"
+  ],
+  "present": [
+   "c2_grouplaw_diffset_curve_v1.py",
+   "e3_owed_measurement_v1.py"
+  ],
+  "script": "c2_grouplaw_diffset_curve_v1.py",
+  "sha": "0a96c309ea4b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_e3_twist_and_cm_controls_v1.md",
+  "claim": "# \u2298 WITHDRAWN \u2014 PREREG \u2014 E3 controls (twist / CM)",
+  "scripts": [
+   "check_no_float.py"
+  ],
+  "present": [
+   "check_no_float.py"
+  ],
+  "script": "check_no_float.py",
+  "sha": "a32fab348b71",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_ell_ge5_conditional_MI_v2_DEVIATIONS.md",
+  "claim": "Filed as they occurred. None changes a verdict (all arms null in + OOS); all are recorded plainly.",
+  "scripts": [
+   "ell_condmi_verify_designer_v1.py"
+  ],
+  "present": [],
+  "script": "ell_condmi_verify_designer_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_ell_ge5_mutual_information_v2_DEVIATIONS.md",
+  "claim": "the null point; it is not \u2014 copying with probability `s` adds correlation on top of the baseline, so",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_flap_grouplaw_transition_v1.md",
+  "claim": "**Status: SPEC ONLY. FROZEN before any transition/chain data is seen. Decidable artifact.**",
+  "scripts": [
+   "flap_grouplaw_transition_v1.py"
+  ],
+  "present": [
+   "flap_grouplaw_transition_v1.py"
+  ],
+  "script": "flap_grouplaw_transition_v1.py",
+  "sha": "e1e7ccea0707",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_h2_order3_structure_control_v1.md",
+  "claim": "`[VERIFIED \u2014 matched control]` \"CM-specific vs generic split order-3, scope {these primes, k, m}.\"",
+  "scripts": [
+   "semaev_elimination_v1.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_islands_curveimage_jointset_v1.md",
+  "claim": "**Status: SPEC ONLY. Written and FROZEN before any island / curve data is seen. Decidable artifact.**",
+  "scripts": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "present": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "script": "islands_curveimage_jointset_v1.py",
+  "sha": "3111bc5bcdbd",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_islands_glv_beta_crossset_v1.md",
+  "claim": "**Status: SPEC ONLY. FROZEN before any island/curve GLV data is seen. Decidable artifact.**",
+  "scripts": [
+   "islands_glv_beta_crossset_v1.py"
+  ],
+  "present": [
+   "islands_glv_beta_crossset_v1.py"
+  ],
+  "script": "islands_glv_beta_crossset_v1.py",
+  "sha": "97e5ca36d4b2",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_isotypic_trace_carry_stratify_v1.md",
+  "claim": "built around neutralizing it (orbit-rep reduction + rank-in-matched-null + a power gate that ABSTAINS",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_kden_ramanujan_comb_v1.md",
+  "claim": "computed for any configuration in the confirmatory set. Decidable artifact.**",
+  "scripts": [
+   "kden_ramanujan_comb_v1.py",
+   "lift_band_spectral_v1.py"
+  ],
+  "present": [
+   "kden_ramanujan_comb_v1.py",
+   "lift_band_spectral_v1.py"
+  ],
+  "script": "kden_ramanujan_comb_v1.py",
+  "sha": "c3fe22fefc52",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_localized_bit_extraction_v2.md",
+  "claim": "**Predecessor:** `PREREG_localized_bit_extraction_v1.md` (v1 battery, outcome N1, scoped bounded null).",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_mu3_diffset_control_repair_v1.md",
+  "claim": "the \u03bc\u2083 channel of `difference_set_xy_geometry_v1.py` and fixes the statistic, null, power, decision",
+  "scripts": [
+   "difference_set_xy_geometry_v1.py",
+   "/scratchpad/m3_glv_control_forcing_v1.py",
+   "_field_bigrading_v1.py"
+  ],
+  "present": [
+   "difference_set_xy_geometry_v1.py",
+   "_field_bigrading_v1.py",
+   "lbe_harness_v1.py"
+  ],
+  "script": "difference_set_xy_geometry_v1.py",
+  "sha": "8e27c7325388",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_mu3_glv_frequency_support_v2.md",
+  "claim": "statistic, Null-B, power, scope, and falsification \u2014 **unchanged** by this amendment).",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_mu3_phase_within_triple_v1.md",
+  "claim": "Companion magnitude probe (already done, scoped null): `RESULT_mu3_glv_frequency_support_v1.md`.",
+  "scripts": [
+   "xy_interference_U_v1.py",
+   "mu3_phase_within_triple_v1.py",
+   "mu3_glv_frequency_support_v1.py"
+  ],
+  "present": [
+   "xy_interference_U_v1.py",
+   "mu3_phase_within_triple_v1.py",
+   "mu3_glv_frequency_support_v1.py"
+  ],
+  "script": "xy_interference_U_v1.py",
+  "sha": "82d5eaf6622e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_mu3_subspace_residual_v2.md",
+  "claim": "**Purpose:** tighten the v1 scoped null by extending the powered range from $|Q_6| \\leq 426$ to",
+  "scripts": [
+   "mu3_subspace_residual_v2.py",
+   "mu3_forced_subspace_object_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "present": [
+   "mu3_subspace_residual_v2.py",
+   "mu3_forced_subspace_object_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "script": "mu3_subspace_residual_v2.py",
+  "sha": "f89405a72e5c",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_n15_joint_readout_confinement_v1_DEVIATIONS.md",
+  "claim": "grade cap (EMPIRICAL), datasets, exact-arithmetic rule, matched-null philosophy",
+  "scripts": [
+   "n15_readout_confinement_runner_v1.py"
+  ],
+  "present": [
+   "n15_readout_confinement_runner_v1.py"
+  ],
+  "script": "n15_readout_confinement_runner_v1.py",
+  "sha": "2a6bbe9eb7d5",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_n1_phase_cap_v2.md",
+  "claim": "**F6 \u2014 the exact variance of the matched null `[PROVED, and MC-verified to machine precision]`.**",
+  "scripts": [
+   "n1_phase_cap_sweep_v1.py"
+  ],
+  "present": [
+   "n1_phase_cap_sweep_v1.py"
+  ],
+  "script": "n1_phase_cap_sweep_v1.py",
+  "sha": "3cc95a93030e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_n7_finite_rank_carrier_v1.md",
+  "claim": "# PREREG \u2014 N7's carrier is FINITE RANK: the character's `U` is a sum of `r \u2264 4` Weil numbers, the null is a sum of `n \u2248 p` random phases",
+  "scripts": [
+   "subrayleigh_deficit_scaling_v1.py"
+  ],
+  "present": [
+   "subrayleigh_deficit_scaling_v1.py"
+  ],
+  "script": "subrayleigh_deficit_scaling_v1.py",
+  "sha": "49b68df3ae91",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_row_budget_lowtail_v2.md",
+  "claim": "### F10 \u2014 the `b=0` stratum has a DIFFERENT forced low-tail law, `8.0\u00d7` the generic rate `[PROVED]`",
+  "scripts": [
+   "row_budget_core_v1.py",
+   "row_budget_pdet_v1.py"
+  ],
+  "present": [
+   "row_budget_core_v1.py",
+   "row_budget_pdet_v1.py"
+  ],
+  "script": "row_budget_core_v1.py",
+  "sha": "d44563acc05a",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_cm_solving_degree_v1.md",
+  "claim": "CM-agnostic neutral system, so it cannot peek at the hypothesis) and (ii) the firing/VOID controls of",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "model_curve_infra_v1.py",
+   "cm_jointset_ho_v1.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "model_curve_infra_v1.py",
+   "cm_jointset_ho_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_structure_firstfall_vs_m_v2.md",
+  "claim": "# PREREG v2 \u2014 Route A crux: the first-fall-degree NULL LADDER (semi-regular \u2192 S_m-symmetric \u2192 Semaev) vs m",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_firstfall_vs_m_v2.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_firstfall_vs_m_v2.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_structure_solvingdegree_vs_m_v1.md",
+  "claim": "# PREREG \u2014 Route A crux: does Semaev summation STRUCTURE lower the solving degree vs a degree/support-matched generic system, and does the advantage GROW with m?",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_solvingdegree_vs_m_v1.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_solvingdegree_vs_m_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_symmetric_reduction_lastfall_v1.md",
+  "claim": "# PREREG \u2014 Route A live lead: does the S_3-symmetric (elementary-symmetric-variable) reduction COLLAPSE the last-fall degree, and is any collapse secp-SPECIFIC or generic?",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "semaev_symmetric_reduction_lastfall_v1.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "semaev_symmetric_reduction_lastfall_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_symmetric_reduction_lastfall_v2.md",
+  "claim": "first-fall provably is \u2014 \u0394_coeff\u22610 with no power to see a lever = the \"null with no power\" failure mode).",
+  "scripts": [
+   "semaev_symmetric_reduction_lastfall_v1.py"
+  ],
+  "present": [
+   "semaev_symmetric_reduction_lastfall_v1.py"
+  ],
+  "script": "semaev_symmetric_reduction_lastfall_v1.py",
+  "sha": "12a9d0a96e67",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_semaev_yield_frobenius_channel_P1_v1.md",
+  "claim": "**Gate:** this is itself the pre-registration artifact.",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_shortscalar_sum_object_v4_amendment.md",
+  "claim": "# PRE-REGISTRATION v4 \u2014 amendment to v3 (R-CONTIG null correction)",
+  "scripts": [
+   "shortscalar_sum_stageA_v2.py"
+  ],
+  "present": [
+   "shortscalar_sum_stageA_v2.py"
+  ],
+  "script": "shortscalar_sum_stageA_v2.py",
+  "sha": "f79e51f9c8ba",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_spectral_decomp_v1.md",
+  "claim": "on the non-CM curve $E'$ is null ($E_3'=3711$, $p\\approx 0.66$). But E3 is a *single-number",
+  "scripts": [
+   "spectral_decomp_apply.py"
+  ],
+  "present": [
+   "spectral_decomp_apply.py"
+  ],
+  "script": "spectral_decomp_apply.py",
+  "sha": "b9fddfbea374",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_structured_pair_bilinear_v1.md",
+  "claim": "**Status: SPEC ONLY. Written before any structured-pair data is seen. Decidable artifact.**",
+  "scripts": [
+   "difference_set_closure_verify_v1.py",
+   "t_y_maxbound_v1.py",
+   "xy_interference_U_v1.py"
+  ],
+  "present": [
+   "difference_set_closure_verify_v1.py",
+   "t_y_maxbound_v1.py",
+   "xy_interference_U_v1.py"
+  ],
+  "script": "difference_set_closure_verify_v1.py",
+  "sha": "c5b68b104421",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_twist_orbit_magnitude_v1.md",
+  "claim": "SIGNED channel, null) \u2014 shares its validated machinery; only the NEW object is spelled out. No",
+  "scripts": [
+   "twist_orbit_magnitude_run_v1.py"
+  ],
+  "present": [
+   "twist_orbit_magnitude_run_v1.py"
+  ],
+  "script": "twist_orbit_magnitude_run_v1.py",
+  "sha": "d9e3eb6a822b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_twist_orbit_magnitude_v1_DEVIATIONS.md",
+  "claim": "excluded; 0 of 90/150 non-DC even-`\u03bc\u2083`-trivial coefficients forced-zero; null non-degenerate); null",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_twist_orbit_monodromy_v1.md",
+  "claim": "| `E[u\u2074]` within the iid-SU(2) band at S, and the deviation from 1/8 shrinks with `p` | **full SU(2) monodromy** for the `\u03c7\u2082(y)\u2297\u03c7_a` family `[EMPIRICAL \u2014 SEEN-DATA]`. Confirms the `A_new`-channel pict",
+  "scripts": [
+   "monodromy_preview_v1.py"
+  ],
+  "present": [],
+  "script": "monodromy_preview_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PREREG_twist_orbit_monodromy_v1_DEVIATIONS.md",
+  "claim": "iid-SU(2) null (centered at the asymptotic `1/8`) is correctly matched to finite-p data, given all 7",
+  "scripts": [
+   "monodromy_preview_v1.py"
+  ],
+  "present": [],
+  "script": "monodromy_preview_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "PROTOCOL_blinded_joint_readout_v1.md",
+  "claim": "report a flat table. **No target is privileged.** You are not told which (if any) target is a",
+  "scripts": [
+   "ecc_secp256k1.py",
+   "int1_frame_operator_v1.py",
+   "lift_sextant_rhombus_law_proof_v2.py"
+  ],
+  "present": [
+   "ecc_secp256k1.py",
+   "int1_frame_operator_v1.py",
+   "lift_sextant_rhombus_law_proof_v2.py"
+  ],
+  "script": "ecc_secp256k1.py",
+  "sha": "7c6eb58b6788",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_L3_signature_leakage_v1.md",
+  "claim": "Grade: **VERIFIED-scope** (empirical, controlled, scaling sweep). Conditional null:",
+  "scripts": [
+   "btc_puzzle_investigation/leak_test.sage",
+   "selfaudit.sage",
+   "rootcheck.sage"
+  ],
+  "present": [
+   "btc_puzzle_investigation/leak_test.sage",
+   "selfaudit.sage",
+   "rootcheck.sage"
+  ],
+  "script": "leak_test.sage",
+  "sha": "5e4d4bb3d78f",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_N1_reframed_2sqrtp_cap_v1.md",
+  "claim": "> **\u00a72 and \u00a73 of this document are WITHDRAWN as N1 findings.** See",
+  "scripts": [
+   "n1_exact_saturation_v1.py"
+  ],
+  "present": [
+   "n1_exact_saturation_v1.py"
+  ],
+  "script": "n1_exact_saturation_v1.py",
+  "sha": "97dae46b63a1",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_Sy_sign_skew_v1.md",
+  "claim": "# RESULT \u2014 Sy sign-skew: CONFIRMED real, but curve-generic (not secp-special, not a leak)",
+  "scripts": [
+   "_sy_skew_test_v1.py"
+  ],
+  "present": [
+   "_sy_skew_test_v1.py"
+  ],
+  "script": "_sy_skew_test_v1.py",
+  "sha": "18846565f384",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_amicable_log_bridge_v1.md",
+  "claim": "# RESULT \u2014 amicable log-bridge: the decidable sub-question is NULL (scoped magnitude bound) (v1, 2026-07-24)",
+  "scripts": [
+   "amicable_log_bridge_v1.py"
+  ],
+  "present": [
+   "amicable_log_bridge_v1.py"
+  ],
+  "script": "amicable_log_bridge_v1.py",
+  "sha": "721e7274520b",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_anew_m_support_v2.md",
+  "claim": "reporting**. Artifact: `audit_phase1_filters_v1.sage` / `.log`. No new sweep was run.*",
+  "scripts": [
+   "audit_phase1_filters_v1.sage",
+   "anew_m_support_v2.sage"
+  ],
+  "present": [
+   "audit_phase1_filters_v1.sage",
+   "anew_m_support_v2.sage"
+  ],
+  "script": "audit_phase1_filters_v1.sage",
+  "sha": "88edde44ef34",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_anew_multiprime_torsion_exploratory_v1.md",
+  "claim": "# RESULT \u2014 multi-prime torsion channels (\u2113=7,19): reduced-scale EXPLORATORY null (not the powered verdict)",
+  "scripts": [
+   "powered_gen.sage",
+   "val_stats.py"
+  ],
+  "present": [],
+  "script": "powered_gen.sage",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "claim": "# RESULT \u2014 FORK (1): the `a\u22600` twisted eigenvalues are NON-ABELIAN \u2192 not Jacobi sums \u2192 L-Stick premise fails; the `\u03b6\u2083` is geometric (L-mono)",
+  "scripts": [
+   "anew_eigenvalue_identify_v1.sage",
+   "anew_eigenvalue_verify_v4.sage"
+  ],
+  "present": [
+   "anew_eigenvalue_identify_v1.sage",
+   "anew_eigenvalue_verify_v4.sage"
+  ],
+  "script": "anew_eigenvalue_identify_v1.sage",
+  "sha": "2f90c6ff532f",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_aperture_probes_v1.md",
+  "claim": "**Seeds:** discovery `20260815`, OOS `20260816`\u2013`20260818`. $R = 1000$ permutation-null draws per cell.",
+  "scripts": [
+   "aperture_probes_v1.py",
+   "check_no_float.py"
+  ],
+  "present": [
+   "aperture_probes_v1.py",
+   "check_no_float.py"
+  ],
+  "script": "aperture_probes_v1.py",
+  "sha": "d05928a085cc",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "claim": "deviations in `..._DEVIATIONS.md`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL / collapse, both firing controls fired]`.",
+  "scripts": [
+   "bd_foundation.py",
+   "bd_engine.py",
+   "bd_run.py"
+  ],
+  "present": [
+   "i1_shortinterval_localizer_check.py"
+  ],
+  "script": "i1_shortinterval_localizer_check.py",
+  "sha": "3f7048c7372a",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_brick_e_cd_degree_v1.md",
+  "claim": "# RESULT \u2014 Brick E, p=43: `c\u207a(d)` is generic-degree (scoped NULL, lowest-power rung)",
+  "scripts": [
+   "brick_e_degree_fitter_v1.py",
+   "brick_e_ctrl_iv_rho_identity_v1.sage",
+   "lbe_dlog.sage"
+  ],
+  "present": [
+   "brick_e_degree_fitter_v1.py",
+   "brick_e_ctrl_iv_rho_identity_v1.sage",
+   "brick_e_run_v1.py"
+  ],
+  "script": "brick_e_degree_fitter_v1.py",
+  "sha": "73fddc54f34c",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_brick_e_cd_degree_v2.md",
+  "claim": "# RESULT v2 \u2014 Brick E, powered ladder: the cover-scramble degree `c\u207a(d)` is at the GENERIC CEILING across all well-posed rungs \u2014 the low-degree channel is retired WITH power",
+  "scripts": [
+   "brick_e_analysis_v2.py",
+   "brick_e_degree_fitter_v1.py",
+   "brick_e_rung_v2.sage"
+  ],
+  "present": [
+   "brick_e_analysis_v2.py",
+   "brick_e_degree_fitter_v1.py",
+   "brick_e_rung_v2.sage"
+  ],
+  "script": "brick_e_analysis_v2.py",
+  "sha": "48f4d681110f",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_c2_chi2_leak_lead_REPRODUCED_v1.md",
+  "claim": "> **\u26d4 WITHDRAWN \u2014 FALSE POSITIVE (2026-08-02, same day).** This \"reproduction\" was **invalid**: the",
+  "scripts": [
+   "c2_grouplaw_diffset_stageA_v1.py",
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "present": [
+   "c2_grouplaw_diffset_stageA_v1.py",
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "script": "c2_grouplaw_diffset_stageA_v1.py",
+  "sha": "255009ee39de",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_c2_grouplaw_diffset_stageA_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 bounded; gate-cleared; fresh-vs-pool-verified null; per-channel plants; 5-seed OOS]`.",
+  "scripts": [
+   "c2_grouplaw_diffset_stageA_v1.py"
+  ],
+  "present": [
+   "c2_grouplaw_diffset_stageA_v1.py"
+  ],
+  "script": "c2_grouplaw_diffset_stageA_v1.py",
+  "sha": "255009ee39de",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_chi2_diffset_FALSE_POSITIVE_v1.md",
+  "claim": "Supersedes `RESULT_c2_chi2_leak_lead_REPRODUCED_v1.md` (WITHDRAWN). **Scripts:**",
+  "scripts": [
+   "c2_grouplaw_diffset_curve_v1.py",
+   "chi2_diffset_definitive_v1.py",
+   "c2_grouplaw_diffset_stageA_v1.py"
+  ],
+  "present": [
+   "c2_grouplaw_diffset_curve_v1.py",
+   "chi2_diffset_definitive_v1.py",
+   "c2_grouplaw_diffset_stageA_v1.py"
+  ],
+  "script": "c2_grouplaw_diffset_curve_v1.py",
+  "sha": "0a96c309ea4b",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_chik_dmodk_leakage_v1.md",
+  "claim": "# RESULT \u2014 \u03c7_k(x([d]G)) vs d mod k: NULL, gated, both key-sets `[EMPIRICAL \u2014 SCOPED]`",
+  "scripts": [
+   "chik_dmodk_leakage_v1.py",
+   "check_no_float.py",
+   "leak_test_exact.py"
+  ],
+  "present": [
+   "chik_dmodk_leakage_v1.py",
+   "check_no_float.py",
+   "leak_test_exact.py"
+  ],
+  "script": "chik_dmodk_leakage_v1.py",
+  "sha": "641fe9d8477e",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_chirp_hologram_plane_v1.md",
+  "claim": "# The quadratic-phase (\"chirp\") plane: a new object, its one dark fringe, and a scoped null",
+  "scripts": [
+   "chirp_hologram_scan_v1.py"
+  ],
+  "present": [
+   "chirp_hologram_scan_v1.py"
+  ],
+  "script": "chirp_hologram_scan_v1.py",
+  "sha": "5028896f4d5b",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_cm_jointset_excess_v3.md",
+  "claim": "**Grade:** `[VERIFIED-scope \u2014 scoped null; discovery + OOS confirmation + scale ladder to 2\u00b9\u2076, R=10\u2074, all firing controls fired]`",
+  "scripts": [
+   "cm_jointset_excess_v3.py",
+   "model_curve_infra_v1.py"
+  ],
+  "present": [
+   "cm_jointset_excess_v3.py",
+   "model_curve_infra_v1.py"
+  ],
+  "script": "cm_jointset_excess_v3.py",
+  "sha": "182e53aaa784",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 2
+ },
+ {
+  "doc": "RESULT_cm_jointset_higherorder_v1.md",
+  "claim": "# RESULT \u2014 A-joint-HO (higher-order / GLV / finer-label joint-set synergy): discovery-tier scoped null",
+  "scripts": [
+   "cm_jointset_ho_v1.py",
+   "model_curve_infra_v1.py"
+  ],
+  "present": [
+   "cm_jointset_ho_v1.py",
+   "model_curve_infra_v1.py"
+  ],
+  "script": "cm_jointset_ho_v1.py",
+  "sha": "07e5f11983d4",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "claim": "degenerate builds (D1). `[VERIFIED \u2014 KAT + artifact]`.",
+  "scripts": [
+   "cm_jointset_semaev_r5_v1.py"
+  ],
+  "present": [
+   "cm_jointset_semaev_r5_v1.py"
+  ],
+  "script": "cm_jointset_semaev_r5_v1.py",
+  "sha": "2d5148c87fae",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_cm_lattice_unfolding_v1.md",
+  "claim": "| ARM P: `I(\u03a6; (a,b) mod \u2113) < 9\u00b710\u207b\u2074 bits`, \u2113\u2208{2,3,5,7}, both mod-12 classes, `p\u22481.3\u00b710\u2075` | **`[EMPIRICAL \u2014 bounded null, powered, scoped]`** |",
+  "scripts": [
+   "cm_lattice_setup_v1.py",
+   "cm_lattice_unfolding_v1.py"
+  ],
+  "present": [
+   "cm_lattice_setup_v1.py",
+   "cm_lattice_unfolding_v1.py"
+  ],
+  "script": "cm_lattice_setup_v1.py",
+  "sha": "9a081bcbe027",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_coherent_pool_P0prime_v1.md",
+  "claim": "char-vs-null effect, not a pool construction bias.** `[VERIFIED \u2014 empirical, real null]`",
+  "scripts": [
+   "check_no_float.py",
+   "row_budget_run_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "present": [
+   "check_no_float.py",
+   "row_budget_run_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "script": "check_no_float.py",
+  "sha": "a32fab348b71",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_cside_nonalgebraic_correlation_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 SCOPED, family-wise NULL]`** for the per-prime CDH/inversion structure; **`[FLAGGED LEAD \u2014 sub-detection, calibration-controlled]`** for the pooled negative bias. **Not a closur",
+  "scripts": [
+   "cside_nonalgebraic_correlation_v1.py",
+   "cside_orbitlevel_v1.py",
+   "arrangement_correlation_v1.py"
+  ],
+  "present": [
+   "cside_nonalgebraic_correlation_v1.py",
+   "cside_orbitlevel_v1.py",
+   "arrangement_correlation_v1.py"
+  ],
+  "script": "cside_nonalgebraic_correlation_v1.py",
+  "sha": "2742c99abafd",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_cside_pooled_tilt_settlement_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 SCOPED]`** for the per-prime `inv` family-wise null (retained from v1); **`[FLAGGED LEAD \u2014 CLOSED as a candidate]`** for the pooled `inv` tilt. **Not a closure of the channel** ",
+  "scripts": [
+   "cside_pooled_tilt_settlement_v1.py",
+   "check_no_float.py",
+   "cside_orbitlevel_v1.py"
+  ],
+  "present": [
+   "cside_pooled_tilt_settlement_v1.py",
+   "check_no_float.py",
+   "cside_orbitlevel_v1.py"
+  ],
+  "script": "cside_pooled_tilt_settlement_v1.py",
+  "sha": "79dabb15d58d",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "claim": "**Date 2026-08-21. Grade: `[VERIFIED \u2014 exact, decidable artifact]`** for every structural check below",
+  "scripts": [
+   "d2_twist_rigidity_certificate_v1.py",
+   "d2_nonabelian_sweep_v2.sage"
+  ],
+  "present": [
+   "d2_twist_rigidity_certificate_v1.py",
+   "d2_nonabelian_sweep_v2.sage"
+  ],
+  "script": "d2_twist_rigidity_certificate_v1.py",
+  "sha": "b82e56f68650",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_descendant_frame_operator_v2.md",
+  "claim": "is made (see \u00a73 for why that phrasing, not the withdrawn one).*",
+  "scripts": [
+   "int1_frame_operator_v1.py"
+  ],
+  "present": [
+   "int1_frame_operator_v1.py"
+  ],
+  "script": "int1_frame_operator_v1.py",
+  "sha": "3921c1fb3d4e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_diffset_cubic_beta2_characterization_v1.md",
+  "claim": "null, 3000 resamples. Integer-exact.",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_diffset_cubic_cmvanishing_v1.md",
+  "claim": "> ## \u2298 HEADLINE SUPERSEDED (banner added 2026-08-04, retrospective audit)",
+  "scripts": [
+   "cmvanishing_curve_setup.sage",
+   "diffset_cubic_Eprime_derive.py",
+   "diffset_cubic_Eprime_null.py"
+  ],
+  "present": [
+   "cmvanishing_curve_setup.sage",
+   "diffset_cubic_Eprime_derive.py",
+   "diffset_cubic_Eprime_null.py"
+  ],
+  "script": "cmvanishing_curve_setup.sage",
+  "sha": "3937fa4378a0",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_diffset_sdiff_v1.md",
+  "claim": "**Grade:** `[MEASURED-EXACT \u2014 scoped null for the frozen-orientation projection, n=82, secp P]`.",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_dirichlet_island_structure_and_leakage_v1.md",
+  "claim": "**Grade: Part A `[VERIFIED \u2014 exact, real secp params]`; Part B `[EMPIRICAL \u2014 NULL at power, scale-resolved]`.**",
+  "scripts": [
+   "scratchpad/islands_rethink.py",
+   "islands_leak.py",
+   "islands_leak_control.py"
+  ],
+  "present": [],
+  "script": "islands_rethink.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_e3_owed_measurement_v1.md",
+  "claim": "# RESULT \u2014 E3 (A-1d) owed measurement DISCHARGED: set-specific reject survives the generator-free null, bounded family-wise",
+  "scripts": [
+   "e3_owed_measurement_v1.py",
+   "check_no_float.py"
+  ],
+  "present": [
+   "e3_owed_measurement_v1.py",
+   "check_no_float.py"
+  ],
+  "script": "e3_owed_measurement_v1.py",
+  "sha": "09f12cdc2fbf",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "claim": "`[EMPIRICAL \u2014 powered family null]` corroboration (`RESULT_eps_to_d_constraint_v2`).** Curve",
+  "scripts": [
+   "t2c_range_glv_structure_v1.py",
+   "eis_carry_2d_dlp_reduction_v1.py"
+  ],
+  "present": [
+   "t2c_range_glv_structure_v1.py",
+   "eis_carry_2d_dlp_reduction_v1.py"
+  ],
+  "script": "t2c_range_glv_structure_v1.py",
+  "sha": "e4be3e8660bc",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_ell_ge5_mutual_information_v1.md",
+  "claim": "# \u2113\u22655: the blind spot held no bridge \u2014 a mutual-information probe tightens the D3 null",
+  "scripts": [
+   "ell_mi_oos.py",
+   "ell_mi_final.py"
+  ],
+  "present": [],
+  "script": "ell_mi_oos.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_eps_to_d_constraint_v1.md",
+  "claim": "## Results \u2014 `[EMPIRICAL \u2014 SCOPED NULL; plant-fired, powered]`",
+  "scripts": [
+   "scratchpad/eps_to_d_run_v1.py"
+  ],
+  "present": [],
+  "script": "eps_to_d_run_v1.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_eps_to_d_constraint_v2.md",
+  "claim": "## Results \u2014 `[EMPIRICAL \u2014 FAMILY-WIDE SCOPED NULL; plant-fired, powered]`",
+  "scripts": [
+   "scratchpad/eps_to_d_family_v2.py"
+  ],
+  "present": [],
+  "script": "eps_to_d_family_v2.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_exclusion_hard_empty_cells_v1.md",
+  "claim": "**Date:** 2026-08-16. **`[EMPIRICAL \u2014 scoped null on HARD exclusion; NOT \"impossible\"]`.** Gate-free",
+  "scripts": [
+   "scratchpad/exclusion_occupancy_v1.py"
+  ],
+  "present": [],
+  "script": "exclusion_occupancy_v1.py",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_flap_a_invariance_v1.md",
+  "claim": "exploratory, D3 classifier densities, D4 gate pool, D5 `check_no_float` fails on the carve-out lines,",
+  "scripts": [
+   "flap_a_invariance_v1.py"
+  ],
+  "present": [
+   "flap_a_invariance_v1.py"
+  ],
+  "script": "flap_a_invariance_v1.py",
+  "sha": "17604941c1c4",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_flap_density_glv_130bit_null_v1.md",
+  "claim": "# 130-bit vs 256-bit scalar: flap density of P=dG \u2014 high-powered NULL (no density bias)",
+  "scripts": [
+   "flap_density_glv_prereg_v1.py"
+  ],
+  "present": [
+   "flap_density_glv_prereg_v1.py"
+  ],
+  "script": "flap_density_glv_prereg_v1.py",
+  "sha": "b70bac98f160",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_fld_6h_theorem_assembly_v4.md",
+  "claim": "`[VERIFIED, not proved]`.\" **That split was an artifact of computing the wrong flap formula for the",
+  "scripts": [
+   "fld_root_symmetry_v1.py",
+   "fld_effective_root_v1.py",
+   "fld_changevar_v1.py"
+  ],
+  "present": [
+   "fld_root_symmetry_v1.py",
+   "fld_effective_root_v1.py",
+   "fld_changevar_v1.py"
+  ],
+  "script": "fld_root_symmetry_v1.py",
+  "sha": "96381ae59b5b",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "claim": "(spec honored verbatim); \u03c7\u00b2 ranked against a matched permutation null (the one float use the",
+  "scripts": [
+   "glm_flap_harness.py",
+   "glm_flap_partB.py",
+   "scratchpad/inv_group.py"
+  ],
+  "present": [
+   "glm_flap_harness.py",
+   "glm_flap_partB.py"
+  ],
+  "script": "glm_flap_harness.py",
+  "sha": "b7d4081cda98",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power and scope stated in \u00a74. **The avenue is NOT closed.**",
+  "scripts": [
+   "glv_norm_readout_matched_null_v1.py",
+   "glv_norm_readout_matched_null_v2.py"
+  ],
+  "present": [
+   "glv_norm_readout_matched_null_v1.py",
+   "glv_norm_readout_matched_null_v2.py"
+  ],
+  "script": "glv_norm_readout_matched_null_v1.py",
+  "sha": "3fcdf1b96594",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_grouplaw_e3_real82_v1.md",
+  "claim": "# RESULT \u2014 group-law E3 on the real 82: a powered null; the \"fires-harder\" prediction is FALSIFIED, localizing the Brick A signal to x-coordinate field arithmetic",
+  "scripts": [
+   "grouplaw_e3_real82_v1.py",
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "present": [
+   "grouplaw_e3_real82_v1.py",
+   "c2_grouplaw_diffset_curve_v1.py"
+  ],
+  "script": "grouplaw_e3_real82_v1.py",
+  "sha": "307c946683af",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 3
+ },
+ {
+  "doc": "RESULT_h5_cofactor_artifact_v1.md",
+  "claim": "# RESULT \u2014 H-5 resolved: the Semaev CM relation-yield lever is a COFACTOR / subgroup-confinement artifact of non-cyclic j=0 model curves (not a CM lever, not the #E-leak)",
+  "scripts": [
+   "h5_followup_run_v1.py",
+   "analyze_h5_followup_v1.py",
+   "analyze_h5_F2b_primedrop_v1.py"
+  ],
+  "present": [
+   "h5_followup_run_v1.py",
+   "analyze_h5_followup_v1.py",
+   "analyze_h5_F2b_primedrop_v1.py"
+  ],
+  "script": "h5_followup_run_v1.py",
+  "sha": "1d64a5b2fb41",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_h5_cofactor_restoration_v1.md",
+  "claim": "- **M25 / N22 H1 leg** \u2192 re-graded from `[null \u2014 cofactor/sampling artifact]` to",
+  "scripts": [
+   "h5_cofactor_restoration_run_v1.py",
+   "check_no_float.py",
+   "analyze_h5_restoration_v1.py"
+  ],
+  "present": [
+   "h5_cofactor_restoration_run_v1.py",
+   "check_no_float.py",
+   "analyze_h5_restoration_v1.py"
+  ],
+  "script": "h5_cofactor_restoration_run_v1.py",
+  "sha": "2757f3fc5854",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_h5_cofactor_restoration_v2.md",
+  "claim": "- **M25 / N22 H1 leg** stays `[null \u2014 cofactor/sampling artifact, model scale]`, now upgraded in",
+  "scripts": [
+   "h5_cofactor_restoration_run_v1.py",
+   "h5_restoration_smallband_v1.py",
+   "check_no_float.py"
+  ],
+  "present": [
+   "h5_cofactor_restoration_run_v1.py",
+   "h5_restoration_smallband_v1.py",
+   "check_no_float.py"
+  ],
+  "script": "h5_cofactor_restoration_run_v1.py",
+  "sha": "2757f3fc5854",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_harmonic_deficit_locus_v1.md",
+  "claim": "> **\u26a0 RETRACTED (2026-07-21) \u2014 the \"b=0 axis LOCALIZATION\" claimed below is a WRONG-NULL ARTIFACT.**",
+  "scripts": [
+   "_axis_null_check_v1.py",
+   "_aggregate_null_check_v1.py",
+   "harmonic_deficit_locus_v2.py"
+  ],
+  "present": [
+   "_axis_null_check_v1.py",
+   "_aggregate_null_check_v1.py",
+   "harmonic_deficit_locus_v2.py"
+  ],
+  "script": "_axis_null_check_v1.py",
+  "sha": "1c66080840d4",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`. The channel is **not** closed; \u00a74 states what is untouched.",
+  "scripts": [
+   "incomplete_sum_2p128_firstorder_v1.py"
+  ],
+  "present": [
+   "incomplete_sum_2p128_firstorder_v1.py"
+  ],
+  "script": "incomplete_sum_2p128_firstorder_v1.py",
+  "sha": "a7816fc79734",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "claim": "# RESULT \u2014 ITEM 2 REMAINDER: spatial statistics of `|T(a,b)|\u00b2`. No structure established; THREE artifacts caught by controls.",
+  "scripts": [
+   "intensity_field_rmt_v1.py"
+  ],
+  "present": [
+   "intensity_field_rmt_v1.py"
+  ],
+  "script": "intensity_field_rmt_v1.py",
+  "sha": "233bcc884b2c",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_intertwined_proxy_WN_tested_v1.md",
+  "claim": "**Grade of this finding:** `[VERIFIED \u2014 decidable artifact]` for the mechanism incoherence (\u00a72.1\u20132.2);",
+  "scripts": [
+   "scratchpad/test_intertwined_proxy.py",
+   "scratchpad/verify_U_pullback.py"
+  ],
+  "present": [],
+  "script": "test_intertwined_proxy.py",
+  "sha": "",
+  "type": "T5",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_interval_C4_M2000_v1.md",
+  "claim": "# RESULT \u2014 C.4: the interval channel at `M = 2000`. A quantified BOUND (18.5\u00d7 tighter), not a null.",
+  "scripts": [
+   "interval_C4_M2000_v1.py"
+  ],
+  "present": [
+   "interval_C4_M2000_v1.py"
+  ],
+  "script": "interval_C4_M2000_v1.py",
+  "sha": "a93cef796c97",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_interval_cneg_recalibration_v1.md",
+  "claim": "# RESULT \u2014 the `E\u2086` control debt is DISCHARGED; item C.2 unblocked; one new caveat on the field `E\u2083` null",
+  "scripts": [
+   "interval_cneg_recalibration_v1.py",
+   "check_no_float.py",
+   "interval_multireadout_v3.py"
+  ],
+  "present": [
+   "interval_cneg_recalibration_v1.py",
+   "check_no_float.py",
+   "interval_multireadout_v3.py"
+  ],
+  "script": "interval_cneg_recalibration_v1.py",
+  "sha": "13ec4835c14f",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_interval_inversion_and_hamming_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power stated. **Neither covariate is closed as a channel.**",
+  "scripts": [
+   "interval_inversion_and_hamming_v1.py"
+  ],
+  "present": [
+   "interval_inversion_and_hamming_v1.py"
+  ],
+  "script": "interval_inversion_and_hamming_v1.py",
+  "sha": "d54e3824f274",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_interval_multireadout_v2.md",
+  "claim": "# RESULT \u2014 interval confinement, extended: larger `M`, group-law difference, and a readout axis that turned out void",
+  "scripts": [
+   "interval_multireadout_v3.py",
+   "oos_group_retest_v1.py",
+   "interval_multireadout_v2.py"
+  ],
+  "present": [
+   "interval_multireadout_v3.py",
+   "oos_group_retest_v1.py",
+   "interval_multireadout_v2.py"
+  ],
+  "script": "interval_multireadout_v3.py",
+  "sha": "a4a3078cfcc4",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_interval_sumobject_item3_v1.md",
+  "claim": "**Log:** `item3_run_v1.log`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power measured.",
+  "scripts": [
+   "interval_sumobject_v1.py",
+   "check_no_float.py",
+   "interval_multireadout_v3.py"
+  ],
+  "present": [
+   "interval_sumobject_v1.py",
+   "check_no_float.py",
+   "interval_multireadout_v3.py"
+  ],
+  "script": "interval_sumobject_v1.py",
+  "sha": "9871da91ef6a",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_interval_vs_random_characterize_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 earned; located artifact + scoped bound]`.** This is the test I had SKIPPED,",
+  "scripts": [
+   "shortscalar_interval_vs_random_characterize_v1.py"
+  ],
+  "present": [
+   "shortscalar_interval_vs_random_characterize_v1.py"
+  ],
+  "script": "shortscalar_interval_vs_random_characterize_v1.py",
+  "sha": "1d8d67699b33",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_islands_curveimage_jointset_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 scoped null, pre-registered, all controls live]`.** Executes",
+  "scripts": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "present": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "script": "islands_curveimage_jointset_v1.py",
+  "sha": "3111bc5bcdbd",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_islands_curveimage_jointset_v2.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 scoped null on S1/S2/S3 only, pre-registered, controls live]`.**",
+  "scripts": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "present": [
+   "islands_curveimage_jointset_v1.py"
+  ],
+  "script": "islands_curveimage_jointset_v1.py",
+  "sha": "3111bc5bcdbd",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_item5_deep_k135_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 BOUND, power measured]`. **Not a null.**",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_jacobi_closed_form_m_law_v3.md",
+  "claim": "**Supersedes:** v2 (which superseded v1). **v3 is a correctness fix**: v1 and v2 both misnamed the",
+  "scripts": [
+   "gauss_id.sage",
+   "jacobi_closed_form_m_law_v2.sage",
+   "m_branch_secp_v1.py"
+  ],
+  "present": [
+   "jacobi_closed_form_m_law_v2.sage",
+   "m_branch_secp_v1.py",
+   "eig_check2.sage"
+  ],
+  "script": "jacobi_closed_form_m_law_v2.sage",
+  "sha": "841e977b1f73",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_joint_carry_twokey_mi_v1.md",
+  "claim": "**`[VERIFIED-scope NULL]`.** **Object:** cross-point synergy of the summand-flap `A=b_eps(x_{P\u2082})` and",
+  "scripts": [
+   "scratchpad/joint_carry_twokey_mi_v1.py"
+  ],
+  "present": [],
+  "script": "joint_carry_twokey_mi_v1.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_joint_fiber_carry_mi_v1.md",
+  "claim": "**`[VERIFIED-scope NULL]`.** **Object:** cross-channel dependence between the public coordinate flap",
+  "scripts": [
+   "scratchpad/joint_fiber_carry_mi_v1.py"
+  ],
+  "present": [],
+  "script": "joint_fiber_carry_mi_v1.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_joint_shadow_decompose_v2.md",
+  "claim": "unverified mechanism (\"joint rho2\u22481 because |U| is flat\") and used dismissal language",
+  "scripts": [
+   "joint_shadow_decompose_v1.py"
+  ],
+  "present": [
+   "joint_shadow_decompose_v1.py"
+  ],
+  "script": "joint_shadow_decompose_v1.py",
+  "sha": "1063f4767a2c",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_joint_shadow_mu3_v1.md",
+  "claim": "Follows `RESULT_joint_shadow_decompose_v2` (the joint-shadow magnitudes are generic; the",
+  "scripts": [
+   "joint_shadow_mu3_v1.py"
+  ],
+  "present": [
+   "joint_shadow_mu3_v1.py"
+  ],
+  "script": "joint_shadow_mu3_v1.py",
+  "sha": "d858fb9a9cd6",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 4
+ },
+ {
+  "doc": "RESULT_large_p_and_arrangement_v1.md",
+  "claim": "# Larger primes on the `I` lens, and arrangement correlations \u2014 the semicircle null's blind side",
+  "scripts": [
+   "phase_family_scan_v1.py",
+   "arrangement_correlation_v1.py"
+  ],
+  "present": [
+   "phase_family_scan_v1.py",
+   "arrangement_correlation_v1.py"
+  ],
+  "script": "phase_family_scan_v1.py",
+  "sha": "c5cd1d552903",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_linchpin_s_gate_v2.md",
+  "claim": "trail). **Artifact:** `scratchpad/linchpin_s_gate_v1.py` + stdout. Exact arithmetic",
+  "scripts": [
+   "scratchpad/linchpin_s_gate_v1.py"
+  ],
+  "present": [],
+  "script": "linchpin_s_gate_v1.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_linchpin_s_gate_verified_v1.md",
+  "claim": "> **SUPERSEDED by `RESULT_linchpin_s_gate_v2.md` (2026-08-11). Kept as trail.** v1's title/grade",
+  "scripts": [
+   "scratchpad/linchpin_s_gate_v1.py"
+  ],
+  "present": [],
+  "script": "linchpin_s_gate_v1.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_lmono_brick1_gkr_inputs_v1.md",
+  "claim": "Scripts: `lmono_brick1_branch_v2.sage` (+ `.log`, `lmono_brick1_branch.json`; v1 superseded \u2014 see the",
+  "scripts": [
+   "lmono_brick1_branch_v2.sage"
+  ],
+  "present": [
+   "lmono_brick1_branch_v2.sage"
+  ],
+  "script": "lmono_brick1_branch_v2.sage",
+  "sha": "2249fc04f420",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_lrc_null_typing_transfer_v1.md",
+  "claim": "# Retyping the lift\u00d7band null under the LRC coverage-transport taxonomy (v1, 2026-07-23)",
+  "scripts": [
+   "lift_band_spectral_v1.py"
+  ],
+  "present": [
+   "lift_band_spectral_v1.py"
+  ],
+  "script": "lift_band_spectral_v1.py",
+  "sha": "31a48b8ac250",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu3_glv_frequency_support_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 scoped null, \u03c4-robust, well-powered]`. **No grade change** to the underlying",
+  "scripts": [
+   "mu3_glv_frequency_support_v1.py",
+   "verify_U_pullback.py",
+   "partA.py"
+  ],
+  "present": [
+   "mu3_glv_frequency_support_v1.py"
+  ],
+  "script": "mu3_glv_frequency_support_v1.py",
+  "sha": "d43911d35c95",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu3_phase_within_triple_v1.md",
+  "claim": "**Grade:** `[EMPIRICAL \u2014 scoped null, corrected null]`. No grade change to the \u221213.99\u03c3 deficit",
+  "scripts": [
+   "mu3_phase_within_triple_v1.py",
+   "mu3_phase_within_triple_globalnull_v2.py",
+   "phase_facts.py"
+  ],
+  "present": [
+   "mu3_phase_within_triple_v1.py",
+   "mu3_phase_within_triple_globalnull_v2.py"
+  ],
+  "script": "mu3_phase_within_triple_v1.py",
+  "sha": "94bf6c6df90f",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu3_projection_v1.md",
+  "claim": "**Scripts:** `mu3_projection_v1.py` (primary D\u2084 + plants), `mu3_selfnull_v1.py` (per-readout self-null),",
+  "scripts": [
+   "mu3_projection_v1.py",
+   "mu3_selfnull_v1.py"
+  ],
+  "present": [
+   "mu3_projection_v1.py",
+   "mu3_selfnull_v1.py"
+  ],
+  "script": "mu3_projection_v1.py",
+  "sha": "80df94c83506",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu3_subspace_residual_v1.md",
+  "claim": "# RESULT \u2014 \u03bc\u2083-forced subspace residual: three probes, scoped null on the powered-strata",
+  "scripts": [
+   "mu3_subspace_residual_v1.py",
+   "check_no_float.py",
+   "run_n1_120deg_v1.py"
+  ],
+  "present": [
+   "mu3_subspace_residual_v1.py",
+   "check_no_float.py",
+   "run_n1_120deg_v1.py"
+  ],
+  "script": "mu3_subspace_residual_v1.py",
+  "sha": "c28b60676e19",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu6_cohomology_supersingular_v2.md",
+  "claim": "Artifact: `supersingular_mu4_mechanism_v1.py` + `.log` (Sage, exact integer point counts over",
+  "scripts": [
+   "supersingular_mu4_mechanism_v1.py"
+  ],
+  "present": [
+   "supersingular_mu4_mechanism_v1.py"
+  ],
+  "script": "supersingular_mu4_mechanism_v1.py",
+  "sha": "8445fe1b669c",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu6_cover_and_conductor_v2.md",
+  "claim": "*2026-07-23. Supersedes `RESULT_mu6_cover_and_conductor_v1.md`, which is **superseded in \u00a71 and carries",
+  "scripts": [
+   "scratchpad/mu6_derivation.py",
+   "secp_branch.py"
+  ],
+  "present": [],
+  "script": "mu6_derivation.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "claim": "**Grade:** R1 finer-syzygy lever `[VERIFIED \u2014 NULL, matched-quo, quo=2, m=2, p=523; single clean cell]`;",
+  "scripts": [
+   "r1_syzygy_m2.py",
+   "r1_fixed_betti.py"
+  ],
+  "present": [
+   "r1_syzygy_m2.py",
+   "r1_fixed_betti.py"
+  ],
+  "script": "r1_syzygy_m2.py",
+  "sha": "6370f4efc606",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu6_isotype_leak_structure_v1.md",
+  "claim": "# \u03bc6-isotype grading of readouts \u2014 tying the flap-null to the leak-structure",
+  "scripts": [
+   "scratchpad/mu6_isotype.py"
+  ],
+  "present": [],
+  "script": "mu6_isotype.py",
+  "sha": "",
+  "type": "T6",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "claim": "`[VERIFIED \u2014 scoped NULL, m\u2208{2,3}, p\u2208[523,601], last-fall degree]`.",
+  "scripts": [
+   "omega_isotypic_staircase_v1.py",
+   "_v2.py",
+   "delta_r_corrected_v2.py"
+  ],
+  "present": [
+   "omega_isotypic_staircase_v1.py",
+   "delta_r_corrected_v2.py",
+   "delta_r_sweep.py"
+  ],
+  "script": "omega_isotypic_staircase_v1.py",
+  "sha": "5fc9858f07eb",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_mu6_quotient_relation_multiplication_v1.md",
+  "claim": "it does NOT need to beat generic `\u221an` or solve ECDLP to count. Disparate real findings compound; recording a",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_mu6_solving_degree_v1.md",
+  "claim": "**`[EMPIRICAL \u2014 scoped component null; PROVISIONAL, citation-verifier owed]`.** **Object:** the last-fall degree `d_LF` of the consistent Semaev point-decomposition ideal. **Class:** the binding solvi",
+  "scripts": [
+   "mu6_solving_degree_v1.py",
+   "semaev_elimination_v1.py"
+  ],
+  "present": [
+   "mu6_solving_degree_v1.py",
+   "semaev_elimination_v1.py"
+  ],
+  "script": "mu6_solving_degree_v1.py",
+  "sha": "a5769101504f",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_n15_joint_readout_confinement_v1.md",
+  "claim": "# RESULT \u2014 N15 joint multi-readout confinement: scoped null on constructed secp keys",
+  "scripts": [
+   "n15_readout_confinement_runner_v1.py",
+   "build_fullrange_dataset_v1.py"
+  ],
+  "present": [
+   "n15_readout_confinement_runner_v1.py",
+   "build_fullrange_dataset_v1.py"
+  ],
+  "script": "n15_readout_confinement_runner_v1.py",
+  "sha": "2a6bbe9eb7d5",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_n15_twopoint_tuple_filter_v1.md",
+  "claim": "**Date 2026-08-22. Grade: `[VERIFIED \u2014 exact, total enumeration; matched null]`** Scripts:",
+  "scripts": [
+   "n15_twopoint_tuple_filter_v1.py",
+   "n15_twopoint_tuple_scaling_v2.py",
+   "n15_threepoint_tuple_filter_v1.py"
+  ],
+  "present": [
+   "n15_twopoint_tuple_filter_v1.py",
+   "n15_twopoint_tuple_scaling_v2.py",
+   "n15_threepoint_tuple_filter_v1.py"
+  ],
+  "script": "n15_twopoint_tuple_filter_v1.py",
+  "sha": "2a278637b3eb",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "claim": "a document cannot witness its own audit; [[feedback-verification-claim-needs-artifact-2026-07-24]]).",
+  "scripts": [
+   "n1_120deg_g2_honest_reproduction_v1.py",
+   "n1_120deg_g2_modular_breadth_v1.py",
+   "n1_omega_descent_reproduction_v1.py"
+  ],
+  "present": [
+   "n1_120deg_g2_honest_reproduction_v1.py",
+   "n1_120deg_g2_modular_breadth_v1.py",
+   "n1_omega_descent_reproduction_v1.py"
+  ],
+  "script": "n1_120deg_g2_honest_reproduction_v1.py",
+  "sha": "d5183e9ba420",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_n1_cap_intersection_v1.md",
+  "claim": "project's existing monodromy corpus shows that conclusion **converges with \u2014 and is superseded by \u2014",
+  "scripts": [
+   "verify_e3_sign.sage"
+  ],
+  "present": [
+   "verify_e3_sign.sage"
+  ],
+  "script": "verify_e3_sign.sage",
+  "sha": "6177cbc4c870",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_n1_cap_proof_attempt_v2.md",
+  "claim": "> # \u26a0 SUPERSEDED \u2014 read `RESULT_n1_cap_intersection_v1.md` instead",
+  "scripts": [
+   "sage_ynq_v3.sage",
+   "sage_N_factor_v1.sage"
+  ],
+  "present": [
+   "sage_ynq_v3.sage",
+   "sage_N_factor_v1.sage"
+  ],
+  "script": "sage_ynq_v3.sage",
+  "sha": "16fd846fe47e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_n1_flap_bridge_v1.md",
+  "claim": "**Date:** 2026-07-25 \u00b7 Scripts: `n1_flap_bridge_v1.py` (superseded statistic), `n1_flap_bridge_v2.py`",
+  "scripts": [
+   "n1_flap_bridge_v1.py",
+   "n1_flap_bridge_v2.py"
+  ],
+  "present": [
+   "n1_flap_bridge_v1.py",
+   "n1_flap_bridge_v2.py"
+  ],
+  "script": "n1_flap_bridge_v1.py",
+  "sha": "98f900501bb3",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_n1_phase_cap_v2.md",
+  "claim": "# RESULT v2 \u2014 N1 re-typed to a phase-pairing question; the v1 headline is withdrawn",
+  "scripts": [
+   "n1_phase_cap_sweep_v1.py"
+  ],
+  "present": [
+   "n1_phase_cap_sweep_v1.py"
+  ],
+  "script": "n1_phase_cap_sweep_v1.py",
+  "sha": "3cc95a93030e",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_n1_v_sign_mechanism_v1.md",
+  "claim": "# N1: WHY `v \u2264 0` fails \u2014 an exact identity, and the conjecture restated as a sub-Weil bound",
+  "scripts": [
+   "n1_vsign_mechanism_v1.py"
+  ],
+  "present": [
+   "n1_vsign_mechanism_v1.py"
+  ],
+  "script": "n1_vsign_mechanism_v1.py",
+  "sha": "538bb17a8958",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 5
+ },
+ {
+  "doc": "RESULT_n7_finite_rank_refuted_v1.md",
+  "claim": "`[VERIFIED]` for the null-is-Rayleigh baseline; `[EMPIRICAL \u2014 suggestive, n=6, min-statistic]` for",
+  "scripts": [
+   "n7_finite_rank_v1.py",
+   "n7_xonly_floor_v1.py",
+   "subrayleigh_deficit_scaling_v1.py"
+  ],
+  "present": [
+   "n7_finite_rank_v1.py",
+   "n7_xonly_floor_v1.py",
+   "subrayleigh_deficit_scaling_v1.py"
+  ],
+  "script": "n7_finite_rank_v1.py",
+  "sha": "e62de2a4f36a",
+  "type": "T4",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_nkd_dterms_subsurface_v2.md",
+  "claim": "## 4. Correction: NOT 2-adic \u2014 Dirichlet-generic in L `[VERIFIED \u2014 matched control]`",
+  "scripts": [
+   "nkd_dterms_mechanism_v1.py"
+  ],
+  "present": [
+   "nkd_dterms_mechanism_v1.py"
+  ],
+  "script": "nkd_dterms_mechanism_v1.py",
+  "sha": "979cdb47b09f",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_orbit_bit_ladder_v1.md",
+  "claim": "exact over `Z/n`. Supersedes the verdict-language framing (\"trivial symmetry / no lever\") used earlier in",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_outside_symmetry_v2.md",
+  "claim": "symmetrized norm N\u0304 as \"within null (flat/geometric)\". They are NOT within the null \u2014 they are",
+  "scripts": [
+   "scratchpad/e_outside.py",
+   "scratchpad/diag_flatter.py"
+  ],
+  "present": [],
+  "script": "e_outside.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_outside_symmetry_v3.md",
+  "claim": "# \"Outside the symmetry\" v3 \u2014 CORRECTS the \"flat/geometric\" characterization",
+  "scripts": [
+   "scratchpad/diag_mechanism.py"
+  ],
+  "present": [],
+  "script": "diag_mechanism.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_overlap_arm_power_v1.md",
+  "claim": "`rho` against a 200-permutation null of the curve vector, and prints `|z|`. That arm shipped a matched",
+  "scripts": [
+   "lift_band_spectral_v1.py",
+   "overlap_plant_exact_v1.py",
+   "overlap_arm_power_v1.py"
+  ],
+  "present": [
+   "lift_band_spectral_v1.py",
+   "overlap_plant_exact_v1.py",
+   "overlap_arm_power_v1.py"
+  ],
+  "script": "lift_band_spectral_v1.py",
+  "sha": "31a48b8ac250",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_plays_1_and_4_refuted_predata_v1.md",
+  "claim": "**Status: DERIVATION + exact verification.** No statistic, no null, no p-value on either posed",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_powermap_familywide_from_settlement_v1.md",
+  "claim": "**Grade:** `[VERIFIED \u2014 calibrated pooled + K=2 OOS, 36-prime scan, gate firing]` for the NULLs; pow7 is a `pooled-significant / OOS-failed` candidate, **not promoted**.",
+  "scripts": [
+   "cside_orbitlevel_v1.py",
+   "cside_pooled_tilt_settlement_v1.py"
+  ],
+  "present": [
+   "cside_orbitlevel_v1.py",
+   "cside_pooled_tilt_settlement_v1.py"
+  ],
+  "script": "cside_orbitlevel_v1.py",
+  "sha": "28c9d64962af",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_pubkey_relations_controlled_v1.md",
+  "claim": "# RESULT \u2014 exposed-pubkey relations: the \"found none\" null was UNCONTROLLED; redone with a control",
+  "scripts": [
+   "pubkey_relations_controlled_v1.py",
+   "pubkey_relations.py",
+   "joint_relations_36k_v1.py"
+  ],
+  "present": [
+   "pubkey_relations_controlled_v1.py",
+   "pubkey_relations.py",
+   "joint_relations_36k_v1.py"
+  ],
+  "script": "pubkey_relations_controlled_v1.py",
+  "sha": "8419ad1408f6",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_public_feature_dmodq_battery_v1.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 NULL at power, SCOPED]`.** Date 2026-08-17. Motivation: the D2/mod-6 audit",
+  "scripts": [
+   "scratchpad/idea2.py",
+   "island_largeq.py",
+   "island_control.py"
+  ],
+  "present": [],
+  "script": "idea2.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_r3_orbit_autocorrelation_v1.md",
+  "claim": "`[EMPIRICAL \u2014 bounded; code-shuffle matched null; 5-seed OOS; gate-cleared]`.",
+  "scripts": [
+   "r3_orbit_autocorrelation_v1.py"
+  ],
+  "present": [
+   "r3_orbit_autocorrelation_v1.py"
+  ],
+  "script": "r3_orbit_autocorrelation_v1.py",
+  "sha": "751c0c645f73",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_rmt_battery_on_spectrum_item2c_v1.md",
+  "claim": "**Date:** 2026-08-01. **Script:** `transfer_operator_rmt_battery_v1.py`. **Grade:** `[EMPIRICAL \u2014 NULL, power validated]`.",
+  "scripts": [
+   "transfer_operator_rmt_battery_v1.py",
+   "conservation_spectrum_v1.py"
+  ],
+  "present": [
+   "transfer_operator_rmt_battery_v1.py",
+   "conservation_spectrum_v1.py"
+  ],
+  "script": "transfer_operator_rmt_battery_v1.py",
+  "sha": "57b2fa097f22",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "claim": "**Date:** 2026-08-01. **Script:** `rmt_delta3_twopoint_v1.py`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`.",
+  "scripts": [
+   "rmt_delta3_twopoint_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "present": [
+   "rmt_delta3_twopoint_v1.py",
+   "twist_orbit_spectrum_run_v1.py"
+  ],
+  "script": "rmt_delta3_twopoint_v1.py",
+  "sha": "39cd5ee2f38b",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_scale_cm_laws_ladder_v1.md",
+  "claim": "**Artifact:** `scale_cm_laws_ladder_v1.sage` (exact; passes `check_no_float.py`).",
+  "scripts": [
+   "scale_cm_laws_ladder_v1.sage",
+   "check_no_float.py",
+   "sextic_identities_verify.py"
+  ],
+  "present": [
+   "scale_cm_laws_ladder_v1.sage",
+   "check_no_float.py",
+   "sextic_identities_verify.py"
+  ],
+  "script": "scale_cm_laws_ladder_v1.sage",
+  "sha": "f2aa3f2746d9",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_score_exclusion_rangecut_v1.md",
+  "claim": "**`[VERIFIED \u2014 deterministic refutation, exact artifact]`.** The deterministic-pin amplifier route",
+  "scripts": [
+   "scratchpad/score_exclusion_frechet_verify_v1.py"
+  ],
+  "present": [],
+  "script": "score_exclusion_frechet_verify_v1.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_semaev_cm_relation_yield_v3_wide.md",
+  "claim": "experiment-designer gate-CLEARED; matched-#E null; firing controls live; m=3; |V|\u2208{4,5}]`.**",
+  "scripts": [
+   "semaev_cm_relation_yield_v3.py",
+   "semaev_elimination_v1.py",
+   "conservation_check.py"
+  ],
+  "present": [
+   "semaev_cm_relation_yield_v3.py",
+   "semaev_elimination_v1.py"
+  ],
+  "script": "semaev_cm_relation_yield_v3.py",
+  "sha": "73f12bdd7614",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_semaev_cm_solving_degree_v1.md",
+  "claim": "# RESULT \u2014 P2c: the \u03bc\u2086/\u03bc\u2083 CM symmetry gives NO Semaev solving-degree lever (scoped component null, not an avenue closure)",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "scratchpad/p2c_smoke.sage",
+   "scratchpad/p2c_invred.sage"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "mu6_solving_degree_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_semaev_cross_twist_yield_P1pp_v1.md",
+  "claim": "# RESULT \u2014 P1\u2033 INCONCLUSIVE: instrument bug caught, then the pre-registered statistic found to SATURATE. The b=1-artifact question is NOT answered; the design is degenerate and needs R1's per-target s",
+  "scripts": [
+   "p1pp_run.py"
+  ],
+  "present": [],
+  "script": "p1pp_run.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "claim": "unaffected. Owed if this null is ever leaned on beyond `[VERIFIED-scope, model]`.",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_firstfall_vs_m_v2.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "semaev_structure_firstfall_vs_m_v2.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_semaev_yield_frobenius_channel_P1_v1.md",
+  "claim": "computation). **Grade:** `[EMPIRICAL \u2014 SCOPED NULL, plant fired \u2192 informative; Outcome C]`. Existing R1 data",
+  "scripts": [
+   "p1_run.py",
+   "p1_secondaries.py",
+   "eisenstein_frobenius.py"
+  ],
+  "present": [],
+  "script": "p1_run.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_semicircle_null_and_verification_v1.md",
+  "claim": "# The cap-respecting null, the re-adjudicated curve-native panels, and the `V\u2082` identity confirmed",
+  "scripts": [
+   "semicircle_null_v1.py",
+   "curve_native_beam_scan_v2.py",
+   "verify_V2_identity_v1.sage"
+  ],
+  "present": [
+   "semicircle_null_v1.py",
+   "curve_native_beam_scan_v2.py",
+   "verify_V2_identity_v1.sage"
+  ],
+  "script": "semicircle_null_v1.py",
+  "sha": "48754360ea14",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_shortscalar_sum_stageA_v1.md",
+  "claim": "- `[EMPIRICAL \u2014 bounded, correctly-matched null]` for the band-confinement result (Q2).",
+  "scripts": [
+   "shortscalar_sum_stageA_v1.py",
+   "shortscalar_interval_nullmatch_diag_v1.py"
+  ],
+  "present": [
+   "shortscalar_sum_stageA_v1.py",
+   "shortscalar_interval_nullmatch_diag_v1.py"
+  ],
+  "script": "shortscalar_sum_stageA_v1.py",
+  "sha": "652665c96a85",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 6
+ },
+ {
+  "doc": "RESULT_shortscalar_sum_stageA_v2.md",
+  "claim": "**Grade: `[EMPIRICAL \u2014 bounded; correctly-matched null; 5-seed OOS; NO closure]`.**",
+  "scripts": [
+   "shortscalar_sum_stageA_v2.py",
+   "..._stageA_v1.py",
+   "..._nullmatch_diag_v1.py"
+  ],
+  "present": [
+   "shortscalar_sum_stageA_v2.py"
+  ],
+  "script": "shortscalar_sum_stageA_v2.py",
+  "sha": "f79e51f9c8ba",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "claim": "null and NOT an ECDLP-security claim. It is a decidable feasibility finding about",
+  "scripts": [
+   "nested_recursion_worked_example_v1.py"
+  ],
+  "present": [
+   "nested_recursion_worked_example_v1.py"
+  ],
+  "script": "nested_recursion_worked_example_v1.py",
+  "sha": "621fdddf6064",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_stickelberger_citation_verified_v1.md",
+  "claim": "Discharges the `[UNVERIFIED CITATION]` debt on Stickelberger that failed three prior runs. No leakage",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_subrayleigh_deficit_arithmetic_scatter_v1.md",
+  "claim": "> **\u26a0 SUPERSEDED by RESULT_...arithmetic_scatter_v2.md.** This v1 headline OVERCLAIMS: it reads the",
+  "scripts": [
+   "arithmetic_scatter_sweep_v1.py",
+   "analysis_scatter_v1.py",
+   "cyclicity_screen_v1.py"
+  ],
+  "present": [
+   "arithmetic_scatter_sweep_v1.py",
+   "analysis_scatter_v1.py",
+   "cyclicity_screen_v1.py"
+  ],
+  "script": "arithmetic_scatter_sweep_v1.py",
+  "sha": "6d8fb9999d79",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_subrayleigh_deficit_arithmetic_scatter_v2.md",
+  "claim": "~44% explained. Corrected below. Everything else in v1 (H2 firing, H1 null, controls, robustness) holds.",
+  "scripts": [
+   "arithmetic_scatter_sweep_v1.py",
+   "analysis_scatter_v1.py"
+  ],
+  "present": [
+   "arithmetic_scatter_sweep_v1.py",
+   "analysis_scatter_v1.py"
+  ],
+  "script": "arithmetic_scatter_sweep_v1.py",
+  "sha": "6d8fb9999d79",
+  "type": "T2",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_subrayleigh_deficit_scaling_v1.md",
+  "claim": "Deviations: `PREREG_subrayleigh_deficit_scaling_v1_DEVIATIONS.md` (D1 prereg numeral slip, no effect;",
+  "scripts": [
+   "subrayleigh_deficit_scaling_v1.py",
+   "analyze_scaling_v1.py"
+  ],
+  "present": [
+   "subrayleigh_deficit_scaling_v1.py"
+  ],
+  "script": "subrayleigh_deficit_scaling_v1.py",
+  "sha": "49b68df3ae91",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_t1b_tail_geometry_v1.md",
+  "claim": "**Artifact:** `scratchpad/t1b_tail_split_v1.py`. Float carve-out: |U| magnitudes, integer args in the",
+  "scripts": [
+   "scratchpad/t1b_tail_split_v1.py"
+  ],
+  "present": [],
+  "script": "t1b_tail_split_v1.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_t1b_yaxis_forced_v1.md",
+  "claim": "decidable dimensionality fact, not a matched-null verdict). Follows `RESULT_t1b_tail_geometry_v1.md`",
+  "scripts": [
+   "scratchpad/t1b_yaxis_dim_v1.py"
+  ],
+  "present": [],
+  "script": "t1b_yaxis_dim_v1.py",
+  "sha": "",
+  "type": "T1",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "claim": "**Grade:** `[VERIFIED-scope \u2014 scoped null / no computational advantage; fair op-model, two model curves,",
+  "scripts": [
+   "t2c_carry_composition_bench_v2.py",
+   "t2c_carry_partition_kangaroo_bench_v1.py"
+  ],
+  "present": [
+   "t2c_carry_composition_bench_v2.py",
+   "t2c_carry_partition_kangaroo_bench_v1.py"
+  ],
+  "script": "t2c_carry_composition_bench_v2.py",
+  "sha": "decdfed61c43",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_t2c_range_carry_skew_exact_v1.md",
+  "claim": "**Date 2026-08-21. Grade: `[VERIFIED \u2014 exact integer counts; decidable artifact]`** for the",
+  "scripts": [
+   "t2c_range_carry_skew_exact_v1.py"
+  ],
+  "present": [
+   "t2c_range_carry_skew_exact_v1.py"
+  ],
+  "script": "t2c_range_carry_skew_exact_v1.py",
+  "sha": "114fd53bb1d7",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_t2d_soft_exclusion_v1.md",
+  "claim": "**Date:** 2026-08-16. **`[EMPIRICAL \u2014 SCOPED NULL; plant-fired]`.** Runs `PREREG_soft_exclusion_dmodk_v1.md`.",
+  "scripts": [
+   "scratchpad/t2d_soft_exclusion_run_v1.py"
+  ],
+  "present": [],
+  "script": "t2d_soft_exclusion_run_v1.py",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "RESULT_twist_orbit_forced_landscape_v1.md",
+  "claim": "**Preview** `[EMPIRICAL \u2014 in-sample, design-only]` (`forced_landscape_v1.py`): null-ish at 5 in-sample",
+  "scripts": [
+   "forced_landscape_v1.py",
+   "twist_orbit_magnitude_run_v1.py"
+  ],
+  "present": [
+   "twist_orbit_magnitude_run_v1.py"
+  ],
+  "script": "twist_orbit_magnitude_run_v1.py",
+  "sha": "d9e3eb6a822b",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_weight1_phase_ramp_v1.md",
+  "claim": "**(c) `[EMPIRICAL \u2014 bounded null, secp class, powered]` Where it exists, the channel does NOT align with",
+  "scripts": [
+   "weight1_phase_ramp_v1.py"
+  ],
+  "present": [
+   "weight1_phase_ramp_v1.py"
+  ],
+  "script": "weight1_phase_ramp_v1.py",
+  "sha": "c2975a10b6d7",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_weyl_xreadout_item4_v1.md",
+  "claim": "# RESULT \u2014 ITEM 4: quadratic (Weyl) phases on the x-readout. FOUR instrument faults; result is LOW-POWER, not a null.",
+  "scripts": [
+   "weyl_xreadout_item4_v1.py"
+  ],
+  "present": [
+   "weyl_xreadout_item4_v1.py"
+  ],
+  "script": "weyl_xreadout_item4_v1.py",
+  "sha": "94510a858132",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "RESULT_y_channel_chi2_vs_axis_v1.md",
+  "claim": "> **\u26a0 SUPERSEDED (2026-07-21) \u2014 the \"axis deficit\" analyzed below is largely a WRONG-NULL ARTIFACT**",
+  "scripts": [
+   "_axis_null_check_v1.py",
+   "y_channel_chi2_vs_axis_v2.py"
+  ],
+  "present": [
+   "_axis_null_check_v1.py",
+   "y_channel_chi2_vs_axis_v2.py"
+  ],
+  "script": "_axis_null_check_v1.py",
+  "sha": "1c66080840d4",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "STRUCTURAL_IMPLICATIONS_2026-07-30_v1.md",
+  "claim": "**Epistemic posture:** This document works against the base-model reflex (\"ECDLP secure / generic / a wall\"). That reflex is not evidence. A valid closure must name object + class + power + scope (`CO",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T3",
+  "status": "NO-REPRO",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "VALIDATION_sssa_lift_firing_control_v1.md",
+  "claim": "**Layer:** mechanical only (per CLAUDE.md \u00a72a: \"does the plant fire\", exactness) \u2014 self-audit + artifact",
+  "scripts": [
+   "sssa_lift_control_v1.py"
+  ],
+  "present": [
+   "sssa_lift_control_v1.py"
+  ],
+  "script": "sssa_lift_control_v1.py",
+  "sha": "4d2ef5248ee8",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "VERIFY_SPEC_jacobi_stickelberger_v1.md",
+  "claim": "up front\" artifact (`CLAUDE.md` \u00a73), not an experiment pre-registration: the object below is a",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "VOID_anew_cartier_c4_adjudication_v1.md",
+  "claim": "# VOID \u2014 the Cartier-arm adjudication of 2026-08-02, control C4 fired",
+  "scripts": [
+   "anew_cartier_audit_v1.sage",
+   "c4_diagnose_v1.sage",
+   "anew_step3_witness_v1.sage"
+  ],
+  "present": [
+   "anew_cartier_audit_v1.sage",
+   "c4_diagnose_v1.sage",
+   "anew_step3_witness_v1.sage"
+  ],
+  "script": "anew_cartier_audit_v1.sage",
+  "sha": "7a98062bb42c",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "VOID_item5_k128_adjudication_v1.md",
+  "claim": "# VOID \u2014 the k=128 adjudication of the Item 5 deep run",
+  "scripts": [],
+  "present": [],
+  "script": "",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "btc_puzzle_research_plan_v1.md",
+  "claim": "1. **Positive control is mandatory.** A null with no firing control is discarded as",
+  "scripts": [
+   "farm/smoke_test.py",
+   "lib_data.py",
+   "lib_control.py"
+  ],
+  "present": [],
+  "script": "smoke_test.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "btc_puzzle_research_plan_v2.md",
+  "claim": "dismissing whole buckets on priors** (\"already answered flat\", \"circular\", \"needs",
+  "scripts": [
+   "farm/lib_data.py"
+  ],
+  "present": [],
+  "script": "lib_data.py",
+  "sha": "",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": false,
+  "batch": 0
+ },
+ {
+  "doc": "btc_puzzle_research_plan_v3.md",
+  "claim": "Date: 2026-07-08. Supersedes selection logic in v1/v2 (does not retract their",
+  "scripts": [
+   "power_scaling.py",
+   "puzzle_kangaroo_pool.py",
+   "leak_test_exact.py"
+  ],
+  "present": [
+   "power_scaling.py",
+   "puzzle_kangaroo_pool.py",
+   "leak_test_exact.py"
+  ],
+  "script": "power_scaling.py",
+  "sha": "af418c2be2f0",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "btc_puzzle_research_plan_v6.md",
+  "claim": "# BTC Puzzle \u2014 Research Plan v6 (gap audit: what the null battery never touched)",
+  "scripts": [
+   "power_scaling.py",
+   "nonce_lattice.py",
+   "pubkey_relations.py"
+  ],
+  "present": [
+   "power_scaling.py",
+   "nonce_lattice.py",
+   "pubkey_relations.py"
+  ],
+  "script": "power_scaling.py",
+  "sha": "af418c2be2f0",
+  "type": "T8",
+  "status": "NOT-A-NULL",
+  "repro": true,
+  "batch": 0
+ },
+ {
+  "doc": "masked_structure_findings_v1.md",
+  "claim": "### A \u2014 \u03bc\u2083-invariant cubic moment `E[z\u00b3]` [null, scoped, well-controlled]",
+  "scripts": [
+   "masked_structure_harness_v1.py",
+   "int1_frame_operator_v1.py",
+   "ecc_secp256k1.py"
+  ],
+  "present": [
+   "masked_structure_harness_v1.py",
+   "int1_frame_operator_v1.py",
+   "ecc_secp256k1.py"
+  ],
+  "script": "masked_structure_harness_v1.py",
+  "sha": "ecd943b85f1b",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "masked_structure_findings_v13.md",
+  "claim": "investigation that is a **proof general in p** (covers secp), not a small-p empirical null.",
+  "scripts": [
+   "summation_poly_structure_v1.py"
+  ],
+  "present": [
+   "summation_poly_structure_v1.py"
+  ],
+  "script": "summation_poly_structure_v1.py",
+  "sha": "2ed396bd4b8e",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "masked_structure_findings_v20.md",
+  "claim": "work (v9/v10/v11) counted relation/decomposition **yield** (generic) and v13 analysed a **single**",
+  "scripts": [
+   "semaev_elimination_v1.py",
+   "summation_and_formalgroup_v1.py"
+  ],
+  "present": [
+   "semaev_elimination_v1.py",
+   "summation_and_formalgroup_v1.py"
+  ],
+  "script": "semaev_elimination_v1.py",
+  "sha": "1fa71425312b",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "masked_structure_findings_v22.md",
+  "claim": "- **(b)** **no soft mode beyond \u03bc\u2086 in general y-readouts** `[EMPIRICAL, p\u22642503, multi-shuffle null]`",
+  "scripts": [
+   "conservation_spectrum_v2.py",
+   "glv_closure_verification_v1.py",
+   "conservation_spectrum_v1.py"
+  ],
+  "present": [
+   "conservation_spectrum_v2.py",
+   "glv_closure_verification_v1.py",
+   "conservation_spectrum_v1.py"
+  ],
+  "script": "conservation_spectrum_v2.py",
+  "sha": "aa1c47a3eddd",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 7
+ },
+ {
+  "doc": "masked_structure_findings_v26.md",
+  "claim": "Tautology \u2260 no structure (D\u2096\u2099/D_err is how we found the Eisenstein lift, rhombus, sextic, 3/4-1/8-1/8).",
+  "scripts": [
+   "positive_structure_hunt_v1.py",
+   "xy_interference_U_v1.py"
+  ],
+  "present": [
+   "positive_structure_hunt_v1.py",
+   "xy_interference_U_v1.py"
+  ],
+  "script": "positive_structure_hunt_v1.py",
+  "sha": "60bec4c133a8",
+  "type": "T1",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "masked_structure_findings_v31.md",
+  "claim": "unique additive cocycle.\" The finding is deeper than an empirical null: it is a **theorem** (prime",
+  "scripts": [
+   "carry_cocycle_v1.py",
+   "joint_set_cocycle_v1.py"
+  ],
+  "present": [
+   "carry_cocycle_v1.py",
+   "joint_set_cocycle_v1.py"
+  ],
+  "script": "carry_cocycle_v1.py",
+  "sha": "00c614ac368c",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "masked_structure_findings_v32.md",
+  "claim": "## (1) Finer-m difference scan `[VERIFIED, powered null, control fires]`",
+  "scripts": [
+   "difference_set_xy_geometry_v1.py",
+   "bilinear_jointset_harness_v1.py"
+  ],
+  "present": [
+   "difference_set_xy_geometry_v1.py",
+   "bilinear_jointset_harness_v1.py"
+  ],
+  "script": "difference_set_xy_geometry_v1.py",
+  "sha": "8e27c7325388",
+  "type": "T5",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "masked_structure_findings_v8.md",
+  "claim": "Framing (user): ECDLP is a fence, not a proven wall \u2014 a null is scoped to the statistic and",
+  "scripts": [
+   "collinear_lift_structure_v1.py"
+  ],
+  "present": [
+   "collinear_lift_structure_v1.py"
+  ],
+  "script": "collinear_lift_structure_v1.py",
+  "sha": "235e69c82fa6",
+  "type": "T6",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "phi_n_native_knd_findings_v1.md",
+  "claim": "(the user's RH-line framework), not generic ML. Prior \"k has no structure\" nulls",
+  "scripts": [
+   "phi_n_native_prime_content_v1.py"
+  ],
+  "present": [
+   "phi_n_native_prime_content_v1.py"
+  ],
+  "script": "phi_n_native_prime_content_v1.py",
+  "sha": "4e9b4ee1126f",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "phi_n_residue_XY_findings_v1.md",
+  "claim": "lens \u2014 the framework's OWN basis, not generic ML. Statistics: the Ramanujan-sum",
+  "scripts": [
+   "phi_n_residue_q53_replicate_v1.py"
+  ],
+  "present": [
+   "phi_n_residue_q53_replicate_v1.py"
+  ],
+  "script": "phi_n_residue_q53_replicate_v1.py",
+  "sha": "ed5616360459",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ },
+ {
+  "doc": "struct_test_results.md",
+  "claim": "## Test A \u2014 reverse-ladder branch predictor \u2192 NULL (measured 2026-07-08)",
+  "scripts": [
+   "puzzle_kangaroo.py",
+   "struct_probes.py",
+   "struct_test_K.py"
+  ],
+  "present": [
+   "puzzle_kangaroo.py",
+   "struct_probes.py",
+   "struct_test_K.py"
+  ],
+  "script": "puzzle_kangaroo.py",
+  "sha": "7e9a05dad651",
+  "type": "T3",
+  "status": "PENDING",
+  "repro": true,
+  "batch": 8
+ }
+]

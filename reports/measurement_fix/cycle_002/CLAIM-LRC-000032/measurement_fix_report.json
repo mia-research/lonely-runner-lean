@@ -1,0 +1,8 @@
+{
+  "family": "general_lrc_metric_pack",
+  "alpha": 0.0125,
+  "parsed_metric_rows": 24,
+  "checks_passed": 25,
+  "checks_failed": 0,
+  "status": "resolved_pass"
+}

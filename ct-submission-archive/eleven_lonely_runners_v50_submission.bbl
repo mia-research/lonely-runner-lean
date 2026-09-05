@@ -1,0 +1,80 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{BGG{\etalchar{+}}98}
+
+\bibitem[BGG{\etalchar{+}}98]{BGG+98}
+A.~Bienia, L.~Goddyn, P.~Gvozdjak, A.~Seb{\H{o}}, and M.~Tarsi.
+\newblock Flows, view obstructions, and the lonely runner.
+\newblock {\em J. Combin. Theory Ser. B}, 72:1--9, 1998.
+\newblock \href {https://doi.org/10.1006/jctb.1997.1791}
+  {\path{doi:10.1006/jctb.1997.1791}}.
+
+\bibitem[BH01]{BH01}
+T.~Bohman and R.~Holzman.
+\newblock Six lonely runners.
+\newblock {\em Electron. J. Combin.}, 8:R3, 2001.
+\newblock URL:
+  \url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v8i2r3}.
+
+\bibitem[BS08]{BS08}
+J.~Barajas and O.~Serra.
+\newblock The lonely runner with seven runners.
+\newblock {\em Electron. J. Combin.}, 15:R48, 2008.
+\newblock URL:
+  \url{https://www.combinatorics.org/ojs/index.php/eljc/article/view/v15i1r48}.
+
+\bibitem[Cus73]{Cus73}
+T.~W. Cusick.
+\newblock View obstruction problems.
+\newblock {\em Aequationes Math.}, 9:165--170, 1973.
+\newblock \href {https://doi.org/10.1007/BF01833350}
+  {\path{doi:10.1007/BF01833350}}.
+
+\bibitem[KN74]{KN74}
+L.~Kuipers and H.~Niederreiter.
+\newblock {\em Uniform Distribution of Sequences}.
+\newblock Wiley, 1974.
+
+\bibitem[Pal26]{Pal26}
+T.~Palelei.
+\newblock The $\phi(n)$ law for arithmetic progressions in the lonely runner
+  conjecture: algebraic structure and computational fragility, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.18158886}
+  {\path{doi:10.5281/zenodo.18158886}}.
+
+\bibitem[PS25]{PS25}
+G.~Perarnau and O.~Serra.
+\newblock The {L}onely {R}unner {C}onjecture turns 60.
+\newblock {\em Computer Science Review}, 58:100798, 2025.
+\newblock \href {https://arxiv.org/abs/2409.20160} {\path{arXiv:2409.20160}},
+  \href {https://doi.org/10.1016/j.cosrev.2025.100798}
+  {\path{doi:10.1016/j.cosrev.2025.100798}}.
+
+\bibitem[Ros25a]{Ros25a}
+M.~Rosenfeld.
+\newblock The lonely runner conjecture holds for eight runners, 2025.
+\newblock \href {https://arxiv.org/abs/2509.14111} {\path{arXiv:2509.14111}}.
+
+\bibitem[Ros25b]{Ros25b}
+M.~Rosenfeld.
+\newblock The lonely runner conjecture holds for nine runners, 2025.
+\newblock \href {https://arxiv.org/abs/2512.01912} {\path{arXiv:2512.01912}}.
+
+\bibitem[Tao18]{Tao18}
+T.~Tao.
+\newblock Some remarks on the lonely runner conjecture.
+\newblock {\em Contrib. Discrete Math.}, 13:1--31, 2018.
+\newblock URL: \url{https://cdm.ucalgary.ca/article/view/62498}.
+
+\bibitem[Tra25]{Tra25}
+T.~Trakulthongchai.
+\newblock Nine and ten lonely runners, 2025.
+\newblock \href {https://arxiv.org/abs/2511.22427} {\path{arXiv:2511.22427}}.
+
+\bibitem[Wil67]{Wil67}
+J.~M. Wills.
+\newblock Zwei {S}{\"a}tze {\"u}ber inhomogene diophantische {A}pproximation.
+\newblock {\em Monatsh. Math.}, 71:263--269, 1967.
+\newblock \href {https://doi.org/10.1007/BF01298836}
+  {\path{doi:10.1007/BF01298836}}.
+
+\end{thebibliography}

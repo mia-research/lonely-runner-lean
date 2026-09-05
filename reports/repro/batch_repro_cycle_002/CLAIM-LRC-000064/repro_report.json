@@ -1,0 +1,11 @@
+{
+  "expected": "reports/repro/batch_repro_cycle_002/CLAIM-LRC-000064/expected_float64_baselines.json",
+  "actual": "reports/repro/batch_repro_cycle_002/CLAIM-LRC-000064/actual_decimal128_baselines.json",
+  "rtol": 1e-07,
+  "atol": 1e-10,
+  "status": "match",
+  "compared_values": 8,
+  "mismatch_count": 0,
+  "max_rel_diff": 1.6800711791046427e-16,
+  "details": []
+}

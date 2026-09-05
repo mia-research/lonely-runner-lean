@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000063",
+  "task_id": "QRM4-LRC-0011",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:52:12Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.28,
+  "rationale": [
+    "No mathematical claim statement is present in the provided excerpt.",
+    "No proof, derivation, or verification evidence is available to assess validity.",
+    "Operational signals are strong (high review score, stable ladder, metric match) but are not substitutes for mathematical correctness."
+  ],
+  "critical_risks": [
+    "Publication without a checkable theorem/claim text could promote an invalid result.",
+    "Hidden assumption or domain-condition failures cannot be detected.",
+    "Potential mismatch between benchmark metrics and actual theorem validity."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Insufficient dossier content for adjudication; require full claim text, assumptions, and proof artifacts (or independent formal/numeric verification) before publication decision."
+}

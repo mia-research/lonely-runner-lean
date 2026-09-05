@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000051",
+  "task_id": "QRM4-LRC-0012",
+  "model_lane": "gemini_family_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:52:37Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.84,
+  "rationale": [
+    "Process indicators are strong (review_score 94.784, numeric ladder stable, metric match pass).",
+    "No substantive claim content or evidence is included in the excerpt, preventing direct validity assessment.",
+    "Conservative publication gating requires content-level verification beyond aggregate metrics."
+  ],
+  "critical_risks": [
+    "Evidence-opacity risk: methods, assumptions, and derivations are not inspectable.",
+    "Undetected error risk: high aggregate scores can mask claim-specific flaws.",
+    "Reproducibility risk: no proof/data artifacts provided for independent check."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Request expedited secondary review with the full dossier (exact claim text, proof/evidence chain, and reproducibility artifacts). If those validate, promotion is likely. | fallback_used_for_lane_provider=gemini"
+}

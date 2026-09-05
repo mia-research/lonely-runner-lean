@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000032",
+  "task_id": "QRM-LRC-0006",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:35:49Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.74,
+  "rationale": [
+    "Numeric reproducibility appears strong and stable across precision checks.",
+    "Review score and tier indicate high empirical support.",
+    "Notation matching passed, lowering representation risk.",
+    "Claim statement/assumptions are not fully extracted in the excerpt.",
+    "Measurement metric alignment is flagged as partial and requires a fix."
+  ],
+  "critical_risks": [
+    "Incomplete claim specification (assumptions pending extraction review).",
+    "Metric-definition mismatch may undermine interpretation despite stable numerics.",
+    "Adjudication snapshot remains at needs_human_review with moderate score (0.480)."
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Promotable after remediation, but publication should be gated until metric-definition alignment and full claim/assumption extraction are completed and revalidated. | fallback_used_for_lane_provider=gemini"
+}

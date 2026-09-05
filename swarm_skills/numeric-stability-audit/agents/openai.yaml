@@ -1,0 +1,4 @@
+interface:
+  display_name: "Numeric Stability Audit"
+  short_description: "Run precision ladder and stability checks on numeric outputs"
+  default_prompt: "Evaluate floating-point robustness and label stability outcomes"

@@ -1,0 +1,32 @@
+{
+  "cycle_id": "cycle_002",
+  "step": "step8_measurement_fix_execution_and_publish_packets",
+  "measurement_fix": {
+    "tickets_total": 4,
+    "ticket_status_counts": {
+      "resolved_pass": 4
+    },
+    "execution_status_counts": {
+      "resolved_pass": 4
+    }
+  },
+  "ranking": {
+    "rows": 27,
+    "recommendation_counts": {
+      "promote_to_claim_dossier": 27
+    }
+  },
+  "numeric_queue": {
+    "rows": 27,
+    "queue_status_counts": {
+      "executed": 27
+    },
+    "ladder_status_counts": {
+      "stable": 27
+    }
+  },
+  "publish_packets": {
+    "dossier_index_rows": 27,
+    "dossier_markdown_files": 27
+  }
+}

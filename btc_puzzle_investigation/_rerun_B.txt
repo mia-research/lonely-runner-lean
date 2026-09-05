@@ -1,0 +1,13 @@
+# TEST B  sum-product energy   set size m=2000, null draws=40
+# curve-structure test: uses 2000 real curve points from the 100k set, not
+# the 82 solved keys. baseline (random F_p subset): E ~ m^2 for BOTH energies.
+# structure => one energy >> m^2.  AP control should blow up additive energy.
+
+  set                        E_add  E_add/m^2         E_mul  E_mul/m^2  rank(add,mul)
+  100k pubkey_X            7998000      2.000       7998000      2.000   40/40, 40/40
+  100k pubkey_Y            7998000      2.000       7998000      2.000   40/40, 40/40
+  orbit jG X               7998000      2.000       7998000      2.000   40/40, 40/40
+  AP control            5333334000   1333.333       7998000      2.000   0/40, 40/40
+
+  read: solved/orbit/random E ~ m^2 and rank mid-null => sum-product-random
+        (no exploitable additive+multiplicative structure). AP add-energy huge = sanity.

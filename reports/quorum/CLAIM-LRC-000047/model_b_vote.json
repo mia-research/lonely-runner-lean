@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000047",
+  "task_id": "QRM-LRC-0008",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:36:50Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.73,
+  "rationale": [
+    "Reproducibility evidence is strong: stable ladder status with very low cross-precision relative error.",
+    "Measurement metric and notation checks both pass, and extraction was not truncated.",
+    "Tier/review metadata and dossier readiness support advancement to board-level review rather than rejection."
+  ],
+  "critical_risks": [
+    "The claim text appears to be an unnormalized CSV row, not a fully formalized mathematical statement.",
+    "Assumptions are explicitly marked as pending extraction review, leaving semantic scope underspecified.",
+    "Validation snapshot still flags needs_human_review with medium float-risk, so interpretation-level validity is not fully closed."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Promote to claim dossier review board with caveats; require formal statement normalization and assumptions extraction sign-off before external publication. | fallback_used_for_lane_provider=gemini"
+}

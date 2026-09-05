@@ -8,12 +8,26 @@ QUESTION (open per v15/v16 handover): is  max_a |U(a,b,c)| = O(sqrt(p)*polylog) 
 over ALL (b,c)?  Only avg_a|U|^2 = n (a Parseval fact) was proven; the max over (b,c) was the
 "live un-bounded corner".
 
-SOURCE-FIRST FINDING (this file tests it empirically): bx+cy is a rational function on E of
-pole order <= 3 at O (x: order 2, y: order 3).  The Kohel-Shparlinski / Lange-Shparlinski
-character-sum bound for sum_d psi(f([d]G)) e_n(ad) holds for any nonconstant rational f with a
-constant depending only on deg(f) -- hence UNIFORM in the coefficients (b,c).  So the bound is
-expected to hold (grade CITED, general-f KS).  This script CONFIRMS or REFUTES it for the secp
-form, hunts for an exceptional (b,c) scar, and measures the scaling max/sqrt(p) vs log p.
+RESOLVED 2026-07-17 -- PROVED, not "expected". See POSITIVE_FINDINGS_MASTER_v2.md sec X.2 and
+the source on disk: kohel_shparlinski_ants4_2000.pdf (SHA-256 645d9022e029...5d8d2a).
+
+  Kohel-Shparlinski, ANTS-IV 2000, Thm 1 + eq (3):  |S(omega,psi,f)| <= 2*deg(f)*q^(1/2),
+  strengthened to (1+deg f)*q^(1/2) when the polar divisor has single-prime-divisor support,
+  where S(omega,psi,f) = sum_{P: f(P)!=inf} omega(P)*psi(f(P)),  omega in Hom(E(F_q),C*).
+  secp has PRIME order  =>  omega([d]G) = e_n(a*d) IS the dl-twist  =>  S = U(a,b,c) exactly,
+  over the FULL group (not a partial sum -- no O(n) degradation at N=n).
+  f = bx+cy: pole order 3 at O (c!=0) / 2 (c=0); gcd(3,p)=1 so m_1 = n_1+1 = 4.
+    =>  max_{a,(b,c)!=(0,0)} |U(a,b,c)| <= 4*sqrt(p) + 1     (+1: our sum includes d=0, a pole)
+  UNIFORM in (b,c) with an EXPLICIT constant -- eq (3) is universally quantified, so there is no
+  implied constant that could fail to be uniform. No exceptional (b,c) can escape.
+
+ATTRIBUTION CORRECTION (this docstring previously said "Kohel-Shparlinski / Lange-Shparlinski"):
+  the mixed/twisted sum is covered by **KOHEL-SHPARLINSKI ALONE**. Lange-Shparlinski (JMC 2007)
+  Lemma 2.4 bounds the UNTWISTED sum sum_P chi(f(P)) -- no omega(P) factor -- and does NOT cover
+  this object. Do not re-pair them.
+
+This script's empirical scan is now a CONSISTENCY CHECK on a proved bound, not a test of an open
+question. It should never report max/sqrt(p) > 4 (+1/sqrt(p)); if it does, the bug is here.
 
 TESTS:
  (1) full (b,c) scan (small p): global max_{a!=0,(b,c)!=0}|U|, its argmax structure, ratio/sqrt(p).

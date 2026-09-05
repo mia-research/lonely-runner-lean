@@ -1,0 +1,33 @@
+{
+  "claim_id": "CLAIM-LRC-000059",
+  "promotion_id": "PROMO-LRC-0019",
+  "source_path": "/Users/trentpalelei/Downloads/Detector___per-n_summary.csv",
+  "source_sha256": "2ff4420e11f156bcb2ec1feb8994e239589d43e43a85ca5a1cb52577aaaab024",
+  "source_bytes": 166,
+  "extraction": {
+    "method": "csv_cells_plus_regex",
+    "rows_scanned": 4,
+    "truncated": false
+  },
+  "tokens_extracted": 15,
+  "usable_values": 15,
+  "sample_values": [
+    "4",
+    "50",
+    "1.0",
+    "1.3523391812865497",
+    "432.0",
+    "5",
+    "50",
+    "1.0",
+    "1.0818713450292399",
+    "664.0",
+    "6",
+    "50"
+  ],
+  "thresholds": {
+    "stable": 1e-09,
+    "sensitive": 1e-06
+  },
+  "created_utc": "2026-02-25T23:29:22Z"
+}

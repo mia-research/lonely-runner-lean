@@ -1,0 +1,101 @@
+[
+  {
+    "m": 2,
+    "p": 307,
+    "semaev": {
+      "dim": 0,
+      "quo": 2,
+      "d_ff": 4,
+      "d_solv": 5,
+      "sec": 0
+    },
+    "plant_linear": {
+      "quo": 1,
+      "d_solv": 1,
+      "must_be": 1
+    },
+    "plant_fieldeqs_only": {
+      "quo": 4,
+      "d_ff": null,
+      "d_solv": 2,
+      "must_be": 2
+    },
+    "generic": {
+      "drawn": 24,
+      "kept": 0,
+      "d_solv_min": null,
+      "d_solv_med": null,
+      "d_solv_max": null,
+      "d_solv_all": [],
+      "d_ff_all": []
+    },
+    "status": "ok",
+    "wall_sec": 0
+  },
+  {
+    "m": 3,
+    "p": 307,
+    "semaev": {
+      "dim": 0,
+      "quo": 6,
+      "d_ff": 12,
+      "d_solv": null,
+      "sec": 0
+    },
+    "plant_linear": {
+      "quo": 1,
+      "d_solv": 1,
+      "must_be": 1
+    },
+    "plant_fieldeqs_only": {
+      "quo": 27,
+      "d_ff": null,
+      "d_solv": 6,
+      "must_be": 3
+    },
+    "generic": {
+      "drawn": 24,
+      "kept": 0,
+      "d_solv_min": null,
+      "d_solv_med": null,
+      "d_solv_max": null,
+      "d_solv_all": [],
+      "d_ff_all": []
+    },
+    "status": "ok",
+    "wall_sec": 1
+  },
+  {
+    "m": 4,
+    "p": 307,
+    "semaev": {
+      "dim": 0,
+      "quo": 24,
+      "d_ff": null,
+      "d_solv": null,
+      "sec": 2
+    },
+    "plant_linear": {
+      "quo": 1,
+      "d_solv": 1,
+      "must_be": 1
+    },
+    "plant_fieldeqs_only": {
+      "quo": 256,
+      "d_ff": null,
+      "d_solv": 12,
+      "must_be": 4
+    },
+    "generic": {
+      "drawn": 24,
+      "kept": 0,
+      "d_solv_min": null,
+      "d_solv_med": null,
+      "d_solv_max": null,
+      "d_solv_all": [],
+      "d_ff_all": []
+    },
+    "status": "ok",
+    "wall_sec": 67
+  }
+]

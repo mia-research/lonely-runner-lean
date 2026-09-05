@@ -1,0 +1,25 @@
+# PRNG NEW-FAMILIES sweep  known-key run length CHECK=1..70  (hit=full, floor~7)
+
+SELFTEST (positive control — detector must reach full run on its own output):
+  java    topbit : recovered run 24/24  PASS
+  java    reject : recovered run 24/24  PASS
+  dotnet  topbit : recovered run 24/24  PASS
+  dotnet  reject : recovered run 24/24  PASS
+  glibc   topbit : recovered run 24/24  PASS
+  glibc   reject : recovered run 24/24  PASS
+
+SWEEP [small-int 0..2^21]  seeds [0,2097152)  (2097152 seeds) x 3 fam x 2 models
+  java    topbit : best run  7/70 (seed 1325485)  coincidence
+  java    reject : best run  7/70 (seed 251301)  coincidence
+  dotnet  topbit : best run  7/70 (seed 1105400)  coincidence
+  dotnet  reject : best run  7/70 (seed 448224)  coincidence
+  glibc   topbit : best run  7/70 (seed 1912476)  coincidence
+  glibc   reject : best run  7/70 (seed 109716)  coincidence
+
+SWEEP [time 2015-01-01 +1209600s]  seeds [1420070400,1421280000)  (1209600 seeds) x 3 fam x 2 models
+  java    topbit : best run  7/70 (seed 1420549558)  coincidence
+  java    reject : best run  7/70 (seed 1420773262)  coincidence
+  dotnet  topbit : best run  6/70 (seed 1420072569)  coincidence
+  dotnet  reject : best run  7/70 (seed 1421021202)  coincidence
+  glibc   topbit : best run  6/70 (seed 1420153749)  coincidence
+  glibc   reject : best run  7/70 (seed 1420594950)  coincidence

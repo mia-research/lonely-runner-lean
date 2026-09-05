@@ -1,0 +1,2 @@
+PREREG_subrayleigh_deficit_scaling_v1.md frozen-block SHA-256:
+93c954713d3a49444ee9e234a2a20b21fdec44cc5f0babb0bdce8a618894f293

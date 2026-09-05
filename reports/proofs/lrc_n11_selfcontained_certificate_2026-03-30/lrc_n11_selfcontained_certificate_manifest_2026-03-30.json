@@ -1,0 +1,60 @@
+{
+  "builder_script": {
+    "file": "build_lrc_n11_selfcontained_certificate_pack.py",
+    "sha256": "997879f91e101789004e8592e5f59ae78475320818aedd56b099518e6a3c9a80"
+  },
+  "counts": {
+    "actual_bad_profiles": 38,
+    "cover_histogram": {
+      "1": 1,
+      "2": 29,
+      "3": 108,
+      "4": 188,
+      "5": 221,
+      "6": 209,
+      "7": 172,
+      "8": 132,
+      "9": 96,
+      "10": 67,
+      "11": 45
+    },
+    "fully_covered_profiles": 45,
+    "impossible_bad_profiles": 7,
+    "profiles_with_positive_local_lb": 1223,
+    "total_local_profiles": 1268
+  },
+  "date": "2026-03-30",
+  "exact_scope": {
+    "branch": "actual exactly-one-divisible local profile layer",
+    "model": "9 singleton/pair contributors on Z_11",
+    "n": 11
+  },
+  "files": [
+    {
+      "bytes": 65378,
+      "file": "lrc_n11_local_profile_rows_2026-03-30.csv",
+      "sha256": "f0384f7058c28fb672ae33715696526dcd640fc84402127a62bbf795226b3f24"
+    },
+    {
+      "bytes": 2983,
+      "file": "lrc_n11_local_bad_profile_rows_2026-03-30.csv",
+      "sha256": "fc7a2af2398a1a54ae78d7c4b2683459f3df49c19b2aaf05448b95850f1a62e7"
+    },
+    {
+      "bytes": 2268,
+      "file": "lrc_n11_actual_bad_state_witnesses_2026-03-30.csv",
+      "sha256": "8595073adfe6508a69fe71659335426992779608b64c688610aeaf20f3b8e3ea"
+    },
+    {
+      "bytes": 400,
+      "file": "lrc_n11_impossible_bad_profile_rows_2026-03-30.csv",
+      "sha256": "da60070a60534d48e1840610d2f29fdc97305935ffd2950bb436cc794b1a368d"
+    },
+    {
+      "bytes": 1668,
+      "file": "lrc_n11_selfcontained_certificate_appendix_2026-03-30.md",
+      "sha256": "c16f9874ee632724685da0204d4938cf7efccd0c2dbd73fcc1457a8c1337a75b"
+    }
+  ],
+  "name": "lrc_n11_selfcontained_certificate_pack"
+}

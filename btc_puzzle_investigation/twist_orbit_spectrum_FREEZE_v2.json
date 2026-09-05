@@ -1,0 +1,23 @@
+{
+  "prereg": "PREREG_twist_orbit_spectrum_v2.md",
+  "stratum_S": [
+    823,
+    907,
+    967,
+    991,
+    1051,
+    1303,
+    1831,
+    2143,
+    2251,
+    2503,
+    2647,
+    2731
+  ],
+  "R": 3000,
+  "seed": 20260726,
+  "class_rule": "mu6 classes, reps g^c c=0..L-1, g=primitive_root(n)",
+  "statistic": "T=max_{j=3 mod6}|FFT_{n-1}(W)[j]|^2",
+  "null": "signed-value permutation of L class-values",
+  "sha256": "7cde99fec08891ac0e558d11458024ddac5261c6722e2be28953c727fa37bd6e"
+}

@@ -1,0 +1,62 @@
+=== POINTED (n,k) leak tests  N=64  per=25 ===
+
+--- FROZEN k=1: target = n (the free axis) ---
+# frozen-k=1 N=64  keys=6375  features=42  distinct_free=255
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 0/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  free_bin    corr_p=0.1474  null  (obs_upper=9/2000)
+  free_par    corr_p=0.0960  null  (obs_upper=6/2000)
+  free_m3     corr_p=0.0520  null  (obs_upper=3/2000)
+  free_m5     corr_p=0.9815  null  (obs_upper=259/2000)
+
+--- FROZEN k=2: target = n (the free axis) ---
+# frozen-k=2 N=64  keys=3175  features=42  distinct_free=127
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 0/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  free_bin    corr_p=0.9310  null  (obs_upper=161/2000)
+  free_par    corr_p=1.0000  null  (obs_upper=2000/2000)
+  free_m3     corr_p=0.2974  null  (obs_upper=21/2000)
+  free_m5     corr_p=0.3128  null  (obs_upper=22/2000)
+
+--- FROZEN k=7: target = n (the free axis) ---
+# frozen-k=7 N=64  keys=5350  features=42  distinct_free=214
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 0/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  free_bin    corr_p=0.7976  null  (obs_upper=97/2000)
+  free_par    corr_p=0.7776  null  (obs_upper=95/2000)
+  free_m3     corr_p=0.3463  null  (obs_upper=25/2000)
+  free_m5     corr_p=0.2729  null  (obs_upper=19/2000)
+
+--- FROZEN k=200: target = n (the free axis) ---
+# frozen-k=200 N=64  keys=550  features=42  distinct_free=22
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 1/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.1154  null  (obs_upper=7/2000)
+  free_bin    corr_p=0.1639  null  (obs_upper=10/2000)
+  free_par    corr_p=1.0000  null  (obs_upper=2000/2000)
+  free_m3     corr_p=0.6052  null  (obs_upper=57/2000)
+  free_m5     corr_p=0.8026  null  (obs_upper=98/2000)
+
+--- FROZEN n=199: target = k (the free axis) ---
+# frozen-n=199 N=64  keys=4950  features=42  distinct_free=198
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 1/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  free_bin    corr_p=0.7846  null  (obs_upper=91/2000)
+  free_par    corr_p=0.7226  null  (obs_upper=76/2000)
+  free_m3     corr_p=0.3483  null  (obs_upper=26/2000)
+  free_m5     corr_p=0.0515  null  (obs_upper=3/2000)
+
+--- FROZEN n=251: target = k (the free axis) ---
+# frozen-n=251 N=64  keys=6250  features=42  distinct_free=250
+  CONTROLS: POS_strong / POS_f0.10 below; NEGATIVE 1/6 fired
+  POS_strong  corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  POS_f0.10   corr_p=0.0005  FIRES  (obs_upper=0/2000)
+  free_bin    corr_p=0.3823  null  (obs_upper=29/2000)
+  free_par    corr_p=0.8366  null  (obs_upper=110/2000)
+  free_m3     corr_p=0.7471  null  (obs_upper=83/2000)
+  free_m5     corr_p=0.8781  null  (obs_upper=127/2000)
+

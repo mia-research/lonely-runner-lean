@@ -1,0 +1,18 @@
+{
+  "N": 20000,
+  "frozen_seed": 20260818,
+  "real": {
+    "E3": 13125,
+    "EVEN": 75,
+    "ODD": 125
+  },
+  "E3_pctile": 98.235,
+  "E3_p_high": 0.01765,
+  "EVEN_pctile": 63.895,
+  "EVEN_p_high": 0.36105,
+  "ODD_pctile": 99.165,
+  "ODD_p_high": 0.00835,
+  "null_med_E3": 2223,
+  "null_med_EVEN": 54,
+  "null_med_ODD": 32
+}

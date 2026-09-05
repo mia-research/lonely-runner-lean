@@ -1,0 +1,98 @@
+#!/usr/bin/env sage
+"""reduce26_translated_origin_v1.sage -- the CORRECT quotient via the translated-origin model.
+
+Round 4 found s1=x+iota(x) is many-to-one on orbits. Round 5: iota(P)=R-P becomes NEGATION after
+translating the origin to P0=R/2 (unique, n odd). On the translated model E0 (origin = P0, so the
+isomorphism tau_{P0}: E -> E0 sends P0 -> O), iota' = negation. The quotient E0/<-1> = P^1 via x0
+(the x-coord on E0). So t = x0(tau(P)) is the correct quotient coordinate, and g(t) = the cubic
+of E0's Weierstrass model. Then F(t) = y_{P1} y_{P2} (ORIGINAL y's) as a function of t.
+
+This script: build E0 explicitly (an elliptic curve isomorphic to E with P0 at origin -- actually
+we don't change the curve, we change the GROUP-ORIGIN; the x-coord map is via the translation
+isomorphism). Compute the quotient map P |-> t = x0(tau(P)) and F(t), then Sum_t chi_2(gF).
+
+The translation-by-P0 isomorphism on a Weierstrass curve is NOT a coordinate change of the plane
+(it's a group law). But the function x0 o tau_{P0} is a rational function on E. Concretely, for
+P0 = (x0_R, y0_R), the translation tau_{-P0}: P -> P - P0 has x-coordinate x(P - P0) as a rational
+function of (x(P), y(P)) via the group law. That's t.
+"""
+from sage.all import GF, EllipticCurve, ZZ, FunctionField, PolynomialRing
+
+
+def chi2(a, p):
+    a = int(a) % p
+    if a == 0: return 0
+    return 1 if pow(a, (p-1)//2, p) == 1 else -1
+
+
+def build_t_and_F(p, A, B, xR, yR):
+    """In L = F_p(x,y), y^2=x^3+Ax+B, compute:
+       (1) x-tau(P) = x(P - P0) as a rational function -- this is the quotient coord t.
+       (2) F = y(P) * y(R - P) -- the original-y product.
+       P0 = R/2: x(P0), y(P0) computed from 2P0=R.
+       Return t, F as elements of L."""
+    R = FunctionField(GF(p), 'x'); x = R.gen()
+    S = PolynomialRing(R, 'Y'); Y = S.gen()
+    L = R.extension(Y**2 - (x**3 + A*x + B), 'y'); y = L.gen()
+    # iota(x), iota(y) = coords of R - (x,y)
+    lam_num = yR + y; lam_den = xR - x
+    x3 = lam_num**2 - (x + xR)*lam_den**2
+    iota_x = x3 / lam_den**2
+    iota_y = y + (lam_num/lam_den)*(x*lam_den**2 - x3)/lam_den**2
+    F = y * iota_y
+    # t = x(P - P0). P - P0 = P + (-P0), -P0 = (xR, -yR). Use the group law for P + (xR, -yR).
+    # lam2 = (-yR - y)/(xR - x); x(P-P0) = lam2^2 - x - xR.
+    # Actually P - P0 where -P0=(xR,-yR): slope = (-yR - y)/(xR - x), x3b = slope^2 - x - xR.
+    lam2_num = -yR - y; lam2_den = xR - x
+    xPminusP0 = (lam2_num**2 - (x + xR)*lam2_den**2) / lam2_den**2
+    t = xPminusP0   # the translated x-coord
+    return L, x, y, t, F, iota_x
+
+
+if __name__ == "__main__":
+    p, A, B = 43, 0, 7
+    Fp = GF(p); Fp2 = GF(p**2, 'a')
+    E = EllipticCurve(Fp, [A, B]); n = E.order()
+    G = next(P for P in E if P.order() == n)
+    Rpt = 3*G; xR, yR = ZZ(Rpt[0]), ZZ(Rpt[1])
+    # P0 = R/2: use division
+    P0 = Rpt.division_points(2)[0]   # over F_p since n odd
+    print("p=%d R=[3]G=(%d,%d)  P0=R/2=(%d,%d)" % (p, xR, yR, ZZ(P0[0]), ZZ(P0[1])))
+
+    L, x, y, t, F, iotax = build_t_and_F(p, A, B, xR, yR)
+    # Verify t is iota-invariant: t(iota(P)) = x(iota(P) - P0). Since iota(P)=R-P and P0=R/2,
+    #   iota(P) - P0 = R - P - R/2 = R/2 - P = -(P - R/2) = -(P - P0). x(-(P-P0)) = x(P-P0). => t invariant.
+    # So t IS iota-invariant. Is it 1-to-1 on orbits? Test numerically.
+    E2 = E.change_ring(Fp2); R2 = E2(Rpt[0], Rpt[1]); P0_2 = E2(P0[0], P0[1])
+    from collections import defaultdict
+    orbits_t = defaultdict(set)
+    orbits_F = defaultdict(set)
+    for x1 in Fp2:
+        rhs = x1**3 + A*x1 + B
+        if not rhs.is_square(): continue
+        y1 = rhs.sqrt()
+        for sg in (1,-1):
+            P = E2(x1, sg*y1)
+            if P.is_zero(): continue
+            iP = R2 - P
+            if iP.is_zero(): continue
+            orb = frozenset([tuple(P), tuple(iP)])
+            # t = x(P - P0)
+            Pm = P - P0_2
+            if Pm.is_zero(): continue
+            tv = Pm[0]
+            Fv = P[1]*iP[1]
+            if tv in Fp:
+                orbits_t[orb].add(int(tv))
+                orbits_F[orb].add(int(Fv)) if Fv in Fp else None
+    # is t 1-to-1 on orbits? (each orbit -> unique t)
+    multi_t = sum(1 for orb,ts in orbits_t.items() if len(ts)>1)
+    print("orbits with multi-valued t: %d of %d" % (multi_t, len(orbits_t)))
+    # are distinct orbits -> distinct t? (t separates orbits)
+    t_to_orbits = defaultdict(list)
+    for orb, ts in orbits_t.items():
+        for tv in ts: t_to_orbits[tv].append(orb)
+    sep = sum(1 for tv,obs in t_to_orbits.items() if len(obs)>1)
+    print("t-values hit by >1 orbit: %d of %d distinct t-values" % (sep, len(t_to_orbits)))
+    print("=> t = x(P - P0) is the CORRECT quotient coordinate (1-to-1 on F_p-valued orbits):",
+          multi_t==0 and sep==0)

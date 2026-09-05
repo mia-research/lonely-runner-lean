@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Claude (Anthropic) \u2014 claude.ai web",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.71,
+  "rationale": [
+    "Reproducibility pipeline reports stable status with max_rel_float64_vs_mpmath ~3.45e-15, well within binary64 machine-epsilon tolerance.",
+    "Decimal128 cross-check (max_rel ~8.64e-32) confirms near-exact agreement at extended precision, strongly supporting numeric integrity.",
+    "4,400,550 usable values extracted without truncation; extraction method (csv_cells_plus_regex) is auditable.",
+    "metric_match and notation_match both pass; no required fixes flagged in measurement layer.",
+    "adjudication_score of 0.480 is sub-threshold for auto-approve, correctly triggering human review \u2014 this review constitutes that step.",
+    "Claim excerpt is raw CSV fragment, not a formal mathematical statement; the actual mathematical claim being tested is not explicitly articulated in the dossier."
+  ],
+  "critical_risks": [
+    "RISK-1 (Medium): float_risk flagged as 'medium' \u2014 binary64 arithmetic in boundary/isolation counting may introduce systematic rounding in edge cases near delta/alpha=0.",
+    "RISK-2 (High): claim_type is 'empirical_claim' but short_statement is raw CSV data, not a falsifiable proposition. The logical claim (e.g., 'arithmetic_varied sequences with phi_n=4 exhibit phi_match=YES') is implicit, not stated. Publication requires explicit formalization.",
+    "RISK-3 (Low): assumptions listed as 'pending extraction review' \u2014 until assumptions are enumerated, scope of claim cannot be fully bounded.",
+    "RISK-4 (Low): seed=0 across all visible rows suggests deterministic seeding; confirm no unintended correlation across test variants."
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Numeric reproducibility is strong and supports promotion of the underlying data packet. However, publication gate should remain on HOLD until: (1) the mathematical claim is formally restated as a falsifiable proposition independent of CSV formatting, (2) explicit assumptions are extracted and attached, (3) float_risk medium is resolved or accepted with a documented tolerance rationale. Once those three items are satisfied, re-adjudication should yield auto-approve. Recommend fast-track re-review given the strong numeric foundation.",
+  "submitted_utc": "2026-02-28T00:00:00Z",
+  "operator_lane": "manual_quorum_vote \u2014 external_model_session \u2014 human_adjudication_tier",
+  "source_ref": "/audit/quorum/CLAIM-LRC-000055/claude_web_2026-02-28.png"
+}

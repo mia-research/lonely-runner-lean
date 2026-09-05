@@ -1,0 +1,5663 @@
+[
+ {
+  "file": "CLAIMS.md",
+  "line": 16,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. **Edit this file in place. Never create `CLAIMS_v2.md`.** Git carries the history. The v13\u2013v18",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 21,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Not the next one. The write-up is not the record; this is.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 23,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "artifact and in the frozen `POSITIVE_FINDINGS_MASTER_v12.md` PART A. Never compress a row by deleting",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 47,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| P13 | `Hom(E,A_new)=0` at secp \u2014 **\u26a0 INHERITS N2; never quote at secp without N2 attached** | `[PROVED]` *(conditional)* | v12 |",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 56,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| P22 | **No `Q(\u03b6_n)`-rational labelling of the two \u03b6\u2083-conjugate planes exists** \u2014 half of `Gal(Q(\u03b6\u2081\u2082\u2099)/Q(\u03b6_n))` swaps the factors (5/5 cells, p=43/61",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "| M31 | **D2 twist-rigidity certificate** exact, 8 primes, both mod-12 arms, every cell; non-abelianity COMPLETE at 9 generic primes, zero exceptions ",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 83,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| M40 | **Semaev `d_ff` has a CLOSED FORM** in this harness: `d_ff = max(2^{m\u22121},\\|V\\|) + (m\u22121)\u00b72^{m\u22121}` \u2014 the S-pair lcm of the dense box's unique to",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 95,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "| N7 | **Sub-Rayleigh deficit** \u2014 0.06\u20130.10%, one-directional, Stouffer \u221271.8 (30 primes), survives the Hermitian matched null, **persistent over a 79",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 96,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| N8 | **Why does `e\u2082=e\u2081\u00b2\u2212\u03c7\u2082(\u22121)p` hold?** **+2026-09-01d: REDUCED TO ONE LEMMA** (`NOTE_n8_pencil_reduction_v1`). The `p+1` `F_p`-rational degree-2 d",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 97,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| N9 | The explicit 2-dimensional piece `W` | not identified. **+P22:** it cannot be identified from `L*(a)` \u2014 must come from the sheaf side | 2026-09",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 107,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| R1 | **Frontier 9 \u2014 FLD-sign intrinsic-ness.** `sign(FLD)=\u2212\u03c7\u2082(M)` 54/54 but reduces to no tested intrinsic invariant. **Its \u03c0\u2194\u03c0\u0304 chirality sub-probe",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 111,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "| SB-owed | **CLOSED 2026-09-02.** `c` measured from the \u03c6-action (`s_lambda_c_v1.sage`, `S` never used \u21d2 non-circular): p=79 `c=2027/6241`, p=163 `c=",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 115,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| BE | **Brick E degree statistic.** p=43 \u2192 D=14 (generic). **163/211 structurally INADMISSIBLE** (needs CRT factor `q>|Q|`; 67<69, 37<99). Powered ru",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 125,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| \u2014 | \"The L-MONO finite evidence is maximal / cannot get sharper\" (`RESULT_lmono_brick1` \u00a73) \u2014 false when written | 2026-09-01b |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 126,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| \u2014 | The centralizer conjecture's **fourth** explanatory item (\"the S-visibility embedding-sign texture \u2014 same character\"). `\u03c1_p=\u03c7\u2082(\u22121)`; S-visibilit",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 146,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "actually running. Nothing is ignored by config; the files were simply never added. Largest",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 160,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`(Z/2)\u00b3`), replaces Kani\u2013Rosen with an **isotypic decomposition** (so **Kani\u2013Rosen is NOT needed**),",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 185,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Polya\u2013Vinogradov `log p`. It never computes the L-polynomial's coefficients. **A bound `d\u221ap log p`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 196,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`[2,\u221e)` and ours is exactly 2. The unread constant can tie ours, never beat it, and cannot touch the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CLAIMS.md",
+  "line": 201,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Never searched:** elliptic Gauss sums, **Eisenstein case** (secp's own CM) \u2014 nearest classical relative",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# The destructive-interference frame: where a \"beam\" can and cannot exist",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 12,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "(joint `(x,y)` 2-D transform, exact `\u03bc\u2083` resonance, magnitude generic at `p\u22641009`),",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 20,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**What is new here is not the analogy \u2014 it is taking the analogy's own conservation law seriously",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 56,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "already fully accounted for by the uniform floor.** There is no unexplained energy anywhere in the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`p/polylog` times brighter than the proved bound allows. That is not a slack issue.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 60,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Corollary that kills a whole class of proposals: \"wrong basis\" is NOT an escape for complete sums.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 64,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Changing basis cannot manufacture a fringe that the uniform bound forbids.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the interference analogy is refuted, by conservation. The nulls there are not cancellations hiding",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "The bound `\u221ap\u00b7polylog` is *true but vacuous* the moment the window `W` has `|W| \u226a \u221ap`, because the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "caustic-exploiting** \u2014 they need a thin set where a relation is exact, never an average bias.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 96,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "statistics are vacuous by construction.* That is the single sharpest output of this frame:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 118,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**This is not hypothetical. The record has already caught one instance.** The D4 finding",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 129,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "standard RMT statistics were never measured**; a rescaled coherent stack is the same move.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 135,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Two distinct failures, both already logged, both are \"your background is not white\":",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 157,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**P0 \u2014 THE ANTI-COHERENT PLANT.** *(recommended first; cannot manufacture a positive)*",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 170,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(anomaly-drill rule: output is a symmetry type / eigenvector / subspace, never a verdict), then a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 179,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`SYNTHESIS_..._ADDENDUM_1_v1.md`; **never run**; instrument exists",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANALYSIS_destructive_interference_frame_v1.md",
+  "line": 197,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**P5 \u2014 THE CAUSTIC.** Wall 2. Extreme-value / tail statistics as an instrument class (never used).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "reports magnitudes; it may **not** convert a magnitude into a verdict (\"safe / generic / bounded /",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "nothing here\"). A bound is a statement about *size*, and structure lives in the *symmetry type,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "carried **opposite signs 6/6** with sum \u22480. This is not evidence of a coupling; it is the tensor",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The anomaly dissolves into a sharper law, not into \"nothing here.\"** v1 stated `C_T \u2248 C_1\u2297C_1`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "ANOMALY_DRILL_01_CT_SPLIT_v1.md",
+  "line": 126,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`2\u00b2\u2075\u2076`. That is \u00a7X.5, and it is not addressable by this method.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- Lifts: the claimed z-pairs are exact lifts and reproduce `s(P135) = 0.058932996993`, `s(P140) = 0.019792401440` to all printed digits (their P140 z ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 37,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "2. **\u03bb \u2261 2 (mod 3), not 1.** Their stated law `d \u2261 (\u22121)^s d\u2080 \u2212 c\u00b7n (mod 3)` folds \u03bb^j \u2192 1. The correct folding is `d \u2261 (\u22121)^s\u00b72^j\u00b7d\u2080 \u2212 c\u00b7n (mod 3)` (v",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 56,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`RESULT_eps_to_d_constraint_v2.md`: the public flap \u03b5 is not the scalar-side",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**C3 (their verification): tautology.** Replicated exactly: their mock key has",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 122,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Farey/Egyptian/Dirichlet apparatus**: CFs of u_frac are the generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 146,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "factor through the unknown d\u2080), not a theorem \u2014 it is DLP-adjacent and cannot",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 148,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "specific mechanisms, and generic per-cell deviations of a few percent at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 167,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`semaev-tautology-trap-verification.md` (Aug 13). Not read: `eisenstein-core-gate-verification.md`,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 173,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "files cited by the docs were never delivered to ~/Downloads \u2014 only their",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 179,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. `d2-lang-torsor-puzzle-verification.md` \u00a74 (\"The 'Oracle Gap' & Tautology",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 181,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is blocked by an \"unresolved circular dependency (Tautology Trap)\": j needs",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 199,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(`semaev-tautology-trap-verification.md` \u00a73) is circular by the document's",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_d2_bridge_mod6_reduction_v1.md",
+  "line": 238,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "A set covering 2^\u221266 of the keyspace cannot be what \"the keyspace shatters into.\"",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_ks_backstop_and_joint_readout_v1.md",
+  "line": 64,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "than the genuine harmonic. So the eps two-point correlations really are O(p^\u22121/2); **the null is not wrong.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_ks_backstop_and_joint_readout_v1.md",
+  "line": 73,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\"never verified\" was a conflation with the failed *Lemmermeyer* citation-verifier run. See",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_ks_backstop_and_joint_readout_v1.md",
+  "line": 75,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "`|\u00c2(k)| \u2264 4\u221ap+1`, uniform, no polylog. The owed gate is NOT \"verify KS\"; it is the lift-step theorem",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **No indexing issue.** Probe B uses `d_to_q6idx` for all index arithmetic \u2014 it never assumes the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 80,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "$\\{r, r+q, r+2q, \\ldots\\}$ in array-index space, calling them \"subgroup cosets.\" They are not:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 81,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the greedy index is not a group homomorphism from $(\\mathbb{Z}/n)^*$, so these APs are arbitrary",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 192,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "must survive the quotient. A signal that did NOT respect the quotient cannot exist in $c(d)$. So",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 193,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the refinement loses no information. **No correction needed.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 246,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "inequality at the minimum of a discrete support. They are not real anti-concentration.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 263,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "essentially impossible and no change is needed.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_mu3_subspace_residual_v1.md",
+  "line": 285,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "The tie-handling fix **completely eliminates the leftward shift** \u2014 the mean goes from 43% to 50%,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "sector and it came back generic \u2026 isolated to one decidable lattice-counting statement\"* as a revert",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 9,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "answer with **dismissal words** \u2014 \"generic\", \"at the floor\", \"refuted\", \"no structure\". The memory's",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 10,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "rule: a bound is a **magnitude**, not \"no structure\"; structure lives in a value-law / symmetry-type /",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 16,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 1. `Sy` \"generic\" (v36 \u00a72) \u2014 WRONG as a characterization",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "I wrote the odd-sector object `Sy = \u03a3_P s_y(P)\u03c7\u2082(y_P)` \"came back generic\". Characterizing it",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 27,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**\"Generic\" erased all three.** The correct statement: *`Sy` is a Weil-magnitude character sum with",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "unchanged** (still an x/y character sum inside bounds \u2014 no leak), but the characterization was biased",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Touched (corrected here):** the *characterizations*. \"Generic\" (`Sy`) hid a Weil-magnitude,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "it is not promoted to a law. No false positive manufactured to compensate for the false negatives.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 79,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "magnitude vs Weil, symmetry type, value-law, sign-law) before writing any of {generic, at-the-floor,",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "AUDIT_negative_bias_session2to4_v1.md",
+  "line": 80,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "no structure, refuted}. A magnitude at \u221ap is a *result about size*, and it is reported as such.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(randomizing the twist) did not average away a class-specific effect \u2014 there is none at this",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "(mean +0.029, n=4). v3's fixed twist is not a hidden carrier of +0.21.",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 26,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Verdict on the worry: the null is NOT a suppression.** The +0.21 was `#E`-leakage from one-sided",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 53,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Scaling:** \u22120.010 \u2192 +0.012 over |V| = no growth; but there is no positive base effect for growth to",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\u03b2-orbits (fewer d.o.f., closed under \u03b2). R2>1 could be **generic order-3 orbit-closure**, not \u03b2/CM",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_semaev_v4_method_result_conclusion_v1.md",
+  "line": 71,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "one surviving positive (H2) is real but its CM interpretation is not yet earned.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 22,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "non-significant*. The test is not weakly powered; it is anti-powered.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 36,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 2. STRUCTURAL \u2014 the GLV lift is *locally affine*, so the footprint carries no local information",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "This is the finding that matters, and it is not a bug \u2014 it reshapes the approach.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 52,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "non-trivial only across intervals of width `~2\u00b9\u00b2\u2078`, at which point it is not a short interval.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "free to move\"* \u2014 is correct about the \u03bc\u2086 symmetry and irrelevant here. What kills the test is not a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "each), but floor yields `max bit-length 129` vs round's `128` \u2014 the vector is not the shortest.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "AUDIT_shortscalar_glv_interval_harness_v1.md",
+  "line": 94,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is the target: the 120\u00b0 lock bounds the **complete** sum, and an incomplete sum over `B \u226a \u221ap` is not",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "strongest (still scoped, not proved) statement available: the $\\mu_3$-trivial sector is generic in",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 47,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "**What it is NOT.** Not a proof of genericity, and not an implication in either direction. The",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the *residual* (after quotienting) is generic.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 64,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "forcing imposes a symmetry, and the residual carries no detectable value-information about $d$.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 132,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "scale** where complete-sum bounds go vacuous ($\\sqrt{n} \\approx 2^{128}$, the puzzle's native",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 146,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "central prediction of the structural framing \u2014 the one place leakage could live \u2014 and we cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 147,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "reach it at small $p$. This is not a failure of the null; it is a scope limitation that must be",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 149,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "about the regime where the complete-sum bounds go vacuous.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 179,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "exists, it is here\"), not an assertion that leakage exists. Our null says the condition is not met",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 180,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "at small $p$ under these statistics. These are compatible. The prediction is not weakened; it is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 218,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "2026-08-08) found that \u00a75 above **overstated the silence**. The $2^{128}$ aperture channel is not",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 233,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **interval-restricted $R_{\\text{inv}}(I) = \\sum_{d \\in I} c(d)\\,c(d^{-1})$** | no code; pointwise version exists (Tier 3) but is not interval-restri",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CONSEQUENCES_mu3_subspace_null_v1.md",
+  "line": 243,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "permutation null. **No RESULT file exists.** It appears written but never run/recorded.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CORRECTION_cside_v1_null_underdispersion_v1.md",
+  "line": 24,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "could be `\u03bd`-fixed only if `\u22121 \u2208 \u03bc\u2083`, impossible since `2 \u2224 3`). So `val[\u03bd(r)] = \u2212val[r]` identically:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "CORRECTION_cside_v1_null_underdispersion_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "`p \u2248 0.03` discovery-sample observation, not `p \u2248 0.004`. It is not withdrawn, and per the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "CORRECTION_cside_v1_null_underdispersion_v1.md",
+  "line": 92,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- A Legendre-symbol-of-index effect can only push `T` **positive**. It cannot manufacture the observed",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "use mpmath arbitrary precision (\u226525 dps) from exact data, never IEEE double.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 29,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*(Galois view: `|F[a,b]|\u00b2` rational \u27fa `|F|` constant on the mult. orbit `{(ta,tb)}`; it is not.)*",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 3. Leak-null: d mod k from a public readout \u2192 **CONFIRMED EXACT (no leak)**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 72,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Verdict: null CONFIRMED exactly** \u2014 no leakage of d mod k from these public readouts; perm p-values",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "shows that null is NOT a float artifact \u2014 the signal was not \"rounded away,\" it is genuinely absent",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 100,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "So far every *exact-feature* null HOLDS exactly (the \"no leak\" conclusions are real, not rounded-away",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 102,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "possible \u2014 RMT battery, ct-coupling decoupling, reconstruction-fidelity \"generic\", sub-Rayleigh.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 111,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 6. Reconstruction-fidelity \"0.93 is generic, not a leak\" (M14/M16) \u2192 **CONFIRMED EXACT**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 114,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "generic geometry, not d-signal. Float-feature (character sums via `np.exp`) \u2014 a real taint candidate.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 128,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "generic, not d-signal\"). \u03bc\u2086-orbit fidelity-invariance confirmed exact (all 6 identical to 30 digits).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 171,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Verdict: null HOLDS.** Under the symmetry-preserving null, `x-half` is NOT elevated \u2014 the apparent",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 177,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 9. y-channel spike / leak (H3 T_y corner, y-odd) \u2192 **HOLDS (no leak, both nulls)**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 182,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "no leak beyond the forced y-odd symmetry.** So the cheap-partial-shadow null holds on BOTH channels;",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 203,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "The exact-rerun program **validates the KB's null/closure conclusions**: every \"no leak\" / structure",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXACT_RERUN_FINDINGS_v1.md",
+  "line": 213,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Pattern holds firm: the \"no leak\" / structure results are REAL under exact arithmetic; the codebase",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 13,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- a **firing/plant control that does not actually fire** (i.e., the instrument is dead, so the null is uninformative);",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 14,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- a **matched control that fails to share the signal's forced symmetries** (so it is not a valid null), OR conversely a positive whose \"signal\" a prop",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "A mood (\"this looks overclaimed\") is not a finding. Name the object, the check, and the artifact.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 49,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "mode where a control \"fires on real signal too,\" making the null vacuous.)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 51,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "correlation with cofactor does not by itself prove the CM channel carries nothing once cofactor is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 83,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "cannot see a joint effect the frozen primary could. Was the frozen primary truly unestimable, or",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "this family structurally cannot represent? If so, the null is scoped to a family that excludes the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "line": 101,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "uninformative (control dead or mismatched)** \u2014 each backed by a decidable artifact (a rerun number, a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_brick_e_lead_rung_and_instruments_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# NOTE \u2014 Brick E opened: instruments located, I1 covariance verified exactly, p=43 LEAD rung reads GENERIC (D=4); the powered ladder run is the define",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_brick_e_lead_rung_and_instruments_v1.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the generic value** (a D \u2264 3 fit imposes 1 linear condition: null P \u2248 1/631 \u2248 0.16%, so D_obs = 4",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_n8_branch_confinement_v1.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**N8**. Script `n8_branch_confinement_v1.py`. Exact integer throughout. **No leakage / ECDLP /",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_n8_branch_confinement_v1.md",
+  "line": 35,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The converse is FALSE** and is not claimed: `p = 199, 271, 379` are non-cyclic via *odd* torsion",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_n8_branch_confinement_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 4. The `a = 0` coefficient is VACUOUS \u2014 a correction to my own note",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NOTE_n8_branch_confinement_v1.md",
+  "line": 128,
+  "analytical": true,
+  "power": false,
+  "scope": true,
+  "text": "N8 (prove the identity) is **not** dead \u2014 it is **correctly scoped for the first time**, and the",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "NOTE_n8_branch_confinement_v1.md",
+  "line": 149,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| `V\u2082(0) = 2mp`, hence `a=0` vacuous (\u00a74) | **`[PROVED \u2014 elementary]`**, measured exact |",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 22,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Arms A and B are asked for a **value**, never for agreement. They are compared only after both return.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Disagreement between A and B is the signal.** Agreement is not confirmation \u2014 both are the same",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 1.5 | `AUDIT_negative_bias_session2to4_v1.md` | sector and it came back generic \u2026 isolated to one decidable lattice-counting statement\"* as a revert",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 2.3 | `PROTOCOL_blinded_joint_readout_v1.md` | report a flat table. **No target is privileged.** You are not told which (if any) target is a | `ecc_",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 100,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 2.14 | `RESULT_joint_shadow_mu3_v1.md` | Follows `RESULT_joint_shadow_decompose_v2` (the joint-shadow magnitudes are generic; the | `joint_shadow_mu",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 111,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 3.4 | `ANOMALY_DRILL_01_CT_SPLIT_v1.md` | reports magnitudes; it may **not** convert a magnitude into a verdict (\"safe / generic / bounded / | `_ano",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 120,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 3.13 | `NOTE_brick_e_lead_rung_and_instruments_v1.md` | # NOTE \u2014 Brick E opened: instruments located, I1 covariance verified exactly, p=43 LEAD rung",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 130,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 4.2 | `NOTE_n8_pointwise_convolution_v1.md` | > # \u26a0 STATUS 2026-09-04 \u2014 this note is **M38** in `CLAIMS.md` `[VERIFIED \u2014 exact]`. It is NOT withdraw",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 138,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 4.10 | `PREREG_c2_grouplaw_diffset_v1.md` | difference `x(P\u1d62\u2212P\u2c7c)` \u2026 never read because the run mis-tagged them [parity-void].\"* Unblocked by the | `",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 140,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 4.12 | `PREREG_h2_order3_structure_control_v1.md` | `[VERIFIED \u2014 matched control]` \"CM-specific vs generic split order-3, scope {these primes, k, m}",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 154,
+  "analytical": true,
+  "power": true,
+  "scope": false,
+  "text": "| 5.5 | `PREREG_row_budget_lowtail_v2.md` | ### F10 \u2014 the `b=0` stratum has a DIFFERENT forced low-tail law, `8.0\u00d7` the generic rate `[PROVED]` | `row",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 155,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 5.6 | `PREREG_semaev_cm_solving_degree_v1.md` | CM-agnostic neutral system, so it cannot peek at the hypothesis) and (ii) the firing/VOID controls o",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 172,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 6.2 | `RESULT_Sy_sign_skew_v1.md` | # RESULT \u2014 Sy sign-skew: CONFIRMED real, but curve-generic (not secp-special, not a leak) | `_sy_skew_test_v1.py",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 178,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "| 6.8 | `RESULT_brick_e_cd_degree_v1.md` | # RESULT \u2014 Brick E, p=43: `c\u207a(d)` is generic-degree (scoped NULL, lowest-power rung) | `brick_e_degree_fitt",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 179,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 6.9 | `RESULT_brick_e_cd_degree_v2.md` | # RESULT v2 \u2014 Brick E, powered ladder: the cover-scramble degree `c\u207a(d)` is at the GENERIC CEILING across a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 202,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "| 7.11 | `RESULT_glv_norm_readout_matched_null_v1.md` | **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power and scope stated in \u00a74. **The avenue is NOT clos",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 215,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 8.3 | `RESULT_intensity_field_spatial_item2b_v1.md` | # RESULT \u2014 ITEM 2 REMAINDER: spatial statistics of `\\|T(a,b)\\|\u00b2`. No structure established; TH",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 241,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 9.8 | `RESULT_n1_120deg_independent_reproduction_v1.md` | a document cannot witness its own audit; [[feedback-verification-claim-needs-artifact-2026",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 255,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 10.1 | `RESULT_nkd_dterms_subsurface_v2.md` | ## 4. Correction: NOT 2-adic \u2014 Dirichlet-generic in L `[VERIFIED \u2014 matched control]` | `nkd_dterms_mec",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 289,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 11.14 | `btc_puzzle_research_plan_v6.md` | # BTC Puzzle \u2014 Research Plan v6 (gap audit: what the null battery never touched) | `power_scaling.py` | Y",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 299,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 12.3 | `masked_structure_findings_v20.md` | work (v9/v10/v11) counted relation/decomposition **yield** (generic) and v13 analysed a **single** | `se",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 301,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 12.5 | `masked_structure_findings_v26.md` | Tautology \u2260 no structure (D\u2096\u2099/D_err is how we found the Eisenstein lift, rhombus, sextic, 3/4-1/8-1/8). ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 305,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 12.9 | `phi_n_native_knd_findings_v1.md` | (the user's RH-line framework), not generic ML. Prior \"k has no structure\" nulls | `phi_n_native_prime_co",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 306,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 12.10 | `phi_n_residue_XY_findings_v1.md` | lens \u2014 the framework's OWN basis, not generic ML. Statistics: the Ramanujan-sum | `phi_n_residue_q53_rep",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 321,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 13.4 | `PREREG_deflation_120deg_generic_j_v1.md` | # PRE-REGISTRATION \u2014 is the 120\u00b0 law generic to odd-order cyclic elliptic curves, or specific to ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 322,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 13.5 | `PREREG_deflation_120deg_generic_j_v1_DEVIATIONS.md` | **Date:** 2026-08-01. **Status of the spec: WITHDRAWN BEFORE DATA. The run was never e",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 326,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 13.9 | `ANALYSIS_interval_charsum_generic_prediction_v1.md` | # The generic prediction for the interval character sum \u2014 committed BEFORE the L=80000",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 329,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 13.12 | `ANALYSIS_semaev_cm_yield_mechanism_v1.md` | > (prime-field summation-poly index calculus is non-competitive with generic \u221ap to begin with).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 330,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 13.13 | `AUDIT_prereg_incomplete_shortscalar_SELFAUDIT_v1.md` | *2026-07-29. **THIS IS NOT THE GATE.** `experiment-designer` was launched twice and ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 342,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 14.4 | `LEAK_HUNT_LEDGER_2026_08_11_v1.md` | to find *how* it leaks. \"ECDLP is secure / nothing here / generic\" is the training reflex this project ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 345,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "| 14.7 | `NOTE_n7_xy_axis_localization_v1.md` | `PREREG_subrayleigh_deficit_scaling_v1.md` (\"report D restricted to strata {b=0},{c=0},{b=c},generic |",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 347,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 14.9 | `PLAN_interval_charsum_realbranch_characterization_v1.md` | # Real-branch characterization plan \u2014 what to run IF L=80000 refutes the generic ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 362,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 15.3 | `PREREG_cm_hecke_grossencharacter_vertical_v1.md` | the object, the single decidable artifact, the anti-tautology construction, the matched/f",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 366,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 15.7 | `PREREG_ell_ge5_mutual_information_v2_DEVIATIONS.md` | the null point; it is not \u2014 copying with probability `s` adds correlation on top of th",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 388,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "| 16.8 | `RESULT_exclusion_hard_empty_cells_v1.md` | **Date:** 2026-08-16. **`[EMPIRICAL \u2014 scoped null on HARD exclusion; NOT \"impossible\"]`.** Gate-f",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 402,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 17.1 | `RESULT_mu6_quotient_relation_multiplication_v1.md` | it does NOT need to beat generic `\u221an` or solve ECDLP to count. Disparate real findings ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 404,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 17.3 | `RESULT_outside_symmetry_v2.md` | symmetrized norm N\u0304 as \"within null (flat/geometric)\". They are NOT within the null \u2014 they are | `scratchpa",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 411,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 17.10 | `RESULT_stickelberger_citation_verified_v1.md` | Discharges the `[UNVERIFIED CITATION]` debt on Stickelberger that failed three prior runs. ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "NULL_RETEST_MASTER_v1.md",
+  "line": 415,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| 17.14 | `STRUCTURAL_IMPLICATIONS_2026-07-30_v1.md` | **Epistemic posture:** This document works against the base-model reflex (\"ECDLP secure / gener",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_L3_signature_leakage_v1.md",
+  "line": 40,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`a`, computable forward in one exponentiation; they are not the inversion of anything.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_L3_signature_leakage_v1.md",
+  "line": 50,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**fixed-curve secp ECDLP** (`Q = kG` on one curve, a different object); nothing here",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_L3_signature_leakage_v1.md",
+  "line": 51,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "speaks to that, and nothing here claims to. Mechanical layer covered by the fired",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_L3_signature_leakage_v1.md",
+  "line": 93,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **C3 \u2014 the target was never a real attack surface.** `a` is public (it sits in the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# RESULT \u2014 Sy sign-skew: CONFIRMED real, but curve-generic (not secp-special, not a leak)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **C1 random-b (deck-check)** | see below | decides curve-generic vs b-specific |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 31,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*\"S1 `p<0.01` AND C2 calibrates AND C1 shows curve-generic \u21d2 skew CONFIRMED, curve-generic (H2);",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 35,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **It is CURVE-GENERIC** \u2014 a property of `\u03a3 s_y(P)\u03c7\u2082(y_P)` over elliptic curves `y\u00b2=x\u00b3+b`, driven by",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 37,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "`h(\u2212p)` class-number formula measures for `p\u22613 mod 4`). **`b=7` / secp carries no special role.**",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **It is NOT a leak** \u2014 `Sy` is an x/y character sum inside the Part V bound; and being curve-generic,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "pursued it needs its own pre-registration. Recorded only so it is not silently rediscovered as \"new\".",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_Sy_sign_skew_v1.md",
+  "line": 59,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\"generic\" only in that `Sy`'s lean is a real, characterized bias \u2014 but a curve-generic one, so the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_amicable_log_bridge_v1.md",
+  "line": 46,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "**This is a scoped magnitude bound, not a closure.** The words *closed / no leakage / benign / generic",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_amicable_log_bridge_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "/ tautological / at-the-floor* are barred per the spec. What it bounds: amicability-specific coupling",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_amicable_log_bridge_v1.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **`Hom = 0` untouched.** Nothing here weakens or extends it.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_m_support_v2.md",
+  "line": 21,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **`m` UNDEFINED gate** (`p \u2224 b\u2082`) | an `m = \u22121` row has `b\u2082 = \u2212p`, divisible; and v1 \u00a71 reports 0 UNDEFINED rows on the MAIN arm | cannot hide `m = ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_m_support_v2.md",
+  "line": 22,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **`extract_m` parity path** (`\"PARITY_FAIL\"`) | is a non-`None` value, so it lands in the tally *and* trips outcome 7; outcome 7 reported 0 | cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`ANALYSIS_..._kronecker_route_v3.md \u00a74` and `RESULT_stickelberger_citation_verified_v1.md \u00a73. No leakage",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Two independent generic primes fail; the plants are correctly classified in those same fields. `p=13`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 40,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "(`n=7`) is the small-case exception, not the generic behavior.",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 50,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **The Hecke-character reading is falsified for generic `p`.** (The reasoning that spread is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 52,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "eigenvalues here are simply not abelian, so they are not Hecke values of a cyclotomic type. The",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **The `\u03b6\u2083` ratio is cyclotomic even though the eigenvalues are not.** `\u03b1\u2082/\u03b1\u2081 = \u03b6\u2083` exactly (proved,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "field. **So the `120\u00b0` law's cyclotomic ratio is NOT an arithmetic fact about the eigenvalues \u2014 it is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **\u00a74b (the \u03c9-descent) is an ingredient of L-mono, not a dead end.** `\u03c9:(x,y)\u21a6(\u03b6\u2083x,y)` puts a genuine",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\u00a74b was correct that it is not *by itself* the order-pinning lever, but it is a live ingredient of the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_anew_twisted_eigenvalues_nonabelian_v1.md",
+  "line": 87,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "check). A wider sweep and a proof (why big monodromy for `a\u22600`, generic `p`) are owed.",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_aperture_probes_v1.md",
+  "line": 85,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The two FIRE cells are not replicated** (different arms, different seeds), and the total count",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "line": 36,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "2^18 secp interval, perm p=0.94), so it cannot predict which sector the answer's baby-step occupies, and",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "line": 79,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **NOT closed:** the CM/interval avenue at large; non-generic transfers on out-of-scope regimes",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "line": 84,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "generic search doesn't already have. Consistent with the single-point closures earlier in this program",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "# RESULT \u2014 Brick E, p=43: `c\u207a(d)` is generic-degree (scoped NULL, lowest-power rung)",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "path. No ECDLP/key-recovery claim. **This is one rung (p=43) of a degree-stability ladder; it is NOT a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| (iii) calibration | null draws \u2192 \u03c0 ~ Uniform | **INAPPLICABLE / BROKEN at p=43** \u2014 `D` two-valued \u21d2 p-value discrete, cannot be Uniform (true KS 0.9",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 45,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Reading:** the QR-half `c\u207a(d)` is **not a low-degree polynomial in `d`** at p=43 \u2014 it is generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 52,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "(`D_obs \u2208 {10,11,12}` \u2192 \u03c0\u22480) from generic, but cannot distinguish `D=13` from `D=14` with power",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Ruled out at p=43:** a strong low-degree channel (`D \u2264 12`). It is absent \u2014 `c\u207a` is maximally generic.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Not ruled out at p=43:** a weak channel (`D = 13`), unresolvable at `|Q|=15`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 59,
+  "analytical": true,
+  "power": false,
+  "scope": true,
+  "text": "A scoped null is not an avenue closure (CLAUDE.md: burden-of-proof on the closure; a null is bound to",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 67,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Grade:** `[VERIFIED-scope \u2014 p=43 rung, NEAR-VACUOUS: c\u207a at the generic degree ceiling (14); rules out a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "strong channel D\u226412, cannot resolve D=13; \u03c0=1.0 vs matched \u03bc\u2083-null]`. Controls i/ii/iv valid; **(iii)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 1,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "# RESULT v2 \u2014 Brick E, powered ladder: the cover-scramble degree `c\u207a(d)` is at the GENERIC CEILING across all well-posed rungs \u2014 the low-degree channe",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Grade:** `[VERIFIED-scope \u2014 cover-scramble degree at the generic ceiling (D=|Q|\u22121) at 3 well-posed rungs",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **D7 (fast degree engine).** The analysis fitter climbed `D=0..|Q|\u22121` with Gaussian elimination each \u2014",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 60,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`c\u207a(d)` sits at the **generic maximal degree** at every rung \u2014 indistinguishable from a random",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 71,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "p-value is discrete and cannot be Uniform \u2014 **INAPPLICABLE / degenerate**, exactly as at p=43",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 72,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(DEVIATIONS D3/D4). The read does not depend on it: `\u03c0=1.0` (real at the ceiling) is not a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "GROWS with |Q| (rules out D\u2264~270 at p=547 vs only D\u226412 at p=43).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_brick_e_cd_degree_v2.md",
+  "line": 84,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "two POWERED ones, `c\u207a` is at the generic degree ceiling with the instrument proven able to detect a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_c2_grouplaw_diffset_stageA_v1.md",
+  "line": 9,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "original run mis-tagged `[parity-void]` and never read are now **read, power-controlled, and bounded.**",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "No leakage claim. No closure. No grade moves on any other item.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Why the plane is not covered by the record's own bounds:**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 27,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "phase, i.e. a character of `\u2124/n`. **`e_n(kd\u00b2)` is not a character of `\u2124/n`**, so that estimate says",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 29,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- The Wiener route is vacuous. The record **already proved** the chirp's spectrum is flat at `\u221an`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 31,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "never as a detector). Hence `\u2016chirp\u2016_A = \u221an`, and",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 69,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "characters; `k\u22600` lines are not bounded by it and indeed run ~2\u00d7 higher).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 95,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**\u21d2 dead.** A third chance pattern for the ledger, killed by the pre-committed OOS rule before it was",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 113,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Because `c` is forced **odd** and real `\u00b11`, and `e_n(kd\u00b2)` is **even** in `d`, a sequence cannot track",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 117,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "alignment by a constant factor** \u2014 the naive `sign(Re e_n(kd\u00b2+a\u2080d))` plant is not the matched one, and",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 127,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Does:** the quadratic-phase plane exists, is measurable, is not covered by the record's bounds,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_chirp_hologram_plane_v1.md",
+  "line": 135,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "phases and stands exactly as written; this is a different object that it never covered.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_excess_v3.md",
+  "line": 9,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**NOT a closure.** Model curves only, `q \u2208 {541,\u2026,65539}` (`q \u2272 2\u00b9\u2076`); `q=2\u00b2\u2075\u2076\u22122\u00b3\u00b2\u2212977` is not",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_excess_v3.md",
+  "line": 11,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "scope, not a statement that the avenue is dead. No ECDLP/extraction/security claim.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_excess_v3.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What is NOT settled (the null is bounded, not a closure)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "No ECDLP / extraction / security claim. A null is a bounded magnitude with power+scope, never a closure.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 49,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Primary family (P1/P2/P4):** every \u0394 \u2264 0 or \u2248 0 (CM never exceeds non-CM). Holm\u2013Bonferroni across",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 105,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "CM arm \u21d2 there cannot be CM-specific *presence* (CM-specificity requires presence on CM). So the verdict",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 107,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "distinction would matter (leave the headline unearned) only for a *positive*, of which there is none.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 111,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "\u03c1=0.30 (so they are not VOID / power-starved), but the demonstrated power is for **gross** \u03c1=0.30",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 140,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "p's are not tuple-comparable to the un-guarded run). **All 7 channels within null, verdict unchanged.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 157,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "measurements (unguarded+guarded discovery, confirmation, ladder) it never reproduces below 0.01 at the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_higherorder_v1.md",
+  "line": 166,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "true 4-relations (generic-nonzero otherwise); GLV endomorphism (\u03b2x,y) on-curve. Runner + logs archived.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "confirmation(OOS) + ladder to 2\u00b9\u2076; PC-S5 + PC-GRADE fired, PC-PLACEBO silent (the anti-tautology",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "line": 14,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "No ECDLP / extraction / security claim. A null is a bounded magnitude with power + scope, never a closure.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "- **CM within null at all 10 primes** (every p \u226b 0.01). **\u0394 \u2264 0 everywhere** (CM never exceeds non-CM;",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "line": 77,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "4/283 random distinct-x vanish (generic-nonzero). Guard confirmed to remove only construction-",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_jointset_semaev_r5_v1.md",
+  "line": 88,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What is NOT settled (untested channels)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_lattice_unfolding_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# RESULT \u2014 CM lattice-unfolding: the public lift does NOT reveal `(a,b)` (powered bounded null); the amicable second equation is STRUCTURALLY vacuous ",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_lattice_unfolding_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **disjointness** | `d` never in `\u03a6`/`\u03a8` path; `X` never in `(a,b)` path; different lattices (norm p vs n) |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_lattice_unfolding_v1.md",
+  "line": 85,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is not an independent public feature. This is the durable half \u2014 it holds for all `p` (the associate",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cm_lattice_unfolding_v1.md",
+  "line": 86,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "identity `\u03c0_n\u22121=\u2212\u03c0_p` is exact), independent of scale: the amicable over-determination cannot be",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_cside_nonalgebraic_correlation_v1.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "- **The shortscalar arm at the $2^{128}$ scale** (`PREREG_incomplete_shortscalar_v2`) remains the operationally-decisive form of this channel \u2014 the or",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cside_pooled_tilt_settlement_v1.md",
+  "line": 6,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "**Grade: `[EMPIRICAL \u2014 SCOPED]`** for the per-prime `inv` family-wise null (retained from v1); **`[FLAGGED LEAD \u2014 CLOSED as a candidate]`** for the po",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_cside_pooled_tilt_settlement_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- Regime $p\\sim10^4$, orbits $\\sim 3$\u2013$8\\times10^3$. This is **three orders of magnitude below** the puzzle's $\\sqrt n\\sim2^{128}$ threshold where com",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_cside_pooled_tilt_settlement_v1.md",
+  "line": 71,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "- Per the counter-prior: a clean scoped null is a valid result; \"not found\" is a failed search, never an absence. This settles one candidate lead; it ",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "with an error-bar argument for the one non-exact claim). No secrets, no leakage or ECDLP claim \u2014",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 45,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "every cell** ($\\alpha/\\sqrt p$ is never a root of unity) while **preserving exactly** purity, the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Extends `RESULT_anew_twisted_eigenvalues_nonabelian_v1.md` (p=43, 67 generic + p=13 exception) with the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "With p=43, 67 from the record: **six generic primes, both mod-12 arms, both anomalous and non-anomalous",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 90,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## \u00a7Sweep FINAL (2026-08-27): nine generic primes, all NON-ABELIAN \u2014 the sweep is COMPLETE",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 94,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "163, 211, 349, 61@a=1, 61@a=2 \u2014 nine generic confirmations across both mod-12 arms, both order",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 96,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "field's plants fired.** The generic non-abelianity of the a\u22600 twisted eigenvalues is established as",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_d2_twist_rigidity_certificate_v1.md",
+  "line": 97,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "the universal behavior at every tested generic prime. Uniform-in-p proof remains open (unchanged).",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_e3_owed_measurement_v1.md",
+  "line": 26,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**A1 \u2014 the reject is NOT a generator-pool artifact.** Structural null = 20,000 sets of 82 uniform random",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_e3_owed_measurement_v1.md",
+  "line": 69,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`p=0.035` cannot strengthen under null redraws. So the bound is: *the marginal cubic-energy channel carries",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_e3_owed_measurement_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "a set-specific reject that does not survive family-wise correction and cannot exceed this magnitude on this",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_e3_owed_measurement_v1.md",
+  "line": 94,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**This is not a door shut.** The bound is on **one marginal rank-1 statistic**; the effect is real at the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_e3_owed_measurement_v1.md",
+  "line": 105,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "it: a bounded, set-specific, CM-mediated positive with power+scope, and a live next probe. It is not a",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 52,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "function; `\u03b5_LBE` is ECDLP-gated; under ECDLP-hardness they cannot be identically equal \u2014 generalizing",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "residual object of study), showing a route is ECDLP-equivalent is **neither** a closure (ECDLP is not",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What stays OPEN (burden-on-closure; the null is NOT enlarged)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "holds is a concrete, deterministic computation (no leakage null needed to start) and is the next Brick B",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 75,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**generic** scalar it **dissolves** \u2014 the aliquot 2-cycle `n \u2194 p` is a property of the curve's **orders**,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "not of an individual `d`, and there is no natural point-map `E(F_p) \u2192 E'(F_n)` (different curves, different",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "CM-special \u2014 i.e. it **folds into T2c**, it is not an independent lever. *(Stated straight, not inflated:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_eis_carry_2d_dlp_reduction_v1.md",
+  "line": 79,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the second-equation hope does not survive contact with a generic scalar.)*",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "classifier multiplier `a` and returned null. `a` was never varied. Motivating principle, imported from",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*when one parameter moves, all cells of a piecewise-constant classifier scale together \u2014 you cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 21,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The question is well posed, and the joint is not forced.** `\u03b5_a(X) = \u03b5_1(aX)`, so varying `a`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 23,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`(\u03b5_1(Y), \u03b5_1(D_a(Y)))` with `D_a = m_a \u2218 x2 \u2218 m_a\u207b\u00b9` a **degree-4** map for every `a` \u2014 never a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 45,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "expected SD of `\u03b8_a` is `\u221aV = 16/(3\u221an) = 0.00533`. Observed \u2248 expected; there is no excess dispersion",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 123,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "*the T1 null is not an artifact of the single `a\u2080`; it holds uniformly over a 32-point sample of the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 128,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "independent of `a` \u2014 and this experiment cannot produce one. So the Coupling-Principle question that",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 130,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "bounds the **typical** `a`, never every `a`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 144,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "32 values of `a` read the *same* pool, so the `\u03b8_a` are not independent and the outcome-table row",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 145,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*\"Agreement \u21d2 the shared-pool coupling is not driving Null-P\"* was never tested.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 147,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "against any `\u03bc\u2086`-invariant of `a`, and the prior run's `a\u2080` is not placed against the confirmatory",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_a_invariance_v1.md",
+  "line": 150,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Not \"closed\", not \"rigid\", not \"avenue dead.\"** No ECDLP content: this bounds the dependence between",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_density_glv_130bit_null_v1.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "fraction. **The scalar side is rigid; the point side is generic \u2014 the ECDLP scramble is exactly that",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_flap_density_glv_130bit_null_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "session). No leakage claim beyond the measured density.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_fld_6h_theorem_assembly_v4.md",
+  "line": 7,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "stub-testing it showed the 69% was a suppressed positive. No leakage / ECDLP claim.*",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 16,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the quadratic residue x\u00b2. GLM's mechanism (flap = threshold on the size of x\u00b2) is dead at the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "**Pre-registered verdict = SCOPED NULL, characterized.** GLM's thesis (C) is not supported: over",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "while the norm-band/threshold/sextant geometry is detected at V=0.36\u20130.84. NOT \"\u03b5 is not arithmetic\"",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "The exact zeros are not luck. Three probes:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "every x (never \"else\"; core:flap = \u00be:\u00bc). This forces \u03c73,\u03c76 \u22a5 \u03b5. It exists only because j=0",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 59,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(no CM \u21d2 no \u03b2 \u21d2 no Eisenstein lift \u21d2 no flap): CM is not correlated with the orthogonality,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "when \u03c72(\u22121)=\u22121, i.e. p\u22613 mod4 \u2014 generic to any centrally-symmetric lattice, not CM.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glm_flap_arithmetic_test_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "component* of functions of x. CM (j=0) upgrades it from \"\u22a5 odd characters\" (what a generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power and scope stated in \u00a74. **The avenue is NOT closed.**",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "row, built to show the lane is not forced. Raw sums of that size are exactly what two uncoupled class",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "functions produce \u2014 which is what the matched null now measures directly. \"S moves\" was never",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "applies, and the \u03bc\u2086 class structure does not tile the interval. The statistic there is not the one",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_grouplaw_e3_real82_v1.md",
+  "line": 22,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "harder** because the group law is where CM acts. This tests that prediction; it is not assumed.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_grouplaw_e3_real82_v1.md",
+  "line": 27,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "imbalance. The real 82 is NOT \u03c6-closed: `E3_gl(real)=489 > 0`, `T=3321`, `E3\u22610 mod3` (bug-check). PASS.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_grouplaw_e3_real82_v1.md",
+  "line": 62,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "cubic-energy projection of the **group-law** difference set carries no detectable concentration OR",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_grouplaw_e3_real82_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "over-uniformity (two-sided p=0.261; family-wise 0.585), and is not set-specific (q_MT=0.854), at a firing",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_grouplaw_e3_real82_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "and band-localized subspaces of that object. N=82 is the whole sample; raw p cannot strengthen.",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "25 cyclic composite-order curves (generic j\u22600) in p\u2208[10007,50021], m=3, |V|\u2208{4,5,6}, K=25, subgroup",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(0.301/0.386/0.546 at |V|=4/5/6); at every |V| generic confinement gives only 19\u201338% of it, the ratio",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 53,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**So M25's H1 leg is NOT fully a cofactor artifact.** Generic subgroup confinement is a real, causal",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "contributor (~38% of the slope at |V|=6), but a residual (~62%) is not reproduced by confinement on",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "generic cyclic curves. This refines \u2014 does not refute \u2014 `RESULT_h5_cofactor_artifact_v1.md`: the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. **A j=0-specific effect (\u03bc\u2086/GLV/CM) on top of generic confinement.** The forward curves are generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "induced confinement together\" is not directly sampled, so a j=0-specific enhancement would appear",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v1.md",
+  "line": 71,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "same within-curve c-sweep on it, and compare its slope to the generic cyclic curves' \u2014 a within-curve",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 16,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "confinement on generic cyclic curves reproduces j0's lever fully \u2014 same levels and same slope \u2014 so",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "there is NO residual. M25's cofactor-artifact null is CONFIRMED and now forward-validated.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "- `\u03b2_induced = 0.206` \u2014 induced confinement slope, from generic cyclic curves at **p\u2208[10007,50021]**",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 29,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "p-dependent** (\u00a72), so the two slopes are not comparable. The pre-reg's own secondary band",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 34,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`T1(index k)` for generic cyclic curves, same statistic, two p-bands:",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 36,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| index k | generic **large-p** (10\u2074\u20135\u00b710\u2074) | generic **small-p** (523\u2013823) |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 51,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| index k | j0 (natural cofactor n\u2082=k) | generic cyclic (induced c=k) | j0 \u2212 generic |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 59,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Slope matches too:** the small-p generic slope over c\u2208{2,\u2026,7} (T1 = 0.236/0.404/0.565/0.735/0.803/0.838)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "So at j0's own scale, inducing subgroup confinement on a generic cyclic (j\u22600) curve reproduces j0's",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "lever in **both level and slope**. The forward prediction is confirmed at matched p; **there is no",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 72,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "p-scales for a p-dependent statistic. There is no residual.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_h5_cofactor_restoration_v2.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "complete \u2014 the null is not a suppression artifact but a mechanism reproduced on demand.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "distributed as an iid sum, every such correlation is bounded before you look; if it is not, that is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "line": 19,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "are vacuous here: P\u00f3lya\u2013Vinogradov completion costs `\u221ap\u00b7log p \u2248 2^128\u00b7256`, which exceeds `W` by",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "line": 26,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\u2014 a global readout bias cannot manufacture a result \u2014 while destroying **within-interval**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "line": 27,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "correlation, which is what \"the sequence is not random here\" means.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# RESULT \u2014 ITEM 2 REMAINDER: spatial statistics of `|T(a,b)|\u00b2`. No structure established; THREE artifacts caught by controls.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 3,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Date:** 2026-08-01. **Script:** `intensity_field_rmt_v1.py`. **Grade:** `[NO CLAIM \u2014 the matched null is not yet correct]`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "distribution) was measured `[EMPIRICAL, p \u2264 2089]`. The **2-point / spatial** statistics never were.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 62,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "That is a specification, not a result, and it is not run here. The single residual (`n = 199`,",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "0.9814 vs 0.9949) is one prime, unreplicated, and cannot be assessed until that null exists.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is not evidence against artifact \u2014 all three artifacts were perfectly consistent across primes.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_C4_M2000_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "At `M = 96` the measured floor was \u227335\u201350% of the set carrying coherent bias \u2014 nearly vacuous, since",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_interval_C4_M2000_v1.md",
+  "line": 9,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "a sparse 96-element subset of a `2^128` interval cannot show a 35% coherent bias unless ECDLP is",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_interval_C4_M2000_v1.md",
+  "line": 84,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "so **the channel is not closed.** The correct reading is \"leakage of this shape and above this",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_cneg_recalibration_v1.md",
+  "line": 7,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "nothing here can produce a positive finding, and none is claimed.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_cneg_recalibration_v1.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`\u03c7\u2082`/`\u03c7\u2086` on the group-law difference (item C.2, never run).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_cneg_recalibration_v1.md",
+  "line": 83,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "so the **full `\u03c7\u2082`/`\u03c7\u2083`/`\u03c7\u2086` family is legal** there. Never run.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_cneg_recalibration_v1.md",
+  "line": 84,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "2. **`\u03c7\u2082` and `\u03c7\u2086` on the group-law difference** \u2014 legal (`x(\u2212Q) = x(Q)`), never read because the run",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_cneg_recalibration_v1.md",
+  "line": 90,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "precompute the pool difference table; never pipe a long run through `tail`; OOS retest before naming.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_inversion_and_hamming_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Dead.** Sixth chance pattern killed by the pre-committed OOS rule (after `k=t`, p=2731",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 1,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "# RESULT \u2014 ITEM 3: the two never-run interval readouts. \u26a0 \"NULL\" RETRACTED \u2014 INSUFFICIENT POWER.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 1. Result \u2014 NO DETECTION (see the retraction: this is not a null)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 87,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "The orbit sum is `3\u00b7\u03c7\u2082(v)` \u2014 **`\u03c7\u2082` can never annihilate a \u03bc\u2083-orbit, for any curve or prime.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 88,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **`\u03c7\u2083(\u03b2)`, `\u03c7\u2086(\u03b2)` are primitive cube roots** exactly when `\u03b2 \u2209 ker \u03c7`, i.e. `\u03b2` is not a cube,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 96,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "would be a cube, `\u03c7\u2083(\u03b2) = 1`, and `E3`/`E6` would NOT be annihilated. The forcing is not universal.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_sumobject_item3_v1.md",
+  "line": 115,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "axis the analysis file said \"actually exists\" and had never been exercised \u2014 is null on the full",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 9,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "whose absence the bias audit flagged. It **retracts** the pre-judged label *\"generic/near-artifactual",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 20,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "instrument provably distinguishes real differences, so a null here is not null-by-design.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 33,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 3. Verdict \u2014 generic mixing confirmed, artifact located",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 36,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "unmissable. It is not present against a real-random null.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**not** equidistribution. The interval character sum is **pseudorandom** \u2014 the standard generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 46,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "sub-\u22485% interval effect is **untested** and remains open; there is no trend suggesting one emerges",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 47,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "at larger L, but this is not a proof of \"no structure.\"",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. The \"generic/near-artifactual\" label was an **unearned prior**; the earned result is \u00a73.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(non-smooth) readout, generic equidistribution predicts **random-like** behavior, which is what the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_interval_vs_random_characterize_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Supersedes the \"generic/near-artifactual\" phrasing in `RESULT_shortscalar_sum_stageA_v1/v2.md`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 6,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "structure / avenue dead / closed\" (the spec pre-committed this framing in \u00a77).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "sits +4.58e10 above a null that never leaves baseline), so the detectors are demonstrably",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*\"generic in additive/multiplicative/near-collision functionals of raw affine coords at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 69,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "this power\"* \u2014 **never** \"no signal / avenue dead / closed.\"",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 71,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "### What this rules out (power \u2248 1 for the smallest detectable effect)",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 77,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "### What is NOT excluded (the live scope boundary \u2014 the honest next probes, \u00a74)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "The null is scoped to S1\u2013S4 **only**; it is *not* \"the set is generic.\" Structure is not",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 79,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "excluded in: (i) the **GLV/\u03bc\u2083 eigen-coordinate `\u03b2X`** (islands are not `\u00d7\u03b2`-closed, so",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "island label \u2014 disjointly constructed (spec \u00a70 tautology check).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 9,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\"no structure / avenue dead / closed\" (\u00a77 pre-committed framing).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 22,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "for B=999 and never re-checked the B=199 secondary cell); the implementation computes the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 23,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "FAILs correctly and the log disclosed them. v1 read this cell as \"S4 power, rules out c\u227317",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 27,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "PC-2 through `add_energy` (S1) \u2014 `window_count` is never applied to the PC-2 set (line 272).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "VOID (uninformative)** in every cell. v1's \"rules out c\u227312 (M=1024)/c\u227317 (M=4096) approximate",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 51,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**tautological** (scalar-lattice) reason; carries no leakage.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 73,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\u00a77 mapping: NON-GENERIC needs S1 FIRES \u2192 no; VOID needs a PC/S0 failure \u2192 no; so the primary",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 80,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "### What the (controlled) null rules out \u2014 power \u2248 1",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 87,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **\u03bc\u2083 / GLV eigen-coordinate `\u03b2X`: UNTESTED**, not excluded \u2014 S2 never fired, so the \u00a74",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is the natural next arm (islands are not `\u00d7\u03b2`-closed).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 92,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "separately). \u00a71a first-moment / binned / slope / collinearity stats are KS-floored or S0-tautological.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 96,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "is the generic outcome and the design has **no calibrated sensitivity to non-exact d-side structure",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 103,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "PC-2's S1 firing (shared-x injection worked), but the band-match is not exact.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_islands_curveimage_jointset_v2.md",
+  "line": 117,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "coord map `x,y`; target = reciprocal-floor label; \u00a70 tautology check).",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 35,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## Forced / generic / structural \u2014 verified, not asserted",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 37,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **50/50 even/odd split**: forced by (generic rho2\u22481) + (character energy is \u00bd even, \u00bd odd).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **x-only ceiling 1/\u221a2 = 0.707**: exact (even-subspace bound); the measured 0.66 is generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## Untested \u2014 what the scalar control cannot see (do NOT conclude \"all generic\")",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "differs between the character and a random target. A generic magnitude is consistent with a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "harder for an x-only phase-recon than a generic even target) or seed noise is untested \u2014 needs a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. v1: \"joint rho2\u22481 because |U| is flat\" \u2014 refuted (flatness 0.78; the real reason is generic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_decompose_v2.md",
+  "line": 67,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "control demotes the magnitude to generic (coordinate-geometry) reconstruction; the d-specific",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_mu3_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Follows `RESULT_joint_shadow_decompose_v2` (the joint-shadow magnitudes are generic; the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_mu3_v1.md",
+  "line": 46,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "principle (a \u03bc6-invariant/equivariant readout is constant on the orbit {\u00b1d,\u00b1\u03bbd,\u00b1\u03bb\u00b2d} and cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_mu3_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "separate d from it), this symmetric skeleton is exactly the part that cannot distinguish d \u2014 and",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_mu3_v1.md",
+  "line": 48,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the decomposition finds it carries no CM-sector concentration.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_joint_shadow_mu3_v1.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(forced flat) cannot? Same conservation-hunt controls.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_large_p_and_arrangement_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`a\u207b\u00b9` and `a\u00b3` are odd and were genuine tests; `a\u00b2` never was.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_large_p_and_arrangement_v1.md",
+  "line": 67,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. the quadratic chirp \u2014 an odd `\u00b11` sequence cannot track an even phase, capping alignment at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 22,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| **Misalignment** | capacity \u2260 0 but aimed at the wrong residue class | structure present, measured in a coordinate that cannot see it | **relocate t",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 25,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "The point of the taxonomy is that only the first is \"no structure.\" The LRC proof's safe fibres come",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "measured against them is a fact about the readout's capacity, and carries no information about whether",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 75,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "so the two level sets are not identical, and the cross-part comparison is between the same functional at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 82,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "read through a coordinate that cannot see it (Part 1). That is Primitive 4 exactly.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 150,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "**consistent, but in-sample**: those three configurations have been seen, so they cannot confirm the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 158,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "fresh `(bexp, M)` including `M` prime and `M` highly composite, so the prediction is not confounded",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 162,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "positions, so piecewise-constancy alone cannot be credited as structure), power, and the confirmatory",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_lrc_null_typing_transfer_v1.md",
+  "line": 179,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| a mod-8 value reduction cannot see positional low-frequency mass | `[PROVED]` \u2014 different functionals of the same sequence |",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_mu3_glv_frequency_support_v1.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "baseline for unstructured size-3 grouping. So there is no \u03bc\u2083 organization in the **bulk/high tail** either,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_glv_frequency_support_v1.md",
+  "line": 77,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "**What this does NOT touch (the null is scoped, never \"the deficit is structureless\"):**",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_mu3_phase_within_triple_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "destroys the inter-column correlation that inflates the variance, so it is not matched to this failure.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_phase_within_triple_v1.md",
+  "line": 95,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "non-CM curve with 3|p\u22121, but no \u03bb, so the character-orbit identity is absent); it is not a fired cell, so",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is not about the y-sheaf's 4-dim structure; it is that a **single-factor** \u03c7\u2082 sum caps at `2\u221ap`,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "So the \u00bd is not a \u03bc3-isotype / eigenspace-starvation effect.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "was never a per-frequency eigenspace split, and this shows what it actually is \u2014 an attained-magnitude",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 75,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*ceiling*. Why single-factor \u2192 dimension 2 (and product \u2192 higher) is not proved here; it is the object",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 103,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 4. Scope, deviations, what is NOT established",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 118,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **No ECDLP content.** `V_f(a)` is a character sum over the public curve; nothing here approaches a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_projection_v1.md",
+  "line": 130,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| \u00bd is NOT a 2-of-4 eigenvalue effect | `[PROVED by counterexample]` \u2014 \u03c7\u2082(x) (#R=2) hits same 2\u221ap |",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_mu3_subspace_residual_v1.md",
+  "line": 49,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "mechanically: the instrument cannot distinguish signal from noise here.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_subspace_residual_v1.md",
+  "line": 87,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "$p = 991$, so the instrument is not validated there.)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_subspace_residual_v1.md",
+  "line": 125,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "2. **The structural prediction of \u00a75.3 is not confirmed \u2014 but not refuted at secp's scale.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu3_subspace_residual_v1.md",
+  "line": 131,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "not eliminate) the prior on genericity in the non-algebraic channel. *(Audit note: \"consistent",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_cohomology_supersingular_v2.md",
+  "line": 11,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`p = 2\u00b2\u2075\u2076\u22122\u00b3\u00b2\u2212977` (`\u2261 3 mod 4`). This is not an extrapolation from small `p`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_cohomology_supersingular_v2.md",
+  "line": 25,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the measured **curve-independence** (below): the argument never touches the cubic beyond \"it is a cubic\",",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_cohomology_supersingular_v2.md",
+  "line": 151,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "one that must be, and is, explicitly closed). Recorded here so the error is not silently buried.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 16,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "2. **The CM target-orbit cannot be quo-matched to a non-CM analog:** CM-orbit quos \u2208 {6,18} (multiples of",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "orbit is always 3\u00d7 a fiber), so it carries no CM-vs-generic lever.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 27,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "## R2 \u2014 lower-order last-fall sensitivity, j=0 vs generic",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**not** distinguish j=0 from generic at accessible scale. `[VERIFIED \u2014 NULL, m=2,3]`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 35,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "## Scope, power, and what is NOT closed (anti-enlargement)",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_mu6_finer_syzygy_R1R2_v1.md",
+  "line": 46,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "it is not a wall, and the live positives are the yield/phase channels, not this.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "line": 7,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`delta_r_sweep.py` (13-cell sweep). No leakage/ECDLP claim; model-scale.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "line": 50,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "## 4. Scope, power, and what is NOT closed (anti-enlargement, per `feedback_negative_bias_enlarge_nulls`)",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`\u2264 0` across 13 cells (never `\u2265 1`); the block degrees are curve-blind (leading-form-forced).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_mu6_solving_degree_v1.md",
+  "line": 59,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. **\u00b5\u2083-graded staircase probe** \u2014 measure the \u03c9-isotypic decomposition of the Gr\u00f6bner staircase / syzygy degrees (the subspace a scalar `d_LF` cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 12,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**NOT a closure. NO information ceiling is claimed or implied.** The public point [d]G determines d",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "the carry), never a cap on exposable information. The result is a scoped null on ONE arm: no CHEAP",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is not a ceiling. See `NOTE_readout_structure_no_selfimposed_ceiling_v1.md`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 80,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "**This is a rising floor, not a ceiling.** Adding one readout took it 2.585 \u2192 3.65; nothing here bounds",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 84,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "hard, not proven). Reported as characterized structure + an open extraction question \u2014 never \"0",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 94,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What is NOT settled (untested channels \u2014 the null is bounded)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 121,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "deviation.** A 0.001-level FP rate is not empirically measurable at 40 re-pairings; the exact",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 123,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "and any residual miscalibration is anti-conservative (toward false positives), so it cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n15_joint_readout_confinement_v1.md",
+  "line": 132,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "constructed POSITIVE, of which there is none). Runner + full log archived",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "a document cannot witness its own audit; [[feedback-verification-claim-needs-artifact-2026-07-24]]).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "line": 7,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**No leakage / key-recovery / ECDLP claim.** This is a curve-arithmetic verification of a public-math",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "line": 34,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "and **`g(\u03b6\u2083 | e\u2084:=p\u00b2+1)=0`** \u2014 a *wrong* `e\u2084` collapses `g` to 0, so the result is not an artifact of",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## The one assumed input, and why it is not a hole",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_120deg_independent_reproduction_v1.md",
+  "line": 50,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "## Scope and what is NOT shown (`[CONDITIONAL NEGATIVE \u2014 method + sample]`)",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "unchanged; **its \u00a74 \"characterization\" is superseded by this one**, including its word *\"generic\"*,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**No leakage, key-recovery or ECDLP content.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Weil allows `|V\u2081| \u2264 2\u221ap`. **The conjecture demanded that a character sum never exceed `\u221a3/2 \u2248 86.6%`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 48,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "of its own Weil bound, at any of the `(n\u22121)/6` classes.** That is what `v \u2264 0` *is*. It is not a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 64,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**This is the positive residue of the refutation.** The route wanted `v \u2264 0` and cannot have it, but",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 89,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`RESULT_n1_v_sign_route_refuted_v1.md` \u00a74 called `v>0` **\"generic\"**. **That was wrong and I am",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 90,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "retracting the word.** 4\u20136% is not generic \u2014 if the two angles were independent the rate would be",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 93,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "it \"generic\" named the frequency and buried the mechanism \u2014 the exact failure mode",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 101,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 6. Consequences for the route \u2014 sharper than \"dead\"",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 116,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Nothing here is evidence for or against (ii) or (iii).**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 121,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "`y\u00b2 = x\u00b3+7`, `#E` prime. **A proof from the CM structure is not given here** \u2014 the 120\u00b0 separation",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_n1_v_sign_mechanism_v1.md",
+  "line": 122,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "makes one look routine, but \"looks routine\" is not a proof and this is graded as verified, not",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_n7_finite_rank_refuted_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "effect is not in question here; only my proposed cause is.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_n7_finite_rank_refuted_v1.md",
+  "line": 51,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "**There is no hard floor.** The ratio falls monotonically past 1 and is *below* the null at the two",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**resolved**, and its guessed mechanism (**2-adic**) is **corrected** to Dirichlet-generic.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "v1 found real/ctrl `\u2248 0.45\u20130.68` (< 1, sub-generic). Mechanism: the contiguous block `[1,\u221alo]`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "count. The clustering was never random \u2014 it is the reciprocal lattice's block-below-\u221alo geometry.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 61,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 4. Correction: NOT 2-adic \u2014 Dirichlet-generic in L `[VERIFIED \u2014 matched control]`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 72,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "law is the Dirichlet reciprocal lattice \u2014 generic in `L`, with NO special role for the power of two.**",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 85,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. **Curve-side image.** Does `{ d = base \u00b1 \u230alo/q\u230b }` (the T=1 islands) have any non-generic image",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_nkd_dterms_subsurface_v2.md",
+  "line": 99,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Exact integers; `A\u2081` via `lo//(lo//D)` and via `d_terms` cross-checked identical. No signal-path float.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 30,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "**The arm can fire.** It is not a dead statistic. But its detection floor, expressed in the units the",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "tautology and is not evidence of power**; it is reported only to confirm the wiring.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 78,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "never a float ratio. `selftest()` verifies, across 72 plant configurations per curve, that every",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 120,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "**both** sides. `[VERIFIED]` \u2014 the `derr` half of the arm carries no detection power at these",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 184,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "curves.\"* Re-running `lift_band_spectral_v1.py` unmodified at the environment above, that is not what",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 191,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`[VERIFIED \u2014 current run; the source of the 1.8 figure is not established, and no claim is made about",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_overlap_arm_power_v1.md",
+  "line": 200,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`|z| > 3`; 200-permutation null; 40 draws (A) / 6 draws (B) per `f`. Nothing here transfers to the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_powermap_familywide_from_settlement_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "Running `cside_orbitlevel_v1.py` across ~18 primes per the handoff's literal wording would reproduce, at the *weaker* v1 inference level (per-prime Bo",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_powermap_familywide_from_settlement_v1.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **pow7 is the only open sub-lead.** It is pooled-significant ($p_{2s}=0.0058$, Holm-SIG) but failed OOS replication. It is not promoted; a larger po",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_powermap_familywide_from_settlement_v1.md",
+  "line": 45,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "- **The $2^{128}$-scale channel is not closed** \u2014 only these $p\\sim10^4$ candidates. The operationally-decisive form (shortscalar arm at $2^{128}$) is",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_pubkey_relations_controlled_v1.md",
+  "line": 36,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "7 points), and finding one **from points alone is a hard problem** (you cannot LLL curve points",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_pubkey_relations_controlled_v1.md",
+  "line": 53,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(ALL and large\u2265100). This is not luck: the **counting bound** governs it.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_r3_orbit_autocorrelation_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Forced-value: all 15 lags generic** (every median A(d) \u2264 2.4\u00d710\u2075 < null 99th \u22484.6\u00d710\u2075) \u2014",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_r3_orbit_autocorrelation_v1.md",
+  "line": 19,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "**Mixing confirmed at these lags/power.** The orbit's \u03c7\u2083 sequence carries no lag-d correlation above",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_rmt_battery_on_spectrum_item2c_v1.md",
+  "line": 10,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "degenerate to me \u2014 but I never demonstrated that, and I closed the item anyway. Both faults are",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_battery_on_spectrum_item2c_v1.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "one number from it, `|\u03bb\u2082|`, from a 16- or 6-state version. Its full spectrum was never examined.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_battery_on_spectrum_item2c_v1.md",
+  "line": 60,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "statistics at every prime.** Power is not in question.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_rmt_battery_on_spectrum_item2c_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "statistic that cannot see a planted rigid spectrum is not measuring rigidity \u2014 check the plant",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "line": 8,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "statistics as never measured on `{\u03b8_a}`. `RESULT_semicircle_null_and_verification_v1.md`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Fourier-adjacent and not independent. No structure.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "line": 53,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**This is not a defect in the record.** `twist_orbit_spectrum_run_v1.py`'s header documents the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "and the two-point correlation on **that** object were never run and are not covered here.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 42,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Nothing here is a leakage claim or an ECDLP consequence \u2014 a curve whose CM structure is confirmed at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "secp is exactly what a generic ordinary `j=0` curve looks like at secp. It removes the *\"we only ever",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **T3 `\u2192 ~10\u2074\u201310\u2075` (`d`-labelled twisted sums, `O(p\u00b2)`).** Need the `d = dlog(P)` labelling. **Cannot",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 79,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "| 120\u00b0 law `v=u\u00b2\u2212\u00be`, `V\u2082=V\u2081\u00b2\u00b12p`, `s\u2081\u00b2+s\u2081s\u2082+s\u2082\u00b2=\u00be` | twisted sums, exact | **T3** | \u2264547, 357 cls | ~10\u2074 | **exact identity**, no prereg; **cannot rea",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 93,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "1. **The `V(a)` / twisted-sum laws provably cannot reach secp.** `V(a) = \u03a3_P \u03c7\u2082(y_P) e_n(a\u00b7d)` is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 97,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "object encodes the discrete log. *(This sharpens N6: for these rows \"no power at `2\u00b2\u2075\u2076`\" is not a",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 105,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "null/extrapolation is not a proof\" rule, applied to a *positive* extrapolation.",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_scale_cm_laws_ladder_v1.md",
+  "line": 135,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "twisted-sum rows are **banner-locked by the DLP** (\u00a73.1) and cannot reach `2\u00b2\u2075\u2076` even in principle;",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_cm_relation_yield_v3_wide.md",
+  "line": 59,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 4. Scope and what is NOT claimed (honest)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_cm_solving_degree_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "4. **Invariant-variable reduction (u_i=x_i\u00b3), the one un-run piece:** a quick elimination-ideal attempt",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_cm_solving_degree_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(`elimination_ideal([x_i])` \u2192 ideal in u_i) gave no clean first-fall (`dff_red=None`, both arms) \u2014 the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_cm_solving_degree_v1.md",
+  "line": 40,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "elimination ideal is not in the form `macaulay_stats` reads a first-fall from; a faithful measurement",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_cm_solving_degree_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "primes p\u2208[523,823]. Scripts: `scratchpad/p2c_smoke.sage`, `scratchpad/p2c_invred.sage` (elimination",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 7,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "NOT a closure of route A** \u2014 see \u00a7\"What is NOT settled\". Zero secp-scale power (model m, model p).",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 42,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "(unsymmetrized) system is dead at model scale** \u2014 114 min to CENSOR at m=4 means m=5 (S\u2086, deg-16/var,",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 53,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "This is **stronger than M9** (`PROJECT_SUMMARY \u00a7123`, curve-independence): it is not merely that secp",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "zero-variance coefficient-invariance is a real invariance, not a dead read-out.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 70,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "ranks \u2014 a mis-specified auxiliary calibration cannot corrupt them, \u00a72b mechanical layer) and (ii) the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 90,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What is NOT settled / the live lead (counter-prior: surface, don't close)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semaev_structure_firstfall_vs_m_v2.md",
+  "line": 102,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "run's m=4 at Dmax=30 is the session compute ceiling). A 2\u20133-point model-scale trend cannot prove the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semicircle_null_and_verification_v1.md",
+  "line": 28,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **It IS the Katz\u2013Sarnak / Sato\u2013Tate prediction** the record cites and had never used.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semicircle_null_and_verification_v1.md",
+  "line": 45,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Dead**, under both the theoretical null and a control that removes the marginal assumption",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semicircle_null_and_verification_v1.md",
+  "line": 67,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**\u2605 The phantom is confirmed dead.** `[I] chi2y` scored `ge = 0/6` (apparent signal) under v1's broken",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_semicircle_null_and_verification_v1.md",
+  "line": 97,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "configuration; the *numerical* confirmation is not a proof of that configuration, which remains",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v1.md",
+  "line": 51,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 3. Bound (Rule 5 \u2014 a bound, never a closure)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v1.md",
+  "line": 60,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "null; the leading candidate \u2014 lower-than-iid discrepancy \u2014 is a generic/near-artifactual property,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "stated op budget; the M=6.25\u00d710\u2076 pairwise case remains flagged NEEDS-chunk (never run).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v2.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 3. The bound (Rule 5 \u2014 a bound, never a closure)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v2.md",
+  "line": 44,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 4. Scope \u2014 what is NOT bounded (open, not closed)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v2.md",
+  "line": 47,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "orbit \u2014 is a generic/near-artifactual property (named, not a secp leakage claim), but a genuine",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_shortscalar_sum_stageA_v2.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "numbers; the M=6.25\u00d710\u2076 pairwise case remains flagged NEEDS-chunk (never run).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 3,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Grade: `[CLOSURE \u2014 construction-infeasibility, graded]`.** This is NOT an empirical",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 19,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "3. `O` and the target are **disjointly constructed** (not the retraction-24 tautology",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "text": "`q=2^j`, \u2248N/2 for generic odd `q`) and **overlaps random band scalars**. Excluded by",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**Requirement 3 fails** (retraction-24 tautology); the only natural matched null",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **The middle is empty.** T-membership is not determined by any proper subset of `d`'s",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 60,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "floor global predicate is not aligned with any coarse weight/length statistic a",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "at which point it is a post-hoc function of the recovered key (the tautology), not an",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 116,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- Object defs: `PROJECT_SUMMARY_secp256k1_v1.md` \u00a7B.7 (A1.5, A2.9; d-side, \"no leakage",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_sidechannel_island_leak_infeasibility_v1.md",
+  "line": 122,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- Related retractions: retraction-24 (feature/target tautology).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_arithmetic_scatter_v2.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# RESULT v2 \u2014 the group order explains ~44% of the deficit scatter; a real residual scatter remains, and it is NOT the tested residue invariants",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_arithmetic_scatter_v2.md",
+  "line": 35,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 2. The residual scatter is NOT the tested residue invariants (H1 null), but it IS real",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_arithmetic_scatter_v2.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "refit stayed silent). The pipeline can see residue structure; there is none in the residual beyond `n`.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_arithmetic_scatter_v2.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*between-prime* scatter is a separate measurement (the trajectory R\u00b2, 0.44) that \u00a79 never required.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_scaling_v1.md",
+  "line": 39,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(decay no faster than 1/log p); the const-vs-1/log p refinement is not cleanly separated at this",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_scaling_v1.md",
+  "line": 48,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **It is NOT a finite-size artifact.** This is the sharp contrast with N1/the \u00bd-saturation",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_subrayleigh_deficit_scaling_v1.md",
+  "line": 68,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "fitted form \u2014 NEVER a statement about p \u2248 2\u00b2\u2075\u2076** (prereg \u00a70). The mechanism is still open",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 13,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "and every op-count is exact. secp's DLP is not solvable; nothing transfers to 2\u00b2\u2075\u2076. No ECDLP/security",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 38,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**R1D \u2248 1 everywhere** (0.92\u20131.13). A public labeling cannot localize a uniform `d`: reordering the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 65,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "cannot cheaply skip meet-in-the-middle giant rows; it filters the accept, saving at most a constant",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 66,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "factor via a smaller effective box \u2014 never the exponent.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 74,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "**Theorem-consistent (the reason it cannot be otherwise).** (i) `\u03b5_LBE` is one bit \u21d2 any \u03b5-conditioning",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 75,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is a constant factor, never exponent movement. (ii) For interval keys the GLV halves do not shrink with",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "line": 80,
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "text": "- Model scale only; zero secp power. secp's live k (\u2265135) is unsolvable, so the *measurement* cannot run",
+  "verdict": "SCOPED"
+ },
+ {
+  "file": "RESULT_t2c_range_carry_skew_exact_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Deterministic first pass per `ROADMAP_REDIRECT_v3` (no prereg needed; **no leakage/advantage claim",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_range_carry_skew_exact_v1.md",
+  "line": 21,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "*Proof:* $a \\bmod n = a + n[a<0]$ etc.; $a+b+2n \\ge n$ always, $a+b \\ge n$ never. Verified 0/200,000",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "RESULT_t2c_range_carry_skew_exact_v1.md",
+  "line": 63,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "sub-range of the actual key is not public.)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_t2c_range_carry_skew_exact_v1.md",
+  "line": 88,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Deterministic map of a public constraint through a public map; no $d$ sampled secretly, no leakage",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_twist_orbit_forced_landscape_v1.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "prereg \u2014 instrument facts, never evidence.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_twist_orbit_forced_landscape_v1.md",
+  "line": 50,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**EVEN**, not odd \u2014 so the odd-channel statistic is mis-specified there and those reference rows are not",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 15,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "character sum `V(a)=\u03a3_d \u03c7\u2082(y_d)e_n(ad)`, a sum over all `d` containing the target frequency). There is no",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "so it cannot by itself break the `[\u22121]/\u03bc\u2084` symmetry M16's no-go rests on. Brick C's phase-ramp idea is",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 49,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "ramp, so the null is not a power failure. Detectable amplitude `\u03b5_min \u2248 2.6/\u221a(n\u22121)` (\u22480.20 at p=163,",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`eis\u2295\u03c7\u2082` proxy) carries no d-linear alignment to `a\u00b7d` above `\u03b5_min`, on the secp class, at model",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 62,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "unidentified). The frequency-domain object is separately governed by M14/M16 and is not touched here.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 83,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`d`-linear target. The **frequency-domain** version \u2014 the object M14/M16 actually govern \u2014 is not",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weight1_phase_ramp_v1.md",
+  "line": 85,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "is not a public leak. A durable redirect: the weight-1 phase, in every form reachable from public",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 6,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## 0. Object, and why it is not a rerun of the chirp plane",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 13,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "and produced the record's conclusion *\"a \u00b11 sequence cannot track a quadratic phase; the sign is all",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 24,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "a **single-frequency** quadratic phase cannot be \u03bc\u2083-invariant in `d` \u2014 the plant was structurally",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "printed all along and I only ever checked it against the data, never the null draws.** Now checked on",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 46,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "## 3. \u26a0 Power \u2014 and why this is not a null",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "RESULT_weyl_xreadout_item4_v1.md",
+  "line": 76,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "arm of the comparison is not a control.**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "VALIDATION_sssa_lift_firing_control_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "homogeneous Washington projective coords so the E\u2081 point needs `z=-X/Y`, never a division by `Z`).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "VALIDATION_sssa_lift_firing_control_v1.md",
+  "line": 6,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "suffices; this is NOT the leakage test. **No grade on any leakage claim.** Precedes the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "VALIDATION_sssa_lift_firing_control_v1.md",
+  "line": 34,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(`recovered = \u00b1d` failed; value was unrelated to `d`). Forcing generic `j` (a\u22600) restored `\u03bb \u2260 0` and the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 141,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Also: `\u03b5 == 2` never fires (the CM law is exhaustive on the field).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 146,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(the statistic is heavy-tailed, so a mean/sd z-score is not trustworthy here).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 183,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "was rewritten accordingly (`slope(Ic)` + `z`-vs-`\u221aM` trend, never a single-M z).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 222,
+  "analytical": true,
+  "power": false,
+  "scope": false,
+  "text": "readouts\" is not a conspiracy \u2014 it is what the theorem predicts, and simple",
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 225,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "vacuous exactly when `\u2016F\u2016_A \u2273 \u221ap`, i.e. for multiplicative-character readouts. G tested",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v1.md",
+  "line": 255,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Disjoint construction \u21d2 tautology-guard clean. Asks whether the exact `C_n \u2286 C_p`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v13.md",
+  "line": 43,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "That is the remaining frontier (v10/v11 measured yields there = generic, but not proved).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v13.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(v9/v10: generic decomposition, bounded \u03b2-lever) down to the summation polynomial's algebraic",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 1,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "# Findings v20 \u2014 S\u2084\u207a elimination complexity: the first-fall degree is curve-independent",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "signal path). Item #1 of the ranked menu \u2014 the elimination / Gr\u00f6bner / first-fall structure of the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 6,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "work (v9/v10/v11) counted relation/decomposition **yield** (generic) and v13 analysed a **single**",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 17,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "curve-independent \u2014 so secp256k1's CM/GLV structure gives no index-calculus elimination lever beyond",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 20,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "control. It advances the hardness picture one honest step past \"yield is generic\": there is a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 69,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "| p=211, m=3 | | secp (j=0, CM \u2124[\u03c9]) | non-CM generic | j=1728 (CM \u2124[i]) |",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 97,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "variety `V_t = {S\u2084(x\u2081,x\u2082,x\u2083,t)=0}`): eliminating `x\u2081,x\u2082,x\u2083` from `(S\u2084, \u2202S\u2084/\u2202x\u2081, \u2202S\u2084/\u2202x\u2082, \u2202S\u2084/\u2202x\u2083)`",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v20.md",
+  "line": 104,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "degeneracies, not a computational lever \u2014 if anything they make elimination harder, not easier.) The",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 13,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- the **cyclic-rotation null is tautological** \u2014 `np.roll` preserves every transition except one",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 19,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## (a) The x-cell \u03bb\u2082 mode is NOT the \u03bc\u2086 charge \u2014 v18's attribution corrected",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "primes \u21d2 **it is NOT a pure \u03bc\u2083/\u03bc\u2086 character mode.** So v18's \"the `~1.8\u00d7` prefactor is the \u03bc\u2086",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 40,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "\u03bc\u2083 content is not cleanly pinnable here \u2014 but two facts are robust: it is **not a pure \u03bc\u2086 charge**,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(fluctuating 0\u20134, never a stable high z with flat `|\u03bb\u2082|`). **No persistent soft mode / approximate",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v22.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "artifacts caught (shuffle-ratio collapse; cyclic-roll tautology).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v26.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Tautology \u2260 no structure (D\u2096\u2099/D_err is how we found the Eisenstein lift, rhombus, sextic, 3/4-1/8-1/8).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v26.md",
+  "line": 37,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "shadow, *distinct from the known s_y bit*. The odd half is not one bit; it has \u03bc\u2083-substructure, and",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v26.md",
+  "line": 79,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "operator; the joint channel carries real correlation x-alone cannot. Buried under \"decays 1/\u221an.\"",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v26.md",
+  "line": 83,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "top-order elimination structure reduces to the additive-group cusp. A real reduction, buried under",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 12,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "i.e. cosets of a subgroup `H=f\u207b\u00b9(f(O))`. `|H| | n` prime \u21d2 `H={O}` (f injective, impossible for a",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The carry is not leaked by the curve coordinates** (all z sub-threshold; control z=849). The",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 42,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "comparison stays DLP-hard; the `xy` 2-cocycle defect is dead.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 56,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "`d`* (v14). Rigidity proves it cannot come from any additive **chaining/accumulation** mechanism, and",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "the carry-null proves it cannot come from the **H\u00b2 comparison**. A door, if one exists, must be",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v31.md",
+  "line": 74,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "concentrates the spectrum, which rigidity says it cannot do *additively*.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "structure \u2014 so these test something genuinely new.** All three: generic, with validated (firing) controls.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 29,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- **Real-82 and constructed-36k difference sets are generic** (M3/M3xy at the random level).",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 30,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "**The xy odd+\u03bc\u2083 harmonic adds nothing over the eis(x) baseline** \u2014 both generic.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 32,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "*differences* `[d(\u03bb\u22121)]G` are generic \u2014 only additive structure moves these moments, and the AP",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 54,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "character spectrum onto one `e_n(a\u2080d)`. Rigidity proves it cannot be additive/chaining; the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 55,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "difference-set nulls show it is not in the pairwise-difference geometry. It is essentially the DLP,",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v32.md",
+  "line": 64,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Finer-m null: **VERIFIED** (control fires). Difference-set geometry generic: **VERIFIED** (AP fires",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v8.md",
+  "line": 7,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## The object (never built) and why it's the right fence to look at",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v8.md",
+  "line": 9,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Prior probes were single-point (generic) and 2-point (difference set, generic). Untouched =",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "masked_structure_findings_v8.md",
+  "line": 57,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "geometric readout does not leak the group-law relation. It is not a wall claim.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_native_knd_findings_v1.md",
+  "line": 4,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "(the user's RH-line framework), not generic ML. Prior \"k has no structure\" nulls",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_native_knd_findings_v1.md",
+  "line": 18,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "framework-native, with the magnitude confound now ruled out. \u03c6(n)/n leans low in",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_native_knd_findings_v1.md",
+  "line": 67,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Nothing is declared permanently dead; the propagation nulls are conditional on the",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_residue_XY_findings_v1.md",
+  "line": 5,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "lens \u2014 the framework's OWN basis, not generic ML. Statistics: the Ramanujan-sum",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_residue_XY_findings_v1.md",
+  "line": 14,
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "text": "## floor of 100k, and NO leakage of the private-key position. Systematic null.",
+  "verdict": "PARTIAL"
+ },
+ {
+  "file": "phi_n_residue_XY_findings_v1.md",
+  "line": 23,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "argmax modulus wanders (34, then 48, never 53). Look-elsewhere. Closed.",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "phi_n_residue_XY_findings_v1.md",
+  "line": 41,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "## What the null MEANS (not \"dead\"; a precise boundary)",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "struct_test_results.md",
+  "line": 58,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "Pohlig-Hellman / isogeny-descent residue. There is no `d mod \u2113` for small \u2113",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "struct_test_results.md",
+  "line": 129,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "- Verdict: generic random-function graph, single-digit components, cyclic ~\u221aM \u2014",
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "file": "struct_test_results.md",
+  "line": 153,
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "text": "milestone keys (2624 bits total) cannot fill the state. To test MT proper you",
+  "verdict": "UNDERSCOPED"
+ }
+]

@@ -1,0 +1,33 @@
+{
+  "claim_id": "CLAIM-LRC-000038",
+  "promotion_id": "PROMO-LRC-0003",
+  "source_path": "/Users/trentpalelei/Downloads/Boundary-probe_isolation___sample_rows.csv",
+  "source_sha256": "6ae6940c2b16c12668ad3a32348f0fe39c963c3bc60bb967fae6a02c4912f4b3",
+  "source_bytes": 8584,
+  "extraction": {
+    "method": "csv_cells_plus_regex",
+    "rows_scanned": 31,
+    "truncated": false
+  },
+  "tokens_extracted": 450,
+  "usable_values": 450,
+  "sample_values": [
+    "1",
+    "10",
+    "100.0",
+    "3.146238076843286",
+    "3.1462370768432857",
+    "1.141420999839335",
+    "1.2469799997571693",
+    "1.3039630008400291",
+    "1.2025860009852634",
+    "1.173205000077592",
+    "1.2617989993711172",
+    "1.2718280001001092"
+  ],
+  "thresholds": {
+    "stable": 1e-09,
+    "sensitive": 1e-06
+  },
+  "created_utc": "2026-02-25T23:21:08Z"
+}

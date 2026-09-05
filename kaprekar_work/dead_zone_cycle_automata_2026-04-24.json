@@ -1,0 +1,181 @@
+{
+  "d5": {
+    "state_count": 54,
+    "attractors": [
+      {
+        "cycle_states": [
+          [
+            5,
+            4
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "cycle_length": 2,
+        "cycle_representatives": [
+          95553,
+          99954
+        ],
+        "basin_size": 3,
+        "max_transient_depth": 1,
+        "depth_histogram": {
+          "0": 2,
+          "1": 1
+        }
+      },
+      {
+        "cycle_states": [
+          [
+            6,
+            4
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            7,
+            6
+          ]
+        ],
+        "cycle_length": 4,
+        "cycle_representatives": [
+          96543,
+          97641,
+          98622,
+          97533
+        ],
+        "basin_size": 21,
+        "max_transient_depth": 5,
+        "depth_histogram": {
+          "0": 4,
+          "1": 5,
+          "2": 6,
+          "3": 2,
+          "4": 3,
+          "5": 1
+        }
+      },
+      {
+        "cycle_states": [
+          [
+            7,
+            5
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            8,
+            4
+          ]
+        ],
+        "cycle_length": 4,
+        "cycle_representatives": [
+          97443,
+          96642,
+          97731,
+          98532
+        ],
+        "basin_size": 30,
+        "max_transient_depth": 5,
+        "depth_histogram": {
+          "0": 4,
+          "1": 7,
+          "2": 5,
+          "3": 7,
+          "4": 6,
+          "5": 1
+        }
+      }
+    ]
+  },
+  "d7": {
+    "state_count": 219,
+    "attractors": [
+      {
+        "cycle_states": [
+          [
+            8,
+            4,
+            3
+          ],
+          [
+            7,
+            6,
+            2
+          ],
+          [
+            8,
+            4,
+            4
+          ],
+          [
+            7,
+            5,
+            1
+          ],
+          [
+            9,
+            5,
+            3
+          ],
+          [
+            8,
+            7,
+            2
+          ],
+          [
+            8,
+            6,
+            5
+          ],
+          [
+            7,
+            5,
+            2
+          ]
+        ],
+        "cycle_length": 8,
+        "cycle_representatives": [
+          9865422,
+          9776331,
+          9855432,
+          9875430,
+          9965421,
+          9877221,
+          9864432,
+          9775431
+        ],
+        "basin_size": 219,
+        "max_transient_depth": 12,
+        "depth_histogram": {
+          "0": 8,
+          "1": 17,
+          "2": 20,
+          "3": 25,
+          "4": 21,
+          "5": 27,
+          "6": 38,
+          "7": 24,
+          "8": 20,
+          "9": 8,
+          "10": 5,
+          "11": 4,
+          "12": 2
+        }
+      }
+    ]
+  }
+}

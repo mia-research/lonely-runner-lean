@@ -1,0 +1,8 @@
+PHP + RANDSTORM(RC4) SWEEP — elapsed 17755s — hit-run=70
+  TIME      PHP  bits  : best run  7/70 (seed 1500627135)
+  SMALLINT  PHP  words : best run  7/70 (seed 5434338)
+  TIME      RC4  stream: best run  7/70 (seed 1388614018)
+  SMALLINT  PHP  bits  : best run  7/70 (seed 13686406)
+  SMALLINT  RC4  stream: best run  7/70 (seed 10608129)
+  TIME      PHP  words : best run  7/70 (seed 1420144987)
+VERDICT: NO HIT — PHP mt_rand + Randstorm RC4 (time+small-int seeds) RULED OUT.

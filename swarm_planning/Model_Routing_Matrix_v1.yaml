@@ -1,0 +1,74 @@
+version: v1
+date: 2026-02-25
+manager:
+  model: codex
+  cap_ratio: 0.15
+account_lanes:
+  lane_a:
+    alias: Lane_A
+    claude: pro
+    chatgpt: paid
+    gemini: family
+    kimi: free
+    deepseek: free
+  lane_b:
+    alias: Lane_B
+    claude: pro
+    chatgpt: free
+    gemini: family
+    kimi: free
+    deepseek: free
+routing:
+  orchestration:
+    primary: codex
+    secondary: deepseek
+    fallback: kimi
+  corpus_metadata:
+    primary: local_python
+    secondary: local_shell
+  bulk_claim_extraction:
+    primary: kimi
+    secondary: deepseek
+    fallback: chatgpt_free
+  track_classification:
+    primary: kimi
+    secondary: deepseek
+    fallback: chatgpt_free
+  notation_audit:
+    primary: claude
+    secondary: chatgpt
+    fallback: deepseek
+  proof_structuring:
+    primary: chatgpt_paid
+    secondary: claude_pro
+    fallback: gemini
+  adversarial_refutation:
+    primary: deepseek
+    secondary: chatgpt_paid
+    fallback: claude_pro
+  numeric_stability_interpretation:
+    primary: local_python
+    secondary: chatgpt_free
+    fallback: deepseek
+  independent_reproduction:
+    primary: local_python
+    secondary: local_python_clean_env
+  ideation:
+    primary: gemini
+    secondary: chatgpt_free
+    fallback: kimi
+  high_impact_adjudication:
+    primary: [claude_pro, chatgpt_paid]
+    secondary: [claude_pro, gemini]
+    fallback: [chatgpt_paid, deepseek]
+  manuscript_drafting:
+    primary: claude_pro
+    secondary: chatgpt_paid
+    fallback: gemini
+budget:
+  premium_cap_ratio: 0.35
+  budget_worker_cap_ratio: 0.50
+failover:
+  provider_quota_warning_ratio: 0.80
+  reroute_noncritical: true
+  defer_high_impact_if_premium_unavailable: true

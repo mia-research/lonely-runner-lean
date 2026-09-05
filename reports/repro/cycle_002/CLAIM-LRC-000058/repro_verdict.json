@@ -1,0 +1,18 @@
+{
+  "claim_id": "CLAIM-LRC-000058",
+  "promotion_id": "PROMO-LRC-0018",
+  "final_status": "stable",
+  "float64_vs_mpmath": {
+    "global_status": "stable",
+    "max_rel_diff": 2.8938474985959806e-16
+  },
+  "decimal128_vs_mpmath": {
+    "global_status": "stable",
+    "max_rel_diff": 1.5227006429646595e-34
+  },
+  "notes": [
+    "Strict ladder executed: float64, decimal128 (prec=34), mpmath (dps=80).",
+    "Use decimal/mpmath agreement as high-precision anchor."
+  ],
+  "created_utc": "2026-02-25T23:29:22Z"
+}

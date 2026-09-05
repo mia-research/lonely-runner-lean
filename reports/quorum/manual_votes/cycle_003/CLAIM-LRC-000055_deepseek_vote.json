@@ -1,0 +1,22 @@
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Deepseek",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.92,
+  "rationale": [
+    "Reproducibility verification shows max relative error 3.45e-15 for float64 and 8.64e-32 for decimal128, well below stable threshold.",
+    "Metric match and notation match both pass.",
+    "Extraction of 4.4 million tokens was successful and stable.",
+    "Claim statement in dossier is poorly formatted and may require clarification for human interpretation.",
+    "Prior adjudication score 0.48 (needs_human_review) is addressed by strong numeric reproducibility."
+  ],
+  "critical_risks": [
+    "Float precision risk noted as medium in dossier, though actual errors are minimal; further testing in edge cases may be warranted.",
+    "Ambiguity in claim statement could lead to misinterpretation; the exact empirical finding needs to be articulated clearly."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Dossier indicates readiness for claim dossier review board. Recommend promotion with caveat to reformat claim statement for clarity.",
+  "submitted_utc": "2026-02-26T14:30:00Z",
+  "operator_lane": "Human",
+  "source_ref": "manual_quorum_user_submission_2026-02-28"
+}

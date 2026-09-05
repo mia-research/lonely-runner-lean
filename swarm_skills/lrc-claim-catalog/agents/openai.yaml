@@ -1,0 +1,4 @@
+interface:
+  display_name: "LRC Claim Catalog"
+  short_description: "Extract and seed atomic LRC claims from tracked artifacts"
+  default_prompt: "Extract atomic claims and seed claim queue from LRC artifacts"

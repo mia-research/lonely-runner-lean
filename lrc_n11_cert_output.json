@@ -1,0 +1,49 @@
+{
+  "lrc_n11_version": "v4",
+  "date": "2026-03-15",
+  "branch1": {
+    "status": "PASS",
+    "checks": 1,
+    "witness": "k = L = 2520",
+    "ok": true
+  },
+  "branch2": {
+    "status": "ANALYTIC (see paper \u00a73.2)",
+    "checks": 0
+  },
+  "branch3": {
+    "status": "PASS",
+    "checks": 2115,
+    "templates_covered": 45,
+    "expected_templates": 45,
+    "min_x0": 1950,
+    "violations": [],
+    "spot_check": "PASS",
+    "spot_log": [
+      {
+        "fixed": "(1,2,3,4,5,6,7,8)",
+        "M": 1,
+        "expected": 6636,
+        "computed": 6636,
+        "match": true
+      },
+      {
+        "fixed": "(1,3,4,5,6,8,9,10)",
+        "M": 13,
+        "expected": 51324,
+        "computed": 51324,
+        "match": true
+      },
+      {
+        "fixed": "(3,4,5,6,7,8,9,10)",
+        "M": 241,
+        "expected": 8080834,
+        "computed": 8080834,
+        "match": true
+      }
+    ],
+    "analytic_clause": "M >= M0(F): x0 >= L0(F)-1 >= 119 (Theorem 4.6, paper \u00a74)",
+    "ok": true
+  },
+  "overall": "PASS \u2014 LRC n=11 computationally verified"
+}

@@ -1,0 +1,31 @@
+{
+  "prereg": "PREREG_e3_owed_measurement_v2.md",
+  "N_null": 20000,
+  "M_oos": 1000,
+  "seed_null": 20260818,
+  "seed_a4": 12345,
+  "E2_real": 1225,
+  "E3_real": 13125,
+  "E6_real": 847,
+  "abc_real": [
+    1082,
+    1057,
+    1182
+  ],
+  "L_struct": 84,
+  "U_struct": 11973,
+  "reject_high": true,
+  "pctile_E3": 98.24000000000001,
+  "p_struct": 0.035398230088495575,
+  "p_E2": 0.9322533873306335,
+  "p_E3": 0.035398230088495575,
+  "p_E6": 0.4445777711114444,
+  "p_FWER_E3": 0.08329583520823959,
+  "fwer_significant": false,
+  "bonferroni7": 0.24778761061946902,
+  "q_MT": 0.015,
+  "q_MT_hits": 15,
+  "mt_med_E3": 2163,
+  "mt_med_pctile": 48.63,
+  "A4_fpr": 0.022
+}

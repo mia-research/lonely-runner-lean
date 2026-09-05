@@ -1,0 +1,81 @@
+claim_id,source_artifact_id,filename,track,priority_note
+SEED-LRC-000001,ART-LRC-50ADA6,Complete Proof_ Individual Isolation in the Lonely Runner Conjecture.pdf,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000002,ART-LRC-B5446A,A Formal Proof of the Lonely Runner Conjecture (Draft with Explanations).docx,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000003,ART-LRC-0945B3,A Structural Reduction of the Lonely Runner Conjecture v3.txt,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000004,ART-LRC-AFE637,A Structural Reduction of the Lonely Runner Conjecture v4.txt,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000005,ART-LRC-C19279,A Structural Reduction of the Lonely Runner Conjecture.md,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000006,ART-LRC-CF1B46,A Structural Reduction of the Lonely Runner Conjecture.pdf,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000007,ART-LRC-65660C,A Structural Reduction of the Lonely Runner Conjecture.txt,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000008,ART-LRC-F0E06E,A Structural Reduction of the Lonely Runner Conjecturev2.txt,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000009,ART-LRC-3D3455,Lonely Runner Conjecture_ Empirical Validation of Global vs. Individual Isolation (1).docx,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000010,ART-LRC-D1C143,Lonely Runner Conjecture_ Empirical Validation of Global vs. Individual Isolation (2).docx,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000011,ART-LRC-A146CD,Lonely Runner Conjecture_ Empirical Validation of Global vs. Individual Isolation.docx,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000012,ART-LRC-48C6C3,Structural Reduction of the Lonely Runner Conjecture.pdf,LRC,P1_core_proof_or_primary_evidence
+SEED-LRC-000013,ART-LRC-D25AAE,Empirical Validation of the Lonely Runner Conjecture_ A Complete Research Summary.docx,LRC,P2_supporting_or_replication
+SEED-LRC-000014,ART-LRC-DA5E63,Complete Source of Truth - Lonely Runner’s Conjecture.docx,LRC,P3_context_or_auxiliary
+SEED-LRC-000015,ART-LRC-BF55BC,LRC Full Proof (1).md,LRC,P3_context_or_auxiliary
+SEED-LRC-000016,ART-LRC-08E4B3,LRC Full Proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000017,ART-LRC-6DF81C,LRC Proof V2.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000018,ART-LRC-465AC0,LRC_COMPLETE_PROOF.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000019,ART-LRC-B5A0CD,Lonely Runners to Ergodic Covering_ A Computational Validation of a Universal Dynamic Principle.docx,LRC,P3_context_or_auxiliary
+SEED-LRC-000020,ART-LRC-3D00F6,lrc_boundary_set_report_2025-09-23T08-04-30.txt,LRC,P3_context_or_auxiliary
+SEED-LRC-000021,ART-LRC-25E56D,lrc_complete_proof v4.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000022,ART-LRC-84A6F9,lrc_complete_proof_v3.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000023,ART-LRC-93E12D,lrc_d1_complete_proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000024,ART-LRC-DA5A64,lrc_d_ge2_complete_proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000025,ART-LRC-79E772,lrc_full_proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000026,ART-LRC-877C5E,lrc_standalone_proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000027,ART-LRC-8A8198,lrc_three_tier_proof.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000028,ART-LRC-E5A6E3,An Empirical Validation of Isolation Dynamics on a Torus.docx,LRC,P3_context_or_auxiliary
+SEED-LRC-000029,ART-LRC-A355EC,From Lonely Runners to the Riemann Zeta Spectrum_ A Unified Research Program.docx,LRC,P3_context_or_auxiliary
+SEED-LRC-000030,ART-LRC-7B5684,generic_individual_isolation_theorem.tex,LRC,P3_context_or_auxiliary
+SEED-LRC-000031,ART-LRC-58353E,lrc_quick_validation_summary.pdf,LRC,P3_context_or_auxiliary
+SEED-LRC-000032,ART-LRC-9689EB,lrc_statistical_validation.txt,LRC,P3_context_or_auxiliary
+SEED-LRC-000033,ART-LRC-8BBBD5,boundary_fragility_plots.pdf,LRC,P3_context_or_auxiliary
+SEED-LRC-000034,ART-LRC-DB5C15,boundary_resolution_analysis.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000035,ART-LRC-69DE50,dimension_3_proof cp.md,LRC,P3_context_or_auxiliary
+SEED-LRC-000036,ART-LRC-7B9292,lrc_boundary_set_data_2025-09-23T08-04-30.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000037,ART-LRC-B5D537,lrc_mechanism_boundary_analysis_2025-09-23T15-30-38-735Z.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000038,ART-LRC-A57C3C,Boundary-probe_isolation___sample_rows.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000039,ART-LRC-76B2A0,Boundary-probe_isolation___summary_by_family.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000040,ART-LRC-D3E3ED,rigorous_boundary_set_validation_2025-09-28T11-20-27-324Z.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000041,ART-LRC-F52BAE,lrc_individual_isolation_1759267335152.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000042,ART-LRC-646B0D,LRC_Quick_Validation__methods_focus_.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000043,ART-LRC-31F4B3,lrc_efficiency_runtime_validation (1).csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000044,ART-LRC-9A62D9,lrc_efficiency_runtime_validation.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000045,ART-LRC-B45A73,lrc_honest_validation_1759237637956.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000046,ART-LRC-219C65,lrc_honest_validation_1759237834647.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000047,ART-LRC-A9E368,lrc_quick_validation_replicated.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000048,ART-LRC-C7381D,lrc_quick_validation_run.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000049,ART-LRC-60FEA1,lrc_rigorous_validation_2025-09-24T12-45-35.json,LRC,P3_context_or_auxiliary
+SEED-LRC-000050,ART-LRC-114769,lrc_rigorous_validation_2025-09-24T12-47-24.json,LRC,P3_context_or_auxiliary
+SEED-LRC-000051,ART-LRC-22D51C,lrc_statistical_validation_2025-09-23T11-05-33-344Z.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000052,ART-LRC-5F0A1F,lrc_validation_data_2025-09-23T11-19-31-619Z.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000053,ART-LRC-312827,lrc_validation_large_1759238333891.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000054,ART-LRC-3ADB05,lrc_validation_large_1759238362541.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000055,ART-LRC-8C2364,lrc_validation_large_1759238706040.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000056,ART-LRC-ACE396,lrc_validation_large_1759239075705.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000057,ART-LRC-C86F4C,lrc_validation_results.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000058,ART-LRC-1B7D80,Detector___per-family_summary.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000059,ART-LRC-9A6905,Detector___per-n_summary.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000060,ART-LRC-A3F56A,boundary_fragility_summary.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000061,ART-LRC-9EF7F3,boundary_set_analysis_2025-09-23T07-47-23.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000062,ART-LRC-EB5832,boundary_set_vs_coarse_midpoint_n10.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000063,ART-LRC-D03300,detector_summary_by_family.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000064,ART-LRC-E10F9F,detector_summary_by_n.csv,LRC,P3_context_or_auxiliary
+SEED-LRC-000065,ART-LRC-ADAC87,pcg64_boundary_fragility.json,LRC,P3_context_or_auxiliary
+SEED-LRC-000066,ART-LRC-1926D9,Lonely Runner Conjecture Tester copy 2.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000067,ART-LRC-50F2BB,Lonely Runner Conjecture Tester copy 3.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000068,ART-LRC-C62E6E,Lonely Runner Conjecture Tester copy 4.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000069,ART-LRC-AF2A60,Lonely Runner Conjecture Tester copy 5.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000070,ART-LRC-2283DC,Lonely Runner Conjecture Tester copy 6.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000071,ART-LRC-4E82EF,Lonely Runner Conjecture Tester copy 7.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000072,ART-LRC-16A819,Lonely Runner Conjecture Tester copy.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000073,ART-LRC-485772,Lonely Runner Conjecture Tester.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000074,ART-FRN-FD9706,boundary_method_rigorous_validationv2.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000075,ART-LRC-9839E7,lrc_individual_isolation_test.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000076,ART-LRC-C65933,lrc_validation_package.py,LRC,P3_context_or_auxiliary
+SEED-LRC-000077,ART-LRC-158C87,LCR Proof test 1.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000078,ART-LRC-9841AD,boundary_set_code.py,LRC,P3_context_or_auxiliary
+SEED-LRC-000079,ART-LRC-B1AEBF,boundary_set_generalization_test.html,LRC,P3_context_or_auxiliary
+SEED-LRC-000080,ART-LRC-FB9464,dimension_3_proof.md,LRC,P3_context_or_auxiliary

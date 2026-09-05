@@ -1,0 +1,21 @@
+# data=real  keys=75  features=42  shuffles=5000
+
+target         best_feature   MI_bits    maxz   corr_p   verdict
+----------------------------------------------------------------------
+PLANT_strong   X%7          2.73459   28.83   0.0002   FIRES  <-- control
+PLANT_f0.02    X%2          0.15358    2.50   0.3287   null  <-- control
+PLANT_f0.05    Y%16         1.17942    2.95   0.1484   null  <-- control
+PLANT_f0.10    Y%2          0.12096    1.63   0.8750   null  <-- control
+PLANT_f0.20    Y%256        2.54133    2.01   0.6359   null  <-- control
+d%2            X%64         0.66364    1.77   0.8222   null
+d%3            Y%25         0.72611    2.00   0.6865   null
+d%5            Y%4          0.20802    1.51   0.9072   null
+d%7            hamY         1.64424    1.90   0.7199   null
+d%11           X%32         2.14593    2.40   0.4001   null
+d%13           phiX%256     3.37157    2.25   0.5027   null
+bit_mid        X%7          0.14496    2.28   0.5383   null
+bit_top2       X%13         0.25795    2.22   0.5835   null
+u_bin8         Y%4          0.44032    2.95   0.1566   null
+--------------------------------------------------------------
+Real target FIRES  => investigate (OOS + attack translation).
+All real targets null => bounded: no (X,Y)->d leak above the floor, this feature set.

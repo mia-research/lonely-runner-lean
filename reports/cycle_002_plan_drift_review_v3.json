@@ -1,0 +1,66 @@
+{
+  "generated_utc": "2026-02-26T02:55:21Z",
+  "counts": {
+    "on_track": 6,
+    "at_risk": 2,
+    "drifted": 0
+  },
+  "rows": [
+    {
+      "area": "run_log artifact",
+      "expected": "run_log.jsonl present with provenance",
+      "observed": "exists=True entries=11",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "manager token cap",
+      "expected": "<=0.15",
+      "observed": "max=0.03",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "premium cap",
+      "expected": "<=0.35",
+      "observed": "max=0.00",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "governance breaches",
+      "expected": "0 unresolved",
+      "observed": "max=0",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "plan metadata freshness",
+      "expected": "status reflects execution",
+      "observed": "Status: Active execution (Cycle 002 completed; anti-drift hardening initiated 2026-02-26)",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "theorem dependency/refuter gate",
+      "expected": "all theorem tasks resolved without critical follow-up",
+      "observed": "status_counts={'executed': 4, 'needs_followup': 2}",
+      "status": "at_risk",
+      "action": "close needs_followup theorem claims"
+    },
+    {
+      "area": "citation grounding gate",
+      "expected": "citation tasks executed for targeted high-impact claims",
+      "observed": "status_counts={'executed': 10}",
+      "status": "on_track",
+      "action": "complete citation tasks"
+    },
+    {
+      "area": "two-model quorum gate",
+      "expected": "live two-model adjudication complete",
+      "observed": "status_counts={'executed_proxy': 10} (offline proxy mode)",
+      "status": "at_risk",
+      "action": "execute live model quorum and replace proxy votes"
+    }
+  ]
+}

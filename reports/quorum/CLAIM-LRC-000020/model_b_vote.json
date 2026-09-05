@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000020",
+  "task_id": "QRM-LRC-0005",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:35:30Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.78,
+  "rationale": [
+    "Numeric reproducibility is strong (stable ladder; float/decimal vs mpmath errors are extremely low).",
+    "Measurement metric and notation alignment both pass, reducing implementation-mismatch risk.",
+    "Current adjudication snapshot explicitly flags needs_human_review with a middling score (0.480).",
+    "Claim text appears structurally truncated/garbled and does not yet present a complete testable proposition.",
+    "Assumptions are marked as pending extraction, leaving scope/validity conditions under-specified."
+  ],
+  "critical_risks": [
+    "Incomplete claim formalization may cause over-interpretation of table artifacts as a general result.",
+    "Unextracted assumptions prevent rigorous boundary-condition checking and external reproducibility.",
+    "Potential mismatch between 'ready' dossier status and unresolved semantic-review flags could lead to premature publication."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Recommend advancing only to focused human semantic review: finalize claim statement and assumptions, then re-run adjudication; keep reproducibility packet attached as supporting evidence. | fallback_used_for_lane_provider=gemini"
+}

@@ -1,0 +1,18 @@
+task_id,claim_id,status,merged_status,external_quorum_complete,model_a_provider,model_b_provider,output_dir,updated_utc
+QRM4-LRC-0001,CLAIM-LRC-000043,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000043,2026-02-28T04:28:31Z
+QRM4-LRC-0002,CLAIM-LRC-000044,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000044,2026-02-28T04:28:31Z
+QRM4-LRC-0003,CLAIM-LRC-000056,blocked_provider_auth,consensus_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000056,2026-02-28T04:28:43Z
+QRM4-LRC-0004,CLAIM-LRC-000057,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000057,2026-02-28T04:28:43Z
+QRM4-LRC-0005,CLAIM-LRC-000042,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000042,2026-02-28T04:28:43Z
+QRM4-LRC-0006,CLAIM-LRC-000048,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000048,2026-02-28T04:28:55Z
+QRM4-LRC-0007,CLAIM-LRC-000038,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000038,2026-02-28T04:29:10Z
+QRM4-LRC-0008,CLAIM-LRC-000049,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000049,2026-02-28T04:29:10Z
+QRM4-LRC-0009,CLAIM-LRC-000050,blocked_provider_auth,consensus_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000050,2026-02-28T04:29:24Z
+QRM4-LRC-0010,CLAIM-LRC-000058,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000058,2026-02-28T04:29:24Z
+QRM4-LRC-0011,CLAIM-LRC-000063,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000063,2026-02-28T04:29:24Z
+QRM4-LRC-0012,CLAIM-LRC-000051,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000051,2026-02-28T04:29:36Z
+QRM4-LRC-0013,CLAIM-LRC-000059,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000059,2026-02-28T04:29:52Z
+QRM4-LRC-0014,CLAIM-LRC-000064,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000064,2026-02-28T04:29:52Z
+QRM4-LRC-0015,CLAIM-LRC-000060,blocked_provider_auth,consensus_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000060,2026-02-28T04:30:04Z
+QRM4-LRC-0016,CLAIM-LRC-000065,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000065,2026-02-28T04:30:04Z
+QRM4-LRC-0017,CLAIM-LRC-000062,blocked_provider_auth,consensus_escalate,no,codex,codex,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/CLAIM-LRC-000062,2026-02-28T04:30:04Z

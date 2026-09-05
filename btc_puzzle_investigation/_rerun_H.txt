@@ -1,0 +1,17 @@
+# TEST H  jump-map functional graph vs random function   ENSEMBLE (10 draws each)
+# Flajolet-Odlyzko random-function: cyclic~sqrt(pi*M/2), comps~0.5*lnM
+# glued-tree would be ~1 component + huge rho + bottleneck (nothing like F-O).
+
+  M=65521 (prime):  F-O expects cyclic~321, comps~5.5
+    JUMP-MAP :  cyclic  320.4 +/- 109.6   comps  3.80 +/- 1.25
+    RANDOM-FN:  cyclic  293.4 +/- 104.8   comps  7.00 +/- 3.10
+    cyclic separation: 0.18 sigma  (<2 => same distribution)
+
+  M=131063 (prime):  F-O expects cyclic~454, comps~5.9
+    JUMP-MAP :  cyclic  586.3 +/- 300.5   comps  5.50 +/- 2.20
+    RANDOM-FN:  cyclic  363.1 +/- 240.4   comps  7.10 +/- 1.97
+    cyclic separation: 0.58 sigma  (<2 => same distribution)
+
+  read: jump-map cyclic/comps overlapping the random-function ensemble (within ~2 sigma)
+        and both near F-O => generic random-function graph, NOT glued-tree. Same at both M
+        => scale-invariant. A persistent >2-sigma gap growing with M would be real structure.

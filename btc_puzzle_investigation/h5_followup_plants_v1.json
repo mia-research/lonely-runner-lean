@@ -1,0 +1,21 @@
+{
+  "orbit_counter_allduplicate": {
+    "raw": 6,
+    "orbit": 1,
+    "expect_orbit": 1,
+    "ok": true
+  },
+  "orbit_counter_alldistinct": {
+    "raw": 3,
+    "orbit": 3,
+    "expect_orbit": 3,
+    "ok": true
+  },
+  "forced_relation_check": {
+    "tval": 180,
+    "q0": 12,
+    "q1": 12,
+    "q2": 12,
+    "ok": true
+  }
+}

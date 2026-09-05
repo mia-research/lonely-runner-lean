@@ -1,0 +1,418 @@
+{
+  "wp": "WP1_nq_nearmiss",
+  "model": "sonnet",
+  "n_samples": 339,
+  "bit_range": [
+    8,
+    120
+  ],
+  "attack_valid": true,
+  "positive_control": {
+    "method": "exact hash-table brute force of {point(r*G): r in [-R_MAX, R_MAX]}, R_MAX = 16*2^(N-1)/256 per band (empirically sized for ~99% true-key coverage; see params comment for the corrected r = n*D - (2^(N-1)*k mod n) identity used, which differs from the brief's literal |r|<2^(N-1)/n).",
+    "bands_tested": [
+      16,
+      20
+    ],
+    "keys_per_band": 10,
+    "wrong_nprime_sampled_per_key": 8,
+    "kgrid_depth": 64,
+    "true_hit_rate": 0.55,
+    "true_hits": 11,
+    "true_trials": 20,
+    "wrong_hit_rate": 0.09375,
+    "wrong_hits": 15,
+    "wrong_trials": 160,
+    "wrong_nonmultiple_hit_rate": 0.07051282051282051,
+    "wrong_nonmultiple_hits": 11,
+    "wrong_nonmultiple_trials": 156,
+    "control_z": 5.4722645514155595,
+    "control_z_nonmultiple": 6.104343016492739,
+    "detected": true,
+    "example_recoveries": [
+      {
+        "N": 16,
+        "true_n": 33,
+        "true_k": 32,
+        "recovered_r": 65,
+        "recovered_kprime": 32
+      },
+      {
+        "N": 16,
+        "true_n": 97,
+        "true_k": 30,
+        "recovered_r": 55,
+        "recovered_kprime": 30
+      },
+      {
+        "N": 16,
+        "true_n": 8,
+        "true_k": 3,
+        "recovered_r": 24,
+        "recovered_kprime": 3
+      },
+      {
+        "N": 16,
+        "true_n": 95,
+        "true_k": 36,
+        "recovered_r": -33,
+        "recovered_kprime": 36
+      },
+      {
+        "N": 16,
+        "true_n": 167,
+        "true_k": 59,
+        "recovered_r": 47,
+        "recovered_kprime": 59
+      },
+      {
+        "N": 16,
+        "true_n": 21,
+        "true_k": 2,
+        "recovered_r": -58,
+        "recovered_kprime": 2
+      },
+      {
+        "N": 16,
+        "true_n": 235,
+        "true_k": 7,
+        "recovered_r": 219,
+        "recovered_kprime": 7
+      },
+      {
+        "N": 16,
+        "true_n": 11,
+        "true_k": 7,
+        "recovered_r": -26,
+        "recovered_kprime": 7
+      },
+      {
+        "N": 20,
+        "true_n": 23,
+        "true_k": 18,
+        "recovered_r": -721,
+        "recovered_kprime": 18
+      },
+      {
+        "N": 20,
+        "true_n": 197,
+        "true_k": 21,
+        "recovered_r": -506,
+        "recovered_kprime": 21
+      }
+    ],
+    "note_multiple_of_n_artifact": "wrong n'=m*true_n structurally reproduces a scaled hit (recovered_r ~ m*r_true) because n'*Q = m*(n*Q) = m*k*Apt + m*r*G -- this is an expected consequence of the identity, not a false positive of the detector. Excluded from wrong_nonmultiple_* to isolate the detector's power against generic (non-multiple) wrong n'.",
+    "multiple_of_n_hits_observed": 4,
+    "multiple_of_n_examples": [
+      {
+        "N": 16,
+        "true_n": 8,
+        "nprime": "104",
+        "multiple": "13",
+        "recovered_r": 312
+      },
+      {
+        "N": 16,
+        "true_n": 8,
+        "nprime": "144",
+        "multiple": "18",
+        "recovered_r": 432
+      },
+      {
+        "N": 16,
+        "true_n": 21,
+        "nprime": "231",
+        "multiple": "11",
+        "recovered_r": -638
+      },
+      {
+        "N": 16,
+        "true_n": 11,
+        "nprime": "33",
+        "multiple": "3",
+        "recovered_r": -78
+      }
+    ]
+  },
+  "null_model": "wrong-n' candidates within key + label permutation within band",
+  "primary_result": {
+    "ks_tests": {
+      "min_x": {
+        "ks_stat": 0.038683556018277554,
+        "p_raw": 0.6776994557949261,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 2.7946103570639607e+76,
+        "mean_wrong": 2.8966513549014565e+76
+      },
+      "min_y": {
+        "ks_stat": 0.0470703915784603,
+        "p_raw": 0.42916619951429413,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 2.8436319993547745e+76,
+        "mean_wrong": 2.896050993502341e+76
+      },
+      "hw_x": {
+        "ks_stat": 0.07309850193764827,
+        "p_raw": 0.051317851252952296,
+        "p_bonferroni": 0.6158142150354275,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 129.3952802359882,
+        "mean_wrong": 128.00122621319915
+      },
+      "hw_y": {
+        "ks_stat": 0.03203192781537395,
+        "p_raw": 0.8673737074619665,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 127.91150442477876,
+        "mean_wrong": 128.01912198507722
+      },
+      "x_mod3": {
+        "ks_stat": 0.025287755220082142,
+        "p_raw": 0.9783921646696359,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 1.0412979351032448,
+        "mean_wrong": 0.9960552952744519
+      },
+      "x_mod5": {
+        "ks_stat": 0.04435190005205625,
+        "p_raw": 0.5051662116511153,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 1.9262536873156342,
+        "mean_wrong": 1.9911620105269245
+      },
+      "x_mod7": {
+        "ks_stat": 0.03230956099253862,
+        "p_raw": 0.8606047604199519,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 2.9705014749262535,
+        "mean_wrong": 3.0028226039678407
+      },
+      "x_mod11": {
+        "ks_stat": 0.05768986060500897,
+        "p_raw": 0.20263293737404886,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 4.725663716814159,
+        "mean_wrong": 4.983145352536295
+      },
+      "x_mod13": {
+        "ks_stat": 0.046121811556480985,
+        "p_raw": 0.454964379840025,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 5.979351032448378,
+        "mean_wrong": 6.002614379084967
+      },
+      "ent_x_lo32": {
+        "ks_stat": 0.03982879287408175,
+        "p_raw": 0.6421832890811914,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 31.2997305244803,
+        "mean_wrong": 31.26412571832265
+      },
+      "reduced_min_x": {
+        "ks_stat": 0.035826247903291114,
+        "p_raw": 0.7644972983496942,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 1.4729719637514347e+76,
+        "mean_wrong": 1.4559401649122908e+76
+      },
+      "reduced_min_y": {
+        "ks_stat": 0.04170281681994334,
+        "p_raw": 0.5843624424583466,
+        "p_bonferroni": 1.0,
+        "n_true": 339,
+        "n_wrong": 86445,
+        "mean_true": 1.416439371545744e+76,
+        "mean_wrong": 1.4500938622427723e+76
+      }
+    },
+    "permutation_null_ks": {
+      "min_x": {
+        "ks_stat": 0.03527098154896177,
+        "p_raw": 0.78070974246362
+      },
+      "min_y": {
+        "ks_stat": 0.043715657354387205,
+        "p_raw": 0.5237988926524189
+      },
+      "hw_x": {
+        "ks_stat": 0.04104343802417726,
+        "p_raw": 0.6046058618914514
+      },
+      "hw_y": {
+        "ks_stat": 0.034391809821273656,
+        "p_raw": 0.8057036367280566
+      },
+      "x_mod3": {
+        "ks_stat": 0.022094973682688368,
+        "p_raw": 0.9953512928017184
+      },
+      "x_mod5": {
+        "ks_stat": 0.0621204233905952,
+        "p_raw": 0.1411662378580104
+      },
+      "x_mod7": {
+        "ks_stat": 0.043947018335357746,
+        "p_raw": 0.5169908017590165
+      },
+      "x_mod11": {
+        "ks_stat": 0.045844178379316314,
+        "p_raw": 0.46266750916165356
+      },
+      "x_mod13": {
+        "ks_stat": 0.017652842848053685,
+        "p_raw": 0.9998889759147412
+      },
+      "ent_x_lo32": {
+        "ks_stat": 0.030944531204812276,
+        "p_raw": 0.892423527466148
+      }
+    },
+    "n_score_tests_bonferroni": 12,
+    "any_score_significant_after_bonferroni": false,
+    "ranking_power": {
+      "min_x": {
+        "top1pct_frac": 0.02064896755162242,
+        "top10pct_frac": 0.12389380530973451
+      },
+      "min_y": {
+        "top1pct_frac": 0.0029498525073746312,
+        "top10pct_frac": 0.12389380530973451
+      },
+      "hw_x": {
+        "top1pct_frac": 0.0058997050147492625,
+        "top10pct_frac": 0.07079646017699115
+      },
+      "hw_y": {
+        "top1pct_frac": 0.0058997050147492625,
+        "top10pct_frac": 0.11504424778761062
+      },
+      "x_mod3": {
+        "top1pct_frac": 0.008849557522123894,
+        "top10pct_frac": 0.10029498525073746
+      },
+      "x_mod5": {
+        "top1pct_frac": 0.017699115044247787,
+        "top10pct_frac": 0.0943952802359882
+      },
+      "x_mod7": {
+        "top1pct_frac": 0.014749262536873156,
+        "top10pct_frac": 0.0943952802359882
+      },
+      "x_mod11": {
+        "top1pct_frac": 0.017699115044247787,
+        "top10pct_frac": 0.10029498525073746
+      },
+      "x_mod13": {
+        "top1pct_frac": 0.008849557522123894,
+        "top10pct_frac": 0.10914454277286136
+      },
+      "ent_x_lo32": {
+        "top1pct_frac": 0.014749262536873156,
+        "top10pct_frac": 0.08849557522123894
+      },
+      "reduced_min_x": {
+        "top1pct_frac": 0.02359882005899705,
+        "top10pct_frac": 0.12094395280235988
+      },
+      "reduced_min_y": {
+        "top1pct_frac": 0.008849557522123894,
+        "top10pct_frac": 0.10619469026548672
+      }
+    },
+    "ranking_baseline": {
+      "top1pct": 0.01,
+      "top10pct": 0.1
+    }
+  },
+  "reading": "CONDITIONAL NEGATIVE (bounded): positive control fired (true hit-rate 0.550 vs generic-wrong 0.07051, z=6.104343016492739; note a separate, expected structural effect at n'=multiples-of-true-n raises the pooled wrong-hit-rate to 0.09375 -- see note_multiple_of_n_artifact), confirming the identity is real and detectable when |r| is small enough to brute force (bands [16, 20]). At N in [8,120] (339 keys, 3 keys/band cap, k'-grid depth 3, 12 scores with Bonferroni correction), no score showed significant n'=n vs n'!=n separation. This is bounded to this feature set, this sample size, this k'-grid depth, and this N-range -- not a claim that no public statistic ever separates true n at these bit-lengths (the perturbation r's typical magnitude tracks 2^(N-1)/256 regardless of n, so at large N a fixed small k'-grid and these coarse scores are expected to lose power relative to a full brute-force radius; a real DL-distance oracle or deeper k'-grid was not run here, per the runtime budget).",
+  "artifacts": [],
+  "runtime_sec": 61.44616985321045,
+  "params": {
+    "keys_per_band": 3,
+    "n_candidates": 256,
+    "t_max_kgrid": 3,
+    "small_n_control_bands": [
+      16,
+      20
+    ],
+    "control_radius_mult": 16,
+    "control_keys_per_band": 10,
+    "control_nprime_sample": 8,
+    "control_kgrid": 64
+  },
+  "log": [
+    "[    0.0s] loading dataset",
+    "[    0.7s] === positive control: small-N exact match ===",
+    "[    0.7s]   N=16: building hash table radius=2048 (10 keys sampled)",
+    "[    1.4s]     table built: 4097 entries in 0.7s",
+    "[    2.5s]   N=16 done (cumulative): true hits 8/10, wrong hits 9/80, wrong-nonmultiple hits 5/76",
+    "[    2.5s]   N=20: building hash table radius=32768 (10 keys sampled)",
+    "[   13.6s]     table built: 65537 entries in 11.1s",
+    "[   14.9s]   N=20 done (cumulative): true hits 11/20, wrong hits 15/160, wrong-nonmultiple hits 11/156",
+    "[   14.9s] positive control: true hit-rate=0.5500 (11/20), wrong hit-rate=0.093750 (15/160), wrong-nonmultiple hit-rate=0.070513 (11/156), z=5.4722645514155595, z_nonmult=6.104343016492739, detected=True",
+    "[   14.9s]   multiple-of-true-n structural hits: 4 (expected artifact: nprime=m*n gives recovered_r ~ m*r_true, not a false positive -- see identity derivation)",
+    "[   14.9s] === main sweep: N in 8..120 ===",
+    "[   14.9s] 113 bands to process",
+    "[   19.0s]   band 10/113 (N=17, 3 keys) done, cumulative keys=30",
+    "[   23.0s]   band 20/113 (N=27, 3 keys) done, cumulative keys=60",
+    "[   27.1s]   band 30/113 (N=37, 3 keys) done, cumulative keys=90",
+    "[   31.0s]   band 40/113 (N=47, 3 keys) done, cumulative keys=120",
+    "[   35.2s]   band 50/113 (N=57, 3 keys) done, cumulative keys=150",
+    "[   39.2s]   band 60/113 (N=67, 3 keys) done, cumulative keys=180",
+    "[   43.4s]   band 70/113 (N=77, 3 keys) done, cumulative keys=210",
+    "[   47.4s]   band 80/113 (N=87, 3 keys) done, cumulative keys=240",
+    "[   51.6s]   band 90/113 (N=97, 3 keys) done, cumulative keys=270",
+    "[   55.9s]   band 100/113 (N=107, 3 keys) done, cumulative keys=300",
+    "[   60.1s]   band 110/113 (N=117, 3 keys) done, cumulative keys=330",
+    "[   61.3s]   band 113/113 (N=120, 3 keys) done, cumulative keys=339",
+    "[   61.3s] main sweep done: 339 keys total across 113 bands",
+    "[   61.3s] computing KS tests",
+    "[   61.4s] KS tests done. any score significant after Bonferroni: False",
+    "[   61.4s]   min_x: KS=0.03868 p_bonf=1 mean_true=2.795e+76 mean_wrong=2.897e+76",
+    "[   61.4s]   min_y: KS=0.04707 p_bonf=1 mean_true=2.844e+76 mean_wrong=2.896e+76",
+    "[   61.4s]   hw_x: KS=0.07310 p_bonf=0.616 mean_true=129.4 mean_wrong=128",
+    "[   61.4s]   hw_y: KS=0.03203 p_bonf=1 mean_true=127.9 mean_wrong=128",
+    "[   61.4s]   x_mod3: KS=0.02529 p_bonf=1 mean_true=1.041 mean_wrong=0.9961",
+    "[   61.4s]   x_mod5: KS=0.04435 p_bonf=1 mean_true=1.926 mean_wrong=1.991",
+    "[   61.4s]   x_mod7: KS=0.03231 p_bonf=1 mean_true=2.971 mean_wrong=3.003",
+    "[   61.4s]   x_mod11: KS=0.05769 p_bonf=1 mean_true=4.726 mean_wrong=4.983",
+    "[   61.4s]   x_mod13: KS=0.04612 p_bonf=1 mean_true=5.979 mean_wrong=6.003",
+    "[   61.4s]   ent_x_lo32: KS=0.03983 p_bonf=1 mean_true=31.3 mean_wrong=31.26",
+    "[   61.4s]   reduced_min_x: KS=0.03583 p_bonf=1 mean_true=1.473e+76 mean_wrong=1.456e+76",
+    "[   61.4s]   reduced_min_y: KS=0.04170 p_bonf=1 mean_true=1.416e+76 mean_wrong=1.45e+76",
+    "[   61.4s] ranking power (top1%/top10% true-n hit-rate vs baseline 0.01/0.1):",
+    "[   61.4s]   min_x: top1%=0.0206 top10%=0.1239",
+    "[   61.4s]   min_y: top1%=0.0029 top10%=0.1239",
+    "[   61.4s]   hw_x: top1%=0.0059 top10%=0.0708",
+    "[   61.4s]   hw_y: top1%=0.0059 top10%=0.1150",
+    "[   61.4s]   x_mod3: top1%=0.0088 top10%=0.1003",
+    "[   61.4s]   x_mod5: top1%=0.0177 top10%=0.0944",
+    "[   61.4s]   x_mod7: top1%=0.0147 top10%=0.0944",
+    "[   61.4s]   x_mod11: top1%=0.0177 top10%=0.1003",
+    "[   61.4s]   x_mod13: top1%=0.0088 top10%=0.1091",
+    "[   61.4s]   ent_x_lo32: top1%=0.0147 top10%=0.0885",
+    "[   61.4s]   reduced_min_x: top1%=0.0236 top10%=0.1209",
+    "[   61.4s]   reduced_min_y: top1%=0.0088 top10%=0.1062",
+    "[   61.4s] READING: CONDITIONAL NEGATIVE (bounded): positive control fired (true hit-rate 0.550 vs generic-wrong 0.07051, z=6.104343016492739; note a separate, expected structural effect at n'=multiples-of-true-n raises the pooled wrong-hit-rate to 0.09375 -- see note_multiple_of_n_artifact), confirming the identity is real and detectable when |r| is small enough to brute force (bands [16, 20]). At N in [8,120] (339 keys, 3 keys/band cap, k'-grid depth 3, 12 scores with Bonferroni correction), no score showed significant n'=n vs n'!=n separation. This is bounded to this feature set, this sample size, this k'-grid depth, and this N-range -- not a claim that no public statistic ever separates true n at these bit-lengths (the perturbation r's typical magnitude tracks 2^(N-1)/256 regardless of n, so at large N a fixed small k'-grid and these coarse scores are expected to lose power relative to a full brute-force radius; a real DL-distance oracle or deeper k'-grid was not run here, per the runtime budget)."
+  ]
+}

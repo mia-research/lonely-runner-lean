@@ -1,0 +1,7 @@
+test_name,statistic,metric_name,metric_value,p_value,alpha,decision,effect_size,confidence_interval,sample_size,metric_unit
+phi_correlation,pearson_r,phi_correlation,0.9995,0.000000,0.0167,significant,0.9995,"[0.899, 1.099]",16,dimensionless
+performance_improvement,welch_t_test,performance_improvement,18.3513,<0.001,0.0167,significant,3.6703,speedup_4.88x,100,dimensionless
+success_rate,wilson_ci_95,success_rate,100.00,N/A,0.0167,na,N/A,"[99.42, 100.00]",660,dimensionless
+scope_boundary,two_proportion_z,scope_boundary,13.9561,<0.001,0.0167,significant,N/A,arith_96.0_vs_nonarith_4.0,250,dimensionless
+power_analysis,achieved_power,power_analysis,>0.8,N/A,0.0167,na,3.6703,required_n_2,100,dimensionless
+multiple_comparisons,bonferroni_correction,multiple_comparisons,0.0167,N/A,0.0167,na,N/A,surviving_tests_3,3,dimensionless

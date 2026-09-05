@@ -1,0 +1,10 @@
+{
+  "cycle_id": "cycle_002",
+  "manager_token_share": 0.02,
+  "premium_token_share": 0.0,
+  "provider_quota_max": null,
+  "governance_breach_count": 0,
+  "health": "green",
+  "findings": [],
+  "actions": []
+}

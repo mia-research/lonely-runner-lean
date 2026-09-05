@@ -1,0 +1,28 @@
+LRC SYNCHRONIZED STATES: Runner Position Analysis for n=11
+================================================================================
+
+QUESTION 1: Blocking runners at start of I_{k+1}
+--------------------------------------------------------------------------------
+k=1: Blocking runners = []
+k=2: Blocking runners = [7]
+k=3: Blocking runners = [8]
+k=4: Blocking runners = []
+k=5: Blocking runners = [9]
+k=6: Blocking runners = []
+k=7: Blocking runners = []
+k=8: Blocking runners = [6]
+
+QUESTION 2: Maximum blocking hits over 8 steps
+--------------------------------------------------------------------------------
+r= 1: 0 hits
+r= 2: 0 hits
+r= 3: 0 hits
+r= 4: 0 hits
+r= 5: 0 hits
+r= 6: 0 hits
+r= 7: 0 hits
+r= 8: 0 hits
+r= 9: 0 hits
+r=10: 0 hits
+
+Overall maximum blocking hits: 0

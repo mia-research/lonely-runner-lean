@@ -1,0 +1,379 @@
+{
+  "meta": {
+    "timestamp": "20260415_081612",
+    "args": {
+      "rungs": [
+        0
+      ],
+      "spaces": [
+        "raw_fy_seed",
+        "cycle_geometry",
+        "hybrid_schedule",
+        "cycle_arc"
+      ],
+      "n_runs": 1,
+      "budget_sec": 30.0,
+      "max_iter": 1000,
+      "initial_temp": 0.5,
+      "cooling_rate": 0.9995,
+      "restart_patience": 3000,
+      "rng_seed": 42,
+      "synthetic_n": 1000,
+      "quick": true,
+      "full": false,
+      "output": null
+    },
+    "sa_config": {
+      "initial_temp": 0.5,
+      "cooling_rate": 0.9995,
+      "min_temp": 1e-09,
+      "max_iterations": 1000,
+      "wallclock_budget_sec": 30.0,
+      "restart_patience": 3000,
+      "restart_keep_best": true,
+      "rng_seed": 42,
+      "log_every": 100,
+      "early_stop_mismatch": 0.0
+    },
+    "rungs": []
+  },
+  "table": {
+    "synthetic_raw_fy_seed": {
+      "raw_fy_seed": [
+        {
+          "space_name": "raw_fy_seed",
+          "run_id": 0,
+          "n_iterations": 1000,
+          "wallclock_sec": 0.02,
+          "initial_energy": 1.0,
+          "best_energy": 0.995,
+          "best_theta": {
+            "seed": 1139027119
+          },
+          "best_iteration": 113,
+          "metropolis_accepts": 335,
+          "improvements": 3,
+          "restarts": 0,
+          "energy_trace": [
+            [
+              0,
+              1.0
+            ],
+            [
+              100,
+              1.0
+            ],
+            [
+              200,
+              0.999
+            ],
+            [
+              300,
+              0.998
+            ],
+            [
+              400,
+              0.999
+            ],
+            [
+              500,
+              0.999
+            ],
+            [
+              600,
+              1.0
+            ],
+            [
+              700,
+              0.998
+            ],
+            [
+              800,
+              0.997
+            ],
+            [
+              900,
+              1.0
+            ],
+            [
+              1000,
+              0.998
+            ],
+            [
+              1000,
+              0.998
+            ]
+          ],
+          "exact_match": false
+        }
+      ]
+    },
+    "synthetic_cycle_geometry": {
+      "cycle_geometry": [
+        {
+          "space_name": "cycle_geometry",
+          "run_id": 0,
+          "n_iterations": 1000,
+          "wallclock_sec": 0.67,
+          "initial_energy": 0.918,
+          "best_energy": 0.875,
+          "best_theta": {
+            "n_cycles": 9,
+            "size_head": 0.43722062399591505,
+            "size_decay": 0.95,
+            "p_geo": 0.5410240158874557,
+            "lane_width": 2,
+            "phase_seed": 93503397
+          },
+          "best_iteration": 906,
+          "metropolis_accepts": 295,
+          "improvements": 9,
+          "restarts": 0,
+          "energy_trace": [
+            [
+              0,
+              0.918
+            ],
+            [
+              100,
+              0.921
+            ],
+            [
+              200,
+              0.916
+            ],
+            [
+              300,
+              0.937
+            ],
+            [
+              400,
+              0.931
+            ],
+            [
+              500,
+              0.916
+            ],
+            [
+              600,
+              0.917
+            ],
+            [
+              700,
+              0.907
+            ],
+            [
+              800,
+              0.91
+            ],
+            [
+              900,
+              0.899
+            ],
+            [
+              1000,
+              0.915
+            ],
+            [
+              1000,
+              0.915
+            ]
+          ],
+          "exact_match": false
+        }
+      ]
+    },
+    "synthetic_hybrid_schedule": {
+      "hybrid_schedule": [
+        {
+          "space_name": "hybrid_schedule",
+          "run_id": 0,
+          "n_iterations": 1000,
+          "wallclock_sec": 0.05,
+          "initial_energy": 0.999,
+          "best_energy": 0.995,
+          "best_theta": {
+            "stages": [
+              {
+                "family": "affine",
+                "params": [
+                  71,
+                  778
+                ]
+              },
+              {
+                "family": "fy",
+                "params": [
+                  854316681
+                ]
+              },
+              {
+                "family": "fy",
+                "params": [
+                  1320763135
+                ]
+              },
+              {
+                "family": "affine",
+                "params": [
+                  553,
+                  773
+                ]
+              }
+            ]
+          },
+          "best_iteration": 32,
+          "metropolis_accepts": 320,
+          "improvements": 3,
+          "restarts": 0,
+          "energy_trace": [
+            [
+              0,
+              0.999
+            ],
+            [
+              100,
+              0.998
+            ],
+            [
+              200,
+              0.998
+            ],
+            [
+              300,
+              0.999
+            ],
+            [
+              400,
+              1.0
+            ],
+            [
+              500,
+              0.998
+            ],
+            [
+              600,
+              0.997
+            ],
+            [
+              700,
+              1.0
+            ],
+            [
+              800,
+              0.999
+            ],
+            [
+              900,
+              1.0
+            ],
+            [
+              1000,
+              0.997
+            ],
+            [
+              1000,
+              0.997
+            ]
+          ],
+          "exact_match": false
+        }
+      ]
+    },
+    "synthetic_cycle_arc": {
+      "cycle_arc": [
+        {
+          "space_name": "cycle_arc",
+          "run_id": 0,
+          "n_iterations": 1000,
+          "wallclock_sec": 0.17,
+          "initial_energy": 0.973,
+          "best_energy": 0.843,
+          "best_theta": {
+            "arcs": [
+              {
+                "anchor": 29,
+                "length": 14,
+                "stride": 16,
+                "direction": 1
+              },
+              {
+                "anchor": 435,
+                "length": 31,
+                "stride": 35,
+                "direction": -1
+              },
+              {
+                "anchor": 73,
+                "length": 17,
+                "stride": 11,
+                "direction": 1
+              },
+              {
+                "anchor": 880,
+                "length": 152,
+                "stride": 28,
+                "direction": 1
+              }
+            ]
+          },
+          "best_iteration": 164,
+          "metropolis_accepts": 424,
+          "improvements": 19,
+          "restarts": 0,
+          "energy_trace": [
+            [
+              0,
+              0.973
+            ],
+            [
+              100,
+              0.941
+            ],
+            [
+              200,
+              0.872
+            ],
+            [
+              300,
+              0.955
+            ],
+            [
+              400,
+              0.979
+            ],
+            [
+              500,
+              0.949
+            ],
+            [
+              600,
+              0.925
+            ],
+            [
+              700,
+              0.935
+            ],
+            [
+              800,
+              0.946
+            ],
+            [
+              900,
+              0.994
+            ],
+            [
+              1000,
+              0.991
+            ],
+            [
+              1000,
+              0.991
+            ]
+          ],
+          "exact_match": false
+        }
+      ]
+    }
+  }
+}

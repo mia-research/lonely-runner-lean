@@ -1,0 +1,21 @@
+{
+  "claim_id": "CLAIM-LRC-000044",
+  "provider": "manual_quorum_vote",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.95,
+  "rationale": [
+    "Proposition is explicit and falsifiable: specifies rates and ranges per family with clear computation rules.",
+    "Strong numeric reproducibility (max relative error 2.84e-15) confirms dataset values are stable.",
+    "Metric match and notation match pass; usable values extracted without truncation.",
+    "Claim is correctly framed as dataset-level observation, not a universal mathematical theorem.",
+    "Falsification rule based on recomputation from source ensures testability."
+  ],
+  "critical_risks": [
+    "Risk of misinterpretation as a general mathematical truth beyond the dataset.",
+    "Dependent on the integrity of the source file and schema consistency.",
+    "Empirical rates may change with different data or experimental conditions."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Approve as dataset-specific empirical claim. For publication, clearly label as observational and include access to source data for verification.",
+  "submitted_utc": "2026-02-28T14:30:00Z"
+}

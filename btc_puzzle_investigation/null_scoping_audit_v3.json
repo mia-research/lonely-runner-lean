@@ -1,0 +1,198 @@
+[
+ {
+  "src": "CLAIMS.md:73",
+  "claim_verdict": "PARTIAL",
+  "artifact": "\u2014",
+  "artifact_verdict": "NO-POINTER",
+  "text": "| M30 | Characters index \u03bc\u2086 orbits \u2014 9\u03c3 grading + scoped null on blocking | `[VERIFIED]`+scoped null | v1"
+ },
+ {
+  "src": "CLAIMS.md:78",
+  "claim_verdict": "PARTIAL",
+  "artifact": "\u2014",
+  "artifact_verdict": "NO-POINTER",
+  "text": "| M35 | **Semaev structure**: prime-field first-fall degree is a **FORCED support invariant** \u2014 no lever "
+ },
+ {
+  "src": "CLAIMS.md:93",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "\u2014",
+  "artifact_verdict": "NO-POINTER",
+  "text": "| N5 | Unbounded / growing-degree corner of the character-sum bounds | `[GAP]` \u2014 no reduction in hand | v"
+ },
+ {
+  "src": "CLAIMS.md:96",
+  "claim_verdict": "PARTIAL",
+  "artifact": "NOTE_n8_pencil_reduction_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "| N8 | **Why does `e\u2082=e\u2081\u00b2\u2212\u03c7\u2082(\u22121)p` hold?** **+2026-09-01d: REDUCED TO ONE LEMMA** (`NOTE_n8_pencil_reduct"
+ },
+ {
+  "src": "CLAIMS.md:105",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_nonarchimedean_purity_statement_v1.md",
+  "artifact_verdict": "ARTIFACT-PARTIAL",
+  "text": "| N31 | Non-archimedean purity citation | **RESOLVED** \u2192 P20. `RESULT_nonarchimedean_purity_statement_v1."
+ },
+ {
+  "src": "CLAIMS.md:114",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "\u2014",
+  "artifact_verdict": "NO-POINTER",
+  "text": "| A-2a | \"0 operational reads wider than the layer\" | **RESOLVED to OPEN** (suppression-direction fix) | "
+ },
+ {
+  "src": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Current status (under review):** `[null \u2014 cofactor / sampling artifact, mechanism identified, model sca"
+ },
+ {
+  "src": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "deviations in `..._DEVIATIONS.md`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL / collapse, both firing controls "
+ },
+ {
+  "src": "RESULT_chirp_hologram_plane_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_chirp_hologram_plane_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "# The quadratic-phase (\"chirp\") plane: a new object, its one dark fringe, and a scoped null"
+ },
+ {
+  "src": "RESULT_cm_jointset_excess_v3.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_cm_jointset_excess_v3.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade:** `[VERIFIED-scope \u2014 scoped null; discovery + OOS confirmation + scale ladder to 2\u00b9\u2076, R=10\u2074, all"
+ },
+ {
+  "src": "RESULT_cm_jointset_higherorder_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_cm_jointset_higherorder_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "# RESULT \u2014 A-joint-HO (higher-order / GLV / finer-label joint-set synergy): discovery-tier scoped null"
+ },
+ {
+  "src": "RESULT_h5_cofactor_restoration_v1.md",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "RESULT_h5_cofactor_restoration_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "- **M25 / N22 H1 leg** \u2192 re-graded from `[null \u2014 cofactor/sampling artifact]` to"
+ },
+ {
+  "src": "RESULT_h5_cofactor_restoration_v2.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_h5_cofactor_restoration_v2.md",
+  "artifact_verdict": "ARTIFACT-PARTIAL",
+  "text": "- **M25 / N22 H1 leg** stays `[null \u2014 cofactor/sampling artifact, model scale]`, now upgraded in"
+ },
+ {
+  "src": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`. The channel is **not** closed; \u00a74 states what is untouched."
+ },
+ {
+  "src": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "# RESULT \u2014 ITEM 2 REMAINDER: spatial statistics of `|T(a,b)|\u00b2`. No structure established; THREE artifacts"
+ },
+ {
+  "src": "RESULT_islands_curveimage_jointset_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_islands_curveimage_jointset_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade: `[EMPIRICAL \u2014 scoped null, pre-registered, all controls live]`.** Executes"
+ },
+ {
+  "src": "RESULT_islands_curveimage_jointset_v2.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_islands_curveimage_jointset_v2.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade: `[EMPIRICAL \u2014 scoped null on S1/S2/S3 only, pre-registered, controls live]`.**"
+ },
+ {
+  "src": "RESULT_joint_shadow_decompose_v2.md",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "RESULT_joint_shadow_decompose_v2.md",
+  "artifact_verdict": "ARTIFACT-PARTIAL",
+  "text": "unverified mechanism (\"joint rho2\u22481 because |U| is flat\") and used dismissal language"
+ },
+ {
+  "src": "RESULT_mu3_glv_frequency_support_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_mu3_glv_frequency_support_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade:** `[EMPIRICAL \u2014 scoped null, \u03c4-robust, well-powered]`. **No grade change** to the underlying"
+ },
+ {
+  "src": "RESULT_mu3_phase_within_triple_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_mu3_phase_within_triple_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade:** `[EMPIRICAL \u2014 scoped null, corrected null]`. No grade change to the \u221213.99\u03c3 deficit"
+ },
+ {
+  "src": "RESULT_mu3_subspace_residual_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_mu3_subspace_residual_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "# RESULT \u2014 \u03bc\u2083-forced subspace residual: three probes, scoped null on the powered-strata"
+ },
+ {
+  "src": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "`[VERIFIED \u2014 scoped NULL, m\u2208{2,3}, p\u2208[523,601], last-fall degree]`."
+ },
+ {
+  "src": "RESULT_n15_joint_readout_confinement_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_n15_joint_readout_confinement_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "# RESULT \u2014 N15 joint multi-readout confinement: scoped null on constructed secp keys"
+ },
+ {
+  "src": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "rmt_delta3_twopoint_v1.py",
+  "artifact_verdict": "SCRIPT-ONLY",
+  "text": "**Date:** 2026-08-01. **Script:** `rmt_delta3_twopoint_v1.py`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`."
+ },
+ {
+  "src": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "**Grade:** `[VERIFIED-scope \u2014 scoped null / no computational advantage; fair op-model, two model curves,"
+ },
+ {
+  "src": "masked_structure_findings_v1.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "masked_structure_findings_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "### A \u2014 \u03bc\u2083-invariant cubic moment `E[z\u00b3]` [null, scoped, well-controlled]"
+ },
+ {
+  "src": "masked_structure_findings_v26.md",
+  "claim_verdict": "PARTIAL",
+  "artifact": "masked_structure_findings_v26.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "Tautology \u2260 no structure (D\u2096\u2099/D_err is how we found the Eisenstein lift, rhombus, sextic, 3/4-1/8-1/8)."
+ },
+ {
+  "src": "phi_n_native_knd_findings_v1.md",
+  "claim_verdict": "UNDERSCOPED",
+  "artifact": "phi_n_native_knd_findings_v1.md",
+  "artifact_verdict": "ARTIFACT-CARRIES",
+  "text": "(the user's RH-line framework), not generic ML. Prior \"k has no structure\" nulls"
+ }
+]

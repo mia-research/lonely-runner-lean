@@ -1,0 +1,8 @@
+task_id,claim_id,ingest_status,result_status,external_quorum_complete,reason
+QRM-LRC-0001,CLAIM-LRC-000055,ingested,executed_live,yes,ok
+QRM-LRC-0003,CLAIM-LRC-000053,ingested,executed_live,yes,ok
+QRM-LRC-0004,CLAIM-LRC-000054,ingested,executed_live,yes,ok
+QRM-LRC-0006,CLAIM-LRC-000032,ingested,executed_live,yes,ok
+QRM-LRC-0007,CLAIM-LRC-000045,ingested,executed_live,yes,ok
+QRM-LRC-0009,CLAIM-LRC-000046,ingested,executed_live,yes,ok
+QRM-LRC-0010,CLAIM-LRC-000041,ingested,executed_live,yes,ok

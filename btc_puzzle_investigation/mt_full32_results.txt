@@ -1,0 +1,5 @@
+MT FULL 2^32 (C engine) — all 3 models — elapsed 8881s — hit-run=70
+  MT randrange: best run  8/70 (seed 4096789537)
+  MT topbit   : best run  8/70 (seed 4142476650)
+  MT reject   : best run  8/70 (seed 3485239186)
+VERDICT: NO HIT — full 2^32 integer-seed space RULED OUT for Python MT (all 3 models).

@@ -1,0 +1,38 @@
+{
+  "cycle_id": "cycle_002",
+  "step": "step7_dossiers_uncapped_measurement_fix",
+  "ranking": {
+    "rows": 27,
+    "recommendation_counts": {
+      "promote_to_claim_dossier": 23,
+      "measurement_fix_then_promote": 4
+    }
+  },
+  "queue_numeric": {
+    "rows": 27,
+    "queue_status_counts": {
+      "executed": 27
+    },
+    "ladder_status_counts": {
+      "stable": 27
+    }
+  },
+  "uncapped_batch3": {
+    "selected": 5,
+    "status_counts": {
+      "stable": 5
+    }
+  },
+  "dossiers": {
+    "index_rows": 23,
+    "markdown_files": 23
+  },
+  "measurement_fix": {
+    "rows": 4,
+    "family_counts": {
+      "general_lrc_metric_pack": 1,
+      "residue_error_pack": 2,
+      "statistical_significance_pack": 1
+    }
+  }
+}

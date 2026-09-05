@@ -1,0 +1,20 @@
+{
+  "claim_id": "CLAIM-LRC-000049",
+  "provider": "Gemini",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.92,
+  "rationale": [
+    "Test 1 demonstrates absolute detection accuracy (perfectMatch=true) for coprime residues within the range n=3..12.",
+    "High-precision verification (relative error 2.77e-34 vs mpmath) confirms the underlying numeric stability of the LRC implementation.",
+    "Test 2 identifies a distinct and sharp phase transition in numerical stability at 1e-08, providing a falsifiable boundary for implementation robustness.",
+    "Test 3 confirms monotonic growth of complexity indicators (avgBoundaryCount), though it lacks a formal scaling law."
+  ],
+  "critical_risks": [
+    "Metric Ambiguity: The 'maxError' metric in Test 1 (up to 0.25) reflects grid-resolution constraints rather than detection inaccuracy, necessitating the 'align_metric_definition' fix.",
+    "Implementation Sensitivity: The sharp breakdown at 1e-08 suggests the method is highly sensitive to double-precision floating-point limits or specific internal thresholds.",
+    "Domain Limitation: The small sample range (n up to 12) prevents the extrapolation of these results to higher number-theoretic complexity classes."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "The claim is empirically robust for the specified dataset. The 'partial' metric match is adequately explained by the grid-resolution nature of the maxError metric. Publication is recommended as an empirical verification report, with caveats that the findings (particularly complexity and fragility) are implementation-specific and limited to the tested range of n.",
+  "submitted_utc": "2026-02-28T17:51:40Z"
+}

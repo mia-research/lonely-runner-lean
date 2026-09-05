@@ -1,0 +1,346 @@
+[
+ {
+  "src": "CLAIMS.md:67",
+  "text": "| M24 | Universal phase channel, k=3 exclusive. **Null:** conditional MI of every contorted keyed readout given `d` is at the permutation null \u21d2 **no keyed-readout channel above that floor over 14/14 primes, `p\u2208[5000,65000]`**; structure lives in the free parameter `b`. *(Was worded \"NOT a leakage channel\" \u2014 object-language on a test-bounded result; the artifact's scope column was dropped in the v12\u2192ledger compression.)* `POSITIVE_FINDINGS_MASTER_v12.md` \u00a7XIV + `CONFIRMED_k3_phase_channel_weierstrass_v1.md` | `[EMPIRICAL]` | v12 \u00b7 scope restored 2026-09-05 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:68",
+  "text": "| M25 | Semaev CM relation-yield lever. **Null:** no j0-specific excess **> \u00b15% yield** (95% CI on mean diff `[\u22120.081,+0.053]`) at **MDE 0.095 log-units**, over **matched `p\u2208[523,823]`, indices k=2/4/6, |V|=6, m=3, K=25**. \u26a0 v2's table covered **20 of 24** j0 primes and omitted the three **highest-lever** indices (n\u2082=14,16,24) \u2014 run 2026-09-05, tail mean \u22120.081, null holds. Arm C verdict **UNFORCED**: a planted lever of v1's size fires at z=+12.5 through the same matched control. `RESULT_h5_cofactor_restoration_v2.md` | **`[null \u2014 cofactor/sampling artifact, model scale]`** (was `[A\u2212]`) \u00b7 **\u26a0 OWED EXTERNAL REVIEW** (v18 \u00a7B: bias-direction conversion) \u00b7 v2 correction: at matched p AND index, confinement fully reproduces j0's lever, **no residual** (v1's residual was a p-scale confound) | v15 H-5; v18 B; 2026-08-31 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:69",
+  "text": "| M26 | x-closure effect **IS \u03b2/CM-specific**, mechanism = GLV relation-triples. **Scope:** `p\u2208{211,307,421,631,907,1093}` (\u22611 mod 3, j=0), m=3, `|V|\u2208{9,12}`, S=18 instances/arm, K=30 generic; orbits at the permutation-null floor `perm_p=0.001`, both `|V|` arms. \u26a0 **\"scaling FLAT\" conflicts with the artifact**, whose P-b row reads **6/6 primes non-flat/rising** \u2014 resolve which quantity each refers to before quoting either. `RESULT_h2_order3_cm_specific_v1.md` | `[VERIFIED]` upgraded | v15 H2 \u00b7 flagged 2026-09-05 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:70",
+  "text": "| M27 | GLV/cubic-character orbit readout exact on real puzzle keys #135/#140. **Null:** 0 operational reduction *on those two keys, at the tested readout class* \u2014 **no power figure and no artifact pointer found in the corpus** (the phrase occurs only here and in `ANALYSIS_intersection_leads_v1.md`). **\u26a0 OWED: locate the establishing artifact or restate with X/Y/Z.** Until then \"0\" is unconditional wording on `[VERIFIED]`. | `[VERIFIED]` | v12 \u00b7 flagged 2026-09-05 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:73",
+  "text": "| M30 | Characters index \u03bc\u2086 orbits \u2014 9\u03c3 grading + scoped null on blocking | `[VERIFIED]`+scoped null | v12 |",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "CLAIMS.md:77",
+  "text": "| M34 | **A_new cyclic whenever `M=p\u00b2+p+1` squarefree**; automatic-\u221ap witness `r=1+p`; S-visibility = embedding-sign question. **S-blindness RARE: 1 blind point (211's \u2113=13) in ~25 (p,\u2113); plain Legendre law FAILS; `\u2113\u22617 mod 12` seen 6/6** | `[VERIFIED]` \u00b7 **the `\u2113 mod 12` law is DISSOLVED by M39/SB** | 2026-08-27 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:78",
+  "text": "| M35 | **Semaev structure**: prime-field first-fall degree is a **FORCED support invariant** \u2014 no lever from group-law coefficients or `S_m` symmetry. **\u26a0 STALE CLAUSE (fixed 2026-09-01c): \"symmetric reduction RAISES solving degree\" was WITHDRAWN by `RESULT_semaev_symmetric_reduction_lastfall_v2`** \u2014 a censored Macaulay statistic; the blind exact `d_gb` re-measurement gives **LOWERS, 6\u21922** | `[VERIFIED-scope]` \u00d73 scoped component nulls \u00b7 **\u26a0 2026-09-02: the growth-rate reading (\"d_ff tracks 2^{m\u22121} \u21d2 the non-subexponential direction\") is WITHDRAWN as an inference \u2014 see M40, d_ff is a closed-form combinatorial quantity** | 2026-09-02 |",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "CLAIMS.md:83",
+  "text": "| M40 | **Scope: this harness only** \u2014 m=2 `|V|=2..8`, m=3 OOS `|V|=3..7`, 12/12 exact. `RESULT_semaev_dff_closed_form_v1.md`. **Semaev `d_ff` has a CLOSED FORM** in this harness: `d_ff = max(2^{m\u22121},\\|V\\|) + (m\u22121)\u00b72^{m\u22121}` \u2014 the S-pair lcm of the dense box's unique top monomial with `x_i^{\\|V\\|}`. **Verified 12/12 exact** (m=2, \\|V\\|=2..8; m=3 OOS, \\|V\\|=3..7 incl. the non-obvious flat at \\|V\\|=3,4). **No arithmetic content** \u2014 explains the zero variance over 24 draws. m=4 \u21d2 **32**, and v2 used `Dmax=30`, so \"CENSORED >30\" was guaranteed a priori; m=5 \u21d2 80 by hand. In the real regime `\\|V\\|\u2248p^{1/m}` it is **linear in the factor base**, so it can never be low \u21d2 **cannot test the Petit\u2013Quisquater assumption in either direction**. `RESULT_semaev_dff_closed_form_v1` | `[PROVED \u2014 derivation]` + `[VERIFIED \u2014 12/12]` | 2026-09-02 |",
+  "analytical": true,
+  "power": true,
+  "scope": true,
+  "verdict": "ANALYTICAL"
+ },
+ {
+  "src": "CLAIMS.md:93",
+  "text": "| N5 | Unbounded / growing-degree corner of the character-sum bounds | `[GAP]` \u2014 no reduction in hand | v12 |",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "src": "CLAIMS.md:95",
+  "text": "| N7 | *(artifact: `RESULT_subrayleigh_cubic_coherence_v1.md`; refutation arm `RESULT_n7_finite_rank_refuted_v1.md`, graded there `[EMPIRICAL \u2014 suggestive, n=6, min-statistic]`)* **Sub-Rayleigh deficit** \u2014 0.06\u20130.10%, one-directional, Stouffer \u221271.8 (30 primes), survives the Hermitian matched null, **persistent over a 79\u00d7 p-range**. Carried by the **low tail** (+130\u2013166%) + high tail (+27\u201374%), offset by a mid excess; **~8% near-zero excess, stabilising**; `M4` structurally blind (`r\u2074\u22480` there); **every character**, and **no (b,c) locus** | **carrier STILL UNIDENTIFIED.** Note: `R\u00b2=0.563` is the fraction the smooth \u03b4(p,n) surface *explains* (~44% residue), and after surface removal there is no residue at `a_p mod 3/4`. **+2026-09-02: free-phase FINITE-RANK REFUTED** (pre-registered; r=4 over-predicts the near-zero excess ~6\u00d7, +50% vs measured +6\u20138%; Rayleigh out-fits r=4 on the char bulk). Null **confirmed Rayleigh** (N7-A). `c=0` depletion **retired as probably finite-size** (min-ratio 1.7\u00d7\u21920.7\u00d7 over p=349\u21922089) \u2014 narrowed, not discharged (min-statistic, n=6). **Untested:** a *constrained* one-angle/\u03c9-orbit finite-rank model; imaginary-part isotype; higher-order phase invariants; co-occurrence arms | 2026-09-02 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:96",
+  "text": "| N8 | **Why does `e\u2082=e\u2081\u00b2\u2212\u03c7\u2082(\u22121)p` hold?** **+2026-09-01d: REDUCED TO ONE LEMMA** (`NOTE_n8_pencil_reduction_v1.md`). The `p+1` `F_p`-rational degree-2 divisors with `sum(D)=R` are the fibres of `\u03c6_R:E\u2192P\u00b9` from `\\|(R)+(O)\\|`; `\u03c7\u2082(N(z))=\u03c7\u2082^{(2)}(z)` makes the fibre-norm of `y` ONE function on the pencil. **LEMMA: `n` odd \u21d2 `Sp(R) \u2212 I(R) = 1` for every `R\u2260O`** (split minus inert, `(O)+(R)` weight 0) \u2014 `[VERIFIED \u2014 exact, all R, 5 curves, j=0 AND non-j=0; even-n control fails at EVERY R]`. The remainder is closed-form and machine-checked: `Sp=(h\u2081+1)/2`; `h\u2081(O)=(n\u22121)\u03c7`; **`I(O)=\u2212\u03c7(2p+1\u2212n)/2`** (`Frob Q=\u2212Q \u21d2 \u03c7\u2082^{(2)}(y_Q)=\u2212\u03c7` constant, set = quadratic twist, size `2p+2\u2212n`); \u21d2 `V\u2081\u00b2\u2212V\u2082=(n\u22121)\u03c7\u22122I(O)=2\u03c7p`. **`n` odd is used three independent times.** Also: `n` odd \u27fa `x\u00b3+Ax+B` IRREDUCIBLE \u27fa **Frobenius 3-cycles `E[2]\u2216{O}`** \u2014 the source of the \u03b6\u2083 on a curve with no \u03bc\u2083 automorphism; **+same day: LEMMA MADE EXPLICIT.** Translating by the rational `Q\u2080=R/2` turns the pencil into the fibres of `x`, so **Lemma \u27fa `\u03a3_{c\u2208F_p} \u03c7\u2082(f(c)) = 0` for the DEGREE-7 `f(c)=(c\u00b3+Ac+B)\u00b7\u220f_i(c\u2212x(T_i+Q\u2080))\u00b7(c\u2212x(Q\u2080))`** \u2014 `[VERIFIED \u2014 exact, every R, 6 curves j=0 and non-j=0]`. Mechanism reconstructed: `E[2]` descends to a **Klein four-group of M\u00f6bius involutions of `P\u00b9=E/\u00b1`**, `\u03c3_i(x)=(t_ix+2t_i\u00b2+A)/(x\u2212t_i)`; `n` odd \u27f9 Frobenius 3-cycles them \u27f9 the three nontrivial `V`-characters are permuted cyclically \u27f9 trace 0. Matches P19's route, re-derived from scratch and made laptop-checkable. **+PROOF OUTLINE:** `f` has branch locus `x(E[2]) \u222a x([2]\u207b\u00b9R)` (8 pts with \u221e) \u21d2 `C:y\u00b2=f` genus 3, `V`-stable, `C/V\u2245P\u00b9`, three genus-1 quotients, `Jac(C)~E\u2081\u00d7E\u2082\u00d7E\u2083` **cyclically permuted by Frobenius \u21d2 trace 0**. **Mechanism's own falsifier RUN and PASSED**: sum vanishes over `F_p` AND `F_{p\u00b2}` (Frob\u00b2 still a 3-cycle) and is NONZERO over `F_{p\u00b3}` (Frob\u00b3 trivial) \u2014 4 curves; and every `F_{p\u00b3}` value is **divisible by 3**, independently corroborating the three-block decomposition. Steps 3\u20134 (genus formula, Kani\u2013Rosen) standard, not written out. **\u26a0 dead hand-step recorded:** `Jac(C_R)\u2245E` for the quartic is FALSE (`\u03a3_c\u03c7\u2082(q_R)` varies with `R`) **+2026-09-04 (duplication notice, no grade move):** a later session re-derived this row's content from scratch \u2014 the `n`-odd hypothesis, the `Q\u2080=R/2` translation, the degree-7 x-line reduction, the genus-3 framing, the `R=O` evaluation, and `s\u2081=s\u2082=0` (= the falsifier's `F_p`/`F_{p\u00b2}` columns) \u2014 in `NOTE_n8_{pointwise_convolution,branch_confinement,twist_reduction,mu3_structure}_v1.md`, having run neither `check_ledger.py` nor read this file. Those notes carry withdrawal/supersession headers. **\u26a0 One of them asserts the `t\u00b3`-structure comes from a \u03bc\u2083 action / CM by `Z[\u03c9]`. That is REFUTED by this row's own data** \u2014 the Lemma holds on **non-`j=0`** curves with no \u03bc\u2083 automorphism; the \u03b6\u2083 is **Galois** (Frobenius 3-cycling `E[2]\u2216{O}`), not CM. The distinguishing test is `k=3`: CM-style reasoning stops at `k=1,2` where both stories agree, while the block story predicts **nonzero over `F_{p\u00b3}`, divisible by 3** \u2014 already run here. | 2026-09-01d |",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "CLAIMS.md:101",
+  "text": "| N13 | \u03bc\u2083-graded syzygy module \u2014 scoped NULL, not a wall | matched-quo Betti sweep + m=4/5 owed; **m=4 wall: `d_ff>30` after 114 min, m=5 unreachable by brute Macaulay** | 2026-08-31 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:103",
+  "text": "| N15 | **Joint multi-readout restriction.** **Null:** no cheap `f(d)` predicts the joint 18-cell readout above the family-wise permutation floor \u2014 **detectable at 7.7e-3 bits against a ceiling H(T)=3.647 bits**, over **bands 32/64/128/256 at N=100,000 plus `b=16` full enumeration**, frozen 45-predictor family. The floor **rises** as readouts are added (2.585\u21923.65), so this is a bound, not a ceiling. Arm C verdict **UNFORCED** (planted joint-only signal reaches the floor at 0.92 bits while all per-readout MIs stay at 5e-5\u20139e-5). \u26a0 **Two supporting sentences are FORCED**: the \"max predictor = `d%7+d%12` in 5/5 bands\" is fixed by alphabet size (same argmax on shuffled T, \u03c1(I,K)=0.993), and \"far below the singleton floor 1.35e-3\" cites the wrong table's floor (own floor 1.59e-4). \u26a0 **4 prereg departures unrecorded in DEVIATIONS**: B=9999\u21922000; 8 bands\u21924; the mandated second joint plant absent; \"full log archived\" \u2014 no log exists tree-wide. `RESULT_n15_joint_readout_confinement_v1.md` | `[VERIFIED-scope \u2014 scoped null]` (was OPEN since v11) \u00b7 **\u26a0 OWED EXTERNAL REVIEW** (v18 \u00a7B) \u00b7 named untested channels remain | v17; v18 B |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:105",
+  "text": "| N31 | Non-archimedean purity citation | **RESOLVED** \u2192 P20. `RESULT_nonarchimedean_purity_statement_v1.md` \u00a72 **REFUTED exactly** (its \"all slopes \u00bd\" is the supersingular condition, not purity) | 2026-09-01a |",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "CLAIMS.md:106",
+  "text": "| N39 | A-joint-HO, 6 channels | scoped null, model scale. **\u26a0 NO ARTIFACT IN THE CORPUS** \u2014 the identifier `N39` occurs only in this file and `POSITIVE_FINDINGS_MASTER_v17.md`; no establishing document, no script, no power figure, no channel list. **OWED: locate or retire.** | v17 \u00b7 flagged 2026-09-05 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:110",
+  "text": "| SB | **S-blindness \u2014 NOT a character question (M39).** Expected blind under the `1/\u2113` model over the 17 tested `(p,\u2113)` pairs = **0.865**; observed **1**; `P(\u22651 blind)=0.60`. The `\u2113\u22617 mod 12` \"6/6 seen\" is really **14/14 with 0.76 expected blind** (`P\u22480.47`) \u2014 post-hoc class-carving around one event. `(211,13)` is **FORCED by the sweep's arbitrary `\u03b2`**: `\u03b2=14`, `\u03b2\u00b2=196<211` so `b\u2082=\u03b2\u00b2` exactly, and `\u03b2\u22121=13\\|M` \u21d2 `\u03b2\u2261b\u2082\u22611 mod 13` \u21d2 `\u03bb\u22611+c+c\u00b2\u22610` for either `c`. **Convention-driven, like \u03c1_p.** Scan: **3/139** primes `p\u22617 mod 12` in `[13,4000)` are forced-blind, all `\u2113=13`, 211 among them | **\u27f3 PROPOSED: close as a `1/\u2113` coincidence.** **PR4 \u2705 CONFIRMED** (\u03b2-swap at 211: both \u03b2 give SEES[3,31,37]/BLIND[13] \u2014 identical, **no exchange \u21d2 eigenplane model REFUTED**). PR1\u2013PR3 open | 2026-09-02 |",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "CLAIMS.md:114",
+  "text": "| A-2a | \"0 operational reads wider than the layer\" | **RESOLVED to OPEN** (suppression-direction fix) | v17 |",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "src": "EXTERNAL_REVIEW_PROMPT_M25_N15_v1.md",
+  "text": "**Current status (under review):** `[null \u2014 cofactor / sampling artifact, mechanism identified, model scale]`.",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_boundary_D_short_interval_CM_invariant_v1.md",
+  "text": "deviations in `..._DEVIATIONS.md`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL / collapse, both firing controls fired]`.",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_brick_e_cd_degree_v1.md",
+  "text": "# RESULT \u2014 Brick E, p=43: `c\u207a(d)` is generic-degree (scoped NULL, lowest-power rung)",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "RESULT_chirp_hologram_plane_v1.md",
+  "text": "# The quadratic-phase (\"chirp\") plane: a new object, its one dark fringe, and a scoped null",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_cm_jointset_excess_v3.md",
+  "text": "**Grade:** `[VERIFIED-scope \u2014 scoped null; discovery + OOS confirmation + scale ladder to 2\u00b9\u2076, R=10\u2074, all firing controls fired]`",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_cm_jointset_higherorder_v1.md",
+  "text": "# RESULT \u2014 A-joint-HO (higher-order / GLV / finer-label joint-set synergy): discovery-tier scoped null",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_glv_norm_readout_matched_null_v1.md",
+  "text": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power and scope stated in \u00a74. **The avenue is NOT closed.**",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "RESULT_h5_cofactor_restoration_v1.md",
+  "text": "- **M25 / N22 H1 leg** \u2192 re-graded from `[null \u2014 cofactor/sampling artifact]` to",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "src": "RESULT_h5_cofactor_restoration_v2.md",
+  "text": "- **M25 / N22 H1 leg** stays `[null \u2014 cofactor/sampling artifact, model scale]`, now upgraded in",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_incomplete_sum_2p128_firstorder_v1.md",
+  "text": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`. The channel is **not** closed; \u00a74 states what is untouched.",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_intensity_field_spatial_item2b_v1.md",
+  "text": "# RESULT \u2014 ITEM 2 REMAINDER: spatial statistics of `|T(a,b)|\u00b2`. No structure established; THREE artifacts caught by controls.",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "src": "RESULT_interval_inversion_and_hamming_v1.md",
+  "text": "**Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power stated. **Neither covariate is closed as a channel.**",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "RESULT_interval_sumobject_item3_v1.md",
+  "text": "**Log:** `item3_run_v1.log`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`, power measured.",
+  "analytical": false,
+  "power": true,
+  "scope": true,
+  "verdict": "SCOPED"
+ },
+ {
+  "src": "RESULT_islands_curveimage_jointset_v1.md",
+  "text": "**Grade: `[EMPIRICAL \u2014 scoped null, pre-registered, all controls live]`.** Executes",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_islands_curveimage_jointset_v2.md",
+  "text": "**Grade: `[EMPIRICAL \u2014 scoped null on S1/S2/S3 only, pre-registered, controls live]`.**",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_joint_shadow_decompose_v2.md",
+  "text": "unverified mechanism (\"joint rho2\u22481 because |U| is flat\") and used dismissal language",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ },
+ {
+  "src": "RESULT_mu3_glv_frequency_support_v1.md",
+  "text": "**Grade:** `[EMPIRICAL \u2014 scoped null, \u03c4-robust, well-powered]`. **No grade change** to the underlying",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_mu3_phase_within_triple_v1.md",
+  "text": "**Grade:** `[EMPIRICAL \u2014 scoped null, corrected null]`. No grade change to the \u221213.99\u03c3 deficit",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_mu3_subspace_residual_v1.md",
+  "text": "# RESULT \u2014 \u03bc\u2083-forced subspace residual: three probes, scoped null on the powered-strata",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_mu6_isotypic_solving_degree_P2b_v1.md",
+  "text": "`[VERIFIED \u2014 scoped NULL, m\u2208{2,3}, p\u2208[523,601], last-fall degree]`.",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_n15_joint_readout_confinement_v1.md",
+  "text": "# RESULT \u2014 N15 joint multi-readout confinement: scoped null on constructed secp keys",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_rmt_delta3_twopoint_item2_v1.md",
+  "text": "**Date:** 2026-08-01. **Script:** `rmt_delta3_twopoint_v1.py`. **Grade:** `[EMPIRICAL \u2014 SCOPED NULL]`.",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "RESULT_t2c_carry_partition_kangaroo_bench_v1.md",
+  "text": "**Grade:** `[VERIFIED-scope \u2014 scoped null / no computational advantage; fair op-model, two model curves,",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "masked_structure_findings_v1.md",
+  "text": "### A \u2014 \u03bc\u2083-invariant cubic moment `E[z\u00b3]` [null, scoped, well-controlled]",
+  "analytical": false,
+  "power": false,
+  "scope": true,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "masked_structure_findings_v26.md",
+  "text": "Tautology \u2260 no structure (D\u2096\u2099/D_err is how we found the Eisenstein lift, rhombus, sextic, 3/4-1/8-1/8).",
+  "analytical": false,
+  "power": true,
+  "scope": false,
+  "verdict": "PARTIAL"
+ },
+ {
+  "src": "phi_n_native_knd_findings_v1.md",
+  "text": "(the user's RH-line framework), not generic ML. Prior \"k has no structure\" nulls",
+  "analytical": false,
+  "power": false,
+  "scope": false,
+  "verdict": "UNDERSCOPED"
+ }
+]

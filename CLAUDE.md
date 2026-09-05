@@ -2,6 +2,27 @@
 
 These OVERRIDE default behaviour for this project. Most important rules first.
 
+## Driver: substrate independence
+
+**`~/.claude/CLAUDE.md` §0 is the overarching driver and governs here.** In short: a
+construct carried across disciplines gets a **verification demand** (exhibit the
+isomorphism -- which state space, which constraints, is it additive) and never a **type
+objection** ("entropy is physical, that is a metaphor"). Mathematics is the substrate;
+thermodynamics is substrate-independent mathematics discovered in heat engines, not a
+theory about them. Lineage and citations live in the canonical file -- do not restate
+them here, and do not let this file drift from it.
+
+In this project specifically:
+
+- The LRC proof runs on measure and equidistribution arguments. Equidistribution is a
+  maximum-entropy statement over a state space, and Theorem 5.2's CRT measure
+  factorisation is a counting result before it is a measure-theoretic one. Framing them
+  that way is legitimate and usually clarifying, not a loosening of rigour.
+- When delegating a second opinion, ask the subagent **which axiom of the mapping fails**,
+  not whether the analogy is "valid". The second phrasing invites a type objection back.
+
+---
+
 ## 0. Tooling: Claude Code only
 
 **No local LLM agents.** Qwen, DeepSeek, Gemma, and Codex subagent scripts
@@ -38,9 +59,92 @@ needs an independent eye.
 | Reviewing the current diff for correctness | bundled `code-review` skill (`/code-review`) — fresh-context reviewer |
 | Independent second opinion on a proof section, plan, or refactor | `Agent` with a self-contained prompt: state the claim, what to check, what counts as a finding |
 | Routine prose/threshold/dedup checks | inline in the main conversation — no special agent needed |
+| **A claim rests on a citation** (`[CITED]`, `[PROVED\|KS]`, any literature bound) — **mandatory before a grade moves up on a citation's strength** | **`citation-verifier`** |
+| **Promoting any consolidated / handover / master / summary document** — **mandatory, before promotion** | **`compile-diff`** |
+| **Before running any leakage test, sweep, scan, or anomaly drill** — **mandatory, pre-registration** | **`experiment-designer`** |
+| **Writing or revising any `feedback_*` / `project_*` memory** — **mandatory** | **`memory-drafter`** |
 
 Trust-but-verify: a subagent's summary is what it intended to do, not always
 what it did. After a subagent writes or edits, spot-check the diff.
+
+### 2a. When a mandatory gate is UNAVAILABLE  *(decided 2026-07-30)*
+
+A gate that cannot run must not become an open-ended moratorium. Distinguish two
+cases — they are not the same and only one licenses proceeding:
+
+- **Gate FAILED** (it ran and reported a defect) → the defect blocks. Fix it.
+- **Gate UNAVAILABLE** (it could not run at all — org access, rate limit,
+  outage) → the work may proceed **PROVISIONALLY**, under all four conditions
+  below. The standing precedent is unchanged and still governs the *failed*
+  case: *a run that did not complete is a run that did not happen, not a run
+  that passed.*
+
+**Conditions for a provisional run — all four, or the hold stands:**
+1. Tag every output `[PROVISIONAL — <gate> unavailable]`. Not a footnote; in the
+   grade slot, where a reader looks for the grade.
+2. Attach a self-audit that names its own **uncovered** sections explicitly.
+   Absence from a self-audit is not clearance.
+3. Record the gate as **owed**, with the date it was attempted and why it failed.
+4. **No grade promotion** until the gate clears. A provisional run produces
+   evidence; it cannot move a claim up a grade.
+
+**What a self-audit can and cannot discharge.** §2b names *context isolation* as
+the mechanism. Isolation is load-bearing against **frame** errors — where a spec
+quietly presupposes its answer — and buys nothing against **mechanical** errors,
+where a simulator or a grep decides and the frame cannot corrupt the number.
+Evidence (2026-07-29): a self-audit with no isolation found a severe power defect
+in the very spec it was auditing.
+
+| layer | pre-reg sections | self-audit sufficient? |
+|---|---|---|
+| **mechanical** | statistic, power, exactness, "does the plant fire" | **yes**, with the artifact |
+| **frame** | object/disjointness, matched-control adequacy, scope, falsification, pre-commitment | **no** — isolation is the mechanism |
+
+A provisional run therefore carries the most risk on the frame layers; the
+`[PROVISIONAL]` tag must name which of them went unaudited.
+
+**This branch covers infrastructure, never inconvenience.** "The gate is slow /
+I am confident / the spec is simple" is not unavailability.
+
+### 2b. The four specialist agents — why they exist and the rules that bind them
+
+Defined in `.claude/agents/`. Rationale and evidence:
+`btc_puzzle_investigation/AGENT_DESIGN_ANALYSIS_v1.md`.
+
+**The premise.** There are 17 `feedback_*` memories, each precisely describing a
+failure mode. **Every one of those failure modes recurred anyway** — including
+`self_cert_words` being violated by the same session that was writing that very
+ban into a document. Instruction-based correction has a measured track record on
+this project of ~0. These agents are **not** "the same work done more carefully."
+A subagent made of this model has this model's prior. They work only because of
+two structural properties, and **if either is dropped, expect the failure to
+return**:
+
+1. **Decidable artifact.** Each agent emits a script, diff, count, quote, or spec
+   — never a judgment. "This looks overclaimed" is not a finding; "the claim's own
+   script grades it CITED, the document says PROVED" is.
+2. **Context isolation.** Never hand an agent the session narrative or the
+   document's framing — only the raw material plus the criteria. The frame is
+   invisible from inside; isolation is the mechanism, not care.
+
+**The refinement that matters: mechanical is not enough — it must be OBJECT-level.**
+A tag-count audit of the master was mechanical *and wrong*: it reported the
+document healthy (more `[PROVED]` tags than its source, same `[HEURISTIC]`) while
+five open frontiers had been liquidated, because a stale panel list kept the token
+counts flat. It measured a **proxy**. Every agent must name the object it tracks
+and check that object — never a correlate. Any number an agent emits must name
+what it counts and list the misses individually.
+
+**Do NOT build a general adversarial reviewer.** An external model asked to find
+overclaiming produced four confident, well-structured, entirely false findings —
+while being right in thesis. §3 already names this: *reviewers asked for issues
+will manufacture them*. Every agent above is therefore instructed that it is **not
+scored on problems found**, and that a clean result stated plainly is a valid
+output.
+
+**Refuting a mechanism ≠ refuting a claim.** When an agent (or a critique) is wrong
+in its particulars, that says nothing about its thesis. Check the two separately,
+thesis first.
 
 ## 3. Verification pattern (use before declaring "done")
 

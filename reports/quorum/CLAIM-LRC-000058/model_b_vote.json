@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000058",
+  "task_id": "QRM4-LRC-0010",
+  "model_lane": "deepseek_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:51:49Z",
+  "provider": "codex_fallback_for_deepseek",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.31,
+  "rationale": [
+    "Dossier excerpt contains no substantive claim, theorem, or proof text to adjudicate.",
+    "Available pipeline signals are favorable (high review score, stable ladder status, metric match pass).",
+    "Favorable metadata alone is insufficient for publication-grade mathematical validity assessment."
+  ],
+  "critical_risks": [
+    "Core mathematical statement is missing, so correctness cannot be checked.",
+    "No proof structure or assumptions are provided, preventing soundness review.",
+    "Potential hidden edge cases or unstated conditions cannot be evaluated."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Escalate for full technical dossier (formal claim statement, assumptions, proof details, and verification artifacts). Reassess immediately once substantive content is available. | fallback_used_for_lane_provider=deepseek"
+}

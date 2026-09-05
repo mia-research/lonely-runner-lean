@@ -1,0 +1,158 @@
+{
+  "budget": {
+    "abstain_rule": "exceed cap -> ABSTAIN on that prime and all larger; never substitute",
+    "per_prime_wall_s": 900,
+    "total_wall_s": 7200
+  },
+  "cell_rule": "cells = (n-1)/6 cosets of mu_6=<6th roots of unity mod n> in (Z/n)*; rep = least positive residue; mu_6 pinned by zeta3_mod_n (smaller nontrivial cube root)",
+  "no_float": true,
+  "object": "E: y^2 = x^3 + 7 over F_p (j=0); L*(T) degree-4 twisted Frobenius poly",
+  "prediction": "g = 2 at every census-surviving cell",
+  "prereg": "PREREG_n1_120deg_exact_ideal_v4.md",
+  "primary_statistic": "g(p,a) = deg gcd(L*(T), L*(zeta3*T)) over Q(zeta_n, zeta3)",
+  "selection_rule": {
+    "in_sample_I": "all primes p==7 mod 12, p<=547, n prime (reported separately, never pooled)",
+    "stratum_C": "first 5 primes p==1 mod 12, p>547, n prime (cross-stratum control)",
+    "stratum_S": "first 10 primes p==7 mod 12, p>547, n=#E prime (PRIMARY, out-of-sample)"
+  },
+  "strata": {
+    "IN_SAMPLE_I": [
+      {
+        "cells": 5,
+        "n": 31,
+        "p": 43,
+        "zeta3_mod_n": 5
+      },
+      {
+        "cells": 13,
+        "n": 79,
+        "p": 67,
+        "zeta3_mod_n": 23
+      },
+      {
+        "cells": 11,
+        "n": 67,
+        "p": 79,
+        "zeta3_mod_n": 29
+      },
+      {
+        "cells": 21,
+        "n": 127,
+        "p": 127,
+        "zeta3_mod_n": 19
+      },
+      {
+        "cells": 23,
+        "n": 139,
+        "p": 163,
+        "zeta3_mod_n": 42
+      },
+      {
+        "cells": 33,
+        "n": 199,
+        "p": 211,
+        "zeta3_mod_n": 92
+      },
+      {
+        "cells": 91,
+        "n": 547,
+        "p": 547,
+        "zeta3_mod_n": 40
+      }
+    ],
+    "STRATUM_C": [
+      {
+        "cells": 102,
+        "n": 613,
+        "p": 577,
+        "zeta3_mod_n": 65
+      },
+      {
+        "cells": 115,
+        "n": 691,
+        "p": 733,
+        "zeta3_mod_n": 253
+      },
+      {
+        "cells": 213,
+        "n": 1279,
+        "p": 1237,
+        "zeta3_mod_n": 504
+      },
+      {
+        "cells": 217,
+        "n": 1303,
+        "p": 1249,
+        "zeta3_mod_n": 95
+      },
+      {
+        "cells": 277,
+        "n": 1663,
+        "p": 1669,
+        "zeta3_mod_n": 318
+      }
+    ],
+    "STRATUM_S": [
+      {
+        "cells": 138,
+        "n": 829,
+        "p": 823,
+        "zeta3_mod_n": 125
+      },
+      {
+        "cells": 161,
+        "n": 967,
+        "p": 907,
+        "zeta3_mod_n": 142
+      },
+      {
+        "cells": 151,
+        "n": 907,
+        "p": 967,
+        "zeta3_mod_n": 384
+      },
+      {
+        "cells": 168,
+        "n": 1009,
+        "p": 991,
+        "zeta3_mod_n": 374
+      },
+      {
+        "cells": 182,
+        "n": 1093,
+        "p": 1051,
+        "zeta3_mod_n": 151
+      },
+      {
+        "cells": 208,
+        "n": 1249,
+        "p": 1303,
+        "zeta3_mod_n": 93
+      },
+      {
+        "cells": 292,
+        "n": 1753,
+        "p": 1831,
+        "zeta3_mod_n": 182
+      },
+      {
+        "cells": 348,
+        "n": 2089,
+        "p": 2143,
+        "zeta3_mod_n": 826
+      },
+      {
+        "cells": 390,
+        "n": 2341,
+        "p": 2251,
+        "zeta3_mod_n": 1106
+      },
+      {
+        "cells": 426,
+        "n": 2557,
+        "p": 2503,
+        "zeta3_mod_n": 835
+      }
+    ]
+  }
+}

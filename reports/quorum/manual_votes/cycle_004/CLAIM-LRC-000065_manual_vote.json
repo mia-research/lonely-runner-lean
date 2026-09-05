@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000065",
+  "provider": "codex_independent_adjudicator",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.84,
+  "rationale": [
+    "Statement 1 is mostly supported numerically: plane_onrate_baseline matches the recorded value and is close to 1/400000, but the stated absolute deviation (~5e-11) is not exact; it is ~1.25e-11 (relative ~5e-06).",
+    "plane_onrate_baseline ≈ 1/n_words is expected null-like behavior for a quality PRNG at this sample size, so it is weak standalone evidence of uniformity.",
+    "Statement 2 is supported: boundary_fragility_epsilon=0.0 only establishes no fragility at epsilon=0 in this run, not over an epsilon sweep.",
+    "Statement 3 is supported: 51930/399998 = 0.129825649..., consistent with the reported ~0.1298 single-run hit rate.",
+    "Statement 4 is supported: 400000/0.0016772940002738324 ≈ 2.3848e8 words/s, correctly interpreted as hardware-specific single-run throughput.",
+    "All four statements are explicit and individually falsifiable against the provided record and tolerance rule.",
+    "The claim is valid as single-run characterization, not as reproducible or universal performance/structure evidence."
+  ],
+  "critical_risks": [
+    "No replicate runs, uncertainty bounds, or seed/hardware variation analysis.",
+    "torus_boundary_hits and gen_time_s are point measurements with likely run-to-run variance.",
+    "Zero-epsilon fragility result cannot infer behavior at epsilon > 0.",
+    "Near-1/n baseline can arise under expected null behavior and does not by itself confirm deeper structure.",
+    "Record-level falsification tolerance validates consistency, not cross-run reproducibility."
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Adjudication supports the four statements as a scoped single-run report, with a minor arithmetic caveat in Statement 1 wording and major replication limitations. Recommend publication hold until multi-run replication (fixed seed protocol + varied seeds), epsilon sweep for fragility, and variance reporting for boundary hits and timing are added.",
+  "submitted_utc": "2026-02-28T00:00:00Z"
+}

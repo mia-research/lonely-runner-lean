@@ -1,0 +1,33 @@
+{
+  "claim_id": "CLAIM-LRC-000020",
+  "promotion_id": "PROMO-LRC-0002",
+  "source_path": "/Users/trentpalelei/Downloads/lrc_boundary_set_report_2025-09-23T08-04-30.txt",
+  "source_sha256": "1a8c3de92c4b4a7ec3d4e6b8189ddab5be964c05691f55b90de55f4e1c49d0fa",
+  "source_bytes": 2420,
+  "extraction": {
+    "method": "regex_text",
+    "chars_scanned": 2397,
+    "truncated": false
+  },
+  "tokens_extracted": 101,
+  "usable_values": 101,
+  "sample_values": [
+    "5",
+    "4",
+    "1",
+    "1.1",
+    "1.2",
+    "57",
+    "24",
+    "1",
+    "4",
+    "6",
+    "2",
+    "1"
+  ],
+  "thresholds": {
+    "stable": 1e-08,
+    "sensitive": 1e-05
+  },
+  "created_utc": "2026-02-25T23:21:08Z"
+}

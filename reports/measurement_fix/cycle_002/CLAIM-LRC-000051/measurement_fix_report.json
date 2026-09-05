@@ -1,0 +1,11 @@
+{
+  "family": "statistical_significance_pack",
+  "alpha": 0.0167,
+  "rows": 6,
+  "checks_passed": 7,
+  "checks_failed": 0,
+  "precision_invariance_ok": true,
+  "max_rel_float_vs_mpmath": 2.06925622485e-16,
+  "max_rel_decimal_vs_mpmath": 1.456515398845e-36,
+  "status": "resolved_pass"
+}

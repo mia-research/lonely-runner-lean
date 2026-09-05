@@ -1,0 +1,18 @@
+{
+  "flag_id": "PIPELINE-BUG-PHI-MATCH-000044-ARITH-n5",
+  "claim_id": "CLAIM-LRC-000044",
+  "source_file": "lrc_efficiency_runtime_validation.csv",
+  "detected": "2026-02-28",
+  "cycle": "005",
+  "severity": "low",
+  "description": "2 arithmetic rows in CLAIM-LRC-000044 are labeled phi_match=true despite detected_phases != phi. detected_phases=3, phi=4 (phi(5)=4), so the condition detected_phases==phi is NOT satisfied. phi_match should be false for both rows.",
+  "affected_rows": [
+    {"n": 5, "phi": 4, "detected_phases": 3, "phi_match_current": "true", "phi_match_correct": "false", "seed": 1, "boundary_count": 100018},
+    {"n": 5, "phi": 4, "detected_phases": 3, "phi_match_current": "true", "phi_match_correct": "false", "seed": 3, "boundary_count": 100019}
+  ],
+  "total_affected_rows": 2,
+  "total_arithmetic_rows": 96,
+  "impact_on_000044_adjudication": "minimal — 000044 adjudicable statements do not directly score arithmetic phi_match rate",
+  "recommended_action": "Correct phi_match labeling in data generation pipeline for arithmetic family at n=5 boundary condition; regenerate CSV and re-verify SHA-256",
+  "investigation_report": "reports/investigations/phi_match_investigation_cycle005.md"
+}

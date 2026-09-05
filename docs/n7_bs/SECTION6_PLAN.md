@@ -49,15 +49,16 @@ So the j₀=0 branch dispatches on `|S|` (level-0 count): `|S|=4` ⇒ `four_band
 | retarget_top | level-m elt → any NONZERO target via const mult | Fermat | **DONE** (`qz_retarget_top`) |
 | retarget²_top | level-m + level-h<m → both targets, one unit λ | composition | **DONE** (`qz_retarget_two_top`) |
 | Rmk8 int wrappers | q(B−B)⊂{0,6}/{0,1,5,6} on integer diffs ⇒ ℓ≤2/3 | qz_subxy_carry | **DONE** (`remark8_i_int`, `remark8_ii_int`, `qz_diff_mem_06/0156`) |
-| L7 | ẽ control via Λ_h, `ν(2d−d')` structure (needs m>1) | carry lemmas | TODO (hard) |
+| L7 | ẽ control via Λ_h, `ν(2d−d')` structure (needs m>1) | carry lemmas | **DONE** (`lemma7_i` + `lemma7_ii` axiom-clean) |
 | L9(i) | 3-elt compression, ν(x)≠ν(y), both <m ⇒ ℓ≤2 | retarget² + Rmk8(i) | **DONE** (`lemma9_i`) |
-| L9(ii) | ν(x)=ν(y)=h<m, r(y)=jr(x) ⇒ q(λy)∈{0,5,6}, ℓ≤j | L4(i) + retarget + e(x,y) | TODO (next) |
-| L9 ν=m edge | 9(i) with one valuation =m | `qz_retarget_two_top` ready | TODO — SUBTLE (see below) |
-| L10 | \|A₁\|≥4 numbering (ν-coloring of E) | finite | TODO |
-| L11 | \|A₁\|=3 numbering | finite | TODO |
-| L12 | \|A₁\|=3,\|A₂\|=2 sufficient conds | L5-style | TODO |
-| 6.1–6.6 | case analysis by (\|A₁\|,\|A₂\|,\|A₄\|) | weave above | TODO |
-| §7 | m=1: 969 + 32×6 exhaustive search | decide (RISK) | TODO |
+| L9(ii) | ν(x)=ν(y)=h<m, r(y)=jr(x) ⇒ q(λy)∈{0,5,6}, ℓ≤j | L4(i) + retarget + e(x,y) | **DONE** (`lemma9_ii_j2`, `lemma9_ii_j3`) |
+| L9 ν=m edge | 9(i) with one valuation =m | exact 7^m shift + carry | **DONE** (`lemma9_i_top` + `lemma9_i_dispatch`, `Lemmas.lean`) |
+| q-equiv | 7^(m+1)∣(a−b) ⇒ qz equal ∀λ | qz_sub_mul_pow | **DONE** (`qz_eq_of_high_dvd`, `Defs.lean`) |
+| L10 | \|A₁\|≥4 numbering (ν-coloring of E) | connectivity cascade + decide | **DONE axiom-clean** (`lemma10` + `lemma10_select` + `cover_distinct`, `Lemmas10_12.lean`) |
+| L11 | \|A₁\|=3 numbering | ultrametric + decide | **DONE axiom-clean** (`lemma11`, `Lemmas10_12.lean`) |
+| L12 | \|A₁\|=3,\|A₂\|=2 sufficient conds | decide | **DONE axiom-clean** (`lemma12_i` + `lemma12_ii`, `Lemmas10_12.lean`, 2026-07-01) |
+| 6.1–6.6 | case analysis by (\|A₁\|,\|A₂\|,\|A₄\|) | weave above | **IN PROGRESS** (agent af765f5358222d978) |
+| §7 | m=1: 969 + 32×6 exhaustive search | decide (RISK) | TODO — needs d₆ + gcd=1 hyp |
 
 **Next-session unit:** define `fitsInterval S a L` (representing `ℓ(S) ≤ L`),
 prove its API, then **Remark 8** + **Lemma 9** (the first structural

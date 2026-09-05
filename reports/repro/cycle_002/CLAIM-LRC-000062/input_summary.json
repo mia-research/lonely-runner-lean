@@ -1,0 +1,33 @@
+{
+  "claim_id": "CLAIM-LRC-000062",
+  "promotion_id": "PROMO-LRC-0021",
+  "source_path": "/Users/trentpalelei/Downloads/boundary_set_vs_coarse_midpoint_n10.csv",
+  "source_sha256": "98b5f1bef13cb0097234a2936f299491966ac123b2afebadbf9e82c346c17897",
+  "source_bytes": 322644,
+  "extraction": {
+    "method": "csv_cells_plus_regex",
+    "rows_scanned": 1201,
+    "truncated": false
+  },
+  "tokens_extracted": 20400,
+  "usable_values": 20400,
+  "sample_values": [
+    "0",
+    "1",
+    "10",
+    "100.0",
+    "0.1",
+    "7.637065517933746",
+    "6.75",
+    "1.2469800001523585",
+    "1.141420999480008",
+    "1.0693150003752256",
+    "1.2617990004702822",
+    "1.2025859990244823"
+  ],
+  "thresholds": {
+    "stable": 1e-09,
+    "sensitive": 1e-06
+  },
+  "created_utc": "2026-02-25T23:29:22Z"
+}

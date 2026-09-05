@@ -1,0 +1,1 @@
+cycle_id,date_utc,phase,lane_active,manager_token_share,worker_token_share,premium_token_share,provider_quota_state,reroute_count,deferred_due_to_quota,governance_breach_count,cycle_health,notes

@@ -1,0 +1,87 @@
+{
+  "generated_utc": "2026-02-26T00:57:04Z",
+  "counts": {
+    "on_track": 8,
+    "at_risk": 3,
+    "drifted": 0
+  },
+  "rows": [
+    {
+      "area": "Phase 0 gate",
+      "expected": ">=90% assigned, <=10% deferred+frontier",
+      "observed": "PASS (96.6% assigned; 3.4% frontier)",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Manager token cap",
+      "expected": "manager_token_share <= 0.15",
+      "observed": "max=0.03",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Premium token cap",
+      "expected": "premium_token_share <= 0.35",
+      "observed": "max=0.00",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Governance breaches",
+      "expected": "no unresolved breaches",
+      "observed": "max=0; health=['green']",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "run_log required artifact",
+      "expected": "logs/run_log.jsonl present",
+      "observed": "exists=True entries=10",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Changelog richness",
+      "expected": "prompt/model/input-output provenance fields",
+      "observed": "rich_fields_present=True",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Canonical status sync",
+      "expected": "promoted claims synced to canonical status register",
+      "observed": "promoted=27; B-Promising=27; sync_csv=True",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Plan metadata freshness",
+      "expected": "Plan status reflects execution",
+      "observed": "Status: Active execution (Cycle 002 completed; anti-drift hardening initiated 2026-02-26)",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "Theorem dependency/refuter gate",
+      "expected": "dependency graphs + adversarial proof attack evidence",
+      "observed": "task_pack_exists=True",
+      "status": "at_risk",
+      "action": "execute theorem task pack before release"
+    },
+    {
+      "area": "Citation grounding gate",
+      "expected": "related work + citations attached",
+      "observed": "task_pack_exists=True",
+      "status": "at_risk",
+      "action": "execute citation task pack before release"
+    },
+    {
+      "area": "Two-model quorum gate",
+      "expected": "explicit two-model quorum on high-impact claims",
+      "observed": "task_pack_exists=True",
+      "status": "at_risk",
+      "action": "execute quorum task pack before release"
+    }
+  ]
+}

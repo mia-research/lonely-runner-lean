@@ -1,0 +1,59 @@
+{
+  "generated_utc": "2026-02-26T03:13:25Z",
+  "counts": {
+    "on_track": 6,
+    "at_risk": 1,
+    "drifted": 0
+  },
+  "rows": [
+    {
+      "area": "run_log artifact",
+      "expected": "run_log.jsonl present with provenance",
+      "observed": "exists=True",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "manager token cap",
+      "expected": "<=0.15",
+      "observed": "max=0.03",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "premium cap",
+      "expected": "<=0.35",
+      "observed": "max=0.00",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "governance breaches",
+      "expected": "0 unresolved",
+      "observed": "max=0",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "theorem dependency/refuter gate",
+      "expected": "all theorem tasks resolved without critical follow-up",
+      "observed": "status_counts={'executed': 5, 'closed_reclassified_empirical': 1}",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "citation grounding gate",
+      "expected": "citation tasks executed for targeted high-impact claims",
+      "observed": "status_counts={'executed': 10}",
+      "status": "on_track",
+      "action": "none"
+    },
+    {
+      "area": "two-model quorum gate",
+      "expected": "live cross-provider adjudication complete",
+      "observed": "status_counts={'blocked_provider_auth': 7, 'executed_live_same_provider': 3} ext={'no': 7, 'partial_same_provider': 3}",
+      "status": "at_risk",
+      "action": "authenticate Claude CLI and rerun live quorum"
+    }
+  ]
+}

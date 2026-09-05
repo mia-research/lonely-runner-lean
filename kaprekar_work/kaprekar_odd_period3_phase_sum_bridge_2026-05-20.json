@@ -1,0 +1,84 @@
+{
+  "bridge_formula": {
+    "phase_sum": "[3u, M, M, 3x, M, M, 3x, M, M, 3u+3delta]",
+    "M": "v+w+y",
+    "fixed_point": true
+  },
+  "random_affine_checks": {
+    "checked": 1000,
+    "failures": 0,
+    "bad_examples": []
+  },
+  "reduced_exact_check": {
+    "rows": [
+      {
+        "d": 23,
+        "period3_count": 10,
+        "ok_count": 10
+      },
+      {
+        "d": 25,
+        "period3_count": 21,
+        "ok_count": 21
+      },
+      {
+        "d": 27,
+        "period3_count": 39,
+        "ok_count": 39
+      },
+      {
+        "d": 29,
+        "period3_count": 66,
+        "ok_count": 66
+      }
+    ],
+    "bad_count": 0,
+    "bad_examples": []
+  },
+  "boundary_check": {
+    "checked": 20,
+    "bad_count": 0,
+    "bad_examples": []
+  },
+  "sampled_global_check": {
+    "sampled_delta_support": {
+      "19": {
+        "1": 1
+      },
+      "21": {
+        "1": 4
+      },
+      "23": {
+        "1": 10
+      },
+      "25": {
+        "1": 21
+      },
+      "27": {
+        "1": 39
+      },
+      "29": {
+        "1": 66
+      },
+      "31": {
+        "1": 105
+      },
+      "33": {
+        "1": 159
+      },
+      "39": {
+        "1": 412,
+        "3": 4
+      },
+      "45": {
+        "1": 773,
+        "3": 39
+      },
+      "55": {
+        "1": 1360,
+        "3": 297,
+        "5": 1
+      }
+    }
+  }
+}

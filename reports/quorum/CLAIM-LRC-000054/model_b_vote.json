@@ -1,0 +1,19 @@
+{
+  "claim_id": "CLAIM-LRC-000054",
+  "task_id": "QRM-LRC-0004",
+  "model_lane": "claude_pro_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": false,
+  "generated_utc": "2026-02-26T03:34:54Z",
+  "provider": "claude_live",
+  "model_call_success": false,
+  "blocked_reason": "claude_error_rc1: Spending cap reached resets 8am",
+  "status_class": "escalate",
+  "confidence": 0.0,
+  "rationale": [
+    "provider_call_failed"
+  ],
+  "critical_risks": [],
+  "publication_gate_recommendation": "escalate",
+  "notes": "claude_error_rc1: Spending cap reached resets 8am"
+}

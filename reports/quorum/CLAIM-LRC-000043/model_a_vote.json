@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "task_id": "QRM4-LRC-0001",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:44:21Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.16,
+  "rationale": [
+    "No substantive claim text was provided in the dossier excerpt.",
+    "No proof sketch, assumptions, or definitions are available to verify correctness.",
+    "Metadata signals (score/status/match) cannot substitute for mathematical validation."
+  ],
+  "critical_risks": [
+    "High risk of false acceptance due to missing primary evidence.",
+    "Undefined scope and terms prevent reproducible adjudication.",
+    "Cannot assess novelty-versus-error tradeoff without technical content."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Escalate for full technical review once the complete claim statement, formal definitions, and proof or counterexample analysis are provided."
+}

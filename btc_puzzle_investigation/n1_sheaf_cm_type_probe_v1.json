@@ -1,0 +1,47 @@
+{
+  "controls": {
+    "N2_zeta3_detector_fired": true,
+    "N3_cm_detector_fired": true
+  },
+  "frozen_hypotheses": {
+    "H_CM": "every alpha_i = pi_p or conj(pi_p) times a small root of unity (CM-i/ii)",
+    "H_R": "deg gcd(L_a*(T),L_a*(zeta3 T)) = 2 per cell (the 120 deg law)",
+    "H_explain": "H_R holds BECAUSE of H_CM (twist roots differ by zeta_3) = CM-iii"
+  },
+  "note": "ARM CM = None means the eigenvalue is NOT a CM value up to a small root of unity -- evidence AGAINST the naive CM character as the vertical mechanism.",
+  "object": "F_a = L_{chi2(y)} (x) L_{chi_a} on E:y^2=x^3+7; H^1_c dim 4, weight 1",
+  "per_prime": [
+    {
+      "ARM_CM_all_CM_values": false,
+      "ARM_R_law_holds": "78/78",
+      "ARM_U_distinct_twist_multisets": 1,
+      "ARM_U_orbit_count": 26,
+      "ARM_U_uniform_across_orbits": true,
+      "N1_consistency": "PASS",
+      "N4_weight_max_err": 0.0,
+      "lambda": 55,
+      "n": 79,
+      "p": 67,
+      "t": -11
+    },
+    {
+      "ARM_CM_all_CM_values": false,
+      "ARM_R_law_holds": "66/66",
+      "ARM_U_distinct_twist_multisets": 1,
+      "ARM_U_orbit_count": 22,
+      "ARM_U_uniform_across_orbits": true,
+      "N1_consistency": "PASS",
+      "N4_weight_max_err": 0.0,
+      "lambda": 29,
+      "n": 67,
+      "p": 79,
+      "t": 13
+    }
+  ],
+  "primes_tested": [
+    67,
+    79
+  ],
+  "scope": "model-scale verification; nothing reaches secp256k1",
+  "script": "n1_sheaf_cm_type_probe_v1.sage"
+}

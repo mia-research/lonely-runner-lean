@@ -1,0 +1,29 @@
+{
+  "wp": "WP3_smallN_exact",
+  "model": "haiku",
+  "_note": "Original file was truncated when the subagent was killed by the session limit; reconstructed by the orchestrator from the full content read pre-truncation. per_N abbreviated to the growth curve; regenerable via wp3_run.py.",
+  "identity_failures": 0,
+  "identity_check_sample_size": 1000,
+  "r_bound_ok_all_N_le_35": true,
+  "per_N_logD_frac_median": {
+    "<=17": 0.0, "18": 0.0588, "19": 0.1111, "20": 0.1478, "21": 0.1904,
+    "22": 0.2211, "23": 0.2591, "25": 0.3245, "28": 0.4012, "30": 0.4454,
+    "32": 0.4779, "34": 0.5106, "35": 0.5231
+  },
+  "enumerable_bands_H_n_given_XY_bits": "0.0 for all N<=21 (see FLAG below)",
+  "attack_valid": "exact",
+  "positive_control": {
+    "detected": true,
+    "note": "deterministic equalities; identity sampled (1000 points, 0 failures)"
+  },
+  "_reviewer_spot_check": {
+    "by": "orchestrator, trust-but-verify",
+    "verdict": "PARTIAL-VERIFIED; one interpretation flag, one prose correction.",
+    "solid": [
+      "identity_failures=0 over 1000 keys AND r_bound_ok=true for every N<=35 => P=base*G+D*G and the n*Q identity hold EXACTLY on the low bands. Real.",
+      "per_N residual fraction grows smoothly 0.0 (N<=17; D=0 median is a small-band artifact) -> 0.523 at N=35. Real."
+    ],
+    "FLAG_tautology": "enumerable_bands H(n|X,Y)=0 / n_deterministic=true is a BIJECTION TAUTOLOGY, NOT a finding: P=d*G is injective (G has prime order) and n=f(d), so H(n|X,Y)=0 necessarily for ANY function of d. It does NOT indicate a cheap/attackable (X,Y)->n map; recovering n on N<=21 still requires enumerating the band (brute discrete log). Do NOT propagate as 'attacker recovers n from (X,Y)'. Same shape as the GECT tautology trap.",
+    "CORRECTION_reading": "The original 'reading' said D spans '~60% of free bits'; THIS WP's data shows median ~0.26 over N<=35 and 0.523 at N=35. The ~60% is borrowed from the 82-key study (N up to 130). Report the measured trend, not the borrowed number."
+  }
+}

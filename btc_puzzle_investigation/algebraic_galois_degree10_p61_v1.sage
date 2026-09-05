@@ -1,0 +1,182 @@
+#!/usr/bin/env sage -python
+"""algebraic_galois_degree10_p61_v1.sage -- the +1-branch second-witness cross-check.
+
+The 10T14 identification (RESULT_algebraic_galois_degree10_v1.md) is single-prime (p=43, -1 branch)
+because p=67/127 give degree 26/42 (out of range). Coincidence: at p=61 (+1 branch, chi2(-1)=+1),
+(n-1)/6 = 10 -- the +1-branch minpoly feeds a degree-40 squarefree object into the SAME pipeline.
+
+This driver runs the W-piece construction GATE BY GATE at p=61, reporting each gate's outcome
+(pass or fail) rather than asserting to a halt, so the +1-branch structural verdict is recorded
+either way. p=43 (-1 branch) is re-run as the control and must reproduce 10T14.
+
+Gates (read as structural verdicts, not sanity checks):
+  G1  assert len(fac)==2        : the +1-branch degree-40 radical splits into 2 conjugate factors
+                                  over Q(omega).
+  G2  evenness f1(-T)==f1(T)    : the Q(omega)-factor is even-in-T.
+  G3  reduce_T2 even-power      : the T^2-reduction yields a degree-10 irreducible over Q(omega).
+If all three pass -> the 10T14 cycle-type census auto-runs; read the group verdict.
+
+EXACT cyclotomic-field / Q arithmetic only (no floats in the signal path).
+"""
+import sys
+from collections import Counter
+import audit_n1_vsign_v2_core as core
+# load() the sibling .sage to bring its defs (build_L, Q_norm, even_factor_over_Qomega, ...)
+# into this namespace. Its __main__ block is guarded, so load() executes only the defs.
+load("algebraic_galois_degree10_v1.sage")
+
+
+def gate_report(p, a=1, n_primes=400):
+    """Run the W-piece construction gate-by-gate; return a dict of gate outcomes + analysis."""
+    out = dict(p=int(p), a=int(a))
+    n = core.curve_order(int(p))
+    assert core.is_prime(n), (p, n)
+    out["n"] = int(n)
+    out["branch"] = "+1" if int(p) % 4 == 1 else "-1"
+    out["eps_chi2_minus1"] = +1 if int(p) % 4 == 1 else -1
+    leg = +1 if int(p) % 4 == 1 else -1
+    out["expect_rad_deg"] = 4 * (n - 1) // (3 if leg == -1 else 6)  # -1: 4(n-1)/3 ; +1: 4(n-1)/6
+    out["expect_even_factor_deg"] = 2 * (n - 1) // (3 if leg == -1 else 6)
+    out["expect_g_deg"] = (n - 1) // (3 if leg == -1 else 6)
+
+    Kn = CyclotomicField(n); zn = Kn.gen()
+    L = build_L(int(p), int(a), Kn, zn, n)
+    PQ = Q_norm(L, Kn, zn, n)
+    out["deg_norm"] = PQ.degree()                       # expect 4(n-1) in both branches
+
+    # ---- G1: 2 conjugate factors over Q(omega) ----
+    Kw = CyclotomicField(3); w = Kw.gen()
+    Pw = PQ.change_ring(Kw)
+    rad = Pw.radical()                                  # squarefree part (strips the mult-3 or mult-6)
+    out["rad_deg"] = rad.degree()
+    fac = [f for f, e in rad.factor()]
+    out["G1_n_factors"] = len(fac)
+    out["G1_pass"] = (len(fac) == 2)
+    if len(fac) != 2:
+        out["G1_factor_degrees"] = sorted(f.degree() for f in fac)
+        out["G2_pass"] = False; out["G3_pass"] = False
+        out["note"] = "G1 failed: degree-%d radical does NOT split into 2 conjugate Q(omega)-factors" % rad.degree()
+        return out
+    f1, f2 = fac
+    tau = Kw.hom([w ** 2])
+    RT = f1.parent(); T = RT.gen()
+    conj_ok = (apply_hom_to_poly(tau, f1, RT) == f2)
+    out["G1_conj_ok"] = bool(conj_ok)
+    out["even_factor_deg"] = f1.degree()
+
+    # ---- G2: even-in-T ----
+    even_ok = (f1(-T) == f1)
+    out["G2_pass"] = bool(even_ok)
+    if not even_ok:
+        # diagnostics: which odd powers are nonzero, and does f1(T) become even after a T -> T+shift?
+        coefs = f1.list()
+        odd_nonzero = [i for i, c in enumerate(coefs) if i % 2 == 1 and c != 0]
+        out["G2_odd_nonzero_powers"] = odd_nonzero
+        out["G2_odd_power_coeffs_mod5"] = [int(odd_nonzero[0])] if odd_nonzero else []
+        # is f1 a polynomial in T^2 up to a linear shift? check f1(T) vs f1(-T): the anti-even part.
+        anti = f1 - f1(-T)        # 2 * (odd-power part); if zero, even
+        out["G2_anti_deg"] = anti.degree()
+        out["note"] = ("G2 failed: Q(omega)-factor is NOT even-in-T. Odd-power indices present: "
+                       + str(odd_nonzero[:8]))
+        out["G3_pass"] = False
+        return out
+
+    # ---- G3: T^2-reduction to degree-10 irreducible ----
+    try:
+        g = reduce_T2(f1, Kw)
+        out["g_deg"] = g.degree()
+        out["g_irreducible"] = bool(g.is_irreducible())
+        out["G3_pass"] = bool(out["g_irreducible"] and out["g_deg"] == 10)
+    except AssertionError as e:
+        out["G3_pass"] = False; out["G3_error"] = str(e); return out
+
+    # absolute poly + disc square (parity diagnostic)
+    tau_g = apply_hom_to_poly(tau, g, PolynomialRing(Kw, 'S'))
+    g_abs = (g * tau_g).change_ring(QQ)
+    out["g_abs_deg"] = g_abs.degree()
+    out["g_abs_irreducible"] = bool(g_abs.is_irreducible())
+    da = g_abs.discriminant()
+    out["disc_abs_is_square"] = bool(da in ZZ and ZZ(da).is_square())
+
+    # ---- cycle census + transitive match (auto-runs at deg 10) ----
+    cyc, Np, nram = cycle_census(g, Kw, g.degree(), n_primes=n_primes)
+    out["census"] = cyc; out["n_primes"] = Np; out["n_ramified"] = nram
+    out["parity"] = parity_split(cyc, g.degree())
+    if g.degree() == 10:
+        out["transitive_match"] = match_transitive_degree10(cyc)
+    else:
+        out["transitive_match"] = None
+    return out
+
+
+def summarize(r, label):
+    print("=" * 72)
+    print(f"{label}: p={r['p']}  n={r['n']}  branch={r['branch']}  eps=chi2(-1)={r['eps_chi2_minus1']:+d}")
+    print(f"  deg Q-norm P        = {r['deg_norm']}   (expect 4(n-1) = {4*(r['n']-1)})")
+    print(f"  rad deg over Q(w)   = {r['rad_deg']}   (expect {r['expect_rad_deg']} = "
+          f"{'4(n-1)/3' if r['branch']=='-1' else '4(n-1)/6'})")
+    g1 = "PASS" if r["G1_pass"] else "FAIL"
+    print(f"  G1 2 conjugate Q(w) factors           = {g1}  (n_factors={r.get('G1_n_factors')})"
+          + ("" if r["G1_pass"] else f"  factor_degs={r.get('G1_factor_degrees')}"))
+    if r["G1_pass"]:
+        print(f"      conj tau(f_+)=f_- : {r.get('G1_conj_ok')}   even-factor deg = {r['even_factor_deg']}"
+              f"  (expect {r['expect_even_factor_deg']})")
+        print(f"  G2 even-in-T (f_+(-T)=f_+(T))        = {'PASS' if r['G2_pass'] else 'FAIL'}")
+        if r["G2_pass"]:
+            print(f"  G3 T^2-reduction -> deg {r.get('g_deg')} irreducible={r.get('g_irreducible')}"
+                  f"  = {'PASS' if r['G3_pass'] else 'FAIL'}  (expect deg {r['expect_g_deg']})")
+            if r["G3_pass"]:
+                print(f"      g_abs deg over Q = {r['g_abs_deg']} irreducible={r['g_abs_irreducible']}"
+                      f"  disc square={r['disc_abs_is_square']}")
+                cyc = r["census"]; tot = sum(cyc.values())
+                ev, od = r["parity"]
+                print(f"      census: {tot} embeddings / {r['n_primes']} split primes ({r['n_ramified']} ram/skip)")
+                print(f"      parity even={float(ev):.3f} odd={float(od):.3f}")
+                for ct, cnt in sorted(cyc.items(), key=lambda kv: (-kv[1], kv[0])):
+                    print(f"         {str(ct):<24} {cnt:4d}  ({100.0*cnt/tot:.1f}%)")
+                m = r.get("transitive_match")
+                if m is None:
+                    print("      transitive match: (not deg 10; skipped)")
+                elif not m:
+                    print("      transitive match: NONE")
+                else:
+                    for tn, gord, nm, dist in m:
+                        print(f"      transitive match: tn={tn}  |G|={gord}  {nm}")
+    if "note" in r:
+        print(f"  NOTE: {r['note']}")
+    print("=" * 72)
+
+
+if __name__ == "__main__":
+    print("### CONTROL: p=43 (-1 branch) -- must reproduce 10T14, |G|=160, solvable, not in A_10")
+    r43 = gate_report(43, a=1, n_primes=400)
+    summarize(r43, "CONTROL p=43 (-1)")
+
+    print("\n### CROSS-CHECK: p=61 (+1 branch) -- the open second witness")
+    r61 = gate_report(61, a=1, n_primes=400)
+    summarize(r61, "CROSS-CHECK p=61 (+1)")
+
+    # save raw
+    import json
+    def serial(o):
+        if isinstance(o, Counter): return {str(k): v for k, v in o.items()}
+        if isinstance(o, (int,)): return int(o)
+        try:
+            from sage.rings.integer import Integer
+            if isinstance(o, Integer): return int(o)
+        except Exception:
+            pass
+        if hasattr(o, "__iter__") and not isinstance(o, (str, dict, list, tuple)):
+            try: return list(o)
+            except Exception: return str(o)
+        return str(o)
+    # JSON-safe recursively: stringify tuple/non-primitive dict keys, convert tuples to lists.
+    def jsonify(d):
+        if isinstance(d, dict):
+            return { (str(k) if not isinstance(k, (str, int, float, bool)) else k): jsonify(v) for k, v in d.items() }
+        if isinstance(d, (list, tuple)):
+            return [jsonify(x) for x in d]
+        return d
+    with open("RESULT_algebraic_galois_degree10_p61_v1.json", "w") as f:
+        json.dump(jsonify({"p43_control": r43, "p61_crosscheck": r61}), f, indent=1, default=serial)
+    print("\nsaved RESULT_algebraic_galois_degree10_p61_v1.json")

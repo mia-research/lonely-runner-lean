@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000045",
+  "task_id": "QRM-LRC-0007",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:36:12Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.79,
+  "rationale": [
+    "Numeric reproducibility is strong (binary64 and decimal128 vs mpmath errors are far below the stable threshold).",
+    "Measurement metric and notation checks pass with no required fixes.",
+    "Repro pipeline reports stable final status and dossier readiness with substantial extracted values.",
+    "Current dossier metadata and required next actions align on promotion to board review."
+  ],
+  "critical_risks": [
+    "Claim statement is represented as raw CSV-like fragments, so semantic interpretation is not fully clear.",
+    "Assumptions are explicitly marked as pending extraction review, leaving scope constraints underspecified.",
+    "Validation snapshot includes needs_human_review with adjudication score 0.480.",
+    "Float risk is medium, so untested edge regimes may still exhibit sensitivity."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Proceed to promotion with caveats attached: require cleaned claim wording, explicit assumptions, and a concise precision-risk note in the reproducibility packet."
+}

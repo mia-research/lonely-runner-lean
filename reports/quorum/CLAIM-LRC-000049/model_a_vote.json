@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000049",
+  "task_id": "QRM4-LRC-0008",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:51:09Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.31,
+  "rationale": [
+    "No substantive claim text or proof/evidence is included in the excerpt.",
+    "High review_score and stable ladder status are positive process signals but not direct validity evidence.",
+    "Measurement metric match pass supports consistency, not correctness of the underlying mathematical claim."
+  ],
+  "critical_risks": [
+    "Primary validity cannot be independently assessed from provided materials.",
+    "Potential publication of an unverified mathematical statement due to missing derivation/details.",
+    "Over-reliance on pipeline metadata may mask logical or proof-level errors."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Escalate for domain-expert review with full claim statement, assumptions, derivation/proof, and counterexample checks before publication gating."
+}

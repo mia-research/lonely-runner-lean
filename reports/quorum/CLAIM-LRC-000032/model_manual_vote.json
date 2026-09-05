@@ -1,0 +1,32 @@
+{
+  "claim_id": "CLAIM-LRC-000032",
+  "task_id": "QRM-LRC-0006",
+  "model_lane": "human_operator",
+  "execution_mode": "manual_human",
+  "external_api_called": true,
+  "provider": "claude",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.75,
+  "rationale": [
+    "Statistical validation report with Bonferroni-corrected significance (alpha=0.0125) is a methodologically sound design for multi-comparison LRC testing",
+    "Numeric stability is outstanding: max_rel float64 vs mpmath = 1.55e-16, the lowest error across all 7 blocked claims",
+    "float_risk rated LOW \u2014 this is the strongest numeric integrity result in the quorum batch",
+    "n=8 configurations across multiple horizon lengths (T=10 to T=1000) provides broad parameter coverage",
+    "201 extracted values appropriate for a summary statistical report; extraction_truncated=False"
+  ],
+  "critical_risks": [
+    "measurement_metric_match is PARTIAL \u2014 align_metric_definition fix is required before publication gate",
+    "Claim statement is a report header fragment, not a formal mathematical proposition",
+    "Explicit assumptions pending extraction \u2014 statistical test assumptions (independence, distribution) not verified",
+    "Small raw value count (201) means conclusions are summary-level; underlying trial data provenance should be traced",
+    "adjudication_score 0.480 triggers human review \u2014 semantic and metric gaps identified"
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "This claim has the best float precision of the batch (low risk, 1.55e-16) and uses rigorous Bonferroni correction. However the partial metric match is a real flag that must be resolved. The metric definition alignment fix in measurement_fix/cycle_002 should be verified as completed before advancing.",
+  "submitted_utc": "2026-02-27T00:00:00Z",
+  "source_ref": "claude_code_adjudication_cycle_003_quorum_retry",
+  "operator_lane": "Lane_A",
+  "generated_utc": "2026-02-28T04:01:35Z"
+}

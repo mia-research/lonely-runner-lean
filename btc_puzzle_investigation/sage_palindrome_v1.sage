@@ -1,0 +1,34 @@
+# Normalized poly P(W)=W^4 - e W^3 + (e^2 - chi) W^2 - chi e W + 1   (e = e1/sqrt(p), chi=+-1)
+# Claim: chi=+1 -> palindromic; chi=-1 -> anti-palindromic.  Both reduce via x=W+chi/W to a QUADRATIC.
+var('e chi W x')
+P = W^4 - e*W^3 + (e^2 - chi)*W^2 - chi*e*W + 1
+print("P(W) =", P)
+# palindromic test: chi=1
+P1 = P.subs(chi==1)
+rev1 = W^4 * P1.subs(W==1/W)
+print("\nchi=+1: P - reverse =", (P1 - rev1).simplify_full(), " (0 => palindromic)")
+# anti-palindromic test chi=-1
+Pm = P.subs(chi==-1)
+revm = W^4 * Pm.subs(W==1/W)
+print("chi=-1: P + reverse =", (Pm + revm).expand().simplify_full())
+print("chi=-1: P - reverse =", (Pm - revm).expand().simplify_full())
+# Reduce chi=1 (palindromic): divide by W^2, set x = W + 1/W  (x^2 = W^2+2+1/W^2)
+# W^2 - e W + (e^2-1) - e/W + 1/W^2 = (W^2+1/W^2) - e(W+1/W) + (e^2-1) = (x^2-2) - e x + (e^2-1)
+print("\nchi=+1 reduction: x^2 - e x + (e^2-3)   [x = W+1/W = 2cos(theta)]")
+q = x^2 - e*x + (e^2-3)
+disc = (q.coefficient(x,1)^2 - 4*q.coefficient(x,0)).simplify_full()
+print("  discriminant in x =", disc, "= 3(4-e^2) >=0  <=>  |e|<=2  (the CAP)")
+# roots on unit circle <=> x=2cos(theta) in [-2,2]; the two x-roots x1,x2:
+print("  x1+x2 = e,  x1*x2 = e^2-3")
+# 120-degree pairing check: if the two conj-pairs are at theta1, theta2=theta1+120,
+# then x1=2cos(t1), x2=2cos(t1+120); verify x1*x2 = e^2-3 with e=x1+x2.
+var('t1')
+x1c = 2*cos(t1); x2c = 2*cos(t1+2*pi/3)
+ec = (x1c+x2c).simplify_full()
+prod_pred = (x1c*x2c).trig_reduce().simplify_full()
+prod_from_e = (ec^2 - 3).trig_reduce().simplify_full()
+print("\n120-check (theta2=theta1+120):")
+print("  e = x1+x2 =", ec)
+print("  x1*x2 =", prod_pred)
+print("  e^2-3 =", prod_from_e)
+print("  MATCH:", bool((prod_pred - prod_from_e).simplify_full()==0))

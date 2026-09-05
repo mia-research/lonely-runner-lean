@@ -1,0 +1,11 @@
+task_id,claim_id,status,merged_status,external_quorum_complete,model_a_provider,model_b_provider,output_dir,updated_utc
+QRM-LRC-0001,CLAIM-LRC-000055,blocked_provider_auth,conflict_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000055,2026-02-26T03:33:29Z
+QRM-LRC-0002,CLAIM-LRC-000052,executed_live_same_provider,conflict_escalate,partial_same_provider,codex,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000052,2026-02-26T03:34:12Z
+QRM-LRC-0003,CLAIM-LRC-000053,blocked_provider_auth,conflict_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000053,2026-02-26T03:34:35Z
+QRM-LRC-0004,CLAIM-LRC-000054,blocked_provider_auth,conflict_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000054,2026-02-26T03:34:54Z
+QRM-LRC-0005,CLAIM-LRC-000020,executed_live_same_provider,conflict_escalate,partial_same_provider,codex,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000020,2026-02-26T03:35:30Z
+QRM-LRC-0006,CLAIM-LRC-000032,blocked_provider_auth,conflict_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000032,2026-02-26T03:35:49Z
+QRM-LRC-0007,CLAIM-LRC-000045,blocked_provider_auth,conflict_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000045,2026-02-26T03:36:12Z
+QRM-LRC-0008,CLAIM-LRC-000047,executed_live_same_provider,consensus_caveated,partial_same_provider,codex,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000047,2026-02-26T03:36:50Z
+QRM-LRC-0009,CLAIM-LRC-000046,blocked_provider_auth,conflict_escalate,no,claude,codex,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000046,2026-02-26T03:37:09Z
+QRM-LRC-0010,CLAIM-LRC-000041,blocked_provider_auth,consensus_escalate,no,codex,claude,/Users/trentpalelei/Desktop/Math Ex/reports/quorum/CLAIM-LRC-000041,2026-02-26T03:37:35Z

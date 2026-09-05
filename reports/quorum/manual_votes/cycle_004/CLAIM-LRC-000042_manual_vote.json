@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLAIM-LRC-000042",
+  "provider": "codex_independent_adjudicator",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.86,
+  "rationale": [
+    "All six adjudicable statements are explicit numeric predicates and individually falsifiable from the stated dataset and thresholds.",
+    "Statement 1 is supported: TORUS_rational_1/5 has plane_max_bin_frac=0.2000, giving ~20,000x to 40,000x separation versus 5e-06 to 1e-05.",
+    "Statement 2 is supported exactly: boundary_hits=0 only for TORUS_rational_1/5; others are 773 to 818.",
+    "Statement 3 is supported for this corpus: eff_rank_lag3=4 and lattice_rate_tol0=0.0 for all five generators.",
+    "Statement 4 is supported on reported metrics: TORUS_irrational_sqrt2/2 matches stochastic generators on plane_max_bin_frac and boundary_hits.",
+    "Statement 5 is supported as reported sentinel behavior: fragility_eps_star=inf for all rows.",
+    "Statement 6 is numerically true, but MT19937's 5e-06 signal is marginal and near a plausible measurement floor.",
+    "Evidence is strong for dataset-level validity (5 generators, fixed protocol) but does not establish universal LRC discriminability."
+  ],
+  "critical_risks": [
+    "No independent recomputation or replicate runs shown; stability across seeds/runs is unquantified.",
+    "plane_max_bin_frac may be sensitive to bin resolution, projection choice, or aliasing effects not unique to lattice structure.",
+    "Negative control coverage is narrow (single irrational torus instance), limiting external validity.",
+    "MT19937 non-zero lattice signal equals a minimal quantum and may be discretization/noise-floor artifact.",
+    "No sensitivity sweep over n, epsilon grid, or binning to establish robustness of the discriminant."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Approve as an empirical benchmark claim with caveats: the proposition is well-specified, falsifiable, and internally consistent under the provided assumptions and controls. The TORUS_irrational_sqrt2/2 control strengthens the claim that the large 0.2000 signal is not generic to non-stochastic sequences, but it also indicates metric-level indistinguishability for equidistributed deterministic vs stochastic generators. Treat the result as corpus-scoped evidence, not a universal theorem of LRC discrimination.",
+  "submitted_utc": "2026-02-28T00:00:00Z"
+}

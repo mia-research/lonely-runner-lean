@@ -1,0 +1,24 @@
+{
+  "claim_id": "CLAIM-LRC-000046",
+  "provider": "claude",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.81,
+  "rationale": [
+    "6,720 extracted values with no truncation; max_rel float64 vs mpmath = 1.11e-15 — well within stable threshold",
+    "metric_match and notation_match both pass with no required fixes",
+    "Honest validation source with base=0.5 variations provides complementary parameter coverage to claims 000045 and 000055",
+    "n=5, phi_n=4 arithmetic progressions show consistent isolation behaviour across varied base parameter",
+    "Repro final status stable; tier A_repro_verified_strong; dossier_readiness: ready"
+  ],
+  "critical_risks": [
+    "Claim statement is a raw CSV fragment — requires formal mathematical reformulation",
+    "Explicit assumptions pending extraction — validity conditions underspecified",
+    "adjudication_score 0.480 triggers human review flag",
+    "float_risk medium — perturbation sensitivity window should be formally reported"
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Solid empirical evidence for n=5 arithmetic isolation at base=0.5, complementing the broader parameter sweep. Numeric integrity is strong. Promotion pipeline should advance subject to claim reformulation and assumption extraction.",
+  "submitted_utc": "2026-02-27T00:00:00Z",
+  "operator_lane": "Lane_A",
+  "source_ref": "claude_code_adjudication_cycle_003_quorum_retry"
+}

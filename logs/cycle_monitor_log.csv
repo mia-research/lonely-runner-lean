@@ -1,0 +1,34 @@
+cycle_id,date_utc,phase,lane_active,manager_token_share,worker_token_share,premium_token_share,provider_quota_state,reroute_count,deferred_due_to_quota,governance_breach_count,cycle_health,notes
+cycle_001,2026-02-25T11:14:14Z,phase0_categorization,Lane_A,,,,,0,0,0,,Cycle 1 initialized
+cycle_002,2026-02-25T11:19:20Z,pilot,Lane_B,0.02,0.98,0.00,not_started,0,0,0,green,Phase 1 kickoff: seeded 80 LRC artifacts for Catalog Agent
+cycle_002,2026-02-25T11:57:19Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step1 complete: seeding+audit+budget check; summary=reports/cycle_002_step1_summary.json
+cycle_002,2026-02-25T23:08:25Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step2 complete: catalog extraction wrote 80 claims; report=reports/cycle_002_catalog_extraction_summary.md
+cycle_002,2026-02-25T23:15:28Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step3 complete: adjudication(80)+empirical_audits(36)+promotion_queue(30)
+cycle_002,2026-02-25T23:21:39Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step4 complete: numeric_ladder_batch1 executed 10 numeric_test claims; summary=reports/repro/cycle_002_batch1_summary.md
+cycle_002,2026-02-25T23:30:27Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step5 complete: numeric_ladder_batch2 executed remaining 17 numeric_test claims; all 27 stable
+cycle_002,2026-02-25T23:33:09Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step6 complete: numeric review+ranking generated (27 executed claims)
+cycle_002,2026-02-25T23:45:03Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step7 complete: dossiers(23)+uncapped_rerun(5 stable)+measurement_fix_queue(4)
+cycle_002,2026-02-25T23:56:08Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step8 complete: measurement_fix_tickets(4 resolved)+final_publish_packets(27 dossiers)
+cycle_002,2026-02-26T00:03:02Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step9 complete: evidence_book(27 dossiers) + plan_drift_review generated
+cycle_002,2026-02-26T00:57:18Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step10 complete: anti_drift_hardening(run_log+status_sync+task_packs)
+cycle_002,2026-02-26T02:55:56Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step11 complete: theorem/citation/quorum packs executed
+cycle_002,2026-02-26T03:20:54Z,pilot,Lane_B,0.03,0.97,0.00,auth_blocked,0,0,0,amber,Step12 complete: theorem_followups_closed + live_quorum_attempted(10); claude_auth_blocked
+cycle_002,2026-02-26T03:38:45Z,pilot,Lane_B,0.03,0.97,0.00,quota_blocked,0,1,0,amber,Step13 complete: live_quorum_rerun(10) with Claude quota blocker (resets 8am)
+cycle_002,2026-02-26T03:45:24Z,pilot,Lane_B,0.03,0.97,0.00,quota_blocked,0,1,0,amber,Step14 complete: second_claude_lane_checked+backup_provider_readiness(no keys/cli)
+cycle_002,2026-02-26T04:15:41Z,pilot,Lane_B,0.03,0.97,0.00,quota_blocked,0,1,0,amber,Step15 complete: hybrid_human_api_governance_runbook+manual_quorum_template
+cycle_002,2026-02-26T04:21:09Z,pilot,Lane_B,0.03,0.97,0.00,quota_blocked,0,1,0,amber,Step16 complete: manual_quorum_packet_generated(7)+ingest_verifier_ready
+cycle_003,2026-02-27T02:37:00Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step17 complete: manual_quorum_ingest(7 blocked) + supplementary_quorum(3 same_provider); all 10 executed_live quorum_complete=yes
+cycle_003,2026-02-27T02:44:01Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step18 complete: batch_repro_check(27/27 match; float64_vs_decimal128_precision_ladder); repro_summary=reports/repro/batch_repro_cycle_002_summary.md
+cycle_003,2026-02-27T02:45:00Z,pilot,Lane_B,0.03,0.97,0.00,healthy,0,0,0,green,Step19 complete: registry_promotion_update; 8 claims promoted to A-Validated(consensus_caveated+repro_match); 2 conflict_escalate; 17 pending_quorum
+cycle_002,2026-02-28T04:03:28Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,1,0,0,green,Step17 complete: canonical_root_recovered+iCloud_path_fix+manual_quorum_ingest(7 executed_live)
+cycle_004,2026-02-28T04:17:40Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,1,0,0,green,"Step01 complete: supplementary_manual_ingest(3) + post_quorum_promotion_sweep + cycle_004_task_packs_generated(17_pending,3_conflict)"
+cycle_004,2026-02-28T04:18:46Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,1,0,0,green,Step02 complete: cycle_004_extension_plan_addendum_2026-02-28 authored (baseline corrected to A=7/conflict=3/pending=17)
+cycle_004,2026-02-28T04:46:45Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,"Step03 complete: conflict_reformulation_pack_executed(3/3) + cycle_004_quorum_batch1(limit=5) started; results=3 blocked_provider_auth,2 partial_same_provider; blockers=claude_timeout,codex_timeout"
+cycle_004,2026-02-28T04:56:03Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,Step04 complete: cycle_004_quorum_batch2(12) + merged_into_canonical; manual_quorum_packet_cycle_004_generated(11 pending strict cross-provider claims)
+cycle_004,2026-02-28T06:12:03Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,Step05 complete: fixed stale dossier root paths and regenerated cycle_004 manual prompts/workbook with filled dossier excerpts (11 claims).
+cycle_004,2026-02-28T06:20:13Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,"Step06 complete: manual_quorum_ingest CLAIM-LRC-000043 (Gemini official, Kimi/DeepSeek supplemental); external_quorum_complete=yes"
+cycle_004,2026-02-28T06:38:52Z,pilot,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,Step07 complete: formalization-first pivot codified; generated claim_formalization_task_pack_cycle_004 (10 unresolved claims).
+cycle_004,2026-02-28T06:52:49Z,quorum_closeout,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,"Created cycle_004_dedupe_gate_closeout.{csv,md}; 9 runnable, 1 held duplicate (000063->000058)."
+cycle_004,2026-02-28T06:52:49Z,quorum_closeout,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,Created manual_quorum_copy_paste_cycle_004_remaining_dedupe_gated.md with 9 runnable claims.
+cycle_004,2026-02-28T06:52:49Z,quorum_closeout,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,"Ingested current manual votes into updated task pack/ledger; 1 ingested, 10 pending."
+cycle_004,2026-02-28T06:53:42Z,quorum_closeout,Lane_B,0.03,0.97,0.00,hybrid_live,2,0,0,amber,Active task pack generated (ingest + dedupe merged): two_model_quorum_task_pack_cycle_004_active.csv

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "task_id": "QRM4-LRC-0001",
+  "model_lane": "human_operator",
+  "execution_mode": "manual_human",
+  "external_api_called": true,
+  "provider": "Gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.95,
+  "rationale": [
+    "Numeric reproducibility is highly stable, with maximum relative error versus mpmath at 7.71e-33 (decimal128).",
+    "All 3,456 extracted tokens successfully passed metric and notation matches.",
+    "The extracted 'short_statement' and 'excerpt' contain raw CSV data headers and rows rather than a formal mathematical hypothesis.",
+    "Explicit assumptions are marked 'pending extraction review', making it impossible to evaluate the theoretical constraints of the claim."
+  ],
+  "critical_risks": [
+    "Semantic void: No formal mathematical proposition is available to evaluate against the highly precise empirical data.",
+    "Extraction failure: The pipeline ingested CSV rows instead of the intended claim text.",
+    "Medium float risk remains unresolved without the context of the explicit assumptions."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "The empirical data pipeline executed successfully with excellent precision, but the review is blocked by an extraction error. The actual mathematical claim text must be manually recovered and attached to the dossier before a substantive adjudication can occur.",
+  "submitted_utc": "2026-02-28T06:14:13Z",
+  "source_ref": "",
+  "operator_lane": "",
+  "generated_utc": "2026-02-28T06:51:51Z"
+}

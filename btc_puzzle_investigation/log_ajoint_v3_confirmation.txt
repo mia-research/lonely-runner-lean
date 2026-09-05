@@ -1,0 +1,9 @@
+== A-joint v3 tier=confirmation N=20000 R=10000 prereg_sha=3560eb73cce2 ==
+  q=2029: CM I_prim=+0.0076 (p=0.6425) | nonCM(N=1951,t=79) I_prim=+0.0091 (p=0.0120) | Delta=-0.0015
+        CM channels: omni(combo) mi=+0.0078 p=0.4577 | sec(interval) mi=+0.0038 p=0.5471 | s_strata=27
+  q=2053: CM I_prim=+0.0075 (p=0.7281) | nonCM(N=2137,t=-83) I_prim=+0.0083 (p=0.1951) | Delta=-0.0008
+        CM channels: omni(combo) mi=+0.0080 p=0.3636 | sec(interval) mi=+0.0045 p=0.0527 | s_strata=27
+  q=2089: CM I_prim=+0.0073 (p=0.8166) | nonCM(N=2143,t=-53) I_prim=+0.0083 (p=0.1876) | Delta=-0.0010
+        CM channels: omni(combo) mi=+0.0077 p=0.5282 | sec(interval) mi=+0.0037 p=0.6873 | s_strata=27
+  Delta>0 on 0/3 primes (paired-sign direction)
+DONE

@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000065",
+  "task_id": "QRM4-LRC-0016",
+  "model_lane": "deepseek_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:54:02Z",
+  "provider": "codex_fallback_for_deepseek",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.31,
+  "rationale": [
+    "Quantitative indicators are strong (review_score 94.274, numeric ladder stable, metric match pass).",
+    "The provided dossier excerpt contains no proof-level mathematical content to independently verify the claim.",
+    "Conservative publication gating requires direct validation of derivations, assumptions, and failure modes."
+  ],
+  "critical_risks": [
+    "No accessible theorem/proof details, so correctness cannot be adjudicated on substance.",
+    "High benchmark-style scores may not guarantee formal validity of the underlying claim.",
+    "Unknown behavior under edge cases, counterexamples, and assumption violations."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Escalation is procedural due to missing technical evidence, not a negative judgment on novelty; provide full derivations, assumptions, and independent verification artifacts for re-evaluation. | fallback_used_for_lane_provider=deepseek"
+}

@@ -1,0 +1,70 @@
+FOCUSED MATH TASK. Single question, computational. Please be concrete and give exact constants, not asymptotic placeholders.
+
+SETUP:
+- p is a prime, d is a positive integer with gcd(p, d) = 1.
+- alpha_j = p + 1/(j*sqrt(2)) for integer j >= 1.
+- Consider the sequence S_N = { k * alpha_j / d : k = 0, 1, ..., N-1 } mod 1.
+- We want to bound the Weyl discrepancy D_N(S_N) using the Erdős-Turán inequality:
+    D_N(alpha) <= C_0 / H + C_1 * sum_{h=1}^{H} 1 / (h * ||h * alpha||)
+  where ||x|| = distance from x to nearest integer, C_0 = 6, C_1 = 4 are standard.
+
+QUESTION 1 (verify):
+At h = d, what is the value of ||d * alpha_j / d|| exactly?
+
+I claim:
+  d * (alpha_j / d) = alpha_j = p + 1/(j*sqrt(2)).
+  Since p is an integer, ||p + 1/(j*sqrt(2))|| = ||1/(j*sqrt(2))||.
+  For j >= 1, 1/(j*sqrt(2)) <= 1/sqrt(2) < 1/2, so the nearest integer is 0, hence
+  ||1/(j*sqrt(2))|| = 1/(j*sqrt(2)).
+
+  Therefore the h = d term in the Erdős-Turán sum is
+    1 / (d * ||d * alpha_j / d||) = 1 / (d * 1/(j*sqrt(2))) = j*sqrt(2)/d.
+
+Please verify: is this calculation correct? Yes or no, with a one-line explanation.
+
+QUESTION 2 (lower bound):
+Granted the calculation above, the Erdős-Turán inequality cannot give an upper bound on D_N better than (C_1 * j*sqrt(2)/d) per N, because the h = d term alone contributes that much to the sum. (Yes, Erdős-Turán is an UPPER bound, but if any single term in the sum is large, the upper bound on D_N is also large — there is no way to make D_N smaller than the contribution forces.)
+
+More precisely: there is a matching LOWER bound on D_N coming from Koksma-type arguments: if alpha has a small partial quotient (in the sense that ||q*alpha|| is small for some small q), then D_N(alpha) is bounded BELOW by something proportional to that partial-quotient contribution.
+
+The classical lower bound (Koksma 1942, Schoissengeier; see Kuipers-Niederreiter Theorem 2.3.5) states:
+  D_N(alpha) >= (1/N) * max_{1 <= h <= N} { 1/(h * ||h * alpha||) } - 1/N
+
+(up to absolute constants).
+
+Applying this with h = d (assuming d <= N), we get
+  D_N(alpha_j / d) >= (C_3 / N) * (j*sqrt(2)/d) - 1/N = (C_3 * j*sqrt(2) - d) / (d * N)
+
+for some absolute constant C_3 > 0.
+
+Please verify: is this lower bound application correct? Does the Koksma-Schoissengeier lower bound apply this way? Cite the exact theorem.
+
+QUESTION 3 (consequence):
+Granted Questions 1 and 2 are correct, the discrepancy of the orbit { k * alpha_j / d : k = 0, ..., N-1 } is at least
+  D_N >= Omega(j / (d * N))
+
+so to achieve D_N < epsilon we need
+  N >= Omega(j / (d * epsilon)).
+
+This makes the smallest valid K(j, mu(A)) in the v11.6 §5.2 Step 2 GROW LINEARLY in j:
+  K(j, mu(A)) = N >= Omega(j / (d * mu(A))).
+
+Then the witness t_j = s_0 + k_j / d in Step 2 is bounded only by
+  t_j <= s_0 + K/d <= s_0 + Omega(j / (d^2 * mu(A))).
+
+This grows linearly in j, so there is NO uniform bound B independent of j.
+
+But the proof's Step 3 (compactness) requires t_j <= B uniformly in j to extract a convergent subsequence and pass to the limit. The perturbation term in Step 3 is t_j / (j * sqrt(2)); if t_j grows like O(j), this term tends to a NONZERO limit (1/sqrt(2) constant), so { alpha_j * t_j } does not converge to { p * t_* }.
+
+Question: Is the proof of Theorem 5.2 as written in v11.6 §5.2 structurally broken because of this? Please give a definitive answer (broken / not broken) with reasoning.
+
+QUESTION 4 (resolution):
+If the proof is broken as Questions 1-3 suggest, propose a CONCRETE FIX. Three candidates:
+
+(a) Replace alpha_j = p + 1/(j*sqrt(2)) with alpha_j = p + epsilon_j for some sequence epsilon_j -> 0 chosen so that ||d * alpha_j|| does NOT vanish. For example, alpha_j = p + 1/(2j) + 1/(j*sqrt(2)) so that the integer-shifted version has ||d * alpha_j|| = ||d/(2j) + d/(j*sqrt(2))|| which is bounded away from 0 for j large (since d/(2j) ~ d/(2j) is a slowly-decaying rational which still hits non-zero residues mod 1). Does this work?
+
+(b) Pick alpha_j with bounded irrationality measure / bounded partial quotients UNIFORMLY in j. For instance, alpha_j = p + phi/j where phi = golden ratio = (1+sqrt(5))/2 has continued fraction [1; 1, 1, 1, ...]. Does this give D_N uniform in j?
+
+(c) Abandon Strategy (a) and pursue a different proof structure entirely: e.g., Fubini/measure-factorization mirroring the Lean approach (Theorem52_Weyl.lean uses Fubini, not Erdős-Turán). Sketch how this would work.
+
+Please give CONCRETE answers to all four questions. Reference standard texts (Kuipers-Niederreiter, Khinchin, Hardy-Wright, Bugeaud "Distribution Modulo One and Diophantine Approximation") where relevant. Aim for ~1500 words total.

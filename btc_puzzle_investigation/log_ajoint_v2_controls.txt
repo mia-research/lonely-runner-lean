@@ -1,0 +1,9 @@
+== FIRING CONTROLS on CM arm q=541 B=2 N=571 (N=5000, R=10000) ==
+  PC-SEM rho=0.0 : mi=+0.0315 p=0.4547 guard_ok=False distinct_psi=0 s3zero=0/0 draws/plant~0.00
+  PC-SEM rho=0.15: mi=+0.0578 p=0.0001 guard_ok=True distinct_psi=3 s3zero=0/728 draws/plant~3.09
+  PC-SEM rho=0.3 : mi=+0.1549 p=0.0001 guard_ok=True distinct_psi=3 s3zero=0/1534 draws/plant~3.07
+  PC-SEM rho=0.6 : mi=+0.5235 p=0.0001 guard_ok=True distinct_psi=3 s3zero=0/3024 draws/plant~3.07
+  PC-GRADE mix=0.0 : mi=+0.0297 p=0.7923
+  PC-GRADE mix=0.1 : mi=+0.0425 p=0.0001
+  PC-GRADE mix=0.25: mi=+0.1090 p=0.0001
+  PC-LIN (omnibus): mi=+0.0000 p=1.0000

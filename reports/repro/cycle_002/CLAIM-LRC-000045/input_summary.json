@@ -1,0 +1,33 @@
+{
+  "claim_id": "CLAIM-LRC-000045",
+  "promotion_id": "PROMO-LRC-0008",
+  "source_path": "/Users/trentpalelei/Downloads/lrc_honest_validation_1759237637956.csv",
+  "source_sha256": "022a34a4560b2b57fe1f26124a3fc9f0d6e3a9c11e42a55a2e1d63c071140b0c",
+  "source_bytes": 9309,
+  "extraction": {
+    "method": "csv_cells_plus_regex",
+    "rows_scanned": 151,
+    "truncated": false
+  },
+  "tokens_extracted": 1410,
+  "usable_values": 1410,
+  "sample_values": [
+    "5",
+    "4",
+    "1",
+    "0.05",
+    "0",
+    "0",
+    "28",
+    "12",
+    "4",
+    "0.20",
+    "4.000000",
+    "5"
+  ],
+  "thresholds": {
+    "stable": 1e-09,
+    "sensitive": 1e-06
+  },
+  "created_utc": "2026-02-25T23:21:08Z"
+}

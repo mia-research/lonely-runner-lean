@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000057",
+  "provider": "Kimi-K2",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.82,
+  "rationale": [
+    "Formal proposition clearly articulates falsifiable empirical claims with explicit metrics",
+    "Agreement_rate=1.0 and isolation_match_rate=1.0 are strong correctness indicators for the dataset",
+    "Speedup range [3.69x, 11.30x] with mean 6.06x is well-bounded and consistent across 100 cases",
+    "Falsification rules are explicit and testable via recomputation from SHA-256 verified source",
+    "Float32 timing noise acknowledged but isolated from correctness-critical columns (Agreement, Isolated counts)",
+    "Dataset-level scope properly limited—no overgeneralization to universal algorithmic validity claimed",
+    "Numeric ladder stable with max_rel_float64_vs_mpmath at 3.0e-16 (excellent)",
+    "Review_score 98.276 reflects high reproducibility confidence"
+  ],
+  "critical_risks": [
+    "Float32 timing noise in time columns may affect speedup precision at 4th decimal place",
+    "Single dataset of 100 cases does not establish asymptotic complexity or worst-case bounds",
+    "No cross-platform timing validation (CPU, OS, implementation language)",
+    "Agreement=true/false is treated as ground truth but no verification of ground-truth oracle provided",
+    "Mean speedup 6.06x is an empirical average, not a proven lower bound for all inputs",
+    "Dataset homogeneity risk: 100 cases may share structural similarities not representative of full LRC input space"
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "This is a well-formed empirical claim with clear falsification criteria. The adjudicable statements are dataset-specific and properly bounded. Key strengths: (1) SHA-256 source integrity verification, (2) separation of correctness claims (agreement_rate, isolation_match_rate) from performance claims (speedup), (3) explicit acknowledgment of float32 timing limitations without conflating them with logical correctness. Caveats for publication: (1) Label as 'empirical validation on 100-case benchmark' not 'universal algorithmic proof', (2) Include note about timing precision limits affecting speedup calculations beyond 3 significant figures, (3) Recommend follow-up work for complexity-theoretic analysis if broader validity is desired. The 1.0 agreement rate is strong but should be reported as 'no discrepancies observed in test set' rather than 'proven correct for all inputs'.",
+  "submitted_utc": "2026-02-26T00:10:00Z"
+}

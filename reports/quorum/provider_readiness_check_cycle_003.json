@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-02-26T03:45:24Z",
+  "scope": "live second-provider readiness for strict cross-provider quorum",
+  "claude": {
+    "auth_state": "valid_token_obtained",
+    "runtime_state": "quota_blocked",
+    "message": "Spending cap reached resets 8am"
+  },
+  "codex_chatgpt": {
+    "runtime_state": "available"
+  },
+  "backup_providers": {
+    "gemini": {
+      "api_key_env": "missing",
+      "cli": "missing"
+    },
+    "deepseek": {
+      "api_key_env": "missing",
+      "cli": "missing"
+    },
+    "kimi": {
+      "api_key_env": "missing",
+      "cli": "missing"
+    }
+  },
+  "strict_cross_provider_quorum_ready_now": false,
+  "recommended_unblock_paths": [
+    "rerun at/after 8am local when Claude cap resets",
+    "or provide Gemini/DeepSeek/Kimi API key for immediate second-provider routing"
+  ]
+}

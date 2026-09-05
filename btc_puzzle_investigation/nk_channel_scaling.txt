@@ -1,0 +1,23 @@
+# n/k CHANNEL scaling verdict  Bnull=300   NS=[500, 1000, 2000, 5000, 10000, 20000, 40000]
+# SIGNAL: I_c plateau (loglog slope ~0) & z ~ sqrt(N).  NOISE: I_c ~1/N & z flat.
+
+[XY%3 x n(nmax=160)  REAL n           ]
+   I_c :   -0.00790   -0.00270   -0.00179   -0.00003    0.00012    0.00025    0.00010
+   z   :      -1.23      -0.92      -1.26      -0.05       0.42       1.73       1.35
+   -> loglog-slope(I_c)=-1.02  z-slope=+0.0173  => noise
+
+[XY%3 x n(nmax=160)  SHUFFLED n (ctrl)]
+   I_c :    0.00336    0.00600   -0.00054   -0.00017    0.00009   -0.00010    0.00017
+   z   :       0.56       2.15      -0.35      -0.27       0.33      -0.71       2.59
+   -> loglog-slope(I_c)=-0.92  z-slope=+0.0048  => noise
+
+[Ytop8 x n(nmax=64)  REAL n           ]
+   I_c :    0.02327    0.02071    0.00329   -0.00422   -0.00151    0.00031   -0.00003
+   z   :       0.85       1.23       0.36      -1.29      -0.89       0.37      -0.08
+   -> loglog-slope(I_c)=-1.38  z-slope=-0.0047  => noise
+
+[Ytop8 x n(nmax=64)  SHUFFLED n (ctrl)]
+   I_c :    0.01223    0.00275   -0.00072   -0.00337    0.00150    0.00016    0.00001
+   z   :       0.44       0.16      -0.08      -1.03       0.88       0.18       0.02
+   -> loglog-slope(I_c)=-1.26  z-slope=+0.0003  => noise
+

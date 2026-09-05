@@ -1,0 +1,7 @@
+task_id,claim_id,status,unresolved_critical_nodes,checks_passed,checks_warn,checks_failed,rationale,output_dir,updated_utc
+THM-LRC-0001,CLAIM-LRC-000007,executed,no,5,0,0,criteria_pass_first_pass,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000007,2026-02-26T01:48:46Z
+THM-LRC-0002,CLAIM-LRC-000030,needs_followup,yes,4,1,0,insufficient_dependency_structure,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000030,2026-02-26T01:48:46Z
+THM-LRC-0003,CLAIM-LRC-000018,executed,no,5,0,0,criteria_pass_first_pass,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000018,2026-02-26T01:48:46Z
+THM-LRC-0004,CLAIM-LRC-000021,executed,no,5,0,0,criteria_pass_first_pass,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000021,2026-02-26T01:48:46Z
+THM-LRC-0005,CLAIM-LRC-000022,executed,no,5,0,0,criteria_pass_first_pass,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000022,2026-02-26T01:48:46Z
+THM-LRC-0006,CLAIM-LRC-000075,needs_followup,yes,4,0,1,high_severity_refuter_failures,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000075,2026-02-26T01:48:46Z

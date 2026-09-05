@@ -1,0 +1,11 @@
+n,phi_n,metric_name,perfect_match_recorded,perfect_match_recomputed,max_error,avg_error,metric_unit,acceptance_threshold,invariant_ok
+3,2,residue_consistency,True,True,1.1102230246251565e-15,4.440892098500626e-16,dimensionless,max_error<=1e-12,True
+4,2,residue_consistency,True,True,0.1250000000000001,0.01785714285714316,dimensionless,max_error<=1e-12,True
+5,4,residue_consistency,True,True,0.09999999999999998,0.013513513513513733,dimensionless,max_error<=1e-12,True
+6,2,residue_consistency,True,True,0.2500000000000001,0.08805555555555566,dimensionless,max_error<=1e-12,True
+7,6,residue_consistency,True,True,0.0714285714285714,0.011616954474097517,dimensionless,max_error<=1e-12,True
+8,4,residue_consistency,True,True,0.09375000000000022,0.03621031746031759,dimensionless,max_error<=1e-12,True
+9,6,residue_consistency,True,True,0.07407407407407463,0.0275429813327124,dimensionless,max_error<=1e-12,True
+10,4,residue_consistency,True,True,0.15000000000000063,0.05657523809523799,dimensionless,max_error<=1e-12,True
+11,10,residue_consistency,True,True,0.04545454545454544,0.012874648120549849,dimensionless,max_error<=1e-12,True
+12,4,residue_consistency,True,True,0.14583333333333348,0.06141692645230429,dimensionless,max_error<=1e-12,True

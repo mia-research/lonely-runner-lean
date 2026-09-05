@@ -1,0 +1,9 @@
+family,n,seed,phi_44,detected_phases_44,phase_count_match,phi_match_44,phi_56,unique_phases_56,unique_phases_match,phi_match_56_raw,phi_match_56_bool,isolation_count_56,metric_relation
+arithmetic,5,0,4,1,False,false,4,4,True,YES,True,12.0,disagree
+arithmetic,7,0,6,2,False,false,6,6,True,YES,True,20.0,disagree
+arithmetic,8,0,4,2,False,false,4,4,True,YES,True,12.0,disagree
+arithmetic,10,0,4,2,False,false,4,4,True,YES,True,12.0,disagree
+arithmetic,11,0,10,5,False,false,10,10,True,YES,True,32.0,disagree
+arithmetic,12,0,4,2,False,false,4,4,True,YES,True,12.0,disagree
+arithmetic,13,0,12,5,False,false,12,12,True,YES,True,42.0,disagree
+arithmetic,15,0,8,3,False,false,8,8,True,YES,True,30.0,disagree

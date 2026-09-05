@@ -1,0 +1,16 @@
+{
+  "run_id": "run_auto_99",
+  "completed_at": "2026-03-30T08:18:24.450666+00:00",
+  "interrupted": false,
+  "n_tested": 5000000,
+  "n_passed": 5000000,
+  "n_failed": 0,
+  "n_batches_completed": 1000,
+  "total_boundaries_evaluated": 3055855783,
+  "global_min_margin": -1.3877787807814457e-17,
+  "global_max_margin": 0.09084019530038637,
+  "total_time_s": 339.0066948360002,
+  "configs_per_second": 14748.971262702727,
+  "success_rate": 1.0,
+  "p_failure_upper_95": 6e-07
+}

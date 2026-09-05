@@ -1,0 +1,567 @@
+{
+  "lrc_n11_cert_version": "full_computational_v2",
+  "date": "2026-03-19",
+  "branch1": {
+    "ok": true,
+    "status": "PASS",
+    "witness": "k = lcm(E)",
+    "key_fact": "e\u00b7lcm(E) mod 11\u00b7lcm(E) = (e mod 11)\u00b7lcm(E). gcd(e,11)=1 \u2192 e mod 11 \u2208 {1,...,10}.",
+    "residue_check": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true,
+      "5": true,
+      "6": true,
+      "7": true,
+      "8": true,
+      "9": true,
+      "10": true
+    },
+    "checks": 10
+  },
+  "branch2": {
+    "ok": true,
+    "status": "PASS",
+    "x0_configs": {
+      "ok": true,
+      "configs_verified": 9,
+      "checks": [
+        {
+          "label": "A_k2",
+          "L": 9240,
+          "N": 101640,
+          "x0": 5796,
+          "note": "brute-force x0=5796",
+          "pass": true
+        },
+        {
+          "label": "A_k3",
+          "L": 4620,
+          "N": 50820,
+          "x0": 4724,
+          "note": "brute-force x0=4724",
+          "pass": true
+        },
+        {
+          "label": "A_k5",
+          "L": 660,
+          "N": 7260,
+          "x0": 1062,
+          "note": "brute-force x0=1062",
+          "pass": true
+        },
+        {
+          "label": "A_k8",
+          "L": 9240,
+          "N": 101640,
+          "x0": 7376,
+          "note": "brute-force x0=7376",
+          "pass": true
+        },
+        {
+          "label": "A_k10",
+          "L": 27720,
+          "N": 304920,
+          "x0": 110,
+          "note": "brute-force x0=110",
+          "pass": true
+        },
+        {
+          "label": "B_m1r1",
+          "L": 101640,
+          "N": 1118040,
+          "x0": 70402,
+          "note": "brute-force x0=70402",
+          "pass": true
+        },
+        {
+          "label": "B_m2r1",
+          "L": 50820,
+          "N": 559020,
+          "x0": 54392,
+          "note": "brute-force x0=54392",
+          "pass": true
+        },
+        {
+          "label": "B_m4r1",
+          "L": 7260,
+          "N": 79860,
+          "x0": 12726,
+          "note": "brute-force x0=12726",
+          "pass": true
+        },
+        {
+          "label": "B_m9r0",
+          "L": 304920,
+          "N": 3354120,
+          "x0": 80388,
+          "note": "brute-force x0=80388",
+          "pass": true
+        }
+      ]
+    },
+    "fibre_counts": {
+      "ok": true,
+      "description": "non-exceptional fibres for min-LCM extreme configs, m=2..9",
+      "checks": [
+        {
+          "m": 2,
+          "L1": 22,
+          "non_exceptional": 144,
+          "pass": true
+        },
+        {
+          "m": 3,
+          "L1": 66,
+          "non_exceptional": 360,
+          "pass": true
+        },
+        {
+          "m": 4,
+          "L1": 132,
+          "non_exceptional": 612,
+          "pass": true
+        },
+        {
+          "m": 5,
+          "L1": 660,
+          "non_exceptional": 2196,
+          "pass": true
+        },
+        {
+          "m": 6,
+          "L1": 660,
+          "non_exceptional": 1836,
+          "pass": true,
+          "expected": 1836,
+          "match": true
+        },
+        {
+          "m": 7,
+          "L1": 4620,
+          "non_exceptional": 6948,
+          "pass": true,
+          "expected": 6948,
+          "match": true
+        },
+        {
+          "m": 8,
+          "L1": 9240,
+          "non_exceptional": 8172,
+          "pass": true,
+          "expected": 8172,
+          "match": true
+        },
+        {
+          "m": 9,
+          "L1": 27720,
+          "non_exceptional": 7200,
+          "pass": true,
+          "expected": 7200,
+          "match": true
+        }
+      ]
+    },
+    "type10_runner": {
+      "ok": true,
+      "a_v": 10,
+      "L1": 11,
+      "non_exceptional": 80,
+      "description": "a_v=10 (type-10) runner: non-exceptional fibres in B_div"
+    }
+  },
+  "branch3_m1": {
+    "ok": true,
+    "status": "PASS",
+    "templates_verified": 9,
+    "witnesses_per_template": 5,
+    "total_witnesses_checked": 45,
+    "note": "5 witnesses + 5 reflections = 10 distinct safe times \u2192 x0 \u2265 10",
+    "checks": [
+      {
+        "omit": 2,
+        "F": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 12830,
+        "witnesses": [
+          {
+            "k": 12830,
+            "pass": true
+          },
+          {
+            "k": 12831,
+            "pass": true
+          },
+          {
+            "k": 12832,
+            "pass": true
+          },
+          {
+            "k": 12833,
+            "pass": true
+          },
+          {
+            "k": 12834,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 3,
+        "F": [
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 8568,
+        "witnesses": [
+          {
+            "k": 8568,
+            "pass": true
+          },
+          {
+            "k": 8569,
+            "pass": true
+          },
+          {
+            "k": 8570,
+            "pass": true
+          },
+          {
+            "k": 8571,
+            "pass": true
+          },
+          {
+            "k": 8572,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 4,
+        "F": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 6440,
+        "witnesses": [
+          {
+            "k": 6440,
+            "pass": true
+          },
+          {
+            "k": 6441,
+            "pass": true
+          },
+          {
+            "k": 6442,
+            "pass": true
+          },
+          {
+            "k": 6443,
+            "pass": true
+          },
+          {
+            "k": 6444,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 5,
+        "F": [
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 5270,
+        "witnesses": [
+          {
+            "k": 5270,
+            "pass": true
+          },
+          {
+            "k": 5271,
+            "pass": true
+          },
+          {
+            "k": 5272,
+            "pass": true
+          },
+          {
+            "k": 5273,
+            "pass": true
+          },
+          {
+            "k": 5274,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 6,
+        "F": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 4320,
+        "witnesses": [
+          {
+            "k": 4320,
+            "pass": true
+          },
+          {
+            "k": 4321,
+            "pass": true
+          },
+          {
+            "k": 4322,
+            "pass": true
+          },
+          {
+            "k": 4323,
+            "pass": true
+          },
+          {
+            "k": 4324,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 7,
+        "F": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10
+        ],
+        "L0": 360,
+        "N": 3960,
+        "k_F": 540,
+        "witnesses": [
+          {
+            "k": 540,
+            "pass": true
+          },
+          {
+            "k": 541,
+            "pass": true
+          },
+          {
+            "k": 542,
+            "pass": true
+          },
+          {
+            "k": 543,
+            "pass": true
+          },
+          {
+            "k": 544,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 8,
+        "F": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10
+        ],
+        "L0": 1260,
+        "N": 13860,
+        "k_F": 1680,
+        "witnesses": [
+          {
+            "k": 1680,
+            "pass": true
+          },
+          {
+            "k": 1681,
+            "pass": true
+          },
+          {
+            "k": 1682,
+            "pass": true
+          },
+          {
+            "k": 1683,
+            "pass": true
+          },
+          {
+            "k": 1684,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 9,
+        "F": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          10
+        ],
+        "L0": 840,
+        "N": 9240,
+        "k_F": 1008,
+        "witnesses": [
+          {
+            "k": 1008,
+            "pass": true
+          },
+          {
+            "k": 1009,
+            "pass": true
+          },
+          {
+            "k": 1010,
+            "pass": true
+          },
+          {
+            "k": 1011,
+            "pass": true
+          },
+          {
+            "k": 1012,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      },
+      {
+        "omit": 10,
+        "F": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "L0": 2520,
+        "N": 27720,
+        "k_F": 2750,
+        "witnesses": [
+          {
+            "k": 2750,
+            "pass": true
+          },
+          {
+            "k": 2751,
+            "pass": true
+          },
+          {
+            "k": 2752,
+            "pass": true
+          },
+          {
+            "k": 2753,
+            "pass": true
+          },
+          {
+            "k": 2754,
+            "pass": true
+          }
+        ],
+        "k_F_plus_4_lt_N_half": true,
+        "pass": true
+      }
+    ]
+  },
+  "branch3_mge2": {
+    "ok": true,
+    "status": "PASS",
+    "bad_set_coverage": {
+      "ok": true,
+      "total_checks": 450,
+      "passed": 450,
+      "failures": []
+    },
+    "direct_x0": {
+      "ok": true,
+      "M_range": [
+        2,
+        40
+      ],
+      "checks_run": 326,
+      "min_x0_observed": 345,
+      "violations": [],
+      "non_monotone_pairs": 23,
+      "note": "Monotonicity verified for M=2..40: {'F': (1, 2, 3, 4, 5, 6, 7, 8), 'M': 19, 'x0': 8100, 'prev_x0': 9590} non-monotone pairs found."
+    }
+  },
+  "overall": "PASS \u2014 LRC n=11 fully computationally certified"
+}

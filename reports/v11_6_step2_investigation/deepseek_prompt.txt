@@ -1,0 +1,67 @@
+TASK: Investigate what explicit Erdős–Turán-type bound on the Weyl discrepancy is actually provable for the sequence used in the proof of Theorem 5.2 of an integer-speed Lonely Runner manuscript. The goal is to make rigorous a step currently marked as "by the Erdős–Turán inequality C(j) grows at most polynomially in j" without committing to a specific form before checking the math.
+
+SETUP (exact):
+- Integer slow speeds v_1, ..., v_k ∈ ℤ⁺ (distinct), L := lcm(v_i), d := gcd(v_i). Generally d < L when k ≥ 2.
+- Integer fast speeds u_1, ..., u_ℓ ∈ ℤ⁺ (distinct).
+- p is a prime with gcd(p, L) = 1.
+- G := {t ≥ 0 : ‖v_i t‖ ≥ 1/n for all i}, periodic with fundamental period 1/d.
+- A := {φ ∈ [0,1) : ‖u_j φ‖ ≥ 1/n for all j}. A is a finite union of closed intervals, each of width ≥ (n−2)/(n · max_j u_j). μ(A) > 0.
+- s_0 ∈ G ∩ [0, 1/d).
+- α_j := p + 1/(j√2)  for j = 1, 2, 3, ...  (so α_j is irrational; α_j → p)
+- We need: a k_j ∈ {0, 1, ..., K(j, μ(A))} with {α_j (s_0 + k_j/d)} ∈ A.
+
+OBSERVATION (driving the problem):
+{k α_j} = {k(p + 1/(j√2))} = {k/(j√2)}  (since kp ∈ ℤ)
+So shifting along the arithmetic progression s_0 + k/d gives the orbit
+  {α_j s_0 + k · α_j/d}  with α_j/d = p/d + 1/(jd√2).
+
+INVESTIGATION QUESTIONS (in order of priority):
+
+(1) DISCREPANCY OF THE ORBIT.
+What is the (Weyl) discrepancy D_N({k · α_j/d}_{k=0}^{N-1}) as a function of (j, N)?
+
+(a) Apply the Erdős–Turán inequality:
+    D_N(α) ≤ C₀/H + C₁ Σ_{h=1}^{H} 1/(h · ‖hα‖)
+    valid for any H ≥ 1, with C₀, C₁ absolute (often taken as 6 or 4 in standard references).
+
+(b) Note that α_j/d − p/d = 1/(jd√2). Since p/d ∈ ℚ, ‖hα_j/d‖ may simplify by writing
+    hα_j/d ≡ h·p/d + h/(jd√2)  (mod 1).
+    The hp/d term is rational with denominator dividing d, so ‖hα_j/d‖ depends on h mod d in a controlled way.
+
+(c) For h coprime to d the rational part contributes a fixed offset; for h ≡ 0 (mod d) it contributes 0. Either way, ‖h · α_j/d‖ is at least the distance from h/(jd√2) to the nearest fraction with denominator d shifted by hp/d.
+
+(d) 1/(jd√2) is a quadratic irrational (root of (jd)²·2 x² = 1). Its continued fraction is eventually periodic, so partial quotients are bounded — but the bound depends on j and d.
+
+KEY SUB-QUESTION: For α = 1/(jd√2) (or equivalently √2/(2jd)), what is the explicit upper bound on partial quotients of α as a function of j and d? Use the classical result that for any quadratic irrational, the periodic CF length and max partial quotient can be bounded via the discriminant of the quadratic.
+
+(2) UNIFORMITY IN j.
+Critical concern: as j → ∞, α_j → p (rational). At α = p exactly, the orbit {k · p/d} is finite (size d) and discrepancy fails to be o(1). So the discrepancy D_N(α_j/d) must DEGRADE as j grows, for fixed N. State the trade-off explicitly: for the orbit to ε-equidistribute (i.e., D_N < ε), we need N ≳ f(j, ε) for some explicit f. Is f(j, ε) = O(j · poly(1/ε)), or worse?
+
+(3) RESULTING K(j, μ(A)) BOUND.
+Given μ(A) > 0 and A being a union of intervals each of width ≥ w := (n−2)/(n · max u_j), the orbit visits A whenever D_N < min(w/2, μ(A)/2). Combining (1) and (2), state the explicit bound:
+  K(j, μ(A)) ≤ ?  as a closed-form function of j, μ(A), d, w.
+
+(4) UNIFORM B FOR COMPACTNESS.
+The proof's Step 3 needs all t_j ≤ B for some absolute B (independent of j). Given (2), the witnesses t_j = s_0 + k_j/d satisfy t_j ≤ s_0 + K(j, μ(A))/d. If K(j, μ(A)) grows with j, then B = sup_j (s_0 + K(j, μ(A))/d) may be infinite. PROPOSED FIX: only use j in a bounded range [1, j_max], and pass to subsequence within that range. Verify this is sufficient — i.e., that for any fixed J there is still enough irrationality to get a witness, and j_max can be chosen so that the perturbation 1/(j√2) is small enough that the Step 3 limit argument still gives {pt_*} ∈ A.
+
+(5) ALTERNATIVE CONSTRUCTIONS.
+If the α_j = p + 1/(j√2) construction has unfavorable discrepancy, propose an alternative perturbation that avoids the issue. Possibilities to consider:
+  - α_j = p + ξ/j for some quadratic irrational ξ with optimal CF (e.g., ξ = √2 itself, or ξ = (1+√5)/2 with partial quotients all 1, giving the smallest possible discrepancy).
+  - α_j = p + r_j where r_j is chosen specifically to keep partial quotients of r_j bounded uniformly.
+
+(6) BOTTOM LINE.
+After the above analysis, state ONE of:
+  (A) The current Erdős–Turán-based argument works as written with explicit C(j) = O(log j) or similar, and uniform B is achievable. Provide the explicit constants.
+  (B) The argument works but C(j) grows polynomially (say O(j^α) for some α > 0), and uniform B requires the j_max truncation as in (4). Provide α.
+  (C) The argument as written cannot be salvaged with α_j = p + 1/(j√2) — an alternative perturbation as in (5) is needed. Provide the new construction.
+
+PLEASE be explicit about constants where possible. Cite Kuipers–Niederreiter, Hardy–Wright, Khinchin, or any other standard reference for any classical fact used. Do not gloss over technical issues; flag them as residual gaps if they arise.
+
+OUTPUT FORMAT:
+- Section 1: Discrepancy analysis
+- Section 2: Uniformity-in-j analysis
+- Section 3: Explicit K(j, μ(A)) bound
+- Section 4: Uniform B resolution
+- Section 5: Alternative constructions if needed
+- Section 6: Bottom-line conclusion (A, B, or C with the requested explicit constants)
+- Section 7: Residual gaps (if any) for future work

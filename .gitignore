@@ -10,8 +10,30 @@ __pycache__/
 *.toc
 
 # Large generated data (regenerable from scripts)
+# Rule: source (.md/.py/.tex/.lean) is tracked; computed datasets are not.
+# Measured 2026-08-05: source = 34 MB, datasets = 2.9 GB.
 prime_power_*_actual_speeds.csv
+*_adversarial.jsonl
+*.npz
+*.pkl
+btc_puzzle_investigation/constructed_keys_*.csv
+btc_puzzle_investigation/**/*_feats.*
+reports/proofs/**/*.csv
+reports/*.csv
+reports/case_b_harness_results.json
 
 # Lean build output
 LonelyRunner/.lake/
 **/.lake/
+
+# --- large regenerable data caches (added 2026-09-05) ---
+# ~200MB across 15 files; all reproducible from the generator scripts in the folder.
+# Excluded because git history is append-only: adding them is effectively permanent.
+# To include them anyway:  git add -f <path>
+btc_puzzle_investigation/constructed_keys_*.csv
+btc_puzzle_investigation/constructed_keys_*.npz
+btc_puzzle_investigation/_angcache_*.npz
+btc_puzzle_investigation/_decomp_cache_*.pkl
+btc_puzzle_investigation/scripts/session_*/p*_feats.npz
+# local ledger backups
+btc_puzzle_investigation/.CLAIMS.md.bak_*

@@ -1,0 +1,14 @@
+# THERMO-CF leak test  data=synthetic  keys=20000  min_bits=40  features=42  shuffles=2000
+CONTROLS
+  POS_strong obs_upper_count=    0/2000  corr_p=0.0005  FIRES
+  POS_f0.10  obs_upper_count=    0/2000  corr_p=0.0005  FIRES
+  NEGATIVE: 0/8 fired
+THERMODYNAMIC targets (CF partial-quotient system)
+  cf_len     obs_upper_count= 2000/2000  corr_p=1.0000  null
+  E_bin      obs_upper_count=  131/2000  corr_p=0.8871  null
+  Emax_bin   obs_upper_count=    1/2000  corr_p=0.0195  FIRES
+  Elog_bin   obs_upper_count=   16/2000  corr_p=0.2394  null
+  Z2_bin     obs_upper_count=  174/2000  corr_p=0.9460  null
+  H_bin      obs_upper_count=   50/2000  corr_p=0.5642  null
+  E_par      obs_upper_count=  217/2000  corr_p=0.9640  null
+  Emax_par   obs_upper_count=    8/2000  corr_p=0.1219  null

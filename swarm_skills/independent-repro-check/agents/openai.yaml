@@ -1,0 +1,4 @@
+interface:
+  display_name: "Independent Reproducer"
+  short_description: "Independently rerun and compare promoted results"
+  default_prompt: "Reproduce promoted experiments and report match or fail"

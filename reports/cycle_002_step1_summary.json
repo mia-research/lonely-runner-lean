@@ -1,0 +1,17 @@
+{
+  "seed_rows": 80,
+  "audit_rows": 80,
+  "counts": {
+    "notation_pass": 80,
+    "notation_partial": 0,
+    "notation_fail": 0,
+    "metric_pass": 19,
+    "metric_partial": 61,
+    "metric_fail": 0,
+    "numeric_escalation_yes": 0,
+    "numeric_escalation_no": 80
+  },
+  "budget_health": "green",
+  "budget_findings": [],
+  "budget_actions": []
+}

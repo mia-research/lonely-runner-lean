@@ -1,0 +1,105 @@
+=== GEMINI ===
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Gemini",
+  "status_class": "escalate",
+  "confidence": 0.9,
+  "rationale": [
+    "Numeric ladder status is verified as stable with high precision (relative error vs mpmath at 8.63e-32 for decimal128).",
+    "Over 4.4 million values successfully extracted and verified, passing metric and notation matches.",
+    "The 'short_statement' and 'excerpt' are raw CSV data dumps rather than a formal mathematical hypothesis or claim.",
+    "Explicit assumptions are marked 'pending extraction review', preventing logical adjudication of the underlying proposition."
+  ],
+  "critical_risks": [
+    "Semantic void: The mathematical nature of the claim cannot be evaluated without a formal theoretical statement.",
+    "Medium float risk noted in validation snapshot, which warrants careful bounding despite high precision repro.",
+    "Potential metadata extraction failure during parsing, resulting in data rows replacing the claim proposition."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "The underlying empirical dataset is highly robust and computationally verified, making it a strong candidate for eventual promotion. However, it must be escalated to resolve the parsing error; a human or extraction script needs to recover the actual mathematical hypothesis being tested by this data before publication.",
+  "submitted_utc": "2026-02-26T05:10:55Z",
+  "operator_lane": "Human",
+  "source_ref": "manual_quorum_user_submission_2026-02-28"
+}
+
+=== KIMI ===
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Kimi-K2",
+  "status_class": "escalate",
+  "confidence": 0.35,
+  "rationale": [
+    "Claim statement appears to be raw CSV data without clear mathematical proposition",
+    "No explicit theorem, lemma, or conjecture statement found in dossier",
+    "Claim type 'empirical_claim' lacks definitional boundaries",
+    "Phi_n=4 for n=5 is trivial (Euler's totient), but context suggests non-standard usage",
+    "Prime=YES for n=5 is correct but appears to be input parameter, not derived result",
+    "Excerpt shows truncated/repeated data patterns suggesting parsing/formatting errors",
+    "Assumptions marked 'pending extraction review' - critical gap for adjudication",
+    "Float risk 'medium' with max_rel_float64_vs_mpmath at 3.45e-15 warrants scrutiny for analytical claims"
+  ],
+  "critical_risks": [
+    "Ambiguous claim statement: No clear mathematical assertion to verify",
+    "Data quality concerns: CSV excerpt shows truncation and repetition artifacts",
+    "Missing assumptions: Cannot evaluate validity without explicit premises",
+    "Undefined terms: 'phi_n', 'family', 'base', 'delta' lack mathematical definitions in dossier",
+    "Reproducibility vs. truth distinction: Numeric stability \u2260 logical validity",
+    "Tier A_repro_verified_strong may reflect computational consistency, not mathematical correctness"
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "This dossier presents stable numerical outputs but fails to articulate a falsifiable mathematical claim. The 'claim statement' is essentially a data row from a CSV file without interpretative context. Before promotion, the claimant must provide: (1) A clear theorem/lemma statement in standard mathematical notation, (2) Definitions for all non-standard terms (phi_n, isolation_count, etc.), (3) Proof sketch or counterexample search strategy, (4) Clarification on whether this is a conjecture, proven result, or algorithmic observation. Current review_score 102.223 appears to measure computational reproducibility, not mathematical significance. Recommend human mathematician review to extract actual claim content from data artifacts.",
+  "submitted_utc": "2026-02-26T00:00:00Z",
+  "operator_lane": "Human",
+  "source_ref": "manual_quorum_user_submission_2026-02-28"
+}
+
+=== DEEPSEEK ===
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Deepseek",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.92,
+  "rationale": [
+    "Reproducibility verification shows max relative error 3.45e-15 for float64 and 8.64e-32 for decimal128, well below stable threshold.",
+    "Metric match and notation match both pass.",
+    "Extraction of 4.4 million tokens was successful and stable.",
+    "Claim statement in dossier is poorly formatted and may require clarification for human interpretation.",
+    "Prior adjudication score 0.48 (needs_human_review) is addressed by strong numeric reproducibility."
+  ],
+  "critical_risks": [
+    "Float precision risk noted as medium in dossier, though actual errors are minimal; further testing in edge cases may be warranted.",
+    "Ambiguity in claim statement could lead to misinterpretation; the exact empirical finding needs to be articulated clearly."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Dossier indicates readiness for claim dossier review board. Recommend promotion with caveat to reformat claim statement for clarity.",
+  "submitted_utc": "2026-02-26T14:30:00Z",
+  "operator_lane": "Human",
+  "source_ref": "manual_quorum_user_submission_2026-02-28"
+}
+
+=== CLAUDE_WEB ===
+{
+  "claim_id": "CLAIM-LRC-000055",
+  "provider": "Claude (Anthropic) \u2014 claude.ai web",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.71,
+  "rationale": [
+    "Reproducibility pipeline reports stable status with max_rel_float64_vs_mpmath ~3.45e-15, well within binary64 machine-epsilon tolerance.",
+    "Decimal128 cross-check (max_rel ~8.64e-32) confirms near-exact agreement at extended precision, strongly supporting numeric integrity.",
+    "4,400,550 usable values extracted without truncation; extraction method (csv_cells_plus_regex) is auditable.",
+    "metric_match and notation_match both pass; no required fixes flagged in measurement layer.",
+    "adjudication_score of 0.480 is sub-threshold for auto-approve, correctly triggering human review \u2014 this review constitutes that step.",
+    "Claim excerpt is raw CSV fragment, not a formal mathematical statement; the actual mathematical claim being tested is not explicitly articulated in the dossier."
+  ],
+  "critical_risks": [
+    "RISK-1 (Medium): float_risk flagged as 'medium' \u2014 binary64 arithmetic in boundary/isolation counting may introduce systematic rounding in edge cases near delta/alpha=0.",
+    "RISK-2 (High): claim_type is 'empirical_claim' but short_statement is raw CSV data, not a falsifiable proposition. The logical claim (e.g., 'arithmetic_varied sequences with phi_n=4 exhibit phi_match=YES') is implicit, not stated. Publication requires explicit formalization.",
+    "RISK-3 (Low): assumptions listed as 'pending extraction review' \u2014 until assumptions are enumerated, scope of claim cannot be fully bounded.",
+    "RISK-4 (Low): seed=0 across all visible rows suggests deterministic seeding; confirm no unintended correlation across test variants."
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "Numeric reproducibility is strong and supports promotion of the underlying data packet. However, publication gate should remain on HOLD until: (1) the mathematical claim is formally restated as a falsifiable proposition independent of CSV formatting, (2) explicit assumptions are extracted and attached, (3) float_risk medium is resolved or accepted with a documented tolerance rationale. Once those three items are satisfied, re-adjudication should yield auto-approve. Recommend fast-track re-review given the strong numeric foundation.",
+  "submitted_utc": "2026-02-28T00:00:00Z",
+  "operator_lane": "manual_quorum_vote \u2014 external_model_session \u2014 human_adjudication_tier",
+  "source_ref": "/audit/quorum/CLAIM-LRC-000055/claude_web_2026-02-28.png"
+}

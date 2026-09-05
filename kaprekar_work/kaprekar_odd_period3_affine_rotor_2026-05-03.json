@@ -1,0 +1,41 @@
+{
+  "law": {
+    "R0": "[u,v,w,x,y,y,x,w,v,u+1]",
+    "R1": "[u,y,v,x,w,w,x,v,y,u+1]",
+    "R2": "[u,w,y,x,v,v,x,y,w,u+1]",
+    "constraints": "u>=1, x>=1, v>=2, w>=v, y>=v+1",
+    "generator_coordinates": {
+      "A": "x-1",
+      "B": "u-1",
+      "C": "y-v-1",
+      "D": "w-v",
+      "E": "v-2"
+    }
+  },
+  "random_param_checks": {
+    "checked": 5000,
+    "failures": 0,
+    "first_failure": []
+  },
+  "exact_census_fit": {
+    "rows": [
+      {
+        "d": 25,
+        "period3_count": 21,
+        "fit_count": 21
+      },
+      {
+        "d": 27,
+        "period3_count": 39,
+        "fit_count": 39
+      },
+      {
+        "d": 29,
+        "period3_count": 66,
+        "fit_count": 66
+      }
+    ],
+    "bad_count": 0,
+    "bad_examples": []
+  }
+}

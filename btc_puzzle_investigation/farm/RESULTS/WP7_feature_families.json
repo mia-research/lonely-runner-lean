@@ -1,0 +1,154 @@
+{
+  "wp": "WP7_feature_families",
+  "model": "sonnet",
+  "n_samples": 100023,
+  "bit_range": [
+    1,
+    160
+  ],
+  "attack_valid": true,
+  "families_done": [
+    "spectral",
+    "compression",
+    "kmer"
+  ],
+  "families": {
+    "spectral": {
+      "n_used": 100023,
+      "dimensionality": 16,
+      "mi_n": 0.00796794774134657,
+      "mi_n_mean": 0.002103502864654383,
+      "mi_nclass": {
+        "n_is_prime": {
+          "max": 0.0018835223418329772,
+          "mean": 0.0004778646202601572
+        },
+        "n_phi_pow2": {
+          "max": 0.0030134774946026788,
+          "mean": 0.0006885573530533012
+        },
+        "n_smooth7": {
+          "max": 0.003611425896764331,
+          "mean": 0.0004299210413846871
+        },
+        "n_omega": {
+          "max": 0.006085404049514853,
+          "mean": 0.0017003255596297479
+        }
+      },
+      "cv_acc": 0.004837476615410199,
+      "cv_acc_base_only": 0.005240539300348733,
+      "cv_acc_base_plus_family": 0.004839014752320923,
+      "cv_delta": -0.0004015245480278092,
+      "baseline_majority": 0.0182,
+      "control_s_star": 1.0,
+      "control_detected": true,
+      "control_curve": {
+        "0.0": 0.006913873932960848,
+        "0.2": 0.009816552170758283,
+        "0.5": 0.009846506145373997,
+        "1.0": 0.02268027682486086
+      },
+      "control_dimensionality": 16,
+      "matched_null_acc": null,
+      "extra": {},
+      "reading": "Conditional negative for family 'spectral' at n=100023: MI(feature;n) max=0.00797, grouped-CV delta-over-base=-0.0004, both at or below this family's own noise floor, while positive control FIRED at s*=1.0 (dim=16) proving the detector is powered at this scale/representation. Not observed with these features at n=100023; bounded to this family + s*, not a general claim about (X,Y).",
+      "runtime_sec_family": 1823.9
+    },
+    "compression": {
+      "n_used": 100023,
+      "dimensionality": 9,
+      "mi_n": 0.01017856832356756,
+      "mi_n_mean": 0.003891170836221036,
+      "mi_nclass": {
+        "n_is_prime": {
+          "max": 0.00421520881266213,
+          "mean": 0.0016790754390911575
+        },
+        "n_phi_pow2": {
+          "max": 0.005469265592004335,
+          "mean": 0.0028408697961877444
+        },
+        "n_smooth7": {
+          "max": 0.004933929674375115,
+          "mean": 0.0022895658361423957
+        },
+        "n_omega": {
+          "max": 0.004517069266990692,
+          "mean": 0.0020513316235528656
+        }
+      },
+      "cv_acc": 0.009553600353566154,
+      "cv_acc_base_only": 0.005240539300348733,
+      "cv_acc_base_plus_family": 0.005158340770278958,
+      "cv_delta": -8.219853006977487e-05,
+      "baseline_majority": 0.0182,
+      "control_s_star": 1.0,
+      "control_detected": true,
+      "control_curve": {
+        "0.0": 0.006992614472721212,
+        "0.2": 0.007325959698726137,
+        "0.5": 0.00932399787209053,
+        "1.0": 0.014338354273555533
+      },
+      "control_dimensionality": 9,
+      "matched_null_acc": null,
+      "extra": {},
+      "reading": "Conditional negative for family 'compression' at n=100023: MI(feature;n) max=0.01018, grouped-CV delta-over-base=-0.0001, both at or below this family's own noise floor, while positive control FIRED at s*=1.0 (dim=9) proving the detector is powered at this scale/representation. Not observed with these features at n=100023; bounded to this family + s*, not a general claim about (X,Y).",
+      "runtime_sec_family": 3972.9
+    },
+    "kmer": {
+      "n_used": 20000,
+      "dimensionality": 24,
+      "mi_n": 0.007969780089023715,
+      "mi_n_mean": 0.0012017057727630915,
+      "mi_nclass": {
+        "n_is_prime": {
+          "max": 0.006243257315553308,
+          "mean": 0.0012716422124751197
+        },
+        "n_phi_pow2": {
+          "max": 0.002505329242288301,
+          "mean": 0.0005767826610953061
+        },
+        "n_smooth7": {
+          "max": 0.006660208707842452,
+          "mean": 0.0015754863763821718
+        },
+        "n_omega": {
+          "max": 0.008847403747609395,
+          "mean": 0.0018103821929458437
+        }
+      },
+      "cv_acc": 0.012794669412907916,
+      "cv_acc_base_only": 0.005997772759520205,
+      "cv_acc_base_plus_family": 0.005649733314285271,
+      "cv_delta": -0.00034803944523493363,
+      "baseline_majority": 0.01825,
+      "control_s_star": 1.0,
+      "control_detected": true,
+      "control_curve": {
+        "0.0": 0.0075991033212592495,
+        "0.2": 0.008269697458726305,
+        "0.5": 0.009756297014434923,
+        "1.0": 0.05267908919858999
+      },
+      "control_dimensionality": 24,
+      "matched_null_acc": null,
+      "extra": {
+        "note": "kmer family subsampled 100023->20000 rows (slow family, per brief)"
+      },
+      "reading": "Conditional negative for family 'kmer' at n=20000: MI(feature;n) max=0.00797, grouped-CV delta-over-base=-0.0003, both at or below this family's own noise floor, while positive control FIRED at s*=1.0 (dim=24) proving the detector is powered at this scale/representation. Not observed with these features at n=20000; bounded to this family + s*, not a general claim about (X,Y).",
+      "runtime_sec_family": 3039.4
+    }
+  },
+  "notes": [
+    "SKIPPED family 'contfrac' -- time budget exhausted (-114s left)",
+    "SKIPPED family 'autocorr' -- time budget exhausted (-114s left)",
+    "SKIPPED family 'gf2rank' -- time budget exhausted (-114s left)",
+    "SKIPPED family 'cluster_purity' -- time budget exhausted (-114s left)",
+    "SKIPPED family 'coord_stats' -- time budget exhausted (-114s left)",
+    "SKIPPED family 'addr_hash' -- time budget exhausted (-114s left)"
+  ],
+  "runtime_sec": 7013.7
+}

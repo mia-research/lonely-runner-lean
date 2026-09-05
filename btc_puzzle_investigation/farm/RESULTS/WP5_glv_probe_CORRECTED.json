@@ -1,0 +1,29 @@
+{
+  "wp": "WP5_glv_probe",
+  "model": "orchestrator-corrected",
+  "n_samples": 20000,
+  "attack_valid": false,
+  "probe_type": "structure_diagnostic",
+  "positive_control": {
+    "test": "GLV split correctness (correct balanced basis)",
+    "detected": true,
+    "verified_count": 60,
+    "sample_size": 60,
+    "note": "d1,d2 ~128-bit nonzero; supersedes buggy wp5_run (d1 was degenerate)"
+  },
+  "primary_result": {
+    "d1_mod_n": {
+      "MI_observed": 0.47450908606670694,
+      "MI_null": 0.4684708139523037,
+      "delta_MI": 0.00603827211440322
+    },
+    "d2_mod_n": {
+      "MI_observed": 0.10877090349421792,
+      "MI_null": 0.10947771237617054,
+      "delta_MI": -0.0007068088819526253
+    }
+  },
+  "supersedes": "WP5_glv_probe.json (original had degenerate d1 => MI=0.0 artifact)",
+  "conditional_reading": "With a CORRECT balanced GLV split, (d1 mod n, d2 mod n) show MI vs n within matched-null noise (delta_MI near 0): not observed to cluster by n at this sample (20k) with this estimator. Diagnostic only (uses known d,n).",
+  "runtime_sec": 422.6
+}

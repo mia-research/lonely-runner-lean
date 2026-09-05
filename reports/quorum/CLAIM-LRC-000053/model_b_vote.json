@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLAIM-LRC-000053",
+  "task_id": "QRM-LRC-0003",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:34:35Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.73,
+  "rationale": [
+    "Reproducibility is stable with 69,718 usable values and no extraction truncation.",
+    "Measurement metric and notation both pass, reducing interpretation mismatch risk.",
+    "Cross-precision relative error bounds vs mpmath are extremely small, supporting numeric robustness.",
+    "Tier A reproducibility and dossier readiness support advancement.",
+    "Human review remains necessary because adjudication score is modest and semantic extraction is incomplete."
+  ],
+  "critical_risks": [
+    "The claim statement/excerpt is malformed CSV-like text and may not yet represent a precise mathematical proposition.",
+    "Assumptions are still pending extraction review, so formal scope and conditions may be underspecified.",
+    "Float risk is marked medium, leaving possible boundary-sensitivity gaps.",
+    "Validation snapshot still reports needs_human_review (adjudication_score 0.480)."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Promote to claim dossier review board, but require semantic normalization of the claim and explicit assumption finalization before external publication. | fallback_used_for_lane_provider=gemini"
+}

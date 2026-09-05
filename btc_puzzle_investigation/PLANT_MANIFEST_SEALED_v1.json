@@ -1,0 +1,230 @@
+[
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "RESULT_r3_orbit_autocorrelation_v1.md"
+ },
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "RESULT_e3_owed_measurement_v1.md"
+ },
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "EXACT_RERUN_FINDINGS_v1.md"
+ },
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "RESULT_weight1_phase_ramp_v1.md"
+ },
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "RESULT_pubkey_relations_controlled_v1.md"
+ },
+ {
+  "desc": "value error \u2014 reported value perturbed in the payload; A/A2 must diverge",
+  "expect": "FIRE",
+  "klass": "P1",
+  "row": "RESULT_mu6_solving_degree_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "RESULT_glv_norm_readout_matched_null_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "RESULT_mu3_projection_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "NOTE_n8_branch_confinement_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "VALIDATION_sssa_lift_firing_control_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "RESULT_shortscalar_sum_stageA_v1.md"
+ },
+ {
+  "desc": "forced by construction \u2014 statistic fixed by a convention; C check 1/3 must fire",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "RESULT_cm_jointset_semaev_r5_v1.md"
+ },
+ {
+  "desc": "inert control \u2014 matched null rewired so it cannot change verdict; C check 2 = no",
+  "expect": "FIRE",
+  "klass": "P3",
+  "row": "AUDIT_negative_bias_session2to4_v1.md"
+ },
+ {
+  "desc": "inert control \u2014 matched null rewired so it cannot change verdict; C check 2 = no",
+  "expect": "FIRE",
+  "klass": "P3",
+  "row": "RESULT_fld_6h_theorem_assembly_v4.md"
+ },
+ {
+  "desc": "inert control \u2014 matched null rewired so it cannot change verdict; C check 2 = no",
+  "expect": "FIRE",
+  "klass": "P3",
+  "row": "RESULT_chirp_hologram_plane_v1.md"
+ },
+ {
+  "desc": "inert control \u2014 matched null rewired so it cannot change verdict; C check 2 = no",
+  "expect": "FIRE",
+  "klass": "P3",
+  "row": "RESULT_Sy_sign_skew_v1.md"
+ },
+ {
+  "desc": "power floor \u2014 detectable threshold set above the effect ceiling; C check 4 = fail",
+  "expect": "FIRE",
+  "klass": "P4",
+  "row": "AUDIT_shortscalar_glv_interval_harness_v1.md"
+ },
+ {
+  "desc": "power floor \u2014 detectable threshold set above the effect ceiling; C check 4 = fail",
+  "expect": "FIRE",
+  "klass": "P4",
+  "row": "RESULT_overlap_arm_power_v1.md"
+ },
+ {
+  "desc": "power floor \u2014 detectable threshold set above the effect ceiling; C check 4 = fail",
+  "expect": "FIRE",
+  "klass": "P4",
+  "row": "RESULT_cm_jointset_higherorder_v1.md"
+ },
+ {
+  "desc": "power floor \u2014 detectable threshold set above the effect ceiling; C check 4 = fail",
+  "expect": "FIRE",
+  "klass": "P4",
+  "row": "AUDIT_mu3_subspace_residual_v1.md"
+ },
+ {
+  "desc": "object substitution \u2014 script computes a correlate; C check 5 must fire",
+  "expect": "FIRE",
+  "klass": "P5",
+  "row": "ANALYSIS_destructive_interference_frame_v1.md"
+ },
+ {
+  "desc": "object substitution \u2014 script computes a correlate; C check 5 must fire",
+  "expect": "FIRE",
+  "klass": "P5",
+  "row": "RESULT_cm_jointset_excess_v3.md"
+ },
+ {
+  "desc": "object substitution \u2014 script computes a correlate; C check 5 must fire",
+  "expect": "FIRE",
+  "klass": "P5",
+  "row": "struct_test_results.md"
+ },
+ {
+  "desc": "object substitution \u2014 script computes a correlate; C check 5 must fire",
+  "expect": "FIRE",
+  "klass": "P5",
+  "row": "masked_structure_findings_v32.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_boundary_D_short_interval_CM_invariant_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "masked_structure_findings_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_h5_cofactor_artifact_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_semaev_structure_firstfall_vs_m_v2.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_weyl_xreadout_item4_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "NOTE_brick_e_lead_rung_and_instruments_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_interval_sumobject_item3_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "AUDIT_semaev_v4_method_result_conclusion_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_flap_density_glv_130bit_null_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_L3_signature_leakage_v1.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "RESULT_joint_shadow_decompose_v2.md"
+ },
+ {
+  "desc": "sound by construction \u2014 exact statistic, live control, adequate power, right object",
+  "expect": "CLEAN",
+  "klass": "N0",
+  "row": "AUDIT_ks_backstop_and_joint_readout_v1.md"
+ },
+ {
+  "desc": "rho_p = chi2(-1), forced by e4=p^2 composed with canon()'s lex sort. Known FORCED.",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "ANCHOR:rho_p"
+ },
+ {
+  "desc": "'3 | the F_p^3 sum corroborates three blocks' \u2014 forced by s1=s2=0 via e3=S3/3. Known FORCED.",
+  "expect": "FIRE",
+  "klass": "P2",
+  "row": "ANCHOR:F_p3_divisibility"
+ }
+]

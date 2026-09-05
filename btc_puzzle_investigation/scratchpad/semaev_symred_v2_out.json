@@ -1,0 +1,154 @@
+[
+  {
+    "p": 307,
+    "tau": 69,
+    "V": [
+      243,
+      130,
+      126,
+      2,
+      154,
+      133
+    ],
+    "|V|": 6,
+    "reduction_correct": true,
+    "P_support": 35,
+    "P_totaldeg": 4,
+    "reduced_semaev": {
+      "dim": 0,
+      "quo": 2,
+      "d_ff": 5,
+      "d_LF": 34,
+      "d_solv": null
+    },
+    "nonempty_gate": true,
+    "probe_i_membership_only": {
+      "dim": 0,
+      "quo": 20,
+      "d_ff": 5,
+      "d_LF": 34,
+      "d_solv": 3
+    },
+    "probe_iii_plant_Shat_times_e1m1": {
+      "dim": 0,
+      "quo": 2,
+      "d_ff": 5,
+      "d_LF": 38,
+      "d_solv": null
+    },
+    "symrand_reduced_dLF": {
+      "all": [
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34
+      ],
+      "min": 34,
+      "max": 34,
+      "distinct": [
+        34
+      ]
+    },
+    "power": {
+      "probe_i_Shat_moves": true,
+      "probe_ii_coeff_variance": false,
+      "probe_iii_plant_fires": true
+    },
+    "unreduced_descriptive": {
+      "dim": 0,
+      "quo": 15,
+      "d_ff": 14,
+      "d_LF": 25,
+      "d_solv": 25
+    },
+    "unreduced_distinct_quo": 12,
+    "six_times_check": true,
+    "ideal_equal_GB": true,
+    "VOID_readout_blind": false,
+    "outcome_at_p": "GENERIC"
+  },
+  {
+    "p": 2069,
+    "tau": 1818,
+    "V": [
+      325,
+      1103,
+      562,
+      416,
+      678,
+      1468
+    ],
+    "|V|": 6,
+    "reduction_correct": true,
+    "P_support": 35,
+    "P_totaldeg": 4,
+    "reduced_semaev": {
+      "dim": 0,
+      "quo": 2,
+      "d_ff": 5,
+      "d_LF": 34,
+      "d_solv": null
+    },
+    "nonempty_gate": true,
+    "probe_i_membership_only": {
+      "dim": 0,
+      "quo": 20,
+      "d_ff": 5,
+      "d_LF": 34,
+      "d_solv": 3
+    },
+    "probe_iii_plant_Shat_times_e1m1": {
+      "dim": 0,
+      "quo": 2,
+      "d_ff": 5,
+      "d_LF": 38,
+      "d_solv": null
+    },
+    "symrand_reduced_dLF": {
+      "all": [
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34
+      ],
+      "min": 34,
+      "max": 34,
+      "distinct": [
+        34
+      ]
+    },
+    "power": {
+      "probe_i_Shat_moves": true,
+      "probe_ii_coeff_variance": false,
+      "probe_iii_plant_fires": true
+    },
+    "unreduced_descriptive": {
+      "dim": 0,
+      "quo": 12,
+      "d_ff": 14,
+      "d_LF": 25,
+      "d_solv": 25
+    },
+    "unreduced_distinct_quo": 12,
+    "six_times_check": true,
+    "ideal_equal_GB": true,
+    "VOID_readout_blind": false,
+    "outcome_at_p": "GENERIC"
+  }
+]

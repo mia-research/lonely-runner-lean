@@ -1,0 +1,14 @@
+{
+  "run_id": "run_auto_99",
+  "target": 5000000,
+  "batch_size": 5000,
+  "n_batches": 1000,
+  "n_workers": 4,
+  "seed": 99,
+  "theta": 0.09090909090909091,
+  "n_runners": 11,
+  "method": "boundary_set_event_complete",
+  "started_at": "2026-03-30T08:12:45.442501+00:00",
+  "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+  "numpy": "2.2.6"
+}

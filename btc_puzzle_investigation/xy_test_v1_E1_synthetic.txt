@@ -1,0 +1,22 @@
+# data=synthetic  keys=30000  features=42  shuffles=2000
+
+target         best_feature   MI_bits    maxz   corr_p   verdict
+----------------------------------------------------------------------
+PLANT_strong   X%7          2.80714 13289.41   0.0005   FIRES  <-- control
+PLANT_f0.02    X%7          0.00209    6.17   0.0015   FIRES  <-- control
+PLANT_f0.05    X%7          0.00967   43.82   0.0005   FIRES  <-- control
+PLANT_f0.10    X%7          0.04105  197.11   0.0005   FIRES  <-- control
+PLANT_f0.20    X%7          0.13759  643.68   0.0005   FIRES  <-- control
+d%2            Y%64         0.00230    2.93   0.2859   null
+d%3            Y%5          0.00041    2.13   0.6162   null
+d%5            Y%11         0.00142    2.16   0.5567   null
+d%7            X%256        0.03947    1.69   0.8371   null
+d%11           X%5          0.00158    2.88   0.1554   null
+d%13           Y%11         0.00388    2.75   0.1789   null
+bit_mid        XY%3         0.00043    2.45   0.4963   null
+bit_top2       XY%5         0.00111    3.14   0.2189   null
+u_bin8         XY%7         0.00918    1.68   0.8356   null
+--------------------------------------------------------------
+sensitivity floor  ~ 0.00209 bits  (smallest weak-plant MI that fired)
+Real target FIRES  => investigate (OOS + attack translation).
+All real targets null => bounded: no (X,Y)->d leak above the floor, this feature set.

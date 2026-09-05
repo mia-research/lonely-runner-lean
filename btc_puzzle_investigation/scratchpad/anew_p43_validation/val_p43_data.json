@@ -1,0 +1,263 @@
+{
+ "p": 43,
+ "B": 7,
+ "nE": 31,
+ "lam": 25,
+ "anew_order": 1893,
+ "l0": 3,
+ "cof": 631,
+ "n_rational_lifts": 15,
+ "records": [
+  {
+   "d": 1,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 2,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 3,
+   "has_lift": true,
+   "ell": 1,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 4,
+   "has_lift": true,
+   "ell": 206,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 5,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 6,
+   "has_lift": true,
+   "ell": 1715,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 7,
+   "has_lift": true,
+   "ell": 401,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 8,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 9,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 10,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 11,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 12,
+   "has_lift": true,
+   "ell": 820,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 13,
+   "has_lift": true,
+   "ell": 1849,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 14,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 15,
+   "has_lift": true,
+   "ell": 43,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 16,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 17,
+   "has_lift": true,
+   "ell": 903,
+   "f5_open": 0,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 18,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 19,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 20,
+   "has_lift": true,
+   "ell": 1286,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 21,
+   "has_lift": true,
+   "ell": 1780,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 22,
+   "has_lift": true,
+   "ell": 21,
+   "f5_open": 0,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 23,
+   "has_lift": true,
+   "ell": 969,
+   "f5_open": 0,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 24,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 25,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 26,
+   "has_lift": true,
+   "ell": 260,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 27,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 28,
+   "has_lift": false,
+   "ell": null,
+   "f5_open": null,
+   "f5_closed": null,
+   "Sclosed_str": null
+  },
+  {
+   "d": 29,
+   "has_lift": true,
+   "ell": 1186,
+   "f5_open": 1,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  },
+  {
+   "d": 30,
+   "has_lift": true,
+   "ell": 1811,
+   "f5_open": 2,
+   "f5_closed": 0,
+   "Sclosed_str": "[3*Place (x + 1, w + 6)]"
+  }
+ ],
+ "n14": {
+  "k_multipliers": [
+   587,
+   1849
+  ],
+  "k_expected_psq_mod_anew": 1849,
+  "affine_violations": 13,
+  "affine_total": 15,
+  "hom_holds": 0,
+  "hom_total": 3
+ }
+}

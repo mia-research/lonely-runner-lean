@@ -1,0 +1,4 @@
+interface:
+  display_name: "Notation Measurement Audit"
+  short_description: "Audit notation drift and metric-claim mismatch"
+  default_prompt: "Audit notation consistency and metric alignment for seeded claims"

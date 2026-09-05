@@ -1,0 +1,245 @@
+[
+  {
+    "m": 2,
+    "p": 307,
+    "Dmax": 12,
+    "K_null": 12,
+    "|V|": 2,
+    "n_support": 9,
+    "semaev_dff": 4,
+    "CAL_A_fieldeqs_only_dff": null,
+    "CAL_B_linearplant_dff": null,
+    "semireg_dff": {
+      "all": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "median": 4,
+      "censored": 0
+    },
+    "symm_dff": {
+      "all": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "median": 4,
+      "censored": 0
+    },
+    "delta1_symmetry": 0,
+    "delta2_coeff": 0,
+    "semaev_below_all_symmetric": true,
+    "wall_sec": 0
+  },
+  {
+    "m": 3,
+    "p": 307,
+    "Dmax": 22,
+    "K_null": 12,
+    "|V|": 3,
+    "n_support": 125,
+    "semaev_dff": 12,
+    "CAL_A_fieldeqs_only_dff": null,
+    "CAL_B_linearplant_dff": null,
+    "semireg_dff": {
+      "all": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "median": 12,
+      "censored": 0
+    },
+    "symm_dff": {
+      "all": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "median": 12,
+      "censored": 0
+    },
+    "delta1_symmetry": 0,
+    "delta2_coeff": 0,
+    "semaev_below_all_symmetric": true,
+    "wall_sec": 22
+  },
+  {
+    "m": 2,
+    "p": 2069,
+    "Dmax": 12,
+    "K_null": 12,
+    "|V|": 2,
+    "n_support": 9,
+    "semaev_dff": 4,
+    "CAL_A_fieldeqs_only_dff": null,
+    "CAL_B_linearplant_dff": null,
+    "semireg_dff": {
+      "all": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "median": 4,
+      "censored": 0
+    },
+    "symm_dff": {
+      "all": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "median": 4,
+      "censored": 0
+    },
+    "delta1_symmetry": 0,
+    "delta2_coeff": 0,
+    "semaev_below_all_symmetric": true,
+    "wall_sec": 0
+  },
+  {
+    "m": 3,
+    "p": 2069,
+    "Dmax": 22,
+    "K_null": 12,
+    "|V|": 3,
+    "n_support": 125,
+    "semaev_dff": 12,
+    "CAL_A_fieldeqs_only_dff": null,
+    "CAL_B_linearplant_dff": null,
+    "semireg_dff": {
+      "all": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "median": 12,
+      "censored": 0
+    },
+    "symm_dff": {
+      "all": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "median": 12,
+      "censored": 0
+    },
+    "delta1_symmetry": 0,
+    "delta2_coeff": 0,
+    "semaev_below_all_symmetric": true,
+    "wall_sec": 22
+  },
+  {
+    "m": 4,
+    "p": 307,
+    "Dmax": 30,
+    "K_null": 6,
+    "|V|": 4,
+    "n_support": 6561,
+    "semaev_dff": null,
+    "CAL_A_fieldeqs_only_dff": null,
+    "CAL_B_linearplant_dff": null,
+    "semireg_dff": {
+      "all": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "median": null,
+      "censored": 6
+    },
+    "symm_dff": {
+      "all": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "median": null,
+      "censored": 6
+    },
+    "delta1_symmetry": null,
+    "delta2_coeff": null,
+    "semaev_below_all_symmetric": null,
+    "wall_sec": 6877
+  }
+]

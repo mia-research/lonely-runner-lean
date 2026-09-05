@@ -1,0 +1,50 @@
+{
+  "Y_period7": {
+    "checked": 21,
+    "failures": 0
+  },
+  "A_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "B_period2": {
+    "checked": 21,
+    "failures": 0
+  },
+  "C_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "D_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "E_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "F_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "G_period5": {
+    "checked": 21,
+    "failures": 0
+  },
+  "H_period3": {
+    "checked": 21,
+    "failures": 0
+  },
+  "T_to_B_reduction": {
+    "checked": 160,
+    "failures": 0,
+    "hit_histogram": {
+      "1": 60,
+      "2": 20,
+      "3": 20,
+      "4": 20,
+      "5": 20,
+      "6": 20
+    }
+  }
+}

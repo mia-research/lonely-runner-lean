@@ -1,0 +1,6 @@
+=== H_A frozen. EXTENDED out-of-sample for power. ===
+OUT-OF-SAMPLE [9000,30000) fresh, hypothesis frozen
+   primes p != 3 mod 8 with NE even : 37
+   A == 0 OBSERVED                  : 1
+   A == 0 expected under MATCHED null: 1.07
+   P(>= observed | matched null)    : 0.6568

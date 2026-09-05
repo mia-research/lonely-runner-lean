@@ -1,0 +1,13 @@
+{
+  "claim_id": "CLAIM-LRC-000032",
+  "provider": "gemini|deepseek|kimi|claude_web",
+  "status_class": "approve_promote|approve_with_caveats|escalate",
+  "confidence": 0.0,
+  "rationale": [],
+  "critical_risks": [],
+  "publication_gate_recommendation": "promote|hold|escalate",
+  "notes": "",
+  "submitted_utc": "2026-02-28T04:00:42Z",
+  "operator_lane": "Lane_A|Lane_B|Human",
+  "source_ref": "chat_url_or_export_or_screenshot_path"
+}

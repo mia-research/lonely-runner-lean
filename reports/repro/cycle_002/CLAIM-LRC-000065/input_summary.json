@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000065",
+  "promotion_id": "PROMO-LRC-0024",
+  "source_path": "/Users/trentpalelei/Downloads/pcg64_boundary_fragility.json",
+  "source_sha256": "eee26d22c03b41977311020edd904d061e72a5a2a8d9127e111e480fc37053aa",
+  "source_bytes": 223,
+  "extraction": {
+    "method": "regex_text",
+    "chars_scanned": 223,
+    "truncated": false
+  },
+  "tokens_extracted": 6,
+  "usable_values": 6,
+  "sample_values": [
+    "400000",
+    "399998",
+    "2.5000125000625003e-06",
+    "0.0",
+    "51930",
+    "0.0016772940002738324"
+  ],
+  "thresholds": {
+    "stable": 1e-09,
+    "sensitive": 1e-06
+  },
+  "created_utc": "2026-02-25T23:29:22Z"
+}

@@ -1,3 +1,7 @@
+> **⛔ FROZEN — NOT CURRENT.** This file is a historical snapshot. The single current-state
+> document is **`CLAIMS.md`**. Do not read status, grades, or open items from here; do not
+> write a successor version of this file. (Frozen 2026-09-01.)
+
 # secp256k1 — Master Positive-Findings & Structure Compendium (v1, 2026-07-17)
 
 **Consolidates and supersedes Handovers 1–4** (`POSITIVE_FINDINGS_HANDOVER_{,2_,3_,4_}v*`). One

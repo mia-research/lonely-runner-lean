@@ -1,0 +1,20 @@
+{
+  "claim_id": "CLAIM-LRC-000056",
+  "provider": "Gemini",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.95,
+  "rationale": [
+    "The empirical proposition is well-defined, falsifiable, and restricted to the provided corpus.",
+    "Data integrity is confirmed by SHA-256 and high-precision validation (max relative error 1.99e-32 with decimal128).",
+    "The clear dichotomy between arithmetic and non-arithmetic families suggests a distinct structural mechanism within this specific parameter space.",
+    "The claim explicitly limits its scope to n in {5..15}, avoiding over-generalization beyond the tested range."
+  ],
+  "critical_risks": [
+    "Dataset artifact risk: The 100% correlation with the 'arithmetic' family may be a byproduct of the specific construction algorithm rather than a universal property of LRCs.",
+    "Empirical-only status: Without a theoretical model explaining *why* arithmetic sequences saturate phases at phi_n, the result lacks explanatory power.",
+    "Boundary count scaling: The marked increase in average boundary counts in random sequences compared to arithmetic ones indicates potential instability or sensitivity in the measurement metric."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "The claim is statistically robust and clearly stated. Promotion is recommended with the caveat that it remains an empirical observation of the provided dataset. Further analysis should investigate if the phase-matching property holds for n > 15 to determine if this is a general structural trait.",
+  "submitted_utc": "2026-02-28T07:42:00Z"
+}

@@ -1,0 +1,50 @@
+{
+  "cycle_id": "cycle_002",
+  "step": "step3_refuter_audit_promotion",
+  "adjudication": {
+    "rows": 80,
+    "decision_counts": {
+      "hold_insufficient_extraction": 7,
+      "needs_human_review": 67,
+      "promote_formal_refutation": 6
+    },
+    "tier_counts": {
+      "D-Insufficient": 50,
+      "C-Weak": 24,
+      "B-Promising": 6
+    }
+  },
+  "measurement_audit_empirical": {
+    "rows": 36,
+    "notation_match_counts": {
+      "pass": 36
+    },
+    "metric_match_counts": {
+      "pass": 30,
+      "partial": 6
+    }
+  },
+  "numeric_triage_empirical": {
+    "rows": 36,
+    "float_risk_counts": {
+      "low": 11,
+      "medium": 25
+    },
+    "needs_precision_ladder_counts": {
+      "yes": 28,
+      "no": 8
+    }
+  },
+  "promotion_queue": {
+    "rows": 30,
+    "track_counts": {
+      "formal_refutation": 3,
+      "numeric_test": 27
+    },
+    "basis_counts": {
+      "direct": 3,
+      "audit_fallback": 27
+    },
+    "p1_count": 1
+  }
+}

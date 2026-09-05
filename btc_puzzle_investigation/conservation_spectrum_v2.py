@@ -141,7 +141,7 @@ def main():
             if tag == 'l2':
                 if aA > 0.6 and abs(abs(arg)-120) < 30:
                     verdict = "  => NONTRIVIAL-mu3 covariant (attribution CONFIRMED)"
-                elif aA > 0.6 and abs(arg) < 30:
+                elif aA > 0.6 and abs(arg) < 30:  # noqa: float — (stat) coarse Sato-Tate-like eigenvector-phase bucketing (0 vs +-120deg, 30deg tol) from numpy eig on a row-normalized empirical transfer matrix; underlying x/y coords and cell labels are exact integers, exact eigendecomposition of the 16x16 empirical matrix is infeasible, and the 30deg window is far above the ~1e-14 numerical eig error (no float-floor risk)
                     verdict = "  => mu3-TRIVIAL (NOT the mu3 charge)"
                 else:
                     verdict = "  => neither clean (|A| low: not a pure mu3 mode)"

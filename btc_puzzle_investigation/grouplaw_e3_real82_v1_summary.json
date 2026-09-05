@@ -1,0 +1,40 @@
+{
+  "prereg": "PREREG_grouplaw_e3_real82_v1.md",
+  "object": "group-law diffset E3",
+  "N_null": 10000,
+  "M_oos": 1000,
+  "seed_null": 20260818,
+  "seed_a4": 12345,
+  "cglv": {
+    "E2": 12996,
+    "E3": 0,
+    "E6": 0
+  },
+  "E2_real": 4225,
+  "E3_real": 489,
+  "E6_real": 2683,
+  "abc_real": [
+    1093,
+    1110,
+    1118
+  ],
+  "T_real": 3321,
+  "L_struct": 93,
+  "U_struct": 12531,
+  "reject_high": false,
+  "reject_low": false,
+  "pctile_E3": 13.03,
+  "p_struct": 0.26077392260773924,
+  "p_E2": 0.5395460453954605,
+  "p_E3": 0.26077392260773924,
+  "p_E6": 0.9017098290170983,
+  "p_FWER_E3": 0.5849415058494151,
+  "fwer_significant": false,
+  "bonferroni7": 1.0,
+  "q_MT": 0.854,
+  "q_MT_hits": 854,
+  "mt_med_E3": 2304,
+  "mt_med_pctile": 49.88,
+  "A4_fpr": 0.012,
+  "field_diff_E3_for_comparison": 13125
+}

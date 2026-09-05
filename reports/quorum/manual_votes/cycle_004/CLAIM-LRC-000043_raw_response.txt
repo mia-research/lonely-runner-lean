@@ -1,0 +1,101 @@
+Gemini:
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "provider": "Gemini",
+  "status_class": "escalate",
+  "confidence": 0.95,
+  "rationale": [
+    "Numeric reproducibility is highly stable, with maximum relative error versus mpmath at 7.71e-33 (decimal128).",
+    "All 3,456 extracted tokens successfully passed metric and notation matches.",
+    "The extracted 'short_statement' and 'excerpt' contain raw CSV data headers and rows rather than a formal mathematical hypothesis.",
+    "Explicit assumptions are marked 'pending extraction review', making it impossible to evaluate the theoretical constraints of the claim."
+  ],
+  "critical_risks": [
+    "Semantic void: No formal mathematical proposition is available to evaluate against the highly precise empirical data.",
+    "Extraction failure: The pipeline ingested CSV rows instead of the intended claim text.",
+    "Medium float risk remains unresolved without the context of the explicit assumptions."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "The empirical data pipeline executed successfully with excellent precision, but the review is blocked by an extraction error. The actual mathematical claim text must be manually recovered and attached to the dossier before a substantive adjudication can occur.",
+  "submitted_utc": "2026-02-28T06:14:13Z"
+}
+
+Kimi:
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "provider": "Kimi-K2",
+  "status_class": "escalate",
+  "confidence": 0.25,
+  "rationale": [
+    "Claim statement is raw CSV data without clear mathematical proposition",
+    "No falsifiable theorem, lemma, or conjecture identified in dossier",
+    "Phi=4 for n=5 is standard totient function, but context suggests non-standard usage",
+    "Efficiency metric (0.180091) undefined - no formula or derivation provided",
+    "Phi_match=false for first row contradicts phi=4, n=5 (should be true if phi(n)=4)",
+    "Assumptions marked 'pending extraction review' - critical gap",
+    "Review_score 100.227 reflects computational reproducibility, not mathematical validity",
+    "Float risk 'medium' with stable numeric ladder does not address logical soundness"
+  ],
+  "critical_risks": [
+    "Missing claim statement: No clear mathematical assertion to verify or falsify",
+    "Undefined terminology: 'efficiency', 'isolation_count', 'detected_phases' lack mathematical definitions",
+    "Data quality issue: phi_match=false appears inconsistent with phi=4, n=5",
+    "Assumption gap: Cannot evaluate claim validity without explicit premises",
+    "Ambiguous scope: Unclear if this is conjecture, proven result, or algorithmic observation",
+    "Reproducibility conflation: Numeric stability \u2260 truth of mathematical statement"
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "This dossier presents computationally stable numerical outputs from CSV data but fails to articulate a falsifiable mathematical claim. The 'short_statement' is a data row, not a mathematical proposition. Critical issues: (1) phi_match=false for n=5, phi=4 is suspicious since \u03c6(5)=4 is correct, (2) 'efficiency' metric lacks definition or derivation, (3) no theorem statement or proof sketch provided. Before promotion, claimant must supply: explicit mathematical claim in standard notation, definitions for all non-standard terms, explanation of phi_match discrepancy, and clarification of whether this is empirical observation or proven result. Current tier A_repro_verified_strong appears to measure data consistency only.",
+  "submitted_utc": "2026-02-26T00:05:00Z"
+}
+
+DeepSeek:
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "provider": "manual_quorum_vote",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.92,
+  "rationale": [
+    "Reproducibility verified with max relative error 2.84e-15 for float64 and 7.72e-33 for decimal128, well below stable threshold.",
+    "Metric match and notation match both pass; 3456 usable values successfully extracted.",
+    "Prior needs_human_review status resolved by strong numeric stability.",
+    "Claim statement is presented as tabular data; for promotion, the mathematical claim should be articulated clearly."
+  ],
+  "critical_risks": [
+    "Claim statement lacks a clear, concise mathematical formulation; potential for misinterpretation.",
+    "Float risk noted as medium, though actual errors are minimal; further testing in edge cases may be warranted."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Recommend promotion to claim dossier review board with note to clarify the claim statement.",
+  "submitted_utc": "2026-02-28T13:15:00Z"
+}
+
+
+=== KIMI supplemental vote captured 2026-02-28T06:56:23Z ===
+{
+  "claim_id": "CLAIM-LRC-000043",
+  "provider": "Kimi-K2",
+  "status_class": "escalate",
+  "confidence": 0.25,
+  "rationale": [
+    "Claim statement is raw CSV data without clear mathematical proposition",
+    "No falsifiable theorem, lemma, or conjecture identified in dossier",
+    "Phi=4 for n=5 is standard totient function, but context suggests non-standard usage",
+    "Efficiency metric (0.180091) undefined - no formula or derivation provided",
+    "Phi_match=false for first row contradicts phi=4, n=5 (should be true if phi(n)=4)",
+    "Assumptions marked 'pending extraction review' - critical gap",
+    "Review_score 100.227 reflects computational reproducibility, not mathematical validity",
+    "Float risk 'medium' with stable numeric ladder does not address logical soundness"
+  ],
+  "critical_risks": [
+    "Missing claim statement: No clear mathematical assertion to verify or falsify",
+    "Undefined terminology: 'efficiency', 'isolation_count', 'detected_phases' lack mathematical definitions",
+    "Data quality issue: phi_match=false appears inconsistent with phi=4, n=5",
+    "Assumption gap: Cannot evaluate claim validity without explicit premises",
+    "Ambiguous scope: Unclear if this is conjecture, proven result, or algorithmic observation",
+    "Reproducibility conflation: Numeric stability ≠ truth of mathematical statement"
+  ],
+  "publication_gate_recommendation": "hold",
+  "notes": "This dossier presents computationally stable numerical outputs from CSV data but fails to articulate a falsifiable mathematical claim. The 'short_statement' is a data row, not a mathematical proposition. Critical issues: (1) phi_match=false for n=5, phi=4 is suspicious since φ(5)=4 is correct, (2) 'efficiency' metric lacks definition or derivation, (3) no theorem statement or proof sketch provided. Before promotion, claimant must supply: explicit mathematical claim in standard notation, definitions for all non-standard terms, explanation of phi_match discrepancy, and clarification of whether this is empirical observation or proven result. Current tier A_repro_verified_strong appears to measure data consistency only.",
+  "submitted_utc": "2026-02-26T00:05:00Z"
+}

@@ -1,0 +1,831 @@
+                THE LONELY RUNNER WITH SEVEN RUNNERS
+
+                                      J. BARAJAS AND O. SERRA
+
+
+
+
+       Abstract. Suppose k + 1 runners having nonzero constant speeds run laps on a unit-length
+       circular track starting at the same time and place. A runner is said to be lonely if she is at
+       distance at least 1/(k + 1) along the track to every other runner. The lonely runner conjecture
+       states that every runner gets lonely. The conjecture has been proved up to six runners (k ≤ 5).
+       A formulation of the problem is related to the regular chromatic number of distance graphs.
+       We use a new tool developed in this context to solve the first open case of the conjecture with
+       seven runners.
+
+
+
+                                           1. Introduction
+
+Consider k + 1 runners on a unit length circular track. All the runners start at the same
+time and place and each runner has a constant speed. A runner is said to be lonely at some
+time if she is at distance at least 1/(k + 1) along the track from every other runner. The
+Lonely Runner Conjecture states that each runner gets lonely. The Lonely Runner Conjecture
+has been introduced by Wills [12] and independently by Cusick [7], and it has been given this
+pitturesque name by Goddyn [4]. For k = 3, there are four proofs in the context of diophantine
+approximations: Betke and Wills [3] and Cusick [7, 8, 9]. The case k = 4 was first proved by
+Cusick and Pomerance [10], with a proof requiring computer checking. Later, Bienia et al. [4]
+gave a simpler proof for the case k = 4. The case k = 5 was proved by Bohman, Holzman and
+Kleitman [5]. A simpler proof for this case was given later by Renault [11].
+
+This problem appears in different contexts. Cusick [7] was motivated by an application in view
+obstruction problems in n–dimensional geometry, and Wills [12] considered the problem from
+the diophantine approximation point of view. Biennia et al. [4] observed that the solution of the
+lonely runner problem implies a theorem on nowhere zero flows in regular matroids. Zhu [13]
+used known results for the lonely runner problem to compute the chromatic number of distance
+graphs. In [2] a similar approach was used to study the chromatic number of circulant graphs.
+
+A convenient and usual reformulation of the lonely runner conjecture can be obtained by as-
+suming that all speeds are integers, not all divisible by the same prime, (see e.g. [5]) and that
+the runner to be lonely has zero speed. Let kxk denote the distance of the real number x to its
+nearest integer. In this formulation the Lonely Runner Conjecture states that, for any set D of
+
+  Research supported by the Spanish Ministry of Eduaction under grant MTM2005-08990-C02-01 and by the
+Catalan Research Council under grant 2005SGR00256.
+                                                     1
+2                                   J. BARAJAS AND O. SERRA
+
+k positive integers, there is a real number t such that ktdk ≥ 1/(k + 1) for each d ∈ D. We shall
+consider a discrete version of the lonely runner problem.
+
+Let N be a positive integer. For an integer x ∈ Z we denote by |x|N the residue class of x or
+−x in the interval [0, N/2]. For a set D ⊂ N of positive integers we define the regular chromatic
+number χr (N, D) as
+                                                              N
+             χr (N, D) = min{k : ∃λ ∈ ZN such that |λd|N ≥      for each d ∈ D},
+                                                              k
+if D contains no multiples of N and χr (N, D) = ∞ otherwise. We define the regular chromatic
+number of D as
+                                  χr (D) = lim inf χr (N, D).
+                                             N →∞
+
+The reason for calling chromatic numbers the parameters defined above stems from applications
+of the lonely runner problem to the study of the chromatic numbers of distance graphs and
+circulant graphs; see e.g [1, 2, 13]. In this terminology, the lonely runner conjecture can be
+equivalently formulated as follows.
+
+Conjecture 1. For every set D ⊂ Z of positive integers with gcd(D) = 1,
+                                        χr (D) ≤ |D| + 1.
+
+In [1] the so–called Prime Filtering Lemma was introduced as a tool to obtain a characterization
+of sets D with |D| = 4 for which equality holds in Conjecture 1. The Prime Filtering Lemma
+provides a short proof of the conjecture for |D| = 4 (five runners) which we include in Section 3
+just to illustrate the technique. In Section 2 we formulate a generalization of the lemma and we
+then use it in the rest of the paper to solve the first open case of the conjecture when |D| = 6.
+As it will become clear in the coming sections, the Prime Filtering Lemma essentially reduces
+the proof to a finite problem in Z7 which can be seen as a generalization of the Lonely Runner
+Problem in which the runners may have different starting points. Unfortunately the conjecture
+does not always hold in this new context and we have to proceed with a more detailed case
+analysis.
+
+
+                          2. Notation and Preliminary results
+
+For a positive integer x and a prime p, the p–adic valuation of x is
+                              νp (x) = max{k : x ≡ 0    (mod pk )}.
+We also denote by rp (x) = (xp−νp (x) )p the congruence class modulo p of the least coefficient in
+the p-ary expansion of x.
+
+We shall consider the discrete version of the lonely runner problem mostly in the integers modulo
+N with N a prime power. We denote by (x)N the residue class of x modulo N in {0, 1, . . . , N −1}
+and we denote by |x|N the residue class of x or −x modulo N in {0, 1, . . . , bN/2c}.
+                              THE LONELY RUNNER WITH SEVEN RUNNERS                                         3
+
+Let D be a set of positive integers, let m = max νp (D) and set N = pm+1 . Note that, for
+each x ∈ Z, νp (x) = νp ((x)N ) = νp (|x|N ). By abuse of notation we still denote by D the set
+{(d)N : d ∈ D} as a subset of ZN whenever the ambient group is clear from the context. The
+p–levels of D are
+                                 Dp (i) = {d ∈ D : νp (d) = i}.
+Let q = qp,m : Z → Zp be defined as
+                                                        x
+                                              q(x) = (b m c)p ,
+                                                       p
+that is, q(x) = k is equivalent to (x)N ∈ [k( Np ), (k + 1) Np ). We call the interval [k( Np ), (k + 1) Np )
+the k-th (N/p)–arc. Our goal is to find a multiplier λ for D0 = D \ Dp (m) such that
+                                        q(λ · D0 ) ∩ {0, p − 1} = ∅,                                     (1)
+where λ · X = {λx; x ∈ X}. Indeed, if (1) holds, then |λd|N ≥ N/p for each d ∈ D and
+χr (D) ≤ χr (N, D) ≤ p, giving Conjecture 1 whenever |D| ≥ p − 1.
+
+We shall mostly use multipliers of the form 1 + pm−j k. Let
+                      Λj,p = {1 + pm−j k, 0 ≤ k ≤ p − 1}, j = 0, 1, . . . , m − 1,
+and
+                                         Λm,p = {1, 2, . . . , p − 1}.
+Note that all elements in U ZN , the multiplicative group of invertible elements in ZN , can be
+obtained as a product of elements in Λ0,p ∪ Λ1,p ∪ · · · Λm,p . In what follows, by a multiplier we
+shall always mean an invertible element in ZN where N is a prime power for some specified
+prime p.
+
+For each j and each λ ∈ Λj,p , we have
+                                              νp (λ · x) = νp (x)                                        (2)
+and, if λ = 1 + kpm−j , then
+                                          
+                                              q(x),                 if νp (x) > j,
+                             q(λ · x) =                                                                  (3)
+                                              q(x) + krp (x),       if νp (x) = j.
+In view of (3), when using a multiplier λ ∈ Λj,p , the values of q on the elements in the p–levels
+Dp (i) of D with i > j remain unchanged. The following result is based in this simple principle.
+It gives a sufficient condition for the existence of a multiplier λ such that multiplication by λ
+sends every element d ∈ D outside a ‘forbidden’ set for d.
+Lemma 2 (Prime Filtering). Let p be a prime and let D be a set of positive integers. Set
+m = max{νp (d) : d ∈ D} and N = pm+1 . For each d ∈ D let Fd ⊂ Zp . Suppose that
+                     X
+                         |Fd | ≤ p − 1 for each j = 0, 1, . . . , m − 1, and
+                       d∈Dp (j)
+                         X
+                                  |Fd | ≤ p − 2,
+                      d∈Dp (m)
+4                                    J. BARAJAS AND O. SERRA
+
+Then there is a multiplier λ such that, for each d ∈ D,
+                                              q(λd) 6∈ Fd .
+
+Proof. For each d ∈ D(m) we have q(Λm,p · d) = Λm,p . Hence there are at most |Fd | elements
+                                      P
+λ in Λm,p such that q(λd) ∈ Fd . Since d∈Dp (m) |Fd | ≤ p − 2, there is λ ∈ Λm,p such that
+q(λd) 6∈ Fd for each d ∈ Dp (m).
+
+Denote by E(i) = ∪j≥i D(j). Let r be the smallest nonnegative integer i for which there is some
+λi ∈ m
+    Q
+      j=i Λj,p verifying q(λi d) 6∈ Fd for every d ∈ E(i). We have seen that r ≤ m.
+
+Suppose that r > 0 and let λ ∈ Λr−1,p . It follows from (2) and (3) that, for each d ∈ E(r), we have
+(λλr d)N = (λr d)N . Note also that, for each d ∈ D(r − 1), we have q(λr d · Λr−1,p ) = Λm,p . Hence
+                                                                                P
+there are at most |Fd | elements λ in Λr−1,p for which q(λλr d) ∈ Fd . Since d∈Dp (r−1) |Fd | < p
+there is at least one λ ∈ Λr−1,p for which λλr d 6∈ Fd for each d ∈ E(r − 1) contradicting the
+minimality of r. Thus r = 0 and we are done.                                                      
+
+We shall often use the following form of Lemma 2, in which all forbidden sets are the 0-th and
+(p − 1)–th (N/p)–arcs.
+Corollary 3. With the notation of Lemma 2, suppose that |d|N ≥ N/p for each d ∈ Dp (i) and
+each i ≥ i0 for some positive integer i0 ≤ m. If
+                                           (p − 1)
+                              |Dp (j)| ≤           , j = 0, 1, . . . , i0 − 1,
+                                              2
+then
+                                             χr (N, D) ≤ p.
+
+Proof. Let Fd = {0, p − 1} for each d ∈ D \ Dp (m). We can apply Lemma 2 to each element
+of D0 = D \ (∪i≥i0 Dp (i)) since d∈Dp (j) |Fd | = 2|Dp (j)| ≤ (p − 1) for each j < i0 . Thus there
+                                P
+
+is λ ∈ j<i0 Λj,p such that q(λd) 6∈ {0, p − 1} for each d ∈ D0 . With such λ we also have
+       Q
+
+|λd|N = |d|N ≥ N/p for each d ∈ D \ D0 . Hence the inequality |λd|N ≥ N/p holds for each
+d ∈ D, which is equivalent to χr (N, D) ≤ p.                                                    
+
+
+                        3. The case with three and five runners
+
+Let us show that the cases with three (|D| = 2) and five (|D| = 4) runners can be easily handled.
+In other words, we prove in a simple way that χr (D) ≤ |D| + 1 for those sets with |D| = 2 or
+|D| = 4.
+
+For |D| = 2, either the two elements in D are relatively prime with 3 or they have different
+3-adic valuations. In both cases Corollary 3 with p = 3 applies and we get χr (D) ≤ 3.
+
+Suppose now that |D| = 4. Let m = max ν5 (D) and N = 5m+1 . Since we assume that
+gcd(D) = 1, we always have D5 (0) 6= ∅. By definition we have D5 (m) 6= ∅ as well. If |D5 (i)| ≤ 2
+                            THE LONELY RUNNER WITH SEVEN RUNNERS                                     5
+
+for each i < m then we are done by Corollary 3. Therefore we only have to consider the case
+|D5 (0)| = 3 and |D5 (m)| = 1.
+
+Put A = D5 (0) = {d1 , d2 , d3 } and D5 (m) = {d4 }. We shall show that, up to multiplication
+of elements in Λ0,5 ∪ Λm,5 , we have q(A) ∩ {0, 4} = ∅. Since these multiplications preserve the
+inequality |d4 |N ≥ N/5 we will conclude that χr (D) ≤ 5.
+
+Let d ∈ A. For each λk = 1 + k5m ∈ Λ0,5 we have
+
+                                      q(λk d) = q(d) + kr5 (d),                                   (4)
+
+and for each j ∈ {1, 2, 3} ⊂ Λm,5 ,
+
+                q((j + 1)d) ⊂ q(jd) + q(d) + {0, 1} ⊂ (j + 1)q(d) + {0, 1, . . . , j}.            (5)
+
+Since we can replace each d ∈ A by −d we may assume that all elements in A belong to two
+nonzero congruence classes modulo 5, say (A)5 ⊂ {1, 2}. Let As = {d ∈ A : (d)5 = s},
+s ∈ {1, 2}, denote the most popular congruence class.
+
+Let us denote by `(A) the cardinality of the smallest arithmetic progression of difference one in
+Z5 which contains q(A). Let us show that
+
+                                          `(jλk · A) ≤ |As |                                      (6)
+
+for some j ∈ Λm,5 and some λk ∈ Λ0,5 .
+
+Suppose that |As | = 3 and assume that (6) does not hold for j = 1. By (4) we may assume, up
+to multiplication by some λk , that q(d1 ) = 0, q(d2 ) = 2 and q(d3 ) = 3.
+
+By (5) we have q(2d1 ) ∈ {0, 1}, q(2d2 ) ∈ {0, 4} and q(2d3 ) ∈ {1, 2}. If (6) does not hold for j = 2
+either, then q(2d2 ) = 4 and q(2d3 ) = 2. Again by (5) we have q(3d1 ) ⊂ {0, 1, 2}, q(3d2 ) ⊂ {1, 2}
+and q(3d3 ) ⊂ {0, 1} and (6) holds for j = 3.
+
+Hence (6) holds and, up to multiplication by some λk , we have q(A) ∩ {0, 4} = ∅ as desired.
+
+Suppose now that As = {d1 , d2 } and r5 (d3 ) = ±2s and assume that (6) does not hold for j = 1.
+Without loss of generality we may assume that q(d1 ) = 0 and q(d2 ) = 2. By (5) we have
+q(2d1 ) ∈ {0, 1}, q(2d2 ) ∈ {0, 4}. If (6) does not hold for j = 2 then q(2d1 ) = 1 and q(2d2 ) = 4.
+Now, again by (5), q(3d1 ) ∈ {1, 2} and q(3d2 ) ∈ {1, 2} so that (6) holds for j = 3.
+
+Hence we have q(λk · As ) ∩ {0, 4} = ∅ at least for two values of k, and since r5 (d3 ) 6= ±s at least
+for one of them we have q(λk d3 ) 6= 0, 4 as well. This concludes the proof.
+
+
+                       4. Overview of the proof for seven runners
+
+In what follows, m = max ν7 (D) and N = 7m+1 . We shall omit the subscript p = 7 and write
+ν(x) = ν7 (x), r(x) = r7 (x) and Λj = Λj,7 .
+6                                       J. BARAJAS AND O. SERRA
+
+Since we assume that gcd(D) = 1, we always have D7 (0) 6= ∅. By definition we have D7 (m) 6= ∅
+as well.
+
+If |D7 (i)| ≤ 3 for each 0 ≤ i < m then we are done by Corollary 3. Therefore we may suppose
+that |D7 (i)| ≥ 4 for some i. On the other hand, if |D7 (i0 )| = 4 for some i0 > 0 then, again by
+Corollary 3, the problem can be reduced to the set D0 = {d/pi0 : d ∈ D \ D7 (0)}. Indeed, if
+we can find a multiplier λ0 such that |λ0 d0 |N 0 ≥ N 0 /p for each d0 ∈ D0 , where N 0 = N/pi0 , then
+|λd|N ≥ N/p for each d ∈ D7 (i), i ≥ i0 with (λ)N = (λ0 )N and Corollary 3 applies. Therefore
+we only have to consider the cases |D7 (0)| = 4 and |D7 (0)| = 5. These two cases are dealt
+with by considering the congruence classes modulo seven of the elements in A = D7 (0). Since
+we can replace every element d ∈ A by −d, we may assume that all elements in A belong to
+three nonzero congruence classes modulo 7, say (A)7 ⊂ {1, 2, 4}. Let As = {d ∈ A : (d)7 = s},
+s ∈ {1, 2, 4}. Recall that, for λk = 1 + k7m ∈ Λ0 we have
+                                         q(λk · As ) = q(As ) + ks                                 (7)
+
+The case |A| = 4 is simpler and is treated in Section 5. The case |A| = 5 is more involved and it
+is described in Section 6. In both cases the general strategy consists of compressing the sets As ,
+s ∈ {1, 2, 4} and then using (7). For this we often apply the Prime Filtering Lemma to subsets
+of A − A or 2A − 2A.
+
+In what follows we shall denote by `(X), where X is a set of integers, the length of the smallest
+arithmetic progression of difference one in Z7 which contains q(X).
+
+
+                                          5. The case |A| = 4
+
+Let A = {d1 , d2 , d3 , d4 } ⊂ D7 (0) and d5 ∈ D7 (i0 ), 0 < i0 ≤ m. Recall that for any d ∈ D7 (m)
+we have |λd|N ≥ N/7. Set d5 = upi0 and let u0 such that uu0 ≡ 1 (mod 7m+1−i0 ). Let
+                                  Λ = {ju0 (1 + 7m−i0 ) : 1 ≤ j ≤ 5}.
+For each λ ∈ Λ ∪ Λ0 we clearly have
+                                     |λd5 |N = j(7m + 7i0 ) ≥ N/7.                                 (8)
+We shall show that there are λ ∈ Λ0 and λ0 ∈ Λ such that q(λλ0 · A) ∩ {0, 6} = ∅, thus concluding
+the case |A| = 4.
+
+Let λk = 1 + k7m , 0 ≤ k ≤ 6, denote the elements in Λ0 and λ0j = js(1 + 7m−i0 ), 1 ≤ j ≤ 5, the
+ones in Λ. For d ∈ A we have
+               q(λ0j+1 d) ∈ q(λ0j d) + q(λ01 d) + {0, 1} ⊂ (j + 1)q(λ01 d) + {0, 1, . . . , j},    (9)
+and
+                                         q(λk d) = q(d) + kr(d).                                  (10)
+
+We consider three cases according to the cardinality |As | of the most popular congruence class
+in A.
+                              THE LONELY RUNNER WITH SEVEN RUNNERS                                             7
+
+Case 1. |As | = 4.
+
+If we show that `(λ0 ·A) ≤ 5 for some λ0 ∈ Λ then, in view of (10), we have {0, 6}∩q(λk λ0 ·A) = ∅
+for at least one value of k and we are done.
+
+Suppose this is not the case. Without loss of generality we may then assume that q(λ01 · A) =
+{0, 2, 4, 6}, say q(λ01 di ) = 2(i−1), 1 ≤ i ≤ 4 . In view of (9), we have q(λ03 di ) ∈ 6(i−1)+{0, 1, 2}.
+Since {2, 3} ∩ q(λ03 · A) 6= ∅ we must have q(λ03 d1 ) = 3. Similarly, {3, 4} ∩ q(λ03 · A) 6= ∅ implies
+q(λ03 d4 ) = 4. Now, again by (9),
+       q(λ04 d1 ) ∈ {2, 3}, q(λ04 d2 ) ∈ {1, 2, 3, 4}, q(λ04 d3 ) ∈ {2, 3, 4, 5} and q(λ04 d4 ) ∈ {3, 4},
+which yields {0, 6} ∩ q(λ04 · A) = ∅, a contradiction.
+
+Case 2. |As | = 3.
+
+Let As = {d1 , d2 , d3 }, so that either d4 ∈ A2s or d4 ∈ A4s .
+
+Suppose that
+                                                 `(λ0 · As ) ≤ 4                                            (11)
+for some λ0 ∈ Λ. Then, in view of (10), we have {0, 6}∩q(λk λ ·A1 ) = ∅ for k ∈ {k0 , k0 +s−1 } and
+some k0 (the values taken modulo seven). By (10) one of these two values sends λ0 d4 outside of
+{0, 6} and we are done.
+
+Suppose that (11) does not hold. Then we may assume that either q(λ01 · As ) = {0, 1, 4} or
+q(λ01 · As ) = {0, 2, 4}, say q(λ01 d1 ) = 0, q(λ01 d2 ) = 1 or 2 and q(λ01 d3 ) = 4. If q(λ01 d2 ) = 1, by (9),
+                               q(λ02 · As ) ⊂ {0, 2, 1} + {0, 1} = {0, 1, 2, 3},
+and (11) holds, a contradiction. If q(λ01 d2 ) = 2, using (9) with λ03 , we have
+                     (q(λ03 d1 ), q(λ03 d2 ), q(λ03 d3 )) ⊂ {0, 1, 2} × {6, 0, 1} × {5, 6, 0}.
+Since {2, 3, 4} ∩ q(λ03 · As ) 6= ∅ we have q(λ03 d1 ) = 2, and {3, 4, 5} ∩ q(λ03 · As ) 6= ∅ implies
+q(λ03 d3 ) = 5. But then q(λ04 d1 ) ⊂ 2 + {0, 1} and q(λ04 d3 ) ⊂ 2 + {0, 1}, so that
+                                  q(λ04 · As ) ⊂ (2 + {0, 1}) ∪ {1, 2, 3, 4},
+and (11) holds, again a contradiction.
+
+Case 3. |As | = 2.
+
+We may assume that either |A2s | = 2 or |A2s | = |A4s | = 1. Let As = {d1 , d2 }.
+
+Suppose that
+                                                 `(λ0 · As ) ≤ 2                                            (12)
+for some λ0 ∈ Λ. Then we have {0, 6} ∩ q(λk λ · A1 ) = ∅ for k ∈ {k0 , k0 + s−1 , k0 + 2s−1 , k0 + 3s−1 }
+and some k0 (the values taken modulo seven). It is a routine checking that for at least one of
+these four values of k we have {0, 6} ∩ q(λk λ · (A \ As )) = ∅ as well and we are done.
+8                                         J. BARAJAS AND O. SERRA
+
+Suppose that (12) does not hold. We may assume that either (i) q(λ01 · As ) = {0, 2} or (ii)
+q(λ01 · As ) = {0, 3}.
+
+Assume that (i) holds. Then (q(λ03 d1 ), q(λ03 d2 )) ⊂ {0, 1, 2} × {6, 0, 1}. Since (12) does not
+hold, (q(λ03 d1 ), q(λ03 d2 )) is one of the pairs (1, 6), (2, 0) or (2, 6). In the two former ones we
+have q(λ04 · As ) ⊂ {1, 2} or q(λ04 · As ) ⊂ {2, 3} respectively, a contradiction; in the last one,
+(q(λ04 d1 ), q(λ04 d2 )) ⊂ {2, 3} × {1, 2}, so that q(λ04 d1 ) = 3 and q(λ04 d1 ) = 1, which in turn implies
+q(λ05 · As ) ⊂ {3, 4}, again a contradiction.
+
+Assume now that (ii) holds. Repeated use of (9) and the fact that (12) does not hold gives
+           (q(λ02 d1 ), q(λ02 d2 )) ⊂ {0, 1} × {6, 0}   implies   q(λ02 d1 ) = 1 and q(λ02 d1 ) = 6
+           (q(λ03 d1 ), q(λ03 d2 )) ⊂ {1, 2} × {2, 3}   implies   q(λ03 d1 ) = 1 and q(λ03 d1 ) = 3
+
+
+Hence,
+                         q(λ05 · As ) ⊂ q(λ02 · As ) + q(λ03 · As ) + {0, 1} = {2, 3},
+giving (12). This completes the proof for the case |A| = 4.
+
+
+                                    6. The case |A| = 5 and m > 1
+
+Recall that N = 7m+1 where we now assume that m = max(ν(D)) ≥ 2, and that all elements
+in A belong to three nonzero congruence classes modulo 7, say (A)7 ⊂ {1, 2, 4}. In particular,
+given any two elements in A we have either r(y) = r(x) or r(y) = 2r(x) or r(x) = 2r(y). We
+find convenient to introduce the following notation:
+
+                                                                 
+               2x − y,       if r(y) = 2r(x)                      2q(x) − q(y),        if r(y) = 2r(x)
+    e(x, y) =   2y − x,       if r(x) = 2r(y)      and ẽ(x, y) =   2q(y) − q(x),        if r(x) = 2r(y)
+                x − y,        if r(y) = r(x),                       q(x) − q(y),         if r(y) = r(x).
+                                                                 
+                                                                                                           (13)
+
+The following properties can be easily checked.
+Lemma 4. Let x, y be integers with ν(x) = ν(y) = j < m.
+
+(i) For each λ ∈ ∪i≤j Λi we have ẽ(x, y) = ẽ(λx, λy).
+
+(ii) |ẽ(x, y) − q(e(x, y))|7 ≤ 1. Moreover, if r(x) = r(y) then ẽ(x, y) − q(e(x, y)) ∈ {0, 6}.
+
+Proof. Let λ = (1+k7i ). If i < j then q(λx) = q(x) and q(λy) = q(y) so there is nothing to prove.
+If i = j and r(y) = 2r(x) then q(λx) = q(x) + kr(x) and q(λy) = q(y) + kr(y) = q(y) + 2kr(x) so
+that ẽ(λx, λy) = 2q(λx) − q(λy) = 2q(x) − q(y) = ẽ(x, y). The case r(y) = r(x) can be similarly
+checked.
+
+Part (ii) follows directly from the definition of q(x) = b 7xm c 7 .
+                                                                
+                                                                                                
+                              THE LONELY RUNNER WITH SEVEN RUNNERS                                            9
+
+Let A1 denote the most popular class and denote by s its congruence class modulo 7. Denote by
+A2 and A4 the subsets of elements in A congruent with 2s and 4s modulo 7 respectively. Recall
+that, for a subset X ⊂ Z, `(X) stands for the length of the shorter arithmetic progression of
+difference 1 in Z7 which contains q(X). As in the case |A| = 4, the general strategy consists
+in ‘compressing’ the sets q(A1 ), q(A2 ), q(A4 ). We summarize in lemmas 5 and 6 below some
+sufficient conditions in terms of the values of lengths of these three sets which allows one to
+conclude that (1) holds.
+
+Lemma 5. Assume that
+
+
+                                        `(A1 ) + `(A2 ) + `(A4 ) ≤ 5.
+
+Then there is λ ∈ Λ0 such that
+                                           q(λ · A) ∩ {0, 6} = ∅,
+unless (`(A1 ), `(A2 ), `(A4 )) = (3, 1, 1) and ẽ(d, d0 ) ∈ {2, 4} for each d ∈ A2 and d0 ∈ A4 .
+
+Proof. The elements of Λ0 will be denoted by λk = 1 + 7m ks−1 . Observe that, for d ∈ Aj ,
+we have q(λk d) = q(d) + jk. By (7) we may assume that q(As ) ⊂ {1, 2, . . . , `(As )}, so that
+q(λk · As ) ∩ {0, 6} = ∅ for k = 0, 1, . . . , 5 − `(As ). We may assume that `(A1 ) + `(A2 ) + `(A4 ) = 5.
+
+If `(A1 ) = 5 we are done. If `(A1 ) = 4 then we clearly have q(λk · (A \ A1 )) ∩ {0, 6} = ∅ for at
+least one of k = 0, 1.
+
+Suppose that `(A1 ) = 3. If either `(A2 ) = 2 or `(A4 ) = 2 then for at least one of the values of
+k = 0, 1, 2 we have q(λk · (A \ A1 )) ∩ {0, 6} = ∅. Let us consider the case `(A2 ) = `(A4 ) = 1.
+Let q(A2 ) = {i} and q(A4 ) = {j}. Suppose that q(λk · A) ∩ {0, 6} 6= ∅ for each k = 0, 1, 2. Since
+at most one element in {i, i + 2, i + 4} belongs to {0, 6}, two of the elements in {j, j + 4, j + 1}
+must be in {0, 6}. The only possibility is {j, j + 1} = {0, 6} and {i + 2} ∈ {0, 6}. This implies
+2i − j ∈ {2, 4}. Hence ẽ(d, d0 ) ∈ {2, 4} for each d ∈ A2 , d0 ∈ A4 .
+
+Suppose finally that `(A1 ) = 2. We may assume that `(A2 ) = 2 and `(A4 ) = 1. Let q(A2 ) =
+{i, i + 1} and q(A4 ) = {j}. Two of the four sets {i, i + 1} + 2k, k = 0, 1, 2, 3, intersect {0, 6}
+for two consecutive values of k in cyclic order. At most two of the sets {j} + 4k , k = 0, 1, 2, 3,
+intersect {0, 6} for two non consecutive values of k. Hence there is some value of k for which
+(q(A2 ) + 2k) ∪ (q(A4 ) + 4k) does not intersect {0, 6}. This completes the proof.               
+
+Lemma 6. Suppose that q(A1 ) ⊂ {1, . . . , `(A1 )} and let d ∈ A1 with q(d) = 1. There is λ ∈ Λ0
+such that
+                                           q(λ · A) ∩ {0, 6} = ∅,
+if one of the following conditions hold:
+
+(i) Either (`(A1 ), `(A2 ), `(A4 )) = (5, 0, 1) and ẽ(d, d0 ) 6∈ {4, 6} for each d0 ∈ A4 , or (`(A1 ), `(A2 ), `(A4 )) =
+(5, 1, 0) and ẽ(d, d0 ) 6∈ {2, 3} for each d0 ∈ A2 .
+10                                        J. BARAJAS AND O. SERRA
+
+(ii) Either (`(A1 ), `(A2 ), `(A4 )) = (4, 0, 2), or (`(A1 ), `(A2 ), `(A4 )) = (4, 2, 0) and ẽ(d, d0 ) 6= 4,
+where q(A2 ) = {i, i + 1} and d0 ∈ A2 ∩ q −1 (i).
+
+(iii) (`(A1 ), `(A2 ), `(A4 )) = (3, 3, 0).
+
+Proof. We may assume that the elements of A1 are congruent to 1 modulo 7, so that q(λk · A1 ) ∩
+{0, 6} = ∅ for k = 0, 1, . . . , 5 − `(A1 ).
+
+(i) Suppose that `(A4 ) = 1. If q(A4 ) = i ∈ {0, 6} then ẽ(d, d0 ) = 2i − 1 ∈ {6, 4}. Similarly, if
+`(A2 ) = 1, then i = q(A2 ) ∈ {0, 6} implies ẽ(d, d0 ) = 2 − i ∈ {2, 3}.
+
+(ii) Suppose that `(A4 ) = 2, say q(A2 ) = {i, i + 1}. One of the two sets {i, i + 1}, {i + 4, i + 5}
+does not intersect {0, 6} so that the result holds for at least one λk , k = 0, 1. If `(A2 ) = 2
+then both q(A2 ) = {i, i + 1} and q(λ2 · A) = {i + 2, i + 4} intersect {0, 6} only if i = 5 and
+ẽ(d, d0 ) = 2 − i = 4.
+
+(iii) Let q(A2 ) = {i, i + 1, i + 2}. Now q(λk · A1 ) ∩ {0, 6} = ∅ for k = 0, 1, 2, and one of the three
+sets {i, i + 1, i + 2}, {i + 2, i + 3, i + 4}, {i + 3, i + 4, i + 5} does not intersect {0, 6}.       
+
+As shown in the lemmas 5 and 6 above, compression alone is usually not enough to conclude
+that (1) holds. The next lemmas provide additional tools to complete the proof. Further results
+of the same nature will appear later on in dealing with specific cases.
+
+Lemma 7. Let X ⊂ Z7 and let d, d0 be two integers with ν(d) = ν(d0 ) = 0 and r(d0 ) = 2r(d).
+There is λ ∈ Λh for some h < m such that
+                                              ẽ(λd, λd0 ) 6∈ X
+whenever one of the two following conditions holds:
+
+(i)   ν(2d − d0 ) < m and `(X) ≤ 4, or
+
+(ii) ν(2d − d0 ) = m and r(2d − d0 ) 6∈ X ∩ (X + 1).
+
+Proof. (i) Since `(X) ≤ 4 there is x ∈ Z7 \(X +{0, 1, 2}). Choose λ ∈ Λh , where h = ν(2d−d0 ) <
+m, such that q(λ(2d−d0 )) = x−1. Using Lemma 4 we have ẽ(λd, λd0 ) ∈ q(e(λd, λd0 )+{−1, 0, 1} =
+x + {−2, −1, 0} 6∈ X.
+
+(ii) Since ν(2d − d0 ) = m we have r(2d − d0 ) = q(2d − d0 ) = q(2d) − q(d0 ). Suppose that
+q(2d − d0 ) 6∈ X. Choose λ ∈ Λ1 such that q(λ(7d)) = 0. Let us show that this λ verifies
+the conditions of the lemma (recall that m > 1). Note that q(2λd) ∈ 2q(λd)) + {0, 1} and
+q(2λd) = 2q(λd)) + 1 implies q(λ(7d)) = q(λ(2d + 2d + 2d + d)) ∈ q(2λd) + q(2λd) + q(2λd) +
+q(λd)+{0, 1, 2, 3} = 7q(λd)+3+{0, 1, 2, 3}, contradicting q(λ(7d)) = 0. Hence q(2λd) = 2q(λd)).
+Thus ẽ(λd, λd0 ) = 2q(λd) − q(λd0 ) = q(λ(2d − d0 )) = q(2d − d0 ) 6∈ X as claimed. A similar
+argument applies when q(2d − d0 ) 6∈ (X + 1) by choosing λ ∈ Λ1 such that q(λ(7d)) = 6 so that
+q(λ(2d)) = 2q(λd)) + 1.                                                                      
+                              THE LONELY RUNNER WITH SEVEN RUNNERS                                   11
+
+Note that the proof of Lemma 7 (ii) requires m > 1. We give a last lemma before starting with
+the case analysis. First we note the following remark.
+Remark 8. Let X ⊂ Z.
+
+(i) If q(X − X) ⊂ {0, 6} then `(k · X) ≤ k + 1, 1 ≤ k ≤ 6.
+
+(ii) If q(X − X) ⊂ {0, 1, 5, 6} then `(X) ≤ 3.
+Lemma 9. Let B = {b1 , b2 , b3 } ⊂ Z with ν(B) = {0} and r(b1 ) = r(b2 ) = r(b3 ). Set x = b1 − b3
+and y = b2 − b3 .
+
+(i) If ν(x) 6= ν(y) then there is a multiplier λ such that `(λ · B) ≤ 2.
+
+(ii) If ν(x) = ν(y) = h < m and r(y) = jr(x), j ∈ {2, 3} then there is a multiplier λ such that
+q(λy) ∈ {0, 5, 6} and `(λ · B) ≤ j. Moreover, if j = 3, then λ ∈ Λh .
+
+Proof. (i) Suppose ν(x) > ν(y). By Lemma 2 there is a multiplier λ such that q(λx) = 0 (if
+ν(x) < m) or λx = N/7 (if ν(x) = m), and q(λy) = 0. Thus q(λx − λy) = q(λ(b1 − b2 )) ∈ {0, 6}
+and q(λ · B − λ · B) ∈ {0, 6}. By Remark 8 (i), we have `(B) ≤ 2.
+
+(ii) Suppose first that r(y) = 2r(x) and set e = e(x, y) = 2x − y. Choose λ ∈ Λh such that either
+q(λe) = 0 (if ν(e) 6= m) or e = N/7 (if ν(e) = m). By Lemma 4 we have ẽ(λx, λy) ∈ {0, 1, 6}.
+Choose λ0 ∈ Λh such that q(λ0 λx) = 0 (if ẽ(λx, λy) ∈ {0, 1}) or q(λ0 λx) = 6 (if ẽ(λx, λy) = 6).
+Then q(λ0 λy) ∈ {0, 6} and q(λ0 λ(y − x)) ∈ {0, 6}. Thus q(λ0 λ · (B − B)) ⊂ {0, 6}. By Remark 8
+(i), we have `(λ0 λ · B) ≤ 2.
+
+Suppose now that r(y) = 3r(x). Choose λ ∈ Λh such that
+                                
+                                 0 if 3q(y) + 5q(x) ∈ {0, 2}
+                        q(λy) =   6 if 3q(y) + 5q(x) ∈ {1, 4, 6}
+                                  5 if 3q(y) + 5q(x) ∈ {3, 5}
+                                
+
+Thus q(λy) ∈ {0, 5, 6}, q(λx) ∈ {0, 1, 5, 6} and q(λy) − q(λx) ∈ {0, 1, 6}. By Lemma 4, q(λ(y −
+x)) ∈ q(y) − q(x) + {0, 6} = {0, 1, 5, 6}. Hence, by Remark 8 (ii), we have `(λ · B) ≤ 3.     
+
+6.1. Case 1: |A1 | = 5. In what follows we shall use some appropriate numbering {d1 , d2 , d3 , d4 , d5 }
+of the elements in A. We shall write eij = e(di , dj ).
+Lemma 10. Suppose that |A1 | ≥ 4 and let E = (A1 − A1 ) \ {0}. There is a numbering of the
+elements of A1 such that one of the following holds:
+
+(i)   ν(e21 ) > ν(e31 ), or
+
+(ii) ν(e) = h for each e ∈ E and r(e31 ) = 2r(e21 ) and either
+
+       (ii.1) r(e41 ) = 3r(e21 ), or
+
+       (iii.2) r(e41 ) = 4r(e21 ).
+12                                     J. BARAJAS AND O. SERRA
+
+Proof. If |ν(E)| > 1 then color the pair {di , dj } with ν(eij ). Two intersecting pairs must have
+different colors. We can rename d1 their common element and d2 , d3 the other two to get (i).
+
+Suppose now that |ν(E)| = 1. Consider the set X = {r(eil ), r(ejl ), r(ekl )} where i, j, k, l are
+pairwise distinct subscripts. If r(eil ) = r(ejl ) then ν(eij ) = ν(eil − ejl ) > ν(eil ) contradicting
+|ν(E)| = 1. By symmetry the elements in X are pairwise distinct and two of them belong to
+one of the sets {1, 2, 4} or {3, 5, 6}. We may thus assume that (r(eil ), r(ejl ), r(ekl )) = (x, 2x, y).
+If y ∈ {3x, 4x} then (ii) holds with l = 1, i = 2, j = 3 and k = 4. If y ∈ {5x, 6x} then
+(r(elj ), r(eij ), r(ekj )) = (−2x, −x, y − 2x) and (ii) holds with j = 1, i = 2, l = 3 and k = 4.     
+
+Let A1 = {d1 , d2 , d3 , d4 , d5 } where we use the labeling provided by Lemma 10. We shall show
+that, up to some multiplier, we have `(A1 ) ≤ 5. The result then follows by Lemma 5.
+
+Let B = {d1 , d2 , d3 } and E = (A1 − A1 ) \ {0}. Suppose that ν(E) 6= {m}. Then, by Lemma 10
+and Lemma 9, we may assume `(B) ≤ 2. Thus, by (7) we may assume that q(B) ⊂ {0, 6}.
+
+If {q(d4 ), q(d5 )} 6= {2, 4} then we have `(A1 ) ≤ 4 and we are done. Suppose {q(d4 ), q(d5 )} =
+{2, 4}. Then q(3d4 ), q(3d5 ) ∈ {0, 1, 5, 6} and q(3 · B) ⊂ {0, 1, 2, 4, 5, 6}. Furthermore, by Remark
+8 (i), `(3 · B) ≤ 4. Thus we have either q(3 · A1 ) ⊂ {0, 1, 2, 5, 6} or q(3 · A1 ) ⊂ {0, 1, 4, 5, 6}, so
+that `(3 · A1 ) ≤ 5.
+
+Suppose now that ν(E) 6= {m}. Set E1 = {e51 , e41 , e31 , e21 } ⊂ {kN/7, 1 ≤ k ≤ 6}. Denote by
+iN/7 and jN/7 the elements in the complement of E1 . Multiplying by (i − j)−1 ∈ U Z7 we may
+assume that the elements in E1 are consecutive, so that `(A1 ) ≤ 5. This completes this case.
+
+
+6.2. Case |A1 | = 4. Let A1 = {d1 , d2 , d3 , d4 } and r(d5 ) ∈ {2s, 4s}, where the elements in A1
+are labeled with the ordering of Lemma 10.
+
+Let B = {d1 , d2 , d3 } and E = (A1 − A1 ) \ {0}. Suppose that ν(E) 6= {m}. Then, by Lemma 10
+and Lemma 9 we may assume that `(B) ≤ 2 and, by (7) we may assume that q(B) ⊂ {0, 6}. If
+q(d4 ) 6= 3 then `(A1 ) ≤ 4, and if q(d4 ) = 3 then q(2 · A1 ) ⊂ {0, 1, 5, 6} and again `(A1 ) ≤ 4. The
+result follows by Lemma 5.
+
+Suppose now that ν(E) 6= {m}. If (ii.1) holds then multiplying by (r(e21 ))−1 (modulo 7) we
+may assume that r(e41 ) = 3N/7, e31 = 2N/7 and e21 = N/7 which yields `(A1 ) ≤ 4. The
+result follows by Lemma 5. Assume that (ii.2) holds. Up to multiplication by some λ ∈ Λm
+we may assume that q({e13 , e24 , e34 }) ⊂ {1, 2, 4} so that `(A1 ) ≤ 5. By Lemma 7 we may also
+assume that ẽ(d4 , d5 ) 6∈ {4, 6}. Thus Lemma 6 (i) applies if d5 ∈ A4 . Finally, if d5 ∈ A2 , we
+may also assume that ẽ(d4 , d5 ) 6∈ {2, 3} by using again Lemma 7 unless e45 = 3N/7. In this
+case we have q({2e14 , 2e24 , 2e34 }) ⊂ {1, 4, 2}, so that `(A1 ) ≤ 5, while 2e4 5 = 6N/7 and so
+ẽ(2d4 , 2d5 ) 6∈ {2, 3}, and the result also follows from Lemma 6 (i). This completes this case.
+
+
+6.3. Case |A1 | = 3, |A2 | = 1 and |A4 | = 1. First we consider a convenient labeling of the
+elements in A1 to be used here and the two following subsections.
+                             THE LONELY RUNNER WITH SEVEN RUNNERS                                     13
+
+Lemma 11. Let s ∈ Z∗7 be given. There is a labeling of the elements in A1 such that one of the
+following holds:
+
+(i) ν(e13 ) > ν(e23 ) = ν(e12 ),
+
+(ii) ν(e13 ) = ν(e23 ) = h and either
+
+       (ii.1) r(e13 ) = 2r(e23 ), or (ii.2) r(e13 ) = 3r(e23 ) = ±s,
+
+
+
+
+Proof. Let E = (A1 − A1 ) \ {0}. If |ν(E)| > 1 then we clearly can label the elements in D to get
+(i). Assume that |ν(E)| = 1. Suppose that |r(E)| < 6. Note that we can not have r(eij ) = r(eik )
+since otherwise ν(ekj ) = ν(eij −eik ) > ν(eij ) contradicting |ν(E)| = 1. Similarly, r(eij ) = r(ekj ).
+Thus we may assume that the repeated values of r on E are r(eij ) = r(ejk ) and we can label
+i = 1, j = 2 and k = 3. Suppose now that |r(E)| = 6. Thus we may assume that r(eik ) = s.
+Observe that r(ejk ) ∈ {3s, 5s}. Indeed, if r(ejk ) = 2s then r(eji ) = r(ejk ) − r(eki ) = s, if
+r(ejk ) = 4s) then r(eij ) = r(eik ) + r(ekj ) = 4s and if r(ejk ) = 6s then r(ekj ) = s, contradicting
+in each case |r(E)| = 6. If r(ejk ) = 3s then r(eji ) = −5s, r(eki ) = −s and we can label i = 3,
+j = 2 and k = 1. In case r(ejk ) = 5s we can label i = 1, j = 2 and k = 3.                            
+
+
+
+
+Let A1 = {d1 , d2 , d3 }, where we use the labeling of Lemma 11, A2 = {d4 } and A4 = {d5 }. We
+divide the proof according to the cases of Lemma 11.
+
+(i) and (ii.1) with h < m. By Lemma 9 applied to A1 we may assume that `(A1 ) ≤ 2 and the
+result follows by Lemma 5.
+
+(ii.2) with h < m. We consider two subcases:
+
+(ii.2.a) ν(e45 ) 6= ν(e13 ). If ν(e45 ) > ν(e13 ), by Lemma 2 applied to e45 we may assume that
+q(e45 ) = 6 and thus ẽ(d4 , d5 ) ∈ {0, 1, 5, 6}. We can then apply Lemma 9 to B = A1 so that we
+may assume that `(A1 ) ≤ 3, yielding the conditions of Lemma 5. A similar argument works
+when ν(e45 ) < ν(e13 ) by applying Lemma 9 first and then Lemma 2.
+
+(ii.2.b) h = ν(e45 ) = ν(e13 ). By Lemma 11 we may assume r(e45 ) = ±r(e13 ). Suppose first
+that r(e45 ) = r(e13 ). Set f = e45 − e13 , so that ν(f ) > h. By Lemma 2 we may assume
+q(f ) = 0 (or f = N/7 with the same consequences) so that ẽ(e13 , e45 ) = q(e13 ) − q(e45 ) ∈ {0, 1}.
+Recall that this last value is invariant by multiplication of elements in Λj with j ≤ h. Put
+ũ = 3q(e13 ) + 5q(e23 ). By Lemma 2, q(e45 ) can be set to the value shown in the following table
+according to the values of ẽ = ẽ(e13 , e45 ) and ũ:
+14                                       J. BARAJAS AND O. SERRA
+
+
+
+                     ũ     0          1          2          3             4             5          6
+              q(e45 )       0          6          0          3             6             0          6
+              q(e13 )       0          6          0          3             6             0          6
+     ẽ = 0   q(e23 )       0          5          6          3             0             1          6
+              q(e12 )     {0, 6}     {0, 1}     {0, 1}     {0, 6}        {6, 5}        {6, 5}     {0, 6}
+              q(e45 )       6          0          6          0        5        6         6          5
+              q(e13 )       0          1          0          1        6        0         0          6
+     ẽ = 1   q(e23 )       0          1          6          0        0        5         1          6
+              q(e12 )     {0, 6}     {0, 6}     {0, 1}     {0, 1}    {6}      {1}      {5, 6}     {6, 6}
+
+
+If ũ = 4 and ẽ = 1 we set q(e45 ) = 5 if q(e12 ) = q(e13 )−q(e23 ), and q(e45 ) = 6 if q(e12 ) = q(e13 )−
+q(e23 ) − 1. In all cases except ẽ = 0 and ũ = 3 we either have `(A1 ) ≤ 3, `(A2 ) = `(A4 ) = 1
+and ẽ(d4 , d5 ) 6∈ {2, 4} or `(A1 ) = 2 and `(A2 ) = `(A4 ) = 1 so that Lemma 5 applies. If ẽ = 0
+and ũ = 3 we have q({2e45 , 2e13 , 2e23 )} ∈ {0, 6} and q(2e12 ) ∈ {0, 1, 5, 6} reaching the same
+conditions.
+
+A similar analysis applies if r(e45 ) = −r(e13 ) by exchanging f = r(e13 ) − r(e45 ) by f = r(e13 ) +
+r(e45 ) and q(e45 ) by q(−e45 ).
+
+(ii.1) and h = m. Up to some multiplier in Λm we may assume that e13 = 2N/7 and e23 =
+N/7, which leads to `(A1 ) = 3. By Lemma 7 we may also assume that ẽ(d4 , d5 ) 6∈ 2, 4 and we
+are in the conditions of Lemma 5.
+
+(ii.2) and h = m. We may assume that A1 contains the elements congruent to 1 modulo 7.
+Up to some multiplier in Λm we may assume that e13 = 3N/7 and e23 = N/7 which implies
+`(A1 ) = 4. We may also assume that q(A1 ) ⊂ {1, 2, 3, 4} and q(d3 ) = 1. Let q(d4 ) = i and
+q(d5 ) = j. In this case (1) holds unless both {i, j} and {i + 2, j + 4} intersect {0, 6}, namely
+when i ∈ {0, 6} and j ∈ {2, 3} or j ∈ {0, 6} and i ∈ {4, 5}. Thus (ẽ34 , ẽ45 ) is one of the four pairs
+{(2, 4), (2, 5), (3, 2), (3, 3)} in the first case and one of the four pairs {(4, 3), (4, 4), (5, 1), (5, 2)}
+in the second one.
+
+If ν(e34 ) < m then by Lemma 7 (i) applied to d3 and d4 we may assume that ẽ34 6∈ {2, 3, 4, 5}
+and we are done.
+
+If ν(e34 ) = m and ν(e45 ) < m then by applying Lemma 7 (i) to d4 and d5 we may assume that
+ẽ45 6∈ {2, 3, 4, 5} if ẽ34 ∈ {2, 3} and ẽ45 6∈ {1, 2, 3, 4} if ẽ34 ∈ {4, 5} thus avoiding the two bad
+cases.
+
+Suppose that ν(e34 ) = ν(e45 ) = m. Observe that one of the four pairs (q(e34 ) − 1 , q(e45 ) − 2 ),
+1 , 2 ∈ {0, 1} is not a bad pair. Observe also that ẽ(d3 , d4 ) = 2(q(d3 )) − q(d4 ) ∈ q(2d3 ) − q(d4 ) +
+{0, 6} = q(e34 ) + {0, 6} and similarly ẽ(d4 , d5 ) ∈ q(e34 ) + {0, 6}. We have d4 = 2d3 + tN/7,
+for some t < 7. By Lemma 2 we may assume that q(7d3 ) = 41 + 22 for each choice of
+1 , 2 ∈ {0, 1} (recall that ν(7d3 ) = 1 < m). By a routine checking we then conclude that
+(ẽ(d3 , d4 ), ẽ(d4 , d5 )) = (q(e34 ) − 1 , q(e45 ) − 2 ). Thus each of the eight bad pairs can be avoided.
+This completes the proof of this case.
+                              THE LONELY RUNNER WITH SEVEN RUNNERS                                     15
+
+6.4. Case |A1 | = 3 and |A2 | = 2. By using the labeling of Lemma 11 we have A1 = {d1 , d2 , d3 }
+and A2 = {d4 , d5 }. We first prove the following Lemma.
+Lemma 12. Assume that |A1 | = 3 and |A2 | = 2. Let d ∈ A1 such that q(A1 ) ⊂ {q(d), . . . , q(d)+
+`(A1 ) − 1} and d0 ∈ A2 . If one of the following conditions hold then there is a multiplier λ such
+that
+                                         q(A) ∩ {0, 6} = ∅.
+
+(i) `(A1 ) ≤ 3.
+
+(ii) `(A1 ) = 4 and ẽ(d, d0 ) ⊂ {0, 1, 6}
+
+Proof. (i) Since `(A1 ) ≤ 3 there are three good multipliers for A1 in Λ0 . At most one of them
+is bad for each of the two elements in A2 .
+
+(ii) We may assume q(A1 ) ⊂ {1, 2, 3, 4}. Let λk = 7m ks−1 ∈ Λ0 , so that λ0 , λ1 are good
+multipliers for A1 . Since ẽ(d, d0 ) ⊂ {0, 1, 6}, then λ0 d0 ∈ {1, 2, 3}, and λ1 d0 ∈ {3, 4, 5}. At most
+one of λ0 , λ1 is bad for the second element in A2 .                                                   
+
+We divide the proof according to the cases in Lemma 11.
+
+(i) or (ii) with h < m. By Lemma 9 applied to B = A1 we may assume that `(A1 ) ≤ 3 and the
+result follows from Lemma 12 (i).
+
+(ii.1) with h = m. Up to a multiplier in Λm we may assume that e13 = 2N/7 and e23 = N/7 so
+that `(A1 ) = 3. The result follows from Lemma 12 (i).
+
+(ii.2) with h = m. We can apply Lemma 2 to set e13 = 3N/7 and e23 = N/7. Thus `(A1 ) = 4.
+If ν(e34 ) < m then by Lemma 7 (i) we can set ẽ34 6∈ {2, 3, 4, 5} and the result follows from
+Lemma 12 (ii). We can do the same if r ν(e35 ) < m. Suppose that ν(e34 ) = ν(e35 ) = m.
+Then ν(e45 ) = m. Set s = (5r(e45 ))7 . By renaming d4 and d5 if necessary we may assume
+e45 = e23 = N/7 so that `(A1 ) = 4 and `(A2 ) = 2. Moreover, by Lemma 7, we may also assume
+that ẽ35 6= 4. The result follows from Lemma 6 (ii).
+
+6.5. Case |A1 | = 3 and |A4 | = 2. By using the labeling of Lemma 11 we have A1 = {d1 , d2 , d3 }
+and A2 = {d4 , d5 }. Suppose that, up to a multiplier,
+              `(A1 ) ≤ 3    and `(A4 ) ≤ 3         or      `(A1 ) ≤ 4    and `(A4 ) ≤ 2.            (14)
+Then either Lemma 5 or Lemma 6 (iii) applies.
+
+We divide the proof according to the cases of Lemma 11.
+
+(i) or (ii.1) with h < m. By Lemma 9 we may assume that `(A1 ) ≤ 2. If `(A4 ) ≤ 3 we are
+in the conditions of Lemma 5. Otherwise we have q(e45 ) ∈ {2, 3, 4}. If |e45 |N ≥ 5N/14 then
+|2e45 |N ≤ 2N/7 which yields `(2 · A1 ) ≤ 3, `(2 · A4 ) ≤ 3 and (14) holds. If |e45 |N ∈ [2N/7, 5N/14]
+then |3e45 |N ≤ N/7 which yields `(3 · A1 ) ≤ 4, `(3 · A4 ) ≤ 2 and (14) holds.
+16                                   J. BARAJAS AND O. SERRA
+
+(ii.2) with h < m. If ν(e13 ) = ν(e45 ) we choose s = r(e45 ). By renaming d4 and d5 if necessary,
+we may assume r(e45 ) = r(e13 ). Let f = e45 − e13 , so that ν(f ) > ν(e13 ). By Lemma 2 we may
+assume q(f ) = 0 (if ν(f ) 6= m) or f = N/7 (if ν(f ) = m). By Lemma 9 (ii) we may also assume
+that q(e13 ) ∈ {0, 5, 6} and `(A1 ) ≤ 3. Hence, q(e45 ) = q(e13 + f ) ∈ q(e13 ) + q(f ) + {0, 1} which
+implies |q(e45 )|N ≤ 2 and `(A4 ) ≤ 3. Therefore (14) holds.
+
+Suppose now ν(e13 ) 6= ν(e45 ). If ν(e13 ) < ν(e45 ) we can apply Lemma 2 to e45 to set q(e45 ) = 0
+(if ν(e45 ) 6= m) or e45 = N/7 (if ν(e45 ) = m) and then Lemma 9 to A1 to set `(A1 ) ≤ 3 and
+`(A4 ) ≤ 2 and (14) holds. A similar argument applies if ν(e13 ) > ν(e45 ) by applying Lemma 9
+first and then Lemma 2.
+
+(ii.1) with h = m. We may assume that e13 = 2N/7 and e23 = N/7 so that `(A1 ) = 3. By
+renaming d4 and d5 if necessary we may assume r(e45 ) ∈ {1, 2, 4}. We consider two cases.
+
+(a) Either ν(e45 ) < m or e45 ∈ {N/7, 2N/7}. By Lemma 2 we may assume q(e45 ) ∈ {0, 1, 5, 6}
+so that `(A4 ) ≤ 3 yielding (14).
+
+(b) ν(e45 ) = m and e45 6∈ {N/7, 2N/7}. We may then assume that e45 = 4N/7, q(A1 ) = {1, 2, 3}
+and q(A4 ) = {i, i+4}. There are three available multipliers in Λ0 for which q(λ·A1 )∩{0, 6} = ∅.
+It can be easily checked that one of them verifies q(λ · A4 ) ∩ {0, 6} as well unless i ∈ {2, 6}, and
+so, ẽ(3, 4) ∈ {4, 5}. By Lemma 7 we may assume that ẽ(d1 , d4 ) takes none of these two values
+unless e45 = 5N/2. If this is the case, we have `(2 · A1 ) = 5, `(2 · A4 ) = 1, e34 = 3N/7 and, by
+Lemma 7(ii), we can avoid ẽ34 = 2. By (7) we may assume q(A1 ) = {1, 3, 5} and, since ẽ34 = 3,
+we have q(A4 ) = {1, 2}.
+
+(ii.2) with h = m. Choose s = r(e45 ). By exchanging d4 with d5 if necessary we may assume
+that r(e13 ) = r(e45 ), and by Lemma 2 we may assume that e13 = N/7 and e23 = 3N/7, so that
+`(A1 ) ≤ 4. If ν(e45 ) = m we have e45 = N/7 and `(A4 ) = 2. If ν(e45 ) < m then, by Lemma 2
+we may set q(e45 ) ∈ {0, 6} and `(A4 ) = 2 again. In both cases Lemma 6 (ii) applies.
+
+
+
+6.6. Case |A1 | = 2 . We may assume that A1 = {d1 , d2 }, A2 = {d3 , d4 } and A4 = {d5 }.
+
+Up to renaming the elements in A we may assume that r(e12 ), r(e34 ) ∈ {1, 2, 4}. Suppose that
+
+                                   `(A1 ) ≤ 2   and    `(A2 ) ≤ 2.                               (15)
+
+Then the result follows from Lemma 5.
+
+If ν(e12 ) 6= ν(e34 ) then, by Lemma 2 applied to e12 and e34 we may assume that q(e12 ), q(e34 ) ∈
+{0, 6}. Hence (15) holds.
+
+Assume now that ν(e12 ) = ν(e34 ). Suppose first that r(e12 ) = r(e34 ). Let f = e12 − e34 . Note
+that ν(e12 ) < ν(f ). If ν(f ) ≤ m, by Lemma 2 applied to f and e34 we may assume that q(f ) = 6
+and q(e34 ) = 0. On the other hand, if ν(f ) > m, so that q(f ) = 0, we can apply Lemma 2 to e34
+to have q(e34 ) = 6. In both cases, Lemma 4 yields q(e12 ) = q(f + e34 ) ∈ {0, 6} and (15) holds.
+                               THE LONELY RUNNER WITH SEVEN RUNNERS                                       17
+
+Suppose now that r(e12 ) 6= r(e34 ). Then either r(e12 ) = 2r(e34 ) or 2r(e12 ) = r(e34 ). If ν(e12 ) <
+m then, the desired multiplier exists by Lemma 9. Assume ν(e12 ) = ν(e34 ) = m. We consider
+two cases:
+
+(a) r(e12 ) = 2r(e34 ). Up to a multiplier in Λm we may assume that e12 = 2N/7 and e34 = N/7.
+Let λk ∈ Λ0 be such that q(λk d2 ) = k, k = 1, 2, 3. Since e12 = 2N/7 we have q(λk · A1 ) =
+{k, k + 2}. On the other hand, since q(d4 ) = ẽ(d2 , d4 ) − 2q(d2 ) and e34 = N/7, we have
+q(λk · A2 ) = (ẽ(d2 , d4 ) − 2k, ẽ(d2 , d4 ) − 2k + 1). Finally, q(d5 ) = 4ẽ(d2 , d5 ) + 4k. Thus, if
+                       (ẽ(d2 , d4 ), ẽ(d2 , d5 )) 6∈ {((4, 2), (4, 4), (5, 4), (6, 4), (6, 6)}        (16)
+then q(λk · A) ∩ {0, 6} = ∅ for some k. Now, if either ν(e24 ) < m, by using Lemma 7(i),
+or e24 ∈ {N/7, 2N/7, 3N/7} we can assume that ẽ(d2 , d4 ) 6∈ {4, 5, 6} and so (16) holds; if
+ν(e24 ) = m and ν(e25 ) < m we can avoid each of the pairs in (16) by setting ẽ(d2 , d5 ) 6∈ {2, 4}
+if e24 ∈ {4N/7, 5N/7} and ẽ(d2 , d5 ) 6∈ {4, 6} if e24 ∈ {0, 6N/7}; finally, if ν(e24 ) = ν(e25 ) = m,
+we observe that one of the four pairs (q(e34 ) − 1 , q(e45 ) − 2 ), 1 , 2 ∈ {0, 1} avoids each of the
+bad pairs in (16). By repeating the argument of case applied to 7d5 , (16) holds.
+
+(b) r(e12 ) = 4r(e34 ). Up to a multiplier in Λm we may assume that e12 = N/7 and e34 = 2N/7.
+Let λk ∈ Λ0 be such that q(λk d4 ) = k, k = 1, 2, 3, so that q(λk · A2 ) = {k, k + 2}. On the
+other hand, q(d2 ) = 4ẽ(d2 , d4 ) + 4k, so that q(λk · A1 ) = {4ẽ(d2 , d4 ) + 4k, 4ẽ(d2 , d4 ) + 4k + 1}.
+Finally q(d5 ) = 2q(d2 ) − ẽ(d2 , d5 ) = ẽ(d2 , d4 ) − ẽ(d2 , d5 ) + k. By Lemma 7 we can assume that
+ẽ(d2 , d4 ) 6∈ {2, 4, 6}. It is then routine to check that, for every value of ẽ(d2 , d4 ) and ẽ(d2 , d5 )
+there is k ∈ {1, 2, 3} such that q(λk · A) ∩ {0, 6} = ∅.
+
+This completes the proof of the case |A| = 5 and m > 1.
+
+
+                                     7. The case |A| = 5 and m = 1
+
+In Section 6 we have used the hypothesis m > 1 in Lemma 7 and in particular situations in
+cases 6.3 and 6.6. However, when m = 1 we are led to consider the problem with N = 49 and
+d6 = k7, 1 ≤ k ≤ 3, which is more efficiently handled by an exhaustive search. There are at
+most (1/21) 21 5 = 969 non equivalent choices for sets of cardinality 5 in U Z49 . By computer
+search we found that there is always a multiplier for which each of these sets can be included in
+the interval [7, 42] except in the three (up to dilation) following ones:
+                       {1, 4, 11, 39, 43} {1, 4, 18, 22, 29} and {1, 4, 18, 44, 46}.
+We consider each of this sets in ZN 0 with N 0 = 2N = 98. There are at most 32 nonequivalent
+subsets in U Z9 8 which are congruent to one of the above exceptional sets, and each of them has
+to be combined with the six possible values of d6 , namely 7k, k = 1, 2, . . . , 6. By checking all
+these possibilities, we found that there is always a suitable multiplier except for the sets
+                              {4, 50, 60, 88, 92}       with      d6 ∈ {14, 28, 42}
+                              {4, 18, 22, 50, 78}       with      d6 ∈ {14, 28, 42}
+                              {4, 18, 44, 46, 50}       with      d6 ∈ {14, 28, 42}.
+18                                       J. BARAJAS AND O. SERRA
+
+Since N 0 is an even number and gcd(D) ≥ 2, none of these sets can arise from one of the
+exceptions found for N = 49. This completes the proof.
+
+                                               References
+ [1] J. Barajas, O. Serra, Distance graphs with maximum chromatic number, Discrete Math. to appear (2007).
+ [2] J. Barajas, O. Serra, On the chromatic number of circulant graphs, Discrete Math. to appear (2007).
+ [3] U. Betke, J.M. Wills, Untere Schranken für zwei dophantische Approximations-Funktionen, Monatsch. Math.
+     76 (1972) 214–217.
+ [4] W. Biennia, L. Goddyn, P. Gvozdjak, A. Sebő and M. Tarsi, Flows, View obstructions and the Lonely
+     Runner, Journal of Combin. Theory Ser. B 72 (1998) 1–9.
+ [5] T. Bohman, R. Holzman, D. Kleitman, Six lonely runners, Electron. J. Combin. 8 (2001), no. 2, Research
+     Paper 3, 49 pp.
+ [6] Y.G. Chen, On a conjecture about diophantine approximations III, J. Number Theory 39 (1991) 91–103.
+ [7] T.W. Cusick, View-obstruction problems, Aequationes Math. 9 (1973) 165–170.
+ [8] T.W. Cusick, View-obstruction problems in n-dimensional geometry, J. Combin. Theory Ser. A 16 (1974),
+     1–11.
+ [9] T. W. Cusick, View-obstruction problems II, Proc. Amer. Math. Soc. 84 (1982) 25–28.
+[10] T.W. Cusick, C. Pomerance, View obstruction problems III, Journal of Number Theory 19 (1984) 131–139.
+[11] J. Renault, View-obstruction: a shorter proof for 6 lonely runners. Discrete Math. 287 (2004) 93–101.
+[12] J.M. Wills, Zwei Säzte über inhomogene diophantische Approximation von Irrationalzahlen, Monatsch. Math.
+     71 (1967) 263–269.
+[13] X. Zhu, Circular chromatic number of distance graphs with distance sets of cardinality 3, J. Graph Theory
+     41 (2002) 195–207.
+
+
+Dept. of Applied Mathematics IV, Polytechnical University of Catalonia, Barcelona, Spain,
+{jbarajas,oserra}@ma4.upc.edu
+

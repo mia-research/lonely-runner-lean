@@ -1,0 +1,201 @@
+{
+  "batch_started_utc": "2026-02-25T23:29:19Z",
+  "batch_completed_utc": "2026-02-25T23:29:22Z",
+  "queue_input": "/Users/trentpalelei/Desktop/Math Ex/registry/promotion_queue_cycle_002.csv",
+  "queue_output": "/Users/trentpalelei/Desktop/Math Ex/registry/promotion_queue_cycle_002.csv",
+  "selected_count": 17,
+  "result_count": 17,
+  "status_counts": {
+    "stable": 17
+  },
+  "serial_runtime_estimate_min": 434,
+  "results": [
+    {
+      "claim_id": "CLAIM-LRC-000052",
+      "promotion_id": "PROMO-LRC-0012",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000052",
+      "usable_values": 50000,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 9.35134028974406e-16,
+      "max_rel_decimal_vs_mpmath": 5.54560133840947e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000053",
+      "promotion_id": "PROMO-LRC-0013",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000053",
+      "usable_values": 50000,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 7.211224820656014e-16,
+      "max_rel_decimal_vs_mpmath": 9.352295497664678e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000054",
+      "promotion_id": "PROMO-LRC-0014",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000054",
+      "usable_values": 50000,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 8.736484308385845e-16,
+      "max_rel_decimal_vs_mpmath": 3.658133727159901e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000055",
+      "promotion_id": "PROMO-LRC-0015",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000055",
+      "usable_values": 50000,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 8.347175990120007e-15,
+      "max_rel_decimal_vs_mpmath": 7.130318408646601e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000056",
+      "promotion_id": "PROMO-LRC-0016",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000056",
+      "usable_values": 50000,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.7808604899104192e-15,
+      "max_rel_decimal_vs_mpmath": 5.807473562637855e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000057",
+      "promotion_id": "PROMO-LRC-0017",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000057",
+      "usable_values": 600,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 3.009180255409312e-16,
+      "max_rel_decimal_vs_mpmath": 2.4453560815371745e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000058",
+      "promotion_id": "PROMO-LRC-0018",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000058",
+      "usable_values": 30,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.8938474985959806e-16,
+      "max_rel_decimal_vs_mpmath": 1.5227006429646595e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000059",
+      "promotion_id": "PROMO-LRC-0019",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000059",
+      "usable_values": 15,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 8.416281112968594e-17,
+      "max_rel_decimal_vs_mpmath": 4.296768881121409e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000060",
+      "promotion_id": "PROMO-LRC-0020",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000060",
+      "usable_values": 12,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.0668135826984363e-16,
+      "max_rel_decimal_vs_mpmath": 2.4032341511948245e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000062",
+      "promotion_id": "PROMO-LRC-0021",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000062",
+      "usable_values": 20400,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.0451741825919958e-10,
+      "max_rel_decimal_vs_mpmath": 2.4332684719019212e-32
+    },
+    {
+      "claim_id": "CLAIM-LRC-000063",
+      "promotion_id": "PROMO-LRC-0022",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000063",
+      "usable_values": 30,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.8938474985959806e-16,
+      "max_rel_decimal_vs_mpmath": 1.5227006429646595e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000064",
+      "promotion_id": "PROMO-LRC-0023",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000064",
+      "usable_values": 15,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 8.416281112968594e-17,
+      "max_rel_decimal_vs_mpmath": 4.296768881121409e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000065",
+      "promotion_id": "PROMO-LRC-0024",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000065",
+      "usable_values": 6,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 3.260350210499948e-16,
+      "max_rel_decimal_vs_mpmath": 1.7167545829180279e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000032",
+      "promotion_id": "PROMO-LRC-0025",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000032",
+      "usable_values": 201,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 1.5512218052845308e-16,
+      "max_rel_decimal_vs_mpmath": 1.6940232055515442e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000049",
+      "promotion_id": "PROMO-LRC-0026",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000049",
+      "usable_values": 520,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 1.7805567707949438e-16,
+      "max_rel_decimal_vs_mpmath": 2.7727497655626533e-34
+    },
+    {
+      "claim_id": "CLAIM-LRC-000050",
+      "promotion_id": "PROMO-LRC-0027",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000050",
+      "usable_values": 520,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 4.888364258418139e-16,
+      "max_rel_decimal_vs_mpmath": 1.2776593133889333e-33
+    },
+    {
+      "claim_id": "CLAIM-LRC-000051",
+      "promotion_id": "PROMO-LRC-0028",
+      "status": "executed",
+      "message": "ok",
+      "artifact_dir": "/Users/trentpalelei/Desktop/Math Ex/reports/repro/cycle_002/CLAIM-LRC-000051",
+      "usable_values": 25,
+      "final_status": "stable",
+      "max_rel_float_vs_mpmath": 2.069256224850224e-16,
+      "max_rel_decimal_vs_mpmath": 1.4565153988451029e-36
+    }
+  ]
+}

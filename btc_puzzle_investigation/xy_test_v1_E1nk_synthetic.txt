@@ -1,0 +1,24 @@
+# data=synthetic  keys=30000  features=42  shuffles=2000  targets=nk
+
+target         best_feature   MI_bits    maxz   corr_p   verdict
+----------------------------------------------------------------------
+PLANT_strong   X%7          2.80714 13289.41   0.0005   FIRES  <-- control
+PLANT_f0.02    X%7          0.00209    6.17   0.0015   FIRES  <-- control
+PLANT_f0.05    X%7          0.00967   43.82   0.0005   FIRES  <-- control
+PLANT_f0.10    X%7          0.04105  197.11   0.0005   FIRES  <-- control
+PLANT_f0.20    X%7          0.13759  643.68   0.0005   FIRES  <-- control
+n_even         X%5          0.00028    2.74   0.3683   null
+n_mod3         Y%32         0.00220    2.64   0.3398   null
+n_mod5         Xtop8        0.02676    1.76   0.7971   null
+n_prime        X%5          0.00059    7.29   0.0030   FIRES
+n_bucket       X%64         0.01202    1.93   0.6727   null
+n_dense        Y%2          0.00764    2.78   0.0980   null
+phin_mod2      X%256        0.00737    2.11   0.6677   null
+phin_mod3      Y%25         0.00162    1.97   0.7056   null
+phin_bkt       X%8          0.00161    1.80   0.7611   null
+k_even         XY%7         0.00163    2.08   0.6642   null
+k_mod3         X%16         0.00102    1.61   0.8651   null
+----------------------------------------------------------------------
+sensitivity floor  ~ 0.00209 bits  (smallest weak-plant MI that fired)
+Any nk-target FIRES => investigate (OOS + candidate-sweep attack translation).
+All nk-targets null => bounded: no (X,Y)->nk leak above the floor, this feature set.

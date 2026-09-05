@@ -1,0 +1,4 @@
+interface:
+  display_name: "Swarm Budget Governor"
+  short_description: "Enforce manager and provider token guardrails per cycle"
+  default_prompt: "Check cycle monitoring logs against governance thresholds"

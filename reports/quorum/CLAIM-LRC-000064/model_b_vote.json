@@ -1,0 +1,25 @@
+{
+  "claim_id": "CLAIM-LRC-000064",
+  "task_id": "QRM4-LRC-0014",
+  "model_lane": "gemini_family_lane_b",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-28T04:53:21Z",
+  "provider": "codex_fallback_for_gemini",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "escalate",
+  "confidence": 0.23,
+  "rationale": [
+    "Only metadata is provided; no substantive dossier content to verify mathematical correctness.",
+    "High internal score and stable ladder status are positive but are not substitutes for proof-level validation.",
+    "Conservative adjudication requires direct inspection of the claim statement, assumptions, and derivation."
+  ],
+  "critical_risks": [
+    "Missing claim text, proof/derivation, and boundary conditions in the excerpt.",
+    "No independent replication or formal-check evidence included in provided material.",
+    "Potential hidden dependence on unstated lemmas, numerics, or heuristic steps cannot be assessed."
+  ],
+  "publication_gate_recommendation": "escalate",
+  "notes": "Given the absent dossier excerpt content, a publication-gate decision cannot be responsibly promoted. Escalate for full technical review once full claim and proof artifacts are available. | fallback_used_for_lane_provider=gemini"
+}

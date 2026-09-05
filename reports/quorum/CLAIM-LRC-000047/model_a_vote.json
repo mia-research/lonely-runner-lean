@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLAIM-LRC-000047",
+  "task_id": "QRM-LRC-0008",
+  "model_lane": "chatgpt_paid_lane_a",
+  "execution_mode": "live_cli",
+  "external_api_called": true,
+  "generated_utc": "2026-02-26T03:36:50Z",
+  "provider": "codex_live",
+  "model_call_success": true,
+  "blocked_reason": "",
+  "status_class": "approve_with_caveats",
+  "confidence": 0.78,
+  "rationale": [
+    "Reproducibility evidence is strong (stable ladder status and pass on metric/notation matching).",
+    "Cross-precision agreement is very tight (float64 and decimal128 vs mpmath relative error bounds are very small).",
+    "Extraction completeness is high (1445 usable values, no truncation), supporting numeric reliability.",
+    "Dossier metadata and final repro status indicate readiness for board-level promotion."
+  ],
+  "critical_risks": [
+    "Adjudication snapshot still records needs_human_review with a moderate adjudication score (0.480).",
+    "Assumptions are not yet explicitly extracted, creating interpretation and scope risk.",
+    "Claim statement appears as a CSV fragment, indicating potential semantic/format ambiguity.",
+    "Float risk is labeled medium and should be explicitly bounded in publication text."
+  ],
+  "publication_gate_recommendation": "promote",
+  "notes": "Gate as promotable with caveats: require a focused human semantic review of assumptions and claim phrasing, plus a quick integrity check that the CSV-derived statement is complete and correctly mapped before final publication."
+}

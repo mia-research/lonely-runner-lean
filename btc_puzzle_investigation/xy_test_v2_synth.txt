@@ -1,0 +1,29 @@
+# v2  data=synthetic  keys=8000  features=42  shuffles=800
+# nmax grid 32..512 step8 (61 pts) priced into n/k channel
+
+CONTROLS
+  POS_strong   maxz= 3537.73  p=0.0012  FIRES
+  POS_f0.05    maxz=   10.95  p=0.0012  FIRES
+  POS_f0.10    maxz=   56.50  p=0.0012  FIRES
+  POS_f0.20    maxz=  179.53  p=0.0012  FIRES
+  NEGATIVE (8 random binary targets): p-values [0.372, 0.356, 0.964, 0.32, 0.467, 0.513, 0.042, 0.713]
+  -> family-wise false-positive rate: 1/8 fired
+
+PARAMETER-FREE TARGETS (recomputed from d)
+  d%2          maxz=    2.44  p=0.4931  null
+  d%3          maxz=    2.73  p=0.2884  null
+  d%5          maxz=    2.95  p=0.1948  null
+  d%7          maxz=    1.82  p=0.7603  null
+  d%11         maxz=    1.92  p=0.6792  null
+  d%13         maxz=    2.08  p=0.5868  null
+  bit_mid      maxz=    2.05  p=0.6841  null
+  bit_top2     maxz=    2.13  p=0.6579  null
+  u_bin8       maxz=    1.39  p=0.9251  null
+  q1_parity    maxz=    2.17  p=0.6442  null
+  q1_mod3      maxz=    2.37  p=0.4482  null
+  q2_parity    maxz=    1.98  p=0.7129  null
+  q2_mod3      maxz=    3.53  p=0.0949  null
+  family min-p=0.0949  Bonferroni x13 = 1.0000
+
+n/k CHANNEL (nmax search priced into the null)
+  max over (feature x nmax): maxz=3.78  best nmax=40  corrected p=0.9476  null

@@ -1,0 +1,97 @@
+[
+  {
+    "claim_id": "CLAIM-LRC-000062",
+    "provider": "Gemini",
+    "status_class": "approve_with_caveats",
+    "confidence": 0.88,
+    "rationale": [
+      "Empirical detection rates for both 'boundary' and 'coarse' methods reached 1.0000 across 1,200 trials, providing strong evidence of functional reliability within this parameter regime.",
+      "The 10.9% speedup in mean witness time (6.867 vs 7.703) is statistically significant within the corpus, supported by 10 runners per config to mitigate noise.",
+      "Zero-miss rate is verified for this specific SHA-256 source, satisfying the immediate correctness criteria for the LRC track.",
+      "High-precision decimal128 verification (2.43e-32) confirms that the underlying mathematical logic is stable despite the elevated float64 noise."
+    ],
+    "critical_risks": [
+      "Statistical Power Risk: 1,200 trials is sufficient for a local empirical finding but inadequate to claim a 'universal' zero-miss rate (upper bound of error rate is approx 0.25% at 95% confidence).",
+      "Numerical Sensitivity: Float64 error (2.045e-10) is the highest in the cycle and sits within 1.5 orders of magnitude of the 'stable' threshold; this suggests potential instability at higher n or tighter thresholds.",
+      "Generalization Risk: The equivalence of the coarse method is strictly bounded to the n=10, T=100 regime; there is no evidence that the ~11% speedup or 0% miss rate persists outside these bounds."
+    ],
+    "publication_gate_recommendation": "promote",
+    "notes": "Promote as a regime-specific efficiency verification. The elevated float64 error warrants a 'monitor' status for future cycles using larger n. The speedup is clear, but the overlap in [min, max] ranges for witness times indicates that 'coarse' is not a Pareto improvement in every individual trial, only on aggregate.",
+    "submitted_utc": "2026-02-28T18:10:55Z"
+  },
+  {
+    "claim_id": "CLAIM-LRC-000062",
+    "provider": "Kimi",
+    "status_class": "approve_with_caveats",
+    "confidence": 0.82,
+    "rationale": [
+      "Statements 1-3 (detect_rate=1.0, miss_rate=0) are empirically supported by 1,200 trials but statistical power for rare-event detection (miss_rate confidence interval) is limited; 95% CI for miss_rate is [0, 0.0031] not [0,0]",
+      "Statement 4 (10.9% faster mean witness time) is calculable from data but distribution overlap is substantial: coarse range [1.42,12.42] vs boundary [2.53,13.74] indicates significant variance not captured by mean comparison",
+      "Statement 5 (coarse matches boundary at this regime) is regime-specific and valid for the fixed parameters; does not generalize to other n, T, or threshold values without additional evidence",
+      "1,200 trials at fixed parameters provides strong evidence for this specific configuration but limited external validity; no parameter sweep or sensitivity analysis presented",
+      "Elevated float64 error (2.045e-10) is within threshold (1e-09) but 20x higher than typical cycle claims; decimal128 anchor provides necessary cross-validation",
+      "Zero miss rate with 100% detection on both methods suggests either true equivalence or insufficiently challenging test configurations; no negative control or adversarial cases included",
+      "Witness time ranges show substantial overlap between methods; mean difference is statistically significant but practically modest given variance",
+      "Runner variation (10 runners × 120 configs) is accounted for but not isolated; cannot distinguish config effects from runner effects"
+    ],
+    "critical_risks": [
+      "Fixed parameter regime (n=10, T=100.0, threshold=0.1) severely limits generalizability; no evidence presented for behavior at other parameters",
+      "Zero miss rate may reflect insufficient test diversity rather than true method equivalence; 1,200 trials from 120 configs suggests limited config space coverage",
+      "Elevated float64 error (2.045e-10) approaching 20% of threshold warrants monitoring; potential numerical instability at edge cases not tested",
+      "No false positive rate reported; detection_rate=1.0 for both methods could mask systematic false positives if ground truth labels are imperfect",
+      "Witness time comparison ignores computational cost of coarse vs boundary method; speedup claim is time-to-detection only, not total runtime",
+      "Lack of adversarial or edge-case testing; equivalence claim may fail on boundary configurations not represented in the 120 config IDs"
+    ],
+    "publication_gate_recommendation": "hold",
+    "notes": "Claims are valid for the specific parameter regime tested but lack generalizability evidence. Recommend: (1) parameter sensitivity analysis (varying n, T, threshold), (2) expanded config diversity to test miss_rate robustness, (3) investigation of float64 error elevation source, (4) inclusion of computational cost metrics beyond witness time. Statements 1-3 should be scoped as 'at n=10, T=100.0, threshold=0.1' rather than universal. Statement 5 equivalence finding is meaningful but regime-bound; requires broader validation for method equivalence claims.",
+    "submitted_utc": "2026-02-28T00:00:00Z"
+  },
+  {
+    "claim_id": "CLAIM-LRC-000062",
+    "provider": "DeepSeek",
+    "status_class": "approve_with_caveats",
+    "confidence": 0.95,
+    "rationale": [
+      "All 1,200 trials show detection for both methods, supporting statements 1-3.",
+      "Mean witness time for coarse (6.867) is less than boundary (7.703), confirming ~10.9% faster (statement 4).",
+      "Statement 5 summarizes the observed equivalence and speed advantage under fixed parameters.",
+      "Float64 error (2.045e-10) is highest in cycle but below stability threshold, and decimal128 confirms precision.",
+      "Data covers only n=10, T=100.0, threshold=0.1; results may not generalize."
+    ],
+    "critical_risks": [
+      "Claims are specific to the tested parameter regime (n=10, T=100.0, threshold=0.1); no evidence for other regimes.",
+      "Float64 error is elevated relative to other claims, though still within acceptable limits; recomputation should monitor.",
+      "Min/max ranges indicate variability in witness times, but means are robust given 1,200 trials.",
+      "Statement 5 asserts matching detection outcomes; this is exact from data, but causal or general equivalence not established."
+    ],
+    "publication_gate_recommendation": "promote",
+    "notes": "Data exactly matches stated values; detection rates perfect; witness time difference as reported. Float error elevated but stable. All statements confirmed for this fixed-parameter corpus.",
+    "submitted_utc": "2025-03-21T12:00:00Z"
+  },
+  {
+    "claim_id": "CLAIM-LRC-000062",
+    "provider": "codex_independent_adjudicator",
+    "status_class": "approve_with_caveats",
+    "confidence": 0.88,
+    "rationale": [
+      "Statement 1 passes exactly: boundary_detect=True in 1200/1200 trials (rate 1.0000).",
+      "Statement 2 passes exactly: coarse_detect=True in 1200/1200 trials (rate 1.0000).",
+      "Statement 3 passes on observed data: miss_due_to_coarse=True in 0/1200 trials (miss_rate 0.0000).",
+      "For Statement 3, 1200 fixed-parameter trials are strong evidence but not proof of true zero; with 0 observed misses, a one-sided 95% upper miss-rate bound is about 0.25%.",
+      "Statement 4 is directionally supported: mean coarse time 6.867 vs boundary 7.703 implies ~10.85% faster on average in this corpus.",
+      "Statement 4 is descriptive, not universal: wide overlapping ranges ([1.417, 12.417] vs [2.531, 13.741]) mean per-trial advantage is not guaranteed.",
+      "Statement 5 is supported as a regime-specific equivalence finding at n=10, T=100.0, threshold=0.1, not a general method-equivalence theorem.",
+      "Float64 error 2.045e-10 is elevated versus peers but remains below the 1e-09 stability gate; decimal128 anchor is very strong."
+    ],
+    "critical_risks": [
+      "All evidence is from one fixed parameter regime; external validity across n, T, thresholds, and distributions is untested.",
+      "Zero observed misses in finite trials does not establish identically zero miss probability.",
+      "No reported confidence intervals or paired significance test for witness-time difference.",
+      "Runner/config dependence may reduce effective independent sample size for miss-rate inference.",
+      "Elevated float64 error, while passing, is closest to threshold in-cycle and should be monitored under harder settings."
+    ],
+    "publication_gate_recommendation": "promote",
+    "notes": "Primary correctness claims (statements 1-3) are strongly supported by the 1,200-row corpus and are individually falsifiable under the stated recomputation gates. Speed and equivalence conclusions are acceptable as fixed-regime empirical characterizations with explicit non-universality caveats.",
+    "submitted_utc": "2026-02-28T00:00:00Z"
+  }
+]

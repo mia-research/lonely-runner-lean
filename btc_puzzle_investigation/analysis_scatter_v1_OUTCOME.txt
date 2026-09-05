@@ -1,0 +1,11 @@
+sweep ended Fri Aug  7 13:54:44 AEST 2026; rows=     588
+[analyze] surface(k!=0)=335  surface-primes=100  trajectory=253
+[analyze] H2 {'fires': True, 'comb_p': 4.9999750001249995e-06, 'Xobs': 399.06992307349736, 'used': 100, 'median_pi': 0.16666666666666666}   within-prime partial-R2(u) median=0.796 over 100 primes  surface_ok=True
+[analyze] SM(r~u^2) p=0.0124 dirty=True
+[analyze] H1a: p(a_p mod3)=0.8169 p(a_p mod4)=0.2292 Holm-reject=[False, False] -> H1a_fires=False
+[analyze] H1a': KW p=0.8877 refit-KW p=0.8700 -> H1a'_fires=False
+[analyze] H1b(gated): p(M)=0.0310 p(autocorr)=1.0000  [valid only if H1 fires & SM clean]
+
+=== §9 OUTCOME ===
+A2 (H0): scatter is delta's smooth dependence on group order n; no residue structure beyond the surface.
+=== ANALYSIS COMPLETE ===

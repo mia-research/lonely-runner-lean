@@ -1,0 +1,11 @@
+== A-joint v3 tier=ladder N=5000 R=10000 prereg_sha=3560eb73cce2 ==
+  q=1033: CM I_prim=+0.0298 (p=0.7748) | nonCM(N=1087,t=-53) I_prim=+0.0318 (p=0.4168) | Delta=-0.0020
+        CM channels: omni(combo) mi=+0.0308 p=0.5939 | sec(interval) mi=+0.0191 p=0.0200 | s_strata=27
+  q=4111: CM I_prim=+0.0358 (p=0.0262) | nonCM(N=4003,t=109) I_prim=+0.0302 (p=0.7049) | Delta=+0.0056
+        CM channels: omni(combo) mi=+0.0322 p=0.3382 | sec(interval) mi=+0.0148 p=0.6939 | s_strata=27
+  q=16417: CM I_prim=+0.0324 (p=0.3102) | nonCM(N=16447,t=-29) I_prim=+0.0316 (p=0.4397) | Delta=+0.0007
+        CM channels: omni(combo) mi=+0.0313 p=0.4999 | sec(interval) mi=+0.0154 p=0.5275 | s_strata=27
+  q=65539: CM I_prim=+0.0285 (p=0.9171) | nonCM(N=65287,t=253) I_prim=+0.0329 (p=0.2393) | Delta=-0.0044
+        CM channels: omni(combo) mi=+0.0295 p=0.8031 | sec(interval) mi=+0.0134 p=0.9522 | s_strata=27
+  Delta>0 on 2/4 primes (paired-sign direction)
+DONE

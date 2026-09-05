@@ -1,0 +1,16 @@
+{
+  "run_id": "run_sandbox_5e5",
+  "completed_at": "2026-03-30T08:03:32.683691+00:00",
+  "interrupted": false,
+  "n_tested": 500000,
+  "n_passed": 500000,
+  "n_failed": 0,
+  "n_batches_completed": 100,
+  "total_boundaries_evaluated": 305814739,
+  "global_min_margin": -1.3877787807814457e-17,
+  "global_max_margin": 0.09046210005363223,
+  "total_time_s": 32.58281435799995,
+  "configs_per_second": 15345.512959878391,
+  "success_rate": 1.0,
+  "p_failure_upper_95": 6e-06
+}

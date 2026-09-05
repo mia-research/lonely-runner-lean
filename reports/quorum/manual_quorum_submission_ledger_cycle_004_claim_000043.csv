@@ -1,0 +1,2 @@
+task_id,claim_id,provider,operator_lane,source_ref,vote_json_path,raw_response_path,submitted_utc,ingest_status,ingest_notes
+QRM4-LRC-0001,CLAIM-LRC-000043,Gemini,manual_quorum_vote,user_chat_paste_cycle_004_claim_000043,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/manual_votes/cycle_004/CLAIM-LRC-000043_manual_vote.json,/Users/trentpalelei/Desktop/Desktop - Trent’s MacBook Pro/Math Ex/reports/quorum/manual_votes/cycle_004/CLAIM-LRC-000043_raw_response.txt,2026-02-28T06:14:13Z,ingested,Codex + manual vote agree on escalation.

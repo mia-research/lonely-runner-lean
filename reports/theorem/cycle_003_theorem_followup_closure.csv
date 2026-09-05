@@ -1,0 +1,3 @@
+claim_id,status,unresolved_critical_nodes,checks_passed,checks_warn,checks_failed,rationale,output_dir,updated_utc
+CLAIM-LRC-000030,executed,no,5,0,0,followup_closed_tex_dependency_graph,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000030,2026-02-26T03:00:40Z
+CLAIM-LRC-000075,closed_reclassified_empirical,no,3,0,0,theorem_followup_closed_by_reclassification,/Users/trentpalelei/Desktop/Math Ex/reports/theorem/CLAIM-LRC-000075,2026-02-26T03:00:40Z
