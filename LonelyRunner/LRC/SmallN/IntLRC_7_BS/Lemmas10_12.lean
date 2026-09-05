@@ -77,6 +77,25 @@ theorem ratio_two_three (a b c : ZMod 7) (ha : a ≠ 0) (hb : b ≠ 0) (hc : c �
     (-a = 2 * (-b) ∨ -a = 3 * (-b)) := by
   revert ha hb hc hrel; revert a b c; decide
 
+/-- **`s`-aligned refinement of `ratio_two_three` (BS Lemma 11, `|r(E)|=6` analysis).**
+For any target unit `s`, one of the six orientations gives ratio `2`, or ratio `3`
+with the big residue additionally equal to `±s`. This is the free parameter `s ∈ Z₇*`
+in BS's Lemma 11 statement ("`r(e₁₃) = 3r(e₂₃) = ±s`"), consumed by case (ii.2.b)
+of §6.3 with `s := r(e₄₅)`. Verified exhaustively (1080 configs). -/
+theorem ratio_two_three_s (s a b c : ZMod 7) (hs : s ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0)
+    (hc : c ≠ 0) (hrel : a = b - c) :
+    (c = 2 * b ∨ (c = 3 * b ∧ (c = s ∨ c = -s))) ∨
+    (b = 2 * c ∨ (b = 3 * c ∧ (b = s ∨ b = -s))) ∨
+    (-c = 2 * a ∨ (-c = 3 * a ∧ (-c = s ∨ -c = -s))) ∨
+    (a = 2 * (-c) ∨ (a = 3 * (-c) ∧ (a = s ∨ a = -s))) ∨
+    (-b = 2 * (-a) ∨ (-b = 3 * (-a) ∧ (-b = s ∨ -b = -s))) ∨
+    (-a = 2 * (-b) ∨ (-a = 3 * (-b) ∧ (-a = s ∨ -a = -s))) := by
+  -- `decide` cannot synthesize the 4-∀ instance (cf. `ii2b_shift`); split `s` first.
+  have hcases : s = 1 ∨ s = 2 ∨ s = 3 ∨ s = 4 ∨ s = 5 ∨ s = 6 := by
+    revert hs; revert s; decide
+  rcases hcases with rfl | rfl | rfl | rfl | rfl | rfl <;>
+    (revert ha hb hc hrel; revert a b c; decide)
+
 /-- Leading residue of a difference written as `δ = 7^h · w`: `(δ / 7^h : ZMod 7) = w`. -/
 theorem res_eq {δ : ℤ} {h : ℕ} {w : ℤ} (hw : δ = 7 ^ h * w) :
     (((δ / 7 ^ h : ℤ)) : ZMod 7) = (w : ZMod 7) := by
@@ -175,6 +194,124 @@ theorem lemma11 (b : Fin 3 → ℤ) (hinj : Function.Injective b) :
       have rcnen : ((-wc : ℤ) : ZMod 7) ≠ 0 := by simpa using rcne
       rcases ratio_two_three (wa : ZMod 7) (wb : ZMod 7) (wc : ZMod 7) rane rbne rcne hrel with
         hD | hD | hD | hD | hD | hD
+      · -- ratio at apex b2: output (b0,b1,b2)
+        refine ⟨b 0, b 1, b 2, ?_,
+          Or.inr ⟨va, ⟨wb, hwb⟩, ndvd_res _ _ hwb rbne, ⟨wc, hwc⟩, ndvd_res _ _ hwc rcne, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwc, res_eq hwb]; exact hD
+      · -- output (b1,b0,b2)
+        refine ⟨b 1, b 0, b 2, ?_,
+          Or.inr ⟨va, ⟨wc, hwc⟩, ndvd_res _ _ hwc rcne, ⟨wb, hwb⟩, ndvd_res _ _ hwb rbne, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwb, res_eq hwc]; exact hD
+      · -- output (b0,b2,b1)
+        refine ⟨b 0, b 2, b 1, ?_,
+          Or.inr ⟨va, ⟨wa, hwa⟩, ndvd_res _ _ hwa rane, ⟨-wc, hwc'⟩, ndvd_res _ _ hwc' rcnen, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwc', res_eq hwa]; push_cast; exact hD
+      · -- output (b2,b0,b1)
+        refine ⟨b 2, b 0, b 1, ?_,
+          Or.inr ⟨va, ⟨-wc, hwc'⟩, ndvd_res _ _ hwc' rcnen, ⟨wa, hwa⟩, ndvd_res _ _ hwa rane, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwa, res_eq hwc']; push_cast; exact hD
+      · -- output (b1,b2,b0)
+        refine ⟨b 1, b 2, b 0, ?_,
+          Or.inr ⟨va, ⟨-wa, hwa'⟩, ndvd_res _ _ hwa' ranen, ⟨-wb, hwb'⟩, ndvd_res _ _ hwb' rbnen, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwb', res_eq hwa']; push_cast; exact hD
+      · -- output (b2,b1,b0)
+        refine ⟨b 2, b 1, b 0, ?_,
+          Or.inr ⟨va, ⟨-wb, hwb'⟩, ndvd_res _ _ hwb' rbnen, ⟨-wa, hwa'⟩, ndvd_res _ _ hwa' ranen, ?_⟩⟩
+        · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+        · rw [res_eq hwa', res_eq hwb']; push_cast; exact hD
+  · -- vc < va : strict max is va (pair b0,b1); output (b0, b2, b1)
+    refine ⟨b 0, b 2, b 1, ?_, Or.inl ⟨va, vc, hac, hva, hva', ?_, ?_⟩⟩
+    · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+    · exact dvd_sub_comm.mpr hvc
+    · exact fun h => hvc' (dvd_sub_comm.mp h)
+
+/-- **Lemma 11 with the `s` parameter (BS L569, full form).** As `lemma11`, but the
+ratio-`3` case is additionally aligned to a given unit `s`: the big leading residue
+`r(d₂−d₃)` equals `±s`. This is BS's "(ii.2) `r(e₁₃) = 3r(e₂₃) = ±s`" — the free
+choice of `s` is what lets §6.3 case (ii.2.b) assume `r(e₄₅) = ±r(e₁₃)` (take
+`s := r(e₄₅)`). Same skeleton as `lemma11`; the equal-valuation branch uses the
+`s`-aligned decide `ratio_two_three_s`. -/
+theorem lemma11_s (s : ZMod 7) (hs : s ≠ 0) (b : Fin 3 → ℤ) (hinj : Function.Injective b) :
+    ∃ d₁ d₂ d₃ : ℤ,
+      (∀ f : ℤ → ZMod 7,
+        ({f d₁, f d₂, f d₃} : Finset (ZMod 7)) = {f (b 0), f (b 1), f (b 2)}) ∧
+      ((∃ h₁ h₂ : ℕ, h₂ < h₁ ∧
+          (7 : ℤ) ^ h₁ ∣ (d₁ - d₃) ∧ ¬ (7 : ℤ) ^ (h₁ + 1) ∣ (d₁ - d₃) ∧
+          (7 : ℤ) ^ h₂ ∣ (d₂ - d₃) ∧ ¬ (7 : ℤ) ^ (h₂ + 1) ∣ (d₂ - d₃)) ∨
+        (∃ h : ℕ,
+          (7 : ℤ) ^ h ∣ (d₁ - d₃) ∧ ¬ (7 : ℤ) ^ (h + 1) ∣ (d₁ - d₃) ∧
+          (7 : ℤ) ^ h ∣ (d₂ - d₃) ∧ ¬ (7 : ℤ) ^ (h + 1) ∣ (d₂ - d₃) ∧
+          ((((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) = 2 * (((d₁ - d₃) / 7 ^ h : ℤ) : ZMod 7) ∨
+           ((((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) = 3 * (((d₁ - d₃) / 7 ^ h : ℤ) : ZMod 7) ∧
+            ((((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) = s ∨
+             (((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) = -s))))) := by
+  -- nonzero differences
+  have n01 : b 0 - b 1 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n02 : b 0 - b 2 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  have n12 : b 1 - b 2 ≠ 0 := sub_ne_zero.mpr (hinj.ne (by decide))
+  obtain ⟨va, hva, hva'⟩ := exists_val7 _ n01
+  obtain ⟨vb, hvb, hvb'⟩ := exists_val7 _ n02
+  obtain ⟨vc, hvc, hvc'⟩ := exists_val7 _ n12
+  -- the additive relation e₀₂ = e₀₁ + e₁₂
+  have hadd : b 0 - b 2 = (b 0 - b 1) + (b 1 - b 2) := by ring
+  rcases lt_trichotomy va vc with hac | hac | hac
+  · -- va < vc : strict max is vc (pair b1,b2); output (b1, b0, b2)
+    refine ⟨b 1, b 0, b 2, ?_, Or.inl ⟨vc, va, hac, hvc, hvc', ?_, ?_⟩⟩
+    · intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+    · rw [hadd]; exact (ultra_add hva hva' hvc hac).1
+    · rw [hadd]; exact (ultra_add hva hva' hvc hac).2
+  · -- va = vc : compare vb with the common value
+    subst hac
+    have hvb_ge : va ≤ vb := by
+      by_contra hlt; rw [not_le] at hlt
+      exact hvb' (hadd ▸ dvd_add (dvd_trans (pow_dvd_pow 7 hlt) hva)
+        (dvd_trans (pow_dvd_pow 7 hlt) hvc))
+    rcases lt_or_eq_of_le hvb_ge with hlt | heq
+    · -- va < vb : strict max is vb (pair b0,b2); output (b0, b1, b2)
+      refine ⟨b 0, b 1, b 2, ?_, Or.inl ⟨vb, va, hlt, hvb, hvb', hvc, hvc'⟩⟩
+      intro f; ext x; simp only [Finset.mem_insert, Finset.mem_singleton, or_comm, or_left_comm, or_assoc]
+    · -- all three valuations equal `va` : the leading-residue ratio case (ii)
+      subst heq
+      -- witnesses for the three differences at the common level `va`
+      obtain ⟨wa, hwa⟩ := hva
+      obtain ⟨wb, hwb⟩ := hvb
+      obtain ⟨wc, hwc⟩ := hvc
+      have h7 : (7 : ℤ) ^ va ≠ 0 := by positivity
+      -- the residues are units, tied by `ra = rb − rc`
+      have rane : (wa : ZMod 7) ≠ 0 := unit_res hwa hva'
+      have rbne : (wb : ZMod 7) ≠ 0 := unit_res hwb hvb'
+      have rcne : (wc : ZMod 7) ≠ 0 := unit_res hwc hvc'
+      have hwrel : wb = wa + wc := by
+        have : (7 : ℤ) ^ va * wb = (7 : ℤ) ^ va * (wa + wc) := by
+          rw [mul_add, ← hwa, ← hwc, ← hwb]; linarith [hadd]
+        exact mul_left_cancel₀ h7 this
+      have hrel : (wa : ZMod 7) = (wb : ZMod 7) - (wc : ZMod 7) := by
+        rw [hwrel]; push_cast; ring
+      -- a unit leading residue means `7^(va+1)` does not divide the difference
+      have ndvd_res : ∀ (δ u : ℤ), δ = (7 : ℤ) ^ va * u → (u : ZMod 7) ≠ 0 →
+          ¬ (7 : ℤ) ^ (va + 1) ∣ δ := by
+        intro δ u hδ hune hdvd
+        obtain ⟨z, hz⟩ := hdvd
+        exact hune (by
+          rw [ZMod.intCast_zmod_eq_zero_iff_dvd]
+          exact ⟨z, mul_left_cancel₀ h7 (by rw [← hδ, hz, pow_succ]; ring)⟩)
+      -- reversed-orientation witnesses and their unit residues
+      have hwa' : b 1 - b 0 = (7 : ℤ) ^ va * (-wa) := by
+        rw [show b 1 - b 0 = -(b 0 - b 1) from by ring, hwa]; ring
+      have hwb' : b 2 - b 0 = (7 : ℤ) ^ va * (-wb) := by
+        rw [show b 2 - b 0 = -(b 0 - b 2) from by ring, hwb]; ring
+      have hwc' : b 2 - b 1 = (7 : ℤ) ^ va * (-wc) := by
+        rw [show b 2 - b 1 = -(b 1 - b 2) from by ring, hwc]; ring
+      have ranen : ((-wa : ℤ) : ZMod 7) ≠ 0 := by simpa using rane
+      have rbnen : ((-wb : ℤ) : ZMod 7) ≠ 0 := by simpa using rbne
+      have rcnen : ((-wc : ℤ) : ZMod 7) ≠ 0 := by simpa using rcne
+      rcases ratio_two_three_s s (wa : ZMod 7) (wb : ZMod 7) (wc : ZMod 7) hs rane rbne rcne
+          hrel with hD | hD | hD | hD | hD | hD
       · -- ratio at apex b2: output (b0,b1,b2)
         refine ⟨b 0, b 1, b 2, ?_,
           Or.inr ⟨va, ⟨wb, hwb⟩, ndvd_res _ _ hwb rbne, ⟨wc, hwc⟩, ndvd_res _ _ hwc rcne, ?_⟩⟩

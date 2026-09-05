@@ -33,6 +33,26 @@ lines of Lean formalizing the bijection `φ : [0, 1/(Lp)) → [0, 1/L) × [0, 1/
 - `LRC/Theorem111_ModDI.lean` — Modified Divisor Induction (hardest section)
 - `LRC/Theorem121_Main.lean` — Assembly + main theorem
 
+## Driver: substrate independence
+
+**`~/.claude/CLAUDE.md` §0 is the overarching driver and governs here.** In short: a
+construct carried across disciplines gets a **verification demand** (exhibit the
+isomorphism -- which state space, which constraints, is it additive) and never a **type
+objection** ("entropy is physical, that is a metaphor"). Mathematics is the substrate;
+thermodynamics is substrate-independent mathematics discovered in heat engines, not a
+theory about them. Lineage and citations live in the canonical file -- do not restate
+them here, and do not let this file drift from it.
+
+In this project specifically:
+
+- Lean enforces the driver's own standard mechanically: a structural analogy must
+  become a definition and a proof term, or it does not exist. "Exhibit the isomorphism"
+  is literally what the elaborator demands.
+- Direction of travel: informal entropy or counting intuition may *suggest* a statement
+  and shape the proof strategy. Only the proof term establishes it. Keep `sorry` honest.
+
+---
+
 ## Style
 - Use `sorry` stubs freely; the goal is type-correctness and structure.
 - Prefer `norm_num`, `omega`, `linarith`, `simp` for arithmetic goals.

@@ -496,6 +496,31 @@ theorem qz_sub_mul_pow (m : ℕ) (a w : ℤ) :
   rw [heq, Int.add_mul_ediv_right _ _ h7]
   push_cast; ring
 
+/-- **Exact negation of the arc index.** When `7^m ∤ x` the floor division is
+strict, so `(-x)/7^m = -(x/7^m) - 1` and `q(-x) = 6 - q(x)` exactly (no carry
+ambiguity). Used by §6.3 (ii.2.b) to transfer the `q ∈ {0,6}` carve from `-e₄₅`
+back to `e₄₅` in the `r(e₄₅) = -r(e₁₃)` mirror. -/
+theorem qz_neg (m : ℕ) (x : ℤ) (hx : ¬ (7 : ℤ) ^ m ∣ x) :
+    qz m (-x) = 6 - qz m x := by
+  simp only [qz]
+  set P : ℤ := (7 : ℤ) ^ m with hP_def
+  have hP : (0 : ℤ) < P := by positivity
+  set q : ℤ := x / P with hq_def
+  set r : ℤ := x % P with hr_def
+  have hr0 : 0 ≤ r := Int.emod_nonneg x (ne_of_gt hP)
+  have hrP : r < P := Int.emod_lt_of_pos x hP
+  have hrne : r ≠ 0 := fun h0 => hx (Int.dvd_of_emod_eq_zero h0)
+  have hx_decomp : x = P * q + r := by
+    have := Int.ediv_add_emod x P; rw [← hq_def, ← hr_def] at this; linarith
+  have hkey : (-x) / P = -q - 1 := by
+    have hneg : -x = (P - r) + P * (-q - 1) := by linarith
+    rw [hneg, Int.add_mul_ediv_left _ _ (ne_of_gt hP),
+      Int.ediv_eq_zero_of_lt (by omega) (by omega), zero_add]
+  rw [hkey]
+  push_cast
+  have h6 : (6 : ZMod 7) = -1 := by decide
+  rw [h6]; ring
+
 /-- **No doubling carry when `q(7a) = 0`.** If the top 7-ary digit of `7a` is 0,
 the low part of `a` is `< 7^{m-1}`, so doubling stays below `7^m` and the carry
 vanishes: `q(2a) = 2·q(a)`. -/

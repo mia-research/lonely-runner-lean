@@ -227,6 +227,28 @@ private theorem lift_shift (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ) (lam₀ : 
       inv_mul_cancel₀ hr₀_ne]; ring
   rw [halg]; exact havoid i
 
+private theorem case61_nonexception_shift (a p q : ZMod 7)
+    (hex : ¬ ((p + (-a - 1) = 2 ∧ q + (-a - 1) = 4) ∨
+      (p + (-a - 1) = 4 ∧ q + (-a - 1) = 2))) :
+    ∃ t : ZMod 7, ∀ x ∈ ({a, a + 1, p, q} : Finset (ZMod 7)),
+      x + t ∉ ({0, 6} : Finset (ZMod 7)) := by
+  revert hex; revert a p q; decide
+
+/-! Finite terminal tables for the two remaining Barajas--Serra partitions. -/
+
+private theorem case65_window_choice (a₁ a₄ : ZMod 7) :
+    ∃ k : ZMod 7,
+      intervalAvoids a₁ 3 1 k ∧ intervalAvoids a₄ 2 4 k := by
+  revert a₁ a₄
+  decide
+
+private theorem case66_window_choice (a₁ a₂ a₄ : ZMod 7) :
+    ∃ k : ZMod 7,
+      intervalAvoids a₁ 2 1 k ∧ intervalAvoids a₂ 2 2 k ∧
+        intervalAvoids a₄ 1 4 k := by
+  revert a₁ a₂ a₄
+  decide
+
 /-- **Case 6.1 `(5,0,0)`** (BS L507). `|A₁| = 5`. Labeling via Lemma 10, then
 `ℓ(A₁) ≤ 5` by Lemma 9 / Remark 8(i), closed by Lemma 5 (`five_lambda0`). -/
 private theorem case_61 (hm : 2 ≤ m)
@@ -237,7 +259,174 @@ private theorem case_61 (hm : 2 ≤ m)
     (hC₂ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 2)).card = 0)
     (hC₄ : (univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 4)).card = 0) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := sorry
+      qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+  classical
+  have hres1 : ∀ i, (d i : ZMod 7) = 1 := by
+    have hS : univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1) = univ := by
+      apply Finset.eq_univ_of_card
+      simpa using hC₁
+    intro i
+    have hi : i ∈ univ.filter (fun i : Fin 5 => (d i : ZMod 7) = 1) := by
+      rw [hS]
+      exact Finset.mem_univ i
+    exact (Finset.mem_filter.mp hi).2
+  have close_window5 : ∀ (lam₀ : ℤ), ¬ (7 : ℤ) ∣ lam₀ →
+      (∃ a : ZMod 7, ∀ i,
+        (qz m (lam₀ * d i) - a).val ≤ 4) →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
+        qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
+    intro lam₀ hlam₀ hwin
+    obtain ⟨u, hu, havoid⟩ := place_window5 m (by omega) (fun i => lam₀ * d i)
+      (lam₀ : ZMod 7) (by
+        intro h0
+        exact hlam₀ ((ZMod.intCast_zmod_eq_zero_iff_dvd lam₀ 7).mp h0))
+      (fun i => by push_cast; rw [hres1 i]; ring) hwin
+    refine ⟨u * lam₀, ?_, ?_⟩
+    · intro hdiv
+      rcases (Nat.prime_iff_prime_int.mp (by decide : Nat.Prime 7)).dvd_mul.mp hdiv with h | h
+      · exact hu h
+      · exact hlam₀ h
+    · intro i
+      simpa [mul_assoc] using havoid i
+  by_cases htop : ∀ i, (7 : ℤ) ^ m ∣ d i - d 0
+  · by_cases hdist : Function.Injective
+        (fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7))
+    · exact case_61_top m (by omega) d hres1 htop hdist
+    · sorry
+  · let b : Fin 4 → ℤ := fun i => d ⟨i.val, by omega⟩
+    have hb_inj : Function.Injective b := by
+      intro i j hij
+      simp only [b] at hij
+      have hval : i.val = j.val := by
+        exact congrArg (fun k : Fin 5 => k.val) (hinj hij)
+      exact Fin.eq_of_val_eq hval
+    obtain ⟨e₁, e₂, e₃, e₄, hperm, hstruct⟩ := lemma10 b hb_inj
+    have he_res : ∀ e : ℤ, e ∈ ({e₁, e₂, e₃, e₄} : Finset ℤ) → (e : ZMod 7) = 1 := by
+      intro e he
+      simp only [Finset.mem_insert, Finset.mem_singleton] at he
+      rcases he with rfl | rfl | rfl | rfl
+      all_goals
+        have hmem : (e : ZMod 7) ∈
+            ({(b 0 : ZMod 7), (b 1 : ZMod 7), (b 2 : ZMod 7), (b 3 : ZMod 7)} : Finset _) := by
+          rw [← hperm (fun x : ℤ => (x : ZMod 7))]
+          simp
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hmem
+        rcases hmem with h | h | h | h <;> simp [b, hres1] at h
+        all_goals exact h
+    have he₁_res : (e₁ : ZMod 7) = 1 := he_res e₁ (by simp)
+    have he₂_res : (e₂ : ZMod 7) = 1 := he_res e₂ (by simp)
+    have he₃_res : (e₃ : ZMod 7) = 1 := he_res e₃ (by simp)
+    have he₄_res : (e₄ : ZMod 7) = 1 := he_res e₄ (by simp)
+    rcases hstruct with
+        ⟨h₁, h₂, hne, hd₁, hd₁', hd₂, hd₂'⟩ |
+        ⟨h, hd₁, hd₁', hd₂, hd₂', hd₃, hd₃', hr₂, hr₃₄⟩
+    · by_cases hlow : h₁ < m ∧ h₂ < m
+      · have hret : ∃ lam₀ : ℤ, ¬ (7 : ℤ) ∣ lam₀ ∧
+            qz m (lam₀ * (e₂ - e₁)) = 0 ∧
+            qz m (lam₀ * (e₃ - e₁)) = 0 := by
+          rcases lt_or_gt_of_ne hne with h12 | h21
+          · obtain ⟨lam₀, hlam₀, hq₃, hq₂⟩ :=
+              qz_retarget_two m h₂ h₁ hlow.2 h12 (e₃ - e₁) (e₂ - e₁)
+                hd₂ hd₂' hd₁ hd₁' 0 0
+            exact ⟨lam₀, hlam₀, hq₂, hq₃⟩
+          · obtain ⟨lam₀, hlam₀, hq₂, hq₃⟩ :=
+              qz_retarget_two m h₁ h₂ hlow.1 h21 (e₂ - e₁) (e₃ - e₁)
+                hd₁ hd₁' hd₂ hd₂' 0 0
+            exact ⟨lam₀, hlam₀, hq₂, hq₃⟩
+        obtain ⟨lam₀, hlam₀, hq₂, hq₃⟩ := hret
+        have h12 : qz m (lam₀ * e₂ - lam₀ * e₁) ∈ ({0, 6} : Finset (ZMod 7)) := by
+          rw [show lam₀ * e₂ - lam₀ * e₁ = lam₀ * (e₂ - e₁) by ring, hq₂]
+          decide
+        have h13 : qz m (lam₀ * e₃ - lam₀ * e₁) ∈ ({0, 6} : Finset (ZMod 7)) := by
+          rw [show lam₀ * e₃ - lam₀ * e₁ = lam₀ * (e₃ - e₁) by ring, hq₃]
+          decide
+        have h23 : qz m (lam₀ * e₂ - lam₀ * e₃) ∈ ({0, 6} : Finset (ZMod 7)) := by
+          obtain ⟨c, hc, hcarry⟩ :=
+            qz_subxy_carry m (lam₀ * (e₂ - e₁)) (lam₀ * (e₃ - e₁))
+          rw [hq₂, hq₃] at hcarry
+          rw [show lam₀ * e₂ - lam₀ * e₃ =
+              lam₀ * (e₂ - e₁) - lam₀ * (e₃ - e₁) by ring, hcarry]
+          rcases hc with rfl | rfl <;> decide
+        obtain ⟨a, hfit⟩ := remark8_i_int m (lam₀ * e₂) (lam₀ * e₃) (lam₀ * e₁)
+          h23 h12 h13
+        let p : ZMod 7 := qz m (lam₀ * e₄)
+        let q : ZMod 7 := qz m (lam₀ * d 4)
+        have hBmem : ∀ x : ZMod 7, x ∈
+            ({qz m (lam₀ * e₂), qz m (lam₀ * e₃), qz m (lam₀ * e₁)} : Finset _) →
+            x ∈ ({a, a + 1} : Finset (ZMod 7)) := by
+          intro x hx
+          obtain ⟨j, hj⟩ := hfit x hx
+          fin_cases j <;> simp [hj]
+        have hBmem' : ∀ x : ZMod 7, x ∈
+            ({qz m (lam₀ * e₂), qz m (lam₀ * e₃), qz m (lam₀ * e₁)} : Finset _) →
+            x ∈ ({a, a + 1, p} : Finset (ZMod 7)) := by
+          intro x hx
+          have hx' := hBmem x hx
+          simp only [Finset.mem_insert, Finset.mem_singleton] at hx' ⊢
+          rcases hx' with hx' | hx'
+          · exact Or.inl hx'
+          · exact Or.inr (Or.inl hx')
+        have hBmem'' : ∀ x : ZMod 7, x ∈
+            ({qz m (lam₀ * e₂), qz m (lam₀ * e₃), qz m (lam₀ * e₁)} : Finset _) →
+            x ∈ ({a, a + 1, p, q} : Finset (ZMod 7)) := by
+          intro x hx
+          have hx' := hBmem' x hx
+          simp only [Finset.mem_insert, Finset.mem_singleton] at hx' ⊢
+          rcases hx' with hx' | hx' | hx'
+          · exact Or.inl hx'
+          · exact Or.inr (Or.inl hx')
+          · exact Or.inr (Or.inr (Or.inl hx'))
+        have hfour : ∀ j : Fin 4, qz m (lam₀ * b j) ∈
+            ({a, a + 1, p, q} : Finset (ZMod 7)) := by
+          intro j
+          have hs := hperm (fun x : ℤ => qz m (lam₀ * x))
+          have hjmem : qz m (lam₀ * b j) ∈
+              ({qz m (lam₀ * b 0), qz m (lam₀ * b 1),
+                qz m (lam₀ * b 2), qz m (lam₀ * b 3)} : Finset _) := by
+            fin_cases j <;> simp
+          have hb : qz m (lam₀ * b j) ∈
+              ({qz m (lam₀ * e₁), qz m (lam₀ * e₂), qz m (lam₀ * e₃),
+                qz m (lam₀ * e₄)} : Finset _) := by
+            rw [hs]
+            exact hjmem
+          simp only [Finset.mem_insert, Finset.mem_singleton] at hb
+          rcases hb with hb | hb | hb | hb
+          · rw [hb]
+            exact hBmem'' _ (by simp)
+          · rw [hb]
+            exact hBmem'' _ (by simp)
+          · rw [hb]
+            exact hBmem'' _ (by simp)
+          · rw [hb]
+            simpa [p]
+        have hmem : ∀ i : Fin 5, qz m (lam₀ * d i) ∈
+            ({a, a + 1, p, q} : Finset (ZMod 7)) := by
+          intro i
+          fin_cases i
+          · change qz m (lam₀ * b 0) ∈ ({a, a + 1, p, q} : Finset _)
+            exact hfour 0
+          · change qz m (lam₀ * b 1) ∈ ({a, a + 1, p, q} : Finset _)
+            exact hfour 1
+          · change qz m (lam₀ * b 2) ∈ ({a, a + 1, p, q} : Finset _)
+            exact hfour 2
+          · change qz m (lam₀ * b 3) ∈ ({a, a + 1, p, q} : Finset _)
+            exact hfour 3
+          · simpa [q] using (Or.inr (Or.inr (Or.inr rfl)) :
+              q ∈ ({a, a + 1, p, q} : Finset (ZMod 7)))
+        by_cases hex : (p + (-a - 1) = 2 ∧ q + (-a - 1) = 4) ∨
+            (p + (-a - 1) = 4 ∧ q + (-a - 1) = 2)
+        · sorry
+        · obtain ⟨t, ht⟩ := case61_nonexception_shift a p q hex
+          have havoid : ∀ i : Fin 5,
+              qz m (lam₀ * d i) + t * (d i : ZMod 7) ∉
+                ({0, 6} : Finset (ZMod 7)) := by
+            intro i
+            have hi := hmem i
+            rw [hres1 i, mul_one]
+            exact ht _ hi
+          exact lift_shift m (by omega) d lam₀ hlam₀ t havoid
+      · sorry
+    · sorry
 
 /-- **`(4,1,0)` 2-window endgame.** 2-window `{a,a+1}` (three `A₁` arcs), 4th `A₁`
 arc `v₄ ≠ a+4`, and the `A₂` arc `q₅` (shift coefficient `2`). The excluded
@@ -1435,30 +1624,26 @@ private theorem fallback_63_l1 (T34 e0 rho : ZMod 7)
         (4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 2 ∨
           4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 3 ∨
           4 * Atar + 2 * e1 - 2 * T34 - (e0 + p * rho) = 4) := by
-  revert hT34 hrho; revert T34 e0 rho; decide
+  have hcases : rho = 1 ∨ rho = 2 ∨ rho = 3 ∨ rho = 4 ∨ rho = 5 ∨ rho = 6 := by
+    revert hrho; revert rho; decide
+  have hTcases : T34 = 3 ∨ T34 = 4 ∨ T34 = 5 := by
+    revert hT34; revert T34; decide
+  have he0cases : e0 = 0 ∨ e0 = 1 ∨ e0 = 2 ∨ e0 = 3 ∨ e0 = 4 ∨ e0 = 5 ∨ e0 = 6 := by
+    revert e0; decide
+  rcases hcases with rfl | rfl | rfl | rfl | rfl | rfl <;>
+    rcases hTcases with rfl | rfl | rfl <;>
+      rcases he0cases with rfl | rfl | rfl | rfl | rfl | rfl | rfl <;> native_decide
 
-set_option maxHeartbeats 3200000 in
-set_option maxRecDepth 4000 in
-/-- **`(3,1,1)` ratio-3 h<m, `ν(e₄₅)=ν(e₁₃)` diff-arc decide** (BS L607–632, `+`-sign).
-Everything is at level `h`, so a `Λ_h` shift `k` moves the four diff-arcs linearly:
-`X=q(e₁₃)↦X+3k`, `Y=q(e₂₃)↦Y+k`, `Z=q(e₁₂)↦Z+2k`, `W=q(e₄₅)↦W+3k`. The
-`f=e₄₅−e₁₃` retarget pins `ẽ' = q(e₁₃)−q(e₄₅) ∈ {0,1}` (so `W ∈ {X, X−1}`), and
-`Z ∈ {X−Y, X−Y+6}` (the `q(e₁₂)` carry). Except at BS's exceptional `ũ=3∧ẽ'=0`
-(`3X+5Y=3 ∧ W=X`), some `k` lands either all three `A₁` diff-arcs in `{0,6}`
-(`ℓ(A₁)≤2`, Lemma 5 needs no carve) or in `{0,1,5,6}` with `W+3k∈{0,6}` (`ℓ≤3` and
-`ẽ(d₄,d₅)∉{2,4}`). -/
-private theorem ii2b_shift (X Y Z W : ZMod 7)
-    (hZ : Z = X - Y ∨ Z = X - Y + 6) (hW : W = X ∨ W = X - 1)
-    (hexc : ¬ (3 * X + 5 * Y = 3 ∧ W = X)) :
-    ∃ k : ZMod 7,
-      (X + 3 * k ∈ ({0, 6} : Finset (ZMod 7)) ∧ Y + k ∈ ({0, 6} : Finset (ZMod 7)) ∧
-        Z + 2 * k ∈ ({0, 6} : Finset (ZMod 7))) ∨
-      (X + 3 * k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
-        Y + k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
-        Z + 2 * k ∈ ({0, 1, 5, 6} : Finset (ZMod 7)) ∧
-        W + 3 * k ∈ ({0, 6} : Finset (ZMod 7))) := by
-  -- Split `Z,W` off first (`decide`'s instance synthesis chokes on the full 4-∀ nesting).
-  rcases hZ with rfl | rfl <;> rcases hW with hw | hw <;> subst W <;> revert hexc X Y <;> decide
+private theorem reflect_fit_63 (x y z a : ZMod 7) (L : ℕ)
+    (hL : L = 2 ∨ L = 3)
+    (hfit : fitsInterval ({6 - x, 6 - y, 6 - z} : Finset (ZMod 7)) a L) :
+    ∃ b : ZMod 7, fitsInterval ({x, y, z} : Finset (ZMod 7)) b L := by
+  rcases hL with rfl | rfl <;> revert x y z a hfit <;> decide
+
+private theorem reflect_mem_63 (x : ZMod 7)
+    (h : 6 - x ∈ ({0, 6} : Finset (ZMod 7))) :
+    x ∈ ({0, 6} : Finset (ZMod 7)) := by
+  revert x; decide
 
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11;
 endgame is `lemma5` on the `(ℓ₁,1,1)` partition (the `(3,1,1)` exception carved by
@@ -1533,8 +1718,36 @@ private theorem case_63 (hm : 2 ≤ m)
       ∀ k₀ : Fin 3, ∃ j : Fin L, qz m (lam₀ * b₁ k₀) = a + (j.val : ZMod 7) := by
     intro lam₀ a L hfit k₀
     exact hfit _ (by fin_cases k₀ <;> simp)
-  -- Apply Lemma 11 to label A₁.
-  obtain ⟨d₁, d₂, d₃, hperm, h_struct⟩ := lemma11 b₁ hb₁_inj
+  -- The alignment target for Lemma 11: `s := r(e₄₅)` where `e₄₅ = 2d₄ − d₅`
+  -- (BS §6.3 (ii.2): "r(e₁₃) = 3r(e₂₃) = ±s"), so that case (ii.2.b) may assume
+  -- `r(e₄₅) = ±r(d₂−d₃)`. When `e₄₅ = 0` any unit works.
+  set e45 : ℤ := 2 * d i₄ - d i₅ with he45_def
+  set s : ZMod 7 := if e45 = 0 then 1 else
+    ((e45 / 7 ^ padicValInt 7 e45 : ℤ) : ZMod 7) with hs_def
+  have hs_ne : s ≠ 0 := by
+    rw [hs_def]
+    split_ifs with he
+    · exact one_ne_zero
+    · intro h0
+      rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at h0
+      obtain ⟨c, hc⟩ := h0
+      have hd : (7 : ℤ) ^ padicValInt 7 e45 ∣ e45 := padicValInt_dvd e45
+      have hd1 : (7 : ℤ) ^ (padicValInt 7 e45 + 1) ∣ e45 :=
+        ⟨c, by
+          calc
+            e45 = (7 : ℤ) ^ padicValInt 7 e45 * (e45 / 7 ^ padicValInt 7 e45) :=
+              (Int.mul_ediv_cancel' hd).symm
+            _ = (7 : ℤ) ^ padicValInt 7 e45 * (7 * c) :=
+              congrArg (fun z : ℤ => (7 : ℤ) ^ padicValInt 7 e45 * z) hc
+            _ = (7 : ℤ) ^ (padicValInt 7 e45 + 1) * c := by rw [pow_succ]; ring⟩
+      have hle : padicValInt 7 e45 + 1 ≤ padicValInt 7 e45 :=
+        ((padicValInt_dvd_iff _ e45).mp hd1).resolve_left he
+      omega
+  have hs_def_orig : s = if 2 * d i₄ - d i₅ = 0 then 1 else
+      (((2 * d i₄ - d i₅) / 7 ^ padicValInt 7 (2 * d i₄ - d i₅) : ℤ) : ZMod 7) := by
+    rw [hs_def, he45_def]
+  -- Apply Lemma 11 (s-aligned form) to label A₁.
+  obtain ⟨d₁, d₂, d₃, hperm, h_struct⟩ := lemma11_s s hs_ne b₁ hb₁_inj
   have hset_eq : ∀ (lam₀ : ℤ),
       ({qz m (lam₀ * b₁ 0), qz m (lam₀ * b₁ 1), qz m (lam₀ * b₁ 2)} : Finset (ZMod 7))
       = {qz m (lam₀ * d₁), qz m (lam₀ * d₂), qz m (lam₀ * d₃)} := fun lam₀ =>
@@ -1573,7 +1786,7 @@ private theorem case_63 (hm : 2 ≤ m)
       lemma9_i_dispatch m h₁ h₂ d₁ d₂ d₃ (ne_of_lt hlt).symm hd1 hd1' hd2 hd2'
     refine close_l5 lam₀ hlam₀ a 2 (by omega) (by omega) ?_ (fun h => absurd h (by decide))
     exact fit_of_set lam₀ a 2 (by rw [hset_eq lam₀]; exact hB_fit)
-  · rcases hr with hr2 | hr3
+  · rcases hr with hr2 | ⟨hr3, hr3s⟩
     · -- ── (ii.1) ratio 2 ──
       by_cases hheq : h = m
       · -- (ii.1) h = m: r⁻¹-frame ℓ(A₁)=3 + Lemma 7 (tight X={2,4}) forces ẽ(d₄,d₅)∉{2,4}.
@@ -2215,7 +2428,153 @@ private theorem case_63 (hm : 2 ≤ m)
           · obtain ⟨ν, hνd, hνd'⟩ := exists_val7 e45 he0
             by_cases hνh : ν = h
             · -- (ii.2.b) ν(e₄₅) = ν(e₁₃) = h: BS ũ-table (L611–635).
-              sorry
+              rcases hr3s with hrEpos | hrEneg
+              · have hν_eq : padicValInt 7 e45 = ν := by
+                  apply Nat.le_antisymm
+                  · by_contra hlt
+                    have hle : ν + 1 ≤ padicValInt 7 e45 := by omega
+                    have : (7 : ℤ) ^ (ν + 1) ∣ e45 :=
+                      (padicValInt_dvd_iff (ν + 1) e45).mpr (Or.inr hle)
+                    exact hνd' this
+                  · exact ((padicValInt_dvd_iff ν e45).mp hνd).resolve_left he0
+                have hEd : (7 : ℤ) ^ h ∣ e45 := by simpa [hνh] using hνd
+                have hs_eq : s = ((e45 / 7 ^ h : ℤ) : ZMod 7) := by
+                  have he0' : 2 * d i₄ - d i₅ ≠ 0 := by simpa [he45_def] using he0
+                  have hν_eq' : padicValInt 7 (2 * d i₄ - d i₅) = ν := by
+                    simpa [he45_def] using hν_eq
+                  rw [hs_def_orig, if_neg he0']
+                  rw [hν_eq', hνh, he45_def]
+                have hEres : ((e45 / 7 ^ h : ℤ) : ZMod 7) =
+                    (((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) := by
+                  calc
+                    ((e45 / 7 ^ h : ℤ) : ZMod 7) = s := hs_eq.symm
+                    _ = (((d₂ - d₃) / 7 ^ h : ℤ) : ZMod 7) := hrEpos.symm
+                obtain ⟨lam, hlam, hctrl⟩ := ii2b_control m h hlt d₁ d₂ d₃ e45
+                  hd1 hd1' hd2 hr3 hEd hEres
+                have carve_mem : ∀ (l : ℤ), qz m (l * e45) ∈ ({0, 6} : Finset (ZMod 7)) →
+                    (2 * qz m (l * d i₄) - qz m (l * d i₅)) ∉ ({2, 4} : Finset (ZMod 7)) := by
+                  intro l hq
+                  simp only [Finset.mem_insert, Finset.mem_singleton] at hq
+                  rcases hq with hq | hq
+                  · obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (l * d i₄) (l * d i₅)
+                    rw [show l * e45 = 2 * (l * d i₄) - l * d i₅ from by
+                      rw [he45_def]; ring, hcarry] at hq
+                    rw [show 2 * qz m (l * d i₄) - qz m (l * d i₅) = -c from by
+                      linear_combination hq]
+                    rcases hc with rfl | rfl | rfl <;> decide
+                  · exact carve_of l hq
+                by_cases hsmall : ∃ a : ZMod 7, fitsInterval
+                    ({qz m (lam * d₁), qz m (lam * d₂), qz m (lam * d₃)} : Finset (ZMod 7)) a 2
+                · obtain ⟨a, hfit⟩ := hsmall
+                  exact close_l5 lam hlam a 2 (by omega) (by omega)
+                    (fit_of_set lam a 2 (by rw [hset_eq lam]; exact hfit)) (fun h => by omega)
+                · have hlarge := hctrl.resolve_left hsmall
+                  obtain ⟨⟨a, hfit⟩, hqE⟩ := hlarge
+                  exact close_l5 lam hlam a 3 (by omega) (by omega)
+                    (fit_of_set lam a 3 (by rw [hset_eq lam]; exact hfit))
+                    (fun _ => carve_mem lam hqE)
+              · have hEd : (7 : ℤ) ^ h ∣ e45 := by simpa [hνh] using hνd
+                have hν_eq : padicValInt 7 e45 = ν := by
+                  apply Nat.le_antisymm
+                  · by_contra hlt'
+                    have hle : ν + 1 ≤ padicValInt 7 e45 := by omega
+                    exact hνd' ((padicValInt_dvd_iff (ν + 1) e45).mpr (Or.inr hle))
+                  · exact ((padicValInt_dvd_iff ν e45).mp hνd).resolve_left he0
+                have hs_eq : s = ((e45 / 7 ^ h : ℤ) : ZMod 7) := by
+                  have he0' : 2 * d i₄ - d i₅ ≠ 0 := by simpa [he45_def] using he0
+                  have hν_eq' : padicValInt 7 (2 * d i₄ - d i₅) = ν := by
+                    simpa [he45_def] using hν_eq
+                  rw [hs_def_orig, if_neg he0']
+                  rw [hν_eq', hνh, he45_def]
+                have hEres : ((e45 / 7 ^ h : ℤ) : ZMod 7) =
+                    (((-d₂ - -d₃) / 7 ^ h : ℤ) : ZMod 7) := by
+                  rw [show -d₂ - -d₃ = -(d₂ - d₃) by ring,
+                    Int.neg_ediv_of_dvd hd2]
+                  push_cast
+                  simpa [hs_eq, neg_neg] using congrArg Neg.neg hrEneg.symm
+                have hneg1 : (7 : ℤ) ^ h ∣ -d₁ - -d₃ := by
+                  rw [show -d₁ - -d₃ = -(d₁ - d₃) by ring]; exact dvd_neg.mpr hd1
+                have hneg1' : ¬ (7 : ℤ) ^ (h + 1) ∣ -d₁ - -d₃ := by
+                  intro hh
+                  apply hd1'
+                  have hh' : (7 : ℤ) ^ (h + 1) ∣ -(d₁ - d₃) := by
+                    simpa [show -d₁ - -d₃ = -(d₁ - d₃) by ring] using hh
+                  exact dvd_neg.mp hh'
+                have hneg2 : (7 : ℤ) ^ h ∣ -d₂ - -d₃ := by
+                  rw [show -d₂ - -d₃ = -(d₂ - d₃) by ring]; exact dvd_neg.mpr hd2
+                have hnegEbase : ¬ (7 : ℤ) ^ m ∣ e45 := by
+                  intro hh
+                  apply hνd'
+                  exact dvd_trans (pow_dvd_pow 7 (by omega : ν + 1 ≤ m)) hh
+                have hcarve_mem : ∀ (l : ℤ), qz m (l * e45) ∈ ({0, 6} : Finset (ZMod 7)) →
+                    (2 * qz m (l * d i₄) - qz m (l * d i₅)) ∉ ({2, 4} : Finset (ZMod 7)) := by
+                  intro l hq
+                  simp only [Finset.mem_insert, Finset.mem_singleton] at hq
+                  rcases hq with hq | hq
+                  · obtain ⟨c, hc, hcarry⟩ := qz_2xsuby_carry m (l * d i₄) (l * d i₅)
+                    rw [show l * e45 = 2 * (l * d i₄) - l * d i₅ from by
+                      rw [he45_def]; ring, hcarry] at hq
+                    rw [show 2 * qz m (l * d i₄) - qz m (l * d i₅) = -c from by
+                      linear_combination hq]
+                    rcases hc with rfl | rfl | rfl <;> decide
+                  · exact carve_of l hq
+                have hneg_r : (((-d₂ - -d₃) / 7 ^ h : ℤ) : ZMod 7) =
+                    3 * (((-d₁ - -d₃) / 7 ^ h : ℤ) : ZMod 7) := by
+                  rw [show -d₂ - -d₃ = -(d₂ - d₃) by ring, Int.neg_ediv_of_dvd hd2,
+                    show -d₁ - -d₃ = -(d₁ - d₃) by ring, Int.neg_ediv_of_dvd hd1]
+                  push_cast
+                  rw [hr3]
+                  ring
+                obtain ⟨lam, hlam, hctrl⟩ := ii2b_control m h hlt (-d₁) (-d₂) (-d₃) e45
+                  hneg1 hneg1' hneg2 hneg_r hEd hEres
+                have hnd1 : ¬ (7 : ℤ) ^ m ∣ lam * d₁ := by
+                  intro hh
+                  have h7 : (7 : ℤ) ∣ lam * d₁ := dvd_trans (dvd_pow_self 7 (by omega : m ≠ 0)) hh
+                  rcases (Nat.prime_iff_prime_int.mp (by decide : Nat.Prime 7)).dvd_mul.mp h7 with h7 | h7
+                  · exact hlam h7
+                  · have : (d₁ : ZMod 7) = 0 := (ZMod.intCast_zmod_eq_zero_iff_dvd d₁ 7).mpr h7
+                    exact one_ne_zero (he₁_res ▸ this)
+                have hnd2 : ¬ (7 : ℤ) ^ m ∣ lam * d₂ := by
+                  intro hh
+                  have h7 : (7 : ℤ) ∣ lam * d₂ := dvd_trans (dvd_pow_self 7 (by omega : m ≠ 0)) hh
+                  rcases (Nat.prime_iff_prime_int.mp (by decide : Nat.Prime 7)).dvd_mul.mp h7 with h7 | h7
+                  · exact hlam h7
+                  · have : (d₂ : ZMod 7) = 0 := (ZMod.intCast_zmod_eq_zero_iff_dvd d₂ 7).mpr h7
+                    exact one_ne_zero (he₂_res ▸ this)
+                have hnd3 : ¬ (7 : ℤ) ^ m ∣ lam * d₃ := by
+                  intro hh
+                  have h7 : (7 : ℤ) ∣ lam * d₃ := dvd_trans (dvd_pow_self 7 (by omega : m ≠ 0)) hh
+                  rcases (Nat.prime_iff_prime_int.mp (by decide : Nat.Prime 7)).dvd_mul.mp h7 with h7 | h7
+                  · exact hlam h7
+                  · have : (d₃ : ZMod 7) = 0 := (ZMod.intCast_zmod_eq_zero_iff_dvd d₃ 7).mpr h7
+                    exact one_ne_zero (he₃_res ▸ this)
+                have hndE : ¬ (7 : ℤ) ^ m ∣ lam * e45 := pow7_ndvd_mul m lam e45 hlam hnegEbase
+                have hreflect : ∀ L : ℕ, (L = 2 ∨ L = 3) →
+                    (∃ a : ZMod 7, fitsInterval
+                      ({qz m (lam * -d₁), qz m (lam * -d₂), qz m (lam * -d₃)} : Finset (ZMod 7)) a L) →
+                    ∃ a : ZMod 7, fitsInterval
+                      ({qz m (lam * d₁), qz m (lam * d₂), qz m (lam * d₃)} : Finset (ZMod 7)) a L := by
+                  intro L hL hfit
+                  obtain ⟨a, hfit⟩ := hfit
+                  have hn1 : qz m (lam * -d₁) = 6 - qz m (lam * d₁) := by
+                    rw [show lam * -d₁ = -(lam * d₁) by ring, qz_neg m (lam * d₁) hnd1]
+                  have hn2 : qz m (lam * -d₂) = 6 - qz m (lam * d₂) := by
+                    rw [show lam * -d₂ = -(lam * d₂) by ring, qz_neg m (lam * d₂) hnd2]
+                  have hn3 : qz m (lam * -d₃) = 6 - qz m (lam * d₃) := by
+                    rw [show lam * -d₃ = -(lam * d₃) by ring, qz_neg m (lam * d₃) hnd3]
+                  rw [hn1, hn2, hn3] at hfit
+                  exact reflect_fit_63 _ _ _ a L hL hfit
+                by_cases hsmall : ∃ a : ZMod 7, fitsInterval
+                    ({qz m (lam * -d₁), qz m (lam * -d₂), qz m (lam * -d₃)} : Finset (ZMod 7)) a 2
+                · obtain ⟨a, hfit⟩ := hreflect 2 (Or.inl rfl) hsmall
+                  exact close_l5 lam hlam a 2 (by omega) (by omega)
+                    (fit_of_set lam a 2 (by rw [hset_eq lam]; exact hfit)) (fun h => by omega)
+                · have hlarge := hctrl.resolve_left hsmall
+                  obtain ⟨⟨a, hfit⟩, hqE⟩ := hlarge
+                  obtain ⟨a', hfit'⟩ := hreflect 3 (Or.inr rfl) ⟨a, hfit⟩
+                  exact close_l5 lam hlam a' 3 (by omega) (by omega)
+                    (fit_of_set lam a' 3 (by rw [hset_eq lam]; exact hfit'))
+                    (fun _ => hcarve_mem lam hqE)
             · by_cases hνm : ν < m
               · -- (ii.2.a) ν(e₄₅) ≠ h and < m: two-level composition sets q(λ·e₄₅)=6.
                 obtain ⟨lam, hlam, ⟨a, hfit⟩, hqe45⟩ :=
