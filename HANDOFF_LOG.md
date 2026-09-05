@@ -660,5 +660,9 @@ DO NOT REDO: **Do not re-run `verify-jacobi-mlaw-code.py`'s conclusions as suspe
              facts, not 98. Same defect `AUDIT_session_2026_09_01_honesty_flags_v1` already recorded
              in this claim's ancestry (`34/34` → 15 distinct, 19 forced). This is what motivated the
              `shortcut-tester` agent and check 1.
-LEDGER:      UNCOMMITTED: `btc_puzzle_investigation/` untracked by policy decision pending; the
-             `Math Ex` tree itself is a git checkout on `btc-ranked-menu-arc-2026-07-17`.
+LEDGER:      **`426d47b`** — `btc_puzzle_investigation/` committed 2026-09-05 on user instruction:
+             4105 files / 62 MB, `CLAIMS.md` tracked for the first time. ~200 MB of regenerable
+             caches `.gitignore`d (15 files; `git add -f` to include). NOT pushed — no instruction.
+             Corrected on the way: this folder's "largest untracked file is 1.6 MB, safe on size"
+             flag was false (460 MB, 54 MB largest), and my own two predecessors' "repo not a git
+             checkout at this path" was false — it is a checkout; files were never added.

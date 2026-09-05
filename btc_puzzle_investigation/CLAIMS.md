@@ -140,13 +140,18 @@ carried through v17 with zero re-claims — verified by `AUDIT_v12_to_v17_loss_a
   823 23h → **1051 55h**; the v2 job (p=1303) has run **37h+ with a 0-byte log**. Weeks of compute for
   a **1-bit** question that M39 answers in O(1). **Recommend killing it**; test PR1–PR3 by the λ route.
   (Not killed — another session's job.)
-- **⚠ NO VERSION HISTORY.** 2222 files in this folder are untracked in git, including 17 of the 18
-  masters and all 4 addenda. The repo's own `.gitignore` says source is tracked; in practice almost
-  nothing is. **Until this is fixed, "edit in place" has no undo** — rule 1 above depends on git
-  actually running. Nothing is ignored by config; the files were simply never added. Largest
-  untracked file is 1.6 MB, so a full add is safe on size. *Not staged automatically: several agent
-  sessions write this folder concurrently, and a blanket `git add -A` would snapshot another
-  session's half-written work.*
+- **✅ VERSION HISTORY RESTORED 2026-09-05** — commit `426d47b`, 4105 files / 62 MB, on branch
+  `btc-ranked-menu-arc-2026-07-17`. This file is now tracked; rule 1's "git carries the history" is
+  true for the first time and "edit in place" has an undo.
+  **Two corrections to what this flag used to say.** (i) It claimed the *"largest untracked file is
+  1.6 MB, so a full add is safe on size"* — **false**: the folder is 460 MB, the largest file is
+  54 MB, and 15 files hold ~200 MB. Those 15 are regenerable caches and are now `.gitignore`d
+  (`constructed_keys_*`, `_angcache_*`, `_decomp_cache_*`, `p*_feats.npz`); `git add -f` to include
+  them. (ii) Two handoff entries recorded the cause as *"repo not a git checkout at this path"* —
+  also false; it is a checkout, the files were never added.
+  The concurrency caution stands and was checked before staging (no other session had written in the
+  preceding 10 minutes): **a blanket `git add -A` can still snapshot another session's half-written
+  work**, so check before the next one.
 - **✅ OPEN-REPRO PACKAGE BUILT (2026-09-02):** **`~/Desktop/odd-order-frobenius-identity/`** (moved OUT of `Math Ex` 2026-09-02 — see below)
   — 1001 lines, self-contained, **zero dependency on this folder**. `common.py` + `identity.py`
   (the theorem, all `ψ≠1` at once via one integer-vector test) + `pencil.py` (the lemma) +
