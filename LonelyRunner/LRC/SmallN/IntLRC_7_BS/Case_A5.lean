@@ -242,6 +242,22 @@ private theorem case65_window_choice (a₁ a₄ : ZMod 7) :
   revert a₁ a₄
   decide
 
+/-- **BS (14), first disjunct** (L700): `ℓ(A₁) ≤ 3` and `ℓ(A₄) ≤ 3`. Holds for
+ARBITRARY window starts `a₁, a₄` — stronger than BS, which normalizes `A₁` to
+`q(A₁) = {1,2,3}` first, so the normalization step is not needed downstream. -/
+private theorem case65_window_33 (a₁ a₄ : ZMod 7) :
+    ∃ k : ZMod 7, intervalAvoids a₁ 3 1 k ∧ intervalAvoids a₄ 3 4 k := by
+  revert a₁ a₄; decide
+
+/-- **BS (14), second disjunct** (L700): `ℓ(A₁) ≤ 4` and `ℓ(A₄) ≤ 2`. Again for
+arbitrary window starts, generalizing `lemma6_402` (which pins `a₁ = 1`).
+
+`ℓ₁ = 5` admits NO good multiplier for any `ℓ₄ ≥ 1`, so `ℓ(A₁) ≤ 4` is forced;
+the full feasibility map is in `docs/n7_bs/AUTOMATION_v2.md` §6. -/
+private theorem case65_window_42 (a₁ a₄ : ZMod 7) :
+    ∃ k : ZMod 7, intervalAvoids a₁ 4 1 k ∧ intervalAvoids a₄ 2 4 k := by
+  revert a₁ a₄; decide
+
 private theorem case66_window_choice (a₁ a₂ a₄ : ZMod 7) :
     ∃ k : ZMod 7,
       intervalAvoids a₁ 2 1 k ∧ intervalAvoids a₂ 2 2 k ∧
