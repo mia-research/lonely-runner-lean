@@ -3169,6 +3169,350 @@ private theorem case_64 (hm : 2 ≤ m)
             (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd1)
             (dvd_trans (pow_dvd_pow 7 (show m + 1 ≤ h by omega)) hd2)
 
+/-! ### §6.5 front-half toolkit (BS L698–731)
+
+BS (14) asks, up to a multiplier, for `ℓ(A₁) ≤ 3 ∧ ℓ(A₄) ≤ 3` or
+`ℓ(A₁) ≤ 4 ∧ ℓ(A₄) ≤ 2`; those two disjuncts are `case65_window_33` /
+`case65_window_42` above. The lemmas here are the "compress, then double or
+triple" engine of BS's branch `(i) or (ii.1) with h < m` (L706–709), restated so
+that no real-metric (`|e|_N ≥ 5N/14`) reasoning is needed. The hypothesis
+replacing BS's metric statement is that all three `A₁` points sit AHEAD of one
+common apex by at most `7^m` — which is exactly what a two-target `Λ`-retarget
+(`qz_retarget_two` with targets `0,0`) delivers. -/
+
+/-- Adding a nonnegative `s ≤ c·7^m` raises the arc index by some `j ≤ c`:
+`q(B + s) = q(B) + j`. (Euclidean: `B % 7^m + s < (c+1)·7^m`.) -/
+private theorem qz_add_small (m : ℕ) (B s : ℤ) (c : ℕ) (hs0 : 0 ≤ s)
+    (hs : s ≤ (c : ℤ) * (7 : ℤ) ^ m) :
+    ∃ j : ℕ, j ≤ c ∧ qz m (B + s) = qz m B + (j : ZMod 7) := by
+  have hP : (0 : ℤ) < (7 : ℤ) ^ m := by positivity
+  have hR0 : 0 ≤ B % (7 : ℤ) ^ m := Int.emod_nonneg B (ne_of_gt hP)
+  have hRP : B % (7 : ℤ) ^ m < (7 : ℤ) ^ m := Int.emod_lt_of_pos B hP
+  have hBd : (7 : ℤ) ^ m * (B / (7 : ℤ) ^ m) + B % (7 : ℤ) ^ m = B := Int.mul_ediv_add_emod B _
+  have hdiv : (B + s) / (7 : ℤ) ^ m
+      = B / (7 : ℤ) ^ m + (B % (7 : ℤ) ^ m + s) / (7 : ℤ) ^ m := by
+    rw [show B + s = (B % (7 : ℤ) ^ m + s) + (7 : ℤ) ^ m * (B / (7 : ℤ) ^ m) by omega,
+      Int.add_mul_ediv_left _ _ (ne_of_gt hP)]
+    ring
+  have hj0 : 0 ≤ (B % (7 : ℤ) ^ m + s) / (7 : ℤ) ^ m := Int.ediv_nonneg (by omega) (le_of_lt hP)
+  have hjc : (B % (7 : ℤ) ^ m + s) / (7 : ℤ) ^ m ≤ (c : ℤ) := by
+    have h1 : (B % (7 : ℤ) ^ m + s) / (7 : ℤ) ^ m < (c : ℤ) + 1 := by
+      rw [Int.ediv_lt_iff_lt_mul hP]; nlinarith
+    omega
+  refine ⟨((B % (7 : ℤ) ^ m + s) / (7 : ℤ) ^ m).toNat, by omega, ?_⟩
+  simp only [qz, hdiv]
+  rw [← Int.cast_natCast, Int.toNat_of_nonneg hj0]
+  push_cast; ring
+
+/-- `7^{m+1}`-multiples are invisible to `q` (they shift the quotient by `7·w`). -/
+private theorem qz_add_high (m : ℕ) (B w : ℤ) :
+    qz m (B + (7 : ℤ) ^ (m + 1) * w) = qz m B := by
+  have hP : ((7 : ℤ) ^ m) ≠ 0 := by positivity
+  simp only [qz]
+  rw [show B + (7 : ℤ) ^ (m + 1) * w = B + (7 : ℤ) ^ m * (7 * w) by ring, mul_comm ((7 : ℤ) ^ m),
+    Int.add_mul_ediv_right _ _ hP]
+  push_cast
+  rw [seven_eq_zero_z7]; ring
+
+/-- **Ahead-shift.** If `x ≡ ρ (mod 7^{m+1})` with `0 ≤ ρ ≤ 7^m` (BS: `x` sits ahead
+of the origin by at most `N/7`), then multiplying by `c` moves the arc index up by
+at most `c`: `q(B + c·x) = q(B) + j`, `j ≤ c`. This is the whole content of BS's
+`ℓ(2·A₁) ≤ 3` / `ℓ(3·A₁) ≤ 4` (L707–709), with no real-metric argument. -/
+private theorem qz_ahead_shift (m : ℕ) (B x ρ : ℤ) (c : ℕ)
+    (hρ0 : 0 ≤ ρ) (hρP : ρ ≤ (7 : ℤ) ^ m) (hdvd : (7 : ℤ) ^ (m + 1) ∣ (x - ρ)) :
+    ∃ j : ℕ, j ≤ c ∧ qz m (B + (c : ℤ) * x) = qz m B + (j : ZMod 7) := by
+  obtain ⟨w, hw⟩ := hdvd
+  obtain ⟨j, hj, hje⟩ := qz_add_small m B ((c : ℤ) * ρ) c (by positivity)
+    (mul_le_mul_of_nonneg_left hρP (by positivity))
+  refine ⟨j, hj, ?_⟩
+  rw [show B + (c : ℤ) * x = (B + (c : ℤ) * ρ) + (7 : ℤ) ^ (m + 1) * ((c : ℤ) * w) by
+    have hx : x = ρ + (7 : ℤ) ^ (m + 1) * w := by omega
+    rw [hx]; ring, qz_add_high, hje]
+
+/-- **Doubling and tripling carries with the one-sided links.** `q(2x) = 2q(x)+ε₂`,
+`q(3x) = 3q(x)+ε₃`, and `ε₂ = 0 ⇒ ε₃ ≤ 1`, `ε₂ = 1 ⇒ ε₃ ≥ 1` (from `2ρ < 7^m ⇒
+3ρ < 2·7^m` and `2ρ ≥ 7^m ⇒ 3ρ ≥ 7^m` on the shared low part `ρ = x % 7^m`).
+These links are what make BS's `5N/14` threshold unnecessary. -/
+private theorem qz_23_carry (m : ℕ) (x : ℤ) :
+    ∃ e2 e3 : ℕ, e2 ≤ 1 ∧ e3 ≤ 2 ∧
+      qz m (2 * x) = 2 * qz m x + (e2 : ZMod 7) ∧
+      qz m (3 * x) = 3 * qz m x + (e3 : ZMod 7) ∧
+      (e2 = 0 → e3 ≤ 1) ∧ (e2 = 1 → 1 ≤ e3) := by
+  have hP : (0 : ℤ) < (7 : ℤ) ^ m := by positivity
+  set R : ℤ := x % (7 : ℤ) ^ m with hRdef
+  have hR0 : 0 ≤ R := Int.emod_nonneg x (ne_of_gt hP)
+  have hRP : R < (7 : ℤ) ^ m := Int.emod_lt_of_pos x hP
+  have hBd : (7 : ℤ) ^ m * (x / (7 : ℤ) ^ m) + R = x := Int.mul_ediv_add_emod x _
+  have h2 : (2 * x) / (7 : ℤ) ^ m = 2 * (x / (7 : ℤ) ^ m) + (2 * R) / (7 : ℤ) ^ m := by
+    rw [show 2 * x = 2 * R + (7 : ℤ) ^ m * (2 * (x / (7 : ℤ) ^ m)) by linear_combination -2 * hBd,
+      Int.add_mul_ediv_left _ _ (ne_of_gt hP)]; ring
+  have h3 : (3 * x) / (7 : ℤ) ^ m = 3 * (x / (7 : ℤ) ^ m) + (3 * R) / (7 : ℤ) ^ m := by
+    rw [show 3 * x = 3 * R + (7 : ℤ) ^ m * (3 * (x / (7 : ℤ) ^ m)) by linear_combination -3 * hBd,
+      Int.add_mul_ediv_left _ _ (ne_of_gt hP)]; ring
+  have he20 : 0 ≤ (2 * R) / (7 : ℤ) ^ m := Int.ediv_nonneg (by omega) (le_of_lt hP)
+  have he21 : (2 * R) / (7 : ℤ) ^ m ≤ 1 := by
+    have : (2 * R) / (7 : ℤ) ^ m < 2 := by rw [Int.ediv_lt_iff_lt_mul hP]; omega
+    omega
+  have he30 : 0 ≤ (3 * R) / (7 : ℤ) ^ m := Int.ediv_nonneg (by omega) (le_of_lt hP)
+  have he32 : (3 * R) / (7 : ℤ) ^ m ≤ 2 := by
+    have : (3 * R) / (7 : ℤ) ^ m < 3 := by rw [Int.ediv_lt_iff_lt_mul hP]; omega
+    omega
+  refine ⟨((2 * R) / (7 : ℤ) ^ m).toNat, ((3 * R) / (7 : ℤ) ^ m).toNat, by omega, by omega,
+    ?_, ?_, ?_, ?_⟩
+  · simp only [qz, h2]
+    rw [← Int.cast_natCast, Int.toNat_of_nonneg he20]; push_cast; ring
+  · simp only [qz, h3]
+    rw [← Int.cast_natCast, Int.toNat_of_nonneg he30]; push_cast; ring
+  · intro h
+    have hlt : 2 * R < (7 : ℤ) ^ m := by
+      by_contra hc
+      have : 1 ≤ (2 * R) / (7 : ℤ) ^ m := by rw [Int.le_ediv_iff_mul_le hP]; omega
+      omega
+    have : (3 * R) / (7 : ℤ) ^ m < 2 := by rw [Int.ediv_lt_iff_lt_mul hP]; omega
+    omega
+  · intro h
+    have hge : 1 ≤ (2 * R) / (7 : ℤ) ^ m := by omega
+    rw [Int.le_ediv_iff_mul_le hP] at hge
+    have : 1 ≤ (3 * R) / (7 : ℤ) ^ m := by rw [Int.le_ediv_iff_mul_le hP]; omega
+    omega
+
+/-- Two `ZMod 7` points at circular distance `≤ 2` fit a common length-3 window. -/
+private theorem pair_fits3 (α β : ZMod 7) (h : β - α ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, (∃ j : Fin 3, α = a + (j.val : ZMod 7)) ∧
+      (∃ j : Fin 3, β = a + (j.val : ZMod 7)) := by
+  revert h; revert α β; decide
+
+/-- Two `ZMod 7` points at circular distance `≤ 1` fit a common length-2 window. -/
+private theorem pair_fits2 (α β : ZMod 7) (h : β - α ∈ ({0, 1, 6} : Finset (ZMod 7))) :
+    ∃ a : ZMod 7, (∃ j : Fin 2, α = a + (j.val : ZMod 7)) ∧
+      (∃ j : Fin 2, β = a + (j.val : ZMod 7)) := by
+  revert h; revert α β; decide
+
+/-- `{0,1,5,6}` and its `+1` translate both sit inside `{0,1,2,5,6}` (the `ℓ₄ ≤ 3`
+band): one carry cannot push a distance-`≤1` `q` value out of the good band. -/
+private theorem shift_0156 (D : ZMod 7) (h : D ∈ ({0, 1, 5, 6} : Finset (ZMod 7))) :
+    D ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)) ∧
+      D + 1 ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)) := by
+  revert h; revert D; decide
+
+/-- The complement of `{0,1,5,6}` in `ZMod 7` (BS's bad band `q(e₄₅) ∈ {2,3,4}`). -/
+private theorem z7_not_0156 (D : ZMod 7) (h : D ∉ ({0, 1, 5, 6} : Finset (ZMod 7))) :
+    D = 2 ∨ D = 3 ∨ D = 4 := by
+  revert h; revert D; decide
+
+/-- `x` sits AHEAD of the origin by at most `N/7`: `x ≡ ρ (mod 7^{m+1})` with
+`0 ≤ ρ ≤ 7^m`. This is BS's `|x|_N ≤ N/7` in a form that only mentions `ediv`. -/
+private def AheadArc (m : ℕ) (x : ℤ) : Prop :=
+  ∃ ρ : ℤ, 0 ≤ ρ ∧ ρ ≤ (7 : ℤ) ^ m ∧ (7 : ℤ) ^ (m + 1) ∣ (x - ρ)
+
+/-- `q(x) = 0` (BS's `Λ_h`-retarget target) gives `AheadArc`, with `ρ = x % 7^m`. -/
+private theorem aheadArc_of_qz_zero (m : ℕ) (x : ℤ) (h : qz m x = 0) : AheadArc m x := by
+  have hP : (0 : ℤ) < (7 : ℤ) ^ m := by positivity
+  refine ⟨x % (7 : ℤ) ^ m, Int.emod_nonneg x (ne_of_gt hP),
+    le_of_lt (Int.emod_lt_of_pos x hP), ?_⟩
+  have h7 : (7 : ℤ) ∣ x / (7 : ℤ) ^ m := by
+    have hz : ((x / (7 : ℤ) ^ m : ℤ) : ZMod 7) = 0 := h
+    exact_mod_cast (ZMod.intCast_zmod_eq_zero_iff_dvd _ 7).mp hz
+  obtain ⟨k, hk⟩ := h7
+  have hd := Int.mul_ediv_add_emod x ((7 : ℤ) ^ m)
+  exact ⟨k, by rw [hk] at hd; linear_combination -hd⟩
+
+/-- `7^m ∣ x` with `q(x) = 1` (the `Λ_m` retarget target) gives `AheadArc`, `ρ = 7^m`. -/
+private theorem aheadArc_of_top_one (m : ℕ) (x : ℤ) (hd : (7 : ℤ) ^ m ∣ x)
+    (h : qz m x = 1) : AheadArc m x := by
+  obtain ⟨Q, hQ⟩ := hd
+  have hdivQ : x / (7 : ℤ) ^ m = Q := by
+    rw [hQ]; exact Int.mul_ediv_cancel_left Q (by positivity)
+  have hq : ((Q : ℤ) : ZMod 7) = 1 := by rw [← hdivQ]; exact h
+  have h7 : (7 : ℤ) ∣ (Q - 1) := by
+    have hz : ((Q - 1 : ℤ) : ZMod 7) = 0 := by push_cast [hq]; ring
+    exact_mod_cast (ZMod.intCast_zmod_eq_zero_iff_dvd _ 7).mp hz
+  obtain ⟨k, hk⟩ := h7
+  exact ⟨(7 : ℤ) ^ m, by positivity, le_refl _, ⟨k, by rw [hQ]; linear_combination (7 : ℤ) ^ m * hk⟩⟩
+
+/-- `ν(x) > m` gives `AheadArc` with `ρ = 0` (all such arcs coincide). -/
+private theorem aheadArc_of_high (m : ℕ) (x : ℤ) (h : (7 : ℤ) ^ (m + 1) ∣ x) :
+    AheadArc m x :=
+  ⟨0, le_refl _, by positivity, by simpa using h⟩
+
+/-- **BS's "Lemma 9(i) ⟹ ℓ(A₁) ≤ 2" in the ahead form.** Two elements with DISTINCT
+`7`-adic valuations admit a unit multiplier putting BOTH ahead of the origin by at
+most `N/7`. Dispatches over the position of the levels relative to `m`: above `m`
+nothing is needed, at `m` the target is `q = 1` (`Λ_m`, `0` unreachable), below `m`
+the target is `q = 0`, and mixed pairs use `qz_retarget_two(_top)`. -/
+private theorem ahead_pair (m : ℕ) (hm : 0 < m) (X Y : ℤ) (h₁ h₂ : ℕ) (hne : h₁ ≠ h₂)
+    (hX : (7 : ℤ) ^ h₁ ∣ X) (hX' : ¬ (7 : ℤ) ^ (h₁ + 1) ∣ X)
+    (hY : (7 : ℤ) ^ h₂ ∣ Y) (hY' : ¬ (7 : ℤ) ^ (h₂ + 1) ∣ Y) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ AheadArc m (lam * X) ∧ AheadArc m (lam * Y) := by
+  -- single-element retarget, used when the partner is already above level `m`
+  have single : ∀ W : ℤ, ∀ h : ℕ, h ≤ m → (7 : ℤ) ^ h ∣ W → ¬ (7 : ℤ) ^ (h + 1) ∣ W →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ AheadArc m (lam * W) := by
+    intro W h hhm hW hW'
+    rcases eq_or_lt_of_le hhm with rfl | hlt
+    · obtain ⟨j, hju, hjW⟩ := qz_retarget_top _ W hW hW' 1 (by decide)
+      exact ⟨j, hju, aheadArc_of_top_one _ _ (Dvd.dvd.mul_left hW j) hjW⟩
+    · obtain ⟨k, hqk, hku⟩ := qz_retarget m h hlt W hW hW' 0
+      exact ⟨1 + k * 7 ^ (m - h), hku, aheadArc_of_qz_zero m _ hqk⟩
+  by_cases hh1 : h₁ ≤ m
+  · by_cases hh2 : h₂ ≤ m
+    · rcases lt_trichotomy h₁ h₂ with hlt | heq | hgt
+      · rcases eq_or_lt_of_le hh2 with rfl | h2lt
+        · obtain ⟨lam, hu, hqY, hqX⟩ :=
+            qz_retarget_two_top _ h₁ (by omega) Y X hY hY' hX hX' 1 0 (by decide)
+          exact ⟨lam, hu, aheadArc_of_qz_zero _ _ hqX,
+            aheadArc_of_top_one _ _ (Dvd.dvd.mul_left hY lam) hqY⟩
+        · obtain ⟨lam, hu, hqY, hqX⟩ :=
+            qz_retarget_two m h₂ h₁ h2lt hlt Y X hY hY' hX hX' 0 0
+          exact ⟨lam, hu, aheadArc_of_qz_zero m _ hqX, aheadArc_of_qz_zero m _ hqY⟩
+      · exact absurd heq hne
+      · rcases eq_or_lt_of_le hh1 with rfl | h1lt
+        · obtain ⟨lam, hu, hqX, hqY⟩ :=
+            qz_retarget_two_top _ h₂ (by omega) X Y hX hX' hY hY' 1 0 (by decide)
+          exact ⟨lam, hu, aheadArc_of_top_one _ _ (Dvd.dvd.mul_left hX lam) hqX,
+            aheadArc_of_qz_zero _ _ hqY⟩
+        · obtain ⟨lam, hu, hqX, hqY⟩ :=
+            qz_retarget_two m h₁ h₂ h1lt hgt X Y hX hX' hY hY' 0 0
+          exact ⟨lam, hu, aheadArc_of_qz_zero m _ hqX, aheadArc_of_qz_zero m _ hqY⟩
+    · obtain ⟨lam, hu, hA⟩ := single X h₁ hh1 hX hX'
+      exact ⟨lam, hu, hA, aheadArc_of_high m _
+        (Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hY) lam)⟩
+  · by_cases hh2 : h₂ ≤ m
+    · obtain ⟨lam, hu, hA⟩ := single Y h₂ hh2 hY hY'
+      exact ⟨lam, hu, aheadArc_of_high m _
+        (Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hX) lam), hA⟩
+    · exact ⟨1, by norm_num,
+        aheadArc_of_high m _ (Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hX) 1),
+        aheadArc_of_high m _ (Dvd.dvd.mul_left (dvd_trans (pow_dvd_pow 7 (by omega)) hY) 1)⟩
+
+set_option maxHeartbeats 800000 in
+/-- **BS §6.5, branch `(i) or (ii.1) with h < m` endgame (L706–709).** Given a unit
+`lam₀` under which the three `A₁` points sit ahead of a common apex `a` by at most
+`7^m`, the multiplier `c·lam₀` for a suitable `c ∈ {1,2,3}` realises one of the two
+disjuncts of BS (14) and hence a `Λ₀` shift `k` avoiding `{0,6}` on all five points.
+
+Dispatch on `D = q(lam₀·(z₄−z₅))`: `D ∈ {0,1,5,6}` needs no scaling; `D = 3`, or
+`D = 2` with doubling carry `1`, or `D = 4` with doubling carry `0`, close after
+doubling (`ℓ₁ ≤ 3, ℓ₄ ≤ 3`); the two survivors `D = 2, ε₂ = 0` and `D = 4, ε₂ = 1`
+close after tripling (`ℓ₁ ≤ 4, ℓ₄ ≤ 2`), using the carry links of `qz_23_carry`. -/
+private theorem case65_doubling_close (m : ℕ) (b : Fin 3 → ℤ) (a z₄ z₅ : ℤ)
+    (lam₀ : ℤ) (hlam₀ : ¬ (7 : ℤ) ∣ lam₀)
+    (hahead : ∀ i : Fin 3, AheadArc m (lam₀ * (b i - a))) :
+    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ k : ZMod 7,
+      (∀ i : Fin 3, qz m (lam * b i) + k ∉ ({0, 6} : Finset (ZMod 7))) ∧
+      qz m (lam * z₄) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) ∧
+      qz m (lam * z₅) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) := by
+  classical
+  have hp7 : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
+  set e : ℤ := lam₀ * (z₄ - z₅) with he_def
+  -- `c·lam₀` is a unit for `c ∈ {1,2,3}`.
+  have hcu : ∀ c : ℕ, 0 < c → c ≤ 3 → ¬ (7 : ℤ) ∣ ((c : ℤ) * lam₀) := by
+    intro c hc0 hc3 hdvd
+    rcases hp7.dvd_mul.mp hdvd with h | h
+    · interval_cases c <;> omega
+    · exact hlam₀ h
+  -- `A₁` sits in a window of length `c+1` at `q(c·lam₀·a)`.
+  have hA1 : ∀ c : ℕ, ∀ i : Fin 3, ∃ j : ℕ, j ≤ c ∧
+      qz m (((c : ℤ) * lam₀) * b i) = qz m ((c : ℤ) * (lam₀ * a)) + (j : ZMod 7) := by
+    intro c i
+    obtain ⟨ρ, hρ0, hρP, hdvd⟩ := hahead i
+    obtain ⟨j, hj, hje⟩ :=
+      qz_ahead_shift m ((c : ℤ) * (lam₀ * a)) (lam₀ * (b i - a)) ρ c hρ0 hρP hdvd
+    refine ⟨j, hj, ?_⟩
+    rw [show ((c : ℤ) * lam₀) * b i = (c : ℤ) * (lam₀ * a) + (c : ℤ) * (lam₀ * (b i - a)) by ring]
+    exact hje
+  -- The `A₄` arc difference is `q(c·e)` up to one carry.
+  have hA4 : ∀ c : ℕ,
+      qz m (((c : ℤ) * lam₀) * z₄) - qz m (((c : ℤ) * lam₀) * z₅) = qz m ((c : ℤ) * e) ∨
+      qz m (((c : ℤ) * lam₀) * z₄) - qz m (((c : ℤ) * lam₀) * z₅) = qz m ((c : ℤ) * e) + 1 := by
+    intro c
+    have hsplit : ((c : ℤ) * lam₀) * z₄ = ((c : ℤ) * lam₀) * z₅ + (c : ℤ) * e := by
+      rw [he_def]; ring
+    rcases qz_add_carry m (((c : ℤ) * lam₀) * z₅) ((c : ℤ) * e) with h | h
+    · left; rw [hsplit, h]; ring
+    · right; rw [hsplit, h]; ring
+  -- Closer with `(ℓ₁,ℓ₄) = (3,3)`.
+  have finish33 : ∀ c : ℕ, 0 < c → c ≤ 2 →
+      qz m (((c : ℤ) * lam₀) * z₄) - qz m (((c : ℤ) * lam₀) * z₅)
+        ∈ ({0, 1, 2, 5, 6} : Finset (ZMod 7)) →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ k : ZMod 7,
+        (∀ i : Fin 3, qz m (lam * b i) + k ∉ ({0, 6} : Finset (ZMod 7))) ∧
+        qz m (lam * z₄) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        qz m (lam * z₅) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) := by
+    intro c hc0 hc2 hΔ
+    obtain ⟨a₄, ⟨j₅, hj₅⟩, ⟨j₄, hj₄⟩⟩ := pair_fits3 _ _ hΔ
+    obtain ⟨k, hk1, hk4⟩ := case65_window_33 (qz m ((c : ℤ) * (lam₀ * a))) a₄
+    refine ⟨(c : ℤ) * lam₀, hcu c hc0 (by omega), k, fun i => ?_, ?_, ?_⟩
+    · obtain ⟨j, hj, hje⟩ := hA1 c i
+      rw [hje]
+      have := hk1 ⟨j, by omega⟩
+      simpa [intervalAvoids, one_mul] using this
+    · rw [hj₄]; exact hk4 j₄
+    · rw [hj₅]; exact hk4 j₅
+  -- Closer with `(ℓ₁,ℓ₄) = (4,2)`.
+  have finish42 : ∀ c : ℕ, 0 < c → c ≤ 3 →
+      qz m (((c : ℤ) * lam₀) * z₄) - qz m (((c : ℤ) * lam₀) * z₅)
+        ∈ ({0, 1, 6} : Finset (ZMod 7)) →
+      ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∃ k : ZMod 7,
+        (∀ i : Fin 3, qz m (lam * b i) + k ∉ ({0, 6} : Finset (ZMod 7))) ∧
+        qz m (lam * z₄) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) ∧
+        qz m (lam * z₅) + 4 * k ∉ ({0, 6} : Finset (ZMod 7)) := by
+    intro c hc0 hc3 hΔ
+    obtain ⟨a₄, ⟨j₅, hj₅⟩, ⟨j₄, hj₄⟩⟩ := pair_fits2 _ _ hΔ
+    obtain ⟨k, hk1, hk4⟩ := case65_window_42 (qz m ((c : ℤ) * (lam₀ * a))) a₄
+    refine ⟨(c : ℤ) * lam₀, hcu c hc0 hc3, k, fun i => ?_, ?_, ?_⟩
+    · obtain ⟨j, hj, hje⟩ := hA1 c i
+      rw [hje]
+      have := hk1 ⟨j, by omega⟩
+      simpa [intervalAvoids, one_mul] using this
+    · rw [hj₄]; exact hk4 j₄
+    · rw [hj₅]; exact hk4 j₅
+  -- Dispatch on `D = q(e)`.
+  obtain ⟨e2, e3, he2, he3, hq2, hq3, hlink0, hlink1⟩ := qz_23_carry m e
+  by_cases hD : qz m e ∈ ({0, 1, 5, 6} : Finset (ZMod 7))
+  · obtain ⟨hgood, hgood'⟩ := shift_0156 _ hD
+    refine finish33 1 (by omega) (by omega) ?_
+    have h1 : ((1 : ℕ) : ℤ) * e = e := by push_cast; ring
+    rcases hA4 1 with h | h
+    · rw [h, h1]; exact hgood
+    · rw [h, h1]; exact hgood'
+  · rcases z7_not_0156 _ hD with hD3 | hD3 | hD3
+    · -- D = 2
+      rcases Nat.lt_or_ge e2 1 with he | he
+      · -- ε₂ = 0 : triple
+        have he0 : e2 = 0 := by omega
+        have he3' : e3 ≤ 1 := hlink0 he0
+        refine finish42 3 (by omega) (by omega) ?_
+        have h3 : ((3 : ℕ) : ℤ) * e = 3 * e := by push_cast; ring
+        have hval : qz m (3 * e) = 6 + (e3 : ZMod 7) := by rw [hq3, hD3]; ring
+        rcases hA4 3 with h | h <;> rw [h, h3, hval] <;> interval_cases e3 <;> decide
+      · -- ε₂ = 1 : double
+        have he1 : e2 = 1 := by omega
+        refine finish33 2 (by omega) (by omega) ?_
+        have h2 : ((2 : ℕ) : ℤ) * e = 2 * e := by push_cast; ring
+        have hval : qz m (2 * e) = 5 := by rw [hq2, hD3, he1]; decide
+        rcases hA4 2 with h | h <;> rw [h, h2, hval] <;> decide
+    · -- D = 3 : double
+      refine finish33 2 (by omega) (by omega) ?_
+      have h2 : ((2 : ℕ) : ℤ) * e = 2 * e := by push_cast; ring
+      have hval : qz m (2 * e) = 6 + (e2 : ZMod 7) := by rw [hq2, hD3]; ring
+      rcases hA4 2 with h | h <;> rw [h, h2, hval] <;> interval_cases e2 <;> decide
+    · -- D = 4
+      rcases Nat.lt_or_ge e2 1 with he | he
+      · -- ε₂ = 0 : double
+        have he0 : e2 = 0 := by omega
+        refine finish33 2 (by omega) (by omega) ?_
+        have h2 : ((2 : ℕ) : ℤ) * e = 2 * e := by push_cast; ring
+        have hval : qz m (2 * e) = 1 := by rw [hq2, hD3, he0]; decide
+        rcases hA4 2 with h | h <;> rw [h, h2, hval] <;> decide
+      · -- ε₂ = 1 : triple
+        have he1 : e2 = 1 := by omega
+        have he3' : 1 ≤ e3 := hlink1 he1
+        refine finish42 3 (by omega) (by omega) ?_
+        have h3 : ((3 : ℕ) : ℤ) * e = 3 * e := by push_cast; ring
+        have hval : qz m (3 * e) = 5 + (e3 : ZMod 7) := by
+          rw [hq3, hD3, show (3 : ZMod 7) * 4 = 5 from by decide]
+        rcases hA4 3 with h | h <;> rw [h, h3, hval] <;> interval_cases e3 <;> decide
+
 /-- **Case 6.5 `(3,0,2)`** (BS L698). `|A₁|=3, |A₄|=2`. Labeling via Lemma 11;
 `lemma6_402` endpoint (symmetric to 6.4). -/
 private theorem case_65 (hm : 2 ≤ m)
