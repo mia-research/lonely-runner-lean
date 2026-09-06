@@ -25,16 +25,27 @@ open Finset
 
 namespace IntLRC7BS
 
-/-- **Discrete Barajas–Serra core, residue-band form (n = 7).** See `Main` for the
-statement context. Proved by the §4 dispatch into `corollary3` (easy branch) and
-the §5/§6 case analysis (hard branch). Fully wired; the only open leaf in the
-import closure is `five_avoid` (the §6 |A|=5 case analysis, `Case_A5.lean`). -/
+/-- Repackage a power-of-7 band as a band at the general modulus `7·P`. -/
+private theorem band_at_pow (m : ℕ) (x : ℤ)
+    (h : (7 ^ m : ℤ) ≤ x % (7 ^ (m + 1) : ℤ) ∧ x % (7 ^ (m + 1) : ℤ) ≤ 6 * 7 ^ m) :
+    (((7 ^ m : ℕ) : ℤ)) ≤ x % (7 * ((7 ^ m : ℕ) : ℤ)) ∧
+      x % (7 * ((7 ^ m : ℕ) : ℤ)) ≤ 6 * ((7 ^ m : ℕ) : ℤ) := by
+  have hz : (7 : ℤ) * ((7 ^ m : ℕ) : ℤ) = (7 ^ (m + 1) : ℤ) := by push_cast; ring
+  have hc : (((7 ^ m : ℕ) : ℤ)) = (7 ^ m : ℤ) := by push_cast; ring
+  rw [hz, hc]; exact h
+
+/-- **Discrete Barajas–Serra core, at a general modulus.**
+
+The modulus is returned as `P` with the band taken mod `7·P`; the power-of-7 case
+is `P = 7^m`. Stating it this way rather than as `∃ m` is what lets BS §7 be
+transcribed: §7 resolves the `|A| = 5, m = 1` case at `N' = 2·49 = 98`, and
+`98 = 7·14` is not a power of 7. See `docs/n7_bs/SECTION7_M1_ANALYSIS_v1.md`. -/
 theorem bs_discrete_q
     (D : Fin 6 → ℕ) (hpos : ∀ i, 0 < D i)
     (hinj : Function.Injective D) (hgcd : Finset.univ.gcd D = 1) :
-    ∃ (m : ℕ) (lam : ℤ), ∀ i,
-      (7 ^ m : ℤ) ≤ (lam * (D i : ℤ)) % (7 ^ (m + 1) : ℤ) ∧
-      (lam * (D i : ℤ)) % (7 ^ (m + 1) : ℤ) ≤ 6 * 7 ^ m := by
+    ∃ (P : ℕ) (lam : ℤ), 0 < P ∧ ∀ i,
+      ((P : ℕ) : ℤ) ≤ (lam * (D i : ℤ)) % (7 * ((P : ℕ) : ℤ)) ∧
+      (lam * (D i : ℤ)) % (7 * ((P : ℕ) : ℤ)) ≤ 6 * ((P : ℕ) : ℤ) := by
   classical
   set m : ℕ := Finset.univ.sup (fun i => padicValNat 7 (D i)) with hm
   set DZ : Finset ℤ := Finset.image (fun i => (D i : ℤ)) Finset.univ with hDZ
@@ -53,8 +64,8 @@ theorem bs_discrete_q
       (DZ.filter (fun d => (7 : ℤ) ^ j ∣ d ∧ ¬ (7 : ℤ) ^ (j + 1) ∣ d)).card ≤ 3
   · -- easy branch: Corollary 3 applies with `i₀ = m`
     obtain ⟨lam, _hlam, hband⟩ := corollary3 m DZ hmax hsmall
-    exact ⟨m, lam, fun i =>
-      hband (D i : ℤ) (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i))⟩
+    exact ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _
+      (hband (D i : ℤ) (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))⟩
   · -- hard branch: some level `j₀ < m` has `≥ 4` elements.
     push_neg at hsmall
     obtain ⟨j₀, hj₀m, hj₀big⟩ := hsmall
@@ -124,7 +135,7 @@ theorem bs_discrete_q
               have : (D (g a) : ℤ) = D (g b) := h; exact_mod_cast this
             exact (S.orderIsoOfFin hScard_eq).injective (Subtype.val_injective (hinj hDgab))
           obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd hpos_d5 hinj_d5
-          refine ⟨m, lam, fun i => ?_⟩
+          refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
           by_cases hi : i ∈ S
           · have ⟨k, hk⟩ : ∃ k : Fin 5, (S.orderIsoOfFin hScard_eq k).val = i := by
               have := (S.orderIsoOfFin hScard_eq).surjective ⟨i, hi⟩
@@ -137,7 +148,7 @@ theorem bs_discrete_q
           have hST : T = S := Finset.eq_of_subset_of_card_le hTS (by rw [hScard_eq, hT4])
           set d4 : Fin 4 → ℤ := fun k => (D (f k) : ℤ)
           obtain ⟨lam, hlam_unit, _, _, hband4⟩ := four_band m hj₀m d4 hf_ndvd
-          refine ⟨m, lam, fun i => ?_⟩
+          refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
           by_cases hi : i ∈ S
           · have hiT : i ∈ T := hST ▸ hi
             have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
@@ -197,7 +208,7 @@ theorem bs_discrete_q
                     Finset.card_erase_of_mem (Finset.mem_univ _)]; simp
           omega
         have hST : T = S := Finset.eq_of_subset_of_card_le hTS (by rw [hScard_eq, hT4])
-        refine ⟨m, lam, fun i => ?_⟩
+        refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
         by_cases hi : i ∈ S
         · have hiT : i ∈ T := hST ▸ hi
           have ⟨k, hk⟩ : ∃ k : Fin 4, (T.orderIsoOfFin hT4 k).val = i := by
@@ -399,7 +410,7 @@ theorem bs_discrete_q
       have hlam_unit : ¬ (7 : ℤ) ∣ lam := by
         exact mt (Prime.dvd_mul (by norm_num : Prime (7 : ℤ)) |>.mp)
           (by simp [lambda0_coprime m hmpos, hlam'_unit])
-      refine ⟨m, lam, fun i => ?_⟩
+      refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
       by_cases h7i : (7 : ℤ) ∣ (D i : ℤ)
       · -- 7 ∣ D i: the (1+k·7^m) factor is inert
         have hinert : (lam * (D i : ℤ)) % (7 : ℤ) ^ (m + 1) =

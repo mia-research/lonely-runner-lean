@@ -1,6 +1,7 @@
 import LonelyRunner.LRC.Defs
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Defs
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Reduction
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.BandGeneral
 
 /-!
 # n = 7 (Barajas–Serra) — assembly + discrete→real bridge
@@ -57,10 +58,10 @@ theorem bs_discrete
     (hinj : Function.Injective D) (hgcd : Finset.univ.gcd D = 1) :
     ∃ (N : ℕ) (lam : ℤ), 0 < N ∧
       ∀ i, (1 : ℝ) / 7 ≤ circDist ((lam * D i : ℝ) / N) := by
-  obtain ⟨m, lam, hq⟩ := bs_discrete_q D hpos hinj hgcd
-  refine ⟨7 ^ (m + 1), lam, by positivity, fun i => ?_⟩
+  obtain ⟨P, lam, hP, hq⟩ := bs_discrete_q D hpos hinj hgcd
+  refine ⟨7 * P, lam, by omega, fun i => ?_⟩
   obtain ⟨hlo, hhi⟩ := hq i
-  have hmain := circDist_ge_of_residue m (lam * (D i : ℤ)) hlo hhi
+  have hmain := circDist_ge_of_band P hP (lam * (D i : ℤ)) hlo hhi
   have hcast : ((lam * (D i : ℤ) : ℤ) : ℝ) = (lam * D i : ℝ) := by push_cast; ring
   rw [hcast] at hmain
   exact hmain
