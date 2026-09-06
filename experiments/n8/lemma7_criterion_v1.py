@@ -12,7 +12,7 @@ which -- because N/(k+1) = p exactly -- is the clean integer condition
 
     (j*v mod N) < p   or   (j*v mod N) > N - p.
 
-A "bad cover" is a k-subset of {1..floor(N/2)} \ pN that covers all of
+A "bad cover" is a k-subset of {1..floor(N/2)} minus multiples of p that covers all of
 {1..floor(N/2)} and satisfies gcd(S u {N}) = 1 for every (k-1)-subset S.
 No bad cover  =>  Lemma 7 applies to (k, p).
 
