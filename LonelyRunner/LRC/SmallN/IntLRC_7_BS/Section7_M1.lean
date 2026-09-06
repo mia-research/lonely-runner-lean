@@ -134,5 +134,31 @@ set_option maxRecDepth 8000000 in
 `N' = 98` reducing to an exceptional 5-set admits a good multiplier. -/
 theorem stage2_clean : bad2 = [] := by rfl
 
+/-! ## Stage 2 over ALL exceptional sets, not only BS's three representatives
+
+`stage2_clean` follows BS and checks only the three published representatives.
+A faithful transcription needs every exceptional 5-set, because an arbitrary `D`
+arrives as some dilate and reducing it to a representative would require a
+separate normalization argument. `bad` already *is* all 63 of them, so quantifying
+over it removes that step entirely.
+-/
+
+/-- All `gcd = 1` configurations over `N' = 98` whose 5-set reduces mod 49 to ANY
+exceptional set, that admit no good multiplier. -/
+def bad2All : List (List Nat) :=
+  (bad.flatMap fun E => (liftsOf E).flatMap fun L => d6vals.map fun d6 => d6 :: L)
+    |>.filter fun D => gcdAll D == 1 && !solvable98 D
+
+set_option maxHeartbeats 4000000 in
+set_option maxRecDepth 8000000 in
+/-- **BS §7 stage 2, over all 63 exceptional sets, kernel-verified.** Every
+`gcd = 1` configuration over `N' = 98` whose 5-set is exceptional mod 49 admits a
+multiplier placing all six elements at circle distance `≥ 1/7`.
+
+This is the form the `m = 1` case actually needs: no dilation-normalization to
+BS's three representatives is required, because the quantification is already
+over every exceptional set. 23802 configurations survive the `gcd = 1` filter. -/
+theorem stage2_all_clean : bad2All = [] := by rfl
+
 end Section7M1
 end IntLRC7BS
