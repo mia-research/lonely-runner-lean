@@ -28,28 +28,39 @@ own text asserts and both of which hold: every bad pair has `ẽ(d₂,d₄) ∈ 
 values are `{2,4}` when `ẽ₂₄ ∈ {4,5}` and `{4,6}` when `ẽ₂₄ ∈ {0,6}`, matching
 BS's two avoidance prescriptions exactly.
 
-## A genuine gap in sub-case (b)
+## RETRACTED: there is no gap in sub-case (b)
 
-BS writes "By Lemma 7 we can assume that `ẽ(d₂,d₄) ∉ {2,4,6}`". Two problems,
-both established by exhaustive check:
+An earlier version of this file claimed a gap here. **That claim was wrong, and
+the error was mine, not the paper's.** It is retracted; the reasoning is kept
+because the table `avoid_66b` below still encodes the mistaken form and must not
+be used.
 
-* `{2,4,6}` is **not sufficient**. Excluding it still leaves `ẽ₂₄ = 0`
-  unresolved. The exact set of `ẽ₂₄` values that fail for some `ẽ₂₅` is
-  `{0,2,4,6}` — see `avoid_66b`, which is stated with that exclusion and is the
-  weakest one that makes the sub-case go through.
-* Neither set is reachable from Lemma 7(i), which requires `ℓ(X) ≤ 4`:
-  `ℓ({2,4,6}) = 5` and `ℓ({0,2,4,6}) = 6`, and **no** interval of length `≤ 4`
-  contains `{0,2,4,6}`. So in the `ν(e₂₄) < m` branch the cited justification
-  does not deliver the exclusion the argument needs.
+The claim was: BS's exclusion `ẽ(d₂,d₄) ∉ {2,4,6}` is insufficient (the true
+failing set being `{0,2,4,6}`) and unreachable from Lemma 7(i), which needs
+`ℓ(X) ≤ 4` while `ℓ({0,2,4,6}) = 6`.
 
-Lemma 7(ii) *does* deliver it when `ν(e₂₄) = m`: for `X = {0,2,4,6}` we have
-`X ∩ (X+1) = {0}`, and `r(e₂₄)` is a leading unit so `r(e₂₄) ≠ 0`, making
-7(ii)'s hypothesis automatic. Sub-case (b) therefore closes as written **only**
-in the `ν(e₂₄) = m` branch; `ν(e₂₄) < m` needs a separate argument not present
-in the paper. BS do note that §6.6 leans on Lemma 7 delicately (§7 opens by
-saying `m > 1` is used "in Lemma 7 and in particular situations in cases 6.3 and
-6.6"), but the `ν(e₂₄) < m` sub-branch of 6.6(b) is not among the situations
-they then address.
+The mistake was treating BS's printed `ẽ(d₂,d₅)` as the `Λ₀`-invariant appearing
+in the fifth arc. Lemma 7 controls `ẽ(d,d')` only when `r(d') = 2·r(d)`. In the
+sub-case (b) frame `r(d₅) = 4 = 2·r(d₄)`, so `d₅`'s ratio-2 partner is `d₄`, not
+`d₂`. Solving the `k`-frame with the correct invariant gives fifth arc
+`2k − ẽ(d₄,d₅)`, and then:
+
+```
+fifth arc as I had it   ẽ(d₂,d₄) − ẽ(d₂,d₅) + k → bad ẽ₂₄ = {0,2,4,6},  ℓ = 6
+fifth arc, corrected    2k − ẽ(d₄,d₅)          → bad ẽ₂₄ = {2,4},      ℓ = 3
+```
+
+`ℓ({2,4}) = 3 ≤ 4`, so Lemma 7(i) applies; and `{2,4} ∩ ({2,4}+1) = ∅`, so
+Lemma 7(ii) applies too. **Sub-case (b) closes at every valuation of `2d₂ − d₄`.
+There is no residual and no gap.**
+
+`avoid_66b` and `avoid_66b_246_insufficient` below are therefore **not used by
+the proof**. `avoid_66b_246_insufficient` remains true as a statement about the
+mistaken arc expression, but it says nothing about Barajas–Serra. The table
+actually used is `avoid_66b_Q` in `Case_A5.lean`.
+
+The sub-case (a) analysis in this file is unaffected: `avoid_66a` reproduces BS's
+list (16) exactly, and the sign correction recorded above stands.
 
 Both tables are stated with explicit `≠` rather than `Finset` membership, so
 kernel `decide` applies directly.
