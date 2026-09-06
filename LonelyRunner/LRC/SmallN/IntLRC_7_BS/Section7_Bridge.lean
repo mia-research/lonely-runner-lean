@@ -293,7 +293,6 @@ form one of the 63 exceptional sets, in which case `P = 14` (`N' = 98`) is used,
 exactly as in BS §7. -/
 theorem m1_six_witness
     (d : Fin 5 → ℤ) (d6 : ℤ)
-    (hpos : ∀ i, 0 < d i)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
     (h6 : (7 : ℤ) ∣ d6)

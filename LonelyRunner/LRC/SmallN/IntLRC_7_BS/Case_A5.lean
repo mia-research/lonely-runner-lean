@@ -96,40 +96,16 @@ private theorem fallback_64_choice (t₄ t₅ : ZMod 7)
       2 * A + δ - c * t₅ ∉ ({0, 6} : Finset (ZMod 7)) := by
   revert h₄ h₅; revert t₄ t₅; decide
 
-/-- **§7 (`m = 1`).** The `|A|=5`, `m=1` case: exhaustive search over `ZMod 49`
-(and `ZMod 98` for the three exceptional dilation classes). BS L786–805.
+/-! **§7 (`m = 1`) is not handled here.** The `|A| = 5, m = 1` case cannot be
+stated in this file's `∃ lam, ¬ 7 ∣ lam ∧ qz 1 (lam·dᵢ) ∉ {0,6}` form: three
+exceptional 5-sets over `ZMod 49` admit no such multiplier, and `d₆` cannot
+rescue them at `N = 49` (a level-1 element only adds a constraint there). BS
+resolve them at `N' = 98`, which is not a power of 7.
 
-**STATEMENT IS FALSE AS WRITTEN — needs redraft.**
-
-BS §7 (L786–805) finds exactly **three** exceptional 5-element sets
-`{1,4,11,39,43}`, `{1,4,18,22,29}`, `{1,4,18,44,46}` (in ZMod 49, up to unit
-dilation) for which *no* unit multiplier works. These are NOT fixable by any unit
-`lam` coprime to 7.
-
-BS resolves these via a JOINT argument with the 6th element `d₆ = 7k` (the
-level-1 element of `D₇(1)` in the full 6-element speed set): lifting to
-`N' = 2*49 = 98`, the only remaining 3 bad `(5-set, d₆)` combinations all have
-`gcd(D) ≥ 2`, which contradicts the LRC normalization `gcd(D) = 1`.
-
-**Required redraft:** this theorem must receive `d₆ : ℤ` (the 6th element at
-level 1, i.e. `7 ∣ d₆ ∧ ¬ 49 ∣ d₆`) and the coprimality constraint
-`¬ ∃ p : ℕ, p.Prime ∧ (∀ i, (p : ℤ) ∣ d i) ∧ (p : ℤ) ∣ d₆` (the full gcd = 1
-condition), OR the m=1 |A|=5 case must be handled jointly at the `bs_discrete_q`
-dispatch level where all 6 elements are simultaneously available.
-
-**Alternative reformulation (most Lean-compatible):** state the joint 6-element
-theorem for m=1 directly: `∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i : Fin 5, qz 1 (lam * d i) ≠ 0 ∧ qz 1 (lam * d i) ≠ 6 ∧ qz 1 (lam * d₆) ≠ 0 ∧ qz 1 (lam * d₆) ≠ 6`
-over `ZMod 98` with the gcd=1 constraint. This is a single computable `decide`
-over a finite search space (968 valid + 3 resolved-by-gcd cases).
-
-See `docs/n7_bs/SECTION6_PLAN.md` for details. -/
-theorem five_avoid_m1 (d : Fin 5 → ℤ)
-    (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
-    (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
-    (hinj : Function.Injective d) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
-      qz 1 (lam * d i) ≠ 0 ∧ qz 1 (lam * d i) ≠ 6 := by
-  sorry
+It is therefore handled jointly with the sixth element, one level up in the §4
+reduction, by `five_band_m1` (`Section7_Wire.lean`) via `m1_six_witness`
+(`Section7_Bridge.lean`). Accordingly `five_avoid` and `five_band` below require
+`2 ≤ m`. See `docs/n7_bs/SECTION7_M1_ANALYSIS_v1.md`. -/
 
 /-- **Relabeling by a unit `{1,2,4}` multiplier composes.** If the `|A|=5`
 conclusion holds for the dilated tuple `lam₀ · d` (with multiplier `lam`), then it
@@ -5460,25 +5436,22 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
 /-- **§6/§7 core (q-avoidance form).** Five integers coprime to 7, already
 normalized to residues `{1,2,4}`, admit a unit multiplier `lam` sending every
 arc index `q(lam·dᵢ)` outside `{0,6}`. This is the entire `|A|=5` case analysis
-(BS §6 for `m ≥ 2`, §7 for `m = 1`). Dispatches to `five_avoid_m1` (§7) and
-`five_compress` (§6); the Λ₀ assembly bridge is `five_lambda0`. -/
-theorem five_avoid (m : ℕ) (hm : 1 ≤ m) (d : Fin 5 → ℤ)
+(BS §6). `m = 1` is §7 and is handled in the §4 reduction instead, jointly with
+the sixth element — see the note above. The Λ₀ assembly bridge is `five_lambda0`. -/
+theorem five_avoid (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
     (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
       qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
-  rcases Nat.lt_or_ge 1 m with hm2 | hm1
-  · exact five_compress m (by omega) d hndvd hres hinj
-  · interval_cases m
-    · exact five_avoid_m1 d hndvd hres hinj
+  exact five_compress m hm d hndvd hres hinj
 
 /-- **Master `|A| = 5` theorem (5-element analogue of `four_band`).** Five integers
 coprime to 7 admit a unit multiplier `lam` placing every residue `(lam·dᵢ)_N` in
 the central band `[7^m, 6·7^m]`. Proved by normalizing to residues `{1,2,4}` and
 applying `band_of_qz_ne` to `five_avoid`. The single level-`m` element of `D₇` is
 handled separately by `band_top` (any unit `lam` keeps it in band). -/
-theorem five_band (m : ℕ) (hm : 1 ≤ m) (d : Fin 5 → ℤ)
+theorem five_band (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     (hnotdvd : ∀ i, ¬ (7 : ℤ) ∣ d i) (hpos : ∀ i, 0 < d i)
     (hinj : Function.Injective d) :
     ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i,
