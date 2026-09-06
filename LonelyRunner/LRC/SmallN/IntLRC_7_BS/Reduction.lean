@@ -1,6 +1,7 @@
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5b
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section5c
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case_A5
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Section7_Wire
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
@@ -134,15 +135,63 @@ theorem bs_discrete_q
             have hDgab : D (g a) = D (g b) := by
               have : (D (g a) : ℤ) = D (g b) := h; exact_mod_cast this
             exact (S.orderIsoOfFin hScard_eq).injective (Subtype.val_injective (hinj hDgab))
-          obtain ⟨lam, hlam_unit, hband5⟩ := five_band m (by rw [hm] at hj₀m; omega) d5 hg_ndvd hpos_d5 hinj_d5
-          refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
-          by_cases hi : i ∈ S
-          · have ⟨k, hk⟩ : ∃ k : Fin 5, (S.orderIsoOfFin hScard_eq k).val = i := by
-              have := (S.orderIsoOfFin hScard_eq).surjective ⟨i, hi⟩
-              exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
-            have := hband5 k; simp only [d5, g, hk] at this; exact this
-          · exact band_top m lam (D i : ℤ) hlam_unit (hnointerior i hi)
-              (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+          -- `S` misses exactly `i_m`, so any index outside `S` IS `i_m`.
+          have hS_eq : S = Finset.univ.erase i_m :=
+            Finset.eq_of_subset_of_card_le
+              (fun x hx => Finset.mem_erase.mpr ⟨fun h => hi_m_notS (h ▸ hx), Finset.mem_univ x⟩)
+              (by rw [Finset.card_erase_of_mem (Finset.mem_univ _), hScard_eq]; simp)
+          have hnotS_eq : ∀ i : Fin 6, i ∉ S → i = i_m := by
+            intro i hi
+            by_contra hne
+            exact hi (hS_eq ▸ Finset.mem_erase.mpr ⟨hne, Finset.mem_univ i⟩)
+          have hkey : ∀ i : Fin 6, i ∈ S → ∃ k : Fin 5, (S.orderIsoOfFin hScard_eq k).val = i := by
+            intro i hi
+            have := (S.orderIsoOfFin hScard_eq).surjective ⟨i, hi⟩
+            exact ⟨this.choose, congr_arg Subtype.val this.choose_spec⟩
+          by_cases hm2 : 2 ≤ m
+          · -- `m ≥ 2`: BS §6, via `five_band`.
+            obtain ⟨lam, hlam_unit, hband5⟩ := five_band m hm2 d5 hg_ndvd hpos_d5 hinj_d5
+            refine ⟨7 ^ m, lam, by positivity, fun i => band_at_pow m _ ?_⟩
+            by_cases hi : i ∈ S
+            · obtain ⟨k, hk⟩ := hkey i hi
+              have := hband5 k; simp only [d5, g, hk] at this; exact this
+            · exact band_top m lam (D i : ℤ) hlam_unit (hnointerior i hi)
+                (hmax _ (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i)))
+          · -- `m = 1`: BS §7. The five level-0 units have no good multiplier at
+            -- `N = 49` when they form one of the three exceptional sets, and `d₆`
+            -- cannot help there. `five_band_m1` handles all six jointly, and may
+            -- return `P = 14` (that is, `N' = 98`), which is why the conclusion
+            -- carries a general modulus.
+            have h1m : 1 ≤ m := by omega
+            have hm1 : m = 1 := by omega
+            have hd6_dvd : (7 : ℤ) ∣ (D i_m : ℤ) := by
+              have h := hnointerior i_m hi_m_notS
+              rwa [hm1, pow_one] at h
+            have hd6_ndvd : ¬ ((7 : ℤ) ^ 2 ∣ (D i_m : ℤ)) := by
+              have h := hmax (D i_m : ℤ)
+                (by rw [hDZ]; exact Finset.mem_image_of_mem _ (Finset.mem_univ i_m))
+              rwa [hm1] at h
+            have hgcd6 : ∀ p : ℕ, p.Prime → (∀ k, (p : ℤ) ∣ d5 k) →
+                ¬ ((p : ℤ) ∣ (D i_m : ℤ)) := by
+              intro p hp hall hdiv
+              have hallD : ∀ i : Fin 6, p ∣ D i := by
+                intro i
+                by_cases hi : i ∈ S
+                · obtain ⟨k, hk⟩ := hkey i hi
+                  have hk' := hall k
+                  simp only [d5, g, hk] at hk'
+                  exact_mod_cast hk'
+                · rw [hnotS_eq i hi]; exact_mod_cast hdiv
+              have hdg : p ∣ Finset.univ.gcd D := Finset.dvd_gcd (fun i _ => hallD i)
+              rw [hgcd] at hdg
+              exact hp.one_lt.ne' (Nat.dvd_one.mp hdg)
+            obtain ⟨P, lam, hP, hb5, hb6⟩ :=
+              five_band_m1 d5 (D i_m : ℤ) hpos_d5 hg_ndvd hinj_d5 hd6_dvd hd6_ndvd hgcd6
+            refine ⟨P, lam, hP, fun i => ?_⟩
+            by_cases hi : i ∈ S
+            · obtain ⟨k, hk⟩ := hkey i hi
+              have := hb5 k; simp only [d5, g, hk] at this; exact this
+            · rw [hnotS_eq i hi]; exact hb6
         · -- |S| = 4: four_band suffices (S = T, no 5th level-0 element)
           have hScard_eq : S.card = 4 := le_antisymm (by omega) hS_card
           have hST : T = S := Finset.eq_of_subset_of_card_le hTS (by rw [hScard_eq, hT4])
