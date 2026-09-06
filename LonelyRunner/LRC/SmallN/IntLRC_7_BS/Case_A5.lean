@@ -3,6 +3,7 @@ import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas7_9
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas10_12
 import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case_A5_Lambda0
+import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Case61_Place
 
 /-!
 # n = 7 (Barajas–Serra) — §6, the case `|A| = 5`
@@ -305,10 +306,11 @@ private theorem case_61 (hm : 2 ≤ m)
     · intro i
       simpa [mul_assoc] using havoid i
   by_cases htop : ∀ i, (7 : ℤ) ^ m ∣ d i - d 0
-  · by_cases hdist : Function.Injective
-        (fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7))
-    · exact case_61_top m (by omega) d hres1 htop hdist
-    · sorry
+  -- `case_61_top_gen` needs no distinctness of the level-`m` coefficients:
+  -- `affine_place` only ever uses two missing residues, and a `Fin 5 → ZMod 7`
+  -- image always leaves at least two. So the collapsed branch is not a separate
+  -- argument, and BS's split here is unnecessary.
+  · exact Case61.case_61_top_gen m (by omega) d hres1 htop
   · let b : Fin 4 → ℤ := fun i => d ⟨i.val, by omega⟩
     have hb_inj : Function.Injective b := by
       intro i j hij
