@@ -49,12 +49,5 @@ equality test inside `bad`'s own reduction and overflows the stack under
 `lake build`, whereas membership checks stay shallow. -/
 theorem bad_subset_exc63 : bad.all (fun T => exc63.contains T) = true := by rfl
 
-set_option maxHeartbeats 4000000 in
-set_option maxRecDepth 8000000 in
-/-- ...and there are exactly as many literals as exceptional sets, so the
-inclusion is an equality of sets. -/
-theorem exc63_length : exc63.length = 63 := by rfl
-
-
 end Section7M1
 end IntLRC7BS

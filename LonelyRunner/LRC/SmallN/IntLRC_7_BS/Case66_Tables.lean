@@ -28,39 +28,21 @@ own text asserts and both of which hold: every bad pair has `ẽ(d₂,d₄) ∈ 
 values are `{2,4}` when `ẽ₂₄ ∈ {4,5}` and `{4,6}` when `ẽ₂₄ ∈ {0,6}`, matching
 BS's two avoidance prescriptions exactly.
 
-## RETRACTED: there is no gap in sub-case (b)
+## A retracted claim, kept as a warning
 
-An earlier version of this file claimed a gap here. **That claim was wrong, and
-the error was mine, not the paper's.** It is retracted; the reasoning is kept
-because the table `avoid_66b` below still encodes the mistaken form and must not
-be used.
+An earlier version of this file claimed a gap in BS sub-case (b): that the
+exclusion `ẽ(d₂,d₄) ∉ {2,4,6}` is insufficient and unreachable from Lemma 7(i).
+**That was our error, not the paper's**, and the table encoding it has been
+removed along with the claim.
 
-The claim was: BS's exclusion `ẽ(d₂,d₄) ∉ {2,4,6}` is insufficient (the true
-failing set being `{0,2,4,6}`) and unreachable from Lemma 7(i), which needs
-`ℓ(X) ≤ 4` while `ℓ({0,2,4,6}) = 6`.
-
-The mistake was treating BS's printed `ẽ(d₂,d₅)` as the `Λ₀`-invariant appearing
-in the fifth arc. Lemma 7 controls `ẽ(d,d')` only when `r(d') = 2·r(d)`. In the
-sub-case (b) frame `r(d₅) = 4 = 2·r(d₄)`, so `d₅`'s ratio-2 partner is `d₄`, not
-`d₂`. Solving the `k`-frame with the correct invariant gives fifth arc
-`2k − ẽ(d₄,d₅)`, and then:
-
-```
-fifth arc as I had it   ẽ(d₂,d₄) − ẽ(d₂,d₅) + k → bad ẽ₂₄ = {0,2,4,6},  ℓ = 6
-fifth arc, corrected    2k − ẽ(d₄,d₅)          → bad ẽ₂₄ = {2,4},      ℓ = 3
-```
-
-`ℓ({2,4}) = 3 ≤ 4`, so Lemma 7(i) applies; and `{2,4} ∩ ({2,4}+1) = ∅`, so
-Lemma 7(ii) applies too. **Sub-case (b) closes at every valuation of `2d₂ − d₄`.
-There is no residual and no gap.**
-
-`avoid_66b` and `avoid_66b_246_insufficient` below are therefore **not used by
-the proof**. `avoid_66b_246_insufficient` remains true as a statement about the
-mistaken arc expression, but it says nothing about Barajas–Serra. The table
+The mistake was taking the invariant against the wrong ratio-2 partner. Lemma 7
+controls `ẽ(d,d')` only when `r(d') = 2·r(d)`; in the (b) frame `r(d₅) = 4 =
+2·r(d₄)`, so `d₅` pairs with `d₄`, not `d₂`. With `ẽ(d₄,d₅)` the fifth arc is
+`2k − ẽ(d₄,d₅)`, the bad set is `{2,4}` with `ℓ = 3 ≤ 4` and empty self-overlap,
+and Lemma 7(i)/(ii) both apply. Sub-case (b) closes at every valuation. The table
 actually used is `avoid_66b_Q` in `Case_A5.lean`.
 
-The sub-case (a) analysis in this file is unaffected: `avoid_66a` reproduces BS's
-list (16) exactly, and the sign correction recorded above stands.
+The sub-case (a) sign correction above is unaffected and stands.
 
 Both tables are stated with explicit `≠` rather than `Finset` membership, so
 kernel `decide` applies directly.
@@ -86,49 +68,6 @@ theorem avoid_66a (t24 t25 : ZMod 7)
       (2 * k - t24 + 1 ≠ 0 ∧ 2 * k - t24 + 1 ≠ 6) ∧
       (4 * t25 + 4 * k ≠ 0 ∧ 4 * t25 + 4 * k ≠ 6) := by
   revert hexc; revert t24 t25; decide
-
-/-- **The five bad pairs all have `ẽ₂₄ ∈ {4,5,6}`.** This is what licenses BS's
-first resolution path: if `ν(e₂₄) < m` then Lemma 7(i) with `X = {4,5,6}`
-(`ℓ(X) = 3 ≤ 4`, so 7(i) genuinely applies) gives `ẽ₂₄ ∉ {4,5,6}` and (16)
-holds. -/
-theorem avoid_66a_of_t24 (t24 t25 : ZMod 7) (h : t24 ≠ 4 ∧ t24 ≠ 5 ∧ t24 ≠ 6) :
-    ∃ k : ZMod 7, (k = 1 ∨ k = 2 ∨ k = 3) ∧
-      (k ≠ 0 ∧ k ≠ 6) ∧
-      (k + 2 ≠ 0 ∧ k + 2 ≠ 6) ∧
-      (2 * k - t24 ≠ 0 ∧ 2 * k - t24 ≠ 6) ∧
-      (2 * k - t24 + 1 ≠ 0 ∧ 2 * k - t24 + 1 ≠ 6) ∧
-      (4 * t25 + 4 * k ≠ 0 ∧ 4 * t25 + 4 * k ≠ 6) := by
-  revert h; revert t24 t25; decide
-
-/-- **BS §6.6(b) table** (L771–780). `e₁₂ = N/7`, `e₃₄ = 2N/7`. With `λk ∈ Λ₀`
-chosen so `q(λk d₄) = k`, the five arc indices are `k`, `k+2` (that is `A₂`),
-`4ẽ₂₄ + 4k`, `4ẽ₂₄ + 4k + 1` (that is `A₁`), and `ẽ₂₄ − ẽ₂₅ + k` (that is `d₅`).
-
-The hypothesis excludes `ẽ₂₄` from the EVEN residues `{0,2,4,6}`. BS write
-`{2,4,6}`; that is not sufficient — `ẽ₂₄ = 0` fails — and neither exclusion is
-reachable from Lemma 7(i). See the module docstring. -/
-theorem avoid_66b (t24 t25 : ZMod 7)
-    (h : t24 ≠ 0 ∧ t24 ≠ 2 ∧ t24 ≠ 4 ∧ t24 ≠ 6) :
-    ∃ k : ZMod 7, (k = 1 ∨ k = 2 ∨ k = 3) ∧
-      (k ≠ 0 ∧ k ≠ 6) ∧
-      (k + 2 ≠ 0 ∧ k + 2 ≠ 6) ∧
-      (4 * t24 + 4 * k ≠ 0 ∧ 4 * t24 + 4 * k ≠ 6) ∧
-      (4 * t24 + 4 * k + 1 ≠ 0 ∧ 4 * t24 + 4 * k + 1 ≠ 6) ∧
-      (t24 - t25 + k ≠ 0 ∧ t24 - t25 + k ≠ 6) := by
-  revert h; revert t24 t25; decide
-
-/-- **BS's `{2,4,6}` is not sufficient in sub-case (b).** The witness is
-`ẽ₂₄ = 0`: for `ẽ₂₅ = 2` no `k ∈ {1,2,3}` works. Stated as a refutation so the
-gap is recorded in the development itself and not only in prose. -/
-theorem avoid_66b_246_insufficient :
-    ¬ ∀ (t24 t25 : ZMod 7), (t24 ≠ 2 ∧ t24 ≠ 4 ∧ t24 ≠ 6) →
-      ∃ k : ZMod 7, (k = 1 ∨ k = 2 ∨ k = 3) ∧
-        (k ≠ 0 ∧ k ≠ 6) ∧
-        (k + 2 ≠ 0 ∧ k + 2 ≠ 6) ∧
-        (4 * t24 + 4 * k ≠ 0 ∧ 4 * t24 + 4 * k ≠ 6) ∧
-        (4 * t24 + 4 * k + 1 ≠ 0 ∧ 4 * t24 + 4 * k + 1 ≠ 6) ∧
-        (t24 - t25 + k ≠ 0 ∧ t24 - t25 + k ≠ 6) := by
-  decide
 
 end Case66
 end IntLRC7BS

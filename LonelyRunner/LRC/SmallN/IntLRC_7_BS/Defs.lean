@@ -19,6 +19,13 @@ Source: `sources_barajas_serra_2008.txt`, §1–§4 (lines 40–264).
 
 Reuse `LonelyRunner.LRC.Defs` (circDist, badSet, goodSet, intLRC).
 See `docs/n7_bs/ROADMAP.md`.
+
+**Not on the path to `intLRC_seven`:** `nu`, `qz_mul_carry`,
+`circDist_ge_of_qval`. `nu` is the paper's `ν` written out; the development
+tracks valuations through explicit `7^h ∣ ·` hypotheses instead.
+`circDist_ge_of_qval` is the `q`-language form of `circDist_ge_of_residue`,
+superseded by `circDist_ge_of_band` (`BandGeneral.lean`) once the modulus stopped
+being a power of 7.
 -/
 
 namespace IntLRC7BS

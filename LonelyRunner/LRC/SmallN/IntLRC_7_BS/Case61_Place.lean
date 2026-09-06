@@ -3,20 +3,19 @@ import LonelyRunner.LRC.SmallN.IntLRC_7_BS.Lemmas10_12
 /-!
 # n = 7 (Barajas–Serra) — §6.1: dropping the distinctness hypothesis
 
-`affine_place` (in `Lemmas10_12.lean`) sends five **distinct** `ZMod 7` residues
-outside `{0,6}` by an affine unit map. Its proof uses injectivity only to know
-that the complement of the image has exactly two elements, so that
-`affine_place_pair` can send those two to `0` and `6`.
+A natural statement here sends five **distinct** `ZMod 7` residues outside
+`{0,6}` by an affine unit map, using injectivity only to know that the complement
+of the image has exactly two elements, so `affine_place_pair` can send those two
+to `0` and `6`.
 
 But two is all that is ever needed, and the image of *any* `Fin 5 → ZMod 7` has
 at most five elements, hence a complement of at least two. So the injectivity
 hypothesis is unnecessary: `affine_place_gen` below drops it.
 
-Consequently `case_61_top` — whose only use of `hdist` is the `affine_place`
-call — generalizes too, as `case_61_top_gen`. That closes the `ν(E) = {m}` half
-of §6.1 **without** the case split on whether the level-`m` coefficients are
-distinct: the branch where they collapse is not a separate argument, it is the
-same argument with more room.
+`case_61_top_gen` below is the corresponding placement step, and it closes the
+`ν(E) = {m}` half of §6.1 **without** any case split on whether the level-`m`
+coefficients are distinct: the branch where they collapse is not a separate
+argument, it is the same argument with more room.
 
 An exhaustive check confirms the boundary is exactly where this reasoning puts
 it: every subset of `ZMod 7` of size `≤ 5` fits a length-5 window under some unit
@@ -28,9 +27,9 @@ namespace Case61
 
 open Finset
 
-/-- **`affine_place` without distinctness.** Any five `ZMod 7` residues — not
-necessarily distinct — admit an affine unit map `x ↦ A + u·x` sending all of them
-outside `{0,6}`.
+/-- **Affine placement, no distinctness needed.** Any five `ZMod 7` residues —
+not necessarily distinct — admit an affine unit map `x ↦ A + u·x` sending all of
+them outside `{0,6}`.
 
 The image has at most 5 elements, so its complement has at least 2; picking any
 two of them and mapping them to `0` and `6` by `affine_place_pair` works, since
@@ -57,12 +56,9 @@ theorem affine_place_gen (c : Fin 5 → ZMod 7) :
   · have hciq : c i = q := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hq6]))
     exact hqc (hciq ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
 
-/-- **`case_61_top` without distinctness.** Identical to `case_61_top` except
-that the level-`m` coefficients need not be distinct: the only use of `hdist`
-there is the `affine_place` call, which `affine_place_gen` discharges without it.
-
-This makes the `hdist` case split in `case_61` unnecessary — both halves are this
-one lemma. -/
+/-- **§6.1 `ν(E) = {m}` placement.** The level-`m` coefficients need not be
+distinct — `affine_place_gen` needs no injectivity — so `case_61` requires no
+case split here. -/
 theorem case_61_top_gen (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ)
     (hres1 : ∀ i, (d i : ZMod 7) = 1)
     (htop : ∀ i, (7 : ℤ) ^ m ∣ (d i - d 0)) :

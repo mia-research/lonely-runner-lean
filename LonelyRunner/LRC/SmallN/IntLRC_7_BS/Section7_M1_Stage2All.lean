@@ -14,11 +14,10 @@ namespace Section7M1
 
 /-! ## Stage 2 over ALL exceptional sets, not only BS's three representatives
 
-`stage2_clean` follows BS and checks only the three published representatives.
-A faithful transcription needs every exceptional 5-set, because an arbitrary `D`
-arrives as some dilate and reducing it to a representative would require a
-separate normalization argument. `bad` already *is* all 63 of them, so quantifying
-over it removes that step entirely.
+BS check only their three published representatives. A faithful transcription
+needs every exceptional 5-set, because an arbitrary `D` arrives as some dilate,
+and reducing it to a representative would require a separate normalization
+argument in Lean. `exc63` is all 63, so quantifying over it removes that step.
 -/
 
 /-- The `gcd = 1` configurations over `N' = 98` arising from a given list of

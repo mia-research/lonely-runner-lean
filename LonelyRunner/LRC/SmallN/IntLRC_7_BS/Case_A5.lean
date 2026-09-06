@@ -214,12 +214,6 @@ private theorem case61_nonexception_shift (a p q : ZMod 7)
 
 /-! Finite terminal tables for the two remaining Barajas--Serra partitions. -/
 
-private theorem case65_window_choice (a₁ a₄ : ZMod 7) :
-    ∃ k : ZMod 7,
-      intervalAvoids a₁ 3 1 k ∧ intervalAvoids a₄ 2 4 k := by
-  revert a₁ a₄
-  decide
-
 /-- **BS (14), first disjunct** (L700): `ℓ(A₁) ≤ 3` and `ℓ(A₄) ≤ 3`. Holds for
 ARBITRARY window starts `a₁, a₄` — stronger than BS, which normalizes `A₁` to
 `q(A₁) = {1,2,3}` first, so the normalization step is not needed downstream. -/
@@ -815,7 +809,7 @@ private theorem case61_endgame (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ)
 
 
 /-- **Case 6.1 `(5,0,0)`** (BS L507). `|A₁| = 5`. Labeling via Lemma 10, then
-`ℓ(A₁) ≤ 5` by Lemma 9 / Remark 8(i), closed by Lemma 5 (`five_lambda0`). -/
+`ℓ(A₁) ≤ 5` by Lemma 9 / Remark 8(i), closed by `lift_shift`/`place_window5`. -/
 private theorem case_61 (hm : 2 ≤ m)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))
@@ -1564,7 +1558,7 @@ private theorem case_62b (hm : 2 ≤ m)
       ⟨h, hd2, hd2', hd3, hd3', hd4, hd4', hr32, hr41⟩
   · -- ── Branch (i): L9(i) dispatch compresses {e₁,e₂,e₃} to ℓ(B) ≤ 2.
     -- BS §6.2 L547–L553: q(e₄) ≠ 3 → ℓ(A₁) ≤ 4; q(e₄) = 3 → ×2 → ℓ ≤ 4.
-    -- In both cases five_lambda0 (4,0,1) closes.
+    -- In both cases the (4,0,1) Λ₀ assembly closes.
     obtain ⟨lam₀, hlam₀, a, hB_fit⟩ :=
       lemma9_i_dispatch m h₁ h₂ e₂ e₃ e₁ hne hd2 hd2' hd3 hd3'
     -- hB_fit : fitsInterval {q(lam₀·e₂), q(lam₀·e₃), q(lam₀·e₁)} a 2
@@ -2218,11 +2212,6 @@ private theorem reflect_fit_63 (x y z a : ZMod 7) (L : ℕ)
     (hfit : fitsInterval ({6 - x, 6 - y, 6 - z} : Finset (ZMod 7)) a L) :
     ∃ b : ZMod 7, fitsInterval ({x, y, z} : Finset (ZMod 7)) b L := by
   rcases hL with rfl | rfl <;> revert x y z a hfit <;> decide
-
-private theorem reflect_mem_63 (x : ZMod 7)
-    (h : 6 - x ∈ ({0, 6} : Finset (ZMod 7))) :
-    x ∈ ({0, 6} : Finset (ZMod 7)) := by
-  revert x; decide
 
 /-- **Case 6.3 `(3,1,1)`** (BS L565). `|A₁|=3, |A₂|=|A₄|=1`. Labeling via Lemma 11;
 endgame is `lemma5` on the `(ℓ₁,1,1)` partition (the `(3,1,1)` exception carved by
@@ -3935,25 +3924,6 @@ private theorem qz_zero_mod (m : ℕ) (x : ℤ) (h : qz m x = 0) :
   obtain ⟨k, hk⟩ := h7
   have hd := Int.mul_ediv_add_emod x ((7 : ℤ) ^ m)
   exact ⟨k, by rw [hk] at hd; linear_combination -hd⟩
-
-/-- `q(x) = 6` means `x` sits BEHIND the origin by at most `7^m`, i.e. `-x` is ahead. -/
-private theorem aheadArc_of_qz_six (m : ℕ) (x : ℤ) (h : qz m x = 6) : AheadArc m (-x) := by
-  have hP : (0 : ℤ) < (7 : ℤ) ^ m := by positivity
-  have hρ0 : 0 ≤ x % (7 : ℤ) ^ m := Int.emod_nonneg x (ne_of_gt hP)
-  have hρP : x % (7 : ℤ) ^ m < (7 : ℤ) ^ m := Int.emod_lt_of_pos x hP
-  have h7 : (7 : ℤ) ∣ (x / (7 : ℤ) ^ m - 6) := by
-    have hz : ((x / (7 : ℤ) ^ m - 6 : ℤ) : ZMod 7) = 0 := by
-      have hx : ((x / (7 : ℤ) ^ m : ℤ) : ZMod 7) = 6 := h
-      push_cast [hx]; ring
-    exact_mod_cast (ZMod.intCast_zmod_eq_zero_iff_dvd _ 7).mp hz
-  obtain ⟨k, hk⟩ := h7
-  have hd := Int.mul_ediv_add_emod x ((7 : ℤ) ^ m)
-  have hqq : x / (7 : ℤ) ^ m = 6 + 7 * k := by omega
-  rw [hqq] at hd
-  have hq : x = (7 : ℤ) ^ m * (6 + 7 * k) + x % (7 : ℤ) ^ m := hd.symm
-  refine ⟨(7 : ℤ) ^ m - x % (7 : ℤ) ^ m, by omega, by omega, ⟨-k - 1, ?_⟩⟩
-  rw [show (7 : ℤ) ^ (m + 1) = 7 ^ m * 7 from by ring]
-  linear_combination -hq
 
 /-- `AheadArc` only depends on the value modulo `7^{m+1}`. -/
 private theorem aheadArc_congr (m : ℕ) (a b : ℤ) (h : (7 : ℤ) ^ (m + 1) ∣ (a - b))
@@ -6000,7 +5970,7 @@ theorem five_compress (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
 normalized to residues `{1,2,4}`, admit a unit multiplier `lam` sending every
 arc index `q(lam·dᵢ)` outside `{0,6}`. This is the entire `|A|=5` case analysis
 (BS §6). `m = 1` is §7 and is handled in the §4 reduction instead, jointly with
-the sixth element — see the note above. The Λ₀ assembly bridge is `five_lambda0`. -/
+the sixth element — see the note above. The Λ₀ bridge is `lambda0_lift`. -/
 theorem five_avoid (m : ℕ) (hm : 2 ≤ m) (d : Fin 5 → ℤ)
     (hndvd : ∀ i, ¬ (7 : ℤ) ∣ d i)
     (hres : ∀ i, (d i : ZMod 7) ∈ ({1, 2, 4} : Finset (ZMod 7)))

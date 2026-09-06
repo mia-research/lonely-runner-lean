@@ -8,6 +8,13 @@ Source: `sources_barajas_serra_2008.txt`, lines 364–506.
 
 These lemmas provide the combinatorial tools used by the §6 case analysis
 (|A|=5). Lemma 5 is the main pigeonhole for `ℓ(A₁)+ℓ(A₂)+ℓ(A₄) ≤ 5`.
+
+**Not on the path to `intLRC_seven`:** `lemma4_i_half`, `lemma4_i_eq`,
+`lemma4_i_le`, `lemma6_330`, `lemma6_402`, `lemma6_420`, `lemma6_501`,
+`lemma6_510`. They are faithful transcriptions of the paper's numbered lemmas and
+are proved, but the case analyses ended up going through other routes. Kept for
+correspondence with the source; do not assume a change here can break the main
+theorem, and do not assume they are exercised by it either.
 -/
 
 open Finset

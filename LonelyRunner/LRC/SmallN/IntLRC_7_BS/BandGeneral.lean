@@ -42,16 +42,4 @@ theorem circDist_ge_of_band (P : ℕ) (hP : 0 < P) (x : ℤ)
   · rw [le_div_iff₀ hNRpos, hNval]; nlinarith [hRlo]
   · linarith [hub]
 
-/-- `circDist_ge_of_residue` is the `P = 7^m` instance of `circDist_ge_of_band`. -/
-theorem circDist_ge_of_residue' (m : ℕ) (x : ℤ)
-    (hlo : (7 ^ m : ℤ) ≤ x % (7 ^ (m + 1) : ℤ))
-    (hhi : x % (7 ^ (m + 1) : ℤ) ≤ 6 * 7 ^ m) :
-    (1 : ℝ) / 7 ≤ circDist ((x : ℝ) / ((7 ^ (m + 1) : ℕ) : ℝ)) := by
-  have hP : 0 < 7 ^ m := by positivity
-  have hNeq : (7 * 7 ^ m : ℕ) = 7 ^ (m + 1) := by ring
-  have hZ : (7 * ((7 ^ m : ℕ) : ℤ)) = (7 ^ (m + 1) : ℤ) := by push_cast; ring
-  have := circDist_ge_of_band (7 ^ m) hP x (by rw [hZ]; exact_mod_cast hlo)
-    (by rw [hZ]; exact_mod_cast hhi)
-  rwa [hNeq] at this
-
 end IntLRC7BS

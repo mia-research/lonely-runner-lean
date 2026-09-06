@@ -534,90 +534,9 @@ theorem affine_place_pair (p q : ZMod 7) (hpq : p ≠ q) :
     ∃ u A : ZMod 7, u ≠ 0 ∧ A + u * p = 0 ∧ A + u * q = 6 := by
   revert hpq; revert p q; decide
 
-/-- **`|A₁| = 5`, `ν(E) = {m}` placement core.** Five distinct `ZMod 7` residues
-(the leading coefficients of five level-`0` elements whose pairwise differences are
-all at level `m`) admit an affine unit map `x ↦ A + u·x` sending all of them
-outside `{0,6}` — i.e. into the central band `{1,…,5}`. (BS's `(i−j)⁻¹`
-multiplier: map the two *missing* residues to `{0,6}`; the unit map then bijects
-the remaining five onto `{1,…,5}`.) -/
-theorem affine_place (c : Fin 5 → ZMod 7) (hc : Function.Injective c) :
-    ∃ u A : ZMod 7, u ≠ 0 ∧ ∀ i, A + u * c i ≠ 0 ∧ A + u * c i ≠ 6 := by
-  classical
-  set S : Finset (ZMod 7) := Finset.image c Finset.univ with hS
-  have hScard : S.card = 5 := by
-    rw [hS, Finset.card_image_of_injective _ hc, Finset.card_univ, Fintype.card_fin]
-  have hcompl : Sᶜ.card = 2 := by rw [Finset.card_compl, hScard]; decide
-  obtain ⟨p, q, hpq, hSc⟩ := Finset.card_eq_two.mp hcompl
-  obtain ⟨u, A, hu, hp0, hq6⟩ := affine_place_pair p q hpq
-  have hpc : p ∉ S := by
-    have : p ∈ Sᶜ := by rw [hSc]; exact Finset.mem_insert_self p {q}
-    exact Finset.mem_compl.mp this
-  have hqc : q ∉ S := by
-    have : q ∈ Sᶜ := by rw [hSc]; exact Finset.mem_insert_of_mem (Finset.mem_singleton_self q)
-    exact Finset.mem_compl.mp this
-  refine ⟨u, A, hu, fun i => ⟨fun h => ?_, fun h => ?_⟩⟩
-  · have hcip : c i = p := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hp0]))
-    exact hpc (hcip ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
-  · have hciq : c i = q := mul_left_cancel₀ hu (add_left_cancel (a := A) (by rw [h, hq6]))
-    exact hqc (hciq ▸ Finset.mem_image_of_mem c (Finset.mem_univ i))
-
-/-- **Case 6.1, `ν(E) = {m}` branch.** Five level-`0` elements, all `≡ 1 mod 7`,
-whose pairwise differences are all at level exactly `m` (so the leading
-coefficients `cᵢ = (dᵢ − d₀)/7^m` are distinct), admit a unit multiplier sending
-every arc index outside `{0,6}`. The multiplier is `(1 + k·7^m)·u` with `u` the
-unit from `affine_place` and `k` the `Λ₀` shift placing the base: by
-`qz_top_affine` then `qz_shift0`, `q(λ·dᵢ) = q(u·d₀) + k·u + u·cᵢ`, and `k` is
-chosen so `q(u·d₀) + k·u = A`, giving `q(λ·dᵢ) = A + u·cᵢ ∉ {0,6}`. -/
-theorem case_61_top (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ)
-    (hres1 : ∀ i, (d i : ZMod 7) = 1)
-    (htop : ∀ i, (7 : ℤ) ^ m ∣ (d i - d 0))
-    (hdist : Function.Injective (fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7))) :
-    ∃ lam : ℤ, ¬ (7 : ℤ) ∣ lam ∧ ∀ i, qz m (lam * d i) ≠ 0 ∧ qz m (lam * d i) ≠ 6 := by
-  set c : Fin 5 → ZMod 7 := fun i => (((d i - d 0) / 7 ^ m : ℤ) : ZMod 7) with hc_def
-  obtain ⟨u, A, hu, havoid⟩ := affine_place c hdist
-  set u_int : ℤ := (u.val : ℤ) with hu_def
-  have hu_cast : ((u_int : ℤ) : ZMod 7) = u := by
-    rw [hu_def]; push_cast; exact ZMod.natCast_rightInverse u
-  have hu_ndvd : ¬ (7 : ℤ) ∣ u_int := by
-    intro h; apply hu
-    rw [← hu_cast]; exact (ZMod.intCast_zmod_eq_zero_iff_dvd u_int 7).mpr (by exact_mod_cast h)
-  set qb : ZMod 7 := qz m (u_int * d 0) with hqb
-  set k : ZMod 7 := (A - qb) * u⁻¹ with hk_def
-  have hku : k * u = A - qb := by rw [hk_def, mul_assoc, inv_mul_cancel₀ hu, mul_one]
-  set k_int : ℤ := (k.val : ℤ) with hk_int_def
-  have hk_cast : ((k_int : ℤ) : ZMod 7) = k := by
-    rw [hk_int_def]; push_cast; exact ZMod.natCast_rightInverse k
-  set lam : ℤ := (1 + k_int * 7 ^ m) * u_int with hlam_def
-  have hlam_ndvd : ¬ (7 : ℤ) ∣ lam := by
-    rw [hlam_def]
-    have hp : Prime (7 : ℤ) := Nat.prime_iff_prime_int.mp (by decide)
-    have h1m : ¬ (7 : ℤ) ∣ (1 + k_int * 7 ^ m) := by
-      intro h
-      have hd7m : (7 : ℤ) ∣ k_int * 7 ^ m :=
-        Dvd.dvd.mul_left (dvd_pow_self 7 (by omega : m ≠ 0)) k_int
-      have h1 : (7 : ℤ) ∣ 1 := by have := dvd_sub h hd7m; simpa using this
-      exact absurd h1 (by norm_num)
-    intro h
-    rcases hp.dvd_mul.mp h with h1 | h2
-    · exact h1m h1
-    · exact hu_ndvd h2
-  refine ⟨lam, hlam_ndvd, fun i => ?_⟩
-  have key : qz m (lam * d i) = A + u * c i := by
-    have hrw : lam * d i = (1 + k_int * 7 ^ m) * (u_int * d i) := by rw [hlam_def]; ring
-    rw [hrw, qz_shift0, hk_cast]
-    have hres_i : ((u_int * d i : ℤ) : ZMod 7) = u := by
-      push_cast; rw [hu_cast, hres1 i]; ring
-    rw [hres_i]
-    have haff : qz m (u_int * d i) = qb + u * c i := by
-      rw [hqb, qz_top_affine m u_int (d i) (d 0) (htop i), hu_cast, hc_def]
-    rw [haff]
-    have : qb + u * c i + k * u = A + u * c i := by rw [hku]; ring
-    linear_combination this
-  rw [key]; exact havoid i
-
 /-- **Residue-agnostic final placement.** Five elements all `≡ r mod 7` (`r` a
 unit) whose arc indices fit a length-5 window admit a `Λ₀` multiplier avoiding
-`{0,6}`. Unlike `five_lambda0`, `r` is ANY unit (not restricted to `{1,2,4}`), so
+`{0,6}`. `r` is ANY unit (not restricted to `{1,2,4}`), so
 this serves the `ν(E)≠{m}` branch after the `3·`-remultiply (residue 3). The
 window `{a,…,a+4}` is shifted to `{1,…,5}` by `k = (1−a)·r⁻¹` (`q(λ·dᵢ) =
 q(dᵢ) + k·r = (q(dᵢ)−a) + 1 ∈ {1,…,5}`). -/
@@ -644,18 +563,6 @@ theorem place_window5 (m : ℕ) (hm : 0 < m) (d : Fin 5 → ℤ)
   rw [key]
   have key2 : ∀ v : ZMod 7, v.val ≤ 4 → (v + 1 ≠ 0 ∧ v + 1 ≠ 6) := by decide
   exact key2 _ (ha i)
-
-/-- **Case 6.1, `ν(E)≠{m}` dichotomy core.** Once `B={d₁,d₂,d₃}` is pinned to
-`q(B) ⊂ {0,6}`, the five arc indices are `{0,6,p,q}` with `p=q(d₄), q=q(d₅)`
-arbitrary. They fit a length-5 window UNLESS `{p,q}={2,4}` (which gives `{0,2,4,6}`,
-ℓ=6 — the unique bad config that BS resolves by the `3·`-remultiply). Exhaustive
-`decide` over `(p,q)`. The window is reported as a start `a` with all of
-`0,6,p,q` within `{a,…,a+4}`. -/
-theorem dichotomy_core (p q : ZMod 7)
-    (hpq : ¬ ((p = 2 ∧ q = 4) ∨ (p = 4 ∧ q = 2))) :
-    ∃ a : ZMod 7,
-      (0 - a).val ≤ 4 ∧ (6 - a).val ≤ 4 ∧ (p - a).val ≤ 4 ∧ (q - a).val ≤ 4 := by
-  revert hpq; revert p q; decide
 
 /-- `q·7^m + r` decomposition of `z mod 7^(m+1)` with `q = qval`, `r ∈ [0,7^m)`. -/
 theorem qval_decomp (m : ℕ) (z : ℤ) :
@@ -812,14 +719,6 @@ theorem cluster3 (m : ℕ) (x : Fin 3 → ℤ)
   · refine ⟨2, fun i => ?_⟩
     have h0 : (x 2 - x 2) % 7 ^ (m + 1) < 7 ^ m := by rw [hdiag 2]; exact hP
     fin_cases i <;> assumption
-
-/-- **Multiplicative Remark 8(i), `k = 3`.** If `q(xᵢ−xⱼ) ∈ {0,6}` for all pairs of
-a 3-set, then `ℓ(3·X) ≤ 4`: the arc indices `q(3xᵢ)` fit a length-4 window. -/
-theorem rmk8_i_k3 (m : ℕ) (x : Fin 3 → ℤ)
-    (hdiff : ∀ i j, qz m (x i - x j) ∈ ({0, 6} : Finset (ZMod 7))) :
-    ∃ a : ZMod 7, ∀ i, (qz m (3 * x i) - a).val ≤ 3 := by
-  obtain ⟨k, hk⟩ := cluster3 m x hdiff
-  exact ⟨qz m (3 * x k), rmk8_concl m (x k) x hk⟩
 
 /-- **Lemma 12 (i) (BS L676).** `|A₁|=3, |A₂|=2`: ℓ(A₁)≤3 guarantees 3 good Λ₀
 multipliers; each A₂ element blocks at most one, leaving one good for all 5. -/

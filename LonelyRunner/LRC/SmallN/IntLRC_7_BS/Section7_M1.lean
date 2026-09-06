@@ -1,46 +1,34 @@
 /-!
-# n = 7 (Barajas–Serra) — §7, the case `|A| = 5`, `m = 1`: the finite searches
+# n = 7 (Barajas–Serra) — §7 stage 1: the exceptional 5-sets at `N = 49`
 
 Source: `sources_barajas_serra_2008.txt` lines 786–805 (§7).
 
 BS §7 disposes of `|A| = 5, m = 1` by two computer searches, asserted in the
-paper without the computation being published. This file carries out **both
-searches inside the Lean kernel**, by `rfl` on `Nat`-valued `Bool` computations.
-No `native_decide`: every fact here is checked by the kernel itself.
+paper without the computation being published. This file carries out the first
+**inside the Lean kernel**, by `rfl` on a `Nat`-valued `Bool` computation — no
+`native_decide`. Stage 2 is `Section7_M1_Stage2All`.
 
-* `stage1_bad_count` — over `N = 49`: of the 20349 five-element subsets of the
-  21 residues whose class mod 7 lies in `{1,2,4}`, exactly 63 admit no
-  multiplier placing every element in `[7,42]`. 63 = 3 dilation orbits × 21,
-  and `stage1_bad_orbits` exhibits the three orbit representatives, which are
-  precisely BS's `{1,4,11,39,43}`, `{1,4,18,22,29}`, `{1,4,18,44,46}`.
-* `stage2_clean` — over `N' = 98`: every `gcd = 1` configuration whose 5-set
-  reduces to one of those three exceptions admits a good multiplier. The
-  configurations BS could not solve all have `gcd ≥ 2`, so the LRC
-  normalization `gcd(D) = 1` excludes them.
+`stage1_bad_count`: of the 20349 five-element subsets of the 21 residues whose
+class mod 7 lies in `{1,2,4}`, exactly 63 admit no multiplier placing every
+element in `[7,42]`. (63 = 3 dilation orbits × 21; the three orbit
+representatives are BS's `{1,4,11,39,43}`, `{1,4,18,22,29}`, `{1,4,18,44,46}`.)
 
-**Two conventions decide these answers**; both were got wrong first and each
-produces a plausible but wrong result (see `docs/n7_bs/SECTION7_M1_ANALYSIS_v1.md`):
+**The universe is the 21 residues with class mod 7 in `{1,2,4}`** — the `hres`
+hypothesis — not all 42 units mod 49. That is where BS's `(1/21)·C(21,5) = 969`
+comes from; over all 42 units one gets 48 exceptions instead of 3, matching
+nothing in the paper. Getting this wrong yields a plausible but wrong result, so
+it is recorded here rather than left implicit.
 
-1. The stage-1 universe is the **21** residues with class mod 7 in `{1,2,4}` —
-   the `hres` hypothesis — not all 42 units mod 49. That is where BS's
-   `(1/21)·C(21,5) = 969` comes from. Over all 42 units one gets 48 exceptions.
-2. In stage 2 the multiplier ranges over **all** of `1..97`, not the units mod
-   98. Restricting to units manufactures a spurious fourth exception,
-   `(4,44,46,50,67)` with `d₆ = 21`, which has `gcd = 1` and so would not be
-   covered by BS's gcd argument. It is not a counterexample: `7, 21, 77, 91` all
-   work for it.
+Written over `List Nat` with `Nat` arithmetic (kernel GMP-accelerated) rather
+than `Finset (ZMod 49)`, which cannot even synthesize the `Decidable` instance.
+~21s. Keep one heavy `rfl` per module: `lake build` also emits C and overflows
+the elaboration stack where `lake env lean` does not.
 
-These computations are the finite core of the `m = 1` case. They do **not** by
-themselves discharge `five_avoid_m1`: that statement is false as written, and
-cannot be repaired by adding `d₆` while keeping the `∃ lam, ¬ 7 ∣ lam ∧
-qz 1 (lam·dᵢ) ∉ {0,6}` shape — at `N' = 98`, 20 of the 1134 `gcd = 1`
-configurations admit **only** multipliers divisible by 7, and `98` is not a power
-of 7 so it is outside the `qz` apparatus entirely. Connecting these searches to
-`bs_discrete` requires the `m = 1` branch to be routed around the `qz` layer.
-See `docs/n7_bs/SECTION7_M1_ANALYSIS_v1.md` §3.
-
-Timings on the reference machine: `stage1_bad_count` ~21s, `stage2_clean` ~3s,
-both with the default elaboration stack.
+`stage1_bad_count` is **not** consumed by `intLRC_seven`: the proof needs only
+`bad_subset_exc63` (`Section7_M1_Exc63`), which bounds the exceptional sets above
+by the pinned literals. The count is kept because it is the certification that
+the enumeration is complete — that there are exactly 63, i.e. BS's three orbits
+and nothing else — which is the fact the paper asserts.
 -/
 
 namespace IntLRC7BS
@@ -75,34 +63,6 @@ set_option maxRecDepth 8000000 in
 admit no good multiplier — three dilation orbits of size 21. -/
 theorem stage1_bad_count : bad.length = 63 := by rfl
 
-/-- Insertion sort on `List Nat`, so a dilated set can be compared as a set. -/
-def ins (x : Nat) : List Nat → List Nat
-  | [] => [x]
-  | y :: ys => if x ≤ y then x :: y :: ys else y :: ins x ys
-
-def srt : List Nat → List Nat
-  | [] => []
-  | x :: xs => ins x (srt xs)
-
-/-- The dilate of `E` by `lam`, as a sorted set of residues mod 49. -/
-def dilate (lam : Nat) (E : List Nat) : List Nat := srt (E.map (fun x => (lam * x) % 49))
-
-/-- BS's three exceptional sets. -/
-def exc : List (List Nat) := [[1, 4, 11, 39, 43], [1, 4, 18, 22, 29], [1, 4, 18, 44, 46]]
-
-set_option maxHeartbeats 4000000 in
-set_option maxRecDepth 8000000 in
-/-- **The 63 exceptions are exactly the dilates of BS's three sets.** Together
-with `stage1_bad_count` (63 = 3 × 21) this is BS's claim that, up to dilation,
-`{1,4,11,39,43}`, `{1,4,18,22,29}` and `{1,4,18,44,46}` are the only
-five-element sets admitting no good multiplier at `N = 49`. -/
-theorem stage1_bad_are_dilates :
-    bad.all (fun T => exc.any (fun E => S21.any (fun lam => T == dilate lam E))) = true := by
-  rfl
-
-set_option maxHeartbeats 400000 in
-/-- Each of BS's three sets really is exceptional. -/
-theorem stage1_exc_are_bad : exc.all (fun E => !solvable E) = true := by rfl
 
 end Section7M1
 end IntLRC7BS
