@@ -1,5 +1,88 @@
 # n = 7 LRC — Barajas–Serra 2008 formalization ROADMAP
 
+> ## ✅ COMPLETE — 2026-09-07
+> 
+> ```
+> #print axioms intLRC_seven
+> 'intLRC_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+> ```
+> 
+> Zero `sorry` in the n=7 tree. No `native_decide`, `unsafe` or `admit`.
+> `lake build LonelyRunner.LRC.SmallN.IntLRC_7` — 3368 jobs, exit 0.
+> `intLRC_three` / `_five` / `_six` re-checked, no regression.
+> 
+> **Done-check: `scripts/n7/gate.sh`.** Run it before trusting any change here.
+> Plain `lake build` will NOT catch a regression: `LonelyRunner.lean` imports only
+> `LonelyRunner.Basic`, so the default target never enters `LRC/` and reports
+> success without compiling this tree at all. Confirmed twice, independently.
+> 
+> ### What closed, and where the work actually was
+> 
+> | item | outcome |
+> |---|---|
+> | `case_65` (§6.5) | closed; nine branches. One sub-case uses an argument NOT from the paper — BS L727–732 is arithmetically unusable (see below) |
+> | `case_66` (§6.6) | closed; needs no `7d₅` doubling-pin fallback |
+> | `case_61` (§6.1) | closed; all three `ν(E)≠{m}` branches share ONE anchor lemma |
+> | `five_avoid_m1` (§7) | **deleted, not proved** — the statement is false |
+> 
+> ### §7 (`m = 1`) — handled a level up, jointly with `d₆`
+> 
+> `five_avoid_m1` was false: three exceptional 5-sets over `ZMod 49` admit no unit
+> multiplier, and `d₆` cannot help at `N = 49` (a level-1 element is already free
+> there by `band_top`, so it only ever adds a constraint). BS resolve them at
+> `N' = 98`, which is not a power of 7.
+> 
+> So the case moved into the §4 reduction, where all six elements are in scope.
+> `bs_discrete_q` now returns a **general modulus `7·P`** rather than `∃ m` with
+> `7^(m+1)`; `circDist_ge_of_band` generalizes `circDist_ge_of_residue` (whose
+> proof never used that `N/7` is a power of 7). The `|S| = 5` branch splits:
+> `m ≥ 2` → `five_band` (§6); `m = 1` → `five_band_m1` (§7), which may return
+> `P = 14`.
+> 
+> Both of BS's §7 computer searches — asserted in the paper without the
+> computation — are now carried out **in the Lean kernel**, no `native_decide`:
+> 
+> | theorem | content |
+> |---|---|
+> | `stage1_bad_count` | 20349 five-subsets, exactly 63 exceptional at `N = 49` |
+> | `stage1_bad_are_dilates` | those 63 are exactly the dilates of BS's three sets |
+> | `bad_subset_exc63` | the 63 pinned as literals |
+> | `stage2_all_clean` | 23802 `gcd = 1` configs at `N' = 98`, all solvable |
+> | `subs4_all_solvable` | every ≤4-subset solvable at `N = 49` |
+> 
+> Three stack obstacles were solved without touching `lakefile.toml`: one heavy
+> `rfl` per module; the 63 sets pinned as literals so `bad`'s search is not nested
+> inside another reduction; and `bad2Of` shown to distribute over append so the
+> search chunks into four groups.
+> 
+> ### Findings about the source
+> 
+> **Confirmed defects.**
+> - §6.6(a): BS print `q(λk·A₂) = (ẽ₂₄ − 2k, …)`, which does not reproduce their
+>   own bad-pair list (16). Only `(2k − ẽ₂₄, …)` does — also the sign consistent
+>   with `ẽ(d,d') = 2q(d) − q(d')` used throughout. `avoid_66a` uses the corrected
+>   sign.
+> - §6.5, L727–732: unusable, not merely misprinted. It reads "unless
+>   `e₄₅ = 5N/2`" and `N = 7^(m+1)` is odd, so `N/2` is not a lattice point. The
+>   natural repair to `5N/7` fails too: the same paragraph asserts `ℓ(2·A₄) = 1`,
+>   needing `q(2e₄₅) ∈ {0,6}`, i.e. `e₄₅ ∈ {0, 3N/7}`; under `5N/7` one gets
+>   `q(2e₄₅) = 3`. The paragraph is consistent only with the impossible reading.
+>   **That branch is closed by an argument not in the paper** (doubled frame; the
+>   obstruction set acquires empty self-overlap so Lemma 7(ii) applies) and is
+>   flagged as such in the Lean.
+> 
+> **Two claims of ours that were RETRACTED — the paper was right both times.**
+> - A claimed gap in §6.6(b) was our own invariant taken against the wrong
+>   ratio-2 partner: `r(d₅) = 4 = 2·r(d₄)`, so `d₅` pairs with `d₄`, not `d₂`.
+>   With `ẽ(d₄,d₅)` the bad set is `{2,4}`, `ℓ = 3 ≤ 4`, and Lemma 7(i) applies.
+> - A claimed relaxation of `q(e₁₃) ∈ {0,5,6}` to include `1` dropped the carry in
+>   the A₄ arc difference; `1` gives `ℓ(A₄) = 4`.
+> 
+> Anything below this box is the pre-completion working record, kept for
+> provenance. Treat the box as current.
+
+---
+
 **Live status board for the n = 7 project.** Update the Status column as files
 land. Ground truth for "done" is always `#print axioms` + build warnings, never
 this table.

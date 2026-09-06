@@ -287,10 +287,12 @@ Source integrity: SHA-256 every claim.
   see "Lean Formalization Status" in `memory/MEMORY.md`.
 - **Naming conventions (v7+)**: Unit-Complete (not U-FORCE), CG1/CG2 (not Cond
   1/2), floor-reset event (not z=0 event).
-- **✅ ACTIVE FRONTIER — n=7 (2026-06-25):** verifying Barajas–Serra 2008 (prime
-  filtering, `p=7`), NOT BHK. `IntLRC_7.lean` reduction is wired; the single
-  `sorry` is the Hard Case `6·v₁ < V ≤ 6·v₅`. Module skeleton in
-  `SmallN/IntLRC_7_BS/`; live status board `docs/n7_bs/ROADMAP.md`. See §11.
+- **✅ n=7 COMPLETE (2026-09-07)** — `#print axioms intLRC_seven` =
+  `[propext, Classical.choice, Quot.sound]`, zero `sorry`, no `native_decide`.
+  Barajas–Serra 2008 fully verified, §7 included. See §11 for the done-check.
+- **No active frontier.** n=3,4,5,6,7 are done; the remaining Lean `sorry`s
+  (`Theorem52_Weyl`, `Theorem121_Main`, `IntLRC_4_Bienia` Path B) belong to the
+  general-n programme, not to any small-n closure.
 
 ## 9. Decisions Claude makes alone (no need to ask)
 
@@ -315,17 +317,29 @@ R48 — on disk `sources_barajas_serra_2008.txt` (SHA-256 in
 residue-chasing proof, **structurally unrelated to BHK 2001**. Do NOT try to
 reuse the n=6 BHK geometry; it does not transfer.
 
-- **Live status board: `docs/n7_bs/ROADMAP.md`** — read it at session start;
-  update its status table as files land.
-- **The whole task = discharge ONE `sorry`.** `IntLRC_7.lean` already wires
-  `intLRC_seven` → BSR (`theorem61_BSR`) + Large-SR (`theorem71_LargeSR`) +
-  Hard Case `6·v₁ < V ≤ 6·v₅` (the lone `sorry` = Barajas–Serra main result).
-- **Module skeleton:** `SmallN/IntLRC_7_BS/{Defs,PrimeFiltering,Reduction,
-  Lemmas,Case_A4,Case_A5,Main}.lean`. Edit Lean in place, commit per change,
-  keep files ≤ ~300 lines.
-- **Done-check (the `/goal`):** `cd LonelyRunner && lake build` exits 0 AND
-  `#print axioms intLRC_seven` = `[propext, Classical.choice, Quot.sound]`,
-  zero `sorry`.
+- **Status board: `docs/n7_bs/ROADMAP.md`** — the completion box at the top is
+  current; everything below it is the pre-completion working record.
+- **Done-check: `LonelyRunner/scripts/n7/gate.sh`.** Run it before trusting any
+  change here. It purges cloud-evicted `.olean` files, builds the explicit module
+  targets, inventories `sorry`, scans for `native_decide`/`unsafe`/`admit`, and
+  runs the axiom check.
+- **⚠ Plain `lake build` is NOT a gate.** `LonelyRunner.lean` imports only
+  `LonelyRunner.Basic`, so the default target never enters `LRC/` and reports
+  success (2485 jobs) without compiling n=6 or n=7 at all. The real target is
+  `lake build LonelyRunner.LRC.SmallN.IntLRC_7` (3368 jobs). Historical
+  "build clean, N jobs" notes predating 2026-09 did not exercise this tree.
+- **The project sits under `~/Desktop`, which is iCloud-synced**, so build
+  artefacts get evicted: a dataless `.olean` reads as `invalid header` while
+  lake's traces still call it up to date. Gate step [0] handles it; expect
+  recurrence.
+- **`§7` (`m = 1`) is not in `Case_A5.lean`.** `five_avoid_m1` was deleted, not
+  proved — the statement is false. `five_avoid`/`five_band` require `2 ≤ m`, and
+  `m = 1` is handled in `Reduction.lean` jointly with `d₆` via `five_band_m1` →
+  `m1_six_witness`. `bs_discrete_q` returns a general modulus `7·P` because BS
+  resolve §7 at `N' = 98`, which is not a power of 7.
+- **Module layout:** `SmallN/IntLRC_7_BS/`. Edit Lean in place, commit per
+  change. Keep one heavy kernel `rfl` per module — `lake build` also emits C and
+  overflows the elaboration stack where `lake env lean` does not.
 - **No local LLM agents** (restates §0): `delegate`/`gemini`/`proof-check`/
   `model-status` skills exist in this environment but are FORBIDDEN — Claude Code
   primitives + the lean4 plugin only.
