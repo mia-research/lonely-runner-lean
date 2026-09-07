@@ -130,3 +130,32 @@ dependence on any retracted result. This is the exact `n = 2^k` counterpart of
    Only one `B_m` to dodge, but a sixth non-divisible runner changes `S`.
 3. The dropped-unit leaves, whose route `Lemma 11.3a′` has a refuted Case III
    (`E = (1,2,3,4,5,6,64)`, `L = 960`, `b̂ = 839`: `bad(64,55,8) = ℤ/8`).
+
+## 8. Boundary exactness  `[PROVED — re-verified without midpoints]`
+
+The cell decomposition of §4 was first computed by evaluating `⌊ex⌋` at the **centre**
+of each cell. That is only sound if the breakpoint list is complete, and it hides
+exactly the endpoint behaviour that matters here — `5·(3/5) = 3` and `7·(5/7) = 5` are
+both exact hits, so the window `[3/5,5/7)` must be closed on the left and open on the
+right or the floors `t₅ = 3`, `t₇ = 4` are wrong at an endpoint.
+
+`experiments/n8/boundary_exact_v1.py` redoes §4 measuring **entry and exit** of every
+cell and never an interior point:
+
+- **Completeness.** For every cell `[a,b)` and every `e`, there is no integer `k` with
+  `a < k/e < b`. Checked as an exact rational comparison, not by sampling.
+  Result: **0 interior breakpoints** across all three `ρ₀`.
+- **Entry/exit agreement.** `⌊e·a⌋` (entry; cells are left-closed) equals
+  `lim_{x→b⁻} ⌊ex⌋ = ⌊e·b⌋ − [e·b ∈ ℤ]` (exit). Result: **0 mismatches**, and the
+  blocked-set union computed at entry equals the one computed at exit in every cell.
+- **Measures unchanged:** `22/35`, `5/14`, `6/7`.
+- **`B_m` two ways.** Derived from the floor definition `⌊8mx⌋ mod 8 ∈ {0,7}` and from
+  the closed form `⋃_j [j/m − 1/(8m), j/m + 1/(8m))`: identical as interval sets, and
+  measure exactly `1/4`, for `m = 1..6`.
+
+**Direction of the one inclusion that is not exact.** The coded bad set is left-closed
+and right-open. The bridge (§1) has a boundary exception: when `(t_e + er) ≡ 7 (mod 8)`
+**and** `s_e = 0`, runner `e` is in fact satisfied. That exception only **removes**
+points from the true bad set. So the set used above is a **superset** of the true bad
+set, and every conclusion of the form "a safe fibre exists" drawn from it is
+conservative — it can only understate the safe set, never overstate it.
