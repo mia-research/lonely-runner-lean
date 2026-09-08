@@ -31,6 +31,7 @@ with `σ_1 = +1`:
 | **`(1,1,−1,−1)`** | **−8** | **0** | **admissible** — family B, `e_1+e_3 = e_5+e_7` |
 | `(1,−1,1,−1)` | −4 | 4 | impossible |
 | **`(1,−1,−1,1)`** | **0** | **0** | **admissible** — family A, `e_1+e_7 = e_3+e_5` |
+| `(1,−1,−1,−1)` | −14 | 2 | impossible |
 
 **A and B are mutually exclusive**: together they give `2e_1 + e_3 + e_7 = e_3 + 2e_5 +
 e_7`, so `e_1 = e_5` — impossible since `e_1 ≡ 1` and `e_5 ≡ 5 (mod 8)`. So the `±1`
