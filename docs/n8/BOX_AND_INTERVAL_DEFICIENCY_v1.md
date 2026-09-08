@@ -15,8 +15,15 @@ leaves. Rather than test the box, enumerate the objects it would apply to.
 computation. Candidates are filtered by `gcd(T) = 1` and the witness ladder (for each
 `q ∈ {2,…,7}` some speed is divisible by `q`, else `t = 1/q` gives `M ≥ 1/q > 1/8`).
 
-Exhaustive over speeds `≤ 26`: **197 294** candidates, **3** tight instances, and **none**
-of them carries a multiple of 8.
+Exhaustive over speeds `≤ 44`: **12 743 536** candidates, **3** tight instances, and
+**none** of them carries a multiple of 8. (Same three at `≤ 26`, from 197 294 candidates.)
+
+**The float pre-filter is provably sound, not merely tolerated.** Every interval endpoint
+is `(8k±1)/(8v)`, so any gap between consecutive bad intervals is
+`[v(8k'−1) − v'(8k+1)] / (8vv')` — an integer over `8vv'`. A **nonzero** gap is therefore
+at least `1/(8·43·44) = 1/15136 ≈ 6.6×10⁻⁵`, five orders above the `10⁻⁹` tolerance, while
+a tight instance has gap exactly `0`. So the filter rejects exactly the non-tight tuples and
+cannot discard a tight one; the survivors are re-decided exactly regardless.
 
 | tight instance | `a_i = 7e_i/e_7` | box `a_j ∈ (j−1,j+1)`, `j=2..6` |
 |---|---|---|
@@ -28,15 +35,17 @@ This reproduces `TIGHT_INSTANCES_v1.md` §5's table independently, and it answer
 question posed there:
 
 > **On the residual class the box question is vacuous — there is nothing in the class.**
-> No tight instance at `n = 8` carries a multiple of 8, exhaustively over speeds `≤ 26`.
+> No tight instance at `n = 8` carries a multiple of 8, exhaustively over speeds `≤ 44`.
 
 `TIGHT_INSTANCES_v2.md` §1 has the same conclusion over the narrower with-8 candidate set
-to `≤ 34`; this is the wider set (all tight instances, no divisibility restriction) and
-gives the box its answer directly rather than by inheritance.
+to `≤ 34`, and `HALVING_AND_TIGHT_WITNESS_v1.md` §4 reached `≤ 44` for the residual class
+with a float first stage. This is the **wider** set — all tight instances, no divisibility
+restriction — carried to `≤ 44` with the pre-filter's soundness proved above, and it gives
+the box its answer directly rather than by inheritance.
 
 **Closure grade.** Object: the global sign-range box at `n = 8`. Observable: the `a`-vector
-of an extremal configuration. Power: exhaustive over speeds `≤ 26`, exact. Scope: that
-range. **The box is false as stated** — two explicit counterexamples, not a null — and on
+of an extremal configuration. Power: exhaustive over speeds `≤ 44`, exact (sound pre-filter). Scope: that
+range — one-sided, as always: a tight instance above 44 would not have been seen. **The box is false as stated** — two explicit counterexamples, not a null — and on
 the class where it might have been repaired there is nothing to repair it against. So the
 `2^5` sign-class decomposition has no `n = 8` analogue to run on. A *per-cycle* form is
 not excluded; it is simply unconstrained by any object now in evidence. This is a scoped
@@ -136,8 +145,9 @@ witnesses, 55% profile cut, 7% sharpness), and the new assertion never fired.
 
 ## 6. Ledger
 
-`[PROVED — exhaustive, speeds ≤ 26]` exactly three tight instances at `n = 8`, none
-carrying a multiple of 8; the box fails on two of them.
+`[PROVED — exhaustive, speeds ≤ 44]` exactly three tight instances at `n = 8`, none
+carrying a multiple of 8; the box fails on two of them. Pre-filter soundness proved, not
+assumed.
 `[PROVED, given LRC(7)]` the interval-deficiency theorem and the four-row ladder; the
 `|L| = 1` row is TOP_GAP recovered.
 `[VERIFIED — 6 792 exact witnesses]` §4, boundary control included.
