@@ -50,19 +50,27 @@ def bad_intervals(z):
         if lo < hi: out.append((lo, hi))
     return out
 
-def lonely_set(Z):
-    """complement in [0,1) of the union of bad sets of the speeds Z. Returns closed pieces."""
-    iv = sorted(x for z in Z for x in bad_intervals(z))
+def lonely_set(Z, lvl=LEVEL):
+    """{t in [0,1] : ||z t|| >= lvl for all z in Z}, exact, closed components including
+    ISOLATED POINTS.  Bad sets complemented as OPEN intervals, merged on STRICT overlap.
+    Needed because the lonely set can be a single point exactly when Z is a tight instance
+    of LRC(|Z|+1); the earlier closed-merge version dropped those (conservative, so the
+    published run stands) but would have raised on such a Z."""
+    iv = sorted((F(k, z) - lvl / z, F(k, z) + lvl / z)
+                for z in Z for k in range(-1, z + 2))
     merged = []
     for lo, hi in iv:
-        if merged and lo <= merged[-1][1]: merged[-1][1] = max(merged[-1][1], hi)
+        if merged and lo < merged[-1][1]: merged[-1][1] = max(merged[-1][1], hi)
         else: merged.append([lo, hi])
     good, cur = [], F(0)
     for lo, hi in merged:
-        if cur < lo: good.append((cur, lo))
+        if lo > 1: break
+        if cur <= lo:
+            a, b = max(cur, F(0)), min(lo, F(1))
+            if a <= b: good.append((a, b))
         cur = max(cur, hi)
-    if cur < 1: good.append((cur, F(1)))
-    return good
+    if cur <= 1: good.append((max(cur, F(0)), F(1)))
+    return [(a, b) for a, b in good if 0 <= a <= b <= 1]
 
 # ---------------------------------------------------------------- PART A
 def part_A(QMAX=48):
@@ -127,6 +135,7 @@ def engine_witness(T, q):
     if not good: raise AssertionError(f"LRC({len(Z)+1}) violated on {Z}")
     lo, hi = max(good, key=lambda p: p[1] - p[0])
     s0 = (lo + hi) / 2
+    assert all(nrm(F(z) * s0) >= LEVEL for z in Z), f"sigma0={s0} not lonely for Z={Z}"
     for k in range(q):
         if all(nrm(F(v, q) * (s0 + k)) >= LEVEL for v in L):
             return (s0 + k) / q, k, s0
