@@ -39,7 +39,8 @@ for fam, dfun in (("A", lambda a,b,c: b+c-a), ("B", lambda a,b,c: a+b-c-1)):
         if o > THIRD and sp not in EXC: hits.append((o,u,sp,fam))
         if fam not in best or o > best[fam][0]: best[fam] = (o,u,sp)
 print(f"resonant primitive tuples scanned (a,b,c <= {CAP}, both families): {n}")
-print(f"   max speed reachable: {8*3*CAP+7}")
+print(f"   max speed reachable: {8*2*CAP+7}")   # d = b+c-a <= 2*CAP, NOT 3*CAP
+print(f"   NOTE: this is a PARAMETER box (a,b,c <= CAP), not a speed box.")
 for fam in ("A","B"):
     o,u,sp = best[fam]
     print(f"   family {fam}: max o = {o} = {float(o):.6f}  at {sp}  (u = {u})")
