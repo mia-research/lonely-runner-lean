@@ -72,7 +72,10 @@ Five speeds lie on the grid `2·T₁ = {2,4,6,8,10,12,14}`; two — `7` and `13`
 |---|---|
 | what a **generic** two-runner deviation would give, `(3/4)²·\|G(on-grid five)\|` | `369/8960 = 0.041183` |
 | the **actual** `\|G(E*)\|` | `93/14560 = 0.006387` |
-| ratio | **0.155 — a factor 6.4 below generic** |
+| ratio, **exact** | **`248/1599`** — i.e. a factor `1599/248 = 6.4476…` below generic |
+
+(`93/14560 ÷ 369/8960 = 248/1599`; the decimals above are renderings of exact
+rationals, never the source of a claim — see §7.)
 
 And the reason is visible: the off-grid speeds are not generic. `13 = 6 + 7` and `7 = 14/2`
 are both resonant with the on-grid part. **The extremum is not the tuple furthest from a
@@ -95,9 +98,24 @@ generic deviation is exactly `3/4` per runner. The `ov` proximity count of `AB_S
 is the *shadow* of this — it counts how many speeds are on the grid but not how resonant
 the off-grid ones are, and §5 shows that is the factor of 6.4 it cannot see.
 
-## 7. Grades
+## 7. Exactness audit  `[PROVED]`
+
+`experiments/n8/ok_float_audit_v1.py`, two stages. **Source scan**: every `/`, `float()`
+and decimal literal in this session's nine scripts, classified. All hits are `/` inside
+printed text or docstrings, except two — `dyadic_engine_v1.py:141` is `Fraction/int`, hence
+exact, and `box_and_deficiency_v1.py:65` (`0.125/v`) is the **deliberate float rejection
+pre-filter**, whose soundness is proved in `BOX_AND_INTERVAL_DEFICIENCY_v1` §1 (a nonzero
+gap is an integer over `8vv'`, hence `≥ 1/15136`, five orders above the `10⁻⁹` tolerance;
+survivors are re-decided exactly regardless). **No float sits on any decision path.**
+
+**Runtime type check**: every quantity reported in this document and its predecessors is
+recomputed and its type asserted — `|G(E*)| = 93/14560`, `(3/4)²|G(on)| = 369/8960`,
+`3/32`, `93/1820`, `93/3640` — all `Fraction`. Reported quantities exact: **True**.
+
+## 8. Grades
 
 §1: **PROVED** to first order in `ε` (the window arithmetic is exact; the linearisation is
 what is first-order). §2, §3: **PROVED — exact and exhaustive** in the stated sweeps.
 §4: **null, measured** on all 63 pairs. §5: **PROVED** (exact rationals). §6.1 cites the
-exhaustive sweep of this project; 6.3 is **OPEN**.
+exhaustive sweep of this project; 6.3 is **OPEN**. §7: **PROVED** — the audit is itself a
+runnable artifact, not an assurance.
