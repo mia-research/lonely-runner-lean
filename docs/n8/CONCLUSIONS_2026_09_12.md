@@ -96,9 +96,14 @@ Reserve profiles: tight AP `0,4,4,2,2,4,4,0`; alternating `8,12,8,2,2,8,12,8`; t
 ## 4. What a deviation does
 
 - It removes the spine from **exactly the runners it puts into residue collision** — all `φ(8)`
-  instants at once, since the spine is all-or-nothing.
-- The **reserve is left alone**: for 3,657 runners that kept the spine across a move, reserve
-  went up 30.4%, unchanged 40.8%, down 28.8%; mean 5.84 → 5.87.
+  instants at once, since the spine is all-or-nothing. For a single displaced runner that is a
+  pair; §5's table shows collisions running to 3 and 4 in general.
+- For runners that **keep** the spine, reserve is roughly unchanged: over 3,657 such runners,
+  up 30.4%, unchanged 40.8%, down 28.8%; mean 5.84 → 5.87.
+- For runners that **lose** the spine, reserve is **created**: over 252 spine-losing instances,
+  reserve up 252, same 0, down 0. Of the 69 with reserve 0 beforehand, counts after are 2, 4,
+  6 — none at 0. **This compensation, not the prior reserve, is what keeps a zero-reserve
+  runner off zero.**
 - A runner that loses the spine lands on a finer 2-power lattice: levels `{1:1474, 2:2056,
   3:1404, 4:202}` over 5,136 floor-of-2 runners, and **zero at level 0**, which (2) forces.
 - Moving a runner **toward the centre** of the pack costs more than moving it the same distance
@@ -106,26 +111,33 @@ Reserve profiles: tight AP `0,4,4,2,2,4,4,0`; alternating `8,12,8,2,2,8,12,8`; t
 - Holding the deviation multiset fixed and varying only **which residue each attaches to**
   swings the floor up to **4×**.
 
-## 5. Where the difficulty is
+## 5. How the count varies
 
-**Exactly one residue collision.** Min count by number of runners sharing a runner's residue,
-exhaustive over `[1..24]`:
+Nothing below fails; every configuration listed has every runner lonely. These are variations
+in the *size* of the count, and no relationship between a small count and proximity to zero
+has been established — by (8) the count cannot be 1, so 2 is not "nearly 0" in any sense yet
+demonstrated.
+
+**Min count by number of runners sharing a runner's residue**, exhaustive over `[1..24]`:
 
 | shares with | 0 others | 1 other | 2 others | 3 others |
 |---|---|---|---|---|
 | instances | 4,044,814 | 3,778,096 | 791,910 | 23,436 |
 | **min count** | 4 | **2** | 4 | 8 |
 
-**Grid distance.** Danger band `k = 1..4`:
+**Min count by grid distance.** Lowest for `k = 1..4`:
 
 | `k` | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |---|---|---|---|---|---|---|---|---|
 | min count | 4 | **2** | **2** | **2** | **2** | 4 | 8 | impossible |
 | `max S` | 8 | 6 | 4–6 | 3–6 | 4,6 | 4–6 | 4,6 | — |
 
-**Both flanks are safe, for different reasons.** `k = 0` by the spine (proved). `k ≥ 5` by the
-spread that high `k` forces (7). Near-collision by explosion: as two runners approach, the
+`k = 0` is held at 4 by the spine (proved). `k ≥ 5` is higher because high `k` forces spread
+(7). Near-collision raises the count rather than lowering it: as two runners approach, the
 count grows like `1/ε` — 300 at `ε = 1/100` — with the rate converging to 3.
+
+`k` is a count of residue collisions, correlated with the mechanism in §4 but not identical to
+it; the non-monotonicity across `k` reflects that.
 
 ## 6. Scale behaviour
 
@@ -138,15 +150,25 @@ count grows like `1/ε` — 300 at `ε = 1/100` — with the rate converging to 
 - A window is the intersection of a fixed component with a sliding bad interval: **one endpoint
   fixed, the other sliding until it clamps.**
 
-## 7. Why the framework does not yet close
+## 7. Status of the induction route
 
-If some configuration had a runner at count 0, any path from the reference has a **first** move
-breaking the invariant. So "the invariant survives every move" is logically identical to "no
-configuration has count 0". The framework re-indexes the problem by move rather than by
-configuration; it does not reduce it.
+**Reachability holds.** Every 8-set sits inside a grid `{1..M}` that also contains a reference;
+with `M > 8` a free slot lets runners be moved one at a time without collision. So every
+configuration is reachable from a reference by finitely many single moves.
 
-This is the structural obstacle any argument of this shape must pass, and it is not a defect of
-the idea.
+**What has actually been checked.** One formulation of the inductive step was tested and does
+not localise: for a non-moved runner, death means `A ⊆ B_{d'}` where `A` is its six-constraint
+good set — and "can one bad set swallow a six-constraint good set" is the seven-constraint
+emptiness question again (`FRAMEWORK_REASONING_v1` Pass 3).
+
+**What was previously overstated here.** An earlier version argued that since "the invariant
+survives every move" is logically equivalent to "no configuration has count 0", the framework
+re-indexes rather than reduces, and called this a structural obstacle. That does not follow —
+**every** proof route is equivalent to its target, and an induction supplies something the
+global statement does not: the configuration one move back, with its spine holders, residue
+structure and reserve profile. §4's compensation result is exactly a move-level statement of
+that kind. The route is open; one formulation of the step has been checked and found not to
+localise.
 
 ## 8. Floors
 

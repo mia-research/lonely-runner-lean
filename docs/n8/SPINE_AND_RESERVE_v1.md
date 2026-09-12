@@ -71,13 +71,29 @@ shapes do. The base minimum *is* the reserve, and the reserve is what survives a
 
 ## 4. Why spread grids resist
 
-A spread grid's runners each carry 6–14 reserve windows. A single collision costs the spine,
-4 windows, and leaves the reserve intact — so the runner lands at its reserve value, not near
-zero. Reaching 2 from such a grid takes **two** moves (`WN_grid_shape_space` §4): one to
-destroy the spine, another to dismantle the reserve.
+**CORRECTED.** An earlier version said a collision "leaves the reserve intact — so the runner
+lands at its reserve value, not near zero". That is false, and false in the direction that
+matters.
 
-The tight grid needs only one move because step two is already done — there is no reserve to
-dismantle.
+Measured over 252 spine-losing runner-instances across single moves off grids in `[1..16]`:
+
+| reserve after vs before | up | same | down |
+|---|---|---|---|
+| instances | **252** | 0 | 0 |
+
+**Losing the spine creates reserve.** Of the 69 spine-losers that had reserve 0 beforehand,
+the counts after are 2, 4 and 6 — **none at 0**. On the worked move of §3, the runner at
+reduced speed 0 had reserve 0, lost all four spine instants, and landed at **2**.
+
+Had a zero-reserve runner actually landed at its reserve value it would have landed at 0. The
+compensation is the entire content: the runner drops onto a finer 2-power lattice
+(`GRID_TOWER_v1`) and acquires windows that did not exist before.
+
+The 5.84 → 5.87 mean reported elsewhere is for runners that **kept** the spine, a different
+population, and says nothing about this.
+
+A spread grid still needs two moves to reach 2 while the tight grid needs one
+(`WN_grid_shape_space` §4) — but the reason is not "no reserve left to dismantle".
 
 ## 5. Reading
 
