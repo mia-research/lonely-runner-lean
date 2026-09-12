@@ -73,6 +73,34 @@ So deviation from the reference does not erode isolation progressively. It levie
 bounded toll — one mirror pair — and then stops taking. That is why moving away from the AP
 cannot drive a runner to zero: the mechanism that would have to do it is not cumulative.
 
+
+## 4a. Counterexample search (carried forward from v1 §4, extended)
+
+A counterexample to LRC(8) is a configuration whose worst runner has event count **0** —
+the objective directly, not a proxy.
+
+| method | population | floor |
+|---|---|---|
+| exhaustive `[1..22]`, primitive | 319,605 | 2 |
+| near-AP adversaries | 48,745 | 2 |
+| hill-climb on the count | — | 2 |
+| annealing, 90 restarts | — | 2 (43 of 90) |
+| **annealing, 300 restarts, unrestricted speeds** | — | **2 (95 of 300)** |
+
+The 300-restart run: local-optimum distribution
+`{2: 95, 4: 81, 6: 36, 8: 19, 10: 13, 12: 14, 14: 12, 16: 7}`, minimiser
+`(2,3,7,9,12,13,14,17)` with counts `[12,10,8,2,8,14,8,8]`. Nothing below 2 in any
+population. By `WN_count_parity`, 1 is unreachable, so 2 and 1 are the same floor and the
+only live question is 0.
+
+**What a search can and cannot do.** No search establishes a floor. Two search-design
+failures in this same session produced false floors that looked solid from several angles:
+the `mmin` ceiling of 29 was an artefact of the search box and broke to 44 when widened
+(`CONJECTURE_M_REFUTED_v1` §3), and §0 above is a third. Context: n = 8 is proved in the
+literature (Rosenfeld 2025, his `k = 7`), so a counterexample would refute a published
+result — these searches locate extremal structure and validate machinery, they are not a
+live hunt.
+
 ## 5. What this does not establish
 
 The floor of 2 is not proved, here or anywhere in this project. §2 is exhaustive over the
@@ -86,6 +114,7 @@ n = 8 is **not proved**. Nothing here bears on the published proof (Rosenfeld 20
 ## 6. Status
 
 `[VERIFIED — exhaustive]` §2's two grids; §3's pair matrix.
+`[VERIFIED — searched]` §4a's five populations; the floor of 2 is not proved by any of them.
 `[PROVED]` the parity law making the count a count of mirror pairs.
 `[RETRACTED]` `TRANSIT_MAP_FULL_v1` §2 and its correction of `VACANCY_FRAME_v1` §3;
 `VACANCY_FRAME_v1` §3 stands.
