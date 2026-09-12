@@ -97,6 +97,34 @@ Worked examples, all with spine count 4 and `max S` 6:
 So the spine is a guaranteed *floor* on simultaneity, not the mechanism producing the maximum.
 Off-grid, runners re-group at finer times.
 
+## 4b. Structure of the maximal-set system  `[VERIFIED — exhaustive [0..13]]`
+
+`(number of maximal sets, size of the largest)` by grid distance, four most common per row:
+
+| `k` | most common `(count, largest)` |
+|---|---|
+| 0 | `(1, 8): 64` — **every** grid, without variation |
+| 1 | `(5,6): 288`, `(4,6): 240`, `(3,6): 232`, `(6,6): 64` |
+| 2 | `(5,4): 406`, `(6,4): 376`, `(4,4): 221`, `(7,4): 124` |
+| 3 | `(6,4): 112`, `(5,4): 108`, `(5,5): 56`, `(7,4): 50` |
+| 4 | `(2,6): 4`, `(6,4): 4`, `(7,4): 2`, `(3,4): 2` |
+
+- `k = 0`: exactly **one** maximal set, of size 8, in all 64 grids. No variation at all.
+- `k = 1`: the largest is **always 6**; only the number of maximal sets varies (3 to 6).
+- `k ≥ 2`: both quantities vary.
+
+So the system is rigid at `k = 0`, half-rigid at `k = 1` (size fixed, count free), and free
+beyond. The count of maximal sets rises from 1 to typically 5–7 as `k` grows: **the single
+all-runner coalition of a grid fragments into several smaller ones.**
+
+## 4c. `max S` at `k = 5`  `[VERIFIED — [0..21]]`
+
+    (k=5, max S=4): 110      (k=5, max S=5): 4      (k=5, max S=6): 72
+
+`max S` is **not** monotone in `k`: `k = 5` reaches 6, the same as `k = 1`, while `k = 2,3,4`
+often sit at 4. Grid distance bounds `max S` at the two extremes (8 only at `k=0`, exactly 6
+at `k=1`) and does not control it in between.
+
 ## 5. S(t) = 0 occurs everywhere
 
 Every configuration examined has instants at which **no** runner is lonely (5 cells for the AP
@@ -117,14 +145,16 @@ not a slide.
   behaviour is continuous sliding with splits/merges as bad intervals cross, and the measure
   jump at commensurate points explained by exact tiling of the bad intervals — neither
   checked.
-- Whether the maximal-set system has structure (a covering design, a matroid) or is arbitrary.
-- `max S` for `k ≥ 5`, absent from the box.
+- Whether the maximal-set system is a known combinatorial object; §4b gives its coarse
+  statistics only.
+- `max S` for `k ≥ 6`.
 
 ## 8. Status
 
 `[PROVED]` §1's two statements.
 `[VERIFIED — exhaustive]` §2, §3 over 6,434 primitive 8-sets in `[0..14]`.
-`[VERIFIED — exhaustive]` §4a over `[0..14]`, 2,032 qualifying configurations.
+`[VERIFIED — exhaustive]` §4a over `[0..14]`, 2,032 qualifying configurations; §4b over
+`[0..13]`; §4c over `[0..21]`.
 `[VERIFIED — exact]` §4, §4a's examples, §5 on the named configurations.
 
 **n = 8 is not proved.** Nothing here bounds any individual count below.
