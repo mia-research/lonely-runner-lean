@@ -70,6 +70,33 @@ removed it from every shared instant, not merely from the four.
 
 E* fragments furthest: 7 maximal sets, none larger than 4.
 
+## 4a. The max-S coalition usually is NOT the spine set  `[VERIFIED — exhaustive [0..14]]`
+
+`max S ≥ spine count` is proved (§1), so it is natural to expect the maximum to be the spine
+set plus extras. It usually is not. Of **2,032** configurations with `k ≥ 2` in which `max S`
+exceeds the spine count:
+
+| max-S set is… | count |
+|---|---|
+| **not** a superset of the spine set | **1,760 (87%)** |
+| a superset of the spine set | 272 (13%) |
+
+Worked examples, all with spine count 4 and `max S` 6:
+
+    V = (0,1,2,3,4,5,8,13)   spine holders {2,3,4,5} at t = 1/8
+                             max-S coalition {1,3,4,5,6,8} at t = 237/1664
+                             drops runner 2, adds 1, 6, 8
+
+    V = (0,1,2,3,4,5,9,13)   spine {1,3,4,5}   max-S {1,2,4,5,6,8}, drops 3, adds 2, 6, 8
+    V = (0,1,2,3,4,5,10,13)  spine {1,2,4,5}   max-S {1,2,3,5,6,8}, drops 4, adds 3, 6, 8
+
+> **The spine set is replaced, not extended.** The maximum occurs at a different instant
+> (`237/1664`, denominator `2⁷·13`) and involves a different coalition — one spine-holder
+> drops out and three non-holders join.
+
+So the spine is a guaranteed *floor* on simultaneity, not the mechanism producing the maximum.
+Off-grid, runners re-group at finer times.
+
 ## 5. S(t) = 0 occurs everywhere
 
 Every configuration examined has instants at which **no** runner is lonely (5 cells for the AP
@@ -90,7 +117,6 @@ not a slide.
   behaviour is continuous sliding with splits/merges as bad intervals cross, and the measure
   jump at commensurate points explained by exact tiling of the bad intervals — neither
   checked.
-- The excess `max S − spine count` at `k ≥ 2`: which runners join, and at what instants.
 - Whether the maximal-set system has structure (a covering design, a matroid) or is arbitrary.
 - `max S` for `k ≥ 5`, absent from the box.
 
@@ -98,6 +124,7 @@ not a slide.
 
 `[PROVED]` §1's two statements.
 `[VERIFIED — exhaustive]` §2, §3 over 6,434 primitive 8-sets in `[0..14]`.
-`[VERIFIED — exact]` §4, §5 on the named configurations.
+`[VERIFIED — exhaustive]` §4a over `[0..14]`, 2,032 qualifying configurations.
+`[VERIFIED — exact]` §4, §4a's examples, §5 on the named configurations.
 
 **n = 8 is not proved.** Nothing here bounds any individual count below.
