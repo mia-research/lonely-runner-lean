@@ -57,8 +57,11 @@ No conclusion is drawn. Items are stated with their evidence base.
     | min count | 4 | 2 | 2 | 2 | 2 | 4 | 8 | impossible |
     | `max S` | 8 | 6 | 4–6 | 3–6 | 4,6 | 4–6 | 4,6 | — |
 
-17. `k = 1 ⟹ max S = 6` in 1,792 configs `[0..14]` and 5,824 configs `[0..16]`. Wider boxes
-    pending.
+17. `k = 1 ⟹ max S = 6`. At `k = 1` exactly one residue is doubled, so 6 runners hold the
+    spine and `max S ≥ 6` follows from (5); the configuration is not a grid so `max S ≤ 7`
+    follows from (4). **The observation is that 7 never occurs**: `max S = 6` in 1,792 configs
+    `[0..14]`, 5,824 `[0..16]`, 14,688 `[0..18]`, and 600 random from `[0..59]` — 22,304 in
+    total, including a wide sample outside the small-box regime.
 18. `k = 6`: 1,320 constructed configurations, min count 8–26, zero spine holders in every one.
 19. Sharing a residue with 0 others → min count 4; with 1 other → 2; with 2 others → 4.
     Exhaustive `[0..20]`: 779,506 / 718,844 / 127,890 instances.
@@ -122,12 +125,11 @@ No conclusion is drawn. Items are stated with their evidence base.
 
 ## Open
 
-40. `k=1 ⟹ max S = 6` beyond `[0..16]`.
-41. The popcorn structure of the measure — jump magnitude as a function of denominator.
-42. Window trajectories on paths where the varying constraint is not the largest, or where more
+40. The popcorn structure of the measure — jump magnitude as a function of denominator.
+41. Window trajectories on paths where the varying constraint is not the largest, or where more
     than one constraint moves.
-43. A measure-based statement of the floor. Every count result lives on reduced integer
+42. A measure-based statement of the floor. Every count result lives on reduced integer
     configurations and has no analogue at irrational speeds.
-44. `k = 6` reached by construction, not enumeration; a second generator not yet run.
+43. `k = 6` reached by construction, not enumeration; a second generator not yet run.
 
 **n = 8 is not proved. Nothing above bounds any count below.**
