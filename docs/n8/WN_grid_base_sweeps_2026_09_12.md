@@ -33,6 +33,33 @@ small; here they enlarge it.
 > The rule is **small reduced configurations are dangerous**. Halves achieved that in one
 > setting and the opposite in another.
 
+## 2a. Fine sweep between grid points  `[VERIFIED — 193 positions, resolution 1/24]`
+
+§1 stepped in halves, which barely samples the interior. Sweeping `x` from grid point 8 to
+grid point 16 at resolution `1/24` — every position strictly between is off-grid:
+
+| denominator of `x` | 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24 |
+|---|---|---|---|---|---|---|---|---|
+| positions | 9 | 8 | 16 | 16 | 16 | 32 | 32 | 64 |
+| **min count** | **2** | 10 | 12 | 13 | 25 | 25 | 37 | 71 |
+
+The minimum over the whole interval is **2, attained only at `x = 9`**, an integer. Every
+position with count `≤ 4` is an integer: `x = 8, 9, 10, 14`. The minimum rises monotonically
+with the denominator of `x`.
+
+**Non-integer speeds are uniformly safer here**, and this reconciles §2 with the
+AP-displacement result. The operative quantity is the size of the configuration *after
+reduction by the gcd*:
+
+- moving **all** runners onto a common finer lattice (AP case, `k = 8` on halves) leaves the
+  reduced configuration the same size — so counts stay low;
+- moving **one** runner off the lattice the other seven occupy (here) multiplies the reduced
+  configuration by that runner's denominator `q` — so counts scale up with `q`.
+
+That is why halves were the adversary's choice in one experiment and the safest option in the
+other. Neither "halves" nor "small denominators" is the rule; **a small reduced configuration
+is the rule**, and the two experiments reach it by opposite means.
+
 ## 3. The worst position is one grid step past the grid point
 
 | base | grid step | `x = G−s` | `G` | `G+s` | `G+2s` | `G+3s` |
@@ -82,8 +109,8 @@ reference with **one runner displaced by a single grid step**.
 
 ## 6. Status
 
-`[VERIFIED — exact]` §1's 65 positions; §3's affine equivalences and the three-base table;
-§4's three spread bases.
+`[VERIFIED — exact]` §1's 65 positions; §2a's 193-position fine sweep; §3's affine
+equivalences and the three-base table; §4's three spread bases.
 `[CORRECTED]` the "adversary chooses halves" reading in
 `WN_offap_displacement_map_2026_09_12` §4 — see §2. The minimisers there are halves, but the
 operative property is the size of the reduced configuration, not the denominator.
