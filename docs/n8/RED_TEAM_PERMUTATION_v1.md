@@ -78,19 +78,51 @@ which is an AP of common difference 3, reducing to `(0,1,2,3,4,5,6,7)` — **the
 assignment reconstitutes the tight AP**. The permutation does not move away from the
 reference; it rebuilds it out of scattered deviations.
 
-## 4. Still untested
+## 4. Tested since: moves from non-grid bases  `[VERIFIED — sampled]`
+
+Every base in the series was a grid. Sampling 40 bases per grid distance from `[0..16]`, one
+runner moved to any integer within span 14:
+
+| base `k` | pool | reach 2 in one move | base min includes 2? |
+|---|---|---|---|
+| 0 | 384 | 36/40 | no — forced ≥ 4 by the spine |
+| 1 | 5,824 | 33/40 | yes |
+| 2 | 12,432 | 31/40 | yes |
+| 3 | 5,320 | 28/40 | yes |
+| 4 | 340 | 32/40 | yes |
+
+Non-grid bases behave like grid bases: a single move reaches 2 from 70–90% of them, and
+**nothing reaches below 2** at any `k`. The one structural difference is the expected one —
+grid bases never start at 2, because the spine forces ≥ 4, while non-grid bases sometimes
+already sit there.
+
+Consistency check on the spine decomposition, over all runner-instances of primitive 8-sets:
+
+| population | level 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|---|
+| all runners, `[0..18]` | 297,396 | 204,556 | 86,408 | 15,500 | 364 |
+| floor-of-2 runners, `[0..22]` | **0** | 1,474 | 2,056 | 1,404 | 202 |
+
+Level 0 means holding the eighth-lattice, which forces count ≥ 4 — so zero floor-of-2 runners
+at level 0 is exactly what §1 predicts, against 49% of the general population. Crashed runners
+sit measurably deeper: mode 0 for the population, mode 2 for the crashed.
+
+## 5. Still untested
 
 - `q` entries beyond `{0,1,2}` in the shape enumeration.
-- Moves starting from **non-grid** bases (`k = 1..4`); every base in the series was a grid.
 - How `k` itself changes under a move, and whether that predicts the count change.
 - The fate of the **reserve** under a move — §1–2 track only the spine.
 - A runner colliding with **two** others simultaneously.
+- Whether the "worst permutation reconstitutes an AP" observation in §3 is general or was one
+  multiset's accident.
 
-## 5. Status
+## 6. Status
 
 `[PROVED]` §1's nesting (`d ≡ 0 mod 8 ⟹ d ≡ 0 mod 4`) and the per-`k` conditions.
 `[VERIFIED — exact]` §1's transition check; §2's window locations; §3's six multisets,
 exhaustive over assignments.
-`[RECORDED]` §4's five untested directions.
+`[VERIFIED — sampled]` §4's five base classes, 40 bases each, plus the two level
+distributions (604,224 and 3,917,216 runner-instances).
+`[RECORDED]` §5's five remaining untested directions.
 
 **n = 8 is not proved.**
