@@ -55,16 +55,19 @@ outside it — not a contradiction, a boundary.
 then 0.20, 0.54, 0.97 at 4, 5, 6. Profiling the `v_max = 3` sets: those with excess 0 average
 3.19 odd differences, those with excess > 0 average 4.57.
 
-**Excess is bounded and shrinks as `v_max` grows.** Over random wide-range sets:
+**Excess is bounded and shrinks as `v_max` grows — but does not reach 0.** Random
+wide-range sets suggested it did; targeted construction shows otherwise (see §6). Building
+sets with `v_max` forced to exactly `V`, 260 per row:
 
-| `v_max` | 3 | 4 | 5 | 6 | 7 | 8 | 9–13 |
-|---|---|---|---|---|---|---|---|
-| max excess | 2 | 1 | 1 | 0 | 0 | 0 | 0 |
-| fraction at excess 0 | 93% | 92% | 99% | 100% | 100% | 100% | 100% |
+| `v_max` | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| excess 0 | 256 | 255 | 259 | 260 | 259 | 260 | 260 | 260 | 259 | 260 |
+| excess 1 | 4 | 5 | 1 | 0 | **1** | 0 | 0 | 0 | **1** | 0 |
+| max excess | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 |
 
-So for `v_max ≥ 6` the level is **exactly** `v_max − 2` in every case observed: a runner is
-lonely at grid `m = 2^{v_max+1}`, one step past the largest power of two dividing any of its
-differences. The difficulty is confined to `v_max ∈ {3,4}`.
+So the level is `v_max − 2` for the large majority and `v_max − 1` for a thin remainder that
+persists to at least `v_max = 11`. A runner is lonely at grid `m = 2^{v_max+1}` or
+`2^{v_max+2}`. The bulk of the difficulty is at `v_max ∈ {3,4}`, where the excess reaches 2–3.
 
 **The worst cells are small.** Only **two** sets in the whole box need excess 3:
 
@@ -82,16 +85,37 @@ Case B is not one problem. It is two small cells:
 - **`v_max = 4`** — 27,048 sets, excess up to 2. No lemma reaches this row at all, because the
   parity lemma's side condition excludes it.
 
-Everything with `v_max ≥ 5` was excess 0 or 1 in sampling and excess 0 from `v_max ≥ 6`. That
-is not proved and the sampling there is thin (144 sets at `v_max = 6`, 7 at `v_max = 9`).
+Everything with `v_max ≥ 5` has excess ≤ 1 under targeted construction (§6) — small, but not
+zero, and not proved.
 
 ## 5. Status
 
 `[PROVED]` Case A cells (`v_max ≤ 2`); the `v_max = 3, #odd ≤ 3` cells (parity lemma);
 the constraint `j ≥ v_max − 2`.
 `[VERIFIED — exhaustive]` §2's table over `[1..20]`.
-`[VERIFIED — sampled]` §3's wide-range excess table; the `v_max ≥ 5` rows are thin.
+`[VERIFIED — targeted]` §3's excess table, 260 constructed sets per valuation row, `v_max`
+to 12.
+`[RETRACTED]` the first version's claim that excess is 0 for all `v_max ≥ 6` — see §6.
 `[OPEN]` the four open cells, 45.5% of the box.
 
 **n = 8 is not proved.** This note maps where the remaining difficulty sits; it removes none
 of it.
+
+## 6. Correction — "excess 0 for `v_max ≥ 6`" is false
+
+The first version of §3 reported, from random wide-range sampling, that excess is 0 in every
+observed case once `v_max ≥ 6`, and flagged that sampling as thin (144 sets at `v_max = 6`,
+7 at `v_max = 9`).
+
+Targeted construction falsifies it. Forcing one difference to valuation exactly `V` and the
+rest below it, 260 sets per row: **excess 1 occurs at `v_max = 7` and at `v_max = 11`** —
+2 of 1,820 sets with `v_max ≥ 6`.
+
+Random sampling missed these because it almost never produces large valuations: a random
+integer has `v₂ ≥ 6` with probability `2⁻⁶`, and all seven differences must avoid exceeding
+it. The thin rows were thin for a structural reason, and the claim read off them was an
+artefact of the sampler, not a property of the problem.
+
+This is the same failure mode as the `mmin` ceiling (`CONJECTURE_M_REFUTED_v1` §3) and the
+floor-versus-span table (`MEASURE_LEMMA_ATTEMPT_v2` §2): a bound read off a region the search
+could not reach.
