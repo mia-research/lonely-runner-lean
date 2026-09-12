@@ -226,4 +226,66 @@ theorem circDist_int_div {n : ℕ} (hn : 0 < n) {c : ℤ} (h : ¬ ((n : ℤ) ∣
     rw [le_sub_iff_add_le, hsum, div_le_one hn']
     linarith
 
+/-! ## §7a — how far the reference reaches
+
+Hold `n−1` runners on the AP of step `d` and let the `n`-th sit at `x` above them.  Two facts
+decide the range of `x` over which the reference still serves the other `n−1`.
+
+First, the AP's **own** differences never obstruct: a pair `j·d, k·d` with `0 < |j−k| < n` has
+`|j−k|·d · p/(nd) = |j−k|p/n`, and `n ∤ (j−k)p` because `p` is a unit.  So only the moved
+runner's difference can fail.
+
+Second, clearing at the instant `p/(nd)` forces that difference, measured in units of `d`, to be
+at least `1/p` — and the largest available `p` is `n−1`, which is what puts the endpoints at
+`d/(n−1)` from the pack.
+-/
+
+/-- The AP's own pairs always clear at a reference instant: their index gap is a nonzero residue
+and `p` is a unit, so `n` cannot divide the product. -/
+theorem ap_pair_clear {n : ℕ} (hn : 0 < n) {a p : ℤ} (ha0 : a ≠ 0) (han : a.natAbs < n)
+    (hcop : IsCoprime (n : ℤ) p) : (n : ℝ)⁻¹ ≤ circDist (((a * p : ℤ) : ℝ) / n) := by
+  refine circDist_int_div hn ?_
+  intro hdvd
+  have hna : (n : ℤ) ∣ a := hcop.dvd_of_dvd_mul_right hdvd
+  have h2 : n ∣ a.natAbs := by
+    have := Int.natAbs_dvd_natAbs.mpr hna
+    simpa using this
+  have hpos : 0 < a.natAbs := Int.natAbs_pos.mpr ha0
+  have := Nat.le_of_dvd hpos h2
+  omega
+
+/-- Clearing at the instant `p/(nd)` forces the difference, in units of the step `d`, to be at
+least `1/p`.  With `p ≤ n−1` this is the `d/(n−1)` that sets both endpoints of the reach. -/
+theorem clearing_needs {n : ℕ} (hn : 0 < n) {y p : ℝ} (hy : 0 < y) (hp : 0 < p)
+    (h : (n : ℝ)⁻¹ ≤ circDist (y * p / n)) : 1 / p ≤ y := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have hx : 0 ≤ y * p / n := by positivity
+  have key : (n : ℝ)⁻¹ ≤ y * p / n := le_of_le_circDist hn hx h
+  have h1 : (1 : ℝ) ≤ y * p := by
+    have := mul_le_mul_of_nonneg_right key (le_of_lt hn')
+    rw [inv_mul_cancel₀ (ne_of_gt hn'), div_mul_cancel₀ _ (ne_of_gt hn')] at this
+    exact this
+  rw [div_le_iff₀ hp]
+  linarith
+
+/-- The reach's endpoints, in the two forms §7a states them.  Lower: the pack's top runner needs
+`d/(n−1)` of room above it.  Upper: the wrap partner needs the same below the next grid point. -/
+theorem reach_lower {n : ℕ} (hn : 1 < n) (d : ℝ) :
+    ((n : ℝ) - 1) * d + d / ((n : ℝ) - 1)
+      = (n : ℝ) * d - ((n : ℝ) - 2) * d / ((n : ℝ) - 1) := by
+  have h : (n : ℝ) - 1 ≠ 0 := by
+    have : (1 : ℝ) < n := by exact_mod_cast hn
+    linarith
+  field_simp
+  ring
+
+theorem reach_upper {n : ℕ} (hn : 1 < n) (d : ℝ) :
+    d + ((n : ℝ) * ((n : ℝ) - 1) - 1) * d / ((n : ℝ) - 1)
+      = (n : ℝ) * d + ((n : ℝ) - 2) * d / ((n : ℝ) - 1) := by
+  have h : (n : ℝ) - 1 ≠ 0 := by
+    have : (1 : ℝ) < n := by exact_mod_cast hn
+    linarith
+  field_simp
+  ring
+
 end Construction8
