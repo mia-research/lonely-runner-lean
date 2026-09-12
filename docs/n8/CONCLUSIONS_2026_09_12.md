@@ -31,6 +31,13 @@ maximum can be **interior**. Candidate times are `m/Δ` with `Δ` a *signed diff
 differences* — not merely `k/d` for `d` a difference. Using the narrower set reports the AP
 itself as failing global isolation.
 
+**Always convert times back to the frame you are reporting in.** Reducing a set by
+`g = gcd` of its pairwise differences rescales time: `V` at time `t` ⟺ `V_reduced` at time
+`g·t`, so an instant found in the reduced frame is `t_reduced / g` in the original. Likewise a
+set scaled by `L` to clear denominators has its period stretched by `L`, so counts and window
+positions computed there are not comparable across different `L` without converting. State
+which frame every time and count is in.
+
 ## 1. The reference
 
 **Definition.** A **grid** is a set of `n` distinct speeds whose reduced residues form a
@@ -46,8 +53,9 @@ uniform `n`-grid. This is arithmetic, not a convention.
 from the AP `1..8`; it has four runners, its residues are complete mod 4 and not mod 8, and it
 globally isolates at `t = 1/4`. The AP `1..14` needs mod 14 because it *has* fourteen runners.
 
-**Worked grids.** `(1,2,3,8)`, `n = 4`, isolates at `t = 1/4`. `(2,4,6,104)`, `n = 4`, isolates
-at `t = 1/4`. `(1,…,8)`, `n = 8`, isolates at `t = 1/8`.
+**Worked grids.** `(1,2,3,8)`, `n = 4`, `g = 1`, isolates at `t = 1/4`. `(2,4,6,104)`,
+`n = 4`, `g = 2`, isolates at `t = 1/8`. `(1,…,8)`, `n = 8`, `g = 1`, isolates at `t = 1/8`.
+In each case the instants are `p/(ng)` with `gcd(p,n) = 1`, per Proved (1).
 
 **Spread is irrelevant to global isolation.** It lives entirely in `q`, which the residue
 criterion cannot see.
