@@ -77,4 +77,112 @@ theorem commensurable {n : ℕ} (hn : 0 < n) {t d e : ℝ} (ht : t ≠ 0)
   field_simp
   linear_combination h2
 
+/-! ## §7c / L1 — the dead steps are a divisor-closed set
+
+A step `D` is **dead** for a difference `d` when `n·D ∣ d`, since then no multiplier can move
+that runner off the lap line.  Two facts make the dead set computable: the divisibility factors
+through `n`, so only the differences divisible by `n` can contribute; and the dead set is closed
+downwards under division, so it is exactly the set of divisors of `{ d/n : n ∣ d }`.
+-/
+
+/-- `n·D ∣ d` iff `d` is `n` times something that `D` divides.  So only the differences
+divisible by `n` can make a step dead, and what they contribute is the divisors of `d/n`. -/
+theorem dead_iff {n D d : ℕ} : n * D ∣ d ↔ ∃ k, d = n * k ∧ D ∣ k := by
+  constructor
+  · rintro ⟨m, rfl⟩
+    exact ⟨D * m, by ring, ⟨m, rfl⟩⟩
+  · rintro ⟨k, rfl, m, rfl⟩
+    exact ⟨m, by ring⟩
+
+/-- The dead steps are closed downwards under divisibility: a divisor of a dead step is dead. -/
+theorem dead_downward {n D D' d : ℕ} (hdvd : D' ∣ D) (h : n * D ∣ d) : n * D' ∣ d :=
+  dvd_trans (mul_dvd_mul_left n hdvd) h
+
+/-- A live step always exists: the dead set is bounded by the largest difference, so any step
+past it is live.  This is what makes `L₀`, the least live step, well defined. -/
+theorem exists_live {n : ℕ} (hn : 0 < n) (ds : Finset ℕ) (hpos : ∀ d ∈ ds, 0 < d) :
+    ∃ D, 0 < D ∧ ∀ d ∈ ds, ¬ (n * D ∣ d) := by
+  classical
+  set B := ds.sup id with hBdef
+  refine ⟨B + 1, Nat.succ_pos B, ?_⟩
+  intro d hd hdvd
+  have hdB : d ≤ B := Finset.le_sup (f := id) hd
+  have hd0 : 0 < d := hpos d hd
+  have h1 : n * (B + 1) ≤ d := Nat.le_of_dvd hd0 hdvd
+  have h2 : B + 1 ≤ n * (B + 1) := Nat.le_mul_of_pos_left _ hn
+  omega
+
+/-! ## L3 — the reading is complete
+
+`docs/n8/LEMMA_L3_v1.md` proves completeness by closedness and compactness.  The same fact has
+an elementary proof, which is what is formalised here: if a runner stands clear of `d` at `t`,
+then it stands clear of `d` everywhere between `t` and the **opening** of the stretch `t` sits
+in.  Taking the largest such opening over all the differences produces an opening that is
+itself an isolation instant and no later than `t` — which is completeness, with no topology.
+-/
+
+/-- The opening of the clear stretch that `t` lies in, for the difference `d`. -/
+noncomputable def opening (n : ℕ) (d t : ℝ) : ℝ := ((⌊d * t⌋ : ℝ) + (n : ℝ)⁻¹) / d
+
+/-- **Clear back to the opening.**  If the runner at difference `d` stands clear at `t`, it
+stands clear at every `s` between that stretch's opening and `t`. -/
+theorem clear_on_left {n : ℕ} (hn : 0 < n) {d t s : ℝ} (hd : 0 < d)
+    (ht : (n : ℝ)⁻¹ ≤ circDist (d * t))
+    (hs1 : opening n d t ≤ s) (hs2 : s ≤ t) :
+    (n : ℝ)⁻¹ ≤ circDist (d * s) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have hni : (0 : ℝ) < (n : ℝ)⁻¹ := inv_pos.mpr hn'
+  have hn1 : (n : ℝ)⁻¹ ≤ 1 := by
+    rw [inv_le_one_iff₀]; right; exact_mod_cast hn
+  set q : ℤ := ⌊d * t⌋ with hq
+  have hfr : Int.fract (d * t) = d * t - q := (Int.self_sub_floor (d * t)).symm
+  -- the threshold at t, read on the fractional part
+  have hlow : (n : ℝ)⁻¹ ≤ Int.fract (d * t) := le_trans (le_min_iff.mp ht).1 (le_refl _)
+  have hhigh : Int.fract (d * t) ≤ 1 - (n : ℝ)⁻¹ := by
+    have := (le_min_iff.mp ht).2
+    linarith
+  -- d*s is caught between q + 1/n and d*t
+  have hds1 : (q : ℝ) + (n : ℝ)⁻¹ ≤ d * s := by
+    have : ((q : ℝ) + (n : ℝ)⁻¹) / d * d ≤ s * d := by
+      exact mul_le_mul_of_nonneg_right hs1 (le_of_lt hd)
+    rw [div_mul_cancel₀ _ (ne_of_gt hd)] at this
+    linarith [this, mul_comm d s]
+  have hds2 : d * s ≤ d * t := mul_le_mul_of_nonneg_left hs2 (le_of_lt hd)
+  -- so its floor is q, and its fractional part sits in the band
+  have hfloor : ⌊d * s⌋ = q := by
+    rw [Int.floor_eq_iff]
+    constructor
+    · linarith
+    · push_cast; linarith [hfr, hhigh]
+  have hfr2 : Int.fract (d * s) = d * s - q := by
+    rw [← Int.self_sub_floor, hfloor]
+  unfold circDist
+  rw [hfr2]
+  apply le_min
+  · linarith
+  · linarith [hfr, hhigh]
+
+/-- The opening of the stretch containing `t` is no later than `t`. -/
+theorem opening_le {n : ℕ} (hn : 0 < n) {d t : ℝ} (hd : 0 < d)
+    (ht : (n : ℝ)⁻¹ ≤ circDist (d * t)) : opening n d t ≤ t := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have hlow : (n : ℝ)⁻¹ ≤ Int.fract (d * t) := (le_min_iff.mp ht).1
+  have hfr : Int.fract (d * t) = d * t - (⌊d * t⌋ : ℝ) := (Int.self_sub_floor (d * t)).symm
+  unfold opening
+  rw [div_le_iff₀ hd]
+  linarith [hfr, hlow]
+
+/-- **L3, completeness.**  If a runner is isolated at `t`, it is isolated at some *opening* no
+later than `t` — namely the largest of the openings of the stretches its differences put `t` in.
+So the reading, which enumerates only openings, cannot miss the first isolation instant. -/
+theorem reading_complete {n : ℕ} (hn : 0 < n) (ds : Finset ℝ) (hne : ds.Nonempty)
+    (hpos : ∀ d ∈ ds, 0 < d) {t : ℝ} (ht : ∀ d ∈ ds, (n : ℝ)⁻¹ ≤ circDist (d * t)) :
+    ∃ e ∈ ds, opening n e t ≤ t ∧ ∀ d ∈ ds, (n : ℝ)⁻¹ ≤ circDist (d * (opening n e t)) := by
+  classical
+  obtain ⟨e, he, hmax⟩ := ds.exists_max_image (fun d => opening n d t) hne
+  refine ⟨e, he, opening_le hn (hpos e he) (ht e he), ?_⟩
+  intro d hd
+  exact clear_on_left hn (hpos d hd) (ht d hd) (hmax d hd)
+    (opening_le hn (hpos e he) (ht e he))
+
 end Construction8
