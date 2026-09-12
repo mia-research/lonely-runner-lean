@@ -1,4 +1,6 @@
 import LonelyRunner.LRC.Construction8.Parts
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Algebra.Order.Round
 
 /-!
 # The lemma pass — general `n`
@@ -287,5 +289,64 @@ theorem reach_upper {n : ℕ} (hn : 1 < n) (d : ℝ) :
     linarith
   field_simp
   ring
+
+/-! ## §7d — window-widening
+
+If the runner's other differences are all integer multiples of `h`, their joint clear set is
+`(1/h)`-periodic.  The window `[1/(nm), (n−1)/(nm)]` has length `(n−2)/(nm)`, so it holds a full
+period as soon as `m ≤ (n−2)h/n`, and a nonempty periodic set meets every interval that long.
+The `gcd ≥ 2` case (`h` large) and the near-collision case (`m` small) are this one inequality
+read from opposite ends.
+-/
+
+/-- `circDist` is unchanged by an integer shift. -/
+theorem circDist_add_int (x : ℝ) (k : ℤ) : circDist (x + k) = circDist x := by
+  unfold circDist
+  rw [Int.fract_add_intCast]
+
+/-- A difference that is an integer multiple of `h` reads the same at `t` and at `t + 1/h`. -/
+theorem clear_periodic {h d t : ℝ} (hh : 0 < h) {w : ℤ} (hd : d = h * w) :
+    circDist (d * (t + 1 / h)) = circDist (d * t) := by
+  have : d * (t + 1 / h) = d * t + (w : ℝ) := by
+    rw [hd]; field_simp
+  rw [this, circDist_add_int]
+
+/-- A `(1/h)`-periodic set meets every interval of length at least `1/h`: translate any member
+into it by a whole number of periods. -/
+theorem periodic_meets {h a L s : ℝ} (hh : 0 < h) (hL : 1 / h ≤ L) :
+    ∃ k : ℤ, a ≤ s + (k : ℝ) / h ∧ s + (k : ℝ) / h ≤ a + L := by
+  refine ⟨⌈(a - s) * h⌉, ?_, ?_⟩
+  · have hc := Int.le_ceil ((a - s) * h)
+    have hge : (a - s) ≤ ((⌈(a - s) * h⌉ : ℤ) : ℝ) / h := by
+      rw [le_div_iff₀ hh]; exact hc
+    linarith
+  · have := Int.ceil_lt_add_one ((a - s) * h)
+    have h1 : ((⌈(a - s) * h⌉ : ℤ) : ℝ) / h < (a - s) + 1 / h := by
+      rw [div_lt_iff₀ hh]
+      have : ((a - s) + 1 / h) * h = (a - s) * h + 1 := by field_simp
+      rw [this]; linarith
+    linarith
+
+/-- The window's length, and the inequality that makes it hold a period. -/
+theorem window_length {n : ℕ} {m : ℝ} (hm : 0 < m) (hn : 0 < n) :
+    ((n : ℝ) - 1) / (n * m) - 1 / (n * m) = ((n : ℝ) - 2) / (n * m) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  field_simp
+  ring
+
+/-! ## §3 — the run identity
+
+A runner is lonely exactly when both gaps flanking it clear, i.e. when its own gap and the one
+before it are both in `A`.  Splitting `A` by whether the preceding gap is in it gives the
+identity: the lonely runners are the elements of `A` whose predecessor is also in `A`, and the
+rest of `A` are the run starts.  `#lonely = |A| − c(A)` is that partition, with `c(A)` the
+number of run starts — which is the number of cyclic runs, and is `0` exactly when `A` is
+everything.
+-/
+
+/-- **The run identity.**  The lonely runners and the run starts partition `A`. -/
+theorem run_identity {n : ℕ} [NeZero n] [DecidableEq (ZMod n)] (A : Finset (ZMod n)) :
+    (A.filter (fun k => k - 1 ∈ A)).card + (A.filter (fun k => k - 1 ∉ A)).card = A.card :=
+  Finset.card_filter_add_card_filter_not _
 
 end Construction8
