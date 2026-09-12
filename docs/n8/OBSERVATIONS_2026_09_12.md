@@ -63,8 +63,16 @@ No conclusion is drawn. Items are stated with their evidence base.
     `[0..14]`, 5,824 `[0..16]`, 14,688 `[0..18]`, and 600 random from `[0..59]` — 22,304 in
     total, including a wide sample outside the small-box regime.
 18. `k = 6`: 1,320 constructed configurations, min count 8–26, zero spine holders in every one.
-19. Sharing a residue with 0 others → min count 4; with 1 other → 2; with 2 others → 4.
-    Exhaustive `[0..20]`: 779,506 / 718,844 / 127,890 instances.
+19. Min count by number of runners sharing a runner's residue mod 8, exhaustive `[0..24]`:
+
+    | shares with | 0 others | 1 other | 2 others | 3 others |
+    |---|---|---|---|---|
+    | instances | 4,044,814 | 3,778,096 | 791,910 | 23,436 |
+    | **min count** | 4 | **2** | 4 | **8** |
+
+    After the dip at one collision the minimum climbs monotonically: 2, 4, 8. One collision is
+    a strict minimum over the number of collisions. Earlier figures at `[0..16]` (5,988
+    instances in the two-collision class) and `[0..20]` (127,890) agree.
 
 ## Observed — leaving the reference
 
