@@ -185,4 +185,45 @@ theorem reading_complete {n : ℕ} (hn : 0 < n) (ds : Finset ℝ) (hne : ds.None
   exact clear_on_left hn (hpos d hd) (ht d hd) (hmax d hd)
     (opening_le hn (hpos e he) (ht e he))
 
+/-! ## The spine arithmetic
+
+One lemma carries §4's `φ(n)` instants, §7's bijection and §7a's endpoints: an integer numerator
+over `n` clears the threshold exactly when `n` does not divide it.  Everything the reference does
+is this fact plus the fact that `k ↦ kr` permutes the residues when `gcd(r,n) = 1`.
+-/
+
+/-- **The spine test.**  For an integer `c`, the point `c/n` clears the threshold `1/n` iff `n`
+does not divide `c`.  This is the whole of "a runner is on a lap line at a reference instant". -/
+theorem circDist_int_div {n : ℕ} (hn : 0 < n) {c : ℤ} (h : ¬ ((n : ℤ) ∣ c)) :
+    (n : ℝ)⁻¹ ≤ circDist ((c : ℝ) / n) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have hnz : (n : ℤ) ≠ 0 := Int.natCast_ne_zero.mpr hn.ne'
+  set r : ℤ := c % n with hr
+  have hr0 : 0 ≤ r := Int.emod_nonneg c hnz
+  have hrn : r < n := Int.emod_lt_of_pos c (by exact_mod_cast hn)
+  have hrne : r ≠ 0 := fun hz => h (Int.dvd_of_emod_eq_zero hz)
+  have hr1 : 1 ≤ r := by omega
+  have hrn1 : r ≤ (n : ℤ) - 1 := by omega
+  have hid : (n : ℤ) * (c / (n : ℤ)) + r = c := Int.mul_ediv_add_emod c n
+  have hidR : (n : ℝ) * ((c / (n : ℤ) : ℤ) : ℝ) + (r : ℝ) = (c : ℝ) := by
+    exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) hid
+  have hsplit : (c : ℝ) / n = ((c / (n : ℤ) : ℤ) : ℝ) + (r : ℝ) / n := by
+    field_simp
+    linarith [hidR]
+  have hrr0 : (0 : ℝ) ≤ (r : ℝ) / n := by positivity
+  have hrr1 : (r : ℝ) / n < 1 := by
+    rw [div_lt_one hn']; exact_mod_cast hrn
+  have hfr : Int.fract ((c : ℝ) / n) = (r : ℝ) / n := by
+    rw [hsplit, Int.fract_intCast_add, Int.fract_eq_self.mpr ⟨hrr0, hrr1⟩]
+  have hR1 : (1 : ℝ) ≤ (r : ℝ) := by exact_mod_cast hr1
+  have hR2 : (r : ℝ) ≤ (n : ℝ) - 1 := by exact_mod_cast hrn1
+  unfold circDist
+  rw [hfr]
+  apply le_min
+  · rw [inv_eq_one_div]
+    gcongr
+  · have hsum : (n : ℝ)⁻¹ + (r : ℝ) / n = (1 + (r : ℝ)) / n := by field_simp
+    rw [le_sub_iff_add_le, hsum, div_le_one hn']
+    linarith
+
 end Construction8
