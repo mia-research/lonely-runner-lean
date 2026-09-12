@@ -26,10 +26,20 @@ Its windows are not arbitrary. For the crashed runner in that transition, `D = (
 
     windows  [1/16, 7/64]  and  [57/64, 15/16]
 
-A mirror pair, and both contain **sixteenths**. Having lost the eighth-lattice, the runner
-lands on the sixteenth — the refinement tower of `GRID_TOWER_v1`. That connects the spine
-decomposition to the tower: **reserve is largely the finer 2-power lattices**, not
-unstructured.
+A mirror pair, and both contain **sixteenths** — the refinement tower of `GRID_TOWER_v1`.
+
+**But that single example does not generalise, and I initially wrote that it did.** Scanning
+all 604,224 runner-instances of primitive 8-sets in `[0..18]`, the 2,184 sitting at the floor
+of 2 land at these tower levels:
+
+| level `j` | 1 (16ths) | 2 (32nds) | 3 (64ths) | 4 (128ths) |
+|---|---|---|---|---|
+| runners | 674 | **768** | 716 | 26 |
+
+The majority land **deeper** than sixteenths, and the mode is level 2. So the connection to
+the tower holds — a crashed runner is caught by some 2-power refinement, and reserve is
+largely those finer lattices — but the level is not fixed at 1. My one worked example was
+level 1 and I generalised from it before checking the population.
 
 ## 3. Missed: what permutations do  `[VERIFIED — new]`
 
