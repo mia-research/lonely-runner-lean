@@ -411,4 +411,83 @@ theorem localisation_free {n : ℕ} (hn : 0 < n) (S : Finset ℤ) (h1 : (1 : ℤ
   · have := le_trans hmin (min_le_right _ _); linarith
   · intro s hs; rw [hshift s]; exact h s hs
 
+/-! ## C1-integer — the residue-blocked construction
+
+`docs/n8/C1_INTEGER_CONSTRUCTION_v1.md` §2.  For an integral reading with exactly one blocked
+runner `Sb` (so `n ∣ Sb`), and `Sb` the largest, the instant
+
+    u  =  p/n  +  1/(n·Sb)
+
+clears everything, provided the unit `p` is chosen so that no unblocked runner reads `n−1` there.
+Two facts do it: the blocked runner lands exactly on the threshold, and every unblocked runner
+moves by at most one `n`-th, so it cannot leave the band.
+-/
+
+/-- The blocked runner lands exactly on the threshold: `n ∣ Sb` makes `Sb·p/n` an integer, so the
+shift `1/(n·Sb)` puts its phase at exactly `1/n`. -/
+theorem blocked_lands_on_threshold {n : ℕ} (hn : 1 < n) {Sb p : ℤ} (hSb : 0 < Sb)
+    (hdvd : (n : ℤ) ∣ Sb) :
+    circDist ((Sb : ℝ) * ((p : ℝ) / n + 1 / ((n : ℝ) * (Sb : ℝ)))) = (n : ℝ)⁻¹ := by
+  have hn0 : (0 : ℤ) < (n : ℤ) := by exact_mod_cast Nat.zero_lt_of_lt hn
+  obtain ⟨m, rfl⟩ := hdvd
+  have hmpos : (0 : ℤ) < m := by by_contra hcon; push Not at hcon; nlinarith
+  have hn' : (0 : ℝ) < n := by exact_mod_cast Nat.zero_lt_of_lt hn
+  have hmR : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hmpos
+  have hrw : (((n : ℤ) * m : ℤ) : ℝ) * ((p : ℝ) / n + 1 / ((n : ℝ) * (((n : ℤ) * m : ℤ) : ℝ)))
+      = ((m * p : ℤ) : ℝ) + (n : ℝ)⁻¹ := by
+    push_cast
+    field_simp
+  have hi0 : (0 : ℝ) ≤ (n : ℝ)⁻¹ := by positivity
+  have hi1 : (n : ℝ)⁻¹ < 1 := by rw [inv_lt_one_iff₀]; right; exact_mod_cast hn
+  have hhalf : (n : ℝ)⁻¹ ≤ 1 - (n : ℝ)⁻¹ := by
+    have h2 : (2 : ℝ) ≤ n := by exact_mod_cast hn
+    have : (n : ℝ)⁻¹ ≤ 1 / 2 := by rw [inv_le_comm₀ hn' (by norm_num)]; linarith
+    linarith
+  rw [hrw]
+  unfold circDist
+  rw [add_comm, Int.fract_add_intCast, Int.fract_eq_self.mpr ⟨hi0, hi1⟩]
+  exact min_eq_left hhalf
+
+/-- An unblocked runner moves by at most one `n`-th, so if it reads `c` with `1 ≤ c ≤ n−2` at the
+reference instant it is still inside the band after the shift. -/
+theorem unblocked_stays_clear {n : ℕ} (hn : 1 < n) {s Sb p : ℤ} (hs : 0 < s) (hSb : 0 < Sb)
+    (hle : s ≤ Sb) (hc1 : 1 ≤ s * p % n) (hc2 : s * p % n ≤ (n : ℤ) - 2) :
+    (n : ℝ)⁻¹ ≤ circDist ((s : ℝ) * ((p : ℝ) / n + 1 / ((n : ℝ) * (Sb : ℝ)))) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast Nat.zero_lt_of_lt hn
+  have hSb' : (0 : ℝ) < (Sb : ℝ) := by exact_mod_cast hSb
+  have hs' : (0 : ℝ) < (s : ℝ) := by exact_mod_cast hs
+  have hsle : (s : ℝ) ≤ (Sb : ℝ) := by exact_mod_cast hle
+  set c : ℤ := s * p % n with hcdef
+  set q : ℤ := s * p / n with hqdef
+  have hdmR : (n : ℝ) * (q : ℝ) + (c : ℝ) = (s : ℝ) * (p : ℝ) := by
+    exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) (Int.mul_ediv_add_emod (s * p) n)
+  set v : ℝ := (c : ℝ) / n + (s : ℝ) / ((n : ℝ) * (Sb : ℝ)) with hv
+  have h1 : (s : ℝ) * (p : ℝ) / n = (q : ℝ) + (c : ℝ) / n := by
+    rw [← hdmR]; field_simp
+  have hrw : (s : ℝ) * ((p : ℝ) / n + 1 / ((n : ℝ) * (Sb : ℝ))) = (q : ℝ) + v := by
+    calc (s : ℝ) * ((p : ℝ) / n + 1 / ((n : ℝ) * (Sb : ℝ)))
+        = (s : ℝ) * (p : ℝ) / n + (s : ℝ) / ((n : ℝ) * (Sb : ℝ)) := by ring
+      _ = ((q : ℝ) + (c : ℝ) / n) + (s : ℝ) / ((n : ℝ) * (Sb : ℝ)) := by rw [h1]
+      _ = (q : ℝ) + v := by rw [hv]; ring
+  have hc1R : (1 : ℝ) ≤ (c : ℝ) := by exact_mod_cast hc1
+  have hc2R : (c : ℝ) ≤ (n : ℝ) - 2 := by exact_mod_cast hc2
+  have hshift : (s : ℝ) / ((n : ℝ) * (Sb : ℝ)) ≤ (n : ℝ)⁻¹ := by
+    rw [inv_eq_one_div, div_le_div_iff₀ (by positivity) hn']
+    nlinarith
+  have hclo : (n : ℝ)⁻¹ ≤ (c : ℝ) / n := by rw [inv_eq_one_div]; gcongr
+  have hchi : (c : ℝ) / n ≤ 1 - 2 * (n : ℝ)⁻¹ := by
+    rw [div_le_iff₀ hn']
+    have hx : (1 - 2 * (n : ℝ)⁻¹) * n = (n : ℝ) - 2 := by field_simp
+    rw [hx]; exact hc2R
+  have hspos : (0 : ℝ) ≤ (s : ℝ) / ((n : ℝ) * (Sb : ℝ)) := by positivity
+  have hvlo : (n : ℝ)⁻¹ ≤ v := by rw [hv]; linarith
+  have hvhi : v ≤ 1 - (n : ℝ)⁻¹ := by rw [hv]; linarith
+  have hipos : (0 : ℝ) < (n : ℝ)⁻¹ := by positivity
+  have hv0 : (0 : ℝ) ≤ v := le_trans (le_of_lt hipos) hvlo
+  have hv1 : v < 1 := by linarith
+  rw [hrw]
+  unfold circDist
+  rw [add_comm, Int.fract_add_intCast, Int.fract_eq_self.mpr ⟨hv0, hv1⟩]
+  exact le_min hvlo (by linarith)
+
 end Construction8
