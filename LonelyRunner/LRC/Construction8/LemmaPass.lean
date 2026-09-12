@@ -349,4 +349,66 @@ theorem run_identity {n : ℕ} [NeZero n] [DecidableEq (ZMod n)] (A : Finset (ZM
     (A.filter (fun k => k - 1 ∈ A)).card + (A.filter (fun k => k - 1 ∉ A)).card = A.card :=
   Finset.card_filter_add_card_filter_not _
 
+/-! ## The integer reading — the all-or-nothing spine test, and free localisation
+
+A runner's reading is **integral** when its own `d_min` divides all its differences, so every
+`s_j = d_j/d_min` is an integer.  Two things then hold, and together they say that for such a
+runner C1 asks for nothing beyond plain existence.
+-/
+
+/-- A multiple of `n` sits exactly on the lap line. -/
+theorem circDist_int_div_of_dvd {n : ℕ} (hn : 0 < n) {c : ℤ} (h : (n : ℤ) ∣ c) :
+    circDist ((c : ℝ) / n) = 0 := by
+  obtain ⟨k, rfl⟩ := h
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have : (((n : ℤ) * k : ℤ) : ℝ) / n = (k : ℝ) := by push_cast; field_simp
+  rw [this]
+  unfold circDist
+  rw [Int.fract_intCast]
+  simp
+
+/-- **All or nothing on the spine.**  For an integral reading, the reference instant indexed by a
+unit `p` clears a difference `s` exactly when `n` does not divide `s` — the same condition for
+every `p`.  So the `φ(n)` instants stand or fall together. -/
+theorem spine_all_or_nothing {n : ℕ} (hn : 0 < n) {s p : ℤ} (hcop : IsCoprime (n : ℤ) p) :
+    ((n : ℝ)⁻¹ ≤ circDist (((s * p : ℤ) : ℝ) / n)) ↔ ¬ ((n : ℤ) ∣ s) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  constructor
+  · intro hcl hdvd
+    have : (n : ℤ) ∣ s * p := hdvd.mul_right p
+    rw [circDist_int_div_of_dvd hn this] at hcl
+    have := inv_pos.mpr hn'
+    linarith
+  · intro hns
+    refine circDist_int_div hn ?_
+    intro hdvd
+    exact hns (hcop.dvd_of_dvd_mul_right hdvd)
+
+/-- **Localisation is free for an integral reading.**  The reading is unchanged by a whole-lap
+shift, and the constraint `s = 1` confines every isolation instant to `[1/n, (n−1)/n]` mod 1.  So
+an isolation instant anywhere gives one in the first window: for such a runner, "isolated
+somewhere" and "isolated in its own first window" are the same statement. -/
+theorem localisation_free {n : ℕ} (hn : 0 < n) (S : Finset ℤ) (h1 : (1 : ℤ) ∈ S) {u₀ : ℝ}
+    (h : ∀ s ∈ S, (n : ℝ)⁻¹ ≤ circDist ((s : ℝ) * u₀)) :
+    ∃ u : ℝ, (n : ℝ)⁻¹ ≤ u ∧ u ≤ 1 - (n : ℝ)⁻¹ ∧
+      ∀ s ∈ S, (n : ℝ)⁻¹ ≤ circDist ((s : ℝ) * u) := by
+  have hn' : (0 : ℝ) < n := by exact_mod_cast hn
+  have hshift : ∀ s : ℤ, circDist ((s : ℝ) * Int.fract u₀) = circDist ((s : ℝ) * u₀) := by
+    intro s
+    have hrw : (s : ℝ) * Int.fract u₀ = (s : ℝ) * u₀ + ((-(s * ⌊u₀⌋) : ℤ) : ℝ) := by
+      rw [Int.fract]; push_cast; ring
+    rw [hrw, circDist_add_int]
+  have hf0 : 0 ≤ Int.fract u₀ := Int.fract_nonneg u₀
+  have hf1 : Int.fract u₀ < 1 := Int.fract_lt_one u₀
+  have hfr : Int.fract (Int.fract u₀) = Int.fract u₀ := Int.fract_eq_self.mpr ⟨hf0, hf1⟩
+  have hu : (n : ℝ)⁻¹ ≤ circDist (Int.fract u₀) := by
+    have h0 := h 1 h1
+    rw [← hshift 1] at h0
+    simpa using h0
+  have hmin : (n : ℝ)⁻¹ ≤ min (Int.fract u₀) (1 - Int.fract u₀) := by
+    unfold circDist at hu; rwa [hfr] at hu
+  refine ⟨Int.fract u₀, le_trans hmin (min_le_left _ _), ?_, ?_⟩
+  · have := le_trans hmin (min_le_right _ _); linarith
+  · intro s hs; rw [hshift s]; exact h s hs
+
 end Construction8
