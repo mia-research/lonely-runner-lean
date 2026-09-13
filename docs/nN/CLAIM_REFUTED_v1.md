@@ -122,3 +122,63 @@ These are corrections of fact, not editorial preferences.
    one it replaces.
 
 **This is the owner's call, and nothing in the manuscript has been changed.**
+
+---
+
+## 7. Addendum — does an AP or grid instant rescue it?  *(owner's question)*
+
+Four checks on the counterexample `(1, 1975, 5265, 6910, 8737, 9589, 11845, 15135)`.
+
+### The grid is never formed at all
+
+`ConstructionN.isolation_iff_coprime` decides this: global isolation happens **iff** the
+relative-speed residues mod `n` are all distinct. From the failing runner they are
+
+    {0, 0, 0, 4, 4, 5, 6, 6}
+
+— three zeros, two fours, two sixes. They collide from every runner's frame. **So this speed
+set never forms the 8-grid, at any time.** There is no grid instant to find, and that is a
+theorem about this configuration, not a search result.
+
+### The AP's own instants are blocked, and stay blocked through lap 2
+
+| lap | `u = 1/8+k` | `3/8+k` | `5/8+k` | `7/8+k` |
+|---|---|---|---|---|
+| 1 (`k=0`) | blocked | blocked | blocked | blocked |
+| 2 (`k=1`) | blocked | blocked | blocked | blocked |
+| 3 (`k=2`) | **clear** | **clear** | blocked | blocked |
+
+In lap 1 each is blocked by a different reading: `23/3` at `1/8`, `8/3` at `3/8`, `6` at
+`4/8`, `34/7` at `5/8`, `7/2` at `7/8`. **The `φ(8)` AP instants do not recover until the
+third lap.**
+
+### Lap 2 does work, but not at a coprime spine point
+
+Lap 2 has 12 clear instants, the first at `u = 219/184`. Among grid points `p/8 + k`, the
+clear ones are `7/4, 17/8, 19/8, 31/8` — and `7/4 = 14/8` has `gcd(6,8) = 2`, a
+**non-coprime** grid point. Simple rationals also work in lap 2: `6/5`, `9/7`, `14/11`.
+
+`219/184` has denominator `184 = 8 × 23`, and `23` is the denominator-free part of the
+reading `23/3` — the reading that blocks `u = 1/8`. The instant that rescues the runner is
+set by the reading that defeated it.
+
+### Only one runner fails
+
+| runner | speed | `d_min` | verdict |
+|---|---|---|---|
+| 0 | 1 | 1974 | **does not return** |
+| 1–3, 6, 7 | 1975, 5265, 6910, 11845, 15135 | — | returns at `u = 1/8` |
+| 4 | 8737 | 852 | returns at `u = 1917/12796` |
+| 5 | 9589 | 852 | returns at `u = 71/564` |
+
+Seven of eight return, six of them at the first spine point. Part 7 is stated per runner, so
+one failure refutes it — but the arrangement is not pathological as a whole.
+
+### What this means for a repair
+
+The two natural repairs need different budgets:
+
+- **"search the full window of laps `1…K`"** needs `K ≥ 2` here.
+- **"search the spine points `p/n` of laps `1…K`"** needs `K ≥ 3` here.
+
+Neither is rescued by the grid, which this configuration never reaches.
