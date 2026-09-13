@@ -95,4 +95,75 @@ theorem lonely_of_flanks {n : ℕ} (p : ℕ → ℝ) (k : ℕ)
     (n : ℝ)⁻¹ ≤ circDist (p m - p k) :=
   le_trans hflank (circDist_ge_flank p n k m hk1 hkn hmn hmk hmono h0 h1)
 
+/-! ## The ends — "there are no end runners"
+
+`SKETCH` §2 makes adjacency cyclic so the first and last runners are not special: the
+first runner's gap *before* it is the wrap, and the last runner's gap *after* it is the
+same wrap.  With that reading both ends have two flanking gaps like everyone else, and the
+same argument applies.
+-/
+
+/-- **The first runner has two flanking gaps too**, its gap before being the wrap. -/
+theorem circDist_ge_flank_first (p : ℕ → ℝ) (n m : ℕ) (hn : 1 < n) (hmn : m < n) (hm0 : m ≠ 0)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1) :
+    min (1 - p (n - 1) + p 0) (p 1 - p 0) ≤ circDist (p m - p 0) := by
+  have h0n : 0 < n := by omega
+  have hn1 : n - 1 < n := by omega
+  have hpm0 : 0 ≤ p m := h0 m hmn
+  have hpm1 : p m < 1 := h1 m hmn
+  have hp00 : 0 ≤ p 0 := h0 0 h0n
+  have hp01 : p 0 < 1 := h1 0 h0n
+  have habs : |p m - p 0| < 1 := by rw [abs_lt]; constructor <;> linarith
+  rw [circDist_of_abs_lt_one habs]
+  have hge : p 0 ≤ p m := hmono 0 m (by omega) hmn
+  have hd : |p m - p 0| = p m - p 0 := abs_of_nonneg (by linarith)
+  rw [hd]
+  have h1m : p 1 ≤ p m := hmono 1 m (by omega) hmn
+  have hmn1 : p m ≤ p (n - 1) := hmono m (n - 1) (by omega) hn1
+  exact le_min (le_trans (min_le_right _ _) (by linarith))
+               (le_trans (min_le_left _ _) (by linarith))
+
+/-- **And the last runner**, its gap after being the same wrap. -/
+theorem circDist_ge_flank_last (p : ℕ → ℝ) (n m : ℕ) (hn : 1 < n) (hmn : m < n)
+    (hml : m ≠ n - 1)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1) :
+    min (p (n - 1) - p (n - 2)) (1 - p (n - 1) + p 0) ≤ circDist (p m - p (n - 1)) := by
+  have h0n : 0 < n := by omega
+  have hn1 : n - 1 < n := by omega
+  have hn2 : n - 2 < n := by omega
+  have hpm0 : 0 ≤ p m := h0 m hmn
+  have hpm1 : p m < 1 := h1 m hmn
+  have hpl0 : 0 ≤ p (n - 1) := h0 _ hn1
+  have hpl1 : p (n - 1) < 1 := h1 _ hn1
+  have habs : |p m - p (n - 1)| < 1 := by rw [abs_lt]; constructor <;> linarith
+  rw [circDist_of_abs_lt_one habs]
+  have hle : p m ≤ p (n - 1) := hmono m (n - 1) (by omega) hn1
+  have hd : |p m - p (n - 1)| = p (n - 1) - p m := by
+    rw [abs_sub_comm, abs_of_nonneg (by linarith)]
+  rw [hd]
+  have hmn2 : p m ≤ p (n - 2) := hmono m (n - 2) (by omega) hn2
+  have h0m : p 0 ≤ p m := hmono 0 m (by omega) hmn
+  exact le_min (le_trans (min_le_left _ _) (by linarith))
+               (le_trans (min_le_right _ _) (by linarith))
+
+/-- Part 1's producing direction at the first runner. -/
+theorem lonely_of_flanks_first {n : ℕ} (p : ℕ → ℝ) (hn : 1 < n)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1)
+    (hflank : (n : ℝ)⁻¹ ≤ min (1 - p (n - 1) + p 0) (p 1 - p 0))
+    (m : ℕ) (hmn : m < n) (hm0 : m ≠ 0) :
+    (n : ℝ)⁻¹ ≤ circDist (p m - p 0) :=
+  le_trans hflank (circDist_ge_flank_first p n m hn hmn hm0 hmono h0 h1)
+
+/-- Part 1's producing direction at the last runner. -/
+theorem lonely_of_flanks_last {n : ℕ} (p : ℕ → ℝ) (hn : 1 < n)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1)
+    (hflank : (n : ℝ)⁻¹ ≤ min (p (n - 1) - p (n - 2)) (1 - p (n - 1) + p 0))
+    (m : ℕ) (hmn : m < n) (hml : m ≠ n - 1) :
+    (n : ℝ)⁻¹ ≤ circDist (p m - p (n - 1)) :=
+  le_trans hflank (circDist_ge_flank_last p n m hn hmn hml hmono h0 h1)
+
 end Construction8
