@@ -19,6 +19,9 @@ extent of the verification can be checked rather than taken, and a done-check sc
 refuses to pass if the open claim of §7.3 is ever stated.
 
 We present a local framework for the problem and a formal verification of it. The
+framework is not specific to `n = 8`: of its 85 verified statements, 81 are stated at
+general `n` or involve no runner count, and the four that are not have explicit general
+forms (§9). The
 framework replaces global analysis with a per-runner construction in three objects — the
 cyclic **gaps** on the track, each runner's nearest speed difference `d_min`, and the
 **laps** the others complete relative to it — and evaluates isolation on an exact integer
@@ -373,7 +376,46 @@ twenty headline declarations. Its failure modes were each tested before it was t
 
 ---
 
-## 9. Statement of what is and is not established
+## 9. Generalisation
+
+The framework is not specific to `n = 8`, and the formal development records how far that
+goes rather than leaving it to assertion.
+
+**Of the 85 theorems, 59 are stated at general `n`** and a further 22 involve no runner
+count at all, being statements about reals — the contiguous-reach bound, the circle-distance
+identities, the index-free wide-gap core. **Four** carry `n = 8` in the statement, all of
+them the stretch geometry of §3.
+
+Those four have explicit general forms. With threshold `1/n`, a reading `s` is in the way
+when `|u − k/s| < 1/(ns)`, and the rest follows:
+
+| | at general `n` | at `n = 8` |
+|---|---|---|
+| in-the-way zone width | `2/(ns)` | `1/(4s)` |
+| clear interval width | `(n−2)/(ns)` | `3/(4s)` |
+| first-zone overlap (Prop 3.1 ff.) | `s/s′ < (n+1)/(n−1)` | `9/7` |
+| descent through consecutive integers | `2s > n + 1` | `2s > 9`, breaking at `s = 4` |
+| single-reading exclusion (Prop 3.3) | `s′ ≤ 2σ/(n−2)` | `s′ ≤ σ/3` |
+
+Each was checked to reduce to the `n = 8` statement actually proved.
+
+**The local restrictions tighten as `n` grows.** The overlap bound `(n+1)/(n−1)` decreases
+towards 1 — `9/7` at `n = 8`, `13/11` at `n = 12`, `17/15` at `n = 16` — so two readings
+must be closer in ratio for their zones to meet at all. The single-reading exclusion
+`2σ/(n−2)` tightens likewise. Whatever obstruction the framework's local bounds present, it
+is not weaker at larger `n`.
+
+**What does not carry over.** The coverage figures of §7.3 are measurements at `n = 8` and
+say nothing about other orders. Part 2(b) is stated at general `n` in its source and so
+transfers without change. And the claim of §7.3, read at general `n`, is the Lonely Runner
+Conjecture itself — settled by computation for `n ≤ 13` (§ References) and open beyond.
+
+**This section claims transferability of the infrastructure, not of any result about the
+conjecture.** Nothing here closes a case at any order, including `n = 8`.
+
+---
+
+## 10. Statement of what is and is not established
 
 **Established and machine-checked.**  Every numbered result of §§2–4: Proposition 2.1; the
 locality of `d_min` and the floor; Propositions 3.1–3.3; Theorems 4.1, 4.2, 4.3, 4.5, 4.6,
