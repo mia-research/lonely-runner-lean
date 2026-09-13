@@ -26,7 +26,20 @@ The chain is:
 * `isolation_iff_coprime` — the dichotomy: isolation at `p/n` **iff** `gcd(n, p) = 1`.
 * `card_coprime_eq_totient` — and there are `φ(n)` such `p`.
 
-The last two together are part 2(b).  **Part 7 is not stated here and is not approached by
+That much is the dichotomy **on the grid**.  The forward half — that no other instant
+can work at all — is the rest:
+
+* `int_of_forall_int_mul` — Bézout.  If `e i * y` is an integer for every `i`, so is
+  `gcd(e) * y`.  No rationality of `y` is needed anywhere, which is what makes the step
+  short.
+* `instants_on_grid` — isolation at **any real** `t` forces `n * t` to be an integer.
+  Primitivity is what closes it: without `gcd(e) = 1` the conclusion is false.
+* `coprime_of_isolation` — and that integer is coprime to `n`.
+* `isolation_forces_coprime_grid` — the two together: global isolation at a real `t`
+  happens only at `t = p/n` with `gcd(n, p) = 1`.
+
+`isolation_forces_coprime_grid` with `isolation_iff_coprime` and `card_coprime_eq_totient`
+is part 2(b).  **Part 7 is not stated here and is not approached by
 any of this.**
 
 ## What is NOT claimed
@@ -151,5 +164,113 @@ theorem isolation_iff_coprime {n : ℕ} (hn : 0 < n) (e : Fin n → ℤ)
 /-- **And there are `φ(n)` of them.**  Euler's totient counts the instants. -/
 theorem card_coprime_eq_totient (n : ℕ) :
     ((range n).filter (fun p => Nat.Coprime n p)).card = Nat.totient n := rfl
+
+/-! ## The forward half: no instant off the grid -/
+
+/-- **Bézout.**  If `e i * y` is an integer for every `i` in `s`, then so is `(s.gcd e) * y`.
+`y` is an arbitrary real — nothing here needs it to be rational, which is what keeps the
+step to one induction. -/
+theorem int_of_forall_int_mul {ι : Type*} [DecidableEq ι] (s : Finset ι) (e : ι → ℤ) (y : ℝ)
+    (h : ∀ i ∈ s, ∃ z : ℤ, (e i : ℝ) * y = z) :
+    ∃ z : ℤ, ((s.gcd e : ℤ) : ℝ) * y = z := by
+  classical
+  induction s using Finset.induction with
+  | empty => exact ⟨0, by simp⟩
+  | insert a s ha ih =>
+      obtain ⟨za, hza⟩ := h a (mem_insert_self a s)
+      obtain ⟨zs, hzs⟩ := ih (fun i hi => h i (mem_insert_of_mem hi))
+      refine ⟨Int.gcdA (e a) (s.gcd e) * za + Int.gcdB (e a) (s.gcd e) * zs, ?_⟩
+      rw [Finset.gcd_insert]
+      have hb : (GCDMonoid.gcd (e a) (s.gcd e)) =
+          e a * Int.gcdA (e a) (s.gcd e) + (s.gcd e) * Int.gcdB (e a) (s.gcd e) := by
+        have := Int.gcd_eq_gcd_ab (e a) (s.gcd e)
+        simpa [Int.gcd_eq_natAbs, Int.coe_gcd] using this
+      rw [hb]
+      push_cast
+      rw [add_mul]
+      rw [show ((e a : ℝ) * Int.gcdA (e a) (s.gcd e)) * y
+            = (Int.gcdA (e a) (s.gcd e) : ℝ) * ((e a : ℝ) * y) by ring,
+          show (((s.gcd e : ℤ) : ℝ) * Int.gcdB (e a) (s.gcd e)) * y
+            = (Int.gcdB (e a) (s.gcd e) : ℝ) * (((s.gcd e : ℤ) : ℝ) * y) by ring,
+          hza, hzs]
+
+/-- **Isolation at any real `t` puts `n * t` on the integers.**  The subject sits at
+relative speed `0` in its own frame; `hprim` is primitivity of the speed set, and it is
+load-bearing — drop it and the conclusion is false. -/
+theorem instants_on_grid {n : ℕ} (hn : 1 < n) (e : Fin n → ℤ)
+    (hprim : (univ : Finset (Fin n)).gcd e = 1)
+    (j₀ : Fin n) (he : e j₀ = 0) (t : ℝ)
+    (hiso : ∀ a b : Fin n, a ≠ b → (n : ℝ)⁻¹ ≤ circDist ((e a - e b : ℤ) * t)) :
+    ∃ z : ℤ, (n : ℝ) * t = z := by
+  classical
+  have hn0 : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
+  set x : Fin n → ℝ := fun j => (n : ℝ) * (e j : ℝ) * t with hx
+  have hx0 : x j₀ = 0 := by simp [hx, he]
+  have hsep : ∀ a b : Fin n, a ≠ b → (n : ℝ)⁻¹ ≤ circDist ((x a - x b) / n) := by
+    intro a b hab
+    have : (x a - x b) / (n : ℝ) = ((e a - e b : ℤ) : ℝ) * t := by
+      simp only [hx]; push_cast; field_simp
+    rw [this]; exact hiso a b hab
+  have hall : ∀ j : Fin n, ∃ z : ℤ, (e j : ℝ) * ((n : ℝ) * t) = z := by
+    intro j
+    obtain ⟨z, hz⟩ := int_of_pairwise_sep hn x j₀ hx0 hsep j
+    exact ⟨z, by rw [← hz]; simp [hx]; ring⟩
+  obtain ⟨z, hz⟩ := int_of_forall_int_mul (univ : Finset (Fin n)) e ((n : ℝ) * t)
+    (fun i _ => hall i)
+  rw [hprim] at hz
+  exact ⟨z, by simpa using hz⟩
+
+/-- Once `n * t = p`, isolation forces `p` coprime to `n`.  Distinctness of the residues is
+not a hypothesis here: isolation already supplies it. -/
+theorem coprime_of_isolation {n : ℕ} (hn : 1 < n) (e : Fin n → ℤ) (t : ℝ) (p : ℤ)
+    (hp : (n : ℝ) * t = p)
+    (hiso : ∀ a b : Fin n, a ≠ b → (n : ℝ)⁻¹ ≤ circDist ((e a - e b : ℤ) * t)) :
+    Nat.gcd n p.natAbs = 1 := by
+  have hn0 : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
+  have hnpos : 0 < n := by omega
+  have hpos : (0 : ℝ) < (n : ℝ)⁻¹ := by positivity
+  have ht : t = (p : ℝ) / n := by field_simp; linarith [hp]
+  have key : ∀ a b : Fin n, a ≠ b → ¬ ((n : ℤ) ∣ (e a - e b) * p) := by
+    intro a b hab hdvd
+    have hrw : ((e a - e b : ℤ) : ℝ) * t = (((e a - e b) * p : ℤ) : ℝ) / n := by
+      rw [ht]; push_cast; ring
+    have h0 := circDist_int_div_of_dvd hnpos hdvd
+    have hab' := hiso a b hab
+    rw [hrw, h0] at hab'
+    exact absurd hab' (not_le.mpr hpos)
+  have hdist : ∀ a b : Fin n, a ≠ b → ¬ ((n : ℤ) ∣ (e a - e b)) := by
+    intro a b hab hdvd
+    exact key a b hab (hdvd.mul_right p)
+  by_contra hg
+  obtain ⟨a, b, hab, hdvd⟩ := break_of_not_coprime hnpos e hdist p hg
+  exact key a b hab hdvd
+
+/-- **Part 2(b) at general `n`, both halves.**  Global isolation of a primitive
+configuration happens only at `t = p/n` with `gcd(n, p) = 1` — and by
+`isolation_iff_coprime` it happens at every such `t`, of which `card_coprime_eq_totient`
+counts `φ(n)` per period.
+
+This is the framework's sole external dependency, derived here from its own objects.
+**It says where global isolation can occur once it occurs, not that it occurs**, and it
+does not approach part 7. -/
+theorem isolation_forces_coprime_grid {n : ℕ} (hn : 1 < n) (e : Fin n → ℤ)
+    (hprim : (univ : Finset (Fin n)).gcd e = 1)
+    (j₀ : Fin n) (he : e j₀ = 0) (t : ℝ)
+    (hiso : ∀ a b : Fin n, a ≠ b → (n : ℝ)⁻¹ ≤ circDist ((e a - e b : ℤ) * t)) :
+    ∃ p : ℤ, (n : ℝ) * t = p ∧ Nat.gcd n p.natAbs = 1 := by
+  obtain ⟨p, hp⟩ := instants_on_grid hn e hprim j₀ he t hiso
+  exact ⟨p, hp, coprime_of_isolation hn e t p hp hiso⟩
+
+/-- **Non-vacuity.**  A theorem whose hypotheses cannot all hold proves nothing, so here is
+a configuration satisfying every hypothesis of `isolation_forces_coprime_grid`: two runners
+at relative speeds `0` and `1`, isolated at `t = 1/2`.  It returns `p = 1`, coprime to `2`. -/
+theorem instants_hypotheses_satisfiable :
+    ∃ (e : Fin 2 → ℤ) (j₀ : Fin 2) (t : ℝ),
+      (univ : Finset (Fin 2)).gcd e = 1 ∧ e j₀ = 0 ∧
+      (∀ a b : Fin 2, a ≠ b → ((2 : ℕ) : ℝ)⁻¹ ≤ circDist ((e a - e b : ℤ) * t)) := by
+  refine ⟨![0, 1], 0, 1/2, by decide, by decide, ?_⟩
+  intro a b hab
+  fin_cases a <;> fin_cases b <;> simp_all <;>
+    · norm_num [circDist, Int.fract]
 
 end ConstructionN

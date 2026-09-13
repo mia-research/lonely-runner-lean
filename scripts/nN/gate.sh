@@ -115,7 +115,12 @@ spine_iff
 spine_iff_residues
 break_of_not_coprime
 isolation_iff_coprime
-card_coprime_eq_totient"
+card_coprime_eq_totient
+int_of_forall_int_mul
+instants_on_grid
+coprime_of_isolation
+isolation_forces_coprime_grid
+instants_hypotheses_satisfiable"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'
