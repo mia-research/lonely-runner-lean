@@ -273,4 +273,75 @@ theorem instants_hypotheses_satisfiable :
   fin_cases a <;> fin_cases b <;> simp_all <;>
     · norm_num [circDist, Int.fract]
 
+/-! ## The arithmetic progression, and §6.1 at general `n`
+
+`docs/n8/MANUSCRIPT_v4.md` §6.1 rules out any argument that bounds how little the
+obstructions amount to.  Its ground is that the arithmetic progression's reading is a set of
+isolated points, so it has measure zero and no size estimate can reach it.  At `n = 8` that
+set is `{1/8, 3/8, 5/8, 7/8}`.  Here it is at general `n`.
+-/
+
+/-- The arithmetic progression is primitive: `1` is among its relative speeds. -/
+theorem ap_primitive {n : ℕ} (hn : 1 < n) :
+    (univ : Finset (Fin n)).gcd (fun j : Fin n => (j : ℤ)) = 1 := by
+  have hd : (univ : Finset (Fin n)).gcd (fun j : Fin n => (j : ℤ)) ∣ 1 := by
+    have h := Finset.gcd_dvd (f := fun j : Fin n => (j : ℤ)) (mem_univ (⟨1, hn⟩ : Fin n))
+    simpa using h
+  have hnorm := Finset.normalize_gcd (s := (univ : Finset (Fin n)))
+    (f := fun j : Fin n => (j : ℤ))
+  rcases Int.isUnit_iff.mp (isUnit_of_dvd_one hd) with h | h
+  · exact h
+  · rw [h] at hnorm; exact absurd hnorm (by decide)
+
+/-- For the arithmetic progression the subject's own readings are `1, …, n-1`, and clearing
+those clears **every** pair: the AP's difference set is the same seen from any runner.  This
+is why one runner's reading and global isolation coincide there, and they do not in general. -/
+theorem ap_pairwise_of_subject {n : ℕ} (t : ℝ)
+    (h : ∀ k : ℕ, 0 < k → k < n → (n : ℝ)⁻¹ ≤ circDist ((k : ℝ) * t)) :
+    ∀ a b : Fin n, a ≠ b → (n : ℝ)⁻¹ ≤ circDist (((a : ℤ) - (b : ℤ) : ℤ) * t) := by
+  intro a b hab
+  have hne : (a : ℕ) ≠ (b : ℕ) := fun hc => hab (Fin.ext hc)
+  rcases lt_or_gt_of_ne hne with hlt | hgt
+  · set k := (b : ℕ) - (a : ℕ) with hk
+    have hk0 : 0 < k := by omega
+    have hkn : k < n := by omega
+    have hcast : (((a : ℤ) - (b : ℤ) : ℤ) : ℝ) = -(k : ℝ) := by
+      simp only [hk]; push_cast [Nat.cast_sub (le_of_lt hlt)]; ring
+    rw [hcast, show -(k : ℝ) * t = -((k : ℝ) * t) by ring, circDist.symm_neg]
+    exact h k hk0 hkn
+  · set k := (a : ℕ) - (b : ℕ) with hk
+    have hk0 : 0 < k := by omega
+    have hkn : k < n := by omega
+    have hcast : (((a : ℤ) - (b : ℤ) : ℤ) : ℝ) = (k : ℝ) := by
+      simp only [hk]; push_cast [Nat.cast_sub (le_of_lt hgt)]; ring
+    rw [hcast]
+    exact h k hk0 hkn
+
+/-- **§6.1 at general `n`.**  The arithmetic progression's reading inside a period is
+**finite** — it sits inside the `φ(n)` points `p/n` with `gcd(n, p) = 1`.  A finite set has
+measure zero, so no argument that bounds how little the obstructions amount to can reach it,
+**at any `n`**, and not because the bound is loose.
+
+At `n = 8` this is the four points `1/8, 3/8, 5/8, 7/8` of §1.2. -/
+theorem ap_reading_finite {n : ℕ} (hn : 1 < n) :
+    {t : ℝ | 0 ≤ t ∧ t < 1 ∧
+       ∀ k : ℕ, 0 < k → k < n → (n : ℝ)⁻¹ ≤ circDist ((k : ℝ) * t)}.Finite := by
+  have hn0 : (0 : ℝ) < n := by
+    have : (1 : ℝ) < n := by exact_mod_cast hn
+    linarith
+  apply Set.Finite.subset ((Set.finite_Iio n).image (fun p : ℕ => (p : ℝ) / n))
+  rintro t ⟨h0, h1, hread⟩
+  obtain ⟨p, hp, -⟩ := isolation_forces_coprime_grid hn (fun j : Fin n => (j : ℤ))
+    (ap_primitive hn) ⟨0, by omega⟩ (by simp) t (ap_pairwise_of_subject t hread)
+  have hpl : (0 : ℝ) ≤ (p : ℝ) := by rw [← hp]; positivity
+  have hpu : (p : ℝ) < n := by rw [← hp]; nlinarith
+  have hpl' : 0 ≤ p := by exact_mod_cast hpl
+  have hpu' : p < n := by exact_mod_cast hpu
+  refine ⟨p.toNat, ?_, ?_⟩
+  · simp only [Set.mem_Iio]; omega
+  · have hcast : ((p.toNat : ℕ) : ℝ) = (p : ℝ) := by
+      exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) (Int.toNat_of_nonneg hpl')
+    simp only [hcast, ← hp]
+    field_simp
+
 end ConstructionN

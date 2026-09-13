@@ -54,7 +54,8 @@ LonelyRunner.LRC.ConstructionN.Integrality
 LonelyRunner.LRC.ConstructionN.Flank
 LonelyRunner.LRC.ConstructionN.Window
 LonelyRunner.LRC.ConstructionN.Bounds
-LonelyRunner.LRC.ConstructionN.Instants"
+LonelyRunner.LRC.ConstructionN.Instants
+LonelyRunner.LRC.ConstructionN.Soundness"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -2 "$LOG"
@@ -120,7 +121,13 @@ int_of_forall_int_mul
 instants_on_grid
 coprime_of_isolation
 isolation_forces_coprime_grid
-instants_hypotheses_satisfiable"
+instants_hypotheses_satisfiable
+ap_primitive
+ap_pairwise_of_subject
+ap_reading_finite
+procedure_sound
+procedure_sound_hypotheses_satisfiable
+clear_width_pos"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'
@@ -128,6 +135,7 @@ AX=LonelyRunner/_NNGateAxCheck.lean
   echo 'import LonelyRunner.LRC.ConstructionN.Coords'
   echo 'import LonelyRunner.LRC.ConstructionN.Bounds'
   echo 'import LonelyRunner.LRC.ConstructionN.Instants'
+  echo 'import LonelyRunner.LRC.ConstructionN.Soundness'
   for d in $DECLS; do echo "#print axioms ConstructionN.$d"; done
 } > "$AX"
 AXOUT=$(lake env lean "$AX" 2>&1)
