@@ -48,7 +48,8 @@ LonelyRunner.LRC.Construction8.Sorted
 LonelyRunner.LRC.Construction8.Grid
 LonelyRunner.LRC.Construction8.Integrality
 LonelyRunner.LRC.Construction8.Flank
-LonelyRunner.LRC.Construction8.Window"
+LonelyRunner.LRC.Construction8.Window
+LonelyRunner.LRC.Construction8.Bounds"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -2 "$LOG"
@@ -100,12 +101,16 @@ coord_iff
 equally_spaced_of_pairwise
 grid_of_pairwise
 no_solo_closure
-wide_gap_core"
+wide_gap_core
+ratio_condition
+lonely_ne_pred
+wide_gap_speeds"
 AX=LonelyRunner/_N8GateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.Construction8.Window'
   echo 'import LonelyRunner.LRC.Construction8.Integrality'
   echo 'import LonelyRunner.LRC.Construction8.Coords'
+  echo 'import LonelyRunner.LRC.Construction8.Bounds'
   for d in $DECLS; do echo "#print axioms Construction8.$d"; done
 } > "$AX"
 AXOUT=$(lake env lean "$AX" 2>&1)
