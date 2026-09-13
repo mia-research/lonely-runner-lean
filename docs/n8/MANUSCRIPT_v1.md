@@ -19,15 +19,15 @@ extent of the verification can be checked rather than taken, and a done-check sc
 refuses to pass if the open claim of §7.3 is ever stated.
 
 We present a local framework for the problem and a formal verification of it. The
-framework is not specific to `n = 8`: of its 85 verified statements, 81 are stated at
-general `n` or involve no runner count, and the four that are not have explicit general
-forms (§9). The
+framework is not specific to `n = 8`: 81 of the 85 verified statements are at general `n`
+or involve no runner count, and the four that are not have explicit general forms (§9). The
 framework replaces global analysis with a per-runner construction in three objects — the
 cyclic **gaps** on the track, each runner's nearest speed difference `d_min`, and the
 **laps** the others complete relative to it — and evaluates isolation on an exact integer
 grid rather than by any continuous argument. Six of the construction's seven parts are
-proved and machine-checked in Lean 4: **85 theorems, no `sorry`, no `native_decide`,
-every declaration depending on `propext`, `Classical.choice` and `Quot.sound` alone.**
+proved and machine-checked in Lean 4. The seventh of the construction's parts that is
+*not* proved here — the `φ(n)` count for arithmetic progressions — is cited to prior work
+rather than re-derived, and is its only external dependency (§5).
 
 The seventh part is the claim that the construction's procedure always returns, and it
 is not proved. We state it precisely, record what is verified of it, and do not state it
@@ -68,8 +68,9 @@ its two ends.
 **Open cells and boundary points are evaluated separately, and touching zones are never
 merged.** This is not a matter of care; it is load-bearing. An in-the-way zone is the set
 where the circle distance is strictly below `1/8`, so it is an **open** interval and its
-endpoints are clear. In the arithmetic progression `(1, …, 8)`, the first runner's reading
-inside its window is exactly the four points `1/8, 3/8, 5/8, 7/8` and nothing else. Any
+endpoints are clear. In the arithmetic progression `(1, …, 8)`, the first runner's
+**reading** — the set of instants at which every other runner is simultaneously clear of it
+— inside its window is exactly the four points `1/8, 3/8, 5/8, 7/8` and nothing else. Any
 implementation that closes those brackets, or that samples cell interiors, reports the
 AP's end runners as never isolated — and compiles, and looks correct.
 
@@ -147,8 +148,20 @@ The zones are open and their endpoints are clear, as §1.2 requires; closing the
 > `1/(4s)`. It cannot bridge its own clear interval.
 
 > **Proposition 3.3 (single-reading exclusion).** Let `σ` be the smallest reading other
-> than the baseline `s_1 = 1`. No single other reading can close a clear interval of `σ`
-> on its own: doing so would need `1/(4s′) ≥ 3/(4σ)`, that is `s′ ≤ σ/3`, against `s′ ≥ σ`.
+> than the baseline `s_1 = 1`. No single reading **other than the baseline** can close a
+> clear interval of `σ` on its own: any such reading has `s′ ≥ σ`, while a solo closure
+> would need `1/(4s′) ≥ 3/(4σ)`, that is `s′ ≤ σ/3`.
+
+Excluding the baseline is necessary, not a technicality. With `σ = 8` — realised by the
+subject at speed 1 of `(0, 1, 9, …)`, whose readings are `{1, 8, …}` — the clear interval
+`[57/64, 63/64]` of `σ` lies entirely inside the baseline's zone `(7/8, 9/8)`.
+
+It costs nothing, because **the baseline has no zone inside the evaluation window at all**:
+the zones of `s = 1` are `((8k−1)/8, (8k+1)/8)`, which meet `[1/8, 7/8]` in neither
+direction. That is exactly how §1.3 defines the window. The counterexample therefore sits
+outside the region where the proposition is used, and the restriction is the statement
+catching up with that. *(The formal statement `no_solo_closure` already carries the
+hypothesis `σ ≤ s′`; the gap was in the prose.)*
 
 Every closure of a clear interval of the slowest reading therefore requires at least two
 readings acting together. This is a structural constraint obtained from the geometry of
@@ -326,10 +339,17 @@ with `d_min = g` throughout, where the moment is exactly `1/(8g)`; and every run
 of whose readings lies within 1 of a multiple of 8, for which `u = 1/8` returns.
 
 *Evidence where it is not proved.* 21,600 runner-instances across seven populations,
-including adversarial ones, all returning; and exhaustively every integer arrangement with
-`0 = v_1 < … < v_8 ≤ 20` and gcd 1 — 77,400 arrangements, 113,145 distinct runner-profiles,
-no failure to return. **This is verification over a bounded family, not a proof, and
-nothing above `v_8 = 20` is covered.**
+including adversarial ones, all returning; and **exhaustively every integer arrangement
+with `0 = v_1 < … < v_8 ≤ 40` and gcd 1 — 18,564,316 arrangements, 148,514,528
+runner-instances, zero failures**, in exact rational arithmetic throughout.
+
+The returned locations sit early in the window: median `u = 1/8`, 90th percentile `0.173`,
+99th percentile `0.25`, and a maximum of `245/304 ≈ 0.806`, attained at
+`V = (0, 3, 10, 16, 18, 22, 33, 38)` by the eighth runner, whose `d_min` is 5. The window
+ends at `0.875`, so even the worst case observed does not reach its end.
+
+**This remains verification over a bounded family, not a proof. Nothing above `v_8 = 40`
+is covered**, and no bound is offered on how far the search extends in general.
 
 The obligation is **per runner**, not per configuration: a runner outside the settled cases
 needs its moment whether or not some other runner in the same arrangement is inside them.
