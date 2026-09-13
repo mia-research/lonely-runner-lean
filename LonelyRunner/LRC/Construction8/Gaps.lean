@@ -67,4 +67,35 @@ theorem cycGap_all_eq (n : ℕ) (hn : 0 < n) (p : ℕ → ℝ)
     cycGap n p i = (n : ℝ)⁻¹ :=
   gaps_all_eq hn (cycGap n p) hge (cycGap_sum n hn p) i
 
+/-! ## The bridge from adjacent separations to the gaps
+
+Each cyclic gap *is* the separation of the adjacent pair it joins, so a bound on
+adjacent circle distances transfers to the gaps.  The interior gaps are literally the
+differences; the wrap gap differs from its pair's difference by the integer 1, which
+`circDist` does not see.
+-/
+
+/-- The wrap gap's circle distance is the circle distance of the pair it joins. -/
+theorem circDist_wrap (p : ℕ → ℝ) (n : ℕ) :
+    circDist (1 - p (n - 1) + p 0) = circDist (p 0 - p (n - 1)) := by
+  have h : (1 : ℝ) - p (n - 1) + p 0 = (p 0 - p (n - 1)) + ((1 : ℤ) : ℝ) := by
+    push_cast; ring
+  rw [h, circDist_add_int]
+
+/-- **The bridge.**  A lower bound on adjacent circle distances is a lower bound on the
+gaps themselves. -/
+theorem cycGap_ge_of_adjacent {n : ℕ} (hn : 0 < n) (p : ℕ → ℝ)
+    (hnn : ∀ i : Fin n, 0 ≤ cycGap n p i)
+    (h : ∀ i : Fin n, (n : ℝ)⁻¹ ≤ circDist (cycGap n p i)) (i : Fin n) :
+    (n : ℝ)⁻¹ ≤ cycGap n p i :=
+  le_of_le_circDist hn (hnn i) (h i)
+
+/-- **Equal spacing from adjacent separations.**  Every adjacent pair at least `1/n`
+apart, with nonnegative gaps, forces every gap to be exactly `1/n`. -/
+theorem cycGap_eq_of_adjacent {n : ℕ} (hn : 0 < n) (p : ℕ → ℝ)
+    (hnn : ∀ i : Fin n, 0 ≤ cycGap n p i)
+    (h : ∀ i : Fin n, (n : ℝ)⁻¹ ≤ circDist (cycGap n p i)) (i : Fin n) :
+    cycGap n p i = (n : ℝ)⁻¹ :=
+  cycGap_all_eq n hn p (cycGap_ge_of_adjacent hn p hnn h) i
+
 end Construction8
