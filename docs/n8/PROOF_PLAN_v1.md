@@ -12,51 +12,61 @@ promotes nothing.
 
 | | part | status | in Lean |
 |---|---|---|---|
-| 1 | Loneliness is a two-neighbour condition; there are no end runners | `[PROVED]` | — |
+| 1 | Loneliness is a two-neighbour condition; there are no end runners | `[PROVED]` | `lonely_iff_flanks`, `_first`, `_last` |
 | 2(a) | All eight lonely ⟺ every gap is exactly `1/8` | `[PROVED]` | `gaps_all_eq` |
 | 2(b) | The instants are `{δt} = r/n`, `gcd(r,n) = 1`; `φ(n)` of them | `[PROVED]` — `lrc_ap_phi_n_law_v1` Thm 3.1(a)(b) | — (cited, not re-derived) |
 | 3 | `d_min` from the two neighbours is exact; nothing before `1/(8·d_min)` | `[PROVED]` | `nearest_below`, `nearest_above`, `before_floor` |
-| 4 | One window, `u ∈ [1/8, 7/8]` | `[PROVED]` | — |
-| 5 | Every other runner's lap count and phase at every `u` | `[PROVED]` | — |
-| 6(a) | The AP part is a permutation: `n` runners on `n` distinct eighths | `[PROVED]` | — |
+| 4 | One window, `u ∈ [1/8, 7/8]` | `[PROVED]` | `window_iff` |
+| 5 | Every other runner's lap count and phase at every `u` | `[PROVED]` | `reading_clear_iff`, `lap_and_phase` |
+| 6(a) | The AP part is a permutation: `n` runners on `n` distinct eighths | `[PROVED]` | `ap_reference` |
 | 6(b) | The deviation displaces runner `k` by `e_k·r/d` eighths | `[PROVED]` | `displacement` |
-| 6(c) | The instant survives iff whole eighths **and** the map is a bijection | `[PROVED]` | — |
+| 6(c) | The instant survives iff whole eighths **and** the map is a bijection | `[PROVED]` | `survives_of`; `int_of_pairwise_sep`, `not_dvd_of_sep` |
 | **7** | **The claim: the procedure returns the moment** | **`[CLAIMED]`** | **not stated, deliberately** |
 
 **One external debt in the whole construction**, and it is the owner's own prior work: 2(b).
 
-## 2. Lean — done, and next in order
+## 2. Lean — the target list is complete
 
-`LonelyRunner/LRC/Construction8/` on branch `n7-case-a5-repr-cases`. **39 theorems, zero `sorry`,
+`LonelyRunner/LRC/Construction8/` on branch `n7-case-a5-repr-cases`. **81 theorems, zero `sorry`,
 no `native_decide`, no `unsafe`, no `admit`, every one `[propext, Classical.choice, Quot.sound]`.**
 
 | file | count | contents |
 |---|---|---|
-| `Parts.lean` | 5 | parts 2(a), 3, 6(b) — handover §7 item 2's cheap independent batch |
-| `LemmaPass.lean` | 24 | the supporting lemmas of §3 below |
+| `Parts.lean` | 5 | parts 2(a), 3, 6(b) |
+| `LemmaPass.lean` | 24 | the supporting lemmas of §3 |
 | `Coords.lean` | 10 | the `(a,m)` condition, stretch overlap, wide-gap, clear-interval bound |
+| `Reference.lean` | 4 | 6(a); 6(c) forward |
+| `Gaps.lean` | 6 | cyclic gaps, conservation, the adjacent bridge |
+| `Sorted.lean` | 4 | the sorting permutation, equal spacing from pairwise separation |
+| `Grid.lean` | 3 | the regular `n`-gon, explicitly |
+| `Integrality.lean` | 8 | 6(c) converse — integrality and the bijection |
+| `Flank.lean` | 14 | part 1, both directions, all indices |
+| `Window.lean` | 3 | parts 4 and 5 |
 
-**Next, in this order** — handover §7 item 2 names the first two:
+**Every target of this list is complete.**
 
-1. **6(a)** — `k ↦ kr (mod n)` is a bijection for `gcd(r,n) = 1`, so the `n` runners occupy the
-   `n` distinct eighths, pairwise at distance `≥ 1/n`. Needs `ZMod n` and `Nat.Coprime`.
-   *Must not claim:* that anyone is lonely — that is part 1. That the instant is first.
-2. **6(c)** — pairwise distances all `≥ 1/n` **iff** every `x_k = k·r + e_k·r/d` is an integer and
-   the `x_k` are distinct mod `n`. The forward direction routes through `gaps_all_eq`; the
-   normalisation `e₀ = 0` is what turns "differences are integers" into "each `x_k` is an integer".
-   *Must not claim:* global isolation as such — that is this composed with part 1.
-3. **Part 1** — the two-gap criterion. The cyclic-order argument is the work; state adjacency mod
-   `n` so the end runners are not special.
-4. **Part 4** — one window. Care with `Int.fract`; prefer routing through `coord_iff`, which has no
-   `Int.fract` in its statement.
-5. **Part 5** — the reading. Follows part 4.
+| target | state |
+|---|---|
+| 1. **6(a)** | **done** — `ap_reference` |
+| 2. **6(c)** | **done, both directions** — `survives_of`; `int_of_pairwise_sep`, `not_dvd_of_sep` |
+| 3. **part 1** | **done, both directions, interior and both ends** — `lonely_iff_flanks`, `_first`, `_last` |
+| 4. **part 4** | **done** — `window_iff` |
+| 5. **part 5** | **done** — `reading_clear_iff`, `lap_and_phase` |
 
-**Part 7 is not to be stated in Lean.** No `theorem claim`, not even with `sorry`. Writing it down
-invites an attack with whatever machinery closes it, which is the failure mode this plan exists to
-prevent.
+So parts 1, 2(a), 3, 4, 5, 6(a), 6(b), 6(c) are all formally verified. Part 2(b) stays cited to
+`lrc_ap_phi_n_law_v1` Theorem 3.1(a)–(b) — the construction's only external debt, and the owner's
+own prior work.
 
-**Geometric wrappers still owed.** `wide_gap_core` and `wide_gap_end` are index-free; stating them
-on `Fin 8` speeds needs `nearest_below`/`nearest_above`. Short, and worth doing when part 1 lands.
+**Part 7 is not stated in Lean, and stays unstated.** No `theorem claim`, not even with `sorry`.
+Writing it down invites an attack with whatever machinery closes it.
+
+**Infrastructure built along the way**, needed by more than one target and not on the original
+list: the cyclic gap structure and its conservation law (`Gaps.lean`); the sorting permutation, so
+a pairwise hypothesis reaches the gaps (`Sorted.lean`); and the regular `n`-gon in explicit form
+(`Grid.lean`).
+
+**Still owed, and small.** `wide_gap_core` and `wide_gap_end` are index-free; stating them on
+`Fin 8` speeds needs `nearest_below`/`nearest_above` and part 1, all of which now exist.
 
 ## 3. Supporting lemmas — what they are and what they are not
 
@@ -112,8 +122,8 @@ Each was tried and failed for a stated reason. Re-entering one is the commonest 
 | the 2-adic ladder | `DYADIC_DEPTH_RESULT_v1` — depth grows with the speed bound. |
 | bounding a lattice or denominator on a sample | Retracted three times: `q ≤ 2n` (handover §6), `L ≤ 6` and `L ≤ 7` (`WHY_IT_PREDICTS_v1` §5), and a `q ≤ 19` attempt. A bigger sample breaks each. |
 | repairing one in-the-way reading and re-testing | Three closed forms each landed near 46%; in 3,234 of 3,234 the reading in the way after a repair is a different one. |
-| the relay / stretch-ratio fracture | Refuted by counterexample: a reading of `11/5` is in the way at `u = 7/8` on its second lap, so `s_end ≤ 9/7` fails; the hop bound `9/7` is the first-stretch case only, with `17/7` and `25/7` at later laps; seven readings give 24 stretches and an 11-hop chain with readings recurring, so counting runners is not counting hops; and `s = 8` is in the way at **both** ends alone, so there is no ratio to accumulate. |
-| the 5-against-6 count at `s = 8` | Not established. Readings collaborate on one gap, and one reading touches many gaps. |
+| **the relay / stretch-ratio fracture** | **Refuted, four counterexamples.** (i) `s = 11/5` is in the way at `u = 7/8` on its **second** lap — `‖(11/5)(7/8)‖ = 3/40 < 1/8` — so `s_end ≤ 9/7` fails. (ii) The hop bound `9/7` is the lap-1-against-lap-1 case only; in general it is `(8k+1)/(8k′−1)`, giving `17/7` and `25/7` at later laps. (iii) Seven readings supply **24 stretches**, and an observed chain ran **11 hops** with readings recurring — a relay is built from stretches, not runners, so `N` runners do not give `N−1` hops. (iv) `s = 8` is in the way at **both** ends by itself (`8·(1/8) = 1`, `8·(7/8) = 7`), so the ends do not force two readings and there is no ratio to accumulate. Each successive draft corrected the bookkeeping and left all four in place. |
+| **the `s = 8` runner count (Regime A pigeonhole)** | **Invalidated.** `s = 8` does fragment the window into 7 in-the-way zones and 6 clear gaps of `3/32` — that part is right. But "5 readings cannot fill 6 gaps" assumes one reading per gap, and both halves fail: readings **collaborate** on a single gap, and one reading has many stretches so it **serves several gaps**. A search over 300,000 draws of five readings closed **3 of the 6**, which is neither 0 nor 6 and refutes the counting directly. The conclusion (gaps survive) held throughout with margin; the mechanism did not. |
 
 **The superseded line.** `BRICK_LEDGER_v1`, `WHY_IT_PREDICTS_v1`, `FIRST_INTERVAL_PROOF_STATUS_v1`
 and `LRC8_ANALYTIC_v1/v2` predate the handover and carry register vocabulary. Read them for
@@ -142,6 +152,33 @@ history; do not build on them.
   `unsafe`, `admit`.
 - Documents: the labels are the first thing to check and should not move — parts 1–6 `[PROVED]`,
   part 7 `[CLAIMED]` with `[VERIFIED]` counts, LRC(8) not proved.
+
+## 8. Supervisor review — handover §7 item 3, done 2026-09-13
+
+Performed against the binding register and the label discipline. **No theorem changed.**
+
+**Register.** All ten `Construction8` files scanned for the fourteen items. Clean — the single
+grep hit is `LemmaPass`'s own sentence saying it uses none of them.
+
+**Labels.** No file claims part 7, the Claim, `LRC(8)` or `intLRC`; every mention of part 7 is a
+disclaimer. Parts 1–6 sit at `[PROVED]`, part 2(b) at cited, part 7 unstated. `Parts.lean` and
+`LemmaPass.lean` — the two files predating this pass — lacked the explicit *nothing here states or
+attempts part 7* line the eight newer files carry; added.
+
+**Citation defects found, all pre-existing, all fixed:**
+
+| | defect | resolution |
+|---|---|---|
+| `LemmaPass` | cited `SKETCH_v6.md`, superseded by v7 | repointed |
+| `LemmaPass` | cited `LEMMAS_v1.md` L2 — **not on disk** | recorded in the header, not deleted: `LEMMA_L3_v2.md` also refers to it, so it existed once, and removing the reference would hide that a source is missing |
+| `LemmaPass` | cited `LEMMA_L3_v1` for an argument `LEMMA_L3_v2` replaced | notes v2 is current and carries the elementary proof |
+| `Gaps` | cited `GAP_FRAME_v1` §0; v2 is current | repointed, with §0's unchanged-ness stated so the citation can be checked |
+
+**Module docstrings.** Every file carries its own scope note naming what it does *not* establish —
+`Gaps` that its conservation is a telescoping identity until `p` is sorted; `Sorted` that it gives
+the permutation but finishes neither target alone; `Grid` that the integrality step is separate;
+`Coords` that `9/7` is the first-stretch case only. Those notes are the reason the tree cannot be
+read as claiming more than it proves, and they should not be trimmed.
 
 ---
 
