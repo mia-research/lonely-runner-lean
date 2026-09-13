@@ -5,11 +5,16 @@ import Mathlib.Algebra.Order.Round
 /-!
 # The lemma pass — general `n`
 
-Source: `docs/n8/SKETCH_v6.md` §4 and §7c, `docs/n8/LEMMAS_v1.md` L2, and
-`docs/n8/SKETCH_DEBTS_v2.md` §6, which orders the targets so each needs nothing above it.
+Source: `docs/n8/SKETCH_v7.md` §4 and §7c, and `docs/n8/SKETCH_DEBTS_v2.md` §6, which orders
+the targets so each needs nothing above it (v2 §6 is carried forward unchanged by v3).
+
+*(This header cited `docs/n8/SKETCH_v6.md`, superseded by v7, and `docs/n8/LEMMAS_v1.md` L2,
+which is not on disk — `LEMMA_L3_v2.md` also refers to it, so it existed once. The dangling
+reference is recorded rather than silently dropped.)*
 
 Everything is stated at general `n`; `n = 8` is an instantiation. Nothing here uses measure,
 covering, a witness, a carrier, or LRC at any order.
+Nothing here states or attempts part 7 of `PROOF_CANDIDATE_v3`.
 -/
 
 namespace Construction8
@@ -117,7 +122,8 @@ theorem exists_live {n : ℕ} (hn : 0 < n) (ds : Finset ℕ) (hpos : ∀ d ∈ d
 /-! ## L3 — the reading is complete
 
 `docs/n8/LEMMA_L3_v1.md` proves completeness by closedness and compactness.  The same fact has
-an elementary proof, which is what is formalised here: if a runner stands clear of `d` at `t`,
+an elementary proof — `LEMMA_L3_v2.md` is the current document and carries it — and that is what
+is formalised here: if a runner stands clear of `d` at `t`,
 then it stands clear of `d` everywhere between `t` and the **opening** of the stretch `t` sits
 in.  Taking the largest such opening over all the differences produces an opening that is
 itself an isolation instant and no later than `t` — which is completeness, with no topology.

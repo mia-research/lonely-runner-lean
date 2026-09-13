@@ -14,6 +14,7 @@ Source: `docs/n8/PROOF_CANDIDATE_v3.md`, parts 2(a), 3, 6(b), and the handover o
 2026-09-13 §7 item 2, which names these three as the cheap independent first pass.
 
 Nothing here uses measure, density, covering, a witness, or LRC at any other order.
+Nothing here states or attempts part 7 of `PROOF_CANDIDATE_v3`.
 -/
 
 namespace Construction8

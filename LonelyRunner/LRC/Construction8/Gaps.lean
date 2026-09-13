@@ -3,7 +3,8 @@ import LonelyRunner.LRC.Construction8.Reference
 /-!
 # The cyclic gap structure
 
-`docs/n8/PROOF_CANDIDATE_v3.md` part 1 and part 2(a); `docs/n8/GAP_FRAME_v1.md` §0.
+`docs/n8/PROOF_CANDIDATE_v3.md` part 1 and part 2(a); `docs/n8/GAP_FRAME_v2.md` §0 (§0 is
+unchanged from v1).
 
 This is the piece both remaining targets of `docs/n8/PROOF_PLAN_v1.md` §2 need and
 neither had: the `n` cyclic gaps of sorted positions, and the fact that they sum to 1.
