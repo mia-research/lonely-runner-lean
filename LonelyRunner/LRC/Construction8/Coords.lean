@@ -104,4 +104,47 @@ spread, so `S/c ≤ a` already gives `S ≤ c * a`. -/
 theorem wide_gap_end (c S a : ℝ) (hc : 0 < c) (ha : S / c ≤ a) : S ≤ c * a := by
   rw [div_le_iff₀ hc] at ha; linarith
 
+/-! ## The single-reading clear-interval bound
+
+A reading's in-the-way zones are the **open** intervals `((8k-1)/(8s), (8k+1)/(8s))`,
+one per lap.  Open, not closed: in-the-way means `circDist (s*u) < 1/n` strictly, so the
+endpoints are clear.  That is what leaves the AP's own reading as isolated points rather
+than nothing (handover 2026-09-13 §5 trap 1), and closing the brackets would destroy it.
+
+Each zone has width `1/(4s)` and consecutive zones are separated by a clear interval of
+width `3/(4s)`.  So a single reading reaches contiguously at most `1/(4s)` — it cannot
+bridge its own clear interval, and it cannot bridge a wider one belonging to a slower
+reading.
+-/
+
+/-- An in-the-way zone has width `1/(4s)`. -/
+theorem blocked_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (9 / (8 * s) + (k : ℝ) / s) - (7 / (8 * s) + (k : ℝ) / s) = 1 / (4 * s) := by
+  field_simp; ring
+
+/-- Consecutive in-the-way zones are separated by a clear interval of width `3/(4s)`. -/
+theorem clear_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (7 / (8 * s) + ((k : ℝ) + 1) / s) - (9 / (8 * s) + (k : ℝ) / s) = 3 / (4 * s) := by
+  field_simp; ring
+
+/-- A reading `s'` reaches contiguously at most `1 / (4 * s')`.  If `σ ≤ s'` with `σ > 0`
+that is strictly less than `σ`'s clear interval `3 / (4 * σ)`.  So when `σ` is the
+smallest reading in play, no single other reading can close one of `σ`'s clear intervals
+on its own — any closure needs at least two readings. -/
+theorem no_solo_closure (sig s' : ℝ) (hsig : 0 < sig) (hle : sig ≤ s') :
+    1 / (4 * s') < 3 / (4 * sig) := by
+  have h1 : 1 / (4 * s') ≤ 1 / (4 * sig) :=
+    one_div_le_one_div_of_le (by linarith) (by linarith)
+  have h2 : 1 / (4 * sig) < 3 / (4 * sig) := by
+    rw [div_lt_div_iff_of_pos_right (by linarith)]; norm_num
+  linarith
+
+/-- Contrapositive: a reading that could close such an interval on its own would have to
+be strictly slower than the smallest, which is impossible. -/
+theorem solo_closure_forces_smaller (sig s' : ℝ) (hsig : 0 < sig) (hs' : 0 < s')
+    (h : 3 / (4 * sig) ≤ 1 / (4 * s')) : s' < sig := by
+  by_contra hcon
+  push Not at hcon
+  exact absurd h (not_le.mpr (no_solo_closure sig s' hsig hcon))
+
 end Construction8
