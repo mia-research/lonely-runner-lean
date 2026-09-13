@@ -1,4 +1,4 @@
-# A machine-checked local framework for the Lonely Runner Conjecture at n = 8
+# A Bounding Framework for Eight Lonely Runners
 
 **T. Palelei.** Draft v1, 2026-09-13.
 
@@ -10,6 +10,12 @@ Eight runners start together on a circle of circumference 1 and run at distinct 
 speeds. The Lonely Runner Conjecture at `n = 8` asserts that each of them is, at some
 instant, at distance at least `1/8` from every other. The case is known by computation
 (Rosenfeld 2025) and has no analytic proof.
+
+**The framework is formally verified** — 81 theorems in Lean 4, no `sorry`, no
+`native_decide`, every declaration depending on `propext`, `Classical.choice` and
+`Quot.sound` alone. Three results are proved here but not yet formalised; §8 maps every
+numbered statement to its Lean declaration or marks it as a paper proof, so the extent of
+the verification can be checked rather than taken.
 
 We present a local framework for the problem and a formal verification of it. The
 framework replaces global analysis with a per-runner construction in three objects — the
