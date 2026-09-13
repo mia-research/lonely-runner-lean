@@ -57,7 +57,8 @@ LonelyRunner.LRC.ConstructionN.Bounds
 LonelyRunner.LRC.ConstructionN.Instants
 LonelyRunner.LRC.ConstructionN.Soundness
 LonelyRunner.LRC.ConstructionN.Negative
-LonelyRunner.LRC.ConstructionN.Band"
+LonelyRunner.LRC.ConstructionN.Band
+LonelyRunner.LRC.ConstructionN.Candidates"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -2 "$LOG"
@@ -146,7 +147,11 @@ band_int
 returns_at_first_spine
 first_spine_in_window
 near_ap_reading_band
-near_ap_top_returns"
+near_ap_top_returns
+exists_clear_candidate
+two_sigma_zone_inside
+band_identity_spine
+returns_at_spine"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'
@@ -157,6 +162,7 @@ AX=LonelyRunner/_NNGateAxCheck.lean
   echo 'import LonelyRunner.LRC.ConstructionN.Soundness'
   echo 'import LonelyRunner.LRC.ConstructionN.Negative'
   echo 'import LonelyRunner.LRC.ConstructionN.Band'
+  echo 'import LonelyRunner.LRC.ConstructionN.Candidates'
   for d in $DECLS; do echo "#print axioms ConstructionN.$d"; done
 } > "$AX"
 AXOUT=$(lake env lean "$AX" 2>&1)
