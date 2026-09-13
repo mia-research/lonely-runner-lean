@@ -166,4 +166,111 @@ theorem lonely_of_flanks_last {n : ℕ} (p : ℕ → ℝ) (hn : 1 < n)
     (n : ℝ)⁻¹ ≤ circDist (p m - p (n - 1)) :=
   le_trans hflank (circDist_ge_flank_last p n m hn hmn hml hmono h0 h1)
 
+/-! ## The converse — a lonely runner has both flanking gaps at `1/n`
+
+Only the two flanking pairs are needed, not the attainment of any minimum.  Instantiating
+loneliness at `k-1` and `k+1` gives each gap directly; at the ends, the wrap gap comes
+from the complementary arc of the far pair.
+-/
+
+/-- The other half of `le_of_le_circDist`: a circle distance of at least `1/n` also bounds
+the complementary arc. -/
+theorem one_sub_ge_of_circDist {n : ℕ} {x : ℝ} (h : |x| < 1)
+    (hc : (n : ℝ)⁻¹ ≤ circDist x) : (n : ℝ)⁻¹ ≤ 1 - |x| := by
+  rw [circDist_of_abs_lt_one h] at hc
+  exact le_trans hc (min_le_right _ _)
+
+/-- **Part 1's converse, interior.** -/
+theorem flanks_of_lonely {n : ℕ} (hn : 0 < n) (p : ℕ → ℝ) (k : ℕ)
+    (hk1 : 1 ≤ k) (hkn : k + 1 < n)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (hlonely : ∀ m, m < n → m ≠ k → (n : ℝ)⁻¹ ≤ circDist (p m - p k)) :
+    (n : ℝ)⁻¹ ≤ min (p k - p (k - 1)) (p (k + 1) - p k) := by
+  have hk : k < n := by omega
+  refine le_min ?_ ?_
+  · have h := hlonely (k - 1) (by omega) (by omega)
+    have hneg : p (k - 1) - p k = -(p k - p (k - 1)) := by ring
+    rw [hneg, circDist.symm_neg] at h
+    exact le_of_le_circDist hn (by have := hmono (k - 1) k (by omega) hk; linarith) h
+  · have h := hlonely (k + 1) (by omega) (by omega)
+    exact le_of_le_circDist hn (by have := hmono k (k + 1) (by omega) hkn; linarith) h
+
+/-- **Part 1's converse at the first runner.** -/
+theorem flanks_of_lonely_first {n : ℕ} (hn : 1 < n) (p : ℕ → ℝ)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1)
+    (hlonely : ∀ m, m < n → m ≠ 0 → (n : ℝ)⁻¹ ≤ circDist (p m - p 0)) :
+    (n : ℝ)⁻¹ ≤ min (1 - p (n - 1) + p 0) (p 1 - p 0) := by
+  have h0n : 0 < n := by omega
+  have hn1 : n - 1 < n := by omega
+  refine le_min ?_ ?_
+  · have h := hlonely (n - 1) hn1 (by omega)
+    have hge : p 0 ≤ p (n - 1) := hmono 0 (n - 1) (by omega) hn1
+    have habs : |p (n - 1) - p 0| = p (n - 1) - p 0 := abs_of_nonneg (by linarith)
+    have hlt : |p (n - 1) - p 0| < 1 := by
+      rw [habs]; have := h0 0 h0n; have := h1 (n - 1) hn1; linarith
+    have hres := one_sub_ge_of_circDist hlt h
+    rw [habs] at hres; linarith
+  · have h := hlonely 1 (by omega) (by omega)
+    exact le_of_le_circDist h0n (by have := hmono 0 1 (by omega) (by omega); linarith) h
+
+/-- **Part 1's converse at the last runner.** -/
+theorem flanks_of_lonely_last {n : ℕ} (hn : 1 < n) (p : ℕ → ℝ)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1)
+    (hlonely : ∀ m, m < n → m ≠ n - 1 → (n : ℝ)⁻¹ ≤ circDist (p m - p (n - 1))) :
+    (n : ℝ)⁻¹ ≤ min (p (n - 1) - p (n - 2)) (1 - p (n - 1) + p 0) := by
+  have h0n : 0 < n := by omega
+  have hn1 : n - 1 < n := by omega
+  have hn2 : n - 2 < n := by omega
+  refine le_min ?_ ?_
+  · have h := hlonely (n - 2) hn2 (by omega)
+    have hneg : p (n - 2) - p (n - 1) = -(p (n - 1) - p (n - 2)) := by ring
+    rw [hneg, circDist.symm_neg] at h
+    exact le_of_le_circDist h0n
+      (by have := hmono (n - 2) (n - 1) (by omega) hn1; linarith) h
+  · have h := hlonely 0 h0n (by omega)
+    have hneg : p 0 - p (n - 1) = -(p (n - 1) - p 0) := by ring
+    rw [hneg, circDist.symm_neg] at h
+    have hge : p 0 ≤ p (n - 1) := hmono 0 (n - 1) (by omega) hn1
+    have habs : |p (n - 1) - p 0| = p (n - 1) - p 0 := abs_of_nonneg (by linarith)
+    have hlt : |p (n - 1) - p 0| < 1 := by
+      rw [habs]; have := h0 0 h0n; have := h1 (n - 1) hn1; linarith
+    have hres := one_sub_ge_of_circDist hlt h
+    rw [habs] at hres; linarith
+
+/-! ## Part 1, as an iff
+
+`PROOF_CANDIDATE_v3` part 1 states it as an iff, and this is it, at every index: the
+seven constraints on a runner are equivalent to the two on its flanking gaps.
+-/
+
+/-- **Part 1, interior.**  Lonely iff both flanking gaps reach `1/n`. -/
+theorem lonely_iff_flanks {n : ℕ} (hn : 0 < n) (p : ℕ → ℝ) (k : ℕ)
+    (hk1 : 1 ≤ k) (hkn : k + 1 < n)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1) :
+    (∀ m, m < n → m ≠ k → (n : ℝ)⁻¹ ≤ circDist (p m - p k))
+      ↔ (n : ℝ)⁻¹ ≤ min (p k - p (k - 1)) (p (k + 1) - p k) :=
+  ⟨fun h => flanks_of_lonely hn p k hk1 hkn hmono h,
+   fun h m hm hmk => lonely_of_flanks p k hk1 hkn hmono h0 h1 h m hm hmk⟩
+
+/-- **Part 1, first runner.** -/
+theorem lonely_iff_flanks_first {n : ℕ} (hn : 1 < n) (p : ℕ → ℝ)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1) :
+    (∀ m, m < n → m ≠ 0 → (n : ℝ)⁻¹ ≤ circDist (p m - p 0))
+      ↔ (n : ℝ)⁻¹ ≤ min (1 - p (n - 1) + p 0) (p 1 - p 0) :=
+  ⟨fun h => flanks_of_lonely_first hn p hmono h0 h1 h,
+   fun h m hm hm0 => lonely_of_flanks_first p hn hmono h0 h1 h m hm hm0⟩
+
+/-- **Part 1, last runner.** -/
+theorem lonely_iff_flanks_last {n : ℕ} (hn : 1 < n) (p : ℕ → ℝ)
+    (hmono : ∀ i j, i ≤ j → j < n → p i ≤ p j)
+    (h0 : ∀ i, i < n → 0 ≤ p i) (h1 : ∀ i, i < n → p i < 1) :
+    (∀ m, m < n → m ≠ n - 1 → (n : ℝ)⁻¹ ≤ circDist (p m - p (n - 1)))
+      ↔ (n : ℝ)⁻¹ ≤ min (p (n - 1) - p (n - 2)) (1 - p (n - 1) + p 0) :=
+  ⟨fun h => flanks_of_lonely_last hn p hmono h0 h1 h,
+   fun h m hm hml => lonely_of_flanks_last p hn hmono h0 h1 h m hm hml⟩
+
 end Construction8
