@@ -53,7 +53,8 @@ LonelyRunner.LRC.ConstructionN.Grid
 LonelyRunner.LRC.ConstructionN.Integrality
 LonelyRunner.LRC.ConstructionN.Flank
 LonelyRunner.LRC.ConstructionN.Window
-LonelyRunner.LRC.ConstructionN.Bounds"
+LonelyRunner.LRC.ConstructionN.Bounds
+LonelyRunner.LRC.ConstructionN.Instants"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -2 "$LOG"
@@ -108,21 +109,31 @@ no_solo_closure
 wide_gap_core
 ratio_condition
 lonely_ne_pred
-wide_gap_speeds"
+wide_gap_speeds
+dvd_of_forall_dvd_mul
+spine_iff
+spine_iff_residues
+break_of_not_coprime
+isolation_iff_coprime
+card_coprime_eq_totient"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'
   echo 'import LonelyRunner.LRC.ConstructionN.Integrality'
   echo 'import LonelyRunner.LRC.ConstructionN.Coords'
   echo 'import LonelyRunner.LRC.ConstructionN.Bounds'
+  echo 'import LonelyRunner.LRC.ConstructionN.Instants'
   for d in $DECLS; do echo "#print axioms ConstructionN.$d"; done
 } > "$AX"
 AXOUT=$(lake env lean "$AX" 2>&1)
 rm -f "$AX"
 NDECL=$(echo "$DECLS" | wc -l | tr -d ' ')
-NCLEAN=$(echo "$AXOUT" | grep -c "depends on axioms: \[propext, Classical.choice, Quot.sound\]")
+# A declaration may depend on a SUBSET of the three (a proof that needs no choice is
+# cleaner, not worse), so match the allowed set rather than one exact string.
+ALLOWED='depends on axioms: \[(propext)?(, )?(Classical\.choice)?(, )?(Quot\.sound)?\]$'
+NCLEAN=$(echo "$AXOUT" | grep -cE "$ALLOWED")
 echo "  $NCLEAN of $NDECL clean"
-BAD=$(echo "$AXOUT" | grep -vE "depends on axioms: \[propext, Classical.choice, Quot.sound\]" | grep -E "axiom|error|sorryAx")
+BAD=$(echo "$AXOUT" | grep -vE "$ALLOWED" | grep -E "axiom|error|sorryAx")
 if [ -n "$BAD" ]; then echo "$BAD" | sed 's/^/  /'; fi
 [ "$NCLEAN" = "$NDECL" ] && AX_OK=1 || AX_OK=0
 echo "$AXOUT" | grep -q "sorryAx" && AX_OK=0
