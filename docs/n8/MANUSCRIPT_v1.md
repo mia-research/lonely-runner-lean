@@ -8,21 +8,22 @@
 
 Eight runners start together on a circle of circumference 1 and run at distinct constant
 speeds. The Lonely Runner Conjecture at `n = 8` asserts that each of them is, at some
-instant, at distance at least `1/8` from every other. The case is known by computation
-(Rosenfeld 2025) and has no analytic proof.
+instant, at distance at least `1/8` from every other. The case was settled by computer
+verification (Rosenfeld 2025), and the computational line has since reached `n = 13`
+(Sungkawichai and Trakulthongchai 2026). **No analytic proof is known at `n = 8`.**
 
-**The framework is formally verified** — 81 theorems in Lean 4, no `sorry`, no
-`native_decide`, every declaration depending on `propext`, `Classical.choice` and
-`Quot.sound` alone. Three results are proved here but not yet formalised; §8 maps every
-numbered statement to its Lean declaration or marks it as a paper proof, so the extent of
-the verification can be checked rather than taken.
+**Every result asserted as proved is formally verified** — 85 theorems in Lean 4, no
+`sorry`, no `native_decide`, every declaration depending on `propext`, `Classical.choice`
+and `Quot.sound` alone. §8 maps every numbered statement to its Lean declaration, so the
+extent of the verification can be checked rather than taken, and a done-check script
+refuses to pass if the open claim of §7.3 is ever stated.
 
 We present a local framework for the problem and a formal verification of it. The
 framework replaces global analysis with a per-runner construction in three objects — the
 cyclic **gaps** on the track, each runner's nearest speed difference `d_min`, and the
 **laps** the others complete relative to it — and evaluates isolation on an exact integer
 grid rather than by any continuous argument. Six of the construction's seven parts are
-proved and machine-checked in Lean 4: **81 theorems, no `sorry`, no `native_decide`,
+proved and machine-checked in Lean 4: **85 theorems, no `sorry`, no `native_decide`,
 every declaration depending on `propext`, `Classical.choice` and `Quot.sound` alone.**
 
 The seventh part is the claim that the construction's procedure always returns, and it
@@ -334,11 +335,11 @@ needs its moment whether or not some other runner in the same arrangement is ins
 
 ## 8. Formal verification
 
-`LonelyRunner/LRC/Construction8/`, Lean 4 with mathlib, ten modules.
+`LonelyRunner/LRC/Construction8/`, Lean 4 with mathlib, eleven modules.
 
 | | |
 |---|---|
-| theorems | **81** |
+| theorems | **85** |
 | `sorry` | **0** |
 | `native_decide`, `unsafe`, `admit` | **0** |
 | axioms, every declaration | `[propext, Classical.choice, Quot.sound]` |
@@ -355,12 +356,12 @@ rather than take it, so the map is given in full.
 | Thm 4.1, the two-gap criterion | `lonely_iff_flanks`, `_first`, `_last` | ✓ |
 | Thm 4.2, all lonely ⟺ every gap `1/8` | `gaps_all_eq` | ✓ |
 | Thm 4.3, the regular `n`-gon | `grid_of_pairwise` | ✓ |
-| **Cor 4.4, never 7** | — | **paper proof; exhaustive to `[1,16]`** |
+| Cor 4.4, never 7 | `lonely_ne_pred` | ✓ (also exhaustive to `[1,16]`) |
 | Thm 4.5, the reference permutation | `ap_reference` | ✓ |
 | Thm 4.6, displacement in eighths | `displacement` | ✓ |
 | Thm 4.7, survival, both directions | `survives_of`; `int_of_pairwise_sep`, `not_dvd_of_sep` | ✓ |
-| **Thm 4.8, the ratio condition** | — | **paper proof; sharp at `s = 1, 7`** |
-| **Thm 4.9, the wide-gap lemma** | `wide_gap_core`, `wide_gap_end` (index-free core only) | **geometric form on sorted speeds not formalised** |
+| Thm 4.8, the ratio condition | `ratio_condition` | ✓ (sharp at `s = 1, 7`) |
+| Thm 4.9, the wide-gap lemma | `wide_gap_core`, `wide_gap_end`, `wide_gap_speeds` | ✓ (core and geometric form) |
 | §1.2/§7.1, the window and the reading | `window_iff`, `reading_clear_iff`, `lap_and_phase` | ✓ |
 | Thm 7.1, soundness | assembled from the above; not stated as one declaration | **partial** |
 
@@ -374,18 +375,14 @@ twenty headline declarations. Its failure modes were each tested before it was t
 
 ## 9. Statement of what is and is not established
 
-**Established and machine-checked.**  Proposition 2.1; the locality of `d_min` and the
-floor; Propositions 3.1–3.3; Theorems 4.1, 4.2, 4.3, 4.5, 4.6, 4.7; the window and the
-reading.  The table in §8 gives the declaration for each.
-
-**Established by proof here, not yet formalised.**  Corollary 4.4 (never 7), Theorem 4.8
-(the ratio condition, sharp at both ends), and the geometric form of Theorem 4.9 — the
-index-free core of 4.9 is formalised, the statement on sorted speeds is not.  Each carries
-an exhaustive or exact check as stated at the point of use, and none is assumed by anything
-that is formalised.
+**Established and machine-checked.**  Every numbered result of §§2–4: Proposition 2.1; the
+locality of `d_min` and the floor; Propositions 3.1–3.3; Theorems 4.1, 4.2, 4.3, 4.5, 4.6,
+4.7, 4.8, 4.9 and Corollary 4.4; the window and the reading.  The table in §8 gives the
+declaration for each.
 
 **Established.**  The soundness of the procedure (7.2), assembled from the formalised parts
-rather than stated as one declaration.  The negative results of §6.
+rather than stated as one declaration.  The negative results of §6, which are proved here
+and carry explicit counterexamples rather than formal statements.
 
 **Not established.** The claim of §7.3, and therefore LRC(8). No bound is offered on how
 far the procedure's search extends, and none of §§2–4 produces a moment for a runner in the
@@ -397,8 +394,24 @@ open case.
 
 ## References
 
-Rosenfeld, M. (2025). *The lonely runner conjecture for seven runners.* — the `k = 7`
-computation from which `n = 8` follows.
+**Barajas, J. and Serra, O. (2008).** *The lonely runner with seven runners.* Electronic
+Journal of Combinatorics **15**, R48. — settles `n = 7`, the largest case with a proof
+that is not computer-assisted.
 
-Palelei, T. `lrc_ap_phi_n_law_v1`, Theorem 3.1(a)–(b). — the `φ(n)` instants and count;
-the sole external dependency, cited at §5.
+**Rosenfeld, M. (2025).** *The lonely runner conjecture holds for eight runners.*
+arXiv:2509.14111, submitted 17 September 2025, revised 16 October 2025. — settles `n = 8`
+by computer verification, combined with bounds on a minimal counterexample. This is the
+case treated here. Rosenfeld states the conjecture with a stationary runner and `n − 1`
+non-zero speeds; the framework below holds no runner still, and the two formulations agree
+by the standard reduction.
+
+**Sungkawichai, T. and Trakulthongchai, T. (2026).** *Eleven, twelve, and thirteen lonely
+runners.* arXiv:2604.23906, submitted 26 April 2026, revised 1 September 2026. — extends
+the computational line to `k ∈ {10, 11, 12}`, so the conjecture is known for `n ≤ 13`.
+Builds on the method of Rosenfeld and the second author, which had reached `k ≤ 9`.
+
+**Palelei, T. (2026).** *The φ(n) Law for Arithmetic Progressions in the Lonely Runner
+Conjecture: Algebraic Structure and Computational Fragility.* Working paper, version 1.0,
+4 January 2026. Zenodo, DOI **10.5281/zenodo.18158886**. — Theorem 3.1(a)–(b) supplies the
+instants of perfect isolation for an arithmetic progression and their count; **the sole
+external dependency of this paper**, cited at §5.
