@@ -55,7 +55,8 @@ LonelyRunner.LRC.ConstructionN.Flank
 LonelyRunner.LRC.ConstructionN.Window
 LonelyRunner.LRC.ConstructionN.Bounds
 LonelyRunner.LRC.ConstructionN.Instants
-LonelyRunner.LRC.ConstructionN.Soundness"
+LonelyRunner.LRC.ConstructionN.Soundness
+LonelyRunner.LRC.ConstructionN.Negative"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -2 "$LOG"
@@ -127,7 +128,16 @@ ap_pairwise_of_subject
 ap_reading_finite
 procedure_sound
 procedure_sound_hypotheses_satisfiable
-clear_width_pos"
+clear_width_pos
+lap_overlap
+lap_overlap_bound_grows
+reading_n_blocks_both_ends
+reading_n_centres_in_window
+reading_n_gap_width
+overlap_bound_decreasing
+overlap_bound_gt_one
+exclusion_bound_decreasing
+n8_lap_overlap_numbers"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'
@@ -136,6 +146,7 @@ AX=LonelyRunner/_NNGateAxCheck.lean
   echo 'import LonelyRunner.LRC.ConstructionN.Bounds'
   echo 'import LonelyRunner.LRC.ConstructionN.Instants'
   echo 'import LonelyRunner.LRC.ConstructionN.Soundness'
+  echo 'import LonelyRunner.LRC.ConstructionN.Negative'
   for d in $DECLS; do echo "#print axioms ConstructionN.$d"; done
 } > "$AX"
 AXOUT=$(lake env lean "$AX" 2>&1)
