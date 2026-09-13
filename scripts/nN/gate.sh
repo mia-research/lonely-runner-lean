@@ -144,7 +144,9 @@ circDist_eq_abs_sub_some_int
 band_identity
 band_int
 returns_at_first_spine
-first_spine_in_window"
+first_spine_in_window
+near_ap_reading_band
+near_ap_top_returns"
 AX=LonelyRunner/_NNGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.ConstructionN.Window'

@@ -121,4 +121,35 @@ theorem first_spine_in_window (n : ℕ) (hn : 1 < n) :
   refine ⟨le_refl _, ?_⟩
   nlinarith [hmul, hinv, hn2]
 
+/-! ## The tightest observed family -/
+/-- The near-AP family `(1, …, n-1, n+1)`: its displaced top runner has differences
+`2, 3, …, n`, so `d_min = 2` and its readings are `k/2` for `k = 3, …, n`.  Every such
+reading is at distance at least `1` from every multiple of `n`. -/
+theorem near_ap_reading_band (n : ℕ) (hn : 1 < n) (k : ℕ) (hk3 : 3 ≤ k) (hkn : k ≤ n)
+    (m : ℤ) : 1 ≤ |(k : ℝ) / 2 - (n : ℝ) * m| := by
+  have hn2 : (2 : ℝ) ≤ n := by exact_mod_cast hn
+  have hk3' : (3 : ℝ) ≤ k := by exact_mod_cast hk3
+  have hkn' : (k : ℝ) ≤ n := by exact_mod_cast hkn
+  rcases le_or_gt m 0 with hm | hm
+  · have hm0 : (m : ℝ) ≤ 0 := by exact_mod_cast hm
+    have : (0 : ℝ) ≤ (n : ℝ) * (-m) := by nlinarith
+    rw [abs_of_nonneg (by nlinarith)]
+    nlinarith
+  · have hm1 : (1 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm
+    rw [abs_of_nonpos (by nlinarith)]
+    nlinarith
+
+/-- **The tightest observed family still returns, at every `n`.**  The displaced top runner
+of `(1, …, n-1, n+1)` is clear at the first spine point `u = 1/n`.
+
+Empirically this runner's clear set is a **single instant** — see
+`docs/nN/TIGHTEST_v1.md`.  That it is nonempty at every `n` is proved here; that it is a
+single point is not, and is not claimed. -/
+theorem near_ap_top_returns (n : ℕ) (hn : 1 < n) (k : ℕ) (hk3 : 3 ≤ k) (hkn : k ≤ n) :
+    (n : ℝ)⁻¹ ≤ circDist (((k : ℝ) / 2) * (n : ℝ)⁻¹) := by
+  have hn0 : 0 < n := by omega
+  have hrw : ((k : ℝ) / 2) * (n : ℝ)⁻¹ = ((k : ℝ) / 2) / n := by ring
+  rw [hrw]
+  exact (band_identity n hn0 _).mpr (near_ap_reading_band n hn k hk3 hkn)
+
 end ConstructionN
