@@ -80,19 +80,6 @@ exactly when `B * s < A * s'`. -/
 theorem stretch_overlap (A B s s' : ℝ) (hs : 0 < s) (hs' : 0 < s') :
     (B / s' < A / s) ↔ (B * s < A * s') := div_lt_div_iff₀ hs' hs
 
-/-- At `n = 8`, for the **first** stretches of both readings, the ends are
-`9/(8 s)` and `7/(8 s')`, so overlap is `7 s < 9 s'` — the `9/7` bound.
-Later laps give a different bound; see `stretch_overlap`. -/
-theorem first_stretch_overlap (s s' : ℝ) (hs : 0 < s) (hs' : 0 < s') :
-    ((7 : ℝ) / (8 * s') < (9 : ℝ) / (8 * s)) ↔ (7 * s < 9 * s') := by
-  rw [div_lt_div_iff₀ (by positivity) (by positivity)]
-  constructor <;> intro h <;> nlinarith
-
-/-- Reading the first-stretch bound down a step of one: `s' = s - 1` gives `9 < 2 s`,
-so a descent through consecutive integers cannot pass `s = 4`. -/
-theorem consecutive_break (s : ℝ) : (7 * s < 9 * (s - 1)) ↔ (9 < 2 * s) := by
-  constructor <;> intro h <;> linarith
-
 /-! ## The wide-gap lemma
 
 `docs/n8/WIDE_GAP_LEMMA_v1.md`.  With `c = n - 1`, `S` the spread, `a` and `b` a
@@ -124,34 +111,128 @@ bridge its own clear interval, and it cannot bridge a wider one belonging to a s
 reading.
 -/
 
-/-- An in-the-way zone has width `1/(4s)`. -/
-theorem blocked_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
-    (9 / (8 * s) + (k : ℝ) / s) - (7 / (8 * s) + (k : ℝ) / s) = 1 / (4 * s) := by
-  field_simp; ring
+/-! ### General-`n` forms
 
-/-- Consecutive in-the-way zones are separated by a clear interval of width `3/(4s)`. -/
-theorem clear_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
-    (7 / (8 * s) + ((k : ℝ) + 1) / s) - (9 / (8 * s) + (k : ℝ) / s) = 3 / (4 * s) := by
-  field_simp; ring
+These six statements carried `n = 8` in the `Construction8` originals.  Here they are at
+general `n`, using the forms recorded and checked at `MANUSCRIPT_v1.md` §9.  With threshold
+`1/n` a reading `s` is in the way when `|u - k/s| < 1/(ns)`, so the lap-`k` zone runs from
+`((n-1)/(ns) + k/s)` to `((n+1)/(ns) + k/s)`, and everything else follows.
 
-/-- A reading `s'` reaches contiguously at most `1 / (4 * s')`.  If `σ ≤ s'` with `σ > 0`
-that is strictly less than `σ`'s clear interval `3 / (4 * σ)`.  So when `σ` is the
-smallest reading in play, no single other reading can close one of `σ`'s clear intervals
-on its own — any closure needs at least two readings. -/
-theorem no_solo_closure (sig s' : ℝ) (hsig : 0 < sig) (hle : sig ≤ s') :
-    1 / (4 * s') < 3 / (4 * sig) := by
-  have h1 : 1 / (4 * s') ≤ 1 / (4 * sig) :=
-    one_div_le_one_div_of_le (by linarith) (by linarith)
-  have h2 : 1 / (4 * sig) < 3 / (4 * sig) := by
-    rw [div_lt_div_iff_of_pos_right (by linarith)]; norm_num
+At `n = 8` these read `2/(8s) = 1/(4s)`, `6/(8s) = 3/(4s)`, `7s < 9s'`, `9 < 2s` and
+`1/(4s') < 3/(4σ)` — the `Construction8` statements exactly.
+
+**One hypothesis is new and is not an artefact of the generalisation.**  The single-reading
+exclusion needs `4 < n`: it asserts `2/(ns') < (n-2)/(nσ)`, and at `n = 4` the two sides
+coincide.  The exclusion is therefore a fact about `n ≥ 5` and was invisible at `n = 8`.
+-/
+
+/-- An in-the-way zone has width `2/(ns)`. -/
+theorem blocked_width (n : ℕ) (hn : 0 < n) (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (((n : ℝ) + 1) / (n * s) + (k : ℝ) / s) - (((n : ℝ) - 1) / (n * s) + (k : ℝ) / s)
+      = 2 / (n * s) := by
+  have hn0 : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hn.ne'
+  field_simp
+  ring
+
+/-- Consecutive zones are separated by a clear interval of width `(n-2)/(ns)`. -/
+theorem clear_width (n : ℕ) (hn : 0 < n) (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (((n : ℝ) - 1) / (n * s) + ((k : ℝ) + 1) / s) - (((n : ℝ) + 1) / (n * s) + (k : ℝ) / s)
+      = ((n : ℝ) - 2) / (n * s) := by
+  have hn0 : (n : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hn.ne'
+  field_simp
+  ring
+
+/-- First zones overlap iff `s/s' < (n+1)/(n-1)`. -/
+theorem first_stretch_overlap (n : ℕ) (hn : 0 < n) (s s' : ℝ) (hs : 0 < s) (hs' : 0 < s') :
+    (((n : ℝ) - 1) / (n * s') < ((n : ℝ) + 1) / (n * s))
+      ↔ ((n : ℝ) - 1) * s < ((n : ℝ) + 1) * s' := by
+  have hn0 : (0 : ℝ) < n := by exact_mod_cast hn
+  rw [div_lt_div_iff₀ (by positivity) (by positivity)]
+  constructor <;> intro h <;> nlinarith
+
+/-- A descent through consecutive integers needs `2s > n + 1`, so it breaks at
+`s = ⌊(n+1)/2⌋`.  At `n = 8` that is `s = 4`. -/
+theorem consecutive_break (n : ℕ) (s : ℝ) :
+    (((n : ℝ) - 1) * s < ((n : ℝ) + 1) * (s - 1)) ↔ ((n : ℝ) + 1 < 2 * s) := by
+  constructor <;> intro h <;> nlinarith
+
+/-- **Single-reading exclusion, general `n`.**  Needs `4 < n`; at `n = 4` the two sides
+coincide and the exclusion is vacuous. -/
+theorem no_solo_closure (n : ℕ) (hn : 4 < n) (sig s' : ℝ) (hsig : 0 < sig) (hle : sig ≤ s') :
+    2 / ((n : ℝ) * s') < ((n : ℝ) - 2) / (n * sig) := by
+  have hn0 : (0 : ℝ) < n := by positivity
+  have hn4 : (4 : ℝ) < n := by exact_mod_cast hn
+  have h1 : 2 / ((n : ℝ) * s') ≤ 2 / ((n : ℝ) * sig) := by gcongr
+  have h2 : 2 / ((n : ℝ) * sig) < ((n : ℝ) - 2) / (n * sig) := by
+    rw [div_lt_div_iff_of_pos_right (by positivity)]
+    linarith
   linarith
 
-/-- Contrapositive: a reading that could close such an interval on its own would have to
-be strictly slower than the smallest, which is impossible. -/
-theorem solo_closure_forces_smaller (sig s' : ℝ) (hsig : 0 < sig) (hs' : 0 < s')
+/-- Contrapositive of the exclusion. -/
+theorem solo_closure_forces_smaller (n : ℕ) (hn : 4 < n) (sig s' : ℝ)
+    (hsig : 0 < sig) (hs' : 0 < s')
+    (h : ((n : ℝ) - 2) / (n * sig) ≤ 2 / ((n : ℝ) * s')) : s' < sig := by
+  by_contra hcon
+  push Not at hcon
+  exact absurd h (not_le.mpr (no_solo_closure n hn sig s' hsig hcon))
+
+/-! ### Faithfulness at `n = 8`
+
+Each general form above, instantiated at `n = 8`, gives back the statement proved in
+`Construction8/Coords.lean` — same hypotheses, same constants.  These six are the check
+that the generalisation did not quietly change what was proved.  The constants `1/(4s)`,
+`3/(4s)`, `7 s < 9 s'`, `9 < 2 s`, `1/(4s') < 3/(4σ)` are the `Construction8` literals.
+-/
+
+/-- `blocked_width` at `n = 8` is the `Construction8` statement. -/
+theorem n8_blocked_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (9 / (8 * s) + (k : ℝ) / s) - (7 / (8 * s) + (k : ℝ) / s) = 1 / (4 * s) := by
+  have h := blocked_width 8 (by norm_num) s hs k
+  norm_num at h
+  rw [show (9 : ℝ) / (8 * s) + (k : ℝ) / s - (7 / (8 * s) + (k : ℝ) / s)
+        = 9 / (8 * s) - 7 / (8 * s) by ring, h]
+  rw [div_eq_div_iff (by positivity) (by positivity)]
+  ring
+
+/-- `clear_width` at `n = 8` is the `Construction8` statement. -/
+theorem n8_clear_width (s : ℝ) (hs : 0 < s) (k : ℤ) :
+    (7 / (8 * s) + ((k : ℝ) + 1) / s) - (9 / (8 * s) + (k : ℝ) / s) = 3 / (4 * s) := by
+  have h := clear_width 8 (by norm_num) s hs k
+  norm_num at h
+  rw [h, div_eq_div_iff (by positivity) (by positivity)]
+  ring
+
+/-- `first_stretch_overlap` at `n = 8` is the `9/7` bound. -/
+theorem n8_first_stretch_overlap (s s' : ℝ) (hs : 0 < s) (hs' : 0 < s') :
+    ((7 : ℝ) / (8 * s') < (9 : ℝ) / (8 * s)) ↔ (7 * s < 9 * s') := by
+  have h := first_stretch_overlap 8 (by norm_num) s s' hs hs'
+  norm_num at h
+  exact h
+
+/-- `consecutive_break` at `n = 8` breaks at `s = 4`. -/
+theorem n8_consecutive_break (s : ℝ) : (7 * s < 9 * (s - 1)) ↔ (9 < 2 * s) := by
+  have h := consecutive_break 8 s
+  norm_num at h
+  exact h
+
+/-- `no_solo_closure` at `n = 8`.  The `4 < n` hypothesis is discharged by `norm_num`,
+which is why it was invisible in `Construction8`. -/
+theorem n8_no_solo_closure (sig s' : ℝ) (hsig : 0 < sig) (hle : sig ≤ s') :
+    1 / (4 * s') < 3 / (4 * sig) := by
+  have hs' : (0 : ℝ) < s' := lt_of_lt_of_le hsig hle
+  have h := no_solo_closure 8 (by norm_num) sig s' hsig hle
+  norm_num at h
+  calc (1 : ℝ) / (4 * s') = 2 / (8 * s') := by
+        rw [div_eq_div_iff (by positivity) (by positivity)]; ring
+    _ < 6 / (8 * sig) := h
+    _ = 3 / (4 * sig) := by
+        rw [div_eq_div_iff (by positivity) (by positivity)]; ring
+
+/-- `solo_closure_forces_smaller` at `n = 8`. -/
+theorem n8_solo_closure_forces_smaller (sig s' : ℝ) (hsig : 0 < sig) (hs' : 0 < s')
     (h : 3 / (4 * sig) ≤ 1 / (4 * s')) : s' < sig := by
   by_contra hcon
   push Not at hcon
-  exact absurd h (not_le.mpr (no_solo_closure sig s' hsig hcon))
+  exact absurd h (not_le.mpr (n8_no_solo_closure sig s' hsig hcon))
 
 end ConstructionN
