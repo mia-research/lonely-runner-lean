@@ -235,4 +235,22 @@ theorem n8_solo_closure_forces_smaller (sig s' : ℝ) (hsig : 0 < sig) (hs' : 0 
   push Not at hcon
   exact absurd h (not_le.mpr (n8_no_solo_closure sig s' hsig hcon))
 
+/-! ### Thresholds in `n`
+
+`no_solo_closure` needing `4 < n` prompted a check of the other general forms for
+thresholds that `n = 8` could not show.  There is exactly one more, and it is here.
+-/
+
+/-- The clear interval between consecutive zones is **positive only for `n > 2`**. -/
+theorem clear_width_pos (n : ℕ) (hn : 2 < n) (s : ℝ) (hs : 0 < s) :
+    0 < ((n : ℝ) - 2) / (n * s) := by
+  have hn2 : (2 : ℝ) < n := by exact_mod_cast hn
+  have hn0 : (0 : ℝ) < n := by linarith
+  exact div_pos (by linarith) (by positivity)
+
+/-- At `n = 2` the zones tile with nothing between them: the clear interval has width zero,
+and the framework's evaluation has no room to work in. -/
+theorem clear_width_eq_zero_at_two (s : ℝ) (hs : 0 < s) :
+    (((2 : ℕ) : ℝ) - 2) / (2 * s) = 0 := by norm_num
+
 end ConstructionN
