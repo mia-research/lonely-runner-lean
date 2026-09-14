@@ -1109,3 +1109,60 @@ been removed from the current work and replaced by a statement in the framework'
 
 Earlier files that still contain the excised material, kept as the version history (not current): `MomentIterationN_v8`–
 `v13.lean`, `SMALL_N_TERMINATION_STATUS_v1`–`v4.md`. The owner decides whether to delete them.
+
+## 52. Why `R` stays below 4 at order 5 — the cascade, the own-AP instants and the isolation positions  `[DERIVED (1–3); VERIFIED (4–7); OPEN (the bound)]`
+
+Added 2026-09-15 at the owner's request. Subject with nearest difference `m = d_min`; the other readings at scale `m` are
+`s = a + e` (AP index `a`, deviation `e`, `|e| ≤ 1/2`). The cascade: `R_0 = 1`; at scale `D_j = m/R_j` the readings are
+`s·R_j`; a runner is in the way iff `s·R_j` is within 1 of `5N`; `R_{j+1}` is the largest `(5N + 1)/s` over those runners;
+`R = R_final = d_min/D_final`. The nearest runner's own reading is `R`, so the cap is `R < 4`.
+Scripts: `experiments/small_n/n5_cascade_R_v1.py`, `n5_ap_instants_v1.py`, `n5_instant_runners_v1.py`,
+`n5_isolation_positions_v1.py`, `n5_exact_ap_v1.py`, `n5_resonant_search_v1.py`.
+
+**1. `R` is a product of step factors (derived).** If step `j` is set at lap `N_j` by a runner whose reading exceeds the
+zone entry `5N_j − 1` by `δ_j ∈ (0, 2)`, then `R_{j+1}/R_j = (5N_j + 1)/(5N_j − 1 + δ_j)`, so
+`R = ∏_j (5N_j + 1)/(5N_j − 1 + δ_j)`. Each factor is below `(5N + 1)/(5N − 1)`: `3/2` at lap 1, `11/9` at lap 2, `8/7` at
+lap 3. (In Lean: `ChainBounds.move_growth`, `NearestState.nearest_reading_recurrence`.)
+
+**2. The lap-1 ladder (derived).** Each runner's reading passes `5` once, so each runner sets at most one lap-1 step. A
+cascade made only of lap-1 steps has `R < (3/2)³ = 27/8`. The limit is approached by readings `4, 8/3, 16/9` (AP slots 4,
+3, 2 with deviations `0, −1/3, −2/9`): each runner in turn reads just above 4, and `R` goes `1 → 3/2 → 9/4 → 27/8`
+(instance `(1.7799, 2.6686, 4.0012)`: `R = 3.37098`). Passing `27/8` needs steps at laps `≥ 2`, whose factors are at most
+`11/9`, and whose entries are fixed by the reading ratios the earlier handoffs set: `s_y/s_x = (5N_y − 1 + δ_y)/(5N_x + 1)`.
+The largest found, `31/9`, is `d` at laps 2, 5, 6, `c` at 1, 2, `b` at 1, with readings `≈ (2.24, 3.28, 9)`: AP slots 2, 3,
+and 4 at the next grid point (index 9), slot 4 exact.
+
+**3. Exact AP: only slot-sharers move the cascade (derived; checked).** With `e = 0` every reading is an integer `a`. At
+`R = 1` a runner with `a ≢ 0 (mod 5)` sits at least one fifth from the subject, so it is not in the way. Hence **with exact
+AP readings and no slot-sharer, `R = 1`** — the AP reference is isolated at its own bound (all 9,139 index triples in
+`2…40`). With a slot-sharer (`a ≡ 0`), `R ≤ 11/5` on the same triples. Everything above that comes from deviations.
+
+**4. The own-AP instants (derived from the residue rule; verified).** To reach `R = 4` the cascade must pass the own-AP
+instants `R = 2` and `R = 3`, each with some runner in the way. By the drift line, at instant `n'` a runner sits at
+`n'a + n'e` (mod 5), in the way iff that is within 1 of a multiple of 5. With `|e| ≤ 1/2` this allows exactly:
+- at `R = 2`: slot 0 with `|2e| < 1`; slot 3 with `e < 0`; slot 2 with `e > 0`;
+- at `R = 3`: slot 0 with `|3e| < 1`; slot 2 with `e < 0`; slot 3 with `e > 0`; slot 4 with `e < −1/3`; slot 1 with `e > 1/3`.
+On 13,592 annealed arrangements with `R > 3`, every in-way runner at those instants falls in these classes (slot 1 does
+not occur). Only 63 of 200,000 uniform arrangements pass both instants.
+
+**5. A tempting pigeonhole fails, and why (verified).** "A different runner in the way at each of `R = 1, 2, 3`" fails in
+1,606 of the 13,592: a slot-sharer with small deviation is in the way at every own-AP instant it passes (1,810 arrangements
+have one runner covering all three). This is the framework's slot-sharer lemma
+(`MomentIterationN.not_lonely_at_ap_instant_of_sharer`) with a deviation.
+
+**6. Where the predictor isolates (verified).** At `R_final`, in all 13,592 arrangements with `R > 3`: exactly one other
+runner is at `+1/5` (the last setter, exactly at its opening), the other two are strictly inside `[1, 4]` fifths, none is
+at `−1/5`, and the nearest runner is at `R_final` fifths.
+
+**7. Large AP gaps (verified, search).** At gap `K` with indices `(1, 1, 2)` and tuned deviations: `R ≈ 1.54` (`K ≈ 100`,
+60 moves), `≈ 1.50` (`K ≈ 1000`, 565 moves). Long cascades at large gaps barely raise `R`.
+
+**What is not shown.** A bound `R < 4` for every arrangement. Items 1–4 reduce it to the stretches between own-AP instants:
+how the in-way runner at `R = 2` (resp. `3`) can hand on across `(2, 3)` and `(3, 4)` given its slot, the sign of its
+deviation and the step factors of item 1 — and the large-gap regime of item 7.
+
+**For order 8.** (a) Item 3 carries over directly: with exact AP readings and no index `≡ 0 (mod 8)`, `R = 1`. (b) Item 5's
+failure will recur: slot-sharers with small deviation cross several own-AP instants, so an order-8 argument cannot count
+instants against runners. (c) The lap-1 ladder at order 8 gives `(9/7)^7 ≈ 5.81 < 7` for lap-1-only cascades, but the
+largest `R` found at order 8 is `≈ 11.96`, so order 8 needs later-lap steps and nearest-runner steps far more than order
+5 does; item 1's product form is where to measure them.
