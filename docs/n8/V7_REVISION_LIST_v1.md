@@ -752,3 +752,33 @@ re-checked: cascade time = BSM.
 **Reading.** The largest time ratio found looks like a limit approached from below, near `R = 12` (`u = d_min·t = 3/2`),
 at spreads just above the Theorem 4.8 threshold. Not established: whether 12 is the supremum, whether it is attained,
 or what arrangement realises it. One round only; nothing here bounds `R` below all arrangements.
+
+## 37. The moment iteration holds at every threshold `1/n`; at `n = 3` it stops within one move — in Lean  `[PROVED-LEAN, outside both trees; one derived-on-paper step now formal]`
+
+Added 2026-09-14.
+
+**General `n`.** `experiments/n8/MomentIterationN_v1.lean` is all of `MomentIteration_v6` with the constant `8`
+replaced by a parameter `n ≥ 2` (`[Fact (2 ≤ n)]`). Compiles, no `sorry`, 24 of 24 axiom lines
+`[propext, Classical.choice, Quot.sound]`; two examples check that `n = 8` recovers v6. The proofs used only
+`0 < n`, `n⁻¹ ≤ 1/2` and `n·n⁻¹ = 1`; the runner set was already an arbitrary finite set of positive differences.
+Soundness, first-ness, completeness given termination, finiteness (`lonely_iff_run_ends`), the flank lemma, the scale
+bridge (reading within 1 of a multiple of `n`), drift lines and slot-sharers therefore hold at every `n`.
+Not carried: the residue rule for `q ≥ 3` (item 34, derived at 8 only), the `R ≈ 12` behaviour (items 35–36),
+`Construction8`, `BufferRoom`.
+
+**n = 3.** `experiments/n8/MomentIterationN_v2.lean`, section `TerminationThree` (compiles, no `sorry`, axioms as above;
+imports only `ConstructionN`, which does not reach `SmallN`):
+- `three_stops_within_one_move` — at most two positive differences, nearest `m`: the first iterate of the move from
+  `1/(3m)` is fixed.
+- `three_first_isolation` — the subject is lonely at that iterate and at no earlier positive time.
+- Mechanism (`nearest_clear_after_move`): if the other runner `b` is in the way at the bound, `|b/m − 3N| < 1` with
+  `N ≥ 1`; the move goes to scale `b/(3N+1)`, where `b` reads `3N+1` (on the threshold) and `m` reads
+  `(3N+1)·m/b ∈ (1, 2]`, clear.
+
+**Chain lengths by `n`** (`experiments/small_n/chain_depth_by_n_v1.py`, exact rationals, random and near-AP sets; sample
+maxima, not bounds): n=3: 1, n=4: 3, n=5: 7, n=6: 9, n=7: 8, n=8: 11. Large counts sit at the maximum for n=4 (10,747 at
+3), n=6 (2,833 at 9), n=8 (1,524 at 11) — not yet examined.
+
+**For v8.** The framework's termination is proved at `n = 3` by its own objects (setter, scale, readings). `n = 4` is
+the first order with a multi-move chain and is the next target; the route through `lonely_iff_run_ends` plus an
+existing existence proof is available in Lean and is not the route, since it says nothing about why the chain stops.
