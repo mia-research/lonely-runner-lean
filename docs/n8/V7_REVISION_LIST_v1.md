@@ -847,9 +847,9 @@ setters; `P = 0` (the nearest runner) needs the product to exceed `n − 1`.
 **Open at n = 5.** The cap: every iterate from `1/(5a)` stays below `4/(5a)` (the nearest runner reads below 4). With
 `exists_fixed_of_capped` and `first_isolation_of_fixed`, the cap gives termination and the first isolation time.
 
-**Orientation.** In the project's numbering (`intLRC n` = `n` runners), `n = 4` is the three-speed case and `n = 5` the
-four-speed case (`intLRC_5`, proved in the Lean tree through Bienia et al. §4). Items 37–38 prove termination at 3 and
-4 from the framework's objects alone; no framework proof of the n = 5 cap exists yet.
+**In the cascade's quantity.** The cap is `R = d_min/D_final < 4` at threshold `1/5` (the quantity of items 35–36).
+Items 37–38 prove termination at orders 3 and 4 from setters, laps and readings; no such proof of the order-5 cap exists
+yet.
 
 ## 40. n = 5, route 1 (chain accounting): word rules proved; long chains are resonances that barely move the time  `[PROVED-LEAN (W1, W2); VERIFIED / EMPIRICAL (structure)]`
 
@@ -944,25 +944,26 @@ length; longest found): k = 2: 1 move at every n = 3…8; k = 3: ≤ 3 at every 
   (n = 4 from item 38; n ≥ 5 from `three_diffs_stop_ge_five`: the nearest runner is clear at iterates 0–3 because
   `(3/2)³ ≤ n − 1`, setters alternate, and two return lemmas give `k₃ ≤ …` against `k₃ ≥ k₁ + 1`.)
 
-## 43. The advance budget: termination whenever `n > 2·(number of differences)`, every `n` — in Lean  `[PROVED-LEAN]`
+## 43. The slowest-setter recursion: `k` differences stop within `2^(k−1) − 1` moves at every `n ≥ max(9, 2^(k−1))` — in Lean  `[PROVED-LEAN]`
 
-Added 2026-09-14 (autonomous run).
+Added 2026-09-15; replaces the item first written here on 2026-09-14 (a zone-width count, excised at the owner's
+direction — see item 51 and `OBJECTION_LEDGER_v1.md` Part 7).
 
-`experiments/n8/MomentIterationN_v8.lean`, section `AdvanceBudget` (compiles, no errors or warnings, no `sorry`, 44 of 44
-axiom lines `[propext, Classical.choice, Quot.sound]`):
-- `advance_lt` — a move set by `x` advances the time by less than `x`'s zone width `2/(n·x)`.
-- `time_budget` — from any positive start `b`, with `k = card ds` and nearest `a`:
-  `t_N − b ≤ (2k/n)(t_N − b) + 2k/(n·a)`. Proof: the moves set by `x` land on distinct laps in `(x·b − 1/n, x·t_N − 1/n]`
-  (at most `x·(t_N − b) + 1` of them), each advancing less than `2/(n·x)`; sum over runners.
-- `stops_when_budget_small` — if `2k < n`, every iterate stays below `b + (c/a)/(1 − c)`, `c = 2k/n`, and
-  `exists_fixed_of_capped` gives a fixed iterate.
-- `first_isolation_when_budget_small` — at the bound `1/(n·m)`: the fixed iterate is lonely and first.
+`experiments/n8/MomentIterationN_v14.lean`, section `SlowestRecursion` (compiles, no errors or warnings, no `sorry`, 63 of
+63 axiom lines `[propext, Classical.choice, Quot.sound]`):
+- `run_length_le` — a run of consecutive moves whose setters lie in a set of `r` runners has at most `2^r − 1` moves,
+  whenever `2^r ≤ n`. Proof, by induction on `r`: the run's slowest setter `v` sets at most once in it — between two of
+  its settings the moves are set by the other `≤ r − 1` runners, all faster than `v`, so that gap is a run of at most
+  `2^(r−1) − 1` moves, and `word_no_slow_return_g` (from `no_return_after_few_faster`: a runner that left at lap `P` is
+  not in the way after `≤ g` moves at laps `≥ P + 1` when `n ≥ 2g + 2`) excludes `v`'s return; so the run is two runs over
+  `r − 1` runners and one setting of `v`.
+- `factor_pow_le_exp_two` — `((n + 1)/(n − 1))^(n − 1) ≤ n − 1` for `n ≥ 9`, so the nearest runner is clear for the first
+  `n − 1` moves (`nearest_clear_first_moves`).
+- `stops_slowest_recursion` — at most `k` differences, `n ≥ 9`, `2^(k−1) ≤ n`: the iterate after `2^(k−1) − 1` moves from
+  the bound is fixed. (`VersionB.slowest_recursion`: that iterate is lonely and first.)
 
-**What this reaches and what it does not.** This is the regime where the zones' widths alone decide: it never uses
-the handoff structure, the word rules or the return lemma. Proved termination now covers: two differences at every
-`n ≥ 3`; three at every `n ≥ 4` (item 42); any `k` at every `n > 2k` (this item). The first open row is `k = 4` at
-`n = 5, 6, 7, 8`; `k = 4, n = 5` is the cap of item 39. The owner's orders (`k = n − 1`) all lie outside the budget
-regime.
+Every step uses who sets each move, at which lap, and the return growth a lap-`P` return needs. It reaches no owner order
+(`2^(n−2) ≤ n` fails for `n ≥ 5`).
 
 ## 44. n = 5: the relaxed chain as a linear program — supremum 31/9, and the boundary treatment is load-bearing  `[VERIFIED-COMPUTATION (bounded laps and length); CONJECTURE (supremum for all chains)]`
 
@@ -971,8 +972,8 @@ Added 2026-09-14 (autonomous run). `experiments/small_n/n5_relaxed_lp_v1.py`.
 **Formulation.** Fix a setter word over `b, c, d` and its laps. With periods `u_x = 1/ρ_x` (nearest period 1,
 `u_b ≥ u_c ≥ u_d`), every iterate is `t_j = (Q_j + 1/5)·u_{w_j}`, every handoff is `(Q_j − 1/5)·u_{w_j} < t_{j−1} < t_j`, and
 the nearest runner is clear while `t_j ≤ 4/5`: all linear in `u`. So the largest reachable time for a word is an LP.
-The relaxation allows any runner in the way to set the move (not only the latest opening); a relaxed run reaching
-`4/5` would still be a run of lap zones from the bound, so the relaxation bounds the true chain.
+The relaxation allows any runner in the way to set the move (not only the latest opening). The true chain satisfies
+every constraint of its own word, so for the words searched the LP value is at least the true chain's nearest reading.
 
 **Boundary.** With the inequalities closed, the supremum is 4.125 (`dcbc`, laps 1, 1, 1, 2, ratios 16/9, 8/3, 4) — but
 every handoff there sits exactly on a zone boundary, where BSM counts the runner clear (checked exactly). With strict
@@ -1003,8 +1004,7 @@ Added 2026-09-15 (autonomous run).
 - `no_return_after_few_faster` — a runner that left at its lap-`P` opening is not in the way after `m ≤ g` further
   moves set at laps `≥ P + 1`, whenever `n ≥ 2g + 2`.
 Use: at four differences the slowest runner's settings are separated by at most three faster moves (item 40's word
-rules), so at `n = 8` it sets at most once — the structural route below the budget threshold (`n > 8`) of item 43. The
-word-level assembly for `k = 4, n = 8` is not written.
+rules), so at `n = 8` it sets at most once. (Assembled in item 46.)
 
 **Relaxed chains at general `n`** (`experiments/small_n/relaxed_lp_general_v1.py`, `_par_v1.py`: the nearest runner is
 also allowed to set moves). Checks: n = 4 gives supremum reading 3 (`cbc`, laps 1, 1, 2; the proved bound of item 38);
@@ -1026,9 +1026,9 @@ errors or warnings, no `sorry`, 51 of 51 axiom lines `[propext, Classical.choice
   `≤ 3` moves is excluded by `word_no_slow_return`, a gap of `≥ 4` contains four moves by the other two runners, which
   alternate, excluded by `word_no_alternation`); so four consecutive setters avoid `v`, excluded again.
 
-**The (differences, order) table after items 42, 43, 46.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every
-`n ≥ 4`; 4 at every `n ≥ 8`; any `k` at every `n > 2k`. Open in the row `k = 4`: `n = 5, 6, 7`. The owner's orders
-(`k = n − 1`, `n ≥ 5`) are all open.
+**The (differences, order) table after items 42, 46.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every
+`n ≥ 4`; 4 at every `n ≥ 8`. Open in the row `k = 4`: `n = 5, 6, 7`. The owner's orders (`k = n − 1`, `n ≥ 5`) are all
+open.
 
 ## 47. Four differences at every `n ≥ 6`: the iteration stops within seven moves — in Lean  `[PROVED-LEAN]`
 
@@ -1059,8 +1059,9 @@ axiom lines `[propext, Classical.choice, Quot.sound]`.
 3. Eight moves would put the slowest setter at most once among eight positions, leaving four consecutive setters that
    alternate — W2.
 
-**The table now.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every `n ≥ 4`; **4 at every `n ≥ 6`**; any `k`
-at every `n > 2k`. In the row `k = 4` only `n = 5` is open — the owner's order 5 and the cap of items 39, 44.
+**The table now.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every `n ≥ 4`; **4 at every `n ≥ 6`**; `k` at
+every `n ≥ max(9, 2^(k−1))` (item 43). In the row `k = 4` only `n = 5` is open — the owner's order 5 and the cap of items
+39, 44.
 
 ## 48. Version B stated for the proved cases — in Lean  `[PROVED-LEAN]`
 
@@ -1069,8 +1070,9 @@ warnings, no `sorry`, all axiom lines `[propext, Classical.choice, Quot.sound]`)
 in the class, an explicit iterate of the move from the bound `1/(n·m)` is lonely and no positive lonely time precedes it
 ("terminates with the correct answer"):
 - `two_diffs` (every `n ≥ 3`, iterate 1), `three_diffs` (every `n ≥ 4`, iterate 3), `four_diffs` (every `n ≥ 6`,
-  iterate 7), `budget` (every `n > 2·card`, some iterate), `order_three` (n = 3), `order_four` (n = 4, with `a·T < 3/4`).
-Consolidated status: `docs/n8/SMALL_N_TERMINATION_STATUS_v1.md`.
+  iterate 7), `slowest_recursion` (every `n ≥ max(9, 2^(k−1))`, iterate `2^(k−1) − 1`; in v14), `order_three` (n = 3),
+  `order_four` (n = 4, with `a·T < 3/4`).
+Consolidated status: `docs/n8/SMALL_N_TERMINATION_STATUS_v5.md`.
 
 ## 49. Corrections to items 44–48 and the status document, from an independent audit  `[CORRECTION]`
 
@@ -1083,15 +1085,27 @@ the documents exist). It found no claim the Lean file contradicts, and four defe
 2. The module docstring of `MomentIterationN_v13.lean` (inherited from v6) still speaks of `1/8` and says termination is
    not stated. The file is left unchanged (its SHA-256 is recorded in the project memory); the documents now say to read
    the theorem statements.
-3. Item 48 points to status v1; the current document is `docs/n8/SMALL_N_TERMINATION_STATUS_v3.md`.
-4. Status v2 §4 asserted, without an artifact, that the two n = 5 failures share one cause (zone width exceeding the
-   window). v3 marks it as a hypothesis. Status v2's table also listed the budget row without item 43's caveat; v3 adds it
-   (the row uses zone widths only and reaches no owner order, since `2(n − 1) < n` never holds).
+3. Item 48 pointed to status v1; the current document is `docs/n8/SMALL_N_TERMINATION_STATUS_v5.md`.
+4. Status v2 §4 asserted, without an artifact, a common cause for the two n = 5 failures. That assertion used a
+   zone-width count and has been excised (item 51).
 
 ## 50. Drift audit of items 37–49; the n = 5 cap is `R < 4`  `[AUDIT]`
 
 Added 2026-09-15 at the owner's request. Verdicts piece by piece in `OBJECTION_LEDGER_v1.md` Part 7. Framework: the
-iteration, zones, setters, laps, return lemma, W1/W2, nearest reading, resonance window, Version B. Import: the advance
-budget (item 43; a density-type count — not framework progress), the density "hypothesis" in status v2/v3 §4 (removed),
-item 39's orientation relabel, and item 44's covering justification of the LP bound. Current status document:
-`docs/n8/SMALL_N_TERMINATION_STATUS_v4.md`. The cap in the cascade's quantity: `R = d_min/D_final < 4` at threshold `1/5`.
+iteration, zones, setters, laps, return lemma, W1/W2, nearest reading, resonance window, Version B. Imports found:
+four; all excised and replaced (item 51). Current status document: `docs/n8/SMALL_N_TERMINATION_STATUS_v5.md`. The cap in the cascade's quantity: `R = d_min/D_final < 4` at threshold `1/5`.
+
+## 51. Imports excised and replaced  `[EXCISION]`
+
+Added 2026-09-15. Owner: *"Not just noted they need to be excised and replaced."* Each import found in item 50's audit has
+been removed from the current work and replaced by a statement in the framework's objects:
+
+| import | excised from | replaced by |
+|---|---|---|
+| zone-width count (`AdvanceBudget`: "any `k` at every `n > 2k`") | `MomentIterationN_v14.lean` (section and `VersionB.budget` removed); item 43 rewritten; items 46–48 tables; status v5 | `SlowestRecursion.stops_slowest_recursion`: `k` differences stop within `2^(k−1) − 1` moves at every `n ≥ max(9, 2^(k−1))`, proved from setters, laps and the return growth (item 43) |
+| a zone-width "hypothesis" for the n = 5 failures | status document §4; item 49 | the handoffs themselves (which runner sets, at which lap, the reading it hands on) named as what has to be analysed |
+| the four-speed relabel of order 5 | item 39 | the cap as `R = d_min/D_final < 4` |
+| covering justification of the LP bound | item 44 | the true chain satisfies its word's constraints, so the LP value bounds its reading from above for the words searched |
+
+Earlier files that still contain the excised material, kept as the version history (not current): `MomentIterationN_v8`–
+`v13.lean`, `SMALL_N_TERMINATION_STATUS_v1`–`v4.md`. The owner decides whether to delete them.
