@@ -818,3 +818,35 @@ only `b, c, bc, cb, cbc` (305,000 arrangements).
 
 The n = 8 argument needs what replaces 1 and 2: a statement about returns after several intervening moves, and about
 the chain passing through the nearest runner's zones.
+
+## 39. n = 5: no fixed chain length; termination reduced to a cap on the time — cap open  `[PROVED-LEAN (reduction, growth lemmas); EMPIRICAL (cap)]`
+
+Added 2026-09-14.
+
+**Why the n = 3, 4 method does not carry.** `experiments/small_n/n5_chain_map_v1.py`: chains reach 137 moves; 115
+distinct setter patterns; length grows with the ratios (`n5_extremes_v1.py`: longest 7 / 12 / 28 as the largest ratio
+goes from units to hundreds). A proof by a fixed number of cases, as at n = 4, is not available.
+
+**What holds in the data.** (random, grid, near-AP and annealed; see the two scripts)
+- The nearest runner is never in the way at any iterate.
+- The largest final nearest reading found is `3.4444` (≈ `31/9`), at ratios `(2.2450, 3.3462, 9.000001)`: moves
+  d2, c1, b1, d5, c2, d6, the last landing at `(6 + 1/5)/9`. Found by search; not shown to be the supremum.
+- The product form of the return condition held on all 59,536 returns tested.
+- Returns do not always come at the next lap (386 of 4,018 skip one or more; in the extremal chain d goes from lap 2
+  to lap 5).
+
+**Proved, every `n`** (`experiments/n8/MomentIterationN_v4.lean`, section `ChainBounds`; compiles, no `sorry`, axioms
+`[propext, Classical.choice, Quot.sound]`):
+- `exists_fixed_of_capped` — if every iterate from a positive start stays at or below `U`, some iterate is fixed.
+- `move_growth` — a move set at lap `Q ≥ 1` from `t` lands before `(Q + 1/n)/(Q − 1/n) · t`.
+- `return_growth` — a runner that left at its lap-`P` opening `t` is in the way at `t' > t` only if
+  `t' > (P + 1 − 1/n)/(P + 1/n) · t`.
+Together they give the multi-move return condition: `∏ (nQⱼ + 1)/(nQⱼ − 1) > (nP + n − 1)/(nP + 1)` over the intervening
+setters; `P = 0` (the nearest runner) needs the product to exceed `n − 1`.
+
+**Open at n = 5.** The cap: every iterate from `1/(5a)` stays below `4/(5a)` (the nearest runner reads below 4). With
+`exists_fixed_of_capped` and `first_isolation_of_fixed`, the cap gives termination and the first isolation time.
+
+**Orientation.** In the project's numbering (`intLRC n` = `n` runners), `n = 4` is the three-speed case and `n = 5` the
+four-speed case (`intLRC_5`, proved in the Lean tree through Bienia et al. §4). Items 37–38 prove termination at 3 and
+4 from the framework's objects alone; no framework proof of the n = 5 cap exists yet.
