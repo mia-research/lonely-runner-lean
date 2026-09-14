@@ -1193,3 +1193,8 @@ Added 2026-09-15. v7 unfrozen per `V8_PLAN_v2` and rulings Q1–Q4. Drafts `MANU
 - **Open, carried:** Existence at order 8; the gap-frame obligation (§4.6); item 24's fit step; order-5 cap `R < 4`;
   `k = 5` at `n = 6…15`. **Owner decisions pending:** whether v8_2 is promoted as the manuscript of record; deletion of history
   files (v8–v13 Lean experiments, status v1–v4).
+
+**Addendum to item 53 (2026-09-15).** Owner decision on history files: archive, never delete. Moved with `git mv` to
+`archive/n8_history/` with original paths kept: `experiments/n8/MomentIterationN_v8.lean` … `_v13.lean` and
+`docs/n8/SMALL_N_TERMINATION_STATUS_v1.md` … `_v4.md`. References above use the original paths. Further work is tracked in
+`V8_REVISION_LIST_v1.md`.
