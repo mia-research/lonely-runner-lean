@@ -989,3 +989,25 @@ decreasing: a fast runner at a large lap can ride on slow runners at lap 1. By l
 is the scale-separated case (some runner much faster than the others): its moves contribute little growth, but they
 reset the word rules between the slower runners. A lemma bounding that contribution, plus the finite check, would
 give the cap; neither is written.
+
+## 45. No return across a few faster moves (every `n`), and the relaxed-chain supremum at n = 6  `[PROVED-LEAN; VERIFIED-COMPUTATION (bounded)]`
+
+Added 2026-09-15 (autonomous run).
+
+**Proved** (`experiments/n8/MomentIterationN_v9.lean`, section `FasterMoves`; compiles, no errors or warnings, no
+`sorry`, 48 of 48 axiom lines `[propext, Classical.choice, Quot.sound]`):
+- `faster_lap_ge` — after `x`'s lap-`P` opening, a runner at least as fast as `x` is in the way only at laps `≥ P + 1`.
+- `lap_factor_antitone` — `(Q + 1/n)/(Q − 1/n)` decreases in `Q ≥ 1`.
+- `bernoulli_upper` — `(1 + y)^g (1 − g·y) ≤ 1` for `y ≥ 0`, `g·y ≤ 1`.
+- `factor_pow_le_return` — `((P + 1 + 1/n)/(P + 1 − 1/n))^g ≤ (P + 1 − 1/n)/(P + 1/n)` whenever `n ≥ 2g + 2`.
+- `no_return_after_few_faster` — a runner that left at its lap-`P` opening is not in the way after `m ≤ g` further
+  moves set at laps `≥ P + 1`, whenever `n ≥ 2g + 2`.
+Use: at four differences the slowest runner's settings are separated by at most three faster moves (item 40's word
+rules), so at `n = 8` it sets at most once — the structural route below the budget threshold (`n > 8`) of item 43. The
+word-level assembly for `k = 4, n = 8` is not written.
+
+**Relaxed chains at general `n`** (`experiments/small_n/relaxed_lp_general_v1.py`, `_par_v1.py`: the nearest runner is
+also allowed to set moves). Checks: n = 4 gives supremum reading 3 (`cbc`, laps 1, 1, 2; the proved bound of item 38);
+n = 5 gives 31/9 (item 44), with the nearest runner never setting a move. **n = 6** (laps ≤ 6, length ≤ 14; 425,520
+LPs): supremum reading **8.63636 ≈ 95/11**, at `edcbdecdbabdc`, laps `(1,1,1,1,2,3,2,3,2,1,3,5,4)` — the nearest runner
+sets move 10 at lap 1 — above annealing's 8.6016 (item 42) and below the second window's edge 11. Bounded search only.
