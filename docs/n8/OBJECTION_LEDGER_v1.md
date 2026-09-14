@@ -191,3 +191,9 @@ othewise there is no point."* Each piece of that line, read for what it actually
 **The cap restated in the framework's own quantity.** For the subject with nearest difference `d_min`, the cascade ends at
 scale `D_final` and the time ratio is `R = d_min / D_final` (items 35–36). The n = 5 cap is **`R < 4` at threshold `1/5`**
 (largest found `31/9`). This is the order-5 counterpart of the n = 8 question about `R` (largest found ≈ 11.96).
+
+## Part 8 — added 2026-09-15: carried into the manuscript
+
+Parts 1, 3, 4, 5 and 6 are summarised in `MANUSCRIPT_v8_2.md` Appendix C with their figures (ruling Q4). Part 2's objection A
+is stated there as Existence (§6.7, `[OPEN]`); D (finite evidence) and Part 5 (exactness only for commensurate speeds) are
+stated where they apply (§6.7; §1.1, §2.2). Part 7's excised import is not cited. Nothing in this ledger is removed.

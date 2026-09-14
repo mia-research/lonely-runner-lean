@@ -1168,3 +1168,28 @@ failure will recur: slot-sharers with small deviation cross several own-AP insta
 instants against runners. (c) The lap-1 ladder at order 8 gives `(9/7)^7 ≈ 5.81 < 7` for lap-1-only cascades, but the
 largest `R` found at order 8 is `≈ 11.96`, so order 8 needs later-lap steps and nearest-runner steps far more than order
 5 does; item 1's product form is where to measure them.
+
+---
+
+## 53. Applied in v8 — `MANUSCRIPT_v8_2.md`  `[APPLIED; nothing removed from this list]`
+
+Added 2026-09-15. v7 unfrozen per `V8_PLAN_v2` and rulings Q1–Q4. Drafts `MANUSCRIPT_v8.md` → `_v8_1.md` → `_v8_2.md`
+(v7 untouched). What each item became is in v8_2 Appendix B; the items stay here as the record.
+
+- **Structure.** Three outcomes in the framework's objects: Construction `[PROVED]`, Localisation `[PROVED]`, Existence
+  `[OPEN]` (§6.4–6.7). The conjecture is named once, in §9: *"If Existence held for every runner, the conjecture at eight
+  runners would follow."* v7 §9 "is the Lonely Runner Conjecture itself" removed. v7 §6 → Appendix A; ledger → Appendix C.
+- **Items applied:** 1–3 (no window; §1.3 states the cascade), 8 (§8.1 fixes), 10–13 (frames, exactness), 14 (interior-point
+  cells; grid row; gate check [4] names only), 17–23 (dead lattice, spread-live scale, 4.9 relation, firewall
+  qualifications), 24 (stated open, §2.3), 25–36 (cascade, openings, setters, recursion, drift, residue rule, `R`, depth 29),
+  37–49 and 52 (§8.2, order 5 open, order 8 exact AP), 51 (no excised import cited). `LOST_FUNCTIONS_v1` §§A–I restored.
+- **Checks.** Every cited Lean declaration exists and matches its v8 statement; 26 declarations outside the gates checked by
+  `experiments/n8/v8_axiom_check_v1.lean` (`.out`, all within the three standard axioms). Compile-diff run twice: 25 losses
+  and 8 grade/caveat defects in v8 → all 33 resolved in v8_1; four residual defects (v7 regime clause, seven ledger figures,
+  a mis-labelled mapping row, a declaration count) fixed in v8_2.
+- **Corrections found while writing** (now in v8_2): cascade depth found is 29 (not 30); n = 6 nearest reading 8.3559; the
+  24,310 exhaustive count is for 4.9's contrapositive; the pinned-frame caveat is kept, not reversed; Proposition 3.3's
+  conclusion keeps the baseline alternative once the window is gone; W1 is a statement about the earliest lonely instant only.
+- **Open, carried:** Existence at order 8; the gap-frame obligation (§4.6); item 24's fit step; order-5 cap `R < 4`;
+  `k = 5` at `n = 6…15`. **Owner decisions pending:** whether v8_2 is promoted as the manuscript of record; deletion of history
+  files (v8–v13 Lean experiments, status v1–v4).
