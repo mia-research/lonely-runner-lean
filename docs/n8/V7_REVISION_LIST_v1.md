@@ -943,3 +943,23 @@ length; longest found): k = 2: 1 move at every n = 3…8; k = 3: ≤ 3 at every 
 - `three_diffs_stop_within_three_moves` (every `n ≥ 4`) — at most three differences: the third iterate is fixed.
   (n = 4 from item 38; n ≥ 5 from `three_diffs_stop_ge_five`: the nearest runner is clear at iterates 0–3 because
   `(3/2)³ ≤ n − 1`, setters alternate, and two return lemmas give `k₃ ≤ …` against `k₃ ≥ k₁ + 1`.)
+
+## 43. The advance budget: termination whenever `n > 2·(number of differences)`, every `n` — in Lean  `[PROVED-LEAN]`
+
+Added 2026-09-14 (autonomous run).
+
+`experiments/n8/MomentIterationN_v8.lean`, section `AdvanceBudget` (compiles, no errors or warnings, no `sorry`, 44 of 44
+axiom lines `[propext, Classical.choice, Quot.sound]`):
+- `advance_lt` — a move set by `x` advances the time by less than `x`'s zone width `2/(n·x)`.
+- `time_budget` — from any positive start `b`, with `k = card ds` and nearest `a`:
+  `t_N − b ≤ (2k/n)(t_N − b) + 2k/(n·a)`. Proof: the moves set by `x` land on distinct laps in `(x·b − 1/n, x·t_N − 1/n]`
+  (at most `x·(t_N − b) + 1` of them), each advancing less than `2/(n·x)`; sum over runners.
+- `stops_when_budget_small` — if `2k < n`, every iterate stays below `b + (c/a)/(1 − c)`, `c = 2k/n`, and
+  `exists_fixed_of_capped` gives a fixed iterate.
+- `first_isolation_when_budget_small` — at the bound `1/(n·m)`: the fixed iterate is lonely and first.
+
+**What this reaches and what it does not.** This is the regime where the zones' widths alone decide: it never uses
+the handoff structure, the word rules or the return lemma. Proved termination now covers: two differences at every
+`n ≥ 3`; three at every `n ≥ 4` (item 42); any `k` at every `n > 2k` (this item). The first open row is `k = 4` at
+`n = 5, 6, 7, 8`; `k = 4, n = 5` is the cap of item 39. The owner's orders (`k = n − 1`) all lie outside the budget
+regime.
