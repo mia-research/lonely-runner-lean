@@ -913,3 +913,33 @@ no `sorry`, 38 of 38 axiom lines `[propext, Classical.choice, Quot.sound]`):
 - `nearest_reading_recurrence` — along the iteration from `1/(n·m)`: `m·t_N ≤ (1/n)·∏_{j<N} (Q_j + 1/n)/(Q_j − 1/n)`, each
   `Q_j ≥ 1` the lap of the setter of move `j` (or the move stays).
 - `nearest_return_needs_product` — if the nearest runner is in the way at iterate `N`, that product exceeds `n − 1`.
+
+## 42. Where the nearest runner leaves its first window; termination for two and three differences at every threshold `1/n` — in Lean  `[PROVED-LEAN; VERIFIED (n = 6 case by BSM); EMPIRICAL (searches)]`
+
+Added 2026-09-14 (autonomous run; owner away).
+
+**The nearest runner's first clear window across `n`** (`experiments/small_n/nearest_window_anneal_v1.py`, `_v2.py`,
+40 annealing runs per `n`, plus `n6_nearest_leaves_v1.py`):
+- n = 3, 4: never leaves (proved, items 37–38). n = 5: never leaves in any search (largest reading 3.3591 here;
+  3.4444 in item 39).
+- **n = 6: it leaves.** Speeds `1, 59733/25000, 299191/100000, 392283/100000, 516561/100000`: at iterate 9 the nearest
+  runner reads 5.44, is in the way, and sets the move to reading 7; the chain ends at reading 8.3559. BSM (all zone
+  endpoints, boundary points evaluated separately) gives the same first isolation time `1250000/897573`. 400,000 random
+  arrangements at n = 6 found no such case; annealing found it.
+- n = 6, 7, 8, 9: leaves in 2, 6, 3, 1 of 40 runs; largest readings 8.60, 9.04, 11.66, 10.66 — all below the second
+  window's edge `2n − 1` in these searches.
+So the first-window cap is a statement for n ≤ 5 only; from n = 6 a cap needs a later window.
+
+**Chains for `k` differences at threshold `1/n`** (`chain_length_k_by_n_v1.py`, random + near-rational + annealing on
+length; longest found): k = 2: 1 move at every n = 3…8; k = 3: ≤ 3 at every n = 4…11; k = 4: 7 (n=5), 5, 6, 5, 5, 4, 5, 4,
+4, 5 (n=6…14); k = 5: 11 (n=6) falling to 4–5 by n = 16, 17. The nearest runner was never in the way when `k ≤ n − 2`.
+
+**Proved** (`experiments/n8/MomentIterationN_v7.lean`, section `FewDifferences`; compiles, no errors or warnings, no
+`sorry`, 41 of 41 axiom lines `[propext, Classical.choice, Quot.sound]`):
+- `nearest_clear_first_moves` (every `n`) — each move multiplies the nearest reading by at most `(n + 1)/(n − 1)`, so
+  the nearest runner is not in the way at iterate `j` whenever `((n + 1)/(n − 1))^j ≤ n − 1`.
+- `two_diffs_stop_within_one_move` (every `n ≥ 3`) — at most two differences: the first iterate is fixed. (Generalises
+  item 37; the nearest runner's reading after the move lies in `(1, n − 1]`, `nearest_clear_after_move_n`.)
+- `three_diffs_stop_within_three_moves` (every `n ≥ 4`) — at most three differences: the third iterate is fixed.
+  (n = 4 from item 38; n ≥ 5 from `three_diffs_stop_ge_five`: the nearest runner is clear at iterates 0–3 because
+  `(3/2)³ ≤ n − 1`, setters alternate, and two return lemmas give `k₃ ≤ …` against `k₃ ≥ k₁ + 1`.)
