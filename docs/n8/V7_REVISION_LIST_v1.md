@@ -1146,8 +1146,8 @@ On 13,592 annealed arrangements with `R > 3`, every in-way runner at those insta
 not occur). Only 63 of 200,000 uniform arrangements pass both instants.
 
 **5. A tempting pigeonhole fails, and why (verified).** "A different runner in the way at each of `R = 1, 2, 3`" fails in
-1,606 of the 13,592: a slot-sharer with small deviation is in the way at every own-AP instant it passes (1,810 arrangements
-have one runner covering all three). This is the framework's slot-sharer lemma
+1,606 of the 13,592: a slot-sharer with small deviation is in the way at every own-AP instant it passes (in 1,810
+arrangements one runner is in the way at all three). This is the framework's slot-sharer lemma
 (`MomentIterationN.not_lonely_at_ap_instant_of_sharer`) with a deviation.
 
 **6. Where the predictor isolates (verified).** At `R_final`, in all 13,592 arrangements with `R > 3`: exactly one other
@@ -1161,7 +1161,9 @@ at `−1/5`, and the nearest runner is at `R_final` fifths.
 how the in-way runner at `R = 2` (resp. `3`) can hand on across `(2, 3)` and `(3, 4)` given its slot, the sign of its
 deviation and the step factors of item 1 — and the large-gap regime of item 7.
 
-**For order 8.** (a) Item 3 carries over directly: with exact AP readings and no index `≡ 0 (mod 8)`, `R = 1`. (b) Item 5's
+**For order 8.** (a) Item 3's argument carries over (a non-zero residue sits at least one eighth away), and it was run at
+order 8: with exact AP readings and no index `≡ 0 (mod 8)`, `R = 1` on 7,950 random seven-reading arrangements from
+`2…60`; with a slot-sharer, `R ≤ 5/2` on 12,050 (`experiments/small_n/n8_exact_ap_v1.py`). (b) Item 5's
 failure will recur: slot-sharers with small deviation cross several own-AP instants, so an order-8 argument cannot count
 instants against runners. (c) The lap-1 ladder at order 8 gives `(9/7)^7 ≈ 5.81 < 7` for lap-1-only cascades, but the
 largest `R` found at order 8 is `≈ 11.96`, so order 8 needs later-lap steps and nearest-runner steps far more than order
