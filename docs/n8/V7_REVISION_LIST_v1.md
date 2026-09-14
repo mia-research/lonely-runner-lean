@@ -1061,3 +1061,13 @@ axiom lines `[propext, Classical.choice, Quot.sound]`.
 
 **The table now.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every `n ≥ 4`; **4 at every `n ≥ 6`**; any `k`
 at every `n > 2k`. In the row `k = 4` only `n = 5` is open — the owner's order 5 and the cap of items 39, 44.
+
+## 48. Version B stated for the proved cases — in Lean  `[PROVED-LEAN]`
+
+Added 2026-09-15 (autonomous run). `experiments/n8/MomentIterationN_v13.lean`, section `VersionB` (compiles, no errors or
+warnings, no `sorry`, all axiom lines `[propext, Classical.choice, Quot.sound]`). Each theorem says: for every arrangement
+in the class, an explicit iterate of the move from the bound `1/(n·m)` is lonely and no positive lonely time precedes it
+("terminates with the correct answer"):
+- `two_diffs` (every `n ≥ 3`, iterate 1), `three_diffs` (every `n ≥ 4`, iterate 3), `four_diffs` (every `n ≥ 6`,
+  iterate 7), `budget` (every `n > 2·card`, some iterate), `order_three` (n = 3), `order_four` (n = 4, with `a·T < 3/4`).
+Consolidated status: `docs/n8/SMALL_N_TERMINATION_STATUS_v1.md`.
