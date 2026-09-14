@@ -782,3 +782,39 @@ maxima, not bounds): n=3: 1, n=4: 3, n=5: 7, n=6: 9, n=7: 8, n=8: 11. Large coun
 **For v8.** The framework's termination is proved at `n = 3` by its own objects (setter, scale, readings). `n = 4` is
 the first order with a multi-move chain and is the next target; the route through `lonely_iff_run_ends` plus an
 existing existence proof is available in Lean and is not the route, since it says nothing about why the chain stops.
+
+## 38. n = 4: the iteration stops within three moves, before the nearest runner reads 3 — in Lean; the return lemma at every `n`  `[PROVED-LEAN, outside both trees]`
+
+Added 2026-09-14. `experiments/n8/MomentIterationN_v3.lean`, section `TerminationFour` (compiles, no errors or warnings,
+no `sorry`, 29 of 29 axiom lines `[propext, Classical.choice, Quot.sound]`; imports only `ConstructionN`).
+
+- `return_lemma` (every `n ≥ 2`) — runner `x` at its lap-`P` opening; the next move is set by `y` at lap `Q`; if `x` is in
+  the way again at the new iterate, then `Q·(n − 2) < 2P + 1`. At `n = 4`: `Q ≤ P`; at `n = 8`: `6Q < 2P + 1`.
+- `four_stops_within_three_moves` — at most three positive differences, nearest `a`: the third iterate of the move from
+  `1/(4a)` is fixed, and `a·T < 3/4` (the nearest runner reads below 3).
+- `four_first_isolation` — the subject is lonely there and at no earlier positive time.
+- Supporting: `step_cases` (a move lands on the opening of a runner in the way), `not_inWay_at_own_opening`,
+  `clear_in_window`, `mem_three`.
+
+**The chain, with `τ = a·t`.** Move 1 (setter `x₁`, lap `k₁ ≥ 1`): `τ < 5/12`. Move 2 (setter `x₂ ≠ x₁`, lap `k₂ ≥ 1`):
+`3t₂ < 5t₁`, `τ < 25/36`. The nearest runner is clear at both, so a third setter is `x₁`; the return lemma gives
+`k₂ ≤ k₁`, returning gives `k₃ ≥ k₁ + 1`, and `3k₃ ≤ 5k₁ + 1` gives `4k₃ + 1 ≤ 12k₁ − 3`, so `τ < 3/4`. A fourth setter
+would be `x₂`, and the return lemma would give `k₃ ≤ k₂ ≤ k₁ < k₃`.
+
+**Checks before the Lean** (`experiments/small_n/return_lemma_check_v1.py`): the return lemma held at every returning
+setter tested (n=4: 32,127; n=5: 226; n=6: 3,987; n=7: 197; n=8: 2,178); at n=4, 240,000 subjects, no violation of the
+`τ` bounds, the three-move limit, or the nearest runner's clearance. `n4_chain_map_v1.py`: setter patterns at n=4 are
+only `b, c, bc, cb, cbc` (305,000 arrangements).
+
+**What n = 3 and n = 4 used, and where n = 8 differs.**
+1. *The nearest runner stays in its first clear window (reading ≤ n − 1).* Held at n = 3 (≤ 2) and n = 4 (< 3), and in
+   every random sample for n = 5…8 (`nearest_window_by_n_v1.py`). It fails at n = 8 on item 36's arrangement
+   `(410, 618, 788, 1252, 1452, 2298, 2416, 2747)` r4: at iterate 19 the nearest runner reads 7.33, is in the way, and
+   sets the move to reading 9; the chain ends at iterate 29, reading 11.91. Not searched adversarially at n = 5, 6, 7.
+2. *Setters alternate between two runners.* Forced at n = 4 (the nearest runner is clear and only two others exist).
+   At n = 8 runners return many times (in the same trace `1495` sets moves at laps 1, 2, 4, 6, 11).
+3. *The return lemma.* Holds at every `n`, but constrains only a return at the very next iterate; at n = 4 alternation
+   made every return immediate.
+
+The n = 8 argument needs what replaces 1 and 2: a statement about returns after several intervening moves, and about
+the chain passing through the nearest runner's zones.
