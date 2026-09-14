@@ -79,3 +79,34 @@ and the obligation is production.
 **Where to start, on the evidence:** at `n = 8` with integer differences, every runner the
 rules miss has at least one difference `≡ 0 (mod 8g)`; two-thirds of them have exactly one,
 and the time is always produced at gap 2 to 11.
+
+---
+
+## Part 4 — FALSE BLOCKERS I raised, recorded so they are not raised again
+
+Added 2026-09-14, after the owner rejected all three. Each was a framing error of mine, not
+an objection to the framework.
+
+| my claim | why it was false |
+|---|---|
+| **"The construction is not proved to always produce."** Stated with the figures 81.9% / 66.0%. | Those are **rule coverage**, not the framework's reach. The framework produced for **12,000 of 12,000** random runners and for all eight runners of every hard case on file — the `1975…` arrangement, the `31, 75, 97…` arrangement, and §7c's own exhibited failure. Quoting a rule-coverage figure as though it bounded the construction is the same error as reading a window as a limit. |
+| **"The stepping isn't proved to terminate."** | **Nothing runs forever.** The gap is a scale `D = k·d_min`, and for a given `k` the test is finite — `4k` candidates. Each step ends. I had imagined a search the construction does not perform. |
+| **"The gcd rule doesn't survive incommensurability — cost, 16 points of coverage."** | The `d_min`-scaled cascade produces for **1,600 of 1,600** all-irrational runners **without the gcd rule**. Its absence costs nothing; I read a rule's inapplicability as a hole in the framework. |
+
+### The pattern behind all three, and behind the five imported restrictions
+
+Every one came from treating the framework as a **search over a restricted space**:
+
+| I imposed | the framework's object |
+|---|---|
+| the first window `u ∈ [1/8, 7/8]` | no restriction on when |
+| `p ∈ {1,3,5,7}` | the numerator is free |
+| the lap, as part of the output | the time is the output |
+| `a ≡ 1 (mod 8)` | any odd numerator |
+| `D ∈ ℤ` | the gap is a **scale**, `k·d_min` |
+| rule coverage as reach | rules are shortcuts; the cascade is the construction |
+| termination | each step is finite; there is no open search |
+
+**Test for the next one:** if an objection is about *how long the search takes*, *how much
+of the space is covered*, or *when the time falls*, it is a false blocker. The construction
+computes a time; those three questions are about a search that is not there.
