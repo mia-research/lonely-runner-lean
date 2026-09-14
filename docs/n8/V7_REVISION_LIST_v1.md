@@ -1029,3 +1029,35 @@ errors or warnings, no `sorry`, 51 of 51 axiom lines `[propext, Classical.choice
 **The (differences, order) table after items 42, 43, 46.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every
 `n ≥ 4`; 4 at every `n ≥ 8`; any `k` at every `n > 2k`. Open in the row `k = 4`: `n = 5, 6, 7`. The owner's orders
 (`k = n − 1`, `n ≥ 5`) are all open.
+
+## 47. Four differences at every `n ≥ 6`: the iteration stops within seven moves — in Lean  `[PROVED-LEAN]`
+
+Added 2026-09-15 (autonomous run). `experiments/n8/MomentIterationN_v11.lean` (section `FourSixAlgebra`) and
+`MomentIterationN_v12.lean` (section `FourDifferencesSix`); v12 compiles with no errors or warnings, no `sorry`, 58 of 58
+axiom lines `[propext, Classical.choice, Quot.sound]`.
+
+**Algebra (v11).**
+- `three_move_bound` — for `n ≥ 6`, `P ≥ 0`, `2A ≥ (P + 1)(n − 2)`: `F(A)·F(P + 1)·F(A + 1) ≤ (P + 1 − 1/n)/(P + 1/n)`.
+  Proof: reduce to `A = (P + 1)(n − 2)/2`; with `x = n − 6` the cleared difference times 4 is a polynomial of 27 monomials
+  in `x, P`, every coefficient a positive integer (`three_move_poly`).
+- `sorted_lap_prod` — `m` distinct laps `≥ 1` give a lap-factor product `≤ g(m) = ∏_{r=1}^{m} F(r)`.
+- `g_balance` — `a + b ≤ 2m → g(a)·g(b) ≤ g(m)²`.
+
+**Words (v12).**
+- `word_no_slow_return_g` — the slowest setter does not return across `≤ g` moves when `n ≥ 2g + 2`.
+- `word_no_slow_return_three` — for `n ≥ 6`, three moves `y z y` cannot carry the slowest setter back: `y` returns across
+  `z`, so the return lemma gives `2·lap(y) ≥ (P + 1)(n − 2)`, and `three_move_bound` caps the growth below what `v`'s
+  return needs.
+- `g_count_bound` — `g(1)·g(3)² ≤ n − 1` for `n ≥ 6` (≤ 7/5 · (1729/935)² ≈ 4.787 ≤ 5).
+
+**`four_diffs_stop_ge_six`.** At most four differences, every `n ≥ 6`: the seventh iterate from `1/(n·a)` is fixed.
+1. On any prefix of the chain whose setters avoid the nearest runner, the slowest setter sets at most once (gaps of 2–3
+   moves: `g = 2`; gap of 4: the three-move bound; gaps ≥ 5: four moves by two runners alternate, W2).
+2. The nearest runner is clear at iterates 0–7 (strong induction): `a·t_j ≤ (1/n)∏ F(lap)`; split the product by runner
+   (`prod_fiberwise`), bound each runner by `g(its count)` (sorted laps), the slowest runner's count is ≤ 1 and the other
+   two counts sum to ≤ 6, so the product is ≤ `g(1)·g(3)² ≤ n − 1`.
+3. Eight moves would put the slowest setter at most once among eight positions, leaving four consecutive setters that
+   alternate — W2.
+
+**The table now.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every `n ≥ 4`; **4 at every `n ≥ 6`**; any `k`
+at every `n > 2k`. In the row `k = 4` only `n = 5` is open — the owner's order 5 and the cap of items 39, 44.
