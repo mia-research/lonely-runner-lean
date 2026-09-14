@@ -170,3 +170,24 @@ irrational `t = 75√2/4` from the grid tier's spine `r = 3`. Revision-list item
 | my claim (review session, 2026-09-14) | why it was wrong |
 |---|---|
 | *"Theorem 4.7 is a global condition … your firewall rules out the global clock. Pulling 4.7 in as the mechanism is exactly the kind of imported obligation you warned about."* | Owner: *"Phi (n) law for AP on LRC proves global isolation for arithmetic progress."* Global isolation of the AP is the owner's own result (Palelei 2026, Thm 3.1; derived in `ConstructionN/Instants.lean`) and it is the framework's **reference ideal** — Theorems 4.5–4.7 are that reference and what a deviation does to it. Not an import. What held of my point is narrower: on `(1,31,75,97,128,160,176,225)` and `(1,2,3,4,5,6,7,9)` the reference instant does not survive (speeds repeat mod 8), so 4.7's survival conditions do not by themselves give those runners their times; the per-runner reading of deviations from the ideal does. And owner: *"Global clock no but the slowest speed defines a cycle."* The firewall bans needing one shared isolation event; the slowest runner's lap as the unit of time is framework-native. |
+
+## Part 7 — added 2026-09-15: drift audit of the small-order termination line (revision-list items 37–49)
+
+Owner, 2026-09-15: *"Can we please check that we are using my framework and doesn't drift in to other's regimes
+othewise there is no point."* Each piece of that line, read for what it actually uses.
+
+| piece | what it uses | verdict |
+|---|---|---|
+| Moment iteration at threshold `1/n`, lap zones, BSM boundaries, the bound `1/(n·d_min)` | openings, zones, readings | **framework** |
+| Setters, laps, return lemma, W1, W2, return growth, nearest reading as chain state, the cap, Version B corollaries (items 37–42, 45–48) | who sets each move, at which lap; readings at the opening's scale | **framework** (route 1, owner-chosen) |
+| Resonance window A1–A4 (item 41) | a handoff at laps `(P, Q)` = the next setter's reading within 1 of a multiple of `n` at the opening's scale (the scale bridge) | **framework**; "resonance" names a repeated handoff |
+| Large-lap searches, speeds `K·(p, q, r) + offsets` (2026-09-15) | AP reference with gap `K`, indices `(p, q, r)`, deviations; measured quantity is the nearest reading = `R = d_min/D_final` | **framework** (AP reference plus deviation; `R` as in items 35–36) |
+| **Advance budget** (item 43, `AdvanceBudget`) | sums each runner's zone width over the time it spans | **import — a density count in chain form.** It never uses a handoff, a setter's identity or a reading. Not framework progress; it reaches no owner order. Kept in Lean as a boundary marker; nothing is to be built on it. |
+| **Status v2/v3 §4 "hypothesis"** — zones' combined width `2(n − 1)/n` exceeding 1 explains the n = 5 failures | the same density count | **import.** Removed in status v4. |
+| **Item 39 "Orientation"** — "n = 5 is the four-speed case (`intLRC_5`, Bienia)" | someone else's problem statement placed next to the framework's | **relabel** (the pattern of Part 6's feedback). Used in no proof or plan; not to be repeated. |
+| **Item 44's justification of the relaxed LP** — a relaxed run reaching `4/5` would contradict a clear point | the LP variables are framework handoffs, but "bounds the true chain" was argued by covering the window | **partly import.** The LP values stand as computations on framework objects (which words and laps can hand off); the bounding argument is not to be relied on. |
+| Reasoning this session before the audit, **not written into any document**: a uniform "clear point within Λ laps from any start" lemma; compactness / almost-periodicity; meeting-time candidates from published proofs | existence, relative density, other LRC proofs | **import.** Dropped; nothing was built on it. |
+
+**The cap restated in the framework's own quantity.** For the subject with nearest difference `d_min`, the cascade ends at
+scale `D_final` and the time ratio is `R = d_min / D_final` (items 35–36). The n = 5 cap is **`R < 4` at threshold `1/5`**
+(largest found `31/9`). This is the order-5 counterpart of the n = 8 question about `R` (largest found ≈ 11.96).

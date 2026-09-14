@@ -1087,3 +1087,11 @@ the documents exist). It found no claim the Lean file contradicts, and four defe
 4. Status v2 §4 asserted, without an artifact, that the two n = 5 failures share one cause (zone width exceeding the
    window). v3 marks it as a hypothesis. Status v2's table also listed the budget row without item 43's caveat; v3 adds it
    (the row uses zone widths only and reaches no owner order, since `2(n − 1) < n` never holds).
+
+## 50. Drift audit of items 37–49; the n = 5 cap is `R < 4`  `[AUDIT]`
+
+Added 2026-09-15 at the owner's request. Verdicts piece by piece in `OBJECTION_LEDGER_v1.md` Part 7. Framework: the
+iteration, zones, setters, laps, return lemma, W1/W2, nearest reading, resonance window, Version B. Import: the advance
+budget (item 43; a density-type count — not framework progress), the density "hypothesis" in status v2/v3 §4 (removed),
+item 39's orientation relabel, and item 44's covering justification of the LP bound. Current status document:
+`docs/n8/SMALL_N_TERMINATION_STATUS_v4.md`. The cap in the cascade's quantity: `R = d_min/D_final < 4` at threshold `1/5`.
