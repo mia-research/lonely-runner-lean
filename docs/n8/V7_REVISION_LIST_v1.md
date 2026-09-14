@@ -963,3 +963,29 @@ the handoff structure, the word rules or the return lemma. Proved termination no
 `n ≥ 3`; three at every `n ≥ 4` (item 42); any `k` at every `n > 2k` (this item). The first open row is `k = 4` at
 `n = 5, 6, 7, 8`; `k = 4, n = 5` is the cap of item 39. The owner's orders (`k = n − 1`) all lie outside the budget
 regime.
+
+## 44. n = 5: the relaxed chain as a linear program — supremum 31/9, and the boundary treatment is load-bearing  `[VERIFIED-COMPUTATION (bounded laps and length); CONJECTURE (supremum for all chains)]`
+
+Added 2026-09-14 (autonomous run). `experiments/small_n/n5_relaxed_lp_v1.py`.
+
+**Formulation.** Fix a setter word over `b, c, d` and its laps. With periods `u_x = 1/ρ_x` (nearest period 1,
+`u_b ≥ u_c ≥ u_d`), every iterate is `t_j = (Q_j + 1/5)·u_{w_j}`, every handoff is `(Q_j − 1/5)·u_{w_j} < t_{j−1} < t_j`, and
+the nearest runner is clear while `t_j ≤ 4/5`: all linear in `u`. So the largest reachable time for a word is an LP.
+The relaxation allows any runner in the way to set the move (not only the latest opening); a relaxed run reaching
+`4/5` would still be a run of lap zones from the bound, so the relaxation bounds the true chain.
+
+**Boundary.** With the inequalities closed, the supremum is 4.125 (`dcbc`, laps 1, 1, 1, 2, ratios 16/9, 8/3, 4) — but
+every handoff there sits exactly on a zone boundary, where BSM counts the runner clear (checked exactly). With strict
+margins (`EPS = 1e-7`) the value falls to the true one. The closed chain is not a limit of strict chains.
+
+**Result (strict).** Laps ≤ 8, length ≤ 9: 37,465 LPs; laps ≤ 12, length ≤ 11: 202,381 LPs. Both give supremum
+**`t = 31/45`, nearest reading `31/9 ≈ 3.4444`**, at `dcbdcd`, laps `(2, 1, 1, 5, 2, 6)`, periods `(4/9, 8/27, 1/9)`
+(ratios `9/4, 27/8, 9`) — the arrangement annealing found (item 39). Next values: 3.375 (`dcb`, laps 1,1,1), 3.3611.
+By largest lap used: 3.375, 3.361, 3.259, 3.039, 3.361, 3.444, 3.143, 2.75, 2.959, 2.862, 2.947, 2.868 (laps 1…12) — not
+decreasing: a fast runner at a large lap can ride on slow runners at lap 1. By length: 1.5, 2.25, 3.375, 2.889, 3.361,
+3.444, 2.947, 2.333, 2.333, 1.933, 1.895 (1…11 moves).
+
+**What a proof of the n = 5 cap needs beyond this.** A finite LP check covers bounded laps and length. The remainder
+is the scale-separated case (some runner much faster than the others): its moves contribute little growth, but they
+reset the word rules between the slower runners. A lemma bounding that contribution, plus the finite check, would
+give the cap; neither is written.
