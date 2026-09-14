@@ -83,3 +83,21 @@ a ban on the framework's engine. One clause fixes it, and it already exists in v
 
 **Found by:** the owner's review of `PROOF_REQUIREMENTS_v1`, item 2, which hit the same gap in
 that document. Corrected there in v2.
+
+## 11. §1.1 and §2.2 state exactness unconditionally; it holds only for commensurable arrangements  `[SETTLED]`
+
+§1.1: *"Every quantity is exact. Positions, lap counts and phases are **rationals** computed
+from the speeds."* §2.2: *"Both conditions are on `ℕ`. There is **no real division, no floor,
+and no fractional part** in the statement."*
+
+For the runner at speed `1 + √2/100` in §7d's own example: `d_min = √2/100` is irrational, the
+produced time `3/(8·d_min) = 26.5165…` is irrational, the readings `1, 140.42…, 211.13…` are
+irrational. **Proposition 2.1's test does not apply** — there is no `mod 8D` for an irrational
+difference, and the test there is the band condition on the reals.
+
+The runner is lonely at that time and the construction delivers; what fails is the *stated
+method*. §7d already separates the three regimes and treats the irrational one differently, so
+the unconditional wording contradicts §7d.
+
+**Fix:** qualify both sections — the arithmetic is exact and integral for commensurable
+arrangements; for incommensurable ones the test is the band condition on the reals.

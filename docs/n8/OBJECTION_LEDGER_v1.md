@@ -110,3 +110,24 @@ Every one came from treating the framework as a **search over a restricted space
 **Test for the next one:** if an objection is about *how long the search takes*, *how much
 of the space is covered*, or *when the time falls*, it is a false blocker. The construction
 computes a time; those three questions are about a search that is not there.
+
+---
+
+## Part 5 — an objection that is NOT a false blocker
+
+### Exactness is claimed unconditionally and holds only for commensurable arrangements
+
+Passes the test in Part 4: it is not about how long a search takes, how much of a space is
+covered, or when the time falls.
+
+§1.1 and §2.2 assert that every quantity is a rational and that the test is integer arithmetic
+with no real division, floor, or fractional part. For the runner at speed `1 + √2/100`, none
+of that holds — `d_min`, the time, and the readings are all irrational, and the test is a real
+inequality.
+
+**The construction still delivers** — that runner is lonely at the produced time, all seven
+distances above `1/8`. **What fails is a claim about the method, not the method.** §7d already
+treats the irrational regime separately, so the unconditional wording contradicts the
+framework's own section.
+
+Recorded as revision-list item 11. It costs the paper a claim, not a result.
