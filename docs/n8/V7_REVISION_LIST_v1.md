@@ -1071,3 +1071,19 @@ in the class, an explicit iterate of the move from the bound `1/(n·m)` is lonel
 - `two_diffs` (every `n ≥ 3`, iterate 1), `three_diffs` (every `n ≥ 4`, iterate 3), `four_diffs` (every `n ≥ 6`,
   iterate 7), `budget` (every `n > 2·card`, some iterate), `order_three` (n = 3), `order_four` (n = 4, with `a·T < 3/4`).
 Consolidated status: `docs/n8/SMALL_N_TERMINATION_STATUS_v1.md`.
+
+## 49. Corrections to items 44–48 and the status document, from an independent audit  `[CORRECTION]`
+
+Added 2026-09-15. A memory-drafting audit read the status document, items 37–48, `MomentIterationN_v13.lean` and its
+output, and recompiled the file (exit 0, 64 axiom lines identical to the checked-in output; all 51 theorem names cited in
+the documents exist). It found no claim the Lean file contradicts, and four defects in the prose:
+1. Items 44–45 and status v2 §3 describe the relaxed-chain LP results as if exact. The LPs are floating-point
+   (`scipy linprog`, HiGHS) with `EPS = 1e-7`; `31/9` and `95/11` are rationals recognised from float optima over bounded
+   searches (item 45's "≈ 95/11" is the accurate form).
+2. The module docstring of `MomentIterationN_v13.lean` (inherited from v6) still speaks of `1/8` and says termination is
+   not stated. The file is left unchanged (its SHA-256 is recorded in the project memory); the documents now say to read
+   the theorem statements.
+3. Item 48 points to status v1; the current document is `docs/n8/SMALL_N_TERMINATION_STATUS_v3.md`.
+4. Status v2 §4 asserted, without an artifact, that the two n = 5 failures share one cause (zone width exceeding the
+   window). v3 marks it as a hypothesis. Status v2's table also listed the budget row without item 43's caveat; v3 adds it
+   (the row uses zone widths only and reaches no owner order, since `2(n − 1) < n` never holds).
