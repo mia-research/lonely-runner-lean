@@ -131,3 +131,42 @@ treats the irrational regime separately, so the unconditional wording contradict
 framework's own section.
 
 Recorded as revision-list item 11. It costs the paper a claim, not a result.
+
+---
+
+## Part 6 — added 2026-09-14, review session
+
+### A further false blocker: "§7.4 has a counterexample"
+
+| the claim | why it was false |
+|---|---|
+| **"§7.4 is false"**, from `(1, 31, 75, 97, 128, 160, 176, 225)`, repeated in review | It refutes v7's **wording**, which stops the cascade at lap 0. The `d_min` lattice read past lap 0 isolates the runner at `t = 43/240` (`u = 5 + 3/8`), and the `1975…` runner at `t = 17/15792` (`u = 2 + 1/8`). Owner: *"The isolation time are found we were just missing the correct application of the dmin cascade."* Revision-list item 12 |
+
+It passes the Part 4 test's pattern exactly: a restriction imposed on the search (lap 0) read back
+as a limit of the construction.
+
+### Objections 1 and 5 now have a machine-checked instance
+
+Rows 1 (*incommensurable speeds*) and 5 (*the real-to-integer reduction*) were DEAD on sampled
+evidence. `experiments/n8/IrrationalDemo_v1.lean`, compiled against the frozen `Construction8`
+with `ratio_condition` unchanged: at speeds `(1, 2, π, 4, …, 8)` **every runner is lonely at its
+own `t = 1/(8·d_min)`**, the runners at `π` and `4` at the irrational `1/(8(4 − π))`. No rational
+approximation of `π` is used — only `3 < π < 3.15`. Axioms `[propext, Classical.choice,
+Quot.sound]`.
+
+This is an instance, not the general case: it rests on Theorem 4.8. The Lean statements the method
+runs on are real-valued throughout except `coord_iff` and the reference (revision-list item 13),
+so Part 5's point stands and is now sharper: **the method is real-valued; the integer test is its
+commensurate representation.**
+
+### Objection 1 — a cascade case, not only Theorem 4.8
+
+`experiments/n8/IrrationalCascade_v1.lean`: at `(1, 1+√2/100, 3, …, 8)` all eight runners are
+proved lonely, and r2 — outside Theorem 4.8 and blocked at `u = 1/8` — is proved lonely at the
+irrational `t = 75√2/4` from the grid tier's spine `r = 3`. Revision-list item 15.
+
+### A further false framing: "Theorem 4.7 is an imported global obligation"
+
+| my claim (review session, 2026-09-14) | why it was wrong |
+|---|---|
+| *"Theorem 4.7 is a global condition … your firewall rules out the global clock. Pulling 4.7 in as the mechanism is exactly the kind of imported obligation you warned about."* | Owner: *"Phi (n) law for AP on LRC proves global isolation for arithmetic progress."* Global isolation of the AP is the owner's own result (Palelei 2026, Thm 3.1; derived in `ConstructionN/Instants.lean`) and it is the framework's **reference ideal** — Theorems 4.5–4.7 are that reference and what a deviation does to it. Not an import. What held of my point is narrower: on `(1,31,75,97,128,160,176,225)` and `(1,2,3,4,5,6,7,9)` the reference instant does not survive (speeds repeat mod 8), so 4.7's survival conditions do not by themselves give those runners their times; the per-runner reading of deviations from the ideal does. And owner: *"Global clock no but the slowest speed defines a cycle."* The firewall bans needing one shared isolation event; the slowest runner's lap as the unit of time is framework-native. |
