@@ -850,3 +850,66 @@ setters; `P = 0` (the nearest runner) needs the product to exceed `n − 1`.
 **Orientation.** In the project's numbering (`intLRC n` = `n` runners), `n = 4` is the three-speed case and `n = 5` the
 four-speed case (`intLRC_5`, proved in the Lean tree through Bienia et al. §4). Items 37–38 prove termination at 3 and
 4 from the framework's objects alone; no framework proof of the n = 5 cap exists yet.
+
+## 40. n = 5, route 1 (chain accounting): word rules proved; long chains are resonances that barely move the time  `[PROVED-LEAN (W1, W2); VERIFIED / EMPIRICAL (structure)]`
+
+Added 2026-09-14. Owner chose route 1 (setters, laps, growth budget only).
+
+**Proved, every `n ≥ 4`** (`experiments/n8/MomentIterationN_v5.lean`, section `WordRules`; compiles, no `sorry`, axioms
+`[propext, Classical.choice, Quot.sound]`):
+- `no_return_after_faster` (W1) — a runner is not in the way straight after a move set by a runner at least as fast.
+  So `x y x` needs `y` slower than `x`.
+- `no_four_alternation` (W2) — no four consecutive moves `y z y z`.
+
+**n = 5 structure** (nearest runner clear; others `b < c < d` by speed). W1 forbids `bcb`, `bdb`, `cdc`; W2 forbids
+alternation. Checked on 158,681 arrangements (`experiments/small_n/n5_word_rules_v1.py`), no violation:
+- gaps between `b`'s settings: `cd`, `dc`, `dcd` (each has exactly one `c`, so `b` and `c` settings alternate);
+- gaps for `c`: `b`, `bd`, `db`, `dbd`; for `d`: `b`, `c`, `bc`, `cb`, `cbc`;
+- chains without `b`: at most 3 moves (largest nearest reading 2.23).
+
+**Long chains** (`n5_cycles_v1.py`, near-rational speed ratios): they are resonances. Example: 300 moves at
+`c/b = 1.0022`, `d/b = 2.0021`, repeating `b(P) d(2P+1) c(P+1) d(2P+2)`; each cycle grows the time by ≈ `1 + 1/P`;
+the chain ends with the nearest runner reading 1.38.
+
+**Where the nearest reading gets large** (`n5_reading_vs_length_v1.py`, 159,801 arrangements): largest final
+reading by chain length — 0–4 moves: 3.18; 5–9: 3.30; 10–14: 1.37; 15–29: ≤ 1.41; 30+: 1.51. By the largest lap any
+setter used — laps ≤ 6: up to 3.30; 7–10: ≤ 2.36; 11–20: 2.09; 21–50: 1.78; > 50: 1.51.
+
+**Proof shape suggested by the data (not yet derived).**
+(A) *Resonance window.* A handoff at laps `(P, Q)` pins the reading of the next setter at the previous opening's scale
+to `(5Q − 1, 5Q + 1)`; a handoff repeated with lap offset `c = Q − mP` fixes `ρ_y/ρ_x − m` to order `1/P`, so it can
+repeat only while `P` stays within a bounded factor — bounding the growth a resonance can deliver at large laps.
+(B) *Small laps.* The chains that approach the cap use laps ≤ 6 and fewer than 10 moves; a finite analysis of the
+word rules with bounded laps.
+
+## 41. The resonance window stated and tested; the setter pigeonhole and the nearest-reading recurrence in Lean, every `n`  `[PROVED-LEAN; VERIFIED; one hoped-for separation not found]`
+
+Added 2026-09-14.
+
+**Resonance window, exact** (`h = 1/n`, `r = ρ_y/ρ_x`; a handoff `x → y` at laps `(P, Q)` means `x`'s lap-`P` opening lies
+in `y`'s lap-`Q` zone):
+- A1 — handoff iff `Q − rP ∈ (h(r − 1), h(r + 1))`.
+- A2 — a run of `k` handoffs with constant lap step `(p, q)` and `ε = r − q/p` has `(k − 1)·p·|ε| < 2h`.
+- A3 — its growth `(P_k + h)/(P₁ + h) < 1 + 2h/(|ε|(P₁ + h))`.
+- A4 — with `D = pQ₁ − qP₁`, unbounded growth needs `D ∈ [h(q − p), h(q + p)]` (the exact ratio `q/p` admits the handoff).
+
+Test (`experiments/small_n/n5_resonance_products_v1.py`, 148,894 arrangements at n = 5): A1 on 89,737 handoffs, A2 and
+A3 on 3,134 runs, no violation. **A4 does not separate:** admissible and non-admissible runs both reach growth 1.83,
+because A3's bound is small only at large `P₁`. The resonance window bounds growth at large laps only.
+
+**Recon for the product route** (same script):
+- (D) Laps are not bounded by position: `Q_j/Q_1` reaches 34 within the first 10 moves (a slow runner sets at lap 1,
+  a fast one later at lap 34); from position 10 on, `Q_j/Q_1 ≤ 1.6`. Laps follow speeds, not the index.
+- (C) The setter-lap product `∏ (5Q + 1)/(5Q − 1)` reaches ≥ 4 in 733 chains (max 5.04: three lap-1 and two lap-2 moves)
+  while every actual nearest reading stays below 4. The product uses only the lower end of each handoff interval; the
+  cap needs the consistency of the speed ratios across different handoffs, not arithmetic on the product.
+
+**Proved, every `n`** (`experiments/n8/MomentIterationN_v6.lean`, section `NearestState`; compiles, no errors or warnings,
+no `sorry`, 38 of 38 axiom lines `[propext, Classical.choice, Quot.sound]`):
+- `setter_repeat` — `k + 1` setters from a set of size `≤ k` include two equal ones at positions `i < j`.
+- `nearest_clear_general` — while `1/n ≤ m·t ≤ 1 − 1/n` the nearest runner is clear.
+- `repeat_within` — `card ds ≤ n − 1`, nearest clear at `n − 1` consecutive moving iterates: some other runner sets two
+  of those moves.
+- `nearest_reading_recurrence` — along the iteration from `1/(n·m)`: `m·t_N ≤ (1/n)·∏_{j<N} (Q_j + 1/n)/(Q_j − 1/n)`, each
+  `Q_j ≥ 1` the lap of the setter of move `j` (or the move stays).
+- `nearest_return_needs_product` — if the nearest runner is in the way at iterate `N`, that product exceeds `n − 1`.
