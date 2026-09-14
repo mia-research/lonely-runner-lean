@@ -68,3 +68,18 @@ Not yet in any manuscript version: **H1** (same-side runners within `1/4` of a l
 **wrap gap / global start / gap migration**, the **relay anatomy** (231,294 blocked instances,
 0 chains reaching the window's end), and **Part II's perturbation mechanisms**. §6.2 still
 refutes the relay without stating the rule the relay runs on.
+
+## 10. §1.1 — the per-runner reading is never distinguished from the stationary frame  `[SETTLED]`
+
+`PROOF_CANDIDATE_v3` Step 3 carries a clause v7 does not:
+
+> *On frames.* Reading `v_j − v_i` is what "`i` is lonely" **means**; it is not a WLOG
+> privileging `i`. Steps 3–5 are performed identically and independently for each of the eight.
+
+v7 §1.1 keeps *"performed identically and separately for each of the eight, and no runner is
+held stationary"* but drops the clause that says **why** the per-runner subtraction is not the
+banned stationary frame. Without it, §7A's own firewall row — "No stationary frame" — reads as
+a ban on the framework's engine. One clause fixes it, and it already exists in v3.
+
+**Found by:** the owner's review of `PROOF_REQUIREMENTS_v1`, item 2, which hit the same gap in
+that document. Corrected there in v2.
