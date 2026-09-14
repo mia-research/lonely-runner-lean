@@ -1011,3 +1011,21 @@ also allowed to set moves). Checks: n = 4 gives supremum reading 3 (`cbc`, laps 
 n = 5 gives 31/9 (item 44), with the nearest runner never setting a move. **n = 6** (laps ≤ 6, length ≤ 14; 425,520
 LPs): supremum reading **8.63636 ≈ 95/11**, at `edcbdecdbabdc`, laps `(1,1,1,1,2,3,2,3,2,1,3,5,4)` — the nearest runner
 sets move 10 at lap 1 — above annealing's 8.6016 (item 42) and below the second window's edge 11. Bounded search only.
+
+## 46. Four differences at every `n ≥ 8`: the iteration stops within seven moves — in Lean  `[PROVED-LEAN]`
+
+Added 2026-09-15 (autonomous run). `experiments/n8/MomentIterationN_v10.lean`, section `FourDifferences` (compiles, no
+errors or warnings, no `sorry`, 51 of 51 axiom lines `[propext, Classical.choice, Quot.sound]`).
+
+- `word_no_alternation` — W2 stated on a word of iterates (`t`, setters `s`, laps `q`).
+- `word_no_slow_return` — for `n ≥ 8`, a setter slowest among the setters between its two settings cannot return across
+  at most three moves (from `no_return_after_few_faster` and `faster_lap_ge'`).
+- `four_diffs_stop_ge_eight` — at most four differences, every `n ≥ 8`: the seventh iterate from `1/(n·a)` is fixed.
+  Proof: the nearest runner is clear at iterates 0–7 (`((n + 1)/(n − 1))^7 ≤ (9/7)^7 ≤ n − 1`); an eighth move would make
+  eight setters from three runners with adjacent setters distinct; the slowest of them, `v`, sets at most once (a gap of
+  `≤ 3` moves is excluded by `word_no_slow_return`, a gap of `≥ 4` contains four moves by the other two runners, which
+  alternate, excluded by `word_no_alternation`); so four consecutive setters avoid `v`, excluded again.
+
+**The (differences, order) table after items 42, 43, 46.** Proved termination: 2 differences at every `n ≥ 3`; 3 at every
+`n ≥ 4`; 4 at every `n ≥ 8`; any `k` at every `n > 2k`. Open in the row `k = 4`: `n = 5, 6, 7`. The owner's orders
+(`k = n − 1`, `n ≥ 5`) are all open.
