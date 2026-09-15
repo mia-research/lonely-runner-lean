@@ -142,7 +142,7 @@ determines the instant from the speeds. Candidate for v8_3 wording and future do
 
 ---
 
-## 7. T4 / W3 started — flanks  `[IN PROGRESS — T4_FLANKS_v1.md]`
+## 7. T4 / W3 started — flanks  `[IN PROGRESS — T4_FLANKS_v2.md]`
 
 Added 2026-09-15.
 - **"Gap ≤ c" is not bounded:** adversarial order 5 gap 6; exhaustive order 8 gap 4; lattice numbering was the wrong coordinate.
