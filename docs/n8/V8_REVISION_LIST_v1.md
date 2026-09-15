@@ -52,3 +52,9 @@ Three ideas and four ranked openings, thought through in `TARGETS_v1.md` with ex
 **T0** per-runner lap distinctness in Lean; **T1a** order 5 `R < 4` for spread `S ≤ s₀` by first exceedance plus an exact
 strict-feasibility linear program per word (owner ruling on fit needed); **T1b** the large-spread regime. Supporting data:
 `experiments/n8/targets_length_vs_reading_v1.out` (longest order-5 chain grows with the largest reading while `R` falls).
+
+**Addendum 2 to item 2 (2026-09-15).** `TARGETS_v3.md` supersedes v2. It withdraws two verdicts reached by reasoning errors:
+the dead-lattice idea was answered only in its cascade-scale form, while its lattice-witness form (`WHY_IT_PREDICTS_v1`) is
+live and half proved (**T4**); and the residue rule was set aside by the wrong criterion (whether the cascade ends on a
+lattice instant), where Existence needs only some lonely instant. Data: `experiments/n8/lattice_witness_nowindow_v1.out`.
+Owner instruction the same day: try T2 (the `n > 2k` derivation) in Lean.

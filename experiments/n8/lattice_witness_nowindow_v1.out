@@ -1,0 +1,4 @@
+n=5: 2974 runners; first live lattice within floor(s_max/n)+1: 2974; gap (lonely - first live): {0: 2814, 1: 105, 2: 55}
+   largest gap 2 at readings ['1', '3', '4', '5'] (first live 2, lonely at 4)
+n=8: 1483 runners; first live lattice within floor(s_max/n)+1: 1483; gap (lonely - first live): {0: 1421, 1: 41, 2: 17, 3: 4}
+   largest gap 3 at readings ['1', '2', '3', '5', '7', '9', '24'] (first live 2, lonely at 5)
