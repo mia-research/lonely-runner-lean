@@ -1,0 +1,15 @@
+(a) triple alone: readings ['127/100', '141/100', '133/50']  d_min 127/100
+   odd spines 1..31 of scale 1 all in the way: False
+   cascade: 0 moves, first lonely instant t = 25/254 (u at scale 1 = 100/127 eighths), R = 1.0000; scales visited ['127/100']
+(a) triple plus a runner at reading 1: readings ['1', '127/100', '141/100', '133/50']  d_min 1
+   odd spines 1..31 of scale 1 all in the way: False
+   cascade: 0 moves, first lonely instant t = 1/8 (u at scale 1 = 1 eighths), R = 1.0000; scales visited ['1']
+(b) near-sharer plus triple: readings ['23/3', '127/100', '141/100', '133/50']  d_min 127/100
+   odd spines 1..31 of scale 1 all in the way: True
+   cascade: 0 moves, first lonely instant t = 25/254 (u at scale 1 = 100/127 eighths), R = 1.0000; scales visited ['127/100']
+(b) near-sharer plus triple: readings ['1', '23/3', '127/100', '141/100', '133/50']  d_min 1
+   odd spines 1..31 of scale 1 all in the way: True
+   cascade: 1 moves, first lonely instant t = 27/184 (u at scale 1 = 27/23 eighths), R = 1.1739; scales visited ['1', '23/27']
+(b) near-sharer plus triple: readings ['1', '25/3', '127/100', '141/100', '133/50']  d_min 1
+   odd spines 1..31 of scale 1 all in the way: True
+   cascade: 1 moves, first lonely instant t = 27/200 (u at scale 1 = 27/25 eighths), R = 1.0800; scales visited ['1', '25/27']

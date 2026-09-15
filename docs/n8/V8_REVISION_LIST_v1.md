@@ -123,3 +123,19 @@ Added 2026-09-15.
   - **G2:** a step drifts every reading by `g·d_y/d_x`, with fixed ratios.
   - **G3:** zero one-sided margin at the ideal's instants.
 - **Ways in:** W1 resonance dichotomy (exact computation first), W2 two-scale transition, W3 commensurate limit through the ideal.
+
+**Addendum to item 5 (2026-09-15).** `WHAT_STOPS_PROOF_v2.md` supersedes v1.
+- **G1 reclassified:** it concerned a fixed scale, which the framework never uses. Run through the cascade, the examples are lonely
+  at the bound or after one move.
+- **G2 reclassified:** a step count, ledger Part 4's test.
+- **G3 corrected:** perfect isolation, both flanks, not positive speeds.
+- **W3 at one lattice:** 4 runners with no near-sharer hold every `p/8`, `p ≤ 24`, in the way. Their readings are near-sharers of
+  lattices 2, 3 and 12, the dead-lattice ladder.
+- **Stable-speed proposal assessed, owner decision:** `Lonely` is closed, not open. The margin is zero at ideals. Rational
+  arrangements are not settled at order 8. The firewall bans a stability radius. Irrationals are not treated separately by the
+  framework.
+
+## 6. Naming: "predictor" → "determinator"  `[OPEN — owner suggestion]`
+
+Owner, 2026-09-15: *"our 'predictor' (we might need to rename it as a determinator)"*. The cascade does not predict; it
+determines the instant from the speeds. Candidate for v8_3 wording and future documents; script and file names left as they are.

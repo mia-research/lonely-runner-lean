@@ -1,0 +1,11 @@
+P= 8  eta=0   : 1  eta=1/16: 1  eta=1/8 : 2  eta=1/4 : 3  eta=1/2 : 4
+P=12  eta=0   : 1  eta=1/16: 1  eta=1/8 : 3  eta=1/4 : 4  eta=1/2 : 4
+P=16  eta=0   : 1  eta=1/16: 2  eta=1/8 : 4  eta=1/4 : 4  eta=1/2 : 4
+P=20  eta=0   : 1  eta=1/16: 2  eta=1/8 : 4  eta=1/4 : 4  eta=1/2 : 4
+P=24  eta=0   : 1  eta=1/16: 3  eta=1/8 : 4  eta=1/4 : 4  eta=1/2 : 4
+P=24  eta=0   : 1  eta=1/16: 3  eta=1/8 : 4  eta=1/4 : 4  eta=1/2 : 4
+witness at P=24, eta=1/2 (4 runners):
+   reading in (15/22, 9/13) = (0.6818, 0.6923); in the way at p = [1, 11, 12, 13, 22, 23, 24]
+   reading in (95/24, 4) = (3.9583, 4.0000); in the way at p = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
+   reading in (21/8, 65/24) = (2.6250, 2.7083); in the way at p = [3, 6, 9, 12, 15, 18, 21, 24]
+   reading in (63/19, 73/22) = (3.3158, 3.3182); in the way at p = [5, 7, 12, 17, 19, 22, 24]
