@@ -1,0 +1,3 @@
+order 5 certificate (strict, simplex): spread bound S = 4, lap bound L = 3, words to 9 moves
+   words tested: 9   realisable (max tau > 0): 0
+   no realisable word -- cascade cannot move at this spread bound

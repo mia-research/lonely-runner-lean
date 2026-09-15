@@ -356,24 +356,24 @@ Added 2026-09-16. With uniform pricing refuted (item 11), the finite certificate
 
 ---
 
-## 13. Order 5: the spread sweep, margin realisability, and the certificate's finiteness bounds in Lean  `[ORDER5_CERTIFICATE_v2.md]`
+## 13. Order 5: the ratio sweep, margin realisability, and the certificate's finiteness bounds in Lean  `[ORDER5_CERTIFICATE_v2.md]`
 
 Added 2026-09-16. Supersedes item 12's scope and **corrects two of its claims**.
 
-- **Spread ≤ 18, not 6** `[PROVED — exact finite certificate]`. `sup R = 27/8` for `S ≤ 9`; `31/9 = 3.4444` for `S = 10…18`.
+- **Ratio `S ≤ 18`, not 6** `[PROVED — exact finite certificate]`. `sup R = 27/8` for `S ≤ 9`; `31/9 = 3.4444` for `S = 10…18`.
   The enumeration is exact rational arithmetic throughout; `order5_certificate_v3.py` solves each word's LP by exact simplex
   instead of vertex enumeration and **reproduces v2's answers exactly** at `S = 5, 6` (same value, same word, same margin),
-  which is what licenses the faster solver. Cost doubles about every two spread steps (52 s at `S=14`, 198 s at `S=18`).
-- **`[CORRECTS item 12]` The lap-1 ladder is extremal only up to spread 9.** From `S = 10` the optimum is the six-move word
+  which is what licenses the faster solver. Cost doubles about every two steps of `S` (52 s at `S=14`, 198 s at `S=18`).
+- **`[CORRECTS item 12]` The lap-1 ladder is extremal only up to `S = 9`.** From `S = 10` the optimum is the six-move word
   `(1,2), (2,1), (1,3), (3,1), (2,2), (1,6)`, in which runner 1 sets four times with two intervening returns. Item 12 recorded
   the old lap-1 `(3/2)³` assumption as *discharged* — that discharge stands only for `S ≤ 9`. Returns are not outside the
-  extremal regime; from spread 10 they are it.
+  extremal regime; from `S = 10` they are it.
 - **`[CORRECTS item 12]` "Artefact" was loose.** The closed-inequality LP is a valid relaxation whose bound is merely too weak
   (its feasible set is a superset, so 4.125 is a true upper bound over that superset), not a false computation. What is not
   realisable is the *word*, which carries `max τ = 0` exactly. A closed relaxation elsewhere is not thereby an error to fix.
 - **`sup R(S)` is flat, and a worry was raised then refuted.** The first two values (`27/8 → 31/9`, numerator `+4`, denominator
   `+1`) extrapolate to the family `(27+4j)/(8+j) → 4`, which would deny any uniform margin. The sweep to `S = 18` kills it:
-  nine consecutive spread bounds all return `31/9`, the same extremal word throughout, the same margin `132/4165` from `S = 11`,
+  nine consecutive ratio bounds all return `31/9`, the same extremal word throughout, the same margin `132/4165` from `S = 11`,
   while the lap bound grows 7 → 14 and the word-length bound 21 → 42. Growing the search space stopped producing better words.
 - **Margin realisability, proved** `[PROVED]`. The margin threshold and the R-supremum are two readings of **one** convex
   polytope `P(w)` in `(u, τ)`, not two sequential steps: since `τ` is a coordinate, every `τ = 0` feasible point is a limit of
@@ -381,7 +381,7 @@ Added 2026-09-16. Supersedes item 12's scope and **corrects two of its claims**.
   `ε → 0` escape — a word realisable only with vanishing margin cannot smuggle in a larger `R`.
 - **Lean: the three finiteness bounds are formalised** `[PROVED — LonelyRunner/LRC/Cascade/Certificate.lean]`. `cascadeR_zoneHi`
   (a setting of `x` at lap `Q` lands at `R = (n·Q+1)/u`), `nearest_setting_ge` / `nearest_never_sets`, `lap_lt_of_cascadeR_lt`
-  and `lap_lt_of_spread`, `laps_strictly_increase`, `lap_mem_Icc`. Cascade gate: **170 theorems, axiom-clean, no `sorry`**.
+  and `lap_lt_of_ratio_le`, `laps_strictly_increase`, `lap_mem_Icc`. Cascade gate: **170 theorems, axiom-clean, no `sorry`**.
   **Owed**: the word LP and the value `31/9` are not yet formalised.
 - **Cross-shift: one null was forced, and is recorded as a defect of the query.** The first cross-shift script answered "the
   chains stay in one cluster" over 7200 walks — but its generator drew the large speeds as a base times a multiplier in `[1,3]`,
@@ -389,5 +389,53 @@ Added 2026-09-16. Supersedes item 12's scope and **corrects two of its claims**.
   1713 of 4800), and the chains containing them are short (≤ 6 moves); every chain of ≥ 10 moves came from the clustered
   control and showed none. Length and cross-cluster traversal are anti-correlated — consistent with the reduction, weak
   evidence for it, since random sampling tops out at `R = 1.30` against the certificate's `3.44`.
-- **Next**: `S = 22, 26` running; the reduction of unbounded to bounded spread is still open; the pricing lemma stays warm
+- **Next**: `S = 22, 26` running; the reduction of unbounded to bounded ratio is still open; the pricing lemma stays warm
   (item 11) — and the correction above is the reason, since returns sit *inside* the extremal word.
+- **Notation fix (found by the framework-integrity check, 2026-09-16).** This line of work had been calling `S = d_max/d_min`
+  "the spread". The manuscript reserves **spread** for `W = v_8 − v_1`; `S` is the **ratio** of largest to smallest difference.
+  That is the collision audit finding C1 removed and manuscript v9.1 separated again — reintroduced here by our own drafting,
+  not by any imported source. Corrected in `ORDER5_CERTIFICATE_v2.md`, item 13, `Certificate.lean` and the scripts; v1 is left
+  as the historical record. No result changes: every number was always about `d_max/d_min`.
+
+---
+
+## 14. Framework-integrity check  `[owner-requested, 2026-09-16]`
+
+Owner's concern: the programme's biggest threat is adopting someone else's measures, since the framework is built
+differently and prior tools are not necessarily compatible. Test applied throughout (owner's ruling 2026-09-15): *tools are
+fine; targets and statements must stay native* — does the statement exist without the other literature, in our vocabulary alone.
+
+**Mechanical scan.** Every occurrence of measure, density, equidistribution, Weyl, Fourier, discrepancy, Bohr, ergodic,
+Lebesgue, probabilistic, expectation, "almost all", Minkowski, covering, lattice, Dirichlet, pigeonhole, residue and CRT, across
+the nine cascade Lean modules and `MANUSCRIPT_v9_1.md`.
+
+- **Lean, structural result**: the cascade tree's only mathlib imports are `Analysis.Complex.ExponentialBounds`,
+  `Analysis.Real.Pi.Bounds`, `Analysis.Real.Pi.Irrational` and `NumberTheory.Real.Irrational`. **No measure theory, no
+  equidistribution, no Fourier analysis is imported at all**, so the artefact cannot be leaning on them unseen. Two hits, both
+  benign: `Certificate.lean` "measured at the nearest difference" (plain English) and `SmallOrders.setter_repeat`, an *abstract*
+  pigeonhole (`k+1` values in a set of size `≤ k`) proved from scratch, cited to nobody.
+- **Manuscript**: every hit is the firewall **banning** the thing (`No measure or density`), the objections table explaining why
+  it is inapplicable, or the phrase "no equidistribution, no result at another order, no proof sketch". None is a use.
+- **`ManyDifferences` (nativeness was recorded open)**: the potential is built only from lap-zone objects — `lapFactor =
+  (r + 1/n)/(r − 1/n)`, `lapsPassed = ⌊x·t − 1/n⌋`, `potential = ∏ lapProd` — and every step (`potential_step`,
+  `time_le_potential`, `lapProd_pow_le`, `potential_pow_le`, `stops_when_twice_card_lt`) is an exact inequality between real
+  quantities. **It meets the owner's qualification: no measure or density claim in disguise.** The statement — *the cascade from
+  the bound stops whenever `2k < n`* — is native.
+- **`Flanks`**: every statement is in our vocabulary (flank openings, readings, ratios, clear / in the way, lonely, stops). The
+  imported tools sit inside proofs only, as ruled.
+- **This session's new work**: the certificate's linear programs are a *solving method* for inequalities that are themselves the
+  framework's own (in-the-way, advancement, readings); the statement — `R ≤ 31/9` over realisable words at ratio bound `S` — is
+  native. The margin `τ > 0` is not an imported device; it is the firewall's **Boundary discipline is mandatory** row enforced
+  numerically. The word enumeration is **not** a search in the banned sense: it enumerates possible `(setter, lap)` sequences to
+  bound every case, and picks no candidate instant — the cascade remains fixed by the speeds.
+
+**The one drift found is ours, not imported.** The order-5 certificate line had been calling `S = d_max/d_min` "the spread".
+The manuscript reserves **spread** for `W = v_8 − v_1`, a difference of speeds; `S` is a **ratio**. This is the collision audit
+finding C1 removed and manuscript v9.1 separated again, reintroduced by our own drafting. Corrected in
+`ORDER5_CERTIFICATE_v2.md`, item 13, `Certificate.lean` (`lap_lt_of_spread` → `lap_lt_of_ratio_le`) and the scripts;
+`ORDER5_CERTIFICATE_v1.md` keeps the old wording as the historical record. **No number changes** — the quantity was always
+`d_max/d_min`.
+
+**Owed to `MANUSCRIPT_v9_2.md`** (v9.1 is frozen, so these are recorded, not applied): the Lean map says Cascade = **161
+theorems**; the tree is now **170** with `Certificate.lean` added, so §7, the Appendix table (`| theorems | 85 | 161 |`) and the
+module list in the artefact section are stale. §9's counting-ruling staleness, already on the list, is unchanged.

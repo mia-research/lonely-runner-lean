@@ -1,7 +1,7 @@
 """Order 5 finite certificate, exact rational simplex (same LPs as v2, polynomial instead of vertex enumeration).
 
 v2 solved each LP by enumerating every 4-subset of the constraint rows: at depth 18 that is C(60,4) ~ 4.9e5 exact
-4x4 solves per call, which does not finish at spread 8. This version solves the identical LP with a two-phase
+4x4 solves per call, which does not finish at ratio 8. This version solves the identical LP with a two-phase
 (big-M) primal simplex in exact Fraction arithmetic and Bland's rule, so the answers are exact, not numerical.
 
 Unknowns (u2, u3, u4, tau), u_i in [1, S], tau in [0, 1]. Every "in the way" and "the instant advances"
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     S = int(sys.argv[1]) if len(sys.argv) > 1 else 6
     L = (4 * S - 1) // 5
     starts = [(x, q) for x in (1, 2, 3) for q in range(1, L + 1)]
-    print(f'order 5 certificate (strict, simplex): spread bound S = {S}, lap bound L = {L}, words to {3*L} moves')
+    print(f'order 5 certificate (strict, simplex): ratio bound S = {S}, lap bound L = {L}, words to {3*L} moves')
     with Pool() as pool:
         res = pool.map(job, [(S, L, s) for s in starts])
     cand = [b for b, _ in res if b[0] is not None]
@@ -143,6 +143,6 @@ if __name__ == '__main__':
     if cand:
         best = max(cand, key=lambda b: b[0])
         print(f'   largest sup R over realisable words: {best[0]} = {float(best[0]):.4f}   word {best[1]}   margin tau = {best[2]}')
-        print(f'   target sup R < 4  ->  {"PROVED for spread <= " + str(S) if best[0] < 4 else "NOT proved"}')
+        print(f'   target sup R < 4  ->  {"PROVED for ratio <= " + str(S) if best[0] < 4 else "NOT proved"}')
     else:
-        print('   no realisable word -- cascade cannot move at this spread bound')
+        print('   no realisable word -- cascade cannot move at this ratio bound')
