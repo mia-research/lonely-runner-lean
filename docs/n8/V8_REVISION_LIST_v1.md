@@ -252,6 +252,15 @@ the one you just applied: does the statement exist without the other literature,
   the bound reaches a fixed point — is in the framework's vocabulary; the potential and the Bernoulli bound are tools inside the
   proof. On the principle above that makes it admissible. Flagged here because the owner stated the principle for the flank
   session; say if the reading is wrong.
+**Addendum (owner, 2026-09-15): the read-across is confirmed, with a qualification.** *"if the n > 2k result's statement is in
+framework vocabulary and the potential and Bernoulli bound appear only inside the proof, that's exactly the admissible pattern:
+tools on the working side, targets native."* The qualification to hold with it: *"the potential must not secretly be a
+measure/density claim in disguise (e.g. 'almost every state has property P' as an intermediate step would violate the ledger
+even inside a proof, since the framework's final statements are exact). As long as the n > 2k argument is exact inequalities end
+to end, it's admissible."* `ManyDifferences` is exact throughout — `potential_step`, `time_le_potential`, `lapFactor_pow_le`,
+`lapProd_pow_le`, `potential_pow_le`, `stops_when_twice_card_lt` are inequalities between real quantities with no "almost every"
+step — so it is admissible. `MANUSCRIPT_v9_1` §9 still lists nativeness as pending; correct that in v9_2, not in place.
+
 - **Not changed:** what must stay native is the target and the statement. Window bounds, search framings and coverage shares
   remain excluded however convenient the tool.
 
