@@ -34,6 +34,7 @@ echo "== [1] build every cascade module =="
 MODS="LonelyRunner.LRC.Cascade.Iteration
 LonelyRunner.LRC.Cascade.SmallOrders
 LonelyRunner.LRC.Cascade.FourDifferences
+LonelyRunner.LRC.Cascade.ManyDifferences
 LonelyRunner.LRC.Cascade.VersionB
 LonelyRunner.LRC.Cascade.Reading
 LonelyRunner.LRC.Cascade.Irrational
@@ -59,7 +60,7 @@ echo "== [3] axiom check, every theorem =="
 AX=LonelyRunner/_CascadeGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.Cascade.All'
-  for f in $SRC/Iteration.lean $SRC/SmallOrders.lean $SRC/FourDifferences.lean $SRC/VersionB.lean $SRC/Reading.lean $SRC/Irrational.lean; do
+  for f in $(ls $SRC/*.lean | grep -v '/All.lean$'); do   # every module, so a new file cannot be missed
     awk '/^namespace /{ns=$2} /^end /{if($2==ns) ns=""} /^theorem /{name=$2; if(ns!="") print "#print axioms " ns "." name; else print "#print axioms " name}' "$f"
   done
 } > "$AX"
