@@ -4,7 +4,7 @@ import LonelyRunner.LRC.Cascade.SmallOrders
 # The finite certificate: why the word list is finite, and what a setting is worth
 
 Part of the cascade artefact (`LRC/Cascade/`).  The order-5 certificate (`docs/n8/ORDER5_CERTIFICATE_v2.md`) proves
-`R < 4` for bounded spread by enumerating finitely many words `(setter, lap)` and bounding each by a linear program.
+`R < 4` for bounded difference ratio by enumerating finitely many words `(setter, lap)` and bounding each by a linear program.
 This module carries the part that makes that enumeration legitimate: the three finiteness bounds, and the identity
 that gives a setting its value.
 
@@ -15,7 +15,7 @@ With `m` the nearest difference and `R = n · m · t` the reading of the cascade
 * `nearest_setting_ge`   — the nearest runner's own settings land at `R = n·Q + 1 ≥ n + 1`, above any cap `≤ n+1`;
   `nearest_never_sets`     hence below such a cap the nearest never sets;
 * `lap_lt_of_cascadeR_lt` — under a cap `C`, a setting of `x` has `n·Q + 1 < C·u`, bounding the lap by the reading;
-* `lap_lt_of_spread`      — with spread `u ≤ S`, the same bound is uniform in the arrangement: `Q < (C·S − 1)/n`;
+* `lap_lt_of_ratio_le`      — with every reading `u ≤ S` (`S = d_max/d_min`, the difference ratio — not `W`, the spread of the speeds), the same bound is uniform in the arrangement: `Q < (C·S − 1)/n`;
 * `laps_strictly_increase`— a runner's successive settings carry strictly increasing laps.
 
 Together: each of the other runners sets at most `⌊(C·S−1)/n⌋` times, at strictly increasing laps, and the nearest
@@ -74,9 +74,9 @@ theorem lap_lt_of_cascadeR_lt (m x : ℝ) (hm : 0 < m) (hx : 0 < x) (Q : ℤ) {C
   have hu : 0 < x / m := div_pos hx hm
   rwa [div_lt_iff₀ hu] at h
 
-/-- **The lap bound is uniform in the spread.** With every reading at most `S`, a setting below the cap `C` has
-`n·Q + 1 < C·S`, a bound depending on the arrangement only through `S`. -/
-theorem lap_lt_of_spread (m x : ℝ) (hm : 0 < m) (hx : 0 < x) (Q : ℤ) {C S : ℝ} (hC : 0 ≤ C)
+/-- **The lap bound is uniform in the difference ratio.** With every reading at most `S`, a setting below the cap `C` has
+`n·Q + 1 < C·S`, a bound depending on the arrangement only through the ratio `S`. -/
+theorem lap_lt_of_ratio_le (m x : ℝ) (hm : 0 < m) (hx : 0 < x) (Q : ℤ) {C S : ℝ} (hC : 0 ≤ C)
     (hS : x / m ≤ S) (h : cascadeR n m (zoneHi n x Q) < C) :
     (n : ℝ) * Q + 1 < C * S := by
   have h1 := lap_lt_of_cascadeR_lt m x hm hx Q h
@@ -99,12 +99,12 @@ theorem zoneHi_lt_of_lap_lt (x : ℝ) (hx : 0 < x) {Q Q' : ℤ} (h : Q < Q') :
   have : (Q : ℝ) < Q' := by exact_mod_cast h
   linarith
 
-/-- **The word list is finite.** Under a cap `C` and spread bound `S`, every lap at which a runner can set lies in a
+/-- **The word list is finite.** Under a cap `C` and ratio bound `S`, every lap at which a runner can set lies in a
 fixed finite interval, uniformly over arrangements. -/
 theorem lap_mem_Icc (m x : ℝ) (hm : 0 < m) (hx : 0 < x) (Q : ℤ) {C S : ℝ} (hC : 0 ≤ C)
     (hQ : 0 ≤ Q) (hS : x / m ≤ S) (h : cascadeR n m (zoneHi n x Q) < C) :
     Q ∈ Finset.Icc (0 : ℤ) ⌈C * S⌉ := by
-  have h1 := lap_lt_of_spread m x hm hx Q hC hS h
+  have h1 := lap_lt_of_ratio_le m x hm hx Q hC hS h
   have hn0 : (0 : ℝ) < n := n_pos
   have hn1 : (1 : ℝ) ≤ n := by have := two_le_n (n := n); linarith
   have hQ0 : (0 : ℝ) ≤ Q := by exact_mod_cast hQ
