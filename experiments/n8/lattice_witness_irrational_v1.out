@@ -1,0 +1,4 @@
+n=5: 777 runners with irrational readings; gap (lonely − first live): {0: 775, 1: 1, 2: 1}; no lonely instant within the search bound up to lattice 10: 0
+   largest gap 2 at readings ['1+0√2', '40+-1/1000√2', '17+-3/20√2', '3+79/1000√2'] (first live 1, lonely at 3)
+n=8: 377 runners with irrational readings; gap (lonely − first live): {0: 377}; no lonely instant within the search bound up to lattice 10: 0
+   largest gap 0 at readings ['1+0√2', '9+-107/500√2', '25+87/1000√2', '13+0√2', '20+-47/500√2', '21+-53/500√2', '6+0√2'] (first live 1, lonely at 1)

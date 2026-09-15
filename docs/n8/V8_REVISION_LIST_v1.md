@@ -86,3 +86,18 @@ planted `sorry` in the new file. Cascade digest now `ddf633f48d6fce9dfba1942f0d5
 **Still for the owner.** It reaches the same threshold, `n > 2k`, as the excised `AdvanceBudget` (zone-width count). This proof
 contains no zone width or interval length, only lap factors of laps passed. Whether that settles the nativeness question is your
 call; nothing else is built on it yet. It does not reach the diagonal `k = n − 1` at any order (`TARGETS_v3` §3.2).
+
+---
+
+## 4. Framework boundary audit  `[OPEN — owner decisions A2, A3, A6]`
+
+Added 2026-09-15 at the owner's request: `FRAMEWORK_BOUNDARY_AUDIT_v1.md`. Nine self-imposed blocks were found (B1–B9). The main
+ones:
+- the target was recast as a bound on `R` (a "when");
+- the order-5 cap `R < 4` is the first window again;
+- "the lattice route needs rational readings" came from residue-class machinery. Checked exactly on `a + b√2` readings and
+  withdrawn (`experiments/n8/lattice_witness_irrational_v1.out`);
+- "dead lattices are integer scales" was read off an `ℕ` statement.
+
+The boundary is the scale rule for relocations (owner's items 16, 20, 24, v7 list). Proposed first native computation (A4): at
+one scale, the relocations that block all of `r = 1, 3, 5, 7`, by slot residues.
