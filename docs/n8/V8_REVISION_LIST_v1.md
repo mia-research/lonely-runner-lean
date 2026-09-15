@@ -101,3 +101,11 @@ ones:
 
 The boundary is the scale rule for relocations (owner's items 16, 20, 24, v7 list). Proposed first native computation (A4): at
 one scale, the relocations that block all of `r = 1, 3, 5, 7`, by slot residues.
+
+**Addendum to item 4 (2026-09-15).** Owner corrections: the scale is directed by the speeds, not picked; that rule is in the Lean
+cascade work; the ideal does not depend on the scale. `FRAMEWORK_BOUNDARY_AUDIT_v3.md` withdraws v2's §3 boundary and A6. A4 done:
+`A4_SPINE_BLOCKING_v1.md`.
+- The in-the-way pattern at spines 1, 3, 5, 7 depends only on slot mod 8 and deviation (exact table; 95,776 checks from speeds).
+- Spine 1 needs a near-sharer, which at depth `δ` is in the way at exactly the spines `r < 1/δ`.
+- Other slots are in the way at two spines at most (`{3, 7}` or `{5, 7}`).
+- A cascade step is one dilation of every reading, and the setter lands on the ideal.
