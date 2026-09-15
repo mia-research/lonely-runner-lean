@@ -1,0 +1,16 @@
+integer [1,26]: 199248 first settings, 10096 repeat settings
+   depth at a first setting: min 0.00870, median 0.2000, max 0.3846 (range is (0, 0.4))
+   depth at a repeat setting: min 0.00870, 1st pct 0.01176, median 0.2000, max 0.3818
+   growth dR since the previous setting: min 0.16410, median 0.7143
+   x-reading increase s_x*dR (must exceed n-2 = 3): min 3.4500, median 5.0000
+   cost check dR > (n-2)/s_x: 10096 of 10096
+   intervening moves: {1: 3870, 2: 5980, 3: 246}
+   ledger sum(returns/s_x): median 0.0000, max 0.5257 (must stay below 1)
+resonant: 3005 first settings, 193 repeat settings
+   depth at a first setting: min 0.00009, median 0.1426, max 0.3999 (range is (0, 0.4))
+   depth at a repeat setting: min 0.00004, 1st pct 0.00038, median 0.1149, max 0.3923
+   growth dR since the previous setting: min 0.00283, median 0.0076
+   x-reading increase s_x*dR (must exceed n-2 = 3): min 3.2862, median 5.0065
+   cost check dR > (n-2)/s_x: 193 of 193
+   intervening moves: {1: 88, 2: 86, 3: 19}
+   ledger sum(returns/s_x): median 0.0000, max 0.0511 (must stay below 1)

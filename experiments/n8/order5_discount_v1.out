@@ -1,0 +1,4 @@
+integer [1,26]: 57978 walks with 2+ moves; worst-case charge / actual growth: min 1.027, median 1.529, p99 10.000, max 20.000  (needs to beat 8/3 = 2.667)
+   return cost in units of (n-2)/s: min 1.150, median 1.667, max 8.333
+resonant: 862 walks with 2+ moves; worst-case charge / actual growth: min 1.000, median 1.462, p99 27.411, max 2139.384  (needs to beat 8/3 = 2.667)
+   return cost in units of (n-2)/s: min 1.095, median 1.669, max 3.529

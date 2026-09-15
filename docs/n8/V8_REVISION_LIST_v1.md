@@ -323,3 +323,19 @@ read from stdin and a `multiprocessing` script with no `__main__` guard; kills a
 300 s — the exact signature of that hang), whose output passes 50 MB, or which runs past 6 h; and reports why it stopped with
 elapsed time, CPU time and output size. Tested: a stalled job killed in 30 s, a normal job run to completion, an unguarded
 multiprocessing script refused. Use it for every long computation.
+
+**Addendum to item 11 (2026-09-16) — `ORDER5_GROWTH_v2.md`: two refutations and a ledger.**
+- **The other session's shift accounting is this document's identity** (`g = 2 − n·δ`); one constant, settled. Its gap constant is
+  `n − 2` — **3 at order 5, not 6**; an order-5 census run at 6 would discard live cases.
+- **Proved and verified ledger**: a return of `x` costs `ΔR > (n−2)/s_x`, so `Σ_x (returns)/s_x < 1` under the cap (10,096 of
+  10,096 integer, 193 of 193 resonant; ledger max 0.5257).
+- **The depth floor is refuted**: depths at repeat settings reach 0.00004; no argument may assume one.
+- **Uniform-constant pricing is refuted**: closure needs the return-cost constant above `2k/(n−2) = 8/3`; the measured minima are
+  1.150 (integer) and 1.095 (resonant), and the worst-case-charge ratio falls to 1.000. So the two-return lemma cannot close
+  order 5 as a uniform pricing statement. Cost and gain are both proportional to `1/s`, so the reading cancels and only `k`
+  survives — the same cancellation behind both earlier walls.
+- **What remains**: the finite certificate under first exceedance, and the flank coupling. Both need the joint structure, not a
+  per-move charge.
+- Also assessed from the other session: the "machine cycle with an identical gap sequence each period" holds only for
+  commensurate ratios; "irrational cases are perturbations of rational ones" is a stability-radius argument the firewall bans and
+  margins at ideals are zero; a strictly decreasing potential gives no finiteness without a floor, and §9 shows there is none.
