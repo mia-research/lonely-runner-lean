@@ -139,3 +139,19 @@ Added 2026-09-15.
 
 Owner, 2026-09-15: *"our 'predictor' (we might need to rename it as a determinator)"*. The cascade does not predict; it
 determines the instant from the speeds. Candidate for v8_3 wording and future documents; script and file names left as they are.
+
+---
+
+## 7. T4 / W3 started — flanks  `[IN PROGRESS — T4_FLANKS_v1.md]`
+
+Added 2026-09-15.
+- **"Gap ≤ c" is not bounded:** adversarial order 5 gap 6; exhaustive order 8 gap 4; lattice numbering was the wrong coordinate.
+- **Flanks:** Existence ⟺ some flank (difference) has a lonely opening (Prop 6.1). At a flank's openings, integer-ratio runners
+  never move; each fractional ratio blocks `k` exactly when `k·f mod 1` is in an open arc of length `2/n` (0 disagreements in
+  143,520 checks).
+- **Proved:**
+  - one fractional runner never shadows a live flank (any real `f`);
+  - at order 8, two rational fractional runners shadow only if both fractional parts are `1/2`;
+  - a rational–irrational pair never shadows.
+- **Exact enumeration:** shadowing triples at order 8 (denominators ≤ 8) are `(2,4,4)`, `(3,3,3)`, `(3,6,6)`, `(5,5,5)`.
+- **Target:** not every flank can be shadowed at once. Owner call: §3(b) uses a residue count in a cyclic group.
