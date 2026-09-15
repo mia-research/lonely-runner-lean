@@ -171,3 +171,13 @@ by pigeonhole (simultaneous approximation) and a residue count: a live flank who
 `Σ (2/n + 1/c_j) < 1` (with `1/c = 0` for irrational) has a lonely opening. At order 8, one, two or three irrational ratios never
 shadow a flank. Exact checks in `ℚ(√2)`: every random pair and triple has a clear opening; near the half-integer shadowing pair
 the first clear opening comes at about `0.44/ε`, with no bound on how soon. Owner call on the pigeonhole and count still stands.
+
+**Addendum 3 to item 7 (2026-09-15) — near-extremes and Lean** (`FLANK_NEAR_EXTREMES_v1.md`).
+- **Shadowed flanks where free flanks run out** are dead, small (2–3 runners) or wide (4–6 runners). The wide ones share one small
+  denominator.
+- **All 16 one-free-flank runners at order 8** in `[1, 20]` are the difference set `{2, …, 7, 16}`. The free flank is the fastest,
+  decided at its first opening by the mirror of Theorem 4.8 (other differences in `[d_max/9, 7·d_max/9]`).
+- **"A sharer's own flank is free" refuted:** 24,656 failures at order 8.
+- **Lean:** `Cascade/Flanks.lean` holds `lonely_iff_exists_flank`, `integer_ratio_clear_iff`, `fractional_ratio_circDist`,
+  `exists_clear_step` and `lonely_opening_of_one_fractional`. Gate 161 of 161.
+- **Not yet in Lean:** the flank sum criterion and the half-integer pair result (counting; owner ruling pending).
