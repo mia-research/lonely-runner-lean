@@ -142,7 +142,7 @@ determines the instant from the speeds. Candidate for v8_3 wording and future do
 
 ---
 
-## 7. T4 / W3 started — flanks  `[IN PROGRESS — T4_FLANKS_v2.md]`
+## 7. T4 / W3 started — flanks  `[IN PROGRESS — T4_FLANKS_v3.md]`
 
 Added 2026-09-15.
 - **"Gap ≤ c" is not bounded:** adversarial order 5 gap 6; exhaustive order 8 gap 4; lattice numbering was the wrong coordinate.
@@ -165,3 +165,9 @@ No runner has every flank shadowed. At order 8 only 16 of 1,007,760 runner-insta
 contain slot-sharer multiples (e.g. `(1, 3, 4, 5, 6, 7, 8, 17)`, subject 1: the difference 16 is 8 × 2, so flank 2 is dead).
 The target "not every flank can be shadowed" has wide margin in this range. The next step is the structure of the near-extreme
 cases.
+
+**Addendum 2 to item 7 (2026-09-15) — the two-irrational case done** (`T4_FLANKS_v3.md` §3(d)). The **flank sum criterion** is proved
+by pigeonhole (simultaneous approximation) and a residue count: a live flank whose non-integer ratios satisfy
+`Σ (2/n + 1/c_j) < 1` (with `1/c = 0` for irrational) has a lonely opening. At order 8, one, two or three irrational ratios never
+shadow a flank. Exact checks in `ℚ(√2)`: every random pair and triple has a clear opening; near the half-integer shadowing pair
+the first clear opening comes at about `0.44/ε`, with no bound on how soon. Owner call on the pigeonhole and count still stands.
