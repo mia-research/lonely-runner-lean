@@ -353,3 +353,41 @@ Added 2026-09-16. With uniform pricing refuted (item 11), the finite certificate
   runner. The optimum is the lap-1 ladder `(3/2)³`, now derived rather than assumed.
 - **Scope**: finite exact verification over words at spread ≤ 6; complete for that range, silent beyond it. `S = 8` running.
 - **Next**: push the spread bound; then either cover unbounded spread or reduce it to the bounded case; then Lean.
+
+---
+
+## 13. Order 5: the spread sweep, margin realisability, and the certificate's finiteness bounds in Lean  `[ORDER5_CERTIFICATE_v2.md]`
+
+Added 2026-09-16. Supersedes item 12's scope and **corrects two of its claims**.
+
+- **Spread ≤ 18, not 6** `[PROVED — exact finite certificate]`. `sup R = 27/8` for `S ≤ 9`; `31/9 = 3.4444` for `S = 10…18`.
+  The enumeration is exact rational arithmetic throughout; `order5_certificate_v3.py` solves each word's LP by exact simplex
+  instead of vertex enumeration and **reproduces v2's answers exactly** at `S = 5, 6` (same value, same word, same margin),
+  which is what licenses the faster solver. Cost doubles about every two spread steps (52 s at `S=14`, 198 s at `S=18`).
+- **`[CORRECTS item 12]` The lap-1 ladder is extremal only up to spread 9.** From `S = 10` the optimum is the six-move word
+  `(1,2), (2,1), (1,3), (3,1), (2,2), (1,6)`, in which runner 1 sets four times with two intervening returns. Item 12 recorded
+  the old lap-1 `(3/2)³` assumption as *discharged* — that discharge stands only for `S ≤ 9`. Returns are not outside the
+  extremal regime; from spread 10 they are it.
+- **`[CORRECTS item 12]` "Artefact" was loose.** The closed-inequality LP is a valid relaxation whose bound is merely too weak
+  (its feasible set is a superset, so 4.125 is a true upper bound over that superset), not a false computation. What is not
+  realisable is the *word*, which carries `max τ = 0` exactly. A closed relaxation elsewhere is not thereby an error to fix.
+- **`sup R(S)` is flat, and a worry was raised then refuted.** The first two values (`27/8 → 31/9`, numerator `+4`, denominator
+  `+1`) extrapolate to the family `(27+4j)/(8+j) → 4`, which would deny any uniform margin. The sweep to `S = 18` kills it:
+  nine consecutive spread bounds all return `31/9`, the same extremal word throughout, the same margin `132/4165` from `S = 11`,
+  while the lap bound grows 7 → 14 and the word-length bound 21 → 42. Growing the search space stopped producing better words.
+- **Margin realisability, proved** `[PROVED]`. The margin threshold and the R-supremum are two readings of **one** convex
+  polytope `P(w)` in `(u, τ)`, not two sequential steps: since `τ` is a coordinate, every `τ = 0` feasible point is a limit of
+  `τ > 0` feasible points, so the supremum over strictly realisable configurations is exactly `(5Q+1)/m*(w)`. This closes the
+  `ε → 0` escape — a word realisable only with vanishing margin cannot smuggle in a larger `R`.
+- **Lean: the three finiteness bounds are formalised** `[PROVED — LonelyRunner/LRC/Cascade/Certificate.lean]`. `cascadeR_zoneHi`
+  (a setting of `x` at lap `Q` lands at `R = (n·Q+1)/u`), `nearest_setting_ge` / `nearest_never_sets`, `lap_lt_of_cascadeR_lt`
+  and `lap_lt_of_spread`, `laps_strictly_increase`, `lap_mem_Icc`. Cascade gate: **170 theorems, axiom-clean, no `sorry`**.
+  **Owed**: the word LP and the value `31/9` are not yet formalised.
+- **Cross-shift: one null was forced, and is recorded as a defect of the query.** The first cross-shift script answered "the
+  chains stay in one cluster" over 7200 walks — but its generator drew the large speeds as a base times a multiplier in `[1,3]`,
+  so no straddling window was available to observe. Re-run with separated scales, cross-cluster handovers do occur (1255 and
+  1713 of 4800), and the chains containing them are short (≤ 6 moves); every chain of ≥ 10 moves came from the clustered
+  control and showed none. Length and cross-cluster traversal are anti-correlated — consistent with the reduction, weak
+  evidence for it, since random sampling tops out at `R = 1.30` against the certificate's `3.44`.
+- **Next**: `S = 22, 26` running; the reduction of unbounded to bounded spread is still open; the pricing lemma stays warm
+  (item 11) — and the correction above is the reason, since returns sit *inside* the extremal word.

@@ -1,0 +1,30 @@
+order 5 cross-shift v2: cluster cut C = 8; gap under the cap 4 - 27/8 = 0.6250
+
+[v1] 4800 walks with global spread > 8   (median spread 775, max 2405)
+   moves: median 1, p99 5, max 73   |   walks with >= 10 moves: 9
+   R: median 1.0025, max 1.2970
+   R carried by ratio <= 8: max 0.0000    by ratio > 8: max 0.2970
+   window-5 setter spread: median 1.000, max 3.134
+   CROSS-CLUSTER HANDOVERS (consecutive setters more than 8 apart): 0 walks of 4800, max count 0
+   among the >= 10-move chains: max window-5 spread 2.018, handovers in 0 of 9, max R 1.2929
+
+[two] 4800 walks with global spread > 8   (median spread 19388, max 143635)
+   moves: median 1, p99 3, max 6   |   walks with >= 10 moves: 0
+   R: median 1.0002, max 1.1004
+   R carried by ratio <= 8: max 0.0000    by ratio > 8: max 0.1004
+   window-5 setter spread: median 1.000, max 181.078
+   CROSS-CLUSTER HANDOVERS (consecutive setters more than 8 apart): 1255 walks of 4800, max count 2
+
+[three] 4800 walks with global spread > 8   (median spread 369903, max 2809716)
+   moves: median 1, p99 3, max 4   |   walks with >= 10 moves: 0
+   R: median 1.0001, max 1.0829
+   R carried by ratio <= 8: max 0.0000    by ratio > 8: max 0.0829
+   window-5 setter spread: median 1.000, max 3648.902
+   CROSS-CLUSTER HANDOVERS (consecutive setters more than 8 apart): 1713 walks of 4800, max count 3
+
+[ladder] 4800 walks with global spread > 8   (median spread 39304, max 216000)
+   moves: median 0, p99 3, max 3   |   walks with >= 10 moves: 0
+   R: median 1.0000, max 1.1110
+   R carried by ratio <= 8: max 0.0000    by ratio > 8: max 0.1110
+   window-5 setter spread: median 1.000, max 3600.000
+   CROSS-CLUSTER HANDOVERS (consecutive setters more than 8 apart): 1050 walks of 4800, max count 2

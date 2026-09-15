@@ -1,0 +1,4 @@
+order 5 certificate (strict, simplex): spread bound S = 17, lap bound L = 13, words to 39 moves
+   words tested: 50112   realisable (max tau > 0): 1629
+   largest sup R over realisable words: 31/9 = 3.4444   word [(1, 2), (2, 1), (1, 3), (3, 1), (2, 2), (1, 6)]   margin tau = 132/4165
+   target sup R < 4  ->  PROVED for spread <= 17

@@ -1,0 +1,15 @@
+order 5 resonant chains: 7200 completed walks, cluster cut C = 8
+   of which global spread > 8: 7200
+   global spread                      min 21.3990   median 770.7805   p99 2266.3510   max 2403.1460
+   moves                              min 0.0000   median 1.0000   p99 5.0000   max 244.0000
+   R (final)                          min 1.0000   median 1.0024   p99 1.0697   max 1.4142
+   R_1 (first opening)                min 1.0000   median 1.0000   p99 1.0000   max 1.0000
+   R carried by ratio <= 8  (IN)      min 0.0000   median 0.0000   p99 0.0000   max 0.0000
+   R carried by ratio >  8  (OUT)     min 0.0000   median 0.0024   p99 0.0697   max 0.4142
+   window-5 setter spread             min 1.0000   median 1.0000   p99 3.0083   max 3.1249
+   window-10 setter spread            min 1.0000   median 1.0000   p99 3.0083   max 3.1249
+   spread of the active set           min 1.0000   median 1.0000   p99 3.0083   max 3.1249
+   distinct runners that ever set: Counter({1: 3157, 2: 1712, 0: 1472, 3: 859})
+   worst OUT: 0.4142 at global spread 375.5, 63 moves, R = 1.4142
+   gap available under the cap: 4 - 27/8 = 0.6250   ->  OUT stays below it: True
+   chains whose window-5 setter spread exceeds 8: 0 of 7200

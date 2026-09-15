@@ -9,7 +9,8 @@
 #   * kills the job if its CPU time stops advancing (STALL seconds, default 300) — the exact signature of that hang;
 #   * kills it if the output file passes MAXOUT bytes (default 50 MB);
 #   * kills it at WALL seconds (default 21600 = 6 h);
-#   * prints why it stopped, with elapsed time, CPU time and output size.
+#   * prints why it stopped, with elapsed time and output size. (The stall detector reads process-group CPU
+#     internally — a worker pool leaves the parent idle — but that reading is not carried out to the summary line.)
 #
 # Env: STALL, MAXOUT, WALL, OUT (output path; default <script>.out next to the script).
 set -u
@@ -28,11 +29,14 @@ python3 -u "$SCRIPT" "$@" > "$OUT" 2>&1 &
 PID=$!
 print "run_job: pid $PID, script $SCRIPT, output $OUT (stall ${STALL}s, max out ${MAXOUT}B, wall ${WALL}s)"
 START=$(date +%s); LASTCPU=""; LASTMOVE=$START; REASON=""
+CPUF=$(mktemp)                                  # the loop's last CPU reading, for the summary line
 while kill -0 $PID 2>/dev/null; do
   sleep 5
   NOW=$(date +%s)
-  CPU=$(ps -o time= -p $PID 2>/dev/null | tr -d ' ')
+  PG=$(ps -o pgid= -p $PID 2>/dev/null | tr -d ' ')
+  CPU=$(ps -Ao pgid=,time= 2>/dev/null | awk -v g="$PG" '$1==g {print $2}' | tr '\n' '+' )   # whole process group: a worker pool leaves the parent idle
   SIZE=$(wc -c < "$OUT" | tr -d ' ')
+  print -r -- "$CPU" > "$CPUF"
   [[ "$CPU" != "$LASTCPU" ]] && { LASTCPU="$CPU"; LASTMOVE=$NOW }
   if (( NOW - LASTMOVE > STALL )); then REASON="stalled: no CPU progress for ${STALL}s"; break; fi
   if (( SIZE > MAXOUT )); then REASON="output passed ${MAXOUT} bytes"; break; fi
@@ -46,5 +50,6 @@ else
   print "run_job: finished, exit $RC"
 fi
 END=$(date +%s)
-print "run_job: elapsed $((END-START))s, cpu ${LASTCPU:-0}, output $(wc -c < "$OUT" | tr -d ' ') bytes"
+rm -f "$CPUF"
+print "run_job: elapsed $((END-START))s, output $(wc -c < "$OUT" | tr -d ' ') bytes"
 tail -3 "$OUT"
