@@ -109,3 +109,17 @@ cascade work; the ideal does not depend on the scale. `FRAMEWORK_BOUNDARY_AUDIT_
 - Spine 1 needs a near-sharer, which at depth `δ` is in the way at exactly the spines `r < 1/δ`.
 - Other slots are in the way at two spines at most (`{3, 7}` or `{5, 7}`).
 - A cascade step is one dilation of every reading, and the setter lands on the ideal.
+
+---
+
+## 5. What still stops a proof  `[OPEN — see WHAT_STOPS_PROOF_v1.md]`
+
+Added 2026-09-15.
+- **Retire as mistranslations:** M1 (lap-bookkeeping limit read as an obstacle), M2 (T1 `R < 4`, T3 `R ≤ 2n − 1`), M3 (T4
+  periodicity), M4 (unstated scale rule).
+- **Genuine obstacles, one mechanism, resonance:**
+  - **G1:** one scale cannot decide. Three runners with no near-sharer hold every odd spine 3–31 in the way; their readings are
+    near multiples of `8/6`, near-sharers at lattice 6 (`experiments/n8/spine_runs_min_runners_v1.out`).
+  - **G2:** a step drifts every reading by `g·d_y/d_x`, with fixed ratios.
+  - **G3:** zero one-sided margin at the ideal's instants.
+- **Ways in:** W1 resonance dichotomy (exact computation first), W2 two-scale transition, W3 commensurate limit through the ideal.
