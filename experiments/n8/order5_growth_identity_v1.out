@@ -1,0 +1,6 @@
+integer [1,26]: {'identity holds': 125744}
+   R_1 (after the first move): median 1.2000, max 1.4400
+   terms (2 - n*delta)/s: 83600 of them; median 0.2000, p99 0.6857, max 0.8824, negative: 0
+resonant: {'identity holds': 1866}
+   R_1 (after the first move): median 1.0022, max 1.0766
+   terms (2 - n*delta)/s: 1332 of them; median 0.0023, p99 0.0424, max 0.0847, negative: 0

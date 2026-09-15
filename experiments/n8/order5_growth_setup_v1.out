@@ -1,0 +1,6 @@
+integer [1,26]: {'identity R = n E/s holds': 125744, 'cap holds, nearest never in the way': 125744, 'no move': 203156}
+   lap-only product / true R: median 1.250, p99 1.875, max 2.156
+   R at each step: median 1.286, p99 2.444, max 3.1429
+resonant: {'identity R = n E/s holds': 1866, 'cap holds, nearest never in the way': 1866, 'no move': 534}
+   lap-only product / true R: median 1.002, p99 1.046, max 1.105
+   R at each step: median 1.004, p99 1.076, max 1.1764

@@ -297,3 +297,23 @@ Added 2026-09-15 (owner: run the order-5 three-ratio flank census with the crite
   workers (no importable main module), and the failing workers wrote ~1 GB each of error text. Both were killed, the output
   files deleted at the owner's direction, and the runs repeated from `.py` files. **Any script using `multiprocessing` is
   written to a file and run from the file.**
+
+---
+
+## 11. Order 5: the growth identity and the wall  `[IN PROGRESS — ORDER5_GROWTH_v1.md]`
+
+Added 2026-09-16 (owner: derive the growth bound from the pricing plus the first-exceedance measure, test both ends, then
+formalise).
+- **Why the refuted measure had to fail** `[PROVED]`: laps are monotone in time and nesting runs forward in time, so a nested
+  return's laps are read later than its parent's. Verified 138/138 and 11/11, including 14 cases where the inner runner is slower.
+  No increasing quantity can found the recursion.
+- **The growth identity** `[PROVED; verified on 127,610 walks, 0 failures]`: `R = R₁ + Σ (2 − n·δ_j)/s_j`. Each move adds the zone
+  width it still had to cross, divided by its reading. `R₁ ≤ 3/2` always.
+- **The order-5 cap restated** `[PROVED]`: `R < 4` ⟺ the nearest runner is never in the way after the bound.
+- **First exceedance gives finiteness** `[PROVED; 0 violations in 199,248 + 3,005]`: before the first step reaching `C`, runner `x`
+  sets at most `max(⌊(C·s−1)/5⌋, 1)` times, and "bound minus current lap" decreases.
+- **The wall** `[PROVED]`: charging each zone crossing its full width bounds the total only when `2k/n < 1` — the `n > 2k`
+  threshold again, now from the additive side. Order 5 needs the depths.
+- **What the depths must supply** `[VERIFIED]`: crude bound 6.4 against a true maximum of 1.73; per-runner budgets give 5.03,
+  still above 4. Terms decay with setting index (medians 0.232, 0.125, 0.096).
+- **Next:** the depth at repeat settings as a function of the previous stretch, at both ends; then the lemma; then Lean.

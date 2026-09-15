@@ -1,0 +1,4 @@
+integer [1,24]: {'nested': 138, 'inner at least as fast': 124, 'inner lap >= parent lap': 138, 'stretch shorter than two inner openings': 138, 'inner slower': 14}
+   d_inner/d_parent: min 0.700, median 1.667, max 2.200; below 1 in 14 of 138
+resonant: {'nested': 11, 'inner at least as fast': 11, 'inner lap >= parent lap': 11, 'stretch shorter than two inner openings': 11}
+   d_inner/d_parent: min 1.740, median 2.005, max 2.018; below 1 in 0 of 11

@@ -1,0 +1,8 @@
+integer [1,26]: 82448 runner-contributions, 125744 walks
+   B_x: median 0.2032, p99 0.6857, max 0.8824
+   worst B_x 0.8824 from 1 settings
+   bound 3/2 + 3*max(B_x) = 4.1471; observed max R = 3.1429
+resonant: 1254 runner-contributions, 1866 walks
+   B_x: median 0.0024, p99 0.0425, max 0.0847
+   worst B_x 0.0847 from 1 settings
+   bound 3/2 + 3*max(B_x) = 1.7540; observed max R = 1.1764
