@@ -217,3 +217,20 @@ cascade as search, imports from other Lonely Runner work), then redraft as v9.
 - every audit finding, except two not applied with reasons given in v9 Appendix B.2.
 
 Item-by-item map: v9 Appendix B.2. v8.2 unchanged. Compile-diff on v9 owed before promotion.
+
+**Addendum to item 8 (2026-09-15) — compile-diff of v9, corrections in `MANUSCRIPT_v9_1.md`.** The loss audit found:
+0 audit findings unaddressed (54 isolated: 52 applied, 2 recorded; 17 own: all applied); 22 numbered results present at the same
+grade; 4 retraction records carried, none re-claimed; 114 Lean names all exist; 26 figures new to v9 all sourced; the Cascade
+digest, theorem count, tag and commit recomputed on disk.
+
+Fixed in v9.1: seven small losses (the `v8_axiom_check_v1.out` result, the `W/(8g)` slot-multiple bound, the citations of item 21
+and `WHY_IT_PREDICTS_v1` §2, "not sampled", "the local restrictions tighten as `n` grows", the `Cascade/Iteration.lean`
+reference, Appendix C's "the first three rows above withdrew those objections"); the sharer refutation record and the census
+range; the open triple list; five differences at `n = 6 … 10` stated open; the own audit credited in Appendix B.2; the "not
+applied" record corrected (the `v_8 ≤ 40` scope is stated in the sweep description, not as a limitation); a B.2 row for the
+§4.5(a) widening to every spine instant; **T3 recorded as not carried into the manuscript**, with the reason. Six contradictions
+the redraft introduced were removed: `ρ`, `q`, `m` collisions (now `z`, `κ`, `w`, `b`, `ρ_j`), and §8.1's generalisation now
+excludes §6.6's order-8 spine paragraph.
+
+Owner decisions still open: promotion of a version as the manuscript of record; the counting/pigeonhole ruling (Props 6.10–6.11);
+the nativeness of `n > 2k` (§8.2); A2 (re-aim T1a).
