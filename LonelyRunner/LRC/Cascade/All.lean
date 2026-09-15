@@ -6,5 +6,6 @@ import LonelyRunner.LRC.Cascade.Flanks
 import LonelyRunner.LRC.Cascade.VersionB
 import LonelyRunner.LRC.Cascade.Reading
 import LonelyRunner.LRC.Cascade.Irrational
+import LonelyRunner.LRC.Cascade.Certificate
 
 /-! # The cascade artefact: every module. -/
