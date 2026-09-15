@@ -1,0 +1,11 @@
+(A) order 8: 118944 runners, 41323 with at least one move, 86276 scales reached by a move
+    integer scales among them: 1046; scales with 8·D > spread: 0
+(B) n=5: 5970 chains; runners setting twice at a non-increasing lap: 0
+(D) n=5: final R an integer in 1 of 3740 chains with a move
+(C) n=5: R <= prod F(Q_j) in 3740 of 3740; prod F <= prod_x g(L_x) in 3740 of 3740
+    largest R rows (R, prod F, prod g, moves): [(3.087, 5.042, 5.042, 5), (3.174, 5.042, 5.042, 5), (3.19, 5.042, 5.042, 5)]
+    longest chains (R, prod F, prod g, moves): [(3.087, 5.042, 5.042, 5), (3.174, 5.042, 5.042, 5), (3.19, 5.042, 5.042, 5)]
+(B) n=6: 1487 chains; runners setting twice at a non-increasing lap: 0
+(D) n=6: final R an integer in 0 of 817 chains with a move
+(B) n=8: 1485 chains; runners setting twice at a non-increasing lap: 0
+(D) n=8: final R an integer in 0 of 829 chains with a move

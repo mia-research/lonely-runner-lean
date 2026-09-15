@@ -1,6 +1,6 @@
 # MANUSCRIPT_v8 — revision list
 
-Started 2026-09-15 for `MANUSCRIPT_v8_2.md` (the current draft). The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
+Started 2026-09-15 for `MANUSCRIPT_v8_2.md`. **v8.2 is frozen (owner, 2026-09-15)**: no edits to it; accepted items go into `MANUSCRIPT_v8_3.md`. The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
 53 ("applied in v8") and kept as the record. **Append only; nothing is removed when it is done** — mark it and say where it
 went. Edits to the manuscript go in a new version (`MANUSCRIPT_v8_3.md`, …).
 
@@ -32,3 +32,17 @@ Not affected: the abstract's opening statement of the problem, the reference tit
 - `k = 5` differences at `n = 6 … 15` (§8.2) `[OPEN]`.
 - Promotion of `MANUSCRIPT_v8_2` (or its successor) as the manuscript of record — owner decision. The four fixes made in v8_2
   have not had their own compile-diff; run one on whichever version is proposed for promotion.
+
+---
+
+## 2. Targets after review  `[OPEN — see TARGETS_v1.md]`
+
+Three ideas and four ranked openings, thought through in `TARGETS_v1.md` with exact checks (`experiments/n8/targets_premises_v1.py`,
+`targets_long_chains_v1.py`). Outcome:
+- **T1** order 5, `R < 4`, via a two-return lemma that prices returns by depth and skipped laps — first action a recon.
+- **T2** Existence for `k` differences at every `n > 2k`, derived from step factors and per-runner laps — **owner ruling needed**:
+  it reaches the same threshold as the excised `AdvanceBudget`.
+- **T3** state `R ≤ 2n − 1` as an empirical conjecture.
+- Dropped, with reasons: the dead-lattice escape valve; the residue rule as a route to Existence.
+- Reduction recorded: Existence for a runner iff its `R_N` is bounded (`exists_fixed_of_capped`); lap bookkeeping alone cannot reach
+  the diagonal at any order.
