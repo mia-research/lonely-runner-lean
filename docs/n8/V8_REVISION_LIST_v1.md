@@ -317,3 +317,9 @@ formalise).
 - **What the depths must supply** `[VERIFIED]`: crude bound 6.4 against a true maximum of 1.73; per-runner budgets give 5.03,
   still above 4. Terms decay with setting index (medians 0.232, 0.125, 0.096).
 - **Next:** the depth at repeat settings as a function of the previous stretch, at both ends; then the lemma; then Lean.
+
+**Addendum (2026-09-16) — run guard.** `scripts/run_job.sh` (owner asked for it after the ten-hour hang). It refuses a script
+read from stdin and a `multiprocessing` script with no `__main__` guard; kills a job whose CPU time stops advancing (default
+300 s — the exact signature of that hang), whose output passes 50 MB, or which runs past 6 h; and reports why it stopped with
+elapsed time, CPU time and output size. Tested: a stalled job killed in 30 s, a normal job run to completion, an unguarded
+multiprocessing script refused. Use it for every long computation.
