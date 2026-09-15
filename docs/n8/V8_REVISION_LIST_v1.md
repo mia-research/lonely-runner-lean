@@ -190,3 +190,30 @@ rule is. Exhaustive over every 8-subset of `[1, 20]` (374,556 sharer pairs, none
 The only shadowed cases without a symmetric-point runner are 14, all at `s = 16`. It is necessary, not sufficient. Proof and a test
 beyond the range are to do. Owner's AP picture recorded in §1: the flank pair sets the gap, isolation at that gap is absolute, and
 speed ordering is bookkeeping.
+
+---
+
+## 8. Consistency audit of v8.2 and redraft as v9  `[APPLIED — MANUSCRIPT_v9.md; nothing removed from this list]`
+
+Added 2026-09-15 at the owner's request: audit v8.2 for internal consistency, uniform treatment, and legacy views (single window,
+cascade as search, imports from other Lonely Runner work), then redraft as v9.
+
+**Two passes.**
+- Own pass: `V8_2_OWN_AUDIT_v1.md`, 17 findings.
+- Isolated pass: `V8_2_ISOLATED_AUDIT_v1.md`, 54 findings, run in a fresh context with only v8.2 and the framework's rules.
+
+**Checked independently before applying** (`experiments/n8/v9_checks_v1.py`, `.out`):
+- the §6.8 irrational runner's cascade instant is `(497/8)/(7 − √2/100) ≈ 8.8930` after 2 moves, not `75√2/4`;
+- the adversarial climb is 28 moves, not 29;
+- every `Construction8` theorem is axiom-clean (`v9_construction8_all_axioms_v1.lean`, `.out`: 85 of 85 within the three
+  axioms);
+- `first_stretch_overlap` and `consecutive_break` exist;
+- the §8.1 per-form ranges match the Lean hypotheses.
+
+**v9** applies:
+- items 1 (Appendix C conjecture link), 3 (`n > 2k` row), 6 (determinator wording) and 7 (flanks, §6.9);
+- the A4 spine pattern and the dilation step from item 4;
+- G3 from item 5;
+- every audit finding, except two not applied with reasons given in v9 Appendix B.2.
+
+Item-by-item map: v9 Appendix B.2. v8.2 unchanged. Compile-diff on v9 owed before promotion.
