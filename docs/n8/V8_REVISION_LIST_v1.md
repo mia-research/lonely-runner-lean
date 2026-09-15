@@ -91,7 +91,7 @@ call; nothing else is built on it yet. It does not reach the diagonal `k = n −
 
 ## 4. Framework boundary audit  `[OPEN — owner decisions A2, A3, A6]`
 
-Added 2026-09-15 at the owner's request: `FRAMEWORK_BOUNDARY_AUDIT_v1.md`. Nine self-imposed blocks were found (B1–B9). The main
+Added 2026-09-15 at the owner's request: `FRAMEWORK_BOUNDARY_AUDIT_v2.md` (v1 plus the basis of the reading stated). Nine self-imposed blocks were found (B1–B9). The main
 ones:
 - the target was recast as a bound on `R` (a "when");
 - the order-5 cap `R < 4` is the first window again;
