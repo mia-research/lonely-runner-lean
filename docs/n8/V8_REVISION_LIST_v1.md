@@ -172,7 +172,7 @@ by pigeonhole (simultaneous approximation) and a residue count: a live flank who
 shadow a flank. Exact checks in `ℚ(√2)`: every random pair and triple has a clear opening; near the half-integer shadowing pair
 the first clear opening comes at about `0.44/ε`, with no bound on how soon. Owner call on the pigeonhole and count still stands.
 
-**Addendum 3 to item 7 (2026-09-15) — near-extremes and Lean** (`FLANK_NEAR_EXTREMES_v1.md`).
+**Addendum 3 to item 7 (2026-09-15) — near-extremes and Lean** (`FLANK_NEAR_EXTREMES_v2.md`).
 - **Shadowed flanks where free flanks run out** are dead, small (2–3 runners) or wide (4–6 runners). The wide ones share one small
   denominator.
 - **All 16 one-free-flank runners at order 8** in `[1, 20]` are the difference set `{2, …, 7, 16}`. The free flank is the fastest,
