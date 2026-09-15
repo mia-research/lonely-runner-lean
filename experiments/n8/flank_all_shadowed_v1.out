@@ -1,0 +1,4 @@
+n=5, all subsets of [1,30], every runner: number of unshadowed flanks -> runners: {1: 4086, 2: 56908, 3: 199004, 4: 452532}
+   runners with exactly one unshadowed flank: 4086; examples: [(1, 3, (1, 2, 3, 4, 7), 1), (1, 3, (1, 2, 3, 4, 8), 2), (1, 3, (1, 2, 3, 4, 12), 1), (1, 3, (1, 2, 3, 4, 13), 2), (1, 4, (1, 2, 3, 4, 16), 0), (1, 3, (1, 2, 3, 4, 17), 1)]
+n=8, all subsets of [1,20], every runner: number of unshadowed flanks -> runners: {1: 16, 2: 4538, 3: 41118, 4: 175806, 5: 354736, 6: 314912, 7: 116634}
+   runners with exactly one unshadowed flank: 16; examples: [(1, 7, (1, 2, 4, 8, 9, 10, 11, 20), 2), (1, 7, (1, 3, 4, 5, 6, 7, 8, 17), 0), (1, 7, (1, 3, 6, 7, 8, 9, 10, 19), 1), (1, 7, (1, 4, 6, 8, 9, 10, 11, 20), 1), (1, 7, (1, 10, 11, 12, 13, 14, 15, 17), 7), (1, 7, (1, 10, 11, 12, 13, 14, 17, 19), 6)]

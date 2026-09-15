@@ -155,3 +155,13 @@ Added 2026-09-15.
   - a rational–irrational pair never shadows.
 - **Exact enumeration:** shadowing triples at order 8 (denominators ≤ 8) are `(2,4,4)`, `(3,3,3)`, `(3,6,6)`, `(5,5,5)`.
 - **Target:** not every flank can be shadowed at once. Owner call: §3(b) uses a residue count in a cyclic group.
+
+**Addendum to item 7 (2026-09-15) — T4_FLANKS action 1 done** (`experiments/n8/flank_all_shadowed_v1.out`, exact). Unshadowed
+flanks per runner, over every subset and every runner:
+- **Order 5,** `[1, 30]`: `{1: 4,086, 2: 56,908, 3: 199,004, 4: 452,532}`.
+- **Order 8,** `[1, 20]`: `{1: 16, 2: 4,538, 3: 41,118, 4: 175,806, 5: 354,736, 6: 314,912, 7: 116,634}`.
+
+No runner has every flank shadowed. At order 8 only 16 of 1,007,760 runner-instances are down to a single free flank, and those
+contain slot-sharer multiples (e.g. `(1, 3, 4, 5, 6, 7, 8, 17)`, subject 1: the difference 16 is 8 × 2, so flank 2 is dead).
+The target "not every flank can be shadowed" has wide margin in this range. The next step is the structure of the near-extreme
+cases.
