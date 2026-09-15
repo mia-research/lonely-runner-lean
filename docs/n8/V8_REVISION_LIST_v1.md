@@ -46,3 +46,9 @@ Three ideas and four ranked openings, thought through in `TARGETS_v1.md` with ex
 - Dropped, with reasons: the dead-lattice escape valve; the residue rule as a route to Existence.
 - Reduction recorded: Existence for a runner iff its `R_N` is bounded (`exists_fixed_of_capped`); lap bookkeeping alone cannot reach
   the diagonal at any order.
+
+**Addendum to item 2 (2026-09-15).** `TARGETS_v2.md` supersedes v1: it corrects two overstatements found by the memory audit
+(per-runner lap distinctness is not a standalone Lean theorem; only "bounded `R` ⇒ stops" is in Lean) and adds own proposals —
+**T0** per-runner lap distinctness in Lean; **T1a** order 5 `R < 4` for spread `S ≤ s₀` by first exceedance plus an exact
+strict-feasibility linear program per word (owner ruling on fit needed); **T1b** the large-spread regime. Supporting data:
+`experiments/n8/targets_length_vs_reading_v1.out` (longest order-5 chain grows with the largest reading while `R` falls).

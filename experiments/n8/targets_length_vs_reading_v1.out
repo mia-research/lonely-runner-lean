@@ -1,0 +1,7 @@
+s_max in [   1,   3]: longest chain     0 moves (R n/a) at readings None
+s_max in [   3,   6]: longest chain     5 moves (R 2.8919) at readings [1.0, 3.0907, 3.8037, 4.642]
+s_max in [   6,  10]: longest chain     7 moves (R 2.1192) at readings [1.0, 7.7638, 8.7736, 9.9096]
+s_max in [  10,  20]: longest chain     8 moves (R 1.9348) at readings [1.0, 12.1687, 13.438, 14.477]
+s_max in [  20,  50]: longest chain    10 moves (R 1.4845) at readings [1.0, 31.462, 32.8741, 34.3553]
+s_max in [  50, 200]: longest chain    30 moves (R 1.3199) at readings [1.0, 150.7622, 152.282, 153.8018]
+s_max in [ 200,1000]: longest chain   191 moves (R 1.5096) at readings [1.0, 468.976, 470.9734, 939.9494]
