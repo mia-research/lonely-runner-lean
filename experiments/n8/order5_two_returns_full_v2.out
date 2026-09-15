@@ -1,0 +1,12 @@
+V=24: 42 two-return runners; 4 difference sets: {(1, 7, 9, 20): 14, (1, 8, 10, 22): 6, (1, 9, 11, 20): 14, (2, 8, 12, 21): 8}
+   returner is the largest difference: 42 of 42
+   returner lap triples: {(4, 5, 7): 14, (5, 6, 7): 6, (4, 5, 6): 14, (2, 3, 4): 8}
+   intervening laps: {1: 8, 2: 62, 3: 34}
+   R: min 31/20 (1.5500), max 2 (2.0000)
+   ratio of the first intervening setter to the returner: [('9/20', 28), ('8/21', 8), ('5/11', 6)]
+V=30: 186 two-return runners; 7 difference sets: {(1, 9, 11, 20): 42, (1, 8, 10, 22): 30, (1, 7, 9, 20): 58, (1, 13, 15, 28): 6, (2, 8, 12, 21): 36, (3, 11, 16, 28): 4, (3, 10, 15, 26): 10}
+   returner is the largest difference: 180 of 186
+   returner lap triples: {(4, 5, 6): 42, (5, 6, 7): 30, (4, 5, 7): 58, (3, 4, 5): 6, (2, 3, 4): 50}
+   intervening laps: {1: 60, 2: 268, 3: 136, 4: 6, 6: 6, 7: 6, 8: 6}
+   R: min 31/20 (1.5500), max 63/26 (2.4231)
+   ratio of the first intervening setter to the returner: [('9/20', 100), ('8/21', 36), ('5/11', 30), ('15/26', 10), ('28/15', 6), ('11/28', 4)]

@@ -1,0 +1,6 @@
+resonant order 5: 7200 walks; moves: median 1, p99 5, max 244
+   R: median 1.0024, p99 1.0697, max 1.4142
+   most settings by one runner: {0: 1472, 1: 5333, 2: 360, 3: 8, 4: 2, 5: 1, 6: 2, 7: 2, 8: 2, 10: 1, 11: 3, 12: 1, 13: 1, 14: 3, 15: 1, 19: 1, 28: 1, 32: 1, 35: 2, 44: 1, 50: 1, 122: 1}
+   pricing (return_growth) holds in 1509 of 1509 returns
+   nested returns: {'nested': 463, 'inner NOT below parent': 461, 'inner below parent': 2}
+   examples where inner laps are not below the parent lap: [(93, 185, 186, ['1', '115299/250', '231973/500', '460167/500']), (93, 186, 187, ['1', '115299/250', '231973/500', '460167/500']), (94, 187, 188, ['1', '115299/250', '231973/500', '460167/500'])]

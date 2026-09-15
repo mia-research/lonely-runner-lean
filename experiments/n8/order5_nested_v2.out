@@ -1,0 +1,2 @@
+order 5, every 5-subset of [1,24], every runner: {'stretches': 6456, 'all inner laps below parent': 2820, 'nested': 138, 'nested NOT below parent': 138}
+examples where the nested laps are not below the parent lap (speeds, subject, Q, inner laps): [((1, 2, 9, 11, 19), 0, 2, 4, 5), ((1, 2, 9, 11, 23), 0, 2, 5, 6), ((1, 2, 9, 15, 21), 0, 4, 3, 4), ((1, 2, 10, 12, 16), 1, 2, 3, 4), ((1, 2, 10, 12, 20), 1, 2, 4, 5)]

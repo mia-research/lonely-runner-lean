@@ -1,0 +1,441 @@
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']
+(1) the six two-return difference sets
+
+  differences [1, 7, 9, 20]; readings at d_min ['1', '7', '9', '20']; R = 1.8000, 6 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+    setter d=7 lap 2: t=13/50, scale D=10/13, reading s_x=91/10 (N=2), g=5N+1−s_x=19/10, depth δ=9/10, ratios to setter ['1/7', '9/7', '20/7']
+    setter d=9 lap 3: t=11/35, scale D=7/11, reading s_x=99/7 (N=3), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/9', '7/9', '20/9']
+    setter d=20 lap 7: t=16/45, scale D=9/16, reading s_x=320/9 (N=7), g=5N+1−s_x=4/9, depth δ=5/9, ratios to setter ['1/20', '7/20', '9/20']
+
+  differences [1, 9, 11, 20]; readings at d_min ['1', '9', '11', '20']; R = 1.5500, 5 moves
+    setter d=20 lap 4: t=1/5, scale D=1, reading s_x=20 (N=4), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=9 lap 2: t=21/100, scale D=20/21, reading s_x=189/20 (N=2), g=5N+1−s_x=31/20, depth δ=11/20, ratios to setter ['1/9', '11/9', '20/9']
+    setter d=20 lap 5: t=11/45, scale D=9/11, reading s_x=220/9 (N=5), g=5N+1−s_x=14/9, depth δ=5/9, ratios to setter ['1/20', '9/20', '11/20']
+    setter d=11 lap 3: t=13/50, scale D=10/13, reading s_x=143/10 (N=3), g=5N+1−s_x=17/10, depth δ=7/10, ratios to setter ['1/11', '9/11', '20/11']
+    setter d=20 lap 6: t=16/55, scale D=11/16, reading s_x=320/11 (N=6), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/20', '9/20', '11/20']
+
+  differences [2, 8, 12, 21]; readings at d_min ['1', '4', '6', '21/2']; R = 2.0000, 5 moves
+    setter d=21 lap 2: t=1/10, scale D=2, reading s_x=21/2 (N=2), g=5N+1−s_x=1/2, depth δ=1/2, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=8 lap 1: t=11/105, scale D=21/11, reading s_x=88/21 (N=1), g=5N+1−s_x=38/21, depth δ=17/21, ratios to setter ['1/4', '3/2', '21/8']
+    setter d=21 lap 3: t=3/20, scale D=4/3, reading s_x=63/4 (N=3), g=5N+1−s_x=1/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+    setter d=12 lap 2: t=16/105, scale D=21/16, reading s_x=64/7 (N=2), g=5N+1−s_x=13/7, depth δ=6/7, ratios to setter ['1/6', '2/3', '7/4']
+    setter d=21 lap 4: t=11/60, scale D=12/11, reading s_x=77/4 (N=4), g=5N+1−s_x=7/4, depth δ=3/4, ratios to setter ['2/21', '8/21', '4/7']
+
+  differences [1, 8, 10, 22]; readings at d_min ['1', '8', '10', '22']; R = 1.6364, 6 moves
+    setter d=10 lap 2: t=1/5, scale D=1, reading s_x=10 (N=2), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 5: t=11/50, scale D=10/11, reading s_x=121/5 (N=5), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=8 lap 2: t=13/55, scale D=11/13, reading s_x=104/11 (N=2), g=5N+1−s_x=17/11, depth δ=6/11, ratios to setter ['1/8', '5/4', '11/4']
+    setter d=22 lap 6: t=11/40, scale D=8/11, reading s_x=121/4 (N=6), g=5N+1−s_x=3/4, depth δ=1/4, ratios to setter ['1/22', '4/11', '5/11']
+    setter d=10 lap 3: t=31/110, scale D=22/31, reading s_x=155/11 (N=3), g=5N+1−s_x=21/11, depth δ=10/11, ratios to setter ['1/10', '4/5', '11/5']
+    setter d=22 lap 7: t=8/25, scale D=5/8, reading s_x=176/5 (N=7), g=5N+1−s_x=4/5, depth δ=1/5, ratios to setter ['1/22', '4/11', '5/11']
+
+  differences [3, 10, 15, 26]; readings at d_min ['1', '10/3', '5', '26/3']; R = 2.4231, 6 moves
+    setter d=15 lap 1: t=1/15, scale D=3, reading s_x=5 (N=1), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 2: t=2/25, scale D=5/2, reading s_x=52/5 (N=2), g=5N+1−s_x=3/5, depth δ=2/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=10 lap 1: t=11/130, scale D=26/11, reading s_x=55/13 (N=1), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['3/10', '3/2', '13/5']
+    setter d=26 lap 3: t=3/25, scale D=5/3, reading s_x=78/5 (N=3), g=5N+1−s_x=2/5, depth δ=3/5, ratios to setter ['3/26', '5/13', '15/26']
+    setter d=15 lap 2: t=8/65, scale D=13/8, reading s_x=120/13 (N=2), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/5', '2/3', '26/15']
+    setter d=26 lap 4: t=11/75, scale D=15/11, reading s_x=286/15 (N=4), g=5N+1−s_x=29/15, depth δ=14/15, ratios to setter ['3/26', '5/13', '15/26']
+
+  differences [1, 13, 15, 28]; readings at d_min ['1', '13', '15', '28']; R = 1.7333, 8 moves
+    setter d=15 lap 3: t=1/5, scale D=1, reading s_x=15 (N=3), g=5N+1−s_x=1, depth δ=0, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 6: t=16/75, scale D=15/16, reading s_x=448/15 (N=6), g=5N+1−s_x=17/15, depth δ=2/15, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 3: t=31/140, scale D=28/31, reading s_x=403/28 (N=3), g=5N+1−s_x=45/28, depth δ=17/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=28 lap 7: t=16/65, scale D=13/16, reading s_x=448/13 (N=7), g=5N+1−s_x=20/13, depth δ=7/13, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=15 lap 4: t=9/35, scale D=7/9, reading s_x=135/7 (N=4), g=5N+1−s_x=12/7, depth δ=5/7, ratios to setter ['1/15', '13/15', '28/15']
+    setter d=28 lap 8: t=7/25, scale D=5/7, reading s_x=196/5 (N=8), g=5N+1−s_x=9/5, depth δ=4/5, ratios to setter ['1/28', '13/28', '15/28']
+    setter d=13 lap 4: t=41/140, scale D=28/41, reading s_x=533/28 (N=4), g=5N+1−s_x=55/28, depth δ=27/28, ratios to setter ['1/13', '15/13', '28/13']
+    setter d=15 lap 5: t=21/65, scale D=13/21, reading s_x=315/13 (N=5), g=5N+1−s_x=23/13, depth δ=10/13, ratios to setter ['1/15', '13/15', '28/15']

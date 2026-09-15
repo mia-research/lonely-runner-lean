@@ -281,3 +281,19 @@ Added 2026-09-15 (owner: run the order-5 three-ratio flank census with the crite
 - **A settings cap is not available** (resonant chains: 150 settings by one runner), so the lemma must price returns.
 - Next: the same transcripts in the resonant regime; then whether pricing plus distinct laps bounds the growth between a
   runner's first and last setting.
+
+**Addendum to item 10 (2026-09-16) — corrections and the refuted measure** (`ORDER5_TWO_RETURN_v2.md`).
+- **v1's §2 was wrong**: it read truncated print output (`most_common(6)`, `rows[:4]`) as totals. Full re-run: `V = 24` has 42
+  two-return runners in **4** difference sets; `V = 30` has 186 in **7**; the returner is the largest difference in 180 of 186,
+  not all; lap triples include `(2,3,4)` and `(3,4,5)`; intervening laps include 1 and go to 8; `R` reaches `63/26 ≈ 2.4231`.
+  The thesis survives; the figures did not. Found by the memory audit, verified here independently.
+- **The candidate well-founded measure is refuted at both ends**: nested returns sit at laps below the parent's in 0 of 138
+  (integer, `[1,24]`) and 2 of 463 (resonant). What v1 saw was the weaker "all intervening laps below the parent" (2,820 of
+  6,456 stretches). The recursion must rest on the lap deficit below a first exceedance instead.
+- **Resonant end**: 7,200 walks, moves to 244, one runner setting 122 times, `R` max 1.4142, pricing 1,509 of 1,509.
+- **The shift constant is settled**: `g = 5N + 1 − s_x`, which is `1 + δ` below the multiple and `1 − e` above, never `δ`;
+  `MANUSCRIPT_v9_1` §6.2 is correct as written.
+- **Process note.** Two runs hung for ten hours: a `multiprocessing.Pool` script fed to Python through a heredoc cannot spawn
+  workers (no importable main module), and the failing workers wrote ~1 GB each of error text. Both were killed, the output
+  files deleted at the owner's direction, and the runs repeated from `.py` files. **Any script using `multiprocessing` is
+  written to a file and run from the file.**
