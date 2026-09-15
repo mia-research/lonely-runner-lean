@@ -181,3 +181,12 @@ the first clear opening comes at about `0.44/ε`, with no bound on how soon. Own
 - **Lean:** `Cascade/Flanks.lean` holds `lonely_iff_exists_flank`, `integer_ratio_clear_iff`, `fractional_ratio_circDist`,
   `exists_clear_step` and `lonely_opening_of_one_fractional`. Gate 161 of 161.
 - **Not yet in Lean:** the flank sum criterion and the half-integer pair result (counting; owner ruling pending).
+
+**Addendum 4 to item 7 (2026-09-15) — the sharer failures read** (`SHARER_FLANK_RULE_v1.md`). Owner: the failures should say what the
+rule is. Exhaustive over every 8-subset of `[1, 20]` (382,738 sharer pairs, none breaking it): a sharer's own flank is shadowed only if
+- some runner sits at a symmetric point of the sharer's AP (ratio denominator 2, the antipode, or 4, the quarter points), or
+- five or more runners sit at its fine slots (denominators 8, 16).
+
+The only shadowed cases without a symmetric-point runner are 14, all at `s = 16`. It is necessary, not sufficient. Proof and a test
+beyond the range are to do. Owner's AP picture recorded in §1: the flank pair sets the gap, isolation at that gap is absolute, and
+speed ordering is bookkeeping.

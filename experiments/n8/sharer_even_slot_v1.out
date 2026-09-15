@@ -1,0 +1,10 @@
+m=1: shadowed with no even-slot runner 8; shadowed with one 23630; free with none 27624; free with one 247582
+    denominator-2 runner False, denominator-4 runner False: shadowed 8, free 27624
+    denominator-2 runner False, denominator-4 runner True : shadowed 4340, free 110508
+    denominator-2 runner True , denominator-4 runner False: shadowed 4740, free 26672
+    denominator-2 runner True , denominator-4 runner True : shadowed 14550, free 110402
+m=2: shadowed with no even-slot runner 6; shadowed with one 1176; free with none 23732; free with one 50798
+    denominator-2 runner False, denominator-4 runner False: shadowed 6, free 23732
+    denominator-2 runner False, denominator-4 runner True : shadowed 398, free 28826
+    denominator-2 runner True , denominator-4 runner False: shadowed 714, free 11584
+    denominator-2 runner True , denominator-4 runner True : shadowed 64, free 10388
