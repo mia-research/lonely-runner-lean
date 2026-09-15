@@ -35,6 +35,7 @@ MODS="LonelyRunner.LRC.Cascade.Iteration
 LonelyRunner.LRC.Cascade.SmallOrders
 LonelyRunner.LRC.Cascade.FourDifferences
 LonelyRunner.LRC.Cascade.ManyDifferences
+LonelyRunner.LRC.Cascade.Flanks
 LonelyRunner.LRC.Cascade.VersionB
 LonelyRunner.LRC.Cascade.Reading
 LonelyRunner.LRC.Cascade.Irrational
