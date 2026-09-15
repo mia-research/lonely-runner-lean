@@ -1,6 +1,6 @@
 # MANUSCRIPT_v8 — revision list
 
-Started 2026-09-15 for `MANUSCRIPT_v8_2.md`. **v8.2 is frozen (owner, 2026-09-15)**: no edits to it; accepted items go into `MANUSCRIPT_v8_3.md`. The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
+Started 2026-09-15 for `MANUSCRIPT_v8_2.md`. **v8.2 was frozen (owner, 2026-09-15); `MANUSCRIPT_v9_1.md` is now frozen too (owner, 2026-09-15), after its compile-diff.** Accepted items go into `MANUSCRIPT_v9_2.md`. Earlier note: **v8.2 is frozen**: no edits to it; accepted items go into `MANUSCRIPT_v8_3.md`. The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
 53 ("applied in v8") and kept as the record. **Append only; nothing is removed when it is done** — mark it and say where it
 went. Edits to the manuscript go in a new version (`MANUSCRIPT_v8_3.md`, …).
 
@@ -234,3 +234,23 @@ excludes §6.6's order-8 spine paragraph.
 
 Owner decisions still open: promotion of a version as the manuscript of record; the counting/pigeonhole ruling (Props 6.10–6.11);
 the nativeness of `n > 2k` (§8.2); A2 (re-aim T1a).
+
+---
+
+## 9. Ruling: imported tools versus native targets  `[SETTLED — owner, 2026-09-15]`
+
+Owner: *"The flank session did import two standard tools — Dirichlet's pigeonhole and residue counting — and we ruled them
+admissible because they appear only on the resonant side, per your dichotomy. That's the boundary of 'not chasing someone
+else's': tools are fine, targets and statements are what must stay native. The check to apply whenever a new target appears is
+the one you just applied: does the statement exist without the other literature, in your vocabulary alone?"*
+
+- **Admissible:** Dirichlet's pigeonhole and residue counting in Propositions 6.10–6.11 (`MANUSCRIPT_v9_1` §6.9), because they
+  appear only on the resonant side of the dichotomy. The pending ruling of item 7 is closed.
+- **The standing test for any new target:** can the statement be made in the framework's own vocabulary, without the other
+  literature? The two-return lemma passes it.
+- **Read across to item 3 (`n > 2k`, `ManyDifferences`):** its statement — with `k` differences and `2k < n`, the cascade from
+  the bound reaches a fixed point — is in the framework's vocabulary; the potential and the Bernoulli bound are tools inside the
+  proof. On the principle above that makes it admissible. Flagged here because the owner stated the principle for the flank
+  session; say if the reading is wrong.
+- **Not changed:** what must stay native is the target and the statement. Window bounds, search framings and coverage shares
+  remain excluded however convenient the tool.
