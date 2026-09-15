@@ -339,3 +339,17 @@ multiprocessing script refused. Use it for every long computation.
 - Also assessed from the other session: the "machine cycle with an identical gap sequence each period" holds only for
   commensurate ratios; "irrational cases are perturbations of rational ones" is a stability-radius argument the firewall bans and
   margins at ideals are zero; a strictly decreasing potential gives no finiteness without a floor, and §9 shows there is none.
+
+---
+
+## 12. Order 5: Existence proved for bounded spread  `[PROVED — ORDER5_CERTIFICATE_v1.md]`
+
+Added 2026-09-16. With uniform pricing refuted (item 11), the finite certificate closes the bounded-spread case.
+- **First exceedance makes it finite**: before `R` reaches 4 the nearest never sets, every lap is `< (4S+1)/5`, laps increase per
+  runner, so the words are finite and each word's conditions are linear in the readings.
+- **The boundary discipline is load-bearing**: closed inequalities return the known 4.125 artefact on an all-boundary word;
+  enforcing a positive margin discards it.
+- **Result**: at order 5 with spread `S ≤ 6`, `sup R = 27/8 = 3.375 < 4`, so the cascade stops and Existence holds for every such
+  runner. The optimum is the lap-1 ladder `(3/2)³`, now derived rather than assumed.
+- **Scope**: finite exact verification over words at spread ≤ 6; complete for that range, silent beyond it. `S = 8` running.
+- **Next**: push the spread bound; then either cover unbounded spread or reduce it to the bounded case; then Lean.
