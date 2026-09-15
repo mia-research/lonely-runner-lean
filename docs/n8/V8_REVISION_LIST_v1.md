@@ -254,3 +254,21 @@ the one you just applied: does the statement exist without the other literature,
   session; say if the reading is wrong.
 - **Not changed:** what must stay native is the target and the statement. Window bounds, search framings and coverage shares
   remain excluded however convenient the tool.
+
+---
+
+## 10. Order 5: census, walks, and the two-return lemma  `[IN PROGRESS — ORDER5_TWO_RETURN_v1.md]`
+
+Added 2026-09-15 (owner: run the order-5 three-ratio flank census with the criterion sums, then the walk transcripts).
+- **Census** (2,776,410 flanks, every 5-subset of `[1,30]`): the flank criterion is sound — 0 shadowed flanks with `Σ < 1` and no
+  dead ratio. Every shadowed flank is dead or flagged.
+- **But the correspondence is one-directional:** 886,730 flagged flanks are clear at the first opening and 9,826 unflagged ones
+  are late, so "near-blocked = flagged" is not an equivalence. Shadowed signatures are small and uniform; late ones are large
+  primes.
+- **Walks** (212,520 runners, `[1,24]`): 5,890 runners with one return, **42** with two. Pricing (`return_growth`) holds in all
+  6,456 returns. Intervening setters are commonly at ratio denominator 5 to the returner.
+- **Two-return cases** are six difference sets up to dilation; the returner is the largest difference, intervening laps 2 and 3,
+  ratios near one half, `R` between 1.55 and 1.80.
+- **A settings cap is not available** (resonant chains: 150 settings by one runner), so the lemma must price returns.
+- Next: the same transcripts in the resonant regime; then whether pricing plus distinct laps bounds the growth between a
+  runner's first and last setting.

@@ -1,0 +1,12 @@
+order 5, every 5-subset of [1,30], every runner, every flank: 2776410 flanks
+(criterion flags Sigma>=1, dead flank, state) -> count:
+   (True, False, 'late'): 1436326
+   (True, False, 'early'): 886730
+   (False, False, 'early'): 192160
+   (False, True, 'shadowed'): 120784
+   (True, False, 'shadowed'): 98148
+   (True, True, 'shadowed'): 32436
+   (False, False, 'late'): 9826
+criterion violations (shadowed while Sigma < 1, not dead): 0 []
+denominator signatures of shadowed flanks: [((1, 1, 1), 87314), ((1, 2, 2), 23810), ((5, 5, 5), 22074), ((1, 1, 2), 18668), ((3, 3, 3), 15726), ((2, 2, 2), 10782), ((1, 3, 3), 10260), ((7, 7, 7), 8582), ((1, 1, 3), 6600), ((2, 4, 4), 6150)]
+denominator signatures of late flanks (k* >= 2): [((13, 13, 13), 84346), ((11, 11, 11), 81084), ((7, 7, 7), 77018), ((17, 17, 17), 61446), ((19, 19, 19), 58336), ((5, 5, 5), 46758), ((23, 23, 23), 38088), ((9, 9, 9), 36204), ((3, 9, 9), 35450), ((5, 10, 10), 26026)]
