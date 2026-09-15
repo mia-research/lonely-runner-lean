@@ -58,3 +58,31 @@ the dead-lattice idea was answered only in its cascade-scale form, while its lat
 live and half proved (**T4**); and the residue rule was set aside by the wrong criterion (whether the cascade ends on a
 lattice instant), where Existence needs only some lonely instant. Data: `experiments/n8/lattice_witness_nowindow_v1.out`.
 Owner instruction the same day: try T2 (the `n > 2k` derivation) in Lean.
+
+---
+
+## 3. T2 proved in Lean: `k` differences at every `n > 2k`  `[PROVED-LEAN — for v8_3]`
+
+Added 2026-09-15 (owner: "try 1"). `LonelyRunner/LRC/Cascade/ManyDifferences.lean`:
+- `stops_when_twice_card_lt` — with `2·card ds < n`, some step of the cascade from `1/(n·m)` is fixed;
+- `many_diffs` — the Version B form (lonely and first).
+
+**The proof is not the paper derivation of `TARGETS_v3` §3.1.** It uses a potential: `Ψ(t)`, the product over runners of the
+lap factors `(r + 1/n)/(r − 1/n)` of the laps each has passed by `t`.
+- A move set at lap `Q` raises `Ψ` by at least that lap's factor (`potential_step`), and multiplies `t` by less
+  (`move_growth`). So `t_N·Ψ(t_0) ≤ t_0·Ψ(t_N)` (`time_le_potential`), with no bookkeeping of distinct laps.
+- A Bernoulli bound gives `Ψ(t)^n ≤ C^k·(∏_x (x + 1/t_0))²·t^{2k}` in integer powers (`lapFactor_pow_le`, `lapProd_pow_le`,
+  `potential_pow_le`). So `t^{n−2k} ≤ B`, and `exists_fixed_of_capped` finishes.
+- No zone widths or interval lengths enter.
+
+Gate `scripts/cascade/gate.sh`: build 3,351 jobs, 0 `sorry`, **152 of 152 theorems axiom-clean**. The gate's axiom check had a
+hardcoded file list and first reported 135, missing the new module. It now reads every module and was tested to fail on a
+planted `sorry` in the new file. Cascade digest now `ddf633f48d6fce9dfba1942f0d5f8ea38b64f93f3735e4108cff90d8bdd9ca8c`.
+
+**Freeze bookkeeping.** v8.2 §7/§10 quote 135 theorems and digest `9657ea89…`; that state is commit `21a7748` in the
+`LonelyRunner` repository, tagged `manuscript-v8.2-cascade`. v8.2 stays as it is. For v8_3: §7 counts and digest, the §8.2 table
+(new row: `k` differences, every `n > 2k`; improves on `max(9, 2^(k−1))` for every `k ≥ 5`), §10.
+
+**Still for the owner.** It reaches the same threshold, `n > 2k`, as the excised `AdvanceBudget` (zone-width count). This proof
+contains no zone width or interval length, only lap factors of laps passed. Whether that settles the nativeness question is your
+call; nothing else is built on it yet. It does not reach the diagonal `k = n − 1` at any order (`TARGETS_v3` §3.2).
