@@ -439,3 +439,37 @@ finding C1 removed and manuscript v9.1 separated again, reintroduced by our own 
 **Owed to `MANUSCRIPT_v9_2.md`** (v9.1 is frozen, so these are recorded, not applied): the Lean map says Cascade = **161
 theorems**; the tree is now **170** with `Certificate.lean` added, so §7, the Appendix table (`| theorems | 85 | 161 |`) and the
 module list in the artefact section are stale. §9's counting-ruling staleness, already on the list, is unchanged.
+
+---
+
+## 15. The eighth-family: verified, corrected, and formalised  `[PROVED — Lean, axiom-clean]`
+
+Added 2026-09-16. Relayed by the owner from a parallel session's `EIGHTH_FAMILY_v1.md`
+(`~/ZCodeProject/lrc-n8/notes/`). Re-derived here from its own instruments; write-up `EIGHTH_FAMILY_v2.md`,
+check `experiments/n8/eighth_family_check_v1.py`, Lean `LRC/Cascade/EighthFamily.lean`.
+
+- **Confirmed**: the six fixed differences of `Δ(x) = {1,3,4,5,7,x,8}` leave exactly `k ≡ 1, 3 (mod 7)`
+  uncovered at the flank of difference 7. Every integer `x ∈ {1,…,7}` is served by `k ∈ {1,3}`; 4000 random
+  non-integer rationals all found a clear opening (largest index `j = 9`).
+- **`[CORRECTS v1]`** v1's proof paragraph says `‖9x/56‖ ≥ 1/8` for every integer `x`, so "`k = 1` is free
+  outright". False at `x = 6`: `54/56` gives `1/28 < 1/8`, blocked. The theorem survives — `x = 6` is clear
+  at `k = 3`, as v1's own *Anchors* paragraph says — so v1 contradicts itself within a page.
+- **The irrational case needs no approximation theory.** v1 closes it with *"the orbit is dense"*, and the
+  working session was preparing to import Kronecker or a Dirichlet argument while uneasy about the firewall.
+  The unease was right and the import is unnecessary: `Flanks.exists_clear_step` (already in the artefact,
+  native, axiom-clean) gives `∃k, 1/n ≤ circDist (k·f + c)` for `0 < f < 1`. Along `k = 1 + 7j` the sixth
+  difference's phase is an integer shift of `j·Int.fract x + 9x/56`, so the lemma applies directly and
+  **covers rational and irrational `x` in one case**. v1's rational/irrational split and its grid argument
+  are both unnecessary.
+- **Formalised**: `eighth_family_lonely` (normalised) and `eighth_family_lonely_scaled` (any `E > 0`), with
+  `clear_of_band`, `fixed_clear_one`, `fixed_clear_three`, `int_clear_one`, `free_clear_of_not_int`.
+  Cascade gate **177 theorems, axiom-clean, no `sorry`** (was 170). The relayed draft carried a `sorry` and
+  a broken tactic block; nothing of it is reused.
+- **Boundary discipline is load-bearing again**: the flank's own runner sits at exactly `1/8` at every one of
+  these openings, clear only because the zones are open (§1.2) — the same discipline that decided the
+  order-5 certificate's `27/8` against the closed-inequality `33/8`.
+- **Scope, stated plainly.** This closes the family that shadows the largest flank; **Existence at order 8
+  remains open and the gate still reports it unstated.** Closing it outright needs uniqueness of the eighth
+  pattern at all denominators (no other minimal largest-flank cover) — unproved; the `A = 0` census at
+  `c > 8` and the bounded-overhang lemma are the two routes. Until then the disjunction "free largest flank
+  or eighth-family" holds only within the census range, denominators ≤ 8.
