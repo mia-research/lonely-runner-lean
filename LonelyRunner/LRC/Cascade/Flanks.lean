@@ -168,6 +168,19 @@ theorem exists_clear_step (hn4 : 4 ≤ n) {f c : ℝ} (hf0 : 0 < f) (hf1 : f < 1
           exact_mod_cast this
         linarith
 
+/-- **Inside the band is clear.**  If `y` lies in `[1/n, 1 − 1/n]` then `y` plus any integer is at least
+`1/n` from every integer.  The clearance facts of a concrete family all reduce to this. -/
+theorem circDist_ge_of_band {y : ℝ} (c : ℤ) (h1 : (n : ℝ)⁻¹ ≤ y) (h2 : y ≤ 1 - (n : ℝ)⁻¹) :
+    (n : ℝ)⁻¹ ≤ circDist (y + (c : ℝ)) := by
+  have hnh : (n : ℝ)⁻¹ ≤ 2⁻¹ := inv_le_half
+  have hh0 : (0 : ℝ) < (n : ℝ)⁻¹ := inv_pos.mpr n_pos
+  have hy0 : (0 : ℝ) ≤ y := le_trans hh0.le h1
+  have hy1 : y < 1 := by linarith
+  rw [circDist_add_int]
+  unfold circDist
+  rw [Int.fract_eq_self.mpr ⟨hy0, hy1⟩, le_min_iff]
+  exact ⟨h1, by linarith⟩
+
 /-- **Blocking a whole residue class of openings forces integrality.**  If the runner at difference `d` is in the
 way at every opening `k ≡ r (mod P)` of the flank at `e`, then `P·(d/e)` is an integer.
 
