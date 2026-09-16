@@ -10,5 +10,6 @@ import LonelyRunner.LRC.Cascade.Certificate
 import LonelyRunner.LRC.Cascade.EighthFamily
 import LonelyRunner.LRC.Cascade.NearAP
 import LonelyRunner.LRC.Cascade.CensusFamilies
+import LonelyRunner.LRC.Cascade.CensusBatch
 
 /-! # The cascade artefact: every module. -/
