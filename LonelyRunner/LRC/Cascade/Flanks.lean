@@ -250,6 +250,47 @@ theorem lonely_opening_of_free_off_lattice (hn4 : 4 ≤ n) {ds : Finset ℝ} {e 
   · rw [circDist_periodic_of_lattice he0 (hlat d hd hdx) r j]
     exact hclear d hd hdx
 
+/-- **An unkillable flank is free for every value of the free parameter.**
+
+The family form.  `U` is the flank's uncovered residue set: every runner but `x` is on the lattice
+(`P·(d/e) ∈ ℤ`, so by `circDist_periodic_of_lattice` its verdict depends only on the residue) and is
+clear at every residue in `U`.  The free runner `x` is unconstrained.  If, whenever `x` lands on the
+lattice, it fails to shadow the whole class of some residue in `U`, then the flank has a lonely opening
+— for **every** real `x`, not merely the ones checked.
+
+The off-lattice values of `x` need no hypothesis at all: `class_killer_int` rules them out, so a family
+is settled by a finite check over the lattice.  This is the machine's `K_e = ∅` verdict, as a theorem. -/
+theorem lonely_of_flank_unkillable (hn4 : 4 ≤ n) {ds : Finset ℝ} {e x : ℝ} (he0 : 0 < e) (P : ℕ)
+    (U : Finset ℕ) (hUne : U.Nonempty)
+    (hlat : ∀ d ∈ ds, d ≠ x → Int.fract ((P : ℝ) * (d / e)) = 0)
+    (hU : ∀ r ∈ U, ∀ d ∈ ds, d ≠ x → (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e r))
+    (hkill : Int.fract ((P : ℝ) * (x / e)) = 0 →
+      ∃ r ∈ U, ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (x * flankOpening n e (r + j * P))) :
+    ∃ k : ℕ, Lonely n ds (flankOpening n e k) := by
+  by_cases hoff : Int.fract ((P : ℝ) * (x / e)) = 0
+  · -- `x` is on the lattice: it fails on some uncovered residue, and the rest are clear there
+    obtain ⟨r, hrU, j, hj⟩ := hkill hoff
+    refine ⟨r + j * P, fun d hd => ?_⟩
+    by_cases hdx : d = x
+    · subst hdx; exact hj
+    · rw [circDist_periodic_of_lattice he0 (hlat d hd hdx) r j]
+      exact hU r hrU d hd hdx
+  · -- `x` is off the lattice: `class_killer_int` rules it out with no further hypothesis
+    obtain ⟨r, hrU⟩ := hUne
+    exact lonely_opening_of_free_off_lattice hn4 he0 P r hlat (hU r hrU) hoff
+
+/-- **Existence for the runner, from an unkillable flank.**  The cascade from the bound reaches a fixed
+point (`lonely_iff_run_ends`), which is Existence read at this flank. -/
+theorem stops_of_flank_unkillable (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {m e x : ℝ}
+    (hm : m ∈ ds) (he0 : 0 < e) (P : ℕ) (U : Finset ℕ) (hUne : U.Nonempty)
+    (hlat : ∀ d ∈ ds, d ≠ x → Int.fract ((P : ℝ) * (d / e)) = 0)
+    (hU : ∀ r ∈ U, ∀ d ∈ ds, d ≠ x → (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e r))
+    (hkill : Int.fract ((P : ℝ) * (x / e)) = 0 →
+      ∃ r ∈ U, ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (x * flankOpening n e (r + j * P))) :
+    ∃ N : ℕ, move n ds ((move n ds)^[N] (1 / (n * m))) = (move n ds)^[N] (1 / (n * m)) := by
+  obtain ⟨k, hk⟩ := lonely_of_flank_unkillable hn4 he0 P U hUne hlat hU hkill
+  exact exists_fixed_of_lonely hpos hm (flankOpening_pos he0 k) hk
+
 /-- **A flank with one fractional ratio has a lonely opening** (`n ≥ 4`). Every other runner has an integer ratio to the flank
 that `n` does not divide (the flank itself has ratio `1`). -/
 theorem lonely_opening_of_one_fractional (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e j : ℝ}
