@@ -8,5 +8,6 @@ import LonelyRunner.LRC.Cascade.Reading
 import LonelyRunner.LRC.Cascade.Irrational
 import LonelyRunner.LRC.Cascade.Certificate
 import LonelyRunner.LRC.Cascade.EighthFamily
+import LonelyRunner.LRC.Cascade.NearAP
 
 /-! # The cascade artefact: every module. -/
