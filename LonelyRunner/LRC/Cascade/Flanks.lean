@@ -168,6 +168,47 @@ theorem exists_clear_step (hn4 : 4 ≤ n) {f c : ℝ} (hf0 : 0 < f) (hf1 : f < 1
           exact_mod_cast this
         linarith
 
+/-- **Blocking a whole residue class of openings forces integrality.**  If the runner at difference `d` is in the
+way at every opening `k ≡ r (mod P)` of the flank at `e`, then `P·(d/e)` is an integer.
+
+This is what makes a killer set finite: only ratios with `P·(d/e) ∈ ℤ` can shadow an entire class of openings,
+so the candidates form a lattice rather than a continuum.  Stated as the clear-step form (some opening in the
+class is clear) with the integrality corollary below.
+
+No density, equidistribution or rationality input: `exists_clear_step` covers rational and irrational `d/e`
+alike, in one case. -/
+theorem clear_in_class_of_not_int (hn4 : 4 ≤ n) {d e : ℝ} (he : 0 < e) (P r : ℕ)
+    (hfr : Int.fract ((P : ℝ) * (d / e)) ≠ 0) :
+    ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e (r + j * P)) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hf0 : 0 < Int.fract ((P : ℝ) * (d / e)) :=
+    lt_of_le_of_ne (Int.fract_nonneg _) (Ne.symm hfr)
+  have hf1 : Int.fract ((P : ℝ) * (d / e)) < 1 := Int.fract_lt_one _
+  obtain ⟨j, hj⟩ := exists_clear_step (n := n) hn4 hf0 hf1
+    (c := (d / e) * (r : ℝ) + (d / e) * (n : ℝ)⁻¹)
+  refine ⟨j, ?_⟩
+  have hfr' : Int.fract ((P : ℝ) * (d / e)) = (P : ℝ) * (d / e) - (⌊(P : ℝ) * (d / e)⌋ : ℝ) := rfl
+  have key : d * flankOpening n e (r + j * P)
+      = ((j : ℝ) * Int.fract ((P : ℝ) * (d / e))
+          + ((d / e) * (r : ℝ) + (d / e) * (n : ℝ)⁻¹))
+        + ((j * ⌊(P : ℝ) * (d / e)⌋ : ℤ) : ℝ) := by
+    unfold flankOpening
+    rw [hfr']
+    push_cast
+    field_simp
+    ring
+  rw [key, circDist_add_int]
+  exact hj
+
+/-- **Integrality of a class killer.**  Contrapositive of `clear_in_class_of_not_int`: shadowing
+every opening in a residue class mod `P` forces `P·(d/e) ∈ ℤ`. -/
+theorem class_killer_int (hn4 : 4 ≤ n) {d e : ℝ} (he : 0 < e) (P r : ℕ)
+    (hblock : ∀ j : ℕ, inWay n d (flankOpening n e (r + j * P))) :
+    Int.fract ((P : ℝ) * (d / e)) = 0 := by
+  by_contra hfr
+  obtain ⟨j, hj⟩ := clear_in_class_of_not_int (n := n) hn4 he P r hfr
+  exact absurd (hblock j) (not_lt.mpr hj)
+
 /-- **A flank with one fractional ratio has a lonely opening** (`n ≥ 4`). Every other runner has an integer ratio to the flank
 that `n` does not divide (the flank itself has ratio `1`). -/
 theorem lonely_opening_of_one_fractional (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e j : ℝ}
