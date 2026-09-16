@@ -16,17 +16,37 @@ the fraction of `e`'s openings it blocks depends only on `c`:
 
 | `c` | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 12 | 16 | 20 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| density | 1/2 | 1/3 | 1/4 | 2/5 | 1/3 | 2/7 | 1/4 | 1/4 | 1/4 | 1/4 |
+| density (max over numerators) | 1/2 | 1/3 | 1/4 | 2/5 | 1/3 | 2/7 | 1/4 | 1/4 | 1/4 | 1/4 |
 
-Small `c` — that is, **large `gcd(d, e)`** — blocks far more than the large-`c` limit of 1/4. Combined with
+Small `c` — that is, **large `gcd(d, e)`** — blocks far more than the large-`c` limit of 1/4.
+
+**`[CORRECTS the first draft]` Density is not a function of `c` alone.** It depends on the numerator as
+well: at `c = 7` the numerators give 2/7 or 1/7, not 2/7 throughout. The row above is the **maximum** over
+numerators, which is the safe direction for a *necessary* condition (it over-estimates blocking, so falling
+short of the requirement really does forbid a shadow) — but it must not be read as the density of a given
+ratio. The first draft of this section read it that way. Combined with
 the forced overlap at opening `k = 0` (every ratio below 1 blocks it), shadowing `e` requires
 
     Σ_j density(e / gcd(d_j, e))  ≥  1 + (m − 1)/e,     m = #{ratios blocking k = 0}.
 
 Two consequences, both exact:
 
-- **No shadow of the largest flank below `c = 8`.** Six generic (density-1/4) ratios supply 1.50 against a
-  requirement of 1.625 at `e = 8` — short. This matches the census, which finds no cover at `c = 4…7`.
+- **`[CORRECTS the first draft]` The budget forbids `e = 4, 5, 7` — but not `e = 6`.** The first draft
+  claimed it "forbids any shadow of the largest flank below `c = 8`", reasoning from six *generic*
+  density-1/4 ratios. That reasoning imposed the large-`c` limit on small flanks, where the densities are
+  higher (2/5 at `c = 5`, 1/3 at `c = 6`). Computed per ratio with actual numerators, over every subset of
+  at most six of the available differences:
+
+  | `e` | best achievable Σ density | requirement | budget forbids? | cover exists? |
+  |---|---|---|---|---|
+  | 4 | 1 | 3/2 | **yes** | no |
+  | 5 | 1 | 8/5 | **yes** | no |
+  | 6 | 3/2 | 3/2 | no (exactly met) | **no** |
+  | 7 | 11/7 | 12/7 | **yes** | no |
+  | 8 | 7/4 | 13/8 | no | yes |
+
+  So counting explains three of the four empty cases. **`e = 6` is empty for a reason the counting does not
+  capture** — the same lesson as §2, one flank earlier than I first saw it.
 - **The eighth pattern is exactly saturated.** Its ratios `{1,3,4,5,7}/8` spend
   `1/4 + 1/4 + 1/2 + 1/4 + 1/4 = 3/2`, against a requirement of exactly `3/2`. It closes the gap only
   through `d = 4`, where `gcd(4,8) = 4` gives `c = 2` and density 1/2. The rigidity predicted for Route A

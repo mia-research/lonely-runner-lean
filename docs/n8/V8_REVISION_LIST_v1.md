@@ -548,7 +548,12 @@ Added 2026-09-16, testing the arithmetic-side idea proposed after Routes A and B
 - **`[PROVED — elementary]` The divisibility hook is real.** The fraction of a flank's openings a ratio
   blocks depends only on `c = e/gcd(d,e)`: density 1/2 at `c = 2`, 2/5 at `c = 5`, 1/4 in the large-`c`
   limit. With the forced overlap at `k = 0`, shadowing needs `Σ density(e/gcd(d_j,e)) ≥ 1 + (m−1)/e`. This
-  **forbids any shadow of the largest flank below `c = 8`** (matching the census's empty `c = 4…7`), and the
+  **forbids a shadow at `e = 4, 5, 7`** — **`[CORRECTS this item's first draft]`** not "below `c = 8`": at
+  `e = 6` the budget is exactly met (3/2 vs 3/2) and no cover exists anyway, so counting explains three of
+  the four empty cases, not four. The first draft reasoned from six *generic* density-1/4 ratios, imposing
+  the large-`c` limit on small flanks where densities are higher. Density also depends on the numerator, not
+  the denominator alone; the published table is the max over numerators (safe for a necessary condition).
+  The
   eighth pattern spends exactly `3/2` against a requirement of exactly `3/2` — **exactly saturated**, closing
   the gap only via `d = 4` (`gcd = 4`, `c = 2`, density 1/2). The rigidity predicted for Route A is real and
   lives here, in the overlap budget.
