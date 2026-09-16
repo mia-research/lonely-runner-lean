@@ -572,3 +572,26 @@ Added 2026-09-16, testing the arithmetic-side idea proposed after Routes A and B
   density or covering language. That is the form to attack and to formalise.
 - **Scope**: integer differences, seven distinct values, `d_max ≤ 30`. Existence at order 8 remains open and
   the gate still reports it unstated.
+
+---
+
+## 19. The near-AP extremal is an infinite family, and it is proved  `[PROVED — Lean, axiom-clean]`
+
+Added 2026-09-16. Follows item 18's exhaustive search, which found exactly one critical set.
+
+- **`{2,3,4,5,6,7,16}` is not isolated.** `{2,3,4,5,6,7,N}` has exactly one free flank **precisely when
+  `16 ∣ N`** (checked against every `N` from 8 to 400 — the characterisation is exact, no exceptions), and
+  the free flank is always `N` itself at opening `k = N/16`. So the critical configuration is the first
+  member of the infinite family `Δ_m = {2,3,4,5,6,7,16m}`.
+- **The whole family is lonely** `[PROVED — LRC/Cascade/NearAP.lean]` at the explicit instant
+  `t_m = (8m+1)/(128m)`: the consecutive block sits at `d·t_m = d/16 + d/(128m) ∈ [1/8, 1/2]` for
+  `2 ≤ d ≤ 7`, `m ≥ 1`; the outlier sits at exactly `m + 1/8`. Theorems `circDist_of_le_half`,
+  `block_clear`, `outlier_clear`, `near_ap_lonely`. Cascade gate **181 theorems, axiom-clean, no `sorry`**.
+- **Why it is extremal, exactly.** The minimum distance over the set is **exactly `1/8`, attained by the
+  outlier** — the order-8 bound is tight on this family, and loneliness holds because `Lonely` asks for
+  `1/n ≤ circDist`, i.e. the threshold attained, not exceeded. The block's own margin is `d/(128m)` at
+  `d = 2`, which tends to 0 as `m → ∞`. **This is the fourth result decided by boundary discipline**
+  (after `33/8` vs `27/8`, the eighth-family flank at exactly `1/8`, and its `x = 7` case).
+- **No counterexample anywhere near it**: `{2,…,7,N}` for `N ≤ 2000` and every consecutive block `a…a+5`
+  with outlier `N ≤ 600` — not one set with zero free flanks.
+- **Scope**: Existence at order 8 remains open; the gate still reports it unstated.
