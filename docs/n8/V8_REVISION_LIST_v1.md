@@ -473,3 +473,31 @@ check `experiments/n8/eighth_family_check_v1.py`, Lean `LRC/Cascade/EighthFamily
   pattern at all denominators (no other minimal largest-flank cover) — unproved; the `A = 0` census at
   `c > 8` and the bounded-overhang lemma are the two routes. Until then the disjunction "free largest flank
   or eighth-family" holds only within the census range, denominators ≤ 8.
+
+---
+
+## 16. Route A verdict: uniqueness refuted, the mechanism generalises  `[ROUTE_A_VERDICT_v1.md]`
+
+Added 2026-09-16, answering the owner's Route A instruction and its named highest-value check.
+
+- **`exists_clear_step` does force something, but about essential ratios, not the free parameter.** If every
+  ratio of a cover but one is rational with period `L`, and they leave a residue class uncovered, the
+  remaining ratio `ρ` must have `ρL ∈ ℤ` — else `exists_clear_step` clears it on that class and the flank is
+  free. So **a cover cannot be rationals plus exactly one irrational.** Two or more irrationals sharing a
+  class is beyond a one-ratio lemma; that gap is the honest limit.
+- **The stronger hope fails for a simple reason**: at the largest flank the five fixed ratios shadow on their
+  own, so the free parameter is unconstrained *there*. It is constrained at the `7/8` flank — which is the
+  eighth-family theorem already formalised (item 15).
+- **`[REFUTES the uniqueness premise]`** Minimal covers of the largest flank exist at `c = 9, 10, 11, 12, 16`
+  that are not the eighth pattern. Verified witness: `{1/10, 1/5, 3/10, 1/2, 7/10}` — differences
+  `{1,2,3,5,7}` at `d_max = 10` — shadows every opening mod 10 and is minimal (every member has private
+  openings). The census reproduces `FLANK_SIGNATURES_v1` §6 exactly at `c ≤ 8` (one cover, the eighth
+  pattern), which is what makes the disagreement above it meaningful. **Route A is closed as stated: no
+  census extension and no rigidity argument can prove a false premise.**
+- **What survives is better.** Every minimal cover found has some *other* flank with an uncovered residue
+  class — the eighth-family mechanism, generalising. So the target is not uniqueness but **"no difference
+  set has every flank shadowed at once"**, which via `lonely_iff_exists_flank` **is** Existence, stated
+  natively.
+- **Routes.** A closed; B (bounded overhang) is live by the owner's own conditional; no formalisation started,
+  per the instruction not to run two in parallel. The essential-ratio lemma is native and not yet in Lean.
+- **Scope**: Existence at order 8 remains open; the gate still reports it unstated.

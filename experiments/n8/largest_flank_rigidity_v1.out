@@ -1,0 +1,39 @@
+(1) the A=0 cover at the largest flank (e = 8): ratios m/8, m in {1,3,4,5,7}
+    k=0: blocked by 1/8,3/8,1/2,5/8,7/8
+    k=1: blocked by 7/8
+    k=2: blocked by 1/2
+    k=3: blocked by 5/8
+    k=4: blocked by 1/2
+    k=5: blocked by 3/8
+    k=6: blocked by 1/2
+    k=7: blocked by 1/8
+    -> shadows every opening: True
+
+(2) coverage budget: residues blocked by a single ratio a/c, out of c
+    c= 2: blocked residues per ratio [1]  (c/4 = 0.50)
+    c= 3: blocked residues per ratio [1]  (c/4 = 0.75)
+    c= 4: blocked residues per ratio [1]  (c/4 = 1.00)
+    c= 5: blocked residues per ratio [1, 2]  (c/4 = 1.25)
+    c= 6: blocked residues per ratio [1, 2]  (c/4 = 1.50)
+    c= 7: blocked residues per ratio [1, 2]  (c/4 = 1.75)
+    c= 8: blocked residues per ratio [2]  (c/4 = 2.00)
+    c=12: blocked residues per ratio [3]  (c/4 = 3.00)
+    c=16: blocked residues per ratio [4]  (c/4 = 4.00)
+
+(3) essential-ratio lemma: an irrational ratio cannot hold a residue class alone
+    irrational ratios that blocked a whole class over 4000 openings: 0 of 300
+    (exists_clear_step proves this is 0 for every non-integer rho*L; the search agrees)
+
+(4) which 5-subsets of ratios with denominator dividing c shadow the flank?
+    c= 8: 1 shadowing 5-subsets of the 7 ratios a/8
+           ['1/8', '3/8', '1/2', '5/8', '7/8']
+    c=12: 8 shadowing 5-subsets of the 11 ratios a/12
+           e.g. ['1/12', '1/2', '1/3', '5/12', '7/12']
+           e.g. ['1/12', '1/2', '1/3', '5/6', '7/12']
+           e.g. ['1/12', '1/2', '2/3', '5/12', '7/12']
+           e.g. ['1/12', '1/2', '2/3', '5/6', '7/12']
+    c=16: 6 shadowing 5-subsets of the 15 ratios a/16
+           e.g. ['1/16', '1/2', '3/16', '5/16', '7/16']
+           e.g. ['1/16', '1/2', '3/8', '5/8', '7/16']
+           e.g. ['1/16', '1/4', '3/16', '5/16', '7/16']
+           e.g. ['1/16', '3/16', '3/4', '5/16', '7/16']

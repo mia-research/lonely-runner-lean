@@ -1,0 +1,28 @@
+candidate cover at c = 10: ['1/10', '1/5', '3/10', '1/2', '7/10']
+differences at d_max = 10: [1, 2, 3, 5, 7] + free x + 10
+
+opening-by-opening (period lcm = 10):
+  k=0: blocked by 1/10,1/5,3/10,1/2,7/10
+  k=1: blocked by 1/10
+  k=2: blocked by 1/2
+  k=3: blocked by 3/10
+  k=4: blocked by 1/2,7/10
+  k=5: blocked by 1/5
+  k=6: blocked by 1/2
+  k=7: blocked by 7/10
+  k=8: blocked by 1/2
+  k=9: blocked by 1/10
+
+minimality — each member's private openings (blocked by it alone):
+  1/10  : private openings [1, 9]
+  1/5   : private openings [5]
+  3/10  : private openings [3]
+  1/2   : private openings [2, 6, 8]
+  7/10  : private openings [7]
+
+shadows every opening: True     minimal (every member has a private opening): True
+
+is it the eighth-pattern {1/8,3/8,1/2,5/8,7/8}?  False
+
+cross-check the eighth pattern with the same code (should shadow, period 8):
+  shadows: True
