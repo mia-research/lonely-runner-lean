@@ -11,5 +11,12 @@ import LonelyRunner.LRC.Cascade.EighthFamily
 import LonelyRunner.LRC.Cascade.NearAP
 import LonelyRunner.LRC.Cascade.CensusFamilies
 import LonelyRunner.LRC.Cascade.CensusBatch
+import LonelyRunner.LRC.Cascade.PinnedBatch1
+
+import LonelyRunner.LRC.Cascade.PinnedBatch2
+
+import LonelyRunner.LRC.Cascade.PinnedBatch3
+
+import LonelyRunner.LRC.Cascade.PinnedBatch4
 
 /-! # The cascade artefact: every module. -/

@@ -181,6 +181,64 @@ theorem circDist_ge_of_band {y : ℝ} (c : ℤ) (h1 : (n : ℝ)⁻¹ ≤ y) (h2 
   rw [Int.fract_eq_self.mpr ⟨hy0, hy1⟩, le_min_iff]
   exact ⟨h1, by linarith⟩
 
+/-- **The clearing test, as an integer comparison** (Proposition 2.1).  A runner at a whole-number
+difference `m` is clear at the `k`-th opening of a whole-number flank `e` exactly when the residue
+`m·(n·k+1) mod n·e` lies in the band `[e, (n−1)·e]`.
+
+This is the framework's own decision procedure: at `t = a/(n·D)` a difference is clear iff
+`D ≤ a·e mod n·D ≤ (n−1)·D`.  Nothing real-valued survives — the verdict is decidable arithmetic, so a
+concrete arrangement discharges by `decide`. -/
+theorem clear_of_residue_band {e k m : ℕ} (he : 0 < e)
+    (h1 : e ≤ m * (n * k + 1) % (n * e)) (h2 : m * (n * k + 1) % (n * e) ≤ (n - 1) * e) :
+    (n : ℝ)⁻¹ ≤ circDist ((m : ℝ) * flankOpening n e k) := by
+  have hn2 : 2 ≤ n := Fact.out
+  have hn0 : (0 : ℝ) < n := n_pos
+  have heR : (0 : ℝ) < e := by exact_mod_cast he
+  have hinv : (n : ℝ) * (n : ℝ)⁻¹ = 1 := mul_inv_cancel₀ hn0.ne'
+  have hN0 : 0 < n * e := Nat.mul_pos (by omega) he
+  have hNR : (0 : ℝ) < ((n * e : ℕ) : ℝ) := by exact_mod_cast hN0
+  have step1 : (m : ℝ) * flankOpening n e k = ((m * (n * k + 1) : ℕ) : ℝ) / ((n * e : ℕ) : ℝ) := by
+    unfold flankOpening; push_cast; field_simp
+  have hdm : ((m * (n * k + 1) : ℕ) : ℝ)
+      = ((n * e : ℕ) : ℝ) * ((m * (n * k + 1) / (n * e) : ℕ) : ℝ)
+        + ((m * (n * k + 1) % (n * e) : ℕ) : ℝ) := by
+    exact_mod_cast (Nat.div_add_mod (m * (n * k + 1)) (n * e)).symm
+  have step2 : ((m * (n * k + 1) : ℕ) : ℝ) / ((n * e : ℕ) : ℝ)
+      = ((m * (n * k + 1) % (n * e) : ℕ) : ℝ) / ((n * e : ℕ) : ℝ)
+        + (((m * (n * k + 1) / (n * e) : ℕ) : ℤ) : ℝ) := by
+    have hz : (((m * (n * k + 1) / (n * e) : ℕ) : ℤ) : ℝ)
+        = ((m * (n * k + 1) / (n * e) : ℕ) : ℝ) := by norm_cast
+    rw [hz, div_add' _ _ _ hNR.ne']
+    congr 1
+    linarith [hdm]
+  rw [step1, step2]
+  refine circDist_ge_of_band _ ?_ ?_
+  · rw [le_div_iff₀ hNR]
+    have he' : (e : ℝ) ≤ ((m * (n * k + 1) % (n * e) : ℕ) : ℝ) := by exact_mod_cast h1
+    push_cast
+    nlinarith [he', hinv, hn0, heR]
+  · rw [div_le_iff₀ hNR]
+    have hn1 : 1 ≤ n := by omega
+    have hcast : (((n - 1) * e : ℕ) : ℝ) = ((n : ℝ) - 1) * (e : ℝ) := by
+      push_cast [Nat.cast_sub hn1]; ring
+    have h2' : ((m * (n * k + 1) % (n * e) : ℕ) : ℝ) ≤ ((n : ℝ) - 1) * (e : ℝ) := by
+      rw [← hcast]; exact_mod_cast h2
+    push_cast
+    nlinarith [h2', hinv, hn0, heR]
+
+/-- **A whole arrangement cleared by one integer check.**  If every difference in the list satisfies the
+residue band at the `k`-th opening of the flank `e`, the subject is lonely there.  The hypothesis is
+decidable arithmetic on small naturals, so a concrete arrangement closes by `decide`. -/
+theorem lonely_of_band_list {L : List ℕ} {e k : ℕ} (he : 0 < e)
+    (h : ∀ m ∈ L, e ≤ m * (n * k + 1) % (n * e) ∧ m * (n * k + 1) % (n * e) ≤ (n - 1) * e) :
+    Lonely n ((L.map (Nat.cast : ℕ → ℝ)).toFinset) (flankOpening n e k) := by
+  classical
+  intro d hd
+  simp only [List.mem_toFinset, List.mem_map] at hd
+  obtain ⟨m, hmL, rfl⟩ := hd
+  obtain ⟨h1, h2⟩ := h m hmL
+  exact clear_of_residue_band he h1 h2
+
 /-- **Blocking a whole residue class of openings forces integrality.**  If the runner at difference `d` is in the
 way at every opening `k ≡ r (mod P)` of the flank at `e`, then `P·(d/e)` is an integer.
 
