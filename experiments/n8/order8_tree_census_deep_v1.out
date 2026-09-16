@@ -1,0 +1,11 @@
+order 8, ratio bound S = 8, lap bound L = 6, runners 6, cap R < 7
+time budget 900s per level
+
+  length  1: examined       36  realisable        6  best R        9/7 = 1.2857
+  length  2: examined      210  realisable       30  best R      81/49 = 1.6531
+  length  3: examined     1020  realisable      120  best R    729/343 = 2.1254
+  length  4: examined     3960  realisable      720  best R  6561/2401 = 2.7326
+  length  5: examined    22680  realisable     3600  best R 59049/16807 = 3.5134
+  length  6: examined   108360  realisable    16920  best R 531441/117649 = 4.5172
+  length  7: examined   485280  realisable    18206  best R       33/7 = 4.7143   [TRUNCATED by budget]
+  -> level not completed; the tree is too wide to enumerate at this depth

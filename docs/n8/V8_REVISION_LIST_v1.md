@@ -595,3 +595,29 @@ Added 2026-09-16. Follows item 18's exhaustive search, which found exactly one c
 - **No counterexample anywhere near it**: `{2,…,7,N}` for `N ≤ 2000` and every consecutive block `a…a+5`
   with outlier `N ≤ 600` — not one set with zero free flanks.
 - **Scope**: Existence at order 8 remains open; the gate still reports it unstated.
+
+---
+
+## 20. The ladder bound — a closed form, and a proof structure for review  `[LADDER_BOUND_v1.md]`
+
+Added 2026-09-16, out of the abandoned order-8 enumeration.
+
+- **`[measured]` The order-8 word enumeration is infeasible and was abandoned.** Pass rate flat at ~16%,
+  growth 4.7×/level through level 6, max length 36, full space 7.25×10^26; level 16 alone would be months.
+  Branch-and-bound against the cap does not bite (bound 62.7 at depth 1, still 22.1 at depth 6, never below
+  7). The cap `n−1` sits far above the true supremum, so realisability prunes almost nothing — the margin
+  that makes order 8 easier mathematically makes it harder combinatorially.
+- **`[VERIFIED]` The enumeration is faithful**: each LP-realisable word's own witness readings, run through
+  the actual cascade (latest-next-opening), reproduced the claimed word 100% of the time at every length
+  tested. The word space is real cascade behaviour, not a relaxation artefact — a hypothesis tested and
+  refuted, not assumed.
+- **`[EMPIRICAL — exact]` The extremal readings are forced into a closed form**: `u_k = (n−1)·((n−1)/(n+1))^(k−1)`,
+  matching the LP's minima digit for digit at order 8 (7, 49/9, 343/81, 2401/729, 16807/6561, 117649/59049).
+  Hence `R = ((n+1)/(n−1))^(n−2)`, since the ladder needs one runner per rung and only `n−2` runners exist.
+- **It reproduces a theorem we own**: at `n = 5` the formula gives `27/8`, exactly the order-5 certificate's
+  proven value. At `n = 8` it gives 4.5172 against a cap of 7. Holds for every `n ≥ 4`; `n = 3` is the
+  boundary case (2 vs 2) and is already proved separately.
+- **Two named gaps**: ladder maximality (observed at every depth, and the pattern breaks at `d = 7` exactly
+  when runners run out — `33/7` instead of `(9/7)^7`), and a bound on the return correction (+2% at order 5,
+  +4% at order 8; unbounded in general). Lemma A and B are in hand; Lemma C is open.
+- **Scope**: Existence at order 8 remains open; the gate still reports it unstated.
