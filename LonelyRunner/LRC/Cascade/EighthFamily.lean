@@ -216,4 +216,87 @@ theorem eighth_family_lonely_scaled (E x : ℝ) (hE : 0 < E) (hx0 : 0 < x) (hx8 
   · rw [show x * (8 * t / E) = 8 * x / E * t by field_simp]; exact hx
   · rw [show E * (8 * t / E) = 8 * t by field_simp]; exact h8
 
+/-! ## the same theorem, from the general `U`/`K` calculus
+
+`eighth_family_lonely` above is proved directly.  Here it is re-derived from
+`Flanks.lonely_of_flank_unkillable` by supplying only the batch machine's own data for this family —
+flank `e = 7`, period `P = 7`, uncovered residues `U = {1, 3}` — and discharging that theorem's three
+hypotheses.  The off-lattice values of `x` (every non-integer) need no argument here at all, being
+disposed of by `Flanks.class_killer_int` inside the general result.
+
+This is the calculus checked against the family it was modelled on. -/
+
+/-- **The eighth family, via the calculus.**  With `P = 7` and `U = {1, 3}` the general flank theorem
+reproduces `eighth_family_lonely`, the whole non-integer range coming free. -/
+theorem eighth_family_via_calculus (x : ℝ) (hx0 : 0 < x) (hx8 : x < 8) :
+    ∃ k : ℕ, Lonely 8 ({1, 3, 4, 5, 7, x, 8} : Finset ℝ) (Flanks.flankOpening 8 7 k) := by
+  have h7 : ((7 : ℕ) : ℝ) * (x / 7) = x := by push_cast; ring
+  have e1 : Flanks.flankOpening 8 7 1 = (1 + 7 * ((0 : ℕ) : ℝ) + 1 / 8) / 7 := by
+    unfold Flanks.flankOpening; push_cast; ring
+  have e3 : Flanks.flankOpening 8 7 3 = ((3 : ℝ) + 1 / 8) / 7 := by
+    unfold Flanks.flankOpening; push_cast; ring
+  refine Flanks.lonely_of_flank_unkillable (n := 8) (x := x) (by norm_num) (by norm_num) 7 {1, 3}
+    ⟨1, by decide⟩ ?_ ?_ ?_
+  · -- hlat: every fixed difference is on the lattice, since `7·(d/7) = d` is a whole number
+    intro d hd hdx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hd
+    have hcast : ((7 : ℕ) : ℝ) * (d / 7) = d := by push_cast; ring
+    rw [hcast]
+    rcases hd with h | h | h | h | h | h | h <;> rw [h]
+    · rw [show (1 : ℝ) = ((1 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 1
+    · rw [show (3 : ℝ) = ((3 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 3
+    · rw [show (4 : ℝ) = ((4 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 4
+    · rw [show (5 : ℝ) = ((5 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 5
+    · rw [show (7 : ℝ) = ((7 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 7
+    · exact absurd h hdx
+    · rw [show (8 : ℝ) = ((8 : ℤ) : ℝ) by norm_num]; exact Int.fract_intCast 8
+  · -- hU: at the uncovered openings 1 and 3, every fixed difference is clear
+    intro r hr d hd hdx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hd hr
+    rcases hr with hr | hr <;> subst hr
+    · rw [e1]
+      rcases hd with h | h | h | h | h | h | h
+      · exact fixed_clear_one 0 d (by tauto)
+      · exact fixed_clear_one 0 d (by tauto)
+      · exact fixed_clear_one 0 d (by tauto)
+      · exact fixed_clear_one 0 d (by tauto)
+      · exact fixed_clear_one 0 d (by tauto)
+      · exact absurd h hdx
+      · exact fixed_clear_one 0 d (by tauto)
+    · rw [e3]
+      rcases hd with h | h | h | h | h | h | h
+      · exact fixed_clear_three d (by tauto)
+      · exact fixed_clear_three d (by tauto)
+      · exact fixed_clear_three d (by tauto)
+      · exact fixed_clear_three d (by tauto)
+      · exact fixed_clear_three d (by tauto)
+      · exact absurd h hdx
+      · exact fixed_clear_three d (by tauto)
+  · -- hkill: an on-lattice `x` is a whole number; it fails at `r = 1`, or at `r = 3` when `x = 6`
+    intro hlat
+    rw [h7] at hlat
+    have hxi : x = ((⌊x⌋ : ℤ) : ℝ) := by
+      have h : Int.fract x = x - (⌊x⌋ : ℝ) := rfl
+      rw [hlat] at h; linarith
+    by_cases h6 : x = 6
+    · refine ⟨3, by decide, 0, ?_⟩
+      rw [show (3 : ℕ) + 0 * 7 = 3 from rfl, e3, h6]
+      have e : (6 : ℝ) * (((3 : ℝ) + 1 / 8) / 7) = (38 : ℝ) / 56 + ((2 : ℤ) : ℝ) := by
+        push_cast; ring
+      rw [e]; exact clear_of_band 38 2 (by norm_num) (by norm_num)
+    · have hm1 : 1 ≤ ⌊x⌋ := by
+        have h : (0 : ℝ) < ((⌊x⌋ : ℤ) : ℝ) := by rw [← hxi]; exact hx0
+        have h' : (0 : ℤ) < ⌊x⌋ := by exact_mod_cast h
+        omega
+      have hm7 : ⌊x⌋ ≤ 7 := by
+        have h : ((⌊x⌋ : ℤ) : ℝ) < 8 := by rw [← hxi]; exact hx8
+        have h' : (⌊x⌋ : ℤ) < 8 := by exact_mod_cast h
+        omega
+      have hm6 : ⌊x⌋ ≠ 6 := fun hc => h6 (by rw [hxi, hc]; norm_num)
+      refine ⟨1, by decide, 0, ?_⟩
+      rw [show (1 : ℕ) + 0 * 7 = 1 from rfl, e1]
+      have hres := int_clear_one ⌊x⌋ hm1 hm7 hm6
+      rw [← hxi] at hres
+      exact hres
+
 end EighthFamily
