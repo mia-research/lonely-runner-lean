@@ -538,3 +538,32 @@ instruction on this agent's part.
   (`LRC/Defs.lean` imports `Mathlib.MeasureTheory.Measure.Lebesgue.Basic`), and an import grep is not the
   nativeness check.
 - **Scope**: Existence at order 8 remains open; the gate still reports it unstated.
+
+---
+
+## 18. The divisibility test: a theorem, a refutation of its own route, and one critical set  `[FLANK_OVERDETERMINATION_v1.md]`
+
+Added 2026-09-16, testing the arithmetic-side idea proposed after Routes A and B were refuted.
+
+- **`[PROVED — elementary]` The divisibility hook is real.** The fraction of a flank's openings a ratio
+  blocks depends only on `c = e/gcd(d,e)`: density 1/2 at `c = 2`, 2/5 at `c = 5`, 1/4 in the large-`c`
+  limit. With the forced overlap at `k = 0`, shadowing needs `Σ density(e/gcd(d_j,e)) ≥ 1 + (m−1)/e`. This
+  **forbids any shadow of the largest flank below `c = 8`** (matching the census's empty `c = 4…7`), and the
+  eighth pattern spends exactly `3/2` against a requirement of exactly `3/2` — **exactly saturated**, closing
+  the gap only via `d = 4` (`gcd = 4`, `c = 2`, density 1/2). The rigidity predicted for Route A is real and
+  lives here, in the overlap budget.
+- **`[REFUTES the route]` The condition is necessary, not sufficient, and cannot close Existence.** On the
+  critical set `{2,3,4,5,6,7,16}` at flank 16 the budget is 1.5 against a requirement of 1.3125 — sufficient
+  for a shadow — and the flank is free regardless. Counting cannot predict freeness once the budget is met;
+  the arrangement decides. The over-determination argument has no contradiction to derive at such a flank.
+  This was the session's own proposal, endorsed on its recommendation, and it does not reach the target.
+- **`[PROVED — finite verification]` Exhaustive: every 7-subset of `{1..30}`** (2,035,800 sets, exact integer
+  arithmetic) has a free flank — Existence holds for all of them — and **exactly one set is tight**:
+  `{2,3,4,5,6,7,16}`, free only at flank 16, six consecutive integers plus an outlier, set gcd 1. Every other
+  set has at least two free flanks. Earlier random sampling suggested a minimum of two free flanks; that was
+  a sampling artefact, and exhaustive search found the thinner margin.
+- **The target in native arithmetic form**: opening `k` of flank `e` is free iff, with `u = 8k+1`, `M = 8e`,
+  every `d_j·u mod M` lies in `[e, M−e]`. So Existence is a simultaneous-avoidance statement — no measure,
+  density or covering language. That is the form to attack and to formalise.
+- **Scope**: integer differences, seven distinct values, `d_max ≤ 30`. Existence at order 8 remains open and
+  the gate still reports it unstated.

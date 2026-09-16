@@ -1,0 +1,45 @@
+(1) blocking density by denominator c  (c = e/gcd(d,e))
+    c :  density   = blocked/c
+     1 :  0        = 0.0000
+     2 :  1/2      = 0.5000
+     3 :  1/3      = 0.3333
+     4 :  1/4      = 0.2500
+     5 :  2/5      = 0.4000
+     6 :  1/3      = 0.3333
+     7 :  2/7      = 0.2857
+     8 :  1/4      = 0.2500
+     9 :  1/3      = 0.3333
+    10 :  3/10     = 0.3000
+    11 :  3/11     = 0.2727
+    12 :  1/4      = 0.2500
+    13 :  4/13     = 0.3077
+    14 :  2/7      = 0.2857
+    15 :  4/15     = 0.2667
+    16 :  1/4      = 0.2500
+    17 :  5/17     = 0.2941
+    18 :  5/18     = 0.2778
+    19 :  5/19     = 0.2632
+    20 :  1/4      = 0.2500
+    21 :  2/7      = 0.2857
+    22 :  3/11     = 0.2727
+    23 :  6/23     = 0.2609
+    24 :  1/4      = 0.2500
+
+    -> small c blocks far more than the large-c limit of 1/4.
+       c = e/gcd(d,e) is small exactly when gcd(d,e) is LARGE.
+
+(2) the budget at a flank: 6 ratios, all below 1 blocking k=0
+    need sum(density) >= 1 + (m-1)/e   with m = #ratios blocking k = 0
+    e=  8: six density-1/4 ratios give 1.50 vs requirement 1.625  -> SHORT
+    e= 12: six density-1/4 ratios give 1.50 vs requirement 1.417  -> enough
+    e= 16: six density-1/4 ratios give 1.50 vs requirement 1.312  -> enough
+    e= 20: six density-1/4 ratios give 1.50 vs requirement 1.250  -> enough
+    e= 30: six density-1/4 ratios give 1.50 vs requirement 1.167  -> enough
+
+(3) what the eighth pattern actually spends (flank 8, ratios m/8):
+    d=1: gcd(d,8)=1, c=8, density=1/4 = 0.2500
+    d=3: gcd(d,8)=1, c=8, density=1/4 = 0.2500
+    d=4: gcd(d,8)=4, c=2, density=1/2 = 0.5000
+    d=5: gcd(d,8)=1, c=8, density=1/4 = 0.2500
+    d=7: gcd(d,8)=1, c=8, density=1/4 = 0.2500
+    total density 3/2 = 1.5000   requirement 1 + 4/8 = 1.5   -> exactly tight

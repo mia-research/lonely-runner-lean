@@ -1,0 +1,13 @@
+exhaustive over 7-subsets of 1..18 (order 8, integer differences)
+  sets: 31824
+  sets with NO free flank: 0
+  fewest free flanks: 1
+    [2, 3, 4, 5, 6, 7, 16] -> free flanks [16]
+
+  divisibility signature of the hardest sets (shadowed flanks only):
+    set [2, 3, 4, 5, 6, 7, 16]  flank   2: max gcd(d_j, e) = 2, so min denominator c = 1
+    set [2, 3, 4, 5, 6, 7, 16]  flank   3: max gcd(d_j, e) = 3, so min denominator c = 1
+    set [2, 3, 4, 5, 6, 7, 16]  flank   4: max gcd(d_j, e) = 4, so min denominator c = 1
+    set [2, 3, 4, 5, 6, 7, 16]  flank   5: max gcd(d_j, e) = 1, so min denominator c = 5
+    set [2, 3, 4, 5, 6, 7, 16]  flank   6: max gcd(d_j, e) = 3, so min denominator c = 2
+    set [2, 3, 4, 5, 6, 7, 16]  flank   7: max gcd(d_j, e) = 1, so min denominator c = 7
