@@ -209,6 +209,47 @@ theorem class_killer_int (hn4 : 4 ≤ n) {d e : ℝ} (he : 0 < e) (P r : ℕ)
   obtain ⟨j, hj⟩ := clear_in_class_of_not_int (n := n) hn4 he P r hfr
   exact absurd (hblock j) (not_lt.mpr hj)
 
+/-- **A ratio on the lattice is periodic in the opening index.**  If `P·(d/e) ∈ ℤ` then the runner at
+difference `d` has the same circle distance at openings `k` and `k + jP`: being in the way depends only
+on `k` mod `P`.  This is what makes the uncovered set `U_e` a set of residues rather than of openings. -/
+theorem circDist_periodic_of_lattice {d e : ℝ} (he : 0 < e) {P : ℕ}
+    (hP : Int.fract ((P : ℝ) * (d / e)) = 0) (k j : ℕ) :
+    circDist (d * flankOpening n e (k + j * P)) = circDist (d * flankOpening n e k) := by
+  -- `P · fract (d/e)` is the integer `⌊P·(d/e)⌋ − P·⌊d/e⌋`
+  have hPρ : (P : ℝ) * (d / e) = (⌊(P : ℝ) * (d / e)⌋ : ℝ) := by
+    have h := Int.fract_add_floor ((P : ℝ) * (d / e))
+    rw [hP] at h; linarith
+  have hmr : ((⌊(P : ℝ) * (d / e)⌋ - (P : ℤ) * ⌊d / e⌋ : ℤ) : ℝ)
+      = (P : ℝ) * Int.fract (d / e) := by
+    have hfr : Int.fract (d / e) = d / e - (⌊d / e⌋ : ℝ) := rfl
+    rw [hfr]; push_cast; rw [← hPρ]; ring
+  rw [fractional_ratio_circDist he, fractional_ratio_circDist he]
+  have key : ((k + j * P : ℕ) : ℝ) * Int.fract (d / e) + d / e / (n : ℝ)
+      = ((k : ℝ) * Int.fract (d / e) + d / e / (n : ℝ))
+        + ((j * (⌊(P : ℝ) * (d / e)⌋ - (P : ℤ) * ⌊d / e⌋) : ℤ) : ℝ) := by
+    push_cast [hmr]; ring
+  rw [key, circDist_add_int]
+
+/-- **A free parameter off the lattice cannot shadow an uncovered class.**  Suppose every runner other
+than `x` has its ratio to the flank on the lattice (`P·(d/e) ∈ ℤ`) and is clear at opening `r`, so the
+whole class `r + jP` is clear of them.  If `x` is off the lattice then the flank has a lonely opening.
+
+Together with `class_killer_int` this is the finiteness the killer set needs: a shadow of an uncovered
+class must come from the lattice, so only lattice values of `x` can be checked, and every other value
+leaves the flank free. -/
+theorem lonely_opening_of_free_off_lattice (hn4 : 4 ≤ n) {ds : Finset ℝ} {e x : ℝ} (he0 : 0 < e)
+    (P r : ℕ)
+    (hlat : ∀ d ∈ ds, d ≠ x → Int.fract ((P : ℝ) * (d / e)) = 0)
+    (hclear : ∀ d ∈ ds, d ≠ x → (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e r))
+    (hoff : Int.fract ((P : ℝ) * (x / e)) ≠ 0) :
+    ∃ k : ℕ, Lonely n ds (flankOpening n e k) := by
+  obtain ⟨j, hj⟩ := clear_in_class_of_not_int (n := n) hn4 he0 P r hoff
+  refine ⟨r + j * P, fun d hd => ?_⟩
+  by_cases hdx : d = x
+  · subst hdx; exact hj
+  · rw [circDist_periodic_of_lattice he0 (hlat d hd hdx) r j]
+    exact hclear d hd hdx
+
 /-- **A flank with one fractional ratio has a lonely opening** (`n ≥ 4`). Every other runner has an integer ratio to the flank
 that `n` does not divide (the flank itself has ratio `1`). -/
 theorem lonely_opening_of_one_fractional (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e j : ℝ}
