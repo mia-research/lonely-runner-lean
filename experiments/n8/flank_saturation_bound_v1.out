@@ -1,0 +1,8 @@
+ c   sum|S_j|   c+m-1   slack   union   saturated?
+  8       12       12       0       8   EXACTLY TIGHT
+ 10       15       14       1      10   slack 1
+ 12       16       16       0      12   EXACTLY TIGHT
+ 16       20       20       0      16   EXACTLY TIGHT
+ 20       30       24       6      20   slack 6
+ 30       43       34       9      30   slack 9
+ 40       60       44      16      40   slack 16

@@ -409,10 +409,15 @@ fine; targets and statements must stay native* — does the statement exist with
 Lebesgue, probabilistic, expectation, "almost all", Minkowski, covering, lattice, Dirichlet, pigeonhole, residue and CRT, across
 the nine cascade Lean modules and `MANUSCRIPT_v9_1.md`.
 
-- **Lean, structural result**: the cascade tree's only mathlib imports are `Analysis.Complex.ExponentialBounds`,
-  `Analysis.Real.Pi.Bounds`, `Analysis.Real.Pi.Irrational` and `NumberTheory.Real.Irrational`. **No measure theory, no
-  equidistribution, no Fourier analysis is imported at all**, so the artefact cannot be leaning on them unseen. Two hits, both
-  benign: `Certificate.lean` "measured at the nearest difference" (plain English) and `SmallOrders.setter_repeat`, an *abstract*
+- **Lean**: the Cascade modules' own `import` lines name only `Analysis.Complex.ExponentialBounds`,
+  `Analysis.Real.Pi.Bounds`, `Analysis.Real.Pi.Irrational` and `NumberTheory.Real.Irrational`.
+  **`[CORRECTS the first draft of this item]`** That was written up as "no measure theory is imported at all", which is false
+  transitively: `LRC/Defs.lean` imports `Mathlib.MeasureTheory.Measure.Lebesgue.Basic`, and `Defs` is in the Cascade tree's
+  transitive closure — it is shared with the older measure-based general-`n` lineage, which is where that import is used. **An
+  import grep is therefore not the nativeness check**, and the structural claim built on one was overstated. What does hold, and
+  is what the check actually rests on: no Cascade *statement* or *proof* contains measure-theoretic content — the scan below is
+  over statements and proof text, and `exists_clear_step`'s proof was read in full (three cases on `f`, closed by
+  `linarith`/`nlinarith`/`omega`). Two hits, both benign: `Certificate.lean` "measured at the nearest difference" (plain English) and `SmallOrders.setter_repeat`, an *abstract*
   pigeonhole (`k+1` values in a set of size `≤ k`) proved from scratch, cited to nobody.
 - **Manuscript**: every hit is the firewall **banning** the thing (`No measure or density`), the objections table explaining why
   it is inapplicable, or the phrase "no equidistribution, no result at another order, no proof sketch". None is a use.
@@ -500,4 +505,36 @@ Added 2026-09-16, answering the owner's Route A instruction and its named highes
   natively.
 - **Routes.** A closed; B (bounded overhang) is live by the owner's own conditional; no formalisation started,
   per the instruction not to run two in parallel. The essential-ratio lemma is native and not yet in Lean.
+- **Scope**: Existence at order 8 remains open; the gate still reports it unstated.
+
+---
+
+## 17. Route B refuted; the target restated  `[ROUTE_A_VERDICT_v1.md companion]`
+
+Added 2026-09-16. Route B was authorised to be *stated and tested* up front, with only formalisation gated on
+A's verdict; it was tested only after the owner asked for its results, which was a misreading of the
+instruction on this agent's part.
+
+- **`[REFUTED]` Shadowing the largest flank does not bound the overhang.** Minimal shadowing covers of size
+  ≤ 6 exist at **every** denominator `c` from 8 to 40 (`route_b_overhang_v1.out`); a cover containing the
+  ratio `1/c` means `d_min/d_max = 1/c`, so `S = d_max/d_min` is unbounded among shadowing sets. Route B's
+  premise fails the same way Route A's did.
+- **No designated pair of flanks works either.** The largest and second-largest are both shadowed in 21 of
+  40,000 random integer sets; the second-largest alone is free in 98.1% of 20,000, not all.
+- **`[EMPIRICAL]` But the margin is real**: over 40,000 random integer difference sets (`d_max ≤ 80`), the
+  number of free flanks was **never below 2** — distribution `{2: 254, 3: 403, 4: 1132, 5: 3797, 6: 10949,
+  7: 23465}`. The extremal case is the near-AP `[1,2,3,4,5,7,8]`, free only at flanks 5 and 7.
+- **The forced-overlap counting bound** `[PROVED — elementary]`: at a flank of period `c`, every ratio below 1
+  blocks opening `k = 0`, so if `m` blocking sets contain 0 the union misses at least `m − 1`, and shadowing
+  requires `Σ_j |S_j| ≥ c + m − 1`. This **proves no shadow exists below `c = 8`** (matching the census: none
+  at `c = 4…7`) and the `c = 8, 12, 16` covers sit at **exact equality** — the rigidity the owner predicted,
+  found where it actually lives. It has slack at larger `c` (6 at `c = 20`, 16 at `c = 40`), so it does not
+  close the problem alone.
+- **The restated target**: some flank is always free — which via `lonely_iff_exists_flank` **is** Existence.
+  The per-flank mechanism is already proved and formalised (item 15's template: an uncovered residue class,
+  then `exists_clear_step` for the free ratio). What is missing is the uniform statement that some flank
+  always has an uncovered residue class.
+- **`[CORRECTS item 14]`** see that item: the "no measure theory imported at all" claim was false transitively
+  (`LRC/Defs.lean` imports `Mathlib.MeasureTheory.Measure.Lebesgue.Basic`), and an import grep is not the
+  nativeness check.
 - **Scope**: Existence at order 8 remains open; the gate still reports it unstated.

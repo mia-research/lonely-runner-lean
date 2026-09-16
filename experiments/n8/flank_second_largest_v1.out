@@ -1,0 +1,9 @@
+random integer difference sets of size 7 (order 8)
+checking: is the flank at the second-largest difference free?
+
+  sets tested: 20000
+  second-largest flank free: 19627  (98.1%)
+  NO flank free at all:      0
+
+largest flank free, for comparison:
+  largest flank free: 19746 (98.7%)

@@ -1,0 +1,4 @@
+sets tested: 40000
+largest AND second-largest both shadowed: 21
+distribution of how many of the 7 flanks are free: {2: 254, 3: 403, 4: 1132, 5: 3797, 6: 10949, 7: 23465}
+fewest free flanks seen: 2   example [1, 2, 3, 4, 5, 7, 8] -> free flanks [5, 7]
