@@ -291,6 +291,46 @@ theorem stops_of_flank_unkillable (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ 
   obtain ⟨k, hk⟩ := lonely_of_flank_unkillable hn4 he0 P U hUne hlat hU hkill
   exact exists_fixed_of_lonely hpos hm (flankOpening_pos he0 k) hk
 
+/-- **The empty-killer-intersection route.**  The flank that survives may depend on the free parameter.
+
+Each flank `e ∈ E` carries its own period `P e` and uncovered residue set `U e`, with every runner but
+`x` on that flank's lattice and clear at every residue in `U e`.  If **some** flank of `E` is one that
+`x` fails to shadow, that flank has a lonely opening.
+
+`hsome`'s body is exactly "`x` is not a killer of flank `e`": either `x` is off that flank's lattice, in
+which case the implication is vacuous and `class_killer_int` does the work, or it is on the lattice and
+fails on some uncovered residue.  So the hypothesis is the negation of "`x` kills every flank", which is
+what an empty intersection of the killer sets gives — the machine's second settlement route.
+
+The mathematical content is the finite check that the intersection is empty; this is the step that turns
+that check into loneliness. -/
+theorem lonely_of_some_flank_unkillable (hn4 : 4 ≤ n) {ds : Finset ℝ} {x : ℝ}
+    (E : Finset ℝ) (P : ℝ → ℕ) (U : ℝ → Finset ℕ)
+    (he0 : ∀ e ∈ E, 0 < e) (hUne : ∀ e ∈ E, (U e).Nonempty)
+    (hlat : ∀ e ∈ E, ∀ d ∈ ds, d ≠ x → Int.fract ((P e : ℝ) * (d / e)) = 0)
+    (hU : ∀ e ∈ E, ∀ r ∈ U e, ∀ d ∈ ds, d ≠ x →
+      (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e r))
+    (hsome : ∃ e ∈ E, Int.fract ((P e : ℝ) * (x / e)) = 0 →
+      ∃ r ∈ U e, ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (x * flankOpening n e (r + j * P e))) :
+    ∃ e ∈ E, ∃ k : ℕ, Lonely n ds (flankOpening n e k) := by
+  obtain ⟨e, heE, hfail⟩ := hsome
+  exact ⟨e, heE, lonely_of_flank_unkillable hn4 (he0 e heE) (P e) (U e) (hUne e heE)
+    (hlat e heE) (hU e heE) hfail⟩
+
+/-- **Existence for the runner, from the empty-killer-intersection route.** -/
+theorem stops_of_some_flank_unkillable (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d)
+    {m x : ℝ} (hm : m ∈ ds) (E : Finset ℝ) (P : ℝ → ℕ) (U : ℝ → Finset ℕ)
+    (he0 : ∀ e ∈ E, 0 < e) (hUne : ∀ e ∈ E, (U e).Nonempty)
+    (hlat : ∀ e ∈ E, ∀ d ∈ ds, d ≠ x → Int.fract ((P e : ℝ) * (d / e)) = 0)
+    (hU : ∀ e ∈ E, ∀ r ∈ U e, ∀ d ∈ ds, d ≠ x →
+      (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e r))
+    (hsome : ∃ e ∈ E, Int.fract ((P e : ℝ) * (x / e)) = 0 →
+      ∃ r ∈ U e, ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (x * flankOpening n e (r + j * P e))) :
+    ∃ N : ℕ, move n ds ((move n ds)^[N] (1 / (n * m))) = (move n ds)^[N] (1 / (n * m)) := by
+  obtain ⟨e, heE, k, hk⟩ :=
+    lonely_of_some_flank_unkillable hn4 E P U he0 hUne hlat hU hsome
+  exact exists_fixed_of_lonely hpos hm (flankOpening_pos (he0 e heE) k) hk
+
 /-- **A flank with one fractional ratio has a lonely opening** (`n ≥ 4`). Every other runner has an integer ratio to the flank
 that `n` does not divide (the flank itself has ratio `1`). -/
 theorem lonely_opening_of_one_fractional (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e j : ℝ}
