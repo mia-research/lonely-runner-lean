@@ -1,0 +1,45 @@
+structural declarations parsed : 224
+
+A. IDENTICAL STATEMENTS: 3 propositions declared more than once
+   x2  Irrational.clear_of_ratio, Irrational.clear_of_ratio
+        {dmin d : ℝ} (hm : 0 < dmin) (h1 : dmin ≤ |d|) (h7 : |d| ≤ 7 * dmin) : (8 : ℝ)⁻¹ ≤ circDist (d * (1 / (8 * dmin)))
+   x2  SmallOrders.three_first_isolation, VersionB.order_three
+        {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) (hcard : ds.card ≤ 2) {m : ℝ} (hm : m ∈ ds) (hmin : ∀ d ∈ ds, m ≤ d) : Lonely 3
+   x2  SmallOrders.four_first_isolation, VersionB.order_four
+        {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) (hcard : ds.card ≤ 3) {a : ℝ} (ha : a ∈ ds) (hmin : ∀ d ∈ ds, a ≤ d) : Lonely 4
+
+B. SAME SHAPE (identifiers and numerals normalised): 5 families covering 13 declarations
+   x4   FourDifferences.four_diffs_stop_ge_eight, FourDifferences.four_diffs_stop_ge_six, SmallOrders.three_diffs_stop_ge_five, SmallOrders.three_diffs_stop_within_three_moves
+   x3   VersionB.two_diffs, VersionB.three_diffs, VersionB.four_diffs
+   x2   Irrational.clear_of_ratio, Irrational.clear_of_ratio
+   x2   SmallOrders.three_first_isolation, VersionB.order_three
+   x2   SmallOrders.four_first_isolation, VersionB.order_four
+
+========================================================================
+ADJUDICATION -- what the mechanical pass finds, and what it CANNOT find.
+
+A1. Irrational.clear_of_ratio declared TWICE, lines 17 and 125, statement AND proof
+    byte-identical, in namespaces IrrationalDemo and IrrationalCascade. The kernel
+    accepts it because the namespaces differ. Genuine duplication.
+
+A2/A3. SmallOrders.three_first_isolation = VersionB.order_three, and the four_ pair.
+    VersionB's own header says it is a SECOND development of the proved cases --
+    'Version B for the proved cases' -- so these are deliberate alternatives, not
+    accidents. Worth knowing they are the same proposition; not a defect.
+
+B. The five same-shape families are mostly small-order statements at different n
+   (two_diffs / three_diffs / four_diffs). Same shape, different content.
+
+THE LIMIT, and it is the important one. This pass compares TEXT. It cannot see a
+mirror written in different types. The clearest example is one created on 2026-09-17:
+
+   clear_of_residue_band   naturals, band as  m*(n*k+1) mod (n*e) in [e, (n-1)*e]
+   clear_at_opening_of_band  reals, band as   exists M, n*M+1 <= (d/e)*(n*k+1) <= n*M+n-1
+
+   'x mod m in [a,b]' and 'exists M, m*M+a <= x <= m*M+b' are the SAME condition, so
+   the second is a generalisation of the first. It was proved from scratch that day
+   without checking whether the tree already had it. The detector scores them as
+   unrelated because the types and the spelling differ.
+
+So the count below is a LOWER BOUND on the mirroring, and the cases it misses are
+exactly the ones worth finding -- same mathematics, different dress.
