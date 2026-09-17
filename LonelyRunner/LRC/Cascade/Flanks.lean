@@ -792,4 +792,49 @@ theorem circDist_flank_self {e : ℝ} (he : 0 < e) (k : ℕ) :
   rw [h1]
   exact min_eq_left (by norm_num at hh ⊢; linarith)
 
+/-! ### The depth of a runner at an opening is quantised
+
+The cascade's instant is always some runner's opening, `(k + 1/n)/b`.  When the speeds are whole
+numbers, a second runner's **depth** into its blocking zone at that instant — the quantity
+`a·t − N + 1/n`, which is `0` at the near edge of the zone and `2/n` at the far edge — cannot take
+an arbitrary value.  It is an integer multiple of `1/(n·b)`, so it is either exactly zero or at
+least `1/(n·b)`.
+
+This answers a candidate lemma from another session, which asked for a **universal** floor `c_* > 0`
+on that depth.  There is no universal floor — over real speeds the depth reaches `6·10⁻¹³` and below
+(`experiments/n8/long_return_depth_v1`).  Over whole-number speeds there is one, and this is it:
+`1/(n·b)`, set by the **previous setter** `b`.  Bounded speeds give a floor; unbounded speeds do
+not, and the real-speed counterexamples are the `b → ∞` limit.  Checked tight on 13,603 moves in
+exact arithmetic (`experiments/n8/return_depth_floor_v1`), the bound being attained. -/
+
+/-- **The depth is an integer over `n·b`.** -/
+theorem depth_eq_int_div {a b : ℤ} (hb : 0 < b) (k : ℕ) (N : ℤ) :
+    (a : ℝ) * flankOpening n (b : ℝ) k - (N : ℝ) + (n : ℝ)⁻¹
+      = ((a * ((n : ℤ) * (k : ℤ) + 1) - N * (n : ℤ) * b + b : ℤ) : ℝ) / ((n : ℝ) * (b : ℝ)) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb
+  unfold flankOpening
+  push_cast
+  field_simp
+
+/-- **So a positive depth is at least `1/(n·b)`.**  `b` is the speed of the runner whose opening the
+cascade is currently at — the previous setter. -/
+theorem depth_floor {a b : ℤ} (hb : 0 < b) (k : ℕ) (N : ℤ)
+    (hpos : 0 < (a : ℝ) * flankOpening n (b : ℝ) k - (N : ℝ) + (n : ℝ)⁻¹) :
+    ((n : ℝ) * (b : ℝ))⁻¹ ≤ (a : ℝ) * flankOpening n (b : ℝ) k - (N : ℝ) + (n : ℝ)⁻¹ := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb
+  have hnb : (0 : ℝ) < (n : ℝ) * (b : ℝ) := mul_pos hn0 hb0
+  set K : ℤ := a * ((n : ℤ) * (k : ℤ) + 1) - N * (n : ℤ) * b + b with hK
+  rw [depth_eq_int_div hb k N] at hpos ⊢
+  have hKpos : (0 : ℝ) < (K : ℝ) := by
+    by_contra h
+    push Not at h
+    exact absurd hpos (not_lt.mpr (div_nonpos_of_nonpos_of_nonneg h hnb.le))
+  have hK1 : (1 : ℝ) ≤ (K : ℝ) := by
+    have : (0 : ℤ) < K := by exact_mod_cast hKpos
+    exact_mod_cast this
+  rw [inv_eq_one_div]
+  gcongr
+
 end Flanks
