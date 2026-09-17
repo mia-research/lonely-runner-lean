@@ -903,8 +903,40 @@
    "grades": [],
    "opens": []
   },
-  "B.2 From v8.2 to v9": {
+  "B.1a From v8 to v8.1 to v8.2": {
    "line": 1063,
+   "decls": [],
+   "notation": [
+    "Construction8",
+    "ConstructionN",
+    "V8_2_ISOLATED_AUDIT_v1",
+    "V8_2_OWN_AUDIT_v1",
+    "V8_REVISION_LIST_v1.md",
+    "d_min",
+    "lap_and_phase",
+    "reading_clear_iff",
+    "window_iff"
+   ],
+   "refs": [],
+   "grades": [
+    "OPEN",
+    "OPEN",
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": [
+    {
+     "line": 1072,
+     "text": "| \u00a72.3 **fitting between the AP locations** | new, `[OPEN]` | the author's statement of 2026-09-14 stated exactly: against a progression of gap `D`, runner `k` "
+    },
+    {
+     "line": 1074,
+     "text": "That `[OPEN]` is the first of the five this manuscript still carries. The section then wrote the anchored gap as `S/7`; the"
+    }
+   ]
+  },
+  "B.2 From v8.2 to v9": {
+   "line": 1090,
    "decls": [],
    "notation": [
     "A4_SPINE_BLOCKING_v1",
@@ -937,8 +969,20 @@
    "grades": [],
    "opens": []
   },
+  "B.2a From v9 to v9.1": {
+   "line": 1154,
+   "decls": [],
+   "notation": [
+    "V8_REVISION_LIST_v1.md",
+    "WHY_IT_PREDICTS_v1",
+    "v8_axiom_check_v1.out"
+   ],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
   "B.3 From v9.1 to v9.2": {
-   "line": 1127,
+   "line": 1176,
    "decls": [],
    "notation": [
     "Finset",
@@ -946,6 +990,7 @@
     "Int.fract",
     "List",
     "SKETCH_v7",
+    "V8_REVISION_LIST_v1.md",
     "exists_clear_step",
     "v9_2_spec_axioms_v1"
    ],
@@ -956,17 +1001,17 @@
    ],
    "opens": [
     {
-     "line": 1139,
+     "line": 1188,
      "text": "| \u00a76.7 | the reduction | `CascadeCapped \u2194 ExistenceAt8`, both directions. The converse is stated so the reduction is read as the obligation restated, not weaken"
     },
     {
-     "line": 1141,
+     "line": 1190,
      "text": "| \u00a78.2 order 5 `[EMPIRICAL] \u2248 31/9` | `[PROVED \u2014 ratio \u2264 26]`, `sup R = 31/9` | **ruling: the post-correct grade, with ambiguity named.** Four are named: the va"
     }
    ]
   },
   "Appendix C. Objections tested": {
-   "line": 1163,
+   "line": 1213,
    "decls": [],
    "notation": [
     "d_min"
@@ -1026,7 +1071,9 @@
   "Appendix A. Routes that cannot close this",
   "Appendix B. Version maps",
   "B.1 From v7 to v8",
+  "B.1a From v8 to v8.1 to v8.2",
   "B.2 From v8.2 to v9",
+  "B.2a From v9 to v9.1",
   "B.3 From v9.1 to v9.2",
   "Appendix C. Objections tested"
  ],
@@ -1037,11 +1084,11 @@
   "MomentIterationN.inWay": [
    "6.1 The move"
   ],
-  "move": [
+  "nextOpening": [
    "6.1 The move",
    "7. Formal verification"
   ],
-  "nextOpening": [
+  "move": [
    "6.1 The move",
    "7. Formal verification"
   ],
@@ -1075,11 +1122,6 @@
    "9. What is and is not established",
    "Abstract"
   ],
-  "7. Formal verification": [
-   "5. No external dependency",
-   "9. What is and is not established",
-   "Abstract"
-  ],
   "4.5 Families in which Existence holds at once": [
    "10. Data and code availability",
    "4.6 Where the reference first degrades",
@@ -1087,6 +1129,11 @@
    "6.9 Flanks",
    "7. Formal verification",
    "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Abstract"
+  ],
+  "7. Formal verification": [
+   "5. No external dependency",
    "9. What is and is not established",
    "Abstract"
   ],
@@ -1115,9 +1162,8 @@
   "2.3 Every arrangement is an ideal plus deviations": [
    "1.3 The cascade, and the three outcomes"
   ],
-  "3. Local restrictions: the clear-interval bound": [
-   "2.1 The autonomous scale",
-   "8.1 The infrastructure at every `n`"
+  "4. Global structure: gaps, the regular `n`-gon, the reference": [
+   "2.1 The autonomous scale"
   ],
   "8.2 Existence with few differences": [
    "10. Data and code availability",
@@ -1126,8 +1172,9 @@
    "7. Formal verification",
    "9. What is and is not established"
   ],
-  "4. Global structure: gaps, the regular `n`-gon, the reference": [
-   "2.1 The autonomous scale"
+  "3. Local restrictions: the clear-interval bound": [
+   "2.1 The autonomous scale",
+   "8.1 The infrastructure at every `n`"
   ],
   "4.6 Where the reference first degrades": [
    "4.2 Conservation and the regular `n`-gon",
@@ -1156,13 +1203,13 @@
   "4.2 Conservation and the regular `n`-gon": [
    "4.6 Where the reference first degrades"
   ],
-  "1.2 The Boundary Set Method": [
-   "4.6 Where the reference first degrades",
-   "6A. The firewall"
-  ],
   "6A. The firewall": [
    "4.6 Where the reference first degrades",
    "6.7 Existence"
+  ],
+  "1.2 The Boundary Set Method": [
+   "4.6 Where the reference first degrades",
+   "6A. The firewall"
   ],
   "9. What is and is not established": [
    "5. No external dependency"
