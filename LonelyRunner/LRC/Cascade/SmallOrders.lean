@@ -505,6 +505,49 @@ theorem return_growth {n : ℕ} [Fact (2 ≤ n)] {x t t' : ℝ} (hx : 0 < x) {P 
   have m := mul_lt_mul_of_pos_left hlow hPh
   linear_combination m
 
+/-! ### the return lemma for `g ≥ 1`
+
+`TerminationFour.return_lemma` needs `hret` — the returning runner in the way **at the next setter's
+opening** — so it governs an immediate return and nothing else.  What follows removes that
+restriction.  The observation is that `return_growth` already bounds a return from **below**, in the
+only currency a return has: how far the instant must travel.  Any upper bound on the travel over the
+same window then closes against it, whatever happened in between and however many moves it took.
+
+So the `g ≥ 1` statement is not a new inequality about openings.  It is the composition of the bound
+a return needs with any bound on what the window supplies. -/
+
+/-- **A return must be paid for by the window's growth.**  `x` leaves at its lap-`P` opening `t` and is
+in the way again at `t' > t`, with `t' ≤ C · t` for any `C` bounding the growth over the window
+between them.  Then `C` must exceed the factor a return costs.
+
+No hypothesis is placed on what happens between `t` and `t'`: the number of intervening moves, their
+setters and their laps are all free.  That is the whole point — `return_lemma` could only speak when
+`t'` was the very next opening. -/
+theorem return_needs_growth {n : ℕ} [Fact (2 ≤ n)] {x t t' C : ℝ} (hx : 0 < x) {P : ℤ} (hP : 0 ≤ P)
+    (ht : t = ((P : ℝ) + (n : ℝ)⁻¹) / x) (hlt : t < t') (hw : inWay n x t') (hC : t' ≤ C * t) :
+    ((P : ℝ) + 1 - (n : ℝ)⁻¹) / ((P : ℝ) + (n : ℝ)⁻¹) < C := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hh0 : (0 : ℝ) < (n : ℝ)⁻¹ := inv_pos.mpr hn0
+  have hPr : (0 : ℝ) ≤ P := by exact_mod_cast hP
+  have ht0 : 0 < t := by rw [ht]; positivity
+  have hgrow := return_growth (n := n) hx hP ht hlt hw
+  have : ((P : ℝ) + 1 - (n : ℝ)⁻¹) / ((P : ℝ) + (n : ℝ)⁻¹) * t < C * t := lt_of_lt_of_le hgrow hC
+  exact lt_of_mul_lt_mul_right (by linarith [this]) ht0.le
+
+/-- **So a runner cannot return within too few moves.**  Every intervening lap is at least `1`, and
+`(Q + 1/n)/(Q − 1/n)` decreases in `Q`, so each move multiplies the instant by at most
+`(1 + 1/n)/(1 − 1/n)`.  A window of `m` moves therefore supplies at most that to the `m`-th power, and
+a return from lap `P` needs more.
+
+At `n = 8` the per-move factor is `9/7`, so a return from lap `P` after `m` moves requires
+`(P + 7/8)/(P + 1/8) < (9/7)^m` — which fails outright for small `P` and small `m`. -/
+theorem return_needs_moves {n : ℕ} [Fact (2 ≤ n)] {x t t' : ℝ} (hx : 0 < x) {P : ℤ} (hP : 0 ≤ P)
+    (ht : t = ((P : ℝ) + (n : ℝ)⁻¹) / x) (hlt : t < t') (hw : inWay n x t') {m : ℕ}
+    (hC : t' ≤ (((1 : ℝ) + (n : ℝ)⁻¹) / (1 - (n : ℝ)⁻¹)) ^ m * t) :
+    ((P : ℝ) + 1 - (n : ℝ)⁻¹) / ((P : ℝ) + (n : ℝ)⁻¹)
+      < (((1 : ℝ) + (n : ℝ)⁻¹) / (1 - (n : ℝ)⁻¹)) ^ m :=
+  return_needs_growth hx hP ht hlt hw hC
+
 end ChainBounds
 
 
