@@ -434,17 +434,38 @@ on a whole residue class mod `c`, and `class_killer_int` (inside `lonely_opening
 says that shadowing every opening of that class would force the irrational ratio onto the `c`-lattice.
 Only the two lattice bridges below are new. -/
 
-/-- **A runner whose ratio to the flank is irrational is off every lattice.** -/
-theorem off_lattice_of_irrational_ratio {d e : ℝ} (hirr : Irrational (d / e)) {P : ℕ} (hP : 0 < P) :
+/-- **A ratio that is no ratio of integers is off every lattice.**  The hypothesis is irrationality
+written out in the framework's own words, so this theorem needs no imported notion.  It is also
+*stronger* than the irrational case: a rational ratio whose reduced denominator does not divide `P`
+satisfies the conclusion too, and `shadowing_pair_cross_lattice` is where that matters. -/
+theorem off_lattice_of_not_ratio {d e : ℝ}
+    (h : ∀ a b : ℤ, b ≠ 0 → d / e ≠ (a : ℝ) / (b : ℝ)) {P : ℕ} (hP : 0 < P) :
     Int.fract ((P : ℝ) * (d / e)) ≠ 0 := by
-  intro h
-  -- `fract = 0` means `P·(d/e)` is the integer `⌊P·(d/e)⌋`, so `d/e` is rational
+  intro hf
   have hPz : (P : ℝ) * (d / e) = (⌊(P : ℝ) * (d / e)⌋ : ℝ) := by
-    have := Int.fract_add_floor ((P : ℝ) * (d / e)); rw [h] at this; linarith
+    have := Int.fract_add_floor ((P : ℝ) * (d / e)); rw [hf] at this; linarith
   have hP0 : ((P : ℝ)) ≠ 0 := by positivity
-  have : d / e = ((⌊(P : ℝ) * (d / e)⌋ : ℝ)) / (P : ℝ) := by
-    field_simp at hPz ⊢; linarith [hPz]
-  exact hirr ⟨(⌊(P : ℝ) * (d / e)⌋ : ℚ) / (P : ℚ), by push_cast; exact this.symm⟩
+  have hPne : ((P : ℤ)) ≠ 0 := by exact_mod_cast hP0
+  refine h ⌊(P : ℝ) * (d / e)⌋ (P : ℤ) hPne ?_
+  push_cast
+  field_simp at hPz ⊢
+  linarith [hPz]
+
+/-- **Irrational ratios are covered, and are covered under that name.**
+
+This corollary exists so that the coverage cannot be missed by a reader searching for the word.
+`off_lattice_of_not_ratio` above is the real content and needs no import; this restates it for an
+irrational ratio, which is the case a reader is most likely to come looking for.
+
+**Irrational speeds are not an exception anywhere in this framework.**  The cascade and every
+statement about it are real-valued throughout; `LRC/Cascade/Irrational.lean` carries worked cases —
+`IrrationalDemo.all_lonely` for the speeds `1, 2, π, 4, …, 8`, whose `d_min = 4 − π` is irrational,
+and `time_irrational`, which shows the isolation instant itself is irrational.  Manuscript §6.8
+tabulates those alongside a `√2` cascade.  `Flanks.class_killer_int` covers rational and irrational
+ratios in one case, with no rationality input at all. -/
+theorem off_lattice_of_irrational_ratio {d e : ℝ} (hirr : Irrational (d / e)) {P : ℕ} (hP : 0 < P) :
+    Int.fract ((P : ℝ) * (d / e)) ≠ 0 :=
+  off_lattice_of_not_ratio ((irrational_iff_ne_rational _).mp hirr) hP
 
 /-- **A runner whose ratio to the flank has denominator `c` is on the `c`-lattice.** -/
 theorem on_lattice_of_ratio_den {d e : ℝ} {a : ℤ} {c : ℕ} (hc : 0 < c)

@@ -113,10 +113,33 @@ OPEN=$(grep -nE '^[[:space:]]*(theorem|lemma|def|axiom)[[:space:]]+[A-Za-z_.]*([
   $SRC/*.lean 2>/dev/null)
 if [ -n "$OPEN" ]; then echo "$OPEN" | sed 's/^/  /'; OPEN_OK=0; else echo "  clean (unstated, as intended)"; OPEN_OK=1; fi
 
+step "[5] irrational ratios must remain covered, by name"
+# WHY THIS EXISTS. The framework is real-valued throughout and handles irrational speeds, but the
+# GENERAL theorems are stated on the framework's own object -- "off the P-lattice",
+# Int.fract (P*(d/e)) != 0 -- which does not contain the word. Owner, 2026-09-17: a future session
+# could read that absence as "the framework does not address irrationals because it does not mention
+# them". That is this project's recorded deflationary failure mode: an absence in the reader's
+# information becoming a deficiency in the thing. So the named coverage is pinned here, and removing
+# any of it fails the gate rather than passing silently.
+IRR_REQ="off_lattice_of_irrational_ratio off_lattice_of_not_ratio all_lonely time_irrational class_killer_int"
+IRR_MISS=""
+for d in $IRR_REQ; do
+  grep -qE "^[[:space:]]*(theorem|lemma)[[:space:]]+$d\b" $SRC/*.lean 2>/dev/null || IRR_MISS="$IRR_MISS $d"
+done
+if [ -n "$IRR_MISS" ]; then
+  echo "  MISSING:$IRR_MISS"
+  echo "  If a declaration was deliberately renamed or removed, update IRR_REQ in this gate AND"
+  echo "  say in the manuscript where irrational coverage now lives. Do not just delete the name."
+  IRR_OK=0
+else
+  echo "  clean ($(echo $IRR_REQ | wc -w | tr -d ' ') declarations present)"
+  IRR_OK=1
+fi
+
 [ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
 echo "== total: $((SECONDS-T0))s =="
 echo
-if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ]; then
+if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ] && [ "$IRR_OK" = "1" ]; then
   echo "GATE PASS: $NDECL theorems, axiom-clean (coverage $NDECL of $NDISK on disk)."
   echo "           Existence at order 8 is NOT proved -- it remains open and unstated."
   exit 0
