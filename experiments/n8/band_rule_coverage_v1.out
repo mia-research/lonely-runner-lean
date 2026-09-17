@@ -1,0 +1,5 @@
+band condition vs clearing condition, 60000 random (d, e, k):
+  agree    : 60000
+  disagree : 0
+  -> the band hypothesis is EXACTLY the clearing condition, not a weakening,
+     so the rule decides every case the criterion decides.
