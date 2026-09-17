@@ -1,0 +1,27 @@
+tight  7mu < W <= 8mu:  1500 arrangements, 1696 runners with max > 7*min
+   by speed-rank r_1..r_8 :   857      0      0      0      0      0      0    839
+   at the two extremes    : 1696 / 1696  (100.0%)
+
+general integer speeds:  1500 arrangements, 8480 runners with max > 7*min
+   by speed-rank r_1..r_8 :   898   1190   1124   1031   1014   1094   1202    927
+   at the two extremes    : 1825 / 8480  (21.5%)
+
+general real speeds:  1500 arrangements, 8537 runners with max > 7*min
+   by speed-rank r_1..r_8 :   885   1184   1100   1073   1070   1123   1195    907
+   at the two extremes    : 1792 / 8537  (21.0%)
+
+READING.
+  Tight regime: 100% of the hard difference sets sit at the two extremes.
+  General arrangements: only ~21% do -- and if rank were irrelevant the figure
+  would be 25%, so the extremes are slightly UNDER-represented, not over. Ranks 2
+  and 7 carry the most (1190, 1202) against 898 and 927 at the extremes.
+
+  So 'the endpoints r_1, r_8 are where the hard ds arise' is a fact about the TIGHT
+  regime only, and I stated it generally. Section 4.6 already says why: 'Beyond
+  W = 8*mu the short gap moves into the interior as runners cross.' Once it has
+  migrated, every rank carries hard sets and rank is exactly the convention the
+  owner called it.
+
+  What survives: ExistenceAt8 depends on ds alone, so rank was never a property of
+  the object in the first place -- which is the same reason 'interior runner' could
+  not extend its coverage.
