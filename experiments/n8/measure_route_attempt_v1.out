@@ -43,3 +43,21 @@ WHAT THIS DOES TO THE REGISTER'S RULING.
   ExistenceAt8 is an existence statement and section 3 says existence is not what is
   being asked. But no easier route to the frozen target follows from it, which is what
   I implied.
+
+========================================================================
+AND THE OTHER HALF OF THE SUGGESTION -- 'continuity' -- dies on a theorem already
+in the tree, without needing any new argument.
+
+  Flanks.lonely_iff_exists_flank is an IFF:
+      (exists s, 0 < s and Lonely n ds s)  <->  exists e in ds, exists k,
+                                                Lonely n ds (flankOpening n e k)
+
+  So the flank openings -- the BOUNDARY points, the ones circDist_flank_self puts
+  exactly on 1/n -- are a COMPLETE search. The interior contains nothing the boundary
+  misses.
+
+  'Interior points are easier to reach than boundary points' presupposes the interior
+  holds something the boundary does not. It does not. There is no easier target.
+
+  Both halves of the suggestion are therefore void: the measure half by the 7/4
+  arithmetic above, the continuity half by a theorem that was already proved.
