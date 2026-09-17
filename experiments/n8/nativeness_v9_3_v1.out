@@ -1,0 +1,42 @@
+declarations checked            : 22
+distinct non-local identifiers  : 35
+
+FLAGGED against section 5's stated exclusions:
+  off_lattice_of_irrational_ratio  (Flanks.lean)  ->  Irrational
+
+All non-local identifiers used, for the record:
+  A
+  D
+  Fact
+  Fact.out
+  Finset
+  For
+  If
+  Int
+  Int.cast_abs
+  Int.fract
+  Int.fract_add_floor
+  Int.fract_intCast
+  Int.fract_lt_one
+  Int.fract_nonneg
+  Int.mul_ediv_add_emod
+  Irrational
+  IsCoprime
+  Most
+  N
+  Ne
+  Ne.symm
+  Only
+  P
+  Proposition
+  Q
+  The
+  With
+  abs_eq_zero.mp
+  abs_lt.mp
+  h0.symm
+  hcop.symm
+  hn0.ne
+  inv_pos.mpr
+  not_lt.mpr
+  this.symm

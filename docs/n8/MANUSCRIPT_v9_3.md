@@ -4,8 +4,9 @@
 Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work of 2026-09-17.
 See `CORRECTIONS_2026_09_17_v2` §5–§6 for the withdrawal and the audit behind it.
 Checked for v9.3: the cascade gate (**PASS, 4,690 theorems axiom-clean**, 2026-09-17, LonelyRunner commit `4f4d0f9`) and a
-compile-diff against v9.2, whose seven findings are addressed here. **Not repeated for v9.3**: the §5 nativeness pass and the
-review against v1 and v7, both of which stand from v9.2 and neither of which the v9.3 edits touch.
+compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 22 new
+declarations and its one exception is recorded in §5. **Not repeated for v9.3**: the review against v1 and v7, which stands
+from v9.2 and which the v9.3 edits do not touch.
 
 ---
 
@@ -33,7 +34,7 @@ exactly when some **flank** (one of its differences) has a lonely opening. **Pro
 multiple of 8. **Open.** It is proved in several families (§4.5, §6.9), and holds in every case computed, including an
 exhaustive sweep of every integer arrangement `0 = v_1 < … < v_8 ≤ 40`.
 
-Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (161
+Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (4,690
 theorems). Both have no `sorry`, and every theorem in both depends on at most `propext`, `Classical.choice` and
 `Quot.sound`. The φ(n) count of isolation instants for an arithmetic progression, the one dependency v7 cited, is derived
 in Lean. §7 maps every numbered statement to its declaration.
@@ -361,6 +362,15 @@ in Lean at general `n`** from the framework's own objects, in `ConstructionN/Ins
 That development is outside the two artefacts of §7 (it sits in the general-`n` line with its own gate). The progression's
 four instants `1/8, 3/8, 5/8, 7/8` in each lap also follow from Theorem 4.3 alone: the eight points `j·t` are pairwise at
 least `1/8` apart. Nothing else is cited: no equidistribution, no result at another order, no proof sketch.
+
+**v9.3's 22 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 21 of them use only
+`Int.fract` and its lemmas, `Int.cast_abs`, `Int.mul_ediv_add_emod`, `Fact.out` and ordinary order and field algebra.
+**There is one exception, and it is stated rather than absorbed.** `Flanks.off_lattice_of_irrational_ratio` uses `Irrational`,
+from `Mathlib.NumberTheory.Real.Irrational` — number theory, which the claim above says does not appear. It is a **convenience
+bridge** with no dependents: it converts an irrational ratio into the framework's own object, `Int.fract (P·(d/e)) ≠ 0`, for a
+reader who has an irrational to hand. Proposition 6.10 is stated on the framework's object and does not use it, and no other
+declaration in the artefact does either, so it can be deleted without affecting any result. Whether to keep a number-theory
+import for a bridge nothing needs is an open decision for the author, recorded here rather than settled quietly.
 
 **The v9.2 additions were checked against that claim, declaration by declaration.** Every non-local identifier they use is
 `Int.fract` and its four lemmas, `Nat.cast`, `Nat.cast_sub`, `Nat.div_add_mod`, `Nat.mul_pos`, `List.mem_map`,
@@ -770,7 +780,9 @@ threshold by a route that uses no covering, which is why §8.2 keeps the row wit
 here concludes with an unbounded `∃` in Lean — Theorem 6.9 and Proposition 6.10 both end `∃ k, Lonely n ds (flankOpening n e k)`
 — and that is not the defect. Their witnesses come from `exists_clear_step`, whose index is bounded by `~1/min(f, 1−f)` in the
 step's fractional part, and `clear_in_class_of_not_int` passes that same bound through. The withdrawn propositions have no such
-bound anywhere in their arguments. A reader checking this table should read the proof, not the `∃`. v7 recorded both rather than repairing them quietly. The first is resolved — first-ness is a proved
+bound anywhere in their arguments. A reader checking this table should read the proof, not the `∃`.
+
+Of the first two violations, v7 recorded both rather than repairing them quietly. The first is resolved — first-ness is a proved
 property of the cascade's output, not a demand — and the second stands as a recorded caveat on pinned enumerations (§4.6, §6.7,
 Appendix A).
 
@@ -1284,12 +1296,14 @@ opening exists without bounding where it is, which is register items 4 and 27 an
 | §6.9 "Open at flanks" | led with `j ≥ 4`, "where Proposition 6.11 does not apply" | that clause withdrawn — register item 26, rule coverage read as reach |
 | §9 author's rulings | the counting ruling **pending** | **withdrawn**; nothing left for it to decide |
 | §6A ban table | "Two of these were violated in earlier drafts" | **three** — the covering ban, unrecorded through v8 and v9.2 |
-| §7 crosswalk: Prop 6.7, §6.6, §6.2 | "derived and verified, not formalised" | 11 Lean declarations |
+| §7 crosswalk: Prop 6.7, §6.6, §6.2 | "derived and verified, not formalised" | 13 Lean declarations (12 theorems and `nextScale`) |
 | §7 crosswalk: H1 (Appendix A item 4) | "not formalised" | `Together.connecting_difference_near_lap`, `_same_side`, `circDist_sub_le` |
 | numbered results | 26 | **25** (6.11 withdrawn; 6.10 restated) |
 
-**Nothing else moved.** §1.3's no-window statement, §6A, the five open items and every other numbered result and declaration
-stand as in v9.2. The four open items of §2.3, §4.6, §6.7 and §8.2 are unchanged; §6.9's open item is unchanged in substance —
+**Nothing else moved.** §1.3's no-window statement, §6A, every open item and every other numbered result and declaration
+stand as in v9.2. To be exact, since v9.2's roll-up counted five and this is a different tally of the same body: §2.3, §4.6,
+§6.7 and the **two** in §8.2 are unchanged verbatim, §6.9's shadowing-triples item is unchanged, and §6.9's flank item is
+unchanged in substance —
 "not every flank of a runner can be shadowed at once" was already there, and only the withdrawn `j ≥ 4` clause preceding it is
 gone.
 
