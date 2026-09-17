@@ -1,0 +1,25 @@
+arrangements                                  : 600
+(runner, arrangement) pairs                   : 4800
+instants sampled per arrangement              : 4000
+
+runners NEVER free of a short flank in sampling: 81
+
+how many of the eight gaps are short (< 1/8) at an instant:
+   0 short :        5  (0.00%)
+   1 short :      499  (0.02%)
+   2 short :     8597  (0.36%)
+   3 short :   126347  (5.26%)
+   4 short :   657905  (27.41%)
+   5 short :  1041950  (43.41%)
+   6 short :   492585  (20.52%)
+   7 short :    71640  (2.98%)
+   8 short :      472  (0.02%)
+
+====================================================================
+RE-TESTING the 'never free' cases with a far larger search
+  re-tested                    : 81
+  found a lonely instant       : 81
+  STILL none                   : 0
+  -> the 81 was a search-window artefact. Every runner sampled has an instant
+     at which neither flanking gap is short, which is section 4.6's obligation
+     holding in every case measured.
