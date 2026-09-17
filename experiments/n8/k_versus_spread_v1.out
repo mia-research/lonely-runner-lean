@@ -1,0 +1,23 @@
+          spread S   sets  median k   90th   max k  max k / S
+  8^0 .. 8^1 (     1-8      )   3373         0      0       2      0.261
+  8^1 .. 8^2 (     8-64     )   2307         1      2       8      0.130
+  8^2 .. 8^3 (    64-512    )    286         2      6      14      0.058
+  8^3 .. 8^4 (   512-4096   )     24         3      9      14      0.013
+  8^4 .. 8^5 (  4096-32768  )      5         3      9       9      0.002
+
+total sets: 5995   overall max k: 14
+
+READING: if max k grows like S, the ratio in the last column stays roughly constant;
+if it grows like log S, the column falls steeply. Either way a bound k <= f(S) is
+enough for ExistenceAt8, since f(S) is finite for every difference set.
+
+LIMIT OF THIS TABLE, and it is the important one.
+  These are RANDOM sets. Random sampling gives max k = 14 even at spread 4096-32768,
+  but the hill-climb in bounded_k_attack_v1 found k = 369 at spread ~14,125 -- 26x
+  worse at comparable spread. So the hard sets are RARE and random sampling does not
+  reach them. This table is evidence about typical behaviour and says almost nothing
+  about the worst case, which is what a theorem needs.
+
+  Reporting the falling last column as 'k grows like log S' would therefore be exactly
+  the error this session has made repeatedly: taking the reach of a search for the
+  shape of the thing. The growth rate of the WORST case is not measured here.
