@@ -1,0 +1,26 @@
+== [0] build-artefact integrity ==  (t+0s)
+  clean
+   ...[0] took 0s
+== [1] build every cascade module ==  (t+0s)
+  modules: 19
+Build completed successfully (3362 jobs).
+   ...[1] took 43s
+== [2] sorry inventory ==  (t+43s)
+  none
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+43s)
+  clean
+   ...[2b] took 0s
+== [3] axiom check, every theorem ==  (t+43s)
+  4691 of 4691 clean
+   ...[3] took 675s
+== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+718s)
+  clean (unstated, as intended)
+   ...[4] took 0s
+== [5] irrational ratios must remain covered, by name ==  (t+718s)
+  clean (5 declarations present)
+   ...[5] took 0s
+== total: 718s ==
+
+GATE PASS: 4691 theorems, axiom-clean (coverage 4691 of 4691 on disk).
+           Existence at order 8 is NOT proved -- it remains open and unstated.
