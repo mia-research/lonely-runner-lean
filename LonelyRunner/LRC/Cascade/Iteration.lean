@@ -838,6 +838,34 @@ theorem own_ap_residue_rule {m : ℝ} (hm : 0 < m) {c κ h u m' : ℤ}
       nlinarith [h3, hh0, hn0, h2]
   exact ⟨fun ⟨M, hM⟩ => ⟨M, (key M).mp hM⟩, fun ⟨M, hM⟩ => ⟨M, (key M).mpr hM⟩⟩
 
+/-- **Proposition 6.7, second clause: `m' = 1` is a slot-sharer.**  It is in the way at *every* own AP
+instant, so it never leaves. -/
+theorem slot_sharer_of_m'_eq_one {m : ℝ} (hm : 0 < m) {c κ h u : ℤ}
+    (hκ : 0 < κ) (hh : 0 < h) (hc : c = h * u) (hnκ : (n : ℤ) * κ = h * 1) (ν : ℤ) :
+    inWay n (((c : ℝ) / (κ : ℝ)) * m) ((ν : ℝ) / (n * m)) := by
+  rw [own_ap_residue_rule hm hκ hh hc hnκ ν]
+  exact ⟨u * ν, by simp⟩
+
+/-- **Proposition 6.7, third clause: an even `m'` with `m' ≤ n` is never in the way at an odd `ν`.**
+The coprimality of `u` and `m'` is what the common factor `h = gcd(c, nκ)` supplies. -/
+theorem not_inWay_odd_of_m'_even_le {m : ℝ} (hm : 0 < m) {c κ h u m' : ℤ}
+    (hκ : 0 < κ) (hh : 0 < h) (hc : c = h * u) (hnκ : (n : ℤ) * κ = h * m')
+    (hcop : IsCoprime u m') (heven : (2 : ℤ) ∣ m') (hle : m' ≤ (n : ℤ)) {ν : ℤ} (hodd : ¬ (2 : ℤ) ∣ ν) :
+    ¬ inWay n (((c : ℝ) / (κ : ℝ)) * m) ((ν : ℝ) / (n * m)) := by
+  rw [own_ap_residue_rule hm hκ hh hc hnκ ν]
+  rintro ⟨M, hM⟩
+  have hnZ : (0 : ℤ) < (n : ℤ) := by have := (Fact.out : 2 ≤ n); omega
+  have hm'0 : (0 : ℤ) < m' := by nlinarith [hκ, hh, hnZ, hnκ]
+  -- `n·|·| < m' ≤ n` forces `|·| = 0`, so `m' ∣ u*ν`
+  have hzero : u * ν - m' * M = 0 := by
+    rcases eq_or_lt_of_le (abs_nonneg (u * ν - m' * M)) with h0 | h0
+    · exact abs_eq_zero.mp h0.symm
+    · exfalso; nlinarith [hM, h0, hle, hnZ]
+  have hdvd : m' ∣ ν * u := ⟨M, by linear_combination hzero⟩
+  -- coprime to `u`, so `m' ∣ ν`; `m'` even then makes `ν` even
+  have hdvdν : m' ∣ ν := hcop.symm.dvd_of_dvd_mul_right hdvd
+  exact hodd (dvd_trans heven hdvdν)
+
 /-- **In the way at an AP instant iff the drift line is within one slot of the subject.** -/
 theorem inWay_at_ap_instant_iff_drift {m : ℝ} (hm : 0 < m) (a K r : ℤ) (e : ℝ) :
     inWay n (((a : ℝ) + e) * m) (((n * K + r : ℤ) : ℝ) / (n * m)) ↔

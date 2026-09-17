@@ -5,7 +5,7 @@ import LonelyRunner.LRC.Cascade.Iteration
 
 Part of the cascade artefact (`LRC/Cascade/`).  Threshold `1/n`.
 
-Manuscript §Appendix C, item 4 (H1).  The development record states it as: same-side runners are in the
+Manuscript Appendix A, item 4 (H1).  The development record states it as: same-side runners are in the
 way together only where their connecting difference is within `1/4` of a lap line.  The manuscript gives
 the sharper form and records it as proved but **not formalised**; it is formalised here.
 
