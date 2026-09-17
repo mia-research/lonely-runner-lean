@@ -1115,7 +1115,9 @@ only where their connecting difference is within `1/4` of a lap line. The sharpe
 in `(0, 1/8)` or in `(−1/8, 0)`, then `|x − y| < 1/8`. Since `x − y` is the connecting difference times `t`, that difference is
 within `1/4` of a lap line, and within `1/8` on the same side. `[PROVED — Together.connecting_difference_near_lap, connecting_difference_same_side; the circle-metric triangle inequality they need, circDist_sub_le, is proved there too]` The development
 record combines H1 with the overlap bound of item 2 to argue that a long run forces near-divisibility conditions
-`k·b ≡ 0 (mod 8a)` on the arrangement's gaps (`PROOF_DEV_v1` Part V). That step is stated there, not derived; it is recorded
+`k·b ≡ 0 (mod 8a)` on the arrangement's gaps (`PROOF_DEV_v1` Part V, which sits in a separate working tree at
+`lrc-n8/notes/` and is not deposited with this manuscript; the passage is quoted verbatim in `LOST_FUNCTIONS_v1` §E, which is,
+so the step is checkable here). That step is stated there, not derived; it is recorded
 here as a direction in the framework's objects, not as a result. The next test it names: trace the steps of the longest run
 (19 zones) and locate the arithmetic that ends it.
 
