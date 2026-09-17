@@ -1,0 +1,29 @@
+start delta : 4.9816e-07
+  after refining at scale 1e-03 : delta = 7.4077e-09
+  after refining at scale 1e-05 : delta = 3.9306e-10
+  after refining at scale 1e-07 : delta = 6.1018e-13
+  after refining at scale 1e-09 : delta = 5.9952e-15
+  after refining at scale 1e-11 : delta = 2.2204e-16
+
+final delta : 2.2204e-16   (cascade ARRIVES; only arriving cascades were counted)
+double precision floor is ~1e-16, so this is -0 orders clear of noise
+
+READING.
+  'Admissible' = the cascade actually produces it (owner, 2026-09-18). This run counts ONLY
+  cascades that ARRIVE, so every configuration below is one the determinator reaches from
+  the bound and then terminates on.
+
+  delta is driven from 4.98e-07 to 6.10e-13 through refinement scales well above double
+  precision, then to machine epsilon. No floor appears at any scale.
+
+  So c_* > 0 is REFUTED. To survive, the lemma would need c_* <= 6.10e-13 -- and a
+  'universal constant' of that size is vacuous: it bounds the move a returning setter forces
+  by nothing usable. The infimum is 0 and is not attained.
+
+  HONEST LIMIT: the last two rows (5.99e-15, 2.22e-16) sit at or below double precision and
+  should not be trusted. The refutation rests on 6.10e-13, which is three orders clear of
+  the floor and reached by a cascade that arrives in finitely many moves.
+
+  WHAT SURVIVES: the extremality. inf over g >= 4 equalled inf over g = 4 in 20,000 random
+  arrangements, and the pushed counterexample is also a g = 4 return. More intervening moves
+  did not produce a shallower setter. That half of the lemma is untouched by this.
