@@ -586,6 +586,30 @@ theorem clear_at_opening_of_band {e d : ℝ} (he : 0 < e) (k : ℕ) (M : ℤ)
   rw [hsplit]
   exact circDist_ge_of_band M hy1 hy2
 
+/-- **The converse: clear at an opening forces the ratio into a band.**  Together with
+`clear_at_opening_of_band` this makes the band criterion an `iff`, which is how the manuscript
+states it.  Taking `M = ⌊·⌋` of the scaled ratio, `circDist ≥ 1/n` says exactly that the scaled
+ratio sits between `nM + 1` and `nM + n − 1`. -/
+theorem band_of_clear_at_opening {e d : ℝ} (he : 0 < e) (k : ℕ)
+    (hclear : (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e k)) :
+    ∃ M : ℤ, (n : ℝ) * (M : ℝ) + 1 ≤ (d / e) * ((n : ℝ) * (k : ℝ) + 1) ∧
+      (d / e) * ((n : ℝ) * (k : ℝ) + 1) ≤ (n : ℝ) * (M : ℝ) + (n : ℝ) - 1 := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hninv : (n : ℝ) * (n : ℝ)⁻¹ = 1 := mul_inv_cancel₀ hn0.ne'
+  set y : ℝ := d * flankOpening n e k with hy
+  have hscale : (d / e) * ((n : ℝ) * (k : ℝ) + 1) = (n : ℝ) * y := by
+    rw [hy, position_at_flank he]; field_simp
+  have hfr : Int.fract y = y - (⌊y⌋ : ℝ) := rfl
+  have h1 : (n : ℝ)⁻¹ ≤ Int.fract y := le_trans hclear (min_le_left _ _)
+  have h2 : (n : ℝ)⁻¹ ≤ 1 - Int.fract y := le_trans hclear (min_le_right _ _)
+  have hA : (1 : ℝ) ≤ (n : ℝ) * Int.fract y := by
+    have := mul_le_mul_of_nonneg_left h1 hn0.le; rwa [hninv] at this
+  have hB : (n : ℝ) * Int.fract y ≤ (n : ℝ) - 1 := by
+    have := mul_le_mul_of_nonneg_left h2 hn0.le
+    rw [mul_sub, mul_one, hninv] at this; linarith
+  rw [hfr, mul_sub] at hA hB
+  exact ⟨⌊y⌋, by linarith [hA, hscale], by linarith [hB, hscale]⟩
+
 /-- **It recovers Theorem 4.8 at `k = 0`.**  Taking `M = 0` and `k = 0` the band condition reads
 `e ≤ d ≤ (n−1)·e`, which at `n = 8` is `d_min ≤ d ≤ 7·d_min` — the hypothesis of
 `Construction8.ratio_condition`.  Stated so the relationship is checkable rather than asserted. -/
@@ -594,6 +618,23 @@ theorem clear_at_bound_of_ratio {e d : ℝ} (he : 0 < e) (h1 : e ≤ d) (h7 : d 
   have hde1 : (1 : ℝ) ≤ d / e := (one_le_div he).mpr h1
   have hde7 : d / e ≤ (n : ℝ) - 1 := by rw [div_le_iff₀ he]; linarith
   refine clear_at_opening_of_band he 0 0 ?_ ?_ <;> push_cast <;> nlinarith [hde1, hde7]
+
+/-- **The mirror, at the other end: `k = 1` at the largest flank.**  Theorem 4.8 is the band at
+`(e = d_min, k = 0)` with `M = 0`, which reads `e ≤ d ≤ (n−1)·e`.  Its mirror is the SAME band at
+`(e = d_max, k = 1)` with `M = 0`, which reads `e/(n+1) ≤ d ≤ (n−1)·e/(n+1)` — at `n = 8`,
+`d_max/9 ≤ d ≤ 7·d_max/9`.  Stated so that what mirrors what is checkable, not asserted: the two
+are one criterion at two `(flank, opening)` pairs, not two theorems. -/
+theorem clear_at_first_opening_of_ratio {e d : ℝ} (he : 0 < e)
+    (h1 : e ≤ ((n : ℝ) + 1) * d) (h7 : ((n : ℝ) + 1) * d ≤ ((n : ℝ) - 1) * e) :
+    (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e 1) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  refine clear_at_opening_of_band he 1 0 ?_ ?_
+  · push_cast
+    rw [div_mul_eq_mul_div, le_div_iff₀ he]
+    nlinarith [h1, he, hn0]
+  · push_cast
+    rw [div_mul_eq_mul_div, div_le_iff₀ he]
+    nlinarith [h7, he, hn0]
 
 /-- **The subject is lonely at flank `e`'s `k`-th opening when every difference's ratio sits in
 some band.**  This is the form that decides a difference set. -/
@@ -680,5 +721,75 @@ theorem lonely_iff_bounded_search {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d)
       rw [hsplit] at hk
       exact (lonely_periodic_of_int_flank hbZ hint _ _).mp hk
   · rintro ⟨e, he, k, -, hk⟩; exact ⟨e, he, k, hk⟩
+
+/-! ### The two symmetries the framework uses and had not stated
+
+Both are elementary and both were relied on before being proved.  `circDist` is **even**, which
+is what makes a difference's sign irrelevant — and so makes "the slowest runner" a labelling
+convention rather than a fact about the arrangement.  And loneliness is **scale-free**: only the
+ratios matter, which is what licenses reading every difference against `d_min`. -/
+
+/-- **`circDist` is even.**  So a difference and its negation are interchangeable, and the order
+of the speeds is a convention. -/
+theorem circDist_neg (x : ℝ) : circDist (-x) = circDist x := by
+  unfold circDist
+  rcases eq_or_ne (Int.fract x) 0 with h | h
+  · rw [h, Int.fract_neg_eq_zero.mpr h]
+  · rw [Int.fract_neg h, min_comm]
+    congr 1 <;> ring
+
+/-- **Loneliness is scale-free.**  Rescaling every difference by `c > 0` and the instant by `1/c`
+leaves every reading, and so every verdict, unchanged.  This is what lets the framework normalise
+by `d_min` and work with ratios. -/
+theorem lonely_smul {ds : Finset ℝ} {c s : ℝ} (hc : 0 < c) :
+    Lonely n (ds.image (fun d => c * d)) (s / c) ↔ Lonely n ds s := by
+  constructor
+  · intro h d hd
+    have := h (c * d) (Finset.mem_image_of_mem _ hd)
+    rwa [show c * d * (s / c) = d * s by field_simp] at this
+  · intro h d' hd'
+    obtain ⟨d, hd, rfl⟩ := Finset.mem_image.mp hd'
+    rw [show c * d * (s / c) = d * s by field_simp]
+    exact h d hd
+
+/-- **In the way is the complement of the band.**  The clear criterion decides both sides: a
+difference is in the way at flank `e`'s `k`-th opening exactly when its scaled ratio is NOT in any
+band, i.e. within `1` of a multiple of `n`. -/
+theorem inWay_at_opening_iff_not_band {e d : ℝ} (he : 0 < e) (k : ℕ) :
+    inWay n d (flankOpening n e k) ↔
+      ¬ ∃ M : ℤ, (n : ℝ) * (M : ℝ) + 1 ≤ (d / e) * ((n : ℝ) * (k : ℝ) + 1) ∧
+        (d / e) * ((n : ℝ) * (k : ℝ) + 1) ≤ (n : ℝ) * (M : ℝ) + (n : ℝ) - 1 := by
+  unfold inWay
+  constructor
+  · intro hlt ⟨M, h1, h2⟩
+    exact absurd (clear_at_opening_of_band he k M h1 h2) (not_le.mpr hlt)
+  · intro hno
+    by_contra hge
+    exact hno (band_of_clear_at_opening he k (not_lt.mp hge))
+
+/-- **Time reversal.**  Loneliness is symmetric about zero: the subject is lonely at `s` exactly
+when it is lonely at `−s`.  Immediate from `circDist_neg`, and it says the lonely set of an
+arrangement is a symmetric set — half of it lies at negative times and carries no new information. -/
+theorem lonely_neg {ds : Finset ℝ} {s : ℝ} : Lonely n ds (-s) ↔ Lonely n ds s := by
+  constructor <;> (intro h d hd; have := h d hd)
+  · rwa [show d * -s = -(d * s) by ring, circDist_neg] at this
+  · rwa [← circDist_neg (d * s), ← show d * -s = -(d * s) by ring] at this
+
+/-- **A flank sits exactly on the boundary at its own openings.**  `circDist (e · flankOpening n e k)`
+is exactly `1/n`, never more and never less.  This is why the zones are OPEN: the flank is clear at
+its own opening by the `≤` in `Lonely`, and would not be under a strict inequality.  The boundary
+discipline of §1.2 is load-bearing exactly here. -/
+theorem circDist_flank_self {e : ℝ} (he : 0 < e) (k : ℕ) :
+    circDist (e * flankOpening n e k) = (n : ℝ)⁻¹ := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have h : e * flankOpening n e k = ((k : ℤ) : ℝ) + (n : ℝ)⁻¹ := by
+    unfold flankOpening; field_simp; push_cast; ring
+  rw [h, add_comm, circDist_add_int]
+  unfold circDist
+  have hh : (n : ℝ)⁻¹ ≤ 2⁻¹ := inv_le_half
+  have h1 : Int.fract ((n : ℝ)⁻¹) = (n : ℝ)⁻¹ :=
+    Int.fract_eq_self.mpr ⟨by positivity, by norm_num at hh ⊢; linarith⟩
+  rw [h1]
+  exact min_eq_left (by norm_num at hh ⊢; linarith)
 
 end Flanks
