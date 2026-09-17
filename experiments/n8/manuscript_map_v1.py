@@ -57,7 +57,9 @@ def parse(path, lean):
         # as defects by the first version of this check; all nine were version-qualified.
         for m2 in re.finditer(r'§\s*([0-9]+(?:\.[0-9]+)?[A-Za-z]?)', l):
             before = l[max(0, m2.start() - 22):m2.start()]
-            if re.search(r'\bv[0-9]', before) or sec.startswith('B.') or sec.startswith('Appendix B'):
+            # `\bv[0-9]` does not match `SKETCH_v7`: `_` is a word character, so there is no boundary
+            # before the `v`. Match the version marker without requiring one, and the sketch by name.
+            if re.search(r'v[0-9]|SKETCH', before) or sec.startswith('B.') or sec.startswith('Appendix B'):
                 S.setdefault('vrefs', set()).add(m2.group(1)); continue
             S['refs'].add(m2.group(1))
         g = re.search(r'`\[([A-Z][A-Za-z]+)', l)

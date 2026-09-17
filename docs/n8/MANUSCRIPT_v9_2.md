@@ -360,8 +360,10 @@ least `1/8` apart. Nothing else is cited: no equidistribution, no result at anot
 **The v9.2 additions were checked against that claim, declaration by declaration.** Every non-local identifier they use is
 `Int.fract` and its four lemmas, `Nat.cast`, `Nat.cast_sub`, `Nat.div_add_mod`, `Nat.mul_pos`, `List.mem_map`,
 `List.mem_toFinset`, `Finset.eq_empty_or_nonempty` and `Function.iterate_add_apply` — the fractional part, integer division,
-casts, membership, iteration. Nothing from measure theory, topology, filters or number theory appears, and no statement of
-equidistribution, Weyl, Kronecker or Dirichlet type is used anywhere. `exists_clear_step`, on which the shadowing argument of
+casts, membership, iteration. Nothing from measure theory, topology, filters or number theory appears in them, and no
+statement of equidistribution, Weyl, Kronecker or Dirichlet type is used in any of them. (Propositions 6.10–6.11, which are
+proved in the text and not formalised, do use Dirichlet's pigeonhole and a residue count; the author ruled those admissible
+as tools on 2026-09-15, and §9 records that the ruling on whether they sit inside the framework is still pending.) `exists_clear_step`, on which the shadowing argument of
 §6.9 rests and which replaced an appeal to the density of an irrational orbit, uses **no non-local identifier at all** in its
 eighty-four lines: it follows the runner's successive positions and compares consecutive nearest integers. The new modules
 import only `Cascade` and `ConstructionN.LemmaPass`; none refers to a result at another order.
@@ -395,6 +397,25 @@ stopping when no reading is within 1 of a multiple of 8. The runner that sets a 
 scale — one slot away, at exactly one eighth. `[DERIVED; VERIFIED — 124,488 of 124,488 runners equal the BSM first
 isolation instant]` The moves do not multiply a common factor: each step resets to `D′ = d/(8N + 1)` (at `(1,…,6,8,9)`,
 runner 1, the chain `(8, N = 1), (7, N = 1)` ends at `D_final = 7/9`). Scales are real and decrease from `d_min`.
+
+**The enlarged tier, and why it is not here.** `SKETCH_v7` §7c gives the cascade as three tiers tried in order — AP at the
+gcd `g`, grid at the runner's `d_min`, and an **enlarged** step, *"some `D` beyond those"*, stepping up until the lattice is
+usable, under the ceiling `D ≤ 7·d_min`. The recursion above is not that third tier renamed: it runs the other way. Its
+factor `s/(8N+1)` is below 1 for every step, so its scales decrease from `d_min` and never enter `d_min < D ≤ 7·d_min` at
+all (0 of 2,488 shuffled arrangements reach a scale above `d_min`). The two are disjoint.
+
+The tier is nonetheless **superseded, and provably so, rather than dropped.** By Theorem 6.2(b) the fixed point is the first
+lonely instant, and by Corollary 6.4 the cascade fails to reach one only when the subject has no lonely instant at all. So
+any instant a search over enlarged steps could return is a lonely instant, hence at or after the cascade's — and when the
+cascade returns nothing there is nothing for that search to find. A tier tried in order can improve on a determinator that
+already lands on the first isolation only by finding it sooner, and Theorem 6.2(b) forbids that. The word is absent from
+this manuscript for that reason and not by oversight.
+
+The same argument retires `SKETCH_v7` §7b's **mixed reading** — the four spine instants `t = p/(8·d_min)`, `p ∈ {1,3,5,7}`, tried in
+order, the lower runners taking `p = 1` and a tight pair taking `p = 3`. Its mechanism is Theorem 4.10: the four points
+stand or fall together exactly when the reading is integral, and separate otherwise. On its own worked example
+`(10, 65, 101, 126, 159, 222, 256, 271)` it gives runners 256 and 271 the instant `t = 1/40`; the cascade gives them
+`9/1040` and `17/1648`, both earlier. A search over four candidates cannot beat a determinator that lands on the first.
 
 **A step is one dilation.** `[PROVED — arithmetic]` Passing from `D` to `D′` multiplies every reading by the same factor
 `λ = D/D′ = (8N + 1)/s_x > 1`, where `x` is the setter. The setter lands exactly on `8N + 1`: slot `≡ 1`, deviation 0, clear at
@@ -511,6 +532,15 @@ instants settle a runner as well (Corollary 6.4).
 > bound ends; equivalently, some flank has a lonely opening.  `[OPEN; not stated in either artefact]`
 
 **What is proved of it.** Every family of §4.5 and of §6.9; and at other thresholds and fewer differences, the rows of §8.
+
+**The joint, and why it is not the statement here.** `SKETCH_v7` §10 put the same obligation as a claim: *"for every
+arrangement and every runner there is a `u` in the window `[1/8, 7/8]` at which all six of the other runners read mid-lap."*
+It was `[CLAIMED]`, never proved, and it is the open statement above **with the first window attached** — the nearest runner
+reads mid-lap exactly when `u ∈ [1/8, 7/8]`, so the claim says the subject is lonely within its first lap. As written it is
+**false**, refuted by the arrangement §6.9 already names: `(1, 31, 75, 97, 128, 160, 176, 225)`, runner 1, which has no
+lonely instant anywhere in `[1/8, 7/8]` and is first lonely at `u = 165/128`, in its second lap. Stripped of the window its
+content is exactly Existence, which is what is stated here and is open. The same refutation retires v7's §7.4 Claim
+(Appendix B.1), whose wording stopped the cascade at lap 0.
 
 **The obligation, as one statement.** `[PROVED — the reduction; Cascade and the specification]` Every link from the bound
 to Existence is formalised except one, and composing them leaves a single obligation. The relocation of an instant is a
@@ -1113,7 +1143,19 @@ Author's rulings of 2026-09-17 are marked.
 | §9 "Author's rulings pending … whether the `n > 2k` proof is native" | the `n > 2k` ruling recorded as made, the Props 6.10–6.11 one still pending | the two sites disagreed after the §8.2 edit; found by the compile-diff before promotion |
 | — | the specification file's gate position stated, with its own axiom-check artefact | it is outside both gates by design, so its "within the three axioms" needed a witness of its own (`v9_2_spec_axioms_v1`); found by the compile-diff |
 | §5 | the nativeness check recorded | the additions were checked against §5's claim declaration by declaration: only `Int.fract`, `Nat` casts and division, `List`/`Finset` membership and `Function.iterate_add_apply`; nothing from measure theory, topology, filters or number theory; `exists_clear_step` uses no non-local identifier at all |
+| §6.2, §6.7 | three sketch sections accounted for | `SKETCH_v7`'s **enlarged tier**, **mixed reading** (its §7b) and **the joint** (its §10) had never appeared in any manuscript version, a gap the v1 audit named on 2026-09-13. The first two are retired by Theorem 6.2(b) — the cascade lands on the first lonely instant, so no tier or candidate list can better it, and the mixed reading is beaten on its own worked example. The joint is the open statement with the first window attached, and **false as written**, by the arrangement §6.9 already names |
 | §10 | census artefacts, the specification file, refreshed digest | the emitters, the verifiers, the harness, the map; and that the census data is deposited so the theorems regenerate from this repository alone |
+
+**A trace recovered, not a change.** B.1 maps v7's sections to v8's but not its numbered results, so a reader holding v7
+cannot follow a result by its number. The three that were renumbered out of §7 are:
+
+| v1 | v7 | v8 onward |
+|---|---|---|
+| Theorem 7.1 — the procedure returns `u` ⟹ the runner is lonely at `u/d_min` | Theorem 7.2 — returns `(d, a)` ⟹ lonely at `a/(8d)` | **Theorem 6.2 (Construction)** |
+| — | Proposition 7.1 — lonely at any instant of its **window** ⟹ lonely at one of the candidates | **Theorem 6.3 (Localisation)** and **Corollary 6.4**, with the window dropped and the statement strengthened to an equivalence over every positive instant |
+
+Nothing was lost in that renumbering; the second was strengthened. Recorded here because the trace was
+missing, not because anything moved.
 
 Unchanged: the 27 numbered results and their declarations; §1.3's statement that there is no window; §6A; and all five open
 items — §2.3, §4.6, §6.7, and the two in §8.2.
