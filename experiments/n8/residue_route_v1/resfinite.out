@@ -1,0 +1,9 @@
+08:41:29
+[A] shift each runner by a multiple of n*b : verdict unchanged 40000, changed 0
+[B] control, shift by a non-multiple       : verdict unchanged 1168, changed 38832
+[C] openings to check  sum_b b : med 420  max 727
+[D] lonely openings found      : min 14  1% 39  med 76
+    sets with exactly one lonely opening: 0
+08:41:35
+
+[exited with code 0]

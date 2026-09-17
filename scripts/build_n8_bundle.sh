@@ -72,8 +72,12 @@ for b in $(grep -ohE '[A-Za-z0-9_]+_v[0-9]+' "$MAN" docs/n8/CORRECTIONS_2026_09_
   for ext in py out; do
     [ -f "experiments/n8/$b.$ext" ] && cp "experiments/n8/$b.$ext" "$B/experiments/"
   done
+  # Some deposits are DIRECTORIES -- several scripts and their outputs for one investigation.
+  # A flat-file-only loop dropped them with no message, which is the same defect as
+  # hand-picking: the list looks derived and silently is not. Added 2026-09-18.
+  [ -d "experiments/n8/$b" ] && cp -R "experiments/n8/$b" "$B/experiments/"
 done
-echo "  experiments: $(ls "$B/experiments" | wc -l | tr -d ' ') (cited by name, with deposits)"
+echo "  experiments: $(find "$B/experiments" -type f | wc -l | tr -d ' ') files in $(ls "$B/experiments" | wc -l | tr -d ' ') entries (cited by name, with deposits)"
 
 # [4] the README: the entry point. Regenerated so its figures cannot drift from the tree.
 T_N=$(grep -hE '^theorem |^lemma ' LonelyRunner/LonelyRunner/LRC/Cascade/*.lean | wc -l | tr -d ' ')

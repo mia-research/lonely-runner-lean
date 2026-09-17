@@ -1,0 +1,18 @@
+08:43:13
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LonelyRunner/LRC/Cascade/Flanks.lean:772:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Cascade/Flanks.lean:778:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+Build completed successfully (2443 jobs).
+=== AXIOMS ===
+'Flanks.clear_at_int_flank_iff_emod' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Flanks.lonely_iff_emod_search' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Flanks.lonely_iff_bounded_search' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Flanks.depth_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+DONE
+08:43:23
+
+[exited with code 0]

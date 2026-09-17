@@ -1,0 +1,12 @@
+08:43:54
+flanks tested 20000
+  free opening exists with u = 1 mod 8 : 19015 (0.951)
+  free residue exists over ALL residues : 19509 (0.975)
+  mean fraction free, u = 1 mod 8 : 0.1976
+  mean fraction free, all residues  : 0.1709
+
+blocked residues per runner : 2b-1 of 8b, fraction -> 2/8 = 0.250
+seven runners, union bound  : 7 * 2/8 = 1.750  > 1, so the bound is vacuous
+08:43:57
+
+[exited with code 0]

@@ -1,6 +1,10 @@
 # A Bounding Framework for Eight Lonely Runners
 
-**T. Palelei.** v9.4, 2026-09-17. **The manuscript of record.** Supersedes v9.3, which held that status earlier the same
+> **SUPERSEDED 2026-09-18 by `MANUSCRIPT_v9_5.md`.** Header stamp only; the body below is unchanged and is kept as the
+> record. Two figures in it are known wrong: §10 gave the `Cascade` digest for `Construction8`, and gave it again for the
+> §6.7 JSON record and `exhaustive_exact.py`. See v9.5 Appendix B.8.
+
+**T. Palelei.** v9.4, 2026-09-17. **Superseded — was the manuscript of record.** Supersedes v9.3, which held that status earlier the same
 day. v9.4 records Lean work that is new mathematics rather than bookkeeping: Theorem 4.8 is now proved at **every** opening,
 not only at the flank's bound, and the search over openings at a whole-number flank is proved **finite**. Two consequences
 follow — the census collapses to one criterion, and loneliness over whole-number differences becomes decidable.

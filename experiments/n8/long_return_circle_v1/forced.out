@@ -1,0 +1,13 @@
+08:36:29
+weighted-mean depth c_eff              min   0.0237  1%   0.0312  med   0.0743  max   0.1495
+min depth over cascade                 min   0.0013  1%   0.0016  med   0.0192  max   0.1094
+lap ratio  sum(1/s)/logG               min   0.5969  1%   0.6221  med   0.7640  max   1.2769
+TRUE (i) ratio  sum((2-8d)/s)/logG     min   1.0080  1%   1.0115  med   1.0798  max   1.1236
+composed with c_eff                    min   1.0080  1%   1.0115  med   1.0798  max   1.1236
+
+cascades 1560;  (iii) sum(1/s) <= (k/6)logG violated in 5 (0.0032)
+TRUE (i) ratio < 1 in : 0 of 1560   <-- must be 0, it is log(1+x)<=x
+composed-with-c_eff < 1 in : 0 of 1560
+08:36:30
+
+[exited with code 0]
