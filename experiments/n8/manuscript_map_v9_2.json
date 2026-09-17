@@ -1,0 +1,1193 @@
+{
+ "path": "docs/n8/MANUSCRIPT_v9_2.md",
+ "sections": {
+  "PREAMBLE": {
+   "line": 0,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "Abstract": {
+   "line": 7,
+   "decls": [],
+   "notation": [
+    "Cascade",
+    "Classical.choice",
+    "Construction8",
+    "Quot.sound",
+    "propext",
+    "sorry"
+   ],
+   "refs": [
+    "4.5",
+    "6.9",
+    "7",
+    "8"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "1. Introduction, and the Boundary Set Method": {
+   "line": 43,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "1.1 The shift": {
+   "line": 45,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "2.2",
+    "6",
+    "6.8",
+    "6.9"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "1.2 The Boundary Set Method": {
+   "line": 67,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "1.3 The cascade, and the three outcomes": {
+   "line": 82,
+   "decls": [],
+   "notation": [
+    "d_min"
+   ],
+   "refs": [
+    "2.3",
+    "6",
+    "6.2"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "2. Foundations: the local scale, the integer plane, the ideal": {
+   "line": 101,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "2.1 The autonomous scale": {
+   "line": 103,
+   "decls": [],
+   "notation": [
+    "d_min"
+   ],
+   "refs": [
+    "3",
+    "4",
+    "6.2",
+    "8.2"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "2.2 The `(a, q)` coordinates \u2014 the commensurate representation": {
+   "line": 125,
+   "decls": [],
+   "notation": [
+    "MomentIterationN.inWay_at_scale_iff",
+    "lap_and_phase",
+    "reading_clear_iff",
+    "window_iff"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "2.3 Every arrangement is an ideal plus deviations": {
+   "line": 142,
+   "decls": [
+    "CascadeRule.reading"
+   ],
+   "notation": [
+    "_below",
+    "clear_iff",
+    "d_min",
+    "gap_is_a_scale",
+    "nearest_on_ideal_above",
+    "on_ideal_clear",
+    "position_in_eighths",
+    "reading_dev_bounds"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED",
+    "OPEN",
+    "VERIFIED"
+   ],
+   "opens": [
+    {
+     "line": 158,
+     "text": "**Fitting the arrangement between the AP locations.** `[OPEN \u2014 how the fit feeds each runner's reading]` The author's"
+    }
+   ]
+  },
+  "3. Local restrictions: the clear-interval bound": {
+   "line": 173,
+   "decls": [],
+   "notation": [
+    "no_solo_closure"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4. Global structure: gaps, the regular `n`-gon, the reference": {
+   "line": 201,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "4.1 Loneliness is a two-neighbour condition": {
+   "line": 203,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4.2 Conservation and the regular `n`-gon": {
+   "line": 213,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "4.6"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4.3 The reference instant": {
+   "line": 228,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "5"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4.4 When the reference survives": {
+   "line": 240,
+   "decls": [],
+   "notation": [
+    "commensurable"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4.5 Families in which Existence holds at once": {
+   "line": 249,
+   "decls": [],
+   "notation": [
+    "Flanks.clear_of_residue_band",
+    "GRID_THEOREM_v1",
+    "d_min",
+    "decide",
+    "localisation_free"
+   ],
+   "refs": [
+    "6.7",
+    "6.9"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "4.6 Where the reference first degrades": {
+   "line": 316,
+   "decls": [],
+   "notation": [
+    "d_min"
+   ],
+   "refs": [
+    "1.2",
+    "4.2",
+    "4.5",
+    "6A"
+   ],
+   "grades": [
+    "PROVED",
+    "VERIFIED",
+    "VERIFIED",
+    "OPEN",
+    "VERIFIED"
+   ],
+   "opens": [
+    {
+     "line": 329,
+     "text": "**The obligation in the gap frame.** `[OPEN]` Once the short gap has left the wrap: the moving short gap misses both flanks of"
+    }
+   ]
+  },
+  "5. No external dependency": {
+   "line": 344,
+   "decls": [],
+   "notation": [
+    "card_coprime_eq_totient",
+    "coprime_of_isolation",
+    "instants_on_grid",
+    "isolation_forces_coprime_grid",
+    "isolation_iff_coprime"
+   ],
+   "refs": [
+    "7"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "6. The cascade": {
+   "line": 362,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "6.1 The move": {
+   "line": 366,
+   "decls": [
+    "MomentIterationN.inWay",
+    "move",
+    "nextOpening"
+   ],
+   "notation": [
+    "inWay_until_opening",
+    "lt_nextOpening",
+    "move_eq_self_or_opening"
+   ],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "6.2 The move changes the scale": {
+   "line": 377,
+   "decls": [],
+   "notation": [
+    "A4_SPINE_BLOCKING_v1",
+    "blocked_lands_on_threshold",
+    "d_min",
+    "dead_downward",
+    "exists_live",
+    "inWay_at_scale_iff",
+    "nextOpening_at_scale",
+    "step_ceiling",
+    "unblocked_stays_clear"
+   ],
+   "refs": [
+    "4",
+    "6.1"
+   ],
+   "grades": [
+    "DERIVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6.3 Every lonely instant is matched by an opening": {
+   "line": 411,
+   "decls": [],
+   "notation": [
+    "exists_clear_candidate"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6.4 Construction": {
+   "line": 425,
+   "decls": [],
+   "notation": [
+    "first_isolation_as_zone_run",
+    "first_isolation_of_fixed",
+    "flank_at_first_isolation",
+    "lonely_of_fixed"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6.5 Localisation": {
+   "line": 440,
+   "decls": [],
+   "notation": [
+    "bound_le_of_lonely",
+    "exists_fixed_of_lonely",
+    "iterate_le_of_lonely",
+    "iterate_mem_openings",
+    "move_le_of_lonely"
+   ],
+   "refs": [],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6.6 The subject's own AP instants": {
+   "line": 455,
+   "decls": [],
+   "notation": [
+    "A4_SPINE_BLOCKING_v1",
+    "drift_blocked_iff_interval",
+    "drift_position",
+    "inWay_at_ap_instant_iff_drift",
+    "not_lonely_at_ap_instant_of_sharer",
+    "sharer_inWay_at_ap_instant",
+    "zone_at_ap_instant_iff"
+   ],
+   "refs": [
+    "2"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED",
+    "VERIFIED",
+    "PROVED",
+    "DERIVED",
+    "PROVED",
+    "VERIFIED"
+   ],
+   "opens": []
+  },
+  "6.7 Existence": {
+   "line": 498,
+   "decls": [],
+   "notation": [
+    "LRC.Spec.existence_of_capped",
+    "capped_of_existence",
+    "d_min",
+    "exists_fixed_of_capped",
+    "first_isolation_as_zone_run",
+    "lonely_iff_run_ends",
+    "move_eq_self_or_opening",
+    "nearest_reading_recurrence",
+    "nextOpening_at_scale"
+   ],
+   "refs": [
+    "10",
+    "4.5",
+    "6.8",
+    "6.9",
+    "6A",
+    "8",
+    "8.2"
+   ],
+   "grades": [
+    "OPEN",
+    "PROVED",
+    "PROVED",
+    "VERIFIED",
+    "PROVED",
+    "EMPIRICAL"
+   ],
+   "opens": [
+    {
+     "line": 502,
+     "text": "> bound ends; equivalently, some flank has a lonely opening.  `[OPEN; not stated in either artefact]`"
+    }
+   ]
+  },
+  "6.8 Hard cases and incommensurate instances": {
+   "line": 564,
+   "decls": [],
+   "notation": [
+    "IrrationalCascade.r2_lonely",
+    "IrrationalDemo.all_lonely",
+    "d_min",
+    "others_lonely",
+    "r1_lonely",
+    "r2_time_irrational",
+    "time_irrational"
+   ],
+   "refs": [],
+   "grades": [
+    "VERIFIED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6.9 Flanks": {
+   "line": 590,
+   "decls": [],
+   "notation": [
+    "SHARER_FLANK_RULE_v2",
+    "circDist_periodic_of_lattice",
+    "class_killer_int",
+    "decide",
+    "eighth_family_via_calculus",
+    "exists_clear_step",
+    "lonely_of_flank_unkillable",
+    "lonely_of_some_flank_unkillable"
+   ],
+   "refs": [
+    "4.5"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "DERIVED",
+    "VERIFIED",
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "6A. The firewall": {
+   "line": 672,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "1.1",
+    "1.2",
+    "4.6",
+    "5",
+    "6.7"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "7. Formal verification": {
+   "line": 694,
+   "decls": [
+    "Flanks.flankOpening",
+    "inWay",
+    "move",
+    "nextOpening",
+    "reading"
+   ],
+   "notation": [
+    "Cascade",
+    "CascadeCapped",
+    "CensusFamilies.family10_lonely",
+    "Construction8",
+    "ConstructionN",
+    "EighthFamily.eighth_family_via_calculus",
+    "Flanks.clear_of_residue_band",
+    "LRC.Spec.ExistenceAt8",
+    "ManyDifferences.stops_when_twice_card_lt",
+    "Run.covers",
+    "VersionB.two_diffs",
+    "_cascade",
+    "_first",
+    "_flank",
+    "_last",
+    "admit",
+    "ap_reference",
+    "before_floor",
+    "blocked_lands_on_threshold",
+    "blocked_width",
+    "bound_le_of_lonely",
+    "capped_of_existence",
+    "card_coprime_eq_totient",
+    "circDist_ge_of_band",
+    "circDist_periodic_of_lattice",
+    "class_killer_int",
+    "clear_iff",
+    "clear_in_class_of_not_int",
+    "clear_on_left",
+    "clear_width",
+    "commensurable",
+    "consecutive_break",
+    "coord_iff",
+    "coprime_of_isolation",
+    "dead_downward",
+    "dead_iff",
+    "displacement",
+    "drift_blocked_iff_interval",
+    "drift_position",
+    "existence_of_capped",
+    "exists_clear_candidate",
+    "exists_clear_step",
+    "exists_fixed_of_capped",
+    "exists_fixed_of_lonely",
+    "exists_live",
+    "first_isolation_as_zone_run",
+    "first_isolation_of_fixed",
+    "first_stretch_overlap",
+    "flank_at_first_isolation",
+    "four_diffs",
+    "four_diffs_stop_ge_six",
+    "fractional_ratio_circDist",
+    "gap_is_a_scale",
+    "gaps_all_eq",
+    "grid_of_pairwise",
+    "inWay_at_ap_instant_iff_drift",
+    "inWay_at_scale_iff",
+    "inWay_until_opening",
+    "instants_on_grid",
+    "int_of_pairwise_sep",
+    "integer_ratio_clear_iff",
+    "isolation_forces_coprime_grid",
+    "isolation_iff_coprime",
+    "iterate_le_of_lonely",
+    "iterate_mem_openings",
+    "lapFactor_pow_le",
+    "lapProd_pow_le",
+    "lap_and_phase",
+    "localisation_free",
+    "lonely_iff_exists_flank",
+    "lonely_iff_flanks",
+    "lonely_iff_run_ends",
+    "lonely_ne_pred",
+    "lonely_of_band_list",
+    "lonely_of_fixed",
+    "lonely_of_flank_unkillable",
+    "lonely_of_reading",
+    "lonely_of_some_flank_unkillable",
+    "lonely_opening_of_free_off_lattice",
+    "lonely_opening_of_one_fractional",
+    "lt_nextOpening",
+    "many_diffs",
+    "move_eq_self_or_opening",
+    "move_growth",
+    "move_le_of_lonely",
+    "native_decide",
+    "nearest_above",
+    "nearest_below",
+    "nearest_reading_recurrence",
+    "nextOpening_at_scale",
+    "no_four_alternation",
+    "no_return_after_faster",
+    "no_return_after_few_faster",
+    "no_solo_closure",
+    "not_dvd_of_sep",
+    "not_lonely_at_ap_instant_of_sharer",
+    "on_ideal_clear",
+    "opening_le",
+    "order_four",
+    "order_three",
+    "position_at_flank",
+    "position_in_eighths",
+    "potential_pow_le",
+    "potential_step",
+    "ratio_condition",
+    "reading_clear_iff",
+    "reading_complete",
+    "reading_dev_bounds",
+    "return_growth",
+    "return_lemma",
+    "run_of_iterate",
+    "sharer_inWay_at_ap_instant",
+    "slowest_recursion",
+    "solo_closure_forces_smaller",
+    "sorry",
+    "spine_all_or_nothing",
+    "step_ceiling",
+    "stops_of_flank_unkillable",
+    "stops_of_one_fractional",
+    "stops_of_some_flank_unkillable",
+    "stops_slowest_recursion",
+    "survives_of",
+    "target_flank_agrees",
+    "target_forms_agree",
+    "three_diffs",
+    "three_diffs_stop_within_three_moves",
+    "time_le_potential",
+    "two_diffs_stop_within_one_move",
+    "two_sigma_zone_inside",
+    "unblocked_stays_clear",
+    "unsafe",
+    "v8_axiom_check_v1.out",
+    "wide_gap_core",
+    "wide_gap_end",
+    "wide_gap_speeds",
+    "window_iff",
+    "zone_at_ap_instant_iff"
+   ],
+   "refs": [
+    "10",
+    "2.1",
+    "2.2",
+    "4.5",
+    "5",
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.6",
+    "6.7",
+    "6.8",
+    "6.9",
+    "8.2"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "8. Generalisation": {
+   "line": 765,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "8.1 The infrastructure at every `n`": {
+   "line": 767,
+   "decls": [],
+   "notation": [
+    "Construction8",
+    "blocked_width",
+    "clear_width",
+    "consecutive_break",
+    "first_stretch_overlap",
+    "no_solo_closure",
+    "two_sigma_zone_inside"
+   ],
+   "refs": [
+    "3",
+    "6.1",
+    "6.6"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "8.2 Existence with few differences": {
+   "line": 792,
+   "decls": [],
+   "notation": [
+    "AdvanceBudget",
+    "ManyDifferences.stops_when_twice_card_lt",
+    "TerminationFour",
+    "TerminationThree",
+    "exists_fixed_of_capped",
+    "four_diffs_stop_ge_six",
+    "move_growth",
+    "nearest_reading_recurrence",
+    "no_four_alternation",
+    "no_return_after_faster",
+    "no_return_after_few_faster",
+    "order5_certificate_S26_v3.out",
+    "potential_step",
+    "return_growth",
+    "return_lemma",
+    "stops_slowest_recursion",
+    "three_diffs_stop_within_three_moves",
+    "time_le_potential",
+    "two_diffs_stop_within_one_move"
+   ],
+   "refs": [
+    "1.3",
+    "4.5",
+    "6.7",
+    "6.9"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "PROVED",
+    "OPEN",
+    "OPEN",
+    "DERIVED",
+    "PROVED",
+    "OPEN",
+    "VERIFIED"
+   ],
+   "opens": [
+    {
+     "line": 808,
+     "text": "remain open. `[OPEN]`"
+    },
+    {
+     "line": 829,
+     "text": "**Order 5: Existence with four differences at `n = 5` is open.** `[OPEN]` A stronger, sufficient statement is `R < 4`, lonely"
+    },
+    {
+     "line": 849,
+     "text": "this row's `[OPEN]`, since `R < 4` is a stronger statement than Existence needs (audit R1; \u00a71.3 has no window). From order 6 the nearest runner itself can set a"
+    }
+   ]
+  },
+  "9. What is and is not established": {
+   "line": 859,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "2",
+    "4.5",
+    "5",
+    "6.7",
+    "6.9",
+    "7",
+    "8.2"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "10. Data and code availability": {
+   "line": 883,
+   "decls": [
+    "circDist"
+   ],
+   "notation": [
+    "Bounds",
+    "CensusBatch",
+    "CensusFamilies",
+    "Certificate",
+    "Coords",
+    "EighthFamily",
+    "Flank",
+    "Flanks",
+    "FourDifferences",
+    "Gaps",
+    "Grid",
+    "Integrality",
+    "Irrational",
+    "Iteration",
+    "LemmaPass",
+    "ManyDifferences",
+    "NearAP",
+    "Parts",
+    "PinnedBatch1",
+    "PinnedBatch4",
+    "Reading",
+    "Reference",
+    "SmallOrders",
+    "Sorted",
+    "VersionB",
+    "WHY_IT_PREDICTS",
+    "Window",
+    "a4_spine_blocking_v1.py",
+    "census_batch_verify_v1.py",
+    "census_export_v1.py",
+    "census_families_v1.json",
+    "chain_from_laps_v1.py",
+    "complete_predictor_replication_v1.py",
+    "e706d5d",
+    "exhaustive_exact.py",
+    "flank_all_shadowed_v1.py",
+    "flank_irrational_v1.py",
+    "flank_near_extreme_v1.py",
+    "flank_one_free_v1.py",
+    "flank_shadow_v1.py",
+    "framework_cases_v1.py",
+    "gen_census_batch_v1.py",
+    "gen_pinned_batch_v1.py",
+    "hard_cases_first_isolation_v1.py",
+    "manuscript_map_v1.py",
+    "move_setters_v1.py",
+    "n8_exact_ap_v1.py",
+    "pinned_batch_verify_v1.py",
+    "predictor",
+    "r16_search_v2.py",
+    "ratio_vs_spread_v1.py",
+    "residue_rule_q_v1.py",
+    "scale_cascade_recursion_v1.py",
+    "sharer_even_slot_v1.py",
+    "sharer_exceptions_v1.py",
+    "v4.29.1",
+    "v9_checks_v1.py"
+   ],
+   "refs": [
+    "4.5",
+    "5",
+    "6.6",
+    "6.7",
+    "6.8",
+    "6.9",
+    "8.1",
+    "8.2"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "References": {
+   "line": 933,
+   "decls": [],
+   "notation": [],
+   "refs": [
+    "5"
+   ],
+   "grades": [],
+   "opens": []
+  },
+  "Appendix A. Routes that cannot close this": {
+   "line": 952,
+   "decls": [],
+   "notation": [
+    "PROOF_DEV_v1",
+    "consecutive_break",
+    "first_stretch_overlap",
+    "two_sigma_zone_inside"
+   ],
+   "refs": [
+    "4.6",
+    "6.4",
+    "6.7"
+   ],
+   "grades": [
+    "PROVED",
+    "PROVED"
+   ],
+   "opens": []
+  },
+  "Appendix B. Version maps": {
+   "line": 997,
+   "decls": [],
+   "notation": [],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "B.1 From v7 to v8": {
+   "line": 999,
+   "decls": [],
+   "notation": [
+    "LOST_FUNCTIONS_v1"
+   ],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "B.2 From v8.2 to v9": {
+   "line": 1024,
+   "decls": [],
+   "notation": [
+    "A4_SPINE_BLOCKING_v1",
+    "Cascade",
+    "Construction8",
+    "FLANK_NEAR_EXTREMES_v2",
+    "FRAMEWORK_BOUNDARY_AUDIT_v3",
+    "FourDifferences",
+    "ManyDifferences",
+    "SHARER_FLANK_RULE_v2",
+    "SmallOrders",
+    "T4_FLANKS_v3",
+    "V8_2_ISOLATED_AUDIT_v1.md",
+    "V8_2_OWN_AUDIT_v1.md",
+    "V8_REVISION_LIST_v1.md",
+    "WHAT_STOPS_PROOF_v2",
+    "WHY_IT_PREDICTS_v1",
+    "commensurable",
+    "consecutive_break",
+    "coprime_of_isolation",
+    "d_max",
+    "first_stretch_overlap",
+    "instants_on_grid",
+    "spine_all_or_nothing",
+    "v8_axiom_check_v1.out",
+    "v9_checks_v1.out",
+    "v9_construction8_all_axioms_v1"
+   ],
+   "refs": [],
+   "grades": [],
+   "opens": []
+  },
+  "B.3 From v9.1 to v9.2": {
+   "line": 1088,
+   "decls": [],
+   "notation": [
+    "v9_2_spec_axioms_v1"
+   ],
+   "refs": [],
+   "grades": [
+    "OPEN",
+    "EMPIRICAL"
+   ],
+   "opens": [
+    {
+     "line": 1100,
+     "text": "| \u00a76.7 | the reduction | `CascadeCapped \u2194 ExistenceAt8`, both directions. The converse is stated so the reduction is read as the obligation restated, not weaken"
+    },
+    {
+     "line": 1102,
+     "text": "| \u00a78.2 order 5 `[EMPIRICAL] \u2248 31/9` | `[PROVED \u2014 ratio \u2264 26]`, `sup R = 31/9` | **ruling: the post-correct grade, with ambiguity named.** Four are named: the va"
+    }
+   ]
+  },
+  "Appendix C. Objections tested": {
+   "line": 1111,
+   "decls": [],
+   "notation": [
+    "d_min"
+   ],
+   "refs": [
+    "2.2",
+    "5",
+    "6",
+    "6.1",
+    "6.7",
+    "6.8",
+    "7.4",
+    "8"
+   ],
+   "grades": [],
+   "opens": []
+  }
+ },
+ "order": [
+  "PREAMBLE",
+  "Abstract",
+  "1. Introduction, and the Boundary Set Method",
+  "1.1 The shift",
+  "1.2 The Boundary Set Method",
+  "1.3 The cascade, and the three outcomes",
+  "2. Foundations: the local scale, the integer plane, the ideal",
+  "2.1 The autonomous scale",
+  "2.2 The `(a, q)` coordinates \u2014 the commensurate representation",
+  "2.3 Every arrangement is an ideal plus deviations",
+  "3. Local restrictions: the clear-interval bound",
+  "4. Global structure: gaps, the regular `n`-gon, the reference",
+  "4.1 Loneliness is a two-neighbour condition",
+  "4.2 Conservation and the regular `n`-gon",
+  "4.3 The reference instant",
+  "4.4 When the reference survives",
+  "4.5 Families in which Existence holds at once",
+  "4.6 Where the reference first degrades",
+  "5. No external dependency",
+  "6. The cascade",
+  "6.1 The move",
+  "6.2 The move changes the scale",
+  "6.3 Every lonely instant is matched by an opening",
+  "6.4 Construction",
+  "6.5 Localisation",
+  "6.6 The subject's own AP instants",
+  "6.7 Existence",
+  "6.8 Hard cases and incommensurate instances",
+  "6.9 Flanks",
+  "6A. The firewall",
+  "7. Formal verification",
+  "8. Generalisation",
+  "8.1 The infrastructure at every `n`",
+  "8.2 Existence with few differences",
+  "9. What is and is not established",
+  "10. Data and code availability",
+  "References",
+  "Appendix A. Routes that cannot close this",
+  "Appendix B. Version maps",
+  "B.1 From v7 to v8",
+  "B.2 From v8.2 to v9",
+  "B.3 From v9.1 to v9.2",
+  "Appendix C. Objections tested"
+ ],
+ "reverse_index": {
+  "CascadeRule.reading": [
+   "2.3 Every arrangement is an ideal plus deviations"
+  ],
+  "MomentIterationN.inWay": [
+   "6.1 The move"
+  ],
+  "move": [
+   "6.1 The move",
+   "7. Formal verification"
+  ],
+  "nextOpening": [
+   "6.1 The move",
+   "7. Formal verification"
+  ],
+  "inWay": [
+   "7. Formal verification"
+  ],
+  "reading": [
+   "7. Formal verification"
+  ],
+  "Flanks.flankOpening": [
+   "7. Formal verification"
+  ],
+  "circDist": [
+   "10. Data and code availability"
+  ]
+ },
+ "cited_by": {
+  "4.5 Families in which Existence holds at once": [
+   "10. Data and code availability",
+   "4.6 Where the reference first degrades",
+   "6.7 Existence",
+   "6.9 Flanks",
+   "7. Formal verification",
+   "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Abstract"
+  ],
+  "7. Formal verification": [
+   "5. No external dependency",
+   "9. What is and is not established",
+   "Abstract"
+  ],
+  "8. Generalisation": [
+   "6.7 Existence",
+   "Abstract",
+   "Appendix C. Objections tested"
+  ],
+  "6.9 Flanks": [
+   "1.1 The shift",
+   "10. Data and code availability",
+   "4.5 Families in which Existence holds at once",
+   "6.7 Existence",
+   "7. Formal verification",
+   "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Abstract"
+  ],
+  "6.8 Hard cases and incommensurate instances": [
+   "1.1 The shift",
+   "10. Data and code availability",
+   "6.7 Existence",
+   "7. Formal verification",
+   "Appendix C. Objections tested"
+  ],
+  "2.2 The `(a, q)` coordinates \u2014 the commensurate representation": [
+   "1.1 The shift",
+   "7. Formal verification",
+   "Appendix C. Objections tested"
+  ],
+  "6. The cascade": [
+   "1.1 The shift",
+   "1.3 The cascade, and the three outcomes",
+   "Appendix C. Objections tested"
+  ],
+  "2.3 Every arrangement is an ideal plus deviations": [
+   "1.3 The cascade, and the three outcomes"
+  ],
+  "6.2 The move changes the scale": [
+   "1.3 The cascade, and the three outcomes",
+   "2.1 The autonomous scale",
+   "7. Formal verification"
+  ],
+  "8.2 Existence with few differences": [
+   "10. Data and code availability",
+   "2.1 The autonomous scale",
+   "6.7 Existence",
+   "7. Formal verification",
+   "9. What is and is not established"
+  ],
+  "4. Global structure: gaps, the regular `n`-gon, the reference": [
+   "2.1 The autonomous scale",
+   "6.2 The move changes the scale"
+  ],
+  "3. Local restrictions: the clear-interval bound": [
+   "2.1 The autonomous scale",
+   "8.1 The infrastructure at every `n`"
+  ],
+  "4.6 Where the reference first degrades": [
+   "4.2 Conservation and the regular `n`-gon",
+   "6A. The firewall",
+   "Appendix A. Routes that cannot close this"
+  ],
+  "5. No external dependency": [
+   "10. Data and code availability",
+   "4.3 The reference instant",
+   "6A. The firewall",
+   "7. Formal verification",
+   "9. What is and is not established",
+   "Appendix C. Objections tested",
+   "References"
+  ],
+  "6.7 Existence": [
+   "10. Data and code availability",
+   "4.5 Families in which Existence holds at once",
+   "6A. The firewall",
+   "7. Formal verification",
+   "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Appendix A. Routes that cannot close this",
+   "Appendix C. Objections tested"
+  ],
+  "6A. The firewall": [
+   "4.6 Where the reference first degrades",
+   "6.7 Existence"
+  ],
+  "1.2 The Boundary Set Method": [
+   "4.6 Where the reference first degrades",
+   "6A. The firewall"
+  ],
+  "4.2 Conservation and the regular `n`-gon": [
+   "4.6 Where the reference first degrades"
+  ],
+  "6.1 The move": [
+   "6.2 The move changes the scale",
+   "7. Formal verification",
+   "8.1 The infrastructure at every `n`",
+   "Appendix C. Objections tested"
+  ],
+  "2. Foundations: the local scale, the integer plane, the ideal": [
+   "6.6 The subject's own AP instants",
+   "9. What is and is not established"
+  ],
+  "10. Data and code availability": [
+   "6.7 Existence",
+   "7. Formal verification"
+  ],
+  "1.1 The shift": [
+   "6A. The firewall"
+  ],
+  "6.6 The subject's own AP instants": [
+   "10. Data and code availability",
+   "7. Formal verification",
+   "8.1 The infrastructure at every `n`"
+  ],
+  "6.3 Every lonely instant is matched by an opening": [
+   "7. Formal verification"
+  ],
+  "2.1 The autonomous scale": [
+   "7. Formal verification"
+  ],
+  "1.3 The cascade, and the three outcomes": [
+   "8.2 Existence with few differences"
+  ],
+  "8.1 The infrastructure at every `n`": [
+   "10. Data and code availability"
+  ],
+  "6.4 Construction": [
+   "Appendix A. Routes that cannot close this"
+  ]
+ },
+ "dangling": [
+  [
+   "Appendix C. Objections tested",
+   "7.4"
+  ]
+ ],
+ "unresolved": []
+}

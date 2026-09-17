@@ -1,0 +1,4 @@
+'LRC.Spec.target_forms_agree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Spec.target_flank_agrees' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Spec.existence_of_capped' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Spec.capped_of_existence' depends on axioms: [propext, Classical.choice, Quot.sound]
