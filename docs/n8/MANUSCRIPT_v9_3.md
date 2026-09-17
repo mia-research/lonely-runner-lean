@@ -4,11 +4,12 @@
 until now. v9.3 **withdraws Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work
 of 2026-09-17.
 See `CORRECTIONS_2026_09_17_v2` §5–§6 for the withdrawal and the audit behind it.
-**§10's figures were corrected after the freeze, the same day.** The digest, commit and theorem count had been computed one
-commit early, before `6a26557` added `off_lattice_of_not_ratio` and gate check [5]: the recorded hash did not match the tree,
-and §7, §10 and the abstract read 4,690 against this line's 4,691. Now all read `6a26557`, digest `5a46c320…`, 4,691, and the
-gate run itself is deposited at `experiments/n8/cascade_gate_v9_3_v1.out`. Figures only; no statement changed. Checked for v9.3: the cascade gate (**PASS, 4,691 theorems axiom-clean**, 2026-09-17) and a
-compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 23 new
+**§10's figures were corrected after the freeze, and then again as the Lean tree grew.** They drifted three times on
+2026-09-17: each time they were computed, Lean was committed, and nothing noticed. They now read **4,695 theorems, 19 modules,
+digest `d49705d1…`, commit `935329d`**, and the gate's **check [6]** fails if they ever disagree with the tree again, so the
+drift cannot recur silently. The gate run is deposited at `experiments/n8/cascade_gate_v9_3_v1.out`. Figures only; no
+statement changed. Checked for v9.3: the cascade gate (**PASS, 4,695 theorems axiom-clean**, 2026-09-17) and a
+compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 27 new
 declarations and its one exception is recorded in §5. **Not repeated for v9.3**: the review against v1 and v7, which stands
 from v9.2 and which the v9.3 edits do not touch.
 
@@ -38,7 +39,7 @@ exactly when some **flank** (one of its differences) has a lonely opening. **Pro
 multiple of 8. **Open.** It is proved in several families (§4.5, §6.9), and holds in every case computed, including an
 exhaustive sweep of every integer arrangement `0 = v_1 < … < v_8 ≤ 40`.
 
-Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (4,691
+Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (4,695
 theorems). Both have no `sorry`, and every theorem in both depends on at most `propext`, `Classical.choice` and
 `Quot.sound`. The φ(n) count of isolation instants for an arithmetic progression, the one dependency v7 cited, is derived
 in Lean. §7 maps every numbered statement to its declaration.
@@ -367,7 +368,7 @@ That development is outside the two artefacts of §7 (it sits in the general-`n`
 four instants `1/8, 3/8, 5/8, 7/8` in each lap also follow from Theorem 4.3 alone: the eight points `j·t` are pairwise at
 least `1/8` apart. Nothing else is cited: no equidistribution, no result at another order, no proof sketch.
 
-**v9.3's 23 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 22 of them use only
+**v9.3's 27 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 26 of them use only
 `Int.fract` and its lemmas, `Int.cast_abs`, `Int.mul_ediv_add_emod`, `Fact.out` and ordinary order and field algebra.
 **The scope of this pass, stated exactly, because it is easy to over-read.** It runs per version over that version's
 *additions*, and it is a claim about what those declarations **cite** — not a claim that the artefact imports nothing. The
@@ -811,7 +812,7 @@ Two artefacts, Lean 4 with mathlib (§10 for toolchain and digests). Each is bui
 | | `Construction8` (v7's artefact, frozen) | `Cascade` |
 |---|---|---|
 | directory | `LonelyRunner/LRC/Construction8/`, 11 modules | `LonelyRunner/LRC/Cascade/`, 19 modules |
-| theorems | 85 | 4,691 |
+| theorems | 85 | 4,695 |
 | `sorry`; `native_decide`, `unsafe`, `admit` | 0; 0 | 0; 0 |
 | axioms | **every theorem** within `[propext, Classical.choice, Quot.sound]` (82 exactly those three, 3 a subset): `experiments/n8/v9_construction8_all_axioms_v1.lean` and `.out`; the gate checks 23 headline declarations | **every theorem** `[propext, Classical.choice, Quot.sound]`, in the gate |
 | gate | `scripts/n8/gate.sh` | `scripts/cascade/gate.sh` |
@@ -823,9 +824,10 @@ and for the axiom check (a fixed file list once left a new module unchecked, and
 the build step while the axiom check read the directory; both now derive the list from disk). It also asserts its own
 coverage: the number of declarations it extracts must equal an independent count on disk taken with a deliberately broader
 pattern, so a declaration written in a form the extractor cannot name fails the gate rather than being skipped silently. At
-4,691 theorems it takes about 12 minutes, almost all of it the per-theorem axiom check — measured
-2026-09-17 on a warm build: total 718 s, of which step [3], the axiom check, is 675 s (94%). The run is deposited at
-`experiments/n8/cascade_gate_v9_3_v1.out`, so this paragraph is not the only witness to it. It scales with the theorem
+4,695 theorems it takes about 12 minutes, almost all of it the per-theorem axiom check — measured
+2026-09-17 on a warm build, almost all of it step [3]. The exact split varies run to run, so it is **not pinned here**:
+the run is deposited at `experiments/n8/cascade_gate_v9_3_v1.out` and that file is the witness, not this paragraph. Check [6]
+of the gate fails if the theorem count, module count, digest or artefact commit above ever disagree with the tree. It scales with the theorem
 count, so the figure drifts upward; a cold build makes the module build step much longer and no cold figure is quoted. It was tested to fail on a planted
 `sorry` in a new module and on a planted declaration naming the open claim; the failure modes of the `Construction8` gate were tested before
 it was trusted. The 7 `ConstructionN` declarations cited in §5 and §6.3 are checked in `experiments/n8/v8_axiom_check_v1.lean` (output `v8_axiom_check_v1.out`: 26 of 26 within the three axioms, three gate
@@ -1016,8 +1018,8 @@ stated (§8.2; Appendix B.5).
   `578022e0296ce565ec601655747d1e5cdc614a9efa2cced6540162e698f43b9d`; gate `scripts/n8/gate.sh`.
 - `LonelyRunner/LRC/Cascade/` — nineteen modules `Iteration`, `SmallOrders`, `FourDifferences`, `ManyDifferences`, `Flanks`,
   `Together`, `VersionB`, `Reading`, `Irrational`, `Certificate`, `EighthFamily`, `NearAP`, `CensusFamilies`, `CensusBatch`,
-  `PinnedBatch1`–`PinnedBatch4`, `All`; digest `5a46c320aef908cd7774dd4bc21b26d61e439d563ca80cec514417dc17420935`
-  (LonelyRunner commit `6a26557`); gate `scripts/cascade/gate.sh`. `Together` is new in v9.3 and carries H1 (Appendix A
+  `PinnedBatch1`–`PinnedBatch4`, `All`; digest `d49705d14d380a8dd6d12c8d4619854d1f6e301379434690678f6a7033940da9`
+  (LonelyRunner commit `935329d`); gate `scripts/cascade/gate.sh`. `Together` is new in v9.3 and carries H1 (Appendix A
   item 4). The eighteen-module state quoted by v9.2 (4,669 theorems, digest `17e68102…`) is commit `48676d6`. The nine-module state quoted by v9.1 (161 theorems, digest
   `a1916b1e…`) is commit `e706d5d`. The seven-module state quoted by v8.2 (135 theorems, digest
   `9657ea89…`) is tag `manuscript-v8.2-cascade`.
@@ -1272,7 +1274,7 @@ Author's rulings of 2026-09-17 are marked.
 
 | v9.1 | v9.2 | why |
 |---|---|---|
-| §7: Cascade 9 modules, 161 theorems | 18 modules, 4,669 at v9.2; **19 modules, 4,691 at v9.3** | the tree; digest and commit refreshed in §10 |
+| §7: Cascade 9 modules, 161 theorems | 18 modules, 4,669 at v9.2; **19 modules, 4,695 at v9.3** | the tree; digest and commit refreshed in §10 |
 | §7 gates paragraph | extended | the fixed module list was still governing the build step while the axiom check read the directory; both now derive from disk. A coverage assertion added against an independent broader count, so a declaration the extractor cannot name fails the gate rather than being skipped. Runtime recorded |
 | §7 table | four rows added | the clearing test as arithmetic; clear openings and shadowing values; the census families; the reduction |
 | §4.5 | the 1,341 census families clearing at the bound | **ruling: it matters, so the split decides** — `k = 0` is this section's criterion. The near-agreement with the 31% figure is called a coincidence of two populations |

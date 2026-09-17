@@ -4,23 +4,26 @@
 == [1] build every cascade module ==  (t+0s)
   modules: 19
 Build completed successfully (3362 jobs).
-   ...[1] took 43s
-== [2] sorry inventory ==  (t+43s)
+   ...[1] took 1s
+== [2] sorry inventory ==  (t+1s)
   none
-   ...[2] took 0s
-== [2b] proof-hygiene scan ==  (t+43s)
+   ...[2] took 1s
+== [2b] proof-hygiene scan ==  (t+2s)
   clean
    ...[2b] took 0s
-== [3] axiom check, every theorem ==  (t+43s)
-  4691 of 4691 clean
-   ...[3] took 675s
-== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+718s)
+== [3] axiom check, every theorem ==  (t+2s)
+  4695 of 4695 clean
+   ...[3] took 678s
+== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+680s)
   clean (unstated, as intended)
    ...[4] took 0s
-== [5] irrational ratios must remain covered, by name ==  (t+718s)
+== [5] irrational ratios must remain covered, by name ==  (t+680s)
   clean (5 declarations present)
    ...[5] took 0s
-== total: 718s ==
+== [6] the manuscript's recorded figures must match this tree ==  (t+680s)
+  clean (../docs/n8/MANUSCRIPT_v9_3.md matches: 4,695 theorems, 19 modules, digest d49705d1, commit 935329d)
+   ...[6] took 0s
+== total: 680s ==
 
-GATE PASS: 4691 theorems, axiom-clean (coverage 4691 of 4691 on disk).
+GATE PASS: 4695 theorems, axiom-clean (coverage 4695 of 4695 on disk).
            Existence at order 8 is NOT proved -- it remains open and unstated.

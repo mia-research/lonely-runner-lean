@@ -1,12 +1,15 @@
-declarations checked            : 23
-distinct non-local identifiers  : 34
+declarations checked            : 27
+distinct non-local identifiers  : 41
 
 FLAGGED against section 5's stated exclusions:
   off_lattice_of_irrational_ratio  (Flanks.lean)  ->  Irrational
 
 All non-local identifiers used, for the record:
   A
+  Construction8
+  Construction8.ratio_condition
   D
+  Existence
   Fact
   Fact.out
   Finset
@@ -22,6 +25,7 @@ All non-local identifiers used, for the record:
   Int.mul_ediv_add_emod
   Irrational
   IsCoprime
+  Measured
   Most
   N
   Ne
@@ -30,7 +34,10 @@ All non-local identifiers used, for the record:
   P
   Proposition
   Q
+  That
   The
+  Theorem
+  This
   With
   abs_eq_zero.mp
   abs_lt.mp
