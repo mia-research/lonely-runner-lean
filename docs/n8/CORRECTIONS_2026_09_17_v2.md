@@ -58,7 +58,7 @@ rule is to stub-test the adjacent claim, then delete the word, never delete only
 |---|---|---|---|
 | `EXISTENCE_ARITHMETIC_v1` §4 "the honest scope" | "§6.7's line **is** LRC(8) for the runner" | `lonely_iff_run_ends`, an `↔` in Lean | **claim holds**; the word sat beside §3/§5, which do not — §1 above |
 | `RETURN_CORRECTION_v2` "genuinely returns" | "if some word exceeds 7, the nearest returns and the framing needs rework" | the named cases: nearest sets at steps 19 and 24, `R = 10.31` | **already fact, not hypothesis**; corrected in `v3` |
-| `NATIVENESS_AUDIT_v2` "explains the infeasibility honestly" | "the word space is 7.25×10²⁶ **because** it is not the framework's object" | not measured — a causal claim asserted | **unverified**; the checkable part is that the cascade is deterministic (`move` is a function), so one arrangement has one path. The "because" is rhetoric and is withdrawn |
+| `NATIVENESS_AUDIT_2026_09_17_v2` "explains the infeasibility honestly" | "the word space is 7.25×10²⁶ **because** it is not the framework's object" | not measured — a causal claim asserted | **unverified**; the checkable part is that the cascade is deterministic (`move` is a function), so one arrangement has one path. The "because" is rhetoric and is withdrawn |
 | `NO_RETURN_TIGHTNESS_v1` §2 "a genuine strengthening" | a `P`-dependent restatement strengthens the lemma | §3 of the same document: 0 extra returns excluded | **strengthens the lemma, not its reach** — say both, not "genuine" |
 
 Three of four sat next to the backlog in §1–§2. The diagnostic worked; it was not acted on at the time.
@@ -68,7 +68,7 @@ Three of four sat next to the backlog in §1–§2. The diagnostic worked; it wa
 The Lean work of 2026-09-17 (`class_killer_int`, `circDist_periodic_of_lattice`,
 `lonely_opening_of_free_off_lattice`, `lonely_of_flank_unkillable`, `lonely_of_some_flank_unkillable`
 and their `stops_` corollaries, gate 189/189 axiom-clean); `RETURN_CORRECTION_v3`;
-`NATIVENESS_AUDIT_v3`; `PROVENANCE_MAP_v1`; `NO_RETURN_TIGHTNESS_v1` §§1, 3–5; `DEEP_REVIEW_v1` §§1–4,
+`NATIVENESS_AUDIT_2026_09_17_v3`; `PROVENANCE_MAP_v1`; `NO_RETURN_TIGHTNESS_v1` §§1, 3–5; `DEEP_REVIEW_2026_09_17_v1` §§1–4,
 6–8; and every measurement artefact. None of those rests on §1 or §2's framings.
 
 ---
