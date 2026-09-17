@@ -1,0 +1,21 @@
+arrangements                      : 3000   (7 real differences, uniform in [1,50])
+searched openings per flank       : k = 0 .. 400
+arrangements with NO lonely opening on ANY flank within K : 0
+
+smallest k over the best flank:
+  min 0   median 0   90th 2   99th 3   max 4
+  k = 0 works for            : 1694 / 3000
+  k <= 2 works for           : 2909 / 3000
+
+flanks with SOME lonely opening (of 7), distribution: {5: 1, 6: 53, 7: 2946}
+the largest difference is a best flank in            : 128 / 3000
+
+========================================================================
+INTEGER arrangements: every 7-subset of [1,20]
+  7-subsets of [1,20]              : 77520
+  free flanks per arrangement      : {1: 1, 2: 43, 3: 668, 4: 4528, 5: 15347, 6: 28342, 7: 28591}
+  arrangements with 0 free flanks  : 0
+  arrangements with 1 free flank   : 1
+
+  the tightest arrangements (<=1 free flank), first 12:
+    (2, 3, 4, 5, 6, 7, 16)   free: [(16, 1)]

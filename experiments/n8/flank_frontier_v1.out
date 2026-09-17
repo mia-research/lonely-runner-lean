@@ -1,0 +1,9 @@
+Targeted search: integer arrangements the mirror of 4.8 does NOT decide
+(some difference below d_max/9, or in (7*d_max/9, d_max))
+
+  sampled arrangements not decided by the mirror : 54771
+  of those, fully DECIDED by one full period     : 54771
+  with ZERO free flanks (would refute Existence) : 0
+  largest 'smallest k over the best flank'       : 74
+
+  tightest found (<=2 free flanks): 0

@@ -1,0 +1,7 @@
+hill-climb restarts               : 400  (7 integers from [1,60], 160 steps each)
+final free-flank counts reached   : {2: 54, 3: 191, 4: 141, 5: 14}
+BEST (fewest free flanks) found   : 2   (1, 2, 3, 6, 9, 16, 34)
+
+No arrangement with zero free flanks was reached. The search bottoms out at 2.
+That is EVIDENCE about the search, not a proof: hill-climbing can miss an isolated
+minimum, and this ranges over integers in a bounded window only.

@@ -1,0 +1,57 @@
+live flanks examined (7-subsets of [1,18]) : 211029
+shadowed                                   : 26137  (12.39%)
+
+BY |J|, the withdrawn criterion's variable:
+   |J|    flanks  shadowed     rate
+     0      5012         0    0.00%
+     1       201         0    0.00%
+     2      1590       210   13.21%
+     3      5504      1354   24.60%
+     4     13329      3599   27.00%
+     5     35964      7592   21.11%
+     6    149429     13382    8.96%
+
+BY LARGEST RATIO DENOMINATOR:
+   den    flanks  shadowed     rate
+     1      5012         0    0.00%
+     2      8029      3771   46.97%
+     3     12838      3297   25.68%
+     4     12404      5682   45.81%
+     5     12593      2610   20.73%
+     6     12348      2219   17.97%
+     7     12460      1540   12.36%
+     8     12376      2351   19.00%
+     9     12838       926    7.21%
+    10     12166      1067    8.77%
+    11     12376       686    5.54%
+    12     11914       676    5.67%
+    13     12376       169    1.37%
+    14     12292       586    4.77%
+    15     12369       189    1.53%
+    16     12348       218    1.77%
+    17     12376        14    0.11%
+    18     11914       136    1.14%
+
+READING.
+  |J| does NOT predict shadowing. The rate PEAKS at |J| = 4 (27.0%) and FALLS to
+  9.0% at |J| = 6. The withdrawn Proposition 6.11 named |J| >= 4 as the open case;
+  |J| = 6 is close to the easiest non-trivial value, and with seven random REAL
+  differences -- |J| = 6 almost surely -- the route is trivial (median k = 0).
+
+  The DENOMINATOR does predict it, and the trend is monotone apart from parity:
+  46.97% at denominator 2 down to 0.11% at 17. At comparable size EVEN beats ODD
+  (2: 47.0, 4: 45.8, 6: 18.0, 8: 19.0  vs  3: 25.7, 5: 20.7, 7: 12.4, 9: 7.2),
+  which is what an arc of half-width 1/8 about 0 should do: an even denominator
+  puts orbit points on the antipode and the symmetric points.
+
+  This agrees with Proposition 6.10 -- the only shadowing PAIRS have both
+  fractional parts 1/2, i.e. denominator 2 -- and with the recorded shadowing
+  triples (2,4,4), (3,3,3), (3,6,6), (5,5,5): all small, mostly even.
+
+CONSEQUENCE FOR WHERE THE HOLE IS.
+  Difficulty sits at SMALL RATIO DENOMINATORS, which is exactly where the lattice
+  machinery applies: a rational ratio of denominator c lies on the c-lattice, so
+  circDist_periodic_of_lattice makes the flank's verdict periodic and the question
+  finite. Each such arrangement is therefore DECIDABLE -- these runs decide them by
+  exhausting one period. What is missing is not a new case split but a UNIFORM
+  statement over denominators. A proof must be uniform in c, not a split on |J|.

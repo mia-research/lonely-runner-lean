@@ -1,0 +1,36 @@
+cascades used                : 325
+moves per cascade  (median)  : 6
+
+The tested link:  sum_j 1/Q_j  ~  k * log G,  with k = 7
+  ratio (sum 1/Q_j)/log G    median 8.60   10th 6.37   90th 13.04
+  predicted if the link holds: about k = 7
+
+The bound's own coefficient, measured per cascade:
+  (2/n)*sum(1/Q_j) / log G   median 2.15   10th 1.59   90th 3.26
+  predicted 2k/n             = 1.75
+
+VERDICT: the bound reads  log G <= 1.75 * log G + C.
+         Coefficient 1.75 >= 1, so it never constrains log G at n=8, k=7.
+         For a cap the coefficient must be < 1, i.e. 2k < n.
+
+LIMITS OF THE MEASUREMENT, stated rather than buried.
+  * Only 325 of 4,000 sampled cascades were usable: the rest stop in under 5 moves.
+    The median usable run is 6 moves, so the asymptotic step
+    sum_i 1/P_i ~ log(P_max/P_min) is being tested on short runs and is crude there.
+    That is why the measured ratio (8.60) sits above the predicted k = 7.
+  * The measurement does NOT carry the verdict. The verdict is arithmetic:
+    the coefficient is 2k/n = 1.75 whatever the data say, and an inequality
+    log G <= 1.75 log G + C constrains nothing. The measurement only checks that
+    the link 'sum 1/Q_j ~ k log G' is not wildly wrong, and it is not -- the
+    measured coefficient 2.15 exceeds 1.75, making the bound MORE vacuous, not less.
+  * Cascades are run in floating point here. The verdict does not depend on
+    precision; the counts and laps do, mildly.
+
+WHAT THIS DOES AND DOES NOT SHOW.
+  Shows: any argument that caps the cascade by counting moves and charging each one
+    its growth cost hits 2k < n and stops. That is not a weakness of one lemma --
+    the potential Psi of section 8.2 reaches the same threshold by different
+    bookkeeping, and this says why.
+  Does NOT show: that no cap exists, or that Existence is false at n = 8. It says
+    the remaining route cannot be a move count. It must use the ARITHMETIC of the
+    particular readings -- which is what the opening/residue/lattice machinery does.
