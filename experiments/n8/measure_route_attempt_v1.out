@@ -1,0 +1,45 @@
+  n=8   k=7  total blocked density = k*2/n = 7/4  >= 1 -> union bound gives NOTHING
+  n=8   k=3  total blocked density = k*2/n = 3/4  < 1  -> union bound SUCCEEDS
+  n=6   k=2  total blocked density = k*2/n = 2/3  < 1  -> union bound SUCCEEDS
+  n=5   k=2  total blocked density = k*2/n = 4/5  < 1  -> union bound SUCCEEDS
+  n=11  k=5  total blocked density = k*2/n = 10/11  < 1  -> union bound SUCCEEDS
+
+At n = 8 with k = 7 the total is 7/4 = 1.75. The blocked arcs cover the circle 1.75
+times over, so the union bound is vacuous -- it does not even show the lonely set is
+non-empty, let alone locate it.
+
+AND THAT IS THE SAME THRESHOLD AS EVERYTHING ELSE.
+  section 8.2's potential Psi caps the cascade exactly when 2k < n.
+  move_count_ceiling_v1 showed any move-counting argument hits log G (1 - 2k/n) <= C,
+    which is vacuous at n=8, k=7 with coefficient -0.75.
+  the withdrawn Proposition 6.11's criterion is sum (2/n + 1/c_j) < 1, which needs
+    |J| <= 3 at order 8 for the SAME reason: each term is at least 2/n.
+
+So the measure route is not a different route. It is the union bound, it is the n > 2k
+threshold, and it dies at n = 8, k = 7 exactly where the others die.
+
+========================================================================
+THE SECOND ERROR, and it is a logical one.
+
+  existence_impositions_v1 measured 'the lonely set always has interior' on 400
+  arrangements. Having interior is a property of a NON-EMPTY set. Every arrangement
+  measured had a non-empty lonely set -- which is just Existence holding empirically,
+  which was already known. The interior observation gives NO route to non-emptiness.
+
+  'The set is fat once you know it is there' does not help you learn it is there. I
+  presented it as though it did.
+
+WHAT THIS DOES TO THE REGISTER'S RULING.
+
+  The register marks covering (item 4), measure (item 5) and union bounds (item 27)
+  NOT APPLICABLE. I read that as a methodological commitment that a measure argument
+  could nonetheless discharge ExistenceAt8. It cannot: at n = 8, k = 7 the union bound
+  is 7/4 and yields nothing at all.
+
+  So the ruling is right on the MATHEMATICS, not only on method. Those routes are
+  inapplicable because they do not work here, exactly as 'NOT APPLICABLE' says.
+
+  The distinction between the frozen target and the framework's conjecture stands --
+  ExistenceAt8 is an existence statement and section 3 says existence is not what is
+  being asked. But no easier route to the frozen target follows from it, which is what
+  I implied.
