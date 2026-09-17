@@ -1,0 +1,37 @@
+arrangements scanned for seeds: 69341
+seeds found per g: {1: 25, 2: 25, 3: 25, 4: 25, 5: 25, 6: 25}
+
+  g  seeds    best random   after refining
+  1     25      9.694e-04        5.329e-15
+  2     25      7.347e-03        1.332e-15
+  3     25      1.365e-02        2.220e-16
+  4     25      1.945e-05        1.332e-15
+  5     25      2.003e-04        5.773e-15
+  6     25      1.315e-03        1.998e-15
+
+VERDICT: THE EXTREMALITY IS VACUOUS, SO BOTH HALVES OF THE LEMMA FAIL.
+
+  The infimum of delta is 0 at EVERY g from 1 to 6, not only at g >= 4. So
+      inf over g >= 4  =  inf over g = 4
+  is true, but it reads 0 = 0, and "permitting more intervening moves cannot produce a
+  shallower returning setter" is true only because nothing can go below zero anywhere.
+
+  The apparent extremality in the first run was SAMPLING NOISE. Bin sizes there were 39, 95,
+  173, 76 and 21, and the minima were 3.7e-03, 1.8e-04, 1.7e-03, 1.1e-04, 8.6e-04 -- all
+  within an order of magnitude. g = 4 held the lowest draw; that is all it was.
+
+  HOW THIS WAS NEARLY MISSED, twice over. A first attempt used 150 random restarts per g.
+  A g = 4 return occurs in about 0.4% of random arrangements, so that expects under one hit,
+  and it duly reported "none found" for five of the six values of g -- a null manufactured by
+  an underpowered search. Harvesting seeds first (69,341 arrangements scanned, 25 per g) and
+  refining those gives the table above.
+
+  NOTE THE DIRECTION. Today's other underpowered searches manufactured NULLS. This one
+  manufactured a POSITIVE: an apparent structural fact, g = 4 being extremal, that was an
+  artefact of bin sizes. The same defect, opposite sign.
+
+WHERE THE LEMMA NOW STANDS
+  c_* > 0                     refuted -- delta reaches 6.1e-13 on an arriving cascade
+  extremality at g = 4        vacuous -- every infimum is 0
+  would a true floor help?    no -- log growth ~ (1/4 - delta)/N, and convergence is governed
+                              by sum 1/N_j, which a constant floor does not touch
