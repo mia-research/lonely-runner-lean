@@ -1,0 +1,42 @@
+/Users/trentpalelei/Desktop/Math Ex/experiments/n8/existence_impositions_v1.py:3: SyntaxWarning: "\ " is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\ "? A raw string is also an option.
+  ExistenceAt8 : forall ds, (forall d in ds, 0 < d) -> ds.card <= 7 -> exists s, 0 < s /\ Lonely 8 ds s
+(1) is s = 0 ever lonely?
+    circDist(d*0) = circDist(0) = 0 < 1/8 for every d, so no. '0 < s' excludes nothing
+    that lonely_neg does not already mirror. The restriction is free.
+
+(3) does the lonely set have interior, or can it be a single point?
+    arrangements with a lonely sample point : 400
+    widest lonely interval found (time units):
+      min 2.05e-02   median 3.06e-02   max 6.34e-02
+    arrangements where no two adjacent samples were both lonely : 0
+
+    A lonely set with interior means the instant can be perturbed and stay lonely.
+    That is what makes the framework's exact arithmetic sufficient rather than
+    necessary -- and it is why an irrational instant is not a problem.
+
+========================================================================
+THE IMPOSITION, and it runs the other way from what I assumed.
+
+  FRAMEWORK_CONJECTURE_v1 section 3: 'measure, density, covering, set emptiness and
+  witnesses all conclude existence, AND EXISTENCE IS NOT WHAT IS BEING ASKED.'
+
+  But ExistenceAt8 IS an existence statement -- 'exists s, 0 < s and Lonely 8 ds s'.
+  So the frozen target in Spec/Target.lean and the framework's stated conjecture are
+  not the same object. The bans exist because the framework aims HIGHER than the
+  target: it wants the instant NAMED, not shown to exist.
+
+  I have been applying bans that belong to the harder goal while trying to discharge
+  the easier one. That is the imposition -- and it is self-imposed, not the owner's.
+
+  THE QUALIFICATION THAT MATTERS. Spec/Target.lean proves
+      target_forms_agree : ExistenceAt8 <-> ExistenceAt8_cascade
+  so the existence form and the cascade form are LOGICALLY EQUIVALENT. Anything that
+  proves one proves the other. The bans are therefore a METHODOLOGICAL commitment
+  about what counts as a proof in this framework, not a logical constraint on what
+  could discharge the frozen target. Those are different claims and I had merged them.
+
+  PRACTICAL CONSEQUENCE. The lonely set has interior -- measured above, 400 of 400,
+  median width 3.06e-02. A continuity or measure argument would reach a fat set far
+  more easily than the framework's machinery reaches its boundary. That route is
+  BANNED AS A FRAMEWORK METHOD and would still discharge ExistenceAt8. Whether that
+  is acceptable is the author's call, not a mathematical question.
