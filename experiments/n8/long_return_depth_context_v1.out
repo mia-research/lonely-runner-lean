@@ -1,0 +1,43 @@
+over 3,000 arriving cascades, totals per cascade (median):
+  actual  sum log(growth)          : 0.4734
+  bound with a floor c_* = 0.05    : 0.4602
+  bound with no floor at all       : 0.7500
+
+  ratio floor/no-floor : 0.614
+
+  A floor multiplies every term by a constant < 1. Convergence of sum (1/4-delta)/N
+  is governed by sum 1/N, which the floor does not touch. So even a TRUE floor
+  lemma leaves the cap exactly where it was.
+
+CHECKING THE LEMMA IN CONTEXT, NOT IN ISOLATION.  Three findings, two correcting my own
+earlier report of it.
+
+1. NEAR-MISS AGAINST return_lemma.  I nearly reported the counterexample as contradicting
+   SmallOrders.return_lemma, having read three of its four hypotheses.  The fourth is
+       hret : inWay n x ((Q + 1/n)/y)
+   -- the returning runner is in the way AT THE NEXT SETTER'S OPENING.  So return_lemma
+   governs an IMMEDIATE return, g = 0, not g >= 4.  Checked on the counterexample:
+   26.568330 sits at circDist 0.354 at the next opening, far outside the zone, so hret fails
+   and the lemma does not apply.  No contradiction -- but the two govern different regimes
+   and neither constrains the other.
+
+2. I STATED THE DIRECTION BACKWARDS.  I wrote that "a positive floor on delta would bound
+   BELOW the move a returning setter forces".  It is the reverse.  delta = d*t - N + 1/8, so
+   delta -> 0 means d*t -> N - 1/8, the LEFT edge: the setter has just entered its zone, and
+   the move it forces is MAXIMAL, a jump of (1/4 - delta)/d.  delta -> 1/4 is the setter
+   already at its opening, jump -> 0.  Small delta means a BIG move and large growth.
+
+3. AND THE FLOOR WOULD NOT GIVE THE CAP EVEN IF TRUE.  Growth per move is
+   (N + 1/8)/(N + delta - 1/8), so log growth ~ (1/4 - delta)/N.  The cascade's total growth
+   converges exactly when sum 1/N_j converges.  A floor delta >= c_* multiplies every term
+   by a constant < 1 and touches nothing else.  Measured over 3,000 arriving cascades, a
+   floor of c_* = 0.05 takes the median total from 0.7500 to 0.4602, a factor of 0.614 -- a
+   constant, not a change in convergence.
+
+   So the lemma is not merely false as stated.  Its true version would leave the cap exactly
+   where it is.  That is the part I should have checked before reporting the refutation as
+   the interesting outcome.
+
+WHAT STILL STANDS: the extremality, that g = 4 is the worst return length.  It held across
+20,000 random arrangements and the pushed counterexample is itself a g = 4 return.  Nothing
+here touches it.
