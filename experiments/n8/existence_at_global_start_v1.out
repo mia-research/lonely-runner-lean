@@ -1,0 +1,46 @@
+arrangements                          : 800
+spread regime  : {'W>8mu': 800}
+
+NOTE ON SCOPE. Section 4.6's claim -- that at the global start every SPEED gap reads
+>= 1/8 so only the wrap can be short -- needs W <= 8*mu. A speed gap reads a_k/(8*mu),
+which is a POSITION difference mod 1, so once W > 8*mu the readings exceed a lap, the
+runners have crossed, and speed-adjacency is no longer position-adjacency. Section 4.6
+says exactly this: 'Beyond W = 8*mu the short gap moves into the interior as runners
+cross.' The counts below mix both regimes and are split afterwards.
+
+at the global start t = 1/(8*mu), number of SHORT gaps (<1/8):
+   0 short :     2  (0.2%)
+   1 short :     7  (0.9%)
+   2 short :    59  (7.4%)
+   3 short :   173  (21.6%)
+   4 short :   290  (36.2%)
+   5 short :   213  (26.6%)
+   6 short :    52  (6.5%)
+   7 short :     4  (0.5%)
+
+runners already LONELY at the global start (both flanks >= 1/8):
+   0 lonely:    98  (12.2%)
+   1 lonely:   226  (28.2%)
+   2 lonely:   259  (32.4%)
+   3 lonely:   128  (16.0%)
+   4 lonely:    67  (8.4%)
+   5 lonely:    13  (1.6%)
+   6 lonely:     7  (0.9%)
+   8 lonely:     2  (0.2%)
+
+cases with exactly one short gap      : 7
+  ...and it joins r_1 and r_8 (wrap)  : 0
+
+====================================================================
+SPLIT BY REGIME -- this is the distinction section 4.6 draws
+
+  W<=7mu: none sampled
+
+  7mu<W<=8mu: none sampled
+
+  W>8mu: 800 arrangements
+    short gaps at the global start, median : 4
+    runners lonely there, median           : 2
+    exactly ONE short gap                  : 7
+      ...and it is the wrap pair (r1,r8)   : 0
+    ZERO runners lonely at the global start: 98

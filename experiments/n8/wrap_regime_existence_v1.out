@@ -1,0 +1,10 @@
+arrangements generated with W <= 8*mu   : 4000
+  of which W <= 7*mu (the progression)  : 0
+  of which 7*mu < W <= 8*mu             : 4000
+
+exactly ONE short gap at the global start : 4000  (100.0%)
+  ...and it is the WRAP pair (r_1, r_8)   : 4000  (100.0% of those)
+exactly SIX runners lonely at that instant: 4000  (100.0%)
+
+runners lonely at the global start:
+   6 lonely:  4000  (100.0%)
