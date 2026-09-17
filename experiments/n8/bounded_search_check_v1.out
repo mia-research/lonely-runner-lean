@@ -1,0 +1,8 @@
+integer difference sets tested            : 4000
+bounded (k < e) and wide (k < 4000) agree : 4000
+bounded says NO where wide says YES       : 0
+  cost of the bounded search: sum of e over the flanks, median 696 openings
+
+  The bounded search never misses. So for whole-number differences the question
+  'is this set lonely somewhere' is DECIDED by a finite check, and running that
+  check on more sets -- which is what the census is -- produces no new mathematics.

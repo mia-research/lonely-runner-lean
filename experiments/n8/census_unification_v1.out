@@ -1,0 +1,26 @@
+instances parsed : 4413
+  band condition holds as recorded        : 4413 / 4413
+  verdict(k) == verdict(k + j*e)          : 13239 / 13239
+  instances recorded with k >= e          : 0
+    of those, some k < e also works       : 0 / 0
+  distinct (flank e, k mod e) pairs used  : 169
+  distinct k recorded                     : 18  max 18
+  largest flank e used                    : 35
+
+======================================================================
+HOW FEW STATEMENTS ACTUALLY COVER THE CENSUS
+  lists                    : 4413   distinct: 4413
+  (e, k) pairs used        : 169
+  greedy minimum cover     : 78 pairs cover all 4413 lists
+    the ten biggest        : [((7, 6), 630), ((14, 6), 489), ((16, 4), 422), ((7, 3), 292), ((21, 15), 238), ((7, 5), 221), ((14, 8), 220), ((7, 4), 167), ((14, 12), 166), ((28, 4), 149)]
+
+READING.
+  Every instance is the SAME statement -- 'every d in L lies in the band at (e,k)' --
+  which is one theorem, clear_at_opening_of_band, instantiated. The 4,413 are
+  membership checks against 169 distinct (flank, opening) pairs, and a greedy
+  cover needs only 78 of them.
+
+  So the 1,341 / 3,072 split ('at the bound' versus 'at a later opening') is a FALSE
+  DIVISION: it is one criterion evaluated at different k, not two phenomena. And the
+  spread of k is bounded by the flank -- the verdict is periodic in k with period e,
+  confirmed 13,239 / 13,239, and no instance uses k >= e.
