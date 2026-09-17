@@ -7,7 +7,11 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT" || exit 2
 OUT="${1:-$HOME/Desktop/lrc_n8_bundle_$(date +%Y-%m-%d).tar.gz}"
 B=$(mktemp -d)/lrc_n8_bundle_$(date +%Y-%m-%d)
-MAN=docs/n8/MANUSCRIPT_v9_3.md
+# Find the CURRENT manuscript, never a hardcoded version. A hardcoded name here shipped
+# v9.3 in a bundle built for v9.4, and the same mistake had already been fixed in the gate.
+MAN=$(ls docs/n8/MANUSCRIPT_v*.md 2>/dev/null | sort -V | tail -1)
+[ -n "$MAN" ] || { echo "  no MANUSCRIPT_v*.md found"; exit 2; }
+echo "  manuscript: $MAN"
 mkdir -p "$B/docs" "$B/experiments" "$B/lean"
 
 # [1] the Lean tree: the transitive import closure of the artefact plus the frozen target
