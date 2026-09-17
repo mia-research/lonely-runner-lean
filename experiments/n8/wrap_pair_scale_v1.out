@@ -1,0 +1,30 @@
+arrangements (7*mu < W <= 8*mu)            : 1500
+
+(b) are the six covered by Theorem 4.8?
+  interior runners (r_2..r_7)              : 9000
+  with every difference in [d_min, 7 d_min]: 9000  (100.0%)
+  -> 4.8 covers them; not new
+
+(a) does the wrap pair get its own instant?
+  r_1 instances                            : 1500, lonely instant found: 1497
+  r_8 instances                            : 1500, lonely instant found: 1500
+  its instant in units of its own bound 1/(8 d_min):
+    min 1.00/8   median 9.00/8   max 2481.00/8
+
+==================================================================
+RE-TESTING the r_1 cases where no instant was found
+  re-tested : 3    still none : 3
+
+==================================================================
+SEARCHING ALL FLANK OPENINGS (lonely_iff_exists_flank is an iff)
+  FOUND  flank e=591/10000  opening k=1   speeds ['1', '10249/10000', '10591/10000', '10907/10000', '559/500', '716/625', '1467/1250', '1499/1250']
+  FOUND  flank e=301/2000  opening k=6   speeds ['1', '10699/10000', '2301/2000', '6143/5000', '331/250', '13969/10000', '1483/1000', '1949/1250']
+  FOUND  flank e=833/5000  opening k=5   speeds ['1', '10803/10000', '5833/5000', '6357/5000', '13531/10000', '14447/10000', '3067/2000', '2053/1250']
+
+==================================================================
+CHECKING THE ARGUMENT STEP BY STEP
+  interior runners                       : 9000
+    d_max <= 7*mu   (the counting step)  : 9000
+    d_max <= 7*d_min (so 4.8 applies)    : 9000
+  endpoint runners r_1, r_8              : 3000
+    d_max > 7*d_min (4.8 does NOT apply) : 1696
