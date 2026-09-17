@@ -592,7 +592,32 @@ instants settle a runner as well (Corollary 6.4).
 > which no reading lies within 1 of a multiple of 8. Equivalently (Corollary 6.4), the run of lap-completion zones from the
 > bound ends; equivalently, some flank has a lonely opening.  `[OPEN; not stated in either artefact]`
 
+**The obligation in the form §3 asks for.** `FRAMEWORK_CONJECTURE_v1` §3: *"A proof is an **exhibition**: the rules,
+written down, with their conditions shown exhaustive."* **Rules, plural; conditions, plural.** Read that way the obligation
+is not that one mechanism works everywhere — it is that the rules already written down leave nothing out. The framework has
+been building rules all along, each a condition paired with an instant:
+
+| rule | condition on the difference set | the instant it names |
+|---|---|---|
+| **Theorem 4.8** | `d_max ≤ 7·d_min` | `1/(8·d_min)` |
+| **Theorem 6.12** | every ratio to some flank `e` in the band at opening `k` | `(k + 1/8)/e` |
+| **Theorem 6.9** | exactly one non-integer ratio at a live flank | an opening of that flank |
+| **Proposition 6.10** | two non-integer ratios, one off the other's lattice | an opening of that flank |
+| **Theorem 6.13** | whole-number differences | decided by a finite search, `k < e` at each flank |
+| **the U/K calculus** (§6.9) | all but one difference on a `P`-lattice, clear openings known | an opening of the free flank |
+| **§4.5, §6.9 census** | the 4,413 fully-pinned families | the recorded `(e, k)` |
+
 **What is proved of it.** Every family of §4.5 and of §6.9; and at other thresholds and fewer differences, the rows of §8.
+
+**What is not yet shown is exhaustiveness.** Measured as predicates on difference sets, the rules above that can be written
+as predicates decide about **39%** of random seven-sets, essentially all of it Theorem 4.8
+(`experiments/n8/formalised_coverage_v1`). That figure is a **lower bound** — the U/K calculus needs a period and a
+clear-opening set supplied per family, and the census is a list of arrangements, so neither is expressible as a predicate and
+both count as uncovered there. The gap is the obligation: **a class of difference sets no rule yet reaches.**
+
+Stating it this way changes what counts as progress. Under "the cascade reaches a fixed point" there is none until the whole
+thing falls; under §3's form, each new rule is measurable ground. It is the same obligation — the equivalences below are
+proved both ways — in the shape §3 asks for.
 
 **The joint, and why it is not the statement here.** `SKETCH_v7` §10 put the same obligation as a claim: *"for every
 arrangement and every runner there is a `u` in the window `[1/8, 7/8]` at which all six of the other runners read mid-lap."*
