@@ -1,4 +1,6 @@
 import LonelyRunner.LRC.Cascade.Flanks
+import LonelyRunner.LRC.Cascade.SmallOrders
+import LonelyRunner.LRC.Cascade.FourDifferences
 
 /-!
 # The frozen target
@@ -19,7 +21,7 @@ the other as a redefinition of the goal.
 
 namespace LRC.Spec
 
-open MomentIterationN Flanks
+open MomentIterationN Flanks ChainBounds NearestState
 
 instance : Fact (2 ≤ 8) := ⟨by norm_num⟩
 
@@ -59,5 +61,51 @@ theorem target_flank_agrees (h : ExistenceAt8_flank) : ExistenceAt8 := by
   · exact ⟨1, by norm_num, by intro d hd; simp at hd⟩
   · obtain ⟨e, he, k, hk⟩ := h ds hpos hcard hne
     exact ⟨flankOpening 8 e k, flankOpening_pos (hpos e he) k, hk⟩
+
+/-! ## the single remaining link
+
+The framework proves every step of the chain from the bound to the target except one. Collected here so
+the remaining obligation is a statement, not a description.
+
+* the relocation step        `MomentIterationN.move_eq_self_or_opening`, `nextOpening_at_scale`
+* the growth of N relocations `SmallOrders.nearest_reading_recurrence` —
+      `m * (move)^[N] b ≤ (1/n) * ∏_{j<N} (Q j + 1/n)/(Q j − 1/n)`
+* capped instants give arrival `SmallOrders.exists_fixed_of_capped`
+* arrival is the isolation     `MomentIterationN.first_isolation_as_zone_run` — Lonely, least, and a `Run`
+* arrival ⟺ lonely somewhere   `MomentIterationN.lonely_iff_run_ends`
+
+So a uniform cap on the cascade's instants is all that is missing. `CascadeCapped` states it; the theorem
+below is the composition, and it is the whole of the reduction. -/
+
+/-- **The cascade's instants are uniformly capped.** For every subject there is a bound above every
+iterate from the bound. -/
+def CascadeCapped : Prop :=
+  ∀ ds : Finset ℝ, (∀ d ∈ ds, 0 < d) → ds.card ≤ 7 → ∀ m ∈ ds, (∀ d ∈ ds, m ≤ d) →
+    ∃ U : ℝ, ∀ N : ℕ, (move 8 ds)^[N] (1 / (8 * m)) ≤ U
+
+/-- **The reduction, in one line.**  A uniform cap on the instants gives the target.  Nothing else is
+owed: every other link is already proved in the artefact. -/
+theorem existence_of_capped (h : CascadeCapped) : ExistenceAt8 := by
+  rw [target_forms_agree]
+  intro ds hpos hcard hne m hm hmin
+  obtain ⟨U, hU⟩ := h ds hpos hcard m hm hmin
+  have hb : (0 : ℝ) < 1 / (8 * m) := by
+    have := hpos m hm; positivity
+  exact exists_fixed_of_capped (n := 8) hpos hb hU
+
+/-- **And the converse**, so this is the obligation restated, not weakened: once the cascade arrives, the
+iterates stabilise, so they are bounded by the arrival value. -/
+theorem capped_of_existence (h : ExistenceAt8) : CascadeCapped := by
+  intro ds hpos hcard m hm hmin
+  rw [target_forms_agree] at h
+  obtain ⟨N, hfix⟩ := h ds hpos hcard ⟨m, hm⟩ m hm hmin
+  refine ⟨(move 8 ds)^[N] (1 / (8 * m)), fun K => ?_⟩
+  rcases le_or_gt K N with hKN | hKN
+  · have e : (move 8 ds)^[N] (1 / (8 * m))
+        = (move 8 ds)^[N - K] ((move 8 ds)^[K] (1 / (8 * m))) := by
+      rw [← Function.iterate_add_apply]; congr 1; omega
+    rw [e]; exact iterate_ge (n := 8) ds _ _
+  · obtain ⟨i, rfl⟩ : ∃ i, K = N + i := ⟨K - N, by omega⟩
+    exact le_of_eq (FourDifferences.iterate_stable (n := 8) hfix i)
 
 end LRC.Spec
