@@ -19,4 +19,6 @@ import LonelyRunner.LRC.Cascade.PinnedBatch3
 
 import LonelyRunner.LRC.Cascade.PinnedBatch4
 
+import LonelyRunner.LRC.Cascade.Together
+
 /-! # The cascade artefact: every module. -/

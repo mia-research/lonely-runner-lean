@@ -1,5 +1,6 @@
 import LonelyRunner.LRC.Cascade.Iteration
 import LonelyRunner.LRC.ConstructionN.LemmaPass
+import Mathlib.NumberTheory.Real.Irrational
 
 /-!
 # Flanks: every lonely instant is an opening of one runner, read by speed ratios
@@ -423,6 +424,73 @@ theorem stops_of_one_fractional (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d 
     (hint : ∀ d ∈ ds, d ≠ j → ∃ A : ℤ, d = A * e ∧ ¬ ((n : ℤ) ∣ A)) :
     ∃ N : ℕ, move n ds ((move n ds)^[N] (1 / (n * m))) = (move n ds)^[N] (1 / (n * m)) := by
   obtain ⟨k, hk⟩ := lonely_opening_of_one_fractional hn4 hpos he hj hfrac hint
+  exact exists_fixed_of_lonely hpos hm (flankOpening_pos (hpos e he) k) hk
+
+/-! ### Proposition 6.10, the mixed pair
+
+A rational and an irrational ratio never shadow a live flank together.  This needs no residue count
+and no pigeonhole: the rational runner's verdict repeats with its own denominator `c`, so it is clear
+on a whole residue class mod `c`, and `class_killer_int` (inside `lonely_opening_of_free_off_lattice`)
+says that shadowing every opening of that class would force the irrational ratio onto the `c`-lattice.
+Only the two lattice bridges below are new. -/
+
+/-- **A runner whose ratio to the flank is irrational is off every lattice.** -/
+theorem off_lattice_of_irrational_ratio {d e : ℝ} (hirr : Irrational (d / e)) {P : ℕ} (hP : 0 < P) :
+    Int.fract ((P : ℝ) * (d / e)) ≠ 0 := by
+  intro h
+  -- `fract = 0` means `P·(d/e)` is the integer `⌊P·(d/e)⌋`, so `d/e` is rational
+  have hPz : (P : ℝ) * (d / e) = (⌊(P : ℝ) * (d / e)⌋ : ℝ) := by
+    have := Int.fract_add_floor ((P : ℝ) * (d / e)); rw [h] at this; linarith
+  have hP0 : ((P : ℝ)) ≠ 0 := by positivity
+  have : d / e = ((⌊(P : ℝ) * (d / e)⌋ : ℝ)) / (P : ℝ) := by
+    field_simp at hPz ⊢; linarith [hPz]
+  exact hirr ⟨(⌊(P : ℝ) * (d / e)⌋ : ℚ) / (P : ℚ), by push_cast; exact this.symm⟩
+
+/-- **A runner whose ratio to the flank has denominator `c` is on the `c`-lattice.** -/
+theorem on_lattice_of_ratio_den {d e : ℝ} {a : ℤ} {c : ℕ} (hc : 0 < c)
+    (hrat : d / e = (a : ℝ) / (c : ℝ)) : Int.fract ((c : ℝ) * (d / e)) = 0 := by
+  have hc0 : ((c : ℝ)) ≠ 0 := by positivity
+  have : (c : ℝ) * (d / e) = ((a : ℤ) : ℝ) := by rw [hrat]; field_simp
+  rw [this, Int.fract_intCast]
+
+/-- **Proposition 6.10, the mixed pair.**  A live flank whose non-integer ratios are one rational (of
+denominator `c`) and one off the `c`-lattice has a lonely opening, so the cascade stops.  Every other
+runner has an integer ratio to the flank that `n` does not divide.  No count of residues is used. -/
+theorem lonely_opening_of_lattice_and_free (hn4 : 4 ≤ n) {ds : Finset ℝ}
+    (hpos : ∀ d ∈ ds, 0 < d) {e y z : ℝ} (he : e ∈ ds) {a : ℤ} {c : ℕ} (hc : 0 < c)
+    (hyrat : y / e = (a : ℝ) / (c : ℝ)) (hyfrac : Int.fract (y / e) ≠ 0)
+    (hzoff : Int.fract ((c : ℝ) * (z / e)) ≠ 0)
+    (hint : ∀ d ∈ ds, d ≠ y → d ≠ z → ∃ A : ℤ, d = A * e ∧ ¬ ((n : ℤ) ∣ A)) :
+    ∃ k : ℕ, Lonely n ds (flankOpening n e k) := by
+  have he0 := hpos e he
+  -- the opening `r` at which the rational runner is clear
+  have hf0 : 0 < Int.fract (y / e) := lt_of_le_of_ne (Int.fract_nonneg _) (Ne.symm hyfrac)
+  obtain ⟨r, hr⟩ := exists_clear_step (n := n) hn4 (c := (y / e) / n) hf0 (Int.fract_lt_one _)
+  refine lonely_opening_of_free_off_lattice (n := n) (x := z) hn4 he0 c r ?_ ?_ hzoff
+  · -- everything but `z` sits on the `c`-lattice
+    intro d hd hdz
+    by_cases hdy : d = y
+    · subst hdy; exact on_lattice_of_ratio_den hc hyrat
+    · obtain ⟨A, hA, -⟩ := hint d hd hdy hdz
+      have : d / e = (A : ℝ) := by rw [hA]; field_simp
+      rw [this, show (c : ℝ) * (A : ℝ) = (((c : ℤ) * A : ℤ) : ℝ) by push_cast; ring,
+        Int.fract_intCast]
+  · -- everything but `z` is clear at opening `r`
+    intro d hd hdz
+    by_cases hdy : d = y
+    · subst hdy; rw [fractional_ratio_circDist he0]; exact hr
+    · obtain ⟨A, hA, hnA⟩ := hint d hd hdy hdz
+      exact (integer_ratio_clear_iff he0 hA r).2 hnA
+
+/-- **The cascade stops** for such an arrangement. -/
+theorem stops_of_lattice_and_free (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d)
+    {m e y z : ℝ} (hm : m ∈ ds) (he : e ∈ ds) {a : ℤ} {c : ℕ} (hc : 0 < c)
+    (hyrat : y / e = (a : ℝ) / (c : ℝ)) (hyfrac : Int.fract (y / e) ≠ 0)
+    (hzoff : Int.fract ((c : ℝ) * (z / e)) ≠ 0)
+    (hint : ∀ d ∈ ds, d ≠ y → d ≠ z → ∃ A : ℤ, d = A * e ∧ ¬ ((n : ℤ) ∣ A)) :
+    ∃ N : ℕ, move n ds ((move n ds)^[N] (1 / (n * m))) = (move n ds)^[N] (1 / (n * m)) := by
+  obtain ⟨k, hk⟩ :=
+    lonely_opening_of_lattice_and_free hn4 hpos he hc hyrat hyfrac hzoff hint
   exact exists_fixed_of_lonely hpos hm (flankOpening_pos (hpos e he) k) hk
 
 end Flanks

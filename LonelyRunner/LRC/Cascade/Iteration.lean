@@ -355,6 +355,121 @@ theorem inWay_at_scale_iff {d D : ℝ} (hD : 0 < D) :
     push Not at hc
     exact absurd (h.mp hc N) (not_le.mpr hN)
 
+/-! ### the spine pattern  (§6.6)
+
+The manuscript records this as proved arithmetic, checked on 95,776 spine instants, but not formalised.
+A runner of slot `a` (a whole number of `n`-ths) and deviation `ε` has reading `a + ε`.  At the spine
+instant `r/n` its position reduces to `(c + r·ε)/n` with `c = a·r mod n`, so **the pattern depends only on
+the slot and the deviation** — not on the scale it is read at.
+-/
+
+/-- **The spine position depends only on slot and deviation.**  At the spine instant `r/n` a reading
+`a + ε` sits where `(c + r·ε)/n` sits, with `c = a·r mod n`. -/
+theorem spine_reduce (a r : ℤ) (ε : ℝ) :
+    circDist (((a : ℝ) + ε) * r / n) = circDist (((((a * r) % n : ℤ) : ℝ) + r * ε) / n) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hnn : (n : ℝ) ≠ 0 := hn0.ne'
+  have hdm : a * r = n * (a * r / n) + (a * r) % n := (Int.mul_ediv_add_emod (a * r) n).symm
+  have key : ((a : ℝ) + ε) * r / n
+      = ((((a * r) % n : ℤ) : ℝ) + r * ε) / n + (((a * r / n : ℤ)) : ℝ) := by
+    have : ((a * r : ℤ) : ℝ) = ((n : ℤ) : ℝ) * ((a * r / n : ℤ) : ℝ) + (((a * r) % n : ℤ) : ℝ) := by
+      exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) hdm
+    push_cast at this ⊢
+    field_simp
+    linarith [this]
+  rw [key, circDist_add_int]
+
+/-- **Scaled by `n`, the zone is a band of width 2 around the multiples of `n`.** -/
+theorem circDist_div_lt_iff (y : ℝ) :
+    circDist (y / n) < (n : ℝ)⁻¹ ↔ ∃ m : ℤ, |y - n * m| < 1 := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hnn : (n : ℝ) ≠ 0 := hn0.ne'
+  have hsplit : ∀ m : ℤ, y / n - (m : ℝ) = (y - n * m) / n := by intro m; field_simp
+  have hinv : (n : ℝ)⁻¹ * n = 1 := inv_mul_cancel₀ hnn
+  constructor
+  · intro h
+    obtain ⟨m, hm⟩ := circDist_eq_abs_sub_some_int (y / n)
+    rw [hm, hsplit, abs_div, abs_of_pos hn0, div_lt_iff₀ hn0, hinv] at h
+    exact ⟨m, h⟩
+  · rintro ⟨m, hm⟩
+    refine lt_of_le_of_lt (circDist_le_abs_sub_int _ m) ?_
+    rw [hsplit, abs_div, abs_of_pos hn0, div_lt_iff₀ hn0, hinv]
+    exact hm
+
+/-- **In the way at a spine instant**, exactly: the reduced value `c + r·ε` lies within 1 of a multiple
+of `n`.  At `n = 8` with `c ∈ [0, 8)` the only multiples in reach are `0` and `8`, which is the
+manuscript's `c + r·ε < 1` or `7 < c + r·ε < 9`. -/
+theorem spine_inWay_iff (a r : ℤ) (ε : ℝ) :
+    inWay n ((a : ℝ) + ε) ((r : ℝ) / n) ↔
+      ∃ m : ℤ, |((((a * r) % n : ℤ) : ℝ) + r * ε) - n * m| < 1 := by
+  have hmul : ((a : ℝ) + ε) * ((r : ℝ) / n) = ((a : ℝ) + ε) * r / n := by ring
+  unfold inWay
+  rw [hmul, spine_reduce (n := n) a r ε]
+  exact circDist_div_lt_iff (n := n) _
+
+/-! ### the step as one dilation  (§6.2)
+
+The manuscript records these as proved arithmetic but not formalised. With `D' = d_x/(n·N+1)` the scale
+the setter hands over, and `λ = D/D'`:
+
+* every reading is multiplied by the same `λ`, and `λ > 1`;
+* the setter lands exactly on `n·N + 1`;
+* every other reading moves by `g·(d_y/d_x)`, with `g = n·N + 1 − s_x ∈ (0, 2)` the distance the setter
+  sat below `n·N + 1`.
+-/
+
+/-- The scale a setter in the way at scale `D` hands over. -/
+noncomputable def nextScale (n : ℕ) (d : ℝ) (N : ℤ) : ℝ := d / (n * N + 1)
+
+theorem nextScale_pos {d D : ℝ} (hd : 0 < d) (hD : 0 < D) {N : ℤ} (hN : |d / D - n * N| < 1) :
+    0 < nextScale n d N := by
+  have hs : 0 < d / D := div_pos hd hD
+  have := abs_lt.mp hN
+  exact div_pos hd (by linarith)
+
+/-- **A step is one dilation.**  Every reading is multiplied by the same factor `λ = D/D'`. -/
+theorem reading_at_nextScale {d dx D : ℝ} (hdx : 0 < dx) (hD : 0 < D) {N : ℤ}
+    (hN : |dx / D - n * N| < 1) :
+    d / nextScale n dx N = (D / nextScale n dx N) * (d / D) := by
+  have h0 := nextScale_pos (n := n) hdx hD hN
+  field_simp
+theorem dilation_factor {dx D : ℝ} (hdx : 0 < dx) (hD : 0 < D) {N : ℤ}
+    (hN : |dx / D - n * N| < 1) :
+    D / nextScale n dx N = ((n : ℝ) * N + 1) / (dx / D) := by
+  have hs : 0 < dx / D := div_pos hdx hD
+  have := abs_lt.mp hN
+  unfold nextScale
+  field_simp
+
+/-- **The factor exceeds 1**: the setter's reading sits strictly below `n·N + 1`. -/
+theorem one_lt_dilation_factor {dx D : ℝ} (hdx : 0 < dx) (hD : 0 < D) {N : ℤ}
+    (hN : |dx / D - n * N| < 1) : 1 < D / nextScale n dx N := by
+  have hs : 0 < dx / D := div_pos hdx hD
+  have h := abs_lt.mp hN
+  rw [dilation_factor (n := n) hdx hD hN, lt_div_iff₀ hs]
+  linarith [h.2]
+
+/-- **The setter lands exactly on `n·N + 1`.** -/
+theorem setter_reading_at_nextScale {dx : ℝ} (hdx : 0 < dx) {N : ℤ} (hN0 : (0 : ℝ) < n * N + 1) :
+    dx / nextScale n dx N = (n : ℝ) * N + 1 := by
+  unfold nextScale; field_simp
+
+/-- **What every other reading moves by.**  `g = n·N + 1 − s_x` is how far the setter sat below
+`n·N + 1`, and the shift is `g·(d/d_x)` — a ratio fixed by the speeds. -/
+theorem other_reading_shift {d dx D : ℝ} (hdx : 0 < dx) (hD : 0 < D) {N : ℤ}
+    (hN : |dx / D - n * N| < 1) :
+    d / nextScale n dx N - d / D = ((n : ℝ) * N + 1 - dx / D) * (d / dx) := by
+  have hs : 0 < dx / D := div_pos hdx hD
+  have := abs_lt.mp hN
+  unfold nextScale
+  field_simp
+
+/-- **The shift's coefficient lies in `(0, 2)`.** -/
+theorem shift_coeff_mem {dx D : ℝ} (hD : 0 < D) {N : ℤ} (hN : |dx / D - n * N| < 1) :
+    0 < (n : ℝ) * N + 1 - dx / D ∧ (n : ℝ) * N + 1 - dx / D < 2 := by
+  have h := abs_lt.mp hN
+  exact ⟨by linarith [h.2], by linarith [h.1]⟩
+
 /-- **The next opening of a runner in the way at scale `D` is the spine point of scale `d/(8N+1)`.** -/
 theorem nextOpening_at_scale {d D : ℝ} (hd : 0 < d) (hD : 0 < D) {N : ℤ} (hN : |d / D - n * N| < 1) :
     nextOpening n d (1 / (n * D)) = 1 / (n * (d / (n * N + 1))) := by
@@ -664,6 +779,64 @@ theorem drift_position {m : ℝ} (hm : 0 < m) (a K r : ℤ) (e : ℝ) :
   push_cast
   field_simp
   ring
+
+/-! ### the own-AP residue rule  (Proposition 6.7)
+
+The manuscript records this as derived and verified on 40,000 runners, but not formalised.  With rational
+readings `s = c/κ`, put `h = gcd(c, nκ)`, `m' = nκ/h` and `u = c/h`.  Then being in the way at the own AP
+instant `ν` is a condition on `u·ν mod m'` alone — and, cleared of the division, it is an inequality
+between whole numbers, so a concrete runner is decided by arithmetic.
+-/
+
+/-- **Proposition 6.7, the own-AP residue rule.**  The hypotheses `c = h·u` and `n·κ = h·m'` are what the
+common factor `h = gcd(c, nκ)` supplies; the rule needs no more of it than that.  The right-hand side is
+an inequality between whole numbers, so a concrete runner is decided by arithmetic. -/
+theorem own_ap_residue_rule {m : ℝ} (hm : 0 < m) {c κ h u m' : ℤ}
+    (hκ : 0 < κ) (hh : 0 < h) (hc : c = h * u) (hnκ : (n : ℤ) * κ = h * m') (ν : ℤ) :
+    inWay n (((c : ℝ) / (κ : ℝ)) * m) ((ν : ℝ) / (n * m)) ↔
+      ∃ M : ℤ, (n : ℤ) * |u * ν - m' * M| < m' := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hnn : (n : ℝ) ≠ 0 := hn0.ne'
+  have hκ0 : (0 : ℝ) < (κ : ℝ) := by exact_mod_cast hκ
+  have hh0 : (0 : ℝ) < (h : ℝ) := by exact_mod_cast hh
+  have hnZ : (0 : ℤ) < (n : ℤ) := by have := (Fact.out : 2 ≤ n); omega
+  -- the numerator identity, entirely in ℤ
+  have hnum : ∀ M : ℤ, c * ν - (n : ℤ) * κ * M = h * (u * ν - m' * M) := by
+    intro M; rw [hc, hnκ]; ring
+  have hκZ : (n : ℤ) * κ = h * m' := hnκ
+  have hm'0 : (0 : ℤ) < m' := by nlinarith [hκ, hh, hnZ, hκZ]
+  have hposn : ((c : ℝ) / (κ : ℝ) * m) * ((ν : ℝ) / (n * m)) = ((c : ℝ) * ν / κ) / n := by
+    field_simp
+  unfold inWay
+  rw [hposn, circDist_div_lt_iff (n := n)]
+  -- one equivalence, used for both directions
+  have key : ∀ M : ℤ, |(c : ℝ) * ν / κ - n * M| < 1 ↔ (n : ℤ) * |u * ν - m' * M| < m' := by
+    intro M
+    have hR : (c : ℝ) * ν / κ - (n : ℝ) * M = (h : ℝ) * ((u : ℝ) * ν - (m' : ℝ) * M) / (κ : ℝ) := by
+      have e := congrArg (fun z : ℤ => (z : ℝ)) (hnum M)
+      push_cast at e
+      field_simp
+      linarith [e]
+    rw [hR, abs_div, abs_of_pos hκ0, div_lt_one hκ0, abs_mul, abs_of_pos hh0]
+    have habs : |(u : ℝ) * ν - (m' : ℝ) * M| = ((|u * ν - m' * M| : ℤ) : ℝ) := by
+      rw [Int.cast_abs]; push_cast; ring_nf
+    rw [habs]
+    -- `h·|·| < κ`  ↔  `n·|·| < m'`, since `n·κ = h·m'`
+    constructor
+    · intro hlt
+      have h1 : (n : ℝ) * ((h : ℝ) * ((|u * ν - m' * M| : ℤ) : ℝ)) < (n : ℝ) * (κ : ℝ) :=
+        by nlinarith [hlt, hn0]
+      have h2 : (n : ℝ) * (κ : ℝ) = (h : ℝ) * (m' : ℝ) := by
+        have e := congrArg (fun z : ℤ => (z : ℝ)) hκZ; push_cast at e; linarith [e]
+      rw [h2] at h1
+      have h3 : (n : ℝ) * ((|u * ν - m' * M| : ℤ) : ℝ) < (m' : ℝ) := by nlinarith [h1, hh0]
+      exact_mod_cast h3
+    · intro hlt
+      have h3 : (n : ℝ) * ((|u * ν - m' * M| : ℤ) : ℝ) < (m' : ℝ) := by exact_mod_cast hlt
+      have h2 : (n : ℝ) * (κ : ℝ) = (h : ℝ) * (m' : ℝ) := by
+        have e := congrArg (fun z : ℤ => (z : ℝ)) hκZ; push_cast at e; linarith [e]
+      nlinarith [h3, hh0, hn0, h2]
+  exact ⟨fun ⟨M, hM⟩ => ⟨M, (key M).mp hM⟩, fun ⟨M, hM⟩ => ⟨M, (key M).mpr hM⟩⟩
 
 /-- **In the way at an AP instant iff the drift line is within one slot of the subject.** -/
 theorem inWay_at_ap_instant_iff_drift {m : ℝ} (hm : 0 < m) (a K r : ℤ) (e : ℝ) :
