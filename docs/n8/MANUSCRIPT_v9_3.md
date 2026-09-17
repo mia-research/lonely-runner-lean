@@ -4,7 +4,9 @@
 until now. v9.3 **withdraws Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work
 of 2026-09-17.
 See `CORRECTIONS_2026_09_17_v2` §5–§6 for the withdrawal and the audit behind it.
-Checked for v9.3: the cascade gate (**PASS, 4,691 theorems axiom-clean**, 2026-09-17) and a
+**§10's digest and commit were corrected after the freeze, the same day**: they had been computed one commit early, before
+`6a26557` added `off_lattice_of_not_ratio` and gate check [5], so the recorded hash did not match the tree. Figures only;
+no statement changed. Checked for v9.3: the cascade gate (**PASS, 4,691 theorems axiom-clean**, 2026-09-17) and a
 compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 23 new
 declarations and its one exception is recorded in §5. **Not repeated for v9.3**: the review against v1 and v7, which stands
 from v9.2 and which the v9.3 edits do not touch.
@@ -1012,8 +1014,8 @@ stated (§8.2; Appendix B.5).
   `578022e0296ce565ec601655747d1e5cdc614a9efa2cced6540162e698f43b9d`; gate `scripts/n8/gate.sh`.
 - `LonelyRunner/LRC/Cascade/` — nineteen modules `Iteration`, `SmallOrders`, `FourDifferences`, `ManyDifferences`, `Flanks`,
   `Together`, `VersionB`, `Reading`, `Irrational`, `Certificate`, `EighthFamily`, `NearAP`, `CensusFamilies`, `CensusBatch`,
-  `PinnedBatch1`–`PinnedBatch4`, `All`; digest `07446691e5609066938bbabd83ce07ad9f0c9b8194de4b8e7cfc8f44dece181e`
-  (LonelyRunner commit `4f4d0f9`); gate `scripts/cascade/gate.sh`. `Together` is new in v9.3 and carries H1 (Appendix A
+  `PinnedBatch1`–`PinnedBatch4`, `All`; digest `5a46c320aef908cd7774dd4bc21b26d61e439d563ca80cec514417dc17420935`
+  (LonelyRunner commit `6a26557`); gate `scripts/cascade/gate.sh`. `Together` is new in v9.3 and carries H1 (Appendix A
   item 4). The eighteen-module state quoted by v9.2 (4,669 theorems, digest `17e68102…`) is commit `48676d6`. The nine-module state quoted by v9.1 (161 theorems, digest
   `a1916b1e…`) is commit `e706d5d`. The seven-module state quoted by v8.2 (135 theorems, digest
   `9657ea89…`) is tag `manuscript-v8.2-cascade`.
