@@ -74,6 +74,24 @@ the remaining obligation is a statement, not a description.
 * arrival is the isolation     `MomentIterationN.first_isolation_as_zone_run` — Lonely, least, and a `Run`
 * arrival ⟺ lonely somewhere   `MomentIterationN.lonely_iff_run_ends`
 
+**Where the framework's exhibition requirement is discharged, since this file is where a reader
+looks for the target.**  `FRAMEWORK_CONJECTURE_v1` §3 asks for *"the rules, written down, with their
+conditions shown exhaustive"*, and says existence is not what is being asked.  That requirement is
+**already met, by definitions rather than by any theorem here**:
+
+    move n ds t       = ds.fold max t (fun d => if inWay n d t then nextOpening n d t else t)
+    nextOpening n d t = ((⌈d·t − 1/n⌉ : ℝ) + 1/n) / d
+
+Both are explicit expressions.  The rule is exhibited; nothing about it is chosen or asserted to
+exist.  So there is **no second, stronger "naming" target** to aim at beyond the ones below, and
+`CascadeCapped` is the whole residue — an existence statement *about a written-down rule*, which is
+what §3 permits and not what it bans.
+
+A caution for anyone tempted to state the naming form as a `Prop`: `∃ f : Finset ℝ → ℝ, …` is not
+it.  That asserts a naming function exists, and classical choice proves it equivalent to
+`ExistenceAt8` (checked).  Exhibition is a property of a **definition**, and proof irrelevance means
+Lean cannot lift it into a statement at all.  `docs/n8/NAMING_VS_EXISTENCE_v1.md` has the argument.
+
 So a uniform cap on the cascade's instants is all that is missing. `CascadeCapped` states it; the theorem
 below is the composition, and it is the whole of the reduction. -/
 
