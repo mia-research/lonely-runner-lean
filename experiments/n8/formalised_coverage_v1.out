@@ -1,0 +1,64 @@
+=== real difference sets, 3000 of them ===
+   R1:  1168  ( 38.9%)
+   R2:     0  (  0.0%)
+   R3:     0  (  0.0%)
+   R4:     0  (  0.0%)
+   covered by SOME formalised rule : 1168  (38.9%)
+   NOT covered                     : 1832  (61.1%)
+   of the uncovered, a lonely instant EXISTS (searched) : 1200 / 1200
+   no instant found                                    : 0
+
+=== int difference sets, 3000 of them ===
+   R1:  1124  ( 37.5%)
+   R2:     0  (  0.0%)
+   R3:     4  (  0.1%)
+   R4:     1  (  0.0%)
+   covered by SOME formalised rule : 1129  (37.6%)
+   NOT covered                     : 1871  (62.4%)
+   of the uncovered, a lonely instant EXISTS (searched) : 1200 / 1200
+   no instant found                                    : 0
+
+=== small-denominator difference sets, 3000 of them ===
+   R1:   385  ( 12.8%)
+   R2:     0  (  0.0%)
+   R3:    50  (  1.7%)
+   R4:    76  (  2.5%)
+   covered by SOME formalised rule : 510  (17.0%)
+   NOT covered                     : 2490  (83.0%)
+   of the uncovered, a lonely instant EXISTS (searched) : 1200 / 1200
+   no instant found                                    : 0
+
+========================================================================
+HOW HARD ARE THE UNCOVERED SETS? (opening index at which they resolve)
+
+  real: 847 uncovered sets resolved
+    opening k: min 0  median 3  90th 12  max 1402
+    resolved at k = 0 (the flank's own bound) : 168
+    resolved at k <= 2                        : 370
+    which flank worked, by size rank (0=smallest): {0: 846, 1: 1}
+
+  int: 880 uncovered sets resolved
+    opening k: min 0  median 2  90th 7  max 23
+    resolved at k = 0 (the flank's own bound) : 231
+    resolved at k <= 2                        : 504
+    which flank worked, by size rank (0=smallest): {0: 727, 1: 142, 2: 10, 3: 1}
+
+  small-denominator: 1255 uncovered sets resolved
+    opening k: min 0  median 1  90th 7  max 29
+    resolved at k = 0 (the flank's own bound) : 435
+    resolved at k <= 2                        : 798
+    which flank worked, by size rank (0=smallest): {0: 906, 1: 298, 2: 47, 3: 4}
+
+READING.
+  As a RULE ON ds, the formalised machinery reaches 17-39%, and essentially all of
+  that is Theorem 4.8. R3 and R4 need INTEGER ratios at a flank, which is non-generic:
+  0.0% of real sets, 0.1% of integer sets. So the flank theorems, though proved and
+  axiom-clean, decide almost no difference set on their own.
+
+  LOWER BOUND, stated as such. The U/K calculus needs a period and a clear-opening
+  set supplied per family, and the 4,475 census theorems are specific arrangements,
+  not a rule on ds. Neither is encodable here, so both are counted as uncovered.
+
+  ExistenceAt8 is NOT satisfied by composing these rules: ~61% of difference sets are
+  untouched by any of them. But a lonely instant was found for every uncovered set
+  searched -- 3,600 of 3,600 -- and usually at a very early opening.
