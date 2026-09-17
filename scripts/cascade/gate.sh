@@ -156,9 +156,13 @@ step "[6] the manuscript's recorded figures must match this tree"
 # time they were computed, then Lean was committed, and nothing noticed. A manuscript whose
 # digest does not match the tree cannot be verified, which is the whole point of recording it.
 # So the drift now fails the gate instead of being caught by luck.
+# Find the CURRENT manuscript rather than hardcoding a version: the highest-numbered
+# MANUSCRIPT_v*.md beside this tree, so a new version does not require editing the gate.
 MAN=""
-for cand in ../docs/n8/MANUSCRIPT_v9_3.md ../MANUSCRIPT_v9_3.md; do
-  [ -f "$cand" ] && MAN="$cand" && break
+for dir in ../docs/n8 ..; do
+  [ -d "$dir" ] || continue
+  cand=$(ls "$dir"/MANUSCRIPT_v*.md 2>/dev/null | sort -V | tail -1)
+  [ -n "$cand" ] && MAN="$cand" && break
 done
 if [ -z "$MAN" ]; then
   echo "  skipped (no MANUSCRIPT_v9_3.md beside this tree)"
