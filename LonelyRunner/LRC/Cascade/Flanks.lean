@@ -614,4 +614,71 @@ theorem exists_lonely_of_bands {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e
     ∃ s : ℝ, 0 < s ∧ Lonely n ds s :=
   ⟨flankOpening n e k, flankOpening_pos (hpos e he) k, lonely_at_opening_of_bands (hpos e he) k h⟩
 
+/-! ### The census is one theorem, not four thousand
+
+The artefact carries 4,413 census families, each a separate declaration.  They are **not**
+4,413 facts.  Every one is the same statement — every difference lies in the band at some
+`(e, k)` — instantiated at one of only 169 distinct `(flank, opening)` pairs, of which a
+greedy cover needs 78 (`experiments/n8/census_unification_v1`).  The criterion is
+`clear_at_opening_of_band` above; what follows bounds the search over `k`.
+
+So the census's own split — 1,341 families "clear at the bound" against 3,072 "decided at a
+later opening" — is a **false division**.  It is one criterion at different `k`, not two
+phenomena. -/
+
+/-- **At an integer flank the verdict repeats with period `e`.**  A corollary of
+`circDist_periodic_of_lattice` at `P = e`, since `fract (e · (d/e)) = fract d = 0` when `d` is a
+whole number.  Consequently a search over openings at an integer flank need never pass `k = e`:
+the openings `0, …, e−1` already carry every verdict the flank can give. -/
+theorem circDist_periodic_of_int_flank {a b : ℤ} (hb : 0 < b) (k j : ℕ) :
+    circDist ((a : ℝ) * flankOpening n (b : ℝ) (k + j * b.toNat))
+      = circDist ((a : ℝ) * flankOpening n (b : ℝ) k) := by
+  have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb
+  refine circDist_periodic_of_lattice hb0 ?_ k j
+  have hbn : ((b.toNat : ℕ) : ℝ) = (b : ℝ) := by
+    exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) (Int.toNat_of_nonneg hb.le)
+  rw [hbn]
+  have : (b : ℝ) * ((a : ℝ) / (b : ℝ)) = ((a : ℤ) : ℝ) := by field_simp
+  rw [this, Int.fract_intCast]
+
+/-- **Loneliness at an integer flank is periodic in the opening, with period the flank.**  The
+whole search collapses to `k < e`. -/
+theorem lonely_periodic_of_int_flank {ds : Finset ℝ} {b : ℤ} (hb : 0 < b)
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) (k j : ℕ) :
+    Lonely n ds (flankOpening n (b : ℝ) (k + j * b.toNat))
+      ↔ Lonely n ds (flankOpening n (b : ℝ) k) := by
+  constructor <;> intro h d hd <;> obtain ⟨a, rfl⟩ := hint d hd
+  · rw [← circDist_periodic_of_int_flank hb k j]; exact h _ hd
+  · rw [circDist_periodic_of_int_flank hb k j]; exact h _ hd
+
+/-- **Loneliness over whole-number differences is a FINITE search.**  `lonely_iff_exists_flank`
+gives an unbounded `∃ k`; at an integer flank the verdict repeats with period `e`, so the search
+collapses to `k < e`.  The subject is lonely somewhere **iff** it is lonely at one of the
+`∑_{e ∈ ds} e` openings with `k < e`.
+
+This is what the census was doing.  Its 4,413 declarations are this criterion evaluated on 4,413
+particular difference sets; with the criterion stated, enumerating more of them adds nothing.
+It does **not** prove `ExistenceAt8`, which quantifies over infinitely many `ds` — a decision
+procedure decides each case, it does not discharge a universal. -/
+theorem lonely_iff_bounded_search {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) (hne : ds.Nonempty)
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) :
+    (∃ s, 0 < s ∧ Lonely n ds s) ↔
+      ∃ e ∈ ds, ∃ k : ℕ, (k : ℝ) < e ∧ Lonely n ds (flankOpening n e k) := by
+  rw [lonely_iff_exists_flank hpos hne]
+  constructor
+  · rintro ⟨e, he, k, hk⟩
+    obtain ⟨b, rfl⟩ := hint e he
+    have hb0 : (0 : ℝ) < (b : ℝ) := hpos _ he
+    have hbZ : 0 < b := by exact_mod_cast hb0
+    have hbN : 0 < b.toNat := by omega
+    refine ⟨(b : ℝ), he, k % b.toNat, ?_, ?_⟩
+    · have : ((k % b.toNat : ℕ) : ℝ) < ((b.toNat : ℕ) : ℝ) := by
+        exact_mod_cast Nat.mod_lt _ hbN
+      rwa [show ((b.toNat : ℕ) : ℝ) = (b : ℝ) from
+        (by exact_mod_cast congrArg (fun z : ℤ => (z : ℝ)) (Int.toNat_of_nonneg hbZ.le))] at this
+    · have hsplit : k = k % b.toNat + (k / b.toNat) * b.toNat := (Nat.mod_add_div' k _).symm
+      rw [hsplit] at hk
+      exact (lonely_periodic_of_int_flank hbZ hint _ _).mp hk
+  · rintro ⟨e, he, k, -, hk⟩; exact ⟨e, he, k, hk⟩
+
 end Flanks
