@@ -915,7 +915,7 @@ negative results of Appendix A, proved in the text or in Lean as stated.
 
 **Author's rulings.** Whether the residue counts and pigeonhole of Propositions 6.10–6.11 sit inside the framework is
 **pending**. The `n > 2k` proof (§8.2) was **ruled on 2026-09-17**: the row is kept with its covering-threshold coincidence
-stated (§8.2; Appendix B.3).
+stated (§8.2; Appendix B.5).
 
 ---
 
@@ -1060,7 +1060,7 @@ here as a direction in the framework's objects, not as a result. The next test i
 | — | Appendix C | the objection ledger's tested objections (ruling Q4) |
 | v7 §3 "the baseline has no zone inside the evaluation window" | §3 | the window is gone, so Proposition 3.3's conclusion keeps the baseline alternative |
 
-### B.1a From v8 to v8.1 to v8.2
+### B.2 From v8 to v8.1 to v8.2
 
 Both dated 2026-09-15. Added in v9.2, the transitions having been recorded in `V8_REVISION_LIST_v1.md` rather than here.
 
@@ -1072,7 +1072,7 @@ Both dated 2026-09-15. Added in v9.2, the transitions having been recorded in `V
 | §2.3 **fitting between the AP locations** | new, `[OPEN]` | the author's statement of 2026-09-14 stated exactly: against a progression of gap `D`, runner `k` sits strictly between its neighbours' locations and adjacent bands overlap by one gap. With the worked fits `(1, 31, 75, 97, 128, 160, 176, 225)` at gap 32 and `(1, 2, 3, 4, 5, 6, 7, 100)` failing, the 45,568/34,462 and 80,357/58,800 counts, and the open part — how the fit decides which runners need the cascade (revision-list item 24) |
 
 That `[OPEN]` is the first of the five this manuscript still carries. The section then wrote the anchored gap as `S/7`; the
-symbol was separated from the difference ratio in v9 and is now `W/7` (B.2, audit finding C1).
+symbol was separated from the difference ratio in v9 and is now `W/7` (B.3, audit finding C1).
 
 **v8.1 → v8.2** (+23 lines, −13).
 
@@ -1085,9 +1085,9 @@ symbol was separated from the difference ratio in v9 and is now `W/7` (B.2, audi
 | Appendix C | rows extended | incommensurable speeds, the real-to-integer reduction, covering and candidate counting, and what the test means |
 
 v8.2 was frozen by the author on 2026-09-15 and audited twice — `V8_2_ISOLATED_AUDIT_v1` (54 findings, isolated) and
-`V8_2_OWN_AUDIT_v1` (17) — which is what v9 was redrafted against (B.2).
+`V8_2_OWN_AUDIT_v1` (17) — which is what v9 was redrafted against (B.3).
 
-### B.2 From v8.2 to v9
+### B.3 From v8.2 to v9
 
 Sources: `V8_REVISION_LIST_v1.md` items 1–7; `V8_2_ISOLATED_AUDIT_v1.md` (54 findings, tables R1–R7 and C1–C5);
 `V8_2_OWN_AUDIT_v1.md` (17 findings, K1–K17); the author's audit request of 2026-09-15; `FRAMEWORK_BOUNDARY_AUDIT_v3`, `WHAT_STOPS_PROOF_v2`, `A4_SPINE_BLOCKING_v1`, `T4_FLANKS_v3`,
@@ -1151,10 +1151,10 @@ generalisation excludes §6.6's order-8 spine paragraph.
 
 ---
 
-### B.2a From v9 to v9.1
+### B.4 From v9 to v9.1
 
 2026-09-15. The compile-diff of v9, run before promotion; its record is the addendum to item 8 of
-`V8_REVISION_LIST_v1.md`. Added in v9.2 for the same reason as B.1a.
+`V8_REVISION_LIST_v1.md`. Added in v9.2 for the same reason as B.2.
 
 **What the loss audit found.** 0 audit findings unaddressed (of the 54 isolated: 52 applied, 2 recorded; of the 17 own: all
 applied); 22 numbered results present at the same grade; 4 retraction records carried, none re-claimed; 114 Lean names all
@@ -1164,8 +1164,8 @@ resolving; 26 figures new to v9 all sourced; and the Cascade digest, theorem cou
 revision-list item 21 and of `WHY_IT_PREDICTS_v1` §2, "not sampled", "the local restrictions tighten as `n` grows", the
 `Cascade/Iteration.lean` reference, and Appendix C's "the first three rows above withdrew those objections". Also restored:
 the sharer refutation record and the census range; the open triple list; five differences at `n = 6 … 10` stated open; the own
-audit credited in B.2; the "not applied" record corrected, the `v_8 ≤ 40` scope belonging to the sweep description and not
-being a limitation; and a B.2 row for §4.5(a)'s widening to every spine instant. **T3 was recorded as not carried into the
+audit credited in B.3; the "not applied" record corrected, the `v_8 ≤ 40` scope belonging to the sweep description and not
+being a limitation; and a B.3 row for §4.5(a)'s widening to every spine instant. **T3 was recorded as not carried into the
 manuscript, with the reason**, rather than left absent.
 
 **Six contradictions the redraft had introduced were removed.** The symbol collisions on `ρ`, `q` and `m` — now `z`, `κ`,
@@ -1173,7 +1173,7 @@ manuscript, with the reason**, rather than left absent.
 
 v9.1 was frozen by the author on the same day.
 
-### B.3 From v9.1 to v9.2
+### B.5 From v9.1 to v9.2
 
 v9.1 is frozen; nothing in it is edited. This version adds what was formalised after that freeze and moves one grade.
 Author's rulings of 2026-09-17 are marked.
@@ -1193,7 +1193,7 @@ Author's rulings of 2026-09-17 are marked.
 | — | the specification file's gate position stated, with its own axiom-check artefact | it is outside both gates by design, so its "within the three axioms" needed a witness of its own (`v9_2_spec_axioms_v1`); found by the compile-diff |
 | §5 | the nativeness check recorded | the additions were checked against §5's claim declaration by declaration: only `Int.fract`, `Nat` casts and division, `List`/`Finset` membership and `Function.iterate_add_apply`; nothing from measure theory, topology, filters or number theory; `exists_clear_step` uses no non-local identifier at all |
 | §6.2, §6.7 | three sketch sections accounted for | `SKETCH_v7`'s **enlarged tier**, **mixed reading** (its §7b) and **the joint** (its §10) had never appeared in any manuscript version, a gap the v1 audit named on 2026-09-13. The first two are retired by Theorem 6.2(b) — the cascade lands on the first lonely instant, so no tier or candidate list can better it, and the mixed reading is beaten on its own worked example. The joint is the open statement with the first window attached, and **false as written**, by the arrangement §6.9 already names |
-| Appendix B | **B.1a** and **B.2a** added | the map ran v7→v8, v8.2→v9, v9.1→v9.2, leaving v8→v8.1→v8.2 and v9→v9.1 unmapped here; both were recorded in `V8_REVISION_LIST_v1.md` instead. Now in the appendix, so the chain is unbroken from v7. Existing numbering untouched, so references to B.1 and B.2 still resolve |
+| Appendix B | **B.2** and **B.4** added; the appendix renumbered B.1–B.5 | the map ran v7→v8, v8.2→v9, v9.1→v9.2, leaving v8→v8.1→v8.2 and v9→v9.1 unmapped here; both were recorded in `V8_REVISION_LIST_v1.md` instead. Now in the appendix, so the chain is unbroken: v7 → v8 → v8.1 → v8.2 → v9 → v9.1 → v9.2. Six cross-references were repointed with the renumbering; the two to B.1 were unaffected, B.1 being the only number that did not move |
 | §10 | census artefacts, the specification file, refreshed digest | the emitters, the verifiers, the harness, the map; and that the census data is deposited so the theorems regenerate from this repository alone |
 
 **A trace recovered, not a change.** B.1 maps v7's sections to v8's but not its numbered results, so a reader holding v7

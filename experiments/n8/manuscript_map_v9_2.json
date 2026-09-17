@@ -903,7 +903,7 @@
    "grades": [],
    "opens": []
   },
-  "B.1a From v8 to v8.1 to v8.2": {
+  "B.2 From v8 to v8.1 to v8.2": {
    "line": 1063,
    "decls": [],
    "notation": [
@@ -935,7 +935,7 @@
     }
    ]
   },
-  "B.2 From v8.2 to v9": {
+  "B.3 From v8.2 to v9": {
    "line": 1090,
    "decls": [],
    "notation": [
@@ -969,7 +969,7 @@
    "grades": [],
    "opens": []
   },
-  "B.2a From v9 to v9.1": {
+  "B.4 From v9 to v9.1": {
    "line": 1154,
    "decls": [],
    "notation": [
@@ -981,7 +981,7 @@
    "grades": [],
    "opens": []
   },
-  "B.3 From v9.1 to v9.2": {
+  "B.5 From v9.1 to v9.2": {
    "line": 1176,
    "decls": [],
    "notation": [
@@ -1071,34 +1071,34 @@
   "Appendix A. Routes that cannot close this",
   "Appendix B. Version maps",
   "B.1 From v7 to v8",
-  "B.1a From v8 to v8.1 to v8.2",
-  "B.2 From v8.2 to v9",
-  "B.2a From v9 to v9.1",
-  "B.3 From v9.1 to v9.2",
+  "B.2 From v8 to v8.1 to v8.2",
+  "B.3 From v8.2 to v9",
+  "B.4 From v9 to v9.1",
+  "B.5 From v9.1 to v9.2",
   "Appendix C. Objections tested"
  ],
  "reverse_index": {
   "CascadeRule.reading": [
    "2.3 Every arrangement is an ideal plus deviations"
   ],
-  "MomentIterationN.inWay": [
-   "6.1 The move"
+  "move": [
+   "6.1 The move",
+   "7. Formal verification"
   ],
   "nextOpening": [
    "6.1 The move",
    "7. Formal verification"
   ],
-  "move": [
-   "6.1 The move",
-   "7. Formal verification"
+  "MomentIterationN.inWay": [
+   "6.1 The move"
   ],
   "Flanks.flankOpening": [
    "7. Formal verification"
   ],
-  "inWay": [
+  "reading": [
    "7. Formal verification"
   ],
-  "reading": [
+  "inWay": [
    "7. Formal verification"
   ],
   "circDist": [
@@ -1111,6 +1111,16 @@
    "Abstract",
    "Appendix C. Objections tested"
   ],
+  "4.5 Families in which Existence holds at once": [
+   "10. Data and code availability",
+   "4.6 Where the reference first degrades",
+   "6.7 Existence",
+   "6.9 Flanks",
+   "7. Formal verification",
+   "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Abstract"
+  ],
   "6.9 Flanks": [
    "1.1 The shift",
    "10. Data and code availability",
@@ -1122,20 +1132,17 @@
    "9. What is and is not established",
    "Abstract"
   ],
-  "4.5 Families in which Existence holds at once": [
-   "10. Data and code availability",
-   "4.6 Where the reference first degrades",
-   "6.7 Existence",
-   "6.9 Flanks",
-   "7. Formal verification",
-   "8.2 Existence with few differences",
-   "9. What is and is not established",
-   "Abstract"
-  ],
   "7. Formal verification": [
    "5. No external dependency",
    "9. What is and is not established",
    "Abstract"
+  ],
+  "6.8 Hard cases and incommensurate instances": [
+   "1.1 The shift",
+   "10. Data and code availability",
+   "6.7 Existence",
+   "7. Formal verification",
+   "Appendix C. Objections tested"
   ],
   "6. The cascade": [
    "1.1 The shift",
@@ -1147,23 +1154,13 @@
    "7. Formal verification",
    "Appendix C. Objections tested"
   ],
-  "6.8 Hard cases and incommensurate instances": [
-   "1.1 The shift",
-   "10. Data and code availability",
-   "6.7 Existence",
-   "7. Formal verification",
-   "Appendix C. Objections tested"
+  "2.3 Every arrangement is an ideal plus deviations": [
+   "1.3 The cascade, and the three outcomes"
   ],
   "6.2 The move changes the scale": [
    "1.3 The cascade, and the three outcomes",
    "2.1 The autonomous scale",
    "7. Formal verification"
-  ],
-  "2.3 Every arrangement is an ideal plus deviations": [
-   "1.3 The cascade, and the three outcomes"
-  ],
-  "4. Global structure: gaps, the regular `n`-gon, the reference": [
-   "2.1 The autonomous scale"
   ],
   "8.2 Existence with few differences": [
    "10. Data and code availability",
@@ -1171,6 +1168,9 @@
    "6.7 Existence",
    "7. Formal verification",
    "9. What is and is not established"
+  ],
+  "4. Global structure: gaps, the regular `n`-gon, the reference": [
+   "2.1 The autonomous scale"
   ],
   "3. Local restrictions: the clear-interval bound": [
    "2.1 The autonomous scale",
@@ -1200,16 +1200,16 @@
    "Appendix A. Routes that cannot close this",
    "Appendix C. Objections tested"
   ],
-  "4.2 Conservation and the regular `n`-gon": [
-   "4.6 Where the reference first degrades"
+  "1.2 The Boundary Set Method": [
+   "4.6 Where the reference first degrades",
+   "6A. The firewall"
   ],
   "6A. The firewall": [
    "4.6 Where the reference first degrades",
    "6.7 Existence"
   ],
-  "1.2 The Boundary Set Method": [
-   "4.6 Where the reference first degrades",
-   "6A. The firewall"
+  "4.2 Conservation and the regular `n`-gon": [
+   "4.6 Where the reference first degrades"
   ],
   "9. What is and is not established": [
    "5. No external dependency"
@@ -1231,10 +1231,10 @@
    "7. Formal verification",
    "8.1 The infrastructure at every `n`"
   ],
-  "6.3 Every lonely instant is matched by an opening": [
+  "2.1 The autonomous scale": [
    "7. Formal verification"
   ],
-  "2.1 The autonomous scale": [
+  "6.3 Every lonely instant is matched by an opening": [
    "7. Formal verification"
   ],
   "1.3 The cascade, and the three outcomes": [
