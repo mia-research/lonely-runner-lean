@@ -1,29 +1,30 @@
-== [0] build-artefact integrity ==  (t+0s)
+== [0] build-artefact integrity ==  (t+1s)
   clean
    ...[0] took 0s
-== [1] build every cascade module ==  (t+0s)
+== [1] build every cascade module ==  (t+1s)
   modules: 19
 Build completed successfully (3362 jobs).
-   ...[1] took 1s
-== [2] sorry inventory ==  (t+1s)
+   ...[1] took 58s
+== [2] sorry inventory ==  (t+59s)
   none
-   ...[2] took 1s
-== [2b] proof-hygiene scan ==  (t+2s)
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+59s)
   clean
    ...[2b] took 0s
-== [3] axiom check, every theorem ==  (t+2s)
-  4695 of 4695 clean
-   ...[3] took 678s
-== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+680s)
+== [3] axiom check, every theorem ==  (t+59s)
+  4698 of 4698 clean
+  of which: 222 structural, 4476 generated census instances (95%)
+   ...[3] took 711s
+== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+770s)
   clean (unstated, as intended)
    ...[4] took 0s
-== [5] irrational ratios must remain covered, by name ==  (t+680s)
+== [5] irrational ratios must remain covered, by name ==  (t+770s)
   clean (5 declarations present)
    ...[5] took 0s
-== [6] the manuscript's recorded figures must match this tree ==  (t+680s)
-  clean (../docs/n8/MANUSCRIPT_v9_3.md matches: 4,695 theorems, 19 modules, digest d49705d1, commit 935329d)
+== [6] the manuscript's recorded figures must match this tree ==  (t+770s)
+  clean (../docs/n8/MANUSCRIPT_v9_3.md matches: 4,698 theorems, 19 modules, digest 1af2c9f2, commit b8ee8b7)
    ...[6] took 0s
-== total: 680s ==
+== total: 770s ==
 
-GATE PASS: 4695 theorems, axiom-clean (coverage 4695 of 4695 on disk).
+GATE PASS: 4698 theorems, axiom-clean (coverage 4698 of 4698 on disk).
            Existence at order 8 is NOT proved -- it remains open and unstated.
