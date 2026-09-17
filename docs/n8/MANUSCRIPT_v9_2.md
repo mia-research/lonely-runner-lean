@@ -1,6 +1,7 @@
 # A Bounding Framework for Eight Lonely Runners
 
-**T. Palelei.** Draft v9.1, 2026-09-15.
+**T. Palelei.** v9.2, 2026-09-17. **The manuscript of record** (frozen by the author, 2026-09-17, after its
+compile-diff, the cascade gate, the §5 nativeness pass and the review against v1 and v7).
 
 ---
 

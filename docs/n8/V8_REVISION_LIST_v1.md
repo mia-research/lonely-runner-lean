@@ -1,6 +1,14 @@
 # MANUSCRIPT_v8 — revision list
 
-Started 2026-09-15 for `MANUSCRIPT_v8_2.md`. **v8.2 was frozen (owner, 2026-09-15); `MANUSCRIPT_v9_1.md` is now frozen too (owner, 2026-09-15), after its compile-diff.** Accepted items go into `MANUSCRIPT_v9_2.md`. Earlier note: **v8.2 is frozen**: no edits to it; accepted items go into `MANUSCRIPT_v8_3.md`. The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
+Started 2026-09-15 for `MANUSCRIPT_v8_2.md`. **v8.2 was frozen (owner, 2026-09-15); `MANUSCRIPT_v9_1.md` is now frozen too (owner, 2026-09-15), after its compile-diff.** Accepted items go into `MANUSCRIPT_v9_2.md`.
+
+**`MANUSCRIPT_v9_2.md` is frozen as THE MANUSCRIPT OF RECORD (owner, 2026-09-17.)** Edits go to `MANUSCRIPT_v9_3.md`. It was
+promoted after: two compile-diffs against v9.1, the second reporting no losses and five internal notes, all addressed; the
+cascade gate at 4,669 of 4,669 axiom-clean with coverage 4,669 of 4,669 on disk; the §5 nativeness pass, enumerating every
+non-local identifier the additions use; a review against v1 and v7, which closed three sketch sections absent from every
+version since the v1 audit named them on 2026-09-13; Appendix B completed and renumbered B.1–B.5, the chain unbroken from v7;
+and the order-5 certificate re-run so its deposited output reproduces from its script. Its byline had carried v9.1's stamp
+through the edit and was corrected at the freeze. Earlier note: **v8.2 is frozen**: no edits to it; accepted items go into `MANUSCRIPT_v8_3.md`. The v7 list, `V7_REVISION_LIST_v1.md`, is closed at item
 53 ("applied in v8") and kept as the record. **Append only; nothing is removed when it is done** — mark it and say where it
 went. Edits to the manuscript go in a new version (`MANUSCRIPT_v8_3.md`, …).
 
