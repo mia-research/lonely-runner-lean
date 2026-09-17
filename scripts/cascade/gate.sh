@@ -23,6 +23,12 @@ SRC=LonelyRunner/LRC/Cascade
 # whether the gate is healthy, hung or dead, and those become indistinguishable. Redirect to a
 # file and read the tail of the file instead.
 T0=$SECONDS; TSTEP=$SECONDS; PREV=""
+# The gate takes ~12 minutes and is NOT atomic against edits. On 2026-09-17 step [3] read
+# 4,697 theorems and check [6] read 4,698 in the same run, because the tree was committed to
+# mid-run. A run that straddles an edit reports a state that never existed, so the tree is
+# fingerprinted at the start and again at the end.
+SRC_EARLY=LonelyRunner/LRC/Cascade
+TREE_AT_START=$(cd "$SRC_EARLY" 2>/dev/null && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
 step() {
   [ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
   echo "== $* ==  (t+$((SECONDS-T0))s)"
@@ -192,9 +198,18 @@ else
 fi
 
 [ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
+TREE_AT_END=$(cd $SRC && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
+if [ "$TREE_AT_START" != "$TREE_AT_END" ]; then
+  echo "== tree CHANGED during this run =="
+  echo "  start ${TREE_AT_START:0:12} -> end ${TREE_AT_END:0:12}"
+  echo "  The figures above mix two states and describe a tree that never existed. Re-run."
+  STABLE_OK=0
+else
+  STABLE_OK=1
+fi
 echo "== total: $((SECONDS-T0))s =="
 echo
-if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ] && [ "$IRR_OK" = "1" ] && [ "$FIG_OK" = "1" ]; then
+if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ] && [ "$IRR_OK" = "1" ] && [ "$FIG_OK" = "1" ] && [ "$STABLE_OK" = "1" ]; then
   echo "GATE PASS: $NDECL theorems, axiom-clean (coverage $NDECL of $NDISK on disk)."
   echo "           Existence at order 8 is NOT proved -- it remains open and unstated."
   exit 0
