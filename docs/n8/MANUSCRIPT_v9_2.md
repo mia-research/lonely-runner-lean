@@ -357,6 +357,15 @@ That development is outside the two artefacts of §7 (it sits in the general-`n`
 four instants `1/8, 3/8, 5/8, 7/8` in each lap also follow from Theorem 4.3 alone: the eight points `j·t` are pairwise at
 least `1/8` apart. Nothing else is cited: no equidistribution, no result at another order, no proof sketch.
 
+**The v9.2 additions were checked against that claim, declaration by declaration.** Every non-local identifier they use is
+`Int.fract` and its four lemmas, `Nat.cast`, `Nat.cast_sub`, `Nat.div_add_mod`, `Nat.mul_pos`, `List.mem_map`,
+`List.mem_toFinset`, `Finset.eq_empty_or_nonempty` and `Function.iterate_add_apply` — the fractional part, integer division,
+casts, membership, iteration. Nothing from measure theory, topology, filters or number theory appears, and no statement of
+equidistribution, Weyl, Kronecker or Dirichlet type is used anywhere. `exists_clear_step`, on which the shadowing argument of
+§6.9 rests and which replaced an appeal to the density of an irrational orbit, uses **no non-local identifier at all** in its
+eighty-four lines: it follows the runner's successive positions and compares consecutive nearest integers. The new modules
+import only `Cascade` and `ConstructionN.LemmaPass`; none refers to a result at another order.
+
 ---
 
 ## 6. The cascade
@@ -1103,6 +1112,7 @@ Author's rulings of 2026-09-17 are marked.
 | §8.2 `n > 2k` "nativeness pending" | kept, coincidence stated | **ruling: keep it as a row with the coincidence stated.** `n > 2k` is `k·(2/n) < 1` — the `k` arcs cannot cover the circle; at `n = 8, k = 7` they cover 1.75 times over. The proof reaches that threshold using no covering |
 | §9 "Author's rulings pending … whether the `n > 2k` proof is native" | the `n > 2k` ruling recorded as made, the Props 6.10–6.11 one still pending | the two sites disagreed after the §8.2 edit; found by the compile-diff before promotion |
 | — | the specification file's gate position stated, with its own axiom-check artefact | it is outside both gates by design, so its "within the three axioms" needed a witness of its own (`v9_2_spec_axioms_v1`); found by the compile-diff |
+| §5 | the nativeness check recorded | the additions were checked against §5's claim declaration by declaration: only `Int.fract`, `Nat` casts and division, `List`/`Finset` membership and `Function.iterate_add_apply`; nothing from measure theory, topology, filters or number theory; `exists_clear_step` uses no non-local identifier at all |
 | §10 | census artefacts, the specification file, refreshed digest | the emitters, the verifiers, the harness, the map; and that the census data is deposited so the theorems regenerate from this repository alone |
 
 Unchanged: the 27 numbered results and their declarations; §1.3's statement that there is no window; §6A; and all five open
