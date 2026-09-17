@@ -31,15 +31,12 @@ else
 fi
 
 echo "== [1] build every cascade module =="
-MODS="LonelyRunner.LRC.Cascade.Iteration
-LonelyRunner.LRC.Cascade.SmallOrders
-LonelyRunner.LRC.Cascade.FourDifferences
-LonelyRunner.LRC.Cascade.ManyDifferences
-LonelyRunner.LRC.Cascade.Flanks
-LonelyRunner.LRC.Cascade.VersionB
-LonelyRunner.LRC.Cascade.Reading
-LonelyRunner.LRC.Cascade.Irrational
-LonelyRunner.LRC.Cascade.All"
+# Derived from disk, not hardcoded: a hardcoded list goes stale silently, and on 2026-09-17 it was
+# missing nine modules on disk (Certificate, EighthFamily, NearAP, CensusFamilies, CensusBatch,
+# PinnedBatch1-4) while still claiming to build every one.
+MODS=$(ls $SRC/*.lean | xargs -n1 basename | sed 's/\.lean$//' \
+  | sed 's|^|LonelyRunner.LRC.Cascade.|' | tr '\n' ' ')
+echo "  modules: $(echo $MODS | wc -w | tr -d ' ')"
 lake build $MODS > "$LOG" 2>&1
 BUILD_EXIT=$?
 tail -1 "$LOG"
@@ -62,10 +59,27 @@ AX=LonelyRunner/_CascadeGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.Cascade.All'
   for f in $(ls $SRC/*.lean | grep -v '/All.lean$'); do   # every module, so a new file cannot be missed
-    awk '/^namespace /{ns=$2} /^end /{if($2==ns) ns=""} /^theorem /{name=$2; if(ns!="") print "#print axioms " ns "." name; else print "#print axioms " name}' "$f"
+    awk '/^namespace /{ns=$2} /^end /{if($2==ns) ns=""} \
+         /^[[:space:]]*(private |protected )*(theorem|lemma) /{ \
+           for(i=1;i<=NF;i++) if($i=="theorem"||$i=="lemma"){name=$(i+1); break} \
+           if(ns!="") print "#print axioms " ns "." name; else print "#print axioms " name}' "$f"
   done
 } > "$AX"
 NDECL=$(grep -c '^#print axioms' "$AX")
+# Coverage assertion: silent under-extraction would report "N of N clean" while checking fewer than
+# exist. Compare against an independent count of proof-carrying declarations on disk.
+# Deliberately BROADER than the extractor's own pattern -- attribute prefixes, `nonrec`, `noncomputable`
+# -- so a declaration written in a form the extractor cannot name makes the counts differ instead of
+# being skipped silently. A same-pattern count on both sides would agree by construction and never fire.
+NDISK=$(grep -hcE '^[[:space:]]*(@\[[^]]*\][[:space:]]*)*(private |protected |nonrec |noncomputable )*(theorem|lemma)[[:space:]]' \
+  $(ls $SRC/*.lean | grep -v '/All.lean$') 2>/dev/null | awk '{s+=$1} END{print s+0}')
+if [ "$NDECL" != "$NDISK" ]; then
+  echo "  COVERAGE FAIL: extracted $NDECL, but $NDISK proof-carrying declarations are on disk"
+  echo "  (a declaration the extractor misses is never axiom-checked)"
+  COV_OK=0
+else
+  COV_OK=1
+fi
 AXOUT=$(lake env lean "$AX" 2>&1)
 rm -f "$AX"
 NCLEAN=$(echo "$AXOUT" | grep -c "depends on axioms: \[propext, Classical.choice, Quot.sound\]")
@@ -75,13 +89,16 @@ if [ -n "$BAD" ]; then echo "$BAD" | sed 's/^/  /'; fi
 [ "$NCLEAN" = "$NDECL" ] && AX_OK=1 || AX_OK=0
 
 echo "== [4] the open statement (Existence at order 8) must NOT be stated =="
-OPEN=$(grep -nE '^[[:space:]]*(theorem|lemma|def|axiom)[[:space:]]+[A-Za-z_.]*([Ll][Rr][Cc]|[Cc]laim|[Ee]xistence|reaches_clear_scale|run_always_ends)' \
+# A NAME TRIPWIRE, not a proof of absence: it catches a declaration named for the open statement, and
+# would not catch one proved under an unrelated name. The frozen statement itself lives in
+# LonelyRunner/LRC/Spec/Target.lean, deliberately outside this artefact.
+OPEN=$(grep -nE '^[[:space:]]*(theorem|lemma|def|axiom)[[:space:]]+[A-Za-z_.]*([Ll][Rr][Cc]|[Cc]laim|[Ee]xistence|ExistenceAt8|reaches_clear_scale|run_always_ends)' \
   $SRC/*.lean 2>/dev/null)
 if [ -n "$OPEN" ]; then echo "$OPEN" | sed 's/^/  /'; OPEN_OK=0; else echo "  clean (unstated, as intended)"; OPEN_OK=1; fi
 
 echo
-if [ "$AX_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ]; then
-  echo "GATE PASS: $NDECL theorems, axiom-clean."
+if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ]; then
+  echo "GATE PASS: $NDECL theorems, axiom-clean (coverage $NDECL of $NDISK on disk)."
   echo "           Existence at order 8 is NOT proved -- it remains open and unstated."
   exit 0
 fi
