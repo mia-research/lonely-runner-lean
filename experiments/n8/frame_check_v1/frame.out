@@ -1,0 +1,6 @@
+[A] (config, runner) pairs tested : 3200
+    conjecture form vs formal form disagree : 0
+    difference-set sizes seen : {5: 14, 6: 393, 7: 2793}
+    smallest best-distance found : 0.162500  (>= 1/8 = 0.125 required)
+[B] difference sets checked : 3000; lonely instants found BELOW 1/(8*m) : 0
+    circDist(m * 1/(8m)) over 3000 sets : [0.125]  (1/8 exactly = boundary)

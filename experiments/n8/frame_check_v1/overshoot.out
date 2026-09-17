@@ -1,0 +1,3 @@
+difference sets 1500, cascades that arrived 1500, move steps examined 1390
+steps that skipped a lonely instant : 0
+CONTROL, jumps deliberately 4x too far : 1142 caught (0 would mean the scan is blind)
