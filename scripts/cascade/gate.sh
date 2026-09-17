@@ -101,6 +101,14 @@ AXOUT=$(lake env lean "$AX" 2>&1)
 rm -f "$AX"
 NCLEAN=$(echo "$AXOUT" | grep -c "depends on axioms: \[propext, Classical.choice, Quot.sound\]")
 echo "  $NCLEAN of $NDECL clean"
+# The count alone overstates the artefact: 95% of it is the census, one generated theorem per
+# arrangement, each the SAME one-line application of lonely_of_band_list with a different list.
+# Report the split so "4,695 theorems" is never read as 4,695 distinct mathematical facts.
+GEN=$(grep -hcE '^theorem |^lemma ' $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
+      | paste -sd+ - | bc 2>/dev/null)
+GEN=${GEN:-0}
+STRUCT=$((NDECL - GEN))
+echo "  of which: $STRUCT structural, $GEN generated census instances ($((100*GEN/NDECL))%)"
 BAD=$(echo "$AXOUT" | grep -vE "depends on axioms: \[propext, Classical.choice, Quot.sound\]" | grep -E "axiom|error|sorryAx|unknown")
 if [ -n "$BAD" ]; then echo "$BAD" | sed 's/^/  /'; fi
 [ "$NCLEAN" = "$NDECL" ] && AX_OK=1 || AX_OK=0
@@ -167,6 +175,10 @@ else
     T_NRE="$T_N"; T_NCOMMA="$T_N"
   fi
   grep -qE "$T_NRE" "$MAN" || { MISS="$MISS theorems($T_NCOMMA)"; FIG_OK=0; }
+  T_G=$(grep -hcE '^theorem |^lemma ' $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
+        | paste -sd+ - | bc 2>/dev/null); T_G=${T_G:-0}
+  T_S=$((T_N - T_G))
+  grep -q "$T_S structural" "$MAN" || { MISS="$MISS structural($T_S)"; FIG_OK=0; }
   grep -q "$T_D" "$MAN"    || { MISS="$MISS digest(${T_D:0:8}...)"; FIG_OK=0; }
   [ -n "$T_C" ] && { grep -q "$T_C" "$MAN" || { MISS="$MISS commit($T_C)"; FIG_OK=0; }; }
   grep -qE "$T_M modules|nineteen modules" "$MAN" || { MISS="$MISS modules($T_M)"; FIG_OK=0; }
