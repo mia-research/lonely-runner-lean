@@ -21,8 +21,16 @@ RESULT = re.compile(r'\*\*(Theorem|Proposition|Corollary|Lemma)\s+([0-9]+\.[0-9]
 results = sorted({m.group(2) for m in RESULT.finditer(text)},
                  key=lambda s: [int(x) for x in re.findall(r'\d+', s)])
 
-# the section 7 crosswalk rows: "| <what> | <lean decls or prose note> | <module> |"
-rows = [l for l in text.splitlines() if l.startswith('|') and l.count('|') >= 3]
+# Scope to the section 7 crosswalk ONLY.  Appendix B is a changelog and QUOTES old
+# crosswalk wording verbatim; without this scoping the check fires on its own history.
+# (Found exactly that way: v9_3's B.6 row quoting v9.2's "not formalised" produced three
+# false positives.)  A check that cannot tell a live row from a historical one is
+# measuring the text, not the claims.
+lines = text.splitlines()
+start = next((i for i, l in enumerate(lines) if re.match(r'^##+ *7\.', l)), 0)
+end = next((i for i, l in enumerate(lines[start + 1:], start + 1)
+            if re.match(r'^##+ *(8\.|Appendix)', l)), len(lines))
+rows = [l for l in lines[start:end] if l.startswith('|') and l.count('|') >= 3]
 PROSE = re.compile(r'not formalised|proved in the text|in the text,', re.I)
 # a row is "covered" if it names at least one lowercase_with_underscores Lean identifier
 LEAN = re.compile(r'`[A-Za-z][A-Za-z0-9_.]*_[A-Za-z0-9_.]*`')
