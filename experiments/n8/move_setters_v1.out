@@ -1,0 +1,28 @@
+
+one runner moved, step 0.01: displaced 1974 (one move 938, several 1036)
+   final runner at exactly 1/8 is the last move's runner: 1974
+   several moves, same runner sets every move: 0 of 1036
+   several moves, number of setter changes: {1: 448, 2: 262, 3: 100, 4: 98, 5: 90, 6: 6, 7: 22, 10: 10}
+   first setter kind: {'index distance 3': 674, 'index distance 2': 392, 'index distance 4': 366, 'index distance 1': 294, 'slot-sharer': 134, 'speed-neighbour': 114}
+   last setter kind:  {'index distance 4': 774, 'index distance 3': 596, 'index distance 1': 282, 'index distance 2': 158, 'slot-sharer': 92, 'speed-neighbour': 72}
+
+every runner moved, |dev| <= 0.9: displaced 2378 (one move 1168, several 1210)
+   final runner at exactly 1/8 is the last move's runner: 2378
+   several moves, same runner sets every move: 0 of 1210
+   several moves, number of setter changes: {1: 595, 2: 326, 3: 139, 4: 81, 5: 41, 6: 15, 7: 6, 8: 5, 9: 1, 10: 1}
+   first setter kind: {'index distance 3': 924, 'index distance 2': 668, 'index distance 4': 515, 'index distance 1': 134, 'speed-neighbour': 125, 'slot-sharer': 12}
+   last setter kind:  {'index distance 3': 986, 'index distance 2': 637, 'index distance 4': 565, 'index distance 1': 106, 'speed-neighbour': 77, 'slot-sharer': 7}
+
+all 8-subsets of [1,16], gcd 1: displaced 33264 (one move 16152, several 17112)
+   final runner at exactly 1/8 is the last move's runner: 33264
+   several moves, same runner sets every move: 0 of 17112
+   several moves, number of setter changes: {1: 7312, 2: 5092, 3: 2542, 4: 284, 5: 1322, 6: 116, 7: 64, 8: 26, 9: 328, 10: 2, 12: 6, 13: 2, 15: 16}
+   first setter kind: {'slot-sharer': 31680, 'index distance 1': 1584}
+   last setter kind:  {'slot-sharer': 16406, 'index distance 3': 6700, 'index distance 2': 4836, 'index distance 4': 3338, 'index distance 1': 1492, 'speed-neighbour': 492}
+
+random integers [1,1000]: displaced 2124 (one move 1083, several 1041)
+   final runner at exactly 1/8 is the last move's runner: 2124
+   several moves, same runner sets every move: 0 of 1041
+   several moves, number of setter changes: {1: 567, 2: 275, 3: 113, 4: 50, 5: 22, 6: 7, 7: 7}
+   first setter kind: {'index distance 3': 747, 'index distance 2': 601, 'index distance 4': 401, 'speed-neighbour': 183, 'slot-sharer': 106, 'index distance 1': 86}
+   last setter kind:  {'index distance 3': 818, 'index distance 2': 579, 'index distance 4': 442, 'speed-neighbour': 135, 'index distance 1': 94, 'slot-sharer': 56}

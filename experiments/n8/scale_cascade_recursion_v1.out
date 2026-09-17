@@ -1,0 +1,16 @@
+
+one runner moved, step 0.01: 12736 runners | cascade time = BSM: 12736 | scales used: {1: 10762, 2: 938, 3: 448, 4: 262, 5: 100, 6: 98, 7: 90, 8: 6, 9: 22, 12: 10}
+   last runner's reading at the final scale: {'1': 10762, '9': 1228, '17': 358, '25': 164, '41': 54, '33': 46}
+   cascaded runners (>=1 change of scale), last runner = speed-neighbour: 72 of 1974; its speed-rank distance: {1: 356, 2: 200, 3: 596, 4: 822}
+
+every runner moved, |dev| <= 0.9: 4800 runners | cascade time = BSM: 4800 | scales used: {1: 2371, 2: 1131, 3: 660, 4: 386, 5: 134, 6: 65, 7: 31, 8: 14, 9: 5, 10: 2, 11: 1}
+   last runner's reading at the final scale: {'1': 2371, '9': 1411, '17': 478, '25': 186, '33': 80, '41': 64}
+   cascaded runners (>=1 change of scale), last runner = speed-neighbour: 96 of 2429; its speed-rank distance: {1: 186, 2: 623, 3: 1025, 4: 595}
+
+all 8-subsets of [1,16], gcd 1: 102952 runners | cascade time = BSM: 102952 | scales used: {1: 69688, 2: 16152, 3: 7312, 4: 5092, 5: 2542, 6: 284, 7: 1322, 8: 116, 9: 64, 10: 26, 11: 328, 12: 2, 14: 6, 15: 2, 17: 16}
+   last runner's reading at the final scale: {'1': 69688, '9': 27502, '17': 5190, '25': 448, '33': 108, '49': 16}
+   cascaded runners (>=1 change of scale), last runner = speed-neighbour: 556 of 33264; its speed-rank distance: {1: 2064, 2: 6504, 3: 14754, 4: 9942}
+
+random integers [1,1000]: 4000 runners | cascade time = BSM: 4000 | scales used: {1: 1830, 2: 1100, 3: 592, 4: 270, 5: 116, 6: 60, 7: 21, 8: 4, 9: 6, 10: 1}
+   last runner's reading at the final scale: {'1': 1830, '9': 956, '17': 405, '25': 209, '33': 138, '41': 89}
+   cascaded runners (>=1 change of scale), last runner = speed-neighbour: 176 of 2170; its speed-rank distance: {1: 274, 2: 600, 3: 821, 4: 475}

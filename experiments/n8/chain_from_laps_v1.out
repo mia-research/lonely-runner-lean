@@ -1,0 +1,4 @@
+one runner moved, step 0.05: 2496 runners | union walk over sorted lap zones = BSM: 2496 | chain setters in increasing lap-completion time (chains >= 2): 186 of 186 | drift-line first AP instant = direct: 2496
+every runner moved, |dev| <= 0.9 (hundredths): 1600 runners | union walk over sorted lap zones = BSM: 1600 | chain setters in increasing lap-completion time (chains >= 2): 414 of 414 | drift-line first AP instant = direct: 1600
+all 8-subsets of [1,14], gcd 1: 24024 runners | union walk over sorted lap zones = BSM: 24024 | chain setters in increasing lap-completion time (chains >= 2): 3780 of 3780 | drift-line first AP instant = direct: 24024
+random integers [1,300]: 1200 runners | union walk over sorted lap zones = BSM: 1200 | chain setters in increasing lap-completion time (chains >= 2): 304 of 304 | drift-line first AP instant = direct: 1200

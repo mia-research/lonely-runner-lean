@@ -1,0 +1,6 @@
+one runner moved, step 0.01: 12736 runners | predictor = BSM: 12736 | moves: {0: 10762, 1: 938, 2: 448, 3: 262, 4: 100, 5: 98, 6: 90, 7: 6, 8: 22, 11: 10}
+two runners moved (pair grid, step 0.1): 78344 runners | predictor = BSM: 78344 | moves: {0: 59536, 1: 8992, 2: 4658, 3: 2424, 4: 1210, 5: 822, 6: 414, 7: 82, 8: 106, 9: 54, 10: 28, 11: 8, 12: 10}
+every runner moved, |dev| <= 0.9: 4800 runners | predictor = BSM: 4800 | moves: {0: 2381, 1: 1141, 2: 654, 3: 355, 4: 140, 5: 72, 6: 31, 7: 16, 8: 2, 9: 7, 10: 1}
+push-out and spread families x = 8..200: 4632 runners | predictor = BSM: 4632 | moves: {0: 3168, 1: 552, 2: 382, 3: 236, 4: 113, 5: 111, 6: 50, 10: 6, 12: 4, 13: 2, 17: 4, 19: 2, 24: 2}
+all 8-subsets of [1,16], gcd 1: 102952 runners | predictor = BSM: 102952 | moves: {0: 69688, 1: 16152, 2: 7312, 3: 5092, 4: 2542, 5: 284, 6: 1322, 7: 116, 8: 64, 9: 26, 10: 328, 11: 2, 13: 6, 14: 2, 16: 16}
+random integers [1,1000]: 4000 runners | predictor = BSM: 4000 | moves: {0: 1872, 1: 1053, 2: 588, 3: 283, 4: 114, 5: 60, 6: 22, 7: 5, 8: 1, 9: 2}
