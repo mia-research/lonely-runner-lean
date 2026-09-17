@@ -1,0 +1,4 @@
+triples checked : 40000
+agree           : 40000
+disagree        : 0
+exact-boundary cases (n*|.| == m', open zone excludes) : 1004

@@ -1,0 +1,31 @@
+order n = 8, arc length 2/n = 1/4
+largest |J| for which the criterion can fire at all : 3
+  (|J| = 4 already gives sum >= 1 >= 1 from the 2/n terms alone,
+   whatever the denominators)
+
+|J| = 1: sum of 1/c_j must be < 3/4; all-equal denominators need c_j >= 2  (or irrational, 1/c = 0)
+|J| = 2: sum of 1/c_j must be < 1/2; all-equal denominators need c_j >= 5  (or irrational, 1/c = 0)
+|J| = 3: sum of 1/c_j must be < 1/4; all-equal denominators need c_j >= 13  (or irrational, 1/c = 0)
+
+Consequence: at order 8 the criterion decides only flanks with at most three
+non-integer ratios.  Flanks with four or more are outside it by the 2/n terms alone,
+before any denominator is looked at.  This is a ceiling of the method, not a gap in
+its proof: no strengthening of the residue count moves it.
+
+Practical reach, every 8-subset of [1,20], per LIVE FLANK:
+  live flanks              : 958256
+  |J| distribution         : {0: 19456, 1: 280, 2: 2611, 3: 10675, 4: 29050, 5: 64386, 6: 159747, 7: 672051}
+  decided by the criterion : 19736  (2.060%)
+  firings by |J|           : {0: 19456, 1: 280}
+  firings with |J| >= 2    : 0  -- none, so in this range the criterion decides nothing that
+                             Theorem 6.9 does not already decide.
+
+SCOPE OF THE ABOVE.  Integer difference sets have no irrational ratios, so every
+1/c_j above is strictly positive.  The criterion's own stated contribution at order 8
+-- 'one, two or three irrational ratios never shadow a live flank' -- rests on the
+1/c_j = 0 terms and is NOT exercised by this range.  The finding is therefore:
+  * over integer differences in [1,20], the criterion decides nothing that Theorem 6.9
+    does not already decide without any count;
+  * its non-redundant content is confined to ratios off every lattice, and to large
+    denominators, neither of which occurs here.
+The |J| <= 3 ceiling holds in both regimes.

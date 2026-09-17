@@ -1,0 +1,8 @@
+denominators swept        : 2..14, all reduced numerators, all whole parts mod 8
+shadowing pairs found     : 8
+denominator pairs (c1,c2) : [(2, 2)]
+with c1 != c2             : []  -> step 1 HOLDS
+with (c1,c2) != (2,2)     : []  -> step 2 HOLDS
+fractional parts realised : [('1/2', '1/2')]
+whole parts mod 8         : [(0, 3), (0, 4), (3, 0), (3, 7), (4, 0), (4, 7), (7, 3), (7, 4)]   (8 combinations)
+unordered whole-part pairs: 4  -- the manuscript's 'exactly 4 such pairs, by whole part mod 8'
