@@ -1,0 +1,40 @@
+(runner, arrangement) pairs with NO lonely instant on their own AP lattice L=1 : 5090
+  of those, a HIGHER lattice L carries one (searched to the framework's bound) : 5004
+  none found up to the bound                                                   : 86
+  lattice L that worked, distribution                                          : {2: 3697, 3: 966, 4: 247, 5: 76, 6: 11, 7: 7}
+
+  cases with no lonely instant on ANY lattice up to the bound (first 5):
+    speeds ['2/3', '5/3', '8/3', '10/3', '13/3', '17/3', '20/3', '25/3']  runner 4  s_max=7.50  searched L<= 2
+    speeds ['4/3', '2', '8/3', '10/3', '13/3', '19/3', '7', '25/3']  runner 4  s_max=7.50  searched L<= 2
+    speeds ['4/3', '2', '8/3', '10/3', '13/3', '19/3', '7', '25/3']  runner 6  s_max=7.50  searched L<= 2
+    speeds ['1', '5/3', '10/3', '4', '14/3', '6', '19/3', '22/3']  runner 1  s_max=9.50  searched L<= 3
+    speeds ['4/3', '2', '3', '11/3', '16/3', '6', '20/3', '25/3']  runner 3  s_max=8.00  searched L<= 3
+
+======================================================================
+RE-TESTING the unrescued cases with L up to 60 (the cap above was too tight)
+  re-tested            : 86
+  cleared with L <= 60 : 86
+  STILL none           : 0
+  -> the 86 was a search-bound artefact, not a finding.
+  full lattice distribution: {2: 3697, 3: 977, 4: 300, 5: 97, 6: 11, 7: 8}
+
+READING, and what this does and does not establish.
+  Every one of the 5,090 (runner, arrangement) pairs with no lonely instant on its own
+  AP lattice L=1 HAS one on a higher lattice, and the lattice needed is small:
+  L=2 for 73%, L<=3 for 92%, L<=7 for all of them. Maximum L needed: 7.
+
+  So 'no lonely own-AP instant' at L=1 is not a failure to be isolated. It is the
+  case where section 6.2's dilation does its job: the runner is pushed off the AP and
+  the isolation is still achieved, at a lattice the framework names.
+
+  SCOPE. 5,000 arrangements: 4,400 perturbations of the AP (1..8) with deviations up to
+  0.45 of the gap across denominators 3..25, plus 600 random integer 8-sets from [1,200].
+  Rational speeds only -- exact periodicity is what makes one period decisive. This is
+  measurement over those families, NOT a proof that a lattice always carries the instant,
+  and not a bound on L in general: the L<=7 here is observed, not derived.
+
+  METHOD WARNING, recorded because it bit twice in this script. The first run capped L at
+  floor(s_max/8)+2, read off the manuscript's FIRST-LIVE-LATTICE bound. That bound says
+  which lattices are live, not how far a lonely instant may sit, and for s_max=7.5 it
+  searches only L=2. It reported 86 failures. All 86 cleared once L ran to 60. A cap taken
+  from the wrong quantity manufactures nulls.
