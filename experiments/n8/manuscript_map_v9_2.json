@@ -337,12 +337,13 @@
     "PROVED",
     "PROVED",
     "PROVED",
+    "PROVED",
     "PROVED"
    ],
    "opens": []
   },
   "6.3 Every lonely instant is matched by an opening": {
-   "line": 441,
+   "line": 442,
    "decls": [],
    "notation": [
     "exists_clear_candidate"
@@ -355,7 +356,7 @@
    "opens": []
   },
   "6.4 Construction": {
-   "line": 455,
+   "line": 456,
    "decls": [],
    "notation": [
     "first_isolation_as_zone_run",
@@ -370,7 +371,7 @@
    "opens": []
   },
   "6.5 Localisation": {
-   "line": 470,
+   "line": 471,
    "decls": [],
    "notation": [
     "bound_le_of_lonely",
@@ -387,7 +388,7 @@
    "opens": []
   },
   "6.6 The subject's own AP instants": {
-   "line": 485,
+   "line": 486,
    "decls": [],
    "notation": [
     "A4_SPINE_BLOCKING_v1",
@@ -411,7 +412,7 @@
    "opens": []
   },
   "6.7 Existence": {
-   "line": 528,
+   "line": 529,
    "decls": [],
    "notation": [
     "LRC.Spec.existence_of_capped",
@@ -445,13 +446,13 @@
    ],
    "opens": [
     {
-     "line": 532,
+     "line": 533,
      "text": "> bound ends; equivalently, some flank has a lonely opening.  `[OPEN; not stated in either artefact]`"
     }
    ]
   },
   "6.8 Hard cases and incommensurate instances": {
-   "line": 603,
+   "line": 604,
    "decls": [],
    "notation": [
     "IrrationalCascade.r2_lonely",
@@ -470,7 +471,7 @@
    "opens": []
   },
   "6.9 Flanks": {
-   "line": 629,
+   "line": 630,
    "decls": [],
    "notation": [
     "SHARER_FLANK_RULE_v2",
@@ -498,7 +499,7 @@
    "opens": []
   },
   "6A. The firewall": {
-   "line": 711,
+   "line": 712,
    "decls": [],
    "notation": [],
    "refs": [
@@ -512,7 +513,7 @@
    "opens": []
   },
   "7. Formal verification": {
-   "line": 733,
+   "line": 734,
    "decls": [
     "Flanks.flankOpening",
     "inWay",
@@ -678,7 +679,7 @@
    "opens": []
   },
   "8. Generalisation": {
-   "line": 804,
+   "line": 805,
    "decls": [],
    "notation": [],
    "refs": [],
@@ -686,7 +687,7 @@
    "opens": []
   },
   "8.1 The infrastructure at every `n`": {
-   "line": 806,
+   "line": 807,
    "decls": [],
    "notation": [
     "Construction8",
@@ -706,7 +707,7 @@
    "opens": []
   },
   "8.2 Existence with few differences": {
-   "line": 831,
+   "line": 832,
    "decls": [],
    "notation": [
     "AdvanceBudget",
@@ -750,21 +751,21 @@
    ],
    "opens": [
     {
-     "line": 847,
+     "line": 848,
      "text": "remain open. `[OPEN]`"
     },
     {
-     "line": 868,
+     "line": 869,
      "text": "**Order 5: Existence with four differences at `n = 5` is open.** `[OPEN]` A stronger, sufficient statement is `R < 4`, lonely"
     },
     {
-     "line": 888,
+     "line": 892,
      "text": "this row's `[OPEN]`, since `R < 4` is a stronger statement than Existence needs (audit R1; \u00a71.3 has no window). From order 6 the nearest runner itself can set a"
     }
    ]
   },
   "9. What is and is not established": {
-   "line": 898,
+   "line": 902,
    "decls": [],
    "notation": [],
    "refs": [
@@ -780,7 +781,7 @@
    "opens": []
   },
   "10. Data and code availability": {
-   "line": 922,
+   "line": 926,
    "decls": [
     "circDist"
    ],
@@ -856,7 +857,7 @@
    "opens": []
   },
   "References": {
-   "line": 972,
+   "line": 976,
    "decls": [],
    "notation": [],
    "refs": [
@@ -866,7 +867,7 @@
    "opens": []
   },
   "Appendix A. Routes that cannot close this": {
-   "line": 991,
+   "line": 995,
    "decls": [],
    "notation": [
     "PROOF_DEV_v1",
@@ -886,7 +887,7 @@
    "opens": []
   },
   "Appendix B. Version maps": {
-   "line": 1036,
+   "line": 1040,
    "decls": [],
    "notation": [],
    "refs": [],
@@ -894,7 +895,7 @@
    "opens": []
   },
   "B.1 From v7 to v8": {
-   "line": 1038,
+   "line": 1042,
    "decls": [],
    "notation": [
     "LOST_FUNCTIONS_v1"
@@ -904,7 +905,7 @@
    "opens": []
   },
   "B.2 From v8 to v8.1 to v8.2": {
-   "line": 1063,
+   "line": 1067,
    "decls": [],
    "notation": [
     "Construction8",
@@ -926,17 +927,17 @@
    ],
    "opens": [
     {
-     "line": 1072,
+     "line": 1076,
      "text": "| \u00a72.3 **fitting between the AP locations** | new, `[OPEN]` | the author's statement of 2026-09-14 stated exactly: against a progression of gap `D`, runner `k` "
     },
     {
-     "line": 1074,
+     "line": 1078,
      "text": "That `[OPEN]` is the first of the five this manuscript still carries. The section then wrote the anchored gap as `S/7`; the"
     }
    ]
   },
   "B.3 From v8.2 to v9": {
-   "line": 1090,
+   "line": 1094,
    "decls": [],
    "notation": [
     "A4_SPINE_BLOCKING_v1",
@@ -970,7 +971,7 @@
    "opens": []
   },
   "B.4 From v9 to v9.1": {
-   "line": 1154,
+   "line": 1158,
    "decls": [],
    "notation": [
     "V8_REVISION_LIST_v1.md",
@@ -982,7 +983,7 @@
    "opens": []
   },
   "B.5 From v9.1 to v9.2": {
-   "line": 1176,
+   "line": 1182,
    "decls": [],
    "notation": [
     "Finset",
@@ -1001,17 +1002,17 @@
    ],
    "opens": [
     {
-     "line": 1188,
+     "line": 1194,
      "text": "| \u00a76.7 | the reduction | `CascadeCapped \u2194 ExistenceAt8`, both directions. The converse is stated so the reduction is read as the obligation restated, not weaken"
     },
     {
-     "line": 1190,
+     "line": 1196,
      "text": "| \u00a78.2 order 5 `[EMPIRICAL] \u2248 31/9` | `[PROVED \u2014 ratio \u2264 26]`, `sup R = 31/9` | **ruling: the post-correct grade, with ambiguity named.** Four are named: the va"
     }
    ]
   },
   "Appendix C. Objections tested": {
-   "line": 1213,
+   "line": 1219,
    "decls": [],
    "notation": [
     "d_min"
@@ -1081,24 +1082,24 @@
   "CascadeRule.reading": [
    "2.3 Every arrangement is an ideal plus deviations"
   ],
-  "move": [
-   "6.1 The move",
-   "7. Formal verification"
+  "MomentIterationN.inWay": [
+   "6.1 The move"
   ],
   "nextOpening": [
    "6.1 The move",
    "7. Formal verification"
   ],
-  "MomentIterationN.inWay": [
-   "6.1 The move"
-  ],
-  "Flanks.flankOpening": [
+  "move": [
+   "6.1 The move",
    "7. Formal verification"
   ],
   "reading": [
    "7. Formal verification"
   ],
   "inWay": [
+   "7. Formal verification"
+  ],
+  "Flanks.flankOpening": [
    "7. Formal verification"
   ],
   "circDist": [
@@ -1111,16 +1112,6 @@
    "Abstract",
    "Appendix C. Objections tested"
   ],
-  "4.5 Families in which Existence holds at once": [
-   "10. Data and code availability",
-   "4.6 Where the reference first degrades",
-   "6.7 Existence",
-   "6.9 Flanks",
-   "7. Formal verification",
-   "8.2 Existence with few differences",
-   "9. What is and is not established",
-   "Abstract"
-  ],
   "6.9 Flanks": [
    "1.1 The shift",
    "10. Data and code availability",
@@ -1132,21 +1123,31 @@
    "9. What is and is not established",
    "Abstract"
   ],
+  "4.5 Families in which Existence holds at once": [
+   "10. Data and code availability",
+   "4.6 Where the reference first degrades",
+   "6.7 Existence",
+   "6.9 Flanks",
+   "7. Formal verification",
+   "8.2 Existence with few differences",
+   "9. What is and is not established",
+   "Abstract"
+  ],
   "7. Formal verification": [
    "5. No external dependency",
    "9. What is and is not established",
    "Abstract"
+  ],
+  "6. The cascade": [
+   "1.1 The shift",
+   "1.3 The cascade, and the three outcomes",
+   "Appendix C. Objections tested"
   ],
   "6.8 Hard cases and incommensurate instances": [
    "1.1 The shift",
    "10. Data and code availability",
    "6.7 Existence",
    "7. Formal verification",
-   "Appendix C. Objections tested"
-  ],
-  "6. The cascade": [
-   "1.1 The shift",
-   "1.3 The cascade, and the three outcomes",
    "Appendix C. Objections tested"
   ],
   "2.2 The `(a, q)` coordinates \u2014 the commensurate representation": [
@@ -1162,19 +1163,19 @@
    "2.1 The autonomous scale",
    "7. Formal verification"
   ],
-  "8.2 Existence with few differences": [
-   "10. Data and code availability",
-   "2.1 The autonomous scale",
-   "6.7 Existence",
-   "7. Formal verification",
-   "9. What is and is not established"
-  ],
   "4. Global structure: gaps, the regular `n`-gon, the reference": [
    "2.1 The autonomous scale"
   ],
   "3. Local restrictions: the clear-interval bound": [
    "2.1 The autonomous scale",
    "8.1 The infrastructure at every `n`"
+  ],
+  "8.2 Existence with few differences": [
+   "10. Data and code availability",
+   "2.1 The autonomous scale",
+   "6.7 Existence",
+   "7. Formal verification",
+   "9. What is and is not established"
   ],
   "4.6 Where the reference first degrades": [
    "4.2 Conservation and the regular `n`-gon",
@@ -1200,13 +1201,13 @@
    "Appendix A. Routes that cannot close this",
    "Appendix C. Objections tested"
   ],
-  "1.2 The Boundary Set Method": [
-   "4.6 Where the reference first degrades",
-   "6A. The firewall"
-  ],
   "6A. The firewall": [
    "4.6 Where the reference first degrades",
    "6.7 Existence"
+  ],
+  "1.2 The Boundary Set Method": [
+   "4.6 Where the reference first degrades",
+   "6A. The firewall"
   ],
   "4.2 Conservation and the regular `n`-gon": [
    "4.6 Where the reference first degrades"
@@ -1227,15 +1228,15 @@
   "1.1 The shift": [
    "6A. The firewall"
   ],
-  "6.6 The subject's own AP instants": [
-   "7. Formal verification",
-   "8.1 The infrastructure at every `n`"
+  "6.3 Every lonely instant is matched by an opening": [
+   "7. Formal verification"
   ],
   "2.1 The autonomous scale": [
    "7. Formal verification"
   ],
-  "6.3 Every lonely instant is matched by an opening": [
-   "7. Formal verification"
+  "6.6 The subject's own AP instants": [
+   "7. Formal verification",
+   "8.1 The infrastructure at every `n`"
   ],
   "1.3 The cascade, and the three outcomes": [
    "8.2 Existence with few differences"

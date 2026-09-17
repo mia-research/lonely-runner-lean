@@ -402,7 +402,8 @@ runner 1, the chain `(8, N = 1), (7, N = 1)` ends at `D_final = 7/9`). Scales ar
 gcd `g`, grid at the runner's `d_min`, and an **enlarged** step, *"some `D` beyond those"*, stepping up until the lattice is
 usable, under the ceiling `D ≤ 7·d_min`. The recursion above is not that third tier renamed: it runs the other way. Its
 factor `s/(8N+1)` is below 1 for every step, so its scales decrease from `d_min` and never enter `d_min < D ≤ 7·d_min` at
-all (0 of 2,488 shuffled arrangements reach a scale above `d_min`). The two are disjoint.
+all. `[PROVED — from the factor; VERIFIED — 0 of 2,488 shuffled arrangements reach a scale above `d_min`,
+`experiments/n8/scale_recursion_check_v1.py`]` The two are disjoint.
 
 The tier is nonetheless **superseded, and provably so, rather than dropped.** By Theorem 6.2(b) the fixed point is the first
 lonely instant, and by Corollary 6.4 the cascade fails to reach one only when the subject has no lonely instant at all. So
@@ -750,8 +751,8 @@ and for the axiom check (a fixed file list once left a new module unchecked, and
 the build step while the axiom check read the directory; both now derive the list from disk). It also asserts its own
 coverage: the number of declarations it extracts must equal an independent count on disk taken with a deliberately broader
 pattern, so a declaration written in a form the extractor cannot name fails the gate rather than being skipped silently. At
-4,669 theorems the gate takes about 11.5 minutes, almost all of it the per-theorem axiom check and was tested to fail on a planted `sorry` in a new
-module and on a planted declaration naming the open claim; the failure modes of the `Construction8` gate were tested before
+4,669 theorems it takes about 11.5 minutes, almost all of it the per-theorem axiom check. It was tested to fail on a planted
+`sorry` in a new module and on a planted declaration naming the open claim; the failure modes of the `Construction8` gate were tested before
 it was trusted. The 7 `ConstructionN` declarations cited in §5 and §6.3 are checked in `experiments/n8/v8_axiom_check_v1.lean` (output `v8_axiom_check_v1.out`: 26 of 26 within the three axioms, three gate
 declarations re-checked there).
 
@@ -879,8 +880,11 @@ within the nearest runner's first relative lap. What is established toward it: `
 Four things about that certificate, stated because each has been misread once. **The value is computed, not recognised:** the
 earlier `≈ 31/9` came from the optimum of floating-point programs over bounded searches (item 49); this is exact rational
 arithmetic and the rational is the answer, not a reading of one. **The bound is on the ratio, not the spread:** `S = d_max/d_min`
-throughout, and the script's own verdict line prints the word *spread*, which this manuscript reserves for `W = v_8 − v_1`; the
-script's wording is wrong and the result is about the ratio. **The enumeration is a relaxation, in the sound direction:** the word
+throughout. The deposited output prints the word *spread*, which this manuscript reserves for `W = v_8 − v_1`; the script has
+since been corrected to print *ratio*, so the deposited output predates that fix and the two disagree in wording. The result
+is about the ratio in both. **What makes the enumeration finite is stated in the output and belongs here:** at ratio bound
+`S` no setter sets beyond lap `L = ⌊(4S − 1)/5⌋`, because `R < 4` at the step before the exceedance forces `Q < (4S + 1)/5`,
+and a runner's setting laps strictly increase; so the words run to at most `3L` moves — `L = 20` and 60 moves at `S = 26`. **The enumeration is a relaxation, in the sound direction:** the word
 programs impose only that each setter is in the way just before it sets and that the instant advances, dropping that the setter has
 the latest opening and that the others are clear, so the optimum bounds the true supremum from **above** and `sup R < 4` over the
 relaxation proves it for the cascade. **The sweep is flat, not closed:** `31/9` holds at every ratio bound from 10 through 26 with
@@ -1157,7 +1161,9 @@ generalisation excludes §6.6's order-8 spine paragraph.
 `V8_REVISION_LIST_v1.md`. Added in v9.2 for the same reason as B.2.
 
 **What the loss audit found.** 0 audit findings unaddressed (of the 54 isolated: 52 applied, 2 recorded; of the 17 own: all
-applied); 22 numbered results present at the same grade; 4 retraction records carried, none re-claimed; 114 Lean names all
+applied); 22 numbered results present at the same grade — v8.2's whole set, carried; v9 adds four of
+its own (Theorems 6.8–6.9, Propositions 6.10–6.11) for the 26 this manuscript carries, so the audit's 22 is a carry count and
+not a total; 4 retraction records carried, none re-claimed; 114 Lean names all
 resolving; 26 figures new to v9 all sourced; and the Cascade digest, theorem count, tag and commit recomputed on disk.
 
 **Fixed in v9.1.** Seven small losses: the `v8_axiom_check_v1.out` result, the `W/(8g)` slot-multiple bound, the citations of
@@ -1207,7 +1213,7 @@ cannot follow a result by its number. The three that were renumbered out of §7 
 Nothing was lost in that renumbering; the second was strengthened. Recorded here because the trace was
 missing, not because anything moved.
 
-Unchanged: the 27 numbered results and their declarations; §1.3's statement that there is no window; §6A; and all five open
+Unchanged: the 26 numbered results and their declarations; §1.3's statement that there is no window; §6A; and all five open
 items — §2.3, §4.6, §6.7, and the two in §8.2.
 
 ## Appendix C. Objections tested
