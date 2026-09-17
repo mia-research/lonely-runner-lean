@@ -61,11 +61,24 @@ done
 cp docs/n8/CORRECTIONS_2026_09_17_v2.md docs/n8/MANUSCRIPT_v9_2.md "$B/docs/" 2>/dev/null
 echo "  docs: $(ls "$B/docs" | wc -l | tr -d ' ') (every cited name that exists on disk)"
 
-# [3] every experiment the manuscript cites, plus every deposit tracked in experiments/n8
-for f in experiments/n8/*.py experiments/n8/*.out; do
-  [ -e "$f" ] && git ls-files --error-unmatch "$f" >/dev/null 2>&1 && cp "$f" "$B/experiments/"
+# [3] the experiments the manuscript or corrections CITE BY NAME, with their deposits.
+# Not every tracked file: experiments/n8 holds 596 of them, the project's whole working
+# history. A first version copied all of them and quadrupled the archive for no reader.
+for b in $(grep -ohE '[A-Za-z0-9_]+_v[0-9]+' "$MAN" docs/n8/CORRECTIONS_2026_09_17_v2.md | sort -u); do
+  for ext in py out; do
+    [ -f "experiments/n8/$b.$ext" ] && cp "experiments/n8/$b.$ext" "$B/experiments/"
+  done
 done
-echo "  experiments: $(ls "$B/experiments" | wc -l | tr -d ' ') (all tracked deposits)"
+echo "  experiments: $(ls "$B/experiments" | wc -l | tr -d ' ') (cited by name, with deposits)"
+
+# [4] the README: the entry point. Regenerated so its figures cannot drift from the tree.
+T_N=$(grep -hE '^theorem |^lemma ' LonelyRunner/LonelyRunner/LRC/Cascade/*.lean | wc -l | tr -d ' ')
+T_M=$(ls LonelyRunner/LonelyRunner/LRC/Cascade/*.lean | wc -l | tr -d ' ')
+T_D=$(cd LonelyRunner/LonelyRunner/LRC/Cascade && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
+T_C=$(cd LonelyRunner && git log -1 --format=%h -- LonelyRunner/LRC/Cascade)
+sed -e "s/@THEOREMS@/$T_N/g" -e "s/@MODULES@/$T_M/g" -e "s/@DIGEST@/$T_D/g" -e "s/@COMMIT@/$T_C/g" \
+    docs/n8/BUNDLE_README_template.md > "$B/README.md"
+echo "  README: regenerated ($T_N theorems, $T_M modules, digest ${T_D:0:8}, commit $T_C)"
 
 tar -czf "$OUT" -C "$(dirname "$B")" "$(basename "$B")"
 echo "  archive: $OUT  ($(du -h "$OUT" | cut -f1))"
