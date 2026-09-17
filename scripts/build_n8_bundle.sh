@@ -75,7 +75,18 @@ for b in $(grep -ohE '[A-Za-z0-9_]+_v[0-9]+' "$MAN" docs/n8/CORRECTIONS_2026_09_
   # Some deposits are DIRECTORIES -- several scripts and their outputs for one investigation.
   # A flat-file-only loop dropped them with no message, which is the same defect as
   # hand-picking: the list looks derived and silently is not. Added 2026-09-18.
-  [ -d "experiments/n8/$b" ] && cp -R "experiments/n8/$b" "$B/experiments/"
+  #
+  # Resolve the REAL on-disk name case-insensitively and copy under that name. The token $b
+  # may be the upper-case document name (RESIDUE_ROUTE_v1) while the deposit directory is
+  # lower-case (residue_route_v1). A plain [ -d "experiments/n8/$b" ] succeeds on macOS,
+  # whose filesystem is case-insensitive, and then cp -R names the copy after the ARGUMENT --
+  # so the bundle shipped experiments/RESIDUE_ROUTE_v1/ while the manuscript cited
+  # experiments/n8/residue_route_v1. On a case-sensitive filesystem the test fails outright
+  # and the deposit is dropped in silence. Neither is acceptable in a bundle built to be
+  # unpacked by someone else.
+  real=$(ls -d experiments/n8/*/ 2>/dev/null | sed 's|.*/n8/||; s|/$||' \
+         | awk -v b="$b" 'tolower($0)==tolower(b){print; exit}')
+  [ -n "$real" ] && [ ! -d "$B/experiments/$real" ] && cp -R "experiments/n8/$real" "$B/experiments/"
 done
 echo "  experiments: $(find "$B/experiments" -type f | wc -l | tr -d ' ') files in $(ls "$B/experiments" | wc -l | tr -d ' ') entries (cited by name, with deposits)"
 
