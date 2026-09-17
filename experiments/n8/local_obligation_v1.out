@@ -1,0 +1,28 @@
+(runner, arrangement) pairs                       : 20800
+d_min set by an IMMEDIATE neighbour (separation 1) : 20800  (100.0%)
+
+subject already lonely at its own bound            : 11992  (57.7%)
+subject has at least one blocker at its bound      : 8808
+  ...and EVERY blocker has reading > 7 (Thm 4.8)   : 8808  (100.0%)
+
+blockers by speed-separation |j - i| from the subject:
+   separation 1: 363
+   separation 2: 1243
+   separation 3: 2138
+   separation 4: 2243
+   separation 5: 2735
+   separation 6: 1957
+   separation 7: 1008
+
+==================================================================
+THE LOCAL CONDITION: when does a subject's OWN neighbour block it?
+  interior subjects (two adjacent gaps)            : 15600
+  adjacent-gap ratio > 7                           : 1178
+  an immediate neighbour blocks at the bound       : 363
+    of those, adjacent-gap ratio > 7               : 363
+    of those, adjacent-gap ratio <= 7              : 0
+
+  => a neighbour NEVER blocks when the two adjacent gaps are within 7x.
+     The subject's own neighbourhood can only obstruct it through the RATIO
+     of its two gaps, which is a 3-consecutive-runner quantity. Everything
+     else that blocks sits at speed-separation >= 2.
