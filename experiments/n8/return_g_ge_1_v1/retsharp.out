@@ -1,0 +1,8 @@
+6.7 climb subject 393: returns 21, violations 0
+   need/supplied  max 0.8853  median 0.7390  min 0.4798   (1.0 = tight)
+6.9 row subject 1: returns 16, violations 0
+   need/supplied  max 0.9012  median 0.6597  min 0.3621   (1.0 = tight)
+
+random sample: 508 returns, violations 0
+   need/supplied  max 0.9800  90th 0.9125  median 0.7229
+   returns using >50% of the supplied growth: 499/508

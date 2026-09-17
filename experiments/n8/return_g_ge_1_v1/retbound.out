@@ -1,0 +1,20 @@
+minimum intervening moves before a runner at lap P may be in the way again:
+   P=0: cost 7.0000  -> m >= 8
+   P=1: cost 1.6667  -> m >= 3
+   P=2: cost 1.3529  -> m >= 2
+   P=3: cost 1.2400  -> m >= 1   (no constraint)
+   P=4: cost 1.1818  -> m >= 1   (no constraint)
+   P=5: cost 1.1463  -> m >= 1   (no constraint)
+   P=6: cost 1.1224  -> m >= 1   (no constraint)
+   P=7: cost 1.1053  -> m >= 1   (no constraint)
+   P=8: cost 1.0923  -> m >= 1   (no constraint)
+
+6.7 climb subject 393: 28 moves, arrived=True, returns tested 21, VIOLATIONS 0
+   observed gap minus required, min 1  median 4  max 11
+   returns where the bound is TIGHT (gap == required): 0
+6.9 row subject 1: 23 moves, arrived=True, returns tested 16, VIOLATIONS 0
+   observed gap minus required, min 1  median 4  max 8
+   returns where the bound is TIGHT (gap == required): 0
+
+random sample: 551 returns tested, VIOLATIONS 0
+   slack min 1  1% 1  median 2;  tight returns 0
