@@ -136,10 +136,53 @@ else
   IRR_OK=1
 fi
 
+step "[6] the manuscript's recorded figures must match this tree"
+# WHY THIS EXISTS. MANUSCRIPT_v9_3 records the Cascade theorem count, digest and commit so a
+# reader can reproduce them. Those figures went stale THREE times on 2026-09-17 alone: each
+# time they were computed, then Lean was committed, and nothing noticed. A manuscript whose
+# digest does not match the tree cannot be verified, which is the whole point of recording it.
+# So the drift now fails the gate instead of being caught by luck.
+MAN=""
+for cand in ../docs/n8/MANUSCRIPT_v9_3.md ../MANUSCRIPT_v9_3.md; do
+  [ -f "$cand" ] && MAN="$cand" && break
+done
+if [ -z "$MAN" ]; then
+  echo "  skipped (no MANUSCRIPT_v9_3.md beside this tree)"
+  FIG_OK=1
+else
+  T_N=$(grep -hE '^theorem |^lemma ' $SRC/*.lean | wc -l | tr -d ' ')
+  T_D=$(cd $SRC && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
+  # The commit that last touched the ARTEFACT, not HEAD: editing this gate or any file
+  # outside LRC/Cascade must not make the manuscript's recorded commit stale, and the
+  # digest below is computed over Cascade only, so the two agree by construction.
+  T_C=$(git log -1 --format=%h -- $SRC 2>/dev/null)
+  T_M=$(ls $SRC/*.lean | wc -l | tr -d ' ')
+  FIG_OK=1; MISS=""
+  # The manuscript writes thousands with a comma. printf's %'d is locale-dependent and BSD
+  # sed rejects the usual :a;...;ta one-liner, so build a regex that accepts either spelling.
+  if [ ${#T_N} -gt 3 ]; then
+    T_NRE="${T_N:0:${#T_N}-3},?${T_N:${#T_N}-3}"
+    T_NCOMMA="${T_N:0:${#T_N}-3},${T_N:${#T_N}-3}"
+  else
+    T_NRE="$T_N"; T_NCOMMA="$T_N"
+  fi
+  grep -qE "$T_NRE" "$MAN" || { MISS="$MISS theorems($T_NCOMMA)"; FIG_OK=0; }
+  grep -q "$T_D" "$MAN"    || { MISS="$MISS digest(${T_D:0:8}...)"; FIG_OK=0; }
+  [ -n "$T_C" ] && { grep -q "$T_C" "$MAN" || { MISS="$MISS commit($T_C)"; FIG_OK=0; }; }
+  grep -qE "$T_M modules|nineteen modules" "$MAN" || { MISS="$MISS modules($T_M)"; FIG_OK=0; }
+  if [ "$FIG_OK" = "1" ]; then
+    echo "  clean ($MAN matches: $T_NCOMMA theorems, $T_M modules, digest ${T_D:0:8}, commit $T_C)"
+  else
+    echo "  STALE in $MAN --$MISS"
+    echo "  The manuscript records figures a reader is told to reproduce. Update them, or"
+    echo "  say in the manuscript why they describe a different commit."
+  fi
+fi
+
 [ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
 echo "== total: $((SECONDS-T0))s =="
 echo
-if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ] && [ "$IRR_OK" = "1" ]; then
+if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ] && [ "$IRR_OK" = "1" ] && [ "$FIG_OK" = "1" ]; then
   echo "GATE PASS: $NDECL theorems, axiom-clean (coverage $NDECL of $NDISK on disk)."
   echo "           Existence at order 8 is NOT proved -- it remains open and unstated."
   exit 0
