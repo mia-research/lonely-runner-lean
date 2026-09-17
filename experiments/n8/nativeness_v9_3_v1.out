@@ -1,48 +1,75 @@
-declarations checked            : 27
-distinct non-local identifiers  : 41
+declarations checked            : 37
+distinct non-local identifiers  : 68
 
 FLAGGED against section 5's stated exclusions:
   off_lattice_of_irrational_ratio  (Flanks.lean)  ->  Irrational
 
 All non-local identifiers used, for the record:
   A
+  And
+  Both
   Construction8
   Construction8.ratio_condition
   D
+  Every
   Existence
   Fact
   Fact.out
   Finset
+  Finset.mem_image.mp
+  Finset.mem_image_of_mem
   For
   If
   Int
   Int.cast_abs
   Int.fract
   Int.fract_add_floor
+  Int.fract_eq_self.mpr
   Int.fract_intCast
   Int.fract_lt_one
+  Int.fract_neg
+  Int.fract_neg_eq_zero.mpr
   Int.fract_nonneg
   Int.mul_ediv_add_emod
+  Int.toNat_of_nonneg
   Irrational
   IsCoprime
+  It
   Measured
   Most
   N
+  Nat
+  Nat.mod_add_div
+  Nat.mod_lt
   Ne
   Ne.symm
+  Nonempty
   Only
   P
   Proposition
   Q
+  So
   That
   The
   Theorem
+  They
   This
   With
   abs_eq_zero.mp
   abs_lt.mp
+  b.toNat
+  ds.Nonempty
+  ds.image
+  fract_eq_self.mpr
+  fract_neg_eq_zero.mpr
   h0.symm
+  hb.le
+  hbZ.le
   hcop.symm
+  hn0.le
   hn0.ne
   inv_pos.mpr
+  mem_image.mp
+  not_le.mpr
+  not_lt.mp
   not_lt.mpr
