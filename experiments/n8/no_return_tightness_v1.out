@@ -1,0 +1,32 @@
+n = 8, h = 1/8;  shipped hypothesis 2g+2 <= n  =>  g <= 3
+
+     P  sharp max g  proof delivers   lost
+     0            7               3      4
+     1            4               3      1
+     2            3               3      0
+     3            3               3      0
+     4            3               3      0
+     5            3               3      0
+     6            3               3      0
+     7            3               3      0
+     8            3               3      0
+     9            3               3      0
+    10            3               3      0
+    11            3               3      0
+    12            3               3      0
+    20            3               3      0
+    50            3               3      0
+   200            3               3      0
+  1000            3               3      0
+  10000            3               3      0
+
+  P-uniform (min over P): sharp 3, shipped proof 3
+  shipped hypothesis gives g <= 3
+
+  VERDICT
+   * as a hypothesis that must hold for EVERY P >= 0: sharp limit is 3, and the
+     shipped 2g+2 <= n gives 3.  TIGHT.
+   * but at small P the sharp bound is strictly better, e.g.:
+       P = 0: sharp allows g <= 7, the proof delivers g <= 3
+       P = 1: sharp allows g <= 4, the proof delivers g <= 3
+     so the hypothesis is tight only in the P -> infinity limit; it is NOT tight per-P.

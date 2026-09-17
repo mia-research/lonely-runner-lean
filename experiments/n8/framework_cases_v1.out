@@ -1,0 +1,44 @@
+order 8: the framework's named cases
+
+  [OK  ] section 6.7 adversarial climb
+         speeds [27, 70, 107, 137, 159, 188, 344, 393]  subject 393
+         t = 49/1872   moves = 28   d_min = 49
+         u = 2401/1872 = 1.2826 laps    R = n*u = 2401/234 = 10.2607
+         lonely: True   nearest runner set at steps: [24]
+         beyond the first window (u > 7/8): True    above the cap (R >= 7): True
+         note: 28 moves; the most in the replication. R = 2401/234 ~ 10.26, u ~ 1.28 laps.
+
+  [OK  ] section 6.9 table / v7 Claim refutation
+         speeds [1, 31, 75, 97, 128, 160, 176, 225]  subject 1
+         t = 11/256   moves = 23   d_min = 30
+         u = 165/128 = 1.2891 laps    R = n*u = 165/16 = 10.3125
+         lonely: True   nearest runner set at steps: [19]
+         beyond the first window (u > 7/8): True    above the cap (R >= 7): True
+         note: 'nothing clears in its first window, and it is lonely at t = 9/40' (line 558).
+
+  [OK  ] section 6.6 near-wrap
+         speeds [1, 2, 3, 4, 5, 6, 7, 9]  subject 1
+         t = 9/64   moves = 1   d_min = 1
+         u = 9/64 = 0.1406 laps    R = n*u = 9/8 = 1.1250
+         lonely: True   nearest runner set at steps: never
+         beyond the first window (u > 7/8): False    above the cap (R >= 7): False
+         note: first lonely instant stays at u = 9/64 (two scales); line 114/484.
+
+  [OK  ] section 6.2 scale chain
+         speeds [1, 2, 3, 4, 5, 6, 8, 9]  subject 1
+         t = 9/56   moves = 2   d_min = 1
+         u = 9/56 = 0.1607 laps    R = n*u = 9/7 = 1.2857
+         lonely: True   nearest runner set at steps: never
+         beyond the first window (u > 7/8): False    above the cap (R >= 7): False
+         note: chain (8,N=1),(7,N=1) ends at D_final = 7/9; R = d_min/D_final = 9/7 (line 118, 378).
+
+  --- what these refute, mechanically ---
+  arrangements here with R >= 7 (the first-window cap): 2
+     section 6.7 adversarial climb
+     section 6.9 table / v7 Claim refutation
+  => any claim that R < 7 for every arrangement at order 8 is refuted by these rows.
+
+  'section 6.9 table / v7 Claim refutation': lonely instant found in the first window u in [1/8, 7/8]: False
+     (manuscript line 558: nothing clears in its first window)
+
+  named cases failing their published values: 0

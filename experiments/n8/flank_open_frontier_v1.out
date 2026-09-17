@@ -1,0 +1,18 @@
+order 8: the flank route's open frontier (j = non-integer ratios at a flank)
+proved: j <= 3 (one-fractional lemma; Props 6.10-6.11).  OPEN: j >= 4  (section 6.9)
+20000 shuffled arrangements, integer differences <= 60
+
+  distribution of  min over live flanks of j :
+     j = 0:    1068  ( 5.34%)
+     j = 1:     125  ( 0.62%)
+     j = 2:     447  ( 2.23%)
+     j = 3:    1313  ( 6.57%)
+     j = 4:    3121  (15.61%)
+     j = 5:    8225  (41.12%)
+     j = 6:    5701  (28.50%)
+
+  arrangements where EVERY live flank has j >= 4 (the open case, unavoidable): 17047  (85.23%)
+  arrangements with some flank at j <= 3 (covered in principle): 2953  (14.77%)
+
+  for a sample of the open-case arrangements, is there a lonely flank opening anyway?
+     40/40 have one;  opening index k needed: min 0, median 0, max 10

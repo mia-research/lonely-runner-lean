@@ -1,0 +1,12 @@
+order 8: directed search for large R = n*u, u = first lonely instant in laps
+cap (first window) R < 7;  manuscript section 6.7 records R ~ 11.96 at S ~ 7.44
+
+  restarts 300, candidates evaluated 40156
+  hill-climbs ending above the cap: 0/300
+
+  largest R found: 408/83 = 4.9157    cap 7    
+    differences [48, 108, 166, 213, 262, 282, 339]   d_min 48   ratio S = 113/16 = 7.0625
+    first lonely instant t = 17/1328,  u = d_min*t = 51/83 = 0.6145 laps, 11 moves
+    lonely there: True
+
+  u > (n-1)/n = 0.8750 (beyond the first window): False

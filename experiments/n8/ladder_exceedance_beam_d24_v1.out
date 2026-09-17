@@ -1,0 +1,11 @@
+order 8, ratio bound S = 8, lap bound L = 6, cap R < 7
+beam width 2500, max depth 24; ladder value ((n+1)/(n-1))^(n-2) = 4.5172
+
+  depth  1  frontier     6  best R at this depth  1.2857   running max  1.2857   (    0s)
+  depth  2  frontier    30  best R at this depth  1.6531   running max  1.6531   (    0s)
+  depth  3  frontier   120  best R at this depth  2.1254   running max  2.1254   (    1s)
+  depth  4  frontier   720  best R at this depth  2.7326   running max  2.7326   (    9s)
+  depth  5  frontier  2500  best R at this depth  3.5134   running max  3.5134   (   66s)
+  depth  6  frontier  2500  best R at this depth  4.5172   running max  4.5172   (  361s)
+  depth  7  frontier  2500  best R at this depth  4.7143   running max  4.7143   (  830s)
+  depth  8  frontier  2500  best R at this depth  5.1616   running max  5.1616   ( 1144s)

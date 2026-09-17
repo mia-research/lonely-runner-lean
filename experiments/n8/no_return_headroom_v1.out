@@ -1,0 +1,19 @@
+n = 8; sampling the stratum that moves: ratio in (7, 8], entries <= 300
+40000 arrangements
+
+  arrangements that moved: 40000/40000
+  returns observed: 2885
+  returns satisfying hlap: 7  (0.2%)
+
+  of the hlap returns, how many would the EXACT-growth form exclude: 0
+    (it must be 0 -- these returns happened; a nonzero count is a bug)
+
+  gap histogram (hlap returns): {6: 3, 7: 3, 8: 1}
+  gaps <= 3 (already covered by the shipped theorem): 0
+
+  margin = exact growth / return threshold, over hlap returns:
+    min 1.1695   median 1.2194   max 1.3255
+    fraction within 5% of the threshold (margin < 1.05): 0/7
+
+  reading: every margin > 1 means the exact-growth bound does NOT contradict that return.
+  The shipped theorem is consistent because those returns all have gap > 3.

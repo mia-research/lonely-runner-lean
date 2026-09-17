@@ -1,0 +1,9 @@
+order 8, ratio bound S = 8, lap bound L = 6, cap R < 7
+extending the depth-14 cap word by one move
+
+  candidate moves tried: 17   realisable: 0   (0s)
+
+  No realisable extension: the word is TERMINAL.
+  This matches the replay (`ladder_cap_word_replay_v1.out`), where the cascade reports
+  LONELY after 14 steps at every witness tested -- the cascade ends here, and the
+  cap is approached as a terminal value, not crossed.

@@ -1,0 +1,19 @@
+n = 8: applicability of no_return_after_few_faster on real cascades
+
+  section 6.7 climb: 28 moves, 21 returns
+     returns satisfying hlap (all intervening laps >= P+1): 2/21
+     CONSISTENCY -- returns with hlap AND gap <= 3 (theorem forbids these): 0   OK
+     extra returns a sharp P-dependent g would exclude: 0  []
+
+  section 6.9 row: 23 moves, 16 returns
+     returns satisfying hlap (all intervening laps >= P+1): 1/16
+     CONSISTENCY -- returns with hlap AND gap <= 3 (theorem forbids these): 0   OK
+     extra returns a sharp P-dependent g would exclude: 0  []
+
+  --- pooled over the named cases plus 3000 shuffled arrangements ---
+  returns observed: 62
+  satisfying hlap:  3  (4.8%)  <- the theorem's reach at ANY g
+  CONSISTENCY: observed returns with hlap and gap <= 3: 0   OK (theorem holds on every cascade seen)
+  extra excluded by the sharp P-dependent g: 0
+  gap histogram among hlap returns: {6: 1, 7: 1, 8: 1}
+  P histogram among hlap returns:   {1: 2, 2: 1}

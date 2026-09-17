@@ -1,0 +1,12 @@
+order 8: 7 differences, threshold 1/8, ratio bound S = 8
+cap in laps: u < 7/8 = 0.8750   (equivalently R < 7)
+3000 shuffled integer difference sets, entries <= 60
+
+  reached a lonely instant : 2634/3000   (no fixed point within the step budget: 366)
+  first lonely instant INSIDE the first window (u <= 0.8750) : 2634  (100.0%)
+  first lonely instant BEYOND it                                  : 0  (0.0%)
+
+  cascade steps: min 0, median 0, max 0
+  laps u: min 0.1250, max 0.1250
+
+  => no sampled arrangement put the first lonely instant beyond the window at this ratio bound.

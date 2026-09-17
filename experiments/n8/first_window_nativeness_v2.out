@@ -1,0 +1,19 @@
+order 8: 7 differences, threshold 1/8
+cap in laps: u < 7/8 = 0.8750   (equivalently R < 7)
+4000 shuffled integer difference sets per ratio bound, entries <= 200
+
+  ceiling check: at u = 1/n, lonely  <=>  every d_j <= (n-1)*d_min  (for ratio <= n)
+    holds on 500 shuffled sets: True
+
+   ratio bound  samples   inside   beyond  no fixpt     max u    max R  max steps
+             8     4000     4000        0         0    0.8750   0.0000         12
+            10     4000     4000        0         0    0.8750   0.0000         12
+            14     4000     4000        0         0    0.8750   0.0000         11
+            20     4000     4000        0         0    0.8750   0.0000         10
+            30     4000     4000        0         0    0.8750   0.0000          9
+            60     4000     4000        0         0    0.8750   0.0000         15
+           120     4000     4000        0         0    0.8750   0.0000         11
+
+  'beyond' = the first lonely instant lies outside the first window, so the certificate's
+  target `sup R < n-1` is false for that arrangement while the framework still produces an
+  instant. 'no fixpt' = no lonely instant within the step budget (not a claim of none).

@@ -1,0 +1,31 @@
+order 8, ratio bound S = 8, cap R < 7
+word from experiments/n8/ladder_return_beam_w2500_v1.out, depth 14
+
+(1) prefix by prefix -- realisability and R
+   len  1  move (1, 1)   max tau =       1/8  min u =              7  R =            9/7 = 1.285714
+   len  2  move (2, 1)   max tau =       1/8  min u =           49/9  R =          81/49 = 1.653061
+   len  3  move (3, 1)   max tau =       1/8  min u =         343/81  R =        729/343 = 2.125364
+   len  4  move (4, 1)   max tau =       1/8  min u =       2401/729  R =      6561/2401 = 2.732611
+   len  5  move (5, 1)   max tau =       1/8  min u =     16807/6561  R =    59049/16807 = 3.513358
+   len  6  move (6, 1)   max tau =       1/8  min u =   117649/59049  R =  531441/117649 = 4.517174
+   len  7  move (3, 2)   max tau =       1/8  min u =         343/81  R =       1377/343 = 4.014577
+   len  8  move (4, 2)   max tau =       1/8  min u =       1715/459  R =      7803/1715 = 4.549854
+   len  9  move (1, 4)   max tau =    13/236  min u =              7  R =           33/7 = 4.714286
+   len 10  move (5, 2)   max tau =    13/236  min u =          35/11  R =         187/35 = 5.342857
+   len 11  move (3, 3)   max tau =   71/2207  min u =        805/187  R =        935/161 = 5.807453
+   len 12  move (2, 4)   max tau =   71/2207  min u =           49/9  R =         297/49 = 6.061224
+   len 13  move (6, 2)   max tau =   71/2207  min u =         245/99  R =       1683/245 = 6.869388
+   len 14  move (1, 6)   max tau =   71/2207  min u =              7  R =              7 = 7.000000   <-- reaches the cap
+
+   every prefix realisable (max tau > 0): yes
+   prefixes reaching the cap: [14]  -> proper prefixes all below the cap: True
+
+(2) is the supremum attained? min of the final reading subject to tau >= eps
+   tau >=          0   min u =                7 = 7.00000000   R = 7.00000000   R < 7: False
+   tau >=  1/1000000   min u =    875001/125000 = 7.00000800   R = 6.99999200   R < 7: True
+   tau >=     1/1000   min u =          876/125 = 7.00800000   R = 6.99200913   R < 7: True
+   tau >=      1/100   min u =           177/25 = 7.08000000   R = 6.92090395   R < 7: True
+
+   min u = 7 + 8*eps exactly, so R = 49/(7 + 8*eps) < 7 for every eps > 0.
+   The supremum 7 is NOT attained: every strictly realisable configuration of this word
+   has R < 7, and R -> 7 only as the margin vanishes.

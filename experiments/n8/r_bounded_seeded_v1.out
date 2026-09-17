@@ -1,0 +1,15 @@
+order 8: how large does R get?  (Existence needs R finite, not R < 7)
+seeded from the named cases; hill climb on integer differences, entries <= 3000
+
+  seed [49, 205, 234, 256, 286, 323, 366]:  R = 2401/234 = 10.2607, 28 steps
+  seed [30, 74, 96, 127, 159, 175, 224]:  R = 165/16 = 10.3125, 23 steps
+
+  largest R found: 165/16 = 10.3125
+    differences [30, 74, 96, 127, 159, 175, 224]   d_min 30   ratio S = 7.4667
+    steps 23;  step factors (lambda, N):
+      N histogram: {1: 7, 2: 5, 3: 4, 4: 3, 5: 3, 6: 1}
+      product of lambdas = 10.3125  (= R, by section 6.2)
+      largest single lambda = 1.2805   (bound 9/7 = 1.2857)
+
+  manuscript section 6.7 records the largest found as ~11.96 at S ~ 7.44
+  this run: 10.3125 at S = 7.4667

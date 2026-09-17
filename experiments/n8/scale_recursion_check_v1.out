@@ -1,0 +1,7 @@
+order 8: the determinator in two coordinates -- time (section 6.1) vs scale (section 6.2)
+
+  cap word, max-margin      time                  49/64  scale                  49/64  agree True   (steps 14/14)
+  cap word, tau>=1/10^6     time          765625/875001  scale          765625/875001  agree True   (steps 14/14)
+
+  shuffled arrangements (ratio <= 8, entries <= 200): 4000/4000 agree
+  shuffled arrangements (ratio <= 40, entries <= 400): 2000/2000 agree

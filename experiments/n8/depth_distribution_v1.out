@@ -1,0 +1,18 @@
+order 8: setter depths.  delta in (0, 1/4); worst case charged by every bound is delta = 0.
+a move's contribution to R is (2 - 8*delta)/s, so delta = 1/4 contributes nothing.
+
+  section 6.7 climb: 28 moves
+     delta/(1/4): min 0.0014  median 0.2329  max 0.8000
+     moves with delta below 10% of the zone (near worst case): 9/28
+  section 6.9 row: 23 moves
+     delta/(1/4): min 0.0143  median 0.2126  max 0.7162
+     moves with delta below 10% of the zone (near worst case): 6/23
+
+  pooled over 20000 moving arrangements: 43324 moves
+     delta as a fraction of the zone width 1/4:
+       min 0.0017   10% 0.0417   median 0.2250   90% 0.5566   max 0.9963
+     mean 0.2682
+     moves below 10% of the zone: 10420/43324  (24.1%)
+
+  a bound charging delta = 0 overpays each move by the factor 2/(2 - 8*delta);
+  at the median depth that factor is 1.290
