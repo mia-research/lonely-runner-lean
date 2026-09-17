@@ -1,0 +1,35 @@
+TWO READINGS of 's_R = 8*N_R - 1 + 8*delta', both with 0 < delta < 1/4.
+
+  (A) POSITION  : s = 8*d*t      -> delta = d*t - N + 1/8     [what I tested]
+  (B) READING   : s = d/d_min    -> delta = (d/d_min - 8N + 1)/8
+
+  g>=4 returns found : 332
+  (A) min delta      : 1.126126e-03   = 1/888
+  (B) min delta      : 1.136364e-02   = 1/88   (208 of 332 fall in (0,1/4))
+
+WHICH READING IS INTENDED, and does either rescue a universal c_*?
+
+  The lemma says "for each R in R_g, WRITE its returning setter position as
+  s_R = 8N_R - 1 + 8*delta(R), 0 < delta(R) < 1/4" -- so the parametrisation must be
+  available for EVERY such R.
+
+  (A) POSITION, s = 8*d*t.  Always available: the returning setter is by definition in the
+      way, so 8*d*t lies within 1 of a multiple of 8 and delta lands in (0, 1/4) every time.
+      332 of 332 here.
+
+  (B) READING, s = d/d_min.  NOT always available: only 208 of 332 returning setters have
+      their reading in the band. For the other 124 the parametrisation does not exist, so
+      the lemma could not be stated of them.
+
+  (A) is therefore the intended reading -- which is the one originally tested.
+
+  NEITHER GIVES A UNIVERSAL CONSTANT. Both floors are denominator effects:
+      (A)  delta >= 1/(8*d')      d' = the previous setter        [proved: Flanks.depth_floor]
+      (B)  delta >= 1/(8*d_min)   d_min = the arrangement's unit
+  and the observed minima are exactly those: 1/888 = 1/(8*111) and 1/88 = 1/(8*11). Both
+  shrink as speeds grow, so neither is a universal c_* > 0.
+
+  ONE PIECE STILL UNREAD. The source text's constant is corrupted -- "c_* = c_4 = inf ...
+  « 0. »". If that was a specific decimal it would identify the intended class, since a
+  floor of 1/(8*b) is 0.125 at b = 1, 0.0625 at b = 2, 0.0125 at b = 10. No universal value
+  matches; a value here would say which b the author had fixed.
