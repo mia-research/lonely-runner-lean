@@ -493,4 +493,35 @@ theorem stops_of_lattice_and_free (hn4 : 4 ≤ n) {ds : Finset ℝ} (hpos : ∀ 
     lonely_opening_of_lattice_and_free hn4 hpos he hc hyrat hyfrac hzoff hint
   exact exists_fixed_of_lonely hpos hm (flankOpening_pos (hpos e he) k) hk
 
+/-! ### Proposition 6.10, the rational pair: the denominators must agree
+
+The manuscript proves this by a residue count over all denominators.  Most of it needs no
+count.  If two runners shadow a live flank between them and each is on a lattice, then each
+is forced onto the *other's* lattice, by `class_killer_int` alone: the first is clear on a
+whole residue class mod `P`, so the second must shadow that entire class, which puts it on
+the `P`-lattice.  For reduced denominators this says `c₂ ∣ c₁` and `c₁ ∣ c₂`, hence `c₁ = c₂`.
+Only the last step -- that two runners of one common denominator `c` cover all `c` residues
+only when `c = 2` -- is a count, and it is a count over a single denominator. -/
+
+/-- **A shadowing pair lies on each other's lattice.**  No residue count is used. -/
+theorem shadowing_pair_cross_lattice (hn4 : 4 ≤ n) {e y z : ℝ} (he0 : 0 < e) {P Q : ℕ}
+    (hylat : Int.fract ((P : ℝ) * (y / e)) = 0)
+    (hzlat : Int.fract ((Q : ℝ) * (z / e)) = 0)
+    (hyclear : ∃ r : ℕ, (n : ℝ)⁻¹ ≤ circDist (y * flankOpening n e r))
+    (hzclear : ∃ r : ℕ, (n : ℝ)⁻¹ ≤ circDist (z * flankOpening n e r))
+    (hshadow : ∀ k : ℕ, inWay n y (flankOpening n e k) ∨ inWay n z (flankOpening n e k)) :
+    Int.fract ((P : ℝ) * (z / e)) = 0 ∧ Int.fract ((Q : ℝ) * (y / e)) = 0 := by
+  constructor
+  · -- `y` is clear on the whole class `r + jP`, so `z` must shadow it
+    obtain ⟨r, hr⟩ := hyclear
+    refine class_killer_int (n := n) hn4 he0 P r (fun j => ?_)
+    have hy : ¬ inWay n y (flankOpening n e (r + j * P)) := by
+      rw [inWay, circDist_periodic_of_lattice he0 hylat r j]; exact not_lt.mpr hr
+    exact (hshadow (r + j * P)).resolve_left hy
+  · obtain ⟨r, hr⟩ := hzclear
+    refine class_killer_int (n := n) hn4 he0 Q r (fun j => ?_)
+    have hz : ¬ inWay n z (flankOpening n e (r + j * Q)) := by
+      rw [inWay, circDist_periodic_of_lattice he0 hzlat r j]; exact not_lt.mpr hr
+    exact (hshadow (r + j * Q)).resolve_right hz
+
 end Flanks

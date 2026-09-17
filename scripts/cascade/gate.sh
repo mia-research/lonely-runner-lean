@@ -17,7 +17,24 @@ cd "$ROOT" || exit 2
 LOG="${1:-/tmp/cascade_gate_build.log}"
 SRC=LonelyRunner/LRC/Cascade
 
-echo "== [0] build-artefact integrity =="
+# Progress timing. Every step prints its own elapsed time as it finishes, so a step running
+# long is visible WHILE it runs rather than only in hindsight. Do not pipe this script through
+# `tail`: tail holds the whole stream until exit, so the output reads empty for the full run
+# whether the gate is healthy, hung or dead, and those become indistinguishable. Redirect to a
+# file and read the tail of the file instead.
+T0=$SECONDS; TSTEP=$SECONDS; PREV=""
+step() {
+  [ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
+  echo "== $* ==  (t+$((SECONDS-T0))s)"
+  PREV="${1%% *}"; TSTEP=$SECONDS
+}
+# Measured baseline, WARM build, 2026-09-17, three runs: 13m12s / 12m20s / 12m04s.
+# The last was instrumented: [0] 0s, [1] 46s, [2] 0s, [2b] 0s, [3] 678s, [4] 0s, total 724s.
+# Step [3] is 93.6% of the run and scales with the theorem count (4688 here), so the total
+# tracks it and this baseline drifts upward as the artefact grows. A COLD build makes step [1]
+# much longer; there is no measured cold figure, so do not quote one.
+
+step "[0] build-artefact integrity"
 DATALESS=$(find .lake/build -name '*.olean' -print0 2>/dev/null \
   | xargs -0 stat -f '%b %N' 2>/dev/null | awk '$1==0 {print $2}')
 if [ -n "$DATALESS" ]; then
@@ -30,7 +47,7 @@ else
   echo "  clean"
 fi
 
-echo "== [1] build every cascade module =="
+step "[1] build every cascade module"
 # Derived from disk, not hardcoded: a hardcoded list goes stale silently, and on 2026-09-17 it was
 # missing nine modules on disk (Certificate, EighthFamily, NearAP, CensusFamilies, CensusBatch,
 # PinnedBatch1-4) while still claiming to build every one.
@@ -44,17 +61,17 @@ if [ $BUILD_EXIT -ne 0 ]; then
   echo "GATE FAIL: build exit $BUILD_EXIT"; grep -E 'error' "$LOG" | head -20; exit 1
 fi
 
-echo "== [2] sorry inventory =="
+step "[2] sorry inventory"
 SORRY=$(grep -nE '(^|[^[:alnum:]_])sorry([^[:alnum:]_]|$)' $SRC/*.lean 2>/dev/null \
   | grep -vE ':[0-9]+: *--' | grep -vE '`sorry`')
 if [ -n "$SORRY" ]; then echo "$SORRY" | sed 's/^/  /'; else echo "  none"; fi
 
-echo "== [2b] proof-hygiene scan =="
+step "[2b] proof-hygiene scan"
 HYG=$(grep -rnE 'native_decide|^[[:space:]]*unsafe[[:space:]]+(def|theorem|lemma|instance)|(^|<;>[[:space:]]*|;[[:space:]]*)[[:space:]]*admit[[:space:]]*$' \
   $SRC/*.lean 2>/dev/null | grep -vE '^[^:]+:[0-9]+:[[:space:]]*--' | grep -vE '`native_decide`|`unsafe`|`admit`')
 if [ -n "$HYG" ]; then echo "$HYG" | sed 's/^/  /'; HYG_OK=0; else echo "  clean"; HYG_OK=1; fi
 
-echo "== [3] axiom check, every theorem =="
+step "[3] axiom check, every theorem"
 AX=LonelyRunner/_CascadeGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.Cascade.All'
@@ -88,7 +105,7 @@ BAD=$(echo "$AXOUT" | grep -vE "depends on axioms: \[propext, Classical.choice, 
 if [ -n "$BAD" ]; then echo "$BAD" | sed 's/^/  /'; fi
 [ "$NCLEAN" = "$NDECL" ] && AX_OK=1 || AX_OK=0
 
-echo "== [4] the open statement (Existence at order 8) must NOT be stated =="
+step "[4] the open statement (Existence at order 8) must NOT be stated"
 # A NAME TRIPWIRE, not a proof of absence: it catches a declaration named for the open statement, and
 # would not catch one proved under an unrelated name. The frozen statement itself lives in
 # LonelyRunner/LRC/Spec/Target.lean, deliberately outside this artefact.
@@ -96,6 +113,8 @@ OPEN=$(grep -nE '^[[:space:]]*(theorem|lemma|def|axiom)[[:space:]]+[A-Za-z_.]*([
   $SRC/*.lean 2>/dev/null)
 if [ -n "$OPEN" ]; then echo "$OPEN" | sed 's/^/  /'; OPEN_OK=0; else echo "  clean (unstated, as intended)"; OPEN_OK=1; fi
 
+[ -n "$PREV" ] && echo "   ...$PREV took $((SECONDS-TSTEP))s"
+echo "== total: $((SECONDS-T0))s =="
 echo
 if [ "$AX_OK" = "1" ] && [ "$COV_OK" = "1" ] && [ -z "$SORRY" ] && [ "$HYG_OK" = "1" ] && [ "$OPEN_OK" = "1" ]; then
   echo "GATE PASS: $NDECL theorems, axiom-clean (coverage $NDECL of $NDISK on disk)."
