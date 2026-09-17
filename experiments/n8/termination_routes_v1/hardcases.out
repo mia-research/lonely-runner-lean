@@ -1,0 +1,9 @@
+6.7 climb (27,70,107,137,159,188,344,393), subject 393
+   arrived=True  moves=28  max tau = a*t = 1.283   first window ends 0.875   -> nearest LEFT its first window
+   distinct setters 7 of 7;  repeats 21
+6.9 row (1,31,75,97,128,160,176,225), subject 1
+   arrived=True  moves=23  max tau = a*t = 1.289   first window ends 0.875   -> nearest LEFT its first window
+   distinct setters 7 of 7;  repeats 16
+
+spread-biased sample: 60000 arriving cascades, moves med 1 max 17
+   cascades where the NEAREST leaves its first clear window: 0/60000 = 0.0000

@@ -1,0 +1,12 @@
+n=4, 3 differences, 4000 arriving cascades
+   moves            : med 0  90th 2  max 3
+   max tau = a*t    : med 0.250  max 0.730   (first window ends at 0.750)
+   (a) NEAREST stayed in its first clear window : 4000/4000 = 1.000
+   (c) distinct setters used  : max 2 of 3;  cascades with a REPEAT setter: 154/4000
+
+n=8, 7 differences, 4000 arriving cascades
+   moves            : med 0  90th 3  max 10
+   max tau = a*t    : med 0.125  max 0.401   (first window ends at 0.875)
+   (a) NEAREST stayed in its first clear window : 4000/4000 = 1.000
+   (c) distinct setters used  : max 6 of 7;  cascades with a REPEAT setter: 79/4000
+

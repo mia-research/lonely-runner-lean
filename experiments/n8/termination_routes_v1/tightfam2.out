@@ -1,0 +1,10 @@
+sanity  {1..7} best min-distance = 1/8 (must be 1/8 = 1/8)  -> OK
+V=10: primitive 7-subsets -> tight 1, loose 119, below 1/8 0
+      TIGHT (1, 2, 3, 4, 5, 6, 7)
+V=12: primitive 7-subsets -> tight 2, loose 790, below 1/8 0
+      TIGHT (1, 2, 3, 4, 5, 6, 7)
+      TIGHT (1, 2, 3, 4, 5, 7, 12)
+V=14: primitive 7-subsets -> tight 3, loose 3428, below 1/8 0
+      TIGHT (1, 2, 3, 4, 5, 6, 7)
+      TIGHT (1, 2, 3, 4, 5, 7, 12)
+      TIGHT (1, 4, 5, 6, 7, 11, 13)

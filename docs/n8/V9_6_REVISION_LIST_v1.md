@@ -58,3 +58,28 @@ problem itself.
 - **`PROOF_DEV_v1` is cited and not deposited.** Already explained in place in Appendix A item 4 —
   it sits in a separate working tree and the passage is quoted verbatim in `LOST_FUNCTIONS_v1` §E.
   Listed here only so it is not re-discovered as a defect.
+
+---
+
+## 3. Termination work items  `[open]`
+
+Opened 2026-09-18 in `TERMINATION_ROUTES_v1.md`, with artefacts in
+`experiments/n8/termination_routes_v1/`.
+
+- **A. The dichotomy.** Tight configurations (lonely set = isolated points, exactly `1/8`) against
+  loose ones (lonely set has interior). Exact census over primitive 7-subsets of `[1,14]`: **3 tight**
+  — `{1,2,3,4,5,6,7}`, `{1,2,3,4,5,7,12}`, `{1,4,5,6,7,11,13}` — and 3,428 loose. Classify the tight
+  family over ℝ, name each instant, show every loose set has slack.
+- **B. The return lemma without the window invariant.** `Q(n−2) < 2P+1` is *stronger* at `n = 8`
+  (`Q ≤ (2P+1)/6`) and independent of the window. First concrete step: a version valid for returns
+  after intervening moves — the present `return_lemma` needs `hret` and so governs only `g = 0`.
+
+**The finding underneath both**: `2k < n` is a property of the counting method, not of the problem.
+`TerminationThree` (`n=3, k=2`) and `TerminationFour` (`n=4, k=3`) are both **outside** that
+regime and both proved, because both are structural rather than counting routes.
+
+**A standing search warning.** The `n = 4` window invariant is false at `n = 8`, witnessed by the two
+arrangements the manuscript names (max `τ` = 1.283 and 1.289 against a window ending at 0.875). No
+sampler found them: 4,000 sets from `[1,40]` and 60,000 spread-biased sets gave **zero** violations.
+Test window and cap invariants against the named arrangements, never against a sampler.
+
