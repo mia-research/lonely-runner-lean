@@ -1,0 +1,54 @@
+   g   returns    min delta    1st pct     median
+   1        39     0.003683     0.0037     0.0706
+   2        95     0.000183     0.0002     0.0525
+   3       173     0.001689     0.0028     0.0669
+   4        76     0.000109     0.0001     0.0981
+   5        21     0.000856     0.0009     0.0670
+
+  inf over all g >= 4 : 0.00010945   (105 returns)
+  inf over g = 4 only : 0.00010945   (76 returns)
+  claim says these are EQUAL and both > 0
+
+======================================================================
+ATTACK: can delta be driven arbitrarily close to 0 at g >= 4?
+  hill-climb restarts              : 600
+  smallest delta reached at g >= 4 : 5.528e-07
+  random sampling had reached      : 1.09e-04
+
+  -> delta is driven below 1e-6. No positive floor survives this search, so
+     c_* > 0 is REFUTED as stated: the infimum appears to be 0 and is not attained.
+
+  WHAT THE EXTREMAL CONFIGURATION LOOKS LIKE -- because 'admissible' is not defined
+  in the statement I was given, and whether these count is the whole question:
+    speeds     : [3.687981, 16.495804, 22.081819, 26.56833, 30.110766, 36.378981, 38.828022]
+    d_min      : 3.687981
+    spread     : 10.53
+    min gap    : 2.45e+00   max gap: 12.8078
+    gap ratio  : 5.2
+
+VERDICT, with its scope stated.
+
+  HOLDS (in sampling): the extremal return length is g = 4. Across 20,000 random
+  arrangements the infimum over all g >= 4 equalled the infimum over g = 4 exactly.
+  Permitting more intervening moves did not produce a shallower returning setter.
+
+  REFUTED: c_* > 0. A hill-climb minimising delta at g >= 4 reaches 5.5e-07, against
+  1.1e-04 from random sampling -- a factor of 200, with no sign of a floor. The
+  infimum appears to be 0 and unattained.
+
+  The extremal arrangement is ORDINARY: speeds well separated, min gap 2.45, spread
+  10.5, gap ratio 5.2. No two speeds nearly equal, nothing degenerate. So the
+  refutation does not depend on admitting a pathological configuration.
+
+  TWO SCOPE LIMITS, both real:
+  * 'Admissible' is not defined in the statement given to me. I read it as any seven
+    positive reals. If it means something narrower that excludes the arrangement
+    above, the refutation does not apply and the claim should be re-tested against
+    the intended class.
+  * Floating point. delta = 5.5e-07 is nine orders above double precision, so this is
+    not numerical noise, but the cascade itself is run in floats and a near-boundary
+    decision could differ in exact arithmetic.
+
+  WHY IT MATTERS EITHER WAY: a positive floor on delta would bound below the move a
+  returning setter forces, which bears directly on the cap. Without it, the g = 4
+  extremality alone yields nothing -- an infimum of 0 attained nowhere gives no bound.
