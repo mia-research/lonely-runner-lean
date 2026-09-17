@@ -880,9 +880,10 @@ within the nearest runner's first relative lap. What is established toward it: `
 Four things about that certificate, stated because each has been misread once. **The value is computed, not recognised:** the
 earlier `≈ 31/9` came from the optimum of floating-point programs over bounded searches (item 49); this is exact rational
 arithmetic and the rational is the answer, not a reading of one. **The bound is on the ratio, not the spread:** `S = d_max/d_min`
-throughout. The deposited output prints the word *spread*, which this manuscript reserves for `W = v_8 − v_1`; the script has
-since been corrected to print *ratio*, so the deposited output predates that fix and the two disagree in wording. The result
-is about the ratio in both. **What makes the enumeration finite is stated in the output and belongs here:** at ratio bound
+throughout. The script and its first output both printed the word *spread*, which this manuscript reserves for
+`W = v_8 − v_1`, a difference and not a ratio; both were corrected and the certificate re-run, and the deposited output now
+reproduces from its script. Everything but that wording is unchanged by the re-run — 280,785 words tested, 5,721 realisable,
+the same supremum, the same word, the same margin. **What makes the enumeration finite is stated in the output and belongs here:** at ratio bound
 `S` no setter sets beyond lap `L = ⌊(4S − 1)/5⌋`, because `R < 4` at the step before the exceedance forces `Q < (4S + 1)/5`,
 and a runner's setting laps strictly increase; so the words run to at most `3L` moves — `L = 20` and 60 moves at `S = 26`. **The enumeration is a relaxation, in the sound direction:** the word
 programs impose only that each setter is in the way just before it sets and that the instant advances, dropping that the setter has
@@ -1200,6 +1201,7 @@ Author's rulings of 2026-09-17 are marked.
 | §5 | the nativeness check recorded | the additions were checked against §5's claim declaration by declaration: only `Int.fract`, `Nat` casts and division, `List`/`Finset` membership and `Function.iterate_add_apply`; nothing from measure theory, topology, filters or number theory; `exists_clear_step` uses no non-local identifier at all |
 | §6.2, §6.7 | three sketch sections accounted for | `SKETCH_v7`'s **enlarged tier**, **mixed reading** (its §7b) and **the joint** (its §10) had never appeared in any manuscript version, a gap the v1 audit named on 2026-09-13. The first two are retired by Theorem 6.2(b) — the cascade lands on the first lonely instant, so no tier or candidate list can better it, and the mixed reading is beaten on its own worked example. The joint is the open statement with the first window attached, and **false as written**, by the arrangement §6.9 already names |
 | Appendix B | **B.2** and **B.4** added; the appendix renumbered B.1–B.5 | the map ran v7→v8, v8.2→v9, v9.1→v9.2, leaving v8→v8.1→v8.2 and v9→v9.1 unmapped here; both were recorded in `V8_REVISION_LIST_v1.md` instead. Now in the appendix, so the chain is unbroken: v7 → v8 → v8.1 → v8.2 → v9 → v9.1 → v9.2. Six cross-references were repointed with the renumbering; the two to B.1 were unaffected, B.1 being the only number that did not move |
+| §8.2 | the certificate re-run at ratio 26 and its output re-deposited | the script and its first output printed *spread* where the manuscript reserves that word for the speed spread. Both corrected; the re-run changed the two wording lines and nothing else — 280,785 words, 5,721 realisable, `31/9`, the same word and margin `132/4165` — so the deposit reproduces from its script |
 | §10 | census artefacts, the specification file, refreshed digest | the emitters, the verifiers, the harness, the map; and that the census data is deposited so the theorems regenerate from this repository alone |
 
 **A trace recovered, not a change.** B.1 maps v7's sections to v8's but not its numbered results, so a reader holding v7
