@@ -1,0 +1,24 @@
+endpoint runners (r_1 and r_8 of 1,500 arrangements) : 3000
+
+4.8's hypothesis HOLDS (every difference in [d_min, 7 d_min]):
+   lonely at own bound 1/(8 d_min) : 1304
+   not lonely there                : 0   <- must be 0 if 4.8 is right
+
+4.8's hypothesis DOES NOT HOLD (some difference > 7 d_min):
+   lonely at own bound anyway      : 0
+   not lonely there                : 1696
+
+   -> of the 1696 endpoints 4.8 does not decide, 0 (0.0%) are lonely at their own bound regardless.
+      '4.8 fails for 1,696 endpoints' was therefore wrong: 4.8 is SILENT on them,
+      and silence is not absence.
+
+======================================================================
+COVERAGE OF ExistenceAt8 BY 4.8, measured on ds directly
+  random 7-element difference sets       : 20000
+  with max <= 7*min, so settled by 4.8   : 7933  (39.7%)
+  NOT settled by 4.8                     : 12067  (60.3%)
+
+  So the open part of ExistenceAt8 is exactly: ds with max > 7*min.
+  The endpoints r_1, r_8 are the runners whose ds lands there -- one side of them
+  carries all seven gaps -- which is why they are the outstanding pair. But the
+  obligation is a condition on ds, not a fact about endpoints.
