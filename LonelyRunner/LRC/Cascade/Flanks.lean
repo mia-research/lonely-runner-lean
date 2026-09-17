@@ -769,13 +769,15 @@ theorem inWay_at_opening_iff_not_band {e d : ℝ} (he : 0 < e) (k : ℕ) :
 
 /-- **Time reversal.**  Loneliness is symmetric about zero: the subject is lonely at `s` exactly
 when it is lonely at `−s`.  Immediate from `circDist_neg`, and it says the lonely set of an
-arrangement is a symmetric set — half of it lies at negative times and carries no new information. -/
+arrangement is a symmetric set — half of it lies at negative times and carries no new
+information. -/
 theorem lonely_neg {ds : Finset ℝ} {s : ℝ} : Lonely n ds (-s) ↔ Lonely n ds s := by
   constructor <;> (intro h d hd; have := h d hd)
   · rwa [show d * -s = -(d * s) by ring, circDist_neg] at this
   · rwa [← circDist_neg (d * s), ← show d * -s = -(d * s) by ring] at this
 
-/-- **A flank sits exactly on the boundary at its own openings.**  `circDist (e · flankOpening n e k)`
+/-- **A flank sits exactly on the boundary at its own openings.**
+`circDist (e · flankOpening n e k)`
 is exactly `1/n`, never more and never less.  This is why the zones are OPEN: the flank is clear at
 its own opening by the `≤` in `Lonely`, and would not be under a strict inequality.  The boundary
 discipline of §1.2 is load-bearing exactly here. -/
@@ -836,5 +838,98 @@ theorem depth_floor {a b : ℤ} (hb : 0 < b) (k : ℕ) (N : ℤ)
     exact_mod_cast this
   rw [inv_eq_one_div]
   gcongr
+
+/-! ### The residue route: at an integer flank the verdict is a congruence
+
+`lonely_iff_bounded_search` collapses the search over openings to `k < e`.  What follows collapses
+the **arithmetic**: at a whole-number flank the real-valued test `1/n ≤ circDist (d·t)` is
+equivalent to a condition on one integer residue.  The threshold `1/n` becomes a band of integers,
+the opening index enters only through `n·k + 1`, and no real number survives in the statement.
+
+This is the object a residue argument can act on.  `circDist` is a min of fractional parts and
+supports only inequalities; `Int.emod` supports congruences, the Chinese Remainder Theorem, and
+counting over `ZMod (n·b)`. -/
+
+/-- **The residue criterion.**  A whole-number runner `a` is clear at the `k`-th opening of the
+whole-number flank `b` exactly when the residue of `a·(n·k+1)` modulo `n·b` lies in the closed
+middle band `[b, (n−1)·b]`. -/
+theorem clear_at_int_flank_iff_emod {a b : ℤ} (hb : 0 < b) (k : ℕ) :
+    (n : ℝ)⁻¹ ≤ circDist ((a : ℝ) * flankOpening n (b : ℝ) k)
+      ↔ b ≤ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * b)
+        ∧ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * b) ≤ (n : ℤ) * b - b := by
+  have hnN : 0 < n := by have := (Fact.out : 2 ≤ n); omega
+  have hn0 : (0 : ℝ) < (n : ℝ) := n_pos
+  have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb
+  set M : ℤ := (n : ℤ) * b with hMdef
+  set m : ℤ := a * ((n : ℤ) * (k : ℤ) + 1) with hmdef
+  have hMpos : 0 < M := by positivity
+  have hM0 : (0 : ℝ) < (M : ℝ) := by exact_mod_cast hMpos
+  -- the position is the integer ratio `m / M`
+  have hpos : (a : ℝ) * flankOpening n (b : ℝ) k = (m : ℝ) / (M : ℝ) := by
+    unfold flankOpening
+    rw [hmdef, hMdef]
+    push_cast
+    field_simp
+  -- its fractional part is the residue over `M`
+  have hx0 : 0 ≤ m % M := Int.emod_nonneg m (ne_of_gt hMpos)
+  have hxM : m % M < M := Int.emod_lt_of_pos m hMpos
+  have hsplit : (m : ℝ) / (M : ℝ) = ((m % M : ℤ) : ℝ) / (M : ℝ) + ((m / M : ℤ) : ℝ) := by
+    have h := Int.emod_add_mul_ediv m M
+    field_simp
+    exact_mod_cast h.symm
+  have hfr : Int.fract ((m : ℝ) / (M : ℝ)) = ((m % M : ℤ) : ℝ) / (M : ℝ) := by
+    rw [hsplit, Int.fract_add_intCast, Int.fract_eq_self]
+    constructor
+    · positivity
+    · rw [div_lt_one hM0]; exact_mod_cast hxM
+  have hMb : (M : ℝ) = (n : ℝ) * (b : ℝ) := by rw [hMdef]; push_cast; ring
+  have hone : (1 : ℝ) - (n : ℝ)⁻¹ = ((n : ℝ) - 1) / (n : ℝ) := by field_simp
+  -- the near edge: `1/n ≤ x/(n·b)` is `b ≤ x`
+  have key1 : (n : ℝ)⁻¹ ≤ ((m % M : ℤ) : ℝ) / (M : ℝ) ↔ (b : ℝ) ≤ ((m % M : ℤ) : ℝ) := by
+    rw [inv_eq_one_div, div_le_div_iff₀ hn0 hM0, one_mul, hMb,
+      show (n : ℝ) * (b : ℝ) = (b : ℝ) * (n : ℝ) by ring, mul_le_mul_iff_left₀ hn0]
+  -- the far edge: `1/n ≤ 1 − x/(n·b)` is `x ≤ (n−1)·b`
+  have key2 : (n : ℝ)⁻¹ ≤ 1 - ((m % M : ℤ) : ℝ) / (M : ℝ)
+      ↔ ((m % M : ℤ) : ℝ) ≤ (M : ℝ) - (b : ℝ) := by
+    have step : (n : ℝ)⁻¹ ≤ 1 - ((m % M : ℤ) : ℝ) / (M : ℝ)
+        ↔ ((m % M : ℤ) : ℝ) / (M : ℝ) ≤ ((n : ℝ) - 1) / (n : ℝ) := by
+      rw [← hone]; constructor <;> intro h <;> linarith
+    rw [step, div_le_div_iff₀ hM0 hn0, hMb,
+      show ((n : ℝ) - 1) * ((n : ℝ) * (b : ℝ)) = ((n : ℝ) * (b : ℝ) - (b : ℝ)) * (n : ℝ) by ring,
+      mul_le_mul_iff_left₀ hn0]
+  rw [hpos, circDist, hfr, le_min_iff, key1, key2]
+  constructor
+  · rintro ⟨h1, h2⟩; exact ⟨by exact_mod_cast h1, by exact_mod_cast h2⟩
+  · rintro ⟨h1, h2⟩; exact ⟨by exact_mod_cast h1, by exact_mod_cast h2⟩
+
+/-- **The whole search is a finite integer computation.**  Composing `lonely_iff_bounded_search`
+with `clear_at_int_flank_iff_emod`: for whole-number differences, "lonely somewhere" is decided by
+`∑_{b ∈ ds} b` residue tests in `ℤ`, and no real number survives in the criterion.
+
+This is the residue route's statement of the problem.  `circDist` is a minimum of fractional parts
+and supports only inequalities; `Int.emod` supports congruences, CRT, and counting over
+`ZMod (n·b)`.  Note also what the criterion shows directly: the verdict for a runner `a` at flank
+`b` depends on `a` only through `a % (n·b)`, so the question *at a fixed flank* is a finite check
+over residues — finiteness in the difference set, not only in the opening index. -/
+theorem lonely_iff_emod_search {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) (hne : ds.Nonempty)
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) :
+    (∃ s, 0 < s ∧ Lonely n ds s) ↔
+      ∃ b : ℤ, 0 < b ∧ (b : ℝ) ∈ ds ∧ ∃ k : ℕ, (k : ℤ) < b ∧
+        ∀ a : ℤ, (a : ℝ) ∈ ds →
+          b ≤ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * b)
+          ∧ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * b) ≤ (n : ℤ) * b - b := by
+  rw [lonely_iff_bounded_search hpos hne hint]
+  constructor
+  · rintro ⟨e, he, k, hk, hl⟩
+    obtain ⟨b, rfl⟩ := hint e he
+    have hb0 : (0 : ℝ) < (b : ℝ) := hpos _ he
+    have hbZ : 0 < b := by exact_mod_cast hb0
+    exact ⟨b, hbZ, he, k, by exact_mod_cast hk,
+      fun a ha => (clear_at_int_flank_iff_emod hbZ k).mp (hl _ ha)⟩
+  · rintro ⟨b, hbZ, hb, k, hk, h⟩
+    have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hbZ
+    refine ⟨(b : ℝ), hb, k, by exact_mod_cast hk, fun d hd => ?_⟩
+    obtain ⟨a, rfl⟩ := hint d hd
+    exact (clear_at_int_flank_iff_emod hbZ k).mpr (h a hd)
 
 end Flanks
