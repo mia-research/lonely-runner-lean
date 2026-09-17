@@ -1,0 +1,63 @@
+CHECK 1: does the memo's lambda_j = (8N_j+1)/s_j match the cascade's actual growth?
+  moves checked 2753, lambda matches exactly: 2753
+
+CHECK 2: c_g over INTEGER speeds -- is c_4 really the smallest?
+    g  returns     inf delta observed
+    1      169                  1/160  = 6.250e-03
+    2      384                  1/584  = 1.712e-03
+    3      619                  1/784  = 1.276e-03
+    4      261                  1/784  = 1.276e-03
+    5       71                  1/632  = 1.582e-03
+    6       40                  1/132  = 7.576e-03
+
+RESPONSE TO THE MEMO, point by point.
+
+MODELS AGREE. The memo's lambda_j = (8N_j + 1)/s_j reproduces the cascade's actual growth
+EXACTLY on 2,753 moves in exact arithmetic. So s_j = 8*d*t and delta_j = d*t - N_j + 1/8,
+and we are describing the same object. The parametrisation is confirmed, not assumed.
+
+PROPOSITION 1, c_4 > 0: TRUE over whole-number speeds, and now PROVED -- not by the cascade
+recurrence but by a denominator argument. Flanks.depth_floor:
+
+    the cascade's instant is always some runner's opening (k + 1/8)/b, so
+    delta = d*t - N + 1/8 is a rational with denominator dividing 8*b, hence
+    delta > 0  =>  delta >= 1/(8*b),   b = the PREVIOUS SETTER's speed.
+
+Axiom-clean. Measured tight on 13,603 moves, the bound attained.
+
+  But it is FALSE over real speeds: delta reaches 6.1e-13 and below on an arriving cascade
+  with ordinary, well-separated speeds. So c_4 > 0 holds exactly when the speeds are
+  bounded and rational, and the constant is 1/(8*b) rather than universal.
+
+PROPOSITION 2, extremality inf_{g>=4} c_g = c_4: not exact. Over integer speeds in [1,100],
+g = 3 TIES g = 4 at 1/784, and g = 2 reaches 1/584. Over real speeds every c_g is 0 for
+g = 1..6, so the identity reads 0 = 0. The memo's suggested mechanism -- that more
+intervening moves accumulate elapsed time before re-entry -- is not what the data show.
+
+SECTION 4 IS THE DECISIVE ONE, AND IT DOES NOT CLOSE.
+
+  The memo derives lambda_j <= 1 + (2 - 8c_*)/s_j and calls it a uniform improvement on
+  lambda_j <= 1 + 2/s_j. Both are true. But the cap needs the PRODUCT to converge, and
+
+      log prod lambda_j  ~  (2 - 8c_*) * sum 1/s_j
+
+  converges iff sum 1/s_j converges -- for ANY positive coefficient. Replacing 2 by
+  2 - 8c_* multiplies the sum by a constant and changes nothing about whether it converges.
+
+  The only value that would change it is 2 - 8c_* = 0, i.e. c_* = 1/4. And c_* = 1/4 is
+  excluded by the memo's own parametrisation, which states 0 < delta < 1/4 strictly.
+
+  So no attainable value of c_* makes the long-return depth decisive. The obstruction is not
+  the size of the constant; it is that convergence is governed by sum 1/s_j, a statement
+  about the LAPS, on which a depth bound says nothing.
+
+WHAT THE MISSING INGREDIENT ACTUALLY IS. Control of sum 1/s_j, i.e. how fast the setter laps
+grow. Measured earlier (experiments/n8/move_count_ceiling_v1): return_growth forces a
+runner's setting laps to be essentially consecutive integers across a run, so each of the k
+runners contributes sum 1/N ~ log G, giving
+
+    log G * (1 - 2k/n) <= C,
+
+whose coefficient at n = 8, k = 7 is -0.75. That is the same 2k < n threshold that section
+8.2's potential reaches and that the withdrawn Proposition 6.11 needed. A depth bound does
+not touch it.
