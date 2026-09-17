@@ -40,7 +40,7 @@ multiple of 8. **Open.** It is proved in several families (§4.5, §6.9), and ho
 exhaustive sweep of every integer arrangement `0 = v_1 < … < v_8 ≤ 40`.
 
 Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (4,695
-theorems). Both have no `sorry`, and every theorem in both depends on at most `propext`, `Classical.choice` and
+theorems, of which **219 structural** and 4,476 generated census instances — see §7). Both have no `sorry`, and every theorem in both depends on at most `propext`, `Classical.choice` and
 `Quot.sound`. The φ(n) count of isolation instants for an arithmetic progression, the one dependency v7 cited, is derived
 in Lean. §7 maps every numbered statement to its declaration.
 
@@ -367,6 +367,13 @@ in Lean at general `n`** from the framework's own objects, in `ConstructionN/Ins
 That development is outside the two artefacts of §7 (it sits in the general-`n` line with its own gate). The progression's
 four instants `1/8, 3/8, 5/8, 7/8` in each lap also follow from Theorem 4.3 alone: the eight points `j·t` are pairwise at
 least `1/8` apart. Nothing else is cited: no equidistribution, no result at another order, no proof sketch.
+
+**What the theorem count is and is not.** 4,476 of the 4,695 — **95%** — are the census: one generated
+theorem per arrangement, each the *same* one-line application of `lonely_of_band_list` with a different seven-element list,
+discharged by `norm_num` and `decide`. They are a machine-checked enumeration, not 4,476 distinct results. The artefact's
+mathematical content is the **219 structural** theorems; the census is evidence of a different kind, and §4.5 and §6.9 report
+it as such (1,341 clear at the bound, 3,072 at a later opening, verified here against the files). The gate prints the split on
+every run so the headline figure cannot be read as 4,695 independent facts.
 
 **v9.3's 27 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 26 of them use only
 `Int.fract` and its lemmas, `Int.cast_abs`, `Int.mul_ediv_add_emod`, `Fact.out` and ordinary order and field algebra.
@@ -812,7 +819,7 @@ Two artefacts, Lean 4 with mathlib (§10 for toolchain and digests). Each is bui
 | | `Construction8` (v7's artefact, frozen) | `Cascade` |
 |---|---|---|
 | directory | `LonelyRunner/LRC/Construction8/`, 11 modules | `LonelyRunner/LRC/Cascade/`, 19 modules |
-| theorems | 85 | 4,695 |
+| theorems | 85 | 4,695 — **219 structural**, 4,476 generated |
 | `sorry`; `native_decide`, `unsafe`, `admit` | 0; 0 | 0; 0 |
 | axioms | **every theorem** within `[propext, Classical.choice, Quot.sound]` (82 exactly those three, 3 a subset): `experiments/n8/v9_construction8_all_axioms_v1.lean` and `.out`; the gate checks 23 headline declarations | **every theorem** `[propext, Classical.choice, Quot.sound]`, in the gate |
 | gate | `scripts/n8/gate.sh` | `scripts/cascade/gate.sh` |

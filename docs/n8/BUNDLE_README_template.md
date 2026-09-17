@@ -84,7 +84,13 @@ GATE PASS: @THEOREMS@ theorems, axiom-clean (coverage @THEOREMS@ of @THEOREMS@ o
            Existence at order 8 is NOT proved -- it remains open and unstated.
 ```
 
-Cascade: **@MODULES@ modules, @THEOREMS@ theorems**, digest `@DIGEST@`, commit `@COMMIT@`.
+Cascade: **@MODULES@ modules, @THEOREMS@ theorems** — of which **@STRUCTURAL@ structural** and
+@GENERATED@ generated census instances. Digest `@DIGEST@`, commit `@COMMIT@`.
+
+**Read the split, not the total.** @GENERATED@ of the @THEOREMS@ are the census: one generated
+theorem per arrangement, each the same one-line application of `lonely_of_band_list` with a
+different seven-element list. They are a machine-checked enumeration, not @GENERATED@ distinct
+results. The mathematical content is the **@STRUCTURAL@ structural** theorems.
 The gate has six checks; [6] fails if the manuscript's recorded figures ever disagree with
 the tree, which is why the numbers here and in the manuscript cannot drift apart.
 

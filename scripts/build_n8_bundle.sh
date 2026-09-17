@@ -76,9 +76,13 @@ T_N=$(grep -hE '^theorem |^lemma ' LonelyRunner/LonelyRunner/LRC/Cascade/*.lean 
 T_M=$(ls LonelyRunner/LonelyRunner/LRC/Cascade/*.lean | wc -l | tr -d ' ')
 T_D=$(cd LonelyRunner/LonelyRunner/LRC/Cascade && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
 T_C=$(cd LonelyRunner && git log -1 --format=%h -- LonelyRunner/LRC/Cascade)
+C=LonelyRunner/LonelyRunner/LRC/Cascade
+T_G=$(grep -hcE '^theorem |^lemma ' $C/PinnedBatch*.lean $C/CensusBatch.lean $C/CensusFamilies.lean | paste -sd+ - | bc)
+T_S=$((T_N - T_G))
 sed -e "s/@THEOREMS@/$T_N/g" -e "s/@MODULES@/$T_M/g" -e "s/@DIGEST@/$T_D/g" -e "s/@COMMIT@/$T_C/g" \
+    -e "s/@STRUCTURAL@/$T_S/g" -e "s/@GENERATED@/$T_G/g" \
     docs/n8/BUNDLE_README_template.md > "$B/README.md"
-echo "  README: regenerated ($T_N theorems, $T_M modules, digest ${T_D:0:8}, commit $T_C)"
+echo "  README: regenerated ($T_N theorems = $T_S structural + $T_G generated, $T_M modules, digest ${T_D:0:8}, commit $T_C)"
 
 tar -czf "$OUT" -C "$(dirname "$B")" "$(basename "$B")"
 echo "  archive: $OUT  ($(du -h "$OUT" | cut -f1))"
