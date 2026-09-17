@@ -192,6 +192,21 @@ else
   grep -q "$T_D" "$MAN"    || { MISS="$MISS digest(${T_D:0:8}...)"; FIG_OK=0; }
   [ -n "$T_C" ] && { grep -q "$T_C" "$MAN" || { MISS="$MISS commit($T_C)"; FIG_OK=0; }; }
   grep -qE "$T_M modules|nineteen modules" "$MAN" || { MISS="$MISS modules($T_M)"; FIG_OK=0; }
+  # WHY THIS EXISTS (added 2026-09-18). The checks above grep for the PRESENCE of the Cascade
+  # digest. v9.2-v9.4 recorded the SAME string in four slots -- Cascade, Construction8, the
+  # section 6.7 JSON record and exhaustive_exact.py -- and passed every time, because one of
+  # the four was right and presence was all that was asked. Construction8's real digest is a
+  # different string entirely, and it is frozen, so it had been wrong since it was written.
+  # Requiring the second artefact's digest AND requiring the two to differ is decidable and
+  # catches exactly this.
+  C8DIR=LonelyRunner/LRC/Construction8
+  if [ -d "$C8DIR" ]; then
+    C8_D=$(cd $C8DIR && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
+    grep -q "$C8_D" "$MAN" || { MISS="$MISS construction8digest(${C8_D:0:8}...)"; FIG_OK=0; }
+    if [ "$C8_D" = "$T_D" ]; then
+      MISS="$MISS two-artefacts-one-digest"; FIG_OK=0
+    fi
+  fi
   if [ "$FIG_OK" = "1" ]; then
     echo "  clean ($MAN matches: $T_NCOMMA theorems, $T_M modules, digest ${T_D:0:8}, commit $T_C)"
   else
