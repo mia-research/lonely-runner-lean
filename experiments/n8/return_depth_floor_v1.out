@@ -1,0 +1,36 @@
+moves tested (integer speeds, exact arithmetic) : 13603
+  delta >= 1/(8 * previous setter's speed)      : 13603
+  violations                                    : 0
+  delta / bound : min 1.000  median 33.0
+
+  So for integer speeds the floor is REAL but is 1/(8*d'), set by the previous
+  setter. Bounded speeds give a floor; unbounded speeds do not. There is no
+  universal c_*, and the continuous counterexamples are the d' -> infinity limit.
+
+WHAT THIS DOES TO THE LEMMA.  'Admissible' has no framework-wide definition -- in docs/n8 it
+appears only locally (a construction parameter, 648 speeds in a p-adic context, five (L,R)
+pairs) and it is not a Lean notion.  So the lemma's class had to be guessed, and the guess
+decides the verdict.
+
+  CONTINUOUS reading (any seven positive reals, cascade arrives):
+      delta drives to 6.1e-13 and below.  No floor.  c_* > 0 REFUTED.
+
+  DISCRETE reading (integer speeds, cascade arrives), exact arithmetic:
+      delta >= 1/(8*d'),  d' = the PREVIOUS SETTER's speed.
+      13,603 moves, zero violations, and TIGHT -- min ratio delta/bound = 1.000 exactly.
+
+  The mechanism: the cascade's instant is always t = (N' + 1/8)/d', the previous setter's
+  opening.  So delta = d*t - N + 1/8 is a rational with denominator dividing 8*d', and a
+  nonzero such rational is at least 1/(8*d').
+
+  So the lemma's instinct was RIGHT and its form was wrong.  There IS a floor; it is not a
+  universal constant but 1/(8*d'), set by the previous setter.  Bounded speeds give a floor
+  (1/480 over [1,60], 1/1160 over [1,200] -- both exactly 1/(8*d') at the extremal d').
+  Unbounded speeds do not, and the continuous counterexamples are the d' -> infinity limit.
+
+  IT STILL DOES NOT GIVE THE CAP.  log growth ~ (1/4 - delta)/N and convergence is governed
+  by sum 1/N_j.  A floor of 1/(8*d') is not even constant across moves, so it scales terms
+  by a varying factor and touches convergence not at all.
+
+  AND THE EXTREMALITY IS STILL VACUOUS in the continuous reading: delta reaches ~1e-15 at
+  every g from 1 to 6, so 'g = 4 is extremal' compares six infima that are all 0.
