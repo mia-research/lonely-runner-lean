@@ -1,5 +1,5 @@
-declarations checked            : 22
-distinct non-local identifiers  : 35
+declarations checked            : 23
+distinct non-local identifiers  : 34
 
 FLAGGED against section 5's stated exclusions:
   off_lattice_of_irrational_ratio  (Flanks.lean)  ->  Irrational
@@ -39,4 +39,3 @@ All non-local identifiers used, for the record:
   hn0.ne
   inv_pos.mpr
   not_lt.mpr
-  this.symm

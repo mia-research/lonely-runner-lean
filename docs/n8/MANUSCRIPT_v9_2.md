@@ -1,6 +1,10 @@
 # A Bounding Framework for Eight Lonely Runners
 
-**T. Palelei.** v9.2, 2026-09-17. **The manuscript of record** (frozen by the author, 2026-09-17, after its
+**T. Palelei.** v9.2, 2026-09-17. **SUPERSEDED by `MANUSCRIPT_v9_3.md`, which is the manuscript of record** (author,
+2026-09-17). v9.2 held that status from 2026-09-17 until v9.3 was confirmed the same day; v9.3 withdraws Propositions
+6.10–6.11, which v9.2 still carries. Frozen and unaltered apart from this stamp — nothing below it has been edited.
+
+*Original header:* v9.2, 2026-09-17. The manuscript of record (frozen by the author, 2026-09-17, after its
 compile-diff, the cascade gate, the §5 nativeness pass and the review against v1 and v7).
 
 ---

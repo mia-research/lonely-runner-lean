@@ -1,10 +1,11 @@
 # A Bounding Framework for Eight Lonely Runners
 
-**T. Palelei.** v9.3, 2026-09-17. Supersedes v9.2, which was the manuscript of record. v9.3 **withdraws
-Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work of 2026-09-17.
+**T. Palelei.** v9.3, 2026-09-17. **The manuscript of record** (frozen by the author, 2026-09-17). Supersedes v9.2, which held that status
+until now. v9.3 **withdraws Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work
+of 2026-09-17.
 See `CORRECTIONS_2026_09_17_v2` §5–§6 for the withdrawal and the audit behind it.
-Checked for v9.3: the cascade gate (**PASS, 4,690 theorems axiom-clean**, 2026-09-17, LonelyRunner commit `4f4d0f9`) and a
-compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 22 new
+Checked for v9.3: the cascade gate (**PASS, 4,691 theorems axiom-clean**, 2026-09-17) and a
+compile-diff against v9.2, whose seven findings are addressed here. The §5 nativeness pass **was re-run** for v9.3's 23 new
 declarations and its one exception is recorded in §5. **Not repeated for v9.3**: the review against v1 and v7, which stands
 from v9.2 and which the v9.3 edits do not touch.
 
@@ -363,14 +364,25 @@ That development is outside the two artefacts of §7 (it sits in the general-`n`
 four instants `1/8, 3/8, 5/8, 7/8` in each lap also follow from Theorem 4.3 alone: the eight points `j·t` are pairwise at
 least `1/8` apart. Nothing else is cited: no equidistribution, no result at another order, no proof sketch.
 
-**v9.3's 22 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 21 of them use only
+**v9.3's 23 additions were checked against that claim too** (`experiments/n8/nativeness_v9_3_v1`), and 22 of them use only
 `Int.fract` and its lemmas, `Int.cast_abs`, `Int.mul_ediv_add_emod`, `Fact.out` and ordinary order and field algebra.
-**There is one exception, and it is stated rather than absorbed.** `Flanks.off_lattice_of_irrational_ratio` uses `Irrational`,
-from `Mathlib.NumberTheory.Real.Irrational` — number theory, which the claim above says does not appear. It is a **convenience
-bridge** with no dependents: it converts an irrational ratio into the framework's own object, `Int.fract (P·(d/e)) ≠ 0`, for a
-reader who has an irrational to hand. Proposition 6.10 is stated on the framework's object and does not use it, and no other
-declaration in the artefact does either, so it can be deleted without affecting any result. Whether to keep a number-theory
-import for a bridge nothing needs is an open decision for the author, recorded here rather than settled quietly.
+**The scope of this pass, stated exactly, because it is easy to over-read.** It runs per version over that version's
+*additions*, and it is a claim about what those declarations **cite** — not a claim that the artefact imports nothing. The
+artefact has always imported more where it needs to: `LRC/Cascade/Irrational.lean` imports `Mathlib.NumberTheory.Real.Irrational`
+and `Mathlib.Analysis.Real.Pi.Irrational` **deliberately**, to exhibit that irrational speeds work (§6.8).
+
+One v9.3 addition, `Flanks.off_lattice_of_irrational_ratio`, uses `Irrational`. That name is a *definition*
+(`x ∉ Set.range ((↑) : ℚ → ℝ)`), not a theorem, and Lean's own dependency list confirms the proof cites exactly one constant
+from that import — `Irrational` itself. **No external result enters.** The mathematical content sits in
+`off_lattice_of_not_ratio`, which states the hypothesis in the framework's own words, needs no import, and is *stronger*: a
+rational ratio whose denominator does not divide `P` satisfies it too, which is what `shadowing_pair_cross_lattice` uses.
+
+**The corollary is kept on purpose, and pinned.** The general theorems are stated on the framework's object — "off the
+`P`-lattice" — which does not contain the word *irrational*, and a reader searching for that word could mistake its absence
+for a gap. Irrational speeds are **not an exception anywhere in this framework**: the cascade is real-valued throughout,
+`class_killer_int` covers rational and irrational ratios in one case with no rationality input, and §6.8 tabulates worked
+irrational arrangements verified in Lean. Check [5] of the cascade gate fails if any of those named declarations is removed,
+so the coverage cannot lapse silently.
 
 **The v9.2 additions were checked against that claim, declaration by declaration.** Every non-local identifier they use is
 `Int.fract` and its four lemmas, `Nat.cast`, `Nat.cast_sub`, `Nat.div_add_mod`, `Nat.mul_pos`, `List.mem_map`,
@@ -978,7 +990,11 @@ If Existence held for every runner, the conjecture at eight runners would follow
 Also established: every numbered result of §§2–4 (§7 gives the declaration); §5's derivation of the φ(n) instants; the
 negative results of Appendix A, proved in the text or in Lean as stated.
 
-**Author's rulings.** Whether the residue counts and pigeonhole of Propositions 6.10–6.11 sit inside the framework was
+**Author's rulings.** **Promotion: v9.3 is the manuscript of record** (author, 2026-09-17). That closes the decision left open
+by `V7_REVISION_LIST_v1` §12 and `V8_REVISION_LIST_v1` — those two lists still describe it as pending and are kept as the record
+of their own moment, not repaired in place.
+
+Whether the residue counts and pigeonhole of Propositions 6.10–6.11 sit inside the framework was
 **pending** in v9.2 and **lapses in v9.3**: both propositions are withdrawn, so the ruling has nothing left to decide
 (`CORRECTIONS_2026_09_17_v2` §5). The author's separate ruling of **2026-09-15**, that such counts are admissible **as tools**,
 is untouched and still stands (§5). The `n > 2k` proof (§8.2) was **ruled on 2026-09-17**: the row is kept with its covering-threshold coincidence
