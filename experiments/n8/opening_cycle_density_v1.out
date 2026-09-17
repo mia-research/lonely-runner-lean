@@ -1,0 +1,36 @@
+(arrangement, flank) pairs        : 4200
+  cycles with NO clear opening    : 231  (5.5%)
+  cycles with at least one        : 3969
+
+density of CLEAR openings on the cycle, where non-empty:
+  min 0.0294   10th 0.1154   median 0.1887   90th 0.3000   max 1.0000
+
+the SAME data read as an arc from k = 0, which is how this session reported it:
+  first clear opening: min 0  median 3  90th 11  max 35
+
+Both describe the same cycles. The density is a property OF the cycle; the first hit
+is a property of the cycle AND of where you decided to start counting.
+
+========================================================================
+WHAT THE REFRAMING CHANGES
+
+  Read as an arc: 'the first clear opening is at median 3, and the required k is
+  UNBOUNDED -- a hill-climb reached 369'. That unboundedness is across arrangements
+  with different periods. WITHIN an arrangement k < P always, because the verdict
+  repeats. So 'k is unbounded' was measuring the origin, not the object.
+
+  Read as a cycle: 5.5% of (arrangement, flank) cycles have NO clear opening -- the
+  flank is shadowed. Where a flank is free at all, roughly a FIFTH of its cycle is
+  clear (median 18.9%, 10th percentile 11.5%). The clear set is not a needle.
+
+  These are the same 4,200 cycles. The density is a property OF the cycle; the first
+  hit is a property of the cycle AND of where counting began.
+
+  The 5.5% are the same phenomenon as the d_min flank saturating below 100% measured
+  earlier (89.0% integer, 75.8% small-denominator): a shadowed flank is an EMPTY
+  cycle, not a distant first hit. No amount of searching further reaches it, which is
+  why widening the search never helped and choosing another flank always did.
+
+  So the statement to aim at is not 'the first clear opening is near'. It is that the
+  clear sets of a runner's flanks are not ALL empty -- which is section 4.6's own open
+  item, 'not every flank of a runner can be shadowed at once', in cycle language.
