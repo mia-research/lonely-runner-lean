@@ -545,4 +545,73 @@ theorem shadowing_pair_cross_lattice (hn4 : 4 ≤ n) {e y z : ℝ} (he0 : 0 < e)
       rw [inWay, circDist_periodic_of_lattice he0 hzlat r j]; exact not_lt.mpr hr
     exact (hshadow (r + j * Q)).resolve_right hz
 
+/-! ### The band criterion at any opening — Theorem 4.8 carried past `k = 0`
+
+Theorem 4.8 (`Construction8.ratio_condition`) decides a difference at the flank's **bound**,
+`k = 0`.  The manuscript's mirror of it states the criterion at every opening: at flank `e`'s
+`k`-th opening runner `d` is clear exactly when the ratio `d/e` lies in
+`⋃_M [(nM+1)/(nk+1), (nM+n−1)/(nk+1)]`.  That is the same object at a different `k`, and it is
+proved here once for all `k`, with `k = 0` recovering 4.8.
+
+The point is coverage.  Measured on difference sets (`experiments/n8/small_k_theorem_v1`),
+`k = 0` alone settles about 50% of random 7-sets; allowing `k ≤ 2` at any flank settles about
+91%.  This does **not** prove Existence — the required `k` is unbounded
+(`experiments/n8/bounded_k_attack_v1` reaches `k = 369`) — it widens what is decided. -/
+
+/-- **A difference is clear at flank `e`'s `k`-th opening when its ratio sits in the band.**
+`k = 0` is Theorem 4.8. -/
+theorem clear_at_opening_of_band {e d : ℝ} (he : 0 < e) (k : ℕ) (M : ℤ)
+    (h1 : (n : ℝ) * (M : ℝ) + 1 ≤ (d / e) * ((n : ℝ) * (k : ℝ) + 1))
+    (h2 : (d / e) * ((n : ℝ) * (k : ℝ) + 1) ≤ (n : ℝ) * (M : ℝ) + (n : ℝ) - 1) :
+    (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e k) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  set y : ℝ := (d / e) * ((n : ℝ) * (k : ℝ) + 1) / (n : ℝ) - (M : ℝ) with hy
+  have hsplit : d * flankOpening n e k = y + (M : ℝ) := by
+    rw [position_at_flank he, hy]; field_simp; ring
+  have hninv : (n : ℝ) * (n : ℝ)⁻¹ = 1 := mul_inv_cancel₀ hn0.ne'
+  have key : (n : ℝ) * y = (d / e) * ((n : ℝ) * (k : ℝ) + 1) - (n : ℝ) * (M : ℝ) := by
+    rw [hy]; field_simp
+  -- `n·y ≥ 1 = n·(1/n)` and `n > 0`, so `y ≥ 1/n`; likewise at the top of the band
+  have hy1 : (n : ℝ)⁻¹ ≤ y := by
+    have hge : (1 : ℝ) ≤ (n : ℝ) * y := by rw [key]; linarith
+    have := mul_le_mul_of_nonneg_left hge (le_of_lt (inv_pos.mpr hn0))
+    rw [← mul_assoc, inv_mul_cancel₀ hn0.ne', one_mul, mul_one] at this
+    linarith
+  have hy2 : y ≤ 1 - (n : ℝ)⁻¹ := by
+    have hle : (n : ℝ) * y ≤ (n : ℝ) - 1 := by rw [key]; linarith
+    have := mul_le_mul_of_nonneg_left hle (le_of_lt (inv_pos.mpr hn0))
+    rw [← mul_assoc, inv_mul_cancel₀ hn0.ne', one_mul, mul_sub, mul_one,
+      inv_mul_cancel₀ hn0.ne'] at this
+    exact this
+  rw [hsplit]
+  exact circDist_ge_of_band M hy1 hy2
+
+/-- **It recovers Theorem 4.8 at `k = 0`.**  Taking `M = 0` and `k = 0` the band condition reads
+`e ≤ d ≤ (n−1)·e`, which at `n = 8` is `d_min ≤ d ≤ 7·d_min` — the hypothesis of
+`Construction8.ratio_condition`.  Stated so the relationship is checkable rather than asserted. -/
+theorem clear_at_bound_of_ratio {e d : ℝ} (he : 0 < e) (h1 : e ≤ d) (h7 : d ≤ ((n : ℝ) - 1) * e) :
+    (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e 0) := by
+  have hde1 : (1 : ℝ) ≤ d / e := (one_le_div he).mpr h1
+  have hde7 : d / e ≤ (n : ℝ) - 1 := by rw [div_le_iff₀ he]; linarith
+  refine clear_at_opening_of_band he 0 0 ?_ ?_ <;> push_cast <;> nlinarith [hde1, hde7]
+
+/-- **The subject is lonely at flank `e`'s `k`-th opening when every difference's ratio sits in
+some band.**  This is the form that decides a difference set. -/
+theorem lonely_at_opening_of_bands {ds : Finset ℝ} {e : ℝ} (he : 0 < e) (k : ℕ)
+    (h : ∀ d ∈ ds, ∃ M : ℤ, (n : ℝ) * (M : ℝ) + 1 ≤ (d / e) * ((n : ℝ) * (k : ℝ) + 1) ∧
+      (d / e) * ((n : ℝ) * (k : ℝ) + 1) ≤ (n : ℝ) * (M : ℝ) + (n : ℝ) - 1) :
+    Lonely n ds (flankOpening n e k) := by
+  intro d hd
+  obtain ⟨M, h1, h2⟩ := h d hd
+  exact clear_at_opening_of_band he k M h1 h2
+
+/-- **Existence for a difference set decided at a single opening.**  If some flank of `ds` has an
+opening at which every ratio lies in a band, the subject has a lonely instant. -/
+theorem exists_lonely_of_bands {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {e : ℝ} (he : e ∈ ds)
+    (k : ℕ)
+    (h : ∀ d ∈ ds, ∃ M : ℤ, (n : ℝ) * (M : ℝ) + 1 ≤ (d / e) * ((n : ℝ) * (k : ℝ) + 1) ∧
+      (d / e) * ((n : ℝ) * (k : ℝ) + 1) ≤ (n : ℝ) * (M : ℝ) + (n : ℝ) - 1) :
+    ∃ s : ℝ, 0 < s ∧ Lonely n ds s :=
+  ⟨flankOpening n e k, flankOpening_pos (hpos e he) k, lonely_at_opening_of_bands (hpos e he) k h⟩
+
 end Flanks
