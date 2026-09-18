@@ -1,0 +1,16 @@
+lonely openings examined: 226519
+  flank rank (0=smallest..6=largest): {0: 14562, 1: 13897, 2: 23272, 3: 31549, 4: 39285, 5: 45436, 6: 58518}
+  other-neighbour rank              : {0: 45386, 1: 37781, 2: 33272, 3: 31311, 4: 28059, 5: 27653, 6: 23057}
+
+  most common (flank rank, other-neighbour rank) pairs:
+     flank rank 6, neighbour rank 0: 14720
+     flank rank 6, neighbour rank 3: 9720
+     flank rank 5, neighbour rank 0: 9546
+     flank rank 6, neighbour rank 2: 9203
+     flank rank 6, neighbour rank 5: 8950
+     flank rank 5, neighbour rank 2: 8888
+     flank rank 4, neighbour rank 0: 8701
+     flank rank 6, neighbour rank 4: 8365
+
+  sets whose working flanks are ALL below rank 4: 0/19440
+  distribution of the LOWEST working rank: {0: 11074, 1: 3703, 2: 3359, 3: 1094, 4: 196, 5: 13, 6: 1}

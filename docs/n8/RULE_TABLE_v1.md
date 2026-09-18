@@ -200,3 +200,68 @@ cannot all sit at ranks `0–3`. Until (i) is pinned down I cannot check (ii), a
 named conjecture, with a unique known extremal set, stable across five exhaustive ranges — and a
 candidate reason for its constant. That is the first thing in this file worth trying to prove rather
 than measure.
+
+---
+
+## 7. (i) made precise, and the mechanism it exposes
+
+**The owner's statement.** The three speeds an isolation is affected by are **the subject and its two
+neighbours** on the circle at the isolation instant.
+
+In the subject's frame this is exact and elementary: the subject sits at `0`, and loneliness is
+precisely *both neighbours at distance `≥ 1/8`* — every other runner is further round, so no other
+constraint is active. At a flank opening the **flank is one of the two neighbours**, sitting at
+exactly `1/8`. So a working flank is a runner that can occupy one neighbour slot while the other
+neighbour stays clear.
+
+### 7a. What the neighbours actually are  `[VERIFIED — 226,519 lonely openings, exhaustive on [1,17]]`
+
+| rank (0 = smallest … 6 = largest) | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|
+| **flank** at a lonely opening | 14,562 | 13,897 | 23,272 | 31,549 | 39,285 | 45,436 | **58,518** |
+| **other neighbour** | **45,386** | 37,781 | 33,272 | 31,311 | 28,059 | 27,653 | 23,057 |
+
+**The two distributions run in opposite directions.** The flank is usually **large**; the other
+neighbour is usually **small**. The single most common configuration is `flank rank 6, neighbour
+rank 0` (14,720 openings) — the largest difference and the smallest.
+
+So the three speeds of an isolation are, typically: **the subject, the largest difference, and the
+smallest.** That is the owner's statement, made concrete.
+
+### 7b. The mechanism this gives, and it connects to a proved rule
+
+Why should the flank be large and the neighbour small? Because of R0′, which is **already proved**:
+
+    lonely at (b, k)  ⟹  b ≤ m·(n·k + 1)
+
+A *small* runner sits near the subject unless it has had time to travel — at flank `b`, opening `k`,
+the nearest runner reads `m(nk+1)/(nb)`, and below `k = ⌈(b/m − 1)/n⌉` it is inside the forbidden arc.
+**The small runners are the binding constraint, and clearing them costs openings.** A flank of size
+`b` supplies `b` openings, of which roughly `b(1 − 1/(n·m))` survive R0′.
+
+**Hence the three largest flanks: they are the ones that supply enough openings for the small runners
+to have cleared.** That is a mechanism in the framework's own objects — readings, openings, the
+nearest runner — and it is why `(4,5,6)` and not `(2,4,6)` survives.
+
+### 7c. Where (ii) now stands
+
+The statement to prove is unchanged and now has a direction of attack:
+
+> No `ds` has all of its working flanks at ranks `0–3`.
+
+Confirmed exhaustively: **0 of 19,440** sets on `[1,17]`, and 0 across every range tested. The
+distribution of the *lowest* working rank shows how rare the hard cases are:
+
+| lowest working rank | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|
+| sets | 11,074 | 3,703 | 3,359 | 1,094 | 196 | 13 | **1** |
+
+Only 210 sets of 19,440 need a flank of rank `≥ 4` at all, and exactly one needs rank 6 —
+`(2,3,4,5,6,7,16)`, the same extremal set at every range.
+
+**What is still missing.** R0′ says small runners cost openings; it does not yet say that the three
+largest flanks supply *enough*. Turning §7b into a proof means bounding, for the three largest `b`,
+the number of openings surviving R0′ from below by more than the other runners can block — and the
+union bound is vacuous there (`6 × 1/4 = 1.5`), so it needs the band arithmetic of `DOOR4_v1` §1, not
+a count. That is the concrete next step, and it is the first one in this file with both a proved
+ingredient and a named target.
