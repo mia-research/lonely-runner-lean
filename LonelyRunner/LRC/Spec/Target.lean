@@ -214,4 +214,45 @@ theorem exists_lonely_of_threeLargest (h : ThreeLargestFlanks) {ds : Finset ℝ}
   · obtain ⟨e, he, -, k, hk⟩ := h ds hpos hcard hne hint
     exact ⟨flankOpening 8 e k, flankOpening_pos (hpos e he) k, hk⟩
 
+/-! ## the framework's own form of the target
+
+`ExistenceAt8` quantifies over a **time** `s : ℝ`.  The construction does not: its statement runs over
+a runner and a lap index, both discrete, and its condition is a congruence.  No time appears, no frame
+is changed, and nothing is placed at `0` — `0` is the circle's start and close, and `d · s` is a
+**separation** between two moving runners, never a position.
+
+`ExistenceAt8_congruence` below is that form.  It is stated **alongside** `ExistenceAt8`, not in place
+of it: this file's rule is that a different statement is an amendment needing a recorded decision.
+What the two are worth relative to each other is pinned by the two theorems that follow.
+
+**They are equivalent on whole-number differences and not otherwise.**  `lonely_iff_emod_search`
+carries `hint`, so the congruence form says nothing about real difference sets, while `ExistenceAt8`
+covers them.  Adopting the congruence form as the target would therefore **drop the real case** —
+which `DOOR3_v1` measures as mathematically comfortable (margins 1.6× to 3.7× once any ratio is
+irrational) but expensive to formalise, since it needs a dense-orbit theorem on the `k`-torus that
+mathlib does not carry.  It would **not** touch the difficulty: that sits entirely in the
+commensurable case, which both forms contain in full. -/
+
+/-- **The target in the framework's own objects.**  No time: a runner `b`, a lap `k`, and a congruence. -/
+def ExistenceAt8_congruence : Prop :=
+  ∀ ds : Finset ℝ, (∀ d ∈ ds, 0 < d) → ds.card ≤ 7 → ds.Nonempty →
+    (∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) →
+      ∃ b : ℤ, 0 < b ∧ (b : ℝ) ∈ ds ∧ ∃ k : ℕ, (k : ℤ) < b ∧
+        ∀ a : ℤ, (a : ℝ) ∈ ds →
+          b ≤ a * ((8 : ℤ) * (k : ℤ) + 1) % ((8 : ℤ) * b)
+          ∧ a * ((8 : ℤ) * (k : ℤ) + 1) % ((8 : ℤ) * b) ≤ (8 : ℤ) * b - b
+
+/-- **The classical form gives the framework's form**, on whole-number differences. -/
+theorem congruence_of_existence (h : ExistenceAt8) : ExistenceAt8_congruence := by
+  intro ds hpos hcard hne hint
+  exact (Flanks.lonely_iff_emod_search (n := 8) hpos hne hint).mp (h ds hpos hcard)
+
+/-- **And the framework's form gives Existence**, on whole-number differences.  This is the exact
+content of adopting it as the target: everything except the real case. -/
+theorem exists_lonely_of_congruence (h : ExistenceAt8_congruence) {ds : Finset ℝ}
+    (hpos : ∀ d ∈ ds, 0 < d) (hcard : ds.card ≤ 7) (hne : ds.Nonempty)
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) :
+    ∃ s, 0 < s ∧ Lonely 8 ds s :=
+  (Flanks.lonely_iff_emod_search (n := 8) hpos hne hint).mpr (h ds hpos hcard hne hint)
+
 end LRC.Spec
