@@ -1,0 +1,16 @@
+6.7 climb subject 393: 28 moves, 7 distinct setters, L_N = 2.3283
+   S_N = sum a(P_j)        = 3.0434   (L_N <= S_N : True)
+   sum over returns of b   = 5.9044
+   multiplicity mu = sumB/L_N = 2.536      (closure needs mu < 2.033)
+   implied coefficient S_N/L_N = 1.307      (closure needs < 1)
+6.9 row subject 1: 23 moves, 7 distinct setters, L_N = 2.3334
+   S_N = sum a(P_j)        = 3.0978   (L_N <= S_N : True)
+   sum over returns of b   = 5.5558
+   multiplicity mu = sumB/L_N = 2.381      (closure needs mu < 2.033)
+   implied coefficient S_N/L_N = 1.328      (closure needs < 1)
+
+random sample, 433 cascades:
+   mu          : min 0.000  median 0.000  max 1.537
+   S_N/L_N     : min 1.063  median 1.509  max 3.286
+   cascades with mu < 2.033 : 433/433
+   cascades with S_N/L_N < 1: 0/433   <-- must be 0, since L_N <= S_N

@@ -1,0 +1,25 @@
+[1] b(P) > a(P) for P >= 1?   cross-multiplying: (8P+7)(8P-1) > (8P+1)^2  <=>  32P > 8  <=> P > 1/4
+   P=   1: a=0.251314  b=0.510826  b>a True   ratio a/b = 0.491977
+   P=   2: a=0.125163  b=0.302281  b>a True   ratio a/b = 0.414062
+   P=   3: a=0.083382  b=0.215111  b>a True   ratio a/b = 0.387621
+   P=   5: a=0.050010  b=0.136576  b>a True   ratio a/b = 0.366174
+   P=  10: a=0.025001  b=0.071459  b>a True   ratio a/b = 0.349869
+   P= 100: a=0.002500  b=0.007463  b>a True   ratio a/b = 0.334999
+
+[2] is a(P)/b(P) MONOTONE, with the worst case at P=1?  (the memo flags this as unchecked)
+   decreasing over P=1..4000 : True
+   rho(1) = 0.491977   rho(10) = 0.349869   rho(4000) = 0.333375   limit 1/3 = 0.333333
+   so c_* = sup rho = rho(1) = log(9/7)/log(5/3) = 0.491977
+
+[3] IDENTIFICATION.  With s = 8P (the reading), expand for large P:
+   P=   10: a=0.02500130 vs 2/s=0.02500000   b=0.07145896 vs 6/s=0.07500000
+   P=  100: a=0.00250000 vs 2/s=0.00250000   b=0.00746272 vs 6/s=0.00750000
+   P= 1000: a=0.00025000 vs 2/s=0.00025000   b=0.00074963 vs 6/s=0.00075000
+   => a(P) ~ 2/s and b(P) ~ 6/s.  These ARE inequalities (i) and (iii) of LONG_RETURN_CIRCLE_v1.
+
+[4] THE COEFFICIENT.  Each runner's return intervals are DISJOINT and tile the run, so
+    sum_i b(P_i^x) <= L_N for each x, and over 7 runners sum_x sum_i b <= 7 L_N -- and that
+    is TIGHT when all seven set throughout.  Then S_N <= A + 7*c_* L_N.
+    c_* at P=1         c_*=0.4920  ->  7*c_* = 3.4438   FAILS (needs < 1)
+    c_* asymptotic     c_*=0.3333  ->  7*c_* = 2.3333   FAILS (needs < 1)
+    multiplicity needed for closure at c_*=0.4920: mu < 2.033
