@@ -110,4 +110,27 @@ theorem odd_clear_of_not_dvd {s R : ℤ} (hs : ¬ ((8 : ℤ) ∣ s)) (hR : Odd R
   have hco : IsCoprime (8 : ℤ) R := ⟨-k, R, by linarith [hsq]⟩
   exact hco.dvd_of_dvd_mul_right h
 
+
+
+/-! ## Integer readings make the blocking 8-periodic — the problem halves
+
+For an **integer** reading `s`, `s(R+8) − sR = 8s ≡ 0 (mod 8)`, so `R` and `R+8` have the same
+blocking status. Hence the two regions are translates: `[9,15] = [1,7] + 8`, and
+
+* the uncovered set of `[9,15]` is the uncovered set of `[1,7]` shifted by `8`;
+* the clear set is `8`-periodic, so it is non-empty in `[1,15]` iff it is non-empty in `[1,7]`;
+* therefore **for integer readings, `R ≤ 7` whenever a clear instant exists at all.**
+
+Observed exactly on the Branch-B minimiser `[3,4,5,7,11,24]`, whose four gaps in `[1,7]` —
+`(9/7, 31/24)`, `(41/11, 15/4)`, `(17/4, 47/11)`, `(161/24, 47/7)` — reappear in `[9,15]` shifted by
+`8`, with total uncovered `53/462` split evenly between the two regions. -/
+
+/-- **Integer readings block 8-periodically.**  The reading at `R + 8` differs from the reading at
+`R` by `8s`, a multiple of `8`, so the two are congruent and block together. -/
+theorem block_periodic {s R : ℤ} : s * (R + 8) - s * R = 8 * s := by ring
+
+/-- **Hence the same multiples are approached.**  `s(R+8) − 8M' = s·R − 8M` with `M' = M + s`, so a
+witness that `s` is in the way at `R` transfers verbatim to `R + 8`. -/
+theorem block_shift {s R M : ℤ} : s * (R + 8) - 8 * (M + s) = s * R - 8 * M := by ring
+
 end Guard
