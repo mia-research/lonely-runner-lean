@@ -1,0 +1,11 @@
+pairs measured: 6000
+  marginal clear density : mean 0.7498  (3/4 = 0.75)
+  joint minus product    : mean +0.0063  median +0.0024
+                           min -0.0398  max +0.2222
+  |deviation| > 0.05     : 312/6000
+  |deviation| > 0.15     : 1/6000
+  worst pair: a1=28 a2=56 b=84  p1=0.667 p2=0.667 p12=0.667 (product 0.444)
+
+count of lonely openings at b=max(ds) vs the independent prediction b*(3/4)^6:
+  ratio actual/predicted : min 0.261  10th 0.775  median 1.028  max 1.788
+  flanks with ZERO lonely openings: 0/2000
