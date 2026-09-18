@@ -90,6 +90,31 @@ obligation, not a reduction of it.
 The mechanism makes it concrete: by part 1, each activity of `d` strictly increases its lap, so
 `|S_d| < ∞` ⟺ `d`'s lap is bounded ⟺ the cascade is capped. Door 5 is a door, not a shortcut.
 
+### 3a. Audit of that equivalence
+
+Because `FAM_of_existence` is what denies the proposal its reduction, it was audited for the ways it
+could be manufactured rather than true.
+
+| check | result |
+|---|---|
+| `sorry` anywhere in `Spec/` or `Cascade/` | none |
+| axioms of `cascade_of_FAM`, `FAM_of_existence`, `FAM_iff_existence` | `[propext, Classical.choice, Quot.sound]` |
+| **is FAM proved outright?** | **no** — it occurs only as a hypothesis of `cascade_of_FAM` and a conclusion of `FAM_of_existence`. Were it provable, `cascade_of_FAM` would already have closed Existence, and the gate reports Existence unstated |
+| is FAM vacuous (the active sets always empty)? | no — 3,853 active-runner observations across 3,002 cascades |
+| is the equivalence prose or machine-checked? | machine-checked: `FAM_iff_existence : FiniteActiveMembership ↔ ExistenceAt8` |
+| does the proof lean on anything unsound? | `iterate_stable`, `lonely_of_fixed`, `target_forms_agree` — all pre-existing and axiom-clean |
+
+**Faithfulness of the definition**, which no build can check. The proposal sets
+`S_d = { j ∈ ℕ : d ∈ I(C_j) }` with `C_0 = 1/d_min`, and FAM is `|S_d| < ∞` for every `d`. The Lean
+definition is `{j : ℕ | inWay 8 d ((move 8 ds)^[j] (1/(8·m)))}.Finite` for every `d ∈ ds`, with `m`
+the minimum. `I(C_j)` is the set in the way at step `j`, which is `inWay`; and the proposal's `C` is
+`8t` in its own normalisation, so its `C_0 = 1/d_min` is this `t_0 = 1/(8·d_min)` — the same instant.
+No hypothesis was added and none dropped.
+
+**What this does and does not say about the proposal.** It denies it the status of a *reduction*.
+It does not touch parts 1 and 3, which are sound and are adopted, one of them supplying a theorem the
+tree did not have.
+
 **On the ratifications.** The proposal cites a tool that "ratified TRUE" both the simultaneous
 exhaustion and FAM. The same tool asserted `K ≤ 15` for every difference set; the §6.7 climb takes
 **K = 28** and the §6.9 row **K = 23**, both arrangements from this manuscript. Those ratifications
