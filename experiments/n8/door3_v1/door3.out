@@ -1,0 +1,12 @@
+[A] Q-independent (generic irrational) speeds: how close to 1/2 can we drive the MINIMUM?
+    60 sets: min 0.3905  median 0.4219  max 0.4600   (1/8 = 0.125, 1/2 = 0.5)
+    sets failing to reach 1/8 : 0
+    sets reaching 0.45 or better: 1
+
+[B] fully DEPENDENT speeds (all integer multiples of one unit) -- the hard case:
+    (1, 2, 3, 4, 5, 6, 7): best min-distance 0.125000  at t~0.125000   (exactly 1/8 = 0.125)
+    (1, 2, 3, 4, 5, 7, 12): best min-distance 0.125000  at t~0.125000   (exactly 1/8 = 0.125)
+    (1, 4, 5, 6, 7, 11, 13): best min-distance 0.125000  at t~0.125000   (exactly 1/8 = 0.125)
+
+[C] PARTIAL dependence: 6 integers plus one irrational -- does the free direction rescue it?
+    40 sets, worst best-min-distance 0.2000 (integers [4, 7, 9, 10, 14, 16] + 1 irrational)
