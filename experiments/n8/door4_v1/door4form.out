@@ -1,0 +1,5 @@
+[1] reformulation vs direct: 200000 cases, disagreements 0
+[2] flank a=b sits exactly on its window's left edge: 20000/20000
+[3] heuristic density of lonely openings at a flank: (3/4)^6 = 0.1780
+    observed at flank b=max(ds): median 0.1831  10th 0.1364  min 0.0476
+    flanks b=max with ZERO lonely openings: 0/3000

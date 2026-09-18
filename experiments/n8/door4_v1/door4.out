@@ -1,0 +1,13 @@
+=== the three tight sets, and the AP ===
+  (1, 2, 3, 4, 5, 6, 7):  per-flank lonely counts {1: 1, 2: 0, 3: 1, 4: 0, 5: 1, 6: 0, 7: 1}
+      best flank 1 with 1 of 1 openings;  total lonely openings 4
+  (1, 2, 3, 4, 5, 7, 12):  per-flank lonely counts {1: 1, 2: 0, 3: 1, 4: 0, 5: 1, 7: 1, 12: 0}
+      best flank 1 with 1 of 1 openings;  total lonely openings 4
+  (1, 4, 5, 6, 7, 11, 13):  per-flank lonely counts {1: 1, 4: 0, 5: 1, 6: 0, 7: 1, 11: 1, 13: 1}
+      best flank 1 with 1 of 1 openings;  total lonely openings 5
+
+=== is the best flank ever the MINIMUM?  the MAXIMUM?  neither? ===
+  4000 sets: best flank is the smallest 6, the largest 2150, neither 1844
+  sets with NO lonely opening at ANY flank: 0
+  hardest seen: max-over-flanks = 3  at ds=(6, 11, 12, 14, 15, 20, 24)
+      its profile {6: 3, 11: 1, 12: 1, 14: 2, 15: 3, 20: 3, 24: 3}

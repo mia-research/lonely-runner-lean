@@ -1,0 +1,11 @@
+20000 primitive difference sets
+   L1 flank=1, k=0  (1 in ds, no a divisible by 8)         829  (0.041)
+   L2 flank=min, k=0 (the bound)                         11167  (0.558)
+   L3 any flank, k=0                                     11167  (0.558)
+   L4 any flank, k<b (full door 4)                       20000  (1.000)
+
+   sets needing k>0 somewhere (L3 fails, L4 holds): 8833 (0.442)
+   examples: [(3, 8, 9, 29, 38, 52, 71), (4, 22, 25, 28, 34, 35, 40), (1, 25, 38, 40, 53, 66, 74), (9, 19, 26, 44, 61, 67, 69)]
+
+   total lonely openings per set: min 8  1% 18  median 38
+   sets with exactly ONE lonely opening in the whole search: 0
