@@ -102,4 +102,42 @@ theorem dmin_always_clear {c : ℤ} (hc : 0 < c) :
     c ≤ c % (8 * c) ∧ c % (8 * c) ≤ 7 * c :=
   clear_of_reading_le_seven hc le_rfl (by omega)
 
+
+
+/-! ## The criterion does not depend on `8`
+
+Nothing in `bad_iff`'s proof uses the value `8`, so the whole thing is a general-`n` statement with
+the constant `n − 1`. At `n = 8` that constant is `7` — Theorem 4.8's. So:
+
+> **at any order `n`, a subject clears at its own `d_min` whenever `S ≤ n − 1`**,
+
+and more precisely whenever every disparity has `c ≤ a mod nc ≤ (n−1)c`. The `n = 8` versions above
+are the `n := 8` instances. -/
+
+/-- `bad_iff` at arbitrary order. -/
+theorem bad_iff_gen {n c r : ℤ} (hc : 0 < c) (hn : 1 < n) (h0 : 0 ≤ r) (h1 : r < n * c) :
+    (∃ k : ℤ, |n * c * k + r| < c) ↔ (r < c ∨ (n - 1) * c < r) := by
+  constructor
+  · rintro ⟨k, hk⟩
+    rw [abs_lt] at hk
+    obtain ⟨hlo, hhi⟩ := hk
+    rcases lt_trichotomy k 0 with h | h | h
+    · right
+      have hk1 : k ≤ -1 := by omega
+      nlinarith [mul_le_mul_of_nonneg_left hk1 (le_of_lt (by nlinarith : (0:ℤ) < n * c))]
+    · subst h; left; simpa using hhi
+    · exfalso
+      have hk1 : 1 ≤ k := by omega
+      nlinarith [mul_le_mul_of_nonneg_left hk1 (le_of_lt (by nlinarith : (0:ℤ) < n * c))]
+  · rintro (h | h)
+    · exact ⟨0, by rw [abs_lt]; constructor <;> omega⟩
+    · exact ⟨-1, by rw [abs_lt]; constructor <;> nlinarith⟩
+
+/-- **`S ≤ n − 1` forces clearance at `d_min`, at every order.**  The `n = 8` case is
+`clear_of_reading_le_seven`, i.e. Theorem 4.8's constant. -/
+theorem clear_of_reading_le_gen {n a c : ℤ} (hc : 0 < c) (hlo : c ≤ a) (hhi : a ≤ (n - 1) * c) :
+    c ≤ a % (n * c) ∧ a % (n * c) ≤ (n - 1) * c := by
+  have h : a % (n * c) = a := Int.emod_eq_of_lt (by omega) (by nlinarith)
+  omega
+
 end DminClearance
