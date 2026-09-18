@@ -335,3 +335,59 @@ It is no longer "how many openings survive six interchangeable quarter-blockers"
 vacuous at `1.5`. It is: *inside the few long windows the slow runners leave, avoid the scattered
 holes the fast ones punch.* That is an argument about two kinds of obstruction, which is the sort the
 framework admits.
+
+---
+
+## 9. Reasoning the fast/slow split all the way through — it does not complete a door
+
+Asked whether §8's split could close one of the doors. It cannot, and the reason explains why `7/4`
+has been so robust.
+
+### 9a. Three routes, one number
+
+**Duration.** Runner `d` is in the way when `circDist(d·t) < 1/n`, so each blocking interval has
+length exactly `1/(4d)` and `d` blocks a fraction `1/4` of any span. Every cascade interval
+`[tⱼ, tⱼ₊₁)` lies inside one blocker's blocking interval, so the intervals partition the span among
+seven runners, each absorbing at most a quarter:
+
+    span ≤ 7 · span/4        vacuous at 7/4.
+
+**Move size.** `move` goes to the *latest* exit among blockers, so each move is at most
+`1/(4·d_setter) ≤ 1/(4m)`, giving `t_N − t₀ ≤ N/(4m)`.
+
+**Settings count.** After a move the setter has exited, so it must re-enter before setting again —
+each setting consumes a distinct blocking interval of that runner (this is
+`nextOpening_le_move`'s corollary, verified: laps strictly increase between activities). Hence
+`#settings by d ≤ d·span + 1` and `N ≤ (Σd)·span + 7`. With the move-size bound:
+
+    N · (1 − Σd/(4m)) ≤ 7,   and  Σd ≥ 7m,  so the coefficient is ≤ 1 − 7/4 < 0.
+
+Vacuous at `7/4` again, from a third direction.
+
+### 9b. Why `7/4` is invariant under this split
+
+**The blocking fraction is `1/4` for every runner, independent of speed** — measured 0.249–0.250
+across every speed band (§8a). The fast/slow asymmetry changes the **granularity** of the blocked set
+(9 runs of mean length 4.88 versus 45 of length 1.00) and not its **measure**.
+
+So every duration, counting or measure argument is blind to the split *by construction*: each sees
+only `7 × 1/4`. This is why the same constant has appeared in the union bound, the potential `Ψ`, the
+move count, Prop 6.11, the Long-Return circle (`7/3` after the depth factor) and now three more
+routes. It is one fact wearing different clothes.
+
+### 9c. What the split is actually good for
+
+It is not useless — it is simply not a measure statement. To use it one needs a claim about how the
+blocked sets **intersect**, not how large they are: the slow runners' blocks are few and long, so a
+single slow runner's blocked set is nearly an interval, while the fast runners' are nearly
+equidistributed. A statement of the form *"a nearly-equidistributed set of density 1/4 cannot cover
+the complement of a few intervals"* would do it — and that is a cancellation statement, which is the
+density machinery again.
+
+**So the split relocates the difficulty rather than removing it**: from "six interchangeable
+quarter-blockers" to "one or two interval-blockers plus four or five equidistributed ones". The
+second description is strictly more informative and still not sufficient.
+
+**Recorded so it is not re-derived.** Any future route that ends in a comparison of *total blocked
+measure* against *total span* will produce `7/4` and be vacuous, whatever the framing. The only
+routes with a chance are those that use where the blocked sets sit relative to **each other**.
