@@ -141,3 +141,62 @@ conditions shown exhaustive.
 **What would settle it**: an argument that the set of working flanks can never be confined to ranks
 `0–3`. The data says it is confined to a single flank exactly once in 77,400 sets, and that flank is
 the largest.
+
+---
+
+## 6. The Three-Largest-Flanks rule  `[CONJECTURE — stable across five exhaustive ranges]`
+
+> **Conjecture (TLF).** For every finite `ds ⊂ ℤ_{>0}` with `|ds| = 7` and `gcd(ds) = 1`, at least one
+> of the **three largest** differences serves as a flank with a lonely opening.
+>
+> With `Flanks.target_flank_agrees` this gives `ExistenceAt8` — door 4 — over whole numbers.
+
+### 6a. Evidence, and a retraction
+
+**I said `(2,4,6)` works equally well, undercutting any story about the three largest. That is
+wrong** — it was true only on the narrow range I had tested.
+
+| range | primitive sets | `(4,5,6)` fails | `(2,4,6)` fails | triples covering all |
+|---|---|---|---|---|
+| `[1,17]` | 19,440 | 0 | 0 | **2** |
+| `[1,20]` | 77,400 | 0 | 1 | **1** |
+| `[1,22]` | 170,213 | 0 | — | — |
+| `[1,24]` | **345,304** | **0** | **2** | **1** |
+| spread-biased sample | 40,000 | 0 | — | — |
+
+The winner count falls 2 → 1 and stays there. **`(4,5,6)` is the unique fixed triple that survives**,
+and it survives every widening. Over 500,000 sets, zero failures.
+
+### 6b. Why this is unlike everything else tried
+
+Every other rule in this file degraded as the range grew — the fitted single-flank list left 54
+uncovered on `[1,14]` and **107** on `[1,17]`; no pair ever reached 1.0 at any range. TLF does the
+opposite: its hard case is a **single set that does not multiply**.
+
+| working flanks per set | 1 | 2 | 3 | ≥4 |
+|---|---|---|---|---|
+| `[1,20]`, 77,400 sets | **1** | 40 | 657 | 76,702 |
+
+The one set with a unique working flank is `(2,3,4,5,6,7,16)` — **the same set at `[1,17]`, `[1,20]`
+and `[1,24]`** — and its flank is the largest. **No set at any range has its only working flank below
+rank 4.**
+
+### 6c. The owner's proposed reason, and what it still needs
+
+The suggestion: an isolation is affected by **three** different speeds, and since no two runners share
+a speed there is a birthday-style forcing that keeps the working flanks from collapsing onto the low
+ranks.
+
+That is the right *shape* of reason — it would explain the `3` and it would explain why distinctness
+matters — and the data is consistent with it: the number of working flanks is 6 at the median and
+collapses to 1 exactly once in 345,304 sets.
+
+**What it is not yet is a derivation.** To become one it needs: (i) a precise statement of which three
+speeds an isolation is "affected by", in the framework's objects; (ii) an argument that those three
+cannot all sit at ranks `0–3`. Until (i) is pinned down I cannot check (ii), and the rule stays
+`[CONJECTURE]`.
+
+**But the status has changed.** This is no longer a fitted rule with a growing residue. It is a single
+named conjecture, with a unique known extremal set, stable across five exhaustive ranges — and a
+candidate reason for its constant. That is the first thing in this file worth trying to prove rather
+than measure.

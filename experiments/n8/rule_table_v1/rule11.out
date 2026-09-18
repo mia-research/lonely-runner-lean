@@ -1,0 +1,8 @@
+[1,24] exhaustive: 345304 primitive sets
+   triple (4,5,6) fails on 0
+   triple (2,4,6) fails on 2
+      [(1, 4, 5, 6, 8, 14, 21), (2, 6, 7, 8, 9, 10, 19)]
+   sets with exactly ONE working flank: 1
+      its rank: {6: 1}
+      sets: [(2, 3, 4, 5, 6, 7, 16)]
+      any with the unique flank below rank 4: 0  []
