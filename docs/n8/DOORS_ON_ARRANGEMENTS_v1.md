@@ -1,5 +1,12 @@
 # The doors on arrangements: what each one says, what blocks it, what I need
 
+> **SUPERSEDED 2026-09-18 by `DOORS_ON_ARRANGEMENTS_v2.md`.** Header stamp only; the body is
+> unchanged and kept as the record. **Three statements in it are wrong**: door 2's "nothing bounds
+> the number of moves" (the move count is flat at 14-21 and arrival is inside the nearest runner's
+> first lap, max `τ = 33/56` exhaustively); door 3's "7 runners × 1/4 = 7/4" (the gap frame has
+> **eight** gaps summing to 1 and the demand is 1/4 out of 1 — the `7/4` is a union bound on blocked
+> time, a different frame); and §0's frame check printed statements containing opaque terms. See v2.
+
 **Date:** 2026-09-18
 **Lean:** `LonelyRunner/LRC/Spec/Doors.lean` — 20 declarations, zero `sorry`, all axiom-clean
 (`experiments/n8/v9_6_doors_axioms_v1.out`).
