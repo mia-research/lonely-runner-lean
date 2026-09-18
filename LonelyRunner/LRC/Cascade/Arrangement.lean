@@ -266,4 +266,63 @@ theorem exists_lonelyAt_iff_bounded {v : Fin 8 → ℝ} (hv : Function.Injective
     exact ⟨t, ht, lonelyAt_iff_lonely_diffSet.mpr hl⟩
 
 
+/-! ### The subject's two gaps
+
+`lonelyAt_iff_neighbours` says only the two neighbours bind.  Named as gaps, that reads: the subject
+is lonely exactly when the gap **ahead** of it and the gap **behind** it each reach `1/8`.
+
+This is the eight-runner picture, not a seven-runner one.  At an instant the eight runners cut the
+circle into **eight** gaps summing to `1` — there is a gap between the last runner and the first,
+because the circle closes.  The subject owns two of those eight, and `gapAhead_add_gapBehind_le_one`
+is the part of that identity the obligation actually uses: the subject's own two gaps are part of a
+whole of `1`.  So the demand is `1/8 + 1/8 = 1/4` of the circle, sitting in the subject's two gaps,
+out of the `1` available across all eight.  Equality throughout is the arithmetic progression.
+
+Verified against `LonelyAt` on 30,267 random instants, zero disagreements
+(`experiments/n8/gap_frame_check_v1`). -/
+
+/-- **The gap ahead of the subject**: the least fractional separation, i.e. the nearest runner in
+front. -/
+noncomputable def gapAhead (v : Fin 8 → ℝ) (k : Fin 8) (t : ℝ) : ℝ :=
+  (Finset.univ.erase k).inf' (others_nonempty k) (fun i => Int.fract (sep v k i t))
+
+/-- **The gap behind the subject**: what is left after the greatest fractional separation, i.e. the
+nearest runner behind. -/
+noncomputable def gapBehind (v : Fin 8 → ℝ) (k : Fin 8) (t : ℝ) : ℝ :=
+  1 - (Finset.univ.erase k).sup' (others_nonempty k) (fun i => Int.fract (sep v k i t))
+
+/-- **Lonely is: both of the subject's gaps reach `1/8`.** -/
+theorem lonelyAt_iff_gaps {v : Fin 8 → ℝ} {k : Fin 8} {t : ℝ} :
+    LonelyAt v k t ↔ (8 : ℝ)⁻¹ ≤ gapAhead v k t ∧ (8 : ℝ)⁻¹ ≤ gapBehind v k t := by
+  rw [lonelyAt_iff_neighbours]
+  unfold gapAhead gapBehind
+  constructor
+  · rintro ⟨h1, h2⟩; exact ⟨h1, by linarith⟩
+  · rintro ⟨h1, h2⟩; exact ⟨h1, by linarith⟩
+
+/-- **The subject's two gaps are part of a whole of `1`.**  The other six gaps of the eight hold the
+rest, so the obligation asks for `1/4` of the circle out of `1` — not for more circle than exists. -/
+theorem gapAhead_add_gapBehind_le_one (v : Fin 8 → ℝ) (k : Fin 8) (t : ℝ) :
+    gapAhead v k t + gapBehind v k t ≤ 1 := by
+  unfold gapAhead gapBehind
+  obtain ⟨i, hi⟩ := others_nonempty k
+  have h : (Finset.univ.erase k).inf' (others_nonempty k) (fun i => Int.fract (sep v k i t))
+      ≤ (Finset.univ.erase k).sup' (others_nonempty k) (fun i => Int.fract (sep v k i t)) :=
+    le_trans (Finset.inf'_le (fun i => Int.fract (sep v k i t)) hi)
+      (Finset.le_sup' (fun i => Int.fract (sep v k i t)) hi)
+  linarith
+
+/-- **Both gaps are nonnegative**, so `1/4` is a demand on a circle of `1` and nothing is being asked
+twice. -/
+theorem gapAhead_nonneg (v : Fin 8 → ℝ) (k : Fin 8) (t : ℝ) : 0 ≤ gapAhead v k t := by
+  unfold gapAhead
+  exact Finset.le_inf' _ _ (fun i _ => Int.fract_nonneg _)
+
+theorem gapBehind_nonneg (v : Fin 8 → ℝ) (k : Fin 8) (t : ℝ) : 0 ≤ gapBehind v k t := by
+  unfold gapBehind
+  have : (Finset.univ.erase k).sup' (others_nonempty k) (fun i => Int.fract (sep v k i t)) ≤ 1 :=
+    Finset.sup'_le _ _ (fun i _ => le_of_lt (Int.fract_lt_one _))
+  linarith
+
+
 end Arrangement

@@ -277,4 +277,70 @@ theorem existenceOnArrangements_iff_isolated :
     exists_congr fun t => and_congr_right fun _ => lonelyAt_iff_blockDegree_zero
 
 
+/-! ## door 3 with the cap written down
+
+`DoorCapped` asks for *some* `U`.  Measurement names one: across **170,213 primitive 7-sets**
+exhaustively (every primitive 7-subset of `[1,22]`), the cascade always arrives, and the arrival
+instant measured in the **nearest runner's own laps** — `τ = e·t` for `e` the least disparity — never
+exceeds `33/56 = 0.58929…`, attained at `(2,6,8,9,11,14,15)` and unchanged as the range grows.
+`33/56` is `(4 + 1/8)/7`.
+
+So the cascade arrives **inside the nearest runner's first lap**.  That is a scale statement: the
+nearest disparity sets the clock, and however far out of scale the other six are, the cascade is done
+before that clock completes one turn.  `DoorFirstLap` states it with the cap written down, and it
+gives the target because it is a `DoorCapped` with `U = 1/e`.
+
+`[EMPIRICAL — exhaustive on [1,22], 170,213 sets; not proved]`  The Lean below proves only that the
+cap **suffices**, never that it holds. -/
+
+/-- **Door 3, with the cap named.**  The cascade never passes `1/e` — one lap of the nearest
+runner. -/
+def DoorFirstLap (v : Fin 8 → ℝ) (k : Fin 8) : Prop :=
+  ∀ N : ℕ, (move 8 (diffSet v k))^[N] (firstReading v k) ≤ 1 / leastDisp v k
+
+/-- **The named cap is a cap**, so door 3 with `U = 1/e` is still the obligation. -/
+theorem doorCapped_of_doorFirstLap {v : Fin 8 → ℝ} {k : Fin 8} (h : DoorFirstLap v k) :
+    DoorCapped v k := ⟨1 / leastDisp v k, h⟩
+
+/-- **And it closes the conjecture.**  Nothing here proves the cap holds. -/
+theorem lonelyRunnerAt8_of_doorFirstLap
+    (h : ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8, DoorFirstLap v k) :
+    LonelyRunnerAt8 :=
+  fun v hv k => (doorCapped_iff hv k).mp (doorCapped_of_doorFirstLap (h v hv k))
+
+/-! ## door 5, and what it cannot be strengthened to
+
+`DoorThreeLargest` measured on **35,872** sets (random 7-subsets of `[1,20]`, `[1,30]`, `[1,45]`,
+`[1,70]`, plus every primitive arithmetic progression `a + d·i`, `a ≤ 39`, `d ≤ 24`): the best
+available flank rank from the large end was `1` in 35,785 cases, `2` in 84, `3` in 3, and **never 4**.
+So three is the right number and it is attained.  `[EMPIRICAL — 35,872 sets]`
+
+The obvious strengthening — take the **largest** disparity — is **refuted**: `(2,3,5,7,8,13,16)` has
+no lonely opening at flank `16`, and needs flank `13`, lap `1`.  The three sets needing rank three are
+`(1,3,5,7,8,14,16)` at flank `8` lap `2`, `(1,4,5,6,7,8,14)` at flank `7` lap `2`, and
+`(1,3,4,5,7,12,16)` at flank `7` lap `3`. -/
+
+/-- **Door 5 with the largest disparity only.**  Stated so that the refutation has something to name —
+this is `[REFUTED]` as a universal statement by `(2,3,5,7,8,13,16)`. -/
+def DoorLargestFlank (v : Fin 8 → ℝ) (k : Fin 8) : Prop :=
+  ∃ i : Fin 8, i ≠ k ∧
+    (∀ i' : Fin 8, i' ≠ k → |v i' - v k| ≤ |v i - v k|) ∧
+    ∃ j : ℕ, LonelyAt v k (flankOpening 8 |v i - v k| j)
+
+/-- **The largest-flank form is a special case of door 5**, so the refutation of the first says
+nothing against the second. -/
+theorem doorThreeLargest_of_doorLargestFlank {v : Fin 8 → ℝ} (hv : Function.Injective v)
+    {k : Fin 8} (h : DoorLargestFlank v k) : DoorThreeLargest v k := by
+  classical
+  obtain ⟨i, hi, hmax, j, hj⟩ := h
+  refine ⟨i, hi, ?_, j, hj⟩
+  have : ((diffSet v k).filter (fun d => |v i - v k| < d)) = ∅ := by
+    rw [Finset.filter_eq_empty_iff]
+    intro d hd
+    obtain ⟨i', hi', rfl⟩ := mem_diffSet.mp hd
+    exact not_lt.mpr (hmax i' hi')
+  rw [this]
+  simp
+
+
 end LRC.Spec
