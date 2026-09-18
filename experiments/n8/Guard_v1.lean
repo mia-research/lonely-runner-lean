@@ -87,4 +87,27 @@ theorem unguarded_width {g R ε δ : ℝ} {k : ℤ} (hg : 0 < g) (hε : 0 < ε) 
   rw [lt_div_iff₀ hge] at hlt
   nlinarith [hR]
 
+
+
+/-! ## The integer case, in general
+
+`ap_clear_at_odd` is the AP's instance of a fact that needs no bound on the reading: for **integer**
+readings, an odd `R` is clear unless the reading is itself divisible by `8`. So an integer profile
+with no reading `≡ 0 (mod 8)` has all eight odd integers of `[1,15]` clear, and `R_final = 1`.
+
+This is the residue partition seen from the covering side: the colliding readings — those divisible
+by `8` — are exactly the ones that can block every odd instant at once. -/
+
+/-- **Integer readings, general form.**  For an odd `R`, the product `s·R` is divisible by `8` only
+if `s` is.  So a reading not divisible by `8` leaves every odd instant clear. -/
+theorem odd_clear_of_not_dvd {s R : ℤ} (hs : ¬ ((8 : ℤ) ∣ s)) (hR : Odd R) :
+    ¬ ((8 : ℤ) ∣ s * R) := by
+  intro h
+  apply hs
+  obtain ⟨m, hm⟩ := hR
+  obtain ⟨k, hk⟩ := Int.even_mul_succ_self m
+  have hsq : R * R = 8 * k + 1 := by subst hm; nlinarith [hk]
+  have hco : IsCoprime (8 : ℤ) R := ⟨-k, R, by linarith [hsq]⟩
+  exact hco.dvd_of_dvd_mul_right h
+
 end Guard
