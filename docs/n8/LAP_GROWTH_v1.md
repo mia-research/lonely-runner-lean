@@ -104,5 +104,26 @@ proofs, it does not find them.
 capped, `exists_fixed_of_capped` gives finitely many moves, so the product is finite. The two are
 **equivalent**. Recasting the obligation in terms of the laps is not a refinement.
 
-Termination is **open**. It is equivalent to `ExistenceAt8`, hence to LRC(8), settled in 2025 by
-computer verification. No route in this document is one, and none is offered.
+Termination is **open**. No route in this document is one, and none is offered.
+
+**A correction to how I had been framing this.** I wrote elsewhere that termination "is equivalent to
+`ExistenceAt8`, hence to LRC(8), settled in 2025 by computer verification", in a position where it
+read as a bar — as though a proof here had to reach the shape or the scale of that search. **That
+inference is invalid.** Equivalence of *statements* says nothing about equivalence of *proof
+methods*: a true statement can carry both a long computational proof and a short analytic one, and
+which exist is not settled by the fact that one does.
+
+What Rosenfeld 2025 legitimately supplies is that the statement is **true** — which helps, since it
+means no route here is hunting something false. It supplies no constraint on proof shape whatever.
+
+And the record in this tree runs the other way. Every order settled before 8 has a **published
+analytic proof**, formalised here: `TerminationThree` and `TerminationFour` are the framework's own,
+Bienia–Goddyn–Gvozdjak–Sebő–Tarsi 1998 covers 4 and 5, BHK 2001 covers 6, Barajas–Serra 2008 covers
+7. None is a computer search. So "order 8 needs a computation" is a claim about publication history,
+not about the problem.
+
+None of the refutations in this document or in `LONG_RETURN_CIRCLE_v1` used that fact as a premise.
+They are self-contained — a forcing argument, a frequency argument, and measurements against named
+arrangements. The error was in the framing, and the framing was doing the deflationary thing the
+project instructions name: converting an absence in my own information into a deficiency in the
+thing.
