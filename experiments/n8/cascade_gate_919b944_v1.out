@@ -1,0 +1,31 @@
+== [0] build-artefact integrity ==  (t+0s)
+  clean
+   ...[0] took 0s
+== [1] build every cascade module ==  (t+0s)
+  modules: 20
+Build completed successfully (3363 jobs).
+   ...[1] took 8s
+== [2] sorry inventory ==  (t+8s)
+  none
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+8s)
+  clean
+   ...[2b] took 0s
+== [3] axiom check, every theorem ==  (t+8s)
+  4752 of 4752 clean
+  of which: 276 structural, 4476 generated census instances (94%)
+   ...[3] took 794s
+== [4] the open statement (Existence at order 8) must NOT be stated ==  (t+802s)
+  clean (unstated, as intended)
+   ...[4] took 0s
+== [5] irrational ratios must remain covered, by name ==  (t+802s)
+  clean (5 declarations present)
+   ...[5] took 0s
+== [6] the manuscript's recorded figures must match this tree ==  (t+802s)
+  STALE in ../docs/n8/MANUSCRIPT_v9_6.md -- theorems(4,752) structural(276) digest(56696dd9...) commit(919b944)
+  The manuscript records figures a reader is told to reproduce. Update them, or
+  say in the manuscript why they describe a different commit.
+   ...[6] took 0s
+== total: 802s ==
+
+GATE FAIL.
