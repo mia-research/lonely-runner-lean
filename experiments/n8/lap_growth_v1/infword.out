@@ -1,0 +1,21 @@
+Frequency test: need f_x/rho_x < A/3 for all x, with sum_x f_x/rho_x = A.
+  7 equal terms give A/7 < A/3.  Satisfiable.  No contradiction available.
+
+explicit round-robin word on rho = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
+   x=0: need 3/rho_x = 3.000   window supplies 4.518   OK
+   x=1: need 3/rho_x = 2.727   window supplies 4.609   OK
+   x=2: need 3/rho_x = 2.500   window supplies 4.684   OK
+   x=3: need 3/rho_x = 2.308   window supplies 4.748   OK
+   x=4: need 3/rho_x = 2.143   window supplies 4.803   OK
+   x=5: need 3/rho_x = 2.000   window supplies 4.851   OK
+   x=6: need 3/rho_x = 1.875   window supplies 4.893   OK
+
+  infinite round-robin word satisfies the condition at EVERY return: True
+  => the scale-free return condition does NOT forbid an infinite setter word.
+
+how clustered must the ratios be for round-robin to work?
+   ratios spread over [1, 1.10] : worst margin +2.673  satisfiable
+   ratios spread over [1, 1.50] : worst margin +1.703  satisfiable
+   ratios spread over [1, 2.00] : worst margin +0.919  satisfiable
+   ratios spread over [1, 3.00] : worst margin -0.013  blocked
+   ratios spread over [1, 6.00] : worst margin -1.203  blocked

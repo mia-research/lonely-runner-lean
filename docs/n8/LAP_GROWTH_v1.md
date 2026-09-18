@@ -77,8 +77,32 @@ Standing, and measured exactly: the lap law of §1 and the scale-free return con
 
 Not standing: any invariant asserting the nearest runner stays clear.
 
-**The next question**, and it is now a finite one: the return condition `3/ρ_x < Σ_{window} 1/ρ_j`
-involves only the seven ratios. A cascade that never terminates must satisfy it at every return,
-forever, drawing windows from a **fixed** set of seven values. Whether an infinite setter word can do
-that is a combinatorial question about seven numbers — not about trajectories, and not a counting
-bound of the kind that has died at `2k < n` five times.
+## 6. That question is now answered, and the answer closes the route  `[REFUTED]`
+
+I proposed: a cascade that never terminates must satisfy `3/ρ_x < Σ_{window} 1/ρ_j` at every return
+forever, drawing windows from a fixed set of seven values — so perhaps no infinite setter word can.
+
+**It can.** If letter `x` has frequency `f_x`, consecutive occurrences are `≈ 1/f_x` apart, so the
+window supplies `≈ A/f_x` with `A = Σ_y f_y/ρ_y`. The condition becomes `f_x/ρ_x < A/3` for every `x`
+— but `Σ_x f_x/ρ_x = A` exactly. Seven non-negative terms summing to `A`, each required below `A/3`:
+satisfiable whenever four or more letters carry weight. **No contradiction is available.**
+
+Explicit witness: the round-robin word on `ρ = (1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6)` satisfies it at
+every return, margins 1.5 to 3.0 (`infword.out`). The condition does bite once the ratios spread past
+about `[1, 3]`, and LRC must hold for clustered ratios too, so that does not rescue it.
+
+So the scale-free condition is a true necessary condition and is too weak to force termination.
+
+## 7. Status of termination, stated without a successor route
+
+`CascadeCapped` was put to Lean directly (`try_cap.lean`): `exact?` cannot close it and `aesop` fails
+after exhaustive search. That only confirms nothing already in the tree suffices — Lean checks
+proofs, it does not find them.
+
+**The residue cannot be usefully restated.** `nearest_reading_recurrence` gives
+`τ_N ≤ (1/n)·∏ (Q_j + 1/n)/(Q_j − 1/n)`, so a bounded lap product implies `CascadeCapped`; and if
+capped, `exists_fixed_of_capped` gives finitely many moves, so the product is finite. The two are
+**equivalent**. Recasting the obligation in terms of the laps is not a refinement.
+
+Termination is **open**. It is equivalent to `ExistenceAt8`, hence to LRC(8), settled in 2025 by
+computer verification. No route in this document is one, and none is offered.
