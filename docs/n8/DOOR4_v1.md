@@ -175,3 +175,71 @@ Whatever controls the error at door 4 is finer than the relation lattice alone.
 **What it leaves.** The main term is right and robust — median ratio 1.013, never overwhelmed across
 4,000 flanks. Door 4's arithmetic remains favourable; what is missing is an error bound, and the
 measurement now says that bound cannot come from relation size by itself.
+
+---
+
+## 9. Two locators, six conditions — the owner's split, tested
+
+**The suggestion.** Loneliness constrains only the subject's **two adjacent gaps**; the other six of
+the eight gaps are free. So perhaps the error is tied to the six free gaps rather than to the two
+that locate the isolation event.
+
+### 9a. The locators are real, and they have an arithmetic identity  `[VERIFIED]`
+
+At `t = 1/8` a runner's distance is `circDist(a/8) = min(a mod 8, 8 − a mod 8)/8`. So:
+
+    distance exactly 1/8  ⟺  a ≡ ±1 (mod 8)
+    distance  < 1/8       ⟺  a ≡ 0  (mod 8)
+
+Checked on the three tight configurations at their **unique** lonely opening (`b = 1`, `k = 0`):
+
+| tight set | distances | exactly at `1/8` |
+|---|---|---|
+| `{1,2,3,4,5,6,7}` | `1/8, 1/4, 3/8, 1/2, 3/8, 1/4, 1/8` | **1 and 7** |
+| `{1,2,3,4,5,7,12}` | `1/8, 1/4, 3/8, 1/2, 3/8, 1/8, 1/2` | **1 and 7** |
+| `{1,4,5,6,7,11,13}` | `1/8, 1/2, 3/8, 1/4, 1/8, 3/8, 3/8` | **1 and 7** |
+
+**Every one is located by exactly two runners, and in every case they are the residues `±1 (mod 8)`
+— here `1` and `7`.** That is a clean identification of the objects the owner named, and it was not
+in the record.
+
+It also explains §3: at `b = 1, k = 0` the criterion is *no difference divisible by 8*, i.e. no
+runner at residue `0`; the runners at `±1` sit on the boundary and are clear by the `≤` in `Lonely`.
+
+### 9b. At solutions, almost nothing else is tight  `[VERIFIED]`
+
+Runners within `1/8 + 1/100` of the subject, over 21,678 lonely openings:
+
+| runners near the boundary | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| openings | **17,905** | 3,322 | 368 | 67 | 14 | 2 |
+
+**83% of lonely openings have exactly one runner near the boundary**, 15% have two. So at a solution
+the other five have genuine slack — the constraint is six-dimensional but few conditions are active
+where it is satisfied.
+
+### 9c. But the exclusion does not concentrate — the strong form fails  `[REFUTED]`
+
+If the six conditions were really two-plus-free, blocking would concentrate in two runners. It does
+not. Over 1,500 flanks, the share of all blocking done by the top two runners:
+
+| | min | median | max | six equal would give |
+|---|---|---|---|---|
+| all blocking | 0.333 | **0.344** | 0.475 | 0.333 |
+| sole blocking | 0.353 | 0.450 | 0.767 | 0.333 |
+
+**Median 0.344 against 0.333 — the six block essentially uniformly.** The concentration in *sole*
+blocking is mild (0.450). So the error cannot be attributed to a distinguished pair: which runners
+are tight varies with `k`, and every runner blocks its share.
+
+### 9d. What this leaves
+
+The split is real at **solutions** and false at **constraints**. Two runners locate the isolation
+event — identified here as the residues `±1 (mod 8)` — and at a typical solution only one runner is
+even close to binding. But all six conditions do equal work in excluding the non-solutions, so an
+error bound cannot be built by demoting four of them.
+
+The usable part is 9a: the extremal configurations are exactly those carrying runners at `±1 (mod 8)`
+with nothing at `0 (mod 8)`, and their single lonely opening is `t = 1/8`. That is a complete
+description of where door 4 is tight, in residues, and it is the sharpest handle yet on the three
+cases any proof has to be exact at.
