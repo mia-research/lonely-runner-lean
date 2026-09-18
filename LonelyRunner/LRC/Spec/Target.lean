@@ -176,4 +176,10 @@ theorem FAM_of_existence (h : ExistenceAt8) : FiniteActiveMembership := by
   rw [Set.mem_setOf_eq, FourDifferences.iterate_stable (n := 8) hfix i] at hj
   exact absurd (lonely_of_fixed hpos hfix d hd) (not_le.mpr hj)
 
+/-- **So FAM is exactly the target.**  Machine-checked, so the claim that it is a weaker or
+"internal" obligation cannot rest on prose.  Composing `cascade_of_FAM` with `target_forms_agree`
+one way and `FAM_of_existence` the other. -/
+theorem FAM_iff_existence : FiniteActiveMembership ↔ ExistenceAt8 :=
+  ⟨fun h => target_forms_agree.mpr (cascade_of_FAM h), FAM_of_existence⟩
+
 end LRC.Spec
