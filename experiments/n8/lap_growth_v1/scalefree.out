@@ -1,0 +1,5 @@
+6.7 climb: returns 21, law holds 21, FAILS 0;  need/supplied med 0.524 max 0.629
+6.9 row: returns 16, law holds 16, FAILS 0;  need/supplied med 0.563 max 0.650
+random: returns 164, law holds 164, FAILS 0
+   need/supplied  median 0.565  90th 0.667  max 0.706  (<1 = satisfied)
+   SLOWEST runner (rho=1): set 0 times of 5282, and RETURNED 0 times

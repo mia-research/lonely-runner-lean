@@ -1,0 +1,14 @@
+6.7 climb subject 393: 28 moves, Q > (rho-1)/8 violations: 0
+   Q / lower bound : min 1.24  median 5.68  max 12.71
+6.9 row subject 1: 23 moves, Q > (rho-1)/8 violations: 0
+   Q / lower bound : min 1.24  median 5.58  max 16.36
+random: 6941 moves, violations 0
+
+growth a setter of ratio rho can supply, from the bound alone:
+   rho=  1: Q >= 1.000  ->  factor <= 1.2857
+   rho=  2: Q >= 1.000  ->  factor <= 1.2857
+   rho=  4: Q >= 1.000  ->  factor <= 1.2857
+   rho=  8: Q >= 1.000  ->  factor <= 1.2857
+   rho= 16: Q >= 1.875  ->  factor <= 1.1429
+   rho= 32: Q >= 3.875  ->  factor <= 1.0667
+   rho= 64: Q >= 7.875  ->  factor <= 1.0323

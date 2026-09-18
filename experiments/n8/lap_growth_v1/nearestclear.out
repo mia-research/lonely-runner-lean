@@ -1,0 +1,6 @@
+6.7 climb: 29 instants, max tau 1.283, instants where NEAREST is in the way: 1, times it SET: 1
+6.9 row: 24 instants, max tau 1.289, instants where NEAREST is in the way: 1, times it SET: 1
+
+spread-biased search: 40000 arriving cascades
+   cascades where the NEAREST is ever in the way at an instant: 0
+   CONTROL, SECOND-slowest ever in the way: 290/4000 cascades (0 would mean the test is blind)

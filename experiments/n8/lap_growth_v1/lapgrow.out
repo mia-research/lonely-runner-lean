@@ -1,0 +1,5 @@
+[1] 3454 moves:  Q = rho*tau +- h  violations 0;  0 < d(tau) <= 2h/rho violations 0
+[2] 6.7 climb: median rho of setters INSIDE return windows 5.84  vs ALL setters 5.84
+[2] 6.9 row: median rho of setters INSIDE return windows 5.30  vs ALL setters 5.30
+[2] random: median rho inside return windows 7.85 vs all setters 8.45   (n_window=759, n_all=5463)
+    fraction of window setters with rho < 2 : 0.000   vs all setters 0.000
