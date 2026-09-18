@@ -447,3 +447,75 @@ at the extremes; it is in the ordinary middle, where nothing distinguished picks
 That is the opposite of what the density measurements suggested (§§11–12 of `DOOR4_v1`, where the
 worst error sat at `Σ ds ≈ 50`, in the middle) — and it is the same answer read from the native side.
 Both say: **the hard cases for naming are the generic ones, not the extremal ones.**
+
+---
+
+## 11. Named instants: the flank does not have to be in `ds`
+
+Asked whether the AP structure lets us **bound the flanks**. It does, and it exposed a freedom the
+whole search had been giving away.
+
+### 11a. The flank-hosting rule, derived  `[PROVED reasoning, VERIFIED 236/236]`
+
+`t = j/8` is an opening of flank `b` iff `8k + 1 = jb` for some `k ≥ 0`, which forces `jb ≡ 1 (mod 8)`.
+Every odd residue is self-inverse mod 8, so for odd `j`:
+
+    t = j/8 is an opening of flank b   ⟺   b ≡ j (mod 8)
+
+That is why flanks `1, 3, 5, 7` host `1/8, 3/8, 5/8, 7/8`, one each — §10a's observation, now derived
+rather than observed.
+
+### 11b. The freedom that had been thrown away
+
+`ExistenceAt8` asks for a lonely **instant**, not a lonely flank opening — and
+`clear_at_int_flank_iff_emod` places **no membership hypothesis on the flank**. So an instant may be
+named as `(k + 1/n)/c` for *any* whole `c`, in or out of `ds`.
+
+    Flanks.lonely_at_named_instant      `[PROVED]`
+    Flanks.exists_lonely_of_named_instant `[PROVED]`
+
+Naming an instant is therefore: **choose a pair `(c, k)`, check one residue condition per
+difference.** All axiom-clean, build 2443 jobs.
+
+### 11c. The `c = 1` case is a theorem on its own
+
+`circDist(a/n) ≥ 1/n` unless `n ∣ a`. So:
+
+> **If no difference is divisible by `n`, then `1/n` is lonely.**
+> `Flanks.lonely_at_inv_of_not_dvd`, `exists_lonely_of_not_dvd` — `[PROVED]`, axiom-clean.
+
+It does **not** require `1 ∈ ds`. Measured coverage at `n = 8`: **0.4201** of primitive 7-sets,
+against `(7/8)^7 = 0.3927`, and **0 failures in 79,336** checks.
+
+This is an *exhibition* in `FRAMEWORK_CONJECTURE_v1` §3's sense — the instant is written down — and it
+is the first one in this file.
+
+### 11d. How far `k = 0` with free `c` reaches
+
+`t = 1/(8c)` is lonely iff `a mod 8c ∈ [c, 7c]` for every `a`:
+
+| | coverage |
+|---|---|
+| `c = 1` | 0.4201 |
+| `c ≤ 2` | 0.5264 |
+| `c ≤ 10` | 0.9090 |
+| any `c ≤ 4000` | **0.9420** |
+
+Median smallest `c` is **2**, 90th percentile 10, largest found 43. Exhaustively on `[1,14]` the
+largest smallest-`c` is **2**.
+
+**But 5.8% have no `c` at all** — including `(2,3,4,5,6,7,16)`, the unique one-flank set of §6b. The
+limitation is the numerator: this fixes `u = 1`, while the general instant is `u/(8c)` with
+`u ≡ 1 (mod 8)`, i.e. `k > 0`.
+
+### 11e. Where the rule table now stands
+
+| rule | instant | condition | coverage | status |
+|---|---|---|---|---|
+| R-A | `1/8` | no difference divisible by 8 | 0.420 | **`[PROVED]`** |
+| R-B | `1/(8c)` | `a mod 8c ∈ [c, 7c]` for all `a` | 0.942 | **`[PROVED]`** (same theorem, `k = 0`) |
+| R-C | `(k+1/8)/c` | the residue condition at `k > 0` | — | `[PROVED]` as a criterion; **no rule names `(c, k)`** |
+
+Two named instants are now proved and cover 94%. The gap is unchanged in kind but much narrower in
+scope: **what names `(c, k)` for the remaining 5.8%** — the sets carrying a difference divisible by 8
+in a configuration no single `c` clears.

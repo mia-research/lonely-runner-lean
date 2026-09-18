@@ -1,0 +1,17 @@
+20000 primitive sets;  no c <= 4000 found: 1159
+  smallest working c : min 1  median 2  90th 10  max 43
+  c=1 works (no a divisible by 8): 0.4201
+  smallest c <=    1: 0.4201
+  smallest c <=    2: 0.5264
+  smallest c <=    3: 0.6151
+  smallest c <=    5: 0.7463
+  smallest c <=   10: 0.9090
+  smallest c <=   50: 1.0000
+  smallest c <=  200: 1.0000
+
+exhaustive [1,14], and the named hard sets:
+   3431 sets, largest smallest-c = 2 at ds=(2, 3, 4, 5, 6, 7, 8)
+   (1, 2, 3, 4, 5, 6, 7)    smallest c = 1
+   (1, 2, 3, 4, 5, 7, 12)   smallest c = 1
+   (1, 4, 5, 6, 7, 11, 13)  smallest c = 1
+   (2, 3, 4, 5, 6, 7, 16)   smallest c = None
