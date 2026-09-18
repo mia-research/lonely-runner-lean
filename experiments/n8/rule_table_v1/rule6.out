@@ -1,0 +1,18 @@
+[1,14]  3431 primitive sets
+    nearest (R1)                         2639  (0.7692)
+    largest (fitted)                     3304  (0.9630)
+    worst blocker, global                2667  (0.7773)
+    worst blocker at nearest flank       3075  (0.8962)
+    R1 OR worst-blocker-global           3190  (0.9298)   uncovered 241
+    R1 OR largest (fitted)               3377  (0.9843)
+      uncovered examples: [(1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 4, 5, 8, 10), (1, 2, 3, 4, 5, 8, 14), (1, 2, 3, 4, 6, 7, 8)]
+
+[1,17]  19440 primitive sets
+    nearest (R1)                        11074  (0.5697)
+    largest (fitted)                    19166  (0.9859)
+    worst blocker, global               14567  (0.7493)
+    worst blocker at nearest flank      18476  (0.9504)
+    R1 OR worst-blocker-global          16286  (0.8378)   uncovered 3154
+    R1 OR largest (fitted)              19253  (0.9904)
+      uncovered examples: [(1, 2, 3, 4, 5, 6, 16), (1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 4, 5, 7, 16), (1, 2, 3, 4, 5, 8, 10)]
+

@@ -1,0 +1,18 @@
+[1,14]  3431 primitive sets
+   best single rank : rank 6 covers 0.9630
+   best pairs       : (4, 6)=0.9977, (3, 6)=0.9971, (5, 6)=0.9962
+   pairs covering ALL sets: NONE
+   best triples     : (4, 5, 6)=1.0000, (2, 4, 6)=1.0000, (3, 5, 6)=0.9997
+   triples covering ALL sets: [(4, 5, 6), (2, 4, 6)]
+   worst case: the smallest working rank is as high as 5
+   number of working flanks per set: min 2  median 6
+
+[1,17]  19440 primitive sets
+   best single rank : rank 6 covers 0.9859
+   best pairs       : (4, 6)=0.9993, (5, 6)=0.9987, (3, 6)=0.9986
+   pairs covering ALL sets: NONE
+   best triples     : (4, 5, 6)=1.0000, (2, 4, 6)=1.0000, (3, 5, 6)=0.9999
+   triples covering ALL sets: [(4, 5, 6), (2, 4, 6)]
+   worst case: the smallest working rank is as high as 6
+   number of working flanks per set: min 1  median 6
+

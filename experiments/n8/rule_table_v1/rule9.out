@@ -1,0 +1,10 @@
+[1,17] 19440 sets.  distribution of #working flanks: {1: 1, 2: 35, 3: 415, 4: 2051, 5: 5339, 6: 6908, 7: 4691}
+   sets with exactly ONE working flank: 1;  its rank: {6: 1}
+   examples: [((2, 3, 4, 5, 6, 7, 16), 6)]
+   any with the single working flank at rank < 4 (would break the triple): 0
+
+[1,20] 77400 sets.  distribution of #working flanks: {1: 1, 2: 40, 3: 657, 4: 4500, 5: 15305, 6: 28314, 7: 28583}
+   sets with exactly ONE working flank: 1;  its rank: {6: 1}
+   examples: [((2, 3, 4, 5, 6, 7, 16), 6)]
+   any with the single working flank at rank < 4 (would break the triple): 0
+
