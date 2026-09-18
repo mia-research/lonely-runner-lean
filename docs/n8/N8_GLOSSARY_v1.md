@@ -4,7 +4,7 @@
 `N8_LEAN_KERNEL_v1.md`, `N8_WHY_OTHER_ROUTES_FAIL_v1.md` and `N8_PROOF_ARGUMENTS_v1.md`.
 
 **Why this file exists.** The framework uses about forty terms with meanings specific to it, and
-several of them are ordinary English words. `OBJECT_REGISTER_v2.md` item 21 records the sharpest
+several of them are ordinary English words. `OBJECT_REGISTER_v3.md` item 21 records the sharpest
 case: the word **gap** was attached to two different objects across many exchanges, and every
 question asked about "whether a gap clears" read as a question about loneliness and was not one.
 The register calls that the most dangerous kind of error, because it survives any audit that
@@ -192,7 +192,7 @@ Each of these has caused a recorded error. This is the section to read before wr
 
 ## 11. A note on dated vocabulary
 
-`OBJECT_REGISTER_v2.md` §0 lists "the framework's own objects" as of **2026-09-14**, when the
+`OBJECT_REGISTER_v3.md` §0 lists "the framework's own objects" as of **2026-09-14**, when the
 construction was a rule-based procedure over lattice instants `p/(8D)` with integer scales
 `D = k·d_min`, and the cascade was `SKETCH_v7` §7c's three tiers. Several entries there —
 **candidates**, the **ceiling** `D ≤ 7·d_min`, the **enlarged tier**, the **output pair `(D, a)`** —

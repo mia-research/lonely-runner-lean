@@ -4,7 +4,7 @@
 
 **What this collects.** Three separate bodies of work, inlined here so each answer stands alone:
 
-- `OBJECT_REGISTER_v2.md` (28 items, append-only; §0a is the supersession table) — constructs imported against the framework,
+- `OBJECT_REGISTER_v3.md` (28 items, append-only; §0a is the supersession table) — constructs imported against the framework,
   each classified and refused with a reason;
 - `OBJECTION_LEDGER_v1.md` (append-only) — objections raised against the construction, each
   **tested rather than argued**, plus the false blockers that were raised and refuted;

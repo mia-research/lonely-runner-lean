@@ -1,7 +1,7 @@
 # The n = 8 Framework — Cheat Sheet
 
 **T. Palelei.** v1, 2026-09-18. Written to be read first, or pasted at the top of a session.
-Sources: `OBJECT_REGISTER_v2.md`, `OBJECTION_LEDGER_v1.md`, `MANUSCRIPT_v9_6.md` §6A, and the
+Sources: `OBJECT_REGISTER_v3.md`, `OBJECTION_LEDGER_v1.md`, `MANUSCRIPT_v9_6.md` §6A, and the
 owner's rulings of 2026-09-14, 09-15, 09-17 and 09-18.
 
 ---
@@ -160,7 +160,7 @@ A misplacement wears the framework's own word, so searching for foreign vocabula
 
 ## 8. What on this page is dated
 
-`OBJECT_REGISTER_v2.md` §0 describes the construction as of **2026-09-14** — a rule-based procedure
+`OBJECT_REGISTER_v3.md` §0 describes the construction as of **2026-09-14** — a rule-based procedure
 over lattice instants with **integer** scales and `4D` candidates per gap, and the cascade as
 `SKETCH_v7` §7c's three tiers. Its entries for *candidates*, the *ceiling* `D ≤ 7·d_min`, the
 *enlarged tier* and the *output pair `(D, a)`* describe that, not the present cascade. §2 above is
