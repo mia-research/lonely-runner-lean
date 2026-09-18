@@ -128,6 +128,21 @@ theorem le_move (ds : Finset ℝ) (t : ℝ) : t ≤ move n ds t := by
   rw [Finset.le_fold_max]
   exact Or.inl le_rfl
 
+/-- **One move clears every runner that was in the way, not only the setter.**  `move` is a fold of
+`max` over `ds`, so it reaches at least `nextOpening n d t` for *each* `d` in the way at `t` — the
+setter is merely the one attaining the maximum.
+
+So a single exact max-opening step exhausts the current blocking interval of every active runner
+simultaneously.  A consequence worth naming: between two successive times the same `d` is in the
+way, its lap strictly increases, since the move carries the instant past `d`'s current opening. -/
+theorem nextOpening_le_move {ds : Finset ℝ} {d t : ℝ} (hd : d ∈ ds) (hw : inWay n d t) :
+    nextOpening n d t ≤ move n ds t := by
+  classical
+  unfold move
+  rw [Finset.le_fold_max]
+  refine Or.inr ⟨d, hd, ?_⟩
+  simp [hw]
+
 /-- **A fixed point of the move is a lonely time.** -/
 theorem lonely_of_fixed {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {t : ℝ} (hfix : move n ds t = t) :
     Lonely n ds t := by

@@ -126,4 +126,54 @@ theorem capped_of_existence (h : ExistenceAt8) : CascadeCapped := by
   · obtain ⟨i, rfl⟩ : ∃ i, K = N + i := ⟨K - N, by omega⟩
     exact le_of_eq (FourDifferences.iterate_stable (n := 8) hfix i)
 
+/-! ## a fifth wording: Finite Active Membership
+
+Proposed as an *internal bridge* to Existence: along the cascade from the bound, each difference is
+in the way at only finitely many steps.  The argument offered for it is sound — seven finite sets
+have a finite union, and a non-terminating cascade has some runner in the way at every step, so `ℕ`
+would embed in that union.  `cascade_of_FAM` below is that argument, formalised.
+
+`FAM_of_existence` is the converse, and it is the point: **FAM is equivalent to the target, not
+weaker than it.**  So "prove FAM" is a restatement of the obligation, not a reduction of it.  The
+mechanism underneath is `Iteration.nextOpening_le_move` — one move clears every runner in the way,
+so a runner's lap strictly increases between successive activities, and its active set is finite
+exactly when its lap is bounded, which is exactly `CascadeCapped`. -/
+
+/-- **Finite Active Membership.**  Each difference is in the way at only finitely many cascade steps. -/
+def FiniteActiveMembership : Prop :=
+  ∀ ds : Finset ℝ, (∀ d ∈ ds, 0 < d) → ds.card ≤ 7 → ∀ m ∈ ds, (∀ d ∈ ds, m ≤ d) →
+    ∀ d ∈ ds, {j : ℕ | inWay 8 d ((move 8 ds)^[j] (1 / (8 * m)))}.Finite
+
+/-- **FAM gives the target.**  Seven finite active sets have a finite union; a cascade that never
+reaches a fixed point has someone in the way at every step, so `ℕ` would sit inside that union. -/
+theorem cascade_of_FAM (h : FiniteActiveMembership) : ExistenceAt8_cascade := by
+  intro ds hpos hcard hne m hm hmin
+  by_contra hno
+  push Not at hno
+  have hact : ∀ j : ℕ, ∃ d ∈ ds, inWay 8 d ((move 8 ds)^[j] (1 / (8 * m))) := by
+    intro j
+    rcases move_eq_self_or_opening (n := 8) ds ((move 8 ds)^[j] (1 / (8 * m))) with hfix | ⟨x, hx, hw, -⟩
+    · exact absurd hfix (hno j)
+    · exact ⟨x, hx, hw⟩
+  have hfin : (⋃ d ∈ ds, {j : ℕ | inWay 8 d ((move 8 ds)^[j] (1 / (8 * m)))}).Finite :=
+    Set.Finite.biUnion ds.finite_toSet (fun d hd => h ds hpos hcard m hm hmin d hd)
+  have huniv : (Set.univ : Set ℕ) ⊆ ⋃ d ∈ ds, {j : ℕ | inWay 8 d ((move 8 ds)^[j] (1 / (8 * m)))} := by
+    intro j _
+    obtain ⟨d, hd, hw⟩ := hact j
+    exact Set.mem_biUnion hd hw
+  exact Set.infinite_univ (hfin.subset huniv)
+
+/-- **And the target gives FAM**, so the two are equivalent and FAM is not a weaker obligation. -/
+theorem FAM_of_existence (h : ExistenceAt8) : FiniteActiveMembership := by
+  intro ds hpos hcard m hm hmin d hd
+  rw [target_forms_agree] at h
+  obtain ⟨N, hfix⟩ := h ds hpos hcard ⟨m, hm⟩ m hm hmin
+  refine Set.Finite.subset (Set.finite_Iio N) ?_
+  intro j hj
+  by_contra hjN
+  simp only [Set.mem_Iio, not_lt] at hjN
+  obtain ⟨i, rfl⟩ : ∃ i, j = N + i := ⟨j - N, by omega⟩
+  rw [Set.mem_setOf_eq, FourDifferences.iterate_stable (n := 8) hfix i] at hj
+  exact absurd (lonely_of_fixed hpos hfix d hd) (not_le.mpr hj)
+
 end LRC.Spec
