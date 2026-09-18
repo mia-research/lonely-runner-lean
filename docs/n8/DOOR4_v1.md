@@ -321,8 +321,8 @@ with exact main term `M(ds) = Σ_b b · Π_{a≠b} |I_a(b)|/b`, so the sufficien
 | `[1,150)` | 0.228 | 0.965 | 4.2× |
 | `[1,1000)` | **0.088** | 0.995 | 11× |
 
-So **the hard cases are the small ones**, which is the right shape for a proof: bound the error by a
-decreasing function of `Σ ds`, and check the finite remainder by hand.
+So the hard cases look like the small ones. **§12 corrects this**: bucketing by sampling range is not
+bucketing by `Σ ds`, and the true behaviour is not monotone.
 
 ### 11a. The binding cases, exhaustively  `[VERIFIED — all 19,440 primitive 7-subsets of [1,17]]`
 
@@ -352,3 +352,53 @@ reason.
 Measured cushion at the binding case: **1.127×**. This is the first door-4 target that is a single
 inequality with a quantified margin, a main term with a proven floor (`M ≥ 5.24`), and an error that
 decays with `Σ ds` — so that a finite check disposes of the remainder.
+
+---
+
+## 12. The error does **not** decay monotonically — §11's reading was wrong
+
+§11 read the decay off buckets of the **sampling range** `[1,V)`. Each such bucket mixes many values
+of `Σ ds`, so it does not show the dependence on `Σ ds` at all. Re-bucketed properly:
+
+| `Σ(ds)` | 28–31 | 32–45 | **46–63** | 64–90 | 91–127 | 182–255 | 725–1023 | 1449–2042 |
+|---|---|---|---|---|---|---|---|---|
+| worst error/`M` | 0.623 | 0.743 | **0.797** | 0.694 | 0.530 | 0.363 | 0.203 | 0.134 |
+
+**The worst error rises to a peak near `Σ ds ≈ 50` and only then decays**, roughly as `S^{−0.44}`. So
+"bound the error by a decreasing function of `Σ ds` and check the finite remainder" is not available:
+there is no decreasing bound that is valid at the small end.
+
+The **median** error, by contrast, is essentially zero throughout (−0.019 to +0.029) — `T ≈ M` for
+typical sets. The error is a worst-case phenomenon, not a typical one.
+
+### 12a. The cushion shrinks with search effort  `[unresolved]`
+
+| search | minimum cushion `(M−1)/error` |
+|---|---|
+| exhaustive, all primitive 7-subsets of `[1,17]` | 1.127× |
+| **exhaustive, all primitive 7-subsets with `Σ ds ≤ 80` (213,713 sets)** | **1.0838×** at `(1,3,4,5,7,18,40)` |
+| hill-climbing, 400 restarts × 300 steps | 1.140× |
+| targeted shape, 5 clustered + 2 spread, 120,000 sets | 1.243× |
+| targeted shape, 4 clustered + 3 spread, 120,000 sets | 1.524× |
+
+**The cushion has fallen 1.127 → 1.084 as the exhaustive range widened, and I have no argument that
+it stays above 1.** If it ever drops below 1, the first-moment bound fails for that set — door 4 would
+still hold there (`T ≥ 2` throughout), but this *argument* would not prove it.
+
+### 12b. Three searches, and only exhaustive works  `[sixth sampler lesson]`
+
+Hill-climbing (1.140×) and both targeted shapes (1.243×, 1.524×) **failed to beat the exhaustive
+minimum** of 1.084×. The worst cases are not reachable by local search from random starts, and the
+shape I inferred from the worst exhaustive example did not generalise. Exhaustive enumeration over
+bounded `Σ ds` is the only method here that has found anything, and it is limited to `Σ ds ≤ 80`.
+
+### 12c. What is and is not established
+
+**Established.** `T ≥ 2` on every set checked — roughly 450,000 across all methods, with none at
+`T ≤ 1` and none where the first-moment bound fails. The main term is exact and its floor is
+`M ≥ 5.24`.
+
+**Not established, and I could not prove it.** That the error is bounded by any decreasing function
+of `Σ ds` — it is not monotone — and that the cushion stays above 1. The first-moment route remains
+the sharpest formulation of door 4, but it is not yet a proof strategy with a proven margin; it is a
+sufficient condition that holds everywhere it has been checked and is tightening as the search widens.

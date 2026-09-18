@@ -1,0 +1,7 @@
+EXHAUSTIVE over all primitive 7-subsets with sum(ds) <= 80:  213713 sets
+  worst error/M   : 0.8565 at ds=(1, 3, 4, 5, 7, 18, 40)  (T=2, M=13.936, need < 0.9282)
+  smallest cushion: 1.0838x at ds=(1, 3, 4, 5, 7, 18, 40)  (T=2, M=13.936)
+  minimum T       : 2 at ds=(1, 2, 3, 4, 5, 7, 8) (M=5.300)
+
+  sets with T = 0 : NONE
+  the first-moment argument SUCCEEDS on every one of these 213713 sets: YES

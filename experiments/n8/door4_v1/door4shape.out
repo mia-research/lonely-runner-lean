@@ -1,0 +1,9 @@
+targeted shape (5 clustered + 2 spread): 120000 sets
+  minimum cushion: 1.2433x at ds=(2, 6, 8, 10, 11, 14, 32)  T=4  M=16.331
+     error/M = 0.7551   requirement < 0.9388
+  sets where the FIRST-MOMENT bound fails (cushion < 1): 0
+  sets with T <= 1 (door 4 itself tight): 0
+
+shape (4 clustered + 3 spread): 120000 sets
+  minimum cushion: 1.5244x at ds=(2, 6, 8, 10, 14, 49, 155)  T=16  M=44.603
+  first-moment failures: 0
