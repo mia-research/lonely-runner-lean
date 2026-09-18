@@ -52,4 +52,39 @@ theorem raising_unguards {s s' R : ℝ} {k : ℤ} (hR : 0 < R) (hs : s * R = 8 *
   have : s * R < s' * R := by exact mul_lt_mul_of_pos_right hlt hR
   linarith [hs ▸ this]
 
+
+
+/-! ## The guard identity, and the AP's clear points
+
+The guard of `R` is the reading `≡ R (mod 8)` because `(ℤ/8)ˣ` is the Klein four-group, so every
+unit is its own inverse: `R·R ≡ 1`. That is `klein_self_inverse`, decided.
+
+The AP's covering rests on the other half: at an **odd** `R`, every reading `1..7` is clear, because
+`8 ∤ i·R`. That is `ap_clear_at_odd`. Together they say the eight points `1,3,…,15` are clear for
+the AP and each is guarded from below by the reading `≡ R`, so the AP's uncovered set is exactly
+those eight points and has measure zero — v11 Theorem 11.3, now with its two halves formalised. -/
+
+/-- **`(ℤ/8)ˣ` is Klein: every unit is its own inverse.**  Hence `R⁻¹ ≡ R`, so the guard of `R` is
+the reading congruent to `R` itself. -/
+theorem klein_self_inverse : ∀ r : ZMod 8, IsUnit r → r * r = 1 := by decide
+
+/-- **The AP is clear at every odd instant.**  For a reading `1 ≤ i ≤ 7` and odd `R`, the product
+`i·R` is never a multiple of `8`, so the reading is at circle distance at least `1/8`. -/
+theorem ap_clear_at_odd {i R : ℤ} (h1 : 1 ≤ i) (h7 : i ≤ 7) (hR : Odd R) :
+    ¬ ((8 : ℤ) ∣ i * R) := by
+  rintro ⟨c, hc⟩
+  obtain ⟨m, hm⟩ := hR
+  subst hm
+  interval_cases i <;> omega
+
+/-- **The un-guarded interval, exactly.**  With the guard raised from `g` to `g + ε`, the reading at
+`R − δ` stays above the band edge `8k+1` — so the guard does not block — precisely while
+`δ < R·ε/(g+ε)`.  At `g = 7`, `R = 7` this is `δ < 7ε/(7+ε)`; at `R = 15`, `δ < 15ε/(7+ε)`. -/
+theorem unguarded_width {g R ε δ : ℝ} {k : ℤ} (hg : 0 < g) (hε : 0 < ε) (hδ : 0 ≤ δ)
+    (hR : g * R = 8 * k + 1) (hlt : δ < R * ε / (g + ε)) :
+    8 * (k : ℝ) + 1 < (g + ε) * (R - δ) := by
+  have hge : 0 < g + ε := by linarith
+  rw [lt_div_iff₀ hge] at hlt
+  nlinarith [hR]
+
 end Guard
