@@ -129,3 +129,49 @@ across all seven flanks, at `b = 1`, `k = 0`, `t = 1/8`.
 So door 4 is tight precisely at the extremal configurations, as it should be, and any argument must
 survive a margin of exactly one opening there. An argument with slack to spare will not be provable;
 it has to be exact at those three points.
+
+---
+
+## 8. The Fourier split: the main term is robust, but relation size does not control the error
+
+Writing `N(b)` for the number of lonely openings at flank `b` and expanding each interval indicator
+over `ℤ/b`:
+
+    N(b) = b · Σ_{h : Σ hᵢaᵢ ≡ 0 (mod b)}  Π Îᵢ(hᵢ) · e(Σ hᵢqᵢ / b)
+
+The `h = 0` term is `b·Π(|Iᵢ|/b)`, and **every** error term requires a non-trivial relation
+`Σ hᵢaᵢ ≡ 0 (mod b)` among the six non-flank runners.
+
+**The main term is robust** `[VERIFIED — 4,000 flanks, `b = max ds`]`:
+
+| actual / main term | min | 1% | median | max |
+|---|---|---|---|---|
+| | **0.324** | 0.550 | **1.013** | 2.076 |
+
+It is never overwhelmed: the error reaches at most about 68% of the main term in the worst case
+observed, and `N(b) > 0` throughout. The median of 1.013 confirms the expansion.
+
+**But relation size does not predict the deficiency** `[REFUTED — my own hypothesis]`. The natural
+next step is to bound the error by the size of the smallest relation, since a large `|h|` forces small
+`Î(h)`. Measured on the extremes, searching `|hᵢ| ≤ 3`:
+
+| flank | ratio | smallest relation (L1 weight) |
+|---|---|---|
+| `(9,11,14,16,25,37,52)`, `b=52` | 0.324 | **3** |
+| `(1,28,30,55,58,70,84)`, `b=84` | 0.329 | **3** |
+| `(11,16,25,27,43,75,81)`, `b=81` | 0.344 | **3** |
+| *typical*: `(3,27,33,52,60,73,85)`, `b=85` | **1.000** | **2** |
+| *typical*: `(20,26,36,59,63,73,85)`, `b=85` | **1.000** | **2** |
+
+**The typical flanks have *smaller* relations than the worst ones.** A weight-2 relation here is just
+`aᵢ + aⱼ = b` — present and harmless. So the error is not governed by how short the shortest relation
+is; the phases `e(Σ hᵢqᵢ/b)` and the coefficients `Îᵢ(hᵢ)` matter as much as the relation lattice,
+and they can cancel or reinforce independently of `|h|`.
+
+**What this closes.** An argument of the form *"the smallest relation is large, therefore the error is
+small, therefore `N(b) > 0`"* will not work, and neither will its contrapositive as a case split.
+Whatever controls the error at door 4 is finer than the relation lattice alone.
+
+**What it leaves.** The main term is right and robust — median ratio 1.013, never overwhelmed across
+4,000 flanks. Door 4's arithmetic remains favourable; what is missing is an error bound, and the
+measurement now says that bound cannot come from relation size by itself.
