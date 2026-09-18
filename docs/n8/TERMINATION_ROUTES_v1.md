@@ -88,6 +88,13 @@ project already had on record, recovered independently.
 small integers; (ii) name the instant in each — the AP gives `1/8, 3/8, 5/8, 7/8`; (iii) show every
 loose configuration has slack, hence a lonely interval.
 
+> **SUPERSEDED 2026-09-18 — step (ii) is done, and the framing of this item is wrong.**
+> `Flanks.lonely_at_inv_of_not_dvd` **proves** that `t = 1/8` is lonely whenever no difference is
+> divisible by 8. **All three tight configurations satisfy that**, so Existence at each is now a
+> theorem, not a programme item. And the premise that the tight family is where the difficulty lies
+> is **false**: they are settled at `k = 0` by the simplest rule there is, while the naming problem
+> sits in the generic middle — `DOOR4_v1` §3, §7 and `RULE_TABLE_v1` §10c, §11c.
+
 **Honest assessment.** (iii) is the whole difficulty and is not easier than LRC(8); (i) needs
 completeness over ℝ. What makes it worth trying is §1: it is a structural route, and structural
 routes are the only ones that have ever worked here.

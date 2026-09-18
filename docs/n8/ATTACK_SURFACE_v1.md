@@ -49,7 +49,10 @@ carry no integrality hypothesis, so the real case is settled by any of them. Onl
 (`lonely_iff_bounded_search`, `lonely_iff_emod_search`, `clear_at_int_flank_iff_emod_b`) carry
 `hint`, and using them is what would owe a real-to-integer lift. See `DOOR3_v1` §4.
 
-**Door 4 — flank form. This is the one I would attack.** The residue work made it pure arithmetic
+**Door 4 — flank form. This is the one I would attack.**  *(Worked extensively since: see
+`DOOR4_v1` and `RULE_TABLE_v1`.  Two named instants are now proved and cover 94%; the residue always
+has a named instant with observed `c ≤ 17` but no proved bound.  `DOOR4_v1` §13 rules §§5, 8, 11, 12
+of that file imported density rather than native.)* The residue work made it pure arithmetic
 with no trajectory in it. Over whole numbers, `lonely_iff_emod_search` reads:
 
 > `∃ b ∈ ds, ∃ k < b, ∀ a ∈ ds:  b ≤ a·(8k+1) mod 8b ≤ 7b`
