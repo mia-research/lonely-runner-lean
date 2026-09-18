@@ -839,6 +839,43 @@ theorem depth_floor {a b : ℤ} (hb : 0 < b) (k : ℕ) (N : ℤ)
   rw [inv_eq_one_div]
   gcongr
 
+/-! ### Door 4: pruning the flank search
+
+`lonely_iff_bounded_search` leaves `∑_{e ∈ ds} e` openings to check.  The first result below removes
+most of the `k = 0` layer: at the first opening only the **nearest** flank can be free, because every
+other flank's first opening is too early for the nearest runner to have cleared. -/
+
+/-- **At the first opening, only the nearest flank can be free.**  Flank `b`'s opening `k = 0` is
+`1/(n·b)`; a runner at difference `m < b` reads `m/(n·b) < 1/n` there and is in the way.  So the
+`k = 0` layer of the search collapses to the single flank `b = min ds`, where it is
+`clear_at_bound_of_ratio`. -/
+theorem inWay_at_first_opening_of_lt {m b : ℝ} (hm : 0 < m) (hmb : m < b) :
+    inWay n m (flankOpening n b 0) := by
+  have hn0 : (0 : ℝ) < n := n_pos
+  have hnh : (n : ℝ)⁻¹ ≤ 2⁻¹ := inv_le_half
+  have hb : (0 : ℝ) < b := lt_trans hm hmb
+  have hnb : (0 : ℝ) < (n : ℝ) * b := mul_pos hn0 hb
+  unfold inWay flankOpening
+  have e : m * ((((0 : ℕ) : ℝ) + (n : ℝ)⁻¹) / b) = m / ((n : ℝ) * b) := by
+    push_cast; field_simp; ring
+  rw [e]
+  have h1 : 0 < m / ((n : ℝ) * b) := div_pos hm hnb
+  have h2 : m / ((n : ℝ) * b) < (n : ℝ)⁻¹ := by
+    rw [div_lt_iff₀ hnb, show (n : ℝ)⁻¹ * ((n : ℝ) * b) = b by field_simp]
+    exact hmb
+  unfold circDist
+  have hfr : Int.fract (m / ((n : ℝ) * b)) = m / ((n : ℝ) * b) := by
+    rw [Int.fract_eq_self]; exact ⟨h1.le, by linarith⟩
+  rw [hfr]
+  exact lt_of_le_of_lt (min_le_left _ _) h2
+
+/-- **So a lonely first opening forces the flank to be the nearest difference.** -/
+theorem eq_min_of_lonely_first_opening {ds : Finset ℝ} {m b : ℝ} (hm : m ∈ ds) (hmpos : 0 < m)
+    (hmin : ∀ d ∈ ds, m ≤ d) (hb : b ∈ ds) (hl : Lonely n ds (flankOpening n b 0)) : m = b := by
+  by_contra hne
+  exact absurd (hl m hm) (not_le.mpr (inWay_at_first_opening_of_lt hmpos
+    (lt_of_le_of_ne (hmin b hb) hne)))
+
 /-! ### The residue route: at an integer flank the verdict is a congruence
 
 `lonely_iff_bounded_search` collapses the search over openings to `k < e`.  What follows collapses
@@ -931,5 +968,49 @@ theorem lonely_iff_emod_search {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) (h
     refine ⟨(b : ℝ), hb, k, by exact_mod_cast hk, fun d hd => ?_⟩
     obtain ⟨a, rfl⟩ := hint d hd
     exact (clear_at_int_flank_iff_emod hbZ k).mpr (h a hd)
+
+/-! ### Door 4: the modulus drops from `n·b` to `b`
+
+`clear_at_int_flank_iff_emod` works modulo `n·b`.  Splitting `a = n·q + s` with `0 ≤ s < n` collapses
+it to a condition modulo `b` alone: since `a(nk+1) = n(ak + q) + s`, the residue is
+`n·((ak+q) mod b) + s`, and the band `[b, (n−1)b]` becomes an interval for `(ak+q) mod b` of length
+exactly `(n−2)/n` of the modulus — the middle three quarters at `n = 8`.
+
+Two things follow that the `n·b` form hides.  The condition on `k` is an **arithmetic progression
+`a·k + q` modulo `b`** landing in a fixed interval, one per runner.  And the flank itself sits exactly
+on that interval's **left edge**, so it contributes no constraint: at order 8 there are six real
+conditions, not seven. -/
+
+/-- **The clearance criterion modulo `b`.**  With `a = n·q + s` and `0 ≤ s < n`, runner `a` is clear at
+flank `b`'s `k`-th opening exactly when `(a·k + q) mod b` lies in the middle band. -/
+theorem clear_at_int_flank_iff_emod_b {a b q s : ℤ} (hb : 0 < b)
+    (hsplit : a = (n : ℤ) * q + s) (hs0 : 0 ≤ s) (hsn : s < (n : ℤ)) (k : ℕ) :
+    (n : ℝ)⁻¹ ≤ circDist ((a : ℝ) * flankOpening n (b : ℝ) k)
+      ↔ b - s ≤ (n : ℤ) * ((a * (k : ℤ) + q) % b)
+        ∧ (n : ℤ) * ((a * (k : ℤ) + q) % b) ≤ ((n : ℤ) - 1) * b - s := by
+  have hnN : 0 < n := by have := (Fact.out : 2 ≤ n); omega
+  have hnZ : (0 : ℤ) < (n : ℤ) := by exact_mod_cast hnN
+  -- the residue modulo `n·b` is `n·((ak+q) mod b) + s`
+  have hid : a * ((n : ℤ) * (k : ℤ) + 1) = (n : ℤ) * (a * (k : ℤ) + q) + s := by
+    rw [hsplit]; ring
+  have hlo : 0 ≤ (a * (k : ℤ) + q) % b := Int.emod_nonneg _ (ne_of_gt hb)
+  have hhi : (a * (k : ℤ) + q) % b < b := Int.emod_lt_of_pos _ hb
+  have hkey : a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * b)
+      = (n : ℤ) * ((a * (k : ℤ) + q) % b) + s := by
+    rw [hid]
+    have hmul : ((n : ℤ) * (a * (k : ℤ) + q)) % ((n : ℤ) * b)
+        = (n : ℤ) * ((a * (k : ℤ) + q) % b) := Int.mul_emod_mul_of_pos _ _ hnZ
+    have hrange : (n : ℤ) * ((a * (k : ℤ) + q) % b) + s < (n : ℤ) * b := by nlinarith
+    have hnn : 0 ≤ (n : ℤ) * ((a * (k : ℤ) + q) % b) + s := by positivity
+    calc ((n : ℤ) * (a * (k : ℤ) + q) + s) % ((n : ℤ) * b)
+        = (((n : ℤ) * (a * (k : ℤ) + q)) % ((n : ℤ) * b) + s % ((n : ℤ) * b)) % ((n : ℤ) * b) :=
+          Int.add_emod _ _ _
+      _ = ((n : ℤ) * ((a * (k : ℤ) + q) % b) + s) % ((n : ℤ) * b) := by
+          rw [hmul, Int.emod_eq_of_lt hs0 (by nlinarith)]
+      _ = (n : ℤ) * ((a * (k : ℤ) + q) % b) + s := Int.emod_eq_of_lt hnn hrange
+  rw [clear_at_int_flank_iff_emod hb k, hkey]
+  constructor
+  · rintro ⟨h1, h2⟩; constructor <;> linarith
+  · rintro ⟨h1, h2⟩; constructor <;> linarith
 
 end Flanks
