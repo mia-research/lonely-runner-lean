@@ -1,0 +1,13 @@
+  primitive 7-subsets of [1,12]: min exact main term 5.2402 at ds=(1, 2, 3, 4, 5, 6, 8)
+  primitive 7-subsets of [1,14]: min exact main term 5.2402 at ds=(1, 2, 3, 4, 5, 6, 8)
+  primitive 7-subsets of [1,16]: min exact main term 5.2402 at ds=(1, 2, 3, 4, 5, 6, 8)
+
+GLOBAL FLOOR (over the ranges searched): M >= 5.2402 at (1, 2, 3, 4, 5, 6, 8)
+  so the requirement error/main < 1 - 1/M is at worst  < 0.8092
+
+exhaustive over primitive 7-subsets of [1,14]: worst error/main
+  3431 sets, zeros 0
+  worst error/main 0.7971 at ds=(1, 5, 6, 7, 8, 11, 13) (total 2, main 9.855)
+  requirement at that set: < 0.8985   -> SATISFIED
+
+  margin: need 0.8985, have 0.7971, cushion factor 1.13x

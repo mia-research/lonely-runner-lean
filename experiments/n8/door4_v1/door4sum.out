@@ -1,0 +1,15 @@
+the three tight sets:
+   (1, 2, 3, 4, 5, 6, 7)    total   4  predicted   4.98  ratio 0.803
+   (1, 2, 3, 4, 5, 7, 12)   total   4  predicted   6.05  ratio 0.661
+   (1, 4, 5, 6, 7, 11, 13)  total   5  predicted   8.36  ratio 0.598
+
+8000 primitive sets, SUMMED over all seven flanks:
+   ratio total/predicted : min 0.598  1% 0.784  median 1.033  max 1.566
+   sets with total ZERO  : 0
+   worst: ds=(1, 5, 7, 13, 19, 56, 68) total 18 vs predicted 30.08 (ratio 0.598)
+
+compare: the worst SINGLE-flank ratio measured earlier was 0.324 (b = max ds).
+   summed worst here is 0.598, 1st percentile 0.784
+
+sets where the predicted total is BELOW 1 (first moment cannot conclude): 0/8000
+   smallest possible sum(ds) for a primitive 7-set is 1+2+..+7 = 28 -> predicted 4.98

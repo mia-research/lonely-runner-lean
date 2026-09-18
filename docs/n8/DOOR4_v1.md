@@ -295,3 +295,60 @@ easy would not help. The coupling is not a resource the error bound can draw on.
 **A correction.** The script that produced these numbers printed a label claiming every subject of the
 extremal arrangement is tight. The data it printed alongside, `[1,2,3,2,2,3,2,1]`, says otherwise —
 only the extremes are. The label was wrong and is fixed in the deposited copy.
+
+---
+
+## 11. The first moment over *all* flanks — the sharpest form so far
+
+§6 showed no designated-flank rule works, so the existential over flanks is essential. That makes the
+natural object the **sum over flanks**, not any single one:
+
+    T(ds) = Σ_{b ∈ ds} N(b)        door 4 holds  ⟺  T(ds) ≥ 1
+
+with exact main term `M(ds) = Σ_b b · Π_{a≠b} |I_a(b)|/b`, so the sufficient condition is
+
+    error := M(ds) − T(ds)  ≤  M(ds) − 1,     i.e.   error/M < 1 − 1/M.
+
+**Summing is far more robust than any single flank.** Worst ratio `T/M`: **0.598** summed against
+**0.324** at `b = max ds`; 1st percentile 0.784 against 0.550.
+
+**And the error shrinks as the speeds grow while the requirement relaxes:**
+
+| range | worst error/`M` | required | cushion |
+|---|---|---|---|
+| `[1,30)` | 0.560 | 0.866 | 1.5× |
+| `[1,70)` | 0.386 | 0.921 | 2.4× |
+| `[1,150)` | 0.228 | 0.965 | 4.2× |
+| `[1,1000)` | **0.088** | 0.995 | 11× |
+
+So **the hard cases are the small ones**, which is the right shape for a proof: bound the error by a
+decreasing function of `Σ ds`, and check the finite remainder by hand.
+
+### 11a. The binding cases, exhaustively  `[VERIFIED — all 19,440 primitive 7-subsets of [1,17]]`
+
+| | |
+|---|---|
+| minimum `T(ds)` | **2** — never 1, never 0 |
+| main-term floor | `M ≥ 5.2402`, at `(1,2,3,4,5,6,8)` |
+| smallest cushion `(M−1)/error` | **1.127×**, at `(1,5,6,7,8,11,13)` — `T = 2`, `M = 9.855` |
+| worst `error/M` | **0.7971**, required `< 0.8985` |
+
+Note that `T`-extremal sets are **not** the LRC-extremal sets: the three tight configurations have
+`max_b N(b) = 1` but `T = 4, 4, 5`, while the `T`-minimal sets are `(1,2,3,4,5,7,8)` and relatives,
+all containing a difference `≡ 0 (mod 8)`.
+
+### 11b. A fifth sampler failure, and it mattered here
+
+Random sampling over `[1,30)` reported a worst `error/M` of **0.560**. Exhaustive search over
+`[1,14]` finds **0.7971** — the sampler understated the worst case by 42% and would have suggested a
+1.5× cushion where the true figure is 1.13×. Every worst-case figure in §11a is exhaustive for that
+reason.
+
+### 11c. What to prove
+
+> For every finite `ds ⊂ ℤ_{>0}` with `|ds| = 7` and `gcd(ds) = 1`:
+> `M(ds) − Σ_{b ∈ ds} N(b)  ≤  M(ds) − 1`.
+
+Measured cushion at the binding case: **1.127×**. This is the first door-4 target that is a single
+inequality with a quantified margin, a main term with a proven floor (`M ≥ 5.24`), and an error that
+decays with `Σ ds` — so that a finite check disposes of the remainder.

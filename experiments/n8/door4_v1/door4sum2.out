@@ -1,0 +1,11 @@
+       range   sets  min ratio       1%   median  min main  worst err/main   needed
+      [1,30)   4000      0.440    0.638    1.001      7.44           0.560    0.866   zeros 0
+      [1,70)   4000      0.614    0.763    1.003     12.68           0.386    0.921   zeros 0
+     [1,150)   4000      0.772    0.843    1.004     28.49           0.228    0.965   zeros 0
+     [1,400)   1200      0.845    0.913    1.003     54.11           0.155    0.982   zeros 0
+    [1,1000)   1200      0.912    0.943    1.001    208.63           0.088    0.995   zeros 0
+
+the three tight sets, exact main term:
+   (1, 2, 3, 4, 5, 6, 7)    total 4  exact main 5.932  ratio 0.674  err/main 0.326  needed <= 0.831
+   (1, 2, 3, 4, 5, 7, 12)   total 4  exact main 7.564  ratio 0.529  err/main 0.471  needed <= 0.868
+   (1, 4, 5, 6, 7, 11, 13)  total 5  exact main 9.375  ratio 0.533  err/main 0.467  needed <= 0.893
