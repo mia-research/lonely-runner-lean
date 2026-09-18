@@ -1086,4 +1086,26 @@ theorem exists_lonely_of_named_instant {ds : Finset ℝ} {c : ℤ} (hc : 0 < c) 
   ⟨flankOpening n (c : ℝ) k, flankOpening_pos (by exact_mod_cast hc) k,
     lonely_at_named_instant hc k h⟩
 
+/-- **Which flanks host the instant `j/n`.**  `flankOpening n b k = j/n` exactly when
+`n·k + 1 = j·b`.  So `j/n` is an opening of the flank `b` only if `j·b ≡ 1 (mod n)`.
+
+At `n = 8` every odd residue is self-inverse mod 8, so for odd `j` this reads `b ≡ j (mod 8)` —
+which is why the flanks `1, 3, 5, 7` host the four instants `1/8, 3/8, 5/8, 7/8`, one each, and the
+even differences host none.  That is the arithmetic behind the arithmetic progression's four global
+isolation events. -/
+theorem flankOpening_eq_div {j b : ℤ} (hb : 0 < b) (k : ℕ) :
+    flankOpening n (b : ℝ) k = (j : ℝ) / (n : ℝ) ↔ (n : ℤ) * (k : ℤ) + 1 = j * b := by
+  have hn0 : (0 : ℝ) < (n : ℝ) := n_pos
+  have hb0 : (0 : ℝ) < (b : ℝ) := by exact_mod_cast hb
+  unfold flankOpening
+  constructor
+  · intro h
+    have hr : (n : ℝ) * (k : ℝ) + 1 = (j : ℝ) * (b : ℝ) := by
+      field_simp at h; linarith
+    exact_mod_cast hr
+  · intro h
+    have hr : (n : ℝ) * (k : ℝ) + 1 = (j : ℝ) * (b : ℝ) := by exact_mod_cast h
+    field_simp
+    linarith
+
 end Flanks

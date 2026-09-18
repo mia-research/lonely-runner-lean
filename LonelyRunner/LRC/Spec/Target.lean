@@ -182,4 +182,36 @@ one way and `FAM_of_existence` the other. -/
 theorem FAM_iff_existence : FiniteActiveMembership ↔ ExistenceAt8 :=
   ⟨fun h => target_forms_agree.mpr (cascade_of_FAM h), FAM_of_existence⟩
 
+/-! ## a candidate route: Three-Largest-Flanks
+
+Not a wording of the target but a **conjecture that would imply it** over whole numbers.  Stated here
+so progress on it is checkable rather than described: `ThreeLargestFlanks` is a `Prop`, and
+`exists_lonely_of_threeLargest` is the reduction.
+
+Evidence at the time of writing, in `docs/n8/RULE_TABLE_v1.md` §6: zero failures across the
+exhaustive ranges `[1,17]`, `[1,20]`, `[1,22]`, `[1,24]` — over 500,000 primitive 7-sets — and a
+single set with only one working flank, `(2,3,4,5,6,7,16)`, whose flank is the largest.  No set
+found at any range has all its working flanks outside the three largest.
+
+It is a **conjecture**: no proof is claimed, and unlike the target itself it may simply be false. -/
+
+/-- **Three-Largest-Flanks.**  For whole-number differences, one of the three largest serves as a
+flank with a lonely opening.  "`e` is among the three largest" is written as: at most two members of
+`ds` exceed it. -/
+def ThreeLargestFlanks : Prop :=
+  ∀ ds : Finset ℝ, (∀ d ∈ ds, 0 < d) → ds.card ≤ 7 → ds.Nonempty →
+    (∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) →
+      ∃ e ∈ ds, (ds.filter (fun d => e < d)).card ≤ 2 ∧
+        ∃ k : ℕ, Lonely 8 ds (flankOpening 8 e k)
+
+/-- **The reduction.**  `ThreeLargestFlanks` gives Existence for every whole-number difference set. -/
+theorem exists_lonely_of_threeLargest (h : ThreeLargestFlanks) {ds : Finset ℝ}
+    (hpos : ∀ d ∈ ds, 0 < d) (hcard : ds.card ≤ 7)
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ)) :
+    ∃ s, 0 < s ∧ Lonely 8 ds s := by
+  rcases Finset.eq_empty_or_nonempty ds with rfl | hne
+  · exact ⟨1, by norm_num, by intro d hd; simp at hd⟩
+  · obtain ⟨e, he, -, k, hk⟩ := h ds hpos hcard hne hint
+    exact ⟨flankOpening 8 e k, flankOpening_pos (hpos e he) k, hk⟩
+
 end LRC.Spec
