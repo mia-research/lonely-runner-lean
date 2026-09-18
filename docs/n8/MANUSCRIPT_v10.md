@@ -10,12 +10,17 @@ margin); it corrects §10's figures and records four withdrawals in **Appendix B
 
 **Checked for v10.** A compile-diff against v9.6 (all 24 numbered results, 14 `[OPEN]` items, every
 withdrawal record and every caveat carried verbatim; no grade raised; a 12-line deletion set
-containing only figure lines). The cascade gate at this tree state is deposited at
-`experiments/n8/cascade_gate_scalecandidates_v1.out`: **4,759 of 4,759 axiom-clean, 283 structural,
-21 modules, no `sorry`, the open statement unstated** — it reports FAIL on check [6] alone, because
-it was run against v9.6's figures. **The gate has not been re-run against v10**; check [6]'s six
-criteria were verified against this file by hand and agree with the tree, and that is a simulation,
-not a run.
+containing only figure lines). And the cascade gate, run against **this** manuscript and deposited at
+`experiments/n8/cascade_gate_v10_v1.out`:
+
+> **GATE PASS: 4,759 theorems, axiom-clean** (coverage 4,759 of 4,759 on disk), 283 structural,
+> 21 modules, no `sorry`, no `native_decide`/`unsafe`/`admit`, the open statement unstated, the
+> named irrational coverage present, and check [6] **clean** — this file's recorded figures match the
+> tree (4,759 theorems, 21 modules, digest `c54d9843`, commit `c023d10`). Tree fingerprint unchanged
+> start to end; 903s.
+
+The gate's own closing line is kept here because it is the point: *"Existence at order 8 is NOT
+proved — it remains open and unstated."*
 
 *Header carried from v9.6, unaltered:*
 
