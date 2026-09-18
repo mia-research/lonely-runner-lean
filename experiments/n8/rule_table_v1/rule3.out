@@ -1,0 +1,12 @@
+the three tight configurations:
+   (1, 2, 3, 4, 5, 6, 7)    nearest flank 1: count 1  first k 0
+   (1, 2, 3, 4, 5, 7, 12)   nearest flank 1: count 1  first k 0
+   (1, 4, 5, 6, 7, 11, 13)  nearest flank 1: count 1  first k 0
+
+random: 20000 primitive sets, nearest flank has NO lonely opening in 3626
+   examples: [(8, 27, 28, 54, 71, 75, 85), (6, 34, 38, 43, 44, 51, 74), (8, 20, 21, 61, 64, 66, 79), (4, 15, 18, 63, 64, 78, 89)]
+   first k at the nearest flank: min 0  median 0  90th 3  max 11
+   settled at k=0: 0.690;  k<=2: 0.868
+
+exhaustive over primitive 7-subsets of [1,14]: 3431 sets, nearest flank fails on 792
+   examples: [(1, 2, 3, 4, 5, 6, 8), (1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 4, 5, 8, 9), (1, 2, 3, 4, 5, 8, 10), (1, 2, 3, 4, 5, 8, 11), (1, 2, 3, 4, 5, 8, 12)]

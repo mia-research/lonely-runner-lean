@@ -1,0 +1,15 @@
+uncovered by R1 or R2 on [1,14]: 54
+  all contain 7 and 8? True
+  all contain a multiple of 8? True
+
+  which rank of flank works (0=smallest .. 6=largest): {1: 14, 2: 40, 3: 49, 4: 51, 5: 46}
+  which flank VALUES work: {4: 10, 5: 26, 6: 27, 7: 49, 8: 46, 9: 13, 10: 17, 11: 8, 13: 4}
+
+  R3 = largest not divisible by 8  : covers 2/54
+  R3 = second largest              : covers 46/54
+  R3 = largest odd, not div by 8   : covers 49/54
+
+  [1,14] R1 or R2 or R3(largest not div by 8): 3379/3431 = 0.9848;  left 52
+      [(1, 2, 3, 5, 7, 8, 9), (1, 2, 3, 5, 7, 8, 10), (1, 2, 3, 5, 7, 8, 12), (1, 2, 3, 5, 7, 8, 14), (1, 2, 5, 6, 7, 8, 9)]
+  [1,17] R1 or R2 or R3(largest not div by 8): 19333/19440 = 0.9945;  left 107
+      [(1, 2, 3, 5, 7, 8, 9), (1, 2, 3, 5, 7, 8, 10), (1, 2, 3, 5, 7, 8, 12), (1, 2, 3, 5, 7, 8, 14), (1, 2, 3, 5, 7, 8, 15)]

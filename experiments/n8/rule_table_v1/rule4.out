@@ -1,0 +1,9 @@
+[1] m=1: 'nearest flank works' == 'no difference divisible by 8'  : 20000/20000 agree
+
+[2] sets where R1 (nearest flank) FAILS: 7374
+    fallback 'second smallest': works on 6502 (0.882)
+    fallback 'largest': works on 7374 (1.000)
+    some flank works: 7374 (1.000);  NO flank works: 0
+
+[3] exhaustive [1,14]: R1 (nearest) OR R2 (largest) covers 3377/3431 (0.9843)
+    uncovered: 54  examples [(1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 5, 7, 8, 9), (1, 2, 3, 5, 7, 8, 10), (1, 2, 3, 5, 7, 8, 12), (1, 2, 3, 5, 7, 8, 14)]

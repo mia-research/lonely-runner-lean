@@ -1,0 +1,9 @@
+openings examined 1252558
+  RULE: lonely at (b,k) requires k >= ceil((b/m - 1)/8)
+  violations (a lonely opening below the bound): 0
+  openings pruned by the rule: 33633 (0.027);  kept 1218925 (0.973)
+
+total openings to check, before the rule 1252895, after 1219456  (0.973 of the original)
+
+k=0 case: the rule says lonely at (b,0) requires b <= m, i.e. b = m -- matches
+          Flanks.eq_min_of_lonely_first_opening, already proved.
