@@ -330,7 +330,7 @@ bucketing by `Σ ds`, and the true behaviour is not monotone.
 |---|---|
 | minimum `T(ds)` | **2** — never 1, never 0 |
 | main-term floor | `M ≥ 5.2402`, at `(1,2,3,4,5,6,8)` |
-| smallest cushion `(M−1)/error` | **1.127×**, at `(1,5,6,7,8,11,13)` — `T = 2`, `M = 9.855` |
+| smallest cushion `(M−1)/error` | **1.127×**, at `(1,5,6,7,8,11,13)` — `T = 2`, `M = 9.855`. **Superseded by §12a: 1.084× on a wider exhaustive range.** |
 | worst `error/M` | **0.7971**, required `< 0.8985` |
 
 Note that `T`-extremal sets are **not** the LRC-extremal sets: the three tight configurations have
@@ -350,8 +350,13 @@ reason.
 > `M(ds) − Σ_{b ∈ ds} N(b)  ≤  M(ds) − 1`.
 
 Measured cushion at the binding case: **1.127×**. This is the first door-4 target that is a single
-inequality with a quantified margin, a main term with a proven floor (`M ≥ 5.24`), and an error that
-decays with `Σ ds` — so that a finite check disposes of the remainder.
+inequality with a quantified margin and a main term with a proven floor (`M ≥ 5.24`).
+
+**Two claims in this section are corrected by §12 and should not be carried forward.** The cushion is
+**1.084×**, not 1.127×, on a wider exhaustive range — and still falling with search effort. And the
+error does **not** decay with `Σ ds`: it rises to a peak near `Σ ds ≈ 50` before falling, so "bound
+the error by a decreasing function and check the finite remainder" is **not available**. The rest of
+this section stands; that conclusion does not.
 
 ---
 
