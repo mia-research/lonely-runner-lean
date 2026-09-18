@@ -1,0 +1,68 @@
+clean  LRC.Spec.LonelyRunnerAt8
+clean  LRC.Spec.ExistenceOnArrangements
+clean  LRC.Spec.lonelyRunnerAt8_iff_existenceOnArrangements
+clean  LRC.Spec.lonelyRunnerAt8_iff_arrangement
+clean  Arrangement.LonelyAt
+clean  Arrangement.InWay
+clean  Arrangement.lonelyAt_iff_neighbours
+clean  Arrangement.inWay_comm
+clean  Arrangement.lonelyAt_add_const
+clean  Arrangement.lonelyAt_const_mul
+clean  Arrangement.lonelyAt_iff_lonely_diffSet
+clean  Arrangement.exists_lonelyAt_iff_flank
+clean  Arrangement.exists_lonelyAt_iff_bounded
+clean  Arrangement.lonelyAt_named_instant
+clean  LRC.Spec.DoorFlank
+clean  LRC.Spec.DoorArrives
+clean  LRC.Spec.DoorCapped
+clean  LRC.Spec.DoorFAM
+clean  LRC.Spec.doorFlank_iff
+clean  LRC.Spec.doorArrives_iff
+clean  LRC.Spec.doorCapped_iff
+clean  LRC.Spec.doorFAM_iff
+clean  LRC.Spec.doors_agree
+clean  LRC.Spec.lonelyRunnerAt8_of_doorFlank
+clean  LRC.Spec.lonelyRunnerAt8_of_doorArrives
+clean  LRC.Spec.lonelyRunnerAt8_of_doorCapped
+clean  LRC.Spec.lonelyRunnerAt8_of_doorFAM
+clean  LRC.Spec.blockDegree
+clean  LRC.Spec.lonelyAt_iff_blockDegree_zero
+clean  LRC.Spec.sum_blockDegree
+clean  LRC.Spec.existenceOnArrangements_iff_isolated
+AUDIT PASS: no audited declaration reaches the difference-set form.
+def LRC.Spec.LonelyRunnerAt8 : Prop :=
+∀ (v : Fin 8 → ℝ),
+  Function.Injective v → ∀ (k : Fin 8), ∃ t, 0 < t ∧ ∀ (i : Fin 8), i ≠ k → 8⁻¹ ≤ circDist (v i * t - v k * t)
+def LRC.Spec.ExistenceOnArrangements : Prop :=
+∀ (v : Fin 8 → ℝ), Function.Injective v → ∀ (k : Fin 8), ∃ t, 0 < t ∧ Arrangement.LonelyAt v k t
+def Arrangement.LonelyAt : (Fin 8 → ℝ) → Fin 8 → ℝ → Prop :=
+fun v k t => ∀ (i : Fin 8), i ≠ k → 8⁻¹ ≤ circDist (Arrangement.sep v k i t)
+def LRC.Spec.LonelyForSubject : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k => ∃ t, 0 < t ∧ Arrangement.LonelyAt v k t
+def LRC.Spec.DoorFlank : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k => ∃ i, i ≠ k ∧ ∃ j, Arrangement.LonelyAt v k (Flanks.flankOpening 8 |v i - v k| j)
+def LRC.Spec.DoorArrives : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k =>
+  ∃ N,
+    MomentIterationN.move 8 (Arrangement.diffSet v k)
+        ((MomentIterationN.move 8 (Arrangement.diffSet v k))^[N] (LRC.Spec.firstReading v k)) =
+      (MomentIterationN.move 8 (Arrangement.diffSet v k))^[N] (LRC.Spec.firstReading v k)
+def LRC.Spec.DoorCapped : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k => ∃ U, ∀ (N : ℕ), (MomentIterationN.move 8 (Arrangement.diffSet v k))^[N] (LRC.Spec.firstReading v k) ≤ U
+def LRC.Spec.DoorFAM : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k =>
+  ∀ (i : Fin 8),
+    i ≠ k →
+      {j |
+          MomentIterationN.inWay 8 |v i - v k|
+            ((MomentIterationN.move 8 (Arrangement.diffSet v k))^[j] (LRC.Spec.firstReading v k))}.Finite
+def LRC.Spec.DoorThreeLargest : (Fin 8 → ℝ) → Fin 8 → Prop :=
+fun v k =>
+  ∃ i,
+    i ≠ k ∧
+      {d ∈ Arrangement.diffSet v k | |v i - v k| < d}.card ≤ 2 ∧
+        ∃ j, Arrangement.LonelyAt v k (Flanks.flankOpening 8 |v i - v k| j)
+def Arrangement.diffSet : (Fin 8 → ℝ) → Fin 8 → Finset ℝ :=
+fun v k => Finset.image (fun i => |v i - v k|) (Finset.univ.erase k)
+def LRC.Spec.blockDegree : (Fin 8 → ℝ) → ℝ → Fin 8 → ℕ :=
+fun v t k => {i | i ≠ k ∧ Arrangement.InWay v k i t}.card
