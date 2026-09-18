@@ -255,4 +255,53 @@ theorem exists_lonely_of_congruence (h : ExistenceAt8_congruence) {ds : Finset �
     ∃ s, 0 < s ∧ Lonely 8 ds s :=
   (Flanks.lonely_iff_emod_search (n := 8) hpos hne hint).mpr (h ds hpos hcard hne hint)
 
+/-! ## the conjecture itself
+
+Everything above is stated in **difference sets**.  That is already a transform of the conjecture, and
+it generalises: `ExistenceAt8` quantifies over arbitrary `ds` with `card ≤ 7`, whereas the conjecture
+speaks of **eight runners with distinct speeds**, whose eight difference sets are not arbitrary — they
+are coupled, sharing the 28 pairwise differences, each appearing in exactly two of them.
+
+`LonelyRunnerAt8` below is the conjecture, stated with no transform at all: eight distinct speeds, a
+chosen runner, and a time at which every other runner is at circle-distance at least `1/8` from it.
+Nothing is placed at `0`, nothing is held stationary, and `v i * t - v k * t` is a separation between
+two moving runners.
+
+`lonelyRunnerAt8_of_existence` shows `ExistenceAt8` suffices for it.  The converse is **not** claimed:
+the difference-set form is strictly more general, and how much of that generality the conjecture
+actually needs is exactly the question of whether we have been proving more than was asked. -/
+
+/-- **The Lonely Runner Conjecture at eight runners, untransformed.**  Eight runners with distinct
+speeds; for each of them there is a positive time at which every other runner is at circle-distance at
+least `1/8`. -/
+def LonelyRunnerAt8 : Prop :=
+  ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
+    ∃ t : ℝ, 0 < t ∧ ∀ i : Fin 8, i ≠ k → (8 : ℝ)⁻¹ ≤ circDist (v i * t - v k * t)
+
+/-- **The difference-set form suffices for the conjecture.**  For a chosen runner `k`, the separations
+`v i * t - v k * t` are `(v i - v k) * t`, and `circDist` is even, so the set of `|v i - v k|` for
+`i ≠ k` is a `Finset` of at most seven positive reals. -/
+theorem lonelyRunnerAt8_of_existence (h : ExistenceAt8) : LonelyRunnerAt8 := by
+  intro v hinj k
+  classical
+  set ds : Finset ℝ := (Finset.univ.erase k).image (fun i => |v i - v k|) with hds
+  have hpos : ∀ d ∈ ds, 0 < d := by
+    intro d hd
+    obtain ⟨i, hi, rfl⟩ := Finset.mem_image.mp hd
+    have : v i ≠ v k := fun hc => (Finset.mem_erase.mp hi).1 (hinj hc)
+    exact abs_pos.mpr (sub_ne_zero.mpr this)
+  have hcard : ds.card ≤ 7 := by
+    refine le_trans (Finset.card_image_le) ?_
+    simp [Finset.card_erase_of_mem]
+  obtain ⟨s, hs, hl⟩ := h ds hpos hcard
+  refine ⟨s, hs, fun i hik => ?_⟩
+  have hmem : |v i - v k| ∈ ds :=
+    Finset.mem_image.mpr ⟨i, Finset.mem_erase.mpr ⟨hik, Finset.mem_univ i⟩, rfl⟩
+  have := hl _ hmem
+  rw [show v i * s - v k * s = (v i - v k) * s by ring]
+  rcases abs_cases (v i - v k) with ⟨he, -⟩ | ⟨he, -⟩
+  · rwa [he] at this
+  · rw [he] at this
+    rwa [show (v i - v k) * s = -(-(v i - v k) * s) by ring, Flanks.circDist_neg]
+
 end LRC.Spec
