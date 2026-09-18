@@ -402,3 +402,50 @@ bounded `Σ ds` is the only method here that has found anything, and it is limit
 of `Σ ds` — it is not monotone — and that the cushion stays above 1. The first-moment route remains
 the sharpest formulation of door 4, but it is not yet a proof strategy with a proven margin; it is a
 sufficient condition that holds everywhere it has been checked and is tightening as the search widens.
+
+---
+
+## 13. Method correction: §§5, 8, 11, 12 are density, not BSM
+
+**The owner's ruling, and it is right.** §§5, 8, 11 and 12 work with a main term, an error term, a
+Fourier decomposition and a first moment. Those are **imported density objects**. The framework is
+BSM: its objects are readings, laps, flanks, openings, bands, and **rules with their conditions shown
+exhaustive** (`FRAMEWORK_CONJECTURE_v1` §3). Estimating a density and bounding its error is not an
+exhibition of a rule, and the standing ruling is that *tools are fine, targets and statements must
+stay native*.
+
+So the decay I was chasing in §12 is a property of an imported statistic, and its failure to be
+monotone is a fact about that statistic — not about the cascade. Chasing it further would be
+refining an import.
+
+### 13a. Which door-4 results are native, and stand
+
+| result | status |
+|---|---|
+| `clear_at_int_flank_iff_emod` — the band criterion as an integer congruence | **native**, `[PROVED]` |
+| `clear_at_int_flank_iff_emod_b` — modulus `n·b → b`; six progressions in bands | **native**, `[PROVED]` |
+| the flank sits on its own band's edge, so six conditions not seven | **native**, `[VERIFIED]` |
+| `inWay_at_first_opening_of_lt`, `eq_min_of_lonely_first_opening` — `k = 0` collapses to the nearest flank | **native**, `[PROVED]` |
+| the two locators are the residues `±1 (mod 8)` | **native**, `[VERIFIED]` |
+| **no designated-flank rule works** (§6) | **native** — and it is a statement *about rules* |
+| main term, error, cushion, first moment (§§5, 8, 11, 12) | **imported** — density |
+
+### 13b. What the native attack on door 4 actually is
+
+Not: estimate how many openings are lonely and bound the error.
+
+But: **exhibit a rule naming a lonely `(e, k)`, with its conditions shown exhaustive.** That is what
+§6.7 does for the cascade, and it is the standard `FRAMEWORK_CONJECTURE_v1` §3 sets.
+
+§6 is therefore the most native result here, and it is a genuine constraint on any such rule: the rule
+cannot be *"take flank `R(ds)`"* for any of the four natural choices of `R`, so it must carry
+conditions. Material already in hand for those conditions:
+
+- **`k = 0` at the nearest flank** — a rule with a condition, covering 0.552 (§3), and now with the
+  companion theorem that no other flank can serve at `k = 0`.
+- **`b = 1, k = 0`, condition "no difference `≡ 0 (mod 8)`"** — settles all three tight
+  configurations, where the locators sit at `±1 (mod 8)` (§9a).
+
+The next native step is to continue that table — name the next rule and its condition — rather than
+to sharpen an error term. §12's measurements are left in place as a record of what the density route
+showed, and are not to be built on.
