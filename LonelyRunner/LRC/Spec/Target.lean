@@ -365,4 +365,32 @@ theorem lonelyRunnerAt8_iff_arrangement :
       ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
         ∃ t : ℝ, 0 < t ∧ Arrangement.LonelyAt v k t := Iff.rfl
 
+/-! ### Existence, stated where the mechanisms live
+
+`ExistenceAt8` quantified over a `Finset ℝ` of size at most seven.  That form is *sufficient* for the
+target but not identical to it: it forces decidable equality, collapses duplicate differences, admits
+sets no arrangement produces, and — decisively — discards the arrangement, which is where the gaps,
+the AP structure and "the subject and its two neighbours" live.
+
+The obligation below is the same statement on the arrangement, and it is `Iff.rfl` to the target: not
+a sufficient condition, the conjecture itself.  Its machinery is `LRC/Cascade/Arrangement.lean`. -/
+
+/-- **Existence on arrangements.**  Every injective speed assignment, every subject, a lonely
+instant.  Nothing is pinned at `0` and no scale is chosen: see `Arrangement.lonelyAt_add_const` and
+`Arrangement.lonelyAt_const_mul`. -/
+def ExistenceOnArrangements : Prop :=
+  ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
+    ∃ t : ℝ, 0 < t ∧ Arrangement.LonelyAt v k t
+
+/-- **The obligation is the target.**  Definitional, not a reduction. -/
+theorem lonelyRunnerAt8_iff_existenceOnArrangements :
+    LonelyRunnerAt8 ↔ ExistenceOnArrangements := Iff.rfl
+
+/-- **The target from per-subject witnesses**, with no difference set anywhere in the path. -/
+theorem lonelyRunnerAt8_of_arrangement
+    (H : ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
+      ∃ t : ℝ, 0 < t ∧ Arrangement.LonelyAt v k t) :
+    LonelyRunnerAt8 := H
+
+
 end LRC.Spec
