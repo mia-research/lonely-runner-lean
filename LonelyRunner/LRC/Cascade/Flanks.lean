@@ -860,6 +860,33 @@ theorem exists_lonely_of_smul {ds : Finset ℝ} {c : ℝ} (hc : 0 < c)
   obtain ⟨s, hs, hl⟩ := h
   exact ⟨s / c, div_pos hs hc, (lonely_smul hc).mpr hl⟩
 
+/-! ### A named lonely instant
+
+`ExistenceAt8` asks for a lonely **instant**, not a lonely flank opening, so the witness need not be
+an opening of a member of `ds`.  That freedom gives an exhibition — the instant written down — for
+every whole-number difference set none of whose members is divisible by `n`. -/
+
+/-- **`1/n` is lonely whenever no difference is divisible by `n`.**  For a whole-number difference `a`,
+`circDist (a · (1/n)) = circDist (a/n) ≥ 1/n` unless `n ∣ a`.
+
+This is an exhibition in `FRAMEWORK_CONJECTURE_v1` §3's sense: the instant is *written down*, not
+shown to exist.  It does **not** require `1 ∈ ds`.  At `n = 8` it covers the difference sets with no
+member divisible by 8 — measured at 0.3967 of primitive 7-sets, against `(7/8)^7 = 0.3927`. -/
+theorem lonely_at_inv_of_not_dvd {ds : Finset ℝ}
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ) ∧ ¬ ((n : ℤ) ∣ a)) :
+    Lonely n ds ((n : ℝ)⁻¹) := by
+  intro d hd
+  obtain ⟨a, rfl, hdvd⟩ := hint d hd
+  have hn : 0 < n := by have := (Fact.out : 2 ≤ n); omega
+  rw [show (a : ℝ) * (n : ℝ)⁻¹ = (a : ℝ) / (n : ℝ) by ring]
+  exact circDist_int_div hn hdvd
+
+/-- **So Existence holds outright for those difference sets**, with `1/n` as the witness. -/
+theorem exists_lonely_of_not_dvd {ds : Finset ℝ}
+    (hint : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ) ∧ ¬ ((n : ℤ) ∣ a)) :
+    ∃ s, 0 < s ∧ Lonely n ds s :=
+  ⟨(n : ℝ)⁻¹, inv_pos.mpr n_pos, lonely_at_inv_of_not_dvd hint⟩
+
 /-! ### Door 4: pruning the flank search
 
 `lonely_iff_bounded_search` leaves `∑_{e ∈ ds} e` openings to check.  The first result below removes
@@ -1033,5 +1060,30 @@ theorem clear_at_int_flank_iff_emod_b {a b q s : ℤ} (hb : 0 < b)
   constructor
   · rintro ⟨h1, h2⟩; constructor <;> linarith
   · rintro ⟨h1, h2⟩; constructor <;> linarith
+
+/-- **The general named instant: `(k + 1/n)/c` for a freely chosen whole number `c`.**  `c` need
+**not** belong to `ds`: `ExistenceAt8` asks for a lonely instant, and `clear_at_int_flank_iff_emod`
+places no membership hypothesis on the flank.  So naming an instant means choosing a pair `(c, k)`
+and checking one residue condition per difference.
+
+`lonely_at_inv_of_not_dvd` is the case `k = 0`, `c = 1`.  Taking `k = 0` with `c` free reaches a
+measured 0.9420 of primitive 7-sets at `n = 8`, with median `c = 2`; the remainder needs `k > 0`. -/
+theorem lonely_at_named_instant {ds : Finset ℝ} {c : ℤ} (hc : 0 < c) (k : ℕ)
+    (h : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ) ∧
+      c ≤ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * c) ∧
+      a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * c) ≤ (n : ℤ) * c - c) :
+    Lonely n ds (flankOpening n (c : ℝ) k) := by
+  intro d hd
+  obtain ⟨a, rfl, h1, h2⟩ := h d hd
+  exact (clear_at_int_flank_iff_emod hc k).mpr ⟨h1, h2⟩
+
+/-- **And it settles Existence for that difference set**, with the instant written down. -/
+theorem exists_lonely_of_named_instant {ds : Finset ℝ} {c : ℤ} (hc : 0 < c) (k : ℕ)
+    (h : ∀ d ∈ ds, ∃ a : ℤ, d = (a : ℝ) ∧
+      c ≤ a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * c) ∧
+      a * ((n : ℤ) * (k : ℤ) + 1) % ((n : ℤ) * c) ≤ (n : ℤ) * c - c) :
+    ∃ s, 0 < s ∧ Lonely n ds s :=
+  ⟨flankOpening n (c : ℝ) k, flankOpening_pos (by exact_mod_cast hc) k,
+    lonely_at_named_instant hc k h⟩
 
 end Flanks
