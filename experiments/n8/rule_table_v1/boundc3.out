@@ -1,0 +1,10 @@
+hunt: max smallest-c = 17 at ds=(92, 94, 116, 137, 160, 224, 384)
+   divisible by 8 : [160, 224, 384]  (3 of 7)
+   2-adic valuations: [2, 1, 2, 0, 5, 5, 7]
+
+ #div by 8      n  median c   max c
+         0   4771         1       1
+         1   4792         3      11
+         2   1957         4      12
+         3    415         4      11
+         4     61         5      10

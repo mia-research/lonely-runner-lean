@@ -1,0 +1,3 @@
+[1,20] exhaustive 77400 sets: max smallest-c = 13 at (1, 4, 9, 13, 14, 16, 17)
+[1,22] exhaustive 170213 sets: max smallest-c = 13 at (1, 4, 9, 13, 14, 16, 17)
+hunt maximising c, 120 restarts x 250 steps: max smallest-c = 15 at (40, 56, 80, 112, 149, 187, 192)

@@ -519,3 +519,66 @@ limitation is the numerator: this fixes `u = 1`, while the general instant is `u
 Two named instants are now proved and cover 94%. The gap is unchanged in kind but much narrower in
 scope: **what names `(c, k)` for the remaining 5.8%** — the sets carrying a difference divisible by 8
 in a configuration no single `c` clears.
+
+---
+
+## 12. What names `(c, k)` for the remaining 5.8%
+
+### 12a. Why `k = 0` has a ceiling  `[derived]`
+
+At `k = 0` the condition is `a mod 8c ∈ [c, 7c]`. For any `a < c` this reads `a ≥ c`, so
+
+    k = 0 requires  c ≤ min ds.
+
+That is the whole reason the `k = 0` layer stalls: for `(2,3,4,5,6,7,16)` the minimum is 2, so only
+`c ∈ {1,2}` are available, and `16 ≡ 0 (mod 16)` and `16 ≡ 0 (mod 8)` kill both. At `k > 0` the
+ceiling lifts, because `a(8k+1)` is no longer smaller than the modulus.
+
+### 12b. Small `(c, k)` always worked  `[VERIFIED — no failure anywhere]`
+
+For 40 sets with no `c` at `k = 0`: smallest `c` had median **5**, max **10**; its `k` median **2**,
+max **5**; **none failed**. `c ∈ ds` in only 7 of 40 — the free-flank freedom of §11b is doing the
+work, not a member of `ds`.
+
+`(2,3,4,5,6,7,16)`, the unique one-flank set, is named by **`(c, k) = (8, 7)`**, i.e. `t = 57/64`.
+
+Across everything tested — exhaustive `[1,14]`, `[1,17]`, `[1,20]`, `[1,22]` (267,000 sets) and
+30,000 random sets to 600 — **a naming pair was found for every set, with `c ≤ 13`.**
+
+### 12c. The divisibility structure, and a confirmation
+
+| # differences divisible by 8 | median `c` | max `c` |
+|---|---|---|
+| **0** | **1** | **1** |
+| 1 | 3 | 11 |
+| 2 | 4 | 12 |
+| 3 | 4 | 11 |
+| 4 | 5 | 10 |
+
+The first row **is** `lonely_at_inv_of_not_dvd`, recovered from the data: no difference divisible by
+8 ⟹ `c = 1` ⟹ `t = 1/8`. Beyond that the count of multiples of 8 does **not** drive the size of `c`.
+
+### 12d. The obstruction: `c` is not bounded by anything I can prove  `[STOP]`
+
+The smallest naming `c` **grows with search effort**:
+
+| search | max smallest-`c` |
+|---|---|
+| exhaustive `[1,14]` | 9 |
+| exhaustive `[1,17]`, `[1,20]`, `[1,22]` | **13** (same set each time) |
+| hill-climb, 120 restarts | 15 |
+| hill-climb, 400 restarts | **17** |
+
+So *"try all `(c, k)` with `c ≤ C`"* is **not** an established rule: I have no `C`. The naming pair
+always exists in practice and I cannot bound where to look for it.
+
+**What a bound would buy, stated exactly.** If `c ≤ C` always sufficed, the condition would depend on
+each `a` only through `a mod 8c` for `c ≤ C`, hence through `a mod 8·lcm(1..C)` — a **finite** check
+over residue patterns. `ExistenceAt8` over whole numbers would reduce to a finite computation. That
+is what the missing bound is worth, and why it is the right thing to attack next.
+
+**Where this leaves the door-4 line.** Two named instants are proved and cover 94% (§11e). The
+remaining 5.8% always have a named instant and it is always small in practice — but the search for it
+is unbounded by anything proved, which is the same shape of gap as `lonely_iff_bounded_search`'s
+per-set finiteness with no uniform bound. The gap has moved from *"which opening"* to *"how far to
+look"*, and got much smaller — `c ≤ 17` observed, against `Σ ds` before — without closing.
