@@ -1,0 +1,9 @@
+     V      n   max general c   max pow2 c   ratio
+    50   1200               8           32     4.0x
+   100   1200              12           32     2.7x
+   200   1200              10           32     3.2x
+   400   1200              11           64     5.8x
+   800   1200              11          128    11.6x
+
+  the closed dyadic route reported max kappa = 7,8,8,9,10 for V = 50..800,
+  i.e. denominator 2^kappa = 8c, so c = 2^(kappa-3) = 16,32,32,64,128.

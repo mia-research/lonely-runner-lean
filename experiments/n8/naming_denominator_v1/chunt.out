@@ -1,0 +1,6 @@
+  scale    200: hunt max smallest-c =  13  at (38, 66, 105, 155, 160, 168, 192)
+  scale   2000: hunt max smallest-c =  17  at (230, 275, 575, 704, 728, 768, 1120)
+  scale  20000: hunt max smallest-c =  23  at (1584, 5196, 11248, 13440, 15547, 15684, 18088)
+
+OVERALL hunted maximum: c = 23 at ds=(1584, 5196, 11248, 13440, 15547, 15684, 18088)
+   its k: [1, 7, 8, 16]
