@@ -1,3 +1,4 @@
+import LonelyRunner.LRC.Cascade.Arrangement
 import LonelyRunner.LRC.Cascade.Flanks
 import LonelyRunner.LRC.Cascade.SmallOrders
 import LonelyRunner.LRC.Cascade.FourDifferences
@@ -354,5 +355,14 @@ theorem exists_lonely_of_card_le_three {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0
       hpos hcard ha (fun d hd => hmin d hd)
     exact ⟨(move 8 ds)^[3] (1 / (8 * a)),
       lt_of_lt_of_le hb (iterate_ge (n := 8) ds _ 3), lonely_of_fixed hpos hfix⟩
+
+/-- **The target in the arrangement's own objects.**  `LonelyRunnerAt8` is exactly "for every
+arrangement and every subject there is a positive time at which the subject is lonely", with
+`Arrangement.LonelyAt` the framework's predicate — separations between moving runners, no `ds`, no
+duplicate collapse, and the indexing intact. -/
+theorem lonelyRunnerAt8_iff_arrangement :
+    LonelyRunnerAt8 ↔
+      ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
+        ∃ t : ℝ, 0 < t ∧ Arrangement.LonelyAt v k t := Iff.rfl
 
 end LRC.Spec
