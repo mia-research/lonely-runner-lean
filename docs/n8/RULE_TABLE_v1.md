@@ -391,3 +391,59 @@ second description is strictly more informative and still not sufficient.
 **Recorded so it is not re-derived.** Any future route that ends in a comparison of *total blocked
 measure* against *total span* will produce `7/4` and be vacuous, whatever the framing. The only
 routes with a chance are those that use where the blocked sets sit relative to **each other**.
+
+---
+
+## 10. The AP's four isolation events, and what they explain
+
+**The owner's statement.** The AP gives four global isolation events — two patterns and their
+inversions — and the framework needs only **one**.
+
+### 10a. Exact, and it explains §8b  `[VERIFIED]`
+
+For `{1,…,7}`, every flank's lonely openings:
+
+| flank | parity | lonely opening | instant |
+|---|---|---|---|
+| 1 | odd | `k = 0` | **1/8** |
+| 2 | even | none | — |
+| 3 | odd | `k = 1` | **3/8** |
+| 4 | even | none | — |
+| 5 | odd | `k = 3` | **5/8** |
+| 6 | even | none | — |
+| 7 | odd | `k = 6` | **7/8** |
+
+**The four isolation events are exactly the four odd flanks' openings**, and the set
+`{1/8, 3/8, 5/8, 7/8}` is closed under `t ↦ 1 − t`: `1/8 ↔ 7/8` pairs flanks 1 and 7, `3/8 ↔ 5/8`
+pairs flanks 3 and 5. Two patterns and their inversions, as stated.
+
+**This explains §8b**, which recorded that the working flanks of the AP are the odd differences
+without knowing why. They are the hosts of the four events, one each.
+
+### 10b. The symmetry is general; the four-fold *opening* structure is not
+
+Over 9,763 lonely openings from general `ds`:
+
+| | |
+|---|---|
+| mirror `1 − t` fails to be lonely | **0** — `lonely_neg`, as it must be |
+| mirror `1 − t` is itself a flank opening | **962 (9.9%)** |
+
+So loneliness is always symmetric, but the **opening** structure is not: away from the AP the mirror
+of a lonely opening is lonely and lands *between* openings. The neat four-event picture is an AP
+phenomenon. (An earlier run of mine reported "0/400 closed" for general `ds`; that tested closure of
+the *opening* set, which is the wrong object for the symmetry claim. The instant-level statement is
+the one above, and it never fails.)
+
+### 10c. The inversion worth recording
+
+*"We only need to find one"* is exactly `ExistenceAt8`'s `∃ s`. And at the AP one is **named
+exactly**: `t = 1/8`, at flank `b = 1`, `k = 0`, under the condition *no difference divisible by 8*.
+
+So the configurations where LRC is **tightest** — the three extremal sets, margin of a single opening
+— are precisely the ones where the naming rule is **simplest and exact**. The naming difficulty is not
+at the extremes; it is in the ordinary middle, where nothing distinguished picks out the instant.
+
+That is the opposite of what the density measurements suggested (§§11–12 of `DOOR4_v1`, where the
+worst error sat at `Σ ds ≈ 50`, in the middle) — and it is the same answer read from the native side.
+Both say: **the hard cases for naming are the generic ones, not the extremal ones.**

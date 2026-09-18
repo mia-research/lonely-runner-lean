@@ -1,0 +1,14 @@
+AP {1..7}: every flank's lonely openings, as instants
+   flank 1 (odd ): k=0 t=1/8
+   flank 2 (even): none
+   flank 3 (odd ): k=1 t=3/8
+   flank 4 (even): none
+   flank 5 (odd ): k=3 t=5/8
+   flank 6 (even): none
+   flank 7 (odd ): k=6 t=7/8
+   distinct isolation instants: [Fraction(1, 8), Fraction(3, 8), Fraction(5, 8), Fraction(7, 8)]
+   count 4;  closed under t -> 1-t ? True
+
+general ds: 400 sets with a lonely opening
+   lonely-instant set closed under t -> 1-t : 0/400
+   mirrored instants hosted by a DIFFERENT flank: 556 occurrences
