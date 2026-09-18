@@ -143,6 +143,24 @@ theorem nextOpening_le_move {ds : Finset ℝ} {d t : ℝ} (hd : d ∈ ds) (hw : 
   refine Or.inr ⟨d, hd, ?_⟩
   simp [hw]
 
+/-! ### The disparity law
+
+Write `ρ = d/m` for a runner's **disparity** with the nearest difference `m`, and `τ = m·t` for the
+nearest runner's reading.  Then `d·t = ρ·τ`: a runner's reading is its disparity times the nearest
+runner's, so laps are set by disparity and not chosen.  The move's effect on `τ` follows. -/
+
+/-- **A runner's reading is its disparity times the nearest runner's reading.** -/
+theorem reading_eq_disparity_mul {m d t : ℝ} (hm : 0 < m) : (d / m) * (m * t) = d * t := by
+  field_simp
+
+/-- **The move advances the nearest runner's reading by the setter's remaining depth, divided by the
+setter's disparity.**  So a runner far out of scale with the nearest — large `ρ` — advances the
+reading very little, however deep it sits; the increment is fixed by the disparity, not chosen. -/
+theorem reading_increment {m d t : ℝ} (hm : 0 < m) (hd : 0 < d) (N : ℤ) :
+    m * ((((N : ℝ)) + (n : ℝ)⁻¹) / d) - m * t
+      = (((N : ℝ) + (n : ℝ)⁻¹) - d * t) / (d / m) := by
+  field_simp
+
 /-- **A fixed point of the move is a lonely time.** -/
 theorem lonely_of_fixed {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d) {t : ℝ} (hfix : move n ds t = t) :
     Lonely n ds t := by
