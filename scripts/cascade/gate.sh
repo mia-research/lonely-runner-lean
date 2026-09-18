@@ -67,6 +67,22 @@ if [ $BUILD_EXIT -ne 0 ]; then
   echo "GATE FAIL: build exit $BUILD_EXIT"; grep -E 'error' "$LOG" | head -20; exit 1
 fi
 
+# WHY THIS EXISTS (added 2026-09-18). Every declaration count below greps for a line beginning
+# `theorem `/`lemma `. That is a PROXY for a declaration, and on 2026-09-18 a `/-- -/` doc comment
+# in Flanks.lean wrapped so that a continuation line began with the word "theorem". It was counted
+# as a declaration by the extractor AND by the coverage assertion -- they agreed, because both read
+# raw lines -- and the manuscript's figure went to 4,749 when 4,748 declarations existed. Only Lean
+# caught it, as `Unknown constant Flanks.on` in check [3].
+# strip_comments removes `/- ... -/` interiors before any line is counted, so a comment can never
+# be counted as a declaration again. Each site below reads through it.
+strip_comments() {
+  awk 'BEGIN{d=0}
+       { line=$0
+         if (d==0) print line; else print ""
+         n=gsub(/\/-/,"&",line); m=gsub(/-\//,"&",line)
+         d += n - m; if (d<0) d=0 }' "$@"
+}
+
 step "[2] sorry inventory"
 SORRY=$(grep -nE '(^|[^[:alnum:]_])sorry([^[:alnum:]_]|$)' $SRC/*.lean 2>/dev/null \
   | grep -vE ':[0-9]+: *--' | grep -vE '`sorry`')
@@ -82,10 +98,10 @@ AX=LonelyRunner/_CascadeGateAxCheck.lean
 {
   echo 'import LonelyRunner.LRC.Cascade.All'
   for f in $(ls $SRC/*.lean | grep -v '/All.lean$'); do   # every module, so a new file cannot be missed
-    awk '/^namespace /{ns=$2} /^end /{if($2==ns) ns=""} \
+    strip_comments "$f" | awk '/^namespace /{ns=$2} /^end /{if($2==ns) ns=""} \
          /^[[:space:]]*(private |protected )*(theorem|lemma) /{ \
            for(i=1;i<=NF;i++) if($i=="theorem"||$i=="lemma"){name=$(i+1); break} \
-           if(ns!="") print "#print axioms " ns "." name; else print "#print axioms " name}' "$f"
+           if(ns!="") print "#print axioms " ns "." name; else print "#print axioms " name}'
   done
 } > "$AX"
 NDECL=$(grep -c '^#print axioms' "$AX")
@@ -94,8 +110,8 @@ NDECL=$(grep -c '^#print axioms' "$AX")
 # Deliberately BROADER than the extractor's own pattern -- attribute prefixes, `nonrec`, `noncomputable`
 # -- so a declaration written in a form the extractor cannot name makes the counts differ instead of
 # being skipped silently. A same-pattern count on both sides would agree by construction and never fire.
-NDISK=$(grep -hcE '^[[:space:]]*(@\[[^]]*\][[:space:]]*)*(private |protected |nonrec |noncomputable )*(theorem|lemma)[[:space:]]' \
-  $(ls $SRC/*.lean | grep -v '/All.lean$') 2>/dev/null | awk '{s+=$1} END{print s+0}')
+NDISK=$(for f in $(ls $SRC/*.lean | grep -v '/All.lean$'); do strip_comments "$f"; done \
+  | grep -cE '^[[:space:]]*(@\[[^]]*\][[:space:]]*)*(private |protected |nonrec |noncomputable )*(theorem|lemma)[[:space:]]')
 if [ "$NDECL" != "$NDISK" ]; then
   echo "  COVERAGE FAIL: extracted $NDECL, but $NDISK proof-carrying declarations are on disk"
   echo "  (a declaration the extractor misses is never axiom-checked)"
@@ -110,8 +126,8 @@ echo "  $NCLEAN of $NDECL clean"
 # The count alone overstates the artefact: 95% of it is the census, one generated theorem per
 # arrangement, each the SAME one-line application of lonely_of_band_list with a different list.
 # Report the split so "4,695 theorems" is never read as 4,695 distinct mathematical facts.
-GEN=$(grep -hcE '^theorem |^lemma ' $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
-      | paste -sd+ - | bc 2>/dev/null)
+GEN=$(strip_comments $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
+      | grep -cE '^theorem |^lemma ')
 GEN=${GEN:-0}
 STRUCT=$((NDECL - GEN))
 echo "  of which: $STRUCT structural, $GEN generated census instances ($((100*GEN/NDECL))%)"
@@ -168,7 +184,7 @@ if [ -z "$MAN" ]; then
   echo "  skipped (no MANUSCRIPT_v9_3.md beside this tree)"
   FIG_OK=1
 else
-  T_N=$(grep -hE '^theorem |^lemma ' $SRC/*.lean | wc -l | tr -d ' ')
+  T_N=$(strip_comments $SRC/*.lean | grep -cE '^theorem |^lemma ')
   T_D=$(cd $SRC && shasum -a 256 *.lean | sort -k2 | shasum -a 256 | cut -d' ' -f1)
   # The commit that last touched the ARTEFACT, not HEAD: editing this gate or any file
   # outside LRC/Cascade must not make the manuscript's recorded commit stale, and the
@@ -185,8 +201,8 @@ else
     T_NRE="$T_N"; T_NCOMMA="$T_N"
   fi
   grep -qE "$T_NRE" "$MAN" || { MISS="$MISS theorems($T_NCOMMA)"; FIG_OK=0; }
-  T_G=$(grep -hcE '^theorem |^lemma ' $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
-        | paste -sd+ - | bc 2>/dev/null); T_G=${T_G:-0}
+  T_G=$(strip_comments $SRC/PinnedBatch*.lean $SRC/CensusBatch.lean $SRC/CensusFamilies.lean 2>/dev/null \
+        | grep -cE '^theorem |^lemma '); T_G=${T_G:-0}
   T_S=$((T_N - T_G))
   grep -q "$T_S structural" "$MAN" || { MISS="$MISS structural($T_S)"; FIG_OK=0; }
   grep -q "$T_D" "$MAN"    || { MISS="$MISS digest(${T_D:0:8}...)"; FIG_OK=0; }

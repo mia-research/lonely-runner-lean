@@ -848,8 +848,8 @@ direction among six integers it is still 0.20; only when every difference is com
 optimum fall to exactly 0.125.
 
 `lonely_smul` already makes loneliness scale-free, so the commensurable case reduces to the integer
-case by clearing denominators.  That half is below.  The incommensurable half needs a dense-orbit
-theorem on the `k`-torus, which mathlib does not carry — see `DOOR3_v1.md`. -/
+case by clearing denominators.  That half is below.  The incommensurable half needs a
+dense-orbit theorem on the `k`-torus, which mathlib does not carry — see `DOOR3_v1.md`. -/
 
 /-- **Existence transports along a positive scaling.**  So a difference set all of whose members are
 `c` times a whole number inherits Existence from the whole-number set, and the real case reduces to
