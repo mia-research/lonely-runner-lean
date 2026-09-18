@@ -22,6 +22,21 @@ Existence reduces to, Theorems 11.1–11.3) and **§12** (depth on the profile s
    28 cascade moves. Both are statements about searches. §12 and §11.2 say so in their own words, and
    §11.1 records what a proof would have to supply.
 
+**Checked for v11.** A **compile-diff against v10** (all 32 numbered results carried at the same
+numbers and statements, every `[OPEN]` item still open, every withdrawal and version map, and a
+**deletion set of zero lines**); its findings are answered and recorded in Appendix B.11. And the
+cascade gate, run against **this** manuscript and deposited at
+`experiments/n8/cascade_gate_v11_v1.out`:
+
+> **GATE PASS: 4,759 theorems, axiom-clean** (coverage 4,759 of 4,759 on disk), 283 structural,
+> 21 modules, no `sorry`, no `native_decide`/`unsafe`/`admit`, the open statement unstated, the
+> named irrational coverage present, and check [6] **clean** — this file's recorded figures match the
+> tree (4,759 theorems, 21 modules, digest `c54d9843`, commit `c023d10`); 920s.
+
+The gate's closing line is kept here because it is the point: *"Existence at order 8 is NOT proved —
+it remains open and unstated."* The v11 development files of §10.1 are **not** in that tree, so the
+figures above are unchanged by them, exactly as §7 records.
+
 **A method ruling carried here.** §11.1 argues by covering, which §6A's row bans in terms that are
 **formal, not a provenance test**. It is admitted by the **author's ruling of 2026-09-18** that the
 ban targets *importing* such an argument, and that one built from the framework's own objects is not
