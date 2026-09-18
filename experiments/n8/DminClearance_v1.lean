@@ -140,4 +140,30 @@ theorem clear_of_reading_le_gen {n a c : ℤ} (hc : 0 < c) (hlo : c ≤ a) (hhi 
   have h : a % (n * c) = a := Int.emod_eq_of_lt (by omega) (by nlinarith)
   omega
 
+
+
+/-! ## `d_min` was never special: the criterion holds at every cascade scale
+
+A cascade scale is `D = e·g/(8N+1)`, where the reading of disparity `a·g` is `a(8N+1)/e`. Blocking
+is `|reading − 8M| < 1`, i.e. `|a(8N+1) − 8Me| < e` — which is `clear_iff`'s statement with `a`
+replaced by `a(8N+1)` and `c` by `e`. So the general criterion *is* `clear_iff`:
+
+> **clear at scale `e/(8N+1)` ⟺ for every disparity `a`,  `e ≤ a(8N+1) mod 8e ≤ 7e`**
+
+and `clear_iff` as first stated is the case `e = d_min/g`, `N = 0`.
+
+Verified against the cascade at **every scale it visits**, not only the first: 46,353 / 46,353
+(`scale_criterion_v1.py`). The depth stratification that follows: `k=0` covers 53.0% of subjects,
+through `k=1` 74.8%, `k=2` 88.0%, `k=3` 95.0%, `k=4` 97.7%.
+
+So the cascade is a sequence of applications of **one** residue-band test, with the host `e` and
+multiplier `8N+1` updating at each move. -/
+
+/-- **The criterion at an arbitrary cascade scale.**  Identical to `clear_iff`; only the arguments
+move.  Stated separately because the reading — not the disparity — is what carries the multiplier. -/
+theorem clear_at_scale_iff {a e N : ℤ} (he : 0 < e) :
+    (∀ M : ℤ, e ≤ |a * (8 * N + 1) - 8 * M * e|) ↔
+      (e ≤ (a * (8 * N + 1)) % (8 * e) ∧ (a * (8 * N + 1)) % (8 * e) ≤ 7 * e) :=
+  clear_iff he
+
 end DminClearance
