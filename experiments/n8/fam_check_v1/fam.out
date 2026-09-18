@@ -1,0 +1,3 @@
+active-runner observations: 3853
+  (1) C_next >= every active runner's own opening : violations 0
+  (2) a runner's lap strictly increases between activities : violations 0
