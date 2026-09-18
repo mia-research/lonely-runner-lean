@@ -1,0 +1,5 @@
+lonely openings examined: 47091
+  fraction inside the slowest runner's LONGEST clear run: 0.132
+  (a run holds ~1/#runs of the clear set; #runs median ~9, so chance ~0.11-0.2)
+  position within its clear run (0=start, 1=end): min 0.00 25% 0.20 median 0.50 75% 0.80
+  rank of the containing run by length (0 = longest): {0: 27798, 1: 3111, 2: 2204, 3: 2092, 4: 2005, 5: 975}

@@ -265,3 +265,73 @@ the number of openings surviving R0′ from below by more than the other runners
 union bound is vacuous there (`6 × 1/4 = 1.5`), so it needs the band arithmetic of `DOOR4_v1` §1, not
 a count. That is the concrete next step, and it is the first one in this file with both a proved
 ingredient and a named target.
+
+---
+
+## 8. Fast and slow blockers are different objects, and the AP names the instant
+
+Two owner observations, tested.
+
+### 8a. "Faster runners get in and out of the way faster"  `[VERIFIED]`
+
+Exact in the flank picture: stepping `k` by one moves runner `a` by `a mod b`. A slow runner steps a
+little and blocks **long runs of consecutive openings**; a fast runner steps far and blocks
+**scattered singles**. Measured at `b = max ds`, 2,400 (runner, flank) pairs:
+
+| `a/b` | # blocked runs | mean run length | blocked fraction |
+|---|---|---|---|
+| 0.00–0.10 | **9** | **4.88** | 0.249 |
+| 0.20–0.35 | 42 | 1.00 | 0.250 |
+| 0.50–0.70 | 45 | 1.00 | 0.249 |
+
+**Same quarter blocked by every runner; completely different shape.** This is the first fact that
+distinguishes the six blockers from one another — and it is exactly what every counting argument
+throws away when it writes `6 × 1/4 = 1.5`. One or two slow runners carve the openings into a few
+long windows; four or five fast ones sprinkle holes inside them.
+
+**A heuristic of mine off it, refuted.** I predicted the lonely openings would sit near the middle of
+the slow runner's clear stretches. They do not: position within the stretch has quartiles
+**0.20 / 0.50 / 0.80** — uniform. (A figure in the first run said 59% lie in "the longest" stretch;
+that was an artefact of ranking by *length* with many runs tied. The honest number is **13.2%**, which
+is chance.)
+
+### 8b. The AP names the instant  `[VERIFIED]`
+
+For an arithmetic progression the positions at time `t` are themselves an AP on the circle with
+generator `d·t`: **clustering is the generator at 0, isolation is the generator at 1/8** — two
+extremes of one parameter. The cascade's bound `t₀ = 1/(8m)` *is* that isolation point, which is why
+`k = 0` at the nearest flank settles the AP exactly (`ap_defect = 0 → k = 0`).
+
+**Departing from the AP does not shift `k` — it kills the flank.** Correlation of `ap_defect` with the
+first working `k` is `−0.164`, and the median `k` is 0 in every band; but the nearest flank's failure
+rate climbs **0.036 → 0.344** across the defect range. The drift is in *which runner nominates*, which
+is the TLF direction: `ap_defect` correlates `+0.32` with the lowest working rank and `−0.36` with the
+number of working flanks. Modest — the medians do not move, it is a tail effect.
+
+**And at the AP itself the nomination has an exact arithmetic description.** For `{1,…,7}` the working
+flanks are ranks `0, 2, 4, 6` — precisely the **odd** differences `1, 3, 5, 7`; every even difference
+fails as a flank. That is a *named* rule at the extremal configuration rather than a count.
+
+| set | `ap_defect` | working ranks |
+|---|---|---|
+| `{1,2,3,4,5,6,7}` | 0.0000 | `[0,2,4,6]` — the odd differences |
+| `{1,2,3,4,5,7,12}` | 0.2194 | `[0,2,4,5]` |
+| `{1,4,5,6,7,11,13}` | 0.1959 | `[0,2,4,5,6]` |
+| `{2,3,4,5,6,7,16}` | 0.2644 | `[6]` — the unique one-flank set |
+
+Note the defect does **not** single out the extremal set: `(2,3,4,5,6,7,16)` sits at 0.264, inside the
+ordinary range. So AP-defect measures how *thin* the options get, not *which* set is hardest.
+
+### 8c. Where this leaves the naming gap
+
+Two of the three pieces a producer needs are now in hand and native:
+
+- **which runner nominates** — the three largest (TLF, conjecture), and at an AP exactly the odd
+  differences (verified);
+- **which laps are dead** — R0′, proved.
+
+Missing still: **which lap**, away from the AP. But the shape of the remaining question has changed.
+It is no longer "how many openings survive six interchangeable quarter-blockers" — a count that is
+vacuous at `1.5`. It is: *inside the few long windows the slow runners leave, avoid the scattered
+holes the fast ones punch.* That is an argument about two kinds of obstruction, which is the sort the
+framework admits.

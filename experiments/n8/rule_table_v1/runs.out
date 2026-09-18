@@ -1,0 +1,11 @@
+2400 (runner, flank) pairs at b = max(ds), bucketed by speed ratio a/b
+     a/b range     n    #runs  avg run len  blocked frac
+  0.00-0.10      231      9.0         4.88         0.249
+  0.10-0.20      225     26.0         1.68         0.249
+  0.20-0.35      355     42.0         1.00         0.250
+  0.35-0.50      372     44.0         1.00         0.249
+  0.50-0.70      503     45.0         1.00         0.249
+  0.70-1.00      714     25.0         1.64         0.250
+
+  -> blocked FRACTION is the same (~1/4) for all speeds; the SHAPE differs:
+     slow runners block few long runs, fast runners block many short ones.

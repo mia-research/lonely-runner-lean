@@ -1,0 +1,13 @@
+     ap_defect      n  lowest working rank   #working flanks
+  0.05-0.15      1922                  0.0               7.0
+  0.15-0.30      8638                  0.0               7.0
+  0.30-0.50      7792                  0.0               7.0
+  0.50-1.00      1638                  0.0               7.0
+
+correlation(ap_defect, lowest working flank rank) = +0.3155
+correlation(ap_defect, number of working flanks)  = -0.3609
+
+   (1, 2, 3, 4, 5, 6, 7)    ap_defect 0.0000  working ranks [0, 2, 4, 6]
+   (2, 3, 4, 5, 6, 7, 16)   ap_defect 0.2644  working ranks [6]
+   (1, 2, 3, 4, 5, 7, 12)   ap_defect 0.2194  working ranks [0, 2, 4, 5]
+   (1, 4, 5, 6, 7, 11, 13)  ap_defect 0.1959  working ranks [0, 2, 4, 5, 6]
