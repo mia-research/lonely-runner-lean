@@ -1108,4 +1108,33 @@ theorem flankOpening_eq_div {j b : ℤ} (hb : 0 < b) (k : ℕ) :
     field_simp
     linarith
 
+/-! ### The two neighbours
+
+Loneliness is a statement about the subject's two **neighbours** on the circle: the runner nearest
+ahead and the runner nearest behind.  Everything else is further round and imposes nothing.  That is
+the sense in which an isolation is affected by three speeds — the subject's and its two neighbours'. -/
+
+/-- **Loneliness splits into one condition per side.**  `circDist` is `min (fract) (1 − fract)`, so
+the threshold `1/n` becomes: nothing within `1/n` ahead, and nothing within `1/n` behind. -/
+theorem lonely_iff_two_sided {ds : Finset ℝ} {s : ℝ} :
+    Lonely n ds s ↔
+      (∀ d ∈ ds, (n : ℝ)⁻¹ ≤ Int.fract (d * s)) ∧
+      (∀ d ∈ ds, Int.fract (d * s) ≤ 1 - (n : ℝ)⁻¹) := by
+  unfold Lonely circDist
+  constructor
+  · intro h
+    refine ⟨fun d hd => le_trans (h d hd) (min_le_left _ _), fun d hd => ?_⟩
+    have := le_trans (h d hd) (min_le_right _ _); linarith
+  · rintro ⟨h1, h2⟩ d hd
+    exact le_min (h1 d hd) (by have := h2 d hd; linarith)
+
+/-- **Only the two neighbours matter.**  The subject is lonely exactly when the runner with the
+least fractional position (the nearest ahead) is at least `1/n`, and the one with the greatest (the
+nearest behind) is at most `1 − 1/n`.  The other `k − 2` runners are unconstrained. -/
+theorem lonely_iff_neighbours {ds : Finset ℝ} (hne : ds.Nonempty) {s : ℝ} :
+    Lonely n ds s ↔
+      (n : ℝ)⁻¹ ≤ ds.inf' hne (fun d => Int.fract (d * s)) ∧
+      ds.sup' hne (fun d => Int.fract (d * s)) ≤ 1 - (n : ℝ)⁻¹ := by
+  rw [lonely_iff_two_sided, Finset.le_inf'_iff, Finset.sup'_le_iff]
+
 end Flanks
