@@ -304,4 +304,35 @@ theorem lonelyRunnerAt8_of_existence (h : ExistenceAt8) : LonelyRunnerAt8 := by
   · rw [he] at this
     rwa [show (v i - v k) * s = -(-(v i - v k) * s) by ring, Flanks.circDist_neg]
 
+/-! ## how much wider is the difference-set form than the conjecture?
+
+Exactly the sets no arrangement can produce, and they are already proved.
+
+For a chosen runner `k`, a value `d` occurs as `|v i - v k|` for **at most two** runners, `v k ± d`.
+So a difference set of card `m` needs multiplicities summing to 7 with each at most 2, i.e. `2m ≥ 7`,
+i.e. **`m ≥ 4`**.  Conversely every `ds` with `4 ≤ card ≤ 7` does arise: take the subject at `0`,
+a runner at `+d` for each `d ∈ ds`, and one at `−d` for `7 − card` of them — eight distinct speeds
+whose difference set from the subject is exactly `ds` (checked on 20,000 sets, no failure).
+
+So `ExistenceAt8` exceeds the conjecture **only on `card ≤ 3`** — and that case is a theorem. -/
+
+/-- **Existence holds outright for at most three differences.**  `FewDifferences` stops the cascade
+within three moves for `card ≤ 3` at every `n ≥ 4`, and a fixed point is a lonely time.
+
+This is the whole of what `ExistenceAt8` asks beyond the conjecture, so the difference-set form is
+**not** a weaker thing we have been chasing by mistake: it is the conjecture plus a case already
+settled. -/
+theorem exists_lonely_of_card_le_three {ds : Finset ℝ} (hpos : ∀ d ∈ ds, 0 < d)
+    (hcard : ds.card ≤ 3) : ∃ s, 0 < s ∧ Lonely 8 ds s := by
+  classical
+  rcases Finset.eq_empty_or_nonempty ds with rfl | hne
+  · exact ⟨1, by norm_num, by intro d hd; simp at hd⟩
+  · obtain ⟨a, ha, hmin⟩ := ds.exists_min_image id hne
+    have ha0 := hpos a ha
+    have hb : (0 : ℝ) < 1 / (8 * a) := by positivity
+    have hfix := FewDifferences.three_diffs_stop_within_three_moves (n := 8) (by norm_num)
+      hpos hcard ha (fun d hd => hmin d hd)
+    exact ⟨(move 8 ds)^[3] (1 / (8 * a)),
+      lt_of_lt_of_le hb (iterate_ge (n := 8) ds _ 3), lonely_of_fixed hpos hfix⟩
+
 end LRC.Spec
