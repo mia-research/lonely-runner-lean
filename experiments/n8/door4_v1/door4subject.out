@@ -1,0 +1,12 @@
+[c] the extremal arrangement v = (0,1,2,3,4,5,6,7): per-subject best count
+    [1, 2, 3, 2, 2, 3, 2, 1]
+    -> only the two EXTREME subjects are tight at 1; interior subjects give 2 or 3
+
+[a] spread across the eight subjects of one arrangement:
+    1500 arrangements: max-min spread  min 2  median 10  max 22
+    hardest subject's count: min 3  1% 5  median 10
+    arrangements with a subject having ZERO: 0
+    hardest subject is an EXTREME runner (slowest or fastest): 6/1500 (chance 2/8 = 0.25)
+
+[b] is any fixed subject index always easy?  count of arrangements where index i is the hardest:
+    {0: 11, 1: 72, 2: 289, 3: 488, 4: 420, 5: 190, 6: 28, 7: 2}

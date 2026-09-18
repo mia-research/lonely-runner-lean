@@ -243,3 +243,55 @@ The usable part is 9a: the extremal configurations are exactly those carrying ru
 with nothing at `0 (mod 8)`, and their single lonely opening is `t = 1/8`. That is a complete
 description of where door 4 is tight, in residues, and it is the sharpest handle yet on the three
 cases any proof has to be exact at.
+
+---
+
+## 10. Is the constraint system an artefact of the ordering?
+
+Three things could be meant, and they separate cleanly.
+
+**The listing order: no.** The constraint system at flank `b` is indexed by the *elements* of `ds`,
+which is a `Finset` — unordered. Nothing in it can depend on how the differences are listed.
+
+**The subject choice: absorbed, but it is where the difficulty lives.** Every set of 7 distinct
+positive reals arises as a difference set, via `v = (0, a₁, …, a₇)`, so quantifying over all `ds`
+adds nothing and loses nothing. But *which* `ds` an arrangement hands you depends on which runner is
+the subject, and that choice matters enormously. Across the eight subjects of one arrangement, the
+best-count spread is **median 10, max 22** (1,500 arrangements).
+
+**The mechanism is duplicate collapse.** In the extremal arrangement `v = (0,1,…,7)`:
+
+| subject | differences | as a set | card |
+|---|---|---|---|
+| 0 | `1,2,3,4,5,6,7` | `{1,…,7}` | **7** |
+| 1 | `1,1,2,3,4,5,6` | `{1,…,6}` | 6 |
+| 3 | `1,1,2,2,3,3,4` | `{1,2,3,4}` | **4** |
+| 7 | `1,2,3,4,5,6,7` | `{1,…,7}` | **7** |
+
+Interior subjects lose differences to collapse — `|vⱼ − vᵢ|` coincides ahead and behind — so they
+face **four** conditions, not seven, and are correspondingly easier. Per-subject best counts for that
+arrangement are `[1, 2, 3, 2, 2, 3, 2, 1]`: **only the two extreme subjects are tight.**
+
+(This is also why `ds.card ≤ 7` in the target must be `≤` and not `=`, measured earlier at §1 of
+`EXISTENCE_FRAME_CHECK_v1`: the collapse is real and common.)
+
+**And in generic arrangements it inverts.** The hardest subject is an extreme runner in only
+**6 of 1,500** arrangements — against 2/8 = 0.25 by chance — while the hardest subject index is
+strongly peaked in the middle:
+
+    index:   0    1    2    3    4    5    6    7
+    hardest: 11   72  289  488  420  190   28    2
+
+So "the extremes are hardest" is a property of the *extremal* arrangement, where collapse spares the
+interior, and it reverses in the generic case. No fixed subject index is ever safe, and the hardest
+subject's count was never zero (min 3 over 1,500).
+
+**What this means for the error bound.** The eight subjects of one arrangement are coupled — they
+share the 28 pairwise differences, each appearing in exactly two of the eight sets — and
+`ExistenceAt8` discards that coupling by quantifying over `ds` independently. That discard is
+*correct and unavoidable*: LRC asks for every runner to be lonely, so knowing that *some* subject is
+easy would not help. The coupling is not a resource the error bound can draw on.
+
+**A correction.** The script that produced these numbers printed a label claiming every subject of the
+extremal arrangement is tight. The data it printed alongside, `[1,2,3,2,2,3,2,1]`, says otherwise —
+only the extremes are. The label was wrong and is fixed in the deposited copy.
