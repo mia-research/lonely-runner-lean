@@ -75,3 +75,31 @@ only through `a mod 8·lcm(1..C)` and `ExistenceAt8` over whole numbers would be
 The data says `C` does not exist but grows only like `log V`; a proved bound of the form
 `c ≤ C·log(max ds)` would be a genuine theorem and is the first target here that the measurements
 support rather than refute.
+
+---
+
+## 5. "An isolation, not the first" — why the distinction earns its keep
+
+The target is `∃ s, 0 < s ∧ Lonely 8 ds s`: **an** isolation. Two things follow, and the second is
+the useful one.
+
+**The cascade happens to find the first.** `Iteration.first_isolation_of_fixed` proves the fixed point
+is lonely *and* at or before every positive lonely time. Checked: cascade arrival equals the least
+lonely opening in **3,000 of 3,000** sets. That is a property of the cascade, not a demand on us —
+and describing it as what we are aiming at makes the target sound stricter than it is.
+
+**Naming a later isolation is far easier than reaching the first.** Of the 1,580 sampled sets that
+`lonely_at_inv_of_not_dvd` covers:
+
+| | |
+|---|---|
+| `t = 1/8` is the **first** isolation | **158** |
+| `t = 1/8` is a **later** isolation | **1,422** |
+
+**The proved theorem names an instant that is not the first in 90% of the sets it settles.** Had the
+target been "the first isolation", that theorem would settle almost nothing. The freedom to name a
+late, arithmetically convenient instant is exactly what makes an exhibition possible — and it is what
+the cascade, which must walk to the first, does not have.
+
+This is the sharpest argument for attacking Existence by *naming* rather than by *terminating*: the
+namer may choose its instant, the cascade may not.
