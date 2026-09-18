@@ -26,7 +26,23 @@ open MomentIterationN Flanks ChainBounds NearestState
 instance : Fact (2 ≤ 8) := ⟨by norm_num⟩
 
 /-- **The target, in differences.**  Every subject with at most seven positive speed differences has a
-lonely instant at threshold `1/8`. -/
+lonely instant at threshold `1/8`.
+
+> **AMENDED 2026-09-18 — no longer the target.**  The target is `LonelyRunnerAt8`, the conjecture
+> itself, recorded below.  `ExistenceAt8` is kept because it **suffices**
+> (`lonelyRunnerAt8_of_existence`) and because everything proved against it still transfers.  It is
+> not the target because it demands machinery the conjecture does not:
+>
+> * `Finset ℝ` forces decidable equality on `ℝ`;
+> * it **collapses duplicates** — `|v i - v k|` can coincide for two runners — so the indexing, and
+>   with it the arrangement, is destroyed before any proof starts;
+> * `card ≤ 7` admits difference sets of `card ≤ 3` that **no arrangement produces**, which cost a
+>   separate theorem (`exists_lonely_of_card_le_three`) the conjecture never asked for;
+> * the gaps, the AP structure, the coupling across the eight subjects and "the subject and its two
+>   neighbours" all live at the **arrangement** level and are not expressible in `ds` alone.
+>
+> Equivalence was not a reason to keep working in it: equivalent statements can demand different
+> machinery, and this one offers strictly less structure to work with. -/
 def ExistenceAt8 : Prop :=
   ∀ ds : Finset ℝ, (∀ d ∈ ds, 0 < d) → ds.card ≤ 7 → ∃ s : ℝ, 0 < s ∧ Lonely 8 ds s
 
@@ -271,9 +287,13 @@ two moving runners.
 the difference-set form is strictly more general, and how much of that generality the conjecture
 actually needs is exactly the question of whether we have been proving more than was asked. -/
 
-/-- **The Lonely Runner Conjecture at eight runners, untransformed.**  Eight runners with distinct
-speeds; for each of them there is a positive time at which every other runner is at circle-distance at
-least `1/8`. -/
+/-- **THE TARGET, as of 2026-09-18.**  The Lonely Runner Conjecture at eight runners, untransformed:
+eight runners with distinct speeds; for each of them there is a positive time at which every other
+runner is at circle-distance at least `1/8`.
+
+Amended to this from `ExistenceAt8` by the author's decision; the reasons are recorded on
+`ExistenceAt8` above.  The indexing is retained, so the arrangement — gaps, AP structure, the coupling
+across the eight subjects — remains available to a proof.  A proof is a term of **this** type. -/
 def LonelyRunnerAt8 : Prop :=
   ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8,
     ∃ t : ℝ, 0 < t ∧ ∀ i : Fin 8, i ≠ k → (8 : ℝ)⁻¹ ≤ circDist (v i * t - v k * t)
