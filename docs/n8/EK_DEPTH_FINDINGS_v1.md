@@ -114,7 +114,52 @@ shell just outside `S = 7`, and it looks like one configuration.**
 - Three candidate scale rules — minimal fit, margin-max all-8, margin-max front-4 — **refuted**: all
   three fail on `(11,21,22,23,26,34,35,40)`, serving no scale for some subject at any `r ≤ 400`.
 
-## 8. Open, and the next target
+## 8. The obligation with no time and no iteration  `[PROVED — Lean]`
+
+Formalised 2026-09-18 in **`LonelyRunner/LRC/Cascade/ScaleCandidates.lean`**, seven declarations,
+zero `sorry`, all within `[propext, Classical.choice, Quot.sound]`.
+
+**The identity that does the work.** A flank opening *is* the first spine instant of a scale read
+off the arrangement:
+
+    flankOpening n e k = (k + 1/n)/e = 1 / (n · (e/(n·k+1)))
+
+so `candidateScale n e k = e/(n·k+1)` — a disparity divided by `n·k+1`. Nothing is chosen
+(`flankOpening_eq_spine`).
+
+| declaration | statement |
+|---|---|
+| `candidateScale` | `e/(n·k+1)`, the scale of the opening |
+| `flankOpening_eq_spine` | the opening is that scale's first spine instant |
+| `own_reading` | at its own candidate scale a disparity reads **exactly** `n·k+1` |
+| `candidate_clear_own` | so it is **clear there by construction** — distance exactly 1 from the multiple `n·k`, the threshold case |
+| **`lonely_iff_exists_candidate_scale`** | **the subject is lonely at some positive instant ⟺ some candidate scale is clear for every disparity.** No quantifier over time, no iteration |
+| `inWay_at_scale_interval` | `d` is in the way at scale `D` ⟺ `D > d`, or `D ∈ (d/(n·M+1), d/(n·M−1))` for some `M ≥ 1` |
+
+**What the last one buys.** The bad scales are an **explicit union of open intervals on a
+half-line** — one dimension, not the six of reading space — and the candidate scales are exactly
+their **left endpoints**. So a good scale is a *gap*, and a gap is **named** by its endpoint rather
+than inferred from a measure. That is what keeps the reformulation on the native side of §6A.
+
+**Verified against the cascade** `[VERIFIED — 32,000 of 32,000, exact]`
+(`experiments/n8/scale_interval_v1.py`): the cascade's final scale is the **largest clear endpoint
+`d/(8M+1)` at or below `d_min`**, every time. So the cascade is a sort and a scan, not an
+iteration; the winning candidate has median rank 1, mean 2.41, max 25 in that sample. The 28 moves
+were the sort happening one comparison at a time.
+
+**Grid versus AP, which is where this came from.** Reduce by `g`; write `u_i = π(i) + n·q_i`. At
+`t = p/(ng)` the `q` part contributes `q_i·p` **whole revolutions** and vanishes mod 1. So a grid is
+an AP whose runners have lapped extra whole times, and global isolation fails exactly when two
+runners share a residue — i.e. their disparity is a multiple of `n·g`, i.e. they slot-share. The
+arrangement-level failure and the subject-level slot-sharer are one condition, and the cure in both
+cases is a scale at which "whole cycles" becomes "whole cycles **plus one slot**" — which is what
+`own_reading` says every candidate does.
+
+**Refuted in passing** `[EMPIRICAL]`: the sharer's own flank at `k = b` (where `d = 8b·g`) settles
+only 26–38% (`sharer_split_v1.py`). And "needs `k ≥ 1`" is **not** the same as "has a slot-sharer at
+`g`" — 51.8% have one, 35.8% need `k ≥ 1`.
+
+## 9. Open, and the next target
 
 The residue of §4 is the obligation. Stated in the framework's objects:
 
