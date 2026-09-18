@@ -44,7 +44,10 @@ that `TerminationThree` and `TerminationFour` both live *outside* that regime an
 wall belongs to the method.
 
 **Door 3 — bare existence.** The classical statement. Least structure to work with; carried mainly
-because it is what an outside reader recognises.
+because it is what an outside reader recognises. **It imposes no extra obligation**: all five doors
+carry no integrality hypothesis, so the real case is settled by any of them. Only the *residue tools*
+(`lonely_iff_bounded_search`, `lonely_iff_emod_search`, `clear_at_int_flank_iff_emod_b`) carry
+`hint`, and using them is what would owe a real-to-integer lift. See `DOOR3_v1` §4.
 
 **Door 4 — flank form. This is the one I would attack.** The residue work made it pure arithmetic
 with no trajectory in it. Over whole numbers, `lonely_iff_emod_search` reads:

@@ -52,13 +52,41 @@ Partial machinery does exist for the mixed case: `off_lattice_of_irrational_rati
 `lonely_opening_of_free_off_lattice` and `lonely_of_flank_unkillable` already settle a flank at which
 one runner is off the lattice and the rest are on it — which is the `[C]` row of §2.
 
-## 4. Verdict
+## 4. Verdict — corrected
 
-**Door 3 is not an alternative attack surface. It is door 4 plus a reduction.** Its extra content is
-exactly the incommensurable case, and that case is the *easy* one mathematically — margins of 1.6× to
-3.7× — while being the expensive one to formalise, because the tool is missing from mathlib.
+**An earlier draft of this file said the real case is "a separate, later obligation". That is wrong,
+and the correction matters.**
 
-So the ordering is: **close door 4 first.** The real case is then a separate, later obligation whose
-mathematics is comfortable and whose cost is library-building, not discovery. Recorded here so that
-door 3 is not mistaken for a shortcut, and so that the missing Kronecker step is not rediscovered as
-a surprise at the end.
+Checked against the hypotheses rather than assumed:
+
+| statement | integrality hypothesis? |
+|---|---|
+| `ExistenceAt8`, `ExistenceAt8_cascade`, `ExistenceAt8_flank`, `CascadeCapped`, `FiniteActiveMembership` | **none — all five are over `ℝ`** |
+| `lonely_iff_exists_flank`, `lonely_iff_run_ends` | **none — over `ℝ`** |
+| `lonely_iff_bounded_search`, `lonely_iff_emod_search` | `hint : ∀ d ∈ ds, ∃ a : ℤ, d = a` |
+
+So **the incommensurable case is not an outstanding obligation of the problem.** Every door, and the
+flank form `ExistenceAt8_flank` itself, is stated and reduced over the reals. A proof arriving through
+the cascade (doors 1, 2, 5) or through the flank form as stated settles the real case with no
+reduction at all.
+
+**What the Kronecker step actually costs is the use of one tool.** The residue reformulation —
+`lonely_iff_bounded_search`, `lonely_iff_emod_search`, `clear_at_int_flank_iff_emod_b` — carries
+`hint`, so it speaks only about whole-number differences. Choosing to work in it is what would incur
+the lift. That is a property of the tool, not of the target.
+
+**The real trade-off**, stated plainly:
+
+- Work in the residue form: strong arithmetic (progressions mod `b`, intervals of relative length
+  `3/4`, six conditions not seven) — and you owe the commensurable-to-real lift, whose remaining half
+  needs a `k`-torus dense-orbit theorem mathlib lacks.
+- Work over `ℝ` directly, in `ExistenceAt8_flank` or the cascade: no lift is ever owed — and you give
+  up the residue arithmetic.
+
+**Neither is a gap.** §2's measurement stands and is the useful part: all the difficulty is in the
+fully commensurable case, and any irrational freedom leaves 1.6× to 3.7× of margin. That says the
+incommensurable case is mathematically comfortable however it is reached — which is exactly why
+treating it as an outstanding obligation was a mistake.
+
+**Ordering unchanged:** close door 4. If it closes in the residue form, the lift is then owed and its
+mathematics is easy; if it closes in the flank form over `ℝ`, nothing is owed.
