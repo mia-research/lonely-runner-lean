@@ -839,6 +839,27 @@ theorem depth_floor {a b : ℤ} (hb : 0 < b) (k : ℕ) (N : ℤ)
   rw [inv_eq_one_div]
   gcongr
 
+/-! ### Door 3: the commensurable half of the real case
+
+Door 3 is Existence over **real** difference sets.  Measurement locates all of its difficulty in the
+**rationally dependent** case: with `ℚ`-independent speeds the orbit is dense in the torus and the
+attainable minimum distance runs 0.39–0.46 against a threshold of 0.125, and with one irrational
+direction among six integers it is still 0.20; only when every difference is commensurable does the
+optimum fall to exactly 0.125.
+
+`lonely_smul` already makes loneliness scale-free, so the commensurable case reduces to the integer
+case by clearing denominators.  That half is below.  The incommensurable half needs a dense-orbit
+theorem on the `k`-torus, which mathlib does not carry — see `DOOR3_v1.md`. -/
+
+/-- **Existence transports along a positive scaling.**  So a difference set all of whose members are
+`c` times a whole number inherits Existence from the whole-number set, and the real case reduces to
+the integer case whenever the differences are commensurable. -/
+theorem exists_lonely_of_smul {ds : Finset ℝ} {c : ℝ} (hc : 0 < c)
+    (h : ∃ s, 0 < s ∧ Lonely n ds s) :
+    ∃ s, 0 < s ∧ Lonely n (ds.image (fun d => c * d)) s := by
+  obtain ⟨s, hs, hl⟩ := h
+  exact ⟨s / c, div_pos hs hc, (lonely_smul hc).mpr hl⟩
+
 /-! ### Door 4: pruning the flank search
 
 `lonely_iff_bounded_search` leaves `∑_{e ∈ ds} e` openings to check.  The first result below removes
