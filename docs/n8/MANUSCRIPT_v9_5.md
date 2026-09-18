@@ -1,5 +1,10 @@
 # A Bounding Framework for Eight Lonely Runners
 
+> **SUPERSEDED 2026-09-18 by `MANUSCRIPT_v9_6.md`.** Header stamp only; the body below is unchanged and is kept as the
+> record. Two things in it are known superseded: the Lean target was amended the same day from `ExistenceAt8` to
+> `LonelyRunnerAt8` on arrangements (v9.6 §6.7, Appendix B.9), and the `Cascade` theorem count of 4,709 was produced by a
+> counting rule that could read a doc-comment line as a declaration — see v9.6's header. Nothing open in it was closed.
+
 **T. Palelei.** v9.5, 2026-09-18. **The manuscript of record.** Supersedes v9.4, which held that status on 2026-09-17.
 v9.5 records two things. **Theorem 6.14**: the clearance criterion at a whole-number flank is an integer congruence, so the
 finite search of 6.13 becomes a finite computation in `ℤ` with no real number in it. And a **correction** — §10 recorded one
