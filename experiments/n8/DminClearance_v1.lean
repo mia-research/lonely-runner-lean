@@ -73,4 +73,33 @@ theorem clear_iff {a c : ℤ} (hc : 0 < c) :
     have : r < c ∨ 7 * c < r := hbad.mp ⟨M, by omega⟩
     omega
 
+
+
+/-! ## Corollary: `S ≤ 7` forces clearance, and `d_min` never fails
+
+Decomposing the balance (the subjects that do *not* clear at `d_min`) from the criterion:
+
+* `a mod 8c > 7c` with `a < 8c` needs `7c < a < 8c` — reading in `(7,8)`;
+* `a mod 8c < c` with `a ≥ c` needs `a ≥ 8c` — reading `≥ 8`.
+
+Both require the reading `a/c` to exceed `7`. So a subject whose spread satisfies `S ≤ 7` cannot
+fail — which is Theorem 4.8's constant, arriving here as a corollary rather than an input.
+Measured: **9716 / 9716**, zero violations (`dmin_balance_v1.py`).
+
+And `d_min` itself is always clear: `a = c` gives `c mod 8c = c`, on the boundary. So at most `6`
+of a subject's `7` disparities can ever fail; measured maximum is `5`. -/
+
+/-- **`S ≤ 7` forces clearance at `d_min`.**  A disparity whose reading lies in `[1, 7]` is inside
+the central band already, so its residue mod `8c` is itself. -/
+theorem clear_of_reading_le_seven {a c : ℤ} (hc : 0 < c) (hlo : c ≤ a) (hhi : a ≤ 7 * c) :
+    c ≤ a % (8 * c) ∧ a % (8 * c) ≤ 7 * c := by
+  have h : a % (8 * c) = a := Int.emod_eq_of_lt (by omega) (by omega)
+  omega
+
+/-- **`d_min` itself never fails.**  Taking `a = c`, the residue is `c`, on the lower boundary —
+and the threshold counts as clear.  Hence at most `6` of the `7` disparities can fail. -/
+theorem dmin_always_clear {c : ℤ} (hc : 0 < c) :
+    c ≤ c % (8 * c) ∧ c % (8 * c) ≤ 7 * c :=
+  clear_of_reading_le_seven hc le_rfl (by omega)
+
 end DminClearance
