@@ -186,4 +186,25 @@ theorem finite_check (l : List (ℚ × ℚ)) (hs : l.Pairwise (fun p q => p.1 �
     obtain ⟨p, hp, hp1, hp2⟩ := h (reach r l) hcand (le_reach l r) (not_lt.1 hle)
     exact reach_uncovered l hs r p hp ⟨hp1, hp2⟩
 
+/-! ## Witness normalisation
+
+The payoff of the chain. If the intervals fail to cover, there is not merely *a* witness — there is
+one whose exact arithmetic shape is known in advance: the start, or `(n·m+1)/s` for a reading `s`.
+
+Read on the Lonely Runner bad sets, where the interval of reading `s` at level `m` is
+`((n·m−1)/s, (n·m+1)/s)`, this says the lonely point never needs to be an arbitrary real, or even an
+arbitrary rational: **its denominator is `n` times one of the speeds, and its numerator is `≡ 1
+(mod n)`.** That is a sharpening of the statement of the conjecture, and it holds at every order. -/
+
+/-- **Witness normalisation.**  If covering fails, a witness exists in normal form: the start `r`,
+or `(n·m+1)/s` with `s` drawn from the given finite set. -/
+theorem witness_normalised (l : List (ℚ × ℚ)) (hs : l.Pairwise (fun p q => p.1 ≤ q.1))
+    (r N : ℚ) (n : ℤ) (S : Finset ℤ)
+    (hS : ∀ p ∈ l, ∃ s ∈ S, ∃ m : ℤ, p.2 = ((n * m + 1 : ℤ) : ℚ) / (s : ℚ))
+    (hfail : ¬ ∀ x, r ≤ x → x ≤ N → ∃ p ∈ l, p.1 < x ∧ x < p.2) :
+    ∃ x, (x = r ∨ ∃ s ∈ S, ∃ m : ℤ, x = ((n * m + 1 : ℤ) : ℚ) / (s : ℚ))
+      ∧ r ≤ x ∧ x ≤ N ∧ ∀ p ∈ l, ¬(p.1 < x ∧ x < p.2) := by
+  rw [reach_decides l hs r N] at hfail
+  exact ⟨reach r l, reach_denom l r n S hS, le_reach l r, not_lt.1 hfail, reach_uncovered l hs r⟩
+
 end ReachRule
