@@ -1,0 +1,6 @@
+'SmallModuli.one_emod' depends on axioms: [propext, Quot.sound]
+'SmallModuli.clear_one' depends on axioms: [propext, Quot.sound]
+'SmallModuli.clear_one_fails' depends on axioms: [propext, Quot.sound]
+'SmallModuli.profile_clear_one' depends on axioms: [propext, Quot.sound]
+'SmallModuli.reach_window' depends on axioms: [propext, Quot.sound]
+'SmallModuli.profile_clear_of_window' depends on axioms: [propext, Quot.sound]
