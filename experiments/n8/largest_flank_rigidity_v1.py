@@ -1,71 +1,39 @@
-"""Route A: is a shadowing cover of the largest flank RIGID, and does exists_clear_step force rationality?
-
-Flank e, threshold 1/8. Opening k sits at t = (k + 1/8)/e; a difference d with ratio rho = d/e is in the
-way there iff circDist(rho*(k + 1/8)) < 1/8. Shadowing = every opening blocked by someone.
-
-(1) Verify the A=0 cover: do {1,3,4,5,7}/8 block every opening of the flank at 8?
-(2) Coverage budget: how many residues does one rational ratio a/c block, out of c? (the arc is 1/4 of
-    the circle, so ~c/4 - the question is how tight the total is.)
-(3) The essential-ratio lemma, empirically: along a residue class left to ONE ratio, an irrational ratio
-    always has a clear opening (exists_clear_step), so it cannot be essential.
-(4) How special is the eighth pattern: search 5-subsets of ratios with denominator dividing c that shadow.
-"""
-from fractions import Fraction as F
-from itertools import combinations
-import random
-TH = F(1, 8)
-def cd(x):
-    f = x % 1
-    return min(f, 1 - f)
-def blocks(rho, k):
-    return cd(rho * (k + TH)) < TH
-print("(1) the A=0 cover at the largest flank (e = 8): ratios m/8, m in {1,3,4,5,7}")
-pat = [F(m, 8) for m in (1, 3, 4, 5, 7)]
-allk = True
-for k in range(8):                      # period 8: (m/8)*8 = m is an integer
-    who = [str(r) for r in pat if blocks(r, k)]
-    print(f"    k={k}: {'blocked by ' + ','.join(who) if who else 'FREE'}")
-    if not who: allk = False
-print(f"    -> shadows every opening: {allk}")
-print()
-print("(2) coverage budget: residues blocked by a single ratio a/c, out of c")
-for c in (2, 3, 4, 5, 6, 7, 8, 12, 16):
-    tot = []
-    for a in range(1, c + 1):
-        if F(a, c).denominator != c: continue
-        tot.append(sum(1 for k in range(c) if blocks(F(a, c), k)))
-    if tot:
-        print(f"    c={c:2}: blocked residues per ratio {sorted(set(tot))}  (c/4 = {c/4:.2f})")
-print()
-print("(3) essential-ratio lemma: an irrational ratio cannot hold a residue class alone")
-rng = random.Random(3)
-import math
-bad = 0
-for _ in range(300):
-    rho = rng.uniform(0.01, 0.99)
-    if abs(rho - round(rho)) < 1e-12: continue
-    L = rng.choice([2, 3, 4, 6, 8]); r = rng.randrange(L)
-    # does rho block EVERY k = r + L*j ?  (it must, to be essential on that class)
-    holds = all(min((rho * (r + L * j + 0.125)) % 1, 1 - (rho * (r + L * j + 0.125)) % 1) < 0.125
-                for j in range(4000))
-    if holds: bad += 1
-print(f"    irrational ratios that blocked a whole class over 4000 openings: {bad} of 300")
-print("    (exists_clear_step proves this is 0 for every non-integer rho*L; the search agrees)")
-print()
-print("(4) which 5-subsets of ratios with denominator dividing c shadow the flank?")
-for c in (8, 12, 16):
-    cands = [F(a, c) for a in range(1, c) if True]
-    cands = sorted(set(cands))
-    found = []
-    for sub in combinations(cands, 5):
-        if all(any(blocks(r, k) for r in sub) for k in range(c)):
-            found.append(sub)
-    print(f"    c={c:2}: {len(found)} shadowing 5-subsets of the {len(cands)} ratios a/{c}")
-    if found and c == 8:
-        for s in found: print(f"           {[str(x) for x in s]}")
-    elif found:
-        norm = set()
-        for s in found:
-            norm.add(tuple(sorted(str(x) for x in s)))
-        ex = sorted(norm)[:4]
-        for s in ex: print(f"           e.g. {list(s)}")
+"""How rigid is shadowing the LARGEST flank?
+Pool = ratios with |rho| <= 1 (rho mod 8 in [0,1] u [7,8]).  Enumerate ALL shadowing multisets
+of size 5 and 6, and report what every one of them must contain."""
+from math import gcd, lcm
+from itertools import combinations_with_replacement
+from collections import Counter
+def blocked(a,q):
+    M=8*q
+    return frozenset(k for k in range(q) if (lambda r: min(r,M-r)<q)((a*(8*k+1))%M))
+QMAX=8
+pool=[(a,q) for q in range(1,QMAX+1) for a in range(0,8*q) if gcd(a,q)==1
+      and not (q==1 and a%8==0) and (a<=q or a>=8*q-q)]
+B={m:blocked(*m) for m in pool}
+def shadows(ms):
+    L=lcm(*[q for _,q in ms])
+    cov=set()
+    for m in ms:
+        q=m[1]; b=B[m]
+        cov|={k for k in range(L) if k%q in b}
+        if len(cov)==L: return True
+    return len(cov)==L
+def label(m):
+    a,q=m
+    return f"{a}/{q}" if a<=q else f"-{8*q-a}/{q}"
+for size in (5,6):
+    sh=[ms for ms in combinations_with_replacement(pool,size) if shadows(ms)]
+    if size==6:   # keep only MINIMAL ones (no shadowing 5-subset)
+        from itertools import combinations
+        sh=[ms for ms in sh if not any(shadows(s) for s in set(combinations(ms,5)))]
+    print(f"\nsize {size}{' (minimal only)' if size==6 else ''}: {len(sh)} shadowing multisets")
+    if not sh: continue
+    always=set(pool)
+    for ms in sh: always &= set(ms)
+    print(f"  present in EVERY one: {sorted(label(m) for m in always)}")
+    c=Counter(m for ms in sh for m in set(ms))
+    print(f"  most common movers: {[(label(m),n) for m,n in c.most_common(8)]}")
+    qs=Counter(q for ms in sh for _,q in ms)
+    print(f"  denominators used: {dict(sorted(qs.items()))}")
+    for ms in sh[:6]: print(f"     {[label(m) for m in ms]}")

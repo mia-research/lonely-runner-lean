@@ -1,49 +1,41 @@
-"""Theorem 6.8: the subject is lonely iff SOME flank has a lonely opening.
-So a shadowed flank is harmless; the question is whether a SUBJECT can have all 7 flanks shadowed,
-and whether an ARRANGEMENT can have all 8 subjects so.
+"""Existence at order 8 <=> every subject has a CLEAR FLANK.
+A flank e is clear iff some opening k has no difference in the way.  Since every reduced
+denominator q_j = e/gcd(|d_j|,e) divides e, the exact finite check runs over k in [0,e).
+Question: can a subject have ALL SEVEN flanks shadowed?  Exhaustive over difference sets."""
+from math import gcd, lcm
+from itertools import combinations
+from functools import lru_cache
+import sys
 
-Measure the distribution of clear flanks per subject."""
-from fractions import Fraction as F
-from collections import Counter
-import random
+@lru_cache(maxsize=None)
+def blockmask(dm, e):
+    """bitmask over k in [0,e) of openings where a mover with d = dm (mod 8e) is in the way"""
+    M=8*e; m=0
+    for k in range(e):
+        r=(dm*(8*k+1))%M
+        if min(r,M-r)<e: m|=1<<k
+    return m
 
-def frac(r): return r - (r.numerator // r.denominator)
+def clear_flanks(ds):
+    """number of flanks e=|d| of this difference set that are clear at some opening"""
+    c=0
+    for e in sorted({abs(d) for d in ds}):
+        full=(1<<e)-1; cov=0
+        for d in ds:
+            cov|=blockmask(d%(8*e), e)
+            if cov==full: break
+        if cov!=full: c+=1
+    return c
 
-def flank_clear(ratios, kmax=600):
-    ints = [r for r in ratios if r.denominator == 1]
-    if any(int(r) % 8 == 0 for r in ints): return False      # not live: dead flank
-    movers = [r for r in ratios if r.denominator != 1]
-    for k in range(kmax):
-        ok = True
-        for r in movers:
-            x = k*frac(r) + r/8
-            if abs(x - F(round(float(x)))) < F(1,8): ok = False; break
-        if ok: return True
-    return False
-
-rng = random.Random(20260919)
-per_subject = Counter(); worst_arr = []; arr_all_shadowed = 0; tot_arr = 0
-for _ in range(4000):
-    v = sorted(rng.sample(range(0, 300), 8))
-    tot_arr += 1
-    lonely_subjects = 0
-    minclear = 99
-    for i in range(8):
-        ds = [v[j] - v[i] for j in range(8) if j != i]
-        nclear = 0
-        for e in ds:
-            if e == 0: continue
-            if flank_clear([F(d, abs(e)) for d in ds]): nclear += 1
-        per_subject[nclear] += 1
-        minclear = min(minclear, nclear)
-        if nclear > 0: lonely_subjects += 1
-    if lonely_subjects == 0:
-        arr_all_shadowed += 1
-        if len(worst_arr) < 3: worst_arr.append(v)
-print(f"arrangements: {tot_arr:,}   subjects: {tot_arr*8:,}\n")
-print(f"  clear flanks per subject (out of 7): {dict(sorted(per_subject.items()))}")
-z = per_subject[0]
-print(f"\n  subjects with ZERO clear flanks (not lonely)   : {z:,}"
-      f"  ({100*z/(tot_arr*8):.3f}%)")
-print(f"  arrangements where NO subject is lonely       : {arr_all_shadowed:,}")
-for v in worst_arr: print(f"     {v}")
+N=int(sys.argv[1]) if len(sys.argv)>1 else 11
+pool=[d for d in range(-N,N+1) if d!=0]
+best=99; bestset=None; hist={}
+tot=0
+for ds in combinations(pool,7):
+    tot+=1
+    c=clear_flanks(ds)
+    hist[c]=hist.get(c,0)+1
+    if c<best: best,bestset=c,ds
+print(f"exhaustive over 7-subsets of [-{N},{N}]\\{{0}}: {tot} difference sets")
+print(f"  clear-flank count histogram: {dict(sorted(hist.items()))}")
+print(f"  MINIMUM clear flanks = {best}   attained at ds = {bestset}")

@@ -1,0 +1,8 @@
+../experiments/n8/MinusSeven_v1.lean:60:36: warning: unused variable `he`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'MinusSeven.minus_seven_residue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MinusSeven.inWay_minus_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MinusSeven.inWay_iff_tiny' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MinusSeven.flank_clear_of_no_tiny' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MinusSeven.minus_seven_is_opening' depends on axioms: [propext, Quot.sound]
