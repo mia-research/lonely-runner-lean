@@ -1,59 +1,37 @@
-"""Is there a RULE that picks a working reading?  Test candidate rules, exhaustively."""
-from itertools import combinations
-from collections import Counter
+"""Branch B (some reading has 8 | s): L(m) is pinned to 0 at every collider.
+Which explicit candidate lands the witness? Test formulas, find the rule."""
+from math import lcm, gcd
+from functools import reduce
 import random
-
-def Wne(S, s):
-    M = 8*s
-    A = s + ((1 - s) % 8)
-    while A <= 7*s:
-        if all(min((sp*A) % M, M - (sp*A) % M) >= s for sp in S): return True
-        A += 8
-    return False
-
-def Wsize(S, s):
-    M, c = 8*s, 0
-    A = s + ((1 - s) % 8)
-    while A <= 7*s:
-        if all(min((sp*A) % M, M - (sp*A) % M) >= s for sp in S): c += 1
-        A += 8
-    return c
-
-rules = {
-    "largest reading":        lambda S: max(S),
-    "largest odd reading":    lambda S: max([x for x in S if x % 2], default=None),
-    "reading of max v2":      lambda S: max(S, key=lambda x: ((x & -x).bit_length(), x)),
-    "second largest":         lambda S: sorted(S)[-2],
+def L(b): return -((-(b-1))//8)
+def U(b): return (7*b-1)//8
+def clears(bs,q): return all(L(b) <= q % b <= U(b) for b in bs)
+random.seed(13)
+profs=[]
+for _ in range(120000):
+    m=random.choice([48,72,96,120,144,192,240,288,360,480,720,840,960,1440,2520])
+    divs=[d for d in range(2,m+1) if m%d==0]
+    if len(divs)<5: continue
+    bs=sorted(random.sample(divs,5))
+    if not any((m//b)%8==0 for b in bs): continue
+    profs.append((m,bs))
+    if len(profs)>=20000: break
+print(f"Branch B divisor-closed profiles: {len(profs)}")
+def mid(bs): 
+    bm=max(bs); return (L(bm)+U(bm))//2
+cands={
+ "L(m)":                lambda m,bs: L(m),
+ "L(m)+1":              lambda m,bs: L(m)+1,
+ "L(m)+L(b*) largest collider": lambda m,bs: L(m)+L(max([b for b in bs if (m//b)%8==0])),
+ "L(m)+max_b L(b)":     lambda m,bs: L(m)+max(L(b) for b in bs),
+ "L(b_max)":            lambda m,bs: L(max(bs)),
+ "L(b_max)+1":          lambda m,bs: L(max(bs))+1,
+ "mid of b_max window": lambda m,bs: mid(bs),
+ "ceil(m/4)":           lambda m,bs: -((-m)//4),
+ "ceil(3m/8)":          lambda m,bs: -((-3*m)//8),
+ "sum L(b)":            lambda m,bs: sum(L(b) for b in bs),
+ "lcm-based: L(M) M=lcm": lambda m,bs: L(reduce(lcm,bs)),
 }
-fail = Counter(); tot = 0; sizes = []
-ex = {}
-for combo in combinations(range(2, 31), 6):
-    if not any(x % 8 == 0 for x in combo): continue
-    S = (1,) + combo; tot += 1
-    sizes.append(Wsize(S, max(S)))
-    for name, f in rules.items():
-        s = f(S)
-        if s is None or not Wne(S, s):
-            fail[name] += 1
-            ex.setdefault(name, (S, s))
-print(f"Branch B profiles, readings from [2,30]: {tot:,}\n")
-for name in rules:
-    c = fail[name]
-    print(f"  {name:<22} failures {c:>7,}  ({100*c/tot:6.3f}%)"
-          + (f"   e.g. S={ex[name][0]} s={ex[name][1]}" if c else "   <-- NO FAILURES"))
-print(f"\n  |W(S, max S)| over all profiles: min {min(sizes)}, "
-      f"median {sorted(sizes)[len(sizes)//2]}, max {max(sizes)}")
-print(f"  profiles with |W(S,max S)| = 0: {sizes.count(0):,}")
-
-# wider range, random, to check the rule is not an artefact of [2,30]
-rng = random.Random(20260919); bad = 0; N = 60000; mn = 10**9
-for _ in range(N):
-    while True:
-        c = tuple(sorted(rng.sample(range(2, 4000), 6)))
-        if any(x % 8 == 0 for x in c): break
-    S = (1,) + c
-    w = Wsize(S, max(S))
-    mn = min(mn, w)
-    if w == 0: bad += 1
-print(f"\n  RANDOM, readings from [2,4000], {N:,} profiles: "
-      f"'largest reading' failures = {bad:,}; min |W(S,max S)| = {mn}")
+for name,f in cands.items():
+    hit=sum(1 for m,bs in profs if clears(bs,f(m,bs)))
+    print(f"   {name:30s} {100*hit/len(profs):6.2f}%")

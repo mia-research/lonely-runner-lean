@@ -1,0 +1,9 @@
+../experiments/n8/CanonicalCandidate_v1.lean:79:72: warning: unused variable `hU`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'CanonicalCandidate.one_le_L' depends on axioms: [propext, Quot.sound]
+'CanonicalCandidate.collider_eq' depends on axioms: [propext, Quot.sound]
+'CanonicalCandidate.collider_blocked' depends on axioms: [propext, Quot.sound]
+'CanonicalCandidate.small_v_clear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CanonicalCandidate.collider_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CanonicalCandidate.collider_kills_lattice' depends on axioms: [propext, Quot.sound]
