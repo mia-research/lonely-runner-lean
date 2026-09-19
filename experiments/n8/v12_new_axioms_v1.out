@@ -16,7 +16,7 @@
 'ReachRule.witness_normalised' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.near_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.covers_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.nBj09oZv3A/Guard_v1.lean:83:73: warning: unused variable `hδ`
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.dL0oE3tgAv/Guard_v1.lean:83:73: warning: unused variable `hδ`
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Guard.guard_blocks_below' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -35,3 +35,4 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Rescale.rescaled_residue' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.rescaled_blocks_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.gcd_covariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Rescale.divisor_reduces' depends on axioms: [propext, Classical.choice, Quot.sound]

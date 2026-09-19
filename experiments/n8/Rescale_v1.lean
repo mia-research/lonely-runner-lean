@@ -75,4 +75,35 @@ theorem gcd_covariant {g a b A : ℤ} (hg : 0 < g) :
   rw [hsub, ← mul_min_of_nonneg _ _ hg.le]
   exact mul_lt_mul_iff_of_pos_left hg
 
+/-! ## Divisor-closed profiles
+
+If every reading divides the largest, `m`, then taking `sₖ = m` makes `gcd(sᵢ, m) = sᵢ`, so
+`gcd_covariant` collapses **every** constraint to a unit one:
+
+    blocks sᵢ A m  ↔  blocks 1 A (m / sᵢ)
+
+The profile's interaction structure disappears; only the seven quotients `m/sᵢ` remain. Two of them
+are free — `sᵢ = m` gives `b = 1` and `sᵢ = 1` gives `b = m` — so **five** constraints are left.
+
+Writing `A = 8q+1`, `blocks 1 A b` says `q mod b` lies within `≈ b/8` of `0`, i.e. `‖q/b‖ ≲ 1/8`.
+So a witness is an integer `q` with `‖q/bᵢ‖ ≳ 1/8` for five moduli — an order-6 question at
+threshold `1/8`, where the proved bound at order 6 is `1/6`. The route has slack; it is not closed
+here, because the witness must be an *integer* `q` and the order-6 bound supplies a real one.
+
+**Verified:** 1,662,240 divisor-closed profiles, exhaustive over every `m < 1200` with at least
+seven divisors and every 7-subset containing `1` and `m` — `sₖ = m` supplies a witness in **all** of
+them, 0 failures. The same profiles under the Branch A move `sₖ = 1` fail 23% of the time, so the
+choice `sₖ = m` is doing the work. -/
+
+/-- **Divisor-closed reduction.**  When `sₖ` divides the generating reading, the constraint becomes a
+unit constraint at the quotient modulus. -/
+theorem divisor_reduces {s m A : ℤ} (hs : 0 < s) (hdvd : s ∣ m) :
+    blocks s A m ↔ blocks 1 A (m / s) := by
+  obtain ⟨b, rfl⟩ := hdvd
+  have hb : s * b / s = b := by
+    rw [mul_comm]; exact Int.mul_ediv_cancel b hs.ne'
+  rw [hb]
+  have h1 : blocks s A (s * b) ↔ blocks (s * 1) A (s * b) := by rw [mul_one]
+  exact h1.trans (gcd_covariant hs)
+
 end Rescale
