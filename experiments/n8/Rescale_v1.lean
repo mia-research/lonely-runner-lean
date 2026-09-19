@@ -106,4 +106,53 @@ theorem divisor_reduces {s m A : ℤ} (hs : 0 < s) (hdvd : s ∣ m) :
   have h1 : blocks s A (s * b) ↔ blocks (s * 1) A (s * b) := by rw [mul_one]
   exact h1.trans (gcd_covariant hs)
 
+/-! ## Why the divisor-closed category holds: the `n − 1` constant again
+
+The reduction leaves unit constraints `blocks 1 (8q+1) b`, i.e. `q mod b` inside an interval of
+length about `3b/4`. Computing that interval exactly turns up the framework's own constant:
+
+```
+ b   clear residues of q mod b
+ 2   1
+ 3   1 2
+ ...
+ 7   1 2 3 4 5 6          <- ALL nonzero residues
+ 8   1 2 3 4 5 6          <- 7 is dropped; the pattern breaks
+```
+
+For `b ≤ 7` the clear set is *exactly* the nonzero residues, so the constraint degenerates to a bare
+non-divisibility. It breaks at `b = 8` — one past `n − 1`, the same place Theorem 4.8's constant
+sits, and for the same reason: `8r+1 ≥ 9 > b` needs `b ≤ 7`, and `8b − 8r − 1 ≥ b` at `r = b−1`
+needs `8b − 7 ≤ 7b`, again `b ≤ 7`.
+
+**Consequence.** In a divisor-closed profile, every reading with `m/sᵢ ≤ 7` — that is, every
+`sᵢ ≥ m/7` — contributes nothing but `(m/sᵢ) ∤ q`. Only readings below `m/8` impose a genuine range
+condition. That is the analytical anchor for the category: the large readings are free of geometry
+and cost only a sieve condition. -/
+
+/-- **The small-modulus law.**  For `2 ≤ b ≤ 7` a unit constraint is bare non-divisibility: the
+candidate `8q+1` is blocked at modulus `b` exactly when `b ∣ q`. It fails at `b = 8`. -/
+theorem small_b_blocks_iff {b q : ℤ} (h2 : 2 ≤ b) (h7 : b ≤ 7) :
+    blocks 1 (8 * q + 1) b ↔ b ∣ q := by
+  have hb : 0 < b := by linarith
+  have hr0 : 0 ≤ q % b := Int.emod_nonneg q hb.ne'
+  have hrb : q % b < b := Int.emod_lt_of_pos q hb
+  have key : (1 * (8 * q + 1)) % (8 * b) = 8 * (q % b) + 1 := by
+    have hq : q = b * (q / b) + q % b := (Int.ediv_add_emod q b).symm
+    have : (1 : ℤ) * (8 * q + 1) = (8 * (q % b) + 1) + (8 * b) * (q / b) := by
+      conv_lhs => rw [hq]
+      ring
+    rw [this, Int.add_mul_emod_self_left]
+    exact Int.emod_eq_of_lt (by linarith) (by linarith)
+  unfold blocks
+  rw [key, Int.dvd_iff_emod_eq_zero]
+  constructor
+  · intro h
+    rcases min_cases (8 * (q % b) + 1) (8 * b - (8 * (q % b) + 1)) with ⟨he, -⟩ | ⟨he, -⟩ <;>
+      rw [he] at h <;> omega
+  · intro h
+    rw [h]
+    simp only [mul_zero, zero_add]
+    exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
+
 end Rescale

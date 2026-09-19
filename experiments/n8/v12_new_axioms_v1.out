@@ -16,7 +16,7 @@
 'ReachRule.witness_normalised' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.near_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.covers_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.dL0oE3tgAv/Guard_v1.lean:83:73: warning: unused variable `hδ`
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.St8hUwkYQc/Guard_v1.lean:83:73: warning: unused variable `hδ`
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Guard.guard_blocks_below' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -29,6 +29,7 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Guard.block_shift' depends on axioms: [propext, Quot.sound]
 'NoFinitePoints.near_eight_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
 'NoFinitePoints.one_reading_blocks_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.St8hUwkYQc/Resc.lean:186:42: warning: `Int.ediv_add_emod` has been deprecated: Use `Int.mul_ediv_add_emod` instead
 'BlockerCount.self_residue' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BlockerCount.self_never_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BlockerCount.unit_never_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -36,3 +37,4 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Rescale.rescaled_blocks_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.gcd_covariant' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.divisor_reduces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Rescale.small_b_blocks_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
