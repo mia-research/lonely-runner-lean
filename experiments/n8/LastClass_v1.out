@@ -1,0 +1,8 @@
+'LastClass.residue_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.only_zero_class' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.second_class_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.neg_one_residue' depends on axioms: [propext, Quot.sound]
+'LastClass.last_class_forces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.clear_of_small_denom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.lcm_minus_one_clear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LastClass.shadow_needs_full_denom' depends on axioms: [propext, Classical.choice, Quot.sound]
