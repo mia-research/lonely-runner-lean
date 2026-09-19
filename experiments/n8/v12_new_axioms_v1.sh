@@ -80,3 +80,9 @@ cp ../experiments/n8/TwoPatterns_v1.lean "$T/TP.lean"
 for d in unit_on_both reflected_reading blocked_reflect; do
   echo "#print axioms TwoPatterns.$d" >> "$T/TP.lean"; done
 lake env lean "$T/TP.lean"
+
+# --- Degenerate2 (standalone) ---
+cp ../experiments/n8/Degenerate2_v1.lean "$T/D2.lean"
+for d in two_degenerate two_both_patterns contains_two_coincides; do
+  echo "#print axioms Degenerate2.$d" >> "$T/D2.lean"; done
+lake env lean "$T/D2.lean"
