@@ -114,3 +114,8 @@ cp ../experiments/n8/GeneralReflect_v1.lean "$T/GR.lean"
 for d in L_split U_split sum_split obstruction_iff L_small U_small width_pos; do
   echo "#print axioms GeneralReflect.$d" >> "$T/GR.lean"; done
 lake env lean "$T/GR.lean"
+
+# --- FlankBridge (standalone) ---
+cp ../experiments/n8/FlankBridge_v1.lean "$T/FB.lean"
+echo "#print axioms FlankBridge.inWay_mod" >> "$T/FB.lean"
+lake env lean "$T/FB.lean"
