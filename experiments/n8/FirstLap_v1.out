@@ -3,3 +3,5 @@
 'FirstLap.flank_clear_of_window' depends on axioms: [propext, Quot.sound]
 'FirstLap.flank_clear_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FirstLap.extremal_survivor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstLap.window_before_full_lap' depends on axioms: [propext, Quot.sound]
+'FirstLap.opening_lt_first_lap' depends on axioms: [propext, Classical.choice, Quot.sound]

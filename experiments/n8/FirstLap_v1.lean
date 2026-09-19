@@ -76,6 +76,25 @@ theorem extremal_survivor : ∀ d ∈ [(2:ℤ),3,4,5,6,7], ¬ inWay d 9 16 := by
   intro x hx
   fin_cases hx <;> constructor <;> norm_num
 
+/-! ## The window witness respects the cap
+
+`Spec/Doors.lean` names `DoorFirstLap`: the cascade never passes `1/e`, one lap of the nearest
+runner.  That is a different statement from the clearance above — same phrase, different object —
+but the two meet here.  A window witness has `d*A ≤ 7e < 8e` for **every** runner, so at the
+instant `A/(8e)` no runner has completed a lap relative to the subject.  The witness produced by
+first-lap clearance therefore lies under the cap, rather than merely somewhere. -/
+
+/-- The window never reaches a full period. -/
+theorem window_before_full_lap {d A e : ℤ} (he : 0 < e) (hhi : d * A ≤ 7 * e) :
+    d * A < 8 * e := by omega
+
+/-- **The witness lies inside the first lap.**  Over the reals, the opening `A/(8e)` supplied by
+a window is strictly below `1/d` for every difference `d` in that window. -/
+theorem opening_lt_first_lap {d A e : ℝ} (he : 0 < e) (hd : 0 < d)
+    (h : d * A ≤ 7 * e) : A / (8 * e) < 1 / d := by
+  rw [div_lt_div_iff₀ (by linarith) hd]
+  linarith
+
 end FirstLap
 
 #print axioms FirstLap.residue_eq_of_window
@@ -83,3 +102,5 @@ end FirstLap
 #print axioms FirstLap.flank_clear_of_window
 #print axioms FirstLap.flank_clear_of_bounds
 #print axioms FirstLap.extremal_survivor
+#print axioms FirstLap.window_before_full_lap
+#print axioms FirstLap.opening_lt_first_lap
