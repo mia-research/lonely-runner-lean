@@ -102,3 +102,9 @@ cp ../experiments/n8/GeneralOrder_v1.lean "$T/GO.lean"
 for d in clear_of_not_dvd spine_all_or_nothing; do
   echo "#print axioms GeneralOrder.$d" >> "$T/GO.lean"; done
 lake env lean "$T/GO.lean"
+
+# --- SplitLaw (standalone) ---
+cp ../experiments/n8/SplitLaw_v1.lean "$T/SL.lean"
+for d in lo_split hi_split blocked_split split_law; do
+  echo "#print axioms SplitLaw.$d" >> "$T/SL.lean"; done
+lake env lean "$T/SL.lean"
