@@ -105,23 +105,31 @@ theorem lonely_of_largest_flank_clear {ds : List ℤ} {e : ℤ}
   obtain ⟨k, hk, hcl⟩ := h
   exact ⟨8 * k + 1, ⟨k, rfl, hk⟩, hcl⟩
 
-/-- **What Existence at order 8 needs from this route, stated as one implication.**  If every subject
-of every arrangement has its largest flank clear at some opening, every subject is lonely.
+/-- **The hypothesis below is REFUTED.**  `existence_of_largest_flank_clear` remains a true
+implication, but its hypothesis is false, so it is vacuous and must not be cited as a route.
 
-The hypothesis is `LargestFlankClear` quantified over arrangements. It is **not proved**: it is
-supported by 48,000 subjects, adversarial search to first-clear index 91, 200,000 ratio-space sets and
-five structured families, with no shadowed case found — and by `no_opposite_parity_halves`, which
-removes the one shadowing mode that is understood.
+**Counterexample.** The arrangement `[-4, 0, 1, 3, 4, 5, 7, 8]`, subject `0`, has differences
+`[-4, 1, 3, 4, 5, 7, 8]`. Its largest flank is `e = 8`, with ratios
+`-1/2, 1/8, 3/8, 1/2, 5/8, 7/8, 1`. The flank is **live** — no ratio is a multiple of `8` — and
+**shadowed**: no clear opening exists for `k < 200000`.
 
-Three candidate mechanisms for it have been tested and refuted: a union bound (six movers at density
-`1/4` give `3/2`), an index estimate from the smallest `|ρ|` (predicts `0.64` where `91` is observed),
-and "a mover of denominator `q` is bad exactly at `k ≡ 0 mod q`" (false — `ρ = 4/5` blocks `{0,1}`,
-`ρ = 11/13` blocks `{0,1,7}`). -/
+Found by exhaustive enumeration over movers with `p < q` and `q ≤ 9`: 906,192 multisets, **33
+shadowing**, of which `((1,2),(1,2),(1,8),(3,8),(5,8),(7,8))` realises as the arrangement above with
+`e = 8`. The same enumeration at `q ≤ 7` found **none**, which is why sampling missed it.
+
+`no_opposite_parity_halves` is unaffected and still holds: the two half-movers here are `±1/2`, both
+blocking even `k`. The shadowing is supplied by the four eighths covering the odd openings — a mode
+that phase-pinning does not exclude.
+
+**LRC is not refuted.** Every subject of that arrangement is still lonely: clear-flank counts are
+5, 4, 4, 4, 5, 5, 5, 2. Note the `2` — below the minimum of `3` that random sampling had suggested,
+so that figure was an artefact too. -/
 theorem existence_of_largest_flank_clear
     (H : ∀ (ds : List ℤ) (e : ℤ), (∀ d ∈ ds, d.natAbs ≤ e.natAbs) →
           ∃ k : ℤ, 0 ≤ k ∧ flankClear ds (8 * k + 1) e)
     (ds : List ℤ) (e : ℤ) (hle : ∀ d ∈ ds, d.natAbs ≤ e.natAbs) :
     ∃ A : ℤ, (∃ k : ℤ, A = 8 * k + 1 ∧ 0 ≤ k) ∧ ∀ d ∈ ds, ¬ inWay d A e :=
   lonely_of_largest_flank_clear (H ds e hle)
+
 
 end FlankBridge
