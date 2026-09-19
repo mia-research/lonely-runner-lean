@@ -86,3 +86,13 @@ cp ../experiments/n8/Degenerate2_v1.lean "$T/D2.lean"
 for d in two_degenerate two_both_patterns contains_two_coincides; do
   echo "#print axioms Degenerate2.$d" >> "$T/D2.lean"; done
 lake env lean "$T/D2.lean"
+
+# --- SolutionPair (needs EdgeWitness's Sat) ---
+grep -v '^import' ../experiments/n8/EdgeWitness_v1.lean > "$T/SP.lean"
+grep -v '^import' ../experiments/n8/SolutionPair_v1.lean >> "$T/SP.lean"
+sed -i '' '1i\
+import LonelyRunner.LRC.ConstructionN.LemmaPass
+' "$T/SP.lean"
+for d in two_of_reflect not_singleton zero_not_sat; do
+  echo "#print axioms SolutionPair.$d" >> "$T/SP.lean"; done
+lake env lean "$T/SP.lean"
