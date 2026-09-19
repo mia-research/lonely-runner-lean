@@ -74,3 +74,9 @@ cp ../experiments/n8/TimeReversal_v1.lean "$T/TR.lean"
 for d in bad_reflect clear_reflect_x; do
   echo "#print axioms TimeReversal.$d" >> "$T/TR.lean"; done
 lake env lean "$T/TR.lean"
+
+# --- TwoPatterns (standalone) ---
+cp ../experiments/n8/TwoPatterns_v1.lean "$T/TP.lean"
+for d in unit_on_both reflected_reading blocked_reflect; do
+  echo "#print axioms TwoPatterns.$d" >> "$T/TP.lean"; done
+lake env lean "$T/TP.lean"
