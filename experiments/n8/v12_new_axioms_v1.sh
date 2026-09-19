@@ -96,3 +96,9 @@ import LonelyRunner.LRC.ConstructionN.LemmaPass
 for d in two_of_reflect not_singleton zero_not_sat; do
   echo "#print axioms SolutionPair.$d" >> "$T/SP.lean"; done
 lake env lean "$T/SP.lean"
+
+# --- GeneralOrder (standalone) ---
+cp ../experiments/n8/GeneralOrder_v1.lean "$T/GO.lean"
+for d in clear_of_not_dvd spine_all_or_nothing; do
+  echo "#print axioms GeneralOrder.$d" >> "$T/GO.lean"; done
+lake env lean "$T/GO.lean"
