@@ -107,7 +107,7 @@ theorem clear_of_order6 {b m q : ℤ} (hb : 10 ≤ b) {t : ℝ}
   · omega
 
 /-- **The whole profile.**  One real witness in the `1/6` band at every modulus gives one
-integer `q` clearing every modulus, provided every modulus is at least `15`. -/
+integer `q` clearing every modulus, provided every modulus is at least `10`. -/
 theorem profile_clear_of_order6 {bs : List ℤ} {t : ℝ} (q : ℤ)
     (hq : |(q : ℝ) - t| ≤ 1 / 2)
     (h : ∀ b ∈ bs, 10 ≤ b ∧ ∃ m : ℤ,
