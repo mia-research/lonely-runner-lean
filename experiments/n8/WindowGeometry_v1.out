@@ -1,0 +1,30 @@
+../experiments/n8/WindowGeometry_v1.lean:42:42: warning: unused variable `hb`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n8/WindowGeometry_v1.lean:55:27: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+../experiments/n8/WindowGeometry_v1.lean:51:47: warning: unused variable `hb`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n8/WindowGeometry_v1.lean:52:5: warning: unused variable `hL`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n8/WindowGeometry_v1.lean:52:25: warning: unused variable `hU`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n8/WindowGeometry_v1.lean:52:46: warning: unused variable `hr`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n8/WindowGeometry_v1.lean:52:59: warning: unused variable `hrb`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'WindowGeometry.clear_iff_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WindowGeometry.blocked_iff_near_zero' depends on axioms: [propext, Quot.sound]
+'WindowGeometry.window_ge_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WindowGeometry.proper_divisor_le_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WindowGeometry.window_covers_divisor' depends on axioms: [propext, Classical.choice, Quot.sound]
