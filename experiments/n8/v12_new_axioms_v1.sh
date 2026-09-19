@@ -56,3 +56,9 @@ for d in self_residue self_never_blocks unit_never_blocks; do
 for d in rescaled_residue rescaled_blocks_iff gcd_covariant divisor_reduces small_b_blocks_iff; do
   echo "#print axioms Rescale.$d" >> "$T/Resc.lean"; done
 lake env lean "$T/Resc.lean"
+
+# --- Involution (standalone) ---
+cp ../experiments/n8/Involution_v1.lean "$T/Inv.lean"
+for d in clear_reflect reflect_fails_zero reflect_fails_one; do
+  echo "#print axioms Involution.$d" >> "$T/Inv.lean"; done
+lake env lean "$T/Inv.lean"
