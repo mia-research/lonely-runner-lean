@@ -119,3 +119,9 @@ lake env lean "$T/GR.lean"
 cp ../experiments/n8/FlankBridge_v1.lean "$T/FB.lean"
 for d in inWay_mod half_mover_whole half_mover_same_parity no_opposite_parity_halves lonely_of_largest_flank_clear existence_of_largest_flank_clear; do echo "#print axioms FlankBridge.$d" >> "$T/FB.lean"; done
 lake env lean "$T/FB.lean"
+
+# --- SmallQFlank (standalone) ---
+cp ../experiments/n8/SmallQFlank_v1.lean "$T/SQ.lean"
+for d in blocks_zero blocks_zero_of_dvd; do
+  echo "#print axioms SmallQFlank.$d" >> "$T/SQ.lean"; done
+lake env lean "$T/SQ.lean"
