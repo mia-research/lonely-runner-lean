@@ -117,5 +117,5 @@ lake env lean "$T/GR.lean"
 
 # --- FlankBridge (standalone) ---
 cp ../experiments/n8/FlankBridge_v1.lean "$T/FB.lean"
-echo "#print axioms FlankBridge.inWay_mod" >> "$T/FB.lean"
+for d in inWay_mod half_mover_whole half_mover_same_parity no_opposite_parity_halves lonely_of_largest_flank_clear existence_of_largest_flank_clear; do echo "#print axioms FlankBridge.$d" >> "$T/FB.lean"; done
 lake env lean "$T/FB.lean"
