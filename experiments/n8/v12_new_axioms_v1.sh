@@ -68,3 +68,9 @@ cp ../experiments/n8/EdgeWitness_v1.lean "$T/EW.lean"
 for d in tight_of_step tight_of_step_up edge_witness edge_witness_both; do
   echo "#print axioms EdgeWitness.$d" >> "$T/EW.lean"; done
 lake env lean "$T/EW.lean"
+
+# --- TimeReversal (standalone) ---
+cp ../experiments/n8/TimeReversal_v1.lean "$T/TR.lean"
+for d in bad_reflect clear_reflect_x; do
+  echo "#print axioms TimeReversal.$d" >> "$T/TR.lean"; done
+lake env lean "$T/TR.lean"
