@@ -53,7 +53,7 @@ cat ../experiments/n8/BlockerCount_v1.lean > "$T/Resc.lean"
 grep -v '^import' ../experiments/n8/Rescale_v1.lean >> "$T/Resc.lean"
 for d in self_residue self_never_blocks unit_never_blocks; do
   echo "#print axioms BlockerCount.$d" >> "$T/Resc.lean"; done
-for d in rescaled_residue rescaled_blocks_iff gcd_covariant divisor_reduces small_b_blocks_iff; do
+for d in rescaled_residue rescaled_blocks_iff gcd_covariant divisor_reduces small_b_blocks_iff common_factor_reduces reduced_modulus_dvd; do
   echo "#print axioms Rescale.$d" >> "$T/Resc.lean"; done
 lake env lean "$T/Resc.lean"
 

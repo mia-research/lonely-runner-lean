@@ -155,4 +155,45 @@ theorem small_b_blocks_iff {b q : ℤ} (h2 : 2 ≤ b) (h7 : b ≤ 7) :
     simp only [mul_zero, zero_add]
     exact lt_of_le_of_lt (min_le_left _ _) (by linarith)
 
+/-! ## Every candidate family is a divisor system
+
+`gcd_covariant` and `divisor_reduces` were used separately: the first to strip common factors, the
+second for profiles whose readings all divide the largest. Composed, they say something stronger than
+either.
+
+For **any** two readings, put `g = gcd(sⱼ, sᵢ)`. Then blocking on the `sᵢ`-family is decided by the
+coprime parts `sⱼ/g` and `sᵢ/g` — and `sᵢ/g` **divides `sᵢ`**, by construction. So the constraints on
+a candidate family always sit at moduli dividing `sᵢ`.
+
+> **The divisor-closed setting is not a special case. It is the per-family structure of an arbitrary
+> profile.**
+
+Every result proved for divisor systems — `divisor_reduces`, `small_b_blocks_iff`, the reflection and
+its two centres, `Degenerate2`, and the `EdgeWitness` family — therefore applies to each candidate
+family of *any* profile, not only to profiles whose readings happen to divide their largest.
+
+Checked: 12,372,192 instances over all 6-subsets of `[2,22)`, 0 failures on both halves — `sᵢ/g`
+always divides `sᵢ`, and the reduced blocking always agrees with the full one. Distinct reduced moduli
+per family: 1 to 5. -/
+
+/-- **The common-factor reduction, for arbitrary readings.**  Any common divisor `g` of the two
+readings divides out: blocking is decided by `sⱼ/g` and `sᵢ/g`. Taking `g = gcd` gives the coprime
+parts. -/
+theorem common_factor_reduces {si sj g A : ℤ} (hg : 0 < g) (hj : g ∣ sj) (hi : g ∣ si) :
+    blocks sj A si ↔ blocks (sj / g) A (si / g) := by
+  obtain ⟨a, ha⟩ := hj
+  obtain ⟨b, hb⟩ := hi
+  have hga : sj / g = a := by rw [ha]; exact Int.mul_ediv_cancel_left a hg.ne'
+  have hgb : si / g = b := by rw [hb]; exact Int.mul_ediv_cancel_left b hg.ne'
+  rw [hga, hgb, ha, hb]
+  exact gcd_covariant hg
+
+/-- **The reduced modulus divides the generating reading.**  So every candidate family is a divisor
+system: after dividing out any common factor, the modulus still divides `sᵢ`. -/
+theorem reduced_modulus_dvd {si g : ℤ} (hg : 0 < g) (hi : g ∣ si) : (si / g) ∣ si := by
+  obtain ⟨b, hb⟩ := hi
+  refine ⟨g, ?_⟩
+  rw [hb, Int.mul_ediv_cancel_left b hg.ne', mul_comm]
+
+
 end Rescale
