@@ -1,0 +1,5 @@
+'FirstLap.residue_eq_of_window' depends on axioms: [propext, Quot.sound]
+'FirstLap.not_inWay_of_window' depends on axioms: [propext, Quot.sound]
+'FirstLap.flank_clear_of_window' depends on axioms: [propext, Quot.sound]
+'FirstLap.flank_clear_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstLap.extremal_survivor' depends on axioms: [propext, Classical.choice, Quot.sound]

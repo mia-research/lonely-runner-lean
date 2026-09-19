@@ -1,0 +1,4 @@
+'Openings.dvd_of_div_dvd' depends on axioms: [propext, Quot.sound]
+'Openings.foldr_lcm_dvd' depends on axioms: [propext, Quot.sound]
+'Openings.dvd_foldr_lcm' depends on axioms: [propext, Quot.sound]
+'Openings.lcm_div_eq' depends on axioms: [propext, Quot.sound]
