@@ -108,3 +108,9 @@ cp ../experiments/n8/SplitLaw_v1.lean "$T/SL.lean"
 for d in lo_split hi_split blocked_split split_law; do
   echo "#print axioms SplitLaw.$d" >> "$T/SL.lean"; done
 lake env lean "$T/SL.lean"
+
+# --- GeneralReflect (standalone) ---
+cp ../experiments/n8/GeneralReflect_v1.lean "$T/GR.lean"
+for d in L_split U_split sum_split obstruction_iff; do
+  echo "#print axioms GeneralReflect.$d" >> "$T/GR.lean"; done
+lake env lean "$T/GR.lean"
