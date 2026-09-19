@@ -1,0 +1,3 @@
+'Derestricted.window_of_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Derestricted.profile_clear_mixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Derestricted.flank_clear_minus_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
