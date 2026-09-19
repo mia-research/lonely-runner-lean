@@ -62,3 +62,9 @@ cp ../experiments/n8/Involution_v1.lean "$T/Inv.lean"
 for d in clear_reflect reflect_fails_zero reflect_fails_one; do
   echo "#print axioms Involution.$d" >> "$T/Inv.lean"; done
 lake env lean "$T/Inv.lean"
+
+# --- EdgeWitness (standalone) ---
+cp ../experiments/n8/EdgeWitness_v1.lean "$T/EW.lean"
+for d in tight_of_step tight_of_step_up edge_witness edge_witness_both; do
+  echo "#print axioms EdgeWitness.$d" >> "$T/EW.lean"; done
+lake env lean "$T/EW.lean"
