@@ -1,160 +1,74 @@
-# Targets after v8.2 — the proposals, thought through
+# The target list, checked against the record
 
-2026-09-15. `MANUSCRIPT_v8_2.md` is frozen (v8.2). This document works through the three ideas and the four ranked
-openings proposed after review, against the framework's proved statements and exact computations. Grades follow
-`CLAIM_GRADES_v1.md`. Scripts: `experiments/n8/targets_premises_v1.py`, `targets_long_chains_v1.py` (outputs `.out`).
+Five targets were proposed. **Three are stale**, one carries an unverified claim that is **false as
+stated**, and two are live. Corrections first, then what is actually actionable.
 
-Notation: threshold `1/n`; `k` differences (the order-`n` diagonal is `k = n − 1`); nearest difference `a = d_min`;
-`R_N = n·a·t_N`, the `N`-th step of the cascade in units of the bound; `F(Q) = (nQ + 1)/(nQ − 1)`;
-`g(L) = F(1)·…·F(L)`; `S = d_max/d_min`.
+## 1. "Integer readings, finite middle band `8 ≤ bᵢ ≤ 27`" — **stale**
 
----
+The band was defined by the `bᵢ ≥ 28` rounding threshold. **That threshold was withdrawn**
+(`0f4e2bf`, `BAND_FACET_v1.md` §1): it rested on a test that searched for the order-7 witness on a
+grid too coarse to represent it and counted "not found" as "route failed", on a population that was
+almost entirely the easy half of the category.
 
-## 1. What Existence reduces to  `[PROVED]`
+With the rounding corrected — the candidate is `(8q+1)/(8m)`, not `q/m` — the route reaches `bᵢ ≥ 8`,
+and **the whole divisor-closed category is settled by an explicit rule**: 103,060 profiles,
+exhaustive over `m < 400`, **0 not settled** (`42f1736`).
 
-**Existence for a runner ⟺ its `R_N` is bounded in `N`.** If `R_N ≤ U` for all `N`, the cascade is fixed at some step
-(`ChainBounds.exists_fixed_of_capped`). Conversely a fixed cascade is eventually constant. Since the steps strictly increase
-until fixed, **a cascade that never stops has `R_N → ∞`**.
+**There is no band `8 ≤ bᵢ ≤ 27`.** What is open for divisor-closed is different and sharper: the
+category is `[VERIFIED]`, not proved, and the obstruction is that the **extremal witness supply is
+exhausted at 38.83%** while the remaining cases admit only **interior** witnesses.
 
-Two corrections to the proposal's wording:
+## 2. "Integer readings, mixed quotients" — **live, but not as described**
 
-- **`R` is set by the last step, not by a product of denominators.** A move resets the scale to `D′ = d/(8N + 1)`, so
-  `R_final = d_min·(8N_last + 1)/d_last`. The product `∏ F(Q_j)` is an **upper bound** on `R_N`
-  (`nearest_reading_recurrence`), not an identity; v7 list item 29 refuted the product formula (`1/81` against `7/9`).
-- **The bound needed is per arrangement, and may depend on `S`.** A uniform constant (`R < 2n − 1`, say) is stronger than
-  Existence. Any bound `R ≤ Φ(S)` suffices.
+The description ("small-quotient non-divisibility interacting with large-quotient LRC phases") is the
+withdrawn framing. The real mixed case found in the record is different: profiles whose moduli are
+**mixed between `b mod 8 ∈ {0,1}` and `b mod 8 ∈ [2,7]`**, which admit **no reflection centre at all**
+— `c ≡ 0` and `c ≡ −1` cannot hold simultaneously mod a common `b ≥ 2`. That is **13,122 of 19,880**
+profiles (66%), where `|S| ≥ 2` holds by a surviving orbit rather than by closure.
 
----
+## 3. "Rational speeds, ≤ 2 non-integer ratios" — **`[PROVED]`, correct as listed**
 
-## 2. Idea 1 — collaborator exhaustion  `[AGREED, with a qualification]`
+## 4. "Rational speeds, 3+ common-lattice ratios" — **live**
 
-Appendix A.3 and A.2(iii) do rule out counting runners against clear intervals, or against "turns". The data make it
-sharper. At order 5, four differences, a chain of **300 moves** has one runner setting **150 times**, up to lap 543
-(`targets_long_chains_v1.out`).
+Correct, and now sharper: the rational frontier is exactly **integer speed sets with no unit speed**
+(200,000 sets, 0 mismatches), and the cost over the integer case is exactly one theorem,
+`unit_never_blocks`, worth **5.76%** of candidates — the share where the minimum speed is the *sole*
+blocker.
 
-**The qualification.** Counting runners *with their laps* is not dead; it is what proves every row of §8.2. A runner sets at
-strictly increasing laps: after setting at lap `Q` it is clear until its lap-`Q + 1` zone. This held in every chain checked,
-0 exceptions at `n = 5, 6, 8`. Section 3 shows how far that count reaches, and where it stops.
+## 5. "General real / irrational, equivalent to `R < 16` or the `s₇·R = 89` ceiling" — **stale, and the `89` claim is false as a bound**
 
----
+**`R < 16` is not a real/irrational handle.** `R` is the least clear point `≥ 1` (Theorem 11.1), and
+`Guard.block_periodic` makes band 1 a `+8` shift of band 0 for integer readings — so `R > 7` forces
+**non-integer** readings. **`R < 16` and target 4 are one problem**, confirmed on every deep case on
+file (`R16_IS_RATIONAL_v1.md`).
 
-## 3. Idea 2 — a closed-form limit on the product, relative to `S`
+**`s₇·R ≤ 89` is false.** Tested on 6,000 random profiles: exceeded **410 times**, with `s₇·R`
+reaching **3001**. It fails because `s₇` is unbounded — at `s₇ = 3001` with `R ≈ 1` the claimed
+ceiling `89/S ≈ 0.03` lies below `R = 1`.
 
-### 3.1 It holds whenever `n > 2k`  `[DERIVED — not yet in Lean]`
+What **is** true, and is worth keeping: `s₇·R = 89` **exactly** at the two largest deep cases on file
+(`R = 44856/3749` and `14062/1179`), and not at the third (`8428/97 ≈ 86.89`). Since `89 = 8·11+1`,
+this says the **extremal** profile is bound by `s₇` at a lap-11 zone endpoint — a description of the
+maximiser, **not** a universal ceiling. Any argument using `R ≤ 89/S` as a bound is using a false
+premise.
 
-Take any step `N`. Let `x` be a runner whose setting laps are `Q < Q′ < …`.
+## The corrected list
 
-1. `R_N ≤ ∏_j F(Q_j)` (`nearest_reading_recurrence`).
-2. A setter in the way at `t_j ≤ t_N` has lap `Q < x·t_N + 1/n = s_x·R_N/n + 1/n`. So `x`'s laps are distinct integers in
-   `[1, L_x]`, with `L_x = ⌊s_x R_N/n + 1/n⌋ ≤ S·R_N`. Its factors therefore multiply to at most `g(L_x)` (`sorted_lap_prod`
-   form).
-3. `log F(r) ≤ 2/(nr − 1)`, and `Σ_{r=2}^{L} 2/(nr − 1) < (2/n)·H_{L−1} ≤ (2/n)(1 + ln L)`. So
-   `g(L) ≤ e^{c_n}·L^{2/n}`, with `c_n = 2/(n − 1) + 2/n`.
-4. Over the `k` runners: `R_N ≤ e^{k c_n}·(S·R_N)^{2k/n}`.
+| target | status |
+|---|---|
+| divisor-closed, general | `[VERIFIED]` 185,729 exhaustive — **open**, obstruction named: only interior witnesses admitted |
+| integer readings, mixed reflection-centre profiles | **open** — 66%, no centre exists |
+| Branch B, general | **open** — resists every named rule (best union 59.49%) |
+| rational readings = no unit speed = `R` band 1 | **open** — one problem, not three |
+| real / irrational | **open** — untouched; `R < 16` is *not* the handle |
 
-If `n > 2k`, then `R_N^{1 − 2k/n} ≤ e^{k c_n} S^{2k/n}`, so
+## What is actionable now
 
-    R_N ≤ ( e^{k c_n} · S^{2k/n} )^{n/(n − 2k)}   for every N,
+Not a frontier, but the highest-yield mechanical task in the record: **Tier 2**
+(`THEOREM_TIERS_v1.md`) — results stated at order 8 whose proofs consume less. One was found by
+inspection (`odd_clear_of_not_dvd` → `GeneralOrder.clear_of_not_dvd`, giving **Branch A at every
+order**, proved on `[propext]` alone). The rest are found the same way: compare each statement's
+hypotheses against what its proof actually uses.
 
-and the cascade stops (§1). This is **Existence for every arrangement with `k` differences at every `n > 2k`**. It improves
-§8.2's `n ≥ max(9, 2^(k−1))` for every `k ≥ 5`: for example `k = 5` at `n ≥ 11`, against 16.
-
-**For the owner to rule.** This uses only the step factor, the setter's lap and per-runner lap distinctness, all in
-`Cascade`. But it lands on **the same threshold, `n > 2k`, as the excised `AdvanceBudget`** (zone-width count, v7 list item
-51). Whether this derivation is framework-native, or the same import reached another way, is your call. It is not formalised
-and nothing is built on it.
-
-### 3.2 It cannot reach the diagonal  `[DERIVED]`
-
-At `k = n − 1` the exponent is `2(n − 1)/n ≥ 1` for every `n ≥ 2`, so step 4 gives nothing. **Lap bookkeeping alone cannot
-prove Existence at any order on the diagonal.** The computations show which two losses are responsible, and they occur in
-different regimes:
-
-| order 5 | `R` | `∏ F(Q_j)` | lap-only bound `∏_x g(L_x)` | what is lost |
-|---|---|---|---|---|
-| resonant chain, 300 moves | 1.380 | 1.473 | 2,244 | **skipped laps**: runner d sets at 150 of its first 543 laps |
-| near-bound chains, 5 moves | 3.087–3.190 | 5.042 | 5.042 | **handoff depth**: the true factor is `(nQ + 1)/(nQ − 1 + δ)`, not `F(Q)` |
-
-(Earlier: `∏ F(Q_j) > 4` in 733 order-5 chains, max 5.04, while every true `R < 4`; status v6 §3.)
-
-So the product route needs a lever that sees **skipped laps** (resonance) or **handoff depth** (near the bound). Proving
-the diagonal needs both.
-
----
-
-## 4. Idea 3 — the dead lattice as an escape valve  `[DOES NOT WORK AS STATED — three reasons]`
-
-1. **The dead lattice is a statement about integer scales.** `dead_iff`, `dead_downward` and `exists_live` are over `ℕ`
-   (dead means `8D | d`). The cascade's scales `d/(8N + 1)` were integers at 1,046 of 86,276 steps (order 8, all eight-subsets
-   of `[1, 16]` plus 2,000 random sets to 200). "Divisors of dead steps are dead" relates integer scales by divisibility; the
-   cascade's successive scales are not divisors of one another.
-2. **The cascade moves away from the spread-live region.** Each move multiplies the scale by `s/(8N + 1) < 1`, so `D`
-   strictly decreases from `d_min`. The live region is **large** `D`, `8D > spread`. After the first move it was reached at
-   **0 of 86,276** steps.
-3. **Live is not clear.** Liveness removes only exact slot-sharers, readings exactly on a multiple of 8 at that scale. Being
-   in the way is the band `|s − 8N| < 1`, and live is not lonely: `(1, …, 7, 9)`, scale 2, runner at 2. `step_ceiling` at
-   the cascade's own instant (`a = 1`) gives `D ≤ d_min`, which is automatic.
-
-What survives is the first step: in integer arrangements the slot-sharer sets the first move (31,680 of 33,264; v7 list
-item 28). The dead lattice describes where the cascade starts, not how deep it goes.
-
----
-
-## 5. The ranked openings
-
-### 5.1 Order 5, `R < 4`  `[AGREED as first target — premises corrected]`
-
-- **Chains are not short.** 318 chains of 25+ moves, the longest 300, and in them `R ≤ 1.41`. A case analysis by the number
-  of lap-1 steps is not finite.
-- **"Every expensive step is cheap" does not close it by itself.** Lap-1-only gives `(3/2)³ = 27/8`. Three runners adding a
-  lap-2 step each gives `27/8·(11/9)³ ≈ 6.16 > 4`. Lap bookkeeping at order 5 is §3.2's diagonal failure.
-- **The regimes separate.** Large `R` comes from short near-bound chains (the loss is depth). Long chains come from
-  resonance and keep `R` small (the loss is skipped laps). A proof could split on that: price depth when laps are small, and
-  price skipped laps when readings are large.
-- **Framing.** Five runners is already settled, and in Lean in this project. What order 5 would add is Existence of the
-  cascade on the diagonal beyond order 4.
-
-**First sub-target (recon, then lemma).** Over order-5 chains, measure per move (i) the depth `δ` against `F(Q)`, and (ii)
-per runner, the laps skipped between settings. Then find which combination has a bound that forces `R < 4`. The candidate
-lemma has the reviewer's shape: between two settings of one runner, the intervening moves' true factors multiply to at
-least that runner's lap ratio `(Q′ − 1/n)/(Q + 1/n)` (`return_growth`), and a handoff at depth `δ` gives up `δ` of its
-factor.
-
-### 5.2 `R ≤ 2n − 1` as a stated conjecture  `[AGREED as a statement; EMPIRICAL]`
-
-Largest `R` found: 3.44 (`n = 5`); 8.60, 9.04, 11.66, 10.66 (`n = 6–9`, annealing); 11.96 at `n = 8` (no `R ≥ 16` in one
-round). A uniform cap implies Existence (§1).
-
-**On the conditional form.** "Each runner sets at most `c` times" gives `R ≤ g(c)^k` directly. Its hypothesis fails at order 5
-(150 settings), and a "no return after `g` faster moves" hypothesis fails the same way. A useful conditional has to be stated
-in skipped laps or depth (§3.2), not in counts.
-
-### 5.3 A two-return lemma  `[AGREED as the tool for 5.1]`
-
-Returns are abundant in resonant chains (runner d returns about 150 times), so the lemma must **price** returns, not forbid
-them. The pricing that `return_growth` already gives is the lap ratio. What is missing is the depth accounting of the
-intervening handoffs (§5.1).
-
-### 5.4 The residue rule as an exclusion engine  `[NOT FOR EXISTENCE]`
-
-Proposition 6.7 decides loneliness at own AP instants, where `R` is an integer. Cascades almost never end there: the final
-`R` was an integer in 1 of 3,740 order-5 chains with a move (0 of 817 at `n = 6`, 0 of 829 at `n = 8`). `R ∈ {1, 2, 3}` is
-not the set to exclude; `R ∈ (3, 4)` is where order-5 cascades end (max ≈ 31/9). Formalising 6.7 is worth doing for the
-manuscript, not for Existence.
-
-### 5.5 What not to do  `[AGREED]`
-
-Order 8 head-on; any route through zone-overlap ratios (Appendix A.2); the near-divisibility step of Appendix A.4 before a
-return lemma exists.
-
----
-
-## 6. Proposed order of work
-
-| # | target | status | first action |
-|---|---|---|---|
-| T1 | Order 5, `R < 4` (5.1), via 5.3 | open | recon: per-move depth and per-runner skipped laps over order-5 chains, exact |
-| T2 | `n > 2k` Existence (3.1) | derived | **owner ruling** on nativeness; then Lean from `nearest_reading_recurrence`, per-runner lap distinctness and the log bound |
-| T3 | State `R ≤ 2n − 1` (5.2) | empirical | record as a conjecture in the framework's quantity, graded, in the v8 list |
-| — | Dead-lattice escape valve (4) | dropped | reasons in §4 |
-| — | Residue rule for Existence (5.4) | dropped for this purpose | — |
+That converts existing proved results into stronger ones at no research risk, and 25 of 56
+declarations are already order-free, so the general-`n` programme inherits them unchanged.
