@@ -16,7 +16,7 @@
 'ReachRule.witness_normalised' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.near_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ArithForm.covers_iff_int' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/Guard_v1.lean:83:73: warning: unused variable `hδ`
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/Guard_v1.lean:83:73: warning: unused variable `hδ`
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Guard.guard_blocks_below' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -29,7 +29,10 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Guard.block_shift' depends on axioms: [propext, Quot.sound]
 'NoFinitePoints.near_eight_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
 'NoFinitePoints.one_reading_blocks_all' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/Resc.lean:186:42: warning: `Int.ediv_add_emod` has been deprecated: Use `Int.mul_ediv_add_emod` instead
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/Resc.lean:186:42: warning: `Int.ediv_add_emod` has been deprecated: Use `Int.mul_ediv_add_emod` instead
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/Resc.lean:269:35: warning: unused variable `hb`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'BlockerCount.self_residue' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BlockerCount.self_never_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BlockerCount.unit_never_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -40,18 +43,19 @@ Note: This linter can be disabled with `set_option linter.unusedVariables false`
 'Rescale.small_b_blocks_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.common_factor_reduces' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Rescale.reduced_modulus_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Rescale.blocker_class' depends on axioms: [propext]
 'Involution.clear_reflect' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Involution.reflect_fails_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Involution.reflect_fails_one' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/EW.lean:35:6: warning: `_root_.not_imp` has been deprecated: Use `Classical.not_imp` instead
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/EW.lean:37:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/EW.lean:35:6: warning: `_root_.not_imp` has been deprecated: Use `Classical.not_imp` instead
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/EW.lean:37:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
 If you'd rather continue using `push_neg` in your project, you can implement it as follows:
 ```
 open Lean.Parser.Tactic in
 macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
   `(tactic| push $cfg:optConfig Not $[$loc]?)
 ```
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/EW.lean:94:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/EW.lean:94:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
 If you'd rather continue using `push_neg` in your project, you can implement it as follows:
 ```
 open Lean.Parser.Tactic in
@@ -70,15 +74,15 @@ macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
 'Degenerate2.two_degenerate' does not depend on any axioms
 'Degenerate2.two_both_patterns' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Degenerate2.contains_two_coincides' depends on axioms: [propext, Classical.choice, Quot.sound]
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/SP.lean:35:6: warning: `_root_.not_imp` has been deprecated: Use `Classical.not_imp` instead
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/SP.lean:37:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/SP.lean:35:6: warning: `_root_.not_imp` has been deprecated: Use `Classical.not_imp` instead
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/SP.lean:37:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
 If you'd rather continue using `push_neg` in your project, you can implement it as follows:
 ```
 open Lean.Parser.Tactic in
 macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
   `(tactic| push $cfg:optConfig Not $[$loc]?)
 ```
-/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.XV8WaQ8Qbv/SP.lean:94:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+/var/folders/_q/kdt84jg952d9njzjblvvn0_00000gn/T/tmp.cBDhUmE9Td/SP.lean:94:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
 If you'd rather continue using `push_neg` in your project, you can implement it as follows:
 ```
 open Lean.Parser.Tactic in

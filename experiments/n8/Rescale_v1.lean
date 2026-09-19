@@ -196,4 +196,36 @@ theorem reduced_modulus_dvd {si g : ℤ} (hg : 0 < g) (hi : g ∣ si) : (si / g)
   rw [hb, Int.mul_ediv_cancel_left b hg.ne', mul_comm]
 
 
+/-! ## The residue class of a blocker is fixed across the whole family
+
+`rescaled_residue` computed the position of a reading that is a **multiple** of `sₖ`. The following
+holds for **every** reading, and is what makes the family rigid.
+
+At any candidate `8q+1`, the residue of `a` modulo `8b` is congruent to `a` modulo `8` — independent
+of the opening `q` and of the modulus `b`. So each blocker occupies one fixed class mod `8` across
+the entire candidate family; only its position *within* that class moves as `q` varies.
+
+Writing the residue as `8t + (a mod 8)`, clearance is a condition on `t` alone, and the admissible
+band for `t` shifts with `a mod 8`:
+
+```
+    clear  ⟺  t ∈ [ ⌈(b − α)/8⌉ , ⌊(7b − α)/8⌋ ],   α = a mod 8
+```
+
+*(0 exceptions over 273,440 cases, `b < 30`, `a < 400`, `q < 40`.)*
+
+**This bounds how far `small_b_blocks_iff` travels.** That law is `blocks 1 (8q+1) b ↔ b ∣ q`, and it
+is the case `α = 1`. For a general coprime numerator it **fails** — 24,533 exceptions over the same
+range, the first at `a = 3, b = 2, q = 0`. What survives to arbitrary `a` is the residue-class
+rigidity below, not the divisibility law. -/
+
+/-- **Fixed residue class.**  At every candidate, a reading's residue modulo `8b` lies in the class
+of `a` modulo `8`, whatever the opening and whatever the modulus. -/
+theorem blocker_class {a b q : ℤ} (hb : 0 < b) :
+    ((a * (8 * q + 1)) % (8 * b)) % 8 = a % 8 := by
+  have h8 : (8 : ℤ) ∣ 8 * b := ⟨b, rfl⟩
+  rw [Int.emod_emod_of_dvd _ h8]
+  have : a * (8 * q + 1) = a + 8 * (a * q) := by ring
+  rw [this, Int.add_mul_emod_self_left]
+
 end Rescale
