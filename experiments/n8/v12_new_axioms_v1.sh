@@ -99,7 +99,7 @@ lake env lean "$T/SP.lean"
 
 # --- GeneralOrder (standalone) ---
 cp ../experiments/n8/GeneralOrder_v1.lean "$T/GO.lean"
-for d in clear_of_not_dvd spine_all_or_nothing; do
+for d in clear_of_not_dvd spine_all_or_nothing small_b_general; do
   echo "#print axioms GeneralOrder.$d" >> "$T/GO.lean"; done
 lake env lean "$T/GO.lean"
 
