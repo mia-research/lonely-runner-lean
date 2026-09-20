@@ -13,9 +13,16 @@ closes the target.
 
 * `LonelyForSubject v k` — the obligation for one subject.
 * `DoorFlank` — some disparity of the subject hosts a lonely opening.
+  **This is the obligation of record (amended 2026-09-20).**  It is the only door with no iteration
+  in it: a disparity and a lap index, both read off the arrangement, and no bound on when or on how
+  many.  `Spec/Target.lean`'s amendment block carries the decision and the reasons.
 * `DoorArrives` — the cascade from the subject's first reading reaches a fixed point.
 * `DoorCapped` — the cascade's instants are bounded above.
 * `DoorFAM` — each other runner is in the subject's way at only finitely many steps.
+
+  The three above are **sufficient routes**, not the obligation: each is stated over the cascade's
+  run, so discharging one means bounding how far a run goes — an obligation the conjecture, which
+  asks only for *some* instant, does not carry.  Every proof of theirs is intact and unaffected.
 * `DoorThreeLargest` — the flank of `DoorFlank` can be taken among the subject's three largest
   disparities.  This one is **not** proved equivalent: it is a strengthening, stated so that what it
   adds is visible.
@@ -72,10 +79,24 @@ theorem lonelyForSubject_iff_diffSet {v : Fin 8 → ℝ} {k : Fin 8} :
   · rintro ⟨t, ht, h⟩; exact ⟨t, ht, lonelyAt_iff_lonely_diffSet.mp h⟩
   · rintro ⟨s, hs, h⟩; exact ⟨s, hs, lonelyAt_iff_lonely_diffSet.mpr h⟩
 
-/-! ## door 1 — a disparity hosts a lonely opening -/
+/-! ## door 1 — a disparity hosts a lonely opening
 
-/-- **Door 1.**  Some other runner's disparity with the subject has an opening at which the subject
-is lonely.  The openings are the speeds' own data; nothing is picked. -/
+**The obligation of record, amended 2026-09-20** (`Spec/Target.lean`, amendment block).  Door 1 is
+the iteration-free door: it asks for a disparity `e` and a lap index `j`, and says the subject is
+lonely at `(j + 1/8)/e`.  Nothing runs, so nothing has to stop.  In scales it reads *some candidate
+scale `e/(8j+1)` is clear for every disparity* — `ScaleCandidates.lonely_iff_exists_candidate_scale`,
+Theorem 6.15.
+
+Discharging it means **exhibiting `(e, j)`** as a function of the difference set, which is
+`MANUSCRIPT_v17.md` §6.7's rules-with-conditions form; `Construction8.ratio_condition` (Theorem 4.8)
+is already one such rule, with `j = 0`.  No bound on `j` is needed: §6.10's measured ceiling `j ≤ 6`
+is recorded there as measured, not proved, and nothing here rests on it.
+
+It is an `↔` like the others, so it is **not easier** — only the right shape. -/
+
+/-- **Door 1 — the obligation of record.**  Some other runner's disparity with the subject has an
+opening at which the subject is lonely.  The openings are the speeds' own data; nothing is picked,
+nothing iterates, and no bound on when or on how many appears. -/
 def DoorFlank (v : Fin 8 → ℝ) (k : Fin 8) : Prop :=
   ∃ i : Fin 8, i ≠ k ∧ ∃ j : ℕ, LonelyAt v k (flankOpening 8 |v i - v k| j)
 
@@ -277,32 +298,54 @@ theorem existenceOnArrangements_iff_isolated :
     exists_congr fun t => and_congr_right fun _ => lonelyAt_iff_blockDegree_zero
 
 
-/-! ## door 3 with the cap written down
+/-! ## door 3 with a cap written down — `[REFUTED]`
 
-`DoorCapped` asks for *some* `U`.  Measurement names one: across **170,213 primitive 7-sets**
-exhaustively (every primitive 7-subset of `[1,22]`), the cascade always arrives, and the arrival
-instant measured in the **nearest runner's own laps** — `τ = e·t` for `e` the least disparity — never
-exceeds `33/56 = 0.58929…`, attained at `(2,6,8,9,11,14,15)` and unchanged as the range grows.
-`33/56` is `(4 + 1/8)/7`.
+**`DoorFirstLap` is false.  Do not attempt to prove it.**  It is kept, with the two implications
+below, because both remain true and because deleting a refuted statement loses the record of why
+this route is closed.  Nothing depends on it; both theorems are now vacuous.
 
-So the cascade arrives **inside the nearest runner's first lap**.  That is a scale statement: the
-nearest disparity sets the clock, and however far out of scale the other six are, the cascade is done
-before that clock completes one turn.  `DoorFirstLap` states it with the cap written down, and it
-gives the target because it is a `DoorCapped` with `U = 1/e`.
+*What was measured, and reproduces.*  Across **170,213 primitive 7-sets** exhaustively (every
+primitive 7-subset of `[1,22]`) the cascade always arrives, and the arrival instant in the
+**nearest runner's own laps** — `τ = e·t` for `e` the least disparity — never exceeds
+`33/56 = 0.58929…`, attained at `(2,6,8,9,11,14,15)`.  That figure is correct.
 
-`[EMPIRICAL — exhaustive on [1,22], 170,213 sets; not proved]`  The Lean below proves only that the
-cap **suffices**, never that it holds. -/
+*What was inferred from it, and is false.*  That the constant is unchanged as the range grows, hence
+that the cascade arrives inside the nearest runner's first lap.  The maximum of `τ` is not stable:
+is `33/56` on `[1,18]`, `[1,20]`, `[1,22]`, then `17/24 = 0.70833` on `[1,24]` at
+`(3,9,11,14,15,19,24)`, then `17/22 = 0.77273` on `[1,30]` at `(4,11,14,17,19,24,30)`.  That shows `33/56` is not a bound; it does not show `τ` unbounded,
+since a maximum over a nested family rises by construction.  Capping the difference range caps the denominator of the readings `u = d/e`, and depth
+lives in fine denominators, so `[1,22]` could not see past itself.
 
-/-- **Door 3, with the cap named.**  The cascade never passes `1/e` — one lap of the nearest
-runner. -/
+*The refutation.*  The arrangement `(27, 70, 107, 137, 159, 188, 344, 393)`, subject `393` —
+recorded in `MANUSCRIPT_v17.md` §6.7 as the 28-move adversarial case — has disparities
+`{49, 205, 234, 256, 286, 323, 366}` and arrives at `t = 49/1872`, so
+
+    τ = 49 · 49/1872 = 2401/1872 = 1.28259 > 1,
+
+which is `t > 1 / leastDisp`.  The arrival is lonely, one reading sits at exactly `1/8`, and no
+opening at or before it is lonely, so it is the first isolation instant.  A second witness is §6.7's
+own second-lap case `(1, 31, 75, 97, 128, 160, 176, 225)`, subject `1`, at `τ = 165/128`.
+
+*Why it was the wrong shape to begin with.*  The conjecture asks for loneliness at **some** time, so
+no bound on *when* is ever required.  `MANUSCRIPT_v17.md` §6A, row two — *"No window, no bound on
+when"* — bans exactly this, and a cap in units of the nearest runner's lap is a window in disguise.
+
+`[REFUTED — exact rational arithmetic; experiments/n8/doorfirstlap_refutation_v1.{py,out},
+doorfirstlap_cap_growth_v1.{py,out}; docs/n8/CAP_DEFECT_v1.md]` -/
+
+/-- **Door 3, with a cap named.**  `[REFUTED]` — asserts `t ≤ 1/e`, i.e. `τ = e·t ≤ 1`, which fails
+at `τ = 2401/1872` on the disparities `{49, 205, 234, 256, 286, 323, 366}`.  Kept as a record; the
+two theorems below are true and vacuous. -/
 def DoorFirstLap (v : Fin 8 → ℝ) (k : Fin 8) : Prop :=
   ∀ N : ℕ, (move 8 (diffSet v k))^[N] (firstReading v k) ≤ 1 / leastDisp v k
 
-/-- **The named cap is a cap**, so door 3 with `U = 1/e` is still the obligation. -/
+/-- **The named cap would be a cap**, so door 3 with `U = 1/e` would still be the obligation.  True,
+and vacuous: `DoorFirstLap` is `[REFUTED]`. -/
 theorem doorCapped_of_doorFirstLap {v : Fin 8 → ℝ} {k : Fin 8} (h : DoorFirstLap v k) :
     DoorCapped v k := ⟨1 / leastDisp v k, h⟩
 
-/-- **And it closes the conjecture.**  Nothing here proves the cap holds. -/
+/-- **And it would close the conjecture.**  True, and vacuous: its hypothesis is `[REFUTED]`, so this
+is not a route to the target. -/
 theorem lonelyRunnerAt8_of_doorFirstLap
     (h : ∀ v : Fin 8 → ℝ, Function.Injective v → ∀ k : Fin 8, DoorFirstLap v k) :
     LonelyRunnerAt8 :=

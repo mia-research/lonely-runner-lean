@@ -109,8 +109,12 @@ it.  That asserts a naming function exists, and classical choice proves it equiv
 `ExistenceAt8` (checked).  Exhibition is a property of a **definition**, and proof irrelevance means
 Lean cannot lift it into a statement at all.  `docs/n8/NAMING_VS_EXISTENCE_v1.md` has the argument.
 
-So a uniform cap on the cascade's instants is all that is missing. `CascadeCapped` states it; the theorem
-below is the composition, and it is the whole of the reduction. -/
+So a uniform cap on the cascade's instants would suffice. `CascadeCapped` states it; the theorem below is
+the composition.
+
+> **AMENDED 2026-09-20 — `CascadeCapped` is no longer the obligation of record.**  It is retained,
+> with both directions still proved, as **one sufficient route among several**.  See the amendment
+> block below for what replaced it and why. -/
 
 /-- **The cascade's instants are uniformly capped.** For every subject there is a bound above every
 iterate from the bound. -/
@@ -129,7 +133,8 @@ theorem existence_of_capped (h : CascadeCapped) : ExistenceAt8 := by
   exact exists_fixed_of_capped (n := 8) hpos hb hU
 
 /-- **And the converse**, so this is the obligation restated, not weakened: once the cascade arrives, the
-iterates stabilise, so they are bounded by the arrival value. -/
+iterates stabilise, so they are bounded by the arrival value.  Since 2026-09-20 this pair is recorded
+as **one sufficient route**, not as the obligation — see the amendment block below. -/
 theorem capped_of_existence (h : ExistenceAt8) : CascadeCapped := by
   intro ds hpos hcard m hm hmin
   rw [target_forms_agree] at h
@@ -142,6 +147,104 @@ theorem capped_of_existence (h : ExistenceAt8) : CascadeCapped := by
     rw [e]; exact iterate_ge (n := 8) ds _ _
   · obtain ⟨i, rfl⟩ : ∃ i, K = N + i := ⟨K - N, by omega⟩
     exact le_of_eq (FourDifferences.iterate_stable (n := 8) hfix i)
+
+/-! ## AMENDED 2026-09-20 — the obligation of record has no iteration in it
+
+**Decision (author, 2026-09-20).**  The obligation of record is the **iteration-free** form:
+
+    LRC.Spec.DoorFlank          (Spec/Doors.lean, arrangement level, proved ↔ by `doorFlank_iff`)
+    ExistenceAt8_flank          (this file, difference-set level, ↔ by `target_flank_iff` below)
+    ScaleCandidates.lonely_iff_exists_candidate_scale   (Theorem 6.15, the same statement in scales)
+
+Read in scales: *some candidate scale `e/(8k+1)` is clear for every disparity*.  A disparity `e` and
+an index `k`, both read off the arrangement.  **No quantifier over time, no iteration, no cap, and no
+bound on how many of anything.**
+
+`CascadeCapped`, `ExistenceAt8_cascade`, `FiniteActiveMembership`, `DoorArrives`, `DoorCapped` and
+`DoorFAM` are **retained with every proof intact**, and are now recorded as *sufficient routes*
+rather than as the obligation.
+
+**Why the amendment.**  The conjecture asks for loneliness at **some** time.  It therefore carries no
+obligation about *when* an instant falls or *how many* steps reach it — `MANUSCRIPT_v17.md` §6A row
+two bans exactly such a bound, and §6.10 states outright that finding the first instant is not the
+obligation.  The iteration wordings nevertheless import one: to discharge `CascadeCapped` is to
+supply a cap, and a cap is a bound on how far a run goes.  That is an obligation the conjecture never
+had, and stating the target that way is what put every attempt on a route that needs one.
+
+**What it costs, stated plainly: nothing is easier.**  All of these are `↔`, so the amended target is
+exactly as hard as the one it replaces.  No bound is supplied here and none is claimed.
+
+**What it changes.**  Under the iteration form the obligation is one indivisible claim with no
+partial credit, and every route to it needs a measure on the run — which `docs/n8/
+PROGRESS_ACCOUNTING_LIMIT_v1.md` shows is pinned at `7/4` by the round-robin the run actually
+performs.  Under the amended form the obligation is *exhibit `(e, k)`*, which is `MANUSCRIPT_v17.md`
+§6.7's rules-with-conditions form; `Construction8.ratio_condition` (Theorem 4.8) is already such a
+rule, with `k = 0`.  Each rule covers a class, the reach is a number, and no cap appears anywhere.
+**A bound on `k` is not required for a proof** — §6.10's measured ceiling `k ≤ 6` is explicitly
+recorded there as measured and not proved, and the amended obligation does not rest on it.
+
+**Evidence that the iteration form was costing rather than buying** (`MANUSCRIPT_v17.md` §6.10,
+`[VERIFIED — exact]`): on `(27, 70, 107, 137, 159, 188, 344, 393)` the cascade takes 28 moves to the
+earliest instant while the smallest clear opening index at any flank is 6; on
+`(1, 31, 75, 97, 128, 160, 176, 225)` it is 23 against 4; across 20,000 subjects in `S ∈ [7,8]`, mean
+2.16 moves against mean `k` of 1.04.  Proposition 6.1 guarantees the instants agree, so the `(e, k)`
+form reaches the identical instant without the sort.
+
+**Superseded designations.**  `ExistenceAt8` ceased to be the target on 2026-09-18 (block above);
+`CascadeCapped` ceased to be the obligation of record on 2026-09-20 (this block).  Neither statement
+is withdrawn and no proof is affected.  See `docs/n8/CAP_DEFECT_v1.md`,
+`docs/n8/PROGRESS_ACCOUNTING_LIMIT_v1.md` and `docs/n8/JOINT_REFRAME_v1.md`. -/
+
+/-! ## the discharge criterion, fixed in advance (2026-09-20)
+
+**This block fixes what counts as discharging the obligation, before the work, so the question is
+decidable rather than judged.**  It is recorded at the author's instruction, against the failure this
+file was created for: the requirement for Existence moved seven times in one session, each time at the
+moment "is this a proof?" was asked and answered by judgement.
+
+**The obligation is discharged by exactly two declarations, and nothing else may be asked for.**
+
+    -- (1) the witness map, written down
+    def witness : (v : Fin 8 → ℝ) → (k : Fin 8) → ℝ × ℕ := …
+
+    -- (2) the theorem that it works
+    theorem witness_lonely (v : Fin 8 → ℝ) (hv : Function.Injective v) (k : Fin 8) :
+        LonelyAt v k (Flanks.flankOpening 8 (witness v k).1 (witness v k).2) := …
+
+From those, `DoorFlank` follows for every arrangement and subject, and
+`LRC.Spec.lonelyRunnerAt8_of_doorFlank` — **already proved** — yields a term of type
+`LonelyRunnerAt8`.  A witness map may equally be given per-subject on the difference set, or as a
+finite case split with each case's `(e, k)` named; the shape is free, the two obligations are not.
+
+**The mechanical check, and the whole of it.**  A term of type `LRC.Spec.LonelyRunnerAt8` whose
+`#print axioms` reports at most `[propext, Classical.choice, Quot.sound]`, in a tree with no `sorry`,
+no `native_decide`, no `unsafe` and no `admit`, **is a proof of the lonely runner conjecture at eight
+runners.**  Nothing further is owed: not a cap, not a bound on `k`, not a count, not a coverage
+percentage, not a termination argument, not a treatment of the real case as a separate obligation
+(every statement on the path is over `ℝ` already — `docs/n8/DOOR3_v1.md` §4), and not an account of
+why the formula works beyond the proof that it does.
+
+**Three things that are not that, named now so that saying so later is not a moved goalpost.**  Each
+is a defect in (1) or (2) as already written above, not an additional standard:
+
+* **A map verified on samples is not (2).**  However many arrangements it clears, that is a test.
+  (2) is a theorem quantified over every injective `v` and every `k`.
+* **A map with unhandled cases is not (1).**  A partial map, or a case split whose cases are not shown
+  exhaustive, leaves (2) unstatable.
+* **A map defined as "the least `(e, k)` that works" is not (1).**  It is `Classical.choice` applied
+  to the conclusion; `∃ f : Finset ℝ → ℝ, …` is provable **from** `ExistenceAt8` (checked — see the
+  caution above and `docs/n8/NAMING_VS_EXISTENCE_v1.md`), so it establishes nothing.
+
+Anything else raised against a candidate must be a concrete failure of (1) or (2), named at a
+specific declaration or a specific arrangement.  "Not yet a proof" with no such site is not a finding. -/
+
+/-- **The flank form is the target**, both directions.  `target_flank_agrees` above gives one way;
+this is the equivalence, and it is the difference-set statement of the amended obligation. -/
+theorem target_flank_iff : ExistenceAt8 ↔ ExistenceAt8_flank := by
+  constructor
+  · intro h ds hpos hcard hne
+    exact (Flanks.lonely_iff_exists_flank (n := 8) hpos hne).mp (h ds hpos hcard)
+  · exact target_flank_agrees
 
 /-! ## a fifth wording: Finite Active Membership
 
