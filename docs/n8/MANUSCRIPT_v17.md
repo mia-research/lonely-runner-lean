@@ -321,6 +321,10 @@ the instant `1/(8·d_min)` is the progression's first spine point. When some rea
 moves to the next scale; the move is fixed by the speeds (§6.2). §6 proves what the cascade arrives at (Construction),
 what it cannot miss (Localisation), and closes the arrival of the cascade by the Localisation equivalence (Existence).
 
+**A term fixed for the whole manuscript.** **"The obligation", "what remains", "what is owed", "no bound is supplied"
+and "no bound is established" refer throughout to the derivation, never to the statement** — likewise §11.1's "not
+progress toward a proof". §6.7, §11, §11.1, Appendix A and Appendix C all use them in that sense.
+
 v7 confined its evaluation to the nearest neighbour's first relative lap and made that confinement the open claim. The
 framework does not require it (revision-list items 1–3), and there is no window here: the cascade runs over every lap,
 and no bound on when an instant falls is a requirement of any result.
@@ -910,18 +914,13 @@ Grading the statement `[OPEN]`, as earlier versions did, conflated the statement
 whether an analytic derivation of it has been written down inside this framework. Those are different things, and only the
 second is a matter of what §6.7 and what follows supply.
 
-**One term, fixed here for the whole manuscript.** **"The obligation", "what remains", "what is owed", "no bound is
-supplied" and "no bound is established" refer to the derivation, not the statement**, wherever they appear below —
-§6.7's remainder, §11, §11.1, Appendix A and Appendix C all use them in that sense, as does §11.1's "not progress toward
-a proof".
-
 What the rest of this section does is measure the derivation: **how much of it the rules written down already reach**, in
 the form §3 asks for.
 
-**The obligation in the form §3 asks for.** `FRAMEWORK_CONJECTURE_v1` §3: *"A proof is an **exhibition**: the rules,
-written down, with their conditions shown exhaustive."* **Rules, plural; conditions, plural.** Read that way the obligation
-is not that one mechanism works everywhere — it is that the rules already written down leave nothing out. The framework has
-been building rules all along, each a condition paired with an instant:
+**The rules, in the form §3 asks for.** `FRAMEWORK_CONJECTURE_v1` §3: *"A proof is an **exhibition**: the rules,
+written down, with their conditions shown exhaustive."* **Rules, plural; conditions, plural.** What is exhibited is not one
+mechanism working everywhere; it is a set of rules, each a condition paired with an instant. The framework has been
+building them all along:
 
 | rule | condition on the difference set | the instant it names |
 |---|---|---|
@@ -933,17 +932,17 @@ been building rules all along, each a condition paired with an instant:
 | **the U/K calculus** (§6.9) | all but one difference on a `P`-lattice, clear openings known | an opening of the free flank |
 | **§4.5, §6.9 census** | the 4,413 fully-pinned families | the recorded `(e, k)` |
 
-**What is proved of it.** Every family of §4.5 and of §6.9; and at other thresholds and fewer differences, the rows of §8.
+**What the rules settle outright.** Every family of §4.5 and of §6.9; and at other thresholds and fewer differences, the rows of §8.
 
-**What is not yet shown is exhaustiveness.** Measured as predicates on difference sets, the rules above that can be written
+**How far the rules reach.** Measured as predicates on difference sets, the rules above that can be written
 as predicates decide about **39%** of random seven-sets, essentially all of it Theorem 4.8
 (`experiments/n8/formalised_coverage_v1`). That figure is a **lower bound** — the U/K calculus needs a period and a
 clear-opening set supplied per family, and the census is a list of arrangements, so neither is expressible as a predicate and
-both count as uncovered there. The gap is the obligation: **a class of difference sets no rule yet reaches.**
+both count as uncovered there. **Each further rule is measurable ground**, and what a new one adds is the class of
+difference sets the existing ones do not name.
 
-Stating it this way changes what counts as progress. Under "the cascade reaches a fixed point" there is none until the whole
-thing falls; under §3's form, each new rule is measurable ground. It is the same obligation — the equivalences below are
-proved both ways — in the shape §3 asks for.
+That is what §3's form buys. Under "the cascade reaches a fixed point" read as a single target there is no progress until
+the whole thing falls; read as rules with conditions, every rule is progress and the reach is a number.
 
 **The joint, and why it is not the statement here.** `SKETCH_v7` §10 put the same obligation as a claim: *"for every
 arrangement and every runner there is a `u` in the window `[1/8, 7/8]` at which all six of the other runners read mid-lap."*
@@ -1018,7 +1017,7 @@ A runner in the way at an opening lies within less than one `d_min` of a specifi
 opening it is. `[PROVED — arithmetic; v7 §7.4, there for the openings of its first window]` Failure needs such a relation at
 every step, for ever.
 
-**The obligation is per runner**, not per arrangement: a runner outside the families of §4.5 and §6.9 needs its instant
+**The rules apply per runner**, not per arrangement: a runner outside the families of §4.5 and §6.9 needs its instant
 whether or not another runner of the same arrangement is inside them.
 
 **Computations.** `[VERIFIED — exact rational arithmetic]`
