@@ -256,8 +256,7 @@ arrives exactly when the runner is lonely, and is capped exactly when the runner
 hypothesis beyond injectivity (`doors_agree`). Existence is therefore not a third thing to establish but the same
 statement in the framework's objects, and it follows from an outcome this manuscript proves. It is in addition **derived
 outright in the families of §4.5 and §6.9**, and at the orders and difference counts of §8.2, and holds in every case
-computed, including an exhaustive sweep of every integer arrangement `0 = v_1 < … < v_8 ≤ 40`. §6.7 measures how far
-the rules written down reach on their own.
+computed, including an exhaustive sweep of every integer arrangement `0 = v_1 < … < v_8 ≤ 40`.
 
 Two Lean 4 artefacts carry the verification: `Construction8` (85 theorems, frozen since v7) and `Cascade` (4,759
 theorems, of which **283 structural** and 4,476 generated census instances — see §7). Both have no `sorry`, and every theorem in both depends on at most `propext`, `Classical.choice` and
