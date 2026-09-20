@@ -17,6 +17,8 @@ Part of the cascade artefact (`LRC/Cascade/`).  Threshold `1/n`.
 * `fractional_ratio_circDist` — otherwise only the fractional part `f` of the ratio moves: the circle distance at opening `k`
   is that of `k·f + (d/e)/n`.
 * `exists_clear_step` — for `n ≥ 4` and `0 < f < 1`, the points `k·f + c` cannot all stay within `1/n` of an integer.
+* `exists_clear_in_class`, `essential_ratio_fract_eq_zero`, `essential_ratio_int` — a shadowing cover cannot be
+  rationals plus exactly one ratio of non-integer period product: that one is forced to have `ρ·L ∈ ℤ`.
 * `lonely_opening_of_one_fractional` — a flank at which one runner has a non-integer ratio and every other ratio is an integer
   not divisible by `n` has a lonely opening; so the cascade from the bound stops (`stops_of_one_fractional`).
 -/
@@ -1136,5 +1138,72 @@ theorem lonely_iff_neighbours {ds : Finset ℝ} (hne : ds.Nonempty) {s : ℝ} :
       (n : ℝ)⁻¹ ≤ ds.inf' hne (fun d => Int.fract (d * s)) ∧
       ds.sup' hne (fun d => Int.fract (d * s)) ≤ 1 - (n : ℝ)⁻¹ := by
   rw [lonely_iff_two_sided, Finset.le_inf'_iff, Finset.sup'_le_iff]
+
+/-! ## essential-ratio rationality
+
+`exists_clear_step` is a one-ratio lemma, and this is what it gives about a *cover*.  Suppose the
+other ratios are rational with common period `L` and leave the residue class `k ≡ r (mod L)`
+uncovered.  Then the runner at `x` can only keep the flank shadowed if `(x/e)·L` is an integer: a
+non-integer leaves the class, and the flank has a free opening.
+
+So a cover of a flank cannot consist of rationals plus exactly one irrational — covers are forced
+towards commensurability.  What this does not reach is two or more ratios with non-integer period
+product sharing a class, where a one-ratio lemma has nothing to say. -/
+
+/-- **A non-integer period product clears somewhere in every residue class.**  On `k = r + L·j` the
+phase of `ρ` is `ρ·(r + 1/n) + (ρ·L)·j`, and only `Int.fract (ρ·L)` moves it. -/
+theorem exists_clear_in_class (hn4 : 4 ≤ n) {ρ : ℝ} (L : ℕ)
+    (hf : Int.fract (ρ * (L : ℝ)) ≠ 0) (r : ℕ) :
+    ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (ρ * (((r + L * j : ℕ) : ℝ) + (n : ℝ)⁻¹)) := by
+  have hf0 : 0 < Int.fract (ρ * (L : ℝ)) :=
+    lt_of_le_of_ne (Int.fract_nonneg _) (Ne.symm hf)
+  have hf1 : Int.fract (ρ * (L : ℝ)) < 1 := Int.fract_lt_one _
+  obtain ⟨j, hj⟩ := exists_clear_step (n := n) hn4
+    (f := Int.fract (ρ * (L : ℝ))) (c := ρ * ((r : ℝ) + (n : ℝ)⁻¹)) hf0 hf1
+  refine ⟨j, ?_⟩
+  have hfe : Int.fract (ρ * (L : ℝ)) = ρ * (L : ℝ) - ((⌊ρ * (L : ℝ)⌋ : ℤ) : ℝ) := rfl
+  have key : ρ * (((r + L * j : ℕ) : ℝ) + (n : ℝ)⁻¹)
+      = ((j : ℝ) * Int.fract (ρ * (L : ℝ)) + ρ * ((r : ℝ) + (n : ℝ)⁻¹))
+        + ((⌊ρ * (L : ℝ)⌋ * j : ℤ) : ℝ) := by
+    rw [hfe]; push_cast; ring
+  rw [key, circDist_add_int]
+  exact hj
+
+/-- **The same, at the flank.**  Only the ratio `d/e` enters (`position_at_flank`). -/
+theorem flank_clear_of_fract_ne (hn4 : 4 ≤ n) {d e : ℝ} (he : 0 < e) (L : ℕ)
+    (hf : Int.fract ((d / e) * (L : ℝ)) ≠ 0) (r : ℕ) :
+    ∃ j : ℕ, (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e (r + L * j)) := by
+  obtain ⟨j, hj⟩ := exists_clear_in_class (n := n) hn4 (ρ := d / e) L hf r
+  exact ⟨j, by rwa [position_at_flank he]⟩
+
+/-- **Essential-ratio rationality.**  If the flank at `e` is shadowed and every runner but `x` is
+clear on the class `r (mod L)`, then `(x/e)·L` has zero fractional part. -/
+theorem essential_ratio_fract_eq_zero (hn4 : 4 ≤ n) {ds : Finset ℝ} {e : ℝ} (he : 0 < e)
+    {x : ℝ} (L r : ℕ)
+    (hothers : ∀ j : ℕ, ∀ d ∈ ds, d ≠ x →
+      (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e (r + L * j)))
+    (hshadow : ∀ k : ℕ, ¬ Lonely n ds (flankOpening n e k)) :
+    Int.fract ((x / e) * (L : ℝ)) = 0 := by
+  by_contra hf
+  obtain ⟨j, hj⟩ := flank_clear_of_fract_ne (n := n) hn4 he L hf r
+  refine hshadow (r + L * j) ?_
+  intro d hd
+  by_cases h : d = x
+  · subst h; exact hj
+  · exact hothers j d hd h
+
+/-- **Essential-ratio rationality, as an integer.**  `ρ·L ∈ ℤ`, in the form ROUTE_A states it. -/
+theorem essential_ratio_int (hn4 : 4 ≤ n) {ds : Finset ℝ} {e : ℝ} (he : 0 < e)
+    {x : ℝ} (L r : ℕ)
+    (hothers : ∀ j : ℕ, ∀ d ∈ ds, d ≠ x →
+      (n : ℝ)⁻¹ ≤ circDist (d * flankOpening n e (r + L * j)))
+    (hshadow : ∀ k : ℕ, ¬ Lonely n ds (flankOpening n e k)) :
+    ∃ m : ℤ, (x / e) * (L : ℝ) = (m : ℝ) := by
+  have h := essential_ratio_fract_eq_zero (n := n) hn4 he (ds := ds) (x := x) L r hothers hshadow
+  refine ⟨⌊(x / e) * (L : ℝ)⌋, ?_⟩
+  have hfe : Int.fract ((x / e) * (L : ℝ))
+      = (x / e) * (L : ℝ) - ((⌊(x / e) * (L : ℝ)⌋ : ℤ) : ℝ) := rfl
+  rw [h] at hfe
+  linarith
 
 end Flanks
