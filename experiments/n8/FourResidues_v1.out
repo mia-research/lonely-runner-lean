@@ -1,0 +1,2 @@
+'FourResidues.window_of_band_away' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FourResidues.clear_of_band_and_four' depends on axioms: [propext, Classical.choice, Quot.sound]
