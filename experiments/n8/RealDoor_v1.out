@@ -1,0 +1,5 @@
+'RealDoor.circDist_ge_of_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RealDoor.lonelyAt_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RealDoor.doorFlank_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RealDoor.lonelyForSubject_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RealDoor.lonelyRunnerAt8_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
