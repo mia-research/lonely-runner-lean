@@ -1,0 +1,29 @@
+
+=== R1 r8 from 8.1 to 16.9: 712 runner-rows
+  [untouched] 481: AP instant {True: 481}; track order {'step-1': 175, 'other': 306}; gap at 1/8 {'behindahead': 352, 'behind': 69, 'ahead': 60}; ties {False: 439, True: 42}
+  [disturbed] 142: AP instant {True: 4, False: 138}; track order {'step-3': 2, 'other': 128, 'step-1': 12}; gap at 1/8 {'behindahead': 4, 'ahead': 136, 'behind': 2}; ties {False: 142}
+  [mover] 89: AP instant {False: 89}; track order {'step-1': 89}; gap at 1/8 {'behind': 89}; ties {False: 89}
+  R1 integer and half-integer positions: disturbed runners (runner, t, behind|ahead, order)
+   r8=17/2: r1 t=17/60 4|8 other; r8 t=1/12 7|1 step-1
+   r8=9: r1 t=9/64 7|8 other; r8 t=1/16 7|1 step-1
+   r8=19/2: r1 t=9/68 7|8 other; r2 t=3/20 1|8 other; r8 t=1/20 7|1 step-1
+   r8=10: r2 t=9/64 1|8 other; r8 t=1/24 7|1 step-1
+   r8=21/2: r2 t=9/68 1|8 other; r3 t=3/20 2|8 other; r8 t=1/28 7|1 step-1
+   r8=11: r3 t=9/64 2|8 other; r8 t=1/32 7|1 step-1
+   r8=23/2: r3 t=9/68 2|8 other; r4 t=3/20 3|8 other; r8 t=1/36 7|1 step-1
+   r8=12: r4 t=9/64 3|8 other; r8 t=1/40 7|1 step-1
+   r8=25/2: r4 t=9/68 3|8 other; r5 t=3/20 4|8 other; r8 t=1/44 7|1 step-1
+   r8=13: r5 t=9/64 4|8 other; r8 t=1/48 7|1 step-1
+   r8=27/2: r5 t=9/68 4|8 other; r6 t=3/20 5|8 other; r8 t=1/52 7|1 step-1
+   r8=14: r6 t=9/64 5|8 other; r8 t=1/56 7|1 step-1
+   r8=29/2: r6 t=9/68 5|8 other; r7 t=17/60 3|8 other; r8 t=1/60 7|1 step-1
+   r8=15: r7 t=9/64 6|8 step-1; r8 t=1/64 7|1 step-1
+   r8=31/2: r7 t=9/68 6|8 step-1; r8 t=1/68 7|1 step-1
+   r8=16: r8 t=1/72 7|1 step-1
+   r8=33/2: r1 t=17/124 7|8 other; r8 t=1/76 7|1 step-1
+
+=== R2 two movers: 78344 runner-rows
+  [untouched] 40704: AP instant {True: 40704}; track order {'step-1': 40434, 'other': 270}; gap at 1/8 {'ahead': 5778, 'behindahead': 29148, 'behind': 5778}; ties {False: 40650, True: 54}
+  [disturbed] 18054: AP instant {False: 14570, True: 3484}; track order {'other': 14148, 'step-3': 300, 'step-1': 3606}; gap at 1/8 {'behind': 7395, 'ahead': 7395, 'behindahead': 3264}; ties {False: 16046, True: 2008}
+  [mover] 19586: AP instant {False: 18278, True: 1308}; track order {'other': 14370, 'step-1': 5132, 'step-3': 84}; gap at 1/8 {'ahead': 7568, 'behind': 7568, 'behindahead': 4450}; ties {False: 16150, True: 3436}
+  R2 non-movers: (approached by a mover?, role): {('approached by a mover', 'disturbed'): 15021, ('approached by a mover', 'untouched'): 118, ('not approached', 'disturbed'): 2187, ('not approached', 'untouched'): 36086}

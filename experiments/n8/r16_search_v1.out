@@ -1,0 +1,13 @@
+44 annealing runs, 18s
+R >= 16 found: False
+top 10 (R, speeds, runner, grid):
+  R = 11.9541  depth 29  S = 7.445  speeds ['343', '855', '1032', '1352', '1661', '1923', '2651', '2961']  r7  grid <= 3000, 1/1  | cascade time = BSM: True
+  R = 11.7881  depth 28  S = 7.550  speeds ['96', '136', '189', '227', '266', '308', '331', '398']  r1  grid <= 448, 1/1  | cascade time = BSM: True
+  R = 11.7881  depth 28  S = 7.550  speeds ['96', '136', '189', '227', '266', '308', '331', '398']  r1  grid <= 448, 1/1  | cascade time = BSM: True
+  R = 11.5528  depth 28  S = 7.517  speeds ['17', '141', '170', '238', '264', '293', '340', '388']  r3  grid <= 438, 1/1  | cascade time = BSM: True
+  R = 11.5528  depth 28  S = 7.517  speeds ['17', '141', '170', '238', '264', '293', '340', '388']  r3  grid <= 438, 1/1  | cascade time = BSM: True
+  R = 11.1674  depth 27  S = 7.462  speeds ['32', '83', '122', '246', '286', '326', '349', '413']  r3  grid <= 418, 1/1  | cascade time = BSM: True
+  R = 11.1250  depth 28  S = 8.000  speeds ['644', '959', '1070', '1360', '1475', '1878', '2004', '2280']  r4  grid <= 2330, 1/1  | cascade time = BSM: True
+  R = 11.1250  depth 28  S = 8.000  speeds ['644', '959', '1070', '1360', '1475', '1878', '2004', '2280']  r4  grid <= 2330, 1/1  | cascade time = BSM: True
+  R = 11.0795  depth 27  S = 7.467  speeds ['1', '31', '71', '97', '127', '158', '177', '225']  r1  grid <= 275, 1/1  | cascade time = BSM: True
+  R = 10.8500  depth 27  S = 8.000  speeds ['44', '89', '120', '226', '260', '294', '313', '368']  r3  grid <= 418, 1/1  | cascade time = BSM: True

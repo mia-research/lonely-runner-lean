@@ -1,0 +1,41 @@
+I = [1/4, 3/7),  |I| = 5/28
+(F1) threshold: L >= 7/(4m)  <=>  m >= 7/(4L) = 49/5 -> every m >= 10 forces a complete gap of B_m inside I regardless of placement.
+
+(F2) table:  l(m) = max component length of I \ B_m,  and the induced cap m2 <= 1/(4 l(m1))
+   m= 1: I\B_m = [('1/4', '3/7')]   l = 5/28   cap m2 <= 7/5
+   m= 2: I\B_m = [('1/4', '3/7')]   l = 5/28   cap m2 <= 7/5
+   m= 3: I\B_m = [('1/4', '7/24'), ('3/8', '3/7')]   l = 3/56   cap m2 <= 14/3
+   m= 4: I\B_m = [('9/32', '3/7')]   l = 33/224   cap m2 <= 56/33
+   m= 5: I\B_m = [('1/4', '3/8'), ('17/40', '3/7')]   l = 1/8   cap m2 <= 2
+   m= 6: I\B_m = [('1/4', '5/16'), ('17/48', '3/7')]   l = 25/336   cap m2 <= 84/25
+   m= 7: I\B_m = [('1/4', '15/56'), ('17/56', '23/56')]   l = 3/28   cap m2 <= 7/3
+   m= 8: I\B_m = [('17/64', '23/64'), ('25/64', '3/7')]   l = 3/32   cap m2 <= 8/3
+   m= 9: I\B_m = [('1/4', '23/72'), ('25/72', '3/7')]   l = 41/504   cap m2 <= 126/41
+   m=10: I\B_m = [('1/4', '23/80'), ('5/16', '31/80'), ('33/80', '3/7')]   l = 3/40   cap m2 <= 10/3
+   m=11: I\B_m = [('1/4', '23/88'), ('25/88', '31/88'), ('3/8', '3/7')]   l = 3/44   cap m2 <= 11/3
+   m=12: I\B_m = [('25/96', '31/96'), ('11/32', '13/32'), ('41/96', '3/7')]   l = 1/16   cap m2 <= 4
+
+CASE ANALYSIS  (m1 < m2, both >= 1):
+  Step 1. If m1 >= 10, I contains a complete gap of B_{m1} (F1), of length
+          3/(4m1); by (F2) 3/(4m1) <= 1/(4m2), i.e. m2 <= m1/3 < m1. Contra.
+          Hence m1 <= 9.
+  Step 2. For each m1 <= 9, (F2) gives m2 <= 1/(4 l(m1)):
+          m1=1: l=5/28 -> m2 <= 7/5 -> candidates []
+          m1=2: l=5/28 -> m2 <= 7/5 -> candidates []
+          m1=3: l=3/56 -> m2 <= 14/3 -> candidates [4]
+          m1=4: l=33/224 -> m2 <= 56/33 -> candidates []
+          m1=5: l=1/8 -> m2 <= 2 -> candidates []
+          m1=6: l=25/336 -> m2 <= 84/25 -> candidates []
+          m1=7: l=3/28 -> m2 <= 7/3 -> candidates []
+          m1=8: l=3/32 -> m2 <= 8/3 -> candidates []
+          m1=9: l=41/504 -> m2 <= 126/41 -> candidates []
+  Step 3. Surviving (m1,m2) after step 2 : [] plus the m1 in {1,2} rows (l(m1) = |I|, cap = 1/(4|I|) = 7/5) -> m2 <= 1, impossible since m2>m1>=1.
+          concrete survivors to test : [(3, 4)]
+  Step 4. Test each survivor directly (does B_{m1} u B_{m2} cover I?):
+          (m1,m2)=(3,4): covers I ? False   uncovered [('9/32', '7/24'), ('3/8', '3/7')]
+          m1=1: I \ B_1 = I itself (l = 5/28), so B_m2 alone must cover I: needs 5/28 <= 1/(4 m2), i.e. m2 <= 7/5, i.e. m2 = 1 <= m1. Impossible.
+          m1=2: I \ B_2 = I itself (l = 5/28), so B_m2 alone must cover I: needs 5/28 <= 1/(4 m2), i.e. m2 <= 7/5, i.e. m2 = 1 <= m1. Impossible.
+
+  => LEMMA D holds. Exhaustive cross-check follows.
+  exhaustive: pairs 1 <= m1 < m2 <= 300 with B_m1 u B_m2 covering I : 0
+  smallest surviving component over 1<=m1<m2<=60 : 1/28320 at (m1,m2)=(59, 60)

@@ -1,0 +1,39 @@
+12736 runner-rows written to out_full_transit_positions_v2.csv
+
+roles (untouched = time exactly 1/8): {'mover': 1592, 'untouched': 9362, 'disturbed': 1782}
+
+[untouched] 9362
+   time is an odd eighth (AP instant): {True: 9362}
+   track order is the AP event order: {'step-1': 9362}
+   gap exactly 1/8 at the start of the window: {'ahead': 693, 'behindahead': 7976, 'behind': 693}
+   ties on the track: {False: 9362}
+
+[disturbed] 1782
+   time is an odd eighth (AP instant): {False: 1348, True: 434}
+   track order is the AP event order: {'other': 1238, 'step-3': 122, 'step-1': 422}
+   gap exactly 1/8 at the start of the window: {'behind': 662, 'behindahead': 458, 'ahead': 662}
+   ties on the track: {False: 1732, True: 50}
+
+[mover] 1592
+   time is an odd eighth (AP instant): {False: 1570, True: 22}
+   track order is the AP event order: {'step-1': 418, 'step-3': 10, 'other': 1164}
+   gap exactly 1/8 at the start of the window: {'ahead': 760, 'behindahead': 72, 'behind': 760}
+   ties on the track: {False: 1492, True: 100}
+
+disturbed runners, by mover and direction: (runner, time, behind|ahead, which gap = 1/8, AP order) for the 3 positions nearest the AP
+  r1 down (r1=1): r1[m] t=1/8 8|2 behindahead step-1
+  r1   up (r1=101/100): r1[m] t=625/998 4|6 ahead step-3; r2[d] t=25/198 1|3 behind step-1
+  r2 down (r2=2): r2[m] t=1/8 1|3 behindahead step-1
+  r2   up (r2=201/100): r1[d] t=25/202 8|2 ahead step-1; r2[m] t=25/198 1|3 ahead step-1; r3[d] t=25/198 2|4 behind step-1
+  r3 down (r3=3): r3[m] t=1/8 2|4 behindahead step-1
+  r3   up (r3=301/100): r3[m] t=25/198 2|4 ahead step-1; r4[d] t=25/198 3|5 behind step-1
+  r4 down (r4=4): r4[m] t=1/8 3|5 behindahead step-1
+  r4   up (r4=401/100): r4[m] t=25/198 3|5 ahead step-1; r5[d] t=25/198 4|6 behind step-1
+  r5 down (r5=5): r5[m] t=1/8 4|6 behindahead step-1
+  r5   up (r5=501/100): r5[m] t=25/198 4|6 ahead step-1; r6[d] t=25/198 5|7 behind step-1
+  r6 down (r6=6): r6[m] t=1/8 5|7 behindahead step-1
+  r6   up (r6=601/100): r6[m] t=25/198 5|7 ahead step-1; r7[d] t=25/198 6|8 behind step-1
+  r7 down (r7=7): r7[m] t=1/8 6|8 behindahead step-1
+  r7   up (r7=701/100): r7[m] t=25/198 6|8 ahead step-1; r8[d] t=3/8 5|3 behindahead step-3
+  r8 down (r8=8): r8[m] t=1/8 7|1 behindahead step-1
+  r8   up (r8=801/100): r1[d] t=3/8 6|4 behindahead step-3; r8[m] t=25/202 7|1 behind step-1

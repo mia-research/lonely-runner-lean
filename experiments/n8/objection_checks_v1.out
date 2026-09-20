@@ -1,0 +1,38 @@
+C1. Register item 17: 'a = 1 (mod 8) is refuted by t = 71/8'  (SKETCH_v7 7d)
+   71/8 == 497/(8*7): True   497 mod 8 = 1   7 is a difference of r1: True
+   (8k+1)/(8d) form with d = 7, k = 62: True
+   every odd a/(8D) rewritten as a'/(8D') with a' = 1 (mod 8), D<60: failures 0
+   VERDICT: with D free, a = 1 (mod 8) loses nothing; item 17's refutation fixed D = 1
+
+C2. Register item 16 / PROOF_REQUIREMENTS_v2 6: SKETCH_v7 7c failure clears at (D,a) = (5,9)
+   r4 differences: [651, 633, 370, 1, 121, 128, 301]
+   t = 9/40: lonely True; distances ['19/40', '17/40', '1/4', '9/40', '9/40', '1/5', '11/40']
+   t = 305/2408: lonely True; distances ['157/344', '425/2408', '163/1204', '305/2408', '785/2408', '64/301', '1/8']
+   305/2408 == 305/(8*301): True  305 mod 8 = 1
+   WHY_THE_LAST_MILE arrangement, runner at 1, t = 9/40: lonely True 
+
+C3. WHY_REDUCTIONS 1: '(3,7,12,20,29,31,44,50) ... no instant at which all eight are lonely'
+   each stated time lonely for its runner: True   distinct: 5
+   the transcript's check tested only the produced times (2026-09-14T02:08, 'allsame=[t for t in ts ...]')
+   gcd of all pairwise differences: 1 -> all-lonely needs every difference*t in (1/8)Z, so t in (1/8)Z
+   speeds mod 8: [2, 3, 4, 4, 4, 5, 7, 7] -> repeated residues, so no c makes {c*v mod 8} a permutation of 0..7
+   brute force t = c/8, c = 0..7, all eight lonely: False
+   VERDICT: claim TRUE for every instant, by Thm 4.2 + residue collision; the stated check was narrower
+
+C4. OBJECTION_LEDGER Part 4 row 1 and the transcript line 'nothing is restricted to the first cycle'
+   produce() used D = k*d_min, a in range(1, 8k+9, 2)  ->  u = d_min*t = a/(8k) <= (8k+7)/(8k) < 2
+   so 'furthest lap 1' was forced by the numerator cap, not measured.  The 12,000/12,000 stands;
+   the lap statistic carries no information.
+
+C5. Register 0, the free test: e cannot block at gap D  iff  m = 8D/gcd(e,8D) is even and <= 8
+   4641 (e,D) pairs, disagreements 0
+
+C6. Register 0, all-or-nothing: if D divides every difference, every odd a gives the same verdict
+   34295 cases, mixed verdicts 0
+
+C7. SKETCH_v7 7d / ledger Part 1 row 1: r2 of (1, 1+sqrt2/100, 3..8) at t = p/(8 d_min)
+   p = 1: margin -0.055826175
+   p = 3: margin 0.0495128834
+   p = 5: margin -0.082521472
+   p = 7: margin 0E-80
+   r1 at 71/8, distances: ['0.125511', '0.250', '0.375', '0.500', '0.375', '0.250', '0.125']

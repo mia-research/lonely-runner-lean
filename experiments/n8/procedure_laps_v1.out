@@ -1,0 +1,109 @@
+CONTROLS -- must reproduce OWNER_PROCEDURE_v2 section 2 and PROOF_CANDIDATE_v3 Step 4
+
+  AP r1          got {'lap_lines': 21, 'clear_points': 4, 'clear_intervals': 0}, t* = 1/8   MATCH
+  AP r4          got {'lap_lines': 9, 'clear_points': 12, 'clear_intervals': 6}, t* = 1/8   MATCH
+  AP r8          got {'lap_lines': 21, 'clear_points': 4, 'clear_intervals': 0}, t* = 1/8   MATCH
+  r8->9 r1       got {'lap_lines': 22, 'clear_points': 12, 'clear_intervals': 6}, t* = 9/64   MATCH
+  r8->9 r8       got {'lap_lines': 12, 'clear_points': 2, 'clear_intervals': 1}, t* = 1/16   MATCH
+  two blocks r1  got {'lap_lines': 29, 'clear_points': 8, 'clear_intervals': 4}, t* = 9/56   MATCH
+  two blocks r4  got {'lap_lines': 21, 'clear_points': 4, 'clear_intervals': 0}, t* = 1/8   MATCH
+  two blocks r5  got {'lap_lines': 21, 'clear_points': 4, 'clear_intervals': 0}, t* = 1/8   MATCH
+  Step 4, six not five: r4 of (4,12,29,37,101,121,176,196) u* = 9/64, t* = 9/512   MATCH
+  LAST_MILE runner at 1: clear points in lap 0 = 0   MATCH (none)
+
+  controls: ALL MATCH
+
+   ['1', '1975', '5265', '6910', '8737', '9589', '11845', '15135']
+      r1: 73/121072 (lap 1, cycle 0)
+      r2: 1/15792 (lap 0, cycle 0)
+      r3: 1/13160 (lap 0, cycle 0)
+      r4: 1/13160 (lap 0, cycle 0)
+      r5: 9/51184 (lap 0, cycle 0)
+      r6: 1/6768 (lap 0, cycle 0)
+      r7: 1/18048 (lap 0, cycle 0)
+      r8: 1/26320 (lap 0, cycle 0)
+   ['1', '31', '75', '97', '128', '160', '176', '225']
+      r1: 11/256 (lap 1, cycle 0)
+      r2: 1/240 (lap 0, cycle 0)
+      r3: 1/176 (lap 0, cycle 0)
+      r4: 1/176 (lap 0, cycle 0)
+      r5: 1/248 (lap 0, cycle 0)
+      r6: 3/344 (lap 0, cycle 0)
+      r7: 1/128 (lap 0, cycle 0)
+      r8: 1/392 (lap 0, cycle 0)
+   ['27', '45', '308', '678', '679', '799', '806', '979']
+      r1: 49/6176 (lap 0, cycle 0)
+      r2: 1/144 (lap 0, cycle 0)
+      r3: 1/2104 (lap 0, cycle 0)
+      r4: 305/2408 (lap 0, cycle 3)
+      r5: 61/480 (lap 0, cycle 3)
+      r6: 1/56 (lap 0, cycle 0)
+      r7: 113/6088 (lap 0, cycle 0)
+      r8: 1/1384 (lap 0, cycle 0)
+   ['3', '7', '12', '20', '29', '31', '44', '50']
+      r1: 1/32 (lap 0, cycle 0)
+      r2: 1/32 (lap 0, cycle 0)
+      r3: 9/256 (lap 0, cycle 0)
+      r4: 1/64 (lap 0, cycle 0)
+      r5: 17/208 (lap 0, cycle 0)
+      r6: 1/16 (lap 0, cycle 0)
+      r7: 1/48 (lap 0, cycle 0)
+      r8: 3/80 (lap 0, cycle 0)
+   ['4', '12', '29', '37', '101', '121', '176', '196']
+      r1: 25/1376 (lap 0, cycle 0)
+      r2: 1/64 (lap 0, cycle 0)
+      r3: 1/64 (lap 0, cycle 0)
+      r4: 9/512 (lap 0, cycle 0)
+      r5: 1/160 (lap 0, cycle 0)
+      r6: 1/160 (lap 0, cycle 0)
+      r7: 9/1112 (lap 0, cycle 0)
+      r8: 3/424 (lap 0, cycle 0)
+   ['10', '65', '101', '126', '159', '222', '256', '271']
+      r1: 1/440 (lap 0, cycle 0)
+      r2: 1/288 (lap 0, cycle 0)
+      r3: 1/200 (lap 0, cycle 0)
+      r4: 1/200 (lap 0, cycle 0)
+      r5: 1/264 (lap 0, cycle 0)
+      r6: 1/272 (lap 0, cycle 0)
+      r7: 9/1040 (lap 0, cycle 0)
+      r8: 17/1648 (lap 0, cycle 0)
+   ['8', '9', '10', '11', '15', '16', '17', '18']
+      r1: 9/56 (lap 0, cycle 1)
+      r2: 3/16 (lap 0, cycle 1)
+      r3: 9/40 (lap 0, cycle 1)
+      r4: 1/8 (lap 0, cycle 1)
+      r5: 1/8 (lap 0, cycle 1)
+      r6: 9/40 (lap 0, cycle 1)
+      r7: 3/16 (lap 0, cycle 1)
+      r8: 9/56 (lap 0, cycle 1)
+   ['1', '2', '3', '4', '5', '6', '7', '8']
+      r1: 1/8 (lap 0, cycle 0)
+      r2: 1/8 (lap 0, cycle 0)
+      r3: 1/8 (lap 0, cycle 0)
+      r4: 1/8 (lap 0, cycle 0)
+      r5: 1/8 (lap 0, cycle 0)
+      r6: 1/8 (lap 0, cycle 0)
+      r7: 1/8 (lap 0, cycle 0)
+      r8: 1/8 (lap 0, cycle 0)
+   ['1', '2', '3', '4', '5', '6', '15', '16']
+      r1: 1/8 (lap 0, cycle 0)
+      r2: 1/8 (lap 0, cycle 0)
+      r3: 1/8 (lap 0, cycle 0)
+      r4: 1/8 (lap 0, cycle 0)
+      r5: 1/8 (lap 0, cycle 0)
+      r6: 1/8 (lap 0, cycle 0)
+      r7: 1/8 (lap 0, cycle 0)
+      r8: 1/8 (lap 0, cycle 0)
+   ['3', '17', '23', '41', '58', '79', '96', '131']
+      r1: 1/112 (lap 0, cycle 0)
+      r2: 1/48 (lap 0, cycle 0)
+      r3: 1/48 (lap 0, cycle 0)
+      r4: 1/136 (lap 0, cycle 0)
+      r5: 1/136 (lap 0, cycle 0)
+      r6: 1/136 (lap 0, cycle 0)
+      r7: 1/136 (lap 0, cycle 0)
+      r8: 1/280 (lap 0, cycle 0)
+named arrangements: 80 runners | returned: 80 | not returned: 0 | re-check failures: 0 | returned beyond lap 0: 2 | furthest lap: 1 (['1', '1975', '5265', '6910', '8737', '9589', '11845', '15135'], 1, '73/121072')
+
+irrational speeds (Q(sqrt2), exact), cap 40 laps: 200 runners | returned: 200 | not returned: 0 | re-check failures: 0 | returned beyond lap 0: 0 | furthest lap: 0 
+

@@ -1,0 +1,21 @@
+tb_hunt_v3   HMAX = 3   CELLCAP = 30000
+a realisable class with Delta > 1/12 = 0.0833333 refutes (H3u)
+
+admissible primitive vectors: ht <= 3 : 216   ht <= 3 : 216   ht in [4,3] : 0
+
+--- rank-1 classes ---
+   distinct rank-1 classes of height <= 3: 108
+   max o_inf = 1/6   min o_inf = 1/24
+   MAX Delta = 0 = 0.0000000   at n0 = (1, 1, -1, -1)   (budget 0.0833333)
+   count with Delta > 1/12: 0
+
+--- rank-2 classes ---
+   arm A (a height-<=3 vector in the plane): 3382 planes
+   arm B (no height-<=3 vector in the plane): 0 planes
+   ... arm A: 2000/3382  kept 0  skipped 0  non-realisable 773
+
+   planes with sub3 of rank 2 (Delta = 0 identically): 1964
+   planes not realisable: 1418
+   cross-validation of the O(1) realisability test against witnesses(PMAX=30): disagreements 0
+   planes SKIPPED for cell count > 30000: 0
+   planes evaluated: 0

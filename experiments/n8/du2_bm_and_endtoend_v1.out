@@ -1,0 +1,30 @@
+PART A -- B_m, floor form vs closed form, m = 1..20
+  m=  1  identical=True   |B_m|=1/4   #components=2   comp lengths [Fraction(1, 8)]
+  m=  2  identical=True   |B_m|=1/4   #components=3   comp lengths [Fraction(1, 16), Fraction(1, 8)]
+  m=  3  identical=True   |B_m|=1/4   #components=4   comp lengths [Fraction(1, 24), Fraction(1, 12)]
+  m=  4  identical=True   |B_m|=1/4   #components=5   comp lengths [Fraction(1, 32), Fraction(1, 16)]
+  m=  5  identical=True   |B_m|=1/4   #components=6   comp lengths [Fraction(1, 40), Fraction(1, 20)]
+  m=  6  identical=True   |B_m|=1/4   #components=7   comp lengths [Fraction(1, 48), Fraction(1, 24)]
+  m=  7  identical=True   |B_m|=1/4   #components=8   comp lengths [Fraction(1, 56), Fraction(1, 28)]
+  m=  8  identical=True   |B_m|=1/4   #components=9   comp lengths [Fraction(1, 64), Fraction(1, 32)]
+  m=  9  identical=True   |B_m|=1/4   #components=10   comp lengths [Fraction(1, 72), Fraction(1, 36)]
+  m= 10  identical=True   |B_m|=1/4   #components=11   comp lengths [Fraction(1, 80), Fraction(1, 40)]
+  m= 11  identical=True   |B_m|=1/4   #components=12   comp lengths [Fraction(1, 88), Fraction(1, 44)]
+  m= 12  identical=True   |B_m|=1/4   #components=13   comp lengths [Fraction(1, 96), Fraction(1, 48)]
+  m= 13  identical=True   |B_m|=1/4   #components=14   comp lengths [Fraction(1, 104), Fraction(1, 52)]
+  m= 14  identical=True   |B_m|=1/4   #components=15   comp lengths [Fraction(1, 112), Fraction(1, 56)]
+  m= 15  identical=True   |B_m|=1/4   #components=16   comp lengths [Fraction(1, 120), Fraction(1, 60)]
+  m= 16  identical=True   |B_m|=1/4   #components=17   comp lengths [Fraction(1, 128), Fraction(1, 64)]
+  m= 17  identical=True   |B_m|=1/4   #components=18   comp lengths [Fraction(1, 136), Fraction(1, 68)]
+  m= 18  identical=True   |B_m|=1/4   #components=19   comp lengths [Fraction(1, 144), Fraction(1, 72)]
+  m= 19  identical=True   |B_m|=1/4   #components=20   comp lengths [Fraction(1, 152), Fraction(1, 76)]
+  m= 20  identical=True   |B_m|=1/4   #components=21   comp lengths [Fraction(1, 160), Fraction(1, 80)]
+  ALL: floor form == closed form and |B_m| = 1/4 exactly : True
+
+PART B -- end-to-end, all 18 absent pairs x all 1 <= m1 < m2 <= 14
+  tuples tested: 1638   failures: 0
+  minimum over all tuples of min_e ||e k / 8L||  =  1/8 = 0.125000   (must be >= 1/8 = 0.125)
+     attained at E = [3, 4, 5, 6, 7, 8, 16], L = 1680, b = 210, r = 7, k = 11970
+
+PART A pass: True
+PART B pass: True

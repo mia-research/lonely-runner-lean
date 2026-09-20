@@ -1,0 +1,35 @@
+
+one runner moved from the AP: 640 runner-times; actual track order = ideal order on own d_min progression: 618
+   time is an own-AP instant = True: 580 of 580
+   time is an own-AP instant = False: 38 of 60
+   ideal positions coincide for some runners: 211 (of which same order 211)
+
+every runner moved, |dev| <= 1/100: 1200 runner-times; actual track order = ideal order on own d_min progression: 1200
+   time is an own-AP instant = True: 1047 of 1047
+   time is an own-AP instant = False: 153 of 153
+   ideal positions coincide for some runners: 0 (of which same order 0)
+
+every runner moved, |dev| <= 1/10: 1200 runner-times; actual track order = ideal order on own d_min progression: 1117
+   time is an own-AP instant = True: 1036 of 1036
+   time is an own-AP instant = False: 81 of 164
+   ideal positions coincide for some runners: 268 (of which same order 266)
+
+every runner moved, |dev| <= 3/10: 1200 runner-times; actual track order = ideal order on own d_min progression: 953
+   time is an own-AP instant = True: 794 of 794
+   time is an own-AP instant = False: 159 of 406
+   ideal positions coincide for some runners: 612 (of which same order 575)
+
+every runner moved, |dev| <= 9/10: 1200 runner-times; actual track order = ideal order on own d_min progression: 801
+   time is an own-AP instant = True: 585 of 585
+   time is an own-AP instant = False: 216 of 615
+   ideal positions coincide for some runners: 800 (of which same order 663)
+
+all 8-subsets of [1,14], gcd 1: 24024 runner-times; actual track order = ideal order on own d_min progression: 24024
+   time is an own-AP instant = True: 15960 of 15960
+   time is an own-AP instant = False: 8064 of 8064
+   ideal positions coincide for some runners: 15432 (of which same order 15432)
+
+random integers [1,1000]: 2400 runner-times; actual track order = ideal order on own d_min progression: 1633
+   time is an own-AP instant = True: 1134 of 1134
+   time is an own-AP instant = False: 499 of 1266
+   ideal positions coincide for some runners: 1737 (of which same order 1405)

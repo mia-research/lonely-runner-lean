@@ -1,0 +1,70 @@
+T1  r8 moved from the AP; neighbours at each runner's time (labels = AP index, cyclic).
+    ok = the AP event's neighbours for that instant (+-1 at phase 1,7; +-3 at 3,5); L=2 rows show raw sides
+   r8= 8.00: L1 r8|r2  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   r8= 8.50: L1 r6|r4  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   r8= 8.90: L1 r6|r4  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   r8= 8.99: L1 r4|r6  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   r8= 9.00: L2 r3|r6  L1 r1/r8|r3*  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1/r8*  L1 r7|r1
+   r8= 9.01: L1 r4|r6  L1 r7|r5  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8= 9.10: L1 r6|r4  L1 r7|r5  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8= 9.50: L1 r6|r4  L1 r7|r5  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=10.00: L1 r7|r2/r8*  L2 r4|r7  L1 r2/r8|r4*  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=10.50: L1 r7|r2*  L1 r7|r5  L1 r8|r6  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=11.00: L1 r7|r2*  L1 r1|r3/r8*  L2 r2|r4  L1 r3/r8|r5*  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=11.50: L1 r7|r2*  L1 r1|r3  L1 r5|r6*  L1 r1|r7  L1 r4|r6  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=12.00: L1 r7|r2*  L1 r1|r3  L1 r2|r4/r8*  L2 r3|r5  L1 r4/r8|r6*  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=12.50: L1 r7|r2*  L1 r1|r3  L1 r2|r4  L1 r1|r7  L1 r2|r3*  L1 r5|r7  L1 r6|r1*  L1 r7|r1
+   r8=13.00: L1 r7|r2*  L1 r1|r3  L1 r2|r4  L1 r3|r5/r8*  L2 r4|r6  L1 r5/r8|r7*  L1 r6|r1*  L1 r7|r1
+   r8=13.50: L1 r7|r2*  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r2|r8  L1 r3|r1  L1 r6|r1*  L1 r7|r1
+   r8=14.00: L1 r7|r2*  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6/r8*  L2 r1|r4  L1 r6/r8|r1*  L1 r7|r1
+   r8=14.50: L1 r7|r2*  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r3|r1  L1 r4|r2  L1 r7|r1
+   r8=15.00: L1 r7/r8|r2*  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7/r8*  L2 r2|r5  L1 r7|r1
+   r8=15.50: L1 r8|r2  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r4|r2  L1 r7|r1
+   r8=16.00: L1 r8|r2  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   r8=16.50: L1 r6|r4  L1 r1|r3  L1 r2|r4  L1 r3|r5  L1 r4|r6  L1 r5|r7  L1 r6|r8  L1 r7|r1
+   tally: {('scale 1, d_min 1', True): 112, ('scale 1, d_min 3/2', 'raw'): 1, ('scale 1, d_min 19/10', 'raw'): 1, ('scale 1, d_min 199/100', 'raw'): 1, ('scale 2, d_min 1', 'raw'): 7, ('scale 1, d_min 1', False): 36, ('scale 1, d_min 2', 'raw'): 1, ('scale 1, d_min 201/100', 'raw'): 1, ('scale 1, d_min 21/10', 'raw'): 1, ('scale 1, d_min 5/2', 'raw'): 1, ('scale 1, d_min 3', 'raw'): 1, ('scale 1, d_min 7/2', 'raw'): 1, ('scale 1, d_min 4', 'raw'): 1, ('scale 1, d_min 9/2', 'raw'): 1, ('scale 1, d_min 5', 'raw'): 1, ('scale 1, d_min 11/2', 'raw'): 1, ('scale 1, d_min 6', 'raw'): 1, ('scale 1, d_min 13/2', 'raw'): 1, ('scale 1, d_min 7', 'raw'): 1, ('scale 1, d_min 15/2', 'raw'): 1, ('scale 1, d_min 8', 'raw'): 1, ('scale 1, d_min 17/2', 'raw'): 1, ('scale 1, d_min 9', 'raw'): 1, ('scale 1, d_min 19/2', 'raw'): 1}   (* = not the AP event's neighbours)
+
+T2  two runners on r1's slot at once: speeds (1,2,3,4,5,6, 1+8a, 1+8b); r1's scale vs dead-lattice prediction
+   a= 1 b= 2: dead [1, 2]  predicted 3  actual L=3 u=7/24  AGREE
+   a= 1 b= 3: dead [1, 3]  predicted 2  actual L=2 u=7/16  AGREE
+   a= 2 b= 3: dead [1, 2, 3]  predicted 4  actual L=4 u=5/32  AGREE
+   a= 2 b= 4: dead [1, 2, 4]  predicted 3  actual L=3 u=7/24  AGREE
+   a= 3 b= 4: dead [1, 2, 3, 4]  predicted 5  actual L=5 u=7/40  AGREE
+   a= 2 b= 6: dead [1, 2, 3, 6]  predicted 4  actual L=4 u=5/32  AGREE
+   a= 3 b= 6: dead [1, 2, 3, 6]  predicted 4  actual L=4 u=5/32  AGREE
+   a= 4 b= 6: dead [1, 2, 3, 4, 6]  predicted 5  actual L=5 u=7/40  AGREE
+   a= 4 b= 8: dead [1, 2, 4, 8]  predicted 3  actual L=3 u=7/24  AGREE
+   a= 6 b=10: dead [1, 2, 3, 5, 6, 10]  predicted 4  actual L=4 u=5/32  AGREE
+   a= 6 b=12: dead [1, 2, 3, 4, 6, 12]  predicted 5  actual L=5 u=7/40  AGREE
+   a=12 b=30: dead [1, 2, 3, 4, 5, 6, 10, 12, 15, 30]  predicted 7  actual L=7 u=9/56  AGREE
+   different subjects at once: r8 on r1's slot (9) and r7 on r2's slot (10) -> speeds (1,2,3,4,5,6,10,9) sorted
+     runner 1: predicted 2 actual L=3 u=7/24
+     runner 2: predicted 2 actual L=2 u=3/16
+     runner 3: predicted 1 actual L=1 u=1/8
+     runner 4: predicted 1 actual L=1 u=1/8
+     runner 5: predicted 1 actual L=1 u=1/8
+     runner 6: predicted 1 actual L=1 u=1/8
+     runner 9: predicted 2 actual L=3 u=11/24
+     runner 10: predicted 2 actual L=2 u=5/16
+
+T3  integer battery: every runner, predicted scale (first not-dead) vs actual least lonely scale
+   all 8-subsets of [1,16], gcd 1: {'runners': 102952, 'scale 1': 70876, 'predicted == actual': 95656}; actual minus predicted where different: {1: 4530, 2: 1098, 3: 1616, 4: 36, 6: 16}
+      e.g. ([1, 2, 3, 4, 5, 6, 8, 9], 1, 'pred 2 actual 5 u=7/40 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 8, 9], 9, 'pred 2 actual 3 u=11/24 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 9, 10], 1, 'pred 2 actual 3 u=7/24 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 9, 10], 9, 'pred 2 actual 3 u=11/24 d_min=1')
+   random [1,100]: {'runners': 12000, 'scale 1': 9775, 'predicted == actual': 11506}; actual minus predicted where different: {1: 350, 2: 123, 3: 15, 4: 5, 6: 1}
+      e.g. ([3, 4, 20, 29, 33, 78, 81, 86], 4, 'pred 3 actual 5 u=9/40 d_min=1')
+      e.g. ([3, 4, 20, 29, 33, 78, 81, 86], 78, 'pred 1 actual 2 u=21/16 d_min=3')
+      e.g. ([12, 34, 45, 47, 54, 55, 64, 67], 45, 'pred 1 actual 3 u=7/24 d_min=2')
+      e.g. ([6, 11, 23, 37, 38, 73, 75, 83], 75, 'pred 3 actual 5 u=27/40 d_min=2')
+   random [1,1000]: {'runners': 3200, 'scale 1': 3060, 'predicted == actual': 3179}; actual minus predicted where different: {1: 14, 2: 2, 3: 5}
+      e.g. ([405, 446, 449, 462, 654, 681, 850, 1000], 446, 'pred 1 actual 2 u=23/16 d_min=3')
+      e.g. ([34, 64, 69, 261, 520, 532, 783, 980], 64, 'pred 1 actual 2 u=19/16 d_min=5')
+      e.g. ([247, 506, 595, 637, 795, 867, 966, 970], 966, 'pred 1 actual 2 u=19/16 d_min=4')
+      e.g. ([236, 237, 264, 294, 409, 413, 416, 925], 416, 'pred 1 actual 2 u=3/16 d_min=3')
+   AP (1..8) with two runners pushed onto slots: (1..6, k1+8a, k2+8b): {'runners': 7936, 'scale 1': 6328, 'predicted == actual': 7754}; actual minus predicted where different: {1: 88, 2: 68, 3: 26}
+      e.g. ([1, 2, 3, 4, 5, 6, 9, 10], 1, 'pred 2 actual 3 u=7/24 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 9, 10], 9, 'pred 2 actual 3 u=11/24 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 9, 26], 1, 'pred 2 actual 3 u=7/24 d_min=1')
+      e.g. ([1, 2, 3, 4, 5, 6, 17, 18], 1, 'pred 3 actual 4 u=5/32 d_min=1')

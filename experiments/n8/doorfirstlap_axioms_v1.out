@@ -1,0 +1,16 @@
+# Run 2026-09-20, AFTER DoorFirstLap was refuted (tau = 2401/1872 > 1).
+# cd LonelyRunner && lake env lean <file with:>
+#   import LonelyRunner.LRC.Spec.Doors
+#   #print axioms LRC.Spec.doorCapped_of_doorFirstLap
+#   #print axioms LRC.Spec.lonelyRunnerAt8_of_doorFirstLap
+#
+# Both theorems take the REFUTED DoorFirstLap as hypothesis. Both are axiom-clean.
+# This is the point: the axiom check cannot see the falsity of a `def ... : Prop`.
+
+'LRC.Spec.doorCapped_of_doorFirstLap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Spec.lonelyRunnerAt8_of_doorFirstLap' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+# Companion: sorry inventory over the whole Spec/ directory, same moment.
+#   grep -nE '(^|[^[:alnum:]_])sorry([^[:alnum:]_]|$)' LonelyRunner/LRC/Spec/*.lean \
+#     | grep -vE ':[0-9]+: *--' | grep -vE '`sorry`' | wc -l
+0

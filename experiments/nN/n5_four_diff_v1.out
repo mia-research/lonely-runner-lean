@@ -1,0 +1,9 @@
+exhaustive 4-subsets of 1..34      tested   43655   max moves   9   at (Fraction(1, 1), Fraction(18, 1), Fraction(20, 1), Fraction(34, 1))   NON-ARRIVAL 0
+random, mixed scales to 1e6        tested  200000   max moves  12   at (Fraction(1, 1), Fraction(24, 1), Fraction(26, 1), Fraction(50, 1))   NON-ARRIVAL 0
+near arithmetic progressions       tested   59752   max moves   5   at (Fraction(3, 1), Fraction(414, 1), Fraction(821, 1), Fraction(1230, 1))   NON-ARRIVAL 0
+ratios near 8/7, 6/5, 5/4, 4/3     tested   60000   max moves   0   at (Fraction(4521, 1), Fraction(22609, 4), Fraction(113029, 16), Fraction(565209, 64))   NON-ARRIVAL 0
+extreme spread (1 tiny, 3 large)   tested   60000   max moves  33   at (Fraction(2, 1), Fraction(796139, 1), Fraction(804475, 1), Fraction(811491, 1))   NON-ARRIVAL 0
+tight clusters                     tested   58816   max moves   0   at (Fraction(6361, 1), Fraction(6362, 1), Fraction(6364, 1), Fraction(6365, 1))   NON-ARRIVAL 0
+
+OVERALL   max moves observed: 33    total non-arrivals: 0
+CAP was 200; a cap-hit would be reported as NON-ARRIVAL.

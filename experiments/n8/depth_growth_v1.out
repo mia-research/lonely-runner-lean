@@ -1,0 +1,10 @@
+all 8-subsets of [1,16], gcd 1: 12869 arrangements | max scales 17 at ['1', '2', '4', '5', '7', '9', '14', '15'] r8 | max t/bound 4.714 at ['1', '2', '5', '7', '8', '10', '14', '16'] r8
+all 8-subsets of [1,20], gcd 1: 125925 arrangements | max scales 18 at ['1', '2', '3', '4', '5', '6', '19', '20'] r8 | max t/bound 4.714 at ['1', '2', '5', '7', '8', '10', '14', '16'] r8
+all 8-subsets of [1,24], gcd 1: 734975 arrangements | max scales 18 at ['1', '2', '3', '4', '5', '6', '19', '20'] r8 | max t/bound 4.714 at ['1', '2', '5', '7', '8', '10', '14', '16'] r8
+push-out families x <= 200: 579 arrangements | max scales 25 at ['1', '2', '3', '4', '5', '6', '32', '33'] r8 | max t/bound 3.571 at ['1', '2', '3', '4', '5', '6', '8', '9'] r8
+push-out families x <= 1000: 2979 arrangements | max scales 25 at ['1', '2', '3', '4', '5', '6', '32', '33'] r8 | max t/bound 3.571 at ['1', '2', '3', '4', '5', '6', '8', '9'] r8
+push-out families x <= 5000: 14979 arrangements | max scales 25 at ['1', '2', '3', '4', '5', '6', '32', '33'] r8 | max t/bound 3.571 at ['1', '2', '3', '4', '5', '6', '8', '9'] r8
+random integers [1,100] (20000 arrangements): 20000 arrangements | max scales 18 at ['14', '28', '31', '34', '40', '55', '61', '98'] r7 | max t/bound 5.556 at ['14', '28', '31', '34', '40', '55', '61', '98'] r7
+random integers [1,1000] (20000 arrangements): 20000 arrangements | max scales 18 at ['87', '208', '597', '697', '755', '799', '879', '942'] r1 | max t/bound 5.110 at ['142', '229', '340', '399', '627', '705', '780', '816'] r4
+random integers [1,10000] (20000 arrangements): 20000 arrangements | max scales 18 at ['1766', '2383', '3807', '4978', '5267', '6158', '8545', '9510'] r8 | max t/bound 5.761 at ['724', '1451', '2198', '4519', '5226', '6089', '8769', '9892'] r4
+random integers [1,100000] (20000 arrangements): 20000 arrangements | max scales 14 at ['7983', '24342', '53653', '56297', '58765', '62345', '94474', '96284'] r8 | max t/bound 5.028 at ['14638', '30476', '37128', '55571', '63994', '66681', '74230', '84684'] r3

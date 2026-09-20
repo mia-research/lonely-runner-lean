@@ -1,0 +1,3 @@
+all 8-subsets of [1,16], gcd 1: {'neighbour ties': 29400, 'tie contains a runner needing a jump': 27764, 'tie is a slot-sharing pair (difference = 8q x its d_min)': 27764, 'runners needing a jump': 31680, '  ... seen inside some neighbour tie': 26228}
+random [1,100]: {'neighbour ties': 2809, 'tie contains a runner needing a jump': 1834, 'tie is a slot-sharing pair (difference = 8q x its d_min)': 1787, 'runners needing a jump': 1989, '  ... seen inside some neighbour tie': 1524}
+random [1,1000]: {'runners needing a jump': 124, 'neighbour ties': 276, 'tie contains a runner needing a jump': 96, 'tie is a slot-sharing pair (difference = 8q x its d_min)': 93, '  ... seen inside some neighbour tie': 80}

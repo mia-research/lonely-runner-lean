@@ -1,0 +1,33 @@
+order 8 certificate (strict, simplex): ratio bound S = 8, lap bound L = 6, words to 36 moves, cap R < 7
+   [1/36]     0.4s  nodes 1  realisable 0  best so far None
+   [2/36]     0.4s  nodes 2  realisable 0  best so far None
+   [3/36]     0.4s  nodes 3  realisable 0  best so far None
+   [4/36]     0.4s  nodes 4  realisable 0  best so far None
+   [5/36]     0.4s  nodes 5  realisable 0  best so far None
+   [6/36]     0.4s  nodes 6  realisable 0  best so far None
+   [7/36]     0.4s  nodes 7  realisable 0  best so far None
+   [8/36]     0.4s  nodes 8  realisable 0  best so far None
+   [9/36]     0.4s  nodes 9  realisable 0  best so far None
+   [10/36]     0.4s  nodes 10  realisable 0  best so far None
+   [11/36]     0.4s  nodes 11  realisable 0  best so far None
+   [12/36]     0.4s  nodes 12  realisable 0  best so far None
+   [13/36]     0.4s  nodes 13  realisable 0  best so far None
+   [14/36]     0.4s  nodes 14  realisable 0  best so far None
+   [15/36]     0.4s  nodes 15  realisable 0  best so far None
+   [16/36]     0.5s  nodes 16  realisable 0  best so far None
+   [17/36]     0.5s  nodes 17  realisable 0  best so far None
+   [18/36]     0.5s  nodes 18  realisable 0  best so far None
+   [19/36]     0.5s  nodes 19  realisable 0  best so far None
+   [20/36]     0.5s  nodes 20  realisable 0  best so far None
+   [21/36]     0.5s  nodes 21  realisable 0  best so far None
+   [22/36]     0.5s  nodes 22  realisable 0  best so far None
+   [23/36]     0.5s  nodes 23  realisable 0  best so far None
+   [24/36]     0.5s  nodes 24  realisable 0  best so far None
+   [25/36]     0.5s  nodes 25  realisable 0  best so far None
+   [26/36]     0.5s  nodes 26  realisable 0  best so far None
+   [27/36]     0.5s  nodes 27  realisable 0  best so far None
+   [28/36]     0.5s  nodes 28  realisable 0  best so far None
+   [29/36]     0.5s  nodes 29  realisable 0  best so far None
+   [30/36]     0.5s  nodes 30  realisable 0  best so far None
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-twd6e76s', '/mp-megfe8en', '/mp-ox822_3d', '/mp-oyg6ls0q', '/mp-cwuv7rii', '/mp-on3kketr'}
+  warnings.warn(

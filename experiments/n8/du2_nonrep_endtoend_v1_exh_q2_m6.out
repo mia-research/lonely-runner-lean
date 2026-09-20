@@ -1,0 +1,3 @@
+EXHAUSTIVE q<= 2, 1<=m1<m2<= 6: 65610 tuples, 0 failures
+  minimum |S| - |B_m1 u B_m2| = 1/24 = 0.041667  at E = [2, 3, 5, 12, 14, 8, 48]
+  minimum witness slack min_e ||e k / 8L|| = 1/8 = 0.125000  at E = [3, 4, 5, 6, 7, 8, 16]   (need >= 1/8)

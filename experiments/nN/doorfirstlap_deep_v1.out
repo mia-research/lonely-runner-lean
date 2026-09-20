@@ -1,0 +1,8 @@
+control n=8 witness: tau = 2401/1872 in 28 moves  (expect 2401/1872, 28 moves)
+
+=== deep families: tau = leastDisp * arrival ===
+  n  tested  max moves      max tau   tau>1 found   witness
+  5   11360        365      0.20884             no   (2, 10245, 10251, 10268)
+  6   11720        256      0.17295             no   (2, 10045, 10047, 10074, 10077)
+  7   11854        479      0.15242             no   (1, 10087, 10102, 10103, 10106, 10118)
+  8   11931        121      0.12852             no   (3, 10117, 10151, 10197, 10227, 10239, 10279)

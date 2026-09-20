@@ -1,0 +1,72 @@
+
+=== one runner pushed out: (1..7, x)
+  ['1', '2', '3', '4', '5', '6', '7', '9']
+    r1 t=9/64 dmin=1 7|8 | r2 t=1/8 dmin=1 1/8|3 | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|1/8 | r8 t=1/16 dmin=2 7|1 S
+  ['1', '2', '3', '4', '5', '6', '7', '12']
+    r1 t=1/8 dmin=1 7|2 | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4/8 | r4 t=9/64 dmin=1 3|8 | r5 t=1/8 dmin=1 4/8|6 | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|1 | r8 t=1/40 dmin=5 7|1 S
+  ['1', '2', '3', '4', '5', '6', '7', '15']
+    r1 t=1/8 dmin=1 7/8|2 | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7/8 | r7 t=9/64 dmin=1 6|8 S | r8 t=1/64 dmin=8 7|1 S
+  ['1', '2', '3', '4', '5', '6', '7', '16']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/72 dmin=9 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '7', '17']
+    r1 t=17/128 dmin=1 7|8 | r2 t=1/8 dmin=1 1/8|3 | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|1/8 | r8 t=1/80 dmin=10 7|1 S
+  ['1', '2', '3', '4', '5', '6', '7', '24']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/136 dmin=17 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '7', '40']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/264 dmin=33 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '7', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/1224 dmin=153 7|1 S R
+  tally: {'runners': 64, 't = 1/(8 d_min)': 60, 'track neighbours = speed-neighbours': 51, 'track neighbours = slot-neighbours (mod 8)': 46, 'ties': 24}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== pair pushed out: (1..6, x-1, x)
+  ['1', '2', '3', '4', '5', '6', '9', '10']
+    r1 t=9/64 dmin=1 6|7 | r2 t=9/56 dmin=1 1|7 | r3 t=1/8 dmin=1 2/8|4 | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|1/7 | r7 t=25/56 dmin=1 2|5 | r8 t=17/56 dmin=1 3|4
+  ['1', '2', '3', '4', '5', '6', '12', '13']
+    r1 t=1/8 dmin=1 6|2 | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4/7 | r4 t=9/64 dmin=1 3|7 | r5 t=9/56 dmin=1 4|7 | r6 t=1/8 dmin=1 5/8|1 | r7 t=5/16 dmin=1 2|6 | r8 t=5/16 dmin=1 3|4
+  ['1', '2', '3', '4', '5', '6', '15', '16']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '23', '24']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '159', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  tally: {'runners': 40, 't = 1/(8 d_min)': 32, 'track neighbours = speed-neighbours': 27, 'track neighbours = slot-neighbours (mod 8)': 27, 'ties': 8}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== block of three pushed out: (1..5, x-2, x-1, x)
+  ['1', '2', '3', '4', '5', '9', '10', '11']
+    r1 t=9/64 dmin=1 5|6 | r2 t=9/56 dmin=1 1|6 | r3 t=3/16 dmin=1 2|6 | r4 t=1/8 dmin=1 3/8|5 | r5 t=1/8 dmin=1 4|1/6 | r6 t=17/56 dmin=1 2|3 | r7 t=17/64 dmin=1 2|3 | r8 t=3/16 dmin=1 5|1
+  ['1', '2', '3', '4', '5', '12', '13', '14']
+    r1 t=1/8 dmin=1 8|2 S | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4/6 | r4 t=9/64 dmin=1 3|6 | r5 t=9/56 dmin=1 4|6 S | r6 t=9/56 dmin=1 5|7 S | r7 t=9/64 dmin=1 5|8 | r8 t=1/8 dmin=1 5/7|1
+  ['1', '2', '3', '4', '5', '14', '15', '16']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  ['1', '2', '3', '4', '5', '30', '31', '32']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  tally: {'runners': 32, 't = 1/(8 d_min)': 22, 'track neighbours = speed-neighbours': 20, 'track neighbours = slot-neighbours (mod 8)': 17, 'ties': 6}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== spread block (1..5, 14, 23, 32) and spread grid (1..6, 159, 160)
+  ['1', '2', '3', '4', '5', '14', '23', '32']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/72 dmin=9 5|7 S R | r7 t=1/72 dmin=9 6|8 S R | r8 t=1/72 dmin=9 7|1 S R
+  ['1', '2', '3', '4', '5', '6', '159', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  tally: {'runners': 16, 't = 1/(8 d_min)': 16, 'track neighbours = speed-neighbours': 16, 'track neighbours = slot-neighbours (mod 8)': 16, 'ties': 0}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== spread grid (1..6,159,160) with one of r1..r6 displaced (PREDICTION_SPREAD_GRID)
+  ['1', '21/10', '3', '4', '5', '6', '159', '160']
+    r1 t=145/1264 dmin=11/10 6|7 | r2 t=295/2092 dmin=9/10 1|7 | r3 t=5/36 dmin=9/10 2|4 S | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  ['1', '2', '3', '4', '49/10', '6', '159', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=5/36 dmin=9/10 3|5 S | r5 t=5/36 dmin=9/10 4|6 S | r6 t=5/44 dmin=11/10 5|7 S | r7 t=1/8 dmin=1 6|8 S R | r8 t=1/8 dmin=1 7|1 S R
+  ['9/10', '2', '3', '4', '5', '6', '159', '160']
+    r1 t=725/6324 dmin=11/10 6|7 | r2 t=1/8 dmin=1 1|3 S | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S R | r6 t=1/8 dmin=1 5|7 S R | r7 t=1/8 dmin=1 6|8 S R | r8 t=23/176 dmin=1 6|1
+  ['1', '2', '3', '4', '5', '61/10', '159', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6 S | r6 t=5/44 dmin=11/10 5|7 S | r7 t=765/6116 dmin=1 6|8 S | r8 t=1/8 dmin=1 7|1 S R
+  ['1', '2', '3', '4', '5', '7', '159', '160']
+    r1 t=1/8 dmin=1 8|2 S R | r2 t=1/8 dmin=1 1|3 S R | r3 t=1/8 dmin=1 2|4 S R | r4 t=1/8 dmin=1 3|5 S R | r5 t=1/8 dmin=1 4|6/7 | r6 t=1/16 dmin=2 5|7 S | r7 t=23/176 dmin=1 5|8 | r8 t=1/8 dmin=1 6/7|1
+  tally: {'runners': 40, 't = 1/(8 d_min)': 34, 'track neighbours = speed-neighbours': 33, 'track neighbours = slot-neighbours (mod 8)': 24, 'ties': 6}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== integer sweep: (1..7, x), x = 8..40 (tally only)
+  tally: {'runners': 264, 't = 1/(8 d_min)': 236, 'track neighbours = speed-neighbours': 152, 'track neighbours = slot-neighbours (mod 8)': 120, 'ties': 168}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== integer sweep: (1..6, x-1, x), x = 8..40 (tally only)
+  tally: {'runners': 264, 't = 1/(8 d_min)': 168, 'track neighbours = speed-neighbours': 114, 'track neighbours = slot-neighbours (mod 8)': 88, 'ties': 128}    (S = speed-neighbours either side, R = slot-neighbours either side)
+
+=== integer sweep: (1..5, x-2, x-1, x), x = 8..40 (tally only)
+  tally: {'runners': 264, 't = 1/(8 d_min)': 144, 'track neighbours = speed-neighbours': 116, 'track neighbours = slot-neighbours (mod 8)': 64, 'ties': 104}    (S = speed-neighbours either side, R = slot-neighbours either side)

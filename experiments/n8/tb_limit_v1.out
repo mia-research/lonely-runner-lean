@@ -1,0 +1,4 @@
+validating tb_limit_v1.rank2_limit against rt_limit_v2.rank2_limit
+   height-<=3 rank-2 lattices compared: 3382   mismatches 0
+   rt_limit_v2 total 240.4s   tb_limit_v1 total 12.6s   speedup 19.1x
+   random height-<=6 rank-2 lattices compared: 60   mismatches 0

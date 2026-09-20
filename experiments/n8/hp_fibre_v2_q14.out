@@ -1,0 +1,378 @@
+unit tuples q <= 14; deciding the whole e_rho0 fibre for each
+   ... 200 unit tuples done, failures so far 1
+   ... 400 unit tuples done, failures so far 1
+   ... 600 unit tuples done, failures so far 1
+   ... 800 unit tuples done, failures so far 1
+   ... 1000 unit tuples done, failures so far 1
+   ... 1200 unit tuples done, failures so far 1
+   ... 1400 unit tuples done, failures so far 1
+   ... 1600 unit tuples done, failures so far 1
+   ... 1800 unit tuples done, failures so far 1
+   ... 2000 unit tuples done, failures so far 1
+   ... 2200 unit tuples done, failures so far 1
+   ... 2400 unit tuples done, failures so far 1
+   ... 2600 unit tuples done, failures so far 1
+   ... 2800 unit tuples done, failures so far 1
+   ... 3000 unit tuples done, failures so far 1
+   ... 3200 unit tuples done, failures so far 1
+   ... 3400 unit tuples done, failures so far 1
+   ... 3600 unit tuples done, failures so far 2
+   ... 3800 unit tuples done, failures so far 2
+   ... 4000 unit tuples done, failures so far 2
+   ... 4200 unit tuples done, failures so far 3
+   ... 4400 unit tuples done, failures so far 3
+   ... 4600 unit tuples done, failures so far 3
+   ... 4800 unit tuples done, failures so far 3
+   ... 5000 unit tuples done, failures so far 3
+   ... 5200 unit tuples done, failures so far 3
+   ... 5400 unit tuples done, failures so far 3
+   ... 5600 unit tuples done, failures so far 3
+   ... 5800 unit tuples done, failures so far 3
+   ... 6000 unit tuples done, failures so far 3
+   ... 6200 unit tuples done, failures so far 3
+   ... 6400 unit tuples done, failures so far 3
+   ... 6600 unit tuples done, failures so far 3
+   ... 6800 unit tuples done, failures so far 3
+   ... 7000 unit tuples done, failures so far 3
+   ... 7200 unit tuples done, failures so far 3
+   ... 7400 unit tuples done, failures so far 3
+   ... 7600 unit tuples done, failures so far 3
+   ... 7800 unit tuples done, failures so far 3
+   ... 8000 unit tuples done, failures so far 3
+   ... 8200 unit tuples done, failures so far 3
+   ... 8400 unit tuples done, failures so far 4
+   ... 8600 unit tuples done, failures so far 4
+   ... 8800 unit tuples done, failures so far 4
+   ... 9000 unit tuples done, failures so far 4
+   ... 9200 unit tuples done, failures so far 4
+   ... 9400 unit tuples done, failures so far 4
+   ... 9600 unit tuples done, failures so far 4
+   ... 9800 unit tuples done, failures so far 4
+   ... 10000 unit tuples done, failures so far 4
+   ... 10200 unit tuples done, failures so far 4
+   ... 10400 unit tuples done, failures so far 4
+   ... 10600 unit tuples done, failures so far 4
+   ... 10800 unit tuples done, failures so far 4
+   ... 11000 unit tuples done, failures so far 4
+   ... 11200 unit tuples done, failures so far 5
+   ... 11400 unit tuples done, failures so far 5
+   ... 11600 unit tuples done, failures so far 5
+   ... 11800 unit tuples done, failures so far 5
+   ... 12000 unit tuples done, failures so far 5
+   ... 12200 unit tuples done, failures so far 5
+   ... 12400 unit tuples done, failures so far 5
+   ... 12600 unit tuples done, failures so far 5
+   ... 12800 unit tuples done, failures so far 5
+   ... 13000 unit tuples done, failures so far 5
+   ... 13200 unit tuples done, failures so far 5
+   ... 13400 unit tuples done, failures so far 5
+   ... 13600 unit tuples done, failures so far 5
+   ... 13800 unit tuples done, failures so far 5
+   ... 14000 unit tuples done, failures so far 6
+   ... 14200 unit tuples done, failures so far 6
+   ... 14400 unit tuples done, failures so far 6
+   ... 14600 unit tuples done, failures so far 6
+   ... 14800 unit tuples done, failures so far 6
+   ... 15000 unit tuples done, failures so far 6
+   ... 15200 unit tuples done, failures so far 6
+   ... 15400 unit tuples done, failures so far 6
+   ... 15600 unit tuples done, failures so far 6
+   ... 15800 unit tuples done, failures so far 6
+   ... 16000 unit tuples done, failures so far 6
+   ... 16200 unit tuples done, failures so far 6
+   ... 16400 unit tuples done, failures so far 6
+   ... 16600 unit tuples done, failures so far 6
+   ... 16800 unit tuples done, failures so far 6
+   ... 17000 unit tuples done, failures so far 6
+   ... 17200 unit tuples done, failures so far 6
+   ... 17400 unit tuples done, failures so far 6
+   ... 17600 unit tuples done, failures so far 6
+   ... 17800 unit tuples done, failures so far 6
+   ... 18000 unit tuples done, failures so far 6
+   ... 18200 unit tuples done, failures so far 6
+   ... 18400 unit tuples done, failures so far 6
+   ... 18600 unit tuples done, failures so far 6
+   ... 18800 unit tuples done, failures so far 6
+   ... 19000 unit tuples done, failures so far 6
+   ... 19200 unit tuples done, failures so far 6
+   ... 19400 unit tuples done, failures so far 6
+   ... 19600 unit tuples done, failures so far 6
+   ... 19800 unit tuples done, failures so far 6
+   ... 20000 unit tuples done, failures so far 6
+   ... 20200 unit tuples done, failures so far 6
+   ... 20400 unit tuples done, failures so far 6
+   ... 20600 unit tuples done, failures so far 6
+   ... 20800 unit tuples done, failures so far 6
+   ... 21000 unit tuples done, failures so far 6
+   ... 21200 unit tuples done, failures so far 7
+   ... 21400 unit tuples done, failures so far 7
+   ... 21600 unit tuples done, failures so far 7
+   ... 21800 unit tuples done, failures so far 7
+   ... 22000 unit tuples done, failures so far 7
+   ... 22200 unit tuples done, failures so far 7
+   ... 22400 unit tuples done, failures so far 7
+   ... 22600 unit tuples done, failures so far 7
+   ... 22800 unit tuples done, failures so far 7
+   ... 23000 unit tuples done, failures so far 7
+   ... 23200 unit tuples done, failures so far 7
+   ... 23400 unit tuples done, failures so far 7
+   ... 23600 unit tuples done, failures so far 7
+   ... 23800 unit tuples done, failures so far 7
+   ... 24000 unit tuples done, failures so far 7
+   ... 24200 unit tuples done, failures so far 7
+   ... 24400 unit tuples done, failures so far 7
+   ... 24600 unit tuples done, failures so far 7
+   ... 24800 unit tuples done, failures so far 7
+   ... 25000 unit tuples done, failures so far 7
+   ... 25200 unit tuples done, failures so far 7
+   ... 25400 unit tuples done, failures so far 7
+   ... 25600 unit tuples done, failures so far 7
+   ... 25800 unit tuples done, failures so far 7
+   ... 26000 unit tuples done, failures so far 7
+   ... 26200 unit tuples done, failures so far 7
+   ... 26400 unit tuples done, failures so far 7
+   ... 26600 unit tuples done, failures so far 7
+   ... 26800 unit tuples done, failures so far 7
+   ... 27000 unit tuples done, failures so far 7
+   ... 27200 unit tuples done, failures so far 7
+   ... 27400 unit tuples done, failures so far 7
+   ... 27600 unit tuples done, failures so far 7
+   ... 27800 unit tuples done, failures so far 7
+   ... 28000 unit tuples done, failures so far 7
+   ... 28200 unit tuples done, failures so far 7
+   ... 28400 unit tuples done, failures so far 7
+   ... 28600 unit tuples done, failures so far 7
+   ... 28800 unit tuples done, failures so far 7
+   ... 29000 unit tuples done, failures so far 7
+   ... 29200 unit tuples done, failures so far 7
+   ... 29400 unit tuples done, failures so far 7
+   ... 29600 unit tuples done, failures so far 8
+   ... 29800 unit tuples done, failures so far 8
+   ... 30000 unit tuples done, failures so far 8
+   ... 30200 unit tuples done, failures so far 8
+   ... 30400 unit tuples done, failures so far 8
+   ... 30600 unit tuples done, failures so far 8
+   ... 30800 unit tuples done, failures so far 8
+   ... 31000 unit tuples done, failures so far 8
+   ... 31200 unit tuples done, failures so far 8
+   ... 31400 unit tuples done, failures so far 8
+   ... 31600 unit tuples done, failures so far 8
+   ... 31800 unit tuples done, failures so far 8
+   ... 32000 unit tuples done, failures so far 8
+   ... 32200 unit tuples done, failures so far 8
+   ... 32400 unit tuples done, failures so far 8
+   ... 32600 unit tuples done, failures so far 8
+   ... 32800 unit tuples done, failures so far 8
+   ... 33000 unit tuples done, failures so far 8
+   ... 33200 unit tuples done, failures so far 8
+   ... 33400 unit tuples done, failures so far 8
+   ... 33600 unit tuples done, failures so far 8
+   ... 33800 unit tuples done, failures so far 8
+   ... 34000 unit tuples done, failures so far 8
+   ... 34200 unit tuples done, failures so far 8
+   ... 34400 unit tuples done, failures so far 8
+   ... 34600 unit tuples done, failures so far 8
+   ... 34800 unit tuples done, failures so far 8
+   ... 35000 unit tuples done, failures so far 8
+   ... 35200 unit tuples done, failures so far 8
+   ... 35400 unit tuples done, failures so far 8
+   ... 35600 unit tuples done, failures so far 8
+   ... 35800 unit tuples done, failures so far 8
+   ... 36000 unit tuples done, failures so far 8
+   ... 36200 unit tuples done, failures so far 8
+   ... 36400 unit tuples done, failures so far 8
+   ... 36600 unit tuples done, failures so far 8
+   ... 36800 unit tuples done, failures so far 8
+   ... 37000 unit tuples done, failures so far 8
+   ... 37200 unit tuples done, failures so far 8
+   ... 37400 unit tuples done, failures so far 8
+   ... 37600 unit tuples done, failures so far 8
+   ... 37800 unit tuples done, failures so far 8
+   ... 38000 unit tuples done, failures so far 8
+   ... 38200 unit tuples done, failures so far 8
+   ... 38400 unit tuples done, failures so far 8
+   ... 38600 unit tuples done, failures so far 8
+   ... 38800 unit tuples done, failures so far 8
+   ... 39000 unit tuples done, failures so far 8
+   ... 39200 unit tuples done, failures so far 8
+   ... 39400 unit tuples done, failures so far 8
+   ... 39600 unit tuples done, failures so far 8
+   ... 39800 unit tuples done, failures so far 8
+   ... 40000 unit tuples done, failures so far 8
+   ... 40200 unit tuples done, failures so far 8
+   ... 40400 unit tuples done, failures so far 8
+   ... 40600 unit tuples done, failures so far 8
+   ... 40800 unit tuples done, failures so far 8
+   ... 41000 unit tuples done, failures so far 8
+   ... 41200 unit tuples done, failures so far 8
+   ... 41400 unit tuples done, failures so far 8
+   ... 41600 unit tuples done, failures so far 8
+   ... 41800 unit tuples done, failures so far 8
+   ... 42000 unit tuples done, failures so far 8
+   ... 42200 unit tuples done, failures so far 8
+   ... 42400 unit tuples done, failures so far 8
+   ... 42600 unit tuples done, failures so far 8
+   ... 42800 unit tuples done, failures so far 8
+   ... 43000 unit tuples done, failures so far 8
+   ... 43200 unit tuples done, failures so far 8
+   ... 43400 unit tuples done, failures so far 8
+   ... 43600 unit tuples done, failures so far 8
+   ... 43800 unit tuples done, failures so far 8
+   ... 44000 unit tuples done, failures so far 8
+   ... 44200 unit tuples done, failures so far 8
+   ... 44400 unit tuples done, failures so far 8
+   ... 44600 unit tuples done, failures so far 8
+   ... 44800 unit tuples done, failures so far 8
+   ... 45000 unit tuples done, failures so far 8
+   ... 45200 unit tuples done, failures so far 8
+   ... 45400 unit tuples done, failures so far 8
+   ... 45600 unit tuples done, failures so far 8
+   ... 45800 unit tuples done, failures so far 8
+   ... 46000 unit tuples done, failures so far 9
+   ... 46200 unit tuples done, failures so far 9
+   ... 46400 unit tuples done, failures so far 9
+   ... 46600 unit tuples done, failures so far 9
+   ... 46800 unit tuples done, failures so far 9
+   ... 47000 unit tuples done, failures so far 9
+   ... 47200 unit tuples done, failures so far 9
+   ... 47400 unit tuples done, failures so far 9
+   ... 47600 unit tuples done, failures so far 9
+   ... 47800 unit tuples done, failures so far 9
+   ... 48000 unit tuples done, failures so far 9
+   ... 48200 unit tuples done, failures so far 9
+   ... 48400 unit tuples done, failures so far 9
+   ... 48600 unit tuples done, failures so far 9
+   ... 48800 unit tuples done, failures so far 9
+   ... 49000 unit tuples done, failures so far 9
+   ... 49200 unit tuples done, failures so far 9
+   ... 49400 unit tuples done, failures so far 9
+   ... 49600 unit tuples done, failures so far 9
+   ... 49800 unit tuples done, failures so far 9
+   ... 50000 unit tuples done, failures so far 9
+   ... 50200 unit tuples done, failures so far 9
+   ... 50400 unit tuples done, failures so far 9
+   ... 50600 unit tuples done, failures so far 9
+
+   unit tuples: 50625
+   rho0=2: closed a priori 50542, closed by finite check 83, total 50625 of 50625
+   rho0=4: closed a priori 50364, closed by finite check 252, total 50616 of 50625
+   rho0=6: closed a priori 50542, closed by finite check 83, total 50625 of 50625
+   largest finite-check threshold M < 607
+   FAILURES: 9
+       ((1, 3, 5, 7), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 4')
+       ((9, 3, 21, 15), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 12')
+       ((9, 27, 45, 63), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 36')
+       ((17, 51, 85, 119), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 68')
+       ((25, 35, 5, 15), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 20')
+       ((33, 11, 77, 55), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 44')
+       ((49, 35, 21, 7), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 28')
+       ((65, 91, 13, 39), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 52')
+       ((105, 75, 45, 15), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 60')
+   ... 500 tuples, failures 0
+   ... 1000 tuples, failures 0
+   ... 1500 tuples, failures 0
+   ... 2000 tuples, failures 0
+   ... 2500 tuples, failures 0
+   ... 3000 tuples, failures 0
+   ... 3500 tuples, failures 0
+   ... 4000 tuples, failures 0
+   ... 4500 tuples, failures 0
+   ... 5000 tuples, failures 0
+   ... 5500 tuples, failures 0
+   ... 6000 tuples, failures 0
+   ... 6500 tuples, failures 0
+   ... 7000 tuples, failures 0
+   ... 7500 tuples, failures 0
+   ... 8000 tuples, failures 0
+   ... 8500 tuples, failures 0
+   ... 9000 tuples, failures 0
+   ... 9500 tuples, failures 0
+   ... 10000 tuples, failures 0
+   ... 10500 tuples, failures 0
+   ... 11000 tuples, failures 0
+   ... 11500 tuples, failures 0
+   ... 12000 tuples, failures 0
+   ... 12500 tuples, failures 0
+   ... 13000 tuples, failures 0
+   ... 13500 tuples, failures 0
+   ... 14000 tuples, failures 0
+   ... 14500 tuples, failures 0
+   ... 15000 tuples, failures 0
+   ... 15500 tuples, failures 0
+   ... 16000 tuples, failures 0
+   ... 16500 tuples, failures 0
+   ... 17000 tuples, failures 0
+   ... 17500 tuples, failures 0
+   ... 18000 tuples, failures 0
+   ... 18500 tuples, failures 0
+   ... 19000 tuples, failures 0
+   ... 19500 tuples, failures 0
+   ... 20000 tuples, failures 0
+   ... 20500 tuples, failures 0
+   ... 21000 tuples, failures 0
+   ... 21500 tuples, failures 0
+   ... 22000 tuples, failures 0
+   ... 22500 tuples, failures 0
+   ... 23000 tuples, failures 0
+   ... 23500 tuples, failures 0
+   ... 24000 tuples, failures 0
+   ... 24500 tuples, failures 0
+   ... 25000 tuples, failures 0
+   ... 25500 tuples, failures 0
+   ... 26000 tuples, failures 0
+   ... 26500 tuples, failures 0
+   ... 27000 tuples, failures 0
+   ... 27500 tuples, failures 0
+   ... 28000 tuples, failures 0
+   ... 28500 tuples, failures 0
+   ... 29000 tuples, failures 0
+   ... 29500 tuples, failures 0
+   ... 30000 tuples, failures 0
+   ... 30500 tuples, failures 0
+   ... 31000 tuples, failures 0
+   ... 31500 tuples, failures 0
+   ... 32000 tuples, failures 0
+   ... 32500 tuples, failures 0
+   ... 33000 tuples, failures 0
+   ... 33500 tuples, failures 0
+   ... 34000 tuples, failures 0
+   ... 34500 tuples, failures 0
+   ... 35000 tuples, failures 0
+   ... 35500 tuples, failures 0
+   ... 36000 tuples, failures 0
+   ... 36500 tuples, failures 0
+   ... 37000 tuples, failures 0
+   ... 37500 tuples, failures 0
+   ... 38000 tuples, failures 0
+   ... 38500 tuples, failures 0
+   ... 39000 tuples, failures 0
+   ... 39500 tuples, failures 0
+   ... 40000 tuples, failures 0
+   ... 40500 tuples, failures 0
+   ... 41000 tuples, failures 0
+   ... 41500 tuples, failures 0
+   ... 42000 tuples, failures 0
+   ... 42500 tuples, failures 0
+   ... 43000 tuples, failures 0
+   ... 43500 tuples, failures 0
+   ... 44000 tuples, failures 0
+   ... 44500 tuples, failures 0
+   ... 45000 tuples, failures 0
+   ... 45500 tuples, failures 0
+   ... 46000 tuples, failures 0
+   ... 46500 tuples, failures 0
+   ... 47000 tuples, failures 0
+   ... 47500 tuples, failures 0
+   ... 48000 tuples, failures 0
+   ... 48500 tuples, failures 0
+   ... 49000 tuples, failures 0
+   ... 49500 tuples, failures 0
+   ... 50000 tuples, failures 0
+   ... 50500 tuples, failures 0
+
+QMAX=14: unit tuples 50625 (ALL of them, primitive or not)
+   rho0=2: a priori 50542, finite check 83, total 50625 of 50625
+   rho0=4: a priori 50364, finite check 261, total 50625 of 50625
+   rho0=6: a priori 50542, finite check 83, total 50625 of 50625
+   largest finite-check threshold M < 607  at ((17, 51, 85, 119), 2)
+   FAILURES: 0

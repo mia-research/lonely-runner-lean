@@ -1,0 +1,17 @@
+exhaustive: n distinct positive integer speeds, gcd 1, NO runner pinned at 0
+exact Fractions; Boundary Set Method; open zones, endpoints clear
+
+  n    V   instances  failures      worst u  window end
+------------------------------------------------------------
+  5   34     1358005         0       77/120         4/5
+        worst at v=(1, 6, 11, 23, 30) runner=4
+  6   26     1370916         0        25/33         5/6
+        worst at v=(1, 5, 10, 14, 19, 23) runner=0
+  7   21      813113         0        33/56         6/7
+        worst at v=(1, 2, 4, 6, 9, 17, 20) runner=6
+  8   18      349992         0        33/56         7/8
+        worst at v=(1, 2, 5, 7, 8, 10, 14, 16) runner=7
+  9   16      102960         0        37/81         8/9
+        worst at v=(1, 2, 3, 4, 5, 6, 7, 9, 10) runner=8
+ 10   15       30030         0        41/90        9/10
+        worst at v=(1, 2, 3, 4, 5, 6, 7, 8, 10, 11) runner=9

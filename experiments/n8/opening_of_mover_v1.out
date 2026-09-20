@@ -1,0 +1,9 @@
+full transit (one mover): {'movers': 1584, 'mover time is an opening of some difference': 1584, 'disturbed': 1782, 'time is an opening of its difference to a mover': 796, '... or a closing': 0}
+   disturbed: lap k of that opening: {0: 686, 1: 56, 2: 54}
+   movers: {'opening of a speed-neighbour': 730, 'opening of another runner': 854}
+r8 8.1..16.9: {'disturbed': 142, 'time is an opening of its difference to a mover': 134, '... or a closing': 0, 'movers': 89, 'mover time is an opening of some difference': 89}
+   disturbed: lap k of that opening: {1: 119, 2: 15}
+   movers: {'opening of a speed-neighbour': 89}
+two movers: {'movers': 19586, 'mover time is an opening of some difference': 19586, 'disturbed': 18054, 'time is an opening of its difference to a mover': 10252, '... or a closing': 32}
+   disturbed: lap k of that opening: {0: 7644, 1: 1904, 2: 530, 3: 67, 4: 47, 5: 23, 6: 21, 7: 2, 8: 10, 9: 2, 10: 2}
+   movers: {'opening of another runner': 8332, 'opening of a speed-neighbour': 11254}

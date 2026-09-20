@@ -1,0 +1,14 @@
+
+=== all 8-subsets of [1,16], gcd 1: 7296 extra-step runners
+   the subject also has a whole-wrap partner (a jump was needed at all): Counter({True: 6900, False: 396})
+   predicted scale P: {1: 396, 2: 6900}
+   covered WITHOUT any partial-wrap runner: Counter({True: 7296})
+   fewest runners that cover every instant at P: {4: 7296}
+   blocker types present (type, count): [((('near slot', 4),), 3840), ((('near slot', 5),), 3072), ((('near slot', 6),), 384)]
+
+=== random [1,100]: 491 extra-step runners
+   the subject also has a whole-wrap partner (a jump was needed at all): Counter({False: 279, True: 212})
+   predicted scale P: {1: 279, 2: 75, 3: 117, 4: 16, 5: 4}
+   covered WITHOUT any partial-wrap runner: Counter({False: 264, True: 227})
+   fewest runners that cover every instant at P: {3: 132, 4: 280, 5: 64, 6: 15}
+   blocker types present (type, count): [((('near slot', 5),), 88), ((('near slot', 4), ('partial wrap', 1)), 76), ((('near slot', 5), ('partial wrap', 1)), 75), ((('near slot', 6),), 74), ((('near slot', 4),), 65), ((('near slot', 3), ('partial wrap', 1)), 32)]

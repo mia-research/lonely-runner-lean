@@ -1,0 +1,30 @@
+PART 1 -- tight instances at n=8, exhaustive over speeds <= 44
+  candidates past gcd + witness-ladder filter : 12743536
+  survived the float rejection, re-decided exactly : 3
+  TIGHT (M(T) = 1/8) : 3
+  of these, carrying a multiple of 8 : 0   []
+
+  a-vector a_i = 7 e_i / e_7, and the box a_j in (j-1, j+1) for j = 2..6:
+    [1, 2, 3, 4, 5, 6, 7]      a = ['1', '2', '3', '4', '5', '6', '7']
+                               box j=2..6 : .....   (holds)
+    [1, 2, 3, 4, 5, 7, 12]     a = ['7/12', '7/6', '7/4', '7/3', '35/12', '49/12', '7']
+                               box j=2..6 : .XXXX   (FAILS)
+    [1, 4, 5, 6, 7, 11, 13]    a = ['7/13', '28/13', '35/13', '42/13', '49/13', '77/13', '7']
+                               box j=2..6 : ...X.   (FAILS)
+
+PART 2 -- the interval-deficiency criterion
+  the single-gap ladder, H = the 7-k smallest speeds (floor terms dropped):
+    |L|=1: sum_(i>6) 1/v_i  <  1/(7 v_6)      [l = 1/(4*7 v_6)]
+    |L|=2: sum_(i>5) 1/v_i  <  2/(6 v_5)      [l = 2/(4*6 v_5)]
+    |L|=3: sum_(i>4) 1/v_i  <  3/(5 v_4)      [l = 3/(4*5 v_4)]
+    |L|=4: sum_(i>3) 1/v_i  <  4/(4 v_3)      [l = 4/(4*4 v_3)]
+
+  k=1  v7 > 7 v6                     fires at |L|=1, l=1/168, budget=1/172 < l ; t=595/4128  min||vt||=93/688  LONELY OK
+  k=1  v7 = 7 v6 (must NOT fire)     does not fire
+  k=2  v6,v7 >> v5                   fires at |L|=2, l=1/60, budget=1229/97844 < l ; t=3821/24060  min||vt||=3821/24060  LONELY OK
+  k=3  v5,v6,v7 >> v4                fires at |L|=3, l=3/80, budget=306629/9560708 < l ; t=219/1202  min||vt||=219/1202  LONELY OK
+
+  |L|=1: fired on 1747/3000 sampled one-gap tuples, witness verified 1747  OK
+  |L|=2: fired on 2451/3000 sampled one-gap tuples, witness verified 2451  OK
+  |L|=3: fired on 2594/3000 sampled one-gap tuples, witness verified 2594  OK
+

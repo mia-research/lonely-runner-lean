@@ -1,0 +1,109 @@
+
+=== E1 one runner moved (each of r1..r8, offsets +-0.01 +-0.1 +-0.3 +-0.5 +-0.9)
+    away: {'runners': 400, 'at an AP instant': 400, "AP instant with that event's AP neighbours": 400, 'time = predicted odd-eighth instant': 400}
+  beside: {'runners': 160, 'at an AP instant': 84, "AP instant with that event's AP neighbours": 84, 'time = predicted odd-eighth instant': 84}
+   moved: {'runners': 80, 'at an AP instant': 0, "AP instant with that event's AP neighbours": 0}
+     beside exception: speeds ['101/100', '2', '3', '4', '5', '6', '7', '8'] r2 t=25/198 phase=None sides r1|r3
+     beside exception: speeds ['11/10', '2', '3', '4', '5', '6', '7', '8'] r2 t=5/36 phase=None sides r1|r3
+     beside exception: speeds ['7/10', '2', '3', '4', '5', '6', '7', '8'] r8 t=85/292 phase=None sides r1|r5
+     beside exception: speeds ['13/10', '2', '3', '4', '5', '6', '7', '8'] r2 t=9/32 phase=None sides r5|r6
+
+  E1 detail, per moved runner: runners NOT at an AP instant with that event's AP neighbours
+    move r1 by  -1/100: not AP-event: ['r1']   beside-runner phases {'r2': 1, 'r8': 3}
+    move r1 by   1/100: not AP-event: ['r1', 'r2(beside)']   beside-runner phases {'r2': None, 'r8': 1}
+    move r1 by   -1/10: not AP-event: ['r1']   beside-runner phases {'r2': 1, 'r8': 3}
+    move r1 by    1/10: not AP-event: ['r1', 'r2(beside)']   beside-runner phases {'r2': None, 'r8': 1}
+    move r1 by   -3/10: not AP-event: ['r1', 'r8(beside)']   beside-runner phases {'r2': 1, 'r8': None}
+    move r1 by    3/10: not AP-event: ['r1', 'r2(beside)']   beside-runner phases {'r2': None, 'r8': 1}
+    move r1 by    -1/2: not AP-event: ['r1', 'r8(beside)']   beside-runner phases {'r2': 1, 'r8': None}
+    move r1 by     1/2: not AP-event: ['r1', 'r2(beside)']   beside-runner phases {'r2': None, 'r8': 1}
+    move r1 by   -9/10: not AP-event: ['r1', 'r8(beside)']   beside-runner phases {'r2': 1, 'r8': None}
+    move r1 by    9/10: not AP-event: ['r1', 'r2(beside)']   beside-runner phases {'r2': None, 'r8': 1}
+    move r2 by  -1/100: not AP-event: ['r2']   beside-runner phases {'r1': 3, 'r3': 1}
+    move r2 by   1/100: not AP-event: ['r1(beside)', 'r2', 'r3(beside)']   beside-runner phases {'r1': None, 'r3': None}
+    move r2 by   -1/10: not AP-event: ['r2']   beside-runner phases {'r1': 3, 'r3': 1}
+    move r2 by    1/10: not AP-event: ['r1(beside)', 'r2', 'r3(beside)']   beside-runner phases {'r1': None, 'r3': None}
+    move r2 by   -3/10: not AP-event: ['r2']   beside-runner phases {'r1': 3, 'r3': 1}
+    move r2 by    3/10: not AP-event: ['r1(beside)', 'r2', 'r3(beside)']   beside-runner phases {'r1': None, 'r3': None}
+    move r2 by    -1/2: not AP-event: ['r2']   beside-runner phases {'r1': 3, 'r3': 1}
+    move r2 by     1/2: not AP-event: ['r1(beside)', 'r2', 'r3(beside)']   beside-runner phases {'r1': None, 'r3': None}
+    move r2 by   -9/10: not AP-event: ['r2']   beside-runner phases {'r1': 3, 'r3': 1}
+    move r2 by    9/10: not AP-event: ['r1(beside)', 'r2', 'r3(beside)']   beside-runner phases {'r1': None, 'r3': None}
+    move r3 by  -1/100: not AP-event: ['r2(beside)', 'r3']   beside-runner phases {'r2': None, 'r4': 1}
+    move r3 by   1/100: not AP-event: ['r3', 'r4(beside)']   beside-runner phases {'r2': 1, 'r4': None}
+    move r3 by   -1/10: not AP-event: ['r2(beside)', 'r3']   beside-runner phases {'r2': None, 'r4': 1}
+    move r3 by    1/10: not AP-event: ['r3', 'r4(beside)']   beside-runner phases {'r2': 1, 'r4': None}
+    move r3 by   -3/10: not AP-event: ['r2(beside)', 'r3']   beside-runner phases {'r2': None, 'r4': 1}
+    move r3 by    3/10: not AP-event: ['r3', 'r4(beside)']   beside-runner phases {'r2': 1, 'r4': None}
+    move r3 by    -1/2: not AP-event: ['r2(beside)', 'r3']   beside-runner phases {'r2': None, 'r4': 1}
+    move r3 by     1/2: not AP-event: ['r3', 'r4(beside)']   beside-runner phases {'r2': 1, 'r4': None}
+    move r3 by   -9/10: not AP-event: ['r2(beside)', 'r3']   beside-runner phases {'r2': None, 'r4': 1}
+    move r3 by    9/10: not AP-event: ['r3', 'r4(beside)']   beside-runner phases {'r2': 1, 'r4': None}
+    move r4 by  -1/100: not AP-event: ['r3(beside)', 'r4']   beside-runner phases {'r3': None, 'r5': 1}
+    move r4 by   1/100: not AP-event: ['r4', 'r5(beside)']   beside-runner phases {'r3': 1, 'r5': None}
+    move r4 by   -1/10: not AP-event: ['r3(beside)', 'r4']   beside-runner phases {'r3': None, 'r5': 1}
+    move r4 by    1/10: not AP-event: ['r4', 'r5(beside)']   beside-runner phases {'r3': 1, 'r5': None}
+    move r4 by   -3/10: not AP-event: ['r3(beside)', 'r4']   beside-runner phases {'r3': None, 'r5': 1}
+    move r4 by    3/10: not AP-event: ['r4', 'r5(beside)']   beside-runner phases {'r3': 1, 'r5': None}
+    move r4 by    -1/2: not AP-event: ['r3(beside)', 'r4']   beside-runner phases {'r3': None, 'r5': 1}
+    move r4 by     1/2: not AP-event: ['r4', 'r5(beside)']   beside-runner phases {'r3': 1, 'r5': None}
+    move r4 by   -9/10: not AP-event: ['r3(beside)', 'r4']   beside-runner phases {'r3': None, 'r5': 1}
+    move r4 by    9/10: not AP-event: ['r4', 'r5(beside)']   beside-runner phases {'r3': 1, 'r5': None}
+    move r5 by  -1/100: not AP-event: ['r4(beside)', 'r5']   beside-runner phases {'r4': None, 'r6': 1}
+    move r5 by   1/100: not AP-event: ['r5', 'r6(beside)']   beside-runner phases {'r4': 1, 'r6': None}
+    move r5 by   -1/10: not AP-event: ['r4(beside)', 'r5']   beside-runner phases {'r4': None, 'r6': 1}
+    move r5 by    1/10: not AP-event: ['r5', 'r6(beside)']   beside-runner phases {'r4': 1, 'r6': None}
+    move r5 by   -3/10: not AP-event: ['r4(beside)', 'r5']   beside-runner phases {'r4': None, 'r6': 1}
+    move r5 by    3/10: not AP-event: ['r5', 'r6(beside)']   beside-runner phases {'r4': 1, 'r6': None}
+    move r5 by    -1/2: not AP-event: ['r4(beside)', 'r5']   beside-runner phases {'r4': None, 'r6': 1}
+    move r5 by     1/2: not AP-event: ['r5', 'r6(beside)']   beside-runner phases {'r4': 1, 'r6': None}
+    move r5 by   -9/10: not AP-event: ['r4(beside)', 'r5']   beside-runner phases {'r4': None, 'r6': 1}
+    move r5 by    9/10: not AP-event: ['r5', 'r6(beside)']   beside-runner phases {'r4': 1, 'r6': None}
+    move r6 by  -1/100: not AP-event: ['r5(beside)', 'r6']   beside-runner phases {'r5': None, 'r7': 1}
+    move r6 by   1/100: not AP-event: ['r6', 'r7(beside)']   beside-runner phases {'r5': 1, 'r7': None}
+    move r6 by   -1/10: not AP-event: ['r5(beside)', 'r6']   beside-runner phases {'r5': None, 'r7': 1}
+    move r6 by    1/10: not AP-event: ['r6', 'r7(beside)']   beside-runner phases {'r5': 1, 'r7': None}
+    move r6 by   -3/10: not AP-event: ['r5(beside)', 'r6']   beside-runner phases {'r5': None, 'r7': 1}
+    move r6 by    3/10: not AP-event: ['r6', 'r7(beside)']   beside-runner phases {'r5': 1, 'r7': None}
+    move r6 by    -1/2: not AP-event: ['r5(beside)', 'r6']   beside-runner phases {'r5': None, 'r7': 1}
+    move r6 by     1/2: not AP-event: ['r6', 'r7(beside)']   beside-runner phases {'r5': 1, 'r7': None}
+    move r6 by   -9/10: not AP-event: ['r5(beside)', 'r6']   beside-runner phases {'r5': None, 'r7': 1}
+    move r6 by    9/10: not AP-event: ['r6', 'r7(beside)']   beside-runner phases {'r5': 1, 'r7': None}
+    move r7 by  -1/100: not AP-event: ['r6(beside)', 'r7', 'r8(beside)']   beside-runner phases {'r6': None, 'r8': None}
+    move r7 by   1/100: not AP-event: ['r7']   beside-runner phases {'r6': 1, 'r8': 3}
+    move r7 by   -1/10: not AP-event: ['r6(beside)', 'r7', 'r8(beside)']   beside-runner phases {'r6': None, 'r8': None}
+    move r7 by    1/10: not AP-event: ['r7']   beside-runner phases {'r6': 1, 'r8': 3}
+    move r7 by   -3/10: not AP-event: ['r6(beside)', 'r7', 'r8(beside)']   beside-runner phases {'r6': None, 'r8': None}
+    move r7 by    3/10: not AP-event: ['r7']   beside-runner phases {'r6': 1, 'r8': 3}
+    move r7 by    -1/2: not AP-event: ['r6(beside)', 'r7', 'r8(beside)']   beside-runner phases {'r6': None, 'r8': None}
+    move r7 by     1/2: not AP-event: ['r7']   beside-runner phases {'r6': 1, 'r8': 3}
+    move r7 by   -9/10: not AP-event: ['r6(beside)', 'r7', 'r8(beside)']   beside-runner phases {'r6': None, 'r8': None}
+    move r7 by    9/10: not AP-event: ['r7']   beside-runner phases {'r6': 1, 'r8': 3}
+    move r8 by  -1/100: not AP-event: ['r7(beside)', 'r8']   beside-runner phases {'r1': 1, 'r7': None}
+    move r8 by   1/100: not AP-event: ['r8']   beside-runner phases {'r1': 3, 'r7': 1}
+    move r8 by   -1/10: not AP-event: ['r7(beside)', 'r8']   beside-runner phases {'r1': 1, 'r7': None}
+    move r8 by    1/10: not AP-event: ['r8']   beside-runner phases {'r1': 3, 'r7': 1}
+    move r8 by   -3/10: not AP-event: ['r7(beside)', 'r8']   beside-runner phases {'r1': 1, 'r7': None}
+    move r8 by    3/10: not AP-event: ['r1(beside)', 'r8']   beside-runner phases {'r1': None, 'r7': 1}
+    move r8 by    -1/2: not AP-event: ['r7(beside)', 'r8']   beside-runner phases {'r1': 1, 'r7': None}
+    move r8 by     1/2: not AP-event: ['r1(beside)', 'r8']   beside-runner phases {'r1': None, 'r7': 1}
+    move r8 by   -9/10: not AP-event: ['r7(beside)', 'r8']   beside-runner phases {'r1': 1, 'r7': None}
+    move r8 by    9/10: not AP-event: ['r1(beside)', 'r8']   beside-runner phases {'r1': None, 'r7': 1}
+
+=== E2 two runners moved (every pair, offsets +-0.3 each)
+    away: {'runners': 320, 'at an AP instant': 320, "AP instant with that event's AP neighbours": 320, 'time = predicted odd-eighth instant': 320}
+  beside: {'runners': 352, 'at an AP instant': 152, "AP instant with that event's AP neighbours": 152, 'time = predicted odd-eighth instant': 152}
+   moved: {'runners': 224, 'at an AP instant': 18, "AP instant with that event's AP neighbours": 18}
+     beside exception: speeds ['7/10', '17/10', '3', '4', '5', '6', '7', '8'] r8 t=85/292 phase=None sides r1|r5
+     beside exception: speeds ['7/10', '23/10', '3', '4', '5', '6', '7', '8'] r3 t=9/32 phase=None sides r6|r7
+     beside exception: speeds ['7/10', '23/10', '3', '4', '5', '6', '7', '8'] r8 t=85/292 phase=None sides r1|r5
+     beside exception: speeds ['13/10', '23/10', '3', '4', '5', '6', '7', '8'] r3 t=9/32 phase=None sides r6|r7
+
+=== E3 every runner moved, |dev| <= 1/100 (120 arrangements; roles all 'moved')
+   moved: {'runners': 960, 'at an AP instant': 0, "AP instant with that event's AP neighbours": 0}
+
+=== E3 every runner moved, |dev| <= 1/10 (120 arrangements; roles all 'moved')
+   moved: {'runners': 960, 'at an AP instant': 1, "AP instant with that event's AP neighbours": 1}
+
+=== E3 every runner moved, |dev| <= 3/10 (120 arrangements; roles all 'moved')
+   moved: {'runners': 960, 'at an AP instant': 0, "AP instant with that event's AP neighbours": 0}

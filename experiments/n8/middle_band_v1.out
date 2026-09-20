@@ -1,0 +1,43 @@
+{'middle-band cases': 666}
+
+runners in the way of the mover at the pair's spine point (labels relative to the mover):
+     90  ()
+     25  ('r3+4',)
+     25  ('r6-4',)
+     24  ('r3+5',)
+     24  ('r6-5',)
+     23  ('r2+4',)
+     23  ('r7-4',)
+     20  ('r2+5',)
+     20  ('r7-5',)
+     15  ('r4+4',)
+     15  ('r5-4',)
+     14  ('r4+3',)
+
+the mover's actual time: (relation to the pair's spine, runners at exactly 1/8):
+     66  ("off the pair's spine", ('r3+4',))
+     66  ("off the pair's spine", ('r6-4',))
+     60  ("off the pair's spine", ('r2+4',))
+     60  ("off the pair's spine", ('r7-4',))
+     44  ("off the pair's spine", ('r1+7',))
+     44  ("off the pair's spine", ('r8-7',))
+     32  ("off the pair's spine", ('r4+4',))
+     32  ("off the pair's spine", ('r5-4',))
+     22  ("off the pair's spine", ('r2+6',))
+     22  ("off the pair's spine", ('r7-6',))
+     21  ("off the pair's spine", ('r4+3',))
+     21  ("off the pair's spine", ('r5-3',))
+
+examples:
+   r1=13/10: gap 7/10, t_c=5/28; in the way at t_c: r7 at 1/7 eighths (AP shift 0); actual t=85/268 = 119/67 t_c, pair-lap position 8*gap*t=119/67; at exactly 1/8: [8]
+   r1=7/5: gap 3/5, t_c=5/24; in the way at t_c: r6 at -1/3 eighths (AP shift 0); actual t=85/264 = 17/11 t_c, pair-lap position 8*gap*t=17/11; at exactly 1/8: [8]
+   r1=3/2: gap 1/2, t_c=1/4; in the way at t_c: ; actual t=1/4 = 1 t_c, pair-lap position 8*gap*t=1; at exactly 1/8: [2, 5, 6]
+   r1=8/5: gap 2/5, t_c=5/16; in the way at t_c: r5 at 1/2 eighths (AP shift 0), r8 at 0 eighths (AP shift 0); actual t=85/256 = 17/16 t_c, pair-lap position 8*gap*t=17/16; at exactly 1/8: [8]
+   r1=17/10: gap 3/10, t_c=5/12; in the way at t_c: r4 at -1/3 eighths (AP shift 0); actual t=125/252 = 25/21 t_c, pair-lap position 8*gap*t=25/21; at exactly 1/8: [8]
+   r2=13/10: gap 3/10, t_c=5/12; in the way at t_c: r6 at -1/3 eighths (AP shift 0); actual t=125/268 = 75/67 t_c, pair-lap position 8*gap*t=75/67; at exactly 1/8: [8]
+   r2=7/5: gap 2/5, t_c=5/16; in the way at t_c: r8 at 1/2 eighths (AP shift 0); actual t=85/264 = 34/33 t_c, pair-lap position 8*gap*t=34/33; at exactly 1/8: [8]
+   r2=3/2: gap 1/2, t_c=1/4; in the way at t_c: ; actual t=1/4 = 1 t_c, pair-lap position 8*gap*t=1; at exactly 1/8: [1, 5, 6]
+   r2=8/5: gap 3/5, t_c=5/24; in the way at t_c: r6 at -2/3 eighths (AP shift 0); actual t=45/176 = 27/22 t_c, pair-lap position 8*gap*t=27/22; at exactly 1/8: [6]
+   r2=17/10: gap 7/10, t_c=5/28; in the way at t_c: r7 at -3/7 eighths (AP shift 0); actual t=45/172 = 63/43 t_c, pair-lap position 8*gap*t=63/43; at exactly 1/8: [6]
+   r2=23/10: gap 7/10, t_c=5/28; in the way at t_c: r8 at 1/7 eighths (AP shift 0); actual t=45/148 = 63/37 t_c, pair-lap position 8*gap*t=63/37; at exactly 1/8: [6]
+   r2=12/5: gap 3/5, t_c=5/24; in the way at t_c: r7 at -1/3 eighths (AP shift 0); actual t=5/16 = 3/2 t_c, pair-lap position 8*gap*t=3/2; at exactly 1/8: [6]

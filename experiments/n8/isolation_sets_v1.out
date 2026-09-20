@@ -1,0 +1,42 @@
+exhaustive: 8 distinct positive integer speeds in [1,16], gcd 1, 12869 arrangements
+   runners 102952 | with an isolation set 102952 | not returned 0 (decided, full period)
+   events checked 1916132 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 552 | sets containing an isolated point: 50278
+
+random integer speeds in [1,100], 1000 arrangements
+   runners 8000 | with an isolation set 8000 | not returned 0 (decided, full period)
+   events checked 301662 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 2375
+
+random integer speeds in [1,1000], 200 arrangements
+   runners 1600 | with an isolation set 1600 | not returned 0 (decided, full period)
+   events checked 115029 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 146
+
+random integer speeds in [1,10000], 40 arrangements
+   runners 320 | with an isolation set 320 | not returned 0 (decided, full period)
+   events checked 48054 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 4
+
+random rational speeds, 300 arrangements
+   runners 2400 | with an isolation set 2400 | not returned 0 (decided, full period)
+   events checked 175767 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 424
+
+constructed: near-collisions and powers of 2, 298 arrangements
+   runners 2384 | with an isolation set 2384 | not returned 0 (decided, full period)
+   events checked 2075480 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 341
+
+irrational speeds, exact Q(sqrt2), 25 arrangements
+   runners 200 | with an isolation set 200 | not returned 0 (lap cap 40)
+   events checked 189046 | not lonely 0
+   set first found beyond lap 0: 0 | furthest lap: 0
+   sets that are isolated points only: 0 | sets containing an isolated point: 4
+

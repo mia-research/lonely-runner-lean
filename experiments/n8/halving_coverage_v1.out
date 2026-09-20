@@ -1,0 +1,4 @@
+V=20: residual sets 12673; settled by Theorem P' 919 (7.252%); by x: {1: 899, 2: 20}
+V=24: residual sets 76902; settled by Theorem P' 6581 (8.558%); by x: {1: 4325, 2: 2256}
+V=28: residual sets 239556; settled by Theorem P' 22708 (9.479%); by x: {1: 16660, 2: 5918, 3: 130}
+V=32: residual sets 710038; settled by Theorem P' 71826 (10.116%); by x: {1: 54802, 2: 16766, 3: 258}

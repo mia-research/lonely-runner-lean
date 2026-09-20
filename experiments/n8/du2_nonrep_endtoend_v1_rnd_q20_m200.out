@@ -1,0 +1,3 @@
+RANDOM 1500 tuples, q<= 20, m<= 200: 0 failures
+  minimum |S| - |B_m1 u B_m2| = 318831313/1131000024 = 0.281902  at E = [5, 14, 122, 127, 132, 632, 1232]
+  brute-force control (independent integer scan for a safe b): 2/2 found one

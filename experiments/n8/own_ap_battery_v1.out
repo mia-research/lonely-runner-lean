@@ -1,0 +1,200 @@
+
+=== B1 one runner moved from the AP (r1..r8, 10 offsets)
+  [moved]
+      runners: 80
+      fw time is an own-AP instant: 68
+        ... with the instant's ideal neighbours: 56
+      lonely at some own-AP instant (persists): 80
+      fw time == first lonely own-AP instant: 68
+  [beside]
+      runners: 160
+      fw time is an own-AP instant: 112
+        ... with the instant's ideal neighbours: 83
+      lonely at some own-AP instant (persists): 124
+      fw time == first lonely own-AP instant: 112
+  [away]
+      runners: 400
+      fw time is an own-AP instant: 400
+        ... with the instant's ideal neighbours: 400
+      lonely at some own-AP instant (persists): 400
+      fw time == first lonely own-AP instant: 400
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 38, ('number of threshold runners', 1): 50, ('threshold runner deviates', False): 32, ('number of threshold runners', 2): 10}
+    e.g. neighbours: speeds ['9/10', '2', '3', '4', '5', '6', '7', '8'] runner r1 t=5/44
+    e.g. neighbours: speeds ['7/10', '2', '3', '4', '5', '6', '7', '8'] runner r1 t=5/52
+    e.g. neighbours: speeds ['1/2', '2', '3', '4', '5', '6', '7', '8'] runner r1 t=1/12
+    e.g. no own-AP instant: speeds ['13/10', '2', '3', '4', '5', '6', '7', '8'] runner r2 t=9/32
+    e.g. no own-AP instant: speeds ['3/2', '2', '3', '4', '5', '6', '7', '8'] runner r2 t=9/32
+    e.g. no own-AP instant: speeds ['19/10', '2', '3', '4', '5', '6', '7', '8'] runner r2 t=41/32
+
+=== B2 two runners moved (every pair, +-0.3)
+  [moved]
+      runners: 224
+      fw time is an own-AP instant: 114
+        ... with the instant's ideal neighbours: 42
+      lonely at some own-AP instant (persists): 216
+      fw time == first lonely own-AP instant: 114
+  [beside]
+      runners: 352
+      fw time is an own-AP instant: 220
+        ... with the instant's ideal neighbours: 192
+      lonely at some own-AP instant (persists): 320
+      fw time == first lonely own-AP instant: 220
+  [away]
+      runners: 320
+      fw time is an own-AP instant: 320
+        ... with the instant's ideal neighbours: 320
+      lonely at some own-AP instant (persists): 320
+      fw time == first lonely own-AP instant: 320
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 240, ('number of threshold runners', 1): 232, ('threshold runner deviates', False): 12, ('number of threshold runners', 2): 10}
+    e.g. neighbours: speeds ['7/10', '23/10', '3', '4', '5', '6', '7', '8'] runner r1 t=5/64
+    e.g. neighbours: speeds ['7/10', '2', '27/10', '4', '5', '6', '7', '8'] runner r1 t=5/52
+    e.g. neighbours: speeds ['7/10', '2', '33/10', '4', '5', '6', '7', '8'] runner r1 t=5/52
+    e.g. no own-AP instant: speeds ['7/10', '23/10', '3', '4', '5', '6', '7', '8'] runner r3 t=9/32
+    e.g. no own-AP instant: speeds ['13/10', '23/10', '3', '4', '5', '6', '7', '8'] runner r3 t=9/32
+    e.g. no own-AP instant: speeds ['7/10', '2', '3', '37/10', '5', '6', '7', '8'] runner r3 t=9/32
+
+=== B3 every runner moved, |dev| <= 1/100
+  [all]
+      runners: 1200
+      fw time is an own-AP instant: 1045
+        ... with the instant's ideal neighbours: 1045
+      lonely at some own-AP instant (persists): 1200
+      fw time == first lonely own-AP instant: 1045
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 155, ('number of threshold runners', 1): 155}
+
+=== B3 every runner moved, |dev| <= 1/10
+  [all]
+      runners: 1200
+      fw time is an own-AP instant: 1016
+        ... with the instant's ideal neighbours: 957
+      lonely at some own-AP instant (persists): 1200
+      fw time == first lonely own-AP instant: 1016
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 184, ('number of threshold runners', 1): 184}
+    e.g. neighbours: speeds ['9327/10000', '2543/1250', '15371/5000', '40143/10000', '4953/1000', '2437/400', '35141/5000', '80419/10000'] runner r1 t=1250/11017
+    e.g. neighbours: speeds ['10873/10000', '20663/10000', '6137/2000', '2553/625', '49109/10000', '6089/1000', '34541/5000', '15977/2000'] runner r8 t=1250/10803
+    e.g. neighbours: speeds ['10533/10000', '10151/5000', '14741/5000', '9783/2500', '1253/250', '60907/10000', '34537/5000', '8089/1000'] runner r8 t=625/5908
+
+=== B3 every runner moved, |dev| <= 3/10
+  [all]
+      runners: 1200
+      fw time is an own-AP instant: 787
+        ... with the instant's ideal neighbours: 553
+      lonely at some own-AP instant (persists): 1200
+      fw time == first lonely own-AP instant: 787
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 413, ('number of threshold runners', 1): 413}
+    e.g. neighbours: speeds ['9787/10000', '899/400', '3033/1000', '20831/5000', '2353/500', '15171/2500', '68011/10000', '80891/10000'] runner r1 t=625/6344
+    e.g. neighbours: speeds ['9787/10000', '899/400', '3033/1000', '20831/5000', '2353/500', '15171/2500', '68011/10000', '80891/10000'] runner r6 t=1250/7327
+    e.g. neighbours: speeds ['9787/10000', '899/400', '3033/1000', '20831/5000', '2353/500', '15171/2500', '68011/10000', '80891/10000'] runner r8 t=125/1288
+
+=== B3 every runner moved, |dev| <= 9/10
+  [all]
+      runners: 1200
+      fw time is an own-AP instant: 586
+        ... with the instant's ideal neighbours: 270
+      lonely at some own-AP instant (persists): 1200
+      fw time == first lonely own-AP instant: 586
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 613, ('number of threshold runners', 1): 614, ('threshold runner deviates', False): 1}
+    e.g. neighbours: speeds ['1217/2000', '18137/10000', '37983/10000', '3847/1000', '45743/10000', '55707/10000', '76003/10000', '16693/2000'] runner r1 t=625/6026
+    e.g. neighbours: speeds ['1217/2000', '18137/10000', '37983/10000', '3847/1000', '45743/10000', '55707/10000', '76003/10000', '16693/2000'] runner r2 t=625/6026
+    e.g. neighbours: speeds ['1217/2000', '18137/10000', '37983/10000', '3847/1000', '45743/10000', '55707/10000', '76003/10000', '16693/2000'] runner r4 t=1250/487
+
+=== B4 random integer speeds in [1,100]
+  [all]
+      runners: 2400
+      fw time is an own-AP instant: 1257
+        ... with the instant's ideal neighbours: 548
+      lonely at some own-AP instant (persists): 1976
+      fw time == first lonely own-AP instant: 1257
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 766, ('number of threshold runners', 1): 1118, ('threshold runner deviates', False): 405, ('number of threshold runners', 3): 3, ('number of threshold runners', 2): 22}
+    e.g. no own-AP instant: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r2 t=25/488
+    e.g. no own-AP instant: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r5 t=9/104
+    e.g. no own-AP instant: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r7 t=65/512
+    e.g. neighbours: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r3 t=1/128
+    e.g. neighbours: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r4 t=1/32
+    e.g. neighbours: speeds ['8', '11', '39', '55', '59', '61', '72', '73'] runner r6 t=1/16
+
+=== B5 all 8-subsets of [1,14], gcd 1
+  [all]
+      runners: 24024
+      fw time is an own-AP instant: 15960
+        ... with the instant's ideal neighbours: 8994
+      lonely at some own-AP instant (persists): 15960
+      fw time == first lonely own-AP instant: 15960
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', False): 8308, ('number of threshold runners', 1): 7820, ('number of threshold runners', 2): 244}
+    e.g. no own-AP instant: speeds ['1', '2', '3', '4', '5', '6', '7', '9'] runner r1 t=9/64
+    e.g. no own-AP instant: speeds ['1', '2', '3', '4', '5', '6', '7', '10'] runner r2 t=9/64
+    e.g. no own-AP instant: speeds ['1', '2', '3', '4', '5', '6', '7', '11'] runner r3 t=9/64
+    e.g. neighbours: speeds ['1', '2', '3', '4', '5', '6', '7', '9'] runner r7 t=1/8
+    e.g. neighbours: speeds ['1', '2', '3', '4', '5', '6', '7', '9'] runner r8 t=1/16
+    e.g. neighbours: speeds ['1', '2', '3', '4', '5', '6', '7', '10'] runner r1 t=1/8
+
+=== B6 named arrangements
+  [all]
+      runners: 48
+      fw time is an own-AP instant: 30
+        ... with the instant's ideal neighbours: 17
+      lonely at some own-AP instant (persists): 41
+      fw time == first lonely own-AP instant: 30
+  off-own-AP framework times, runners exactly on the threshold: {('threshold runner deviates', True): 13, ('number of threshold runners', 1): 17, ('threshold runner deviates', False): 6, ('number of threshold runners', 2): 1}
+    e.g. neighbours: speeds ['1', '31', '75', '97', '128', '160', '176', '225'] runner r7 t=1/128
+    e.g. neighbours: speeds ['1', '31', '75', '97', '128', '160', '176', '225'] runner r8 t=1/392
+    e.g. neighbours: speeds ['1', '2', '3', '4', '5', '6', '7', '9'] runner r7 t=1/8
+    e.g. no own-AP instant: speeds ['1', '2', '3', '4', '5', '6', '7', '9'] runner r1 t=9/64
+    e.g. no own-AP instant: speeds ['27', '45', '308', '678', '679', '799', '806', '979'] runner r4 t=305/2408
+    e.g. no own-AP instant: speeds ['27', '45', '308', '678', '679', '799', '806', '979'] runner r5 t=61/480
+
+B6 detail:
+  [1, 31, 75, 97, 128, 160, 176, 225]
+    r1 d_min 30: fw t=11/256 own-AP instant False ideal-neighbours None | first lonely own-AP instant 43/240 | threshold runners [(3, True)]
+    r2 d_min 30: fw t=1/240 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/240 | threshold runners []
+    r3 d_min 22: fw t=1/176 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/176 | threshold runners []
+    r4 d_min 22: fw t=1/176 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/176 | threshold runners []
+    r5 d_min 31: fw t=1/248 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/248 | threshold runners []
+    r6 d_min 16: fw t=3/344 own-AP instant False ideal-neighbours None | first lonely own-AP instant 19/128 | threshold runners [(-8, True)]
+    r7 d_min 16: fw t=1/128 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/128 | threshold runners []
+    r8 d_min 49: fw t=1/392 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/392 | threshold runners []
+  [1, 2, 3, 4, 5, 6, 7, 9]
+    r1 d_min 1: fw t=9/64 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(8, False)]
+    r2 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/8 | threshold runners []
+    r3 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/8 | threshold runners []
+    r4 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/8 | threshold runners []
+    r5 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/8 | threshold runners []
+    r6 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/8 | threshold runners []
+    r7 d_min 1: fw t=1/8 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/8 | threshold runners []
+    r8 d_min 2: fw t=1/16 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/16 | threshold runners []
+  [3, 7, 12, 20, 29, 31, 44, 50]
+    r1 d_min 4: fw t=1/32 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/32 | threshold runners []
+    r2 d_min 4: fw t=1/32 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/32 | threshold runners []
+    r3 d_min 5: fw t=9/256 own-AP instant False ideal-neighbours None | first lonely own-AP instant 3/40 | threshold runners [(6, True)]
+    r4 d_min 8: fw t=1/64 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/64 | threshold runners []
+    r5 d_min 2: fw t=17/208 own-AP instant False ideal-neighbours None | first lonely own-AP instant 5/16 | threshold runners [(-13, False)]
+    r6 d_min 2: fw t=1/16 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/16 | threshold runners []
+    r7 d_min 6: fw t=1/48 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/48 | threshold runners []
+    r8 d_min 6: fw t=3/80 own-AP instant False ideal-neighbours None | first lonely own-AP instant 11/48 | threshold runners [(-5, False)]
+  [27, 45, 308, 678, 679, 799, 806, 979]
+    r1 d_min 18: fw t=49/6176 own-AP instant False ideal-neighbours None | first lonely own-AP instant 7/144 | threshold runners [(43, True)]
+    r2 d_min 18: fw t=1/144 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/144 | threshold runners []
+    r3 d_min 263: fw t=1/2104 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/2104 | threshold runners []
+    r4 d_min 1: fw t=305/2408 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(301, False)]
+    r5 d_min 1: fw t=61/480 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(300, False)]
+    r6 d_min 7: fw t=1/56 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/56 | threshold runners []
+    r7 d_min 7: fw t=113/6088 own-AP instant False ideal-neighbours None | first lonely own-AP instant 3/56 | threshold runners [(-109, True)]
+    r8 d_min 173: fw t=1/1384 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/1384 | threshold runners []
+  [4, 12, 29, 37, 101, 121, 176, 196]
+    r1 d_min 8: fw t=25/1376 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(22, True)]
+    r2 d_min 8: fw t=1/64 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/64 | threshold runners []
+    r3 d_min 8: fw t=1/64 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/64 | threshold runners []
+    r4 d_min 8: fw t=9/512 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(8, False)]
+    r5 d_min 20: fw t=1/160 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/160 | threshold runners []
+    r6 d_min 20: fw t=1/160 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/160 | threshold runners []
+    r7 d_min 20: fw t=9/1112 own-AP instant False ideal-neighbours None | first lonely own-AP instant 1/32 | threshold runners [(-7, True)]
+    r8 d_min 20: fw t=3/424 own-AP instant False ideal-neighbours None | first lonely own-AP instant 29/160 | threshold runners [(-8, True)]
+  [1, 3, 5, 9, 12, 14, 16, 18]
+    r1 d_min 2: fw t=9/88 own-AP instant False ideal-neighbours None | first lonely own-AP instant 7/16 | threshold runners [(6, True)]
+    r2 d_min 2: fw t=1/8 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(5, True), (8, True)]
+    r3 d_min 2: fw t=1/16 own-AP instant True ideal-neighbours False | first lonely own-AP instant 1/16 | threshold runners []
+    r4 d_min 3: fw t=1/24 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/24 | threshold runners []
+    r5 d_min 2: fw t=1/16 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/16 | threshold runners []
+    r6 d_min 2: fw t=1/16 own-AP instant True ideal-neighbours True | first lonely own-AP instant 1/16 | threshold runners []
+    r7 d_min 2: fw t=9/88 own-AP instant False ideal-neighbours None | first lonely own-AP instant None | threshold runners [(-5, True)]
+    r8 d_min 2: fw t=9/104 own-AP instant False ideal-neighbours None | first lonely own-AP instant 3/16 | threshold runners [(-6, True)]

@@ -1,0 +1,9 @@
+rho0=2  q<= 11: 247690 primitive tuples (excluding {1,3,5,7,4})
+   min |S| = 22/35 = 0.628571 at (1, 3, 5, 7, 2)
+   number with |S| <= 1/2 : 0
+rho0=4  q<= 11: 247717 primitive tuples (excluding {1,3,5,7,4})
+   min |S| = 211/390 = 0.541026 at (1, 3, 13, 15, 4)
+   number with |S| <= 1/2 : 0
+rho0=6  q<= 11: 247718 primitive tuples (excluding {1,3,5,7,4})
+   min |S| = 587377/884115 = 0.664367 at (81, 59, 37, 15, 22)
+   number with |S| <= 1/2 : 0

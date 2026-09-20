@@ -1,0 +1,16 @@
+sweep: q_rho in 0..2 for each of the 5 present classes; 4374 admissible E_non
+boundary audit on the sampled subset: interior=0 mismatch=0 entry/exit-setdiff=0
+
+global minimum |S| = 1/2 = 0.500000  at E_non = [2, 3, 12, 5, 14]  (absent (1, 7))
+instances with |S| <= 1/2 : 1
+    |S| = 1/2 = 0.500000   E_non = [2, 3, 12, 5, 14]   absent (1, 7)
+
+per-absent-pair minimum over the sweep:
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/du2_nonrep_v1.py", line 100, in <module>
+    main(int(sys.argv[1]) if len(sys.argv) > 1 else 2)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/du2_nonrep_v1.py", line 95, in main
+    print(f"   absent {A:>7}  min |S| = {str(m):>12} = {float(m):.6f}  at {list(E)}"
+                      ^^^^^^
+TypeError: unsupported format string passed to tuple.__format__

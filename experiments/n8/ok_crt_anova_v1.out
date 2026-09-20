@@ -1,0 +1,132 @@
+
+============================================================================
+the E* grid   H = [2, 6, 8, 10, 14]
+  |G| = 41/560   N = 8   M = 8*lcm(H) = 6720 = 64 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 7422137/70246400  = 0.105659
+  order    share of Var   components
+      1        0.249844   64:0.2498 <-- MAIN EFFECTS
+      2        0.750156   64x5:0.2473  64x7:0.5029 <-- CROSS TERMS
+      3        0.000000   
+      4        0.000000   
+  INERT local factors (S does not depend on them at all): [3]
+
+============================================================================
+its base   H = [1, 3, 4, 5, 7]
+  |G| = 41/560   N = 4   M = 8*lcm(H) = 3360 = 32 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 3366703/70246400  = 0.047927
+  order    share of Var   components
+      1        0.248656   32:0.2487 <-- MAIN EFFECTS
+      2        0.751344   32x5:0.2457  32x7:0.5057 <-- CROSS TERMS
+      3        0.000000   
+      4        0.000000   
+  INERT local factors (S does not depend on them at all): [3]
+
+============================================================================
+an AP prefix   H = [1, 2, 3, 4, 5]
+  |G| = 7/48   N = 6   M = 8*lcm(H) = 480 = 32 * 3 * 5
+  mean S = 0   (must be 0: True)
+  Var(S) = 827941/9216000  = 0.089837
+  order    share of Var   components
+      1        0.597974   32:0.5980 <-- MAIN EFFECTS
+      2        0.402026   32x3:0.1310  32x5:0.2710 <-- CROSS TERMS
+      3        0.000000   
+  INERT local factors (S does not depend on them at all): []
+
+============================================================================
+6-subset of T2   H = [1, 2, 3, 4, 5, 7]
+  |G| = 1/35   N = 2   M = 8*lcm(H) = 3360 = 32 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 33/1400  = 0.023571
+  order    share of Var   components
+      1        0.001846   32:0.0018 <-- MAIN EFFECTS
+      2        0.998154   32x5:0.4995  32x7:0.4986 <-- CROSS TERMS
+      3        0.000000   
+      4        0.000000   
+  INERT local factors (S does not depend on them at all): [3]
+
+============================================================================
+base of T3   H = [1, 4, 5, 6, 7]
+  |G| = 5/48   N = 6   M = 8*lcm(H) = 3360 = 32 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 1709839/25288704  = 0.067613
+  order    share of Var   components
+      1        0.475061   32:0.4751 <-- MAIN EFFECTS
+      2        0.524939   32x3:0.1719  32x7:0.3530 <-- CROSS TERMS
+      3        0.000000   
+      4        0.000000   
+  INERT local factors (S does not depend on them at all): [5]
+
+============================================================================
+MAIN-EFFECT SHARE OF Var(S)  (1.0 == no cross terms == the axiom holds)
+       the E* grid: 0.249844
+          its base: 0.248656
+      an AP prefix: 0.597974
+    6-subset of T2: 0.001846
+        base of T3: 0.475061
+
+
+############################################################################
+CONTROL -- forcing check.  Predicted max order = 1 + max_e omega_odd(e).
+
+[predicted max order 3]
+============================================================================
+e=15,  omega_odd=2   H = [1, 2, 4, 8, 15]
+  |G| = 73/240   N = 12   M = 8*lcm(H) = 960 = 64 * 3 * 5
+  mean S = 0   (must be 0: True)
+  Var(S) = 39601/221184  = 0.179041
+  order    share of Var   components
+      1        0.515791   64:0.5158 <-- MAIN EFFECTS
+      2        0.148687   64x3:0.0703  64x5:0.0784 <-- CROSS TERMS
+      3        0.335522   64x3x5:0.3355
+  INERT local factors (S does not depend on them at all): []
+
+[predicted max order 3]
+============================================================================
+e=21,  omega_odd=2   H = [1, 2, 3, 5, 21]
+  |G| = 47/280   N = 10   M = 8*lcm(H) = 1680 = 16 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 60909929/474163200  = 0.128458
+  order    share of Var   components
+      1        0.243316   16:0.2433 <-- MAIN EFFECTS
+      2        0.299203   16x3:0.0007  16x5:0.1915  16x7:0.1070 <-- CROSS TERMS
+      3        0.457481   16x3x7:0.4575
+      4        0.000000   
+  INERT local factors (S does not depend on them at all): []
+
+[predicted max order 3]
+============================================================================
+e=15,  2-power rest   H = [2, 4, 8, 16, 15]
+  |G| = 29/96   N = 16   M = 8*lcm(H) = 1920 = 128 * 3 * 5
+  mean S = 0   (must be 0: True)
+  Var(S) = 3648383/14745600  = 0.247422
+  order    share of Var   components
+      1        0.647462   128:0.6475 <-- MAIN EFFECTS
+      2        0.159710   128x3:0.0501  128x5:0.1096 <-- CROSS TERMS
+      3        0.192828   128x3x5:0.1928
+  INERT local factors (S does not depend on them at all): []
+
+[predicted max order 4]
+============================================================================
+e=105, omega_odd=3   H = [1, 2, 4, 8, 105]
+  |G| = 257/840   N = 46   M = 8*lcm(H) = 6720 = 64 * 3 * 5 * 7
+  mean S = 0   (must be 0: True)
+  Var(S) = 401649649/677376000  = 0.592949
+  order    share of Var   components
+      1        0.089621   64:0.0896 <-- MAIN EFFECTS
+      2        0.125466   64x3:0.0240  64x5:0.0267  64x7:0.0748 <-- CROSS TERMS
+      3        0.391134   64x3x5:0.1097  64x3x7:0.0824  64x5x7:0.1991
+      4        0.393779   64x3x5x7:0.3938
+  INERT local factors (S does not depend on them at all): []
+
+[predicted max order 2]
+============================================================================
+e=9,   omega_odd=1 (null)   H = [1, 2, 4, 8, 9]
+  |G| = 91/288   N = 8   M = 8*lcm(H) = 576 = 64 * 9
+  mean S = 0   (must be 0: True)
+  Var(S) = 911587/7962624  = 0.114483
+  order    share of Var   components
+      1        0.569583   64:0.5696 <-- MAIN EFFECTS
+      2        0.430417   64x9:0.4304 <-- CROSS TERMS
+  INERT local factors (S does not depend on them at all): []

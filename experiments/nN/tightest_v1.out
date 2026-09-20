@@ -1,0 +1,17 @@
+n=7 (phi=6), speeds <= 18:  4708 runners with a SINGLE clear instant
+    at u = 1/n : 4692 of 4708
+    other positions: 8/49x16
+    which runner: {'top': 1027, 'middle': 2654, 'bottom': 1027}
+    examples: [((1, 2, 3, 4, 5, 6, 8), 6), ((1, 2, 3, 4, 5, 6, 9), 6), ((1, 2, 3, 4, 5, 6, 10), 6), ((1, 2, 3, 4, 5, 6, 11), 6)]
+
+n=8 (phi=4), speeds <= 17:  2794 runners with a SINGLE clear instant
+    at u = 1/n : 2792 of 2794
+    other positions: 9/64x2
+    which runner: {'top': 541, 'middle': 1712, 'bottom': 541}
+    examples: [((1, 2, 3, 4, 5, 6, 7, 9), 7), ((1, 2, 3, 4, 5, 6, 7, 10), 7), ((1, 2, 3, 4, 5, 6, 7, 11), 7), ((1, 2, 3, 4, 5, 6, 7, 12), 7)]
+
+n=9 (phi=6), speeds <= 15:  296 runners with a SINGLE clear instant
+    at u = 1/n : 296 of 296
+    which runner: {'top': 97, 'middle': 102, 'bottom': 97}
+    examples: [((1, 2, 3, 4, 5, 6, 7, 8, 10), 8), ((1, 2, 3, 4, 5, 6, 7, 8, 11), 8), ((1, 2, 3, 4, 5, 6, 7, 8, 12), 8), ((1, 2, 3, 4, 5, 6, 7, 8, 13), 8)]
+

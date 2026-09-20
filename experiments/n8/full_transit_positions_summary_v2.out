@@ -1,0 +1,11 @@
+mover + the neighbour it approaches (interior movers and ends where the neighbour exists), by |deviation|:
+  |dev| in [0.0,0.1): {'pairs': 126, 'mover and approached neighbour share the time': 90, "... each is the other's flank at exactly 1/8": 90, 't = 1/(8*|gap between them|)': 90, 'pair members flanked by speed-neighbours': 216}
+  |dev| in [0.1,0.2): {'pairs': 140, 'mover and approached neighbour share the time': 84, "... each is the other's flank at exactly 1/8": 84, 't = 1/(8*|gap between them|)': 84, 'pair members flanked by speed-neighbours': 188}
+  |dev| in [0.2,0.3): {'pairs': 140, 'mover and approached neighbour share the time': 58, "... each is the other's flank at exactly 1/8": 58, 't = 1/(8*|gap between them|)': 58, 'pair members flanked by speed-neighbours': 128}
+  |dev| in [0.3,0.4): {'pairs': 140, 'mover and approached neighbour share the time': 28, "... each is the other's flank at exactly 1/8": 28, 't = 1/(8*|gap between them|)': 28, 'pair members flanked by speed-neighbours': 68}
+  |dev| in [0.4,0.5): {'pairs': 140, 'mover and approached neighbour share the time': 6, "... each is the other's flank at exactly 1/8": 6, 't = 1/(8*|gap between them|)': 6, 'pair members flanked by speed-neighbours': 6}
+  |dev| in [0.5,0.6): {'pairs': 140, 'mover and approached neighbour share the time': 0, "... each is the other's flank at exactly 1/8": 0, 't = 1/(8*|gap between them|)': 0, 'pair members flanked by speed-neighbours': 0}
+  |dev| in [0.6,0.7): {'pairs': 140, 'mover and approached neighbour share the time': 0, "... each is the other's flank at exactly 1/8": 0, 't = 1/(8*|gap between them|)': 0, 'pair members flanked by speed-neighbours': 0}
+  |dev| in [0.7,0.8): {'pairs': 140, 'mover and approached neighbour share the time': 0, "... each is the other's flank at exactly 1/8": 0, 't = 1/(8*|gap between them|)': 0, 'pair members flanked by speed-neighbours': 0}
+  |dev| in [0.8,0.9): {'pairs': 140, 'mover and approached neighbour share the time': 12, "... each is the other's flank at exactly 1/8": 12, 't = 1/(8*|gap between them|)': 12, 'pair members flanked by speed-neighbours': 86}
+  |dev| in [0.9,1.0): {'pairs': 140, 'mover and approached neighbour share the time': 20, "... each is the other's flank at exactly 1/8": 20, 't = 1/(8*|gap between them|)': 20, 'pair members flanked by speed-neighbours': 68}

@@ -1,0 +1,63 @@
+C1  Unit-Complete companion leaf (both absent classes non-units)
+   E_non = [1, 2, 3, 5, 7]   |S| = 22/35 = 0.628571   union bound |S| > 1/2 ? True
+   E_non = [1, 3, 4, 5, 7]   |S| = 5/14 = 0.357143   union bound |S| > 1/2 ? False
+   E_non = [1, 3, 5, 6, 7]   |S| = 6/7 = 0.857143   union bound |S| > 1/2 ? True
+   -> rho0 = 4 gives 5/14 < 1/2: the union-bound test CAN fail, so the
+      18 dropped-unit passes are not forced by the code.
+
+C2  all seven classes present
+   E_non = [1..7]   |S| = 0   (expected 0)
+   ne.safe_cells([1..7]) returns 0 safe cells (expected 0), so the
+   witness locator has nothing to pick and the argument would report failure.
+   Search over 5- and 6-element E_non found no empty S (see du2_controls log),
+   so this control had to be built from the 7-class set.
+
+C3  every 2-subset of {1..7} removed, |S| and the union-bound verdict
+     absent  units absent         |S|   >1/2
+     (1, 2)             1           1   True
+     (1, 3)             2           1   True
+     (1, 4)             1           1   True
+     (1, 5)             2           1   True
+     (1, 6)             1           1   True
+     (1, 7)             2           1   True
+     (2, 3)             1         5/6   True
+     (2, 4)             0         6/7   True
+     (2, 5)             1           1   True
+     (2, 6)             0        5/14   False
+     (2, 7)             1         5/6   True
+     (3, 4)             1       19/35   True
+     (3, 5)             2           1   True
+     (3, 6)             1           1   True
+     (3, 7)             2         5/6   True
+     (4, 5)             1           1   True
+     (4, 6)             0       22/35   True
+     (4, 7)             1       13/15   True
+     (5, 6)             1           1   True
+     (5, 7)             2           1   True
+     (6, 7)             1           1   True
+   -> the three all-non-unit pairs (2,4),(2,6),(4,6) are the Unit-Complete
+      leaf.  Exactly ONE of the 21 pairs fails |S| > 1/2, namely (2,6),
+      i.e. the Unit-Complete case rho0 = 4.  All 18 dropped-unit pairs pass.
+
+C4  mutation control: the measure must move when the bad-residue set is changed
+     absent   {0,7} (true)       {0}     {0,1,7}
+     (1, 2)              1         1         6/7
+     (1, 3)              1         1        5/14
+     (1, 4)              1         1         1/2
+     (1, 5)              1         1       37/84
+     (1, 6)              1         1        5/14
+     (1, 7)              1         1         1/2
+     (2, 3)            5/6         1        1/28
+     (2, 5)              1         1        5/28
+     (2, 7)            5/6         1         1/4
+     (3, 4)          19/35         1         1/5
+     (3, 5)              1         1         2/7
+     (3, 6)              1         1         4/5
+     (3, 7)            5/6         1        1/12
+     (4, 5)              1         1         1/2
+     (4, 7)          13/15         1         1/3
+     (5, 6)              1         1        3/14
+     (5, 7)              1         1         1/6
+     (6, 7)              1         1         1/5
+   -> widening the bad set to {0,1,7} changes |S| in 18/18 pairs;
+      narrowing it to {0} changes |S| where |S| < 1 already.

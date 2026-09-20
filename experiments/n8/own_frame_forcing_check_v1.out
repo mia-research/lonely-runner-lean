@@ -1,0 +1,5 @@
+every runner moved |dev|<=1/10: {'largest displacement < 1/2 slot': 1017}
+every runner moved |dev|<=3/10: {'largest displacement < 1/2 slot': 803}
+every runner moved |dev|<=9/10: {'largest displacement < 1/2 slot': 586, 'some runner displaced >= 1/2 slot': 1, 'all deviations zero (forced)': 1}
+all 8-subsets of [1,14]: {'all deviations zero (forced)': 10416, 'some runner displaced >= 1/2 slot': 4528, 'largest displacement < 1/2 slot': 1016}
+random integers [1,1000]: {'largest displacement < 1/2 slot': 1027, 'all deviations zero (forced)': 22, 'some runner displaced >= 1/2 slot': 77}

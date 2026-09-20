@@ -1,0 +1,15 @@
+
+=== all 8-subsets of [1,16], gcd 1: 102952 runners
+             scale 1: {'runners': 70876, 'neighbours +-1': 35230, 'a runner shares its slot at u=1/8': 0, 'tied neighbour at its time': 25080, 'neighbours other': 35544, 'neighbours +-3': 102}
+   jump = prediction: {'runners': 24780, 'neighbours other': 21758, 'a runner shares its slot at u=1/8': 24780, 'tied neighbour at its time': 0, 'neighbours +-1': 1436, 'neighbours +-3': 1586}
+   jump > prediction: {'runners': 7296, 'neighbours other': 6746, 'a runner shares its slot at u=1/8': 6900, 'tied neighbour at its time': 0, 'neighbours +-1': 228, 'neighbours +-3': 322}
+
+=== random [1,100]: 12000 runners
+             scale 1: {'runners': 9814, 'neighbours +-1': 3863, 'a runner shares its slot at u=1/8': 0, 'tied neighbour at its time': 2155, 'neighbours other': 5815, 'neighbours +-3': 136}
+   jump = prediction: {'runners': 1709, 'neighbours other': 1546, 'a runner shares its slot at u=1/8': 1709, 'tied neighbour at its time': 287, 'neighbours +-3': 58, 'neighbours +-1': 105}
+   jump > prediction: {'runners': 477, 'neighbours other': 424, 'a runner shares its slot at u=1/8': 195, 'tied neighbour at its time': 46, 'neighbours +-1': 24, 'neighbours +-3': 29}
+
+=== random [1,1000]: 3200 runners
+             scale 1: {'runners': 3076, 'neighbours +-1': 1097, 'a runner shares its slot at u=1/8': 0, 'tied neighbour at its time': 234, 'neighbours other': 1924, 'neighbours +-3': 55}
+   jump = prediction: {'runners': 109, 'neighbours other': 101, 'a runner shares its slot at u=1/8': 109, 'tied neighbour at its time': 12, 'neighbours +-1': 6, 'neighbours +-3': 2}
+   jump > prediction: {'runners': 15, 'neighbours other': 13, 'a runner shares its slot at u=1/8': 5, 'tied neighbour at its time': 0, 'neighbours +-1': 1, 'neighbours +-3': 1}

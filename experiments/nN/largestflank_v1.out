@@ -1,0 +1,22 @@
+=== CONTROL: the recorded n=8 refutation (2,3,5,7,8,13,16) ===
+  lonely openings at flank 16: []   (record: none)
+  lonely openings at flank 13: [1, 2]   (record: lap 1)
+  CONTROL PASSES
+
+=== does the LARGEST disparity always work? (exhaustive, primitive sets) ===
+  n     range      sets  failures  verdict
+  5    [1,40]     85771         0  holds on this range
+  5    [1,60]    455041         0  holds on this range
+  5    [1,80]   1473833         0  holds on this range
+  6    [1,26]     64436        55  REFUTED (55)
+        witnesses: [(1, 2, 3, 5, 6), (1, 2, 3, 5, 10), (1, 3, 4, 5, 6), (1, 3, 4, 5, 8), (1, 3, 4, 5, 9)]
+  6    [1,32]    196751        62  REFUTED (62)
+        witnesses: [(1, 2, 3, 5, 6), (1, 2, 3, 5, 10), (1, 3, 4, 5, 6), (1, 3, 4, 5, 8), (1, 3, 4, 5, 9)]
+  7    [1,20]     38549       148  REFUTED (148)
+        witnesses: [(1, 2, 3, 5, 7, 10), (1, 2, 3, 5, 7, 14), (1, 2, 5, 6, 7, 10), (1, 2, 5, 7, 9, 18), (1, 2, 5, 7, 12, 15)]
+  7    [1,24]    133644       205  REFUTED (205)
+        witnesses: [(1, 2, 3, 5, 7, 10), (1, 2, 3, 5, 7, 14), (1, 2, 5, 6, 7, 10), (1, 2, 5, 7, 9, 18), (1, 2, 5, 7, 12, 15)]
+  8    [1,16]     11432       268  REFUTED (268)
+        witnesses: [(1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 4, 5, 7, 10), (1, 2, 3, 4, 5, 7, 12), (1, 2, 3, 4, 5, 7, 14), (1, 2, 3, 4, 5, 7, 16)]
+  8    [1,18]     31788       414  REFUTED (414)
+        witnesses: [(1, 2, 3, 4, 5, 7, 8), (1, 2, 3, 4, 5, 7, 10), (1, 2, 3, 4, 5, 7, 12), (1, 2, 3, 4, 5, 7, 14), (1, 2, 3, 4, 5, 7, 16)]

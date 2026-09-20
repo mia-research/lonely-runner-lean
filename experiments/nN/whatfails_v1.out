@@ -1,0 +1,32 @@
+=== CHECK 1: is the excess case still covered by a termination theorem? ===
+  n excess card <=                   covering theorem  covered
+  5              1                   two_diffs (n>=3)     True
+  6              2                   two_diffs (n>=3)     True
+  7              2                   two_diffs (n>=3)     True
+  8              3                 three_diffs (n>=4)     True
+  9              3                 three_diffs (n>=4)     True
+ 10              4                  four_diffs (n>=6)     True
+ 11              4                  four_diffs (n>=6)     True
+ 12              5                               None    False
+ 13              5                               None    False
+ 14              6                               None    False
+ 15              6                               None    False
+ 16              7                               None    False
+ 17              7                               None    False
+ 18              8                               None    False
+ 19              8                               None    False
+ 20              9                               None    False
+
+  -> excess case first UNCOVERED at n = 12
+
+=== CHECK 2: door 5, best flank rank from the large end (n=8 claim: never worse than 3) ===
+  n=5  k=4  tested  3765   worst rank 1   distribution {1: 3765}   witness (5, 12, 18, 19)
+  n=6  k=5  tested  3922   worst rank 2   distribution {1: 3918, 2: 4}   witness (3, 9, 12, 15, 25)
+  n=7  k=6  tested  3959   worst rank 2   distribution {1: 3953, 2: 6}   witness (2, 5, 7, 9, 12, 13)
+  n=8  k=7  tested  3982   worst rank 3   distribution {1: 3977, 2: 4, 3: 1}   witness (1, 3, 5, 7, 12, 14, 16)
+
+=== CHECK 3: DoorFirstLap, tau = leastDisp * arrival (n=8: REFUTED, tau=2401/1872) ===
+  n=5  tested  5604   max tau      363/545 = 0.66606   no counterexample in this sample   witness (33, 80, 109, 133)
+  n=6  tested  5826   max tau      125/162 = 0.77160   no counterexample in this sample   witness (10, 22, 32, 43, 54)
+  n=7  tested  5920   max tau        22/39 = 0.56410   no counterexample in this sample   witness (7, 16, 27, 39, 47, 64)
+  n=8  tested  5959   max tau    1225/2592 = 0.47261   no counterexample in this sample   witness (49, 227, 247, 292, 324, 359, 398)

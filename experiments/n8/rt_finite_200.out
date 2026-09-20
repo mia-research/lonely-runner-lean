@@ -1,0 +1,35 @@
+rt_finite_v1: EXHAUSTIVE over primitive unit 4-tuples with max speed <= 200
+Hadamard box: R=2 needs <= 41, R=3 needs <= 140, R=4 needs <= 332
+   ... 100000 tuples
+   ... 200000 tuples
+   ... 300000 tuples
+
+  primitive unit 4-tuples with max speed <= 200: 385211
+  overflow-guard trips: 0
+  N_exc (o > 1/3 outside the two known exceptions): 0
+
+  top 15 by o:
+               (1, 3, 5, 7)  o =                16/35 = 0.45714286   (known exception)
+              (1, 11, 5, 7)  o =                26/77 = 0.33766234   (known exception)
+              (17, 3, 5, 7)  o =              186/595 = 0.31260504
+             (1, 3, 13, 15)  o =               58/195 = 0.29743590
+            (1, 11, 13, 23)  o =             974/3289 = 0.29613864
+            (1, 11, 21, 31)  o =             694/2387 = 0.29074152
+            (1, 27, 13, 15)  o =             506/1755 = 0.28831909
+             (1, 19, 13, 7)  o =               70/247 = 0.28340081
+             (17, 3, 13, 7)  o =               62/221 = 0.28054299
+            (9, 11, 13, 15)  o =            1786/6435 = 0.27754468
+            (1, 19, 21, 39)  o =               68/247 = 0.27530364
+             (17, 3, 21, 7)  o =                14/51 = 0.27450980
+              (1, 19, 5, 7)  o =                26/95 = 0.27368421
+             (17, 19, 5, 7)  o =               88/323 = 0.27244582
+            (1, 19, 37, 55)  o =          10532/38665 = 0.27239105
+
+  near-miss counts #{o >= 1/3 - d} for d = 0, 1/100, 1/50, 1/30, 1/20, 1/12:
+      [2, 2, 2, 3, 8, 832]
+
+  boundary audit (cells, interior breakpoints, entry != exit) on the top 20:
+     failures: 0
+
+  independent re-verification by ob_core_v1.o_x on the top 10:
+     10 of 10 agree exactly

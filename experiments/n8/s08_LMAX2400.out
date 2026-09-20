@@ -1,0 +1,17 @@
+LMAX=2400  exhaustive admissible configurations: 267632   (of which E_div=={8}: 12916)
+  LIT  fails (no SAFE b in either window)                 : 0    [E_div=={8}: 0]
+  CERT fails (no SAFE+admissible b in either window)      : 46   [E_div=={8}: 0]
+  no SAFE+admissible b anywhere in B_hon                  : 0
+
+LIT failures (counterexamples to the goal as literally stated):
+
+CERT failures with |E_div|==1 (cleanest, twin present):
+    E=(1, 3, 5, 12, 15, 20, 24) L=120 E_div=[24] safe+admissible fibres in B_hon=61
+    E=(1, 3, 9, 12, 15, 45, 360) L=360 E_div=[360] safe+admissible fibres in B_hon=133
+    E=(3, 9, 12, 15, 20, 45, 360) L=360 E_div=[360] safe+admissible fibres in B_hon=133
+    E=(1, 5, 12, 15, 20, 24, 35) L=840 E_div=[24] safe+admissible fibres in B_hon=363
+    E=(1, 5, 15, 20, 24, 35, 105) L=840 E_div=[24] safe+admissible fibres in B_hon=335
+    E=(3, 5, 12, 15, 20, 24, 105) L=840 E_div=[24] safe+admissible fibres in B_hon=323
+    E=(1, 9, 12, 15, 27, 45, 360) L=1080 E_div=[360] safe+admissible fibres in B_hon=353
+    E=(9, 12, 15, 20, 27, 45, 360) L=1080 E_div=[360] safe+admissible fibres in B_hon=333
+    E=(1, 5, 12, 15, 20, 35, 48) L=1680 E_div=[48] safe+admissible fibres in B_hon=515

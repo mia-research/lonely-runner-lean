@@ -1,0 +1,11 @@
+fewest clear components over each exhaustive family
+n distinct positive integer speeds, gcd 1, no runner pinned at 0; exact
+
+  n  phi    V   instances  fail  min comps
+----------------------------------------------------
+  5    4   26      322180     0          1
+        at v=(1, 2, 3, 4, 6) runner=4, its only/first clear u=1/5
+        component-count histogram (<=6): 1:30875, 2:85758, 3:64277, 4:46554, 5:14966, 6:31256
+  6    2   22      444864     0          1
+        at v=(1, 2, 3, 4, 5, 7) runner=5, its only/first clear u=1/6
+        component-count histogram (<=6): 1:21424, 2:69636, 3:82126, 4:87034, 5:24558, 6:64618

@@ -1,0 +1,3 @@
+order 8 certificate (strict, simplex): ratio bound S = 5, lap bound L = 4, words to 24 moves, cap R < 7
+   words tested: 24   realisable (max tau > 0): 0
+   no realisable word -- cascade cannot move at this ratio bound

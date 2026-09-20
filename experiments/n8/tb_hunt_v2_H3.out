@@ -1,0 +1,6 @@
+tb_hunt_v2   HMAX = 3  PMAX = 40  CELLCAP = 4000000
+budget: a class with Delta > 1/12 = 0.0833333 refutes (H3u)
+
+admissible primitive vectors of height <= 3: 216
+
+--- rank-1 classes ---

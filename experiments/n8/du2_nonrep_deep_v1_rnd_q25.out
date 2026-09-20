@@ -1,0 +1,4 @@
+RANDOM 3000 draws, q in 0..25, all 18 absent pairs
+  boundary audit on sampled subset: interior=0 mismatch=0 entry/exit-setdiff=0
+  min |S| = 11107394/15446613 = 0.719083  at [137, 74, 59, 196, 78] (absent (5, 7))
+  instances with |S| < 1/2 : 0

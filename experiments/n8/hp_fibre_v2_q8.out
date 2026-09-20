@@ -1,0 +1,66 @@
+unit tuples q <= 8; deciding the whole e_rho0 fibre for each
+   ... 200 unit tuples done, failures so far 1
+   ... 400 unit tuples done, failures so far 1
+   ... 600 unit tuples done, failures so far 1
+   ... 800 unit tuples done, failures so far 2
+   ... 1000 unit tuples done, failures so far 2
+   ... 1200 unit tuples done, failures so far 3
+   ... 1400 unit tuples done, failures so far 3
+   ... 1600 unit tuples done, failures so far 3
+   ... 1800 unit tuples done, failures so far 3
+   ... 2000 unit tuples done, failures so far 3
+   ... 2200 unit tuples done, failures so far 3
+   ... 2400 unit tuples done, failures so far 3
+   ... 2600 unit tuples done, failures so far 4
+   ... 2800 unit tuples done, failures so far 4
+   ... 3000 unit tuples done, failures so far 4
+   ... 3200 unit tuples done, failures so far 4
+   ... 3400 unit tuples done, failures so far 4
+   ... 3600 unit tuples done, failures so far 4
+   ... 3800 unit tuples done, failures so far 4
+   ... 4000 unit tuples done, failures so far 4
+   ... 4200 unit tuples done, failures so far 4
+   ... 4400 unit tuples done, failures so far 4
+   ... 4600 unit tuples done, failures so far 4
+   ... 4800 unit tuples done, failures so far 5
+   ... 5000 unit tuples done, failures so far 5
+   ... 5200 unit tuples done, failures so far 5
+   ... 5400 unit tuples done, failures so far 5
+   ... 5600 unit tuples done, failures so far 5
+   ... 5800 unit tuples done, failures so far 5
+   ... 6000 unit tuples done, failures so far 5
+   ... 6200 unit tuples done, failures so far 5
+   ... 6400 unit tuples done, failures so far 5
+
+   unit tuples: 6561
+   rho0=2: closed a priori 6529, closed by finite check 32, total 6561 of 6561
+   rho0=4: closed a priori 6457, closed by finite check 99, total 6556 of 6561
+   rho0=6: closed a priori 6529, closed by finite check 32, total 6561 of 6561
+   largest finite-check threshold M < 327
+   FAILURES: 5
+       ((1, 3, 5, 7), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 4')
+       ((9, 3, 21, 15), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 12')
+       ((9, 27, 45, 63), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 36')
+       ((25, 35, 5, 15), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 20')
+       ((49, 35, 21, 7), 4, '|S^c| = 9/14 > 1/2 at e_rho0 = 28')
+   ... 500 tuples, failures 0
+   ... 1000 tuples, failures 0
+   ... 1500 tuples, failures 0
+   ... 2000 tuples, failures 0
+   ... 2500 tuples, failures 0
+   ... 3000 tuples, failures 0
+   ... 3500 tuples, failures 0
+   ... 4000 tuples, failures 0
+   ... 4500 tuples, failures 0
+   ... 5000 tuples, failures 0
+   ... 5500 tuples, failures 0
+   ... 6000 tuples, failures 0
+   ... 6500 tuples, failures 0
+
+QMAX=8: unit tuples 6561 (ALL of them, primitive or not)
+   rho0=2: a priori 6529, finite check 32, total 6561 of 6561
+   rho0=4: a priori 6457, finite check 104, total 6561 of 6561
+   rho0=6: a priori 6529, finite check 32, total 6561 of 6561
+   largest finite-check threshold M < 327  at ((9, 27, 45, 63), 2)
+   FAILURES: 0
+python3 hp_fibre_v2.py 8 > hp_fibre_v2_q8.out 2>&1  5.74s user 0.04s system 99% cpu 5.790 total

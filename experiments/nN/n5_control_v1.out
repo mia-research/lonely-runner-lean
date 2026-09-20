@@ -1,0 +1,17 @@
+=== controls against proved theorems ===
+n=  6 k=4  allowed  7   observed max     5   AGREES   four_diffs_stop_ge_six
+n=  7 k=4  allowed  7   observed max     5   AGREES   four_diffs_stop_ge_six
+n=  8 k=4  allowed  7   observed max     5   AGREES   four_diffs_stop_ge_six
+n=  9 k=4  allowed  7   observed max     4   AGREES   four_diffs_stop_ge_six
+n= 12 k=4  allowed  7   observed max     3   AGREES   four_diffs_stop_ge_six
+n=  4 k=3  allowed  3   observed max     3   AGREES   three_diffs_stop_within_three_moves
+n=  5 k=3  allowed  3   observed max     3   AGREES   three_diffs_stop_within_three_moves
+n=  6 k=3  allowed  3   observed max     3   AGREES   three_diffs_stop_within_three_moves
+n=  8 k=3  allowed  3   observed max     3   AGREES   three_diffs_stop_within_three_moves
+n=  3 k=2  allowed  1   observed max     1   AGREES   two_diffs_stop_within_one_move
+n=  5 k=2  allowed  1   observed max     1   AGREES   two_diffs_stop_within_one_move
+n=  8 k=2  allowed  1   observed max     1   AGREES   two_diffs_stop_within_one_move
+
+=== the uncovered diagonal case, same implementation ===
+n=  5 k=4  allowed  7   observed max     9   *** CONTRADICTS THEOREM ***   (k=4, n=5) -- NOT covered by any theorem
+     witness: (1, 19, 21, 40)

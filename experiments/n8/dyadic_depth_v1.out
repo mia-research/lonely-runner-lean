@@ -1,0 +1,10 @@
+MAIN  threshold 1/8, N=20000/V, kmax=16
+  V=  50  max kappa=7  dist={4: 7878, 5: 7678, 6: 4379, 7: 65}  unsettled=0
+  V= 100  max kappa=8  dist={4: 7979, 5: 5575, 6: 4610, 7: 1834, 8: 2}  unsettled=0
+  V= 200  max kappa=8  dist={4: 8097, 5: 5410, 6: 3385, 7: 2236, 8: 872}  unsettled=0
+  V= 400  max kappa=9  dist={4: 7666, 5: 5875, 6: 3442, 7: 1595, 8: 1033, 9: 389}  unsettled=0
+  V= 800  max kappa=10  dist={4: 7421, 5: 5563, 6: 3694, 7: 1673, 8: 844, 9: 593, 10: 212}  unsettled=0
+
+POSITIVE CONTROL  threshold 1/7 (LRC(8) false at 1/7 -- failures MUST appear)
+  V=  50  settled=2000  UNSETTLED=0  *** CONTROL DID NOT FIRE -- harness broken ***
+  V= 200  settled=2000  UNSETTLED=0  *** CONTROL DID NOT FIRE -- harness broken ***

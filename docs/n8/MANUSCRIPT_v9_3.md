@@ -1,5 +1,12 @@
 # A Bounding Framework for Eight Lonely Runners
 
+**T. Palelei.** v9.3, 2026-09-17. **SUPERSEDED by `MANUSCRIPT_v9_4.md`, which is the manuscript of record** (author,
+2026-09-17). v9.3 held that status earlier the same day. v9.4 adds Theorems 6.12–6.13 — Theorem 4.8 proved at every opening,
+and the search over openings proved finite at a whole-number flank — which v9.3 does not carry. Frozen and unaltered apart
+from this stamp.
+
+*Original header:*
+
 **T. Palelei.** v9.3, 2026-09-17. **The manuscript of record** (frozen by the author, 2026-09-17). Supersedes v9.2, which held that status
 until now. v9.3 **withdraws Propositions 6.10–6.11** and the counting ruling they were waiting on, and records the Lean work
 of 2026-09-17.

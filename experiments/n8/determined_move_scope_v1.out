@@ -1,0 +1,5 @@
+('hypothesis fails', 'BSM time = 1/(8m) + 1/(8D) anyway', False) 1327
+('hypothesis fails', 'BSM time = 1/(8m) + 1/(8D) anyway', True) 668
+('lemma hypothesis holds at some p', False, 'BSM time = that move', False) 1995
+('lemma hypothesis holds at some p', True, 'BSM time = that move', False) 377
+('lemma hypothesis holds at some p', True, 'BSM time = that move', True) 258

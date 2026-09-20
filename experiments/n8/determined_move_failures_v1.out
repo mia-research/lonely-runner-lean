@@ -1,0 +1,12 @@
+sharer not the largest + a reading = 7 mod 8 47
+sharer not the largest 621
+('7 mod 8 reading', 'after the move at', '>= S') 54
+('larger reading', 'moves more than 1 slot', 'lands in a different slot') 1607
+('larger reading', 'moves more than 1 slot', 'lands in the same slot band as it started') 14
+examples:
+   ('s=[1, 2, 3, 4, 5, 8, 9] S=8', 'larger reading 9: 1 -> 17/8 eighths')
+   ('s=[1, 1, 2, 3, 4, 8, 9] S=8', 'larger reading 9: 1 -> 17/8 eighths')
+   ('s=[1, 2, 3, 4, 8, 9, 10] S=8', 'larger reading 9: 1 -> 17/8 eighths')
+   ('s=[1, 2, 3, 4, 8, 9, 10] S=8', 'larger reading 10: 2 -> 13/4 eighths')
+   ('s=[2, 1, 1, 2, 3, 8, 9] S=8', 'larger reading 9: 1 -> 17/8 eighths')
+   ('s=[1, 1, 2, 3, 8, 9, 10] S=8', 'larger reading 9: 1 -> 17/8 eighths')

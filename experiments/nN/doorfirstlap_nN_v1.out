@@ -1,0 +1,14 @@
+=== POSITIVE CONTROL: the recorded n=8 refutation ===
+  disparities {49,205,234,256,286,323,366}  arrival t = 49/1872
+  tau = 49*t = 2401/1872 = 1.28259   expected 2401/1872 = 1.28259
+  CONTROL PASSES
+
+=== targeted search at n = 5, 6, 7 (same shape: small min, large spread) ===
+  n=5  tested  37007   max tau   0.65463 = 671/1025
+        no tau>1 in THIS sample   witness (244, 586, 820, 987)
+  n=6  tested  38642   max tau   0.76874 = 1825/2374
+        no tau>1 in THIS sample   witness (219, 647, 905, 1063, 1187)
+  n=7  tested  39385   max tau   0.61224 = 30/49
+        no tau>1 in THIS sample   witness (45, 171, 231, 276, 315, 388)
+  n=8  tested  39696   max tau   0.71422 = 1617/2264
+        no tau>1 in THIS sample   witness (49, 111, 165, 227, 283, 362, 388)

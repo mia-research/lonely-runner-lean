@@ -1,0 +1,226 @@
+
+=== [A] rho0=2 rho'=1  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [A] rho0=2 rho'=3  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [A] rho0=2 rho'=5  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [A] rho0=2 rho'=7  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [B] rho0=2 rho'=2  W=[0,1/5)  V=[6]  J=[3, 4]  kappa=2  ell=1/5
+    C1=75  M1=9  residual cells: 27
+      e'=10  (q'=1  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 10)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=2   x=1/16         E=(1, 2, 3, 5, 7, 10, 16)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=3   x=1/24         E=(1, 2, 3, 5, 7, 10, 24)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=4   x=1/32         E=(1, 2, 3, 5, 7, 10, 32)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=5   x=1/40         E=(1, 2, 3, 5, 7, 10, 40)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=6   x=1/48         E=(1, 2, 3, 5, 7, 10, 48)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=7   x=1/56         E=(1, 2, 3, 5, 7, 10, 56)  uncovered(all 7)=[2, 6]
+      e'=10  (q'=1  ) m=8   x=1/64         E=(1, 2, 3, 5, 7, 10, 64)  uncovered(all 7)=[2, 6]
+      e'=18  (q'=2  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 18)  uncovered(all 7)=[2, 6]
+      e'=18  (q'=2  ) m=7   x=1/56         E=(1, 2, 3, 5, 7, 18, 56)  uncovered(all 7)=[2, 6]
+      e'=18  (q'=2  ) m=8   x=1/64         E=(1, 2, 3, 5, 7, 18, 64)  uncovered(all 7)=[2, 6]
+      e'=26  (q'=3  ) m=1   x=5/26         E=(1, 2, 3, 5, 7, 8, 26)  uncovered(all 7)=[6]
+      e'=26  (q'=3  ) m=2   x=1/16         E=(1, 2, 3, 5, 7, 16, 26)  uncovered(all 7)=[2, 6]
+      e'=34  (q'=4  ) m=1   x=5/34         E=(1, 2, 3, 5, 7, 8, 34)  uncovered(all 7)=[6]
+      e'=34  (q'=4  ) m=2   x=1/16         E=(1, 2, 3, 5, 7, 16, 34)  uncovered(all 7)=[2, 6]
+      e'=42  (q'=5  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 42)  uncovered(all 7)=[2, 6]
+      e'=42  (q'=5  ) m=2   x=1/16         E=(1, 2, 3, 5, 7, 16, 42)  uncovered(all 7)=[2, 6]
+      e'=42  (q'=5  ) m=3   x=1/24         E=(1, 2, 3, 5, 7, 24, 42)  uncovered(all 7)=[2, 6]
+      e'=50  (q'=6  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 50)  uncovered(all 7)=[2, 6]
+      e'=50  (q'=6  ) m=2   x=1/10         E=(1, 2, 3, 5, 7, 16, 50)  uncovered(all 7)=[2, 6]
+      e'=58  (q'=7  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 58)  uncovered(all 7)=[2, 6]
+      e'=58  (q'=7  ) m=2   x=5/58         E=(1, 2, 3, 5, 7, 16, 58)  uncovered(all 7)=[2, 6]
+      e'=66  (q'=8  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 66)  uncovered(all 7)=[2, 6]
+      e'=66  (q'=8  ) m=2   x=5/66         E=(1, 2, 3, 5, 7, 16, 66)  uncovered(all 7)=[2, 6]
+      e'=74  (q'=9  ) m=1   x=1/8          E=(1, 2, 3, 5, 7, 8, 74)  uncovered(all 7)=[2, 6]
+      e'=74  (q'=9  ) m=2   x=5/74         E=(1, 2, 3, 5, 7, 16, 74)  uncovered(all 7)=[2, 6]
+      e'=74  (q'=9  ) m=3   x=5/74         E=(1, 2, 3, 5, 7, 24, 74)  uncovered(all 7)=[2, 6]
+
+=== [C] rho0=4 rho'=1  W=[2/7,2/5)  V=[1, 4]  J=[]  kappa=0  ell=4/35
+    J = empty; only m <= 3 need a check.
+      m=1   witness x=2/7
+      m=2   witness x=2/7
+      m=3   witness x=2/7
+
+=== [C] rho0=4 rho'=7  W=[2/7,2/5)  V=[1, 4]  J=[]  kappa=0  ell=4/35
+    J = empty; only m <= 3 need a check.
+      m=1   witness x=2/7
+      m=2   witness x=2/7
+      m=3   witness x=2/7
+
+=== [C] rho0=4 rho'=4  W=[2/7,2/5)  V=[1, 4]  J=[]  kappa=0  ell=4/35
+    J = empty; only m <= 3 need a check.
+      m=1   witness x=2/7
+      m=2   witness x=2/7
+      m=3   witness x=2/7
+
+=== [D] rho0=4 rho'=3  W=[2/7,2/5)  V=[1, 4]  J=[4]  kappa=1  ell=4/35
+    C1=132  M1=16  residual cells: 63
+      e'=11  (q'=1  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 11)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 11, 16)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 11, 24)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=5   x=2/7          E=(1, 3, 4, 5, 7, 11, 40)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=6   x=2/7          E=(1, 3, 4, 5, 7, 11, 48)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=8   x=2/7          E=(1, 3, 4, 5, 7, 11, 64)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=9   x=2/7          E=(1, 3, 4, 5, 7, 11, 72)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=10  x=2/7          E=(1, 3, 4, 5, 7, 11, 80)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=11  x=2/7          E=(1, 3, 4, 5, 7, 11, 88)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=12  x=2/7          E=(1, 3, 4, 5, 7, 11, 96)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=13  x=2/7          E=(1, 3, 4, 5, 7, 11, 104)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=14  x=33/112       E=(1, 3, 4, 5, 7, 11, 112)  uncovered(all 7)=[1]
+      e'=11  (q'=1  ) m=15  x=2/7          E=(1, 3, 4, 5, 7, 11, 120)  uncovered(all 7)=[1]
+      e'=19  (q'=2  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 19)  uncovered(all 7)=[4]
+      e'=19  (q'=2  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 19)  uncovered(all 7)=[4]
+      e'=19  (q'=2  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 19, 24)  uncovered(all 7)=[4]
+      e'=19  (q'=2  ) m=6   x=2/7          E=(1, 3, 4, 5, 7, 19, 48)  uncovered(all 7)=[4]
+      e'=19  (q'=2  ) m=15  x=2/7          E=(1, 3, 4, 5, 7, 19, 120)  uncovered(all 7)=[4]
+      e'=27  (q'=3  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 27)  uncovered(all 7)=[1, 4]
+      e'=27  (q'=3  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 27)  uncovered(all 7)=[1, 4]
+      e'=27  (q'=3  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 27)  uncovered(all 7)=[1, 4]
+      e'=35  (q'=4  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 35)  uncovered(all 7)=[1, 4]
+      e'=35  (q'=4  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 35)  uncovered(all 7)=[1, 4]
+      e'=35  (q'=4  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 35)  uncovered(all 7)=[1, 4]
+      e'=35  (q'=4  ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 35)  uncovered(all 7)=[1, 4]
+      e'=43  (q'=5  ) m=1   x=13/43        E=(1, 3, 4, 5, 7, 8, 43)  uncovered(all 7)=[4]
+      e'=43  (q'=5  ) m=2   x=13/43        E=(1, 3, 4, 5, 7, 16, 43)  uncovered(all 7)=[4]
+      e'=51  (q'=6  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 51)  uncovered(all 7)=[1, 4]
+      e'=51  (q'=6  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 51)  uncovered(all 7)=[1, 4]
+      e'=59  (q'=7  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 59)  uncovered(all 7)=[1, 4]
+      e'=59  (q'=7  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 59)  uncovered(all 7)=[1, 4]
+      e'=59  (q'=7  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 59)  uncovered(all 7)=[1, 4]
+      e'=59  (q'=7  ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 59)  uncovered(all 7)=[1, 4]
+      e'=67  (q'=8  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 67)  uncovered(all 7)=[1]
+      e'=67  (q'=8  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 67)  uncovered(all 7)=[1]
+      e'=75  (q'=9  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 75)  uncovered(all 7)=[4]
+      e'=75  (q'=9  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 75)  uncovered(all 7)=[4]
+      e'=83  (q'=10 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 83)  uncovered(all 7)=[1, 4]
+      e'=83  (q'=10 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 83)  uncovered(all 7)=[1, 4]
+      e'=83  (q'=10 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 83)  uncovered(all 7)=[1, 4]
+      e'=83  (q'=10 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 83)  uncovered(all 7)=[1, 4]
+      e'=91  (q'=11 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 91)  uncovered(all 7)=[1, 4]
+      e'=91  (q'=11 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 91)  uncovered(all 7)=[1, 4]
+      e'=91  (q'=11 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 91)  uncovered(all 7)=[1, 4]
+      e'=99  (q'=12 ) m=1   x=29/99        E=(1, 3, 4, 5, 7, 8, 99)  uncovered(all 7)=[4]
+      e'=99  (q'=12 ) m=2   x=29/99        E=(1, 3, 4, 5, 7, 16, 99)  uncovered(all 7)=[4]
+      e'=99  (q'=12 ) m=3   x=3/8          E=(1, 3, 4, 5, 7, 24, 99)  uncovered(all 7)=[4]
+      e'=107 (q'=13 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 107)  uncovered(all 7)=[1, 4]
+      e'=107 (q'=13 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 107)  uncovered(all 7)=[1, 4]
+      e'=107 (q'=13 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 107)  uncovered(all 7)=[1, 4]
+      e'=107 (q'=13 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 107)  uncovered(all 7)=[1, 4]
+      e'=115 (q'=14 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 115)  uncovered(all 7)=[1, 4]
+      e'=115 (q'=14 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 115)  uncovered(all 7)=[1, 4]
+      e'=115 (q'=14 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 115)  uncovered(all 7)=[1, 4]
+      e'=115 (q'=14 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 115)  uncovered(all 7)=[1, 4]
+      e'=123 (q'=15 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 123)  uncovered(all 7)=[1]
+      e'=123 (q'=15 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 123)  uncovered(all 7)=[1]
+      e'=123 (q'=15 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 123)  uncovered(all 7)=[1]
+      e'=123 (q'=15 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 123)  uncovered(all 7)=[1]
+      e'=131 (q'=16 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 131)  uncovered(all 7)=[4]
+      e'=131 (q'=16 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 131)  uncovered(all 7)=[4]
+      e'=131 (q'=16 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 131)  uncovered(all 7)=[4]
+      e'=131 (q'=16 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 131)  uncovered(all 7)=[4]
+
+=== [D] rho0=4 rho'=5  W=[2/7,2/5)  V=[1, 4]  J=[3]  kappa=1  ell=4/35
+    C1=132  M1=16  residual cells: 56
+      e'=13  (q'=1  ) m=1   x=4/13         E=(1, 3, 4, 5, 7, 8, 13)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=2   x=4/13         E=(1, 3, 4, 5, 7, 13, 16)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=3   x=3/8          E=(1, 3, 4, 5, 7, 13, 24)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=6   x=4/13         E=(1, 3, 4, 5, 7, 13, 48)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=8   x=4/13         E=(1, 3, 4, 5, 7, 13, 64)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=9   x=4/13         E=(1, 3, 4, 5, 7, 13, 72)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=10  x=5/16         E=(1, 3, 4, 5, 7, 13, 80)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=11  x=4/13         E=(1, 3, 4, 5, 7, 13, 88)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=12  x=4/13         E=(1, 3, 4, 5, 7, 13, 96)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=13  x=33/104       E=(1, 3, 4, 5, 7, 13, 104)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=14  x=4/13         E=(1, 3, 4, 5, 7, 13, 112)  uncovered(all 7)=[1]
+      e'=13  (q'=1  ) m=15  x=4/13         E=(1, 3, 4, 5, 7, 13, 120)  uncovered(all 7)=[1]
+      e'=21  (q'=2  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 21)  uncovered(all 7)=[1, 4]
+      e'=21  (q'=2  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 21)  uncovered(all 7)=[1, 4]
+      e'=21  (q'=2  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 21, 24)  uncovered(all 7)=[1, 4]
+      e'=21  (q'=2  ) m=6   x=2/7          E=(1, 3, 4, 5, 7, 21, 48)  uncovered(all 7)=[1, 4]
+      e'=29  (q'=3  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 29)  uncovered(all 7)=[1, 4]
+      e'=29  (q'=3  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 29)  uncovered(all 7)=[1, 4]
+      e'=29  (q'=3  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 29)  uncovered(all 7)=[1, 4]
+      e'=37  (q'=4  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 37)  uncovered(all 7)=[4]
+      e'=37  (q'=4  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 37)  uncovered(all 7)=[4]
+      e'=37  (q'=4  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 37)  uncovered(all 7)=[4]
+      e'=45  (q'=5  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 45)  uncovered(all 7)=[1]
+      e'=45  (q'=5  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 45)  uncovered(all 7)=[1]
+      e'=53  (q'=6  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 53)  uncovered(all 7)=[1, 4]
+      e'=53  (q'=6  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 53)  uncovered(all 7)=[1, 4]
+      e'=53  (q'=6  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 53)  uncovered(all 7)=[1, 4]
+      e'=61  (q'=7  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 61)  uncovered(all 7)=[1, 4]
+      e'=61  (q'=7  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 61)  uncovered(all 7)=[1, 4]
+      e'=61  (q'=7  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 61)  uncovered(all 7)=[1, 4]
+      e'=69  (q'=8  ) m=1   x=20/69        E=(1, 3, 4, 5, 7, 8, 69)  uncovered(all 7)=[1]
+      e'=69  (q'=8  ) m=2   x=20/69        E=(1, 3, 4, 5, 7, 16, 69)  uncovered(all 7)=[1]
+      e'=77  (q'=9  ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 77)  uncovered(all 7)=[1, 4]
+      e'=77  (q'=9  ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 77)  uncovered(all 7)=[1, 4]
+      e'=77  (q'=9  ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 77)  uncovered(all 7)=[1, 4]
+      e'=85  (q'=10 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 85)  uncovered(all 7)=[1, 4]
+      e'=85  (q'=10 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 85)  uncovered(all 7)=[1, 4]
+      e'=85  (q'=10 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 85)  uncovered(all 7)=[1, 4]
+      e'=93  (q'=11 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 93)  uncovered(all 7)=[4]
+      e'=93  (q'=11 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 93)  uncovered(all 7)=[4]
+      e'=93  (q'=11 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 93)  uncovered(all 7)=[4]
+      e'=101 (q'=12 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 101)  uncovered(all 7)=[1]
+      e'=101 (q'=12 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 101)  uncovered(all 7)=[1]
+      e'=101 (q'=12 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 101)  uncovered(all 7)=[1]
+      e'=101 (q'=12 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 101)  uncovered(all 7)=[1]
+      e'=109 (q'=13 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 109)  uncovered(all 7)=[1, 4]
+      e'=109 (q'=13 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 109)  uncovered(all 7)=[1, 4]
+      e'=109 (q'=13 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 109)  uncovered(all 7)=[1, 4]
+      e'=117 (q'=14 ) m=1   x=2/7          E=(1, 3, 4, 5, 7, 8, 117)  uncovered(all 7)=[1, 4]
+      e'=117 (q'=14 ) m=2   x=2/7          E=(1, 3, 4, 5, 7, 16, 117)  uncovered(all 7)=[1, 4]
+      e'=117 (q'=14 ) m=3   x=2/7          E=(1, 3, 4, 5, 7, 24, 117)  uncovered(all 7)=[1, 4]
+      e'=117 (q'=14 ) m=4   x=2/7          E=(1, 3, 4, 5, 7, 32, 117)  uncovered(all 7)=[1, 4]
+      e'=125 (q'=15 ) m=1   x=36/125       E=(1, 3, 4, 5, 7, 8, 125)  uncovered(all 7)=[1]
+      e'=125 (q'=15 ) m=2   x=36/125       E=(1, 3, 4, 5, 7, 16, 125)  uncovered(all 7)=[1]
+      e'=125 (q'=15 ) m=3   x=36/125       E=(1, 3, 4, 5, 7, 24, 125)  uncovered(all 7)=[1]
+      e'=125 (q'=15 ) m=4   x=36/125       E=(1, 3, 4, 5, 7, 32, 125)  uncovered(all 7)=[1]
+
+=== [E] rho0=6 rho'=1  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [E] rho0=6 rho'=3  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [E] rho0=6 rho'=5  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [E] rho0=6 rho'=7  W=[0,1/7)  V=[2, 6]  J=[]  kappa=0  ell=1/7
+    J = empty; only m <= 2 need a check.
+      m=1   witness x=1/8
+      m=2   witness x=1/16
+
+=== [F] rho0=6 rho'=6  W=[1/6,1/5)  V=[4, 6]  J=[]  kappa=0  ell=1/30
+    J = empty; only m <= 8 need a check.
+      m=1   witness x=1/6
+      m=2   witness x=1/6
+      m=3   witness x=1/6
+      m=4   witness x=1/6
+      m=5   witness x=1/6
+      m=6   witness x=3/16
+      m=7   witness x=1/6
+      m=8   witness x=1/6
+
+TOTAL residual cells checked: 179;  failures: 0

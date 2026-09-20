@@ -1,0 +1,25 @@
+
+one runner moved from the AP, step 0.05: 2496 runners, displaced 360
+   Q1/Q2  moment = latest first-opening of the runners in the way at the bound: 174
+          ... that time is a lonely time: 174;  moment EARLIER than it: 0
+   Q3     single wrap partner and nothing else in the way: 54, moment = 1/(8 d_min) + 1/(8 D): 40
+
+every runner moved, |dev| <= 0.1, 0.3, 0.9: 2400 runners, displaced 809
+   Q1/Q2  moment = latest first-opening of the runners in the way at the bound: 285
+          ... that time is a lonely time: 285;  moment EARLIER than it: 0
+   Q3     single wrap partner and nothing else in the way: 4, moment = 1/(8 d_min) + 1/(8 D): 0
+
+spread/push-out integer families x = 8..60: 1272 runners, displaced 402
+   Q1/Q2  moment = latest first-opening of the runners in the way at the bound: 147
+          ... that time is a lonely time: 147;  moment EARLIER than it: 0
+   Q3     single wrap partner and nothing else in the way: 402, moment = 1/(8 d_min) + 1/(8 D): 147
+
+all 8-subsets of [1,14], gcd 1: 24024 runners, displaced 8064
+   Q1/Q2  moment = latest first-opening of the runners in the way at the bound: 4284
+          ... that time is a lonely time: 4284;  moment EARLIER than it: 0
+   Q3     single wrap partner and nothing else in the way: 8064, moment = 1/(8 d_min) + 1/(8 D): 4284
+
+random integers [1,500]: 3200 runners, displaced 1657
+   Q1/Q2  moment = latest first-opening of the runners in the way at the bound: 849
+          ... that time is a lonely time: 849;  moment EARLIER than it: 0
+   Q3     single wrap partner and nothing else in the way: 88, moment = 1/(8 d_min) + 1/(8 D): 36

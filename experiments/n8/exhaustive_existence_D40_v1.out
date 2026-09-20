@@ -1,0 +1,8 @@
+exhaustive 7-subsets of 1..40: 18643560 sets
+  NO free flank : 0   <-- any entry refutes Existence at order 8
+  exactly ONE free flank: 3
+     [2, 3, 4, 5, 6, 7, 16]  free only at 16  (= d_max)
+     [2, 3, 4, 5, 6, 7, 32]  free only at 32  (= d_max)
+     [4, 6, 8, 10, 12, 14, 32]  free only at 32  (= d_max)
+  of the one-free sets, the free flank is d_max in 3 of 3
+  gcd of the whole set: Counter({1: 2, 2: 1})

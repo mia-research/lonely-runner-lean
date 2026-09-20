@@ -1,0 +1,14 @@
+q =    2: runners 2400 | sharer&no-instant  531 | sharer&instant 0 | NO sharer & NO instant   32 | no sharer & instant  1837
+q =    3: runners 2400 | sharer&no-instant  505 | sharer&instant 0 | NO sharer & NO instant   71 | no sharer & instant  1824
+q =    4: runners 2400 | sharer&no-instant  336 | sharer&instant 0 | NO sharer & NO instant   93 | no sharer & instant  1971
+q =    5: runners 2400 | sharer&no-instant  354 | sharer&instant 0 | NO sharer & NO instant   66 | no sharer & instant  1980
+q =    6: runners 2400 | sharer&no-instant  278 | sharer&instant 0 | NO sharer & NO instant   91 | no sharer & instant  2031
+q =    8: runners 2400 | sharer&no-instant  209 | sharer&instant 0 | NO sharer & NO instant   58 | no sharer & instant  2133
+q =   10: runners 2400 | sharer&no-instant  174 | sharer&instant 0 | NO sharer & NO instant   40 | no sharer & instant  2186
+q =   12: runners 2400 | sharer&no-instant  156 | sharer&instant 0 | NO sharer & NO instant   31 | no sharer & instant  2213
+q =   16: runners 2400 | sharer&no-instant  123 | sharer&instant 0 | NO sharer & NO instant   21 | no sharer & instant  2256
+q =   25: runners 2400 | sharer&no-instant   68 | sharer&instant 0 | NO sharer & NO instant   11 | no sharer & instant  2321
+q =   50: runners 2400 | sharer&no-instant   42 | sharer&instant 0 | NO sharer & NO instant    0 | no sharer & instant  2358
+q =   97: runners 2400 | sharer&no-instant   17 | sharer&instant 0 | NO sharer & NO instant    0 | no sharer & instant  2383
+q =  211: runners 2400 | sharer&no-instant    8 | sharer&instant 0 | NO sharer & NO instant    0 | no sharer & instant  2392
+q = 1000: runners 2400 | sharer&no-instant    2 | sharer&instant 0 | NO sharer & NO instant    0 | no sharer & instant  2398

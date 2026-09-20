@@ -1,0 +1,35 @@
+
+one runner moved from the AP: 640 runner-times | ties on track 28 | own-frame slots shared 236 | compared 376
+   speed-rank labels, swaps: {0: 373, 6: 3}
+   own d_min labels,  swaps: {0: 373, 6: 3}  step-1/step-3 at 0: {'step-1': 365, 'step-3': 8}
+   (speed-rank swaps -> own-frame swaps) where they differ: {}
+
+every runner moved, |dev| <= 1/100: 1200 runner-times | ties on track 0 | own-frame slots shared 0 | compared 1200
+   speed-rank labels, swaps: {0: 1200}
+   own d_min labels,  swaps: {0: 1200}  step-1/step-3 at 0: {'step-3': 153, 'step-1': 1047}
+   (speed-rank swaps -> own-frame swaps) where they differ: {}
+
+every runner moved, |dev| <= 1/10: 1200 runner-times | ties on track 0 | own-frame slots shared 349 | compared 851
+   speed-rank labels, swaps: {0: 809, 1: 13, 3: 1, 4: 19, 5: 2, 6: 7}
+   own d_min labels,  swaps: {0: 821, 1: 1, 3: 1, 4: 19, 5: 2, 6: 7}  step-1/step-3 at 0: {'step-1': 770, 'step-3': 51}
+   (speed-rank swaps -> own-frame swaps) where they differ: {(1, 0): 12}
+
+every runner moved, |dev| <= 3/10: 1200 runner-times | ties on track 1 | own-frame slots shared 942 | compared 257
+   speed-rank labels, swaps: {0: 225, 1: 8, 3: 4, 4: 1, 5: 3, 6: 16}
+   own d_min labels,  swaps: {0: 231, 1: 2, 3: 4, 4: 1, 5: 3, 6: 16}  step-1/step-3 at 0: {'step-1': 227, 'step-3': 4}
+   (speed-rank swaps -> own-frame swaps) where they differ: {(1, 0): 6}
+
+every runner moved, |dev| <= 9/10: 1200 runner-times | ties on track 0 | own-frame slots shared 1186 | compared 14
+   speed-rank labels, swaps: {0: 4, 1: 1, 2: 2, 3: 1, 5: 3, 6: 3}
+   own d_min labels,  swaps: {0: 11, 1: 1, 3: 1, 6: 1}  step-1/step-3 at 0: {'step-1': 11}
+   (speed-rank swaps -> own-frame swaps) where they differ: {(1, 0): 1, (2, 0): 2, (3, 0): 1, (5, 0): 2, (5, 1): 1, (6, 0): 1, (6, 3): 1}
+
+all 8-subsets of [1,14], gcd 1: 24024 runner-times | ties on track 10000 | own-frame slots shared 13496 | compared 528
+   speed-rank labels, swaps: {0: 168, 1: 30, 2: 70, 3: 82, 4: 70, 5: 48, 6: 60}
+   own d_min labels,  swaps: {0: 528}  step-1/step-3 at 0: {'step-1': 528}
+   (speed-rank swaps -> own-frame swaps) where they differ: {(1, 0): 30, (2, 0): 70, (3, 0): 82, (4, 0): 70, (5, 0): 48, (6, 0): 60}
+
+random integers [1,1000]: 2400 runner-times | ties on track 100 | own-frame slots shared 2291 | compared 9
+   speed-rank labels, swaps: {0: 1, 3: 4, 4: 1, 5: 1, 6: 2}
+   own d_min labels,  swaps: {0: 7, 1: 1, 4: 1}  step-1/step-3 at 0: {'step-1': 7}
+   (speed-rank swaps -> own-frame swaps) where they differ: {(3, 0): 4, (4, 0): 1, (5, 0): 1, (6, 1): 1, (6, 4): 1}

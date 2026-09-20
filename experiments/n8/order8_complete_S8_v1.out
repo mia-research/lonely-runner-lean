@@ -1,0 +1,8 @@
+order 8 COMPLETE certificate: ratio bound S = 8, lap bound L = 6, max length 36, cap R < 7
+ladder ((n+1)/(n-1))^(n-2) = 4.5172
+
+  length  1: realisable        6   best R here  1.2857   running max  1.2857   (     0s)
+  length  2: realisable       30   best R here  1.6531   running max  1.6531   (     0s)
+  length  3: realisable      120   best R here  2.1254   running max  2.1254   (     1s)
+  length  4: realisable      720   best R here  2.7326   running max  2.7326   (     9s)
+  length  5: realisable     3600   best R here  3.5134   running max  3.5134   (    77s)

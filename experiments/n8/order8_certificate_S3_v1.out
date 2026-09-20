@@ -1,0 +1,31 @@
+order 8 certificate (strict, simplex): ratio bound S = 3, lap bound L = 2, words to 12 moves, cap R < 7
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/order_n_certificate_v1.py", line 132, in job
+    extend([first], S, L, best, stats)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/order_n_certificate_v1.py", line 116, in extend
+    tau = opt(cons, NV, 'max', S, True)
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/order_n_certificate_v1.py", line 81, in opt
+    row = list(c[:NV]) + ([c[NV]] if with_tau else [])
+                           ~^^^^
+IndexError: tuple index out of range
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/order_n_certificate_v1.py", line 140, in <module>
+    res = pool.map(job, [(S, L, s) for s in starts])
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 774, in get
+    raise self._value
+IndexError: tuple index out of range

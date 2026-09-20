@@ -1,0 +1,33 @@
+admissible primitive vectors of height <= 3: 216
+
+rank-1 classes at height <= 3 (before any realisability filter): 108
+   with a witness in |alpha| <= 12 : 88
+   with a witness in |alpha| <= 40 : 108
+   max limit = 1/6   min limit = 1/24
+   limits above 1/6: 0
+
+distinct 2-planes spanned by two height-<= 3 admissible vectors: 3382
+   distinct saturated rank-2 lattices: 3382
+   realisable by the exact (C)+(G) test: 1964
+   of these, with a witness inside the report's alpha box |alpha| <= 24: 1632
+   MISSED by that box: 332
+   limits computed for 1964 of them (cell-count skips: 0)
+   MAX limit over ALL realisable height-<=3 rank-2 classes: 1/4 = 0.2500000   (report's value over its 1795: 1/4)
+   classes with limit > 1/4: 0
+   classes with limit > 1/3: 0
+
+   the classes the report's box missed, with an explicit witness from |alpha| <= 300:
+      ((3, 0, -13, 10), (0, 1, 5, -4))  o_inf = 19/208  witness (1, 11, 61, 79)  max speed 79
+      ((3, 3, 2, -2), (0, 6, -1, -3))  o_inf = 181/2160  witness (1, 59, 21, 111)  max speed 111
+      ((1, 0, 4, -3), (0, 3, -10, 7))  o_inf = 433/5040  witness (1, 11, 53, 71)  max speed 71
+      ((1, 2, 3, -2), (0, 3, 7, -4))  o_inf = 191/1680  witness (1, 11, 13, 31)  max speed 31
+      ((1, 4, -1, 0), (0, 9, -5, 2))  o_inf = 131/1584  witness (1, 11, 45, 63)  max speed 63
+      ((1, 5, 1, -3), (0, 12, 1, -7))  o_inf = 5/84  witness (1, 27, 5, 47)  max speed 47
+      ((1, 0, -3, 2), (0, 3, 11, -8))  o_inf = 10/99  witness (1, 11, 37, 55)  max speed 55
+      ((1, 7, 0, -2), (0, 9, -1, -2))  o_inf = 125/1008  witness (1, 11, 21, 39)  max speed 39
+      ((3, 0, 5, -4), (0, 3, -3, 2))  o_inf = 199/2160  witness (1, 11, 69, 87)  max speed 87
+      ((3, 0, 8, -5), (0, 1, -2, 1))  o_inf = 29/240  witness (1, 11, 29, 47)  max speed 47
+      ((3, 0, -7, 8), (0, 1, 2, -3))  o_inf = 3/28  witness (1, 27, 45, 39)  max speed 45
+      ((1, 2, 1, -4), (0, 3, 4, -11))  o_inf = 133/1320  witness (25, 3, 61, 23)  max speed 61
+      ... 332 missed classes; explicit witness found for 332, none found in |alpha| <= 300 for 0
+      max limit among the missed classes: 39/200 = 0.1950000

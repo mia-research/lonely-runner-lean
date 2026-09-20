@@ -84,3 +84,20 @@ in a statement about an arrangement.
 #print LRC.Spec.DoorThreeLargest
 #print Arrangement.diffSet
 #print LRC.Spec.blockDegree
+
+/-
+THE FULL DEFINITION CHAIN.
+
+Printing a door statement that contains `firstReading`, `diffSet` or `move` and calling it a frame
+check is no check at all: the reader cannot see through the opaque term.  Every definition a door
+statement names is printed below, down to `circDist`, so nothing in a door is taken on trust.
+-/
+#print Arrangement.sep
+#print Arrangement.InWay
+#print circDist
+#print Flanks.flankOpening
+#print LRC.Spec.leastDisp
+#print LRC.Spec.firstReading
+#print MomentIterationN.inWay
+#print MomentIterationN.nextOpening
+#print MomentIterationN.move

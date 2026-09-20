@@ -1,0 +1,32 @@
+
+one runner moved, step 0.05: 2496 runners
+   exact slot-sharer present & no lonely AP instant : 84
+   exact slot-sharer present & lonely AP instant    : 0
+   no sharer & no lonely AP instant                 : 44
+   no sharer & lonely AP instant                    : 2368
+   runners with a lonely AP instant whose first one is named by the small-drift rule: 2148 of 2368
+   no-sharer, no-instant profiles (a mod 8, e): [((1, '0'), (1, '3/17'), (2, '6/17'), (4, '-8/17'), (5, '-5/17'), (6, '-2/17'), (7, '1/17')), ((1, '-3/7'), (1, '0'), (1, '3/7'), (3, '-1/7'), (4, '2/7'), (6, '-2/7'), (7, '1/7')), ((0, '-4/13'), (1, '0'), (1, '3/13'), (2, '-6/13'), (3, '1/13'), (5, '-5/13'), (6, '2/13')), ((1, '-1/9'), (1, '0'), (2, '2/9'), (3, '1/9'), (4, '4/9'), (5, '1/3'), (7, '-1/3'))]
+
+every runner moved, deviations in fiftieths: 3200 runners
+   exact slot-sharer present & no lonely AP instant : 119
+   exact slot-sharer present & lonely AP instant    : 0
+   no sharer & no lonely AP instant                 : 10
+   no sharer & lonely AP instant                    : 3071
+   runners with a lonely AP instant whose first one is named by the small-drift rule: 1664 of 3071
+   no-sharer, no-instant profiles (a mod 8, e): [((1, '0'), (2, '-2/5'), (6, '-1/5'), (6, '-2/5'), (6, '1/5'), (7, '1/5'), (7, '2/5')), ((1, '-1/5'), (1, '0'), (2, '-1/5'), (5, '-1/5'), (6, '-2/5'), (6, '-2/5'), (7, '-1/5')), ((0, '-1/3'), (1, '-1/3'), (1, '0'), (1, '1/3'), (3, '1/3'), (5, '1/3'), (6, '-1/3')), ((0, '-1/2'), (1, '0'), (3, '-1/2'), (5, '-1/2'), (5, '-3/10'), (6, '-1/2'), (7, '-1/2'))]
+
+all 8-subsets of [1,16], gcd 1: 102952 runners
+   exact slot-sharer present & no lonely AP instant : 31680
+   exact slot-sharer present & lonely AP instant    : 0
+   no sharer & no lonely AP instant                 : 396
+   no sharer & lonely AP instant                    : 70876
+   runners with a lonely AP instant whose first one is named by the small-drift rule: 69688 of 70876
+   no-sharer, no-instant profiles (a mod 8, e): [((0, '-1/2'), (1, '0'), (5, '-1/2'), (6, '-1/2'), (6, '0'), (7, '-1/2'), (7, '0')), ((0, '-1/2'), (1, '0'), (4, '-1/2'), (6, '-1/2'), (6, '0'), (7, '-1/2'), (7, '0')), ((0, '-1/2'), (1, '0'), (3, '-1/2'), (5, '-1/2'), (6, '0'), (7, '-1/2'), (7, '0')), ((0, '-1/2'), (1, '0'), (3, '-1/2'), (4, '-1/2'), (6, '0'), (7, '-1/2'), (7, '0'))]
+
+random integers [1,300]: 4800 runners
+   exact slot-sharer present & no lonely AP instant : 379
+   exact slot-sharer present & lonely AP instant    : 0
+   no sharer & no lonely AP instant                 : 51
+   no sharer & lonely AP instant                    : 4370
+   runners with a lonely AP instant whose first one is named by the small-drift rule: 2398 of 4370
+   no-sharer, no-instant profiles (a mod 8, e): [((0, '-1/3'), (0, '1/3'), (1, '-1/3'), (1, '0'), (3, '0'), (3, '1/3'), (5, '1/3')), ((1, '-1/3'), (1, '0'), (3, '1/3'), (4, '1/3'), (5, '1/3'), (6, '0'), (7, '0')), ((0, '1/3'), (1, '0'), (2, '-1/3'), (2, '0'), (3, '-1/3'), (4, '1/3'), (6, '-1/3')), ((0, '1/4'), (1, '0'), (2, '1/4'), (3, '-1/4'), (4, '-1/4'), (5, '-1/4'), (6, '0'))]

@@ -1,0 +1,7 @@
+no exact sharer, no lonely own-AP instant: 1079 runners
+  reading denominator q: {2: 370, 3: 345, 4: 185, 5: 77, 6: 46, 7: 21, 8: 11, 9: 13, 10: 2, 11: 2, 13: 2, 14: 1, 15: 1, 16: 1, 19: 1, 20: 1}
+  a finer-scale sharer (L | q, L*s in 8Z): {True: 633, False: 446}
+  some runner lands exactly on the subject at some own-AP instants: {False: 588, True: 491}
+  least lonely lattice L on the own d_min: {2: 864, 3: 139, 4: 59, 5: 3, 6: 1, 7: 13}
+  L divides q / L shares a factor with q: {(True, True): 505, (False, False): 528, (False, True): 46}
+  q = 2: odd doubled readings take all four slot-pairs mod 16: 370 of 370
