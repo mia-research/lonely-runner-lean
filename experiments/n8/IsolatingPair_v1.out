@@ -1,0 +1,4 @@
+'IsolatingPair.five_ten_residues' depends on axioms: [propext, Quot.sound]
+'IsolatingPair.five_ten_no_consecutive' depends on axioms: [propext, Quot.sound]
+'IsolatingPair.five_alone_not_isolating' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IsolatingPair.ten_alone_not_isolating' depends on axioms: [propext, Classical.choice, Quot.sound]
