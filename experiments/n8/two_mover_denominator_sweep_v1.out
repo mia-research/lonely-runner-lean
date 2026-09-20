@@ -1,0 +1,23 @@
+1) FULL characterisation of two-mover failures (no early stop)
+   failing (q1,q2) denominator pairs: {(2, 2): 4}
+   examples: [('1/2', '7/2'), ('1/2', '9/2'), ('7/2', '15/2'), ('9/2', '15/2')]
+
+2) the q=2 failures, exactly
+   u = p/2 is BLOCKED iff p*A = +/-1 (mod 16).  A = 8k+1 is 1 or 9 (mod 16).
+   blocked when A=1  (mod 16): p = [1, 15] (mod 16)
+   blocked when A=9  (mod 16): p = [7, 9] (mod 16)
+   -> a pair fails iff one is blocked at A=1 and the other at A=9.
+
+3) MINIMAL clearing k over all NON-failing pairs -- can k be named by a bound?
+     k     count  cumulative %
+     0    378867      56.2725%
+     1    153976      79.1423%
+     2     70786      89.6560%
+     3     38038      95.3058%
+     4     12632      97.1820%
+     5      7532      98.3007%
+     6      7084      99.3529%
+     7      3101      99.8134%
+     8       760      99.9263%
+    13         4     100.0000%
+   largest minimal k anywhere in range: 13 at u1=24/25, u2=74/25

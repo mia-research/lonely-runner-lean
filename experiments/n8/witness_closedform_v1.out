@@ -1,0 +1,24 @@
+CANDIDATE CLOSED FORM for the critical family ds = {2,3,4,5,6,7,x}, 16 | x:
+   witness set at flank x  ==  [x/16, x/8)  U  [7x/8, 15x/16)
+   single witness map:      (e,k) = (x, x/16)
+
+  x values tested: 212  (full-set check for x<=4096)
+  witness-set formula mismatches: 0
+  single-map (x, x/16) failures : 0
+
+Is the map the FIRST witness (smallest k)?
+  x=  16: min k = 1, x/16 = 1, equal: True
+  x=  32: min k = 2, x/16 = 2, equal: True
+  x=  48: min k = 3, x/16 = 3, equal: True
+  x=  64: min k = 4, x/16 = 4, equal: True
+  x= 144: min k = 9, x/16 = 9, equal: True
+  x= 496: min k = 31, x/16 = 31, equal: True
+
+Sanity: does the formula respect |S| = 1 (no other flank supports)?
+  x=  16: supporting flanks = [16]  -> |S| = 1
+  x=  32: supporting flanks = [32]  -> |S| = 1
+  x=  48: supporting flanks = [48]  -> |S| = 1
+  x=  64: supporting flanks = [64]  -> |S| = 1
+  x= 144: supporting flanks = [144]  -> |S| = 1
+  x= 496: supporting flanks = [496]  -> |S| = 1
+  x=1024: supporting flanks = [1024]  -> |S| = 1

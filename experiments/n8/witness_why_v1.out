@@ -1,0 +1,47 @@
+WHY THE LARGEST FLANK FAILS  (exhaustive primitive 7-subsets of [1,30])
+
+1) is d_max PRIME?
+   prime=True :    46 failures /   479060 sets = 0.0096%
+   prime=False:  2952 failures /  1550185 sets = 0.1904%
+   -> composite flank fails 19.8x more often than prime
+
+2) number of distinct primes of d_max
+    omega      sets    fail    rate %
+        1    848891     263    0.0310
+        2    708421    2206    0.3114
+        3    471933     529    0.1121
+
+3) the smallest CRT modulus c_d = d_max/gcd(d,d_max) over the other six
+   (c_d = 2 means one disparity constrains k only mod 2 -- a coarse, correlated cut)
+    min c_d      sets    fail    rate %
+          2    263278    2061    0.7828
+          3    303171     535    0.1765
+          4    128464     125    0.0973
+          5    258509     141    0.0545
+          6     48488      29    0.0598
+          7    133671       0    0.0000
+          8      7980       0    0.0000
+          9    116954      12    0.0103
+         10     31648       1    0.0032
+         11     38550      41    0.1064
+         12       896       0    0.0000
+         13    133672      10    0.0075
+
+4) surviving openings at d_max (the quantity that hits 0)
+   d_max prime    : mean   5.51  median   5.0  min 0
+   d_max composite: mean   4.84  median   5.0  min 0
+
+   WITHDRAWN 2026-09-20: an earlier version of this file explained the table by
+   'each constraint removes about a quarter, so survivors ~ e*(3/4)^6'. That is an
+   independent-density estimate. It is banned by MANUSCRIPT §6A row six, and it is
+   also REFUTED -- Appendix A routes 10-14 measured the joint density BELOW the
+   product of the pairwise conditionals (ratio to 0.716, 2594/3000 profiles), so the
+   constraints anti-correlate and the estimate is wrong as well as inadmissible.
+
+   What stands, exactly and without density:
+     * flank e has exactly e openings                     (Theorem 15H)
+     * for d < e,  c_d = e/gcd(d,e) = m  <=>  d = j*e/m, gcd(j,m)=1;
+       in particular  c_d = 2  <=>  e/2 is itself a disparity   (checked, 0 mismatches)
+     * a witness at e exists iff the CRT system {k mod c_d in A_d} is solvable
+   The table above is a MEASUREMENT of association between min c_d and failure.
+   It is not an explanation, and nothing here derives the failure rate.

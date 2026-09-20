@@ -1,0 +1,17 @@
+Window-rule coverage under different sampling schemes on the SAME rule.
+The conjecture ranges over Fin 8 -> R.  There is no canonical measure there,
+so any 'fraction covered' is a property of the scheme, not of the problem.
+
+  sampling scheme                  n  covered %
+  integers [1,20]               4000     43.75%
+  integers [1,40]               4000     42.27%
+  integers [1,200]              4000     41.95%
+  uniform reals [1,10]          4000     84.95%
+  uniform reals [1,100]         4000     45.50%
+  log-uniform [1,1000]          4000      1.80%
+  AP +/-10%                     4000     61.62%
+  AP +/-50%                     4000     50.10%
+  clustered w/ outliers         4000     16.75%
+
+spread across schemes is the answer: if the number moves, it is not a
+fraction of the conjecture -- it is a pass rate on one enumeration.

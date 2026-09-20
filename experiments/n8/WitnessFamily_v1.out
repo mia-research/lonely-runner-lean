@@ -1,0 +1,3 @@
+'WitnessFamily.clear_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WitnessFamily.lonely_witness_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WitnessFamily.lonely_critical_set' depends on axioms: [propext, Classical.choice, Quot.sound]

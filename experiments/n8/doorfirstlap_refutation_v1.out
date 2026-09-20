@@ -1,0 +1,16 @@
+ds            = ['49', '205', '234', '256', '286', '323', '366']
+d_min m       = 49
+fixed point t = 49/1872  (manuscript records t = 49/1872)
+t == 49/1872  : True
+lonely at t   : True
+circDist(d*t) : ['529/1872', '685/1872', '1/8', '35/117', '35/72', '851/1872', '131/312']  all >= 1/8: True
+tau = m*t     = 2401/1872 = 1.2825854700854702
+
+DoorFirstLap asserts  t <= 1/leastDisp  i.e.  m*t <= 1
+   here  m*t = 2401/1872 > 1 -> REFUTED
+
+openings at or before t: 49  any earlier lonely: []
+
+case 2 ds     = ['30', '74', '96', '127', '159', '175', '224']
+  t = 11/256  m*t = 165/128 = 1.2890625  (manuscript: 'first lonely at u = 165/128, in its second lap')
+  u == 165/128: True  lonely: True  -> m*t > 1: True

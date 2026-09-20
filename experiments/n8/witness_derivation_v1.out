@@ -1,0 +1,21 @@
+A = x/2 + 1.  For d in {2,...,7}:  d*A = d*x/2 + d.
+no-wraparound needs  7*A = 7x/2 + 7 < 8x   <=>  7 < 9x/2  <=>  x >= 2.
+
+   d | d*A            | >= x ?            | <= 7x ?
+   2 | 2x/2 + 2        | 2/2 >= 1 : yes      | 2x/2 + 2 <= 7x  <=> 2 <= 6x  <=> x >= 0.333
+   3 | 3x/2 + 3        | 3/2 >= 1 : yes      | 3x/2 + 3 <= 7x  <=> 3 <= 11/2x  <=> x >= 0.545
+   4 | 4x/2 + 4        | 4/2 >= 1 : yes      | 4x/2 + 4 <= 7x  <=> 4 <= 5x  <=> x >= 0.800
+   5 | 5x/2 + 5        | 5/2 >= 1 : yes      | 5x/2 + 5 <= 7x  <=> 5 <= 9/2x  <=> x >= 1.111
+   6 | 6x/2 + 6        | 6/2 >= 1 : yes      | 6x/2 + 6 <= 7x  <=> 6 <= 4x  <=> x >= 1.500
+   7 | 7x/2 + 7        | 7/2 >= 1 : yes      | 7x/2 + 7 <= 7x  <=> 7 <= 7/2x  <=> x >= 2.000
+
+  d = x : x*A mod 8x = x*(A mod 8); 16|x so x/2 = 0 mod 8, hence A = 1 mod 8,
+          so x*A mod 8x = x, which is the LEFT ENDPOINT of [x,7x] -- admissible
+          because the threshold is CLOSED (>= 1/8). This is Theorem 6.16.
+
+So every constraint holds for x >= 2 with 16 | x.  Elementary; no case analysis.
+
+confirmation over x = 16..47984 step 16: violations = 0
+
+GRADE: this is PROVED (elementary arithmetic), not EMPIRICAL.
+It belongs in Flanks.lean as a lemma, not in a script.

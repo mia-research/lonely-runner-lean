@@ -1,0 +1,5 @@
+AP 1..7                  clear measure on (0,2] = 0   isolated clear points found: 8
+                           -> the clear set is FINITE: ['1/8', '3/8', '5/8', '7/8', '9/8', '11/8', '13/8', '15/8']
+(2,6,8,9,11,14,15)       clear measure on (0,2] = 29/240   isolated clear points found: 24
+(2,3,5,7,8,13,16)        clear measure on (0,2] = 41/280   isolated clear points found: 24
+28-move {49,205,...}     clear measure on (0,2] = 51907461343/196705850880   isolated clear points found: 1232

@@ -1,0 +1,13 @@
+global setter lap sequence: [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 2, 3, 4, 3, 4, 3, 5, 4, 3, 4, 6, 4, 5, 1, 6, 5, 8, 6]
+
+per-runner setting laps (Certificate.laps_strictly_increase says these must strictly increase):
+  d=  49  u=d/m= 1.00  laps=[1]  strictly increasing: True
+  d= 205  u=d/m= 4.18  laps=[1, 2, 3, 5]  strictly increasing: True
+  d= 234  u=d/m= 4.78  laps=[1, 2, 3, 4, 6]  strictly increasing: True
+  d= 256  u=d/m= 5.22  laps=[2, 3, 4, 6]  strictly increasing: True
+  d= 286  u=d/m= 5.84  laps=[1, 2, 3, 4, 5]  strictly increasing: True
+  d= 323  u=d/m= 6.59  laps=[2, 3, 4, 8]  strictly increasing: True
+  d= 366  u=d/m= 7.47  laps=[1, 2, 4, 5, 6]  strictly increasing: True
+
+all per-runner sequences strictly increasing: True
+distinct setters: 7 of 7   total moves: 28

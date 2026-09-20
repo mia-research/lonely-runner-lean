@@ -1,0 +1,5 @@
+'TwoMover.Ico_subset_allowed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TwoMover.card_allowed_two_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TwoMover.card_allowed_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TwoMover.two_mover_refuted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TwoMover.not_forall_two_mover' depends on axioms: [propext, Classical.choice, Quot.sound]

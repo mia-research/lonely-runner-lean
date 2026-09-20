@@ -1,0 +1,10 @@
+STEP 1  reduction  d*A mod 8e in [e,7e]  <=>  (d'A) mod 8c in [c,7c]
+  checked 98400 (d,e,k) triples; mismatches: 0
+
+STEP 2  the witness set at a flank IS the CRT intersection
+  checked 2800 (set,flank) pairs; mismatches: 0
+
+STEP 3  when the moduli c_d are PAIRWISE COPRIME, CRT makes the six
+        constraints independent: a witness exists iff every A_d is nonempty.
+  pairwise-coprime moduli :    59 flanks, rule 'all A_d nonempty <=> witness' correct 59/59
+  NOT pairwise coprime    :  2741 flanks, same rule correct 2634/2741  (96.1%)

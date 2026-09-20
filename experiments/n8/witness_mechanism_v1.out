@@ -1,0 +1,38 @@
+
+THE UNIQUE |S|=1 SET  ds=[2, 3, 4, 5, 6, 7, 16]
+  flank e | moduli c_d = e/gcd(d,e)                | empty A_d? | pairwise coprime | witness k
+        2 | [1, 2, 1, 2, 1, 2, 1]                  | [1]        | False            | -- none --
+        3 | [3, 1, 3, 3, 1, 3, 3]                  | none       | False            | -- none --
+        4 | [2, 4, 1, 4, 2, 4, 1]                  | none       | False            | -- none --
+        5 | [5, 5, 5, 1, 5, 5, 5]                  | none       | False            | -- none --
+        6 | [3, 2, 3, 6, 1, 6, 3]                  | none       | False            | -- none --
+        7 | [7, 7, 7, 7, 7, 1, 7]                  | none       | False            | -- none --
+       16 | [8, 16, 4, 16, 8, 16, 1]               | none       | False            | [1, 14]
+
+THE AP (extremal)  ds=[1, 2, 3, 4, 5, 6, 7]
+  flank e | moduli c_d = e/gcd(d,e)                | empty A_d? | pairwise coprime | witness k
+        1 | [1, 1, 1, 1, 1, 1, 1]                  | none       | True             | [0]
+        2 | [2, 1, 2, 1, 2, 1, 2]                  | none       | False            | -- none --
+        3 | [3, 3, 1, 3, 3, 1, 3]                  | none       | False            | [1]
+        4 | [4, 2, 4, 1, 4, 2, 4]                  | none       | False            | -- none --
+        5 | [5, 5, 5, 5, 1, 5, 5]                  | none       | False            | [3]
+        6 | [6, 3, 2, 3, 6, 1, 6]                  | none       | False            | -- none --
+        7 | [7, 7, 7, 7, 7, 7, 1]                  | none       | False            | [6]
+
+the tau-extremal set  ds=[2, 6, 8, 9, 11, 14, 15]
+  flank e | moduli c_d = e/gcd(d,e)                | empty A_d? | pairwise coprime | witness k
+        2 | [1, 1, 1, 2, 2, 1, 2]                  | none       | False            | -- none --
+        6 | [3, 1, 3, 2, 6, 3, 2]                  | none       | False            | [4]
+        8 | [4, 4, 1, 8, 8, 4, 8]                  | none       | False            | [3]
+        9 | [9, 3, 9, 1, 9, 9, 3]                  | none       | False            | -- none --
+       11 | [11, 11, 11, 11, 1, 11, 11]            | none       | False            | -- none --
+       14 | [7, 7, 7, 14, 14, 1, 14]               | none       | False            | [4, 8]
+       15 | [15, 5, 15, 5, 15, 15, 1]              | none       | False            | [6, 9]
+
+
+c_d = 1 means e | d, and then the constraint is all-or-nothing:
+  clear at EVERY opening iff 8 does not divide d/e  (the framework's integer-ratio theorem).
+  So a flank e that divides another disparity d with 8 | d/e is DEAD at every opening.
+
+Check that this is what kills the small flanks of the |S|=1 set:
+  flank  2: killed outright by d=[16] (ratio [8], divisible by 8)

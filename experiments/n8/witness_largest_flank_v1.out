@@ -1,0 +1,28 @@
+exhaustive primitive 7-subsets of [1,30]: 2029245
+largest flank FAILS to host a witness: 2998 (0.1477%)
+best rank needed when it fails: {2: 2965, 3: 33}
+   (1, 2, 3, 4, 5, 7, 8)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 10)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 12)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 14)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 16)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 20)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 22)  needs rank 2
+   (1, 2, 3, 4, 5, 7, 26)  needs rank 2
+   (1, 2, 3, 4, 7, 10, 14)  needs rank 2
+   (1, 2, 3, 4, 7, 10, 20)  needs rank 2
+   (1, 2, 3, 4, 7, 15, 20)  needs rank 2
+   (1, 2, 3, 5, 6, 7, 10)  needs rank 2
+   (1, 2, 3, 5, 6, 7, 14)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 9)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 10)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 12)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 14)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 15)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 16)  needs rank 2
+   (1, 2, 3, 5, 7, 8, 20)  needs rank 2
+   (1, 2, 3, 5, 7, 9, 10)  needs rank 2
+   (1, 2, 3, 5, 7, 9, 14)  needs rank 2
+   (1, 2, 3, 5, 7, 10, 14)  needs rank 3
+   (1, 2, 3, 5, 7, 11, 14)  needs rank 2
+   (1, 2, 3, 5, 7, 12, 14)  needs rank 2

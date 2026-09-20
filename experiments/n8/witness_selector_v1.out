@@ -1,0 +1,25 @@
+CLAIM: for d < e,  c_d = e/gcd(d,e) = m  <=>  d is j*e/m with gcd(j,m)=1.
+In particular  min c_d = 2  <=>  e/2 is itself a disparity.
+
+  checked all (d,e) with d<e<60: mismatches for the m=2 case: 0
+
+SELECTOR TEST on exhaustive primitive 7-subsets of [1,30]
+Candidate: choose the flank that MAXIMISES min_d c_d (least harmonised), tie-break largest.
+
+  sets: 2029245
+  flank = d_max                :  2998 failures  (0.1477%)
+  flank = argmax min c_d       : 16508 failures  (0.8135%)
+  improvement factor           : 0.2x
+     still fails: (1, 2, 3, 4, 5, 7, 22)  selected flank 22 (min c_d = 11)
+     still fails: (1, 2, 3, 4, 5, 7, 26)  selected flank 26 (min c_d = 13)
+     still fails: (1, 2, 3, 4, 5, 8, 10)  selected flank 3 (min c_d = 3)
+     still fails: (1, 2, 3, 4, 5, 8, 12)  selected flank 5 (min c_d = 5)
+     still fails: (1, 2, 3, 4, 5, 12, 16)  selected flank 5 (min c_d = 5)
+     still fails: (1, 2, 3, 4, 5, 12, 24)  selected flank 5 (min c_d = 5)
+     still fails: (1, 2, 3, 4, 5, 17, 24)  selected flank 17 (min c_d = 17)
+     still fails: (1, 2, 3, 4, 7, 8, 12)  selected flank 7 (min c_d = 7)
+     still fails: (1, 2, 3, 4, 7, 8, 14)  selected flank 3 (min c_d = 3)
+     still fails: (1, 2, 3, 4, 7, 12, 16)  selected flank 7 (min c_d = 7)
+
+  and the two combined (try argmax-min-c_d, else d_max, else next largest):
+  neither works: 186 (0.0092%)
