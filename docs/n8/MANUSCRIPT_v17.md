@@ -10,15 +10,19 @@ equivalence the cascade arrives, at every arrangement and every runner. Grading 
 conflated the statement's truth with whether an analytic derivation of it has been written down
 here; those are different, and §6.7 now says so and measures only the second.
 
-**Seven sites.** §6.7's `[OPEN; not stated in either artefact]` → `[PROVED — via the Localisation
+**Nine sites.** §6.7's `[OPEN; not stated in either artefact]` → `[PROVED — via the Localisation
 equivalence]` plus a paragraph stating the equivalence and the distinction (1); the abstract's
 third outcome (2); §1.3's "states what remains (Existence)" (3); §9's outcome entry (4); the joint
 paragraph in §6.7 (5); the termination row in **Appendix C**'s objection register (6); and §11's
 "none of it moves Existence" (7). **Two further sites, added after the first loss report:** §7's reading of the
 `Cascade` gate's closing line, which is a verdict on that artefact and not on Existence (8); and §6.9's "Open at flanks",
 an open item carried by a bolded word and no tag, which is Existence read at flanks and closes with it — its residual, that
-the derivation at a general flank is not written down here, is stated in its place (9). Three bookkeeping lines follow the
-grade: Appendix B.2's count of
+the derivation at a general flank is not written down here, is stated in its place (9). **Four further sentences, each a
+present-tense contradiction of the new grade, edited with it:** §11.3's closing "nothing here closes Existence"; Appendix
+C's "The obligation is Existence (§6.7), open"; §9's counterfactual "If Existence held for every runner, the conjecture at
+eight runners would follow", which the equivalence makes a statement about one object, not two; and Appendix A's title,
+now "Routes that cannot supply the derivation", with a note fixing what "close" means there. Three bookkeeping lines
+follow: Appendix B.2's count of
 live `[OPEN]` items (five → four), Appendix B.5's "the `[OPEN]` is unchanged" row, and §10's module
 inventory, which now names `LRC/Spec/Doors.lean` and its axiom witness — the module the closure
 rests on was previously absent from the inventory, though, like `Target.lean`, it sits outside both
@@ -907,9 +911,10 @@ Grading the statement `[OPEN]`, as earlier versions did, conflated the statement
 whether an analytic derivation of it has been written down inside this framework. Those are different things, and only the
 second is a matter of what §6.7 and what follows supply.
 
-**One term, fixed here for the whole manuscript.** **"The obligation", "what remains", "what is owed" and "no bound is
-supplied" refer to the derivation, not the statement**, wherever they appear below — §6.7's remainder, §11, §11.1,
-Appendix A and Appendix C all use them in that sense.
+**One term, fixed here for the whole manuscript.** **"The obligation", "what remains", "what is owed", "no bound is
+supplied" and "no bound is established" refer to the derivation, not the statement**, wherever they appear below —
+§6.7's remainder, §11, §11.1, Appendix A and Appendix C all use them in that sense, as does §11.1's "not progress toward
+a proof".
 
 What the rest of this section does is measure the derivation: **how much of it the rules written down already reach**, in
 the form §3 asks for.
@@ -2114,7 +2119,7 @@ jumps to ≈ 4.98 — but that family stays in band 0 throughout. **Regular spac
 
 So a counterexample would have to beat the AP at covering *while* being irregular enough to push `R`
 past 15 — two objectives that pull apart. That is a description of the obstruction, not a proof of
-it, and nothing in §12 supplies the derivation; Existence itself is closed in §6.7, by the equivalence.
+it, and nothing here supplies the derivation; Existence itself is closed in §6.7, by the equivalence.
 
 ---
 
