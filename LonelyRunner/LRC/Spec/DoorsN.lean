@@ -718,4 +718,56 @@ theorem doorThreeLargest_of_doorLargestFlank {v : Fin n → ℝ} (hv : Function.
     exact not_lt.mpr (hmax i' hi')
   rw [this]; simp
 
+/-! ### door 5 at rank two — the `n = 6` candidate
+
+`DoorLargestFlank` (rank 1) is `[REFUTED]` at `n = 6, 7, 8` and has no counterexample at
+`n = 5`.  The rank-2 form sits between it and `DoorThreeLargest`, and is the candidate at
+`n = 6`: exhaustively, the best flank rank is 2 at `n = 6` and 3 at `n = 8`, so the number in
+door 5 is order-dependent even though the `Prop` is not.  Stated generically; nothing here is
+claimed proved at any order. -/
+
+open Classical in
+/-- **Door 5 at rank two.**  The lonely opening sits at a disparity with at most one disparity
+above it — one of the subject's two largest. -/
+def DoorTwoLargest (v : Fin n → ℝ) (k : Fin n) : Prop :=
+  ∃ i : Fin n, i ≠ k ∧
+    ((diffSet v k).filter (fun d => |v i - v k| < d)).card ≤ 1 ∧
+    ∃ j : ℕ, LonelyAt v k (flankOpening n |v i - v k| j)
+
+open Classical in
+/-- **Rank two is a special case of rank three**, so it feeds the proved chain. -/
+theorem doorThreeLargest_of_doorTwoLargest {v : Fin n → ℝ} {k : Fin n}
+    (h : DoorTwoLargest v k) : DoorThreeLargest v k := by
+  obtain ⟨i, hi, hcard, j, hj⟩ := h
+  exact ⟨i, hi, le_trans hcard (by norm_num), j, hj⟩
+
+open Classical in
+/-- **And rank one is a special case of rank two.**  `DoorLargestFlank → DoorTwoLargest →
+DoorThreeLargest → LonelyForSubject`: the whole ladder, so a result at any rung transfers down. -/
+theorem doorTwoLargest_of_doorLargestFlank {v : Fin n → ℝ} (hv : Function.Injective v)
+    {k : Fin n} (h : DoorLargestFlank v k) : DoorTwoLargest v k := by
+  classical
+  obtain ⟨i, hi, hmax, j, hj⟩ := h
+  refine ⟨i, hi, ?_, j, hj⟩
+  have he : ((diffSet v k).filter (fun d => |v i - v k| < d)) = ∅ := by
+    rw [Finset.filter_eq_empty_iff]
+    intro d hd
+    obtain ⟨i', hi', rfl⟩ := mem_diffSet.mp hd
+    exact not_lt.mpr (hmax i' hi')
+  rw [he]; simp
+
+open Classical in
+/-- **The rank-two door closes the conjecture at its order.** -/
+theorem lonelyForSubject_of_twoLargest {v : Fin n → ℝ} (hv : Function.Injective v) (k : Fin n)
+    (h : DoorTwoLargest v k) : LonelyForSubject v k :=
+  lonelyForSubject_of_threeLargest hv k (doorThreeLargest_of_doorTwoLargest h)
+
+open Classical in
+theorem lonelyRunnerAtN_of_doorTwoLargest
+    (h : ∀ v : Fin n → ℝ, Function.Injective v → ∀ k : Fin n, DoorTwoLargest v k) :
+    LonelyRunnerAtN n := by
+  intro v hv k
+  obtain ⟨t, ht, hl⟩ := lonelyForSubject_of_twoLargest hv k (h v hv k)
+  exact ⟨t, ht, fun i hi => hl i hi⟩
+
 end LRC.SpecN
