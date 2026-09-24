@@ -1,0 +1,5 @@
+n=4 H=40: lone-flank failures=226; x<n: 104; largest works 226; some multiple works 226; smallest multiple works 214; no multiple works: []
+n=5 H=50: lone-flank failures=650; x<n: 379; largest works 650; some multiple works 650; smallest multiple works 557; no multiple works: []
+n=6 H=48: lone-flank failures=699; x<n: 284; largest works 692; some multiple works 699; smallest multiple works 536; no multiple works: []
+n=7 H=56: lone-flank failures=502; x<n: 282; largest works 502; some multiple works 502; smallest multiple works 316; no multiple works: []
+n=8 H=64: lone-flank failures=472; x<n: 173; largest works 447; some multiple works 472; smallest multiple works 212; no multiple works: []

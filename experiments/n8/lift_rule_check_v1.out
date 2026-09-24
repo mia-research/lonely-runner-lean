@@ -1,0 +1,8 @@
+n=3: (A) exact-condition mismatches 0; (B) count<n cases 60152, lift fails 0; (C) M=c-1 cases 60152, lift fails 0
+n=4: (A) exact-condition mismatches 0; (B) count<n cases 46025, lift fails 0; (C) M=c-1 cases 46025, lift fails 0
+n=5: (A) exact-condition mismatches 0; (B) count<n cases 60919, lift fails 0; (C) M=c-1 cases 42555, lift fails 0
+n=6: (A) exact-condition mismatches 0; (B) count<n cases 59766, lift fails 0; (C) M=c-1 cases 39661, lift fails 0
+n=7: (A) exact-condition mismatches 0; (B) count<n cases 74520, lift fails 0; (C) M=c-1 cases 39075, lift fails 0
+n=8: (A) exact-condition mismatches 0; (B) count<n cases 72009, lift fails 0; (C) M=c-1 cases 38783, lift fails 0
+n=9: (A) exact-condition mismatches 0; (B) count<n cases 82558, lift fails 0; (C) M=c-1 cases 38248, lift fails 0
+n=10: (A) exact-condition mismatches 0; (B) count<n cases 86474, lift fails 0; (C) M=c-1 cases 37941, lift fails 0

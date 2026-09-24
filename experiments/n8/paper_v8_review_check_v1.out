@@ -1,0 +1,34 @@
+========================================================================
+CHECK 1  Section 11: 'M >= c-1 closed -- R5, flank the lone non-multiple'
+population: all (n-1)-subsets of [1,H] with exactly one disparity not divisible by n
+  n=4 H=40: sets=1350  lone-non-multiple flank fails=226  no flank at all=0  first failure=(1, 4, 8)
+  n=5 H=50: sets=4800  lone-non-multiple flank fails=650  no flank at all=0  first failure=(1, 5, 10, 15)
+  n=6 H=48: sets=2800  lone-non-multiple flank fails=699  no flank at all=0  first failure=(1, 6, 12, 18, 24)
+  n=7 H=56: sets=2688  lone-non-multiple flank fails=502  no flank at all=0  first failure=(1, 7, 14, 21, 28, 35)
+  n=8 H=64: sets=1568  lone-non-multiple flank fails=472  no flank at all=0  first failure=(1, 8, 16, 24, 32, 40, 48)
+  worked: n=4, {1,4,8}: flank 1 -> None ; any flank -> (4, 1)
+========================================================================
+CHECK 2  R4 at composite n: flank e largest, n|e, no other d divisible by n,
+         #(non-flank d coprime to n) < phi(n)  ==>  flank e works at a = k e + 1, k a unit
+  n=4 phi=2 H=40: hypothesis holds on 935, failures 0;  control (#coprime >= phi): 715, flank e fails on 0
+  n=6 phi=2 H=36: hypothesis holds on 21749, failures 0;  control (#coprime >= phi): 24731, flank e fails on 14
+  n=8 phi=4 H=32: hypothesis holds on 226181, failures 0;  control (#coprime >= phi): 207833, flank e fails on 118
+  n=9 phi=6 H=27: hypothesis holds on 209854, failures 0;  control (#coprime >= phi): 147698, flank e fails on 103
+  n=10 phi=4 H=30: hypothesis holds on 1095646, failures 0;  control (#coprime >= phi): 1168196, flank e fails on 7305
+========================================================================
+CHECK 3  Theorem 11(c) converse: 'a run of such zones ending at a lonely instant ... is this run'
+  cascade steps: [Fraction(1, 8), Fraction(9, 64)]
+  bound 1/8  in zone(16)? True  in zone(8)? True
+  end of zone(16) = 17/128  inside zone(8)? True
+  run A = [zone(8)] ends 9/64 ; run B = [zone(16), zone(8)] ends 9/64 ; lonely there? True
+========================================================================
+CHECK 4  Section 2.1 'every candidate instant this paper constructs is an endpoint'
+  R6 instant t=1/6 lonely? True ; is it an opening of any flank? no
+  cascade halts at 9/56 ; certificate (7,1) works? True
+========================================================================
+CHECK 5  Section 12 {1,2,3,5} at n=5: flank 5 is not coprime to 5
+  flank 5, j=1: readings [6, 12, 18, 5] band [5,20]  ok=True  gcd(e,n)=5
+  flank 3, j=2: readings [11, 7, 3, 10] band [3,12]  ok=True  gcd(e,n)=1
+========================================================================
+CHECK 6  Section 4 scale: reading s*u with u = d_min t; Theorem 8 at u = 1/n
+  s=7, u=1/n: s*u = 7/8; its distance from Z = 1/8 (>= 1/n: True); distance of s*u from nZ = 7/8 (>= 1: False)
