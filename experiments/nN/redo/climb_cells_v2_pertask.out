@@ -1,0 +1,56 @@
+main: roots expanded, cells 28, early 7, terms 0; tasks 126
+DIFF task 48771c4e9e1432aa235d: v1 cells 180 early 97 terms 0 | v2 cells 167 early 90 terms 0
+DIFF task 74b6a2ec1f048fe40f24: v1 cells 250 early 107 terms 0 | v2 cells 25 early 15 terms 0
+DIFF task 81804b17d8ec106b6a2f: v1 cells 47 early 23 terms 0 | v2 cells 19 early 12 terms 0
+DIFF task e80a7a60f8e1e22a2800: v1 cells 49 early 28 terms 0 | v2 cells 14 early 9 terms 0
+DIFF task b7428972bba0ee103893: v1 cells 635 early 292 terms 0 | v2 cells 15 early 9 terms 0
+DIFF task 9d0fb0278f7415e0f576: v1 cells 1488 early 688 terms 0 | v2 cells 23 early 14 terms 0
+DIFF task 9d0fb0278f7415e0f576: v1 cells 1198 early 552 terms 0 | v2 cells 23 early 14 terms 0
+DIFF task e80a7a60f8e1e22a2800: v1 cells 45 early 25 terms 0 | v2 cells 14 early 9 terms 0
+DIFF task b7428972bba0ee103893: v1 cells 606 early 278 terms 0 | v2 cells 15 early 9 terms 0
+DIFF task d2e4b8e3b42830ab84fc: v1 cells 211 early 112 terms 0 | v2 cells 4318 early 1948 terms 0
+DIFF task b7428972bba0ee103893: v1 cells 57 early 28 terms 0 | v2 cells 15 early 9 terms 0
+DIFF task 66dd03ea67d49f4c4a02: v1 cells 2050 early 912 terms 0 | v2 cells 5143 early 2306 terms 2
+DIFF task d2e4b8e3b42830ab84fc: v1 cells 4445 early 2017 terms 1 | v2 cells 4318 early 1948 terms 0
+Process SpawnPoolWorker-5:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 131, in worker
+    put((job, i, result))
+    ~~~^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 206, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 444, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 400, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/process.py", line 320, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 136, in worker
+    put((job, i, (False, wrapped)))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/queues.py", line 397, in put
+    self._writer.send_bytes(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 206, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 444, in _send_bytes
+    self._send(header + buf)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py", line 400, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
