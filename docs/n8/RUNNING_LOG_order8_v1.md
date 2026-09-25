@@ -986,3 +986,35 @@ no information.
 
 This is the owner's two-neighbour picture at the core's level: the core's own two pinners decide
 whether the block has room at the first event.
+
+## 2026-09-25 — E28. The block rule, unified: the core's first isolation, or its first cell with room
+
+**Owner (2026-09-25).** The AP absorbs deviations of up to `1/8` either side, which is why deforming
+it works. Away from the AP, at higher speeds, runners settle onto grids: an AP with a variable scale.
+So a runner's own point is its grid slot at the scale its arrangement reads at (not its rank; E27's
+own-slot test used rank).
+
+**Statement 2b** (`redo/pinned_core_v1.out`; 98 runners whose core is pinned on both sides at its first
+isolation `τ_C = 1/(8a)`).
+- Predicted from the two pinners alone, the core's next cell starts at the behind-pinner `b`'s next
+  opening `t₁ = (8m+9)/(8b)`. True in 72/98.
+- Otherwise another core reading near its zone is in the way at `t₁` (core `[1,14,15]`: 14 is in the way
+  at `17/120`, and the next instant is its opening `17/112`).
+- In general the core's next cell is given by **the core's own cascade continued past `τ_C`**.
+- The block then makes from ~1 to thousands of turns in that cell (median about 555).
+
+**The unified rule** (`redo/block_rule_unified_v1.out`; exact; after fixing a cell-end error that
+treated a reading exactly at `7/8` as not yet in its zone):
+
+> A separated runner's isolation event is at the core's first isolation `τ_C` if the block is clear
+> there; otherwise it lies in the core's **first lonely cell of positive length** (from the core's
+> cascade).
+
+It holds for **3,107/3,107** separated runners with blocks of 3–6: 1,337 at `τ_C`, 1,770 in that cell.
+`[EMPIRICAL — arrangements, every runner]`
+
+**What proving it needs.**
+1. The core (at most five readings) has lonely cells of positive length, since it is lonely at
+   `1/(c+1) > 1/8` by lower orders (native); its cascade reaches the first one. Provable.
+2. **The block has a jointly clear instant inside the core's first positive-length cell.** This is the
+   remaining content: a fast block (min `≥ 9·max core`) in a cell set by the core's neighbours.
