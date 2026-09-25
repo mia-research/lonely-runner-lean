@@ -374,3 +374,60 @@ certifies 1,973/4,000: holding the instant fixed was what made it scale-blind.
 - The robust-window question for fast blocks of three or more.
 - Tight configurations other than the AP.
 - The owner's neighbour-speed statement.
+
+## 2026-09-25 — E13. Neighbours fix the isolation point; tight sets; windows; the block split; the cascade map
+
+**Owner (2026-09-25).**
+- The cascade's sequence of scales is the path the isolation takes: each step re-reads the
+  arrangement as an AP plus deviations at a finer scale.
+- The neighbours that fix a runner's isolation point are its two **circle** neighbours at the global
+  event (for runner 8 at `t = 1/8`: runners 1 and 7). The other five deviate from their global
+  isolation points but stay inside their sections of the circle.
+
+**Every runner of the AP, not only the end runners** `[reasoned; VERIFIED ap_neighbours_v1.out]`.
+- At `t = a/8` subject `k`'s circle neighbours are `k ± a (mod 8)`. With the other five in their
+  sections, Theorem 1 leaves two constraints linear in `t`, one per neighbour.
+- The feasible instants form an interval whose ends are the neighbours' openings. It is nonempty iff
+  one ratio of the two neighbours' speed differences lies on one side of a fixed value. The mirror
+  class `8 − a` reverses the inequality.
+- So in each pair `{1,7}` and `{3,5}` one class survives, at an opening of a neighbour.
+- Exact check: at relative deformation `≤ 1/200`, both pairs survive for all 12,000 subject-trials. At
+  `1/100`, `{3,5}` survives 12,000/12,000 and `{1,7}` 11,996. Failures begin only when a non-neighbour
+  leaves its section.
+
+**Tight configurations** (`tight_search_v1`, `v2`; exhaustive, exact, BSM boundary rule).
+- Among 1,180,572 primitive 7-subsets of `[1,28]`, every set is lonely and exactly three are tight:
+  `(1..7)`, `(1,2,3,4,5,7,12)` and `(1,4,5,6,7,11,13)`.
+- All three are lonely only at `1/8, 3/8, 5/8, 7/8`, and each class is pinned from both sides by
+  neighbours at `±1/8`. For class 1 that forces `1` and `7` in the set, which all three contain.
+- Tightness is the two-neighbour pinning, so the neighbour analysis applies at each.
+
+**Robust windows for fast blocks** (`robust_window_v1`; exact). Worst stretch with no common clear
+point, times `min F`:
+
+| block size | exhaustive max | growth along consecutive blocks `N..N+f−1`, `N = 20 → 160` |
+|---|---|---|
+| 2 | 0.49 | bounded (≤ 3/4 proved, `pair_window`) |
+| 3 | 0.72 | 0.69 → 0.74, bounded |
+| 4 | 1.12 | 1.09 → 1.23, bounded |
+| 5 | 2.02 | 2.1 → 11.2, **grows linearly** |
+| 6 | 2.12 | 3.0 → 17.2, **grows linearly** |
+
+Reason for the growth: a nearly synchronised block rotates at rate `≈ N` while its internal spread
+changes at rate `≈ f`. When the spread lays five or more runners with gaps under `1/4`, one is always
+blocked, for a time independent of `N`. **No window rule exists for fast blocks of 5 or 6 without a
+common factor.** Such a block is an AP translated by `N`, which returns it to the AP analysis.
+
+**The block split in Lean** (Spec gate PASS 1,539/1,539, `spec_gate_block_split.out`).
+`BlockSplitEightN.lonely_eight_of_block_split`: a block with common factor `g ≥ 28·max(core)`,
+order seven only. `OrderEightCasesN` §2i: `BlockSplit8`, its case, the field `no_block_split`.
+
+**The cascade map** (`cascade_map_v1`; exact).
+- Along the cascade from the bound, no runner is in the way at more than 4 steps (1,436 rule-miss
+  sets) or 3 (1,500 random sets); paths are at most 11 steps.
+- The runner that sets each move is the subject's nearest runner on that side of the circle in
+  2,345/2,533 moves (93%), and 1,236/1,404 (88%) on random sets.
+- Theorem 13(5) makes finiteness of these per-runner counts equivalent to the event existing, so the
+  map is the per-runner form of the obligation. A **bound** on the counts would be a cap-shaped
+  statement; the analogous move-count shape is false at order five (`MANUSCRIPT_v20` §16B), so none
+  is claimed.
