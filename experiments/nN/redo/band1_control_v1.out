@@ -1,0 +1,4 @@
+late climbs inside their own word polytope, strictly: 38; failures 0; skipped (tied readings) 0
+distinct words among them: 24; lengths [15, 16, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 23]
+band-1 event cells recorded: 4331 distinct words
+real late climbs (readings <= 9) whose full cascade word is a band-1 event cell: 38; missing 0
