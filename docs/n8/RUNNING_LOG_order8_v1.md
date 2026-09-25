@@ -1087,3 +1087,35 @@ have a gap follows from the Base and the Steps. Scale-free runners (`m = 0`) are
      spread, on the time scale `1/E` (E29).
 
 These are the two lemmas of E29, now as the one step repeated down the levels.
+
+## 2026-09-25 — E31. The owner's hunch on narrow cells confirmed; the non-synchronised step level by level
+
+**Owner's hunch: the narrow cells are a ratio of speed differences against the AP ideal.**
+`[identity + VERIFIED on all 8, redo/narrow_cells_v1.out]`
+- A cell starting at scale `D` (`t = 1/(8D)`) has width `min_c (8m+7 − c/D)/(8c)`: it ends when the
+  reading whose ratio `c/D` sits just short of an AP value `8m+7` (the AP's `7/8` slot) enters its zone.
+- Each of the 8 narrow cells of E30 is ended that way, with shortfalls 0.004–0.09 of a slot:
+  `956/1.9958 = 478.996` vs 479; `12063/807 = 14.948` vs 15; `2398/0.9996 = 2398.993` vs 2399.
+
+**The non-synchronised step, per level size** (`redo/room_vs_kappa_v1.out`; exact interval merge).
+- A fast level of `f` readings sits above `u = 7 − f` slower ones.
+- **Room:** the lower orders guarantee a slower-level cell of `ROOM(f) = 18(1/(u+1) − 1/8)` turns of the
+  level's slowest reading.
+- **κ:** the longest the level (no consecutive pair within relative `1/9`, max/min `< 9`) can stay
+  blocked from any start, in the same units. κ is scale-invariant.
+
+| `f` | ROOM | κ, exhaustive (small readings) | κ, sampled (mildly synchronised) | status |
+|---|---|---|---|---|
+| 1 | 0.32 | 0.25 (one zone) | — | **proved: R8** |
+| 2 | 0.75 | 0.75 (`pair_window`) | — | **proved** |
+| 3 | 1.35 | 0.685 | 0.745 | margin ×1.8 `[EMPIRICAL]` |
+| 4 | 2.25 | 1.054 | 1.172 | margin ×1.9 `[EMPIRICAL]` |
+| 5 | 3.75 | 1.470 | 1.744 | margin ×2.2 `[EMPIRICAL]` |
+| 6 | 6.75 | 2.763 | 2.273 | margin ×2.4 `[EMPIRICAL]` |
+
+- The "tight case" of E30 (six slower readings) has room for exactly one fast reading, which **R8
+  already proves**.
+- **Route to a proof** for `f = 3..6`: κ depends only on ratio shape, a bounded region (consecutive
+  ratios in `[10/9, 9)`), and κ sits about half its room. That margin makes a finite, certified check
+  over the ratio region practical: a covering argument (admissible, E11).
+- Synchronised levels are carried by `sync_block` (the common phase is free).
