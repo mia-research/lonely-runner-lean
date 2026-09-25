@@ -1,0 +1,7 @@
+3107 separated runners (block 3-6): {'event in the first positive-length core cell': 1770, 'event at tau_C (block clear there)': 1337}
+block WITH a nearly synchronised sub-cluster: 1720 runners
+   turns available: min 0.33, median 150.8;  turns needed: median 0.153, 99% 0.693, max 143.958;  least margin 0.204
+   tightest: core [8, 54], block [946, 947, 954, 1138, 1139]: available 0.547, needed 0.344
+block without a nearly synchronised sub-cluster: 50 runners
+   turns available: min 0.73, median 10.4;  turns needed: median 0.073, 99% 0.368, max 0.375;  least margin 0.544
+   tightest: core [4771, 31245], block [401850, 456603, 529997, 648914, 805805]: available 0.725, needed 0.181

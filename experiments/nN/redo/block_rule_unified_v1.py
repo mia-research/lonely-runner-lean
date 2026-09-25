@@ -18,24 +18,25 @@ def first_positive_cell(core, tC):
         e = cell_end(core, s)
         if e > s: return s, e
         s = cascade_from(core, s + F(1, 10**15))
-rnd = random.Random(55); SA.rnd = rnd
-tab = Counter(); bad = []
-for name in ("uniform", "clustered", "slow-plus-fast"):
-    for _ in range(300):
-        V = sorted(set(SA.family(name)))
-        if len(V) < 8: continue
-        for k in range(8):
-            ds = readings(V, k)
-            rs = [(F(ds[i + 1], ds[i]), i) for i in range(len(ds) - 1)]; r, i = max(rs)
-            if r < 9: continue
-            core, block = ds[:i + 1], ds[i + 1:]
-            if len(block) < 3: continue
-            tC, _ = cascade_cap(core); t, _ = cascade_cap(ds)
-            s, e = first_positive_cell(core, tC)
-            if t == tC: tab['event at tau_C (block clear there)'] += 1
-            elif s <= t <= e: tab['event in the first positive-length core cell'] += 1
-            else:
-                tab['NEITHER'] += 1
-                if len(bad) < 5: bad.append((core, block, str(tC), str(s), str(e), float(t)))
-print(f"{sum(tab.values())} separated runners (block 3-6): {dict(tab)}")
-for b in bad: print(f"   neither: core {b[0]}, block {b[1]}: tau_C {b[2]}, first positive cell [{b[3]}, {b[4]}], event {b[5]:.7f}")
+if __name__ == '__main__':
+    rnd = random.Random(55); SA.rnd = rnd
+    tab = Counter(); bad = []
+    for name in ("uniform", "clustered", "slow-plus-fast"):
+        for _ in range(300):
+            V = sorted(set(SA.family(name)))
+            if len(V) < 8: continue
+            for k in range(8):
+                ds = readings(V, k)
+                rs = [(F(ds[i + 1], ds[i]), i) for i in range(len(ds) - 1)]; r, i = max(rs)
+                if r < 9: continue
+                core, block = ds[:i + 1], ds[i + 1:]
+                if len(block) < 3: continue
+                tC, _ = cascade_cap(core); t, _ = cascade_cap(ds)
+                s, e = first_positive_cell(core, tC)
+                if t == tC: tab['event at tau_C (block clear there)'] += 1
+                elif s <= t <= e: tab['event in the first positive-length core cell'] += 1
+                else:
+                    tab['NEITHER'] += 1
+                    if len(bad) < 5: bad.append((core, block, str(tC), str(s), str(e), float(t)))
+    print(f"{sum(tab.values())} separated runners (block 3-6): {dict(tab)}")
+    for b in bad: print(f"   neither: core {b[0]}, block {b[1]}: tau_C {b[2]}, first positive cell [{b[3]}, {b[4]}], event {b[5]:.7f}")

@@ -1,0 +1,5 @@
+core [1], clusters [[165199, 166021, 168160, 169369, 171435, 174121]]: needed 0.00004 (= 7.0 block turns), cell 0.75000; widest cluster spread E = 8922: needed x E = 0.378, cell x max(core) = 0.750
+core [1], clusters [[165198, 166020, 168159, 169368, 171434, 174120]]: needed 0.00004 (= 7.1 block turns), cell 0.75000; widest cluster spread E = 8922: needed x E = 0.385, cell x max(core) = 0.750
+core [3], clusters [[99961, 99974, 99990, 99992, 100003, 100007]]: needed 0.00144 (= 143.8 block turns), cell 0.25000; widest cluster spread E = 46: needed x E = 0.066, cell x max(core) = 0.750
+core [3], clusters [[99958, 99971, 99987, 99989, 100000, 100004]]: needed 0.00144 (= 144.0 block turns), cell 0.25000; widest cluster spread E = 46: needed x E = 0.066, cell x max(core) = 0.750
+4 runners need > 2 block turns; needed time x (widest cluster spread E): min 0.066, max 0.385
