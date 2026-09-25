@@ -1,0 +1,2 @@
+Part 1: R(C, e) for f=5 (core 2) and f=6 (core 1), speeds in [1,12]: 42174 cases, fails 0 []  (9s)
+Part 2: full sets C u {10^6 + e_i}: the constructed instant is lonely (exact) in 300/300
