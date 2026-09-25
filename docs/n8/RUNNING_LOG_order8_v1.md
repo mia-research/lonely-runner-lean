@@ -744,3 +744,36 @@ The distributions of tiers and cascade moves do not depend on divisibility by 7 
 7" was an artefact of the pinned frame.** The only long cascades (191 and 688 moves) are slow runners
 whose fast cluster is itself an AP (gaps 11 and 13). The cascade walks through the cluster's AP and
 lands where its spread leaves a gap.
+
+## 2026-09-25 — E22. Redo items 1–2: isolated runners and the AP, on arrangements
+
+**Redo 1b: runners lonely only at isolated instants** (supersedes `tight_search_v1/v2`;
+`redo/isolated_runners_v1_B20.out`, `_B24.out`; exhaustive, exact, BSM boundary rule).
+- Every arrangement of 8 distinct speeds in `[1,24]` with gcd of differences 1, **every runner**:
+  734,478 arrangements, **5,875,824 runners, every one lonely**.
+- 2,690 runners are lonely only at isolated instants, always at `1/8, 3/8, 5/8, 7/8`. Their readings
+  form exactly three sets: `{1..7}` (1,534 runners), `{1,2,3,4,5,7,12}` (830) and
+  `{1,4,5,6,7,11,13}` (326).
+- At `1/8` each is pinned by the runners at distance 1 (ahead) and 7 (behind); the cascade isolates
+  it in 0 moves, AP tier.
+- **The arrangements are mostly not APs.** Readings `{1..7}` arise wherever the other seven sit at
+  `k ± i` with any choice of sides. The runner reads its own AP; the arrangement need not be one.
+
+**Redo 1c: persistence under deformation of the arrangement** (supersedes `ap_local_v1`,
+`tight_local_v1`; `redo/isolated_persistence_v1.out`; exact).
+- 150 arrangements from `[1,24]` containing isolated runners, **every speed** deformed by `|r| ≤ ρ`,
+  every runner's event read with the cascade map.
+- **All runners reach their event at every radius**: isolated runners 1,216/1,216, the others
+  8,384/8,384.
+- At `ρ = 1/400`, 1,123 of the isolated runners' events sit within `1/64` of a class instant
+  (classes 1, 3, 5).
+
+**Redo 2: the AP arrangement `(1..8)` deformed** (`redo/ap_arrangement_v1.out`; exact; extends
+`ap_neighbours_v1`, which already stood).
+- Every runner reaches its event, 2,000/2,000 at every `ρ` from `1/10` to `1/200`.
+- **The owner's neighbour rule holds exactly at `ρ ≤ 1/50`**: every event near a class instant is
+  pinned by one of that runner's two circle neighbours at the global event (1,830/1,830 at `1/50`,
+  1,954/1,954 at `1/100`, 1,987/1,987 at `1/200`).
+- At larger deformations a non-neighbour sometimes enters the sector and pins the event instead
+  (1,298/1,319 at `1/20`, 835/894 at `1/10`), and more events move off the class instants: the cascade
+  moving the isolation to another scale.
