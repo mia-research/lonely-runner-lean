@@ -1,0 +1,6 @@
+20000 random small deformations of 1..7: predicted surviving instants match exactly in 20000; all four lost in 302
+all four lost -- first isolation near j/8 (j, cascade moves): [((1, 0), 103), ((3, 6), 44), ((5, 11), 53)]
+   e.g. T = 0.12498550168180492 moves 0
+   e.g. T = 0.6250268761556746 moves 11
+   e.g. T = 0.12493840536615448 moves 0
+   e.g. T = 0.1248811131802524 moves 0

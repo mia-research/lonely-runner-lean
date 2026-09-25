@@ -1,0 +1,5 @@
+hard sets, largest 41..60 (1436): rounding possible (Q >= 28 d_6) 0; mirror with d_max at 1/8: 1436 (misses []); at 1/7: 1436 (misses [])
+non-hard residual sets of [1,60] (2000): rounding possible (Q >= 28 d_6) 0; mirror with d_max at 1/8: 2000 (misses []); at 1/7: 2000 (misses [])
+hard sets at 1/7, Q = e + d_max +0: some lonely point 1436 of 1436; mean share of lattice points lonely 12.92%
+hard sets at 1/7, Q = e + d_max -1: some lonely point 1436 of 1436; mean share of lattice points lonely 9.47%
+hard sets at 1/7, Q = e + d_max +1: some lonely point 1436 of 1436; mean share of lattice points lonely 8.89%

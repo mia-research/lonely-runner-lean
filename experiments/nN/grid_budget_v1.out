@@ -1,0 +1,19 @@
+[1,40]: 28 hard sets
+   units, R = 0: exact 0, budget closes 0; best blocked/grid ratio [(1.0, 25), (1.2, 2), (1.3, 1)]
+   units, R = 1: exact 25, budget closes 21; best blocked/grid ratio [(0.0, 17), (0.5, 3), (0.8, 1), (1.0, 7)]
+   units, R = 2: exact 27, budget closes 22; best blocked/grid ratio [(0.0, 11), (0.5, 7), (0.7, 1), (0.8, 3), (1.0, 6)]
+   units, R = 3: exact 27, budget closes 19; best blocked/grid ratio [(0.0, 7), (0.5, 9), (0.7, 2), (0.8, 1), (1.0, 9)]
+   all i, R = 0: exact 8, budget closes 4; best blocked/grid ratio [(0.5, 2), (0.7, 2), (1.0, 12), (1.1, 1), (1.2, 5), (1.3, 3)]
+   all i, R = 1: exact 26, budget closes 21; best blocked/grid ratio [(0.0, 7), (0.5, 11), (0.7, 3), (1.0, 6), (1.2, 1)]
+   all i, R = 2: exact 28, budget closes 25; best blocked/grid ratio [(0.0, 8), (0.5, 10), (0.7, 3), (0.8, 4), (1.0, 2), (1.2, 1)]
+   all i, R = 3: exact 28, budget closes 25; best blocked/grid ratio [(0.0, 5), (0.2, 3), (0.3, 2), (0.5, 9), (0.8, 6), (1.0, 2)]
+largest 41..60: 1436 hard sets
+   units, R = 0: exact 0, budget closes 0; best blocked/grid ratio [(1.0, 1354), (1.2, 56), (1.3, 9), (1.5, 17)]
+   units, R = 1: exact 1413, budget closes 1143; best blocked/grid ratio [(0.0, 825), (0.5, 241), (0.7, 3), (0.8, 73), (0.9, 1), (1.0, 288)]
+   units, R = 2: exact 1432, budget closes 1240; best blocked/grid ratio [(0.0, 742), (0.2, 20), (0.5, 378), (0.6, 3), (0.7, 8), (0.8, 84)]
+   units, R = 3: exact 1433, budget closes 1166; best blocked/grid ratio [(0.0, 450), (0.2, 19), (0.3, 86), (0.5, 353), (0.6, 3), (0.7, 114)]
+   all i, R = 0: exact 264, budget closes 84; best blocked/grid ratio [(0.5, 72), (0.7, 10), (0.8, 2), (1.0, 546), (1.1, 34), (1.2, 344)]
+   all i, R = 1: exact 1426, budget closes 1025; best blocked/grid ratio [(0.0, 232), (0.2, 5), (0.3, 83), (0.4, 7), (0.5, 481), (0.6, 13)]
+   all i, R = 2: exact 1436, budget closes 1182; best blocked/grid ratio [(0.0, 270), (0.2, 109), (0.3, 65), (0.4, 7), (0.5, 448), (0.6, 9)]
+   all i, R = 3: exact 1436, budget closes 1193; best blocked/grid ratio [(0.0, 175), (0.2, 109), (0.3, 66), (0.4, 12), (0.5, 376), (0.6, 16)]
+total 71s

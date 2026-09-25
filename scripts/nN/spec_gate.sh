@@ -142,7 +142,9 @@ AX=LonelyRunner/_SpecGateAxCheck.lean
   for m in $MODS; do echo "import $m"; done
   awk '{print "#print axioms " $2}' /tmp/spec_gate_decls.txt
 } > "$AX"
-AXOUT=$(lake env lean "$AX" 2>&1)
+# Lean wraps a long `depends on axioms: [...]` list over several lines (a long declaration name
+# pushes it past the width); rejoin continuation lines, which start with a space, before matching.
+AXOUT=$(lake env lean "$AX" 2>&1 | awk 'NR>1 && /^ / {printf "%s", $0; next} NR>1 {print ""} {printf "%s", $0} END {print ""}')
 rm -f "$AX"
 ALLOWED='depends on axioms: \[(propext)?(, )?(Classical\.choice)?(, )?(Quot\.sound)?\]$'
 NCLEAN=$(echo "$AXOUT" | grep -cE "$ALLOWED")
@@ -190,6 +192,20 @@ LRC.FlankFinite.FourClears:OWED       LRC.Resonance.CoprimeLargestFlank:OWED
 LRC.OrderFive.RCapped:OWED            LRC.OrderFive.WindowConstantFive:OWED
 LRC.RationalN.ratWorks:ROUTE          LRC.OrderFive.BandFits:ROUTE
 LRC.Resonance.Resonant:ROUTE          LRC.Resonance.GoodK:ROUTE
+LRC.OrderSevenN.avoids06:ROUTE        LRC.OrderSevenN.fitsWindow5:ROUTE
+LRC.OrderSevenN.fits4:ROUTE           LRC.OrderSevenN.fits3:ROUTE
+LRC.OrderSevenN.fits2:ROUTE           LRC.OrderSevenN.intervalAvoids:ROUTE
+LRC.OrderSevenN.fitsInterval:ROUTE    LRC.OrderSevenN.AheadArc:ROUTE
+LRC.OrderSixN.MeetsBox:ROUTE          LRC.OrderSixN.IsMinimalStep:ROUTE
+LRC.OrderSixN.OnOrbit:ROUTE           LRC.OrderSixN.OrbitMeets:ROUTE
+LRC.OrderSixN.MinimalOnOrbit:ROUTE    LRC.OrderSixN.Lonely6:ROUTE
+LRC.OrderSixN.FreeFlank:ROUTE         LRC.OrderFiveN.Parallel:ROUTE
+LRC.Stepping.NoRelation:ROUTE
+LRC.OrderSixN.OneOf:ROUTE             LRC.OrderSixN.S7.IsBHKLift:ROUTE
+LRC.OrderSevenN.InsideCone:ROUTE
+LRC.OrderEightN.FreeFlank8:ROUTE      LRC.OrderEightN.ShiftedApplies8:ROUTE
+LRC.OrderEightN.RationalOpening8:ROUTE LRC.OrderEightN.ClassClear8:ROUTE
+LRC.OrderSixN.S7.Named.Found:ROUTE    LRC.OrderSixN.S7.Named.Found6:ROUTE
 "
 PROPS=$(python3 - $SRC/*.lean <<'PYEOF'
 import re, sys

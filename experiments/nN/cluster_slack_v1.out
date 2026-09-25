@@ -1,0 +1,4 @@
+r = 5: the 5 smallest at 1/6, the rest at 1/8: holds on 1436 of 1436 hard sets; fails e.g. []
+r = 4: the 4 smallest at 1/6, the rest at 1/8: holds on 1436 of 1436 hard sets; fails e.g. []
+r = 6: the 6 smallest at 1/6, the rest at 1/8: holds on 1436 of 1436 hard sets; fails e.g. []
+r = 7: the 7 smallest at 1/6, the rest at 1/8: holds on 1436 of 1436 hard sets; fails e.g. []

@@ -1,0 +1,8 @@
+28 hard: exact 28/28;  structural SC (ratio <= 3, two consecutive meetings in a core cell) 28/28;  from order 6's margin alone 0/28
+   first SC pair by rank: [((6, 7), 9), ((5, 6), 8), ((4, 7), 6), ((5, 7), 5)]
+400 ordinary: exact 400/400;  structural SC (ratio <= 3, two consecutive meetings in a core cell) 346/400;  from order 6's margin alone 0/400
+   first SC pair by rank: [((5, 7), 86), ((5, 6), 71), ((6, 7), 60), ((4, 7), 57), ((3, 7), 27), ((4, 6), 26), ((4, 5), 9), ((2, 7), 4)]
+28 hard: best pair's (longest core cell) x (d + d'): min 1.36 median 2.10;  core cell x max(core): min 0.375
+1,586 failing q = 2..5: best pair's (longest core cell) x (d + d'): min 0.30 median 1.59;  core cell x max(core): min 0.156
+20,000 random 5-sets from [1,40]: longest lonely cell at 1/8, x max: min 0.2500 at (4, 7, 21, 28, 35), 1% 0.3897, median 0.625
+   the progression cores: [((1, 2, 3, 4, 5), 0.25), ((2, 4, 6, 8, 10), 0.25), ((3, 6, 9, 12, 15), 0.25)]

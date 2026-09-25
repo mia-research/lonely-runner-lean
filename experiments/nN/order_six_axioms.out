@@ -1,0 +1,4 @@
+'LRC.OrderSixN.lonely_six_or_residual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_six_of_freeFlank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_six_of_fast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_six_of_descent' depends on axioms: [propext, Classical.choice, Quot.sound]

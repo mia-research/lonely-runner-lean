@@ -1,0 +1,11 @@
+'LRC.OrderSixN.S7.lonely_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.bhk_s7_exceptional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.bhk_s7_g4_hard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.bhk_s7_small_n' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_of_meeting' depends on axioms: [propext, Classical.choice, Quot.sound]
+@LRC.OrderSixN.S7.lonely_7 : ∀ {v1 v2 v3 v4 v5 : ℕ},
+  0 < v1 →
+    v1 < v2 →
+      v2 < v3 →
+        v3 < v4 →
+          v4 < v5 → 3 * v1 < v3 → ¬v3 - v2 ∣ v3 → ¬v3 - v2 ∣ v1 → ∃ t, 0 < t ∧ LRC.OrderSixN.Lonely6 v1 v2 v3 v4 v5 t

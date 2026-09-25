@@ -1,0 +1,5 @@
+[1,40] residual 91523  (105s)
+   (LEN, NEAR-AP, RULE) counts: [((True, True, True), 91249), ((False, True, True), 190), ((True, False, True), 53), ((True, True, False), 28), ((False, False, True), 3)]
+   LEN covers 91330; NEAR-AP 91467; RULE 91495
+   LEN fails: 193; of those covered by NEAR-AP or RULE: 193
+   covered by none: 0

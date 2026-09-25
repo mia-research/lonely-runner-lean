@@ -1,0 +1,1 @@
+'LRC.OrderSixN.lonely_6' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,7 @@
+28 hard sets, laps r <= 0: family size 30.6;  family 0/28;  same number of random openings of the same flanks 21/28
+28 hard sets, laps r <= 1: family size 46.6;  family 25/28;  same number of random openings of the same flanks 27/28
+28 hard sets, laps r <= 2: family size 55.4;  family 27/28;  same number of random openings of the same flanks 27/28
+1,586 failing q = 2..5, laps r <= 0: family size 34.1;  family 1558/1586;  same number of random openings of the same flanks 1515/1586
+1,586 failing q = 2..5, laps r <= 1: family size 55.9;  family 1583/1586;  same number of random openings of the same flanks 1568/1586
+1,586 failing q = 2..5, laps r <= 2: family size 69.5;  family 1585/1586;  same number of random openings of the same flanks 1576/1586
+(0s)

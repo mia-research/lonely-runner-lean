@@ -1,0 +1,4 @@
+closed-form blocked set vs Theorem 10: 3814764 checks, 0 disagreements
+[1,40] after N | 8, 3, 5: 1335; certified at a speed-one rung: 696; of the 312 the plain budget misses: 63; plain or speed-one: 1086  (42s)
+speed <= 2: 1072; of the 312 plain misses: 183; plain or speed <= 2: 1206
+speed <= 3: 1322; of the 312 plain misses: 300; plain or speed <= 3: 1323

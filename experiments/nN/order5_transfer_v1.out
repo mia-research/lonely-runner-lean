@@ -1,0 +1,30 @@
+  (1, 7, 10, 18, 24, 35, 37): least blocked pairs over K = 11 (budget 8) at K = 1;  as m*d^-1: m = 1 for d = 1;  per runner {1: 2, 7: 2, 10: 2, 18: 2, 24: 0, 35: 2, 37: 1}
+  (2, 3, 5, 7, 8, 18, 34): least blocked pairs over K = 12 (budget 8) at K = 1;  as m*d^-1: m = 3 for d = 3;  per runner {2: 2, 3: 2, 5: 2, 7: 2, 8: 0, 18: 2, 34: 2}
+  (2, 12, 15, 21, 32, 34, 38): least blocked pairs over K = 10 (budget 8) at K = 1;  as m*d^-1: m = 15 for d = 15;  per runner {2: 2, 12: 0, 15: 2, 21: 2, 32: 0, 34: 2, 38: 2}
+  (3, 4, 5, 7, 17, 18, 40): least blocked pairs over K = 17 (budget 8) at K = 2;  as m*d^-1: m = 6 for d = 3;  per runner {3: 2, 4: 0, 5: 1, 7: 2, 17: 2, 18: 2, 40: 8}
+  (3, 5, 6, 7, 8, 26, 27): least blocked pairs over K = 10 (budget 8) at K = 9;  as m*d^-1: m = 18 for d = 5;  per runner {3: 1, 5: 2, 6: 2, 7: 2, 8: 0, 26: 2, 27: 1}
+  (3, 5, 6, 7, 8, 27, 30): least blocked pairs over K = 10 (budget 8) at K = 5;  as m*d^-1: m = 5 for d = 7;  per runner {3: 1, 5: 2, 6: 2, 7: 2, 8: 0, 27: 1, 30: 2}
+  (3, 5, 6, 7, 8, 27, 34): least blocked pairs over K = 12 (budget 8) at K = 1;  as m*d^-1: m = 3 for d = 3;  per runner {3: 2, 5: 2, 6: 2, 7: 2, 8: 0, 27: 2, 34: 2}
+  (3, 5, 7, 8, 12, 26, 27): least blocked pairs over K = 9 (budget 8) at K = 4;  as m*d^-1: m = 1 for d = 7;  per runner {3: 2, 5: 2, 7: 2, 8: 0, 12: 0, 26: 2, 27: 1}
+  (3, 5, 7, 8, 12, 27, 30): least blocked pairs over K = 9 (budget 8) at K = 3;  as m*d^-1: m = 21 for d = 7;  per runner {3: 2, 5: 1, 7: 2, 8: 0, 12: 0, 27: 2, 30: 2}
+  (3, 5, 7, 8, 12, 27, 34): least blocked pairs over K = 10 (budget 8) at K = 1;  as m*d^-1: m = 3 for d = 3;  per runner {3: 2, 5: 2, 7: 2, 8: 0, 12: 0, 27: 2, 34: 2}
+  (3, 5, 7, 8, 18, 34, 39): least blocked pairs over K = 10 (budget 8) at K = 13;  as m*d^-1: m = 26 for d = 5;  per runner {3: 1, 5: 2, 7: 2, 8: 0, 18: 2, 34: 2, 39: 1}
+  (3, 6, 15, 21, 24, 33, 39): least blocked pairs over K = 11 (budget 8) at K = 1;  as m*d^-1: m = None for d = None;  per runner {3: 2, 6: 2, 15: 2, 21: 2, 24: 0, 33: 2, 39: 1}
+  (3, 7, 10, 16, 18, 23, 37): least blocked pairs over K = 11 (budget 8) at K = 1;  as m*d^-1: m = 3 for d = 3;  per runner {3: 2, 7: 2, 10: 2, 16: 0, 18: 2, 23: 2, 37: 1}
+  (3, 12, 15, 21, 24, 33, 39): least blocked pairs over K = 9 (budget 8) at K = 1;  as m*d^-1: m = None for d = None;  per runner {3: 2, 12: 0, 15: 2, 21: 2, 24: 0, 33: 2, 39: 1}
+  (4, 5, 6, 8, 14, 27, 32): least blocked pairs over K = 12 (budget 8) at K = 2;  as m*d^-1: m = 10 for d = 5;  per runner {4: 0, 5: 2, 6: 0, 8: 0, 14: 0, 27: 2, 32: 8}
+  (4, 5, 6, 8, 14, 32, 37): least blocked pairs over K = 7 (budget 8) at K = 2;  as m*d^-1: m = 8 for d = 4;  per runner {4: 0, 5: 2, 6: 2, 8: 0, 14: 2, 32: 0, 37: 1}
+  (4, 5, 6, 14, 16, 17, 38): least blocked pairs over K = 10 (budget 8) at K = 2;  as m*d^-1: m = 34 for d = 17;  per runner {4: 0, 5: 2, 6: 2, 14: 2, 16: 0, 17: 2, 38: 2}
+  (4, 5, 6, 14, 16, 34, 38): least blocked pairs over K = 10 (budget 8) at K = 2;  as m*d^-1: m = 10 for d = 5;  per runner {4: 0, 5: 2, 6: 2, 14: 2, 16: 0, 34: 2, 38: 2}
+  (4, 5, 6, 14, 17, 32, 38): least blocked pairs over K = 10 (budget 8) at K = 2;  as m*d^-1: m = 34 for d = 17;  per runner {4: 0, 5: 2, 6: 2, 14: 2, 17: 2, 32: 0, 38: 2}
+  (4, 5, 6, 14, 32, 34, 38): least blocked pairs over K = 10 (budget 8) at K = 2;  as m*d^-1: m = 10 for d = 5;  per runner {4: 0, 5: 2, 6: 2, 14: 2, 32: 0, 34: 2, 38: 2}
+  (4, 6, 14, 15, 16, 34, 38): least blocked pairs over K = 10 (budget 8) at K = 2;  as m*d^-1: m = 30 for d = 15;  per runner {4: 0, 6: 2, 14: 2, 15: 2, 16: 0, 34: 2, 38: 2}
+  (4, 7, 8, 15, 29, 36, 37): least blocked pairs over K = 7 (budget 8) at K = 6;  as m*d^-1: m = 5 for d = 7;  per runner {4: 0, 7: 2, 8: 0, 15: 2, 29: 2, 36: 0, 37: 1}
+  (5, 6, 7, 8, 29, 34, 36): least blocked pairs over K = 14 (budget 8) at K = 1;  as m*d^-1: m = 5 for d = 5;  per runner {5: 2, 6: 2, 7: 2, 8: 0, 29: 2, 34: 2, 36: 4}
+  (5, 7, 8, 12, 26, 31, 36): least blocked pairs over K = 12 (budget 8) at K = 1;  as m*d^-1: m = 5 for d = 5;  per runner {5: 2, 7: 2, 8: 0, 12: 0, 26: 2, 31: 2, 36: 4}
+  (5, 7, 8, 12, 29, 34, 36): least blocked pairs over K = 12 (budget 8) at K = 1;  as m*d^-1: m = 5 for d = 5;  per runner {5: 2, 7: 2, 8: 0, 12: 0, 29: 2, 34: 2, 36: 4}
+  (5, 7, 12, 27, 32, 33, 37): least blocked pairs over K = 9 (budget 8) at K = 1;  as m*d^-1: m = 33 for d = 33;  per runner {5: 2, 7: 2, 12: 0, 27: 2, 32: 0, 33: 2, 37: 1}
+  (5, 8, 14, 18, 32, 34, 39): least blocked pairs over K = 9 (budget 8) at K = 1;  as m*d^-1: m = 5 for d = 5;  per runner {5: 2, 8: 0, 14: 2, 18: 2, 32: 0, 34: 2, 39: 1}
+  (5, 8, 18, 28, 34, 38, 39): least blocked pairs over K = 9 (budget 8) at K = 1;  as m*d^-1: m = 38 for d = 38;  per runner {5: 2, 8: 0, 18: 2, 28: 0, 34: 2, 38: 2, 39: 1}
+Case B: shift budget (fewer than 8 blocked pairs at some K) holds for 2 of 28;  |m| at the best K: [(1, 3), (3, 4), (4, 3), (5, 6), (6, 1), (8, 2), (9, 2), (10, 3), (13, 1), (15, 1), (None, 2)]
+whole [1,40] residual v1: shift budget at some K for 10414 of 91523  (61s)

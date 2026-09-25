@@ -1,0 +1,9 @@
+@LRC.OrderFiveN.lonely_group_two_free : ∀ {A : Finset ℕ} {u b c τ : ℝ},
+  0 < u →
+    0 < τ →
+      (∀ m ∈ A, 5⁻¹ ≤ circDist (u * ↑m * τ)) →
+        Irrational (b / u) →
+          Irrational (c / u) →
+            ∃ t, 0 < t ∧ (∀ m ∈ A, 5⁻¹ ≤ circDist (u * ↑m * t)) ∧ 5⁻¹ ≤ circDist (b * t) ∧ 5⁻¹ ≤ circDist (c * t)
+'LRC.OrderFiveN.lonely_group_two_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_walk_clear' depends on axioms: [propext, Classical.choice, Quot.sound]

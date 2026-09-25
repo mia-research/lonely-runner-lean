@@ -1,0 +1,9 @@
+[1,40], R = 1: per-lap budget closes: units 22, all i 21, either 24 of 28; free lap 18; neither e.g. [(3, 4, 5, 7, 17, 18, 40), (3, 6, 15, 21, 24, 33, 39), (3, 12, 15, 21, 24, 33, 39), (4, 7, 8, 15, 29, 36, 37)]
+[1,40], R = 2: per-lap budget closes: units 25, all i 25, either 26 of 28; free lap 21; neither e.g. [(3, 4, 5, 7, 17, 18, 40), (4, 7, 8, 15, 29, 36, 37)]
+[1,40], R = 3: per-lap budget closes: units 26, all i 25, either 26 of 28; free lap 24; neither e.g. [(3, 4, 5, 7, 17, 18, 40), (4, 7, 8, 15, 29, 36, 37)]
+[1,40], R = 5: per-lap budget closes: units 28, all i 28, either 28 of 28; free lap 27; neither e.g. []
+largest 41..60, R = 1: per-lap budget closes: units 1188, all i 1104, either 1307 of 1436; free lap 855; neither e.g. [(1, 7, 12, 25, 56, 58, 59), (1, 10, 21, 24, 26, 43, 53), (2, 5, 7, 24, 31, 41, 46), (2, 5, 7, 24, 40, 41, 43), (2, 7, 10, 24, 26, 41, 43)]
+largest 41..60, R = 2: per-lap budget closes: units 1369, all i 1298, either 1412 of 1436; free lap 1132; neither e.g. [(1, 10, 21, 24, 26, 43, 53), (2, 7, 10, 24, 26, 41, 43), (2, 7, 12, 15, 43, 56, 58), (2, 7, 12, 15, 56, 58, 59), (2, 11, 12, 15, 28, 48, 58)]
+largest 41..60, R = 3: per-lap budget closes: units 1397, all i 1347, either 1427 of 1436; free lap 1174; neither e.g. [(2, 7, 12, 15, 56, 58, 59), (5, 6, 7, 27, 32, 41, 59), (5, 7, 12, 27, 41, 56, 58), (5, 7, 18, 32, 37, 43, 57), (5, 8, 12, 35, 39, 53, 55)]
+largest 41..60, R = 5: per-lap budget closes: units 1415, all i 1388, either 1432 of 1436; free lap 1239; neither e.g. [(2, 7, 12, 15, 56, 58, 59), (5, 6, 7, 27, 32, 41, 59), (5, 7, 18, 32, 37, 43, 57), (5, 14, 17, 24, 41, 43, 53)]
+total 70s

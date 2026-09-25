@@ -1,0 +1,9 @@
+'LRC.OrderFiveN.exists_rows' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_merge_model_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.existenceAtN_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonelyRunnerAtN_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+LRC.OrderFiveN.lonelyRunnerAtN_five : LRC.SpecN.LonelyRunnerAtN 5
+def LRC.SpecN.LonelyRunnerAtN : ℕ → Prop :=
+fun n =>
+  ∀ (v : Fin n → ℝ),
+    Function.Injective v → ∀ (k : Fin n), ∃ t, 0 < t ∧ ∀ (i : Fin n), i ≠ k → (↑n)⁻¹ ≤ circDist (v i * t - v k * t)

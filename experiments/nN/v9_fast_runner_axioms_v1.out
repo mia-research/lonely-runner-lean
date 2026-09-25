@@ -1,0 +1,3 @@
+'LRC.SpecN.lonely_of_fast_runner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonely_of_fast_of_existence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonely_five_of_fast' depends on axioms: [propext, Classical.choice, Quot.sound]

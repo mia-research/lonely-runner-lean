@@ -1,0 +1,2 @@
+[1,40] residual 91523: VS(q) for some q in 2..7: 91523; not 0; least q [(2, 91523)]; misses e.g. []  (160s)
+hard sets, largest 41..60 (1436): VS(q) some q in 2..7: 1436; not 0; least q [(2, 1436)]; misses e.g. []  (163s)

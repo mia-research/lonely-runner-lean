@@ -1,0 +1,4 @@
+LEN misses (193): gap median 0.207 (min 0.133, share at exactly 1/8 0.00); AP-fit median 1.57; first cell length x d_max median 0.060 (share one-point 0.07); first T x d_min median 0.172; cascade moves mean 4.46
+LEN covers (91330): gap median 0.261 (min 0.143, share at exactly 1/8 0.00); AP-fit median 1.20; first cell length x d_max median 0.193 (share one-point 0.05); first T x d_min median 0.153; cascade moves mean 2.62
+cascade moves -> median first-cell length x d_max: {0: 0.25, 1: 0.273, 2: 0.168, 3: 0.208, 4: 0.148, 5: 0.165, 6: 0.175}
+(156s)

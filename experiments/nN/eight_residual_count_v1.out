@@ -1,0 +1,6 @@
+N = 30: 7-subsets of [1,30]
+  residual before §15 (rules R6, R1, descent, free flank, R4, R8, halving): 29347
+  of those, first-lap clearance applies: 1600;  -7 opening applies: 17025
+  residual after §15 (EightResidual as stated): 12309
+  residual sets with NO certificate at any flank: 0  []
+  2.7s

@@ -1,0 +1,19 @@
+[1,30] residual v1 12309: ladder-wide count (sum_d W(d,e) < tau(e) at some flank e in S): 3495;  plain rung budget: 12257  (5s)
+  best flank's  sum_d W / tau  : min 0.333  10% 0.625  median 1.000  90% 1.208  max 1.750
+  W(d,e)/tau(e) by d/e (rounded to 1/2): mean
+    d/e ~  0.0: mean 0.441  max 0.667  (n = 105)
+    d/e ~  0.5: mean 0.486  max 0.800  (n = 225)
+    d/e ~  1.0: mean 0.324  max 0.750  (n = 186)
+    d/e ~  1.5: mean 0.114  max 0.250  (n = 101)
+    d/e ~  2.0: mean 0.126  max 0.278  (n = 63)
+    d/e ~  2.5: mean 0.144  max 0.250  (n = 35)
+    d/e ~  3.0: mean 0.128  max 0.375  (n = 28)
+    d/e ~  3.5: mean 0.208  max 0.500  (n = 17)
+    d/e ~    4: mean 0.153  max 1.000  (n = 110)
+  weights 1/phi, all N            : 3495 of 12309
+  weights 1/phi, N >= 2           : 6494 of 12309
+  weights 1/phi, N >= 3           : 6448 of 12309
+  weights 1/phi, N >= e/2         : 3682 of 12309
+  weights 1 (flank union bound)   : 2731 of 12309
+  weights N/phi, N >= 2           : 2998 of 12309
+  weights 1/phi^2, N >= 2         : 8930 of 12309

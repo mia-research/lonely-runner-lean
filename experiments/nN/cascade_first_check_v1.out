@@ -1,0 +1,3 @@
+random residual [1,60] (3000): cascade fixed point == earliest lonely instant in 3000; differs in 0 []
+hard sets 41..60 (1436): cascade fixed point == earliest lonely instant in 1436; differs in 0 []
+random 7-sets [1,60] (2000): cascade fixed point == earliest lonely instant in 2000; differs in 0 []

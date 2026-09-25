@@ -1,0 +1,8 @@
+least lap r: sets | mean gap | mean AP-fit deviation | mean spread | mean flank scale e/q
+   r = 0:   264 | 0.272 |   1.84 |   16.6 |   1.2
+   r = 1:  1162 | 0.286 |   1.29 |   13.2 |  13.0
+   r = 2:    10 | 0.280 |   1.22 |   12.5 |  20.9
+flanks with e/q >= 3 only -- least lap r: sets | mean AP-fit deviation | mean spread
+   r = 0:     4 |   1.79 |    9.8
+   r = 1:  1419 |   1.39 |   13.8
+   r = 2:    13 |   1.42 |   13.4

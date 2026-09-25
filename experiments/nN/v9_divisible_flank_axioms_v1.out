@@ -1,0 +1,3 @@
+'LRC.Resonance.card_congr_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Resonance.card_forbidden_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Resonance.flankWorks_of_dvd_budget' depends on axioms: [propext, Classical.choice, Quot.sound]

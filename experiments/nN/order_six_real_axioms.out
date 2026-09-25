@@ -1,0 +1,5 @@
+'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.existenceAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_six_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.lonely_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.exists_merge_model_five' depends on axioms: [propext, Classical.choice, Quot.sound]

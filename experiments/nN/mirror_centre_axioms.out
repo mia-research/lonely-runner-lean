@@ -1,0 +1,4 @@
+'LRC.MirrorCentre.fract_bounds_of_circDist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.MirrorCentre.circDist_ge_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.MirrorCentre.lonely_of_mem_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.MirrorCentre.exists_lonely_mirror_meeting' depends on axioms: [propext, Classical.choice, Quot.sound]

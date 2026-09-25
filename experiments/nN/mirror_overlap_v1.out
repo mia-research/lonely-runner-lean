@@ -1,0 +1,14 @@
+  (1, 7, 10, 18, 24, 35, 37)  Q=72: vertices 1~0/1+1/1Q, 7~1/8-16/8Q, 10~1/7-2/7Q, 18~1/4+0/4Q, 24~1/3+0/3Q, 35~1/2-2/2Q; cascade moves by [24, 7, 18] -> k=13
+  (3, 5, 6, 7, 8, 26, 27)  Q=53: vertices 3~0/1+3/1Q, 5~1/8-13/8Q, 6~1/8-5/8Q, 7~1/8+3/8Q, 8~1/7+3/7Q, 26~1/2-1/2Q; cascade moves by [] -> k=3
+  (3, 5, 6, 7, 8, 27, 30)  Q=57: vertices 3~0/1+3/1Q, 5~1/8-17/8Q, 6~1/8-9/8Q, 7~1/8-1/8Q, 8~1/7-1/7Q, 27~1/2-3/2Q; cascade moves by [] -> k=3
+  (4, 5, 6, 8, 14, 27, 32)  Q=59: vertices 4~1/8-27/8Q, 5~1/8-19/8Q, 6~1/8-11/8Q, 8~1/7-3/7Q, 14~1/4-3/4Q, 27~3/7+12/7Q; cascade moves by [27] -> k=3
+  (5, 7, 8, 12, 26, 31, 36)  Q=67: vertices 5~1/8-27/8Q, 7~1/8-11/8Q, 8~1/8-3/8Q, 12~1/6+5/6Q, 26~2/5-4/5Q, 31~3/7+16/7Q; cascade moves by [31] -> k=3
+  (5, 8, 18, 28, 34, 38, 39)  Q=77: vertices 5~1/8-37/8Q, 8~1/8-13/8Q, 18~1/4-5/4Q, 28~3/8-7/8Q, 34~3/7+7/7Q, 38~1/2-1/2Q; cascade moves by [34, 28, 18] -> k=5
+six hard sets of [1,40]: 6 sets
+   overlap beyond independence (mean per set, in units of Q): total -0.064; exact +0.028, near (|delta| <= Q/16) -0.093, none +0.001
+   nearest small-denominator vertex of each effective disparity, q: [(1, 3), (2, 4), (3, 1), (4, 3), (5, 1), (6, 1), (7, 7), (8, 16)]
+   cascade on the lattice: moves [(3, 2), (0, 2), (1, 2)]; driver by rank (0 = second largest a, 1 = third, ...): [(1, 2), (2, 2), (3, 2), (4, 1), (5, 1)]
+1,436 hard sets, largest 41..60: 1436 sets
+   overlap beyond independence (mean per set, in units of Q): total -0.056; exact +0.004, near (|delta| <= Q/16) -0.045, none -0.015
+   nearest small-denominator vertex of each effective disparity, q: [(1, 1709), (2, 1287), (3, 480), (4, 444), (5, 1033), (6, 282), (7, 1378), (8, 2003)]
+   cascade on the lattice: moves [(0, 560), (1, 277), (2, 240), (3, 107), (4, 97), (5, 50)]; driver by rank (0 = second largest a, 1 = third, ...): [(1, 625), (2, 480), (3, 627), (4, 555), (5, 311), (6, 10)]

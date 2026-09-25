@@ -1,0 +1,8 @@
+'LRC.OrderSixN.lonely_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_8_1_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_8_1_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_8_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.two_flank_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.orbit_isolation_two_bhk' depends on axioms: [propext, Classical.choice, Quot.sound]
+@LRC.OrderSixN.lonely_8 : ∀ {v1 v2 v3 v4 v5 : ℕ},
+  0 < v1 → v1 < v2 → v2 < v3 → v3 < v4 → v4 < v5 → v3 ≤ 3 * v1 → ∃ t, 0 < t ∧ LRC.OrderSixN.Lonely6 v1 v2 v3 v4 v5 t

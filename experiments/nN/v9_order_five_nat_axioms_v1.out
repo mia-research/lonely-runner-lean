@@ -1,0 +1,6 @@
+LRC.OrderFiveN.lonely_five_nat : ∀ (S : Finset ℕ),
+  (∀ d ∈ S, 0 < d) → S.card ≤ 4 → ∃ t, 0 < t ∧ ∀ d ∈ S, 5⁻¹ ≤ circDist (↑d * t)
+'LRC.OrderFiveN.lonely_five_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonely_five_residual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_fifth_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_time_coprime' depends on axioms: [propext, Classical.choice, Quot.sound]

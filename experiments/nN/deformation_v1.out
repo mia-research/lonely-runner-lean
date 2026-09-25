@@ -1,0 +1,22 @@
+setup 41s
+Case B (28): {'sets with a cell descended from an event': 1, 'sets with a born cell': 28, 'sets whose every cell is born': 27}  (10s)
+   event classes a (mod 8) reaching lambda = 1: {5: 1}
+   born cells by (opening rank, closing rank) at birth: [((7, 3), 46), ((6, 5), 43), ((7, 4), 38), ((7, 5), 34), ((6, 4), 31), ((6, 3), 29), ((5, 4), 24), ((6, 1), 22)]
+delta = 2/15 (2): {'sets with a cell descended from an event': 0, 'sets with a born cell': 2, 'sets whose every cell is born': 2}  (0s)
+   event classes a (mod 8) reaching lambda = 1: {}
+   born cells by (opening rank, closing rank) at birth: [((7, 5), 2), ((7, 4), 1), ((7, 3), 1), ((7, 6), 1), ((2, 4), 1), ((6, 4), 1), ((2, 6), 1)]
+random residual (30): {'sets with a cell descended from an event': 0, 'sets with a born cell': 30, 'sets whose every cell is born': 30}  (12s)
+   event classes a (mod 8) reaching lambda = 1: {}
+   born cells by (opening rank, closing rank) at birth: [((7, 4), 33), ((3, 7), 32), ((6, 2), 31), ((5, 2), 31), ((7, 3), 30), ((3, 6), 29), ((5, 4), 28), ((7, 2), 25)]
+(1, 3, 4, 5, 7, 11, 24) steps 300: events at lambda 0: 9; last event-descended cell alive at lambda 0.190; births along the path 156; cells at lambda 1: 4 (event-descended 0)  (0.2s)
+(1, 3, 4, 5, 7, 11, 24) steps 600: events at lambda 0: 9; last event-descended cell alive at lambda 0.192; births along the path 157; cells at lambda 1: 4 (event-descended 0)  (0.3s)
+(1, 4, 5, 6, 7, 11, 16) steps 300: events at lambda 0: 7; last event-descended cell alive at lambda 0.363; births along the path 60; cells at lambda 1: 4 (event-descended 0)  (0.1s)
+(1, 4, 5, 6, 7, 11, 16) steps 600: events at lambda 0: 7; last event-descended cell alive at lambda 0.363; births along the path 61; cells at lambda 1: 4 (event-descended 0)  (0.3s)
+(3, 5, 6, 7, 8, 26, 27) steps 300: events at lambda 0: 13; last event-descended cell alive at lambda 0.127; births along the path 251; cells at lambda 1: 8 (event-descended 0)  (0.2s)
+(3, 5, 6, 7, 8, 26, 27) steps 600: events at lambda 0: 13; last event-descended cell alive at lambda 0.128; births along the path 252; cells at lambda 1: 8 (event-descended 0)  (0.4s)
+(2, 12, 15, 21, 32, 34, 38) steps 300: events at lambda 0: 22; last event-descended cell alive at lambda 1.000; births along the path 237; cells at lambda 1: 24 (event-descended 1)  (0.4s)
+(2, 12, 15, 21, 32, 34, 38) steps 600: events at lambda 0: 22; last event-descended cell alive at lambda 1.000; births along the path 237; cells at lambda 1: 24 (event-descended 1)  (0.8s)
+(5, 8, 18, 28, 34, 38, 39) steps 300: events at lambda 0: 25; last event-descended cell alive at lambda 0.303; births along the path 320; cells at lambda 1: 20 (event-descended 0)  (0.5s)
+(5, 8, 18, 28, 34, 38, 39) steps 600: events at lambda 0: 25; last event-descended cell alive at lambda 0.303; births along the path 324; cells at lambda 1: 20 (event-descended 0)  (1.1s)
+(1, 5, 6, 7, 8, 17, 19) steps 300: events at lambda 0: 9; last event-descended cell alive at lambda 0.320; births along the path 113; cells at lambda 1: 6 (event-descended 0)  (0.2s)
+(1, 5, 6, 7, 8, 17, 19) steps 600: events at lambda 0: 9; last event-descended cell alive at lambda 0.322; births along the path 117; cells at lambda 1: 6 (event-descended 0)  (0.4s)

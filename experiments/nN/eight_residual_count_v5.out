@@ -1,0 +1,33 @@
+N = 30: 7-subsets of [1,30]
+  EightResidual without no_rational_opening (v1): 12309
+  with no_rational_opening (v2): 5816
+  with no_thirds (v3): 1151
+  with no_fifths (v4): 100
+  with no_common_factor: 100
+  EightResidual as stated (v5, with no_six_seven_nine): 0
+  first ten remaining: []
+  class form vs Theorem 10 disagreements: 0
+  residual sets with NO certificate at any flank: 0  []
+  5.0s
+N = 36: 7-subsets of [1,36]
+  EightResidual without no_rational_opening (v1): 47153
+  with no_rational_opening (v2): 25860
+  with no_thirds (v3): 6035
+  with no_fifths (v4): 601
+  with no_common_factor: 598
+  EightResidual as stated (v5, with no_six_seven_nine): 0
+  first ten remaining: []
+  class form vs Theorem 10 disagreements: 0
+  residual sets with NO certificate at any flank: 0  []
+  19.7s
+N = 40: 7-subsets of [1,40]
+  EightResidual without no_rational_opening (v1): 91523
+  with no_rational_opening (v2): 45176
+  with no_thirds (v3): 11219
+  with no_fifths (v4): 1335
+  with no_common_factor: 1330
+  EightResidual as stated (v5, with no_six_seven_nine): 7
+  first ten remaining: [(2, 12, 15, 21, 32, 34, 38), (4, 5, 6, 8, 14, 32, 37), (4, 5, 6, 14, 16, 34, 38), (4, 5, 6, 14, 17, 32, 38), (4, 5, 6, 14, 32, 34, 38), (4, 6, 14, 15, 16, 34, 38), (4, 7, 8, 15, 29, 36, 37)]
+  class form vs Theorem 10 disagreements: 0
+  residual sets with NO certificate at any flank: 0  []
+  46.0s

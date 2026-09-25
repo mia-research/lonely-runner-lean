@@ -1,0 +1,2 @@
+(A) per cell, hard sets: {'cells': 45100, 'short': 43428, 'short, mirror lattice hit': 43428, 'short, Q-1 lattice hit': 12052, 'short, Q+1 lattice hit': 13276}
+(B) longest lonely cell of the six, in units of 1/(4 d_max): {'>= 1': 1436} ; smallest ratios: [(1.085, (7, 12, 35, 42, 49, 56, 58)), (1.198, (6, 7, 32, 33, 39, 45, 46)), (1.316, (7, 12, 26, 40, 47, 54, 58)), (1.371, (5, 7, 12, 35, 42, 49, 56)), (1.371, (7, 12, 35, 42, 49, 53, 56))] ; median 2.75

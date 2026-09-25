@@ -1,0 +1,85 @@
+x, 2, 3, 4, 5, 6, 7
+   x = 1.0                    T = 0.1250000000  certificate flank 7.0                    lap j = 0  moves 0
+   x = 1.2                    T = 0.1041666667  certificate flank 1.2                    lap j = 0  moves 0
+   x = 1.22                   T = 0.1024590164  certificate flank 1.22                   lap j = 0  moves 0
+   x = 1.223                  T = 0.1022076860  certificate flank 1.223                  lap j = 0  moves 0
+   x = 1.2237                 T = 0.1021492196  certificate flank 1.2237                 lap j = 0  moves 0
+   x = 1.22376                T = 0.1021442113  certificate flank 1.22376                lap j = 0  moves 0
+   x = 1.223768               T = 0.1021435435  certificate flank 1.223768               lap j = 0  moves 0
+   x = 1.2237684              T = 0.1021435102  certificate flank 1.2237684              lap j = 0  moves 0
+   x = 1.22376846             T = 0.1021435052  certificate flank 1.22376846             lap j = 0  moves 0
+   x = 1.223768466            T = 0.1021435047  certificate flank 1.223768466            lap j = 0  moves 0
+   x = 1.2237684665           T = 0.1021435046  certificate flank 1.2237684665           lap j = 0  moves 0
+   x = 1.22376846655          T = 0.1021435046  certificate flank 1.22376846655          lap j = 0  moves 0
+   x = 1.223768466552         T = 0.1021435046  certificate flank 1.223768466552         lap j = 0  moves 0
+   x = 1.2237684665524        T = 0.1021435046  certificate flank 1.2237684665524        lap j = 0  moves 0
+   x = 1.22376846655244       T = 0.1021435046  certificate flank 1.22376846655244       lap j = 0  moves 0
+   x = 1.223768466552443      T = 0.1021435046  certificate flank 1.223768466552443      lap j = 0  moves 0
+   x = 1.223768466552443      T = 0.1021435046  certificate flank 1.223768466552443      lap j = 0  moves 0
+   x = 1.22376846655244322    T = 0.1021435046  certificate flank 1.2237684665524433     lap j = 0  moves 0
+   x = 1.223768466552443220   T = 0.1021435046  certificate flank 1.2237684665524433     lap j = 0  moves 0
+1, 2, 3, 4, 5, 6, 7x
+   x = 1.0                    T = 0.1250000000  certificate flank 7.0                    lap j = 0  moves 0
+   x = 1.2                    T = 0.1339285714  certificate flank 8.4                    lap j = 1  moves 1
+   x = 1.22                   T = 0.1317330211  certificate flank 8.54                   lap j = 1  moves 1
+   x = 1.223                  T = 0.1314098820  certificate flank 8.561                  lap j = 1  moves 1
+   x = 1.2237                 T = 0.1313347109  certificate flank 8.5659                 lap j = 1  moves 1
+   x = 1.22376                T = 0.1313282716  certificate flank 8.56632                lap j = 1  moves 1
+   x = 1.223768               T = 0.1313274131  certificate flank 8.566376               lap j = 1  moves 1
+   x = 1.2237684              T = 0.1313273702  certificate flank 8.5663788              lap j = 1  moves 1
+   x = 1.22376846             T = 0.1313273638  certificate flank 8.56637922             lap j = 1  moves 1
+   x = 1.223768466            T = 0.1313273631  certificate flank 8.566379262            lap j = 1  moves 1
+   x = 1.2237684665           T = 0.1313273631  certificate flank 8.5663792655           lap j = 1  moves 1
+   x = 1.22376846655          T = 0.1313273631  certificate flank 8.56637926585          lap j = 1  moves 1
+   x = 1.223768466552         T = 0.1313273631  certificate flank 8.566379265864         lap j = 1  moves 1
+   x = 1.2237684665524        T = 0.1313273631  certificate flank 8.5663792658668        lap j = 1  moves 1
+   x = 1.22376846655244       T = 0.1313273631  certificate flank 8.56637926586708       lap j = 1  moves 1
+   x = 1.223768466552443      T = 0.1313273631  certificate flank 8.5663792658671        lap j = 1  moves 1
+   x = 1.223768466552443      T = 0.1313273631  certificate flank 8.566379265867102      lap j = 1  moves 1
+   x = 1.22376846655244322    T = 0.1313273631  certificate flank 8.566379265867102      lap j = 1  moves 1
+   x = 1.223768466552443220   T = 0.1313273631  certificate flank 8.566379265867102      lap j = 1  moves 1
+
+sweep: 1, 2, 3, 4, 5, 6, 7x and x, 2, ..., 7 and 1, 2, 3, x*4, 5, 6, 7 -- where the certificate changes
+   7x: max lap 3; changes (10): x=1.000: lap 0, moves 0; x=1.001: lap 1, moves 6; x=1.041: lap 2, moves 5; x=1.080: lap 1, moves 4; x=1.103: lap 1, moves 1; x=1.286: lap 0, moves 0; x=2.143: lap 2, moves 1; x=2.429: lap 0, moves 0; x=3.286: lap 3, moves 1; x=3.572: lap 0, moves 0
+   x (runner 1): max lap 0; changes (1): x=1.000: lap 0, moves 0
+   4x (runner 4): max lap 2; changes (8): x=1.000: lap 0, moves 0; x=1.751: lap 1, moves 3; x=1.929: lap 1, moves 4; x=2.084: lap 2, moves 5; x=2.250: lap 1, moves 0; x=2.251: lap 0, moves 0; x=3.750: lap 1, moves 0; x=3.751: lap 1, moves 4
+
+shrinking the deviation: 1, 2, 3, 4, 5, 6, 7(1 + delta) and 1, 2, 3, 4(1 + delta), 5, 6, 7
+   7(1+delta), delta = 1e-1 : T = 0.281250000000  lap 1  moves 4
+   7(1+delta), delta = 1e-2 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-3 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-4 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-5 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-6 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-7 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-8 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-9 : T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-10: T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-11: T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 1e-12: T = 0.375000000000  lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-1: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-2: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-3: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-4: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-5: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-6: lap 1  moves 6
+   7(1+delta), delta = 0.2237684665...e-7: lap 1  moves 6
+   4(1+delta), delta = 1e-1 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-2 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-3 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-4 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-5 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-6 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-7 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-8 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-9 : T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-10: T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-11: T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 1e-12: T = 0.125000000000  lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-1: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-2: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-3: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-4: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-5: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-6: lap 0  moves 0
+   4(1+delta), delta = 0.2237684665...e-7: lap 0  moves 0

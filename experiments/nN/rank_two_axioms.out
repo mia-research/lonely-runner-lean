@@ -1,0 +1,3 @@
+'LRC.OrderFiveN.lonely_of_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_merge_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonely_five_rank_two' depends on axioms: [propext, Classical.choice, Quot.sound]

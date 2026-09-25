@@ -1,0 +1,6 @@
+def LRC.SpecN.LonelyRunnerAtN : ℕ → Prop :=
+fun n =>
+  ∀ (v : Fin n → ℝ),
+    Function.Injective v → ∀ (k : Fin n), ∃ t, 0 < t ∧ ∀ (i : Fin n), i ≠ k → (↑n)⁻¹ ≤ circDist (v i * t - v k * t)
+'LRC.SpecN.lonelyRunnerAtN_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_four' depends on axioms: [propext, Classical.choice, Quot.sound]

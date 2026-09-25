@@ -1,0 +1,5 @@
+'LRC.OrderSixN.S7.Named.bhk_prop11_part1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.Named.bhk_prop11_part2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.Named.bhk_s5_main' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.Named.lonely_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely_six_nat' depends on axioms: [propext, Classical.choice, Quot.sound]

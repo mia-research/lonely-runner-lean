@@ -1,0 +1,4 @@
+hard sets, largest 41..60 (1436): mirror centre in the first cell and lonely: 1436; boundary pair is the top pair: 142; e_L = e_R: 5
+   (rank of e_L, rank of e_R), 0 = largest, most common: [((3, 0), 389), ((2, 0), 294), ((6, 0), 225), ((4, 0), 175), ((0, 1), 76), ((1, 0), 66), ((1, 2), 57), ((5, 0), 20), ((6, 1), 18), ((2, 3), 16)]
+non-hard residual sets of [1,60] (3000): mirror centre in the first cell and lonely: 3000; boundary pair is the top pair: 423; e_L = e_R: 12
+   (rank of e_L, rank of e_R), 0 = largest, most common: [((3, 0), 393), ((2, 0), 326), ((6, 0), 323), ((4, 0), 289), ((0, 1), 227), ((1, 2), 220), ((1, 0), 196), ((2, 3), 105), ((5, 0), 101), ((4, 1), 91)]

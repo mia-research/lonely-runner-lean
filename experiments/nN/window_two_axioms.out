@@ -1,0 +1,5 @@
+'LRC.SpecN.two_flank_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.two_flank_window_opening' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.blocked_cover_short' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonely_six_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonely_six_of_slow_window' depends on axioms: [propext, Classical.choice, Quot.sound]

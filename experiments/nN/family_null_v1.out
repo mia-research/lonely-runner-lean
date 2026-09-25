@@ -1,0 +1,4 @@
+lonely measure per period: min 0.039, 1% 0.057, median 0.109
+rule (q <= 8, flank = least multiple): mean size 21.0;  family 2998/3000;  same number of uniform random t 2687/3000;  random numerators, same denominators 2837/3000
+top pair mirror k/(d6+d7): mean size 65.8;  family 2994/3000;  same number of uniform random t 2991/3000;  random numerators, same denominators 2982/3000
+(3s)

@@ -1,0 +1,4 @@
+'LRC.OrderEightN.lonely_eight_nat_of_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.existenceAt8_of_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.existenceAt8_iff_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.lonelyRunnerAt8_of_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]

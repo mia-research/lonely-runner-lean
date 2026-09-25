@@ -1,0 +1,24 @@
+hard sets 1436: some q <= 8 with its least multiple e having a lonely opening at ANY lap: 1417; not: 19 [(5, 6, 7, 8, 30, 36, 48), (5, 6, 7, 8, 34, 36, 48), (5, 6, 7, 8, 36, 48, 60), (5, 6, 7, 16, 27, 37, 59), (5, 6, 8, 14, 34, 36, 48), (5, 6, 14, 16, 36, 52, 54)]
+   least such q: [(2, 573), (3, 298), (4, 240), (5, 131), (6, 11), (7, 59), (8, 105)]
+   the lonely openings found, by lap: {'other lap of e': 16120, 'on the rule lattice (j = i*e/q)': 317}
+   rank of the largest flank with a lonely opening (0 = largest): [(0, 1436)]
+the 19 left: some multiple of some q <= 8, any lap, has a lonely opening: 19; not: 0
+   (5, 6, 7, 8, 30, 36, 48): lonely flanks that are multiples of a q <= 8: [30, 36, 48] (q in [2, 3, 4, 5, 6, 8])
+   (5, 6, 7, 8, 34, 36, 48): lonely flanks that are multiples of a q <= 8: [34, 36, 48] (q in [2, 3, 4, 6, 8])
+   (5, 6, 7, 8, 36, 48, 60): lonely flanks that are multiples of a q <= 8: [36, 48, 60] (q in [2, 3, 4, 5, 6, 8])
+   (5, 6, 7, 16, 27, 37, 59): lonely flanks that are multiples of a q <= 8: [27] (q in [3])
+   (5, 6, 8, 14, 34, 36, 48): lonely flanks that are multiples of a q <= 8: [34, 36, 48] (q in [2, 3, 4, 6, 8])
+   (5, 6, 14, 16, 36, 52, 54): lonely flanks that are multiples of a q <= 8: [36, 52, 54] (q in [2, 3, 4, 6])
+   (5, 6, 14, 16, 36, 52, 58): lonely flanks that are multiples of a q <= 8: [36, 52, 58] (q in [2, 3, 4, 6])
+   (5, 7, 12, 24, 38, 41, 53): lonely flanks that are multiples of a q <= 8: [38] (q in [2])
+   (5, 7, 12, 24, 41, 53, 54): lonely flanks that are multiples of a q <= 8: [54] (q in [2, 3, 6])
+   (6, 7, 8, 10, 11, 38, 48): lonely flanks that are multiples of a q <= 8: [38, 48] (q in [2, 3, 4, 6, 8])
+   (6, 7, 8, 10, 11, 51, 52): lonely flanks that are multiples of a q <= 8: [51, 52] (q in [2, 3, 4])
+   (6, 7, 8, 10, 21, 45, 47): lonely flanks that are multiples of a q <= 8: [21, 45] (q in [3, 5, 7])
+   (6, 7, 8, 10, 22, 38, 48): lonely flanks that are multiples of a q <= 8: [22, 38, 48] (q in [2, 3, 4, 6, 8])
+   (6, 7, 8, 10, 41, 47, 48): lonely flanks that are multiples of a q <= 8: [48] (q in [2, 3, 4, 6, 8])
+   (6, 7, 8, 10, 45, 47, 48): lonely flanks that are multiples of a q <= 8: [45, 48] (q in [2, 3, 4, 5, 6, 8])
+   (6, 7, 8, 10, 47, 48, 60): lonely flanks that are multiples of a q <= 8: [48, 60] (q in [2, 3, 4, 5, 6, 8])
+   (6, 8, 10, 14, 45, 48, 51): lonely flanks that are multiples of a q <= 8: [45, 48, 51] (q in [2, 3, 4, 5, 6, 8])
+   (6, 8, 10, 21, 39, 45, 47): lonely flanks that are multiples of a q <= 8: [39, 45] (q in [3, 5])
+   (6, 15, 21, 39, 48, 51, 57): lonely flanks that are multiples of a q <= 8: [39, 51, 57] (q in [3])

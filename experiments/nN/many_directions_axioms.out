@@ -1,0 +1,5 @@
+'LRC.Stepping.span_returns' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Stepping.exists_step_near' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonely_of_model_many' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.exists_merge_model_many' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonely_five_many' depends on axioms: [propext, Classical.choice, Quot.sound]

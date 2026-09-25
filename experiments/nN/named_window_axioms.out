@@ -1,0 +1,5 @@
+'LRC.OrderSixN.lonely_of_123_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.bhk_s7_g4_hard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.bhk_s7_g7_hard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.S7.lonely_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]

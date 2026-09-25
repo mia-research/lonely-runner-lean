@@ -1,0 +1,29 @@
+28 hard sets: first-lap instants blocked by k disparities: [(1, 546), (2, 221), (3, 59), (4, 19), (5, 7), (6, 4)]
+  single-blocker depth |reading| in 64ths (8 = edge of the band): [(0, 74), (1, 52), (2, 95), (3, 85), (4, 60), (5, 54), (6, 75), (7, 45), (8, 6)]
+  share of instants blocked by the busiest disparity: min 0.24 median 0.31 max 0.45;  its rank in the set: [(1, 4), (2, 4), (3, 2), (4, 3), (5, 3), (6, 4), (7, 8)]
+28 hard: instants 30.6; free observed 0.00 vs independent 5.46; blockers per blocked instant 1.51; total blocking load sum_d p_d 1.51
+1,586 failing q = 2..5: instants 34.1; free observed 2.72 vs independent 6.15; blockers per blocked instant 1.63; total blocking load sum_d p_d 1.50
+400 ordinary residual: instants 34.5; free observed 5.83 vs independent 7.44; blockers per blocked instant 1.63; total blocking load sum_d p_d 1.35
+28 hard sets, free flank (e any multiple of q <= 8, e <= 8 max), first lap: certified 21/28; same number of random openings of those flanks: 28/28
+  smallest working flank e, its q, the smallest linked |d' -+ d| at that q, max(S), e in S?:
+    (4, 2, 2, 37, False)
+    (5, 5, 10, 38, False)
+    (4, 2, 2, 27, False)
+    (4, 2, 2, 27, False)
+    (6, 2, 2, 39, False)
+    (4, 4, 12, 39, False)
+    (4, 2, 4, 37, False)
+    (4, 4, 12, 39, False)
+    (7, 7, 14, 32, False)
+    (7, 7, 14, 37, False)
+    (7, 7, 21, 38, False)
+    (7, 7, 21, 38, False)
+    (7, 7, 21, 38, False)
+    (7, 7, 28, 38, False)
+    (7, 7, 21, 38, False)
+    (9, 3, 3, 37, False)
+    (4, 2, 2, 36, False)
+    (9, 3, 3, 36, False)
+    (8, 4, 4, 37, False)
+    (6, 2, 34, 39, False)
+    (6, 2, 34, 39, False)

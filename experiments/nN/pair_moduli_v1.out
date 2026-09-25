@@ -1,0 +1,37 @@
+[1,40] residual v1: 91523 sets; no q <= 8: 28  (68s)
+(A) largest flank has no lonely opening: 128 of 91523 residual sets; of the 28 hard sets: 0
+    residual examples: [(1, 2, 3, 5, 7, 12, 16), (1, 2, 3, 5, 7, 12, 24), (1, 2, 3, 5, 7, 12, 32), (1, 2, 5, 7, 11, 12, 24), (1, 2, 5, 7, 12, 19, 24), (1, 3, 4, 5, 6, 7, 8), (1, 3, 4, 5, 6, 7, 16), (1, 3, 4, 5, 7, 8, 12)]
+    hard-set examples: []
+    of the largest-flank failures, certified by some q <= 8: 128, not: 0
+(B) the hard sets: 28 sets; some pair modulus works: 28; first working pair is the top pair (d_max, d_max-1): 28; rank of first working pair [(0, 28)]; none: 0 []
+    per hard set (top pair diff works, top pair sum works, proper divisor of d_max works):
+    (1, 7, 10, 18, 24, 35, 37): diff 2 -> []; sum 72 -> [9, 18, 24, 36, 72]; d_max 37 -> []; largest flank True
+    (2, 3, 5, 7, 8, 18, 34): diff 16 -> [16]; sum 52 -> [13, 26, 52]; d_max 34 -> [17]; largest flank True
+    (2, 12, 15, 21, 32, 34, 38): diff 4 -> []; sum 72 -> [9, 18, 36, 72]; d_max 38 -> [19]; largest flank True
+    (3, 4, 5, 7, 17, 18, 40): diff 22 -> [11, 22]; sum 58 -> [29, 58]; d_max 40 -> [10, 20]; largest flank True
+    (3, 5, 6, 7, 8, 26, 27): diff 1 -> []; sum 53 -> [53]; d_max 27 -> [9]; largest flank True
+    (3, 5, 6, 7, 8, 27, 30): diff 3 -> []; sum 57 -> [19, 57]; d_max 30 -> [10, 15]; largest flank True
+    (3, 5, 6, 7, 8, 27, 34): diff 7 -> []; sum 61 -> [61]; d_max 34 -> [17]; largest flank True
+    (3, 5, 7, 8, 12, 26, 27): diff 1 -> []; sum 53 -> [53]; d_max 27 -> [9]; largest flank True
+    (3, 5, 7, 8, 12, 27, 30): diff 3 -> []; sum 57 -> [19, 57]; d_max 30 -> [10, 15]; largest flank True
+    (3, 5, 7, 8, 12, 27, 34): diff 7 -> []; sum 61 -> [61]; d_max 34 -> [17]; largest flank True
+    (3, 5, 7, 8, 18, 34, 39): diff 5 -> []; sum 73 -> [73]; d_max 39 -> [13]; largest flank True
+    (3, 6, 15, 21, 24, 33, 39): diff 6 -> []; sum 72 -> [9, 18, 36, 72]; d_max 39 -> [13]; largest flank True
+    (3, 7, 10, 16, 18, 23, 37): diff 14 -> [14]; sum 60 -> [15, 30, 60]; d_max 37 -> []; largest flank True
+    (3, 12, 15, 21, 24, 33, 39): diff 6 -> []; sum 72 -> [9, 18, 36, 72]; d_max 39 -> [13]; largest flank True
+    (4, 5, 6, 8, 14, 27, 32): diff 5 -> []; sum 59 -> [59]; d_max 32 -> [16]; largest flank True
+    (4, 5, 6, 8, 14, 32, 37): diff 5 -> []; sum 69 -> [23, 69]; d_max 37 -> []; largest flank True
+    (4, 5, 6, 14, 16, 17, 38): diff 21 -> [21]; sum 55 -> [11, 55]; d_max 38 -> [19]; largest flank True
+    (4, 5, 6, 14, 16, 34, 38): diff 4 -> []; sum 72 -> [9, 12, 18, 24, 36, 72]; d_max 38 -> [19]; largest flank True
+    (4, 5, 6, 14, 17, 32, 38): diff 6 -> []; sum 70 -> [10, 35, 70]; d_max 38 -> [19]; largest flank True
+    (4, 5, 6, 14, 32, 34, 38): diff 4 -> []; sum 72 -> [9, 12, 18, 24, 36, 72]; d_max 38 -> [19]; largest flank True
+    (4, 6, 14, 15, 16, 34, 38): diff 4 -> []; sum 72 -> [9, 12, 18, 24, 36, 72]; d_max 38 -> [19]; largest flank True
+    (4, 7, 8, 15, 29, 36, 37): diff 1 -> []; sum 73 -> [73]; d_max 37 -> []; largest flank True
+    (5, 6, 7, 8, 29, 34, 36): diff 2 -> []; sum 70 -> [14, 35, 70]; d_max 36 -> [9, 12, 18]; largest flank True
+    (5, 7, 8, 12, 26, 31, 36): diff 5 -> []; sum 67 -> [67]; d_max 36 -> [9, 18]; largest flank True
+    (5, 7, 8, 12, 29, 34, 36): diff 2 -> []; sum 70 -> [14, 35, 70]; d_max 36 -> [9, 12, 18]; largest flank True
+    (5, 7, 12, 27, 32, 33, 37): diff 4 -> []; sum 70 -> [10, 14, 35, 70]; d_max 37 -> []; largest flank True
+    (5, 8, 14, 18, 32, 34, 39): diff 5 -> []; sum 73 -> [73]; d_max 39 -> [13]; largest flank True
+    (5, 8, 18, 28, 34, 38, 39): diff 1 -> []; sum 77 -> [11, 77]; d_max 39 -> [13]; largest flank True
+(B) whole residual, top pair only (diff, sum, proper divisor of d_max): {(True, True, True): 44413, (False, True, True): 34337, (False, True, False): 6538, (True, True, False): 6207, (False, False, True): 12, (True, False, True): 12, (True, False, False): 3, (False, False, False): 1}
+total 72s

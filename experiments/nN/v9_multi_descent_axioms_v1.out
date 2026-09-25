@@ -1,0 +1,9 @@
+@LRC.Descent.lonely_multi_descent_iff : ∀ {n : ℕ},
+  0 < n →
+    ∀ (E : Finset ℕ) (M : List ℕ),
+      ∑ e ∈ E, max 2 (e.gcd n) < n →
+        ((∃ t, 0 < t ∧ (∀ e ∈ E, (↑n)⁻¹ ≤ circDist (↑e * t)) ∧ ∀ m ∈ M, (↑n)⁻¹ ≤ circDist (↑(n * m) * t)) ↔
+          ∃ τ, 0 < τ ∧ ∀ m ∈ M, (↑n)⁻¹ ≤ circDist (↑m * τ))
+'LRC.Descent.bad_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Descent.card_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.Descent.lonely_multi_descent_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

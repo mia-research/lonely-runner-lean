@@ -1,0 +1,4 @@
+'LRC.OrderEightN.card_rungUnits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.lonely_eight_of_rung_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.link_reading' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderEightN.link_reading_emod' depends on axioms: [propext, Classical.choice, Quot.sound]

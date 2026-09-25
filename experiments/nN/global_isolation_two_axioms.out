@@ -1,0 +1,5 @@
+'LRC.OrderSixN.orbit_isolation_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.orbit_isolation_two_bhk' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.isolation_or_short_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.meetsBox_iff_orbitMeets' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.order_bound_of_minimal' depends on axioms: [propext, Classical.choice, Quot.sound]

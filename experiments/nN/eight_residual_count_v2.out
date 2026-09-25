@@ -1,0 +1,6 @@
+N = 30: 7-subsets of [1,30]
+  EightResidual without no_rational_opening (v1): 12309
+  EightResidual as stated (v2): 5816
+  class form vs Theorem 10 disagreements: 0
+  residual sets with NO certificate at any flank: 0  []
+  5.2s
