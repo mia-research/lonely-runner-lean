@@ -1,0 +1,9 @@
+runners within 1/8 of their own vertex at their own event (frame: AP anchored at slowest and fastest)
+family                     runners    k/8  k a/8, some odd a   event / AP instant: median, max
+AP gap 840 + dev 1/100         800    749                800   1.005, 5.016
+AP gap 840 + dev 1/8           800    682                743   1.071, 5.102
+AP gap 840 + dev 1/2           800    355                587   1.532, 37.770
+AP gap 840 + dev 2             800    252                543   2.395, 722.636
+uniform [1,60]                 800    275                556   2.240, 11.898
+uniform [1,1000]               800    281                553   2.283, 142.037
+late events (the subject)       34      5                 23
