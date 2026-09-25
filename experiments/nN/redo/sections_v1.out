@@ -1,0 +1,4 @@
+3107 separated runners
+(a) at the core's own event, non-pinning core readings by segment: {1: 1607, 2: 900, 3: 604, 4: 427, 5: 336, 6: 283}
+(b) at the runner's event t*, non-pinning core readings by segment: {1: 3426, 2: 905, 3: 604, 4: 424, 5: 328, 6: 292};  least slack beyond 1/8: 0.0000
+    non-pinning block readings by segment: {1: 2616, 2: 2290, 3: 1973, 4: 1815, 5: 1762, 6: 1760};  least slack beyond 1/8: 2.50e-06
