@@ -1,0 +1,5 @@
+hard sets: 28
+c = 1/4 (claimed): needs (d+d')/max(core) >= 8.0; hard sets meeting it: 0/28
+c = 5/32 (floor): needs (d+d')/max(core) >= 12.8; hard sets meeting it: 0/28
+c = 1/12 (proved): needs (d+d')/max(core) >= 24.0; hard sets meeting it: 0/28
+best (d+d')/max(core) over the hard sets: min 2.1875, max 7.6250
