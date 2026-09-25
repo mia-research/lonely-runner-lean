@@ -1,0 +1,10 @@
+1,436 rule-miss sets: cascade steps with a runner in the way 2533;  steps with 2+ runners in the zone on one side 616
+   (1, 4, 5, 7, 18, 32, 46) at t = 33/256 (D = 1/(8t) = 32/33): readings s = d/D: {1: '33/32', 4: '33/8', 5: '165/32', 7: '231/32', 18: '297/16', 32: '33', 46: '759/16'}
+      in the zone ahead (s mod 8 in (0,1)): [];  behind (s mod 8 in (7,8)): [7, 46]
+   (1, 4, 5, 7, 18, 32, 46) at t = 9/32 (D = 1/(8t) = 4/9): readings s = d/D: {1: '9/4', 4: '9', 5: '45/4', 7: '63/4', 18: '81/2', 32: '72', 46: '207/2'}
+      in the zone ahead (s mod 8 in (0,1)): [18, 32];  behind (s mod 8 in (7,8)): [7, 46]
+1,500 random 7-sets of [1,200]: cascade steps with a runner in the way 1404;  steps with 2+ runners in the zone on one side 349
+   (9, 16, 31, 73, 111, 150, 151) at t = 1/72 (D = 1/(8t) = 9): readings s = d/D: {9: '1', 16: '16/9', 31: '31/9', 73: '73/9', 111: '37/3', 150: '50/3', 151: '151/9'}
+      in the zone ahead (s mod 8 in (0,1)): [73, 150, 151];  behind (s mod 8 in (7,8)): []
+   (5, 26, 32, 33, 37, 143, 172) at t = 9/256 (D = 1/(8t) = 32/9): readings s = d/D: {5: '45/32', 26: '117/16', 32: '9', 33: '297/32', 37: '333/32', 143: '1287/32', 172: '387/8'}
+      in the zone ahead (s mod 8 in (0,1)): [143, 172];  behind (s mod 8 in (7,8)): [26]
