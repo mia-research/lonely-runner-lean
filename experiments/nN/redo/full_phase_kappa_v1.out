@@ -1,0 +1,4 @@
+f=3: ROOM 1.350;  full-phase kappa found 0.631 turns  (shape [1.0, 1.386, 1.972], phases [0.606, 0.749, 0.881])  (1s)
+f=4: ROOM 2.250;  full-phase kappa found 0.991 turns  (shape [1.0, 1.167, 1.399, 1.936], phases [0.618, 0.155, 0.739, 0.905])  (1s)
+f=5: ROOM 3.750;  full-phase kappa found 0.977 turns  (shape [1.0, 1.375, 1.684, 2.076, 5.728], phases [0.536, 0.021, 0.541, 0.68, 0.529])  (1s)
+f=6: ROOM 6.750;  full-phase kappa found 1.393 turns  (shape [1.0, 1.111, 1.774, 2.495, 3.749, 8.795], phases [0.857, 0.264, 0.331, 0.785, 0.904, 0.135])  (2s)
