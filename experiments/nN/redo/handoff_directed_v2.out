@@ -1,0 +1,20 @@
+  ('first cell', 'at t_C'): 144
+  ('first cell', 'interior of a core cell'): 3
+  ('handoff', 'start of a later core cell'): 33
+
+(ii) core blocked at every period point k/g:
+  core (32,208) train step 16 x5 N=10000: core blocked at all k/g: True; t_C 1/256; t_pred 1/256; event 0.0039125 (core cell #0); (t-t_pred)N 0.062
+  core (32,208) train step 16 x5 N=100000: core blocked at all k/g: True; t_C 1/256; t_pred 1/256; event 0.0039062 (core cell #0); (t-t_pred)N 0.000
+  core (32,208) train step 16 x5 N=1000000: core blocked at all k/g: True; t_C 1/256; t_pred 1/256; event 0.0039062 (core cell #0); (t-t_pred)N 0.000
+  core (16,96) train step 16 x5 N=10000: core blocked at all k/g: True; t_C 1/128; t_pred 1/128; event 0.0078125 (core cell #0); (t-t_pred)N 0.000
+  core (16,96) train step 16 x5 N=100000: core blocked at all k/g: True; t_C 1/128; t_pred 1/128; event 0.0078125 (core cell #0); (t-t_pred)N 0.000
+  core (16,96) train step 16 x5 N=1000000: core blocked at all k/g: True; t_C 1/128; t_pred 1/128; event 0.0078131 (core cell #0); (t-t_pred)N 0.625
+  core (48,320) train step 16 x4 N=10000: core blocked at all k/g: True; t_C 1/384; t_pred 1/384; event 0.0026125 (core cell #0); (t-t_pred)N 0.083
+  core (48,320) train step 16 x4 N=100000: core blocked at all k/g: True; t_C 1/384; t_pred 1/384; event 0.0026042 (core cell #0); (t-t_pred)N 0.000
+  core (48,320) train step 16 x4 N=1000000: core blocked at all k/g: True; t_C 1/384; t_pred 1/384; event 0.0026042 (core cell #0); (t-t_pred)N 0.000
+  core (32,224) train step 16 x4 N=10000: core blocked at all k/g: True; t_C 1/256; t_pred 9/1792; event 0.0050223 (core cell #0); (t-t_pred)N 0.000
+  core (32,224) train step 16 x4 N=100000: core blocked at all k/g: True; t_C 1/256; t_pred 9/1792; event 0.0039062 (core cell #None); (t-t_pred)N -111.607
+  core (32,224) train step 16 x4 N=1000000: core blocked at all k/g: True; t_C 1/256; t_pred 9/1792; event 0.0039062 (core cell #None); (t-t_pred)N -1116.071
+  core (24,162) train step 6 x5 N=10000: core blocked at all k/g: True; t_C 1/192; t_pred 1/192; event 0.0052125 (core cell #0); (t-t_pred)N 0.042
+  core (24,162) train step 6 x5 N=100000: core blocked at all k/g: True; t_C 1/192; t_pred 1/192; event 0.0052112 (core cell #0); (t-t_pred)N 0.292
+  core (24,162) train step 6 x5 N=1000000: core blocked at all k/g: True; t_C 1/192; t_pred 1/192; event 0.0052083 (core cell #0); (t-t_pred)N 0.000

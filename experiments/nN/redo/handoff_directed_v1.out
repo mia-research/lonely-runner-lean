@@ -1,0 +1,38 @@
+base: a=10, b=69, d=16, f=5, N=10^5
+  t_C=1/80, first core cell [0.012500, 0.012681], train max gap at t_C 1/5; subject event 0.016306 in core cell #1; t_pred 3/184 = 0.016304; (t - t_pred)*N = 0.168
+  every runner's event: ['0.016306', '0.019074', '0.002119', '0.007812', '0.007812', '0.007814', '0.007813', '0.007812']
+
+perturb b (core ratio), d (train step), f (train length), N:
+  180 arrangements; handoff (event outside the core's first cell) in 33
+  (t - t_pred)*N over all: min 0.000, max 0.617
+  core-cell index of the event: {0: 147, 1: 33}
+   b=61 d=12: first cell [0.01250,0.01434] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=61 d=14: first cell [0.01250,0.01434] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=61 d=16: first cell [0.01250,0.01434] gap@tC 0.200  event 0.018443 cell#1  t_pred 9/488  (t-tp)N 0.00
+   b=61 d=18: first cell [0.01250,0.01434] gap@tC 0.225  event 0.013894 cell#0  t_pred 1/72  (t-tp)N 0.49
+   b=61 d=20: first cell [0.01250,0.01434] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
+   b=63 d=12: first cell [0.01250,0.01389] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=63 d=14: first cell [0.01250,0.01389] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=63 d=16: first cell [0.01250,0.01389] gap@tC 0.200  event 0.017863 cell#1  t_pred 1/56  (t-tp)N 0.55
+   b=63 d=18: first cell [0.01250,0.01389] gap@tC 0.225  event 0.017858 cell#1  t_pred 1/56  (t-tp)N 0.12
+   b=63 d=20: first cell [0.01250,0.01389] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
+   b=65 d=12: first cell [0.01250,0.01346] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=65 d=14: first cell [0.01250,0.01346] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=65 d=16: first cell [0.01250,0.01346] gap@tC 0.200  event 0.017313 cell#1  t_pred 9/520  (t-tp)N 0.52
+   b=65 d=18: first cell [0.01250,0.01346] gap@tC 0.225  event 0.017312 cell#1  t_pred 9/520  (t-tp)N 0.42
+   b=65 d=20: first cell [0.01250,0.01346] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
+   b=67 d=12: first cell [0.01250,0.01306] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=67 d=14: first cell [0.01250,0.01306] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=67 d=16: first cell [0.01250,0.01306] gap@tC 0.200  event 0.016793 cell#1  t_pred 9/536  (t-tp)N 0.21
+   b=67 d=18: first cell [0.01250,0.01306] gap@tC 0.225  event 0.016792 cell#1  t_pred 9/536  (t-tp)N 0.11
+   b=67 d=20: first cell [0.01250,0.01306] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
+   b=68 d=12: first cell [0.01250,0.01287] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=68 d=14: first cell [0.01250,0.01287] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=68 d=16: first cell [0.01250,0.01287] gap@tC 0.200  event 0.016546 cell#1  t_pred 9/544  (t-tp)N 0.18
+   b=68 d=18: first cell [0.01250,0.01287] gap@tC 0.225  event 0.016545 cell#1  t_pred 9/544  (t-tp)N 0.12
+   b=68 d=20: first cell [0.01250,0.01287] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
+   b=69 d=12: first cell [0.01250,0.01268] gap@tC 0.400  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=69 d=14: first cell [0.01250,0.01268] gap@tC 0.300  event 0.012501 cell#0  t_pred 1/80  (t-tp)N 0.12
+   b=69 d=16: first cell [0.01250,0.01268] gap@tC 0.200  event 0.016306 cell#1  t_pred 3/184  (t-tp)N 0.17
+   b=69 d=18: first cell [0.01250,0.01268] gap@tC 0.225  event 0.016305 cell#1  t_pred 3/184  (t-tp)N 0.10
+   b=69 d=20: first cell [0.01250,0.01268] gap@tC 0.250  event 0.012504 cell#0  t_pred 1/80  (t-tp)N 0.37
