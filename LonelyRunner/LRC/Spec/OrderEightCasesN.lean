@@ -937,27 +937,27 @@ theorem lonelyRunnerAt8_of_residual
   LRC.Spec.lonelyRunnerAt8_of_existence (existenceAt8_iff_residual.mpr hres)
 
 /-- **The residual statement asks nothing beyond the conjecture.**  A residual set `R` is the
-disparity set of the arrangement `(0, r₁, …, r₇)` for its subject, the runner of speed `0`; the
-conjecture at eight runners, applied to that one subject, gives the residual statement back.  No
-runner is pinned in the target: `0` is simply one of the eight speeds of this particular
-arrangement. -/
+reading set of the runner at speed `1` in the arrangement `(1, 1 + r₁, …, 1 + r₇)`: every speed is
+positive, no runner is at rest, and the runner's own readings `v_j − v_1` are exactly `R`
+(`MANUSCRIPT_v21` §1.1: reading `v_j − v_i` is what "`i` is lonely" means).  The conjecture at eight
+runners, applied to that runner, gives the residual statement back. -/
 theorem residual_of_lonelyRunnerAt8 (h : LRC.Spec.LonelyRunnerAt8) :
     ∀ R : Finset ℕ, (∀ d ∈ R, 0 < d) → EightResidual R →
       ∃ t : ℝ, 0 < t ∧ ∀ d ∈ R, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
   intro R hpos hR
   classical
   set f := R.orderEmbOfFin hR.card_eq with hf
-  set v : Fin 8 → ℝ := Fin.cons 0 (fun i : Fin 7 => ((f i : ℕ) : ℝ)) with hv
+  set v : Fin 8 → ℝ := Fin.cons 1 (fun i : Fin 7 => 1 + ((f i : ℕ) : ℝ)) with hv
   have hinj : Function.Injective v := by
     refine Fin.cons_injective_iff.mpr ⟨?_, ?_⟩
     · rintro ⟨i, hi⟩
       have hmem : f i ∈ R := Finset.orderEmbOfFin_mem R hR.card_eq i
-      have h0 : ((f i : ℕ) : ℝ) = 0 := hi
-      have : f i = 0 := by exact_mod_cast h0
+      have h0 : 1 + ((f i : ℕ) : ℝ) = 1 := hi
+      have : f i = 0 := by exact_mod_cast (by linarith : ((f i : ℕ) : ℝ) = 0)
       exact absurd (hpos _ hmem) (by omega)
     · intro a b hab
-      have hab' : ((f a : ℕ) : ℝ) = ((f b : ℕ) : ℝ) := hab
-      have : (f a : ℕ) = f b := by exact_mod_cast hab'
+      have hab' : 1 + ((f a : ℕ) : ℝ) = 1 + ((f b : ℕ) : ℝ) := hab
+      have : (f a : ℕ) = f b := by exact_mod_cast (by linarith : ((f a : ℕ) : ℝ) = ((f b : ℕ) : ℝ))
       exact f.injective this
   obtain ⟨t, ht, hl⟩ := h v hinj 0
   refine ⟨t, ht, fun d hd => ?_⟩
@@ -966,7 +966,8 @@ theorem residual_of_lonelyRunnerAt8 (h : LRC.Spec.LonelyRunnerAt8) :
       rw [hf, Finset.range_orderEmbOfFin]; exact hd
     exact this
   have := hl i.succ (Fin.succ_ne_zero i)
-  simpa [hv, hi] using this
+  have e : v i.succ * t - v 0 * t = (d : ℝ) * t := by simp [hv, hi]; ring
+  rwa [e] at this
 
 /-- **The owed statement is the conjecture at eight runners, exactly.** -/
 theorem lonelyRunnerAt8_iff_residual :

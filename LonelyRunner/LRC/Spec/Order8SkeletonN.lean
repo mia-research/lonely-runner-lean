@@ -6,22 +6,29 @@ import LonelyRunner.LRC.Spec.OrderEightCasesN
 2026-09-25.  Scale invariance fixes the scale up to one factor, so a whole-number disparity set is
 its ratios.  Split on **separation of scale** with threshold `T`:
 
-* **separated** (`Separated8 T S`): the set splits into a slow core `C` and a fast block `F` with
-  `T·c ≤ x` for every `c ∈ C`, `x ∈ F`;
+* **separated** (`Separated8 T S`): a runner's readings split into a slow core `C` and a fast block
+  `F` with `T·c ≤ x` for every `c ∈ C`, `x ∈ F`;
 * **scale-free**: otherwise.  Every consecutive ratio is then below `T`.
 
+**Frame (restated 2026-09-25, `MANUSCRIPT_v21` §1.1).**  The owed statements quantify over
+**arrangements** of eight distinct positive speeds and over **every runner** `k`, and apply the split
+to that runner's own readings `readingsOf v k` (`|v_j − v_k|`, what "`k` is lonely" means).  No runner
+is held at rest: a set of seven readings is realised as the readings of the runner at speed `1` in the
+arrangement `(1, 1 + s₁, …, 1 + s₇)` (`readingsOf_cons`).  The earlier statement over bare difference
+sets is withdrawn.
+
 Every set is one or the other, so the split cannot leak.  The proof then asks, for each block size
-`f`, that every separated set with a block of `f` runners be lonely (`BlockRule8 f T`), and that
-every scale-free set be lonely (`BoundedCovered8 T`).  `lonelyRunnerAt8_of_skeleton` proves that
-these give the conjecture.  At `T = 9` the block sizes 1 and 2 are **discharged**: R8 carries a
-block of one (`blockRule8_one`) and the fast pair a block of two (`blockRule8_two`).  So the
-conjecture at eight runners follows from exactly five named statements (`lonelyRunnerAt8_of_holes`):
+`f`, that every runner whose readings are separated with a block of `f` be lonely (`ArrBlockRule8 f T`), and
+that every runner whose readings are scale-free be lonely (`ArrBoundedCovered8 T`).  At `T = 9` the
+block sizes 1 and 2 are **discharged** as lemmas about a runner's readings: R8 carries a block of one
+(`blockRule8_one`) and the fast pair a block of two (`blockRule8_two`).  So the conjecture at eight
+runners follows from exactly five named statements (`lonelyRunnerAt8_of_arrangement_holes`):
 
 | hole | what is in hand toward it |
 |---|---|
-| `BlockRule8 3 9`, `BlockRule8 4 9` | block split (common factor), synchronised block at the seventh; window constants measured, not proved |
-| `BlockRule8 5 9`, `BlockRule8 6 9` | block split; synchronised block at the seventh (cores not divisible by 7); general R owed; unsynchronised blocks: none |
-| `BoundedCovered8 9` | the case list of `OrderEightCasesN`; the two-pinner lemma at tight points; the finite cover not built |
+| `ArrBlockRule8 3 9`, `ArrBlockRule8 4 9` | block split (common factor), synchronised block at the seventh; window constants measured, not proved |
+| `ArrBlockRule8 5 9`, `ArrBlockRule8 6 9` | block split; synchronised block at the seventh (cores not divisible by 7); general R owed; unsynchronised blocks: none |
+| `ArrBoundedCovered8 9` | the case list of `OrderEightCasesN`; the two-pinner lemma at tight points; the finite cover not built |
 
 These are **OWED**: asserted nowhere, used only as hypotheses.  None of them adds a requirement to
 the conjecture: each is a family of instances of it.
@@ -48,51 +55,11 @@ def Separated8 (T : ℕ) (S : Finset ℕ) : Prop :=
   ∃ m : ℕ, (S.filter (· ≤ m)).Nonempty ∧ (S.filter (m < ·)).Nonempty ∧
     ∀ c ∈ S.filter (· ≤ m), ∀ x ∈ S.filter (m < ·), T * c ≤ x
 
-/-- **The block rule for blocks of `f` runners** (OWED for `f ≥ 3`): a nonempty core `C` below a
-block `F` of `f` runners, `T·c ≤ x` across, at most seven in all, is lonely. -/
+/-- **The block rule, as a lemma about one runner's readings**: a nonempty core `C` below a block `F`
+of `f` readings, `T·c ≤ x` across, at most seven in all, is lonely.  Proved for `f = 1, 2` at `T = 9`. -/
 def BlockRule8 (f T : ℕ) : Prop :=
   ∀ C F : Finset ℕ, (∀ d ∈ C, 0 < d) → (∀ d ∈ F, 0 < d) → F.card = f → C.card + F.card ≤ 7 →
     C.Nonempty → (∀ c ∈ C, ∀ x ∈ F, T * c ≤ x) → Lonely8 (C ∪ F)
-
-/-- **The bounded region** (OWED): every scale-free set of at most seven is lonely. -/
-def BoundedCovered8 (T : ℕ) : Prop :=
-  ∀ S : Finset ℕ, (∀ d ∈ S, 0 < d) → S.card ≤ 7 → ¬ Separated8 T S → Lonely8 S
-
-/-- **The skeleton.**  Block rules for every block size `1 … 6` and the bounded region give every
-whole-number set of at most seven. -/
-theorem lonely8_of_skeleton {T : ℕ} (hblock : ∀ f, 1 ≤ f → f ≤ 6 → BlockRule8 f T)
-    (hbounded : BoundedCovered8 T) (S : Finset ℕ) (hpos : ∀ d ∈ S, 0 < d) (hcard : S.card ≤ 7) :
-    Lonely8 S := by
-  classical
-  by_cases hsep : Separated8 T S
-  · obtain ⟨m, hCne, hFne, hsplit⟩ := hsep
-    set C := S.filter (· ≤ m)
-    set F := S.filter (m < ·)
-    have hunion : C ∪ F = S := by
-      ext d; simp only [C, F, Finset.mem_union, Finset.mem_filter]
-      constructor
-      · rintro (⟨h, -⟩ | ⟨h, -⟩) <;> exact h
-      · intro h; by_cases hd : d ≤ m
-        · exact Or.inl ⟨h, hd⟩
-        · exact Or.inr ⟨h, by omega⟩
-    have hcardsum : C.card + F.card = S.card := by
-      rw [← Finset.card_union_of_disjoint]
-      · rw [hunion]
-      · rw [Finset.disjoint_left]; intro d hd hd'
-        simp only [C, F, Finset.mem_filter] at hd hd'; omega
-    have hF1 : 1 ≤ F.card := Finset.card_pos.mpr hFne
-    have hC1 : 1 ≤ C.card := Finset.card_pos.mpr hCne
-    have hl := hblock F.card hF1 (by omega) C F
-      (fun d hd => hpos d (Finset.mem_of_mem_filter d hd))
-      (fun d hd => hpos d (Finset.mem_of_mem_filter d hd)) rfl (by omega) hCne hsplit
-    rwa [hunion] at hl
-  · exact hbounded S hpos hcard hsep
-
-/-- **The conjecture at eight runners from the skeleton.** -/
-theorem lonelyRunnerAt8_of_skeleton {T : ℕ} (hblock : ∀ f, 1 ≤ f → f ≤ 6 → BlockRule8 f T)
-    (hbounded : BoundedCovered8 T) : LRC.Spec.LonelyRunnerAt8 :=
-  LRC.Spec.lonelyRunnerAt8_of_existence
-    (existenceAt8_of_nat fun S hpos hcard => lonely8_of_skeleton hblock hbounded S hpos hcard)
 
 /-- **Block of one, discharged** at `T = 9`: R8. -/
 theorem blockRule8_one : BlockRule8 1 9 := by
@@ -139,13 +106,111 @@ theorem blockRule8_two : BlockRule8 2 9 := by
     · rw [h]; exact hal
     · rw [Finset.mem_singleton.mp h]; exact hbl
 
-/-- **The conjecture at eight runners from exactly five named holes.** -/
-theorem lonelyRunnerAt8_of_holes (h3 : BlockRule8 3 9) (h4 : BlockRule8 4 9) (h5 : BlockRule8 5 9)
-    (h6 : BlockRule8 6 9) (hB : BoundedCovered8 9) : LRC.Spec.LonelyRunnerAt8 := by
-  refine lonelyRunnerAt8_of_skeleton (T := 9) (fun f hf1 hf6 => ?_) hB
+/-- A runner's own readings in an arrangement: `|v_j − v_k|` for the other seven. -/
+def readingsOf (v : Fin 8 → ℕ) (k : Fin 8) : Finset ℕ :=
+  (Finset.univ.erase k).image (fun i => Nat.dist (v i) (v k))
+
+/-- An arrangement: eight distinct positive speeds.  No runner is at rest. -/
+def Arr8 (v : Fin 8 → ℕ) : Prop := (∀ i, 0 < v i) ∧ Function.Injective v
+
+/-- **The block rule on arrangements** (OWED for `f ≥ 3`): every runner of every arrangement whose
+readings split at `m` into a nonempty core below and a block of `f` above, `T·c ≤ x` across, is lonely. -/
+def ArrBlockRule8 (f T : ℕ) : Prop :=
+  ∀ v : Fin 8 → ℕ, Arr8 v → ∀ k : Fin 8, ∀ m : ℕ,
+    ((readingsOf v k).filter (· ≤ m)).Nonempty → ((readingsOf v k).filter (m < ·)).card = f →
+    (∀ c ∈ (readingsOf v k).filter (· ≤ m), ∀ x ∈ (readingsOf v k).filter (m < ·), T * c ≤ x) →
+    Lonely8 (readingsOf v k)
+
+/-- **The bounded region on arrangements** (OWED): every runner of every arrangement whose readings
+are scale-free is lonely. -/
+def ArrBoundedCovered8 (T : ℕ) : Prop :=
+  ∀ v : Fin 8 → ℕ, Arr8 v → ∀ k : Fin 8, ¬ Separated8 T (readingsOf v k) → Lonely8 (readingsOf v k)
+
+/-- The arrangement `(1, 1 + s₁, …, 1 + s₇)`: every speed positive, all distinct. -/
+theorem arr8_cons (S : Finset ℕ) (hS : S.card = 7) (hpos : ∀ d ∈ S, 0 < d) :
+    Arr8 (Fin.cons 1 (fun i : Fin 7 => 1 + S.orderEmbOfFin hS i)) := by
+  refine ⟨fun i => ?_, ?_⟩
+  · refine Fin.cases ?_ (fun j => ?_) i
+    · simp
+    · simp only [Fin.cons_succ]; omega
+  · refine Fin.cons_injective_iff.mpr ⟨?_, ?_⟩
+    · rintro ⟨j, hj⟩
+      simp only at hj
+      have := hpos _ (Finset.orderEmbOfFin_mem S hS j); omega
+    · intro a b hab
+      exact (S.orderEmbOfFin hS).injective (by simpa using hab)
+
+/-- **The runner at speed `1` reads exactly `S`.** -/
+theorem readingsOf_cons (S : Finset ℕ) (hS : S.card = 7) :
+    readingsOf (Fin.cons 1 (fun i : Fin 7 => 1 + S.orderEmbOfFin hS i)) 0 = S := by
+  classical
+  ext d
+  simp only [readingsOf, Finset.mem_image, Finset.mem_erase, Finset.mem_univ, and_true]
+  constructor
+  · rintro ⟨i, hi0, rfl⟩
+    obtain ⟨j, rfl⟩ := Fin.exists_succ_eq.mpr hi0
+    simp only [Fin.cons_succ, Fin.cons_zero, Nat.dist]
+    have hm := Finset.orderEmbOfFin_mem S hS j
+    have : 1 + S.orderEmbOfFin hS j - 1 + (1 - (1 + S.orderEmbOfFin hS j)) =
+        S.orderEmbOfFin hS j := by omega
+    rwa [this]
+  · intro hd
+    obtain ⟨j, hj⟩ : ∃ j, S.orderEmbOfFin hS j = d := by
+      have : d ∈ Set.range (S.orderEmbOfFin hS) := by rw [Finset.range_orderEmbOfFin]; exact hd
+      exact this
+    refine ⟨j.succ, Fin.succ_ne_zero j, ?_⟩
+    simp only [Fin.cons_succ, Fin.cons_zero, Nat.dist]
+    omega
+
+/-- **The skeleton on arrangements.**  Every whole-number set of at most seven readings is lonely,
+given the owed arrangement statements for blocks of `3 … 6` and the bounded region. -/
+theorem lonely8_of_arrangement_holes (h : ∀ f, 3 ≤ f → f ≤ 6 → ArrBlockRule8 f 9)
+    (hB : ArrBoundedCovered8 9) (S : Finset ℕ) (hpos : ∀ d ∈ S, 0 < d) (hcard : S.card ≤ 7) :
+    Lonely8 S := by
+  classical
+  by_cases h6 : S.card ≤ 6
+  · exact lonely_eight_of_card_le_six hpos h6
+  have hS : S.card = 7 := by omega
+  have hR := readingsOf_cons S hS
+  have harr := arr8_cons S hS hpos
+  set v : Fin 8 → ℕ := Fin.cons 1 (fun i : Fin 7 => 1 + S.orderEmbOfFin hS i) with hv
+  by_cases hsep : Separated8 9 S
+  · obtain ⟨m, hCne, hFne, hsplit⟩ := hsep
+    set C := S.filter (· ≤ m)
+    set F := S.filter (m < ·)
+    have hunion : C ∪ F = S := by
+      ext d; simp only [C, F, Finset.mem_union, Finset.mem_filter]
+      constructor
+      · rintro (⟨hd, -⟩ | ⟨hd, -⟩) <;> exact hd
+      · intro hd; by_cases hdm : d ≤ m
+        · exact Or.inl ⟨hd, hdm⟩
+        · exact Or.inr ⟨hd, by omega⟩
+    have hcardsum : C.card + F.card = S.card := by
+      rw [← Finset.card_union_of_disjoint]
+      · rw [hunion]
+      · rw [Finset.disjoint_left]; intro d hd hd'
+        simp only [C, F, Finset.mem_filter] at hd hd'; omega
+    have hF1 : 1 ≤ F.card := Finset.card_pos.mpr hFne
+    have hC1 : 1 ≤ C.card := Finset.card_pos.mpr hCne
+    have hCpos : ∀ d ∈ C, 0 < d := fun d hd => hpos d (Finset.mem_of_mem_filter d hd)
+    have hFpos : ∀ d ∈ F, 0 < d := fun d hd => hpos d (Finset.mem_of_mem_filter d hd)
+    by_cases hf1 : F.card = 1
+    · have := blockRule8_one C F hCpos hFpos hf1 (by omega) hCne hsplit; rwa [hunion] at this
+    by_cases hf2 : F.card = 2
+    · have := blockRule8_two C F hCpos hFpos hf2 (by omega) hCne hsplit; rwa [hunion] at this
+    have hrule := h F.card (by omega) (by omega) v harr 0 m
+    rw [hR] at hrule
+    exact hrule hCne rfl hsplit
+  · have := hB v harr 0 (by rw [hR]; exact hsep)
+    rwa [hR] at this
+
+/-- **The conjecture at eight runners from exactly five named holes, stated on arrangements.** -/
+theorem lonelyRunnerAt8_of_arrangement_holes (h3 : ArrBlockRule8 3 9) (h4 : ArrBlockRule8 4 9)
+    (h5 : ArrBlockRule8 5 9) (h6 : ArrBlockRule8 6 9) (hB : ArrBoundedCovered8 9) :
+    LRC.Spec.LonelyRunnerAt8 := by
+  refine LRC.Spec.lonelyRunnerAt8_of_existence (existenceAt8_of_nat fun S hpos hcard => ?_)
+  refine lonely8_of_arrangement_holes (fun f hf3 hf6 => ?_) hB S hpos hcard
   interval_cases f
-  · exact blockRule8_one
-  · exact blockRule8_two
   · exact h3
   · exact h4
   · exact h5
