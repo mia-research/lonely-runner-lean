@@ -579,3 +579,45 @@ and by CRT one choice of offsets can fill every small grid at once.
 - `two_pinner`: one of the pinned opening and the mirror opening always keeps both pinners clear.
 
 Scope: the pinners only. The other runners' slack is a set-specific radius, a separate hypothesis.
+
+## 2026-09-25 — E18. The skeleton in Lean; the cascade is a map; the continuity route from global isolation
+
+**Owner (2026-09-25).**
+- The cascade is not a search function.
+- For any arrangement it identifies the scale.
+- The event it identifies rests on the AP's global isolation, deformed.
+- Global isolation can be proved by the φ(n) law.
+
+**The cascade, stated as a map** (correcting E16–E17's algorithm words: "terminates", "halts",
+"runs"). The cascade is a map on instants fixed by the speeds: an instant goes to the largest next
+opening of the runners in the way there, and stays where none is. Its fixed point is the isolation
+event, at `u = 1/8` of the scale `D_final` (Theorems 11, 6.15). What a proof must establish is that
+**this map has a fixed point for every arrangement**, a property of the map, which Theorem 13 makes
+equivalent to loneliness.
+
+**The skeleton** `[PROVED — Lean Order8SkeletonN, gate PASS 1,557/1,557]`. Split on separation of
+scale at `T = 9`: separated (a slow core and a fast block of `f` runners) or scale-free. The split
+cannot leak.
+- `lonelyRunnerAt8_of_holes`: the conjecture at eight runners follows from exactly five named OWED
+  statements, `BlockRule8 3/4/5/6 9` and `BoundedCovered8 9`.
+- Block sizes 1 and 2 are discharged (`blockRule8_one` by R8, `blockRule8_two` by the fast pair).
+- The cascade's own route, `DoorFAM` ↔ lonely (`doors_agree`), stands beside it.
+
+**The continuity route (the owner's deformation argument, made exact)** `[reasoned; not in Lean]`.
+Take any path of speeds from the AP (`λ = 0`) to a target (`λ = 1`), and let `Λ` be the set of `λ`
+at which the subject is lonely.
+- `0 ∈ Λ` by the φ(n) law.
+- **`Λ` is open.** A lonely set with a cell of positive length has an interior instant with margin,
+  which survives small changes of speed. A lonely set of isolated points only (a tight
+  configuration) survives by the two-pinner lemma.
+- **`Λ` is closed** if the lonely instants stay in a bounded window along the path: a limit of lonely
+  instants is lonely, loneliness being closed.
+
+So `Λ = [0,1]`. The argument concerns the lonely **set**, so the deaths and births along a path
+(`deformation_v1`) do no harm. It reduces the deformation argument to two statements:
+1. **Persistence at every tight configuration.** The two-pinner lemma covers an isolated instant with
+   exactly two pinners at commensurable speeds (its mirror step uses a period). Needed: every tight
+   configuration is commensurable and has such an instant, or a version for three or more pinners.
+   All three known tight sets are whole-number sets with the pinner pair `{1, 7}`.
+2. **No escape to infinity along the path.** A bound on lonely instants, used as a compactness tool.
+   It is not a cap on the cascade and asks nothing of when the event falls.
