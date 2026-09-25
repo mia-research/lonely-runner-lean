@@ -1150,3 +1150,46 @@ bounds below).
 shapes and phases, window = ROOM(3) = 27/20 turns). First run to a 3,000,000-evaluation cap:
 1,498,439 boxes certified, **no refuting centre**, 173 boxes open (not complete). Re-running with the
 certified volume tracked.
+
+## 2026-09-25 — E33. The law of delayed isolation, found by perturbation
+
+**Certification abandoned.** `certify_f3_v1` (exact branch and bound, `f = 3`, all shapes and phases):
+after 3,998,406 certified boxes, **0.0001%** of the volume, stuck near relay configurations, no
+refutation. Brute certification is the wrong tool; the cascade's mechanism is the right one.
+
+**Owner (2026-09-25).**
+- Take arrangements that delay the isolation, perturb them, and find the exact ratio at play.
+- The aim: existence of isolation is held proved (deformation of global isolation); what must be shown
+  is that **every arrangement is finite**, i.e. no arrangement only moves the isolation event around.
+
+**Perturbation** (`redo/perturb_delay_v1.out` … `v3.out`; exact).
+- Arrangement `[8, 12, 38, 100005, 100016, 100027, 100038, 100048]`, runner 8: 191 cascade moves.
+  Moving any one fast speed by `≥ 2` drops it to 1–6 moves; within a window about 2 wide it stays at 191
+  (or 784). The last speed is irrelevant. **A resonance.**
+- Family: slow `[8, 12, 38]` and a fast train `N + (0, d, 2d, 3d)` plus a tail. Only `d = 10` and
+  `d = 11` resonate; there the move count grows in proportion to `N` (`d = 10`: 1,044 / 2,086 / 4,169 /
+  8,336 at `N = 5×10⁴ … 4×10⁵`), and the **delay in time is independent of `N`**.
+
+**The law.** Let `t_C` be the core's opening instant, fixed by the runner's slow neighbours (`3/80`
+here). The fast train's **speed differences** times `t_C` place its offsets on the circle.
+
+| `d` | offsets × `t_C` | largest gap | delay (time) |
+|---|---|---|---|
+| 9 | `0, 27/80, 27/40, 1/80, 31/80` | `13/40 > 1/4` | about `1/N` |
+| **10** | **`0, 3/8, 3/4, 1/8, 1/2`** | **exactly `1/4`** | **`1/240 = 1/(8·30)`**, every `N` |
+| **11** | `0, 33/80, 33/40, 19/80, 49/80` | `19/80 < 1/4` | **`≈ 1/2640 = (1/4 − 19/80)/33`**, every `N` |
+| 12 | `0, 9/20, 9/10, 7/20, 29/40` | `7/20 > 1/4` | about `1/N` |
+
+- If the largest gap exceeds `1/4`, there is no delay.
+- Otherwise the event is carried along for the time it takes the offsets, moving at rates equal to the
+  speed differences, to open a gap. That time is set by the **differences relative to the core's scale**,
+  not by `N`. The move count grows with `N` only because each relay move lasts about `1/N`.
+- The owner's hunch, "a ratio of the difference between speeds, or from the AP ideal", is this law:
+  resonance is the train's offsets sitting on eighth-slots (the AP ideal) densely enough to leave no gap.
+
+**Finiteness mechanism** `[reasoned]`.
+- For whole-number differences the offsets all return to 0 together within one period
+  `1/gcd(differences)`, where the train bunches and leaves a gap `> 1/4`. So the train cannot hold the
+  relay beyond one such period.
+- What remains is whether the core is still clear then or hands off to its next cell: a question at the
+  core's scale about the core plus the train's differences, the same problem one level down.
