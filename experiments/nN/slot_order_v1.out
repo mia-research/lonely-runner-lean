@@ -1,0 +1,2 @@
+400 rule-miss sets as arrangements {0} u S, subject at speed 0: {'NO lonely instant in slot order': 340, 'slot order holds': 60};  classes found {3: 14, 5: 14, 1: 46, 7: 46};  e.g. [(0, 1, 4, 5, 6, 7, 51, 56), (0, 1, 4, 5, 7, 18, 32, 46), (0, 1, 5, 7, 12, 43, 56, 58)]
+300 random arrangements in [0,60], all 8 subjects: {'NO lonely instant in slot order': 1739, 'slot order holds': 661};  e.g. [((1, 7, 8, 14, 15, 17, 40, 47), 0), ((1, 7, 8, 14, 15, 17, 40, 47), 1), ((1, 7, 8, 14, 15, 17, 40, 47), 2)]
