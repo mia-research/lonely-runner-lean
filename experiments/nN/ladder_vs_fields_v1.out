@@ -1,0 +1,19 @@
+the 7 EightResidual sets of [1,40]:
+  (2, 12, 15, 21, 32, 34, 38): ladder D*=5, a=9 (t=9/40), D* a disparity: False;  SKETCH_v7 form: (8, 7);  fields N*=15 at e=15
+  (4, 5, 6, 8, 14, 32, 37): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=16 at e=32
+  (4, 5, 6, 14, 16, 34, 38): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=16 at e=16
+  (4, 5, 6, 14, 17, 32, 38): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=16 at e=32
+  (4, 5, 6, 14, 32, 34, 38): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=16 at e=32
+  (4, 6, 14, 15, 16, 34, 38): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=15 at e=15
+  (4, 7, 8, 15, 29, 36, 37): ladder D*=3, a=1 (t=1/24), D* a disparity: False;  SKETCH_v7 form: (3, 1);  fields N*=12 at e=36
+1,436 rule-miss sets, largest 41..60:
+  ladder D*: max 10, distribution [(2, 667), (3, 173), (4, 405), (5, 95), (6, 38), (7, 29), (8, 23), (9, 3), (10, 3)]
+  D* is a disparity: 96/1436;  SKETCH_v7 form finds nothing: 13/1436
+  fields N*: max 24, distribution [(1, 264), (9, 375), (10, 252), (11, 122), (12, 216), (13, 41), (14, 87), (15, 14), (16, 28), (17, 7), (18, 4), (19, 10), (20, 3), (21, 4), (23, 6), (24, 3)]
+  ladder resolution against the fields' flank: {'D* < e(N*)': 1340, 'D* = e(N*)': 96}
+3,000 random primitive 7-sets of [1,60]:
+  ladder D*: max 11, distribution [(1, 1189), (2, 529), (3, 366), (4, 503), (5, 271), (6, 70), (7, 62), (8, 7), (10, 2), (11, 1)]
+  D* is a disparity: 351/3000;  SKETCH_v7 form finds nothing: 37/3000
+  fields N*: max 13, distribution [(1, 1772), (2, 544), (3, 427), (4, 138), (5, 77), (6, 11), (7, 16), (8, 12), (9, 2), (13, 1)]
+  ladder resolution against the fields' flank: {'D* = e(N*)': 311, 'D* < e(N*)': 2689}
+(0s)

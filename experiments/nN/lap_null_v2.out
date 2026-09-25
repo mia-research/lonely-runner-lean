@@ -1,0 +1,6 @@
+1436 rule-miss sets, largest 41..60
+laps r <= 0: family size 33.4; family 0; null (20 seeds) mean 1334.40 sd 7.65 range 1321-1346; seeds >= family 20/20
+laps r <= 1: family size 56.1; family 1416; null (20 seeds) mean 1414.00 sd 4.60 range 1404-1423; seeds >= family 8/20
+laps r <= 2: family size 71.7; family 1432; null (20 seeds) mean 1426.15 sd 3.00 range 1420-1431; seeds >= family 0/20
+laps r <= 2: family size 71.7; family 1432; null (500 seeds) mean 1426.39 sd 2.99 range 1417-1433; seeds >= family 17/500
+any lap: the rule's least-multiple flanks 1417; same number of random flanks of S (20 seeds): mean 1435.1 sd 1.1 range 1432-1436

@@ -1,0 +1,11 @@
+  after 50 restarts: best k=12, D*=19, L_0=3  (2s)
+  after 100 restarts: best k=12, D*=19, L_0=3  (4s)
+  after 150 restarts: best k=12, D*=19, L_0=3  (5s)
+  after 200 restarts: best k=13, D*=15, L_0=2  (7s)
+  after 250 restarts: best k=13, D*=15, L_0=2  (9s)
+  after 300 restarts: best k=13, D*=15, L_0=2  (11s)
+  after 350 restarts: best k=13, D*=18, L_0=3  (12s)
+  after 400 restarts: best k=13, D*=18, L_0=3  (14s)
+best: k=13, L_0=3, D*=18, a=129, S=(544, 288204592574, 613507435291, 632607263354, 683284929988, 872741386696, 954946554524)
+  exact check at t=43/48: min circDist 1/6 (>= 1/8: True)
+python3 ladder_worst_search_v2.py  13.96s user 0.11s system 99% cpu 14.121 total

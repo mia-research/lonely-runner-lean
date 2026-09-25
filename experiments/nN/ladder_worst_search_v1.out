@@ -1,0 +1,8 @@
+  after 10 restarts: best k=11, D*=13, L_0=2  (0s)
+  after 20 restarts: best k=11, D*=13, L_0=2  (0s)
+  after 30 restarts: best k=11, D*=16, L_0=3  (0s)
+  after 40 restarts: best k=11, D*=16, L_0=3  (0s)
+  after 50 restarts: best k=11, D*=16, L_0=3  (1s)
+  after 60 restarts: best k=12, D*=16, L_0=3  (1s)
+best: k=12, L_0=3, D*=16, a=25, S=(2528, 79518, 1730133, 3847738, 7052642, 7314173, 8663068)
+  exact check at t=25/128: min circDist 9/64 (>= 1/8: True)

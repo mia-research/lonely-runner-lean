@@ -1,0 +1,11 @@
+formula F vs brute force, d < 2000, D <= 40: 0 disagreements []
+coprime runners, (D, min B, max B): [(2, 0, 1), (3, 0, 1), (4, 1, 1), (5, 1, 2), (6, 1, 2), (7, 1, 2), (8, 2, 2), (9, 2, 3), (10, 2, 3), (11, 2, 3), (12, 3, 3), (13, 3, 4), (14, 3, 4), (15, 3, 4), (16, 4, 4)]
+rule-miss sets 41..60 (1436), at D*: {'union bound fails': 971, 'union bound sum B < D': 465}
+   runners with D | d (blind, clear for every j): [(0, 1), (1, 319), (2, 415), (3, 390), (4, 253), (5, 48), (6, 10)]
+   runners blocking no numerator at D*: [(0, 1), (1, 133), (2, 160), (3, 236), (4, 236), (5, 325), (6, 299), (7, 46)]
+random primitive [1,10^3] (3000), at D*: {'union bound sum B < D': 1838, 'union bound fails': 1162}
+   runners with D | d (blind, clear for every j): [(0, 157), (1, 415), (2, 463), (3, 330), (4, 250), (5, 126), (6, 61), (7, 1198)]
+   runners blocking no numerator at D*: [(0, 116), (1, 227), (2, 239), (3, 279), (4, 316), (5, 252), (6, 267), (7, 1304)]
+random primitive [1,10^6] (3000), at D*: {'union bound fails': 1194, 'union bound sum B < D': 1806}
+   runners with D | d (blind, clear for every j): [(0, 185), (1, 428), (2, 417), (3, 345), (4, 250), (5, 140), (6, 47), (7, 1188)]
+   runners blocking no numerator at D*: [(0, 134), (1, 244), (2, 247), (3, 281), (4, 262), (5, 275), (6, 281), (7, 1276)]
