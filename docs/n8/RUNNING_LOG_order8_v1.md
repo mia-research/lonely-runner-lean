@@ -941,3 +941,48 @@ runners with blocks of 3–6, arrangements, every runner).
    lonely instants recur with its period.
 2. That instant falls in a core-clear cell within a bounded number of handoffs (observed `≤ 2`).
    Statement 2 is the content.
+
+## 2026-09-25 — E27. Own-slot test; statement 2 of the block rule splits on a doubly pinned core
+
+**Owner (2026-09-25).** At a runner's isolation point every other runner is within `1/8` either side of
+its own isolation point.
+
+**Own-slot test** (`redo/own_slot_v1.out`; exact; every runner). Each runner's own vertex is taken by
+**rank** at the global event, `((rank_j − rank_k)·a mod 8)/8`, best class `a`. Every other runner is
+within `1/8` of it in:
+
+| arrangements | holds |
+|---|---|
+| AP deformed by up to `1/20` | 1,179/2,000 |
+| AP deformed by up to `1/5` | 207/2,000 |
+| uniform | 66/2,000 |
+| clustered | 24/2,000 |
+| slow-plus-fast | 39/2,000 |
+
+It holds near the AP, not in general, with rank as the reference. Open for the owner: whether the
+intended reference is the grid's **residue** slot (a grid is an AP with lapped runners, slot = reduced
+speed residue mod 8). With "nearest vertex" as the reference, "within `1/8`" is automatic and carries
+no information.
+
+**Statement 2 of the block rule** (`redo/handoff_cause_v1.out`, `v2.out`; 3,107 separated runners, block
+3–6; exact).
+- The offsets explanation is **refuted**: 44 of the 45 handoff runners have their offsets gapped at
+  `τ_C`.
+- **Every handoff has a core pinned on both sides at its first isolation.** At `τ_C = 1/(8a)` a core
+  reading `a` sits exactly at `1/8` and a core reading `(8m+7)·a` exactly at `7/8`, observed pairs
+  (1,7), (1,15), (2,14), (4,28), (1,47), (2,46), (2,30). The core's first lonely cell is then a single
+  point.
+
+| core at its first isolation | no handoff | handoff |
+|---|---|---|
+| not pinned on both sides | **3,009** | **0** |
+| pinned on both sides | 53 (block clear at that point) | 45 (44 × 1, 1 × 2) |
+
+**So statement 2 splits:**
+- **2a:** when the core's first isolation has room, the block has a clear instant inside the core's
+  first cell `[EMPIRICAL — 3,009/3,009]`.
+- **2b:** when the core is pinned on both sides by `a` and `(8m+7)·a`, the block lands in a later core
+  cell within at most two handoffs `[EMPIRICAL — 45/45]`.
+
+This is the owner's two-neighbour picture at the core's level: the core's own two pinners decide
+whether the block has room at the first event.
