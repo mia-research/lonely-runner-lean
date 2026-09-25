@@ -1,0 +1,8 @@
+steps tested: 9604;  {'pass': 9596, 'FAIL': 8};  steps by (levels - 1, j): {(1, 1): 4646, (2, 1): 1789, (2, 2): 1789, (3, 1): 448, (3, 2): 448, (3, 3): 448, (4, 1): 9, (4, 2): 9, (4, 3): 9, (4, 4): 9}
+   level WITH a synchronised pair (3160 steps not settled at tau_(j-1)): turns available min 0.01; needed max 348.041, 99% 0.683; least margin -0.365
+   level without a synchronised pair (901 steps not settled at tau_(j-1)): turns available min 0.06; needed max 0.542, 99% 0.373; least margin -0.117
+   FAIL: clustered runner 155793, levels [[195], [5007], [155792], [1433219, 1477137, 1478364, 1505482]], step j=3: tau_prev 0.0006410, cell [0.0006410, 0.0006411], tau_j 0.0006427
+   FAIL: multi-level runner 52, levels [[2], [956, 960, 966], [19988, 20110, 20359]], step j=2: tau_prev 0.0626302, cell [0.0626302, 0.0626308], tau_j 0.0628940
+   FAIL: multi-level runner 171, levels [[107, 123], [2454], [22571, 25672, 43529], [10622931]], step j=2: tau_prev 0.0011682, cell [0.0011682, 0.0011716], tau_j 0.0012734
+   FAIL: multi-level runner 21, levels [[807, 868, 1290, 1956, 12063], [240020, 244977]], step j=1: tau_prev 0.0001549, cell [0.0001549, 0.0001554], tau_j 0.0001762
+   FAIL: multi-level runner 40910, levels [[69], [706], [39319, 40028, 40221], [468611, 3209013]], step j=3: tau_prev 0.0018116, cell [0.0018116, 0.0018119], tau_j 0.0018184

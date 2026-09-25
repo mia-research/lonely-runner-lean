@@ -1,0 +1,2 @@
+steps: 9604;  index of the U_(j-1) cell where level j lands (0 = at tau_(j-1)): {0: 5543, 1: 4053, 2: 8}
+   cells passed over: 8; their widths in turns of level j's slowest reading: max 0.2081, all < 1: True
