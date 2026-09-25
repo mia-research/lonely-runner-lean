@@ -681,3 +681,66 @@ The owner's reading, "AP gap 1 and let the grid take care of it", is what the ca
   E16 step 2, E17, E19's "tight ⇒ commensurable") should be read as "a runner whose isolation
   happens at isolated instants". E19's reduction (the continuity route ends at whole-number
   arrangements) is unaffected, since it quantifies over each runner's own reading.
+
+## 2026-09-25 — E21. AUDIT: everything built in a pinned frame is void; the redo begins
+
+**Owner (2026-09-25).** Any conclusion or finding that uses a stationary runner must be done again.
+The framework's rules are integral, not decoration. Mod n could not be used because the first
+runner's speed had been set to 0.
+
+**The rule broken** (`MANUSCRIPT_v21` §1.1): *"Each runner is treated independently: the construction
+is performed identically and separately for each of the eight, and no runner is held stationary."* §4:
+global isolation iff the **reduced speeds** form a complete residue system mod n; a grid is an AP with
+whole extra laps. §6.7: a difference-set enumeration counts only because *"every runner of every
+arrangement was evaluated"*. This session built one runner's difference set, putting that runner at
+speed 0, treated it as the object, and evaluated only that runner.
+
+**VOID until redone.**
+
+| entry | voided |
+|---|---|
+| E2 | five-set cell floor |
+| E3 | lap null |
+| E4–E7 | ladder vs fields, live steps, the resolution field's evidence |
+| E9 | the converse `residual_of_lonelyRunnerAt8`, which builds the arrangement `(0, r₁, …, r₇)` |
+| E10 | residual members, block split and fast pair evidence |
+| E11 | AP deformations at scale |
+| E12 | the end-runner analysis with disparities deformed |
+| E13 | tight search, robust windows, cascade map |
+| E14, E15 | zone and slot-order tests |
+| E16, E17 | R, the synchronised-block evidence, the grid-at-7 rule and "divisible by 7", divisible-core cascade readings, tight-set local analysis |
+| E18 | the skeleton's `Separated8`, stated on difference sets |
+| E19 | "tight ⇒ commensurable" |
+| review | `PROOF_SHAPE_REVIEW_2026_09_25_v1` findings built on difference sets |
+
+**Kept as lemmas about one runner's readings** (their supporting evidence is redone):
+- `sync_block` (reals)
+- the two-pinner algebra
+- `pair_window`
+- `lonely_iff_translate_mem`, `translate_scale`
+- the blocked-count formula
+- `ap_neighbours_v1`, which deformed the **speeds** of all 8 runners and evaluated every runner and
+  stands as is.
+
+**The redo's rule.**
+- Objects are arrangements of 8 distinct positive speeds, none zero.
+- Every runner is evaluated in its own readings.
+- AP / grid / mod 8 are read on the arrangement's reduced speeds.
+- The diagnostic is the cascade run per runner: scale, tier, isolation event.
+
+Shared code: `experiments/nN/redo/arrangement_lib.py`.
+
+**Redo 1: the synchronised block** (`redo/sync_arrangements_v1.out`, `redo/long_cascades_v1.out`; exact).
+900 arrangements: a slow group of 1–3 runners (random; multiples of 7; multiples of 42) and a fast
+cluster at `10⁵ + e`. **All 7,200 runners reach their isolation event.**
+
+| slow group | AP | grid | enlarged |
+|---|---|---|---|
+| random | 1,015 | 817 | 568 |
+| multiples of 7 | 995 | 848 | 557 |
+| multiples of 42 | 1,006 | 900 | 494 |
+
+The distributions of tiers and cascade moves do not depend on divisibility by 7 or 42: **"divisible by
+7" was an artefact of the pinned frame.** The only long cascades (191 and 688 moves) are slow runners
+whose fast cluster is itself an AP (gaps 11 and 13). The cascade walks through the cluster's AP and
+lands where its spread leaves a gap.
