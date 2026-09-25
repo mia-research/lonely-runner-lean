@@ -454,3 +454,38 @@ and those segments are the subject's own zone modulo 8.
 
 This entry corrects E13's "roughly 10%": the 7–12% there counts moves not set by the nearest runner,
 which is a different statistic.
+
+## 2026-09-25 — E15. "The same location around the curve": what it means, and why E14 does not test it
+
+**Owner (2026-09-25).**
+- Any arrangement can be read as an AP. The AP is scale invariant, so once the speeds are fixed the
+  scale is established; deviations move the local isolation away from the global event, but it
+  occurs at the same location around the curve.
+- The development had AP / GRID (and enlarged) tiers: where the speeds do not fit the AP, the grid
+  at the runner's own scale acts as an AP.
+- The cascade finds the scale that is used.
+
+**What this is, in the framework's proved terms.** In the normalised coordinate `u = D·t` every tier
+places the isolation at the spine points `p/8` of its own scale. The sharpest form is proved:
+`MANUSCRIPT_v20` Theorem 6.15 with 6.16. Every flank opening is the first spine point `u = 1/8` of
+the candidate scale `D = e/(8k+1)`, and the subject is lonely iff some candidate scale is clear. The
+cascade's final scale is that `D`: it lands at `t = 1/(8·D_final)`. **So "the same location" is a
+theorem.** What is open is only that a clear scale exists for every arrangement.
+
+**Worked example** (exact): `(9, 16, 31, 73, 111, 150, 151)`.
+- The owner's gap `15` works: at `D = 15` the spine point `p = 3` clears (`t = 3/120 = 1/40`), as do
+  the numerators `a = 9, 17, 25, 49, 57, 65, 73`.
+- The cascade starts at `D = d_min = 9`, where 73, 150 and 151 are in the way. In one move it reaches
+  `D = 73/9` (candidate scale `e = 73`, `k = 1`), lonely at `t = 9/584`, with runner 73 exactly at
+  the threshold. That is the first isolation, earlier than `1/40`.
+
+**E14 withdrawn as evidence.** E14 counted runners in the zone at the cascade's intermediate
+scales. Those are, by construction, the scales where runners are in the way: that is what makes the
+cascade move. The example above is E14's own example, at the cascade's starting scale. E14 measures
+nothing about the owner's claim.
+
+**`slot_order_v1` recorded as testing a stronger, different claim**: that all seven other runners
+keep their octagon slots at the isolation instant. The test itself is sound (AP: all four classes
+for every subject; small AP deformations 800/800, `slot_order_v1_sanity.out`). The claim holds near
+the AP and fails away from it (60/400 rule-miss, 661/2,400 random). The owner did not make it. It is
+not evidence against "the same location".
