@@ -1,0 +1,16 @@
+400 divisible-core sets, N = 10^5: pinned by {'core': 213, 'block': 180, 'both': 3};  isolation {'before 3/(4E)': 323, 'later': 73}
+   nearest a/q (q <= 24) within 2/N of t*: [(16, 2), (8, 4), ('none within 2/N', 390)]
+   core [21], offsets [0, 20, 35, 36, 46, 51]: t* = 0.005952; pinned by [21]; core readings ['1/8']; offsets' largest gap 0.696
+   core [11, 49], offsets [0, 10, 43, 52, 56]: t* = 0.011366; pinned by ['N+43']; core readings ['1/8', '557/1000']; offsets' largest gap 0.375
+   core [42, 56], offsets [0, 14, 15, 33, 49]: t* = 0.002976; pinned by [42]; core readings ['1/8', '167/1000']; offsets' largest gap 0.854
+   core [14, 56], offsets [0, 2, 5, 9, 28]: t* = 0.008931; pinned by ['N+0']; core readings ['1/8', '1/2']; offsets' largest gap 0.750
+   core [21], offsets [0, 4, 9, 19, 36, 45]: t* = 0.005952; pinned by [21]; core readings ['1/8']; offsets' largest gap 0.732
+   core [42], offsets [0, 7, 16, 17, 18, 54]: t* = 0.002976; pinned by [42]; core readings ['1/8']; offsets' largest gap 0.839
+later events (t* >= 3/(4E)):
+   core [10, 28], offsets [0, 11, 18, 53, 60] (E/c_min = 6.0): t* = 0.01250 = 0.125 laps of c_min; pinned by ['N+53']; offsets' largest gap 0.438
+   core [7, 48], offsets [0, 1, 22, 42, 44] (E/c_min = 6.3): t* = 0.01786 = 0.125 laps of c_min; pinned by ['N+22']; offsets' largest gap 0.375
+   core [5, 7], offsets [0, 9, 13, 54, 56] (E/c_min = 11.2): t* = 0.02500 = 0.125 laps of c_min; pinned by ['N+0']; offsets' largest gap 0.600
+   core [7], offsets [0, 23, 35, 40, 47, 57] (E/c_min = 8.1): t* = 0.01786 = 0.125 laps of c_min; pinned by [7, 'N+23']; offsets' largest gap 0.393
+   core [4, 7], offsets [0, 10, 29, 32, 40] (E/c_min = 10.0): t* = 0.03125 = 0.125 laps of c_min; pinned by ['N+29']; offsets' largest gap 0.594
+   core [7, 14], offsets [0, 5, 20, 42, 44] (E/c_min = 6.3): t* = 0.01786 = 0.125 laps of c_min; pinned by ['N+20']; offsets' largest gap 0.393
+   pinned by {'block': 59, 'core': 14};  laps of c_min completed at t*: [(0, 73)];  offsets' largest gap: min 0.250

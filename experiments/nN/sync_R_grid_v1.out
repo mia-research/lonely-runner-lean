@@ -1,0 +1,3 @@
+Part 1, [1,16]: 288288 cases; the grid criterion (q in {2,3,6,7} / {2,3,7}) settles 281008; errors 0
+Part 2, f=6, core c = 42k, offsets up to 10^6: least working q [(4, 602), (5, 995), (8, 237), (9, 131), (10, 26), (11, 9)];  none with q <= 60: 0
+Part 2, f=5, core {6k, 7m}, offsets up to 10^6: least working q [(4, 569), (5, 941), (8, 241), (9, 167), (10, 36), (11, 44), (12, 2)];  none with q <= 60: 0

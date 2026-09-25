@@ -1,0 +1,14 @@
+[1,16]: 288288 cases; offsets gapped (> 1/4) at the core's first isolation event: 283246;  not: 5042
+   gaps where it fails: [('1/4', 5008), ('13/64', 1), ('27/128', 1), ('29/128', 5), ('3/16', 21), ('9/40', 6)]
+   core (1, 2), offsets (0, 1, 2, 4, 6): core's first event tau = 1/8; offsets' largest gap there 1/4
+   core (1, 2), offsets (0, 1, 2, 4, 14): core's first event tau = 1/8; offsets' largest gap there 1/4
+   core (1, 2), offsets (0, 1, 2, 6, 12): core's first event tau = 1/8; offsets' largest gap there 1/4
+   core (1, 2), offsets (0, 1, 2, 12, 14): core's first event tau = 1/8; offsets' largest gap there 1/4
+failures at tau itself: 5042;  gapped just inside the core's cell: 4858;  still not: 184
+   core (1, 2), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.13895; core's lonely openings ['1/8', '9/16', '9/8', '25/16', '17/8']...; t* follows core opening #0 (1/8); offsets' gap there 0.250
+   core (1, 3), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.13895; core's lonely openings ['1/8', '3/8', '17/24', '9/8', '11/8']...; t* follows core opening #0 (1/8); offsets' gap there 0.250
+   core (1, 4), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.13895; core's lonely openings ['1/8', '9/32', '17/32', '25/32', '9/8']...; t* follows core opening #0 (1/8); offsets' gap there 0.250
+   core (1, 5), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.13895; core's lonely openings ['1/8', '9/40', '17/40', '5/8', '33/40']...; t* follows core opening #0 (1/8); offsets' gap there 0.250
+   core (1, 6), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.13895; core's lonely openings ['1/8', '3/16', '17/48', '25/48', '11/16']...; t* follows core opening #0 (1/8); offsets' gap there 0.250
+   core (1, 7), offsets (0, 3, 6, 9, 12): full-set isolation t* = 0.16072; core's lonely openings ['1/8', '9/56', '17/56', '25/56', '33/56']...; t* follows core opening #1 (9/56); offsets' gap there 0.446
+   the full set isolates just after the core's lonely opening number: [(0, 177), (1, 7)]
