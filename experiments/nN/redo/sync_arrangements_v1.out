@@ -1,0 +1,6 @@
+random slow: 2400 runners in 300 arrangements (grids mod 8: 2);  every runner's cascade reaches its isolation event: 2400/2400
+   cascade moves per runner: [(0, 1117), (1, 685), (2, 340), (3, 171), (4, 59), (5, 21), (6, 6), (191, 1)];  tier: {'grid': 817, 'AP': 1015, 'enlarged': 568}
+slow multiples of 7: 2400 runners in 300 arrangements (grids mod 8: 0);  every runner's cascade reaches its isolation event: 2400/2400
+   cascade moves per runner: [(0, 1074), (1, 726), (2, 348), (3, 179), (4, 49), (5, 18), (6, 3), (7, 1), (688, 2)];  tier: {'AP': 995, 'grid': 848, 'enlarged': 557}
+slow multiples of 42: 2400 runners in 300 arrangements (grids mod 8: 2);  every runner's cascade reaches its isolation event: 2400/2400
+   cascade moves per runner: [(0, 1369), (1, 579), (2, 272), (3, 134), (4, 29), (5, 11), (6, 5), (7, 1)];  tier: {'grid': 900, 'AP': 1006, 'enlarged': 494}

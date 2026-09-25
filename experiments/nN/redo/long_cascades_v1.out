@@ -1,0 +1,6 @@
+random slow: arrangement [8, 12, 38, 100005, 100016, 100027, 100038, 100048], runner at speed 8: readings [4, 30, 99997, 100008, 100019, 100030, 100040]
+   191 moves; isolation t = 0.037880 (scale D = 3.2999, = 0.152 laps of d_min); moves set by {99997: 38, 100019: 38, 100040: 38, 100008: 38}
+slow multiples of 7: arrangement [14, 49, 56, 100010, 100023, 100036, 100049, 100058], runner at speed 49: readings [7, 35, 99961, 99974, 99987, 100000, 100009]
+   688 moves; isolation t = 0.019231 (scale D = 6.4998, = 0.135 laps of d_min); moves set by {99961: 138, 100009: 138, 100000: 138, 99987: 137}
+slow multiples of 7: arrangement [14, 49, 56, 100010, 100023, 100036, 100049, 100058], runner at speed 56: readings [7, 42, 99954, 99967, 99980, 99993, 100002]
+   688 moves; isolation t = 0.019233 (scale D = 6.4994, = 0.135 laps of d_min); moves set by {99954: 138, 100002: 138, 99993: 138, 99980: 137}
