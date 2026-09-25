@@ -1,0 +1,8 @@
+clustered: levels [[195], [5007], [155792], [1433219, 1477137, 1478364, 1505482]], step j=3: cell starts at 1/(8D), D = 195.0000; width 5.349e-08; ended by reading 155792: c/D = 798.93333, AP value 8m+7 = 799, shortfall 0.06667
+multi-level: levels [[2], [956, 960, 966], [19988, 20110, 20359]], step j=2: cell starts at 1/(8D), D = 1.9958; width 5.448e-07; ended by reading 956: c/D = 478.99583, AP value 8m+7 = 479, shortfall 0.00417
+multi-level: levels [[107, 123], [2454], [22571, 25672, 43529], [10622931]], step j=2: cell starts at 1/(8D), D = 107.0000; width 3.332e-06; ended by reading 2454: c/D = 22.93458, AP value 8m+7 = 23, shortfall 0.06542
+multi-level: levels [[807, 868, 1290, 1956, 12063], [240020, 244977]], step j=1: cell starts at 1/(8D), D = 807.0000; width 5.393e-07; ended by reading 12063: c/D = 14.94796, AP value 8m+7 = 15, shortfall 0.05204
+multi-level: levels [[69], [706], [39319, 40028, 40221], [468611, 3209013]], step j=3: cell starts at 1/(8D), D = 69.0000; width 2.702e-07; ended by reading 40221: c/D = 582.91304, AP value 8m+7 = 583, shortfall 0.08696
+multi-level: levels [[2, 6, 8], [107212, 176383], [2022941, 2043705]], step j=2: cell starts at 1/(8D), D = 2.0000; width 1.029e-07; ended by reading 107212: c/D = 53606.91175, AP value 8m+7 = 53607, shortfall 0.08825
+multi-level: levels [[1, 6], [2398, 2416, 2445], [155024, 243466]], step j=2: cell starts at 1/(8D), D = 0.9996; width 3.884e-07; ended by reading 2398: c/D = 2398.99255, AP value 8m+7 = 2399, shortfall 0.00745
+multi-level: levels [[26, 41], [46860, 48228, 48495, 48974], [531423]], step j=2: cell starts at 1/(8D), D = 26.0000; width 1.994e-07; ended by reading 48228: c/D = 1854.92308, AP value 8m+7 = 1855, shortfall 0.07692

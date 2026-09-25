@@ -1,0 +1,4 @@
+f=3: ROOM = 1.350 turns;  kappa exhaustive (readings < 60) 0.685 at (23, 26, 42);  kappa over mildly synchronised samples 0.745 at (149, 174, 250)  (5s)
+f=4: ROOM = 2.250 turns;  kappa exhaustive (readings < 40) 1.054 at (12, 15, 23, 37);  kappa over mildly synchronised samples 1.172 at (61, 76, 88, 123)  (8s)
+f=5: ROOM = 3.750 turns;  kappa exhaustive (readings < 34) 1.470 at (7, 8, 11, 17, 25);  kappa over mildly synchronised samples 1.744 at (145, 172, 234, 262, 357)  (15s)
+f=6: ROOM = 6.750 turns;  kappa exhaustive (readings < 40) 2.763 at (10, 13, 16, 19, 29, 35);  kappa over mildly synchronised samples 2.273 at (102, 146, 185, 228, 281, 415)  (59s)
