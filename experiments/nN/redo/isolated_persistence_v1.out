@@ -1,0 +1,3 @@
+|r| <= 1/50: isolated runners reach an isolation event 1216/1216 (class of the event: {'elsewhere': 845, 1: 294, 3: 74, 5: 3});  all other runners 8384/8384;  failures []
+|r| <= 1/100: isolated runners reach an isolation event 1216/1216 (class of the event: {'elsewhere': 550, 1: 496, 3: 141, 5: 29});  all other runners 8384/8384;  failures []
+|r| <= 1/400: isolated runners reach an isolation event 1216/1216 (class of the event: {1: 646, 3: 273, 5: 201, 'elsewhere': 93, 7: 3});  all other runners 8384/8384;  failures []

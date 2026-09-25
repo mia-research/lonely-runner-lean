@@ -1,0 +1,9 @@
+arrangements of 8 distinct speeds in [1,20], gcd of differences 1: 125880;  runners evaluated: 1007040  (6s)
+runners with no lonely instant: 0;  runners lonely only at isolated instants: 1410
+distinct reading sets among the isolated runners: 3
+  readings [1, 2, 3, 4, 5, 6, 7]: 1022 runner(s), e.g. runner at speed 1 of (1, 2, 3, 4, 5, 6, 7, 8) (grid mod 8: True, reduced residues [0, 1, 2, 3, 4, 5, 6, 7])
+     lonely only at ['1/8', '3/8', '5/8', '7/8'];  at 1/8: pinned ahead by [1], behind by [7];  cascade: t = 1/8 after 0 moves, tier AP
+  readings [1, 2, 3, 4, 5, 7, 12]: 318 runner(s), e.g. runner at speed 1 of (1, 2, 3, 4, 5, 6, 8, 13) (grid mod 8: False, reduced residues [0, 1, 2, 3, 4, 4, 5, 7])
+     lonely only at ['1/8', '3/8', '5/8', '7/8'];  at 1/8: pinned ahead by [1], behind by [7];  cascade: t = 1/8 after 0 moves, tier AP
+  readings [1, 4, 5, 6, 7, 11, 13]: 70 runner(s), e.g. runner at speed 7 of (1, 2, 3, 6, 7, 14, 18, 20) (grid mod 8: False, reduced residues [0, 1, 1, 2, 3, 5, 5, 6])
+     lonely only at ['1/8', '3/8', '5/8', '7/8'];  at 1/8: pinned ahead by [1], behind by [7];  cascade: t = 1/8 after 0 moves, tier AP
