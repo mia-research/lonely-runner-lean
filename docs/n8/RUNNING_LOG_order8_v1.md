@@ -431,3 +431,26 @@ order seven only. `OrderEightCasesN` §2i: `BlockSplit8`, its case, the field `n
   map is the per-runner form of the obligation. A **bound** on the counts would be a cap-shaped
   statement; the analogous move-count shape is false at order five (`MANUSCRIPT_v20` §16B), so none
   is claimed.
+
+## 2026-09-25 — E14. Confinement to AP segments, tested along the cascade
+
+**Owner's claim.** Placing every runner in its AP segment at the cascade's scale means only the two
+neighbours can be in the isolation zone; the other five are confined to their segments.
+
+**Test** (`cascade_zone_v1.out`; exact). At each cascade step `t = 1/(8D)`, reading `s = d/D`. The
+zone is `s` within 1 of a multiple of 8. Steps with two or more runners in the zone on one side:
+**616/2,533** (rule-miss sets) and **349/1,404** (random 7-sets of `[1,200]`).
+
+Example: `(9, 16, 31, 73, 111, 150, 151)` at `t = 1/72`, `D = 9`, readings `1, 1.78, 3.44, 8.11,
+12.33, 16.67, 16.78`. Runners 73, 150 and 151 are each inside an AP segment, `[8,9]` and `[16,17]`,
+and those segments are the subject's own zone modulo 8.
+
+**Reading.** Confinement holds when the readings sit near `1..7`: the AP and its small deformations
+(E12, E13). Once readings exceed 8 the segments wrap and several runners can share segment 0 or 7.
+**Open, for the owner:** which placement is meant.
+- (a) By reading: refuted as above.
+- (b) By speed rank: the rank-4 runner 73 reads 8.11.
+- (c) By a choice of scale that makes the placement work: then its existence is the obligation.
+
+This entry corrects E13's "roughly 10%": the 7–12% there counts moves not set by the nearest runner,
+which is a different statistic.
