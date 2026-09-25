@@ -1,0 +1,6 @@
+climb_cells_v2_B10_S9: 21 root cells, 70 tasks after the first move (0 already done), setup 0s
+climb cells v2: readings in [1, 10], S >= 9; exact; 111s
+  LPs solved 356546; LPs skipped by the witness 276013; cells explored 69385; early events 31393
+  climbs exiting into (7, 9) (terminal cells): 14
+  far reading S over every terminal cell: [9, 65/7]
+  distinct setter words among terminal cells: 6
