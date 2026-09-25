@@ -1,0 +1,6 @@
+ratio-chain rule: coverage among subjects with S > 12, and soundness check (rule applies => event in band 0)
+  uniform [1,1000]             subjects  2400; with S > 12:  1197; rule applies:    42
+  uniform [1,100000]           subjects  2400; with S > 12:  1248; rule applies:    37
+  skewed (many scales)         subjects  2400; with S > 12:  1574; rule applies:   458
+  geometric-ish ratio 1.5..3   subjects  2400; with S > 12:  1773; rule applies:   664
+soundness violations (rule applies but event not in band 0): 0

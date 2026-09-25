@@ -1,0 +1,11 @@
+ratio-chain rule: coverage among subjects with S > 12, and soundness check (rule applies => event in band 0)
+  uniform [1,1000]             subjects  2400; with S > 12:  1197; rule applies:    42
+  uniform [1,100000]           subjects  2400; with S > 12:  1248; rule applies:    37
+  skewed (many scales)         subjects  2400; with S > 12:  1574; rule applies:   458
+  geometric-ish ratio 1.5..3   subjects  2400; with S > 12:  1773; rule applies:   664
+soundness violations (rule applies but event not in band 0): 0
+split-chain rule: coverage among subjects with S > 12, by which case applies
+  uniform [1,1000]             S > 12:  1197; covered    56 (4%)  {'none': 1141, 'lower order': 8, 'chain': 41, 'split u=4': 3, 'split u=2': 2, 'split u=3': 2}
+  uniform [1,100000]           S > 12:  1248; covered    44 (3%)  {'none': 1204, 'chain': 37, 'split u=4': 3, 'split u=5': 2, 'split u=2': 1, 'split u=3': 1}
+  skewed (many scales)         S > 12:  1574; covered   664 (42%)  {'chain': 458, 'none': 910, 'split u=3': 30, 'split u=5': 80, 'split u=4': 42, 'split u=6': 46, 'lower order': 1, 'split u=2': 7}
+  geometric-ish ratio 1.5..3   S > 12:  1773; covered  1351 (76%)  {'chain': 664, 'split u=6': 404, 'split u=5': 185, 'none': 422, 'split u=4': 77, 'split u=3': 17, 'split u=2': 4}
