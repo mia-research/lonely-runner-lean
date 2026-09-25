@@ -1,0 +1,5 @@
+f=2, primitive blocks in [1,60]: kappa >= 75/152 = 0.4934 at (56, 57)
+f=3, primitive blocks in [1,40]: kappa >= 109/152 = 0.7171 at (36, 37, 38)
+f=4, primitive blocks in [1,26]: kappa >= 987/880 = 1.1216 at (14, 20, 21, 22)
+f=5, primitive blocks in [1,20]: kappa >= 383/190 = 2.0158 at (16, 17, 18, 19, 20)
+f=6, primitive blocks in [1,18]: kappa >= 55/26 = 2.1154 at (11, 12, 13, 14, 15, 17)

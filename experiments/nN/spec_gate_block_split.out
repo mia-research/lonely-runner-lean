@@ -1,0 +1,32 @@
+== [0] build-artefact integrity ==  (t+0s)
+  clean
+   ...[0] took 0s
+== [1] build every Spec module (list derived from disk) ==  (t+0s)
+  81 modules
+✔ [8344/8344] Built LonelyRunner.LRC.Spec.RungBudgetEightN (3.5s)
+Build completed successfully (8344 jobs).
+   ...[1] took 6s
+== [2] sorry inventory ==  (t+6s)
+  none
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+6s)
+  clean (no axiom / native_decide / unsafe / admit)
+   ...[2b] took 0s
+== [3] axiom check on EVERY declaration, with a coverage assertion ==  (t+6s)
+  extractor names 1539; 13 anonymous instance(s) unnameable; 1552 on disk
+  1539 of 1539 clean (51 depend on no axioms at all)
+   ...[3] took 215s
+== [4] the OWED register: every asserted Prop is accounted for ==  (t+221s)
+  clean (72 Prop-valued defs, all registered)
+  OWED:    LRC.FlankFinite.FourClears LRC.Resonance.CoprimeLargestFlank LRC.OrderFive.RCapped LRC.OrderFive.WindowConstantFive 
+  REFUTED: LRC.Spec.DoorFirstLap LRC.Spec.DoorLargestFlank LRC.SpecN.DoorFirstLap LRC.SpecN.DoorLargestFlank 
+   ...[4] took 1s
+== [5] tree stability ==  (t+222s)
+  clean (digest 0b6ab2fccaa8)
+== total: 222s ==
+
+GATE PASS (Spec layer): 1539 declarations, axiom-clean, coverage 1539 of 1552.
+           This gates the SPEC LAYER only.  It does not gate the paper
+           (scripts/n8/gate.sh) or the cascade artefact (scripts/cascade/gate.sh).
+           LRC is NOT proved at any order.  The OWED items above are not theorems.
+EXIT 0

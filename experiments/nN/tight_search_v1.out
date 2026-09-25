@@ -1,0 +1,4 @@
+primitive 7-subsets of [1,20]: 77400;  not lonely at all: 0 [];  tight: 3  (16s)
+  (1, 2, 3, 4, 5, 6, 7): isolated lonely instants in (0,1): ['1/8', '3/8', '5/8', '7/8']
+  (1, 2, 3, 4, 5, 7, 12): isolated lonely instants in (0,1): ['1/8', '3/8', '5/8', '7/8']
+  (1, 4, 5, 6, 7, 11, 13): isolated lonely instants in (0,1): ['1/8', '3/8', '5/8', '7/8']

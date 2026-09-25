@@ -1,0 +1,4 @@
+|r| <= 1/20: subject-trials 12000;  pair {1,7} survives at a neighbour opening 11506/12000;  pair {3,5} 11867/12000;  e.g. failures [(7, 1), (5, 3)]
+|r| <= 1/50: subject-trials 12000;  pair {1,7} survives at a neighbour opening 11888/12000;  pair {3,5} 11998/12000;  e.g. failures [(1, 1), (7, 1)]
+|r| <= 1/100: subject-trials 12000;  pair {1,7} survives at a neighbour opening 11996/12000;  pair {3,5} 12000/12000;  e.g. failures [(7, 1), (7, 1)]
+|r| <= 1/200: subject-trials 12000;  pair {1,7} survives at a neighbour opening 12000/12000;  pair {3,5} 12000/12000;  e.g. failures []

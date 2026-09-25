@@ -4,6 +4,7 @@ import LonelyRunner.LRC.Spec.FastRunnerN
 import LonelyRunner.LRC.Spec.ShiftedTotientN
 import LonelyRunner.LRC.Spec.MirrorN
 import LonelyRunner.LRC.Spec.FastPairEightN
+import LonelyRunner.LRC.Spec.BlockSplitEightN
 
 /-!
 # Order eight, whole-number disparities: the framework's rules, and the case they leave
@@ -709,6 +710,41 @@ theorem lonely_eight_of_fastPair {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
   · rw [hdb]; exact hbl
   exact hCl d (Finset.mem_erase.mpr ⟨hda, Finset.mem_erase.mpr ⟨hdb, hd⟩⟩)
 
+/-! ## 2i. the block split (separation of scale with a common factor)
+
+A block `F` of disparities sharing a factor `g ≥ 28·c` for every other disparity `c`: the block
+repeats with period `1/g`, order seven clears it once per period, and the rest is clear at `1/8`
+on a window of length `1/(28·max)` by order seven's margin
+(`LRC.BlockSplitEight.lonely_eight_of_block_split`).  Every `EightResidual` member built with a
+large common block is settled by it (`experiments/nN/block_split_v1.out`, 162 of 162). -/
+
+/-- **A block split**: a nonempty proper part `F` of the set whose members share a factor `g` with
+`28c ≤ g` for every disparity `c` outside `F`. -/
+def BlockSplit8 (S : Finset ℕ) : Prop :=
+  ∃ F ⊆ S, ∃ g : ℕ, F.Nonempty ∧ (S \ F).Nonempty ∧ (∀ f ∈ F, g ∣ f) ∧ ∀ c ∈ S \ F, 28 * c ≤ g
+
+/-- A block split over seven disparities gives loneliness at `1/8`. -/
+theorem lonely_eight_of_blockSplit {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (hc7 : S.card = 7)
+    (h : BlockSplit8 S) : ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  classical
+  obtain ⟨F, hFS, g, hFne, hCne, hg, hc⟩ := h
+  have hsplit : (S \ F).card + F.card = 7 := by
+    rw [Finset.card_sdiff_add_card_eq_card hFS, hc7]
+  have hFcard : F.card ≤ 6 := by have := Finset.card_pos.mpr hCne; omega
+  have hCcard : (S \ F).card ≤ 6 := by have := Finset.card_pos.mpr hFne; omega
+  have hCm : ∀ c ∈ S \ F, c ≤ g / 28 := by
+    intro c hc'
+    rw [Nat.le_div_iff_mul_le (by norm_num)]
+    have := hc c hc'
+    omega
+  obtain ⟨t, ht, hCl, hFl⟩ := LRC.BlockSplitEight.lonely_eight_of_block_split
+    (C := S \ F) (F := F) (fun c hc' => hpos c (Finset.mem_sdiff.mp hc').1)
+    (fun f hf => hpos f (hFS hf)) hCcard hFcard hCne hCm hg (Nat.mul_div_le g 28)
+  refine ⟨t, ht, fun d hd => ?_⟩
+  by_cases hdF : d ∈ F
+  · exact hFl d hdF
+  · exact hCl d (Finset.mem_sdiff.mpr ⟨hd, hdF⟩)
+
 /-! ## 3. the case analysis -/
 
 /-- **The shifted flank applies** (R4's condition). -/
@@ -751,6 +787,7 @@ structure EightResidual (S : Finset ℕ) : Prop where
     ∀ i, ¬ RationalOpening8 S N (e / N) i
   no_small_resolution : ∀ D, 0 < D → D ≤ resolutionCap8 → ∀ j, ¬ ResolutionClears8 S D j
   no_fast_pair : ¬ FastPair8 S
+  no_block_split : ¬ BlockSplit8 S
 
 /-- **Order eight, whole numbers.**  A set of at most seven positive disparities, one of them odd,
 is lonely at `1/8`, or it is in `EightResidual`. -/
@@ -830,9 +867,11 @@ theorem lonely_eight_or_residual {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
     exact Or.inl (lonely_eight_of_resolution hD hj)
   by_cases hfp : FastPair8 S
   · exact Or.inl (lonely_eight_of_fastPair hpos hc7 hfp)
+  by_cases hbs : BlockSplit8 S
+  · exact Or.inl (lonely_eight_of_blockSplit hpos hc7 hbs)
   right
   push Not at hcost hff hfast
-  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_, hfp⟩
+  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_, hfp, hbs⟩
   · intro e heS k hk; exact hfl ⟨e, heS, k, hk⟩
   · intro e heS he; exact hm7 ⟨e, heS, he⟩
   · intro e heS N hN8 hNe i hi; exact hro ⟨e, heS, N, hN8, hNe, i, hi⟩
