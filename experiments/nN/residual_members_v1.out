@@ -1,0 +1,7 @@
+L = 8*lcm(1..64) has 28 digits
+constructed 3000: in EightResidual (with D <= 64): 162
+  core [13, 35, 54, 96, 100], fast pair L*[30, 173]
+  core [2, 10, 63, 71, 96], fast pair L*[33, 145]
+  core [15, 35, 59, 96, 99], fast pair L*[33, 226]
+  core [13, 63, 77, 80, 84], fast pair L*[5, 29]
+  core [18, 40, 46, 50, 77], fast pair L*[23, 61]

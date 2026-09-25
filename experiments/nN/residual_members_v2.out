@@ -1,0 +1,5 @@
+constructed 3000: residual members with gcd(d, d') <= 10^6: 163
+certificate at a core flank (e <= 100, j < e): 25/163;  {'no core-flank certificate': 138, 'core flank': 25}
+   no core-flank certificate: [23, 70, 72, 80, 87] + two large
+   no core-flank certificate: [13, 48, 77, 86, 90] + two large
+   no core-flank certificate: [26, 34, 56, 69, 90] + two large

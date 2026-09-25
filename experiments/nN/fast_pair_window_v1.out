@@ -1,0 +1,2 @@
+max over 1 <= a <= b <= 80 of (longest run with no common clear point) * a = 305/616 (= 0.4951) at a=76, b=77;  claimed bound 3/4: holds
+residual members without a large common factor: 163;  fast-pair rule (min F >= 9 max C) gives an exactly verified lonely instant: 163/163
