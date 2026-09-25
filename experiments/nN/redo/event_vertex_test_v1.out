@@ -1,0 +1,4 @@
+uniform [1,60]          : runners with every |dev| <= 1 slot: 777 of 1200; |R* - nearest odd| max 1.000, median 0.000
+AP gap 840 + dev 1/8    : runners with every |dev| <= 1 slot: 1053 of 1200; |R* - nearest odd| max 0.983, median 0.000
+AP gap 840 + dev 2      : runners with every |dev| <= 1 slot: 682 of 1200; |R* - nearest odd| max 0.996, median 0.010
+late events (34)        : runners with every |dev| <= 1 slot: 0 of 34; worst dev 4.000 slots
