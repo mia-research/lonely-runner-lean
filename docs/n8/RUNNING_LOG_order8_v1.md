@@ -650,3 +650,34 @@ it could ever be lost is at a whole-number arrangement. The remaining work is at
 skeleton's five holes, the cascade on integer speeds, the band test mod 8.
 - New equivalent form, not yet explored: a whole-number set `S` is lonely iff nearby rank-2
   configurations (all lonely) have lonely instants that stay bounded as they approach `S`.
+
+## 2026-09-25 — E20. Correction: the "tight configurations" of E13/E16/E17/E19 were read in a stationary frame
+
+**Owner (2026-09-25).** No runner is to be made stationary.
+
+**What was wrong.** `tight_search_v1/v2` enumerated 7-element **difference sets** and E13–E19 called
+each one a "configuration" (e.g. "the tight set `(1,4,5,6,7,11,13)`"). That fixes one runner, the one
+at speed 0, as a global reference and treats its difference set as the arrangement: the stationary
+frame the framework excludes (`PAPER_v9_1` §2.2, "no pinned runner"). Reading `v_j − v_i` is
+legitimate only as "is runner `i` lonely"; it is not a description of the arrangement.
+
+**Restated correctly.** `(1,4,5,6,7,11,13)` is the difference set of the runner at speed 0 in the
+arrangement `{0,1,4,5,6,7,11,13}`. For that runner, isolation is at `t = 1/8` (the AP at gap 1) and
+happens at a single instant, because the runners at differences 1 and 7 sit exactly on `1/8` and `7/8`
+there. The arrangement as a whole, every runner read in its own differences (exact cascade):
+
+| runner | cascade moves | isolation | scale | tier |
+|---|---|---|---|---|
+| 0, 1, 4, 6, 7 | 0 | `1/8` | 1 | AP, gap 1 |
+| 5 | 1 | `9/64` | `8/9` | enlarged: its difference 8 is a full lap at gap 1 |
+| 11, 13 | 0 | `1/16` | 2 | grid at `d_min = 2` |
+
+The owner's reading, "AP gap 1 and let the grid take care of it", is what the cascade does.
+
+**Scope of the correction.**
+- E13's and E17's per-runner results (neighbour pinning, the two-pinner lemma) are statements about
+  one runner's reading, and stand as such.
+- Every place where "tight configuration" was used as a property of an arrangement (E13 table,
+  E16 step 2, E17, E19's "tight ⇒ commensurable") should be read as "a runner whose isolation
+  happens at isolated instants". E19's reduction (the continuity route ends at whole-number
+  arrangements) is unaffected, since it quantifies over each runner's own reading.
