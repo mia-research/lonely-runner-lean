@@ -904,3 +904,40 @@ every runner).
 **Dropped.** The window-constant measurements (`level_window_v1/v2`) were a detour toward a proof tool.
 The cascade gives each event directly and cheaply (3,107 runners in seconds). The runs were stopped and
 the files removed.
+
+## 2026-09-25 — E26. The block rule as the cascade read level by level; the non-pinners near their points
+
+**Owner (2026-09-25).** At the isolation point the five non-pinning runners are near their isolation
+point (their slot) but not on it.
+
+**Measured** (`redo/slot_deviation_v1.out`; exact). At each runner's event, deviation of every
+non-pinning runner from its nearest octagon point (slot units; random positions: mean 0.25, 25% within
+1/8):
+
+| runners | mean deviation | within 1/8 |
+|---|---|---|
+| scale-free | 0.23 | 31% |
+| separated | 0.21 | 39% |
+| the 252 | 0.22 | 35% |
+
+2,856 of 42,088 non-pinners sit exactly on a point. So the effect is **real but modest** away from the
+AP neighbourhood (near the AP it is exact, E22). If "their isolation point" means the **specific** slot
+given by rank at the global event, that version is still to be measured.
+
+**The block rule, derived from the cascade** (`redo/nested_cascade_v1.out`; exact; 3,107 separated
+runners with blocks of 3–6, arrangements, every runner).
+- **Rule:** start at the core's own event `τ_C` (the runner's slow neighbours fix it); run the block's
+  cascade from there to the first instant where the block is clear; if the core is not clear there,
+  the core's cascade carries it to its next clear cell, and the block's resumes.
+- This lands exactly on the runner's event in 3,107/3,107 (by construction: both are the first instant
+  after `τ_C` where everything is clear).
+- **Handoffs:** 0 for 3,062, 1 for 44, 2 for 1. **The 252 the phase construction missed all take 0**: the
+  block's own cascade finds its clear instant inside the core's first cell. The phase construction
+  failed there only because it could not choose phases for several clusters at comparable scales.
+
+**What a proof of the rule needs** (in the framework's objects):
+1. From any start, the block's cascade reaches a block-clear instant. The block has at most six
+   readings, so it is lonely at `1/(f+1)` by order `f+1 ≤ 7` (native), and for whole-number readings its
+   lonely instants recur with its period.
+2. That instant falls in a core-clear cell within a bounded number of handoffs (observed `≤ 2`).
+   Statement 2 is the content.
