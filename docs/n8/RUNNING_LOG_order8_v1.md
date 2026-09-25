@@ -621,3 +621,32 @@ So `Λ = [0,1]`. The argument concerns the lonely **set**, so the deaths and bir
    All three known tight sets are whole-number sets with the pinner pair `{1, 7}`.
 2. **No escape to infinity along the path.** A bound on lonely instants, used as a compactness tool.
    It is not a cap on the cascade and asks nothing of when the event falls.
+
+## 2026-09-25 — E19. Statement 1 of the continuity route settled on paper; statement 2 is the integer conjecture
+
+**Statement 1 (isolation survives at tight configurations): no classification of tight sets needed.**
+1. **Tight ⇒ commensurable** `[reasoned from RealEightN; Lean owed]`. If the disparities span two or
+   more rational directions, `RealEightN`'s rank ≥ 2 argument applies: the exact merge leaves at most
+   six readings, order 7 clears them at `1/7`, and stepping (`lonely_of_model_many`) carries them to a
+   real time at `1/8`. Stepping with half the error allowance (`η = σ/(2C)`) leaves every reading
+   **strictly** above `1/8`, so a small interval is lonely: the lonely set has interior, and the
+   configuration is not tight.
+2. Commensurable configurations lie on countably many rays (scaled whole-number sets), and a path in
+   configuration space can avoid countably many lines except at its endpoints.
+3. At the AP, persistence is proved: the end runner by the two-pinner lemma (class 1 or 7, E12); the
+   interior runners are not tight.
+
+So along a suitable path the set of lonely stages is **open**.
+
+**Statement 2 (no escape to infinity) is the conjecture at whole numbers** `[reasoned]`. If the target
+were not lonely, the first stage `λ*` with an empty lonely set cannot have rank ≥ 2 (those are always
+lonely, point 1). So `λ*` is a whole-number configuration with no lonely instant. Closedness is
+therefore **equivalent to the conjecture at integer arrangements**. The deformation from global
+isolation reduces the problem to whole numbers, exactly the reduction `RealEightN` already proves;
+it does not settle it.
+
+**Reading.** The owner's picture is exact in this sense: global isolation deforms, and the only place
+it could ever be lost is at a whole-number arrangement. The remaining work is at that level: the
+skeleton's five holes, the cascade on integer speeds, the band test mod 8.
+- New equivalent form, not yet explored: a whole-number set `S` is lonely iff nearby rank-2
+  configurations (all lonely) have lonely instants that stay bounded as they approach `S`.
