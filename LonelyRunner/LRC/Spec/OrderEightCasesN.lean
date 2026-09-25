@@ -629,6 +629,44 @@ theorem lonely_eight_of_sixths {S : Finset ℕ} {M : ℕ} (hM : 0 < M) (d₀ : �
   · exact lonely_eight_of_rationalOpening (by norm_num) hM (key 1 (Or.inl rfl) fun _ => h)
   · exact lonely_eight_of_rationalOpening (by norm_num) hM (key 5 (Or.inr rfl) fun _ => h)
 
+/-! ## 2g. resolutions that are not disparities (the `L_0` ladder)
+
+The fields of §2c–§2f take the resolution to be a disparity (`e ∈ S`).  The ladder of the manuscript
+line (`docs/n8/PROOF_REQUIREMENTS_v2.md` §7) does not: at a resolution `D` it tries the `D` numerators
+`8j + 1` and the instant `(8j + 1)/(8D)`, with the same band test.  Nothing in the certificate needs
+`D ∈ S` (`lonely_eight_of_opening` already takes any `e > 0`).  On the seven `EightResidual` sets of
+`[1, 40]` the least such `D` is `3` (six sets, `t = 1/24`) or `5` (one set, `t = 9/40`), where the
+flank fields need `N = 12, 15, 16` (`experiments/nN/ladder_vs_fields_v1.out`).
+
+The case below takes `D ≤ resolutionCap8`.  The cap is a case boundary, not a claim: no fixed cap
+closes the residual, since a disparity divisible by `8·lcm(1..C)` kills every `D ≤ C`
+(`experiments/nN/ladder_live_steps_v1.out`). -/
+
+/-- **The case boundary for §2g.**  Resolutions up to this value are tried. -/
+def resolutionCap8 : ℕ := 64
+
+/-- **A resolution clears** at the numerator `8j + 1`: every reading `d·(8j + 1) mod 8D` lies in
+`[D, 7D]`.  `D` need not be a disparity. -/
+def ResolutionClears8 (S : Finset ℕ) (D j : ℕ) : Prop :=
+  ∀ d ∈ S, D ≤ d * (8 * j + 1) % (8 * D) ∧ d * (8 * j + 1) % (8 * D) ≤ 7 * D
+
+/-- **The instant, named.**  A clearing resolution exhibits `(8j + 1)/(8D)`. -/
+theorem lonely_eight_at_resolution {S : Finset ℕ} {D j : ℕ} (hD : 0 < D)
+    (h : ResolutionClears8 S D j) :
+    ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * (((8 * j + 1 : ℕ) : ℝ) / ((8 * D : ℕ) : ℝ))) := by
+  have hl := lonely_of_mirror_band (n := 8) (q := 8 * D) (K := 8 * j + 1) (by omega) (by norm_num)
+    (S := S) (fun d hd => by
+      obtain ⟨h1, h2⟩ := h d hd
+      constructor <;> omega)
+  intro d hd
+  simpa using hl d hd
+
+/-- A clearing resolution gives loneliness at `1/8`. -/
+theorem lonely_eight_of_resolution {S : Finset ℕ} {D j : ℕ} (hD : 0 < D)
+    (h : ResolutionClears8 S D j) :
+    ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) :=
+  lonely_eight_of_opening hD j h
+
 /-! ## 3. the case analysis -/
 
 /-- **The shifted flank applies** (R4's condition). -/
@@ -643,6 +681,7 @@ non-multiples of `8` cost at least `8` (so the descent's budget is spent); no mu
 free flank; the shifted flank's condition fails; and no disparity is more than seven times every
 other; and neither §15 opening applies — first-lap clearance at any flank and index, or the `−7`
 opening at any flank.  The last class needs no field: it is inside `spread` (`lastClass_is_spread`).
+Since §2g, also no clearing resolution `D ≤ resolutionCap8`, disparity or not.
 
 Since one disparity is odd and some is a multiple of `8`, the cost condition leaves exactly the
 shapes `(multiples of 8, non-multiples) = (1, 6), (2, 5), (3, 4)`, and `(4, 3)` with one of the
@@ -668,6 +707,7 @@ structure EightResidual (S : Finset ℕ) : Prop where
   no_fifths : ∀ e ∈ S, 5 ∣ e → ∀ i, ¬ RationalOpening8 S 5 (e / 5) i
   no_six_seven_nine : ∀ e ∈ S, ∀ N, (N = 6 ∨ N = 7 ∨ N = 9) → N ∣ e →
     ∀ i, ¬ RationalOpening8 S N (e / N) i
+  no_small_resolution : ∀ D, 0 < D → D ≤ resolutionCap8 → ∀ j, ¬ ResolutionClears8 S D j
 
 /-- **Order eight, whole numbers.**  A set of at most seven positive disparities, one of them odd,
 is lonely at `1/8`, or it is in `EightResidual`. -/
@@ -742,15 +782,19 @@ theorem lonely_eight_or_residual {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
     have hN0 : 0 < N := by omega
     exact Or.inl (lonely_eight_of_rationalOpening hN0
       (Nat.div_pos (Nat.le_of_dvd (hpos e heS) hNe) hN0) hi)
+  by_cases hres : ∃ D, 0 < D ∧ D ≤ resolutionCap8 ∧ ∃ j, ResolutionClears8 S D j
+  · obtain ⟨D, hD, -, j, hj⟩ := hres
+    exact Or.inl (lonely_eight_of_resolution hD hj)
   right
   push Not at hcost hff hfast
-  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro e heS k hk; exact hfl ⟨e, heS, k, hk⟩
   · intro e heS he; exact hm7 ⟨e, heS, he⟩
   · intro e heS N hN8 hNe i hi; exact hro ⟨e, heS, N, hN8, hNe, i, hi⟩
   · intro e heS he3 i hi; exact hth ⟨e, heS, he3, i, hi⟩
   · intro e heS he5 i hi; exact hfi ⟨e, heS, he5, i, hi⟩
   · intro e heS N hN hNe i hi; exact hsn ⟨e, heS, N, hN, hNe, i, hi⟩
+  · intro D hD hDc j hj; exact hres ⟨D, hD, hDc, j, hj⟩
 
 /-! ## 4. what order eight reduces to -/
 

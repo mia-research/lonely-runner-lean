@@ -205,6 +205,7 @@ LRC.OrderSixN.OneOf:ROUTE             LRC.OrderSixN.S7.IsBHKLift:ROUTE
 LRC.OrderSevenN.InsideCone:ROUTE
 LRC.OrderEightN.FreeFlank8:ROUTE      LRC.OrderEightN.ShiftedApplies8:ROUTE
 LRC.OrderEightN.RationalOpening8:ROUTE LRC.OrderEightN.ClassClear8:ROUTE
+LRC.OrderEightN.ResolutionClears8:ROUTE
 LRC.OrderSixN.S7.Named.Found:ROUTE    LRC.OrderSixN.S7.Named.Found6:ROUTE
 "
 PROPS=$(python3 - $SRC/*.lean <<'PYEOF'
