@@ -1046,3 +1046,44 @@ cascade).
 - Both are lower-level instances of the same problem (fewer readings, one level down the scale tree).
   That points to an **induction on the scale structure**: each level is carried by the level below it,
   as orders 3–7 were carried by lower orders.
+
+## 2026-09-25 — E30. The induction on the scale tree, stated and tested at every level
+
+**Definitions.** Take runner `k`'s readings `R`, sorted.
+- The **scale tree** cuts `R` wherever consecutive readings jump by ratio `≥ 9`, giving levels
+  `L₀ < L₁ < … < L_m`.
+- A **synchronised cluster** is a run inside a level with consecutive relative gaps `≤ 1/9`.
+- `U_j = L₀ ∪ … ∪ L_j`, and `τ_j` is `U_j`'s first isolation event (its cascade).
+
+**Base** `[provable, native]`. For `j < m`, `U_j` has at most six readings, so it is lonely at
+`1/(|U_j|+1) > 1/8` by lower orders and has lonely cells of positive length.
+
+**Step(j), as tested** (`redo/scale_induction_v1.out`, `v2.out`; exact; four families of arrangements,
+every runner, 9,604 steps at every level `j` of trees with up to 5 levels). Level `j` lands:
+
+| where level `j` lands | steps |
+|---|---|
+| at `τ_{j−1}` itself (clear there) | 5,543 |
+| in `U_{j−1}`'s first lonely cell of positive length | 4,053 |
+| in the second such cell | 8 |
+
+- The 8 cells passed over were all narrower than **0.21 turns** of level `j`'s slowest reading.
+- "The first cell of positive length" alone fails 8/9,604, because of those cells.
+- Stated as **"the first cell of positive length wide enough for level `j`, and never beyond the
+  second"**, the step holds 9,604/9,604 `[EMPIRICAL]`.
+
+**Conclusion.** Step(`m`) gives the runner a lonely instant. So loneliness of every runner whose readings
+have a gap follows from the Base and the Steps. Scale-free runners (`m = 0`) are the bounded region.
+
+**What a proof of Step(`j`) needs** (level `j` is at least 9 times faster than `U_{j−1}`):
+1. **Room**, guaranteed by the Base. `U_{j−1}` (`u ≤ 6` readings) is lonely at `1/(u+1)` somewhere, and
+   the margin gives a cell of length `≥ 2(1/(u+1) − 1/8)/max U_{j−1}`. That is at least
+   `9·2(1/(u+1) − 1/8)` turns of level `j`: 0.32 (`u = 6`), 0.75 (5), 1.35 (4), 2.25 (3), 3.75 (2),
+   6.75 (1).
+2. **Level `j` clears inside such a room.**
+   - (a) Non-synchronised levels: observed within 0.54 turns from the cell's start (E29: 0.375 for the
+     top level).
+   - (b) Synchronised clusters: the common phase is free (`sync_block`); the wait is set by the cluster's
+     spread, on the time scale `1/E` (E29).
+
+These are the two lemmas of E29, now as the one step repeated down the levels.
