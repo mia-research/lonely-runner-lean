@@ -541,3 +541,41 @@ instant `t*` pinned by exactly two runners, `d₊` reading `+1/8` and `d₋` rea
   and the pinners are the subject's circle neighbours at `t*`: the owner's neighbour rule in general
   form.
 - The other runners need slack (a radius depending on the set, e.g. `1/85` at the AP, E12).
+
+## 2026-09-25 — E17. R: proved for cores not divisible by 7, and read off the cascade; the two-pinner lemma in Lean
+
+**R at the seventh** `[PROVED — Lean SyncGridN, gate PASS 1,548/1,548]`. At `t = a/q` whole-number
+offsets sit on the grid `(1/q)ℤ`. At most six offsets leave one of seven slots empty, so the gap is
+`≥ 2/7 > 1/4`, whatever the offsets are (pigeonhole, a tool). A core runner not divisible by 7 reads
+at least `1/7` from the integers there. `lonely_of_sync_grid`: a core with no element divisible by 7
+and a synchronised block of at most six runners, `N ≥ 56·max`, is lonely at a named instant in
+`[1/7, 1/7 + 1/N]`.
+
+With `q ∈ {2,3,6,7}` the grid criterion settles 281,008/288,288 cases with speeds in `[1,16]`, with
+no error (`sync_R_grid_v1`). It misses only (f = 6) `42 | c`, and (f = 5) a core with elements
+divisible by 6 and by 7. No single grid can reach those: past `q = 7` the offsets can fill the grid,
+and by CRT one choice of offsets can fill every small grid at once.
+
+**What the cascade shows** (owner: "look at the cascade and the isolation events";
+`sync_divisible_cascade_v1`, `sync_first_event_v1`; exact).
+- On 396 divisible-core sets, the full set's isolation sits in the **core's first lap** in every case,
+  mostly right at the core's first opening, with the block contributing only its free phase. Only 10
+  events lie near a small-denominator fraction. The grids were an artefact of my method; the
+  mechanism is the core's own isolation event.
+- **R′** (offsets gapped at the core's first isolation event) holds in 283,246/288,288.
+  - Of the 5,042 failures, 5,008 have gap exactly `1/4`.
+  - Just inside the core's first cell, all but 184 are gapped.
+  - Those 184 isolate later in the core's first cell (177) or after its second lonely opening (7).
+- Typical survivor: offsets forming an AP, `(0, 3, 6, 9, 12)`, evenly spaced at the core's opening
+  until the AP's spread opens a gap. The owner's AP structure appears inside the block.
+
+**Owed for R in general**: within the core's first two isolation cells, the offsets open a gap
+`> 1/4`. Its hard instances are offsets in AP. `[EMPIRICAL — all 288,288 cases in [1,16]]`
+
+**The two-pinner lemma** `[PROVED — Lean TwoPinnerN]`.
+- `pinners_clear_at_opening`: with `λ₋ ≤ λ₊` within the band's slack, the opening `(N₊ + 1/8)/(d₊λ₊)`
+  keeps both pinners clear.
+- `mirror_readings`: at `1 − t*` whole-number pinners swap sides.
+- `two_pinner`: one of the pinned opening and the mirror opening always keeps both pinners clear.
+
+Scope: the pinners only. The other runners' slack is a set-specific radius, a separate hypothesis.
