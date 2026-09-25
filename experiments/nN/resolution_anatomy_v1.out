@@ -1,0 +1,27 @@
+N = 30: v1 residual 12309 sets  (3s)
+least clearing D: [(2, 5270), (3, 1994), (4, 2147), (5, 1439), (6, 891), (7, 381), (8, 81), (9, 77), (10, 20), (11, 3), (12, 6)]
+D = 2^a * o, (a, o): [((0, 3), 1994), ((0, 5), 1439), ((0, 7), 381), ((0, 9), 77), ((0, 11), 3), ((1, 1), 5270), ((1, 3), 891), ((1, 5), 20), ((2, 1), 2147), ((2, 3), 6), ((3, 1), 81)]
+at the least D: {'needs overlap': 7815, 'plain budget holds': 4494}
+blocker rank (1 = least) over the other openings: [(1, 10111), (2, 6295), (3, 5818), (4, 5816), (5, 6087), (6, 5436), (7, 4521)]
+blocker residue mod 8: [(0, 5070), (1, 12234), (2, 4725), (3, 3642), (4, 2648), (5, 4313), (6, 4612), (7, 6840)]
+odd part o > 1: non-multiples of 8 (units mod o) in a proper coset, against a null of the same count (x20):
+   o = 3 {'no proper coset': 2285, 'null rate x20': 12120, 'proper coset': 606}
+   o = 5 {'no proper coset': 1323, 'null rate x20': 1955, 'proper coset': 136}
+   o = 7 {'proper coset': 65, 'null rate x20': 891, 'no proper coset': 316}
+   o = 9 {'a non-unit or no residue': 75, 'no proper coset': 2, 'null rate x20': 0}
+   o = 11 {'no proper coset': 3, 'null rate x20': 0}
+offset from nearest vertex k/8 (in eighths) at the clearing instant: exactly 0: 37601 of 86163 ; <= 0.25: 50904 ; max: 0.5
+N = 40: v1 residual 91523 sets  (25s)
+least clearing D: [(2, 36114), (3, 18129), (4, 18410), (5, 10941), (6, 4335), (7, 2770), (8, 401), (9, 297), (10, 62), (11, 43), (12, 18), (13, 3)]
+D = 2^a * o, (a, o): [((0, 3), 18129), ((0, 5), 10941), ((0, 7), 2770), ((0, 9), 297), ((0, 11), 43), ((0, 13), 3), ((1, 1), 36114), ((1, 3), 4335), ((1, 5), 62), ((2, 1), 18410), ((2, 3), 18), ((3, 1), 401)]
+at the least D: {'needs overlap': 58697, 'plain budget holds': 32826}
+blocker rank (1 = least) over the other openings: [(1, 69120), (2, 44832), (3, 42601), (4, 42606), (5, 43272), (6, 42966), (7, 40429)]
+blocker residue mod 8: [(0, 45722), (1, 75373), (2, 40598), (3, 27839), (4, 20440), (5, 28818), (6, 30138), (7, 56898)]
+odd part o > 1: non-multiples of 8 (units mod o) in a proper coset, against a null of the same count (x20):
+   o = 3 {'no proper coset': 17757, 'null rate x20': 94500, 'proper coset': 4725}
+   o = 5 {'no proper coset': 9581, 'null rate x20': 22026, 'proper coset': 1422}
+   o = 7 {'no proper coset': 2461, 'null rate x20': 7251, 'proper coset': 309}
+   o = 9 {'a non-unit or no residue': 255, 'no proper coset': 28, 'null rate x20': 181, 'proper coset': 14}
+   o = 11 {'no proper coset': 41, 'null rate x20': 19, 'proper coset': 2}
+   o = 13 {'no proper coset': 3, 'null rate x20': 0}
+offset from nearest vertex k/8 (in eighths) at the clearing instant: exactly 0: 257232 of 640661 ; <= 0.25: 365449 ; max: 0.5

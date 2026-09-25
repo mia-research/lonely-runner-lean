@@ -1,0 +1,22 @@
+N = 30: v1 residual 12309 sets
+   (5, 'A = 1 mod 8') 8439
+   (5, 'all odd A') 11870
+   (5, 'null: 24 uniform t') 11079
+   (6, 'A = 1 mod 8') 10429
+   (6, 'all odd A') 12305
+   (6, 'null: 56 uniform t') 12229
+   (7, 'A = 1 mod 8') 12116
+   (7, 'all odd A') 12309
+   (7, 'null: 120 uniform t') 12306
+  least k with a lonely A/2^k (A odd): [(4, 8145), (5, 3725), (6, 435), (7, 4)]
+N = 40: v1 residual 91523 sets
+   (5, 'A = 1 mod 8') 62252
+   (5, 'all odd A') 76678
+   (5, 'null: 24 uniform t') 84729
+   (6, 'A = 1 mod 8') 77363
+   (6, 'all odd A') 91272
+   (6, 'null: 56 uniform t') 91129
+   (7, 'A = 1 mod 8') 89728
+   (7, 'all odd A') 91519
+   (7, 'null: 120 uniform t') 91514
+  least k with a lonely A/2^k (A odd): [(4, 54458), (5, 22220), (6, 14594), (7, 247), (8, 4)]
