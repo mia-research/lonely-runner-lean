@@ -1,0 +1,4 @@
+scale-free: 13851 non-pinning readings; mean |delta| = 0.2297 (random: 0.25);  median 0.2240;  within 1/8 of the slot 4308/13851
+separated: 28237 non-pinning readings; mean |delta| = 0.2083 (random: 0.25);  median 0.2000;  within 1/8 of the slot 10992/28237
+the 252: 1504 non-pinning readings; mean |delta| = 0.2225 (random: 0.25);  median 0.2133;  within 1/8 of the slot 524/1504
+{'non-pinners exactly on a slot': 2856, 'non-pinners': 42088}

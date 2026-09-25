@@ -1,0 +1,3 @@
+3107 separated runners: the level-by-level cascade lands on the runner's event 3107/3107
+   core-block handoffs, all: [(0, 3062), (1, 44), (2, 1)]
+   core-block handoffs, the 252 the construction missed: [(0, 252)]
