@@ -325,3 +325,52 @@ translation; there are no lattices and no divisibility.
 4. **The integer ladder is demoted to a rule.** It is a divisibility device, not a scale-invariant
    one. It emptied every finite window and clears the scale-free arithmetic members at `L₀`. It stays
    in the case list, but it is not the organising principle.
+
+## 2026-09-25 — E12. The AP's end runner is locally robust; log-time and the fast pair in Lean
+
+**Owner's points recorded.**
+- The straight-line path of `deformation_v1` was session 1's choice and is not the deformation the
+  cascade reads. The births and deaths it counts belong to that path, not to the arrangement.
+- Global isolation (the AP's simultaneous event) is not runner isolation, and the conjecture asks
+  only for the latter.
+- The owner holds that per-runner isolation can be carried through deformation given the runner's
+  neighbouring speeds (closest faster, closest slower). The precise statement is to come from the
+  owner before it is tested.
+
+**Correction to E11 ("they are not deformations of the AP").** That was inferred from how the sets
+were built, not measured. Measured scale-invariantly (`ap_distance_v1.out`,
+`ρ(S) = min_k maxᵢ |d₍ᵢ₎/(k·i) − 1|`):
+- the 22 scale-free residual members sit at `ρ = 0.39 … 1.51` (median 1.01);
+- the near-AP sets searched sit at `ρ ≤ 0.07`.
+
+Every arrangement is a deformation of some AP (`MANUSCRIPT_v20` §2.3). The right statement is that
+the members are **large** deformations. Between `ρ ≈ 0.07` and `0.39` no search for residual members
+has been run.
+
+**The AP's end runner under any small deformation** `[PROVED — below; VERIFIED ap_local_v1.out]`.
+Deform the disparities `1..7` to `d_k = k(1 + r_k)`, `|r_k| ≤ ρ`.
+- **Class 1**, `t = 1/(8d₁)`: runner 1 reads exactly `1/8`; runner `k` reads `(k/8)(1+r_k)/(1+r₁)`.
+  For `k = 2..6` that is at least `2/8` from an integer, less at most `(6/8)·2ρ/(1−ρ) < 1/8` when
+  `ρ < 1/13`. Runner 7 reads `(7/8)·d₇/(7d₁) ≤ 7/8` iff `d₇ ≤ 7d₁`.
+- **Class 7**, `t = (6 + 1/8)/d₇` (opening `j = 6` of the largest flank): runner `k` reads
+  `(7k/8)(1+r_k)/(1+r₇)`. For `k = 2..6` that is at least `2/8` from an integer, less at most
+  `(42/8)·2ρ/(1−ρ) < 1/8` when `ρ < 1/85`. Runner 1 reads `(7/8)·7d₁/d₇ ≤ 7/8` iff `d₇ ≥ 7d₁`.
+
+So for `ρ < 1/85` the end runner is lonely at one of two named instants, and exactly one of
+`d₇ ≤ 7d₁`, `d₇ ≥ 7d₁` holds (both on the boundary). **Its isolation moves from class 1 to class 7 as
+`d₇/d₁` crosses 7 and never vanishes.** The deciding runners are `d₁` (the nearest speed) and `d₇`.
+Sampled: 4,000/4,000 at `ρ = 1/100`. The fixed-instant sign rule (session 2, instant held at `a/8`)
+certifies 1,973/4,000: holding the instant fixed was what made it scale-blind.
+
+**Lean** (commit `412b3bf`, Spec gate PASS 1,536/1,536, `experiments/nN/spec_gate_logtime_fastpair.out`):
+- `LogTimeN`: `lonely_iff_translate_mem` (real disparities, every `n ≥ 2`): lonely iff some translate
+  of `{log d}` lies in `G n`; `translate_scale`: scaling is translation.
+- `FastPairEightN`: `pair_window` (every window of length `3/(4a)` holds an instant clearing
+  `0 < a ≤ b` at `1/8`) and `lonely_eight_of_fast_pair` (core of at most five at `1/6` by order six,
+  `9·max C ≤ a ≤ b`). `OrderEightCasesN` §2h: `FastPair8`, its case, and the field `no_fast_pair`.
+
+**Still owed from E11's list.**
+- The block split in Lean (a block with a large common factor).
+- The robust-window question for fast blocks of three or more.
+- Tight configurations other than the AP.
+- The owner's neighbour-speed statement.
