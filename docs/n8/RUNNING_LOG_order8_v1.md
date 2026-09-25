@@ -489,3 +489,55 @@ keep their octagon slots at the isolation instant. The test itself is sound (AP:
 for every subject; small AP deformations 800/800, `slot_order_v1_sanity.out`). The claim holds near
 the AP and fails away from it (60/400 rule-miss, 661/2,400 random). The owner did not make it. It is
 not evidence against "the same location".
+
+## 2026-09-25 — E16. Toward a finite proof: the plan, the synchronised block, the tight sets
+
+**Owner (2026-09-25).** If the scale is set by the arrangement there are only finitely many
+arrangements: the AP is scale invariant, and mod `n` converts the rest. Any arrangement must
+produce a scale; the question is how to prove it.
+
+**Where finiteness enters, and where it does not** (reasoned).
+- Scale invariance fixes `d_min = 1`; the ratios remain a continuum and are unbounded.
+- Mod 8 reduces the band test at **one** scale. The cascade's next scale `D·s/(8N+1)` depends on
+  `s` itself, not on `s mod 8`.
+- Finiteness enters through **compactness**. On a region of bounded ratios, every non-tight
+  configuration has a lonely cell of positive length, so one certificate works on an open
+  neighbourhood of it; tight configurations are covered by the two-pinner lemma below. So finitely
+  many certificate types cover the region.
+- Compactness does not create existence. The cover must be **built and verified** (covering is
+  admissible, owner ruling E11).
+- Unbounded ratios fall to the separation rules.
+
+**The plan.**
+1. Close the separation side for every block size.
+2. Local analysis at every tight configuration.
+3. Choose the separation threshold, size the bounded region, then build and verify a finite
+   certificate cover exactly.
+
+**Step 1: the synchronised block** `[Lean: SyncBlockN, gate PASS 1,541/1,541]`. For a block
+`{N + eᵢ}` with offsets `0 ≤ eᵢ ≤ E`, the common phase makes a full turn in `1/N` while the offsets
+move `≤ E/N`, so the phase is a free shift (`sync_block`, `lonely_of_sync_block`, any block size, real
+speeds). Blocks of 5 and 6, which have no window rule (E13), reduce to the `N`-free question
+
+> **R(C, e):** some `t₀` inside the core's clear set leaves the offsets `{eᵢ t₀}` with a gap `> 1/4`.
+
+R holds in all **288,288** cases with speeds in `[1,16]` (f = 5 with a core of 2, f = 6 with a core
+of 1). 80% of them fall to the easy case: the core clears before `3/(4E)`, where the offsets bunch
+together. The full rule at `N = 10⁶` is lonely exactly in 300/300 (`sync_block_v1`, `v2`).
+**R is not proved; it is the separation side's remaining statement.**
+
+**Step 2: every tight configuration so far is locally robust** (`tight_local_v1`; exact). All three
+tight sets keep their isolation under deformations up to `1/100` at the openings of the class pair
+`{1,7}`, 2,000/2,000 each. In `(1,4,5,6,7,11,13)` the pair `{3,5}` is weaker: class 3 is pinned by
+three runners (11 at `+1/8`; 5 and 13 at `7/8`).
+
+**Two-pinner lemma** `[PROVED — below; any order]`. Let a whole-number set be lonely at an isolated
+instant `t*` pinned by exactly two runners, `d₊` reading `+1/8` and `d₋` reading `−1/8`. Deform
+`d ↦ d(1 + r_d)`, small.
+- At `t*` the constraints are `t ≥ (N₊ + 1/8)/d₊'` and `t ≤ (N₋ + 7/8)/d₋'`. Both equal `t*` before
+  deformation, so the interval survives iff `r₊ ≥ r₋`.
+- At the mirror `1 − t*` the pinners swap sides and it survives iff `r₊ ≤ r₋`.
+- So one of the two always survives, at an opening of a pinner. The condition is scale-invariant,
+  and the pinners are the subject's circle neighbours at `t*`: the owner's neighbour rule in general
+  form.
+- The other runners need slack (a radius depending on the set, e.g. `1/85` at the AP, E12).
