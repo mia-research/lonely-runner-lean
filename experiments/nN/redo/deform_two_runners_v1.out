@@ -1,0 +1,4 @@
+runners 8,1 deformed: 1352 subject-events; lost: 0 (every cascade stopped); R: {'R=1': 1086, 'band 0, R>1': 266}; max R = 425/134 (3.172); S<=7 -> R=1: 1042/1042; pinned by a circle neighbour: 1352/1352
+runners 8,4 deformed: 1352 subject-events; lost: 0 (every cascade stopped); R: {'R=1': 1005, 'band 0, R>1': 347}; max R = 425/137 (3.102); S<=7 -> R=1: 913/913; pinned by a circle neighbour: 1352/1352
+runners 2,7 deformed: 1352 subject-events; lost: 0 (every cascade stopped); R: {'band 0, R>1': 438, 'R=1': 914}; max R = 17/4 (4.250); S<=7 -> R=1: 780/780; pinned by a circle neighbour: 1352/1352
+runners 4,5 deformed: 1352 subject-events; lost: 0 (every cascade stopped); R: {'R=1': 1116, 'band 0, R>1': 236}; max R = 2 (2.000); S<=7 -> R=1: 1026/1026; pinned by a circle neighbour: 1352/1352
