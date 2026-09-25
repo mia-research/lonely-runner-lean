@@ -193,3 +193,72 @@ runner, no first-instant demand and no bound on when.
 requires a clear window of fixed length. `DoorFirstLap` (refuted) bounded when. The cloud sessions'
 length step and "robust order-six lemma" (E2) were likewise stronger than the conjecture: a cell of a
 given length at a lower order. The latter is false.
+
+## 2026-09-25 — E10. What we need against what we have
+
+**Corrections from the owner (2026-09-25).** The cascade is not a search and not an algorithm that
+needs to terminate; it identifies an isolation event from the speeds. The framework neither
+guarantees a first isolation event nor requires one. Earlier entries' "halts" and "terminates" are
+superseded in that sense.
+
+**Target.** `LonelyRunnerAt8 ↔` every `EightResidual` set is lonely at `1/8` (E9, proved).
+
+### What we have — proved, Lean, axiom-clean
+
+- **Layer 1, every order.** Localisation (`doors_agree`), the certificate's arithmetic form
+  (Theorem 10), cascade equivalences (Theorem 13), mirror centre (`MirrorCentreN`).
+- **Lower orders, framework form.** `n = 3 … 7`, whole numbers and real speeds (`RealFiveN` …
+  `RealSevenN`); BHK Prop 11 and §5 at named instants.
+- **Order-8 reductions.** Real → whole numbers (`RealEightN`); common factor; `card ≤ 6` by order 7.
+- **Order-8 rules (the case list).** R1, R4, R6, R8, descent (shift budget), free flank, first lap,
+  `−7` opening, rational openings at flanks (`N ∣ 8`, 3, 5, 6, 7, 9), resolutions `D ≤ 64` (§2g).
+  Rung budget and link lemma.
+- **General tools on disk, not yet used at order 8.** `MergeN` (merge rule), `WindowN` (sharp window),
+  `WindowTwoN` (two-flank window at `1/6`), `TwoGroupsN` (two groups lined up by stepping, order 5),
+  `DescentN` / `DescentMultiN`, `SelfSimilarN`, `Stepping`.
+
+### What the residual contains — it is NOT empty
+
+Every finite window tested is empty (E7), but members exist. Three families were constructed and all
+verified exactly (integer band test plus exact `circDist`):
+
+| family | how built | members | what clears them | artifact |
+|---|---|---|---|---|
+| core + fast block with a large common factor | 5 runners in `[1,100]` plus `L·u, L·u'`, `L = 8·lcm(1..64)`, `u' ≤ 7u` | 162 of 3,000 | **block split**: core lonely at `1/6` (order 6) gives a window `1/(12·max C)`; the pair repeats with period `1/gcd`, lonely at `1/3` (order 3) in each period; `gcd ≥ 12·max C` puts one in the window. 162/162 | `residual_members_v1`, `block_split_v1` |
+| core + fast pair, no common factor | as above, second large runner in `(d/7, d)`, `gcd ≤ 10⁶` | 163 of 3,000 (138 with no certificate at any core flank) | **fast pair**: every window of length `3/(4a)` holds a point where both `a ≤ b` are clear; with the core's window this needs `min F ≥ 9·max C`. 163/163 | `residual_members_v2`, `fast_pair_window_v1` |
+| **no separation of scale** (`max/min < 9`) | `d₁ = 8·lcm(1..64)·u` kills every `D ≤ 64`; the other six hill-climbed to satisfy every field | 22 in 150 restarts (0 of 5,900 at random: the free flank and the cost field remove them) | **the first live lattice past the cap, `L₀ = 67`, clears all 22** (no blocked live lattice) | `residual_members_v3`, `v4` |
+
+The two-runner window constant: the longest run with no common clear point, times `a`, is at most
+`305/616 ≈ 0.495` over `1 ≤ a ≤ b ≤ 80`, against the `3/4` used `[VERIFIED]`. The lemma's proof is
+three lines: a window meets at most one open zone of `a`, and `b` crosses a quarter lap in either
+remaining piece. `[ASSERTED, not in Lean]`
+
+### What we need
+
+1. **Fast-block rules, in Lean.** Block split and fast pair are native (two lower orders, a window,
+   a named instant) and generalise R8 (a block of one). Owed: the two-runner window lemma at `1/8`
+   (analogous to `WindowTwoN` at `1/6`); the period argument for a block with a common factor
+   (commensurable analogue of `TwoGroupsN`); the two cases and their fields. **This is the cloud
+   sessions' length step done correctly**: the core's window comes from its order margin, which is
+   proved, and the block is fast, so no uniform cell bound (E2, review Finding 5) is needed.
+2. **The lattice rule past any cap.** Scale-free residual members clear at the first live lattice.
+   A cap is a case boundary, and the rule that would close it is PROOF_REQUIREMENTS_v2 §7's: some
+   live lattice at or just past `L₀` clears. Against it, the live-step count reaches 13 under search
+   (E6). What is owed is the mechanism. The union bound fails at a lattice of coprime runners (E6), so
+   the count has to see **overlaps** of blocked sets; the link lemma is the one overlap tool in hand.
+3. **The organising principle.** The evidence splits the problem on **separation of scale**:
+   - separated sets are carried by lower orders with margin (R8, block split, fast pair, descent);
+   - scale-free sets are carried by lattices.
+
+   A proof needs this dichotomy stated as cases whose conditions are jointly exhaustive. That means
+   a quantitative separation threshold on one side, and on the other a lattice argument valid at
+   every set whose consecutive ratios stay below it.
+
+### On whether the named-witness standard is what is blocking a proof
+
+Logically a named witness is not required, and for whole numbers it costs nothing (E8). **On the
+evidence so far it is not the obstacle.** Every rule found today names its instant as a matter of
+course: block split, fast pair, and the lattice at `L₀`. The proved rules already argue "the blocked
+candidates cannot cover" as counts (rung budget, descent shift budget), which the framework admits as
+tools. The obstacle is mathematical and specific: at a lattice of mostly coprime runners, first-order
+counts over-spend (`7D/4 > D`), and a proof needs control of the overlaps.
