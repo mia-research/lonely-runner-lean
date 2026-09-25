@@ -1,0 +1,38 @@
+PART 1. Arrangement types, every runner.  u* = d_min t*; first cycle = u* <= 1.
+family                           runners  u*<=1/8  u*<=1  u*>1 max moves     max u*
+A AP+dev rho=1/100                   480      416    480     0        11  2625/4198
+A AP+dev rho=1/8                     480      400    480     0        11 6775/10944
+A AP+dev rho=1/2                     480      271    480     0        10 7533/20120
+A AP+dev rho=2                       480      238    480     0         9   945/2984
+B uniform [1,40]                     480      285    480     0         7       9/32
+B uniform [1,1000]                   480      208    480     0         6     51/152
+C compact train core=3               320      147    320     0         5 15003/80000
+D spread train core=3                320      164    320     0         6  1575/8144
+C compact train core=4               320      146    320     0         5   913/5384
+D spread train core=4                320      172    320     0         6   285/1528
+C compact train core=5               320      141    320     0         5  1489/7940
+D spread train core=5                320      194    320     0         4       9/44
+E four close pairs                   480      169    480     0         8     73/312
+F geometric                           24       15     24     0         3 2125/12186
+G near-wrap                           64       52     64     0         1  1125/7001
+H residual [1,40]                     56       22     56     0         7     51/184
+I hard cases                          24       13     21     3        28    165/128
+
+Subject-slot test: smallest distance (in AP eighths, at scale d_min) of any other runner's reading from a
+multiple of 8, i.e. from the subject's own slot.  delta = 0 exact sharer; delta < 1 in the slot zone at u = 1/8.
+  events after the first cycle (u* > 1): 3 runners -> 0 (exact): 0, (0,1/8): 0, [1/8,1): 3, >=1: 0
+  events in the first cycle (u* <= 1): 5445 runners -> 0 (exact): 630, (0,1/8): 180, [1/8,1): 1582, >=1: 3053
+
+Every event after the first cycle:
+  I hard cases               V=[27, 70, 107, 137, 159, 188, 344, 393] runner 393: u*=2401/1872 moves=28 nearest-to-slot delta=26/49
+  I hard cases               V=[1, 31, 75, 97, 128, 160, 176, 225] runner 1: u*=165/128 moves=23 nearest-to-slot delta=8/15
+  I hard cases               V=[1, 1975, 5265, 6910, 8737, 9589, 11845, 15135] runner 1: u*=219/184 moves=22 nearest-to-slot delta=1/3
+
+PART 2. TrainCollapseN's instant below N = 56 m.  Core C, compact train {N+e}, all <= m.
+  N = 56 m: collapse instant lonely at 1/8 in 300 of 300
+  N = 40 m: collapse instant lonely at 1/8 in 300 of 300
+  N = 30 m: collapse instant lonely at 1/8 in 300 of 300
+  N = 20 m: collapse instant lonely at 1/8 in 300 of 300
+  N = 15 m: collapse instant lonely at 1/8 in 299 of 300
+  N = 12 m: collapse instant lonely at 1/8 in 300 of 300
+  N =  9 m: collapse instant lonely at 1/8 in 297 of 300
