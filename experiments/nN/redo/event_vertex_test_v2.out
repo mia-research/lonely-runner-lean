@@ -1,0 +1,9 @@
+subjects whose event has every runner within 1/8 of its vertex (one common rotation):
+family                     subjects  class 1 some odd a   band needed (slots): class 1 median/max; some a median/max
+AP gap 840 + dev 1/100          800      708        800   0.03/3.02; 0.02/0.09
+AP gap 840 + dev 1/8            800      668        707   0.34/3.36; 0.32/3.11
+AP gap 840 + dev 1/2            800      288        300   1.70/3.24; 1.42/3.02
+AP gap 840 + dev 2              800       91         93   2.19/3.24; 2.05/2.90
+uniform [1,60]                  800       99        101   2.25/3.21; 2.00/3.00
+uniform [1,1000]                800       86         86   2.25/3.25; 2.07/2.96
+late events                      34        0          0   some a median/max 2.45/2.71
