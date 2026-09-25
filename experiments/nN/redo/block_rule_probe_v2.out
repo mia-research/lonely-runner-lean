@@ -1,0 +1,8 @@
+3107 separated runners (block 3-6): event inside the core's first cell 3093/3107
+   block turns inside that cell (l * min block): [('< 1', 18), ('< 2', 15), ('< 4', 59), ('< 8', 155), ('< 16', 459), ('< 64', 651), ('>= 256', 1365), ('< 256', 385)]
+   the cell's length in units of 1/max(core), times 64: [('< 1', 8), ('< 2', 19), ('< 4', 43), ('< 8', 78), ('< 16', 229), ('< 64', 2704), ('< 256', 26)]
+   beyond: runner 5, core [1, 14, 15], block [1239, 1286, 1292, 1320]: first cell [0.1250000, 0.1339286] (11.06 block turns); event t* = 0.1518362
+   beyond: runner 19, core [1, 14, 15], block [1225, 1272, 1278, 1306]: first cell [0.1250000, 0.1339286] (10.94 block turns); event t* = 0.1519388
+   beyond: runner 151, core [1, 6, 7], block [16900, 139672, 1786747, 1832015]: first cell [0.1250000, 0.1458333] (352.08 block turns); event t* = 0.1875002
+   beyond: runner 124, core [1, 7, 105, 109], block [19352, 196898, 196914]: first cell [0.1250000, 0.1272936] (44.39 block turns); event t* = 0.1630952
+   beyond: runner 13, core [1, 2, 7, 12], block [168, 169, 172]: first cell [0.1250000, 0.1562500] (5.25 block turns); event t* = 0.1793155

@@ -1,0 +1,15 @@
+uniform: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 2736, 'separated, block 4': 9, 'separated, block 5': 55, 'separated, block 6': 400}
+   separated runners covered: {'no proved rule (block 4)': 9, 'no proved rule (block 5)': 55, 'no proved rule (block 6)': 400};  uncovered runners' cascade tier: {'enlarged': 119, 'AP': 179, 'grid': 166}
+clustered: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 177, 'separated, block 1': 180, 'separated, block 2': 383, 'separated, block 3': 608, 'separated, block 4': 588, 'separated, block 5': 710, 'separated, block 6': 554}
+   separated runners covered: {'R8': 180, 'fast pair': 383, 'no proved rule (block 3)': 608, 'no proved rule (block 4)': 588, 'no proved rule (block 5)': 710, 'no proved rule (block 6)': 554};  uncovered runners' cascade tier: {'grid': 936, 'AP': 989, 'enlarged': 535}
+slow-plus-fast: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 114, 'separated, block 1': 798, 'separated, block 2': 822, 'separated, block 3': 745, 'separated, block 5': 447, 'separated, block 6': 274}
+   separated runners covered: {'R8': 798, 'fast pair': 822, 'no proved rule (block 3)': 745, 'no proved rule (block 5)': 447, 'no proved rule (block 6)': 274};  uncovered runners' cascade tier: {'enlarged': 359, 'grid': 518, 'AP': 589}
+separated runners with block 3-6 by size: {3: 862, 4: 496, 5: 804, 6: 945}
+   isolation event vs the core's own event: {'t* in (tau_C, 2 tau_C)': 1770, 't* = tau_C': 1337}
+   pinned by: {'block': 1756, 'core': 1130, 'both': 221};  {'core clear all the way from tau_C to t*': 3062, 'core blocked in between': 45}
+   uniform: runner 960477 of [92809, 192697, 316605, 368705, 756928, 783430, 960477, 967137]: core readings [6660], block [177047, 203549, 591772, 643872, 767780, 867668]; tau_C = 0.000019, t* = 0.000019; pinned by [643872]
+   uniform: runner 967137 of [92809, 192697, 316605, 368705, 756928, 783430, 960477, 967137]: core readings [6660], block [183707, 210209, 598432, 650532, 774440, 874328]; tau_C = 0.000019, t* = 0.000020; pinned by [210209]
+   uniform: runner 234605 of [55036, 92886, 234605, 242987, 397041, 487085, 526355, 878609]: core readings [8382], block [141719, 162436, 179569, 252480, 291750, 644004]; tau_C = 0.000015, t* = 0.000015; pinned by [141719]
+   uniform: runner 242987 of [55036, 92886, 234605, 242987, 397041, 487085, 526355, 878609]: core readings [8382], block [150101, 154054, 187951, 244098, 283368, 635622]; tau_C = 0.000015, t* = 0.000015; pinned by [8382]
+   uniform: runner 215229 of [204566, 215229, 237652, 430336, 449018, 675590, 783280, 801765]: core readings [10663, 22423], block [215107, 233789, 460361, 568051, 586536]; tau_C = 0.000012, t* = 0.000015; pinned by [215107]
+   uniform: runner 430336 of [204566, 215229, 237652, 430336, 449018, 675590, 783280, 801765]: core readings [18682], block [192684, 215107, 225770, 245254, 352944, 371429]; tau_C = 0.000007, t* = 0.000007; pinned by [18682]

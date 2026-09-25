@@ -28,22 +28,23 @@ def family(name):
         return sorted(V)[:8]
     slow = rnd.sample(range(1, 61), rnd.choice((1, 2, 3)))
     return slow + [10**5 + e for e in rnd.sample(range(0, 61), 8 - len(slow))]
-for name in ("uniform", "clustered", "slow-plus-fast"):
-    sep = Counter(); cov = Counter(); lonely = tot = 0; unc_tiers = Counter()
-    for _ in range(400):
-        V = sorted(set(family(name)))
-        if len(V) < 8: continue
-        for k in range(8):
-            ds = readings(V, k); tot += 1
-            t, n = cascade_cap(ds); lonely += t is not None
-            ratios = [(F(ds[i + 1], ds[i]), i) for i in range(len(ds) - 1)]
-            r, i = max(ratios)
-            if r < 9: sep['scale-free'] += 1; continue
-            core, block = ds[:i + 1], ds[i + 1:]; f = len(block); sep[f'separated, block {f}'] += 1
-            if f == 1: cov['R8'] += 1
-            elif f == 2 and block[0] >= 9 * core[-1]: cov['fast pair'] += 1
-            elif reduce(gcd, block) >= 28 * core[-1]: cov['block split'] += 1
-            else:
-                cov[f'no proved rule (block {f})'] += 1; unc_tiers[tier(V, k)] += 1
-    print(f"{name}: {tot} runners; cascade reaches the event {lonely}/{tot};  {dict(sorted(sep.items()))}")
-    print(f"   separated runners covered: {dict(sorted(cov.items()))};  uncovered runners' cascade tier: {dict(unc_tiers)}")
+if __name__ == '__main__':
+    for name in ("uniform", "clustered", "slow-plus-fast"):
+        sep = Counter(); cov = Counter(); lonely = tot = 0; unc_tiers = Counter()
+        for _ in range(400):
+            V = sorted(set(family(name)))
+            if len(V) < 8: continue
+            for k in range(8):
+                ds = readings(V, k); tot += 1
+                t, n = cascade_cap(ds); lonely += t is not None
+                ratios = [(F(ds[i + 1], ds[i]), i) for i in range(len(ds) - 1)]
+                r, i = max(ratios)
+                if r < 9: sep['scale-free'] += 1; continue
+                core, block = ds[:i + 1], ds[i + 1:]; f = len(block); sep[f'separated, block {f}'] += 1
+                if f == 1: cov['R8'] += 1
+                elif f == 2 and block[0] >= 9 * core[-1]: cov['fast pair'] += 1
+                elif reduce(gcd, block) >= 28 * core[-1]: cov['block split'] += 1
+                else:
+                    cov[f'no proved rule (block {f})'] += 1; unc_tiers[tier(V, k)] += 1
+        print(f"{name}: {tot} runners; cascade reaches the event {lonely}/{tot};  {dict(sorted(sep.items()))}")
+        print(f"   separated runners covered: {dict(sorted(cov.items()))};  uncovered runners' cascade tier: {dict(unc_tiers)}")
