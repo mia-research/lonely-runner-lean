@@ -1,0 +1,10 @@
+3107 separated runners (block 3-6): the level-by-level construction produces an exactly lonely instant before 2 tau_C for 2855/3107
+   number of fast clusters per runner: {1: 2009, 2: 596, 3: 226, 4: 111, 5: 120, 6: 45}
+   construction fails: runner 234605, core [8382], clusters [[141719], [162436, 179569], [252480], [291750], [644004]]; tau_C = 0.0000149, cascade event 0.0000150
+   construction fails: runner 242987, core [8382], clusters [[150101, 154054], [187951], [244098], [283368], [635622]]; tau_C = 0.0000149, cascade event 0.0000149
+   construction fails: runner 430336, core [18682], clusters [[192684], [215107, 225770], [245254], [352944, 371429]]; tau_C = 0.0000067, cascade event 0.0000067
+   construction fails: runner 449018, core [18682], clusters [[211366, 226572, 233789], [244452], [334262, 352747]]; tau_C = 0.0000067, cascade event 0.0000067
+   construction fails: runner 869746, core [3730], clusters [[109400], [523408, 549234], [691393, 757413], [861026]]; tau_C = 0.0000335, cascade event 0.0000335
+   construction fails: runner 857445, core [8360], clusters [[80296], [225490, 243127], [364949], [438649], [745284]]; tau_C = 0.0000150, cascade event 0.0000150
+   construction fails: runner 865805, core [8360], clusters [[88656], [233850, 251487], [373309], [447009], [753644]]; tau_C = 0.0000150, cascade event 0.0000150
+   construction fails: runner 732789, core [2166], clusters [[43273], [122892], [201312], [466127], [650097, 674001]]; tau_C = 0.0000577, cascade event 0.0000582
