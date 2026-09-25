@@ -1,0 +1,2 @@
+780 arrangements (180 handoff-family, 600 random, f = 2..6): violations of t* <= B + 1/N: 0
+  B / t*: min 1.001, median 1.463, 90th pct 4.444, max 66.272
