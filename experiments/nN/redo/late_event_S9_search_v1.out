@@ -1,0 +1,70 @@
+ARM CONTROL S in [7,9] (late events known here): 60 restarts x 3000 iterations
+  seed  52: u*=39/28 (1.3929) moves=25 V=[1, 31, 70, 96, 126, 158, 176, 225] subject 1 S=7.467 dist(S,8Z)=0.533 min dist any reading=0.533
+  seed  16: u*=377/272 (1.3860) moves=25 V=[5, 34, 74, 99, 127, 157, 175, 222] subject 5 S=7.483 dist(S,8Z)=0.517 min dist any reading=0.517
+  seed  20: u*=16640/12019 (1.3845) moves=25 V=[94, 2142, 4857, 6824, 8698, 10871, 12113, 15541] subject 94 S=7.542 dist(S,8Z)=0.458 min dist any reading=0.458
+  seed  48: u*=130195/94104 (1.3835) moves=25 V=[154, 3322, 4606, 6786, 8579, 10325, 13082, 15085] subject 15085 S=7.454 dist(S,8Z)=0.546 min dist any reading=0.546
+  seed  47: u*=24505/18064 (1.3566) moves=25 V=[167, 549, 883, 1777, 2154, 3796, 4035, 4657] subject 1777 S=7.639 dist(S,8Z)=0.361 min dist any reading=0.361
+  seed  41: u*=1441/1064 (1.3543) moves=22 V=[790, 1340, 1551, 2345, 2609, 3149, 3542, 5140] subject 3542 S=7.003 dist(S,8Z)=0.997 min dist any reading=0.997
+  seed  18: u*=65/48 (1.3542) moves=27 V=[46, 63, 69, 90, 123, 133, 147, 166] subject 123 S=7.700 dist(S,8Z)=0.300 min dist any reading=0.300
+  seed  56: u*=34353/25400 (1.3525) moves=21 V=[380, 3370, 4417, 6477, 8627, 10008, 12895, 14977] subject 14977 S=7.011 dist(S,8Z)=0.989 min dist any reading=0.989
+  seed  53: u*=3577/2648 (1.3508) moves=24 V=[14, 197, 227, 289, 455, 528, 712, 939] subject 528 S=7.041 dist(S,8Z)=0.959 min dist any reading=0.959
+  seed  26: u*=1421/1056 (1.3456) moves=24 V=[7, 47, 79, 91, 117, 138, 182, 211] subject 211 S=7.034 dist(S,8Z)=0.966 min dist any reading=0.966
+  restarts ending past the first cycle (u* > 1): 34 of 60
+    LATE seed 52: u*=39/28 S=112/15 dist(S,8Z)=8/15 V=[1, 31, 70, 96, 126, 158, 176, 225] subject 1
+    LATE seed 16: u*=377/272 S=217/29 dist(S,8Z)=15/29 V=[5, 34, 74, 99, 127, 157, 175, 222] subject 5
+    LATE seed 20: u*=16640/12019 S=15447/2048 dist(S,8Z)=937/2048 V=[94, 2142, 4857, 6824, 8698, 10871, 12113, 15541] subject 94
+    LATE seed 48: u*=130195/94104 S=14931/2003 dist(S,8Z)=1093/2003 V=[154, 3322, 4606, 6786, 8579, 10325, 13082, 15085] subject 15085
+    LATE seed 47: u*=24505/18064 S=2880/377 dist(S,8Z)=136/377 V=[167, 549, 883, 1777, 2154, 3796, 4035, 4657] subject 1777
+    LATE seed 41: u*=1441/1064 S=2752/393 dist(S,8Z)=392/393 V=[790, 1340, 1551, 2345, 2609, 3149, 3542, 5140] subject 3542
+    LATE seed 18: u*=65/48 S=77/10 dist(S,8Z)=3/10 V=[46, 63, 69, 90, 123, 133, 147, 166] subject 123
+    LATE seed 56: u*=34353/25400 S=14597/2082 dist(S,8Z)=2059/2082 V=[380, 3370, 4417, 6477, 8627, 10008, 12895, 14977] subject 14977
+    LATE seed 53: u*=3577/2648 S=514/73 dist(S,8Z)=70/73 V=[14, 197, 227, 289, 455, 528, 712, 939] subject 528
+    LATE seed 26: u*=1421/1056 S=204/29 dist(S,8Z)=28/29 V=[7, 47, 79, 91, 117, 138, 182, 211] subject 211
+    LATE seed 34: u*=715/532 S=85/11 dist(S,8Z)=3/11 V=[4, 41, 55, 79, 101, 174, 196, 227] subject 174
+    LATE seed 29: u*=343/258 S=199/28 dist(S,8Z)=25/28 V=[17, 56, 87, 101, 124, 145, 188, 216] subject 216
+    LATE seed 28: u*=845/636 S=101/13 dist(S,8Z)=3/13 V=[13, 74, 127, 151, 189, 215, 328, 374] subject 215
+    LATE seed 33: u*=85/64 S=133/17 dist(S,8Z)=3/17 V=[50, 67, 91, 107, 124, 143, 154, 183] subject 50
+    LATE seed 0: u*=1519/1144 S=221/31 dist(S,8Z)=27/31 V=[3, 34, 82, 105, 131, 146, 181, 224] subject 3
+    LATE seed 36: u*=1519/1144 S=222/31 dist(S,8Z)=26/31 V=[3, 47, 82, 96, 124, 146, 194, 225] subject 225
+    LATE seed 45: u*=2343/1768 S=506/71 dist(S,8Z)=62/71 V=[1, 72, 242, 293, 368, 440, 479, 578] subject 72
+    LATE seed 12: u*=99/76 S=112/15 dist(S,8Z)=8/15 V=[1, 31, 75, 96, 126, 158, 176, 225] subject 1
+    LATE seed 40: u*=425/328 S=128/17 dist(S,8Z)=8/17 V=[20, 51, 75, 92, 147, 182, 192, 220] subject 92
+    LATE seed 44: u*=165/128 S=112/15 dist(S,8Z)=8/15 V=[1, 31, 75, 97, 128, 160, 176, 225] subject 1
+    LATE seed 50: u*=1898/1479 S=1479/208 dist(S,8Z)=185/208 V=[1728, 2261, 2370, 2523, 2681, 2999, 3207, 4392] subject 3207
+    LATE seed 17: u*=1533/1208 S=151/21 dist(S,8Z)=17/21 V=[36, 66, 90, 101, 117, 133, 187, 208] subject 187
+    LATE seed 14: u*=4225/3332 S=213/26 dist(S,8Z)=5/26 V=[1491, 1959, 2229, 2426, 2556, 3007, 3299, 3389] subject 2556
+    LATE seed 21: u*=657/520 S=65/9 dist(S,8Z)=7/9 V=[58, 76, 105, 119, 133, 141, 162, 188] subject 58
+    LATE seed 9: u*=24455/19364 S=4841/670 dist(S,8Z)=519/670 V=[8, 678, 1729, 2225, 2812, 3094, 3911, 4849] subject 8
+    LATE seed 11: u*=24941/20096 S=3581/509 dist(S,8Z)=491/509 V=[41, 457, 1110, 1342, 1720, 2304, 3622, 4131] subject 3622
+    LATE seed 4: u*=287/232 S=311/42 dist(S,8Z)=25/42 V=[9, 76, 103, 123, 146, 175, 320, 362] subject 320
+    LATE seed 13: u*=365/296 S=37/5 dist(S,8Z)=3/5 V=[16, 23, 48, 87, 102, 138, 175, 198] subject 87
+    LATE seed 7: u*=2993/2468 S=617/82 dist(S,8Z)=39/82 V=[44, 141, 184, 450, 532, 746, 816, 1149] subject 532
+    LATE seed 24: u*=144321/121072 S=15134/1977 dist(S,8Z)=682/1977 V=[1, 1978, 5321, 6922, 8737, 9589, 11845, 15135] subject 1
+    LATE seed 35: u*=41/35 S=283/40 dist(S,8Z)=37/40 V=[500, 547, 682, 722, 816, 851, 877, 1005] subject 722
+    LATE seed 1: u*=845/732 S=183/26 dist(S,8Z)=25/26 V=[17, 43, 89, 115, 135, 145, 180, 200] subject 17
+    LATE seed 32: u*=91/79 S=395/56 dist(S,8Z)=53/56 V=[2, 87, 121, 146, 175, 227, 341, 397] subject 397
+    LATE seed 38: u*=845/736 S=92/13 dist(S,8Z)=12/13 V=[44, 65, 96, 109, 136, 161, 169, 188] subject 96
+ARM S >= 9: 60 restarts x 3000 iterations
+  seed  33: u*=735/856 (0.8586) moves=21 V=[39, 54, 81, 97, 114, 134, 146, 175] subject 39 S=9.067 dist(S,8Z)=1.067 min dist any reading=0.867
+  seed  17: u*=363/436 (0.8326) moves=19 V=[81, 1038, 1280, 2000, 2244, 2607, 2926, 4940] subject 1280 S=15.124 dist(S,8Z)=0.876 min dist any reading=0.876
+  seed  52: u*=1679/2040 (0.8230) moves=20 V=[2, 25, 71, 94, 120, 151, 165, 257] subject 2 S=11.087 dist(S,8Z)=3.087 min dist any reading=0.913
+  seed  21: u*=49/60 (0.8167) moves=21 V=[42, 85, 110, 118, 142, 160, 171, 178] subject 118 S=9.500 dist(S,8Z)=1.500 min dist any reading=0.500
+  seed  40: u*=99/122 (0.8115) moves=19 V=[24, 31, 48, 109, 121, 145, 157, 220] subject 109 S=9.250 dist(S,8Z)=1.250 min dist any reading=0.917
+  seed  35: u*=253/312 (0.8109) moves=22 V=[163, 255, 316, 397, 535, 581, 815, 873] subject 581 S=9.087 dist(S,8Z)=1.087 min dist any reading=0.913
+  seed  56: u*=12177/15076 (0.8077) moves=18 V=[344, 3093, 5179, 6116, 7599, 9009, 12178, 13654] subject 13654 S=9.018 dist(S,8Z)=1.018 min dist any reading=0.845
+  seed  50: u*=95/118 (0.8051) moves=17 V=[872, 1813, 2296, 2635, 2809, 3009, 3989, 4293] subject 3989 S=10.253 dist(S,8Z)=2.253 min dist any reading=0.842
+  seed  45: u*=33/41 (0.8049) moves=19 V=[2, 59, 128, 292, 324, 394, 424, 476] subject 292 S=9.062 dist(S,8Z)=1.062 min dist any reading=0.719
+  seed  24: u*=1307/1640 (0.7970) moves=18 V=[205, 1512, 5747, 6948, 8277, 8960, 10833, 13278] subject 1512 S=9.002 dist(S,8Z)=1.002 min dist any reading=0.868
+  restarts ending past the first cycle (u* > 1): 0 of 60
+ARM S in [9,15]: 60 restarts x 3000 iterations
+  seed  20: u*=305/352 (0.8665) moves=21 V=[221, 2517, 3330, 6108, 7342, 9419, 10517, 16111] subject 10517 S=9.377 dist(S,8Z)=1.377 min dist any reading=0.714
+  seed  25: u*=1323/1528 (0.8658) moves=20 V=[55, 272, 495, 600, 654, 867, 922, 993] subject 654 S=11.093 dist(S,8Z)=3.093 min dist any reading=0.926
+  seed  22: u*=147/172 (0.8547) moves=20 V=[14, 32, 64, 83, 104, 128, 143, 177] subject 14 S=9.056 dist(S,8Z)=1.056 min dist any reading=0.833
+  seed  27: u*=2299/2760 (0.8330) moves=19 V=[671, 792, 1109, 1535, 2144, 2353, 2973, 4457] subject 2144 S=11.067 dist(S,8Z)=3.067 min dist any reading=0.952
+  seed  26: u*=1241/1504 (0.8251) moves=20 V=[28, 45, 78, 95, 113, 136, 148, 216] subject 28 S=11.059 dist(S,8Z)=3.059 min dist any reading=0.941
+  seed  28: u*=1679/2056 (0.8166) moves=20 V=[27, 42, 65, 89, 160, 183, 324, 417] subject 160 S=11.174 dist(S,8Z)=3.174 min dist any reading=0.870
+  seed  59: u*=495/608 (0.8141) moves=20 V=[11, 43, 53, 74, 91, 150, 165, 193] subject 150 S=9.267 dist(S,8Z)=1.267 min dist any reading=0.867
+  seed  35: u*=1155/1424 (0.8111) moves=19 V=[14, 232, 297, 449, 519, 875, 914, 1149] subject 519 S=9.000 dist(S,8Z)=1.000 min dist any reading=0.786
+  seed  48: u*=53889/66464 (0.8108) moves=19 V=[270, 1903, 5464, 6953, 8578, 9649, 12101, 14970] subject 270 S=9.002 dist(S,8Z)=1.002 min dist any reading=0.755
+  seed  53: u*=363/448 (0.8103) moves=20 V=[96, 117, 126, 140, 153, 165, 185, 196] subject 196 S=9.091 dist(S,8Z)=1.091 min dist any reading=0.818
+  restarts ending past the first cycle (u* > 1): 0 of 60
