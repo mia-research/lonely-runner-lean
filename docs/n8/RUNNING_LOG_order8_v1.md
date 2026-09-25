@@ -1284,3 +1284,9 @@ the event, and the relocation is the cascade curing slot-sharers. **Not establis
 dilates every reading and can put new runners into the subject's slot (the trace's first move made three). The move count is
 not the handle: resonant trains (E33) make it grow with `N` while the relocated time stays bounded, and §0 excludes move
 counts. The object for a proof is the **set of scales** the cure can visit.
+
+**E35 correction (same day, author).** "That the curing always ends" and "why can't the stretching keep feeding runners
+in forever" are termination questions, which treat the cascade as an algorithm. It is not one and does not need to
+terminate: it identifies the event. The owed statement is static: **every arrangement has, for every runner, a scale
+at which no other runner sits in the subject's slot** (Thm 6.15's candidate scale `e/(8k+1)`, no time, no iteration).
+The cascade reads that scale off; nothing is asked of its path.
