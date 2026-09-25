@@ -1,0 +1,90 @@
+
+== AP gap 840 plus deviations up to rho = 1/100: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 2791;  moves max 11, mean 1.13
+   relocation factor t*/t_ref: min 0.981  median 1.006  90% 2.996  max 5.018
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 505
+   runners sharing a slot at t*, by number of repeats: {0: 505, 1: 2150, 2: 465, 3: 80}
+   move setters: other 3624 (100%)
+
+== AP gap 840 plus deviations up to rho = 1/20: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 2774;  moves max 11, mean 1.08
+   relocation factor t*/t_ref: min 0.918  median 1.030  90% 2.984  max 5.088
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 426
+   runners sharing a slot at t*, by number of repeats: {0: 426, 1: 2187, 2: 536, 3: 51}
+   move setters: other 3460 (100%)
+
+== AP gap 840 plus deviations up to rho = 1/8: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 2616;  moves max 16, mean 0.96
+   relocation factor t*/t_ref: min 0.813  median 1.077  90% 2.788  max 6.678
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 424
+   runners sharing a slot at t*, by number of repeats: {0: 424, 1: 2053, 2: 636, 3: 84, 4: 3}
+   move setters: other 3057 (100%)
+
+== AP gap 840 plus deviations up to rho = 1/4: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 2234;  moves max 12, mean 0.93
+   relocation factor t*/t_ref: min 0.689  median 1.181  90% 2.429  max 5.880
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 242
+   runners sharing a slot at t*, by number of repeats: {0: 242, 1: 1590, 2: 1128, 3: 226, 4: 14}
+   move setters: other 2984 (100%)
+
+== AP gap 840 plus deviations up to rho = 1/2: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1761;  moves max 12, mean 0.96
+   relocation factor t*/t_ref: min 0.525  median 1.492  90% 3.984  max 22.757
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 142
+   runners sharing a slot at t*, by number of repeats: {0: 142, 1: 976, 2: 1400, 3: 596, 4: 83, 5: 3}
+   move setters: other 2983 (97%), nearest faster 47 (2%), nearest slower 38 (1%)
+
+== AP gap 840 plus deviations up to rho = 1: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1481;  moves max 10, mean 1.06
+   relocation factor t*/t_ref: min 0.377  median 2.104  90% 9.674  max 864.286
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 22
+   runners sharing a slot at t*, by number of repeats: {0: 22, 1: 516, 2: 1344, 3: 1017, 4: 288, 5: 13}
+   move setters: other 3145 (93%), nearest slower 129 (4%), nearest faster 125 (4%)
+
+== AP gap 840 plus deviations up to rho = 2: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1493;  moves max 10, mean 1.04
+   relocation factor t*/t_ref: min 0.281  median 2.426  90% 12.071  max 1007.405
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 21
+   runners sharing a slot at t*, by number of repeats: {0: 21, 1: 389, 2: 1256, 3: 1134, 4: 359, 5: 40, 6: 1}
+   move setters: other 3040 (91%), nearest faster 154 (5%), nearest slower 141 (4%)
+
+== AP gap 840 plus deviations up to rho = 4: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1518;  moves max 10, mean 0.95
+   relocation factor t*/t_ref: min 0.226  median 2.451  90% 14.478  max 1080.173
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 30
+   runners sharing a slot at t*, by number of repeats: {0: 30, 1: 373, 2: 1252, 3: 1096, 4: 369, 5: 69, 6: 11}
+   move setters: other 2763 (91%), nearest slower 144 (5%), nearest faster 135 (4%)
+
+== AP gap 840 plus deviations up to rho = 16: 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1498;  moves max 11, mean 0.99
+   relocation factor t*/t_ref: min 0.197  median 2.500  90% 13.287  max 1774.014
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 33
+   runners sharing a slot at t*, by number of repeats: {0: 33, 1: 388, 2: 1179, 3: 1165, 4: 369, 5: 60, 6: 6}
+   move setters: other 2883 (91%), nearest faster 147 (5%), nearest slower 143 (5%)
+
+== random arrangements in [1, 10^6] (each is its fitted AP plus deviations): 400 arrangements, 3200 runners, capped 0
+   fixed point reached: 3200 of 3200
+   event at the bound (0 moves): 1405;  moves max 11, mean 1.06
+   relocation factor t*/t_ref: min 0.220  median 2.631  90% 15.777  max 1025.592
+   flank exactly on 1/8 or 7/8: 3200;  every position in [1/8,7/8]: all (asserted)
+   slot pattern at t* is a complete system {1..7} (a grid at scale D*): 25
+   runners sharing a slot at t*, by number of repeats: {0: 25, 1: 367, 2: 1242, 3: 1132, 4: 367, 5: 67}
+   move setters: other 3069 (91%), nearest faster 162 (5%), nearest slower 153 (5%)

@@ -1,0 +1,24 @@
+12784 runners.  Slot pattern at t* by nearest eighth, complete system {1..7}:
+   rho 1/100: 3200 of 3200
+   rho 1/8: 1669 of 3200
+   rho 1: 20 of 3192
+   rho 16: 20 of 3192
+What each move cures (setter's position just before the move): {'setter sat just under the subject, eighths in (7,8)': 6618, 'setter sat in slot 0 (on the subject), eighths in [0,1)': 6468}
+
+Two traces:
+
+  arrangement [8400, 9240, 10081, 10918, 11763, 12600, 13440, 14282], runner 10918; signed differences [-2518, -1678, -837, 845, 1682, 2522, 3364]
+    t = 1/6696 (scale D = 837.00): eighths 4.99 6.00 7.00 1.01 2.01 3.01 4.02   CLEAR
+
+  arrangement [8308, 9358, 9593, 11119, 11359, 11836, 12776, 14328], runner 9593; signed differences [-1285, -235, 1526, 1766, 2243, 3183, 4735]
+    t = 1/1880 (scale D = 235.00): eighths 2.53 7.00 6.49 7.51 1.54 5.54 4.15   in the way: [1766]
+      move: setter 1766 to its lap 1 + 1/8, i.e. 9 eighths
+    t = 9/14128 (scale D = 196.22): eighths 1.45 6.80 7.78 1.00 3.43 0.22 0.13   in the way: [1526, 3183, 4735]
+      move: setter 1526 to its lap 1 + 1/8, i.e. 9 eighths
+    t = 9/12208 (scale D = 169.56): eighths 0.42 6.61 1.00 2.42 5.23 2.77 3.93   in the way: [-1285]
+      move: setter -1285 to its lap 1 + 1/8, i.e. 9 eighths
+    t = 9/10280 (scale D = 142.78): eighths 7.00 6.35 2.69 4.37 7.71 6.29 1.16   in the way: [2243]
+      move: setter 2243 to its lap 2 + 1/8, i.e. 17 eighths
+    t = 17/17944 (scale D = 131.94): eighths 6.26 6.22 3.57 5.38 1.00 0.12 3.89   in the way: [3183]
+      move: setter 3183 to its lap 3 + 1/8, i.e. 25 eighths
+    t = 25/25464 (scale D = 127.32): eighths 5.91 6.15 3.99 5.87 1.62 1.00 5.19   CLEAR
