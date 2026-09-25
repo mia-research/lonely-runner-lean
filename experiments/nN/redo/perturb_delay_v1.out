@@ -1,0 +1,9 @@
+base: runner 8 moves 191, event t = 0.037880
+speed 100005 moved by -12..+12 (step 2): moves    1    1    1    1    1    1  191  784    2    2    1    1    1
+speed 100016 moved by -12..+12 (step 2): moves    4    4    4    4    4    4  191  191    5    4    4    4    4
+speed 100027 moved by -12..+12 (step 2): moves    2    2    2    2    2  191  191    3    3    2    2    2    2
+speed 100038 moved by -12..+12 (step 2): moves    5    5    5    5    5  784  191    6    5    5    5   dup    5
+speed 100048 moved by -12..+12 (step 2): moves    3   dup    3    3    3    3  191    4    3    3    3    3    3
+last speed 100049 (fast readings [99997, 100008, 100019, 100030, 100041]): moves 191, event t = 0.037880
+last speed 100048 (fast readings [99997, 100008, 100019, 100030, 100040]): moves 191, event t = 0.037880
+last speed 100047 (fast readings [99997, 100008, 100019, 100030, 100039]): moves 191, event t = 0.037880
