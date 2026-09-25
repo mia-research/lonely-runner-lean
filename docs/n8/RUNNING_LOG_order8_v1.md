@@ -1018,3 +1018,31 @@ It holds for **3,107/3,107** separated runners with blocks of 3–6: 1,337 at `�
    `1/(c+1) > 1/8` by lower orders (native); its cascade reaches the first one. Provable.
 2. **The block has a jointly clear instant inside the core's first positive-length cell.** This is the
    remaining content: a fast block (min `≥ 9·max core`) in a cell set by the core's neighbours.
+
+## 2026-09-25 — E29. Statement 2 (the block clears inside the core's first cell with room): what bounds each side
+
+`redo/block_in_cell_v1.out`, `v2.out`; exact; the 1,770 separated runners whose block is not clear at the
+core's first isolation. Measured in turns of the block's slowest reading: **available** = the core
+cell's length, **needed** = from the cell's start to the block's first jointly clear instant (block
+cascade).
+
+| block | runners | available (min / median) | needed (median / max) | least margin |
+|---|---|---|---|---|
+| no nearly synchronised sub-cluster | 50 | 0.73 / 10.4 | 0.073 / 0.375 | 0.54 |
+| with a nearly synchronised sub-cluster | 1,720 | 0.33 / 151 | 0.153 / 144 | 0.20 |
+
+- **Needed never exceeds available** (3,107/3,107 overall, E28).
+- Only **4** runners need more than 2 turns. All have a single-reading core (`[1]` or `[3]`) and a
+  six-reading synchronised cluster (e.g. `[99961, 99974, 99990, 99992, 100003, 100007]`, spread
+  `E = 46`). The wait is set by the cluster's spread: needed × `E` ≤ 0.385. The block waits while its
+  offsets, turning at rate `E`, rotate out of an evenly spread arrangement. The single core runner's
+  cell `3/(4c)` accommodates it.
+
+**Structure of a proof of statement 2** (reasoned from the data; not proved).
+- **(i) Non-synchronised levels:** a window lemma. The block clears within a bounded fraction of a
+  turn of its slowest reading, observed `≤ 0.375` from the cell's start.
+- **(ii) Synchronised clusters:** the common phase is free (`sync_block`). The wait is the offsets' gap
+  condition (R in the arrangement frame), on the time scale `1/E` of the cluster's own spread.
+- Both are lower-level instances of the same problem (fewer readings, one level down the scale tree).
+  That points to an **induction on the scale structure**: each level is carried by the level below it,
+  as orders 3–7 were carried by lower orders.
