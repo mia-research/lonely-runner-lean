@@ -1,0 +1,14 @@
+--- 28 hard: 396 lonely cells
+   M1 distinct nonzero vertices at cell midpoints: {2: 0.03, 3: 0.04, 4: 0.384, 5: 0.399, 6: 0.141, 7: 0.005}
+      collisions: {0: 0.005, 1: 0.141, 2: 0.399, 3: 0.384, 4: 0.04, 5: 0.03}  mean |offset| (eighths): 0.255
+      baseline, uniform instants: {0: 0.005, 1: 0.016, 2: 0.023, 3: 0.152, 4: 0.379, 5: 0.318, 6: 0.107}  mean |offset|: 0.249
+   M2 openings of the rank-7 runner: blockers per opening {0: 0.16, 1: 0.451, 2: 0.257, 3: 0.08, 4: 0.013, 5: 0.007, 6: 0.032}  blockers shallow 0.473, deep 0.527
+   M2 openings of the rank-6 runner: blockers per opening {0: 0.165, 1: 0.436, 2: 0.277, 3: 0.061, 4: 0.021, 5: 0.041}  blockers shallow 0.467, deep 0.533
+   M3 share of the largest runner's openings that are lonely: mean 0.161, min 0.111
+--- 400 ordinary: 9160 lonely cells
+   M1 distinct nonzero vertices at cell midpoints: {2: 0.001, 3: 0.037, 4: 0.266, 5: 0.472, 6: 0.206, 7: 0.018}
+      collisions: {0: 0.018, 1: 0.206, 2: 0.472, 3: 0.266, 4: 0.037, 5: 0.001}  mean |offset| (eighths): 0.249
+      baseline, uniform instants: {0: 0.004, 1: 0.011, 2: 0.027, 3: 0.144, 4: 0.369, 5: 0.352, 6: 0.088, 7: 0.005}  mean |offset|: 0.25
+   M2 openings of the rank-7 runner: blockers per opening {0: 0.165, 1: 0.421, 2: 0.264, 3: 0.095, 4: 0.023, 5: 0.003, 6: 0.028}  blockers shallow 0.512, deep 0.488
+   M2 openings of the rank-6 runner: blockers per opening {0: 0.172, 1: 0.394, 2: 0.288, 3: 0.094, 4: 0.019, 5: 0.033}  blockers shallow 0.497, deep 0.503
+   M3 share of the largest runner's openings that are lonely: mean 0.165, min 0.025
