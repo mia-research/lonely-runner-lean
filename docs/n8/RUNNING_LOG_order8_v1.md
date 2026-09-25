@@ -174,3 +174,22 @@ Read: `PAPER_v9_1` §§2–9, 15, 18; `MANUSCRIPT_v20` §0, §1.2, §6.10, §6A.
   check (`five_cell_floor_v1`'s grid) is replaced by BSM in `five_cell_floor_v2`: 0 disagreements on
   all 20 sub-`1/4` sets. Means and standard deviations of counts in the null tests are the only
   floats left.
+
+## 2026-09-25 — E9. Owner rulings; the owed statement proved equal to the conjecture
+
+**Rulings (owner, 2026-09-25).** (i) The resolution field of E7 is native: a rule in the R6 sense,
+no different in kind. E7's "the owner's to confirm" is answered. (ii) Density has no use in the
+framework, which works natively for all positive reals. Pigeonhole is a **tool**, not an object, so
+`Stepping.exists_step_near` stands, and E8's flag on the real-speed step is withdrawn.
+
+**`lonelyRunnerAt8_iff_residual`** `[PROVED — commit in LonelyRunner/, Spec gate PASS 1,524/1,524,
+experiments/nN/spec_gate_residual_iff.out]`. The converse `residual_of_lonelyRunnerAt8` realises a
+residual set as the disparities of the arrangement `(0, r₁, …, r₇)` for its subject, the runner of
+speed 0. So the owed statement is **exactly** the conjecture at eight runners: it adds no pinned
+runner, no first-instant demand and no bound on when.
+
+**Where extra requirements do live**: in the OWED register, off this path. `RCapped` is a cap.
+`FourClears` and `CoprimeLargestFlank` require the *largest* flank specifically. `WindowConstantFive`
+requires a clear window of fixed length. `DoorFirstLap` (refuted) bounded when. The cloud sessions'
+length step and "robust order-six lemma" (E2) were likewise stronger than the conjecture: a cell of a
+given length at a lower order. The latter is false.
