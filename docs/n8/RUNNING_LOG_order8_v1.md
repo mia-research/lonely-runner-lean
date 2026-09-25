@@ -262,3 +262,66 @@ course: block split, fast pair, and the lattice at `L₀`. The proved rules alre
 candidates cannot cover" as counts (rung budget, descent shift budget), which the framework admits as
 tools. The obstacle is mathematical and specific: at a lattice of mostly coprime runners, first-order
 counts over-spend (`7D/4 > D`), and a proof needs control of the overlaps.
+
+## 2026-09-25 — E11. Rulings; AP deformations at scale; the log-time form; the list revised
+
+**Rulings (owner, 2026-09-25).**
+- (i) The owner holds that the cascade **guarantees** the isolation event exists: it carries the AP's
+  global isolation (φ(n) law) to local isolation as the speeds deform. Recorded as the owner's
+  position. Two facts stand beside it:
+  - the Lean tree proves the equivalence "event ⇔ lonely", and the unconditional statement at order
+    8 is still the hypothesis of `lonelyRunnerAt8_of_residual`;
+  - `PAPER_v9_1`'s abstract calls isolation surviving deformation what "the Lonely Runner Conjecture
+    asserts".
+
+  Along linear deformation paths (`deformation_v1.out`), the cells descended from the AP's events die
+  early (λ ≈ 0.13–0.36), and loneliness at the target is carried by cells **born** along the path:
+  every cell is born in 27/28 rule-miss and 30/30 random residual sets `[EMPIRICAL, one path per set]`.
+  A deformation argument has to carry births, not only the original events.
+- (ii) **Covering is admissible now.** The ban was needed early to clear out what did not apply; with
+  the framework developed, the owner will entertain covering arguments.
+- (iii) Scale invariance: tests must not be scale-blind. The AP is scale invariant.
+
+**AP deformations at scale** (`near_ap_scale_v1`, `v2`; exact):
+- Random ±3 deformations of `k·(1..7)`, `k = 10², 10³, 10⁴`, are settled mostly by R6 (171/158/146
+  of 200): an arithmetic accident.
+- Searched *for* residual membership (240 restarts, `|eᵢ| ≤ k/100` and `k/10`, `k` up to `10⁵`): **no
+  member found**. Within 1% the §15 first-lap and −7 openings carry them; within 10% the `N = 6, 7, 9`
+  openings and the resolution field do.
+- So E10's scale-free residual members, built around `d₁ = 8·lcm(1..64)`, are arithmetic
+  constructions. They are not deformations of the AP.
+
+**The log-time form** `[PROVED — two lines]`. With `x = log t`, `aᵢ = log dᵢ`, and the fixed set
+`G = ⋃_{M≥0} [log(M + 1/8), log(M + 7/8)]`, the subject is lonely **iff some translate of the
+configuration {aᵢ} lies inside G**. The speeds enter only through the configuration; scaling is
+translation; there are no lattices and no divisibility.
+- The first tooth `[log 1/8, log 7/8]` has length **exactly `log 7`**. R1 is "fits in the first tooth",
+  and the AP (span `log 7`) fits with zero slack: its tightness, read in this picture.
+- First-lap clearance is "six in the first tooth, the flank on a tooth's left edge".
+- Teeth and gaps shrink like `1/M`, with the gaps' share tending to `1/4`: seven translates of the
+  blocked set are not excluded from covering by share alone (`7/4 > 1`).
+- Separation of scale is a gap between consecutive `aᵢ`. If every gap is `< log T`, the configuration
+  spans `< 6 log T`: **up to scaling, the scale-free remainder is a bounded region.**
+
+### The list, revised
+
+1. **State the obligation in log-time form** (Lean, short). Scale invariance becomes exact, and it
+   gives covering arguments a translation-invariant setting.
+2. **Separation-of-scale rules.** In hand: a fast block of one (R8, proved); a fast pair (verified
+   163/163, window lemma to formalise); a block with a large common factor (verified 162/162; uses
+   the block's full LRC over its period, formalise). **Newly visible gap:** a fast block of `f ≥ 3`
+   runners **without** a common factor needs a *robust window*: every window of length `κ/min F` holds
+   a point where the block is clear at `1/8`, whatever phase the window starts at. That is a
+   shifted-start statement for `f` runners, and it is not in hand. The shifted Lonely Runner
+   Conjecture (Beck, Hoşten and Schymura 2019, *Lonely Runner Polyhedra*) is the literature's name for
+   that shape `[CITED — not verified; citation-verifier owed before any use]`. Whether the organising
+   split can always put the gap where `f ≤ 2`, or use a common factor, is open.
+3. **The bounded remainder.** With covering admitted, arguments on a bounded region of
+   configurations become available. **Tight configurations are where they must be done by hand**: at
+   the AP the clear set is isolated points, so no neighbourhood carries an instant. Session 2's sign
+   rule (`ap_sign_rule_v1`) is the local analysis at the AP. Its four instants cover four cones of
+   deformation directions, and whether those cones exhaust the directions is not checked. The
+   deformation data above says born cells take over.
+4. **The integer ladder is demoted to a rule.** It is a divisibility device, not a scale-invariant
+   one. It emptied every finite window and clears the scale-free arithmetic members at `L₀`. It stays
+   in the case list, but it is not the organising principle.
