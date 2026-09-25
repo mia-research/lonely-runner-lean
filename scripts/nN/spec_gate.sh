@@ -212,6 +212,7 @@ LRC.OrderEightN.ResolutionClears8:ROUTE
 LRC.OrderEightN.FastPair8:ROUTE
 LRC.OrderEightN.BlockSplit8:ROUTE
 LRC.OrderSixN.S7.Named.Found:ROUTE    LRC.OrderSixN.S7.Named.Found6:ROUTE
+LRC.SplitChain.Valid:ROUTE
 "
 PROPS=$(python3 - $SRC/*.lean <<'PYEOF'
 import re, sys
@@ -227,7 +228,7 @@ for path in sys.argv[1:]:
             if ns and ns[-1] == m.group(1): ns.pop()
             continue
         m = re.match(r'\s*(?:noncomputable\s+)?def\s+([A-Za-z_][\w.\x27]*)\b(.*)', line)
-        if m and re.search(r':\s*Prop\b', m.group(2)):
+        if m and (re.search(r':\s*Prop\b', m.group(2)) or re.search(r'\u2192\s*Prop\b', m.group(2))):
             print('.'.join(ns + [m.group(1)]))
 PYEOF
 )
