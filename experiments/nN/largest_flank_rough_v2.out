@@ -1,0 +1,5 @@
+e = 120 (factor <= 7): 1 failures of 593775 six-subsets of [1,30]  [(2, 12, 14, 16, 18, 30)]  (1s)
+e = 125 (factor <= 7): 0 failures of 593775 six-subsets of [1,30]  []  (1s)
+e = 126 (factor <= 7): 0 failures of 593775 six-subsets of [1,30]  []  (1s)
+e = 121 (no factor <= 7): 0 failures of 593775 six-subsets of [1,30]  []  (1s)
+e = 127 (no factor <= 7): 0 failures of 593775 six-subsets of [1,30]  []  (1s)
