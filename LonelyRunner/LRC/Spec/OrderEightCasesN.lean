@@ -852,4 +852,43 @@ theorem lonelyRunnerAt8_of_residual
     LRC.Spec.LonelyRunnerAt8 :=
   LRC.Spec.lonelyRunnerAt8_of_existence (existenceAt8_iff_residual.mpr hres)
 
+/-- **The residual statement asks nothing beyond the conjecture.**  A residual set `R` is the
+disparity set of the arrangement `(0, r₁, …, r₇)` for its subject, the runner of speed `0`; the
+conjecture at eight runners, applied to that one subject, gives the residual statement back.  No
+runner is pinned in the target: `0` is simply one of the eight speeds of this particular
+arrangement. -/
+theorem residual_of_lonelyRunnerAt8 (h : LRC.Spec.LonelyRunnerAt8) :
+    ∀ R : Finset ℕ, (∀ d ∈ R, 0 < d) → EightResidual R →
+      ∃ t : ℝ, 0 < t ∧ ∀ d ∈ R, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  intro R hpos hR
+  classical
+  set f := R.orderEmbOfFin hR.card_eq with hf
+  set v : Fin 8 → ℝ := Fin.cons 0 (fun i : Fin 7 => ((f i : ℕ) : ℝ)) with hv
+  have hinj : Function.Injective v := by
+    refine Fin.cons_injective_iff.mpr ⟨?_, ?_⟩
+    · rintro ⟨i, hi⟩
+      have hmem : f i ∈ R := Finset.orderEmbOfFin_mem R hR.card_eq i
+      have h0 : ((f i : ℕ) : ℝ) = 0 := hi
+      have : f i = 0 := by exact_mod_cast h0
+      exact absurd (hpos _ hmem) (by omega)
+    · intro a b hab
+      have hab' : ((f a : ℕ) : ℝ) = ((f b : ℕ) : ℝ) := hab
+      have : (f a : ℕ) = f b := by exact_mod_cast hab'
+      exact f.injective this
+  obtain ⟨t, ht, hl⟩ := h v hinj 0
+  refine ⟨t, ht, fun d hd => ?_⟩
+  obtain ⟨i, hi⟩ : ∃ i, f i = d := by
+    have : d ∈ Set.range f := by
+      rw [hf, Finset.range_orderEmbOfFin]; exact hd
+    exact this
+  have := hl i.succ (Fin.succ_ne_zero i)
+  simpa [hv, hi] using this
+
+/-- **The owed statement is the conjecture at eight runners, exactly.** -/
+theorem lonelyRunnerAt8_iff_residual :
+    LRC.Spec.LonelyRunnerAt8 ↔
+      ∀ R : Finset ℕ, (∀ d ∈ R, 0 < d) → EightResidual R →
+        ∃ t : ℝ, 0 < t ∧ ∀ d ∈ R, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) :=
+  ⟨residual_of_lonelyRunnerAt8, lonelyRunnerAt8_of_residual⟩
+
 end LRC.OrderEightN
