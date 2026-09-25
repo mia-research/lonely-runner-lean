@@ -3,6 +3,7 @@ import LonelyRunner.LRC.Spec.OrderSixN
 import LonelyRunner.LRC.Spec.FastRunnerN
 import LonelyRunner.LRC.Spec.ShiftedTotientN
 import LonelyRunner.LRC.Spec.MirrorN
+import LonelyRunner.LRC.Spec.FastPairEightN
 
 /-!
 # Order eight, whole-number disparities: the framework's rules, and the case they leave
@@ -667,6 +668,47 @@ theorem lonely_eight_of_resolution {S : Finset ℕ} {D j : ℕ} (hD : 0 < D)
     ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) :=
   lonely_eight_of_opening hD j h
 
+/-! ## 2h. the fast pair (separation of scale)
+
+Two disparities `a < b` with every other at most `a/9`: the other five are lonely at `1/6` by order
+six, and `LRC.FastPairEight.lonely_eight_of_fast_pair` puts the pair clear inside that window.  R8
+is the same rule for a block of one.  Every `EightResidual` member built with two large runners and
+no large common factor is settled by it (`experiments/nN/fast_pair_window_v1.out`, 163 of 163). -/
+
+/-- **A fast pair**: two disparities `a < b` with `9c ≤ a` for every other disparity `c`. -/
+def FastPair8 (S : Finset ℕ) : Prop :=
+  ∃ a ∈ S, ∃ b ∈ S, a < b ∧ ∀ c ∈ S, c ≠ a → c ≠ b → 9 * c ≤ a
+
+/-- A fast pair over seven disparities gives loneliness at `1/8`. -/
+theorem lonely_eight_of_fastPair {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (hc7 : S.card = 7)
+    (h : FastPair8 S) : ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  classical
+  obtain ⟨a, ha, b, hb, hab, hc⟩ := h
+  set C := (S.erase b).erase a with hC
+  have hab' : a ≠ b := ne_of_lt hab
+  have haC : a ∈ S.erase b := Finset.mem_erase.mpr ⟨hab', ha⟩
+  have hCcard : C.card = 5 := by
+    rw [hC, Finset.card_erase_of_mem haC, Finset.card_erase_of_mem hb, hc7]
+  have hCne : C.Nonempty := Finset.card_pos.mp (by omega)
+  have hCpos : ∀ c ∈ C, 0 < c := fun c hc' =>
+    hpos c (Finset.mem_of_mem_erase (Finset.mem_of_mem_erase hc'))
+  have hCm : ∀ c ∈ C, c ≤ a / 9 := by
+    intro c hc'
+    have hca : c ≠ a := (Finset.mem_erase.mp hc').1
+    have hcb : c ≠ b := (Finset.mem_erase.mp (Finset.mem_erase.mp hc').2).1
+    have hcS : c ∈ S := Finset.mem_of_mem_erase (Finset.mem_of_mem_erase hc')
+    rw [Nat.le_div_iff_mul_le (by norm_num)]
+    have := hc c hcS hca hcb
+    omega
+  obtain ⟨t, ht, hCl, hal, hbl⟩ := LRC.FastPairEight.lonely_eight_of_fast_pair hCpos hCcard.le hCne
+    hCm hab.le (Nat.mul_div_le a 9)
+  refine ⟨t, ht, fun d hd => ?_⟩
+  by_cases hda : d = a
+  · rw [hda]; exact hal
+  by_cases hdb : d = b
+  · rw [hdb]; exact hbl
+  exact hCl d (Finset.mem_erase.mpr ⟨hda, Finset.mem_erase.mpr ⟨hdb, hd⟩⟩)
+
 /-! ## 3. the case analysis -/
 
 /-- **The shifted flank applies** (R4's condition). -/
@@ -708,6 +750,7 @@ structure EightResidual (S : Finset ℕ) : Prop where
   no_six_seven_nine : ∀ e ∈ S, ∀ N, (N = 6 ∨ N = 7 ∨ N = 9) → N ∣ e →
     ∀ i, ¬ RationalOpening8 S N (e / N) i
   no_small_resolution : ∀ D, 0 < D → D ≤ resolutionCap8 → ∀ j, ¬ ResolutionClears8 S D j
+  no_fast_pair : ¬ FastPair8 S
 
 /-- **Order eight, whole numbers.**  A set of at most seven positive disparities, one of them odd,
 is lonely at `1/8`, or it is in `EightResidual`. -/
@@ -785,9 +828,11 @@ theorem lonely_eight_or_residual {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
   by_cases hres : ∃ D, 0 < D ∧ D ≤ resolutionCap8 ∧ ∃ j, ResolutionClears8 S D j
   · obtain ⟨D, hD, -, j, hj⟩ := hres
     exact Or.inl (lonely_eight_of_resolution hD hj)
+  by_cases hfp : FastPair8 S
+  · exact Or.inl (lonely_eight_of_fastPair hpos hc7 hfp)
   right
   push Not at hcost hff hfast
-  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_, hfp⟩
   · intro e heS k hk; exact hfl ⟨e, heS, k, hk⟩
   · intro e heS he; exact hm7 ⟨e, heS, he⟩
   · intro e heS N hN8 hNe i hi; exact hro ⟨e, heS, N, hN8, hNe, i, hi⟩

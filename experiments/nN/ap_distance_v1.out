@@ -1,0 +1,6 @@
+1s; residual members found: 22
+furthest: passes 13 of 13 fields (next field: -); residues mod 8 [0, 1, 7, 3, 4, 6, 0]
+22 scale-free residual members: rho min 0.387, median 1.014, max 1.508
+AP deformations k=10000, |e|<=100: rho max 0.0073
+AP deformations k=10000, |e|<=1000: rho max 0.0721
+AP-local radius (ap_local_v1, proved): relative deviation < 1/85 = 0.0118

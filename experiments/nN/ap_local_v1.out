@@ -1,0 +1,6 @@
+|r_k| <= 1/4: two-class rule lonely 2325/4000;  fixed-instant sign rule certifies 1000/4000;  first failure r = [-0.05790225, 0.115881, -0.0070735, -0.053428, -0.22709875, 0.068786, 0.09867]
+|r_k| <= 1/10: two-class rule lonely 2781/4000;  fixed-instant sign rule certifies 1487/4000;  first failure r = [-0.0223563, -0.0862903, 0.0041921, -0.0856564, 0.0279842, 0.0152251, 0.040836]
+|r_k| <= 1/20: two-class rule lonely 3091/4000;  fixed-instant sign rule certifies 1698/4000;  first failure r = [-0.0349551, 0.01400955, 0.02352615, 0.03668845, 0.03027735, -0.03052835, 0.0415808]
+|r_k| <= 1/40: two-class rule lonely 3581/4000;  fixed-instant sign rule certifies 1963/4000;  first failure r = [0.005201725, 0.002807775, -0.009313725, 0.006445125, 0.0114768, -0.01159275, 0.0209875]
+|r_k| <= 1/60: two-class rule lonely 3860/4000;  fixed-instant sign rule certifies 1933/4000;  first failure r = [-0.001987566666666667, -0.00667755, -0.003889633333333333, -0.015658983333333334, 0.009609166666666667, -0.015706833333333333, 0.015250583333333333]
+|r_k| <= 1/100: two-class rule lonely 4000/4000;  fixed-instant sign rule certifies 1973/4000;  first failure r = None
