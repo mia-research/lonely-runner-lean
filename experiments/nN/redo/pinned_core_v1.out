@@ -1,0 +1,14 @@
+doubly pinned separated runners: 98
+  ('handoffs 0', 'event at tau_C'): 53
+  ('handoffs 1', 'event in [t1, end]'): 42
+  ('handoffs 1', 'event later'): 2
+  ('handoffs 2', 'event later'): 1
+  next core instant != t1: 26
+  next core instant == t1: 72
+  block turns in the cell starting at t1: min 0.00, median 555.0
+   exception: core [1, 14, 15], block [1239, 1286, 1292, 1320]: tau_C 1/8, t1 17/120, core's next instant 17/112, event 0.151836, handoffs 1
+   exception: core [1, 14, 15], block [1225, 1272, 1278, 1306]: tau_C 1/8, t1 17/120, core's next instant 17/112, event 0.151939, handoffs 1
+   exception: core [1, 6, 7], block [16907, 139679, 1786754, 1832022]: tau_C 1/8, t1 9/56, core's next instant 3/16, event 0.125000, handoffs 0
+   exception: core [1, 6, 7], block [16900, 139672, 1786747, 1832015]: tau_C 1/8, t1 9/56, core's next instant 3/16, event 0.187500, handoffs 1
+   exception: core [1, 3, 6, 7], block [151068, 153035, 153165]: tau_C 1/8, t1 9/56, core's next instant 3/16, event 0.125000, handoffs 0
+   exception: core [1, 6, 7, 10], block [151061, 153028, 153158]: tau_C 1/8, t1 9/56, core's next instant 3/16, event 0.125000, handoffs 0
