@@ -99,4 +99,37 @@ theorem lonely_along_path {p : ℝ → Fin 8 → ℝ} (hp : Continuous p) {k : F
     exact mem_nhdsWithin_of_mem_nhds (hopen x (Set.Ico_subset_Icc_self hx.2) hx.1))
   exact hsub (Set.right_mem_Icc.mpr zero_le_one)
 
+/-- **Margin gives local stability along a path.**  If at `p s` the subject is lonely at `t > 0` with margin `ε > 0`,
+then at every `r` near `s` the subject is lonely (at the same `t`). -/
+theorem eventually_lonely_of_margin {p : ℝ → Fin 8 → ℝ} (hp : Continuous p) {k : Fin 8} {s t ε : ℝ}
+    (hε : 0 < ε) (ht : 0 < t) (hm : ∀ i : Fin 8, i ≠ k → (8 : ℝ)⁻¹ + ε ≤ circDist (sep (p s) k i t)) :
+    ∀ᶠ r in 𝓝 s, LRC.Spec.LonelyForSubject (p r) k := by
+  set η := ε / (2 * t) with hη
+  have hη0 : 0 < η := by positivity
+  have hev : ∀ᶠ r in 𝓝 s, ∀ i : Fin 8, |p r i - p s i| ≤ η := by
+    rw [Filter.eventually_all]
+    intro i
+    have hc : Continuous (fun r => p r i) := (continuous_apply i).comp hp
+    have := (Metric.tendsto_nhds.mp (hc.tendsto s)) η hη0
+    filter_upwards [this] with r hr
+    rw [Real.dist_eq] at hr; exact hr.le
+  filter_upwards [hev] with r hr
+  refine ⟨t, ht, lonelyAt_of_close hm hr ?_⟩
+  rw [abs_of_pos ht, hη]; field_simp; ring_nf; exact le_refl _
+
+/-- **The deformation theorem, with margin.**  Along a continuous path of speeds: lonely at the start; wherever the
+subject is lonely it is lonely somewhere with a positive margin; and some lonely instant always lies in `[c, T]`,
+`c > 0`.  Then the subject is lonely at the end. -/
+theorem lonely_along_path_of_margin {p : ℝ → Fin 8 → ℝ} (hp : Continuous p) {k : Fin 8} {c T : ℝ}
+    (hc : 0 < c) (h0 : LRC.Spec.LonelyForSubject (p 0) k)
+    (hmargin : ∀ s ∈ Set.Icc (0 : ℝ) 1, LRC.Spec.LonelyForSubject (p s) k →
+      ∃ t ε : ℝ, 0 < t ∧ 0 < ε ∧ ∀ i : Fin 8, i ≠ k → (8 : ℝ)⁻¹ + ε ≤ circDist (sep (p s) k i t))
+    (hbound : ∀ s ∈ Set.Icc (0 : ℝ) 1, LRC.Spec.LonelyForSubject (p s) k →
+      ∃ t ∈ Set.Icc c T, LonelyAt (p s) k t) :
+    LRC.Spec.LonelyForSubject (p 1) k := by
+  refine lonely_along_path hp hc h0 ?_ hbound
+  intro s hs hl
+  obtain ⟨t, ε, ht, hε, hm⟩ := hmargin s hs hl
+  exact eventually_lonely_of_margin hp hε ht hm
+
 end LRC.Deformation

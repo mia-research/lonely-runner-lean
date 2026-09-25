@@ -1,0 +1,162 @@
+
+=== AP with runners 3,4 crowding one slot; runner 4 moved: runner 4 moved from speed 2580
+  subject runner 1
+    delta=  -50  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  -10  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=   10  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=   30  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  100  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  150  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  210  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  280  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  360  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  450  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0208  pinned by [2] closed by [8] first-cell-point
+    -> jumps 0, tight points 0
+  subject runner 3
+    delta=  -50  R=  169/168 ( 1.006)  moves= 1  cell L=0.0001 longest cell 0.0006  pinned by [1, 5] closed by [8]
+    delta=  -30  R=    57/56 ( 1.018)  moves= 1  cell L=0.0004 longest cell 0.0018  pinned by [1, 5] closed by [8] jump
+    delta=  -10  R=    85/84 ( 1.012)  moves= 1  cell L=0.0030 longest cell 0.0030  pinned by [2] closed by [8] jump
+    delta=    0  R=    73/70 ( 1.043)  moves= 2  cell L=0.0036 longest cell 0.0036  pinned by [8] closed by [2] jump
+    delta=   10  R=    25/24 ( 1.042)  moves= 1  cell L=0.0010 longest cell 0.0042  pinned by [1, 5] closed by [8] jump
+    delta=   30  R=        1 ( 1.000)  moves= 0  cell L=0.0009 longest cell 0.0054  pinned by [4] closed by [8] jump
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0071  pinned by [4] closed by [2] first-cell-point
+    delta=  100  R=    68/63 ( 1.079)  moves= 1  cell L=0.0020 longest cell 0.0095  pinned by [6] closed by [7] jump
+    delta=  150  R=      9/8 ( 1.125)  moves= 1  cell L=0.0031 longest cell 0.0125  pinned by [1, 5] closed by [8] jump
+    delta=  210  R=  153/140 ( 1.093)  moves= 1  cell L=0.0040 longest cell 0.0161  pinned by [8] closed by [1, 5] jump
+    delta=  280  R=    17/14 ( 1.214)  moves= 1  cell L=0.0000 longest cell 0.0202  pinned by [6] closed by [8] first-cell-point jump
+    delta=  360  R=      9/8 ( 1.125)  moves= 1  cell L=0.0052 longest cell 0.0250  pinned by [7] closed by [6] jump
+    delta=  450  R=  153/112 ( 1.366)  moves= 2  cell L=0.0063 longest cell 0.0304  pinned by [7] closed by [6] jump
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.0042 longest cell 0.0369  pinned by [4] closed by [8] jump
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0333 longest cell 0.0452  pinned by [4] closed by [8]
+    -> jumps 12, tight points 0
+  subject runner 4
+    delta=  -50  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0018  pinned by [1, 3] closed by [5] first-cell-point
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0054  pinned by [1, 3] closed by [5] first-cell-point
+    delta=  -10  R=  165/163 ( 1.012)  moves= 1  cell L=0.0045 longest cell 0.0090  pinned by [5] closed by [8] jump
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0109  pinned by [3, 6] closed by [2] first-cell-point jump
+    delta=   10  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0127  pinned by [1, 3] closed by [5] first-cell-point
+    delta=   30  R=        1 ( 1.000)  moves= 0  cell L=0.0036 longest cell 0.0164  pinned by [3] closed by [8]
+    delta=   60  R=    17/15 ( 1.133)  moves= 2  cell L=0.0017 longest cell 0.0221  pinned by [1] closed by [8] jump
+    delta=  100  R=        1 ( 1.000)  moves= 0  cell L=0.0021 longest cell 0.0297  pinned by [3] closed by [6] jump
+    delta=  150  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0395  pinned by [1, 3] closed by [5] first-cell-point
+    delta=  210  R=    81/65 ( 1.246)  moves= 1  cell L=0.0081 longest cell 0.0515  pinned by [1] closed by [7] jump
+    delta=  280  R=  153/151 ( 1.013)  moves= 1  cell L=0.0098 longest cell 0.0661  pinned by [7] closed by [6] jump
+    delta=  360  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0833  pinned by [3, 8] closed by [7] first-cell-point jump
+    delta=  450  R=    51/41 ( 1.244)  moves= 1  cell L=0.0011 longest cell 0.0994  pinned by [8] closed by [7] jump
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.0265 longest cell 0.1299  pinned by [3] closed by [8] jump
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0683 longest cell 0.0683  pinned by [3] closed by [8]
+    -> jumps 9, tight points 0
+  subject runner 8
+    delta=  -50  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  -10  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=   10  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=   30  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  100  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  150  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  210  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  280  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  360  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  450  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0429  pinned by [7] closed by [1] first-cell-point
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0352  pinned by [7] closed by [1] first-cell-point
+    -> jumps 0, tight points 0
+
+=== AP with runners 7,8 crowding one slot; runner 8 moved: runner 8 moved from speed 5920
+  subject runner 1
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.0205 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  -10  R=        1 ( 1.000)  moves= 0  cell L=0.0200 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0197 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=   20  R=        1 ( 1.000)  moves= 0  cell L=0.0191 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.0180 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  120  R=        1 ( 1.000)  moves= 0  cell L=0.0163 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  200  R=        1 ( 1.000)  moves= 0  cell L=0.0142 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  300  R=        1 ( 1.000)  moves= 0  cell L=0.0116 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  420  R=        1 ( 1.000)  moves= 0  cell L=0.0086 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.0053 longest cell 0.0208  pinned by [2] closed by [8]
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0022 longest cell 0.0195  pinned by [2] closed by [8]
+    delta=  790  R=        1 ( 1.000)  moves= 0  cell L=0.0002 longest cell 0.0019  pinned by [2] closed by [8]
+    -> jumps 0, tight points 0
+  subject runner 7
+    delta=  -30  R=  169/168 ( 1.006)  moves= 1  cell L=0.0001 longest cell 0.0002  pinned by [5] closed by [2]
+    delta=  -10  R=    57/56 ( 1.018)  moves= 1  cell L=0.0004 longest cell 0.0007  pinned by [5] closed by [2] jump
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0010  pinned by [2, 8] closed by [4] first-cell-point jump
+    delta=   20  R=    89/84 ( 1.060)  moves= 3  cell L=0.0015 longest cell 0.0015  pinned by [1] closed by [6] jump
+    delta=   60  R=    15/14 ( 1.071)  moves= 1  cell L=0.0025 longest cell 0.0025  pinned by [6] closed by [1] jump
+    delta=  120  R=    68/63 ( 1.079)  moves= 1  cell L=0.0020 longest cell 0.0040  pinned by [4] closed by [3] jump
+    delta=  200  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0060  pinned by [8] closed by [5] first-cell-point jump
+    delta=  300  R=    17/14 ( 1.214)  moves= 1  cell L=0.0000 longest cell 0.0084  pinned by [4] closed by [2] first-cell-point jump
+    delta=  420  R=    69/56 ( 1.232)  moves= 1  cell L=0.0057 longest cell 0.0114  pinned by [3] closed by [4] jump
+    delta=  560  R=    45/28 ( 1.607)  moves= 3  cell L=0.0074 longest cell 0.0149  pinned by [3] closed by [4] jump
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.0035 longest cell 0.0184  pinned by [8] closed by [1] jump
+    delta=  790  R=        1 ( 1.000)  moves= 0  cell L=0.0191 longest cell 0.0206  pinned by [8] closed by [1]
+    -> jumps 10, tight points 0
+  subject runner 8
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.0006 longest cell 0.0015  pinned by [1, 3, 5, 7] closed by [2]
+    delta=  -10  R=        1 ( 1.000)  moves= 0  cell L=0.0018 longest cell 0.0044  pinned by [1, 3, 5, 7] closed by [2]
+    delta=    0  R=  129/127 ( 1.016)  moves= 2  cell L=0.0010 longest cell 0.0059  pinned by [1] closed by [3] jump
+    delta=   20  R=        1 ( 1.000)  moves= 0  cell L=0.0000 longest cell 0.0088  pinned by [3, 7] closed by [6] first-cell-point jump
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.0088 longest cell 0.0146  pinned by [7] closed by [1]
+    delta=  120  R=    66/65 ( 1.015)  moves= 1  cell L=0.0038 longest cell 0.0231  pinned by [1] closed by [3] jump
+    delta=  200  R=    25/22 ( 1.136)  moves= 2  cell L=0.0134 longest cell 0.0341  pinned by [1] closed by [2] jump
+    delta=  300  R=  289/269 ( 1.074)  moves= 1  cell L=0.0061 longest cell 0.0474  pinned by [1] closed by [2] jump
+    delta=  420  R=  391/275 ( 1.422)  moves= 3  cell L=0.0074 longest cell 0.0627  pinned by [1] closed by [2] jump
+    delta=  560  R=    85/47 ( 1.809)  moves= 4  cell L=0.0042 longest cell 0.0798  pinned by [1] closed by [5] jump
+    delta=  700  R=  925/289 ( 3.201)  moves= 8  cell L=0.0097 longest cell 0.0960  pinned by [1] closed by [6] jump
+    delta=  790  R= 2075/419 ( 4.952)  moves=11  cell L=0.0010 longest cell 0.0192  pinned by [3] closed by [5] jump
+    -> jumps 9, tight points 0
+  subject runner 4
+    delta=  -30  R=        1 ( 1.000)  moves= 0  cell L=0.1655 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=  -10  R=        1 ( 1.000)  moves= 0  cell L=0.1632 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.1621 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=   20  R=        1 ( 1.000)  moves= 0  cell L=0.1599 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=   60  R=        1 ( 1.000)  moves= 0  cell L=0.1555 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=  120  R=        1 ( 1.000)  moves= 0  cell L=0.1493 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=  200  R=        1 ( 1.000)  moves= 0  cell L=0.1413 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=  300  R=        1 ( 1.000)  moves= 0  cell L=0.1320 longest cell 0.1361  pinned by [3, 5] closed by [8]
+    delta=  420  R=        1 ( 1.000)  moves= 0  cell L=0.1216 longest cell 0.1485  pinned by [3, 5] closed by [8]
+    delta=  560  R=        1 ( 1.000)  moves= 0  cell L=0.1106 longest cell 0.1667  pinned by [3, 5] closed by [8]
+    delta=  700  R=        1 ( 1.000)  moves= 0  cell L=0.1005 longest cell 0.1311  pinned by [3, 5] closed by [8]
+    delta=  790  R=        1 ( 1.000)  moves= 0  cell L=0.0944 longest cell 0.0974  pinned by [3, 5] closed by [8]
+    -> jumps 0, tight points 0
+
+=== late case (1,31,75,97,128,160,176,225): runner 7 (176, close to 160) moved: runner 7 moved from speed 176
+  subject runner 1
+    delta=  -12  R=  135/112 ( 1.205)  moves= 1  cell L=0.0104 longest cell 0.0597  pinned by [8] closed by [7]
+    delta=   -8  R=  135/112 ( 1.205)  moves= 1  cell L=0.0065 longest cell 0.0318  pinned by [8] closed by [7]
+    delta=   -4  R=  135/112 ( 1.205)  moves= 1  cell L=0.0028 longest cell 0.0596  pinned by [8] closed by [7]
+    delta=   -2  R=  135/112 ( 1.205)  moves= 1  cell L=0.0011 longest cell 0.0781  pinned by [8] closed by [7]
+    delta=   -1  R=  135/112 ( 1.205)  moves= 1  cell L=0.0002 longest cell 0.0781  pinned by [8] closed by [7]
+    delta=    0  R=   165/16 (10.312)  moves=23  cell L=0.0081 longest cell 0.0781  pinned by [4] closed by [6] jump
+    delta=    1  R=   615/88 ( 6.989)  moves=18  cell L=0.0014 longest cell 0.0781  pinned by [7] closed by [2] jump
+    delta=    2  R=   410/59 ( 6.949)  moves=18  cell L=0.0064 longest cell 0.0781  pinned by [7] closed by [2] jump
+    delta=    4  R=   255/37 ( 6.892)  moves=17  cell L=0.0135 longest cell 0.0648  pinned by [3] closed by [2] jump
+    delta=    8  R=    45/16 ( 2.812)  moves= 6  cell L=0.0022 longest cell 0.0318  pinned by [4] closed by [6] jump
+    delta=   12  R=    45/16 ( 2.812)  moves= 6  cell L=0.0022 longest cell 0.0512  pinned by [4] closed by [6]
+    delta=   20  R=    45/16 ( 2.812)  moves= 6  cell L=0.0022 longest cell 0.0691  pinned by [4] closed by [6]
+    delta=   30  R=    54/41 ( 1.317)  moves= 2  cell L=0.0005 longest cell 0.0615  pinned by [7] closed by [6] jump
+    delta=   40  R=    54/43 ( 1.256)  moves= 1  cell L=0.0081 longest cell 0.0387  pinned by [7] closed by [6] jump
+    -> jumps 7, tight points 0
+  subject runner 8
+    delta=  -12  R=        1 ( 1.000)  moves= 0  cell L=0.1133 longest cell 0.1133  pinned by [7] closed by [1]
+    delta=   -8  R=        1 ( 1.000)  moves= 0  cell L=0.0977 longest cell 0.0977  pinned by [7] closed by [1]
+    delta=   -4  R=        1 ( 1.000)  moves= 0  cell L=0.0820 longest cell 0.0820  pinned by [7] closed by [1]
+    delta=   -2  R=        1 ( 1.000)  moves= 0  cell L=0.0742 longest cell 0.0742  pinned by [7] closed by [1]
+    delta=   -1  R=        1 ( 1.000)  moves= 0  cell L=0.0703 longest cell 0.0703  pinned by [7] closed by [1]
+    delta=    0  R=        1 ( 1.000)  moves= 0  cell L=0.0664 longest cell 0.0666  pinned by [7] closed by [1]
+    delta=    1  R=        1 ( 1.000)  moves= 0  cell L=0.0625 longest cell 0.0652  pinned by [7] closed by [1]
+    delta=    2  R=        1 ( 1.000)  moves= 0  cell L=0.0586 longest cell 0.0639  pinned by [7] closed by [1]
+    delta=    4  R=        1 ( 1.000)  moves= 0  cell L=0.0508 longest cell 0.0612  pinned by [7] closed by [1]
+    delta=    8  R=        1 ( 1.000)  moves= 0  cell L=0.0352 longest cell 0.0639  pinned by [7] closed by [1]
+    delta=   12  R=        1 ( 1.000)  moves= 0  cell L=0.0195 longest cell 0.0577  pinned by [7] closed by [1]
+    delta=   20  R=  261/194 ( 1.345)  moves= 2  cell L=0.0010 longest cell 0.0452  pinned by [2] closed by [3] jump
+    delta=   30  R=   171/97 ( 1.763)  moves= 4  cell L=0.0171 longest cell 0.0488  pinned by [5] closed by [3] jump
+    delta=   40  R=  297/224 ( 1.326)  moves= 2  cell L=0.0068 longest cell 0.0225  pinned by [1] closed by [3] jump
+    -> jumps 3, tight points 0
