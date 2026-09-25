@@ -1,0 +1,22 @@
+3107 separated runners: the level-by-level cascade lands on the runner's event 3107/3107
+   core-block handoffs, all: [(0, 3062), (1, 44), (2, 1)]
+   core-block handoffs, the 252 the construction missed: [(0, 252)]
+  ('handoff', 'largest cluster 2', 'offsets gapped at tau_C'): 5
+  ('handoff', 'largest cluster 3', 'offsets gapped at tau_C'): 27
+  ('handoff', 'largest cluster 4', 'offsets gapped at tau_C'): 9
+  ('handoff', 'largest cluster 5', 'offsets NOT gapped at tau_C'): 1
+  ('handoff', 'largest cluster 5', 'offsets gapped at tau_C'): 3
+  ('no handoff', 'largest cluster 1', 'offsets gapped at tau_C'): 58
+  ('no handoff', 'largest cluster 2', 'offsets gapped at tau_C'): 400
+  ('no handoff', 'largest cluster 3', 'offsets gapped at tau_C'): 1204
+  ('no handoff', 'largest cluster 4', 'offsets gapped at tau_C'): 500
+  ('no handoff', 'largest cluster 5', 'offsets NOT gapped at tau_C'): 8
+  ('no handoff', 'largest cluster 5', 'offsets gapped at tau_C'): 551
+  ('no handoff', 'largest cluster 6', 'offsets NOT gapped at tau_C'): 10
+  ('no handoff', 'largest cluster 6', 'offsets gapped at tau_C'): 331
+   handoff example: core [1, 14, 15], clusters [[1239, 1286, 1292, 1320]]: tau_C 0.125000, event 0.151836, handoffs 1
+   handoff example: core [1, 14, 15], clusters [[1225, 1272, 1278, 1306]]: tau_C 0.125000, event 0.151939, handoffs 1
+   handoff example: core [1, 3, 5, 7], clusters [[158, 160, 163]]: tau_C 0.125000, event 0.160714, handoffs 1
+   handoff example: core [1, 6, 7], clusters [[16900], [139672], [1786747, 1832015]]: tau_C 0.125000, event 0.187500, handoffs 1
+   handoff example: core [1, 2, 7], clusters [[1487, 1524, 1544, 1550]]: tau_C 0.125000, event 0.160843, handoffs 1
+   handoff example: core [1, 7], clusters [[1159049, 1180640, 1212347, 1229741, 1248993]]: tau_C 0.125000, event 0.160715, handoffs 1

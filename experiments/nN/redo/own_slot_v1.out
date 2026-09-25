@@ -1,0 +1,5 @@
+uniform: 2000 runners; runners with EVERY other runner within 1/8 of its own global-event vertex (best class): 66/2000;  number of runners outside, by count: {0: 66, 1: 132, 2: 245, 3: 499, 4: 662, 5: 383, 6: 13}
+clustered: 2000 runners; runners with EVERY other runner within 1/8 of its own global-event vertex (best class): 24/2000;  number of runners outside, by count: {0: 24, 1: 74, 2: 242, 3: 564, 4: 747, 5: 342, 6: 7}
+slow-plus-fast: 2000 runners; runners with EVERY other runner within 1/8 of its own global-event vertex (best class): 39/2000;  number of runners outside, by count: {0: 39, 1: 141, 2: 301, 3: 521, 4: 640, 5: 348, 6: 10}
+AP deformed 1/20: 2000 runners; runners with EVERY other runner within 1/8 of its own global-event vertex (best class): 1179/2000;  number of runners outside, by count: {0: 1179, 1: 159, 2: 86, 3: 84, 4: 111, 5: 320, 6: 61}
+AP deformed 1/5: 2000 runners; runners with EVERY other runner within 1/8 of its own global-event vertex (best class): 207/2000;  number of runners outside, by count: {0: 207, 1: 189, 2: 220, 3: 357, 4: 576, 5: 422, 6: 29}

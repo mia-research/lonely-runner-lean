@@ -1,0 +1,4 @@
+  ('handoff', 'core pinned both sides at tau_C'): 45
+  ('no handoff', 'core not pinned both sides'): 3009
+  ('no handoff', 'core pinned both sides at tau_C'): 53
+  handoff runners' core pinners (ahead at 1/8, behind at 7/8): {((1,), (7,)): 19, ((1,), (15,)): 4, ((2,), (14,)): 3, ((4,), (28,)): 3, ((1,), (47,)): 2, ((2,), (46,)): 2, ((2,), (30,)): 2, ((1, 105), (7,)): 1}
