@@ -1193,3 +1193,58 @@ here). The fast train's **speed differences** times `t_C` place its offsets on t
   relay beyond one such period.
 - What remains is whether the core is still clear then or hands off to its next cell: a question at the
   core's scale about the core plus the train's differences, the same problem one level down.
+
+---
+
+## E34 — 2026-09-25 — the train at its period points (Lean), and the handoff law at the core's scale
+
+**1. The bunching bound, proved** (`LRC/Spec/SyncPeriodN.lean`, gate: `experiments/nN/spec_gate_sync_period.out`).
+- `block_clear_at_period`: a fast block `{N + e}` whose offsets are all multiples of `g`, at the period
+  point `t₀ = k/g`, is clear at `1/8` at the named instant `t₀ + fract(−1/2 − N t₀)/N ∈ [t₀, t₀ + 1/N)`,
+  whenever `8·Emax ≤ 3N`. There every offset reads a whole number, so the train is one point of the
+  circle and the phase `1/2` clears all of it.
+- `lonely_at_period`: with a core clear on that turn, core and block are clear together.
+- `[PROVED]`, no `sorry`, no `native_decide`. **What it does not cover:** a core that is blocked at every
+  period point (e.g. `g` divides every core reading). Item 2 shows that case does not arise as a barrier
+  in the arrangements run, but the lemma alone does not close it.
+
+**2. The handoff at the core's scale** (`experiments/nN/redo/handoff_search_v1`, `handoff_directed_v1/v2/v3`).
+- Random offsets in `[1,80]` bunch too rarely: 0 handoffs in 4,000 arrangements. So the bunching was
+  built in: subject `s`, core `s + a, s + b` with `b/a` just short of 7 (a narrow first cell), and train
+  `s + N + j·d`, offsets spread round the circle with no gap `> 1/4` at the core's opening `t_C = 1/(8a)`.
+  Every runner is run through the exact cascade.
+- **Prediction, exact and independent of `N`:** `t_pred` = the first instant `≥ t_C` at which the core is
+  clear and the train's **shape** (offsets × `t`) leaves a gap `≥ 1/4`. Both conditions change only at
+  breakpoints `c·t ∈ ℤ ± 1/8` and `(eᵢ − eⱼ)·t ∈ ℤ + {0, 1/4, 3/4}`, so `t_pred` is a finite exact
+  computation. The fast phase `N·t` only has to reach the gap, which takes at most one turn `1/N`.
+- 180 arrangements (`b ∈ {61..69}`, `d ∈ {12..20}`, `f ∈ {4,5}`, `N ∈ {10⁴,10⁵,10⁶}`): `|t* − t_pred|·N ≤ 0.617`
+  in every one.
+  - 144 have the event at `t_C` and 3 inside the first cell (the within-cell delay of E33).
+  - **33 are handoffs, and all 33 land at the START of the core's next cell** (`t_pred = 9/(8b)`: reading
+    `b` reopening), because by then the train's shape has a quarter gap.
+- **The one miss, and what it was.** Core `(32, 224)`: `224/32 = 7`, the core is **doubly pinned** at
+  `t_C = 1/256` (`32·t_C = 1/8`, `224·t_C = 7/8`), so its clear set there is a single point that the
+  cell-midpoint predictor never examined. At an isolated point the train is not decided by its shape but
+  by where `N·t₀` falls:
+  - `N ∈ [100000, 100016]` (`N/256` frac up to `0.6875`): event at `t_C`.
+  - From `100017` on (frac `≥ 0.6914`): event at `t_pred = 9/1792`, the next positive cell.
+  - The edge `0.6875 = 7/8 − 48/256` is the `sync_block` window `[1/8, 7/8 − Emax·t₀]` exactly.
+  Refined `t_ref` = the first isolated core point in `[t_C, t_pred]` where the actual train is clear, else
+  `t_pred`. Across all 195 arrangements `|t* − t_ref|·N ≤ 0.625`. `[EMPIRICAL — constructed families]`
+- **Core blocked at every period point** (`(32,208)`, `(16,96)`, `(48,320)`, `(24,162)`, and `(32,224)`
+  with step 16 or 6): the event is at `t_C` or at `t_pred` all the same. The train's quarter gap is found
+  off the period points, so `lonely_at_period` is sufficient but not the route.
+
+**What this settles, and what it does not.**
+- **In these families the fast train does not move the isolation event around.** `t*` converges to
+  `t_pred` as `N → ∞`, and `t_pred` is a function of the core and the train's differences alone. `N`
+  contributes at most one turn. The only `N`-dependence is at doubly pinned isolated points, and there it
+  can only bring the event earlier than `t_pred`, never later.
+- **This reduces the handoff to a problem without `N`.** Is there, and how early, a `t` with the core
+  clear and the offsets `E·t` leaving a gap `≥ 1/4`, that is, a free phase `y` at distance `≥ 1/8` from
+  every `e·t`? That is the core plus the train's differences with one extra free phase, a lower-order
+  object.
+- **`[OPEN]`:** a bound on `t_pred` in terms of the core and `E`.
+  - Available: the train's quarter-gap set contains every window `|t − k/g| ≤ 3/(4·Emax)`.
+  - Not available: that some positive core cell meets one of those windows. The lemma of item 1 covers
+    exactly the windows in which the core is clear.
