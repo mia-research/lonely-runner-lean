@@ -1,0 +1,6 @@
+k=1000, |e_i|<=10: residual members 0 of 40 restarts
+k=1000, |e_i|<=100: residual members 0 of 40 restarts
+k=10000, |e_i|<=100: residual members 0 of 40 restarts
+k=10000, |e_i|<=1000: residual members 0 of 40 restarts
+k=100000, |e_i|<=1000: residual members 0 of 40 restarts
+k=100000, |e_i|<=10000: residual members 0 of 40 restarts
