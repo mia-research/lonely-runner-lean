@@ -1248,3 +1248,39 @@ here). The fast train's **speed differences** times `t_C` place its offsets on t
   - Available: the train's quarter-gap set contains every window `|t − k/g| ≤ 3/(4·Emax)`.
   - Not available: that some positive core cell meets one of those windows. The lemma of item 1 covers
     exactly the windows in which the core is clear.
+
+---
+
+## E35 — 2026-09-25 — every arrangement only relocates the isolation event: what the cascade shows
+
+Author's framing (restated after reading every prompt): any arrangement is just deviations from the AP; the
+φ(n) law gives the AP's global isolation; the cascade shows where each runner's isolation moves to. Task: use
+the cascade to show any arrangement only relocates the event. Scripts `experiments/nN/redo/relocation_v1/v2`
+(LonelyRunner repo), exact, arrangements of 8 positive distinct speeds, every runner, signed differences.
+
+**The runs.** Arrangements built as AP gap 840 plus deviations up to `ρ` gaps, `ρ` = 1/100 … 16 (for `ρ ≥ 1` runners lap past
+other slots), and 400 random arrangements in `[1, 10⁶]` (each is its fitted AP plus deviations). 32,000 runners.
+- **Every runner's event is the AP's first spine point `u = 1/8` at some scale `D*`**, with its flank exactly at 1/8 or 7/8
+  (Thm 6.2(d)) and every other runner in `[1/8, 7/8]`: 32,000 of 32,000, no cap reached.
+- **The relocation is a change of scale, not a loss.** `t*/t_ref` (`t_ref` the fitted AP's instant, `W/7`) ranges from about 0.2
+  to about 1,800; the number of moves stays at most 16 and averages about 1 at **every** deviation size.
+- **Near the AP the relocated event is the AP's event, slot for slot.** At `ρ = 1/100`, all 3,200 runners have the seven others
+  on the seven distinct slots 1..7 (nearest eighth) at `t*`. At `ρ = 1/8`: 1,669 of 3,200. At `ρ ≥ 1`: about 20 of 3,200. So
+  far from the AP the others share slots at the event; what the event needs is only that **none sits in the subject's slot**.
+
+**What a move is, in AP terms.** Just before every one of 13,086 moves, the setter sat **in the subject's own slot** at that
+scale: eighths in `[0, 1)` (6,468) or just under it in `(7, 8)` (6,618), i.e. the runner has lapped onto the subject, the
+residue-sharing of §4.5. The move re-reads the arrangement at the scale where that runner sits exactly one slot ahead
+(`8N + 1` eighths); every other reading dilates by the same factor. So **the cascade cures slot-sharers one at a time, and
+each cure relocates the event to a finer scale.** The setter is rarely the subject's nearest speed (91–100% "other"): it is
+a far runner that lapped round, and after the move it is the subject's circle neighbour at one eighth.
+
+**A trace** (`relocation_v2.out`): `(8308, 9358, 9593, 11119, 11359, 11836, 12776, 14328)`, runner 9593. Scales
+235 → 196.2 → 169.6 → 142.8 → 131.9 → 127.3. The first cure (1766 to 9 eighths) put three others into the subject's slot;
+each later cure removed one and created at most one; at `D* = 127.3` no runner shares the slot.
+
+**What this establishes, and what it does not.** `[EMPIRICAL — 32,000 runners]` every arrangement tested only relocates
+the event, and the relocation is the cascade curing slot-sharers. **Not established:** that the curing always ends. A cure
+dilates every reading and can put new runners into the subject's slot (the trace's first move made three). The move count is
+not the handle: resonant trains (E33) make it grow with `N` while the relocated time stays bounded, and §0 excludes move
+counts. The object for a proof is the **set of scales** the cure can visit.
