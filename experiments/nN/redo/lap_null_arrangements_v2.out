@@ -1,0 +1,4 @@
+4308 arrangements realising the 1,436 rule-miss reading sets; every runner's cascade reaches its event: 34464/34464
+   rule-miss runner, laps r <= 0: family 0/1436;  null mean 1334.4 sd 7.7 range 1321-1346
+   rule-miss runner, laps r <= 1: family 1416/1436;  null mean 1414.0 sd 4.6 range 1404-1423
+   rule-miss runner, laps r <= 2: family 1432/1436;  null mean 1426.2 sd 3.0 range 1420-1431

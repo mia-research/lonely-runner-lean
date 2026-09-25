@@ -1,0 +1,4 @@
+rule-miss runners in arrangements of [1,24]: 0 runners, 0 distinct reading sets
+   laps r <= 0: family 0/0;  null mean 0.0 sd 0.0 range 0-0
+   laps r <= 1: family 0/0;  null mean 0.0 sd 0.0 range 0-0
+   laps r <= 2: family 0/0;  null mean 0.0 sd 0.0 range 0-0

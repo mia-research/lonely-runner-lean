@@ -1,0 +1,6 @@
+uniform: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 2736, 'separated, block 4': 9, 'separated, block 5': 55, 'separated, block 6': 400}
+   separated runners covered: {'no proved rule (block 4)': 9, 'no proved rule (block 5)': 55, 'no proved rule (block 6)': 400};  uncovered runners' cascade tier: {'enlarged': 119, 'AP': 179, 'grid': 166}
+clustered: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 177, 'separated, block 1': 180, 'separated, block 2': 383, 'separated, block 3': 608, 'separated, block 4': 588, 'separated, block 5': 710, 'separated, block 6': 554}
+   separated runners covered: {'R8': 180, 'fast pair': 383, 'no proved rule (block 3)': 608, 'no proved rule (block 4)': 588, 'no proved rule (block 5)': 710, 'no proved rule (block 6)': 554};  uncovered runners' cascade tier: {'grid': 936, 'AP': 989, 'enlarged': 535}
+slow-plus-fast: 3200 runners; cascade reaches the event 3200/3200;  {'scale-free': 114, 'separated, block 1': 798, 'separated, block 2': 822, 'separated, block 3': 745, 'separated, block 5': 447, 'separated, block 6': 274}
+   separated runners covered: {'R8': 798, 'fast pair': 822, 'no proved rule (block 3)': 745, 'no proved rule (block 5)': 447, 'no proved rule (block 6)': 274};  uncovered runners' cascade tier: {'enlarged': 359, 'grid': 518, 'AP': 589}
