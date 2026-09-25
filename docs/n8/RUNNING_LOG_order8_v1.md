@@ -1119,3 +1119,34 @@ These are the two lemmas of E29, now as the one step repeated down the levels.
   ratios in `[10/9, 9)`), and κ sits about half its room. That margin makes a finite, certified check
   over the ratio region practical: a covering argument (admissible, E11).
 - Synchronised levels are carried by `sync_block` (the common phase is free).
+
+## 2026-09-25 — E32. What the non-synchronised step must cover; the cascade's workings in a blocked stretch
+
+**Phases.** E31's κ was measured over one period of whole-number blocks, i.e. only the phases a small
+block reaches on its own orbit. Over all arrangements, and as readings grow, a level's orbit fills out
+its phase torus. A **uniform** step ("every window of length ROOM holds a clear instant") must therefore
+hold for **every** starting phase: a region of `2f − 1` dimensions (`f − 1` ratios, `f` phases).
+`full_phase_kappa_v1` (a light local search) found no value above the whole-number ones, and the
+whole-number values are valid lower bounds for it. All known values sit below ROOM.
+
+**Owner: the cascade is not a black box.** Traced through the longest blocked stretch of the worst block
+of each size (`redo/cascade_trace_worst_v1.out`; exact). **A blocked stretch is a relay:**
+- at almost every move exactly one runner is in the way, the one that has just entered its zone at
+  `7/8`;
+- the move goes to its opening at `1/8`, where the next runner arrives at `7/8`;
+- the stretch lasts exactly as long as these handoffs line up.
+
+The long relays are runners travelling **in formation**. In `(10, 13, 16, 19, 29, 35)` (κ = 2.763) the
+AP `10, 13, 16, 19` (common difference 3) sits in consecutive eighths (slots 6, 7, 0, 1 at `t = 0.375`)
+and passes through the zone in turn (19, 16, 13, 10; later 13, 16, 19), with 29 and 35 filling the gaps.
+The relay breaks when the train drifts out of formation, at a rate set by the **differences between the
+speeds**: the owner's hunch, seen in the mechanism.
+
+**Route to the non-synchronised step, in the framework's terms** `[proposed]`: bound a relay's length by
+its train's formation lifetime, which the speed differences control (and the non-synchronised condition
+bounds below).
+
+**Certification in progress** (`certify_f3_v1`, exact rational interval branch and bound, `f = 3`, all
+shapes and phases, window = ROOM(3) = 27/20 turns). First run to a 3,000,000-evaluation cap:
+1,498,439 boxes certified, **no refuting centre**, 173 boxes open (not complete). Re-running with the
+certified volume tracked.
