@@ -190,6 +190,8 @@ LRC.SpecN.DoorThreeLargest:ROUTE      LRC.SpecN.DoorTwoLargest:ROUTE
 LRC.SpecN.DoorFirstLap:REFUTED        LRC.SpecN.DoorLargestFlank:REFUTED
 LRC.FlankFinite.FourClears:OWED       LRC.Resonance.CoprimeLargestFlank:OWED
 LRC.OrderFive.RCapped:OWED            LRC.OrderFive.WindowConstantFive:OWED
+LRC.Order8Skeleton.BlockRule8:OWED    LRC.Order8Skeleton.BoundedCovered8:OWED
+LRC.Order8Skeleton.Lonely8:ROUTE      LRC.Order8Skeleton.Separated8:ROUTE
 LRC.RationalN.ratWorks:ROUTE          LRC.OrderFive.BandFits:ROUTE
 LRC.Resonance.Resonant:ROUTE          LRC.Resonance.GoodK:ROUTE
 LRC.OrderSevenN.avoids06:ROUTE        LRC.OrderSevenN.fitsWindow5:ROUTE
