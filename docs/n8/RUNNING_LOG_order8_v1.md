@@ -777,3 +777,58 @@ lands where its spread leaves a gap.
 - At larger deformations a non-neighbour sometimes enters the sector and pins the event instead
   (1,298/1,319 at `1/20`, 835/894 at `1/10`), and more events move off the class instants: the cascade
   moving the isolation to another scale.
+
+## 2026-09-25 — E23. Redo items 3–4, the cascade map, the five-reading floor, the lap null — on arrangements
+
+All in the framework's frame: arrangements of distinct positive speeds, every runner evaluated in its
+own readings. Exact.
+
+**Item 3: separation of scale** (`redo/separation_arrangements_v1.out`; supersedes the pinned-frame
+separation evidence).
+- Three families (uniform in `[1,10⁶]`, clustered, slow-plus-fast), **9,600 runners, all reach their
+  isolation event.**
+- Separated runners with a block of 1 or 2 readings are covered by proved rules (R8: 978, fast pair:
+  1,205).
+- Blocks of 3–6 are covered by no proved rule, but the cascade isolates every one (clustered family:
+  AP 989, grid 936, enlarged 535). The block split rarely applies to arrangements not built with a
+  common factor.
+- The frame shows itself: in slow-plus-fast arrangements a fast runner sees the slow runners as its
+  block of 1–3 (R8, fast pair), while a slow runner sees the fast cluster as a block of 5–6.
+
+**Item 4: the residual and the ladder** (`redo/residual_arrangements_v1_B24.out`; supersedes
+`eight_residual_count_v6`, `ladder_vs_fields_v1`, `ladder_live_steps_v1`). Every arrangement in `[1,24]`,
+**5,875,824 runners**:
+- 2,271,460 have collided readings (fewer than seven distinct; order seven).
+- 21,404 have readings in the session-start residual.
+- **0** have readings in `EightResidual` with the resolution field.
+- Ladder: least clearing resolution `≤ 13`, live steps past `L₀` `≤ 10`.
+
+**Cascade map** (`redo/cascade_map_arrangements_v1.out`; supersedes `cascade_map_v1`). 8,000 runners
+of random arrangements in `[1,200]` and `[1,10⁶]`:
+- every cascade takes `≤ 10` moves;
+- no runner is in the way at more than 4 steps;
+- the move is set by the subject's nearest runner on that side in 3,587/3,952 (91%) and 3,614/4,167
+  (87%) of moves.
+
+**Five-reading floor** (`redo/five_floor_arrangements_v1.out`; supersedes `five_cell_floor_v1/v2`). Every
+runner with five readings in every arrangement of 6 speeds in `[1,30]`: least (longest cell × largest
+reading) = `5/32`, readings `{1,3,4,5,7}` and `{1,4,5,6,7}`. **Unchanged**: it depends only on a
+runner's readings, and is now established over runners of arrangements.
+
+**Lap null** (`redo/lap_null_arrangements_v1.out`, `_v2.out`; supersedes `lap_null_v1/v2`).
+- Arrangements in `[1,24]` contain no rule-miss runner.
+- The 1,436 known rule-miss reading sets, realised as a runner at speed 100 inside 4,308 arrangements
+  (others at `100 ± r`, all speeds positive): every runner of those arrangements reaches its event,
+  34,464/34,464.
+- The family/null figures are **unchanged** (0 / 1,416 / 1,432 against 1,334 / 1,414 / 1,426), as they
+  depend only on the runner's readings.
+
+**What the redo changed, and what it did not.**
+- **Changed:** "divisible by 7" was an artefact (E21). The "hard cases of R" are a fast cluster that is
+  itself an AP. The "tight sets" are runners whose own readings form one of three sets, in
+  arrangements that are mostly not APs (E22). The neighbour rule is confirmed exactly for every runner
+  of the deformed AP at `ρ ≤ 1/50` (E22).
+- **Unchanged** (reading-level statistics, now established over arrangements): the five-reading floor
+  `5/32`; the lap null.
+- **Still to redo, needs the owner's say (Lean):** `residual_of_lonelyRunnerAt8` builds the arrangement
+  `(0, r₁, …, r₇)`; the skeleton's `Separated8` is stated on difference sets.
