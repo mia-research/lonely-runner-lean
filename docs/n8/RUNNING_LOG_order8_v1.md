@@ -832,3 +832,40 @@ runner's readings, and is now established over runners of arrangements.
   `5/32`; the lap null.
 - **Still to redo, needs the owner's say (Lean):** `residual_of_lonelyRunnerAt8` builds the arrangement
   `(0, r₁, …, r₇)`; the skeleton's `Separated8` is stated on difference sets.
+
+## 2026-09-25 — E24. Lean restated in the arrangement frame; the rule for blocks of 3–6, read off the cascade
+
+**Lean** (Spec gate PASS 1,561/1,561, `experiments/nN/spec_gate_arrangement_frame.out`).
+- `residual_of_lonelyRunnerAt8` realises a residual set as the readings of the runner at speed 1 in
+  `(1, 1 + r₁, …, 1 + r₇)`: every speed positive, no runner at rest.
+- `Order8SkeletonN` restated: `readingsOf v k` (a runner's own readings), `Arr8` (eight distinct
+  positive speeds), and the OWED holes `ArrBlockRule8 f 9` (f = 3..6) and `ArrBoundedCovered8 9`,
+  quantified over arrangements and every runner. `lonelyRunnerAt8_of_arrangement_holes` proves the
+  conjecture at eight runners from them.
+- Blocks of 1 and 2 are discharged by `blockRule8_one` and `blockRule8_two`, lemmas about a runner's
+  readings. The set-form holes are withdrawn.
+
+**Owner: "there must be a rule, it isn't random, it's a deterministic system."** Read off the cascade
+(`redo/block_rule_probe_v1.out`, `v2.out`; exact). 3,107 separated runners with blocks of 3–6, from
+arrangements in three families, every runner:
+- The runner's isolation event `t*` equals the **core's own isolation event** `τ_C` in 1,337 cases and
+  lies strictly between `τ_C` and `2τ_C` in the other 1,770: **never at or beyond `2τ_C`**. The core is
+  the runner's slow readings, its nearest speeds.
+- It lies in the **core's first lonely cell** in 3,093/3,107, pinned by a block reading (1,756), a core
+  reading (1,130) or both (221).
+- The block usually makes many turns in that cell: 16 or more for about 2,400.
+- **The 14 exceptions:** the block makes 5–352 turns in the first cell yet has no joint clear instant
+  there, because it contains a nearly synchronised sub-pair (e.g. core `[1,14,15]`, block
+  `[1239, 1286, 1292, 1320]`: 1286 and 1292). The event then falls in a later core cell, still before
+  `2τ_C`. This also shows the window constant for blocks of 4 (E13) was too optimistic: nearly
+  synchronised sub-pairs stretch the blocked runs.
+
+**The rule in the owner's terms** `[EMPIRICAL — 3,107 runners]`. The runner's near neighbours fix the
+scale and the event (`τ_C`). The fast block only has to find a clear phase inside the core's lonely
+cells, which it does in the first cell unless it contains a nearly synchronised sub-cluster, and
+within `[τ_C, 2τ_C)` always.
+
+**What a proof of it needs.** A statement that the block, fast relative to the core, has a joint clear
+instant inside the core's lonely cells before `2τ_C`. Its hard instances are blocks containing nearly
+synchronised sub-clusters, which the synchronised-block reduction treats as one runner with a free
+phase.
