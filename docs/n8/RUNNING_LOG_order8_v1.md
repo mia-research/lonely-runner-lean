@@ -869,3 +869,38 @@ within `[τ_C, 2τ_C)` always.
 instant inside the core's lonely cells before `2τ_C`. Its hard instances are blocks containing nearly
 synchronised sub-clusters, which the synchronised-block reduction treats as one runner with a free
 phase.
+
+## 2026-09-25 — E25. The block rule derived from the cascade; sections; the window-constant detour dropped
+
+**Owner (2026-09-25).**
+- The cascade knows which isolation events happen in one or more cycles, so the rule can be derived.
+- Using the cascade is not compute heavy.
+- At the isolation point the runners not pinning it sit in their sections, so their exact positions
+  are not needed.
+
+**Derivation from the synchronised-block lemma, checked against the cascade**
+(`redo/block_rule_derived_v1.out`, `v2.out`; 3,107 separated runners with blocks of 3–6, arrangements,
+every runner).
+- A block splits into synchronised clusters. Each cluster's common phase is free; it imposes only that
+  its offsets leave a gap `> 1/4` (plus drift). Clusters of `≤ 3` always do (gap `≥ 1/3`).
+- The cluster's offsets are slow quantities and effectively join the core's level. That is why the
+  event can move past the core's first cell: core `[1,14,15]`, block `[1239, 1286, 1292, 1320]` =
+  base 1239 with offsets `{0, 47, 53, 81}`.
+- As a **construction** (core clear with room for one turn; clusters' phases chosen slowest first,
+  each inside the window where the slower levels stay clear; final instant checked exactly), it
+  produces an exactly lonely instant before `2τ_C` for **2,855/3,107**.
+- The failures are all blocks made of several clusters at **comparable** scales, neither synchronised
+  nor separated (e.g. core `[8382]`, clusters `[141719], [162436, 179569], [252480], [291750],
+  [644004]`): a scale-free level inside the block, where the cascade (not a phase choice) finds the
+  instant.
+
+**Sections** (`redo/sections_v1.out`). Segments 1–6 lie at distance `≥ 1/8` from the subject.
+- At the core's own event, every non-pinning core reading is in segments 1–6; they crowd segment 1
+  (1,607 of 4,157), just past the zone.
+- At the runner's event, non-pinning core readings again crowd segment 1 (3,426 of 5,979). Non-pinning
+  block readings spread nearly evenly over segments 1–6 (2,616 … 1,760): their phase is free, which is
+  the synchronised-block reduction seen directly.
+
+**Dropped.** The window-constant measurements (`level_window_v1/v2`) were a detour toward a proof tool.
+The cascade gives each event directly and cheaply (3,107 runners in seconds). The runs were stopped and
+the files removed.
