@@ -1,0 +1,4 @@
+repeat relays studied: 400
+  width of the repeat interval in the repeater's reading (eighths of a unit, capped 16): [(1, 1), (3, 8), (4, 6), (5, 9), (6, 30), (7, 30), (8, 37), (9, 21), (10, 123), (11, 38), (12, 16), (13, 33), (14, 10), (15, 20), (16, 18)]
+  why the repeat stops at the interval's ends: {'never sets': 121, 'not in the way when reached': 145, 'edge of scan': 127, 'isolated before it returns': 407}
+  R with the repeat: median 2.065, max 5.000; R once the repeat is gone (smallest seen): median 1.042
