@@ -1,0 +1,27 @@
+half-lap settled sets: 155159
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens satisfy R1', '4 evens'): 25297
+  ('evens isolated at delta', 'delta other', 'evens satisfy R1', '3 evens'): 24427
+  ('evens isolated at delta', 'delta other', 'evens satisfy R1', '4 evens'): 21030
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens satisfy R1', '3 evens'): 19821
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens satisfy R1', '5 evens'): 14644
+  ('evens isolated at delta', 'delta other', 'evens satisfy R1', '2 evens'): 11279
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens not R1', '5 evens'): 7504
+  ('evens isolated at delta', 'delta other', 'evens satisfy R1', '5 evens'): 6418
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens satisfy R1', '2 evens'): 6128
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens not R1', '4 evens'): 5344
+  ('evens isolated at delta', 'delta other', 'evens not R1', '4 evens'): 4310
+  ('evens isolated at delta', 'delta other', 'evens not R1', '5 evens'): 3277
+  ('evens isolated at delta', 'delta other', 'evens not R1', '3 evens'): 1927
+  ('evens isolated at delta', 'delta = +-1/(8 e_min)', 'evens not R1', '3 evens'): 1551
+  e.g. T (1, 2, 3, 4, 7, 8, 30): t = 1/2 + (-5/56); evens [2, 4, 8, 30] at [6.57, 5.14, 2.29, 2.57] eighths; odds [1, 3, 7] at [3.29, 1.86, 7.0]
+  e.g. T (1, 2, 3, 4, 7, 16, 30): t = 1/2 + (-5/56); evens [2, 4, 16, 30] at [6.57, 5.14, 4.57, 2.57] eighths; odds [1, 3, 7] at [3.29, 1.86, 7.0]
+  e.g. T (1, 2, 3, 4, 7, 24, 25): t = 1/2 + (-5/56); evens [2, 4, 24] at [6.57, 5.14, 6.86] eighths; odds [1, 3, 7, 25] at [3.29, 1.86, 7.0, 2.14]
+  e.g. T (1, 2, 3, 4, 7, 24, 30): t = 1/2 + (-5/56); evens [2, 4, 24, 30] at [6.57, 5.14, 6.86, 2.57] eighths; odds [1, 3, 7] at [3.29, 1.86, 7.0]
+  e.g. T (1, 2, 3, 4, 14, 16, 30): t = 1/2 + (-9/112); evens [2, 4, 14, 16, 30] at [6.71, 5.43, 7.0, 5.71, 4.71] eighths; odds [1, 3] at [3.36, 2.07]
+  e.g. T (1, 2, 3, 4, 14, 24, 25): t = 1/2 + (17/192); evens [2, 4, 14, 24] at [1.42, 2.83, 1.92, 1.0] eighths; odds [1, 3, 25] at [4.71, 6.12, 5.71]
+  e.g. T (3, 4, 5, 6, 7, 8, 30): t = 1/2 + (-3/80); evens [4, 6, 8, 30] at [6.8, 6.2, 5.6, 7.0] eighths; odds [3, 5, 7] at [3.1, 2.5, 1.9]
+  e.g. T (3, 4, 5, 6, 7, 8, 32): t = 1/2 + (-9/256); evens [4, 6, 8, 32] at [6.88, 6.31, 5.75, 7.0] eighths; odds [3, 5, 7] at [3.16, 2.59, 2.03]
+  e.g. T (3, 4, 5, 6, 7, 9, 32): t = 1/2 + (-1/24); evens [4, 6, 32] at [6.67, 6.0, 5.33] eighths; odds [3, 5, 7, 9] at [3.0, 2.33, 1.67, 1.0]
+  e.g. T (3, 4, 5, 6, 7, 16, 30): t = 1/2 + (-3/80); evens [4, 6, 16, 30] at [6.8, 6.2, 3.2, 7.0] eighths; odds [3, 5, 7] at [3.1, 2.5, 1.9]
+  e.g. T (3, 4, 5, 6, 7, 16, 32): t = 1/2 + (-9/256); evens [4, 6, 16, 32] at [6.88, 6.31, 3.5, 7.0] eighths; odds [3, 5, 7] at [3.16, 2.59, 2.03]
+  e.g. T (3, 4, 5, 6, 7, 17, 32): t = 1/2 + (-5/136); evens [4, 6, 32] at [6.82, 6.24, 6.59] eighths; odds [3, 5, 7, 17] at [3.12, 2.53, 1.94, 7.0]
