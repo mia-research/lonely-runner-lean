@@ -2427,3 +2427,37 @@ a single one that then pinches.** On these paths the count never fell below 8.
 
 **Next:** track each component's lineage along the paths (birth, pinch-off, merger, split). Establish whether those
 descended from the progression's pairs survive the whole path, and what keeps the count up.
+
+---
+
+## E71 — 2026-09-26 — lineages of the lonely stretches along the deformation paths
+
+**Owner:** *"just remember that there is no arrangement that can move so it isn't isolated. The scale invariance and
+the fact runners are always bound by their neighbours speed means that any arrangement just pushes the isolation."*
+
+**Coordinates.** In `R = 8·d_min·t` only the ratios `ρ_j = d_j/d_min` matter: runner `j` holds the slot on
+`R ∈ ((8k − 1)/ρ_j, (8k + 1)/ρ_j)`. A pinch-off or birth is the linear relation `ρ_b(8k + 1) = ρ_a(8m − 1)`, and a
+pinch at `R = 1` is a ratio crossing `8m − 1`.
+
+**Tracking** (`lineage_v1.{py,out}`; exact, BSM; 55 paths: the 40 random and the 15 Case C `W/30` paths of E69; grid
+300). Each lonely stretch in `R ∈ [1, 15]` is labelled by its ends: the zone exit that opens it and the zone entry that
+closes it, as (runner, lap). It continues across a grid step if one label persists (a hand-off), pinches off if neither
+does, and unmatched new stretches are births. **Resolution check** (`lineage_v1_fine.out`, 12 paths at grid 3,000):
+births 1,305 against 1,312 at grid 300, pinch-offs 1,065 against 1,072, ambiguous matches 0 against 4, and identical
+lineage answers and minimum counts. Grid 300 is adequate for these counts. `[VERIFIED — exact, these 55 paths]`
+- **Births 10,069, pinch-offs 8,353, hand-offs 11,906** (90 ambiguous matches, flagged, not guessed). Births exceed
+  pinch-offs: away from the progression the lonely stretches multiply.
+- **Just after the progression (`s = 1/300`) every path has exactly 4 stretches in `R ∈ [1, 15]`** (55 of 55): one
+  from each pair `(1, 7)`, `(3, 5)`, `(9, 15)`, `(11, 13)`, as the pair law predicts (`lineage_count_v1.out`).
+- **The progression is where isolation is scarcest:** on 54 of 55 paths the count never falls below 4. At the targets
+  it ranges from 4 to 396.
+- The one dip, to 3 for `s ∈ [217, 239]/300`, is a **window artefact**. That arrangement is in Case A (all ratios at
+  most 3.65), lonely on the long stretch `R ∈ [1, 2.0]`; its stretches lie in `R < 4.3` and again beyond 17, so the
+  window `[1, 15]` straddles the gap. A window fixed in `R` is not natural at every scale.
+- **Lineage:** the stretch holding the target's isolation descends by hand-offs alone from one present just after the
+  progression on **13 of 55** paths. On the other 42 every original stretch pinches off along the way, and the
+  isolation is carried by stretches born on the path. The φ(n) isolation is pushed and displaced into new places, not
+  carried as one continuous stretch.
+
+**Next:** where births happen and which runners open them (the source of the count), read in the ratio coordinates.
+Also, a window matched to the arrangement's own scale in place of `R ≤ 15`.
