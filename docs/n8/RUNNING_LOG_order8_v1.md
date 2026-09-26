@@ -2844,3 +2844,27 @@ runner, time in units of `1/d_min`) `[VERIFIED — exact]`:
 - **It ends at the first jump during which nobody arrives.** In trace 1 the 27th jump (runner 3's, 0.056) catches no
   one, and the slot is empty from `t·d_min = 1.4329`. The next runner arrives 0.0039 later. Each runner sets 1–6 times.
 - The cascade resolves each case in 26–27 exact steps.
+
+---
+
+## E84 — 2026-09-26 — every reading set up to 24: what the final hand-off looks like
+
+**Owner:** *"The reason I say density is not the case is because our framework operates on a different basis … are we
+bringing in density because it's logical or because that's what other frames have used?"* Answer recorded: imported,
+not logical. Each arrangement's cascade is an exact finite computation, and counts over arrangements say nothing about
+why any one stops. The E83–E84 tallies below only record which exact situation each arrangement is in; they are not
+offered as rates.
+
+**Exhaustive** (`exit_vs_arrival_v1.{py,out}`, `final_handoff_v1.{py,out}`; exact; all 346,104 sets of seven distinct
+readings in `1 … 24` of the slowest runner, every runner moving) `[VERIFIED — exhaustive exact]`:
+- Isolated at the bound with no move: 200,736. The longest relay has 19 moves. The latest isolation is at `R = 5.67`,
+  readings `(3, 9, 11, 14, 15, 19, 24)`, so every set in this range is isolated within the nearest neighbour's first lap.
+  The final setter is never the nearest runner.
+- **At the final hand-off, runners are not used up.** In relays of 1, 2 and 3 moves every setter is a different runner.
+  The runner that comes closest to arriving in time (the nearest miss) has not set a move in this relay in 121,543 of
+  145,368 arrangements. The relay ends because the runners still available are not at the entry edge when the setter
+  leaves, not because the available runners have run out.
+- The nearest miss often arrives very soon after the exit: within a quarter of the setter's last stretch in 23,283.
+
+So the mechanism of the stop is the positions of the runners that are still available at the setter's exit instant.
+Those positions are set by their speed ratios to the setter at that exact instant.
