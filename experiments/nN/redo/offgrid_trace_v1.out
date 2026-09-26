@@ -1,0 +1,26 @@
+relocations 327: forward 158, back 169
+FORWARD: an arriving runner identified 158; carried straight across by it (lands at its exit, no relay) 7
+  relay length (moves from the pinched instant): [(1, 7), (2, 41), (3, 53), (4, 24), (5, 20), (6, 10), (8, 2), (9, 1)]
+  first setter of the relay is the arriving runner: 26
+  arriving runner = the runner that held the isolation before (same runner, other edge): 0
+  R after / R before: max 2.062; hist [(1.0, 35), (1.1, 62), (1.2, 24), (1.3, 16), (1.4, 6), (1.5, 3), (1.6, 3), (1.7, 2), (1.8, 4), (1.9, 1), (2.0, 1), (2.1, 1)]
+BACK: the new place is opened (left end) by the runner that pinned the old one: 2
+  R after / R before: min 0.481; hist [(0.5, 3), (0.6, 12), (0.7, 13), (0.8, 30), (0.9, 68), (1.0, 43)]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.000 -> 1.229; pinned by None; arriving [1]; relay [5, 1, 6]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.000 -> 1.051; pinned by None; arriving [7]; relay [5, 7]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.000 -> 1.581; pinned by None; arriving [0]; relay [5, 0, 7, 3, 6, 7, 1, 0]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.000 -> 1.149; pinned by None; arriving [6]; relay [5, 6, 7, 1, 0]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.000 -> 1.112; pinned by None; arriving [7]; relay [5, 7, 2]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 5: R 1.000 -> 1.187; pinned by None; arriving [1]; relay [4, 1, 7]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 5: R 1.000 -> 1.087; pinned by None; arriving [6]; relay [4, 6]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 5: R 1.041 -> 1.374; pinned by 6; arriving [7]; relay [7, 3, 6]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 5: R 1.000 -> 1.067; pinned by None; arriving [0]; relay [4, 0, 7]
+  fwd  V [43, 60, 73, 86, 98, 99, 148, 177] runner 5: R 1.000 -> 1.103; pinned by None; arriving [1]; relay [4, 1, 0]
+  back V [43, 60, 73, 86, 98, 99, 148, 177] runner 4: R 1.454 -> 1.257; was pinned by 0; new place opened by 3, closed by 6
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 6: R 1.066 -> 1.000; was pinned by 3; new place opened by None, closed by 1
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 6: R 1.025 -> 1.000; was pinned by 0; new place opened by None, closed by 1
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 6: R 1.102 -> 1.000; was pinned by 4; new place opened by None, closed by 5
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 6: R 1.032 -> 1.000; was pinned by 1; new place opened by None, closed by 1
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 7: R 1.127 -> 1.000; was pinned by 1; new place opened by None, closed by 1
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 7: R 1.025 -> 1.000; was pinned by 0; new place opened by None, closed by 0
+  back V [9, 19, 56, 73, 93, 111, 186, 189] runner 7: R 1.092 -> 1.000; was pinned by 1; new place opened by None, closed by 0

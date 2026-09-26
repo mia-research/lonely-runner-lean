@@ -1,0 +1,20 @@
+
+speeds [1, 2, 3, 4, 5, 6, 7, 16]
+  runner speed 1: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 10; blocked only by 16 at 26 of 799 sample instants
+  runner speed 2: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 16 at 66 of 799 sample instants
+  runner speed 3: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 10; blocked only by 16 at 60 of 799 sample instants
+  runner speed 4: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 10; blocked only by 16 at 98 of 799 sample instants
+  runner speed 5: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 16 at 42 of 799 sample instants
+  runner speed 6: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 16 at 6 of 799 sample instants
+  runner speed 7: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 16 at 12 of 799 sample instants
+  runner speed 16: isolation t = 1/72 (R = 1), 0 cascade moves; lonely components in one lap: 12; blocked only by 16 at 0 of 799 sample instants
+
+speeds [1, 2, 3, 4, 5, 6, 7, 8]
+  runner speed 1: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 4; blocked only by 8 at 72 of 799 sample instants
+  runner speed 2: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 8 at 48 of 799 sample instants
+  runner speed 3: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 8 at 148 of 799 sample instants
+  runner speed 4: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 6; blocked only by 8 at 98 of 799 sample instants
+  runner speed 5: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 6; blocked only by 8 at 0 of 799 sample instants
+  runner speed 6: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 8 at 0 of 799 sample instants
+  runner speed 7: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 8; blocked only by 8 at 0 of 799 sample instants
+  runner speed 8: isolation t = 1/8 (R = 1), 0 cascade moves; lonely components in one lap: 4; blocked only by 8 at 0 of 799 sample instants
