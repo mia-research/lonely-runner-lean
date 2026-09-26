@@ -1,0 +1,4 @@
+random arrangements, every runner: events 4000; readings in the AP part (r <= 7): [(1, 705), (2, 660), (3, 529), (4, 397), (5, 326), (6, 291), (7, 1092)]; front half entirely AP: 2115 of 4000
+Case C sample (slowest runner): events 1350; readings in the AP part (r <= 7): [(1, 796), (2, 277), (3, 165), (4, 51), (5, 37), (6, 24)]; front half entirely AP: 112 of 1350
+Case C adversarial climbs: events 15; readings in the AP part (r <= 7): [(1, 14), (2, 1)]; front half entirely AP: 0 of 15
+late events among 20,000 random slowest runners: events 0; readings in the AP part (r <= 7): []; front half entirely AP: 0 of 0
