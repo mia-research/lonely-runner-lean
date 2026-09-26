@@ -2729,3 +2729,28 @@ did from the progression.
 So an arrangement is a small move from a grid, and its runners' isolation mostly rides through that move unchanged. The
 isolation it carries is each runner's own isolation near its nearest neighbour's first band, which the grid also has,
 not the grid's shared φ(8) instants. The relocations that do occur are the walls of E75, now few per path.
+
+---
+
+## E79 — 2026-09-26 — the relocations off the grid, traced; the grid 1…7, 16
+
+**Relocations** (`offgrid_trace_v1.{py,out}`, `offgrid_bound_v1.{py,out}`; exact; the 60 targets of E78, every runner)
+`[VERIFIED — exact]`. There are 327 relocations: 158 forward, 169 back.
+- **Forward:** 122 of 158 start from the bound `R = 1`, the nearest neighbour's first edge. An arriving runner is found
+  at the slot edge in 158 of 158. It carries the isolation straight across by itself (landing at its own exit) in only
+  7; otherwise the relay runs 2–5 moves (at most 9). `R` grows by a factor of at most 2.06.
+- **Back:** 147 of 169 return the isolation to `R = 1`. `R` falls by a factor of at least 0.48.
+- **Pattern:** the isolation sits at `R = 1` whenever that instant is clear. A runner reaching the slot there pushes it
+  forward through a short relay, and when that runner leaves, the isolation returns to `R = 1`.
+
+(A first recount was run from inline code; on macOS multiprocessing could not start its workers, and the parent kept
+respawning them for 24 minutes and filled a 64 MB error log. It was killed; the rerun from a script file took under a
+minute.)
+
+**The grid 1…7, 16** (`grid16_v1.{py,out}`; exact; every runner moving). Owner's suspicion: 16 fills the place of 8
+but also coincides with other positions, delaying global isolation. The cascade: runners 1–7 are isolated at `t = 1/8`
+with no moves, exactly as in the progression `1…8`. Runner 16 is isolated first at `t = 1/72` (its nearer neighbour 7
+is 9 away) and is also clear at `t = 1/8` (it reads the others at `7/8 … 1/8`). **Global isolation is at `t = 1/8`,
+not delayed.** Runner 16 does sit in other runners' slots at other instants: sampled at 799 instants, it is the only
+runner in the way at 6–98 of them per runner. Even so each runner has more lonely stretches per lap with 16 than with
+8 (runner 1: 10 against 4).
