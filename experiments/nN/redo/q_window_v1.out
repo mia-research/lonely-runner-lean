@@ -1,0 +1,17 @@
+six-sets 4276; Q(F) holds (every blocked stretch past T0 ends within 7 x its start): 4276; fails: 0
+max ratio 2.4825
+  F [14, 21, 33, 36, 46, 81]: ratio 2.4825  stretch [4.565, 11.333] in R_F = 8 min(F) t;  T0 in R_F 4.148
+  F [60, 97, 163, 216, 275, 309]: ratio 2.4439  stretch [4.167, 11.389] in R_F = 8 min(F) t;  T0 in R_F 4.660
+  F [1, 4, 5, 7, 12, 29]: ratio 2.4286  stretch [1.000, 2.429] in R_F = 8 min(F) t;  T0 in R_F 1.000
+  F [4, 5, 7, 15, 18, 34]: ratio 2.4286  stretch [4.000, 9.714] in R_F = 8 min(F) t;  T0 in R_F 2.824
+  F [13, 21, 33, 45, 58, 72]: ratio 2.4286  stretch [4.153, 10.524] in R_F = 8 min(F) t;  T0 in R_F 4.333
+  F [29, 46, 72, 99, 122, 154]: ratio 2.3750  stretch [4.331, 10.734] in R_F = 8 min(F) t;  T0 in R_F 4.519
+  F [8, 13, 20, 28, 34, 43]: ratio 2.3750  stretch [4.279, 10.605] in R_F = 8 min(F) t;  T0 in R_F 4.465
+  F [42, 52, 65, 118, 161, 299]: ratio 2.3333  stretch [3.913, 9.130] in R_F = 8 min(F) t;  T0 in R_F 3.371
+  F [12, 13, 17, 40, 46, 87]: ratio 2.3000  stretch [3.913, 9.000] in R_F = 8 min(F) t;  T0 in R_F 3.310
+  F [7, 10, 17, 18, 24, 32]: ratio 2.2778  stretch [4.900, 11.958] in R_F = 8 min(F) t;  T0 in R_F 5.250
+  F [5, 8, 14, 17, 19, 30]: ratio 2.2500  stretch [3.833, 9.000] in R_F = 8 min(F) t;  T0 in R_F 4.000
+  F [52, 60, 169, 229, 278, 295]: ratio 2.2007  stretch [4.054, 9.310] in R_F = 8 min(F) t;  T0 in R_F 4.231
+  F [4, 5, 12, 14, 26, 35]: ratio 2.2000  stretch [4.286, 9.429] in R_F = 8 min(F) t;  T0 in R_F 2.743
+  F [13, 16, 34, 35, 41, 75]: ratio 2.2000  stretch [4.756, 10.463] in R_F = 8 min(F) t;  T0 in R_F 4.160
+  F [13, 17, 31, 45, 80, 85]: ratio 2.2000  stretch [4.333, 9.533] in R_F = 8 min(F) t;  T0 in R_F 3.671

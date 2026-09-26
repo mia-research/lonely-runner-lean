@@ -1,0 +1,6 @@
+events 3200 (400 arrangements x 8 subjects)
+  grid pattern (nearest eighths distinct and nonzero): 26
+  within 1/56 of its nearest eighths: 61;  and a grid pattern: 1
+  within 1/32 of its nearest eighths: 110;  and a grid pattern: 1
+  within 1/16 of its nearest eighths: 3200;  and a grid pattern: 26
+  largest deviation, histogram in 1/64 units: [(0, 60), (1, 41), (2, 531), (3, 2265), (4, 303)]

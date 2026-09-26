@@ -1,0 +1,4 @@
+eps 0.01 window x1: both pairs survive 2370 of 2400
+eps 0.01 window x4: both pairs survive 2400 of 2400
+eps 0.05 window x1: both pairs survive 1966 of 2400
+eps 0.05 window x4: both pairs survive 2340 of 2400
