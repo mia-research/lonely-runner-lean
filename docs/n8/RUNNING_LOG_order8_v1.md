@@ -3583,3 +3583,48 @@ The one and only hard problem is **two runners in a slot, which delays the isola
 cycles until it isolates. Consistent with this session's record: every cascade move cures a runner in the subject's
 slot (E35, 13,086 of 13,086); every type E36 could not decide contains such runners; the delay law of E33 is a group on
 the eighth-slots.
+
+---
+
+## E40 — 2026-09-27 — two runners in a slot: the law, in one family
+
+**Definition (reasoned from the grid).** Reduce by `g`, take residues mod 8. At a grid instant `p/(8g)`, `p` odd, runner
+`j` sits exactly `(π_j − π_k)·p` eighths from runner `k` (Thm 4.11): clear unless the residues are equal. So what delays a
+runner is **another runner in its own slot** (difference a multiple of `8g`); two *other* runners sharing a slot do no
+harm. With eight runners, a doubled slot forces an empty one.
+
+**Family** (`experiments/nN/redo/doubled_slot_v1/v2`): AP reduced speeds `0…7` (+100, all positive); the runner with
+residue `r` moved to `s + 8m`: slot `s` doubled (pair `8m` apart), slot `r` empty, `c = (r − s) mod 8`. `s, r` all
+distinct pairs, `m = 1…8` (to 12 for the table). 448 arrangements, 3,584 runners, exact cascade.
+
+**Measured** `[EMPIRICAL — exact, this family]`:
+1. **Only the doubled slot is delayed:** 0 of 2,688 other runners; 438 of 896 pair members.
+2. **The far member of the pair is essentially never delayed** (one case per `c`, at `s = 0, m = 1`); the **home**
+   member (inside the AP) carries the delay.
+3. **Home member at an interior slot (`s = 1…6`): always the minimal relocation.** Event at the partner's own
+   opening, lap `m`: `t* = (8m+1)/(64m)`, i.e. the grid instant `1/8` stretched by `1 + 1/(8m)`. `[reasoned proof]` at
+   that instant the partner is exactly one eighth ahead, and every AP reading `a`, `1 ≤ |a| ≤ 6`, sits at
+   `|a|·(1 + 1/(8m)) ≤ 6·9/8 = 6.75` eighths: clear.
+4. **Home member at an end of the AP (`s = 0`, mirror `s = 7`):** it has a runner reading exactly 7 (the far end), and
+   the stretch pushes it past 7. The event then depends on the **empty slot** `c` (mirror `c ↔ 8 − c`), independent of
+   `m` except where `8m` is a multiple of the flank distance:
+
+| `c` (s = 0) | event `R = 8t*` | flank | lap |
+|---|---|---|---|
+| 1 | not delayed | — | — |
+| 2 | 25/7 | far end, `d = 7` | 3 |
+| 3 | 17/7 | `d = 7` | 2 |
+| 4 | 9/5 | `d = 5` | 1 |
+| 5 | 3/2 (odd `m`); `(12m+1)/(8m)`, partner at lap `3m/2` (even `m`) | `d = 6` / partner | 1 / `3m/2` |
+| 6 | 9/7 | `d = 7` | 1 |
+| 7 (the runner reading 7 is the empty one) | the minimal relocation of item 3 | partner | `m` |
+
+   Exceptions: `m = 7` (partner 56, a multiple of 7), `m = 5, 10` at `c = 4` (multiples of 5): the partner then sits on
+   the flank's lattice and becomes the flank itself.
+
+**This is the author's three-part relationship, in this family.** (i) *Missing grid*: the empty slot `c` sets the
+delay. (ii) *Too close to a third runner*: the delay beyond the minimal relocation happens only when a third runner
+reads exactly 7 (the AP's far end, pinned at 7/8), and disappears when that runner is the missing one (`c = 7`).
+(iii) *Cycles until isolation*: the flank's lap, 1 to 3, fixed by `c`. The pair's separation `m` enters only through
+`m mod d`, so **the family is a finite case split with a named `(flank, lap)` per case** (exhibit form), checkable by
+residues. Not yet proved or formalised; one family only.
