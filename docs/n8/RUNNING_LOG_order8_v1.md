@@ -2868,3 +2868,39 @@ readings in `1 … 24` of the slowest runner, every runner moving) `[VERIFIED �
 
 So the mechanism of the stop is the positions of the runners that are still available at the setter's exit instant.
 Those positions are set by their speed ratios to the setter at that exact instant.
+
+---
+
+## E85 — 2026-09-26 — reasoning in the framework's own objects: the ray through the grid, residual sets, the grid nudge
+
+**Owner:** *"You don't need a full proof immediately, you just need to follow what the cascade is doing to deform the
+isolation point and slowly piece together the actual proof … We are doing novel mathematics."* The owner also rejected
+reducing the residual case to the E77 movers problem: *"it looks a bit like it but this is nuanced."*
+
+**The single object.** For whole-number readings the isolation is at a rational instant `a/N`, and each reading sits at
+`(a·d mod N)/N`. So isolation is a modulus `N` (the grid) and a multiplier `a` with every residue in `[N/8, 7N/8]`. The
+cascade always takes `N = 8e` (`e` a reading, the AP scale) and `a = 8k + 1`: `clear_at_int_flank_iff_emod`. Seen
+geometrically, the subject's view is the ray `t·d` (scale invariance), and isolation is the ray entering a box of the
+mod-8 grid (each coordinate of `8t·d` in `[8m + 1, 8m + 7]`). Why every positive ray enters a box is the open
+question, not a result.
+
+**The ladder** (memory `project_n8_tight_instances`, proved). If some `q ∈ {2, …, 8}` divides no reading, the subject
+is isolated at `t = 1/q`. A set is **residual** when every `q` from 2 to 8 divides some reading.
+
+**The cascade on residual sets** (`residual_cascade_v1.{py,out}`: readings `≤ 40`, 3,996,993 sets;
+`residual_scale_v1.{py,out}`: readings `≤ 32`, 715,822) `[VERIFIED — exhaustive exact]`. 61% (431,258 of 715,822) are
+isolated at the bound. The rest move to another reading's scale with a small lap (`8k + 1 ∈ {9, …, 41}`). In 24,252 of
+them the new scale is the multiple of 8 that the unit grid leaves blocked, with multiplier `e + 1`.
+
+**The grid nudge** (`grid_nudge_v1.{py,out}`; exact, every residual set up to 32) `[VERIFIED — exhaustive exact]`. At
+`t = 1/8` every reading not divisible by 8 is already clear; only the multiples of 8 are blocked. Nudging to
+`t = (1/8)(1 ± 1/d₀)`, with `d₀` the largest multiple of 8, puts `d₀` exactly on the slot edge and moves every other `d`
+by `±d/(8d₀)`.
+- **The rule when `d₀` is the largest reading and the only multiple of 8** (elementary, owed as a lemma): the shifts
+  are all under `1/8`, so residues 2–6 stay clear. The forward nudge works iff no reading is `≡ 7 (mod 8)`; the backward
+  one iff none is `≡ 1`. With two or more multiples of 8, the smaller ones move by less than `1/8` and stay blocked.
+- **Data:** a nudge isolates 230,085 of 715,822 residual sets. In every set with a reading `≡ 7` the forward nudge fails,
+  as the rule says. The other mismatches with the simple rule come from readings larger than `d₀`, which move by more
+  than `1/8`.
+- **Where the nudge cannot work:** the sets holding readings at both edges, `≡ 1` and `≡ 7 (mod 8)`, the pinned pair of
+  the grid. There the cascade moves to a different reading's scale. That is what to follow next.
