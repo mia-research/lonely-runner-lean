@@ -3021,3 +3021,35 @@ it, 4 remain, each isolated one move later at a second opening.
 
 This is the owner's *"AP/grid and a deviation forced by d_min"* as a theorem: the multiples of `q` become their own
 smaller problem at their own bound, and the rest ride with margin `r/q − 1/8`.
+
+---
+
+## E90 — 2026-09-26 — every reading set up to 24 has an AP/grid view with room
+
+**Owner:** asked what structurally guarantees that the cascade always lands on room: *"Because any arrangement can be
+viewed in an AP/grid fashion."*
+
+**The menu of views** (`menu_forcing_v1.{py,out}`, `menu_single_v1.{py,out}`; exact; all 346,104 sets of seven
+distinct readings in `1 … 24`) `[VERIFIED — exhaustive exact]`. Each instant in the menu is a way of viewing the
+arrangement:
+- `B`: the bound, an AP at scale `d_min`;
+- `L`: ladder rungs `a/q`, the grid mod `q`;
+- `N`: nudges, the grid mod 8 plus one deviation;
+- `R_q`: rung R1, the multiples of `q` as their own AP plus the grid mod `q` for the rest;
+- `V`: reverse R1.
+
+**Every set is isolated by at least one of them (0 missed).** The views overlap heavily. How many sets each works for:
+
+| view | `B` | `L` | `N` | `R2` | `R3` | `R4` | `R5` | `R6` | `R7` | `R8` | `V` |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| works for | 200,736 | 268,853 | 112,169 | 179,748 | 223,910 | 170,807 | 211,811 | 135,254 | 206,136 | 160,107 | 27,185 |
+| the only one | 14 | 324 | 0 | 5 | 5 | 6 | 1 | 0 | 19 | 0 | 1 |
+
+Only 375 sets depend on a single view. For those, the cascade often isolates at a different view's instant (e.g.
+`(1, 2, 3, 8, 17, 22, 23)`: ladder only; the cascade lands at `25/176`, reading 22 on lap 3).
+
+**Reading.** The owner's guarantee, stated as what must be proved: *every arrangement has an AP/grid view in which
+every reading's deviation from its grid position stays inside that position's margin.* The menu gives explicit views
+(`B`, `L`, `N`, `R_q`, `V`, all with proved conditions in Lean: R1, the ladder, `GridNudgeN`, `RungR1N`), and
+exhaustively up to 24 one of them always has room. The next step is the case structure of that "always", starting
+from the residual sets (multiples of 5, 6 or 2 and 3, 7 and 8 all present), where only the `R_q` and `N` views remain.
