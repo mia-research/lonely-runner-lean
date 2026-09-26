@@ -2825,3 +2825,22 @@ band 0's most thinly blocked point.
 its edge, and that runner's shift `frac(2ρ_j)` frees the mirror point in band 1 unless `2ρ_j` is whole. To test next:
 - does band 1 always open at the mirror of a singly covered band-0 point?
 - which full blocks of band 0 are thick everywhere (every point covered twice, or by mirrored runners), and do any exist?
+
+---
+
+## E83 — 2026-09-26 — the long relays in the cascade's own terms
+
+**Owner:** *"Hard cases is a misnomer. Cascade deals with every single case instantly without a problem. So the hard
+case seems to be about your band/flank or other addition. Use cascade to show you what happens."* The labels "hard",
+"band" and "mirror" (E80–E82) are the session's framings, not the cascade's; E82's mirror probe is set aside.
+
+**What the cascade does** (`cascade_own_terms_v1.{py,out}`; exact; the three longest relays of E81, subject the slowest
+runner, time in units of `1/d_min`) `[VERIFIED — exact]`:
+- **Every move is a hand-off.** The setter leaves the slot. During its jump (the rest of its time in the slot) the
+  runners arriving at the slot enter, and the latest to leave sets the next move.
+- **The relay is single file.** In the first trace, 19 of 27 jumps catch exactly one arriving runner, and that runner
+  sets the next move. Several arrive together only during the long jumps: the nearest runner's jump (0.229 laps of
+  `d_min`) catches 4.
+- **It ends at the first jump during which nobody arrives.** In trace 1 the 27th jump (runner 3's, 0.056) catches no
+  one, and the slot is empty from `t·d_min = 1.4329`. The next runner arrives 0.0039 later. Each runner sets 1–6 times.
+- The cascade resolves each case in 26–27 exact steps.
