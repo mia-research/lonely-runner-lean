@@ -1,0 +1,7 @@
+sets where the bound is not lonely: 145368
+  smallest other gap < d_1: 77173
+  some blocker in a crowded pair: 32913
+  every blocker in a crowded pair: 31553
+  tightest pair at least one eighth apart at t*: 73014
+  scale reading sits next to a smallest gap: 53448
+  tightest pair's separation at t*, in eighths (floor, capped at 8): [(0, 72354), (1, 63237), (2, 8397), (3, 1299), (4, 62), (5, 12), (6, 7)]
