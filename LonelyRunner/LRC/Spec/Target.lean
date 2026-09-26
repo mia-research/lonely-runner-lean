@@ -434,9 +434,10 @@ Exactly the sets no arrangement can produce, and they are already proved.
 
 For a chosen runner `k`, a value `d` occurs as `|v i - v k|` for **at most two** runners, `v k ± d`.
 So a difference set of card `m` needs multiplicities summing to 7 with each at most 2, i.e. `2m ≥ 7`,
-i.e. **`m ≥ 4`**.  Conversely every `ds` with `4 ≤ card ≤ 7` does arise: take the subject at `0`,
-a runner at `+d` for each `d ∈ ds`, and one at `−d` for `7 − card` of them — eight distinct speeds
-whose difference set from the subject is exactly `ds` (checked on 20,000 sets, no failure).
+i.e. **`m ≥ 4`**.  Conversely every `ds` with `4 ≤ card ≤ 7` does arise: take the subject at speed
+`c = max ds + 1`, a runner at `c + d` for each `d ∈ ds`, and one at `c − d` for `7 − card` of them —
+eight distinct positive speeds (every `c − d ≥ 1`, no runner stationary) whose difference set from
+the subject is exactly `ds` (checked on 20,000 sets, no failure).
 
 So `ExistenceAt8` exceeds the conjecture **only on `card ≤ 3`** — and that case is a theorem. -/
 
