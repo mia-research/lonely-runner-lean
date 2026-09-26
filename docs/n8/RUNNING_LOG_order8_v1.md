@@ -3261,3 +3261,35 @@ increments of `R` between successive repeats) `[VERIFIED — exact]`:
 `ρ ≈ 8`, 0.375 for `ρ ≈ 16`). The fast colliders repeat cheaply, and only the nearest runner's own zone adds a large
 step. This bounds each increment by the repeater's band plus the relay across it. It does not bound how many repeats a
 relay can chain; the late events chain about 20.
+
+---
+
+## E100 — 2026-09-27 — the grand return in Lean; where the cascade lands among the views
+
+**Owner:** *"for integers, there is the grand return where all runners return to 0 at the same time essentially,
+which means the pattern would repeat from there"*; then *"The cascade doesn't search though, so while the grand return
+provides a finite cycle, I don't actually think it needs it. So there must be a mechanism that dictates where the
+isolation is pushed."*
+
+**`LRC/Spec/GrandReturnN.lean`** (commit `436fcde`; Spec gate PASS, 1,624 declarations, axiom-clean) `[PROVED —
+axiom-clean]`. `lonely_add_int`: for whole-number readings the pattern repeats after every whole instant.
+`lonely_mirror`: it is lonely at `1 − s` exactly when at `s`. `exists_lonely_iff_half`: it is lonely somewhere exactly
+when it is lonely in `(0, 1/2]`. This fences the window `[1/(8·d_min), 1/2]`, ending at the half lap. As the owner
+says, the cascade does not use it.
+
+**Where the cascade lands** (`cascade_vs_menu_v1.{py,out}`; exact; all 346,104 sets of readings `≤ 24`) `[VERIFIED —
+exhaustive exact]`. The cascade's isolation is exactly one of the explicit views in 310,889:
+
+| view | sets |
+|---|---|
+| the bound `1/(8·d_min)` | 200,736 |
+| the next opening `9/(8e)` of some reading `e` (lap 1) | 63,806 |
+| rung R1 `a/q ± 1/(8·min D_q)` | 37,438 |
+| reverse R1 `9/(8·e_max)` | 7,847 |
+| a ladder rung `a/q` | 1,062 |
+
+In the other 35,215 it lands on a later opening of some reading (lap `≥ 2`); a later view isolates each of those too.
+
+**Reading.** The isolation is displaced from the bound to the nearest candidate scale that has room: in 76% the bound
+itself or one reading's next opening (the AP at that runner's scale `e/9`), in 11% a rung plus its multiples' own
+deviation. The views are ordered by time, and the cascade lands on the first one with room.
