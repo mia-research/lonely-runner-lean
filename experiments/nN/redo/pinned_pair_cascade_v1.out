@@ -1,0 +1,27 @@
+residual sets <= 32 with one multiple of 8 and both edges occupied: 180875
+  ('bound (smallest reading, k = 0)', 0): 97724
+  ('edge 7 mod 8', 1): 9605
+  ('interior 6 mod 8', 1): 5403
+  ('interior 6 mod 8', 2): 5364
+  ('multiple of 8', 1): 4732
+  ('edge 7 mod 8', 4): 4712
+  ('edge 1 mod 8', 1): 4707
+  ('multiple of 8', 4): 4646
+  ('interior 5 mod 8', 1): 4052
+  ('interior 5 mod 8', 3): 3845
+  ('interior 4 mod 8', 4): 3736
+  ('interior 6 mod 8', 4): 3729
+  ('interior 4 mod 8', 2): 3675
+  ('interior 2 mod 8', 3): 3149
+  ('edge 7 mod 8', 3): 3016
+  ('multiple of 8', 2): 2775
+  T (1, 2, 3, 4, 5, 7, 24): scale reading e = 7 (k = 1); positions at the isolation (eighths) [1.29, 2.57, 3.86, 5.14, 6.43, 1.0, 6.86]
+  T (1, 2, 3, 4, 7, 8, 30): scale reading e = 7 (k = 1); positions at the isolation (eighths) [1.29, 2.57, 3.86, 5.14, 1.0, 2.29, 6.57]
+  T (1, 2, 3, 4, 7, 10, 24): scale reading e = 7 (k = 1); positions at the isolation (eighths) [1.29, 2.57, 3.86, 5.14, 1.0, 4.86, 6.86]
+  T (2, 3, 4, 5, 7, 17, 24): scale reading e = 17 (k = 1); positions at the isolation (eighths) [1.06, 1.59, 2.12, 2.65, 3.71, 1.0, 4.71]
+  T (2, 3, 4, 6, 7, 16, 25): scale reading e = 16 (k = 1); positions at the isolation (eighths) [1.12, 1.69, 2.25, 3.38, 3.94, 1.0, 6.06]
+  T (2, 3, 4, 6, 7, 25, 32): scale reading e = 32 (k = 2); positions at the isolation (eighths) [1.06, 1.59, 2.12, 3.19, 3.72, 5.28, 1.0]
+  T (3, 4, 5, 6, 7, 8, 25): scale reading e = 25 (k = 1); positions at the isolation (eighths) [1.08, 1.44, 1.8, 2.16, 2.52, 2.88, 1.0]
+  T (3, 4, 5, 6, 7, 9, 24): scale reading e = 24 (k = 1); positions at the isolation (eighths) [1.12, 1.5, 1.88, 2.25, 2.62, 3.38, 1.0]
+  T (3, 4, 5, 6, 7, 16, 25): scale reading e = 25 (k = 1); positions at the isolation (eighths) [1.08, 1.44, 1.8, 2.16, 2.52, 5.76, 1.0]
+  T (4, 5, 6, 7, 8, 9, 29): scale reading e = 29 (k = 1); positions at the isolation (eighths) [1.24, 1.55, 1.86, 2.17, 2.48, 2.79, 1.0]
