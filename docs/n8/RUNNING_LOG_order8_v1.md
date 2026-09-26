@@ -3452,3 +3452,36 @@ before its first commit; the draft was repaired for every item. The corrections 
 - **v1 items given fates** (plan §6): C-even and `K₆` superseded (E57–E68); the Case C window reduction measured in E56
   (`case_c_map_v1`) and kept as a tool; B3 subsumed by residual fields; tight points carried as conditional; the owner's
   three gap shapes and two-runner moves carried into WP3–WP4; E102's Lean hygiene items carried as WP8.
+
+---
+
+## E36 — 2026-09-27 — exhibit route: does the arrangement's TYPE decide the flank?
+
+Author: go with **exhibit** (`DoorFlank`: name a flank and a lap for every runner of every arrangement; a finite case
+split with each case's `(e, j)` named is admissible, `Spec/Target.lean`). Author: the arrangement types are few, since AP
+is scale invariant and grid is continuous: evenly spaced (AP), clumpy with outliers and even with outliers (AP and/or
+grid). Ordering is a real constraint: a runner cannot pass its neighbour without swapping, so in `CascadeRule.reading`
+the slots `⌊(v_j − base)/D⌋` are monotone in speed (one line from the definition; not yet stated as a lemma).
+First-lap clearance is **not** used (author's 2026-09-25 ruling, provisional only).
+
+**Test** (`experiments/nN/redo/type_decides_flank_v1/v2`). Type of runner `k` = its rank plus every runner's slot
+residue mod 8 against the AP of gap `d_min` from `v_k`. Per runner, exact (Thm 6.14): the flank ranks that work at some
+opening `j < e`, and the cascade's flank. Runners deduplicated by normalised signed differences.
+
+| range | distinct runners | types | types with ≥ 2 members | one flank rank works for all members | cascade's flank constant |
+|---|---|---|---|---|---|
+| every arrangement `1 = v₁ < … < v₈ ≤ 18`, gcd 1 | 155,520 | 95,888 | 5,134 | **5,122** | 3,344 |
+| 6,000 random in `[1, 400]` | 48,000 | 37,548 | 3,413 | **3,413** | 2,945 |
+
+No runner lacked a working flank. `[EMPIRICAL]`
+- **The type nearly decides a working flank; it does not decide the cascade's flank.** The cascade lands on the first
+  event; the exhibit needs only some flank, and at type level one exists in all but 12 types.
+- **All 12 failing types contain runners in or just under the subject's own slot** (residue 0 or 7): the slot-sharers
+  of E35. Within them the working flank depends on the sharers' laps and deviations, e.g. type rank 0, residues
+  `(0,1,2,3,4,5,7,0)`: `(1,2,3,4,5,6,8,9)` works at flank ranks {5,6}, `(1,3,5,7,10,12,15,17)` at {6,7},
+  `(1,3,6,8,9,12,15,18)` at {2,3,4,5,7}. So the type needs refining exactly at the sharers.
+- **This type is not "few".** 95,888 types from 155,520 runners; the bound is `8·8⁸`, finite but large, and ordering does
+  not reduce residues (any residue sequence comes from a monotone slot sequence). The author's classes (even / clumpy /
+  outliers) are far coarser; whether a coarse class decides the flank is untested.
+- **Not yet examined:** the lap `j`. It is unbounded (§6.10, `k ≈ linear in S`), so a finite case split can name it
+  only as a formula in the arrangement, not as a constant.
