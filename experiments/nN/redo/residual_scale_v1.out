@@ -1,0 +1,10 @@
+residual sets, readings <= 32: 715822
+  bound: 431258
+  ('e not a multiple of 8', 'd_min > 1', '8k+1 < e'): 129122
+  ('e not a multiple of 8', 'd_min = 1', '8k+1 > e'): 75263
+  ('e multiple of 8', 'd_min > 1', '8k+1 < e'): 44062
+  ('e multiple of 8', 'd_min = 1', 'k = e/8'): 24252
+  ('e multiple of 8', 'd_min = 1', '8k+1 > e'): 9270
+  ('e not a multiple of 8', 'd_min > 1', '8k+1 > e'): 1610
+  ('e multiple of 8', 'd_min > 1', 'k = e/8'): 902
+  ('e multiple of 8', 'd_min > 1', '8k+1 > e'): 83

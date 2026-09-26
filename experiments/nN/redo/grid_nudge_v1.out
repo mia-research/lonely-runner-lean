@@ -1,0 +1,26 @@
+residual sets, readings <= 32: 715822
+  (has 1 mod 8, has 7 mod 8, multiples of 8, forward nudge lonely, backward nudge lonely): count
+  (False, False, 1, False, False): 18929
+  (False, False, 1, False, True): 12706
+  (False, False, 1, True, False): 6912
+  (False, False, 1, True, True): 27463
+  (False, False, 2, False, False): 31272
+  (False, False, 3, False, False): 4840
+  (False, False, 4, False, False): 186
+  (False, True, 1, False, False): 51634
+  (False, True, 1, False, True): 106188
+  (False, True, 2, False, False): 56298
+  (False, True, 3, False, False): 6540
+  (False, True, 4, False, False): 184
+  (True, False, 1, False, False): 47490
+  (True, False, 1, False, True): 2373
+  (True, False, 1, True, False): 68683
+  (True, False, 2, False, False): 39393
+  (True, False, 3, False, False): 4140
+  (True, False, 4, False, False): 99
+  (True, True, 1, False, False): 175115
+  (True, True, 1, False, True): 5760
+  (True, True, 2, False, False): 45972
+  (True, True, 3, False, False): 3586
+  (True, True, 4, False, False): 59
+  one of the two nudges isolates: 230085
