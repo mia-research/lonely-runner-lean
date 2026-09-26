@@ -1,0 +1,76 @@
+
+== laps up to Q = 1: 1500 arrangements
+   (a) runners outside the doubled slot delayed past 1/8: 0
+   (b) pair members: 3000; minimal relocation 1/8 + 1/(64m) works for 1374
+       blockers of the minimal relocation by (residue offset, side, stretch size):
+         (7, 'ahead', 'stretch<1'): 731
+         (1, 'behind', 'stretch<1'): 711
+         (2, 'behind', 'stretch>=1'): 167
+         (6, 'ahead', 'stretch>=1'): 157
+         (1, 'behind', 'stretch>=1'): 78
+         (7, 'ahead', 'stretch>=1'): 77
+       e.g. speeds [100, 101, 102, 103, 113, 106, 107, 115], runner 107, m=1: blocked by differences [-7]; event R = 17/7
+       e.g. speeds [100, 101, 102, 103, 113, 106, 107, 115], runner 115, m=1: blocked by differences [-15, -14]; event R = 3/4
+       e.g. speeds [100, 101, 102, 104, 105, 114, 115, 107], runner 115, m=1: blocked by differences [-15, -14]; event R = 17/13
+       e.g. speeds [100, 101, 102, 104, 105, 114, 115, 107], runner 107, m=1: blocked by differences [-7, 7]; event R = 1/2
+
+== laps up to Q = 3: 1500 arrangements
+   (a) runners outside the doubled slot delayed past 1/8: 0
+   (b) pair members: 3000; minimal relocation 1/8 + 1/(64m) works for 812
+       blockers of the minimal relocation by (residue offset, side, stretch size):
+         (1, 'behind', 'stretch<1'): 737
+         (7, 'ahead', 'stretch<1'): 735
+         (2, 'behind', 'stretch>=1'): 373
+         (6, 'ahead', 'stretch>=1'): 350
+         (7, 'ahead', 'stretch>=1'): 255
+         (1, 'behind', 'stretch>=1'): 242
+         (3, 'behind', 'stretch>=1'): 116
+         (5, 'ahead', 'stretch>=1'): 108
+         (4, 'behind', 'stretch>=1'): 31
+         (4, 'ahead', 'stretch>=1'): 29
+       e.g. speeds [124, 117, 102, 127, 120, 114, 115, 118], runner 102, m=2: blocked by differences [22, 15]; event R = 1/12
+       e.g. speeds [109, 102, 127, 112, 105, 122, 123, 103], runner 127, m=3: blocked by differences [-15]; event R = 1/4
+       e.g. speeds [100, 125, 110, 103, 121, 106, 115, 108], runner 100, m=1: blocked by differences [21, 15]; event R = 3/7
+       e.g. speeds [100, 125, 110, 103, 121, 106, 115, 108], runner 108, m=1: blocked by differences [7]; event R = 9/17
+
+== laps up to Q = 10: 1500 arrangements
+   (a) runners outside the doubled slot delayed past 1/8: 0
+   (b) pair members: 3000; minimal relocation 1/8 + 1/(64m) works for 661
+       blockers of the minimal relocation by (residue offset, side, stretch size):
+         (7, 'ahead', 'stretch<1'): 703
+         (1, 'behind', 'stretch<1'): 666
+         (2, 'behind', 'stretch>=1'): 396
+         (6, 'ahead', 'stretch>=1'): 393
+         (1, 'behind', 'stretch>=1'): 289
+         (7, 'ahead', 'stretch>=1'): 278
+         (3, 'behind', 'stretch>=1'): 170
+         (5, 'ahead', 'stretch>=1'): 164
+         (4, 'behind', 'stretch>=1'): 111
+         (4, 'ahead', 'stretch>=1'): 109
+         (5, 'behind', 'stretch>=1'): 70
+         (3, 'ahead', 'stretch>=1'): 51
+       e.g. speeds [100, 165, 110, 103, 153, 130, 131, 156], runner 100, m=7: blocked by differences [31]; event R = 1/3
+       e.g. speeds [116, 141, 182, 175, 169, 178, 187, 153], runner 169, m=2: blocked by differences [-53]; event R = 9/53
+       e.g. speeds [116, 141, 182, 175, 169, 178, 187, 153], runner 153, m=2: blocked by differences [-37, 22]; event R = 1/12
+       e.g. speeds [156, 181, 150, 119, 129, 114, 187, 162], runner 114, m=6: blocked by differences [15]; event R = 17/67
+
+== laps up to Q = 50: 1500 arrangements
+   (a) runners outside the doubled slot delayed past 1/8: 0
+   (b) pair members: 3000; minimal relocation 1/8 + 1/(64m) works for 602
+       blockers of the minimal relocation by (residue offset, side, stretch size):
+         (1, 'behind', 'stretch<1'): 669
+         (7, 'ahead', 'stretch<1'): 652
+         (6, 'ahead', 'stretch>=1'): 434
+         (2, 'behind', 'stretch>=1'): 395
+         (7, 'ahead', 'stretch>=1'): 318
+         (1, 'behind', 'stretch>=1'): 304
+         (5, 'ahead', 'stretch>=1'): 179
+         (3, 'behind', 'stretch>=1'): 170
+         (4, 'ahead', 'stretch>=1'): 117
+         (4, 'behind', 'stretch>=1'): 103
+         (3, 'ahead', 'stretch>=1'): 79
+         (5, 'behind', 'stretch>=1'): 78
+       e.g. speeds [500, 165, 478, 279, 352, 377, 402, 382], runner 478, m=12: blocked by differences [-126]; event R = 1/22
+       e.g. speeds [500, 165, 478, 279, 352, 377, 402, 382], runner 382, m=12: blocked by differences [118, -103]; event R = 25/118
+       e.g. speeds [292, 310, 191, 440, 481, 106, 491, 343], runner 191, m=19: blocked by differences [119]; event R = 1/85
+       e.g. speeds [340, 333, 367, 480, 273, 114, 355, 297], runner 273, m=3: blocked by differences [207]; event R = 1/23

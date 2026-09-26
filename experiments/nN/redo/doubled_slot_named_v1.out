@@ -1,0 +1,9 @@
+checked 134400 (runner, arrangement) cases, m = 1..300; failures 606
+  s=0 r=1 far: 1 m values, e.g. m=1: cascade t*=9/64
+  s=0 r=1 home: 300 m values, e.g. m=1: cascade t*=1/16, m=2: cascade t*=9/128, m=3: cascade t*=1/16, m=4: cascade t*=17/256, m=5: cascade t*=1/16
+  s=0 r=2 far: 1 m values, e.g. m=1: cascade t*=9/56
+  s=0 r=3 far: 1 m values, e.g. m=1: cascade t*=3/16
+  s=0 r=4 far: 1 m values, e.g. m=1: cascade t*=9/40
+  s=0 r=5 far: 1 m values, e.g. m=1: cascade t*=17/56
+  s=0 r=6 far: 1 m values, e.g. m=1: cascade t*=25/56
+  s=7 r=6 home: 300 m values, e.g. m=1: cascade t*=1/16, m=2: cascade t*=9/128, m=3: cascade t*=1/16, m=4: cascade t*=17/256, m=5: cascade t*=1/16
