@@ -1,0 +1,14 @@
+collider lap k (bucketed: <=10 exact, then <=20, <=50, <=250): relays, largest final R, largest displacement in the collider's laps
+  k   1:   2636 relays; R up to 1.804; collider laps up to 0.751
+  k   2:   2435 relays; R up to 1.879; collider laps up to 1.654
+  k   3:   2219 relays; R up to 1.565; collider laps up to 1.630
+  k   4:   2148 relays; R up to 1.635; collider laps up to 2.491
+  k   5:   1951 relays; R up to 1.462; collider laps up to 2.326
+  k   6:   1842 relays; R up to 1.545; collider laps up to 3.219
+  k   7:   1731 relays; R up to 1.614; collider laps up to 4.272
+  k   8:   1656 relays; R up to 1.657; collider laps up to 5.268
+  k   9:   1567 relays; R up to 1.512; collider laps up to 4.556
+  k  10:   1610 relays; R up to 1.920; collider laps up to 9.162
+  k  20:   9260 relays; R up to 1.507; collider laps up to 9.501
+  k  50:   5555 relays; R up to 1.491; collider laps up to 13.743
+  k 250:   2595 relays; R up to 1.342; collider laps up to 39.125
