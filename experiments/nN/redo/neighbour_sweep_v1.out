@@ -1,0 +1,9 @@
+sweeps: 20 arrangements x 8 runners x 239 steps; subject events 305920
+  every event found (no cap hit): True
+  event in the nearer neighbour's first clear band (R <= 7): 305920 of 305920
+  events past it: 0; R range - .. -
+  their spread ratio S: min -, max -
+  late events by subject's speed rank: []; by swept runner: []
+  R overall max 4.0196; events with R in (7, 9): 0
+  R <= 7 whenever S <= 7 (R1): True
+  late events by floor(S): []
