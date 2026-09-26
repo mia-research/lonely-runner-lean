@@ -1,0 +1,14 @@
+Case C (slowest runner, g_1 < W/22): event location and the six runners' wait, in laps of d_2
+  even              g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.504 laps of d_2; max WAIT/ROOM 0.1068
+  even              g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.248 laps of d_2; max WAIT/ROOM 0.0211
+  even              g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.597 laps of d_2; max WAIT/ROOM 0.0046
+  clumped+outliers  g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.253 laps of d_2; max WAIT/ROOM 0.0468
+  clumped+outliers  g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.377 laps of d_2; max WAIT/ROOM 0.0134
+  clumped+outliers  g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 1.297 laps of d_2; max WAIT/ROOM 0.1218
+  even+clump        g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.183 laps of d_2; max WAIT/ROOM 0.0323
+  even+clump        g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.378 laps of d_2; max WAIT/ROOM 0.0214
+  even+clump        g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.685 laps of d_2; max WAIT/ROOM 0.0471
+Case C arrangements: 1350
+  most times one runner sets a move: {0: 565, 1: 768, 2: 16, 7: 1}
+  hypothesis H (every runner sets at most once): holds in 1333 of 1350
+  moves at most 31; WAIT at most 1.2966 laps of d_2; runner 2 (g_1) ever sets: 0

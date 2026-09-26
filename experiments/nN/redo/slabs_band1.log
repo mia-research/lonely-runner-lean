@@ -1,0 +1,48 @@
+=== S in [12, 13] start 07:56:46
+  LPs solved 1368566; LPs skipped by the witness 1077985; cells explored 241668; early events 113319
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [12, 13] end 07:59:45
+=== S in [13, 14] start 07:59:45
+  LPs solved 1683601; LPs skipped by the witness 1320944; cells explored 295943; early events 139411
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [13, 14] end 08:03:07
+=== S in [14, 15] start 08:03:07
+  LPs solved 2136641; LPs skipped by the witness 1664168; cells explored 372995; early events 173570
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [14, 15] end 08:07:29
+=== S in [15, 16] start 08:07:29
+  LPs solved 8192266; LPs skipped by the witness 6320255; cells explored 1429835; early events 679741
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [15, 16] end 08:23:30
+=== S in [16, 17] start 08:23:30
+  LPs solved 10189339; LPs skipped by the witness 7874289; cells explored 1801243; early events 871134
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [16, 17] end 08:41:57
+=== S in [17, 18] start 08:41:57
+  LPs solved 7973172; LPs skipped by the witness 6119662; cells explored 1387255; early events 659110
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [17, 18] end 08:53:02
+=== S in [18, 19] start 08:53:02
+  LPs solved 10840763; LPs skipped by the witness 8307062; cells explored 1893653; early events 903201
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [18, 19] end 09:10:48
+=== S in [19, 20] start 09:10:48
+  LPs solved 14305002; LPs skipped by the witness 10979868; cells explored 2507199; early events 1188767
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [19, 20] end 09:33:21
+=== S in [20, 21] start 09:33:21
+  LPs solved 15342989; LPs skipped by the witness 11724854; cells explored 2697148; early events 1305501
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [20, 21] end 09:53:49
+=== S in [21, 22] start 09:53:49
+  LPs solved 19050665; LPs skipped by the witness 14524052; cells explored 3339165; early events 1611855
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [21, 22] end 10:20:16
+=== S in [22, 23] start 10:20:16
+  LPs solved 24052418; LPs skipped by the witness 18313067; cells explored 4210017; early events 2017350
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [22, 23] end 10:57:36
+=== S in [23, 24] start 10:57:36
+  LPs solved 58992580; LPs skipped by the witness 44530151; cells explored 10320670; early events 5014749
+  climbs exiting into (15, 17) (terminal cells): 0
+=== S in [23, 24] end 12:20:43

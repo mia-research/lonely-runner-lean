@@ -1,0 +1,4 @@
+climb_cells_v3_B16_S15_bands2: 77 root cells, 1128 tasks after the first move (0 already done), setup 1s
+climb cells v3: readings in [1, 16], S >= 15, bands followed 2 (exit into (15, 17)); exact; 961s
+  LPs solved 8192266; LPs skipped by the witness 6320255; cells explored 1429835; early events 679741
+  climbs exiting into (15, 17) (terminal cells): 0

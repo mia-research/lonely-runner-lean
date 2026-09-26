@@ -1,0 +1,4 @@
+climb_cells_v3_B24_S23_bands2: 378 root cells, 7074 tasks after the first move (0 already done), setup 6s
+climb cells v3: readings in [1, 24], S >= 23, bands followed 2 (exit into (15, 17)); exact; 4987s
+  LPs solved 58992580; LPs skipped by the witness 44530151; cells explored 10320670; early events 5014749
+  climbs exiting into (15, 17) (terminal cells): 0
