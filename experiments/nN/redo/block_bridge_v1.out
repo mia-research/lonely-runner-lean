@@ -1,0 +1,12 @@
+block [165, 166, 337, 494, 505, 772]: L*d1 = 13/4 (3.2500);  stretch in d1-laps [80.8750, 84.1250]; d1-zones inside at laps [81, 82, 83, 84] -> d1's clear bands bridged by the other five: 3
+      centre t = 1/2 (0.50000); phase of each runner relative to the slowest at the centre: ['165:0.000', '166:0.500', '337:0.000', '494:0.500', '505:0.000', '772:0.500']
+block [355, 357, 373, 524, 561, 784]: L*d1 = 3495685/837012 (4.1764);  stretch in d1-laps [300.5002, 304.6766]; d1-zones inside at laps [301, 302, 303, 304] -> d1's clear bands bridged by the other five: 3
+      centre t = 713437/837012 (0.85236); phase of each runner relative to the slowest at the centre: ['355:0.000', '357:0.705', '373:0.343', '524:0.049', '561:0.587', '784:0.663']
+block [232, 233, 361, 365, 680, 742]: L*d1 = 486243/267862 (1.8153);  stretch in d1-laps [145.8033, 147.6186]; d1-zones inside at laps [146, 147] -> d1's clear bands bridged by the other five: 1
+      centre t = 2710227/4285792 (0.63237); phase of each runner relative to the slowest at the centre: ['232:0.000', '233:0.632', '361:0.576', '365:0.106', '680:0.304', '742:0.511']
+block [186, 255, 280, 499, 565, 728]: L*d1 = 1953/1130 (1.7283);  stretch in d1-laps [92.1358, 93.8642]; d1-zones inside at laps [93] -> d1's clear bands bridged by the other five: 0
+      centre t = 1/2 (0.50000); phase of each runner relative to the slowest at the centre: ['186:0.000', '255:0.500', '280:0.000', '499:0.500', '565:0.500', '728:0.000']
+block [395, 457, 470, 624, 634, 696]: L*d1 = 6715/2784 (2.4120);  stretch in d1-laps [385.2811, 387.6931]; d1-zones inside at laps [386, 387] -> d1's clear bands bridged by the other five: 1
+      centre t = 227/232 (0.97845); phase of each runner relative to the slowest at the centre: ['395:0.000', '457:0.664', '470:0.384', '624:0.065', '634:0.849', '696:0.513']
+block [165, 170, 265, 448, 535, 700]: L*d1 = 5053/3584 (1.4099);  stretch in d1-laps [88.7151, 90.1250]; d1-zones inside at laps [89, 90] -> d1's clear bands bridged by the other five: 1
+      centre t = 640963/1182720 (0.54194); phase of each runner relative to the slowest at the centre: ['165:0.000', '170:0.710', '265:0.194', '448:0.369', '535:0.518', '700:0.938']
