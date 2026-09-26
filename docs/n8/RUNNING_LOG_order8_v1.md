@@ -3053,3 +3053,29 @@ every reading's deviation from its grid position stays inside that position's ma
 (`B`, `L`, `N`, `R_q`, `V`, all with proved conditions in Lean: R1, the ladder, `GridNudgeN`, `RungR1N`), and
 exhaustively up to 24 one of them always has room. The next step is the case structure of that "always", starting
 from the residual sets (multiples of 5, 6 or 2 and 3, 7 and 8 all present), where only the `R_q` and `N` views remain.
+
+---
+
+## E91 — 2026-09-26 — the single-view sets, perturbed
+
+(`single_perturb_v1.{py,out}`; exact; the 375 sets up to 24 that exactly one view isolates; each reading moved by ±1,
+±2, i.e. one runner's speed changed; 7,718 perturbed sets) `[VERIFIED — exact]`:
+
+| single view | perturbed sets | its view still works | mean views open after | no view |
+|---|---|---|---|---|
+| `B` | 234 | 219 | 3.99 | 0 |
+| `L` | 6,770 | 6,649 | 3.05 | 0 |
+| `R2` | 98 | 70 | 4.05 | 0 |
+| `R3` | 81 | 54 | 3.74 | 0 |
+| `R4` | 116 | 74 | 3.90 | 0 |
+| `R5` | 19 | 15 | 3.47 | 0 |
+| `R7` | 382 | 320 | 3.50 | 0 |
+| `V` | 18 | 10 | 4.06 | 0 |
+
+- **No perturbed set loses every view.** The one view mostly survives, and on average three to four views are open
+  after a single change.
+- **A set that depends on one view is a coincidence among views, not a thin place in the isolation.** One runner's
+  change reopens several.
+- The cascade's own isolation moves by more than a factor 1.5 in only 188 of 7,718.
+
+The views behave like the pair laws: each is locally robust, and where one closes others are open.
