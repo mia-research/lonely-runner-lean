@@ -3236,3 +3236,28 @@ are running, and that return is what carries the isolation past the bound. Move 
 return falls after the relay has already reached isolation, at `R ≈ 1.04`. So the repeat needs the others' relay to
 last exactly as long as the repeater's clear band (E67's loop), a condition about one unit wide in the repeater's
 speed.
+
+---
+
+## E99 — 2026-09-27 — the extra R each repeat adds
+
+(`repeat_increments_v1.{py,out}`; exact; each repeat is a setting by a runner that has already set in the relay;
+increments of `R` between successive repeats) `[VERIFIED — exact]`:
+
+| | exhaustive `≤ 24` | wide sample | longest relays (late events) |
+|---|---|---|---|
+| relays with a repeat | 9,091 (1 repeat: 7,021) | 1,253 (1 repeat: 1,013) | 15 (all `≥ 8` repeats) |
+| second increment `<` first | 1,939 of 2,070 | 224 of 240 | 15 of 15 |
+| increments shrink all along | 1,378 of 2,070 | 192 of 240 | 0 of 15 |
+| largest increment by repeat index | 2.0, 1.446, 1.057, 1.024, 0.75, 0.511 | 0.707, 0.333, 0.335, 0.043, 0.015, 0.031 | 1.798, 0.845, 1.047, 0.913, 0.363, 0.523 |
+
+- **The ceiling on each successive repeat's contribution falls** in both the exhaustive and the wide data. Individual
+  relays do not always shrink step by step.
+- **In the longest relays the increments stay small (about 0.1–0.9) throughout, except one jump of about 2.0–2.5.**
+  That jump is the nearest runner's own zone, `R ∈ (7, 9)`, width 2 in `R`. The long relays reach `R ≈ 10–11.5` by
+  many small repeats plus that one crossing.
+
+**Reading.** A repeat by a runner of ratio `ρ` must cross its clear band, which is `6/ρ` wide in `R` (0.75 for
+`ρ ≈ 8`, 0.375 for `ρ ≈ 16`). The fast colliders repeat cheaply, and only the nearest runner's own zone adds a large
+step. This bounds each increment by the repeater's band plus the relay across it. It does not bound how many repeats a
+relay can chain; the late events chain about 20.
