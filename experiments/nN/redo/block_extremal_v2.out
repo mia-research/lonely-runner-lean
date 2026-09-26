@@ -1,0 +1,55 @@
+(a) extremal block [165, 166, 337, 494, 505, 772]: longest blocked stretch [647/1320, 673/1320] = [0.49015, 0.50985], length 13/660 = 3.2500 laps of 165
+    zones inside it (start, end, runner, lap):
+      [0.49015, 0.49167]  runner 165 lap 81
+      [0.49077, 0.49109]  runner 772 lap 379
+      [0.49084, 0.49134]  runner 505 lap 248
+      [0.49165, 0.49216]  runner 494 lap 243
+      [0.49207, 0.49239]  runner 772 lap 380
+      [0.49221, 0.49295]  runner 337 lap 166
+      [0.49282, 0.49332]  runner 505 lap 249
+      [0.49322, 0.49473]  runner 166 lap 82
+      [0.49336, 0.49369]  runner 772 lap 381
+      [0.49367, 0.49418]  runner 494 lap 244
+      [0.49466, 0.49498]  runner 772 lap 382
+      [0.49480, 0.49530]  runner 505 lap 250
+      [0.49518, 0.49592]  runner 337 lap 167
+      [0.49570, 0.49620]  runner 494 lap 245
+      [0.49595, 0.49628]  runner 772 lap 383
+      [0.49621, 0.49773]  runner 165 lap 82
+      [0.49678, 0.49728]  runner 505 lap 251
+      [0.49725, 0.49757]  runner 772 lap 384
+      [0.49772, 0.49823]  runner 494 lap 246
+      [0.49815, 0.49889]  runner 337 lap 168
+      [0.49854, 0.49887]  runner 772 lap 385
+      [0.49876, 0.49926]  runner 505 lap 252
+      [0.49925, 0.50075]  runner 166 lap 83
+      [0.49975, 0.50025]  runner 494 lap 247
+      [0.49984, 0.50016]  runner 772 lap 386
+      [0.50074, 0.50124]  runner 505 lap 253
+      [0.50111, 0.50185]  runner 337 lap 169
+      [0.50113, 0.50146]  runner 772 lap 387
+      [0.50177, 0.50228]  runner 494 lap 248
+      [0.50227, 0.50379]  runner 165 lap 83
+      [0.50243, 0.50275]  runner 772 lap 388
+      [0.50272, 0.50322]  runner 505 lap 254
+      [0.50372, 0.50405]  runner 772 lap 389
+      [0.50380, 0.50430]  runner 494 lap 249
+      [0.50408, 0.50482]  runner 337 lap 170
+      [0.50470, 0.50520]  runner 505 lap 255
+      [0.50502, 0.50534]  runner 772 lap 390
+      [0.50527, 0.50678]  runner 166 lap 84
+      [0.50582, 0.50633]  runner 494 lap 250
+      [0.50631, 0.50664]  runner 772 lap 391
+      [0.50668, 0.50718]  runner 505 lap 256
+      [0.50705, 0.50779]  runner 337 lap 171
+      [0.50761, 0.50793]  runner 772 lap 392
+      [0.50784, 0.50835]  runner 494 lap 251
+      [0.50833, 0.50985]  runner 165 lap 84
+      [0.50866, 0.50916]  runner 505 lap 257
+      [0.50891, 0.50923]  runner 772 lap 393
+    positions (laps mod 1) of each runner at the stretch's midpoint: [0.5, 0.0, 0.5, 0.0, 0.5, 0.0]
+(b) resolution: scale and re-climb
+    x5: start Q 3.2500 -> climbed Q 13/4 (3.2500) block [825, 830, 1685, 2470, 2525, 3860] shape [1.0, 1.0061, 2.0424, 2.9939, 3.0606, 4.6788]
+    x20: start Q 3.2500 -> climbed Q 13/4 (3.2500) block [3300, 3320, 6740, 9880, 10100, 15440] shape [1.0, 1.0061, 2.0424, 2.9939, 3.0606, 4.6788]
+(c) pairs at progression positions: a = 200, block {a, a+p, 2a+q, 3a, 3a+r, s}
+    best in the structured family: Q = 650/201 (3.2338) block [200, 201, 397, 600, 601, 936]
