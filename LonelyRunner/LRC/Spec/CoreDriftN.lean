@@ -1,4 +1,5 @@
 import LonelyRunner.LRC.Spec.Order8SkeletonN
+import LonelyRunner.LRC.Cascade.Together
 
 /-!
 # The core drift bound: relay links and near-progression blocks, band by band
@@ -59,6 +60,17 @@ theorem block_persists {F : Finset ℝ} {d1 τ μ ε : ℝ} (hd1 : 0 < d1)
       _ ≤ μ := hb
   have := (abs_sub_le_iff.mp hlip).2
   have := hlon d hd
+  linarith
+
+/-- **A mover cannot patch the same gap in two consecutive bands if its phase moves by more than a quarter lap.**  If
+its phase `φ` is within `1/8` of a lap line `a` in one band and `φ + ρ` is within `1/8` of it in the next, then
+`circDist ρ < 1/4`.  Contrapositive: a mover whose deviation from the progression at scale `d₁` is more than `1/4` of a
+lap from a whole number never patches a fixed gap in two consecutive bands. -/
+theorem mover_consecutive {φ ρ a : ℝ} (h0 : circDist (φ - a) < 1 / 8) (h1 : circDist (φ + ρ - a) < 1 / 8) :
+    circDist ρ < 1 / 4 := by
+  have e : ρ = (φ + ρ - a) - (φ - a) := by ring
+  rw [e]
+  have := Together.circDist_sub_le (φ + ρ - a) (φ - a)
   linarith
 
 end LRC.CoreDrift
