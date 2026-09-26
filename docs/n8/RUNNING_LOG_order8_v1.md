@@ -3187,3 +3187,24 @@ similar to d_min."*
 first lap (`b ≈ 8·d_min`), the same runner that repeats. It is a candidate for the owner's ratio: `d_min` sets where
 the isolation starts, and the collider's lap sets how far it can move. **Range caveat:** readings `≤ 24` restrict
 `k ≤ 3` and cap `S`. **Next:** the wide sample, measuring the displacement in the collider's own units against `k`.
+
+---
+
+## E97 — 2026-09-27 — the displacement on widely spread readings; the spread against 8 is the ratio
+
+(`displace_collider_v1.{py,out}`; exact; random sets, `d_min ∈ 1…20`, readings to 2,000; the slowest runner)
+`[VERIFIED — exact, this sample]`. For every collider lap `k` from 1 to about 250 the final `R` stays at most 1.92. In
+the collider's own laps the displacement grows about as `k·(R − 1)` (0.75 at `k = 1`, up to 39.1 at `k ≈ 250`). That
+follows from the collider's lap time being about `1/k` of the bound, so it is not an invariant: `R`, in units of
+`d_min`, is.
+
+**The ratio that sets the displacement** (with E47, E96 and the certificates):
+- `S ≤ 7`: isolated at the bound, `R = 1` (R1).
+- `S` from 7 to about 11: a reading near `8·d_min` collides on its first lap. The displacement is largest here: `R` up
+  to 5.667 for readings `≤ 24`, and late events up to `R ≈ 15` for `S ≤ 2993/273` (E47–E48).
+- `S` larger: the ceiling falls (about 3.5 by `S = 14`; under 2 on the wide sample).
+
+So `d_min` sets where the isolation starts, and the spread's nearness to `8·d_min` sets how far it can move. That is the
+grid collision at the bound (E92), and the repeating runner is that collider coming round on consecutive laps (E96).
+This matches the proof's existing split: the certificates cover `S ≤ 24`, including the late events, and Case C
+(`S > 24`) sits at the small-displacement end.
