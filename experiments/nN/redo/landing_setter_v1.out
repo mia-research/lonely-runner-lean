@@ -1,0 +1,6 @@
+sets: [('bound', 200736), ('displaced', 145368)]
+rank of setter e (1 = d_min, 7 = largest): [(2, 5527), (3, 16353), (4, 28652), (5, 34078), (6, 31528), (7, 29230)]
+lap K: [(1, 85137), (2, 29096), (3, 26456), (4, 4015), (5, 565), (6, 74), (7, 25)]
+R* = 8 d_min t*, in halves: [(1.0, 108249), (1.5, 30449), (2.0, 5059), (2.5, 1107), (3.0, 388), (3.5, 86), (4.0, 20), (4.5, 7), (5.0, 2), (5.5, 1)]
+e against (8K+1) d_min: [('e < (8K+1) d_min', 145368)]
+setter at the bound: [('setter was a collider at the bound', 59963), ('setter was clear at the bound', 85405)]
