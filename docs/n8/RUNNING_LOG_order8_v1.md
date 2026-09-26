@@ -3079,3 +3079,27 @@ from the residual sets (multiples of 5, 6 or 2 and 3, 7 and 8 all present), wher
 - The cascade's own isolation moves by more than a factor 1.5 in only 188 of 7,718.
 
 The views behave like the pair laws: each is locally robust, and where one closes others are open.
+
+---
+
+## E92 — 2026-09-27 — the crowding test
+
+**Owner:** runners are bounded by their neighbours (distinct speeds); *"crowd them too evenly and all of a sudden you
+have AP again."*
+
+(`crowding_v1.{py,out}`; exact; the 145,368 sets of seven readings in `1 … 24` where the bound `1/(8·d_min)` is not
+lonely) `[VERIFIED — exhaustive exact]`:
+- Some other runners' neighbour gap is smaller than `d_1`: 77,173.
+- **The runners blocking the bound are in a crowded pair (a neighbour gap `< d_1`) in only 32,913**; every blocker in
+  31,553. Mostly the bound fails because a reading, spread well away from its neighbours, wraps onto a multiple of 8 at
+  the nearest runner's scale (residue within `d_min` of `0 mod 8·d_min`): a grid collision, not crowding.
+- **At the cascade's isolation the tightest pair is still within one eighth of each other in 72,354** (separation
+  `8·g_min·t*`: `< 1` in 72,354, `[1, 2)` in 63,237, `[2, 3)` in 8,397, larger in 1,380). Crowded runners ride together
+  in one clear eighth, harmless, as the owner said of shared eighths.
+- The scale reading at the isolation sits next to a smallest gap in 53,448.
+
+**Reading.** As operationalised here (a gap under `d_1`), crowding is not what closes the bound; the grid collision
+is. Crowded groups are carried through intact and do not need separating. The owner's "evenly crowded is an AP again"
+is consistent with that: a crowded group moves as one. What the cascade has to resolve at the bound is the reading
+that collides with the subject's own residue class, and its first move goes to that reading's own exit
+(`(8k+1)/(8b)`, the bound nudged by the colliding reading).
