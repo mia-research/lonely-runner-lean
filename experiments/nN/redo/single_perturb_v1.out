@@ -1,0 +1,9 @@
+single-view sets: 375
+  B  : perturbed sets 234; its view still works 219; mean views open 3.99; no view 0; cascade isolation moved by a factor > 1.5 in 5
+  L  : perturbed sets 6770; its view still works 6649; mean views open 3.05; no view 0; cascade isolation moved by a factor > 1.5 in 172
+  R2 : perturbed sets 98; its view still works 70; mean views open 4.05; no view 0; cascade isolation moved by a factor > 1.5 in 2
+  R3 : perturbed sets 81; its view still works 54; mean views open 3.74; no view 0; cascade isolation moved by a factor > 1.5 in 3
+  R4 : perturbed sets 116; its view still works 74; mean views open 3.90; no view 0; cascade isolation moved by a factor > 1.5 in 3
+  R5 : perturbed sets 19; its view still works 15; mean views open 3.47; no view 0; cascade isolation moved by a factor > 1.5 in 0
+  R7 : perturbed sets 382; its view still works 320; mean views open 3.50; no view 0; cascade isolation moved by a factor > 1.5 in 2
+  V  : perturbed sets 18; its view still works 10; mean views open 4.06; no view 0; cascade isolation moved by a factor > 1.5 in 1
