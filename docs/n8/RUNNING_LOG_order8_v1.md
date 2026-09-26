@@ -2992,3 +2992,32 @@ family isolates 231,052 of the 231,062 sets that no proved lemma settles**. By r
 `1/(8·d_min)` (R1), `1/q` (ladder), the nudges, `9/(8e)` (reverse R1), and `a/q ± 1/(8·min D_q)` (rung R1). That is
 AP/grid plus a deviation forced by the multiples' own `d_min`. It is a map, not a proof. The next steps are the 10
 exceptions through the cascade, and the condition under which rung R1 must succeed.
+
+---
+
+## E89 — 2026-09-26 — the ten exceptions through the cascade; rung R1 in Lean
+
+**The ten** (`exceptions10_v1.{py,out}`; exact) `[VERIFIED — exact]`. The cascade isolates all of them immediately. Six
+are isolated at the bound `1/(8·d_min)` with no moves (e.g. `(3,4,5,6,7,9,32)` at `1/24`). Three are at reading 26's
+second opening `9/208` (`R = 1.04`, one move). One is at `9/216 = 1/24` (reading 27, `R = 1.33`). They were
+exceptions only to E88's menu, which tested R1 (`max ≤ 7·min`), a sufficient condition for the bound, instead of the
+bound instant itself. **The menu's missing entry is the grid at the bound:** at `1/(8·d_min)` each reading sits at
+`(d mod 8·d_min)/(8·d_min)`, so isolation holds when every residue is in `[d_min, 7·d_min]` (32 mod 24 = 8 here). With
+it, 4 remain, each isolated one move later at a second opening.
+- **Owner's addition:** where two runners share an eighth and no scale separates them, isolation may take several
+  cycles; the cascade still determines it. In these ten, runners share clear eighths at the bound (e.g. 3 and 4; 5, 6
+  and 7), which is harmless. The case that matters is two runners sharing the subject's own slot. E35 records the
+  cascade curing slot-sharers.
+
+**`LRC/Spec/RungR1N.lean`** (commit `59a9cd6`; Spec gate PASS, 1,621 declarations, axiom-clean) `[PROVED — axiom-clean]`:
+- **`rung_r1_forward` / `rung_r1_backward`** hold at any instant `t₀` of any arrangement. Readings on whole laps at
+  `t₀` with `m ≤ w ≤ 7m` sit, after the deviation `±1/(8m)`, exactly where they sit at their own first instant. Every
+  other reading at `K + ρ`, `ρ ∈ [1/8, 7/8]`, rides within its room (`ρ + w/(8m) ≤ 7/8`, or `ρ − w/(8m) ≥ 1/8`
+  backward).
+- **`half_lap_r1`:** whole-number readings with the evens in `[m, 7m]` for some `m > 0` and every odd reading at most
+  `3m` are isolated at `1/2 + 1/(8m)`.
+- **`rung_r1_nat`:** every rung `a/q`, `2 ≤ q ≤ 8`, with the explicit room condition `(a·u mod q)/q + u/(8m) ≤ 7/8` for
+  the non-multiples.
+
+This is the owner's *"AP/grid and a deviation forced by d_min"* as a theorem: the multiples of `q` become their own
+smaller problem at their own bound, and the rest ride with margin `r/q − 1/8`.
