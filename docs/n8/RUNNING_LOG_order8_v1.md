@@ -2754,3 +2754,23 @@ is 9 away) and is also clear at `t = 1/8` (it reads the others at `7/8 … 1/8`)
 not delayed.** Runner 16 does sit in other runners' slots at other instants: sampled at 799 instants, it is the only
 runner in the way at 6–98 of them per runner. Even so each runner has more lonely stretches per lap with 16 than with
 8 (runner 1: 10 against 4).
+
+---
+
+## E80 — 2026-09-26 — the flank sum criterion at the event: a corner, not the main road; the hard-case plan
+
+**Check** (`flank_at_event_v1.{py,out}`; exact; 1,500 whole-number arrangements × 8 runners) `[VERIFIED — exact]`. At
+the cascade's isolation the flank is the pinner's reading. The flank sum criterion (`FlankSumN`) holds there in only
+347 of 12,000, and at any reading's flank in 360. Movers at the event's flank: 6 in 9,402, 5 in 1,552, 4 in 441. **The
+typical isolation has all six other readings as movers**, clear at that particular opening, not by a count over
+openings. So four to six movers is the ordinary case, and the hard cases must be defined by the cascade itself: first
+openings blocked, a long relay, a late landing.
+
+**Plan (owner: "find those hard cases, permutate them through cascade … a pattern, then a rule or law, from that a
+mechanism and proof"):**
+1. **Find:** exact climbs on relay length and `R`, plus the known hard sets (Case B late events, the Case C climbs, the
+   longest off-grid relays).
+2. **Perturb:** one-runner moves through the cascade; record each relay (who hands to whom, at which laps, where it
+   lands).
+3. **Pattern to rule:** what every long relay has in common.
+4. **Mechanism to proof:** the rule as a lemma in the scale objects, in Lean.
