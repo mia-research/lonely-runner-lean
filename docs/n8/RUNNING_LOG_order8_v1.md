@@ -3556,3 +3556,30 @@ in the way in turn, where the event lands read as the AP at that scale) and chec
 
 **Terminology.** "Relay" (E32–E37) is my shorthand, not a framework object. In the framework it is the cascade's run of
 lap-completion zones (Thm 6.2(c)): the runners in the way at successive moves.
+
+---
+
+## E39 — 2026-09-27 — (b) measured on two slices of the shape space; back to the proof plan
+
+**Slices** (`experiments/nN/redo/shape_slices_v1`): the AP with gaps all 1, two gaps varied over `k/16`, `k = 1…128`,
+16,384 shapes per slice, every runner, exact; each shape's cone = the cascade event's (flank rank, lap `j`, band of
+every reading). Slice A = the two end gaps, slice B = the two middle gaps.
+
+| | cones | runners next to the varied gaps | other runners | single-shape cones | largest `j` |
+|---|---|---|---|---|---|
+| A | 583 | 132–246 each | 6–14 each | 110 | 17 |
+| B | 702 | 167–280 each | 12–20 each | 130 | 21 |
+
+Towards the edges (cones met in each band of the smaller / larger varied gap): smaller gap `[1/16, 1/8)`: 182 (A), 220
+(B); larger gap `[4, 8]`: 336 (A), 384 (B). `[EMPIRICAL]` Limits of the measurement: the cascade's cone is one cone
+containing the shape, so the counts **overstate** what a minimal cover needs; the 1/16 grid can **miss** cones thinner
+than a grid step, and the 110–130 single-shape cones say many are that thin. Read as it stands: **each 2-D slice needs
+hundreds of cones**, with `j` rising towards the outlier edge. A cone cover of the 6-dimensional middle is not a small
+object; no extrapolation to 6-D is claimed.
+
+**Author (the proof plan).** AP is scale invariant and grid is infinite, which explains how arrangements mix and match.
+The one and only hard problem is **two runners in a slot, which delays the isolation**. It has a relationship between
+(i) missing grids, (ii) not being too close to a third runner (where it would become AP), and (iii) the number of
+cycles until it isolates. Consistent with this session's record: every cascade move cures a runner in the subject's
+slot (E35, 13,086 of 13,086); every type E36 could not decide contains such runners; the delay law of E33 is a group on
+the eighth-slots.
