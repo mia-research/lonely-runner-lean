@@ -1,0 +1,16 @@
+pinch-offs 1753
+ lonely components in R in [1,15] besides the pinched point, at s*: [(7, 2), (8, 4), (9, 3), (10, 4), (11, 5), (12, 12), (13, 3), (14, 8), (15, 9), (16, 5), (17, 8), (18, 9), (19, 9), (20, 1672)]
+ of which after the pinched instant: [(7, 2), (8, 4), (9, 3), (10, 4), (11, 5), (12, 12), (13, 3), (14, 8), (15, 9), (16, 5), (17, 8), (18, 9), (19, 9), (20, 1672)]
+ the landing is the first component after the pinch: 1753 of 1753
+  C:clumped+outliers/W100  pinch at R 2.5850 -> R 3.8522; components besides it 7, after it 7; first ones [(3.852, 3.964), (4.308, 4.416), (5.687, 5.687), (10.857, 10.857), (12.12, 12.236), (12.58, 12.684)]
+  random[1,300]            pinch at R 2.4259 -> R 3.1190; components besides it 7, after it 7; first ones [(3.119, 3.279), (4.754, 5.047), (5.946, 6.2), (9.266, 9.911), (11.713, 12.069), (13.208, 13.516)]
+  C:clumped+outliers/W30   pinch at R 1.0000 -> R 1.1333; components besides it 8, after it 8; first ones [(1.133, 1.533), (3.002, 3.002), (3.931, 4.092), (5.781, 5.8), (5.933, 6.275), (11.331, 11.667)]
+  C:clumped+outliers/W100  pinch at R 2.5170 -> R 3.7015; components besides it 8, after it 8; first ones [(3.701, 3.974), (4.504, 4.59), (5.291, 5.382), (9.0, 9.163), (10.863, 10.939), (11.993, 12.261)]
+  random[1,300]            pinch at R 4.0785 -> R 4.2521; components besides it 8, after it 8; first ones [(4.252, 4.547), (5.22, 5.467), (5.64, 5.809), (6.335, 6.472), (9.112, 9.398), (11.242, 11.483)]
+  random[1,300]            pinch at R 2.1989 -> R 5.5774; components besides it 8, after it 8; first ones [(5.577, 5.717), (6.338, 6.89), (9.147, 9.184), (9.529, 9.863), (11.543, 11.581), (12.021, 12.27)]
+  C:even+clump/W100        pinch at R 1.0000 -> R 1.8836; components besides it 9, after it 9; first ones [(1.884, 2.066), (3.683, 3.819), (4.151, 4.222), (5.857, 6.094), (9.0, 9.0), (9.861, 9.972)]
+  random[1,300]            pinch at R 1.0000 -> R 1.8472; components besides it 9, after it 9; first ones [(1.847, 2.007), (3.666, 3.792), (4.874, 5.107), (5.324, 5.34), (5.857, 5.976), (10.54, 10.793)]
+  random[1,300]            pinch at R 4.7557 -> R 5.8079; components besides it 9, after it 9; first ones [(5.808, 5.897), (6.29, 6.299), (6.567, 7.0), (9.972, 10.031), (10.856, 10.892), (11.928, 11.984)]
+  C:clumped+outliers/W100  pinch at R 2.0342 -> R 2.3054; components besides it 10, after it 10; first ones [(2.305, 2.344), (2.677, 2.752), (3.949, 4.176), (4.612, 4.667), (6.96, 6.98), (9.231, 9.316)]
+  C:even+clump/W100        pinch at R 1.0000 -> R 1.2857; components besides it 10, after it 10; first ones [(1.286, 1.356), (2.995, 3.021), (3.707, 3.774), (6.646, 6.714), (9.0, 9.0), (9.286, 9.312)]
+  random[1,300]            pinch at R 2.7398 -> R 4.1278; components besides it 10, after it 10; first ones [(4.128, 4.154), (4.331, 4.566), (5.26, 5.568), (5.745, 5.879), (6.452, 6.522), (9.28, 9.437)]
