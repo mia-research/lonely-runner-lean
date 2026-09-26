@@ -3348,3 +3348,32 @@ slot at the bound in 59,963 and clear there in 85,405. (`e < (8K+1)·d_min` in e
 
 **Not new.** The log-time form (every runner's blocked windows are one fixed set shifted by its log-reading) was reached
 for again; it is E11 and `LogTimeN`.
+
+---
+
+## E103 — 2026-09-27 — E100's next step: the 35,215 sets past lap 1, perturbed through the cascade
+
+**Owner:** *"Please remember that floating point is banned, exact only, we prefer to use cascade or the boundary set
+method, we do not any runner stationary"*; asked that the last exchanges before the compaction be read in full, not
+grepped, to get back to where the work was. Read: transcript lines 1225–1640 (E89 to E101). The thread resumed here is
+E100's stated next step.
+
+**What closes the lap-0/1 openings, and does one move reopen one** (`lap1_reopen_v1.{py,out}`; exact; the 35,215 sets
+of readings `≤ 24` whose cascade isolation is not an explicit view) `[VERIFIED — exhaustive exact]`:
+- In 8,952 a lap-0/1 opening `(8k+1)/(8e)`, `k ≤ 1`, is itself lonely, later than the cascade's instant; in 26,263
+  every lap-0/1 opening at or after the bound is blocked.
+- One runner is in the slot at every lap-0/1 opening in 7,612; otherwise two to six runners are needed between them
+  (1: 7,612; 2: 12,996; 3: 7,944; 4: 5,059; 5: 1,525; 6: 79).
+- Moving one reading by `±1` or `±2` (kept positive and distinct) brings the cascade back to a lap `≤ 1` opening in
+  34,983 of 35,215; in 33,194 of those a reopening move is on a runner that lies in every minimal blocking set.
+
+**The 232 that no single move reopens** (`lap1_stuck_v1`, `lap1_stuck_check_v1`) `[VERIFIED — exhaustive exact]`: every
+one has `d_min = 1` and exactly two readings on multiples of `8·d_min` (16 and 24): two runners in the subject's own
+slot at the bound, a double grid collision, which one move cannot remove. Their isolation is just past the bound, at
+`R* = 17/15` (runner 15's opening on lap 2) or `25/22`, `25/23` (lap 3). This is the case the owner singled out at E89
+(two runners sharing the subject's slot).
+
+**Correction to E100's classification.** "Lap 2 or later" measured the setter's lap, not the displacement. A fast
+runner's second or third opening comes just after the bound: of the 35,215, those set on lap 3 have `R* < 1.25` in 9,444
+of 15,089, and every lap-`K` group has most of its mass below `R* = 1.75` (`lap1_stuck_check_v1.out`). The displacement
+is `R*`, and these sets are displaced little.
