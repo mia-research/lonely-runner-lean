@@ -1,0 +1,7 @@
+generic sets (reduced, every six coprime), random in [1,400]: 300
+  near-lattice rule fires (Delta = a/b, b <= 40, k <= 6): 300; of these the drift bound k*drift <= margin holds: 0
+  not fired: 0  e.g. []
+  residual (2, 12, 15, 21, 32, 34, 38): fires: x=2, Delta=1/5, k=3, drift=2/5, margin=1/56, bound holds=False
+  residual (4, 5, 6, 8, 14, 32, 37): fires: x=4, Delta=1/2, k=1, drift=1/2, margin=1/56, bound holds=False
+  residual (4, 5, 6, 14, 17, 32, 38): fires: x=4, Delta=1/2, k=2, drift=1/2, margin=1/56, bound holds=False
+  residual (4, 7, 8, 15, 29, 36, 37): fires: x=4, Delta=1/5, k=4, drift=2/5, margin=1/56, bound holds=False
