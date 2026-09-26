@@ -1,0 +1,10 @@
+(1) random reduced 7-sets in [1,400]: 3000; rule applies 164; instant verified lonely 164; failures 0
+(2) of these, every six coprime (the class the rule leaves): 2811 of 3000 fresh samples
+(3) the seven [1,40] residual sets of v21 s17D:
+    (2, 12, 15, 21, 32, 34, 38): not closed (every six coprime)
+    (4, 5, 6, 8, 14, 32, 37): not closed (every six coprime)
+    (4, 5, 6, 14, 16, 34, 38): closed -- x=5, h=2, lonely at t=1/28
+    (4, 5, 6, 14, 17, 32, 38): not closed (every six coprime)
+    (4, 5, 6, 14, 32, 34, 38): closed -- x=5, h=2, lonely at t=1/28
+    (4, 6, 14, 15, 16, 34, 38): closed -- x=15, h=2, lonely at t=1/28
+    (4, 7, 8, 15, 29, 36, 37): not closed (every six coprime)
