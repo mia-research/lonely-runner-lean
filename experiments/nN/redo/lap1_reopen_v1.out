@@ -1,0 +1,5 @@
+counts: [('a lap-0/1 opening after t* is lonely', 8952), ('every lap-0/1 opening blocked', 26263), ('exceptions', 35215), ('landing lap K=2', 16868), ('landing lap K=3', 15089), ('landing lap K=4', 2621), ('landing lap K=5', 563), ('landing lap K=6', 49), ('landing lap K=7', 25), ('no single move reopens', 232), ('some single move reopens lap <= 1', 34983)]
+fewest runners blocking every lap-0/1 opening: [(1, 7612), (2, 12996), (3, 7944), (4, 5059), (5, 1525), (6, 79)]
+common blocker: [('no single common blocker', 27603), ('one runner blocks every lap-1 opening', 7612)]
+rank (1 = d_min) of runners in every minimal blocking set: [(2, 4269), (3, 10974), (4, 14272), (5, 14584), (6, 12494), (7, 17122)]
+reopening move and blockers: [('a reopening move is on a runner in every minimal blocking set', 33194), ('no reopening move is on such a runner', 1789)]
