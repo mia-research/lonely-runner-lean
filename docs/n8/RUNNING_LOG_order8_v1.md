@@ -2637,3 +2637,35 @@ every runner moving at a positive speed (any common shift gives the same geometr
 `R = 1` (`t = 1/8`), 0 moves. Second: seven runners at `R = 1` with 0 moves, and the runner at speed 12 at `R = 9/8` after
 1 move. Third: the same, with the runner at speed 13 at `R = 9/8` after 1 move. All are in the first window. "Tight"
 means only that the isolation has zero room (an isolated instant), not that it is hard to find.
+
+---
+
+## E76 — 2026-09-26 — the owner's rule at the cascade's own scale; the six grid residues traced
+
+**Owner:** *"cascade already gives you the scale, use it. But informally I think it is, try and place most of the front
+half in AP and grid can take care of the rest"*; then *"trace the six grid residues."*
+
+**At the cascade's scale** `D* = 1/(8t*)` (`front_half_v1.{py,out}`; exact) `[VERIFIED — exact]`. A reading is in the
+**AP part** when `r = d/D* ≤ 7` (first lap) and in the **grid part** when it wraps (`r mod 8 ∈ [1, 7]`).
+- Random arrangements, every runner (4,000 events): the smallest half is entirely AP in 2,115. The number of AP
+  readings spreads from 1 (705) to 7 (1,092).
+- Case C sample (1,350): 1 AP reading in 796, 2 in 277; front half entirely AP in only 112.
+- The 15 hardest Case C climbs: 1 AP reading in 14, 2 in 1.
+
+**Where isolation is hardest, the AP part is the nearest runner alone and the grid carries the other six.**
+
+**The six residues** (`grid_residue_trace_v1.{py,out}`; exact; the five hardest climbs and the five Case C samples with
+the most moves). With `u = r₁ = g₁/D` running over the nearest runner's first lap `[1, 7]`, each wrapped reading's
+residue `ρ_j·u mod 8` rotates at its own rate `ρ_j`. The blocked arc is `(7, 9)`, width 2 of the 8. At each move the
+setter is the residue inside the arc with the latest exit; it jumps to exactly `1.00` and every other residue rotates
+on.
+- **Near-progression six** (readings `≈ 6, 11, 16, 21, 25, 30` in units of `g₁`, step `≈ 5`): the cascade ends at
+  `u ≈ 1.63`, with all six residues bunched in `[1.0, 3.0]`, just past the arc. At that scale (`u ≈ 8/5`) each back
+  reading is about `8j + 1.6`: **the back six are themselves an AP, placed at their own scale (`D ≈ step/8`) so that
+  every one sits just past a multiple of 8.** This is AP and grid mixed: an AP for the nearest runner at scale `g₁`,
+  and an AP for the back six at scale `step/8`, read on the grid.
+- **A fast train** (five readings `1012.4 … 1018.9`): the members' residues form a fan with spacing `Δρ·u ≈ 1.6–1.9`,
+  under the arc width 2, so one member is always in the arc. The setters cycle `4, 3, 2, 6, 5, 4, …` (the relay word
+  repeats) until the spacing opens past 2, at `u ≈ 1.056`.
+- **The hardest climbs:** the setters relay through all six with no repeated word. Each move moves one residue to
+  `1.00`, and the isolation arrives when every residue is out of the arc at once (e.g. `u = 6.42`).
