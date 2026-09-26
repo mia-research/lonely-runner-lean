@@ -2297,3 +2297,41 @@ between consecutive setters. Movers can substitute (E64), so a second loop with 
 bounded. Grade of "every runner sets at most twice outside the tight five-group": `[EMPIRICAL — 1,350]` (E66).
 
 Note: `case_c_map_v1` prints its table on import (E-lesson 13); harmless here, recorded.
+
+---
+
+## E68 — 2026-09-26 — Case C: towards a third setting, then the wait itself; the E57 block law is refuted
+
+**Owner:** "Ok" to perturbing the loop arrangements towards a third setting.
+
+**A third setting is easy to reach** (`relay_third_v1.{py,out}`; exact; one-runner moves of the six, `g₁` fixed, order,
+distinctness and `W > 24g₁` kept; the objective is the cascade's own settings count plus the covered fraction of the
+repeater's next band) `[VERIFIED — exact, 68 climbs from the 17 loop arrangements]`. 47 of 68 climbs reach three
+settings, one reaches four outside the tight five-group. Consecutive loops almost never share a word, except in the
+tight five-group (7 and 11 settings, same word every band). Most repeaters are fast runners bridged by a slow one,
+which costs little. **So "every runner sets at most twice" (E66) is false as a law; the settings count is not the
+invariant.** What Case C needs bounded is the wait itself against the room `(3/4)(d₂/g₁)` laps of `d₂`.
+
+**The wait, climbed directly** (`relay_wait_v1.{py,out}`; exact; 90 starts, every 15th Case C arrangement per family;
+3,000 one-runner moves each) `[VERIFIED — exact per arrangement]`. The largest waits reached, in laps of `d₂`:
+13.389 and 12.717 (all six readings within 6.3% of each other), 5.304, 4.712, 4.427, 4.199, 3.636, 3.565. **Every one
+of the twelve largest has a clump**: two to six readings within a few per cent of each other (e.g. `1.0, 1.037, 1.067`;
+`1.331 … 1.411`; `2.058, 2.061`). In the four largest the relay repeats one word 4, 4, 3 and 2 times; in others there is
+no repeated word.
+
+**The E57 block law is refuted** `[VERIFIED — exact counterexample]`. The 5.304 arrangement has readings
+`d/d₂ ≈ [1.0, 1.037, 1.067, 2.064, 3.064, 4.038]` and `σ₅/d₂ = 2.064`, so `min(min F, σ₅) = d₂`, and the cascade from
+`1/(8g₁)` is blocked for 5.304 laps of `d₂`. The blocked stretch containing it is at least that long, so
+`L·min(min F, σ₅) ≥ 5.304 > 13/4`. The law was found by local ascent from 51 starts (E57, E58); it misses clumps
+smaller than five. Here a tight **triple** sits at `d₂` inside a near-progression `1, 2, 3, 4`. E58's use of the law
+("Case C closes wherever `min(d₂, σ₅) ≥ (13/3)·g₁`") falls with it.
+
+**Not a finding:** every link ratio in these chains lies within about 0.06 of a fraction with denominator at most 6,
+but that is roughly the chance level (any real lies within `1/12` of such a fraction). It is not evidence of resonance
+and is not to be cited as such (E-lesson 9, density versus mechanism).
+
+**What the wait follows, as far as these runs show** `[EMPIRICAL — 90 climbs]`: long waits need clumps. A clump of `k`
+runners fans out on the time scale of its own spread, so it acts like one runner whose zone widens up to `k/4` of a lap.
+The one-zone-per-setting accounting of E67 then undercounts; the train (E33, `TrainCollapseN`) is the five-and-six case
+of this. **Next:** group the readings into clumps and test whether, clump by clump, the cascade sets each clump about
+once, with a clump's cost being its fanned zone; that is the accounting a proof would use.
