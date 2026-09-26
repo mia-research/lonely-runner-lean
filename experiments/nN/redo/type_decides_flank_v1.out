@@ -1,0 +1,32 @@
+
+== every arrangement 1 = v1 < ... < v8 <= 18, gcd of differences 1: 155520 distinct runners, 95888 types, 5134 types with >= 2 members (holding 64766 runners)
+   runners with no working flank: 0
+   types where ONE flank rank works for every member: 5122 of 5134
+   types where the cascade's flank rank is the same for every member: 3344 of 5134
+   members per multi-member type: {2: 541, 3: 58, 4: 1495, 5: 600, 6: 49, 7: 28, 8: 397, 9: 407, 10: 10, 11: 8, 12: 4, 13: 60}
+   no common flank, type (0, (0, 1, 2, 3, 4, 5, 7, 0)):
+      (1, 2, 3, 4, 5, 6, 8, 9) runner rank 0: working flank ranks [5, 6], cascade [6]
+      (1, 2, 3, 4, 5, 6, 8, 17) runner rank 0: working flank ranks [5, 6], cascade [6]
+      (1, 2, 3, 4, 5, 6, 16, 17) runner rank 0: working flank ranks [3, 4, 5, 6, 7], cascade [6]
+      (1, 2, 3, 4, 5, 14, 16, 17) runner rank 0: working flank ranks [3, 4, 5, 6, 7], cascade [6]
+   no common flank, type (7, (0, 1, 2, 3, 4, 5, 7, 0)):
+      (1, 2, 3, 4, 5, 6, 8, 9) runner rank 7: working flank ranks [1, 4], cascade [1]
+      (1, 2, 3, 4, 5, 6, 16, 17) runner rank 7: working flank ranks [0, 1, 2, 3, 4], cascade [2]
+      (1, 2, 3, 4, 5, 14, 16, 17) runner rank 7: working flank ranks [0, 1, 2, 3, 4], cascade [4]
+      (1, 2, 3, 4, 13, 14, 16, 17) runner rank 7: working flank ranks [0, 1, 2, 3], cascade [3]
+   no common flank, type (6, (0, 1, 2, 3, 4, 5, 0, 1)):
+      (1, 2, 3, 4, 5, 6, 9, 10) runner rank 6: working flank ranks [1, 4], cascade [1]
+      (1, 2, 3, 4, 5, 6, 17, 18) runner rank 6: working flank ranks [0, 1, 2, 3, 4], cascade [2]
+      (1, 2, 3, 4, 5, 14, 17, 18) runner rank 6: working flank ranks [0, 1, 2, 3, 4], cascade [4]
+      (1, 2, 3, 4, 13, 14, 17, 18) runner rank 6: working flank ranks [0, 1, 2, 3], cascade [3]
+   no common flank, type (0, (0, 1, 2, 3, 4, 6, 7, 0)):
+      (1, 2, 3, 4, 5, 7, 8, 9) runner rank 0: working flank ranks [4, 5, 6, 7], cascade [5]
+      (1, 2, 3, 4, 5, 7, 8, 17) runner rank 0: working flank ranks [4, 6, 7], cascade [7]
+      (1, 2, 3, 4, 5, 7, 16, 17) runner rank 0: working flank ranks [3, 4, 5, 6, 7], cascade [6]
+      (1, 2, 3, 4, 5, 15, 16, 17) runner rank 0: working flank ranks [5, 6, 7], cascade [5]
+
+== 6,000 random arrangements in [1, 400]: 48000 distinct runners, 37548 types, 3413 types with >= 2 members (holding 13865 runners)
+   runners with no working flank: 0
+   types where ONE flank rank works for every member: 3413 of 3413
+   types where the cascade's flank rank is the same for every member: 2945 of 3413
+   members per multi-member type: {2: 2008, 3: 539, 4: 259, 5: 162, 6: 85, 7: 64, 8: 42, 9: 40, 10: 32, 11: 25, 12: 23, 13: 11}
