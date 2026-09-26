@@ -1,0 +1,21 @@
+reading sets (7 distinct in 1..32): 3365856
+  settled by R1       :  1338125   (by it alone: 250706)
+  settled by ladder   :  2650034   (by it alone: 1111648)
+  settled by nudge    :   387321   (by it alone: 61984)
+  settled by revR1    :   278241   (by it alone: 9699)
+  settled by offlat   :   132943   (by it alone: 15629)
+  settled by flanksum :   320804   (by it alone: 668)
+  settled by none of them: 231062
+  (in the first 400 per start) cascade isolation for the unsettled: at the bound / lap k: [((False, 1), 862), ((False, 2), 168), ((False, 3), 115), ((False, 4), 90), ((True, 0), 365)]
+    T (1, 2, 3, 4, 5, 7, 24): isolation at scale reading 7, lap 1, R 1.286, 2 moves
+    T (1, 2, 3, 4, 5, 24, 28): isolation at scale reading 24, lap 3, R 1.042, 1 moves
+    T (1, 2, 3, 4, 7, 8, 30): isolation at scale reading 7, lap 1, R 1.286, 2 moves
+    T (1, 2, 3, 4, 7, 16, 30): isolation at scale reading 7, lap 1, R 1.286, 2 moves
+    T (1, 2, 3, 4, 7, 24, 25): isolation at scale reading 24, lap 4, R 1.375, 4 moves
+    T (1, 2, 3, 4, 7, 24, 30): isolation at scale reading 7, lap 1, R 1.286, 2 moves
+    T (1, 2, 3, 4, 8, 14, 30): isolation at scale reading 14, lap 2, R 1.214, 2 moves
+    T (1, 2, 3, 4, 8, 21, 30): isolation at scale reading 21, lap 3, R 1.190, 2 moves
+    T (1, 2, 3, 4, 8, 28, 30): isolation at scale reading 28, lap 4, R 1.179, 2 moves
+    T (1, 2, 3, 4, 10, 24, 28): isolation at scale reading 24, lap 3, R 1.042, 1 moves
+    T (1, 2, 3, 4, 14, 16, 30): isolation at scale reading 14, lap 2, R 1.214, 3 moves
+    T (1, 2, 3, 4, 14, 24, 25): isolation at scale reading 24, lap 3, R 1.042, 1 moves

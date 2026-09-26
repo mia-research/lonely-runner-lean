@@ -1,0 +1,12 @@
+sets settled by none of the proved lemmas: 231062
+  ('q', 2, 'pusher not the largest'): 153327
+  ('q', 3, 'pusher not the largest'): 70333
+  ('q', 4, 'pusher not the largest'): 3929
+  ('q', 2, 'pusher is the largest'): 1832
+  ('q', 5, 'pusher not the largest'): 1230
+  ('q', 3, 'pusher is the largest'): 353
+  ('q', 4, 'pusher is the largest'): 28
+  ('q', 5, 'pusher is the largest'): 19
+  ('q', 7, 'pusher not the largest'): 10
+  ('q', 6, 'pusher not the largest'): 1
+  examples still unsettled: []
