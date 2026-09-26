@@ -1,0 +1,3 @@
+bound not lonely: 145368; the first move isolates: 54642
+  (lambda - 1) in eighths, floor: [(0, 47481), (1, 97887)]
+  why the first move does not isolate (kinds of readings in the slot at t1): [(('edge',), 90726)]
