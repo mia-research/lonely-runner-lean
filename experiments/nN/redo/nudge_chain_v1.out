@@ -1,0 +1,14 @@
+exhaustive, readings <= 24: relays 145368
+  length (capped 6): [][(1, 54642), (2, 42816), (3, 25693), (4, 11340), (5, 5259), (6, 5618)]
+  the lambdas decrease along the chain: 81291
+  a setter repeats: 9091
+  a wrap occurs: 376
+  a setter comes back: 10062
+  among chains of length >= 2: lambdas decrease 26649 of 90726
+wide, d_min 1..20, readings to 2000: relays 30997
+  length (capped 6): [][(1, 13019), (2, 9323), (3, 4921), (4, 2179), (5, 932), (6, 623)]
+  the lambdas decrease along the chain: 21661
+  a setter repeats: 1253
+  a wrap occurs: 3346
+  a setter comes back: 1577
+  among chains of length >= 2: lambdas decrease 8642 of 17978
