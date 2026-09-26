@@ -2805,3 +2805,23 @@ one at a time; 1,920 moves) `[VERIFIED — exact]`:
 - **Evidence:** the exact certificates show it for `S ≤ 24` (no climb leaves band 1, E49–E52, E66). In Case C band 0 is
   never fully blocked (E56, E73).
 - **Next:** find the reason in the configuration at `R = 9`, where runner 0 hands the relay into band 1.
+
+---
+
+## E82 — 2026-09-26 — step 3 probe: band 1 is band 0 mirrored and shifted; the landing sits over band 0's thinnest point
+
+**The mirror** `[PROVED — one line]`. In `R = 8·d_min·t`, runner `j` sits at `ρ_j·R/8`, and at `16 − R` it sits at
+`2ρ_j − ρ_j·R/8`: the reflection of its band-0 position, shifted by `frac(2ρ_j)`. The nearest runner (`ρ = 1`) and any
+runner with `2ρ_j` whole are mirrored exactly. So band 1 (`R ∈ [9, 15]`) is band 0 (`[1, 7]`) reflected, with every
+other runner displaced by its own shift.
+
+**Hard cases, read through the mirror** (`band_mirror_v1.{py,out}`; exact; the top 8 of E81) `[VERIFIED — exact]`. At
+the landing `R*` in band 1, the mirror instant `16 − R*` in band 0 is blocked, as a late event requires. It is blocked by
+**one** runner in 6 of 8 cases and by two in 2, each sitting just inside its zone edge (`0.1–0.5` or `7.2–7.9` eighths).
+Its shift `frac(2ρ_j)` carries it clear at `R*`, while the pinner sits exactly on an edge at `1.00`. Band 1 opens over
+band 0's most thinly blocked point.
+
+**Candidate law for step 4:** a full block of band 0 must be thin somewhere, at a point covered by a single runner near
+its edge, and that runner's shift `frac(2ρ_j)` frees the mirror point in band 1 unless `2ρ_j` is whole. To test next:
+- does band 1 always open at the mirror of a singly covered band-0 point?
+- which full blocks of band 0 are thick everywhere (every point covered twice, or by mirrored runners), and do any exist?
