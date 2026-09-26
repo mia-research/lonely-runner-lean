@@ -1,0 +1,8 @@
+bound not lonely: 49654; the first move isolates: 20767
+  failure kinds ('edge',): 23807
+  failure kinds ('wrap',): 2230
+  failure kinds ('edge', 'wrap'): 1039
+  failure kinds ('back',): 738
+  failure kinds ('back', 'edge'): 467
+  failure kinds ('back', 'wrap'): 466
+  failure kinds ('back', 'edge', 'wrap'): 140
