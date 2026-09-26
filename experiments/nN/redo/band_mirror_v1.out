@@ -1,0 +1,32 @@
+V [171, 222, 292, 338, 389, 442, 472, 557]: R* = 11.4633, mirror 16 - R* = 4.5367
+   shifts frac(2 rho_j): [0.0, 0.745, 0.549, 0.549, 0.627, 0.804, 0.137]
+   blocking the mirror instant: [4]; their positions there (eighths) [0.107]; at R* [4.913]
+   all positions at R* (eighths): [3.463, 3.197, 5.537, 1.0, 4.913, 3.656, 6.761]
+V [72, 138, 236, 283, 358, 438, 534, 594]: R* = 10.4286, mirror 16 - R* = 5.5714
+   shifts frac(2 rho_j): [0.0, 0.97, 0.394, 0.667, 0.091, 0.0, 0.818]
+   blocking the mirror instant: [3]; their positions there (eighths) [0.143]; at R* [5.19]
+   all positions at R* (eighths): [2.429, 1.913, 1.34, 5.19, 1.831, 1.0, 2.481]
+V [132, 184, 304, 353, 381, 407, 437, 524]: R* = 10.2329, mirror 16 - R* = 5.7671
+   shifts frac(2 rho_j): [0.0, 0.615, 0.5, 0.577, 0.577, 0.731, 0.077]
+   blocking the mirror instant: [2]; their positions there (eighths) [0.51]; at R* [3.49]
+   all positions at R* (eighths): [2.233, 1.847, 3.49, 1.0, 6.116, 4.02, 5.141]
+V [216, 265, 340, 376, 422, 440, 495, 562]: R* = 10.7188, mirror 16 - R* = 5.2812
+   shifts frac(2 rho_j): [0.0, 0.061, 0.531, 0.408, 0.143, 0.388, 0.122]
+   blocking the mirror instant: [4]; their positions there (eighths) [0.143]; at R* [1.0]
+   all positions at R* (eighths): [2.719, 3.125, 3.0, 5.062, 1.0, 5.031, 3.688]
+V [98, 168, 276, 328, 383, 417, 494, 592]: R* = 10.7524, mirror 16 - R* = 5.2476
+   shifts frac(2 rho_j): [0.0, 0.086, 0.571, 0.143, 0.114, 0.314, 0.114]
+   blocking the mirror instant: [4]; their positions there (eighths) [7.914]; at R* [1.0]
+   all positions at R* (eighths): [2.752, 3.342, 3.329, 3.777, 1.0, 4.828, 3.881]
+V [16, 93, 203, 257, 337, 417, 456, 565]: R* = 10.5436, mirror 16 - R* = 5.4564
+   shifts frac(2 rho_j): [0.0, 0.857, 0.26, 0.338, 0.416, 0.429, 0.26]
+   blocking the mirror instant: [5]; their positions there (eighths) [7.18]; at R* [4.249]
+   all positions at R* (eighths): [2.544, 1.606, 1.0, 3.954, 6.909, 4.249, 3.174]
+V [97, 157, 248, 294, 342, 365, 429, 518]: R* = 10.4038, mirror 16 - R* = 5.5962
+   shifts frac(2 rho_j): [0.0, 0.033, 0.567, 0.167, 0.933, 0.067, 0.033]
+   blocking the mirror instant: [4, 6]; their positions there (eighths) [0.996, 7.267]; at R* [6.47, 1.0]
+   all positions at R* (eighths): [2.404, 2.183, 2.159, 2.482, 6.47, 1.568, 1.0]
+V [2, 85, 210, 274, 339, 371, 458, 585]: R* = 10.3928, mirror 16 - R* = 5.6072
+   shifts frac(2 rho_j): [0.0, 0.012, 0.554, 0.12, 0.892, 0.988, 0.048]
+   blocking the mirror instant: [4, 6]; their positions there (eighths) [0.928, 7.386]; at R* [6.204, 1.0]
+   all positions at R* (eighths): [2.393, 2.045, 2.058, 2.197, 6.204, 1.098, 1.0]
