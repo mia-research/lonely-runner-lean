@@ -3377,3 +3377,50 @@ slot at the bound, a double grid collision, which one move cannot remove. Their 
 runner's second or third opening comes just after the bound: of the 35,215, those set on lap 3 have `R* < 1.25` in 9,444
 of 15,089, and every lap-`K` group has most of its mass below `R* = 1.75` (`lap1_stuck_check_v1.out`). The displacement
 is `R*`, and these sets are displaced little.
+
+---
+
+## E104 — 2026-09-27 — the proof plan against the Lean tree; the double collisions moved off the grid
+
+**Owner:** asked to check the proof plan (`PROOF_PLAN_ORDER8_v1.md`) is still correct and whether Cases A, B and C are
+all still needed, *"as I feel some of our lean work might have lightened the load"*; and to run the continuous
+perturbation of the double collisions.
+
+**Two proved reductions, both axiom-clean (Spec gate 2026-09-27).**
+1. `SlowestSkeletonN.lonelyRunnerAt8_of_cases T`: the conjecture from `CaseB8 T` and `CaseC8 T`, Case A by R1. Both
+   Props quantify over **every** reading set of a slowest runner, i.e. every set of seven distinct positive whole
+   numbers.
+2. `OrderEightN.lonelyRunnerAt8_iff_residual` (both directions): the conjecture holds **exactly when every
+   `EightResidual` set is lonely at `1/8`**. `EightResidual` keeps only sets with an odd reading, no common factor, a
+   multiple of each of 5, 6, 7 and 8, `7a < b` for some pair (the `spread` field), cost `≥ 8`, and none of the proved
+   openings: free flank, shifted, fast singleton, first lap or `−7` at any flank, rational openings at `N ∣ 8`, thirds,
+   fifths, `N = 6, 7, 9`, any resolution `D ≤ 64`, fast pair, block split.
+
+**What this does to the plan** `[PROVED — reading of the two Lean statements]`:
+- **Case A is not needed.** The `spread` field excludes R1 sets from the residual.
+- **Cases B and C are needed only on residual sets.** Plan v1 owes them on every set; route 2 owes them only where
+  every proved opening has failed.
+- **On all 7-subsets of `[1, 40]` the residual is empty** (`experiments/nN/eight_residual_count_v6.out`: the v5
+  residual's seven sets clear at `D ≤ 5`) `[VERIFIED — exhaustive exact, finite window]`. The residual is infinite, so
+  this is a window, not a proof.
+- **Stale open item.** Handover v4 §5.6 lists the residual sets `(2,12,15,21,32,34,38)` and `(4,7,8,15,29,36,37)` as
+  unresolved. Both lie in `[1, 40]`, so neither is in the current residual; the cascade isolates them at `R* = 34/21`
+  (3 moves) and `36/29` (1 move). Both have `W/d_min ≤ 24`, Case B.
+- Plan v1 also predates E56: its B/C boundary is 22 (now 24), and its Case C sub-cases (separated scales, compact
+  clump) overlap residual fields that are already proved (fast pair, block split, fast singleton). A plan v2 stating the
+  target as the residual statement is owed.
+
+**The double collisions, moved continuously** (`double_collision_v1.{py,out}`; exact; four of E103's 232; readings 16
+and 24 moved by `j/16`, `|j| ≤ 15`, singly and together) `[VERIFIED — these four sets]`:
+- In `(1,2,3,4,15,16,24)` and `(1,2,3,10,15,16,24)` the isolation **does not move at all**: `R* = 17/15` throughout,
+  opened by runner 15. At the bound (`d_min = 1`, every reading on an eighth) runner 15 sits exactly on the entering
+  edge `7/8`; the colliders on residue 0 force a forward move, any forward move carries 15 into the slot, and the
+  isolation is at 15's exit `(2 + 1/8)/15`. The colliders decide that the isolation moves, not where to.
+- In `(1,2,3,4,16,22,24)` the landing is 22's exit (`25/22`; 22 on residue 6 is carried in by 16's exit) until 16
+  moves up by `5/16`; then 16's own exit comes first and the isolation is there, `R* = 272/261`, then 24's (`25/24`).
+- In `(1,2,3,4,16,23,24)` it is 23's exit (`25/23`; 23 on the entering edge), or 16's own once 16 moves below 16 far
+  enough to be the last to leave (`272/241`).
+
+So in these sets the displacement is set by the runner nearest the entering edge at the bound (residue 7, or 6), the
+leaving/entering pair of the pair law, and the collider only forces the direction. This is E93's edge push, seen
+exactly; the second collider plays no separate part.
