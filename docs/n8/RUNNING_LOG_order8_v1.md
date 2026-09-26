@@ -3485,3 +3485,34 @@ No runner lacked a working flank. `[EMPIRICAL]`
   outliers) are far coarser; whether a coarse class decides the flank is untested.
 - **Not yet examined:** the lap `j`. It is unbounded (§6.10, `k ≈ linear in S`), so a finite case split can name it
   only as a formula in the arrangement, not as a constant.
+
+---
+
+## E37 — 2026-09-27 — the flank is a consequence, and the cascade read move by move
+
+**Author:** the flank is a proxy for isolation, not isolation; the cascade directs you to the event; it is not a black
+box. Agreed. At the event some runner sits exactly one eighth away (Thm 6.2(d)): that runner *is* the flank, after the
+fact. Choosing a flank first and checking the rest is a search (E36 and my step 5 both did it). In Lean the
+cascade-directed door is `DoorArrives` (`∃ N`, the map from the runner's first reading reaches a fixed point; no cap;
+`doorArrives_iff`); the move is a written-down rule (`Target.lean`). Whether it replaces `DoorFlank` as the obligation of
+record is the author's call.
+
+**The 28-move case read move by move** (`experiments/nN/redo/cascade_mechanics_v1.out`): `(27,70,107,137,159,188,344,393)`,
+runner 393, differences `−366, −323, −286, −256, −234, −205` (a clump, ratio 1.79) and `−49` (the nearest runner).
+- **The nearest runner is the clock.** It starts exactly one eighth behind (7.00) and drifts steadily down through the
+  slots, `7.00 → 6.80 → … → 1.09` over moves 0–22, about 0.2–0.4 eighths per move. The whole relay of 23 moves happens
+  inside one of its laps. At move 23 it reaches the subject's slot itself (0.98) and its own opening is a large step.
+- **The clump relays.** Each move advances every runner by `g·d_y/d_x` eighths (`g` the setter's shortfall below its
+  landing slot, 0.4–2.0): clump runners by 1–3 eighths, the clock by 0.1–0.4. Through moves 3–23 the clump spans an arc
+  of **5.1–6.2 eighths**, so as it turns one member keeps falling into the subject's slot band `(7, 1)`; each move puts
+  that member one slot ahead and another arrives.
+- **It lands when the clump fits.** After the clock's lap step the clump's arc is **4.0–4.6 eighths**; five moves later
+  (move 28) the bunch sits in `[2.39, 5.07]`, the setter at 7.00 and the clock at 5.74: nobody in the band.
+
+**The mechanism, in the framework's terms** `[reasoned from one trace]`. A group that fits in an arc of at most 6
+eighths is the same condition as E33's "offsets leave a gap of at least 1/4" (2 eighths). The relay is a group whose
+members are spread over more than 6 eighths; its arc changes only through the group's **internal** speed differences
+(relative positions move at `8·Δd` eighths per unit time), not through the moves. For a far train the common position is
+free, so only the arc condition matters (E33, `SyncPeriodN`); for a near clump the common position is carried by the
+clock, and landing needs the arc condition **and** the gap sitting on the subject's slot. Not yet checked beyond this
+case.
