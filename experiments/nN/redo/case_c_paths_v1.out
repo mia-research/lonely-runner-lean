@@ -1,0 +1,101 @@
+Case C (slowest runner, g_1 < W/22): event location and the six runners' wait, in laps of d_2
+  even              g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.504 laps of d_2; max WAIT/ROOM 0.1068
+  even              g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.248 laps of d_2; max WAIT/ROOM 0.0211
+  even              g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.597 laps of d_2; max WAIT/ROOM 0.0046
+  clumped+outliers  g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.253 laps of d_2; max WAIT/ROOM 0.0468
+  clumped+outliers  g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.377 laps of d_2; max WAIT/ROOM 0.0134
+  clumped+outliers  g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 1.297 laps of d_2; max WAIT/ROOM 0.1218
+  even+clump        g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.183 laps of d_2; max WAIT/ROOM 0.0323
+  even+clump        g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.378 laps of d_2; max WAIT/ROOM 0.0214
+  even+clump        g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.685 laps of d_2; max WAIT/ROOM 0.0471
+
+=== even rest: [1000, 1020, 1520, 2010, 2490, 3000, 3515, 4000]  (g1 = 20, W = 3000)
+   runner 4 moved:
+      delta= -40 u*=0.1282 wait=0.084 laps  wait/room=0.0043 pins=[5]
+      delta= -32 u*=0.1253 wait=0.007 laps  wait/room=0.0003 pins=[2] jump
+      delta= -24 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0] jump
+      delta= -16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  -8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   0 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  24 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  32 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  40 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+   runner 6 moved:
+      delta= -40 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -32 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -24 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  -8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   0 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  24 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  32 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  40 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+   runner 8 moved:
+      delta= -40 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -32 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -24 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta= -16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  -8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   0 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=   8 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  16 u*=0.1250 wait=0.000 laps  wait/room=0.0000 pins=[0]
+      delta=  24 u*=0.1282 wait=0.084 laps  wait/room=0.0043 pins=[5] jump
+      delta=  32 u*=0.1262 wait=0.030 laps  wait/room=0.0015 pins=[6] jump
+      delta=  40 u*=0.1258 wait=0.021 laps  wait/room=0.0011 pins=[6] jump
+
+=== clumped + outliers: [1000, 1003, 1010, 1017, 1030, 5030, 5040, 9040]  (g1 = 3, W = 8040)
+   runner 4 moved:
+      delta=   0 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4]
+      delta=   8 u*=0.1350 wait=0.033 laps  wait/room=0.0133 pins=[2] jump
+   runner 6 moved:
+      delta= -40 u*=0.1250 wait=0.000 laps  wait/room=0.0001 pins=[6]
+      delta= -32 u*=0.1250 wait=0.000 laps  wait/room=0.0001 pins=[6]
+      delta= -24 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4] jump
+      delta= -16 u*=0.1250 wait=0.000 laps  wait/room=0.0001 pins=[6] jump
+      delta=  -8 u*=0.1250 wait=0.000 laps  wait/room=0.0001 pins=[6]
+      delta=   0 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4] jump
+      delta=   8 u*=0.1250 wait=0.000 laps  wait/room=0.0001 pins=[6] jump
+   runner 8 moved:
+      delta= -40 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4]
+      delta= -32 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[6] jump
+      delta= -24 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4] jump
+      delta= -16 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4]
+      delta=  -8 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[6] jump
+      delta=   0 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4] jump
+      delta=   8 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4]
+      delta=  16 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[6] jump
+      delta=  24 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4] jump
+      delta=  32 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[4]
+      delta=  40 u*=0.1252 wait=0.001 laps  wait/room=0.0002 pins=[6] jump
+
+=== even rest + a clump: [1000, 1007, 1507, 1512, 1516, 2016, 2510, 3000]  (g1 = 7, W = 2000)
+   runner 4 moved:
+      delta=   0 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+   runner 6 moved:
+      delta= -40 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta= -32 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta= -24 u*=0.1279 wait=0.210 laps  wait/room=0.0039 pins=[4] jump
+      delta= -16 u*=0.1269 wait=0.136 laps  wait/room=0.0025 pins=[4] jump
+      delta=  -8 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6] jump
+      delta=   0 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta=   8 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta=  16 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta=  24 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6]
+      delta=  32 u*=0.1277 wait=0.199 laps  wait/room=0.0037 pins=[4] jump
+      delta=  40 u*=0.1268 wait=0.129 laps  wait/room=0.0024 pins=[4] jump
+   runner 8 moved:
+      delta= -40 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta= -32 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta= -24 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta= -16 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta=  -8 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta=   0 u*=0.1264 wait=0.104 laps  wait/room=0.0019 pins=[6] jump
+      delta=   8 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1] jump
+      delta=  16 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta=  24 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta=  32 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
+      delta=  40 u*=0.1260 wait=0.071 laps  wait/room=0.0013 pins=[1]
