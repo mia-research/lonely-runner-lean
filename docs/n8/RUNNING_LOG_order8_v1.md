@@ -2527,3 +2527,48 @@ speeds (E67), and in the even family all six are comparable.
 none of the comparable-speed fast groups. The empirical bound (`R ≤ 7`) is strong and survives an adversarial push.
 The missing piece is the same object seen three times now (E56 window lemma, E67 accounting, E68 clumps): a fast group
 of comparable speeds must find a common clear instant inside the core's clear set, without the nested-window doubling.
+
+---
+
+## E74 — 2026-09-26 — the circle geometry at the isolation; grids; the grid pair law in Lean
+
+**Owner** (in order): *"Test the cascade and find out"*; *"Do you see that you are trying to explain what the cascade
+does, so if any part fails your explanation is wrong because the cascade doesn't fail. Please keep going autonomously
+until you have a proof"*; *"why does it seem like you are trying to prove all these proxies rather than how and why speed
+changes deform the location of the isolation?"*; *"why do you need bands? … any arrangement of speeds simply moves the
+isolation point. Deforms the circle geometry to relocate the isolation … USE cascade"*; *"other global isolations happen
+other than just AP, so you can have 1…7, 16 but the runners need to be on a speed on a mod n location I call in early
+work grid"*.
+
+**Proxies set aside.** The window forms (`Q(F)`, `q_window_v1`, `q_climb_v1`: every blocked stretch of a six-set past
+`T₀` ends within 7× its start; 4,276 of 4,276 random, then climbed to 5.83 of 7) are statements about stretches of time,
+not about where the isolation is. They are recorded and not built on.
+
+**The circle geometry, traced** (`circle_deform_v1`, `circle_mechanism_v1`; exact; paths from the progression, every
+runner as subject) `[VERIFIED — exact, 25 arrangements × 8 subjects]`:
+- At the progression each subject sees the other seven one per eighth (`1/8 … 7/8`).
+- The runner pinning the isolation sits exactly on an edge of the subject's slot: `1/8` if it moves forward, `7/8` if
+  it moves backward.
+- **1,634 relocations:** 613 forward and 982 back. In 618, two runners sat at the same slot edge just before, one leaving
+  and one arriving from the other direction: the pinch-offs. After such a pinch the arriving runner pins the relocated
+  isolation from the far edge in 185; the cascade relays on in 432. The backward relocations are to a place that opens
+  earlier; no pinch is involved.
+
+**Grids (owner).** Global isolation holds at every grid, not only the progression: reduced speeds a complete residue
+system mod 8. At `t = a/(8g)`, each subject sees the others at `a·n_j/8`, one on each nonzero eighth.
+
+**The grid pair law** (`LRC/Spec/GridPairN.lean`, commit `a376e70`; Spec gate PASS, 1,606 declarations, axiom-clean)
+`[PROVED — axiom-clean]`. `grid_pair` covers any subject at any instant `t` of any arrangement. Suppose runner `p` sits
+exactly at `a·n_p/8 ≡ 1/8`, runner `q` within `1/56` of `a·n_q/8 ≡ 7/8`, and every other runner within `1/56` of
+`a·n_j/8 ≡ 2 … 6`. Then the subject is lonely at `t` or at `((8 − a)/a)·t`. At the partner instant each position is the
+reflection of `a·n_j/8 − ((8 − a)/a)·D_j` (`partner_position`), so `q` is on the clear side at one of the two. For
+`a = 1` the partner is `7t`. This generalises `ProgressionPairN` from the progression to every grid pattern.
+
+Checked first (`grid_pair_v1`): random grids, all subjects, perturbations up to `0.001` per speed keep both pairs, 2,400
+of 2,400. At `0.01` the losses were the search window: with it widened ×4, 2,400 of 2,400. At `0.05`, 2,340 of 2,400.
+
+**How far ordinary isolation sits from a grid pattern** (`event_pattern_v1`; exact; 400 random arrangements × 8
+subjects) `[VERIFIED — exact]`. At the cascade isolation point the seven others fall on distinct nonzero nearest eighths
+in only **26 of 3,200** events. Within `1/56` of their nearest eighths: 61; within `1/56` and a grid pattern: 1.
+Ordinary isolation points are far from grid patterns: runners share eighths. The grid pair law is the local
+displacement law around every grid; it does not by itself carry an arbitrary arrangement.
