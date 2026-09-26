@@ -3103,3 +3103,23 @@ is. Crowded groups are carried through intact and do not need separating. The ow
 is consistent with that: a crowded group moves as one. What the cascade has to resolve at the bound is the reading
 that collides with the subject's own residue class, and its first move goes to that reading's own exit
 (`(8k+1)/(8b)`, the bound nudged by the colliding reading).
+
+---
+
+## E93 — 2026-09-27 — the first move is a nudge at the nearest runner's scale
+
+(`nearest_nudge_v1.{py,out}`; exact; the 145,368 sets of seven readings in `1 … 24` where the bound is not lonely)
+`[VERIFIED — exhaustive exact]`. At the bound `t₀ = 1/(8m)`, `m = d_min`, each reading sits at `ρ = d/(8m) mod 1`. The
+first move goes to the latest collider's exit `t₁ = (8k+1)/(8b)`, which multiplies the scale by `λ = t₁/t₀` and moves
+every reading forward by `Δ = d·(t₁ − t₀) = (λ − 1)·d/(8m)` laps, in proportion to its size.
+- **The first move isolates 54,642.**
+- **In all 90,726 others, the reading left in the slot was clear at the bound and was pushed forward across the
+  entering edge `7/8`** (`Δ < 3/4`). There are no wraps (`Δ ≥ 3/4`) and no colliders returning.
+- `λ − 1 < 1/4` in all 145,368 (`< 1/8` in 47,481).
+- **Caveat, recorded before use:** with readings `≤ 24`, the shift `(λ − 1)·d/(8m)` stays under about `3/4`, so "no
+  wraps" is largely forced by the range. It is not evidence about wide-spread sets and must be checked on them.
+
+**Reading.** The first move is a nudge at the nearest runner's own scale: every reading shifts forward in proportion to
+its size, and the move fails only when a reading near `7/8` is pushed over the edge. The room condition is
+`ρ + Δ ≤ 7/8` for the readings near the edge. The pushed reading's exit is the next move, so the relay is a chain of
+such nudges.
