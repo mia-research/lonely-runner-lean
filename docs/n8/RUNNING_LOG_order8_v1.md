@@ -2669,3 +2669,45 @@ on.
   repeats) until the spacing opens past 2, at `u ≈ 1.056`.
 - **The hardest climbs:** the setters relay through all six with no repeated word. Each move moves one residue to
   `1.00`, and the isolation arrives when every residue is out of the arc at once (e.g. `u = 6.42`).
+
+---
+
+## E77 — 2026-09-26 — the flank sum criterion in Lean; how a grid achieves isolation
+
+**Owner:** *"keep going, use the survey and prove the grid part … There is a proof there to be found. Cascade working
+for all arrangements tested is not a fluke"*; *"Yes start on step 1. And after maybe we need to map how the grid achieves
+isolation if there is a pattern and then we can look at how cascade is mapping those isolation points when the speeds
+are moved off grid, just like we did with AP."*
+
+**The survey** (a read-only sweep of `docs/n8`, `docs/nN`, `LRC/Cascade` and `LRC/Spec`) found that no proved result
+seats more than three wrapped readings. At order 8 the flank sum criterion (`T4_FLANKS_v3` §3(d)) reaches three
+movers, and the termination results (`ManyDifferences`, `FourDifferences`) stop at `2k < 8`.
+`docs/nN/RESIDUE_DYNAMICS_v1.md` already has the residue picture of E76: the cascade is a map on the residue vector,
+and non-termination is a blocked cycle covering a whole period.
+
+**`LRC/Spec/FlankSumN.lean`** (commit `238f4e8`; Spec gate PASS, 1,613 declarations, axiom-clean) `[PROVED —
+axiom-clean]`:
+- **`arc_count`:** an open quarter-lap arc holds at most `c/4 + 1` of the points `i/c + β`, `i = 0 … c − 1`
+  (`card_filter_shift` moves the count to a window where the arc does not wrap; `card_int_Ioo_le` counts the integers).
+- **`mover_count`:** a mover of ratio `a/c` (`c`, `a` coprime) is in the way at most `N/4 + N/c` times among the
+  openings `0 … N − 1`, for `c ∣ N` (`count_mul`: periodicity; `k ↦ a·k mod c` is injective on one period).
+- **`flank_sum`:** at a flank `e`, suppose every runner outside the movers `M` has a whole ratio `A` with `8 ∤ A`, and
+  `Σ_{d ∈ M} (1/4 + 1/c_d) < 1`. Then some opening of `e` is lonely.
+
+This is the rational (whole-number arrangement) case of `T4_FLANKS_v3` §3(d), now in Lean. It seats up to three movers.
+Four movers reach the sum `1` and are the open core.
+
+**How a grid achieves isolation** (`grid_map_v1.{py,out}`; exact, BSM; 150 random grids × 8 runners, the complete lonely
+set over one period `[0, 1/g)`) `[VERIFIED — exact]`:
+- **Every runner of every grid has exactly four lonely components through the φ(8) instants `a/(8g)`**, one per
+  instant (1,200 of 1,200); many are single points.
+- **Every runner also has other lonely components:** from 4 to 46 or more per runner, and none of the 1,200 is lonely
+  only at the φ(8) instants.
+- The cascade's isolation is a φ(8) instant in only 177 of 1,200. Usually it finds an earlier, runner-own isolation:
+  the bound `1/(8·d_min)` comes before `1/(8g)` when `d_min > g`.
+
+The φ(8) instants are the grid's guaranteed global isolation; each runner holds more isolation of its own besides.
+Their persistence off the grid is `GridPairN.grid_pair`.
+
+**Next (owner):** move the speeds off the grid and map with the cascade how those isolation points are displaced, as E69
+did from the progression.
