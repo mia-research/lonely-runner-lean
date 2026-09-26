@@ -1,0 +1,5 @@
+reading sets: 346104
+  cascade instant is a view: 310889
+  not a view: 35215
+  a later view isolates: 35215
+  the view the cascade lands on, by family: [('B', 200736), ('O', 63806), ('R', 37438), ('V', 7847), ('L', 1062)]
