@@ -2572,3 +2572,49 @@ subjects) `[VERIFIED — exact]`. At the cascade isolation point the seven other
 in only **26 of 3,200** events. Within `1/56` of their nearest eighths: 61; within `1/56` and a grid pattern: 1.
 Ordinary isolation points are far from grid patterns: runners share eighths. The grid pair law is the local
 displacement law around every grid; it does not by itself carry an arbitrary arrangement.
+
+---
+
+## E75 — 2026-09-26 — "a deformation only moves the isolation", made exact: closed, open, connected
+
+**Multipliers at a pinch are not the mechanism** (`pinch_multiplier_v1.{py,out}`; exact; 1,753 pinches) `[VERIFIED —
+exact]`. At a pinch `t*` the pinching pair sits on the edges `1/8`, `7/8`; at `λt*`, `λ ≡ 3, 5 (mod 8)`, it sits at
+`3/8`, `5/8`. All seven are strictly clear at `3t*` or `5t*` in 824 of 1,753. The smallest working `λ` then decays
+geometrically, and 10 pinches have none up to 200. That is the chance rate, not a law (E-lesson 9).
+
+**The reduction** `[PROVED — in the text below; the pieces marked are in Lean]`. Work in ratio coordinates for the
+slowest runner: `X = {1 = ρ₁ < ρ₂ < … < ρ₇}`, open and convex in `ℝ⁶` (every runner, every positive-speed arrangement,
+by `EndRunnerN` and scale invariance). Fix a window `R = 8·d_min·t ∈ [1, B]`.
+1. `P = {ρ ∈ X : lonely at some R ∈ [1, B]}` is **closed** in `X`: a limit of lonely instants in a compact window is
+   lonely (`DeformationN.lonelyAt_of_limit`).
+2. `P` is **open** at every `ρ` whose lonely set in the window has an interval of positive length: its interior points
+   are strictly clear and stay so under small changes (`DeformationN.lonelyAt_of_close`). Call `ρ` **fragile** when
+   its lonely set in the window is finite (isolated points only).
+3. Every isolated lonely point lies on a **wall**: a hyperplane `ρ_b(8k + 1) = ρ_a(8m − 1)` (runner `a` leaving at
+   `1/8` exactly as `b` enters at `7/8`; at `R = 1`, `ρ_b = 8m − 1`). The fragile set lies in the countable union of
+   walls.
+4. A polygonal path in general position avoids every pairwise intersection of walls (codimension 2). At a fragile
+   point on it, every isolated lonely point lies on the same wall. Crossing that wall, each such point opens on one
+   side and vanishes on the other. For a pair of the progression type (`t*`, `7t*`: the same two runners with roles
+   reversed) the two open on opposite sides.
+5. **Start** at a grid: every direction off it keeps a lonely instant (`GridPairN.grid_pair`,
+   `ProgressionPairN.pair_law`, proved).
+
+Hence `P = X` (lonely within `R ≤ B` for every arrangement, so LRC at eight runners) **if and only if** the following
+lemma holds:
+
+> **(L) Wall lemma.** At every fragile point on a single wall, the window's isolated lonely points do not all open on
+> the same side.
+
+The simplest failure of (L) is an arrangement whose window lonely set is a single degenerate point. (L) is the
+precise content of "a speed change only moves the isolation": at every wall, the isolation survives on both sides.
+If (L) fails at some wall, then arrangements just across it are not lonely within the window.
+
+**Evidence** `[VERIFIED — exact, these paths]`: at each of the 1,753 pinch-offs of E69 and the 8,353 of E71, the window
+held at least 7 other lonely components with positive length (E70). So no pinch met a fragile point, and (L) held
+trivially. The known fragile points are the tight instances `{1…7}`, `{1,2,3,4,5,7,12}`, `{1,4,5,6,7,11,13}` (memory
+`project_n8_tight_instances`: lonely only at `{1/8, 3/8, 5/8, 7/8}`). `grid_pair` needs one runner `≡ 1`, one `≡ 7` and
+the rest `≡ 2…6 (mod 8)`, not distinct residues, and all three fit it for both pairs `(1,7)` and `(3,5)`.
+
+**Next:** prove (L). First establish, with the cascade and BSM, which fragile points exist at all (every lonely point
+degenerate), starting from the known tight instances and pushing arrangements towards fragility exactly.
