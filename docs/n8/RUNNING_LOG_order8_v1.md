@@ -2904,3 +2904,34 @@ by `±d/(8d₀)`.
   than `1/8`.
 - **Where the nudge cannot work:** the sets holding readings at both edges, `≡ 1` and `≡ 7 (mod 8)`, the pinned pair of
   the grid. There the cascade moves to a different reading's scale. That is what to follow next.
+
+---
+
+## E86 — 2026-09-26 — the grid nudge in Lean; the pinned pair through the cascade; reverse patterns
+
+**Owner:** *"Are you trying to force all runners to agree on a scale? That is not required in the framework. Merely any
+speed is just AP/grid and a deviation that is forced by d_min"*; *"lets see if we can turn it into a lemma of worth"*;
+*"Reverse patterns show up all the time. For the AP 4 global isolation, its two patterns and its inverts."*
+
+**`LRC/Spec/GridNudgeN.lean`** (commit `477c551`; Spec gate PASS, 1,617 declarations, axiom-clean) `[PROVED — axiom-clean]`.
+Take any instant `t₀` of any arrangement where every reading sits exactly on an eighth (`w j · t₀ = m j / 8`), and let
+the largest reading `w p` be the only one on `0 (mod 8)`.
+- **`grid_nudge_forward`:** if every other reading is on residues `1 … 6`, the subject is isolated at
+  `t₀ + 1/(8·w p)`.
+- **`grid_nudge_backward`:** if every other reading is on residues `2 … 7`, it is isolated at `t₀ − 1/(8·w p)`.
+- **`nat_nudge_forward`:** the whole-number case at `t₀ = 1/8`.
+
+The nudge is each reading's own grid position plus the deviation `w j/(8·w p)` forced by one blocked runner. No common
+scale is imposed. The two nudges fail together exactly when both edges `1` and `7` are occupied: the pinned pair.
+
+**The pinned pair through the cascade** (`pinned_pair_cascade_v1.{py,out}`; exact; the 180,875 residual sets up to 32
+with one multiple of 8 and both edges occupied) `[VERIFIED — exhaustive exact]`. 97,724 are isolated at the bound
+(the smallest reading's own AP scale, `k = 0`). The rest move to another reading's scale, mostly with `k = 1`: an edge
+reading, an interior one or the multiple of 8, in comparable numbers. A recurring shape is the **largest** reading at
+its second opening, `t = 9/(8e)`. Every other reading then sits in the first lap, at `9d/e` eighths (e.g.
+`(3, 4, 5, 6, 7, 8, 25)`: `1.08 … 2.88`, with 25 on the edge).
+- **Reverse R1** (elementary, owed as a lemma): if every other reading lies in `[e/9, 7e/9]`, the subject is isolated
+  at `9/(8e)`. It is the counterpart of R1, which uses the smallest reading at `k = 0` with all others in
+  `[d_min, 7·d_min]`.
+- **The owner's framing:** reverse patterns recur throughout. The AP's four global isolation instants are two patterns
+  (`a = 1`, `3`) and their inverts (`a = 7`, `5`).
