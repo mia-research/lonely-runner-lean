@@ -3123,3 +3123,22 @@ every reading forward by `Δ = d·(t₁ − t₀) = (λ − 1)·d/(8m)` laps, in
 its size, and the move fails only when a reading near `7/8` is pushed over the edge. The room condition is
 `ρ + Δ ≤ 7/8` for the readings near the edge. The pushed reading's exit is the next move, so the relay is a chain of
 such nudges.
+
+---
+
+## E94 — 2026-09-27 — the first move on widely spread readings: the E93 caveat confirmed
+
+(`nearest_nudge_wide_v1.{py,out}`; exact; random sets with `d_min ∈ 1…20` and the rest up to 2,000; 49,654 with the
+bound not lonely) `[VERIFIED — exact, this sample]`. The first move isolates 20,767. Of the 28,887 failures:
+- edge pushes alone in 23,807;
+- wraps (a reading shifted `≥ 3/4` lap into the slot) in 3,875;
+- a collider back in the slot in 1,811 (combinations counted in each).
+
+**E93's "edge pushes only" was forced by the range.** In general a failed first move leaves three kinds of readings in
+the slot:
+- **edge:** near readings nudged over `7/8`;
+- **wrap:** far readings carried round by a shift of most of a lap, their grid residue re-read at the new scale;
+- **back:** a collider that returns.
+
+The edge kind is the nudge's room condition. The wrap kind is the grid at the new scale, as in E76 (six residues turning
+at their own rates).
