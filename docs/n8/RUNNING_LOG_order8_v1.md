@@ -3424,3 +3424,31 @@ and 24 moved by `j/16`, `|j| ≤ 15`, singly and together) `[VERIFIED — these 
 So in these sets the displacement is set by the runner nearest the entering edge at the bound (residue 7, or 6), the
 leaving/entering pair of the pair law, and the collider only forces the direction. This is E93's edge push, seen
 exactly; the second collider plays no separate part.
+
+---
+
+## E105 — 2026-09-27 — proof plan v2, the residual route; its loss check
+
+**Owner:** *"Yes"* to writing proof plan v2 on the residual route (target: every residual set is lonely; Case B within
+`24·d_min` by the certificates; Case C beyond it, open).
+
+**`docs/n8/PROOF_PLAN_ORDER8_v2.md`** (v1 kept). Checked by `compile-diff` against v1, E102–E104 and the Lean definitions
+before its first commit; the draft was repaired for every item. The corrections that change content:
+- **Theorem 6.15 is existential.** The draft said a residual set is lonely "only at" an opening `(8K+1)/(8e)` with
+  `e > 64` and `e/gcd(K, e) ≥ 10`; the correct statement is: if lonely, then lonely at some such opening, equivalently
+  every lonely opening of a reading has both properties.
+- **The converse was graded too high.** The fields negate class conditions, and Lean proves class ⇒ lonely only
+  (`band_of_class`, `lonely_eight_at_rationalOpening`). The converse (lonely at the instant ⇒ class condition) follows
+  from `rationalOpening_reading` and `r < M`; it is now stated in the plan, graded `[PROVED — in the text]`, and owed in
+  Lean (`classClear_iff_band`, WP2).
+- **`not_fast` is one-sided:** no reading more than 7 times every other; the least reading may lie far below the rest,
+  which is Case C territory.
+- **Backward views** (rung R1 backward, nudge backward) are excluded through the mirror (`GrandReturnN.lonely_mirror`),
+  to the forward instant at `q − a`; ladder rungs `a/q` for every coprime `a`.
+- **Figures:** E10's 22 members have `d_max/d_min` from 7.12 to 8.83 (all Case B); landings with rung denominator
+  `≥ 10` are 107,049 of 346,104 (the 108,428 above 8 include 1,379 at `q = 9`); the 63,806 next-opening landings are all
+  at `e ≤ 24`, excluded by the resolution field.
+- **Attribution:** the recommendation to add the views as exclusions was the session's, in chat after E104, not in E104.
+- **v1 items given fates** (plan §6): C-even and `K₆` superseded (E57–E68); the Case C window reduction measured in E56
+  (`case_c_map_v1`) and kept as a tool; B3 subsumed by residual fields; tight points carried as conditional; the owner's
+  three gap shapes and two-runner moves carried into WP3–WP4; E102's Lean hygiene items carried as WP8.
