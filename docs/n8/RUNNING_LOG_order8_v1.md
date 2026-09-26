@@ -2711,3 +2711,21 @@ Their persistence off the grid is `GridPairN.grid_pair`.
 
 **Next (owner):** move the speeds off the grid and map with the cascade how those isolation points are displaced, as E69
 did from the progression.
+
+---
+
+## E78 — 2026-09-26 — off the grid: the nearest grid, and how the cascade carries each runner's isolation from it
+
+(`offgrid_v1.{py,out}`; exact; 60 random targets, speeds in `[1, 200]`, every runner as subject; 300-step paths)
+`[VERIFIED — exact, these targets]`
+- **Every target has a grid within two speed units**: each speed moved by at most 1 for 36 targets and at most 2 for 24,
+  order kept, residues mod 8 all different. The path from that grid to the target is short.
+- **At the grid, each runner's cascade isolation is its own, not a φ(8) instant**, in 451 of 480. It sits at `R` between
+  1 and 2.32, set by the runner's nearest neighbour. The φ(8) instant is the isolation in only 29.
+- **Carried the whole way, with no relocation: 346 of 480.** The rest relocate a few times (forward pinches up to 8,
+  backward births up to 7 on one path).
+- `R` at the targets is at most 2.60.
+
+So an arrangement is a small move from a grid, and its runners' isolation mostly rides through that move unchanged. The
+isolation it carries is each runner's own isolation near its nearest neighbour's first band, which the grid also has,
+not the grid's shared φ(8) instants. The relocations that do occur are the walls of E75, now few per path.
