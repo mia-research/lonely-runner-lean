@@ -3208,3 +3208,31 @@ So `d_min` sets where the isolation starts, and the spread's nearness to `8·d_m
 grid collision at the bound (E92), and the repeating runner is that collider coming round on consecutive laps (E96).
 This matches the proof's existing split: the certificates cover `S ≤ 24`, including the late events, and Case C
 (`S > 24`) sits at the small-displacement end.
+
+---
+
+## E98 — 2026-09-27 — the repeaters perturbed
+
+**Owner:** *"If you perturb these with cascade you will see."*
+
+(`repeater_perturb_v1.{py,out}`; exact; 400 relays sampled from the 9,091 with a repeated setter, readings `≤ 24`;
+only the repeater's reading moved, by `e ∈ [−1, 1]` in steps of `1/64`) `[VERIFIED — exact, this sample]`:
+- **The repeat holds over a window of about one unit of the repeater's reading.** The interval of `e` around 0 where it
+  still sets twice is most often `10/8` wide (123 of 400); nearly all lie between `5/8` and `2`.
+- **Why the repeat stops at the window's ends:**
+
+  | cause | ends |
+  |---|---|
+  | isolated before the repeater returns | 407 |
+  | the relay reaches the repeater's next zone, but it is not in the way there | 145 |
+  | the repeater never sets | 121 |
+  | the edge of the scan | 127 |
+
+- **With the repeat, the isolation lies further out; without it, at the bound:** `R` has median 2.07 (at most 5.0)
+  with the repeat, and falls to median 1.04 once the repeat is gone.
+
+**Reading.** A repeat is a timing coincidence. The fast collider comes round again just inside the relay the others
+are running, and that return is what carries the isolation past the bound. Move its speed by about one unit and its
+return falls after the relay has already reached isolation, at `R ≈ 1.04`. So the repeat needs the others' relay to
+last exactly as long as the repeater's clear band (E67's loop), a condition about one unit wide in the repeater's
+speed.
