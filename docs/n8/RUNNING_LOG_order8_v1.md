@@ -2965,3 +2965,30 @@ by `d_min`"*, measured.
 **Next:** why the half lap `t₀ = 1/2` serves so often. There every odd reading sits at `1/2`, with margin `3/8`, and
 every even reading at `0`, blocked. The deviation must move the even readings out while the odd ones keep within
 their margin.
+
+---
+
+## E88 — 2026-09-26 — the half lap is halving; rung R1 settles all but 10 of the unsettled sets
+
+**Why the half lap** (`half_lap_v1.{py,out}`; exact; the 155,159 half-lap cases of E87) `[VERIFIED — exhaustive exact]`.
+At `t = 1/2 + δ` every even reading sits where it sits at `δ`, so the full set is isolated there exactly when the evens
+are isolated at `δ` (automatic, not a finding) and the odds, riding from `1/2`, stay clear. In 92,289 of 155,159 the
+cascade's `δ` is `±1/(8·e_min)`: the evens' own bound, a lower-order isolation with fewer runners. The evens satisfy
+R1 among themselves in most cases. This is halving. Memory records **Theorem P (halving)**, `[PROVED — in the text,
+from LRC(4)–LRC(7)]`, as settling about a tenth of the residual case by shifting the evens along their own period and
+counting. The cascade's version is different: it deviates from the rung by the evens' own bound.
+
+**Rung R1** (`rung_r1_v1.{py,out}`; exact) `[VERIFIED — exhaustive exact, readings ≤ 32]`. For a ladder rung `a/q`
+(`q ∈ 2…8`, `a` coprime to `q`), let `D_q` be the readings divisible by `q`, and test `t = a/q ± 1/(8·min D_q)`. Every
+`d ∈ D_q` sits where it sits at `D_q`'s own bound. Every other reading rides from its nonzero multiple of `1/q`. **This
+family isolates 231,052 of the 231,062 sets that no proved lemma settles**. By rung: `q = 2` 112,296; `q = 3` 79,824;
+`q = 4` 24,791; `q = 5` 12,700; `q = 6` 711; `q = 7` 702; `q = 8` 28.
+
+**The 10 it misses:** `(3,4,5,6,7,9,32)`, `(3,4,5,7,9,12,32)`, `(3,4,5,7,17,18,32)`, `(3,5,6,7,8,26,27)`,
+`(3,5,6,7,8,27,30)`, `(3,5,7,8,12,26,27)`, `(3,5,7,8,12,27,30)`, `(3,5,7,8,18,26,29)`, `(3,5,7,8,18,29,30)`,
+`(4,5,6,8,14,27,32)`.
+
+**So every reading set up to 32 except those 10** is isolated at an instant from a finite explicit menu: the bound
+`1/(8·d_min)` (R1), `1/q` (ladder), the nudges, `9/(8e)` (reverse R1), and `a/q ± 1/(8·min D_q)` (rung R1). That is
+AP/grid plus a deviation forced by the multiples' own `d_min`. It is a map, not a proof. The next steps are the 10
+exceptions through the cascade, and the condition under which rung R1 must succeed.
