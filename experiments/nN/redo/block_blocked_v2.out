@@ -1,0 +1,9 @@
+  one slow a<=50 + tight five-train at N=1000      n= 30  max L*minF     0.659  max L*sigma5    0.910  max L*min(minF,sigma5)  0.365
+  one slow a<=50 + tight five-train at N=10000     n= 30  max L*minF     0.334  max L*sigma5    1.901  max L*min(minF,sigma5)  0.265
+  two slow + tight four-train at N=1000            n= 30  max L*minF     0.492  max L*sigma5   72.731  max L*min(minF,sigma5)  0.492
+  two slow + tight four-train at N=10000           n= 30  max L*minF     0.489  max L*sigma5  500.150  max L*min(minF,sigma5)  0.489
+  tight six-train at N=1000                        n= 30  max L*minF    18.304  max L*sigma5    0.415  max L*min(minF,sigma5)  0.415
+  tight six-train at N=10000                       n= 30  max L*minF   116.057  max L*sigma5    0.360  max L*min(minF,sigma5)  0.360
+  evenly spaced k*d+dev, d=200                     n= 30  max L*minF     0.800  max L*sigma5    3.254  max L*min(minF,sigma5)  0.800
+  random 6-sets in [1,1000]                        n= 60  max L*minF     1.448  max L*sigma5  120.500  max L*min(minF,sigma5)  1.310
+  random 6-sets in [1,100]                         n= 60  max L*minF     1.034  max L*sigma5   15.188  max L*min(minF,sigma5)  0.909

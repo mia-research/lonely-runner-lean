@@ -1,0 +1,12 @@
+longest blocked stretch L of a six-runner block, in three scales (max over the family)
+  compact train N+{0..5}*d, d in 3..20, N=100  n= 18  max L*min(F)     4.164   max L*spread    1.953   max L*delta_min   0.391
+  compact train N+{0..5}*d, d in 3..20, N=1000 n= 18  max L*min(F)    34.241   max L*spread    0.643   max L*delta_min   0.129
+  compact train N+{0..5}*d, d in 3..20, N=10000 n= 18  max L*min(F)   334.249   max L*spread    0.515   max L*delta_min   0.103
+  compact train N+random offsets<=60, N=100    n= 40  max L*min(F)     2.159   max L*spread    0.904   max L*delta_min   0.100
+  compact train N+random offsets<=60, N=1000   n= 40  max L*min(F)    15.686   max L*spread    0.434   max L*delta_min   0.031
+  compact train N+random offsets<=60, N=10000  n= 40  max L*min(F)   104.500   max L*spread    0.324   max L*delta_min   0.038
+  evenly spaced k*d+dev (k=1..6), d=10         n= 40  max L*min(F)     0.789   max L*spread    4.144   max L*delta_min   0.637
+  evenly spaced k*d+dev (k=1..6), d=50         n= 40  max L*min(F)     0.888   max L*spread    4.377   max L*delta_min   0.801
+  evenly spaced k*d+dev (k=1..6), d=200        n= 40  max L*min(F)     1.004   max L*spread    4.791   max L*delta_min   0.823
+  random 6-sets in [1,100]                     n= 60  max L*min(F)     1.085   max L*spread   19.878   max L*delta_min   2.025
+  random 6-sets in [1,1000]                    n= 60  max L*min(F)     1.896   max L*spread   86.889   max L*delta_min   2.779
