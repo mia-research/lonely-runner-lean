@@ -2935,3 +2935,33 @@ its second opening, `t = 9/(8e)`. Every other reading then sits in the first lap
   `[d_min, 7·d_min]`.
 - **The owner's framing:** reverse patterns recur throughout. The AP's four global isolation instants are two patterns
   (`a = 1`, `3`) and their inverts (`a = 7`, `5`).
+
+---
+
+## E87 — 2026-09-26 — the map onto the proved lemmas; the rest is a ladder instant plus a deviation forced by `d_min`
+
+**The map** (`lemma_map_v1.{py,out}`; exact; every set of seven distinct whole-number readings in `1 … 32`, 3,365,856
+sets, the slowest runner of eight moving runners) `[VERIFIED — exhaustive exact]`:
+
+| proved lemma | settles | alone |
+|---|---|---|
+| ladder (some `q ∈ 2…8` divides no reading) | 2,650,034 | 1,111,648 |
+| R1 (`max ≤ 7·min`) | 1,338,125 | 250,706 |
+| grid nudge (`GridNudgeN`, at `a/8`) | 387,321 | 61,984 |
+| flank sum (`FlankSumN`) | 320,804 | 668 |
+| reverse R1 (others in `[e/9, 7e/9]`; one-line, owed in Lean) | 278,241 | 9,699 |
+| off-lattice (`OffLatticeN`) | 132,943 | 15,629 |
+| **none** | **231,062** | |
+
+**The ladder nudge** (`ladder_nudge_v1.{py,out}`; exact) `[VERIFIED — exhaustive exact, readings ≤ 32]`. **All
+231,062** unsettled sets are isolated at an instant within `1/(8·d_min)` of a ladder instant `t₀ = a/q` (`q ∈ 2…8`,
+`a` coprime to `q`) where one reading sits exactly on a slot edge. By rung: `q = 2` (the half lap) 155,159; `q = 3`
+70,686; `q = 4` 3,957; `q = 5` 1,249; `q = 7` 10; `q = 6` 1. The reading on the edge is the largest in only 2,232.
+
+**So, for every reading set up to 32, the isolation is either a proved lemma's or a ladder (grid mod `q`) instant plus
+a deviation of at most `1/(8·d_min)`.** This is the owner's *"any speed is just AP/grid and a deviation that is forced
+by `d_min`"*, measured.
+
+**Next:** why the half lap `t₀ = 1/2` serves so often. There every odd reading sits at `1/2`, with margin `3/8`, and
+every even reading at `0`, blocked. The deviation must move the even readings out while the odd ones keep within
+their margin.
