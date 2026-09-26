@@ -2258,3 +2258,42 @@ arrangements). The designed hypothesis was "every runner sets at most once", whi
 **Slabs complete** (`slabs_band1.log`) `[VERIFIED — exhaustive exact]`: `S ∈ [12, 13] … [23, 24]` through band 1, 0 exits
 in every slab. With E50, **every subject with `d_max ≤ 24·d_min` has its event by `R = 15`**. So Case B is verified at
 `T = 24`.
+
+---
+
+## E67 — 2026-09-26 — Case C: the cascade's accounting is additive; how a runner comes to set twice
+
+**Owner:** *"But cascade doesnt, so it must work differently"* (on the nested-window recursion doubling for comparable
+speeds); *"use the cascade pertubate the speeds to find the mechanisim"*.
+
+**Why the cascade does not double** `[PROVED — from the cascade's definition]`. `SplitChainN.needT` pays a worst-case
+phase at every layer: `needT (a :: L) = 2·needT L + 1/(4a)`. The cascade pays only the moves that happen: each move ends
+at the setter's zone exit, so it is at most that setter's zone width, and `WAIT < Σ_d n_d/(4d)`, where `n_d` counts the
+settings of `d`. A runner that has just set stays clear for `3/(4d)`, so it sets again only if the other runners'
+moves carry the cascade across that whole clear band. Fast runners' zones that fall inside a slower setter's zone are
+jumped over and cost nothing. The object to bound is `n_d`, not a window.
+
+**Candidate H2 refuted** (`relay_law_v1.{py,out}`, exact; 1,350 Case C runs) `[VERIFIED — refutation]`. H2 said a
+runner sets again only if a runner at least 3 times slower sets between. Of 52 repeated settings, 18 have such a setter;
+34 do not. Of the 34, 20 come from the one tight five-group arrangement (E66). The other 14 are near-progression sets
+(the "even" family, ratios near `k : j`, e.g. `3G + g₁` against `G + g₁`, just under 3 : 1) and three clumped sets.
+
+**Perturbation through the cascade** (`relay_perturb_v1.{py,out}`, exact, bisection to the boundary; 176 one-runner
+moves over the 17 arrangements with a repeat) `[VERIFIED — exact, on these 17]`:
+- **Every repeat has one shape:** `d` sets; a relay of other runners carries the cascade across `d`'s clear band;
+  `d` sets again. In 306 of 340 loops the relay's setters are all distinct and none is `d`. The other 34 are in
+  the tight five-group arrangement and its perturbations. Relay lengths: 1 (33), 2 (43), 3 (118), 4 (128), 5–9 (16),
+  21–22 (2, tight five-group).
+- **A repeat is destroyed in only two ways.** In 117 of 176 moves the relay breaks: at some exit instant no runner
+  is in the way, so the event comes earlier and the chains agree up to there. In 34 the first setting of `d` is
+  absorbed at the start: another runner is in the way at `1/(8g₁)` with a later exit. The remaining 25 are changes
+  of setter where exits cross.
+- So a second setting of `d` is a closed relay loop around `d`'s band. Each link of the loop is the climb-cell
+  relation `|d′(8M + 1) − 8M′s| < s` (E64). A third setting needs a second loop around the next band.
+
+**Next:** bound the loops. A third setting needs two consecutive loops. If the second loop reuses the first loop's
+links, `CoreDriftN.link_persistence` with `b = 1` forces `|η| < 1/4` on every link, i.e. a near-rational relation
+between consecutive setters. Movers can substitute (E64), so a second loop with different runners still has to be
+bounded. Grade of "every runner sets at most twice outside the tight five-group": `[EMPIRICAL — 1,350]` (E66).
+
+Note: `case_c_map_v1` prints its table on import (E-lesson 13); harmless here, recorded.

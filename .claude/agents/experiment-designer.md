@@ -1,6 +1,6 @@
 ---
 name: experiment-designer
-description: Pre-register a test BEFORE data is seen — statistic, matched control, power, scope, falsification condition — or audit a completed run against its spec. Use before running any leakage test, sweep, scan, or anomaly drill. Post-hoc analysis cannot substitute.
+description: Pre-register a test BEFORE data is seen — statistic, matched control, power, scope, falsification condition — or audit a completed run against its spec. ECC work only (btc_puzzle_investigation/, secp256k1_arithmetic/): use before running any leakage test, sweep, scan, or anomaly drill there. Not for LRC or other work (owner, 2026-09-24 and 2026-09-26). Post-hoc analysis cannot substitute.
 tools: Read, Grep, Glob, Bash
 ---
 

@@ -61,7 +61,7 @@ needs an independent eye.
 | Routine prose/threshold/dedup checks | inline in the main conversation — no special agent needed |
 | **A claim rests on a citation** (`[CITED]`, `[PROVED\|KS]`, any literature bound) — **mandatory before a grade moves up on a citation's strength** | **`citation-verifier`** |
 | **Promoting any consolidated / handover / master / summary document** — **mandatory, before promotion** | **`compile-diff`** |
-| **Before running any leakage test, sweep, scan, or anomaly drill** — **mandatory, pre-registration** | **`experiment-designer`** |
+| **ECC work only** (`btc_puzzle_investigation/`, `secp256k1_arithmetic/`): **before running any leakage test, sweep, scan, or anomaly drill** — **mandatory, pre-registration**. Not for LRC or any other work (owner: *"you don't need prereg, that was just for the ECC work"*, 2026-09-24; *"prereg is only for ecc work"*, 2026-09-26) | **`experiment-designer`** |
 | **Writing or revising any `feedback_*` / `project_*` memory** — **mandatory** | **`memory-drafter`** |
 
 Trust-but-verify: a subagent's summary is what it intended to do, not always
