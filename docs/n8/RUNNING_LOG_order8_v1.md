@@ -3516,3 +3516,43 @@ members are spread over more than 6 eighths; its arc changes only through the gr
 free, so only the arc condition matters (E33, `SyncPeriodN`); for a near clump the common position is carried by the
 clock, and landing needs the arc condition **and** the gap sitting on the subject's slot. Not yet checked beyond this
 case.
+
+---
+
+## E38 — 2026-09-27 — the shape space, and a noted plan
+
+**Author:** the grand-return search is not the framework. Because of mirroring and scale invariance there are only so
+many valid types (clumpy with a fast outlier is slow outlier with a clump). Can the 6-dimensional shape space show the
+deformations merely relocate the loneliness? "We already have half a proof."
+
+**Mirror, in Lean.** `Arrangement.lonelyAt_const_mul` holds for every `c`, including `−1`; with `circDist` even,
+reversing every speed leaves each runner lonely at the same instant.
+
+**The shape space** `[reasoned; each step cites a proved statement]`.
+- Translation and scale (proved) leave the seven consecutive gaps `g = (g₁…g₇) > 0` up to a common factor; the mirror
+  reverses the sequence. A runner's readings are sums of consecutive gaps, so **linear in `g`**.
+- At flank `e` and lap `j`, a reading `d` is clear iff `(8M+1)e ≤ (8j+1)d ≤ (8M+7)e` for some whole `M` (Thm 6.12). With
+  `e`, `j` and each reading's `M` fixed, that is a finite set of **linear inequalities in `g`**: a polyhedral cone. So a
+  runner's lonely shapes are a **union of cones**, one per `(flank, lap, band assignment)`.
+- **A deformation is a path in the shape space; relocation is crossing from one cone into a neighbouring one** (the flank
+  or lap changes). "Deformation merely relocates" = **the cones leave no hole**.
+- **The AP is one interior point** (all gaps equal): lonely by the φ(n) law, on the boundary of its cone (tight; the
+  two-pinner lemma is its local persistence).
+- **The faces of the shape space are the lower orders.** A face is where some gaps vanish relative to the others: runners
+  merge, fewer than eight distinct speeds, orders ≤ 7, **native and proved**, with slack (`1/7 − 1/8` and more). Each
+  separated-scale lemma is one face read this way: R8 (one runner far), fast pair, block split, `lonely_of_train_collapse`
+  (a tight train is a face where the train's gaps vanish), `RealEightN`'s merge.
+- **Where the laps grow:** the needed lap is unbounded (§6.10) exactly as the shape approaches a face; the cones
+  accumulate there, which is where the lower orders take over instead.
+- **What a proof would need in this picture:** (a) around each face, a neighbourhood of explicit width in which the
+  lower-order slack carries loneliness (width depends on the lower-order instant, so near corners it recurses: the scale
+  tree of E30); (b) the compact remainder of the interior, away from the faces, covered by finitely many cones, each
+  checked as linear inequalities. Nothing here is proved beyond the cited pieces; (a) and (b) are open.
+
+**Noted, not run (author: note it down).** Type test: types = groups split at large gaps (72 up to mirror), each
+separator near or far, each group AP-like (deviations within 1/8) or grid-like, runner position within its group. Per
+type, many arrangements, every runner, exact cascade; record the mechanism (clock = near neighbour, which runners are
+in the way in turn, where the event lands read as the AP at that scale) and check it is uniform per type.
+
+**Terminology.** "Relay" (E32–E37) is my shorthand, not a framework object. In the framework it is the cascade's run of
+lap-completion zones (Thm 6.2(c)): the runners in the way at successive moves.
