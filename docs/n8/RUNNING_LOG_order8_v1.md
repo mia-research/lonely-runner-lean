@@ -2774,3 +2774,34 @@ mechanism and proof"):**
    lands).
 3. **Pattern to rule:** what every long relay has in common.
 4. **Mechanism to proof:** the rule as a lemma in the scale objects, in Lean.
+
+---
+
+## E81 — 2026-09-26 — hard cases found and perturbed (plan steps 1–2)
+
+**Step 1, find** (`hard_cases_v1.{py,out}`; exact climbs on relay length, then `R`; 90 starts, speeds `≤ 600`, every
+runner moving; the slowest runner) `[VERIFIED — exact]`. The longest relays reached are 23–27 moves, and **all of them
+are late events**: `R` between 9.2 and 11.5, in the nearest neighbour's second band. `S` is just above 7, and the
+readings are about `1, 2.4–2.5, 3.2–3.3, 4.0–4.3, 4.4–5.3, 5.5–5.9, 7.0–7.6` times `d_min`, the late template of
+E41/E47. Every relay word starts `6, 5, 4, 3, 2` (fastest to slowest), and the nearest runner (rank 0) sets exactly
+once, in `R ∈ (7, 9)`.
+- **The mechanism at the start:** reading `ρ`'s first zone is `R ∈ (7/ρ, 9/ρ)`. Two neighbouring readings' first zones
+  overlap exactly when their ratio is under `9/7`. In every hard case the three links between the four fastest readings
+  are under `9/7`, so their first-lap zones form a staircase from the fastest runner down. Where a lower step is too big,
+  a later-lap zone of a faster runner bridges it.
+
+**Step 2, perturb** (`hard_perturb_v1.{py,out}`; exact; the top 15; every speed moved by `1/8 … 1` whole-speed unit,
+one at a time; 1,920 moves) `[VERIFIED — exact]`:
+- **Late survives in 1,451 of 1,920.** At this size (below 2% of `d_min`) the hard cells have width, and they close as
+  the move grows: 112–115 survivors at `±1/8`, 70–74 at `±1`.
+- **Every surviving late event passes through the nearest runner's zone** (rank 0 sets): 1,451 of 1,451. A late event
+  is exactly a relay that blocks all of band 0 and hands through `(7, 9)` into band 1 (Thm 11.2).
+- The moves that end the lateness drop the event back to band 0: to `R < 2` in 159, `R ∈ [4, 7)` in 282.
+
+**Pattern for step 3:**
+- **Observed:** the relay covers at most one whole band.
+- **Candidate law:** if every instant of band 0 (`R ∈ [1, 7]`) is blocked, some instant of band 1 (`R ∈ [9, 15]`) is
+  clear.
+- **Evidence:** the exact certificates show it for `S ≤ 24` (no climb leaves band 1, E49–E52, E66). In Case C band 0 is
+  never fully blocked (E56, E73).
+- **Next:** find the reason in the configuration at `R = 9`, where runner 0 hands the relay into band 1.
