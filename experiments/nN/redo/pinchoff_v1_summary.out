@@ -1,0 +1,8 @@
+pinch-offs 1753
+ displaced forward by factor R_land/R_pinch: max 2.5365; histogram [(1.0, 1305), (1.1, 251), (1.2, 60), (1.3, 64), (1.4, 27), (1.5, 20), (1.6, 3), (1.7, 9), (1.8, 5), (1.9, 4), (2.1, 1), (2.2, 1), (2.4, 1), (2.5, 2)]
+ landing R: max 5.8079; in (7,9): 0
+ landing component length in R: min 0.000000
+ handover moves: [(0, 555), (1, 492), (2, 397), (3, 173), (4, 89), (5, 25), (6, 12), (7, 5), (9, 3), (12, 2)]
+ pinch at R=1 (the bound) 1624; elsewhere 129
+ pinchers (leaving rank, entering rank): [((0, 6), 571), ((0, 5), 375), ((0, 4), 286), ((0, 3), 223), ((0, 2), 89), ((0, 1), 80), ((3, 6), 24), ((4, 6), 19), ((2, 6), 15), ((2, 4), 13), ((4, 5), 11), ((3, 4), 10)]
+births 191: new component length at detection, max 0.00e+00; displaced back by factor min 0.3394
