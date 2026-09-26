@@ -2618,3 +2618,22 @@ the rest `≡ 2…6 (mod 8)`, not distinct residues, and all three fit it for bo
 
 **Next:** prove (L). First establish, with the cascade and BSM, which fragile points exist at all (every lonely point
 degenerate), starting from the known tight instances and pushing arrangements towards fragility exactly.
+
+---
+
+## E75 correction — 2026-09-26 — the three tight arrangements, in positive speeds only
+
+**Owner:** *"NEVER USE A STATIONARY RUNNER."* E75 cited the tight instances as reading sets taken from a memory recorded
+in a rest frame, and the session then described them through a runner at rest. That is withdrawn. The arrangements,
+every runner moving at a positive speed (any common shift gives the same geometry):
+
+| arrangement (speeds) | slowest runner's readings | residues mod 8 | grid |
+|---|---|---|---|
+| `8, 9, 10, 11, 12, 13, 14, 15` | `1 … 7` | `0 … 7` | yes (the AP) |
+| `8, 9, 10, 11, 12, 13, 15, 20` | `1, 2, 3, 4, 5, 7, 12` | `0,1,2,3,4,4,5,7` | no |
+| `8, 9, 12, 13, 14, 15, 19, 21` | `1, 4, 5, 6, 7, 11, 13` | `0,1,3,4,5,5,6,7` | no |
+
+**Cascade, every runner** (both sides of each subject) `[VERIFIED — exact]`. First arrangement: every runner isolated at
+`R = 1` (`t = 1/8`), 0 moves. Second: seven runners at `R = 1` with 0 moves, and the runner at speed 12 at `R = 9/8` after
+1 move. Third: the same, with the runner at speed 13 at `R = 9/8` after 1 move. All are in the first window. "Tight"
+means only that the isolation has zero room (an isolated instant), not that it is hard to find.
