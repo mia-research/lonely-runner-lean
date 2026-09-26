@@ -2394,3 +2394,36 @@ order. The event matched the predicted first open instant in 400 of 400 directio
 instant of each pair lonely. (ii) The pinch-off displacement: at a pinch-off every runner except the two pinchers is
 clear, with room. In 555 of 1,753 the entering runner's exit is already lonely; read off, from the geometry at `s*`,
 what forces the landing in the others.
+
+---
+
+## E70 — 2026-09-26 — the pair law in Lean; at every pinch-off the geometry holds many other lonely places
+
+**Owner:** "yes" to (1) the pair law in Lean beyond first order and (2) the displacement at a pinch-off.
+
+**(1) `LRC/Spec/ProgressionPairN.lean`** (commit `428c341`; Spec gate PASS, 1,601 declarations, axiom-clean)
+`[PROVED — axiom-clean]`. Readings `d j` with `|d j − j·c| ≤ c/20`, `j = 1 … 7`:
+- **`instant_lonely`:** for `a ∈ {1, 3, 5, 7}` with `a·d (8 − a) ≤ (8 − a)·d a`, all seven are clear at
+  `a²/(8·d a)`. Runner `a` is leaving its zone there, runner `8 − a` is at most at its entry, and the other five
+  stay within `1/8` of their progression positions `2/8 … 6/8` (`dev_bound`: the deviation is at most `14/152`).
+- **`pair_law`:** for `a ∈ {1, 3}` one of `a`, `8 − a` is lonely. The two conditions of a pair are complementary
+  (`d 7 ≤ 7·d 1` or `7·d 1 ≤ d 7`; `3·d 5 ≤ 5·d 3` or `5·d 3 ≤ 3·d 5`).
+
+Exact, not first order. The progression's isolation survives every deformation in the neighbourhood and is displaced
+within its pair. Condition `a = 1` is R1.
+
+**(2) The lonely places at a pinch-off** (`pinchoff_components_v1.{py,out}`; exact, BSM; the 1,753 pinch-offs of E69)
+`[VERIFIED — exact, on these 85 paths]`:
+- **At every pinch-off the geometry already holds at least 7 other lonely components with `R ≤ 15`** (20 or more in
+  1,672 of 1,753).
+- The isolation is displaced to the first of them after the pinched instant, in 1,753 of 1,753. This is by
+  construction (the event is the first lonely instant); the content is the count.
+- Some of these components are isolated points (length 0), e.g. `R = 9` exactly: the next places that can pinch.
+
+**Reformulation.** Loneliness is lost along a path only if the last lonely component pinches off. The progression
+starts with two that survive the first step (the pair law). Along the path, pinch-offs remove components one at a
+time and births add them. **The relocation statement is therefore: the lonely components within reach never fall to
+a single one that then pinches.** On these paths the count never fell below 8.
+
+**Next:** track each component's lineage along the paths (birth, pinch-off, merger, split). Establish whether those
+descended from the progression's pairs survive the whole path, and what keeps the count up.
