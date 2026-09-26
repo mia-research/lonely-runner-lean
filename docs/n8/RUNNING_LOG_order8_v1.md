@@ -2461,3 +2461,42 @@ lineage answers and minimum counts. Grid 300 is adequate for these counts. `[VER
 
 **Next:** where births happen and which runners open them (the source of the count), read in the ratio coordinates.
 Also, a window matched to the arrangement's own scale in place of `R ≤ 15`.
+
+---
+
+## E72 — 2026-09-26 — what "bound by their neighbours" does, read off the cascade
+
+**Owner:** *"Test the cascade and find out"* (on what "runners are always bound by their neighbours' speed" means for
+the isolation).
+
+**(1) Births and pinch-offs by runner pair** (`birth_labels_v1.{py,out}`; the 55 paths of E71; grid 300; exact)
+`[VERIFIED — exact, these paths]`. There are 9,362 births and 8,237 pinch-offs. By rank difference `|a − b|` of the
+opening and closing runners, births number 2,855 / 2,250 / 2,079 / 1,238 / 719 / 136 for `|a − b| = 1 … 6`. Per
+available pair (6, 5, 4, 3, 2, 1 pairs) that is 476 / 450 / 520 / 413 / 360 / 136, roughly uniform apart from the
+subject's circle-neighbour pair `(0, 6)`. **Speed neighbours are not preferred in opening new places.** The fastest
+runners take part most often, because they have the most zones in any stretch of `R`: births follow zone density.
+
+**(2) Neighbour sweeps** (`neighbour_sweep_v1.{py,out}`; exact) `[VERIFIED — exact, 305,920 subject events]`. Twenty
+random arrangements (speeds below 400). Each runner is swept through its whole range between its speed neighbours in
+239 steps (the slowest over `(v₂/8, v₂)`, the fastest over `(v₇, v₇ + (v₇ − v₁))`), and **every** runner's cascade event
+is found at every step.
+- **Every event lies in the nearer neighbour's first clear band, `R ≤ 7`: 305,920 of 305,920.** The largest is
+  `R = 4.02`. No cascade hit its cap.
+- None lies in `(7, 9)`, and `R ≤ 7` whenever `S ≤ 7` (R1).
+
+**Reading.** In the cascade, "bound by the neighbours" acts on **where** the isolation sits, not on which runners open
+new places. Each runner's isolation is held inside its nearer neighbour's first clear band, well inside it on these
+sweeps. The exceptions known are the knife-edge late events (E39–E48, `S ≤ 2993/273`), which sit in the second band,
+`R ≤ 15`.
+
+**The window the deformation theorem needs.** `lonely_along_path` asks for a fixed window of instants. In the
+scale-free coordinate `R` the neighbour bound supplies one, `R ∈ [1, 15]`: the first two clear bands of the nearer
+neighbour. A pinch-off can then always be displaced inside that window exactly when the bound holds at the pinch. So
+the relocation proof and the neighbour bound are one statement:
+
+> **Neighbour bound.** Every runner of every arrangement is lonely at some `t` with `8·d_min·t ≤ 15`, where `d_min`
+> is its gap to its nearer speed neighbour.
+
+Status: `[VERIFIED — exact certificates]` for `S ≤ 24` (Case A proved; Case B slabs, event by `R = 15`, E49–E52 and
+E66). `[EMPIRICAL]` for `S > 24` (Case C: event in the first band, `R ≤ 7`, in 1,350 of 1,350, E56). In these sweeps,
+`R ≤ 4.02`.
