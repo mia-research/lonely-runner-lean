@@ -3293,3 +3293,15 @@ In the other 35,215 it lands on a later opening of some reading (lap `≥ 2`); a
 **Reading.** The isolation is displaced from the bound to the nearest candidate scale that has room: in 76% the bound
 itself or one reading's next opening (the AP at that runner's scale `e/9`), in 11% a rung plus its multiples' own
 deviation. The views are ordered by time, and the cascade lands on the first one with room.
+
+---
+
+## E101 — 2026-09-27 — handover v4; an owner ruling recorded
+
+**Owner ruling, 2026-09-26 (chat), not previously logged:** asked whether a measure argument inside a single window
+(not a density statement across arrangements) could be used, the owner answered *"it can be provisionally use if
+completes the proof part."* None has been used.
+
+**Handovers.** `HANDOVER_2026_09_26_v3.md` (commit `d2a8584`) was checked by `compile-diff` against v2 and E67–E100,
+which found 45 losses: four figures in disagreement with their sources, hypotheses and scopes dropped, and v2's open
+items and retractions missing. `HANDOVER_2026_09_26_v4.md` repairs them. v2 and v3 are kept unchanged.
