@@ -1290,3 +1290,632 @@ in forever" are termination questions, which treat the cascade as an algorithm. 
 terminate: it identifies the event. The owed statement is static: **every arrangement has, for every runner, a scale
 at which no other runner sits in the subject's slot** (Thm 6.15's candidate scale `e/(8k+1)`, no time, no iteration).
 The cascade reads that scale off; nothing is asked of its path.
+
+---
+
+## E36 — 2026-09-25 — review of MANUSCRIPT_v21 and PAPER_v9_1; one correction under the owner's positive-speed rule
+
+**Review written:** `docs/n8/REVIEW_MANUSCRIPT_v21_PAPER_v9_1_v1.md`. The grade-affecting items are M1–M4 there. One check
+is on disk: `experiments/n8/thm11_3_proof_step_check_v1.{py,out}`, exact `Fraction`.
+
+**Owner rules restated today:**
+- Exact arithmetic only; no floating point.
+- The Boundary Set Method, not brute force.
+- No runner is ever stationary, and every speed is positive.
+
+**Correction to the review's M2 under these rules.** M2 realised a disparity set `ds` with the subject at `0` and runners at
+`−d`. That uses a stationary runner and negative speeds. The statement is unchanged, but the arrangement must be restated:
+- Put the subject at `c = max ds + 1`.
+- Put a runner at `c + d` for each `d ∈ ds`, and at `c − d` for `7 − card ds` of them.
+- Every speed is then positive and distinct, and the disparities from the subject are exactly `ds`.
+
+`lonelyAt_add_const` (`Cascade/Arrangement.lean`) is the shift that makes the two placements equivalent. So the equivalence
+`ExistenceAt8 ↔ LonelyRunnerAt8`, the equivalence M2 states, stands under the positive-speed rule. `[PROVED — in the text; not
+yet in Lean]`
+
+---
+
+## E37 — 2026-09-25 — what the conjecture asks, statement by statement; owner opens covering
+
+**Owner rulings recorded here:**
+- Pre-registration applies to ECC work only.
+- Covering is now admissible as a proof form. The ban was needed early, to clear away things that did not apply; the
+  framework is now developed.
+- Density is of no use: the framework works natively on all positive reals.
+- Pigeonhole is a tool, not an object.
+
+**The statements, against the conjecture.** The source is the Lean definitions: `Spec/Target.lean`, `Spec/Doors.lean`, and
+`experiments/n8/RCapObligation_v1.lean`.
+
+| statement | relation to the conjecture | extra requirement |
+|---|---|---|
+| `LonelyRunnerAt8`: every injective `v`, every `k`, `∃ t > 0` with every other runner at circle distance `≥ 1/8` | **is** the conjecture | none. Common start, distinct speeds, some `t > 0`, closed `1/8`, a separate `t` for each runner. It admits zero and negative speeds, which is equivalent by `lonelyAt_add_const` and asks nothing more |
+| `DoorFlank`, `DoorArrives`, `DoorCapped`, `DoorFAM` | `↔` per subject (`doors_agree`) | none |
+| `ExistenceAt8`, `_congruence`, `_flank`, and the `EightResidual` statement | `↔` (the card ≤ 3 case is proved; E36 gives realisation with positive speeds) | none |
+| `CascadeCapped` | `↔`: the cap `U` is chosen per set (`∃ U` inside `∀ ds`) | none. Its docstring and v21 §6.7 l.1196 say "uniform", which overstates it |
+| `RCapped B` | sufficient only | **yes**: one `B` for every arrangement |
+| `DoorFirstLap` | sufficient only, and `[REFUTED]` | **yes**: a bound on when |
+| "the first isolation" | a proved property of the cascade's output (Thm 6.2(b)) | only if someone requires the witness to be first, or bounds where it falls |
+| §6A named/bounded-witness test, covering ban | rules about the form of a proof, not about what is proved | **yes, on the proof** |
+
+**Witness or proxy.** The conjecture asks for `∃ t`. A proof of any statement proved equivalent to it proves the conjecture:
+a certificate, a candidate scale, the cascade arriving, or the bad zones failing to cover `(0, ∞)`. So does a proof by
+contradiction; Lean's `Classical.choice` is already among the three permitted axioms. Naming the witness is not required.
+
+---
+
+## E38 — 2026-09-25 — TrainCollapseN recovered and committed; two of my statements corrected
+
+**Recovered.** The session that lost its context left `LRC/Spec/TrainCollapseN.lean` uncommitted. It builds cleanly and
+has been committed as `6304771`. Spec gate PASS, 1,568 of 1,568 declarations axiom-clean
+(`experiments/nN/spec_gate_train_collapse.out`).
+
+**The result, `lonely_of_train_collapse` `[PROVED]`.**
+- **Setup:** a core `C` and a fast train `{N + e : e ∈ E}`, with `|C| + |E| ≤ 7`. Every core reading and every offset
+  is at most `m`. Take two offsets `i < j` with no offset at their midpoint; any adjacent pair qualifies.
+- **Conclusion:** for every `N ≥ 56·m`, the runner is lonely at a named instant in `[2τ, 2τ + 1/N)`. The time `τ`
+  depends on `C` and `E` only, not on `N`.
+- **Checked before formalising:** `experiments/nN/redo/train_collapse_bound_v1.out`, 780 arrangements, 0 violations.
+
+**Corrections.**
+- **E36 said** M2 (`ExistenceAt8 ↔ LonelyRunnerAt8`) was "not yet in Lean". That was wrong. Commit `f32daf4` proves it
+  (`lonelyRunnerAt8_iff_residual`), and `4ceb484` restates it with positive speeds `(1, 1 + r₁, …, 1 + r₇)`.
+- **E37's answer to the owner** said a continuation from the AP fails on openness and on boundedness. Both
+  objections are withdrawn, because both tested the wrong object:
+  - *Openness.* It asked whether the AP's exact instant survives a perturbation. The claim is that the **event**
+    relocates. Example: in `(1, …, 7, 8 + ε)`, runner `8 + ε` is lonely at `1/(8(1 + ε)) → 1/8` on a stretch of positive
+    length. Also, "end runner" was a word about speed order; on the circle every runner is held from both sides
+    (Thm 4.1).
+  - *Boundedness.* It compared events **across** arrangements. Within one arrangement the event is bounded by its
+    speeds: the period `1/gcd` for whole-number speeds, and `TrainCollapseN` for compact fast trains.
+
+**The gap to the skeleton (`Order8SkeletonN`).**
+1. The theorem needs separation ratio 56; the skeleton splits at `T = 9`. Separation at 56 implies separation at 9,
+   so the skeleton can take `T = 56`.
+2. The train's spread must be at most `N/56`. Spread-out blocks remain owed.
+3. `ArrBoundedCovered8` remains owed.
+
+---
+
+## E39 — 2026-09-25 — arrangement types through the cascade; late events need the far runner in the subject's slot
+
+**Scripts.** `experiments/nN/redo/arrangement_types_v1`, `late_event_law_v1`, `late_event_law_v2` (`.py` and `.out`). Exact
+`Fraction` arithmetic; eight distinct positive speeds; every runner. Definitions:
+- `u* = d_min·t*`, the event measured in laps of the nearest runner;
+- **first cycle** means `u* ≤ 1`;
+- `S = d_max/d_min`.
+
+**1. Arrangement types** `[EMPIRICAL — 5,448 runners, 17 families]`. Every runner of every family resolves in the first
+cycle. The families include: the AP deformed by `1/100` to 2 gaps; uniform on `[1,40]` and `[1,1000]`; separated core
+with a compact train or a spread train; four close pairs; geometric; near-wrap; the seven `[1,40]` residual sets. The
+only events past the first cycle are three of the three recorded hard cases (`u* = 2401/1872, 165/128, 219/184`), all
+found by adversarial search. Spread and compact trains alike stay small (`max u* ≤ 1575/8144`). The hard compact
+trains of E33 are constructed resonances and do not appear at random.
+
+**2. The late events share one pattern** `[EMPIRICAL — 4 late events; knife-edge]`. In every late event the subject's
+**far** runner (largest difference) reads `S` inside the subject's slot zone at the AP scale `d_min`, that is within 1
+of 8:
+- the three hard cases have `S = 366/49, 224/30, 15134/1974`, i.e. `7.47, 7.47, 7.67`;
+- a hill-climb constrained to `S ≥ 8` found one more, `(109, 154, 234, 313, 273, 337, 390, 469)`, subject 109, with
+  `S = 8` exactly (an exact sharer) and `u* = 2565/2248`.
+
+Constrained to `S ≥ 8`, the climbs push `S` down to `8.02–8.09` (`u* ≤ 0.81`) and find nothing past the first cycle
+there. On the circle the subject and its far runner are neighbours across the wrap. That is the owner's "two runners
+essentially sharing a slot".
+
+The pattern is necessary-looking but not sufficient: of 2,289 random runners with `S ∈ (7, 8)`, none is late. Lateness
+also needs the other runners in a chain of slot-sharing pairs (for example `(27,70), (70,107), (107,137), (137,159),
+(159,188)` in the 28-move case). Every one of those runners is critical: shifting any single speed by 2–5% of `d_min`
+brings the event back inside the first cycle. The setters are spread across all seven runners. This is the relay of
+E32, not a single pair.
+
+**3. The factor 56 in `TrainCollapseN`** `[EMPIRICAL — 300 per ratio]`. 56 is the proof's margin: the gap between
+`1/7` and `1/8` is `1/56`, which absorbs the core's drift `c/N` during the one fast turn. The collapse instant itself is
+lonely far below 56: 300 of 300 at ratios 56, 40, 30, 20 and 12; 299 of 300 at 15; 297 of 300 at 9. So 56 is a
+property of the argument. The construction mostly works at 9 but fails on a few sets there.
+
+---
+
+## E40 — 2026-09-25 — adversarial search at far-runner readings of 9 or more: nothing past the first cycle
+
+**Script.** `experiments/nN/redo/late_event_S9_search_v1.{py,out}`: exact hill-climb with annealing and plateau moves.
+Three arms of 60 restarts × 3,000 steps. The objective is the largest `u* = d_min·t*` over runners whose far reading
+`S = d_max/d_min` lies in the arm's range. Starts are random at four speed ranges plus the recorded hard cases with the
+far runner stretched.
+
+| arm | restarts past the first cycle (`u* > 1`) | largest `u*` |
+|---|---|---|
+| control, `S ∈ [7, 9]` | **34 of 60** | `39/28` at `(1,31,70,96,126,158,176,225)`, subject 1, `S = 112/15` |
+| `S ≥ 9` | **0 of 60** | `735/856` at `S = 9.067` |
+| `S ∈ [9, 15]` | **0 of 60** | `305/352` at `S = 9.377` |
+
+`[EMPIRICAL — adversarial search, the stated budgets]`
+
+**Reading it.**
+- The control fires, so the search can find late events. Its late events span `S = 7.003` to `S = 213/26 = 8.19`, on both
+  sides of 8, all within 1 of 8.
+- Theorem 11.2 (`R = 8u*` avoids `(7, 9)`) makes the first cycle exactly `u* ≤ 7/8`, or `R ∈ [1, 7]`. The `S ≥ 9` maxima
+  sit just under `7/8` (`R ≤ 6.94`), so every event found there is in band 0.
+- The hardest `S ≥ 9` instances sit at the edge of a slot zone: `S` just above 9, or `S = 15.12`, which is within 1 of 16.
+- In every best instance some reading lies within 1 of a multiple of 8.
+- `39/28` exceeds `u*` for every recorded hard case (`165/128`, `2401/1872`, `219/184`). In `R` it is `78/7 ≈ 11.14`, below
+  the manuscript's `R ≈ 11.97`.
+
+---
+
+## E41 — 2026-09-25 — the late events read off the cascade: one relay template; extra laps on the far runner end it
+
+**Owner (2026-09-25).** The cascade is not a black box and tells you where the isolation point is. Read it; do not
+search.
+
+**Script.** `experiments/nN/redo/late_event_trace_v1.{py,out}`. It covers 37 distinct late subjects: the 34 from E40's
+control arm, the three recorded hard cases and E39's `S = 8` case. Exact arithmetic, in the coordinate `R = 8·d_min·t`
+with readings `s = d/d_min`.
+
+**1. The route into band 1** `[PROVED — from Thms 11.2 and 6.25; VERIFIED on 37 of 37]`. A move multiplies `R` by less
+than `9/7`, so from `R ≤ 7` the next `R` is below 9. A late event therefore needs some step to land in `(7, 9)`. There
+the nearest runner's own reading `R` is within 1 of 8, which puts `d_min` in the subject's slot. The next move is set by
+`d_min` itself, to `R = 9`. Observed: 37 of 37 land in `(7, 9)`, and in 37 of 37 the next setter is `d_min`.
+
+**2. The far runner starts it** `[VERIFIED — 37 of 37]`. The far runner is in the way at the bound `R = 1` in every case,
+with its reading within 1 of 8. It then carries 2–6 of the band-0 moves.
+
+**3. One template** `[EMPIRICAL — 37 cases]`. Every late case has nearly the same readings:
+`1, ≈2.3–2.5, ≈3.2–3.3, ≈4.1–4.3, ≈5.1–5.4, ≈5.6–6.0, S ≈ 7.0–7.8`. That is the AP's `2, …, 7`, each pushed up by a
+fraction of a slot. The band-0 climb follows almost the same setter word in every case (reading, lap):
+`(S,1) (5.9,1) (5.2,1) (4.2,1) (S,2) (3.2,1) (5.9,2) (5.2,2) (2.4,1) (4.2,2) (5.9,3) (S,4) (5.2,3) (3.2,2) … (S,6) (2.4,2)`,
+landing in `(7, 9)`. So a late event is the AP deformed in one specific way: the isolation point moves from `R = 1`
+through a relay across every runner, into band 1.
+
+**4. Extra laps on the far runner** `[VERIFIED — exact, 37 of 37]`. Replacing `d_max` by `d_max + 8·d_min` or
+`d_max + 16·d_min` (reading `S + 8`, `S + 16`, still within 1 of a multiple of 8) makes every one of the 37 resolve at
+`u* ≈ 0.13–0.30`, mostly in one move. The template needs the far runner **on its first lap** of the subject's slot.
+Direct constructive evidence against late events near 16 or 24; not a proof.
+
+**Route this suggests** `[proposed]`.
+- The climb is a word of `(setter, lap)` pairs, and each step is `R' = (8M + 1)/s`. The word is valid exactly when each
+  landing lies inside the next setter's zone, `|s'·R − 8M'| < 1`. That is a system of strict linear inequalities in the
+  readings: an exact polytope for each word.
+- So the late set is the union of the polytopes of the words that reach `(7, 9)`. That is the exact rational-LP method
+  of the order-5 certificate (v21 §8.2), which gave `sup R = 31/9` there.
+- What such a certificate would show: that every such word forces `S` within 1 of 8, and that past `R = 9` band 1 holds
+  a clear point.
+
+---
+
+## E42 — 2026-09-25 — the climb certificate, first form; one reading of the owner's one-slot statement
+
+**Word polytopes** (`experiments/nN/redo/late_word_certificate_v1.py`, `late_word_validate_v1.py`). Exact rational
+simplex (order-5 solver), readings `1 ≤ s₂ ≤ … ≤ s₇`. The relaxed rows (each setter in the slot just before it sets)
+are sound: **38 of 38 real late climbs lie strictly inside their own word's polytope** `[VERIFIED]`. They use 24
+distinct words, of lengths 15–23.
+
+**Not tractable in this form.** 5,332 words tested to length 6 and 17,483 to length 8, a factor of about 1.8 per step.
+Length 23 would need of the order of 10⁸ LPs. The relaxation drops "latest opening", so it admits far more words than
+the cascade takes.
+
+**Next form** `[proposed]`. Label every runner at every step by its slot class: clear in gap `M`, meaning reading in
+`[8M+1, 8M+7]`, or in the way at lap `M`, meaning reading in `(8M−1, 8M+1)`. With `R_i = (8M+1)/s_p`, every label is a
+linear constraint in the readings. Given the labels, the cascade is exact: the in-the-way set is known, and the
+latest-opening choice is linear. Each runner's label only advances, by at most a few classes per step. The branches are
+then the cascade's own cells (v21 §12, walls `e(8M±1)/(8N+1)`), not a relaxation.
+
+**Owner (2026-09-25):** *"All intervening runner at the time of isolation will be near their own isolation point
+depending on the speeds and their variation from AP. The max they can go is 1/8 away on either side."*
+
+One reading was tested exactly (`event_vertex_test_v1.{py,out}`) and **does not hold**:
+- **The reading:** own point = `a_k·r mod 8`, with `r` the odd integer nearest `R*` and `a_k` the nearest integer to
+  `s_k`; claim `|dev| ≤ 1` slot.
+- **Result:** it holds for every runner in 777 of 1,200, 1,053 of 1,200 and 682 of 1,200 subjects in three families,
+  and in **0 of 34** late events (worst deviation 4 slots).
+- **Also found:** the median `|R* − nearest odd|` is 0. Most events sit exactly at an odd `R`, a unit instant of the
+  AP at scale `d_min`.
+
+This refutes that reading only, not the owner's statement. The intended meaning of "own isolation point" is to be asked.
+
+---
+
+## E43 — 2026-09-25 — the owner's vertex statement, tested as stated
+
+**Owner:** *"Runner 1 isolation point is near 1/8, runner 2 is 2/8 etc etc runner 8 is 8/8"*, with at most 1/8 on either
+side.
+
+**Test** (`experiments/nN/redo/event_vertex_test_v2.{py,out}`, exact). At each subject's cascade event `t*`, is every
+runner of speed rank `k` within `1/8` of `k/8`, up to one common rotation? Also with the vertices `k·a/8` for the AP's
+other global instants (`a` = 3, 5, 7). "Band" is the smallest deviation that works, in slots.
+
+| family (800 subjects each; late: 34) | class 1 | some odd `a` | band (some `a`), median / max |
+|---|---|---|---|
+| AP + deviation `1/100` gap | 708 | **800** | 0.02 / 0.09 |
+| AP + deviation `1/8` gap | 668 | 707 | 0.32 / 3.11 |
+| AP + deviation `1/2` gap | 288 | 300 | 1.42 / 3.02 |
+| AP + deviation 2 gaps | 91 | 93 | 2.05 / 2.90 |
+| uniform `[1,60]` | 99 | 101 | 2.00 / 3.00 |
+| uniform `[1,1000]` | 86 | 86 | 2.07 / 2.96 |
+| late events | 0 | **0** | 2.45 / 2.71 |
+
+`[EMPIRICAL — exact per case]`
+
+**Reading.** As stated, the property holds for small deformations of the AP. It holds for every subject at `1/100` of a
+gap, and 707 of 800 already fail to hold it at `1/8` of a gap. It fails in general and at every late event. E35 found
+the same far from the AP: the others share slots at the event, and what the event needs is only that no runner sits in
+the subject's slot.
+
+**Open question for the owner:** is "own point" meant at the event's own scale `D*`? That would relabel runners by
+their slot at `D*`, not by speed rank.
+
+---
+
+## E44 — 2026-09-25 — each runner at its own event against its own vertex
+
+**Owner:** each runner is near its vertex `k/8` at **its own** isolation, not at the others'.
+
+**Frame.** At its own event a runner is at 0 relative to itself, so the statement is about absolute positions. Those
+depend on a common speed shift, to which loneliness is blind. Frame used: the AP anchored at the slowest and fastest
+speeds, gap `D = W/7`, `v₀ = v_min − D` (v21 §2.3).
+
+**Test** (`experiments/nN/redo/own_vertex_test_v1.{py,out}`, exact): at runner `k`'s own cascade event `t*_k`, is
+`(v_k − v₀)·t*_k` within `1/8` of `k/8`? A random position passes with probability `1/4`.
+
+| family (800 runners each; late: 34) | within `1/8` of `k/8` | chance |
+|---|---|---|
+| AP + deviation `1/100` gap | 749 | 200 |
+| AP + deviation `1/8` gap | 682 | 200 |
+| AP + deviation `1/2` gap | 355 | 200 |
+| AP + deviation 2 gaps | 252 | 200 |
+| uniform `[1,60]`, `[1,1000]` | 275, 281 | 200 |
+| late events (subject) | 5 | 8.5 |
+
+`[EMPIRICAL — exact per case]`
+
+**Design error, recorded.** The second column of the `.out` ("some odd `a`") is uninformative for odd `k`: the arcs
+around `1/8, 3/8, 5/8, 7/8` cover the whole circle. Do not cite it.
+
+**Reading.** Near the AP, each runner's own event sits at its own vertex. By half a gap of deviation the rate is 44%,
+and in general it is close to chance. The runners' own events move with the deformation (median event 2.2–2.4 times
+the AP instant in the uniform families). Together with E43, the vertex picture describes the AP and its small
+deformations, not the general event.
+
+---
+
+## E45 — 2026-09-25 — the exact climb cells; readings up to 9
+
+**Owner (2026-09-25).** *"Do we need to know where the other runners are as long as they are more than 1/8 away?"*
+**No.** Loneliness asks only that each other runner be at least `1/8` from the subject. So each runner carries one
+coarse label per cascade step:
+- **clear in gap `M`**: reading in `[8M+1, 8M+7]`;
+- **in the subject's slot at lap `M`**: reading in `(8M−1, 8M+1)`.
+
+The lap number is kept only to follow the cascade.
+
+**Method** (`experiments/nN/redo/climb_cells_v1.py`). With `R = (8M+1)/s_p` after each move, every label and the
+latest-opening choice of setter are linear inequalities in the readings. The cascade is followed exactly, with nothing
+relaxed: every real climb lies in the cell of its own label sequence, and every cell with margin `τ > 0` contains real
+climbs.
+
+**The LP.** Exact rational arithmetic (`gmpy2.mpq`), solved through the dual with a 7 × 7 basis and Bland's rule.
+Cross-checked against the order-5 `Fraction` simplex: 600 of 600 feasible LPs agree on the exact optimum, and 400 random
+LPs agree (38 optima, 362 infeasible) (`climb_cells_lpcheck_v1*.out`).
+
+**A bug, fixed before any result was used.** The first run crashed. Closing the cell zeroed `τ` in `τ`'s own bound
+rows, which are part of the starting basis, so the basis went singular. A guard now raises an error on any singular
+basis.
+
+**Readings in `[1, 9]`** (`climb_cells_B9.out`, `_S1_words.txt`, `_validate.out`) `[VERIFIED — exhaustive, exact]`:
+- 659,744 LPs over 71,990 cells; 32,380 climbs end in band 0 (early events).
+- **1,810 cells climb into `(7, 9)`**, using 579 words of lengths 15–25.
+- **Completeness: 38 of 38 real late climbs are found**, each in its own word and `S` range.
+- First setter: the far runner in 1,752 cells, `s₆` in 57, `s₅` in 1. In every case the far runner reads in `(7, 9]`,
+  which inside this box is forced by the setup. This run is the control.
+
+**Running:** readings up to 17 with `S ≥ 9`, covering the next slot zone at 16. This is the informative run.
+
+---
+
+## E46 — 2026-09-26 — climb cells v2: faster, restartable, regression-tested
+
+**Organisation.** The owner asked for a better way to run long jobs than one blind run. `climb_cells_v2.py` makes these
+changes:
+- **Witness shortcut.** A child cell only adds rows; if the parent's witness point satisfies them, no LP is needed.
+- **Warm start.** When an LP is needed, it starts from the parent's dual basis.
+- **Queue.** 126 tasks after the first move, fed through a shared queue.
+- **Checkpoints and progress.** An append-only `.jsonl` checkpoint and a `.progress` file.
+- **Early positives.** Any climb into `(7, 9)` goes to `.TERMINALS.txt` the moment it is found.
+- **caffeinate.** Always run under it. The first long v1 run (readings ≤ 17) was not, and the Mac slept through most
+  of a night; it was stopped once v2 passed.
+
+**Regression, readings ≤ 9** `[VERIFIED]`. Identical to v1: 71,990 cells, 32,380 early events, 1,810 terminal cells,
+579 words, the same exact `S` ranges cell for cell, 38 of 38 real late climbs. 137 s against 1,968 s.
+
+**The first regression failed.** It gave 47,396 cells against v1's 71,990. A per-task comparison
+(`climb_cells_v2_pertask.out`) found the cause: the task id hashed only the word and the labels, so cells with
+different histories collided and the bookkeeping kept one of each pair. The search and the LP were right; the totals
+were wrong. The id now hashes every constraint row, and a guard stops the run on any collision.
+
+**Lemma used from here** `[PROVED — in the text]`. Inside band 0 (`R ≤ 7`) every move lands on an opening
+`(8M + 1)/s_j` with `M ≤ (7s_j + 1)/8`: finitely many values. `R` strictly increases, so the cascade either reaches a
+fixed point (the event) or exits into `(7, 9)`. The same holds in every band. So **"no climb leaves band `b`" is
+existence of the event** for every runner in the box. No cap is imported.
+
+**Running:** stepped boxes `S ∈ [9, B]`, `B = 10 … 17` (`run_stepped_boxes.sh`, `stepped_boxes.log`).
+
+---
+
+## E47 — 2026-09-26 — CORRECTION to E40/E41: late events exist with far reading S > 9
+
+**Found by the exact box `S ∈ [9, 10]`** (`climb_cells_v2_B10_S9.out`): 14 climbs into `(7, 9)`, with `S ∈ [9, 65/7]`.
+
+**Confirmed** `[VERIFIED — exact; late_S9_witness_v1.{py,out}]`. For each of the 14 cells, a witness point strictly inside
+(`τ > 0`) was realised as positive integer speeds and run through the plain cascade: **14 of 14 late**, `u* ≈ 1.13`,
+`S ≈ 9.26`. Example: runner at speed 27897393 of `(27897393, 55794786, 110795338, 140358898, 168620898, 208085778,
+228479138, 286202778)`, readings about `1, 2.97, 4.03, 5.04, 6.46, 7.19, 9.26`.
+
+**What this corrects.**
+- **E40 said** 0 of 120 adversarial restarts found a late event with `S ≥ 9`, and "suggested" the case split "far
+  reading ≥ 9 ⇒ event in the first cycle". That split is **false**: the cells are thin and the search missed them.
+- **E41's** "the far runner starts every late climb" holds on its 37 cases only. Here the second-farthest reading,
+  about 7.19, is the one in the subject's slot at `R = 1`.
+- **What survives:** a late event needs some reading in the subject's slot at the bound (someone must be in the way at
+  `R = 1`); it need not be the far one.
+
+**The exact box enumeration found what adversarial search did not.** This is the reason for the exact enumeration.
+
+**Also.** `climb_cells_v3.py` adds `bands`. With `bands = 1` it is identical to v2 on readings ≤ 9 (regression PASS).
+Next: every climb with readings ≤ 9 through band 1 (`bands = 2`), i.e. does any climb leave `[9, 15]` into `(15, 17)`?
+
+---
+
+## E48 — 2026-09-26 — stepped boxes for S ≥ 9 (band 0 only)
+
+Source: `climb_cells_v2_B{10,11,12}_S9.out` `[VERIFIED — exhaustive exact enumeration of each box]`.
+
+| box `S ∈` | cells | climbs into `(7, 9)` | largest `S` among them |
+|---|---|---|---|
+| `[9, 10]` | 69,385 | 14 | `65/7 ≈ 9.286` |
+| `[9, 11]` | 112,548 | 27 | `2993/273 ≈ 10.963` |
+| `[9, 12]` | 210,432 | 27 (the same) | `2993/273` |
+
+- Late climbs with `S ≥ 9` occupy `S ∈ [9, 2993/273]`; the box `(2993/273, 12]` has none.
+- The boxes followed band 0 only, which cannot prove existence where climbs leave it, so the run was stopped at
+  `B = 13`.
+- **Next:** each box followed through band 1 (`climb_cells_v3`, `bands = 2`), starting with readings ≤ 9 (running) and
+  then `S ∈ [9, 12]`.
+
+---
+
+## E49 — 2026-09-26 — readings ≤ 9 through band 1: no climb leaves band 1
+
+`climb_cells_v3.py 9 1 2` (`climb_cells_v3_B9_bands2.out`): readings `1 ≤ s₂ ≤ … ≤ s₇ ≤ 9`, every climb followed exactly
+while `R ≤ 15`, with the nearest difference tracked from `R > 7`. **0 climbs exit into `(15, 17)`**. 181,068 cells;
+78,568 events; 1,222,578 exact LPs solved and 868,363 skipped by the witness; 1,108 s.
+
+**Consequence, with E46's lemma** `[VERIFIED — exhaustive exact enumeration; grade held until the positive control
+reports]`: every subject with `d_max ≤ 9·d_min` has its isolation event at some `R ≤ 15`, i.e. `t ≤ 15/(8·d_min)`.
+This extends R1 (`d_max ≤ 7·d_min`, Thm 4.8) to ratio 9. It is not in Lean: the LP certificates (Farkas vectors for
+pruned cells, witness points for kept ones) are owed.
+
+**Positive control running** (`band1_control_v1.py`). The real late climbs with readings ≤ 9 must each appear, with
+their full cascade word, as a band-1 event cell. A zero exit count is only meaningful if the run produces the known
+band-1 events.
+
+---
+
+## E50 — 2026-09-26 — every subject with d_max ≤ 12·d_min has its isolation event by R = 15
+
+**Positive control PASS** (`band1_control_v1.out`). Of the real late climbs with readings ≤ 9, **38 of 38** appear, with
+their full cascade word, among the band-1 event cells of the readings-≤-9 run (4,331 distinct band-1 event words). The
+band-1 logic finds the known events, so E49's zero is a real zero.
+
+**`S ∈ [9, 12]` through band 1** (`climb_cells_v3_B12_S9_bands2.out`): **0 exits into `(15, 17)`**. 210,561 cells
+against 210,432 in band 0 alone, so the 27 late climbs of E48 add 129 cells and all reach their event in band 1. 241 s.
+
+**Result** `[VERIFIED — exhaustive exact enumeration (gmpy2 mpq, dual simplex cross-checked against the order-5
+solver), with positive control; not in Lean]`. This combines E49 (`S ≤ 9`), this run, and E46's lemma (in a band the
+cascade reaches its event or leaves through the next gap).
+
+> **For every subject whose largest difference is at most 12 times its smallest (`d_max ≤ 12·d_min`), the cascade
+> reaches its isolation event at some `R ≤ 15`, i.e. `t ≤ 15/(8·d_min)`. So the subject is lonely.**
+
+This extends R1 (ratio ≤ 7) to ratio ≤ 12 at order 8, for real speeds (readings are real; the cells are polytopes in
+reading space).
+
+**Owed for `[PROVED]`:** a Lean check of the enumeration's certificates, i.e. a Farkas vector for every pruned branch
+and a witness for every kept cell, or an independent re-derivation.
+
+**Remaining:** ratios above 12 (the stepped boxes continue; cost grows with `B`), and an argument for unbounded ratio
+(the skeleton's separated side and the region with no separation).
+
+---
+
+## E51 — 2026-09-26 — unbounded S: the split-chain rule (R8 and the fast pair, generalised)
+
+**The template of the two proved fast-block cases.** Lower orders make the slow core lonely at a stricter threshold,
+which leaves a window of room; a window lemma puts the fast runners' clear instant inside it (`pair_window`: any window
+of `3/4` of `a`'s lap).
+
+**Nested windows** `[PROVED — in the text; the argument of pair_window iterated]`. A runner is blocked on
+`(j − 1/8, j + 1/8)` of its own laps. So a window of `2ℓ + 1/4` laps holds a clear stretch of length `ℓ`, for `ℓ ≤ 3/4`.
+Chaining from the fastest down, with readings `s₁ < … < s₇` and ratios `rᵢ = sᵢ₊₁/sᵢ`:
+`W₇ = 1/4;  ℓᵢ = Wᵢ₊₁/rᵢ;  Wᵢ = 2ℓᵢ + 1/4;  every ℓᵢ ≤ 3/4`.
+
+**Split-chain rule.** Split at `u`. The core `s₁..s_u` is lonely at `1/(u+1)` (native lower orders), so it stays clear
+at `1/8` on a window of `ROOM_u = 2(1/(u+1) − 1/8)·r_u` laps of `s_{u+1}`. The top `s_{u+1}..s₇` runs the chain. The
+rule holds iff the chain is valid and `W_{u+1} ≤ ROOM_u`. At `u = 6` this is R8 (`r₆ ≥ 7`). At `u = 5` it is the fast
+pair. The plain chain (`u = 0`) uses the nearest runner's first band.
+
+**Checked** (`ratio_chain_v1`, `split_chain_v1`; exact). Soundness: 0 violations. Wherever the plain chain applies, the
+cascade's event is in band 0. Coverage among subjects with `S > 12`:
+
+| family | covered |
+|---|---|
+| geometric-like, ratios 1.5–3 | 76% |
+| many scales | 42% |
+| uniform `[1,1000]` | 4% |
+| uniform `[1,100000]` | 3% |
+
+**What it misses: dense blocks.** A subject with one close neighbour and six readings of moderate spread has `S` large,
+but no ratio chain. There `ROOM₁ = (3/4)·r₁` is large, and what is needed is a **window constant** for the 6-runner
+block: every window of `K` laps of its slowest runner holds a clear instant.
+- `K` is **not** uniform in laps of the block's slowest runner. Compact resonant trains (E33) delay the event by a fixed
+  time independent of `N`, which is unboundedly many laps.
+- Compact sub-blocks must therefore be collapsed (`SyncBlockN`, `TrainCollapseN`: the free phase, then the offsets at
+  their own scale). Bounded-shape blocks need exact window constants, computable by the cell method with a free phase.
+
+**The architecture this implies**, the E30 scale-tree induction with three step types:
+1. Separated levels, by nested windows (this rule).
+2. Compact levels, by collapse (`TrainCollapseN`).
+3. Bounded-shape levels, by window constants from exact cell enumeration.
+
+**Formalisable now:** the split-chain rule. It is `pair_window` iterated plus the native lower orders.
+
+---
+
+## E52 — 2026-09-26 — the split-chain rule in Lean; slabs to S = 15; the framing corrected
+
+**Owner (2026-09-26).** *"Why are we talking coverage? Aren't we supposed to be proving that any arrangement moves the
+isolation?"* The proof is the deformation argument, the continuity route of E18/E19:
+- Global isolation holds at the AP.
+- It survives small changes: interior margin, or the two-pinner lemma at isolated instants.
+- What is owed is that the relocated isolation cannot escape to infinity: the owner's "bounded by the speeds of the
+  arrangement".
+
+The box certificates are exactly that bound on their region, `t ≤ 15/(8·d_min)`. The rules are regions where the bound
+is available. "Coverage" figures were a diagnostic of which regions are not yet reached, and are not to be reported as
+progress.
+
+**Lean: `LRC/Spec/SplitChainN.lean`** (commit below; gate `experiments/nN/spec_gate_split_chain.out`, PASS 1,576 of
+1,576) `[PROVED — axiom-clean]`:
+- `stretch`: every window of `(2ℓ + 1/4)/a` holds a clear stretch of `ℓ/a`, for `ℓ ≤ 3/4`.
+- `nested`: `needT (a :: L) = 2·needT L + 1/(4a)`, `Valid` = every `a·needT L ≤ 3/4`. Every window of `needT L` holds an
+  instant clearing the whole list.
+- `lonely_of_split`: a core lonely at `θ ≥ 1/8` (elements `≤ m`) plus a valid list with `needT F ≤ 2(θ − 1/8)/m` gives
+  both clear at some `t > 0`.
+- `lonely_eight_of_split`: the order-seven instance, with room `1/(28m)`.
+- `r8_of_split`: R8 recovered.
+
+**Gate hardened.** The Prop detector matched only `def … : Prop`, so a false `def Foo : A → Prop` would have passed
+unregistered. It now also matches `… → Prop`. Only `Valid` was affected, registered ROUTE (a condition used only as a
+hypothesis).
+
+**Slabs through band 1** (`slabs_band1.log`) `[VERIFIED — exhaustive exact]`: `S ∈ [12, 13]`, `[13, 14]`, `[14, 15]`,
+each with 0 exits from band 1. With E50: **every subject with `d_max ≤ 15·d_min` has its event by `R = 15`.** Caveat:
+no positive control inside these slabs (no late climb with `S > 2993/273` is known). The `S ≤ 9` control covers the
+same code path.
+
+---
+
+## E53 — 2026-09-26 — one runner deformed from the AP, traced exactly
+
+**Script.** `experiments/nN/redo/deform_one_runner_v1.{py,out}`, exact `Fraction` arithmetic. The AP is `v_k = k·840`,
+`k = 1..8`; one runner's speed moves by `δ ∈ (−G, G)`. For each step and each chosen subject the cascade gives:
+- `t*`, shown as `t*·G`, so the AP's global instant is `1/8 = 0.125`;
+- `d_min`;
+- `S = d_max/d_min`;
+- `R = 8·d_min·t*`;
+- the runner pinning the event at exactly `1/8`.
+
+`[VERIFIED — exact trace; 39 steps × 6 subject/deformation pairs]`
+
+**1. While `S ≤ 7` the event sits at `R = 1`, `t* = 1/(8·d_min)`; `d_min` sets the scale.**
+- Runner 8 moved outward (`δ ≥ 0`): its `d_min = G + δ` grows and the event slides continuously from `0.125` down to
+  `0.0641` at `δ = 0.95G`. It is pinned throughout by runner 7, its nearest speed and circle neighbour, at exactly `1/8`.
+- Runner 4 moved either way up to `|δ| = 0.45G`: the event slides from `0.125` to `0.2273` as `d_min` shrinks, pinned by
+  runner 3 or runner 5.
+
+**2. When `S` crosses 7 the event relocates within band 0 and is never lost.**
+- Subject 1 with runner 8 moved outward: at `δ = 0.05G … 0.25G` the event jumps to `R = 3`, `t* = 3/8`, the AP's own
+  `3/8` global instant, pinned by runners 4 and 6. Further out it moves to `R ≈ 2.3` (pinned by 8), then `R = 9/4`
+  (pinned by 5), then `R ≈ 1.13–1.16` (pinned by 8).
+- Runner 8 moved inward toward 7 (its `d_min` shrinks): `R` ranges over `1 … 475/99 ≈ 4.8`, pinned mostly by runner 1,
+  its circle neighbour across the wrap.
+- Every event in the trace has `R ≤ 475/99`, i.e. `t* < 5/(8·d_min)`: bounded by the speeds.
+
+**3. Grids re-form the global event.** Where the deformed arrangement is a grid again (runner 8 at `7.5G`, `7.25G`,
+`7.05G`; runner 4 at `3.25G`, `4.75G`, `3.05G`, `4.95G`), the event returns to `R = 1` with four pinners `[1, 3, 5, 7]`.
+That is the φ(n) global instant of the new, finer grid.
+
+**4. Runners whose `d_min` and `S` do not change keep the AP event.** Subject 4 while runner 8 moves, and subjects 1
+and 8 while runner 4 moves, stay at `t* = 1/8`, pinned by their AP neighbours.
+
+**Reading, in the owner's terms.** The deformation moves each runner's isolation point along the AP's own spine at
+scale `d_min`, pinned by its circle neighbour. It is never lost. It jumps to another AP instant (`3/8`) or a
+cascade-found instant in band 0 when `S` crosses 7, and snaps back to a global instant whenever the arrangement is a
+grid again. Time scales as `1/d_min`: as a runner closes on a neighbour, `d_min → 0` and `t*` grows like `R/(8·d_min)`.
+
+---
+
+## E54 — 2026-09-26 — two runners deformed; the deformation step in Lean; the owner's taxonomy of shapes
+
+**Two runners deformed together** (`deform_two_runners_v1.{py,out}`, exact): pairs `(8,1), (8,4), (2,7), (4,5)`, each
+over a 13 × 13 grid of deformations in `(−0.9G, 0.9G)`, every subject: 5,408 subject-events.
+- None lost; every event in band 0; largest `R = 17/4`.
+- `S ≤ 7 ⇒ R = 1` held in every case, and every event is pinned by a circle neighbour. Both are forced by theorems
+  (R1, Thm 6.2(d)), so they confirm the code and add nothing.
+- The informative part is the band-0 containment, the same picture as one runner (E53).
+
+**Lean: `LRC/Spec/DeformationN.lean`** (commit `4f5a39e`, gate PASS 1,580 of 1,580) `[PROVED — axiom-clean]`:
+- `lonelyAt_of_close`, **openness**: lonely at `t` with margin `ε` stays lonely at `t` under any change of speeds of
+  size `η` with `2η|t| ≤ ε`.
+- `lonelyAt_of_limit`, **closedness**: a limit of arrangements lonely at instants in `[c, T]` is lonely at an instant
+  in `[c, T]`.
+- `lonely_along_path`, **the deformation theorem**: along a continuous path of speeds, isolation at the start that is
+  locally stable and never leaves a fixed window of instants `[c, T]`, `c > 0`, is present at the end. Real induction.
+
+Its two conditions are explicit hypotheses:
+- **Local stability** holds wherever the lonely set has interior. Isolated instants need the two-pinner lemma.
+- **The window** is the owner's "bounded by the speeds". The box certificates supply it where `d_max ≤ 15·d_min`
+  (`t* ≤ 15/(8·d_min)`).
+
+**Owner (2026-09-26), the shapes an ordered arrangement can take.** *"All speeds are in order. So basically you have
+evenly spaced, you have clumped with outliers and evenly spaced with a clump somewhere. Giant spaced can still be seen
+as even spaced. All clumped is also like even spaced."*
+
+The shape is the vector of the seven consecutive **speed gaps** `g₁..g₇` up to scale: an arrangement-level object that
+treats every runner at once. A subject's readings are sums of consecutive gaps.
+
+**Evenly spaced** `[PROVED — in the text; the bound rests on E50/E52]`. If `g_max ≤ ρ·g_min`, then for every subject
+`d_min ≥ g_min` and `d_max ≤ Σg ≤ 7·g_max`, so `S ≤ 7ρ`. That gives:
+- `ρ ≤ 1` (all gaps equal, the AP): R1, in Lean;
+- `ρ ≤ 15/7`: every runner by the box certificates (`[VERIFIED]`, not in Lean).
+
+"Giant spaced" and "all clumped" are the same class: scale invariance, one gap.
+
+**Clumped with outliers, or evenly spaced with a clump.** Some gaps are much smaller than others.
+- A tight clump is a compact train: `TrainCollapseN`, `SyncBlockN` (free phase).
+- Levels separated by large gaps: the split-chain rule (`SplitChainN`, `pair_window` iterated).
+- **Owed:** a case split on the gap vector, with thresholds, that makes these classes jointly exhaustive, plus the
+  bound at each class's boundary.
+
+---
+
+## E55 — 2026-09-26 — deformations through crowded slots; margin stability in Lean; one end is enough
+
+**The close-pair rule (owner).** It is E35's slot-sharing cure: *"where two runners crowd a single slot, but it is really
+sensitive because it's easy for it to slip into a different scale."*
+
+**Map of deformations through crowded slots** (`deform_map_v1`, `v2`; exact). Three paths: the AP with runners 3, 4
+crowded into one slot; the AP with 7, 8 crowded; and the late case `(1,31,…,225)` with its close pair pulled apart.
+- **The first event jumps between nearby scales, often:** 7–12 jumps per crowded subject along a path, `R` moving
+  within `1 … 1.37`. That is the owner's sensitivity. The first event is sometimes a single doubly pinned instant.
+- **The lonely set never loses its interior.** At every step every subject has a lonely cell of positive length within
+  `R ≤ 16`: 0 genuinely tight points on these paths.
+- **So local stability holds by margin throughout.** In the interior of a lonely interval every reading is strictly
+  above `1/8`. Genuine tightness, where no cell has interior, occurs at special whole-number configurations such as the
+  exact AP's end runners; there the two-pinner lemma is needed.
+
+**Lean** (commits `7129a6e`, and the one below) `[PROVED — axiom-clean; gate PASS 1,583 of 1,583]`:
+- `DeformationN.eventually_lonely_of_margin`: lonely with margin at `p s` implies lonely at every nearby `p r`.
+- `DeformationN.lonely_along_path_of_margin`: the deformation theorem with local stability supplied by margins.
+- **`EndRunnerN.lonelyRunnerAt8_of_slowest`**: if the slowest runner of every arrangement of eight distinct positive
+  whole-number speeds is lonely, the conjecture holds for every runner of every real arrangement. This is the owner's
+  *"runner 1 is runner 8's neighbour … if you prove it at one end it is proved all over"*, made exact. Every subject's
+  readings are the slowest runner's readings in `(1, 1 + s₁, …, 1 + s₇)`, and sets of at most six fall to order seven.
+  Reversing the speeds swaps the ends.
+
+**What this does to the case split.** Only the slowest runner remains. Its readings are the cumulative speed gaps:
+`d_j = g₁ + … + g_j`, `d_min = g₁`, `d_max = W = Σg`. So the owner's shapes are directly the subject's cases:
+- `g₁ ≥ W/7`, the subject's own gap at least the mean: R1 (`ratio_condition`; Thm 4.9, the wide-gap lemma for an end
+  runner). **In Lean.**
+- `W/15 ≤ g₁ < W/7`: the box certificates, event by `R = 15`. `[VERIFIED — computer]`; Lean owed (certificate export).
+- `g₁ < W/15`: the subject's own first gap is small against the spread. Open. The late events all have a close pair
+  elsewhere and `g₁` comparable to the mean; the slabs continue upward.
