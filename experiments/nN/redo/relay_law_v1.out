@@ -1,0 +1,46 @@
+Case C (slowest runner, g_1 < W/22): event location and the six runners' wait, in laps of d_2
+  even              g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.504 laps of d_2; max WAIT/ROOM 0.1068
+  even              g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.248 laps of d_2; max WAIT/ROOM 0.0211
+  even              g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.597 laps of d_2; max WAIT/ROOM 0.0046
+  clumped+outliers  g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.253 laps of d_2; max WAIT/ROOM 0.0468
+  clumped+outliers  g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.377 laps of d_2; max WAIT/ROOM 0.0134
+  clumped+outliers  g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 1.297 laps of d_2; max WAIT/ROOM 0.1218
+  even+clump        g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.183 laps of d_2; max WAIT/ROOM 0.0323
+  even+clump        g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.378 laps of d_2; max WAIT/ROOM 0.0214
+  even+clump        g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.685 laps of d_2; max WAIT/ROOM 0.0471
+Case C runs 1350; repeated settings 52; with a >= 3x slower setter in between (H2) 18; without 34
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [4, 1, 2], sigma5/d_2 3.1974, gaps g2..g7 [1766, 1660, 1571, 1898, 1670, 1630]
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [6, 4, 1], sigma5/d_2 3.0862, gaps g2..g7 [2089, 1964, 1969, 2102, 1850, 1776]
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [6, 4, 1], sigma5/d_2 2.9701, gaps g2..g7 [1521, 1441, 1470, 1300, 1333, 1267]
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [6, 4, 1], sigma5/d_2 3.0277, gaps g2..g7 [786, 811, 756, 725, 666, 696]
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [6, 1, 2], sigma5/d_2 2.8839, gaps g2..g7 [1343, 1315, 1134, 1130, 1118, 1212]
+  H2 fails: even              W/30    repeater rank 3 (0 = g_1), between ranks [6, 4, 1], sigma5/d_2 3.1849, gaps g2..g7 [221, 218, 227, 228, 198, 191]
+  H2 fails: even              W/1000  repeater rank 3 (0 = g_1), between ranks [5, 1], sigma5/d_2 3.9411, gaps g2..g7 [692, 715, 663, 733, 662, 685]
+  H2 fails: even              W/1000  repeater rank 2 (0 = g_1), between ranks [6, 3, 5, 1, 3], sigma5/d_2 3.9411, gaps g2..g7 [692, 715, 663, 733, 662, 685]
+  H2 fails: even              W/1000  repeater rank 6 (0 = g_1), between ranks [5, 2], sigma5/d_2 3.5855, gaps g2..g7 [936, 811, 912, 825, 826, 925]
+  H2 fails: even              W/1000  repeater rank 5 (0 = g_1), between ranks [2, 6, 4], sigma5/d_2 3.5855, gaps g2..g7 [936, 811, 912, 825, 826, 925]
+  H2 fails: even              W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 5], sigma5/d_2 3.9902, gaps g2..g7 [407, 451, 417, 419, 416, 380]
+  H2 fails: clumped+outliers  W/1000  repeater rank 3 (0 = g_1), between ranks [2, 1, 4], sigma5/d_2 0.8492, gaps g2..g7 [16198, 47, 13706, 22, 18, 35]
+  H2 fails: clumped+outliers  W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 6, 5], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 3 (0 = g_1), between ranks [2, 6, 5, 4], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 2 (0 = g_1), between ranks [6, 5, 4, 3], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 6 (0 = g_1), between ranks [5, 4, 3, 2], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 5 (0 = g_1), between ranks [4, 3, 2, 6], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 6, 5], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 3 (0 = g_1), between ranks [2, 6, 5, 4], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 2 (0 = g_1), between ranks [6, 5, 4, 3], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 6 (0 = g_1), between ranks [5, 4, 3, 2], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 5 (0 = g_1), between ranks [4, 3, 2, 6], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 6, 5], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 3 (0 = g_1), between ranks [2, 6, 5, 4], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 2 (0 = g_1), between ranks [6, 5, 4, 3], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 6 (0 = g_1), between ranks [5, 4, 3, 2], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 5 (0 = g_1), between ranks [4, 3, 2, 6], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 6, 5], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 3 (0 = g_1), between ranks [2, 6, 5, 4], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 6 (0 = g_1), between ranks [5, 4, 3, 2], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 5 (0 = g_1), between ranks [4, 3, 2, 6], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 4 (0 = g_1), between ranks [3, 2, 6, 5], sigma5/d_2 0.0351, gaps g2..g7 [7172, 32274, 65, 74, 63, 51]
+  H2 fails: clumped+outliers  W/1000  repeater rank 5 (0 = g_1), between ranks [1, 3, 2], sigma5/d_2 1.2857, gaps g2..g7 [12, 9, 3, 3, 3, 2736]
+  H2 fails: even+clump        W/1000  repeater rank 4 (0 = g_1), between ranks [1, 5, 2], sigma5/d_2 2.1928, gaps g2..g7 [1111, 1260, 14, 11, 1312, 1108]
+repeaters without a 3x-slower bridge, by sigma5/d_2 < 0.25: Counter({True: 20, False: 14})
