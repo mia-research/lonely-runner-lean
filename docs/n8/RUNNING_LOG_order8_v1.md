@@ -2335,3 +2335,62 @@ runners fans out on the time scale of its own spread, so it acts like one runner
 The one-zone-per-setting accounting of E67 then undercounts; the train (E33, `TrainCollapseN`) is the five-and-six case
 of this. **Next:** group the readings into clumps and test whether, clump by clump, the cascade sets each clump about
 once, with a clump's cost being its fanned zone; that is the accounting a proof would use.
+
+---
+
+## E69 — 2026-09-26 — deformation paths from the progression: every pinch-off located exactly
+
+**Owner:** the loneliness exists (the progression) and speed deformations move it; *"I don't think of it as a jump, more
+displaced to somewhere else in the geometry"*; locating every pinch-off along deformation paths *"is a good place to
+start"*. The wait bounds, block laws and clump accounting of E66–E68 are statements about blocked stretches from an
+arbitrary start, and are set aside as proxies; the object is the displacement at a pinch-off.
+
+**Set-up** (`pinchoff_v1.{py,out}`, `pinchoff_v1_summary.out`; exact, BSM). 85 paths: 45 Case C arrangements (every
+30th of E56's 1,350) and 40 random arrangements of speeds in `[1, 300]`. Each path is `v(s) = (1 − s)v_AP + s·v`, with
+`v_AP` the progression with the target's slowest speed and spread, so every speed stays positive, the order is kept,
+and the slowest runner's readings are linear in `s`. The event is followed on a 400-point grid, with bisection to
+`2⁻⁴⁴` wherever its pinning changes. A pinch-off (runner `a` leaves exactly as runner `c` enters) is linear in `s` and
+solved exactly. The landing is computed **at `s*` itself**: from the pinched instant, the entering runner holds the
+slot until its own exit, and the cascade from there gives the first lonely instant.
+
+**First run defect, repaired before reading results.** The entering runner at the component's right end can change
+inside a grid step; v1 solved only for the runner seen at the left of the bracket, giving 72 solutions outside their
+bracket and one "no landing" at `s* = 1.446`, off the path, where speeds are negative. Cascading from the bound there
+ends at once with no moves (the artefact is confirmed). Repaired: every runner's entry is a candidate, and only
+solutions inside the bracket count.
+
+**Results** `[VERIFIED — exact, on these 85 paths]`:
+- **1,753 pinch-offs. Every one is displaced to a lonely component that already has positive length at `s*`**: the
+  isolation moves to another place in the geometry, and the event just after `s*` agrees with the landing in all
+  1,753.
+- **Where:** 1,624 of 1,753 pinch the first spine instant `R = 1`. There the nearest runner leaves as a farther one
+  enters. The entering runner is rank 6 (571), 5 (375), 4 (286), 3 (223), 2 (89) and 1 (80). The other 129 are
+  elsewhere.
+- **How far:** `R` grows by a factor of at most 2.54 (1,305 of 1,753 under 1.05). The largest landing is `R = 5.81`,
+  and none lands in `(7, 9)`.
+- **Handover:** in 555 the isolation lands exactly where the entering runner leaves its zone, with no relay. In 492
+  it takes one move, in 397 two, and at most 12.
+- **191 births:** the event is displaced *back*, to a component born at that moment (length 0 at detection), by a
+  factor of at least 0.34.
+- **73 transitions at `s = 0` itself:** at the progression every isolation instant is already pinched (at `R = 1` the
+  first runner sits at `+1/8` and the last at `−1/8`), and the first step off it displaces the isolation to `R = 3` or
+  `R = 5`.
+
+**The first step off the progression** (`ap_first_step_v1.{py,out}`) `[PROVED — first order, below; VERIFIED 400 of 400
+exact directions]`. Take readings `j·d + s·e_j`. At `t = a/(8d)`, `a ∈ {1, 3, 5, 7}`, every runner sits on an odd
+multiple of `1/8`. Only two sit on the zone boundary: `j ≡ a` at `+1/8` and `j ≡ −a` at `−1/8` (mod 8, since
+`a² ≡ 1`). To first order, instant `a` stays lonely iff some `y` has `e_j + j·y ≥ 0` for the first and
+`e_{j′} + j′·y ≤ 0` for the second. So:
+- `a = 1` opens iff `e₇ ≤ 7e₁`, and `a = 7` iff `e₇ ≥ 7e₁`;
+- `a = 3` opens iff `3e₅ ≤ 5e₃`, and `a = 5` iff `3e₅ ≥ 5e₃`.
+
+**The four isolation instants come in two complementary pairs, and every direction opens at least one of each
+pair.** The progression's isolation is never destroyed by the first step; it is displaced within the pair. `a = 1`
+survives exactly when the spread grows at most 7 times as fast as the smallest reading, which is R1 (Case A) to first
+order. The event matched the predicted first open instant in 400 of 400 directions; the one tie (`e₇ = 7e₁`) is
+`W = 7·d_min` exactly, lonely at `R = 1` by R1.
+
+**Next:** (i) the pair law in Lean, beyond first order: every deformation of the progression small enough keeps one
+instant of each pair lonely. (ii) The pinch-off displacement: at a pinch-off every runner except the two pinchers is
+clear, with room. In 555 of 1,753 the entering runner's exit is already lonely; read off, from the geometry at `s*`,
+what forces the landing in the others.
