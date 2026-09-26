@@ -3305,3 +3305,46 @@ completes the proof part."* None has been used.
 **Handovers.** `HANDOVER_2026_09_26_v3.md` (commit `d2a8584`) was checked by `compile-diff` against v2 and E67–E100,
 which found 45 losses: four figures in disagreement with their sources, hypotheses and scopes dropped, and v2's open
 items and retractions missing. `HANDOVER_2026_09_26_v4.md` repairs them. v2 and v3 are kept unchanged.
+
+---
+
+## E102 — 2026-09-27 — Lean review; the cascade is the oracle; where the displaced isolation lands
+
+**Lean review** (Spec gate re-run 2026-09-27: PASS, 99 modules, 1,624 declarations axiom-clean, coverage 1,624 of
+1,638, OWED register unchanged). The six new modules (`ProgressionPairN`, `GridPairN`, `FlankSumN`, `GridNudgeN`,
+`RungR1N`, `GrandReturnN`) state what their docstrings say. None is imported by any other module and none discharges
+`CaseB8` or `CaseC8`. Docstring defects: `ProgressionPairN` asserts the surviving interval
+`[a²/(8·d_a), a(8−a)/(8·d_{8−a})]`, of which only the left endpoint is proved; `SlowestSkeletonN` says Case B is
+verified at `T = 22` where E66 gives `T = 24`. The fact "within `1/8` of `m/8`, `m mod 8 ∈ 2…6`, is clear" is proved three
+times. Owed: reverse R1, the bound-grid lemma, `Lonely8` wrappers for the whole-number forms.
+
+**Owner (chat, verbatim):** *"Ok I want to be sure you read the mistakes or misunderstanding the last session had, mainly
+to do with trying to import previous proofs frame work instead of reasoning within this new/novel work"*; then *"Yes the
+cascade is your oracle because it will instantly find the isolation points of any arrangement. What that leaves you to do
+is make sure we have the mechanisim it uses and we will have proof. Most useful if you ever find an exception or counter
+example is to then perturb it through cascade so you can see the mechanisim."*
+
+**The relapse this answered.** After re-reading handover v4, the session's reply framed the proof as the cascade orbit
+stopping or passing the half lap because the openings are finite (a search that must terminate), leaned on the
+distinct-setter move budget (termination counting), wrote "hands the isolation", proposed hunting the arrangements
+closest to the half lap, and restated the conjecture as an equivalent existence statement. The half-lap observation (a
+crossing of `1/2` goes through an even reading `b` and lands at `1/2 + 1/(8b)`, which the mirror shows is not lonely)
+stands as mathematics and is a check, not the frame. Memory:
+`feedback_n8_cascade_is_the_oracle_2026_09_27` (place test: a draft must name where the isolation lands, checkable
+against the cascade, not only that or when it stops).
+
+**Every landing is a rung plus its own deviation** (`rung_landing_v1.{py,out}`; exact; all 346,104 sets of readings
+`≤ 24`) `[VERIFIED — exhaustive exact]`. The cascade's isolation is `t* = (8K+1)/(8e) = K/e + 1/(8e)`: the rung
+`a/q = K/e` in lowest terms plus the deviation forced by `e`. Loneliness forces `e` to be the least reading divisible by
+`q`: 346,104 of 346,104. The session's further claim that every multiple of `q` lies in `[e, 7e]` is **false** (holds in
+281,137); the condition is residues mod `8e` in `[e, 7e]`. Denominators: `q = 1` (the bound) 200,736; `q = 3…8`
+36,940; `q = 2` never; `q > 8` 108,428, where `e` is the only multiple of `q` in 106,543, so there the rung reading is
+just runner `e`'s own opening on lap `K` and adds nothing.
+
+**Where the displaced isolation lands** (`landing_setter_v1.{py,out}`; the 145,368 sets not isolated at the bound)
+`[VERIFIED — exhaustive exact]`: the setter is never the nearest runner (ranks 2–7: 5,527 / 16,353 / 28,652 / 34,078 /
+31,528 / 29,230); its lap `K ≤ 7` (`K = 1`: 85,137); `R* < 1.5` in 108,249 and `R* < 5.67` always; the setter was in the
+slot at the bound in 59,963 and clear there in 85,405. (`e < (8K+1)·d_min` in every case is `R* > 1` restated.)
+
+**Not new.** The log-time form (every runner's blocked windows are one fixed set shifted by its log-reading) was reached
+for again; it is E11 and `LogTimeN`.
