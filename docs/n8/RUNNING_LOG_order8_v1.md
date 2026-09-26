@@ -3142,3 +3142,23 @@ the slot:
 
 The edge kind is the nudge's room condition. The wrap kind is the grid at the new scale, as in E76 (six residues turning
 at their own rates).
+
+---
+
+## E95 — 2026-09-27 — the chain of nudges; repeats are what exceed the budget, and they are not slot-sharing
+
+**The chain** (`nudge_chain_v1.{py,out}`; exact; exhaustive readings `≤ 24`, 145,368 relays; wide sample, 30,997)
+`[VERIFIED — exact]`:
+- The nudges do not shrink step by step: the factors `λᵢ` decrease along the chain in only 26,649 of 90,726 chains of
+  length `≥ 2` (wide: 8,642 of 17,978).
+- A setter repeats in 9,091 relays (wide: 1,253). A wrap occurs in 376 (wide: 3,346).
+
+**The budget** `[PROVED — from Thm 6.25]`. Each move multiplies `R` by less than `9/7`, and `(9/7)⁷ < 7`. A chain whose
+setters are all different has at most 7 moves and ends inside the first lap. Only repeats take a relay further.
+
+**Are repeats the owner's multiple cycles, two runners sharing a slot?** (`repeat_crowding_v1.{py,out}`; exact,
+readings `≤ 24`) `[VERIFIED — exhaustive exact]`. At the repeat, the repeating setter shares its eighth with another
+reading (`|d − s|·t < 1/8`) in **540 of 9,091**. For comparison, some setter shares its eighth when it sets in 40,776 of
+the 136,277 chains without a repeat. **As operationalised here, repeats are not caused by slot-sharing.** E67 recorded
+their commoner shape: a fast runner whose clear band is bridged by others, often by a slower runner's longer zone.
+Those cost little, since a fast setter at lap `M` multiplies `R` by less than `(8M+1)/(8M−1)`.
