@@ -1,0 +1,5 @@
+generic reduced sets with exactly two odd readings: 1000; rule succeeds 946; separation case (min odd > 3 max even) 1
+  failures: 54  e.g. [[48, 67, 126, 183, 198, 232, 278], [33, 50, 52, 150, 160, 169, 210], [11, 58, 118, 125, 310, 320, 356], [35, 118, 124, 228, 292, 342, 343], [95, 148, 164, 298, 330, 354, 387], [25, 54, 76, 145, 160, 212, 338]]
+  residual (2, 12, 15, 21, 32, 34, 38): rule does not succeed
+  residual (4, 5, 6, 8, 14, 32, 37): lonely at t = 31/768 (tau0 + -4/4 room, shift 0)
+  residual (4, 5, 6, 14, 17, 32, 38): lonely at t = 37/912 (tau0 + -4/4 room, shift 0)
