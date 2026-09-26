@@ -3162,3 +3162,28 @@ reading (`|d − s|·t < 1/8`) in **540 of 9,091**. For comparison, some setter 
 the 136,277 chains without a repeat. **As operationalised here, repeats are not caused by slot-sharing.** E67 recorded
 their commoner shape: a fast runner whose clear band is bridged by others, often by a slower runner's longer zone.
 Those cost little, since a fast setter at lap `M` multiplies `R` by less than `(8M+1)/(8M−1)`.
+
+---
+
+## E96 — 2026-09-27 — who repeats, at which laps, and which ratio caps the displacement
+
+**Owner:** *"I believe there is a scale or ratio that will dictate how far out the isolation point gets pushed,
+similar to d_min."*
+
+(`displace_ratio_v1.{py,out}`; exact; the 145,368 relays of readings `≤ 24`) `[VERIFIED — exhaustive exact]`:
+- **Repeaters are the fast runners.** By rank: 6 in 4,428, 5 in 3,162, 4 in 2,539, 3 in 1,486, 2 in 458, 1 in 49. By
+  `ρ = d/d_min` they cluster just below 8 (8 in 2,963; 7 in 1,850), with peaks at 16 (1,549) and 21 (1,150): the runners
+  that collide at the bound.
+- **They set on consecutive laps:** (1, 2) in 5,536, (2, 3) in 2,830, (3, 4) in 2,663. A runner with `ρ ≈ 8` passes the
+  slot about once per unit of `R`, so a relay spanning a unit or two meets it again.
+- **Ceilings on the displacement** (largest final `R` per value):
+  - the collider's lap `k` at the bound (`b ≈ 8k·d_min`): `k = 1` 5.667, `k = 2` 3.571, `k = 3` 3.571;
+  - `b/d_min`: 4.7–5.7 for `b ∈ [7.3, 8.5]·d_min`, and 3.571 at 16 and 24;
+  - `g_min/d_min` (crowding): 5.667 at 0.33, 4.714 at 0.5, 4.688 at 0.67, 3.905 at 1, 4.4 at 1.5, 3.3 at 2, 2.2 at 3;
+  - `S`: peak 5.667 at `S = 8`, falling to about 3.5 by `S = 14`;
+  - `d₂/d_min` and `d_min/g`: no ordering.
+
+**Reading.** The displacement is set by the runner that collides at the bound, and it is largest for a collider on its
+first lap (`b ≈ 8·d_min`), the same runner that repeats. It is a candidate for the owner's ratio: `d_min` sets where
+the isolation starts, and the collider's lap sets how far it can move. **Range caveat:** readings `≤ 24` restrict
+`k ≤ 3` and cap `S`. **Next:** the wide sample, measuring the displacement in the collider's own units against `k`.
