@@ -1,0 +1,29 @@
+reading sets (7 distinct in 1..24): 346104
+  isolated by no menu instant: 0
+  B    works:  200736; the only family that works:     14
+  L    works:  268853; the only family that works:    324
+  N    works:  112169; the only family that works:      0
+  R2   works:  179748; the only family that works:      5
+  R3   works:  223910; the only family that works:      5
+  R4   works:  170807; the only family that works:      6
+  R5   works:  211811; the only family that works:      1
+  R6   works:  135254; the only family that works:      0
+  R7   works:  206136; the only family that works:     19
+  R8   works:  160107; the only family that works:      0
+  V    works:   27185; the only family that works:      1
+  sets the bound does not isolate: 145368; their most common patterns:
+    ['L', 'R3', 'R5', 'R7']: 3437
+    ['L', 'R2', 'R3', 'R5', 'R7']: 2807
+    ['L', 'R3', 'R7']: 1988
+    ['L', 'R2', 'R3', 'R7']: 1914
+    ['L', 'N', 'R3', 'R4', 'R5', 'R6', 'R8']: 1821
+    ['L', 'N', 'R4', 'R5', 'R8']: 1759
+    ['L', 'N', 'R2', 'R4', 'R5', 'R6', 'R8']: 1757
+    ['L', 'R2', 'R3', 'R4', 'R5', 'R7']: 1702
+    ['N', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8']: 1682
+    ['L', 'R2', 'R3', 'R4', 'R5']: 1618
+    ['N', 'R2', 'R4', 'R5', 'R6', 'R7', 'R8']: 1599
+    ['L', 'N', 'R2', 'R3', 'R4', 'R5', 'R6', 'R8']: 1590
+    ['L', 'R2', 'R3', 'R4', 'R5', 'R6']: 1576
+    ['L', 'N', 'R3', 'R4', 'R5', 'R8']: 1547
+    ['L', 'R3', 'R4', 'R5', 'R7']: 1457
