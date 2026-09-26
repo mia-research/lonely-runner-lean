@@ -1,0 +1,7 @@
+generic reduced sets (every six coprime), random in [1,400]: 2000
+  movers at g = g_1 (the nearest runner's gap):     {0: 37, 2: 14, 3: 28, 4: 87, 5: 298, 6: 1536}
+  least movers over every lattice g in [2, max]:    {2: 405, 3: 725, 4: 655, 5: 208, 6: 7}
+  residual (2, 12, 15, 21, 32, 34, 38): movers at g_1 = 2; least 2 at g = 2 (movers [15, 21])
+  residual (4, 5, 6, 8, 14, 32, 37): movers at g_1 = 4; least 2 at g = 2 (movers [5, 37])
+  residual (4, 5, 6, 14, 17, 32, 38): movers at g_1 = 5; least 2 at g = 2 (movers [5, 17])
+  residual (4, 7, 8, 15, 29, 36, 37): movers at g_1 = 4; least 4 at g = 2 (movers [7, 15, 29, 37])
