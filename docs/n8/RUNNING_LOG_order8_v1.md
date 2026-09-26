@@ -1919,3 +1919,342 @@ crowded into one slot; the AP with 7, 8 crowded; and the late case `(1,31,…,22
 - `W/15 ≤ g₁ < W/7`: the box certificates, event by `R = 15`. `[VERIFIED — computer]`; Lean owed (certificate export).
 - `g₁ < W/15`: the subject's own first gap is small against the spread. Open. The late events all have a close pair
   elsewhere and `g₁` comparable to the mean; the slabs continue upward.
+
+---
+
+## E56 — 2026-09-26 — proof plan; WP1 in Lean; WP2 maps Case C
+
+**Plan:** `docs/n8/PROOF_PLAN_ORDER8_v1.md`. The owner's direction: certificates are kept, since they do no harm, and
+other methods are tried as well.
+
+**WP1** (`LRC/Spec/SlowestSkeletonN.lean`, commit `d38da5e`, gate PASS 1,588 of 1,588) `[PROVED]`:
+`lonelyRunnerAt8_of_cases T`. The conjecture at eight runners follows from two OWED statements on the slowest runner,
+both registered on the gate:
+- `CaseB8 T`: `7m < max ≤ T·m`;
+- `CaseC8 T`: `max > T·m`.
+
+Case A (`max ≤ 7m`) is discharged by R1. At `T = 22`, Case B is verified by the slab certificates (not Lean).
+
+**WP2: Case C mapped by the cascade** (`case_c_map_v1`, `case_c_paths_v1`; exact) `[EMPIRICAL — 1,350 arrangements +
+76 path steps]`.
+- Setting: the subject is the slowest runner with `g₁ < W/22`.
+- Shapes of the other gaps: even; clumped with outliers; even with a clump.
+- Subject's gap: `g₁ ≈ W/30, W/100, W/1000`.
+
+Results:
+- **The event always lies in the nearest runner's first clear band**, `t ∈ [1/(8g₁), 7/(8g₁)]`: 1,350 of 1,350.
+- **The other six clear together within at most 1.297 laps of `d₂`** after that band opens. The band gives
+  `(3/4)·s₂` laps, and the largest share used was 12%.
+- **Along the paths the event relocates often and stays very early:** 24 jumps in 76 steps, `u* ≤ 0.135`,
+  `WAIT/ROOM ≤ 0.013`.
+
+**What Case C therefore needs** (WP3): a window lemma for the six, i.e. every window of `K` laps of `d₂` holds an
+instant clearing all six, with `K ≤ (3/4)·s₂`. The room is large unless runner 3 is also close to the subject; then the
+core is the clump at the subject end (a larger `u`, lower order at `1/(u+1)`).
+- **A plain count cannot give the window lemma:** six runners block `6 × 1/4 > 1` of a window.
+- **What it needs** is the structure of the E31/E32 blocked stretches (κ ≤ 2.76 measured), with compact clumps
+  collapsed (`TrainCollapseN`).
+
+---
+
+## E57 — 2026-09-26 — WP3: the scale law for a six-runner block's longest blocked stretch
+
+**Owner:** *"there is an interesting relationship between scale."*
+
+**Measured** (`block_blocked_v1`, `v2`; exact, Boundary Set Method; one period `1/gcd`; touching zones do not merge).
+`L(F)` is the longest stretch of time during which some runner of a six-runner block `F` is in the subject's slot.
+Neither single scale bounds it:
+- **Compact trains** `N + E`: `L × min F` grows with `N` (4 → 34 → 334 laps), while `L × spread ≤ 1.95` and shrinks.
+  The train blocks on the time scale of its internal spread, independent of `N` (E33's resonance law).
+- **Spread blocks** (evenly spaced, random): `L × min F ≤ 1.9` laps, while `L × spread` grows.
+
+**The law** `[EMPIRICAL — 11 families, exact per block]`. Let `σ₅(F)` be the smallest spread of any five of the six.
+Then `L(F) × min(min F, σ₅(F)) ≤ 1.31` in every family, including one slow runner with a tight five-train, two slow
+runners with a tight four-train, tight six-trains, evenly spaced blocks and random blocks.
+
+**Why five.** A runner blocks an open quarter of the circle, and open quarters that only touch leave a clear point. So
+four cannot hold the slot continuously; at least five are needed. A tight four with two slow runners stays short
+(`L × min F ≤ 0.49`).
+
+**Use in Case C.** Runner 2's first band gives a window of `3/(4g₁)` in time. Any window longer than `L(F)` holds an
+instant clearing all six (startup stretch to be included in the check). So Case C closes wherever
+`min(d₂, σ₅) ≥ (4C/3)·g₁`. The two exceptions:
+- **Runner 3 also close to the subject:** a larger core at the subject's end, lower order at `1/(u+1)`.
+- **A five-cluster tighter than about `1.75·g₁`:** its free phase collapses it (`SyncBlockN`, `TrainCollapseN`).
+
+**Owed:**
+1. Exact `C`: map the worst blocks by perturbation.
+2. A proof of the block law, in two regimes: no tight five (`L ≤ C/min F`); a tight five (`L ≤ C/σ₅`).
+3. The startup stretch included.
+4. The Lean lemma.
+
+---
+
+## E58 — 2026-09-26 — WP3 item 1: the extremal block and its mechanism (resonance at t = 1/2)
+
+**Search** (`block_extremal_v1`, `v2`, `v3`; exact; local ascent, one runner at a time with decreasing steps): 31
+climbs from spread, random, compact, slow-plus-five and structured starts, and 20 climbs seeded at resonances `q = 2..6`.
+
+**Correction to E57.** The measured bound `1.31` was a sampling artefact. The ascent reaches
+**`Q = L·min(min F, σ₅) = 13/4`** at `F = [165, 166, 337, 494, 505, 772]` (shape about `1, 1, 2, 3, 3.06, 4.68`). Every
+top block contains a close pair: 165/166, 355/357, 232/233, 195/197, 165/170.
+
+**Mechanism** `[VERIFIED — exact, on the extremal block]`.
+- The longest blocked stretch is `[647/1320, 673/1320]`, centred exactly at `t = 1/2`, and is a relay of 47 zones from
+  all six runners.
+- At `t = 1/2` the even readings (166, 494, 772) sit on the subject and the odd ones (165, 337, 505) sit opposite, at
+  `1/2`.
+- So near a small-denominator instant `p/q` the runners with `q | d` restart as at `t = 0`, and the rest start from
+  fixed fractions. The long blocked stretch is a start-up stretch re-read at the scale `1/q`: the self-similarity of
+  scale the owner pointed to.
+
+**Robustness** `[EMPIRICAL]`:
+- Scaled ×5 and ×20 and re-climbed with fine steps, `Q` stays exactly `13/4`.
+- Pairs at progression positions peak at `650/201 ≈ 3.234`.
+- Starts seeded at `q = 3..6` reach at most `4725/1996 ≈ 2.37`, still centred at `t = 1/2`.
+- **Start-up stretch (item 3):** `Q₀ ≤ 0.196`, harmless.
+
+**For Case C** (`L < 3/(4g₁)`). With the constant `13/4`, the six clear inside runner 2's first band when
+`min(d₂, σ₅) ≥ (13/3)·g₁`. The two exceptions stand as before: a larger core at the subject's end, or collapse of a
+tight five.
+
+**Owed:**
+- Item 2, the law proved. Its content is now concrete: blocked stretches are longest at resonant instants `p/q`, where
+  a sub-block restarts, and are then bounded like a start-up stretch.
+- Whether `13/4` is the supremum. It is found by local ascent from 51 starts, not proved.
+
+---
+
+## E59 — 2026-09-26 — WP3 item 2: the longest blocked stretch is a bridge over the slowest runner's clear bands
+
+**Owner:** *"the cascade does this instantly and forcibly, so while it may be empirically found we should be able to
+analytically prove it."* The cascade moves by force to the latest opening, so the stretch is fixed by the speeds and
+should be derivable.
+
+**Exact reading of the stretches** (`block_bridge_v1.{py,out}`) `[VERIFIED — exact, on the top blocks]`.
+- **The `13/4` extremal** `[165,166,337,494,505,772]`: the stretch is
+  `[647/1320, 673/1320] = [(81 − 1/8)/165, (84 + 1/8)/165]`. It opens where the slowest runner enters its lap-81 zone
+  and closes where it leaves its lap-84 zone. The other five cover its **three** clear bands between, so
+  `L·d₁ = 3 + 1/4` exactly.
+- **Its centre** is `t = 1/2`, and every runner's phase relative to the slowest is exactly `0` or `1/2`: 166, 494 and
+  772 are half a lap from 165, while 337 and 505 are level with it. A runner half a lap away puts its zone in the middle
+  of the slowest runner's clear band.
+- **Other top blocks** bridge 3, 1, 1, 1 and 0 of the slowest runner's clear bands. `[355, 357, 373, 524, 561, 784]`
+  bridges 3 with `L·d₁ ≈ 4.18`; there `Q` is smaller because `σ₅ = 206 < min F`.
+
+**Analytic target, restated.** A blocked stretch is: the slowest runner's zones, plus the other five covering every
+clear band of the slowest runner that lies between them. So `L·d₁ < (number of bridged bands) + 5/4`. The block law
+becomes a bound on how many consecutive clear bands of the slowest runner (each `3/4` of its lap) the other five can
+cover without a gap.
+- **Covering one band** needs a runner near half a lap from the slowest: a phase relation, i.e. a resonance.
+- **Covering `k` consecutive bands** needs that relation to persist for `k` laps. Its drift rate is set by the speed
+  differences (the owner's scale relation).
+- **Next:** prove the per-band covering condition from the cascade's relay (each landing must lie in another runner's
+  zone), and bound how many consecutive bands a fixed set of phase relations can cover.
+
+---
+
+## E60 — 2026-09-26 — the off-lattice rule, at every order (owner: check it seriously)
+
+**Owner:** *"Hey don't throw away something so easily. If we prove n=8 most of this framework will generalise…
+Please check this seriously, not just dismissed."* The session had set the argument aside as "too strong" before
+checking it. Checked, it is correct and carries a precise condition.
+
+**The rule** `[PROVED — Lean, axiom-clean]` (`LRC/Spec/OffLatticeN.lean`, commit below; gate PASS 1,590 of 1,590).
+- **`lonely_of_off_lattice`**, every `n ≥ 4`. Split the readings into `x` and `D`. Let `h` divide every element of `D`
+  but not `x`, and let `D` be lonely at `1/n` at `τ > 0`. Then the subject is lonely at `τ + k/h` for some `k`. Each
+  `d ∈ D` moves by `d/h` whole laps per step, so `D` stays put; `x` advances by `frac(x/h) ∈ (0, 1)` of a lap, so
+  `Flanks.exists_clear_step` clears it. No density, no count.
+- **`lonely_eight_of_off_lattice`**: at order eight `D` (at most six) is supplied by native order seven.
+
+**What it is.** It is the step `LRC(n−1) ⇒ LRC(n)` for every set with an off-lattice reading.
+- It leaves exactly the sets in which every reading is a multiple of the gcd of the others; for a reduced set, every
+  `n − 2` of the `n − 1` readings are coprime.
+- It holds for real readings as well: the rest must be whole multiples of a common unit `u` with `x/u` not a whole
+  number, rational or irrational.
+
+**Checked** (`off_lattice_v1.{py,out}`, exact) `[VERIFIED]`:
+- 164 of 164 applicable random reduced sets are lonely at the constructed instant.
+- It closes 3 of the 7 `[1, 40]` residual sets of v21 §17D, e.g. `(4,5,6,14,16,34,38)`: `x = 5`, `h = 2`, `t = 1/28`.
+- The class it leaves, every six coprime, is 2,811 of 3,000 random reduced sets. So it closes real cases but not the
+  generic case.
+
+**Recorded as an error of this session:** dismissing a derivation as "too strong" without checking its hypotheses.
+This is the deflationary failure mode `CLAUDE.md` names.
+
+---
+
+## E61 — 2026-09-26 — the near-lattice rule (an invariant scale in place of the lattice): an uninformative test, and why
+
+**Owner:** *"What if you replaced the lattice with an invariant scale like cascade does?"*
+
+**The rule.** Choose a time step `Δ` with every `d ∈ D` within `δ` of a whole number of laps per step, and step
+`t = τ + kΔ` from `D`'s order-seven instant, which has margin `μ ≥ 1/56`. `D` stays clear while `kδ ≤ μ`, and `x`
+advances by `frac(xΔ)` of a lap per step. It fails only when `x` stays near-whole wherever `D` is, i.e. when `x` is tied
+to `D` by small integer relations (AP- and grid-like). That suggests a structure-versus-generic split.
+
+**Test** (`near_lattice_v1.{py,out}`, exact): 300 generic reduced sets (every six coprime) and the four residual sets
+the exact rule left, with `Δ = a/b`, `b ≤ 40`, `k ≤ 6`.
+- The "rule fires" on 300 of 300 and on 4 of 4, **but the drift condition `k·drift ≤ μ` holds in 0 cases**. The drift
+  per step was `2/5` or `1/2`. The hits are density: `6 × 780` trial instants and one happened to be lonely (the §17E
+  null). `[EMPIRICAL — uninformative as evidence for the mechanism]`
+
+**Why** `[reasoned]`. For whole-number readings, a step with all six readings within `1/56` of whole numbers is one of:
+1. an exact lattice `Δ = 1/h` (the proved off-lattice rule);
+2. a tiny step `Δ ≲ 1/(56·d_max)`, where `x` moves enough only if it is about 14 times the others (scale separation:
+   R8, split-chain);
+3. a Diophantine near-coincidence of the fractions `n/d` across all six, which needs readings of order `56k` or more.
+
+So, limited by order seven's margin `1/56`, the near-lattice drift argument adds nothing on small generic readings;
+the margin is the binding constraint.
+
+**Open:**
+- the large-reading regime, where near-coincidences exist and scaling changes nothing (simultaneous approximation, a
+  pigeonhole tool; needs a designed test);
+- a larger margin taken from `D`'s own lonely cell instead of the `1/7` threshold.
+
+---
+
+## E62 — 2026-09-26 — a lattice at the smallest gap: static part and movers
+
+**Owner:** *"what if the lattice is based on the smallest gap."* Step `t = τ + k/g`. Multiples of `g` stay exactly put
+(the static part); the others move by `frac(x/g)` per step (the movers). One mover is the proved off-lattice rule.
+`m` movers need a common clear step: the mover ladder of v21 §6.11. There `m ≤ 1` is proved; `m = 2` fails only for a
+half-lap pair; `m ≥ 3` is open. What is new: the static part is supplied by a lower order at a free instant with room,
+not at a fixed flank opening.
+
+**Measured** (`gap_lattice_movers_v1.{py,out}`, exact; 2,000 generic reduced sets, every six coprime, random in
+`[1, 400]`):
+- **At `g = g₁`** (the nearest runner's gap): movers `{6: 1536, 5: 298, 4: 87, 3: 28, 2: 14, 0: 37}`. Generic readings
+  are not multiples of the smallest gap. The `0` cases are `g₁ = 1`, a degenerate step.
+- **At the best lattice** `g ∈ [2, max]`: movers `{2: 405, 3: 725, 4: 655, 5: 208, 6: 7}`, typically at `g = 2`
+  (parity).
+- **Residual sets:** three of the four have 2 movers at `g = 2` (their odd readings), and one has 4.
+
+**Reading.** The smallest-gap lattice itself leaves about six movers. The useful lattice is usually parity, which is
+the `t = 1/2` resonance of the extremal block (E58/E59) again. At `g = 2` every mover moves exactly half a lap per step,
+so a step alternates between `τ` and `τ + 1/2`. Two movers then fail only if at every admissible `τ` one sits in
+`(3/8, 5/8)` and the other in `(−1/8, 1/8)`. Here `τ` ranges over the whole lonely set of the even (static) part, not
+one instant.
+
+---
+
+## E63 — 2026-09-26 — digression: the parity lattice with two odd movers
+
+**The statement.** For sets with exactly two odd readings `x₁`, `x₂` and five even `E`: some `τ` in the lonely set of
+`E` has both odd readings clear at `τ` or both at `τ + 1/2`. **This is equivalent to the subject being lonely**, since
+the lonely instant itself serves as `τ`. Only its structure can help.
+
+**The structure** `[PROVED — in the text]`.
+- **Failure at `τ`** means one odd reading is within `1/8` of half a lap and the other within `1/8` of the subject.
+  Equivalently, `‖2xᵢτ‖ < 1/4` for both, with `(x₁ − x₂)τ` away from whole numbers.
+- **A mover** stays in its failure arc for at most `1/(4x)`.
+- **Order six gives `E` a room** of `1/(12·max E)` around its instant. So **if both odd readings exceed
+  `3·max E`, failure cannot last across the room, and the subject is lonely.** This is a separation case.
+
+**Tested** (`parity_two_movers_v1.{py,out}`, exact): the order-six instant of the evens, 9 points across its room, and
+the half-shift.
+- Generic reduced sets with two odd readings: **946 of 1,000**. Of these, the separation case applies to 1.
+- Residual sets: 2 of 3 (`(4,5,6,8,14,32,37)` at `t = 31/768`, `(4,5,6,14,17,32,38)` at `t = 37/912`). Not
+  `(2,12,15,21,32,34,38)`.
+- **Not evidence of a mechanism.** The failure pattern has probability about `1/8` per instant for random positions,
+  so a 95% success rate over 9 correlated instants is what the geometry predicts. The guarantee holds only in the
+  separation case.
+
+**Reading.** At comparable speeds the parity route needs a room longer than the odd movers' failure passages. Order
+six's room is too short unless the odd readings are fast; this is the same margin bottleneck as E61. What the
+digression does confirm: failures at comparable speeds sit at the `t = 1/2` resonance, the mechanism of the extremal
+blocked stretch (E58/E59). So the window law and these residual cases are one problem.
+
+---
+
+## E64 — 2026-09-26 — WP3 steps 1–2: the relay across clear bands, checked exactly
+
+**Step 1** `[PROVED — from the cascade's definition]`. Covering a clear band of the slowest runner `d₁` is a cascade
+relay from `d₁`'s opening to `d₁`'s next zone. Each link has the form `|d′(8M + 1) − 8M′·d| < d`, the climb-cell
+relation.
+
+**Step 2, per link** `[VERIFIED — exact, two links on the extremal block]`. Over one lap of `d₁` the landing of setter
+`j` advances `n_j` of its laps, and the next runner `j′` drifts, to first order, by `ε_{j′} − (n_{j′}/n_j)·ε_j`. Here
+`ε = d/d₁ − n` is the deviation from the progression at the block's smallest gap.
+- 165 → 494: predicted `−0.0061`, observed `0.0083 → 0.0023`.
+- 505 → 166: predicted `−0.0141`, observed `0.0156 → 0.0017`.
+
+(`block_drift_v1.{py,out}`)
+
+**Step 2 as first stated ("the same word repeats") is false** `[VERIFIED]`. The words differ band to band. When a link's
+slack runs out, a runner far from the progression takes over: in the extremal block 772 (`ε = −0.32`) replaces
+165 → 494 at lap 83. In `[355, …, 784]`, 524 (`ε = +0.48`), 561 (`−0.42`) and 784 (`+0.21`) change position every
+band.
+
+**Consequence: the owner's smallest-gap lattice, at the block's own scale.**
+- **Near-progression runners** (small `ε`) form a slowly drifting core. Their links last at most `slack/drift` bands,
+  which is analytic.
+- **Far runners** are movers. They extend a bridge only by landing in the right arcs band after band: the mover problem,
+  band by band.
+
+The window law's proof therefore has two parts: the drift bound for the core, and a bound on how many consecutive bands
+the movers can patch.
+
+---
+
+## E65 — 2026-09-26 — WP3 part 1 in Lean: the core drift bound
+
+**`LRC/Spec/CoreDriftN.lean`** (commit below; gate PASS 1,594 of 1,594) `[PROVED — axiom-clean]`:
+- **`link_offset`**: a setter `d` landing at `t_b = (M + bn + 1/8)/d`, one landing per band, leaves the next runner `d′`
+  offset from its lap line `M′ + bn′` by exactly `o + bη`, with `o = d′(M + 1/8)/d − M′` and `η = nd′/d − n′`. The
+  offset is linear in the band.
+- **`link_persistence`**: if the link holds at bands `0` and `b`, then `|b|·|η| < 1/4`. A link lasts fewer than
+  `1/(4|η|)` bands either side.
+- **`link_drift_eq`**: `η = (nε′ − n′ε)/(n + ε)` for `d = (n + ε)d₁`, `d′ = (n′ + ε′)d₁`. The drift is the deviation
+  from the progression at the block's smallest gap.
+- **`block_persists`**: a block whose readings are all within `ε` of whole multiples of `d₁`, clear at `τ` with margin
+  `μ`, is clear at `τ + b/d₁` for every whole `b` with `|b|·ε ≤ μ`. A near-progression core has a clear instant in every
+  band for `μ/ε` bands around any lonely instant with margin.
+
+**Consistent with E64's exact data.** Link 165 → 494 has slack `0.0083` and drift `−0.0061` per band, so it holds for
+2 bands and breaks at the third. Observed: laps 81 and 82 held, 83 broke.
+
+**Still owed for the window law:**
+- Part 2, the mover bound: how many consecutive bands far-from-progression runners can patch.
+- Part 3, the assembly into the window lemma, then Case C.
+
+---
+
+## E66 — 2026-09-26 — the movers; Case C read off the cascade; slabs to 24
+
+**Lean.** `CoreDriftN.mover_consecutive` (commit `c9497b9`, gate PASS 1,595 of 1,595) `[PROVED]`: a phase that moves by
+more than a quarter lap per band never lies within `1/8` of a fixed lap line in two consecutive bands.
+
+**Movers are resonant** (`mover_pattern_v1`, exact). In the long stretches of the top blocks, every far-from-progression
+runner has a deviation near a small-denominator fraction:
+- 772 `≈ −1/3`;
+- 524 and 561 `≈ ±1/2`;
+- 784 and 742 `≈ 1/4`;
+- 361 and 365 `≈ −1/2`.
+
+So they are near-progression at the finer gap `d₁/q`, `q ≤ 4`: long stretches need the whole block near a progression
+at `d₁/Q`, `Q` small.
+
+**Owner:** *"Just check any arrangement through cascade and then design your test about how the isolation occurs. The
+cascade is deterministic and will give you the answer."*
+
+**Case C read off the cascade from the bound** (`case_c_cascade_path_v1`, `case_c_repeat_setters_v1`; exact; 1,350
+arrangements). The designed hypothesis was "every runner sets at most once", which gives
+`WAIT ≤ Σ zone widths < 1.5` laps of `d₂`.
+- It holds in **1,333 of 1,350**.
+- In **16**, one runner sets twice; the waits are short (`≤ 0.69` laps of `d₂`).
+- In **1**, one runner sets seven times (31 moves, wait `1.297`). The set has gaps `[7172, 32274, 65, 74, 63, 51]`: a
+  tight five-group with `σ₅/d₂ = 0.035`, the train resonance.
+- Runner 2 never sets.
+
+**The Case C law, as the cascade shows it** `[EMPIRICAL — 1,350]`:
+1. With no tight five-group, every runner sets at most twice, so `WAIT ≤ 3` laps of `d₂`. This fits inside runner 2's
+   first band when `d₂ ≥ 4g₁`. **To prove:** no five runners can bridge two consecutive clear bands of a sixth, outside
+   resonance.
+2. With a tight five-group, the free-phase mechanism is needed. `TrainCollapseN`, as proved, needs the train 56 times
+   faster than the core; here it is not.
+
+**Slabs complete** (`slabs_band1.log`) `[VERIFIED — exhaustive exact]`: `S ∈ [12, 13] … [23, 24]` through band 1, 0 exits
+in every slab. With E50, **every subject with `d_max ≤ 24·d_min` has its event by `R = 15`**. So Case B is verified at
+`T = 24`.
