@@ -1,0 +1,5 @@
+even                450: closed by (A) core <= 7     0, by (B) core {g_1}     0, by either     0
+clumped+outliers    450: closed by (A) core <= 7   121, by (B) core {g_1}    22, by either   127
+even+clump          450: closed by (A) core <= 7    98, by (B) core {g_1}    58, by either   105
+climb                15: closed by (A) core <= 7     0, by (B) core {g_1}     0, by either     0
+number of readings above 7 g_1, by family: [(('climb', 1), 3), (('climb', 2), 2), (('climb', 3), 7), (('climb', 4), 1), (('climb', 5), 2), (('clumped+outliers', 1), 24), (('clumped+outliers', 2), 37), (('clumped+outliers', 3), 52), (('clumped+outliers', 4), 93), (('clumped+outliers', 5), 115), (('clumped+outliers', 6), 129), (('even', 5), 150), (('even', 6), 300), (('even+clump', 4), 74), (('even+clump', 5), 19), (('even+clump', 6), 357)]
