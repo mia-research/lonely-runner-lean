@@ -1,0 +1,148 @@
+Case C (slowest runner, g_1 < W/22): event location and the six runners' wait, in laps of d_2
+  even              g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.504 laps of d_2; max WAIT/ROOM 0.1068
+  even              g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.248 laps of d_2; max WAIT/ROOM 0.0211
+  even              g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.597 laps of d_2; max WAIT/ROOM 0.0046
+  clumped+outliers  g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.253 laps of d_2; max WAIT/ROOM 0.0468
+  clumped+outliers  g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.377 laps of d_2; max WAIT/ROOM 0.0134
+  clumped+outliers  g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 1.297 laps of d_2; max WAIT/ROOM 0.1218
+  even+clump        g1 ~ W/30   : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.183 laps of d_2; max WAIT/ROOM 0.0323
+  even+clump        g1 ~ W/100  : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.378 laps of d_2; max WAIT/ROOM 0.0214
+  even+clump        g1 ~ W/1000 : 150 arrangements; event in the nearest runner's first band: 150/150; max WAIT 0.685 laps of d_2; max WAIT/ROOM 0.0471
+starts 17 (4 climbs each, 3000 proposals per climb)
+even              W/30    climb 0: obj 3.000 repeater rank 4 settings 3 loops [[1], [3, 5, 6]] same-word False sigma5/d2 2.6072
+      readings/d [0.2821, 0.5193, 0.6974, 1.0, 1.0886, 1.2548]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2821, 0.0321), 3: (0.6974, 0.0307), 5: (0.0886, 0.0886), 6: (0.2548, 0.0048)}
+even              W/30    climb 1: obj 3.000 repeater rank 6 settings 3 loops [[1], [4, 3, 5]] same-word False sigma5/d2 2.5549
+      readings/d [0.2213, 0.4346, 0.5462, 0.7603, 0.8613, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2213, 0.0287), 3: (0.5462, 0.0462), 4: (0.7603, 0.0103), 5: (0.8613, 0.1113)}
+even              W/30    climb 2: obj 3.000 repeater rank 4 settings 3 loops [[2, 1], [3, 6, 5, 2]] same-word False sigma5/d2 2.5164
+      readings/d [0.2796, 0.6163, 0.7016, 1.0, 1.27, 1.32]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2796, 0.0296), 2: (0.6163, 0.0503), 3: (0.7016, 0.0349), 5: (0.27, 0.02), 6: (0.32, 0.0133)}
+even              W/30    climb 3: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.9712
+      readings/d [0.2824, 0.5426, 0.7576, 1.0, 1.2023, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2824, 0.0324), 3: (0.7576, 0.0076), 5: (0.2023, 0.0477), 6: (0.3815, 0.0482)}
+even              W/30    climb 0: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.8215
+      readings/d [0.2871, 0.5716, 0.7576, 1.0, 1.1903, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2871, 0.0371), 3: (0.7576, 0.0076), 5: (0.1903, 0.0597), 6: (0.3816, 0.0483)}
+even              W/30    climb 1: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.7717
+      readings/d [0.2812, 0.6022, 0.7576, 1.0, 1.188, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2812, 0.0312), 3: (0.7576, 0.0076), 5: (0.188, 0.062), 6: (0.3816, 0.0483)}
+even              W/30    climb 2: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.8843
+      readings/d [0.2856, 0.5579, 0.7576, 1.0, 1.1964, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2856, 0.0356), 3: (0.7576, 0.0076), 5: (0.1964, 0.0536), 6: (0.3815, 0.0482)}
+even              W/30    climb 3: obj 2.680 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.7402
+      readings/d [0.2885, 0.5296, 0.7179, 1.0, 1.122, 1.32]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2885, 0.0385), 3: (0.7179, 0.0321), 5: (0.122, 0.122), 6: (0.32, 0.0133)}
+even              W/30    climb 0: obj 3.407 repeater rank 4 settings 3 loops [[1], [6, 5, 2]] same-word False sigma5/d2 2.7421
+      readings/d [0.2873, 0.6365, 0.7592, 1.0, 1.1339, 1.4244]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2873, 0.0373), 2: (0.6365, 0.0301), 3: (0.7592, 0.0092), 5: (0.1339, 0.1161), 6: (0.4244, 0.0756)}
+even              W/30    climb 1: obj 3.000 repeater rank 5 settings 3 loops [[1], [3, 2, 4]] same-word False sigma5/d2 2.5283
+      readings/d [0.2834, 0.4503, 0.7047, 0.8251, 1.0, 1.2495]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2834, 0.0334), 2: (0.4503, 0.0497), 3: (0.7047, 0.038), 4: (0.8251, 0.0751)}
+even              W/30    climb 2: obj 2.687 repeater rank 3 settings 2 loops [[1, 2]] same-word False sigma5/d2 2.3818
+      readings/d [0.4124, 0.698, 1.0, 1.1797, 1.5603, 1.6802]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.4124, 0.079), 2: (0.698, 0.0314), 4: (0.1797, 0.0703), 5: (0.5603, 0.0603), 6: (0.6802, 0.0136)}
+even              W/30    climb 3: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.9691
+      readings/d [0.2815, 0.5458, 0.7576, 1.0, 1.1858, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2815, 0.0315), 3: (0.7576, 0.0076), 5: (0.1858, 0.0642), 6: (0.3816, 0.0483)}
+even              W/30    climb 0: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.9829
+      readings/d [0.2841, 0.5341, 0.7576, 1.0, 1.1928, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2841, 0.0341), 3: (0.7576, 0.0076), 5: (0.1928, 0.0572), 6: (0.3815, 0.0481)}
+even              W/30    climb 1: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.7628
+      readings/d [0.2889, 0.5833, 0.7576, 1.0, 1.1949, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2889, 0.0389), 3: (0.7576, 0.0076), 5: (0.1949, 0.0551), 6: (0.3815, 0.0482)}
+even              W/30    climb 2: obj 3.000 repeater rank 5 settings 3 loops [[1], [2, 3, 4, 6]] same-word False sigma5/d2 2.4604
+      readings/d [0.289, 0.4775, 0.6804, 0.8694, 1.0, 1.2418]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.289, 0.039), 2: (0.4775, 0.0225), 3: (0.6804, 0.0137), 4: (0.8694, 0.1194), 6: (0.2418, 0.0082)}
+even              W/30    climb 3: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.8686
+      readings/d [0.2821, 0.5723, 0.7576, 1.0, 1.1958, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2821, 0.0321), 3: (0.7576, 0.0076), 5: (0.1958, 0.0542), 6: (0.3816, 0.0483)}
+even              W/30    climb 0: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 3.0057
+      readings/d [0.2828, 0.5315, 0.7576, 1.0, 1.1898, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2828, 0.0328), 3: (0.7576, 0.0076), 5: (0.1898, 0.0602), 6: (0.3815, 0.0482)}
+even              W/30    climb 1: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.8089
+      readings/d [0.29, 0.5668, 0.7576, 1.0, 1.2007, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.29, 0.04), 3: (0.7576, 0.0076), 5: (0.2007, 0.0493), 6: (0.3815, 0.0482)}
+even              W/30    climb 2: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.7349
+      readings/d [0.2881, 0.5937, 0.7576, 1.0, 1.1854, 1.3817]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2881, 0.0381), 3: (0.7576, 0.0076), 5: (0.1854, 0.0646), 6: (0.3817, 0.0483)}
+even              W/30    climb 3: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 3.0012
+      readings/d [0.2841, 0.5288, 0.7576, 1.0, 1.186, 1.3815]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2841, 0.0341), 3: (0.7576, 0.0076), 5: (0.186, 0.064), 6: (0.3815, 0.0482)}
+even              W/30    climb 0: obj 3.231 repeater rank 5 settings 3 loops [[1], [2, 3, 4]] same-word False sigma5/d2 2.4526
+      readings/d [0.2815, 0.4653, 0.6809, 0.8448, 1.0, 1.1557]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2815, 0.0315), 2: (0.4653, 0.0347), 3: (0.6809, 0.0143), 4: (0.8448, 0.0948), 6: (0.1557, 0.0943)}
+even              W/30    climb 1: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.6580
+      readings/d [0.2866, 0.6198, 0.7576, 1.0, 1.1833, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2866, 0.0366), 3: (0.7576, 0.0076), 5: (0.1833, 0.0667), 6: (0.3816, 0.0483)}
+even              W/30    climb 2: obj 3.247 repeater rank 5 settings 3 loops [[1], [2, 4]] same-word False sigma5/d2 2.4676
+      readings/d [0.281, 0.4595, 0.6814, 0.8434, 1.0, 1.153]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.281, 0.031), 2: (0.4595, 0.0405), 4: (0.8434, 0.0934), 6: (0.153, 0.097)}
+even              W/30    climb 3: obj 3.365 repeater rank 4 settings 3 loops [[1], [6, 5, 2]] same-word False sigma5/d2 2.7053
+      readings/d [0.2898, 0.6404, 0.7663, 1.0, 1.1339, 1.4243]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2898, 0.0398), 2: (0.6404, 0.0263), 3: (0.7663, 0.0163), 5: (0.1339, 0.1161), 6: (0.4243, 0.0757)}
+even              W/30    climb 0: obj 3.271 repeater rank 5 settings 3 loops [[1], [2, 4]] same-word False sigma5/d2 2.4444
+      readings/d [0.2825, 0.4585, 0.6815, 0.8394, 1.0, 1.149]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2825, 0.0325), 2: (0.4585, 0.0415), 4: (0.8394, 0.0894), 6: (0.149, 0.101)}
+even              W/30    climb 1: obj 3.211 repeater rank 5 settings 3 loops [[1], [2, 3, 4]] same-word False sigma5/d2 2.4637
+      readings/d [0.2812, 0.4661, 0.6806, 0.8446, 1.0, 1.1589]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2812, 0.0312), 2: (0.4661, 0.0339), 3: (0.6806, 0.0139), 4: (0.8446, 0.0946), 6: (0.1589, 0.0911)}
+even              W/30    climb 2: obj 3.000 repeater rank 5 settings 3 loops [[1], [2, 4]] same-word False sigma5/d2 2.4165
+      readings/d [0.2816, 0.4627, 0.6811, 0.844, 1.0, 1.1433]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2816, 0.0316), 2: (0.4627, 0.0373), 4: (0.844, 0.094)}
+even              W/30    climb 3: obj 3.000 repeater rank 4 settings 3 loops [[1], [6, 5, 2]] same-word False sigma5/d2 2.8008
+      readings/d [0.2806, 0.6386, 0.8179, 1.0, 1.1338, 1.4245]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2806, 0.0306), 2: (0.6386, 0.0281), 5: (0.1338, 0.1162), 6: (0.4245, 0.0755)}
+even              W/30    climb 0: obj 2.406 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 3.0162
+      readings/d [0.2851, 0.5218, 0.7577, 1.0, 1.1844, 1.3817]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2851, 0.0351), 3: (0.7577, 0.0077), 5: (0.1844, 0.0656), 6: (0.3817, 0.0484)}
+even              W/30    climb 1: obj 2.406 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.7177
+      readings/d [0.2864, 0.6033, 0.7576, 1.0, 1.1823, 1.3817]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2864, 0.0364), 3: (0.7576, 0.0076), 5: (0.1823, 0.0677), 6: (0.3817, 0.0484)}
+even              W/30    climb 2: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.9017
+      readings/d [0.2898, 0.5406, 0.7576, 1.0, 1.1975, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2898, 0.0398), 3: (0.7576, 0.0076), 5: (0.1975, 0.0525), 6: (0.3816, 0.0483)}
+even              W/30    climb 3: obj 2.407 repeater rank 4 settings 2 loops [[1]] same-word False sigma5/d2 2.8737
+      readings/d [0.2845, 0.564, 0.7576, 1.0, 1.2048, 1.3816]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2845, 0.0345), 3: (0.7576, 0.0076), 5: (0.2048, 0.0452), 6: (0.3816, 0.0482)}
+even              W/1000  climb 0: obj 3.306 repeater rank 6 settings 3 loops [[1, 3], [2, 5]] same-word False sigma5/d2 4.1107
+      readings/d [0.1606, 0.3398, 0.5011, 0.6758, 0.8362, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1606, 0.0894), 2: (0.3398, 0.0065), 3: (0.5011, 0.0011), 4: (0.6758, 0.0092), 5: (0.8362, 0.0862)}
+even              W/1000  climb 1: obj 3.482 repeater rank 6 settings 3 loops [[3, 1, 4], [3, 2]] same-word False sigma5/d2 3.9382
+      readings/d [0.168, 0.3318, 0.5066, 0.6602, 0.8298, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.168, 0.082), 2: (0.3318, 0.0016), 3: (0.5066, 0.0066), 4: (0.6602, 0.0065)}
+even              W/1000  climb 2: obj 3.000 repeater rank 3 settings 3 loops [[4, 6, 1], [2, 4, 6, 5]] same-word False sigma5/d2 3.7496
+      readings/d [0.3616, 0.6842, 1.0, 1.3782, 1.7283, 2.0401]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.3616, 0.0283), 2: (0.6842, 0.0176), 4: (0.3782, 0.0449), 5: (0.7283, 0.0217), 6: (0.0401, 0.0401)}
+even              W/1000  climb 3: obj 3.328 repeater rank 6 settings 3 loops [[4, 3, 1], [2, 3]] same-word False sigma5/d2 3.9411
+      readings/d [0.1675, 0.3397, 0.4823, 0.6757, 0.8298, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1675, 0.0825), 2: (0.3397, 0.0063), 3: (0.4823, 0.0177), 4: (0.6757, 0.0091)}
+even              W/1000  climb 0: obj 3.000 repeater rank 4 settings 3 loops [[1], [6, 2, 3]] same-word False sigma5/d2 3.7069
+      readings/d [0.2601, 0.5383, 0.7699, 1.0, 1.2788, 1.5026]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2601, 0.0101), 2: (0.5383, 0.0383), 3: (0.7699, 0.0199), 6: (0.5026, 0.0026)}
+even              W/1000  climb 1: obj 3.000 repeater rank 4 settings 3 loops [[1], [6, 2, 3, 6]] same-word False sigma5/d2 3.7073
+      readings/d [0.2574, 0.5206, 0.7505, 1.0, 1.2375, 1.4747]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2574, 0.0074), 2: (0.5206, 0.0206), 3: (0.7505, 0.0005), 6: (0.4747, 0.0253)}
+even              W/1000  climb 2: obj 3.000 repeater rank 4 settings 3 loops [[1], [2, 3, 6]] same-word False sigma5/d2 3.5413
+      readings/d [0.2692, 0.5327, 0.7618, 1.0, 1.258, 1.4859]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2692, 0.0192), 2: (0.5327, 0.0327), 3: (0.7618, 0.0118), 6: (0.4859, 0.0141)}
+even              W/1000  climb 3: obj 3.070 repeater rank 4 settings 3 loops [[1], [5, 6, 2]] same-word False sigma5/d2 3.8254
+      readings/d [0.2454, 0.5079, 0.7131, 1.0, 1.241, 1.4467]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2454, 0.0046), 2: (0.5079, 0.0079), 5: (0.241, 0.009), 6: (0.4467, 0.0533)}
+even              W/1000  climb 0: obj 3.000 repeater rank 6 settings 3 loops [[5, 2], [4, 3]] same-word False sigma5/d2 3.4650
+      readings/d [0.1844, 0.3344, 0.4899, 0.6728, 0.8235, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {2: (0.3344, 0.001), 3: (0.4899, 0.0101), 4: (0.6728, 0.0062), 5: (0.8235, 0.0735)}
+even              W/1000  climb 1: obj 4.304 repeater rank 6 settings 4 loops [[5, 2], [3, 1], [3, 2]] same-word False sigma5/d2 3.5727
+      readings/d [0.1801, 0.3344, 0.5138, 0.6658, 0.8235, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1801, 0.0699), 2: (0.3344, 0.001), 3: (0.5138, 0.0138), 4: (0.6658, 0.0008), 5: (0.8235, 0.0735)}
+even              W/1000  climb 2: obj 3.000 repeater rank 6 settings 3 loops [[4, 2], [3, 4]] same-word False sigma5/d2 3.4846
+      readings/d [0.1847, 0.3345, 0.5214, 0.6632, 0.8284, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {2: (0.3345, 0.0012), 3: (0.5214, 0.0214), 4: (0.6632, 0.0035)}
+even              W/1000  climb 3: obj 3.304 repeater rank 6 settings 3 loops [[5, 2], [4, 5, 3, 1, 2]] same-word False sigma5/d2 3.5850
+      readings/d [0.1796, 0.3344, 0.5046, 0.6658, 0.8234, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1796, 0.0704), 2: (0.3344, 0.001), 3: (0.5046, 0.0046), 4: (0.6658, 0.0008), 5: (0.8234, 0.0734)}
+even              W/1000  climb 0: obj 3.000 repeater rank 4 settings 3 loops [[3, 2, 5], [1]] same-word False sigma5/d2 3.8287
+      readings/d [0.2513, 0.5071, 0.7529, 1.0, 1.2453, 1.4693]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2513, 0.0013), 2: (0.5071, 0.0071), 3: (0.7529, 0.0029), 5: (0.2453, 0.0047)}
+even              W/1000  climb 1: obj 3.791 repeater rank 6 settings 3 loops [[2, 3], [4, 1]] same-word False sigma5/d2 3.9448
+      readings/d [0.1665, 0.3432, 0.5237, 0.6698, 0.8665, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1665, 0.0835), 2: (0.3432, 0.0098), 3: (0.5237, 0.0237), 4: (0.6698, 0.0032), 5: (0.8665, 0.1165)}
+even              W/1000  climb 2: obj 3.000 repeater rank 4 settings 3 loops [[6, 2, 5, 6], [1]] same-word False sigma5/d2 3.8324
+      readings/d [0.2511, 0.5071, 0.7839, 1.0, 1.2468, 1.4693]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2511, 0.0011), 2: (0.5071, 0.0071), 5: (0.2468, 0.0032), 6: (0.4693, 0.0307)}
+even              W/1000  climb 3: obj 3.000 repeater rank 4 settings 3 loops [[6, 3, 2, 6], [1]] same-word False sigma5/d2 3.7972
+      readings/d [0.2486, 0.5018, 0.773, 1.0, 1.2428, 1.4458]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2486, 0.0014), 2: (0.5018, 0.0018), 3: (0.773, 0.023), 6: (0.4458, 0.0542)}
+clumped+outliers  W/1000  climb 0: obj 3.000 repeater rank 5 settings 3 loops [[4, 1], [4, 2, 3, 6]] same-word False sigma5/d2 0.9386
+      readings/d [0.4935, 0.538, 0.9078, 0.998, 1.0, 1.0012]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.4935, 0.0065), 2: (0.538, 0.038), 3: (0.9078, 0.0922), 4: (0.998, 0.002), 6: (0.0012, 0.0012)}
+clumped+outliers  W/1000  climb 1: obj 3.472 repeater rank 5 settings 3 loops [[4, 2, 3, 6], [4, 1, 3, 6]] same-word False sigma5/d2 0.8795
+      readings/d [0.522, 0.5422, 0.9706, 0.998, 1.0, 1.0013]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.522, 0.022), 2: (0.5422, 0.0422), 3: (0.9706, 0.0294), 4: (0.998, 0.002), 6: (0.0013, 0.0013)}
+clumped+outliers  W/1000  climb 2: obj 3.000 repeater rank 4 settings 3 loops [[3, 1, 6], [3, 2, 6]] same-word False sigma5/d2 0.9542
+      readings/d [0.4861, 0.5373, 0.9822, 1.0, 1.0002, 1.0011]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.4861, 0.0139), 2: (0.5373, 0.0373), 3: (0.9822, 0.0178), 6: (0.0011, 0.0011)}
+clumped+outliers  W/1000  climb 3: obj 3.000 repeater rank 5 settings 3 loops [[4, 3, 2], [4, 1, 6]] same-word False sigma5/d2 0.9560
+      readings/d [0.482, 0.5404, 0.9723, 0.998, 1.0, 1.0012]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.482, 0.018), 2: (0.5404, 0.0404), 3: (0.9723, 0.0277), 4: (0.998, 0.002), 6: (0.0012, 0.0012)}
+clumped+outliers  W/1000  climb 0: obj 7.000 repeater rank 4 settings 7 loops [[3, 2, 6, 5], [3, 2, 6, 5], [1, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5]] same-word True sigma5/d2 0.0360
+      readings/d [0.1773, 0.9965, 0.9981, 1.0, 1.0016, 1.0029]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.1773, 0.0727), 2: (0.9965, 0.0035), 3: (0.9981, 0.0019), 5: (0.0016, 0.0016), 6: (0.0029, 0.0029)}
+clumped+outliers  W/1000  climb 1: obj 7.000 repeater rank 4 settings 7 loops [[3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 1, 6, 5], [3, 2, 6, 5]] same-word True sigma5/d2 0.0351
+      readings/d [0.182, 0.9965, 0.9981, 1.0, 1.0016, 1.0029]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.182, 0.068), 2: (0.9965, 0.0035), 3: (0.9981, 0.0019), 5: (0.0016, 0.0016), 6: (0.0029, 0.0029)}
+clumped+outliers  W/1000  climb 2: obj 11.000 repeater rank 4 settings 11 loops [[3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 1, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 1], [3, 2, 6, 5]] same-word True sigma5/d2 0.0351
+      readings/d [0.182, 0.9966, 0.9982, 1.0, 1.0016, 1.0029]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.182, 0.068), 2: (0.9966, 0.0034), 3: (0.9982, 0.0018), 5: (0.0016, 0.0016), 6: (0.0029, 0.0029)}
+clumped+outliers  W/1000  climb 3: obj 7.000 repeater rank 4 settings 7 loops [[3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 2, 6, 5], [3, 1, 6, 5], [3, 2, 6, 5]] same-word True sigma5/d2 0.0349
+      readings/d [0.182, 0.9965, 0.9981, 1.0, 1.0016, 1.0028]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.182, 0.068), 2: (0.9965, 0.0035), 3: (0.9981, 0.0019), 5: (0.0016, 0.0016), 6: (0.0028, 0.0028)}
+clumped+outliers  W/1000  climb 0: obj 2.363 repeater rank 5 settings 2 loops [[1, 2]] same-word False sigma5/d2 1.3425
+      readings/d [0.4269, 0.7383, 0.7515, 0.9201, 1.0, 74.1613]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.4269, 0.0731), 2: (0.7383, 0.0117), 4: (0.9201, 0.0799), 6: (0.1613, 0.0887)}
+clumped+outliers  W/1000  climb 1: obj 3.000 repeater rank 6 settings 3 loops [[2, 5, 4], [3]] same-word False sigma5/d2 1.2976
+      readings/d [0.0059, 0.0098, 0.0115, 0.0125, 0.0135, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.0059, 0.0059), 2: (0.0098, 0.0098), 3: (0.0115, 0.0115), 4: (0.0125, 0.0125), 5: (0.0135, 0.0135)}
+clumped+outliers  W/1000  climb 2: obj 3.000 repeater rank 6 settings 3 loops [[5, 4], [3]] same-word False sigma5/d2 1.2993
+      readings/d [0.0048, 0.0081, 0.0093, 0.0101, 0.011, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.0048, 0.0048), 2: (0.0081, 0.0081), 3: (0.0093, 0.0093), 4: (0.0101, 0.0101), 5: (0.011, 0.011)}
+clumped+outliers  W/1000  climb 3: obj 2.365 repeater rank 5 settings 2 loops [[4, 1, 2]] same-word False sigma5/d2 1.5434
+      readings/d [0.3932, 0.6917, 0.7449, 0.9195, 1.0, 83.8229]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.3932, 0.0598), 2: (0.6917, 0.025), 4: (0.9195, 0.0805), 6: (0.8229, 0.0729)}
+even+clump        W/1000  climb 0: obj 3.000 repeater rank 5 settings 3 loops [[2, 1], [6, 3]] same-word False sigma5/d2 93.5918
+      readings/d [0.0106, 0.0119, 0.3324, 0.6553, 1.0, 1.3121]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.0106, 0.0106), 2: (0.0119, 0.0119), 3: (0.3324, 0.0009), 6: (0.3121, 0.0213)}
+even+clump        W/1000  climb 1: obj 3.000 repeater rank 5 settings 3 loops [[3], [1, 4]] same-word False sigma5/d2 93.3967
+      readings/d [0.0106, 0.0121, 0.3117, 0.5529, 1.0, 1.3796]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.0106, 0.0106), 2: (0.0121, 0.0121), 3: (0.3117, 0.0217), 4: (0.5529, 0.0529)}
+even+clump        W/1000  climb 2: obj 3.000 repeater rank 4 settings 3 loops [[2], [5, 3, 6, 5]] same-word False sigma5/d2 93.7236
+      readings/d [0.0146, 0.0179, 0.494, 1.0, 1.385, 2.0798]   rho(rank): (frac(e/d), dist to p/q q<=4) {2: (0.0179, 0.0179), 3: (0.494, 0.006), 5: (0.385, 0.0516), 6: (0.0798, 0.0798)}
+even+clump        W/1000  climb 3: obj 3.000 repeater rank 4 settings 3 loops [[2], [5, 3, 6, 5]] same-word False sigma5/d2 102.9070
+      readings/d [0.0146, 0.0179, 0.4772, 1.0, 1.5189, 1.9546]   rho(rank): (frac(e/d), dist to p/q q<=4) {2: (0.0179, 0.0179), 3: (0.4772, 0.0228), 5: (0.5189, 0.0189), 6: (0.9546, 0.0454)}
+even+clump        W/1000  climb 0: obj 3.939 repeater rank 6 settings 3 loops [[1], [2, 4]] same-word False sigma5/d2 2.2268
+      readings/d [0.2325, 0.4822, 0.4981, 0.5011, 0.7688, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2325, 0.0175), 2: (0.4822, 0.0178), 3: (0.4981, 0.0019), 4: (0.5011, 0.0011), 5: (0.7688, 0.0188)}
+even+clump        W/1000  climb 1: obj 3.908 repeater rank 6 settings 3 loops [[1], [2, 4]] same-word False sigma5/d2 2.3920
+      readings/d [0.2149, 0.4859, 0.4886, 0.4912, 0.7731, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2149, 0.0351), 2: (0.4859, 0.0141), 3: (0.4886, 0.0114), 4: (0.4912, 0.0088), 5: (0.7731, 0.0231)}
+even+clump        W/1000  climb 2: obj 4.000 repeater rank 6 settings 4 loops [[2, 4], [5, 3], [2, 4]] same-word False sigma5/d2 2.1956
+      readings/d [0.2311, 0.4926, 0.4946, 0.4976, 0.77, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2311, 0.0189), 2: (0.4926, 0.0074), 3: (0.4946, 0.0054), 4: (0.4976, 0.0024), 5: (0.77, 0.02)}
+even+clump        W/1000  climb 3: obj 3.000 repeater rank 6 settings 3 loops [[2, 4], [5, 3]] same-word False sigma5/d2 2.2608
+      readings/d [0.2246, 0.4923, 0.4947, 0.4976, 0.7636, 1.0]   rho(rank): (frac(e/d), dist to p/q q<=4) {1: (0.2246, 0.0254), 2: (0.4923, 0.0077), 3: (0.4947, 0.0053), 4: (0.4976, 0.0024), 5: (0.7636, 0.0136)}
+climbs reaching a third setting: 47 of 68
