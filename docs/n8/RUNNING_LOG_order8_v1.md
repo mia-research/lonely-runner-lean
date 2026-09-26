@@ -2500,3 +2500,30 @@ the relocation proof and the neighbour bound are one statement:
 Status: `[VERIFIED — exact certificates]` for `S ≤ 24` (Case A proved; Case B slabs, event by `R = 15`, E49–E52 and
 E66). `[EMPIRICAL]` for `S > 24` (Case C: event in the first band, `R ≤ 7`, in 1,350 of 1,350, E56). In these sweeps,
 `R ≤ 4.02`.
+
+---
+
+## E73 — 2026-09-26 — the neighbour bound in Case C: adversarial test, and what the proved lemmas close
+
+**Owner:** *"prove the neighbour bound for Case C."*
+
+**Tested before any proof attempt** (`casec_R_climb_v1.{py,out}`; exact; 179 climbs of `R` itself, with free moves of
+the six other speeds and `W > 24g₁` kept; starts: every 10th E56 arrangement plus hand-built shapes — runner 3 also
+close, trains of 3–6 near `d₂` or at the top, near-progressions with an outlier) `[VERIFIED — exact, 179 climbs]`.
+**All 179 end in the first band; the largest is `R = 6.42`**, at readings
+`(1, 1.75, 2.92, 4.06, 5.14, 6.86, 24.09)·g₁`: five within `7g₁`, one just past `24g₁`. The stronger form, `R ≤ 7`
+(the nearer neighbour's first band), survives the push in Case C.
+
+**What the proved nested windows already close in the first band** (`casec_split_cover_v1.{py,out}`; exact). Two
+forms, both from `SplitChainN.nested`:
+- **(A)** the core is the readings at most `7g₁`, clear on `[1/8, 7/(8ρ_max)]` in `u = g₁t`;
+- **(B)** the core is `{g₁}`, clear on `[1/8, 7/8]`.
+
+Together they close **232 of 1,365**: 127 of 450 clumped-with-outliers, 105 of 450 even-with-a-clump, **0 of 450
+even**, and 0 of the 15 climbed shapes. The doubling in `needT` fails as soon as the fast group holds comparable
+speeds (E67), and in the even family all six are comparable.
+
+**Status of the neighbour bound in Case C: not proved.** The proved lemmas cover a minority (17% of this data) and
+none of the comparable-speed fast groups. The empirical bound (`R ≤ 7`) is strong and survives an adversarial push.
+The missing piece is the same object seen three times now (E56 window lemma, E67 accounting, E68 clumps): a fast group
+of comparable speeds must find a common clear instant inside the core's clear set, without the nested-window doubling.
