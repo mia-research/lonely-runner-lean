@@ -4604,3 +4604,41 @@ need `|c·δᵢ| ≤ 1` up to relocation; the edge readings (`c·nᵢ ≡ ±1`) 
 edge roles, which is the pair law when each edge holds one reading. It fails in exactly two ways, both named by the owner:
 a slot doubled at an edge (two readings with `c·nᵢ ≡ 1`), and deviations too large for the class (answered by a finer
 grid, larger `m`). Not derived: that some `(j, m ≤ f(S), c)` always works.
+
+---
+
+## E129–E130 — 2026-09-27 — the pair law for any grid in Lean; the φ(8) classes suffice; the m = 2 exceptions; handover v8
+
+**Owner:** *"keep going"*; *"The exception and counterexamples are important, they help you refine and clarify the
+mechanism. You take the exception and perturb them through cascade"*; *"Just checking we are using a stationary runner,
+as there are 8 runners so 8 gaps as this system is a circle and runner 1 is a neighbour to runner 8 as well as runner
+7"* (answered: no runner at rest; the subject is the slowest runner, enough by `EndRunnerN`; seven positive readings;
+lonely ⇔ both flanking gaps ≥ 1/8; see O8 below); *"we need to update the handover document so the context can be
+compacted"*.
+
+**Proved** (`Spec/GridPairLawN.lean`, commits `e12c237` and below; Spec gate PASS **1,915**,
+`experiments/nN/spec_gate_grid_class_clear.out`) `[PROVED — axiom-clean]`:
+- `grid_pair_law`: a grid (readings `x i`, grid points `n i`), classes `c` and mirror `c'` with the two edge readings
+  swapped, all others interior under both; if every deviation after rescaling by `n a/x a` and by `n b/x b` is at most
+  `1/C`, lonely at `c·n a/x a` or `c'·n b/x b`. The AP instance (classes 1 and 7) allows deviations up to `1/7`.
+- `grid_class_clear`: one class, any number of readings per edge, small-deviation conditions.
+
+**Measured** (`experiments/nN/redo/`, exact):
+- `grid_pair_law_reach_v1`: the proved pair law alone settles 5,441 of 42,811 band sets to 24; obstruction mostly an
+  edge empty or doubled.
+- `grid_class_criterion_v1`: the single-class small-deviation criterion settles 38,517 of 42,811 (90%).
+- `grid_class_unsettled_v1`: **the claim "the unsettled are captured readings" was false**: all 4,294 have a
+  capture-free grid that still fails (the small-deviation bound is conservative against the exact block).
+- `grid_class_control_v1` **(the control against tautology):** with the class unrestricted any flank opening counts as a
+  class instant; restricted to **`c ≤ 7` (the four `φ(8)` classes), all 42,811 band sets to 24 are still covered with
+  `m ≤ 2`.** The coverage is content.
+- `grid_class_m2_exceptions_v1` (E130): 73 band sets to 24 need `m = 2`; they are grids at half the nearest runner's
+  scale (half-integer shapes; the AP with one position moved); `±1` moves restore `m = 1` (60–95 per rank).
+
+- **O8. A label slip in E121–E128:** `s₀ = 1` in the band notation is the reading of the runner nearest the subject in
+  speed (`d_min`), not the subject; "the slowest runner's window `(7, 9)`" there means the nearest runner's window. The
+  subject is the slowest runner and is never among the readings. Mathematics unaffected.
+
+**Handover v8** written (`docs/n8/HANDOVER_2026_09_27_v8.md`, v7 kept): v7's §0 stands; adds items 28–31 (setup and
+O8, O1–O7, the checks that caught errors, the owner's rulings), the proof state, the case structure, the mechanism, the
+open step stated exactly. `compile-diff` loss check run next (recorded below when it reports).
