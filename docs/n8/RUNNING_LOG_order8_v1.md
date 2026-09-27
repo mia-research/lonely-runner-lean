@@ -4882,3 +4882,26 @@ faster 42,430. `[VERIFIED — these chains; the sweep decomposition not yet chec
 sweep; each sweep is the same pattern one lap further on (the owner's "same pattern at different parts of the circle").
 If exact, the argument's form is: one sweep either lands or hands over to a lap-shifted copy of itself; scale invariance
 carries the step to every sweep. Next: check that every chain decomposes into descending sweeps, and what ends a sweep.
+
+---
+
+## E142 — 2026-09-27 — the chain has three move types, forced by ordering: sweep down, bridge up, bridge down
+
+(`LonelyRunner/experiments/nN/redo/sweep_bridge_v1.{py,out}`, exact.) Consecutive setters `a → b` with exit laps:
+| population | sweep step (slower, same lap) | bridge up (faster, higher lap) | bridge down (slower, lower lap) |
+|---|---|---|---|
+| band to 24 | 52,656 | 3,701 | 498 |
+| Case B to 24 | 51,127 | 51,443 | 22,625 |
+| late fine band shapes | 24,384 | 42,373 | 34,578 |
+No other type occurs; the sweep-step ratio condition `s_a(8k−1) < s_b(8k+1)` holds on all 128,167.
+
+**Why** `[reasoned; one line from ordering]`: at `a`'s exit `R = (8k+1)/s_a`, a runner `b` in its window
+`(8l−1) < s_b·R < (8l+1)`; if `s_b > s_a` then `s_b·R > 8k+1`, so `l > k`; if `s_b < s_a` then `s_b·R < 8k+1`, so
+`l ≤ k`. Laps at any instant are ordered as the speeds are (the owner's *"if r2 speeds past r3 then it is r3"*).
+A sweep on lap `k` passes down through consecutive ratios below `ρ_k = (8k+1)/(8k−1)` (9/7, 17/15, 25/23, … → 1), so a
+gap that stops a sweep on lap `k` stops it on every later lap; only equal speeds pass every lap.
+
+**Reading in the owner's terms** `[mine]`: clusters sweep (the AP at the cluster's own scale), outliers bridge (the
+grid: a fast runner's window, width `2/s`, only nudges the instant; the owner's "8 million and 7"); the landing is where
+a sweep reaches a gap no outlier covers. The band is sweep-dominated; late shapes are bridge-dominated. Next: the
+bridges in late shapes, who bridges and across which gaps.
