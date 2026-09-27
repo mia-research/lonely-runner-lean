@@ -4204,3 +4204,59 @@ readings) at order eight, with order seven supplying the six.
   loneliness at the whole-number points, the target included. The continuum carries nothing across a whole-number
   point: arriving at a non-lonely one, the instants escape like `1/ε`. Where the work is: the whole-number arrangements,
   as in plan v2.
+
+---
+
+## E117 — 2026-09-27 — the owed sets read as AP/grid plus deviation; one free reading as a case; O6
+
+**Owner:** *"go ahead with the whole-number slot points through the cascade. Remember our target is to prove n=8 or
+reduce the proof that is required."* Then, mid-run: *"AP and grid provide global isolation, such that any arrangement
+can be viewed in relation to this global isolation. Every arrangement is actually a smaller set than it looks because of
+the ordering and the fact AP is scale invariant and grid positions are infinite. Once the arrangements are categorised,
+you find that any of these arrangements provides from AP/grid plus a deviation. Meaning any arrangement just relocates
+the isolation event. For isolation not to occur you have to break the conjecture about every speed being different. What
+I think we will find is that as we start to compile these different arrangements that the rules actually simplify, but
+we need to get to a position where the reduced real different arrangements are proved first. AP scale invariance
+subsumes a lot and the fact any multiple of 8 outside of AP is still captured by grid means there is no escape for
+arrangements."*
+
+- **O6. `OneFreeN.exists_clear_step` duplicated `Flanks.exists_clear_step`** (the mover ladder's rung `m = 1`, v21
+  §6.11). The pre-use grep (O2, O3) was skipped again. What E116's theorem adds is only that order seven clears the six
+  fixed readings, in place of divisibility at a flank. The whole-number module below uses the existing lemma.
+
+**Proved** (`LonelyRunner/` commit below; Spec gate PASS **1,899**, `experiments/nN/spec_gate_one_free_field.out`)
+`[PROVED — axiom-clean]`: `OneFreeEightN.lonely_eight_of_one_free`: six readings sharing a factor `g ≥ 2` that the
+seventh lacks are lonely (order seven on the six at `t₇`, then `t₇ + k/g`, one step by `Flanks.exists_clear_step`).
+It generalises halving. **`EightResidual` gains a 22nd field, `no_one_free`**, with its case in
+`lonely_eight_or_residual`; `lonelyRunnerAt8_iff_residual` is unchanged. Reach `[VERIFIED — exhaustive exact,
+[1,30]]` (`one_free_reach_v1.out`): among the 200,952 sets passing the arithmetic fields, it settles 16,047 (`g = 2`
+15,273, `g = 3` 760, `g = 4` 14). No `[1,30]` set is residual in any case; this is an infinite family closed by one
+lemma, not a count of progress.
+
+**The owed sets, through the cascade** (`experiments/nN/residual_members_v5.{py,out}`, v4's construction with the three
+newer fields added; exact) `[VERIFIED — these 47 constructed members]`:
+- Members with **all 22 fields** exist: 47 of 400 constructions. The largest reading is a multiple of `8·lcm(1…64)`, so
+  it sits exactly on the subject at every instant of every lattice `D ≤ 64`; the least live lattice is `L0 = 67`. Their
+  spread is 7.1–8.9, which excludes `FastPair8` (needs `9c ≤ a`) and `BlockSplit8` (needs `g ≥ 28c`) outright.
+- **Read at `L0`** the grid part (multiples of 67) is empty in 42 of 47: the lattice reading is all deviation and names
+  no structure. `L0` clears at 4–14 of its 67 instants.
+- **Read at their own AP scale `d_min`** they are one category: the largest runner lapped once into the subject's slot at
+  the bound (47 of 47). The cascade relocates the isolation to a **middle reading's second opening** `9/(8e)` in 44, and
+  to lap 2 in 3 (flank the largest in 2), `R* ≤ 2.13`, 1–5 moves.
+
+**The category, exhaustively** (`experiments/nN/redo/collision_band_v1.{py,out}`) `[VERIFIED — exhaustive exact,
+readings ≤ 40]`: every 7-set with `7·d_min < d_max < 9·d_min` (1,717,540 sets). The bound is blocked in all (the largest
+sits in `(7/8, 9/8)` there). The least lap `K` with some reading's opening `(8K+1)/(8e)` lonely: 1 in 1,644,119;
+2 in 71,233; 3 in 2,101; 4 in 85; 5 in 1; 6 in 1. The cascade lands at that least lap or later.
+
+**Reading, in the owner's terms** `[my reading; not a proof]`:
+- The owner's "any multiple of 8 outside of AP is still captured by grid" is, in lattice terms, the least live lattice:
+  no reading is `≡ 0 (mod 8D)` for every `D`, so the subject's slot is empty at some least `D`. The constructed members
+  are the extreme case (in the slot at every lattice up to 64).
+- But the categorisation that simplifies is the AP scale, not `L0`: every owed set known is the AP at scale `d_min`
+  with its fastest runner lapped into the subject's slot, and its isolation relocates to the first later runner-scale
+  with room. That is Case B's first band; handover v7 §3 step 6 grades Case B `[VERIFIED — exact certificates, event by
+  R = 15; positive control covers S ≤ 9]`, Lean owed.
+- No Case C residual member is known (plan v2 §4). **Next:** attempt Case C residual members by construction (a slow core
+  below a six-reading cluster with no common factor, no fast pair, no block split, no one free reading). If none exists,
+  the structural reason is the next case; if they exist, their cascade is the next category.
