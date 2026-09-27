@@ -3959,3 +3959,28 @@ exactly the proxy seems to be our work."* Offender paths (`LonelyRunner/experime
   blocker in 66,215, most often a slot-6 runner at the bound. **Diagnosis:** the proxy picks the runner nearest the
   entering edge whether or not it is in the way; the cascade moves only on runners in the way, and the entering-edge
   runner matters only after the colliders force time forward. The proxy is wrong, not the cascade.
+
+---
+
+## E112 — 2026-09-27 — owner on tools; O2: the deformation argument was already the owner's, in Lean
+
+**Owner (2026-09-27), on tools.** *"We have been wary of density, coverage, counting and other means because they have
+not been natively acquired. They tend to be imports of you trying to relate what we are doing to other proofs instead
+of reasoning. Now that doesn't mean we can't use any of them as tools but they must arrive organically and not just be
+a this works for another frame."* This refines the 2026-09-15 ruling (*"tools are fine, targets and statements are
+what must stay native"*): a tool is admissible when the framework's own reasoning arrives at it, not when it is carried
+in because it works in another proof.
+
+- **O2. The open/closed framing was presented as mine and a ruling was asked for that already existed.** In E111's
+  reply I restated the owner's claim as general topology (a connected shape space; the lonely set open and closed) and
+  asked whether a local bound on the instant is admissible. Check run: the argument is the owner's own (E52, from
+  E18/E19: *"any arrangement moves the isolation"*), proved in Lean as `DeformationN.lonely_along_path` (2026-09-26):
+  along a path of speeds from the AP, isolation that is locally stable and stays in a window `[c, T]` is present at the
+  end. The window is the owner's *"bounded by the speeds of the arrangement"* (E52), so it arrived natively. The
+  "connected space" wrapper was the import; the native form is **the path from the AP**. Lesson: read the log's
+  treatment of a route before re-framing it (the source-first rule, applied to our own log).
+- **Standing, from the Lean statement:** the path route owes exactly `lonely_along_path`'s two hypotheses along every
+  path from the AP: (1) local stability, proved where the instant has margin (`lonelyAt_of_close`) and needing
+  relocation where it has none (the two-pinner lemma; proved in three families: `APNeighbourhoodN`,
+  `GridNeighbourhoodN`, `DoubledNbhdN`); (2) the window, bounded by the speeds, supplied so far by the box
+  certificates where `d_max ≤ 15·d_min` (E52) and measured by E72 (`8·d_min·t ≤ 15`, `[VERIFIED]` for `S ≤ 24`).
