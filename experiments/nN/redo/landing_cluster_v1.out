@@ -1,0 +1,7 @@
+      798  ('band24', 'flank on lap 0 (first window)')
+    42013  ('band24', 'slowest of its cluster')
+    64169  ('caseB24', 'flank on lap 0 (first window)')
+   103355  ('caseB24', 'slowest of its cluster')
+     2311  ('late', 'slowest of cluster (nearest runner)')
+     3089  ('late', 'slowest of its cluster')
+examples inside a cluster: []
