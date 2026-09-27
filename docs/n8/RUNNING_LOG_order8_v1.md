@@ -5390,3 +5390,30 @@ own reading, any scale, any laps, any number of readings per slot: every runner 
 `DoubledNbhdN`, `GridNeighbourhoodN`, `APNeighbourhoodN`, `GridNudgeN` and the one-free lemma are special cases of (1)
 and (2). **The one open statement:** repeated separation cannot continue for ever; proved part: a pair of distinct speeds
 hands over by a sweep step on finitely many laps (`sweep_lap_bound`).
+
+---
+
+## E163 — 2026-09-28 — bridges through the cascade; why "no return" is the conjecture itself; what is left
+
+**Owner:** *"yes use the cascade on the bridges and bring this proof home."*
+
+(`LonelyRunner/experiments/nN/redo/bridge_recur_v1.{py,out}`, exact.) Bridge pairs (a hand-over to a faster runner on a
+later lap, or a slower one on an earlier lap) recur within one chain: 26 times in Case B to 24, 4,298 in the late fine
+band shapes, at gaps of 1–3 laps. Unlike sweep steps (`sweep_lap_bound`), bridges carry no per-pair lap bound: at `a`'s
+exit on lap `k` the faster `b` is in a window iff `(8k+1)·b/a` is within 1 of a multiple of 8, which recurs. Chains end
+after a bridge in 41,798 Case B chains and after a sweep in 48,928; every late shape ends after a bridge. (The "every `r`
+laps" gloss in my message was loose: the condition can hold on consecutive laps.)
+
+**Why "repeated separation cannot continue for ever" is not a smaller lemma** `[reasoned]`: for whole-number readings
+(`RealEightN` reduces to them) every position repeats exactly after one period; a chain that runs a full period without a
+gap never ends. So the statement is exactly "the windows cannot cover a whole period", LRC(8) for that arrangement. The
+separation / transport lemmas describe each step exactly; the finishing step is global: `CoverB8`, `CoverC8` (the gap sits
+at a grid-class instant of the arrangement's own grid).
+
+**What is left, stated plainly:** Case B (spread 7–24): normalised shapes form a bounded region cut into finitely many
+grid-class cells with uniform rules; `CoverB8` is a finite check; the wall-cut strips are generated and checked from 7 to
+20 (strip `[19,20]`: 1,224 categories), 20–24 to run; a Lean translation of the strip certificates would give a complete
+computer-assisted Case B; a derivation replacing them is still owed. Case C (spread above 24): not bounded; far fast
+outliers are settled (`not_fast`, proved); what remains is slow runners far below a cluster, measured to be lonely within
+the slow runner's first two blocks (E153–E154): the one piece of new mathematics still needed, the same shape as the band
+theorem. Asked the owner which to put first.
