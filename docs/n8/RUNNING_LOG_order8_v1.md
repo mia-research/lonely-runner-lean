@@ -4701,3 +4701,13 @@ non-terminating first cover); E129's evidence (all 4,294 unsettled have a captur
 `EightResidual` pending decision narrowed without source (v7: "the obligation or a sufficient route (v21 §17B)"). Also
 flagged: the `c ≤ 7` result was on disk and unlogged (logged above); strip `[16,17]`'s check was still running.
 Repaired in `HANDOVER_2026_09_27_v10.md` (v9 kept, not promoted).
+
+---
+
+## E133 — 2026-09-27 — handover versions stopped at v10
+
+**Owner:** *"I'm worried the update document is recursively getting updated with no end."* Each `compile-diff` pass
+compares the handover against the whole log, which is far more detailed than a handover, so every pass finds more to
+carry (v8 → v9 → v10; the v9 pass's six losses all dated from before v8). Second time the owner has stopped this (E109).
+**Rule from here:** `HANDOVER_2026_09_27_v10.md` is the handover. The v10 loss check's findings, if any, are recorded
+here in the log only; no v11. The running log is the record; the handover points into it and does not repeat it.
