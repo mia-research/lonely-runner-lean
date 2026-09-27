@@ -1,0 +1,18 @@
+== band24
+  w=1 (72368 moves): moves left 0: 30193, moves left 1: 19994, moves left 2: 11477, moves left 3: 5021, moves left >=4: 5683
+  w=2 (24073 moves): moves left 0: 10486, moves left 1: 8417, moves left 2: 3182, moves left 3: 749, moves left >=4: 1239
+  w=3 (2395 moves): moves left 0: 1308, moves left 1: 840, moves left 2: 179, moves left 3: 13, moves left >=4: 55
+  w=4 (32 moves): moves left 0: 26, moves left 1: 6
+  commonest chain signatures (w per move): [((1,), 8519), ((1, 1), 5985), ((2,), 3753), ((1, 1, 1), 3243), ((2, 1), 3124), ((1, 2), 2920), ((1, 2, 1), 1848), ((2, 1, 1), 1266)]
+== caseB24
+  w=1 (243034 moves): moves left 0: 106995, moves left 1: 63695, moves left 2: 37320, moves left 3: 17852, moves left >=4: 17172
+  w=2 (76619 moves): moves left 0: 34099, moves left 1: 24668, moves left 2: 10003, moves left 3: 4048, moves left >=4: 3801
+  w=3 (7600 moves): moves left 0: 4149, moves left 1: 2334, moves left 2: 585, moves left 3: 313, moves left >=4: 219
+  w=4 (165 moves): moves left 0: 125, moves left 1: 29, moves left 2: 2, moves left 3: 4, moves left >=4: 5
+  commonest chain signatures (w per move): [((), 64967), ((1,), 39690), ((1, 1), 20091), ((2,), 13573), ((1, 1, 1), 9219), ((2, 1), 8878), ((1, 2), 7781), ((1, 2, 1), 4689)]
+== late
+  w=1 (85365 moves): moves left 0: 2763, moves left 1: 1983, moves left 2: 4359, moves left 3: 3921, moves left >=4: 72339
+  w=2 (18654 moves): moves left 0: 2410, moves left 1: 1732, moves left 2: 855, moves left 3: 1462, moves left >=4: 12195
+  w=3 (2669 moves): moves left 0: 181, moves left 1: 1685, moves left 2: 185, moves left 3: 17, moves left >=4: 601
+  w=4 (47 moves): moves left 0: 46, moves left 2: 1
+  commonest chain signatures (w per move): [((1, 1, 1, 1, 1, 1, '...'), 2542), ((1, 1, 1, 1, 2, 1, '...'), 2249), ((1, 1, 1, 1, 2, 2, '...'), 609)]
