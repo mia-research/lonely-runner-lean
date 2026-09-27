@@ -5103,3 +5103,35 @@ readings: on the slow group's first block, the whole question is exactly the fas
 `lonely_eight_of_fast_in_slow_block` and `lonely_eight_of_regimes` (whole-number form: the bound, or the fast group clear
 somewhere in the slow group's first block). Not yet in Lean: the same on the slow group's common block on lap `k`
 (needed for the late shapes, E151).
+
+---
+
+## E152 — 2026-09-27 — Case C through the cascade; a correction to E148/E151's second clause; the six-reading window
+
+**Owner:** *"use the cascade on case C … Please do autonomously."*
+
+**Correction (forced by definition, found before relying on it):** once the slow group is on one lap at the landing it
+is clear throughout that lap's common block, so any clear point of the fast group inside the block is clear for all,
+and the cascade lands at the first. "The landing is the fast group's own first point from the block start" therefore
+**follows** whenever the slow group is on one lap: E151's 42,811/42,811 and 5,400/5,400 for that clause, and E148's
+"`G`'s own landing" once the landing is inside the slow group's first block, are not evidence. **The content** is only:
+the slow group is on one lap at the landing, i.e. the landing lies inside the slow group's common block (E148: the
+landing is inside `[1/(8 d_min), 7/(8 s_top)]`).
+
+**Case C** (`LonelyRunner/experiments/nN/redo/casec_regime_v1`, `casec_groups_v1`, exact): P1 = every set with
+`d_min = 1`, readings `≤ 32`, spread `> 24` (635,334); P2 = 19,625 random wide (spread 25–2,000); P3 = the 547 constructed
+residual C members. Not at the bound: P1 378,084; P2 14,273; P3 547. The slow group (below the largest gap) is on one lap
+at the landing (lap 0) in P1 370,387 (98.0%), P2 7,200 (50.4%), P3 547 (the slow group is the nearest runner alone in
+292,211 of P1 and all of P3). Room used inside the block mostly under a quarter. **Recursive splitting into R1 groups is
+the wrong cut** (scoped negative): at the landing some R1 group is split over laps in most sets (an R1 group of spread up
+to 7 shares a lap block only on lap 0; E127's run-out).
+
+**The dominant shape's lemma** (`redo/six_window_v1.{py,out}`): with the slow group the nearest runner alone, its block is
+`R ∈ [1, 7]`, a window of ratio 7, and the fast group starts past its own bound. Needed: *`m ≤ 6` readings, from any start
+`A ≥ 1` in their own bound units, are clear at `1/8` within ratio `ρ` of `A`*. Worst `ρ`, exact, readings `≤ 20`:
+`m = 4`: 19/7 ≈ 2.71; `m = 5`: 25/7 ≈ 3.57; `m = 6`: **33/5 = 6.6** (`(6, 8, 10, 11, 13, 14)`: from just after `R = 3`,
+next lonely at `99/5`). Close to 7 on a finite window (the O7 caution applies); pushed further next.
+
+**Lean** (`SlowBlockN`, commit `f21edb2`; Spec gate PASS **1,929**, `experiments/nN/spec_gate_regimes_lap.out`)
+`[PROVED — axiom-clean]`: `slow_clear_lap`, `exists_block_iff_fast_lap`, `lonely_eight_of_fast_in_slow_block_lap`: the
+reduction on the slow group's common block on any lap `k`.
