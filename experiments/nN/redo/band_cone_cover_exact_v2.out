@@ -1,0 +1,21 @@
+wave 1: frontier 20  stats {'in': 0, 'empty': 0, 'split': 1, 'HOLE': 0}  cones 41  used 1  0s
+wave 2: frontier 50  stats {'in': 2, 'empty': 10, 'split': 9, 'HOLE': 0}  cones 41  used 6  0s
+wave 3: frontier 57  stats {'in': 6, 'empty': 40, 'split': 25, 'HOLE': 0}  cones 41  used 8  0s
+wave 4: frontier 83  stats {'in': 20, 'empty': 63, 'split': 45, 'HOLE': 0}  cones 41  used 12  1s
+wave 5: frontier 189  stats {'in': 32, 'empty': 86, 'split': 93, 'HOLE': 0}  cones 41  used 18  1s
+wave 6: frontier 384  stats {'in': 71, 'empty': 143, 'split': 186, 'HOLE': 0}  cones 41  used 25  3s
+wave 7: frontier 736  stats {'in': 158, 'empty': 224, 'split': 402, 'HOLE': 0}  cones 68  used 39  7s
+wave 8: frontier 887  stats {'in': 372, 'empty': 360, 'split': 788, 'HOLE': 0}  cones 120  used 50  16s
+wave 9: frontier 1012  stats {'in': 674, 'empty': 499, 'split': 1234, 'HOLE': 0}  cones 187  used 58  28s
+wave 10: frontier 1085  stats {'in': 1061, 'empty': 643, 'split': 1715, 'HOLE': 0}  cones 211  used 69  43s
+wave 11: frontier 892  stats {'in': 1517, 'empty': 808, 'split': 2179, 'HOLE': 0}  cones 227  used 81  60s
+wave 12: frontier 659  stats {'in': 1936, 'empty': 905, 'split': 2555, 'HOLE': 0}  cones 235  used 92  76s
+wave 13: frontier 428  stats {'in': 2269, 'empty': 992, 'split': 2794, 'HOLE': 0}  cones 235  used 96  89s
+wave 14: frontier 255  stats {'in': 2467, 'empty': 1064, 'split': 2952, 'HOLE': 0}  cones 241  used 99  97s
+wave 15: frontier 147  stats {'in': 2615, 'empty': 1088, 'split': 3035, 'HOLE': 0}  cones 241  used 102  103s
+wave 16: frontier 91  stats {'in': 2684, 'empty': 1115, 'split': 3086, 'HOLE': 0}  cones 241  used 104  106s
+wave 17: frontier 31  stats {'in': 2734, 'empty': 1129, 'split': 3113, 'HOLE': 0}  cones 241  used 105  108s
+wave 18: frontier 12  stats {'in': 2756, 'empty': 1130, 'split': 3121, 'HOLE': 0}  cones 241  used 105  109s
+wave 19: frontier 0  stats {'in': 2766, 'empty': 1132, 'split': 3121, 'HOLE': 0}  cones 241  used 105  109s
+DONE {'in': 2766, 'empty': 1132, 'split': 3121, 'HOLE': 0} cones used 105
+leaves saved: 3898

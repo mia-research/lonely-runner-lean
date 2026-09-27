@@ -1,0 +1,3 @@
+cones: 41
+random fine (ties allowed): outside every cone: 0 []
+adversarial: best (least violation over cones) = 1.7914  (> 0 would be outside every cone) at [1.0, 3.7323, 4.9441, 6.1007, 6.7947, 8.1175, 8.6737]

@@ -1,0 +1,43 @@
+shapes: 329045  (late fine: 431 )  empty-category shapes: 0
+greedy cover by lap assignments: 41 categories
+   laps 0000111  newly covered 101566
+   laps 0000011  newly covered 75114
+   laps 0001111  newly covered 60101
+   laps 0000001  newly covered 37817
+   laps 0011111  newly covered 23531
+   laps 0011122  newly covered 7186
+   laps 0111222  newly covered 5507
+   laps 0011112  newly covered 3990
+   laps 0111122  newly covered 3651
+   laps 0001112  newly covered 2568
+   laps 0111111  newly covered 2249
+   laps 0223334  newly covered 1363
+   laps 0011222  newly covered 989
+   laps 0112233  newly covered 724
+   laps 1345679  newly covered 534
+   laps 0112223  newly covered 474
+   laps 0112222  newly covered 323
+   laps 0111112  newly covered 262
+   laps 0001122  newly covered 204
+   laps 0122334  newly covered 191
+   laps 0011223  newly covered 129
+   laps 0123344  newly covered 123
+   laps 0111223  newly covered 101
+   laps 0233344  newly covered 97
+   laps 0122233  newly covered 56
+   laps (1, 3, 5, 6, 8, 9, 12)  newly covered 51
+   laps 0122333  newly covered 35
+   laps 0233444  newly covered 27
+   laps 0012223  newly covered 25
+   laps 0123456  newly covered 15
+   laps 0233456  newly covered 7
+   laps 0233445  newly covered 7
+   laps 0012222  newly covered 6
+   laps (1, 3, 4, 6, 7, 8, 10)  newly covered 5
+   laps 0112234  newly covered 4
+   laps 0345556  newly covered 4
+   laps (1, 1, 4, 6, 8, 10, 11)  newly covered 3
+   laps 0223344  newly covered 3
+   laps 0233345  newly covered 1
+   laps (1, 7, 8, 9, 10, 11, 12)  newly covered 1
+   laps 0123445  newly covered 1

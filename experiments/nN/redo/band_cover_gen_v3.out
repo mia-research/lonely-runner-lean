@@ -1,0 +1,20 @@
+nodes 1  frontier 20  0s
+nodes 21  frontier 50  0s
+nodes 71  frontier 57  0s
+nodes 128  frontier 83  1s
+nodes 211  frontier 189  2s
+nodes 400  frontier 384  4s
+nodes 784  frontier 736  8s
+nodes 1520  frontier 887  18s
+nodes 2407  frontier 1012  31s
+nodes 3419  frontier 1085  48s
+nodes 4504  frontier 892  67s
+nodes 5396  frontier 659  85s
+nodes 6055  frontier 428  98s
+nodes 6483  frontier 255  107s
+nodes 6738  frontier 147  113s
+nodes 6885  frontier 91  117s
+nodes 6976  frontier 31  119s
+nodes 7007  frontier 12  120s
+nodes 7019  frontier 0  121s
+DONE Counter({'split': 3121, 'in': 2766, 'empty': 1132}) cones used 105
