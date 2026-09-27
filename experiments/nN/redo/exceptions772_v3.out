@@ -1,0 +1,7 @@
+total: 772
+    274  ('delayed', 'G-next: the flank is a fast reading (G leads, S blocked its earlier points)')
+    169  ('delayed', 'S-next: the flank is a slow reading (S leads, G blocked its earlier points)')
+    260  ('delayed', 'S-own')
+     18  ('later block', 'G-next: the flank is a fast reading (G leads, S blocked its earlier points)')
+     51  ('later block', 'nudge (GridNudgeN)')
+other, examples: []
