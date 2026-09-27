@@ -3892,3 +3892,19 @@ within the framework"*). Read: paper v9.1 in full, MANUSCRIPT_v21 §0 and §17, 
   the reading set is the arrangement up to translation, so the arrangement-level neighbourhood theorems discharge any
   residual set lying, rescaled, within a proved radius. Whether any does is untested (v7 §5.11).
 - The Lean is ahead of v21: `EightResidual` has 21 fields (`no_fast_pair`, `no_block_split` added after v21's 19).
+
+---
+
+## E109 — 2026-09-27 — assumptions overturned (running register); handover versions stopped
+
+Owner: *"note any assumption that gets overturned as this will help any future handover"*; *"the handover document is
+repeating, we can probably stop that."* Handover versions stop at v7; the `compile-diff` run on v7 was stopped before
+it reported (v7 is therefore not loss-checked). From here, overturned assumptions are logged as numbered items **O1,
+O2, …** in dated entries like this one, for the next handover to collect.
+
+- **O1. "The cascade gives the first lonely instant."** I summarised the cascade as giving *the first* lonely instant.
+  Owner: it gives *a* lonely instant, which is what the conjecture asks (*"at some time"*); the first instant was never
+  guaranteed by the owner and is not required. Check run: `LRC/Cascade/Iteration.lean:213` `first_isolation_of_fixed`
+  does state that the fixed point is `≤` every lonely `s` (paper v9.1 Thm 11(b)), so the fact is in the tree; but it is a
+  by-product of the construction, not what the cascade is for, and no proof here may lean on "first" as an obligation.
+  Correct frame: the cascade arrives at a lonely instant exactly when the runner is lonely (`doors_agree`).
