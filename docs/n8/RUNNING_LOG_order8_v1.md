@@ -4077,3 +4077,46 @@ axiom-clean, `experiments/nN/spec_gate_pinch_open.out`) `[PROVED — axiom-clean
 Owed in Lean for the assembly: isolated lonely instant ⇒ pinch (one leaving, one entering); the finite-wall avoidance of
 item 3; the path through `M`; `lonely_along_path` with `hopen` from margin or `pinch_eventually_lonely`. **(B) stays the
 open content** (the owner's *"bounded by the speeds"*, E52; E72's `8·d_min·t ≤ 15`, `[VERIFIED]` for `S ≤ 24`).
+
+---
+
+## E115 — 2026-09-27 — `LonelyRunnerAt8` from the window, in Lean; O4
+
+**Owner:** *"Ok so we need to do this in lean"* (the path route of E113–E114). Plan: `docs/n8/PATH_ROUTE_LEAN_PLAN_v1.md`.
+
+**Proved** (`LonelyRunner/` commit below; Spec gate PASS, **1,892** declarations, axiom-clean,
+`experiments/nN/spec_gate_path_window.out`) `[PROVED — axiom-clean, one OWED hypothesis]`:
+
+> **`LRC.PathWindow.lonelyRunnerAt8_of_window : WindowBound → LRC.Spec.LonelyRunnerAt8`**, axioms
+> `[propext, Classical.choice, Quot.sound]`.
+
+`WindowBound` (registered **OWED** in `scripts/nN/spec_gate.sh`) is the owner's *"bounded by the speeds of the
+arrangement"* (E52): for every `c > 0` and `C` there is `T` such that every arrangement whose subject readings all lie in
+`[c, C]`, if lonely, is lonely at some `t ∈ (0, T]`. It quantifies over all such arrangements, including ones where two
+non-subject runners share a speed (the chain below passes through such points; no lemma needs distinct speeds).
+
+**The proof** (`Spec/PathRouteN.lean`, `Spec/PathWindowN.lean`):
+- `margin_or_pinch`: at a lonely instant (positive readings) some instant has a margin, or the instant is a pinch
+  (a runner on `+1/8`, a different one on `−1/8`).
+- `move_one_strict`, `move_one_period`: **move one runner, the others fixed.** At a lonely instant `t1` only the moving
+  runner changes position. Strictly clear: it stays clear. On an edge: one sign of the change moves it inward at `t1`;
+  for the other sign, at the mirror `P − t1` (a common period `P > t1`) it is on the opposite edge and the same change
+  moves it inward. Every other runner is as clear at `P − t1` as at `t1`.
+- `segment_lonely`: along a segment moving runner `i`, with the other readings rational, a margin gives openness
+  (`eventually_lonely_of_margin`); otherwise at a pinch a fixed runner is on an edge, so `t1` is rational, so the moving
+  reading is rational, so every reading is, so a common period exists (`common_period`) and `move_one_period` applies.
+  Closedness is the window. `DeformationN.lonely_along_path` carries lonely-at-start to lonely-at-end.
+- `slowest_of_window`: from the AP (subject speed `v 0`, runner `j` at `v 0 + j/8`, lonely at `t = 1`) move runners
+  `1, …, 7` in turn to their whole-number speeds. Readings stay in `[1/8, C]`, `C = 1 + Σ readings`. Then
+  `EndRunnerN.lonelyRunnerAt8_of_slowest`.
+
+- **O4. Walls, simple versus multi pinches, and the path-avoidance argument (E113 item 4, E114 item 3, plan P2 and P4)
+  are not needed.** I carried over E75's frame, in which all runners move at once along a general path, where multi
+  pinches really can close on both sides. Moving one runner at a time (the owner's *"runners are always bound by their
+  neighbours"*, E71) makes every pinch benign: only the moving runner's position changes. `line_pinch_cases` (P2) is
+  proved and unused by the final theorem. (A) of E113 is therefore not owed at all, not even through a choice of
+  path.
+
+**What remains for the conjecture at eight runners: `WindowBound`, and only it.** It is the statement E52 named
+(*"the relocated isolation cannot escape to infinity"*), now the single hypothesis of a proved theorem. Evidence so far
+is E72's `8·d_min·t ≤ 15` (`[VERIFIED]` for `S ≤ 24`, `[EMPIRICAL]` beyond), which would give `T = 15/(8c)`. Not proved.
