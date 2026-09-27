@@ -5035,3 +5035,64 @@ lower order supplying their loneliness but not its position in the window.
 **1,922**, `experiments/nN/spec_gate_slow_block.out`) `[PROVED — axiom-clean]`: `slow_clear` (a reading in
 `[d_min, s_top]` is clear at every instant with `d_min·t ≥ 1/8` and `s_top·t ≤ 7/8`); `lonely_of_fast_in_slow_block`
 (on that block, if every fast reading is clear, every reading is): the d_max regime reduced to the fast group.
+
+---
+
+## E150 — 2026-09-27 — the 772 exceptions through the cascade: the roles swap, the grid nudge, forced delays
+
+**Owner:** *"yes use the cascade on the 772 exceptions"*; then *"keep going, prove the reduction in lean"*.
+
+(`LonelyRunner/experiments/nN/redo/exceptions772_v1/v2/v3.{py,out}`, exact.) The 772 Case B sets (readings `≤ 24`) not
+settled by the two regimes of E148 (703 delayed, 69 later-block). v1: the blocker of the fast group's first point is
+the slow group's top (or next-to-top), on lap 0 or 1; the slow group spans more than 7 in 472 of 703 (it is itself a
+band arrangement, e.g. `(1,2,3,4,5,8)`) with one far outlier above (16–24). (v1's "landing = the first `G`-point with
+`S` clear" holds by definition and is not cited; v2 was capped at 400 sets and is superseded; a first v3 hung on a
+`10⁻⁹` stepping loop and was replaced by the flank test.)
+**v3, all 772** `[VERIFIED — these 772]`:
+| mechanism | count |
+|---|---|
+| the slow group leads: the landing is `S`'s own first point, the fast group clear there | 260 |
+| grid nudge: the far outlier is the only reading `≡ 0 (mod 8 d_min)` (captured at the bound), landing `t₀ + 1/(8 d_max)` (`GridNudgeN`, proved) | 51 |
+| the slow group's next point (flank slow; `G` blocked its earlier points) | 169 |
+| the fast group's next point (flank fast; `S` blocked its earlier points) | 292 |
+The last two rows' split by the flank's group is forced (every landing is some reading's exit); their content is the
+forced delay (E150 v1: one to three points skipped), the near pair's behaviour (E140).
+
+**So on Case B to 24** `[VERIFIED — this window; my reading of the mechanisms]`: every set is settled by the bound;
+the fast group inside the slow group's first block (E148, `SlowBlockN`); the slow group leading (roles swapped); the grid
+nudge (`GridNudgeN`); or a forced delay of one to three points of one group. The owner's "a multiple of 8 outside the
+AP is still captured by the grid" is the 51 nudge cases literally.
+
+**E150 addendum — owner:** *"Why only whole numbers? At any scale AP it is just a deviation. Example 100…800 and if the
+second runner is 201, that is just fraction and d_min works?"* The reduction theorems `lonely_of_fast_in_slow_block`,
+`block_iff_fast`, `exists_block_iff_fast` are stated for any real readings; the `Finset ℕ` form
+(`lonely_eight_of_fast_in_slow_block`, `lonely_eight_of_regimes`) only matches the residual target, which is on whole
+numbers because `RealEightN` reduces real speeds to them. The example, exact: speeds `100, 201, 300, …, 800`, every runner
+as subject, is lonely exactly at its own bound `1/(8 d_min)` (`d_min` 101 for runner 100, 99 for runners 201 and 300,
+100 otherwise): the deviation moves `d_min`, and the isolation sits at the relocated bound (R1, proved for all real
+speeds).
+
+---
+
+## E151 — 2026-09-27 — the band followed with the cascade: the slow group on one lap, the fast group's own point
+
+**Owner:** *"This is easy, it's not a problem. Use the cascade on the band to see why."* Then, on my summary's last
+sentence: *"are you sure you aren't doing that thing which says, I need to offer one more thing to do?"*
+
+(`LonelyRunner/experiments/nN/redo/band_ladder_v1/v2.{py,out}`, exact; band to 24 in units of `d_min`, and the late
+fine band shapes.)
+- **Derived and confirmed:** split at the largest gap (at least `9/7` in the band, `exists_big_gap`); every lap-1 exit
+  `9/g` of a fast reading lies in the slow group's first block `[1, 7/s_top]` (0 violations in 42,811 and 5,400).
+- **"Inside the slow group's first block" was range-forced (O7 again):** it holds on the integer band to 24 but on none
+  of the 5,400 late fine shapes, which land at `R ≥ 9`.
+- **The regime, corrected** `[VERIFIED — these two populations]`: at the landing the slow group is on one lap and the
+  landing is the fast group's own first point from the start of that lap's block: band to 24 **42,811 of 42,811**
+  (lap 0); late shapes **5,400 of 5,400** (the slow group is the nearest runner alone, lap 1, `R = 9`).
+- When block level 1 fails the top four are dense: 1,968 of 1,968 (band), 3,089 of 3,089 (late) (`b1_remainder`,
+  proved). Least block level: band 1–4, late 1–6; landing laps up to 9.
+- **Retracted from my summary:** "if no reading qualifies … the same argument runs one lap later with threshold `17/15`
+  … it goes on the same way until `ρ_k` falls below some gap, which always happens". **Not established**: "top dense ⇒ a
+  three-block instant" is not derived; `SweepBridgeN` gives that gaps eventually stop sweeps, not that a block rule then
+  holds (outliers can still bridge); the late shapes need levels up to 6. The owner caught it: a tidy continuation
+  offered in place of the stopping point.
+- **Owed, the one statement:** the fast group has its own point before the slow group's common block (on its lap) ends.
