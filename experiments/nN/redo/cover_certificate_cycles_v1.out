@@ -1,0 +1,5 @@
+empty leaves by the shape of their refutation:
+     671  branching (some runner in 3+ walls)
+     297  cycle among runners 1..6
+     164  cycle/path through the fixed runner or s7 range
+edges per refutation: [(2, 4), (3, 259), (4, 336), (5, 274), (6, 193), (7, 66)]

@@ -1,0 +1,6 @@
+strip [10,11]: DONE Counter({'split': 3404, 'in': 3203, 'empty': 1564}) cones used 168
+CHECK PASSED
+strip [11,12]: DONE Counter({'split': 5718, 'in': 4972, 'empty': 2504}) cones used 255
+CHECK PASSED
+strip [12,13]: DONE Counter({'split': 7628, 'in': 6885, 'empty': 3201}) cones used 308
+CHECK PASSED

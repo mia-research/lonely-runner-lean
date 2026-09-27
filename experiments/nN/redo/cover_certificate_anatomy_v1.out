@@ -1,0 +1,28 @@
+empty leaves: rows in the Farkas combination: [(2, 4), (3, 259), (4, 336), (5, 274), (6, 193), (7, 66)]
+  row types combined:
+      242  ('wall', 'wall', 'wall', 'wall')
+      203  ('order', 'wall', 'wall')
+      191  ('wall', 'wall', 'wall', 'wall', 'wall')
+      144  ('wall', 'wall', 'wall', 'wall', 'wall', 'wall')
+       68  ('s7>=7', 'wall', 'wall', 'wall')
+       68  ('s7>=7', 'wall', 'wall', 'wall', 'wall')
+       55  ('wall', 'wall', 'wall')
+       50  ('wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall')
+       37  ('s7>=7', 'wall', 'wall', 'wall', 'wall', 'wall')
+       25  ('order', 'order', 'wall', 'wall')
+       11  ('s7>=7', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall')
+        8  ('s7<=9', 'wall', 'wall', 'wall', 'wall', 'wall')
+  runner pairs of the walls used (i, j):
+      331  (0, 5)
+      309  (3, 4)
+      300  (3, 6)
+      299  (3, 5)
+      292  (4, 5)
+      281  (4, 6)
+      271  (1, 6)
+      270  (5, 6)
+      262  (2, 3)
+      254  (2, 6)
+      252  (1, 5)
+      245  (1, 4)
+containment certificates: rows combined: [(0, 150), (1, 16209), (2, 38716), (3, 63794), (4, 66678), (5, 42317), (6, 12372)]

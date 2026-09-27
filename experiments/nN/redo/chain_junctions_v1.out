@@ -1,0 +1,5 @@
+late shapes: 250
+    101  opposite b->a passed
+     71  no passing junction of this pair
+     57  both orientations passed
+     21  same orientation a->b passed
