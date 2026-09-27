@@ -3767,3 +3767,23 @@ verified beforehand on 26,561 deviation vectors including all `3⁸` corner/cent
 **Scope.** The radius `1/32` is what the class-7 bands allow at the end runners (the tightest reading is the
 offset-6 runner, which needs `ρ ≤ 7/180`); interior runners alone would allow `1/16`. Grids with laps (E44) and the doubled
 slot's deviations are not in this theorem.
+
+---
+
+## E46 — 2026-09-27 — every complete grid's neighbourhood, proved
+
+`LonelyRunner/LRC/Spec/GridNeighbourhoodN.lean`; gate `experiments/nN/spec_gate_grid_nbhd.out`.
+`[PROVED — axioms propext, Classical.choice, Quot.sound; no sorry, no native_decide]`
+
+A complete grid: whole-number speeds `uᵢ` with all eight residues mod 8 distinct (the AP with any whole laps), every
+speed deviated by `|eᵢ| ≤ ρ`, `W` a bound for the whole-number differences. `grid_nbhd_exists`: if
+`2ρ(14W + 21) ≤ 1`, every runner is lonely at a named positive instant.
+- **The instant** (`gridT`): the runner's class-1 circle neighbours `A`, `B` (differences `≡ 1`, `≡ 7 (mod 8)`) sit one
+  eighth away at their own openings `t_A = D_A/(8δ_A)`, `t_B = D_B/(8δ_B)`, both within `O(ρ)` of `1/8`. Each is clear on
+  one side of its opening, fixed by its sign: `(+,−)` → `max`, `(−,+)` → `min`, `(+,+)` → `t_A` if `t_A ≤ t_B` else the
+  class-7 instant `7t_B`, `(−,−)` → `t_B` if `t_B ≤ t_A` else `7t_A`. For the AP this is E45's rule.
+- **Every other runner** keeps its residue `2…6` slot: the relocation moves it at most `c·|δ|·2ρ` eighths (`expand`).
+- **The two neighbours exist** in every complete grid (`exists_nbrs`: the eight residues are all of `0…7`).
+- **Scope.** The radius shrinks with the laps (`~1/(28W)`): each complete grid carries its own open neighbourhood; E44
+  measured far larger offsets are tolerated in practice. With E45 this makes the neighbourhoods of all complete grids
+  (every AP with every assignment of whole laps) proved regions of the shape space.
