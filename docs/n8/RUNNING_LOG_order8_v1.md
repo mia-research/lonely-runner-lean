@@ -4137,3 +4137,70 @@ is E72's `8·d_min·t ≤ 15` (`[VERIFIED]` for `S ≤ 24`, `[EMPIRICAL]` beyond
   point is the earliest lonely instant (`first_isolation_of_fixed`), so `WindowBound` says exactly that the cascade
   rests by a time bounded by the speeds on each box. This uses the first-instant property as a tool for the window, not
   as an obligation of the conjecture (O1 stands).
+
+---
+
+## E116 — 2026-09-27 — what one move contains: the continuum is settled by order seven; the window is the whole-number points; O5
+
+**Owner:** *"now the only thing to do is for you to actually do the work, encounter the problems and see realise if
+there are any default assumptions you still have to work through."* Starting point: E115 and its addendum; a review of
+the Lean (this session) observed that `slowest_of_window` applies the window only along its seven moves, each with six
+readings fixed and rational (whole numbers or `j/8`) and one reading varying.
+
+**Proved** (`LonelyRunner/LonelyRunner/LRC/Spec/OneFreeN.lean`, axiom-clean, `lake env lean` clean; Spec gate below)
+`[PROVED — axiom-clean]`:
+
+> **`LRC.OneFree.lonely_of_one_free_eight`.** Six readings `v j − v k` (`j ≠ i`) with a common period `P > 0`
+> (every `(v j − v k)·P` whole), all readings positive, and the seventh **off the lattice** (`(v i − v k)·P` not whole):
+> the subject is lonely, at `t₇ + m·P`, where native order seven clears the six at `1/7` at `t₇`
+> (`existenceAtN_seven`) and `m` is written down (`exists_far_multiple`: one step if `‖α‖ ≥ 1/4`, else
+> `⌈1/(4‖α‖)⌉` steps, `α = (v i − v k)·P`). No density, no measure.
+
+This is R7's mechanism (paper v9.1 §10.6, `IrrationalN.lonely_of_one_free`, which there needs at most three other
+readings) at order eight, with order seven supplying the six.
+
+**Checks** (`LonelyRunner/experiments/nN/redo/move_window_v1.{py,out}`, exact):
+- `[VERIFIED — 2,587 random cases]` the lemma's instant `t₇ + mP`, `m ≤ ⌈1/(4‖α‖)⌉`, is lonely: 0 failures.
+- `[VERIFIED — one family, exact]` **the escape, with a positive control.** Reading 7 of `(1,…,7)` moved to `7 + ε`: at
+  threshold `1/8` (the endpoint lonely) the first lonely time is `3/8` for every `ε = 10⁻¹…10⁻⁴`; at threshold
+  `1/8 + 1/1000` (the endpoint **not** lonely) it is `0.874, 0.874, 8.87, 80.9`, growing like `1/ε`.
+
+**What a move contains** `[reasoned in the text; the pieces cited are proved]`:
+1. Along a move, every arrangement off the lattice `x ∈ (1/P)ℤ` of the moving reading is lonely (the lemma). What is
+   left are the **lattice points**, where every reading is a whole multiple of `1/P`: whole-number arrangements after
+   rescaling. On moves 1–6 they are hybrids (whole-number runners `8·D_j`, AP runners `j`, the mover at `8x`); on move 7
+   the lattice is `gℤ`, `g` the gcd of the six fixed readings, and **the target itself is a lattice point**.
+2. At a lattice point `X`: if `X` is lonely, nearby points are lonely at bounded times (`move_one_strict`,
+   `move_one_period`, `eventually_lonely_of_margin`, all at `X`'s own instant or its mirror). If `X` is not lonely,
+   nearby points are lonely only at times that escape to infinity (`lonelyAt_of_limit`, contrapositive; the control
+   above shows the `1/ε` rate). **So the window at a lattice point is exactly that point's loneliness.**
+3. Hence, move by move: the window along the move ⇔ every lattice point on it is lonely (⇒: `segment_lonely` on the
+   sub-segment `[0, s]`; ⇐: every point then lonely, locally bounded, and finitely many neighbourhoods cover `[0, 1]`;
+   not in Lean). The failure modes E115's addendum named for `WindowBound` (a multi pinch only; a pinch with no common
+   period) do not arise on a move: at a pinch one pinner is fixed, so the instant is rational and a period exists
+   (`segment_lonely`, as proved).
+4. **So the path route owes exactly the whole-number conjecture at the lattice points of its moves, the target among
+   them.** That is the statement plan v2 already reduces to (`lonelyRunnerAt8_iff_residual`): the path route and the
+   residual route owe the same thing. What the path route adds is a native, one-runner proof that everything between
+   whole-number points is lonely.
+
+**Consequences for earlier entries.**
+- E115's "What remains … `WindowBound`, and only it" holds, and `WindowBound` restricted to the moves is equivalent to
+  the whole-number conjecture; it is not a separate analytic fact about escape. E52's *"the relocated isolation cannot
+  escape to infinity"* is, on a move, exactly *"no whole-number arrangement on it fails"*.
+- The §6 neighbourhood theorems return to the path in whole-number form: they discharge lattice points near an AP,
+  grid or doubled-slot shape at some scale. With zero deviation, `grid_nbhd_exists` is a case of R6 at `q = 8` (a
+  complete residue system mod 8 is lonely at `1/8`). R6 at `q = 8` settles more: every lattice point whose subject
+  readings avoid `0 mod 8`. So a lattice point not settled at `1/8` has a runner in the subject's own class mod 8
+  (`EightResidual`'s `eight` field; handover v7 §0.11, the one mechanism that delays the isolation).
+- The discrete form of the deformation is **one runner moved by one lattice unit** between whole-number arrangements,
+  which is what E103, E110 and E111 did with the cascade (moves of `±1, ±2`). A unit step moves the runner's position
+  at `X`'s instant `t*` by `t*/P`, small against a slot exactly when the scale (`d_min`) is large: the owner's
+  *"deviation forced by d_min"*.
+
+- **O5. "The deformation carries isolation to the target through the continuum."** E113–E115 treated the path from the
+  AP as doing work between whole-number arrangements, with the window as the one thing owed about it. Check run (this
+  entry): on every move the continuum is lonely by order seven plus one free reading, and the window is exactly
+  loneliness at the whole-number points, the target included. The continuum carries nothing across a whole-number
+  point: arriving at a non-lonely one, the instants escape like `1/ε`. Where the work is: the whole-number arrangements,
+  as in plan v2.
