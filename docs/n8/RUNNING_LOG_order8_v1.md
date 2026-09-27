@@ -4030,3 +4030,50 @@ slot takes a bit of time to sort out but in a very predictable and forced way."*
 **Reading, owner's terms:** the only local way to lose the isolation along the path is two runners at one place at every
 lonely instant: the owner's two-in-a-slot, at the slot edge. Two runners at one *speed* is excluded outright (a face;
 injectivity). No overturned assumption this entry.
+
+---
+
+## E114 — 2026-09-27 — O3; PinchOpenN in Lean; openness needs no window, and the path can avoid multi pinches
+
+**Owner:** *"Yes do this. But remember because scale is invariant and because grids are infinite expanding number will
+ultimately just be repeating what is already known."* Recorded verbatim. Boundary recorded beside it (memory-drafter
+found these on disk): larger ranges have turned up things smaller ones did not (the cascade length `2k+1` on
+`(1, 5k−2, 5k, 10k−2)`; "lattice gap ≤ 3" withdrawn at gap 6; the `53/462` floor held to 40 only). Sets up to 24 do
+repeat under rescaling (E113: three of its six fragile sets are rescalings). Taken here as: settle (A) by reasoning, not
+by a larger search.
+
+- **O3. E113's "the wall lemma at a simple pinch is the mirror" was already proved.** `Spec/TwoPinnerN.lean`
+  (2026-09-25) has the mirror argument, roles swapped, for the two pinners. Check that would have caught it: grep the Lean
+  tree for the route before deriving (the pre-use check's step 0, the O2 lesson again). E113's measurements stand; its
+  item 3 is `TwoPinnerN`, not new.
+
+**New in Lean: `LRC/Spec/PinchOpenN.lean`** (`LonelyRunner/` commit below; Spec gate PASS, **1,863** declarations,
+axiom-clean, `experiments/nN/spec_gate_pinch_open.out`) `[PROVED — axiom-clean]`:
+- `opens_at_leaving`: at a simple pinch (runner `a` on `+1/8`, `b` on `−1/8`, every other runner clear with margin
+  `ε > 0`), in any direction `w` with `(w_b − w_k)(v_a − v_k) ≤ (w_a − w_k)(v_b − v_k)`, for small `r ≥ 0` the subject is
+  lonely at the leaving runner's own opening `(Na + 1/8)/((v_a − v_k) + r(w_a − w_k))`. The condition does not depend
+  on `r`.
+- `mirror_pinch`, `right_side`, **`pinch_eventually_lonely`**: for whole-number readings, the mirror `M − t0` is a
+  simple pinch with roles swapped and the others equally clear, so the other sign is covered there; with `−w` for
+  `r ≤ 0`, the subject is lonely at every `r` near `0`, **both sides, any direction**. This is
+  `DeformationN.lonely_along_path`'s `hopen` at a simple pinch, with the other runners' room carried (the part
+  `TwoPinnerN` left set-specific).
+
+**The path route, restructured** `[reasoned in the text; the pieces named are proved; the assembly is not in Lean]`:
+1. **Openness needs no window.** With margin: `eventually_lonely_of_margin`. At a simple pinch: `pinch_eventually_lonely`
+   (the mirror may lie far outside any window; openness does not care). E75 stated (L) inside the window, which is why
+   the mirror did not settle it there.
+2. **Closedness is the window, and only there.** `lonely_along_path`'s `hbound`: some lonely instant in `[c, T]`.
+3. **Multi pinches can be avoided by the choice of path, given the window.** With every lonely instant `≤ T` and speeds
+   bounded on the path, only walls with laps `≤ d_max·T` matter: finitely many. A multi pinch lies on two of them at
+   once (two independent linear conditions: codimension 2 in the readings). Route the path from the AP through a
+   rational point `M` in the open cone of increasing positive readings that avoids the finitely many hyperplanes
+   `span(AP, W)` and `span(W, target)`: a finite union of hyperplanes does not cover an open cone. Then no interior point
+   of the path is a multi pinch at an instant `≤ T`; the target itself is reached by closedness, not openness. Rational
+   ends keep every wall crossing rational, so the mirror applies.
+4. **So (A) is not a separate obligation; the path route owes only (B), the window:** a lonely arrangement is lonely at
+   some instant bounded by its speeds, uniformly on a bounded set of arrangements with `d_min` bounded below.
+
+Owed in Lean for the assembly: isolated lonely instant ⇒ pinch (one leaving, one entering); the finite-wall avoidance of
+item 3; the path through `M`; `lonely_along_path` with `hopen` from margin or `pinch_eventually_lonely`. **(B) stays the
+open content** (the owner's *"bounded by the speeds"*, E52; E72's `8·d_min·t ≤ 15`, `[VERIFIED]` for `S ≤ 24`).
