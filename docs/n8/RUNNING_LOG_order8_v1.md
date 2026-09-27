@@ -5135,3 +5135,27 @@ next lonely at `99/5`). Close to 7 on a finite window (the O7 caution applies); 
 **Lean** (`SlowBlockN`, commit `f21edb2`; Spec gate PASS **1,929**, `experiments/nN/spec_gate_regimes_lap.out`)
 `[PROVED — axiom-clean]`: `slow_clear_lap`, `exists_block_iff_fast_lap`, `lonely_eight_of_fast_in_slow_block_lap`: the
 reduction on the slow group's common block on any lap `k`.
+
+---
+
+## E153 — 2026-09-27 — the six-reading window: factor 7 fails on fine shapes (ρ reaches 9); the blocks form; run protections
+
+(`LonelyRunner/experiments/nN/redo/six_window_climb_v1.{py,out}`, exact.) E152's candidate lemma "six readings, from any
+start `A ≥ 1` in their own bound units, are clear within ratio 7" is **false on fine shapes**: hill-climbs reach
+`ρ = 9.0000` (e.g. `(1, 1.3746, 1.7628, 2.2539, 2.5123, 3.23)`), `8.9998`, `8.72`, `8.43`, `7.52`. The integer value 6.6
+(readings `≤ 20`) was range-forced (O7's pattern, caught before use). Mechanism `[my reading]`: a dense six-crowd is
+lonely in its first block, runs out of shared blocks (E127), and waits for a late alignment.
+
+**The form that matches the cascade** `[reasoned]`: with the slow group the nearest runner alone its blocks are
+`A·([1,7] ∪ [9,15] ∪ …)` in the fast group's units; the late band shapes land in the second (`R = 9`). So the question is
+how many of the slow runner's blocks the worst start needs. This is Case C's own statement (slow runner plus the six)
+with a lap count attached, the same form as the band theorem (the nearest runner's first two blocks); its content is
+whether a small fixed count always suffices.
+
+**Process** (owner: *"If you're going to start a slow run you should caffeinate and put protections around it"*): the
+first scan (`six_blocks_v1`) was started bare inside a foreground wait, against v7 §1.12; stopped. `six_blocks_v2` runs
+under `caffeinate` with a progress file, a resumable checkpoint, early flags for sets needing more than two blocks, and a
+positive control. The first control was wrong (the rounded E121 supremum shape keeps its single isolated point
+`R ≈ 6.319` in the first block, so one block suffices for it); replaced by a late shape from the E121/E128 walk verified
+by the cascade (`R* = 9.0`), whose six from their own start need the second block: control PASS. Result recorded below
+when the scan ends.
