@@ -5242,3 +5242,78 @@ sufficiency (`lonely_of_gridClass8` via `lonely_eight_of_pairwise_laps`); **`Cov
 **`lonelyRunnerAt8_of_covers : CoverB8 → CoverC8 → LonelyRunnerAt8`**. Gate result below.
 Gate: **PASS 1,944** declarations, axiom-clean (`experiments/nN/spec_gate_regime_skeleton.out`); `CoverB8`, `CoverC8`
 on the OWED register beside `WindowBound`, `CaseB8`, `CaseC8`.
+
+---
+
+## E159 — 2026-09-28 — are we proving the wrong thing? CoverB8 holds on fine shapes; the separation regime; the cell form
+
+**Owner:** *"yes state the separation regime in lean … Yes but make sure we aren't trying to prove the wrong thing
+because we termed the problem wrong."* With a pasted reframing (source not stated): the objects should be finitely many
+combinatorial cells of normalised arrangements (AP/grid residue class, ordering of openings/walls, slot occupancy, which
+pair is separating), each with a uniform isolation rule; continuous parameters move inside a cell until a wall; the
+obligation is a finite transition/termination argument on cells, not a quantifier over all finite sets.
+
+**Check 1, is `CoverB8` true beyond readings ≤ 24?** (`LonelyRunner/experiments/nN/redo/coverB_fine_v1.{py,out,progress}`,
+exact, protected, control passed.) `CoverB8` quantifies over all whole-number sets at all scales. Bound or grid class
+with `mm ≤ 4`, `c ∈ φ(8)`: the 5,400 verified late band shapes: least `mm` 2 (5,363) or 3 (37); 5,000 random fine band
+shapes: `mm = 1`; 5,000 random fine shapes with spread 9–24: bound 1,347, `mm = 1` 3,649, `mm = 2` 4. None needs `mm > 3`.
+`[VERIFIED — these populations]` Closes the E134 flag (late shapes with `c ≤ 7`).
+
+**Check 2, the separation regime** (`LonelyRunner/LonelyRunner/LRC/Spec/SeparationN.lean`) `[PROVED — gate below]`: a
+reading `c` exactly in the subject's slot at `t₀` (`c·t₀ ∈ ℤ`) separates at `t₀ + 1/(8c)`; every other reading `d` moves by
+`d/(8c)` of a lap; if each keeps its band, all are clear there (`lonely_of_separation`; the mirror
+`lonely_of_separation_back`). Generalises `GridNudgeN` to a captured reading of any rank. **What this shows about the
+formulation:** the 15 Case C leftovers (E157) need two to four successive separations; repeated separation from an
+instant is the cascade itself, so "the separations come to rest" is not a regime (it renames the conjecture for that
+set). `CoverC8`'s `WithinTwoBlocks8` disjunct stays, documented as the place of the Case C transition argument.
+
+**The cell form, assessed** `[reasoned]`: the pasted reframing is right about the form and is not a different statement.
+A `GridClass8` instance is a lap assignment decided by a pairwise interval test; with the reference `(e, mm, c)`, each
+reading's residue `c·n mod 8`, and the order of the fourteen interval endpoints, the data is finite and the rule inside
+the cell is uniform (the largest left end); the walls between cells are endpoint coincidences (E124's walls). So
+`CoverB8` says "the good cells cover the normalised shapes"; stated over all finite sets of readings it hides that the
+data is finite. The obligation should be restated as: (a) the finite cell list with uniform rules (Lean: each is a
+`GridClass8` or a separation instance); (b) either a covering of normalised shapes by good cells or a transition argument
+in which a separation moves an arrangement from a cell to another and cannot cycle for ever. The proved ingredient for
+(b): `SweepBridgeN.sweep_stop_persists` (windows narrow each lap, so a pair that has separated stays separated; only
+equal speeds never separate).
+
+---
+
+## E160 — 2026-09-28 — the pasted spine tested with the cascade; a concurrent session in the Lean tree
+
+**Owner:** *"AP is scale invariant meaning 1…8 and 1m…8m are the same thing. Likewise grid is infinite so 1…7,16 is the
+same as 1…7,16m; we don't need a thousand iterations."* And a pasted proof spine (source not stated): choose the
+arrangement's AP/grid reference and a clear class; reduce a failed class to one unresolved pair; take the captured
+runner's forced exit; prove a **transport** statement ("after a pair exit that does not isolate, the new obstruction is a
+relocated copy of the same grid arrangement, with a determined next pair/slot"; the relocated state keeps AP/grid
+positions, edge directions and the captured pair, not scale or lap labels); prove **no return** (perpetual hand-off would
+return to the same pair in the same relative slot state and force equal speeds). Stop proving `CoverB8`/`CoverC8`
+directly.
+
+**Scale and grid** `[reasoned]`: agreed; cells are normalised by scale and by grid position (residues). The continuous
+data re-enters at one place: at a separation every other reading moves by `d/(8c)` of a lap; for the captured reading
+the largest (`1…7,16`, `…,16m`) this is under an eighth and `GridNudgeN` applies; for a middle captured reading the
+faster readings move more than a lap and where they land depends on `d/c`.
+
+**The spine through the cascade** (`LonelyRunner/experiments/nN/redo/transport_v1.{py,out}`, exact, every move of every
+Case B chain to readings `≤ 24`) `[VERIFIED — this window]`:
+- **Residues alone do not determine the transport.** State normalised by scale and grid (each reading's eighth-slot,
+  the separating runner, which readings are faster than it): 81,202 states, 11,419 (14.1%) with more than one next
+  obstruction, almost all "lands" vs "one reading enters", decided by the position *within* the eighth. The transport
+  state must carry the **order of the edge crossings (walls)**; with it the next state is determined by construction
+  (the cascade is deterministic on that order). The pasted cell definition includes "ordering of the relevant
+  openings/walls", consistent.
+- **"One unresolved pair" is false as stated.** After a non-isolating separation the next obstruction is one reading in
+  135,934 moves, two in 41,276, three in 4,675, four in 164, five in 1. The cascade still resolves it deterministically
+  (latest exit; several on the leaving side are harmless, E135), so the transport lemma must allow a set in the slot.
+- `move_eq_separation` (added to `SeparationN` by another session, read here): a separation whose other readings keep
+  their bands is exactly the cascade's next move, `move 8 ds t₀ = t₀ + 1/(8c)`. First half of the spine's capture-exit
+  step.
+
+**Concurrent session.** Another session is editing `LRC/Spec` and running its own Spec gate
+(`/tmp/spec_gate_capture_transport.out`), apparently on the capture-transport lemma. This session's gate for
+`SeparationN` + the `RegimeSkeletonN` docstring failed its tree-stability check (`tree CHANGED during this run`) because of
+that edit; nothing wrong with the Lean. `SeparationN.lean` (with the other session's `move_eq_separation`) and the
+`RegimeSkeletonN` docstring edit are **uncommitted**; this session holds Lean edits and gate runs until the owner decides
+which session owns the tree.
