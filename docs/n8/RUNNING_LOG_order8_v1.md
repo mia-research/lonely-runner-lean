@@ -4260,3 +4260,34 @@ sits in `(7/8, 9/8)` there). The least lap `K` with some reading's opening `(8K+
 - No Case C residual member is known (plan v2 §4). **Next:** attempt Case C residual members by construction (a slow core
   below a six-reading cluster with no common factor, no fast pair, no block split, no one free reading). If none exists,
   the structural reason is the next case; if they exist, their cascade is the next category.
+
+---
+
+## E118 — 2026-09-27 — Case C has owed sets; both known categories relocate within the first window
+
+**Case C residual members exist** (`LonelyRunner/experiments/nN/residual_members_C_v1.{py,out}`; the field predicates
+factored into `residual_fields_v1.py`; exact) `[VERIFIED — these constructed members, all 22 fields]`. Plan v2 §4 said
+none was known. With a collider `L·u` (`L = 8·lcm(1…64)`) as the least reading and six readings hill-climbed in
+`[25·d_min, 175·d_min]`: 297 of 300 constructions pass every field. With the collider inside the fast cluster: 250 of
+300. Shape: **one slow runner below a six-reading cluster** (the cluster's own spread `≤ 7` in 492 of 547; four have a
+2/5 split).
+
+**Through the cascade:** every one is isolated with `R* ≤ 1.377`, inside the slow runner's first window
+(`8·d_min·t ≤ 7`), the flank a cluster member in 546 of 547.
+
+**The adversarial shape tested** (`experiments/nN/redo/cluster_drift_v1.{py,out}`) `[VERIFIED — these 4,110 sets]`: a
+near-lattice cluster `c·(1…6)` with one member moved by `±1, ±2, 3` (grid plus deviation), a slow runner below with
+spread `> 24`, `c = 40, 120, 400`. `R* > 7`: 0; the largest `R* = 1.463`. My expectation that the drifting member would
+block the cluster for long stretches was wrong: read as an AP at its own scale, the cluster has `φ(8)` global instants
+per period, and one deviating member does not block all of them (the owner's *"AP scale invariance subsumes a lot"*).
+
+**The two categories of owed sets now known, at the AP scale** `[my reading; each backed by the measurements named]`:
+- **B1:** the AP at scale `d_min` with the fastest runner lapped once into the subject's slot (spread 7–9). Relocates to
+  a middle reading's second opening `9/(8e)` (E117: 44 of 47; exhaustive to 40, least lap 1 in 95.7%, at most 6).
+- **C1:** a slow runner below a fast cluster, the cluster an R1 group at its own scale. Relocates within the slow runner's
+  first window (`R* ≤ 1.46` on 4,657 sets here; E73's adversarial climbs `R ≤ 6.42`).
+
+What a proof of C1 needs, in the framework's own terms: the fast cluster's instants (the flank openings of an R1 group,
+or its `φ(8)` class instants when it is near an AP) meet the slow runner's first window. `FastPair8` (a pair: every
+window of length `3/(4a)` holds a joint clear point) and `BlockSplit8` (a common factor `g`) are the two cases of this
+already proved; C1 is the same statement for a group of up to six with no common factor. Not proved.
