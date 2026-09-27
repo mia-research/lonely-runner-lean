@@ -5159,3 +5159,21 @@ positive control. The first control was wrong (the rounded E121 supremum shape k
 `R ≈ 6.319` in the first block, so one block suffices for it); replaced by a late shape from the E121/E128 walk verified
 by the cascade (`R* = 9.0`), whose six from their own start need the second block: control PASS. Result recorded below
 when the scan ends.
+
+---
+
+## E154 — 2026-09-27 — the six-reading crowd through the cascade: the slow runner carries it to its second block
+
+**Owner:** *"Are you using the cascade in these climbs?"* No: `six_blocks_v2` computes the six-group's whole lonely set
+and searches starts (same numbers as the cascade from each start, but no chain read). Switched to the cascade for the
+mechanism; the integer scan keeps running for its counts.
+
+(`LonelyRunner/experiments/nN/redo/six_blocks_cascade_v1.{py,out,progress}`, exact, under `caffeinate`, control passed.)
+A slow runner alone (reading `1/A` in the group's units; its blocks `A·[8k+1, 8k+7]`) below the four extremal fine
+six-crowds of E153; starts at the end of the crowd's first block, just after it, and a grid in `[1.7, 12]`: 102 of 112
+starts land in the slow runner's first block, 10 in its second, none later. In all 10 the chain is the same
+`[VERIFIED — these 10]`: the crowd runs out of shared blocks and its windows chain (setters at laps 2–9); once past `7A`
+the slow runner is inside its own window `(7A, 9A)` and **sets one move itself, its exit at `9A`**; the crowd then lands
+after 1–5 more moves at `R ∈ [9.0, 10.6]` (slow runner's units), inside `[9, 15]`. The late band shapes' `R = 9` landing
+(E151) is the same event. Integer six-sets (least `≤ 20`, readings `≤ 20`, starts `A ∈ [1, 12]`): the chunks finished so
+far need only the first block.
