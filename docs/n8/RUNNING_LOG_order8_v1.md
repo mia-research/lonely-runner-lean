@@ -4778,3 +4778,23 @@ scale (grid `n = round(s)`), each `φ(8)` class decided exactly with relocation.
   defeats both AP pairs by crossing edges, the isolation relocates to the fast group's next opening, where the readings
   split into two clear blocks. Next: perturb these through the cascade; derive "crossing edges at the AP ⇒ a two-block
   split exists", and read the 5 at `R ∈ [3, 4)`.
+
+---
+
+## E137 — 2026-09-27 — the band to 24 by the AP classes and the block instants; what is and is not content
+
+(`LonelyRunner/experiments/nN/redo/proved_union_band_v1.{py,out}`, `proved_union_rem_cascade_v1.{py,out}`, exact,
+band sets to 24, 42,811.)
+- AP `φ(8)` classes (relocated, exact; instances of `lonely_eight_of_pairwise_laps`) ∪ two-block ∪ three-block
+  (`lonely_eight_of_blocks`, `K = 1, 2`) settle all but **42**. The 149 pure crossing-edge sets of E136: two-block 144,
+  three-block 5.
+- The 42: `d_min = 3` in 40, `2` in 2 (grids in thirds or halves of `d_min`); AP failure capture 32, crossing plus
+  interior 10; cascade `R* ∈ [3, 6)`; **every one lonely at a `K = 3` block instant `25/(8e)`**.
+- **Grade of this** `[VERIFIED — these windows; not a derivation]`: the exact block condition at `(8K+1)/(8e)` *is*
+  loneliness at that instant, and every cascade landing is some reading's opening `(8K+1)/(8e)` (its flank's). So
+  "AP classes ∪ blocks with `K ≤ 3`" says: every band set to 24 is lonely at an AP class instant or at an opening on lap
+  `≤ 3`. The content is the lap bound `K ≤ 3` in this window (E117 to 40: least lap up to 6), not the family. A derived
+  rule has the form of E119's gap rule (a reading `e ≥ 9·d_max/15` with no reading in `(7e/9, e)` forces the two-block
+  instant). **The derivation owed for the band is the analogue for each level `K`**: a checkable condition on the
+  readings (gaps, in the owner's grid-at-scale-`e/(8K+1)` view) forcing the block instant, with the AP classes, and
+  a proof that the conditions exhaust the band.
