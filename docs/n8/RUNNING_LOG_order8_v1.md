@@ -5351,3 +5351,42 @@ narrow each lap: that gives the finiteness above **for sweep steps**. Bridges (a
 one on an earlier lap) have no per-pair lap bound: at `a`'s exit on lap `k` the faster `b` is in a window iff
 `‖(8k+1)·s_b/(8 s_a)‖ < 1/8`, which for a rational ratio recurs periodically. **The open core narrows to: bridges
 cannot sustain the chain for ever.**
+
+---
+
+## E162 — 2026-09-28 — picking up the parallel session; O10: mistaking one general mechanism for many small ones
+
+**Owner:** *"Have a look at the other session's progress … They have run out of tokens so you need to pick it up and
+finish this proof."* The parallel session's plan: `DoubledSlotN` (the one-doubled-slot AP family), `DoubledNbhd*` (its
+neighbourhoods) and `move_eq_separation` are the pieces; show any non-clear grid placement is carried into one of those
+neighbourhoods at its own scale. Its tree changes: only `move_eq_separation` (+ the `Cascade.Iteration` import) in
+`SeparationN`; its own gate (`/tmp/spec_gate_capture_transport.out`) never reached a verdict.
+
+**Tree made whole:** `SeparationN` = this session's separation lemmas + the parallel session's `move_eq_separation` +
+this session's `transport`, `crossed_entering_edge`, `slower_obstruction_is_edge_push`, `sweep_lap_bound`,
+`sweep_lap_lt` (E161). Spec gate **PASS 1,957** (`experiments/nN/spec_gate_separation_merged.out`), committed
+`LonelyRunner/` `261ccec`.
+
+**The reach of the formalised family** (`LonelyRunner/experiments/nN/redo/doubled_family_reach_v1.{py,out}`, exact, Case B
+to readings `≤ 24`): at the nearest runner's scale, 123 of 210,335 arrangements are in the `DoubledSlotN` family (the AP
+with exactly one runner lapped); 14,583 have one doubled slot with several runners lapped; 85,972 two or more doubled
+slots; 735 a complete residue system; 108,922 are off the nearest runner's grid. **Scope:** this measures the narrowness
+of one parametrised Lean instance, not a failure of the mechanism; it also counted doubled slots anywhere on the circle,
+when only the subject's own slot matters (a doubled slot elsewhere is harmless, E89). Owner: *"That is weird … because the
+cascade never fails."* Correct: every cascade move is a runner in the subject's slot separating.
+
+- **O10. Mistaking general mechanisms for small distinct ones.** Owner: *"Do you see you have been mistaking
+  generalisable mechanisms as small distinct ones?"* Yes. The near pair, the capture, the grid nudge, the doubled edge,
+  the carry to `R = 9`, the 772 exceptions and the 15 Case C leftovers were measured and named separately; they are one
+  event (a runner in the subject's slot; the isolation waits for it to separate). The regime lists (bound, first opening,
+  block level, slow block, grid nudge) are instances of one principle (the arrangement's own grid, read at an instant,
+  with deviation), and were extended item by item whenever something leaked. The reach measurement above compared
+  arrangements with one parametrised instance and read its narrowness as a property of the mechanism.
+
+**The general mechanism, already in the tree:** (1) `GridPairLawN.grid_class_clear`: any grid through the arrangement's
+own reading, any scale, any laps, any number of readings per slot: every runner clear except those in the subject's slot;
+(2) `SeparationN.lonely_of_separation` / `move_eq_separation`: those separate, any rank, exactly the cascade's next move;
+`transport`: the next obstruction is only readings the shift carried over an entering edge. `DoubledSlotN`,
+`DoubledNbhdN`, `GridNeighbourhoodN`, `APNeighbourhoodN`, `GridNudgeN` and the one-free lemma are special cases of (1)
+and (2). **The one open statement:** repeated separation cannot continue for ever; proved part: a pair of distinct speeds
+hands over by a sweep step on finitely many laps (`sweep_lap_bound`).
