@@ -1,0 +1,28 @@
+
+== E40
+  rho 1/256 other :  1283 runners; |factor-1|/rho median 0.65, 95% 128.36, max 1025.0; jumps 78
+  rho 1/256 beside:   517 runners; |factor-1|/rho median 1.33, 95% 510.84, max 1023.7; jumps 62
+  rho 1/256 home  :   300 runners; |factor-1|/rho median 0.03, 95% 0.15, max 0.4; jumps 0
+  rho 1/256 far   :   300 runners; |factor-1|/rho median 0.04, 95% 0.25, max 0.7; jumps 0
+  rho  1/64 other :  1277 runners; |factor-1|/rho median 0.62, 95% 51.56, max 255.8; jumps 87
+  rho  1/64 beside:   523 runners; |factor-1|/rho median 1.23, 95% 91.22, max 256.6; jumps 57
+  rho  1/64 home  :   300 runners; |factor-1|/rho median 0.04, 95% 0.18, max 0.3; jumps 0
+  rho  1/64 far   :   300 runners; |factor-1|/rho median 0.04, 95% 0.23, max 0.7; jumps 0
+  rho  1/16 other :  1293 runners; |factor-1|/rho median 0.64, 95% 8.35, max 64.2; jumps 76
+  rho  1/16 beside:   507 runners; |factor-1|/rho median 1.15, 95% 22.97, max 63.6; jumps 63
+  rho  1/16 home  :   300 runners; |factor-1|/rho median 0.07, 95% 1.35, max 11.8; jumps 4
+  rho  1/16 far   :   300 runners; |factor-1|/rho median 0.03, 95% 0.30, max 1.0; jumps 0
+
+== laps<=1
+  rho 1/256 other :  1291 runners; |factor-1|/rho median 0.43, 95% 204.69, max 1024.6; jumps 105
+  rho 1/256 beside:   509 runners; |factor-1|/rho median 1.65, 95% 365.89, max 1023.3; jumps 131
+  rho 1/256 home  :   300 runners; |factor-1|/rho median 0.09, 95% 0.58, max 413.6; jumps 2
+  rho 1/256 far   :   300 runners; |factor-1|/rho median 0.10, 95% 0.73, max 163.1; jumps 3
+  rho  1/64 other :  1283 runners; |factor-1|/rho median 0.46, 95% 45.07, max 256.4; jumps 93
+  rho  1/64 beside:   517 runners; |factor-1|/rho median 13.76, 95% 91.78, max 171.1; jumps 112
+  rho  1/64 home  :   300 runners; |factor-1|/rho median 0.11, 95% 0.57, max 32.0; jumps 0
+  rho  1/64 far   :   300 runners; |factor-1|/rho median 0.09, 95% 0.47, max 40.9; jumps 1
+  rho  1/16 other :  1279 runners; |factor-1|/rho median 0.45, 95% 11.38, max 53.7; jumps 92
+  rho  1/16 beside:   521 runners; |factor-1|/rho median 4.44, 95% 22.92, max 43.0; jumps 132
+  rho  1/16 home  :   300 runners; |factor-1|/rho median 0.09, 95% 0.64, max 33.6; jumps 3
+  rho  1/16 far   :   300 runners; |factor-1|/rho median 0.09, 95% 0.51, max 25.4; jumps 2

@@ -1,0 +1,16 @@
+
+== E40
+  rho 1/256 other : 1282 runners; nearest class-instant offset/rho median 0.11, 95% 0.56, max 1.87; within 8*rho: 1282/1282
+  rho 1/256 beside: 518 runners; nearest class-instant offset/rho median 0.10, 95% 0.42, max 0.66; within 8*rho: 518/518
+  rho  1/64 other : 1290 runners; nearest class-instant offset/rho median 0.12, 95% 0.65, max 1.91; within 8*rho: 1290/1290
+  rho  1/64 beside: 510 runners; nearest class-instant offset/rho median 0.09, 95% 0.42, max 0.64; within 8*rho: 510/510
+  rho  1/16 other : 1288 runners; nearest class-instant offset/rho median 0.13, 95% 0.42, max 1.66; within 8*rho: 1288/1288
+  rho  1/16 beside: 512 runners; nearest class-instant offset/rho median 0.12, 95% 0.40, max 0.71; within 8*rho: 512/512
+
+== laps<=1
+  rho 1/256 other : 1297 runners; nearest class-instant offset/rho median 0.06, 95% 0.41, max 1.47; within 8*rho: 1297/1297
+  rho 1/256 beside: 503 runners; nearest class-instant offset/rho median 0.07, 95% 0.34, max 0.57; within 8*rho: 503/503
+  rho  1/64 other : 1297 runners; nearest class-instant offset/rho median 0.07, 95% 0.43, max 1.71; within 8*rho: 1297/1297
+  rho  1/64 beside: 503 runners; nearest class-instant offset/rho median 0.08, 95% 0.35, max 0.62; within 8*rho: 503/503
+  rho  1/16 other : 1288 runners; nearest class-instant offset/rho median 0.07, 95% 0.29, max 1.78; within 8*rho: 1288/1288
+  rho  1/16 beside: 512 runners; nearest class-instant offset/rho median 0.08, 95% 0.35, max 0.57; within 8*rho: 512/512
