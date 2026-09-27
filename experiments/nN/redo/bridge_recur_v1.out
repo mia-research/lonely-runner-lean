@@ -1,0 +1,18 @@
+== Case B to 24
+    78215  bridge pair once
+       26  bridge pair recurs in the chain
+    64967  lands at the bound
+    54642  last handover: none (one move)
+    48928  last handover: sweep
+    41798  last handover: bridge
+       15  gap 1, ratio denominator r = 13, gap multiple of r: False
+        4  gap 1, ratio denominator r = 7, gap multiple of r: False
+        3  gap 2, ratio denominator r = 21, gap multiple of r: False
+        1  gap 1, ratio denominator r = 6, gap multiple of r: False
+        1  gap 1, ratio denominator r = 10, gap multiple of r: False
+        1  gap 1, ratio denominator r = 16, gap multiple of r: False
+        1  gap 3, ratio denominator r = 11, gap multiple of r: False
+== late fine band shapes
+    68355  bridge pair once
+     4298  bridge pair recurs in the chain
+     5400  last handover: bridge
