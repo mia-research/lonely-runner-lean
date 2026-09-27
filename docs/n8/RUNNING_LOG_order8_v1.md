@@ -3666,3 +3666,25 @@ instant named, for an infinite family. **It is one family** (the AP with one run
 - **C's event is not a fixed table.** Its flank is one of those blocking runners in about 55% of C cases (546 of 992 at
   `Q = 1`), rarely the partner, and its lap spreads with `Q` (up to 48 at `Q = 50`). The E40 end-case table does not carry
   over as it stands.
+
+---
+
+## E42 — 2026-09-27 — the delayed pair members of a doubled slot, grouped
+
+`experiments/nN/redo/doubled_slot_C_v1` (grouping) and `_v2` (across lap sizes), exact, orientation normalised so the
+partner is ahead (the mirror). Class C = a pair member delayed past the grid instant whose partner's opening is blocked.
+`[EMPIRICAL]`
+- **The empty slot does not decide the event outside E40's family.** Grouped by (empty-slot offset, blocker signature),
+  each group still spreads over several events: at `Q = 1`, e.g. empty slot at offset 6 with the offset-7 runner blocking:
+  the blocker's first opening (`R = 9/7`) in 203 of 421, an offset-5 runner's (`9/5`) in 56, and others. The other runners'
+  laps choose among a few candidate openings.
+- **Every event is an opening of a near runner at a small lap.** At `Q = 1` the events are from a short list,
+  `9/7, 17/7, 25/7, 9/5, 3/2, 17/13, 17/12, 17/14, 17/15`: `(8N + 1)/d` with `d ≤ 15`, `N ≤ 3`.
+- **Mostly the first opening after the grid instant**: 2,686 of 3,060 at `Q = 1`, 2,157 of 2,492 at `Q = 3`, 891 of 1,063
+  at `Q = 10`, 648 of 852 at `Q = 50`; the rest a few laps later (up to 12).
+- **The delay is bounded and shrinks with laps**: `R = 8t* ≤ 25/7` at every `Q` (so `t* ≤ 25/56`, under half a grid
+  cycle; `25/7` is E40's largest), max 2.46 at `Q = 10`, 1.41 at `Q = 50`.
+
+So in the author's three parts: the *cycles until isolation* stay under half a grid cycle, and the event is a near
+runner's first (or nearly first) opening after the grid instant; *which* runner is set by the arrangement's laps, not by
+the empty slot alone. No law of the E40 kind yet for general grids.
