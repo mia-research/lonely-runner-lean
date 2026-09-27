@@ -252,4 +252,167 @@ theorem line_pinch_cases {α β : Fin 8 → ℝ} {k a b : Fin 8} {s t0 : ℝ} {N
     rw [hc]; push_cast at hel ⊢
     linear_combination hel
 
+/-! ### Moving one runner at a time
+
+The other runners do not move, so at a lonely instant `t1` only the moving runner's position changes.  Off an edge it
+stays clear.  On an edge it moves inward for one sign of the change; for the other sign, the mirror instant `P − t1`
+puts it on the opposite edge, where the same change moves it inward.  No wall condition, and no distinction between
+one runner and two runners on an edge. -/
+
+theorem sep_move_other {v w : Fin 8 → ℝ} {k i j : Fin 8} (hki : k ≠ i) (hji : j ≠ i)
+    (hw : ∀ m : Fin 8, m ≠ i → w m = 0) (r t : ℝ) : sep (v + r • w) k j t = sep v k j t := by
+  rw [sep_line, hw j hji, hw k hki, sep_eq]; ring
+
+theorem sep_move_self {v w : Fin 8 → ℝ} {k i : Fin 8} (hki : k ≠ i)
+    (hw : ∀ m : Fin 8, m ≠ i → w m = 0) (r t : ℝ) : sep (v + r • w) k i t = sep v k i t + r * w i * t := by
+  rw [sep_line, hw k hki, sep_eq]; ring
+
+/-- **One runner moved: strictly clear case.** -/
+theorem move_one_strict {v w : Fin 8 → ℝ} {k i : Fin 8} {t1 : ℝ} (hki : k ≠ i)
+    (hw : ∀ m : Fin 8, m ≠ i → w m = 0) (ht1 : 0 < t1) (hl : LonelyAt v k t1)
+    (hs : (8 : ℝ)⁻¹ < circDist (sep v k i t1)) :
+    ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
+  have hc : Tendsto (fun r : ℝ => circDist (sep v k i t1 + r * w i * t1)) (𝓝 0)
+      (𝓝 (circDist (sep v k i t1 + 0 * w i * t1))) :=
+    (circDist_lipschitz.continuous.comp (continuous_const.add
+      ((continuous_id.mul continuous_const).mul continuous_const))).tendsto 0
+  simp only [zero_mul, add_zero] at hc
+  filter_upwards [hc.eventually (lt_mem_nhds hs)] with r hr
+  refine ⟨t1, ht1, fun j hjk => ?_⟩
+  by_cases hji : j = i
+  · subst hji; rw [sep_move_self hki hw]; exact hr.le
+  · rw [sep_move_other hki hji hw]; exact hl j hjk
+
+/-- **One runner moved: the general case, with a common period.**  Readings with a common period `P > t1`: the
+subject stays lonely under every small change of the one runner, at `t1` or at its mirror `P − t1`. -/
+theorem move_one_period {v w : Fin 8 → ℝ} {k i : Fin 8} {t1 P : ℝ} (hki : k ≠ i)
+    (hw : ∀ m : Fin 8, m ≠ i → w m = 0) (ht1 : 0 < t1) (hP : t1 < P) (hl : LonelyAt v k t1)
+    (hper : ∀ j : Fin 8, ∃ z : ℤ, (v j - v k) * P = z) :
+    ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
+  rcases lt_or_eq_of_le (hl i hki.symm) with hs | he
+  · exact move_one_strict hki hw ht1 hl hs
+  -- the mirror instant keeps every other runner exactly as clear
+  have hmir : ∀ j : Fin 8, circDist (sep v k j (P - t1)) = circDist (sep v k j t1) := by
+    intro j
+    obtain ⟨z, hz⟩ := hper j
+    have e : sep v k j (P - t1) = -(sep v k j t1) + (z : ℝ) := by rw [sep_eq, sep_eq, ← hz]; ring
+    rw [e, circDist_add_int_po, circDist_neg_po]
+  obtain ⟨zi, hzi⟩ := hper i
+  have hPt : 0 < P - t1 := by linarith
+  -- small changes: |r · w i| · P < 3/4
+  have hsmall : ∀ᶠ r in 𝓝 (0 : ℝ), |r * w i| * P < 3 / 4 := by
+    have hc : Tendsto (fun r : ℝ => |r * w i| * P) (𝓝 0) (𝓝 (|0 * w i| * P)) :=
+      ((continuous_abs.comp (continuous_id.mul continuous_const)).mul continuous_const).tendsto 0
+    simp only [zero_mul, abs_zero] at hc
+    exact hc.eventually (gt_mem_nhds (by norm_num))
+  obtain ⟨N, hN | hN⟩ := edge_of_eq he.symm
+  · -- on the leaving edge at `t1`; on the entering edge at the mirror
+    filter_upwards [hsmall] with r hr
+    have hb1 : |r * w i| * t1 < 3 / 4 := lt_of_le_of_lt (by gcongr) hr
+    have hb2 : |r * w i| * (P - t1) < 3 / 4 := lt_of_le_of_lt (by gcongr; linarith) hr
+    rcases le_or_gt 0 (r * w i) with hsg | hsg
+    · refine ⟨t1, ht1, fun j hjk => ?_⟩
+      by_cases hji : j = i
+      · subst hji; rw [sep_move_self hki hw, hN]
+        rw [abs_of_nonneg hsg] at hb1
+        refine LRC.TwoPinner.clear_of_band (N := N) ?_ ?_ <;> nlinarith
+      · rw [sep_move_other hki hji hw]; exact hl j hjk
+    · refine ⟨P - t1, hPt, fun j hjk => ?_⟩
+      by_cases hji : j = i
+      · subst hji; rw [sep_move_self hki hw]
+        have hx : sep v k j (P - t1) = ((zi - N - 1 : ℤ) : ℝ) + 7 / 8 := by
+          rw [sep_eq]; push_cast; rw [mul_sub, hzi, ← sep_eq, hN]; ring
+        rw [hx]; rw [abs_of_neg hsg] at hb2
+        refine LRC.TwoPinner.clear_of_band (N := zi - N - 1) ?_ ?_ <;> nlinarith
+      · rw [sep_move_other hki hji hw, hmir j]; exact hl j hjk
+  · -- on the entering edge at `t1`; on the leaving edge at the mirror
+    filter_upwards [hsmall] with r hr
+    have hb1 : |r * w i| * t1 < 3 / 4 := lt_of_le_of_lt (by gcongr) hr
+    have hb2 : |r * w i| * (P - t1) < 3 / 4 := lt_of_le_of_lt (by gcongr; linarith) hr
+    rcases le_or_gt (r * w i) 0 with hsg | hsg
+    · refine ⟨t1, ht1, fun j hjk => ?_⟩
+      by_cases hji : j = i
+      · subst hji; rw [sep_move_self hki hw, hN]
+        rw [abs_of_nonpos hsg] at hb1
+        refine LRC.TwoPinner.clear_of_band (N := N) ?_ ?_ <;> nlinarith
+      · rw [sep_move_other hki hji hw]; exact hl j hjk
+    · refine ⟨P - t1, hPt, fun j hjk => ?_⟩
+      by_cases hji : j = i
+      · subst hji; rw [sep_move_self hki hw]
+        have hx : sep v k j (P - t1) = ((zi - N - 1 : ℤ) : ℝ) + 1 / 8 := by
+          rw [sep_eq]; push_cast; rw [mul_sub, hzi, ← sep_eq, hN]; ring
+        rw [hx]; rw [abs_of_pos hsg] at hb2
+        refine LRC.TwoPinner.clear_of_band (N := zi - N - 1) ?_ ?_ <;> nlinarith
+      · rw [sep_move_other hki hji hw, hmir j]; exact hl j hjk
+
+/-- A positive rational reading on an edge makes the instant rational. -/
+theorem instant_rat {q : ℚ} {t : ℝ} {N : ℤ} {e : ℚ} (hq : (q : ℝ) ≠ 0) (h : (q : ℝ) * t = (N : ℝ) + (e : ℝ)) :
+    ∃ x : ℚ, t = x :=
+  ⟨((N : ℚ) + e) / q, by rw [Rat.cast_div]; push_cast; field_simp; linarith⟩
+
+/-- A reading on an edge at a rational instant is rational. -/
+theorem reading_rat {x t : ℝ} {tq : ℚ} {N : ℤ} {e : ℚ} (ht : t = tq) (ht0 : t ≠ 0) (h : x * t = (N : ℝ) + (e : ℝ)) :
+    ∃ q : ℚ, x = q := by
+  have htq : (tq : ℝ) ≠ 0 := by rw [← ht]; exact ht0
+  refine ⟨((N : ℚ) + e) / tq, ?_⟩
+  rw [Rat.cast_div]; push_cast; rw [← ht]; field_simp; linarith
+
+/-- **One segment of the path: one runner moved, lonely at the start ⇒ lonely at the end, given the window.**  The
+other runners' readings are rational; every reading stays positive along the segment. -/
+theorem segment_lonely {v w : Fin 8 → ℝ} {k i : Fin 8} {c T : ℝ} (hc : 0 < c) (hki : k ≠ i)
+    (hw : ∀ m : Fin 8, m ≠ i → w m = 0)
+    (hrat : ∀ j : Fin 8, j ≠ i → ∃ q : ℚ, v j - v k = q)
+    (hpos : ∀ s ∈ Set.Icc (0 : ℝ) 1, ∀ j : Fin 8, j ≠ k → 0 < (v + s • w) j - (v + s • w) k)
+    (hbound : ∀ s ∈ Set.Icc (0 : ℝ) 1, LRC.Spec.LonelyForSubject (v + s • w) k →
+      ∃ t ∈ Set.Icc c T, LonelyAt (v + s • w) k t)
+    (h0 : LRC.Spec.LonelyForSubject v k) : LRC.Spec.LonelyForSubject (v + w) k := by
+  have hp : Continuous (fun s : ℝ => v + s • w) := continuous_const.add (continuous_id.smul continuous_const)
+  have h0' : LRC.Spec.LonelyForSubject (v + (0 : ℝ) • w) k := by simpa using h0
+  have key := LRC.Deformation.lonely_along_path (p := fun s : ℝ => v + s • w) hp hc h0' ?_ hbound
+  · simpa using key
+  intro s hs hl
+  obtain ⟨t1, ht1, hl1⟩ := hl
+  set u := v + s • w with hu
+  -- it suffices to work at `u` in the direction `w`
+  suffices G : ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (u + r • w) k by
+    have htr : Tendsto (fun r : ℝ => r - s) (𝓝 s) (𝓝 0) := by
+      simpa using ((continuous_id.sub continuous_const).tendsto s : Tendsto (fun r : ℝ => r - s) (𝓝 s) (𝓝 (s - s)))
+    filter_upwards [htr.eventually G] with r hr
+    have e : u + (r - s) • w = v + r • w := by rw [hu]; ext m; simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]; ring
+    rw [e] at hr; exact hr
+  have hposu : ∀ j : Fin 8, j ≠ k → 0 < u j - u k := hpos s hs
+  have hfix : ∀ j : Fin 8, j ≠ i → u j - u k = v j - v k := by
+    intro j hj; simp only [hu, Pi.add_apply, Pi.smul_apply, smul_eq_mul, hw j hj, hw k hki]; ring
+  rcases margin_or_pinch hposu ht1 hl1 with ⟨t', ε, ht', hε, hm⟩ | ⟨a, b, hak, hbk, Na, Nb, hA, hB⟩
+  · have hq : Continuous (fun r : ℝ => u + r • w) := continuous_const.add (continuous_id.smul continuous_const)
+    have hm' : ∀ m : Fin 8, m ≠ k → (8 : ℝ)⁻¹ + ε ≤ circDist (sep ((fun r : ℝ => u + r • w) 0) k m t') := by
+      intro m hm0; simpa using hm m hm0
+    exact LRC.Deformation.eventually_lonely_of_margin hq hε ht' hm'
+  rcases lt_or_eq_of_le (hl1 i hki.symm) with hstr | heq
+  · exact move_one_strict hki hw ht1 hl1 hstr
+  -- runner `i` is on an edge; a fixed runner on an edge makes `t1` rational
+  have ht1q : ∃ x : ℚ, t1 = x := by
+    by_cases hai : a = i
+    · have hbi : b ≠ i := by
+        intro hbi; subst hai; subst hbi
+        exact pinners_ne hA hB
+      obtain ⟨q, hq⟩ := hrat b hbi
+      have hqne : (q : ℝ) ≠ 0 := by rw [← hq, ← hfix b hbi]; exact (hposu b hbk).ne'
+      exact instant_rat (e := 7 / 8) hqne (by rw [← hq, ← hfix b hbi, hB]; push_cast; ring)
+    · obtain ⟨q, hq⟩ := hrat a hai
+      have hqne : (q : ℝ) ≠ 0 := by rw [← hq, ← hfix a hai]; exact (hposu a hak).ne'
+      exact instant_rat (e := 1 / 8) hqne (by rw [← hq, ← hfix a hai, hA]; push_cast; ring)
+  obtain ⟨tq, htq⟩ := ht1q
+  have hiq : ∃ q : ℚ, u i - u k = q := by
+    obtain ⟨N, hN | hN⟩ := edge_of_eq heq.symm
+    · exact reading_rat (e := 1 / 8) htq ht1.ne' (by rw [← sep_eq, hN]; push_cast; ring)
+    · exact reading_rat (e := 7 / 8) htq ht1.ne' (by rw [← sep_eq, hN]; push_cast; ring)
+  have hallq : ∀ j : Fin 8, ∃ q : ℚ, u j - u k = q := by
+    intro j
+    by_cases hji : j = i
+    · subst hji; exact hiq
+    · rw [hfix j hji]; exact hrat j hji
+  obtain ⟨P, hP, hper⟩ := common_period hallq t1
+  exact move_one_period hki hw ht1 hP hl1 hper
+
 end LRC.PathRoute
