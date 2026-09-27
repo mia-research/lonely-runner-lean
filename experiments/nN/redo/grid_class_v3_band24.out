@@ -1,0 +1,2 @@
+readings <= 24, spread in (7, 9]: least m: [(1, 42752), (2, 59)]
+  not covered with m <= 2, e.g. []
