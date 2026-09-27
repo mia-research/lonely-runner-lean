@@ -4332,3 +4332,37 @@ does.
 can be brought to rest in gaps of the readings simultaneously. In the band 7–9 the first node is proved (two-block, or a
 dense top four with a big gap below); the next is the remainder, where `W₁` rests in the big gap and `W₂` (width
 `log(17/15)`) must rest in a gap of the dense top block.
+
+---
+
+## E120 — 2026-09-27 — loneliness is pairwise in the laps; the band's categories are grid placements
+
+**Owner:** *"I think we can prove this if we try. go ahead, prove the remainder in lean."* — *"Remember the flank is a
+proxy for what the cascade actually does. The cascade points directly to the isolation point … if the flank fails or any
+other parts fail the cascade still shows the isolation point, which means the description of the proxy is wrong because
+the cascade ALWAYS works."* — commit locally, no push needed.
+
+**Proved** (`TwoBlockN.lonely_eight_of_pairwise_laps`, commit `69d0933`, Spec gate PASS **1,905**,
+`experiments/nN/spec_gate_pairwise_laps.out`) `[PROVED — axiom-clean]`: give each reading `d` a lap `k d`; its clear
+interval of `R = 8t` is `[(8k+1)/d, (8k+7)/d]`. If every two meet, all meet (one-dimensional Helly), at the largest left
+end: lonely there. **No flank is chosen**: the reading attaining the largest left end is the flank after the fact. The
+cascade's landing is exactly this largest left end for its lap assignment.
+
+**Measured** (exact; `experiments/nN/redo/`):
+- `b1_remainder_extremes_v1`: the band remainder's longest cascades (18 moves) push each reading at most once per lap,
+  window after window; the slowest runner never leaves its first block.
+- `b1_lap_vectors_v1`: landing lap assignments across all 1,717,540 band sets to 40: **52**, all monotone, `k₀ = 0`,
+  `R* ≤ 6.447`. `b1_late_probe_v1`: no band cascade passes `R = 7` (20,000 random sets, `d₁ ≤ 400`; hill-climb max 6.025).
+- `b1_lap_vector_growth_v1`: lap assignments to 20, 24, 30, 36, 40: 20, 37, 43, 49, 52; 40,000 random finer shapes
+  (`d₁` up to 2,000) add **0**. `[VERIFIED — these populations; saturation not proved]`
+
+**Reading** `[reasoned]`: the owner's categorisation of arrangements, in the band, is by **lap assignment** (the grid
+placement of the ordered readings): about 52 categories, each settled by one pairwise lemma (a handful of linear
+inequalities on ratios). **What remains for the band is that the categories exhaust it**: some monotone lap assignment
+with `k₀ = 0` is pairwise compatible, equivalently some `R ∈ [1, 7]` is clear. Not proved. Routes considered and why
+each stalls, recorded so they are not re-derived: a single-interval survival invariant (adding readings slowest-first)
+loses a factor per reading and needs consecutive ratios near 3; counting blocked measure exceeds the window (each reading
+blocks about a quarter); fixed-flank families fail on dense top blocks (a reading close to the top blocks runs of the
+top's openings). The one that follows the cascade itself: its pushes form a finite state machine over monotone lap
+assignments (laps ≤ 7 while `R < 7`), each transition a linear condition; exhausting the band is then that every path
+ends in a compatible assignment before `k₀` moves.
