@@ -3787,3 +3787,19 @@ speed deviated by `|eᵢ| ≤ ρ`, `W` a bound for the whole-number differences.
 - **Scope.** The radius shrinks with the laps (`~1/(28W)`): each complete grid carries its own open neighbourhood; E44
   measured far larger offsets are tolerated in practice. With E45 this makes the neighbourhoods of all complete grids
   (every AP with every assignment of whole laps) proved regions of the shape space.
+
+---
+
+## E47 — 2026-09-27 — the doubled slot under deviation
+
+`experiments/nN/redo/doubled_deviation_v1/v2`, exact: E40's family and one-doubled grids with laps ≤ 1, every speed
+deviated in `[−ρ, ρ]`, 300 arrangements per cell, every runner, by role. `[EMPIRICAL]`
+- **Runners outside the pair relocate along the spine**, like a complete grid (E44): the lonely instant nearest a class
+  instant `p/8` is within at most `1.91ρ` (relative) of it, every runner, both families, `ρ = 1/256, 1/64, 1/16`
+  (medians 0.06–0.13ρ). This holds for the runners **beside** the doubled slot too (two runners one slot away at the grid
+  instant): max 0.71ρ. Against their own undeviated event (`1/8`, no slack) 5–25% jump to another class instant: the
+  class jump of E43, not a loss.
+- **The pair members relocate near their own delayed event** (the partner's opening, E40): E40 family, `|factor − 1|` at
+  most `0.7ρ` with no jumps for `ρ ≤ 1/64`; 4 jumps of 300 at `ρ = 1/16`. With laps ≤ 1: medians `≈ 0.1ρ`, but 0–3 jumps
+  per 300 and outliers to `413ρ` at `ρ = 1/256`; those are pair members whose delayed event has no slack (E41's class C).
+  Not yet examined individually.
