@@ -1,0 +1,42 @@
+bound blocked 145368
+cascade lands there 33392
+edge runner next opening lonely 43694
+('edge runner slot at bound', 2) 106
+('edge runner slot at bound', 3) 1638
+('edge runner slot at bound', 4) 6264
+('edge runner slot at bound', 5) 13923
+('edge runner slot at bound', 6) 30837
+('edge runner slot at bound', 7) 92600
+exceptions: blockers of the proxy instant
+   ('blocker slot at bound', 0, 'blocker is a collider (slot 0)') 11890
+   ('blocker slot at bound', 1, '') 2590
+   ('blocker slot at bound', 2, '') 6257
+   ('blocker slot at bound', 3, '') 11454
+   ('blocker slot at bound', 4, '') 12482
+   ('blocker slot at bound', 5, '') 20285
+   ('blocker slot at bound', 6, '') 53594
+   ('blocker slot at bound', 7, '') 23972
+   ('number of blockers', 1) 66215
+   ('number of blockers', 2) 30315
+   ('number of blockers', 3) 4899
+   ('number of blockers', 4) 243
+   ('number of blockers', 5) 2
+examples (readings, edge runner, its next opening, blockers there, cascade t*):
+   ((1, 2, 3, 4, 5, 6, 8), 6, '3/16', [5], '9/64')
+   ((1, 2, 3, 4, 5, 6, 16), 6, '3/16', [5, 16], '17/128')
+   ((1, 2, 3, 4, 5, 6, 24), 6, '3/16', [5], '25/192')
+   ((1, 2, 3, 4, 5, 8, 9), 5, '9/40', [4, 9], '9/64')
+   ((1, 2, 3, 4, 5, 8, 10), 5, '9/40', [4], '9/64')
+   ((1, 2, 3, 4, 5, 8, 11), 5, '9/40', [4], '9/64')
+   ((2, 3, 4, 5, 6, 7, 16), 7, '9/56', [6], '9/128')
+   ((2, 3, 4, 5, 6, 7, 17), 7, '9/56', [6], '9/136')
+   ((2, 3, 4, 5, 6, 9, 16), 9, '1/8', [16], '9/128')
+   ((2, 3, 4, 5, 6, 10, 17), 10, '9/80', [17], '9/136')
+   ((2, 3, 4, 5, 6, 12, 15), 15, '3/40', [12], '3/32')
+   ((2, 3, 4, 5, 6, 13, 15), 15, '3/40', [13], '9/104')
+   ((3, 4, 5, 6, 7, 8, 24), 8, '9/64', [7], '3/64')
+   ((3, 4, 5, 6, 7, 9, 24), 9, '1/8', [24], '3/64')
+   ((3, 4, 5, 6, 7, 13, 24), 13, '9/104', [24], '3/64')
+   ((3, 4, 5, 6, 7, 14, 24), 14, '9/112', [24], '3/64')
+   ((3, 4, 5, 6, 7, 18, 22), 22, '9/176', [18], '1/16')
+   ((3, 4, 5, 6, 7, 18, 23), 23, '9/184', [18], '1/16')

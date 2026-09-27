@@ -1,0 +1,215 @@
+exceptions: 96650
+every numerator singly blocked: 41204
+cascade setter e is a sole blocker at L0: 23596
+cascade setter e blocks some numerator at L0: 41885
+one move makes the first live lattice clear: 96441
+... and the mover is the cascade setter e: 37327
+... and the mover is a sole blocker at L0: 93491
+most blockers on one numerator at L0: [(1, 41204), (2, 49437), (3, 5867), (4, 142)]
+examples (readings, L0, blockers per numerator j, cascade e, K, one-move rescuers):
+   ((3, 5, 6, 9, 15, 21, 24), 2, [(15,), (9,)], 21, 1, [9, 15, 24])
+   ((3, 4, 9, 13, 17, 21, 24), 2, [(17,), (9,)], 17, 1, [9, 17, 24])
+   ((2, 9, 13, 17, 19, 21, 24), 2, [(17,), (9,)], 17, 1, [9, 17, 24])
+   ((2, 8, 13, 17, 19, 21, 23), 2, [(17,), (23,)], 17, 1, [8, 17, 23])
+   ((1, 4, 9, 13, 14, 16, 17), 3, [(1,), (16,), (14, 17)], 16, 2, [1, 16])
+   ((1, 2, 13, 14, 16, 22, 23), 3, [(1, 2, 22, 23), (16,), (14,)], 13, 2, [14, 16])
+   ((3, 4, 9, 17, 18, 21, 24), 2, [(17,), (9,)], 17, 1, [9, 17, 24])
+   ((2, 17, 19, 21, 22, 23, 24), 2, [(17,), (23,)], 17, 1, [17, 24])
+=== A
+   base segment: setter is the moved runner 33
+   paths 402
+   sets 201
+   ('base setter slot at the bound', 0) 33
+   ('base setter slot at the bound', 1) 4
+   ('base setter slot at the bound', 2) 7
+   ('base setter slot at the bound', 3) 11
+   ('base setter slot at the bound', 4) 6
+   ('base setter slot at the bound', 5) 11
+   ('base setter slot at the bound', 6) 28
+   ('base setter slot at the bound', 7) 101
+   ('segment setter slot at the bound (unmoved runners)', 'moved') 99
+   ('segment setter slot at the bound (unmoved runners)', 0) 45
+   ('segment setter slot at the bound (unmoved runners)', 1) 21
+   ('segment setter slot at the bound (unmoved runners)', 2) 18
+   ('segment setter slot at the bound (unmoved runners)', 3) 26
+   ('segment setter slot at the bound (unmoved runners)', 4) 12
+   ('segment setter slot at the bound (unmoved runners)', 5) 28
+   ('segment setter slot at the bound (unmoved runners)', 6) 74
+   ('segment setter slot at the bound (unmoved runners)', 7) 209
+   ('segment setter', 'base setter') 369
+   ('segment setter', 'moved') 99
+   ('segment setter', 'other') 64
+   ('segments on the path', 1) 314
+   ('segments on the path', 2) 51
+   ('segments on the path', 3) 32
+   ('segments on the path', 4) 5
+   (3, 8, 14, 16, 17, 22, 23), moving 8:
+      s in [ -1 , 1 ] setter 22 lap 1 t* 9/176
+   (3, 8, 14, 16, 17, 22, 23), moving 16:
+      s in [ -1 , 31/32 ] setter 22 lap 1 t* 9/176
+   (2, 8, 14, 16, 17, 22, 23), moving 8:
+      s in [ -1 , 1 ] setter 14 lap 1 t* 9/112
+   (2, 8, 14, 16, 17, 22, 23), moving 16:
+      s in [ -1 , 31/32 ] setter 14 lap 1 t* 9/112
+   (2, 8, 14, 16, 17, 18, 23), moving 8:
+      s in [ -1 , 1 ] setter 14 lap 1 t* 9/112
+   (2, 8, 14, 16, 17, 18, 23), moving 16:
+      s in [ -1 , 31/32 ] setter 14 lap 1 t* 9/112
+=== B
+   base segment: setter is the moved runner 6
+   paths 37
+   sets 8
+   ('base setter slot at the bound', 6) 6
+   ('base setter slot at the bound', 7) 2
+   ('segment setter slot at the bound (unmoved runners)', 'moved') 25
+   ('segment setter slot at the bound (unmoved runners)', 0) 10
+   ('segment setter slot at the bound (unmoved runners)', 1) 12
+   ('segment setter slot at the bound (unmoved runners)', 2) 6
+   ('segment setter slot at the bound (unmoved runners)', 3) 7
+   ('segment setter slot at the bound (unmoved runners)', 6) 66
+   ('segment setter slot at the bound (unmoved runners)', 7) 31
+   ('segment setter', 'base setter') 72
+   ('segment setter', 'moved') 25
+   ('segment setter', 'other') 60
+   ('segments on the path', 1) 18
+   ('segments on the path', 2) 4
+   ('segments on the path', 3) 4
+   ('segments on the path', 4) 4
+   ('segments on the path', 5) 1
+   ('segments on the path', 9) 6
+   (2, 14, 15, 16, 17, 18, 23), moving 2:
+      s in [ -1 , -13/16 ] setter 14 lap 2 t* 17/112
+      s in [ -25/32 , -21/32 ] setter moved 2 lap 0 t* 4/39
+      s in [ -5/8 , -15/32 ] setter 23 lap 2 t* 17/184
+      s in [ -7/16 , 1 ] setter 14 lap 1 t* 9/112
+   (2, 14, 15, 16, 17, 18, 23), moving 14:
+      s in [ -1 , -7/32 ] setter 23 lap 2 t* 17/184
+      s in [ -3/16 , 31/32 ] setter moved 14 lap 1 t* 18/221
+   (2, 14, 15, 16, 17, 18, 23), moving 16:
+      s in [ -31/32 , 31/32 ] setter 14 lap 1 t* 9/112
+   (2, 14, 15, 16, 17, 18, 23), moving 17:
+      s in [ -31/32 , 31/32 ] setter 14 lap 1 t* 9/112
+   (2, 14, 15, 16, 17, 18, 23), moving 23:
+      s in [ -1 , 5/16 ] setter 14 lap 1 t* 9/112
+      s in [ 11/32 , 1 ] setter moved 23 lap 2 t* 68/747
+   (1, 14, 15, 16, 17, 18, 23), moving 1:
+      s in [ -31/32 , -31/32 ] setter 14 lap 56 t* 449/112
+      s in [ -15/16 , -15/16 ] setter 14 lap 28 t* 225/112
+      s in [ -29/32 , -29/32 ] setter 15 lap 20 t* 161/120
+      s in [ -7/8 , -7/8 ] setter 14 lap 14 t* 113/112
+      s in [ -27/32 , -27/32 ] setter 18 lap 15 t* 121/144
+      s in [ -13/16 , -13/16 ] setter 15 lap 10 t* 27/40
+      s in [ -25/32 , -25/32 ] setter 14 lap 8 t* 65/112
+      s in [ -3/4 , -3/4 ] setter 14 lap 7 t* 57/112
+      s in [ -23/32 , -23/32 ] setter 18 lap 8 t* 65/144
+      s in [ -11/16 , -11/16 ] setter 17 lap 7 t* 57/136
+      s in [ -21/32 , -21/32 ] setter 14 lap 5 t* 41/112
+      s in [ -5/8 , -5/8 ] setter 15 lap 5 t* 41/120
+      s in [ -19/32 , -7/32 ] setter 16 lap 5 t* 41/128
+      s in [ -3/16 , -3/16 ] setter moved 1 lap 0 t* 2/13
+      s in [ -5/32 , 3/16 ] setter 14 lap 2 t* 17/112
+      s in [ 7/32 , 11/32 ] setter moved 1 lap 0 t* 4/39
+      s in [ 3/8 , 17/32 ] setter 23 lap 2 t* 17/184
+      s in [ 9/16 , 1 ] setter 14 lap 1 t* 9/112
+=== C
+   base segment: setter is the moved runner 75
+   paths 549
+   sets 300
+   ('base setter slot at the bound', 0) 64
+   ('base setter slot at the bound', 1) 97
+   ('base setter slot at the bound', 2) 10
+   ('base setter slot at the bound', 3) 9
+   ('base setter slot at the bound', 4) 9
+   ('base setter slot at the bound', 5) 24
+   ('base setter slot at the bound', 6) 28
+   ('base setter slot at the bound', 7) 59
+   ('segment setter slot at the bound (unmoved runners)', 'moved') 562
+   ('segment setter slot at the bound (unmoved runners)', 0) 304
+   ('segment setter slot at the bound (unmoved runners)', 1) 325
+   ('segment setter slot at the bound (unmoved runners)', 2) 152
+   ('segment setter slot at the bound (unmoved runners)', 3) 99
+   ('segment setter slot at the bound (unmoved runners)', 4) 167
+   ('segment setter slot at the bound (unmoved runners)', 5) 188
+   ('segment setter slot at the bound (unmoved runners)', 6) 151
+   ('segment setter slot at the bound (unmoved runners)', 7) 208
+   ('segment setter', 'base setter') 641
+   ('segment setter', 'moved') 562
+   ('segment setter', 'other') 953
+   ('segments on the path', 1) 315
+   ('segments on the path', 2) 58
+   ('segments on the path', 3) 46
+   ('segments on the path', 4) 39
+   ('segments on the path', 5) 14
+   ('segments on the path', 6) 4
+   ('segments on the path', 7) 2
+   ('segments on the path', 9) 71
+   (7, 8, 10, 11, 14, 15, 24), moving 7:
+      s in [ -1 , 31/32 ] setter moved 7 lap 0 t* 1/48
+   (7, 8, 10, 11, 14, 15, 24), moving 15:
+      s in [ -31/32 , 1 ] setter 7 lap 0 t* 1/56
+   (2, 3, 6, 9, 16, 17, 20), moving 2:
+      s in [ -1 , -11/16 ] setter 16 lap 2 t* 17/128
+      s in [ -21/32 , -1/4 ] setter moved 2 lap 0 t* 4/43
+      s in [ -7/32 , 27/32 ] setter 16 lap 1 t* 9/128
+      s in [ 7/8 , 31/32 ] setter moved 2 lap 0 t* 1/23
+   (2, 3, 6, 9, 16, 17, 20), moving 16:
+      s in [ -1 , 31/32 ] setter moved 16 lap 1 t* 3/40
+   (2, 3, 6, 9, 16, 17, 20), moving 17:
+      s in [ -31/32 , 1 ] setter 16 lap 1 t* 9/128
+   (1, 9, 18, 19, 20, 21, 24), moving 1:
+      s in [ -31/32 , -31/32 ] setter 9 lap 36 t* 289/72
+      s in [ -15/16 , -15/16 ] setter 9 lap 18 t* 145/72
+      s in [ -29/32 , -29/32 ] setter 20 lap 27 t* 217/160
+      s in [ -7/8 , -7/8 ] setter 9 lap 9 t* 73/72
+      s in [ -27/32 , -27/32 ] setter 21 lap 17 t* 137/168
+      s in [ -13/16 , -13/16 ] setter 19 lap 13 t* 105/152
+      s in [ -25/32 , -25/32 ] setter 24 lap 14 t* 113/192
+      s in [ -3/4 , -3/4 ] setter 18 lap 9 t* 73/144
+      s in [ -23/32 , -23/32 ] setter 24 lap 11 t* 89/192
+      s in [ -11/16 , -21/32 ] setter 20 lap 8 t* 13/32
+      s in [ -5/8 , -5/8 ] setter 20 lap 7 t* 57/160
+      s in [ -19/32 , -19/32 ] setter moved 1 lap 0 t* 4/13
+      s in [ -9/16 , -9/16 ] setter 20 lap 6 t* 49/160
+      s in [ -17/32 , -17/32 ] setter 19 lap 5 t* 41/152
+      s in [ -1/2 , -11/32 ] setter 20 lap 5 t* 41/160
+      s in [ -5/16 , -9/32 ] setter moved 1 lap 0 t* 2/11
+      s in [ -1/4 , -3/32 ] setter 18 lap 3 t* 25/144
+      s in [ -1/16 , -1/16 ] setter moved 1 lap 0 t* 2/15
+      s in [ -1/32 , 3/8 ] setter 24 lap 3 t* 25/192
+      s in [ 13/32 , 13/32 ] setter moved 1 lap 0 t* 4/45
+      s in [ 7/16 , 19/32 ] setter 24 lap 2 t* 17/192
+      s in [ 5/8 , 1 ] setter moved 1 lap 0 t* 1/13
+t* = 9/(8e) 113
+('colliders at 8m (both on the first lap)', False) 76
+('colliders at 8m (both on the first lap)', True) 125
+('setter slot at bound, lap K', 0, 1) 13
+('setter slot at bound, lap K', 0, 2) 3
+('setter slot at bound, lap K', 0, 3) 14
+('setter slot at bound, lap K', 0, 4) 3
+('setter slot at bound, lap K', 1, 3) 4
+('setter slot at bound, lap K', 2, 2) 2
+('setter slot at bound, lap K', 2, 3) 5
+('setter slot at bound, lap K', 3, 2) 1
+('setter slot at bound, lap K', 3, 3) 10
+('setter slot at bound, lap K', 4, 1) 1
+('setter slot at bound, lap K', 4, 2) 4
+('setter slot at bound, lap K', 4, 3) 1
+('setter slot at bound, lap K', 5, 1) 1
+('setter slot at bound, lap K', 5, 2) 10
+('setter slot at bound, lap K', 6, 1) 1
+('setter slot at bound, lap K', 6, 2) 27
+('setter slot at bound, lap K', 7, 1) 97
+('setter slot at bound, lap K', 7, 3) 2
+('setter slot at bound, lap K', 7, 4) 2
+((3, 8, 14, 16, 17, 22, 23), 3, 22, 1, '9/176', ['27/176', '9/22', '63/88', '9/11', '153/176', '1/8', '31/176'])
+((2, 8, 14, 16, 17, 22, 23), 2, 14, 1, '9/112', ['9/56', '9/14', '1/8', '2/7', '41/112', '43/56', '95/112'])
+((2, 8, 14, 16, 17, 18, 23), 2, 14, 1, '9/112', ['9/56', '9/14', '1/8', '2/7', '41/112', '25/56', '95/112'])
+((2, 8, 13, 14, 16, 17, 23), 2, 23, 2, '17/184', ['17/92', '17/23', '37/184', '27/92', '11/23', '105/184', '1/8'])
+((2, 8, 10, 14, 16, 18, 23), 2, 14, 1, '9/112', ['9/56', '9/14', '45/56', '1/8', '2/7', '25/56', '95/112'])
+((2, 8, 9, 14, 16, 17, 23), 2, 14, 1, '9/112', ['9/56', '9/14', '81/112', '1/8', '2/7', '41/112', '95/112'])
+((2, 8, 9, 14, 16, 17, 22), 2, 14, 1, '9/112', ['9/56', '9/14', '81/112', '1/8', '2/7', '41/112', '43/56'])
+((2, 7, 8, 16, 17, 18, 23), 2, 16, 1, '9/128', ['9/64', '63/128', '9/16', '1/8', '25/128', '17/64', '79/128'])
+((2, 7, 8, 16, 17, 18, 22), 2, 16, 1, '9/128', ['9/64', '63/128', '9/16', '1/8', '25/128', '17/64', '35/64'])
+((2, 7, 8, 14, 16, 18, 23), 2, 14, 1, '9/112', ['9/56', '9/16', '9/14', '1/8', '2/7', '25/56', '95/112'])
+((2, 7, 8, 14, 16, 17, 22), 2, 14, 1, '9/112', ['9/56', '9/16', '9/14', '1/8', '2/7', '41/112', '43/56'])
+((2, 7, 8, 9, 16, 17, 23), 2, 16, 1, '9/128', ['9/64', '63/128', '9/16', '81/128', '1/8', '25/128', '79/128'])
