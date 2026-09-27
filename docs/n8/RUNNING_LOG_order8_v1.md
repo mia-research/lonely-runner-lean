@@ -4436,3 +4436,34 @@ pass 15. From copy 0 to copy 1 every runner's window lattice slides by the fract
 slides `{sᵢ}` into a cover of copy 1. The measure of the windows does not forbid it (about `1.5` per reading on a length
 of 6), so the obstruction is in the arithmetic of the slides. An isolated agent was given the bare statement (lonely at
 some `R ∈ [1, 15]` in the band) at the same time; its report is recorded when it arrives.
+
+---
+
+## E123 — 2026-09-27 — the band 7–9 settled by an exact certificate; walls, not boxes, are its natural cells
+
+**Isolated agent** (given only the bare statement, the proved facts and the test shapes; none of this session's framing)
+returned a computer-assisted proof. Files moved from scratch to `LonelyRunner/experiments/nN/band_cert_v1/`.
+
+> **Band theorem.** For `1 = s₀ ≤ s₁ ≤ … ≤ s₆` with `7 ≤ s₆ ≤ 9` (readings in units of `d_min`), some
+> `R ∈ [1, 7] ∪ [9, 15]` has `(sᵢ·R) mod 8 ∈ [1, 7]` for every `i`. `[VERIFIED — computer-assisted, exact]`
+
+- **Method:** a nested tiling of `(s₂, …, s₆)` into closed boxes (64 top cells, 279,871 cells, 223,719 leaves). Down each
+  chain the set of `R` clear for every speed in every box is carried (box robustness: `R ∈ [(8k+1)/a, (8k+7)/b]` is clear
+  for all `x ∈ [a, b]`); at each leaf an exact interval rule settles `s₁`. No measure or density argument.
+- **Checks:** the agent's `verify.py` re-run by the main session: ALL VERIFIED (`verify_rerun_main_session.out`);
+  corrupted certificates (upper end 9, upper end 14, a deleted cell, a collapsed node) rejected. **Independent
+  re-implementation owed by the report, discharged here**: `verify_independent_v1.py` (no shared code; checks that the
+  good set of `s₁` covers `[1, b₂]` instead of that the bad set is empty) PASSED on the same 279,871 cells and rejects the
+  `R ≤ 14` corruption at the same leaf. SHA-256 of `cert15.pkl`: `2732d5b3…dffdb27` (`SHA256SUMS`).
+- **Shape checks** (exact): 1,717,540 integer band sets to 40, 50,000 random fine shapes, 2,008 extremal and perturbed
+  shapes, 300 adversarial climbs: every certificate witness clear, every least clear `R ≤ 15`.
+- **The constant:** an exact shape has least clear `R = 89/s₆ ≈ 11.9659`, so the band's constant lies in
+  `[11.9659, 15]`. Boxes cannot reach `R ≤ 14` at the widths tried: they fail along the walls
+  `(8k+7)/sᵢ = (8k'+1)/sⱼ`, where the working instant shrinks to a point.
+
+**Standing** `[my reading]`: this is the kind of certificate the owner said should not be needed (E119: *"provide that
+analytically so you don't need thousands of certificates"*). It closes the band as a verified statement, independent of
+Case B's earlier certificates, and it is not the analytic proof. What it teaches for the analytic route: the natural cells
+are bounded by the walls `(8k+7)/sᵢ = (8k'+1)/sⱼ`, which are exactly the pairwise conditions of
+`TwoBlockN.lonely_eight_of_pairwise_laps`. Cells cut along walls are the lap-assignment categories (E120: about 52 in the
+band to 40), not boxes; axis-aligned boxes straddle walls and pay for it in count.
