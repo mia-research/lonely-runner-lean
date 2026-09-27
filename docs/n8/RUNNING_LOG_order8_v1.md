@@ -4291,3 +4291,44 @@ What a proof of C1 needs, in the framework's own terms: the fast cluster's insta
 or its `φ(8)` class instants when it is near an AP) meet the slow runner's first window. `FastPair8` (a pair: every
 window of length `3/(4a)` holds a joint clear point) and `BlockSplit8` (a common factor `g`) are the two cases of this
 already proved; C1 is the same statement for a group of up to six with no common factor. Not proved.
+
+---
+
+## E119 — 2026-09-27 — the two systems as one comb; the band 7–9 derived to a remainder; block rules in Lean
+
+**Owner** (in sequence): *"We enumerated Case B to something like 24 but it is actually unnecessary. Because it's trying
+to enumerate scale invariance rather than logically deriving the two systems at play, AP which is scale invariant and
+Grid which is infinite."* — *"Please remember to think and reason this through, not just look for similar looking
+answers."* — *"If you have an unanswered question, cascade provides the answer."* — *"Please prove as much as possible in
+lean right away."* — *"Are you trying to fit it into another frame rather than reason?"* (answered: yes, the plan to add
+the rule as a 23rd `EightResidual` field was the plan-v2 reflex; not done) — *"We have the case b enumerated up to 24.
+So we know that is true, we just need to provide that analytically so you don't need thousands of certificates."*
+
+**The frame** `[reasoned]`: in log coordinates `x = log d`, `ρ = log(8t)`, reading `d` is clear iff `x + ρ` lies in
+`F = [0, log 7] ∪ ⋃_{k≥1} [log(8k+1), log(8k+7)]`, the logarithm of the grid's clear set `[1,7] + 8ℤ`. Changing the
+instant is a rigid shift (the AP's scale invariance); `F`'s gaps `G_k = (log(8k−1), log(8k+1))`, widths `log(9/7)`,
+`log(17/15)`, `log(25/23)`, …, are the subject's slot on every lap (the grid is infinite). So the slowest runner is
+lonely iff its seven ordered log-readings can be shifted into `F`, and **the cascade is this comb sliding**: each move
+pushes the points inside a window past its upper edge; its landing is the least shift.
+
+**Proved** (`LonelyRunner/LonelyRunner/LRC/Spec/TwoBlockN.lean`, commit `0e1eaf9`, Spec gate PASS **1,904**,
+`experiments/nN/spec_gate_two_block.out`) `[PROVED — axiom-clean]`:
+- `lonely_eight_of_blocks`: at the scale `e/(8K+1)`, if every reading's position `(8K+1)d/e` lies in a block
+  `[8k+1, 8k+7]`, lonely at `(8K+1)/(8e)`; `e` need not be a reading. `lonely_eight_of_two_block` (`K = 1`, blocks 0, 1)
+  and `lonely_eight_of_three_block` (`K = 2`, blocks 0, 1, 2) are its cases.
+- `exists_big_gap`: seven readings spanning more than a factor 7 have a consecutive ratio at least `9/7` (`(9/7)⁶ < 7`).
+- `b1_remainder`: in the band `7·d₁ < d₇ < 9·d₁` (the fastest runner lapped into the subject's slot at the AP scale), if
+  no reading carries a two-block instant, the top four readings are dense (consecutive ratios below `9/7`).
+
+**Checks** (exact): the two-block rule is sound on every band set to 30 (`b1_gap_rule_check_v1.out`: 167,864 of
+182,104 covered, 0 unsound). The remainder through the cascade (`b1_remainder_cascade_v1.out`, 128,741 sets to 40):
+the lap-1 window walks down the dense top block one reading per move, stops at the big gap, and the lap-2 window then
+reaches the top reading, which lands at its lap-2 opening (position 17): the most common landing is lap blocks
+`0011112` with the flank at lap 2. **Fixed-rank rules do not cover the band** (`b1_rule_cover_v1.out`): a greedy cover by
+`(rank, lap)` needs 13 pairs and leaves 989 of 1,717,540 sets; the flank must be chosen by gap structure, as the cascade
+does.
+
+**What the analytic proof of Case B is, stated this way** `[reasoned; open]`: for spread at most 24, the comb's windows
+can be brought to rest in gaps of the readings simultaneously. In the band 7–9 the first node is proved (two-block, or a
+dense top four with a big gap below); the next is the remainder, where `W₁` rests in the big gap and `W₂` (width
+`log(17/15)`) must rest in a gap of the dense top block.
