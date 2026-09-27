@@ -4910,3 +4910,22 @@ bridges in late shapes, who bridges and across which gaps.
 `experiments/nN/spec_gate_sweep_bridge.out`) `[PROVED — axiom-clean]`: `lap_lt_of_faster` (bridge up),
 `lap_le_of_slower` (sweep step or bridge down), `sweep_ratio` (a sweep step needs `s_a(8k−1) < s_b(8k+1)`),
 `sweep_ratio_mono`, `sweep_stop_persists` (a ratio that stops a lap-`k` sweep stops the lap-`k+1` sweep).
+
+---
+
+## E143 — 2026-09-27 — the landing is a cluster bottom's exit (forced); the question as rotations of the circle
+
+(`LonelyRunner/experiments/nN/redo/landing_cluster_v1.{py,out}`, exact.) Clusters on lap `k` = maximal runs with
+consecutive ratio below `ρ_k`. Every landing with its flank on lap `k ≥ 1` is the exit of the slowest member of its
+lap-`k` cluster: band to 24 42,013 of 42,013; Case B to 24 103,355 of 103,355; late 5,400 of 5,400 (2,311 of them the
+nearest runner's `R = 9`). The rest land at the bound (lap 0). **Grade: forced, not a finding** `[reasoned; one line]`:
+at a lonely exit `(8k+1)/s_f`, a slower neighbour within ratio `ρ_k` would sit in its own window (`sweep_ratio` read
+backwards); at `k = 1` this is E119's gap rule (no reading in `(7e/9, e)`).
+
+**The question in the owner's circle terms** `[reasoned]`: fix a cluster bottom `e`; its exits are `(8k+1)/(8e)`,
+`k = 1, 2, …`; between consecutive exits every other runner `i` advances by the fixed fraction `s_i/e` of a lap: a
+rotation of the circle. A cluster rotates coherently while its spread allows (E127's run-out); an outlier is one
+rotation. The landing is the first exit of some cluster bottom at which every rotated runner is out of the subject's
+slot. The owner's *"prove cluster with outliers works at one point … you prove it for all"* reads here as: the
+configuration at exit `k+1` is the configuration at exit `k` rotated, so a statement proved for one exit in a form
+invariant under the rotation holds for all.
