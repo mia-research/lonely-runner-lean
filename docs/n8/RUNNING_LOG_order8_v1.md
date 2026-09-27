@@ -3936,3 +3936,26 @@ isolation fails are the two the owner named: one runner at the edge of a clear s
 slot. Each has a proved lemma in one setting: the grid nudge (`GridNudgeN`, every reading on an eighth) and the
 doubled slot (`DoubledSlotN`, `DoubledNbhdN`, the AP family). What is owed is their form at a general live lattice `D`
 with off-lattice readings. No overturned assumption this entry.
+
+---
+
+## E111 — 2026-09-27 — the offending runners moved through the cascade; the entering-edge proxy
+
+Owner: *"The cascade is a perfect oracle … What is off is our understanding of how the oracle works … understanding
+exactly the proxy seems to be our work."* Offender paths (`LonelyRunner/experiments/nN/redo/offender_paths_v1/v2`,
+`edge_runner_rule_v1`), exact; offender moved by `s = i/32`, `|i| ≤ 32`; cascade from the bound at every step:
+- **Double collisions** (the 201 of E110; offenders = the two readings `≡ 0 mod 8`): moving a collider over `±1` does
+  not change the landing on 314 of 402 paths. The landing's setter at the bound: slot 7 in 101 (97 of them on lap 1,
+  `t* = 9/(8e)`), slot 6 in 28 (27 on lap 2), a collider itself in 33. `t* = 9/(8e)` in 113 of 201. **The colliders
+  decide that the isolation leaves the bound, not where it goes; the runner at the entering edge (slot 7, often exactly
+  on `7/8` and so clear at the bound) sets it at its next opening** `[VERIFIED — these 201 sets]`. This is E104's law
+  on 201 sets instead of 4.
+- **The 8 others:** the setter at the bound is in slot 6 or 7 in all 8. Moving the slowest runner towards zero sends
+  the landing's lap up (to 56): the shape approaching a face, as E38b predicts.
+- **Edge pushes** (300 sampled): 315 of 549 paths keep one landing; moving the sole blocker makes it the setter on 562
+  segments.
+- **Proxy tested, and it fails:** "the next opening of the runner with the largest fractional reading at the bound" is
+  lonely in 43,694 of the 145,368 sets whose bound is blocked (the cascade lands there in 33,392). Exceptions: one
+  blocker in 66,215, most often a slot-6 runner at the bound. **Diagnosis:** the proxy picks the runner nearest the
+  entering edge whether or not it is in the way; the cascade moves only on runners in the way, and the entering-edge
+  runner matters only after the colliders force time forward. The proxy is wrong, not the cascade.
