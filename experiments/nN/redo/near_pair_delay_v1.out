@@ -1,0 +1,27 @@
+eps = 1/100
+   subject speed 1          t* = 1/8            =     0.1250
+   subject speed 2          t* = 201/16         =    12.5625   partner clears at 1/(8 eps) = 25/2; other six: first clear instant after it = 201/16
+   subject speed 201/100    t* = 25/2           =    12.5000   partner clears at 1/(8 eps) = 25/2; other six: first clear instant after it = 25/2
+   subject speed 3          t* = 25/198         =     0.1263
+   subject speed 4          t* = 1/8            =     0.1250
+   subject speed 5          t* = 1/8            =     0.1250
+   subject speed 6          t* = 1/8            =     0.1250
+   subject speed 7          t* = 1/8            =     0.1250
+eps = 1/1000
+   subject speed 1          t* = 1/8            =     0.1250
+   subject speed 2          t* = 1001/8         =   125.1250   partner clears at 1/(8 eps) = 125; other six: first clear instant after it = 1001/8
+   subject speed 2001/1000  t* = 125            =   125.0000   partner clears at 1/(8 eps) = 125; other six: first clear instant after it = 125
+   subject speed 3          t* = 125/999        =     0.1251
+   subject speed 4          t* = 1/8            =     0.1250
+   subject speed 5          t* = 1/8            =     0.1250
+   subject speed 6          t* = 1/8            =     0.1250
+   subject speed 7          t* = 1/8            =     0.1250
+eps = 1/10000
+   subject speed 1          t* = 1/8            =     0.1250
+   subject speed 2          t* = 10001/8        =  1250.1250   partner clears at 1/(8 eps) = 1250; other six: first clear instant after it = 10001/8
+   subject speed 20001/10000 t* = 1250           =  1250.0000   partner clears at 1/(8 eps) = 1250; other six: first clear instant after it = 1250
+   subject speed 3          t* = 1250/9999      =     0.1250
+   subject speed 4          t* = 1/8            =     0.1250
+   subject speed 5          t* = 1/8            =     0.1250
+   subject speed 6          t* = 1/8            =     0.1250
+   subject speed 7          t* = 1/8            =     0.1250
