@@ -5177,3 +5177,23 @@ the slow runner is inside its own window `(7A, 9A)` and **sets one move itself, 
 after 1–5 more moves at `R ∈ [9.0, 10.6]` (slow runner's units), inside `[9, 15]`. The late band shapes' `R = 9` landing
 (E151) is the same event. Integer six-sets (least `≤ 20`, readings `≤ 20`, starts `A ∈ [1, 12]`): the chunks finished so
 far need only the first block.
+
+---
+
+## E155 — 2026-09-27 — owner: stop searching, use the cascade; the wide Case C sets land at the bound (scale separation)
+
+**Owner:** *"You have an oracle that tells you exactly the answer and you fool around with a hill climb that tells you
+nothing … We had a process where you test with the cascade and perturb if you need."* The hill climbs (E153) and the
+worst-start scan (`six_blocks_v2`, stopped) were searches for extremes; they explain nothing. Process restored: case →
+cascade chain → perturb the deciding runner.
+
+(`LonelyRunner/experiments/nN/redo/casec_split_cascade_v1.{py,out}`, exact.) Twelve random wide Case C sets (spread 400–
+2,000) whose slow group (below the largest gap) is split over laps at the landing (E152's 50% of P2): **every one lands
+within 1–3 moves of the bound, `R* ∈ [1.001, 1.33]`**; perturbing the off-lap slow readings by `d_min/4` moves the
+landing by at most `0.4` and in most cases not at all. `[VERIFIED — these 12]` Reading `[mine]`: these sets are several
+scales well apart (neighbour ratios such as 6.1, 3.5, 8.1); splitting at the single largest gap leaves a "slow group"
+spanning several scales, so its readings sit on different laps — an artefact of the split, not a hard case. The cascade
+lands at the nearest runner's bound and a fast runner in the subject's slot moves it by a nudge the width of its narrow
+window (the owner's "8 million and 7"). The structure is **clusters at well-separated scales, nested**: `nested_clear`
+(proved) is the case of single readings with ratios `≥ 7/3`. Next: state the nested-clusters rule, test it with the
+cascade on the Case C populations, perturb the exceptions.
