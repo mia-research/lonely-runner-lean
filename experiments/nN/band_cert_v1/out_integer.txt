@@ -1,0 +1,2 @@
+[all integer 7-tuples up to 40 in the band] shapes=1717540  certificate-witness failures=0  no clear R<=40: 0  least-clear>15: 0  max least-clear=6.447368
+    argmax shape: ['1', '16/5', '4', '22/5', '28/5', '7', '38/5']

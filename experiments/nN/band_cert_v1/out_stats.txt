@@ -1,0 +1,6 @@
+level s6: cells=64  min width=1/32 (=2^5 denominator)
+level s5: cells=867  min width=193/4096 (=2^12 denominator)
+level s4: cells=7254  min width=5825/33554432 (=2^25 denominator)
+level s3: cells=47967  min width=17175/134217728 (=2^27 denominator)
+level s2: cells=223719  min width=7730107025/140737488355328 (=2^47 denominator)
+total cells 279871

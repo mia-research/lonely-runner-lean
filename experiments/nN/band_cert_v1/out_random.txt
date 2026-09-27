@@ -1,0 +1,3 @@
+[random fine shapes (denominators <= 10^4)] shapes=50000  certificate-witness failures=0  no clear R<=40: 0  least-clear>15: 0  max least-clear=5.595978
+    argmax shape: ['1', '7893/2260', '14854/3203', '22922/3887', '23979/3785', '9889/1304', '2127/263']
+    histogram of floor(least clear R): {1: 47066, 2: 2720, 3: 194, 4: 19, 5: 1}

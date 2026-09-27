@@ -1,0 +1,6 @@
+Rhi = 9 (claim false for [1,9])                         -> VERIFICATION FAILED
+Rhi = 14                                                -> VERIFICATION FAILED
+drop a level-5 cell                                     -> VERIFICATION FAILED
+drop last top cell                                      -> AssertionError: top range
+   collapsing level-2 node with 7 cells over (1.0, 2.9083251953125)
+collapse a split level-2 node to one cell               -> VERIFICATION FAILED

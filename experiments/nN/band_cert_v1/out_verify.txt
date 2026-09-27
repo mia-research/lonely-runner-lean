@@ -1,0 +1,2 @@
+Rhi = 15  top cells: 64  cells checked: 279871  level-2 leaves: 223719
+ALL VERIFIED
