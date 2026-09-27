@@ -1,0 +1,28 @@
+== [0] build-artefact integrity ==  (t+0s)
+  clean
+   ...[0] took 0s
+== [1] build every Spec module (list derived from disk) ==  (t+0s)
+  113 modules
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+Build completed successfully (8376 jobs).
+   ...[1] took 27s
+== [2] sorry inventory ==  (t+27s)
+  none
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+27s)
+  clean (no axiom / native_decide / unsafe / admit)
+   ...[2b] took 0s
+== [3] axiom check on EVERY declaration, with a coverage assertion ==  (t+27s)
+  extractor names 1910; 14 anonymous instance(s) unnameable; 1924 on disk
+  1910 of 1910 clean (54 depend on no axioms at all)
+   ...[3] took 279s
+== [4] the OWED register: every asserted Prop is accounted for ==  (t+306s)
+  UNREGISTERED Prop-valued def(s): LRC.NestedBlocks.InBlock
+  A Prop asserted and concluded by no theorem is invisible to build, sorry and axiom
+  checks.  Decide its standing (TARGET / ROUTE / OWED / REFUTED) and add it above.
+   ...[4] took 0s
+== [5] tree stability ==  (t+306s)
+  clean (digest e1f39f2de435)
+== total: 306s ==
+
+GATE FAIL.
