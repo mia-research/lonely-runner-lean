@@ -1,0 +1,7 @@
+Case B to 24: 210335 sets; [('bound', 64967), ('grid step/d_min >= 1', 145368)]; uncovered 0 []
+Case C P1 (every 10th): 63534 sets; [('bound', 26536), ('grid step/d_min >= 1', 36998)]; uncovered 0 []
+Case C constructed members: 547 sets; [('grid step/d_min >= 1', 547)]; uncovered 0 []
+random wide: 24000 sets; [('bound', 6641), ('grid step/d_min >= 1', 17359)]; uncovered 0 []
+random fine band: 5000 sets; [('grid step/d_min >= 1', 5000)]; uncovered 0 []
+random fine 9-24: 5000 sets; [('bound', 1347), ('grid step/d_min >= 1', 3653)]; uncovered 0 []
+late band shapes: 5400 sets; [('grid step/d_min >= 1/2', 5400)]; uncovered 0 []

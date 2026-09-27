@@ -20,6 +20,10 @@ namespace LRC.SlowestSkeleton
 
 open LRC.OrderEightN LRC.Order8Skeleton
 
+/-! **Off the path (E166).**  The spread split at `T` came from the range of the old certificates; the conjecture now
+follows from the single spread-free covering `RegimeSkeleton.Cover8` (`lonelyRunnerAt8_of_cover8`).  `CaseB8`, `CaseC8`
+stay registered OWED for the record; nothing on the current path uses them. -/
+
 /-- **Case B** at threshold `T`: the slowest runner whose greatest reading lies in `(7m, T·m]`, `m` its least. -/
 def CaseB8 (T : ℕ) : Prop :=
   ∀ v : Fin 8 → ℕ, Arr8 v → (∀ i, v 0 ≤ v i) → ∀ m ∈ readingsOf v 0, (∀ d ∈ readingsOf v 0, m ≤ d) →

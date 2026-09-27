@@ -1,0 +1,31 @@
+== [0] build-artefact integrity ==  (t+0s)
+  clean
+   ...[0] took 0s
+== [1] build every Spec module (list derived from disk) ==  (t+0s)
+  118 modules
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+Build completed successfully (8381 jobs).
+   ...[1] took 15s
+== [2] sorry inventory ==  (t+15s)
+  none
+   ...[2] took 0s
+== [2b] proof-hygiene scan ==  (t+15s)
+  clean (no axiom / native_decide / unsafe / admit)
+   ...[2b] took 0s
+== [3] axiom check on EVERY declaration, with a coverage assertion ==  (t+15s)
+  extractor names 1950; 14 anonymous instance(s) unnameable; 1964 on disk
+  1950 of 1950 clean (54 depend on no axioms at all)
+   ...[3] took 293s
+== [4] the OWED register: every asserted Prop is accounted for ==  (t+308s)
+  clean (87 Prop-valued defs, all registered)
+  OWED:    LRC.FlankFinite.FourClears LRC.Resonance.CoprimeLargestFlank LRC.OrderFive.RCapped LRC.OrderFive.WindowConstantFive LRC.Order8Skeleton.ArrBlockRule8 LRC.Order8Skeleton.ArrBoundedCovered8 LRC.PathWindow.WindowBound LRC.SlowestSkeleton.CaseB8 LRC.SlowestSkeleton.CaseC8 LRC.RegimeSkeleton.Cover8 
+  REFUTED: LRC.Spec.DoorFirstLap LRC.Spec.DoorLargestFlank LRC.SpecN.DoorFirstLap LRC.SpecN.DoorLargestFlank 
+   ...[4] took 0s
+== [5] tree stability ==  (t+308s)
+  clean (digest 76c8ad8b3579)
+== total: 308s ==
+
+GATE PASS (Spec layer): 1950 declarations, axiom-clean, coverage 1950 of 1964.
+           This gates the SPEC LAYER only.  It does not gate the paper
+           (scripts/n8/gate.sh) or the cascade artefact (scripts/cascade/gate.sh).
+           LRC is NOT proved at any order.  The OWED items above are not theorems.

@@ -2,47 +2,33 @@ import LonelyRunner.LRC.Spec.SlowestSkeletonN
 import LonelyRunner.LRC.Spec.TwoBlockN
 
 /-!
-# The regime skeleton: every proved regime feeds the target; the gap is two named coverings
+# The regime skeleton: the conjecture at eight runners from one spread-free covering
 
-2026-09-28.  Running record: `RUNNING_LOG_order8_v1.md` E156–E158.
+2026-09-28.  Running record: `RUNNING_LOG_order8_v1.md` E156–E166.
 
-`SlowestSkeletonN.lonelyRunnerAt8_of_cases T` reduces the conjecture at eight runners to `CaseB8 T` and `CaseC8 T`
-(Case A, spread at most 7, is R1 and proved there).  This module states what the arrangement's own structure gives in each
-case as **regimes**, each a condition on the readings that is **proved sufficient** for loneliness, and names the one
-statement still owed in each case: that every set of the case satisfies some regime (`CoverB8`, `CoverC8`, both
-registered OWED in `scripts/nN/spec_gate.sh`).
+**The one owed statement is `Cover8 M`** (registered OWED in `scripts/nN/spec_gate.sh`): every set of whole-number
+readings (least reading `m`) is lonely at the bound `1/(8m)`, or at a relocated grid-class instant of a grid through one of
+its own readings `e` with step `e/mm ≥ m/M` and a class `c ∈ {1, 3, 5, 7}` (the units mod 8).  **`lonelyRunnerAt8_of_cover8
+M : Cover8 M → LonelyRunnerAt8`**, for every `M`, with no case split: sets of spread at most 7 are lonely at the bound (R1).
 
-The regimes (readings `S`, least reading `m`):
-* `BoundClear8 S m`: every reading clear at the bound `1/(8m)` (the AP at the nearest runner's scale).
-* `GridClass8 S e mm c`: the grid through reading `e` at scale `e/mm`, class `c`: every reading `d` sits at a grid point
-  `n` with `|n·e − mm·d| < e` (the floor or the ceiling of `mm·d/e`), on lap `⌊c·n/8⌋` (one lap less when `c·n ≡ 0 mod 8`),
-  and these laps are pairwise compatible.  Sufficient by `TwoBlock.lonely_eight_of_pairwise_laps` (1-D Helly).  The lap
-  assignment is fixed by `S` up to finitely many choices, so the regime is a restriction, not loneliness renamed.  The
-  owner's "AP/grid plus a deviation": the grid is the arrangement's own, at `1/mm` of one of its readings.
-* `WithinTwoBlocks8 S m`: lonely at some instant inside the nearest runner's first two clear blocks (`t ≤ 15/(8m)`).
-  Used only in Case C, for a captured middle reading released by its own exit and a few fast nudges (E157).  **A
-  placeholder**: those sets are two runners in one slot (the captured runner shares the subject's slot at every grid
-  instant) and the isolation waits for them to separate, the captured runner's exit.  That is the same event as the near
-  pair, the grid nudge, the doubled edge and the late band's carry to `R = 9`, and it is exactly one move of the cascade
-  (owner, E158).  One separation is stated and proved in `SeparationN` (`lonely_of_separation`, any rank, forward
-  and mirror).  The 15 leftovers need two to four successive separations, and repeated separation from an instant is the
-  cascade itself, so it cannot be a regime here without renaming the conjecture (E159).  The honest form of the Case C
-  obligation is the one E159 records: finitely many cells (reference, class, residues, endpoint order), each with a
-  uniform rule, and separations moving between cells that cannot continue for ever.
+* `BoundClear8 S m`: every reading clear at the bound (the AP at the nearest runner's scale).
+* `GridClass8 S e mm c`: the grid through reading `e` at scale `e/mm`, class `c`: each reading `d` at a grid point `n` with
+  `|n·e − mm·d| < e`, on lap `⌊c·n/8⌋` (one less when `c·n ≡ 0 mod 8`), the laps pairwise compatible.  Sufficient by
+  `TwoBlock.lonely_eight_of_pairwise_laps` (1-D Helly).  The owner's "AP/grid plus a deviation": the grid is the
+  arrangement's own, the lap is free (the grid is infinite), the scale is a reading's own (the AP is scale invariant).
+* `GridStep8 S m M`: one of the two, with the grid step at least `m/M` (the reference no finer than a fixed fraction of the
+  nearest runner, so the covering is a restriction and not loneliness renamed).
 
-The coverings, and what has been checked (exact, `LonelyRunner/experiments/nN/redo/`):
-* `CoverB8`: every set with spread in `(7, 24]` is in `BoundClear8` or a `GridClass8` with `mm ≤ 4`, `c ∈ {1,3,5,7}`.
-  Checked on all 210,335 sets with readings `≤ 24`: least `mm` 1/2/3/4 for 201,698/8,422/210/5, none uncovered
-  (`grid_class_caseB_c7_v1.out`, E132).  Not proved.
-* `CoverC8`: every set with spread above 24 is in `BoundClear8`, a `GridClass8` with `mm ≤ 8`, `c ∈ {1,3,5,7}`, or
-  `WithinTwoBlocks8`.  Checked: all 635,334 sets with least reading 1 and readings `≤ 32` by `GridClass8` with `mm ≤ 4`;
-  19,610 of 19,625 random wide sets by `GridClass8` (`mm ≤ 7`), the other 15 captures released at `R ≤ 1.09`, inside
-  `WithinTwoBlocks8`; the 547 constructed residual Case C members by `GridClass8` (`mm ≤ 5`)
-  (`casec_gridclass_v1.out`, `casec_leftover_cascade_v1.out`, E157).  Not proved; the infinite range is the open part.
+**Measured** `[VERIFIED — these populations; not proved]` (`experiments/nN/redo/cover8_step_v1.out`, E165): `Cover8 2`
+holds on all 210,335 Case B sets to readings `≤ 24`; every tenth Case C set with least reading 1 and readings `≤ 32`; the
+547 constructed residual Case C members; 24,000 random sets of spread up to 2,000; 10,000 random fine shapes; 5,400 late
+band shapes (the only population needing a step below `m`, down to `m/2`).  None uncovered.
 
-`lonelyRunnerAt8_of_covers : CoverB8 → CoverC8 → LonelyRunnerAt8`.
+**Retired** (E166): the spread split (`SlowestSkeletonN.CaseB8`/`CaseC8` at `T = 24`, from the range of the old
+certificates) and its coverings `CoverB8`, `CoverC8`, `RegimeB8`, `RegimeC8`, `WithinTwoBlocks8` (in git history before
+this commit).  Owner: *"because of scale invariance and infinite grid the spread of 7–24 is irrelevant."*
 
-Everything here is proved; no `sorry`, no `native_decide`.  The two coverings are hypotheses, not theorems.
+Everything here is proved; no `sorry`, no `native_decide`.  `Cover8` is a hypothesis, not a theorem.
 -/
 
 namespace LRC.RegimeSkeleton
@@ -61,30 +47,6 @@ def GridClass8 (S : Finset ℕ) (e mm c : ℕ) : Prop :=
       (k d = c * n / 8 ∨ (c * n % 8 = 0 ∧ k d + 1 = c * n / 8))) ∧
     ∀ d ∈ S, ∀ d' ∈ S, (8 * k d + 1) * d' ≤ (8 * k d' + 7) * d
 
-/-- **Window regime (Case C only).**  Lonely inside the nearest runner's first two clear blocks. -/
-def WithinTwoBlocks8 (S : Finset ℕ) (m : ℕ) : Prop :=
-  ∃ t : ℝ, 1 / (8 * (m : ℝ)) ≤ t ∧ t ≤ 15 / (8 * (m : ℝ)) ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t)
-
-/-- The regimes of Case B. -/
-def RegimeB8 (S : Finset ℕ) (m : ℕ) : Prop :=
-  BoundClear8 S m ∨
-    ∃ e ∈ S, ∃ mm c : ℕ, 1 ≤ mm ∧ mm ≤ 4 ∧ (c = 1 ∨ c = 3 ∨ c = 5 ∨ c = 7) ∧ GridClass8 S e mm c
-
-/-- The regimes of Case C. -/
-def RegimeC8 (S : Finset ℕ) (m : ℕ) : Prop :=
-  BoundClear8 S m ∨
-    (∃ e ∈ S, ∃ mm c : ℕ, 1 ≤ mm ∧ mm ≤ 8 ∧ (c = 1 ∨ c = 3 ∨ c = 5 ∨ c = 7) ∧ GridClass8 S e mm c) ∨
-    WithinTwoBlocks8 S m
-
-/-- **OWED: the Case B covering.**  Every set of whole-number readings with spread in `(7, 24]` is in a Case B regime. -/
-def CoverB8 : Prop :=
-  ∀ S : Finset ℕ, (∀ d ∈ S, 0 < d) → ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → (∃ d ∈ S, 7 * m < d) →
-    (∀ d ∈ S, d ≤ 24 * m) → RegimeB8 S m
-
-/-- **OWED: the Case C covering.**  Every set of whole-number readings with spread above 24 is in a Case C regime. -/
-def CoverC8 : Prop :=
-  ∀ S : Finset ℕ, (∀ d ∈ S, 0 < d) → ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → (∃ d ∈ S, 24 * m < d) → RegimeC8 S m
-
 /-- The bound regime is sufficient. -/
 theorem lonely_of_boundClear8 {S : Finset ℕ} {m : ℕ} (hm : 0 < m) (h : BoundClear8 S m) : Lonely8 S := by
   have hm' : (0 : ℝ) < m := by exact_mod_cast hm
@@ -96,43 +58,33 @@ theorem lonely_of_gridClass8 {S : Finset ℕ} (hS : S.Nonempty) (hpos : ∀ d �
   obtain ⟨k, -, hpair⟩ := h
   exact LRC.TwoBlock.lonely_eight_of_pairwise_laps hS hpos k hpair
 
-/-- The window regime is sufficient. -/
-theorem lonely_of_withinTwoBlocks8 {S : Finset ℕ} {m : ℕ} (hm : 0 < m) (h : WithinTwoBlocks8 S m) : Lonely8 S := by
-  obtain ⟨t, h1, -, h⟩ := h
-  have hm' : (0 : ℝ) < m := by exact_mod_cast hm
-  have : (0 : ℝ) < 1 / (8 * (m : ℝ)) := by positivity
-  exact ⟨t, lt_of_lt_of_le this h1, h⟩
+/-! ### The spread-free covering (E164–E165) -/
 
-/-- Every Case B regime is sufficient. -/
-theorem lonely_of_regimeB8 {S : Finset ℕ} {m : ℕ} (hS : S.Nonempty) (hpos : ∀ d ∈ S, 0 < d) (hm : 0 < m)
-    (h : RegimeB8 S m) : Lonely8 S := by
+/-- **The grid regime with a step bound.**  Lonely at the bound, or at a grid-class instant of a grid through one of the
+arrangement's own readings `e` at step `e/mm` at least `m/M` (`mm·m ≤ M·e`), with a class that is a unit mod 8. -/
+def GridStep8 (S : Finset ℕ) (m M : ℕ) : Prop :=
+  BoundClear8 S m ∨
+    ∃ e ∈ S, ∃ mm c : ℕ, 1 ≤ mm ∧ mm * m ≤ M * e ∧ (c = 1 ∨ c = 3 ∨ c = 5 ∨ c = 7) ∧ GridClass8 S e mm c
+
+/-- **OWED: the spread-free covering.**  Every set of whole-number readings, least reading `m`, is in `GridStep8 S m M`. -/
+def Cover8 (M : ℕ) : Prop :=
+  ∀ S : Finset ℕ, (∀ d ∈ S, 0 < d) → ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → GridStep8 S m M
+
+/-- The grid regime with a step bound is sufficient. -/
+theorem lonely_of_gridStep8 {S : Finset ℕ} {m M : ℕ} (hS : S.Nonempty) (hpos : ∀ d ∈ S, 0 < d) (hm : 0 < m)
+    (h : GridStep8 S m M) : Lonely8 S := by
   rcases h with h | ⟨e, -, mm, c, -, -, -, hg⟩
   · exact lonely_of_boundClear8 hm h
   · exact lonely_of_gridClass8 hS hpos hg
 
-/-- Every Case C regime is sufficient. -/
-theorem lonely_of_regimeC8 {S : Finset ℕ} {m : ℕ} (hS : S.Nonempty) (hpos : ∀ d ∈ S, 0 < d) (hm : 0 < m)
-    (h : RegimeC8 S m) : Lonely8 S := by
-  rcases h with h | ⟨e, -, mm, c, -, -, -, hg⟩ | h
-  · exact lonely_of_boundClear8 hm h
-  · exact lonely_of_gridClass8 hS hpos hg
-  · exact lonely_of_withinTwoBlocks8 hm h
-
-/-- **Case B from its covering.** -/
-theorem caseB8_of_cover (h : CoverB8) : CaseB8 24 := by
-  intro v hv _ m hm hmin hsp hT
-  have hpos := readingsOf_pos hv 0
-  exact lonely_of_regimeB8 (readingsOf_nonempty v 0) hpos (hpos m hm) (h _ hpos m hm hmin hsp hT)
-
-/-- **Case C from its covering.** -/
-theorem caseC8_of_cover (h : CoverC8) : CaseC8 24 := by
-  intro v hv _ m hm hmin hsp
-  have hpos := readingsOf_pos hv 0
-  exact lonely_of_regimeC8 (readingsOf_nonempty v 0) hpos (hpos m hm) (h _ hpos m hm hmin hsp)
-
-/-- **The conjecture at eight runners from the two coverings.**  Case A is R1 (inside `lonelyRunnerAt8_of_cases`); Case B
-and Case C follow from their coverings through the proved regimes. -/
-theorem lonelyRunnerAt8_of_covers (hB : CoverB8) (hC : CoverC8) : LRC.Spec.LonelyRunnerAt8 :=
-  lonelyRunnerAt8_of_cases 24 (caseB8_of_cover hB) (caseC8_of_cover hC)
+/-- **The conjecture at eight runners from the spread-free covering**, for any step bound `M`.  No Case A/B/C split. -/
+theorem lonelyRunnerAt8_of_cover8 (M : ℕ) (h : Cover8 M) : LRC.Spec.LonelyRunnerAt8 :=
+  LRC.EndRunner.lonelyRunnerAt8_of_slowest fun v hv _ => by
+    classical
+    have hne := readingsOf_nonempty v 0
+    have hpos := readingsOf_pos hv 0
+    have hmS : (readingsOf v 0).min' hne ∈ readingsOf v 0 := Finset.min'_mem _ hne
+    exact lonely_of_gridStep8 hne hpos (hpos _ hmS)
+      (h _ hpos _ hmS (fun d hd => Finset.min'_le _ d hd))
 
 end LRC.RegimeSkeleton
