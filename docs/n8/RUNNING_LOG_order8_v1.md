@@ -4120,3 +4120,20 @@ non-subject runners share a speed (the chain below passes through such points; n
 **What remains for the conjecture at eight runners: `WindowBound`, and only it.** It is the statement E52 named
 (*"the relocated isolation cannot escape to infinity"*), now the single hypothesis of a proved theorem. Evidence so far
 is E72's `8·d_min·t ≤ 15` (`[VERIFIED]` for `S ≤ 24`, `[EMPIRICAL]` beyond), which would give `T = 15/(8c)`. Not proved.
+
+**What `WindowBound` contains** `[reasoned in the text; not in Lean]`, recorded so the theorem is not over-read:
+- It implies `LonelyRunnerAt8` (the theorem above), so it is at least as strong as the conjecture at eight runners.
+- Conversely it would follow from the conjecture plus local stability at every arrangement of a box: if lonely
+  arrangements `y_n` of a box had first lonely times `→ ∞`, a limit `y*` (compact box) that is lonely with a margin, or
+  at a simple pinch with a common period (`pinch_eventually_lonely`), keeps its nearby arrangements lonely at bounded
+  times. What could break it is a `y*` whose every lonely instant closes in the approach direction: a multi pinch
+  (E113's (A) returns here, as a condition for the window, not for the reduction), or a simple pinch with no common
+  period (the mirror needs one; irrational `y*`).
+- The chain passes through arrangements where two runners share a speed. Those have at most seven distinct readings,
+  and native order seven makes them lonely at `1/7`, strictly clear of `1/8`: a margin, so the window holds near them
+  by `eventually_lonely_of_margin`-type stability `[reasoned]`.
+- So the theorem puts the whole content of the conjecture into one statement, the owner's E52 *"the relocated
+  isolation cannot escape to infinity"*, with the deformation argument itself now formal. The cascade's resting
+  point is the earliest lonely instant (`first_isolation_of_fixed`), so `WindowBound` says exactly that the cascade
+  rests by a time bounded by the speeds on each box. This uses the first-instant property as a tool for the window, not
+  as an obligation of the conjecture (O1 stands).
