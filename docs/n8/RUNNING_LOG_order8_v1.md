@@ -4798,3 +4798,22 @@ band sets to 24, 42,811.)
   instant). **The derivation owed for the band is the analogue for each level `K`**: a checkable condition on the
   readings (gaps, in the owner's grid-at-scale-`e/(8K+1)` view) forcing the block instant, with the AP classes, and
   a proof that the conditions exhaust the band.
+
+---
+
+## E138 — 2026-09-27 — owner: regimes, not one rule; the four-block regime is a knife-edge at exact finer grids
+
+**Owner:** *"I dislike treating the cascade as an algorithm that is search … it directs you to the isolation point
+which is deterministically forced."* — *"I feel like sometimes you are looking for a rule that always works, but the
+arrangement of speeds means different things apply at different times."* Taken as the frame: the proof is a partition
+of arrangements by **regime** (AP class instant; two-block; three-block; four-block; …), each with its forced, proved
+instant, plus the condition on the speeds that selects the regime; the owed content is those conditions and their
+covering. E137's "not a derivation" grade stands for the union as a statement; the regimes are the objects.
+
+**What switches a regime** (`LonelyRunner/experiments/nN/redo/regime_switch_v1.{py,out}`, exact): the 42 band sets to 24
+whose isolation is at a four-block instant (E137), each reading moved in steps of `d_min/12` up and down until the
+landing's laps change. Every reading, both directions, switches it (36–42 of 42 per rank and sign); the first step
+almost always suffices. Switches drop the top lap (4 → 1, 2, 3; 3 → 1, 2) in 360 of 504, stay or rise in the rest (to 5
+or 6 in 20). `[VERIFIED — these 42 sets]` Reading `[mine]`: the four-block regime sits only at exact grid points of a
+finer grid (`d_min/3`, `d_min/2`); moving off the point relocates the isolation to an earlier, simpler regime (often
+two-block, `R ≈ 1.3`). Same pattern as E130's `m = 2` exceptions.
