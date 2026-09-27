@@ -4711,3 +4711,22 @@ compares the handover against the whole log, which is far more detailed than a h
 carry (v8 → v9 → v10; the v9 pass's six losses all dated from before v8). Second time the owner has stopped this (E109).
 **Rule from here:** `HANDOVER_2026_09_27_v10.md` is the handover. The v10 loss check's findings, if any, are recorded
 here in the log only; no v11. The running log is the record; the handover points into it and does not repeat it.
+
+---
+
+## E134 — 2026-09-27 — handover v10 loss check (log only, per E133); read v10 with these corrections
+
+`compile-diff` on v10: no open item, retraction or pending decision lost; every E132 repair present. Corrections to
+read into v10 (no v11):
+- **Strip `[16,17]`: CHECK PASSED** (762 categories; `redo/strips_progress_v1.txt`, committed in `LonelyRunner/`
+  `d939fee`). v10's "check running" is stale. `[VERIFIED — computer-assisted, independently checked]`.
+- **v10 §4 open step:** `m ≤ 4` is a measurement on readings `≤ 24` (E132), not part of the statement to be derived; the
+  statement is E128's `(j, m ≤ f(S), c)` with `c ∈ φ(8)`. The `c ≤ 7` restriction is checked on integer readings `≤ 24`
+  only; **not yet checked on the 272 late fine shapes** (their `m ≤ 2` figure used `c` unrestricted).
+- **v10 §1, `WindowBound`:** E115's grade is `[reasoned in the text; not in Lean]`; the multi-pinch / no-common-period
+  failure points belong to the converse argument (conjecture plus local stability ⇒ window), not to `WindowBound` itself.
+  Also from E115, not in v10: near an arrangement with two runners at one speed, order seven gives loneliness at `1/7`,
+  a margin, so the window holds there `[reasoned]`.
+- **v10 §1, `NestedBlocksN` row:** E126's units are `u = 1/(8d)` (half a window), and the result is "not yet in Lean"
+  (an observation, not a registered obligation).
+- v10's "where v9 is silent" means where v10 is silent.
