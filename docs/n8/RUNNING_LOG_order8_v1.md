@@ -3832,3 +3832,17 @@ the simple non-equalities feeding it.
 
 **Proved regions of the shape space so far** (each with every runner's instant named): every complete grid's
 neighbourhood (E46; E45 for the AP), the doubled-slot family (E41) and its neighbourhood (E48).
+
+---
+
+## E106 — 2026-09-27 — log numbering; handover v5
+
+**Numbering collision.** Two sessions appended to this log on 2026-09-27. The entries up to E105 are one series; after
+E105 the file continues with a second series whose headings read E36–E48 (from the heading "E36 — exhibit route: does the
+arrangement's TYPE decide the flank?"). The file is append-only, so the headings are not changed. **Cite the second
+series as E36b–E48b.** New entries continue from E106.
+
+**Handover v5** (`docs/n8/HANDOVER_2026_09_26_v5.md`, v4 kept): carries v4 in full; adds §0, the corrections a fresh
+session needs (frame, owner-right moments, session-right moments, measurement mistakes, Lean tooling); E102–E105; the
+second series' results and Lean modules (§6) and how they sit against plan v2's residual route. `compile-diff` run
+before promotion (below or in the next entry).
