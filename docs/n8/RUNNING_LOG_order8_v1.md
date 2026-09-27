@@ -3688,3 +3688,32 @@ partner is ahead (the mirror). Class C = a pair member delayed past the grid ins
 So in the author's three parts: the *cycles until isolation* stay under half a grid cycle, and the event is a near
 runner's first (or nearly first) opening after the grid instant; *which* runner is set by the arrangement's laps, not by
 the empty slot alone. No law of the E40 kind yet for general grids.
+
+---
+
+## E43 — 2026-09-27 — deviations: on the AP they relocate the event along the spine
+
+`experiments/nN/redo/deviations_v1/v2`, exact: base arrangements (the AP; complete grids with laps ≤ 1, ≤ 3; E40's
+doubled slot; doubled slot with laps ≤ 1), every speed deviated uniformly in `[−ρ, ρ]` gap units, 250 arrangements per
+cell, every runner. At the grid instant a deviation `e` moves a runner `e` eighths (Prop 2.2), so `|e| < 1` keeps it in its
+own slot's band. `[EMPIRICAL]`
+
+**The AP: deviations relocate along the spine, between the φ(8) classes.**
+
+| `ρ` | event's spine class `p` (`t ≈ p/8`) | max `|8t* − p|/(pρ)` | flank a class-`p` circle neighbour (offset `±p`) |
+|---|---|---|---|
+| 1/64 | 1: 1,761; 5: 129; 3: 110 | 2.05 | **2,000 / 2,000** |
+| 1/16 | 1: 1,748; 3: 155; 5: 97 | 12.78 | 1,932 / 2,000 |
+| 1/8 | 1: 1,699; 3: 256; 5: 44; 7: 1 | 6.85 | 1,791 / 2,000 |
+| 1/4 | 1: 1,564; 3: 418; 5: 17; 7: 1 | 3.83 | 1,472 / 2,000 |
+
+At small deviation every runner's event is a class instant `1/8, 3/8, 5/8`, moved by at most about `2ρ` relative, with
+the flank the circle neighbour of that class (Cor 4.15's neighbour rule). When the class-1 instant is blocked (a
+neighbour moved inward: the AP has no slack, §4.2) the event **jumps to class 3 or 5**. That is the author's picture: the
+deviation relocates the isolation along the AP's spine; it does not remove it.
+
+**Grids with laps and doubled slots: the spine is not their reference.** Many of their base events are already before
+the grid instant (E41's class A), so distance to the spine measures nothing there. Against each runner's own base event
+(`deviations_v1`): median factor ≈ 1.00, but 5–10% jump by factors 1.4–5 even at `ρ = 1/64` (the same class-jump
+phenomenon), and the flank is a class neighbour in only 47–71%. Beyond `ρ ≈ 1/2` runners leave their slots and the
+factors spread (to about 100 at `ρ = 1`).
