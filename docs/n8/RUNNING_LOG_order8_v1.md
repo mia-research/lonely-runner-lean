@@ -5096,3 +5096,10 @@ fine band shapes.)
   holds (outliers can still bridge); the late shapes need levels up to 6. The owner caught it: a tidy continuation
   offered in place of the stopping point.
 - **Owed, the one statement:** the fast group has its own point before the slow group's common block (on its lap) ends.
+
+**E151 addendum — in Lean** (`SlowBlockN`, `LonelyRunner/` commit `75d35d0`; Spec gate PASS **1,926**,
+`experiments/nN/spec_gate_regimes.out`) `[PROVED — axiom-clean]`: `block_iff_fast` and `exists_block_iff_fast` (real
+readings: on the slow group's first block, the whole question is exactly the fast group's);
+`lonely_eight_of_fast_in_slow_block` and `lonely_eight_of_regimes` (whole-number form: the bound, or the fast group clear
+somewhere in the slow group's first block). Not yet in Lean: the same on the slow group's common block on lap `k`
+(needed for the late shapes, E151).
