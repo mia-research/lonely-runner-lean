@@ -4862,3 +4862,23 @@ subject, `ε = 1/100, 1/1000, 1/10000` `[VERIFIED — this family, these ε]`:
 - **Already proved for every `ε`**: scaled to whole numbers the six other readings share a factor the partner's reading
   lacks: `OneFreeEightN.lonely_eight_of_one_free` (order seven on the six, then a written number of steps of their
   period). Only `ε = 0`, two runners at one speed, breaks it (the owner's statement).
+
+---
+
+## E141 — 2026-09-27 — the relay is a descending wave, repeated lap after lap
+
+**Owner:** *"Most configurations that are considered unique are just reformations of the same pattern at different
+parts of the circle. But because it is a circle that means if you prove cluster with outliers works at one point you
+prove it for all."*
+
+**Measured** (`LonelyRunner/experiments/nN/redo/relay_order_v1.{py,out}`, exact; setter rank.lap per move, rank 0 = the
+nearest runner): the longest band-24 chains and the late shapes read
+`6.1 5.1 4.1 3.1 2.1 1.1 | 5.2 4.2 3.2 2.2 1.2 | …`, with the fast runners entering the later sweeps at their own later
+laps (`6.3`, `6.4`); late chains end `… 1.2 0.1`, the sweep reaching the nearest runner, whose exit of `(7, 9)` at
+`R = 9` is the landing (many late `R* = 9.000`). Consecutive setter steps in late chains: to a slower runner 59,042, to a
+faster 42,430. `[VERIFIED — these chains; the sweep decomposition not yet checked on all chains]`
+
+**Reading** `[mine, in the owner's terms]`: the isolation is passed down the arrangement in speed order, one lap per
+sweep; each sweep is the same pattern one lap further on (the owner's "same pattern at different parts of the circle").
+If exact, the argument's form is: one sweep either lands or hands over to a lap-shifted copy of itself; scale invariance
+carries the step to every sweep. Next: check that every chain decomposes into descending sweeps, and what ends a sweep.
