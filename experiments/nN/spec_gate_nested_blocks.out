@@ -3,26 +3,29 @@
    ...[0] took 0s
 == [1] build every Spec module (list derived from disk) ==  (t+0s)
   113 modules
-Note: This linter can be disabled with `set_option linter.style.longLine false`
+Note: This linter can be disabled with `set_option linter.style.setOption false`
 Build completed successfully (8376 jobs).
-   ...[1] took 27s
-== [2] sorry inventory ==  (t+27s)
+   ...[1] took 5s
+== [2] sorry inventory ==  (t+5s)
   none
    ...[2] took 0s
-== [2b] proof-hygiene scan ==  (t+27s)
+== [2b] proof-hygiene scan ==  (t+5s)
   clean (no axiom / native_decide / unsafe / admit)
    ...[2b] took 0s
-== [3] axiom check on EVERY declaration, with a coverage assertion ==  (t+27s)
+== [3] axiom check on EVERY declaration, with a coverage assertion ==  (t+5s)
   extractor names 1910; 14 anonymous instance(s) unnameable; 1924 on disk
   1910 of 1910 clean (54 depend on no axioms at all)
-   ...[3] took 279s
-== [4] the OWED register: every asserted Prop is accounted for ==  (t+306s)
-  UNREGISTERED Prop-valued def(s): LRC.NestedBlocks.InBlock
-  A Prop asserted and concluded by no theorem is invisible to build, sorry and axiom
-  checks.  Decide its standing (TARGET / ROUTE / OWED / REFUTED) and add it above.
+   ...[3] took 289s
+== [4] the OWED register: every asserted Prop is accounted for ==  (t+294s)
+  clean (83 Prop-valued defs, all registered)
+  OWED:    LRC.FlankFinite.FourClears LRC.Resonance.CoprimeLargestFlank LRC.OrderFive.RCapped LRC.OrderFive.WindowConstantFive LRC.Order8Skeleton.ArrBlockRule8 LRC.Order8Skeleton.ArrBoundedCovered8 LRC.PathWindow.WindowBound LRC.SlowestSkeleton.CaseB8 LRC.SlowestSkeleton.CaseC8 
+  REFUTED: LRC.Spec.DoorFirstLap LRC.Spec.DoorLargestFlank LRC.SpecN.DoorFirstLap LRC.SpecN.DoorLargestFlank 
    ...[4] took 0s
-== [5] tree stability ==  (t+306s)
+== [5] tree stability ==  (t+294s)
   clean (digest e1f39f2de435)
-== total: 306s ==
+== total: 294s ==
 
-GATE FAIL.
+GATE PASS (Spec layer): 1910 declarations, axiom-clean, coverage 1910 of 1924.
+           This gates the SPEC LAYER only.  It does not gate the paper
+           (scripts/n8/gate.sh) or the cascade artefact (scripts/cascade/gate.sh).
+           LRC is NOT proved at any order.  The OWED items above are not theorems.
