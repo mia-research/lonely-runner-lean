@@ -4946,3 +4946,22 @@ by a deviation crossing an eighth line, which the owner's picture counts as one 
 about types modulo relocation (like E36b's 95,888 slot-residue types, too fine). Not a test of the owner's finiteness
 claim at the owner's level. A test at that level needs types taken up to relocation (the pattern and its relocations as
 one class), not yet defined operationally.
+
+---
+
+## E145 — 2026-09-27 — the owner's types, counted; what the count can and cannot test
+
+**Owner** (confirming the definition): *"yes I think that matches, use it and test with the cascade. Because we are
+comparing to global isolation, the specific arrangement works anywhere along the line and around the circle."* Type =
+cluster composition (runs below `ρ_k`, `k` the landing lap, lap 0 read as `ρ₁`), the landing cluster (bottom = flank),
+each outlier's eighth-slot at the landing; laps and in-slot deviations dropped (scale and lap-rotation invariant).
+
+(`LonelyRunner/experiments/nN/redo/owner_types_v1.{py,out}`, exact, spread `≤ 24`.) Distinct types for readings `≤ N`:
+12: 543; 16: 5,482; 20: 24,238; 24: 75,941; 28: 93,126 (new per step 4,939 → 18,756 → 51,703 → 17,185). Cluster
+compositions 64 of 64 by `N = 24`; (composition, landing cluster) 175 at 24 and at 28.
+
+**Grade** `[reasoned]`: an outlier in slot 1–6 is clear, so membership of a type already includes loneliness at its
+instant; types are finite by construction (`≤ 64 · 7 · 6⁶`) and "every arrangement has a type" is the conjecture. The
+count is therefore not the test. The owner's "works anywhere along the line and around the circle" is tested instead by
+**predictability**: whether the landing cluster is determined by the lap-1 cluster structure (read from the speeds
+before any landing), leaving the outliers' clearance (the grid) as the proof obligation. Next entry.
