@@ -11,3 +11,5 @@ strip [14,15]: DONE Counter({'split': 10741, 'in': 9363, 'empty': 5138}) cones u
 CHECK PASSED
 strip [15,16]: DONE Counter({'split': 30722, 'in': 26801, 'empty': 13528}) cones used 754
 CHECK PASSED
+strip [16,17]: DONE Counter({'split': 31801, 'in': 28086, 'empty': 12832}) cones used 762
+CHECK PASSED
