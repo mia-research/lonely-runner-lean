@@ -3717,3 +3717,30 @@ the grid instant (E41's class A), so distance to the spine measures nothing ther
 (`deviations_v1`): median factor ≈ 1.00, but 5–10% jump by factors 1.4–5 even at `ρ = 1/64` (the same class-jump
 phenomenon), and the flank is a class neighbour in only 47–71%. Beyond `ρ ≈ 1/2` runners leave their slots and the
 factors spread (to about 100 at `ρ = 1`).
+
+---
+
+## E44 — 2026-09-27 — the reference for grids with laps is the grid's own class instants
+
+**Reasoned.** A complete grid (every residue once) is globally isolated at all four class instants `p/8`, laps or not
+(the φ(8) law; whole laps invisible, Thm 4.12), so every runner is lonely there; a runner's *first* event may be earlier,
+at its own scale, which is why E43's spine reading did not fit grids with laps. At `t = p/8` a deviation `e` moves a runner
+`p·e` eighths, laps or not. Author on E42: the delay under half a grid cycle fits a mirroring pattern (for whole-number
+speeds, lonely at `t` iff at `1 − t`).
+
+**Measured** (`experiments/nN/redo/reference_grid_v1`, exact): complete grids with laps up to `Q`, every speed deviated in
+`[−ρ, ρ]`, 200 arrangements per cell, every runner; for each class `p` the first lonely instant at or after
+`p/8 − 1/64`, and the one nearest its class instant. `[EMPIRICAL]`
+
+| laps `≤ Q` | `ρ` | max offset/`ρ` | median | flank the class-`p` neighbour |
+|---|---|---|---|---|
+| 0 (AP) | 1/64 | 0.64 | 0.11 | 1,600 / 1,600 |
+| 1 | 1/64 | 0.65 | 0.07 | 1,600 / 1,600 |
+| 3 | 1/64 | 1.48 | 0.04 | 1,591 / 1,600 |
+| 10 | 1/64 | 1.56 | 0.03 | 1,405 / 1,600 |
+| 10 | 1/8 | 0.58 | 0.03 | 1,091 / 1,600 |
+
+**Grids with laps relocate like the AP**: every deviated runner is lonely within a small multiple of `ρ` (relative) of a
+class instant, the laps do not enlarge the offset (the median shrinks), and at small `ρ` the flank is the class
+neighbour. All four classes carry events. The doubled slot's pair members are not covered by this reference (the partner
+sits on them at every grid instant); their reference is E40/E41's law.
