@@ -4842,3 +4842,23 @@ next arrives, two runners bracketing the subject's slot. Next: at each single-ru
 when the current one exits; trace the 601 late `w = 3` exceptions; count arrangement types with fast outliers taken
 by their fraction (the category counts of E124 and the strips grow with the lap labels of fast readings, which the
 owner's grid reading says are not types).
+
+---
+
+## E140 — 2026-09-27 — relays use every runner; the owner's near pair: delayed, forced, and already proved
+
+**Relays** (`LonelyRunner/experiments/nN/redo/relay_setters_v1.{py,out}`, exact) `[VERIFIED — these populations]`: long
+relays are not a pair taking turns. Chains of four or more moves (band and Case B to 24) use 4–6 distinct setters, the
+top two setters under 75% of moves in nearly all; every late shape uses all seven. At a single-runner move the next
+runner has just entered past `7/8` in 186,044 of 211,873.
+
+**Owner:** *"So if you have 1, 2, 2.01, 3…8, all that does is delay the isolation point and it delays in a predictable
+and forced manner."* Tested (`redo/near_pair_delay_v1.{py,out}`, exact), speeds `1, 2, 2+ε, 3, …, 7`, every runner as
+subject, `ε = 1/100, 1/1000, 1/10000` `[VERIFIED — this family, these ε]`:
+- runners outside the pair: isolated at `t = 1/8` (runner 3 at `1/(8(1−ε))`, beside it);
+- the pair: the partner's reading is `ε`, so isolation waits for its first exit `1/(8ε)`; the cascade lands at the first
+  instant after it where the other six are clear (runner 2: `12.5625, 125.125, 1250.125`; runner `2+ε`: exactly
+  `1/(8ε)`), matching the forced location in all six cases. The delay is `1/(8ε)` plus less than one period of the six.
+- **Already proved for every `ε`**: scaled to whole numbers the six other readings share a factor the partner's reading
+  lacks: `OneFreeEightN.lonely_eight_of_one_free` (order seven on the six, then a written number of steps of their
+  period). Only `ε = 0`, two runners at one speed, breaks it (the owner's statement).
