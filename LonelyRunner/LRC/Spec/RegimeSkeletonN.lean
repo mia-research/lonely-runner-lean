@@ -24,7 +24,11 @@ The regimes (readings `S`, least reading `m`):
   placeholder**: those sets are two runners in one slot (the captured runner shares the subject's slot at every grid
   instant) and the isolation waits for them to separate, the captured runner's exit.  That is the same event as the near
   pair, the grid nudge, the doubled edge and the late band's carry to `R = 9`, and it is exactly one move of the cascade
-  (owner, E158).  The separation regime belongs here once it is stated.
+  (owner, E158).  One separation is stated and proved in `SeparationN` (`lonely_of_separation`, any rank, forward
+  and mirror).  The 15 leftovers need two to four successive separations, and repeated separation from an instant is the
+  cascade itself, so it cannot be a regime here without renaming the conjecture (E159).  The honest form of the Case C
+  obligation is the one E159 records: finitely many cells (reference, class, residues, endpoint order), each with a
+  uniform rule, and separations moving between cells that cannot continue for ever.
 
 The coverings, and what has been checked (exact, `LonelyRunner/experiments/nN/redo/`):
 * `CoverB8`: every set with spread in `(7, 24]` is in `BoundClear8` or a `GridClass8` with `mm ≤ 4`, `c ∈ {1,3,5,7}`.

@@ -1,0 +1,8 @@
+   108922  ('not on the d_min grid',)
+    58029  ('two or more doubled slots', 'bound blocked')
+    27943  ('two or more doubled slots', 'bound clear')
+    10197  ('one doubled slot, several runners lapped', 'bound clear')
+     4386  ('one doubled slot, several runners lapped', 'bound blocked')
+      735  ('complete residue system', 'bound clear')
+       93  ('dsZ family (one runner lapped)', 'bound clear')
+       30  ('dsZ family (one runner lapped)', 'bound blocked')

@@ -1,0 +1,15 @@
+start
+control (Case B integer sample): {1: 329, 'bound': 175, 2: 21, 3: 1}
+random fine band seed 0: {1: 1250}
+random fine band seed 1: {1: 1250}
+random fine band seed 2: {1: 1250}
+random fine band seed 3: {1: 1250}
+random fine spread 9-24 seed 1: {1: 901, 'bound': 348, 2: 1}
+random fine spread 9-24 seed 3: {1: 913, 'bound': 337}
+random fine spread 9-24 seed 2: {1: 928, 'bound': 320, 2: 2}
+random fine spread 9-24 seed 0: {'bound': 342, 1: 907, 2: 1}
+late band shapes part 1: {2: 1341, 3: 9}
+late band shapes part 3: {2: 1341, 3: 9}
+late band shapes part 2: {2: 1340, 3: 10}
+late band shapes part 0: {2: 1341, 3: 9}
+ALLDONE

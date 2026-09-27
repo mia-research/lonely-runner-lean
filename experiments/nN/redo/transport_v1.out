@@ -1,0 +1,10 @@
+normalised states: 81202; states with more than one next obstruction: 11419 (14.1%)
+outcomes of moves: {'lands': 145368, 'next obstruction: 1 reading(s)': 135934, 'next obstruction: 2 reading(s)': 41276, 'next obstruction: 3 reading(s)': 4675, 'next obstruction: 4 reading(s)': 164, 'next obstruction: 5 reading(s)': 1}
+   ambiguous state ((1, 1, 1, 2, 2, 6, 0), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 3, 5, 7), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 3, 6, 0), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 4, 5, 7), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 4, 6, 0), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
+   ambiguous state ((1, 1, 2, 2, 5, 7, 1), 5, (False, False, False, False, False, False, True)) -> ['(4,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 5, 7, 1), 5, (False, False, False, False, False, False, True)) -> ['(4,)', 'lands']
+   ambiguous state ((1, 1, 1, 2, 5, 5, 7), 6, (False, False, False, False, False, False, False)) -> ['(5,)', 'lands']
