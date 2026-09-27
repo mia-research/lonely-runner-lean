@@ -1,0 +1,7 @@
+      676  ('B>9', 'delayed by the slow group (blockers at t_G: 1)')
+       27  ('B>9', 'delayed by the slow group (blockers at t_G: 2)')
+   102926  ('B>9', 'flank in the fast group')
+      429  ('B>9', 'flank in the slow group')
+   102652  ('B>9', "full landing = fast group's own landing")
+    42013  ('band', 'flank in the fast group')
+    42013  ('band', "full landing = fast group's own landing")
