@@ -3846,3 +3846,20 @@ series as E36b–E48b.** New entries continue from E106.
 session needs (frame, owner-right moments, session-right moments, measurement mistakes, Lean tooling); E102–E105; the
 second series' results and Lean modules (§6) and how they sit against plan v2's residual route. `compile-diff` run
 before promotion (below or in the next entry).
+
+---
+
+## E107 — 2026-09-27 — handover v5 loss check; v6; the residue-pattern count
+
+**`compile-diff` on v5** (against v4, E102–E105, E36b–E48b, E106): nothing of v4 lost (line diff: v4 carried verbatim).
+17 losses from the log summaries: open items (the ordering lemma not stated; a coarse class untested; E38b's noted type
+test), caveats and scopes (E104 "these four sets", E40b "in this family", proved radii, E37b "reasoned from one trace",
+E39b's overstate/miss caveats, E47b's jumps and `413ρ` outliers), grade tags dropped on E102–E104, "confirmed exactly"
+over `[EMPIRICAL]` results, and one figure (E47b's `1.91ρ` given as "about `1.6ρ`"). **`HANDOVER_2026_09_26_v6.md`**
+repairs every item; v5 kept.
+
+**Residue patterns** (`LonelyRunner/experiments/nN/redo/residue_patterns_v1.{py,out}`, exact enumeration): occupancy
+patterns of eight whole-number speeds in the 8 residue slots: 6,435; up to translation and mirror 440; also up to odd
+rescaling (units of `ℤ/8` permute the slots) **264**, of which the complete grid is 1 and one doubled slot with one empty
+is 3 (by empty slots: 0: 1, 1: 3, 2: 28, 3: 73, 4: 98, 5: 48, 6: 12, 7: 1). This counts residue patterns only; laps and
+deviations are not in it.
