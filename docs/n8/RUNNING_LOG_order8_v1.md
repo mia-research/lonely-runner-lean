@@ -3863,3 +3863,32 @@ patterns of eight whole-number speeds in the 8 residue slots: 6,435; up to trans
 rescaling (units of `ℤ/8` permute the slots) **264**, of which the complete grid is 1 and one doubled slot with one empty
 is 3 (by empty slots: 0: 1, 1: 3, 2: 28, 3: 73, 4: 98, 5: 48, 6: 12, 7: 1). This counts residue patterns only; laps and
 deviations are not in it.
+
+---
+
+## E108 — 2026-09-27 — handover v6 loss check; owner-directed review; v7
+
+**`compile-diff` on v6** (against v5, v4, E102–E107, E36b–E48b): nothing from v4 or v5 lost; every E107 category
+repaired; no retraction re-claimed. Thirteen log items missing or weakened (v5 had already dropped them): the
+"relay" terminology note (E38b); E38b's recursion caveat, its "faces" (v5/v6 said "edges") and its grade
+`[reasoned; each step cites a proved statement]`; E44b's `ρ = 1/64` scope and 1,091/1,600 at `ρ = 1/8`; E47b's
+"(relative)"; E37b's pending decision (DoorArrives vs DoorFlank), which read as settled; E105's corrected Theorem 6.15
+statement; E102's half-lap content and place test; E104's `[VERIFIED — exhaustive exact, finite window]` tag; E36b's
+"Not yet examined: the lap `j`"; E102's note that the six first-series modules are imported by none. About eight
+v5-origin statements had no log source and no mark. All repaired in **`HANDOVER_2026_09_26_v7.md`** (v6 kept).
+
+**Owner-directed review of v6** (owner: *"review the handover document and especially look at training default
+assumptions that are not true"*; then *"the proof does not look like other proofs because it is novel and new … reason
+within the framework"*). Read: paper v9.1 in full, MANUSCRIPT_v21 §0 and §17, plan v2, `Target.lean`, `Doors.lean`,
+`EndRunnerN`, `OrderEightCasesN`. Corrections carried into v7:
+- v6 §0.16 listed "the proved neighbourhood radii shrink with the laps" as a negative about the object. It is a fact
+  about the proved bound `2ρ(14W + 21) ≤ 1`; the actual tolerance is unmeasured (the suppression pattern: a limit of the
+  proof read as a limit of the thing).
+- Missing from §0: translating vs adjoining a runner (memory `feedback_count_the_runners_given_2026_09_12`); the
+  Rosenfeld preprint is not the task (memory `project_n8_rosenfeld_2026_09_07`); "hard case" means the one delaying
+  mechanism, not a case the cascade struggles with; the list of foreign proof shapes.
+- **The neighbourhood theorems are not off the residual path** `[reasoned from the Lean statements; unchecked]`:
+  `residual_of_lonelyRunnerAt8` reads a residual set as the slowest runner's readings of `(1, 1 + r₁, …, 1 + r₇)`, where
+  the reading set is the arrangement up to translation, so the arrangement-level neighbourhood theorems discharge any
+  residual set lying, rescaled, within a proved radius. Whether any does is untested (v7 §5.11).
+- The Lean is ahead of v21: `EightResidual` has 21 fields (`no_fast_pair`, `no_block_split` added after v21's 19).
