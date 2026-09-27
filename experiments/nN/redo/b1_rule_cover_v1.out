@@ -1,0 +1,16 @@
+B1 sets to 40 : 1717540   with no rule K<=4: 2
+greedy cover (rank r = 0 slowest .. 6 fastest, lap K): newly covered
+   r=3 K=1  581930
+   r=4 K=1  449297
+   r=2 K=1  276453
+   r=5 K=1  190160
+   r=6 K=2  86100
+   r=4 K=2  52186
+   r=1 K=1  35063
+   r=5 K=2  24169
+   r=3 K=2  10597
+   r=6 K=3  6002
+   r=2 K=2  2239
+   r=6 K=1  1465
+   r=5 K=3  890
+uncovered after these: 989
