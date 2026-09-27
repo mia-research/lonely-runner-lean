@@ -3908,3 +3908,31 @@ O2, …** in dated entries like this one, for the next handover to collect.
   does state that the fixed point is `≤` every lonely `s` (paper v9.1 Thm 11(b)), so the fact is in the tree; but it is a
   by-product of the construction, not what the cascade is for, and no proof here may lean on "first" as an obligation.
   Correct frame: the cascade arrives at a lonely instant exactly when the runner is lonely (`doors_agree`).
+
+---
+
+## E110 — 2026-09-27 — the lattice ladder against the cascade; its exceptions are edge pushes and slot collisions
+
+Owner: *"when we have an exception or counter example for the proxy … use cascade to figure out what is happening …
+permutating counter examples or exceptions always finds and refines the mechanism."* Proxy tested: the ladder of E4–E6
+(PROOF_REQUIREMENTS_v2 §7), read in the owner's picture. At lattice `D` the instants `(8j+1)/(8D) = j/D + 1/(8D)` are a
+rung plus a deviation; the readings that are multiples of `D` form a grid read by residues mod 8 and never block on a
+live lattice; a reading `≡ 0 (mod 8D)` is a runner in the subject's slot, which kills the lattice. `L0` = least live
+`D`. Every set of 7 distinct readings in `1..24` (slowest runner of `(c, c + d₁, …)`), exact
+(`LonelyRunner/experiments/nN/redo/lattice_vs_cascade_v1`, `lattice_exceptions_v1/v2`, `lattice_then_cascade_v1`)
+`[VERIFIED — exhaustive exact, readings ≤ 24]`:
+- `L0 ∈ {1, 2, 3, 4}`; the first live lattice clears in 249,454 of 346,104; the least clearing lattice `D* ≤ 14`.
+- The cascade's instant is a lattice instant of `D*` in only 74,684; the ladder and the cascade generally name
+  different instants.
+- **The 96,650 exceptions** (`L0` fails): in 96,441 one runner moved by `±1, ±2` makes the first live lattice clear,
+  and the runner moved is a sole blocker of some `L0` numerator in 93,491: **an edge push by one runner**.
+- **The 209 no single move rescues:** 201 have two readings `≡ 0 (mod 8)` (169 with `d_min = 1`), `L0 = 3` in 165:
+  **two runners in the subject's slot at the bound**, the double collision of E103 and the owner's one hard case.
+- Starting the cascade at the `L0` instants does not shorten it (1 move in 59,153 of the exceptions, up to 17). Recorded
+  as a measurement only: a move count is a foreign shape (v21 §0), not pursued.
+
+**Reading** `[my reading of the above; not a proof]`: read at the arrangement's own least live scale, the ways
+isolation fails are the two the owner named: one runner at the edge of a clear slot, and runners in the subject's
+slot. Each has a proved lemma in one setting: the grid nudge (`GridNudgeN`, every reading on an eighth) and the
+doubled slot (`DoubledSlotN`, `DoubledNbhdN`, the AP family). What is owed is their form at a general live lattice `D`
+with off-lattice readings. No overturned assumption this entry.
