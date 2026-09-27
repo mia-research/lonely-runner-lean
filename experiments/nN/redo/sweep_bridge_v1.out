@@ -1,0 +1,13 @@
+== band24
+    52656  sweep step
+     3701  bridge: faster runner, lap up
+      498  bridge: slower runner, lap down
+== caseB24
+    51443  bridge: faster runner, lap up
+    51127  sweep step
+    22625  bridge: slower runner, lap down
+== late
+    42373  bridge: faster runner, lap up
+    34578  bridge: slower runner, lap down
+    24384  sweep step
+sweep steps violating the ratio condition: 0
