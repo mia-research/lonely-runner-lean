@@ -4467,3 +4467,36 @@ Case B's earlier certificates, and it is not the analytic proof. What it teaches
 are bounded by the walls `(8k+7)/sᵢ = (8k'+1)/sⱼ`, which are exactly the pairwise conditions of
 `TwoBlockN.lonely_eight_of_pairwise_laps`. Cells cut along walls are the lap-assignment categories (E120: about 52 in the
 band to 40), not boxes; axis-aligned boxes straddle walls and pay for it in count.
+
+---
+
+## E124 — 2026-09-27 — the band covered by 105 categories, cut only along walls, with certificates
+
+Following E123's lesson (the natural cells are bounded by the walls `(8k+7)/sᵢ = (8k'+1)/sⱼ`, the pairwise conditions of
+`lonely_eight_of_pairwise_laps`), the band was covered by **lap-assignment cones** instead of boxes. A cone `C(k)` is
+`{(8kᵢ+1)·sⱼ ≤ (8kⱼ+7)·sᵢ for all i ≠ j}` (`s₀ = 1`); every shape in it is lonely at `R = maxᵢ (8kᵢ+1)/sᵢ`, inside the
+slowest runner's block `k₀`.
+
+**Result** `[VERIFIED — exact, certified, independently checked]` (`LonelyRunner/experiments/nN/redo/`):
+> Every `1 = s₀ ≤ s₁ ≤ … ≤ s₆` with `7 ≤ s₆ ≤ 9` lies in one of **105** cones `C(k)` with `k₀ ∈ {0, 1}`; hence lonely at
+> some `R ∈ [1, 7] ∪ [9, 15]`.
+- **Method:** recursive subtraction from the band polytope, **cut only along cone walls** (never along axes); each piece
+  ends inside a cone or empty. 7,019 nodes: 3,121 cuts, 2,766 cone leaves, 1,132 empty leaves
+  (`band_cover_gen_v3.{py,out}`, tree `band_cover_tree_v3.json.gz`, SHA-256 in `band_cover_tree_v3.SHA256`).
+- **Certificates:** every wall left uncut at a node carries Farkas multipliers showing it holds on the piece; every empty
+  leaf carries an emptiness certificate (strict walls handled by a common slack). Produced by an exact dictionary simplex
+  (`exact_lp.py`; cross-checked against HiGHS on 2,000 random LPs, 0 mismatches; `sympy`'s `lpmax` was found to return
+  infeasible points on 2 of 300 and is not used).
+- **Independent check:** `band_cover_check_v3.py` imports no LP or generator code, rebuilds every piece from the root and
+  verifies every certificate by exact arithmetic: **CHECK PASSED**, 7,019 of 7,019 nodes. Negative controls (a deleted
+  leaf, a cone lap changed by one, a halved multiplier, an empty leaf relabelled as a cone leaf): all rejected.
+- **A first version did not terminate** (`band_cone_cover_exact_v1`, 93,169 cuts and growing): reversed walls taken
+  closed left flat slabs on the walls themselves (`band_cone_cover_diag_v1.out`: 327 of 600 frontier pieces with no
+  interior), re-cut forever. Taking the reversed wall strict (points on a wall belong to the closed cone) fixed it.
+
+**Standing** `[my reading]`: the band is now settled twice by exact computation, independently: boxes (E123, 279,871
+cells) and walls (here, 7,019 nodes). The wall version is organised by the owner's categories: **105 grid placements**,
+each one linear rule proved in Lean. That the 105 exhaust the band is still shown by computation, not by an argument;
+the categories are the rules, and the tree is the bookkeeping of their exhaustion. Lean: each leaf is either membership in
+a cone (the pairwise theorem) or linear infeasibility (a linear combination with the recorded multipliers), so the tree
+translates mechanically; not yet done (size: about 7,000 nodes of certificate arithmetic).
