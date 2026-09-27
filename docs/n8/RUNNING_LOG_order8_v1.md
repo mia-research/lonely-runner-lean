@@ -4642,3 +4642,42 @@ compacted"*.
 **Handover v8** written (`docs/n8/HANDOVER_2026_09_27_v8.md`, v7 kept): v7's §0 stands; adds items 28–31 (setup and
 O8, O1–O7, the checks that caught errors, the owner's rulings), the proof state, the case structure, the mechanism, the
 open step stated exactly. `compile-diff` loss check run next (recorded below when it reports).
+
+---
+
+## E131 — 2026-09-27 — handover v8 loss check (compile-diff): v8 not promoted; v9 repairs; items v8 had with no log entry
+
+**`compile-diff` on v8** (against v7 and E109–E130; agent report, isolated context). Mechanical items all correct on disk
+(8 of 8 modules, every theorem and gate count, every figure checked against the log or `.out`). **Losses found**, each
+repaired in `HANDOVER_2026_09_27_v9.md` (v8 kept, not promoted):
+- Global caveats: v7 was never loss-checked (E109); E114's recorded limit that larger ranges have turned up things smaller
+  ones did not (applies to v8 §4's `m ≤ 4`, measured on readings `≤ 24`, where spread above 12 forces `d_min = 1`).
+- Open items dropped: E110 (the two failure modes at a general live lattice `D`); E118 (what C1 needs); E121 (what bounds
+  the jump at a wall); E122 (why a cover of copy 0 cannot survive the slides); E124 (Lean translation of the wall tree);
+  E125 (the junction open step); E127 (simultaneity of crowds).
+- Routes-not-to-re-derive dropped: E111's entering-edge proxy; E120's survival invariant, blocked-measure count and
+  finite-state-machine route; E125's mirror orientation of the breaking pair.
+- Scope or grade dropped (G1–G8, G12, G14, G15): among them the `1/ε` escape is one family; the supremum shape is
+  `[EMPIRICAL — 64 climbs]`; late landings after run-out is 183 of 183 (Case B to 24: 135,310 after, 75,025 before);
+  `pinch_eventually_lonely` needs a common period; `R* ≤ 1.377` is the 547 constructed C members (1.463 the 4,110
+  cluster-drift sets, E73's climbs to 6.42); **the band to 32 and the late shapes (`m ≤ 2`) were measured with `c`
+  unrestricted**; only the band to 24 has the `c ≤ 7` control.
+- The open step in v8 §4 was stated with `c ∈ {1,3,5,7}` and `m ≤ 4` on Case B, where only `c` unrestricted was measured.
+  The re-check is running (`experiments/nN/redo/grid_class_caseB_c7_v1.{py,out}`, `m ≤ 6`), recorded below when done.
+- Notation: v8 §2's `89/s₇` should be `89/s₆` (band notation `s₀…s₆`).
+- v8 §5 said "carried from v7 §5.10, unchanged" but added a decision and dropped v7's lap-`j` sentence.
+- v8 items with no log entry, now given one here:
+  - the landing's effective places: positions within `1/7` merged, **7 distinct in 186,869 of 328,614** band sets to 32
+    (`experiments/nN/redo/band_effective_order_v1.{py,out}`, commit `9af4203`): the landing is not a disguised
+    order-seven configuration;
+  - strips (E124's method, `redo/strips_progress_v1.txt`, each tree independently checked, CHECK PASSED): `[12,13]` 308,
+    `[13,14]` 337, `[14,15]` 399, `[15,16]` 754, `[16,17]` 762 categories (check of `[16,17]` running at writing);
+    `[VERIFIED — computer-assisted, independently checked]` per strip;
+  - owner, 2026-09-27 (chat): *"Please prove as much as possible in lean right away. It's the backbone and it tends to cut
+    through any context rot/compaction."*
+  - "`m = 2` is a knife-edge" and "the finer grid is the arrangement's own natural unit": my readings of E130, graded so.
+- Consistency with v7, now stated in v9: the wall lemma (L) of v7 §3 step 2 and §5.1 is off the path (O4: the path route
+  moves one runner at a time; `PathWindowN` needs no wall lemma); v7 §0.2's "the event exists by the deformation of the
+  AP's global isolation" holds between whole-number points (order seven plus one free reading, `OneFreeN`) and carries
+  nothing across them (O5); tools: E112 refines the 2026-09-15 ruling, and v7 §1.5's 2026-09-26 ruling (a measure
+  argument inside one window, provisionally, if it completes a proof part) is not withdrawn.
