@@ -1,0 +1,10 @@
+mode A (collider = least reading) : members 297 ; first failing field after climbing: {'ALL': 297, '6,7,9': 3}
+mode B (collider inside the fast cluster) : members 250 ; first failing field after climbing: {'6,7,9': 49, 'ALL': 250, 'one free': 1}
+mode A cascade on 297 members; R* range 1.000..1.234
+    297 cluster spread <= 7
+    297 ('core 1 / cluster 6', 'flank in cluster', 'R* <= 7 (slow runner on its first lap)')
+mode B cascade on 250 members; R* range 1.000..1.377
+    195 cluster spread <= 7
+    245 ('core 1 / cluster 6', 'flank in cluster', 'R* <= 7 (slow runner on its first lap)')
+    4 ('core 2 / cluster 5', 'flank in cluster', 'R* <= 7 (slow runner on its first lap)')
+    1 ('core 2 / cluster 5', 'flank in core', 'R* <= 7 (slow runner on its first lap)')
