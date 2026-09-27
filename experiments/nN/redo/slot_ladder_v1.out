@@ -1,0 +1,41 @@
+N = 24 sets: 346104
+   116280  L0=1  clears
+    61483  L0=2  L0 clears  cascade elsewhere
+    16896  L0=2  L0 clears  cascade on D*
+     6678  L0=2  L0 fails; D*-L0=1  cascade elsewhere
+     1156  L0=2  L0 fails; D*-L0=1  cascade on D*
+    23350  L0=2  L0 fails; D*-L0=2  cascade elsewhere
+     3367  L0=2  L0 fails; D*-L0=2  cascade on D*
+     7770  L0=2  L0 fails; D*-L0=3  cascade elsewhere
+      201  L0=2  L0 fails; D*-L0=3  cascade on D*
+     6002  L0=2  L0 fails; D*-L0=4  cascade elsewhere
+      544  L0=2  L0 fails; D*-L0=4  cascade on D*
+     1119  L0=2  L0 fails; D*-L0=5  cascade elsewhere
+        9  L0=2  L0 fails; D*-L0=5  cascade on D*
+      293  L0=2  L0 fails; D*-L0>=6  cascade elsewhere
+        9  L0=2  L0 fails; D*-L0>=6  cascade on D*
+    27937  L0=3  L0 clears  cascade elsewhere
+     6188  L0=3  L0 clears  cascade on D*
+    21095  L0=3  L0 fails; D*-L0=1  cascade elsewhere
+     2990  L0=3  L0 fails; D*-L0=1  cascade on D*
+     8249  L0=3  L0 fails; D*-L0=2  cascade elsewhere
+      103  L0=3  L0 fails; D*-L0=2  cascade on D*
+     2377  L0=3  L0 fails; D*-L0=3  cascade elsewhere
+        1  L0=3  L0 fails; D*-L0=3  cascade on D*
+     4377  L0=3  L0 fails; D*-L0=4  cascade elsewhere
+      145  L0=3  L0 fails; D*-L0=4  cascade on D*
+      823  L0=3  L0 fails; D*-L0=5  cascade elsewhere
+        2  L0=3  L0 fails; D*-L0=5  cascade on D*
+      306  L0=3  L0 fails; D*-L0>=6  cascade elsewhere
+       20  L0=3  L0 fails; D*-L0>=6  cascade on D*
+    17610  L0=4  L0 clears  cascade elsewhere
+     3060  L0=4  L0 clears  cascade on D*
+     3842  L0=4  L0 fails; D*-L0=1  cascade elsewhere
+       14  L0=4  L0 fails; D*-L0=1  cascade on D*
+      884  L0=4  L0 fails; D*-L0=2  cascade elsewhere
+      831  L0=4  L0 fails; D*-L0=3  cascade elsewhere
+       10  L0=4  L0 fails; D*-L0=3  cascade on D*
+       74  L0=4  L0 fails; D*-L0=4  cascade elsewhere
+        7  L0=4  L0 fails; D*-L0=5  cascade elsewhere
+        1  L0=4  L0 fails; D*-L0>=6  cascade elsewhere
+        1  L0=4  L0 fails; D*-L0>=6  cascade on D*

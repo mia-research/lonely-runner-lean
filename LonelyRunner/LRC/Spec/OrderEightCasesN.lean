@@ -5,6 +5,7 @@ import LonelyRunner.LRC.Spec.ShiftedTotientN
 import LonelyRunner.LRC.Spec.MirrorN
 import LonelyRunner.LRC.Spec.FastPairEightN
 import LonelyRunner.LRC.Spec.BlockSplitEightN
+import LonelyRunner.LRC.Spec.OneFreeEightN
 
 /-!
 # Order eight, whole-number disparities: the framework's rules, and the case they leave
@@ -760,6 +761,8 @@ free flank; the shifted flank's condition fails; and no disparity is more than s
 other; and neither §15 opening applies — first-lap clearance at any flank and index, or the `−7`
 opening at any flank.  The last class needs no field: it is inside `spread` (`lastClass_is_spread`).
 Since §2g, also no clearing resolution `D ≤ resolutionCap8`, disparity or not.
+Since 2026-09-27 (E117), also no six disparities sharing a factor the seventh lacks (`no_one_free`,
+`OneFreeEightN`: order seven on the six, one step on the seventh), which generalises halving.
 
 Since one disparity is odd and some is a multiple of `8`, the cost condition leaves exactly the
 shapes `(multiples of 8, non-multiples) = (1, 6), (2, 5), (3, 4)`, and `(4, 3)` with one of the
@@ -788,6 +791,8 @@ structure EightResidual (S : Finset ℕ) : Prop where
   no_small_resolution : ∀ D, 0 < D → D ≤ resolutionCap8 → ∀ j, ¬ ResolutionClears8 S D j
   no_fast_pair : ¬ FastPair8 S
   no_block_split : ¬ BlockSplit8 S
+  /-- No six readings share a factor the seventh lacks (`OneFreeEightN`, E117; generalises halving). -/
+  no_one_free : ∀ x ∈ S, ∀ g, 2 ≤ g → (∀ d ∈ S, d ≠ x → g ∣ d) → g ∣ x
 
 /-- **Order eight, whole numbers.**  A set of at most seven positive disparities, one of them odd,
 is lonely at `1/8`, or it is in `EightResidual`. -/
@@ -869,9 +874,12 @@ theorem lonely_eight_or_residual {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
   · exact Or.inl (lonely_eight_of_fastPair hpos hc7 hfp)
   by_cases hbs : BlockSplit8 S
   · exact Or.inl (lonely_eight_of_blockSplit hpos hc7 hbs)
+  by_cases hof : ∃ x ∈ S, ∃ g, 2 ≤ g ∧ (∀ d ∈ S, d ≠ x → g ∣ d) ∧ ¬ g ∣ x
+  · obtain ⟨x, hx, g, hg, hdiv, hnd⟩ := hof
+    exact Or.inl (LRC.OneFreeEight.lonely_eight_of_one_free hpos hcard hx hg hdiv hnd)
   right
   push Not at hcost hff hfast
-  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_, hfp, hbs⟩
+  refine ⟨hc7, hodd, hcf, h5, h6, h7, h8, hsp, hcost, hff, hsh, hfast, ?_, ?_, ?_, ?_, ?_, ?_, ?_, hfp, hbs, ?_⟩
   · intro e heS k hk; exact hfl ⟨e, heS, k, hk⟩
   · intro e heS he; exact hm7 ⟨e, heS, he⟩
   · intro e heS N hN8 hNe i hi; exact hro ⟨e, heS, N, hN8, hNe, i, hi⟩
@@ -879,6 +887,7 @@ theorem lonely_eight_or_residual {S : Finset ℕ} (hpos : ∀ d ∈ S, 0 < d) (h
   · intro e heS he5 i hi; exact hfi ⟨e, heS, he5, i, hi⟩
   · intro e heS N hN hNe i hi; exact hsn ⟨e, heS, N, hN, hNe, i, hi⟩
   · intro D hD hDc j hj; exact hres ⟨D, hD, hDc, j, hj⟩
+  · intro x hx g hg hdiv; by_contra hnd; exact hof ⟨x, hx, g, hg, hdiv, hnd⟩
 
 /-! ## 4. what order eight reduces to -/
 

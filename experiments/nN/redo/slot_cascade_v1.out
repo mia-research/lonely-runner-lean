@@ -1,0 +1,151 @@
+N = 24  slot sets (8 | some d, cost >= 8, max > 7 min): 134350
+    11914  noncollider-flank r=2      K=0    R<=1  nC=1   e.g. (2, 3, 4, 5, 6, 7, 24) flank 2 lap 0 t* 1/16
+     9898  collider-flank             K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 9, 24) flank 24 lap 1 t* 3/64
+     9684  noncollider-flank r=7      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 8, 23) flank 23 lap 1 t* 9/184
+     9013  collider-flank             K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 7, 8, 24) flank 24 lap 1 t* 3/64
+     6829  collider-flank             K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 5, 6, 24) flank 24 lap 3 t* 25/192
+     6003  noncollider-flank r=6      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 8, 22) flank 22 lap 1 t* 9/176
+     5037  noncollider-flank r=1      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 17, 19, 24) flank 17 lap 1 t* 9/136
+     4918  collider-flank             K=2    R<2   nC=1   e.g. (2, 3, 4, 5, 13, 15, 24) flank 24 lap 2 t* 17/192
+     4640  noncollider-flank r=6      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 5, 8, 22) flank 22 lap 3 t* 25/176
+     4524  noncollider-flank r=7      K=2    R<2   nC=1   e.g. (2, 3, 4, 5, 13, 16, 23) flank 23 lap 2 t* 17/184
+     3497  noncollider-flank r=7      K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 8, 16, 23) flank 23 lap 1 t* 9/184
+     3394  noncollider-flank r=5      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 21, 24) flank 21 lap 1 t* 3/56
+     3043  noncollider-flank r=7      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 5, 16, 23) flank 23 lap 3 t* 25/184
+     2925  noncollider-flank r=6      K=2    R<2   nC=1   e.g. (2, 3, 4, 5, 13, 16, 22) flank 22 lap 2 t* 17/176
+     2860  noncollider-flank r=4      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 20, 24) flank 20 lap 1 t* 9/160
+     2502  collider-flank             K=2    R<2   nC=2   e.g. (2, 3, 4, 5, 13, 16, 24) flank 24 lap 2 t* 17/192
+     2500  noncollider-flank r=3      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 7, 19, 24) flank 19 lap 1 t* 9/152
+     2424  noncollider-flank r=2      K=1    R<2   nC=1   e.g. (3, 4, 5, 6, 8, 18, 22) flank 18 lap 1 t* 1/16
+     2380  noncollider-flank r=2      K=0    R<=1  nC=2   e.g. (2, 3, 4, 5, 6, 8, 24) flank 2 lap 0 t* 1/16
+     1949  noncollider-flank r=5      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 5, 8, 21) flank 21 lap 3 t* 25/168
+     1911  noncollider-flank r=5      K=2    R<2   nC=1   e.g. (2, 3, 4, 8, 12, 15, 21) flank 21 lap 2 t* 17/168
+     1734  noncollider-flank r=6      K=3    R<2   nC=2   e.g. (1, 2, 3, 4, 8, 16, 22) flank 22 lap 3 t* 25/176
+     1634  noncollider-flank r=3      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 7, 8, 19) flank 19 lap 3 t* 25/152
+     1583  noncollider-flank r=7      K=2    R<2   nC=2   e.g. (2, 3, 4, 8, 13, 16, 23) flank 23 lap 2 t* 17/184
+     1574  noncollider-flank r=6      K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 8, 16, 22) flank 22 lap 1 t* 9/176
+     1510  collider-flank             K=1    R<2   nC=3   e.g. (3, 4, 5, 6, 8, 16, 24) flank 24 lap 1 t* 3/64
+     1231  noncollider-flank r=4      K=2    R<2   nC=1   e.g. (2, 3, 4, 11, 13, 16, 20) flank 20 lap 2 t* 17/160
+     1224  noncollider-flank r=6      K=2    R<2   nC=2   e.g. (2, 3, 4, 8, 13, 16, 22) flank 22 lap 2 t* 17/176
+     1190  noncollider-flank r=4      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 8, 14, 20) flank 20 lap 3 t* 5/32
+     1183  noncollider-flank r=5      K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 8, 21, 24) flank 21 lap 1 t* 3/56
+     1095  noncollider-flank r=2      K=3    R<2   nC=1   e.g. (1, 2, 3, 4, 7, 8, 18) flank 18 lap 3 t* 25/144
+      878  noncollider-flank r=5      K=3    R<2   nC=2   e.g. (1, 2, 3, 4, 8, 16, 21) flank 21 lap 3 t* 25/168
+      853  noncollider-flank r=5      K>=4   R<2   nC=1   e.g. (1, 2, 3, 4, 6, 8, 21) flank 21 lap 4 t* 11/56
+      851  noncollider-flank r=4      K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 8, 20, 24) flank 20 lap 1 t* 9/160
+      843  noncollider-flank r=3      K=2    R<2   nC=1   e.g. (2, 3, 4, 11, 13, 16, 19) flank 19 lap 2 t* 17/152
+      814  noncollider-flank r=1      K=1    R<2   nC=2   e.g. (3, 4, 5, 8, 17, 19, 24) flank 17 lap 1 t* 9/136
+      716  noncollider-flank r=3      K=1    R<2   nC=2   e.g. (3, 4, 5, 6, 8, 19, 24) flank 19 lap 1 t* 9/152
+      692  noncollider-flank r=7      K>=4   R<2   nC=1   e.g. (1, 2, 3, 7, 8, 12, 23) flank 23 lap 4 t* 33/184
+      681  collider-flank             K>=4   R<2   nC=1   e.g. (1, 2, 3, 4, 7, 13, 24) flank 24 lap 4 t* 11/64
+      632  collider-flank             K=2    R>=2  nC=1   e.g. (3, 4, 5, 13, 15, 19, 24) flank 24 lap 2 t* 17/192
+      563  collider-flank             K>=4   R<2   nC=2   e.g. (1, 2, 3, 7, 8, 13, 24) flank 24 lap 4 t* 11/64
+      532  noncollider-flank r=7      K=2    R>=2  nC=1   e.g. (3, 4, 5, 13, 16, 18, 23) flank 23 lap 2 t* 17/184
+      515  noncollider-flank r=2      K=1    R<2   nC=2   e.g. (3, 4, 5, 8, 18, 19, 24) flank 18 lap 1 t* 1/16
+      500  noncollider-flank r=1      K=3    R<2   nC=1   e.g. (1, 2, 3, 7, 8, 12, 17) flank 17 lap 3 t* 25/136
+      485  noncollider-flank r=7      K=3    R<2   nC=2   e.g. (1, 2, 3, 4, 16, 23, 24) flank 23 lap 3 t* 25/184
+      420  noncollider-flank r=6      K>=4   R<2   nC=1   e.g. (1, 2, 3, 7, 8, 12, 22) flank 22 lap 4 t* 3/16
+      413  collider-flank             K=2    R>=2  nC=2   e.g. (3, 4, 5, 13, 16, 19, 24) flank 24 lap 2 t* 17/192
+      401  noncollider-flank r=6      K=2    R>=2  nC=1   e.g. (3, 4, 5, 13, 16, 18, 22) flank 22 lap 2 t* 17/176
+      399  collider-flank             K=3    R<2   nC=2   e.g. (1, 2, 3, 6, 7, 8, 16) flank 16 lap 3 t* 25/128
+      397  noncollider-flank r=4      K=3    R<2   nC=2   e.g. (1, 2, 3, 8, 14, 16, 20) flank 20 lap 3 t* 5/32
+      368  noncollider-flank r=5      K=2    R<2   nC=2   e.g. (2, 3, 8, 12, 13, 16, 21) flank 21 lap 2 t* 17/168
+      360  noncollider-flank r=4      K=2    R<2   nC=2   e.g. (2, 3, 8, 11, 13, 16, 20) flank 20 lap 2 t* 17/160
+      304  noncollider-flank r=2      K=3    R<2   nC=2   e.g. (1, 2, 3, 7, 8, 16, 18) flank 18 lap 3 t* 25/144
+      291  noncollider-flank r=7      K=1    R<2   nC=3   e.g. (3, 4, 5, 8, 16, 23, 24) flank 23 lap 1 t* 9/184
+      276  noncollider-flank r=2      K=2    R<2   nC=1   e.g. (2, 3, 10, 12, 15, 18, 24) flank 18 lap 2 t* 17/144
+      251  noncollider-flank r=5      K>=4   R<2   nC=2   e.g. (1, 2, 3, 6, 8, 16, 21) flank 21 lap 4 t* 11/56
+      219  noncollider-flank r=3      K=3    R<2   nC=2   e.g. (1, 2, 3, 7, 8, 16, 19) flank 19 lap 3 t* 25/152
+      199  noncollider-flank r=2      K>=4   R<2   nC=1   e.g. (1, 2, 5, 6, 7, 8, 18) flank 18 lap 4 t* 11/48
+      194  noncollider-flank r=4      K>=4   R<2   nC=1   e.g. (1, 2, 3, 6, 7, 16, 20) flank 20 lap 4 t* 33/160
+      193  noncollider-flank r=4      K=1    R>=2  nC=1   e.g. (3, 4, 5, 12, 15, 19, 24) flank 12 lap 1 t* 3/32
+      176  noncollider-flank r=7      K>=4   R<2   nC=2   e.g. (1, 2, 7, 8, 12, 16, 23) flank 23 lap 4 t* 33/184
+      173  noncollider-flank r=6      K=3    R>=2  nC=1   e.g. (3, 4, 9, 13, 16, 20, 22) flank 22 lap 3 t* 25/176
+      172  collider-flank             K=3    R>=2  nC=1   e.g. (3, 4, 10, 14, 17, 19, 24) flank 24 lap 3 t* 25/192
+      171  noncollider-flank r=4      K=2    R>=2  nC=1   e.g. (3, 4, 5, 13, 16, 20, 22) flank 20 lap 2 t* 17/160
+      162  noncollider-flank r=5      K=2    R>=2  nC=1   e.g. (3, 4, 12, 14, 17, 21, 24) flank 21 lap 2 t* 17/168
+      148  noncollider-flank r=7      K=2    R>=2  nC=2   e.g. (3, 4, 8, 13, 16, 18, 23) flank 23 lap 2 t* 17/184
+      147  noncollider-flank r=6      K=2    R>=2  nC=2   e.g. (3, 4, 8, 13, 16, 18, 22) flank 22 lap 2 t* 17/176
+      144  collider-flank             K=2    R<2   nC=3   e.g. (2, 3, 4, 8, 13, 16, 24) flank 24 lap 2 t* 17/192
+      128  noncollider-flank r=7      K=2    R<2   nC=3   e.g. (2, 3, 8, 13, 16, 23, 24) flank 23 lap 2 t* 17/184
+      125  noncollider-flank r=3      K>=4   R<2   nC=1   e.g. (1, 2, 6, 7, 10, 16, 19) flank 19 lap 4 t* 33/152
+      123  noncollider-flank r=6      K=3    R<2   nC=3   e.g. (1, 2, 3, 8, 16, 22, 24) flank 22 lap 3 t* 25/176
+      121  noncollider-flank r=3      K=2    R<2   nC=2   e.g. (2, 3, 11, 13, 16, 19, 24) flank 19 lap 2 t* 17/152
+      120  noncollider-flank r=3      K=2    R>=2  nC=1   e.g. (3, 4, 11, 12, 15, 19, 24) flank 19 lap 2 t* 17/152
+      117  noncollider-flank r=6      K=2    R<2   nC=3   e.g. (2, 3, 8, 13, 16, 22, 24) flank 22 lap 2 t* 17/176
+      100  noncollider-flank r=1      K=2    R<2   nC=1   e.g. (1, 2, 5, 6, 7, 9, 16) flank 9 lap 2 t* 17/72
+       93  noncollider-flank r=7      K=3    R>=2  nC=1   e.g. (3, 4, 10, 13, 16, 18, 23) flank 23 lap 3 t* 25/184
+       91  noncollider-flank r=5      K=3    R<2   nC=3   e.g. (1, 2, 3, 8, 16, 21, 24) flank 21 lap 3 t* 25/168
+       85  noncollider-flank r=4      K=1    R>=2  nC=2   e.g. (3, 4, 8, 12, 15, 19, 24) flank 12 lap 1 t* 3/32
+       82  noncollider-flank r=5      K=1    R<2   nC=3   e.g. (3, 4, 5, 8, 16, 21, 24) flank 21 lap 1 t* 3/56
+       82  noncollider-flank r=2      K=1    R>=2  nC=1   e.g. (3, 4, 10, 12, 15, 19, 24) flank 10 lap 1 t* 9/80
+       81  noncollider-flank r=1      K=3    R<2   nC=2   e.g. (1, 2, 7, 8, 12, 17, 24) flank 17 lap 3 t* 25/136
+       79  collider-flank             K>=4   R>=2  nC=1   e.g. (3, 9, 10, 14, 15, 19, 24) flank 24 lap 4 t* 11/64
+       78  noncollider-flank r=6      K=1    R<2   nC=3   e.g. (3, 4, 5, 8, 16, 22, 24) flank 22 lap 1 t* 9/176
+       76  noncollider-flank r=4      K=2    R>=2  nC=2   e.g. (3, 4, 8, 13, 16, 20, 22) flank 20 lap 2 t* 17/160
+       75  noncollider-flank r=3      K=1    R>=2  nC=1   e.g. (3, 4, 11, 13, 16, 18, 22) flank 11 lap 1 t* 9/88
+       75  noncollider-flank r=4      K=3    R>=2  nC=1   e.g. (3, 9, 11, 14, 16, 20, 22) flank 20 lap 3 t* 5/32
+       62  noncollider-flank r=5      K=3    R>=2  nC=1   e.g. (3, 8, 12, 15, 19, 21, 22) flank 21 lap 3 t* 25/168
+       61  collider-flank             K>=4   R<2   nC=3   e.g. (1, 2, 7, 8, 13, 16, 24) flank 24 lap 4 t* 11/64
+       60  noncollider-flank r=7      K>=4   R>=2  nC=1   e.g. (3, 7, 10, 13, 16, 18, 23) flank 23 lap 4 t* 33/184
+       54  collider-flank             K=1    R>=2  nC=2   e.g. (3, 8, 10, 13, 16, 18, 23) flank 8 lap 1 t* 9/64
+       52  noncollider-flank r=6      K>=4   R>=2  nC=1   e.g. (2, 6, 8, 9, 11, 14, 15) flank 14 lap 4 t* 33/112
+       51  noncollider-flank r=3      K=3    R>=2  nC=1   e.g. (3, 8, 11, 14, 15, 19, 22) flank 19 lap 3 t* 25/152
+       46  noncollider-flank r=2      K=1    R>=2  nC=2   e.g. (3, 4, 10, 13, 16, 19, 24) flank 10 lap 1 t* 9/80
+       44  collider-flank             K=2    R>=2  nC=3   e.g. (3, 4, 8, 13, 16, 19, 24) flank 24 lap 2 t* 17/192
+       41  noncollider-flank r=6      K=3    R>=2  nC=2   e.g. (3, 8, 9, 13, 16, 20, 22) flank 22 lap 3 t* 25/176
+       40  noncollider-flank r=6      K>=4   R<2   nC=2   e.g. (1, 2, 7, 8, 12, 22, 24) flank 22 lap 4 t* 3/16
+       38  collider-flank             K=3    R<2   nC=3   e.g. (1, 2, 6, 7, 8, 16, 24) flank 16 lap 3 t* 25/128
+       37  noncollider-flank r=5      K=2    R>=2  nC=2   e.g. (3, 8, 12, 14, 17, 21, 24) flank 21 lap 2 t* 17/168
+       36  noncollider-flank r=4      K=1    R<2   nC=3   e.g. (2, 3, 8, 12, 13, 16, 24) flank 12 lap 1 t* 3/32
+       35  noncollider-flank r=5      K>=4   R>=2  nC=1   e.g. (2, 6, 9, 13, 16, 21, 22) flank 21 lap 4 t* 11/56
+       33  noncollider-flank r=3      K=2    R>=2  nC=2   e.g. (3, 4, 11, 13, 16, 19, 24) flank 19 lap 2 t* 17/152
+       32  noncollider-flank r=1      K>=4   R<2   nC=1   e.g. (1, 2, 5, 7, 13, 17, 24) flank 17 lap 4 t* 33/136
+       31  noncollider-flank r=2      K=3    R>=2  nC=1   e.g. (3, 7, 10, 13, 16, 18, 22) flank 18 lap 3 t* 25/144
+       31  noncollider-flank r=2      K=2    R>=2  nC=1   e.g. (3, 10, 12, 15, 18, 19, 24) flank 18 lap 2 t* 17/144
+       30  noncollider-flank r=7      K=1    R>=2  nC=1   e.g. (3, 7, 10, 14, 17, 20, 24) flank 7 lap 1 t* 9/56
+       28  noncollider-flank r=2      K=2    R<2   nC=2   e.g. (1, 2, 6, 7, 8, 10, 16) flank 10 lap 2 t* 17/80
+       28  noncollider-flank r=4      K>=4   R<2   nC=2   e.g. (1, 2, 6, 7, 8, 16, 20) flank 20 lap 4 t* 33/160
+       27  noncollider-flank r=4      K=3    R<2   nC=3   e.g. (1, 2, 8, 14, 16, 20, 24) flank 20 lap 3 t* 5/32
+       26  noncollider-flank r=3      K=1    R<2   nC=3   e.g. (2, 3, 8, 11, 13, 16, 24) flank 11 lap 1 t* 9/88
+       22  noncollider-flank r=1      K=3    R>=2  nC=1   e.g. (3, 7, 10, 14, 17, 19, 24) flank 17 lap 3 t* 25/136
+       22  noncollider-flank r=3      K>=4   R<2   nC=2   e.g. (1, 6, 7, 8, 10, 16, 19) flank 19 lap 4 t* 33/152
+       21  noncollider-flank r=3      K=3    R>=2  nC=2   e.g. (3, 8, 11, 14, 16, 19, 22) flank 19 lap 3 t* 25/152
+       20  noncollider-flank r=2      K>=4   R<2   nC=2   e.g. (1, 5, 6, 7, 8, 16, 18) flank 18 lap 4 t* 11/48
+       19  collider-flank             K>=4   R>=2  nC=2   e.g. (3, 8, 10, 14, 15, 19, 24) flank 24 lap 4 t* 11/64
+       19  noncollider-flank r=4      K=2    R<2   nC=3   e.g. (2, 8, 11, 13, 16, 20, 24) flank 20 lap 2 t* 17/160
+       18  noncollider-flank r=3      K>=4   R>=2  nC=1   e.g. (2, 6, 8, 12, 15, 19, 21) flank 19 lap 4 t* 33/152
+       17  collider-flank             K=1    R>=2  nC=3   e.g. (3, 8, 10, 13, 16, 19, 24) flank 8 lap 1 t* 9/64
+       17  noncollider-flank r=6      K=2    R>=2  nC=3   e.g. (3, 8, 13, 16, 18, 22, 24) flank 22 lap 2 t* 17/176
+       16  noncollider-flank r=5      K>=4   R<2   nC=3   e.g. (1, 2, 6, 8, 16, 21, 24) flank 21 lap 4 t* 11/56
+       16  noncollider-flank r=2      K=3    R<2   nC=3   e.g. (1, 2, 7, 8, 16, 18, 24) flank 18 lap 3 t* 25/144
+       13  noncollider-flank r=3      K=1    R>=2  nC=2   e.g. (3, 8, 11, 13, 16, 18, 22) flank 11 lap 1 t* 9/88
+       12  noncollider-flank r=4      K=3    R>=2  nC=2   e.g. (3, 8, 10, 14, 17, 20, 24) flank 20 lap 3 t* 5/32
+       10  noncollider-flank r=4      K>=4   R>=2  nC=1   e.g. (2, 7, 11, 13, 16, 18, 20) flank 20 lap 4 t* 33/160
+        8  noncollider-flank r=5      K=3    R>=2  nC=2   e.g. (3, 8, 12, 15, 19, 21, 24) flank 21 lap 3 t* 25/168
+        8  noncollider-flank r=7      K=2    R>=2  nC=3   e.g. (3, 8, 13, 16, 18, 23, 24) flank 23 lap 2 t* 17/184
+        7  noncollider-flank r=6      K=1    R>=2  nC=1   e.g. (2, 6, 7, 8, 10, 12, 15) flank 6 lap 1 t* 3/16
+        7  noncollider-flank r=7      K=1    R>=2  nC=2   e.g. (2, 7, 8, 9, 11, 14, 16) flank 7 lap 1 t* 9/56
+        7  noncollider-flank r=5      K=2    R<2   nC=3   e.g. (2, 8, 12, 13, 16, 21, 24) flank 21 lap 2 t* 17/168
+        7  noncollider-flank r=7      K>=4   R<2   nC=3   e.g. (1, 7, 8, 12, 16, 23, 24) flank 23 lap 4 t* 33/184
+        6  noncollider-flank r=4      K=1    R>=2  nC=3   e.g. (3, 8, 12, 13, 16, 19, 24) flank 12 lap 1 t* 3/32
+        6  noncollider-flank r=7      K=3    R>=2  nC=2   e.g. (3, 10, 13, 16, 18, 23, 24) flank 23 lap 3 t* 25/184
+        6  collider-flank             K=3    R>=2  nC=2   e.g. (2, 6, 8, 9, 11, 14, 16) flank 16 lap 3 t* 25/128
+        6  noncollider-flank r=1      K=2    R<2   nC=2   e.g. (1, 5, 6, 7, 9, 16, 24) flank 9 lap 2 t* 17/72
+        6  noncollider-flank r=7      K>=4   R>=2  nC=2   e.g. (1, 5, 7, 8, 13, 23, 24) flank 23 lap 6 t* 49/184
+        5  collider-flank             K>=4   R>=2  nC=3   e.g. (3, 8, 10, 14, 16, 19, 24) flank 24 lap 4 t* 11/64
+        5  noncollider-flank r=1      K=2    R>=2  nC=1   e.g. (3, 9, 11, 14, 15, 19, 24) flank 9 lap 2 t* 17/72
+        5  noncollider-flank r=2      K>=4   R>=2  nC=1   e.g. (2, 7, 10, 11, 14, 16, 18) flank 18 lap 4 t* 11/48
+        4  noncollider-flank r=4      K=2    R>=2  nC=3   e.g. (3, 8, 11, 13, 16, 20, 24) flank 20 lap 2 t* 17/160
+        4  noncollider-flank r=1      K>=4   R>=2  nC=1   e.g. (1, 4, 5, 6, 8, 14, 17) flank 17 lap 5 t* 41/136
+        3  noncollider-flank r=1      K=3    R>=2  nC=2   e.g. (3, 8, 10, 14, 17, 19, 24) flank 17 lap 3 t* 25/136
+        3  noncollider-flank r=5      K>=4   R>=2  nC=2   e.g. (1, 4, 5, 6, 8, 16, 21) flank 21 lap 6 t* 7/24
+        2  noncollider-flank r=4      K=3    R>=2  nC=3   e.g. (3, 8, 10, 14, 16, 20, 24) flank 20 lap 3 t* 5/32
+        2  collider-flank             K=3    R>=2  nC=3   e.g. (3, 8, 11, 14, 16, 19, 24) flank 16 lap 3 t* 25/128
+        2  noncollider-flank r=6      K=1    R>=2  nC=2   e.g. (2, 6, 8, 10, 14, 15, 24) flank 6 lap 1 t* 3/16
+        2  noncollider-flank r=6      K=3    R>=2  nC=3   e.g. (2, 6, 8, 10, 14, 16, 24) flank 14 lap 3 t* 25/112
+        2  noncollider-flank r=2      K=3    R>=2  nC=2   e.g. (2, 7, 10, 13, 16, 18, 24) flank 18 lap 3 t* 25/144
+        2  noncollider-flank r=6      K>=4   R>=2  nC=2   e.g. (1, 4, 5, 6, 8, 14, 16) flank 14 lap 4 t* 33/112
+        1  noncollider-flank r=5      K=1    R>=2  nC=1   e.g. (2, 5, 7, 8, 10, 12, 15) flank 5 lap 1 t* 9/40
+        1  noncollider-flank r=7      K=1    R>=2  nC=3   e.g. (2, 7, 8, 10, 14, 16, 24) flank 7 lap 1 t* 9/56
+        1  noncollider-flank r=2      K>=4   R>=2  nC=2   e.g. (1, 4, 6, 8, 10, 14, 16) flank 10 lap 4 t* 33/80

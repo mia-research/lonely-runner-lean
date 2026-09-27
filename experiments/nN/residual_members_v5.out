@@ -1,0 +1,54 @@
+2s, 400 restarts
+members with all current fields: 47
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 1 moves, flank = reading #6 of 7, lap 1, R* = 1.118, spread 8.51
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 7 of 67 j; cascade 2 moves, flank = reading #3 of 7, lap 1, R* = 1.550, spread 8.00
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 1 moves, flank = reading #6 of 7, lap 1, R* = 1.096, spread 8.83
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 3 moves, flank = reading #4 of 7, lap 1, R* = 1.570, spread 8.25
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 3 moves, flank = reading #3 of 7, lap 1, R* = 1.442, spread 8.56
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.337, spread 8.81
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 3 moves, flank = reading #4 of 7, lap 1, R* = 1.659, spread 7.67
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 9 of 67 j; cascade 5 moves, flank = reading #7 of 7, lap 2, R* = 2.094, spread 8.12
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 5 of 67 j; cascade 1 moves, flank = reading #5 of 7, lap 1, R* = 1.255, spread 7.76
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.357, spread 7.89
+  L0=67: grid part 1 (d/L0 mod 8 [7]), deviation 6; L0 clears at 14 of 67 j; cascade 3 moves, flank = reading #3 of 7, lap 1, R* = 1.706, spread 8.61
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 7 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.345, spread 8.15
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.475, spread 7.63
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 3 moves, flank = reading #5 of 7, lap 1, R* = 1.361, spread 8.63
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.414, spread 8.05
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 12 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.410, spread 8.40
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 13 of 67 j; cascade 2 moves, flank = reading #3 of 7, lap 1, R* = 1.585, spread 7.13
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #3 of 7, lap 1, R* = 1.439, spread 8.75
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.406, spread 8.73
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 4 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.330, spread 8.60
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.467, spread 7.25
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 1 moves, flank = reading #4 of 7, lap 1, R* = 1.231, spread 8.27
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 1 moves, flank = reading #6 of 7, lap 1, R* = 1.214, spread 8.66
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 4 moves, flank = reading #4 of 7, lap 1, R* = 1.771, spread 7.95
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 9 of 67 j; cascade 2 moves, flank = reading #6 of 7, lap 1, R* = 1.395, spread 8.07
+  L0=67: grid part 1 (d/L0 mod 8 [4]), deviation 6; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.589, spread 7.52
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.487, spread 8.13
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 6 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.294, spread 8.87
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #6 of 7, lap 1, R* = 1.366, spread 7.79
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 5 moves, flank = reading #6 of 7, lap 2, R* = 1.945, spread 8.88
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 6 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.566, spread 8.88
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 3 moves, flank = reading #3 of 7, lap 1, R* = 1.709, spread 7.97
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 5 moves, flank = reading #7 of 7, lap 2, R* = 2.125, spread 8.00
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 9 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.336, spread 8.78
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 5 of 67 j; cascade 3 moves, flank = reading #2 of 7, lap 1, R* = 1.937, spread 7.39
+  L0=67: grid part 1 (d/L0 mod 8 [2]), deviation 6; L0 clears at 11 of 67 j; cascade 1 moves, flank = reading #6 of 7, lap 1, R* = 1.098, spread 8.43
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 2 moves, flank = reading #3 of 7, lap 1, R* = 1.596, spread 8.70
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 14 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.641, spread 8.50
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 9 of 67 j; cascade 3 moves, flank = reading #3 of 7, lap 1, R* = 1.720, spread 7.57
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 7 of 67 j; cascade 1 moves, flank = reading #5 of 7, lap 1, R* = 1.251, spread 8.25
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 7 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.411, spread 8.36
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 10 of 67 j; cascade 2 moves, flank = reading #5 of 7, lap 1, R* = 1.319, spread 8.83
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.444, spread 8.45
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 8 of 67 j; cascade 1 moves, flank = reading #4 of 7, lap 1, R* = 1.182, spread 8.64
+  L0=67: grid part 0 (d/L0 mod 8 []), deviation 7; L0 clears at 11 of 67 j; cascade 2 moves, flank = reading #4 of 7, lap 1, R* = 1.455, spread 8.18
+  L0=67: grid part 1 (d/L0 mod 8 [5]), deviation 6; L0 clears at 10 of 67 j; cascade 1 moves, flank = reading #3 of 7, lap 1, R* = 1.267, spread 8.12
+  L0=67: grid part 1 (d/L0 mod 8 [6]), deviation 6; L0 clears at 13 of 67 j; cascade 3 moves, flank = reading #4 of 7, lap 1, R* = 1.517, spread 8.46
+summary over 47 members:
+   bound blocked by the largest 47
+   ('lap 1', 'flank is a middle reading') 44
+   ('lap 2', 'flank is a middle reading') 1
+   ('lap 2', 'flank is the largest') 2
