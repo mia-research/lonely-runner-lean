@@ -1,0 +1,15 @@
+sup shape (1, 2.3509, 3.2412, 4.1886, 5.2223, 5.7871, 7.4378) 
+ lonely set in [1,16]: [(6.3191, 6.3191), (11.9659, 12.0326), (12.6496, 12.7726), (13.0415, 13.1309), (14.1171, 14.5008)]
+ landing R* = 6.31906; positions mod 8: [6.3191, 6.8555, 4.4813, 2.468, 1.0, 4.5689, 7.0]
+   reading 1 -0.005 -> first lonely R 6.3191
+   reading 1 +0.005 -> first lonely R 6.3191
+   reading 2 -0.005 -> first lonely R 6.3191
+   reading 2 +0.005 -> first lonely R 5.2369
+   reading 3 -0.005 -> first lonely R 6.3191
+   reading 3 +0.005 -> first lonely R 6.3191
+   reading 4 -0.005 -> first lonely R 9.0000
+   reading 4 +0.005 -> first lonely R 6.3130
+   reading 5 -0.005 -> first lonely R 1.2100
+   reading 5 +0.005 -> first lonely R 6.3191
+   reading 6 -0.005 -> first lonely R 5.2450
+   reading 6 +0.005 -> first lonely R 1.2092
