@@ -4566,3 +4566,41 @@ exactly on laps `k` with `ρ ≤ (8k+7)/(8k+1)`, of length `((8k+7) − (8k+1)ρ
 crowds (effective runners, valid up to a lap set by their spread) nested by gaps: the owner's *"smaller set than it
 looks because of the ordering"*, made quantitative. Not done: the case where a crowd's common blocks run out before the
 nesting reaches it.
+
+---
+
+## E127–E128 — 2026-09-27 — crowds run out; the owner's reference taken literally: a grid through a reading, at 1/m scale, plus a class
+
+**Owner:** *"use the cascade to see what happens when the crowd runs out"*; *"keep attacking the proof, convert to lean
+and keep reducing this proof. use the cascade to find why the gaps line up by 15."* Strip runs restarted at the
+owner's request (E124's method, `[13,14]` onwards).
+
+**E127, crowds** (`crowd_runout_v1/v2.out`, exact): adjacent readings of ratio `ρ` share clear blocks on laps
+`k ≤ ⌊(7 − ρ)/(8(ρ − 1))⌋` (run-out at `R = (8K+7)/s_{i+1}`). Every late band landing (183 of 183) comes after the first
+run-out; Case B to 24: 135,310 after, 75,025 before. After a run-out the cascade pushes the members on different laps:
+the crowd is split at an internal gap with a window resting in it (two-block inside the crowd). Reading `[mine]`: at lap
+`k` a window's relative width is about `1 + 1/(4k)`, so as laps grow any gap between distinct readings admits a window;
+only equal speeds (gap ratio 1) can never be separated, the owner's *"for isolation not to occur you have to break every
+speed being different"*. Simultaneity (all crowds at one instant) is not derived.
+
+**E128, the transfer between copies** (`copy_transfer_v1.out`, 639 late shapes): covering copy 0 does not force the
+top's gap `G₂` open (148 miss it); copy 1's first clear point is exactly `R = 9` in 300 of 639.
+
+**E128, the reference grid** `[VERIFIED — exhaustive exact, finite windows; the family is a finding, not a proof]`: at
+the AP scale write each reading `sᵢ = nᵢ + δᵢ` (grid position plus deviation; doubled slots and a reading captured at 8
+allowed); candidate instants the classes `R = c` (odd `c ≤ 15`), relocated, with lap `⌊c·nᵢ/8⌋` (a captured reading on
+the lap before or at), decided exactly by the pairwise theorem (`grid_class_v1.out`): covers 325,486 of 328,614 band sets
+to 32 but only 118 of 272 late shapes. Allowing the reference grid through any reading `sⱼ` at scale `sⱼ/m`
+(`grid_class_v2/v3`, `grid_class_exceptions_v1.out`):
+- late band shapes: all 272 with `m ≤ 2`;
+- the band to 32 (spread 7–9): all 365,287 with `m ≤ 2`;
+- Case B to readings `≤ 24` (spread 7–24): 210,120 with `m ≤ 2`, the other 215 (spread mostly 21–24) with `m = 3` (210)
+  or `m = 4` (5); every one covered with `m ≤ 4`.
+
+**Reading** `[mine]`: the cascade's categories reorganise into the owner's two systems: **a grid through one of the
+arrangement's own readings, at `1/m` of its scale (`m` small, growing with the spread), and one of the grid's classes
+(`c` odd, a unit mod 8), relocated**. What decides a class is linear in the deviations: interior readings (`c·nᵢ ≡ 2…6`)
+need `|c·δᵢ| ≤ 1` up to relocation; the edge readings (`c·nᵢ ≡ ±1`) need a sign; mirror classes (`c` and `−c`) swap the
+edge roles, which is the pair law when each edge holds one reading. It fails in exactly two ways, both named by the owner:
+a slot doubled at an edge (two readings with `c·nᵢ ≡ 1`), and deviations too large for the class (answered by a finer
+grid, larger `m`). Not derived: that some `(j, m ≤ f(S), c)` always works.
