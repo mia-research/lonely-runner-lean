@@ -4500,3 +4500,37 @@ each one linear rule proved in Lean. That the 105 exhaust the band is still show
 the categories are the rules, and the tree is the bookkeeping of their exhaustion. Lean: each leaf is either membership in
 a cone (the pairwise theorem) or linear infeasibility (a linear combination with the recorded multipliers), so the tree
 translates mechanically; not yet done (size: about 7,000 nodes of certificate arithmetic).
+
+---
+
+## E125 — 2026-09-27 — why the categories exhaust: what the cascade's chain says, and what it does not yet say
+
+**Owner:** *"use the cascade to find why the categories exhaust, not enumeration."* The strip runs (E124's method on
+spread 9–13) were stopped. Recorded before stopping: strips `[9,10]`, `[10,11]`, `[11,12]` covered and independently
+checked (131, 168, 255 categories; 6,611, 8,171, 13,194 nodes), `[12,13]` generated (308 categories), not checked. The
+category count grows with the spread (fast readings wrap more laps).
+
+**The cascade as a chain** `[reasoned from the definition]`: the landing fails to occur before `R` exactly when the open
+windows `((8k−1)/sᵢ, (8k+1)/sᵢ)` chain across `[1, R]`: each window overlaps the next. A junction from runner `a`'s window
+`k` to runner `b`'s window `l` requires `s_b/s_a > (8l−1)/(8k+1)`. Multiplying along the chain between two consecutive
+windows of one runner `a` (laps `k`, `k+1`): `(8k+7)/(8k+1) < ∏ (8lₜ+1)/(8lₜ−1)` over the windows bridging it, i.e. in
+log `R` the bridging windows' log-widths `log((8l+1)/(8l−1)) ≈ 1/(4l)` must exceed the gap's log-length, with overlaps.
+This is E119's comb, now derived from the cascade itself. A budget count does not forbid a cover: each runner supplies
+roughly 0.7–1.0 of log-measure over `[1, 15]` against about 2.7. The obstruction lives in the junction conditions (the
+overlaps), not in the totals.
+
+**Tested, and not the mechanism by themselves** (exact):
+- **Mirror orientation of the breaking pair** (`chain_junctions_v1.out`, 250 late shapes): the pair breaking the chain at
+  the landing had passed the chain in the opposite orientation in 101, both orientations in 57, the same in 21, never in
+  71. The pair law's contradiction needs the two thresholds to come from one resonance (the AP's exact mirror laps); at
+  other laps the orientations are independent conditions.
+- **The cover's refutations** (`cover_certificate_anatomy_v1.out`, `cover_certificate_cycles_v1.out`): the 1,132 empty
+  pieces are refuted by combinations of 2–7 rows, mostly walls spread over all runner pairs; 297 are cycles among runners
+  1–6, 164 cycles or paths through the fixed runner or the range of `s₇`, 671 branch. The certificates are basic LP
+  solutions depending on the arbitrary cutting order, so their shape is not canonical and is not read as the mechanism.
+
+**What is established, and what is not** `[my reading]`: the band is exhausted by 105 categories (E124, exact); the reason
+has the form of junction conditions around the chain, each a ratio bound, whose conjunction across both copies is
+inconsistent; for the AP the conjunction is exactly tight (windows touch) and the pair law is its two-runner case. A
+short argument for the inconsistency in general has not been found; stated as the open step: *no set of ratio bounds of
+junction type can chain both copies `[1, 7]` and `[9, 15]` when the spread is below 9*.
