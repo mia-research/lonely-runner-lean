@@ -1,0 +1,25 @@
+    72368  moves with 1 in the window
+    24073  moves with 2 in the window
+     2395  moves with 3 in the window
+       32  moves with 4 in the window
+    22616  other member at <1 eighths past its edge
+     6002  other member at <2 eighths past its edge
+      341  other member at >=2 eighths past its edge
+    11820  moves left to the landing after a doubled move: 0
+     9263  moves left to the landing after a doubled move: 1
+     3361  moves left to the landing after a doubled move: 2
+     2056  moves left to the landing after a doubled move: 3
+
+examples with three in the window at one move: T, R*, moves (in window, setter, others' positions in eighths, new R):
+   ((2, 3, 4, 5, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 6, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 7, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 8, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 9, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 10, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 11, 15, 16, 17), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
+   ((2, 3, 4, 12, 13, 14, 15), 1.5, [(1, 15, [], 1.2), (3, 12, [1.75, 2.5], 1.5)])
+   ((2, 3, 4, 12, 15, 16, 17), 1.5, [(3, 15, [1.6, 2.2], 1.2), (1, 12, [], 1.5)])
+   ((2, 3, 4, 13, 15, 16, 17), 1.3846153846153846, [(3, 15, [1.6, 2.2], 1.2), (1, 13, [], 1.3846)])
+   ((2, 3, 4, 14, 15, 16, 17), 1.2857142857142858, [(3, 15, [1.6, 2.2], 1.2), (1, 14, [], 1.2857)])
+   ((2, 3, 4, 15, 16, 17, 18), 1.2, [(3, 15, [1.6, 2.2], 1.2)])
