@@ -3984,3 +3984,49 @@ in because it works in another proof.
   relocation where it has none (the two-pinner lemma; proved in three families: `APNeighbourhoodN`,
   `GridNeighbourhoodN`, `DoubledNbhdN`); (2) the window, bounded by the speeds, supplied so far by the box
   certificates where `d_max ≤ 15·d_min` (E52) and measured by E72 (`8·d_min·t ≤ 15`, `[VERIFIED]` for `S ≤ 24`).
+
+---
+
+## E113 — 2026-09-27 — the wall lemma at a simple pinch is the mirror; what the path route then owes
+
+Owner: *"what is next with extending the reduction of proof … AP/Grid relocates the isolation point in a predictable
+way that does not cannot destroy it. Two runners at one speed would destroy the isolation … two runners sharing the same
+slot takes a bit of time to sort out but in a very predictable and forced way."* Source read first: E52, E69–E75
+(the reduction to the wall lemma (L)), `DeformationN`, `GrandReturnN`.
+
+**Derivation** `[reasoned in the text; pieces cited are proved; not in Lean as a whole]`:
+1. **Walls are hyperplanes through the origin in the readings.** A pinch (runner `a` leaving at `+1/8` on lap `k`
+   exactly as `b` enters at `−1/8` on lap `m`) is `d_b(8k + 1) = d_a(8m − 1)` (E75 item 3, in readings not ratios).
+2. **The path.** Readings of the slowest runner along the straight line from the AP to a whole-number target (every
+   speed positive, order kept; whole numbers suffice by `RealEightN`, the slowest runner by `EndRunnerN`). A line with
+   rational ends meets a wall at a rational parameter or lies inside it. So every pinch met on the path is at a
+   rational arrangement, where `GrandReturnN.lonely_mirror` holds.
+3. **The mirror swaps the roles.** At a simple pinch `t0` (one runner on each edge, the rest strictly clear) of a
+   whole-number set, the mirror `1 − t0` is lonely, the same two runners pinch it with roles swapped (`a` entering, `b`
+   leaving), and so it lies on the same wall. `t0` opens where `d_b(8k + 1) < d_a(8m − 1)`; the mirror opens on the other
+   side. So a line crossing the wall opens `t0` on one side and `1 − t0` on the other; a line inside the wall keeps the
+   pinch. **At a simple pinch the wall lemma (L) is the mirror.** At the progression this is the pair law: `(1/8, 7/8)`
+   and `(3/8, 5/8)` are mirror pairs (E69, `ProgressionPairN.pair_law`).
+4. **Openness along the path** then holds at every lonely point of the path except where **every** lonely instant is a
+   **multi pinch** (two or more runners on one edge: two runners at one place at `t0`). With margin:
+   `lonelyAt_of_close`; simple pinch: item 3; at irrational parameters no wall is met except one containing the line.
+5. **Closedness** is the window: if lonely then lonely at some `t ≤ T`, uniform along the path (the owner's *"bounded by
+   the speeds"*, E52; measured as E72's `8·d_min·t ≤ 15`). With it the lonely parameters are open, equal to the
+   window-lonely parameters, which are closed (`lonelyAt_of_limit`), and contain `s = 0`; so the whole path is lonely.
+
+**So the path route owes two statements about single whole-number arrangements:**
+- **(A)** a lonely whole-number arrangement has a lonely instant with margin or a simple pinch (not multi pinches only);
+- **(B)** the window: some lonely instant is bounded by the speeds.
+
+**Checks** (`LonelyRunner/experiments/nN/redo/pinch_types_v1`, `mirror_opening_v1`), exact:
+- `[VERIFIED — exhaustive exact, readings ≤ 24]` Of 346,104 sets, **6 have no lonely interval** in `(0, 1/2]`: the three
+  tight instances and three rescalings (`2·(1…7)`, `2·(1,2,3,4,5,7,12)`, `3·(1…7)`). Every one has a simple pinch.
+  **Multi pinches only: 0 sets.** Controls: `1…7` and `(1,2,3,4,5,7,12)` give 2 simple pinches each, as expected.
+- `[VERIFIED — 19 simple pinches × 200 integer directions × both signs]` The mirror is the same pair with roles swapped
+  at all 19. On each side exactly one of `t0`, `1 − t0` opens, swapping with the sign (1,895 and 1,839 each way); the 132
+  cases where neither opens as an interval are exactly the directions inside the wall (normal · direction `= 0`, 132 of
+  132), where the pinch persists.
+
+**Reading, owner's terms:** the only local way to lose the isolation along the path is two runners at one place at every
+lonely instant: the owner's two-in-a-slot, at the slot edge. Two runners at one *speed* is excluded outright (a face;
+injectivity). No overturned assumption this entry.
