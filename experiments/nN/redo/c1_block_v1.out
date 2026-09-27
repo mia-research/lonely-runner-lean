@@ -1,0 +1,7 @@
+      703  ('B>9', 'delayed (not G alone)')
+    95560  ('B>9', "t_G in S's first clear block", 'gap >= 15/7')
+     7023  ('B>9', "t_G in S's first clear block", 'gap in [9/7, 15/7)')
+       59  ('B>9', 't_G in a later block of S (S laps mixed)', 'gap >= 15/7')
+       10  ('B>9', 't_G in a later block of S (S laps mixed)', 'gap in [9/7, 15/7)')
+    25841  ('band', "t_G in S's first clear block", 'gap >= 15/7')
+    16172  ('band', "t_G in S's first clear block", 'gap in [9/7, 15/7)')
