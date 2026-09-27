@@ -1,0 +1,2 @@
+readings <= 24, spread (7, 9]: settled by grid_pair_law alone: 5441 of 42811
+  commonest obstruction among the unsettled: [('an edge empty or doubled', 32101), ('a reading captured (c n = 0 mod 8)', 5259), ('deviation beyond 1/C', 10)]

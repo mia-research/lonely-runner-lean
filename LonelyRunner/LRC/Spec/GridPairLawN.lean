@@ -126,4 +126,34 @@ theorem grid_pair_law {ι : Type*} (S : Finset ι) (x : ι → ℝ) (n : ι → 
       have := scale c' (x i * (n b / x b)) (n i) hc'R hc'C' (hdev i hi).2
       push_cast; simpa using this
 
+/-- **One class of a grid, any number of readings per edge.**  At the instant `u = c · ν` (positions `x i · u` in
+eighths), reading `i` sits at `c · (x i · ν)`, its grid point `c · n i` plus `c` times its deviation.  If no reading is
+captured (`c · n i ≢ 0 mod 8`), interior readings deviate by at most `1/c`, leaving-edge readings do not fall below their
+point (by at most `6/c` above), and entering-edge readings do not rise above it, the subject is lonely at `u`. -/
+theorem grid_class_clear {ι : Type*} (S : Finset ι) (x : ι → ℝ) (n : ι → ℤ) {c : ℤ} (hc : 1 ≤ c) {ν : ℝ}
+    (h : ∀ i ∈ S,
+      ((2 ≤ (c * n i) % 8 ∧ (c * n i) % 8 ≤ 6) ∧ |x i * ν - n i| ≤ 1 / c) ∨
+      ((c * n i) % 8 = 1 ∧ (n i : ℝ) ≤ x i * ν ∧ x i * ν ≤ n i + 6 / c) ∨
+      ((c * n i) % 8 = 7 ∧ (n i : ℝ) - 6 / c ≤ x i * ν ∧ x i * ν ≤ n i)) :
+    ∀ i ∈ S, (8 : ℝ)⁻¹ ≤ circDist (x i * (c * ν) / 8) := by
+  intro i hi
+  have hcR : (0 : ℝ) < c := by exact_mod_cast (by omega : (0 : ℤ) < c)
+  have hx : x i * (c * ν) / 8 = (c * (x i * ν)) / 8 := by ring
+  rw [hx]
+  rcases h i hi with ⟨hr, hd⟩ | ⟨hr, h1, h2⟩ | ⟨hr, h1, h2⟩
+  · apply clear_interior hr
+    have : |(c : ℝ) * (x i * ν) - c * n i| ≤ 1 := by
+      rw [← mul_sub, abs_mul, abs_of_pos hcR]
+      calc (c : ℝ) * |x i * ν - n i| ≤ c * (1 / c) := mul_le_mul_of_nonneg_left hd hcR.le
+        _ = 1 := by field_simp
+    push_cast; exact this
+  · refine clear_leaving hr ?_ ?_ <;> push_cast
+    · nlinarith
+    · have := mul_le_mul_of_nonneg_left h2 hcR.le
+      rw [mul_add, mul_div_cancel₀ _ hcR.ne'] at this; linarith
+  · refine clear_entering hr ?_ ?_ <;> push_cast
+    · have := mul_le_mul_of_nonneg_left h1 hcR.le
+      rw [mul_sub, mul_div_cancel₀ _ hcR.ne'] at this; linarith
+    · nlinarith
+
 end LRC.GridPairLaw

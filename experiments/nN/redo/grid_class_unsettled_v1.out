@@ -1,0 +1,3 @@
+unsettled band sets to 24: 4294
+   Counter({'a capture-free grid exists but fails': 4294})
+   top reading rounds to 8 at the AP scale (captured there): Counter({True: 3449, False: 845})
