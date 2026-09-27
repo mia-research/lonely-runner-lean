@@ -4534,3 +4534,35 @@ has the form of junction conditions around the chain, each a ratio bound, whose 
 inconsistent; for the AP the conjunction is exactly tight (windows touch) and the pair law is its two-runner case. A
 short argument for the inconsistency in general has not been found; stated as the open step: *no set of ratio bounds of
 junction type can chain both copies `[1, 7]` and `[9, 15]` when the spread is below 9*.
+
+---
+
+## E126 — 2026-09-27 — nested blocks: a derivation for separated readings; what Case B's derivation must add
+
+**Owner:** *"We can enumerate stuff but honestly it often is needed if we think and reason about it. We have for case B
+up to 24 and nothing escapes. But we can replace those certs by deriving why that always happens."*
+
+**Proved** (`Spec/NestedBlocksN.lean`, commits `c46405e`, `8822784`; Spec gate PASS **1,910**,
+`experiments/nN/spec_gate_nested_blocks.out`) `[PROVED — axiom-clean]`:
+- `exists_block_in`: an interval of time of length `L` with `8d·L ≥ 14` contains a whole clear block of reading `d`
+  (one period and one block).
+- `nested_clear`: readings with each at least `7/3` of the one before have a common clear instant: nest blocks from the
+  slowest runner up; the last block is clear for all. A derivation, no search.
+- Process note: the first gate run FAILED on the OWED register (`InBlock`, a Prop-valued def, unregistered) after the
+  module had been committed with "axiom-clean" in its message; `InBlock` was then registered as ROUTE
+  (`clear_of_inBlock` proves it sufficient) and the gate re-run: PASS. The commit message preceded the gate; recorded
+  so the order is fixed next time (gate, then commit).
+
+**The worst-phase version, reasoned (not yet in Lean):** an interval of length `ℓ` meeting at most one window of `d'`
+leaves a piece of length at least `min(6u', (ℓ − 2u')/2)` inside one block (`u' = 1/(8d')`); if it meets two windows it
+contains the block between them. In units `λ = ℓ/u`: `λ' = min(6, (λρ − 2)/2)` for a ratio step `ρ`, from `λ₀ = 6`.
+With every consecutive ratio at least 2 the pieces survive all six steps (`6, 5, 4, 3, 2, 1, 0`). Dense readings kill
+the worst-phase bound within two steps: **Case B cannot be derived phase-free**; its derivation has to use the actual
+phases, which is what the cascade's junction conditions (E125) carry.
+
+**Where the derivation of Case B has to act** `[reasoned]`: separated readings nest (above). Dense readings share
+windows at low laps (the cascade pushes them together; E92's crowds); a crowd of spread `ρ` has common clear blocks
+exactly on laps `k` with `ρ ≤ (8k+7)/(8k+1)`, of length `((8k+7) − (8k+1)ρ)/(8M)`. So the derivation's objects are
+crowds (effective runners, valid up to a lap set by their spread) nested by gaps: the owner's *"smaller set than it
+looks because of the ordering"*, made quantitative. Not done: the case where a crowd's common blocks run out before the
+nesting reaches it.
