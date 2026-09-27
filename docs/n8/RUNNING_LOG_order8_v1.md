@@ -5013,3 +5013,25 @@ d_max: `S` is R1 at `d_min`'s scale and `G` (at most six readings) reaches its o
 210,335). **Owed, now precisely:** a statement about `G` alone: `G` is lonely at some instant in the window
 `[1/(8 d_min), 7/(8 s_top)]`, i.e. in `G`'s coordinates `R_G = 8 g₁ t ∈ [g₁/d_min, 7 g₁/s_top]`, a multiplicative window of
 ratio `7 d_min/s_top`. Next: the reduction in Lean (slow group clear on its first block; `G` clear there ⇒ lonely).
+
+---
+
+## E149 — 2026-09-27 — the fast group at its landing: one crowd, or its clusters on consecutive laps
+
+(`LonelyRunner/experiments/nN/redo/fast_group_shape_v1.{py,out}`, exact, the d_max landings of E148.) The fast group `G`
+at its own landing inside the slow group's first block is either on one lap (a common block of `G`: band 6,018 of
+42,013, most often for `|G| ≤ 4`) or split over 2–6 laps; the first split falls at `G`'s largest gap in roughly 60–70%.
+`[reasoned]` A split between `gᵢ` and `gᵢ₊₁` across lap `m` needs only `gᵢ₊₁/gᵢ ≥ ρ_m`, so any gap above the lap's
+threshold can carry it: `G` at its landing is its clusters at the landing's lap thresholds, each on one lap: the block
+rule (`lonely_eight_of_blocks`) inside `G`, consistent with E143. Note: the largest gap often sits just above the nearest
+runner (`|G| = 6`), so the split into `S` and `G` is frequently "the nearest runner and the rest".
+
+**Where the proof stands on Case B** `[my reading]`: regime (1) the bound; regime (2) the slow group R1 on its first block
+(`SlowBlockN`, below) and the fast group lonely there at a block-rule instant. The owed statement is that such an
+instant exists in the window `R ∈ [1, 7/s_top]` (units `d_min = 1`): a statement about at most six readings, native
+lower order supplying their loneliness but not its position in the window.
+
+**E149 addendum — in Lean** (`LonelyRunner/LonelyRunner/LRC/Spec/SlowBlockN.lean`, commit `8e67a47`; Spec gate PASS
+**1,922**, `experiments/nN/spec_gate_slow_block.out`) `[PROVED — axiom-clean]`: `slow_clear` (a reading in
+`[d_min, s_top]` is clear at every instant with `d_min·t ≥ 1/8` and `s_top·t ≤ 7/8`); `lonely_of_fast_in_slow_block`
+(on that block, if every fast reading is clear, every reading is): the d_max regime reduced to the fast group.
