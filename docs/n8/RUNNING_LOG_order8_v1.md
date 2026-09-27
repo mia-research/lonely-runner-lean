@@ -5417,3 +5417,34 @@ computer-assisted Case B; a derivation replacing them is still owed. Case C (spr
 outliers are settled (`not_fast`, proved); what remains is slow runners far below a cluster, measured to be lonely within
 the slow runner's first two blocks (E153–E154): the one piece of new mathematics still needed, the same shape as the band
 theorem. Asked the owner which to put first.
+
+---
+
+## E164–E166 — 2026-09-28 — spread is irrelevant (owner); one spread-free covering `Cover8`; the retirement
+
+**Owner:** *"No, don't you see that because of scale invariance and infinite grid the spread of 7–24 is irrelevant. Maybe
+the condition that requires it is set up wrong."* It was: the Case B/C split at 24 came from the range of the old
+certificates. Normalised by the grid (a reading's own scale, residues mod 8, deviations in `[−1/2, 1/2]`) the data is
+spread-free: at the exact class instant reading `i` is clear iff `c·δᵢ ∈ [1 − rᵢ, 7 − rᵢ]`, independent of its lap and of
+the spread. Magnitude re-enters only through relocation (a reading at a large grid point tolerates a relocation of about
+`1/(c·n)`): the capture/separation mechanism.
+
+**E164** (`LonelyRunner/experiments/nN/redo/m_vs_spread_v1/v2`, `capture_reference_v1`, exact): the needed grid fineness
+`m` does not grow with spread: `m ≤ 3` at every spread 7–400; at 400–2,000 mostly 1–2 with a tail. The 19 sets needing
+`m > 8` (up to 37) all have a captured runner (a multiple of `8 d_min`), and their working reference is the captured
+runner's own grid (13 of 19) or the reading just above `d_min`, with `m` ≈ the captured runner's lap count at the bound
+plus 2–5; their grid step is `≈ 5.6–7 d_min` (coarser than `d_min`).
+
+**E165** (`redo/cover8_step_v1.{py,out,progress}`, exact, protected) `[VERIFIED — these populations]`: the spread-free
+covering with the grid step at least `d_min/M`: Case B to 24 (210,335) all with step `≥ d_min`; Case C P1 every tenth set
+(63,533) all `≥ d_min`; constructed residual C members (547) all `≥ d_min`; random wide spread to 2,000 (24,000) all
+`≥ d_min`; random fine (10,000) all `≥ d_min`; late band shapes (5,400) all `≥ d_min/2` (they land in the nearest
+runner's second block, which a step `≥ d_min` cannot reach: with the step at least `d_min` the nearest runner sits at grid
+point 1, lap 0). **`Cover8 2`: none uncovered.**
+
+**E166, in Lean** (`RegimeSkeletonN`, `LonelyRunner/` commit `1807df7`; Spec gate PASS **1,950**,
+`experiments/nN/spec_gate_retire.out`): `GridStep8 S m M` (bound, or `GridClass8` through a reading `e` with
+`mm·m ≤ M·e`); **`Cover8 M`** (registered OWED); **`lonelyRunnerAt8_of_cover8 : Cover8 M → LonelyRunnerAt8`**, every `M`,
+no case split. **Retired:** `CoverB8`, `CoverC8`, `RegimeB8`, `RegimeC8`, `WithinTwoBlocks8` and their theorems (git
+history before `1807df7`); `SlowestSkeletonN.CaseB8`/`CaseC8` marked off the path (still registered OWED for the record).
+`Cover8` is the single owed statement of this route.
