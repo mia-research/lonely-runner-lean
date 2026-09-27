@@ -16,6 +16,9 @@ not at the bound but 772 of 210,335 is the fast group's own landing inside this 
 * `block_iff_fast`, `exists_block_iff_fast`: on the block the whole question is exactly the fast group's.
 * `lonely_eight_of_fast_in_slow_block` (whole numbers) and `lonely_eight_of_regimes`: the bound, or the fast group
   clear somewhere in the slow group's first block, gives loneliness.
+* `slow_clear_lap`, `exists_block_iff_fast_lap`, `lonely_eight_of_fast_in_slow_block_lap`: the same on the slow
+  group's common block on any lap `k` (E151: on the late band shapes the slow group is the nearest runner alone and the
+  landing is in its lap-1 block).
 
 Everything here is proved; no `sorry`, no `native_decide`.
 -/
@@ -94,5 +97,51 @@ theorem lonely_eight_of_regimes {R : Finset ℕ} {dmin top : ℕ} (hd : 0 < dmin
   · have hd' : (0 : ℝ) < dmin := by exact_mod_cast hd
     exact ⟨1 / (8 * dmin), by positivity, h⟩
   · exact lonely_eight_of_fast_in_slow_block hd hmin h1 h2 hG
+
+/-- **The slow group on lap `k`.**  If `d_min·t ≥ k + 1/8` and `s_top·t ≤ k + 7/8`, every reading in `[d_min, s_top]` is on
+lap `k` and clear.  (The first block is `k = 0`; a single slow reading has such a block on every lap.) -/
+theorem slow_clear_lap {dmin stop d t : ℝ} (k : ℕ) (ht : 0 ≤ t) (hlo : dmin ≤ d) (hhi : d ≤ stop)
+    (h1 : (k : ℝ) + 1 / 8 ≤ dmin * t) (h2 : stop * t ≤ (k : ℝ) + 7 / 8) : (8 : ℝ)⁻¹ ≤ circDist (d * t) := by
+  refine LRC.TwoPinner.clear_of_band (N := k) ?_ ?_
+  · push_cast; nlinarith
+  · push_cast; nlinarith
+
+/-- **The reduction on lap `k`.**  On the slow group's common block on lap `k`, the whole question is exactly the fast
+group's: some instant of the block is clear for every reading iff some instant of it is clear for every fast reading. -/
+theorem exists_block_iff_fast_lap {ι : Type*} [DecidableEq ι] (S G : Finset ι) (x : ι → ℝ) {dmin stop : ℝ} (k : ℕ)
+    (hd : 0 < dmin) (hS : ∀ i ∈ S, dmin ≤ x i ∧ x i ≤ stop) :
+    (∃ t, (k : ℝ) + 1 / 8 ≤ dmin * t ∧ stop * t ≤ (k : ℝ) + 7 / 8 ∧ ∀ i ∈ S ∪ G, (8 : ℝ)⁻¹ ≤ circDist (x i * t)) ↔
+      (∃ t, (k : ℝ) + 1 / 8 ≤ dmin * t ∧ stop * t ≤ (k : ℝ) + 7 / 8 ∧ ∀ i ∈ G, (8 : ℝ)⁻¹ ≤ circDist (x i * t)) := by
+  constructor
+  · rintro ⟨t, h1, h2, h⟩
+    exact ⟨t, h1, h2, fun i hi => h i (Finset.mem_union_right _ hi)⟩
+  · rintro ⟨t, h1, h2, h⟩
+    have ht : 0 ≤ t := by
+      by_contra hn; push Not at hn
+      have : dmin * t < 0 := mul_neg_of_pos_of_neg hd hn
+      have : (0 : ℝ) ≤ k := by positivity
+      linarith
+    refine ⟨t, h1, h2, fun i hi => ?_⟩
+    rcases Finset.mem_union.mp hi with hs | hg
+    · exact slow_clear_lap k ht (hS i hs).1 (hS i hs).2 h1 h2
+    · exact h i hg
+
+/-- **Whole-number form on lap `k`.**  Readings `R`, least at least `d_min`, slow group the readings up to `top`; if at an
+instant of the slow group's common block on lap `k` every faster reading is clear, the subject is lonely. -/
+theorem lonely_eight_of_fast_in_slow_block_lap {R : Finset ℕ} {dmin top : ℕ} (k : ℕ) (hd : 0 < dmin)
+    (hmin : ∀ d ∈ R, dmin ≤ d) {t : ℝ} (h1 : (k : ℝ) + 1 / 8 ≤ (dmin : ℝ) * t) (h2 : (top : ℝ) * t ≤ (k : ℝ) + 7 / 8)
+    (hG : ∀ d ∈ R, top < d → (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t)) :
+    ∃ t : ℝ, 0 < t ∧ ∀ d ∈ R, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  have hd' : (0 : ℝ) < dmin := by exact_mod_cast hd
+  have ht : 0 < t := by
+    by_contra hn; push Not at hn
+    have : (dmin : ℝ) * t ≤ 0 := mul_nonpos_of_nonneg_of_nonpos hd'.le hn
+    have : (0 : ℝ) ≤ k := by positivity
+    linarith
+  refine ⟨t, ht, fun d hd => ?_⟩
+  by_cases hdt : top < d
+  · exact hG d hd hdt
+  · push Not at hdt
+    exact slow_clear_lap k ht.le (by exact_mod_cast hmin d hd) (by exact_mod_cast hdt) h1 h2
 
 end LRC.SlowBlock
