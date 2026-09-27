@@ -1,0 +1,24 @@
+  laps<=  0, rho  1/64: 1600 runners; class carrying the nearest event {1: 237, 3: 747, 5: 486, 7: 130}; offset/rho median 0.11, 95% 0.44, max 0.64; flank a class neighbour 1600/1600
+        max offset/rho by lap spread: 0: 0.6
+  laps<=  0, rho  1/16: 1600 runners; class carrying the nearest event {1: 233, 3: 653, 5: 501, 7: 213}; offset/rho median 0.12, 95% 0.40, max 0.63; flank a class neighbour 1486/1600
+        max offset/rho by lap spread: 0: 0.6
+  laps<=  0, rho   1/8: 1600 runners; class carrying the nearest event {1: 212, 3: 628, 5: 507, 7: 253}; offset/rho median 0.12, 95% 0.33, max 2.28; flank a class neighbour 1197/1600
+        max offset/rho by lap spread: 0: 2.3
+  laps<=  1, rho  1/64: 1600 runners; class carrying the nearest event {1: 315, 3: 531, 5: 453, 7: 301}; offset/rho median 0.07, 95% 0.31, max 0.65; flank a class neighbour 1600/1600
+        max offset/rho by lap spread: 0: 0.7, 1: 0.6
+  laps<=  1, rho  1/16: 1600 runners; class carrying the nearest event {1: 324, 3: 488, 5: 460, 7: 328}; offset/rho median 0.06, 95% 0.29, max 2.74; flank a class neighbour 1543/1600
+        max offset/rho by lap spread: 0: 0.4, 1: 2.7
+  laps<=  1, rho   1/8: 1600 runners; class carrying the nearest event {1: 317, 3: 453, 5: 449, 7: 381}; offset/rho median 0.06, 95% 0.27, max 2.02; flank a class neighbour 1325/1600
+        max offset/rho by lap spread: 0: 0.2, 1: 2.0
+  laps<=  3, rho  1/64: 1600 runners; class carrying the nearest event {1: 381, 3: 405, 5: 409, 7: 405}; offset/rho median 0.04, 95% 0.27, max 1.48; flank a class neighbour 1591/1600
+        max offset/rho by lap spread: 1: 0.2, 2: 1.1, 3: 1.5
+  laps<=  3, rho  1/16: 1600 runners; class carrying the nearest event {1: 333, 3: 422, 5: 471, 7: 374}; offset/rho median 0.04, 95% 0.25, max 0.67; flank a class neighbour 1501/1600
+        max offset/rho by lap spread: 1: 0.4, 2: 0.6, 3: 0.7
+  laps<=  3, rho   1/8: 1600 runners; class carrying the nearest event {1: 337, 3: 385, 5: 447, 7: 431}; offset/rho median 0.04, 95% 0.18, max 0.95; flank a class neighbour 1329/1600
+        max offset/rho by lap spread: 2: 0.3, 3: 0.9
+  laps<= 10, rho  1/64: 1600 runners; class carrying the nearest event {1: 320, 3: 372, 5: 445, 7: 463}; offset/rho median 0.03, 95% 0.82, max 1.56; flank a class neighbour 1405/1600
+        max offset/rho by lap spread: 3: 0.2, 4: 0.8, 5: 1.1, 6: 1.3, 7: 1.1, 8: 1.6, 9: 1.1, 10: 1.1
+  laps<= 10, rho  1/16: 1600 runners; class carrying the nearest event {1: 341, 3: 325, 5: 398, 7: 536}; offset/rho median 0.03, 95% 0.26, max 0.40; flank a class neighbour 1269/1600
+        max offset/rho by lap spread: 5: 0.3, 6: 0.3, 7: 0.4, 8: 0.4, 9: 0.4, 10: 0.4
+  laps<= 10, rho   1/8: 1600 runners; class carrying the nearest event {1: 283, 3: 294, 5: 454, 7: 569}; offset/rho median 0.03, 95% 0.14, max 0.58; flank a class neighbour 1091/1600
+        max offset/rho by lap spread: 5: 0.3, 6: 0.6, 7: 0.2, 8: 0.3, 9: 0.3, 10: 0.2
