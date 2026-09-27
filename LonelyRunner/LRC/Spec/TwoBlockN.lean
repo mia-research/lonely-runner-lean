@@ -109,4 +109,24 @@ theorem lonely_eight_of_three_block {S : Finset ℕ} {e : ℕ} (he : 0 < e)
   · exact ⟨1, by omega, by omega⟩
   · exact ⟨2, by omega, by omega⟩
 
+/-- **Loneliness is pairwise in the laps (one-dimensional Helly).**  Give every reading `d` a lap `k d`.  Its clear
+interval of `R = 8·t` on that lap is `[(8·k d + 1)/d, (8·k d + 7)/d]`.  If every two of these intervals meet, all of
+them do, at the largest left end: the subject is lonely there.  No flank is chosen in advance; the reading attaining the
+largest left end is the flank after the fact, and the instant is `(8·k e + 1)/(8e)`. -/
+theorem lonely_eight_of_pairwise_laps {S : Finset ℕ} (hS : S.Nonempty) (hpos : ∀ d ∈ S, 0 < d) (k : ℕ → ℕ)
+    (hpair : ∀ d ∈ S, ∀ d' ∈ S, (8 * k d + 1) * d' ≤ (8 * k d' + 7) * d) :
+    ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  classical
+  -- the largest left end `(8 k e + 1)/e`
+  obtain ⟨e, heS, hmax⟩ := S.exists_max_image (fun d : ℕ => ((8 * k d + 1 : ℕ) : ℚ) / d) hS
+  have he : 0 < e := hpos e heS
+  refine lonely_eight_of_blocks (K := k e) he fun d hd => ⟨k d, ?_, ?_⟩
+  · -- `(8 k d + 1)/d ≤ (8 k e + 1)/e`
+    have h := hmax d hd
+    have hd0 : (0 : ℚ) < d := by exact_mod_cast hpos d hd
+    have he0 : (0 : ℚ) < e := by exact_mod_cast he
+    rw [div_le_div_iff₀ hd0 he0] at h
+    exact_mod_cast h
+  · exact hpair e heS d hd
+
 end LRC.TwoBlock
