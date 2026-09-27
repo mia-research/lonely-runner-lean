@@ -4730,3 +4730,31 @@ read into v10 (no v11):
 - **v10 §1, `NestedBlocksN` row:** E126's units are `u = 1/(8d)` (half a window), and the result is "not yet in Lean"
   (an observation, not a registered obligation).
 - v10's "where v9 is silent" means where v10 is silent.
+
+---
+
+## E135 — 2026-09-27 — the doubled edge read from the cascade: not a case; it folds into the junction step
+
+**Owner:** *"Brute force? … we should be using either BSM or cascade."* The first two scripts
+(`redo/doubled_edge_v1.py`, stopped; `doubled_edge_v2.{py,out}`) searched references and lap assignments. Recorded fact
+from v2 `[VERIFIED — exhaustive exact, band sets to 24]`: a working `φ(8)` class with at most one reading per edge
+exists for 42,806 of 42,811; the other 5 need a captured reading; **no set needs a doubled edge**. (The v2 example list
+prints sets with key `(0,0)` by a selection bug; the counts are correct.)
+
+**The cascade itself** (`redo/doubled_slot_cascade_v1.{py,out}`, exact, every move of every band set to 24): moves with
+1, 2, 3, 4 readings in the subject's window (open zone): 72,368; 24,073; 2,395; 32. At a move with several in the
+window the cascade goes to the latest exit; every other member is then already past its own leaving edge (22,616 of
+28,959 less than one eighth past, 6,002 less than two, 341 further), none still in the window.
+
+**Reading** `[reasoned from the definition; the pieces are proved]`: a move goes to the maximum of the leaving points, so
+any number of readings on the leaving side are at or past their edge there: the largest-left-end form of
+`lonely_eight_of_pairwise_laps`, which never counts edge multiplicity. A doubled leaving edge is therefore never the
+obstruction; the walk continues only when a reading **enters** before the last leaver clears. In grid-class terms that
+is the interleaving (an entering reading's `n/x` between two leaving readings'), i.e. E125's junction again. **Open step
+(i) of v10 §4 (doubled edges) folds into the junction step**: the doubled slot is the same event as one runner in the
+way. Owner's *"the rules actually simplify"* (E117), here.
+
+**Next** `[proposed]`: the `φ(8)` pairs are complementary: the edges of `(1,7)` (grid residues 1, 7) are interior
+under `(3,5)` with slack, and conversely. So a crossing that continues the walk from a `(1,7)` instant is interior for
+`(3,5)`. Test with the cascade: when the walk from a class instant is continued by a crossing, does it break at or
+before the neighbouring class instant.
