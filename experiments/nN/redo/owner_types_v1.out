@@ -1,0 +1,10 @@
+N = 12: types A 197, band 26, B 334; all 543 (new since previous N: 543)
+   cluster compositions seen: 34 ; landing-cluster choices: 65
+N = 16: types A 919, band 569, B 4075; all 5482 (new since previous N: 4939)
+   cluster compositions seen: 58 ; landing-cluster choices: 149
+N = 20: types A 1809, band 1229, B 21940; all 24238 (new since previous N: 18756)
+   cluster compositions seen: 63 ; landing-cluster choices: 168
+N = 24: types A 3031, band 2830, B 71149; all 75941 (new since previous N: 51703)
+   cluster compositions seen: 64 ; landing-cluster choices: 175
+N = 28: types A 4435, band 4744, B 86910; all 93126 (new since previous N: 17185)
+   cluster compositions seen: 64 ; landing-cluster choices: 175
