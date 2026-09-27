@@ -1,0 +1,25 @@
+Q = 1: 3155 class-C cases; groups (empty-slot offset c, blocker signature) -> (flank, lap[, R when m = 1]):
+  c=6 blockers [(7, 'ahead', 'small')]: 421 cases -> blocker N=1 R=9/7 x203, off 5 ahead N=1 R=9/5 x56, off 5 ahead N=2 R=17/13 x43, off 4 ahead N=2 R=17/12 x40, blocker N=3 R=25/7 x23
+  c=4 blockers [(7, 'ahead', 'small')]: 414 cases -> blocker N=1 R=9/7 x126, off 5 ahead N=1 R=9/5 x124, off 6 ahead N=1 R=3/2 x78, off 3 behind N=1 R=9/5 x30, off 3 ahead N=2 R=17/11 x21
+  c=5 blockers [(7, 'ahead', 'small')]: 404 cases -> blocker N=1 R=9/7 x113, off 6 ahead N=1 R=3/2 x112, off 3 ahead N=2 R=17/11 x50, blocker N=2 R=17/7 x42, off 2 ahead N=2 R=17/10 x40
+  c=3 blockers [(7, 'ahead', 'small')]: 393 cases -> blocker N=1 R=9/7 x117, off 6 ahead N=1 R=3/2 x111, blocker N=2 R=17/7 x51, off 5 ahead N=1 R=9/5 x45, off 2 ahead N=3 R=5/2 x28
+  c=2 blockers [(7, 'ahead', 'small')]: 368 cases -> blocker N=1 R=9/7 x135, off 6 ahead N=1 R=3/2 x55, blocker N=3 R=25/7 x53, blocker N=2 R=17/7 x46, off 5 ahead N=1 R=9/5 x36
+  c=7 blockers [(6, 'ahead', 'big')]: 120 cases -> blocker N=2 R=17/14 x66, off 5 ahead N=2 R=17/13 x22, off 4 ahead N=2 R=17/12 x18, off 3 ahead N=2 R=17/11 x9, off 5 ahead N=4 R=33/13 x5
+  c=4 blockers [(6, 'ahead', 'big')]: 66 cases -> off 5 ahead N=2 R=17/13 x36, blocker N=2 R=17/14 x30
+  c=6 blockers [(7, 'ahead', 'big')]: 66 cases -> blocker N=2 R=17/15 x66
+  c=5 blockers [(6, 'ahead', 'big')]: 61 cases -> blocker N=2 R=17/14 x61
+  c=2 blockers [(6, 'ahead', 'big')]: 60 cases -> blocker N=2 R=17/14 x30, off 4 ahead N=2 R=17/12 x11, off 5 ahead N=2 R=17/13 x10, off 3 ahead N=2 R=17/11 x9
+  c=5 blockers [(1, 'behind', 'small')]: 60 cases -> blocker N=2 R=17/7 x29, blocker N=1 R=9/7 x11, off 6 ahead N=1 R=3/2 x11, off 2 behind N=1 R=3/2 x9
+  c=1 blockers [(6, 'ahead', 'big')]: 60 cases -> blocker N=2 R=17/14 x35, off 5 ahead N=2 R=17/13 x12, off 5 ahead N=4 R=33/13 x7, off 4 ahead N=2 R=17/12 x5, off 3 ahead N=2 R=17/11 x1
+  c=6 blockers [(1, 'behind', 'small')]: 55 cases -> blocker N=1 R=9/7 x32, blocker N=3 R=25/7 x11, off 2 behind N=1 R=3/2 x10, blocker N=2 R=17/7 x2
+  c=2 blockers [(6, 'ahead', 'big'), (7, 'ahead', 'small')]: 53 cases -> off 5 ahead N=1 R=9/5 x20, off 5 ahead N=2 R=17/13 x13, off 4 ahead N=2 R=17/12 x8, off 3 ahead N=2 R=17/11 x7, blocker N=1 R=9/7 x5
+  c=3 blockers [(6, 'ahead', 'big')]: 52 cases -> blocker N=2 R=17/14 x31, off 5 ahead N=2 R=17/13 x11, off 4 ahead N=2 R=17/12 x10
+  c=4 blockers [(6, 'ahead', 'big'), (7, 'ahead', 'small')]: 52 cases -> blocker N=1 R=9/7 x32, off 5 ahead N=2 R=17/13 x20
+  c=3 blockers [(6, 'ahead', 'big'), (7, 'ahead', 'small')]: 51 cases -> blocker N=1 R=9/7 x17, off 5 ahead N=1 R=9/5 x14, off 5 ahead N=2 R=17/13 x11, off 4 ahead N=2 R=17/12 x9
+  c=2 blockers [(1, 'behind', 'small')]: 47 cases -> blocker N=1 R=9/7 x27, blocker N=3 R=25/7 x9, off 6 ahead N=1 R=3/2 x7, blocker N=2 R=17/7 x4
+  c=4 blockers [(1, 'behind', 'small')]: 46 cases -> off 3 behind N=1 R=9/5 x17, blocker N=1 R=9/7 x14, off 5 ahead N=1 R=9/5 x8, off 6 ahead N=1 R=3/2 x4, off 2 behind N=1 R=3/2 x3
+  c=3 blockers [(1, 'behind', 'small')]: 45 cases -> blocker N=1 R=9/7 x17, blocker N=2 R=17/7 x12, off 6 ahead N=1 R=3/2 x9, off 2 behind N=1 R=3/2 x7
+  c=5 blockers [(6, 'ahead', 'big'), (7, 'ahead', 'small')]: 40 cases -> blocker N=1 R=9/7 x23, blocker N=3 R=25/14 x7, off 4 ahead N=2 R=17/12 x6, off 3 ahead N=2 R=17/11 x4
+  c=3 blockers [(7, 'ahead', 'big')]: 35 cases -> blocker N=2 R=17/15 x35
+  c=4 blockers [(7, 'ahead', 'big')]: 33 cases -> blocker N=2 R=17/15 x33
+  c=5 blockers [(7, 'ahead', 'big')]: 28 cases -> blocker N=2 R=17/15 x28
