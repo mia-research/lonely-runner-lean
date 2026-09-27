@@ -4905,3 +4905,8 @@ gap that stops a sweep on lap `k` stops it on every later lap; only equal speeds
 grid: a fast runner's window, width `2/s`, only nudges the instant; the owner's "8 million and 7"); the landing is where
 a sweep reaches a gap no outlier covers. The band is sweep-dominated; late shapes are bridge-dominated. Next: the
 bridges in late shapes, who bridges and across which gaps.
+
+**E142 addendum — in Lean** (`LonelyRunner/LonelyRunner/LRC/Spec/SweepBridgeN.lean`; Spec gate PASS **1,920**,
+`experiments/nN/spec_gate_sweep_bridge.out`) `[PROVED — axiom-clean]`: `lap_lt_of_faster` (bridge up),
+`lap_le_of_slower` (sweep step or bridge down), `sweep_ratio` (a sweep step needs `s_a(8k−1) < s_b(8k+1)`),
+`sweep_ratio_mono`, `sweep_stop_persists` (a ratio that stops a lap-`k` sweep stops the lap-`k+1` sweep).
