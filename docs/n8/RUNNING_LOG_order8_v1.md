@@ -4965,3 +4965,32 @@ instant; types are finite by construction (`≤ 64 · 7 · 6⁶`) and "every arr
 count is therefore not the test. The owner's "works anywhere along the line and around the circle" is tested instead by
 **predictability**: whether the landing cluster is determined by the lap-1 cluster structure (read from the speeds
 before any landing), leaving the outliers' clearance (the grid) as the proof obligation. Next entry.
+
+---
+
+## E146–E147 — 2026-09-27 — d_min or d_max; the landing is the fast group's own point (the recursion)
+
+**Owner:** *"the conjecture itself is a limitation to the arrangements that can happen; once you add scale invariance and
+infinity to it, plus mirror effect and circle effect that just displaces the arrangement, you are not left with a whole
+lot."*
+
+**E146** (`LonelyRunner/experiments/nN/redo/landing_predict_v1`, `dmin_dmax_v1/v2`, exact, spread `(7, 24]`, readings
+`≤ 24`): the lap-1 cluster composition alone predicts the landing cluster in at most 55.17% (so composition is not the
+decider). With clusters cut at the landing lap's `ρ_k` (the confirmed type definition): band: bottom of the fastest
+cluster 41,272, at the bound 798, other 741; spread above 9: bound 64,169, fastest-cluster bottom 54,129, other 49,226,
+and in every frequent "other" description the flank lies above the largest gap.
+
+**E147, the recursion** (`redo/fast_group_v1.{py,out}`) `[VERIFIED — these windows]`: split at the largest consecutive
+gap into a slow group and a fast group `G`; for every landing not at the bound, run the cascade on `G` alone from the
+same start `1/(8 d_min)`:
+- band: the full landing **is** `G`'s own landing in 42,013 of 42,013;
+- spread above 9: 102,652 of 103,355; the other 703 are delayed by the slow group (one blocker at `G`'s landing in
+  676, two in 27), which pushes the isolation to `G`'s next point (the near-pair's forced delay, E140); flank in the slow
+  group in 429.
+
+**Reading** `[mine, in the owner's terms]`: the arrangement splits at its largest gap; the isolation is either d_min's
+(the bound) or the fast group's own point. `G` has at most six readings: a lower order, native and proved (orders 3–7),
+lonely with margin `1/(|G|+1) ≥ 1/7`. The one condition left is that the slow group is clear at one of `G`'s lonely
+instants: **E118's C1 statement, now the mechanism of Case B as well as Case C**; `FastPair8`, `BlockSplit8`,
+`OneFreeEightN` are its proved cases. Next: C1 through the cascade (how `G`'s lonely instants sit against the slow
+group's windows; the 703 delays perturbed).
