@@ -5317,3 +5317,37 @@ Case B chain to readings `≤ 24`) `[VERIFIED — this window]`:
 that edit; nothing wrong with the Lean. `SeparationN.lean` (with the other session's `move_eq_separation`) and the
 `RegimeSkeletonN` docstring edit are **uncommitted**; this session holds Lean edits and gate runs until the owner decides
 which session owns the tree.
+
+---
+
+## E161 — 2026-09-28 — separation and transport, off-tree; no return for sweep steps; the no-return claim narrowed to bridges
+
+**Owner:** *"Can you copy the earlier version not changed by the other session and see what you can do."* With a pasted
+outline (source not stated): any arrangement is globally isolated by its AP/grid unless it has one captured pair; the
+pair has a forced separation; at that event the cascade has transported the same global arrangement; if still blocked,
+the blocker is again one captured pair; a sequence of hand-offs is constrained by the ordered runners and fixed grid
+positions and cannot evade indefinitely.
+
+**Work kept off the Lean tree** (another session is editing `LRC/Spec`): this session's version of `SeparationN` (without
+the other session's `move_eq_separation` and `Cascade.Iteration` import) copied to the scratchpad, extended, and compiled
+with `lake env lean` against the tree's built modules (no tree change; not gated). Copy kept at
+`docs/n8/SeparationN_transport_draft_v1.lean.txt`. `[PROVED — compiles clean, no sorry; not yet gated]`:
+- `crossed_entering_edge`: a reading clear at `t₀` that is in the slot after the separation crossed its entering edge
+  during the shift `d/(8c)`.
+- `slower_shift_lt`, `slower_obstruction_is_edge_push`: a slower reading moves less than an eighth of a lap, so an
+  obstructing slower reading was within an eighth of its entering edge at `t₀` (an edge push, E93/E110).
+- **`transport`**: after a separation (captured reading `c` exactly in the slot at `t₀`, the others clear at `t₀`), the
+  captured reading is clear, and every reading in the slot crossed its entering edge during the shift; a slower one was
+  an edge push. The next obstruction is made only of readings the shift carried over an entering edge.
+- **`sweep_lap_bound`, `sweep_lap_lt`**: a sweep step from `a` down to `b` on lap `k` forces
+  `8k·(s_a − s_b) < s_a + s_b`, i.e. `k < (s_a + s_b)/(8(s_a − s_b))`: a pair of distinct speeds hands the isolation
+  down by a sweep step on finitely many laps; only equal speeds could on every lap.
+
+**The outline's no-return step, checked** `[reasoned; E141 as evidence]`: "a perpetual hand-off would return to the same
+pair in the same relative slot state and force equal speeds" cannot be derived from recurrence alone: the same pair in
+the same slot state recurs in ordinary lonely sets (E141's relays repeat setters in order one lap later), and for
+whole-number readings the full state recurs exactly after one period. The recurrence is not exact because windows
+narrow each lap: that gives the finiteness above **for sweep steps**. Bridges (a faster runner on a later lap, a slower
+one on an earlier lap) have no per-pair lap bound: at `a`'s exit on lap `k` the faster `b` is in a window iff
+`‖(8k+1)·s_b/(8 s_a)‖ < 1/8`, which for a rational ratio recurs periodically. **The open core narrows to: bridges
+cannot sustain the chain for ever.**
