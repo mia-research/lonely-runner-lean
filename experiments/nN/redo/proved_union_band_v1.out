@@ -1,0 +1,48 @@
+    6021  ('band to 24 (R* <= 7)', 'pair (1,7) fails', 'pair (3,5) fails')
+   23300  ('band to 24 (R* <= 7)', 'pair (1,7) fails', 'pair (3,5) holds')
+    4091  ('band to 24 (R* <= 7)', 'pair (1,7) holds', 'pair (3,5) fails')
+    9399  ('band to 24 (R* <= 7)', 'pair (1,7) holds', 'pair (3,5) holds')
+    5400  ('late fine shapes (R* > 7)', 'pair (1,7) fails', 'pair (3,5) fails')
+
+where both pairs fail, the reasons present:
+    5400  ('late', ('fails: edges cross', 'fails: interior deviation'))
+    4222  ('band to 24', ('fails: capture',))
+    1650  ('band to 24', ('fails: edges cross', 'fails: interior deviation'))
+     149  ('band to 24', ('fails: edges cross',))
+band sets to 24: 42811
+   29588  AP B1 B2
+    5772  AP B1
+    4455  B1 B2
+    1377  AP B2
+    1028  B1
+     496  B2
+      53  AP
+      42  none
+the 149 pure crossing-edge sets: {'two-block': 144, 'three-block': 5}
+remaining after AP classes + two-block + three-block: 42
+  AP failure reasons among them: [(('fails: capture',), 32), (('fails: edges cross', 'fails: interior deviation'), 10)]
+    (2, 6, 8, 9, 11, 14, 15) [1.0, 3.0, 4.0, 4.5, 5.5, 7.0, 7.5] ('fails: capture',)
+    (2, 6, 8, 10, 11, 14, 16) [1.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0] ('fails: capture',)
+    (3, 4, 10, 13, 16, 18, 23) [1.0, 1.333, 3.333, 4.333, 5.333, 6.0, 7.667] ('fails: capture',)
+    (3, 7, 10, 13, 16, 18, 23) [1.0, 2.333, 3.333, 4.333, 5.333, 6.0, 7.667] ('fails: capture',)
+    (3, 7, 10, 14, 17, 19, 24) [1.0, 2.333, 3.333, 4.667, 5.667, 6.333, 8.0] ('fails: capture',)
+    (3, 8, 10, 14, 15, 19, 24) [1.0, 2.667, 3.333, 4.667, 5.0, 6.333, 8.0] ('fails: capture',)
+    (3, 8, 10, 14, 16, 19, 24) [1.0, 2.667, 3.333, 4.667, 5.333, 6.333, 8.0] ('fails: capture',)
+    (3, 8, 10, 14, 17, 19, 24) [1.0, 2.667, 3.333, 4.667, 5.667, 6.333, 8.0] ('fails: capture',)
+    (3, 8, 11, 14, 15, 19, 22) [1.0, 2.667, 3.667, 4.667, 5.0, 6.333, 7.333] ('fails: edges cross', 'fails: interior deviation')
+    (3, 8, 11, 14, 15, 19, 23) [1.0, 2.667, 3.667, 4.667, 5.0, 6.333, 7.667] ('fails: capture',)
+    (3, 8, 11, 14, 15, 19, 24) [1.0, 2.667, 3.667, 4.667, 5.0, 6.333, 8.0] ('fails: capture',)
+    (3, 8, 11, 14, 16, 19, 22) [1.0, 2.667, 3.667, 4.667, 5.333, 6.333, 7.333] ('fails: edges cross', 'fails: interior deviation')
+    (3, 8, 11, 14, 16, 19, 23) [1.0, 2.667, 3.667, 4.667, 5.333, 6.333, 7.667] ('fails: capture',)
+    (3, 8, 11, 14, 16, 19, 24) [1.0, 2.667, 3.667, 4.667, 5.333, 6.333, 8.0] ('fails: capture',)
+    (3, 9, 12, 15, 17, 21, 24) [1.0, 3.0, 4.0, 5.0, 5.667, 7.0, 8.0] ('fails: capture',)
+    (3, 9, 13, 16, 20, 22, 24) [1.0, 3.0, 4.333, 5.333, 6.667, 7.333, 8.0] ('fails: capture',)
+    (3, 10, 12, 15, 17, 21, 24) [1.0, 3.333, 4.0, 5.0, 5.667, 7.0, 8.0] ('fails: capture',)
+    (3, 10, 13, 14, 16, 18, 22) [1.0, 3.333, 4.333, 4.667, 5.333, 6.0, 7.333] ('fails: edges cross', 'fails: interior deviation')
+    (3, 10, 13, 14, 16, 18, 23) [1.0, 3.333, 4.333, 4.667, 5.333, 6.0, 7.667] ('fails: capture',)
+    (3, 10, 13, 15, 17, 21, 24) [1.0, 3.333, 4.333, 5.0, 5.667, 7.0, 8.0] ('fails: capture',)
+    (3, 10, 13, 16, 17, 18, 23) [1.0, 3.333, 4.333, 5.333, 5.667, 6.0, 7.667] ('fails: capture',)
+    (3, 10, 13, 16, 17, 19, 22) [1.0, 3.333, 4.333, 5.333, 5.667, 6.333, 7.333] ('fails: edges cross', 'fails: interior deviation')
+    (3, 10, 13, 16, 17, 19, 23) [1.0, 3.333, 4.333, 5.333, 5.667, 6.333, 7.667] ('fails: capture',)
+    (3, 10, 13, 16, 18, 20, 23) [1.0, 3.333, 4.333, 5.333, 6.0, 6.667, 7.667] ('fails: capture',)
+    (3, 10, 13, 16, 18, 21, 23) [1.0, 3.333, 4.333, 5.333, 6.0, 7.0, 7.667] ('fails: capture',)
