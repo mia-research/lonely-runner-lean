@@ -13,10 +13,12 @@ margin `ε > 0`.  Change the speeds along a direction `w`, to `v + r • w`.
 * `opens_at_leaving`: if `(w b − w k)(v a − v k) ≤ (w a − w k)(v b − v k)`, then for every small `r ≥ 0` the subject is
   lonely at the leaving runner's own opening `(Na + 1/8)/((v a − v k) + r (w a − w k))`: runner `a` stays on `1/8`,
   runner `b` does not cross into the slot, and the others keep their room.
-* `pinch_eventually_lonely`: for whole-number readings the mirror instant `M − t0` is again a simple pinch, with `a`
+* `pinch_eventually_lonely`: for readings with a common period `P > t0` the mirror `P − t0` is again a simple pinch, with `a`
   and `b` swapping roles (`TwoPinner.mirror_readings`), so the other sign of the condition is covered there.  One of the
   two signs always holds, and replacing `w` by `−w` covers `r ≤ 0`.  So the subject is lonely at every `r` near `0`,
   on both sides.
+* `inside_wall_eventually_lonely`: if the direction keeps the pinners' ratio, both sides open at the leaving
+  runner's opening, with no period needed.
 
 This is `TwoPinnerN`'s mirror argument stated for arrangements and a direction, with the other runners' room carried
 along, in the form the deformation theorem uses.  Everything here is proved; no `sorry`, no `native_decide`.
@@ -116,55 +118,48 @@ theorem opens_at_leaving {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : ℝ} {Na
   · have := hoth i hik hia hib
     rwa [sep_line] at this
 
-/-- The mirror of a simple pinch, for whole-number readings: at `M − t0` the two runners swap roles and every other
-runner is exactly as clear as before. -/
-theorem mirror_pinch {v : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : ℝ} {Na Nb M : ℤ}
-    (hint : ∀ i : Fin 8, ∃ z : ℤ, v i - v k = z)
+/-- The mirror of a simple pinch, for readings with a common period `P` (every `(v i − v k)·P` a whole number): at
+`P − t0` the two runners swap roles and every other runner is exactly as clear as before. -/
+theorem mirror_pinch {v : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε P : ℝ} {Na Nb : ℤ}
+    (hper : ∀ i : Fin 8, ∃ z : ℤ, (v i - v k) * P = z)
     (hA : (v a - v k) * t0 = Na + 1 / 8) (hB : (v b - v k) * t0 = Nb + 7 / 8)
     (hrest : ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i t0)) :
-    (∃ Nb' : ℤ, (v b - v k) * (M - t0) = Nb' + 1 / 8) ∧ (∃ Na' : ℤ, (v a - v k) * (M - t0) = Na' + 7 / 8) ∧
-      ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i (M - t0)) := by
-  obtain ⟨za, hza⟩ := hint a
-  obtain ⟨zb, hzb⟩ := hint b
-  refine ⟨⟨zb * M - Nb - 1, ?_⟩, ⟨za * M - Na - 1, ?_⟩, ?_⟩
+    (∃ Nb' : ℤ, (v b - v k) * (P - t0) = Nb' + 1 / 8) ∧ (∃ Na' : ℤ, (v a - v k) * (P - t0) = Na' + 7 / 8) ∧
+      ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i (P - t0)) := by
+  obtain ⟨za, hza⟩ := hper a
+  obtain ⟨zb, hzb⟩ := hper b
+  refine ⟨⟨zb - Nb - 1, ?_⟩, ⟨za - Na - 1, ?_⟩, ?_⟩
   · push_cast; rw [mul_sub, hB, hzb]; ring
   · push_cast; rw [mul_sub, hA, hza]; ring
   · intro i h1 h2 h3
-    obtain ⟨z, hz⟩ := hint i
-    have e : sep v k i (M - t0) = -(sep v k i t0) + ((z * M : ℤ) : ℝ) := by
-      simp only [sep]; push_cast; rw [← hz]; ring
+    obtain ⟨z, hz⟩ := hper i
+    have e : sep v k i (P - t0) = -(sep v k i t0) + (z : ℝ) := by
+      simp only [sep]; rw [← hz]; ring
     rw [e, circDist_add_int_po, circDist_neg_po]
     exact hrest i h1 h2 h3
 
-/-- **The right side of a simple pinch, for whole-number readings.**  Whatever the direction, the pinch itself or its
-mirror `M − t0` opens for small `r ≥ 0`. -/
-theorem right_side {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : ℝ} {Na Nb M : ℤ}
-    (hak : a ≠ k) (hbk : b ≠ k) (hab : a ≠ b) (ht0 : 0 < t0) (hM : t0 < M) (hε : 0 < ε)
-    (hDa : 0 < v a - v k) (hDb : 0 < v b - v k) (hint : ∀ i : Fin 8, ∃ z : ℤ, v i - v k = z)
+/-- **The right side of a simple pinch, for readings with a common period `P > t0`.**  Whatever the direction, the
+pinch itself or its mirror `P − t0` opens for small `r ≥ 0`. -/
+theorem right_side {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε P : ℝ} {Na Nb : ℤ}
+    (hak : a ≠ k) (hbk : b ≠ k) (hab : a ≠ b) (ht0 : 0 < t0) (hP : t0 < P) (hε : 0 < ε)
+    (hDa : 0 < v a - v k) (hDb : 0 < v b - v k) (hper : ∀ i : Fin 8, ∃ z : ℤ, (v i - v k) * P = z)
     (hA : (v a - v k) * t0 = Na + 1 / 8) (hB : (v b - v k) * t0 = Nb + 7 / 8)
     (hrest : ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i t0)) :
     ∀ᶠ r in 𝓝[≥] (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
   rcases le_total ((w b - w k) * (v a - v k)) ((w a - w k) * (v b - v k)) with hdir | hdir
   · filter_upwards [opens_at_leaving hak hbk hab ht0 hε hDa hDb hA hB hrest hdir] with r hr
     exact ⟨_, hr.1, hr.2⟩
-  · obtain ⟨⟨Nb', hB'⟩, ⟨Na', hA'⟩, hrest'⟩ := mirror_pinch (M := M) hint hA hB hrest
-    have ht1 : 0 < (M : ℝ) - t0 := by linarith
-    have hrest'' : ∀ i : Fin 8, i ≠ k → i ≠ b → i ≠ a → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i (M - t0)) :=
+  · obtain ⟨⟨Nb', hB'⟩, ⟨Na', hA'⟩, hrest'⟩ := mirror_pinch (P := P) hper hA hB hrest
+    have ht1 : 0 < P - t0 := by linarith
+    have hrest'' : ∀ i : Fin 8, i ≠ k → i ≠ b → i ≠ a → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i (P - t0)) :=
       fun i h1 h2 h3 => hrest' i h1 h3 h2
     filter_upwards [opens_at_leaving hbk hak hab.symm ht1 hε hDb hDa hB' hA' hrest'' hdir] with r hr
     exact ⟨_, hr.1, hr.2⟩
 
-/-- **A simple pinch is locally stable.**  For whole-number readings, the subject stays lonely under every small change
-of speeds along any direction, on both sides.  This is `DeformationN.lonely_along_path`'s `hopen` at a simple pinch. -/
-theorem pinch_eventually_lonely {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : ℝ} {Na Nb M : ℤ}
-    (hak : a ≠ k) (hbk : b ≠ k) (hab : a ≠ b) (ht0 : 0 < t0) (hM : t0 < M) (hε : 0 < ε)
-    (hDa : 0 < v a - v k) (hDb : 0 < v b - v k) (hint : ∀ i : Fin 8, ∃ z : ℤ, v i - v k = z)
-    (hA : (v a - v k) * t0 = Na + 1 / 8) (hB : (v b - v k) * t0 = Nb + 7 / 8)
-    (hrest : ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i t0)) :
-    ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
-  rw [← nhdsLE_sup_nhdsGE, Filter.eventually_sup]
-  refine ⟨?_, right_side (w := w) hak hbk hab ht0 hM hε hDa hDb hint hA hB hrest⟩
-  have hR := right_side (w := -w) hak hbk hab ht0 hM hε hDa hDb hint hA hB hrest
+/-- Replacing `r` by `−r` and `w` by `−w`: a right-side statement for `−w` is a left-side statement for `w`. -/
+theorem left_of_right {v w : Fin 8 → ℝ} {k : Fin 8}
+    (hR : ∀ᶠ r in 𝓝[≥] (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • (-w)) k) :
+    ∀ᶠ r in 𝓝[≤] (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
   have hneg : Tendsto (fun r : ℝ => -r) (𝓝[≤] (0 : ℝ)) (𝓝[≥] (0 : ℝ)) := by
     rw [tendsto_nhdsWithin_iff]
     refine ⟨?_, ?_⟩
@@ -176,5 +171,36 @@ theorem pinch_eventually_lonely {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : �
   filter_upwards [hneg.eventually hR] with r hr
   have e : v + (-r) • (-w) = v + r • w := by ext i; simp
   rwa [e] at hr
+
+/-- **A simple pinch is locally stable.**  For readings with a common period `P > t0`, the subject stays lonely under
+every small change of speeds along any direction, on both sides.  `DeformationN.lonely_along_path`'s `hopen` at a
+simple pinch. -/
+theorem pinch_eventually_lonely {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε P : ℝ} {Na Nb : ℤ}
+    (hak : a ≠ k) (hbk : b ≠ k) (hab : a ≠ b) (ht0 : 0 < t0) (hP : t0 < P) (hε : 0 < ε)
+    (hDa : 0 < v a - v k) (hDb : 0 < v b - v k) (hper : ∀ i : Fin 8, ∃ z : ℤ, (v i - v k) * P = z)
+    (hA : (v a - v k) * t0 = Na + 1 / 8) (hB : (v b - v k) * t0 = Nb + 7 / 8)
+    (hrest : ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i t0)) :
+    ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
+  rw [← nhdsLE_sup_nhdsGE, Filter.eventually_sup]
+  exact ⟨left_of_right (right_side (w := -w) hak hbk hab ht0 hP hε hDa hDb hper hA hB hrest),
+    right_side (w := w) hak hbk hab ht0 hP hε hDa hDb hper hA hB hrest⟩
+
+/-- **Inside the wall.**  If the direction keeps the two pinners' ratio (`(w b − w k)(v a − v k) =
+(w a − w k)(v b − v k)`), the pinch persists on both sides at the leaving runner's opening; no period is needed. -/
+theorem inside_wall_eventually_lonely {v w : Fin 8 → ℝ} {k a b : Fin 8} {t0 ε : ℝ} {Na Nb : ℤ}
+    (hak : a ≠ k) (hbk : b ≠ k) (hab : a ≠ b) (ht0 : 0 < t0) (hε : 0 < ε)
+    (hDa : 0 < v a - v k) (hDb : 0 < v b - v k)
+    (hA : (v a - v k) * t0 = Na + 1 / 8) (hB : (v b - v k) * t0 = Nb + 7 / 8)
+    (hrest : ∀ i : Fin 8, i ≠ k → i ≠ a → i ≠ b → (8 : ℝ)⁻¹ + ε ≤ circDist (sep v k i t0))
+    (heq : (w b - w k) * (v a - v k) = (w a - w k) * (v b - v k)) :
+    ∀ᶠ r in 𝓝 (0 : ℝ), LRC.Spec.LonelyForSubject (v + r • w) k := by
+  rw [← nhdsLE_sup_nhdsGE, Filter.eventually_sup]
+  refine ⟨left_of_right ?_, ?_⟩
+  · have hdir : ((-w) b - (-w) k) * (v a - v k) ≤ ((-w) a - (-w) k) * (v b - v k) := by
+      simp only [Pi.neg_apply]; nlinarith [heq]
+    filter_upwards [opens_at_leaving hak hbk hab ht0 hε hDa hDb hA hB hrest hdir] with r hr
+    exact ⟨_, hr.1, hr.2⟩
+  · filter_upwards [opens_at_leaving hak hbk hab ht0 hε hDa hDb hA hB hrest heq.le] with r hr
+    exact ⟨_, hr.1, hr.2⟩
 
 end LRC.PinchOpen
