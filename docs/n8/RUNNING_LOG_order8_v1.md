@@ -4758,3 +4758,23 @@ way. Owner's *"the rules actually simplify"* (E117), here.
 under `(3,5)` with slack, and conversely. So a crossing that continues the walk from a `(1,7)` instant is interior for
 `(3,5)`. Test with the cascade: when the walk from a class instant is continued by a crossing, does it break at or
 before the neighbouring class instant.
+
+---
+
+## E136 — 2026-09-27 — the AP reference's two mirror pairs against the cascade; pure crossing edges relocate to the two-block instant
+
+(`LonelyRunner/experiments/nN/redo/ap_pairs_vs_late_v1.{py,out}`, `ap_edges_cross_v1.{py,out}`, exact.) At the AP
+scale (grid `n = round(s)`), each `φ(8)` class decided exactly with relocation.
+- **Forced, no content:** every late fine shape fails both pairs (5,400 of 5,400). At all four AP instants reading 0
+  confines the relocated instant to `[1, 7]`, so any working AP class gives `R* ≤ 7`; the statement is its
+  contrapositive. Recorded so it is not cited as a finding.
+- **Content:** 6,021 band sets to 24 fail both pairs yet land in copy 0: the isolation relocates to a lap assignment the
+  AP does not name. Reasons: capture 4,222; edges cross plus an interior deviation 1,650; **edges cross only 149** (the
+  pure doubled edge: interleaved lags, no capture, interiors within slack).
+- **The 149 through the cascade** `[VERIFIED — these 149 sets]`: both pairs doubled (residue patterns such as
+  `(1,1,2,3,3,5,7)`: a companion near the nearest runner and a doubled 3); landing `R* ∈ [1, 2)` in 144, `[3, 4)` in 5;
+  the flank a fast reading on its lap-1 leaving edge (the second opening `9/(8e)`); landing laps `0…0 1…1` in 144:
+  **the two-block instant** (`TwoBlockN.lonely_eight_of_two_block`, proved). Reading `[mine]`: when a crowd at the bottom
+  defeats both AP pairs by crossing edges, the isolation relocates to the fast group's next opening, where the readings
+  split into two clear blocks. Next: perturb these through the cascade; derive "crossing edges at the AP ⇒ a two-block
+  split exists", and read the 5 at `R ∈ [3, 4)`.
