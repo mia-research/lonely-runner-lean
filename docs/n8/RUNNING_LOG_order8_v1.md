@@ -4681,3 +4681,23 @@ repaired in `HANDOVER_2026_09_27_v9.md` (v8 kept, not promoted):
   AP's global isolation" holds between whole-number points (order seven plus one free reading, `OneFreeN`) and carries
   nothing across them (O5); tools: E112 refines the 2026-09-15 ruling, and v7 §1.5's 2026-09-26 ruling (a measure
   argument inside one window, provisionally, if it completes a proof part) is not withdrawn.
+
+---
+
+## E132 — 2026-09-27 — the owner's reference with the φ(8) classes holds on Case B to 24; handover v9 loss check; v10
+
+**The owed re-check** (`experiments/nN/redo/grid_class_caseB_c7_v1.{py,out}`) `[VERIFIED — exhaustive exact, readings
+≤ 24]`: every Case B set (spread in `(7, 24]`, 210,335 sets) is lonely at a relocated class instant with the class
+restricted to the **`φ(8)` classes `c ∈ {1, 3, 5, 7}`**, reference grid through one of its own readings at scale `sⱼ/m`:
+least `m` = 1 in 201,698; 2 in 8,422; 3 in 210; 4 in 5; **uncovered 0**. So E128's Case B figure survives the tautology
+control of E129: the owner's *"AP/grid plus a deviation"*, with the reference taken at the arrangement's own scale, is
+exact on the whole of Case B in this window. Scope: E114's caveat (spread above 12 forces `d_min = 1` here).
+
+**`compile-diff` on v9**: every loss E131 named is repaired. Still lost (all dating from before v8): E115's `WindowBound`
+evidence (E72's `8·d_min·t ≤ 15`, `[VERIFIED]` for `S ≤ 24`, `[EMPIRICAL]` beyond, `T = 15/(8c)`) and its "what
+`WindowBound` contains" caveat; E126's worst-phase nesting (every consecutive ratio at least 2 survives six steps,
+`[reasoned]`, not in Lean); E124's tool caveats (`sympy` `lpmax` returned infeasible points on 2 of 300, not used; the
+non-terminating first cover); E129's evidence (all 4,294 unsettled have a capture-free grid that still fails); the
+`EightResidual` pending decision narrowed without source (v7: "the obligation or a sufficient route (v21 §17B)"). Also
+flagged: the `c ≤ 7` result was on disk and unlogged (logged above); strip `[16,17]`'s check was still running.
+Repaired in `HANDOVER_2026_09_27_v10.md` (v9 kept, not promoted).
