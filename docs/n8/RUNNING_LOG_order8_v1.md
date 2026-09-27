@@ -4929,3 +4929,20 @@ rotation. The landing is the first exit of some cluster bottom at which every ro
 slot. The owner's *"prove cluster with outliers works at one point … you prove it for all"* reads here as: the
 configuration at exit `k+1` is the configuration at exit `k` rotated, so a statement proved for one exit in a form
 invariant under the rotation holds for all.
+
+- **O9. E143's rotation form is Theorem 6.15** (`ScaleCandidates.lonely_iff_exists_candidate_scale`, proved; the
+  obligation of record since 2026-09-20): lonely iff some candidate `e/(8k+1)` is clear. Caught by the pre-use grep
+  before anything was built on it. What E143 adds is only the derived restriction: a candidate `e` on lap `k` must be a
+  cluster bottom (no slower reading within ratio `ρ_k`).
+
+---
+
+## E144 — 2026-09-27 — landing types with laps dropped: the exact eighth-slot description keeps growing (scoped)
+
+(`LonelyRunner/experiments/nN/redo/landing_types_v1.{py,out}`, exact.) Type = per rank the eighth-slot of the position at
+the landing (flank marked), laps dropped. Distinct types, all spreads, readings `≤ N`: `N = 12` 521; 16 5,064; 20
+22,199; 24 57,802 (Case B dominates: 55,329 at 24). **Scope of the null**: this description separates landings that differ
+by a deviation crossing an eighth line, which the owner's picture counts as one pattern relocated; it says nothing
+about types modulo relocation (like E36b's 95,888 slot-residue types, too fine). Not a test of the owner's finiteness
+claim at the owner's level. A test at that level needs types taken up to relocation (the pattern and its relocations as
+one class), not yet defined operationally.
