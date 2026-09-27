@@ -1,0 +1,13 @@
+(1) moving reading 7 of (1..7) by eps; first lonely time
+   delta = 1/8 (X lonely)
+     eps = 1/10     first lonely t = 3/8 (0.375)
+     eps = 1/100    first lonely t = 3/8 (0.375)
+     eps = 1/1000   first lonely t = 3/8 (0.375)
+     eps = 1/10000  first lonely t = 3/8 (0.375)
+   delta = 1/8 + 1/1000 (X not lonely)
+     eps = 1/10     first lonely t = 3063/3550 (0.863)
+     eps = 1/100    first lonely t = 3063/3505 (0.874)
+     eps = 1/1000   first lonely t = 62126/7001 (8.874)
+     eps = 1/10000  first lonely t = 5661260/70001 (80.874)
+(2) one-free lemma on random six-sets
+   tested 2587, failures 0
