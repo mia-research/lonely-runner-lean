@@ -4405,3 +4405,34 @@ relocation: when a class's isolation dies at a pinch (a wall), some other class'
 runner's first two blocks. The pinch-level facts proved so far (`PinchOpenN`: both sides open at a simple pinch, one
 side by the mirror) put the other side at the mirror `P − t₀`, which is far; the band's data put it within `R ≤ 12`.
 What bounds the jump is the open question, now located at a single wall.
+
+---
+
+## E122 — 2026-09-27 — the cascade read literally: a walk through the union of windows; the band as two copies
+
+**Owner** (mid-run): *"I wonder if you are treating the mechanism as if it exists in a recognisable shape and then finding
+it doesn't and then trying to change the shape, rather than let the cascade teach how it works and actually follow … The
+training data is what muddles the water."* Recorded; the reading below starts from the cascade's definition only.
+
+**What the cascade is, literally** `[reasoned from the definition]`: every reading `s` blocks the open windows
+`((8k−1)/s, (8k+1)/s)` of `R = 8·d_min·t`, width `2/s`, period `8/s`. A move goes to the right end of the latest-ending
+window containing the current `R`. So the cascade walks right from `R = 1` through the **union of all windows** and stops
+at its first uncovered point. Everything about where isolation lands is the structure of that union: a chain of
+overlapping windows, broken for the first time at the landing.
+
+**In the band** (`7 < s₇ < 9` in units of `d_min`): the slowest runner's own window `(7, 9)` splits the range; the other
+six readings' windows must cover **copy 0** `[1, 7]` entirely, and then **copy 1** `[9, 15]` entirely, for the landing to
+pass 15. From copy 0 to copy 1 every runner's window lattice slides by the fraction `{sᵢ}` of its own period
+(`R + 8` shifts runner `i` by `8sᵢ ≡ 8{sᵢ}`); the slowest runner does not slide.
+
+**Tested, exact** (`experiments/nN/redo/band_two_copies_v1.out`, `band_top_gaps_v1.out`):
+- Every band set to 40 has an uncovered point in copy 0 (1,717,540 of 1,717,540); the late fine shapes need copy 1.
+- The top's deviation `ε = s₇ − 7` opens `G_m = [7(8m−1)/s₇, 8m−1]` just before the slowest runner's windows (length
+  `(8m−1)ε/s₇`); at the supremum shape the copy-1 component starts exactly at `105/s₇`. **But the other readings cover
+  both `G₁` and `G₂` in 69,479 band sets to 40 and 1,821 of 20,000 fine shapes**, which are isolated elsewhere: the
+  top's gaps are one source of gaps, not the mechanism.
+
+**The question the cascade poses** `[open]`: why a cover of copy 0 by the six readings' window lattices cannot survive the
+slides `{sᵢ}` into a cover of copy 1. The measure of the windows does not forbid it (about `1.5` per reading on a length
+of 6), so the obstruction is in the arithmetic of the slides. An isolated agent was given the bare statement (lonely at
+some `R ∈ [1, 15]` in the band) at the same time; its report is recorded when it arrives.
