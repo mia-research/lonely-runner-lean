@@ -5197,3 +5197,48 @@ lands at the nearest runner's bound and a fast runner in the subject's slot move
 window (the owner's "8 million and 7"). The structure is **clusters at well-separated scales, nested**: `nested_clear`
 (proved) is the case of single readings with ratios `≥ 7/3`. Next: state the nested-clusters rule, test it with the
 cascade on the Case C populations, perturb the exceptions.
+
+---
+
+## E156–E158 — 2026-09-28 — the regime skeleton in Lean; the coverings checked before stating; one mechanism
+
+**Owner:** *"Ok please look at the lean and the proof we are trying to construct"*; then *"yes build it in lean"*; *"As the
+gaps get bigger, they just fall into larger grid positions; we shouldn't need thousands of certificates, we can already
+prove grids globally isolate and then it's just a deviation from grid"*; *"It will be because there are two runners in
+the same slot, which just means it delays the isolation event because the runners need to separate from each other"*;
+*"It's the same mechanism over and over. Can't you see that."*
+
+**Review of the Lean (E156):** `LonelyRunnerAt8 ⇔` every `EightResidual` set lonely (proved); `⇐ CaseB8 T ∧ CaseC8 T`
+(Case A inside, proved; B and C OWED); `⇐ WindowBound` (OWED). Of this session's modules only `OneFreeEightN` fed the
+target (as the residual field `no_one_free`); `TwoBlockN`, `NestedBlocksN`, `GridPairLawN`, `SweepBridgeN`, `SlowBlockN`,
+`OneFreeN` were imported by nothing. The three Case B agents died with the previous process (exploration scripts only).
+
+**Coverings checked before stating (E157)** (`LonelyRunner/experiments/nN/redo/regime_cover_v1/v2`,
+`casec_gridclass_v1`, `casec_composed_v1`, `casec_leftover_cascade_v1`, exact, protected runs):
+- An ad hoc regime list (bound, first opening, low blocks, slow block at the largest gap) left 14 Case B sets and
+  hundreds of Case C sets uncovered; allowing the slow block with the nearest runner alone would make the covering the
+  E72 neighbour bound (the regimes then do no work). Not used.
+- **The grid-class regime** (grid through reading `e` at scale `e/mm`, class `c ∈ φ(8)`, laps from the grid point,
+  decided by 1-D Helly): Case B to 24, 0 uncovered with `mm ≤ 4` (E132); Case C: all 635,334 sets with least reading 1
+  and readings `≤ 32` with `mm ≤ 4` (least `mm` 1/2/3/4 = 557,732/73,903/3,513/186); 19,610 of 19,625 random wide sets
+  (`mm` up to 7); all 547 constructed residual C members (`mm ≤ 5`). The owner's "they just fall into larger grid
+  positions" holds on these populations `[VERIFIED — these populations]`.
+- The 15 random-wide leftovers: each has a middle reading on a multiple of `8 d_min` (captured at every rational class
+  instant of the nearest runner's grid; never the largest, so `GridNudgeN` does not apply); the cascade releases it by
+  its own exit and one to three fast nudges, landing at `R ∈ [1.009, 1.09]`. The composed regime (slow block plus a
+  fast-group grid class) covers none of them.
+
+**One mechanism (E158, owner):** the capture is two runners in one slot (the captured runner and the subject); the
+isolation waits for them to separate, the captured runner's exit. The near pair (`1/(8ε)`, E140), the grid nudge, the
+doubled edge (E135) and the late band's carry to `R = 9` (E151, E154) are the same event, and it is exactly one move of
+the cascade (a runner in the subject's slot; go to its separation). The proof therefore has one mechanism and one
+question: separation is forced whenever speeds differ; what must be shown is that separating one pair cannot keep
+putting another runner into the slot for ever.
+
+**In Lean** (`LonelyRunner/LonelyRunner/LRC/Spec/RegimeSkeletonN.lean`): regimes `BoundClear8`, `GridClass8`,
+`WithinTwoBlocks8` (a placeholder for the separation regime; Case C only), `RegimeB8`, `RegimeC8`, each with a proved
+sufficiency (`lonely_of_gridClass8` via `lonely_eight_of_pairwise_laps`); **`CoverB8`, `CoverC8` registered OWED**;
+`caseB8_of_cover : CoverB8 → CaseB8 24`, `caseC8_of_cover : CoverC8 → CaseC8 24`,
+**`lonelyRunnerAt8_of_covers : CoverB8 → CoverC8 → LonelyRunnerAt8`**. Gate result below.
+Gate: **PASS 1,944** declarations, axiom-clean (`experiments/nN/spec_gate_regime_skeleton.out`); `CoverB8`, `CoverC8`
+on the OWED register beside `WindowBound`, `CaseB8`, `CaseC8`.
