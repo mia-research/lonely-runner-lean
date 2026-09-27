@@ -4994,3 +4994,22 @@ lonely with margin `1/(|G|+1) ≥ 1/7`. The one condition left is that the slow 
 instants: **E118's C1 statement, now the mechanism of Case B as well as Case C**; `FastPair8`, `BlockSplit8`,
 `OneFreeEightN` are its proved cases. Next: C1 through the cascade (how `G`'s lonely instants sit against the slow
 group's windows; the 703 delays perturbed).
+
+---
+
+## E148 — 2026-09-27 — Case B's mechanism in two regimes: d_min's bound, or the fast group inside the slow group's first block
+
+(`LonelyRunner/experiments/nN/redo/c1_block_v1.{py,out}`, exact, spread `(7, 24]`, readings `≤ 24`)
+`[VERIFIED — this window]`. Split at the largest consecutive gap into slow group `S` (top `s_top`) and fast group `G`.
+From `t₀ = 1/(8 d_min)` every slow reading has cleared its first window, and if `S`'s spread is at most 7 the whole of
+`S` stays clear until `7/(8 s_top)` (`S` is an R1 group at `d_min`'s scale). Of the landings not at the bound:
+- band: `G`'s own landing lies in `S`'s first clear block in **42,013 of 42,013** (gap `≥ 15/7` in 25,841; in
+  `[9/7, 15/7)` in 16,172);
+- spread above 9: in `S`'s first block 102,583; in a later block of `S` 69; delayed by `S` (not `G`'s own landing) 703.
+
+**So on Case B to 24 the mechanism is two regimes** `[my reading of the above]`: (1) d_min: the bound is clear; (2)
+d_max: `S` is R1 at `d_min`'s scale and `G` (at most six readings) reaches its own isolation inside `S`'s first block
+`[1/(8 d_min), 7/(8 s_top)]`. Exceptions to study by perturbation: the 703 delays and 69 later-block landings (772 of
+210,335). **Owed, now precisely:** a statement about `G` alone: `G` is lonely at some instant in the window
+`[1/(8 d_min), 7/(8 s_top)]`, i.e. in `G`'s coordinates `R_G = 8 g₁ t ∈ [g₁/d_min, 7 g₁/s_top]`, a multiplicative window of
+ratio `7 d_min/s_top`. Next: the reduction in Lean (slow group clear on its first block; `G` clear there ⇒ lonely).
