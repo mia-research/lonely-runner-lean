@@ -1,0 +1,11 @@
+    6021  ('band to 24 (R* <= 7)', 'pair (1,7) fails', 'pair (3,5) fails')
+   23300  ('band to 24 (R* <= 7)', 'pair (1,7) fails', 'pair (3,5) holds')
+    4091  ('band to 24 (R* <= 7)', 'pair (1,7) holds', 'pair (3,5) fails')
+    9399  ('band to 24 (R* <= 7)', 'pair (1,7) holds', 'pair (3,5) holds')
+    5400  ('late fine shapes (R* > 7)', 'pair (1,7) fails', 'pair (3,5) fails')
+
+where both pairs fail, the reasons present:
+    5400  ('late', ('fails: edges cross', 'fails: interior deviation'))
+    4222  ('band to 24', ('fails: capture',))
+    1650  ('band to 24', ('fails: edges cross', 'fails: interior deviation'))
+     149  ('band to 24', ('fails: edges cross',))
