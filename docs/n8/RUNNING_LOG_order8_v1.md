@@ -4817,3 +4817,28 @@ almost always suffices. Switches drop the top lap (4 → 1, 2, 3; 3 → 1, 2) in
 or 6 in 20). `[VERIFIED — these 42 sets]` Reading `[mine]`: the four-block regime sits only at exact grid points of a
 finer grid (`d_min/3`, `d_min/2`); moving off the point relocates the isolation to an earlier, simpler regime (often
 two-block, `R ≈ 1.3`). Same pattern as E130's `m = 2` exceptions.
+
+---
+
+## E139 — 2026-09-27 — the chain by multiplicity: crowds end it; long chains are single-runner relays
+
+**Owner:** *"use the cascade to follow that chain"*; *"I think it's here we need to examine what the conjecture forces. I
+firmly believe there aren't that many arrangements. AP scale invariance means it doesn't matter if it is 1…8 or
+1m…8m, and grid means if it isn't 8m and it is 8 million and 7 that d_max or d_min finds the location point. Runners …
+can pass the speed of their neighbour … if r2 speeds past r3 then it is r3. The cascade works because it understands
+that no arrangement escapes it. We just need to logically show speed arrangements may be continuous but they are not
+infinite. Cluster of speeds and some outliers is AP with some grid. The only hard problem in this is two runners in one
+slot, but that is resolved. You can't even [have] three runners involved or it starts to apply AP again."*
+
+**Measured** (`LonelyRunner/experiments/nN/redo/chain_multiplicity_v1.{py,out}`, exact; every move of every chain;
+band to 24, Case B to 24, late fine band shapes), by `w` = runners in the subject's window at the move:
+- `w = 4`: last move in 26 of 32 (band), 125 of 165 (Case B), 46 of 47 (late).
+- `w = 3`: at most one move left in 2,148 of 2,395 (band), 6,483 of 7,600 (Case B), 1,866 of 2,669 (late; 601 with
+  four or more left).
+- `w = 1`: carries the long chains: in the late shapes 72,339 of 85,365 single-runner moves have four or more left.
+`[VERIFIED — these populations]` Reading `[mine]`: a crowd of three or four in the window ends the chain almost
+always (consistent with the owner's "three runners … apply AP again"); the long relays are one runner leaving as the
+next arrives, two runners bracketing the subject's slot. Next: at each single-runner move, where the next runner sits
+when the current one exits; trace the 601 late `w = 3` exceptions; count arrangement types with fast outliers taken
+by their fraction (the category counts of E124 and the strips grow with the lap labels of fast readings, which the
+owner's grid reading says are not types).
