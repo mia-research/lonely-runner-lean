@@ -4366,3 +4366,42 @@ blocks about a quarter); fixed-flank families fail on dense top blocks (a readin
 top's openings). The one that follows the cascade itself: its pushes form a finite state machine over monotone lap
 assignments (laps ≤ 7 while `R < 7`), each transition a linear condition; exhausting the band is then that every path
 ends in a compatible assignment before `k₀` moves.
+
+---
+
+## E121 — 2026-09-27 — O7: the band's cascade does pass 7; the supremum and its anatomy; enumerative routes measured
+
+**Owner:** *"use the cascade to find why the pushes stop before 7 … This is eminently answerable … work autonomously …
+remember we have an oracle that perfectly isolates every arrangement, all we need to do is figure out the mechanism."*
+(Owner away for a few hours; work below is autonomous.)
+
+- **O7. "In the band the slowest runner never leaves its first block" was range-forced.** E120 took it from readings
+  `≤ 40` (`R* ≤ 6.447`), 20,000 random sets with `d₁ ≤ 400`, and a weak hill-climb (6.03). A local search on fine shapes
+  (`band_extremal_v1/v2`, `d₁ = 2520, 27720`) finds `R* = 11.966`, confirmed by an independent scan of every opening
+  (`band_late_trace_v1.out`). The trap handover v7 §4.6 records (E93/E94), again. The target for the band is therefore
+  lonely at some `R ∈ [1, 7] ∪ [9, 15]`, not `[1, 7]`.
+
+**The supremum** `[EMPIRICAL — 64 climbs, fine scale]` (`band_extremal_v2.out`): all climbs converge to `R* ≈ 11.966`
+at one shape, readings/`d₁ ≈ (1, 2.35, 3.24, 4.1886, 5.2223, 5.7871, 7.4378)`, readings 4–7 pinned, 2–3 free. None
+exceeds 15, consistent with Case B's certificates (event by `R = 15`, handover v7 §3 step 6).
+
+**Anatomy** (`band_sup_anatomy_v1.out`, exact): at the rounded supremum shape the lonely set in `[1, 16]` is
+`{6.3191} ∪ [11.966, 12.033] ∪ [12.650, 12.773] ∪ [13.042, 13.131] ∪ [14.117, 14.501]`: the first lonely instant is a
+**single point**, a simple pinch (reading 4 on the leaving edge at 1.0, reading 6 on the entering edge at 7.0). Moving
+one reading by `±0.005` either opens it (`R*` → 1.21 or 5.24) or kills it (`R*` → 9, or ≈ 12). **A late event is the far
+side of a wall**: in the owner's terms, class 7's relocated isolation (the AP's global instant `R = 7`, pinch pair
+{1, 7} for the undeviated AP, here displaced to 6.32 with other pinchers) dies at a pinch, and the isolation jumps to the
+next class that survives (near 11–13, the {3, 5} pair's classes on the slowest runner's second lap).
+
+**Enumerative routes measured, and why they are not the proof** (exact):
+- The AP's own class instants, readings matched to AP positions by rank (`band_ap_classes_v1.out`): compatible for
+  311,198 of 1,717,540 band sets (classes 3, 5, 7) and for none of the late extremal shapes. The reference must be chosen
+  per arrangement (a grid at the arrangement's own scale and laps), which is what a landing lap assignment is.
+- Distinct cascade push sequences in the band (`band_push_paths_v1.out`): 454, 1,242, 2,141 to 24, 32, 40, still
+  growing; 19 new in 20,000 fine shapes. Following the cascade path by path reproduces the certificate count.
+
+**What the mechanism must be, stated precisely** `[reasoned]`: not a list of paths or cells but an invariant of the
+relocation: when a class's isolation dies at a pinch (a wall), some other class's isolation exists within the slowest
+runner's first two blocks. The pinch-level facts proved so far (`PinchOpenN`: both sides open at a simple pinch, one
+side by the mirror) put the other side at the mirror `P − t₀`, which is far; the band's data put it within `R ≤ 12`.
+What bounds the jump is the open question, now located at a single wall.
