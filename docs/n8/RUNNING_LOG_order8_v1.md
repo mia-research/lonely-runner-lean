@@ -5643,7 +5643,7 @@ Place statements, each checked against the landing by exact equality:
   (bound 200,736; next opening 63,806; R1 37,438; reverse R1 7,847; ladder 1,062). E100 reproduced.
 - **S1, a named view displaced by one separation**: the view `v` has a runner in the subject's slot; it leaves, and
   `t*` is its exit, `t* = move(v)` (E158; `SeparationN`): **31,318** (from rung R1 22,187, from a next opening 6,555,
-  from a nudge 2,576; the runner that leaves is a faster reading, ranks 3–6 in 29,826). None from the bound: a runner
+  from a nudge 2,576; the runner that leaves is one of ranks 3–6 in 30,476 and ranks 1–2 in 842). None from the bound: a runner
   captured at the bound leaves at an R1 view, already S0.
 - **S2, the stretch at a ladder rung** `a/q` (`q ≤ 8`): the incident's left boundary is the **latest opening at or
   before the rung**, `max_e (⌊e·a/q − 1/8⌋ + 1/8)/e`: **3,129 of the 3,897 incidents S0 and S1 miss** (rungs `1/8`
