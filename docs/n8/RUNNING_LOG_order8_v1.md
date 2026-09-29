@@ -5448,3 +5448,77 @@ point 1, lap 0). **`Cover8 2`: none uncovered.**
 no case split. **Retired:** `CoverB8`, `CoverC8`, `RegimeB8`, `RegimeC8`, `WithinTwoBlocks8` and their theorems (git
 history before `1807df7`); `SlowestSkeletonN.CaseB8`/`CaseC8` marked off the path (still registered OWED for the record).
 `Cover8` is the single owed statement of this route.
+
+---
+
+## E170 — 2026-09-29 — Lean review; `Cover8` card bound committed; band cover built; quantity tests before formalising
+
+**Record gap.** `BandCover*N.lean`, `gen_band_lean_v{1,2}*.py`, `g1_cascade_v1.py` and `pair_sep_general_v1.py` cite
+E167–E169; this log has no such entries. This entry does not fill them.
+
+**Owner:** *"Can you please review the lean work for n=8"*; then *"Go ahead with both and do the tests for quantity before
+formalising"* (both = commit the `Cover8` correction separately, then run the full Spec gate).
+
+**Review findings** (`LonelyRunner/` source read-only until the commit below):
+- **`Cover8` as committed at `1807df7` was false for every `M`**: it quantified over every `Finset ℕ`, and `{1,…,8}` has
+  no instant at threshold `1/8` (of the nine points `0, t, …, 8t` two lie within `1/9`; their difference is `jt` for a
+  reading `j` in `1..8`). `lonelyRunnerAt8_of_cover8` was never wrong; its hypothesis was unsatisfiable. The E166 entry
+  and the 1,950 gate PASS (`spec_gate_retire.out`) certified that version; a gate cannot see a false `Prop` (the
+  `DoorFirstLap` pattern). **Fixed: `LonelyRunner/` commit `3ea9feb`** (`S.card ≤ 7`; the fix only — the staged file was
+  compiled off-tree first; `gridStep8_two_bounded` and `TwoBlock.exists_in_assigned_blocks` stay uncommitted).
+- **What `Cover8 M` asserts** `[reasoned; exact check]`. Write NB(X) for "every set of at most seven positive whole
+  numbers is lonely at some `t` with `8·d_min·t ≤ X`". Then **NB(M − ½) ⇒ `Cover8 M` ⇒ NB(8⌊7M/8⌋ + 7)**. Left: with
+  `e = max S`, `mm = ⌊8et + ½⌋`, class `c = 1`, laps `⌊dt⌋`, every lonely instant with `8mt ≤ M − ½` is a `GridClass8`
+  instance (0 failures in about 353,000 lonely instants; scratchpad `cover8_sandwich_v{1,2}`). Right, at `M = 2`: Lean,
+  `gridStep8_two_bounded` (uncommitted). **Not an equivalence**: whether `Cover8 2 ⇔ NB(15)` is open; no tested set
+  separates them. Below `R = M − ½` the grid and class clauses constrain nothing.
+- **The band cover compiles.** Built one module at a time (about 53 min; the one earlier build log stops at 8251/8258,
+  and the smallest module alone peaks at 7.9 GB). `LRC.BandCover.band_lonely`: seven real readings `1 ≤ s₁ ≤ … ≤ s₆`,
+  `7 ≤ s₆ ≤ 9`, are lonely. **`[PROVED — Lean]`**: 289 of 289 declarations `[propext, Classical.choice, Quot.sound]`.
+  Untracked; imported by nothing on a route to `LonelyRunnerAt8` (it settles the 7–9 part of `CaseB8`, off the path).
+- The parallel session's commits `1526de6` (`PinchTransportN`), `33e1b5f` (`LapDeadlineN`), `f93fdd6`
+  (`MixedLapOverlapN`) were axiom-checked independently here (33 and 13 declarations, all standard; no new `Prop`; they
+  import only tracked modules).
+
+**Two facts recorded for the termination question** `[reasoned from the definitions]`: (1) for whole-number readings
+well-foundedness is automatic — every move lands on an opening `(k + 1/8)/d` (`Iteration.lean:37`), there are `Σd` per
+unit of time, iterates strictly increase, and positions repeat after `t = 1`; so a non-isolating chain is exactly one that
+runs a full period, and the free rank (`Σd`) is not scale-free. (2) For whole-number readings every pair's capture state
+recurs with period `1/gcd(a, b)` (`HandoffDriftN.zero_drift_iff` with `(r, s) = (a/g, b/g)`), so a quantity of one pair's
+state cannot decrease across a period. `lonely_iff_run_ends` (`Iteration.lean:770`) already proves termination ⇔
+isolation (parallel session's correction: "remaining global step" is not a reduction).
+
+**Quantity tests before formalising** (`LonelyRunner/experiments/nN/redo/quantity_tests_v1.{py,out}`,
+`quantity_tests_v1b.{py,out}`, `quantity_tests_v1c.{py,out}`, commits `0b9e646`, `51e1214`; exact; spec fixed in the script's docstring before any data). A
+candidate survives only if strictly monotone on every chain, well-founded, scale-free (`S` vs `3S`) and joint.
+Candidates: Q1 readings in the way; Q2 lap groups; Q3 setter rank; Q4 setter lap; Q6 wait; Q7 total depth; Q8 horizon
+of the clear readings; Q9 `MixedLapOverlapN` width deficit; Q11 openings left in the period (control).
+- **Controls pass**: Q11 strictly decreases on every chain of every population and differs under scaling on 2,085 of
+  2,085; the Lean consistency check (criterion certifies ⇒ `t_N ≤ P`; every chain ends within a period) has 0 violations.
+- **No candidate survives** `[VERIFIED — these populations]`. Chains with at least two moves: Case B to 24 90,726; Case C
+  sample (20,000 sets, readings ≤ 200) 8,358; late band shapes 5,400. Strictly monotone chains, Case B: Q1 9,985 (dec);
+  Q2 5,015 (dec); Q3 47,047 (dec; 55,144 increasing transitions, the bridges); Q4 14,361 (inc); Q6 21,794 dec / 29,687
+  inc; Q7 39,605 (dec); Q8 59,410 (inc); Q9 undefined (three or more unprotected clear readings) somewhere in 82,777.
+  **Late band shapes: none of Q1–Q9 is strictly monotone on any of the 5,400 chains.** All of Q1–Q9 are scale-free (0 of
+  2,085 differ). First violations are listed individually in the `.out`.
+- **Chain lengths** (moves): Case B max 19 (`(1, 19, …, 24)`, a descending relay); Case C sample max 11; late shapes 17–25.
+  Max `R*`: 5.667, 2.558, 10.835.
+- **Pair recurrence** `[VERIFIED — these populations; the zero is forced]`: the same hand-off pair `(a, b)` recurs within
+  a chain in 802 of 90,726 Case B chains and 4,882 of 5,400 late chains (E163); pair plus depth
+  (`HandoffDriftN.depth8`) recurs in none. **That zero is forced by chain length** (`quantity_tests_v1c`, commit `51e1214`):
+  all 977 Case B returns and all 8,909 late-shape returns come sooner than `1/gcd(a, b)`, and a zero-drift return needs
+  `s·a = r·b` with `r ≥ 1`, so `r ≥ a/g` and the elapsed time is at least `1/g`. Every return is the nonzero-drift case.
+  What stays open: a joint rank built from `repeated_capture_bounds_drift` (finitely many repeats of one lap-advance
+  pattern with nonzero drift) across changing patterns and pairs; not tested here.
+- **`MixedLapOverlapN` reach**: certifies somewhere in 16,057 of 90,726 Case B chains (at the last move in 9,765; two or
+  more moves early in 186); late shapes 1,121 of 5,400 (last move 1,109; early 0).
+- **Correction to E114's boundary note**: the `2k+1` cascade length on `(1, 5k−2, 5k, 10k−2)` is an **order-five** fact
+  (threshold `1/5`: moves `2k+1` for even `k`, `2k+2` for odd `k` in this implementation's count; at `1/8` the same sets
+  take 0–3 moves). No order-eight family with unbounded chain length is known from these runs.
+
+**Gate.** Full Spec gate **PASS 2,338** declarations, axiom-clean, 87 `Prop`s all registered, tree stable (digest
+`eaf210fdfe84`), 735 s (`LonelyRunner/experiments/nN/spec_gate_cover8_card.out`, commit `bc0ae6d`). **Scope:** the gate reads
+the working tree, so it covers the untracked modules (band cover, `CascadeGridN`, `CascadeTransportN`, `HandoffDriftN`,
+`HandoffResonanceN`, `ArrangementShapeN`) and the uncommitted `gridStep8_two_bounded` / `exists_in_assigned_blocks`.
+HEAD's `RegimeSkeletonN` (fix only) was compiled separately off-tree, not gated as such. `Cover8` stays OWED.
+
