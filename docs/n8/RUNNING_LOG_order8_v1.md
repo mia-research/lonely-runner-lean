@@ -5879,3 +5879,46 @@ reflected window's laps grow with `P`, and approaching a parameter where windows
 bound; so the global half (E178; E115/O5) is untouched by reflection, and the isolation near the first one is carried by
 the born windows at named places (E179). Left open by this entry: multi-pinches (the 28 that pair and the 41
 single-parameter windows need their own statement), and the bounded-time half.
+
+---
+
+## E181 — 2026-09-29 — partial reflection in Lean; every simple pinch has a partner at the same parameter
+
+**Owner:** *"yes put the reflection identity in Lean and test it"*; and *"Could there be a series of pinches interacting
+between the other 6 so its like an orchestrated overlapping pattern?"*
+
+**Already in the tree, from the parallel session** (uncommitted when read): `LRC/Spec/PinchReflectionN.lean`, the full
+reflection around a common period `(λ+1)t` of every reading — reflected labels `Pᵢ − qᵢ − 1`, every active slack's slope
+reversed with factor `−λ` (`active_slope_reversal`, including simultaneous pinches), and an actual right neighbourhood
+of reflected windows (`reflected_right_windows`). Not duplicated. Its slope identity uses only the two active readings;
+its window theorem needs every reading whole at `(λ+1)t`.
+
+**New in Lean: `LRC/Spec/PartialReflectionN.lean`**, `partial_reflected_right_inequalities`: reflect only the readings in
+`R ⊆ S` (each whole at `(λ+1)t`, e.g. just the pinching pair around its own period); every other reading keeps its own
+label and must be strictly clear at the reflected instant `λt`; then the new labels satisfy every pairwise window
+inequality on a right neighbourhood. The one new step: at `λt` a slack is zero only if both readings sit on boundaries,
+and unreflected readings are strictly inside, so every zero slack is between reflected readings. `[PROVED — Lean]`,
+`[propext, Classical.choice, Quot.sound]`. **Tested on a real event** (`experiments/nN/partial_reflection_axioms_v1.lean`,
+`real_event_instance`): the death at `τ = 23/37` on the path to `(1, 7, 12, 15, 17, 18, 23)`, pair period `37/42`,
+`λ = 3/5`, every hypothesis discharged by computation; axiom-clean. **Spec gate PASS 2,365** declarations, 139 modules,
+tree stable (`experiments/nN/spec_gate_partial_reflection.out`). **Not committed**: `PartialReflectionN` imports
+`PinchReflectionN`, which imports `SymbolicWindowTransportN`; both are the parallel session's and uncommitted, so they go
+in first.
+
+**Against the cascade** (`LonelyRunner/experiments/nN/redo/partial_reflection_v1{,b}.{py,out}`, commit `47c77de`; exact;
+E178's paths, subsamples) `[VERIFIED — these subsamples]`:
+- **Deaths**: at every simple-pinch death, 1,712 of 1,712, a partial reflection around the pinching pair's own period
+  with the other five strictly clear exists within 21 multiples; its labels form a window just after the pinch, born
+  exactly there, in 1,712 of 1,712 (the theorem's conclusion on real data).
+- **Births**: at every simple-pinch birth, 1,449 of 1,449, the partner is a window that dies at the same parameter.
+- **Place test**: the partner is the cascade's replacement in 29 of 1,712 deaths, exactly E178's simultaneous events
+  (a window dies and an earlier one is born, `R` ratio `5/3`, first multiple of the pair period).
+- **Distance**: death partners at median `R` 23 (Case B), 67 (late shapes), 23 (Case C), against the full reflection's
+  77.5, 1.27 million, 647; birth partners in the late shapes at median 6.2 (first multiple in 23 of 24).
+
+**Reading** `[reasoned; the pairing verified on these subsamples]`: pinches come in **linked pairs**. Every simple pinch
+has a partner of the opposite kind at the same parameter, at `Q − t₀` with `Q` a multiple of the pinching pair's own
+period, and the other five readings clear there: an overlapping pattern set by the pair, with the other five's clearance
+as the condition. The pairing gives the relay condition at every simple pinch with a partner far nearer than the full
+reflection, but still not at bounded times; what keeps the first isolation close remains the windows already open
+(E178–E179), and the bounded-time half stays open.
