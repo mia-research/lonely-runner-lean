@@ -6298,3 +6298,66 @@ defined by the readings alone (not by loneliness, E145). Open: `q` itself, which
 
 **Gates running:** `compile-diff` of the map against log E100–E188 and v21 §15–§17E (owed before the map is relied on as
 complete); `memory-drafter` for the owner's ruling. Results in the next entry.
+
+---
+
+## E190 — 2026-09-30 — the reduction of an arbitrary arrangement, worked through: what each step exploits, and its template one level down
+
+**Owner:** *"So look at the proof we made to reduce "any" arrangement.  There are constraints inherent in the system,
+like the arrangement of speeds.  Lets carefully work our way through that"*.
+
+Read (statements and docstrings, not re-derived): `Spec/Target.lean` (`LonelyRunnerAt8`, `ExistenceAt8`,
+`lonelyRunnerAt8_of_existence`); `Spec/RealEightN.lean` (`existenceAt8_of_nat`, `existenceAt8_iff_congruence`);
+`RealFiveN.exists_rows`; `MergeSixN.exists_merge_model_all`; `ManyDirectionsN.lonely_of_model_many`;
+`OrderEightCasesN` (`lonely_eight_of_card_le_six`, `_common_factor`, `_no_multiple_of`, `_spread`, `_descent`,
+`_fast`); v21 §17A–B; `PROOF_SHAPE_REVIEW_2026_09_25_v1.md` §2.
+
+### The chain, step by step (all proved, or equivalent as recorded)
+
+- **N1. Arrangement → the subject's readings.** The separations are `(v i − v k)t` and `circDist` is even, so only
+  `|v i − v k|` matters (`lonelyRunnerAt8_of_existence`). **What the arrangement adds is coordinates, not a
+  restriction** `[reasoned; the review's N1 records it]`: every set of seven distinct positive reals is the reading set of
+  the slowest runner of `(c, c + d₁, …, c + d₇)`, `c > 0` (all speeds positive), and smaller sets are order seven's. The
+  signs, the gaps and the other seven subjects' readings are all functions of the seven numbers. The converse is not an
+  `↔` in Lean (review §2 N1); owed, small.
+- **N2. Real → whole numbers** (`existenceAt8_of_nat`). The readings are `l·(r₀ + Σ rⱼ βⱼ)` with whole-number rows over
+  directions free of rational relations (`exists_rows`). One class (all rows parallel): whole numbers, rescaled. More
+  than one: a whole-number direction `y` on which **two readings coincide** (`exists_merge_model_all`), so at most six
+  model readings; **order seven** clears them at `1/7` at a model instant `τ`; **stepping** (pigeonhole returns) finds a
+  real time at which every real reading is within the **margin `1/7 − 1/8 = 1/56`** of its model reading
+  (`lonely_of_model_many`). What it exploits: independent directions are a **freedom** (the real time can imitate any
+  whole-number projection), and the order below has **slack** to pay for the imitation. Rank one has no such freedom;
+  that is why whole numbers are what is left.
+- **N3. Common factor out; at most six readings by order seven.**
+- **N4. The case list → `EightResidual`.** Each case uses one arithmetic fact of the whole numbers and names its instant.
+
+### The template, and where it recurs one level down `[reasoned]`
+
+N2's shape is: **merge readings until at most six remain, settle those by order seven, and spend a freedom to place the
+rest inside the slack.** The case list repeats it at rank one, with a resolution `q` in the role of the direction:
+- `lonely_eight_of_descent` (`q = 8`): the multiples of 8 are **merged onto the grid** (at `t = (j + τ)/8` a multiple
+  `8d′` reads `d′τ`, whatever `j`), their cofactors (at most six) go to **order seven** at `τ`, and the non-multiples are
+  placed by a **pigeonhole over the eight shifts `j`** (cost `Σ max 2 (gcd e 8) < 8`).
+- `lonely_eight_of_fast` (R8): the six slow readings to order seven at `1/7`; the fast runner is the freedom.
+- `lonely_eight_of_card_le_six`: nothing to merge.
+- §17E's rung-selection rule is the same shape with the model instant fixed: at `i/q + 1/(8e) = (i + q/(8e))/q` a
+  multiple `q·d′` reads `d/(8e)`, i.e. the **cofactors at their own bound `1/(8e′)`, `e′ = e/q`**: "R1 on the multiples"
+  is R1 on the cofactors, and the units `i` are the shifts.
+
+**Caution (map M6, F6).** With the model instant left free, the template is the obligation again: a multiple of `q` is
+clear at `t` exactly when its cofactor is clear at `q·t`, so "some `(j, τ)` with the cofactors lonely at `τ` and the
+non-multiples clear at `(j + τ)/q`" is loneliness at `t = (j + τ)/q`, restated. The content is always a **restriction**:
+order seven's instant, the cofactors' bound, a pigeonhole over the shifts.
+
+### The constraint the reduction exploits, at rank one `[reasoned]`
+
+At rank one the arrangement of the speeds that matters is **which readings each `q` divides**. For each `q` the seven
+readings split into multiples (merged onto the grid, carried by their cofactors, at most six, so order seven always has a
+lonely instant for them) and non-multiples (which must fit into that instant pulled back by `q`). Every rank-one case
+in the list uses this split (R6: no multiple; common factor: no non-multiple; descent: few non-multiples cheaply placed;
+rung-selection: multiples spread). This is the inherent constraint for Q5: per `q`, the family is described by the split,
+the non-multiples' residues mod `q`, and the cofactors' structure.
+
+**Open from here (for the map, not mechanisms):** the split profile of each set across `q` (how many readings each `q`
+divides, with their cofactors), read against `q_min` (E188) and the residual; and which restriction of the model instant
+the non-multiples need when the split leaves several of them.
