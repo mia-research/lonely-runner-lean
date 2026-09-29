@@ -5806,3 +5806,41 @@ the AP; the local half ("a pinch does not destroy isolation") has, at every even
 every pinch after `s = 0` (the fact these samples show). Not addressed by this test: the global half, that the
 relocations stay at bounded times along the whole path (E115/O5: `WindowBound` on the moves is the whole-number
 conjecture).
+
+---
+
+## E179 — 2026-09-29 — the protecting window at each deformation event: a relay, not the AP's windows carried along
+
+**Owner:** *"yes identify the protecting window at each event"*.
+
+(`LonelyRunner/experiments/nN/redo/deform_protect_v1.{py,out}`, `deform_protect_v1b.{py,out}`, commit `9a07e0f`;
+exact; same paths and events as E178.) At each event after `s = 0` the **protectors** are the windows of positive width
+at `τ`. For a fixed lap assignment each pair condition is linear in `s`, so the parameters where it is a window form one
+interval `[s_lo, s_hi]` `[reasoned]`. Hence "from the AP" is exact: the window exists at `s = 0`, i.e. it is the AP's
+class window at `(8n+c)/8` with lap assignment `⌊i(8n+c)/8⌋`, and has existed all the way to `τ`; and an AP class window
+survives the whole path exactly when its lap assignment is still a window for the target.
+
+`[VERIFIED — these samples]`:
+
+| population | events after `s = 0` | with a protector | protected by an AP class window | paths protected by one at every event | targets an AP class window survives to |
+|---|---|---|---|---|---|
+| Case B, every 100th | 6,796 | all | 4,361 | 1,001 of 2,104 | 313 of 2,104 |
+| late band shapes, every 10th | 1,539 | all | 0 | 0 of 540 | 0 of 540 |
+| Case C sample | 5,402 | all | 1,203 | 12 of 500 | 7 of 500 |
+
+- The AP class windows that protect are all on lap 0 (classes 5, 3, 7). The target's first isolation is itself an AP
+  class window in 87 Case B targets, 1 Case C target, no late shape.
+- **So the protection is a relay**: AP class windows protect the start of many paths; windows born along the path take
+  over, each born while others are open (every event after `s = 0` has a protector, E178), and in the late shapes the
+  born windows carry all of it. The proposal "the protector is always an AP class window carried along" (E178's closing
+  suggestion) is refuted on these samples.
+- **The protectors are at named places** (subsamples, E174–E176's list applied to each protector's left end at `τ`):
+  Case B, 20,974 protector instances, all placed (AP-origin at rungs with `q ≤ 7` bar 2; born mostly `q ≤ 8`, 669 at
+  `q = 9–19`); late shapes, 2,598, all born, all placed with `q ≤ 7`, the commonest the nearest runner's second opening
+  (`R = 9`); Case C, 75,695 (wide spreads have many windows), 1,600 not placed at `q ≤ 40` and the rest spread to
+  `q = 40`. By E177, rungs with large `q` describe almost any instant, so the Case C naming is weak.
+
+**Reading** `[reasoned]`: what the deformation shows is not persistence of the AP's own windows but a relay of windows at
+named places, with a birth always ahead of the last open window's death (after `s = 0`, on these samples). The analytic
+target this points to is the relay condition: along the deformation, whenever an open window is about to die, another
+window is already open or is born first. Not proved; not addressed here: the global half (E178).
