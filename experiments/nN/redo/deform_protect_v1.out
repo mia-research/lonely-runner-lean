@@ -1,0 +1,67 @@
+E179 (2026-09-29): the window that protects each pinch along the deformation from the AP -- where does it come from?
+
+Owner: "yes identify the protecting window at each event".
+
+Same path, grid and events as deform_pinch_v1 (E178).  At every event after s = 0 the PROTECTORS are the windows of
+positive width that exist at tau.  For a fixed lap assignment k each pair condition (8k_i+1) d_j(s) <= (8k_j+7) d_i(s)
+is linear in s, so the parameters where k is a window form one interval [s_lo, s_hi] (computed exactly).  Hence:
+  ORIGIN AP      k is a window at s = 0: one of the AP's class windows, at the AP instant (8n+c)/8 (c odd), with
+                 k_i = floor(i (8n+c)/8); it has existed along the whole path up to tau.
+  ORIGIN BORN    k first became a window at s_lo in (0, tau): born along the path.
+Per target: the AP class windows (c, n <= 20) that are still windows at s = 1 (they persist through the whole path,
+since the parameter set is an interval containing 0 and 1), and whether one of them is the target's first isolation.
+
+
+== Case B to 24, every 100th ==  paths 2104, events after s = 0: 6796
+events with at least one protector: 6796
+events protected by a window from the AP: 4361; only by windows born along the path: 2435
+the AP class (c, n) of the earliest AP-origin protector: {(5, 0): 2607, (3, 0): 969, (7, 0): 785}
+   born-only event tau=6/13 death: protectors [((0, 0, 0, 0, 1, 1, 1), '1/8', None, 1.5), ((0, 0, 0, 1, 1, 1, 2), '18/221', None, 2.118), ((0, 0, 1, 1, 2, 2, 3), '9/275', None, 2.833)]
+   born-only event tau=8/15 death: protectors [((0, 0, 1, 1, 2, 2, 3), '9/275', None, 2.728), ((0, 0, 1, 1, 2, 2, 4), '111/209', None, 3.178), ((0, 0, 1, 1, 2, 3, 4), '36/71', None, 3.457)]
+   born-only event tau=342/629 birth: protectors [((0, 0, 1, 1, 2, 2, 3), '9/275', None, 2.714), ((0, 0, 1, 1, 2, 2, 4), '111/209', None, 3.148), ((0, 0, 1, 1, 2, 3, 4), '36/71', None, 3.44)]
+   born-only event tau=6/13 death: protectors [((0, 0, 0, 0, 1, 1, 1), '8/85', None, 1.286), ((0, 0, 0, 1, 1, 2, 2), '54/187', None, 1.875), ((0, 0, 1, 1, 2, 3, 3), '64/323', None, 2.66)]
+   born-only event tau=64/85 death: protectors [((0, 0, 0, 1, 1, 2, 2), '54/187', None, 1.53), ((0, 0, 1, 1, 2, 4, 4), '324/443', None, 2.357), ((0, 0, 1, 2, 3, 5, 5), '960/1513', None, 2.929)]
+   born-only event tau=87/115 death: protectors [((0, 0, 1, 1, 2, 4, 4), '324/443', None, 2.343), ((0, 0, 1, 2, 3, 5, 5), '960/1513', None, 2.912), ((0, 0, 1, 2, 4, 6, 6), '64/85', None, 3.48)]
+   born-only event tau=22/29 birth: protectors [((0, 0, 1, 1, 2, 4, 4), '324/443', None, 2.335), ((0, 0, 1, 2, 3, 5, 5), '960/1513', None, 2.902), ((0, 0, 1, 2, 4, 6, 6), '64/85', None, 3.468)]
+   born-only event tau=624/799 birth: protectors [((0, 0, 0, 1, 2, 3, 3), '22/29', None, 1.705), ((0, 0, 1, 1, 2, 4, 4), '324/443', None, 2.25), ((0, 0, 1, 1, 3, 4, 4), '24/31', None, 2.476)]
+per path: every event protected by an AP-origin window: 1001 of 2104
+targets with an AP class window persisting to s = 1 (n <= 20): 313 of 2104
+   earliest persisting class (c, n): {(3, 0): 202, (5, 0): 69, (7, 0): 42}
+targets whose first isolation IS an AP class window: 87; its class: {(3, 0): 84, (5, 0): 3}
+targets with no persisting AP class window (first 10): [((1, 2, 4, 5, 9, 10, 18), 1.0), ((1, 2, 5, 8, 15, 23, 24), 1.133), ((1, 2, 7, 11, 12, 20, 21), 1.0), ((1, 2, 13, 14, 16, 21, 23), 1.308), ((1, 3, 5, 7, 8, 9, 16), 1.286), ((1, 3, 11, 12, 15, 18, 24), 1.133), ((1, 4, 6, 7, 17, 22, 23), 1.0), ((1, 4, 8, 14, 20, 21, 24), 1.25), ((1, 5, 6, 10, 12, 17, 21), 1.0), ((1, 5, 9, 13, 16, 17, 21), 1.062)]
+
+== late band shapes, every 10th ==  paths 540, events after s = 0: 1539
+events with at least one protector: 1539
+events protected by a window from the AP: 0; only by windows born along the path: 1539
+the AP class (c, n) of the earliest AP-origin protector: {}
+   born-only event tau=508855/599533 death: protectors [((1, 2, 3, 4, 5, 6, 8), '203542/1348399', None, 9.0), ((1, 3, 4, 5, 7, 8, 10), '305313/629651', None, 11.212), ((1, 3, 4, 6, 7, 8, 11), '7531054/9231347', None, 12.211)]
+   born-only event tau=1015465/1113899 death: protectors [((0, 1, 2, 3, 4, 4, 5), '203093/808271', None, 6.425), ((1, 2, 3, 4, 5, 6, 8), '18463/109330', None, 9.0), ((1, 3, 4, 5, 7, 8, 10), '609279/1397941', None, 11.166)]
+   born-only event tau=609279/656431 death: protectors [((1, 2, 3, 4, 5, 6, 8), '18463/109330', None, 9.0), ((1, 3, 4, 5, 7, 8, 10), '609279/1397941', None, 11.172), ((1, 3, 4, 6, 7, 8, 11), '683131/748490', None, 12.188)]
+   born-only event tau=507975/548386 death: protectors [((0, 1, 1, 2, 2, 3, 3), '101595/880772', None, 4.231), ((0, 1, 2, 3, 4, 4, 5), '101595/401902', None, 6.33), ((1, 2, 3, 4, 5, 6, 8), '15630/74171', None, 9.0)]
+   born-only event tau=2235090/2299301 death: protectors [((1, 3, 4, 5, 6, 7, 9), '203190/209903', None, 10.523), ((1, 3, 4, 5, 7, 8, 10), '1219140/2790703', None, 11.065), ((1, 3, 4, 6, 7, 8, 10), '40638/65873', None, 11.781)]
+   born-only event tau=506915/562369 death: protectors [((0, 1, 1, 2, 2, 3, 3), '202766/1890473', None, 4.24), ((0, 1, 2, 3, 4, 4, 5), '101383/412421', None, 6.344), ((1, 2, 3, 4, 5, 6, 8), '101383/486915', None, 9.0)]
+   born-only event tau=101383/105555 death: protectors [((1, 2, 3, 4, 5, 6, 8), '101383/486915', None, 9.0), ((1, 3, 4, 5, 6, 7, 9), '608298/670493', None, 10.471), ((1, 3, 4, 5, 7, 8, 10), '1216596/3166201', None, 11.093)]
+   born-only event tau=202766/205349 death: protectors [((1, 3, 4, 5, 6, 7, 9), '608298/670493', None, 10.421), ((1, 3, 4, 5, 7, 8, 10), '1216596/3166201', None, 11.08), ((1, 3, 5, 6, 8, 9, 11), '1824894/4255441', None, 12.775)]
+per path: every event protected by an AP-origin window: 0 of 540
+targets with an AP class window persisting to s = 1 (n <= 20): 0 of 540
+   earliest persisting class (c, n): {}
+targets whose first isolation IS an AP class window: 0; its class: {}
+targets with no persisting AP class window (first 10): [((27720, 63963, 86790, 112837, 142389, 159647, 203542), 9.0), ((27720, 65506, 87523, 114138, 142766, 160864, 203093), 9.0), ((27720, 66172, 89391, 115423, 145003, 163567, 203190), 10.473), ((27720, 66645, 89041, 114152, 144842, 163098, 202766), 10.398), ((27720, 67255, 87811, 113448, 141519, 157834, 202604), 9.0), ((27720, 68045, 89968, 111744, 125067, 153372, 197044), 9.144), ((27720, 69131, 90048, 111275, 125551, 154076, 196919), 9.15), ((27720, 69652, 89321, 113469, 124802, 154959, 195581), 10.346), ((27720, 70425, 88645, 113100, 123445, 154137, 194832), 10.386), ((27720, 63963, 86875, 113688, 142235, 159647, 202866), 9.0)]
+
+== Case C sample (500) ==  paths 500, events after s = 0: 5402
+events with at least one protector: 5402
+events protected by a window from the AP: 1203; only by windows born along the path: 4199
+the AP class (c, n) of the earliest AP-origin protector: {(5, 0): 688, (7, 0): 259, (3, 0): 256}
+   born-only event tau=352/653 death: protectors [((0, 0, 0, 1, 1, 2, 2), '792/2353', None, 1.521), ((0, 1, 1, 2, 3, 5, 5), '220/423', None, 3.668), ((0, 1, 2, 3, 4, 6, 7), '352/2109', None, 4.714)]
+   born-only event tau=704/851 death: protectors [((0, 0, 0, 1, 1, 2, 3), '2288/3275', None, 1.087), ((0, 0, 1, 2, 2, 4, 5), '88/123', None, 1.783), ((0, 1, 2, 3, 3, 7, 8), '19008/24895', None, 2.926)]
+   born-only event tau=187/215 death: protectors [((0, 0, 0, 1, 1, 3, 3), '2904/3401', None, 1.087), ((0, 0, 1, 2, 2, 4, 5), '88/123', None, 1.589), ((0, 0, 1, 2, 2, 5, 5), '704/837', None, 1.783)]
+   born-only event tau=352/387 death: protectors [((0, 0, 1, 2, 2, 4, 5), '88/123', None, 1.417), ((0, 0, 1, 2, 2, 5, 5), '704/837', None, 1.558), ((0, 0, 1, 2, 2, 5, 6), '8/9', None, 1.646)]
+   born-only event tau=358/645 death: protectors [((0, 0, 1, 2, 2, 2, 3), '179/417', None, 1.677), ((0, 0, 1, 2, 2, 3, 3), '716/3509', None, 1.873), ((0, 0, 1, 2, 3, 3, 4), '179/473', None, 2.216)]
+   born-only event tau=3043/4030 death: protectors [((0, 0, 1, 2, 2, 3, 3), '716/3509', None, 1.087), ((0, 0, 1, 3, 3, 4, 4), '1969/4076', None, 1.435), ((0, 0, 2, 4, 4, 5, 5), '7697/11092', None, 1.813)]
+   born-only event tau=358/449 death: protectors [((0, 0, 1, 3, 3, 4, 4), '1969/4076', None, 1.219), ((0, 0, 2, 4, 4, 5, 5), '7697/11092', None, 1.545), ((0, 0, 2, 4, 4, 5, 6), '179/260', None, 1.637)]
+   born-only event tau=1432/1677 death: protectors [((0, 0, 2, 4, 4, 5, 5), '7697/11092', None, 1.2), ((0, 0, 2, 4, 4, 5, 6), '179/260', None, 1.256), ((0, 0, 2, 5, 5, 6, 7), '179/228', None, 1.462)]
+per path: every event protected by an AP-origin window: 12 of 500
+targets with an AP class window persisting to s = 1 (n <= 20): 7 of 500
+   earliest persisting class (c, n): {(7, 0): 4, (5, 0): 3}
+targets whose first isolation IS an AP class window: 1; its class: {(5, 0): 1}
+targets with no persisting AP class window (first 10): [((4, 22, 38, 68, 71, 156, 176), 1.0), ((1, 14, 63, 136, 140, 164, 179), 1.036), ((8, 10, 77, 119, 145, 184, 200), 1.0), ((6, 8, 78, 116, 166, 169, 182), 1.0), ((6, 52, 93, 96, 153, 162, 192), 1.097), ((2, 20, 77, 79, 87, 138, 195), 1.077), ((4, 11, 41, 99, 112, 180, 181), 1.01), ((4, 5, 85, 103, 136, 159, 194), 1.031), ((1, 12, 37, 58, 109, 128, 185), 1.008), ((2, 30, 38, 44, 74, 144, 180), 1.136)]

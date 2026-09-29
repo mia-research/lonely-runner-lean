@@ -1,0 +1,22 @@
+E179 follow-up: name each protector by the place list of E174-E176 (place_general_v1.place_G, applied to the
+protector's left end at tau): the bound, a reading's next opening 9/(8e), one separation from those, a rung of the
+nearest runner's ladder (itself, displaced by one separation, or the stretch at it; least q), or none.
+Subsamples: Case B every 400th, late band shapes every 40th, Case C first 100.
+
+== Case B every 400th: paths 526, protector instances 20974 ==
+  AP-origin 3011: place {'rung-sep': 1502, 'rung-str': 939, 'sep': 357, 'O': 190, 'rung': 23}; least q {2: 167, 3: 418, 4: 334, 5: 872, 6: 611, 7: 60, 10: 1, 11: 1}
+  born-origin 17963: place {'rung-str': 8566, 'rung-sep': 7325, 'sep': 1212, 'O': 735, 'rung': 125}; least q {2: 1667, 3: 3848, 4: 2972, 5: 4168, 6: 757, 7: 1574, 8: 361, 9: 329, 10: 99, 11: 165, 13: 63, 14: 2, 15: 8, 17: 2, 19: 1}
+  born, most common R of the protector's left end: [(9.0, 210), (11.34, 72), (12.5, 68), (14.467, 62), (11.0, 61), (13.667, 60), (5.857, 57), (4.867, 57), (6.467, 57), (5.667, 56), (1.133, 54), (10.22, 54)]
+  not placed (first 10): []
+
+== late every 40th: paths 135, protector instances 2598 ==
+  AP-origin 0: place {}; least q {}
+  born-origin 2598: place {'rung-str': 1165, 'rung-sep': 1106, 'sep': 223, 'O': 104}; least q {2: 468, 3: 877, 4: 402, 5: 458, 6: 22, 7: 44}
+  born, most common R of the protector's left end: [(9.0, 104), (10.616, 6), (9.189, 6), (14.39, 5), (10.764, 5), (9.174, 5), (9.216, 5), (9.171, 5), (9.203, 5), (9.191, 5), (4.656, 5), (11.235, 4)]
+  not placed (first 10): []
+
+== Case C first 100: paths 100, protector instances 75695 ==
+  AP-origin 633: place {'rung-sep': 293, 'rung-str': 229, 'sep': 79, 'O': 32}; least q {2: 42, 3: 91, 4: 93, 5: 208, 6: 76, 7: 9, 8: 1, 9: 1, 15: 1}
+  born-origin 75062: place {'rung-str': 42274, 'rung-sep': 30206, 'none': 1600, 'sep': 556, 'O': 319, 'rung': 107}; least q {2: 1701, 3: 3378, 4: 3073, 5: 5873, 6: 2309, 7: 6537, 8: 2477, 9: 3963, 10: 1780, 11: 6038, 12: 1422, 13: 5802, 14: 2029, 15: 2859, 16: 2183, 17: 3912, 18: 1033, 19: 3245, 20: 1141, 21: 1398, 22: 1109, 23: 2160, 24: 455, 25: 1248, 26: 590, 27: 833, 28: 356, 29: 913, 30: 96, 31: 690, 32: 267, 33: 375, 34: 184, 35: 380, 36: 64, 37: 338, 38: 115, 39: 200, 40: 61}
+  born, most common R of the protector's left end: [(4.333, 78), (9.0, 69), (12.333, 66), (3.8, 61), (9.667, 58), (10.2, 57), (5.4, 53), (11.8, 50), (9.286, 49), (2.2, 48), (13.4, 47), (10.429, 46)]
+  not placed (first 10): [('born', 'none', None, None, 4.057), ('born', 'none', None, None, 4.018), ('born', 'none', None, None, 10.646), ('born', 'none', None, None, 10.7), ('born', 'none', None, None, 11.919), ('born', 'none', None, None, 11.962), ('born', 'none', None, None, 3.923), ('born', 'none', None, None, 3.961), ('born', 'none', None, None, 4.042), ('born', 'none', None, None, 11.946)]
