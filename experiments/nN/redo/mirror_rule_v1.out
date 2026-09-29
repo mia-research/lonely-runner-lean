@@ -1,0 +1,36 @@
+E180 (2026-09-29): reflect each pinch of the deformation around the common period at tau.
+
+Owner: "There may be a more general rule here: reflect a pinched isolation event around a common grid period.  This
+swaps the boundary runners, and the active inequality reverses sign -- so the obstruction that kills the old window can
+support the new o[ne]" (message cut off).
+
+At an event tau of the deformation (deform_pinch_v1, E178) the tight window k is a single instant t0.  The readings
+d_i(tau) are rational; P is their least common period (P d_i(tau) = N_i, integers), P > t0.  The REFLECTED window has
+lap assignment k'_i = N_i - k_i - 1 and sits at P - t0.  Derivation (reasoned, in the E180 log entry): for a simple pinch
+(a on +1/8, b on -1/8) the active inequalities satisfy g_k'(s) = g_k(s) + 8 (N_a d_b(s) - N_b d_a(s)); both vanish at
+tau and their slopes have opposite signs because P > t0.  So a death of k at tau is a birth of k' at tau, and a birth of
+k is a death of k'.
+Checked here, exactly, at every event of the subsamples: k' is a window at tau (a single instant at P - t0); for a death
+of k, k' is not a window just before tau and is a window just after (born); for a birth of k, the reverse (dies).
+"Just before/after" = tau -+ delta with delta = 1/10^15 (all other constraints keep their margin at that distance; the
+check reports any case where that fails).  Multi-pinches are checked the same way and reported separately.
+
+
+== Case B every 400th: paths 526, events after s = 0: 1705 ==
+  simple pinches 1654: reflected window tight at tau, at P - t0: 1654; behaves as derived (death <-> birth): 1654
+     not as derived: 0; (kind, reflected before, after, original before, after): {}
+  multi pinches 51: reflected window tight at tau, at P - t0: 51; behaves as derived (death <-> birth): 15
+     not as derived: 36; (kind, reflected before, after, original before, after): {('birth', False, False, False, False): 30, ('death', False, False, False, False): 6}
+  where the reflected window sits, R = 8 d_min (P - t0): median 150.1, max 1259.2; original R median 1.75
+
+== late every 40th: paths 135, events after s = 0: 374 ==
+  simple pinches 374: reflected window tight at tau, at P - t0: 374; behaves as derived (death <-> birth): 374
+     not as derived: 0; (kind, reflected before, after, original before, after): {}
+  where the reflected window sits, R = 8 d_min (P - t0): median 1238149.0, max 7424534.8; original R median 4.24
+
+== Case C first 100: paths 100, events after s = 0: 1151 ==
+  simple pinches 1133: reflected window tight at tau, at P - t0: 1133; behaves as derived (death <-> birth): 1133
+     not as derived: 0; (kind, reflected before, after, original before, after): {}
+  multi pinches 18: reflected window tight at tau, at P - t0: 18; behaves as derived (death <-> birth): 13
+     not as derived: 5; (kind, reflected before, after, original before, after): {('birth', False, False, False, False): 3, ('death', False, False, False, False): 2}
+  where the reflected window sits, R = 8 d_min (P - t0): median 782.4, max 12493.4; original R median 1.00
