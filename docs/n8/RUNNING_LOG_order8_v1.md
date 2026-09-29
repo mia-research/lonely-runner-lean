@@ -5600,3 +5600,29 @@ fastest reading's opening in 2,605 (consistent with E100, E151).
 
 Next work is under the memory's place test: a statement names the class of arrangements and the place the isolation is,
 given by the readings, checked against the cascade; an exception is perturbed through the cascade.
+
+---
+
+## E173 — 2026-09-29 — the recurrence recorded in memory; corrections to E170–E172
+
+**Owner:** *"yes move it to the top and record it"*.
+
+- **Memory.** `feedback-n8-cascade-is-the-oracle-2026-09-27` was linked only from `feedback_INDEX.md`; it now heads
+  `MEMORY.md` (with the no-prereg memory) and the n=8 section of `lrc_INDEX.md`. Both memories were revised through
+  `memory-drafter` (isolated; raw artefacts and owner quotes only). What was added: the 2026-09-29 entry points (a parallel
+  session's rank note adopted as the plan without the place test; pre-registration returning without the word, as checks
+  and survival criteria "fixed before any data"; the owner's boundary/incident direction turned back into a rate); two
+  shapes new to the list (a decreasing quantity or rank per move or per wave; a rate in place of a place); the place test
+  applied to incoming notes and to a test script's pass condition; and, on the other side, CLAUDE.md §3 checks (the gate,
+  `#print axioms`, E171's C1/C2) stay, and monotone facts proved about the cascade stay as tools.
+- **Corrections found by the drafter** (each checked here):
+  - E172 quotes E171 as saying "chain length ≤ 7 × waves; what must be bounded is the number of waves". That wording is
+    not on disk anywhere else; it was chat. The on-disk form is `wave_incident_v1.py` line 36 ("a wave has at most seven
+    moves").
+  - E170 cites `Iteration.lean:770` for `lonely_iff_run_ends`; the theorem is at line 772 (770 is its docstring).
+  - E171/E172's late-shape landings, 2,311 (nearest runner's second opening) and 2,605 (fastest reading's opening), sum
+    to 4,916 of 5,400. The other 484 are hosted by ranks 1, 2, 4 and 5 (263, 46, 166, 9; `wave_incident_v1.out`).
+  - E171's "Reading, in the owner's frame" (each step of the walk as an exact residue test modulo `8a`; an incident as a
+    multiplier `u ≡ 1 (mod 8)` putting every `u·d mod 8a` in `[a, 7a]`) restates the flank form, `ExistenceAt8_flank`,
+    already proved equivalent to the target. Under the place test an equivalent restatement is not a step; it is recorded
+    as a restatement, not as a lead.
