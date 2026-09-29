@@ -1,0 +1,29 @@
+E185 (2026-09-30): the window (B) at the target, read on the path route's last move.
+
+Owner: "work on the window (B) on the path route making sure it is compliant to the framework, no density, no coverage,
+boundaries and isolation events and cascade as the oracle".
+
+From the Lean (PathRouteN.segment_lonely, DeformationN.lonely_along_path) and E116: on a move, the window holds exactly
+when every lattice point on it is lonely (off the lattice OneFreeN places the event; at a lonely lattice point
+move_one_strict / move_one_period keep nearby points lonely at its own instant or its mirror, inside its period).  The
+target is a lattice point of the last move.  So (B) at the target is the target's own isolation event, seen from the
+last move: six readings fixed, one reading (the mover) arriving.
+
+In boundaries and events: the six fixed readings have their own clear set F at 1/8 (their isolation is native order
+seven, at 1/7, so F has intervals with room).  The target's event t* (the cascade's landing on all seven) lies in one of
+F's intervals.  Recorded exactly, for every set of seven readings in 1..24 and every choice of mover (the path route may
+move the runners in any order, E115 O4):
+  j        the index, in time order, of the F-interval holding t* (j = 1: the six's first clear interval);
+  where    t* is F-interval's left end (a boundary of the six, the mover clear there) or the mover's opening inside it.
+Derived check (R8's mechanism, reasoned): a mover faster than 7 x every fixed reading cannot fit the six's order-seven
+interval inside one of its slots, so j = 1 for it.  Each F-interval with index < j lies inside one slot of the mover
+(it is where the mover is in the way throughout); checked exactly for every such interval.
+
+sets: 346104
+mover = the fastest reading: j {1: 309156, 2: 35218, 3: 1673, 4: 54, 5: 3}; where {'left end': 316874, 'mover opening': 29230}
+over all seven choices of mover, the least j per set: {1: 345133, 2: 958, 3: 13}
+the lowest-rank mover attaining the least j: {0: 145273, 1: 188961, 2: 5983, 3: 3020, 4: 1413, 5: 978, 6: 476}
+where t* sits in its F-interval (all movers): {'mover opening': 316820, 'left end': 2105908}
+CHECK every F-interval before t*'s lies inside one slot of the mover: 0 violations
+CHECK mover > 7 x every fixed reading => j = 1: {}
+sets where no choice of mover gives j = 1: 971; first 20: [((1, 3, 4, 5, 6, 7, 8), 3.5714285714285716, {0: 2, 1: 3, 2: 3, 3: 3, 4: 2, 5: 3, 6: 3}), ((1, 3, 4, 5, 6, 7, 16), 3.5714285714285716, {0: 3, 1: 3, 2: 3, 3: 3, 4: 2, 5: 4, 6: 3}), ((1, 3, 4, 5, 6, 7, 24), 3.5714285714285716, {0: 3, 1: 3, 2: 3, 3: 4, 4: 3, 5: 3, 6: 3}), ((1, 3, 4, 5, 6, 8, 14), 3.5, {0: 3, 1: 2, 2: 3, 3: 3, 4: 2, 5: 3, 6: 3}), ((1, 3, 4, 5, 7, 8, 12), 3.5714285714285716, {0: 3, 1: 3, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2}), ((1, 3, 4, 5, 7, 12, 16), 3.5714285714285716, {0: 4, 1: 4, 2: 3, 3: 4, 4: 4, 5: 2, 6: 3}), ((1, 3, 4, 5, 7, 12, 24), 3.5714285714285716, {0: 3, 1: 3, 2: 3, 3: 4, 4: 3, 5: 3, 6: 3}), ((1, 3, 4, 6, 14, 15, 16), 3.0625, {0: 3, 1: 3, 2: 4, 3: 2, 4: 4, 5: 3, 6: 3}), ((1, 4, 5, 6, 7, 8, 13), 2.8333333333333335, {0: 3, 1: 2, 2: 2, 3: 2, 4: 3, 5: 2, 6: 2}), ((1, 4, 5, 6, 7, 10, 16), 2.8333333333333335, {0: 4, 1: 3, 2: 2, 3: 2, 4: 3, 5: 2, 6: 3}), ((1, 4, 5, 6, 7, 13, 16), 2.8333333333333335, {0: 3, 1: 3, 2: 2, 3: 2, 4: 3, 5: 2, 6: 2}), ((1, 4, 5, 6, 7, 13, 24), 2.8333333333333335, {0: 4, 1: 3, 2: 3, 3: 3, 4: 4, 5: 2, 6: 2}), ((1, 4, 5, 6, 7, 16, 20), 2.85, {0: 4, 1: 3, 2: 2, 3: 3, 4: 3, 5: 3, 6: 2}), ((1, 4, 5, 6, 7, 16, 23), 2.8333333333333335, {0: 5, 1: 3, 2: 2, 3: 3, 4: 3, 5: 3, 6: 2}), ((1, 4, 5, 6, 14, 15, 24), 2.375, {0: 4, 1: 4, 2: 2, 3: 3, 4: 3, 5: 2, 6: 2}), ((1, 4, 5, 6, 14, 16, 22), 2.357142857142857, {0: 5, 1: 3, 2: 2, 3: 2, 4: 2, 5: 2, 6: 2}), ((1, 4, 5, 6, 14, 16, 23), 2.357142857142857, {0: 5, 1: 3, 2: 2, 3: 2, 4: 2, 5: 2, 6: 2}), ((1, 4, 5, 6, 14, 23, 24), 2.375, {0: 4, 1: 4, 2: 2, 3: 2, 4: 3, 5: 2, 6: 2}), ((1, 4, 5, 6, 15, 16, 21), 2.3333333333333335, {0: 5, 1: 4, 2: 2, 3: 2, 4: 2, 5: 2, 6: 2}), ((1, 4, 5, 6, 15, 21, 24), 2.375, {0: 6, 1: 5, 2: 2, 3: 3, 4: 2, 5: 3, 6: 2})]
