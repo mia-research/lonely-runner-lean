@@ -6177,3 +6177,95 @@ disjoint `[VERIFIED — exact, all pairs in 2..7]`; `{2,4}`, `{2,6}`, `{2,7}`, `
 6 or 7 overlap. So each reading blocks at most one of `2t, 3t, 5t`, and one of the three has at most two blockers among
 seven readings. It is stated at a clear instant (the old pinch), so it is the replacement after a pinch, local stability
 (`hopen`), and it does not bear on (B).
+
+---
+
+## E188 — 2026-09-30 — method: the cycle read from the record; the cascade side and the case list are one object; the landings in rung coordinates
+
+**Owner:** *"yes run the landings through the cascade in residue form / I feel like we keep doing the same thing.  we
+propose a a why, check it against cascade and find an exception that rules it out.  But are we understanding why the
+exception happens, are we trying to tie all these hints clues of what is happening together.  Are we mapping  things so
+we understand before proposing a the mechanisim.  We know cascade never fails, we just need to know how so we can prove
+it rather than observe it.  We need to reason through our methodology and especially our repeated attempts to see what
+can break us out of the cycle."*
+
+### The cycle, from the record
+
+- **It has been named before.** O10 (E162, owner 2026-09-28): general mechanisms taken for small distinct ones, regime
+  lists extended item by item whenever something leaked. It recurred after that: E174 (places, misses), E175 (the 768),
+  E178–E183 (deaths, protecting windows, reflection, relocation, restart), E185 (the last move, the 971), E187. Each
+  began from a new vantage, stated a rule the majority obeys, and ended on its exceptions. E184 already records that
+  E178–E183 re-derived E113–E115.
+- **Three times an exception set folded back into one structure, and the structure was not named as the object.** E103
+  and E174: the later openings are one separation from a view. E175: the 768 are rungs with `q = 9, 10, 11`. E187: the
+  971 land at E174/E175's places.
+- **E187's proposed next step was already on disk.** The band `d(8k+1) mod 8e ∈ [e, 7e]` is v21 §15's bridge
+  `lonely_eight_of_opening`, proved. The rule "flank = the least multiple of `q`" is v21 §17E's rung-selection rule
+  (`LonelyRunner/experiments/nN/rung_selection_v1.out`: it certifies 91,523 of 91,523 v1 residual sets on `[1,40]`, least
+  `q` up to 16). §17D records that the `q` needed grows with the window, so no fixed list closes the residual.
+- **Forced facts were found after the data, one round each**: E176's 320/320 (E177), E185's one-slot check, E187's
+  "`c` inside the host's slot". Each was derivable before running.
+
+### Why it recurs `[reasoned from the record]`
+
+1. **The object mapped was the first isolation.** E109 O1: the cascade gives *a* lonely instant, and "first" is a
+   by-product (`first_isolation_of_fixed`), not the obligation. The first isolation's place depends on which host happens
+   to open first, so every place rule for it has exceptions (the map below: it is a structured rung's first certified
+   instant in 61 of the 145,368 sets where the bound is blocked).
+2. **Vantages came from the Lean route's needs** (`hopen`, (B), the path route) **or from incoming notes, not from the
+   map.** The cascade side (E100–E187) and the case-list side (v21 §15–§17E) were not read as one object, so each side
+   re-found the other's families.
+3. **Exceptions were used to rule a statement out, not to read the mechanism.** `methodology_understand_exceptions`
+   steps 2–4 (what forces the witness there; is it the main mechanism in disguise) were skipped; when an exception folded
+   back, the fold was logged and the vantage changed.
+4. **There is no living map.** The record is an append-only log of more than 6,000 lines; each round starts from the
+   latest entry.
+
+### The tie `[derived; Lean pointers from E162 and v21]`
+
+One mechanism, E162's (1) and (2). At a grid instant `i/q` (`gcd(i, q) = 1`), a non-multiple of `q` reads a nonzero
+multiple of `1/q`, so for `q ≤ 8` the subject's slot holds exactly the readings divisible by `q`
+(`GridPairLawN.grid_class_clear`); they separate, the least one last, at `i/q + 1/(8e)`, `e` the least multiple
+(`SeparationN.lonely_of_separation`), and a multiple then reads as at `e`'s first opening, clear iff `d mod 8e ∈ [e, 7e]`.
+Instances already on disk: `q = 1` from `0` is the bound and R1; no multiple of `q` is R6; E100's rung views; §17C's
+rational openings; §17E's rung-selection rule. And every cascade landing (derived below, D1–D2) is this mechanism at its
+own `q_c = h/gcd(h, K)`. The cascade from the bound is the mechanism at `q = 1`; when that fails it keeps moving, and its
+landing is usually at full resolution (`q_c = h`), where §17D says the list "is the obligation again".
+
+### The landings in rung coordinates
+
+`LonelyRunner/experiments/nN/redo/rung_map_v1.{py,out}` (commit `8101b8a`; exact; all 346,104 sets `≤ 24`; the per-set
+JSON, 14.6 MB, is regenerable and not committed).
+- **Derived and checked**: D1, the host is the least reading divisible by `q_c` (a slower multiple would read `d/(8h) < 1/8`
+  at `t*`); D2, `t*` is the rung instant `i/q_c + 1/(8h)`. 0 violations each.
+- **The cascade's own rung**: the bound (`K = 0`) in 200,736 (171,972 with one host, 28,764 with a second, faster host also
+  opening there; the script recorded the fastest host, so those show as `q_c = h`). Of the 145,368 blocked-bound sets:
+  `q_c = h` (gcd 1, full resolution) 115,094, of which `K = 1` (the host's first opening) is the largest part; `q_c ∈
+  [2, 8]` 24,039; `q_c ∈ {9,…,12}` 6,235. Multi-host blocked-bound sets: 520, class by the fastest host.
+- **The least certifying rung `q_min`** (rung-selection rule with the exact unit test, R6 included): `1`: 200,736;
+  `2`: 74,083; `3`: 47,567; `4`: 16,563; `5`: 6,597; `6`: 360; `7`: 190; `8`: 7; `9`: 1 (`(3,4,5,7,17,18,24)`).
+- **The landing is `q_min`'s first certified instant** in 200,797: the 200,736 bound sets and 61 others. Otherwise it is
+  earlier (145,307); never later (forced: the landing is the first lonely instant).
+
+**Reading** `[reasoned]`: on blocked-bound sets the first isolation and the structured one are different instants in all
+but 61. The first is the multi-move chain's endpoint, placed by fine arithmetic; the structured one is the mechanism
+started at a better grid instant and landing in one move. Every set here has a one-move start with `q ≤ 9`. This is the
+case-list route read in the cascade's own terms, not a new route.
+
+### Method from here (proposed to the owner)
+
+1. **One living map**, a versioned document read before each step: the objects in rung coordinates; derived facts with
+   their Lean status; observed regularities, each with its exceptions and the three questions answered (what feature,
+   what forces the witness there, same mechanism in disguise); open questions. The log stays the record; the map is where
+   the next step starts.
+2. **Classify a step before doing it**: an equivalent restatement of the obligation (not a step, by the place test); a
+   rule the majority obeys (not a proof); or an argument uniform over an infinite family (a step). Only the third moves
+   the proof. The rung budget (`RungBudgetEightN`, a pigeonhole over the `φ(q)` units) is the one uniform tool in view.
+3. **Read an exception in the map's coordinates**, never by opening a new vantage: for the rungs below `q_min`, which
+   condition failed (multiples not spread, or every unit blocked) and by which readings.
+4. **Derive the forced facts first**; run only for what is not forced.
+
+**The next map question, not a mechanism:** why the rungs `q < q_min` fail, per set, by condition and by reading. That is
+what pushes `q` up, and it is what a uniform choice of `q` has to handle. The rung budget's failures (1,329 of 91,523 on
+`[1,40]`, where every unit count exceeds `φ(q)` but a unit is still free) are where blocked units coincide; the link
+lemma (`N ∣ d′ − c·d`, `link_reading`) names when two readings block together.
