@@ -1,0 +1,41 @@
+E186 (2026-09-30): independent check of the parallel session's double-and-backtrack rule
+(experiments/nN/redo/double_backtrack_selector_v1.md; LRC/Spec/DoubleBacktrackN.lean).
+
+Rule, at a dying window's pinch instant t (old labels q_i, phases f_i = d_i t - q_i in [1/8, 7/8]):
+  p_i = 2 q_i + [f_i >= 9/16]  (= floor(2 d_i t - 1/8), the last opening at or before 2t),
+  T = max_i (p_i + 1/8)/d_i,  delta = 2t - T,  need_i = max(0, (2 f_i - c_i - 7/8)/d_i);
+  p is a window at the pinch exactly when max need <= delta; strict gives extension past the pinch.
+Checked here, exactly:
+  (1) the worked example: readings (1, 50, 105, 106, 136, 189, 199) on the shape path; old labels (0,0,1,1,1,2,2) at
+      s* = 1990/2837, t* = 2837/7336: p, T = 41/56, delta, max need, the s-interval [199/738, 2189/2539]; and the failure
+      case, old labels (0,1,2,3,4,5,6) at s = 199/483, t = 7/8.
+  (2) every simple-pinch death on E178's subsampled paths (a different population from the md's 459): the rule's
+      verdict (strict / equality / fails), whether p is really a window just after the pinch (exact, at tau + 10^-15),
+      and the PLACE TEST: is p's window the cascade's replacement (the new first isolation just after the death)?
+
+worked example: old window a single instant at t*: True (lo = hi = 2837/7336)
+  phases f = ['1/8', '371/524', '365/1048', '62/131', '7/8', '65/131', '741/1048']
+  p = (0, 1, 2, 2, 3, 4, 5), T = 41/56, delta = 303/7336, max need = 212775/11326784, difference = 1947/86464
+  s-interval of p: ['199/738', '2189/2539']
+failure case: old window a single instant at 7/8: True; p = (0, 3, 5, 6, 8, 10, 12), delta = 1/56, max need = 231/776 -> fails
+
+== Case B every 400th: simple-pinch deaths 511 ==
+  rule verdict: strict 267, equality 15, fails 229
+  CHECK strict => p is a window just after the pinch: 267 of 267
+  CHECK fails => p is not a window just after: 229 of 229
+  PLACE TEST: p's window is the cascade's replacement: 61 of 267 strict (and 62 of all deaths)
+  p's window earlier than the dying instant: 0 of 267 strict
+
+== late every 40th: simple-pinch deaths 350 ==
+  rule verdict: strict 87, equality 0, fails 263
+  CHECK strict => p is a window just after the pinch: 87 of 87
+  CHECK fails => p is not a window just after: 263 of 263
+  PLACE TEST: p's window is the cascade's replacement: 20 of 87 strict (and 20 of all deaths)
+  p's window earlier than the dying instant: 0 of 87 strict
+
+== Case C first 100: simple-pinch deaths 851 ==
+  rule verdict: strict 532, equality 8, fails 311
+  CHECK strict => p is a window just after the pinch: 532 of 532
+  CHECK fails => p is not a window just after: 311 of 311
+  PLACE TEST: p's window is the cascade's replacement: 25 of 532 strict (and 27 of all deaths)
+  p's window earlier than the dying instant: 0 of 532 strict
