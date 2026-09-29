@@ -5844,3 +5844,38 @@ survives the whole path exactly when its lap assignment is still a window for th
 named places, with a birth always ahead of the last open window's death (after `s = 0`, on these samples). The analytic
 target this points to is the relay condition: along the deformation, whenever an open window is about to die, another
 window is already open or is born first. Not proved; not addressed here: the global half (E178).
+
+---
+
+## E180 — 2026-09-29 — reflecting a pinch around the common period: a death is a birth, exactly, at every simple pinch
+
+**Owner:** *"There may be a more general rule here: reflect a pinched isolation event around a common grid period. This
+swaps the boundary runners, and the active inequality reverses sign—so the obstruction that kills the old window can
+support the new o"* (message cut off).
+
+**Derivation** `[reasoned from the definitions]`. At an event `τ` of the deformation (E178) the tight window, lap
+assignment `k`, is a single instant `t₀`; at a simple pinch runner `a` is on `+1/8` and `b` on `−1/8`. The readings are
+rational at `τ`; `P` is their least common period, `P·dᵢ(τ) = Nᵢ`, and `P > t₀`. At `P − t₀` every position is negated,
+so `a` and `b` swap roles: the **reflected window** has `k'ᵢ = Nᵢ − kᵢ − 1`. With `g_k(s) = (8k_b+7)·d_a(s) −
+(8k_a+1)·d_b(s)` the old window's active inequality, the reflected one is `g_{k'}(s) = g_k(s) + 8(N_a d_b(s) −
+N_b d_a(s))`; the added term vanishes at `τ`, and with `eᵢ = dᵢ′`,
+`g_k′ = (d_b e_a − d_a e_b)·(8k_a+1)/d_a` while `g_{k'}′ = (d_b e_a − d_a e_b)·((8k_a+1)/d_a − 8P)`. Since
+`P > t₀ = (8k_a+1)/(8d_a)` the bracket is negative: **the slopes have opposite signs, so a death of `k` at `τ` is a birth
+of `k'` at `τ`, and a birth of `k` is a death of `k'`.** The other readings keep their margin under reflection. This is
+`PinchOpenN`'s mechanism (`TwoPinnerN.mirror_readings`, the sign dichotomy) stated for windows along the deformation.
+
+**Checked** (`LonelyRunner/experiments/nN/redo/mirror_rule_v1.{py,out}`, commit above; exact; subsamples of E178's
+paths: Case B every 400th, late band shapes every 40th, Case C first 100) `[VERIFIED — these subsamples]`:
+- **Simple pinches, 3,161**: the reflected window is tight at `τ` at `P − t₀` in all, and behaves as derived (death ↔
+  birth) in all 3,161.
+- **Multi-pinches, 69**: tight at `P − t₀` in all; pair as derived in 28; the other 41 are windows that exist at the
+  single parameter `τ` only (the original and its reflection both), neither a death nor a birth.
+- **The reflected window is far**: median `R = 8 d_min (P − t₀)` 150 (Case B), 782 (Case C), 1.2 million (late shapes),
+  against the original's median 1.75, 1.00, 4.24. So it is never the first isolation (E178: 0 of 10,796 deaths).
+
+**What it gives** `[reasoned]`: along a rational path, **the relay condition of E179 holds at every simple pinch**, by
+derivation, not observation: no simple pinch can remove the last window. What it does not give: bounded times. The
+reflected window's laps grow with `P`, and approaching a parameter where windows accumulate the periods grow without
+bound; so the global half (E178; E115/O5) is untouched by reflection, and the isolation near the first one is carried by
+the born windows at named places (E179). Left open by this entry: multi-pinches (the 28 that pair and the 41
+single-parameter windows need their own statement), and the bounded-time half.
