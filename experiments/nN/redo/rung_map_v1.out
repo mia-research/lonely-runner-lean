@@ -1,0 +1,78 @@
+E188 (2026-09-30): the cascade's landings read in rung coordinates, against v21 section 17E's rung-selection rule.
+A MAP: no pass condition except the derivation checks and the oracle check.
+
+Owner: "yes run the landings through the cascade in residue form", with: "are we mapping things so we understand before
+proposing a the mechanisim".  The residue form d(8k+1) mod 8e in [e, 7e] is v21 section 15's bridge
+(lonely_eight_of_opening), already proved; read on a landing it only restates that the landing is lonely.  The
+coordinates that tie the cascade to the case list (v21 section 17C-E) are the RUNG ones:
+
+  rung (q, i, e): the instant i/q + 1/(8e), gcd(i, q) = 1, e the least reading divisible by q.  A multiple d of q reads
+  as at e's first opening (clear iff d mod 8e in [e, 7e]: R1 on the multiples); a non-multiple reads d*i/q + d/(8e).
+  q = 1 is the bound 1/(8 d_min) (R1); no multiple of q is R6 at the unit i/q.  (rung_selection_v1.py, section 17E.)
+
+Derived (checked, must hold): the landing t* is an opening (K + 1/8)/h of a host h; with i/q = K/h reduced,
+  (D1) h is the least reading divisible by q  (a slower multiple d would read d/(8h) < 1/8 at t*);
+  (D2) so t* is the rung (q, i, h), and every reading is clear there in the rung's own terms.
+Recorded, per set (exact, integer arithmetic for the rule):
+  q_c   the cascade's own rung denominator, h/gcd(h, K); its class: 1 (the bound), q_c = h (gcd 1: the full resolution,
+        where section 17D says the list "is the obligation again"), 2..8, other;
+  q_min the least q for which the rung-selection rule certifies the set (some unit i clear), with R6 included;
+  whether the cascade's landing is the earliest certified instant at q_min's rung.
+
+sets: 346104
+CHECK D1 host is the least reading divisible by q_c: 0 violations
+CHECK D2 t* is the rung instant i/q + 1/(8h): 0 violations
+CHECK some rung certifies every set (the landing is one, D2): 0 without
+hosts at t*: {1: 316820, 2: 26224, 3: 3060}
+
+the cascade's own rung, class of q_c: {'1 (bound)': 171972, 'q = h': 143858, '2..8': 24039, 'other': 6235}
+q_c = h (full resolution): by K: {1: 101753, 2: 23942, 3: 15410, 4: 2126, 5: 563, 6: 39, 7: 25}
+q_c other (> 8, < h): {9: 588, 10: 1097, 11: 2652, 12: 1898}
+readings divisible by q_c, count: {1: 159225, 2: 13803, 3: 1088, 4: 16, 7: 171972}
+
+q_min (least certifying rung, R6 included): {1: 200736, 2: 74083, 3: 47567, 4: 16563, 5: 6597, 6: 360, 7: 190, 8: 7, 9: 1}
+the landing IS the earliest certified instant of q_min's rung: 200797 of 346104
+q_c class x q_min: {('1 (bound)', 1): 171972, ('q = h', 2): 55876, ('q = h', 3): 39291, ('q = h', 1): 28764, ('2..8', 2): 15181, ('q = h', 4): 13658, ('2..8', 3): 6039, ('q = h', 5): 5748, ('other', 2): 3026, ('other', 3): 2237, ('2..8', 4): 2155, ('other', 4): 750, ('2..8', 5): 633, ('q = h', 6): 342, ('other', 5): 216, ('q = h', 7): 171, ('2..8', 7): 16, ('2..8', 6): 15, ('q = h', 8): 7, ('other', 7): 3, ('other', 6): 3, ('q = h', 9): 1}
+landing earlier than q_min's first certified instant: 145307; later: 0
+
+sets with q_min >= 7: 198; by q_min {7: 190, 8: 7, 9: 1}
+  (3, 4, 5, 7, 17, 18, 24)  q_min 9 first 65/144  | cascade t* 3/64 = rung 1/24 + 1/(8*24), q_c class q = h, R* 9/8
+  (2, 3, 4, 5, 6, 7, 16)  q_min 8 first 113/128  | cascade t* 9/128 = rung 1/16 + 1/(8*16), q_c class q = h, R* 9/8
+  (2, 3, 4, 5, 7, 12, 16)  q_min 8 first 113/128  | cascade t* 9/128 = rung 1/16 + 1/(8*16), q_c class q = h, R* 9/8
+  (2, 4, 5, 6, 7, 16, 20)  q_min 8 first 81/128  | cascade t* 9/128 = rung 1/16 + 1/(8*16), q_c class q = h, R* 9/8
+  (3, 4, 5, 7, 11, 13, 24)  q_min 8 first 169/192  | cascade t* 3/64 = rung 1/24 + 1/(8*24), q_c class q = h, R* 9/8
+  (3, 4, 5, 7, 11, 19, 24)  q_min 8 first 169/192  | cascade t* 9/152 = rung 1/19 + 1/(8*19), q_c class q = h, R* 27/19
+  (3, 4, 5, 13, 14, 23, 24)  q_min 8 first 169/192  | cascade t* 9/184 = rung 1/23 + 1/(8*23), q_c class q = h, R* 27/23
+  (3, 4, 5, 14, 19, 23, 24)  q_min 8 first 169/192  | cascade t* 9/152 = rung 1/19 + 1/(8*19), q_c class q = h, R* 27/19
+  (1, 2, 4, 5, 6, 14, 16)  q_min 7 first 33/112  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 3, 4, 5, 11, 19, 24)  q_min 7 first 1/7  | cascade t* 25/192 = rung 1/8 + 1/(8*24), q_c class 2..8, R* 25/24
+  (1, 4, 5, 6, 7, 16, 17)  q_min 7 first 17/56  | cascade t* 17/56 = rung 2/7 + 1/(8*7), q_c class q = h, R* 17/7
+  (1, 4, 5, 6, 8, 13, 14)  q_min 7 first 33/112  | cascade t* 33/112 = rung 2/7 + 1/(8*14), q_c class 2..8, R* 33/14
+  (1, 4, 5, 6, 8, 14, 19)  q_min 7 first 33/112  | cascade t* 33/112 = rung 2/7 + 1/(8*14), q_c class 2..8, R* 33/14
+  (1, 4, 5, 6, 13, 14, 16)  q_min 7 first 33/112  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 4, 5, 6, 13, 14, 24)  q_min 7 first 7/16  | cascade t* 25/192 = rung 1/8 + 1/(8*24), q_c class 2..8, R* 25/24
+  (1, 4, 5, 6, 14, 15, 16)  q_min 7 first 33/112  | cascade t* 33/112 = rung 2/7 + 1/(8*14), q_c class 2..8, R* 33/14
+  (1, 4, 5, 6, 14, 16, 17)  q_min 7 first 97/112  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 4, 5, 6, 14, 16, 19)  q_min 7 first 33/112  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 4, 5, 6, 14, 19, 24)  q_min 7 first 7/16  | cascade t* 25/192 = rung 1/8 + 1/(8*24), q_c class 2..8, R* 25/24
+  (1, 4, 5, 6, 16, 17, 21)  q_min 7 first 145/168  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 5, 6, 8, 9, 14, 19)  q_min 7 first 33/112  | cascade t* 41/152 = rung 5/19 + 1/(8*19), q_c class q = h, R* 41/19
+  (1, 5, 6, 8, 9, 19, 20)  q_min 7 first 1/7  | cascade t* 9/64 = rung 1/8 + 1/(8*8), q_c class q = h, R* 9/8
+  (1, 5, 6, 8, 11, 13, 19)  q_min 7 first 1/7  | cascade t* 9/64 = rung 1/8 + 1/(8*8), q_c class q = h, R* 9/8
+  (1, 5, 6, 8, 11, 13, 21)  q_min 7 first 7/24  | cascade t* 7/24 = rung 2/7 + 1/(8*21), q_c class 2..8, R* 7/3
+  (1, 5, 6, 8, 13, 14, 19)  q_min 7 first 33/112  | cascade t* 41/152 = rung 5/19 + 1/(8*19), q_c class q = h, R* 41/19
+  (1, 5, 6, 8, 13, 14, 23)  q_min 7 first 33/112  | cascade t* 49/184 = rung 6/23 + 1/(8*23), q_c class q = h, R* 49/23
+  (1, 5, 6, 8, 13, 17, 19)  q_min 7 first 1/7  | cascade t* 9/64 = rung 1/8 + 1/(8*8), q_c class q = h, R* 9/8
+  (1, 5, 6, 8, 13, 19, 20)  q_min 7 first 1/7  | cascade t* 9/64 = rung 1/8 + 1/(8*8), q_c class q = h, R* 9/8
+  (1, 5, 6, 13, 16, 17, 19)  q_min 7 first 1/7  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 6, 7, 10, 16, 17, 23)  q_min 7 first 25/56  | cascade t* 41/184 = rung 5/23 + 1/(8*23), q_c class q = h, R* 41/23
+  (1, 6, 8, 10, 17, 19, 21)  q_min 7 first 73/168  | cascade t* 33/152 = rung 4/19 + 1/(8*19), q_c class q = h, R* 33/19
+  (1, 6, 10, 13, 16, 17, 19)  q_min 7 first 1/7  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 6, 10, 13, 16, 17, 23)  q_min 7 first 1/7  | cascade t* 25/184 = rung 3/23 + 1/(8*23), q_c class q = h, R* 25/23
+  (1, 6, 10, 14, 16, 17, 23)  q_min 7 first 65/112  | cascade t* 25/112 = rung 3/14 + 1/(8*14), q_c class q = h, R* 25/14
+  (1, 6, 10, 16, 17, 20, 23)  q_min 7 first 1/7  | cascade t* 25/184 = rung 3/23 + 1/(8*23), q_c class q = h, R* 25/23
+  (1, 6, 10, 16, 17, 21, 23)  q_min 7 first 97/168  | cascade t* 25/184 = rung 3/23 + 1/(8*23), q_c class q = h, R* 25/23
+  (1, 6, 13, 15, 16, 17, 19)  q_min 7 first 1/7  | cascade t* 17/120 = rung 2/15 + 1/(8*15), q_c class q = h, R* 17/15
+  (1, 6, 13, 16, 17, 19, 20)  q_min 7 first 1/7  | cascade t* 17/128 = rung 1/8 + 1/(8*16), q_c class 2..8, R* 17/16
+  (1, 6, 14, 15, 16, 17, 23)  q_min 7 first 65/112  | cascade t* 25/112 = rung 3/14 + 1/(8*14), q_c class q = h, R* 25/14
+  (1, 6, 14, 16, 17, 20, 23)  q_min 7 first 65/112  | cascade t* 25/112 = rung 3/14 + 1/(8*14), q_c class q = h, R* 25/14
