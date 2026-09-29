@@ -1,0 +1,73 @@
+E176 (2026-09-29): the place statement of E174-E175 on larger readings and on the late band shapes.
+
+Owner: "yes test it on larger readings and the late band shapes".
+
+SCALE.  E174-E175's rungs a/q were instants in absolute time.  That is not scale-free: multiplying every reading by
+L moves the same place to a rung with denominator Lq, and at the late band shapes' scale (nearest reading 27720) no rung
+with small q exists.  Positions are what scaling keeps.  So the rung is stated here as a position of the NEAREST runner
+m: the instant r = a/(q m) at which it sits at a/q of its lap.  Every reading's position there is (d/m)(a/q).  For
+m = 1 this is E174-E175's rung exactly; for any m every absolute rung a/q is a nearest-runner rung with denominator
+q/gcd(m, q) <= q.  So the readings <= 24 population must come out fully placed again (the positive control).
+
+The place statement G, for the incident's left boundary t* (the cascade's landing), in this order:
+  B        t* = the bound 1/(8m);
+  O        t* = a reading's next opening 9/(8e);
+  sep      t* = move(v) for v = B or O not lonely (one separation: the reading in the slot at v leaves);
+  rung     t* = r, a rung of the nearest runner's ladder;
+  rung-sep t* = move(r), r < t* not lonely (the rung displaced by one separation);
+  rung-str t* = the latest opening at or before r (the stretch at the rung).
+Rungs are tried in increasing q (2..QMAX); the least q that places the incident is recorded.  The slot condition is
+the cascade's own: reading d is in the slot at r iff circDist(d r) < 1/8 (E175: for q <= 8 at m = 1 only multiples
+of q fit; readings off the grid fit once q >= 9).
+
+Populations: readings <= 24, all 346,104 (control); nearest reading 1 and readings <= 32, all 736,281; random seven-sets
+with readings <= 48, <= 96, <= 200 (30,000 each, seed 11); the late band shapes (5,400).  Oracle check: the landing
+equals the first lonely instant computed without the cascade.  Scale check: S and 3S classified alike (sample).
+Misses are listed, traced, and perturbed one reading at a time through the cascade.
+
+
+== readings <= 24, all (control) ==  sets 346104
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'B': 200736, 'O': 85137, 'sep': 35163, 'rung-str': 21630, 'rung-sep': 3291, 'rung': 147}
+least q for the rung places: {2: 84, 3: 980, 4: 2126, 5: 4444, 6: 9735, 7: 6674, 8: 13, 9: 475, 10: 13, 11: 524}
+placed with q <= 8 or no rung: 345092; q 9..16: 1012; q 17..40: 0; not placed (q <= 40): 0
+rung places by spread and q: {('<=24', 'q9-16'): 1012, ('<=24', 'q<=8'): 23227, ('<=8', 'q<=8'): 829}
+
+== nearest reading 1, readings <= 32, all ==  sets 736281
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'B': 296010, 'sep': 189851, 'rung-str': 155062, 'O': 63916, 'rung-sep': 31442}
+least q for the rung places: {2: 6, 3: 135, 4: 2021, 5: 16654, 6: 50176, 7: 103666, 8: 12, 9: 2467, 10: 33, 11: 5015, 13: 2303, 15: 4016}
+placed with q <= 8 or no rung: 722447; q 9..16: 13834; q 17..40: 0; not placed (q <= 40): 0
+rung places by spread and q: {('<=24', 'q9-16'): 1012, ('<=24', 'q<=8'): 20955, ('<=64', 'q9-16'): 12822, ('<=64', 'q<=8'): 151714, ('<=8', 'q<=8'): 1}
+
+== random, readings <= 48 (30,000) ==  sets 30000
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'B': 17272, 'O': 6606, 'sep': 3370, 'rung-str': 2283, 'rung-sep': 464, 'rung': 5}
+least q for the rung places: {2: 9, 3: 72, 4: 170, 5: 440, 6: 775, 7: 967, 8: 1, 9: 26, 11: 43, 13: 70, 15: 177, 17: 2}
+placed with q <= 8 or no rung: 29682; q 9..16: 316; q 17..40: 2; not placed (q <= 40): 0
+rung places by spread and q: {('<=24', 'q9-16'): 25, ('<=24', 'q<=8'): 1391, ('<=64', 'q9-16'): 291, ('<=64', 'q<=8'): 1004, ('<=64', 'q>=17'): 2, ('<=8', 'q<=8'): 39}
+
+== random, readings <= 96 (30,000) ==  sets 30000
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'B': 16631, 'O': 6753, 'sep': 3693, 'rung-str': 2310, 'rung-sep': 602, 'rung': 11}
+least q for the rung places: {2: 6, 3: 54, 4: 138, 5: 405, 6: 739, 7: 942, 8: 1, 9: 21, 10: 1, 11: 32, 13: 93, 15: 415, 17: 8, 19: 4, 20: 10, 22: 15, 23: 36, 29: 1, 31: 2}
+placed with q <= 8 or no rung: 29362; q 9..16: 562; q 17..40: 76; not placed (q <= 40): 0
+rung places by spread and q: {('<=24', 'q9-16'): 21, ('<=24', 'q<=8'): 995, ('<=64', 'q9-16'): 140, ('<=64', 'q<=8'): 1078, ('<=64', 'q>=17'): 3, ('<=8', 'q<=8'): 29, ('>64', 'q9-16'): 401, ('>64', 'q<=8'): 183, ('>64', 'q>=17'): 73}
+
+== random, readings <= 200 (30,000) ==  sets 30000
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'B': 16332, 'O': 6573, 'sep': 4159, 'rung-str': 2190, 'rung-sep': 729, 'rung': 14, 'none': 3}
+least q for the rung places: {2: 6, 3: 46, 4: 155, 5: 372, 6: 707, 7: 895, 9: 26, 10: 1, 11: 26, 13: 76, 15: 384, 17: 3, 19: 5, 20: 8, 22: 24, 23: 146, 27: 3, 29: 4, 31: 35, 36: 1, 39: 10}
+placed with q <= 8 or no rung: 29245; q 9..16: 513; q 17..40: 239; not placed (q <= 40): 3
+rung places by spread and q: {('<=24', 'q9-16'): 10, ('<=24', 'q<=8'): 928, ('<=64', 'q9-16'): 167, ('<=64', 'q<=8'): 1050, ('<=64', 'q>=17'): 2, ('<=8', 'q<=8'): 25, ('>64', 'q9-16'): 336, ('>64', 'q<=8'): 178, ('>64', 'q>=17'): 237}
+not placed, listed (first 20): [((1, 11, 115, 128, 135, 196, 199), '137/135', 2), ((1, 50, 105, 106, 136, 189, 199), '201/199', 2), ((1, 12, 65, 92, 128, 175, 196), '177/175', 2)]
+not placed, perturbed one reading (first 200): destinations {'none': 16, 'rung-str': 10, 'B': 7, 'sep': 4}
+
+== late band shapes ==  sets 5400
+oracle check (landing = independent first lonely instant): 0 violations
+places: {'O': 2311, 'sep': 1568, 'rung-str': 1487, 'rung-sep': 34}
+least q for the rung places: {3: 1521}
+placed with q <= 8 or no rung: 5400; q 9..16: 0; q 17..40: 0; not placed (q <= 40): 0
+rung places by spread and q: {('<=8', 'q<=8'): 1521}
+
+scale check (S vs 3S): 0 of 1046 classified differently
