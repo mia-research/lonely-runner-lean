@@ -5695,3 +5695,42 @@ rung (`q ≤ 8`) 3,129; a rung with `q = 9–11` displaced by one separation 768
 condition `|d·a mod q| < q/8` rather than a cut at `q ≤ 8`, it takes both the multiples of `q` and the readings off the
 grid by less than `q/8` (one off at `q = 9–16`, two off from `q = 17`). Scope: this is the population of readings ≤ 24;
 the general statement is not tested beyond it.
+
+---
+
+## E176 — 2026-09-29 — the place statement on larger readings and the late band shapes
+
+**Owner:** *"yes test it on larger readings and the late band shapes"*.
+
+(`LonelyRunner/experiments/nN/redo/place_general_v1.{py,out}`, `place_general_v1b.{py,out}`, commit `f52df8d`; exact.)
+
+**Scale.** E174–E175's rungs `a/q` were instants in absolute time, which is not scale-free: multiplying every reading
+by `λ` moves the same place to a rung with denominator `λq`, and at the late band shapes' scale (nearest reading 27,720)
+there is no rung of small `q`. Here the rung is a **position of the nearest runner**: the instant `a/(q·d_min)` at which
+it sits at `a/q` of its lap. For `d_min = 1` this is E174–E175's rung; for any `d_min` every absolute rung with
+denominator `q` is a nearest-runner rung with denominator at most `q`. Places, in order: the bound; a reading's next
+opening `9/(8e)`; one separation from either; a rung itself, a rung displaced by one separation, or the stretch at a rung
+(least `q` recorded). Oracle check (landing = first lonely instant computed without the cascade): 0 violations in every
+population. Scale check (`S` against `3S`): 0 of 1,046 placed differently.
+
+| population | sets | placed | largest least `q` | least `q ≥ 17` | not placed (`q ≤ 40`) |
+|---|---|---|---|---|---|
+| readings ≤ 24, all (control) | 346,104 | all | 11 | 0 | 0 |
+| nearest reading 1, readings ≤ 32, all | 736,281 | all | 15 | 0 | 0 |
+| random, readings ≤ 48 | 30,000 | all | 17 | 2 | 0 |
+| random, readings ≤ 96 | 30,000 | all | 31 | 76 | 0 |
+| random, readings ≤ 200 | 30,000 | 29,997 | 39 | 239 | 3 |
+| late band shapes | 5,400 | all | 3 | 0 | 0 |
+
+- **Late band shapes, all 5,400 placed with no rung finer than thirds** `[VERIFIED — these shapes]`: the nearest
+  runner's next opening `9/(8·d_min)` (`R = 9`) 2,311; one separation from the bound or a next opening 1,568; the stretch
+  at the nearest runner's position `4/3` of a lap (`R = 32/3`) 1,487; that rung displaced by one separation 34.
+- **The needed `q` grows with the spread.** Every rung place with spread ≤ 24 has `q ≤ 16`; the `q ≥ 17` places occur
+  at spread above 24 (2 at readings ≤ 48, then mostly spread above 64).
+- **The 320 incidents needing `q ≥ 17` or not placed at `q ≤ 40` are one place** `[VERIFIED — these populations]`: in
+  all 320 the readings in the subject's slot at the bound are within `d_min` of a multiple of `8·d_min` (captured at the
+  bound); the isolation follows 2 to 8 separations from the bound (134 + 37 at two), landing just after it (`R` 1.01 to
+  1.41). Example: `(1, 50, 105, 106, 136, 189, 199)`: 136 = 17·8 sits at the bound; when it leaves at `R = 1.0074`, 199
+  is in the slot; when 199 leaves, isolation at `R = 201/199`. A large-`q` rung is the rung description of an instant
+  just after the bound; the place is the bound's capture followed by the separations of the readings carried into the
+  slot (E157–E158's leftovers; E161's transport), not a rung.
