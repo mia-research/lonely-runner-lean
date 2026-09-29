@@ -5565,3 +5565,38 @@ integer `l`: every step of the walk is an exact residue test modulo `8a`, and an
 `u ≡ 1 (mod 8)` with `u·d mod 8a ∈ [a, 7a]` for every reading. A tight incident is an exact integer relation
 `(8K_a + 1)·c = (8K_c + 7)·a` between two readings. E170–E171 rule out summaries of this test (scalars per move, per
 wave, grid labels); what is left to study is the boundary test itself.
+
+---
+
+## E172 — 2026-09-29 — correction: E170–E171 imported the frame, and used pre-registration language on LRC
+
+**Owner:** *"Pre-reg? Did you lose context, we do that for ecc/btc work not lrc. Although you slipping context maybe we
+need it because at every time you want to try and retroactively turn it in to a density or coverage attempt"*
+
+Yes. This session did not read `feedback-n8-cascade-is-the-oracle-2026-09-27` or
+`feedback-n8-no-prereg-no-imports-2026-09-14` before working. E170 and E171 are built on the imported shapes both list:
+- **Pre-registration language** on LRC: "fixed before any data was seen", survival criteria (E170, E171 docstrings).
+  CLAUDE.md §2 scopes that to ECC/BTC work.
+- **Termination by a decreasing quantity / well-founded rank** (E170's panel, adopted from the parallel session's
+  suggestion; E171 Part B's waves). It says only *that* the cascade stops.
+- **The finite-openings fence**: E170's "a non-isolating chain is exactly one that runs a full period" is the
+  half-lap / finitely-many-openings shape (`exists_lonely_iff_half`, E100).
+- **A move budget**: E171's "chain length ≤ 7 × waves; what must be bounded is the number of waves".
+- **Coverage**: E171 Part A asked whether a grid label *covers* the incidents.
+- **Density**: E171's random-instant control (proportions of uniformly sampled instants), against its own "no density"
+  paragraph.
+- E170's "correction to E114" was already on disk (the oracle memory: move counts refuted at order five,
+  `experiments/nN/cascade_length_unbounded_v1.out`).
+
+None of these names a place. **Read E170's quantity panel and "two facts for the termination question", E171 Part B, and
+E171 Part A's coverage figures and both controls as off-frame: they are not steps.** Pre-registration did not protect
+against this; the E170–E171 docstrings fixed their checks in advance and so fixed the imported question in place.
+
+**What stands** (facts about named objects, not routes): the Lean review in E170 (`Cover8` card bound, `LonelyRunner/`
+`3ea9feb`; the band cover builds and `band_lonely` is axiom-clean; Spec gate PASS 2,338; what `Cover8` asserts as
+written); **the scripts are the cascade** (E171 C1, C2: 0 violations; the oracle confirmation the memory asks for); and
+the late band shapes' landings as places: the nearest runner's second opening `9/(8·d_min)` in 2,311 of 5,400, the
+fastest reading's opening in 2,605 (consistent with E100, E151).
+
+Next work is under the memory's place test: a statement names the class of arrangements and the place the isolation is,
+given by the readings, checked against the cascade; an exception is perturbed through the cascade.
