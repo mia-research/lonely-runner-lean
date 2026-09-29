@@ -5659,3 +5659,39 @@ Place statements, each checked against the landing by exact equality:
   `1/4`, where 24 is in the way; the latest opening before `1/4` (21's, `41/168`) is lonely too, but later.
 - **None of the 3,897 is a single point.** Every one of them, moved one reading by ±1, lands at an S0 or S1 place for
   between 1 and 13 of its moves (`place_incidents_v1.out`), so they sit inside families, not at isolated coincidences.
+
+---
+
+## E175 — 2026-09-29 — the 768 through the cascade: rungs with q = 9, 10, 11, one separation
+
+**Owner:** *"yes place the 768 through the cascade and see what is happen there"*.
+
+(`LonelyRunner/experiments/nN/redo/place_768_v1{,c,d}.{py,out}`, commit `6be6f20`; exact.) The 768 incidents E174 left
+unplaced, each traced move by move from the bound, perturbed one reading at a time, and tested against rungs `a/q` up to
+`q = 40`.
+
+- **All 768 are a rung displaced by one separation, at `q = 9, 10, 11`** `[VERIFIED — readings ≤ 24]`: the rung has a
+  runner in the subject's slot; it leaves and the isolation is there (`t* = move(a/q)`). By nearest reading: `d_min = 1`,
+  28 sets, rung `2/9` (`R = 16/9`); `d_min = 2`, 453 sets, rungs `1/11` (247) and `1/10` (206); `d_min = 3`, 287 sets,
+  `1/10` (170) and `1/11` (117). None is a single point. Traces: the cascade walks up by single separations to the rung's
+  neighbourhood and the last move is the exit of the reading sitting in the slot at the rung.
+- **Why `q = 9` is where they start** `[reasoned from the definitions; confirmed on all 768]`: reading `d` is in the
+  slot at rung `a/q` exactly when `|d·a − n·q| < q/8` for an integer `n`. For `q ≤ 8` that forces `d·a = n·q`, so only
+  multiples of `q` can be there (this is why E100's rung R1 uses the multiples `D_q`, and why its menu, cut at `q ≤ 8`,
+  was complete for them). For `q ≥ 9` a reading with `d·a ≡ ±1 (mod q)` also fits. At the 768's rungs every reading in
+  the slot has residue `0` or `+1`: **exact multiples only in 261 sets** (E100's R1 view with `q > 8`, e.g.
+  `(2, 3, 4, 14, 17, 22, 24)`: 22 = 2·11 on the rung `1/11`, leaving at `17/176 = 1/11 + 1/(8·22)`), **a reading one past
+  the grid in 507** (the same place relocated by the deviation, e.g. `(2, 3, 4, 14, 17, 23, 24)`: 23 in the slot at
+  `1/11`, leaving at `17/184`; `(1, …, 23, 24)` at `2/9`: 23 at `5 + 1/9`, leaving at `41/184`, `1/1656` after the rung).
+- **The stretch form too**: 741 of the 768 are also the stretch at a rung with `q = 9` or `10` (the rung closes the
+  stretch: the reading in the way at `1/9` closes it, residues `0` or `±1`), and 27 at `3/13` with the rung inside the
+  stretch.
+- **Perturbation**: moving one reading by ±1 sends each of the 768 back to an E174 place (named view, one separation
+  from one, or the stretch at a rung with `q ≤ 8`) for between 1 and 7 of its ranks (`place_768_v1.out`).
+
+**The place test on readings ≤ 24, complete** `[VERIFIED — all 346,104 sets of seven readings in 1..24]`: every incident
+has a place given by the readings. Named view 310,889; a named view displaced by one separation 31,318; the stretch at a
+rung (`q ≤ 8`) 3,129; a rung with `q = 9–11` displaced by one separation 768. With the rung R1 family defined by the slot
+condition `|d·a mod q| < q/8` rather than a cut at `q ≤ 8`, it takes both the multiples of `q` and the readings off the
+grid by less than `q/8` (one off at `q = 9–16`, two off from `q = 17`). Scope: this is the population of readings ≤ 24;
+the general statement is not tested beyond it.
