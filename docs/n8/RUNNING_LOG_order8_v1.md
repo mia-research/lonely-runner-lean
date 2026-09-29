@@ -5626,3 +5626,36 @@ given by the readings, checked against the cascade; an exception is perturbed th
     multiplier `u ≡ 1 (mod 8)` putting every `u·d mod 8a` in `[a, 7a]`) restates the flank form, `ExistenceAt8_flank`,
     already proved equivalent to the target. Under the place test an equivalent restatement is not a step; it is recorded
     as a restatement, not as a lead.
+
+---
+
+## E174 — 2026-09-29 — the place test on the boundary incidents
+
+**Owner:** *"ok now apply the place test to the boundary incidents"*.
+
+(`LonelyRunner/experiments/nN/redo/place_incidents_v1.{py,out}`, `place_incidents_v1b.{py,out}`, commit `58a9be6`;
+exact.) Class: all 346,104 sets of seven distinct whole-number readings in `1..24` (E100's population). The incident:
+the cascade's landing `t*` is an opening boundary `(8K+1)/(8a)` of a host `a`; the stretch that follows ends at the
+first closing `(8L+7)/(8c)`. Oracle check: landing = first lonely instant computed without the cascade, 0 violations.
+
+Place statements, each checked against the landing by exact equality:
+- **S0, a named view** (E100's menu: bound, next opening `9/(8e)`, rung R1, nudge, reverse R1, ladder rung): **310,889**
+  (bound 200,736; next opening 63,806; R1 37,438; reverse R1 7,847; ladder 1,062). E100 reproduced.
+- **S1, a named view displaced by one separation**: the view `v` has a runner in the subject's slot; it leaves, and
+  `t*` is its exit, `t* = move(v)` (E158; `SeparationN`): **31,318** (from rung R1 22,187, from a next opening 6,555,
+  from a nudge 2,576; the runner that leaves is a faster reading, ranks 3–6 in 29,826). None from the bound: a runner
+  captured at the bound leaves at an R1 view, already S0.
+- **S2, the stretch at a ladder rung** `a/q` (`q ≤ 8`): the incident's left boundary is the **latest opening at or
+  before the rung**, `max_e (⌊e·a/q − 1/8⌋ + 1/8)/e`: **3,129 of the 3,897 incidents S0 and S1 miss** (rungs `1/8`
+  1,053; `1/7` 827; `1/5` 785; `1/4` 245; `1/6` 198; `1/3` 15; `2/7` 5; `1/2` 1). Two forms, and only two
+  `[reasoned from the definitions; confirmed on all 3,129]`: the rung is itself clear for every reading and lies
+  inside the incident's stretch (**2,170**; the rung isolates and the cascade lands at the left end of the same
+  stretch, which E100's equality test did not count), or the rung is obstructed and the stretch ends before it, closed
+  by the reading in the way at the rung (**959**; obstructed ⟺ the closer is in the way at the rung, on all 3,129).
+  Example: `(1, 2, 3, 4, 15, 22, 24)` lands at `25/176`, the opening of 22 on lap 3, and the stretch contains the rung
+  `1/7` (`22/7 = 3 + 1/7` puts 22 just past its opening there).
+- **Not yet placed: 768.** Listed in `place_incidents_v1b.out`. The first ones land on an earlier stretch before an
+  obstructed rung, not the last one: `(1, 6, 15, 21, 23, 24, …)` at `41/184` (the opening of 23 on lap 5) below the rung
+  `1/4`, where 24 is in the way; the latest opening before `1/4` (21's, `41/168`) is lonely too, but later.
+- **None of the 3,897 is a single point.** Every one of them, moved one reading by ±1, lands at an S0 or S1 place for
+  between 1 and 13 of its moves (`place_incidents_v1.out`), so they sit inside families, not at isolated coincidences.
