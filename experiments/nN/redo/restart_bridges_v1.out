@@ -1,0 +1,35 @@
+E183 (2026-09-29): how much of the restarted cascade after a death the pairwise separation bounds control.
+
+Owner: "yes try making the pairwise separation bound control the restart".
+
+After a death (E182, case 3) the new landing is the cascade restarted at the dying instant: first the entering runner
+b's exit, then further moves.  Each move's setter relative to the previous one (SweepBridgeN): SWEEP (slower, same lap),
+BRIDGE DOWN (slower, earlier lap), BRIDGE UP (faster, later lap).  Derived: between bridges up the setter's rank
+strictly falls, so a run has at most 7 moves and the restart has at most 7 (U + 1) moves, U = bridges up.
+Recorded exactly for every case-3 restart of E182's populations:
+  * U, the moves, and the check moves <= 7 (U + 1) (derived; must hold);
+  * every sweep step against the proved pair bound k < (s_a + s_b)/(8 (s_a - s_b)) (sweep_lap_bound; must hold);
+  * every bridge up: the pair (setter a -> faster b), whether the same pair bridges up again in the same restart
+    (then HandoffDriftN's drift bound applies), and the residue (8k+1) b mod 8a that let b into the slot.
+
+
+== Case B to 24, every 100th: case-3 restarts 1459 ==
+  restart reaches the landing: 1459; moves <= 7 (U+1) (derived): 1459; every sweep within the pair bound: 1459
+  bridges up per restart U: {0: 385, 1: 736, 2: 264, 3: 65, 4: 7, 5: 1, 6: 1}
+  restarts with no bridge up (pairwise-controlled, at most 6 further moves): 385 of 1459
+  restarts where the same pair bridges up twice (drift bound applies): 2
+  move-type patterns (top 10): [(('up',), 265), (('sweep',), 151), (('down', 'up'), 125), (('down',), 109), (('up', 'up'), 77), (('sweep', 'sweep'), 75), (('sweep', 'up'), 58), (('down', 'up', 'up'), 34), (('up', 'sweep'), 33), (('down', 'sweep', 'up'), 32)]
+
+== late band shapes, every 10th: case-3 restarts 1314 ==
+  restart reaches the landing: 1314; moves <= 7 (U+1) (derived): 1314; every sweep within the pair bound: 1314
+  bridges up per restart U: {0: 141, 1: 199, 2: 458, 3: 118, 4: 168, 5: 168, 6: 61, 8: 1}
+  restarts with no bridge up (pairwise-controlled, at most 6 further moves): 141 of 1314
+  restarts where the same pair bridges up twice (drift bound applies): 2
+  move-type patterns (top 10): [(('up', 'up'), 255), (('up',), 119), (('down',), 112), (('down', 'down', 'up', 'down', 'up'), 78), (('down', 'up', 'up', 'up', 'down', 'down', 'up', 'down', 'up'), 65), (('up', 'up', 'up'), 56), (('up', 'up', 'down', 'up'), 53), (('down', 'up', 'up', 'up', 'down', 'down', 'up', 'down', 'up', 'down', 'down'), 51), (('down', 'up'), 47), (('down', 'up', 'up'), 44)]
+
+== Case C sample (500): case-3 restarts 2750 ==
+  restart reaches the landing: 2750; moves <= 7 (U+1) (derived): 2750; every sweep within the pair bound: 2750
+  bridges up per restart U: {0: 841, 1: 1379, 2: 406, 3: 105, 4: 15, 5: 3, 6: 1}
+  restarts with no bridge up (pairwise-controlled, at most 6 further moves): 841 of 2750
+  restarts where the same pair bridges up twice (drift bound applies): 7
+  move-type patterns (top 10): [(('up',), 568), (('down',), 436), (('down', 'up'), 314), (('sweep',), 207), (('sweep', 'up'), 76), (('up', 'up'), 74), (('up', 'down'), 71), (('down', 'up', 'up'), 69), (('sweep', 'sweep'), 63), (('up', 'down', 'up'), 52)]
