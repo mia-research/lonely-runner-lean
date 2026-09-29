@@ -6004,3 +6004,37 @@ one pair, where the drift bound bites, occur in 11 of 5,523. So speed gaps canno
 extends it is which faster readings sit in the slot at a setter's exit, a condition on the readings' residues
 `(8k+1)·b mod 8a`, i.e. on the arrangement's own grid, not on how close two speeds are. Any control of the restart would
 have to come from that residue structure.
+
+---
+
+## E184 — 2026-09-30 — corrections after re-reading memory and the log: E178–E183 re-derived E113–E115 without citing them; two in-place edits
+
+**Owner:** *"You just compacted you context, please read you memory (not grep) you can skim scan handover, manuscrip and
+paper document though"*. Read in full: `feedback-n8-cascade-is-the-oracle`, `feedback-n8-no-prereg-no-imports`,
+`feedback-n8-obligation-is-loneliness`, `feedback_document_cadence_running_log`, `project-n8-cascade-function-sources`,
+`project-n8-tight-instances`, `lrc_INDEX`, `feedback_INDEX`; skimmed handover v10, `MANUSCRIPT_v21` §0 and §17,
+`PAPER_v9_1`; read E52, E112, E113.
+
+1. **E178–E183 re-derived the owner's path route and did not cite it** (O2/O3 again: read the log's treatment of a route
+   before deriving). Already on record:
+   - E52: the proof is the deformation argument (global isolation at the AP; survives small changes; what is owed is that
+     the relocated isolation cannot escape to infinity, *"bounded by the speeds of the arrangement"*).
+   - E112: `DeformationN.lonely_along_path` (Lean, 2026-09-26) owes two hypotheses along every path from the AP: local
+     stability and the window.
+   - E113: at a simple pinch the wall lemma is the mirror (same pair, roles swapped, opens on the other side); the path
+     route owes (A) no lonely whole-number arrangement has only multi pinches, (B) the window. Checked there: multi
+     pinches only, 0 of 346,104 sets `≤ 24`.
+   - E114 `PinchOpenN`; E115 `LonelyRunnerAt8 ⇐ WindowBound` (`PathWindowN`), O4 one runner at a time avoids multi
+     pinches, O5 the continuum carries nothing across a whole-number point.
+   So E180's reflection is E113 item 3 (mirror), E178–E182's "local half / global half" is E113's (A)/(B), and E182's
+   "one global fact" is (B), `WindowBound`, which E52 names as the owner's bound, not an import. **New relative to that
+   record:** `PartialReflectionN` (Lean, reflection around the pinching pair's own period, the others strictly clear;
+   E181; generalises the mirror from the full period); E178's straight-path counts (after `s = 0` every pinch had another
+   open window, 13,737 of 13,737 on samples); E182's three exhaustive relocation cases at a death; E183's decomposition.
+2. **Two in-place edits of this log, against its append-only rule** (`feedback_document_cadence_running_log`): E174's
+   figure for the separating runner's rank (29,826 changed to 30,476; commit `cf60341`) and E175's stretch-form line
+   (commit `363862c`). Both corrected true figures, recounted from the `.out` files; they should have been appended as
+   corrections. Recorded here; no further in-place edits.
+3. **E183's target was a cap** (a bound on the restart), a shape `feedback-n8-obligation-is-loneliness` and
+   `MANUSCRIPT_v21` §0 list as foreign. It was flagged (E172 shape) and run at the owner's direction; its result is a
+   record of which restarts the pairwise lemmas control, not a target to pursue.
