@@ -5757,3 +5757,52 @@ step ("force a terminal overlap within a bounded chain"; "why those chains canno
 that/when-it-stops shape (E172); it is flagged to the owner, not run. The place-test form of the same material: from the
 residue condition, name which reading the bound's capture carries into the slot and where its exit is, for the class
 where exactly one is carried and its exit is clear; check against the cascade; perturb the exceptions.
+
+---
+
+## E178 — 2026-09-29 — the isolation followed along the deformation from the AP: every event a pinch, none unprotected
+
+**Owner:** *"yes run the deformation and pinch test"* (after the parallel session's direction, relayed: *"deforming the
+AP moves isolation without destroying its existence"*; the replacement window to be derived, not assumed).
+
+(`LonelyRunner/experiments/nN/redo/deform_pinch_v1.{py,out}`, `deform_pinch_v1b.{py,out}`, commit `043af1b`; exact.)
+**The path** is `WindowPinchN`'s deformation in `ArrangementShapeN`'s coordinates: subject (the slowest runner) at 0,
+span 7; target readings `S` give shape readings `x_i = 7 S_i / S_7`; along `s ∈ [0, 1]`, `d_i(s) = i + s (x_i − i)`,
+the AP `1..7` at `s = 0`, the target at `s = 1`. At every step the cascade's first isolation, followed exactly (400-step
+grid, events located by exact bisection, then `τ` solved from the tight pair constraint
+`(8k_i+1) d_j(s) = (8k_j+7) d_i(s)`, linear in `s`). Scope: two events between neighbouring grid points whose effects
+cancel on the landing are not seen.
+
+**Forced by the definitions** `[reasoned]`: windows of different lap assignments are disjoint, so the first isolation
+changes only when its window closes to a single instant (death) or a new window opens from a single instant before it
+(birth); both are **pinches**. On a rational path each pinch parameter is rational, so the readings there have a common
+period `P`; at a **simple** pinch (one reading on `+1/8`, one on `−1/8`, the rest strictly clear) `PinchOpenN` applies
+(lonely on both sides). The local argument can fail only at a multi-pinch with no other open window.
+
+| population | paths | events | simple / multi pinches | no other open window | unprotected |
+|---|---|---|---|---|---|
+| Case B to 24, every 100th | 2,104 | 8,900 (4,263 deaths, 4,637 births) | 8,668 / 232 | 2,104 | 0 |
+| late band shapes, every 10th | 540 | 2,079 (1,961 / 118) | 2,079 / 0 | 540 | 0 |
+| Case C sample | 500 | 5,902 (4,572 / 1,330) | 5,833 / 69 | 500 | 0 |
+
+Oracle check (cascade landing = first lonely component, every tenth grid point): 0 violations in all three.
+`[VERIFIED — these samples]`:
+- **Every event is a pinch**: the tight window is a single instant at `τ` in all 16,881.
+- **The events with no other open window are exactly the `s = 0` event of each path** (the AP, whose windows are all
+  single points; a simple pinch; `P = 1`): matching counts on the full samples, and checked directly on subsamples
+  (526 of 526, 135 of 135, 100 of 100 at `τ = 0`). **Every later event, 13,737 of them, happens while another window of
+  positive width exists.** No unprotected multi-pinch in any sample.
+- **At the AP start** the class-1 window at `1/8` dies at once in every path and the isolation moves to another φ(8)
+  class: class 3 (lap change `⌊3i/8⌋`) in all 540 late shapes; class 5 or class 3 in Case B (lap changes
+  `⌊5i/8⌋` 1,190, `⌊3i/8⌋` 952).
+- **The mirror `P − t₀` is never the replacement** (0 of 10,796 deaths): an earlier window is always there.
+- **Jumps** in `R = 8 d_min t` at deaths: up to 1.4 (Case B), 3.2 (late), 1.5 (Case C). The negative jumps (Case B 69,
+  Case C 32) are a death and a birth at the same `τ`, the new window at `3/5` of the dying instant (`R` ratio `5/3` in
+  every listed case).
+
+**Reading** `[reasoned]`: along these paths the deformation never reduces the isolation to a single point after leaving
+the AP; the local half ("a pinch does not destroy isolation") has, at every event found, one of two proved reasons —
+`PinchOpenN` at a simple pinch, or another window of positive width. Not proved: that an open window always coexists at
+every pinch after `s = 0` (the fact these samples show). Not addressed by this test: the global half, that the
+relocations stay at bounded times along the whole path (E115/O5: `WindowBound` on the moves is the whole-number
+conjecture).
