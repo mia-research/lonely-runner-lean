@@ -5522,3 +5522,46 @@ the working tree, so it covers the untracked modules (band cover, `CascadeGridN`
 `HandoffResonanceN`, `ArrangementShapeN`) and the uncommitted `gridStep8_two_bounded` / `exists_in_assigned_blocks`.
 HEAD's `RegimeSkeletonN` (fix only) was compiled separately off-tree, not gated as such. `Cover8` stays OWED.
 
+
+---
+
+## E171 — 2026-09-29 — the oracle's isolation incidents, and waves; cascade-checked; no density
+
+**Owner:** *"yes run the wave-level test. Make sure it is backed up by cascade and [check you are not] trying to find a
+density or something else creeping."* Then: *"Think about what we are trying to prove not what others have tried. It is
+about boundaries, isolation incidents that we have an oracle for that works exactly and perfectly."*
+
+(`LonelyRunner/experiments/nN/redo/wave_incident_v1.{py,out}`, `wave_incident_v1b.{py,out}`, commit `39c76d0`; exact;
+checks fixed in the docstring before any data.) Populations as E170: Case B to 24 (210,335), Case C sample (20,000),
+late band shapes (5,400).
+
+- **The oracle, checked** `[VERIFIED — these populations]`: C1, the cascade's landing equals the first lonely instant
+  computed without the cascade (linear-merge intersection of closed clear intervals): **0 violations** in all three
+  populations. C2, every move type agrees with `SweepBridgeN` (faster next setter on a later lap, slower on the same or an
+  earlier lap): **0 violations**.
+- **No density.** Every quantity is read at a cascade state or at an incident (who opens, who closes, laps, readings in
+  the slot, deadlines). Total depth and openings-left were dropped from E170's panel.
+- **Waves** (chain cut at every bridge up; within a wave the setter's rank strictly falls, at most seven moves): **no
+  wave-level candidate is strictly monotone on every chain** (readings in the way, start rank, end rank, wave length,
+  opening setter's lap, horizon, lap jump). Waves per chain: Case B 1–9, Case C 1–7, late shapes 7–12. So neither a
+  per-move nor a per-wave scalar organises the walk (E170, E171).
+- **Incidents — the boundary structure** `[VERIFIED — these populations]`. Tight (single point: an opening boundary equal
+  to a closing boundary) first incidents: Case B 37,908 of 210,335; Case C 1,932 of 20,000; late shapes 0 of 5,400.
+  Hosts (the reading that opens at the incident) of every rank occur; late shapes are hosted by the nearest runner
+  (2,311, at its second opening) or the fastest (2,605).
+- **The grid label is not specific to the oracle's incident.** The lap assignment at the first incident is a
+  `GridClass8` pattern (`e ∈ S`, `mm ≤ 4`, unit class) in 210,330 / 18,021 / 5,363 cases (the 5 Case B exceptions are
+  six-reading crowds such as `(1, 19, …, 24)`, `R ≈ 2.2–2.6`); late shapes need only `(e = nearest, mm = 2, c = 5)`
+  (`R` near 10) or `(nearest, 3, 3)` (`R` near 9). **Controls:** second incidents in the same `R` bin are covered at the
+  same rates (Case B `[2,4)`: 6,635/6,640 first, 74,540/74,726 second; late `[8,16)`: 5,363/5,400 first, 5,400/5,400
+  second); and **random instants that need not be lonely** fit the pattern at 99.96% for `R ∈ [1,2)`, 93.0% `[2,4)`,
+  67.4% `[4,8)`, 41.3% `[8,16)` (Case B, every tenth set). Below `R = 2` the grid clause constrains nothing (as E170's
+  sandwich predicted); above it the pattern describes lonely instants in general, first and second alike.
+
+**Reading, in the owner's frame** `[reasoned from the definitions]`: the oracle only ever visits opening boundaries
+`(8K + 1)/(8a)` and stops at the first one no window contains (the flank form, `ExistenceAt8_flank`, proved equivalent).
+For whole-number readings, reading `d`'s window contains `a`'s opening exactly when `|(8K + 1)·d − 8la| < a` for some
+integer `l`: every step of the walk is an exact residue test modulo `8a`, and an incident hosted by `a` is a multiplier
+`u ≡ 1 (mod 8)` with `u·d mod 8a ∈ [a, 7a]` for every reading. A tight incident is an exact integer relation
+`(8K_a + 1)·c = (8K_c + 7)·a` between two readings. E170–E171 rule out summaries of this test (scalars per move, per
+wave, grid labels); what is left to study is the boundary test itself.
