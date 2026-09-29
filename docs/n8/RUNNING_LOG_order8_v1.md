@@ -6269,3 +6269,32 @@ case-list route read in the cascade's own terms, not a new route.
 what pushes `q` up, and it is what a uniform choice of `q` has to handle. The rung budget's failures (1,329 of 91,523 on
 `[1,40]`, where every unit count exceeds `φ(q)` but a unit is still free) are where blocked units coincide; the link
 lemma (`N ∣ d′ − c·d`, `link_reading`) names when two readings block together.
+
+---
+
+## E189 — 2026-09-30 — the method adopted; the mechanism map built (v1); the interim reduction (Q5)
+
+**Owner**, on E188's proposed method: *"This is a much better approach.  We need to learn from the failed attempts
+methodologically not just about that proposed statement.  Always understanding the exceptions should always be required
+/ yes build the map and record the memory"*. Then: *"Only one question.  Since we have reduced "any" arrangement to a
+finite set.  Do we need an interim step where we reduce the infinite family to a reduced set too?"*
+
+**The map:** `docs/n8/MECHANISM_MAP_v1.md` (outer repo `c40cfa5`). §0 the method (M1 map first; M2 classify the step:
+restatement / majority rule / uniform argument / map run; M3 the three answers required for **every** exception; M4
+derive forced facts first; M5 failed attempts entered by method class; M6 state every restriction). §1 objects in rung
+coordinates. §2 derived facts with Lean status: the 29 declarations cited were checked against the tree (all resolve;
+`PinchReflectionN`, `HandoffDriftN`, `SymbolicWindowTransportN`, `DoubleBacktrackN` and this session's
+`PartialReflectionN` are untracked and marked so). §3 regularities R1–R9 with their exceptions and the three answers
+(R3's budget failures and R8 marked not understood). §4 open questions Q1–Q5. §5 the equivalent forms of the obligation
+(restatements, not steps). §6 failed attempts in classes F1–F11, each with its log entries. The map is a working document;
+the log remains the record.
+
+**Q5, the interim reduction** `[reasoned; derived on paper, not checked, not in Lean]`: yes, one is needed; the case-list
+form is a finite list, and a uniform argument still has to be told which `q` each set uses. At a fixed rung `q` the
+rung's conditions see a reading only through whether `q` divides it, its residue mod `q`, and the cell of its reading at
+`1/(8e)` cut by the walls `1/8 − r/q`, `7/8 − r/q`; so at fixed `q` the infinite family falls into finitely many classes,
+defined by the readings alone (not by loneliness, E145). Open: `q` itself, which on the windows measured keeps growing
+(§17E: 9 on `[1,30]`, 16 on `[1,40]`).
+
+**Gates running:** `compile-diff` of the map against log E100–E188 and v21 §15–§17E (owed before the map is relied on as
+complete); `memory-drafter` for the owner's ruling. Results in the next entry.
