@@ -1,0 +1,51 @@
+E182 (2026-09-29), relocation_death_v1: where the isolation goes when its window dies along the deformation from the AP.
+
+Owner: "yes run the three-case relocation test if you tell me why it matters.  We are trying to determine how the
+cascade is forced to show n=8."
+
+Why: lonely_iff_run_ends makes n = 8 the statement that the cascade always stops.  Along the deformation from the AP
+(isolated) to a target, the cascade's landing changes only at pinches (E178); a birth moves it to a newborn window at the
+pinch instant; a DEATH is the only moment the isolation could be lost.  So the step to be forced is the relocation at a
+death.
+
+Derived from the definitions (reasoned): at a death the dying window is a single instant t0 where runner a sits on +1/8
+(leaving the subject's slot, lap k_a) and b on -1/8 (entering, lap k_b).  Just after, b's closing precedes a's opening,
+so a's window and b's window overlap and together cover everything from a's entry to b's exit
+T_b = (k_b + 1 + 1/8)/d_b.  Hence the new first isolation is exactly one of:
+  CASE 1  at T_b, b's exit (its separation, E158; SeparationN.move_eq_separation) -- exactly when the other readings are
+          clear at T_b;
+  CASE 2  earlier than t0: a window born at the same instant (the partial reflection, E181);
+  CASE 3  later than T_b: some reading is in the way at T_b (carried into the slot by the shift, E161's transport).
+CHECK (derived, must be 0): no new first isolation strictly between a's opening and T_b.
+Everything is evaluated exactly at s = tau + delta, delta = 1/10^15, just after the death.
+Case 3 records the readings in the way at T_b (faster or slower than b), and the cascade's moves from T_b to the landing.
+Populations: E178's (Case B to 24 every 100th, late band shapes every 10th, Case C sample 500).  Simple pinches only;
+multi-pinch deaths are counted.
+
+
+== Case B to 24, every 100th: deaths after s = 0: 2159 (simple 2052, multi 107) ==
+  CASE 1 (b's exit): 524   CASE 2 (earlier, born at the same instant): 69   CASE 3 (later than b's exit): 1459
+  CHECK, a new first isolation between a's opening and b's exit (derived impossible): 0
+  case 3: readings in the way at b's exit: {1: 1099, 2: 333, 3: 27}
+  case 3: those faster than b / slower than b: faster-only 518, slower-only 786, both 155
+  case 3: cascade moves from b's exit to the landing: {1: 525, 2: 423, 3: 269, 4: 118, 5: 61, 6: 35, 7: 17, 8: 6, 9: 3, 10: 2}; cascade reaches the landing: 1459 of 1459
+  case 3: jump in R beyond b's exit: max 3.041, median 0.348
+  paths in which every simple death relocates by case 1 or 2: 1084 of 2104
+
+== late band shapes, every 10th: deaths after s = 0: 1421 (simple 1421, multi 0) ==
+  CASE 1 (b's exit): 107   CASE 2 (earlier, born at the same instant): 0   CASE 3 (later than b's exit): 1314
+  CHECK, a new first isolation between a's opening and b's exit (derived impossible): 0
+  case 3: readings in the way at b's exit: {1: 847, 2: 394, 3: 65, 4: 8}
+  case 3: those faster than b / slower than b: faster-only 671, slower-only 367, both 276
+  case 3: cascade moves from b's exit to the landing: {1: 231, 2: 337, 3: 151, 4: 85, 5: 106, 6: 18, 7: 57, 8: 50, 9: 103, 10: 68, 11: 79, 12: 23, 13: 5, 14: 1}; cascade reaches the landing: 1314 of 1314
+  case 3: jump in R beyond b's exit: max 6.126, median 1.712
+  paths in which every simple death relocates by case 1 or 2: 0 of 540
+
+== Case C sample (500): deaths after s = 0: 4072 (simple 4014, multi 58) ==
+  CASE 1 (b's exit): 1233   CASE 2 (earlier, born at the same instant): 31   CASE 3 (later than b's exit): 2750
+  CHECK, a new first isolation between a's opening and b's exit (derived impossible): 0
+  case 3: readings in the way at b's exit: {1: 1754, 2: 806, 3: 174, 4: 15, 5: 1}
+  case 3: those faster than b / slower than b: faster-only 942, slower-only 1380, both 428
+  case 3: cascade moves from b's exit to the landing: {1: 1211, 2: 739, 3: 431, 4: 186, 5: 112, 6: 48, 7: 17, 8: 3, 9: 2, 10: 1}; cascade reaches the landing: 2750 of 2750
+  case 3: jump in R beyond b's exit: max 2.286, median 0.094
+  paths in which every simple death relocates by case 1 or 2: 8 of 500
