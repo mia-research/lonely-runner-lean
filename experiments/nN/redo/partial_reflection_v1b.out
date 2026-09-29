@@ -1,0 +1,16 @@
+E181 follow-up: births.  At a simple-pinch BIRTH of the first window (window k born at tau, a single instant t0 with a
+on +1/8 and b on -1/8), reflect the pair around its own period (least multiple Q > t0 with the other five strictly
+clear at Q - t0).  By the same identity (time reversed) the reflected window should be a window at tau that DIES there:
+a window just before tau, not just after.  Exact; same subsamples as partial_reflection_v1.
+
+== Case B every 400th: simple-pinch births after s = 0: 1143 ==
+  partner found (other five strictly clear at Q - t0): 1143; the partner is a window that dies at tau: 1143
+  multiple j: {1: 193, 2: 233, 3: 160, 4: 172, 5: 89, 6: 105, 7: 51, 8: 30, 9: 46, 10: 19, 11: 11, 12: 10}; R medians: born 2.08, partner 51.11
+
+== late every 40th: simple-pinch births after s = 0: 24 ==
+  partner found (other five strictly clear at Q - t0): 24; the partner is a window that dies at tau: 24
+  multiple j: {1: 23, 7: 1}; R medians: born 3.74, partner 6.23
+
+== Case C first 100: simple-pinch births after s = 0: 282 ==
+  partner found (other five strictly clear at Q - t0): 282; the partner is a window that dies at tau: 282
+  multiple j: {1: 35, 2: 48, 3: 35, 4: 46, 5: 25, 6: 23, 7: 16, 8: 14, 9: 5, 10: 8, 11: 6, 12: 6}; R medians: born 1.73, partner 52.10

@@ -1,0 +1,46 @@
+E181 (2026-09-29): partial reflection at the deformation's pinches, against the cascade.
+
+Owner: "yes put the reflection identity in Lean and test it" and "Could there be a series of pinches interacting
+between the other 6 so its like an orchestrated overlapping pattern?"
+
+Lean: LonelyRunner/LRC/Spec/PartialReflectionN.lean, partial_reflected_right_inequalities (built on PinchReflectionN).
+Reflect only the pinching pair R = {a, b} (a on +1/8 leaving, b on -1/8 entering, at the dying window's instant t0)
+around a common period Q of the PAIR alone (Q d_a, Q d_b whole at tau; Q > t0).  The reflected instant is Q - t0; the
+pair's labels there are Q d_i - k_i - 1; every other reading keeps its own label floor(d_c (Q - t0)) and must be
+strictly clear at Q - t0 (the theorem's hypothesis hfree).  Q runs over multiples j Q_ab of the pair's least period.
+
+Per death of the first window along the deformation paths of E178 (subsamples), recorded exactly:
+  * the least multiple j for which the other five readings are strictly clear (the theorem applies); its R;
+  * THEOREM CHECK: at tau + delta the reflected labels form a window (the theorem's conclusion) -- must hold whenever
+    the hypotheses hold;
+  * PLACE TEST: is the cascade's replacement (the new first window just after tau) that partial reflection?
+  * for comparison, the full reflection's R (period of all seven readings).
+Simple pinches only (a and b named); multi-pinches reported by count.
+
+
+== Case B every 400th: deaths after s = 0: 529 (simple 511, multi 18) ==
+  partial reflection with the other five strictly clear, within 400 multiples of the pair period: 511 of 511
+  THEOREM CHECK (reflected labels a window just after tau): 511 of 511; born exactly at tau: 511
+  PLACE TEST (the cascade's replacement IS that partial reflection): 21 of 511
+  multiple j used: {1: 113, 2: 126, 3: 116, 4: 59, 5: 33, 6: 22, 7: 19, 8: 4, 9: 9, 10: 4, 11: 1, 12: 1, 13: 2, 15: 2}
+  R medians: dying window 1.00; partial reflection 23.00; full reflection 77.5
+  partial reflection is the full one (Q a multiple of the full period): 94
+  when it is the replacement: R dying 3.30 -> partial 2.00 (medians); j {1: 21}
+
+== late every 40th: deaths after s = 0: 350 (simple 350, multi 0) ==
+  partial reflection with the other five strictly clear, within 400 multiples of the pair period: 350 of 350
+  THEOREM CHECK (reflected labels a window just after tau): 350 of 350; born exactly at tau: 350
+  PLACE TEST (the cascade's replacement IS that partial reflection): 1 of 350
+  multiple j used: {1: 105, 2: 62, 3: 55, 4: 29, 5: 28, 6: 17, 7: 14, 8: 8, 9: 2, 10: 8, 11: 9, 12: 1, 14: 1, 15: 1, 21: 2}
+  R medians: dying window 4.36; partial reflection 67.38; full reflection 1270805.1
+  partial reflection is the full one (Q a multiple of the full period): 0
+  when it is the replacement: R dying 6.29 -> partial 10.48 (medians); j {1: 1}
+
+== Case C first 100: deaths after s = 0: 866 (simple 851, multi 15) ==
+  partial reflection with the other five strictly clear, within 400 multiples of the pair period: 851 of 851
+  THEOREM CHECK (reflected labels a window just after tau): 851 of 851; born exactly at tau: 851
+  PLACE TEST (the cascade's replacement IS that partial reflection): 7 of 851
+  multiple j used: {1: 152, 2: 163, 3: 120, 4: 92, 5: 83, 6: 57, 7: 34, 8: 37, 9: 24, 10: 23, 11: 12, 12: 15, 13: 3, 14: 5, 15: 4}
+  R medians: dying window 1.00; partial reflection 23.00; full reflection 647.0
+  partial reflection is the full one (Q a multiple of the full period): 15
+  when it is the replacement: R dying 3.05 -> partial 1.83 (medians); j {1: 7}
