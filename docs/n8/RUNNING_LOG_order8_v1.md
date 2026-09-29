@@ -5971,3 +5971,36 @@ the path, which is O5's statement in another form, equivalent to the conjecture 
 terms the owner's principle, that isolation can fail only if two runners share a speed, is what would have to supply it:
 along the order-preserving path the speed ratios stay away from equality, and the separation lemmas already on disk
 (`sweep_lap_bound`, E127's crowd run-out) bound separation per pair by the ratio gap. Not attempted here.
+
+---
+
+## E183 — 2026-09-29 — making the pairwise separation bound control the restart: it does, exactly when there is no bridge up
+
+**Owner:** *"yes try making the pairwise separation bound control the restart"*. (A bound on the restart is the
+when-at-the-latest shape of E172; done at the owner's direction, stated in the framework's own objects: the cascade's
+move types and the separation lemmas in the tree.)
+
+**Derived** `[reasoned from SweepBridgeN]`: the restart after a death (E182) is cascade moves; each setter relative to the
+previous one is a sweep (slower, same lap), a bridge down (slower, earlier lap) or a bridge up (faster, later lap).
+Between bridges up the setter's rank strictly falls, so the restart has at most `7 (U + 1)` setters, `U` = bridges up.
+Sweeps are bounded pair by pair (`sweep_lap_bound`), same-lap groups separate by `t < 1/(4(a − b))`
+(`same_lap_separation_time`), and a pair's repeated bridges are bounded by its drift
+(`HandoffDriftN.repeated_capture_bounds_drift`). **A first bridge up is not a separation failure**: a faster `b` is in the
+slot at `a`'s exit exactly when `(8k+1)·b mod 8a` is within `a` of 0, a residue coincidence no speed gap bounds.
+
+**Checked** (`LonelyRunner/experiments/nN/redo/restart_bridges_v1.{py,out}`, commit above; exact; every case-3 restart of
+E182) `[VERIFIED — these samples]`: all 5,523 restarts reach the landing, satisfy the `7 (U + 1)` bound, and every sweep
+step is within the pair bound.
+
+| population | case-3 restarts | no bridge up | bridges up per restart | same pair bridging up twice |
+|---|---|---|---|---|
+| Case B, every 100th | 1,459 | 385 | 1: 736, 2: 264, up to 6 | 2 |
+| late band shapes, every 10th | 1,314 | 141 | 2: 458, up to 8 | 2 |
+| Case C sample | 2,750 | 841 | 1: 1,379, up to 6 | 7 |
+
+**Reading** `[reasoned; counts as above]`: the pairwise separation bounds control the restart exactly when it has no
+bridge up (26%, 11%, 31% of the case-3 restarts). The rest extend through bridges up between distinct pairs; repeats of
+one pair, where the drift bound bites, occur in 11 of 5,523. So speed gaps cannot control the restart in general: what
+extends it is which faster readings sit in the slot at a setter's exit, a condition on the readings' residues
+`(8k+1)·b mod 8a`, i.e. on the arrangement's own grid, not on how close two speeds are. Any control of the restart would
+have to come from that residue structure.
