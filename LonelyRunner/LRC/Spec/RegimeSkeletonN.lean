@@ -6,7 +6,7 @@ import LonelyRunner.LRC.Spec.TwoBlockN
 
 2026-09-28.  Running record: `RUNNING_LOG_order8_v1.md` E156–E166.
 
-**The one owed statement is `Cover8 M`** (registered OWED in `scripts/nN/spec_gate.sh`): every set of whole-number
+**The one owed statement is `Cover8 M`** (registered OWED in `scripts/nN/spec_gate.sh`): every set of at most seven whole-number
 readings (least reading `m`) is lonely at the bound `1/(8m)`, or at a relocated grid-class instant of a grid through one of
 its own readings `e` with step `e/mm ≥ m/M` and a class `c ∈ {1, 3, 5, 7}` (the units mod 8).  **`lonelyRunnerAt8_of_cover8
 M : Cover8 M → LonelyRunnerAt8`**, for every `M`, with no case split: sets of spread at most 7 are lonely at the bound (R1).
@@ -66,9 +66,11 @@ def GridStep8 (S : Finset ℕ) (m M : ℕ) : Prop :=
   BoundClear8 S m ∨
     ∃ e ∈ S, ∃ mm c : ℕ, 1 ≤ mm ∧ mm * m ≤ M * e ∧ (c = 1 ∨ c = 3 ∨ c = 5 ∨ c = 7) ∧ GridClass8 S e mm c
 
-/-- **OWED: the spread-free covering.**  Every set of whole-number readings, least reading `m`, is in `GridStep8 S m M`. -/
+/-- **OWED: the spread-free covering.**  Every set of at most seven positive whole-number
+readings, least reading `m`, is in `GridStep8 S m M`. The cardinality bound is essential. -/
 def Cover8 (M : ℕ) : Prop :=
-  ∀ S : Finset ℕ, (∀ d ∈ S, 0 < d) → ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → GridStep8 S m M
+  ∀ S : Finset ℕ, S.card ≤ 7 → (∀ d ∈ S, 0 < d) →
+    ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → GridStep8 S m M
 
 /-- The grid regime with a step bound is sufficient. -/
 theorem lonely_of_gridStep8 {S : Finset ℕ} {m M : ℕ} (hS : S.Nonempty) (hpos : ∀ d ∈ S, 0 < d) (hm : 0 < m)
@@ -83,8 +85,11 @@ theorem lonelyRunnerAt8_of_cover8 (M : ℕ) (h : Cover8 M) : LRC.Spec.LonelyRunn
     classical
     have hne := readingsOf_nonempty v 0
     have hpos := readingsOf_pos hv 0
+    have hcard : (readingsOf v 0).card ≤ 7 := by
+      unfold readingsOf
+      exact le_trans Finset.card_image_le (by simp)
     have hmS : (readingsOf v 0).min' hne ∈ readingsOf v 0 := Finset.min'_mem _ hne
     exact lonely_of_gridStep8 hne hpos (hpos _ hmS)
-      (h _ hpos _ hmS (fun d hd => Finset.min'_le _ d hd))
+      (h _ hcard hpos _ hmS (fun d hd => Finset.min'_le _ d hd))
 
 end LRC.RegimeSkeleton
