@@ -5683,9 +5683,9 @@ unplaced, each traced move by move from the bound, perturbed one reading at a ti
   `(2, 3, 4, 14, 17, 22, 24)`: 22 = 2·11 on the rung `1/11`, leaving at `17/176 = 1/11 + 1/(8·22)`), **a reading one past
   the grid in 507** (the same place relocated by the deviation, e.g. `(2, 3, 4, 14, 17, 23, 24)`: 23 in the slot at
   `1/11`, leaving at `17/184`; `(1, …, 23, 24)` at `2/9`: 23 at `5 + 1/9`, leaving at `41/184`, `1/1656` after the rung).
-- **The stretch form too**: 741 of the 768 are also the stretch at a rung with `q = 9` or `10` (the rung closes the
-  stretch: the reading in the way at `1/9` closes it, residues `0` or `±1`), and 27 at `3/13` with the rung inside the
-  stretch.
+- **The stretch form too**: every one of the 768 is also the stretch at a rung (least `q`: 9 in 689, 10 in 51, `3/13`
+  in 28). The rung closes the stretch in 741 (the reading in the way at the rung closes it; residues `0` or `±1`) and lies
+  inside it in 27.
 - **Perturbation**: moving one reading by ±1 sends each of the 768 back to an E174 place (named view, one separation
   from one, or the stretch at a rung with `q ≤ 8`) for between 1 and 7 of its ranks (`place_768_v1.out`).
 
