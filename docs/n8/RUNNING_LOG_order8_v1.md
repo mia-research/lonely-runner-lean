@@ -6038,3 +6038,77 @@ paper document though"*. Read in full: `feedback-n8-cascade-is-the-oracle`, `fee
 3. **E183's target was a cap** (a bound on the restart), a shape `feedback-n8-obligation-is-loneliness` and
    `MANUSCRIPT_v21` §0 list as foreign. It was flagged (E172 shape) and run at the owner's direction; its result is a
    record of which restarts the pairwise lemmas control, not a target to pursue.
+
+---
+
+## E185 — 2026-09-30 — the window (B): what it is on the path route, and the target's event read on the last move
+
+**Owner:** *"work on the window (B) on the path route making sure it is compliant to the framework, no density, no
+coverage, boundaries and isolation events and cascade as the oracle"*.
+
+**What (B) is on the path route** `[reasoned from the Lean statements and E116]`: `PathRouteN.segment_lonely` needs the
+window only along one move (one runner moving, six fixed at rational readings), and `DeformationN.lonely_along_path`
+uses it only for closedness. On a move: off the lattice of the six, `OneFreeN.lonely_of_one_free_eight` places the event
+(order seven on the six, then stepping); at a lonely lattice point, `move_one_strict` / `move_one_period` keep nearby
+points lonely at that point's own instant or its mirror, inside its period, so the bound is free there; at a lattice point
+that is not lonely the instants escape like `1/ε` (E116). So (B) on a move is loneliness at its lattice points, and there
+is no separate escape to rule out. The target is a lattice point of the last move (O5, E116). **So (B) at the target is
+the target's own isolation event, seen from the last move**: six readings fixed, the seventh arriving.
+
+**Read on the last move** (`LonelyRunner/experiments/nN/redo/last_move_v1.{py,out}`, commit above; exact; all 346,104 sets
+of seven readings in `1..24`; any runner may be moved last, E115 O4). The six fixed readings have their own clear set `F`
+at `1/8` (native order seven clears them at `1/7`, so `F` has intervals with room). The target's event `t*` (the cascade's
+landing on all seven) lies in one of `F`'s intervals, index `j` in time order `[VERIFIED — readings ≤ 24]`:
+- **Mover = the fastest reading**: `j = 1` (the six's first clear interval) in 309,156; `j = 2` 35,218; `j = 3` 1,673;
+  `j = 4` 54; `j = 5` 3. The event is that interval's left end (a boundary of the six, the mover clear there) in 316,874
+  and the mover's opening inside it in 29,230.
+- **Best mover**: some choice of mover gives `j = 1` in 345,133 sets; the least `j` is 2 in 958 and 3 in 13. The 971 sets
+  where every choice gives `j ≥ 2` are listed in the `.out` (first: `(1, 3, 4, 5, 6, 7, 8)`, `R* = 25/7`).
+- Each `F`-interval before `t*`'s lies inside one slot of the mover: 0 exceptions. **This is forced** (a connected
+  interval inside the mover's in-the-way set lies in one of its disjoint slots), a consistency check, not a finding. The
+  R8 check (a mover faster than 7 times every fixed reading gives `j = 1`) was **not exercised**: no set with readings
+  `≤ 24` has such a mover.
+
+**Reading** `[reasoned; the counts are this window's]`: at the target, (B) is the place statement *the target's event is
+in the first clear interval of the other six that the mover's slot does not swallow*; an interval `[a, b]` of `F` is
+swallowed exactly when `x·a` and `x·b` lie within `1/8` of one whole number `k`, a boundary condition on the mover's
+reading `x` against the six's own clear interval. In 345,133 of 346,104 sets some mover leaves the six's **first** clear
+interval open, so the event is named by the six's own first isolation (a lower-order object) and one boundary comparison.
+The 971 sets where every mover swallows the first interval are the exceptions to that statement; per the place test they
+are to be perturbed through the cascade next.
+
+---
+
+## E186 — 2026-09-30 — the parallel session's double-and-backtrack rule, checked
+
+**Owner:** relayed the parallel session's rule (`LonelyRunner/experiments/nN/redo/double_backtrack_selector_v1.md`,
+`LRC/Spec/DoubleBacktrackN.lean`, uncommitted) and asked for it to be checked.
+
+**The rule** at a dying window's pinch `t` (old labels `qᵢ`, phases `fᵢ ∈ [1/8, 7/8]`): `pᵢ = 2qᵢ + [fᵢ ≥ 9/16]`, the
+last opening at or before `2t`; `T = maxᵢ (pᵢ + 1/8)/dᵢ`; a window exactly when the largest need is at most the rollback
+`2t − T`. `[reasoned]` The algebra holds: at `2t` a phase `f` becomes `2f mod 1`, clear exactly when `f ≤ 7/16` or
+`f ≥ 9/16`, so only phases strictly between those can be in the way, and the upper bounds at `T` are exactly the need
+inequality.
+
+**Checked** (`LonelyRunner/experiments/nN/redo/double_backtrack_check_v1.{py,out}`, commit `d3f4163`; exact):
+- The Lean module builds and its 17 audited declarations use only `[propext, Classical.choice, Quot.sound]`
+  (`experiments/nN/double_backtrack_axioms_v1.lean`, run here). Not gated, not committed.
+- The worked example reproduces exactly (`p = (0,1,2,2,3,4,5)`, `T = 41/56`, `δ = 303/7336`, largest need
+  `212775/11326784`, parameter range `[199/738, 2189/2539]`), and so does the failure case (rollback `1/56` against need
+  `231/776`).
+- On E178's subsampled paths (1,712 simple deaths, a population independent of the md's 459): the rule's test is exact
+  (strict ⇒ a window just after the pinch, every case; fails ⇒ not, every case). Strict 267 of 511 (Case B), 87 of 350
+  (late band shapes), 532 of 851 (Case C).
+- **Place test**: the rule's window is the cascade's replacement (the new first isolation) in 61 of 267, 20 of 87 and 25 of
+  532 strict cases, and it is never earlier than the dying instant. So it names **a** window that survives the pinch, not
+  where the cascade goes.
+- **Frame**: native (openings, the pinch, exact inequalities; no density, no coverage). Two presentation points against the
+  owner's standing rule on positive speeds: `region_lonely` puts the subject at speed `0` (`Fin.cases 0 …`), and the md
+  writes the target as speeds `(0, 1, 50, …)`; state it with the subject at a positive speed (`lonelyAt_add_const`) and
+  write the target as the subject's readings `(1, 50, 105, 106, 136, 189, 199)`.
+
+**Where it sits** `[reasoned]`: a surviving window at a pinch is local stability, which the path route already has
+(`PinchOpenN`, `PinchReflectionN`, and `move_one_period` on one-runner moves). The rule's window is nearer than the
+reflection's (`T < 2t` against `P − t`), but by E116 the window (B) is not about the replacement's distance: on a move it
+is loneliness at the lattice points. The md's next branch (derive a different window from the two conflicting readings)
+is again local stability; it does not bear on (B).
