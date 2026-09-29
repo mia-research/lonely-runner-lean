@@ -1,0 +1,270 @@
+E170 (2026-09-29): test candidate decreasing quantities on the cascade BEFORE formalising any termination theorem.
+
+Owner: "do the tests for quantity before formalising".  Nothing here is formalised.
+
+THE CHECK, fixed before any data was seen
+-----------------------------------------
+Object: the cascade of `LRC/Cascade/Iteration.lean` on whole-number readings S (at most seven), threshold 1/8, from the
+bound t0 = 1/(8m), m = min S:  move(t) = t if lonely, else max over readings in the way (circDist(d t) < 1/8, strict) of
+nextOpening(d, t) = (ceil(d t - 1/8) + 1/8)/d.  Exact rational arithmetic throughout.  States j = 0..N; t_N is the fixed
+point (lonely).  Every quantity is computed from the state alone (no knowledge of N).
+
+A quantity SURVIVES only if all four hold, on every chain of every population:
+  (i)   strictly monotone along the chain (in one declared direction);
+  (ii)  well-founded: integer-valued, or a real with a recorded positive minimum step;
+  (iii) scale-free: the same sequence on S and on 3S (the AP is scale invariant; a rank that grows with scale is not
+        a proof ingredient, E164-E166);
+  (iv)  joint: not a function of one pair's state alone (for whole-number readings every pair's capture state recurs
+        with period 1/gcd, HandoffDriftN.zero_drift_iff with (r, s) = (a/g, b/g)).
+Violations are counted and the first ones listed individually.  A clean result is reported as clean.
+
+Candidates (all at state j with readings in the way B_j non-empty):
+  Q1 blocked      |B_j|                                                  integer
+  Q2 lapgroups    number of distinct lap labels round(d t) over B_j      integer
+  Q3 setterrank   rank in sorted S of the reading whose opening is t_{j+1} (smallest rank on ties)   integer
+  Q4 setterlap    that reading's opening lap K (t_{j+1} = (K + 1/8)/setter)                          integer
+  Q6 wait         8m (t_{j+1} - t_j)                                     real
+  Q7 depth        sum over B_j of (1/8 - circDist(d t_j))                real
+  Q8 horizon      8m * min over clear readings c of (deadline(c, t_j) - t_j), deadline = (lap + 7/8)/c   real
+  Q9 deficit      MixedLapOverlapN budget: D = max B_j, P = t_j + 3/(4D); clear readings with c*3/(4D) <= slack are
+                  protected (protected_clear_until); W = 0, 1/(4e), 1/(4a)+1/(2b) for 0, 1, 2 unprotected; undefined
+                  for >= 3.  Delta = 8m (t_{j+1} + W - P).  Delta <= 0 is the Lean criterion certifying t_N <= P.
+  Q11 control     openings of all readings remaining in (t_j, t_0 + 1).  Strictly decreasing BY CONSTRUCTION; must
+                  FAIL (iii).  It is the positive control for the monotonicity count and the negative control for the
+                  scale test.
+Pair state (iv): at each hand-off, (a/m, b/m, depth8(a, b, K, L)) with a = setter at j, b = setter at j+1, K = a's
+  opening lap, L = b's lap label at t_{j+1} (HandoffDriftN.depth8).  Counted: repeats of the same state within one chain.
+Landing: single point iff some reading has d t_N = 7/8 mod 1 exactly (the setter sits at 1/8, so the left side is
+  already closed).
+
+Named test cases (from the review exchange, 2026-09-29):
+  TC1 the AP 1..7; TC2 (99, 200, ..., 700), the whole-number form of (0.99, 2, ..., 7); TC3 chains containing a
+  hand-off between readings in ratio 7:8; TC4 the late band shapes (coverB_fine_v1.late_shapes, fine scale 27720);
+  TC5 E114's family (1, 5k-2, 5k, 10k-2), cascade length 2k+1.
+Populations: Case B to 24 exhaustive (7-subsets of [1, 24] with 7 min < max), Case C sample (20,000 random 7-subsets
+  of [1, 200] with max > 24 min, seed 5), late band shapes.
+Consistency checks against the Lean: t_N <= P_j whenever Delta_j <= 0 (MixedLapOverlapN.protected_group_overlaps_*,
+  with iterate_le_of_lonely); iterates strictly increase; every chain ends before t_0 + 1.
+
+
+-- trace TC1 AP 1..7  S=(1, 2, 3, 4, 5, 6, 7)  moves N=0  R*=1 (1.0000)  single-point landing=True
+   pair states: []
+
+-- trace TC2 (99,200..700)  S=(99, 200, 300, 400, 500, 600, 700)  moves N=6  R*=297/100 (2.9700)  single-point landing=True
+   j=0 t=1/792 Q1=1 Q2=1 Q3=6 Q4=1 Q6=0.2729 Q7=0.0088 Q8=0.155 Q9=None Q11=2798 cert=False
+   j=1 t=9/5600 Q1=1 Q2=1 Q3=5 Q4=1 Q6=0.2121 Q7=0.0893 Q8=0.1131 Q9=None Q11=2797 cert=False
+   j=2 t=3/1600 Q1=1 Q2=1 Q3=4 Q4=1 Q6=0.297 Q7=0.0625 Q8=0.2475 Q9=None Q11=2796 cert=False
+   j=3 t=9/4000 Q1=1 Q2=1 Q3=3 Q4=1 Q6=0.4455 Q7=0.025 Q8=0.3394 Q9=None Q11=2795 cert=False
+   j=4 t=9/3200 Q1=1 Q2=1 Q3=6 Q4=2 Q6=0.1768 Q7=0.0938 Q8=0.0825 Q9=None Q11=2794 cert=False
+   j=5 t=17/5600 Q1=1 Q2=1 Q3=2 Q4=1 Q6=0.5657 Q7=0.0357 Q8=0.0707 Q9=None Q11=2793 cert=False
+   pair states: [('700/99', '200/33', '9/7'), ('200/33', '500/99', '3/2'), ('500/99', '400/99', '9/5'), ('400/99', '700/99', '5/4'), ('700/99', '100/33', '12/7')]
+TC5 k=2 S=(1, 8, 10, 18) moves N=1 (E114 says 2k+1 = 5)
+TC5 k=3 S=(1, 13, 15, 28) moves N=0 (E114 says 2k+1 = 7)
+TC5 k=4 S=(1, 18, 20, 38) moves N=0 (E114 says 2k+1 = 9)
+TC5 k=5 S=(1, 23, 25, 48) moves N=2 (E114 says 2k+1 = 11)
+TC5 k=6 S=(1, 28, 30, 58) moves N=0 (E114 says 2k+1 = 13)
+TC5 k=7 S=(1, 33, 35, 68) moves N=0 (E114 says 2k+1 = 15)
+TC5 k=8 S=(1, 38, 40, 78) moves N=3 (E114 says 2k+1 = 17)
+TC5 k=9 S=(1, 43, 45, 88) moves N=1 (E114 says 2k+1 = 19)
+TC5 k=10 S=(1, 48, 50, 98) moves N=1 (E114 says 2k+1 = 21)
+
+== Case B to 24 (exhaustive) ==
+summary: {'sets': 210335, 'maxN': 19, 'N_dist': {0: 64967, 1: 54642, 2: 42816, 3: 25693, 4: 11340, 5: 5259, 6: 3139, 7: 1376, 8: 555, 9: 278, 10: 140, 11: 49}, 'maxR': '17/3', 'maxR_float': 5.666666666666667, 'single_point_landings': 37908, 'ratio78_handoffs': 11148}
+Lean consistency (certified => t_N <= P; ended within a period): 0 violations []
+pair-state repeats within a chain: {'chains_with_handoff': 90726}  first: []
+  Q1_blocked     {'transitions': {'eq': 109017, 'inc': 36714, 'dec': 36319}, 'chains': {'chains>=2moves': 90726, 'nonincreasing': 56096, 'strictly_inc': 9780, 'strictly_dec': 9985}, 'min_dec_step': '1'}
+        eq e.g. (1, 2, 3, 4, 6, 8, 14) : ['1', '1', '1']
+        eq e.g. (1, 2, 3, 4, 6, 8, 14) : ['1', '1', '1']
+        inc e.g. (1, 2, 3, 4, 15, 16, 22) : ['1', '2']
+        inc e.g. (1, 2, 3, 6, 7, 8, 13) : ['1', '1', '2']
+  Q2_lapgroups   {'transitions': {'eq': 141641, 'inc': 21285, 'dec': 19124}, 'chains': {'chains>=2moves': 90726, 'nonincreasing': 70790, 'strictly_inc': 4531, 'strictly_dec': 5015}, 'min_dec_step': '1'}
+        eq e.g. (1, 2, 3, 4, 6, 8, 14) : ['1', '1', '1']
+        eq e.g. (1, 2, 3, 4, 6, 8, 14) : ['1', '1', '1']
+        inc e.g. (1, 2, 3, 4, 15, 16, 22) : ['1', '2']
+        inc e.g. (1, 2, 3, 6, 7, 8, 13) : ['1', '1', '2']
+  Q3_setterrank  {'transitions': {'inc': 55144, 'dec': 126906}, 'chains': {'chains>=2moves': 90726, 'strictly_inc': 14361, 'strictly_dec': 47047, 'nonincreasing': 47047}, 'min_dec_step': '1'}
+        inc e.g. (1, 2, 3, 4, 6, 8, 14) : ['5', '6', '4']
+        inc e.g. (1, 2, 3, 4, 7, 12, 16) : ['6', '4', '5']
+  Q4_setterlap   {'transitions': {'inc': 55144, 'dec': 23123, 'eq': 103783}, 'chains': {'chains>=2moves': 90726, 'strictly_inc': 14361, 'nonincreasing': 47047, 'strictly_dec': 3731}, 'min_dec_step': '1'}
+        inc e.g. (1, 2, 3, 4, 6, 8, 14) : ['1', '2', '1']
+        inc e.g. (1, 2, 3, 4, 7, 12, 16) : ['2', '1', '2']
+        eq e.g. (1, 2, 3, 6, 7, 8, 13) : ['1', '1', '1']
+        eq e.g. (1, 2, 3, 6, 7, 8, 13) : ['1', '1', '1']
+  Q6_wait        {'transitions': {'dec': 82868, 'inc': 98128, 'eq': 1054}, 'chains': {'chains>=2moves': 90726, 'strictly_dec': 21794, 'nonincreasing': 21794, 'strictly_inc': 29687}, 'min_dec_step': '1/2618'}
+        inc e.g. (1, 2, 3, 4, 6, 8, 14) : ['1/8', '5/56', '2/7']
+        inc e.g. (1, 2, 3, 4, 7, 12, 16) : ['1/16', '25/112', '11/84']
+        eq e.g. (2, 3, 4, 10, 12, 15, 20) : ['1/5', '3/10', '3/10']
+        eq e.g. (2, 3, 7, 10, 12, 15, 23) : ['1/5', '3/10', '3/10']
+  Q7_depth       {'transitions': {'dec': 112818, 'inc': 66749, 'eq': 2483}, 'chains': {'chains>=2moves': 90726, 'strictly_dec': 39605, 'nonincreasing': 41260, 'strictly_inc': 13083}, 'min_dec_step': '1/3040'}
+        inc e.g. (1, 2, 3, 4, 7, 19, 24) : ['1/8', '7/192', '1/14', '11/152']
+        inc e.g. (1, 2, 3, 4, 7, 19, 24) : ['1/8', '7/192', '1/14', '11/152']
+        eq e.g. (1, 2, 5, 7, 9, 16, 23) : ['1/8', '1/8']
+        eq e.g. (1, 2, 5, 8, 13, 14, 22) : ['1/8', '1/8', '11/112']
+  Q8_horizon     {'transitions': {'dec': 42670, 'inc': 139374, 'eq': 6}, 'chains': {'chains>=2moves': 90726, 'strictly_inc': 59410, 'strictly_dec': 2274, 'nonincreasing': 2274}, 'min_dec_step': '5/20748'}
+        inc e.g. (1, 2, 3, 4, 6, 8, 14) : ['1/14', '1/24', '3/7']
+        inc e.g. (1, 2, 3, 4, 7, 12, 16) : ['0', '3/16', '17/112']
+        eq e.g. (1, 5, 7, 12, 15, 22, 24) : ['0', '1/264', '1/168', '7/60', '7/60']
+        eq e.g. (1, 4, 5, 7, 12, 15, 24) : ['0', '5/24', '1/168', '7/60', '7/60', '1/24']
+  Q9_deficit     {'transitions': {'eq': 33, 'inc': 3642, 'dec': 11504}, 'chains': {'chains>=2moves': 90726, 'undefined_somewhere': 82777, 'strictly_inc': 2067, 'strictly_dec': 5826, 'nonincreasing': 5832}, 'min_dec_step': '1/2277'}
+        eq e.g. (1, 2, 3, 4, 6, 8, 14) : ['-1/168', '-1/168', 'None']
+        eq e.g. (1, 2, 3, 4, 8, 13, 14) : ['-135/728', '-135/728', '-41/182']
+        inc e.g. (1, 2, 3, 4, 7, 19, 24) : ['919/3192', 'None', '-17/84', '-29/152']
+        inc e.g. (1, 2, 3, 4, 8, 22, 23) : ['-729/2024', '-353/2024']
+  Q11_control    {'transitions': {'dec': 182050}, 'chains': {'chains>=2moves': 90726, 'strictly_dec': 90726, 'nonincreasing': 90726}, 'min_dec_step': '1'}
+
+== Case C sample (20,000, readings <= 200) ==
+summary: {'sets': 20000, 'maxN': 11, 'N_dist': {0: 5465, 1: 6177, 2: 4214, 3: 2350, 4: 1062, 5: 424, 6: 185, 7: 86, 8: 24, 9: 9, 10: 3, 11: 1}, 'maxR': '243/95', 'maxR_float': 2.557894736842105, 'single_point_landings': 1932, 'ratio78_handoffs': 22}
+Lean consistency (certified => t_N <= P; ended within a period): 0 violations []
+pair-state repeats within a chain: {'chains_with_handoff': 8358}  first: []
+  Q1_blocked     {'transitions': {'eq': 7572, 'inc': 3246, 'dec': 4696}, 'chains': {'chains>=2moves': 8358, 'nonincreasing': 5330, 'strictly_inc': 927, 'strictly_dec': 1684}, 'min_dec_step': '1'}
+        eq e.g. (8, 14, 41, 64, 120, 167, 199) : ['2', '2']
+        eq e.g. (1, 31, 77, 88, 110, 130, 160) : ['2', '2']
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['1', '2']
+        inc e.g. (7, 81, 98, 106, 122, 134, 182) : ['1', '1', '2', '1']
+  Q2_lapgroups   {'transitions': {'eq': 8291, 'inc': 2976, 'dec': 4247}, 'chains': {'chains>=2moves': 8358, 'nonincreasing': 5565, 'strictly_inc': 851, 'strictly_dec': 1513}, 'min_dec_step': '1'}
+        eq e.g. (8, 14, 41, 64, 120, 167, 199) : ['2', '2']
+        eq e.g. (1, 31, 77, 88, 110, 130, 160) : ['2', '2']
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['1', '2']
+        inc e.g. (7, 81, 98, 106, 122, 134, 182) : ['1', '1', '2', '1']
+  Q3_setterrank  {'transitions': {'inc': 8957, 'dec': 6557}, 'chains': {'chains>=2moves': 8358, 'strictly_inc': 3499, 'strictly_dec': 1647, 'nonincreasing': 1647}, 'min_dec_step': '1'}
+        inc e.g. (8, 14, 41, 64, 120, 167, 199) : ['3', '5']
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['1', '4']
+  Q4_setterlap   {'transitions': {'inc': 8957, 'dec': 4196, 'eq': 2361}, 'chains': {'chains>=2moves': 8358, 'strictly_inc': 3499, 'strictly_dec': 818, 'nonincreasing': 1647}, 'min_dec_step': '1'}
+        inc e.g. (8, 14, 41, 64, 120, 167, 199) : ['1', '3']
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['5', '8']
+        eq e.g. (7, 81, 98, 106, 122, 134, 182) : ['2', '2', '3', '2']
+        eq e.g. (7, 31, 53, 116, 128, 130, 185) : ['1', '4', '3', '3']
+  Q6_wait        {'transitions': {'dec': 8929, 'inc': 6575, 'eq': 10}, 'chains': {'chains>=2moves': 8358, 'strictly_dec': 3318, 'nonincreasing': 3324, 'strictly_inc': 1735}, 'min_dec_step': '3/483230'}
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['1/40', '157/4920']
+        inc e.g. (1, 31, 77, 88, 110, 130, 160) : ['1/88', '145/2728']
+        eq e.g. (7, 40, 90, 99, 110, 132, 173) : ['9/110', '119/990', '119/990', '91/360', '7/440', '259/3806', '1862/17127']
+        eq e.g. (7, 9, 23, 54, 83, 96, 176) : ['1/6', '7/96', '7/96', '161/1328']
+  Q7_depth       {'transitions': {'dec': 9437, 'inc': 6027, 'eq': 50}, 'chains': {'chains>=2moves': 8358, 'strictly_dec': 3629, 'nonincreasing': 3660, 'strictly_inc': 1509}, 'min_dec_step': '1/24024'}
+        inc e.g. (7, 81, 98, 106, 122, 134, 182) : ['1/56', '19/212', '5/49', '15/1072']
+        inc e.g. (7, 81, 98, 106, 122, 134, 182) : ['1/56', '19/212', '5/49', '15/1072']
+        eq e.g. (6, 32, 36, 110, 138, 182, 192) : ['1/8', '1/8']
+        eq e.g. (1, 8, 14, 19, 39, 69, 86) : ['1/8', '1/8', '1/8']
+  Q8_horizon     {'transitions': {'inc': 11080, 'dec': 4418, 'eq': 16}, 'chains': {'chains>=2moves': 8358, 'strictly_inc': 4904, 'strictly_dec': 643, 'nonincreasing': 645}, 'min_dec_step': '7/810920'}
+        inc e.g. (8, 14, 41, 64, 120, 167, 199) : ['0', '193/1592']
+        inc e.g. (2, 80, 110, 117, 123, 134, 190) : ['0', '93/2680']
+        eq e.g. (6, 7, 85, 130, 165, 186, 187) : ['0', '0', '107/1705']
+        eq e.g. (3, 20, 24, 84, 96, 104, 117) : ['0', '0']
+  Q9_deficit     {'transitions': {'inc': 584, 'dec': 1812, 'eq': 2}, 'chains': {'chains>=2moves': 8358, 'strictly_inc': 208, 'undefined_somewhere': 7378, 'strictly_dec': 712, 'nonincreasing': 714}, 'min_dec_step': '41/898130'}
+        inc e.g. (8, 14, 41, 64, 120, 167, 199) : ['832463/3987960', '3665023/10900424']
+        inc e.g. (4, 28, 36, 55, 100, 159, 191) : ['5640433/11692065', 'None', '-380684/5314575', '-25877/759225']
+        eq e.g. (6, 81, 103, 105, 108, 184, 192) : ['2431/19872', '2431/19872']
+        eq e.g. (5, 17, 18, 60, 86, 120, 150) : ['-17/120', '-17/120']
+  Q11_control    {'transitions': {'dec': 15514}, 'chains': {'chains>=2moves': 8358, 'strictly_dec': 8358, 'nonincreasing': 8358}, 'min_dec_step': '1'}
+
+== late band shapes (TC4) ==
+summary: {'sets': 5400, 'maxN': 25, 'N_dist': {17: 187, 18: 1177, 19: 1663, 20: 864, 21: 223, 22: 800, 23: 457, 24: 26, 25: 3}, 'maxR': '226380/20893', 'maxR_float': 10.835207964389987, 'single_point_landings': 0, 'ratio78_handoffs': 0}
+Lean consistency (certified => t_N <= P; ended within a period): 0 violations []
+pair-state repeats within a chain: {'chains_with_handoff': 5400}  first: []
+  Q1_blocked     {'transitions': {'eq': 69584, 'inc': 16620, 'dec': 15131}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '1'}
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+  Q2_lapgroups   {'transitions': {'eq': 69584, 'inc': 16620, 'dec': 15131}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '1'}
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '1', '1', '1', '1', '2', '1']
+  Q3_setterrank  {'transitions': {'dec': 58962, 'inc': 42373}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '1'}
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['6', '5', '4', '3', '6', '2', '5', '4', '1', '3']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['6', '5', '4', '3', '6', '2', '5', '4', '1', '3']
+  Q4_setterlap   {'transitions': {'eq': 24384, 'inc': 42373, 'dec': 34578}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '1'}
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '2', '1', '2', '2', '1', '2']
+        eq e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '2', '1', '2', '2', '1', '2']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '2', '1', '2', '2', '1', '2']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['1', '1', '1', '1', '2', '1', '2', '2', '1', '2']
+  Q6_wait        {'transitions': {'inc': 56369, 'dec': 44966}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '725495400/9680678615101'}
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['22969/101771', '5475462300/16247434837', '478391760/2525775187', '819181440/1785194177', '1196824860/11483534327', '14970816/26765773', '190764/2469833', '53154640/148575011', '22145200/37479949', '73753680/267310853']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['22969/101771', '5475462300/16247434837', '478391760/2525775187', '819181440/1785194177', '1196824860/11483534327', '14970816/26765773', '190764/2469833', '53154640/148575011', '22145200/37479949', '73753680/267310853']
+  Q7_depth       {'transitions': {'dec': 51438, 'inc': 49897}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '811/1535084320'}
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['4751/110880', '12029/1628336', '77661/638588', '1045/63284', '86351/902696', '12659/407084', '12869/231440', '381/18782', '190159/1139112', '779/7107']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['4751/110880', '12029/1628336', '77661/638588', '1045/63284', '86351/902696', '12659/407084', '12869/231440', '381/18782', '190159/1139112', '779/7107']
+  Q8_horizon     {'transitions': {'dec': 49915, 'inc': 51420}, 'chains': {'chains>=2moves': 5400}, 'min_dec_step': '68405740525584/15109723660475851349'}
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['34393/159647', '220671220/1610118991', '2827329120/18014088539', '468093780/1610118991', '734916/29676131', '4700355660/16247434837', '189924/4160923', '5463920/66741837', '670226480/1785194177', '35241360/378203743']
+        inc e.g. (27720, 63963, 86790, 112837, 142389, 159647, 203542) : ['34393/159647', '220671220/1610118991', '2827329120/18014088539', '468093780/1610118991', '734916/29676131', '4700355660/16247434837', '189924/4160923', '5463920/66741837', '670226480/1785194177', '35241360/378203743']
+  Q9_deficit     {'transitions': {'inc': 74, 'dec': 895}, 'chains': {'chains>=2moves': 5400, 'undefined_somewhere': 5400}, 'min_dec_step': '69703796513120/29343392921127997'}
+        inc e.g. (27720, 69070, 88524, 115013, 125476, 156759, 194413) : ['None', 'None', 'None', 'None', 'None', 'None', 'None', 'None', 'None', 'None']
+        inc e.g. (27720, 69591, 89314, 113809, 124906, 158221, 196333) : ['None', 'None', 'None', 'None', '654775342339985310640020/523187503261499659006739', 'None', 'None', 'None', 'None', '11641256832611391480/12376625134784327179']
+  Q11_control    {'transitions': {'dec': 101335}, 'chains': {'chains>=2moves': 5400, 'strictly_dec': 5400, 'nonincreasing': 5400}, 'min_dec_step': '1'}
+
+-- trace TC3 (a 7:8 hand-off)  S=(1, 2, 3, 6, 7, 8, 13)  moves N=3  R*=3/2 (1.5000)  single-point landing=False
+   j=0 t=1/8 Q1=1 Q2=1 Q3=5 Q4=1 Q6=0.125 Q7=0.125 Q8=0.0 Q9=None Q11=39 cert=False
+   j=1 t=9/64 Q1=1 Q2=1 Q3=4 Q4=1 Q6=0.1607 Q7=0.1094 Q8=0.0288 Q9=None Q11=38 cert=False
+   j=2 t=9/56 Q1=2 Q2=2 Q3=3 Q4=1 Q6=0.2143 Q7=0.125 Q8=0.5893 Q9=-0.2473 Q11=37 cert=True
+   pair states: [('8', '7', '9/8'), ('7', '6', '9/7')]
+
+-- trace TC3 (a 7:8 hand-off)  S=(1, 26, 38, 148, 175, 187, 200)  moves N=2  R*=177/175 (1.0114)  single-point landing=False
+   j=0 t=1/8 Q1=1 Q2=1 Q3=6 Q4=25 Q6=0.005 Q7=0.125 Q8=0.0 Q9=None Q11=774 cert=False
+   j=1 t=201/1600 Q1=1 Q2=1 Q3=4 Q4=22 Q6=0.0064 Q7=0.1094 Q8=0.0153 Q9=None Q11=773 cert=False
+   pair states: [('200', '175', '9/8')]
+
+-- trace longest chain, Case B  S=(1, 19, 20, 21, 22, 23, 24)  moves N=19  R*=49/22 (2.2273)  single-point landing=False
+   j=0 t=1/8 Q1=1 Q2=1 Q3=6 Q4=3 Q6=0.0417 Q7=0.125 Q8=0.0 Q9=None Q11=129 cert=False
+   j=1 t=25/192 Q1=1 Q2=1 Q3=5 Q4=3 Q6=0.0453 Q7=0.1198 Q8=0.0038 Q9=None Q11=128 cert=False
+   j=2 t=25/184 Q1=1 Q2=1 Q3=4 Q4=3 Q6=0.0494 Q7=0.1141 Q8=0.0083 Q9=None Q11=127 cert=False
+   j=3 t=25/176 Q1=1 Q2=1 Q3=3 Q4=3 Q6=0.0541 Q7=0.108 Q8=0.0136 Q9=None Q11=126 cert=False
+   j=4 t=25/168 Q1=1 Q2=1 Q3=2 Q4=3 Q6=0.0595 Q7=0.1012 Q8=0.0201 Q9=None Q11=125 cert=False
+   j=5 t=5/32 Q1=1 Q2=1 Q3=1 Q4=3 Q6=0.0658 Q7=0.0938 Q8=0.0417 Q9=None Q11=124 cert=False
+   j=6 t=25/152 Q1=1 Q2=1 Q3=6 Q4=4 Q6=0.0592 Q7=0.0724 Q8=0.032 Q9=None Q11=123 cert=False
+   j=7 t=11/64 Q1=1 Q2=1 Q3=5 Q4=4 Q6=0.0598 Q7=0.0781 Q8=0.0341 Q9=None Q11=122 cert=False
+   j=8 t=33/184 Q1=1 Q2=1 Q3=4 Q4=4 Q6=0.0652 Q7=0.0707 Q8=0.0414 Q9=None Q11=121 cert=False
+   j=9 t=3/16 Q1=1 Q2=1 Q3=3 Q4=4 Q6=0.0714 Q7=0.0625 Q8=0.05 Q9=None Q11=120 cert=False
+   j=10 t=11/56 Q1=1 Q2=1 Q3=2 Q4=4 Q6=0.0786 Q7=0.0536 Q8=0.0536 Q9=None Q11=119 cert=False
+   j=11 t=33/160 Q1=2 Q2=2 Q3=1 Q4=4 Q6=0.0868 Q7=0.1187 Q8=0.0457 Q9=None Q11=118 cert=False
+   j=12 t=33/152 Q1=1 Q2=1 Q3=5 Q4=5 Q6=0.0458 Q7=0.1184 Q8=0.0359 Q9=None Q11=116 cert=False
+   j=13 t=41/184 Q1=1 Q2=1 Q3=4 Q4=5 Q6=0.081 Q7=0.0272 Q8=0.0745 Q9=None Q11=115 cert=False
+   j=14 t=41/176 Q1=1 Q2=1 Q3=3 Q4=5 Q6=0.0887 Q7=0.017 Q8=0.0864 Q9=None Q11=114 cert=False
+   j=15 t=41/168 Q1=1 Q2=1 Q3=2 Q4=5 Q6=0.0976 Q7=0.006 Q8=0.006 Q9=None Q11=113 cert=False
+   j=16 t=41/160 Q1=1 Q2=1 Q3=5 Q4=6 Q6=0.0804 Q7=0.0187 Q8=0.0026 Q9=None Q11=111 cert=False
+   j=17 t=49/184 Q1=1 Q2=1 Q3=1 Q4=5 Q6=0.0275 Q7=0.0652 Q8=0.0059 Q9=None Q11=110 cert=False
+   j=18 t=41/152 Q1=1 Q2=1 Q3=4 Q4=6 Q6=0.0694 Q7=0.0592 Q8=0.0802 Q9=None Q11=109 cert=False
+   pair states: [('24', '23', '25/24'), ('23', '22', '25/23'), ('22', '21', '25/22'), ('21', '20', '25/21'), ('20', '19', '5/4'), ('19', '24', '27/19'), ('24', '23', '11/8'), ('23', '22', '33/23'), ('22', '21', '3/2'), ('21', '20', '11/7'), ('20', '19', '33/20'), ('19', '23', '20/19'), ('23', '22', '41/23'), ('22', '21', '41/22'), ('21', '20', '41/21'), ('20', '23', '37/20'), ('23', '19', '12/23'), ('19', '22', '29/19')]
+
+-- trace longest chain, Case C  S=(6, 66, 80, 86, 95, 179, 186)  moves N=11  R*=342/179 (1.9106)  single-point landing=False
+   j=0 t=1/48 Q1=1 Q2=1 Q3=4 Q4=2 Q6=0.0737 Q7=0.1042 Q8=0.0 Q9=None Q11=697 cert=False
+   j=1 t=17/760 Q1=2 Q2=2 Q3=3 Q4=2 Q6=0.1124 Q7=0.1697 Q8=0.0513 Q9=0.1903 Q11=695 cert=False
+   j=2 t=17/688 Q1=1 Q2=1 Q3=2 Q4=2 Q6=0.089 Q7=0.1017 Q8=0.072 Q9=None Q11=693 cert=False
+   j=3 t=17/640 Q1=1 Q2=1 Q3=6 Q4=5 Q6=0.0476 Q7=0.0656 Q8=0.0323 Q9=None Q11=692 cert=False
+   j=4 t=41/1488 Q1=1 Q2=1 Q3=5 Q4=5 Q6=0.0517 Q7=0.0571 Q8=0.0411 Q9=None Q11=691 cert=False
+   j=5 t=41/1432 Q1=1 Q2=1 Q3=1 Q4=2 Q6=0.1712 Q7=0.0147 Q8=0.0783 Q9=None Q11=690 cert=False
+   j=6 t=17/528 Q1=2 Q2=2 Q3=6 Q4=6 Q6=0.0352 Q7=0.1799 Q8=0.03 Q9=None Q11=689 cert=False
+   j=7 t=49/1488 Q1=1 Q2=1 Q3=5 Q4=6 Q6=0.0618 Q7=0.0195 Q8=0.024 Q9=None Q11=687 cert=False
+   j=8 t=49/1432 Q1=1 Q2=1 Q3=3 Q4=3 Q6=0.1017 Q7=0.0677 Q8=0.0825 Q9=None Q11=686 cert=False
+   j=9 t=25/688 Q1=1 Q2=1 Q3=2 Q4=3 Q6=0.1308 Q7=0.032 Q8=0.03 Q9=None Q11=685 cert=False
+   j=10 t=5/128 Q1=1 Q2=1 Q3=5 Q4=7 Q6=0.0356 Q7=0.1172 Q8=0.0829 Q9=0.0898 Q11=683 cert=False
+   pair states: [('95/6', '43/3', '153/95'), ('43/3', '40/3', '51/43'), ('40/3', '31', '59/40'), ('31', '179/6', '287/186'), ('179/6', '11', '337/179'), ('11', '31', '12/11'), ('31', '179/6', '343/186'), ('179/6', '43/3', '261/179'), ('43/3', '40/3', '75/43'), ('40/3', '179/6', '17/16')]
+
+-- trace longest chain, late  S=(27720, 69042, 88938, 114783, 125803, 156446, 194476)  moves N=25  R*=1358280/125803 (10.7969)  single-point landing=False
+   j=0 t=1/221760 Q1=1 Q2=1 Q3=6 Q4=1 Q6=0.2828 Q7=0.002 Q8=0.2403 Q9=None Q11=777207 cert=False
+   j=1 t=9/1555808 Q1=1 Q2=1 Q3=5 Q4=1 Q6=0.3118 Q7=0.03 Q8=0.2596 Q9=None Q11=777206 cert=False
+   j=2 t=9/1251568 Q1=1 Q2=1 Q3=4 Q4=1 Q6=0.3884 Q7=0.0296 Q8=0.0958 Q9=None Q11=777205 cert=False
+   j=3 t=9/1006424 Q1=1 Q2=1 Q3=3 Q4=1 Q6=0.1904 Q7=0.0985 Q8=0.155 Q9=None Q11=777204 cert=False
+   j=4 t=3/306088 Q1=1 Q2=1 Q3=6 Q4=2 Q6=0.2496 Q7=0.0311 Q8=0.0083 Q9=None Q11=777203 cert=False
+   j=5 t=17/1555808 Q1=1 Q2=1 Q3=2 Q4=1 Q6=0.382 Q7=0.0968 Q8=0.2347 Q9=None Q11=777202 cert=False
+   j=6 t=1/79056 Q1=1 Q2=1 Q3=5 Q4=2 Q6=0.2071 Q7=0.1039 Q8=0.0054 Q9=None Q11=777201 cert=False
+   j=7 t=17/1251568 Q1=1 Q2=1 Q3=1 Q4=1 Q6=0.6013 Q7=0.0628 Q8=0.2662 Q9=None Q11=777200 cert=False
+   j=8 t=3/184112 Q1=1 Q2=1 Q3=4 Q4=2 Q6=0.1324 Q7=0.0751 Q8=0.009 Q9=None Q11=777198 cert=False
+   j=9 t=17/1006424 Q1=1 Q2=1 Q3=3 Q4=2 Q6=0.3596 Q7=0.0639 Q8=0.3294 Q9=None Q11=777197 cert=False
+   j=10 t=17/918264 Q1=1 Q2=1 Q3=5 Q4=3 Q6=0.3242 Q7=0.0213 Q8=0.3132 Q9=None Q11=777196 cert=False
+   j=11 t=25/1251568 Q1=1 Q2=1 Q3=6 Q4=4 Q6=0.2741 Q7=0.0096 Q8=0.2455 Q9=0.9236 Q11=777195 cert=False
+   j=12 t=33/1555808 Q1=1 Q2=1 Q3=2 Q4=2 Q6=0.5948 Q7=0.0114 Q8=0.3642 Q9=None Q11=777194 cert=False
+   j=13 t=17/711504 Q1=1 Q2=1 Q3=4 Q4=3 Q6=0.2101 Q7=0.1192 Q8=0.1942 Q9=None Q11=777193 cert=False
+   j=14 t=25/1006424 Q1=1 Q2=1 Q3=5 Q4=4 Q6=0.3385 Q7=0.0112 Q8=0.0459 Q9=None Q11=777192 cert=False
+   j=15 t=33/1251568 Q1=1 Q2=1 Q3=3 Q4=3 Q6=0.1904 Q7=0.0985 Q8=0.1753 Q9=None Q11=777190 cert=False
+   j=16 t=25/918264 Q1=1 Q2=1 Q3=1 Q4=2 Q6=0.7879 Q7=0.0047 Q8=0.6618 Q9=None Q11=777189 cert=False
+   j=17 t=17/552336 Q1=1 Q2=1 Q3=6 Q4=6 Q6=0.1589 Q7=0.1107 Q8=0.0053 Q9=None Q11=777188 cert=False
+   j=18 t=49/1555808 Q1=2 Q2=2 Q3=4 Q4=4 Q6=0.2871 Q7=0.1394 Q8=0.0157 Q9=None Q11=777187 cert=False
+   j=19 t=33/1006424 Q1=2 Q2=2 Q3=0 Q4=1 Q6=1.7286 Q7=0.0751 Q8=0.2151 Q9=None Q11=777185 cert=False
+   j=20 t=1/24640 Q1=2 Q2=2 Q3=6 Q4=8 Q6=0.2649 Q7=0.0371 Q8=0.2344 Q9=None Q11=777180 cert=False
+   j=21 t=65/1555808 Q1=1 Q2=1 Q3=1 Q4=3 Q6=0.7725 Q7=0.0095 Q8=0.1536 Q9=None Q11=777178 cert=False
+   j=22 t=25/552336 Q1=2 Q2=2 Q3=2 Q4=4 Q6=0.248 Q7=0.1434 Q8=0.0827 Q9=0.1957 Q11=777176 cert=False
+   j=23 t=11/237168 Q1=1 Q2=1 Q3=6 Q4=9 Q6=0.1198 Q7=0.1051 Q8=0.0708 Q9=-0.2947 Q11=777174 cert=True
+   j=24 t=73/1555808 Q1=1 Q2=1 Q3=4 Q4=6 Q6=0.3917 Q7=0.0278 Q8=0.7575 Q9=None Q11=777173 cert=False
+   pair states: [('48619/6930', '78223/13860', '171135/97238'), ('78223/13860', '125803/27720', '275787/156446'), ('125803/27720', '38261/9240', '99180/125803'), ('38261/9240', '48619/6930', '67009/38261'), ('48619/6930', '4941/1540', '119169/97238'), ('4941/1540', '78223/13860', '5774/4941'), ('78223/13860', '11507/4620', '117150/78223'), ('11507/4620', '125803/27720', '13829/23014'), ('125803/27720', '38261/9240', '187340/125803'), ('38261/9240', '78223/13860', '209993/114783'), ('78223/13860', '48619/6930', '150409/78223'), ('48619/6930', '4941/1540', '185569/97238'), ('4941/1540', '125803/27720', '84799/88938'), ('125803/27720', '78223/13860', '240349/125803'), ('78223/13860', '38261/9240', '123311/156446'), ('38261/9240', '11507/4620', '75087/38261'), ('11507/4620', '48619/6930', '38483/34521'), ('48619/6930', '125803/27720', '253361/194476'), ('125803/27720', '1', '217467/125803'), ('1', '48619/6930', '1431/770'), ('48619/6930', '11507/4620', '187085/97238'), ('11507/4620', '4941/1540', '9156/11507'), ('4941/1540', '48619/6930', '12461/14823'), ('48619/6930', '125803/27720', '345705/194476')]
+
+== scale test (S vs 3S) on 2085 sets with >= 2 moves: sequences differing per quantity {'Q11_control': 2085}

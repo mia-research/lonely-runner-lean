@@ -1,0 +1,11 @@
+Case B to 24 {'chains>=2': 90726, 'pair (a,b) recurs': 802, 'pair+depth recurs': 0, 'criterion certifies somewhere': 16057, 'certifies at j = N-1 (last move)': 9765, 'certifies at j <= N-3 (>= 2 moves early)': 186}
+late band shapes {'chains>=2': 5400, 'pair (a,b) recurs': 4882, 'pair+depth recurs': 0, 'criterion certifies somewhere': 1121, 'certifies at j = N-1 (last move)': 1109, 'certifies at j <= N-3 (>= 2 moves early)': 0}
+E114 family k=2 [1, 8, 10, 18]: moves at 1/8: 1, at 1/5: 5 (2k+1 = 5)
+E114 family k=3 [1, 13, 15, 28]: moves at 1/8: 0, at 1/5: 8 (2k+1 = 7)
+E114 family k=4 [1, 18, 20, 38]: moves at 1/8: 0, at 1/5: 9 (2k+1 = 9)
+E114 family k=5 [1, 23, 25, 48]: moves at 1/8: 2, at 1/5: 12 (2k+1 = 11)
+E114 family k=6 [1, 28, 30, 58]: moves at 1/8: 0, at 1/5: 13 (2k+1 = 13)
+E114 family k=7 [1, 33, 35, 68]: moves at 1/8: 0, at 1/5: 16 (2k+1 = 15)
+E114 family k=8 [1, 38, 40, 78]: moves at 1/8: 3, at 1/5: 17 (2k+1 = 17)
+E114 family k=9 [1, 43, 45, 88]: moves at 1/8: 1, at 1/5: 20 (2k+1 = 19)
+E114 family k=10 [1, 48, 50, 98]: moves at 1/8: 1, at 1/5: 21 (2k+1 = 21)
