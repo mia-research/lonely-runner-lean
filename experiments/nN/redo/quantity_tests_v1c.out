@@ -1,0 +1,2 @@
+Case B to 24 {'returns': 977, 'elapsed < 1/gcd': 977, 'drift nonzero': 977, 'lap advance is a multiple of (a/g, b/g)': 0} first with elapsed >= 1/gcd: []
+late band shapes {'returns': 8909, 'elapsed < 1/gcd': 8909, 'drift nonzero': 8909, 'lap advance is a multiple of (a/g, b/g)': 0} first with elapsed >= 1/gcd: []
