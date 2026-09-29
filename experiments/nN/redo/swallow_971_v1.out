@@ -1,0 +1,262 @@
+E187 (2026-09-30): the 971 sets of E185 run through the cascade -- why every mover swallows the six's first clear
+interval, named in boundaries and events.
+
+Owner: "yes run the 971 through the cascade".
+
+Objects (all exact, all from the readings; no density, no coverage):
+  t*            the cascade's landing on the seven (the oracle), from the bound 1/(8 d_min).
+  near-miss     a closed interval I before t* on which six readings are clear and the seventh, m, is in the way
+                throughout.  Every clear interval of the six (m removed) that ends before t* is one (derived: the seven are
+                clear nowhere before t*, and m's in-the-way set is a union of disjoint open slots, so a connected closed
+                interval where m is always in the way lies in ONE slot of m, lap k: (k - 1/8)/m < a <= b < (k + 1/8)/m).
+  first near-miss of m   the six's first clear interval, when it ends before t* (E185: j(m) >= 2).
+The 971 are exactly the sets where EVERY runner has a first near-miss before t* (E185: least j >= 2).  For each set:
+  * each runner's first near-miss [a, b]: the reading opening it (phase 1/8 at a), the one closing it (phase 7/8 at b),
+    m's lap k, and the two slacks m*a - (k - 1/8), (k + 1/8) - m*b (both > 0 by the derivation; checked);
+  * the time order of the seven first near-misses, and every near-miss before t* (all runners, all intervals);
+  * the cascade's moves from the bound: at each, the readings in the way and the setter(s); whether each first
+    near-miss is VISITED by the cascade (some move time in it) or jumped;
+  * t*'s boundaries: the host (opening at t*) and the closer (first closing after t*);
+  * E174's place of t* (S0 a named view / S1 one separation from one / miss).
+CHECKs (derived, must hold): every near-miss lies inside one slot of its blocker; the seven first near-misses are
+pairwise disjoint (in one, m blocks and m' is clear; in the other, m' blocks); the cascade's landing equals the first
+lonely instant of the seven (oracle check).
+
+sets: 971
+CHECK oracle (landing = first lonely instant): 0 violations
+CHECK every first near-miss inside one slot of its blocker: 0 violations
+CHECK the seven first near-misses pairwise disjoint: 0 violations
+E174 place of t*: {('S0', 'R'): 350, ('S1', 'R'): 328, ('miss',): 175, ('S1', 'N'): 9, ('S0', 'L'): 79, ('S1', 'O'): 19, ('S0', 'O'): 11}
+d_min: {1: 370, 2: 290, 3: 311}
+R* = 8 d_min t*: {'3': 76, '17/6': 60, '17/7': 51, '34/13': 40, '33/16': 31, '25/8': 30, '17/8': 27, '17/5': 26, '75/22': 25, '25/7': 24, '11/6': 23, '5/2': 22, '51/16': 22, '25/12': 19, '25/16': 18}
+moves from the bound: {6: 39, 7: 237, 8: 259, 9: 173, 10: 133, 11: 49, 12: 33, 13: 26, 14: 10, 15: 7, 16: 3, 17: 1, 19: 1}
+near-misses before t* (all runners, all intervals): {7: 138, 8: 207, 9: 169, 10: 161, 11: 117, 12: 63, 13: 41, 14: 37, 15: 14, 16: 7, 17: 9, 18: 5, 19: 2, 21: 1}
+time order of the first near-misses, by rank of the blocker (top 12): [((0, 6, 5, 4, 3, 2, 1), 218), ((0, 2, 1, 6, 5, 4, 3), 30), ((0, 3, 2, 1, 6, 5, 4), 28), ((0, 4, 3, 2, 6, 5, 1), 28), ((0, 6, 5, 3, 2, 1, 4), 28), ((0, 6, 3, 2, 1, 5, 4), 24), ((0, 3, 2, 6, 5, 4, 1), 23), ((0, 6, 4, 3, 2, 5, 1), 23), ((0, 5, 4, 3, 2, 6, 1), 23), ((0, 5, 4, 6, 3, 2, 1), 22), ((0, 6, 4, 3, 2, 1, 5), 18), ((0, 5, 4, 3, 2, 1, 6), 17)]
+blocker's lap k in its first near-miss, by rank: {0: {0: 971}, 1: {1: 913, 2: 57, 3: 1}, 2: {1: 783, 2: 168, 3: 18, 4: 2}, 3: {1: 624, 2: 274, 3: 71, 4: 2}, 4: {1: 434, 2: 377, 3: 130, 4: 25, 5: 5}, 5: {1: 329, 2: 335, 3: 219, 4: 67, 5: 21}, 6: {1: 313, 2: 250, 3: 267, 4: 96, 5: 40, 6: 3, 7: 2}}
+first near-misses visited by the cascade (a move time inside): 5102 of 6797
+sets where the cascade visits all seven first near-misses: 0
+t* host rank: {1: 55, 2: 90, 3: 199, 4: 260, 5: 172, 6: 195}; closer rank: {1: 34, 2: 144, 3: 142, 4: 146, 5: 193, 6: 312}
+
+traces (first 12): readings; t*, R*; moves (t, in the way, setter); first near-misses in time order (blocker, lap k, [a, b], opener, closer, slacks, visited by move #)
+
+(1, 3, 4, 5, 6, 7, 8)  t* = 25/56  R* = 25/7  host 7 closer 4  place ('S0', 'R')
+   move at 1/8: in the way (8,), setter (8,) -> 9/64
+   move at 9/64: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (8,), setter (8,) -> 25/64
+   move at 25/64: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7,), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [1/24, 7/64] opened by [3] closed by [8], slacks 1/6, 1/64; visited []
+   near-miss of  8 (lap 1): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [9/64, 7/48] opened by [8] closed by [6], slacks 7/64, 5/48; visited [1]
+   near-miss of  6 (lap 1): [9/56, 7/40] opened by [7] closed by [5], slacks 5/56, 3/40; visited [2]
+   near-miss of  5 (lap 1): [3/16, 7/32] opened by [6] closed by [4], slacks 1/16, 1/32; visited [3]
+   near-miss of  4 (lap 1): [9/40, 15/64] opened by [5] closed by [8], slacks 1/40, 3/16; visited [4]
+   near-miss of  3 (lap 1): [17/56, 5/16] opened by [7] closed by [6], slacks 1/28, 3/16; visited [6]
+
+(1, 3, 4, 5, 6, 7, 16)  t* = 25/56  R* = 25/7  host 7 closer 4  place ('S0', 'R')
+   move at 1/8: in the way (16,), setter (16,) -> 17/128
+   move at 17/128: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (5, 16), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (16,), setter (16,) -> 49/128
+   move at 49/128: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7,), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [1/24, 7/128] opened by [3] closed by [16], slacks 1/6, 9/128; visited []
+   near-miss of 16 (lap 2): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [17/128, 7/48] opened by [16] closed by [6], slacks 7/128, 5/48; visited [1]
+   near-miss of  6 (lap 1): [9/56, 7/40] opened by [7] closed by [5], slacks 5/56, 3/40; visited [2]
+   near-miss of  5 (lap 1): [25/128, 7/32] opened by [16] closed by [4], slacks 13/128, 1/32; visited []
+   near-miss of  4 (lap 1): [9/40, 31/128] opened by [5] closed by [16], slacks 1/40, 5/32; visited [4]
+   near-miss of  3 (lap 1): [17/56, 39/128] opened by [7] closed by [16], slacks 1/28, 27/128; visited [6]
+
+(1, 3, 4, 5, 6, 7, 24)  t* = 25/56  R* = 25/7  host 7 closer 24  place ('S0', 'R')
+   move at 1/8: in the way (24,), setter (24,) -> 25/192
+   move at 25/192: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (24,), setter (24,) -> 73/192
+   move at 73/192: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7,), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [3/64, 5/64] opened by [24] closed by [24], slacks 11/64, 3/64; visited []
+   near-miss of 24 (lap 3): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [25/192, 7/48] opened by [24] closed by [6], slacks 7/192, 5/48; visited [1]
+   near-miss of  6 (lap 1): [9/56, 31/192] opened by [7] closed by [24], slacks 5/56, 5/32; visited [2]
+   near-miss of  5 (lap 1): [3/16, 13/64] opened by [6] closed by [24], slacks 1/16, 7/64; visited [3]
+   near-miss of  4 (lap 1): [9/40, 47/192] opened by [5] closed by [24], slacks 1/40, 7/48; visited [4]
+   near-miss of  3 (lap 1): [17/56, 5/16] opened by [7] closed by [6], slacks 1/28, 3/16; visited [6]
+
+(1, 3, 4, 5, 6, 8, 14)  t* = 7/16  R* = 7/2  host 14 closer 4  place ('S0', 'R')
+   move at 1/8: in the way (8,), setter (8,) -> 9/64
+   move at 9/64: in the way (14,), setter (14,) -> 17/112
+   move at 17/112: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (14,), setter (14,) -> 33/112
+   move at 33/112: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (8,), setter (8,) -> 25/64
+   move at 25/64: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (14,), setter (14,) -> 7/16
+   near-miss of  1 (lap 0): [1/24, 1/16] opened by [3] closed by [14], slacks 1/6, 1/16; visited []
+   near-miss of  8 (lap 1): [1/8, 15/112] opened by [1] closed by [14], slacks 1/8, 3/56; visited [0]
+   near-miss of 14 (lap 2): [9/64, 7/48] opened by [8] closed by [6], slacks 3/32, 1/12; visited [1]
+   near-miss of  6 (lap 1): [17/112, 7/40] opened by [14] closed by [5], slacks 1/28, 3/40; visited [2]
+   near-miss of  5 (lap 1): [3/16, 23/112] opened by [6] closed by [14], slacks 1/16, 11/112; visited [3]
+   near-miss of  4 (lap 1): [9/40, 15/64] opened by [5] closed by [8], slacks 1/40, 3/16; visited [4]
+   near-miss of  3 (lap 1): [33/112, 5/16] opened by [14] closed by [6], slacks 1/112, 3/16; visited [6]
+
+(1, 3, 4, 5, 7, 8, 12)  t* = 25/56  R* = 25/7  host 7 closer 4  place ('S0', 'R')
+   move at 1/8: in the way (8,), setter (8,) -> 9/64
+   move at 9/64: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (12,), setter (12,) -> 17/96
+   move at 17/96: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (8,), setter (8,) -> 25/64
+   move at 25/64: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7, 12), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [1/24, 7/96] opened by [3] closed by [12], slacks 1/6, 5/96; visited []
+   near-miss of  8 (lap 1): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [9/64, 5/32] opened by [8] closed by [12], slacks 7/64, 1/32; visited [1]
+   near-miss of 12 (lap 2): [9/56, 7/40] opened by [7] closed by [5], slacks 3/56, 1/40; visited [2]
+   near-miss of  5 (lap 1): [17/96, 7/32] opened by [12] closed by [4], slacks 1/96, 1/32; visited [3]
+   near-miss of  4 (lap 1): [9/40, 15/64] opened by [5] closed by [8], slacks 1/40, 3/16; visited [4]
+   near-miss of  3 (lap 1): [17/56, 31/96] opened by [7] closed by [12], slacks 1/28, 5/32; visited [6]
+
+(1, 3, 4, 5, 7, 12, 16)  t* = 25/56  R* = 25/7  host 7 closer 4  place ('S0', 'R')
+   move at 1/8: in the way (16,), setter (16,) -> 17/128
+   move at 17/128: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (12,), setter (12,) -> 17/96
+   move at 17/96: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (16,), setter (16,) -> 49/128
+   move at 49/128: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7, 12), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [1/24, 7/128] opened by [3] closed by [16], slacks 1/6, 9/128; visited []
+   near-miss of 16 (lap 2): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [17/128, 5/32] opened by [16] closed by [12], slacks 7/128, 1/32; visited [1]
+   near-miss of 12 (lap 2): [9/56, 7/40] opened by [7] closed by [5], slacks 3/56, 1/40; visited [2]
+   near-miss of  5 (lap 1): [17/96, 23/128] opened by [12] closed by [16], slacks 1/96, 29/128; visited [3]
+   near-miss of  4 (lap 1): [9/40, 23/96] opened by [5] closed by [12], slacks 1/40, 1/6; visited [4]
+   near-miss of  3 (lap 1): [17/56, 39/128] opened by [7] closed by [16], slacks 1/28, 27/128; visited [6]
+
+(1, 3, 4, 5, 7, 12, 24)  t* = 25/56  R* = 25/7  host 7 closer 24  place ('S0', 'R')
+   move at 1/8: in the way (24,), setter (24,) -> 25/192
+   move at 25/192: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (12,), setter (12,) -> 17/96
+   move at 17/96: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (24,), setter (24,) -> 73/192
+   move at 73/192: in the way (5,), setter (5,) -> 17/40
+   move at 17/40: in the way (7, 12), setter (7,) -> 25/56
+   near-miss of  1 (lap 0): [3/64, 7/96] opened by [24] closed by [12], slacks 11/64, 5/96; visited []
+   near-miss of 24 (lap 3): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [25/192, 5/32] opened by [24] closed by [12], slacks 7/192, 1/32; visited [1]
+   near-miss of 12 (lap 2): [9/56, 31/192] opened by [7] closed by [24], slacks 3/56, 3/16; visited [2]
+   near-miss of  5 (lap 1): [17/96, 13/64] opened by [12] closed by [24], slacks 1/96, 7/64; visited [3]
+   near-miss of  4 (lap 1): [9/40, 23/96] opened by [5] closed by [12], slacks 1/40, 1/6; visited [4]
+   near-miss of  3 (lap 1): [17/56, 31/96] opened by [7] closed by [12], slacks 1/28, 5/32; visited [6]
+
+(1, 3, 4, 6, 14, 15, 16)  t* = 49/128  R* = 49/16  host 16 closer 15  place ('S0', 'R')
+   move at 1/8: in the way (16,), setter (16,) -> 17/128
+   move at 17/128: in the way (15,), setter (15,) -> 17/120
+   move at 17/120: in the way (14,), setter (14,) -> 17/112
+   move at 17/112: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (16,), setter (16,) -> 25/128
+   move at 25/128: in the way (15,), setter (15,) -> 5/24
+   move at 5/24: in the way (14,), setter (14,) -> 25/112
+   move at 25/112: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (14,), setter (14,) -> 33/112
+   move at 33/112: in the way (3,), setter (3,) -> 3/8
+   move at 3/8: in the way (16,), setter (16,) -> 49/128
+   near-miss of  1 (lap 0): [1/24, 7/128] opened by [3] closed by [16], slacks 1/6, 9/128; visited []
+   near-miss of 16 (lap 2): [1/8, 1/8] opened by [1] closed by [15], slacks 1/8, 1/8; visited [0]
+   near-miss of 15 (lap 2): [17/128, 15/112] opened by [16] closed by [14], slacks 15/128, 13/112; visited [1]
+   near-miss of 14 (lap 2): [17/120, 7/48] opened by [15] closed by [6], slacks 13/120, 1/12; visited [2]
+   near-miss of  6 (lap 1): [17/112, 23/128] opened by [14] closed by [16], slacks 1/28, 3/64; visited [3]
+   near-miss of  4 (lap 1): [25/112, 31/128] opened by [14] closed by [16], slacks 1/56, 5/32; visited [7]
+   near-miss of  3 (lap 1): [33/112, 39/128] opened by [14] closed by [16], slacks 1/112, 27/128; visited [9]
+
+(1, 4, 5, 6, 7, 8, 13)  t* = 17/48  R* = 17/6  host 6 closer 8  place ('S0', 'R')
+   move at 1/8: in the way (8,), setter (8,) -> 9/64
+   move at 9/64: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6, 13), setter (6,) -> 3/16
+   move at 3/16: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4, 13), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (13,), setter (13,) -> 33/104
+   move at 33/104: in the way (6,), setter (6,) -> 17/48
+   near-miss of  1 (lap 0): [1/32, 7/104] opened by [4] closed by [13], slacks 5/32, 3/52; visited []
+   near-miss of  8 (lap 1): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [9/64, 15/104] opened by [8] closed by [13], slacks 7/64, 3/26; visited [1]
+   near-miss of  6 (lap 1): [17/104, 7/40] opened by [13] closed by [5], slacks 11/104, 3/40; visited []
+   near-miss of  5 (lap 1): [3/16, 7/32] opened by [6] closed by [4], slacks 1/16, 1/32; visited [3]
+   near-miss of  4 (lap 1): [17/64, 15/56] opened by [8] closed by [7], slacks 3/16, 3/56; visited []
+   near-miss of 13 (lap 4): [17/56, 5/16] opened by [7] closed by [6], slacks 1/14, 1/16; visited [6]
+
+(1, 4, 5, 6, 7, 10, 16)  t* = 17/48  R* = 17/6  host 6 closer 16  place ('S0', 'R')
+   move at 1/8: in the way (16,), setter (16,) -> 17/128
+   move at 17/128: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6,), setter (6,) -> 3/16
+   move at 3/16: in the way (5, 16), setter (5,) -> 9/40
+   move at 9/40: in the way (4,), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (10,), setter (10,) -> 5/16
+   move at 5/16: in the way (16,), setter (16,) -> 41/128
+   move at 41/128: in the way (6,), setter (6,) -> 17/48
+   near-miss of  1 (lap 0): [1/32, 7/128] opened by [4] closed by [16], slacks 5/32, 9/128; visited []
+   near-miss of 16 (lap 2): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [17/128, 7/48] opened by [16] closed by [6], slacks 7/128, 5/48; visited [1]
+   near-miss of  6 (lap 1): [9/56, 7/40] opened by [7] closed by [5], slacks 5/56, 3/40; visited [2]
+   near-miss of  5 (lap 1): [17/80, 7/32] opened by [10] closed by [4], slacks 3/16, 1/32; visited []
+   near-miss of  4 (lap 1): [9/40, 31/128] opened by [5] closed by [16], slacks 1/40, 5/32; visited [4]
+   near-miss of 10 (lap 3): [17/56, 39/128] opened by [7] closed by [16], slacks 9/56, 5/64; visited [6]
+
+(1, 4, 5, 6, 7, 13, 16)  t* = 17/48  R* = 17/6  host 6 closer 16  place ('S0', 'R')
+   move at 1/8: in the way (16,), setter (16,) -> 17/128
+   move at 17/128: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6, 13), setter (6,) -> 3/16
+   move at 3/16: in the way (5, 16), setter (5,) -> 9/40
+   move at 9/40: in the way (4, 13), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (13,), setter (13,) -> 33/104
+   move at 33/104: in the way (6, 16), setter (6,) -> 17/48
+   near-miss of  1 (lap 0): [1/32, 7/128] opened by [4] closed by [16], slacks 5/32, 9/128; visited []
+   near-miss of 16 (lap 2): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [17/128, 15/104] opened by [16] closed by [13], slacks 7/128, 3/26; visited [1]
+   near-miss of  6 (lap 1): [17/104, 7/40] opened by [13] closed by [5], slacks 11/104, 3/40; visited []
+   near-miss of  5 (lap 1): [25/128, 7/32] opened by [16] closed by [4], slacks 13/128, 1/32; visited []
+   near-miss of  4 (lap 1): [25/104, 31/128] opened by [13] closed by [16], slacks 9/104, 5/32; visited []
+   near-miss of 13 (lap 4): [17/56, 39/128] opened by [7] closed by [16], slacks 1/14, 21/128; visited [6]
+
+(1, 4, 5, 6, 7, 13, 24)  t* = 17/48  R* = 17/6  host 6 closer 24  place ('S0', 'R')
+   move at 1/8: in the way (24,), setter (24,) -> 25/192
+   move at 25/192: in the way (7,), setter (7,) -> 9/56
+   move at 9/56: in the way (6, 13), setter (6,) -> 3/16
+   move at 3/16: in the way (5,), setter (5,) -> 9/40
+   move at 9/40: in the way (4, 13), setter (4,) -> 9/32
+   move at 9/32: in the way (7,), setter (7,) -> 17/56
+   move at 17/56: in the way (13,), setter (13,) -> 33/104
+   move at 33/104: in the way (6,), setter (6,) -> 17/48
+   near-miss of  1 (lap 0): [1/32, 7/192] opened by [4] closed by [24], slacks 5/32, 17/192; visited []
+   near-miss of 24 (lap 3): [1/8, 1/8] opened by [1] closed by [7], slacks 1/8, 1/8; visited [0]
+   near-miss of  7 (lap 1): [25/192, 15/104] opened by [24] closed by [13], slacks 7/192, 3/26; visited [1]
+   near-miss of  6 (lap 1): [11/64, 7/40] opened by [24] closed by [5], slacks 5/32, 3/40; visited []
+   near-miss of  5 (lap 1): [3/16, 13/64] opened by [6] closed by [24], slacks 1/16, 7/64; visited [3]
+   near-miss of  4 (lap 1): [25/104, 47/192] opened by [13] closed by [24], slacks 9/104, 7/48; visited []
+   near-miss of 13 (lap 4): [17/56, 5/16] opened by [7] closed by [6], slacks 1/14, 1/16; visited [6]
