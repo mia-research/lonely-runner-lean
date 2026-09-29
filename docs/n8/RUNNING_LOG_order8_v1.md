@@ -5922,3 +5922,52 @@ period, and the other five readings clear there: an overlapping pattern set by t
 as the condition. The pairing gives the relay condition at every simple pinch with a partner far nearer than the full
 reflection, but still not at bounded times; what keeps the first isolation close remains the windows already open
 (E178–E179), and the bounded-time half stays open.
+
+---
+
+## E182 — 2026-09-29 — where the isolation goes when its window dies: exhaustive three cases; what the relocation forces and what it does not
+
+**Owner:** *"yes run the three-case relocation test if you tell me why it matters. We are trying to determine how the
+cascade is forced to show n=8. Does the relocation help us? then yes do it"*.
+
+**Why it matters** `[reasoned]`: `lonely_iff_run_ends` makes n = 8 the statement that the cascade always stops. Along the
+deformation from the AP (isolated) to a target, the cascade's landing changes only at pinches (E178); a birth moves it to
+the newborn window's instant; a death is the only moment the isolation could be lost, so the relocation at a death is the
+step that has to be forced.
+
+**The three cases** `[reasoned from the definitions]`: at a death runner `a` sits on `+1/8` (leaving) and `b` on `−1/8`
+(entering) at the dying instant `t₀`; just after, `b` closes before `a` opens, so their windows overlap and cover
+everything from `a`'s entry to `b`'s exit `T_b`. So the new first isolation is at `T_b` (case 1, `b`'s separation, E158),
+earlier than `t₀` (case 2, a window born at the same instant, E181), or later than `T_b` (case 3, a reading in the way at
+`T_b`, carried there by the shift, E161).
+
+**Checked** (`LonelyRunner/experiments/nN/redo/relocation_death_v1.{py,out}`, commit `f41cbc0`; exact at `τ + 10^-15`;
+E178's full samples; simple pinches) `[VERIFIED — these samples]`:
+
+| population | simple deaths | case 1 | case 2 | case 3 | isolation between `a`'s opening and `T_b` | paths with no case 3 |
+|---|---|---|---|---|---|---|
+| Case B, every 100th | 2,052 | 524 | 69 | 1,459 | 0 | 1,084 of 2,104 |
+| late band shapes, every 10th | 1,421 | 107 | 0 | 1,314 | 0 | 0 of 540 |
+| Case C sample | 4,014 | 1,233 | 31 | 2,750 | 0 | 8 of 500 |
+
+Case 3: the readings in the way at `T_b` are usually one (1,099 / 847 / 1,754), faster than `b` only, slower only, or
+both; the cascade from `T_b` reaches the landing in 1 to 14 moves; the jump in `R` beyond `T_b` has median 0.35 / 1.71 /
+0.09, maximum 3.0 / 6.1 / 2.3. Note: a different, older `relocation_v1.py` (commit `87dac69`, 2026-09-25, relocation
+factor against the fitted AP) exists; it was overwritten in the working tree by mistake during this entry and restored
+from `HEAD` before anything ran.
+
+**What the relocation forces** `[reasoned from proved pieces]`: in cases 1 and 3 there is no isolation before `t₀` just
+after the death, so the new landing is the cascade restarted at the dying instant (the cascade reaches the least lonely
+instant above its start, `first_isolation_of_fixed`, `iterate_le_of_lonely`). That restarted cascade is forced to stop no
+later than the reflected window: the partial partner when the other five are clear at `Q − t₀` (`PartialReflectionN`),
+the full reflection `P − t₀` always (`PinchReflectionN.reflected_right_windows`). So every event along a rational
+deformation is forced: a birth jumps to the newborn instant; a death restarts the cascade, which passes `b`'s exit and
+stops no later than the reflection.
+
+**What it does not do**: a single separation is the minority (case 1: 26%, 8%, 31% of simple deaths); in general the
+relocation is the cascade restarted, not one named step. And the proof by deformation now needs exactly one global fact,
+finitely many events along the path; given the local facts that is the same as the landing staying at bounded times on
+the path, which is O5's statement in another form, equivalent to the conjecture as a bare bound. In the framework's
+terms the owner's principle, that isolation can fail only if two runners share a speed, is what would have to supply it:
+along the order-preserving path the speed ratios stay away from equality, and the separation lemmas already on disk
+(`sweep_lap_bound`, E127's crowd run-out) bound separation per pair by the ratio gap. Not attempted here.
