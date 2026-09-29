@@ -1,0 +1,247 @@
+E175 (2026-09-29): the 768 incidents E174 left unplaced, run through the cascade.
+
+Owner: "yes place the 768 through the cascade and see what is happen there".
+
+For each of the 768 (sets of seven readings in 1..24 whose incident is not a named view, not one separation from one,
+and not the stretch at a rung a/q with q <= 8):
+  * the cascade's trace from the bound: each move, the readings in the subject's slot, the runner that leaves;
+  * the incident: host (reading at its opening), lap, closer (first reading to close after), stretch width;
+  * rungs a/q with q up to 40 (the menu stopped at 8): the least q for which the incident is
+        Q0  the rung itself (t* = a/q),
+        Q1  the rung displaced by one separation (the rung is not lonely and t* = move(a/q)),
+        Q2  the stretch at the rung (t* = the latest opening at or before a/q);
+    and, for that rung, which readings are in the way there and how q relates to them (q divides a reading, q is a
+    reading, neither);
+  * one reading at a time moved by +-1 through the cascade: where the isolation lands (E174's places S0, S1, S2, or
+    unplaced again), and which ranks' moves place it.
+
+sets: 768
+moves from the bound: {4: 368, 5: 83, 6: 166, 7: 133, 8: 16, 9: 1, 10: 1}
+incident: host rank {3: 12, 4: 160, 5: 593, 6: 3}; closer rank {1: 68, 2: 54, 3: 145, 4: 486, 5: 6, 6: 9}; single point 0
+Q0: 0 sets; least q {}
+Q1: 768 sets; least q {9: 28, 10: 376, 11: 364}
+Q2: 768 sets; least q {9: 689, 10: 51, 13: 28}
+placed by some rung with q <= 40: 768 of 768; by least q: {9: 717, 10: 51}
+Q1 rungs: {'1/10': 376, '1/11': 364, '2/9': 28}
+Q1: runner that leaves = the only reading in the way at the rung: 692 of 768
+Q1: q divides some reading 337; q is a reading 0; a reading in the way is a multiple of q 337 (of 768)
+not placed by any rung q <= 40: 0
+
+perturbation (one reading +-1): destinations {('unplaced', None): 4180, ('S0', 'O'): 1416, ('S1', 'O'): 1159, ('S0', 'B'): 594, ('S2', '1/8'): 448, ('S0', 'R'): 397, ('S1', 'R'): 297, ('S0', 'L'): 61, ('S2', '1/6'): 20, ('S1', 'N'): 17, ('S2', '1/5'): 12, ('S2', '1/7'): 5, ('S2', '1/4'): 4}
+ranks whose move places the isolation (sets counted per rank): {0: 735, 1: 315, 2: 533, 3: 350, 4: 468, 5: 430, 6: 363}
+number of ranks whose move places it, per set: {1: 3, 2: 98, 3: 149, 4: 170, 5: 246, 6: 76, 7: 26}
+
+traces (first 16): readings; moves t (R), readings in the slot, runner(s) leaving; incident; rungs
+
+(1, 2, 6, 15, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [24]  leaves [24]
+   t=25/192 R=1.0417  in slot [15, 23]  leaves [15]
+   t=17/120 R=1.1333  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(6, -1, 1.19, 'S0', 'R'), (6, 1, 1.286, 'S0', 'R'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.087, 'S1', 'N'), (21, -1, 1.133, 'S1', 'R'), (21, 1, 1.136, 'S2', '1/6'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.0, 'S0', 'B')]
+
+(1, 3, 6, 15, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [24]  leaves [24]
+   t=25/192 R=1.0417  in slot [15, 23]  leaves [15]
+   t=17/120 R=1.1333  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (3, 1, 2.375, 'S1', 'R'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.286, 'S0', 'R'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.087, 'S1', 'N'), (21, -1, 1.133, 'S1', 'R'), (21, 1, 1.136, 'S2', '1/6'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.0, 'S0', 'B')]
+
+(1, 6, 7, 15, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [24]  leaves [24]
+   t=25/192 R=1.0417  in slot [7, 15, 23]  leaves [7]
+   t=9/56 R=1.2857  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (6, -1, 1.286, 'S0', 'R'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.571, 'S1', 'R'), (21, -1, 1.5, 'S0', 'R'), (21, 1, 1.5, 'S0', 'R'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.0, 'S0', 'B')]
+
+(1, 6, 7, 20, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [24]  leaves [24]
+   t=25/192 R=1.0417  in slot [7, 23]  leaves [7]
+   t=9/56 R=1.2857  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [20]  leaves [20]
+   t=33/160 R=1.6500  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.286, 'S0', 'R'), (20, -1, 1.571, 'S1', 'R'), (21, 1, 1.5, 'S0', 'R'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.0, 'S0', 'B')]
+
+(1, 6, 8, 10, 14, 18, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [14, 21]  leaves [14]
+   t=17/112 R=1.2143  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [10]  leaves [10]
+   t=17/80 R=1.7000  in slot [14]  leaves [14]
+   t=25/112 R=1.7857  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [14, 18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.214, 'S0', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (10, -1, 1.571, 'S1', 'R'), (10, 1, 1.571, 'S1', 'R'), (14, -1, 1.7, 'S0', 'R'), (14, 1, 1.7, 'S0', 'R'), (18, -1, 1.786, 'S1', 'R'), (18, 1, 1.786, 'S1', 'R'), (21, -1, 1.5, 'S0', 'R'), (21, 1, 1.5, 'S0', 'R')]
+
+(1, 6, 8, 10, 18, 19, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [10]  leaves [10]
+   t=17/80 R=1.7000  in slot [19]  leaves [19]
+   t=33/152 R=1.7368  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (10, -1, 1.571, 'S1', 'R'), (10, 1, 1.571, 'S1', 'R'), (18, -1, 1.737, 'S1', 'R'), (19, 1, 1.7, 'S0', 'R'), (21, -1, 1.125, 'S0', 'R'), (21, 1, 1.136, 'S1', 'R')]
+
+(1, 6, 8, 10, 18, 21, 23)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [10]  leaves [10]
+   t=17/80 R=1.7000  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [18, 23]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.435, 'S1', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (10, -1, 1.571, 'S1', 'R'), (10, 1, 1.571, 'S1', 'R'), (18, -1, 1.783, 'S1', 'R'), (18, 1, 1.783, 'S1', 'R'), (21, -1, 1.125, 'S0', 'R'), (21, 1, 1.136, 'S1', 'R'), (23, -1, 1.7, 'S0', 'R'), (23, 1, 1.708, 'S1', 'R')]
+
+(1, 6, 8, 14, 15, 18, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [14, 15, 21]  leaves [14]
+   t=17/112 R=1.2143  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [14]  leaves [14]
+   t=25/112 R=1.7857  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [14, 18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.286, 'S0', 'O'), (6, -1, 1.214, 'S0', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (14, -1, 1.667, 'S0', 'R'), (15, 1, 1.571, 'S1', 'R'), (18, -1, 1.786, 'S1', 'R'), (18, 1, 1.786, 'S1', 'R'), (21, -1, 1.5, 'S0', 'R'), (21, 1, 1.5, 'S0', 'R')]
+
+(1, 6, 8, 14, 18, 20, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [14, 21]  leaves [14]
+   t=17/112 R=1.2143  in slot [6, 20]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [20]  leaves [20]
+   t=33/160 R=1.6500  in slot [14]  leaves [14]
+   t=25/112 R=1.7857  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [14, 18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.25, 'S1', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (14, -1, 1.65, 'S0', 'R'), (14, 1, 1.667, 'S0', 'R'), (18, -1, 1.786, 'S1', 'R'), (18, 1, 1.786, 'S1', 'R'), (20, -1, 1.571, 'S1', 'R'), (21, 1, 1.5, 'S0', 'R')]
+
+(1, 6, 8, 15, 18, 19, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [15, 21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [19]  leaves [19]
+   t=33/152 R=1.7368  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.571, 'S1', 'R'), (18, -1, 1.737, 'S1', 'R'), (19, 1, 1.667, 'S0', 'R'), (21, -1, 1.133, 'S1', 'R'), (21, 1, 1.136, 'S1', 'R')]
+
+(1, 6, 8, 15, 19, 21, 23)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [15, 21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [19]  leaves [19]
+   t=33/152 R=1.7368  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.316, 'S1', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.571, 'S1', 'R'), (19, -1, 1.667, 'S0', 'R'), (19, 1, 1.667, 'S0', 'R'), (21, -1, 1.133, 'S1', 'R'), (21, 1, 1.136, 'S1', 'R'), (23, -1, 1.737, 'S1', 'R'), (23, 1, 1.737, 'S1', 'R')]
+
+(1, 6, 8, 15, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [8, 24]  leaves [8]
+   t=9/64 R=1.1250  in slot [15, 21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.286, 'S0', 'R'), (8, 1, 1.952, 'S2', '1/4'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.571, 'S1', 'R'), (21, -1, 1.133, 'S1', 'N'), (21, 1, 1.136, 'S1', 'R'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.667, 'S0', 'R')]
+
+(1, 6, 8, 18, 19, 20, 21)  lands t*=11/48 R=11/6  host 18/K4 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6, 20]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [20]  leaves [20]
+   t=33/160 R=1.6500  in slot [19]  leaves [19]
+   t=33/152 R=1.7368  in slot [18]  leaves [18]
+   t=11/48 R=1.8333  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [18]; readings divisible by 9: [18]
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.389, 'S0', 'R'), (6, 1, 1.389, 'S0', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (18, -1, 1.737, 'S1', 'R'), (21, 1, 1.136, 'S1', 'R')]
+
+(1, 6, 8, 19, 20, 21, 23)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [8]  leaves [8]
+   t=9/64 R=1.1250  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6, 20]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [20]  leaves [20]
+   t=33/160 R=1.6500  in slot [19]  leaves [19]
+   t=33/152 R=1.7368  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.316, 'S2', '1/6'), (6, 1, 1.316, 'S1', 'R'), (8, -1, 1.0, 'S0', 'B'), (8, 1, 1.0, 'S0', 'B'), (19, -1, 1.65, 'S0', 'R'), (21, 1, 1.136, 'S1', 'R'), (23, -1, 1.737, 'S1', 'R'), (23, 1, 1.737, 'S1', 'R')]
+
+(1, 6, 8, 20, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [8, 24]  leaves [8]
+   t=9/64 R=1.1250  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6, 20]  leaves [6]
+   t=3/16 R=1.5000  in slot [21]  leaves [21]
+   t=11/56 R=1.5714  in slot [20]  leaves [20]
+   t=33/160 R=1.6500  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.0, 'S0', 'B'), (6, -1, 1.25, 'S1', 'R'), (6, 1, 1.286, 'S0', 'R'), (8, 1, 1.087, 'S1', 'R'), (20, -1, 1.571, 'S1', 'R'), (21, 1, 1.136, 'S1', 'R'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.65, 'S0', 'R')]
+
+(1, 6, 11, 15, 21, 23, 24)  lands t*=41/184 R=41/23  host 23/K5 closer 21/L4
+   t=1/8 R=1.0000  in slot [24]  leaves [24]
+   t=25/192 R=1.0417  in slot [15, 23]  leaves [15]
+   t=17/120 R=1.1333  in slot [21]  leaves [21]
+   t=25/168 R=1.1905  in slot [6]  leaves [6]
+   t=3/16 R=1.5000  in slot [11, 21]  leaves [21]
+   t=11/56 R=1.5714  in slot [15]  leaves [15]
+   t=5/24 R=1.6667  in slot [24]  leaves [24]
+   t=41/192 R=1.7083  in slot [23]  leaves [23]
+   t=41/184 R=1.7826  in slot []  leaves None
+   Q1 at rung 2/9: in the way there [23]; readings divisible by 9: []
+   Q2 at rung 3/13: in the way there []; readings divisible by 13: []
+   perturbations that place it: [(1, 1, 1.2, 'S0', 'O'), (6, -1, 1.19, 'S0', 'R'), (6, 1, 1.286, 'S0', 'R'), (11, -1, 1.783, 'S1', 'R'), (15, -1, 1.571, 'S1', 'R'), (15, 1, 1.087, 'S1', 'N'), (21, -1, 1.133, 'S1', 'R'), (21, 1, 1.136, 'S2', '1/6'), (23, -1, 1.708, 'S1', 'R'), (24, 1, 1.0, 'S0', 'B')]
+
+not placed by any rung (first 20): []
