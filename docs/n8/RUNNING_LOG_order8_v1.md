@@ -5734,3 +5734,26 @@ population. Scale check (`S` against `3S`): 0 of 1,046 placed differently.
   is in the slot; when 199 leaves, isolation at `R = 201/199`. A large-`q` rung is the rung description of an instant
   just after the bound; the place is the bound's capture followed by the separations of the readings carried into the
   slot (E157–E158's leftovers; E161's transport), not a rung.
+
+---
+
+## E177 — 2026-09-29 — correction to E176's last bullet (a parallel session's review)
+
+The parallel session reviewed E176 (owner relayed it; text not on disk) and reproduced the three unplaced examples
+independently (all three isolate after exactly two moves, e.g. `1/8 →(136) 137/1088 →(199) 201/1592`). Two corrections,
+both accepted:
+- **The 320/320 is a definition, not a pattern.** At the bound `1/(8m)`, reading `d` is in the subject's slot exactly
+  when `|d − 8Nm| < m` for an integer `N`. `place_general_v1b.py` line 43 tests that condition on readings already
+  selected as in the slot, so it cannot fail. Every incident other than the bound has the bound obstructed, also by
+  definition; and selecting `q ≥ 17` selects instants close to the bound (a rung near `1/8` needs a large `q`). What
+  remains is an observation on these samples: those incidents finish in 2–8 moves just after the bound.
+- **"The bound's capture followed by the separations of the readings carried into the slot" is not a place.** Without a
+  restriction it is the cascade from the bound itself; E176's "one place, not a rung" is withdrawn. Likewise rungs with
+  unrestricted `q` describe any rational instant; E176's growth of the needed `q` with spread is that effect.
+
+The exact condition for the next step, from the review (same test as E171's reading): when setter `b` exits lap `K` at
+`(8K+1)/(8b)`, reading `d` is in the slot exactly when `|(8K+1)·d − 8Lb| < b` for an integer `L`. The review's proposed
+step ("force a terminal overlap within a bounded chain"; "why those chains cannot keep renewing") is the
+that/when-it-stops shape (E172); it is flagged to the owner, not run. The place-test form of the same material: from the
+residue condition, name which reading the bound's capture carries into the slot and where its exit is, for the class
+where exactly one is carried and its exit is clear; check against the cascade; perturb the exceptions.
