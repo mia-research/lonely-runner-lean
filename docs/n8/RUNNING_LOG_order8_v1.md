@@ -6361,3 +6361,59 @@ the non-multiples' residues mod `q`, and the cofactors' structure.
 **Open from here (for the map, not mechanisms):** the split profile of each set across `q` (how many readings each `q`
 divides, with their cofactors), read against `q_min` (E188) and the residual; and which restriction of the model instant
 the non-multiples need when the split leaves several of them.
+
+---
+
+## E191 — 2026-09-30 — consequences never drawn (M7); map v2 with v1's compile-diff repairs; E190 corrected
+
+**Map:** `MECHANISM_MAP_v2` (built here) · §9 (new: consequences of proved results) and §4 Q6 · M2 (d) plus the new M7 ·
+nearest §6 classes F7 (record not read) and F13 (consequence not drawn): this entry records instances of both, one of
+them E190's.
+
+**Owner:** *"That is interesting.  We are proving things and then not thinking about how they may affect the whole proof
+attempt, that is working harder instead of smarter.  Are there other opportunities we have been missing."* Then:
+*"Please be careful, we re proved all n=3 to 7 natively with the framework"*.
+
+**Correction to E190.** E190 said the converse of N1 "is not an `↔` in Lean (review §2 N1); owed, small". Wrong:
+`OrderEightN.lonelyRunnerAt8_iff_residual` (`OrderEightCasesN.lean:982`, both directions, `LonelyRunner` commit
+`f32daf4`, 2026-09-25) proves the conjecture at eight runners equivalent to every `EightResidual` set being lonely, and
+E104 records it. The review (same date) and v21 §17B still carry the question as the author's; the theorem answers it.
+E190's own placement (it predates the `**Map:**` convention): map v1 · §4 Q5 · M2 (d), a reading of proved statements ·
+nearest class F7, which it fell into on this point.
+
+**v1's `compile-diff`** (`docs/n8/MECHANISM_MAP_v1_COMPILE_DIFF_v1.md`, saved as returned). Losses that change what v1
+said, all repaired in v2:
+- the hypotheses of "the mechanism" were dropped: `grid_class_clear` holds for one class under small-deviation
+  conditions (E129); a separation is the cascade's next move when every other reading keeps its band (E159, E160);
+- v1 §2A put a move budget ("at most 7 moves") into the mechanism, the shape E172 and E184 flag as imported;
+- R3 lacked v21 §17E's density premise and the same-size null that makes the rung-selection rule structure;
+- local stability was widened to the straight deformation, where multi-pinches and the bounded-time half are open;
+  partial reflection was stated without its hypotheses; the OWED Props (`WindowBound`, `CaseB8`, `CaseC8`, `Cover8`)
+  were missing;
+- entry and figure mismatches (3,897 is E174's; "E126" items are E129–E130's; the growth figures are
+  `rung_selection_v1.out`'s; v21 §17D's 12, 15, 16 are rational-opening `N`, not rung `q`; `EightResidual` has 22
+  fields in the tree, not 19);
+- global caveats missing: the range caveat (E114), field usability (v21 §17C), the tool rulings (E101, E112).
+Part (C) of the report lists the open items in range that the map does not carry.
+
+**`docs/n8/MECHANISM_MAP_v2.md`** carries those repairs, M7 ("draw the consequence"), the owner's caution on lower
+orders, Q6, new failure classes F12 (range-forced) and F13 (consequence not drawn), and §9, the consequence register:
+- **C1** the residual is the conjecture (`lonelyRunnerAt8_iff_residual`); manuscript correction owed.
+- **C2** the case list's strong induction on the sum has "every smaller-sum set is lonely" in scope where it calls the
+  residual, and does not pass it on; passing it makes any proved transfer to a smaller-sum set a case.
+- **C3** the rung budget, uniform in `q`, is proved and is not a residual field, while fields were added one resolution
+  at a time.
+- **C4** `no_small_resolution` quantifies over every `j` (checked, `OrderEightCasesN.lean:791`), and the cascade's
+  landing is a clearing resolution with `D` the host; so §17D's final `0` on `[1,40]` records the cascade's arrival, not
+  structure.
+- **C5** our own order-seven proof (native, re-proved in the framework) uses only that every nonzero residue mod 7 is a
+  unit; `BS_TRANSFER_v2` (2026-09-18, before the native re-proof) found the break at 8 to be mathematical (the
+  non-units), posed an affine multiplier family at order 8 as the open sub-problem, and the log has not returned to it.
+  This is Q6, to be read from our own order-seven modules first.
+- **C6** E190's template across N2, descent, R8 and rung-selection.
+- **C7** the earlier maps (`EXISTENCE_MAP_v1`–`v5` and others) are cited nowhere in the log.
+- **C8** the path route duplicates N2's reduction; its open halves bear on `hopen`.
+
+**Memory:** `feedback_n8_map_first_2026_09_30.md` written by `memory-drafter` (pointers in `MEMORY.md`'s n=8 block,
+`lrc_INDEX.md`, `feedback_INDEX.md`; scope notes added to the oracle memory and the exceptions memo). An update for this
+entry's rulings (M7, the lower-order caution, v2, the audit starting at E191) is with `memory-drafter`.
