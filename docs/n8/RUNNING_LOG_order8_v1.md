@@ -6112,3 +6112,68 @@ inequality.
 reflection's (`T < 2t` against `P − t`), but by E116 the window (B) is not about the replacement's distance: on a move it
 is loneliness at the lattice points. The md's next branch (derive a different window from the two conflicting readings)
 is again local stability; it does not bear on (B).
+
+---
+
+## E187 — 2026-09-30 — the 971 of E185 through the cascade: every runner has a near-miss before the isolation; the event is read at the host, which is Theorem 6.15's form
+
+**Owner:** *"yes run the 971 through the cascade"*.
+
+**Scripts** (`LonelyRunner/experiments/nN/redo/`, commit above; exact): `swallow_971_v1.{py,out}` recomputes the 971 from
+all 346,104 sets (list in `swallow_971_v1_sets.json`) and traces each; `swallow_971_v1b.{py,out}` is the second pass.
+Oracle check (landing = first lonely instant computed without the cascade): 0 violations.
+
+**The object** `[reasoned]`. Before `t*` the seven are clear nowhere, so any clear interval of six of them (runner `m`
+removed) that ends before `t*` has `m` in the way throughout, and a connected closed interval where `m` is always in the
+way lies in **one** slot of `m`, lap `k`: `(k − 1/8)/m < a ≤ b < (k + 1/8)/m`. Call it a **near-miss** of `m` (six
+clear, one runner alone in its slot). E185's "the mover swallows the six's first clear interval" is exactly *the mover
+has a near-miss before `t*`*, and the 971 are the sets where **every runner** has one. Checked: each first near-miss in
+one slot, 0 violations; the seven first near-misses pairwise disjoint (derived: in one `m` blocks and `m'` is clear), 0
+violations.
+
+**Why each runner swallows** `[VERIFIED — the 971]`:
+- **The slowest**: its first near-miss is its **lap-0 slot, before the bound** `1/(8 d_min)` in all 971. That is forced
+  by the bound (the slowest is in the way from the start until `1/(8 d_min)`), and the cascade, which starts at the bound,
+  never sees it. It happens whenever the other six are clear somewhere before the bound, which puts `d_min ∈ {1, 2, 3}`
+  here (370, 290, 311).
+- **The other six** (5,826 first near-misses): at one of their own returns, lap `k = 1` in 3,396, `k = 2` in 1,461, up to
+  `k = 7`. In 3,626 the near-miss contains `k/m`, the instant `m` is exactly at the subject; there the others read
+  `(d·k mod m)/m`, so **the six are clear at `k/m` exactly when every other reading has `d·k mod m ∈ [m/8, 7m/8]`**, a
+  residue statement mod `m`. Checked against "contains `k/m`": 22 disagreements, each a slot of `m` holding **two** clear
+  intervals of the six with `k/m` in the second (e.g. `(1,3,4,5,7,12,16)`, `m = 5`: `[17/96, 23/128]` and
+  `[25/128, 7/32] ∋ 1/5`), so the equivalence holds for *a* near-miss in the lap-`k` slot, not necessarily the first.
+- The dominant time order of the first near-misses is the slowest (lap 0), then **fastest to slowest** (218 sets): the
+  first returns `≈ 1/m` in order of speed.
+
+**The cascade walks them** `[VERIFIED — the 971]`: of 8,454 moves from the bound, 7,193 have exactly one reading in the
+way, and each such move is inside a near-miss of that reading or is the last move, exiting to `t*` (0 exceptions;
+derived). At a visit the move is the blocker's own opening. In 186 sets **every** move is single-blocker: the cascade is a
+chain of near-misses, each left through its blocker's opening, landing in the next (trace of `(1,3,4,5,6,7,8)` in the
+`.out`: `8, 7, 6, 5, 4` a sweep on lap 1, then `7, 3, 8, 5, 7`, landing at `t* = 25/56`, 7's opening on lap 3).
+
+**The target's event, read at the host** `[reasoned; checked]`: 949 of the 971 have one host `h` (a single reading
+opening at `t*`), 22 have two. With one host, the six others are clear on `[c, t*]` with `c` **inside `h`'s slot** (if `h`
+entered its slot at a clear instant of the six, the seven would be clear before `t*`); 0 violations. So the event is: a
+**last opener** opens at `c` while `h` is still in its slot, and `h` leaves at `t* = (K + 1/8)/h` with no reading closing
+in between. That instant is the flank opening at the **candidate scale `h/(8K+1)`** (§6.10, `flankOpening_eq_spine`), `h`
+is clear there by construction (Theorem 6.16), and the content is the other six: **Theorem 6.15's own form**. The cascade
+has a move at `c` in 656 of 949.
+
+**Place of `t*`** (E174's places plus E175's stretch at a rung `q ≤ 8`): 970 of 971 are named: `S0 R` 350, `S1 R` 328,
+`S0 L` 79, `S2` at `1/4, 1/5, 1/8, 1/3, 1/6, 2/7, 1/7, 1/2` 174 in all, `S1 O` 19, `S0 O` 11, `S1 N` 9. One,
+`(1, 8, 11, 18, 19, 20, 21)`, is in E175's 768 (placed there by a rung with `q ≤ 11`).
+
+**What this settles for (B) at the target** `[reasoned]`: the 971 are **not a separate kind of isolation event**; their
+`t*` is at the same named places as the rest. The first-interval reading of E185 is not a statement that holds for all
+sets: it fails as soon as the mover has a near-miss before `t*`, and in the 971 every runner has one (the slowest by the
+bound). The reading that is stated for every set is at the host: `t*` is `h`'s opening, the six others clear on a
+stretch starting inside `h`'s slot. That is the obligation of record (Theorem 6.15) read at the cascade's landing. So on
+the path route, (B) at the target is **Theorem 6.15 at the host's candidate scale**, and the last move adds the stretch
+`[c, t*]` and its last opener; it does not add a weaker statement.
+
+**The parallel session's multipliers** (relayed, their files not on disk): at a clear instant, a phase `f ∈ [1/8, 7/8]` is
+in the way at `m·t` exactly when `m f` is within `1/8` of a whole number. For `m = 2, 3, 5` those ranges are pairwise
+disjoint `[VERIFIED — exact, all pairs in 2..7]`; `{2,4}`, `{2,6}`, `{2,7}`, `{3,6}`, `{3,7}`, `{4,5}` and the rest with
+6 or 7 overlap. So each reading blocks at most one of `2t, 3t, 5t`, and one of the three has at most two blockers among
+seven readings. It is stated at a clear instant (the old pinch), so it is the replacement after a pinch, local stability
+(`hopen`), and it does not bear on (B).
