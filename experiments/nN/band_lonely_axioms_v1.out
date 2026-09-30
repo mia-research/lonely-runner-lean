@@ -1,0 +1,15 @@
+'LRC.BandCover.band_lonely' depends on axioms: [propext, Classical.choice, Quot.sound]
+LRC.BandCover.band_lonely : ∀ (s1 s2 s3 s4 s5 s6 : ℝ),
+  1 ≤ s1 →
+    s1 ≤ s2 →
+      s2 ≤ s3 →
+        s3 ≤ s4 →
+          s4 ≤ s5 →
+            s5 ≤ s6 →
+              7 ≤ s6 →
+                s6 ≤ 9 →
+                  ∃ t,
+                    0 < t ∧
+                      ∀ (i : Fin 7),
+                        8⁻¹ ≤ circDist (LRC.BandCover.bandS (s1 - 1) (s2 - 1) (s3 - 1) (s4 - 1) (s5 - 1) (s6 - 1) i * t)
+AXIOMS EXIT 0

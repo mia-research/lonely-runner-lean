@@ -1,0 +1,202 @@
+⚠ [2411/2817] Replayed LonelyRunner.LRC.Defs
+warning: LonelyRunner/LRC/Defs.lean:55:42: This simp argument is unused:
+  Int.fract_neg
+
+Hint: Omit it from the simp argument list.
+  simp [I̵n̵t̵.̵f̵r̵a̵c̵t̵_̵n̵e̵g̵,̵ ̵h]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LonelyRunner/LRC/Defs.lean:114:6: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: LonelyRunner/LRC/Defs.lean:121:12: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: LonelyRunner/LRC/Defs.lean:123:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+⚠ [8250/8258] Replayed LonelyRunner.LRC.Spec.TwoPinnerN
+warning: LonelyRunner/LRC/Spec/TwoPinnerN.lean:10:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+⚠ [8251/8258] Replayed LonelyRunner.LRC.Spec.BandCoverCoreN
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:10:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:23:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:28:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:90:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:95:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:98:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverCoreN.lean:143:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+⚠ [8252/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree2N
+warning: LonelyRunner/LRC/Spec/BandCoverTree2N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree2N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree2N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree2N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8253/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree3N
+warning: LonelyRunner/LRC/Spec/BandCoverTree3N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree3N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree3N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree3N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8254/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree4N
+warning: LonelyRunner/LRC/Spec/BandCoverTree4N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree4N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree4N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree4N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8255/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree17N
+warning: LonelyRunner/LRC/Spec/BandCoverTree17N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree17N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree17N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree17N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8256/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree18N
+warning: LonelyRunner/LRC/Spec/BandCoverTree18N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree18N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree18N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree18N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8257/8258] Replayed LonelyRunner.LRC.Spec.BandCoverTree19N
+warning: LonelyRunner/LRC/Spec/BandCoverTree19N.lean:7:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree19N.lean:8:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree19N.lean:9:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverTree19N.lean:12:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+⚠ [8258/8258] Replayed LonelyRunner.LRC.Spec.BandCoverN
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:13:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:14:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:15:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:16:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:17:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LonelyRunner/LRC/Spec/BandCoverN.lean:20:0: Unscoped option maxHeartbeats is not allowed:
+Please scope this to individual declarations, as in
+```
+set_option maxHeartbeats in
+-- comment explaining why this is necessary
+example : ... := ...
+```
+
+Note: This linter can be disabled with `set_option linter.style.setOption false`
+Build completed successfully (8258 jobs).
+BUILD EXIT 0
