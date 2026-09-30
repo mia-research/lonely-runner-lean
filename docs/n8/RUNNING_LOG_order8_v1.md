@@ -6682,3 +6682,27 @@ an oracle check. The owner's own statements of the programme are on record: E74 
 location of the isolation"*), E100 (*"there must be a mechanism that dictates where the isolation is pushed"*), E102
 (*"make sure we have the mechanism it uses and we will have proof"*), E111 (*"understanding exactly the proxy seems to be
 our work"*). Work resumes on the cascade's run itself, at the owner's direction.
+
+---
+
+## E198 — 2026-09-30 — design phase: how the cascade works, inside the owner's design (`CASCADE_DESIGN_v1`)
+
+**Map:** `MECHANISM_MAP_v2` · §0 (the method) and §1 (objects) · design only, nothing run · frame check applied at every
+step of the document: "would this step make sense to someone who had never seen the cascade?".
+
+**Owner:** *"Maybe we need to spend more time in the design phase.  Thinking and reasoning through how the it works.  But
+also think and reason all parts along the way.  Every step has to be though of, am I trying to fit this to another frame
+to avoid it.  We have a perfect oracle that is so much an advantage that others don't get and we seem to be wasting it
+because it doesn't look like other frames"*.
+
+**Written:** `docs/n8/CASCADE_DESIGN_v1.md`, built on the owner's design as recorded in E139–E163 (re-read for this
+entry): an arrangement is a grid plus a deviation; at the arrangement's own grid instant every runner is clear except
+those captured in the subject's slot (`grid_class_clear`); each capture is released by one cascade move, a separation
+(`lonely_of_separation`, `move_eq_separation`); only readings carried over the entering edge obstruct next (`transport`);
+the same mechanism at every scale (the slow/fast recursion, `SlowBlockN`, E147–E152; nested clusters, E155) and every lap
+(rotations, E141). One question is left (E158): separating one pair cannot keep putting another runner into the slot for
+ever; inside the recursion it is the fast group's chain ending inside the slow group's block (E151–E154).
+
+**Consequence:** the programme's open question is restated in the cascade's objects only (what is carried in during each
+separation, from which grid position, against the separation's length), with four design questions (§6) for discussion
+before any step. The E164–E197 work is placed against it: most of it studied other objects (F14, E196–E197).
