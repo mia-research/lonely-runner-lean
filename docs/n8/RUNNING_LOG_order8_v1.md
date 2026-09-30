@@ -7035,3 +7035,47 @@ these windows; nothing says how far they reach.
 choice, applied to every arrangement, not a narrowing); then design the crowd's mechanism from the cascade (E154), which
 would leave one region, named by the readings, for the proof to handle; and connect that region to the finiteness step
 (where in the simplex the crowds lie).
+
+---
+
+## E207 — 2026-09-30 — E206's three steps: the stricter split removes route (i); the crowds are the band, already covered by certified cones
+
+**Map:** `CASCADE_DESIGN_v2` §3; E206 §7 · M2 (d) for step 1; steps 2 and 3 answered from the record (source first; F7
+avoided: the crowd mechanism and the band's cover were already on disk) · nearest §6 class F7.
+
+**Owner:** *"Yes try tbhis"* (E206's order: a stricter split; the crowd's mechanism; crowds in the simplex).
+
+**Step 1, the stricter split** (`LonelyRunner/experiments/nN/redo/e207_split_v1.{py,out}`; exact) `[VERIFIED — these
+populations]`: re-splitting the lower part while its spread exceeds `s` still applies to every arrangement for every `s`
+from 1 to 7 (a design choice, not a narrowing).
+- every set `≤ 24`: `s = 7`: 231 landings past the slow part's first interval; `s = 5`: 2 (slow part spread exactly 5);
+  **`s = 3, 2, 1`: none**.
+- Case C (1,000 + 1,000): `s = 7`: 6 and 3; **`s ≤ 5`: none**.
+- late fine band shapes (5,400): past the first interval at **every** `s`; the slow part is the slowest reading alone and
+  every landing is in its second block `[9, 15]`.
+So route (i) (a slow part near spread 7) was an artefact of the split rule. With the slowest reading alone as the slow
+part (`s = 1`), every set here lands in its first block `[1, 7]`, except the late band shapes, which land in `[9, 15]`:
+**E121's target, `R ∈ [1, 7] ∪ [9, 15]`, reached again from the cascade's run.**
+
+**Step 2, the crowd's mechanism, on record** (read, not re-derived): E122 (owner: *"let the cascade teach how it
+works"*): in the band the slowest runner's own window `(7, 9)` splits the range into copy 0 `[1, 7]` and copy 1
+`[9, 15]`; from copy 0 to copy 1 every other runner's window lattice slides by the fraction `{sᵢ}` of its own period
+(`R + 8` shifts runner `i` by `8{sᵢ}`) while the slowest runner does not slide: copy 1 is copy 0 re-arranged by the
+deviations. E154 read the ten late cases through the cascade: the crowd runs out of shared blocks, the slowest runner sets
+one move itself (its exit at 9), and the crowd lands one to five moves later.
+
+**Step 3, where the crowds lie, on record:** the late shapes are **the band**, spread 7 to 9 in units of `d_min`: the AP
+neighbourhood where R1 just fails. E123–E124: every `1 = s₀ ≤ … ≤ s₆` with `7 ≤ s₆ ≤ 9` lies in one of **105
+lap-assignment cones**, each lonely at a named instant `R = maxᵢ (8kᵢ+1)/sᵢ` inside the slowest runner's block 0 or 1,
+cut only along walls, certified exactly and independently checked `[VERIFIED — computer-assisted, exact]`. E125: strips
+`[9,10]`, `[10,11]`, `[11,12]` covered and checked the same way (131, 168, 255 cones); `[12,13]` generated (308), not
+checked; the count grows with the spread. This is the owner's finiteness (E199) already realised on a compact piece of
+the simplex: a bounded-spread region, finitely many cones, each a named instant.
+
+**Consequence:**
+- The split's structure and the record's band work are one picture: spread `≤ 7`, the bound (R1, proved); spread 7 to 12,
+  finitely many certified cones in the slowest runner's first two blocks; larger spreads, on every population here, the
+  six others' own run lands in the slowest runner's first block.
+- The remaining question is the owner's own from E125 (*"use the cascade to find why the categories exhaust, not
+  enumeration"*): why a finite set of lap assignments covers each bounded-spread strip, and what carries the count as the
+  spread grows (the fast readings wrap more laps). That is where the work stands.
