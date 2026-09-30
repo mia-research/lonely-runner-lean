@@ -7865,3 +7865,63 @@ setter, both faces):
   The map-first memory says to cut a version before the next step when a consequence duplicates a route, and this one
   does.
 - **Standing questions:** none answered. The cap in `WideStep8` is still the owner's decision.
+
+---
+
+## E220 — 2026-10-01 — map v3 cut and checked; the complete account of the cascade designed for approval
+
+**Map:** none — housekeeping (a map cut and its `compile-diff`) and a design written for the owner's approval; nothing
+run.
+
+**Owner:** *"Yes I was just thinking the same thing.  We keep proposing mechanisims, testing them and finding exceptions.
+We should really know and understand what the cascade does in all configurations, not be testing to find out something
+different happens.  I think this is the next major piece of work.  There should be no gaps in what we understand should
+happen"*.
+
+**Map v3** (`docs/n8/MECHANISM_MAP_v3.md`; v2 and v1 retained). Scope: log E100–E219 and v21 §15–§17E. It adds:
+- §0: the owner's rulings of E196–E215 and of today; **M8** (derive first; a run checks a derivation); the interval
+  check; session findings kept apart from owner rulings.
+- §1: the objects of E201–E218.
+- §2 F–H: the band and the band route; the derived facts of the cascade's run, each with its check named; our order-seven
+  proof read for order eight.
+- §3 R10–R14.
+- §4: Q7 withdrawn; the central statement ("why the carrying-in stops inside the block") reached from six sides; **Q8,
+  the complete account**.
+- §6: F14, F15 and F16, and new instances of F1, F3, F5 and F7.
+- §7: the next step is Q8.
+- §8: owed items.
+- §9: C9–C15.
+- §10: an index of the run artifacts.
+
+**`compile-diff`** (mandatory before promotion; condensed report and its verification in
+`docs/n8/MECHANISM_MAP_v3_COMPILE_DIFF_v1.md`):
+- The first draft lost 22 items and widened 11 grades or scopes. The largest: the pointer to v1's part (C); open items
+  of E190–E219 (strips 9–12, the `WideStep8 1` checks, first-lap clearance, the (2,5)–(4,3) shapes); R11 graded
+  "Answered" without M3 on the 128 orbits; the leaving-face hand-off stated without its conditions; the boxes stated
+  equal to E124's cells.
+- The first repair was verified by the same agent: 21 of 22 losses repaired, all retractions carried. It found nine new
+  problems in the repairs and six conflicts in the design. The worst: a leaving-face exception ("the order of the
+  readings changes") taken from E219's data and cited as E218 M4-3's derivation, the re-scoping M8 forbids. It is now
+  recorded as an **incomplete derivation**: M4-3 assumed the moved reading keeps its place, and E219's 243 "other"
+  crossings are that assumption failing. That is gap C2a.
+- The second repair was checked mechanically (the corrected phrases absent, the new ones present). C1's `[PROVED]`
+  covering E190's `[reasoned]` clause is left as is (low).
+
+**The design** (`docs/n8/CASCADE_DESIGN_v3.md` §8; §1–§7 are v2's, unchanged). It is for the owner's approval before any
+work.
+- §8.0 states plainly that an account with no gaps anywhere is the proof itself (`doors_agree`). So the design closes
+  every other gap by derivation, and isolates the obligation as a statement about where the readings sit at the last
+  separation.
+- The discipline (M8).
+- Level A, the step (complete by derivation).
+- Level B, patterns of moves (passages, bridges, junctions derived; the conveyor as data).
+- Level C, the run as a function of the arrangement: walls `(8K+1)·d = (8k ± 1)·h`, and the local rule at each kind of
+  wall.
+- Level D, placement by grid plus deviation and the split: D1 (one cluster) derived; gaps D2 (the fast part's chain ends
+  in a block of the slow part), D3 (the band's copy 0 and copy 1), D4 (the nest), D5 (the recursion's exceptions).
+- A gap register, and an order of work: A, then B and C, then D3 first, because a derivation there can be checked
+  against `band_lonely`.
+- Three questions to the owner.
+
+**Consequence:** none for the proof. Map v3 is the start point for the next step (map-first); Q8 waits on the owner's
+approval of the design.
