@@ -1,0 +1,517 @@
+E202 (2026-09-30): what decides the index (E201): designed in AP/grid-plus-deviation terms, then run against the cascade.
+
+Owner: "yes, design what decides the index first, then run it.  remember our checklist to make sure we're not
+drifting.  Why ap/grid plus deviation works to find the isolation everytime".
+
+DESIGN (units R = 8 d_min t; P = the slow part, spread sigma <= 7; F = the fast part; E201's split)
+  1. The start is always there.  At the bound R = 1 the slow part is clear (every p/d_min in [1, sigma] with sigma <= 7,
+     slots 1..6 of the eighths: AP-like), and the instant is the class-1 instant of the slowest reading's own grid: each
+     fast reading f sits at eighth-slot floor(f/d_min) mod 8 with deviation frac(f/d_min).  So at the start the only
+     obstruction is the fast readings the deviation has put in the subject's slot: the CAPTURES.  [derived]
+  2. The push.  The cascade separates the captures (each move is the latest exit among those in the slot); during each
+     separation, readings near the entering edge can be CARRIED IN (`transport`: only readings carried over the entering
+     edge obstruct next).  Inside P's first clear interval R in [1, 7/sigma] every move is F's (E201, D1).  [derived]
+  3. What decides the index.  Derived exactly: the landing is in P's first interval iff F's push ends by R = 7/sigma.
+     So the index is decided by the push's EXTENT (captures separating, carry-ins, read from the grid slots and deviations
+     at the start) against P's interval end 7/sigma.  The derived equivalence is a check, not a finding (M4).
+  Why AP/grid plus deviation finds the isolation (the design's claim to test): at the start the AP-like slow part is
+  clear and the fast part is a grid plus deviation; the isolation is where the separations of what the deviation captured
+  stop carrying anyone in.
+
+CHECKLIST (applied to this design; recorded so drift is visible):
+  object = the cascade's own run (captures, separations, carry-ins, the landing) ....................... yes
+  would it make sense without the cascade? (captures and carry-ins are cascade objects) ................ no
+  a count used as the argument? (moves are recorded, never bounded; the index test compares times) ...... no
+  a rate or density as the answer? (exceptions listed one by one) ....................................... no
+  an instant family the cascade does not visit? (the grid is read at the bound, where the cascade starts) no
+  "first isolation" used? ................................................................................ no
+  another proof's architecture as the object? ............................................................ no
+
+RUN (exact).  Per set: sigma, 7/sigma; the captures at the bound with their slots; every move with its length in R and
+the readings it carried in, with the eighth-slot each held at the move's start; the push's extent; the index (P's clear
+interval holding the landing, E201 v2).  Classes of first-interval landings: A no capture (landing at the bound); B one
+separation, nothing carried in; C carry-ins (a chain).  Second-interval landings: where the push stood at 7/sigma.
+Populations as E201: every set <= 24; the late fine band shapes; Case C samples (seeds 13 and 29).
+
+
+== every 7-set of readings in 1..24: 346104 sets ==
+  CHECK index 0 <=> the landing is by R = 7/sigma (derived): 0 violations
+  index: {0: 345873, 1: 227, 2: 4}
+  first-interval landings by class (A no capture / B one separation / C carry-ins): {'A': 200736, 'B': 54642, 'C': 90495}
+  captures at the bound, their eighth-slot and deviation class (slot 0, or slot 7): {0: 135204, 7: 51357}
+  carried in, by the eighth-slot held at the move's start: {6: 121069, 7: 61698, 5: 30864, 4: 12989, 3: 3794, 1: 1674, 2: 1061, 0: 23}
+  carried in, faster than the setter (bridge up) / not: {False: 150724, True: 82448}
+  first-interval landings closest to the interval end (push extent against 7/sigma - 1):
+    (3, 6, 13, 16, 18, 20, 22) P (3, 6) sigma 2 extent 53/22 of 5/2, moves 9
+    (1, 2, 5, 13, 14, 15, 24) P (1, 2, 5) sigma 5 extent 3/8 of 2/5, moves 5
+    (1, 2, 5, 13, 15, 21, 24) P (1, 2, 5) sigma 5 extent 3/8 of 2/5, moves 5
+    (1, 2, 5, 14, 15, 19, 24) P (1, 2, 5) sigma 5 extent 3/8 of 2/5, moves 5
+    (1, 2, 3, 4, 6, 16, 22) P (1, 2, 3, 4, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 5, 6, 16, 22) P (1, 2, 3, 5, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 6, 13, 16, 22) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 6, 15, 16, 22) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 6, 15, 22, 24) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 3
+    (1, 2, 3, 6, 16, 17, 22) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 6, 16, 18, 22) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 2
+    (1, 2, 3, 6, 16, 19, 22) P (1, 2, 3, 6) sigma 6 extent 3/22 of 1/6, moves 2
+  landings after the first interval: 231; sigma of their slow part: {'7': 210, '6': 19, '5': 2}
+    (1, 2, 3, 4, 5, 7, 16) P (1, 2, 3, 4, 5, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 5, 7, 24) P (1, 2, 3, 4, 5, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 6, 7, 16) P (1, 2, 3, 4, 6, 7) sigma 7 (7/sigma 1) index 1 moves 4; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in [(6, 6)]
+        R 9/7 +3/14: in the slot (6,), setter (6,), carried in [(16, 4)]
+        R 3/2 +1/16: in the slot (16,), setter (16,), carried in []
+    (1, 2, 3, 4, 6, 7, 24) P (1, 2, 3, 4, 6, 7) sigma 7 (7/sigma 1) index 1 moves 3; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in [(6, 6)]
+        R 9/7 +3/14: in the slot (6,), setter (6,), carried in []
+    (1, 2, 3, 4, 7, 15, 16) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7), (15, 7)]
+        R 17/16 +25/112: in the slot (7, 15), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 15, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7), (15, 7)]
+        R 25/24 +41/168: in the slot (7, 15), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 17) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 18) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 3; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in [(18, 3)]
+        R 9/7 +13/126: in the slot (18,), setter (18,), carried in []
+    (1, 2, 3, 4, 7, 16, 19) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 3; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in [(19, 4)]
+        R 9/7 +4/133: in the slot (19,), setter (19,), carried in []
+    (1, 2, 3, 4, 7, 16, 20) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 21) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 22) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7), (22, 6)]
+        R 17/16 +25/112: in the slot (7, 22), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 23) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7), (23, 7)]
+        R 17/16 +25/112: in the slot (7, 23), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 16, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0), (24, 0)]
+        R 1 +1/16: in the slot (16, 24), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 17, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 18, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 3; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in [(18, 2)]
+        R 9/7 +13/126: in the slot (18,), setter (18,), carried in []
+    (1, 2, 3, 4, 7, 19, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 4; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in [(19, 3)]
+        R 9/7 +4/133: in the slot (19,), setter (19,), carried in [(24, 6)]
+        R 25/19 +9/152: in the slot (24,), setter (24,), carried in []
+    (1, 2, 3, 4, 7, 20, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 21, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 22, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in []
+    (1, 2, 3, 4, 7, 23, 24) P (1, 2, 3, 4, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7), (23, 7)]
+        R 25/24 +41/168: in the slot (7, 23), setter (7,), carried in []
+    (1, 2, 3, 5, 6, 7, 16) P (1, 2, 3, 5, 6, 7) sigma 7 (7/sigma 1) index 1 moves 4; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7)]
+        R 17/16 +25/112: in the slot (7,), setter (7,), carried in [(6, 6)]
+        R 9/7 +3/14: in the slot (6,), setter (6,), carried in [(5, 6), (16, 4)]
+        R 3/2 +3/10: in the slot (5, 16), setter (5,), carried in []
+    (1, 2, 3, 5, 6, 7, 24) P (1, 2, 3, 5, 6, 7) sigma 7 (7/sigma 1) index 1 moves 4; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7)]
+        R 25/24 +41/168: in the slot (7,), setter (7,), carried in [(6, 6)]
+        R 9/7 +3/14: in the slot (6,), setter (6,), carried in [(5, 6)]
+        R 3/2 +3/10: in the slot (5,), setter (5,), carried in []
+    (1, 2, 3, 5, 7, 15, 16) P (1, 2, 3, 5, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(16, 0)]
+        R 1 +1/16: in the slot (16,), setter (16,), carried in [(7, 7), (15, 7)]
+        R 17/16 +25/112: in the slot (7, 15), setter (7,), carried in []
+    (1, 2, 3, 5, 7, 15, 24) P (1, 2, 3, 5, 7) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(24, 0)]
+        R 1 +1/24: in the slot (24,), setter (24,), carried in [(7, 7), (15, 7)]
+        R 25/24 +41/168: in the slot (7, 15), setter (7,), carried in []
+
+== late fine band shapes: 5400 sets ==
+  CHECK index 0 <=> the landing is by R = 7/sigma (derived): 0 violations
+  index: {1: 5400}
+  first-interval landings by class (A no capture / B one separation / C carry-ins): {}
+  captures at the bound, their eighth-slot and deviation class (slot 0, or slot 7): {7: 5400}
+  carried in, by the eighth-slot held at the move's start: {6: 62731, 5: 35050, 4: 16005, 3: 8148, 1: 2452, 2: 920, 0: 129, 7: 33}
+  carried in, faster than the setter (bridge up) / not: {False: 65082, True: 60386}
+  first-interval landings closest to the interval end (push extent against 7/sigma - 1):
+  landings after the first interval: 5400; sigma of their slow part: {'1': 5400}
+    (27720, 63963, 86790, 112837, 142389, 159647, 203542) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203542, 7)]
+        R 1 +22969/101771: in the slot (203542,), setter (203542,), carried in [(159647, 5)]
+        R 124740/101771 +5475462300/16247434837: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 249480/159647 +478391760/2525775187: in the slot (142389,), setter (142389,), carried in [(112837, 6)]
+        R 27720/15821 +819181440/1785194177: in the slot (112837,), setter (112837,), carried in [(203542, 4)]
+        R 249480/112837 +1196824860/11483534327: in the slot (203542,), setter (203542,), carried in [(86790, 6)]
+        R 235620/101771 +14970816/26765773: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 27720/9391 +53154640/148575011: in the slot (142389,), setter (142389,), carried in [(63963, 6), (203542, 5)]
+        R 52360/15821 +22145200/37479949: in the slot (63963, 203542), setter (63963,), carried in [(112837, 5)]
+        R 9240/2369 +73753680/267310853: in the slot (112837,), setter (112837,), carried in [(159647, 6)]
+    (27720, 63963, 86790, 112837, 142785, 159647, 203542) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203542, 7)]
+        R 1 +22969/101771: in the slot (203542,), setter (203542,), carried in [(159647, 5)]
+        R 124740/101771 +5475462300/16247434837: in the slot (159647,), setter (159647,), carried in [(142785, 6)]
+        R 249480/159647 +93482928/506559931: in the slot (142785,), setter (142785,), carried in [(112837, 6)]
+        R 5544/3173 +166031712/358031801: in the slot (112837,), setter (112837,), carried in [(203542, 4)]
+        R 249480/112837 +1196824860/11483534327: in the slot (203542,), setter (203542,), carried in [(86790, 6)]
+        R 235620/101771 +14970816/26765773: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142785, 6)]
+        R 27720/9391 +10386992/29797643: in the slot (142785,), setter (142785,), carried in [(63963, 6), (203542, 5)]
+        R 10472/3173 +4510352/7516837: in the slot (63963, 203542), setter (63963,), carried in [(112837, 5)]
+        R 9240/2369 +73753680/267310853: in the slot (112837,), setter (112837,), carried in [(159647, 6)]
+    (27720, 63963, 86790, 113004, 142389, 159647, 203542) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203542, 7)]
+        R 1 +22969/101771: in the slot (203542,), setter (203542,), carried in [(159647, 5)]
+        R 124740/101771 +5475462300/16247434837: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 249480/159647 +478391760/2525775187: in the slot (142389,), setter (142389,), carried in [(113004, 6)]
+        R 27720/15821 +22626450/49662119: in the slot (113004,), setter (113004,), carried in [(203542, 4)]
+        R 6930/3139 +34338150/319459169: in the slot (203542,), setter (203542,), carried in [(86790, 6)]
+        R 235620/101771 +14970816/26765773: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 27720/9391 +53154640/148575011: in the slot (142389,), setter (142389,), carried in [(63963, 6), (203542, 5)]
+        R 52360/15821 +22145200/37479949: in the slot (63963, 203542), setter (63963,), carried in [(113004, 5)]
+        R 9240/2369 +2005850/7436291: in the slot (113004,), setter (113004,), carried in [(159647, 6)]
+    (27720, 63963, 86790, 113377, 142235, 159647, 203202) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203202, 7)]
+        R 1 +857/3763: in the slot (203202,), setter (203202,), carried in [(159647, 5)]
+        R 4620/3763 +201224100/600751661: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113377, 6)]
+        R 49896/28447 +130899888/293203229: in the slot (113377,), setter (113377,), carried in [(203202, 4)]
+        R 22680/10307 +13802740/116355723: in the slot (203202,), setter (203202,), carried in [(86790, 6)]
+        R 26180/11289 +1649144/2969007: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (203202, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 203202), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86790, 113377, 142389, 159647, 203202) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203202, 7)]
+        R 1 +857/3763: in the slot (203202,), setter (203202,), carried in [(159647, 5)]
+        R 4620/3763 +201224100/600751661: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 249480/159647 +478391760/2525775187: in the slot (142389,), setter (142389,), carried in [(113377, 6)]
+        R 27720/15821 +73110240/163067047: in the slot (113377,), setter (113377,), carried in [(203202, 4)]
+        R 22680/10307 +13802740/116355723: in the slot (203202,), setter (203202,), carried in [(86790, 6)]
+        R 26180/11289 +1649144/2969007: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 27720/9391 +53154640/148575011: in the slot (142389,), setter (142389,), carried in [(63963, 6), (203202, 5)]
+        R 52360/15821 +22145200/37479949: in the slot (63963, 203202), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86790, 113377, 142389, 159647, 203542) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203542, 7)]
+        R 1 +22969/101771: in the slot (203542,), setter (203542,), carried in [(159647, 5)]
+        R 124740/101771 +5475462300/16247434837: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 249480/159647 +478391760/2525775187: in the slot (142389,), setter (142389,), carried in [(113377, 6)]
+        R 27720/15821 +73110240/163067047: in the slot (113377,), setter (113377,), carried in [(203542, 4)]
+        R 22680/10307 +120369060/1048953697: in the slot (203542,), setter (203542,), carried in [(86790, 6)]
+        R 235620/101771 +14970816/26765773: in the slot (86790,), setter (86790,), carried in [(159647, 5)]
+        R 756/263 +190764/2469833: in the slot (159647,), setter (159647,), carried in [(142389, 6)]
+        R 27720/9391 +53154640/148575011: in the slot (142389,), setter (142389,), carried in [(63963, 6), (203542, 5)]
+        R 52360/15821 +22145200/37479949: in the slot (63963, 203542), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86875, 113377, 142235, 159647, 202866) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202866, 7)]
+        R 1 +7769/33811: in the slot (202866,), setter (202866,), carried in [(159647, 5)]
+        R 41580/33811 +1797046020/5397824717: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113377, 6)]
+        R 49896/28447 +130899888/293203229: in the slot (113377,), setter (113377,), carried in [(202866, 4)]
+        R 22680/10307 +42678300/348489977: in the slot (202866,), setter (202866,), carried in [(86875, 6)]
+        R 78540/33811 +322401156/587466125: in the slot (86875,), setter (86875,), carried in [(159647, 5)]
+        R 49896/17375 +13061664/163168625: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (202866, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 202866), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86875, 113377, 142235, 159647, 203028) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203028, 7)]
+        R 1 +553/2417: in the slot (203028,), setter (203028,), carried in [(159647, 5)]
+        R 2970/2417 +128841570/385866799: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113377, 6)]
+        R 49896/28447 +130899888/293203229: in the slot (113377,), setter (113377,), carried in [(203028, 4)]
+        R 22680/10307 +3004710/24912019: in the slot (203028,), setter (203028,), carried in [(86875, 6)]
+        R 5610/2417 +23124882/41995375: in the slot (86875,), setter (86875,), carried in [(159647, 5)]
+        R 49896/17375 +13061664/163168625: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (203028, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 203028), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86875, 113377, 142235, 159647, 203202) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203202, 7)]
+        R 1 +857/3763: in the slot (203202,), setter (203202,), carried in [(159647, 5)]
+        R 4620/3763 +201224100/600751661: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113377, 6)]
+        R 49896/28447 +130899888/293203229: in the slot (113377,), setter (113377,), carried in [(203202, 4)]
+        R 22680/10307 +13802740/116355723: in the slot (203202,), setter (203202,), carried in [(86875, 6)]
+        R 26180/11289 +108398444/196146375: in the slot (86875,), setter (86875,), carried in [(159647, 5)]
+        R 49896/17375 +13061664/163168625: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (203202, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 203202), setter (63963,), carried in [(113377, 5)]
+        R 9240/2369 +6251280/24417283: in the slot (113377,), setter (113377,), carried in [(159647, 6)]
+    (27720, 63963, 86875, 113553, 142235, 159647, 202866) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202866, 7)]
+        R 1 +7769/33811: in the slot (202866,), setter (202866,), carried in [(159647, 5)]
+        R 41580/33811 +1797046020/5397824717: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113553, 6)]
+        R 49896/28447 +14455728/32628709: in the slot (113553,), setter (113553,), carried in [(202866, 4)]
+        R 2520/1147 +4881660/38781217: in the slot (202866,), setter (202866,), carried in [(86875, 6)]
+        R 78540/33811 +322401156/587466125: in the slot (86875,), setter (86875,), carried in [(159647, 5)]
+        R 49896/17375 +13061664/163168625: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (202866, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 202866), setter (63963,), carried in [(113553, 5)]
+        R 9240/2369 +678160/2717243: in the slot (113553,), setter (113553,), carried in [(159647, 6)]
+    (27720, 63963, 86875, 113688, 142235, 159647, 202866) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202866, 7)]
+        R 1 +7769/33811: in the slot (202866,), setter (202866,), carried in [(159647, 5)]
+        R 41580/33811 +1797046020/5397824717: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113688, 6)]
+        R 49896/28447 +19783071/44917813: in the slot (113688,), setter (113688,), carried in [(202866, 4)]
+        R 3465/1579 +6859545/53387569: in the slot (202866,), setter (202866,), carried in [(86875, 6)]
+        R 78540/33811 +322401156/587466125: in the slot (86875,), setter (86875,), carried in [(159647, 5)]
+        R 49896/17375 +13061664/163168625: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (202866, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 202866), setter (63963,), carried in [(113688, 5)]
+        R 9240/2369 +915145/3740651: in the slot (113688,), setter (113688,), carried in [(159647, 6)]
+    (27720, 63963, 86951, 113688, 142235, 159354, 202866) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202866, 7)]
+        R 1 +7769/33811: in the slot (202866,), setter (202866,), carried in [(159354, 5)]
+        R 41580/33811 +33504240/99776261: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 4620/2951 +15817956/83947097: in the slot (142235,), setter (142235,), carried in [(113688, 6)]
+        R 49896/28447 +19783071/44917813: in the slot (113688,), setter (113688,), carried in [(202866, 4)]
+        R 3465/1579 +6859545/53387569: in the slot (202866,), setter (202866,), carried in [(86951, 6)]
+        R 78540/33811 +1606036740/2939900261: in the slot (86951,), setter (86951,), carried in [(159354, 5)]
+        R 249480/86951 +67730740/769777203: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 26180/8853 +89635084/251841291: in the slot (142235,), setter (142235,), carried in [(63963, 6), (202866, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 202866), setter (63963,), carried in [(113688, 5)]
+        R 9240/2369 +915145/3740651: in the slot (113688,), setter (113688,), carried in [(159354, 6)]
+    (27720, 63963, 86951, 113688, 142235, 159354, 203235) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203235, 7)]
+        R 1 +3083/13549: in the slot (203235,), setter (203235,), carried in [(159354, 5)]
+        R 16632/13549 +13515348/39983099: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 4620/2951 +15817956/83947097: in the slot (142235,), setter (142235,), carried in [(113688, 6)]
+        R 49896/28447 +19783071/44917813: in the slot (113688,), setter (113688,), carried in [(203235, 4)]
+        R 3465/1579 +156387/1258463: in the slot (203235,), setter (203235,), carried in [(86951, 6)]
+        R 1848/797 +38150112/69299947: in the slot (86951,), setter (86951,), carried in [(159354, 5)]
+        R 249480/86951 +67730740/769777203: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 26180/8853 +89635084/251841291: in the slot (142235,), setter (142235,), carried in [(63963, 6), (203235, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 203235), setter (63963,), carried in [(113688, 5)]
+        R 9240/2369 +915145/3740651: in the slot (113688,), setter (113688,), carried in [(159354, 6)]
+    (27720, 63963, 86951, 113688, 142235, 159647, 202866) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202866, 7)]
+        R 1 +7769/33811: in the slot (202866,), setter (202866,), carried in [(159647, 5)]
+        R 41580/33811 +1797046020/5397824717: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 249480/159647 +868789152/4541478209: in the slot (142235,), setter (142235,), carried in [(113688, 6)]
+        R 49896/28447 +19783071/44917813: in the slot (113688,), setter (113688,), carried in [(202866, 4)]
+        R 3465/1579 +6859545/53387569: in the slot (202866,), setter (202866,), carried in [(86951, 6)]
+        R 78540/33811 +1606036740/2939900261: in the slot (86951,), setter (86951,), carried in [(159647, 5)]
+        R 249480/86951 +67415040/816556841: in the slot (159647,), setter (159647,), carried in [(142235, 6)]
+        R 27720/9391 +96532128/267145777: in the slot (142235,), setter (142235,), carried in [(63963, 6), (202866, 5)]
+        R 94248/28447 +39576768/67390943: in the slot (63963, 202866), setter (63963,), carried in [(113688, 5)]
+        R 9240/2369 +915145/3740651: in the slot (113688,), setter (113688,), carried in [(159647, 6)]
+    (27720, 64153, 86615, 114125, 142198, 159822, 203221) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203221, 7)]
+        R 1 +46259/203221: in the slot (203221,), setter (203221,), carried in [(159822, 5)]
+        R 249480/203221 +601510140/1804399259: in the slot (159822,), setter (159822,), carried in [(142198, 6)]
+        R 13860/8879 +17447760/90184003: in the slot (142198,), setter (142198,), carried in [(114125, 6)]
+        R 17820/10157 +9095652/21075775: in the slot (114125,), setter (114125,), carried in [(203221, 4)]
+        R 4536/2075 +56012544/421683575: in the slot (203221,), setter (203221,), carried in [(86615, 6)]
+        R 471240/203221 +1976624496/3520397383: in the slot (86615,), setter (86615,), carried in [(159822, 5)]
+        R 49896/17323 +10489556/153810917: in the slot (159822,), setter (159822,), carried in [(142198, 6)]
+        R 26180/8879 +32956880/90184003: in the slot (142198,), setter (142198,), carried in [(64153, 6), (203221, 5)]
+        R 33660/10157 +374578380/651602021: in the slot (64153, 203221), setter (64153,), carried in [(114125, 5)]
+        R 249480/64153 +31991904/133117475: in the slot (114125,), setter (114125,), carried in [(159822, 6)]
+    (27720, 64153, 86615, 114125, 142198, 160236, 203221) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203221, 7)]
+        R 1 +46259/203221: in the slot (203221,), setter (203221,), carried in [(160236, 5)]
+        R 249480/203221 +297886050/904536671: in the slot (160236,), setter (160236,), carried in [(142198, 6)]
+        R 6930/4451 +8928810/45208807: in the slot (142198,), setter (142198,), carried in [(114125, 6)]
+        R 17820/10157 +9095652/21075775: in the slot (114125,), setter (114125,), carried in [(203221, 4)]
+        R 4536/2075 +56012544/421683575: in the slot (203221,), setter (203221,), carried in [(86615, 6)]
+        R 471240/203221 +1976624496/3520397383: in the slot (86615,), setter (86615,), carried in [(160236, 5)]
+        R 49896/17323 +4670974/77104673: in the slot (160236,), setter (160236,), carried in [(142198, 6)]
+        R 13090/4451 +16865530/45208807: in the slot (142198,), setter (142198,), carried in [(64153, 6), (203221, 5)]
+        R 33660/10157 +374578380/651602021: in the slot (64153, 203221), setter (64153,), carried in [(114125, 5)]
+        R 249480/64153 +31991904/133117475: in the slot (114125,), setter (114125,), carried in [(160236, 6)]
+    (27720, 64153, 86615, 114285, 142198, 159977, 203221) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203221, 7)]
+        R 1 +46259/203221: in the slot (203221,), setter (203221,), carried in [(159977, 5)]
+        R 249480/203221 +10788513120/32510685917: in the slot (159977,), setter (159977,), carried in [(142198, 6)]
+        R 249480/159977 +316821780/1624886389: in the slot (142198,), setter (142198,), carried in [(114285, 6)]
+        R 17820/10157 +33160644/77386183: in the slot (114285,), setter (114285,), carried in [(203221, 4)]
+        R 16632/7619 +210405888/1548340799: in the slot (203221,), setter (203221,), carried in [(86615, 6)]
+        R 471240/203221 +1976624496/3520397383: in the slot (86615,), setter (86615,), carried in [(159977, 5)]
+        R 49896/17323 +181078128/2771281571: in the slot (159977,), setter (159977,), carried in [(142198, 6)]
+        R 471240/159977 +598441140/1624886389: in the slot (142198,), setter (142198,), carried in [(64153, 6), (203221, 5)]
+        R 33660/10157 +374578380/651602021: in the slot (64153, 203221), setter (64153,), carried in [(114285, 5)]
+        R 249480/64153 +114642528/488781707: in the slot (114285,), setter (114285,), carried in [(159977, 6)]
+    (27720, 64153, 86615, 114285, 142198, 160236, 203221) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203221, 7)]
+        R 1 +46259/203221: in the slot (203221,), setter (203221,), carried in [(160236, 5)]
+        R 249480/203221 +297886050/904536671: in the slot (160236,), setter (160236,), carried in [(142198, 6)]
+        R 6930/4451 +8928810/45208807: in the slot (142198,), setter (142198,), carried in [(114285, 6)]
+        R 17820/10157 +33160644/77386183: in the slot (114285,), setter (114285,), carried in [(203221, 4)]
+        R 16632/7619 +210405888/1548340799: in the slot (203221,), setter (203221,), carried in [(86615, 6)]
+        R 471240/203221 +1976624496/3520397383: in the slot (86615,), setter (86615,), carried in [(160236, 5)]
+        R 49896/17323 +4670974/77104673: in the slot (160236,), setter (160236,), carried in [(142198, 6)]
+        R 13090/4451 +16865530/45208807: in the slot (142198,), setter (142198,), carried in [(64153, 6), (203221, 5)]
+        R 33660/10157 +374578380/651602021: in the slot (64153, 203221), setter (64153,), carried in [(114285, 5)]
+        R 249480/64153 +114642528/488781707: in the slot (114285,), setter (114285,), carried in [(160236, 6)]
+    (27720, 64335, 86837, 113919, 142235, 159354, 203235) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203235, 7)]
+        R 1 +3083/13549: in the slot (203235,), setter (203235,), carried in [(159354, 5)]
+        R 16632/13549 +13515348/39983099: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 4620/2951 +15817956/83947097: in the slot (142235,), setter (142235,), carried in [(113919, 6)]
+        R 49896/28447 +470951712/1080217931: in the slot (113919,), setter (113919,), carried in [(203235, 4)]
+        R 83160/37973 +3895584/30264481: in the slot (203235,), setter (203235,), carried in [(86837, 6)]
+        R 1848/797 +38360784/69209089: in the slot (86837,), setter (86837,), carried in [(159354, 5)]
+        R 249480/86837 +64746220/768767961: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 26180/8853 +89635084/251841291: in the slot (142235,), setter (142235,), carried in [(64335, 6), (203235, 5)]
+        R 94248/28447 +68900832/122009183: in the slot (64335, 203235), setter (64335,), carried in [(113919, 5)]
+        R 16632/4289 +42149184/162866197: in the slot (113919,), setter (113919,), carried in [(159354, 6)]
+    (27720, 64335, 86951, 113688, 142235, 159354, 203235) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203235, 7)]
+        R 1 +3083/13549: in the slot (203235,), setter (203235,), carried in [(159354, 5)]
+        R 16632/13549 +13515348/39983099: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 4620/2951 +15817956/83947097: in the slot (142235,), setter (142235,), carried in [(113688, 6)]
+        R 49896/28447 +19783071/44917813: in the slot (113688,), setter (113688,), carried in [(203235, 4)]
+        R 3465/1579 +156387/1258463: in the slot (203235,), setter (203235,), carried in [(86951, 6)]
+        R 1848/797 +38150112/69299947: in the slot (86951,), setter (86951,), carried in [(159354, 5)]
+        R 249480/86951 +67730740/769777203: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 26180/8853 +89635084/251841291: in the slot (142235,), setter (142235,), carried in [(64335, 6), (203235, 5)]
+        R 94248/28447 +68900832/122009183: in the slot (64335, 203235), setter (64335,), carried in [(113688, 5)]
+        R 16632/4289 +1809577/6772331: in the slot (113688,), setter (113688,), carried in [(159354, 6)]
+    (27720, 64335, 86951, 113919, 142235, 159354, 203235) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(203235, 7)]
+        R 1 +3083/13549: in the slot (203235,), setter (203235,), carried in [(159354, 5)]
+        R 16632/13549 +13515348/39983099: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 4620/2951 +15817956/83947097: in the slot (142235,), setter (142235,), carried in [(113919, 6)]
+        R 49896/28447 +470951712/1080217931: in the slot (113919,), setter (113919,), carried in [(203235, 4)]
+        R 83160/37973 +3895584/30264481: in the slot (203235,), setter (203235,), carried in [(86951, 6)]
+        R 1848/797 +38150112/69299947: in the slot (86951,), setter (86951,), carried in [(159354, 5)]
+        R 249480/86951 +67730740/769777203: in the slot (159354,), setter (159354,), carried in [(142235, 6)]
+        R 26180/8853 +89635084/251841291: in the slot (142235,), setter (142235,), carried in [(64335, 6), (203235, 5)]
+        R 94248/28447 +68900832/122009183: in the slot (64335, 203235), setter (64335,), carried in [(113919, 5)]
+        R 16632/4289 +42149184/162866197: in the slot (113919,), setter (113919,), carried in [(159354, 6)]
+    (27720, 64342, 85595, 114315, 141780, 160073, 202272) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202272, 7)]
+        R 1 +281/1204: in the slot (202272,), setter (202272,), carried in [(160073, 5)]
+        R 1485/1204 +62665515/192727892: in the slot (160073,), setter (160073,), carried in [(141780, 6)]
+        R 249480/160073 +76062294/378252499: in the slot (141780,), setter (141780,), carried in [(114315, 6)]
+        R 4158/2363 +7613298/18008423: in the slot (114315,), setter (114315,), carried in [(202272, 4)]
+        R 16632/7621 +1351977/9175684: in the slot (202272,), setter (202272,), carried in [(85595, 6)]
+        R 2805/1204 +12055989/20611276: in the slot (85595,), setter (85595,), carried in [(160073, 5)]
+        R 49896/17119 +80155152/2740289687: in the slot (160073,), setter (160073,), carried in [(141780, 6)]
+        R 471240/160073 +8451366/22250147: in the slot (141780,), setter (141780,), carried in [(64342, 6), (202272, 5)]
+        R 462/139 +2475858/4471769: in the slot (64342, 202272), setter (64342,), carried in [(114315, 5)]
+        R 124740/32171 +60040596/245175191: in the slot (114315,), setter (114315,), carried in [(160073, 6)]
+    (27720, 64342, 85595, 114315, 141984, 160073, 202272) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202272, 7)]
+        R 1 +281/1204: in the slot (202272,), setter (202272,), carried in [(160073, 5)]
+        R 1485/1204 +62665515/192727892: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 249480/160073 +62678385/315663956: in the slot (141984,), setter (141984,), carried in [(114315, 6)]
+        R 3465/1972 +6391539/15028612: in the slot (114315,), setter (114315,), carried in [(202272, 4)]
+        R 16632/7621 +1351977/9175684: in the slot (202272,), setter (202272,), carried in [(85595, 6)]
+        R 2805/1204 +12055989/20611276: in the slot (85595,), setter (85595,), carried in [(160073, 5)]
+        R 49896/17119 +80155152/2740289687: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 471240/160073 +6964265/18568468: in the slot (141984,), setter (141984,), carried in [(64342, 6), (202272, 5)]
+        R 385/116 +2084005/3731836: in the slot (64342, 202272), setter (64342,), carried in [(114315, 5)]
+        R 124740/32171 +60040596/245175191: in the slot (114315,), setter (114315,), carried in [(160073, 6)]
+    (27720, 64342, 85771, 114315, 141984, 160073, 202272) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202272, 7)]
+        R 1 +281/1204: in the slot (202272,), setter (202272,), carried in [(160073, 5)]
+        R 1485/1204 +62665515/192727892: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 249480/160073 +62678385/315663956: in the slot (141984,), setter (141984,), carried in [(114315, 6)]
+        R 3465/1972 +6391539/15028612: in the slot (114315,), setter (114315,), carried in [(202272, 4)]
+        R 16632/7621 +1351977/9175684: in the slot (202272,), setter (202272,), carried in [(85771, 6)]
+        R 2805/1204 +8540895/14752612: in the slot (85771,), setter (85771,), carried in [(160073, 5)]
+        R 35640/12253 +69102000/1961374469: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 471240/160073 +6964265/18568468: in the slot (141984,), setter (141984,), carried in [(64342, 6), (202272, 5)]
+        R 385/116 +2084005/3731836: in the slot (64342, 202272), setter (64342,), carried in [(114315, 5)]
+        R 124740/32171 +60040596/245175191: in the slot (114315,), setter (114315,), carried in [(160073, 6)]
+    (27720, 64342, 85771, 114315, 141984, 160073, 202294) P (27720,) sigma 1 (7/sigma 7) index 1 moves 20; captures at the bound [(202294, 7)]
+        R 1 +23593/101147: in the slot (202294,), setter (202294,), carried in [(160073, 5)]
+        R 124740/101147 +5266647540/16190903731: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 249480/160073 +62678385/315663956: in the slot (141984,), setter (141984,), carried in [(114315, 6)]
+        R 3465/1972 +6391539/15028612: in the slot (114315,), setter (114315,), carried in [(202294, 4)]
+        R 16632/7621 +113383116/770841287: in the slot (202294,), setter (202294,), carried in [(85771, 6)]
+        R 235620/101147 +717827220/1239354191: in the slot (85771,), setter (85771,), carried in [(160073, 5)]
+        R 35640/12253 +69102000/1961374469: in the slot (160073,), setter (160073,), carried in [(141984, 6)]
+        R 471240/160073 +6964265/18568468: in the slot (141984,), setter (141984,), carried in [(64342, 6), (202294, 5)]
+        R 385/116 +2084005/3731836: in the slot (64342, 202294), setter (64342,), carried in [(114315, 5)]
+        R 124740/32171 +60040596/245175191: in the slot (114315,), setter (114315,), carried in [(160073, 6)]
+
+== Case C, readings <= 200 (seed 13): 1000 sets ==
+  CHECK index 0 <=> the landing is by R = 7/sigma (derived): 0 violations
+  index: {0: 994, 1: 6}
+  first-interval landings by class (A no capture / B one separation / C carry-ins): {'A': 238, 'B': 307, 'C': 449}
+  captures at the bound, their eighth-slot and deviation class (slot 0, or slot 7): {0: 795, 7: 439}
+  carried in, by the eighth-slot held at the move's start: {6: 537, 5: 203, 7: 151, 4: 114, 3: 71, 1: 52, 2: 41, 0: 13}
+  carried in, faster than the setter (bridge up) / not: {True: 754, False: 428}
+  first-interval landings closest to the interval end (push extent against 7/sigma - 1):
+    (3, 9, 11, 18, 68, 138, 144) P (3, 9, 11, 18) sigma 6 extent 7/68 of 1/6, moves 2
+    (5, 14, 26, 105, 122, 150, 154) P (5, 14, 26) sigma 26/5 extent 4/21 of 9/26, moves 4
+    (6, 8, 19, 27, 36, 143, 183) P (6, 8, 19, 27, 36) sigma 6 extent 5/61 of 1/6, moves 2
+    (3, 9, 14, 44, 143, 161, 186) P (3, 9, 14) sigma 14/3 extent 34/161 of 1/2, moves 4
+    (5, 15, 19, 67, 110, 153, 158) P (5, 15, 19) sigma 19/5 extent 52/153 of 16/19, moves 6
+    (5, 13, 56, 69, 75, 123, 130) P (5, 13) sigma 13/5 extent 2/3 of 22/13, moves 8
+    (2, 12, 107, 111, 113, 171, 190) P (2, 12) sigma 6 extent 7/107 of 1/6, moves 3
+    (5, 14, 22, 23, 77, 88, 142) P (5, 14, 22, 23) sigma 23/5 extent 23/142 of 12/23, moves 2
+    (4, 12, 13, 20, 89, 149, 158) P (4, 12, 13, 20) sigma 5 extent 11/89 of 2/5, moves 2
+    (4, 7, 14, 30, 71, 152, 184) P (4, 7, 14) sigma 7/2 extent 11/38 of 1, moves 3
+    (6, 16, 31, 93, 97, 115, 151) P (6, 16, 31) sigma 31/6 extent 3/31 of 11/31, moves 1
+    (5, 11, 21, 76, 111, 151, 175) P (5, 11, 21) sigma 21/5 extent 6/35 of 2/3, moves 2
+  landings after the first interval: 6; sigma of their slow part: {'7': 4, '20/3': 1, '34/5': 1}
+    (2, 13, 14, 107, 113, 150, 197) P (2, 13, 14) sigma 7 (7/sigma 1) index 1 moves 5; captures at the bound [(113, 0)]
+        R 1 +1/113: in the slot (113,), setter (113,), carried in [(14, 7)]
+        R 114/113 +219/791: in the slot (14,), setter (14,), carried in [(13, 6), (113, 1), (150, 3)]
+        R 9/7 +9/91: in the slot (13, 113, 150), setter (13,), carried in [(150, 0), (197, 6)]
+        R 18/13 +1/65: in the slot (150, 197), setter (150,), carried in [(113, 6)]
+        R 7/5 +19/565: in the slot (113,), setter (113,), carried in []
+    (2, 8, 14, 85, 97, 115, 189) P (2, 8, 14) sigma 7 (7/sigma 1) index 1 moves 2; captures at the bound [(97, 0)]
+        R 1 +1/97: in the slot (97,), setter (97,), carried in [(14, 7), (189, 6)]
+        R 98/97 +187/679: in the slot (14, 189), setter (14,), carried in []
+    (2, 14, 136, 144, 178, 182, 197) P (2, 14) sigma 7 (7/sigma 1) index 1 moves 6; captures at the bound [(144, 0)]
+        R 1 +1/72: in the slot (144,), setter (144,), carried in [(14, 7)]
+        R 73/72 +137/504: in the slot (14,), setter (14,), carried in [(136, 4)]
+        R 9/7 +11/476: in the slot (136,), setter (136,), carried in [(182, 5), (197, 6)]
+        R 89/68 +129/6188: in the slot (182, 197), setter (182,), carried in [(144, 6)]
+        R 121/91 +115/6552: in the slot (144,), setter (144,), carried in [(178, 6)]
+        R 97/72 +79/6408: in the slot (178,), setter (178,), carried in []
+    (1, 5, 7, 77, 104, 149, 159) P (1, 5, 7) sigma 7 (7/sigma 1) index 1 moves 3; captures at the bound [(104, 0)]
+        R 1 +1/104: in the slot (104,), setter (104,), carried in [(7, 7), (159, 7)]
+        R 105/104 +201/728: in the slot (7, 159), setter (7,), carried in [(149, 6)]
+        R 9/7 +10/1043: in the slot (149,), setter (149,), carried in []
+    (3, 10, 20, 71, 75, 157, 182) P (3, 10, 20) sigma 20/3 (7/sigma 21/20) index 1 moves 4; captures at the bound [(71, 7)]
+        R 1 +4/71: in the slot (71,), setter (71,), carried in [(20, 6), (157, 4), (182, 4)]
+        R 75/71 +417/1420: in the slot (20, 157, 182), setter (20,), carried in [(71, 1)]
+        R 27/20 +63/1420: in the slot (71,), setter (71,), carried in [(157, 6)]
+        R 99/71 +6/11147: in the slot (157,), setter (157,), carried in []
+    (5, 12, 27, 34, 118, 157, 180) P (5, 12, 27, 34) sigma 34/5 (7/sigma 35/34) index 1 moves 4; captures at the bound [(118, 7), (157, 7)]
+        R 1 +7/118: in the slot (118, 157), setter (118,), carried in [(34, 6)]
+        R 125/118 +265/1003: in the slot (34,), setter (34,), carried in [(27, 5), (118, 1), (180, 6)]
+        R 45/34 +35/102: in the slot (27, 118, 180), setter (27,), carried in [(118, 7)]
+        R 5/3 +25/354: in the slot (118,), setter (118,), carried in []
+
+== Case C, readings <= 5,000 (seed 29): 1000 sets ==
+  CHECK index 0 <=> the landing is by R = 7/sigma (derived): 0 violations
+  index: {0: 997, 1: 3}
+  first-interval landings by class (A no capture / B one separation / C carry-ins): {'A': 225, 'B': 338, 'C': 434}
+  captures at the bound, their eighth-slot and deviation class (slot 0, or slot 7): {0: 728, 7: 626}
+  carried in, by the eighth-slot held at the move's start: {6: 510, 5: 250, 4: 107, 3: 74, 2: 50, 1: 42, 7: 40, 0: 21}
+  carried in, faster than the setter (bridge up) / not: {False: 374, True: 720}
+  first-interval landings closest to the interval end (push extent against 7/sigma - 1):
+    (28, 188, 1354, 2059, 2560, 4419, 4936) P (28, 188) sigma 47/7 extent 89/4419 of 2/47, moves 2
+    (165, 364, 787, 3816, 3819, 4548, 4817) P (165, 364, 787) sigma 787/165 extent 299/1516 of 368/787, moves 3
+    (32, 197, 1266, 3020, 4178, 4389, 4473) P (32, 197) sigma 197/32 extent 251/4389 of 27/197, moves 3
+    (101, 199, 533, 2335, 3946, 4196, 4402) P (101, 199, 533) sigma 533/101 extent 547/4402 of 174/533, moves 2
+    (158, 185, 387, 801, 2393, 4128, 4674) P (158, 185, 387, 801) sigma 801/158 extent 293/2393 of 305/801, moves 1
+    (116, 367, 516, 1794, 1846, 3407, 4066) P (116, 367, 516) sigma 129/29 extent 345/2033 of 74/129, moves 3
+    (143, 497, 509, 2148, 2824, 4917, 4969) P (143, 497, 509) sigma 509/143 extent 751/2824 of 492/509, moves 3
+    (187, 631, 2505, 2681, 3064, 4395, 4848) P (187, 631) sigma 631/187 extent 441/1616 of 678/631, moves 4
+    (177, 321, 968, 1363, 1561, 2172, 4737) P (177, 321) sigma 107/59 extent 625/968 of 306/107, moves 4
+    (187, 258, 845, 3004, 4170, 4209, 4528) P (187, 258, 845) sigma 845/187 extent 101/834 of 464/845, moves 2
+    (151, 748, 1184, 1681, 1878, 2002, 4092) P (151,) sigma 1 extent 2094/1681 of 6, moves 9
+    (182, 942, 1499, 2510, 3327, 3612, 4867) P (182,) sigma 1 extent 5507/4867 of 6, moves 9
+  landings after the first interval: 3; sigma of their slow part: {'491/73': 1, '538/77': 1, '475/69': 1}
+    (73, 153, 163, 491, 1723, 2180, 2450) P (73, 153, 163, 491) sigma 491/73 (7/sigma 511/491) index 1 moves 3; captures at the bound [(1723, 7)]
+        R 1 +102/1723: in the slot (1723,), setter (1723,), carried in [(491, 6), (2180, 5)]
+        R 1825/1723 +235936/845993: in the slot (491, 2180), setter (491,), carried in [(1723, 1), (2180, 7)]
+        R 657/491 +50808/845993: in the slot (1723, 2180), setter (1723,), carried in []
+    (154, 431, 1076, 3932, 4711, 4788, 4868) P (154, 431, 1076) sigma 538/77 (7/sigma 539/538) index 1 moves 3; captures at the bound [(4788, 7), (4868, 7)]
+        R 1 +7/114: in the slot (4788, 4868), setter (4788,), carried in [(1076, 6), (4711, 6)]
+        R 121/114 +3476/15333: in the slot (1076, 4711), setter (1076,), carried in [(3932, 3), (4711, 0), (4788, 1), (4868, 1)]
+        R 693/538 +18887/362074: in the slot (3932, 4711, 4788, 4868), setter (4711,), carried in []
+    (69, 324, 475, 2963, 3284, 3658, 3793) P (69, 324, 475) sigma 475/69 (7/sigma 483/475) index 1 moves 5; captures at the bound [(3284, 7)]
+        R 1 +97/3284: in the slot (3284,), setter (3284,), carried in [(475, 6), (3793, 6)]
+        R 3381/3284 +433389/1559900: in the slot (475, 3793), setter (475,), carried in [(2963, 4), (3793, 0)]
+        R 621/475 +37122/1801675: in the slot (2963, 3793), setter (3793,), carried in [(3284, 6)]
+        R 5037/3793 +470097/12456212: in the slot (3284,), setter (3284,), carried in [(3658, 6)]
+        R 4485/3284 +67689/6006436: in the slot (3658,), setter (3658,), carried in []
