@@ -1,0 +1,59 @@
+E216/E217 (2026-10-01): the re-aimed run.  The class instant on the arrangement's own grid: what selects it, how the
+speed moves it.  Design: log E216.  No window, no lap restriction; M = ceil(mm*m/e) is a coordinate; the range M <= 4 is a
+range of search, not a statement (every set with no lonely class instant in it is listed).
+
+Object (corrected in E217 from E216's).  After the pair law's rescaling (a on its grid point) the class instant depends
+only on the leaving-edge reading a, its grid point n_a and the class c: the grid through a with divisor n_a, class c,
+c*n_a = 8K+1.  So the family is the readings' openings (8K+1)/(8a), each read as class c of the grid through a with
+n_a = (8K+1)/c.  At t = c*n_a/(8a) reading d has rescaled grid point n' = round(n_a*d/a), residue r' = c*n' mod 8,
+deviation eps' = c*(n_a*d/a - n'); clear iff (c*n_a*d) mod 8a in [a, 7a].
+Kinds of failure (the reading is in the way; named by its rescaled residue): captured (r' = 0), entering edge passed
+(r' = 7), leaving edge not reached (r' = 1), interior beyond band (r' in 2..6).  E216's M4-3 was false as stated: a
+residue-7 reading can be clear with eps' >= 2 (past the next leaving edge); it is dropped.
+Part A (placement) and Part B (relocation) as in E216.  Checks: C1 (the cascade's landing equals the least clear point
+from clear_set); M4-2 (mirror residues); M4-3 (residue-7 readings have eps <= 0 at lonely instants); the integer test
+against Fraction positions at lonely instants.
+
+
+== A. every 7-set of readings <= 16: 11440 sets ==
+  CHECKS (C1, M4-2, construction, integer vs Fraction): 0 failures
+  sets with no lonely class instant in the range (R <= 7*4): 0 []
+  failing readings at non-lonely class instants, by kind: {'leaving edge not reached': 314008, 'interior beyond band': 373777, 'captured': 368408, 'entering edge passed': 196994}
+  class instants failing only on the entering edge (the pair law's case): 70403; their mirrors: {'mirror not lonely': 58610, 'mirror lonely': 15003}
+  kinds failing those mirrors: {'interior beyond band': 37886, 'entering edge passed': 15650, 'leaving edge not reached': 12796, 'captured': 16808}
+  lonely class instants by the largest interior deviation (grid_pair_law's hypothesis is |eps| <= 1): {'largest interior |eps| <= 1': 72159, 'largest interior |eps| > 1': 87347}
+  the cascade's landing is one of the set's lonely class instants: {True: 11440} (FORCED whenever the landing lies in the search window R <= 7*4: the landing is a lonely opening)
+
+== A. uniform 7-sets of readings <= 200: 2000 sets ==
+  CHECKS (C1, M4-2, construction, integer vs Fraction): 0 failures
+  sets with no lonely class instant in the range (R <= 7*4): 0 []
+  failing readings at non-lonely class instants, by kind: {'captured': 144589, 'leaving edge not reached': 124316, 'interior beyond band': 137536, 'entering edge passed': 95066}
+  class instants failing only on the entering edge (the pair law's case): 28198; their mirrors: {'mirror lonely': 7459, 'mirror not lonely': 25277}
+  kinds failing those mirrors: {'interior beyond band': 15022, 'leaving edge not reached': 9750, 'entering edge passed': 9274, 'captured': 8061}
+  lonely class instants by the largest interior deviation (grid_pair_law's hypothesis is |eps| <= 1): {'largest interior |eps| > 1': 39556, 'largest interior |eps| <= 1': 21708}
+  the cascade's landing is one of the set's lonely class instants: {True: 2000} (FORCED whenever the landing lies in the search window R <= 7*4: the landing is a lonely opening)
+
+== A. fine shapes, least reading 1,000, spread uniform in [2, 20]: 1000 sets ==
+  CHECKS (C1, M4-2, construction, integer vs Fraction): 0 failures
+  sets with no lonely class instant in the range (R <= 7*4): 0 []
+  failing readings at non-lonely class instants, by kind: {'entering edge passed': 23772, 'leaving edge not reached': 37531, 'captured': 36967, 'interior beyond band': 34014}
+  class instants failing only on the entering edge (the pair law's case): 7312; their mirrors: {'mirror not lonely': 6716, 'mirror lonely': 1831}
+  kinds failing those mirrors: {'entering edge passed': 2635, 'interior beyond band': 4023, 'leaving edge not reached': 2946, 'captured': 1787}
+  lonely class instants by the largest interior deviation (grid_pair_law's hypothesis is |eps| <= 1): {'largest interior |eps| > 1': 9899, 'largest interior |eps| <= 1': 5559}
+  the cascade's landing is one of the set's lonely class instants: {True: 1000} (FORCED whenever the landing lies in the search window R <= 7*4: the landing is a lonely opening)
+
+== B. relocation: 30 fine shapes, each reading moved -150..+150 in steps of 5 (180 sweeps) ==
+  CHECK C1 over every step: 0 failures
+  begun | another leaving-edge reading | : 1818
+  begun | the mirror of an ended instant (its entering-edge reading, class 8 - c) | : 69
+  begun | the same leaving-edge reading, another lap | : 66
+  ended | interior beyond band | the moved reading: 433
+  ended | interior beyond band | another reading: 409
+  ended | leaving edge not reached | another reading: 285
+  ended | entering edge passed | the moved reading: 242
+  ended | captured | the moved reading: 169
+  ended | captured | another reading: 159
+  ended | entering edge passed | another reading: 135
+  ended | leaving edge not reached | the moved reading: 133
+  landing at each step: {'landing is a lonely class instant': 10954}
+  steps with no lonely class instant for M <= 4: 0 []

@@ -1,0 +1,22 @@
+E217 (2026-10-01): the re-aimed run's relocation read on the cascade's own landing (Part B of v1 tracked every lonely
+opening in the window, a family broader than the cascade uses).
+
+Same 30 seeded fine shapes and sweeps as `class_instant_run_v1.py` Part B (each reading moved -150..+150 in steps of 5,
+readings keeping their names).  At each step the exact cascade's landing, as an opening: setter h and lap K,
+t = (8K+1)/(8h).  When the landing's opening changes between consecutive steps (not the same setter and lap):
+  - at the OLD landing instant, after the move, which readings are in the way, and on which side of their slot
+    (entering side: position mod 8 in (7, 8); leaving side: in [0, 1));
+  - whether the NEW landing's setter is a reading that was in the way at the old instant (the isolation pushed to that
+    reading's exit), the old setter at another lap, or another reading.
+Representation-free (no grid or class chosen).  Check: C1 at every step.
+
+CHECK C1: 0 failures
+landing jumps (the landing's opening changed between steps): 16
+  new landing: another reading: 13
+  new landing: new setter was in the way at the old landing: 3
+  earlier | another reading: 10
+  later | new setter was in the way at the old landing: 3
+  later | another reading: 3
+  readings in the way at the old landing after the move: {0: 10, 1: 6}
+  their sides: {(): 10, (('entering side', 1),): 6}
+  the moved reading: {'moved reading clear': 10, 'moved reading in the way': 6}
