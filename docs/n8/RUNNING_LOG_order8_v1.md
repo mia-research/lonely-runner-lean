@@ -6467,3 +6467,57 @@ and which freedom each set's certificate uses).
 **Housekeeping:** `memory-drafter` revised `feedback_n8_map_first_2026_09_30.md` (M7 kept as the session's rule, not an
 owner ruling; the `**Map:**` audit starts at E191, the `**Consequence:**` audit at E192). Map v2 §9 C7 should read
 "returned 1 before E190"; carried to v3.
+
+---
+
+## E193 — 2026-09-30 — Q6 step 2: the crowded level through our order-seven instant form; the 97 exceptions read
+
+**Map:** `MECHANISM_MAP_v2` · §4 Q6 and Q5 · M2 (d), a map run (pass conditions: the oracle check only) · nearest §6
+classes F2 (a rate as the answer: avoided, counts of sets the 56-instant family clears are not reported as findings)
+and F11 (the exceptions are read here, not answered with a new vantage).
+
+**Owner:** *"Ok that sounds good, just remember to keep to our own framework, boundaries, isolation events, cascade not
+density or other frames."*
+
+**Step 1, read** (`OrderSevenA4N`, `S5N`, `S5bN`, `LemmasN`). `four_band`'s instant is `λ/7^{m+1}`, `λ = j + k·7^m`:
+a **fine instant** `j/7^{m+1}` (`j ≤ 5`) where the crowded level's readings leave two adjacent sevenths empty
+(compression, by the carry lemma, checked in the kernel over every carry path), then a **grid rotation** `k/7` that
+turns the empty pair onto the subject's slot. Readings of one residue class rotate together; `lemma5` is the several
+classes at once: arcs rotating at speeds 1, 2, 4 on the 7-grid, a grid time at which every arc misses the slot. So the
+hard branch is an isolation event on the grid, found exactly, and the proof covers an infinite family because each
+reading enters only through its class, its top digit and its carry bits.
+
+**Step 2, run** (`LonelyRunner/experiments/nN/redo/crowded_level_v1.{py,out}`, `_v1b`; commits `1dace25` and the one
+above; exact). Class: 7-sets in `1..24` with a multiple of 8, level-0 cost `≥ 8`, no common factor: 229,061 sets, all
+with `m = 1` (modulus 64, instants `(j + 8k)/64`). Derived before running: whether `a/64` is lonely depends only on the
+readings mod 64. Oracle check (no lonely `a/64` before the cascade's landing): 0 violations.
+
+**Exceptions, no `a/64` lonely: 97** (each listed in `crowded_level_v1b.out`). All have exactly one multiple of 8. The
+three answers `[VERIFIED — these 97]`:
+- (i) **Feature.** 34 have no multiple of 6 (31) or of 7 (3): R6 at `1/6` or `1/7`. 12 are one-free (six readings share a
+  factor the seventh lacks). One, `(3,4,5,13,16,18,21)`, is R1 (landing at the bound `1/24`). The other **51** meet the
+  residual's positive fields (odd, a multiple of each of 5, 6, 7, 8) and are neither R6 nor one-free. No small subset
+  explains any exception: the smallest set of readings whose blocked instants cover the 56-instant grid has 6 readings
+  (18 sets) or all 7 (79).
+- (ii) **Where the isolation is.** Of the 51: 36 are lonely at a grid instant `i/11` (21) or `i/12` (15); 15 are on no
+  grid with `q ≤ 12`. Of those 15 the cascade lands at `17/128`, `33/128` or `9/128` (host 16 at the rungs `1/8`, `1/4`,
+  `1/16`, modulus `128 = 2·64`) in 6, at host 13's openings `25/104`, `49/104` in 5, and at hosts 5, 23 and the bound in
+  the rest.
+- (iii) **Same mechanism?** Yes in kind: a grid through the arrangement at another resolution (6, 7, 11, 12) with its
+  multiples separating, or the 8-adic grid one level finer (`128 = 2·64`, the counterpart of order seven's §7 move from
+  49 to `98 = 2·49`). **Not understood:** why six or seven readings jointly block every `a/64` in these sets (no
+  derivation yet; the joint blocking is the object).
+
+**Consequence:**
+- Q6 `[VERIFIED — readings ≤ 24]`: order seven's instant form translated to one prime power (`8^{m+1}`, here 64) does not
+  settle the crowded level at eight even at `m = 1`. The exceptions move to other resolutions, which the case list's R6
+  (5–8), thirds, fifths and sixths/sevenths/ninths already reflect, and in part to `2·64`, as order seven's §7 did. Order
+  eight's hard branch is multi-resolution where order seven's needed one prime and one special modulus.
+- Q5 `[derived]`: at `m = 1` (a multiple of 8, none of 64) the question "is some `a/64` lonely" depends only on the
+  residues mod 64: a finite question for an infinite family. Its complete answer, the list of residue patterns mod 64
+  with no lonely `a/64`, is computable and would be a class (c) statement (every other `m = 1` set is lonely at some
+  `a/64`), with the list itself as the analogue of order seven's §7 exceptional sets.
+- Routes: this narrows Q6 and does not duplicate a route in map v2 §9.
+
+**Next:** the complete finite list at `m = 1` (residue patterns mod 64 whose blocked instants cover all 56), using the
+unit group's action and sign to reduce the enumeration; then read which resolution settles each pattern class.
