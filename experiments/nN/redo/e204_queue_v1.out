@@ -1,0 +1,61 @@
+E204 (2026-09-30): the passage-end configuration: the entering queue at every move of the cascade.
+
+Owner: "yes, design the passage-end configuration first, then run it".
+
+DESIGN (the cascade's own objects)
+  At a move starting at t, the readings not in the subject's slot form the ENTERING QUEUE: each approaches the entering
+  edge (position 7/8 of its lap) and reaches it after T_c = (7/8 - frac(c t))/c.  The move lasts D = (the setter's exit) - t.
+  FORCED (the cascade's rule restated, M4): a queue reading is carried in during the move iff T_c < D and it has not left
+  again by the move's end; a reading already in the slot at the move's start can also be carried in again if it is fast
+  enough to leave and re-enter.  Both edge cases are counted, not treated as violations.
+  CONTENT (not forced; recorded):
+    C1 the conveyor: is the next setter the queue FRONT (least T_c) of the previous move?  Not forced: when several are
+       carried in, the latest exit sets the next move.
+    C2 cycling: in each chain, which readings set moves and how often; whether the readings that keep the relay going
+       are the fast ones coming round again.
+    C3 the end: at the landing, the front's identity (rank), and its margin T_front / D (> 1: it arrives after the
+       setter leaves; the isolation lasts until it enters).
+  Checklist: the queue, T_c, D and the carry-ins are the cascade's objects; D and T are recorded per move, never argued
+  monotone (F1); no rate is the answer; no instant family; no first isolation.
+RUN (exact) on relays: every chain to 24 with at least three passages (E203), the late fine band shapes, Case C chains.
+
+
+== every relay to 24 with at least three passages: 16785 relays ==
+  edge cases of the forced rule: the front reached the edge within the move but was out again at its end (passed through): 2293 moves; a reading carried in although the front had not reached the edge (a reading already in the slot at the move's start, re-entering): 6 moves
+  C1 the next setter is the previous move's queue front: 44580 moves; not: 15464 moves
+  C1 relays in which every hand-over is the queue front: 5456 of 16785
+  C2 the reading setting the most moves, by rank (0 = slowest): {1: 963, 2: 2104, 3: 2688, 4: 3261, 5: 2552, 6: 5217}
+  C2 distinct setters per relay: {3: 6169, 4: 5506, 5: 3515, 6: 1595}
+  C3 at the landing, the queue front's rank: {1: 683, 2: 1211, 3: 1966, 4: 2926, 5: 3735, 6: 6264}
+  C3 margin T_front/D at the landing: least 0.0, lower quartile 1.2065217391304348, median 1.8148148148148149
+  C1 examples where the next setter is not the front (set, move, front, next setter, carried in): [((1, 2, 3, 5, 7, 12, 24), 2, 24, 5, (5,)), ((1, 2, 3, 6, 7, 11, 16), 2, 11, 16, (11, 16)), ((1, 2, 3, 6, 7, 11, 24), 2, 24, 11, (11,)), ((1, 2, 3, 6, 7, 13, 16), 1, 13, 6, (6, 13)), ((1, 2, 3, 6, 7, 14, 16), 1, 14, 6, (6,)), ((1, 2, 3, 6, 7, 16, 17), 2, 17, 16, (16,)), ((1, 2, 3, 6, 7, 16, 20), 1, 20, 6, (6,)), ((1, 2, 3, 6, 7, 16, 21), 1, 21, 6, (6,)), ((1, 2, 3, 6, 7, 16, 21), 2, 16, 21, (16, 21)), ((1, 2, 3, 6, 7, 16, 22), 2, 22, 16, (16,)), ((1, 2, 3, 6, 7, 16, 23), 2, 23, 16, (16,)), ((1, 2, 3, 6, 7, 16, 24), 2, 24, 16, (16,))]
+
+== late fine band shapes: 5400 relays ==
+  edge cases of the forced rule: the front reached the edge within the move but was out again at its end (passed through): 2473 moves; a reading carried in although the front had not reached the edge (a reading already in the slot at the move's start, re-entering): 0 moves
+  C1 the next setter is the previous move's queue front: 79338 moves; not: 21997 moves
+  C1 relays in which every hand-over is the queue front: 0 of 5400
+  C2 the reading setting the most moves, by rank (0 = slowest): {4: 180, 5: 2239, 6: 2981}
+  C2 distinct setters per relay: {7: 5400}
+  C3 at the landing, the queue front's rank: {1: 1215, 2: 2525, 3: 49, 4: 1325, 5: 129, 6: 157}
+  C3 margin T_front/D at the landing: least 9.585667072987537e-05, lower quartile 0.09338037921255063, median 1.0865611520283276
+  C1 examples where the next setter is not the front (set, move, front, next setter, carried in): [((27720, 63963, 86790, 112837, 142389, 159647, 203542), 13, 203542, 159647, (159647, 203542)), ((27720, 63963, 86790, 112837, 142389, 159647, 203542), 18, 159647, 27720, (27720, 86790)), ((27720, 63963, 86790, 112837, 142785, 159647, 203542), 13, 203542, 159647, (159647, 203542)), ((27720, 63963, 86790, 112837, 142785, 159647, 203542), 18, 159647, 27720, (27720, 86790)), ((27720, 63963, 86790, 113004, 142389, 159647, 203542), 13, 203542, 159647, (159647, 203542)), ((27720, 63963, 86790, 113004, 142389, 159647, 203542), 18, 159647, 27720, (27720, 86790)), ((27720, 63963, 86790, 113377, 142235, 159647, 203202), 13, 203202, 159647, (159647, 203202)), ((27720, 63963, 86790, 113377, 142235, 159647, 203202), 18, 159647, 27720, (27720, 86790)), ((27720, 63963, 86790, 113377, 142389, 159647, 203202), 13, 203202, 159647, (159647, 203202)), ((27720, 63963, 86790, 113377, 142389, 159647, 203202), 18, 159647, 27720, (27720, 86790)), ((27720, 63963, 86790, 113377, 142389, 159647, 203542), 13, 203542, 159647, (159647, 203542)), ((27720, 63963, 86790, 113377, 142389, 159647, 203542), 18, 159647, 27720, (27720, 86790))]
+
+== Case C chains with at least two passages, readings <= 200: 423 relays ==
+  edge cases of the forced rule: the front reached the edge within the move but was out again at its end (passed through): 59 moves; a reading carried in although the front had not reached the edge (a reading already in the slot at the move's start, re-entering): 1 moves
+  C1 the next setter is the previous move's queue front: 554 moves; not: 281 moves
+  C1 relays in which every hand-over is the queue front: 197 of 423
+  C2 the reading setting the most moves, by rank (0 = slowest): {1: 91, 2: 104, 3: 72, 4: 57, 5: 53, 6: 46}
+  C2 distinct setters per relay: {2: 204, 3: 124, 4: 64, 5: 24, 6: 7}
+  C3 at the landing, the queue front's rank: {1: 12, 2: 24, 3: 57, 4: 92, 5: 109, 6: 129}
+  C3 margin T_front/D at the landing: least 0.0, lower quartile 1.2201729106628243, median 1.907798693814829
+  C1 examples where the next setter is not the front (set, move, front, next setter, carried in): [((2, 33, 39, 64, 140, 175, 190), 0, 190, 140, (140,)), ((4, 26, 61, 95, 110, 131, 190), 1, 110, 95, (95,)), ((7, 100, 106, 115, 124, 145, 183), 0, 100, 145, (100, 145)), ((1, 23, 26, 32, 126, 179, 183), 1, 183, 126, (126,)), ((5, 38, 39, 40, 46, 135, 185), 0, 185, 135, (135,)), ((1, 13, 35, 40, 95, 109, 175), 0, 95, 109, (109,)), ((1, 64, 71, 93, 99, 123, 127), 2, 123, 99, (99, 123)), ((6, 46, 86, 107, 126, 151, 156), 0, 86, 126, (86, 126)), ((1, 40, 61, 96, 132, 180, 196), 0, 196, 132, (132, 180, 196)), ((1, 40, 61, 96, 132, 180, 196), 2, 196, 180, (180, 196)), ((1, 14, 63, 136, 140, 164, 179), 1, 164, 140, (140, 179)), ((4, 50, 58, 123, 142, 174, 191), 2, 174, 191, (191,))]
+
+== Case C chains with at least two passages, readings <= 5,000: 397 relays ==
+  edge cases of the forced rule: the front reached the edge within the move but was out again at its end (passed through): 41 moves; a reading carried in although the front had not reached the edge (a reading already in the slot at the move's start, re-entering): 0 moves
+  C1 the next setter is the previous move's queue front: 484 moves; not: 277 moves
+  C1 relays in which every hand-over is the queue front: 172 of 397
+  C2 the reading setting the most moves, by rank (0 = slowest): {1: 98, 2: 96, 3: 74, 4: 58, 5: 37, 6: 34}
+  C2 distinct setters per relay: {2: 198, 3: 116, 4: 58, 5: 16, 6: 9}
+  C3 at the landing, the queue front's rank: {1: 17, 2: 28, 3: 40, 4: 67, 5: 117, 6: 128}
+  C3 margin T_front/D at the landing: least 0.012570374766460411, lower quartile 1.3633013656728503, median 2.180359796271957
+  C1 examples where the next setter is not the front (set, move, front, next setter, carried in): [((61, 316, 480, 988, 2522, 4218, 4246), 0, 4246, 2522, (2522, 4218, 4246)), ((69, 539, 1240, 1429, 1890, 3028, 3680), 0, 3680, 1429, (1429, 1890)), ((9, 945, 1860, 1996, 2732, 4361, 4694), 1, 4361, 1996, (1996, 4694)), ((135, 845, 1616, 2051, 2246, 2587, 4619), 1, 4619, 2246, (2246,)), ((1, 223, 241, 1935, 2974, 3016, 3418), 1, 2974, 1935, (1935, 2974, 3418)), ((105, 530, 2424, 3165, 4185, 4230, 4904), 0, 4904, 3165, (3165,)), ((32, 197, 1266, 3020, 4178, 4389, 4473), 0, 3020, 4178, (4178, 4473)), ((57, 483, 2357, 2917, 3305, 3402, 4826), 0, 4826, 3402, (3402,)), ((57, 483, 2357, 2917, 3305, 3402, 4826), 1, 2917, 3305, (2917, 3305)), ((46, 373, 1079, 1472, 2325, 2490, 4906), 0, 2490, 2325, (2325,)), ((53, 376, 4112, 4252, 4293, 4531, 4664), 0, 4531, 4664, (4664,)), ((53, 376, 4112, 4252, 4293, 4531, 4664), 1, 4293, 4252, (4252, 4293))]
