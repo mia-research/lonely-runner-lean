@@ -1,0 +1,12 @@
+2:   finer: a = j + (N/16)*k, dilation j in 1..J (argument 3), rotation k/16.  Disallowed instants count as blocked.
+4:   Every instant a/N, 0 < a < N, is allowed; the multiple's blocked instants are part of the union (at W > V it can
+43:  NI = N - 1; int J = (argc > 3) ? atoi(argv[3]) : N; int G = N / 16;
+49:      int allowed = (a % G) >= 1 && (a % G) <= J;   /* dilation j = a mod (N/16) in 1..J, rotation k = a div (N/16) */
+50:      if (!allowed || !(t >= N / 8 && t <= 7 * N / 8)) B[x][(a - 1) / 64] |= 1ULL << ((a - 1) % 64);
+V W = 4 4  J = 1 : exceptional orbits        0
+V W = 4 4  J = 2 : exceptional orbits        0
+V W = 4 4  J = 3 : exceptional orbits        0
+V W = 4 4  J = 4 : exceptional orbits        0
+V W = 4 4  J = 5 : exceptional orbits        0
+
+[killed]
