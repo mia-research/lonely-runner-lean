@@ -7735,3 +7735,133 @@ the openings that fail only on their entering edge number 70,403 (`class_instant
 
 The finding is unchanged: beyond the pair law's hypothesis, the mirror is not in general where the isolation goes.
 Found by the `memory-drafter` agent's review. The memory states the denominator correctly.
+
+---
+
+## E218 — 2026-10-01 — design: the persistence-region run (the landing's certificate, its box of arrangements, and where the cascade moves the isolation across each face)
+
+**Owner:** *"yes, design the persistence-region run first, then run it"*.
+
+**Map:** v2 §1 (certificate `(e, k)`, opening, the cascade, landing) and E217's lead (owed to v3). M2 class (d), a map
+run. Nearest §6 classes, and why this step is none of them:
+- F4 (a restatement taken for a step): the run does not assert that the boxes fill the arrangement space, which would be
+  the obligation (Theorem 6.15) restated. It records how the cascade moves between boxes.
+- F14 (an instant family the cascade does not use): every instant is the cascade's own landing or its next move.
+- F3 (a majority rule stated as a law): the classes are records, with the exceptions listed.
+
+**Interval check** (the oracle memory, 2026-10-01):
+- Step 1: the only intervals here are intervals of **speeds** (a box of arrangements), never of instants. Deleting them
+  leaves the certificate's instant, which is the place.
+- Step 2: no window in `u = d_min·t`; the lap `K` is unrestricted.
+- Step 3: no owed statement and no `M`.
+- The union here is of regions of arrangements, each with a named instant: the owner's case-list form (MANUSCRIPT_v20
+  §0), not register item 4's union of windows over instants.
+
+**Object.** The cascade's landing at an arrangement is a certificate: the setter `h` on its leaving edge at lap `K`,
+`t = (8K+1)/(8h)` (a candidate scale), and for every other reading `d` the clear block `[8k_d+1, 8k_d+7]` holding its
+position `p_d = (8K+1)·d/h`. The **persistence region** of the certificate `(h, K, k)` is the set of arrangements lonely
+at `h`'s opening at lap `K` with every reading in the same block.
+
+**Forced before running (M4):**
+- M4-1. With `h` fixed, the region is a **box**: each `d` separately in `[(8k_d+1)·h/(8K+1), (8k_d+7)·h/(8K+1)]`; in speed
+  space it is a cone over that box (scale invariance). Every arrangement in it is lonely at that one instant.
+- M4-2. This is the grid view (E217). On the grid through `h` of step `h/(8K+1)`, each reading lies in its block of grid
+  positions. A face is one reading at its leaving edge (`p_d = 8k_d+1`) or entering edge (`p_d = 8k_d+7`). Per reading,
+  the slacks `p_d − (8k_d+1)` and `(8k_d+7) − p_d` sum to 6. The setter's leaving slack is 0 by definition.
+- M4-3. Moving `d` alone slower past its leaving face puts it in the way at `t`, on the leaving side; it exits just
+  after. So the landing hands off to `d`'s opening at lap `k_d` unless another reading's slack is used up there, or `d`'s
+  change of speed has cleared an earlier instant. Those are the exceptions to record.
+- M4-4. Moving `d` alone faster past its entering face puts it in the way at `t`, on the entering side. If the run to
+  `t` is unchanged, the cascade's next move goes to `d`'s next opening `(8k_d+9)/(8d)`. Whether that is lonely is
+  content, not forced.
+
+**Parts:**
+- **A. The landing's box.** Every 7-set of readings ≤ 16 (11,440), and 1,000 seeded fine shapes (least reading 1,000,
+  spread uniform in `[2, 20]`). Record the certificate and each reading's two slacks, and which readings are tight
+  (slack 0) besides the setter. Derivation check: 20 arrangements sampled inside each box are all lonely at the
+  certificate's instant. For those, record whether the cascade lands at the same certificate or at an earlier one (the
+  by-product).
+- **B. Across each face** (the owner's tool, one runner at a time). Take 300 seeded fine shapes and 300 sets drawn
+  uniformly from the ≤ 16 family. For each reading `d ≠ h`, move it alone to just past each face: the arrangement is
+  scaled by `1000·(8K+1)` so that the face is a whole number, and `d` is one unit beyond it. Run the exact cascade and
+  classify the new landing.
+  - Leaving face: a hand-off to `d` at lap `k_d`; an earlier instant; or other.
+  - Entering face: `d`'s next opening; an earlier instant; or a later opening of another reading, with the extra moves
+    and which reading.
+  - At each entering crossing whose next opening of `d` is not lonely, record the readings in the way there and on
+    which side.
+
+**Checks** (the only pass conditions):
+- C1 (oracle): the landing equals the least clear point from `clear_set`, at every arrangement run.
+- The box check (M4-1), at every sampled arrangement.
+- The construction check: the moved reading is in the way at `t`, on the intended side.
+
+**Checklist.** The objects are the cascade's certificate, its instant (a candidate scale) and the arrangement space's
+boxes, each with a named instant. Populations are exhaustive or seeded uniform, ranked by nothing. There is no window,
+no cap and no covering of instants. Counts are records, and every exception class is listed.
+
+---
+
+## E219 — 2026-10-01 — the persistence-region run: leaving faces are hand-offs; the isolation is displaced only when a reading enters; the boxes are E124's cells, and their exhaustion is E125's open question again
+
+**Map:** v2 §1 (certificate, landing); E217's lead; M2 (d), as designed in E218. Nearest §6 classes: F5 (M4-3 and
+M4-4 checked, not found) and F7/F11 (this run re-arrives at E125's question; see Consequence).
+
+**Checks** `[VERIFIED — every run]` (`LonelyRunner/experiments/nN/redo/persistence_run_v1.out`):
+- C1 (the cascade's landing equals the least clear point from `clear_set`): 0 failures at every set, every sampled
+  arrangement and every moved arrangement.
+- The box check (M4-1): every one of the roughly 124,000 arrangements sampled inside a landing's box is lonely at that
+  certificate's instant.
+- The construction check (the moved reading is in the way at `t` on the intended side): 0 failures.
+
+**A. The landing's box** (every 7-set of readings ≤ 16, 11,440; 1,000 fine shapes):
+- **Tight readings.** Besides the setter, a reading sits exactly on a face in 2,121 of the 11,440 whole-number sets
+  (entering side 2,223 times, leaving side 792) and in none of the 1,000 fine shapes. Tightness is a whole-number
+  coincidence.
+- **The boxes overlap.** Arrangements sampled inside the landing's box land at the same certificate 71,543 times, at an
+  earlier one 42,775 times, and later 5 times (the sample changed the slowest reading, and with it the bound).
+  "Earlier" is the landing being the least lonely instant, a by-product: another certificate's box overlaps. So the
+  landing's region is the box less the boxes of earlier certificates.
+- **The setter** is the slowest reading in 6,072 of 11,440 sets (bound landings included) and in 457 of 1,000 fine
+  shapes. Recorded.
+
+**B. Across each face, one reading at a time** (300 whole-number sets, 300 fine shapes; every reading other than the
+setter, both faces):
+- **Leaving face** (the reading slowed past its leaving edge). The landing hands off to that reading's opening at its
+  lap in 1,694 of 1,800 fine-shape crossings; the other 106 go to an earlier instant. In the whole-number sets:
+  - hand-off in 1,404 of 1,800;
+  - earlier instant in 153;
+  - other in 243, where a tight reading or a change of order (the moved reading passing the setter) intervenes.
+
+  This is M4-3 `[derived + VERIFIED]`: a continuous hand-off, not a relocation.
+- **Entering face** (the reading made faster past its entering edge). The cascade's next move goes to that reading's
+  next exit (M4-4, forced). Whether that exit is lonely is the content. In fine shapes:
+  - lonely there in 746 of 1,800;
+  - an earlier instant in 281 (the faster reading's windows cleared one);
+  - a later opening in 773: of another reading 678, of the old setter 67, of the same reading at a later lap 28.
+
+  Where the entering reading's exit is not lonely, one to three other readings are in the way there (most often one,
+  on its entering side). The whole-number sets show the same pattern.
+
+**Consequence:**
+- **The isolation is displaced only by a reading entering its slot at the isolation instant** `[derived (M4-3) +
+  VERIFIED (B)]`. Slowing a reading past its leaving edge is a continuous hand-off to that reading's own opening. This
+  sharpens E217 B′ (6 of 6 destroyed by an entering reading) into a derivation plus a check on every face. In the owner's
+  words, *"each isolation is pushed there by the speed"*: the push is always a reading entering.
+- **The persistence regions are E124's cells** `[reasoned]`. A box is a lap assignment with a named setter; E124's cones
+  are lap-assignment cells, and each is a union of these boxes (E217 precision note). Across an entering face the
+  relocation follows the cascade's own move rule, from the entering reading's exit onward (M4-4). **So "why the boxes
+  exhaust the arrangement space" is E125's open question** (*"why the categories exhaust"*). And "why every relay
+  started at an entering face ends in a box" is the cascade's arrival, which is the obligation (`doors_agree`; §5,
+  F4). This run adds a fact about the faces. It does not add a mechanism for the exhaustion, and it re-arrives at the
+  statement E206 had already found reached "from four sides".
+- **Direction** `[reasoned]`: continuing runs of this kind will keep re-arriving at E125, because the objects (a lap
+  assignment and its faces) are the same. Map v3 is owed and overdue (E192–E219). It now carries three results that
+  bear on where the next step starts:
+  - E215's failure record;
+  - E217's result that the owed statement is candidate scales plus a cap;
+  - this entry's re-arrival at E125.
+
+  The map-first memory says to cut a version before the next step when a consequence duplicates a route, and this one
+  does.
+- **Standing questions:** none answered. The cap in `WideStep8` is still the owner's decision.
