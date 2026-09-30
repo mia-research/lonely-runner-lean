@@ -23,11 +23,15 @@ restricted to seven readings of spread above 9 (`wideStep8_of_cover8`), so this 
 **Measured** `[VERIFIED — these populations; not proved]`: `Cover8` needs `M = 2` only on band shapes (E210,
 `experiments/nN/redo/cover8_check_v1.out`).  `WideStep8 1` holds as written on every population in
 `experiments/nN/redo/wide_step_check_v1.out` and `wide_step_check_v2.out` (E212; v2 replaces v1's edge population,
-which was bound-clear by construction), and an adversarial walk for a wide set with no clear point in the slowest
-reading's first clear stretch found none (`wide_first_stretch_walk_v1.out`).
+which was bound-clear by construction).  An adversarial walk found no wide set without a lonely instant in the slowest
+reading's first window (`wide_first_stretch_walk_v1.out`): a truth check of the by-product below, nothing more (E215).
 
-**The place `WideStep8 1` names** (`gridStep8_one_first_stretch`): a grid with step at least `m` puts the slowest reading
-on lap 0, so the grid-class instant lies in the slowest reading's first clear stretch, `1 ≤ 8·m·t ≤ 7`.
+**The place is the grid-class instant**: the largest left end of the assigned lap blocks, an opening of one of the
+readings, on a grid through one of the arrangement's own readings.  `gridStep8_one_first_stretch` records a by-product at
+`M = 1`: that instant falls in the slowest reading's first window, `1 ≤ 8·m·t ≤ 7`.  The framework does not require the
+first window (object register v3 item 15), and through this by-product `WideStep8 1` is a first-lap cap on wide sets,
+the shape of the refuted `Spec.DoorFirstLap` (E215).  The route holds for every `M`; `M = 1` is a reading of the data,
+not the target.
 
 Everything here is proved; no `sorry`, no `native_decide`.  `WideStep8` is a hypothesis, not a theorem.
 -/
@@ -112,9 +116,10 @@ theorem lonelyRunnerAt8_of_wideStep8 (M : ℕ) (h : WideStep8 M) : LRC.Spec.Lone
   push Not at h9
   exact lonely_of_gridStep8 hne hpos hm0 (h S hS hpos _ hmS hmin h9)
 
-/-- **The place `WideStep8 1` names.**  A grid with step at least the slowest reading `m` puts `m` at grid point 1, so on
-lap 0 at every class that is a unit mod 8; the 1-D Helly instant (the largest left end of the assigned clear blocks)
-then lies in `m`'s first clear stretch.  At the bound, `8·m·t = 1`. -/
+/-- **A by-product at `M = 1`, not the place.**  A grid with step at least the slowest reading `m` puts `m` at grid point
+1, so on lap 0 at every class that is a unit mod 8; the 1-D Helly instant (the largest left end of the assigned clear
+blocks) then falls in `m`'s first window.  At the bound, `8·m·t = 1`.  The place is the grid-class instant; the first
+window is not a requirement of the framework (E215; object register v3 item 15). -/
 theorem gridStep8_one_first_stretch {S : Finset ℕ} {m : ℕ} (hpos : ∀ d ∈ S, 0 < d) (hmS : m ∈ S)
     (h : GridStep8 S m 1) :
     ∃ t : ℝ, 0 < t ∧ 1 ≤ 8 * m * t ∧ 8 * m * t ≤ 7 ∧ ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
