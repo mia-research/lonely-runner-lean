@@ -7347,3 +7347,151 @@ as written. The two uses of "first" name different objects.
 with no `**Consequence:**` line. In both the tag cites an earlier result and records no new one: E200 cites `SlowBlockN`
 `[PROVED]`, and E209 cites earlier populations as `[VERIFIED]`. **Consequence** for both: none new. The log is append-only,
 so the audit will keep listing these two; the map v3 cut should carry this note.
+
+---
+
+## E213 — 2026-10-01 — design: the Q7 map run (why the slowest reading's first clear stretch closes only in the band)
+
+**Owner:** *"yes, design the Q7 map run first, then run it"*.
+
+**Map:** v2 plus Q7, which is owed to v3 (E212's Consequence line). §1 objects: the cascade's slot boundaries (a reading's
+exit `(8k+1)/s` and entry `(8k−1)/s`, in `R = 8mt` with readings `s` in units of `m`), the landing, and the entering queue
+(E204). §4 question: Q7. M2 class (d), a map run: its only pass conditions are derivation checks and the oracle check.
+The exception is the tight wide set of E212. Nearest §6 classes, and why this step is none of them:
+- F11 (a new vantage in place of reading an exception): not this, since the run reads that exception itself.
+- F14 (an instant family the cascade does not use): not this, since exits and entries are the cascade's own instants.
+- F5 (a forced fact reported as a finding): guarded by the list below.
+
+**Q7.** The walk reached sets of spread 7 to 9 whose first clear stretch `[1, 7]` is empty (the late shapes). Above 9 it
+did not, in any population or walk (E212). The tightest wide set, `(27720, 85358, 117495, 140959, 159149, 200880, 258489)`,
+keeps two clear points, both held by the pair `117495 : 258489 = 5 : 11` in mirror orientation.
+
+**Forced before running (M4):**
+- M4-1. `R` is clear iff every reading sits in `[1, 7]` mod 8. The least clear point of `[1, 7]`, if there is one, is
+  `R = 1` or some reading's exit. So the first stretch is empty iff the bound is blocked and every exit in `(1, 7]` lies
+  inside another reading's open window: the cascade's own condition that the exit is not a landing.
+- M4-2. A move of one reading shifts only that reading's windows. Speeding it up uncovers a sliver just before each of its
+  old exits; slowing it down uncovers a sliver just after each of its old entries.
+- M4-3. The mirror algebra. For readings `a < b`, "`b` exits lap `K` where `a` enters lap `l`" means
+  `s_b/s_a = (8K+1)/(8l−1)`. "`a` exits lap `k` where `b` enters lap `L`" means `s_b/s_a = (8L−1)/(8k+1)`. Both hold at
+  one ratio iff `(8K+1)(8k+1) = (8l−1)(8L−1)`. Moving the ratio off that value opens one junction and closes the other.
+  At the tight set, `33·25 = 15·55 = 825`, with `K = 4`, `l = 2`, `k = 3`, `L = 7`.
+
+**The three answers sought (M3), and the part that serves each.**
+- (i) The feature: is the mirror pair at an exact resonance specific to the tight set, or present wherever a wide set is
+  close to closing? Part B.
+- (ii) What forces the witness: when a move covers the landing's exit, where the cascade lands next, and whether that
+  place is uncovered by the same move (M4-2). Parts A and B, contrasted with the band's closures in Part C.
+- (iii) Main mechanism in disguise (§2A: grid-class clearance, separation, readings carried over an entering edge), or
+  new: the tight set's two junctions split into grid slack and deviation, as in E208. Part A.
+
+**Parts:**
+- **A. The tight set, perturbed through the cascade.** Move one reading (the least fixed as the scale) by
+  `δ ∈ {±1, ±3, ±10, ±30, ±100, ±300, ±1000}` at scale 27,720. Record the exact cascade's landing `R`, its setter and its
+  queue front (E204), and whether it lies in `[1, 7]`. Also record the grid/deviation split of the two tight junctions on
+  the slowest reading's grid.
+- **B. The walk's 300 final wide sets.** Apply every such move to each set, and classify where the cascade lands next
+  against the landing's interval before the move:
+  - `s`: the same interval;
+  - `e`: another interval that was already clear;
+  - `n`: a place newly uncovered by the move;
+  - `m`: `n` bounded by the old landing's pair, in mirror orientation;
+  - `x`: beyond 7, the first stretch emptied.
+
+  Each `x` is listed individually.
+- **C. The band's closures.** Run the same walk with spread in `(7, 9]`, recording every step that empties the first
+  stretch. At each, record:
+  - the moved reading;
+  - the slivers its move uncovered (M4-2);
+  - which reading covers each sliver afterwards, and on which lap;
+  - whether that reading bounded the interval that closed.
+
+  B shows what stays uncovered above 9, and C what covers it in the band.
+
+**Checks** (the only pass conditions):
+- C1 (oracle): the cascade's landing equals the least clear point computed without the cascade (`clear_set` on
+  `[1, 40]`), on every run.
+- M4-1: that least point is `R = 1` or an exit, on every run.
+- M4-3 at the tight set.
+
+**Checklist.** The objects are the cascade's boundaries, its landing and its queue. The first stretch is a fixed interval
+of the slowest reading, not a first isolation. Counts in B and C are records of a map, with the exceptions listed; none
+is the answer. No rate, no instant family beyond the cascade's own exits and entries, no stopping shape. The perturbation
+is the owner's tool (E67, E98): *"each isolation is pushed there by the speed"*.
+
+---
+
+## E214 — 2026-10-01 — the Q7 map run: the tight wide set is the grid pair law's mirror on the arrangement's own grid; Q7 sharpened to the closing pair's mirror junction
+
+**Map:** v2 plus Q7 (owed to v3); §1 slot boundaries, landing, queue; §4 Q7; M2 (d), a map run as designed in E213;
+nearest §6 class F5, which this entry guards (two forced counts marked below).
+
+**Checks** `[VERIFIED — every run]` (`LonelyRunner/experiments/nN/redo/q7_map_run_v1.out`, `_v2.out`, `_v3.out`):
+- C1 (the cascade's landing equals the least clear point from `clear_set`, no cascade): 0 failures across parts A, B
+  and C.
+- M4-1 (that point is `R = 1` or an exit): 0 failures.
+- M4-3 at the tight set: the ratio is `11/5` and `33·25 = 15·55`, and both junction equalities hold exactly.
+
+**A. The tight set, perturbed through the cascade** (`q7_map_run_v1.out` A):
+- The landing is `R = 1320/373`. Its setter is `258489` (exiting) and its queue front is `117495` (entering).
+- **Only the pair acts locally.** Moving `117495` faster, or `258489` slower, sends the landing to the mirror point
+  `R ≈ 5.898`, where the roles swap: setter `117495`, front `258489`. Moving `117495` slower, or `258489` faster, keeps
+  it at `R ≈ 3.539`, where that point opens into an interval. This holds for 26 of the 28 pair moves. The other two,
+  `117495` by `+300` and `+1000`, go to a new junction with `159149` near `R = 4.0`.
+- **The other four readings are slack.** Moves up to `±300` leave the landing where it is. Only moves of `±1000` open
+  intervals elsewhere, two of them earlier.
+- **The split of the two tight junctions** (E208), on the slowest reading's grid: "`258489` exits at 33, `117495`
+  enters at 15" has grid slack `+3` and deviation `−3`; "`117495` exits at 25, `258489` enters at 55" has grid slack `−5`
+  and deviation `+5`. One is a grid gap closed by the deviation, the other a grid overlap opened by it.
+
+**The three answers for E212's exception, the tight set** (M3):
+- **(i) The feature** `[VERIFIED — exact, v3 (2)]`. The pair sits exactly on the grid through its own reading `117495`
+  with divisor 5, at grid points 5 and 11 (deviation 0). The two clear points are classes `c = 3` and `c' = 5 = 8 − 3`.
+  At class 3 the pair reads `15 ≡ 7` and `33 ≡ 1`; at class 5 it reads `25 ≡ 1` and `55 ≡ 7`. The pair takes the two
+  edges and swaps them. The other five readings sit at interior grid residues (2 to 6 mod 8) in both classes.
+- **(ii) What forces the witness** `[derived (M4-3) + VERIFIED (A)]`. The two edge conditions are one ratio, so any move
+  of the pair opens exactly one of the two class instants, and the cascade lands at the one that opens.
+- **(iii) The main mechanism in disguise** `[VERIFIED for the arithmetic; reasoned as a reading]`. For the pair, yes: it
+  is the mirror of `GridPairLawN.grid_pair_law` (the module of map §2A's first row) on the arrangement's own grid.
+  Three of the other five deviate by more than that lemma's `1/C` hypothesis allows (`85358` by `−0.37`, `159149` by
+  `−0.23` and `200880` by `−0.45`, against `1/5`), yet all five are clear at both class instants. So the lemma as stated
+  does not cover this set; its mirror is what holds the witness.
+- Status in map §3 (v3): **answered for the tight set**.
+
+**B. The 300 extremal wide sets, every one-reading move of up to `±1000`** (`q7_map_run_v1.out` B; split in `_v2.out`;
+listed in `_v3.out`):
+- **No move empties the first stretch** (`x = 0` of about 25,000 moves).
+- **261 moves cover the interval holding the landing.** The cascade then lands:
+  - at the same pair's mirror junction (the other class): 140;
+  - at an interval that was already clear: 106. **Forced** (F5), since every one of these sets had another clear
+    interval and the landing is the least clear point (checked, 106 of 106);
+  - at a new junction: 15, listed individually. Each pairs the moved reading, or the old pair's partner, with a third
+    reading.
+- 123 further moves leave the old interval clear and open an earlier one; that is a different event.
+- Of the 155 covering moves not forced to an existing interval, 140 go to the pair's mirror.
+
+**C. The band's closures** (`q7_map_run_v1.out` C; 32 of 600 walks with spread `(7, 9]` emptied the first stretch):
+- Every closing move started from exactly one clear interval (32 of 32). The moved reading bounded that interval in 22,
+  and in 10 a third reading's window slid over it.
+- After closure the landing is at `R` 9 to 11. `R ≥ 9` is **forced** (F5): the slowest reading is in the way on
+  `(7, 9)`.
+- Each closing move uncovered 2 to 6 slivers of its own windows (M4-2), 138 in all. Every one is covered afterwards: by one
+  reading in 104 cases, by two in 33, by three in 1. The coverer bounded the closed interval in 34 cases; in the other
+  104 it is a third reading.
+
+**Consequence:**
+- **Q7 is not answered; it is sharpened** `[VERIFIED — these runs]`. The object is now the pair law's other class, the
+  closing pair's mirror junction. Above spread 9, at the extremal sets, it opens in 140 of the 155 covering moves that
+  are not forced. In the band's closures, every place a closing move uncovers is covered. The next map run should
+  locate the closing pair's mirror junction at each band closure, using the M4-3 algebra, and record its slack (grid plus
+  deviation) and what covers it. It should do the same at the wide extremal sets, so the two are compared on one object.
+  Status in map §3: **not understood**.
+- **The extremal wide configurations reach §2A's mechanism** `[reasoned]`: the tight set is `grid_pair_law`'s mirror on
+  the arrangement's own grid. The lemma's small-deviation hypothesis is stronger than what the set uses: the others need
+  only be clear at both class instants. A two-instant form of the pair law (the pair cannot block both classes) is a
+  candidate lemma. As a statement with "the others clear at both instants" among its hypotheses it is close to a
+  restatement (F4), so it is recorded, not proposed.
+- **Where else:** the band's late shapes are the place to look for the mirror's absence. That is the next run above.
+- **Standing questions:** none answered. v21 §17G's first-lap clearance is untouched (E212 note).
+- **Owed to map v3:** Q7 as sharpened; the tight set's three answers (a new §3 entry); the F5 instances of E212 and this
+  entry; E192–E214.
