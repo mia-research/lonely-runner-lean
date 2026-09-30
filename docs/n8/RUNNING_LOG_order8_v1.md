@@ -7722,3 +7722,16 @@ against the files:
   interval check (delete the interval clause and see whether a place remains; rewrite in `u = d_min·t` and compare with
   register rows; find the time bound an owed Prop implies) and over-application guards. Pointers were updated in
   `MEMORY.md`, `lrc_INDEX.md`, `feedback_INDEX.md` and `feedback_n8_map_first_2026_09_30.md`.
+
+**Precision note on E217's mirror counts.** "When an opening fails only on its entering edge, the mirror … is lonely in
+15,003 of 73,613" mixes denominators. 73,613 counts mirror evaluations, one for each entering-edge reading in the way;
+the openings that fail only on their entering edge number 70,403 (`class_instant_run_v1.py`, Part A; `.out` line 22):
+
+| population | mirror lonely | mirror evaluations | openings |
+|---|---|---|---|
+| every 7-set of readings ≤ 16 | 15,003 | 73,613 | 70,403 |
+| 2,000 uniform 7-sets of readings ≤ 200 | 7,459 | 32,736 | 28,198 |
+| 1,000 fine shapes | 1,831 | 8,547 | 7,312 |
+
+The finding is unchanged: beyond the pair law's hypothesis, the mirror is not in general where the isolation goes.
+Found by the `memory-drafter` agent's review. The memory states the denominator correctly.
