@@ -6616,3 +6616,50 @@ closes every pattern is the **full set of multipliers one or two binary digits f
 **Next:** (1) why one extra binary digit suffices: for the 128 orbits at `V = 3`, which `a/128` is lonely and what it is
 in rung terms; (2) `V = 6, 7` at modulus 256 with the multiple's blocked instants included (feasible), to see where the
 fixed modulus stops; (3) the `(2,5)` shape.
+
+---
+
+## E196 — 2026-09-30 — owner: "are we creeping back into trying to derive something that the cascade doesn't do"; E192–E195 assessed; the line paused
+
+**Map:** `MECHANISM_MAP_v2` · the method itself (§0: the cascade is the oracle; the work is its mechanism) · housekeeping
+and assessment, nothing new run · nearest §6 classes F1 and a new one, F14 (below).
+
+**Owner:** *"I also wonder are we creeping back into trying to derive something that the cascade doesn't do instead of
+trying to figure out why the cascade is a perfect oracle that has never not found an isolation point for any
+arrangement"*. Relayed from the parallel session (not on disk): *"Both directions can fail, and I found an exact example
+where every eligible \(2t,3t,5t\) candidate fails its immediate repair. At the tripled event, one runner blocks the
+backward repair and a different runner blocks the forward repair. Moving to the latter runner's next opening then clears
+all seven."*
+
+**Assessment `[reasoned]`: yes.** E192–E195 took our order-seven proof's instant form (a multiplier at modulus
+`8·2^V`: dilations and grid rotations) and checked, exhaustively over residues, whether it names a lonely instant. The
+cascade entered only as the oracle check (no lonely grid instant before its landing). The cascade does not visit those
+instants: it starts at the bound and moves by openings. So the line establishes certificates the cascade does not
+produce. They are true statements of the owner's case-list proof form (v21 §0: a condition plus a named instant), and
+the results stand at their grades; but they do not say why the cascade finds the isolation, and read in the cascade's
+terms E195 says only that the landing comes **no later than** the first lonely grid instant: the when-at-the-latest shape
+(F1), which names no place.
+- **How it happened:** Q6 asked whether our order-seven *architecture* carries up; reading it (E192) was right, but E193
+  onward took its instant family as the object to test, rather than asking what the cascade does on the same sets.
+- **The parallel session's note, same reading:** the `2t, 3t, 5t` candidates are replacements the cascade does not
+  make. Its own repair, "moving to the latter runner's next opening then clears all seven", **is the cascade's move** (the
+  blocking reading's next opening). When a derived rule fails, the fix that works is the cascade's move again; so do the
+  rung-selection exits (the least multiple's opening, E188) and E193's exceptions (the cascade's `17/128` is host 16's
+  opening).
+- **F14 (new class):** a family of instants the cascade does not use, pursued in place of the cascade's mechanism, with
+  the cascade reduced to an oracle check. Instances: E193–E195; the double-and-backtrack and `2t, 3t, 5t` lines (E186;
+  this note).
+
+**Recorded as data, not pursued:** the stopped run (`crowded_m1_cover_v4.c`, `_partial.out`) found, at `V = 4`, zero
+exceptions already for the single dilation `j = 1` with the sixteen rotations `k/16` (`J = 1..5` all 0; `V = 3` not
+reached). Because the unit normalisation fixes an odd reading `d₀` at 1, this reads, for the original set: for every odd
+reading `d₀`, the subject is lonely at some `a/128` with `a·d₀ ≡ 1 (mod 8)` `[VERIFIED — exhaustive mod 128, V = 4]`.
+
+**Consequence:**
+- The E192–E195 results stay on the case-list route (map v2 §9 C3, C5; Q5). They are not the cascade's mechanism and are
+  not to be presented as it.
+- What the owner asks is the cascade's own question: at every move the readings in the subject's slot separate and the
+  latest exit is taken (E162); the landing is the exit after which nothing is in the slot. What stays unexplained is why
+  that chain of exits always reaches an empty slot, in the cascade's own objects.
+- Standing check: the owner's question is the check for F14 at the start of a step: does the step study what the cascade
+  does, or a family it does not use?
