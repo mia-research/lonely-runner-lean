@@ -7707,3 +7707,18 @@ opening's persistence region fixes the opening as well. So the two are regions o
 assignment, linear inequalities in the speeds), and a cone is a union of persistence regions. Also, "about one case in
 five" in E217's Consequence is a description of the counts beside it (15,003 of 73,613, and so on), not a rate offered
 as a result.
+
+**Corrections found by the memory review (2026-10-01).** The `memory-drafter` agent's pass over E207–E217, checked here
+against the files:
+- **F7 in E217.** "`M` is time `[derived]`" re-derives E170 (log line 5469): *NB(M − ½) ⇒ `Cover8 M` ⇒
+  NB(8⌊7M/8⌋ + 7)*, where NB(X) means every set of at most seven readings is lonely at some `t` with `8·d_min·t ≤ X`.
+  E215 item 4 and E217 should have cited it. Reproduced: both `DoorFirstLap` refutations are band sets (spreads 7.469
+  and 7.467) needing `M = 2`, first lonely at `R = 2401/234` and `165/16`, above 7.
+- **A proxy in E215 item 2.** "The words appear 6, 9 and 10 times in E212, E213 and E214" counts the substring `cover`.
+  All six hits in E212 are the names `Cover8` and `wideStep8_of_cover8`, or gate prose. The count is not evidence of the
+  item-4 object. The object-level evidence is E213 M4-2 and E214 Part C's instruments (union of windows over a stretch
+  of instants), which E215 also cites. The count is withdrawn as evidence; the finding stands on those instruments.
+- Recorded in memory: `feedback_n8_cascade_is_the_oracle_2026_09_27.md`, section "Recurrence 2026-10-01", with an
+  interval check (delete the interval clause and see whether a place remains; rewrite in `u = d_min·t` and compare with
+  register rows; find the time bound an owed Prop implies) and over-application guards. Pointers were updated in
+  `MEMORY.md`, `lrc_INDEX.md`, `feedback_INDEX.md` and `feedback_n8_map_first_2026_09_30.md`.
