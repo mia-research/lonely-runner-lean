@@ -7119,3 +7119,41 @@ where the grid would join.
 - Why copy 1 is reached only by the late shapes: there the deviation bridged 36,062 grid gaps over 5,400 chains (about 7
   per chain) against 20,712 over 86,470 in the integer band (about 0.24): the late shapes are the arrangements whose
   deviations bridge the grid's gaps across the whole of copy 0.
+
+---
+
+## E209 — 2026-09-30 — review: do we need to prove it in Lean now
+
+**Map:** none — review at the owner's request; nothing built.
+
+**Owner:** *"Then review if we need to prove it in lean now"*.
+
+**What is already in Lean** (checked in the tree and the record):
+- **The band theorem is proved:** `LRC.BandCover.band_lonely` (`Spec/BandCoverN.lean` with `BandCoverCoreN` and six
+  `BandCoverTree*N` modules): seven real readings `1 ≤ s₁ ≤ … ≤ s₆` with `7 ≤ s₆ ≤ 9` are lonely; E124's certified cover
+  re-checked by Lean; 289 of 289 declarations `[propext, Classical.choice, Quot.sound]`; no `sorry`, no
+  `native_decide`; builds one module at a time (about 53 min, 7.9 GB peak) (E170, E172). **Untracked**, about 20 MB of
+  generated Lean, and **imported by nothing on a route to `LonelyRunnerAt8`**.
+- The route in the tree: `lonely_of_gridStep8` from **`Cover8 M`** (`Spec/RegimeSkeletonN.lean:71`, OWED): every set of at
+  most seven readings has its bound clear or a grid class with step at most `M`. The reductions around it (`SlowBlockN`,
+  `TwoBlockN`, `NestedBlocksN`, `GridPairLawN`, `lonely_eight_of_pairwise_laps`) are proved and tracked.
+
+**What E201–E208 add that Lean could take now:** only small derived facts (the split exists; inside the slow part's clear
+interval only the fast part obstructs, a corollary of `exists_block_iff_fast_lap`; the junction slack split, algebra).
+Everything else in those entries is a map `[VERIFIED — populations]`, not a theorem.
+
+**Assessment** `[reasoned]`:
+1. **The band: yes, bank it.** It is finished, axiom-clean, and it is exactly the region the cascade work isolates as
+   needing the slowest runner's second block (E201, E205, E207, E208). What is owed is not a proof but a decision: commit
+   the modules (size and build cost), then wire `band_lonely` into the route (the band part of any covering). The
+   commit needs the owner's go-ahead (generated files of this size; the build time).
+2. **The strips 9–12: no, not now.** Certified in Python (E125) and generable into Lean the same way, but the number of
+   cones grows with the spread (131, 168, 255, 308, …), so strip by strip cannot close the unbounded spread, and the owner
+   asked for derivation over enumeration (E119, E125, E126).
+3. **The general case: not yet.** There is no theorem to formalise: E125's inconsistency (the deviation cannot bridge
+   every grid gap in both copies) is now visible from the cascade's side (E208) but not derived. A derivation would be
+   uniform in spread and far smaller in Lean than certificates, and could replace the 20 MB cover.
+4. **A check owed before more Lean on the route: `Cover8 M` as written.** It asserts one step bound `M` for every set.
+   The steps needed grew with the spread on the populations (E157: up to 4 on Case B and Case C to 32, up to 7 on random
+   wide sets), and nothing on record shows a fixed `M` suffices. A `def … : Prop` is type-checked, never proved (F8,
+   `DoorFirstLap`), so whether a fixed `M` can hold must be checked before anything is built on it.
