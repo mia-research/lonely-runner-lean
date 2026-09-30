@@ -6663,3 +6663,22 @@ reading `d₀`, the subject is lonely at some `a/128` with `a·d₀ ≡ 1 (mod 8
   that chain of exits always reaches an empty slot, in the cascade's own objects.
 - Standing check: the owner's question is the check for F14 at the start of a step: does the step study what the cascade
   does, or a family it does not use?
+
+---
+
+## E197 — 2026-09-30 — owner: "We have a perfect oracle and you keep wanting to prove something else"
+
+**Map:** none — housekeeping (an owner ruling on direction; nothing run).
+
+**Owner:** *"This keeps on being an ongoing problem.  We want to prove n=8 via the framework.  We have a perfect oracle
+and you keep wanting to prove something else"*.
+
+**Recorded as a recurrence of F14 and of the oracle memory's failure.** Since the owner's direction of 2026-09-29 (*"It
+is about boundaries, isolation incidents that we have an oracle for"*), the entries that studied the cascade's own run
+were E174–E175 (where it lands, the misses perturbed through it) and E178–E183 (how its landing moves as a speed
+changes: pinches, reflection, relocation, restart). E185–E195 moved step by step onto other objects: the path route's
+window, the reduction proofs, our order-seven proof's multipliers, exhaustive certificate families. The cascade ended as
+an oracle check. The owner's own statements of the programme are on record: E74 (*"how and why speed changes deform the
+location of the isolation"*), E100 (*"there must be a mechanism that dictates where the isolation is pushed"*), E102
+(*"make sure we have the mechanism it uses and we will have proof"*), E111 (*"understanding exactly the proxy seems to be
+our work"*). Work resumes on the cascade's run itself, at the owner's direction.
