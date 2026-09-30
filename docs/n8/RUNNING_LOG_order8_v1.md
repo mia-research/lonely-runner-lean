@@ -6569,3 +6569,50 @@ level-0 cost `≥ 8` was enumerated: 109,453,344 normalised patterns `[VERIFIED 
 
 **Next:** (1) the exhaustive list at `v = 4` (residues mod 128, one multiple of 8 with `v = 4`); (2) the 128 odd-cofactor
 orbits mod 64 read by M3 (starting from the cores `{1,5,6,7,11,13}` and `{2,7,9,11,13,15}`); (3) map v3.
+
+---
+
+## E195 — 2026-09-30 — one multiple of 8, not of 64: no exception at modulus 128 or 256 (exhaustive over residues)
+
+**Map:** `MECHANISM_MAP_v2` · §4 Q5, Q6 (and Q4) · M2 (c) in form: a finite exhaustive statement that covers an infinite
+family; not proved in Lean · nearest §6 classes F5 (checked: the statement is not forced by the definitions; the same
+check at modulus 64 has 128 exceptional orbits) and F6 (the instant family is restricted and stated: `a/2^{W+3}`).
+
+**The statement** `[VERIFIED — exhaustive over residues mod 128 and mod 256; not in Lean]`: every set of seven positive
+readings with **exactly one multiple of 8, that multiple not divisible by 64, and an odd reading** is lonely at `1/8` at
+an instant `a/128` when the multiple's 2-adic valuation `V` is 3 or 4, and at an instant `a/256` (with `8 ∤ a`) when
+`V = 5`. This is the residual's `(1,6)` shape at `m = 1`.
+
+**How it was checked** (`LonelyRunner/experiments/nN/redo/crowded_m1_cover_v2.c`, `_v3.c`, summary
+`crowded_m1_cover_E195.out`; commit `8784e8e`). Derived before running: at `a/N` a reading's clearness depends only on its
+residue mod `N`, and multiplying every residue by a unit mod `N` permutes the instants, so one odd reading is normalised to
+1 and nothing is lost; the multiple `2^V·c` runs over every odd `c`; the other five readings run over every residue that is
+not a multiple of 8, with repeats. Counts:
+- `V = 3`, modulus 64: 21,846,048 patterns, **128** exceptional orbits (control: equals E194's odd-cofactor list);
+- `V = 3`, modulus 128: 1,283,115,904 patterns, **0**;
+- `V = 4`, modulus 128: 641,557,952 patterns, **0** (run twice, two programs);
+- `V = 5`, modulus 256: 19,650,718,080 patterns, **0**.
+
+**What closes it, read against our order-seven proof** `[derived; checked]`: not order seven's own instant family. At
+`V = 3` that family (a dilation `j/64` and a rotation `k/8`) is exactly the `a/64` grid, which leaves the 128 orbits. What
+closes every pattern is the **full set of multipliers one or two binary digits finer** (`a/128`, `a/256`): the freedom
+`BS_TRANSFER_v1` §3 measured as "the whole unit group mod `8M`", here made exhaustive at fixed moduli.
+
+**Consequence:**
+- Q5 `[VERIFIED — as above]`: the `(1,6)` shape with `m = 1` (a multiple of 8 not divisible by 64, whatever its size and
+  whatever the other six readings) is closed by three finite checks. This is the order-seven pattern of reduction,
+  residues and a finite verification, carried to order eight for this shape.
+- **Not closed:** the `(1,6)` shape with the multiple divisible by 64 (`V ≥ 6`): at a fixed modulus `2^{W+3}` the multiple
+  reads `0` once `V ≥ W + 3`, so the modulus must grow with `V` and the check grows with it; a statement uniform in `V`
+  needs structure this run does not supply (order seven's uniformity in `m` came from its dilation family being enough,
+  which is exactly what fails here at `V = 3`). The shapes `(2,5)`, `(3,4)`, `(4,3)` (two to four multiples of 8) are
+  not yet checked.
+- **Lean:** 2 × 10¹⁰ patterns is not a kernel `decide`. A proof needs the reason each pattern class has its instant (a
+  certificate per class, or a structural lemma); that reason is not yet read (M3 on the statement's own content: which
+  `a` works, and why one extra binary digit suffices).
+- Routes: this is on the case-list route (§17C), as a new case for the residual's `(1,6)` shape; it does not duplicate a
+  map v2 §9 route. It refines C3 and C5.
+
+**Next:** (1) why one extra binary digit suffices: for the 128 orbits at `V = 3`, which `a/128` is lonely and what it is
+in rung terms; (2) `V = 6, 7` at modulus 256 with the multiple's blocked instants included (feasible), to see where the
+fixed modulus stops; (3) the `(2,5)` shape.
