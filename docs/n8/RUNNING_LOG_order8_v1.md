@@ -6982,3 +6982,56 @@ against `F`'s structure (spread `σ_F`, tightest internal ratio: a crowd).
   interval long). Everywhere else the fast part's gap at the start is under one of its own laps.
 - Not established: why a non-crowded fast part's gap is under one lap, or how long a crowd's can be. Both are statements
   about the fast part alone (lower order).
+
+---
+
+## E206 — 2026-09-30 — review: are E197–E205 progressing, and have they drifted
+
+**Map:** none — review of E197–E205 at the owner's request; nothing run.
+
+**Owner:** *"Then lets review carefully if we are progressing and check against drift"*.
+
+**1. The checklist, step by step.** E201–E205 each studied the cascade's own run (its moves, split into the slow part's
+and the fast part's), each was designed before it was run, each recorded its checklist in the script, and every derived
+check held (0 violations throughout). No instant family the cascade does not visit (the F14 of E193–E195), no rate given
+as the answer, no count used as the argument, no first isolation, no other proof's machinery. Forced facts were marked
+as checks each time (E201's "some interval", E202's index criterion, E204's queue rule, E205's criterion). **No frame
+drift found.** One phrasing to correct: "almost always" (E201–E202 reports) reads as a rate; the content is the listed
+exceptions and their mechanism, and reports should say it that way.
+
+**2. Against the owner's plan (E199–E200).** Existence: settled (no first isolation used). AP/grid plus deviation: made
+concrete at the one instant every arrangement has, the bound (E202): the slow part is clear there, AP-like, and the only
+obstruction is what the deviation captured of the fast part. No gaps: the split applies to every arrangement (E201).
+The cascade as the map of the displacement: E202–E204 map it (captures, separations, carry-ins, the conveyor, the gap).
+**Not yet touched: the finiteness step** (the compact simplex of E199): the maps have not been connected to it.
+
+**3. What is new against the record.** The gapless split (re-split until the slow part's spread is at most 7); the
+landing's interval with exactly two routes past the first (E201, E205); the slow part's own move carrying the isolation to
+its second interval on every set tested (E154 generalised); the run from the bound as captures at slots 0/7, passages of
+AP-like clusters, a conveyor carried by the fast readings, ending at a gap in the arrivals (E202–E204); the fast part's
+gap at the start under one of its own laps except for crowds (E205).
+
+**4. What has not moved.** No forcing argument. Since E201 each step's consequence has come back to E151's statement
+(2026-09-27): the fast part's own isolation meets the slow part's clear interval early. Four maps (index, sweep, queue,
+spacing) reach it from four sides; the statement itself is unchanged. The maps are not wasted: they have **localised**
+the difficulty. But a fifth map of the same statement would be circling (F4-adjacent: new coordinates for the open
+statement).
+
+**5. Where the difficulty now lives** `[reasoned from E201–E205]`:
+- (i) a slow part near spread 7: a **wall of the split rule** (at spread exactly 7 the slow part's first interval
+  shrinks to a point). The split has freedom (any threshold below 7 is still gapless), so this route may be removable by
+  the choice of split, at the cost of a larger fast part. Untested.
+- (ii) a **crowded fast part** (six readings within ratio about 4, neighbours within 1.2): its own isolation is sparse and
+  its gap at the start runs to one to four of its laps. This is the region of E121's supremum shapes and E153's fine
+  shapes, and the one E154 read through the cascade (the slow runner's own move, then the crowd lands in the second
+  interval).
+
+**6. Drift risks ahead, named now.** (a) "The fast part's gap is under one of its laps" is a when-at-the-latest shape
+(F1) if made a lemma on its own; it may enter only as the content of a place statement (the landing lies in the slow
+part's first interval). (b) Every count here is scoped to its window (E114's range caveat): crowds reached four laps on
+these windows; nothing says how far they reach.
+
+**7. What would move closer** (for the owner to choose): test whether a stricter split removes route (i) (a design
+choice, applied to every arrangement, not a narrowing); then design the crowd's mechanism from the cascade (E154), which
+would leave one region, named by the readings, for the proof to handle; and connect that region to the finiteness step
+(where in the simplex the crowds lie).
