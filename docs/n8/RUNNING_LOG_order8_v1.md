@@ -6908,3 +6908,46 @@ if fast, from further back) during the last move. Longer chains are relays of si
 - Next design question, in the same terms: the configuration at the passage ends: where every cluster sits at each
   passage end in a chain, what keeps one at the entering edge while the relay continues, and what empties the slot at
   the last one; read on the long relays and the late shapes (including the slow part's own move, E154).
+
+---
+
+## E204 — 2026-09-30 — the passage-end configuration: a conveyor of arrivals, carried by the fast readings; the end is a gap in their arrivals
+
+**Map:** `CASCADE_DESIGN_v2` §2, §3–§4 · M2 (d), designed first · nearest §6 classes F5 (the queue rule is the cascade's rule
+restated: stated as such, edge cases counted) and F1 (avoided: move lengths and times-to-edge recorded per move, never
+argued monotone).
+
+**Owner:** *"yes, design the passage-end configuration first, then run it"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e204_queue_v1.py` docstring): at a move from `t` the readings outside the slot
+form the **entering queue**, each reaching the entering edge after `T_c = (7/8 − frac(c·t))/c`; the move lasts `D` (the
+setter's remaining stay). Forced: a queue reading is carried in iff `T_c < D` and it is still in the slot at the move's
+end (edge cases counted: a fast front passing straight through; a reading re-entering). Content: C1 whether the next
+setter is the previous move's queue front; C2 which readings set the moves; C3 the front at the landing.
+
+**Run** (exact) `[VERIFIED — these populations]`:
+- relays to 24 with at least three passages (16,785): C1 the next setter was the previous front in 44,580 moves, not in
+  15,464 (then several were carried in and the latest exit set the move); every hand-over was the front in 5,456 relays;
+  C2 the most frequent setter is the fastest reading in 5,217 relays (ranks 1–5 the rest), 3–6 distinct setters per
+  relay; C3 the front at the landing is a fast reading in most (rank 6: 6,264; 5: 3,735; 4: 2,926; …); edge cases: a front
+  passing through within the move 2,293 moves, a re-entry 6.
+- late fine band shapes (5,400): C1 79,338 against 21,997; all seven readings set moves in every relay; the most frequent
+  setter is rank 5 or 6 in 5,220; C3 the landing front is rank 1–2 in 3,740.
+- Case C (423 and 397 relays): C1 554 against 281, 484 against 277; the landing front mostly rank 4–6.
+
+**Reading** `[reasoned from the run]`: the relay is mostly a **conveyor**: the reading nearest the entering edge arrives
+before the current setter leaves and takes the next hand-over; the fast readings, which come round most often, carry
+most of it. It ends at a move where the setter leaves before the front arrives: a **gap in the arrivals**. At the
+landing the gap is where the fast readings are all clear (the fast part's own isolation) while the slow setter has just
+left (the slow part clear).
+
+**Consequence:**
+- How the relay ends is now mapped in the cascade's objects (queue, front, carry-in, the gap). The gap is an instant where
+  the fast part is isolated on its own and the slow part is clear: **the same statement as E151/E201 reached from the
+  relay's side**: the fast part's own isolation intervals (lower order, native) must meet the slow part's clear intervals
+  early. Three design steps (E202–E204) converge on it.
+- What is now visible about why: the slow part's intervals are long (AP-like), the fast part's isolation intervals are
+  fine-grained at the slow part's scale, so they meet early; they fail to meet early only where the slow part is near
+  spread 7 (short intervals, E202) or the fast part is a crowd whose own isolation intervals are sparse (the late shapes).
+- Next design question: the fast part's own isolation intervals, placed against the slow part's intervals: their spacing
+  at the slow part's scale, read from the fast part's own structure (its own slow/fast split, recursively).
