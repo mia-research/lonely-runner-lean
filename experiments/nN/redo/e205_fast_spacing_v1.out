@@ -1,0 +1,80 @@
+E205 (2026-09-30): the fast part's isolation spacing, against the slow part's intervals.
+
+Owner: "yes, design the fast part's isolation spacing first, then run it / Then lets review carefully if we are
+progressing and check against drift".
+
+DESIGN (units R = 8 d_min t; P the slow part of spread sigma <= 7, F the fast part; E201's split)
+  Objects: F's own ISOLATION INTERVALS (F alone lonely at 1/8: the fast part's own isolation events, which exist by the
+  native lower order); their GAPS; F's natural unit, one lap of its slowest reading, 8 d_min / f_1 in R.
+  FORCED (checks, M4): P is clear on its first interval I0 = [1, 7/sigma], so the landing is in I0 iff F has an isolation
+  point in I0; the gap of F containing R = 1 is exactly F's push from the bound (E202).
+  CONTENT (recorded, not assumed): the spacing of F's isolation across I0 and across P's first period, in F-laps, read
+  against F's own structure: its spread sigma_F = f_top / f_1 and its tightest internal ratio (a CROWD: readings close in
+  ratio, moving nearly together).  The hypothesis to test: a spread F has short gaps (few F-laps); a crowded F blocks the
+  slot for long stretches (sparse isolation), which is what sends the late shapes to P's second interval.
+  Checklist: the objects are the fast part's own isolation events and the slow part's intervals; gaps recorded, never
+  bounded as the argument; no rate as the answer; no instant family; no first isolation.
+RUN (exact).  Per set with a fast part: F's isolation intervals over [1, 9] and the landing's interval; the largest gap
+of F inside [1, max(7/sigma, the landing)] in F-laps; F's number of isolation intervals inside I0; sigma_F and F's
+tightest ratio; the index (E201).  Checks: index 0 iff F has an isolation point in I0 (forced).
+
+
+== every 7-set of readings in 1..24: 210335 sets with a fast part ==
+  CHECK index 0 iff F has an isolation point in the slow part's first interval (forced): 0 violations
+  index: {0: 210104, 1: 227, 2: 4}
+  F's gap at the start (F-laps), index 0 / later:
+    index 0: {'<= 0': 64967, '<= 0.25': 110463, '<= 0.5': 26288, '<= 1': 8123, '<= 2': 260, '<= 4': 3}
+    later: {'<= 0.25': 187, '<= 0.5': 42, '<= 1': 2}
+  F's number of isolation intervals inside the first interval (index-0 sets): {1: 4864, 2: 7431, 3: 13209, 4: 18638, 5: 20972, 6: 21032, 7: 17621, 8: 17751, 9: 9662, 10: 78924}
+  F's spread sigma_F, index 0 / later:
+    index 0: {'<= 1.5': 14593, '<= 2': 26440, '<= 20': 12066, '<= 3': 58419, '<= 4': 48717, '<= 7': 49869}
+    later: {'<= 1.5': 205, '<= 2': 26}
+  F's tightest internal ratio, index 0 / later:
+    index 0: {'<= 1.05': 47770, '<= 1.1': 96741, '<= 1.2': 54089, '<= 1.5': 9926, '<= 2': 194, '> 2': 2}
+    later: {'<= 1.05': 50, '<= 1.1': 65, '<= 1.2': 59, '<= 1.5': 43, '<= 2': 5}
+  the slow part's spread sigma of the later landings: {'7': 210, '6': 19, '5': 2}
+
+== late fine band shapes: 5400 sets with a fast part ==
+  CHECK index 0 iff F has an isolation point in the slow part's first interval (forced): 0 violations
+  index: {1: 5400}
+  F's gap at the start (F-laps), index 0 / later:
+    index 0: {}
+    later: {'<= 2': 2780, '<= 4': 2620}
+  F's number of isolation intervals inside the first interval (index-0 sets): {}
+  F's spread sigma_F, index 0 / later:
+    index 0: {}
+    later: {'<= 3': 2906, '<= 4': 2494}
+  F's tightest internal ratio, index 0 / later:
+    index 0: {}
+    later: {'<= 1.1': 664, '<= 1.2': 4736}
+  the slow part's spread sigma of the later landings: {'1': 5400}
+
+== Case C, readings <= 200: 1000 sets with a fast part ==
+  CHECK index 0 iff F has an isolation point in the slow part's first interval (forced): 0 violations
+  index: {0: 994, 1: 6}
+  F's gap at the start (F-laps), index 0 / later:
+    index 0: {'<= 0': 238, '<= 0.25': 583, '<= 0.5': 150, '<= 1': 22, '<= 2': 1}
+    later: {'<= 0.25': 5, '<= 0.5': 1}
+  F's number of isolation intervals inside the first interval (index-0 sets): {1: 8, 2: 9, 3: 11, 4: 14, 5: 13, 6: 11, 7: 18, 8: 13, 9: 10, 10: 887}
+  F's spread sigma_F, index 0 / later:
+    index 0: {'<= 1.5': 17, '<= 2': 76, '<= 20': 247, '<= 3': 184, '<= 4': 147, '<= 7': 305, '> 20': 18}
+    later: {'<= 1.5': 1, '<= 2': 2, '<= 3': 3}
+  F's tightest internal ratio, index 0 / later:
+    index 0: {'<= 1.05': 487, '<= 1.1': 274, '<= 1.2': 183, '<= 1.5': 48, '<= 2': 2}
+    later: {'<= 1.05': 1, '<= 1.1': 3, '<= 1.2': 2}
+  the slow part's spread sigma of the later landings: {'7': 4, '20/3': 1, '34/5': 1}
+
+== Case C, readings <= 5,000: 1000 sets with a fast part ==
+  CHECK index 0 iff F has an isolation point in the slow part's first interval (forced): 0 violations
+  index: {0: 997, 1: 3}
+  F's gap at the start (F-laps), index 0 / later:
+    index 0: {'<= 0': 225, '<= 0.25': 598, '<= 0.5': 148, '<= 1': 24, '<= 2': 2}
+    later: {'<= 0.25': 1, '<= 0.5': 2}
+  F's number of isolation intervals inside the first interval (index-0 sets): {1: 7, 2: 12, 3: 9, 4: 11, 5: 22, 6: 15, 7: 14, 8: 12, 9: 10, 10: 885}
+  F's spread sigma_F, index 0 / later:
+    index 0: {'<= 1.5': 26, '<= 2': 62, '<= 20': 227, '<= 3': 190, '<= 4': 158, '<= 7': 306, '> 20': 28}
+    later: {'<= 1.5': 3}
+  F's tightest internal ratio, index 0 / later:
+    index 0: {'<= 1.05': 545, '<= 1.1': 245, '<= 1.2': 161, '<= 1.5': 45, '<= 2': 1}
+    later: {'<= 1.05': 2, '<= 1.2': 1}
+  the slow part's spread sigma of the later landings: {'491/73': 1, '538/77': 1, '475/69': 1}
