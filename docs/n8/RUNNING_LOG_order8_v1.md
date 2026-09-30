@@ -6770,3 +6770,48 @@ first: *"Think about it, we want to develop our proof so there is no gaps."*
   structure, and every proof obligation is of one kind: where the deviation pushes the isolation, shown by the cascade.
   The one obligation left is that the push never loses it: at each level of the split the fast part's isolation falls
   inside the slow part's block (E151), and captures separate without an endless chain (E158).
+
+---
+
+## E201 — 2026-09-30 — E151 in the owner's form: designed, run, refined once; where the fast part's push lands in the slow part
+
+**Map:** `CASCADE_DESIGN_v2` §3–§4, §7; E200's gapless structure · M2 (d), a map run with the statement named in advance
+as a place (the slow part's clear interval) · nearest §6 classes F5 (checked: the "some interval" form is forced, the
+content is the index) and F14 (avoided: the object is the cascade's own run, split into its slow-part and fast-part
+moves).
+
+**Owner:** *"yes, design E151's statement in that form first and then run it"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e151_block_v1.py` docstring): split at the largest consecutive ratio and
+re-split the lower part until its spread is at most 7 (always stops): every arrangement gets a slow part `P` (AP-like at
+`d_min`'s scale) and a fast part `F`. Derived: while `P` is clear, only `F` can be in the subject's slot, so every
+cascade move made there is `F`'s own push (D1). Statement v1: the cascade lands in `P`'s first same-lap block, or, after
+a move set by `P`, in its second.
+
+**Run v1** (exact): every set `≤ 24` (346,104): first block 345,873, no block 231; late fine shapes (5,400): second
+block 5,400, each after a move set by `P`; Case C (1,000 + 1,000): first 994 and 997, no block 6 and 3. Checks: landing
+lonely, D1: 0 violations in all four.
+
+**The three answers on v1's 240 exceptions** `[VERIFIED — these 240]`: (i) every one has `P` of spread 7 or just under
+(6.7–7), so its same-lap block is a point or tiny; (ii) `P`'s top reading passes to its next lap while the rest of `P` is
+on lap 0, and the landing follows that top reading's own exit; (iii) the same mechanism as the late shapes: the slow
+part sets a move itself. So the right object is **`P`'s own clear intervals** (its isolation intervals, bounded by its
+own exits and entries), not only its same-lap blocks.
+
+**Run v2, refined statement** (`e151_block_v2.{py,out}`): the cascade lands in `P`'s first clear interval, or, after a
+move set by `P`, in its second. `[VERIFIED — these populations]`:
+- every set `≤ 24`: first 345,873; second 227 (all 227 after a move set by `P`); **third 4**;
+- late fine shapes: second 5,400 (all after a move set by `P`);
+- Case C `≤ 200`: first 994, second 6 (all after `P`'s move); Case C `≤ 5,000`: first 997, second 3 (likewise).
+The 4: `(1,2,4,6,14,15,16)`, `(1,2,5,7,18,23,24)`, `(1,2,5,7,19,23,24)`, `(1,3,4,5,6,7,24)`; each `P` has spread 6–7, and
+the chain alternates moves of `P`'s own members (a sweep through `P`) with `F`'s before landing in `P`'s third interval.
+
+**Consequence:**
+- **Forced part (F5):** "the landing lies in some clear interval of `P`" holds by definition (at the landing everyone is
+  clear). The content is the **index** and **who moves between intervals**: `F`'s push fits in `P`'s first interval in
+  almost every set; otherwise `P` itself sets the move to its next interval, and `F` lands there. A proof needs the reason
+  `F`'s push fits early, in the cascade's terms.
+- **What decides the index** is the next design question: `F`'s push (its own chain from the bound) against the length of
+  `P`'s intervals. Short intervals come from `P` near spread 7 (the four) or `P` a single slowest reading with a crowded
+  six above it (the late shapes, E154).
+- No first-isolation claim is used: the statement is where the cascade lands.
