@@ -7198,3 +7198,147 @@ Lean definitions, not from E165's script; pairwise laps decided as 1-D Helly, as
   at most six readings (order seven, native, proved); spread 7 to 9 (`band_lonely`, proved); and, owed, **grid step at
   least `m` (`M = 1`) for seven readings of spread above 9**. That owed statement is strictly smaller than `Cover8 2`
   and holds on every population here. Building it means a new theorem and a new OWED entry in the Spec gate's register.
+
+---
+
+## E211 — 2026-10-01 — design: the band route (`band_lonely` wired in; what stays owed is `WideStep8`)
+
+**Owner:** *"yes, design the route first, then build it in lean"*.
+
+**Map:** v2; §5 (the owed forms of the obligation) and §9 (M7). This step draws the consequence of `band_lonely`
+(E169, committed `388793f`), a class (c) result uniform over every real band shape. The wiring itself is not a proof step.
+Nearest §6 classes: F13 (a consequence not drawn; this step is the remedy for `band_lonely`); F4 (a restatement taken for
+a step; not this, since the new owed statement is implied by `Cover8 M` and is not equivalent to the obligation); F8 (a
+false `def … : Prop`; guarded by the check below, run before it is registered).
+
+**Correction to E210's Consequence line.** It said the owed statement for spread above 9 at `M = 1` is "strictly smaller
+than `Cover8 2`". That is wrong: it has a smaller domain but a tighter step (`m`, not `m/2`), so neither implies the other.
+The right comparison is at equal `M`: the restricted statement `WideStep8 M` below is implied by `Cover8 M` (a Lean lemma
+below), and the populations show `M = 1` suffices on it while `Cover8` needs `M = 2`.
+
+**The route** (seven readings; least reading `m`; greatest `W`):
+
+| case | discharge | status |
+|---|---|---|
+| at most six readings | native order seven at `1/7` (`lonely_eight_of_card_le_six`) | proved |
+| `W ≤ 7m` | the bound `1/(8m)` (R1, `lonely_eight_of_spread`) | proved |
+| `7m < W ≤ 9m` | `band_lonely` with `sᵢ = dᵢ/m`, instant `t/m` | proved; wiring owed (this step) |
+| `9m < W` | `WideStep8 M`: `GridStep8 S m M` | **OWED** |
+
+**Forced before anything runs (M4):**
+- F-a. The four cases are exhaustive (trichotomy on `W` against `7m` and `9m`, after the split on the number of readings).
+- F-b. The band case needs only the order of the readings: `1 ≤ s₁ ≤ … ≤ s₆`, `7 ≤ s₆ ≤ 9` is `band_lonely`'s hypothesis
+  verbatim, and dividing by `m` rescales time (the AP is scale invariant).
+- F-c. `Cover8 M → WideStep8 M` (a restriction of the domain).
+- F-d. **The place `WideStep8 1` names.** In its grid-class disjunct the slowest reading `m` sits at grid point `n` with
+  `n·e < mm·m + e ≤ 2e`, so `n = 1`, `c·n ≤ 7` and its lap is 0. The 1-D Helly instant (the largest left end of the
+  assigned clear blocks) therefore lies in `m`'s lap-0 block: `1 ≤ 8mt ≤ 7`, the slowest reading's first clear stretch.
+  The bound disjunct is `8mt = 1`. So the owed statement says: *above spread 9, the subject is isolated inside the slowest
+  reading's first clear stretch, at a grid-class instant of a grid through one of its own readings with step at least
+  `m`*. That is a place given by the readings. It says nothing about the cascade's landing, and none is claimed.
+
+**Checklist.** Objects: the readings' order, spread (the gap simplex's own coordinate), laps and clear blocks, the grid
+through a reading (AP/grid plus deviation). No density, rate, coverage, instant family or first isolation. "First clear
+stretch" is the slowest reading's lap-0 block, a fixed interval, not a first isolation.
+
+**Check before registering** (F8; CLAUDE.md §3): `WideStep8 1` as written, on seven-reading sets of spread above 9:
+exhaustive small ranges, random wide sets, and fine shapes just above 9 (the edge next to the band, where the band needed
+the second block). Every set failing `M ≤ 1` is listed.
+
+**Build.** A new module `LRC/Spec/BandRouteN.lean` (namespace `LRC.BandRoute`), so as not to touch the uncommitted edits
+of another session in `RegimeSkeletonN.lean` and `TwoBlockN.lean`; it uses only committed declarations.
+- `lonely8_of_band`: seven readings with `7m < W ≤ 9m` are lonely.
+- `WideStep8 M` (`def … : Prop`, registered OWED in `scripts/nN/spec_gate.sh`).
+- `wideStep8_of_cover8 : Cover8 M → WideStep8 M`.
+- `lonelyRunnerAt8_of_wideStep8 M : WideStep8 M → LonelyRunnerAt8`.
+- `gridStep8_one_first_stretch`: F-d in Lean.
+Done-check: build the explicit target, `#print axioms` on each declaration, the hygiene scan, and the gate's register
+check for the new `Prop`.
+
+---
+
+## E212 — 2026-10-01 — the band route built: `LonelyRunnerAt8` from `band_lonely` and `WideStep8 M`; `WideStep8 1` checked, including an adversarial walk
+
+**Map:** v2; §5 and §9 (M7 consequence of `band_lonely`), as designed in E211. The checks are class (d) (derivation
+checks and a check of an owed statement's truth, F8); the Lean is wiring plus one derived place (F-d). Nearest §6: F5
+(a forced fact reported as a finding), which hit this entry twice and is recorded below.
+
+**Built** (`LonelyRunner/LRC/Spec/BandRouteN.lean`, namespace `LRC.BandRoute`) `[PROVED — Lean]`:
+- `lonely8_of_band`: seven readings with least `m` and greatest in `(7m, 9m]` are lonely (order the readings, divide by
+  `m`, `band_lonely`, rescale by `1/m`).
+- `WideStep8 M` (`def … : Prop`): seven readings, least `m`, some reading above `9m` → `GridStep8 S m M`. Registered
+  **OWED** in `scripts/nN/spec_gate.sh`.
+- `wideStep8_of_cover8 : Cover8 M → WideStep8 M`.
+- **`lonelyRunnerAt8_of_wideStep8 M : WideStep8 M → LonelyRunnerAt8`**, for every `M`. Cases: at most six readings (order
+  seven), `W ≤ 7m` (R1), `7m < W ≤ 9m` (`lonely8_of_band`), `9m < W` (`WideStep8 M`).
+- `gridStep8_one_first_stretch`: `GridStep8 S m 1` gives a lonely `t` with `1 ≤ 8mt ≤ 7` (E211 F-d).
+
+Evidence:
+- `lake build LonelyRunner.LRC.Spec.BandRouteN`: 8,352 jobs, exit 0 (`experiments/nN/band_route_build_v1.log`). The only
+  warnings in the module are line length. It was rebuilt, exit 0, after a docstring-only edit made after the gate run.
+- `#print axioms` on all four theorems: `[propext, Classical.choice, Quot.sound]` (`experiments/nN/band_route_axioms_v1.out`).
+- Spec gate PASS (`experiments/nN/band_route_spec_gate_v1.out`): 143 modules, no `sorry`, hygiene clean, 2,413 of 2,413
+  declarations axiom-clean, 88 Prop-valued defs all registered, `LRC.BandRoute.WideStep8` on the OWED list, tree digest
+  `21392f5945c1`. The gate builds every module on disk, so the pass covers other sessions' uncommitted modules as they
+  stood.
+- Only committed declarations are used. `RegimeSkeletonN.lean` and `TwoBlockN.lean` carry another session's uncommitted
+  edits and are untouched; every declaration used was confirmed present at `HEAD`.
+
+**`WideStep8 1` checked as written** (`experiments/nN/redo/wide_step_check_v1.{py,out}`, `_v2.{py,out}`; `least_M` from
+E210's independent implementation) `[VERIFIED — these populations]`. Least `M` (0 = the bound is clear):
+
+| population (seven readings, spread above 9) | sets | 0 | 1 | ≥ 2 |
+|---|---|---|---|---|
+| every 7-set of readings ≤ 20 | 37,660 | 15,658 | 22,002 | 0 |
+| every tenth 7-set ≤ 24 | 16,767 | 6,451 | 10,316 | 0 |
+| random 7-sets ≤ 2,000 | 4,000 | 1,016 | 2,984 | 0 |
+| fine shapes (least 1,000), spread (9, 9.5] | 4,000 | 1,016 | 2,984 | 0 |
+| fine shapes, spread (9.5, 12] | 3,000 | 971 | 2,029 | 0 |
+| six-crowd shapes, top just above 9 | 200 | 0 | 200 | 0 |
+| v2: late band shapes, one middle reading moved to (9m, 9.5m] | 67,407 | 0 | 67,407 | 0 |
+| v2: fine shapes, spread (9, 9.2], a reading in (7m, 9m) | 6,000 | 0 | 6,000 | 0 |
+
+- **F5, first instance.** v1's "edge" population (each late shape's *top* reading moved above `9m`: 27,000 sets, all 0)
+  is bound-clear by construction: the other six readings lie in `[m, 7m]` and the moved one in `[9m, 15m]`. It tested
+  nothing and is not in the table. v2 replaces it with sets that keep a reading blocked at the bound (checked: 0
+  bound-clear in both v2 populations).
+- The identical counts of rows three and four were checked element by element: the populations share no set, 1,494 sets
+  differ in least `M`, and the totals coincide.
+
+**Adversarial walk** (`wide_first_stretch_walk_v1.{py,out}`). By `gridStep8_one_first_stretch`, a wide set with no clear
+`R = 8mt` in `[1, 7]` refutes `WideStep8 1`. This walk is the one that found the late shapes inside the band: 300 walks
+of 4,000 steps, spread `(9, 12]`, keeping moves that do not widen the widest clear interval in `[1, 7]`.
+- **No wide set with an empty first stretch was reached.**
+- The tightest set is `(27720, 85358, 117495, 140959, 159149, 200880, 258489)` (spread 9.325). Its first stretch is two
+  isolated points, `R = 1320/373` and `2200/373` (`wide_first_stretch_tight_v1.out`). Both points are held by one pair
+  in exact ratio `258489/117495 = 11/5`, in opposite orientations: at `1320/373` the pair reads 15 and 33 (entering edge;
+  exit edge), and at `2200/373` it reads 25 and 55 (exit edge; entering edge). Moving the ratio off `11/5` opens one
+  point while the other closes. That is E125's pair law at one exact mirror resonance. Every other walk ends with an
+  interval of width at least about `10⁻⁸`.
+- **F5, second instance.** `wide_first_stretch_pins_v1.out` reports "one pair at both ends" for the 25 tightest sets.
+  That is forced: every clear interval opens at some reading's exit and closes at another's entry. Only the single-point
+  set's two-point mirror is unforced.
+
+**Consequence:**
+- **The owed statement shrinks** (§5 routes) `[PROVED]`. `LonelyRunnerAt8` now follows from `WideStep8 M`, which
+  `Cover8 M` implies at every `M`. Seven readings of spread at most 9 are proved (orders three to seven, R1, the band).
+  What is owed is seven readings of spread above 9, and the populations say `M = 1` suffices there. `Cover8` stays
+  registered as a sufficient route; neither statement is refuted.
+- **The owed statement names a place** (place test) `[PROVED]` for `M = 1`. A wide set in `WideStep8 1` is isolated inside
+  the slowest reading's first clear stretch, at a grid-class instant of a grid through one of its own readings with step
+  at least `m`. It says nothing about the cascade's landing.
+- **A new map question for v3 (Q7)** `[reasoned]`: why the slowest reading's first clear stretch can close when the spread
+  is 7 to 9 (the late shapes) and did not close above 9 in any population or walk. The lead is the tight set's mirror pair
+  `11/5`, E125's pair law at an exact resonance. Its three answers (M3) are not given: status "not understood".
+- **Where else** `[reasoned]`: the same wiring would take any further certified strip (E125's `[9,10]`, `[10,11]`,
+  `[11,12]`, certified in Python) off the owed domain. The owner stopped strip enumeration in E125 (*"use the cascade to
+  find why the categories exhaust, not enumeration"*), so this is not proposed.
+- **Standing questions:** E210's comparison with `Cover8 2` is corrected (E211). None other found (grep of v21 §17 and the
+  map's §4 for "owed", "standing question", "author's ruling").
+- Owed to map v3: C7's fix; E192–E212; Q7; the two F5 instances here.
+
+**Note on E212's standing-questions line.** That line was written before the grep ran; the grep was run afterwards. v21
+§17G lists two pending author's rulings. `EightResidual`'s is answered by C1. The other is first-lap clearance (§15I;
+provisional since 2026-09-25): every reading on lap 0 at a flank opening `A/(8e)`. `WideStep8 1` does not use it and does
+not settle it, because only the slowest reading is on lap 0 there and the others may be on any lap. So the line stands
+as written. The two uses of "first" name different objects.
