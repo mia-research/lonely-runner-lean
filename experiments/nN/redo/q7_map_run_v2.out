@@ -1,0 +1,14 @@
+E214 (2026-10-01): Part B of the Q7 map run with the old landing interval's fate split out.
+
+v1's classes n and m (`q7_map_run_v1.out`) mixed two cases: the move COVERS the interval holding the old landing, or it
+OPENS a new interval earlier while the old one survives (the landing is the least clear point, so it moves either way).
+Here every move whose landing leaves the old interval is split by: survives = some clear interval after the move meets
+the old one.  Recorded per class and fate; for covered cases, where the landing goes (the same pair's mirror junction m;
+an interval already clear e; a place the move newly uncovered n).  Same 300 final sets and moves as v1; same checks.
+
+CHECK C1 and M4-1: 0 failures
+  old interval covered | e: 106
+  old interval covered | m: 140
+  old interval covered | n: 15
+  old interval survives, an earlier one opened | m: 1
+  old interval survives, an earlier one opened | n: 122

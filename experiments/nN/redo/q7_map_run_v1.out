@@ -1,0 +1,142 @@
+E213/E214 (2026-10-01): the Q7 map run.  Why the slowest reading's first clear stretch closes only in the band.
+
+Owner: "yes, design the Q7 map run first, then run it".  Design: log E213.  Units: readings s = d/m (m the least), R = 8mt.
+A reading is in the way while its position s*R mod 8 lies in (-1, 1) (strict; boundary points clear, BSM).  Its exit on
+lap k is R = (8k+1)/s, its entry (8k-1)/s.  The first clear stretch is R in [1, 7].
+
+Parts:
+  A. The tight wide set (E212) perturbed through the exact cascade, one reading at a time (least fixed as the scale),
+     delta in {+-1, +-3, +-10, +-30, +-100, +-300, +-1000} at scale 27,720: landing R, setter, queue front (E204), in [1,7].
+     The grid/deviation split (E208) of its two tight junctions on the slowest reading's grid.
+  B. The 300 final sets of E212's wide walk: every such move; where the cascade lands next, against the interval holding
+     the landing before the move: s same interval; e another interval already clear; n a place newly uncovered by the
+     move; m n bounded by the old landing's pair (by rank) in mirror orientation; x beyond 7.  Every x listed.
+  C. The band's closures: the same walk with spread in (7, 9]; at each step that empties the first stretch: the moved
+     reading, the slivers its move uncovered in [1, 7] (M4-2), which readings cover each sliver afterwards and on which
+     lap, and whether a coverer bounded an interval that closed.
+Checks (the only pass conditions): C1, the cascade's landing equals the least clear point from `clear_set` (no cascade);
+M4-1, that point is R = 1 or an exit; M4-3, the mirror algebra at the tight set.
+
+
+== A. the tight wide set (27720, 85358, 117495, 140959, 159149, 200880, 258489), spread 9.3250 ==
+  first stretch: [('1320/373', '1320/373'), ('2200/373', '2200/373')]
+  CHECK M4-3: ratio 11/5; 33*25 == 15*55: True; s_b*15 == s_a*33: True; s_a*55 == s_b*25: True
+  junction b exits at 33, a enters at 15: gap 0 = grid 3 + deviation -3 (grid readings 9, 4)
+  junction a exits at 25, b enters at 55: gap 0 = grid -5 + deviation 5 (grid readings 4, 9)
+  landing R 1320/373 (3.53887), setter (258489,), queue front 117495; C1 True; M4-1 True
+  perturbations (rank moved, delta): landing R, in [1,7], setter, front, clear intervals in [1,7]
+    rank 1    +1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1    +3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1   +10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1   +30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1  +100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1  +300: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1 +1000: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1    -1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1    -3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1   -10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1   -30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1  -100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1  -300: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 1 -1000: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0127
+    rank 2    +1: R 5.89807 in setter (117496,) front 258489 | 1 intervals, widest 5.02e-05
+    rank 2    +3: R 5.89797 in setter (117498,) front 258489 | 1 intervals, widest 0.000151
+    rank 2   +10: R 5.89762 in setter (117505,) front 258489 | 1 intervals, widest 0.000502
+    rank 2   +30: R 5.89662 in setter (117525,) front 258489 | 1 intervals, widest 0.00151
+    rank 2  +100: R 5.89311 in setter (117595,) front 258489 | 1 intervals, widest 0.00502
+    rank 2  +300: R 4.00051 in setter (117795,) front 159149 | 2 intervals, widest 0.015
+    rank 2 +1000: R 3.97688 in setter (118495,) front 159149 | 2 intervals, widest 0.0498
+    rank 2    -1: R 3.53887 in setter (258489,) front 117494 | 1 intervals, widest 3.01e-05
+    rank 2    -3: R 3.53887 in setter (258489,) front 117492 | 1 intervals, widest 9.04e-05
+    rank 2   -10: R 3.53887 in setter (258489,) front 117485 | 1 intervals, widest 0.000301
+    rank 2   -30: R 3.53887 in setter (258489,) front 117465 | 1 intervals, widest 0.000904
+    rank 2  -100: R 3.53887 in setter (258489,) front 117395 | 1 intervals, widest 0.00301
+    rank 2  -300: R 3.53887 in setter (258489,) front 117195 | 1 intervals, widest 0.00906
+    rank 2 -1000: R 3.53887 in setter (258489,) front 116495 | 1 intervals, widest 0.0304
+    rank 3    +1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3    +3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3   +10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3   +30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3  +100: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.000717
+    rank 3  +300: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0099
+    rank 3 +1000: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0418
+    rank 3    -1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3    -3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3   -10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3   -30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3  -100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3  -300: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 3 -1000: R 2.96100 in setter (159149,) front 139959 | 5 intervals, widest 0.0272
+    rank 4    +1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4    +3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4   +10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4   +30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4  +100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4  +300: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4 +1000: R 2.94251 in setter (160149,) front 140959 | 3 intervals, widest 0.00728
+    rank 4    -1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4    -3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4   -10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4   -30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4  -100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 4  -300: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0029
+    rank 4 -1000: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0207
+    rank 5    +1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5    +3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5   +10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5   +30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5  +100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5  +300: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.00447
+    rank 5 +1000: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0279
+    rank 5    -1: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5    -3: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5   -10: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5   -30: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5  -100: R 3.53887 in setter (258489,) front 117495 | 2 intervals, widest 0
+    rank 5  -300: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.00582
+    rank 5 -1000: R 3.53887 in setter (258489,) front 117495 | 3 intervals, widest 0.0286
+    rank 6    +1: R 3.53886 in setter (258490,) front 117495 | 1 intervals, widest 1.37e-05
+    rank 6    +3: R 3.53883 in setter (258492,) front 117495 | 1 intervals, widest 4.11e-05
+    rank 6   +10: R 3.53874 in setter (258499,) front 117495 | 1 intervals, widest 0.000137
+    rank 6   +30: R 3.53846 in setter (258519,) front 117495 | 1 intervals, widest 0.000411
+    rank 6  +100: R 3.53751 in setter (258589,) front 117495 | 1 intervals, widest 0.00137
+    rank 6  +300: R 3.53477 in setter (258789,) front 117495 | 1 intervals, widest 0.0041
+    rank 6 +1000: R 3.52524 in setter (259489,) front 117495 | 2 intervals, widest 0.0136
+    rank 6    -1: R 5.89812 in setter (117495,) front 258488 | 1 intervals, widest 2.28e-05
+    rank 6    -3: R 5.89812 in setter (117495,) front 258486 | 1 intervals, widest 6.85e-05
+    rank 6   -10: R 5.89812 in setter (117495,) front 258479 | 1 intervals, widest 0.000228
+    rank 6   -30: R 5.89812 in setter (117495,) front 258459 | 1 intervals, widest 0.000685
+    rank 6  -100: R 5.89812 in setter (117495,) front 258389 | 1 intervals, widest 0.00228
+    rank 6  -300: R 5.89812 in setter (117495,) front 258189 | 2 intervals, widest 0.00685
+    rank 6 -1000: R 5.89812 in setter (117495,) front 257489 | 2 intervals, widest 0.0229
+  CHECK C1 and M4-1 over part A: 0 failures
+
+== B. the 300 final sets of E212's wide walk, every move ==
+  CHECK C1 and M4-1 over part B: 0 failures
+  classes over all moves: {'s': 24622, 'n': 137, 'm': 141, 'skip': 194, 'e': 106}
+  by (moved reading bounds the old landing interval, class): {(False, 'e'): 3, (False, 'n'): 99, (False, 's'): 17677, (True, 'e'): 103, (True, 'm'): 141, (True, 'n'): 38, (True, 's'): 6945}
+  newly uncovered landings, by who bounds them: {('n', 'moved reading exits at the new left end', 'another enters there'): 58, ('m', 'another reading exits there', 'moved reading enters at the new right end'): 72, ('n', 'another reading exits there', 'moved reading enters at the new right end'): 74, ('m', 'moved reading exits at the new left end', 'another enters there'): 69, ('n', 'another reading exits there', 'another enters there'): 5}
+  x (first stretch emptied by one move): 0
+  clear intervals in [1,7] at the final sets: {1: 10, 2: 4, 3: 4, 4: 30, 5: 40, 6: 212}
+
+== C. the band's closures: 32 walks of 600 emptied the first stretch ==
+  CHECK C1 and M4-1 at the closed sets: 0 failures
+  the moved reading: rank {1: 2, 2: 2, 3: 5, 4: 7, 5: 12, 6: 4}; direction {'slower': 16, 'faster': 16}
+  clear intervals in [1,7] just before the closing move: {1: 32}
+  the moved reading bounded a closing interval: {True: 22, False: 10}
+  landing after the closing move (R): {9: 28, 10: 4}
+  slivers uncovered by the closing move inside [1,7]: {2: 3, 3: 4, 4: 11, 5: 8, 6: 6}
+  slivers covered by a reading that bounded a closing interval: {False: 104, True: 34}
+  number of readings covering a sliver: {1: 104, 2: 33, 3: 1}
+    (27720, 106089, 130748, 148043, 163710, 182796, 233812) spread 8.4348 move rank 2 slower (130748 -> 130647); closed [('228690/32687', '7', ((130748,), (27720,)))]; slivers [(1.48408, 1.48522, [(148043, 1), (163710, 1)]), (3.18016, 3.18262, [(148043, 2)]), (4.87625, 4.88002, [(182796, 4)]), (6.57234, 6.57742, [(233812, 7)])]; lands R 9.1749
+    (27720, 73739, 104360, 133508, 168624, 191131, 240167) spread 8.6640 move rank 5 slower (191131 -> 190703); closed [('27720/11243', '5775/2342', ((191131,), (168624,)))]; slivers [(1.01522, 1.0175, [(240167, 1)]), (2.17547, 2.18035, [(104360, 1)]), (3.33572, 3.34321, [(73739, 1), (133508, 2)]), (4.49597, 4.50606, [(104360, 2)]), (5.65623, 5.66892, [(73739, 2)]), (6.81648, 6.83178, [(133508, 4)])]; lands R 9.4482
+    (27720, 78127, 98973, 120883, 135570, 172465, 216795) spread 7.8209 move rank 6 slower (216795 -> 216673); closed [('90552/14453', '216216/34493', ((216795,), (172465,)))]; slivers [(1.91794, 1.91902, [(120883, 1)]), (2.94084, 2.9425, [(78127, 1)]), (3.96374, 3.96598, [(172465, 3)]), (4.98665, 4.98945, [(135570, 3), (172465, 4)]), (6.00955, 6.01293, [(78127, 2)])]; lands R 9.4018
+    (27720, 79172, 104842, 130416, 143986, 185312, 230094) spread 8.3006 move rank 5 slower (185312 -> 184963); closed [('31185/23164', '97020/71993', ((185312,), (143986,)))]; slivers [(1.0471, 1.04907, [(230094, 1)]), (2.24378, 2.24802, [(104842, 1)]), (3.44047, 3.44696, [(130416, 2)]), (4.63715, 4.6459, [(143986, 3)]), (5.83384, 5.84484, [(79172, 2), (230094, 6)])]; lands R 9.0000
+    (27720, 68777, 88879, 111344, 122698, 151574, 194043) spread 7.0001 move rank 4 faster (122698 -> 123205); closed [('452760/64681', '7', ((194043,), (27720,)))]; slivers [(2.02492, 2.03328, [(111344, 1)]), (3.82484, 3.84065, [(111344, 2)]), (5.62477, 5.64801, [(194043, 5)])]; lands R 10.4284
+    (27720, 67559, 88823, 108266, 120448, 152593, 194055) spread 7.0005 move rank 1 slower (67559 -> 67319); closed [('90552/12937', '7', ((194055,), (27720,)))]; slivers [(2.87216, 2.8824, [(152593, 2)]), (6.15462, 6.17656, [(108266, 3)])]; lands R 9.4358
+    (27720, 88298, 120628, 147702, 168625, 194069, 210452) spread 7.5921 move rank 5 slower (194069 -> 193884); closed [('1358280/194069', '7', ((194069,), (27720,)))]; slivers [(1.0, 1.0008, [(210452, 1)]), (2.14254, 2.14458, [(210452, 2)]), (3.28522, 3.28836, [(210452, 3)]), (4.42791, 4.43213, [(147702, 3)]), (5.5706, 5.57591, [(120628, 3)]), (6.71328, 6.71969, [(168625, 5)])]; lands R 9.6153
+    (27720, 69064, 90968, 115429, 148057, 162314, 208698) spread 7.5288 move rank 5 faster (162314 -> 162341); closed [('5940/4969', '97020/81157', ((208698,), (162314,)))]; slivers [(1.53677, 1.53702, [(148057, 1)]), (2.90278, 2.90326, [(69064, 1), (148057, 2)]), (4.26879, 4.2695, [(208698, 4)]), (5.63481, 5.63574, [(115429, 3)])]; lands R 9.1740
+    (27720, 75202, 98237, 133226, 171440, 215698, 244457) spread 8.8188 move rank 4 slower (171440 -> 171158); closed [('6237/4286', '97020/66613', ((171440,), (133226,)))]; slivers [(1.13182, 1.13369, [(215698, 1)]), (2.42534, 2.42933, [(98237, 1)]), (3.71885, 3.72498, [(244457, 4)]), (5.01237, 5.02062, [(133226, 3), (215698, 5)]), (6.30588, 6.31627, [(244457, 7)])]; lands R 9.3814
+    (27720, 106688, 124055, 135756, 151734, 171049, 194091) spread 7.0018 move rank 5 faster (171049 -> 171569); closed [('157080/64697', '415800/171049', ((194091,), (171049,)))]; slivers [(1.45411, 1.45853, [(135756, 1), (151734, 1)]), (2.74665, 2.755, [(151734, 2)]), (4.03919, 4.05147, [(106688, 2)]), (5.33173, 5.34794, [(124055, 3)]), (6.62427, 6.64441, [(135756, 4)])]; lands R 9.2833
+    (27720, 77457, 99308, 129141, 140908, 175073, 217921) spread 7.8615 move rank 1 faster (77457 -> 77812); closed [('77000/14349', '138600/25819', ((129141,), (77457,)))]; slivers [(3.20619, 3.22088, [(140908, 2)]), (6.05614, 6.08389, [(217921, 6)])]; lands R 9.6395
+    (27720, 69917, 97039, 116520, 132178, 166510, 207185) spread 7.4742 move rank 4 slower (132178 -> 131717); closed [('249480/69917', '3465/971', ((69917,), (116520,)))]; slivers [(1.46802, 1.47316, [(166510, 1)]), (3.14576, 3.15677, [(69917, 1), (207185, 3)]), (4.8235, 4.84038, [(97039, 2)]), (6.50123, 6.52399, [(69917, 2), (166510, 5), (207185, 6)])]; lands R 10.3121

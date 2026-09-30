@@ -1,0 +1,44 @@
+E214 (2026-10-01): the Q7 map run's covering moves that did not go to the pair's mirror, listed; and the grid-pair-law
+reading of the tight set checked.
+
+(1) Part B (v2): of 261 moves that cover the interval holding the old landing, 106 go to an interval already clear (e),
+140 to the same pair's mirror junction (m), 15 to a place newly uncovered (n).  e is forced whenever the set had another
+clear interval (M4-1: the landing is the least clear point); checked here.  The 15 n are listed individually.
+(2) The tight set's two points against `GridPairLawN.grid_pair_law`: the pair's readings at R1, R2 are c*n on the grid
+through 117495 with divisor 5 (grid points n_a = 5, n_b = 11), classes c = 3 and c' = 5 = 8 - 3 (mirror); checked exactly,
+with every other reading's grid position and deviation (grid step 117495/5) listed.
+
+(1) e moves: 106; the set had another clear interval in 106 (forced)
+    n moves (covered, landing at a newly uncovered place, not the mirror): 15
+      (27720, 84333, 116357, 141121, 150492, 194205, 268964) rank 5 -1000 | old pair exit (194205,) enter (150492,) at R 1.2846 | new exit (27720,) enter (194205,) at R 1.0000 | 7 intervals before
+      (27720, 86013, 114752, 142487, 161503, 202924, 252416) rank 1 -1000 | old pair exit (161503,) enter (142487,) at R 2.9178 | new exit (142487,) enter (86013,) at R 4.8636 | 3 intervals before
+      (27720, 86013, 114752, 142487, 161503, 202924, 252416) rank 3 +1000 | old pair exit (161503,) enter (142487,) at R 2.9178 | new exit (142487,) enter (86013,) at R 4.8297 | 3 intervals before
+      (27720, 86678, 116363, 144181, 163425, 205341, 255988) rank 1 -300 | old pair exit (163425,) enter (144181,) at R 2.8835 | new exit (144181,) enter (86678,) at R 4.8065 | 4 intervals before
+      (27720, 86678, 116363, 144181, 163425, 205341, 255988) rank 1 -1000 | old pair exit (163425,) enter (144181,) at R 2.8835 | new exit (144181,) enter (86678,) at R 4.8065 | 4 intervals before
+      (27720, 86678, 116363, 144181, 163425, 205341, 255988) rank 3 +300 | old pair exit (163425,) enter (144181,) at R 2.8835 | new exit (144181,) enter (86678,) at R 4.7965 | 4 intervals before
+      (27720, 86678, 116363, 144181, 163425, 205341, 255988) rank 3 +1000 | old pair exit (163425,) enter (144181,) at R 2.8835 | new exit (144181,) enter (86678,) at R 4.7734 | 4 intervals before
+      (27720, 68781, 84725, 114639, 156055, 194231, 276701) rank 3 -1000 | old pair exit (114639,) enter (68781,) at R 6.0451 | new exit (276701,) enter (114639,) at R 1.7031 | 1 intervals before
+      (27720, 85424, 114705, 142375, 162745, 202797, 252026) rank 1 +1000 | old pair exit (142375,) enter (85424,) at R 4.8674 | new exit (162745,) enter (142375,) at R 2.8956 | 1 intervals before
+      (27720, 84949, 114029, 141582, 160755, 201701, 250644) rank 1 +300 | old pair exit (141582,) enter (84949,) at R 4.8947 | new exit (160755,) enter (141582,) at R 2.9314 | 1 intervals before
+      (27720, 84949, 114029, 141582, 160755, 201701, 250644) rank 1 +1000 | old pair exit (141582,) enter (84949,) at R 4.8947 | new exit (160755,) enter (141582,) at R 2.9314 | 1 intervals before
+      (27720, 85358, 117495, 140959, 159149, 200880, 258489) rank 2 +300 | old pair exit (258489,) enter (117495,) at R 3.5389 | new exit (117495,) enter (159149,) at R 4.0005 | 2 intervals before
+      (27720, 85358, 117495, 140959, 159149, 200880, 258489) rank 2 +1000 | old pair exit (258489,) enter (117495,) at R 3.5389 | new exit (117495,) enter (159149,) at R 3.9769 | 2 intervals before
+      (27720, 69014, 86005, 115023, 155999, 195627, 278671) rank 3 +300 | old pair exit (69014,) enter (115023,) at R 3.6149 | new exit (115023,) enter (155999,) at R 4.0863 | 1 intervals before
+      (27720, 69014, 86005, 115023, 155999, 195627, 278671) rank 3 +1000 | old pair exit (69014,) enter (115023,) at R 3.6149 | new exit (278671,) enter (155999,) at R 4.0784 | 1 intervals before
+(2) tight set (27720, 85358, 117495, 140959, 159149, 200880, 258489); grid step 23499 (117495/5)
+    R 1320/373: class 3
+      reading 27720: grid point 1, deviation 0.1796; position 1320/373 = 1320/373 mod 8; c*n = 3 = 3 mod 8
+      reading 85358: grid point 4, deviation -0.3676; position 12194/1119 = 3242/1119 mod 8; c*n = 12 = 4 mod 8
+      reading 117495: grid point 5, deviation 0.0000; position 15 = 7 mod 8; c*n = 15 = 7 mod 8
+      reading 140959: grid point 6, deviation -0.0015; position 20137/1119 = 2233/1119 mod 8; c*n = 18 = 2 mod 8
+      reading 159149: grid point 7, deviation -0.2274; position 159149/7833 = 33821/7833 mod 8; c*n = 21 = 5 mod 8
+      reading 200880: grid point 9, deviation -0.4516; position 66960/2611 = 4296/2611 mod 8; c*n = 27 = 3 mod 8
+      reading 258489: grid point 11, deviation 0.0000; position 33 = 1 mod 8; c*n = 33 = 1 mod 8
+    R 2200/373: class 5
+      reading 27720: grid point 1, deviation 0.1796; position 2200/373 = 2200/373 mod 8; c*n = 5 = 5 mod 8
+      reading 85358: grid point 4, deviation -0.3676; position 60970/3357 = 7258/3357 mod 8; c*n = 20 = 4 mod 8
+      reading 117495: grid point 5, deviation 0.0000; position 25 = 1 mod 8; c*n = 25 = 1 mod 8
+      reading 140959: grid point 6, deviation -0.0015; position 100685/3357 = 20117/3357 mod 8; c*n = 30 = 6 mod 8
+      reading 159149: grid point 7, deviation -0.2274; position 795745/23499 = 43777/23499 mod 8; c*n = 35 = 3 mod 8
+      reading 200880: grid point 9, deviation -0.4516; position 111600/2611 = 7160/2611 mod 8; c*n = 45 = 5 mod 8
+      reading 258489: grid point 11, deviation 0.0000; position 55 = 7 mod 8; c*n = 55 = 7 mod 8
