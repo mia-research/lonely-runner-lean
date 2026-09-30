@@ -7079,3 +7079,43 @@ the simplex: a bounded-spread region, finitely many cones, each a named instant.
 - The remaining question is the owner's own from E125 (*"use the cascade to find why the categories exhaust, not
   enumeration"*): why a finite set of lap assignments covers each bounded-spread strip, and what carries the count as the
   spread grows (the fast readings wrap more laps). That is where the work stands.
+
+---
+
+## E208 — 2026-09-30 — E125's question in the band: the landing is the grid's own gap, reached after the deviation bridges earlier ones
+
+**Map:** `CASCADE_DESIGN_v2` §2, §7; E125's open step · M2 (d), designed first · nearest §6 classes F14 (avoided: E128's
+grid-class family was not used as the test, since with floor/ceiling positions and any odd class it would contain the
+landing almost by construction, F5; the test is the cascade's own chain) and F2 (avoided).
+
+**Owner:** *"yes, design E125's question in the band first, then run it / Then review if we need to prove it in lean
+now"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e208_band_junctions_v1.py` docstring): the cascade's chain (E122, E125):
+consecutive setters `(a, lap k)`, `(b, lap l)` join iff `J = s_b(8k+1) − s_a(8l−1) > 0`; the landing's **break** is the
+queue front's next window, with `J ≤ 0`. On the slowest reading's own grid, `sᵢ = nᵢ + δᵢ` (nearest whole number plus
+deviation), every slack splits exactly and linearly: `J = [n_b(8k+1) − n_a(8l−1)] + [δ_b(8k+1) − δ_a(8l−1)]`, the
+**grid's** slack (a whole number; 0 at the AP's own junctions, where windows touch) plus the **deviation's** part
+(amplified by the laps).
+
+**Run** (exact) `[VERIFIED — these populations]`; checks (joins positive, breaks non-positive) 0 violations:
+- every integer band set, readings `≤ 28` (86,470 chains): every landing in copy 0 `[1, 7]`. Breaks: **grid gap
+  (grid slack < 0) 76,923**; grid tight, deviation negative 1,968; grid overlapping, deviation breaking it 7,579. Joins:
+  grid overlap 75,401; grid tight held by the deviation 2,464; **a grid gap bridged by the deviation 20,712**.
+- late fine band shapes (5,400): every landing in copy 1 `[9, 15]`. Breaks: grid gap 4,207; tight 46; overlap broken
+  1,147. Joins: overlap 59,209; tight 6,064; grid gap bridged 36,062.
+
+**Reading, in the owner's terms** `[reasoned from the run]`: the band's isolation is mostly **the grid's own gap** (the
+AP/grid's isolation class) reached by the chain; the chain gets there after **the deviation has bridged earlier grid
+gaps**, each bridge a linear condition on the deviations amplified by the laps. That is "AP/grid plus deviation,
+relocated": the deviation carries the isolation from one grid gap to a later one; in the rest the deviation opens a gap
+where the grid would join.
+
+**Consequence:**
+- E125's open step reads, in these objects: to pass both copies the deviation would have to bridge **every** grid gap in
+  `[1, 7]` and in `[9, 15]`; each bridge is a linear condition on the deviations, and E124's emptiness certificates are
+  exactly the conjunctions of such conditions that are inconsistent. A derivation would name the inconsistent
+  conjunction (E125: for the AP it is exactly tight and the pair law is its two-runner case). Not derived here.
+- Why copy 1 is reached only by the late shapes: there the deviation bridged 36,062 grid gaps over 5,400 chains (about 7
+  per chain) against 20,712 over 86,470 in the integer band (about 0.24): the late shapes are the arrangements whose
+  deviations bridge the grid's gaps across the whole of copy 0.
