@@ -6521,3 +6521,51 @@ three answers `[VERIFIED — these 97]`:
 
 **Next:** the complete finite list at `m = 1` (residue patterns mod 64 whose blocked instants cover all 56), using the
 unit group's action and sign to reduce the enumeration; then read which resolution settles each pattern class.
+
+---
+
+## E194 — 2026-09-30 — the complete list at m = 1, modulus 64; the exceptions are the non-unit top level; order seven's §7 move repairs them
+
+**Map:** `MECHANISM_MAP_v2` · §4 Q6 and Q5 · M2 (d) with a finite exhaustive statement (class (c) in form: it covers
+every `m = 1` residue pattern) · nearest §6 classes F6 (the instant family is restricted: `a/64`, then `a/(8·2^v)`) and
+F11 (the exceptions are read, E193's next step followed).
+
+**Run** (`LonelyRunner/experiments/nN/redo/crowded_m1_cover_v1.c`, `.patterns`; `crowded_m1_cores_v1.{py,out}`;
+commit above). Derived first: at `m = 1` whether some `a/64` is lonely depends only on the residues mod 64, and the
+answer is invariant under multiplying every residue by a unit mod 64 (the unit permutes the 56 instants), so one odd
+residue is normalised to 1. Every multiset of seven residues with no residue 0, a multiple of 8, an odd residue and
+level-0 cost `≥ 8` was enumerated: 109,453,344 normalised patterns `[VERIFIED — exhaustive mod 64]`.
+- **Exceptional (no `a/64` lonely): 32,642 unit-orbits.** Their minimal covering sub-multisets ("cores"): 12,518
+  distinct, of sizes 5 (18), 6 (372), 7 (12,128).
+- **Three answers** `[VERIFIED — exhaustive mod 64]`:
+  - (i) **Feature: an even cofactor at the top level.** 28,786 orbits contain residue 32 (a multiple of 8 with cofactor
+    `≡ 4 mod 8`: it reads `a/2`, blocking every even `a`); a further 3,728 have their multiple at 16 or 48 (cofactor
+    `≡ 2 mod 4`: blocks `a ≡ 4 mod 8`). So **32,514 of 32,642** carry a multiple of 8 whose cofactor is **not a unit**.
+    Every core of size 5 or 6 contains 32. Order seven's `band_top` holds because every top-level cofactor is a unit mod
+    7 (T7); mod 8 that fails, and this is where. Only **128 orbits** have the multiple at an odd cofactor (residues 8, 24,
+    40, 56): the counterpart of order seven's own exceptional list at `m = 1` (§7).
+  - (ii) **Where the witness is.** Take the modulus from the 2-adic valuation of the multiple, `N = 8·2^v`: the cofactor
+    becomes odd and the top level is clear at every unit instant again. On E193's 97 exceptions `[VERIFIED — these 97]`:
+    93 have the multiple 16 (`v = 4`), and **all 93 are lonely at some `a/128` with `a` odd**, order seven's own form (a
+    unit multiplier); the cascade itself lands at `17/128`, `33/128`, `9/128` in six of them (E193). The other 4 have the
+    multiple 8 or 24 (`v = 3`) and stay exceptional: `(1,5,6,7,8,11,13)`, `(1,5,6,7,11,13,24)`, `(2,7,8,9,11,13,15)`,
+    `(2,7,9,11,13,15,24)`; the six non-multiples `{1,5,6,7,11,13}` or `{2,7,9,11,13,15}` block the whole `1/64` grid alone,
+    and the cascade lands at host 13's openings (`49/104`, `25/104`).
+  - (iii) **Same mechanism.** Yes: order seven's instant form, with the modulus read from the top level's 2-adic
+    valuation. That is order seven's §7 move (`49 → 98 = 2·49`), which at order eight is the rule for every even cofactor,
+    not a special case.
+
+**Consequence:**
+- Q6 `[VERIFIED — exhaustive mod 64; the 97]`: the order-seven architecture carries further than E193 found, once its
+  top level is taken 2-adically. What fails at `a/64` is almost entirely (32,514 of 32,642 orbits) the non-unit top level,
+  and on the window the 2-adic modulus repairs 93 of 97. The residue left is the odd-cofactor list: 128 orbits mod 64, 4
+  sets on the window.
+- Q5 `[derived; VERIFIED as above]`: the finite reduction at `m = 1` becomes: the top level's 2-adic valuation `v`, then
+  residues mod `8·2^v`. The complete exceptional list at `v = 4` (mod 128) is the next computation; `v = 5` (mod 256) needs
+  a pruned enumeration.
+- The 4 remaining sets land on the 13-grid (a prime other than 2), so the genuine exceptions carry the multi-resolution
+  question of E193 (map v2 R3, Q3); they are to be read by M3 next, not answered with a new family.
+- Map v2 §9 C3 (the rung budget as a uniform case) and C5 (Q6) are refined by this; carried to map v3.
+
+**Next:** (1) the exhaustive list at `v = 4` (residues mod 128, one multiple of 8 with `v = 4`); (2) the 128 odd-cofactor
+orbits mod 64 read by M3 (starting from the cores `{1,5,6,7,11,13}` and `{2,7,9,11,13,15}`); (3) map v3.
