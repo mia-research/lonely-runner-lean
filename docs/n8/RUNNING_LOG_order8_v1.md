@@ -6951,3 +6951,34 @@ left (the slow part clear).
   spread 7 (short intervals, E202) or the fast part is a crowd whose own isolation intervals are sparse (the late shapes).
 - Next design question: the fast part's own isolation intervals, placed against the slow part's intervals: their spacing
   at the slow part's scale, read from the fast part's own structure (its own slow/fast split, recursively).
+
+---
+
+## E205 — 2026-09-30 — the fast part's isolation spacing: under one of its own laps, except for crowds
+
+**Map:** `CASCADE_DESIGN_v2` §3–§4 · M2 (d), designed first · nearest §6 class F5 (the index criterion is forced: a check).
+
+**Owner:** *"yes, design the fast part's isolation spacing first, then run it / Then lets review carefully if we are
+progressing and check against drift"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e205_fast_spacing_v1.py` docstring): the fast part `F`'s own isolation
+intervals (its own isolation events, which exist by the native lower order), measured in `F`'s natural unit, one lap of
+its slowest reading (`8·d_min/f₁` in `R`). Forced: the landing is in the slow part's first interval `[1, 7/σ]` iff `F` has
+an isolation point there; `F`'s gap at the start is its push (E202). Content: the gap at the start in `F`-laps, read
+against `F`'s structure (spread `σ_F`, tightest internal ratio: a crowd).
+
+**Run** (exact) `[VERIFIED — these populations]`; forced check 0 violations throughout:
+- every set `≤ 24` with a fast part (210,335): first interval 210,104, later 231. `F`'s gap at the start, first-interval
+  sets: none 64,967; `≤ 1/4` lap 110,463; `≤ 1/2` 26,288; `≤ 1` 8,123; `≤ 2` 260; `≤ 4` 3. Later sets: `≤ 1/4` 187, `≤ 1/2`
+  42, `≤ 1` 2, with the slow part's spread 5–7 in all 231: the interval is short, the gap is not long.
+- late fine band shapes (5,400): all later; `F` is a crowd (spread `≤ 4`, tightest ratio `≤ 1.2`) and its gap at the start
+  is 1–4 of its laps (`≤ 2`: 2,780; `≤ 4`: 2,620), longer than the slow part's first interval.
+- Case C (1,000 + 1,000): first interval 994 and 997; the gap exceeds one lap in 1 and 2 of them; the later landings have
+  the slow part's spread 6.7–7.
+
+**Consequence:**
+- The two routes past the first interval are separate and each is named by the readings: a slow part near spread 7 (a
+  short interval, the fast part's gap short), or a crowded fast part (a gap of one to four of its laps, the slow part's
+  interval long). Everywhere else the fast part's gap at the start is under one of its own laps.
+- Not established: why a non-crowded fast part's gap is under one lap, or how long a crowd's can be. Both are statements
+  about the fast part alone (lower order).
