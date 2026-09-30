@@ -6815,3 +6815,53 @@ the chain alternates moves of `P`'s own members (a sweep through `P`) with `F`'s
   `P`'s intervals. Short intervals come from `P` near spread 7 (the four) or `P` a single slowest reading with a crowded
   six above it (the late shapes, E154).
 - No first-isolation claim is used: the statement is where the cascade lands.
+
+---
+
+## E202 — 2026-09-30 — what decides the index: the push from the bound (AP/grid plus deviation) against the slow part's interval
+
+**Map:** `CASCADE_DESIGN_v2` §2–§4 · M2 (d), designed in the owner's terms first, the checklist in the script's docstring
+· nearest §6 classes F5 (the index criterion "the landing is by `7/σ`" is derived, a check) and F1 (avoided: moves are
+recorded, never bounded; the test compares two times named by the readings).
+
+**Owner:** *"yes, design what decides the index first, then run it.  remember our checklist to make sure we're not
+drifting.  Why ap/grid plus deviation works to find the isolation everytime"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e202_index_v1.py` docstring; units `R = 8·d_min·t`): (1) every arrangement
+has its bound `R = 1`, where the slow part (spread `σ ≤ 7`) is clear, AP-like in slots 1–6, and the fast part sits on the
+slowest reading's own grid: each fast reading `f` at eighth-slot `⌊f/d_min⌋ mod 8` with deviation `{f/d_min}`; so at the
+start the only obstruction is the fast readings the deviation has put in the subject's slot, the **captures**
+`[derived]`; (2) the cascade separates the captures, and each separation can **carry in** readings over the entering edge
+(`transport`); inside the slow part's first interval `R ∈ [1, 7/σ]` every move is the fast part's (E201, D1); (3) the
+index is 0 exactly when that **push** ends by `R = 7/σ` `[derived; a check]`. Checklist recorded in the docstring: the
+object is the cascade's run; no count as argument; no rate; no instant family; no first isolation; no other proof's
+architecture.
+
+**Run** (`e202_index_v1.{py,out}`; exact) `[VERIFIED — these populations]`:
+- every set `≤ 24` (346,104): derived check 0 violations; index 0: 345,873 (no capture, landing at the bound 200,736;
+  one separation, nothing carried in, 54,642; a chain of carry-ins 90,495); index 1: 227; index 2: 4. **Every landing
+  after the first interval has a slow part of spread 5 to 7** (7: 210; 6: 19; 5: 2), whose first interval ends by
+  `R = 7/σ ≤ 1.4`.
+- captures at the bound sit at grid slot 0 (135,204) or slot 7 (51,357); carry-ins come from slot 6 (121,069), slot 7
+  (61,698), and, for fast readings crossing several eighths in one separation, slots 5 to 0 (the rest); 82,448 carry-ins
+  are faster than the setter, 150,724 not.
+- late fine band shapes (5,400): all index 1; slow part a single reading (`σ = 1`), the capture at slot 7, a sweep of
+  about 20 moves through the crowded six outlasting `R = 7` (the population is built to have no lonely point in
+  `[1, 7]`), then the slow reading's own move and the landing in its second interval (E154).
+- Case C (1,000 + 1,000): index 0 in 994 and 997; the 9 later landings all have `σ` between 6.67 and 7.
+
+**Why AP/grid plus deviation finds the isolation** `[reasoned from the run; the three answers for the later landings]`:
+at the bound the AP-like slow part is clear and the fast part is a grid plus a deviation, so the only obstruction is what
+the deviation captured (slot 0 or 7); the cascade separates the captures, the separations carry in readings from the
+entering edge (a sweep down through the fast part's clusters, E141), and the landing is where a separation carries no one
+in. The landing leaves the slow part's first interval only when that interval is short (the slow part near spread 7:
+(i) the feature; (ii) the slow part's own top then re-enters and its exit sets the next interval, where the fast part
+lands; (iii) the same mechanism, a separation) or when the fast part is a crowd whose sweep is long (the late shapes).
+
+**Consequence:**
+- The index is decided by two places read from the arrangement: the slow part's interval end `7/σ` and the end of the
+  fast part's sweep from the bound (captures at slots 0/7, carry-ins from the entering edge). On these populations the
+  index exceeds 0 only for `σ ≥ 5` or a crowded fast part.
+- What a proof needs next, in the same terms: why the sweep started by the captures ends early against the slow part's
+  interval; for a crowded fast part, why it ends inside the slow part's second interval (E154's pattern). Not
+  established here.
