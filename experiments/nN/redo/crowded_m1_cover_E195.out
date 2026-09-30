@@ -1,0 +1,7 @@
+E195 runs, 2026-09-30 (exact, exhaustive over residues; counts are patterns after normalising one odd residue to 1):
+  crowded_m1_cover_v2 V=3 (N=64, instants 8 !| a):   21,846,048 patterns, 128 exceptional orbits (control: = E194's odd-cofactor list)
+  crowded_m1_cover_v2 V=4 (N=128, instants 8 !| a): 641,557,952 patterns, 0 exceptional
+  crowded_m1_cover_v2 V=5 (N=256, instants 8 !| a): 19,650,718,080 patterns, 0 exceptional (280 s)
+  crowded_m1_cover_v3 V=3 W=3 (N=64, all instants): 21,846,048 patterns, 128 exceptional orbits (control)
+  crowded_m1_cover_v3 V=4 W=4 (N=128, all instants): 641,557,952 patterns, 0 (control)
+  crowded_m1_cover_v3 V=3 W=4 (N=128, all instants): 1,283,115,904 patterns, 0 exceptional
