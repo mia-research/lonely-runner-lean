@@ -7699,3 +7699,11 @@ spread uniform in `[2, 20]`):
   by the reading that enters. Not yet designed.
 - **Standing questions:** E215's question on how the owed statement should read is answered in part (above). The cap
   remains a decision for the owner.
+
+**Precision note on E217's lead.** "The band theorem's 105 cones are exactly such regions" overstates. A cone (E124,
+`cone_band`) fixes a lap for every reading and requires the lap blocks to meet pairwise. Inside one cone the lonely
+instant is the largest left end, which can be a different reading's opening in different parts of the cone. An
+opening's persistence region fixes the opening as well. So the two are regions of the same kind (a fixed lap
+assignment, linear inequalities in the speeds), and a cone is a union of persistence regions. Also, "about one case in
+five" in E217's Consequence is a description of the counts beside it (15,003 of 73,613, and so on), not a rate offered
+as a result.
