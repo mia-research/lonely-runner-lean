@@ -1,0 +1,102 @@
+E201b (2026-09-30): E151's statement, refined after the three questions on v1's exceptions.
+
+v1 (e151_block_v1): every exception (231 + 6 + 3) had a slow part of spread 7 or just under, whose same-lap block B_0 is a
+point or tiny; its top reading moves to its next lap while the rest of the slow part is still on lap 0, and the landing
+follows that top reading's own exit.  So the right object is the slow part's OWN clear intervals (its isolation
+intervals at 1/8, in time order from the bound: boundaries are its own exits and entries), not only its same-lap blocks.
+REFINED STATEMENT: the cascade lands inside the slow part's first clear interval, or else, after a move set by the slow
+part itself, inside its second.  (For a slow part of one reading these are v1's B_0 and B_1.)
+Derived, unchanged: inside a clear interval of P only fast readings can be in the slot (D1).
+
+v1's text follows.
+
+E201 (2026-09-30): E151's statement in the owner's form, designed, then run against the cascade.
+
+Owner: "yes, design E151's statement in that form first and then run it".  Map: CASCADE_DESIGN_v2 §3, §4, §7; the
+gapless structure of E200.
+
+DESIGN
+  The split, gapless by construction.  Split the readings at the largest consecutive ratio; if the part below has spread
+  above 7, split that part again at its own largest ratio; repeat.  This stops (a single reading has spread 1), so every
+  arrangement gets a SLOW PART P (the lowest group, spread <= 7, AP-like at d_min's scale) and a FAST PART F (the rest).
+  P's BLOCKS: B_k = [(8k+1)/(8 d_min), (8k+7)/(8 p_top)], for every lap k with p_top/d_min <= (8k+7)/(8k+1); P is clear
+  throughout each B_k (`SlowBlockN.slow_clear_lap`, proved).
+  Derived: (D1) inside a block only fast readings can be in the subject's slot, so every cascade move made inside a block
+  is a move of F alone: there the cascade IS the fast part's own push; (D2) on a block the whole question is F's
+  (`exists_block_iff_fast_lap`, proved).
+  THE STATEMENT (a place, named by P's readings): the cascade lands inside P's first block B_0, as F's own push; or else,
+  after a move set by P itself between B_0 and B_1, inside B_1 (E154's pattern: the slow runner sets one move itself and
+  the crowd lands in the second block).
+  Frame checks: the place is a block of the slow part, given by its readings; the push is the cascade itself (D1); no
+  count of moves, no rate, no instant family; "first isolation" is not used (the statement is where the cascade lands).
+
+RUN (exact, Fractions).  Per set: P and F; the block holding the landing (0, 1, 2, ..., or none); the moves between B_0
+and B_1 and who set them; the derived check D1 on every move; the landing checked lonely.  Every set outside the
+statement is listed individually, with its trace, for the three questions (M3).
+Populations: every 7-set of readings in 1..24 (346,104); the late fine band shapes (coverB_fine_v1.late_shapes); Case C
+samples (spread above 24: 1,000 with readings <= 200, seed 13; 1,000 with readings <= 5,000, seed 29).
+
+
+== every 7-set of readings in 1..24: 346104 sets ==
+  CHECK the landing is lonely: 0 violations
+  CHECK D1 (moves inside a block are the fast part's alone): 0 violations
+  slow part size: {1: 139188, 2: 42660, 3: 16714, 4: 7262, 5: 3120, 6: 1391, 7: 135769}; fast part size: {0: 135769, 1: 1391, 2: 3120, 3: 7262, 4: 16714, 5: 42660, 6: 139188}
+  the slow part's clear interval holding the landing (0 = first): {0: 345873, 1: 227, 2: 4}
+  landings in the second interval: 227; with a move set by the slow part between the first two: 227
+  OUTSIDE the statement (not in the first two intervals): 4
+    (1, 2, 4, 6, 14, 15, 16)  P (1, 2, 4, 6)  blocks 19  landing block 2  R* 33/14  moves 9
+        move at 17/128: in the slot (15,), setter (15,)
+        move at 17/120: in the slot (14,), setter (14,)
+        move at 17/112: in the slot (6,), setter (6,)
+        move at 3/16: in the slot (16,), setter (16,)
+        move at 25/128: in the slot (15,), setter (15,)
+        move at 5/24: in the slot (14,), setter (14,)
+        move at 25/112: in the slot (4,), setter (4,)
+        move at 9/32: in the slot (14,), setter (14,)
+    (1, 2, 5, 7, 18, 23, 24)  P (1, 2, 5, 7)  blocks 19  landing block 2  R* 11/6  moves 6
+        move at 1/8: in the slot (24,), setter (24,)
+        move at 25/192: in the slot (7, 23), setter (7,)
+        move at 9/56: in the slot (18,), setter (18,)
+        move at 25/144: in the slot (23,), setter (23,)
+        move at 33/184: in the slot (5,), setter (5,)
+        move at 9/40: in the slot (18,), setter (18,)
+    (1, 2, 5, 7, 19, 23, 24)  P (1, 2, 5, 7)  blocks 19  landing block 2  R* 9/5  moves 6
+        move at 1/8: in the slot (24,), setter (24,)
+        move at 25/192: in the slot (7, 23), setter (7,)
+        move at 9/56: in the slot (19,), setter (19,)
+        move at 25/152: in the slot (24,), setter (24,)
+        move at 11/64: in the slot (23,), setter (23,)
+        move at 33/184: in the slot (5,), setter (5,)
+    (1, 3, 4, 5, 6, 7, 24)  P (1, 3, 4, 5, 6, 7)  blocks 15  landing block 2  R* 25/7  moves 10
+        move at 9/56: in the slot (6,), setter (6,)
+        move at 3/16: in the slot (5,), setter (5,)
+        move at 9/40: in the slot (4,), setter (4,)
+        move at 9/32: in the slot (7,), setter (7,)
+        move at 17/56: in the slot (3,), setter (3,)
+        move at 3/8: in the slot (24,), setter (24,)
+        move at 73/192: in the slot (5,), setter (5,)
+        move at 17/40: in the slot (7,), setter (7,)
+
+== late fine band shapes: 5400 sets ==
+  CHECK the landing is lonely: 0 violations
+  CHECK D1 (moves inside a block are the fast part's alone): 0 violations
+  slow part size: {1: 5400}; fast part size: {6: 5400}
+  the slow part's clear interval holding the landing (0 = first): {1: 5400}
+  landings in the second interval: 5400; with a move set by the slow part between the first two: 5400
+  OUTSIDE the statement (not in the first two intervals): 0
+
+== Case C, readings <= 200 (seed 13): 1000 sets ==
+  CHECK the landing is lonely: 0 violations
+  CHECK D1 (moves inside a block are the fast part's alone): 0 violations
+  slow part size: {1: 770, 2: 172, 3: 44, 4: 12, 5: 2}; fast part size: {2: 2, 3: 12, 4: 44, 5: 172, 6: 770}
+  the slow part's clear interval holding the landing (0 = first): {0: 994, 1: 6}
+  landings in the second interval: 6; with a move set by the slow part between the first two: 6
+  OUTSIDE the statement (not in the first two intervals): 0
+
+== Case C, readings <= 5,000 (seed 29): 1000 sets ==
+  CHECK the landing is lonely: 0 violations
+  CHECK D1 (moves inside a block are the fast part's alone): 0 violations
+  slow part size: {1: 783, 2: 145, 3: 52, 4: 19, 5: 1}; fast part size: {2: 1, 3: 19, 4: 52, 5: 145, 6: 783}
+  the slow part's clear interval holding the landing (0 = first): {0: 997, 1: 3}
+  landings in the second interval: 3; with a move set by the slow part between the first two: 3
+  OUTSIDE the statement (not in the first two intervals): 0
