@@ -6417,3 +6417,53 @@ orders, Q6, new failure classes F12 (range-forced) and F13 (consequence not draw
 **Memory:** `feedback_n8_map_first_2026_09_30.md` written by `memory-drafter` (pointers in `MEMORY.md`'s n=8 block,
 `lrc_INDEX.md`, `feedback_INDEX.md`; scope notes added to the oracle memory and the exceptions memo). An update for this
 entry's rulings (M7, the lower-order caution, v2, the audit starting at E191) is with `memory-drafter`.
+
+---
+
+## E192 — 2026-09-30 — Q6: our order-seven proof read for order eight; the residual is the translated hard branch, at the bottom level only
+
+**Map:** `MECHANISM_MAP_v2` · §4 Q6 and Q5 · M2 (d), a source reading, nothing run · nearest §6 classes F7 (avoided:
+our own modules read first) and F9 (orders three to seven read as our native proofs).
+
+**Owner:** *"Yes the lean work is ahead of the manuscript and paper at this time as I feel we need to bed down the proof
+attempt first. / yes start with Q6, read our order seven proof first"*. So the manuscript corrections owed from E191
+(map v2 §9 C1, C4) wait; the Lean tree leads.
+
+**The reading:** `docs/n8/Q6_ORDER_SEVEN_READ_v1.md`. Our order-seven proof (`Spec/OrderSeven*N.lean`) uses one
+arithmetic fact, T7: every nonzero residue mod 7 is a unit. Its steps: the instant `K/(7P)` with the band; descent;
+7-adic levels and top digits; the multiplier identity `qz_lambda` (pure algebra); one level (`single_level_avoid`, T7:
+bijective slopes, `2 × 3 = 6 < 7`); the top level (`band_top`, T7); the level induction (`unit_filtering`); the easy
+branch (`corollary3`: at most three readings per level below the top); the hard branch (`bs_discrete_q`: a crowded
+level, moved to the bottom by `exists_pre_congr`, then `four_band` (§5: normalise into the squares `{1,2,4}`, compress
+into an arc of length ≤ 5 at a dilation `j ≤ 5` by the carry lemma, shift off `{0,6}`), `five_band` (§6), `five_band_m1`
+(§7, moduli 49 and 98)).
+
+At order eight, step by step (`[derived]`, not in Lean): the multiplier identity holds in octal digits; the top level
+holds for any odd multiplier; one level holds with a **cost** per reading, `≤ max(2, gcd(r, 8))`, free when the costs
+sum to at most 7. That cost is exactly the hypothesis of `lonely_eight_of_descent` (`Σ max 2 (gcd e 8) < 8` over the
+non-multiples of 8), so **descent is step 5 at level 0**, with the higher levels sent to order seven through the
+cofactors; the easy branch at eight is contained in descent. And the residual's `cost` field (checked,
+`OrderEightCasesN.lean:779`: `8 ≤ Σ max 2 (gcd e 8)` over the non-multiples) makes **every residual set the hard branch
+at the bottom level**; v21's shapes `(1,6)`–`(4,3)` are that crowded level.
+
+**Consequence:**
+- Q5 `[derived]`: the positive-arithmetic fields alone reduce the residual to one shape, a crowded level of non-multiples
+  of 8 (cost ≥ 8), with the multiples of 8 carried by order seven through their cofactors. The open statement is about
+  that level.
+- Q6 `[derived]`: our order-seven architecture carries through the easy branch (the case list already holds it);
+  what does not carry is its hard-branch mechanism, which rests on T7 throughout. Mod 8 the units `{±1, ±3}` are not
+  cyclic and the non-units `2`, `4` form their own classes.
+- A simplification over order seven `[derived]`: a crowded **interior** level never arises at order eight on this route.
+- Freedom not yet spent `[reasoned]`: descent fixes order seven's instant `τ` and uses eight shifts. The crowded level can
+  also use the choice of `τ` among the cofactors' lonely instants, and dilations, which is what order seven's hard
+  branch spends.
+- Routes: this does not duplicate any route in map v2 §9. It locates the open statement inside the case list, and it
+  adds §3 of the note (the hard-branch tools and their state at 8) to the map at its next version.
+
+**Next (source first):** read `four_band`'s compression and shift in full (`OrderSevenA4N`, `OrderSevenS5bN`) and
+`five_band`'s case structure (§6), then a map run on the residual's crowded level (sign-normalised classes mod 8, costs,
+and which freedom each set's certificate uses).
+
+**Housekeeping:** `memory-drafter` revised `feedback_n8_map_first_2026_09_30.md` (M7 kept as the session's rule, not an
+owner ruling; the `**Map:**` audit starts at E191, the `**Consequence:**` audit at E192). Map v2 §9 C7 should read
+"returned 1 before E190"; carried to v3.
