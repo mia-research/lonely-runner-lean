@@ -6706,3 +6706,33 @@ ever; inside the recursion it is the fast group's chain ending inside the slow g
 **Consequence:** the programme's open question is restated in the cascade's objects only (what is carried in during each
 separation, from which grid position, against the separation's length), with four design questions (§6) for discussion
 before any step. The E164–E197 work is placed against it: most of it studied other objects (F14, E196–E197).
+
+---
+
+## E199 — 2026-09-30 — the owner's proof breakdown; existence checked; "only so many arrangements" as the compact gap simplex
+
+**Map:** `MECHANISM_MAP_v2` · the method and §4's open questions · design only, nothing run · frame checks in
+`CASCADE_DESIGN_v2.md` §7.
+
+**Owner:** *"Let me try and break it down.  For n=8 proof, we need to prove existence or exhibit - double check that.  The
+proof is that for 8 runners any arrangement eventually, each runner becomes lonely.  For our framework, we should lonely
+is proven for AP and grid - so for that we already have existence/exhibit - that works for ap/grid but not every
+arrangement.  Next step is any arrangement is not infinite.  We prove that for 8 runners there are only so many
+arrangements.  Then we should those arrangements can be reference to the ap/grid arrangement and that for those finite
+arrangment they are simply ap/grid plus divation.  Cascade works because it shows the map of where that displacement is
+relocated to."*
+
+**Checked:** the target is existence for every injective arrangement and every runner (`Spec/Target.lean:401`); the
+proofs are classical, so no witness is required, and in the framework existence and the exhibit coincide (`doors_agree`,
+`first_isolation_of_fixed`). The AP and grid base is proved with deviation neighbourhoods and named relocated instants
+(`APNeighbourhoodN`, `GridNeighbourhoodN`, `GridNudgeN`, `grid_class_clear`, `nested_clear`; all tracked).
+
+**Reasoned** (`docs/n8/CASCADE_DESIGN_v2.md` §7): up to shift and scale (proved symmetries) an arrangement is its seven
+gaps normalised to sum 1, a point of a **closed simplex**: compact, with the lower orders and clustered or far speeds on
+its boundary faces. The proof the breakdown gives: a **finite cover of the simplex by explicit pieces**, each a reference
+(AP, grid) plus a deviation region with a proved relocated instant; the cascade supplies the map (where the isolation
+relocates, and where each piece ends at the next event). A cover must be built and checked; it cannot be inferred from
+local stability, which would presuppose that every point is lonely.
+
+**Consequence:** the programme's finiteness step is stated in the framework's objects (references, deviations,
+relocations; the cascade's map), with three questions to the owner (§7.6) before any step.
