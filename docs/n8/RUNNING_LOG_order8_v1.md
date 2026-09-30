@@ -7157,3 +7157,44 @@ Everything else in those entries is a map `[VERIFIED — populations]`, not a th
    The steps needed grew with the spread on the populations (E157: up to 4 on Case B and Case C to 32, up to 7 on random
    wide sets), and nothing on record shows a fixed `M` suffices. A `def … : Prop` is type-checked, never proved (F8,
    `DoorFirstLap`), so whether a fixed `M` can hold must be checked before anything is built on it.
+
+---
+
+## E210 — 2026-09-30 — the band cover committed; E209 corrected; `Cover8 M` checked as written: `M = 2` suffices, and only the band needs 2
+
+**Map:** none — housekeeping (a commit) and a check of an OWED statement's truth (F8), at the owner's direction.
+
+**Owner:** *"yes commit the band cover, then check Cover8 M"*.
+
+**The band cover, committed** (`LonelyRunner/` `388793f`): `BandCoverCoreN`, `BandCoverN`, `BandCoverTree{2,3,4,17,18,19}N`,
+the generators `experiments/nN/redo/gen_band_lean_v1.py`, `gen_band_lean_v2.py`, `gen_band_lean_v2_driver.py`, the build
+logs and the axiom check. Before the commit: a scan for `sorry`, `native_decide`, `admit`, `unsafe` (the only matches are
+docstring sentences); `lake build LonelyRunner.LRC.Spec.BandCoverN` against the current tree, 8,258 jobs, exit 0;
+`#print axioms LRC.BandCover.band_lonely`: `[propext, Classical.choice, Quot.sound]` `[PROVED — Lean]`. The modules'
+running record is E169, which is in the E167–E169 gap noted in E170. Still imported by nothing on a route to
+`LonelyRunnerAt8`.
+
+**Correction to E209 point 4.** E209 said the steps needed "grew with the spread (E157: up to 4 …, up to 7 …)". That read
+E157's grid divisor `mm` as `Cover8`'s bound `M`; they differ (`Cover8 M` bounds the step `e/mm` below by `m/M`, and `e`
+can be any reading). The record already had the direct measurement (E165, in the docstring of `RegimeSkeletonN`):
+`Cover8 2` on every population tested. F7 on the session's part.
+
+**`Cover8 M`, checked as written** (`LonelyRunner/experiments/nN/redo/cover8_check_v1.{py,out}`; an implementation from the
+Lean definitions, not from E165's script; pairwise laps decided as 1-D Helly, as `lonely_eight_of_pairwise_laps`)
+`[VERIFIED — these populations]`. Least `M` per set (0: the bound is clear):
+- every subset of `1..16` with 1 to 7 readings (26,332; sets with fewer than seven readings are inside `Cover8` and were
+  not in E165): 0 in 16,513, 1 in 9,819;
+- every 7-set `≤ 20` (77,520): 0 or 1; every tenth 7-set `≤ 24` (34,611): 0 or 1;
+- the late fine band shapes (5,400): **2** in all; the band's extremal shape (E121): 1; the six-crowd shapes with a slow
+  runner (E153/E154, 104): 0 in 5, 1 in 93, **2** in 6; random sets of 2 to 7 readings up to 2,000 (3,000): 0 or 1.
+- **No set needs `M ≥ 3`.** Every set needing `M = 2` has spread in the band: the six crowd shapes 7.11 to 8.72, the late
+  shapes 7.005 to 7.44 (the step `m/2` with class 5 or 7: the slowest reading's second block, E207).
+
+**Consequence:**
+- `Cover8 2` stands on every population, now including the sets of fewer than seven readings: no sign that it is false
+  as written. It remains OWED (unproved).
+- **A route the tree now allows** `[reasoned; not built]`: the only sets needing `M = 2` lie in the band, which
+  `band_lonely` proves for every real shape. So `LonelyRunnerAt8` would follow from: spread `≤ 7` (the bound, R1, proved);
+  at most six readings (order seven, native, proved); spread 7 to 9 (`band_lonely`, proved); and, owed, **grid step at
+  least `m` (`M = 1`) for seven readings of spread above 9**. That owed statement is strictly smaller than `Cover8 2`
+  and holds on every population here. Building it means a new theorem and a new OWED entry in the Spec gate's register.
