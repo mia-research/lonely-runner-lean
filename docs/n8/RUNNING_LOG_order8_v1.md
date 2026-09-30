@@ -7495,3 +7495,65 @@ listed in `_v3.out`):
 - **Standing questions:** none answered. v21 §17G's first-lap clearance is untouched (E212 note).
 - **Owed to map v3:** Q7 as sharpened; the tight set's three answers (a new §3 entry); the F5 instances of E212 and this
   entry; E192–E214.
+
+---
+
+## E215 — 2026-10-01 — review before the mirror-junction run: E212–E214 drifted into the first window and covering; the run as proposed is not run
+
+**Owner:** *"yes, design the mirror junction run first, then run it but before you do.  Stop and think are we chasing
+the correct target, native framework, are we introducing any density or coverage or other things from other frames
+before we go on"*.
+
+**Map:** none — review at the owner's request; nothing run. Checked against object register v3 items 2, 4 and 15, the
+two order-eight memories on the cascade as oracle and on imports, and `Target.lean:160`.
+
+**The target is right; the object drifted.** The target is `LonelyRunnerAt8` through the framework's mechanism (AP/grid
+plus deviation; the cascade maps where the displacement is relocated). The band route's Lean (E212) serves it. From E212
+on, the object of study slid away from it:
+
+1. **The first window** (register v3 item 15, **MISPLACED**; owner: *"I never thought the first window/cycle was a
+   requirement and think it keeps getting introduced from context loss and revert to training data."*). `R ∈ [1, 7]` is
+   the slowest reading's first window `mt ∈ [1/8, 7/8]`. E212 called it "the place `WideStep8 1` names" and made it Q7's
+   object. The place is the grid-class instant. That it falls in the first window is a by-product, like "first" in the
+   landing (E109 O1).
+2. **Covering** (register item 4, **NOT APPLICABLE**: *"Covering forms a complement; the construction forms none"*; §6.1
+   requires proofs to be pointwise; item 2, blocking, **MISPLACED**). Q7 asked whether the readings' windows can fill
+   `[1, 7]`. E213's M4-1 and E214's Part C ("slivers", "covered by", "what covers it") are statements about a union of
+   windows over a stretch of instants. The mirror-junction run as proposed ("records … what covers it") continues this.
+   The words appear 6, 9 and 10 times in E212, E213 and E214. In those parts the cascade appears only as an oracle check.
+3. **A hard-case hunt** (oracle memory: *"Do not hunt for the 'hardest' ones by nearness to the half lap"*; E83). E212's
+   walk ranked sets by the widest clear interval inside the first window: a length, and nearness to a fence. As a truth
+   check of `WideStep8 1` its logic stands, because an empty first window would refute it. But its extremal set then
+   became "the exception", although no explanation had failed on it, and it became Q7's object.
+4. **A cap in the owed statement.** `WideStep8 1` implies a lonely instant with `8mt ≤ 7` (`gridStep8_one_first_stretch`,
+   proved), so on wide sets it implies that the cascade never leaves the slowest reading's first lap. That is the shape of
+   `DoorFirstLap` (`Doors.lean:339`, **REFUTED**), on a smaller domain. The obligation of record has *"No quantifier over
+   time, no iteration, no cap"* (`Target.lean:160`). The route `lonelyRunnerAt8_of_wideStep8` holds for every `M`, so the
+   cap is my choice of `M = 1`, read off the data. It is not refuted, and nothing in the framework demands it.
+   `Cover8 M` has the same property at any uniform `M`: another session's uncommitted `gridStep8_two_bounded` states
+   `8mt ≤ 15` at `M = 2`. The dilemma is on disk: without a step bound the statement is loneliness renamed (the tree's own
+   note, and map C4); with a uniform step bound it is a cap.
+5. **Density, rates:** none used as an argument. Counts were given as records. "140 of 155" was used as evidence for a
+   sharpened question, which leans towards F3 (a majority rule stated as a law); flagged.
+
+**How it entered** (for map §6): through consequences, not through a method. E207 recorded that only the band needs the
+slowest reading's second block. E210 found that only band shapes need `M = 2`. E211 and E212 chose `M = 1` for the wide
+statement, proved its by-product (the first window), and named that by-product the place. Q7 then took the by-product as
+its object, and the walk and the covering instruments followed. Each step was checked for density and rates; none was
+checked against register item 15.
+
+**What stands:**
+- The band route in Lean: `band_lonely` wired in; `lonelyRunnerAt8_of_wideStep8` for every `M`.
+- `gridStep8_one_first_stretch`, a true theorem. The fault is the reading put on it, not the theorem.
+- The truth checks of `WideStep8 1`, as F8 guards.
+- E214's answer (iii), which is native: at the extremal set, the class instant is chosen by the sign of the pair's
+  deviation on the arrangement's own grid (`GridPairLawN.grid_pair_law`'s mirror). That is *"each isolation is pushed
+  there by the speed"* in the framework's objects: a place, from the grid plus the deviation.
+
+**Not done, pending the owner:**
+- The mirror-junction run as proposed.
+- Q7 as framed: withdrawn from the map questions, to go into map v3 §6 as this entry's failure.
+- The E212 wording in `BandRouteN`'s docstring ("the place `WideStep8 1` names … first clear stretch"), to be corrected
+  in place.
+
+**Consequence:** none for the proof. This entry changes what the next step studies, not what is proved.
