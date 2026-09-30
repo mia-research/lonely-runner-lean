@@ -218,6 +218,7 @@ LRC.SplitChain.Valid:ROUTE
 LRC.SlowestSkeleton.CaseB8:OWED       LRC.SlowestSkeleton.CaseC8:OWED
 LRC.RegimeSkeleton.BoundClear8:ROUTE  LRC.RegimeSkeleton.GridClass8:ROUTE
 LRC.RegimeSkeleton.Cover8:OWED        LRC.RegimeSkeleton.GridStep8:ROUTE
+LRC.BandRoute.WideStep8:OWED
 "
 PROPS=$(python3 - $SRC/*.lean <<'PYEOF'
 import re, sys

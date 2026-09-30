@@ -1,0 +1,20 @@
+E212 (2026-10-01): adversarial walk for a wide set with NO clear point in the slowest reading's first clear stretch.
+
+`BandRoute.gridStep8_one_first_stretch` (proved): GridStep8 S m 1 gives a lonely instant with 1 <= 8mt <= 7.  So a set of
+seven readings with spread above 9 and no clear R = 8mt in [1, 7] would refute WideStep8 1.  The late band shapes were
+found by exactly this kind of walk inside the band (`coverB_fine_v1.late_shapes`: keep moves that leave [1, 7] unclear).
+Here: readings at scale D = 27,720 (least reading D), spread in (9, 12]; one reading moved per step by up to +-600 (the
+least reading fixed); a move is kept when the set stays wide and the widest clear interval of R in [1, 7] does not grow
+(search instrument only, exact via `band_cert_v1/core.clear_set`).  Starts: the late band shapes with one middle reading
+moved above 9 (E212's edge population), and random wide sets.  Every set reaching an empty first stretch is listed with
+its least M (cover8_check_v1.least_M) and its first clear R in [1, 40].  Recorded: the least widest-interval reached.
+
+walks: 300 x 4000 steps
+least widest clear interval of R in [1,7] reached (-1 = empty): ['0', '2475/559095616', '23100/5110742629', '9900/2188277977', '1260/120275717', '3300/286363079', '51975/3550917617', '10395/512079782', '831600/30116174401', '1155/41532019']
+median over walks: 2079/37550 (float 0.05537)
+sets reaching an empty first stretch: 0
+  nearest: widest 0 (0.00000) at (27720, 85358, 117495, 140959, 159149, 200880, 258489) spread 9.3250 least M (1, (85358, 2, 5))
+  nearest: widest 2475/559095616 (0.00000) at (27720, 87270, 119296, 142910, 161492, 203609, 262451) spread 9.4679 least M (1, (119296, 4, 7))
+  nearest: widest 23100/5110742629 (0.00000) at (27720, 87080, 118061, 141442, 160140, 201911, 259734) spread 9.3699 least M (1, (87080, 3, 7))
+  nearest: widest 9900/2188277977 (0.00000) at (27720, 84933, 118006, 141323, 160066, 201420, 259613) spread 9.3655 least M (1, (118006, 4, 7))
+  nearest: widest 1260/120275717 (0.00001) at (27720, 69014, 86005, 115023, 155999, 195627, 278671) spread 10.0531 least M (1, (27720, 1, 3))

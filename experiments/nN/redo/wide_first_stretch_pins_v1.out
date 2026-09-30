@@ -1,0 +1,83 @@
+E212 (2026-10-01): what holds the first clear stretch open at the walk's tightest wide sets.
+
+For each of the tightest sets of `wide_first_stretch_walk_v1` (re-run with the same seeds, keeping every walk's final
+set), take the clear intervals of R in [1, 7] and, at each end of each interval, the reading at an edge (position 1 or 7
+mod 8, exact).  Recorded: per set, the end-pinning pairs (reading at 7 on one end, reading at 1 on the other), their
+ratio, and whether one pair pins both ends of the narrowest interval in opposite orientation (the mirror pair, E125).
+
+(27720, 85358, 117495, 140959, 159149, 200880, 258489) width 0 in [1320/373, 1320/373] (2 clear intervals in [1,7])
+  opens: at-1 [258489] at-7 [117495] | closes: at-1 [258489] at-7 [117495]
+  one pair at both ends, ratio 11/5
+(27720, 87270, 119296, 142910, 161492, 203609, 262451) width 4.43e-06 in [86625/14912, 217800/37493] (1 clear intervals in [1,7])
+  opens: at-1 [119296] at-7 [] | closes: at-1 [] at-7 [262451]
+  one pair at both ends, ratio 262451/119296
+(27720, 87080, 118061, 141442, 160140, 201911, 259734) width 4.52e-06 in [693000/118061, 254100/43289] (1 clear intervals in [1,7])
+  opens: at-1 [118061] at-7 [] | closes: at-1 [] at-7 [259734]
+  one pair at both ends, ratio 259734/118061
+(27720, 84933, 118006, 141323, 160066, 201420, 259613) width 4.52e-06 in [49500/8429, 1524600/259613] (1 clear intervals in [1,7])
+  opens: at-1 [118006] at-7 [] | closes: at-1 [] at-7 [259613]
+  one pair at both ends, ratio 259613/118006
+(27720, 69014, 86005, 115023, 155999, 195627, 278671) width 1.05e-05 in [11340/3137, 138600/38341] (1 clear intervals in [1,7])
+  opens: at-1 [69014] at-7 [] | closes: at-1 [] at-7 [115023]
+  one pair at both ends, ratio 115023/69014
+(27720, 84949, 114029, 141582, 160755, 201701, 250644) width 1.15e-05 in [16500/3371, 415800/84949] (1 clear intervals in [1,7])
+  opens: at-1 [141582] at-7 [] | closes: at-1 [] at-7 [84949]
+  one pair at both ends, ratio 141582/84949
+(27720, 83064, 113633, 136020, 153899, 194344, 249992) width 1.46e-05 in [693000/113633, 190575/31249] (1 clear intervals in [1,7])
+  opens: at-1 [113633] at-7 [] | closes: at-1 [] at-7 [249992]
+  one pair at both ends, ratio 249992/113633
+(27720, 85872, 115234, 143119, 163246, 204045, 253163) width 2.03e-05 in [10395/3578, 415800/143119] (1 clear intervals in [1,7])
+  opens: at-1 [85872] at-7 [] | closes: at-1 [] at-7 [143119]
+  one pair at both ends, ratio 143119/85872
+(27720, 86011, 117001, 143352, 164876, 204967, 257401) width 1.12e-05 in [875/181, 415800/86011] (3 clear intervals in [1,7])
+  opens: at-1 [143352] at-7 [] | closes: at-1 [] at-7 [86011]
+  one pair at both ends, ratio 143352/86011
+(27720, 84716, 114072, 141192, 161695, 202134, 250960) width 2.32e-05 in [22869/6274, 2475/679] (2 clear intervals in [1,7])
+  opens: at-1 [250960] at-7 [] | closes: at-1 [] at-7 [114072]
+  one pair at both ends, ratio 31370/14259
+(27720, 85231, 114669, 142050, 162406, 202602, 252274) width 3.16e-05 in [41580/11467, 15400/4247] (2 clear intervals in [1,7])
+  opens: at-1 [252274] at-7 [] | closes: at-1 [] at-7 [114669]
+  one pair at both ends, ratio 252274/114669
+(27720, 85184, 114429, 141971, 161938, 202409, 251518) width 4.81e-05 in [2835/968, 415800/141971] (1 clear intervals in [1,7])
+  opens: at-1 [85184] at-7 [] | closes: at-1 [] at-7 [141971]
+  one pair at both ends, ratio 141971/85184
+(27720, 85424, 114705, 142375, 162745, 202797, 252026) width 5.7e-05 in [5544/1139, 51975/10678] (1 clear intervals in [1,7])
+  opens: at-1 [142375] at-7 [] | closes: at-1 [] at-7 [85424]
+  one pair at both ends, ratio 142375/85424
+(27720, 85920, 117391, 143194, 162340, 203952, 258270) width 0.000122 in [2079/716, 207900/71597] (2 clear intervals in [1,7])
+  opens: at-1 [85920] at-7 [] | closes: at-1 [] at-7 [143194]
+  one pair at both ends, ratio 71597/42960
+(27720, 68781, 84725, 114639, 156055, 194231, 276701) width 0.000211 in [33000/5459, 138600/22927] (1 clear intervals in [1,7])
+  opens: at-1 [114639] at-7 [] | closes: at-1 [] at-7 [68781]
+  one pair at both ends, ratio 38213/22927
+(27720, 87278, 114457, 140928, 159738, 200706, 251796) width 0.000226 in [99000/16351, 127050/20983] (4 clear intervals in [1,7])
+  opens: at-1 [114457] at-7 [] | closes: at-1 [] at-7 [251796]
+  one pair at both ends, ratio 251796/114457
+(27720, 86013, 114752, 142487, 161503, 202924, 252416) width 0.00032 in [471240/161503, 415800/142487] (3 clear intervals in [1,7])
+  opens: at-1 [161503] at-7 [] | closes: at-1 [] at-7 [142487]
+  one pair at both ends, ratio 161503/142487
+(27720, 86678, 116363, 144181, 163425, 205341, 255988) width 0.000238 in [914760/144181, 434280/68447] (4 clear intervals in [1,7])
+  opens: at-1 [144181] at-7 [] | closes: at-1 [] at-7 [205341]
+  one pair at both ends, ratio 205341/144181
+(27720, 67760, 84540, 112937, 153043, 193168, 274883) width 0.000199 in [63000/10267, 135/22] (4 clear intervals in [1,7])
+  opens: at-1 [112937] at-7 [] | closes: at-1 [] at-7 [67760]
+  one pair at both ends, ratio 10267/6160
+(27720, 84333, 116357, 141121, 150492, 194205, 268964) width 0.00475 in [1512/1177, 16170/12541] (7 clear intervals in [1,7])
+  opens: at-1 [194205] at-7 [] | closes: at-1 [] at-7 [150492]
+  one pair at both ends, ratio 64735/50164
+(27720, 84491, 114835, 138342, 147550, 191543, 263594) width 0.00286 in [63000/17413, 11880/3281] (6 clear intervals in [1,7])
+  opens: at-1 [191543] at-7 [] | closes: at-1 [] at-7 [114835]
+  one pair at both ends, ratio 191543/114835
+(27720, 102258, 163141, 187447, 216077, 235075, 268960) width 0.000181 in [22869/6724, 637560/187447] (6 clear intervals in [1,7])
+  opens: at-1 [268960] at-7 [] | closes: at-1 [] at-7 [187447]
+  one pair at both ends, ratio 268960/187447
+(27720, 90488, 105063, 124343, 151170, 197006, 284140) width 0.0149 in [471240/124343, 54054/14207] (6 clear intervals in [1,7])
+  opens: at-1 [124343] at-7 [] | closes: at-1 [] at-7 [284140]
+  one pair at both ends, ratio 284140/124343
+(27720, 84722, 101578, 117992, 146134, 190549, 272510) width 0.015 in [346500/50789, 1302840/190549] (4 clear intervals in [1,7])
+  opens: at-1 [101578] at-7 [] | closes: at-1 [] at-7 [190549]
+  one pair at both ends, ratio 190549/101578
+(27720, 85496, 101577, 116710, 146173, 190563, 270491) width 0.0144 in [33000/4837, 434280/63521] (5 clear intervals in [1,7])
+  opens: at-1 [101577] at-7 [] | closes: at-1 [] at-7 [190563]
+  one pair at both ends, ratio 63521/33859
+kinds: {'point': 1, 'interval': 24}

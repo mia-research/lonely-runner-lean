@@ -1,0 +1,10 @@
+'LRC.BandRoute.lonely8_of_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.BandRoute.wideStep8_of_cover8' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.BandRoute.lonelyRunnerAt8_of_wideStep8' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.BandRoute.gridStep8_one_first_stretch' depends on axioms: [propext, Classical.choice, Quot.sound]
+LRC.BandRoute.lonelyRunnerAt8_of_wideStep8 : ∀ (M : ℕ), LRC.BandRoute.WideStep8 M → LRC.Spec.LonelyRunnerAt8
+def LRC.BandRoute.WideStep8 : ℕ → Prop :=
+fun M =>
+  ∀ (S : Finset ℕ),
+    S.card = 7 →
+      (∀ d ∈ S, 0 < d) → ∀ m ∈ S, (∀ d ∈ S, m ≤ d) → (∃ d ∈ S, 9 * m < d) → LRC.RegimeSkeleton.GridStep8 S m M

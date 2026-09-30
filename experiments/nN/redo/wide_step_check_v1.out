@@ -1,0 +1,44 @@
+E211/E212 (2026-10-01): WideStep8 1 checked as written, before it is registered OWED (F8).
+
+Owner: "yes, design the route first, then build it in lean".  Design: log E211.
+
+  WideStep8 M:  every set S of exactly 7 positive whole numbers, least element m, with some reading above 9m, has
+    GridStep8 S m M (BoundClear8 S m, or a grid class through one of its own readings e with mm*m <= M*e, class a unit
+    mod 8).  The route: at most six readings (order seven), W <= 7m (the bound), 7m < W <= 9m (band_lonely), 9m < W
+    (this statement).  GridStep8 is decided by `least_M` of `cover8_check_v1.py` (written from the Lean definitions).
+Populations (seven readings, spread above 9 only):
+  every 7-set of readings <= 20; every tenth 7-set of readings <= 24; random 7-sets of readings <= 2,000;
+  fine random shapes (least reading 1,000) with spread in (9, 9.5] and in (9.5, 12];
+  the edge next to the band: every late band shape (E120-E124; they need M = 2 in the band) with its top reading moved
+  to u*m, u in {9.001, 9.01, 9.05, 9.2, 9.5};
+  the six-crowd shapes with a slow runner (E153/E154) at crowd scales A putting the top just above 9.
+Recorded per population: least M (0 = the bound is clear), and every set with least M >= 2 or none, individually.
+
+
+== every 7-set of readings <= 20, spread above 9: 37660 sets ==
+  least M (0 = the bound is clear): {0: 15658, 1: 22002}
+  needing M >= 2, or none up to the cap: 0
+
+== every tenth 7-set of readings <= 24, spread above 9: 16767 sets ==
+  least M (0 = the bound is clear): {0: 6451, 1: 10316}
+  needing M >= 2, or none up to the cap: 0
+
+== random 7-sets of readings <= 2,000, spread above 9: 4000 sets ==
+  least M (0 = the bound is clear): {0: 1016, 1: 2984}
+  needing M >= 2, or none up to the cap: 0
+
+== fine shapes, least reading 1,000, spread in (9, 9.5]: 4000 sets ==
+  least M (0 = the bound is clear): {0: 1016, 1: 2984}
+  needing M >= 2, or none up to the cap: 0
+
+== fine shapes, least reading 1,000, spread in (9.5, 12]: 3000 sets ==
+  least M (0 = the bound is clear): {0: 971, 1: 2029}
+  needing M >= 2, or none up to the cap: 0
+
+== late band shapes with the top reading moved just above 9: 27000 sets ==
+  least M (0 = the bound is clear): {0: 27000}
+  needing M >= 2, or none up to the cap: 0
+
+== six-crowd shapes with a slow runner, top just above 9: 200 sets ==
+  least M (0 = the bound is clear): {1: 200}
+  needing M >= 2, or none up to the cap: 0
