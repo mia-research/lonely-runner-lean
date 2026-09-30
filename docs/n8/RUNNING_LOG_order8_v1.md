@@ -7342,3 +7342,8 @@ of 4,000 steps, spread `(9, 12]`, keeping moves that do not widen the widest cle
 provisional since 2026-09-25): every reading on lap 0 at a flank opening `A/(8e)`. `WideStep8 1` does not use it and does
 not settle it, because only the slowest reading is on lap 0 there and the others may be on any lap. So the line stands
 as written. The two uses of "first" name different objects.
+
+**Audit note (2026-10-01).** The map-first audit (memory `feedback_n8_map_first`) flags E200 and E209 for a grade tag
+with no `**Consequence:**` line. In both the tag cites an earlier result and records no new one: E200 cites `SlowBlockN`
+`[PROVED]`, and E209 cites earlier populations as `[VERIFIED]`. **Consequence** for both: none new. The log is append-only,
+so the audit will keep listing these two; the map v3 cut should carry this note.
