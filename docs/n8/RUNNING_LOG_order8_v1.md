@@ -6865,3 +6865,46 @@ lands; (iii) the same mechanism, a separation) or when the fast part is a crowd 
 - What a proof needs next, in the same terms: why the sweep started by the captures ends early against the slow part's
   interval; for a crowded fast part, why it ends inside the slow part's second interval (E154's pattern). Not
   established here.
+
+---
+
+## E203 — 2026-09-30 — how the sweep ends: passages of AP-like clusters, linked by bridges from the entering edge
+
+**Map:** `CASCADE_DESIGN_v2` §2, §4 · M2 (d), designed first in the cascade's own terms · nearest §6 classes F1 (avoided:
+passages and revisits recorded, never bounded as the argument) and F2 (avoided: no statement of how much time clusters
+cover).
+
+**Owner:** *"Thats ok, we want each step to move us closer.  We already have the cascade so figuring how how it is doing
+it is important step towards why is it forced.  yes, design why the sweep ends first, then run it"*.
+
+**Design** (`LonelyRunner/experiments/nN/redo/e203_sweep_v1.py` docstring): on lap `k` a cluster is a maximal run with
+consecutive ratios below `ρ_k` (E142–E143: a same-lap sweep can only go down through one, and stops at its bottom). The
+chain grouped: **passages** (a cluster going through the subject's slot, members exiting in descending speed) linked by
+**bridges** (at a cluster bottom's exit another cluster is already in the slot); the landing is a bottom's exit with no
+other cluster in the slot: a gap between passages, bounded by one bottom's exit and the next top's entry.
+
+**Run** (exact; commit below) `[VERIFIED — these populations]`; derived checks (descending inside a passage; the landing
+a cluster bottom's exit) 0 violations throughout.
+- every set `≤ 24` with a chain (145,368): **one passage 96,670**; two 31,913; three 9,217; four 4,402; five to fifteen
+  the rest (longest 15, in 2 chains). Bridges 78,267: up 55,137, down 23,123, the same cluster on another lap 7. Chains
+  with a revisit (a cluster passing again on a later lap): 4,885. At a bridge the next cluster was, one move earlier, at
+  the entering edge (slot 6: 22,336; slot 7: 13,811) or further back when fast (slot 5: 11,510; 4: 6,286; …).
+- late fine band shapes (5,400): 13–21 passages, every chain with revisits: a relay across laps (E141's descending waves).
+- Case C (762 and 775 chains): mostly one to three passages; revisits in 39 and 29.
+- Example read in full: `(1,3,4,5,6,7,8)`: the captured cluster `4…8` passes on lap 1 in five moves; then single readings
+  relay across laps (7 on lap 2, 3 on lap 1, 8 on lap 3, 5 on lap 2, 7 on lap 3), up and down alternately; the landing is
+  7's exit on lap 3, `R = 25/7`, the rung `3/7` plus 7's exit (E188's form), with every other reading in slots 1–6.
+
+**Reading** `[reasoned from the run]`: the sweep is the captured AP-like cluster going through the slot; it ends at that
+cluster's bottom exit unless another cluster is then in the slot, and that cluster got there from the entering edge (or,
+if fast, from further back) during the last move. Longer chains are relays of single readings across laps.
+
+**Consequence:**
+- How the cascade ends the sweep is now stated in its own objects (passages, bridges, the gap at the landing). Why it
+  must end is not: a chain continues exactly while each passage end finds another cluster in the slot, and that is
+  decided by where the clusters sit (grid slot and deviation) at the passage ends.
+- "Each cluster obstructs once" is **not** the mechanism (revisits in 4,885 chains to 24 and in every late shape; E163
+  already found no-return to be the conjecture itself).
+- Next design question, in the same terms: the configuration at the passage ends: where every cluster sits at each
+  passage end in a chain, what keeps one at the entering edge while the relay continues, and what empties the slot at
+  the last one; read on the long relays and the late shapes (including the slow part's own move, E154).
