@@ -6736,3 +6736,37 @@ local stability, which would presuppose that every point is lonely.
 
 **Consequence:** the programme's finiteness step is stated in the framework's objects (references, deviations,
 relocations; the cascade's map), with three questions to the owner (§7.6) before any step.
+
+---
+
+## E200 — 2026-09-30 — the owner on the breakdown: no "first isolation"; the mix of AP and grid; the isolation pushed by the speed; no gaps
+
+**Map:** `CASCADE_DESIGN_v2` §7 · design only, nothing run.
+
+**Owner** (on E199's points, verbatim): *"I don't like first isolation.  Because that is not required by the conjecture
+and I don't believe our frame work.  Often it is, but sometimes it is not."* · *"Hmmm do we not have a mix and match
+proof, where the first half of AP will work with a second part of grid?"* · on the gap simplex: *"Yes AP is scale
+invariant and Grid extends to infinity, both of those together plus the fact that the conjecture arrangement places
+inherent constraints too i.e. runner 2 can speedup past runner 3 without becoming runner 3."* · on the size of a piece:
+*"This question doesn't quite make sense to me. Each isolation is pushed there by the speed."* · on which reference
+first: *"Think about it, we want to develop our proof so there is no gaps."*
+
+**Recorded:**
+- **First isolation is out of the argument** (E109 O1 restated): the proof uses `doors_agree` (lonely ⇔ the cascade
+  arrives) and the cascade's landing as *an* isolation; nothing rests on it being the first. (The Lean statement
+  `first_isolation_of_fixed`, `Cascade/Iteration.lean:213`, says the landing is at or before every positive lonely time;
+  it is a by-product and is not used.)
+- **The mix of AP and grid is in the tree** `[PROVED — SlowBlockN, tracked]`: split at the largest gap; the slow part is
+  an AP-like group (an R1 group at `d_min`'s scale) clear on its common block on any lap `k` (`slow_clear`,
+  `slow_clear_lap`); on that block **the whole question is exactly the fast part's** (`block_iff_fast`,
+  `exists_block_iff_fast`, `exists_block_iff_fast_lap`; real readings), and the fast part is read on its own grid. Also
+  mixed: descent and the rung form (the multiples carried AP-like through their cofactors, the rest on the grid).
+- **"Pieces" withdrawn.** The owner's object is the push: the isolation's location as the speeds make it, which the
+  cascade computes. No regions are grown around references.
+- **No gaps, reasoned** `[derived]`: growing a region around one reference leaves gaps. The decomposition must apply to
+  every arrangement by construction: a largest gap always exists (so the AP part / grid part split always applies);
+  every speed is a grid position plus a deviation at any scale (so "grid plus deviation" always applies); the grid
+  through the arrangement's own reading is always defined (`GridPairLawN`). Then no arrangement is outside the
+  structure, and every proof obligation is of one kind: where the deviation pushes the isolation, shown by the cascade.
+  The one obligation left is that the push never loses it: at each level of the split the fast part's isolation falls
+  inside the slow part's block (E151), and captures separate without an endless chain (E158).
