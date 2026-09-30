@@ -7557,3 +7557,145 @@ checked against register item 15.
   in place.
 
 **Consequence:** none for the proof. This entry changes what the next step studies, not what is proved.
+
+---
+
+## E216 — 2026-10-01 — design: the re-aimed run (the class instant on the arrangement's own grid, what selects it, how the speed moves it)
+
+**Owner:** *"yes re-aim it, fix the docstring and record the memory"*. The docstring fix is `LonelyRunner` `6107511`. The
+memory is with the `memory-drafter` agent. Q7 as framed in E212–E214 is withdrawn (E215), to go into map v3 §6.
+
+**Map:** v2 §2A row 1 (`GridPairLawN`: the grid pair law, the grid-class clearance), §1's certificate and opening
+objects, v21 §6.10's candidate scales (Theorem 6.15, the obligation of record). No map §4 question yet: this step
+continues E214's answer (iii). M2 class (d), a map run. Nearest §6 classes:
+- F14 (an instant family the cascade does not use). Every instant here is a reading's opening `(8K+1)/(8a)`, the
+  cascade's own kind of instant and the landing's kind (map C4). The landing is recorded against them in every set.
+- F4 (a restatement taken for a step). See M4-6.
+- F1 (a cap) and item 15 (the first window). There is no window, the laps are unrestricted, and `M` is a coordinate.
+
+**Object.** A grid through one of the arrangement's own readings `e` with divisor `mm` (step `e/mm`). Each reading `d`
+has grid point `n = round(mm·d/e)`. A class `c ∈ {1, 3, 5, 7}` gives residues `r = c·n mod 8`.
+- The **class instant** is the opening of the reading `a` on the class's leaving edge (`r_a = 1`),
+  `t = c·n_a/(8·d_a)`. That is `a`'s opening at lap `K = (c·n_a − 1)/8`: the candidate scale `d_a/(8K+1)`, pointwise and
+  exact.
+- At `t`, each reading sits at `p = c·n_a·d/d_a = c·n + ε`, where `ε` is its deviation relative to `a`'s grid point (the
+  pair law's rescaling `ν = n_a/x_a`).
+- The reading is clear iff `p mod 8 ∈ [1, 7]`, and the class instant is lonely iff all seven are.
+
+**Forced before running (M4):**
+- M4-1. A lonely class instant is a clear candidate scale, so it witnesses Theorem 6.15 at that set.
+- M4-2. The mirror class `8 − c` maps every residue `r ↦ (8 − r) mod 8`. Interior residues stay interior, `1 ↔ 7`, and
+  `0` stays `0`. A reading whose grid point is a multiple of 8 sits at residue 0 in every class of that grid.
+- M4-3. At a lonely class instant, every reading at residue 7 has `ε ≤ 0` (clear at the entering edge). This is a
+  check, not a finding.
+- M4-4. The kinds of failure are exhaustive by residue: residue 0 (captured; in the way unless `|ε| ≥ 1` or it wraps);
+  residue 7 with `ε > 0` (past the entering edge: the pair law's case); residue 1 with `ε < 0` (a doubled leaving edge);
+  an interior residue `r` with `r + ε ∉ [1, 7]`.
+- M4-5. The grid pair law (`grid_pair_law`, proved). When class `c` fails only through its entering-edge reading `b`
+  (`ε_b > 0`), the pair `(a, b)` sits in the right order for the mirror class `8 − c` with `b` on the leaving edge. The
+  mirror is lonely iff the other readings are clear there. That last condition is content, not forced.
+- M4-6. **The restatement hazard.** Every opening `(8K+1)/(8h)` is the class-1 instant of the grid through `h` with
+  `mm = 8K + 1`. With `mm` unrestricted, "some lonely class instant exists" is loneliness renamed (map C4). So the run's
+  content is which grid and class hold the isolation, and how they move with the speeds. `M = ⌈mm·m/e⌉` (the grid's
+  coarseness against the slowest reading) is recorded as a coordinate and never required. The computational range is
+  `M ≤ 4`, a range of search, not a statement. Every set with no lonely class instant in the range is listed.
+
+**Parts:**
+- **A. Placement**, per set:
+  - the lonely class instants in the range, and their coarsest `M`;
+  - at each, the edge pair and every interior reading's `ε` against its residue's band `[1 − r, 7 − r]`;
+  - at each non-lonely class instant, the failing readings by kind (M4-4);
+  - for each class that fails only on its entering edge, whether the mirror is lonely (M4-5); if it is not, the kind
+    that fails it;
+  - the cascade's landing (setter `h`, lap `K`), and whether it is one of the set's lonely class instants.
+
+  Populations, chosen by construction and ranked by nothing: every 7-set of readings ≤ 16 (11,440); 2,000 seeded
+  uniform 7-sets of readings ≤ 200; 1,000 seeded fine shapes at scale 1,000 with spread uniform in `[2, 20]`.
+- **B. Relocation** (the owner's tool; *"each isolation is pushed there by the speed"*). Take 30 seeded fine shapes
+  (scale 1,000, spread uniform in `[2, 20]`). Move each reading in turn by `−150` to `+150` in steps of 5, readings
+  keeping their names. At each step record the lonely class instants and the landing. At each change, record:
+  - for an instant that ends, the reading and the kind that end it;
+  - for one that begins, its relation to the ended ones: the same grid's mirror (the pair law), the same grid's other
+    class, or another grid;
+  - where the landing is.
+
+**Checks** (the only pass conditions):
+- C1 (oracle): the landing equals the least clear point from `clear_set`.
+- M4-2's residue map at every mirror evaluated.
+- M4-3 at every lonely class instant.
+- The integer clearance test (`c·n_a·d mod 8d_a ∈ [d_a, 7d_a]`) against the `Fraction` position at every lonely instant.
+
+**Checklist.** The objects are the arrangement's own grids, classes (units mod 8), residues, deviations and openings
+(candidate scales), and the cascade's landing. Every statement is pointwise at a named instant, with no union of windows.
+There is no window and no lap restriction. `M` is a coordinate. The populations are exhaustive or seeded uniform, and
+nothing is ranked by nearness to anything. Counts are records, with the exceptions listed.
+
+---
+
+## E217 — 2026-10-01 — the re-aimed run: the grid-class instant is an opening; the pair law's mirror does not carry the isolation in general; the landing's opening persists under speed change
+
+**Map:** v2 §2A row 1, candidate scales (Theorem 6.15); continues E214 (iii); M2 (d), as designed in E216 with the
+corrections below. Nearest §6 classes: F5 (one output was forced, and is marked) and F14 (Part B's first form tracked
+every lonely opening; Part B′ reads the landing only).
+
+**Corrections to E216's design, found by its own checks and derivation before any result was read:**
+- **M4-3 was false as stated.** A reading on residue 7 can be clear with `ε ≥ 2` (past the next lap's leaving edge; for
+  example at the progression, grid through 1 with divisor 3, class 3, the reading 2 sits at `18 ≡ 2`). The check fired
+  21 times on the progression. It is dropped, and failures are named by the side of the slot the reading is actually on.
+- **The family is the readings' openings** `[derived]`. After the pair law's rescaling (`a` on its grid point), the class
+  instant depends only on `(a, n_a, c)`: the grid through the leaving-edge reading `a` itself. So the family is every
+  opening `(8K+1)/(8a)`, read as class `c` of the grid through `a` with `n_a = (8K+1)/c`. E216's reading `e` adds
+  nothing at the instant. Every such instant is a candidate scale `a/(8K+1)`, Theorem 6.15's object.
+- **`M` is time** `[derived]`. `t = c·n_a/(8a)` with `n_a·m ≤ M·a` gives `R = 8mt ≤ c·M`. The search range `M ≤ 4` is the
+  window `R ≤ 28`, and the "coarsest `M`" E216 planned to record would have been close to "earliest instant". It was
+  dropped. This confirms E215 point 4 by derivation: a uniform step bound is a cap on time.
+- **"The landing is a lonely class instant" is forced** (F5) whenever the landing lies in the window, because the landing
+  is a lonely opening. It held in every set and at every step, and is not a finding.
+
+**Checks** `[VERIFIED — every run]`: C1 (the cascade's landing equals the least clear point from `clear_set`), 0 failures
+in every population and at every sweep step. M4-2 (the mirror's residue map), the construction check, and the integer
+test against `Fraction` positions: 0 failures (`LonelyRunner/experiments/nN/redo/class_instant_run_v1.out`,
+`class_instant_run_v2.out`).
+
+**A. Placement** (every 7-set of readings ≤ 16, 11,440; 2,000 uniform 7-sets of readings ≤ 200; 1,000 fine shapes of
+spread uniform in `[2, 20]`):
+- Every set has a lonely opening inside the search window. That is the range check (no misses), not a finding.
+- **The pair law's mirror, beyond its hypothesis** `[VERIFIED — these populations; a scoped null]`. When an opening fails
+  only on its entering edge, the mirror (class `8 − c`, the entering reading on the leaving edge) is lonely in 15,003
+  of 73,613, 7,459 of 32,736 and 1,831 of 8,547. The rest fail by all four kinds, most often an interior reading beyond
+  its band. So the mirror that held E214's tight set is not, in general, where the isolation goes once the other
+  readings' deviations are unrestricted.
+- **The pair law's small-deviation hypothesis** (`|ε| ≤ 1` for interior readings) does not describe most lonely openings.
+  An interior reading deviates by more than 1 at 87,347 of 159,506, 39,556 of 61,264 and 9,899 of 15,458 of them, and
+  is still clear inside its residue's band `[1 − r, 7 − r]`.
+- Failing readings at non-lonely openings fall in all four kinds in every population. Recorded, not ranked.
+
+**B. Relocation.** Thirty seeded fine shapes; each reading moved by `−150` to `+150` in steps of 5 (up to 15%):
+- Part B's first form (every lonely opening in the window: 1,953 begun, 1,965 ended) tracked a family broader than the
+  cascade uses. It is recorded in `_v1.out` and not read as mechanism.
+- **B′, the cascade's own landing** (`_v2.out`): across 10,954 steps the landing's opening (setter and lap) changed 16
+  times.
+  - In 10, an earlier opening became lonely while the old one stayed lonely. That is the landing being the least lonely
+    instant, a by-product (E109 O1), not a relocation.
+  - In 6, the old landing's isolation was destroyed. Each time **exactly one reading was in the way there, on its
+    entering side**. In 3 of the 6 the landing moved to that reading's own exit; in 3 to another reading's.
+  - `[VERIFIED — these sweeps; small counts, recorded, not a law]`.
+
+**Consequence:**
+- **The grid view of the owed statement is candidate scales plus a cap** `[derived]`. The pair law's class instant is an
+  opening of the leaving-edge reading. `GridClass8`'s Helly instant is also an opening (of the reading with the largest
+  left end). So every `GridStep8` certificate names a clear candidate scale (Theorem 6.15's object), with its lap
+  structure read from a grid. The step bound `M` bounds its time. `WideStep8 M` is Theorem 6.15 on wide sets, plus a
+  lap structure, plus a cap. This answers the E215 decision point on how the owed statement should read: the native
+  content is the lap structure, and the cap is not native.
+- **E214's (iii) is scoped to the tight set** `[VERIFIED — these populations]`. The mirror carried the isolation there
+  (both junctions tight at one ratio), and does in about one case in five here. It is not the general relocation.
+- **A lead for the next step** `[VERIFIED — these sweeps; reasoned as a reading]`. The landing's opening persists across
+  wide speed changes and ends only when one reading enters its slot there. The region of speeds where one opening, with
+  one lap for every reading, stays lonely is a set of linear inequalities in the speeds. The band theorem's 105 cones
+  (E124) are exactly such regions. So the relocation map is the cone structure: which lap assignment holds where in
+  the shape space, and what the cascade does on crossing a wall (one reading entering). This is the owner's *"every
+  arrangement is AP/grid plus deviation … the cascade maps where the displacement is relocated"*, with the walls named
+  by the reading that enters. Not yet designed.
+- **Standing questions:** E215's question on how the owed statement should read is answered in part (above). The cap
+  remains a decision for the owner.
