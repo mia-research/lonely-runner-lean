@@ -1,0 +1,122 @@
+E203 (2026-09-30): why the sweep ends: designed in the cascade's own terms, then run.
+
+Owner: "Thats ok, we want each step to move us closer.  We already have the cascade so figuring how how it is doing it is
+important step towards why is it forced.  yes, design why the sweep ends first, then run it".
+
+DESIGN (the cascade's chain, grouped by clusters; units R = 8 d_min t)
+  Clusters.  On lap k a CLUSTER is a maximal run of consecutive readings with ratio below rho_k = (8k+1)/(8k-1) (lap 0
+  read as rho_1, E145).  Forced by ordering (E142, E143; `SweepBridgeN`): a same-lap sweep can only go down through such a
+  run, and it stops at the run's bottom.
+  PASSAGE: consecutive moves whose setters lie in one lap-k cluster: the cluster going through the subject's slot, its
+  members exiting in descending speed order (derived: faster members are further ahead).
+  BRIDGE: two consecutive passages; at one cluster bottom's exit a reading of another cluster (or of the same cluster on
+  another lap) is already in the slot.  Up (to a faster cluster) or down.
+  THE END: the landing is a cluster bottom's exit at which no other cluster is partway through the slot (E143, forced):
+  a gap between passages, bounded by a bottom's exit and the next top's entry: an isolation event in the owner's terms.
+  So "why the sweep ends" is: why the passages stop linking.  Two things decide it and are recorded:
+    (a) the BRIDGES: at each, how the next cluster came to be in the slot (its grid slot at the preceding instant and
+        its deviation), and whether it was faster or slower;
+    (b) REVISITS: whether a chain ever passes the same cluster on a later lap (a cluster obstructing twice).
+  Frame checks (the checklist): the object is the cascade's chain, grouped; no statement about how much time the clusters
+  cover (the other frame); revisits and passages are recorded, never bounded as an argument; no instant family; no first
+  isolation; every exception listed.
+RUN (exact).  Per chain: its passages (cluster members, lap, number of moves in it), its bridges (up/down, the next
+cluster's slot at the bridging instant), revisits, and (derived checks) moves inside a passage go down in speed; the
+landing is a cluster bottom's exit.  Populations as E201/E202, restricted to chains (at least one move).
+
+
+== every 7-set of readings in 1..24: 145368 chains ==
+  CHECK moves inside a passage go down in speed (derived): 0 violations
+  CHECK the landing is the last passage's cluster bottom's exit (E143, forced): 0 violations
+  passages per chain: {1: 96670, 2: 31913, 3: 9217, 4: 4402, 5: 1951, 6: 727, 7: 296, 8: 112, 9: 47, 10: 16, 11: 8, 13: 4, 14: 3, 15: 2}
+  bridges: 78267; up 55137, down 23123; to the same cluster on another lap 7
+  chains with a revisit (a cluster passing on a second lap): 4885
+  the next cluster's eighth-slots at the bridging instant (top 12): [((6,), 22336), ((7,), 13811), ((5,), 11510), ((4,), 6286), ((5, 6), 5062), ((6, 7), 4292), ((4, 5), 3007), ((3,), 1769), ((3, 4), 1480), ((0, 7), 988), ((1,), 928), ((4, 5, 6), 794)]
+  chain shapes (cluster size, lap, moves) most common: [(((1, 1, 1),), 16016), (((2, 1, 1),), 9215), (((3, 1, 1),), 8040), (((2, 1, 2),), 7862), (((3, 1, 2),), 7808), (((4, 1, 1),), 6628), (((1, 3, 1),), 6188), (((4, 1, 3),), 5165)]
+    revisit: (1, 2, 3, 4, 6, 7, 16) P (1, 2, 3, 4, 6, 7) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 4, 6, 8, 21) P (1,) moves 4 passages [(1, 1, 1), (1, 3, 1), (1, 1, 1), (1, 4, 1)] R* 11/7
+    revisit: (1, 2, 3, 4, 7, 13, 24) P (1,) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 2, 1), (1, 4, 1)] R* 11/8
+    revisit: (1, 2, 3, 4, 7, 19, 24) P (1, 2, 3, 4, 7) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 3, 1), (1, 4, 1)] R* 11/8
+    revisit: (1, 2, 3, 5, 7, 13, 24) P (1,) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 2, 1), (1, 4, 1)] R* 11/8
+    revisit: (1, 2, 3, 5, 7, 19, 24) P (1, 2, 3, 5, 7) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 3, 1), (1, 4, 1)] R* 11/8
+    revisit: (1, 2, 3, 6, 7, 9, 16) P (1,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 10, 16) P (1,) moves 5 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1), (1, 2, 1)] R* 17/10
+    revisit: (1, 2, 3, 6, 7, 11, 16) P (1,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 12, 16) P (1,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 13, 16) P (1,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 14, 16) P (1,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 15, 16) P (1, 2, 3, 6, 7) moves 5 passages [(2, 2, 1), (2, 1, 2), (2, 3, 2)] R* 5/3
+    revisit: (1, 2, 3, 6, 7, 16, 17) P (1, 2, 3, 6, 7) moves 4 passages [(2, 2, 1), (2, 1, 2), (2, 3, 1)] R* 25/16
+    revisit: (1, 2, 3, 6, 7, 16, 19) P (1, 2, 3, 6, 7) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 25/16
+
+== late fine band shapes: 5400 chains ==
+  CHECK moves inside a passage go down in speed (derived): 0 violations
+  CHECK the landing is the last passage's cluster bottom's exit (E143, forced): 0 violations
+  passages per chain: {13: 451, 14: 979, 15: 2287, 16: 935, 17: 26, 18: 649, 19: 70, 21: 3}
+  bridges: 76951; up 42373, down 34578; to the same cluster on another lap 0
+  chains with a revisit (a cluster passing on a second lap): 5400
+  the next cluster's eighth-slots at the bridging instant (top 12): [((6,), 36963), ((5,), 17124), ((4,), 11512), ((3,), 5056), ((4, 5), 2764), ((3, 5), 1187), ((3, 4), 1174), ((2,), 528), ((5, 6), 460), ((1,), 155), ((0,), 27), ((4, 6), 1)]
+  chain shapes (cluster size, lap, moves) most common: [(((4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 1, 1)), 688), (((4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 1), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 1, 1)), 465), (((5, 1, 5), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 3, 1), (1, 5, 1), (1, 3, 1), (1, 2, 1), (1, 6, 1), (1, 4, 1), (1, 1, 1), (1, 8, 1)), 427), (((5, 1, 5), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 3, 1), (1, 5, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 1, 1), (1, 8, 1)), 344), (((4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 1), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 5, 1), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 1, 1)), 215), (((5, 1, 5), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 1, 1)), 215), (((5, 1, 5), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 1, 1), (1, 8, 1)), 197), (((6, 1, 6), (2, 2, 2), (1, 3, 1), (1, 4, 1), (1, 2, 1), (1, 3, 1), (1, 5, 1), (1, 3, 1), (1, 2, 1), (1, 6, 1), (1, 4, 1), (1, 1, 1), (1, 8, 1), (1, 3, 1), (1, 4, 1), (1, 9, 1)), 184)]
+    revisit: (27720, 63963, 86790, 112837, 142389, 159647, 203542) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86790, 112837, 142785, 159647, 203542) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86790, 113004, 142389, 159647, 203542) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86790, 113377, 142235, 159647, 203202) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86790, 113377, 142389, 159647, 203202) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86790, 113377, 142389, 159647, 203542) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86875, 113377, 142235, 159647, 202866) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86875, 113377, 142235, 159647, 203028) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86875, 113377, 142235, 159647, 203202) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86875, 113553, 142235, 159647, 202866) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86875, 113688, 142235, 159647, 202866) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86951, 113688, 142235, 159354, 202866) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86951, 113688, 142235, 159354, 203235) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 63963, 86951, 113688, 142235, 159647, 202866) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+    revisit: (27720, 64153, 86615, 114125, 142198, 159822, 203221) P (27720,) moves 20 passages [(4, 1, 4), (1, 2, 1), (1, 1, 1), (2, 2, 2), (1, 1, 1), (1, 2, 1), (1, 3, 1), (1, 4, 1), (1, 3, 1), (1, 2, 1), (1, 4, 1), (1, 3, 1), (1, 4, 1), (1, 6, 1), (1, 2, 1), (1, 1, 1)] R* 9
+
+== Case C, readings <= 200 (seed 13): 762 chains ==
+  CHECK moves inside a passage go down in speed (derived): 0 violations
+  CHECK the landing is the last passage's cluster bottom's exit (E143, forced): 0 violations
+  passages per chain: {1: 339, 2: 233, 3: 107, 4: 51, 5: 16, 6: 11, 7: 2, 8: 1, 9: 1, 10: 1}
+  bridges: 755; up 500, down 255; to the same cluster on another lap 0
+  chains with a revisit (a cluster passing on a second lap): 39
+  the next cluster's eighth-slots at the bridging instant (top 12): [((6,), 307), ((5,), 112), ((7,), 92), ((4,), 64), ((3,), 35), ((2,), 25), ((1,), 24), ((5, 6), 18), ((6, 7), 11), ((0, 7), 10), ((4, 5), 10), ((2, 3), 8)]
+  chain shapes (cluster size, lap, moves) most common: [(((1, 3, 1),), 40), (((1, 4, 1),), 35), (((1, 2, 1),), 29), (((1, 1, 1),), 28), (((1, 5, 1),), 20), (((2, 3, 1),), 17), (((1, 6, 1),), 16), (((2, 2, 1),), 13)]
+    revisit: (4, 50, 58, 123, 142, 174, 191) P (4,) moves 4 passages [(1, 6, 1), (1, 4, 1), (1, 2, 1), (1, 7, 1)] R* 228/191
+    revisit: (2, 13, 14, 107, 113, 150, 197) P (2, 13, 14) moves 5 passages [(1, 7, 1), (2, 1, 2), (1, 13, 1), (1, 10, 1)] R* 162/113
+    revisit: (1, 54, 140, 167, 181, 182, 192) P (1,) moves 5 passages [(1, 24, 1), (1, 21, 1), (2, 23, 1), (1, 7, 1), (2, 24, 1)] R* 193/181
+    revisit: (3, 41, 66, 85, 102, 140, 193) P (3,) moves 5 passages [(1, 8, 1), (1, 6, 1), (1, 3, 1), (1, 2, 1), (1, 10, 1)] R* 243/193
+    revisit: (4, 27, 95, 104, 113, 117, 190) P (4,) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 4, 1), (2, 5, 1)] R* 164/113
+    revisit: (2, 105, 109, 122, 148, 155, 175) P (2,) moves 6 passages [(1, 11, 1), (1, 7, 1), (1, 8, 1), (1, 7, 1), (1, 10, 1), (1, 12, 1)] R* 194/175
+    revisit: (6, 34, 41, 94, 142, 172, 196) P (6,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 75/47
+    revisit: (3, 6, 20, 48, 70, 89, 136) P (3, 6) moves 4 passages [(1, 3, 1), (1, 1, 1), (1, 4, 1), (1, 8, 1)] R* 195/136
+    revisit: (1, 23, 60, 75, 96, 146, 180) P (1,) moves 4 passages [(1, 12, 1), (1, 3, 1), (1, 13, 1), (1, 20, 1)] R* 161/146
+    revisit: (4, 54, 65, 66, 117, 151, 190) P (4,) moves 5 passages [(2, 2, 1), (1, 5, 1), (1, 4, 1), (1, 2, 1), (1, 6, 1)] R* 196/151
+    revisit: (1, 41, 84, 96, 103, 109, 197) P (1,) moves 5 passages [(1, 12, 1), (1, 25, 1), (1, 14, 1), (1, 11, 1), (1, 26, 1)] R* 209/197
+    revisit: (1, 27, 54, 78, 88, 106, 150) P (1,) moves 5 passages [(1, 11, 1), (1, 19, 1), (1, 7, 1), (1, 14, 1), (1, 20, 1)] R* 161/150
+    revisit: (3, 18, 45, 64, 66, 80, 193) P (3,) moves 6 passages [(1, 8, 1), (1, 2, 1), (2, 3, 1), (1, 1, 1), (2, 4, 1), (1, 3, 1)] R* 5/3
+    revisit: (3, 33, 45, 66, 140, 182, 191) P (3,) moves 3 passages [(1, 8, 1), (1, 2, 1), (1, 9, 1)] R* 219/191
+    revisit: (5, 15, 19, 67, 110, 153, 158) P (5, 15, 19) moves 6 passages [(2, 4, 2), (1, 3, 1), (1, 2, 1), (2, 5, 2)] R* 205/153
+
+== Case C, readings <= 5,000 (seed 29): 775 chains ==
+  CHECK moves inside a passage go down in speed (derived): 0 violations
+  CHECK the landing is the last passage's cluster bottom's exit (E143, forced): 0 violations
+  passages per chain: {1: 378, 2: 226, 3: 104, 4: 38, 5: 20, 6: 4, 7: 2, 8: 1, 9: 2}
+  bridges: 683; up 482, down 201; to the same cluster on another lap 0
+  chains with a revisit (a cluster passing on a second lap): 29
+  the next cluster's eighth-slots at the bridging instant (top 12): [((6,), 281), ((5,), 140), ((4,), 59), ((3,), 38), ((2,), 30), ((7,), 27), ((5, 6), 23), ((1,), 22), ((0,), 11), ((4, 5), 10), ((6, 7), 6), ((4, 6), 6)]
+  chain shapes (cluster size, lap, moves) most common: [(((1, 2, 1),), 46), (((1, 1, 1),), 35), (((1, 3, 1),), 34), (((1, 4, 1),), 29), (((2, 3, 1),), 21), (((1, 6, 1),), 18), (((1, 5, 1),), 18), (((2, 1, 1),), 11)]
+    revisit: (131, 1791, 2199, 3791, 3956, 4010, 4170) P (131,) moves 12 passages [(4, 4, 3), (1, 2, 1), (4, 5, 4), (1, 3, 1), (3, 6, 3)] R* 6419/3956
+    revisit: (28, 1655, 1895, 2179, 2882, 3646, 4014) P (28,) moves 9 passages [(1, 18, 1), (1, 13, 1), (1, 10, 1), (1, 17, 1), (1, 9, 1), (1, 8, 1), (1, 18, 1), (1, 20, 1), (1, 11, 1)] R* 2492/2179
+    revisit: (73, 153, 163, 491, 1723, 2180, 2450) P (73, 153, 163, 491) moves 3 passages [(1, 3, 1), (1, 1, 1), (1, 4, 1)] R* 2409/1723
+    revisit: (32, 1221, 2156, 3156, 3752, 4290, 4334) P (32,) moves 6 passages [(2, 17, 2), (1, 15, 1), (1, 5, 1), (1, 9, 1), (1, 16, 1)] R* 516/469
+    revisit: (18, 34, 551, 1440, 2265, 3666, 4864) P (18, 34) moves 5 passages [(1, 10, 1), (1, 16, 1), (1, 4, 1), (1, 17, 1), (1, 11, 1)] R* 89/80
+    revisit: (182, 942, 1499, 2510, 3327, 3612, 4867) P (182,) moves 9 passages [(1, 1, 1), (1, 2, 1), (2, 3, 2), (1, 1, 1), (1, 3, 1), (1, 6, 1), (1, 2, 1), (1, 7, 1)] R* 10374/4867
+    revisit: (121, 802, 1780, 1970, 2792, 3762, 4238) P (121,) moves 9 passages [(1, 3, 1), (1, 1, 1), (1, 4, 1), (1, 3, 1), (1, 6, 1), (1, 3, 1), (1, 5, 1), (1, 7, 1), (1, 8, 1)] R* 605/326
+    revisit: (131, 724, 829, 1972, 3540, 4622, 4636) P (131,) moves 4 passages [(1, 2, 1), (2, 1, 2), (1, 3, 1)] R* 3275/1972
+    revisit: (79, 843, 1111, 1881, 1955, 3458, 4204) P (79,) moves 4 passages [(2, 3, 1), (1, 7, 1), (1, 2, 1), (1, 8, 1)] R* 5135/4204
+    revisit: (110, 724, 1072, 2000, 2634, 4265, 4907) P (110,) moves 5 passages [(1, 3, 1), (1, 5, 1), (1, 6, 1), (1, 1, 1), (1, 4, 1)] R* 605/439
+    revisit: (49, 156, 879, 1044, 1895, 4401, 4686) P (49, 156) moves 5 passages [(1, 12, 1), (1, 5, 1), (1, 12, 1), (1, 3, 1), (1, 14, 1)] R* 5537/4686
+    revisit: (14, 1001, 1287, 3321, 3934, 3946, 4779) P (14,) moves 6 passages [(1, 9, 1), (2, 36, 2), (1, 44, 1), (1, 12, 1), (1, 45, 1)] R* 5054/4779
+    revisit: (88, 1796, 2282, 2779, 3345, 3722, 4504) P (88,) moves 7 passages [(1, 4, 1), (1, 5, 1), (1, 7, 1), (1, 6, 1), (1, 3, 1), (1, 4, 1), (1, 5, 1)] R* 3608/2779
+    revisit: (2, 894, 2482, 2730, 3220, 3567, 3731) P (2,) moves 4 passages [(1, 223, 1), (1, 56, 1), (1, 224, 1), (1, 156, 1)] R* 1249/1241
+    revisit: (66, 1030, 1696, 1772, 1965, 2270, 3281) P (66,) moves 7 passages [(1, 2, 1), (1, 4, 1), (1, 7, 1), (1, 5, 1), (2, 4, 2), (1, 8, 1)] R* 4290/3281
