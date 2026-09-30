@@ -1,0 +1,38 @@
+E218/E219 (2026-10-01): the persistence-region run.  Design: log E218.
+
+The cascade's landing is a certificate: the setter h on its leaving edge at lap K, t = (8K+1)/(8h), and every other
+reading d in the clear block [8k_d+1, 8k_d+7] holding p_d = (8K+1)*d/h.  With h fixed its persistence region is a box
+(M4-1): each d separately in [(8k_d+1)h/(8K+1), (8k_d+7)h/(8K+1)].  Faces: d at its leaving edge or its entering edge.
+  A. The landing's box: certificate, slacks p_d - (8k_d+1) and (8k_d+7) - p_d, tight readings besides the setter;
+     box check (sampled arrangements inside the box are lonely at t) and where the cascade lands for them.
+  B. Across each face, one reading at a time: the arrangement scaled by L = 1000*(8K+1) so the face is a whole number,
+     d moved to one unit past it; the exact cascade's new landing, classified.
+Checks: C1 (cascade landing = least clear point from clear_set) at every arrangement run; the box check; the
+construction check (the moved reading is in the way at t on the intended side).
+
+
+== A. every 7-set of readings <= 16: 11440 sets ==
+  CHECKS (C1 at the set and at every sample; box check at every sample): 0 failures
+  readings tight at the landing besides the setter: {0: 9319, 1: 1347, 2: 654, 3: 120}
+  their sides: {'entering': 2223, 'leaving': 792}
+  arrangements sampled inside the landing's box: where the cascade lands: {'same certificate': 71543, 'earlier instant': 42775, 'later instant': 5}
+  setter's rank (0 = slowest): {0: 6072, 1: 135, 2: 502, 3: 915, 4: 1113, 5: 1281, 6: 1422}
+
+== A. fine shapes, least reading 1,000, spread uniform in [2, 20]: 1000 sets ==
+  CHECKS (C1 at the set and at every sample; box check at every sample): 0 failures
+  readings tight at the landing besides the setter: {0: 1000}
+  their sides: {}
+  arrangements sampled inside the landing's box: where the cascade lands: {'same certificate': 5691, 'earlier instant': 4309}
+  setter's rank (0 = slowest): {0: 457, 1: 20, 2: 71, 3: 111, 4: 118, 5: 122, 6: 101}
+
+== B. 300 sets drawn uniformly from the readings <= 16 family: 300 sets ==
+  CHECKS (C1 at every arrangement; construction): 0 failures
+  leaving face: {'hand-off to d at its lap': 1404, 'other: setter another reading': 229, 'earlier instant': 153, 'other: setter d': 12, 'other: setter the old setter': 2}
+  entering face: {"d's next opening": 710, 'later, setter another reading': 678, 'earlier instant': 306, 'later, setter the old setter': 66, 'later, setter d': 40}
+  entering crossings not settled at d's next opening: readings in the way there (name, side): {((('another reading', 'entering side'), 1),): 265, ((('another reading', 'entering side'), 1), (('another reading', 'leaving side'), 1)): 178, ((('another reading', 'leaving side'), 1),): 168, ((('another reading', 'entering side'), 2),): 87, ((('another reading', 'entering side'), 2), (('another reading', 'leaving side'), 1)): 36, ((('another reading', 'leaving side'), 2),): 31, ((('another reading', 'entering side'), 1), (('another reading', 'leaving side'), 2)): 11, ((('the old setter', 'leaving side'), 1),): 4, ((('another reading', 'entering side'), 2), (('another reading', 'leaving side'), 2)): 2, ((('another reading', 'leaving side'), 1), (('the old setter', 'leaving side'), 1)): 1}
+
+== B. 300 fine shapes, spread uniform in [2, 20]: 300 sets ==
+  CHECKS (C1 at every arrangement; construction): 0 failures
+  leaving face: {'hand-off to d at its lap': 1694, 'earlier instant': 106}
+  entering face: {"d's next opening": 746, 'later, setter another reading': 678, 'earlier instant': 281, 'later, setter the old setter': 67, 'later, setter d': 28}
+  entering crossings not settled at d's next opening: readings in the way there (name, side): {((('another reading', 'entering side'), 1),): 320, ((('another reading', 'leaving side'), 1),): 148, ((('another reading', 'entering side'), 1), (('another reading', 'leaving side'), 1)): 94, ((('another reading', 'entering side'), 2),): 78, ((('another reading', 'leaving side'), 2),): 45, ((('another reading', 'entering side'), 1), (('another reading', 'leaving side'), 2)): 24, ((('another reading', 'entering side'), 2), (('another reading', 'leaving side'), 1)): 23, ((('another reading', 'entering side'), 3),): 16, ((('another reading', 'leaving side'), 3),): 10, ((('the old setter', 'leaving side'), 1),): 3}
