@@ -7925,3 +7925,63 @@ work.
 
 **Consequence:** none for the proof. Map v3 is the start point for the next step (map-first); Q8 waits on the owner's
 approval of the design.
+
+---
+
+## E221 — 2026-10-01 — the complete account, Level A: the step, catalogued and checked
+
+**Owner:** *"yes approved, start with the Level A catalogue"* (approving `CASCADE_DESIGN_v3` §8).
+
+**Map:** v3 §4 Q8 and §7; `CASCADE_DESIGN_v3` §8.2. The items are derivations uniform over every arrangement (class (c)
+in form). They are the definition unfolded and not progress on the obligation (map §5), and every one is forced: the run
+is a check, by design. Nearest §6 classes: F5 (forced facts are stated as such and checked, not reported as findings) and
+F4 (Level A is not presented as a step on the obligation).
+
+**The catalogue** (`docs/n8/CASCADE_ACCOUNT_LEVEL_A_v1.md`), A.0–A.12:
+- A.0: units and the definition: positions `8dt`, slots `(8k−1, 8k+1)`, blocks `[8k+1, 8k+7]`, BSM's strict
+  inequality.
+- A.1: the move advances, and no lonely instant lies inside it `[PROVED]`.
+- A.2: every cascade instant after the bound is an opening `(8K+1)/(8h)` of its setter, a candidate scale `[PROVED]`.
+- A.3: the setter is the crowd member with the largest remaining distance to its leaving edge relative to its speed,
+  and the move's length is that time `[derived]`.
+- A.4: the step is a rotation of every position by its own speed, read at the setter's exit `[derived]`.
+- A.5: the next crowd is exactly the arrivals and the re-entries; a re-entry needs `D > (7 − x_c)/(8c)` `[derived]`.
+  The general form; `SeparationN.transport` is its centred special case `[PROVED]`.
+- A.6: the three move types `[PROVED — SweepBridgeN]`.
+- A.7: the setter is never in the way at its own exit `[PROVED]`.
+- A.8: the landing's certificate `[PROVED]`; the setter is the slowest of its lap-`K` cluster `[derived]`.
+- A.9: first isolation, a by-product, not used.
+- A.10: the bound's captures, grid slots 7 and 0 of the slowest reading's grid `[derived]`.
+- A.11: the edge cases.
+- A.12: what Level A does not say.
+
+**The check** (`LonelyRunner/experiments/nN/redo/cascade_level_a_check_v1.{py,out}`; exact; the clear set computed
+without the cascade) `[VERIFIED — these populations]`:
+- every 7-set of readings ≤ 20 (77,520 sets, 60,742 moves);
+- 1,000 seeded fine shapes (1,064 moves);
+- the 5,400 late band shapes (106,735 moves).
+
+**0 failures on every item** (A.1, A.2, A.3, A.4–A.5, A.6, A.7, A.8, A.10) in all three populations. Edge cases, counted
+as derived (A.11):
+- a reading exactly on an edge: 1,729 times in the whole-number sets, none in the fine shapes;
+- tied setters: 23 and 1;
+- re-entries within one move: 10 (sets ≤ 20) and 162 (late shapes), each satisfying A.5's condition.
+
+**Consequence:**
+- **Level A is complete** `[derived + PROVED; checked]`. One move of the cascade, in every configuration, is the rotation
+  of A.4 read at the setter's exit. Everything after it (who is in the way next, the move type, where the chain can land)
+  is A.5–A.8. So every question about a chain is a question about the sequence of these rotations, which is Level B's
+  object.
+- **What Level B starts from:**
+  - A.3 gives the setter as a maximum of `(1 − x_c)/c`;
+  - A.5 gives the next crowd as the arrivals (readings within `8rD` of an entering edge) and the re-entries (fast
+    readings);
+  - A.6 gives the lap order.
+
+  Gap B4 (when the next setter is the queue front) is a question about the order of arrivals' exits, from A.3 applied to
+  the next crowd.
+- **Re-entries are real but rare** (162 in 106,735 moves of the late shapes). They are fast readings lapping within one
+  move. They bear on E204's conveyor "carried by the fast readings".
+- **Lean, optional** `[reasoned]`: A.3, A.5 (the general transport), A.8's cluster clause and A.10 are on paper and
+  small. They would sit beside `SeparationN` and `SweepBridgeN`. The owner's call; not needed before Level B.
+- **Standing questions:** none answered.
