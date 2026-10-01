@@ -8371,3 +8371,52 @@ configuration with one answer: it is the obligation localised to the class where
   they do not shorten it.
 - **Next, proposed:** relate the cascade's relay from a dead lattice to the ladder's next live lattice, by derivation
   first. In candidate-scale terms, when the landing's `(h, K)` is the ladder's `(D, a)`, and why. Then check.
+
+---
+
+## E230 — 2026-10-01 — owner: "are you making additional requirement for what looked like proof in the past?" Yes; corrected against `MANUSCRIPT_v20` §0
+
+**Owner:** *"So you're saying if we prove D we prove the conjecture?"*, then, quoting my answer: *"Are you sure or are you
+making additional requirement for what looked like proof in the past?"*
+
+**Map:** none — a correction of my statements of the obligation, against the owner's own text.
+
+**What stands:** proving `∃ (e, k)` for every configuration is the conjecture (`doors_agree`, Theorem 6.15, both ways).
+The open part is the captured configurations that no proved case covers (`lonelyRunnerAt8_iff_residual`; every residual
+set has multiples of 8).
+
+**What I added that the owner's text does not require** (`MANUSCRIPT_v20` §0, 2026-09-24: *"A proof is a finite list of
+cases. Each case is a condition on the difference set together with a proof that `(e, k)` exists on that condition. The
+list closes when the conditions are jointly exhaustive."*; *"Existence is all that is owed, not a formula … by any means
+— pigeonhole, contradiction, induction, construction. A closed form for `e` or `k` is more than the obligation asks."*;
+*"A case proved is proof of that case."*; the foreign shapes are a cap, a move count and *"a uniform theorem — one
+statement or formula covering every set"*):
+1. **"cover every captured configuration uniformly"**: a uniform theorem is a foreign shape. Withdrawn.
+2. **"and name its instant"**, and design v4's D1 ("from the readings, name a reading, grid, class and laps"): more than is
+   owed. What is owed is `∃ (e, k)` on each case's condition, by any means. Withdrawn.
+3. **"An existence argument with no bound on where" as falling short**: wrong. Existence by contradiction or pigeonhole is
+   admissible (v20 §0; `exists_clear_step` is `by_contra`, `exists_fixed_of_lonely` uses pigeonhole). Propositions
+   6.10–6.11 were withdrawn for their **covering statement form**, a union bound concluded from an assumed cover (§6A row
+   seven; `CORRECTIONS_2026_09_17_v2` §5(b)), on the owner's question whether counts were *"added as part of a reference to
+   other's needs"*. They were not withdrawn for being existence arguments.
+4. **The `D ≤ 64` small-resolution case as falling short**: it is a proved case (`ResolutionClears8`, v21 §17C). A case
+   proved is proof of that case. Only the verified-not-proved remainder of the `L₀` ladder (31,066 runners) is not proof,
+   and only because it is finite evidence about an infinite family.
+5. **"No intermediate theorem sits between D and the conjecture"**: misleading. What remains is the cases not yet covered,
+   and every proved case and every reduction shrinks it. Examples: `lonelyRunnerAt8_iff_residual`; E192's reduction of the
+   residual to one crowded level; the band route; E195's `(1,6)` shape at `V = 3, 4, 5`, if its residue reduction is
+   accepted as proof.
+
+**Cause (F7):**
+- E229 and my answer took `PROOF_REQUIREMENTS_v2` §4 (2026-09-14, *"a rule that produces `(D, a)`"*) as the statement of
+  what a proof is. `MANUSCRIPT_v20` §0 (2026-09-24, the owner's) superseded it.
+- The memory that records the ruling, `feedback_n8_obligation_is_loneliness_2026_09_24`, was not read this session. It is
+  linked from the oracle memory, not from `MEMORY.md`'s must-read list.
+- Its own rule applies: *"Take every framing sentence … from the owner's documents. It must be quotable with file and
+  section."*
+
+**Carried to design v5 and map v4:** D1 restated as **`∃ (e, k)` on conditions that, with the proved cases, are jointly
+exhaustive over the captured configurations, by any means.** D2 and D3 are restated likewise as cases.
+
+**Consequence:** the target is unchanged in substance (the uncovered captured cases), and lighter in form: any admissible
+argument for `∃ (e, k)` on a condition counts, and each proved condition is progress.
