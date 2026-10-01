@@ -9349,3 +9349,72 @@ none is stated.
 - **Proposed phase 3c:** derive level 2 (`c`, `x₁`, `x₂`, against `x₃`) as a drift statement across `x₁`'s at least six clear
   arcs inside `c`'s arc. That is a statement about two readings, inside the proved two-walker framework. Check it exactly,
   then see whether the argument lifts level by level.
+
+## E251 — 2026-10-01 — owner's check: is phase 3c's object native? The drift lemma is not; excised and replaced
+
+**Owner:** *"Ok, please check that we are searching for a native object and it is not just a similar shaped object as
+other frames pretending to be helpful"*.
+
+**Map:** v3 §4 Q8; E248–E250. The memories' tests, run on the proposed phase 3c object and on what led to it:
+- the place test and the interval check (`feedback_n8_cascade_is_the_oracle`);
+- the pre-use check, steps 0–3 (`feedback_n8_no_prereg_no_imports`);
+- the register (`OBJECT_REGISTER_v3.md`).
+
+**The object tested.** E250's drift lemma: *inside `c`'s first arc, the joint clear set of `c, x₁, …, x_k` has a stretch
+longer than `1/(4x_{k+1})`, because the next reading's blocked runs drift across the lower level's stretches from lap to
+lap.*
+
+**Results.**
+1. **Place test: fails.** Delete the interval clause and nothing constructs an instant. "Some stretch is longer than `L`"
+   names no place; the instant inside the stretch is not determined.
+2. **Register: two items.** "`x_{k+1}`'s blocked runs do not cover `C_k`" is item 4 (covering). "`C_{k+1}` is non-empty" is
+   item 8 (set emptiness). The stretch-length comparison is the mechanism by which non-covering is shown.
+3. **Pre-use check, step 0 (our own record): the route is already on disk, and classified.** E59 (log l.2046–2052): *"The
+   block law becomes a bound on how many consecutive clear bands of the slowest runner … the other five can cover
+   without a gap … Covering `k` consecutive bands needs that relation to persist for `k` laps. Its drift rate is set by
+   the speed differences."* E61 (l.2094–2108) tested the drift condition and found it held in 0 cases. The oracle memory
+   lists *"Proxies over stretches of blocked time (windows, `Q(F)`, block laws, bands …)"* as imported shapes (v4 §4
+   item 1). The drift lemma is that route again, under new names: "nested actual stretches", "drift lemma".
+4. **Pre-use check, step 1 (trace): fails.** The need for "a stretch longer than the next blocked run" traces to my own
+   E249 design. That design took its shape from `SplitChainN`'s nested windows, which is the classical nested-intervals
+   argument for fast-growing speeds. It does not trace to a framework step. The cascade does not form stretches; it moves
+   from opening to opening (A.1).
+5. **Related objects carried with it, reclassified:**
+   - E244–E246's *longest blocked stretch* and `Q` (the span of a blocked stretch) are blocked-time proxies, the `Q(F)`
+     family. Their use there was as refutation statistics for a place-naming case, a truth check, which the memory allows.
+     They are **not** evidence for a mechanism, and E246's "margin of about 2" is withdrawn as such.
+   - W6(7) is window-shaped; E246 already flagged it as a cap. The owner's ruling on `c`'s first arc stays open.
+   - E249/E250's *nested actual stretches* (part 3, the `λ_k` table) are kept as data, read as a covering measurement,
+     and are not a mechanism.
+
+**What passes.**
+- **The case's place.** The block's relay landing from `c`'s exit: the least clear block-flank opening `(8K + 1)/(8h)`
+  after it (E239; v21 §6.10's sort and scan). At that candidate scale `h/(8K + 1)`, every block reading satisfies the
+  clearance criterion `h ≤ x_j(8K + 1) mod 8h ≤ 7h` (Theorem 6.19), and `c`'s reading `c(8K + 1)/h` lies in the band
+  `[1, 7]` (Corollary 6.21). Every object here is native: flank, opening, reading, band.
+- **E249/E250 parts 1–2** (the flank reading: winners, indices, walkers' steps, shadowed flanks) are native objects
+  (v21 §6.9–6.11).
+
+**Excision table** (memory: *"An import found is excised and replaced, not labelled"*):
+
+| import | excised from | replaced by |
+|---|---|---|
+| the drift lemma (nested actual stretches; non-covering by drift across laps) | E250's Consequence as phase 3c's target; the plan | the flank statement below |
+| `Q` and the longest blocked stretch as evidence for a mechanism | E246's Consequence ("margin of about 2") | refutation statistic only (truth check of the case) |
+
+**Phase 3c, replaced (proposed).** The native object is the flank. At a block flank `h`, the openings inside `c`'s band
+run are those where `c` reads in `[1, 7]`. There `c` is a slow walker with step `8c/h` per opening, and the five other
+block readings are walkers with steps `ĝ_j` (§6.11). The case needs one opening where all five read in the band. The
+record's native tools for this are:
+- Theorem 6.9 (one walker clears);
+- Theorem 6.18 (two walkers, by run length, with the `1/2` shadowing family as the exception);
+- §6.11's case table (lattice, cross-lattice, run length, common lattice).
+
+Phase 3c should read, at each configuration's winning flank, which walkers sit near the band's edge at the openings
+before the winner and what brings each into the band at the winner. That is per walker and per opening, with no
+stretches and no lengths.
+
+**Flagged for the owner, not excised.** `SplitChainN` (nested windows) is proved, has been in the record since E30, and was
+used in E231 and as an exclusion since. Its statements conclude loneliness, and the windows are tools inside. Its shape is
+the classical nested-intervals method. Whether it is native is the owner's call. Under the memory's rule, nothing proved
+is excised on the session's own reading.
