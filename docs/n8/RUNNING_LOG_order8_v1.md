@@ -9862,3 +9862,94 @@ near-twin chain below it ends at a free flank"**: 547 of 547, with step 1 derive
 - (b): the fastest flank's long run is not shadowed by several walkers in turn;
 - (c): why a near twin's flank is free (its own walkers are the same readings, met at slightly shifted openings);
 - the slow flanks, which the chain argument does not need.
+
+## E261 — 2026-10-02 — step 2: (c) reduces to (b); a truth check of (b) from the record's own theorems
+
+**Owner:** *"ok do it"* (step 2: derive (b) and (c), then check).
+
+**Map:** v3 §9 C1; E260's owed items. Read: v21 §16L (`DoorLargestFlank` `[REFUTED]` at thresholds `1/6` and `1/7`;
+the failing sets are not listed in `experiments/nN/rules_at_six_seven_v1.out`), §6.11 (`TwoMover.card_allowed_two_mul`,
+`card_allowed_lt`: a mover blocks at most half its period, and exactly half only at `q = 2`), and `bad_run_le`.
+
+**(c) reduces to (b), derived.** Let a cluster `x₁ < … < x_m` sit below nothing faster, with slow runner `c`.
+1. Suppose the fastest flank `x_m` is shadowed across `c`'s band run by one walker throughout. By E260 that walker is a
+   near twin `x_j = x_m − δ_j`. Its in-way condition at every opening `u` of the run is `δ_j·u/x_m ∈ (0, 2)`; at the
+   run's last opening `u ≤ 7x_m/c` this gives `δ_j < 2c/7`. Every reading strictly between `x_j` and `x_m` is within
+   `δ_j` of `x_m`.
+2. At every opening `u` of `x_{m−1}` inside `c`'s band run (`u ≤ 7x_{m−1}/c`), `x_m` reads
+   `x_m·u/x_{m−1} ≡ 1 + δu/x_{m−1}` (mod 8), with `δ = x_m − x_{m−1} ≤ δ_j`. So `0 < δu/x_{m−1} ≤ 7δ/c < 2`: the
+   reading is in `(1, 3)`, and **`x_m` is clear at every such opening.**
+3. So the full set is lonely at an `x_{m−1}` opening inside `c`'s arc **exactly when** the set without `x_m` is lonely
+   there. That is the same question one level down, at the new fastest flank `x_{m−1}`.
+4. Recursing: a cluster of one is free (only `c` walks, and it is clear in its run).
+   - Readings above the current flank stay clear while their total gap `Δ` keeps `Δ·u/x < 6`. That holds automatically
+     for chains of up to three twins (`Δ < 6c/7`). Deeper chains need the cumulative check.
+   - The data's chains have depth at most 2 (E260).
+
+**So C1 follows from (b) at every level of the chain** `[derived]`. Here (b) says: *a cluster's fastest flank is not
+shadowed across `c`'s band run by several walkers in turn.* (c) is no longer a separate owed item.
+
+**(b), what the record's theorems already say.**
+- At the fastest flank every walker's ratio is below 1, so it is never a whole number. By `card_allowed_two_mul` and
+  `card_allowed_lt`, a single walker blocks at most half its period.
+- So **a shadow of every opening of the fastest flank is necessarily a hand-off.** Single near twins shadow only because
+  `c`'s band run is finite (Theorem 6.18's persistence).
+- Hence (b) is **false in general** if some six readings at threshold `1/8` have their largest flank shadowed at every
+  opening. Put a slow runner `c` below them, with the six scaled so that `x₁ ≥ 9c`, which changes no ratio. The result
+  is a C1-shaped set whose fastest flank is hand-off-shadowed across `c`'s run.
+
+**Truth check (exhaustive, exact).** Every six-set `≤ 30` with `gcd 1`. Its largest flank `e`, at every opening
+`j < e` (Theorem 6.13's period): is some walker in the way, `d(8j + 1) mod 8e ∉ [e, 7e]` (Theorem 6.14)?
+- Report the six-sets whose largest flank is shadowed at every opening.
+- For each, form the C1-shaped set: `c = 1` and the six scaled by `K = ⌈9/x₁⌉`. Record:
+  - whether the fastest flank across `c`'s run is a single shadow or a hand-off;
+  - where the cascade lands (flank and rank);
+  - whether the set is in `EightResidual` (E255's classifier).
+
+**Checks:** the residue test agrees with direct evaluation of `circDist` at the opening instants (exact), on every flagged
+set.
+
+## E262 — 2026-10-02 — (b) is false for C1-shaped sets in general; every counterexample found is closed by §17C
+
+**Map:** v3 §9 C1; E261 run as designed. Script `LonelyRunner/experiments/nN/redo/fastest_flank_check_v1.{py,out}`.
+
+**Check: 0 disagreements.** The residue test (Theorem 6.14) agrees with direct `circDist` evaluation on all 58 flagged
+six-sets.
+
+**Result.**
+- Of the 588,559 six-sets `≤ 30` with `gcd 1`, **58 have their largest flank shadowed at every opening** at threshold
+  `1/8`. Examples: `(2, 3, 7, 10, 16, 20)`, `(1, 3, 4, 5, 7, 8)`, `(1, 21, 22, 23, 24, 30)`.
+- By the half-period mover theorems each of these shadows is a hand-off (E261).
+- Each gives a C1-shaped set `(1, K·six)` whose fastest flank is hand-off-shadowed across `c`'s band run: 58 of 58, with
+  `s = 31` to `139` segments.
+- **So (b), "a cluster's fastest flank is not shadowed by a hand-off", is false for C1-shaped sets in general.** E261's
+  recursion therefore does not prove C1 from the walker theorems alone.
+
+**Where the cascade lands in them.** At `c`'s own flank in 32 (the six scaled by `K` with no reading `≡ 0 mod 8`, so
+lonely at the bound). At a slower cluster flank in 26: rank 2 in 7, rank 3 in 6, rank 4 in 6, rank 5 in 7.
+
+**All 58 are closed by §17C** (first rule: R6 at `q = 8` 32, free flank 14, R6 at `q = 6` 5, rational opening 5, and
+2 by other §17C fields; `fastest_flank_check_v1.out` lists each). **None is in `EightResidual`.** On `EightResidual`'s
+C1 members (E260) the fastest flank was never hand-off-shadowed (0 of 547).
+
+**What this says** `[derived from the counts and the field each set fails]`. (b)'s failures in this range are exactly
+configurations that the arithmetic of §17C closes.
+- The largest group (32) fails `EightResidual`'s `eight` field: no reading is a multiple of 8, so nothing shares the
+  subject's slot at the grid.
+- In `EightResidual` some reading is `≡ 0 (mod 8)`, which is the owner's *"two runners in the same slot"* again.
+
+So a proof of C1 along the fastest-flank recursion cannot stand on the walker theorems alone. It has to use
+`EightResidual`'s arithmetic: the same fields whose failure closes (b)'s counterexamples.
+
+**Consequence (M7).**
+- (c) is derived: it reduces to (b) one level down (E261).
+- (b) is refuted in general. On the open configurations it holds (547 of 547), and in this range every counterexample is
+  closed by §17C.
+- **The owed statement is now (b) restricted to `EightResidual`:** *for a set in `EightResidual` of C1's shape, the
+  cluster's fastest flank is not hand-off-shadowed across `c`'s band run.* Its proof has to say which field excludes the
+  hand-off.
+- Two next steps, each native:
+  1. a truth check of the restricted statement on more `EightResidual` members, built by E117/E118's construction with
+     other seeds;
+  2. for each of the 58 counterexamples, which `EightResidual` field it fails, and whether one field (`eight`, the
+     slot-sharer) accounts for the hand-off mechanism.
