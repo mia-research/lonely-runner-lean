@@ -8420,3 +8420,52 @@ exhaustive over the captured configurations, by any means.** D2 and D3 are resta
 
 **Consequence:** the target is unchanged in substance (the uncovered captured cases), and lighter in form: any admissible
 argument for `∃ (e, k)` on a condition counts, and each proved condition is progress.
+
+---
+
+## E231 — 2026-10-01 — Level D as cases is `Order8SkeletonN`'s five holes; the block of three, from proved lemmas, down to one strip
+
+**Owner:** *"Ok so lets contiunue on"* (after E230's restatement: `∃ (e, k)` on conditions, any admissible means, each
+proved condition progress).
+
+**Map:** v3 §4 Q8; design v4 restated by E230. Record first: Lean, then the log. A derivation from proved lemmas; no run.
+Nearest §6 class F7, avoided this time: E229's proposed step (the relay against the `L₀` ladder) was **not run**,
+because E4 and E11 already answer it. E4: the ladder's resolution is almost never a disparity, so the cascade's landing
+(always a reading's opening, A.2) rarely is the ladder's `(D, a)`. E11 item 4: the ladder is *"a divisibility device,
+not a scale-invariant one"*, kept as a rule.
+
+**Level D as cases is already stated in Lean.** `Order8SkeletonN.lonelyRunnerAt8_of_arrangement_holes` (2026-09-25)
+gives `LonelyRunnerAt8` from exactly five named owed statements, split on separation of scale at `T = 9` (the
+organising principle of E7–E11):
+- `ArrBlockRule8 f 9` for `f = 3, 4, 5, 6`: a runner whose readings split into a core and a fast block of `f` readings,
+  at least 9 times the core across, is lonely. `f = 1, 2` are proved (`blockRule8_one` by R8, `blockRule8_two` by the
+  fast pair).
+- `ArrBoundedCovered8 9`: a scale-free runner (every consecutive ratio below 9) is lonely.
+
+These are E230's cases. The record's architecture for the block holes (E30; log l.1757–1768) has three step types:
+- separated levels by nested windows: `SplitChainN`, proved;
+- compact levels by collapse: `TrainCollapseN` (a train `N + e` with `N ≥ 56m`), proved; `SyncBlockN` reduces a
+  synchronised block to an `N`-free question, which is open (true on 288,288 cases);
+- bounded shapes by window constants, owed.
+
+**Derived for `f = 3`** `[derived from proved lemmas; no Lean instance built (owner, E222)]`:
+- The core has `7 − 3 = 4` readings. Native order five makes it lonely at `θ = 1/5` (`lonely_five_nat`).
+- `SplitChainN.lonely_of_split` then needs `needT F ≤ 2(θ − 1/8)/m = 3/(20m)`, with `m` the core's largest reading.
+- For the block `x₁ ≤ x₂ ≤ x₃`, nested in any order, `needT = 1/x₃ + 1/(2x₂) + 1/(4x₁) ≤ 7/(4x₁)`. The validity
+  conditions hold: `x₁(1/(2x₃) + 1/(4x₂)) ≤ 3/4`.
+- So **a core of four below a block of three with `x₁ ≥ (35/3)·m` is lonely.**
+- The skeleton's `T = 9` therefore leaves one strip for `f = 3`: **`9m ≤ x₁ < (35/3)m`**, and within it only blocks
+  whose exact `needT` exceeds `3/(20m)`.
+- `lonely_eight_of_split` uses a core of six at `1/7` (`needT ≤ 1/(28m)`, so `x₁ ≥ 49m` for three). The core's actual
+  size, four at `1/5`, is what brings it to `35/3`.
+- For `f ≥ 4`, nesting equal speeds is invalid (`x·needT_{f−1} = (2^{f−1} − 1)/4 > 3/4`), which is where compact
+  blocks and collapse enter. Cores of 3, 2, 1 give `θ = 1/4, 1/3, 1/2` and wider windows `1/(4m)`, `5/(12m)`, `3/(4m)`.
+
+**Consequence:**
+- The first hole reduces, by proved lemmas, to the strip `9m ≤ x₁ < 35m/3` for blocks of three. The window inside the
+  strip has two parts:
+  - the core's actual clear window, which can be wider than the margin bound `(θ − 1/8)/m` each side;
+  - the triple's true window, where `pair_window`'s constant `3/4` is proved and E7 measured `≤ 0.495` for pairs.
+- This is one case in v20 §0's form: `∃ (e, k)` on a condition.
+- **Next, proposed:** derive the strip for `f = 3` from the core's own clear set (a set of at most four readings, lonely
+  at `1/5`) and the triple's joint clear stretches, using the `pair_window` structure. Then check exactly.
