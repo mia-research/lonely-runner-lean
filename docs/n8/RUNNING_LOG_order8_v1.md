@@ -9833,14 +9833,18 @@ cluster's flanks.
 - The alternating occupants in the 6 hand-offs number 15. That is too few to read against a null, so nothing is stated
   about them.
 
-**Derived** `[from TwoWalker.bad_run_le, Theorem 6.18's bad-run bound; not in Lean as a statement here]`.
+**Derived** `[from TwoWalker.bad_run_le, Theorem 6.18's bad-run bound; proved in `experiments/n8/TwoWalker_v1.lean`, a
+development file outside the gated tree (v21 l.1879); the step below is not in Lean]`. Exact form: for a walker
+with step `0 < f ≤ 1/2`, in the way at `m + 1` consecutive openings ⇒ `m·f < 2/n = 1/4`.
 1. At the fastest cluster flank `e = x₆ ≥ 9c`, `c`'s band run has `L ≥ 3e/(4c) − 1` openings. A walker `x_j` in the way
-   at every one of them has `ĝ_j ≤ 1/(4L)` (a walker is in the way for at most `1/(4ĝ)` consecutive openings).
+   at every one of them has `(L − 1)·ĝ_j < 1/4`.
 2. Here `ρ_j = x_j/e ∈ (0, 1)`, so `ĝ_j = min(ρ_j, 1 − ρ_j)`.
-   - If `ĝ_j = ρ_j`, then `x_j ≤ e/(4L) ≤ c·(e/c)/(3e/c − 4) < c` (for `e > 2c`), contradicting `x_j > c`.
-   - So `e − x_j ≤ e/(4L) ≤ (9/23)c`.
-3. **A single walker that shadows the fastest flank across `c`'s band run is a near twin just below it, within `(9/23)c`.**
+   - If `ĝ_j = ρ_j`, then `x_j < e/(4(L − 1)) ≤ c·(e/c)/(3e/c − 8) < c` (for `e > 4c`), contradicting `x_j > c`.
+   - So `e − x_j < e/(4(L − 1)) ≤ (9/19)c`.
+3. **A single walker that shadows the fastest flank across `c`'s band run is a near twin just below it, within `(9/19)c`.**
    The largest gap in the data is `0.27c`.
+*Correction, same day:* first written with `ĝ ≤ 1/(4L)` and `(9/23)c`, paraphrasing the bound. Read against
+`bad_run_le`'s statement it is `(L − 1)ĝ < 1/4` and `(9/19)c`. The conclusion is unchanged.
 
 **Not derived** (measured only, on these members):
 - (b) that the fastest flank is never shadowed by a hand-off: 0 of 547 open members, and none in E253's closed
