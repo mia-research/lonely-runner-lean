@@ -8255,3 +8255,119 @@ content, its commit date, and the untracked modules of other sessions), as the p
 - Lean is now the first source read for each target (E225–E227). The crosswalk of E226 covers v21 and the log; its next
   version owes the Lean modules too (for example the untracked `CascadeTransportN` against Levels A and B).
 - Level D starts at D3, the pinned pair, after the owner's approval of v4.
+
+---
+
+## E228 — 2026-10-01 — design: D3, the pinned pair at the grid instant (captured readings with both edges occupied)
+
+**Owner:** *"yes to v4"* (`CASCADE_DESIGN_v4`; its order starts with D3's pinned pair).
+
+**Map:** v3 §4 Q8; design v4 §8.5 D3. M2 class (d), a map run whose pass conditions are derivation checks, preparing a
+rule in v21 §6.7's form (a condition on the readings and a named instant). Nearest §6 classes:
+- F14 (instants the cascade does not use): every instant here is a move of the cascade run from the grid instant;
+- F7 (the record not read): the Lean tree and E27–E36 were read first and are listed below.
+
+**Record first** (E225–E227 order: Lean, then log, then documents):
+- `GridNudgeN`: at a grid instant `t₀` with every reading on an exact eighth, if exactly one reading is captured
+  (residue 0) and it is the largest, the subject is lonely at `t₀ + 1/(8p)` if no reading sits at residue 7, or at
+  `t₀ − 1/(8p)` if none sits at residue 1. They fail together exactly when both edges are occupied: **the pinned pair**.
+  `nat_nudge_forward`: the whole-number form at `t₀ = 1/8`.
+- `RungR1N.rung_r1_nat`: multiples of `q ≤ 8` captured at a rung `a/q`, R1 among themselves, the others with room.
+- `GridPairN`, `GridPairLawN`, `TwoPinnerN`: nothing captured, one reading on each edge, so lonely at `t` or at the
+  mirror.
+- `DoubledSlotN`, `DoubledNbhdN`: the arrangement with one runner moved by whole laps into another's slot, which is one
+  captured reading with both edges occupied, at named instants, under small deviation.
+- Log E27–E28: a core "pinned on both sides" at its first isolation; its next cell starts at the reading on the entering
+  edge's next opening `(8m+9)/(8b)` in 72 of 98, otherwise "the core's own cascade continued" `[EMPIRICAL]`. E29–E36:
+  train and core.
+
+**The object.** Whole-number readings at the subject's own grid instant `t₀ = 1/8`, where reading `d` sits at position
+`d` (eighths). It has:
+- a captured set `C` (multiples of 8, at least one);
+- leaving-edge readings `E₁ ≡ 1`, at least one;
+- entering-edge readings `E₇ ≡ 7`, at least one;
+- interior readings `≡ 2 … 6`.
+
+`GridNudgeN` does not apply (both edges occupied) and the pair law does not apply (something captured).
+
+**Forced, from Levels A–C:**
+- F-1. At `t₀` the crowd is `C`: readings on an edge are clear (BSM).
+- F-2. The first move goes to the exit of the slowest captured reading `c*`, at `t₁ = 1/8 + 1/(8c*)`. Every captured
+  reading sits at the centre of its slot and needs `1/(8c)`, so the slowest exits last (B.1).
+- F-3. Every landing is an opening of its setter `h` (A.2). So the landing instant is `λ/8` with
+  `λ = (8K + 1)/h`: a dilation of the grid instant by a ratio fixed by the integer `h` and its exit lap `K`. If `h`
+  exits on its first lap after `t₀`, then `λ = (h + 9 − r)/h` for `h ≡ r ∈ {2, …, 7}`; `(h + 1)/h` for a captured `h`;
+  and `(h + 8)/h` for `h ≡ 1`. Further laps add `8j`. **The relay from the grid instant is integer arithmetic in the
+  readings.**
+- F-4. E28's "the reading on the entering edge's next opening" is `h ∈ E₇` on its first lap, `λ = (h + 2)/h`.
+
+**The run** (`LonelyRunner/experiments/nN/redo/d3_pinned_pair_v1.py`; exact). Take every 7-set of readings ≤ 24 with the
+object's conditions, and a seeded uniform sample of such sets with readings ≤ 64. Run the cascade from `t₀ = 1/8` (A.1:
+it lands at the first lonely instant at or after `t₀`, a lonely instant of the subject).
+- Record the landing as `(h's residue r, extra laps j, λ)`: whose exit, as which grid role (captured, `E₇`, interior,
+  `E₁`), and on which lap.
+- Record the number of moves.
+
+**Checks** (the only pass conditions):
+- F-2: the first move is `c*`'s exit.
+- F-3: the landing is `λ/8` with `λ = (8K+1)/h` exactly, and `h`'s first-lap formula holds when `j = 0`.
+- C1: the landing equals the least clear point at or after `t₀`, computed without the cascade.
+
+**What the run is for.** To read, in grid data, which role's exit holds the isolation. Then (the next entry) to derive the
+exact arithmetic condition for each role that occurs, as a rule: the condition, the named instant `λ/8`, and the proof by
+the band test (`lonely_eight_of_blocks`). Counts are records, never the answer. Every set where the landing is not a
+first-lap exit (`j > 0`) is listed.
+
+**Checklist:**
+- The objects are the grid instant (the subject's own AP instant, v21 §6.6), the cascade's moves from it, and the setter
+  roles by residue.
+- No window of instants: the run starts at a named instant and records named instants.
+- No cap: `K` and `j` are free and recorded.
+- No ranking; populations exhaustive or seeded uniform.
+
+---
+
+## E229 — 2026-10-01 — D3 run: from the pinned grid instant every role's exit can hold the isolation; D3 is the record's "fourth rule" (the `L₀` ladder)
+
+**Map:** v3 §4 Q8; design v4 D3; M2 (d), as designed in E228. Nearest §6 classes: F3 (the role counts are records, not a
+rule) and F7 (the record's own statement of this object, `PROOF_REQUIREMENTS_v2` §7, read after the run; it should have
+been read before it, and is now carried).
+
+**Checks** `[VERIFIED — these populations]` (`LonelyRunner/experiments/nN/redo/d3_pinned_pair_v1.{py,out}`; exact): every
+7-set of readings ≤ 24 with a captured reading and both edges occupied (86,301 sets), and 3,000 seeded such sets of
+readings ≤ 64. **0 failures** on:
+- F-2: the first move from `1/8` is the slowest captured reading's exit;
+- F-3: every landing is `λ/8` with `λ = (8K+1)/h`, and the first-lap formula holds with `j ≥ 0` whole;
+- C1: the oracle check.
+
+**The map** (records, not a rule). Whose exit holds the isolation from the pinned grid instant (sets ≤ 24):
+- the reading on the entering edge (`≡ 7`): 33,069, E28's pattern;
+- interior readings: 40,019 (`r = 6`: 17,049; `5`: 10,246; `3`: 5,300; `4`: 4,579; `2`: 2,845);
+- captured readings: 9,583;
+- the leaving edge (`≡ 1`): 3,630.
+
+The landing's setter exits on its first lap after `1/8` in 71,946, on a later lap in 14,355 (listed). The landing is at
+the first move in 4,186; the relay runs 1 to 25 moves. The seeded sample to 64 has the same shape.
+
+**Reading** `[derived]`. At any of these landings the condition is Theorem 6.14 at the flank `h` with
+`k = (h + 8 − r)/8 + j`, which is the band test. So D3 yields no new kind of rule. The pinned pair is not one
+configuration with one answer: it is the obligation localised to the class where `GridNudgeN` stops.
+
+**What the record already says about this object** (read after the run):
+- `PROOF_REQUIREMENTS_v2` §7: for whole-number differences every runner the three base rules miss has a difference
+  `≡ 0 (mod 8g)`. *"The obligation is a fourth rule: produce `(D, a)` when `j ≥ 1` differences are divisible by `8g`."*
+  Its candidate is the `L₀` ladder (the first live lattice, then the next): `[VERIFIED — 31,066 of 31,066]`, not proved.
+- v21 §17C makes the ladder a case at `D ≤ 64` (`ResolutionClears8`; "a case boundary, not a claim").
+- §17E item 5: its relation to the rational-opening fields is "not yet worked out".
+- Map v3 C4: the cascade's landing `(8K+1)/(8h)` is itself a clearing resolution with `D = h`.
+
+**Consequence:**
+- D3 is the record's fourth rule. Its open content is the ladder's justification by place, and the ladder's relation to
+  the cascade (whose instants are the readings' openings, while the ladder's resolutions `D` need not be readings).
+  Map v3 C4 shows the two meet when `D = h`.
+- The D targets of design v4 all reduce to D1, the selection. D1 is `PROOF_REQUIREMENTS_v2` §4 verbatim: *"a rule that
+  produces `(D, a)` from the differences, valid for every configuration — or a finite set of rules whose side conditions
+  are exhaustive"*, which is the obligation. Levels A–C and this map localise it to the captured case and the ladder;
+  they do not shorten it.
+- **Next, proposed:** relate the cascade's relay from a dead lattice to the ladder's next live lattice, by derivation
+  first. In candidate-scale terms, when the landing's `(h, K)` is the ladder's `(D, a)`, and why. Then check.
