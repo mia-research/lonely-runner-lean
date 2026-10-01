@@ -9269,3 +9269,83 @@ nothing for five.
 - **Phase 3b, proposed:** read each `f = 6` landing in flank terms: the winning flank, its index from `c`'s exit, the five
   walkers' steps there, and which of the six flanks have a clear opening inside the arc at all. Then derive from what
   every configuration shares.
+
+## E249 — 2026-10-01 — design: phase 3b, the `f = 6` landings in flank terms, and the nested actual stretches
+
+**Owner:** *"ok"* to phase 3b.
+
+**Map:** v3 §4 Q8; E248's consequence. M2 class (d), a map run. Record: v21 §6.9–6.11 (flanks, walkers, Theorem 6.9,
+Theorem 6.18); `SplitChainN` (nested windows: `stretch`, `needT`).
+
+**Population.** The 1,629 `f = 6` configurations of E235 and E243 that K0 does not settle.
+
+**Read, per configuration, inside `c`'s first arc `[1/(8c), 7/(8c)]`.**
+1. **The six flanks.** For each block reading `h`, its openings `(8K + 1)/(8h)` inside the arc (their number `L_h`). At
+   each opening the five other block readings are walkers at `x_j(8K + 1)/h` mod 8, and `c` is clear (inside its arc).
+   Recorded per flank: the index of its first clear opening (from the arc's first opening of that flank), or *shadowed*
+   (no clear opening in the arc), and its number of clear openings.
+2. **The winner.** The earliest clear flank opening over the six. At the winner, the five walkers' fractional ratios
+   `f_j = frac(x_j/h)`, their steps `ĝ_j = min(f_j, 1 − f_j)` (§6.11), and their positions.
+3. **Nested actual stretches.** For `k = 0 … 5`, `C_k` is the joint clear set of `c, x₁, …, x_k` inside the arc
+   (`C_0` = the arc), with its longest stretch `λ_k`. Derived: an interval longer than `1/(4x_{k+1})` holds an instant at
+   which `x_{k+1}` is clear (its blocked runs are that long). Recorded: `4x_{k+1}λ_k` at each level, and every
+   configuration where it drops below 1 at some level.
+
+**Checks (forced):**
+- the winner equals the cascade's landing (A.9 and Corollary 6.24);
+- the full set is lonely at the winner and at every recorded clear opening (exact).
+
+**After the run:** what every configuration shares (if anything), then every configuration that differs, read (M3)
+before anything is stated. Lengths `λ_k` are lengths of named clear stretches (places), not measures of sets.
+
+## E250 — 2026-10-01 — phase 3b read: every level of the nested actual stretches holds with a margin of at least 2.18
+
+**Map:** v3 §4 Q8; E249 run as designed. Script `LonelyRunner/experiments/nN/redo/hole6_flank_v1.{py,out}`.
+
+**Checks: 0 failures.** The winner equals the cascade's landing in all 1,629. The full set is lonely at every first
+clear opening recorded.
+
+**1. Flanks.**
+
+| population | flanks with a clear opening in `c`'s first arc: 6 / 5 / 4 / 3 | shadowed flanks by rank 1…6 |
+|---|---|---|
+| E235 (809) | 764 / 44 / 1 / 0 | 11, 17, 6, 7, 3, 2 |
+| E243 (820) | 778 / 40 / 1 / 1 | 16, 18, 5, 4, 1, 1 |
+
+- The winner is at index 0 of its flank in 699 of 809 and 608 of 820. Larger indices belong to the fastest flanks, where
+  the arc holds many openings.
+- At the winner, the largest walker step `max ĝ` is below 1/2 in all but 3 configurations.
+
+**2. Nested actual stretches.** Here `λ_k` is the longest stretch of the joint clear set of `c, x₁, …, x_k` inside the
+arc. Least value over the configurations of `4x_{k+1}λ_k` (this is above 1 exactly when `x_{k+1}` is clear somewhere in
+that stretch):
+
+| level `k` | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| E235 | 27.41 | 3.0028 | 2.532 | 2.204 | 2.258 | 2.181 |
+| E243 | 27.12 | 3.0005 | 2.695 | 2.879 | 2.676 | 2.873 |
+
+Below 1 at no level in any configuration.
+- **Level 0, derived.** `λ₀` is the arc, `3/(4c)`, so `4x₁λ₀ = 3x₁/c ≥ 27`.
+- **Level 1, derived.** The arc is at least 27/4 laps of `x₁`, so it holds a full clear arc of `x₁`, `λ₁ = 3/(4x₁)`, and
+  `4x₂λ₁ = 3x₂/x₁ > 3`. The data's least values (3.0028, 3.0005) are `3x₂/x₁` at the tightest pairs.
+- **Levels 2–5: records, not derived.** The least margins are 2.18 to 2.88.
+
+**What every configuration shares.** At every level the next block reading has room in some actual stretch, with a
+margin of at least 2.18 in this data. Nested windows fails on these blocks because it assumes the worst placement in a
+single stretch, losing a factor 2 per level. The actual stretches do not lose it. Inside `c`'s first arc each level has
+many stretches, roughly one per lap of the slower readings, and the next reading's blocked runs drift against them from
+lap to lap. So some stretch receives a favourable placement.
+
+**Import check.** Places: each stretch is named by its certificate ends, and the next reading's clear instant inside it
+is named (its exit, or the stretch's start). The margins are records. A uniform constant would be a window constant, and
+none is stated.
+
+**Consequence (M7).** The native reason for W6(7) points to a **drift lemma**, one per level.
+- Inside `c`'s first arc, the readings `c, x₁, …, x_k` have, among their many clear stretches, one longer than
+  `1/(4x_{k+1})`. The data has twice that.
+- The mechanism is the next reading's blocked run walking across the lower level's stretches from lap to lap. That is the
+  walker framework of v21 §6.11 (Theorem 6.18 is its two-walker form), applied to stretches in place of openings.
+- **Proposed phase 3c:** derive level 2 (`c`, `x₁`, `x₂`, against `x₃`) as a drift statement across `x₁`'s at least six clear
+  arcs inside `c`'s arc. That is a statement about two readings, inside the proved two-walker framework. Check it exactly,
+  then see whether the argument lifts level by level.
