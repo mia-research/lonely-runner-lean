@@ -1,0 +1,20 @@
+E222 (2026-10-01): the Level B catalogue checked (docs/n8/CASCADE_ACCOUNT_LEVEL_B_v1.md, B.12).
+
+Owner: "Yes we are not looking at lean until the map is complete" (Level B approved in the same message).  M8: every item
+is derived; this run checks the derivations, pass condition 0 failures on every item.  Exact; the cascade is
+`e151_block_v1.trace` (BSM, strict).  Positions p = 8*s*t.  A reading in slot l exits at (8l+1)/(8s) and entered at
+(8l-1)/(8s).  Items B1-B10; B.8's conveyor breaks classified by kind; edge cases counted.
+Populations: every 7-set of readings <= 20; 1,000 seeded fine shapes; the 5,400 late band shapes (check only).
+
+
+== every 7-set of readings <= 20: 77520 sets ==
+  FAILURES by item (pass: none): none
+  records (not failures): {'break: faster arrival entering late': 512, 'break: front not in next crowd': 1814, 'break: slower arrival': 3860, 'bridge down or mixed': 3344, 'bridge up': 9517, 'conveyor breaks': 6069, 'conveyor holds': 26358, 'landing: front passed through': 1102, 'landing: no arrival': 27213, 'sweep': 19569}
+
+== 1,000 seeded fine shapes, spread uniform in [2, 20]: 1000 sets ==
+  FAILURES by item (pass: none): none
+  records (not failures): {'break: faster arrival entering late': 7, 'break: front not in next crowd': 50, 'break: slower arrival': 104, 'bridge down or mixed': 51, 'bridge up': 176, 'conveyor breaks': 160, 'conveyor holds': 359, 'landing: front passed through': 30, 'landing: no arrival': 515, 'sweep': 292}
+
+== the 5,400 late band shapes: 5400 sets ==
+  FAILURES by item (pass: none): none
+  records (not failures): {'break: faster arrival entering late': 1190, 'break: front not in next crowd': 10316, 'break: slower arrival': 11077, 'bridge down or mixed': 34578, 'bridge up': 42374, 'conveyor breaks': 21997, 'conveyor holds': 79338, 'edge: arrival entered before the front (front lapped)': 35, 'landing: front passed through': 2473, 'landing: no arrival': 2927, 'sweep': 24384}
