@@ -8099,3 +8099,40 @@ readings ≤ 16. **0 failures after the repairs.**
 - **Levels A–C are the cascade's local and semi-local account without gaps.** What remains is Level D: which landing
   region contains a given arrangement, from the grid plus deviation and the split. Its gaps D2–D5 contain the obligation.
 - **Standing questions:** the first-isolation flag above, for the owner.
+
+---
+
+## E224 — 2026-10-01 — Level D: the interval check on the approved design's D items, before any work; a re-aim proposed
+
+**Map:** none — design check of `CASCADE_DESIGN_v3` §8.5 before starting Level D (the owner's *"continue on to other
+too"*); nothing derived or run.
+
+**The interval check** (memory `feedback_n8_cascade_is_the_oracle`, 2026-10-01) on §8.5 and §8.6:
+- **D3**, second half: *"which band shapes reach copy 1"*. Copy 1 means the landing is not in `R ∈ [1, 7]`. A band
+  shape reaches it iff it has no lonely instant there. Step 1 (delete the interval clause) leaves nothing. Step 2: it is
+  `u ∈ [1/8, 7/8]`, register v3 item 15, and "is a clear set empty", item 8. The same drift as Q7 (E215), carried into
+  the approved design by me. D3's first half, the chain pattern of E154 and its landing certificate in copy 1, names an
+  instant and stands.
+- **D2**: *"`F`'s chain … ends inside a clear block of `P`"*. At the landing every reading is clear, `P` included, so
+  "inside a block of `P`" is forced (F5), and "the chain ends" is the obligation (F4). D2 has content only in what it
+  names: the certificate, by `F`'s grid positions and deviations.
+- D4 and D5 inherit D2's form.
+
+**What Levels A–C now show about where Level D lives** `[derived, E222–E223]`: the landing moves continuously under any
+change of speeds except when a reading enters its slot at the isolation instant (C.5). Then the cascade moves to that
+reading's next exit. It lands there (746 of 1,800 in E219; 278, 51, 233 in E223's infinitesimal crossings), or the relay
+continues by Level B's rules. So the open statement is localised to one event: **where the relay started by an entering
+reading lands**, named by the readings. This is *"each isolation is pushed there by the speed"*: the entering reading
+pushes it to its own exit, and from there the relay carries it.
+
+**Proposed re-aim of Level D, for the owner** (not started):
+- **D-object:** the landing certificate as a function of the arrangement (Level C's regions), reached from a reference
+  where it is known (the bound when the spread is at most 7; the AP's class instants) by crossing faces. Each crossing
+  is a derived local rule: hand-off on a leaving face, one move to the entering reading's exit on an entering face.
+- **D-gap:** at an entering-face crossing, where the relay from the entering reading's exit lands, named by the grid
+  positions and deviations at that exit. This is the single derivation target; D2–D5 become its instances (the band,
+  the split, the nest, the recursion's exceptions).
+- **Not the object:** which arrangements land in a given window (item 15), whether a window's clear set is empty
+  (item 8), or that the relay ends (F1; the obligation).
+
+**Consequence:** none for the proof. Level D waits on the owner's ruling on the re-aim.
