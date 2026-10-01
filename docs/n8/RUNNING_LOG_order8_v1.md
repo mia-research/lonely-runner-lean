@@ -9673,3 +9673,95 @@ log l.7341). Only first-lap clearance stays pending among v21 §17G's rulings, p
 **Consequence (M7).** The next step on C1 is the 21 hand-offs: read and perturb them through the cascade (E67's method)
 to see whether a hand-off is a succession of same-slot pairs (the owner's mechanism, one pair after another) or something
 else. If it is a succession, the twin-chain argument has a chance to extend to it.
+
+## E257 — 2026-10-01 — design: the 21 hand-offs, read for persistence and perturbed through the cascade
+
+**Owner:** *"yes"* to E256's next step.
+
+**Map:** v3 §4 Q8; C1 (E118); E253's hand-offs. The method is E67's: *"use the cascade pertubate the speeds to find the
+mechanisim"*.
+
+**The question, sharpened before running.** E256 asked whether a hand-off is "a succession of same-slot pairs". As
+stated that is empty: every walker in the way at a flank opening sits in the subject's slot, so every hand-off is a
+succession of occupants. What the owner's mechanism adds is **persistence**: *"it delays the isolation event because the
+runners need to separate from each other"*. A walker `x_j` at flank `e` reads `A + εu` (mod 8) at opening `u ≡ 1 (mod 8)`
+(E253). It stays in the subject's slot for a block of about `1/(4|ε|)` consecutive openings, and then it has separated.
+So the native question is:
+- **Persistent succession:** the run splits into a few consecutive segments, each held by one walker throughout, and each
+  of those walkers is a near-sharer over its segment (a pair separating, then the next pair); or
+- **Flicker:** fast walkers (large `|ε|`) alternating opening by opening, with no persistent occupant.
+
+**Part 1 (read).** For each of the 21 hand-offs (E253, `hole6_shadow_v2.out`), the least number `s` of consecutive
+segments into which the run's openings split so that each segment has one walker in the way at every opening of it.
+Greedy left to right is exact for this. Per segment: the walker's `(A, A mod 8, ε)`, the segment length in openings, and
+`1/(4|ε|)`, its persistence.
+
+**Part 2 (perturb, E67).** For each hand-off configuration, move each block reading by `±1, ±2`, one at a time. Per move:
+- whether the flank is still shadowed across the run;
+- if so, whether the shadow is now one walker or still a hand-off;
+- where the cascade lands (inside `c`'s first arc, and which flank).
+
+Read which reading's move frees the flank, and whether that reading is a segment's occupant.
+
+**Checks (forced):** `c` is never in the way inside its run; the earliest first-clear flank opening is the cascade's
+landing, and the set is lonely there.
+
+**Not read:** shares, counts as rates, or lengths of time. Segments are counted in openings (places).
+
+## E258 — 2026-10-01 — the hand-offs read: persistent near-sharers in succession, or alternation near half-integers
+
+**Map:** v3 §4 Q8; C1; E257 run as designed. Scripts `LonelyRunner/experiments/nN/redo/hole6_handoff_v1.{py,out}` and
+`hole6_handoff_v2.{py,out}` (with its matched null).
+
+**Checks: 0 failures** (`c` never in the way inside its run; the landing is the earliest first-clear flank opening).
+
+**Part 1, persistence.** Each hand-off was split into the least number `s` of consecutive segments of openings with one
+walker in the way throughout each segment. `s` per hand-off: 2 in 5; 3 in 1; 4 in 3; 5 to 17 in 12.
+- **The 5 with `s = 2` are the owner's mechanism twice in succession:** a persistent near-sharer, then another. Example,
+  flank 35858: a near twin (`A = 1`, `ε = −0.010`) for 20 openings, then a near double (`A = 2`, `ε = −0.011`) for 7.
+- **The others mix in alternation:** segments of 1–2 openings (119 in all) whose occupant does not persist. Example,
+  flank 24413: walkers at ratios 1.480 and 3.502 alternate for 11 openings, then two near-sharers hold the remaining 8
+  (`A = 9`, `ε = 0.055`; `A = 7`, `ε = −0.042`).
+- Every segment is within its occupant's persistence `1/(4|ε|) + 1` (137 of 137). That is close to forced; recorded,
+  not read as a finding.
+
+**The alternating occupants against a matched null** (`hole6_handoff_v2.out`; exact Farey regions of order 8 for a
+uniform fractional ratio). Nearest small-denominator fraction to `frac(x_j/e)`:
+
+| nearest `q` | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| observed (119) | 0 | **36** | 13 | 11 | 9 | 8 | 32 | 10 |
+| uniform expectation | 14.9 | **8.5** | 10.6 | 10.2 | 16.3 | 6.8 | 26.8 | 24.9 |
+
+Within 0.01 of the nearest fraction: 49 observed against 51.9 expected. **Only `q = 2` exceeds the null**, at 36 against
+8.5. My reading before the null ("near small-denominator ratios" in general) is withdrawn; uniform ratios give that.
+Part of the `q = 2` excess is selection: a walker that blocks every other opening steps by about half a lap.
+- The persistent occupants (segments of 3 or more) are near whole ratios (`q = 1`) in 17 of 18: near-sharers.
+
+**Part 2, perturbation (E67).** Each block reading of the 21 configurations was moved by `±1, ±2` (504 moves):
+- 492 leave a hand-off, 4 turn it into a single shadow, and 8 free the flank;
+- **all 8 freeing moves move the flank reading itself**, which changes every walker's ratio at once;
+- the cascade lands inside `c`'s first arc after every one of the 504.
+
+At readings around `10⁴`–`10⁵` a unit move changes a ratio by about `10⁻⁴`, so this robustness is expected and is recorded,
+not read as structure.
+
+**Reading `[derived from the counts above, with their null]`.** Shadowing across `c`'s band run is made of near forms of
+the two exact shadowing structures the record already has:
+- **the sharer** (Theorem 6.8's dead flank, `A ≡ 0 mod 8`, and its edge forms `A ≡ ±1`): persistent, for about `1/(4|ε|)`
+  openings;
+- **the half-integer pair** (§6.11: the only exact shadowing pairs have both fractional parts `1/2`): alternating.
+
+In each, the shadow lasts as long as the deviation from the exact structure allows. That is the owner's E156 statement
+read at flanks: *"we can already prove grids globally isolate and then it's just a deviation from grid"*.
+
+**Consequence (M7), for C1.** A proof along this line has three parts:
+1. the exact structures. The record has them proved: Theorem 6.8; `card_allowed_two_mul` and `card_allowed_lt` (a mover
+   blocks at most half its period, exactly half only at `q = 2`); `class_killer_int`;
+2. the deviation. A near structure persists for openings in inverse proportion to its deviation. For a near-sharer that
+   means `|x_j − A·e| < 0.3c` across `c`'s run (E253);
+3. the six flanks together.
+   - The twin-chain argument (E253) shows near-sharers alone cannot shadow all six.
+   - The open piece is the alternating structure. At the fastest flank every walker's ratio is below 1, so its whole part
+     is 0. A near-half pair there has both readings near `x₆/2`, the class pair `(1/2, 1/2)`, which is not one of §6.11's
+     shadowing classes. Whether that blocks the alternation at the fastest flank is the next thing to derive and check.
