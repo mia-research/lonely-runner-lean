@@ -7985,3 +7985,58 @@ as derived (A.11):
 - **Lean, optional** `[reasoned]`: A.3, A.5 (the general transport), A.8's cluster clause and A.10 are on paper and
   small. They would sit beside `SeparationN` and `SweepBridgeN`. The owner's call; not needed before Level B.
 - **Standing questions:** none answered.
+
+---
+
+## E222 — 2026-10-01 — the complete account, Level B: patterns of moves, catalogued and checked; no Lean until the map is complete
+
+**Owner:** *"Yes we are not looking at lean until the map is complete"* (approving Level B next, and declining the
+optional Lean offered in E221). This supersedes `CASCADE_DESIGN_v3` §8.7's clause *"Lean follows each derived item as it
+is completed"* and E221's Lean consequence; carried to the next versions of the design and the map. The catalogues cite
+existing Lean declarations as anchors (reading, not building). Recorded in memory by the `memory-drafter` agent.
+
+**Map:** v3 §4 Q8; `CASCADE_DESIGN_v3` §8.3. Derivations uniform over every arrangement, all forced by Level A, checked by
+design (M8). Nearest §6 classes: F5 (stated as forced) and F3 (the records below are data, not laws).
+
+**The catalogue** (`docs/n8/CASCADE_ACCOUNT_LEVEL_B_v1.md`), B.1–B.11, all `[derived]` from Level A:
+- B.1: the setter is the latest exit `(8l+1)/(8s)` over the crowd.
+- B.2: the junction: at the setter `a`'s exit on lap `k`, reading `b` is in slot `l` iff
+  `s_a(8l−1) < s_b(8k+1) < s_a(8l+1)`. Every reading's place at an exit is decided by its ratio to the setter.
+- B.3: the slower readings in the setter's slot form an unbroken run, every reading within ratio `ρ_k` below it.
+- B.4: a sweep step jumps to the bottom of that run, not to the next slower reading.
+- B.5: passages descend through consecutive ratios below `ρ_k` to the lap-`k` cluster's bottom, or end at a bridge.
+- B.6: bridges, up or down: the latest exit is on another lap.
+- B.7: the queue.
+- B.8: **gap B4 closed**: the next setter is the queue front iff the front is in the next crowd and no member exits later.
+  An arrival outlasts the front iff its entry lag exceeds the difference of their stays: any slower arrival outlasts it;
+  a faster one only by entering late enough. This holds unless the front itself lapped.
+- B.9: the chain ends iff nobody is in a slot at the exit: a gap in the arrivals, or the front passing through.
+- B.10: the first move.
+- B.11: what Level B does not say.
+
+**Two corrections to B.8, both before commit:**
+- (1) The first draft said an arrival can outlast the front "only by being slower". That is false for a faster arrival
+  entering late. It was found while the check was being designed, before it ran, and corrected.
+- (2) The check found 35 moves (late shapes) where the front had itself lapped, so an arrival entered before it. The
+  statement now carries that exception. The classification by exits holds there.
+
+**The check** (`LonelyRunner/experiments/nN/redo/cascade_level_b_check_v1.{py,out}`; exact) `[VERIFIED — these
+populations]`: every 7-set of readings ≤ 20, 1,000 seeded fine shapes, the 5,400 late band shapes. **0 failures on every
+item** (B1, B2, B3, B4, B5–B6, B8's condition and its slower-arrival clause, B9, B10). Records, which are data and not
+laws:
+- conveyor breaks by kind (the front not in the next crowd; a slower arrival; a faster arrival entering late), in all
+  three populations. The last kind (512, 7, 1,190) is the case the first draft of B.8 excluded;
+- landings after at least one move, by a gap in the arrivals or by the front passing through: 27,213 and 1,102 (sets
+  ≤ 20), 515 and 30 (fine), 2,927 and 2,473 (late shapes).
+
+**Consequence:**
+- **Level B is complete** `[derived; checked]`. A chain is passages (each sweep jumps to the bottom of the run within
+  `ρ_k` below the setter) joined by bridges (a latest exit on another lap). Its hand-overs follow the conveyor exactly
+  when B.8's condition holds. It ends when nobody is in a slot at an exit. Gap B4 is closed.
+- **What Level C starts from:** by B.2, every reading's place at every exit is a ratio inequality against the current
+  setter. So the whole chain, as a function of the speeds, is fixed by finitely many inequalities of the form
+  `s_a(8l ± 1)` against `s_b(8k + 1)`, as long as the chain is finite. These are Level C's walls (design §8.4 C1), now
+  derived from B.2 rather than assumed.
+- **E204's "gap in the arrivals" is half the story in the late shapes:** 2,473 of their landings come from the front
+  passing through within the last move, against 2,927 with no arrival. Both are B.9.
+- **Standing questions:** none answered. The owner's Lean ruling is recorded above.
