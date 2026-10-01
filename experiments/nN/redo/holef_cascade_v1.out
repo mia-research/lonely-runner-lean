@@ -1,0 +1,72 @@
+E234/E235 (2026-10-01): the cascade inside the holes ArrBlockRule8 f 9, f = 4, 5, 6, read as E232/E233 read f = 3.
+Design: log E234.
+
+A core of 7 - f readings (c1 < ... < m = 1000) below a block of f (x1 >= 9m, x1/m uniform in [9, 60], consecutive block
+ratios uniform in (1, 2)), less every proved rule on every split into a slower part and a top-k part: R8, the fast pair,
+the block split, the train collapse, nested windows (core of j at 1/(j+1)).  1,000 configurations per f.
+Checks (forced): C1 (t* = least clear point, computed without the cascade); t* >= tau_C; t* in a core stretch;
+  F1 a move made from inside a core stretch has only block setters; F2 t* is the block's own relay from the path's
+  first instant inside the stretch that holds t*.
+Records: landing stretch; setters by region and class; paths not passing tau_C; paths landing beyond S0, move by move;
+block setters in gaps.
+
+
+==================== f = 4: 1000 configurations (core of 3) ====================
+excluded while sampling, by the first proved rule found: {'nested windows': 1384}
+x1/m of the kept: {0: 22, 10: 193, 20: 183, 30: 206, 40: 191, 50: 205}
+CHECKS (C1, t* >= tau_C, t* in a core stretch, F1, F2): 0 failures
+t* equals tau_C: 302
+landing stretch: {'S0': 998, 'S1': 2}
+moves by (from-region, setter class): {('S0', 'B'): 1030, ('gap0', 'C'): 2, ('pre', 'B'): 1, ('pre', 'C'): 110}
+block moves inside the landing stretch: {0: 305, 1: 452, 2: 174, 3: 55, 4: 9, 5: 4, 6: 1}
+S0 length in laps of x1 (landing in S0 / beyond): min 0.0374 / max 0.2787
+block relay from tau_C in laps of x1: max 0.7687
+
+-- landing beyond S0: 2 paths (first 12 read in full) --
+core (143, 770, 1000) block (34400, 34835, 67979, 130473)  x1/m 34.40  stretches (laps of x1 from tau_C) [(0.0, 0.0301), (8.6301, 9.021), (20.1898, 34.4301)]  lands in S1
+   from +0.0000 [S0]  setter B 34400  in the way C() B(34400, 130473)  -> +0.0551 [gap0]
+   from +0.0551 [gap0]  setter C 1000  in the way C(1000,) B()  -> +8.6301 [S1]
+core (145, 455, 1000) block (21549, 24274, 30956, 44036)  x1/m 21.55  stretches (laps of x1 from tau_C) [(0.0, 0.2787), (5.6659, 21.8277), (34.7038, 43.3767)]  lands in S1
+   from +0.0000 [S0]  setter B 24274  in the way C() B(24274, 44036)  -> +0.1768 [S0]
+   from +0.1768 [S0]  setter B 30956  in the way C() B(30956,)  -> +0.3055 [gap0]
+   from +0.3055 [gap0]  setter C 1000  in the way C(1000,) B(21549,)  -> +5.6659 [S1]
+
+-- not passing through tau_C: 1 paths (first 12 read in full) --
+core (108, 970, 1000) block (39406, 59510, 81409, 100943)  x1/m 39.41  stretches (laps of x1 from tau_C) [(0.0, 28.1834), (40.6247, 67.5894), (81.2495, 106.9954)]  lands in S0
+   from -0.0940 [pre]  setter B 59510  in the way C(970,) B(59510,)  -> +0.0700 [S0]
+
+-- a block setter in a gap: 0 paths (first 12 read in full) --
+
+==================== f = 5: 1000 configurations (core of 2) ====================
+excluded while sampling, by the first proved rule found: {'nested windows': 87}
+x1/m of the kept: {0: 17, 10: 207, 20: 191, 30: 212, 40: 189, 50: 184}
+CHECKS (C1, t* >= tau_C, t* in a core stretch, F1, F2): 0 failures
+t* equals tau_C: 273
+landing stretch: {'S0': 1000}
+moves by (from-region, setter class): {('S0', 'B'): 1270, ('pre', 'C'): 36}
+block moves inside the landing stretch: {0: 273, 1: 373, 2: 223, 3: 85, 4: 35, 5: 10, 6: 1}
+S0 length in laps of x1 (landing in S0 / beyond): min 0.0481 / max nan
+block relay from tau_C in laps of x1: max 0.7277
+
+-- landing beyond S0: 0 paths (first 12 read in full) --
+
+-- not passing through tau_C: 0 paths (first 12 read in full) --
+
+-- a block setter in a gap: 0 paths (first 12 read in full) --
+
+==================== f = 6: 1000 configurations (core of 1) ====================
+excluded while sampling, by the first proved rule found: {'nested windows': 3}
+x1/m of the kept: {0: 13, 10: 200, 20: 193, 30: 190, 40: 200, 50: 204}
+CHECKS (C1, t* >= tau_C, t* in a core stretch, F1, F2): 0 failures
+t* equals tau_C: 191
+landing stretch: {'S0': 1000}
+moves by (from-region, setter class): {('S0', 'B'): 1673}
+block moves inside the landing stretch: {0: 191, 1: 353, 2: 222, 3: 136, 4: 54, 5: 22, 6: 14, 7: 6, 8: 2}
+S0 length in laps of x1 (landing in S0 / beyond): min 6.8528 / max nan
+block relay from tau_C in laps of x1: max 0.9607
+
+-- landing beyond S0: 0 paths (first 12 read in full) --
+
+-- not passing through tau_C: 0 paths (first 12 read in full) --
+
+-- a block setter in a gap: 0 paths (first 12 read in full) --
