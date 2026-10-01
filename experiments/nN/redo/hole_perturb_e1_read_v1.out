@@ -1,0 +1,29 @@
+E237 (2026-10-01): the three overruns outside explanation E1 (hole_perturb_regions_v1.out), read move by move:
+the block's relay from tau_C at the original h, and either side of the wall h* = (8K+1)/(8 b0).
+
+core (134, 665, 772, 1000) block (9313, 10633, 11568)  h 10633 K 12  h*/h 1.00609
+  original tc 0.001125000 b0 0.001133420 g 0.001140318 landing stretch 1 (h,K)=(10633.0,12)
+      from 0.001125000 way [10633.0, 11568.0] setter [10633.0] -> 0.001140318
+  outside  tc 0.001125000 b0 0.001133420 g 0.001134595 landing stretch 1 (h,K)=(11568.0,13)
+      from 0.001125000 way [10697.714, 11568.0] setter [11568.0] -> 0.001134595
+  inside   tc 0.001125000 b0 0.001133420 g 0.001134595 landing stretch 1 (h,K)=(11568.0,13)
+      from 0.001125000 way [10697.714, 11568.0] setter [11568.0] -> 0.001134595
+
+core (144, 806, 993, 1000) block (9905, 10338, 12632)  h 10338 K 9  h*/h 1.00876
+  original tc 0.000868056 b0 0.000875000 g 0.000882666 landing stretch 1 (h,K)=(10338.0,9)
+      from 0.000868056 way [10338.0, 12632.0] setter [10338.0] -> 0.000882666
+  outside  tc 0.000868056 b0 0.000875000 g 0.000880700 landing stretch 1 (h,K)=(12632.0,11)
+      from 0.000868056 way [10428.571, 12632.0] setter [12632.0] -> 0.000880700
+  inside   tc 0.000868056 b0 0.000875000 g 0.000880700 landing stretch 1 (h,K)=(12632.0,11)
+      from 0.000868056 way [10428.571, 12632.0] setter [12632.0] -> 0.000880700
+
+core (146, 504, 930, 1000) block (10274, 11527, 11600)  h 10274 K 9  h*/h 1.01504
+  original tc 0.000856164 b0 0.000875000 g 0.000888164 landing stretch 1 (h,K)=(10274.0,9)
+      from 0.000856164 way [11600.0] setter [11600.0] -> 0.000872845
+      from 0.000872845 way [10274.0, 11527.0] setter [10274.0] -> 0.000888164
+  outside  tc 0.000856164 b0 0.000875000 g 0.000878373 landing stretch 1 (h,K)=(11527.0,10)
+      from 0.000856164 way [10428.571, 11600.0] setter [10428.571] -> 0.000875000
+      from 0.000875000 way [11527.0] setter [11527.0] -> 0.000878373
+  inside   tc 0.000856164 b0 0.000875000 g 0.000878373 landing stretch 1 (h,K)=(11527.0,10)
+      from 0.000856164 way [10428.571, 11600.0] setter [10428.571] -> 0.000875000
+      from 0.000875000 way [11527.0] setter [11527.0] -> 0.000878373

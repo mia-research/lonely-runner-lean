@@ -1,0 +1,10 @@
+E237 (2026-10-01): E1 restated after reading its three exceptions (hole_perturb_e1_read_v1.out).
+
+E1': moving h alone to h* = (8K+1)/(8 b0) reaches the wall g = b0 iff every block reading other than h is clear at b0.
+Derived: the move of h shifts no other reading.  If another block reading x is in the way at b0, then with h at h* the
+block is not clear at b0, the relay's landing is at least x's exit past b0, and the move cannot bring g to b0 (region
+moved).  If every other block reading is clear at b0, then at h* the block is clear at b0 = h*'s exit on lap K.
+Checked on every overrun whose W_h move keeps the speed order (hole_perturb_v2's wall_check decides region moved).
+
+(every other block reading clear at b0, region moved): {(False, True): 12, (True, False): 17}
+E1' failures (clear and moved, or not clear and kept): 0 of 29

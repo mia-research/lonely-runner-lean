@@ -1,0 +1,18 @@
+E237 (2026-10-01): why a one-reading move to the wall g = b0 sometimes changes the region (hole_perturb_v2.out).
+
+Explanations, derived, checked here against every case:
+  E1 (W_h, the overruns): the move of h reaches the wall iff g is the only instant of the block's relay from tau_C that
+     lies past b0.  Otherwise an earlier relay instant past b0 is the exit of another block reading, which the move of h
+     does not shift: g falls to that reading's exit and stays past b0 (region moved).
+  E2 (W_c, all populations): if the move of c changes the region, then c sets tau_C (the core's own landing is c's exit,
+     so the move shifts tau_C and the block's relay starts elsewhere), or tau_C jumps along the move.
+
+E1 overruns, (g the only relay instant past b0, region moved): {(False, True): 9, (True, False): 17, (True, True): 3}
+   E1 holds iff every case is (True, False) or (False, True); failures: 3
+   relay instants past b0 when the region moved: {3: 2, 2: 7, 1: 3}
+E2 over, W_c: region moved as (c sets tau_C, tau_C jumped): {}; kept as ('kept', c sets tau_C): {('kept', False): 29}
+E2 ctrl3, W_c: region moved as (c sets tau_C, tau_C jumped): {(True, False): 2, (False, True): 1}; kept as ('kept', c sets tau_C): {('kept', False): 97}
+E2 ctrl4, W_c: region moved as (c sets tau_C, tau_C jumped): {(False, True): 1}; kept as ('kept', c sets tau_C): {('kept', False): 49}
+E2 ctrl5, W_c: region moved as (c sets tau_C, tau_C jumped): {(True, False): 2}; kept as ('kept', c sets tau_C): {('kept', False): 48}
+E2 ctrl6, W_c: region moved as (c sets tau_C, tau_C jumped): {(True, False): 50}; kept as ('kept', c sets tau_C): {}
+E2 failures (region moved, c does not set tau_C, no tau_C jump): 0

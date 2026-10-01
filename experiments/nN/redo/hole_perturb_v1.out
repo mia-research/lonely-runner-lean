@@ -1,0 +1,238 @@
+E236/E237 (2026-10-01): the hole paths perturbed through the cascade, one reading at a time.  Design: log E236.
+
+g  = the block's relay landing from tau_C (first instant >= tau_C with the block clear), exit of block reading h on lap K;
+b0 = the end of the core's first lonely stretch S0, core reading c on its entering edge on lap k (8 c b0 = 8k + 7).
+Derived (A.9, C.5): the full set lands in S0 iff g <= b0; the landing leaves S0 at the wall h(8k+7) = c(8K+1).
+  W_c: c -> c* = (8k+7)/(8g)  (slower = inside);   W_h: h -> h* = (8K+1)/(8 b0)  (faster = inside).
+Checks at relative eta = 1e-9 either side of the wall:
+  W1 inside: lands in S0 at g, within O(eta) of b0;   W2 outside: the path visits g and its next instant is c's exit on
+  lap k+1, (8k+9)/(8c);   C1 at every wall-side point.
+Walk: the moved reading in a straight line from its value to the wall (100 grid points, bisection at every change of the
+landing's stretch index); each change classified: a g = b0 wall (any readings), a tau_C jump (relabels the stretches),
+or other (listed in full).
+Late entries: block reading b (lap L) setting the core's last move past tau_C; tie wall b* = (8L+1)/(8 tau_C).
+  T1 at b*(1 +- eta): the same landing; the faster side passes through tau_C, the slower side does not.
+A finite move that changes (h, K) or (c, k) at the wall is counted as region moved and listed, not failed.
+
+
+== the 30 overruns: 30 configurations ==
+  FAILURES (pass: none): none
+  W_c W1 inside lands in S0 at g, at b0: 29
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 29
+  W_c skipped (the move changes the speed order): 1
+  W_c walk: changes of the landing stretch before the wall = 0: 29
+  W_h W1 inside lands in S0 at g, at b0: 17
+  W_h W2 outside: g visited, next move to c's exit on lap k+1: 17
+  W_h region moved: 12
+  W_h skipped (the move changes the speed order): 1
+  W_h walk: changes of the landing stretch before the wall = 0: 17
+    note (97, 371, 671, 1000) (9917, 10060, 11316): ('W_h', 'inside', 'region moved', (9917, Fraction(13, 1), 671, Fraction(0, 1)), (Fraction(11598714297313, 1000000000), Fraction(15, 1), 671, Fraction(0, 1)))
+    note (70, 490, 729, 1000) (9433, 10004, 10018): ('W_h', 'inside', 'region moved', (10004, Fraction(18, 1), 490, Fraction(0, 1)), (Fraction(959000000959, 100000000), Fraction(17, 1), 490, Fraction(0, 1)))
+    note (134, 665, 772, 1000) (9313, 10633, 11568): ('W_h', 'inside', 'region moved', (11568, Fraction(13, 1), 772, Fraction(0, 1)), (Fraction(2674428574103, 250000000), Fraction(12, 1), 772, Fraction(0, 1)))
+    note (144, 806, 993, 1000) (9905, 10338, 12632): ('W_h', 'inside', 'region moved', (12632, Fraction(11, 1), 1000, Fraction(0, 1)), (Fraction(10428571439, 1000000), Fraction(9, 1), 1000, Fraction(0, 1)))
+    note (143, 538, 943, 1000) (9107, 11363, 12243): ('W_h', 'inside', 'region moved', (9107, Fraction(8, 1), 1000, Fraction(0, 1)), (Fraction(12714285727, 1000000), Fraction(11, 1), 1000, Fraction(0, 1)))
+    note (146, 504, 930, 1000) (10274, 11527, 11600): ('W_h', 'inside', 'region moved', (11527, Fraction(10, 1), 1000, Fraction(0, 1)), (Fraction(10428571439, 1000000), Fraction(9, 1), 1000, Fraction(0, 1)))
+    note (149, 546, 881, 1000) (9260, 10630, 12409): ('W_h', 'inside', 'region moved', (9260, Fraction(8, 1), 1000, Fraction(0, 1)), (Fraction(12714285727, 1000000), Fraction(11, 1), 1000, Fraction(0, 1)))
+    note (144, 230, 856, 1000) (9145, 9450, 10127): ('W_h', 'inside', 'region moved', (9145, Fraction(8, 1), 1000, Fraction(0, 1)), (Fraction(10428571439, 1000000), Fraction(9, 1), 1000, Fraction(0, 1)))
+    note (144, 320, 341, 1000) (9181, 10137, 11284): ('W_h', 'inside', 'region moved', (11284, Fraction(10, 1), 1000, Fraction(0, 1)), (Fraction(10428571439, 1000000), Fraction(9, 1), 1000, Fraction(0, 1)))
+    note (67, 280, 714, 1000) (9608, 10057, 11623): ('W_h', 'inside', 'region moved', (10057, Fraction(19, 1), 1000, Fraction(1, 1)), (Fraction(59000000059, 5000000), Fraction(22, 1), 1000, Fraction(1, 1)))
+    note (144, 368, 627, 1000) (9375, 11367, 12566): ('W_h', 'inside', 'region moved', (12566, Fraction(11, 1), 1000, Fraction(0, 1)), (Fraction(11571428583, 1000000), Fraction(10, 1), 1000, Fraction(0, 1)))
+    note (145, 455, 1000) (21549, 24274, 30956, 44036): ('W_h', 'inside', 'region moved', (21549, Fraction(19, 1), 1000, Fraction(0, 1)), (Fraction(44714285759, 1000000), Fraction(39, 1), 1000, Fraction(0, 1)))
+
+== the 6 late entries: 6 configurations ==
+  FAILURES (pass: none): none
+  T1 landing at the wall differs from the original: 4
+  T1 landing at the wall equals the original: 2
+  T1 same landing; faster side passes tau_C, slower side does not: 6
+    note (58, 286, 520, 1000) (9237, 10729, 12415): ('T1', (58, 286, 520, 1000), (9237, 10729, 12415), 9237, 1.0070609745828973, 0.002184857027788965, 0.0021634615384615386, 0.0021634615384615386, 0.002163461540625)
+    note (96, 189, 857, 1000) (10743, 10854, 10930): ('T1', (96, 189, 857, 1000), (10743, 10854, 10930), 10743, 1.0015927684176777, 0.0013148096434887834, 0.0013127187864644108, 0.0013127187864644108, 0.0013127187877771296)
+    note (112, 259, 491, 1000) (9553, 9766, 12355): ('T1', (112, 259, 491, 1000), (9553, 9766, 12355), 9766, 1.0125833390220038, 0.0011645556369726787, 0.0011645556369726787, 0.0011645556369726787, 0.0011645556369726787)
+    note (59, 393, 652, 1000) (9292, 10315, 12736): ('T1', (59, 393, 652, 1000), (9292, 10315, 12736), 12736, 1.0022539166420337, 0.002165841584158416, 0.002165841584158416, 0.002165841584158416, 0.002165841584158416)
+    note (112, 215, 392, 1000) (9944, 10094, 10677): ('T1', (112, 215, 392, 1000), (9944, 10094, 10677), 10677, 1.009438772855463, 0.0011356186194623958, 0.001125, 0.001125, 0.001125000001125)
+    note (108, 970, 1000) (39406, 59510, 81409, 100943): ('T1', (108, 970, 1000), (39406, 59510, 81409, 100943), 59510, 1.001531021863739, 0.001161569484120316, 0.0011603082927989063, 0.0011603082927989063, 0.0011603082927989063)
+
+== controls f = 3: 100 configurations ==
+  FAILURES (pass: none): {'C1 at W_h inside': 6, 'C1 at W_c inside': 1}
+  W_c W1 inside lands in S0 at g, at b0: 97
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 97
+  W_c region moved: 3
+  W_c walk: changes of the landing stretch before the wall = 0: 97
+  W_h W1 inside lands in S0 at g, at b0: 1
+  W_h W2 outside: g visited, next move to c's exit on lap k+1: 1
+  W_h region moved: 59
+  W_h skipped (the move changes the speed order): 40
+  W_h walk: changes of the landing stretch before the wall = 0: 1
+    note (430, 515, 534, 1000) (10279, 11027, 12437): ('W_h', 'inside', 'region moved', (12437, Fraction(4, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (434, 473, 925, 1000) (9238, 9649, 10183): ('W_h', 'inside', 'region moved', (9649, Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (58, 187, 858, 1000) (10213, 11661, 11885): ('W_h', 'inside', 'region moved', (None, None, 858, Fraction(1, 1)), (Fraction(25311000025311, 2500000000), Fraction(22, 1), 858, Fraction(1, 1)))
+    note (371, 827, 852, 1000) (9132, 9544, 13718): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (328, 374, 842, 1000) (10037, 10518, 11034): ('W_h', 'inside', 'region moved', (10518, Fraction(4, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (328, 445, 776, 1000) (10315, 11648, 11750): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (279, 459, 879, 1000) (9007, 9019, 12672): ('W_h', 'inside', 'region moved', (9019, Fraction(4, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (604, 639, 852, 1000) (9847, 10393, 12659): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (166, 307, 350, 1000) (9190, 10160, 13523): ('W_h', 'inside', 'region moved', (9190, Fraction(7, 1), 1000, Fraction(0, 1)), (Fraction(1857142859, 200000), Fraction(8, 1), 1000, Fraction(0, 1)))
+    note (146, 511, 581, 1000) (10060, 10217, 10523): ('W_h', 'inside', 'region moved', (10060, Fraction(9, 1), 1000, Fraction(0, 1)), (Fraction(10428571439, 1000000), Fraction(9, 1), 1000, Fraction(0, 1)))
+    note (612, 761, 838, 1000) (9282, 10014, 10778): ('W_h', 'inside', 'region moved', (10014, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (211, 224, 302, 1000) (9364, 9991, 11337): ('W_h', 'inside', 'region moved', (11337, Fraction(7, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (601, 633, 680, 1000) (9245, 10690, 12308): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (263, 614, 862, 1000) (10750, 10865, 11831): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(5857142863, 1000000), Fraction(5, 1), 1000, Fraction(0, 1)))
+    note (128, 226, 332, 1000) (9300, 9975, 10675): ('W_c', 'inside', 'region moved', (9300, Fraction(9, 1), Fraction(1280999998719, 776000000), Fraction(1, 1)), (10675, Fraction(12, 1), Fraction(1280999998719, 776000000), Fraction(1, 1)))
+    note (160, 370, 820, 1000) (9086, 11101, 12003): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(8142857151, 1000000), Fraction(7, 1), 1000, Fraction(0, 1)))
+    note (396, 466, 828, 1000) (9093, 9193, 9709): ('W_h', 'inside', 'region moved', (9193, Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (77, 437, 547, 1000) (9580, 9644, 9715): ('W_h', 'inside', 'region moved', (9644, Fraction(25, 1), 1000, Fraction(2, 1)), (Fraction(201000000201, 23000000), Fraction(25, 1), 1000, Fraction(2, 1)))
+    note (299, 339, 351, 1000) (9447, 10579, 12378): ('W_h', 'inside', 'region moved', (Fraction(4714285719, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (445, 691, 987, 1000) (10546, 10575, 11383): ('W_h', 'inside', 'region moved', (Fraction(142857143, 40000), Fraction(1, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (67, 399, 577, 1000) (9378, 10697, 10862): ('W_h', 'inside', 'region moved', (9378, Fraction(20, 1), 399, Fraction(0, 1)), (Fraction(2109000002109, 200000000), Fraction(23, 1), 399, Fraction(0, 1)))
+    note (110, 429, 564, 1000) (9600, 9800, 11692): ('W_h', 'inside', 'region moved', (None, None, 564, Fraction(0, 1)), (Fraction(1792714287507, 250000000), Fraction(11, 1), 564, Fraction(0, 1)))
+    note (387, 543, 636, 1000) (9673, 9722, 11122): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (158, 360, 497, 1000) (9997, 10499, 10919): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(1857142859, 200000), Fraction(8, 1), 1000, Fraction(0, 1)))
+    note (103, 566, 969, 1000) (9624, 9812, 10860): ('W_h', 'inside', 'region moved', (9812, Fraction(12, 1), 566, Fraction(0, 1)), (Fraction(3921571432493, 500000000), Fraction(12, 1), 566, Fraction(0, 1)))
+    note (643, 733, 919, 1000) (9469, 9866, 12218): ('W_h', 'inside', 'region moved', (9866, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (173, 796, 904, 1000) (9243, 9551, 10918): ('W_h', 'inside', 'region moved', (Fraction(8142857151, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(8142857151, 1000000), Fraction(7, 1), 1000, Fraction(0, 1)))
+    note (390, 604, 851, 1000) (9559, 10980, 11691): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (611, 682, 694, 1000) (9645, 10535, 12848): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (57, 114, 785, 1000) (9445, 9948, 11854): ('W_h', 'inside', 'region moved', (9948, Fraction(22, 1), 785, Fraction(1, 1)), (Fraction(26533000026533, 3000000000), Fraction(21, 1), 785, Fraction(1, 1)))
+    note (635, 728, 802, 1000) (10153, 10705, 10825): ('W_h', 'inside', 'region moved', (10705, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (195, 393, 498, 1000) (9226, 9594, 13008): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (72, 468, 703, 1000) (9376, 11163, 12725): ('W_h', 'inside', 'region moved', (None, None, 468, Fraction(0, 1)), (Fraction(2958428574387, 250000000), Fraction(22, 1), 468, Fraction(0, 1)))
+    note (289, 530, 700, 1000) (9480, 10083, 12624): ('W_h', 'inside', 'region moved', (Fraction(4714285719, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (283, 558, 775, 1000) (9225, 11743, 12089): ('W_h', 'inside', 'region moved', (Fraction(4714285719, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (190, 364, 413, 1000) (9263, 9990, 12686): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (243, 592, 845, 1000) (11068, 11445, 11724): ('W_h', 'inside', 'region moved', (11445, Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (114, 360, 512, 1000) (10610, 11043, 11513): ('W_h', 'inside', 'region moved', (Fraction(13857142871, 1953125), Fraction(8, 1), 512, Fraction(0, 1)), (Fraction(13857142871, 1953125), Fraction(12, 1), 512, Fraction(0, 1)))
+    note (233, 734, 891, 1000) (9535, 10791, 12453): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(5857142863, 1000000), Fraction(5, 1), 1000, Fraction(0, 1)))
+    note (213, 332, 591, 1000) (9903, 10038, 12504): ('W_h', 'inside', 'region moved', (10038, Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (95, 408, 857, 1000) (9102, 11542, 12336): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(1, 1)), (Fraction(97000000097, 15000000), Fraction(12, 1), 1000, Fraction(1, 1)))
+    note (388, 503, 669, 1000) (9296, 9619, 9695): ('W_h', 'inside', 'region moved', (9619, Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (412, 866, 936, 1000) (9990, 10009, 11512): ('W_h', 'inside', 'region moved', (Fraction(142857143, 40000), Fraction(1, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (198, 389, 536, 1000) (9103, 9155, 12496): ('W_h', 'inside', 'region moved', (9155, Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (53, 494, 778, 1000) (9228, 11239, 11919): ('W_h', 'inside', 'region moved', (None, None, 778, Fraction(1, 1)), (Fraction(1167000001167, 100000000), Fraction(28, 1), 778, Fraction(1, 1)))
+    note (375, 577, 737, 1000) (9132, 9348, 14206): ('W_h', 'inside', 'region moved', (9348, Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (247, 313, 750, 1000) (9621, 9801, 10007): ('W_h', 'inside', 'region moved', (Fraction(5857142863, 1000000), Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(5857142863, 1000000), Fraction(5, 1), 1000, Fraction(0, 1)))
+    note (112, 535, 898, 1000) (9555, 10446, 11654): ('W_h', 'inside', 'region moved', (10446, Fraction(13, 1), 535, Fraction(0, 1)), (Fraction(1482714287197, 200000000), Fraction(12, 1), 535, Fraction(0, 1)))
+    note (61, 176, 189, 1000) (10063, 10869, 11519): ('W_c', 'inside', 'region moved', (None, None, Fraction(6756405398649, 5000000000), Fraction(2, 1)), (10869, Fraction(23, 1), Fraction(6756405398649, 5000000000), Fraction(2, 1)))
+    note (108, 454, 509, 1000) (9580, 10521, 10701): ('W_h', 'inside', 'region moved', (None, None, 509, Fraction(0, 1)), (Fraction(6471571435043, 1000000000), Fraction(11, 1), 509, Fraction(0, 1)))
+    note (610, 768, 875, 1000) (10072, 10169, 11992): ('W_h', 'inside', 'region moved', (10169, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (435, 772, 889, 1000) (10331, 10344, 12218): ('W_h', 'inside', 'region moved', (Fraction(142857143, 40000), Fraction(1, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (345, 527, 656, 1000) (10566, 10922, 12085): ('W_h', 'inside', 'region moved', (10922, Fraction(4, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (679, 687, 897, 1000) (9912, 10134, 10192): ('W_h', 'inside', 'region moved', (10134, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (200, 405, 684, 1000) (9531, 9955, 12754): ('W_h', 'inside', 'region moved', (12754, Fraction(8, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (325, 429, 881, 1000) (9513, 10117, 13303): ('W_h', 'inside', 'region moved', (13303, Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (481, 677, 882, 1000) (10779, 11223, 11895): ('W_h', 'inside', 'region moved', (Fraction(142857143, 40000), Fraction(1, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (588, 706, 709, 1000) (9167, 10417, 12079): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (172, 454, 660, 1000) (9245, 9497, 10120): ('W_h', 'inside', 'region moved', (Fraction(8142857151, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)), (Fraction(8142857151, 1000000), Fraction(7, 1), 1000, Fraction(0, 1)))
+    note (90, 91, 170, 1000) (9949, 10054, 13075): ('W_h', 'inside', 'region moved', (10054, Fraction(14, 1), 1000, Fraction(1, 1)), (Fraction(113000000113, 15000000), Fraction(14, 1), 1000, Fraction(1, 1)))
+    note (136, 779, 845, 1000) (10247, 11686, 11909): ('W_c', 'inside', 'region moved', (11686, Fraction(11, 1), 845, Fraction(0, 1)), (10247, Fraction(15, 1), Fraction(30740999969259, 24200000000), Fraction(1, 1)))
+    note (136, 779, 845, 1000) (10247, 11686, 11909): ('W_h', 'inside', 'region moved', (11686, Fraction(17, 1), 1000, Fraction(1, 1)), (Fraction(121000000121, 15000000), Fraction(15, 1), 1000, Fraction(1, 1)))
+
+== controls f = 4: 50 configurations ==
+  FAILURES (pass: none): {'C1 at W_h inside': 6}
+  W_c W1 inside lands in S0 at g, at b0: 49
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 49
+  W_c region moved: 1
+  W_c walk: changes of the landing stretch before the wall = 0: 49
+  W_h region moved: 25
+  W_h skipped (the move changes the speed order): 25
+    note (349, 464, 1000) (55519, 72249, 131396, 152191): ('W_h', 'inside', 'region moved', (152191, Fraction(55, 1), 1000, Fraction(0, 1)), (Fraction(23000000023, 1000000), Fraction(20, 1), 1000, Fraction(0, 1)))
+    note (231, 624, 1000) (53311, 66448, 113080, 140441): ('W_h', 'inside', 'region moved', (Fraction(33285714319, 1000000), Fraction(18, 1), 1000, Fraction(0, 1)), (Fraction(33285714319, 1000000), Fraction(29, 1), 1000, Fraction(0, 1)))
+    note (555, 909, 1000) (17687, 19950, 31453, 40319): ('W_h', 'inside', 'region moved', (Fraction(4714285719, 1000000), Fraction(1, 1), 1000, Fraction(0, 1)), (Fraction(4714285719, 1000000), Fraction(4, 1), 1000, Fraction(0, 1)))
+    note (169, 588, 1000) (32551, 54082, 54123, 93654): ('W_h', 'inside', 'region moved', (Fraction(45857142903, 1000000), Fraction(34, 1), 1000, Fraction(0, 1)), (Fraction(45857142903, 1000000), Fraction(40, 1), 1000, Fraction(0, 1)))
+    note (181, 648, 1000) (18300, 19468, 26161, 35229): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(4142857147, 200000), Fraction(18, 1), 1000, Fraction(0, 1)))
+    note (187, 230, 1000) (47279, 51501, 74637, 117105): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(57285714343, 1000000), Fraction(50, 1), 1000, Fraction(0, 1)))
+    note (890, 957, 1000) (35910, 47010, 74814, 99613): ('W_h', 'inside', 'region moved', (99613, Fraction(14, 1), 1000, Fraction(0, 1)), (Fraction(5857142863, 1000000), Fraction(5, 1), 1000, Fraction(0, 1)))
+    note (640, 921, 1000) (36003, 52588, 61740, 66794): ('W_h', 'inside', 'region moved', (66794, Fraction(13, 1), 1000, Fraction(0, 1)), (Fraction(8142857151, 1000000), Fraction(7, 1), 1000, Fraction(0, 1)))
+    note (195, 984, 1000) (52540, 75489, 110903, 116120): ('W_h', 'inside', 'region moved', (Fraction(81285714367, 1000000), Fraction(52, 1), 1000, Fraction(0, 1)), (Fraction(81285714367, 1000000), Fraction(71, 1), 1000, Fraction(0, 1)))
+    note (746, 852, 1000) (12024, 15863, 20199, 36711): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (310, 800, 1000) (34615, 46152, 83745, 88843): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(16142857159, 1000000), Fraction(14, 1), 1000, Fraction(0, 1)))
+    note (358, 428, 1000) (17153, 24094, 42769, 44410): ('W_h', 'inside', 'region moved', (42769, Fraction(15, 1), 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (758, 899, 1000) (49245, 76067, 88778, 119533): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(1857142859, 200000), Fraction(8, 1), 1000, Fraction(0, 1)))
+    note (242, 663, 1000) (11837, 14375, 19051, 28642): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(7000000007, 1000000), Fraction(6, 1), 1000, Fraction(0, 1)))
+    note (179, 627, 1000) (57907, 68133, 125933, 185182): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(20142857163, 200000), Fraction(88, 1), 1000, Fraction(0, 1)))
+    note (55, 771, 1000) (52766, 67184, 113468, 124206): ('W_h', 'inside', 'region moved', (67184, Fraction(153, 1), 771, Fraction(1, 1)), (Fraction(116421000116421, 1000000000), Fraction(283, 1), 771, Fraction(1, 1)))
+    note (69, 647, 1000) (22934, 23510, 25210, 38584): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(1, 1)), (Fraction(187000000187, 5000000), Fraction(70, 1), 1000, Fraction(1, 1)))
+    note (459, 566, 1000) (51005, 83963, 84538, 116748): ('W_h', 'inside', 'region moved', (83963, Fraction(23, 1), 1000, Fraction(0, 1)), (Fraction(16142857159, 1000000), Fraction(14, 1), 1000, Fraction(0, 1)))
+    note (366, 434, 1000) (40190, 52470, 61605, 74967): ('W_h', 'inside', 'region moved', (74967, Fraction(26, 1), 1000, Fraction(0, 1)), (Fraction(16142857159, 1000000), Fraction(14, 1), 1000, Fraction(0, 1)))
+    note (383, 433, 1000) (9460, 11182, 13045, 13476): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (422, 552, 1000) (37332, 64907, 82640, 96509): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(12714285727, 1000000), Fraction(11, 1), 1000, Fraction(0, 1)))
+    note (501, 872, 1000) (39953, 58364, 72410, 76215): ('W_h', 'inside', 'region moved', (Fraction(11571428583, 1000000), Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(11571428583, 1000000), Fraction(10, 1), 1000, Fraction(0, 1)))
+    note (121, 912, 1000) (57615, 78976, 111156, 164181): ('W_h', 'inside', 'region moved', (111156, Fraction(137, 1), 1000, Fraction(1, 1)), (Fraction(569000000569, 15000000), Fraction(71, 1), 1000, Fraction(1, 1)))
+    note (772, 773, 1000) (11613, 11888, 12884, 23104): ('W_h', 'inside', 'region moved', (11888, Fraction(2, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (131, 807, 1000) (30563, 40152, 65018, 77383): ('W_c', 'inside', 'region moved', (77383, Fraction(74, 1), 807, Fraction(0, 1)), (65018, Fraction(91, 1), Fraction(401345678611, 300000000), Fraction(1, 1)))
+    note (131, 807, 1000) (30563, 40152, 65018, 77383): ('W_h', 'inside', 'region moved', (Fraction(243000000243, 5000000), Fraction(68, 1), 1000, Fraction(1, 1)), (Fraction(243000000243, 5000000), Fraction(91, 1), 1000, Fraction(1, 1)))
+
+== controls f = 5: 50 configurations ==
+  FAILURES (pass: none): {'C1 at W_h inside': 1}
+  W_c W1 inside lands in S0 at g, at b0: 48
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 48
+  W_c region moved: 2
+  W_c walk: changes of the landing stretch before the wall = 0: 48
+  W_h region moved: 7
+  W_h skipped (the move changes the speed order): 43
+    note (117, 1000) (56460, 81805, 145935, 216572, 348419): ('W_c', 'inside', 'region moved', (145935, Fraction(156, 1), Fraction(18047666648619, 10850000000), Fraction(1, 1)), (216572, Fraction(244, 1), Fraction(18047666648619, 10850000000), Fraction(1, 1)))
+    note (198, 1000) (25201, 41748, 70690, 110693, 193726): ('W_h', 'inside', 'region moved', (Fraction(81285714367, 1000000), Fraction(52, 1), 1000, Fraction(0, 1)), (Fraction(81285714367, 1000000), Fraction(71, 1), 1000, Fraction(0, 1)))
+    note (676, 1000) (40917, 49611, 52302, 59108, 74351): ('W_h', 'inside', 'region moved', (52302, Fraction(10, 1), 1000, Fraction(0, 1)), (Fraction(1857142859, 200000), Fraction(8, 1), 1000, Fraction(0, 1)))
+    note (73, 1000) (38386, 66451, 129217, 196256, 280775): ('W_h', 'inside', 'region moved', (196256, Fraction(336, 1), 1000, Fraction(1, 1)), (Fraction(1283000001283, 5000000), Fraction(481, 1), 1000, Fraction(1, 1)))
+    note (308, 1000) (49565, 72980, 92322, 131446, 138552): ('W_h', 'inside', 'region moved', (None, None, 1000, Fraction(0, 1)), (Fraction(23000000023, 1000000), Fraction(20, 1), 1000, Fraction(0, 1)))
+    note (99, 1000) (29249, 33380, 59263, 99002, 154576): ('W_h', 'inside', 'region moved', (Fraction(99000000099, 5000000), Fraction(25, 1), 1000, Fraction(1, 1)), (Fraction(99000000099, 5000000), Fraction(37, 1), 1000, Fraction(1, 1)))
+    note (120, 1000) (25158, 47184, 60523, 120408, 225989): ('W_c', 'inside', 'region moved', (60523, Fraction(63, 1), Fraction(8846999991153, 5312500000), Fraction(1, 1)), (47184, Fraction(53, 1), Fraction(8846999991153, 5312500000), Fraction(1, 1)))
+    note (120, 1000) (25158, 47184, 60523, 120408, 225989): ('W_h', 'inside', 'region moved', (Fraction(17000000017, 600000), Fraction(32, 1), 1000, Fraction(1, 1)), (Fraction(17000000017, 600000), Fraction(53, 1), 1000, Fraction(1, 1)))
+    note (225, 1000) (51088, 81318, 154973, 238526, 435360): ('W_h', 'inside', 'region moved', (154973, Fraction(86, 1), 1000, Fraction(0, 1)), (Fraction(276714285991, 1000000), Fraction(242, 1), 1000, Fraction(0, 1)))
+
+== controls f = 6: 50 configurations ==
+  FAILURES (pass: none): none
+  W_c region moved: 50
+  W_h region moved: 3
+  W_h skipped (the move changes the speed order): 47
+    note (1000,) (37513, 37730, 42341, 66923, 128206, 232395): ('W_c', 'inside', 'region moved', (None, None, Fraction(149573666517093, 21500000000), Fraction(0, 1)), (128206, Fraction(16, 1), Fraction(149573666517093, 21500000000), Fraction(0, 1)))
+    note (1000,) (19319, 36230, 71616, 94934, 169121, 334940): ('W_c', 'inside', 'region moved', (169121, Fraction(3, 1), Fraction(332268999667731, 48500000000), Fraction(0, 1)), (94934, Fraction(12, 1), Fraction(332268999667731, 48500000000), Fraction(0, 1)))
+    note (1000,) (47751, 69582, 125684, 129082, 144209, 204561): ('W_c', 'inside', 'region moved', (204561, Fraction(5, 1), Fraction(451786999548213, 68500000000), Fraction(0, 1)), (129082, Fraction(17, 1), Fraction(451786999548213, 68500000000), Fraction(0, 1)))
+    note (1000,) (40317, 63663, 114974, 193804, 367986, 732883): ('W_c', 'inside', 'region moved', (114974, Fraction(2, 1), Fraction(1287950998712049, 188500000000), Fraction(0, 1)), (367986, Fraction(47, 1), Fraction(1287950998712049, 188500000000), Fraction(0, 1)))
+    note (1000,) (28310, 42927, 74539, 140092, 176588, 203898): ('W_c', 'inside', 'region moved', (None, None, Fraction(103009666563657, 14750000000), Fraction(0, 1)), (176588, Fraction(22, 1), Fraction(103009666563657, 14750000000), Fraction(0, 1)))
+    note (1000,) (33571, 57191, 103554, 186069, 278242, 524123): ('W_c', 'inside', 'region moved', (103554, Fraction(2, 1), Fraction(17258999982741, 2500000000), Fraction(0, 1)), (103554, Fraction(13, 1), Fraction(17258999982741, 2500000000), Fraction(0, 1)))
+    note (1000,) (44450, 87270, 172353, 258880, 464605, 588131): ('W_c', 'inside', 'region moved', (None, None, Fraction(402156999597843, 59000000000), Fraction(0, 1)), (172353, Fraction(22, 1), Fraction(402156999597843, 59000000000), Fraction(0, 1)))
+    note (1000,) (35049, 39254, 59879, 115540, 157879, 167906): ('W_c', 'inside', 'region moved', (157879, Fraction(3, 1), Fraction(419152999580847, 65000000000), Fraction(0, 1)), (59879, Fraction(8, 1), Fraction(419152999580847, 65000000000), Fraction(0, 1)))
+    note (1000,) (55358, 107425, 176939, 310407, 316620, 519741): ('W_c', 'inside', 'region moved', (55358, Fraction(1, 1), Fraction(30078999969921, 4520000000), Fraction(0, 1)), (107425, Fraction(14, 1), Fraction(30078999969921, 4520000000), Fraction(0, 1)))
+    note (1000,) (56474, 108414, 202641, 343632, 610441, 725683): ('W_c', 'inside', 'region moved', (725683, Fraction(15, 1), Fraction(4273086995726913, 617000000000), Fraction(0, 1)), (610441, Fraction(77, 1), Fraction(4273086995726913, 617000000000), Fraction(0, 1)))
+    note (1000,) (38496, 48055, 65359, 114037, 120281, 222383): ('W_c', 'inside', 'region moved', (222383, Fraction(8, 1), Fraction(280655666386011, 43000000000), Fraction(0, 1)), (120281, Fraction(16, 1), Fraction(280655666386011, 43000000000), Fraction(0, 1)))
+    note (1000,) (59700, 63558, 116155, 218588, 340879, 351455): ('W_c', 'inside', 'region moved', (218588, Fraction(4, 1), Fraction(162616999837383, 24200000000), Fraction(0, 1)), (116155, Fraction(15, 1), Fraction(162616999837383, 24200000000), Fraction(0, 1)))
+    note (1000,) (9137, 16869, 17136, 33743, 43442, 73781): ('W_c', 'inside', 'region moved', (None, None, Fraction(118082999881917, 17000000000), Fraction(0, 1)), (16869, Fraction(2, 1), Fraction(118082999881917, 17000000000), Fraction(0, 1)))
+    note (1000,) (20437, 35855, 70694, 118275, 136212, 142271): ('W_c', 'inside', 'region moved', (None, None, Fraction(247428999752571, 36500000000), Fraction(0, 1)), (70694, Fraction(9, 1), Fraction(247428999752571, 36500000000), Fraction(0, 1)))
+    note (1000,) (46807, 66875, 89277, 118497, 235503, 272595): ('W_c', 'inside', 'region moved', (46807, Fraction(1, 1), Fraction(18172999981827, 2600000000), Fraction(0, 1)), (272595, Fraction(34, 1), Fraction(18172999981827, 2600000000), Fraction(0, 1)))
+    note (1000,) (17090, 30397, 40858, 69079, 112875, 158906): ('W_c', 'inside', 'region moved', (158906, Fraction(3, 1), Fraction(79452999920547, 11500000000), Fraction(0, 1)), (158906, Fraction(20, 1), Fraction(79452999920547, 11500000000), Fraction(0, 1)))
+    note (1000,) (15070, 22449, 24277, 28784, 36743, 65084): ('W_c', 'inside', 'region moved', (None, None, Fraction(4197666662469, 687500000), Fraction(0, 1)), (28784, Fraction(4, 1), Fraction(4197666662469, 687500000), Fraction(0, 1)))
+    note (1000,) (25314, 36133, 48658, 81256, 129913, 218351): ('W_c', 'inside', 'region moved', (218351, Fraction(7, 1), Fraction(24328999975671, 3500000000), Fraction(0, 1)), (48658, Fraction(6, 1), Fraction(24328999975671, 3500000000), Fraction(0, 1)))
+    note (1000,) (57025, 107654, 173566, 285245, 320441, 547784): ('W_c', 'inside', 'region moved', (107654, Fraction(2, 1), Fraction(747695665918971, 107000000000), Fraction(0, 1)), (320441, Fraction(40, 1), Fraction(747695665918971, 107000000000), Fraction(0, 1)))
+    note (1000,) (15257, 17876, 20331, 38517, 41549, 50059): ('W_c', 'inside', 'region moved', (38517, Fraction(1, 1), Fraction(31282999968717, 6250000000), Fraction(0, 1)), (17876, Fraction(3, 1), Fraction(31282999968717, 6250000000), Fraction(0, 1)))
+    note (1000,) (48875, 54118, 97073, 179428, 197055, 326596): ('W_c', 'inside', 'region moved', (48875, Fraction(1, 1), Fraction(81648999918351, 11750000000), Fraction(0, 1)), (326596, Fraction(41, 1), Fraction(81648999918351, 11750000000), Fraction(0, 1)))
+    note (1000,) (15914, 17457, 25203, 27282, 28042, 37547): ('W_c', 'inside', 'region moved', (None, None, Fraction(262828999737171, 41000000000), Fraction(0, 1)), (37547, Fraction(5, 1), Fraction(262828999737171, 41000000000), Fraction(0, 1)))
+    note (1000,) (55687, 79374, 106376, 207905, 327093, 571178): ('W_c', 'inside', 'region moved', (55687, Fraction(1, 1), Fraction(2289650997710349, 337000000000), Fraction(0, 1)), (327093, Fraction(42, 1), Fraction(2289650997710349, 337000000000), Fraction(0, 1)))
+    note (1000,) (17114, 17525, 30837, 46260, 63802, 113914): ('W_c', 'inside', 'region moved', (46260, Fraction(1, 1), Fraction(71952999928047, 11000000000), Fraction(0, 1)), (30837, Fraction(4, 1), Fraction(71952999928047, 11000000000), Fraction(0, 1)))
+    note (1000,) (23923, 32135, 43906, 60848, 91880, 102832): ('W_c', 'inside', 'region moved', (43906, Fraction(1, 1), Fraction(26620999973379, 4062500000), Fraction(0, 1)), (60848, Fraction(8, 1), Fraction(26620999973379, 4062500000), Fraction(0, 1)))
+    note (1000,) (54332, 84413, 109342, 120102, 134036, 215176): ('W_c', 'inside', 'region moved', (54332, Fraction(1, 1), Fraction(590890999409109, 89000000000), Fraction(0, 1)), (84413, Fraction(11, 1), Fraction(590890999409109, 89000000000), Fraction(0, 1)))
+    note (1000,) (46272, 74151, 109082, 144732, 237807, 249413): ('W_c', 'inside', 'region moved', (249413, Fraction(6, 1), Fraction(253280999746719, 36250000000), Fraction(0, 1)), (144732, Fraction(18, 1), Fraction(253280999746719, 36250000000), Fraction(0, 1)))
+    note (1000,) (35309, 55651, 78241, 83765, 96343, 134785): ('W_c', 'inside', 'region moved', (96343, Fraction(3, 1), Fraction(6761567894473, 1000000000), Fraction(0, 1)), (78241, Fraction(10, 1), Fraction(6761567894473, 1000000000), Fraction(0, 1)))
+    note (1000,) (29176, 48202, 75401, 110971, 204474, 270259): ('W_c', 'inside', 'region moved', (48202, Fraction(1, 1), Fraction(715658999284341, 104500000000), Fraction(0, 1)), (204474, Fraction(26, 1), Fraction(715658999284341, 104500000000), Fraction(0, 1)))
+    note (1000,) (23465, 43538, 48132, 77028, 148798, 228433): ('W_c', 'inside', 'region moved', (148798, Fraction(4, 1), Fraction(32850999967149, 5000000000), Fraction(0, 1)), (23465, Fraction(3, 1), Fraction(32850999967149, 5000000000), Fraction(0, 1)))
+    note (1000,) (23465, 43538, 48132, 77028, 148798, 228433): ('W_h', 'inside', 'region moved', (228433, Fraction(30, 1), 1000, Fraction(0, 1)), (Fraction(142857143, 40000), Fraction(3, 1), 1000, Fraction(0, 1)))
+    note (1000,) (22876, 38909, 42273, 47914, 66418, 81431): ('W_c', 'inside', 'region moved', (66418, Fraction(2, 1), Fraction(232462999767537, 36500000000), Fraction(0, 1)), (66418, Fraction(9, 1), Fraction(232462999767537, 36500000000), Fraction(0, 1)))
+    note (1000,) (40471, 52077, 81339, 138387, 187510, 213473): ('W_c', 'inside', 'region moved', (138387, Fraction(4, 1), Fraction(213472999786527, 31000000000), Fraction(0, 1)), (213473, Fraction(27, 1), Fraction(213472999786527, 31000000000), Fraction(0, 1)))
+    note (1000,) (32157, 35071, 64571, 65406, 86203, 109817): ('W_c', 'inside', 'region moved', (109817, Fraction(2, 1), Fraction(603420999396579, 89000000000), Fraction(0, 1)), (86203, Fraction(11, 1), Fraction(603420999396579, 89000000000), Fraction(0, 1)))
+    note (1000,) (36316, 64571, 108762, 124991, 243821, 261274): ('W_c', 'inside', 'region moved', (261274, Fraction(5, 1), Fraction(3349666663317, 500000000), Fraction(0, 1)), (261274, Fraction(34, 1), Fraction(3349666663317, 500000000), Fraction(0, 1)))
+    note (1000,) (31674, 48395, 59745, 78037, 120065, 215244): ('W_c', 'inside', 'region moved', (215244, Fraction(5, 1), Fraction(41852999958147, 6250000000), Fraction(0, 1)), (215244, Fraction(28, 1), Fraction(41852999958147, 6250000000), Fraction(0, 1)))
+    note (1000,) (55081, 58284, 78545, 90600, 129728, 153330): ('W_c', 'inside', 'region moved', (55081, Fraction(1, 1), Fraction(6764333326569, 1000000000), Fraction(0, 1)), (55081, Fraction(7, 1), Fraction(6764333326569, 1000000000), Fraction(0, 1)))
+    note (1000,) (55081, 58284, 78545, 90600, 129728, 153330): ('W_h', 'inside', 'region moved', (78545, Fraction(11, 1), 1000, Fraction(0, 1)), (Fraction(8142857151, 1000000), Fraction(7, 1), 1000, Fraction(0, 1)))
+    note (1000,) (14386, 18645, 33642, 33822, 48209, 67437): ('W_c', 'inside', 'region moved', (48209, Fraction(1, 1), Fraction(6886999993113, 1000000000), Fraction(0, 1)), (48209, Fraction(6, 1), Fraction(6886999993113, 1000000000), Fraction(0, 1)))
+    note (1000,) (52957, 104752, 169378, 293573, 370363, 380335): ('W_c', 'inside', 'region moved', (370363, Fraction(8, 1), Fraction(2182333331151, 312500000), Fraction(0, 1)), (104752, Fraction(13, 1), Fraction(2182333331151, 312500000), Fraction(0, 1)))
+    note (1000,) (25596, 27547, 49769, 77448, 103271, 136103): ('W_c', 'inside', 'region moved', (136103, Fraction(3, 1), Fraction(34423666632243, 5000000000), Fraction(0, 1)), (103271, Fraction(13, 1), Fraction(34423666632243, 5000000000), Fraction(0, 1)))
+    note (1000,) (49047, 61147, 68764, 104990, 156670, 286591): ('W_c', 'inside', 'region moved', (49047, Fraction(1, 1), Fraction(3499666663167, 500000000), Fraction(0, 1)), (104990, Fraction(13, 1), Fraction(3499666663167, 500000000), Fraction(0, 1)))
+    note (1000,) (59853, 63430, 65824, 113554, 210261, 240117): ('W_c', 'inside', 'region moved', (210261, Fraction(4, 1), Fraction(560272999439727, 83000000000), Fraction(0, 1)), (240117, Fraction(31, 1), Fraction(560272999439727, 83000000000), Fraction(0, 1)))
+    note (1000,) (15263, 18080, 23880, 37176, 59281, 89728): ('W_c', 'inside', 'region moved', (None, None, Fraction(106840999893159, 17000000000), Fraction(0, 1)), (15263, Fraction(2, 1), Fraction(106840999893159, 17000000000), Fraction(0, 1)))
+    note (1000,) (15263, 18080, 23880, 37176, 59281, 89728): ('W_h', 'inside', 'region moved', (23880, Fraction(3, 1), 1000, Fraction(0, 1)), (Fraction(2428571431, 1000000), Fraction(2, 1), 1000, Fraction(0, 1)))
+    note (1000,) (46363, 61836, 62377, 104139, 120827, 129381): ('W_c', 'inside', 'region moved', (120827, Fraction(3, 1), Fraction(34712999965287, 5000000000), Fraction(0, 1)), (104139, Fraction(13, 1), Fraction(34712999965287, 5000000000), Fraction(0, 1)))
+    note (1000,) (34491, 54733, 62653, 99486, 128422, 178499): ('W_c', 'inside', 'region moved', (99486, Fraction(2, 1), Fraction(149825666516841, 21500000000), Fraction(0, 1)), (128422, Fraction(16, 1), Fraction(149825666516841, 21500000000), Fraction(0, 1)))
+    note (1000,) (50649, 54282, 80267, 85493, 125211, 194826): ('W_c', 'inside', 'region moved', (80267, Fraction(2, 1), Fraction(6936654314051, 1000000000), Fraction(0, 1)), (80267, Fraction(10, 1), Fraction(6936654314051, 1000000000), Fraction(0, 1)))
+    note (1000,) (23624, 46231, 85363, 129330, 185110, 338732): ('W_c', 'inside', 'region moved', (85363, Fraction(2, 1), Fraction(31198999968801, 4750000000), Fraction(0, 1)), (338732, Fraction(45, 1), Fraction(31198999968801, 4750000000), Fraction(0, 1)))
+    note (1000,) (53628, 98575, 122584, 156510, 159280, 183584): ('W_c', 'inside', 'region moved', (183584, Fraction(4, 1), Fraction(1990999998009, 287500000), Fraction(0, 1)), (159280, Fraction(20, 1), Fraction(1990999998009, 287500000), Fraction(0, 1)))
+    note (1000,) (27535, 31291, 57388, 97828, 149572, 173248): ('W_c', 'inside', 'region moved', (97828, Fraction(2, 1), Fraction(37392999962607, 5750000000), Fraction(0, 1)), (149572, Fraction(20, 1), Fraction(37392999962607, 5750000000), Fraction(0, 1)))
+    note (1000,) (39818, 73423, 100803, 185680, 303355, 420437): ('W_c', 'inside', 'region moved', (420437, Fraction(13, 1), Fraction(33600999966399, 5000000000), Fraction(0, 1)), (100803, Fraction(13, 1), Fraction(33600999966399, 5000000000), Fraction(0, 1)))
+    note (1000,) (22992, 43308, 57645, 82420, 119647, 175252): ('W_c', 'inside', 'region moved', (119647, Fraction(3, 1), Fraction(102230333231103, 16750000000), Fraction(0, 1)), (175252, Fraction(25, 1), Fraction(102230333231103, 16750000000), Fraction(0, 1)))

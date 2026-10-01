@@ -1,0 +1,97 @@
+E236/E237 (2026-10-01): the hole paths perturbed through the cascade, one reading at a time.  Design: log E236.
+v2: (1) C1 used a float bound (1 / S[0] on an int) and failed 14 times at landings on the bound; now exact.
+(2) The walk runs in every case whose endpoint keeps the speed order, region moved or not.  (3) R0 at every walk point:
+the landing is in S0 iff g <= b0, and then it is g (forced, A.9).  (4) Each change of the landing stretch is classified
+by what is discontinuous across the bisection bracket (tau_C, g, b0); with none, it must be the wall g = b0.
+
+g  = the block's relay landing from tau_C (first instant >= tau_C with the block clear), exit of block reading h on lap K;
+b0 = the end of the core's first lonely stretch S0, core reading c on its entering edge on lap k (8 c b0 = 8k + 7).
+Derived (A.9, C.5): the full set lands in S0 iff g <= b0; the landing leaves S0 at the wall h(8k+7) = c(8K+1).
+  W_c: c -> c* = (8k+7)/(8g)  (slower = inside);   W_h: h -> h* = (8K+1)/(8 b0)  (faster = inside).
+Checks at relative eta = 1e-9 either side of the wall:
+  W1 inside: lands in S0 at g, within O(eta) of b0;   W2 outside: the path visits g and its next instant is c's exit on
+  lap k+1, (8k+9)/(8c);   C1 at every wall-side point.
+Walk: the moved reading in a straight line from its value to the wall (100 grid points, bisection at every change of the
+landing's stretch index); each change classified: a g = b0 wall (any readings), a tau_C jump (relabels the stretches),
+or other (listed in full).
+Late entries: block reading b (lap L) setting the core's last move past tau_C; tie wall b* = (8L+1)/(8 tau_C).
+  T1 at b*(1 +- eta): the same landing; the faster side passes through tau_C, the slower side does not.
+A finite move that changes (h, K) or (c, k) at the wall is counted as region moved and listed, not failed.
+
+
+== the 30 overruns: 30 configurations ==
+  FAILURES (pass: none): none
+  W_c W1 inside lands in S0 at g, at b0: 29
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 29
+  W_c skipped (the move changes the speed order): 1
+  W_c walk: changes of the landing stretch before the wall = 0: 29
+  W_h W1 inside lands in S0 at g, at b0: 17
+  W_h W2 outside: g visited, next move to c's exit on lap k+1: 17
+  W_h region moved: 12
+  W_h skipped (the move changes the speed order): 1
+  W_h walk: changes of the landing stretch before the wall = 0: 29
+
+== the 6 late entries: 6 configurations ==
+  FAILURES (pass: none): none
+  T1 landing at the wall differs from the original: 4
+  T1 landing at the wall equals the original: 2
+  T1 same landing; faster side passes tau_C, slower side does not: 6
+    note (58, 286, 520, 1000) (9237, 10729, 12415): ('T1', (58, 286, 520, 1000), (9237, 10729, 12415), 9237, 1.0070609745828973, 0.002184857027788965, 0.0021634615384615386, 0.0021634615384615386, 0.002163461540625)
+    note (96, 189, 857, 1000) (10743, 10854, 10930): ('T1', (96, 189, 857, 1000), (10743, 10854, 10930), 10743, 1.0015927684176777, 0.0013148096434887834, 0.0013127187864644108, 0.0013127187864644108, 0.0013127187877771296)
+    note (112, 259, 491, 1000) (9553, 9766, 12355): ('T1', (112, 259, 491, 1000), (9553, 9766, 12355), 9766, 1.0125833390220038, 0.0011645556369726787, 0.0011645556369726787, 0.0011645556369726787, 0.0011645556369726787)
+    note (59, 393, 652, 1000) (9292, 10315, 12736): ('T1', (59, 393, 652, 1000), (9292, 10315, 12736), 12736, 1.0022539166420337, 0.002165841584158416, 0.002165841584158416, 0.002165841584158416, 0.002165841584158416)
+    note (112, 215, 392, 1000) (9944, 10094, 10677): ('T1', (112, 215, 392, 1000), (9944, 10094, 10677), 10677, 1.009438772855463, 0.0011356186194623958, 0.001125, 0.001125, 0.001125000001125)
+    note (108, 970, 1000) (39406, 59510, 81409, 100943): ('T1', (108, 970, 1000), (39406, 59510, 81409, 100943), 59510, 1.001531021863739, 0.001161569484120316, 0.0011603082927989063, 0.0011603082927989063, 0.0011603082927989063)
+
+== controls f = 3: 100 configurations ==
+  FAILURES (pass: none): none
+  W_c W1 inside lands in S0 at g, at b0: 97
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 97
+  W_c region moved: 3
+  W_c walk change: jump of g: 1
+  W_c walk change: jump of tc+g+b0: 1
+  W_c walk: changes of the landing stretch before the wall = 0: 99
+  W_c walk: changes of the landing stretch before the wall = 2: 1
+  W_h W1 inside lands in S0 at g, at b0: 1
+  W_h W2 outside: g visited, next move to c's exit on lap k+1: 1
+  W_h region moved: 59
+  W_h skipped (the move changes the speed order): 40
+  W_h walk change: jump of g: 5
+  W_h walk: changes of the landing stretch before the wall = 0: 57
+  W_h walk: changes of the landing stretch before the wall = 1: 1
+  W_h walk: changes of the landing stretch before the wall = 2: 2
+    walk (58, 187, 858, 1000) (10213, 11661, 11885) W_h: s=0.569568 jump of g stretch 0 -> 1; (h,K,c,k) (Fraction(5586913377325709201, 549755813888000), Fraction(22, 1), 858, Fraction(1, 1)) -> (11885, Fraction(26, 1), 858, Fraction(1, 1)); (tc,g,b0) (2155.1724, 2155.1724, 2177.114, 2198.1489, 2185.3147, 2185.3147)
+    walk (58, 187, 858, 1000) (10213, 11661, 11885) W_h: s=0.711061 jump of g stretch 1 -> 0; (h,K,c,k) (11885, Fraction(26, 1), 858, Fraction(1, 1)) -> (None, None, 858, Fraction(1, 1)); (tc,g,b0) (2155.1724, 2155.1724, 2198.1489, 2155.1724, 2185.3147, 2185.3147)
+    walk (146, 511, 581, 1000) (10060, 10217, 10523) W_h: s=0.192708 jump of g stretch 0 -> 1; (h,K,c,k) (Fraction(1155015284467717827, 109951162777600), Fraction(9, 1), 1000, Fraction(0, 1)) -> (10060, Fraction(9, 1), 1000, Fraction(0, 1)); (tc,g,b0) (856.1644, 856.1644, 868.6503, 907.0577, 875.0, 875.0)
+    walk (53, 494, 778, 1000) (9228, 11239, 11919) W_h: s=0.218589 jump of g stretch 0 -> 1; (h,K,c,k) (Fraction(1304523424429319403, 109951162777600), Fraction(28, 1), 778, Fraction(1, 1)) -> (11239, Fraction(27, 1), 778, Fraction(1, 1)); (tc,g,b0) (2358.4906, 2358.4906, 2370.5028, 2413.4709, 2410.0257, 2410.0257)
+    walk (53, 494, 778, 1000) (9228, 11239, 11919) W_h: s=0.401606 jump of g stretch 1 -> 0; (h,K,c,k) (11239, Fraction(27, 1), 778, Fraction(1, 1)) -> (None, None, 778, Fraction(1, 1)); (tc,g,b0) (2358.4906, 2358.4906, 2413.4709, 2358.4906, 2410.0257, 2410.0257)
+    walk (136, 779, 845, 1000) (10247, 11686, 11909) W_c: s=0.319763 jump of tc+g+b0 stretch 0 -> 1; (h,K,c,k) (10247, Fraction(15, 1), Fraction(1445394424910874611, 1330409069608960), Fraction(1, 1)) -> (11686, Fraction(12, 1), 845, Fraction(0, 1)); (tc,g,b0) (1444.1592, 1035.503, 1476.0418, 1037.5663, 1725.8383, 1035.503)
+    walk (136, 779, 845, 1000) (10247, 11686, 11909) W_c: s=0.474385 jump of g stretch 1 -> 0; (h,K,c,k) (11686, Fraction(12, 1), 845, Fraction(0, 1)) -> (None, None, 845, Fraction(0, 1)); (tc,g,b0) (997.145, 997.145, 1037.5663, 997.145, 1035.503, 1035.503)
+
+== controls f = 4: 50 configurations ==
+  FAILURES (pass: none): none
+  W_c W1 inside lands in S0 at g, at b0: 49
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 49
+  W_c region moved: 1
+  W_c walk: changes of the landing stretch before the wall = 0: 50
+  W_h region moved: 25
+  W_h skipped (the move changes the speed order): 25
+  W_h walk: changes of the landing stretch before the wall = 0: 25
+
+== controls f = 5: 50 configurations ==
+  FAILURES (pass: none): none
+  W_c W1 inside lands in S0 at g, at b0: 48
+  W_c W2 outside: g visited, next move to c's exit on lap k+1: 48
+  W_c region moved: 2
+  W_c walk: changes of the landing stretch before the wall = 0: 50
+  W_h region moved: 7
+  W_h skipped (the move changes the speed order): 43
+  W_h walk: changes of the landing stretch before the wall = 0: 7
+
+== controls f = 6: 50 configurations ==
+  FAILURES (pass: none): none
+  W_c region moved: 50
+  W_c walk: changes of the landing stretch before the wall = 0: 50
+  W_h region moved: 3
+  W_h skipped (the move changes the speed order): 47
+  W_h walk: changes of the landing stretch before the wall = 0: 3
