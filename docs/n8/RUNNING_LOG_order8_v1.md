@@ -8177,3 +8177,40 @@ for what is not on disk (a decision, or something undefined). To be carried into
 
 **Consequence:** C.4 and C.5 stand as written; their flag is withdrawn (the use is a description of a proved property of
 the oracle). Level D proceeds on the approved re-aim (E224).
+
+---
+
+## E226 — 2026-10-01 — Levels A–C crosswalked to the record: mostly restatement of v21 §6 and E142–E183 (F7); Level D placed on the flank programme
+
+**Map:** none — a citation pass after the owner's *"Documentation is only good if you bother reading it"* (E225); nothing
+derived or run.
+
+**Done:** v21 §6.1–§6.6 and §6.9–§6.15 read in full; the log's E142–E143, E178–E183, E202–E204 and E115 read; each Level
+A–C item grepped against the log up to E220 and v21. Result in `docs/n8/CASCADE_ACCOUNT_CROSSWALK_v1.md`.
+
+**Finding (F7, the third instance today after E217 and E225):**
+- Most of Levels A–C restates in position language what v21 §6 already has, proved or verified: §6.1–§6.2 (the move,
+  the scale recursion, a step is one dilation), Theorems 6.2–6.3, 6.12–6.17, 6.19, 6.23–6.24.
+- The rest restates E142–E143 (move types, cluster bottom) and E178–E183 (the landing changes only at pinches; a death
+  restarts the cascade past the entering reading's exit), with the path route's `margin_or_pinch` and `PinchOpenN`.
+- What the greps do not find is B.4, B.8, C.3, the resolution of E219's exceptions as finite-travel effects, and the
+  count of landings by pass-through. Those are the account's additions; nothing else in A–C is to be cited as new.
+- The checks of E221–E223 stand as re-confirmations.
+
+**Cause:** the design (E220) and each level were built from the definition and recent entries, not from the manuscript
+of record. Map-first reads the map, but map v3 does not reproduce v21 §6, and v21 §6 was not opened. Step 0 of the
+pre-use check (search our own record) was skipped at the design stage, so the derivations were sound and redundant.
+
+**Level D, placed:** in the record's terms the re-aimed target (E224) is Theorem 6.15 locally, and the record's native
+machinery for it is the flank framework (v21 §6.9–§6.11: Theorems 6.8, 6.9, 6.12–6.14, 6.18; Proposition 6.10; the U/K
+calculus). Its open items as the record states them:
+- the derivation at a general flank;
+- the shadowing triples;
+- "both on a common lattice, run-length failing";
+- the index bound (measured, not proved).
+
+Level D is designed from these after v21 §6.7 and §17 are read in full.
+
+**Consequence:** the complete account is a consolidation with a citation layer (the crosswalk) plus five additions. The
+next step reads v21 §6.7 and §17 and the latest handover before Level D's design, so that the design starts from the
+record.
