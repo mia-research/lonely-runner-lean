@@ -9765,3 +9765,96 @@ read at flanks: *"we can already prove grids globally isolate and then it's just
    - The open piece is the alternating structure. At the fastest flank every walker's ratio is below 1, so its whole part
      is 0. A near-half pair there has both readings near `x₆/2`, the class pair `(1/2, 1/2)`, which is not one of §6.11's
      shadowing classes. Whether that blocks the alternation at the fastest flank is the next thing to derive and check.
+
+## E259 — 2026-10-02 — design: phase 3c's flank reading on the open configurations (E118's C1 members)
+
+**Owner:** *"Ok do that making sure you are measuring and deriving the framework and not importing anything"*.
+
+**Map:** v3 §4 Q8 and §9 C1; C1 (E118). The gap this closes: E248–E258 read shadowing on populations that E255 showed are
+all already closed by §17C. The open configurations are `EightResidual`'s members of C1's shape.
+
+**Population (record, not new).** E118's Case C members, regenerated exactly (seed 118, its construction unchanged) and
+saved by `residual_members_C_list_v1.py`. Every member is re-checked against all 22 fields.
+- Mode A: the collider `L·u` (`L = 8·lcm(1…64)`) is the least reading.
+- Mode B: the collider is inside the fast cluster.
+
+E118's construction climbs on **membership** (the number of fields passed), not on a hardness score. These are
+constructed members, not hunted cases. They exclude E60's class by their own field `no_one_free`.
+
+**Read: E253's and E258's readings unchanged, on every member.** `c` is the least reading; the six others are the
+cluster's flanks.
+- At each cluster flank `e`, `c`'s band run (`u = 8k + 1 ∈ [e/c, 7e/c]`): the first opening with no cluster walker in
+  the way (Theorem 6.14's congruence), or *shadowed across the run*.
+- For each shadowed flank:
+  - one walker throughout, given as `(A, A mod 8, ε)` with `x_j/e = A + ε`, and `|x_j − A·e|/c`; or
+  - a hand-off, with its segments and occupants.
+- Alternating occupants' nearest small-denominator fraction, against the same exact uniform null as E258.
+- The **fastest flank's** state (free / one walker / hand-off), in preparation for step 2.
+
+**Checks (forced):**
+- `c` is never in the way inside its run;
+- the earliest first-clear cluster-flank opening is the cascade's landing (E118 recorded one mode B member whose flank
+  is in the core; any such member is listed, not forced);
+- the set is lonely there;
+- all 22 fields hold for every member.
+
+**What is native here, stated before running.**
+- *Objects:* flank openings, readings mod `8e` (Theorems 6.8, 6.14), each walker's `A` and `ε` (Theorem 6.8's position
+  `k·f + ρ/8`), and persistence (Theorem 6.18's bad-run bound).
+- *Not used:* rates as answers, stretches or lengths of time, a window as an object, a score.
+- *Counts:* bookkeeping of named places.
+- *Null:* any "near a fraction" reading is set against its matched null, as in E258.
+
+## E260 — 2026-10-02 — the open configurations read: the fastest flank is free, or shadowed by one near twin whose chain ends free
+
+**Map:** v3 §9 C1; E259 run as designed. Scripts:
+- `LonelyRunner/experiments/nN/residual_members_C_list_v1.{py,out,json}`: E118's members regenerated exactly, 297 + 250.
+  All pass every field predicate on re-check: 16 predicates covering the 22 fields, with the count of 7 fixed by
+  construction.
+- `LonelyRunner/experiments/nN/redo/hole_C1_flanks_v1.{py,out}` and `hole_C1_chain_v1.{py,out}`.
+
+**Checks: 0 failures.**
+- `c` is never in the way inside its run.
+- The landing is the earliest first-clear cluster-flank opening in all 547 members, so E118's one "flank in core" member
+  lands at a cluster flank by this reading.
+- Every member is lonely there.
+
+**Measured on `EightResidual`'s C1 members** (the open configurations; E253–E258 read only closed ones):
+
+| | mode A (297) | mode B (250) |
+|---|---|---|
+| cluster flanks shadowed across `c`'s band run: 0 / 1 / 2 | 242 / 48 / 7 | 242 / 8 / 0 |
+| shadowed by one walker throughout | 56, all `A ≡ 1`, `ε < 0` (a near twin just below), all with `\|x_j − A·e\| < 0.3c` | 8: `A ≡ 1, ε < 0` 6; `A ≡ 0, ε > 0` 1; `A ≡ 7, ε > 0` 1 |
+| hand-offs | 6 (`s` = 2, 2, 3, 3, 4, 9) | 0 |
+| **the fastest flank** | free 287; one near twin below 10 | free 249; one near twin below 1 |
+
+- **The chain, followed in all 11 members whose fastest flank is shadowed** (`hole_C1_chain_v1.out`): each link is a near
+  twin (`A = 1`, `ε < 0`), and every chain ends at a free flank, after one link in 10 and after two in 1.
+- The alternating occupants in the 6 hand-offs number 15. That is too few to read against a null, so nothing is stated
+  about them.
+
+**Derived** `[from TwoWalker.bad_run_le, Theorem 6.18's bad-run bound; not in Lean as a statement here]`.
+1. At the fastest cluster flank `e = x₆ ≥ 9c`, `c`'s band run has `L ≥ 3e/(4c) − 1` openings. A walker `x_j` in the way
+   at every one of them has `ĝ_j ≤ 1/(4L)` (a walker is in the way for at most `1/(4ĝ)` consecutive openings).
+2. Here `ρ_j = x_j/e ∈ (0, 1)`, so `ĝ_j = min(ρ_j, 1 − ρ_j)`.
+   - If `ĝ_j = ρ_j`, then `x_j ≤ e/(4L) ≤ c·(e/c)/(3e/c − 4) < c` (for `e > 2c`), contradicting `x_j > c`.
+   - So `e − x_j ≤ e/(4L) ≤ (9/23)c`.
+3. **A single walker that shadows the fastest flank across `c`'s band run is a near twin just below it, within `(9/23)c`.**
+   The largest gap in the data is `0.27c`.
+
+**Not derived** (measured only, on these members):
+- (b) that the fastest flank is never shadowed by a hand-off: 0 of 547 open members, and none in E253's closed
+  populations;
+- (c) that the near twin's own flank is free, or continues the chain through near twins to a free flank: 11 of 11.
+
+**Native check.**
+- Every object is the framework's own: flank openings, readings mod `8e` (Theorem 6.14), positions (Theorem 6.8), and
+  the bad-run bound (Theorem 6.18).
+- The members are E118's constructed members, built by climbing on membership.
+- No rate, stretch or window is used. The counts are bookkeeping of named flanks.
+
+**Consequence (M7).** On the open configurations, C1's case takes the form **"the fastest cluster flank is free, or the
+near-twin chain below it ends at a free flank"**: 547 of 547, with step 1 derived. What a proof still owes:
+- (b): the fastest flank's long run is not shadowed by several walkers in turn;
+- (c): why a near twin's flank is free (its own walkers are the same readings, met at slightly shifted openings);
+- the slow flanks, which the chain argument does not need.
