@@ -8214,3 +8214,44 @@ Level D is designed from these after v21 §6.7 and §17 are read in full.
 **Consequence:** the complete account is a consolidation with a citation layer (the crosswalk) plus five additions. The
 next step reads v21 §6.7 and §17 and the latest handover before Level D's design, so that the design starts from the
 record.
+
+---
+
+## E227 — 2026-10-01 — the record read for Level D (v21 §6.7, §17, handover v10, and the Lean tree first); design v4
+
+**Owner:** *"Yes"* (to reading v21 §6.7, §17 and the latest handover in full, then designing Level D from the open
+items). Then, while I worked: *"Remember that lean now outpaces the manuscript, handover and paper documents so"*.
+
+**Map:** v3 §4 Q8; `CASCADE_DESIGN_v3` §8.5 re-aimed (E224, E225). A design from the record; nothing derived or run.
+
+**Read in full:** v21 §6.7 (Existence; the rules-with-conditions form; the 2026-09-20 amendment: exhibit `(e, k)`, no
+bound on `k`), §17 (the case list; `EightResidual`'s shapes; §17E's constraints on a proof's shape; §17G), handover v10
+(§4's open step, the pair law as its first piece, owed: doubled edges and deviations beyond `1/C`, the twelve routes not to
+re-derive). Then, on the owner's reminder, **the Lean `Spec/` tree surveyed module by module** (every module's stated
+content, its commit date, and the untracked modules of other sessions), as the primary record of what is proved.
+
+**What the survey changed** (my first v4 draft, written from the documents alone, would have re-proposed proved work):
+- the exact band condition at a class instant ("D-a" in the draft) is `TwoBlockN.lonely_eight_of_blocks` and
+  `lonely_eight_of_pairwise_laps`;
+- doubled edges are in part `DoubledSlotN`, `DoubledNbhdN` and `GridClassN`;
+- captured readings are in part `GridNudgeN` and `RungR1N`;
+- neighbourhoods of every complete grid, the AP and the pair pattern are `GridNeighbourhoodN`, `APNeighbourhoodN` and
+  `GridPairN`/`GridPairLawN`, each with a radius;
+- local cascade transport is another session's untracked `CascadeTransportN` and `CascadeGridN`.
+
+**Design v4** (`docs/n8/CASCADE_DESIGN_v4.md`; v3 retained):
+- v3's §8.5–§8.9 are replaced and v3 §8.7's Lean clause is removed (E222).
+- The base is the Lean rules, listed with their anchors.
+- The targets are what Lean lacks:
+  - **D1**: the selection, from the readings, of a reading, grid, class and laps that `lonely_eight_of_pairwise_laps`
+    accepts, with no uniform cap. This is the obligation, and handover §4's open step in Lean's terms.
+  - **D2**: where the isolation goes when it leaves a grid's neighbourhood (beyond the proved radii).
+  - **D3**: captured readings beyond `GridNudgeN`'s single largest reading and `RungR1N`'s rungs; the pinned pair (both
+    edges occupied) is the named failure of the nudge.
+  - **D4**: transport, with the other session's modules once committed.
+- Order: D3's pinned pair first, then D2, then D1.
+
+**Consequence:**
+- Lean is now the first source read for each target (E225–E227). The crosswalk of E226 covers v21 and the log; its next
+  version owes the Lean modules too (for example the untracked `CascadeTransportN` against Levels A and B).
+- Level D starts at D3, the pinned pair, after the owner's approval of v4.
