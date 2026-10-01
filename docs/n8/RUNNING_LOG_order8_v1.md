@@ -9192,3 +9192,80 @@ place, for the owner to rule on. `Q` is a refutation statistic for that case, no
   - the AP derivation, where the blocked range is `(3/20, 1/4)` per unit step, span 5/3;
   - the free-phase reduction of compact blocks (`SyncBlockN`'s open `N`-free question, `OneFreeN`).
 - **Owner ruling needed:** whether `c`'s first arc may be the case's place, since in `u` it is item 15's object.
+
+## E247 — 2026-10-01 — design: step 3, the native reason for W6(7); phase 3a, the record's mechanisms inside `c`'s first arc
+
+**Owner:** *"Yes"* to step 3: the native reason for W6(7), before any Lean, from two leads (the progression derivation,
+and the free-phase view of compact blocks).
+
+**Map:** v3 §4 Q8; the `f = 6` case of E246. Record first, read before designing: `SyncBlockN` (`sync_block`, the free
+common phase), `SyncPeriodN` (`block_clear_at_period`), `SyncGridN` (`lonely_of_sync_grid`), `SplitChainN`
+(`lonely_of_split`), `FastPairEightN` (`pair_window`), and `OneFreeN` (`exists_clear_step`). What they need:
+- **`sync_block`** holds for any block `{N + e}` and any start `t₀`. If the offsets `{e·t₀}` leave a point `y` at distance
+  at least `1/8 + Emax/N` from every offset, the named instant `t₀ + fract(−y − N·t₀)/N` clears the block. The margin can
+  be met only if `Emax/N < 3/8`: a tight block.
+- **Nested windows** need each faster reading's need to fit in the slower one's clear arc: a separated block. Inside
+  `c`'s first arc this is `lonely_of_split` with core `{c}` at `θ = 1/2`, which E242's exclusions already applied. Every
+  configuration read here fails it.
+
+**Phase 3a: name each `f = 6` landing by a mechanism already in the record, inside `c`'s first arc.** Populations: E235's
+`f = 6` (1,000) and E243's (1,000). Mechanisms, each naming an instant whose loneliness is checked exactly:
+- K0: the block is clear at `c`'s exit `1/(8c)` (evaluation).
+- K1: `sync_block` with carrier `N = x₁` and offsets `x_i − x₁`, at a named start `t₀`: `c`'s exit, or a point `k/q`
+  (`q ≤ 12`) with `[t₀, t₀ + 1/x₁]` inside the arc. `y` is the middle of the offsets' widest gap at `t₀`.
+- K2: as K1 with the carrier the block reading that makes `max|x_i − N|/N` least, and signed offsets. `sync_block` is
+  stated for `e ≥ 0`; signed offsets are its direct extension, marked `[derived]`.
+
+**Read.** The configurations no mechanism reaches are listed with their consecutive ratios and spread, and their shape
+is read before anything is stated (M3).
+
+**Phase 3b (after 3a is read):** derive the mechanism the unreached configurations need, starting from the two leads,
+then check it by construction and perturbation.
+
+**Checks.**
+- Each named instant lies in `c`'s first arc, and the full set is lonely there (exact).
+- Every configuration where K1 or K2's hypothesis holds is clear at the named instant. A failure would be a fault in
+  the check, since `sync_block` is proved.
+
+## E248 — 2026-10-01 — phase 3a read: the record's mechanisms reach no `f = 6` configuration beyond the trivial case
+
+**Map:** v3 §4 Q8; E247 run as designed. Script `LonelyRunner/experiments/nN/redo/hole6_mech_v1.{py,out}`.
+
+**Checks: 0 failures.** No mechanism's hypothesis held without the full set being lonely at its named instant.
+
+| population | K0 (block clear at `c`'s exit) | K1 / K2 (`sync_block`, two carriers) | not reached |
+|---|---|---|---|
+| E235 `f = 6` (ratios below 2) | 191 | 0 | 809 |
+| E243 `f = 6` (some ratio 2 to 9) | 180 | 0 | 820 |
+
+- **Why `sync_block` never fires here.** Its margin `1/8 + Emax/N` must be met by a point between six offsets, which needs
+  `Emax/N` well below `3/8`. Over the unreached configurations, the best carrier's `max|x_i − N|/N` is:
+  - E235: 0.2 to 0.3 in 1, 0.3 to 0.4 in 2, 0.4 to 0.5 in 12, 0.5 and above in 794;
+  - E243: 0.6 and above in all 820.
+- **Nested windows** inside the arc (core `{c}` at `θ = 1/2`) were excluded by construction (E242).
+- So the record's proved mechanisms sit at the two ends:
+  - *tight blocks* (free phase: `sync_block`, period points, sevenths);
+  - *separated blocks* (nested windows, `pair_window`).
+
+  The `f = 6` hole's blocks lie between them. This is the record's own owed item, "bounded shapes by window constants"
+  (E30; E231). `WindowConstantFive`, its order-five form, is registered OWED.
+
+**The two leads, read against this.**
+- The progression derivation (E245: span 5/3) assumes a free fast phase, which is the tight regime.
+- The free-phase view is `sync_block` itself.
+- Neither reaches the hole's blocks as sampled. Both remain correct where they apply.
+
+**What the cascade does instead (E239, E243).** It lands at the least clear flank opening after `c`'s exit: a block
+reading `h`'s exit at which the other five block readings are all clear. In the record's terms (v21 §6.9–6.11), that is a
+flank whose five walkers clear at some opening inside `c`'s first arc. The arc is a run of at least `(27/4)·(x_h/x₁)`
+openings of flank `h`. The record proves one walker (Theorem 6.9) and two walkers by run length (Theorem 6.18, with the
+`1/2` shadowing family as the exception). It has measured three walkers (§6.11: 1,432 shadowing of 496,128). It has
+nothing for five.
+
+**Consequence (M7).**
+- The native reason for W6(7) is not in the record's sync or nesting tools. It is the flank question: within `c`'s first
+  arc, some flank of the six-block has an opening where its five walkers are all clear (no block shadows all six of its
+  flanks across the arc).
+- **Phase 3b, proposed:** read each `f = 6` landing in flank terms: the winning flank, its index from `c`'s exit, the five
+  walkers' steps there, and which of the six flanks have a clear opening inside the arc at all. Then derive from what
+  every configuration shares.
