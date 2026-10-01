@@ -1,0 +1,17 @@
+E260 (2026-10-02): the twin chain on the open configurations (hole_C1_flanks_v1.out).  For every C1 member whose
+fastest cluster flank is shadowed: follow the chain flank -> the walker that shadows it alone (if any) -> that walker's
+own flank -> ..., recording each link's state (free / one walker (A, eps) / hand-off), until a free flank is reached or
+the chain breaks.  The derived claim (E253) to check: the chain descends through near twins (A = 1, eps < 0) and ends at
+a free flank.
+A  rank 6 alone by rank 5 (A=1, eps=-0.00037) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00119) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00206) -> rank 5 free
+A  rank 6 alone by rank 4 (A=1, eps=-0.00195) -> rank 4 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00466) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00056) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00237) -> rank 5 alone by rank 4 (A=1, eps=-0.00029) -> rank 4 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00004) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00214) -> rank 5 free
+A  rank 6 alone by rank 5 (A=1, eps=-0.00481) -> rank 5 free
+B  rank 6 alone by rank 5 (A=1, eps=-0.00085) -> rank 5 free
+chains: {('A', 'ends at a free flank', 'all links near twins (A=1, eps<0)'): 10, ('B', 'ends at a free flank', 'all links near twins (A=1, eps<0)'): 1}

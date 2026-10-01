@@ -1,0 +1,6 @@
+v5: adds no_common_factor and no_six_seven_nine (v4 no_fifths, v3 no_thirds,
+v2 no_rational_opening).  Count the sets in EightResidual (LonelyRunner/LRC/Spec/OrderEightCasesN.lean) among the
+7-element subsets of [1, N], field by field as the structure states them.  Reports the count
+without the two §15 fields and with them, and checks each residual set for a certificate
+(Theorem 10: some flank e in S and index j < e with every d*(8j+1) mod 8e in [e, 7e]).
+members: mode A 297, mode B 250; failing any of the 16 fields on re-check: {'A': 0, 'B': 0}
