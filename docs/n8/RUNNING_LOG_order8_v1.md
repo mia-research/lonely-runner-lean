@@ -9540,3 +9540,87 @@ handle: near-sharers, which the chain argument handles, and hand-offs, which it 
 
 **Answer to E252's question.** Shadowing across a run does not have the record's small-denominator structure. It has
 the near-sharer structure in 62 of 83 cases and a hand-off structure in the rest.
+
+## E254 — 2026-10-01 — design: do the lower orders' template (v21 §17C) and E60 reach the hole configurations?
+
+**Owner:** *"Let me ask this. All n=3 to 7 were reproved via the framework. Does that not suggest how we could achieve
+n=8 without importing other frameworks. We have an overarching frame work that can reprove the others so I feel like
+that should assist us in this step of proof we are in? I mean the cascade will work in all those other proofs too."*
+
+**Map:** v3 §4 Q8 and v21 §17. Record first (read): §17A and §17C.
+- Orders 3–7 were proved natively in §0's form: a finite case list, each case ending at a named residue-band
+  certificate. At order 7 that is `t = K/(7P)` with every `d·K mod 7P` in `[P, 6P]`, Barajas–Serra's prime filtering as
+  `unit_filtering` over the units mod 7, with descent by 7 and by 2.
+- The template is already carried to order 8 in `OrderEightCasesN` (§17C, `[PROVED]`), *"`OrderSixN` one order up"*:
+  `lonely_eight_or_residual` (every whole-number set is lonely or in `EightResidual`).
+- E60 (`lonely_of_off_lattice`, 2026-09-26) came after v21 and is not among `EightResidual`'s fields.
+
+The hole route (`Order8SkeletonN`'s five holes, which we have been mapping) and the residual route (§17C) are two case
+lists for the same target. Neither has been run on the other's configurations.
+
+**Run.** For every hole configuration read so far, as a whole-number set of seven disparities:
+- populations: E233's `f = 3` (2,000); E235's `f = 4, 5, 6` (1,000 each); E243's wide `f = 6` (1,000);
+- record the first §17C rule whose condition holds, in `EightResidual`'s field order (common factor, R6 at
+  `q = 5, 6, 7, 8`, R1, descent, free flank, R4, R8, first lap, the `−7` opening, rational opening, thirds, fifths,
+  sixths, sevenths, ninths, small resolution `D ≤ 64`), and then E60;
+- list the configurations in `EightResidual` that E60 does not close.
+
+Field implementations are those of `experiments/nN/eight_residual_count_v5.py` and `v6.py`, copied, since those scripts run
+on import.
+
+**Checks.** At each case's named instant the full set is lonely (exact), for every rule whose instant is computed here:
+small resolution `(8j + 1)/(8D)`, and the band certificates. A failure would be a fault in the copy.
+
+**Caution recorded in advance.** `c = 1000` in every `f ≥ 4` configuration (E235's sampling), so R6 at `q = 5` and `q = 8`
+cannot fire there (`5 | 1000`, `8 | 1000`), and E60's reach through `h = 2` is inflated. Which rule closes a
+configuration is case bookkeeping for this sample, not a rate.
+
+## E255 — 2026-10-01 — the lower orders' template already closes every hole configuration we mapped
+
+**Map:** v3 §4 Q8 and v21 §17C; E254 run as designed. Script
+`LonelyRunner/experiments/nN/redo/hole_residual_v1.{py,out}`.
+
+**Checks: 0 failures.** Where small resolution fired, the full set is lonely at `(8j + 1)/(8D)`.
+
+**Result.** Every configuration is closed by a §17C rule, all of them proved in `OrderEightCasesN` and axiom-clean.
+**None is in `EightResidual`**, so E60 was never reached.
+
+| population | first §17C rule that holds (count) |
+|---|---|
+| `f = 3` (2,000) | free flank 675, R6 `q = 6` 652, R6 `q = 7` 515, `−7` opening 58, common factor 30, rational opening 27, descent 21, fifths 10, thirds 10, sixths/sevenths/ninths 2 |
+| `f = 4` (1,000) | R6 `q = 6` 353, free flank 279, R6 `q = 7` 272, `−7` opening 33, rational opening 18, thirds 12, common factor 11, descent 10, fifths 9, sixths/… 3 |
+| `f = 5` (1,000) | R6 `q = 6` 324, free flank 283, R6 `q = 7` 250, `−7` opening 40, thirds 34, rational opening 31, fifths 14, common factor 9, descent 8, sixths/… 7 |
+| `f = 6` (1,000) | R6 `q = 6` 315, free flank 295, R6 `q = 7` 259, thirds 57, `−7` opening 27, common factor 16, fifths 14, sixths/… 11, descent 6 |
+| `f = 6` wide (1,000) | R6 `q = 6` 364, free flank 274, R6 `q = 7` 253, thirds 40, `−7` opening 21, common factor 14, fifths 12, descent 11, sixths/… 10, small resolution `D = 2` 1 |
+
+(Which rule fires first is bookkeeping for this sample, not a rate. E254 recorded the sampling bias in advance:
+`c = 1000` makes R6 at 5 and 8 impossible and inflates E60.)
+
+**What this means.**
+1. **The hole route and the residual route meet, and the residual route is ahead.** E232–E253 mapped the cascade inside
+   configurations that `lonely_eight_or_residual` already proves lonely, at named instants, by the lower orders' native
+   template. Nothing in those entries is wrong; the map stands. But no sampled hole configuration is open.
+2. **The open content of the holes is hole ∩ `EightResidual`.** Random sampling at large readings almost never reaches
+   `EightResidual`. Its positive fields need every `q ∈ {5, 6, 7, 8}` to divide some disparity, spread above 7, the
+   multiples-of-8 shapes `(1,6), (2,5), (3,4), (4,3)` (the last with a non-multiple `≡ 4 mod 8`), and then the failure of
+   every certificate family. R6 at `q = 6` or `7` alone closed over half of every population.
+3. **What the lower orders' template says the order-8 structure is.**
+   - At order 7 the native proof's arithmetic was the units mod 7 (`unit_filtering`), with descent by 7 and by 2.
+   - At order 8 the modulus is `8 = 2³`, `φ(8) = 4`, and §17C's fields are organised by the multiples of 8 (descent's
+     cost, R4, the free flank).
+   - **Phase 3c found the same object independently** (E253): what shadows a flank across a run is a near-sharer,
+     ratio near `A` with `A ≡ 0` or `±1 (mod 8)`. That is a near-collision, the near form of a reading `≡ 0 (mod 8)`
+     relative to the flank (Theorem 6.27: an exact block is colliding).
+4. The record's own open rule in these terms is `PROOF_REQUIREMENTS_v2` §7: *produce `(D, a)` when some difference is
+   `≡ 0 (mod 8g)`* (the `L₀` ladder, verified on 31,066 runners, not proved).
+
+**Consequence (M7).**
+- Re-aim from the holes to `EightResidual`: the one open statement of §17C, already reduced from the conjecture by the
+  lower orders' method, proved in Lean.
+- The next map work belongs inside `EightResidual`, by construction (owner, E241): build members at larger readings, run
+  the cascade, and read its landings in the sharer terms phase 3c found. The target is the order-8 counterpart of unit
+  filtering: a residue-band certificate at a modulus read off the set's multiples-of-8 structure.
+- Owner rulings still standing:
+  - whether `EightResidual` is the obligation or a sufficient route (§17B);
+  - whether first-lap clearance stays (§17C);
+  - `c`'s first arc as a place (E246), now moot for the sampled holes.
