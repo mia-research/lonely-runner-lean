@@ -8136,3 +8136,44 @@ pushes it to its own exit, and from there the relay carries it.
   (item 8), or that the relay ends (F1; the obligation).
 
 **Consequence:** none for the proof. Level D waits on the owner's ruling on the re-aim.
+
+---
+
+## E225 — 2026-10-01 — owner: Level D re-aim approved; first isolation is established; a ruling asked for that was already on disk (F7)
+
+**Owner:** *"1. Yes"* (E224's re-aim of Level D approved). *"2. First isolation isn't needed by the conjecture and I don't
+think we have established if the cascade has or not... I seem to remember there are speed where lap occure.  Does that
+mean that is the first isolation or just the first isolation that the cascade finds."* Then: *"So why did you ask rather
+than read the results we have already documented.  Documentation is only good if you bother reading it"*.
+
+**Map:** none — housekeeping (an owner question answered from the record, and a failure recorded).
+
+**The answer, from the record** `[PROVED; VERIFIED]`: the cascade's landing is the first isolation, the earliest positive
+lonely time, not only the first the cascade finds.
+- `bound_le_of_lonely` (`Cascade/Iteration.lean:198`): nothing positive before the bound is lonely.
+- `move_le_of_lonely` (line 107) and `iterate_le_of_lonely` (line 184): the cascade never passes a lonely instant.
+- So `first_isolation_of_fixed` (line 213; manuscript v21 Theorem 6.2): the landing is at or before every positive
+  lonely time. The file is in the gated `LRC/Cascade/` tree.
+- Independently: `experiments/nN/cascade_first_check_v1.out` finds the landing equal to the earliest lonely instant in
+  6,436 of 6,436 sets, and every C1 check of E171 and E212–E223 agreed.
+
+The "laps" are:
+- the first isolation itself lying beyond the slowest reading's first lap (the late shapes; `DoorFirstLap` refuted);
+- bridges up to faster readings' later laps;
+- fast readings lapping within one move (A.5 re-entries).
+
+None skips a lonely instant. Per E200 nothing in the argument rests on it; using it to describe the oracle is sound
+because it is proved.
+
+**The failure (F7; O2 in memory `feedback_n8_no_prereg_no_imports`, "asked for a ruling already on disk").** E223's flag
+asked the owner to rule on using first isolation, as if its standing were open. The facts were on disk in three places:
+- Level A's own A.9, written the same day, cites `first_isolation_of_fixed` as `[PROVED]`;
+- map v3 §2C;
+- E200, which rules on the argument, not on the fact.
+
+Step 0 of the pre-use check (grep the record first) was skipped. **Correction in practice:** before any question to the
+owner, the log, the map, the catalogues and the Lean tree are searched for the answer; a question goes to the owner only
+for what is not on disk (a decision, or something undefined). To be carried into map v4 §6 F7.
+
+**Consequence:** C.4 and C.5 stand as written; their flag is withdrawn (the use is a description of a proved property of
+the oracle). Level D proceeds on the approved re-aim (E224).
