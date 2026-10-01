@@ -9418,3 +9418,80 @@ stretches and no lengths.
 used in E231 and as an exclusion since. Its statements conclude loneliness, and the windows are tools inside. Its shape is
 the classical nested-intervals method. Whether it is native is the owner's call. Under the memory's rule, nothing proved
 is excised on the session's own reading.
+
+## E252 — 2026-10-01 — phase 3c designed on the flank object, reasoned from the record first; E246's piece is E60
+
+**Owner:** *"Yes please and please try to reason and think it through, any time you do not we just end up with another
+attempted import"*.
+
+**Map:** v3 §4 Q8; E251's replacement for phase 3c. Read first: v21 §6.9 in full (Theorems 6.8, 6.9, 6.12–6.14, the U/K
+calculus, the shadowing computations), §6.11 (Theorem 6.18), `Cascade/Flanks.lean` (`class_killer_int`,
+`circDist_periodic_of_lattice`, `lonely_of_flank_unkillable`, `lonely_of_some_flank_unkillable`), and E60.
+
+**The reasoning, step by step, in the framework's objects.**
+
+**R1 — the case at a flank** `[derived from Theorems 6.12–6.14]`.
+- At block flank `e`, opening `k` (`u = 8k + 1`), reading `d` reads `d·u/e` and is clear iff `d·u mod 8e ∈ [e, 7e]`.
+- `c` reads `c·u/e`. It is in its first band `[1, 7]` exactly for `u ∈ [e/c, 7e/c]`; call that `c`'s **band run** at `e`.
+- The `f = 6` case (the cascade's place) is: some block flank `e` has an opening in `c`'s band run at which the five
+  other block readings are clear. For whole numbers, the block's clear openings at `e`, `U_e`, repeat with period `e`
+  (Theorem 6.13).
+
+**R2 — `c` as the free difference** `[derived; it is E60's lonely_of_off_lattice]`.
+- The six block readings are whole, so they are lonely by native order 7, and some block flank `e` has `U_e` non-empty
+  (Theorem 6.8 applied to the six).
+- With `g = gcd(block)`, the clear openings repeat with period `P = e/g`. If `g ∤ c`, then `c` is off that lattice.
+  `class_killer_int` forbids it from being in the way at every opening of a clear class, so `lonely_of_flank_unkillable`
+  gives an isolation. The index is bounded: `c` advances `frac(c/g) ≥ 1/g` per step and, by Theorem 6.18's bad-run
+  bound, is in the way for at most about `g/4` consecutive steps.
+- **This is E60**, proved in Lean and axiom-clean, which I had not read before deriving it. It closes every set with a
+  reading not divisible by the gcd of the others. What it leaves is **every six readings coprime** (2,811 of 3,000
+  random reduced sets in E60).
+- **Correction to E246:** its derived piece (closed when `g ≥ 4c/3`) is contained in E60. Since `g ≥ 4c/3 > c`, `g`
+  cannot divide `c`. It adds nothing, and is withdrawn as a separate result.
+
+**R3 — in the generic class the calculus has no further leverage** `[derived]`. When every six readings are coprime, `c`
+is on the lattice at every block flank (`P = e`), and its verdict is constant along each residue class `r + je`. The
+case at flank `e` is then the finite residue question itself: some `k` in `U_e` with `c·u` in `c`'s band.
+
+**R4 — `c` is a slow walker at every block flank** `[derived from Theorem 6.18's bad-run bound]`.
+- `ĝ_c = c/e ≤ 1/9`.
+- `c` is in the way for at most `e/(4c)` consecutive openings, and its band run at `e` has at least `(3/4)(e/c) − 1`
+  openings, at least 5.75 at `e = x₁` and more at faster flanks.
+- So `c` never blocks inside its band run. A flank fails across the run only if **the five block walkers shadow every
+  opening of the run**.
+
+**R5 — what the record knows about shadowing.**
+- Every shadowing configuration found exhaustively has `max ĝ ≥ 1/3` (§6.11; register item 30).
+- The pairs that shadow are the half-integer family (both fractional parts `1/2`).
+- Shadowing triples with small denominators: `(2,4,4)`, `(3,3,3)`, `(3,6,6)`, `(5,5,5)`.
+- §6.9: shadowing at flanks comes from walkers sharing small denominators ("wide (4–6 runners sharing one small
+  denominator)").
+- In the hole, walkers' ratios `x_j/e` usually have large denominators.
+
+**Where this leaves the native question.** The `f = 6` case fails only if every block flank is shadowed by its five
+block walkers across `c`'s band run. That is shadowing over a finite run of openings, and the record's shadowing
+knowledge is about all openings.
+
+**Phase 3c (map run, design).** Population: the 1,629 configurations of E248 not settled by K0, with E60's condition
+recorded first. Any configuration with a reading not divisible by the gcd of the others is closed by
+`lonely_of_off_lattice` and is set aside.
+
+Read at each block flank `e`, inside `c`'s band run (openings only):
+- the flank's first opening at which every block walker is clear (its index in the run), or *shadowed across the run*;
+- for every opening of the run before it, the walkers in the way: by name, reading mod 8, and their ratio's reduced
+  denominator `q` relative to `e` and `ĝ`;
+- for each flank shadowed across the run, the walkers that do the shadowing, opening by opening, with `(q, ĝ)`. These are
+  to be compared with the record's shadowing configurations (small shared denominators, `max ĝ ≥ 1/3`).
+
+**Checks (forced):**
+- inside the run `c` is never in the way (R4);
+- the earliest first-clear opening over the flanks is the cascade's landing (A.9);
+- the full set is lonely there (exact).
+
+**Not read:** stretches, lengths of anything, windows, shares or counts as rates.
+
+**Question this phase answers:** whether shadowing across the run, at the flanks where it happens, has the record's
+known shadowing structure (shared small denominators, a fast walker). If it does, the native route to the `f = 6` case is
+the shadowing analysis of §6.9–6.11 restricted to a run, and the next step is a derivation there. If it does not, the
+reading names the structure that does.
