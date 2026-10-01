@@ -1,0 +1,24 @@
+E221 (2026-10-01): the Level A catalogue checked (docs/n8/CASCADE_ACCOUNT_LEVEL_A_v1.md, A.13).
+
+Owner: "yes approved, start with the Level A catalogue".  M8: every item is derived; this run checks the derivations,
+with pass condition 0 failures on every item.  Exact arithmetic; the cascade is `e151_block_v1.trace` (BSM: in the way iff
+circDist < 1/8, strict); the clear set is computed without the cascade (`band_cert_v1/core.clear_set`).
+Positions p = 8*d*t (eighths of a lap).  Items: A1, A2, A3, A4-A5, A6, A7, A8, A10, with A11's edge cases counted.
+Populations: every 7-set of readings <= 20; 1,000 seeded fine shapes (least 1,000, spread uniform in [2, 20]); the
+5,400 late band shapes (a record population, used only as a check).
+
+
+== every 7-set of readings <= 20: 77520 sets, 60742 moves ==
+  FAILURES by item (pass: none): none
+  A11 edge cases counted (not failures): {'re-entries': 10, 'reading exactly on an edge': 1729, 'tied setters': 23}
+  chain lengths (moves): {0: 49205, 1: 12012, 2: 7943, 3: 4429, 4: 1948, 5: 993, 6: 598, 7: 193, 8: 91, 9: 33, 10: 44, 11: 7, 12: 9, 13: 7, 14: 4, 15: 1, 16: 2, 17: 1}
+
+== 1,000 seeded fine shapes, spread uniform in [2, 20]: 1000 sets, 1064 moves ==
+  FAILURES by item (pass: none): none
+  A11 edge cases counted (not failures): {'re-entries': 0}
+  chain lengths (moves): {0: 455, 1: 273, 2: 142, 3: 67, 4: 36, 5: 18, 6: 3, 7: 1, 8: 2, 9: 1, 11: 2}
+
+== the 5,400 late band shapes: 5400 sets, 106735 moves ==
+  FAILURES by item (pass: none): none
+  A11 edge cases counted (not failures): {'re-entries': 162, 'tied setters': 1}
+  chain lengths (moves): {17: 187, 18: 1177, 19: 1663, 20: 864, 21: 223, 22: 800, 23: 457, 24: 26, 25: 3}
