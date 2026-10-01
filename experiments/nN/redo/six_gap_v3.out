@@ -1,0 +1,28 @@
+E246 Part A' (2026-10-01): the shapes at the top of six_gap_v2.out, constructed at larger readings.
+
+Q (six_gap_v2.q_of): the largest span (s0 + G)/max(s0, 9/(8 a1)) of a blocked stretch in the first period; c's first arc
+can hold no isolation iff Q > 7.  Families read off the 20 largest Q (each built for a = 10 .. 300 and reduced by its
+gcd):
+  AP1  {a, a+1, ..., a+5}                       (14..19 at the top; derived limit 5/3 as a grows, E245)
+  AP2  {a, a+2, ..., a+10}, a odd               (step-2 progressions: (20, 22, ..., 28, 31) region)
+  AP2' {a, a+2, a+4, a+6, a+8, a+11}            ((20, 22, 24, 26, 28, 31))
+  TC   {a, a+2, a+3, a+5, 2a+2, 2a+3}           ((14, 16, 17, 19, 30, 31))
+  CL4  {a, a+1, a+2, a+3, 2a+3, 3a-2}           ((10, 11, 12, 13, 23, 28))
+Reported per family: Q at each a in steps, its greatest value and where.
+
+check failures: 0
+
+AP1: greatest Q 3.0549 at a = 14 (stretch 0.0987 to 0.3015); Q > 7 at 0 values of a
+   Q at a = 10, 20, 40, 80, 160, 300 (or the nearest built): [(10, 2.5385), (11, 2.5143), (20, 2.3157), (21, 1.7124), (40, 1.9817), (41, 1.6917), (80, 1.8218), (81, 1.6798), (160, 1.7436), (161, 1.6734), (299, 1.7076), (300, 1.7076)]
+
+AP2: greatest Q 2.4667 at a = 27 (stretch 0.0507 to 0.1250); Q > 7 at 0 values of a
+   Q at a = 10, 20, 40, 80, 160, 300 (or the nearest built): [(11, 1.3158), (21, 2.0667), (41, 2.2174), (81, 1.9362), (161, 1.8), (299, 1.6885)]
+
+AP2': greatest Q 3.3312 at a = 28 (stretch 0.0481 to 0.1602); Q > 7 at 0 values of a
+   Q at a = 10, 20, 40, 80, 160, 300 (or the nearest built): [(10, 1.2754), (11, 1.2838), (20, 2.8417), (21, 2.816), (40, 2.362), (41, 2.2609), (80, 1.4456), (81, 1.4127), (160, 1.4373), (161, 1.4202), (299, 1.3767), (300, 1.3638)]
+
+TC: greatest Q 2.9203 at a = 14 (stretch 0.0927 to 0.2708); Q > 7 at 0 values of a
+   Q at a = 10, 20, 40, 80, 160, 300 (or the nearest built): [(10, 1.4848), (11, 1.925), (20, 1.5476), (21, 1.4032), (40, 1.4393), (41, 1.2736), (80, 1.2784), (81, 1.278), (160, 1.2643), (161, 1.2642), (299, 1.2254), (300, 1.2254)]
+
+CL4: greatest Q 2.7097 at a = 10 (stretch 0.1384 to 0.3750); Q > 7 at 0 values of a
+   Q at a = 10, 20, 40, 80, 160, 300 (or the nearest built): [(10, 2.7097), (11, 1.5307), (20, 1.5806), (21, 1.2952), (40, 1.2535), (41, 1.2535), (80, 1.2519), (81, 1.2519), (160, 1.214), (161, 1.214), (299, 1.2107), (300, 1.2107)]
