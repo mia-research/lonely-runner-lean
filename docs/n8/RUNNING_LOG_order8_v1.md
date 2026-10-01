@@ -8806,3 +8806,195 @@ no window in `u`, no cap and no rate.
 - E1′ adds a fact the earlier runs did not show: an overrun can be held at `b₀` by more than one block reading.
 - The open object is unchanged from E235: `g` itself, the block's relay landing from a given instant, in the block's
   readings.
+
+## E238 — 2026-10-01 — design: `g`, the block's relay landing from the entry instant, read in the block's readings
+
+**Owner:** *"Well we better do that now"* (on E237's open object `g`).
+
+**Map:** v3 §4 Q8; the object E235 and E237 left open. M2 class (d), a map run. Record first:
+- v21 §6.10, *"The cascade is a sort and a scan"*: from the bound, the landing is the largest clear candidate scale,
+  `[VERIFIED 32,000 of 32,000]`;
+- Corollary 6.24: every instant the cascade visits is a candidate;
+- Theorem 6.19: the clearance criterion;
+- §6.9 and §6.11: the flank framework. At reading `h`'s exits on laps `K, K + 1, …`, every other reading walks by
+  `8·frac(d/h)` per lap.
+
+Nothing here is new as a statement. The run reads `g` in those terms, from the hole's own entry instants instead of the
+bound.
+
+**The object.** For entry instant `t₀`, each block reading `h` is a flank, with openings `(8K + 1)/(8h)` for
+`K ≥ K₀(h)`, where `K₀(h)` is the first lap whose opening is at or after `t₀`. The opening of lap `K₀ + j` is the flank's
+index `j`. Derived from A.9 from `t₀` and Corollary 6.24: `g = t₀` if the block is clear at `t₀`; otherwise `g` is the
+least clear flank opening at or after `t₀`, over the block's readings. So `g` is named by a pair (`h`, `j`).
+
+**Populations: the hole configurations of E233 and E235, at their actual entry instants.**
+- `t₀ = τ_C` for all 5,000 (2,000 at `f = 3`, 1,000 each at `f = 4, 5, 6`);
+- `t₀` = the start of `S₁` for the 30 overruns.
+
+**Checks (forced):**
+- G1 (oracle, by a second route): `g` from the relay equals the least clear flank opening at or after `t₀`, found by
+  scanning each flank with Theorem 6.19's criterion and no cascade.
+- G2: when `g > t₀`, the winning flank is the relay's last setter.
+- G3: every relay instant after `t₀` is an opening of its setter's flank.
+
+**Records, per path:**
+- whether the block is clear at `t₀`;
+- the winning flank `h`, by rank in the block, and its index `j`;
+- whether `h` was in the way at `t₀`, and whether `g` is the latest exit among the readings in the way at `t₀` (a landing
+  in one move);
+- the number of moves, and the number of flank openings in `(t₀, g)` that the relay passed without visiting;
+- for each read path, the winning flank's scan from `K₀`: each opening clear or blocked, and by which reading at which
+  reading mod 8.
+
+**After the run:** what every path shares, then every path that differs, read (M3) before anything is stated. Indices
+and move counts are records, not statements. A ceiling on either would be a cap (memory
+`feedback_n8_cascade_is_the_oracle`, interval check step 2).
+
+## E239 — 2026-10-01 — `g` read in the block's readings: the least clear flank opening after the entry
+
+**Map:** v3 §4 Q8; E238 run as designed, then M3 on what it showed.
+
+**Scripts** (`LonelyRunner/experiments/nN/redo/`, each `.py` with its `.out`):
+- `hole_g_flank_v1`: the flank reading of `g`;
+- `first_exit_three_v1`, `first_exit_three_v2`, `first_exit_three_spread_v1`, `first_exit_three_v3`: exhaustive tests of
+  the `f = 3` regularity;
+- `hole_g_three_control_v1`: an attempt to build a hole configuration to order.
+
+**Checks (0 failures on all 5,030 relays):**
+- G1 (oracle by a second route): `g` from the relay equals the least clear flank opening found by scanning each block
+  reading's exits with Theorem 6.19's criterion, no cascade.
+- G2: the winning flank is the relay's last setter.
+- G3: every relay instant is an opening of its setter's flank.
+
+**`g` in the block's readings** `[derived from A.9 and Corollary 6.24; checked G1]`. `g = t₀` if the block is clear at
+the entry; otherwise `g` is block reading `h`'s exit on lap `K₀(h) + j`, the least clear flank opening at or after `t₀`.
+This is v21 §6.10's sort and scan, run from the entry instant instead of the bound.
+
+| `f` | entry `t₀` | clear at `t₀` | winner by rank (slowest first) | index `j` of the winner | moves |
+|---|---|---|---|---|---|
+| 3 | `τ_C` | 866 | 495 / 274 / 365 | 0: 1,134 | 1 to 3 |
+| 3 | start of `S₁` | 13 | 5 / 5 / 5 | 0: 15 | 1 to 3 |
+| 4 | `τ_C` | 302 | 173 / 157 / 186 / 182 | 0: 687; 1: 11 | 1 to 6 |
+| 4 | start of `S₁` | 2 | | | |
+| 5 | `τ_C` | 273 | 93 / 119 / 149 / 175 / 191 | 0: 662; 1: 57; 2: 7; 3: 1 | 1 to 6 |
+| 6 | `τ_C` | 191 | 78 / 82 / 118 / 141 / 184 / 206 | 0: 649; 1: 114; 2: 34; 3: 11; 4: 1 | 1 to 8 |
+
+Further records:
+- The winner was in the way at `t₀` in 835 of 1,134 relays at `f = 3`. There, and only there, `g` is the latest exit
+  among the readings in the way at `t₀`, reached in one move.
+- No two flanks opened at `g` together.
+
+**The paths that differ: `j > 0` (`f = 4, 5, 6`; 236 paths, 41 read in full in the `.out`) (M3).**
+- *Feature.* The winner is one of the faster readings (rank 3 or above, except one rank-2 winner at `f = 5`). Its first
+  openings after `t₀` are blocked by other block readings inside their in-way arcs (readings 7.0 to 8.0 or 0.0 to 0.9
+  eighths at that opening; listed per path).
+- *What forces the witness.* The relay first takes the blockers' exits (setters with `j = 0`). The landing is the fast
+  reading's later lap, the first of its openings at which no slower block reading is in the way.
+- *Same mechanism.* Yes: G1 held on all 236. `j > 0` only says that the least clear opening is not a first exit.
+
+**The `f = 3` regularity, tested (M3 on a record, not a statement).** At `f = 3` the landing was always some reading's
+first exit after `t₀` (`j = 0`, 1,149 of 1,149).
+- *Not forced for three readings.* Exhaustive and exact over whole-number triples and every start
+  (`first_exit_three_v1`, `v2`): 3,830 of 9,880 triples up to 40 have a start at which no first exit is clear (P1 fails).
+  On the tight triples tested in `v2`, P1 and P2 ("the landing is a first exit") fail on the same triples: 774 of the
+  24,052 triples up to 80 with spread below 2.2, and 20 of the 84,533 with `81 ≤ c ≤ 160` and spread below 1.62.
+- *The spread of a failing triple has no floor in sight.* The least spread falls with height: 2.125, 1.833, 1.719 and
+  1.609 for `c` in 1–20, 21–40, 41–60 and 61–80, then 1.569 at `(72, 73, 113)` for `c ≤ 160`. The hole's `f = 3` blocks have
+  spread 1.003 to 1.617 (`first_exit_three_spread_v1`), and their readings are near `10⁴`. So the record is scoped to this
+  sample. It is not a property of tight blocks, and no threshold is claimed. (v12's `53/462` floor decayed the same way.)
+- *A control built to order was not possible.* Placing the hole's entry on a failing start of `(8, 15, 29)` put every
+  in-strip candidate under nested windows (`hole_g_three_control_v1`: 0 built; 73 covered, 1,527 outside the strip).
+- *The shape of every failure below spread 1.62* (`first_exit_three_v3`; all 21 with `c ≤ 160`). Two close readings
+  (`b/a ≤ 1.09`, `b − a` from 1 to 8, equal to 1 in 10 of them) and a third at `c/a` from 1.569 to 1.617. Twenty have
+  exactly two failing starts and one has four. So these failures can be **constructed** to a shape rather than searched
+  for (owner: *"we can now construct rather than search to be able to look for the mechanisim"*). That is E242.
+
+**Import check.** Place: `g`, an instant named by `(h, j)` from the readings and the entry. The index `j` and the move
+counts are records. A ceiling on either would be a cap, and none is stated.
+
+**Consequence (M7, for map §9).**
+- Within a core stretch, the hole's case is now named fully in the readings: the block's least clear flank opening `(h, j)`
+  after the stretch's entry, against the stretch's closing edge `(c, k)`.
+- The `f = 3` hope that `g` is always a first exit does not hold for three readings in general. Any proof of the hole has
+  to deal with `j > 0` at every `f`.
+- The next item is the owner's (E240): record every isolation, not only the cascade's.
+
+## E240 — 2026-10-01 — design: the record of every isolation, not only the cascade's
+
+**Owner:** *"So when we find an isolation, are we mapping what other isolation occur for that given speed via BSM.
+Maybe we should be keeping a record of what other isolations there are other than the one cascade points to"*; then
+*"Ok continue on with that"*.
+
+**Map:** v3 §4 Q8 and the obligation. Theorem 6.15 and v20 §0 ask for *some* isolation; first-ness is a by-product (E200,
+§6A). Until now each run kept only the cascade's isolation. The C1 check computed the clear set and discarded everything
+after its first point. This builds a record.
+
+**Scope.**
+- For whole-number readings the lonely set has period 1 and is symmetric about 1/2, so `(0, 1/2]` holds every isolation
+  up to those two maps (`GrandReturnN.exists_lonely_iff_half`).
+- Populations: the hole configurations of E233 (`f = 3`, 2,000) and E235 (`f = 4, 5, 6`, 1,000 each).
+
+**What is recorded, per configuration, as certificates.** An instant is named by `[reading rank, lap]`: an exit
+`(8K + 1)/(8d)` on the left, an entering edge `(8K + 7)/(8d)` on the right.
+- Every core lonely stretch `S_k` in `(0, 1/2]`, with both ends named.
+- For each stretch, the block's relay landing from its start, `g_k`. If `g_k` lies in `S_k`, the stretch holds an
+  isolation and `g_k` is the first of them; otherwise the stretch holds none.
+- For the first ten stretches, every isolation in the stretch, both ends named.
+- The cascade's isolation, by stretch index and certificate.
+
+**Storage.** The full record (`hole_isolations_f<f>_v1.jsonl.gz`, about 45 MB) regenerates exactly from the seeded
+script and stays on disk, not committed. The committed record is `hole_isolations_subset_v1.jsonl.gz`: the first 100
+configurations of each `f`, and every configuration whose cascade lands beyond `S₀`.
+
+**Checks:**
+- I1: the cascade's isolation is the first recorded one (A.9).
+- I2: in the first ten stretches, the clear set computed without the cascade gives `g_k` as the first isolation, and
+  none exactly when `g_k` lies past the stretch's end.
+- I3: every recorded isolation is lonely at its left end (exact).
+
+**Reported:** places and lists only (which stretches hold isolations, and how many isolations each of the first ten
+holds). No totals of time, shares or coverage (register items 4 and 8).
+
+## E241 — 2026-10-01 — the isolation record, built: every core stretch in `(0, 1/2]`, and which hold isolations
+
+**Map:** v3 §4 Q8; E240 run as designed.
+
+**Scripts** (`LonelyRunner/experiments/nN/redo/`):
+- `hole_isolations_v1.{py,out}`: the record. The full record is in `hole_isolations_f<f>_v1.jsonl.gz`, on disk and not
+  committed, about 45 MB; it regenerates exactly. The committed part is `hole_isolations_subset_v1.jsonl.gz`.
+- `hole_isolations_runs_v1.{py,out}`: runs of consecutive stretches holding none.
+
+**Checks I1, I2, I3: 0 failures** at every `f`.
+- I1: the cascade's isolation is the first one recorded.
+- I2: the first ten stretches computed without the cascade agree with `g_k`.
+- I3: every recorded isolation is lonely at its left end.
+
+**The record (places and lists).**
+
+| `f` | configurations | core stretches in `(0, 1/2]` (each) | stretches holding none (all configurations) | configurations with every stretch holding | longest run holding none |
+|---|---|---|---|---|---|
+| 3 | 2,000 | 278 to 825 | 28,615 of 1,090,481 | 4 | 3 (13 configurations); 2 in 446 |
+| 4 | 1,000 | 314 to 832 | 4,280 of 574,420 | 131 | 3 (1); 2 in 19 |
+| 5 | 1,000 | 394 to 750 | 2,490 of 574,192 | 273 | 1 |
+| 6 | 1,000 | 500 | 0 of 500,000 | 1,000 | 0 |
+
+- The first ten stretches all hold isolations in 1,559, 940, 969 and 1,000 configurations for `f = 3, 4, 5, 6`. Where one
+  holds none, it is usually alone among the ten.
+- Isolations per stretch in the first ten: 0 to 21 at `f = 3`; over 100 at `f ≥ 4` (listed in the `.out`).
+- **A lead tested and not upheld:** "a stretch holding none is always followed by one that holds" fails at `f = 3` and
+  `f = 4` (runs of two and three, listed). That no path landed beyond `S₁` (E233, E235) is a record of where these
+  populations' empty stretches fell: an empty `S₀` was rare, and `S₀` and `S₁` were never both empty. It is not a
+  property of the hole.
+- **At `f = 6` every core stretch holds an isolation**, in all 500,000. The core is the one reading `m`, and every stretch
+  is one of `m`'s clear arcs, at least 27/4 laps of `x₁` long (E235). This is a record, scoped to these 1,000.
+
+**Import check.** Places: each recorded isolation is named by certificates, and each stretch's first isolation is
+`g_k`. Counts of stretches and isolations are records of places. No time totals, shares or coverage are stated.
+
+**Consequence (M7).**
+- The obligation needs one isolation per configuration, and the record shows that in the block holes there are many: in
+  every core stretch but a few per configuration at `f = 3, 4, 5`, and in every stretch at `f = 6`.
+- The cascade's isolation is the first. The record now lets a candidate place be checked against *every* isolation,
+  not only the first (the oracle memory's scope rule: a rule naming *a* lonely instant is checked by exact loneliness).
+- What decides whether a stretch holds an isolation is the same comparison as in E237 (`g_k` against the stretch's
+  closing edge), now available for every stretch.
