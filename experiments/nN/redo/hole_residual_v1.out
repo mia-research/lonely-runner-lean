@@ -1,0 +1,33 @@
+E254/E255 (2026-10-01): do the lower orders' template at order eight (v21 17C, OrderEightCasesN) and E60
+(lonely_of_off_lattice) reach the hole configurations?  Design: log E254.
+
+Field implementations copied from experiments/nN/eight_residual_count_v5.py and v6.py (those scripts run on import).
+For each configuration (seven whole-number disparities: the core and the block), the first 17C rule whose condition
+holds, in EightResidual's field order, then E60; the configurations in EightResidual that E60 does not close are listed.
+Check: the full set is lonely at the small-resolution instant (8j+1)/(8D) and at band certificates when those rules fire.
+
+
+== f=3 (E233): 2000 configurations ==
+  CHECKS: 0 failures
+  first rule that holds: {'free flank': 675, 'R6 q=6': 652, 'R6 q=7': 515, 'minus seven': 58, 'common factor': 30, 'rational opening': 27, 'descent': 21, 'fifths': 10, 'thirds': 10, 'sixths/sevenths/ninths': 2}
+  in EightResidual and not closed by E60 (0), first 15: []
+
+== f=4 (E235): 1000 configurations ==
+  CHECKS: 0 failures
+  first rule that holds: {'R6 q=6': 353, 'free flank': 279, 'R6 q=7': 272, 'minus seven': 33, 'rational opening': 18, 'thirds': 12, 'common factor': 11, 'descent': 10, 'fifths': 9, 'sixths/sevenths/ninths': 3}
+  in EightResidual and not closed by E60 (0), first 15: []
+
+== f=5 (E235): 1000 configurations ==
+  CHECKS: 0 failures
+  first rule that holds: {'R6 q=6': 324, 'free flank': 283, 'R6 q=7': 250, 'minus seven': 40, 'thirds': 34, 'rational opening': 31, 'fifths': 14, 'common factor': 9, 'descent': 8, 'sixths/sevenths/ninths': 7}
+  in EightResidual and not closed by E60 (0), first 15: []
+
+== f=6 (E235): 1000 configurations ==
+  CHECKS: 0 failures
+  first rule that holds: {'R6 q=6': 315, 'free flank': 295, 'R6 q=7': 259, 'thirds': 57, 'minus seven': 27, 'common factor': 16, 'fifths': 14, 'sixths/sevenths/ninths': 11, 'descent': 6}
+  in EightResidual and not closed by E60 (0), first 15: []
+
+== f=6 wide (E243): 1000 configurations ==
+  CHECKS: 0 failures
+  first rule that holds: {'R6 q=6': 364, 'free flank': 274, 'R6 q=7': 253, 'thirds': 40, 'minus seven': 21, 'common factor': 14, 'fifths': 12, 'descent': 11, 'sixths/sevenths/ninths': 10, 'small resolution D=2': 1}
+  in EightResidual and not closed by E60 (0), first 15: []
