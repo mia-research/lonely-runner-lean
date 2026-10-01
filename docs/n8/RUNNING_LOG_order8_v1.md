@@ -9624,3 +9624,52 @@ configuration is case bookkeeping for this sample, not a rate.
   - whether `EightResidual` is the obligation or a sufficient route (§17B);
   - whether first-lap clearance stays (§17C);
   - `c`'s first arc as a place (E246), now moot for the sampled holes.
+
+## E256 — 2026-10-01 — the re-aim at `EightResidual` was done on 2026-09-27 (E117–E118); three routes meet at C1
+
+**Owner:** *"Ok lets try it"* (E255's re-aim: build `EightResidual` members by construction, run the cascade, read the
+landings in sharer terms).
+
+**Map:** map v3 §9 C1; log E117–E121, E147–E148, E152–E157. **No run.** Read before designing (F7): the run approved
+here already exists.
+
+**What is on disk.**
+- **E117** (`residual_members_v4/v5`): members of `EightResidual` with **all 22 fields**, Case B shape, built by
+  construction (47 of 400). The largest reading is a multiple of `8·lcm(1…64)` (a collider at every lattice
+  `D ≤ 64`); spread 7.1–8.9. The cascade relocates the isolation to a middle reading's second opening `9/(8e)` (44 of
+  47), `R* ≤ 2.13`.
+- **E118** (`residual_members_C_v1`): Case C members, all 22 fields, 297 of 300 constructions. Shape: **one slow runner
+  below a six-reading cluster.** Through the cascade, all are isolated inside the slow runner's first window, with the
+  flank a cluster member in 546 of 547.
+- **E118 named the open statement C1:** *"the fast cluster's instants … meet the slow runner's first window"*, for a
+  cluster of up to six with no common factor. Its proved cases are `FastPair8` and `BlockSplit8` (and `OneFreeEightN`,
+  E147).
+- **E147–E148** made C1 *"the mechanism of Case B as well as Case C"*.
+- E152–E217 attempted it (regimes, coverings, the grid-class regime, `Cover8`, `WideStep8`, the band route).
+- **The owner's own statement of the mechanism** (log l.4188–4191, quoted in the E115 context): *"It will be because there
+  are two runners in the same slot, which just means it delays the isolation event because the runners need to separate
+  from each other"*; *"It's the same mechanism over and over."* The record's l.4195 names it *"the one mechanism that
+  delays the isolation"* (`EightResidual`'s `eight` field).
+
+**Three routes meet at one statement.**
+- The `f = 6` hole's case, W6(7) (E246), is C1 with a cluster of six.
+- `EightResidual`'s constructed members are C1 configurations (E118).
+- Cases B and C take C1 as their mechanism (E148).
+- E255's re-aim therefore lands where E232–E253 already were. Building residual members again would repeat E117–E118.
+
+**Correction to E255 and the reply that carried it.** "Whether `EightResidual` is the obligation or a sufficient route"
+is **answered**, not pending. `lonelyRunnerAt8_iff_residual` proves it is the obligation (map v3 §9 C1; E212's note,
+log l.7341). Only first-lap clearance stays pending among v21 §17G's rulings, plus E246's arc ruling.
+
+**What today adds to C1, in native terms (E248–E253):**
+- The record's sync and nesting tools do not reach C1's configurations (E248).
+- E60 closes the off-lattice ones (E253).
+- At the cluster's flanks inside the slow runner's band run, a flank is shadowed by a **near-sharer** (62 of 83: a
+  cluster reading whose ratio to the flank is near a whole `A ≡ 0, ±1 (mod 8)`, so it barely moves) or by a
+  **hand-off** (21 of 83). Never more than 2 of the 6 flanks are shadowed.
+- The near-sharer is the owner's *"two runners in the same slot"* read at a flank. For near-sharers alone, the twin-chain
+  argument (E253) shows not all six flanks can be shadowed.
+
+**Consequence (M7).** The next step on C1 is the 21 hand-offs: read and perturb them through the cascade (E67's method)
+to see whether a hand-off is a succession of same-slot pairs (the owner's mechanism, one pair after another) or something
+else. If it is a succession, the twin-chain argument has a chance to extend to it.
