@@ -1,0 +1,69 @@
+E223 (2026-10-01): the Level C catalogue checked (docs/n8/CASCADE_ACCOUNT_LEVEL_C_v1.md, C.8).
+
+Owner: "Yes on to the next, if it not large then continue on to other too".  M8: derived items, checked; pass condition
+0 failures.  Exact rational speeds; the cascade is `e151_block_v1.trace` (BSM, strict).  Crossings at relative eta.
+  C1  margins along the chain; a random perturbation inside them leaves the chain (setter ranks, laps, landing) unchanged.
+  C3  a tie wall between a crowd member and the setter: both sides land at the same certificate; setter ranks differ in
+      at most one move.
+  C4  an edge wall at an intermediate exit: both sides land at the same certificate, except where the wall is also a face
+      of the landing's box (the reading on an edge at the landing) or of an earlier certificate's box (the wall instant
+      lonely on one side, before the landing): those are counted as the derived exceptions.
+  C5  the landing's faces: inside lands at the certificate (else counted, region moved); outside, leaving face: hand-off
+      to d's opening on lap k_d, instant within O(eta); entering face: the old landing is visited and the next instant is
+      d's exit on lap k_d + 1; never an earlier landing.
+Populations: 300 seeded fine shapes; 300 late band shapes drawn uniformly; 300 sets drawn uniformly from readings <= 16.
+
+
+== 300 seeded fine shapes ==
+  FAILURES (pass: none): none
+  C1 perturbations unchanged: 900
+  C3 same landing; setter changes in <= 1 moves: 13
+  C3 skipped (order): 116
+  C3 skipped (slot changes): 31
+  C3 tie at the final move: the landing hands off (derived, C.3 as repaired): 8
+  C4 landing differs: also a face of the landing box (derived): 92
+  C4 same landing: 519
+  C4 same landing, route changed: 208
+  C4 skipped (order): 355
+  C5 earlier landing: the face is also a face of an earlier box (coincident walls, derived): 2
+  C5 entering: next move to d's exit; lonely there: 278
+  C5 entering: next move to d's exit; relay continues: 262
+  C5 leaving: hand-off: 317
+  C5 region moved (inside landing differs): 95
+  C5 skipped (order): 2646
+
+== 300 late band shapes drawn uniformly ==
+  FAILURES (pass: none): none
+  C1 perturbations unchanged: 900
+  C3 same landing; setter changes in <= 1 moves: 382
+  C3 skipped (slot changes): 978
+  C3 tie at the final move: the landing hands off (derived, C.3 as repaired): 41
+  C4 landing differs: also a face of the landing box (derived): 4029
+  C4 same landing: 25790
+  C4 same landing, route changed: 4079
+  C4 skipped (order): 4375
+  C5 earlier landing: the face is also a face of an earlier box (coincident walls, derived): 2
+  C5 entering: next move to d's exit; lonely there: 51
+  C5 entering: next move to d's exit; relay continues: 103
+  C5 leaving: hand-off: 324
+  C5 region moved (inside landing differs): 2953
+  C5 skipped (order): 167
+
+== 300 sets drawn uniformly from readings <= 16 ==
+  FAILURES (pass: none): none
+  C1 on a wall (not perturbed): 133
+  C1 perturbations unchanged: 501
+  C3 same landing; setter changes in <= 1 moves: 18
+  C3 skipped (order): 39
+  C3 skipped (slot changes): 36
+  C3 tie at the final move: the landing hands off (derived, C.3 as repaired): 5
+  C4 landing differs: also a face of the landing box (derived): 147
+  C4 same landing: 689
+  C4 same landing, route changed: 305
+  C4 skipped (order): 466
+  C5 entering: next move to d's exit; lonely there: 233
+  C5 entering: next move to d's exit; relay continues: 173
+  C5 leaving: hand-off: 225
+  C5 region moved (inside landing differs): 95
+  C5 skipped (another reading tight at the landing): 85
+  C5 skipped (order): 2789
