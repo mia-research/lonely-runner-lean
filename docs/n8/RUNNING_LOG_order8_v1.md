@@ -8998,3 +8998,197 @@ holds). No totals of time, shares or coverage (register items 4 and 8).
   not only the first (the oracle memory's scope rule: a rule naming *a* lonely instant is checked by exact loneliness).
 - What decides whether a stretch holds an isolation is the same comparison as in E237 (`g_k` against the stretch's
   closing edge), now available for every stretch.
+
+## E242 — 2026-10-01 — design: the `f = 6` hole beyond consecutive ratio 2 (step 1 of the owner's two)
+
+**Owner:** *"Can we close that hole and then move to formalise it?"*; on the plan (1. extend the population, 2. construct,
+3. read the native reason in flank form, 4. formalise), *"Yes start with step 1 and then 2"*.
+
+**Map:** v3 §4 Q8; the hole `ArrBlockRule8 6 9`. M2 class (d), a map run. E235's `f = 6` population had consecutive
+block ratios in `(1, 2)` only. Blocks with some consecutive ratio between 2 and 9 that no proved rule covers are also
+in the hole and have not been read.
+
+**Population.** The core is the one reading `c = 1000`. The block has `x₁/c` uniform in `[9, 60]`, and each
+consecutive ratio `x_{i+1}/x_i` log-uniform in `[1, 9)`. Kept only if:
+- some consecutive ratio is at least 2;
+- the total spread `x₆/x₁` is at most 64 (a search range, not a statement);
+- no proved rule covers the set: R8, the fast pair, the block split, the train collapse, or nested windows on every
+  split (`holef_cascade_v1.covered`).
+
+1,000 configurations are kept, seed 242. Exclusions are recorded by rule.
+
+**Read, per configuration, with the checks of E235, E239 and E241 (all forced, pass condition 0 failures):**
+- C1, `t* ≥ τ_C`, `t*` in a core stretch, F1, F2;
+- G1–G3 for the block's relay from `τ_C`;
+- I1–I3 for the isolation record of all 500 of `c`'s arcs in `(0, 1/2]`.
+
+**Records:**
+- the stretch holding the cascade's isolation;
+- the winning flank's rank and index `j`;
+- the block's relay from `τ_C`, in laps of `x₁` (a record; a ceiling would be a cap);
+- the arcs holding no isolation, and their runs;
+- every configuration whose cascade lands beyond `c`'s first arc, read move by move.
+
+## E243 — 2026-10-01 — the `f = 6` hole beyond ratio 2: the same, every arc of `c` holds an isolation
+
+**Map:** v3 §4 Q8; E242 run as designed. Script `LonelyRunner/experiments/nN/redo/hole6_wide_v1.{py,out}`. The
+full isolation record is in `hole6_wide_isolations_v1.jsonl.gz` (23.5 MB, on disk, not committed; it regenerates
+exactly). The first 100 configurations are committed as `hole6_wide_isolations_subset_v1.jsonl.gz`.
+
+**Population.** 1,000 kept.
+- Max consecutive ratio of the kept: 2 (216), 3 (268), 4 (237), 5 (141), 6 (73), 7 (31), 8 (34).
+- Spread `x₆/x₁` from 2 to 64.
+- Excluded: 8,921 outside the search range, 825 by nested windows, 53 by R8, and 30 with every ratio below 2.
+
+**Checks: 0 failures** (C1, `t* ≥ τ_C`, `t*` in a core stretch, F1, F2, G1–G3, I1–I3).
+
+**Records:**
+- The cascade lands in `c`'s first arc in 1,000 of 1,000.
+- **Every one of `c`'s 500 arcs in `(0, 1/2]` holds an isolation, in all 1,000** (500,000 of 500,000). With E241 that is
+  1,000,000 of 1,000,000 arcs over both `f = 6` populations.
+- The block is clear at `τ_C` in 180.
+- The winner's index `j` runs to 26, carried by the fastest readings (rank 6; up to 7 at rank 5). The winner's lap is
+  short when the block is spread.
+- The block's relay from `τ_C` took at most 0.737 laps of `x₁`, a record. The arc is at least 27/4 laps.
+
+**Consequence (M7).** Nothing in the wider population differs from E235 and E241 at `f = 6`. The case "the block's relay
+from the bound lands in `c`'s first arc" holds on all 2,000 configurations read. Whether it can fail comes down to one
+object of the six-block: its longest blocked stretch, i.e. the longest run of instants with no joint clear point,
+measured in laps of `x₁`.
+- If every six-block's longest blocked stretch is shorter than 27/4 laps of `x₁`, every arc of `c` holds an isolation.
+- If some six-block has a longer one, a configuration can be built that puts `c`'s first arc inside it.
+
+That is what step 2 constructs (E244).
+
+## E244 — 2026-10-01 — design: construct six-blocks with long blocked stretches and place `c`'s arc inside one (step 2)
+
+**Owner:** *"Yes start with step 1 and then 2"*; earlier, *"we can now construct rather than search to be able to look
+for the mechanisim"*.
+
+**Map:** v3 §4 Q8; the hole `ArrBlockRule8 6 9`, E243's consequence. M2 class (d), a construction.
+
+**The object.** For a six-block, its blocked stretches are the maximal open runs of instants with no joint clear point
+(at `1/8`), between consecutive clear intervals. Scaling a block by `g` divides every instant by `g`, so a blocked
+stretch measured in laps of `x₁` depends only on the reduced block. Its start is the right end of a clear interval: an
+entering edge of some block reading.
+
+**Derived (E237's rule, at `f = 6`).** Put `c`'s first arc `[1/(8c), 7/(8c)]` so that it starts at the start of a
+blocked stretch of length `G` (in time). Then the arc holds no isolation exactly when `G` exceeds the arc's length
+`3/(4c)`. The hole requires `c ≤ x₁/9`, so the arc is at least 27/4 laps of `x₁`. The first arc can therefore fail only
+for a block with a blocked stretch longer than 27/4 laps of `x₁`.
+
+**Part A (exhaustive, exact).** Every reduced six-set `a₁ < … < a₆ ≤ 32` with `gcd = 1`. For each, the joint clear set
+over one period `[0, 1]`, every blocked stretch (including the one through `0`), and the longest one `G`, as `G·a₁`
+laps of `a₁`, with its start. Reported:
+- the greatest `G·a₁` by height band of `a₆`, to see whether it grows with height, since a quantity found exhaustively to a
+  height has drifted with height before;
+- the 20 largest, with their sets and starts.
+
+**Part A′ (after reading Part A).** The shapes at the top of Part A are built at larger readings, by construction rather
+than search. It is designed once Part A is read and logged.
+
+**Part B (placing).** For each top set, the arc start is put on the stretch's start:
+- `c = g/(8(s₀ + n))`, with `n` the least whole number for which `c ≤ g·a₁/9`;
+- the set is scaled to whole numbers, and checked against the proved rules (it must be in the hole);
+- the cascade is run (C1), and the isolation record is taken for `c`'s arcs.
+
+Read: where the cascade lands, and whether the first arc holds. Every configuration whose first arc holds none is read
+move by move.
+
+**Checks.**
+- Part A: the clear set of each set is computed twice, by `clear_set` and by direct evaluation at both ends of every
+  clear interval. Every left end must be an exit and every right end an entering edge.
+- Part B: C1, F1, F2, I1–I3.
+
+## E245 — 2026-10-01 — Part A read; E244's placement condition corrected: the first arc is `[s, 7s]`
+
+**Map:** v3 §4 Q8; E244 Part A. Script `LonelyRunner/experiments/nN/redo/six_gap_v1.{py,out}`.
+
+**Part A (exhaustive, all 897,973 reduced six-sets `≤ 32`; check 0 failures).**
+- The longest blocked stretch, in laps of `a₁`, is carried by consecutive blocks `{a, …, a + 5}`. By height band of `a₆`
+  its greatest value is 1.30, 1.68, 2.10, 2.84, 3.01, 3.12 and 4.04 (at `(27, …, 32)`). It grows with height: one
+  stretch runs from about `0.12` to `0.25` of the period, so its length in laps of `a₁` is roughly `a/10`.
+- **The derivation for this shape:** six readings in arithmetic progression with step `τ` (one apart, in reduced time)
+  sit at `aτ + iτ`. When `3/20 < τ < 1/4`, each step is below 1/4 and the six span more than 3/4, so every placement puts
+  one of them inside the open bad arc of width 1/4. No joint clear point exists there.
+  `[derived; agrees with the stretch starts in the .out]`
+- In laps of `a₁`, this stretch passes 27/4 for `a` above about 60.
+
+**Correction to E244 (not caught at design time).** E244's derived condition ("the first arc can fail only for a block
+with a blocked stretch longer than 27/4 laps") is necessary, but it is not the condition.
+- `c`'s first arc is `[s, 7s]` with `s = 1/(8c)`; its length is fixed by its start. The hole gives `s ≥ 9/(8x₁)`.
+- So the first arc holds no isolation **exactly when the block is blocked on all of `[s, 7s]`** for some
+  `s ≥ 9/(8x₁)`: a blocked stretch `(s₀, s₀ + G)` with `s₀ + G > 7·max(s₀, 9/(8x₁))`, taken just past `s₀`.
+- In reduced time the block's pattern has period 1. In a later period `k ≥ 1` a stretch spans a ratio of at most
+  `(k + 1)/k ≤ 2`, so only the first period can matter.
+- The consecutive blocks' long stretch spans a ratio of about 2 (0.12 to 0.25). It cannot hold a first arc. Part A's
+  object measures a necessary condition only.
+
+**Part A″ (run next; it replaces Part B's placement condition).** For every reduced six-set `≤ 32`, compute
+`Q = max (s₀ + G)/max(s₀, 9/(8a₁))` over its blocked stretches in the first period. The first arc can hold no isolation
+for some `c` exactly when `Q > 7`.
+- This is a refutation search for the case "the block's relay from `1/(8c)` lands in `c`'s first arc". It is a truth
+  check of a candidate case, not a statement.
+- Reported: the greatest `Q` by height band, and the 20 largest with their stretches. Any set with `Q > 7` is placed in
+  the hole (Part B) and read move by move.
+
+## E246 — 2026-10-01 — step 2 read: no six-block can hold `c`'s first arc; the `f = 6` case reduced to one early range
+
+**Map:** v3 §4 Q8; E245 Part A″ and E244 Part A′. Scripts `LonelyRunner/experiments/nN/redo/six_gap_v2.{py,out}` and
+`six_gap_v3.{py,out}`.
+
+**Checks: 0 failures** (every clear interval's ends are clear; left ends are exits, right ends entering edges).
+
+**Part A″ (exhaustive, 897,973 reduced six-sets `≤ 32`).** No set has `Q > 7`. `Q` is the largest span
+`(s₀ + G)/max(s₀, 9/(8a₁))` of a blocked stretch.
+- Greatest `Q` by height band of `a₆`: 1.61, 1.94, 2.54, 3.05, 2.63, 2.71, 2.92; the overall greatest is 3.05 at
+  `(14, …, 19)`.
+- `Q < 2` for 897,546 of the sets, 2 to 3 for 426, and above 3 for 1.
+
+**Part A′ (constructed, not searched).** The five shapes at the top of Part A″ were built for `a = 10 … 300`:
+- `AP1` `{a, …, a + 5}`;
+- `AP2` (step 2);
+- `AP2′` `{a, a + 2, …, a + 8, a + 11}`;
+- `TC` `{a, a + 2, a + 3, a + 5, 2a + 2, 2a + 3}`;
+- `CL4` `{a, a + 1, a + 2, a + 3, 2a + 3, 3a − 2}`.
+
+In every family `Q` falls with height:
+- `AP1` goes to 1.71 at `a = 300`, consistent with E245's limit 5/3.
+- `TC` and `CL4` go to about 1.21–1.23.
+- The greatest anywhere is 3.33 (`AP2′` at `a = 28`). `Q > 7` at no `a` in any family.
+
+**Derived: the `f = 6` case needs only the start of the block's first period** `[derived from lonely_seven_nat and
+periodicity; not in Lean]`.
+- The six block readings are whole numbers, `x_i = g·a_i` with `g = gcd`. In real time their clear set has period `1/g`.
+  It is non-empty in every period: `lonely_seven_nat` gives an instant at which the six are clear at `1/7`, hence at
+  `1/8`, and periodicity carries it to every period.
+- So any interval of length at least `1/g` holds a block-clear instant. `c`'s first arc has length `3/(4c)`.
+- **If `g ≥ 4c/3`, the first arc holds an isolation**, and that configuration of `ArrBlockRule8 6 9` is closed. This is
+  `BlockSplit8`'s idea at `f = 6` with the constant `4/3` in place of 28.
+- What remains is `c > 3g/4`, i.e. arc starts `s = 1/(8c) < 1/(6g)`: in reduced time, `s ∈ [9/(8a₁), 1/6)`. That range
+  is empty unless `a₁ ≥ 7`.
+
+**The `f = 6` case, stated (v20 §0 form).**
+- Condition: the configuration is in `ArrBlockRule8 6 9`.
+- Instant: the block's relay landing from `c`'s exit `1/(8c)`, which lies in `c`'s first arc.
+- It is proved when `g ≥ 4c/3` (above).
+- It is open on `c > 3g/4`, where it is the statement W6(7): *six whole-number readings have a joint clear instant in
+  every `[s, 7s]` with `9/(8x₁) ≤ s < 1/(6g)`*. W6(7) is scale-free; it names the window by `c`'s own arc, not by a
+  chosen constant.
+- **Evidence (records, not proof):** exhaustive to 32 and constructed to 300, the largest span a blocked stretch reaches
+  is 3.33 against the 7 needed. Over 2,000 configurations of the hole, every one of `c`'s arcs held an isolation.
+
+**Import check.** Place: the block's relay landing from `c`'s exit, an instant. The window `[s, 7s]` is `c`'s first arc
+(an object of the hole), not an `R`-window. Rewritten in `u = c·t`, it is `u ∈ [1/8, 7/8]` for `c`. That is `c`'s
+own first window, and in this hole `c` is `d_min`, so it is register item 15's object. Item 15 is **misplaced as a
+requirement**. Here it is the cascade's own landing stretch at `f = 6` (E243: 2,000 of 2,000), proposed as the case's
+place, for the owner to rule on. `Q` is a refutation statistic for that case, not a statement.
+
+**Consequence (M7).**
+- Step 2 found no construction that defeats the `f = 6` case, and it narrowed the open content to W6(7) on the early
+  range `[9/(8x₁), 1/(6g))`.
+- The margin in the data is a factor of about 2 (3.33 against 7).
+- Step 3 (the native reason) has two leads from this run:
+  - the AP derivation, where the blocked range is `(3/20, 1/4)` per unit step, span 5/3;
+  - the free-phase reduction of compact blocks (`SyncBlockN`'s open `N`-free question, `OneFreeN`).
+- **Owner ruling needed:** whether `c`'s first arc may be the case's place, since in `u` it is item 15's object.
