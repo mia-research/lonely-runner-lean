@@ -1,0 +1,9 @@
+E258 (2026-10-01): the hand-offs' alternating occupants (hole6_handoff_v1.out): how near is each to a small-denominator
+ratio?  For every segment of one or two openings (an occupant that does not persist), the walker's fractional ratio
+f = frac(x_j / e) and the nearest fraction p/q with q <= 8, with |f - p/q|; also, for persistent segments (three or more
+openings), the same.  The record's exact shadowing families are lattice walkers with small denominators (the 1/2 pair
+family; triples (2,4,4), (3,3,3), (3,6,6), (5,5,5); v21 6.9, 6.11).  A walker at f = p/q + delta has its verdict repeat
+with period q up to the drift q*delta per period.
+alternating occupants (segments of 1-2 openings) (119): nearest denominator q: {2: 36, 3: 13, 4: 11, 5: 9, 6: 8, 7: 32, 8: 10}; distance: {'|f - p/q| < 0.01': 49, '< 0.03': 61, '< 0.06': 9}
+persistent occupants (3 or more) (18): nearest denominator q: {1: 17, 8: 1}; distance: {'< 0.06': 7, '|f - p/q| < 0.01': 3, '< 0.03': 8}
+matched null, uniform f (exact, Farey regions of order 8): expected share by nearest q: {1: 0.125, 2: 0.0714, 3: 0.0893, 4: 0.0857, 5: 0.1369, 6: 0.0571, 7: 0.225, 8: 0.2095}; within 0.01: 0.436
