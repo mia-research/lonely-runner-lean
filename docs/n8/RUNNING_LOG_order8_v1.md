@@ -8040,3 +8040,62 @@ laws:
 - **E204's "gap in the arrivals" is half the story in the late shapes:** 2,473 of their landings come from the front
   passing through within the last move, against 2,927 with no arrival. Both are B.9.
 - **Standing questions:** none answered. The owner's Lean ruling is recorded above.
+
+---
+
+## E223 — 2026-10-01 — the complete account, Level C: the run as a function of the arrangement, catalogued and checked
+
+**Owner:** *"Yes on to the next, if it not large then continue on to other too"*.
+
+**Map:** v3 §4 Q8; `CASCADE_DESIGN_v3` §8.4. Derived items, checked (M8). Nearest §6 classes: F5 (stated as forced) and
+F3 (records, not laws). No Lean (E222).
+
+**Memory housekeeping.** The `memory-drafter` agent of E222 stopped on a usage limit at its last step (a link check). Its
+writes are complete and were verified here:
+- `project_n8_lean_on_hold_until_map_complete_2026_10_01.md`, every `[[link]]` resolving and every file it cites present;
+- the pointer in `lrc_INDEX.md`;
+- one sentence in `MEMORY.md`'s n=8 line.
+
+**The catalogue** (`docs/n8/CASCADE_ACCOUNT_LEVEL_C_v1.md`):
+- C.1: a finite chain is decided by the signs of finitely many forms, linear and homogeneous in the speeds, and **all of
+  them are edge forms** `b(8k + 1) − a(8j ± 1)`. Off every wall, nearby arrangements have the same chain.
+- C.2: the walls.
+- C.3: a tie wall is an edge wall on the leaving side. At an intermediate move, crossing it is a relabelling; at the
+  final move it is the landing's leaving face, a hand-off.
+- C.4: **crossing a wall at an intermediate move changes the route, never the landing**, unless the wall is also a face
+  of the landing's box or of an earlier certificate's box. **Gap C2 closed**: the routes rejoin at the latest at the
+  landing.
+- C.5: at an infinitesimal crossing of the landing's faces, the leaving face is a hand-off and the entering face's next
+  move is the entering reading's next exit. Neither makes an earlier landing, unless the face coincides with an earlier
+  box's face. **Gap C2a resolved:** E219's exceptions came from moving the reading a finite distance, across other walls.
+- C.6: the landing's region is its box less earlier boxes; its boundary is made of faces.
+- C.7: what Level C does not say.
+- **Flag for the owner:** C.4 and C.5 use `move_le_of_lonely` (the chain never passes a lonely instant), and with it
+  first isolation, to describe what the oracle does at a wall. Not as an argument for the conjecture (E200).
+
+**Repairs found by the check** (M8: each exception read, the derivation repaired, with a derived reason):
+- C.3's first draft said a tie never changes the landing. 54 crossings (8, 41, 5) did. All were at the final move, all
+  continuous hand-offs: a tie is an edge on the leaving side. C.1 and C.3 were repaired.
+- C.5's first draft did not state that the crossed face must not also be an earlier box's face. 4 crossings were of that
+  kind, read in full on `(1, 3, 4, 5, 6, 7, 8)`: reading 4 at `21/5` is on the landing's entering face and on its own
+  leaving edge at the earlier instant `15/56`. The condition is now explicit.
+
+**The check** (`LonelyRunner/experiments/nN/redo/cascade_level_c_check_v1.{py,out}`; exact rational speeds; crossings at
+relative distance `10⁻⁹`) `[VERIFIED — these populations]`: 300 seeded fine shapes, 300 late band shapes, 300 sets from
+readings ≤ 16. **0 failures after the repairs.**
+- C.1: 2,301 perturbations inside the margins, every chain unchanged (133 whole-number sets on a wall, not perturbed).
+- C.3: ties at intermediate moves unchanged; 54 final-move hand-offs, as derived.
+- C.4: every changed landing is also a face of the landing's box (92, 4,029, 147); routes changed with the landing kept
+  in 208, 4,079 and 305 crossings.
+- C.5: leaving faces all hand-offs (317, 324, 225); entering faces all go next to the entering reading's exit (lonely
+  there 278, 51, 233; the relay continues 262, 103, 173); 4 coincident faces.
+
+**Consequence:**
+- **Level C is complete** `[derived; checked]`. A chain's dependence on the speeds is a hyperplane arrangement of edge
+  walls `b(8k + 1) = a(8j ± 1)`. Most walls change only the route. The landing changes only on its own box's faces
+  (hand-off on leaving; one more move, to the entering reading's exit, on entering) and on earlier boxes' faces. With
+  Level B: the isolation moves continuously except when a reading enters at it, and is then carried by the cascade's
+  ordinary moves.
+- **Levels A–C are the cascade's local and semi-local account without gaps.** What remains is Level D: which landing
+  region contains a given arrangement, from the grid plus deviation and the split. Its gaps D2–D5 contain the obligation.
+- **Standing questions:** the first-isolation flag above, for the owner.
