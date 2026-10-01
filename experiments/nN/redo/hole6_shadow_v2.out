@@ -1,0 +1,42 @@
+E253 (2026-10-01): phase 3c, reading the shadowed flanks (hole6_shadow_v1.out): one walker or several?
+
+For each block flank shadowed across c's band run (generic class, every six coprime): the walkers in the way at EVERY
+opening of the run (the intersection over the run).  If one exists it shadows the run alone; its ratio x_j/e = A + eps
+(A the nearest whole number) and A mod 8, and the derived condition: at u = 8k + 1 (u = 1 mod 8) it reads A + eps*u
+(mod 8), so it is in the way at every opening of the run exactly when A + eps*u stays within 1 of a multiple of 8 for all
+u in the run (checked exactly; this is the near form of the exact slot-sharer, Theorem 6.8, 8 | A).  If none exists, the
+shadow is a hand-off: listed with every walker's (A, eps, A mod 8) and the openings each one covers.
+
+
+== E235 f=6: 44 shadowed flanks ==
+  shadowed by one walker alone (in the way at every opening of the run): 30; by a hand-off: 14
+  CHECK the derived condition (A + eps*u within 1 of a multiple of 8 for all u in the run) against exact coverage: 0 disagreements
+  the lone walker: (A mod 8, sign of eps): {(1, '-'): 27, (7, '+'): 2, (0, '-'): 1}
+  the lone walker: A: {1: 26, 7: 2, 9: 1, 8: 1}; |x_j - A e| / c (tenths): {0.0: 7, 0.1: 14, 0.2: 9}
+    HAND-OFF  block (9778, 9952, 10778, 11151, 16614, 21557)  flank rank 4 (e = 11151), run 8 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.1231, 2), (2, 1, 1, -0.1075, 1), (3, 1, 1, -0.0334, 6), (5, 1, 1, 0.4899, 1), (6, 2, 2, -0.0668, 4)]
+    HAND-OFF  block (24413, 36140, 56041, 85491, 169873, 221062)  flank rank 1 (e = 24413), run 19 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 1, 1, 0.4804, 6), (3, 2, 2, 0.2955, 4), (4, 4, 4, -0.4981, 10), (5, 7, 7, -0.0417, 4), (6, 9, 1, 0.0551, 5)]
+    HAND-OFF  block (17142, 33435, 46774, 78348, 94753, 160355)  flank rank 1 (e = 17142), run 12 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.0495, 5), (3, 3, 3, -0.2714, 3), (4, 5, 5, -0.4295, 2), (5, 6, 6, -0.4725, 4), (6, 9, 1, 0.3545, 3)]
+    HAND-OFF  block (35501, 35858, 71318, 78901, 144408, 230897)  flank rank 2 (e = 35858), run 27 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.01, 20), (3, 2, 2, -0.0111, 20), (4, 2, 2, 0.2004, 10), (5, 4, 4, 0.0272, 9), (6, 6, 6, 0.4392, 8)]
+    HAND-OFF  block (11211, 17259, 29115, 55731, 92107, 136704)  flank rank 1 (e = 11211), run 8 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.4605, 3), (3, 3, 3, -0.403, 3), (4, 5, 5, -0.0289, 0), (5, 8, 0, 0.2158, 3), (6, 12, 4, 0.1937, 4)]
+    HAND-OFF  block (13432, 13755, 17171, 25467, 31373, 52948)  flank rank 2 (e = 13755), run 10 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.0235, 9), (3, 1, 1, 0.2483, 3), (4, 2, 2, -0.1485, 3), (5, 2, 2, 0.2808, 2), (6, 4, 4, -0.1506, 3)]
+    HAND-OFF  block (11792, 18979, 28186, 41395, 79604, 84983)  flank rank 2 (e = 18979), run 14 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.3787, 4), (3, 1, 1, 0.4851, 6), (4, 2, 2, 0.1811, 4), (5, 4, 4, 0.1943, 4), (6, 4, 4, 0.4777, 3)]
+    HAND-OFF  block (15874, 26084, 44783, 51428, 97499, 105089)  flank rank 2 (e = 26084), run 19 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.3914, 4), (3, 2, 2, -0.2831, 6), (4, 2, 2, -0.0284, 9), (5, 4, 4, -0.2621, 5), (6, 4, 4, 0.0289, 9)]
+    HAND-OFF  block (14624, 14963, 28345, 47564, 56241, 95404)  flank rank 2 (e = 14963), run 11 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.0227, 9), (3, 2, 2, -0.1057, 4), (4, 3, 3, 0.1788, 3), (5, 4, 4, -0.2413, 3), (6, 6, 6, 0.376, 3)]
+    HAND-OFF  block (10941, 11960, 16809, 21615, 22798, 43428)  flank rank 3 (e = 16809), run 13 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.3491, 4), (2, 1, 1, -0.2885, 4), (4, 1, 1, 0.2859, 4), (5, 1, 1, 0.3563, 4), (6, 3, 3, -0.4164, 3)]
+    HAND-OFF  block (10619, 20671, 34031, 49364, 68771, 104298)  flank rank 1 (e = 10619), run 8 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.0534, 4), (3, 3, 3, 0.2047, 2), (4, 5, 5, -0.3514, 2), (5, 6, 6, 0.4762, 1), (6, 10, 2, -0.1782, 1)]
+    HAND-OFF  block (12217, 23955, 24595, 39211, 45890, 75415)  flank rank 1 (e = 12217), run 9 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.0392, 6), (3, 2, 2, 0.0132, 0), (4, 3, 3, 0.2095, 2), (5, 4, 4, -0.2438, 3), (6, 6, 6, 0.173, 2)]
+    HAND-OFF  block (10945, 19136, 19734, 27649, 42899, 71542)  flank rank 1 (e = 10945), run 8 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.2516, 2), (3, 2, 2, -0.197, 1), (4, 3, 3, -0.4738, 4), (5, 4, 4, -0.0805, 3), (6, 7, 7, -0.4635, 4)]
+    HAND-OFF  block (15118, 25352, 32067, 63084, 112107, 220280)  flank rank 1 (e = 15118), run 12 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 2, 2, -0.3231, 4), (3, 2, 2, 0.1211, 2), (4, 4, 4, 0.1728, 3), (5, 7, 7, 0.4155, 3), (6, 15, 7, -0.4293, 4)]
+
+== E243 f=6: 39 shadowed flanks ==
+  shadowed by one walker alone (in the way at every opening of the run): 32; by a hand-off: 7
+  CHECK the derived condition (A + eps*u within 1 of a multiple of 8 for all u in the run) against exact coverage: 0 disagreements
+  the lone walker: (A mod 8, sign of eps): {(1, '-'): 23, (0, '+'): 4, (7, '+'): 4, (0, '-'): 1}
+  the lone walker: A: {1: 19, 16: 2, 23: 1, 8: 1, 24: 2, 7: 2, 41: 2, 15: 1, 9: 2}; |x_j - A e| / c (tenths): {0.0: 10, 0.1: 17, 0.2: 5}
+    HAND-OFF  block (9284, 10592, 12204, 13510, 32643, 168055)  flank rank 1 (e = 9284), run 6 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 1, 1, 0.1409, 1), (3, 1, 1, 0.3145, 2), (4, 1, 1, 0.4552, 3), (5, 4, 4, -0.484, 3), (6, 18, 2, 0.1016, 1)]
+    HAND-OFF  block (36993, 154134, 176599, 350827, 740507, 2238068)  flank rank 1 (e = 36993), run 28 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 4, 4, 0.1666, 4), (3, 5, 5, -0.2262, 7), (4, 9, 1, 0.4836, 7), (5, 20, 4, 0.0175, 11), (6, 60, 4, 0.4998, 14)]
+    HAND-OFF  block (9960, 10814, 24621, 29988, 96653, 159199)  flank rank 1 (e = 9960), run 7 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 1, 1, 0.0857, 0), (3, 2, 2, 0.472, 1), (4, 3, 3, 0.0108, 0), (5, 10, 2, -0.2959, 1), (6, 16, 0, -0.0162, 6)]
+    HAND-OFF  block (13118, 15080, 22312, 24397, 69849, 134726)  flank rank 1 (e = 13118), run 10 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 1, 1, 0.1496, 2), (3, 2, 2, -0.2991, 3), (4, 2, 2, -0.1402, 3), (5, 5, 5, 0.3247, 3), (6, 10, 2, 0.2703, 3)]
+    HAND-OFF  block (39539, 39911, 151036, 409229, 439905, 1110284)  flank rank 2 (e = 39911), run 30 openings; walkers (rank, A, A mod 8, eps, openings covered): [(1, 1, 1, -0.0093, 22), (3, 4, 4, -0.2157, 7), (4, 10, 2, 0.2535, 7), (5, 11, 3, 0.0221, 11), (6, 28, 4, -0.181, 6)]
+    HAND-OFF  block (41003, 203725, 356033, 414476, 418237, 984232)  flank rank 1 (e = 41003), run 30 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 5, 5, -0.0315, 8), (3, 9, 1, -0.3169, 8), (4, 10, 2, 0.1084, 9), (5, 10, 2, 0.2002, 12), (6, 24, 0, 0.0039, 26)]
+    HAND-OFF  block (12690, 15606, 70192, 95943, 132768, 235191)  flank rank 1 (e = 12690), run 9 openings; walkers (rank, A, A mod 8, eps, openings covered): [(2, 1, 1, 0.2298, 2), (3, 6, 6, -0.4687, 3), (4, 8, 0, -0.4395, 2), (5, 10, 2, 0.4624, 3), (6, 19, 3, -0.4664, 4)]
