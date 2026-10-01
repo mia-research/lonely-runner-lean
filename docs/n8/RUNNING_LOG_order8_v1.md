@@ -8469,3 +8469,127 @@ These are E230's cases. The record's architecture for the block holes (E30; log 
 - This is one case in v20 §0's form: `∃ (e, k)` on a condition.
 - **Next, proposed:** derive the strip for `f = 3` from the core's own clear set (a set of at most four readings, lonely
   at `1/5`) and the triple's joint clear stretches, using the `pair_window` structure. Then check exactly.
+
+---
+
+## E232 — 2026-10-01 — design: the cascade inside the hole `ArrBlockRule8 3 9`, read move by move
+
+**Owner:** *"Im lost, we have holes, the cascade does not fail at these holes so then what are we missing.  Understanding
+how the cascade approaches these holes so we can figure out the mechanisim?"*; then *"Yes"* to the map run, starting
+with blocks of three.
+
+**Map:** v3 §4 Q8; the hole `ArrBlockRule8 3 9` (`Order8SkeletonN`). M2 class (d), a map run: no window, no bound, no
+rule proposed. The only pass conditions are derivation checks and the oracle check.
+
+**The population: the hole, less every block-level rule already proved.**
+- **The hole.** Whole-number readings: a core of four (`c₁ < … < c₄ = m`) below a block of three (`x₁ < x₂ < x₃`,
+  `x₁ ≥ 9m`).
+- **Excluded, because a proved rule covers them:**
+  - the fast pair (`FastPair8`: `x₂ ≥ 9x₁`, so the top two are a block of two);
+  - R8 (`x₃ ≥ 7x₂`);
+  - the block split (`BlockSplit8`: a common factor of the block at least `28m`);
+  - nested windows with the core at `θ = 1/5` (E231: the best valid order's `needT ≤ 3/(20m)`).
+- **Sampling:** 2,000 seeded configurations at fine scale. The core's ratios are uniform in `(0.05, 1]` of `m`;
+  `x₁/m` is uniform in `[9, 35/3)`; `x₂/x₁` and `x₃/x₂` are uniform in `(1, 2)`; the exclusions above are then
+  applied.
+
+**What is read, per path, in the hole's own objects:**
+- the core's own first isolation `τ_C` (the cascade on the four core readings alone) and the core's lonely cells;
+- the full set's landing `t*`, and which core cell holds it (the first, or a later one), with `t*/τ_C`;
+- the path's setters in order, each marked as a core reading (C) or a block reading (B) with its lap, and the pattern
+  (for example C…C then B…B);
+- where the three block readings sit at `τ_C`;
+- the move that ends the path, and who is nearest to entering then (the queue front, B.7).
+
+**Forced before running (checks):**
+- C1: `t*` equals the least clear point of the full set, computed without the cascade.
+- `t* ≥ τ_C`: the core is clear at `t*`, and `τ_C` is the core's first lonely instant (A.9 applied to the core).
+- `t*` lies in a lonely cell of the core (it is clear there).
+
+**After the run:** look for what every path has in common, and read every path that differs (M3) before stating
+anything.
+
+## E233 — 2026-10-01 — the cascade inside the hole `ArrBlockRule8 3 9`: a core relay, then a block relay inside the core's lonely stretches
+
+**Map:** v3 §4 Q8; E232's design, run as designed. M2 class (d), a map run. The pass conditions are derivation checks
+and the oracle check. No rule is proposed.
+
+**Scripts** (`LonelyRunner/experiments/nN/redo/`, each `.py` with its `.out`; all three use the same 2,000 configurations,
+`gen(232, 2000)`):
+- `hole3_cascade_v1`: E232's reading (setters, pattern, landing stretch, block positions at `τ_C`);
+- `hole3_cascade_v2`: the block's own relay from `τ_C` against the core's first stretch;
+- `hole3_cascade_v3`: every path that differs, read move by move.
+
+**Checks (all 0 failures):**
+- E232's three: C1 (`t*` equals the least clear point of the full set, computed without the cascade); `t* ≥ τ_C`; `t*` lies
+  in a lonely stretch of the core.
+- v2: `t*` is in the core's first stretch exactly when the block's own relay from `τ_C` lands before that stretch closes,
+  and then `t*` is that landing.
+- v3, F1: a move made from an instant inside a core stretch has only block setters (the core is clear there, A.1).
+- v3, F2: `t*` is the block's own relay (the three block readings alone) run from the path's first instant inside the
+  stretch that holds `t*`.
+
+**What every path shares `[derived from A.1; checked F1, F2]`.** Write `S₀, S₁, …` for the core's lonely stretches from
+`τ_C` on (the core's own cascade lands at `τ_C`, the start of `S₀`).
+1. **Before `S₀`, the core relays.** 406 of the 411 moves made before `S₀` have a core setter.
+2. **Inside a stretch, the block relays.** Every move made from inside a stretch (1,489) has a block setter (F1). From the
+   path's first instant in a stretch, the path is the three block readings' own relay (F2).
+3. **The landing** is the block's relay landing, in the first stretch where that relay lands before the stretch closes.
+
+The 2,000 configurations split as follows:
+
+| landing stretch | count | path |
+|---|---|---|
+| `S₀`, `t* = τ_C` | 866 | no block reading in the way at `τ_C` |
+| `S₀`, `t* > τ_C` | 1,106 | 1 to 3 block moves from `τ_C` (patterns B1, B2, …); 5 of these enter `S₀` past `τ_C` (below) |
+| `S₁` | 28 | the block's relay overran `S₀` (below) |
+
+**Every path that differs, read move by move (M3; `hole3_cascade_v3.out`).**
+- **The 28 landing in `S₁`.**
+  - *Feature.* The block's relay from `τ_C` is longer than `S₀`. In laps of `x₁`, `S₀` has length 0 to 0.334 in these
+    28 and the block's relay 0.045 to 0.533 (v2 lists each pair).
+  - *What forces the witness.* The block move that would land past `S₀`'s end does land there, in the gap. In the gap
+    every move (41 over the 28 paths) has a core setter, sometimes with block readings in the way as well. So from the
+    gap the path is the core's own relay, which lands at the core's first lonely instant after the gap: the start of
+    `S₁` (all 28 enter `S₁` at its start). The block then relays inside `S₁` (F2): 0 to 3 moves, 20 in all.
+  - *Same mechanism.* Yes: steps 1 to 3 applied again from the gap.
+- **The 5 that do not pass through `τ_C`.**
+  - *Feature.* At the core's last move before `τ_C`, a block reading is also in the way, and its exit is later than the
+    core reading's (by under 0.15 laps of `x₁`).
+  - *What forces the witness.* That block reading sets the move (B.1, the latest exit), so the path enters `S₀` past
+    `τ_C`. The block then relays from there inside `S₀` (F2).
+  - *Same mechanism.* Yes: step 2 from a later entry instant. All 5 have a long `S₀` (0.94 to 7.46 laps of `x₁`) and
+    land in it.
+- **The single-point stretch.** For the core `(70, 490, 729, 1000)`, `S₀` is the single instant `τ_C`. A block reading is
+  in the way there, so the block's move leaves `S₀` at once. The path then follows the 28 above (one of them).
+
+**Records, not forced (scoped to this sample):**
+- No block reading set a move in a gap (0 of 41). The derivation allows it: a core reading near its leaving edge can
+  exit before a fast block reading in the way does. This is therefore not a statement.
+- No path landed beyond `S₁`.
+- The block's relay from `τ_C` took at most 0.686 laps of `x₁`.
+
+The last two are *when at the latest* shapes. They are recorded as data, and promoting either to a statement would be a
+cap (memory `feedback_n8_cascade_is_the_oracle`, interval check step 2).
+
+**Import check.**
+- *Place test.* Class: the hole less the proved block rules. Place: the block's relay landing from the path's entry instant
+  into a core stretch. The entry instant is the core's own landing (`τ_C`, or the start of `S₁`) except in the 5 above.
+  Both relays are cascades on subsets of the readings, so the place is constructed from the readings.
+- *Interval check.* Delete "inside the stretch" and what remains, "the block's relay from the entry instant", still
+  constructs the instant. The stretches are where that relay is cut off: they are the core's own lonely set, not a window
+  in `u`. Rewritten in `u = c₁·t`, they are not register item 15 (they start at the core's isolation, not at `u = 1/8`),
+  and no uniform `u ≤ X` is stated.
+
+**Consequence (M7, for map §9).**
+- In this hole the cascade is two cascades of lower order composed:
+  - the core's (four readings: order 5, native and proved);
+  - the block's (three readings: order 4, native and proved), run from an entry instant rather than from its own bound.
+- So the proof-form question for `ArrBlockRule8 3 9` is not whether some instant exists. It is, per configuration, which
+  core stretch holds the block's relay landing. The record's route (`lonely_of_split`, E231) answers it with a uniform
+  margin around one core instant and a uniform `needT`, which is why it leaves the strip `9m ≤ x₁ < 35m/3`. The cascade
+  answers it with the actual stretch and the actual relay, and moves to the next stretch when the first is too short.
+- The block's relay from an arbitrary entry instant, in its own readings, is the object this points to. It is not yet
+  read: no run here asks where the three-reading relay lands from a given instant.
+- Next on the owner's sequence: blocks of four to six (E232), read the same way, to see whether steps 1 to 3 hold with a
+  larger block.
