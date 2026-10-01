@@ -8593,3 +8593,93 @@ cap (memory `feedback_n8_cascade_is_the_oracle`, interval check step 2).
   read: no run here asks where the three-reading relay lands from a given instant.
 - Next on the owner's sequence: blocks of four to six (E232), read the same way, to see whether steps 1 to 3 hold with a
   larger block.
+
+## E234 — 2026-10-01 — design: the holes `ArrBlockRule8 f 9`, `f = 4, 5, 6`, read the same way
+
+**Owner:** *"Yes"* to E232's map run, *"starting with blocks of three"*; the sequence continues to four, five and six.
+
+**Map:** v3 §4 Q8; E232's design carried to the other three block holes. M2 class (d), a map run. The pass conditions
+are derivation checks and the oracle check. E233's place (the block's relay from the entry instant into a core stretch)
+is compared with the landing as check F2. No rule is proposed.
+
+**The population, per `f`:** whole-number readings; a core of `7 − f` (`c₁ < … < m`, `m = 1000`, the others uniform in
+`(0.05, 1]·m`) below a block of `f`. `x₁/m` is uniform in `[9, 60]`. This is a search range, not a statement. For
+`f = 3` nested windows cover everything above `35m/3` (E231). For `f ≥ 4` no such edge was derived, so the range is
+wider and the excluded share is recorded by rule. Consecutive block ratios are uniform in `(1, 2)`. 1,000
+configurations per `f`.
+
+**Excluded, because a proved rule covers them.** Each rule is checked on every split of the seven readings into a
+slower part and a top-`k` part, not only on the hole's own split:
+- R8 (`lonely_eight_of_fast`: `7s < V` for every other reading `s`);
+- the fast pair (`FastPair8`);
+- the block split (`BlockSplit8`: a top-`k` set whose common factor is at least `28 ×` every other reading). A
+  non-top set cannot satisfy it;
+- the train collapse (`lonely_of_train_collapse`): a top-`k` set, `k ≥ 2`, with spread at most `m'` and least element at
+  least `56m'`, where `m' = max(the other readings, the spread)`. The midpoint condition holds for two adjacent offsets;
+- nested windows (`lonely_of_split`): the slowest `j` readings as the core, lonely at `θ = 1/(j + 1)` (native orders
+  `j + 1 ≤ 7`), the rest as a valid nested list in its best order, with `needT ≤ 2(θ − 1/8)/(largest core reading)`.
+
+**Checks (forced):** C1, `t* ≥ τ_C`, `t*` in a core stretch (E232); F1 and F2 (E233).
+
+**Records:** the stretch holding `t*`; the setters by region (before `S₀`, inside `S_k`, in the gap after `S_k`) and
+class (C or B); the paths that do not pass through `τ_C`; every path landing beyond `S₀`, read move by move; any block
+setter in a gap.
+
+**After the run:** what every path shares, then every path that differs, read (M3) before anything is stated.
+
+## E235 — 2026-10-01 — the holes `f = 4, 5, 6`: the same two relays; overruns only at `f = 4` (2 of 1,000)
+
+**Map:** v3 §4 Q8; E234 run as designed. M2 class (d). Script `LonelyRunner/experiments/nN/redo/holef_cascade_v1.{py,out}`.
+
+**Population, as sampled.** Only nested windows fired among the exclusions, removing 1,384, 87 and 3 draws for
+`f = 4, 5, 6`. R8, the fast pair, the block split and the train collapse never fired. With consecutive block ratios in
+`(1, 2)` they cannot (R8 and the fast pair need a ratio of 7 or 9). The block split and the train would need the block's
+common factor, or its least element, at least 28 or 56 times its spread, and no draw had that. So this is the hole for
+blocks of consecutive ratio below 2. `x₁/m` of those kept is spread over `[9, 60]` (v1.out lists it by decade).
+
+**Checks (all three `f`, 0 failures):** C1, `t* ≥ τ_C`, `t*` in a core stretch, F1, F2.
+
+**What every path shares.** E233's steps 1 to 3 hold at every `f`:
+1. the core relays to `τ_C`;
+2. inside a core stretch only block readings set moves (F1), and the path from its entry instant is the block's own relay
+   (F2);
+3. the landing is that relay's landing, in the first stretch where it lands before the stretch closes.
+
+| `f` | core | `t* = τ_C` | lands in `S₀` | lands in `S₁` | block moves inside the landing stretch | moves before `S₀` (C / B) |
+|---|---|---|---|---|---|---|
+| 4 | 3 | 302 | 998 | 2 | 0 to 6 | 110 / 1 |
+| 5 | 2 | 273 | 1,000 | 0 | 0 to 6 | 36 / 0 |
+| 6 | 1 | 191 | 1,000 | 0 | 0 to 8 | 0 / 0 |
+
+**`f = 6`, derived.** The core is the one reading `m`. Then `τ_C` is the bound `1/(8m)`, and `S₀ = [1/(8m), 7/(8m)]` is
+`m`'s own clear stretch. Its length `3/(4m)` is `(3/4)(x₁/m) ≥ 27/4` laps of `x₁` (output: the least is 6.85). Every
+path is the block of six relaying from the bound inside `m`'s first clear stretch.
+
+**Every path that differs, read (M3; `f = 4`, listed in full in the `.out`).**
+- **The 2 landing in `S₁`.**
+  - *Feature.* `S₀` is short (0.030 and 0.279 laps of `x₁`), and a block move from inside it lands in the gap.
+  - *What forces the witness.* In the gap the core sets every move (2 of 2), so the path is the core's own relay to the
+    start of `S₁`. Both land at that start with no block move there: the block is clear when `S₁` opens.
+  - *Same mechanism.* Yes: E233's 28.
+- **The 1 not passing through `τ_C`.** Core `(108, 970, 1000)`, block `(39406, 59510, 81409, 100943)`. At the last move
+  before `S₀`, block reading 59510 is in the way with core reading 970 and exits later. It sets the move, and the path
+  enters `S₀` at `+0.070` laps of `x₁`. *Same mechanism.* Yes: E233's 5.
+- **Block setters in a gap:** none at any `f`.
+
+**Records, not forced (scoped to this sample).** No path landed beyond `S₁`. The block's relay from `τ_C` took at most
+0.769, 0.728 and 0.961 laps of `x₁`. Both are *when at the latest* shapes and are not statements (E233).
+
+**Overruns by `f` (E233 and E235 together).** 28 of 2,000 at `f = 3`, 2 of 1,000 at `f = 4`, 0 at `f = 5, 6`. The smaller
+the core, the longer its lonely stretches, in laps of `x₁`. At `f = 6` the stretch is at least 27/4 laps, by derivation.
+
+**Consequence (M7, for map §9).**
+- Across the four block holes the cascade is one structure: the core's cascade (order `8 − f`, native), then the block's
+  cascade (order `f + 1`, native) run from an entry instant, cut off where the next core reading enters the way.
+- **The place for each hole** is the block's relay landing from the entry instant into the core's lonely set. The
+  condition of a case is that this landing comes before the first core entering edge after the entry. Both are edge
+  events of the readings (Level C's edge forms), so the case is stated in the framework's own objects.
+- **What this shows is missing from the record.** The record's proved rules replace the block's relay by a uniform need
+  (`needT`, `pair_window`) and the core's stretch by a uniform margin (`θ − 1/8`), which is why they leave the strip at
+  `f = 3` and every block of consecutive ratio below 2 at `f ≥ 4` (1,384 of 2,384 draws excluded at `f = 4`, 87 of 1,087
+  at `f = 5`, 3 of 1,003 at `f = 6`). The cascade uses neither. The block's own relay from a given instant, in the
+  block's readings, is the object that has not been read. It is the next map item.
