@@ -8683,3 +8683,126 @@ the core, the longer its lonely stretches, in laps of `x₁`. At `f = 6` the str
   `f = 3` and every block of consecutive ratio below 2 at `f ≥ 4` (1,384 of 2,384 draws excluded at `f = 4`, 87 of 1,087
   at `f = 5`, 3 of 1,003 at `f = 6`). The cascade uses neither. The block's own relay from a given instant, in the
   block's readings, is the object that has not been read. It is the next map item.
+
+## E236 — 2026-10-01 — design: perturbing the hole paths through the cascade, one reading at a time
+
+**Owner:** *"So we are going to use the cascade to show this happening. Are doing that by perturbing the examples or
+constructing examples so we can see what happens with the cascade?"*; then, to the perturbation proposal, *"ok go ahead"*.
+
+**Map:** v3 §4 Q8; E233/E235's exceptions. M3 on them, by the owner's method (E67: *"use the cascade pertubate the
+speeds to find the mechanisim"*). This is a derivation from Level C, checked by exact perturbation (M8). No rule is
+proposed.
+
+**Notation.**
+- `g` is the block's relay landing from `τ_C`: the first instant at or after `τ_C` at which the block is clear. It is
+  the exit of block reading `h` on lap `K`, `8hg = 8K + 1`.
+- `b₀` is the end of `S₀`, where core reading `c` reaches its entering edge on lap `k`, `8cb₀ = 8k + 7`.
+
+**Derived (A.9, C.5).** The core is clear on all of `S₀`, so the full set has a lonely instant in `S₀` exactly when
+`g ≤ b₀`, and then lands at `g`. The landing therefore leaves `S₀` at one wall, `g = b₀`, i.e.
+`h(8k + 7) = c(8K + 1)`. That is C.5's entering face with `c` as the moving reading: `c` on its entering edge at `h`'s
+exit. Two readings move it:
+- `W_c`: move `c` to `c* = (8k + 7)/(8g)`. Slower than `c*` is inside (`b₀ > g`).
+- `W_h`: move `h` to `h* = (8K + 1)/(8b₀)`. Faster than `h*` is inside (`g < b₀`).
+
+**Predicted at the wall, at relative `η = 10⁻⁹`:**
+- W1 (inside): the landing is in `S₀`, at `g`, within `O(η)` of `b₀`.
+- W2 (outside): the path visits `g`, and its next instant is `c`'s exit on lap `k + 1`, `(8k + 9)/(8c)`. That is C.5's
+  one more move. The core then relays on.
+
+**Predicted along a walk.** The moved reading goes in a straight line from its value to the wall, 100 grid points, and
+any change of the landing's stretch index between grid points is located by bisection. The prediction: the index changes
+only at walls of the form `g = b₀`, possibly with other readings named if the finite move changed `h`, `K`, `c` or `k`.
+Every other change is classified (a jump of `τ_C`, which relabels the stretches; anything else) and listed to be read.
+
+**The late entries (6).** At the core's last move before `S₀`, block reading `b` (lap `L`) sets, exiting after the core
+reading that exits at `τ_C`. The tie wall is `b* = (8L + 1)/(8τ_C)`. Predicted (C.3, C.4) at `b*(1 ± η)`: the same
+landing on both sides. On the faster side the path passes through `τ_C`; on the slower side it does not.
+
+**Populations:**
+- the 30 overruns (E233: 28; E235: 2);
+- the 6 late entries;
+- controls, landing in `S₀` with `t* > τ_C` and entering at `τ_C`: 100 seeded from `f = 3`, and 50 each from
+  `f = 4, 5, 6`. For these the walk goes the other way, from `S₀` out across the same wall.
+
+**Checks:**
+- W1, W2 and T1;
+- C1 (the landing equals the least clear point, without the cascade) at every wall-side point.
+
+A finite move that changes `(h, K)`, `(c, k)` or `τ_C` by the time it reaches the wall is counted as *region moved*
+(C.5's term) and listed, not failed. Pass condition: 0 failures. Every switch off the predicted wall type is read before
+anything is stated.
+
+## E237 — 2026-10-01 — the hole paths perturbed: the landing leaves `S₀` at one wall, `g = b₀`, and nowhere else
+
+**Map:** v3 §4 Q8; E236 run as designed. M3 on E233/E235's exceptions, by perturbation through the cascade.
+
+**Scripts** (`LonelyRunner/experiments/nN/redo/`, each `.py` with its `.out`):
+- `hole_perturb_v1`: the first run. Its 14 C1 failures were a fault in the check, not in the cascade. `c1_ok` started the
+  clear set at `1 / S[0]` with `S[0]` an integer, which is a float; all 14 were landings exactly on the bound
+  (0 moves), where the landing and the least clear point agree as rationals (read in the scratch debug, then fixed);
+- `hole_perturb_v2`: exact C1; walks in every order-preserving case; R0 at every walk point;
+- `hole_perturb_regions_v1`, `hole_perturb_e1_read_v1`, `hole_perturb_e1_refined_v1`: the region-moved cases, read and
+  explained.
+
+**Failures in v2 and after: none.** That covers W1, W2, T1, C1 at every wall-side point, and R0 at every grid and
+bisection point of 403 one-reading walks (101 grid points each).
+
+**R0, the derived rule** `[derived from A.9; checked at every walk point]`: the full set lands in `S₀` exactly when
+`g ≤ b₀`, and then at `g`. Here `g` is the block's relay landing from `τ_C`, and `b₀` is `S₀`'s end. The landing leaves
+`S₀` only where that inequality changes.
+
+**1. Moving the core reading `c` that closes `S₀` (`W_c`).**
+
+| population | wall reached; W1 and W2 hold | region moved | skipped (order) |
+|---|---|---|---|
+| 30 overruns | 29 | 0 | 1 |
+| 250 controls | 194 | 56 | 0 |
+
+- At the wall `c* = (8k + 7)/(8g)`: just slower, the landing is in `S₀` at `g`, at `b₀`. Just faster, the path visits `g`,
+  and its next instant is `c`'s exit on lap `k + 1`. That is C.5's entering face, the one more move.
+- Along every walk from an overrun to the wall, the landing stays in `S₁` until the wall (29 of 29).
+- **E2 (region moved), checked on all 56.** `c` also sets `τ_C` (54), or `τ_C` jumps along the move (2). Moving `c` then
+  moves the relay's start. All 50 controls at `f = 6` are of this kind, since the one core reading sets both ends of `S₀`.
+  No control in which `c` does not set `τ_C` had its region moved (223 of 223).
+
+**2. Moving the block reading `h` whose exit is `g` (`W_h`, the overruns).** The wall is reached in 17. In 12 the
+region moved, and 1 was skipped for order.
+- **E1′** `[derived; checked 29 of 29, hole_perturb_e1_refined_v1.out]`: moving `h` alone reaches the wall exactly
+  when every other block reading is clear at `b₀`. The move shifts no other reading. If a reading `x` is in the way at
+  `b₀`, its exit past `b₀` holds the relay past `b₀` whatever `h` does.
+- *How E1′ was reached (M3).* The first statement, E1 ("`g` is the only relay instant past `b₀`"), failed on 3 cases.
+  Reading them move by move (`hole_perturb_e1_read_v1.out`) showed the reading holding the relay past `b₀` was a second
+  crowd member in the same move (2 cases), or the setter of the next move (1 case). Those are not relay instants, so E1
+  missed them. E1′ states the condition at `b₀` itself.
+- So an overrun can be held by more than one block reading. In that case no single block reading's move undoes it, but
+  the closing core reading's move always does (part 1).
+
+**3. The late entries (T1, 6 of 6).** At the tie wall `b* = (8L + 1)/(8τ_C)` the landing is the same on both sides. The
+path passes through `τ_C` only on the faster side. A late entry is therefore a change of route, not of landing (C.3, C.4).
+In 4 of the 6, the finite move to the wall itself changed the landing, which is the effect of moving a reading a finite
+distance (C.5 Gap C2a).
+
+**4. Every other change of landing stretch along the walks** (7, in 5 control walks). Each is classified by what was
+discontinuous across the bisection bracket, and R0 held on both sides of each:
+- **`g` jumps forward past `b₀`** with `τ_C` fixed (3): the block-clear interval holding `g` closes up;
+- **`g` jumps back to `τ_C`** (3): a block reading leaves the way at `τ_C`, so the block is clear there;
+- **`τ_C` jumps** (1): the core gains an earlier lonely stretch, which relabels the stretches.
+
+None is unclassified.
+
+**Import check.** Place: `g`, the block's relay landing from the entry instant, which is an instant. Delete "in `S₀`"
+and what remains, "the landing is `g` when `g ≤ b₀`; otherwise the core relays to its next stretch and the block relays
+again", still constructs the instant from the readings. The wall `h(8k + 7) = c(8K + 1)` is an edge form (C.1). There is
+no window in `u`, no cap and no rate.
+
+**Consequence (M7, for map §9).**
+- The overrun is C.5's entering face, located: the landing region of `S₀` meets the region of `S₁` along the wall
+  `g = b₀`. Perturbation crosses it exactly where predicted, and along 403 walks the landing changed stretch nowhere else
+  except at the named jumps of `g` and `τ_C`.
+- For the proof form (v20 §0), a hole configuration's case is decided by the sign of `b₀ − g`. That is an edge form in the
+  readings once the relay's setters and laps are fixed. Within each case, the instant is `g` (in `S₀`) or the same
+  construction from the start of `S₁`.
+- E1′ adds a fact the earlier runs did not show: an overrun can be held at `b₀` by more than one block reading.
+- The open object is unchanged from E235: `g` itself, the block's relay landing from a given instant, in the block's
+  readings.
