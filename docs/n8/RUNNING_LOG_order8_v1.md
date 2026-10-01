@@ -9495,3 +9495,48 @@ Read at each block flank `e`, inside `c`'s band run (openings only):
 known shadowing structure (shared small denominators, a fast walker). If it does, the native route to the `f = 6` case is
 the shadowing analysis of §6.9–6.11 restricted to a run, and the next step is a derivation there. If it does not, the
 reading names the structure that does.
+
+## E253 — 2026-10-01 — phase 3c read: shadowing across `c`'s band run is a near-sharer (62 of 83) or a hand-off (21)
+
+**Map:** v3 §4 Q8; E252 run as designed. Scripts `LonelyRunner/experiments/nN/redo/hole6_shadow_v1.{py,out}` and
+`hole6_shadow_v2.{py,out}`.
+
+**Checks: 0 failures.**
+- `c` is never in the way inside its band run (R4).
+- The earliest first-clear opening over the block flanks is the cascade's landing in every configuration, and the full
+  set is lonely there.
+
+**E60 first.** `lonely_of_off_lattice` closes 90 (E235) and 105 (E243) configurations, almost all through `h = 2`: one
+block reading is odd and the other six, `c = 1000` included, are even. This is partly an artefact of the sampling:
+`c = 1000` in every configuration. Left in the generic class: 719 and 715.
+
+**Shadowing in the generic class.**
+- Block flanks shadowed across `c`'s band run, per configuration: none in 676 and 677; one in 42 and 37; two in 1 and 1.
+  **Never more than two of the six.**
+- At openings blocked before a flank's first clear one, the walkers in the way have reduced denominators `q > 1000` in
+  21,618 of 21,865 and 25,495 of 25,706, and `q ≤ 16` in 6 in all. **The record's shadowing structure (shared small
+  denominators, §6.9–6.11) does not appear.**
+- **Shadowed flanks, read one by one (83):**
+  - **62 are shadowed by one walker alone**, in the way at every opening of the run.
+    - In every one, the walker's ratio to the flank is `x_j/e = A + ε` with `A` whole and `|x_j − A·e| < 0.3c`.
+    - Since `u = 8k + 1 ≡ 1 (mod 8)`, it reads `A + εu` (mod 8): it barely moves.
+    - It stays within 1 of a multiple of 8 across the run with `A ≡ 1, ε < 0` (50: just below its leaving edge; `A = 1`
+      in 45, a near twin just slower than the flank), `A ≡ 7, ε > 0` (6), or `A ≡ 0` (6).
+    - The derived condition ("`A + εu` within 1 of a multiple of 8 for every `u` in the run") agrees with exact coverage
+      for every walker of every shadowed flank: 0 disagreements.
+    - This is the **near form of the record's dead flank** (an exact slot-sharer, `8 ∣ A`, Theorem 6.8) and of the
+      sharer's flank (§6.9). Call it a **near-sharer**.
+  - **21 are hand-offs:** several walkers, each in the way at part of the run, none at all of it (listed in the `.out`).
+
+**Derived, and conditional.** Suppose a flank could be shadowed across the run only by a near-sharer. Then the six
+flanks could not all be shadowed at once.
+- The fastest flank's near-sharer must be a near twin just below it (`A = 1`), since no block reading is faster.
+- That twin's own flank needs a near-sharer: another twin below it, or a reading near `A ≥ 7` times it. The chain of
+  twins stays within `2c` of the fastest reading, so no reading is 7 times any member of it.
+- So the chain's lowest member has a free flank.
+
+The hypothesis fails in 21 cases (the hand-offs), so this is **not** a proof. It names the two structures a proof has to
+handle: near-sharers, which the chain argument handles, and hand-offs, which it does not.
+
+**Answer to E252's question.** Shadowing across a run does not have the record's small-denominator structure. It has
+the near-sharer structure in 62 of 83 cases and a hand-off structure in the rest.
