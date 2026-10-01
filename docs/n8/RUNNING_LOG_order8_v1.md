@@ -9928,13 +9928,16 @@ six-sets.
 **Where the cascade lands in them.** At `c`'s own flank in 32 (the six scaled by `K` with no reading `≡ 0 mod 8`, so
 lonely at the bound). At a slower cluster flank in 26: rank 2 in 7, rank 3 in 6, rank 4 in 6, rank 5 in 7.
 
-**All 58 are closed by §17C** (first rule: R6 at `q = 8` 32, free flank 14, R6 at `q = 6` 5, rational opening 5, and
-2 by other §17C fields; `fastest_flank_check_v1.out` lists each). **None is in `EightResidual`.** On `EightResidual`'s
+**All 58 are closed by §17C** (first rule: R6 at `q = 8` 30, free flank 19, R6 at `q = 6` 5, rational opening 4;
+`fastest_flank_check_v1.out` lists each). **None is in `EightResidual`.** On `EightResidual`'s
 C1 members (E260) the fastest flank was never hand-off-shadowed (0 of 547).
 
 **What this says** `[derived from the counts and the field each set fails]`. (b)'s failures in this range are exactly
 configurations that the arithmetic of §17C closes.
-- The largest group (32) fails `EightResidual`'s `eight` field: no reading is a multiple of 8, so nothing shares the
+
+*Correction, same entry:* the rule counts were first written from a partial view of the output (32 / 14 / 5 / 5 / 2).
+Counted from the full file they are 30 / 19 / 5 / 4.
+- The largest group (30) fails `EightResidual`'s `eight` field: no reading is a multiple of 8, so nothing shares the
   subject's slot at the grid.
 - In `EightResidual` some reading is `≡ 0 (mod 8)`, which is the owner's *"two runners in the same slot"* again.
 
