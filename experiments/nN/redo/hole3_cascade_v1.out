@@ -1,0 +1,50 @@
+E232/E233 (2026-10-01): the cascade inside the hole ArrBlockRule8 3 9, read move by move.  Design: log E232.
+
+A core of four (c1 < c2 < c3 < c4 = m) below a block of three (x1 < x2 < x3, x1 >= 9m), less every block-level rule
+already proved (fast pair, R8, block split, nested windows with the core at 1/5).  Map run: no window, no bound.
+Read per path: the core's own first isolation tau_C and its lonely cells; the landing t*; which core cell holds t*;
+the setters in order (C core / B block) with laps; the block's positions at tau_C; the last move's setter and queue front.
+Checks: C1 (t* = least clear point, no cascade); t* >= tau_C; t* in a core cell.
+
+
+== the hole ArrBlockRule8 3 9 less the proved block rules: 2000 configurations ==
+  CHECKS (C1; t* >= tau_C; t* in a core cell): 0 failures
+  t* equals tau_C: 866
+  core cell holding t* (0 = the cell starting at tau_C): {0: 1972, 1: 28}
+  t*/tau_C: <=1.0 866; (1,1.25] 1107; (1.25,1.5] 19; (1.5,2) 8; >=2 0
+  the path passes through tau_C: 1995 of 2000
+  block readings in the way at tau_C: {0: 866, 1: 812, 2: 283, 3: 39}
+  setters before tau_C: {'none': 1673, 'C': 322, 'B': 5}
+  setters at or after tau_C: {'B': 1104, 'none': 868, 'BC': 28}
+  last setter: {'B': 1121, 'bound': 727, 'C': 152}
+  moves: {0: 727, 1: 786, 2: 348, 3: 107, 4: 23, 5: 8, 6: 1}
+  path patterns (run-length), most common: [('', 727), ('B1', 677), ('B2', 205), ('C1 B1', 110), ('C1', 109), ('B3', 47), ('C2 B1', 30), ('C2', 27), ('C1 B2', 20), ('C2 B2', 10), ('B1 C1', 6), ('C3 B1', 4), ('C3', 3), ('B1 C2', 3), ('C1 B1 C1 B1', 3)]
+  paths landing beyond the core's first cell (28), listed:
+    core (97, 371, 671, 1000) block (9917, 10060, 11316)  t*/tau_C 1.3400 cell 1  pattern B1 C1 B3  block positions at tau_C (4.66, 6.237, 7.711)
+    core (51, 356, 918, 1000) block (9094, 10599, 11240)  t*/tau_C 1.3964 cell 1  pattern B1 C2 B1  block positions at tau_C (2.314, 4.392, 7.824)
+    core (70, 490, 729, 1000) block (9433, 10004, 10018)  t*/tau_C 1.2945 cell 1  pattern B1 C1 B1  block positions at tau_C (6.757, 6.914, 7.114)
+    core (134, 665, 772, 1000) block (9313, 10633, 11568)  t*/tau_C 1.5152 cell 1  pattern C1 B1 C2 B1  block positions at tau_C (0.112, 3.817, 7.697)
+    core (144, 806, 993, 1000) block (9905, 10338, 12632)  t*/tau_C 1.6079 cell 1  pattern B1 C2  block positions at tau_C (4.785, 7.722, 7.792)
+    core (146, 284, 688, 1000) block (9159, 9348, 9610)  t*/tau_C 1.3140 cell 1  pattern B2 C1  block positions at tau_C (0.027, 1.822, 6.733)
+    core (146, 750, 902, 1000) block (10941, 11356, 11604)  t*/tau_C 1.7614 cell 1  pattern B2 C3 B1  block positions at tau_C (2.938, 5.781, 7.479)
+    core (143, 538, 943, 1000) block (9107, 11363, 12243)  t*/tau_C 1.3648 cell 1  pattern B1 C2  block positions at tau_C (5.615, 7.462, 7.685)
+    core (78, 240, 605, 1000) block (9083, 9715, 14059)  t*/tau_C 1.1523 cell 1  pattern C1 B1 C1 B1  block positions at tau_C (0.521, 1.142, 7.119)
+    core (143, 497, 588, 1000) block (9036, 9340, 10622)  t*/tau_C 1.3059 cell 1  pattern B1 C1 B1  block positions at tau_C (1.315, 2.28, 7.189)
+    core (117, 723, 937, 1000) block (9925, 10512, 12626)  t*/tau_C 1.2960 cell 1  pattern C1 B1 C1  block positions at tau_C (1.274, 4.969, 7.331)
+    core (146, 504, 930, 1000) block (10274, 11527, 11600)  t*/tau_C 1.4312 cell 1  pattern B2 C2 B1  block positions at tau_C (6.37, 6.952, 7.452)
+    core (149, 546, 881, 1000) block (9260, 10630, 12409)  t*/tau_C 1.5221 cell 1  pattern B2 C2  block positions at tau_C (3.282, 6.148, 7.342)
+    core (146, 652, 736, 1000) block (9243, 9458, 12045)  t*/tau_C 1.3140 cell 1  pattern B1 C1  block positions at tau_C (0.781, 2.5, 7.308)
+    core (143, 852, 961, 1000) block (9033, 10457, 12754)  t*/tau_C 1.5453 cell 1  pattern B1 C2 B2  block positions at tau_C (1.126, 1.189, 7.168)
+    core (79, 550, 817, 1000) block (9204, 9751, 13862)  t*/tau_C 1.3430 cell 1  pattern B1 C2  block positions at tau_C (3.43, 4.506, 7.468)
+    core (75, 144, 601, 1000) block (9268, 9974, 11256)  t*/tau_C 1.1450 cell 1  pattern C1 B1 C1 B1  block positions at tau_C (0.559, 2.789, 5.361)
+    core (144, 286, 500, 1000) block (9921, 10261, 12318)  t*/tau_C 1.2960 cell 1  pattern B1 C1  block positions at tau_C (4.896, 5.542, 7.257)
+    core (144, 230, 856, 1000) block (9145, 9450, 10127)  t*/tau_C 1.5274 cell 1  pattern B1 C2 B1  block positions at tau_C (1.625, 6.326, 7.507)
+    core (144, 320, 341, 1000) block (9181, 10137, 11284)  t*/tau_C 1.2960 cell 1  pattern B1 C1  block positions at tau_C (6.361, 6.396, 7.757)
+    core (134, 398, 766, 1000) block (10205, 11177, 12342)  t*/tau_C 1.3174 cell 1  pattern C1 B1 C1 B1  block positions at tau_C (3.845, 4.593, 7.078)
+    core (67, 280, 714, 1000) block (9608, 10057, 11623)  t*/tau_C 1.1390 cell 1  pattern B1 C1  block positions at tau_C (5.478, 6.104, 7.403)
+    core (144, 368, 627, 1000) block (9375, 11367, 12566)  t*/tau_C 1.2960 cell 1  pattern B1 C1  block positions at tau_C (1.104, 6.938, 7.264)
+    core (145, 394, 863, 1000) block (9149, 9303, 12822)  t*/tau_C 1.5493 cell 1  pattern B1 C2 B2  block positions at tau_C (0.159, 0.428, 7.097)
+    core (148, 781, 945, 1000) block (9686, 10406, 10518)  t*/tau_C 1.7266 cell 1  pattern B2 C2 B1  block positions at tau_C (1.446, 6.311, 7.068)
+    core (67, 360, 744, 1000) block (10171, 11595, 12046)  t*/tau_C 1.1390 cell 1  pattern B1 C1  block positions at tau_C (3.791, 5.06, 7.806)
+    core (144, 247, 289, 1000) block (9671, 10899, 11378)  t*/tau_C 1.3289 cell 1  pattern B1 C1 B2  block positions at tau_C (3.16, 3.688, 7.014)
+    core (142, 534, 767, 1000) block (9326, 11376, 12476)  t*/tau_C 1.3038 cell 1  pattern C1 B2 C1  block positions at tau_C (0.284, 3.934, 6.384)

@@ -1,0 +1,45 @@
+E233 (2026-10-01): the cascade inside the hole ArrBlockRule8 3 9, part 2: the block's relay time from tau_C against the
+core's first lonely stretch, both in laps of the block's slowest reading x1.
+
+Same 2,000 configurations as hole3_cascade_v1.  Per configuration (exact):
+  L_C = length of the core's first lonely stretch (the clear interval of the four core readings starting at tau_C);
+  g_B = time from tau_C to the block's own first lonely instant at or after tau_C (the three block readings alone,
+        the cascade run from tau_C);
+both times x1 (laps of x1).  Forced (a check): t* is in the core's first stretch iff g_B <= L_C; then t* = tau_C + g_B.
+Records: L_C and g_B for every path; the 28 that land in the core's second stretch read in full (L_C, g_B, and the
+second stretch).
+
+CHECK (t* in the first stretch iff g_B <= L_C; then t* = the block's own landing): 0 failures
+L_C, the core's first stretch, in laps of x1: {'<= 8': 1125, '<= 4': 475, '<= 0.5': 59, '<= 2': 192, '<= 1': 99, '<= 16': 4, '<= 0.25': 45, '<= 0': 1}
+g_B, the block's relay time from tau_C, in laps of x1: {'<= 0.25': 872, '<= 0': 866, '<= 0.5': 248, '<= 0.75': 14}
+largest g_B over all paths: 0.6856 laps of x1
+smallest L_C among paths landing in the first stretch: 0.0440; largest L_C among those landing later: 0.3340
+the 28 landing later, read in full (core, block, L_C, g_B, second stretch start and length, in laps of x1):
+  core (97, 371, 671, 1000) block (9917, 10060, 11316)  L_C 0.1524  g_B 0.4755  second stretch at (3.8472, 1.9675)  core spread 10.309
+  core (51, 356, 918, 1000) block (9094, 10599, 11240)  L_C 0.0626  g_B 0.1262  second stretch at (8.668, 4.282)  core spread 19.608
+  core (70, 490, 729, 1000) block (9433, 10004, 10018)  L_C 0.0000  g_B 0.2804  second stretch at (4.8128, 2.6044)  core spread 14.286
+  core (134, 665, 772, 1000) block (9313, 10633, 11568)  L_C 0.0784  g_B 0.1427  second stretch at (5.278, 1.7068)  core spread 7.463
+  core (144, 806, 993, 1000) block (9905, 10338, 12632)  L_C 0.0688  g_B 0.1447  second stretch at (5.2271, 4.7467)  core spread 6.944
+  core (146, 284, 688, 1000) block (9159, 9348, 9610)  L_C 0.1725  g_B 0.2834  second stretch at (2.4623, 1.3446)  core spread 6.849
+  core (146, 750, 902, 1000) block (10941, 11356, 11604)  L_C 0.2061  g_B 0.3877  second stretch at (7.0442, 4.1029)  core spread 6.849
+  core (143, 538, 943, 1000) block (9107, 11363, 12243)  L_C 0.0080  g_B 0.3147  second stretch at (2.904, 3.9469)  core spread 6.993
+  core (78, 240, 605, 1000) block (9083, 9715, 14059)  L_C 0.1407  g_B 0.2351  second stretch at (2.4115, 6.8122)  core spread 12.821
+  core (143, 497, 588, 1000) block (9036, 9340, 10622)  L_C 0.0079  g_B 0.2264  second stretch at (2.2669, 3.2809)  core spread 6.993
+  core (117, 723, 937, 1000) block (9925, 10512, 12626)  L_C 0.0952  g_B 0.2086  second stretch at (3.5271, 3.1659)  core spread 8.547
+  core (146, 504, 930, 1000) block (10274, 11527, 11600)  L_C 0.1935  g_B 0.3288  second stretch at (3.632, 5.4086)  core spread 6.849
+  core (149, 546, 881, 1000) block (9260, 10630, 12409)  L_C 0.3340  g_B 0.5334  second stretch at (4.0562, 3.0151)  core spread 6.711
+  core (146, 652, 736, 1000) block (9243, 9458, 12045)  L_C 0.1741  g_B 0.2115  second stretch at (2.4848, 0.5902)  core spread 6.849
+  core (143, 852, 961, 1000) block (9033, 10457, 12754)  L_C 0.0079  g_B 0.2290  second stretch at (4.0314, 5.0095)  core spread 6.993
+  core (79, 550, 817, 1000) block (9204, 9751, 13862)  L_C 0.0794  g_B 0.1271  second stretch at (4.9952, 1.5645)  core spread 12.658
+  core (75, 144, 601, 1000) block (9268, 9974, 11256)  L_C 0.0289  g_B 0.0454  second stretch at (2.3459, 6.951)  core spread 13.333
+  core (144, 286, 500, 1000) block (9921, 10261, 12318)  L_C 0.0689  g_B 0.5130  second stretch at (2.5491, 6.2006)  core spread 6.944
+  core (144, 230, 856, 1000) block (9145, 9450, 10127)  L_C 0.0635  g_B 0.3018  second stretch at (4.0805, 5.128)  core spread 6.944
+  core (144, 320, 341, 1000) block (9181, 10137, 11284)  L_C 0.0638  g_B 0.2948  second stretch at (2.359, 6.8857)  core spread 6.944
+  core (134, 398, 766, 1000) block (10205, 11177, 12342)  L_C 0.1765  g_B 0.1987  second stretch at (3.5071, 4.1466)  core spread 7.463
+  core (67, 280, 714, 1000) block (9608, 10057, 11623)  L_C 0.0896  g_B 0.3640  second stretch at (2.4916, 4.8141)  core spread 14.925
+  core (144, 368, 627, 1000) block (9375, 11367, 12566)  L_C 0.0651  g_B 0.2126  second stretch at (2.4089, 2.5363)  core spread 6.944
+  core (145, 394, 863, 1000) block (9149, 9303, 12822)  L_C 0.1183  g_B 0.2379  second stretch at (4.0395, 5.2278)  core spread 6.897
+  core (148, 781, 945, 1000) block (9686, 10406, 10518)  L_C 0.2945  g_B 0.3129  second stretch at (5.7716, 4.2089)  core spread 6.757
+  core (67, 360, 744, 1000) block (10171, 11595, 12046)  L_C 0.0949  g_B 0.1493  second stretch at (2.6376, 3.1078)  core spread 14.925
+  core (144, 247, 289, 1000) block (9671, 10899, 11378)  L_C 0.0672  g_B 0.2110  second stretch at (2.4849, 7.2533)  core spread 6.944
+  core (142, 534, 767, 1000) block (9326, 11376, 12476)  L_C 0.1474  g_B 0.2681  second stretch at (3.1872, 1.6024)  core spread 7.042

@@ -1,0 +1,167 @@
+E233 (2026-10-01): the cascade inside the hole ArrBlockRule8 3 9, part 3: every path that differs, read move by move.
+
+Same 2,000 configurations as hole3_cascade_v1/v2.  The paths read in full: the 28 landing in the core's second lonely
+stretch, the 5 that do not pass through tau_C, and every core whose first stretch is a single point.  For each move:
+the instant in laps of x1 from tau_C, where it lies (inside core stretch k, or in the gap after stretch k), the setter
+(C core / B block, with the reading), the readings in the way split C/B.
+Checks (forced by A.1, the move depends only on the instant and the readings in the way):
+  F1  a move made from an instant inside a core stretch has only block setters (the core is clear there);
+  F2  t* is the block's own relay (the three block readings alone) run from the path's first instant inside the stretch
+      that holds t*.
+
+CHECKS F1, F2 over all 2,000: 0 failures
+landing stretch: {'S0': 1972, 'S1': 28}
+move regions over all paths (from-region, setter class): {('S0', 'B'): 1469, ('pre', 'C'): 406, ('gap0', 'C'): 41, ('S1', 'B'): 20, ('pre', 'B'): 5}
+
+== landing in the core's second stretch: 28 paths ==
+core (97, 371, 671, 1000) block (9917, 10060, 11316)  stretches (laps of x1 from tau_C) [(0.0, 0.1524), (3.8472, 5.8147), (8.294, 10.6095)]  lands in S1
+   from +0.0000 [S0]  setter B 10060  in the way C() B(10060,)  -> +0.1588 [gap0]
+   from +0.1588 [gap0]  setter C 671  in the way C(671,) B(9917,)  -> +3.8472 [S1]
+   from +3.8472 [S1]  setter B 11316  in the way C() B(11316,)  -> +3.9809 [S1]
+   from +3.9809 [S1]  setter B 10060  in the way C() B(10060,)  -> +4.1019 [S1]
+   from +4.1019 [S1]  setter B 9917  in the way C() B(9917,)  -> +4.3454 [S1]
+core (51, 356, 918, 1000) block (9094, 10599, 11240)  stretches (laps of x1 from tau_C) [(0.0, 0.0626), (8.668, 12.95), (15.2235, 16.0978)]  lands in S1
+   from +0.0000 [S0]  setter B 10599  in the way C() B(10599,)  -> +0.1262 [gap0]
+   from +0.1262 [gap0]  setter C 356  in the way C(356,) B()  -> +6.4488 [gap0]
+   from +6.4488 [gap0]  setter C 918  in the way C(918,) B()  -> +8.6680 [S1]
+   from +8.6680 [S1]  setter B 9094  in the way C() B(9094, 10599)  -> +8.8358 [S1]
+core (70, 490, 729, 1000) block (9433, 10004, 10018)  stretches (laps of x1 from tau_C) [(0.0, 0.0), (4.8128, 7.4172), (12.6335, 19.251)]  lands in S1
+   from +0.0000 [S0]  setter B 10018  in the way C() B(10018,)  -> +0.2219 [gap0]
+   from +0.2219 [gap0]  setter C 490  in the way C(490,) B(9433, 10004)  -> +4.8128 [S1]
+   from +4.8128 [S1]  setter B 10004  in the way C() B(10004, 10018)  -> +4.9604 [S1]
+core (134, 665, 772, 1000) block (9313, 10633, 11568)  stretches (laps of x1 from tau_C) [(0.0, 0.0784), (5.278, 6.9848), (9.313, 12.1419)]  lands in S1
+   from -1.7896 [pre]  setter C 1000  in the way C(1000,) B(10633,)  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 10633  in the way C() B(10633, 11568)  -> +0.1427 [gap0]
+   from +0.1427 [gap0]  setter C 772  in the way C(772,) B()  -> +3.0943 [gap0]
+   from +3.0943 [gap0]  setter C 665  in the way C(665,) B()  -> +5.2780 [S1]
+   from +5.2780 [S1]  setter B 10633  in the way C() B(10633,)  -> +5.3978 [S1]
+core (144, 806, 993, 1000) block (9905, 10338, 12632)  stretches (laps of x1 from tau_C) [(0.0, 0.0688), (5.2271, 9.9738), (12.5984, 14.4439)]  lands in S1
+   from +0.0000 [S0]  setter B 10338  in the way C() B(10338, 12632)  -> +0.1447 [gap0]
+   from +0.1447 [gap0]  setter C 993  in the way C(993, 1000) B()  -> +2.6236 [gap0]
+   from +2.6236 [gap0]  setter C 806  in the way C(806,) B()  -> +5.2271 [S1]
+core (146, 284, 688, 1000) block (9159, 9348, 9610)  stretches (laps of x1 from tau_C) [(0.0, 0.1725), (2.4623, 3.8068), (7.135, 9.3315)]  lands in S1
+   from +0.0000 [S0]  setter B 9348  in the way C() B(9348,)  -> +0.1191 [S0]
+   from +0.1191 [S0]  setter B 9159  in the way C() B(9159,)  -> +0.2834 [gap0]
+   from +0.2834 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.4623 [S1]
+core (146, 750, 902, 1000) block (10941, 11356, 11604)  stretches (laps of x1 from tau_C) [(0.0, 0.2061), (7.0442, 11.1471), (16.4083, 17.9852)]  lands in S1
+   from +0.0000 [S0]  setter B 11604  in the way C() B(11604,)  -> +0.1792 [S0]
+   from +0.1792 [S0]  setter B 11356  in the way C() B(11356,)  -> +0.3877 [gap0]
+   from +0.3877 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.9413 [gap0]
+   from +2.9413 [gap0]  setter C 902  in the way C(902,) B(11604,)  -> +4.2786 [gap0]
+   from +4.2786 [gap0]  setter C 750  in the way C(750,) B()  -> +7.0442 [S1]
+   from +7.0442 [S1]  setter B 11356  in the way C() B(11356,)  -> +7.1319 [S1]
+core (143, 538, 943, 1000) block (9107, 11363, 12243)  stretches (laps of x1 from tau_C) [(0.0, 0.008), (2.904, 6.8509), (12.5615, 18.222)]  lands in S1
+   from +0.0000 [S0]  setter B 9107  in the way C() B(9107, 11363)  -> +0.1643 [gap0]
+   from +0.1643 [gap0]  setter C 1000  in the way C(1000,) B(12243,)  -> +2.2847 [gap0]
+   from +2.2847 [gap0]  setter C 943  in the way C(943,) B()  -> +2.9040 [S1]
+core (78, 240, 605, 1000) block (9083, 9715, 14059)  stretches (laps of x1 from tau_C) [(0.0, 0.1407), (2.4115, 9.2237), (15.0132, 16.2252)]  lands in S1
+   from -2.3338 [pre]  setter C 605  in the way C(605,) B()  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 9083  in the way C() B(9083, 9715)  -> +0.2351 [gap0]
+   from +0.2351 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.4115 [S1]
+   from +2.4115 [S1]  setter B 14059  in the way C() B(14059,)  -> +2.5728 [S1]
+core (143, 497, 588, 1000) block (9036, 9340, 10622)  stretches (laps of x1 from tau_C) [(0.0, 0.0079), (2.2669, 5.5478), (12.5551, 18.0799)]  lands in S1
+   from +0.0000 [S0]  setter B 9036  in the way C() B(9036,)  -> +0.2264 [gap0]
+   from +0.2264 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.2669 [S1]
+   from +2.2669 [S1]  setter B 10622  in the way C() B(10622,)  -> +2.4160 [S1]
+core (117, 723, 937, 1000) block (9925, 10512, 12626)  stretches (laps of x1 from tau_C) [(0.0, 0.0952), (3.5271, 6.693), (10.5923, 13.8228)]  lands in S1
+   from -1.3127 [pre]  setter C 937  in the way C(937, 1000) B()  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 9925  in the way C() B(9925,)  -> +0.2086 [gap0]
+   from +0.2086 [gap0]  setter C 723  in the way C(723,) B()  -> +3.5271 [S1]
+core (146, 504, 930, 1000) block (10274, 11527, 11600)  stretches (laps of x1 from tau_C) [(0.0, 0.1935), (3.632, 9.0406), (14.6793, 20.7415)]  lands in S1
+   from +0.0000 [S0]  setter B 11600  in the way C() B(11600,)  -> +0.1714 [S0]
+   from +0.1714 [S0]  setter B 10274  in the way C() B(10274, 11527)  -> +0.3288 [gap0]
+   from +0.3288 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.7620 [gap0]
+   from +2.7620 [gap0]  setter C 930  in the way C(930,) B(11527, 11600)  -> +3.6320 [S1]
+   from +3.6320 [S1]  setter B 11527  in the way C() B(11527, 11600)  -> +3.7934 [S1]
+core (149, 546, 881, 1000) block (9260, 10630, 12409)  stretches (laps of x1 from tau_C) [(0.0, 0.334), (4.0562, 7.0713), (11.909, 11.9393)]  lands in S1
+   from +0.0000 [S0]  setter B 10630  in the way C() B(10630,)  -> +0.1805 [S0]
+   from +0.1805 [S0]  setter B 9260  in the way C() B(9260,)  -> +0.3565 [gap0]
+   from +0.3565 [gap0]  setter C 1000  in the way C(1000,) B(12409,)  -> +2.6490 [gap0]
+   from +2.6490 [gap0]  setter C 881  in the way C(881,) B(10630, 12409)  -> +4.0562 [S1]
+core (146, 652, 736, 1000) block (9243, 9458, 12045)  stretches (laps of x1 from tau_C) [(0.0, 0.1741), (2.4848, 3.0751), (8.0349, 9.4171)]  lands in S1
+   from +0.0000 [S0]  setter B 9243  in the way C() B(9243, 9458)  -> +0.2115 [gap0]
+   from +0.2115 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.4848 [S1]
+core (143, 852, 961, 1000) block (9033, 10457, 12754)  stretches (laps of x1 from tau_C) [(0.0, 0.0079), (4.0314, 9.0409), (14.6335, 18.0739)]  lands in S1
+   from +0.0000 [S0]  setter B 9033  in the way C() B(9033,)  -> +0.2290 [gap0]
+   from +0.2290 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.2661 [gap0]
+   from +2.2661 [gap0]  setter C 852  in the way C(852, 961) B()  -> +4.0314 [S1]
+   from +4.0314 [S1]  setter B 9033  in the way C() B(9033,)  -> +4.2290 [S1]
+   from +4.2290 [S1]  setter B 10457  in the way C() B(10457, 12754)  -> +4.3055 [S1]
+core (79, 550, 817, 1000) block (9204, 9751, 13862)  stretches (laps of x1 from tau_C) [(0.0, 0.0794), (4.9952, 6.5597), (9.3761, 11.8982)]  lands in S1
+   from +0.0000 [S0]  setter B 13862  in the way C() B(13862,)  -> +0.1271 [gap0]
+   from +0.1271 [gap0]  setter C 550  in the way C(550,) B()  -> +4.2631 [gap0]
+   from +4.2631 [gap0]  setter C 1000  in the way C(1000,) B(9751,)  -> +4.9952 [S1]
+core (75, 144, 601, 1000) block (9268, 9974, 11256)  stretches (laps of x1 from tau_C) [(0.0, 0.0289), (2.3459, 9.2969), (15.421, 18.5649)]  lands in S1
+   from -1.9019 [pre]  setter C 601  in the way C(601,) B()  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 11256  in the way C() B(11256,)  -> +0.0454 [gap0]
+   from +0.0454 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.3459 [S1]
+   from +2.3459 [S1]  setter B 11256  in the way C() B(11256,)  -> +2.5155 [S1]
+core (144, 286, 500, 1000) block (9921, 10261, 12318)  stretches (laps of x1 from tau_C) [(0.0, 0.0689), (2.5491, 8.7498), (13.7103, 19.9109)]  lands in S1
+   from +0.0000 [S0]  setter B 10261  in the way C() B(10261,)  -> +0.2107 [gap0]
+   from +0.2107 [gap0]  setter C 1000  in the way C(1000,) B(12318,)  -> +2.5491 [S1]
+core (144, 230, 856, 1000) block (9145, 9450, 10127)  stretches (laps of x1 from tau_C) [(0.0, 0.0635), (4.0805, 9.2085), (11.4948, 12.093)]  lands in S1
+   from +0.0000 [S0]  setter B 9145  in the way C() B(9145,)  -> +0.1866 [gap0]
+   from +0.1866 [gap0]  setter C 1000  in the way C(1000,) B(10127,)  -> +2.3498 [gap0]
+   from +2.3498 [gap0]  setter C 856  in the way C(856,) B()  -> +4.0805 [S1]
+   from +4.0805 [S1]  setter B 9145  in the way C() B(9145,)  -> +4.1866 [S1]
+core (144, 320, 341, 1000) block (9181, 10137, 11284)  stretches (laps of x1 from tau_C) [(0.0, 0.0638), (2.359, 9.2448), (11.54, 15.5887)]  lands in S1
+   from +0.0000 [S0]  setter B 9181  in the way C() B(9181,)  -> +0.1554 [gap0]
+   from +0.1554 [gap0]  setter C 1000  in the way C(1000,) B(10137, 11284)  -> +2.3590 [S1]
+core (134, 398, 766, 1000) block (10205, 11177, 12342)  stretches (laps of x1 from tau_C) [(0.0, 0.1765), (3.5071, 7.6537), (10.205, 10.955)]  lands in S1
+   from -1.9610 [pre]  setter C 1000  in the way C(1000,) B()  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 12342  in the way C() B(12342,)  -> +0.1987 [gap0]
+   from +0.1987 [gap0]  setter C 766  in the way C(766,) B()  -> +3.5071 [S1]
+   from +3.5071 [S1]  setter B 10205  in the way C() B(10205,)  -> +3.6444 [S1]
+core (67, 280, 714, 1000) block (9608, 10057, 11623)  stretches (laps of x1 from tau_C) [(0.0, 0.0896), (2.4916, 7.3057), (12.0996, 12.0996)]  lands in S1
+   from +0.0000 [S0]  setter B 9608  in the way C() B(9608,)  -> +0.1996 [gap0]
+   from +0.1996 [gap0]  setter C 1000  in the way C(1000,) B(10057, 11623)  -> +2.4916 [S1]
+core (144, 368, 627, 1000) block (9375, 11367, 12566)  stretches (laps of x1 from tau_C) [(0.0, 0.0651), (2.4089, 4.9451), (8.6832, 9.4401)]  lands in S1
+   from +0.0000 [S0]  setter B 12566  in the way C() B(12566,)  -> +0.1619 [gap0]
+   from +0.1619 [gap0]  setter C 1000  in the way C(1000,) B(11367,)  -> +2.4089 [S1]
+core (145, 394, 863, 1000) block (9149, 9303, 12822)  stretches (laps of x1 from tau_C) [(0.0, 0.1183), (4.0395, 9.2673), (11.5546, 11.9905)]  lands in S1
+   from +0.0000 [S0]  setter B 9149  in the way C() B(9149, 9303, 12822)  -> +0.2379 [gap0]
+   from +0.2379 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.4056 [gap0]
+   from +2.4056 [gap0]  setter C 863  in the way C(863,) B()  -> +4.0395 [S1]
+   from +4.0395 [S1]  setter B 9149  in the way C() B(9149,)  -> +4.2379 [S1]
+   from +4.2379 [S1]  setter B 12822  in the way C() B(12822,)  -> +4.3323 [S1]
+core (148, 781, 945, 1000) block (9686, 10406, 10518)  stretches (laps of x1 from tau_C) [(0.0, 0.2945), (5.7716, 9.9805), (13.5999, 15.0731)]  lands in S1
+   from +0.0000 [S0]  setter B 10518  in the way C() B(10518,)  -> +0.2224 [S0]
+   from +0.2224 [S0]  setter B 10406  in the way C() B(10406,)  -> +0.3129 [gap0]
+   from +0.3129 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.7160 [gap0]
+   from +2.7160 [gap0]  setter C 781  in the way C(781, 945) B(9686,)  -> +5.7716 [S1]
+   from +5.7716 [S1]  setter B 9686  in the way C() B(9686, 10406)  -> +5.9443 [S1]
+core (67, 360, 744, 1000) block (10171, 11595, 12046)  stretches (laps of x1 from tau_C) [(0.0, 0.0949), (2.6376, 5.7454), (12.8086, 20.3275)]  lands in S1
+   from +0.0000 [S0]  setter B 10171  in the way C() B(10171,)  -> +0.1493 [gap0]
+   from +0.1493 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.6376 [S1]
+core (144, 247, 289, 1000) block (9671, 10899, 11378)  stretches (laps of x1 from tau_C) [(0.0, 0.0672), (2.4849, 9.7382), (12.1559, 19.4092)]  lands in S1
+   from +0.0000 [S0]  setter B 11378  in the way C() B(11378,)  -> +0.2110 [gap0]
+   from +0.2110 [gap0]  setter C 1000  in the way C(1000,) B()  -> +2.4849 [S1]
+   from +2.4849 [S1]  setter B 9671  in the way C() B(9671,)  -> +2.7300 [S1]
+   from +2.7300 [S1]  setter B 11378  in the way C() B(11378,)  -> +2.7609 [S1]
+core (142, 534, 767, 1000) block (9326, 11376, 12476)  stretches (laps of x1 from tau_C) [(0.0, 0.1474), (3.1872, 4.7896), (9.326, 12.3065)]  lands in S1
+   from -2.2822 [pre]  setter C 1000  in the way C(1000,) B(11376, 12476)  -> +0.0000 [S0]
+   from +0.0000 [S0]  setter B 12476  in the way C() B(12476,)  -> +0.0669 [S0]
+   from +0.0669 [S0]  setter B 11376  in the way C() B(11376,)  -> +0.2681 [gap0]
+   from +0.2681 [gap0]  setter C 767  in the way C(767,) B()  -> +3.1872 [S1]
+
+== not passing through tau_C: 5 paths ==
+core (58, 286, 520, 1000) block (9237, 10729, 12415)  stretches (laps of x1 from tau_C) [(0.0, 6.5725), (18.1187, 25.0465), (27.3557, 31.0861)]  lands in S0
+   from -0.0766 [pre]  setter B 9237  in the way C(520,) B(9237, 10729)  -> +0.1411 [S0]
+   from +0.1411 [S0]  setter B 12415  in the way C() B(12415,)  -> +0.1976 [S0]
+core (96, 189, 857, 1000) block (10743, 10854, 10930)  stretches (laps of x1 from tau_C) [(0.0, 6.0406), (8.7263, 9.4017), (12.5356, 16.7836)]  lands in S0
+   from -0.1143 [pre]  setter B 10743  in the way C(857,) B(10743,)  -> +0.0225 [S0]
+core (112, 259, 491, 1000) block (9553, 9766, 12355)  stretches (laps of x1 from tau_C) [(0.0, 6.2771), (11.1411, 16.7177), (19.106, 21.5265)]  lands in S0
+   from -0.0853 [pre]  setter B 9766  in the way C(1000,) B(9766,)  -> +0.1352 [S0]
+   from +0.1352 [S0]  setter B 9553  in the way C() B(9553, 12355)  -> +0.3779 [S0]
+core (59, 393, 652, 1000) block (9292, 10315, 12736)  stretches (laps of x1 from tau_C) [(0.0, 0.9428), (6.8537, 6.969), (10.539, 16.261)]  lands in S0
+   from -0.0591 [pre]  setter B 12736  in the way C(1000,) B(12736,)  -> +0.0445 [S0]
+   from +0.0445 [S0]  setter B 10315  in the way C() B(10315,)  -> +0.1852 [S0]
+   from +0.1852 [S0]  setter B 9292  in the way C() B(9292,)  -> +0.3795 [S0]
+core (112, 215, 392, 1000) block (9944, 10094, 10677)  stretches (laps of x1 from tau_C) [(0.0, 7.458), (9.944, 11.0094), (17.3513, 17.402)]  lands in S0
+   from -0.0888 [pre]  setter B 10677  in the way C(1000,) B(9944, 10677)  -> +0.1056 [S0]
+
+== core's first stretch a single point: 1 paths ==
+core (70, 490, 729, 1000) block (9433, 10004, 10018)  stretches (laps of x1 from tau_C) [(0.0, 0.0), (4.8128, 7.4172), (12.6335, 19.251)]  lands in S1
+   from +0.0000 [S0]  setter B 10018  in the way C() B(10018,)  -> +0.2219 [gap0]
+   from +0.2219 [gap0]  setter C 490  in the way C(490,) B(9433, 10004)  -> +4.8128 [S1]
+   from +4.8128 [S1]  setter B 10004  in the way C() B(10004, 10018)  -> +4.9604 [S1]
