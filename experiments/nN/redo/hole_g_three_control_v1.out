@@ -1,0 +1,10 @@
+E239 (2026-10-01): positive control for the f = 3 record "the winning flank's index is 0" (hole_g_flank_v1.out).
+
+first_exit_three_v1.out: the compact triple T = (8, 15, 29) has the start s0 = 57/232 at which no first exit is clear.
+A block lam*T has the same positions at tau_C as T has at lam*tau_C, so lam = (s0 + n)/tau_C puts the hole's entry
+instant on that start.  Cores are taken from the E233 population (gen(232, 2000)) in order until one gives a block with
+x1 = 8*lam in the strip [9m, 35m/3) and no proved rule covering the set (holef_cascade_v1.covered).  The set is scaled by lam's denominator to whole
+numbers (the scale symmetry; positions at every instant are unchanged).  Then: the block's
+relay from tau_C, its winning flank and index j (hole_g_flank_v1.study), and where the full set lands (the cascade).
+
+constructed: 0

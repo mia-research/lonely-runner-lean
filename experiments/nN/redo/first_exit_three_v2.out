@@ -1,0 +1,25 @@
+E239 (2026-10-01): for three whole-number readings and every start t0, two properties, exact:
+  P1  some reading's first exit at or after t0 is clear (first_exit_three_v1 tested this one);
+  P2  the least clear exit at or after t0 (= the relay's landing g, A.9 and Corollary 6.24) is some reading's first exit
+      at or after t0, i.e. the winning flank's index j is 0 (the record read off hole_g_flank_v1.out at f = 3).
+P2 implies P1.  Starts: every exit in one period [0, 1) and every midpoint between consecutive exits (the first exits and
+the least clear exit after t0 are constant on each open interval).  A start where the block is clear is skipped (g = t0).
+Run: (a) every triple <= 80 with spread c/a below 2.2; (b) every triple with 81 <= c <= 160 and spread below 1.62.
+Reported: the number of triples failing each property, and the least spread of a failing triple, by height band.
+
+
+== (a) triples <= 80, spread below 2.2: 24052 triples ==
+  failing P1 (some first exit clear): 774
+    least spread by band of c: {1: (2.125, (8, 10, 17), '49/136'), 21: (1.8333, (18, 20, 33), '25/264'), 41: (1.7188, (32, 36, 55), '81/440'), 61: (1.6087, (46, 47, 74), '137/592')}
+    the 8 least-spread: [((46, 47, 74), 1.6087, '137/592'), ((38, 39, 62), 1.6316, '113/496'), ((48, 52, 79), 1.6458, '193/632'), ((47, 50, 79), 1.6809, '49/632'), ((47, 51, 80), 1.7021, '121/640'), ((44, 47, 75), 1.7045, '241/600'), ((41, 43, 70), 1.7073, '31/80'), ((41, 48, 70), 1.7073, '31/80')]
+  failing P2 (the landing is a first exit): 774
+    least spread by band of c: {1: (2.125, (8, 10, 17), '49/136'), 21: (1.8333, (18, 20, 33), '25/264'), 41: (1.7188, (32, 36, 55), '81/440'), 61: (1.6087, (46, 47, 74), '137/592')}
+    the 8 least-spread: [((46, 47, 74), 1.6087, '137/592'), ((38, 39, 62), 1.6316, '113/496'), ((48, 52, 79), 1.6458, '193/632'), ((47, 50, 79), 1.6809, '49/632'), ((47, 51, 80), 1.7021, '121/640'), ((44, 47, 75), 1.7045, '241/600'), ((41, 43, 70), 1.7073, '31/80'), ((41, 48, 70), 1.7073, '31/80')]
+
+== (b) triples 81 <= c <= 160, spread below 1.62: 84533 triples ==
+  failing P1 (some first exit clear): 20
+    least spread by band of c: {101: (1.5694, (72, 73, 113), '209/904'), 121: (1.5875, (80, 84, 127), '313/1016'), 141: (1.57, (100, 101, 157), '297/1256')}
+    the 8 least-spread: [((72, 73, 113), 1.5694, '209/904'), ((100, 101, 157), 1.57, '297/1256'), ((96, 100, 151), 1.5729, '225/1208'), ((99, 102, 157), 1.5859, '97/1256'), ((80, 84, 127), 1.5875, '313/1016'), ((74, 75, 118), 1.5946, '225/944'), ((94, 95, 150), 1.5957, '289/1200'), ((86, 87, 138), 1.6047, '265/1104')]
+  failing P2 (the landing is a first exit): 20
+    least spread by band of c: {101: (1.5694, (72, 73, 113), '209/904'), 121: (1.5875, (80, 84, 127), '313/1016'), 141: (1.57, (100, 101, 157), '297/1256')}
+    the 8 least-spread: [((72, 73, 113), 1.5694, '209/904'), ((100, 101, 157), 1.57, '297/1256'), ((96, 100, 151), 1.5729, '225/1208'), ((99, 102, 157), 1.5859, '97/1256'), ((80, 84, 127), 1.5875, '313/1016'), ((74, 75, 118), 1.5946, '225/944'), ((94, 95, 150), 1.5957, '289/1200'), ((86, 87, 138), 1.6047, '265/1104')]

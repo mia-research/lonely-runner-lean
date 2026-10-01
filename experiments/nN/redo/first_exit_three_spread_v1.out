@@ -1,0 +1,26 @@
+E239 (2026-10-01): the spread of the triples with a start at which no first exit is clear, against the spread of the
+blocks left in the hole ArrBlockRule8 3 9 (after the proved rules).
+
+(1) The f = 3 hole population (hole3_cascade_v1.gen(232, 2000)): the block's spread x3/x1, least and greatest.
+(2) Exhaustive, exact, whole-number triples a < b < c <= 80 with c/a below 2.2: every start (as in first_exit_three_v1),
+    and for each triple with a bad start, its spread.  The least spread of a bad triple is reported with the triple.
+
+hole f = 3 blocks (2,000): spread x3/x1 from 1.0031 to 1.6169; by tenth: {1.0: 302, 1.1: 566, 1.2: 557, 1.3: 373, 1.4: 157, 1.5: 42, 1.6: 3}
+triples <= 80 with spread below 2.2: 24052; with a bad start: 774
+bad triples by spread (tenth): {1.6: 4, 1.7: 33, 1.8: 102, 1.9: 145, 2.0: 174, 2.1: 316}
+the 15 least-spread bad triples:
+   (46, 47, 74) spread 1.6087 starts ['137/592', '449/592']
+   (38, 39, 62) spread 1.6316 starts ['113/496', '377/496']
+   (48, 52, 79) spread 1.6458 starts ['193/632', '433/632']
+   (47, 50, 79) spread 1.6809 starts ['49/632', '577/632']
+   (47, 51, 80) spread 1.7021 starts ['121/640', '513/640']
+   (44, 47, 75) spread 1.7045 starts ['241/600', '353/600']
+   (41, 48, 70) spread 1.7073 starts ['31/80', '337/560']
+   (41, 43, 70) spread 1.7073 starts ['31/80', '337/560']
+   (38, 44, 65) spread 1.7105 starts ['21/104', '409/520']
+   (32, 36, 55) spread 1.7188 starts ['81/440', '353/440']
+   (29, 32, 50) spread 1.7241 starts ['161/400', '233/400']
+   (26, 28, 45) spread 1.7308 starts ['137/360', '217/360']
+   (45, 47, 78) spread 1.7333 starts ['5/48', '553/624']
+   (42, 44, 73) spread 1.7381 starts ['65/584', '513/584']
+   (46, 53, 80) spread 1.7391 starts ['249/640', '77/128']

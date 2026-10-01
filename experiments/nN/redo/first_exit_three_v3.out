@@ -1,0 +1,29 @@
+E239 (2026-10-01): every triple with spread below 1.62 that fails P2 (first_exit_three_v2), listed, to read its shape.
+
+first_exit_three_v2.out shows the least-spread failing triples as near-pairs (a, a+1) with a third reading near 1.57-1.61a.
+Exhaustive, exact, every triple with c <= 160 and c/a below 1.62: each failing triple with b - a, c/a, c/b and a failing
+start.  Reported: the failing triples by b - a.
+
+triples with c <= 160 and spread below 1.62: 96061; failing P2: 21
+failing triples by b - a: {1: 10, 2: 1, 3: 3, 4: 4, 6: 1, 7: 1, 8: 1}
+   (72, 73, 113)  b-a 1  c/a 1.5694  c/b 1.5479  failing starts 2, first 209/904
+   (100, 101, 157)  b-a 1  c/a 1.5700  c/b 1.5545  failing starts 2, first 297/1256
+   (96, 100, 151)  b-a 4  c/a 1.5729  c/b 1.5100  failing starts 2, first 225/1208
+   (99, 102, 157)  b-a 3  c/a 1.5859  c/b 1.5392  failing starts 2, first 97/1256
+   (80, 84, 127)  b-a 4  c/a 1.5875  c/b 1.5119  failing starts 2, first 313/1016
+   (74, 75, 118)  b-a 1  c/a 1.5946  c/b 1.5733  failing starts 2, first 225/944
+   (94, 95, 150)  b-a 1  c/a 1.5957  c/b 1.5789  failing starts 2, first 289/1200
+   (86, 87, 138)  b-a 1  c/a 1.6047  c/b 1.5862  failing starts 2, first 265/1104
+   (66, 67, 106)  b-a 1  c/a 1.6061  c/b 1.5821  failing starts 2, first 201/848
+   (84, 91, 135)  b-a 7  c/a 1.6071  c/b 1.4835  failing starts 2, first 497/1080
+   (92, 94, 148)  b-a 2  c/a 1.6087  c/b 1.5745  failing starts 4, first 137/1184
+   (46, 47, 74)  b-a 1  c/a 1.6087  c/b 1.5745  failing starts 2, first 137/592
+   (64, 68, 103)  b-a 4  c/a 1.6094  c/b 1.5147  failing starts 2, first 153/824
+   (85, 93, 137)  b-a 8  c/a 1.6118  c/b 1.4731  failing starts 2, first 305/1096
+   (98, 99, 158)  b-a 1  c/a 1.6122  c/b 1.5960  failing starts 2, first 305/1264
+   (75, 78, 121)  b-a 3  c/a 1.6133  c/b 1.5513  failing starts 2, first 73/968
+   (83, 84, 134)  b-a 1  c/a 1.6145  c/b 1.5952  failing starts 2, first 241/1072
+   (96, 100, 155)  b-a 4  c/a 1.6146  c/b 1.5500  failing starts 2, first 73/1240
+   (78, 79, 126)  b-a 1  c/a 1.6154  c/b 1.5949  failing starts 2, first 241/1008
+   (91, 97, 147)  b-a 6  c/a 1.6154  c/b 1.5155  failing starts 2, first 241/1176
+   (73, 76, 118)  b-a 3  c/a 1.6164  c/b 1.5526  failing starts 2, first 73/944

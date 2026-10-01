@@ -1,0 +1,228 @@
+E238/E239 (2026-10-01): g, the block's relay landing from the entry instant t0, read in the block's readings.
+Design: log E238.
+
+Flanks: each block reading h, openings (8K+1)/(8h), K >= K0(h) = the first lap whose opening is at or after t0; index
+j = K - K0.  Derived (A.9 from t0; Corollary 6.24): g = t0 if the block is clear at t0, else the least clear flank
+opening at or after t0 over the block's readings.
+Checks: G1 g (relay) = least clear flank opening found by scanning flanks with Theorem 6.19's criterion (no cascade);
+G2 the winning flank is the relay's last setter; G3 every relay instant after t0 is an opening of its setter's flank.
+Populations: the hole configurations of E233 (f = 3, 2,000) and E235 (f = 4, 5, 6, 1,000 each) at t0 = tau_C, and the
+30 overruns at t0 = the start of S1.
+
+
+== f = 3, t0 = tau_C: 2000 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 866
+  winning flank by rank (1 = slowest block reading): {1: 495, 2: 274, 3: 365}
+  winning flank's index j: {0: 1134}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 835 of 1134
+  g = the latest exit of the readings in the way at t0 (one move): 835 of 1134
+  readings in the way at t0: {1: 812, 2: 283, 3: 39}
+  moves: {1: 835, 2: 248, 3: 51}
+  flank openings in (t0, g) passed without a visit: {0: 762, 1: 331, 2: 41}
+  (rank, j) of the winner: {(1, 0): 495, (2, 0): 274, (3, 0): 365}
+  paths with j > 0 (0), first 15 read:
+
+== f = 3, t0 = S1: 28 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 13
+  winning flank by rank (1 = slowest block reading): {1: 5, 2: 5, 3: 5}
+  winning flank's index j: {0: 15}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 11 of 15
+  g = the latest exit of the readings in the way at t0 (one move): 11 of 15
+  readings in the way at t0: {1: 11, 2: 4}
+  moves: {1: 11, 2: 3, 3: 1}
+  flank openings in (t0, g) passed without a visit: {0: 10, 1: 5}
+  (rank, j) of the winner: {(1, 0): 5, (2, 0): 5, (3, 0): 5}
+  paths with j > 0 (0), first 15 read:
+
+== f = 4, t0 = tau_C: 1000 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 302
+  winning flank by rank (1 = slowest block reading): {1: 173, 2: 157, 3: 186, 4: 182}
+  winning flank's index j: {0: 687, 1: 11}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 463 of 698
+  g = the latest exit of the readings in the way at t0 (one move): 454 of 698
+  readings in the way at t0: {1: 433, 2: 203, 3: 58, 4: 4}
+  moves: {1: 454, 2: 174, 3: 55, 4: 10, 5: 4, 6: 1}
+  flank openings in (t0, g) passed without a visit: {0: 337, 1: 245, 2: 103, 3: 13}
+  (rank, j) of the winner: {(1, 0): 173, (2, 0): 157, (3, 0): 182, (3, 1): 4, (4, 0): 175, (4, 1): 7}
+  paths with j > 0 (11), first 15 read:
+    core (135, 806, 1000) block (45687, 48689, 55784, 103972)  phases at t0 (eighths) (6.153, 7.674, 6.898, 0.978)  in the way (48689, 103972)  setters (rank, j) [(2, 0), (1, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(48689, 7.684)]
+        flank opening j=1: clear
+    core (216, 241, 1000) block (20583, 22109, 38302, 64073)  phases at t0 (eighths) (7.292, 6.356, 1.324, 0.634)  in the way (20583, 64073)  setters (rank, j) [(1, 0), (2, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(20583, 7.409)]
+        flank opening j=1: clear
+    core (189, 812, 1000) block (13169, 13576, 25800, 32684)  phases at t0 (eighths) (5.677, 7.831, 0.508, 4.931)  in the way (13576, 25800)  setters (rank, j) [(2, 0), (4, 0), (1, 0), (3, 1), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(13169, 7.317)]
+        flank opening j=1: clear
+    core (261, 314, 1000) block (41236, 64514, 71131, 81790)  phases at t0 (eighths) (5.992, 7.18, 0.533, 1.372)  in the way (64514, 71131)  setters (rank, j) [(2, 0), (1, 0), (4, 0), (3, 1)]  winner rank 3 j 1
+        flank opening j=0: blocked by [(64514, 7.604)]
+        flank opening j=1: clear
+    core (206, 377, 1000) block (17536, 24359, 31295, 58265)  phases at t0 (eighths) (5.126, 6.248, 7.917, 2.84)  in the way (31295,)  setters (rank, j) [(3, 0), (2, 0), (1, 0), (4, 1), (3, 1)]  winner rank 3 j 1
+        flank opening j=0: blocked by [(24359, 7.09)]
+        flank opening j=1: clear
+    core (210, 248, 1000) block (40043, 41763, 73437, 112674)  phases at t0 (eighths) (6.681, 6.871, 5.7, 0.543)  in the way (112674,)  setters (rank, j) [(4, 0), (2, 0), (1, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(41763, 7.041)]
+        flank opening j=1: clear
+    core (587, 926, 1000) block (41082, 52763, 69359, 107728)  phases at t0 (eighths) (5.986, 1.886, 6.158, 7.523)  in the way (107728,)  setters (rank, j) [(4, 0), (3, 0), (1, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(69359, 7.109)]
+        flank opening j=1: clear
+    core (145, 455, 1000) block (21549, 24274, 30956, 44036)  phases at t0 (eighths) (4.614, 7.407, 5.49, 7.697)  in the way (24274, 44036)  setters (rank, j) [(2, 0), (3, 0), (1, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(24274, 0.125)]
+        flank opening j=1: clear
+    core (315, 805, 1000) block (34438, 52125, 53015, 87538)  phases at t0 (eighths) (5.327, 5.476, 0.302, 5.898)  in the way (53015,)  setters (rank, j) [(3, 0), (4, 0), (2, 0), (1, 0), (4, 1), (3, 1)]  winner rank 3 j 1
+        flank opening j=0: blocked by [(87538, 7.052)]
+        flank opening j=1: clear
+    core (495, 834, 1000) block (11345, 14005, 23778, 32653)  phases at t0 (eighths) (6.919, 4.293, 0.036, 1.966)  in the way (23778,)  setters (rank, j) [(3, 0), (1, 0), (4, 0), (2, 0), (3, 1)]  winner rank 3 j 1
+        flank opening j=0: blocked by [(11345, 7.379)]
+        flank opening j=1: clear
+    core (271, 968, 1000) block (36152, 40963, 44141, 62433)  phases at t0 (eighths) (5.402, 7.155, 2.882, 6.38)  in the way (40963,)  setters (rank, j) [(2, 0), (1, 0), (3, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(40963, 0.874)]
+        flank opening j=1: clear
+
+== f = 4, t0 = S1: 2 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 2
+  winning flank by rank (1 = slowest block reading): {}
+  winning flank's index j: {}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 0 of 0
+  g = the latest exit of the readings in the way at t0 (one move): 0 of 0
+  readings in the way at t0: {}
+  moves: {}
+  flank openings in (t0, g) passed without a visit: {}
+  (rank, j) of the winner: {}
+  paths with j > 0 (0), first 15 read:
+
+== f = 5, t0 = tau_C: 1000 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 273
+  winning flank by rank (1 = slowest block reading): {1: 93, 2: 119, 3: 149, 4: 175, 5: 191}
+  winning flank's index j: {0: 662, 1: 57, 2: 7, 3: 1}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 401 of 727
+  g = the latest exit of the readings in the way at t0 (one move): 373 of 727
+  readings in the way at t0: {1: 383, 2: 250, 3: 80, 4: 12, 5: 2}
+  moves: {1: 373, 2: 223, 3: 85, 4: 35, 5: 10, 6: 1}
+  flank openings in (t0, g) passed without a visit: {0: 251, 1: 198, 2: 152, 3: 74, 4: 36, 5: 11, 6: 4, 7: 1}
+  (rank, j) of the winner: {(1, 0): 93, (2, 0): 118, (2, 1): 1, (3, 0): 144, (3, 1): 5, (4, 0): 155, (4, 1): 19, (4, 2): 1, (5, 0): 152, (5, 1): 32, (5, 2): 6, (5, 3): 1}
+  paths with j > 0 (65), first 15 read:
+    core (458, 1000) block (49570, 50823, 91492, 109975, 208462)  phases at t0 (eighths) (4.231, 6.967, 7.764, 0.12, 7.157)  in the way (91492, 109975, 208462)  setters (rank, j) [(3, 0), (2, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(50823, 7.417), (91492, 0.573)]
+        flank opening j=1: clear
+    core (680, 1000) block (41887, 52522, 53536, 102825, 178277)  phases at t0 (eighths) (5.599, 5.238, 6.729, 7.213, 6.172)  in the way (102825,)  setters (rank, j) [(4, 0), (3, 0), (1, 0), (4, 1), (5, 2)]  winner rank 5 j 2
+        flank opening j=0: blocked by [(53536, 7.579), (102825, 0.844)]
+        flank opening j=1: blocked by [(41887, 0.143), (52522, 0.428)]
+        flank opening j=2: clear
+    core (479, 1000) block (34194, 51649, 52189, 69204, 106243)  phases at t0 (eighths) (7.386, 3.827, 4.954, 0.476, 5.802)  in the way (34194, 69204)  setters (rank, j) [(1, 0), (3, 0), (2, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(34194, 7.645)]
+        flank opening j=1: clear
+    core (475, 1000) block (16572, 22338, 25097, 39564, 42066)  phases at t0 (eighths) (2.888, 7.027, 4.836, 3.293, 0.56)  in the way (22338, 42066)  setters (rank, j) [(2, 0), (3, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(22338, 7.261)]
+        flank opening j=1: clear
+    core (198, 1000) block (25201, 41748, 70690, 110693, 193726)  phases at t0 (eighths) (7.278, 2.848, 5.02, 7.056, 2.414)  in the way (25201, 110693)  setters (rank, j) [(1, 0), (5, 1), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(25201, 7.72)]
+        flank opening j=1: clear
+    core (156, 1000) block (46085, 57001, 61770, 104688, 177328)  phases at t0 (eighths) (7.417, 5.391, 3.962, 7.077, 0.718)  in the way (46085, 104688, 177328)  setters (rank, j) [(1, 0), (2, 0), (3, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(46085, 0.263)]
+        flank opening j=1: clear
+    core (507, 1000) block (39711, 48623, 85929, 171808, 206065)  phases at t0 (eighths) (6.325, 7.903, 1.485, 2.872, 6.44)  in the way (48623,)  setters (rank, j) [(2, 0), (1, 0), (3, 0), (5, 2)]  winner rank 5 j 2
+        flank opening j=0: blocked by [(48623, 0.507)]
+        flank opening j=1: blocked by [(39711, 0.361)]
+        flank opening j=2: clear
+    core (465, 1000) block (57274, 84890, 111708, 187614, 359688)  phases at t0 (eighths) (3.17, 6.559, 0.232, 3.471, 5.523)  in the way (111708,)  setters (rank, j) [(3, 0), (2, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(84890, 7.38)]
+        flank opening j=1: clear
+    core (282, 1000) block (33123, 53714, 99108, 173208, 242712)  phases at t0 (eighths) (5.457, 6.475, 7.447, 6.213, 4.681)  in the way (99108,)  setters (rank, j) [(3, 0), (2, 0), (1, 0), (4, 2), (5, 3)]  winner rank 5 j 3
+        flank opening j=0: blocked by [(53714, 7.431)]
+        flank opening j=1: blocked by [(33123, 7.139), (173208, 7.004)]
+        flank opening j=2: blocked by [(33123, 0.23), (99108, 7.744)]
+        flank opening j=3: clear
+    core (474, 1000) block (57781, 101358, 101846, 151858, 212615)  phases at t0 (eighths) (1.901, 5.835, 6.865, 0.376, 0.555)  in the way (151858, 212615)  setters (rank, j) [(4, 0), (3, 0), (2, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(101846, 7.078), (151858, 0.693)]
+        flank opening j=1: clear
+    core (698, 1000) block (32756, 38698, 52951, 94732, 94748)  phases at t0 (eighths) (6.928, 7.441, 3.861, 7.719, 7.742)  in the way (38698, 94732, 94748)  setters (rank, j) [(2, 0), (1, 0), (3, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(32756, 7.371), (38698, 7.964)]
+        flank opening j=1: clear
+    core (708, 1000) block (27524, 43769, 61618, 82061, 145441)  phases at t0 (eighths) (6.876, 5.821, 7.031, 3.905, 5.425)  in the way (61618,)  setters (rank, j) [(3, 0), (1, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(27524, 7.552), (61618, 0.546)]
+        flank opening j=1: clear
+    core (537, 1000) block (16306, 21466, 39749, 63783, 102544)  phases at t0 (eighths) (6.365, 7.974, 2.02, 6.777, 6.957)  in the way (21466,)  setters (rank, j) [(2, 0), (1, 0), (5, 2)]  winner rank 5 j 2
+        flank opening j=0: blocked by [(21466, 0.402), (63783, 0.047)]
+        flank opening j=1: blocked by [(16306, 7.962)]
+        flank opening j=2: clear
+    core (671, 1000) block (47213, 90529, 123005, 206664, 276247)  phases at t0 (eighths) (6.362, 6.917, 7.316, 3.994, 3.694)  in the way (123005,)  setters (rank, j) [(3, 0), (1, 0), (4, 1), (3, 1)]  winner rank 3 j 1
+        flank opening j=0: blocked by [(47213, 7.009), (90529, 0.156), (276247, 7.477)]
+        flank opening j=1: clear
+    core (624, 1000) block (39517, 63155, 79741, 106658, 207351)  phases at t0 (eighths) (7.329, 5.21, 7.79, 2.926, 4.293)  in the way (39517, 79741)  setters (rank, j) [(1, 0), (2, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(39517, 0.226)]
+        flank opening j=1: clear
+
+== f = 6, t0 = tau_C: 1000 relays ==
+  CHECKS G1, G2, G3: 0 failures
+  block clear at t0 (g = t0): 191
+  winning flank by rank (1 = slowest block reading): {1: 78, 2: 82, 3: 118, 4: 141, 5: 184, 6: 206}
+  winning flank's index j: {0: 649, 1: 114, 2: 34, 3: 11, 4: 1}
+  ties (two flanks open at g): 0
+  winner in the way at t0: 424 of 809
+  g = the latest exit of the readings in the way at t0 (one move): 353 of 809
+  readings in the way at t0: {1: 372, 2: 280, 3: 118, 4: 33, 5: 6}
+  moves: {1: 353, 2: 222, 3: 136, 4: 54, 5: 22, 6: 14, 7: 6, 8: 2}
+  flank openings in (t0, g) passed without a visit: {0: 208, 1: 147, 2: 125, 3: 106, 4: 79, 5: 61, 6: 32, 7: 25, 8: 13, 9: 9, 10: 3, 11: 1}
+  (rank, j) of the winner: {(1, 0): 78, (2, 0): 82, (3, 0): 113, (3, 1): 5, (4, 0): 123, (4, 1): 18, (5, 0): 126, (5, 1): 47, (5, 2): 9, (5, 3): 2, (6, 0): 127, (6, 1): 44, (6, 2): 25, (6, 3): 9, (6, 4): 1}
+  paths with j > 0 (160), first 15 read:
+    core (1000,) block (53060, 56173, 109779, 144458, 233809, 357106)  phases at t0 (eighths) (5.06, 0.173, 5.779, 0.458, 1.809, 5.106)  in the way (56173, 144458)  setters (rank, j) [(2, 0), (3, 0), (6, 1)]  winner rank 6 j 1
+        flank opening j=0: blocked by [(56173, 0.786)]
+        flank opening j=1: clear
+    core (1000,) block (15012, 27634, 36515, 53447, 60896, 112675)  phases at t0 (eighths) (7.012, 3.634, 4.515, 5.447, 4.896, 0.675)  in the way (15012, 112675)  setters (rank, j) [(1, 0), (2, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(15012, 0.01), (60896, 0.944), (112675, 0.165)]
+        flank opening j=1: clear
+    core (1000,) block (22578, 39839, 63538, 110353, 173720, 214551)  phases at t0 (eighths) (6.578, 7.839, 7.538, 6.353, 5.72, 6.551)  in the way (39839, 63538)  setters (rank, j) [(2, 0), (1, 0), (5, 2)]  winner rank 5 j 2
+        flank opening j=0: blocked by [(22578, 7.004), (39839, 0.591), (63538, 0.738), (110353, 0.437)]
+        flank opening j=1: blocked by [(22578, 0.044)]
+        flank opening j=2: clear
+    core (1000,) block (47444, 84577, 131388, 193610, 357487, 569366)  phases at t0 (eighths) (7.444, 4.577, 3.388, 1.61, 5.487, 1.366)  in the way (47444,)  setters (rank, j) [(1, 0), (2, 0), (6, 3)]  winner rank 6 j 3
+        flank opening j=0: blocked by [(47444, 0.08)]
+        flank opening j=1: blocked by [(47444, 0.747), (357487, 7.303)]
+        flank opening j=2: blocked by [(84577, 0.088), (131388, 0.842)]
+        flank opening j=3: clear
+    core (1000,) block (54650, 70410, 127185, 239630, 467706, 668902)  phases at t0 (eighths) (6.65, 6.41, 7.185, 7.63, 3.706, 4.902)  in the way (127185, 239630)  setters (rank, j) [(3, 0), (1, 0), (5, 2)]  winner rank 5 j 2
+        flank opening j=0: blocked by [(54650, 7.269), (70410, 7.207), (127185, 0.625)]
+        flank opening j=1: blocked by [(54650, 0.203), (70410, 0.411), (668902, 7.915)]
+        flank opening j=2: clear
+    core (1000,) block (14827, 16150, 30465, 56131, 84951, 143531)  phases at t0 (eighths) (6.827, 0.15, 6.465, 0.131, 4.951, 7.531)  in the way (16150, 56131, 143531)  setters (rank, j) [(2, 0), (1, 0), (4, 1)]  winner rank 4 j 1
+        flank opening j=0: blocked by [(14827, 7.057), (16150, 0.4)]
+        flank opening j=1: clear
+    core (1000,) block (46596, 53083, 73995, 76728, 79239, 88106)  phases at t0 (eighths) (6.596, 5.083, 1.995, 4.728, 7.239, 0.106)  in the way (79239, 88106)  setters (rank, j) [(5, 0), (1, 0), (2, 0), (3, 0), (6, 1), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(46596, 7.632)]
+        flank opening j=1: clear
+    core (1000,) block (48995, 60512, 69883, 125130, 134900, 160800)  phases at t0 (eighths) (0.995, 4.512, 5.883, 5.13, 6.9, 0.8)  in the way (48995, 160800)  setters (rank, j) [(6, 0), (5, 0), (4, 0), (3, 0), (2, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(125130, 7.078)]
+        flank opening j=1: clear
+    core (1000,) block (24321, 42684, 55213, 101575, 184961, 289092)  phases at t0 (eighths) (0.321, 2.684, 7.213, 5.575, 0.961, 1.092)  in the way (24321, 55213, 184961)  setters (rank, j) [(3, 0), (4, 0), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(24321, 0.326), (55213, 7.225)]
+        flank opening j=1: clear
+    core (1000,) block (33164, 38670, 72243, 135913, 162991, 187246)  phases at t0 (eighths) (1.164, 6.67, 0.243, 7.913, 2.991, 3.246)  in the way (72243, 135913)  setters (rank, j) [(3, 0), (2, 0), (4, 1), (6, 1)]  winner rank 6 j 1
+        flank opening j=0: blocked by [(38670, 7.858), (162991, 8.0)]
+        flank opening j=1: clear
+    core (1000,) block (24474, 42841, 54347, 55841, 106029, 157539)  phases at t0 (eighths) (0.474, 2.841, 6.347, 7.841, 2.029, 5.539)  in the way (24474, 55841)  setters (rank, j) [(1, 0), (3, 0), (5, 0), (6, 1)]  winner rank 6 j 1
+        flank opening j=0: blocked by [(54347, 7.541)]
+        flank opening j=1: clear
+    core (1000,) block (55687, 79374, 106376, 207905, 327093, 571178)  phases at t0 (eighths) (7.687, 7.374, 2.376, 7.905, 7.093, 3.178)  in the way (55687, 79374, 207905, 327093)  setters (rank, j) [(1, 0), (6, 1), (5, 1)]  winner rank 5 j 1
+        flank opening j=0: blocked by [(55687, 0.012), (79374, 7.837)]
+        flank opening j=1: clear
+    core (1000,) block (43726, 86044, 87147, 140997, 202325, 208057)  phases at t0 (eighths) (3.726, 6.044, 7.147, 4.997, 2.325, 0.057)  in the way (87147, 208057)  setters (rank, j) [(3, 0), (2, 0), (6, 1)]  winner rank 6 j 1
+        flank opening j=0: blocked by [(87147, 7.542)]
+        flank opening j=1: clear
+    core (1000,) block (14866, 23789, 26310, 49005, 84259, 124192)  phases at t0 (eighths) (6.866, 7.789, 2.31, 1.005, 4.259, 4.192)  in the way (23789,)  setters (rank, j) [(2, 0), (1, 0), (4, 0), (6, 2)]  winner rank 6 j 2
+        flank opening j=0: blocked by [(14866, 7.442), (23789, 0.71), (84259, 7.521)]
+        flank opening j=1: blocked by [(14866, 0.399)]
+        flank opening j=2: clear
+    core (1000,) block (24160, 43487, 72609, 98714, 184681, 233677)  phases at t0 (eighths) (0.16, 3.487, 0.609, 2.714, 0.681, 1.677)  in the way (24160, 72609, 184681)  setters (rank, j) [(1, 0), (5, 1), (4, 0), (6, 1)]  winner rank 6 j 1
+        flank opening j=0: blocked by [(24160, 0.917)]
+        flank opening j=1: clear
