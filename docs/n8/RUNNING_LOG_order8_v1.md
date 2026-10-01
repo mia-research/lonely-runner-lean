@@ -9312,7 +9312,7 @@ clear opening recorded.
 | E235 (809) | 764 / 44 / 1 / 0 | 11, 17, 6, 7, 3, 2 |
 | E243 (820) | 778 / 40 / 1 / 1 | 16, 18, 5, 4, 1, 1 |
 
-- The winner is at index 0 of its flank in 699 of 809 and 608 of 820. Larger indices belong to the fastest flanks, where
+- The winner is at index 0 of its flank in 649 of 809 and 608 of 820. Larger indices belong to the fastest flanks, where
   the arc holds many openings.
 - At the winner, the largest walker step `max ĝ` is below 1/2 in all but 3 configurations.
 
