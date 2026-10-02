@@ -4,7 +4,8 @@
 # the setter is the blocker with the largest end (8j+1)/rho_y (ties: larger index wins, as in the exact cascade); next state = its exit.
 # A branch is kept iff its cell has an interior point (LP, maximal slack on the strict inequalities).  A leaf = no blocker.
 # Soundness: an exact rational witness of every leaf is run through the exact cascade.  Coverage: random exact arrangements must lie in exactly one leaf.
-import sys, math, time, random, itertools
+import sys, math, time, random, itertools, os
+TT = float(os.environ.get('TT', '1e-9'))
 from fractions import Fraction as F
 import numpy as np
 from scipy.optimize import linprog
@@ -35,7 +36,7 @@ def feasible(cons):
     if res.status != 0: return False, None
     t = res.x[-1]
     any_strict = any(k.strict for k in cons)
-    if any_strict and t < 1e-9: return False, None
+    if any_strict and t < TT: return False, None
     return True, res.x[:NV]
 def rng(cons, i):
     A = [list(-k.c) for k in cons]; b = [k.c0 for k in cons]
