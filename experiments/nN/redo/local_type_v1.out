@@ -1,0 +1,40 @@
+E282/E283 (2026-10-02): does the local type at the bound fix the isolation's role?  Design: log E282.
+Type tau(t): per reading, status ok / r0 / r1- / r7+ of P = 8 d t rounded to the nearest grid point (n + eps).
+arrangements: {'F1': 300, 'F2': 1200, 'F3': 4500, 'F4': 10459, 'F5': 2700, 'F6': 2619, 'residual': 5978}
+CHECKS: F1 (lonely iff all ok) failures 0; F2 (first setter = argmax rho/d, and its exit time) failures 0
+  F1        lonely at the bound: 156 of 300; moves max 7; nbad (at the bound) distribution {0: 156, 1: 82, 2: 41, 3: 18, 4: 2, 5: 1}
+  F2        lonely at the bound: 605 of 1200; moves max 11; nbad (at the bound) distribution {0: 605, 1: 503, 2: 91, 3: 1}
+  F3        lonely at the bound: 2348 of 4500; moves max 8; nbad (at the bound) distribution {0: 2348, 1: 1153, 2: 686, 3: 238, 4: 64, 5: 10, 6: 1}
+  F4        lonely at the bound: 4542 of 10459; moves max 13; nbad (at the bound) distribution {0: 4542, 1: 3813, 2: 1537, 3: 472, 4: 84, 5: 11}
+  F5        lonely at the bound: 615 of 2700; moves max 8; nbad (at the bound) distribution {0: 615, 1: 1151, 2: 689, 3: 202, 4: 37, 5: 6}
+  F6        lonely at the bound: 1381 of 2619; moves max 9; nbad (at the bound) distribution {0: 1381, 1: 620, 2: 425, 3: 146, 4: 40, 5: 7}
+  residual  lonely at the bound: 0 of 5978; moves max 10; nbad (at the bound) distribution {1: 1469, 2: 2396, 3: 1506, 4: 507, 5: 90, 6: 10}
+
+not lonely at the bound: 18109 arrangements in 1240 distinct types tau(bound)
+  groups with >= 3 members: 561; first setter rank determined by tau(bound) in 312 groups (12628 of 17227 arrangements)
+  groups with >= 3 members: 561; number of moves determined by tau(bound) in 30 groups (112 of 17227 arrangements)
+  groups with >= 3 members: 561; next type tau(t1) determined by tau(bound) in 21 groups (82 of 17227 arrangements)
+  groups with >= 3 members: 561; landing setter rank determined by tau(bound) in 10 groups (37 of 17227 arrangements)
+  nbad = 1: groups >= 3: 18; first setter rank pure in 18
+  nbad = 1: groups >= 3: 18; landing setter rank pure in 0
+  nbad = 1: groups >= 3: 18; moves pure in 0
+  nbad = 2: groups >= 3: 135; first setter rank pure in 63
+  nbad = 2: groups >= 3: 135; landing setter rank pure in 0
+  nbad = 2: groups >= 3: 135; moves pure in 0
+  nbad = 3: groups >= 3: 346; first setter rank pure in 193
+  nbad = 3: groups >= 3: 346; landing setter rank pure in 9
+  nbad = 3: groups >= 3: 346; moves pure in 22
+
+the largest mixed groups (tau(bound), size, distinct landing ranks, distinct moves, distinct tau(t1)):
+  oooooo0 size 1302 landing ranks {6: 873, 5: 171, 2: 57, 4: 131, 3: 46, 1: 24} moves {1: 828, 7: 4, 3: 114, 4: 48, 11: 6, 6: 40, 2: 210, 8: 17, 9: 2, 5: 32, 10: 1} tau1 30 kinds
+  ooooo0o size 1127 landing ranks {2: 31, 5: 730, 6: 206, 4: 94, 3: 60, 1: 6} moves {3: 82, 1: 708, 2: 250, 6: 7, 4: 43, 5: 31, 7: 5, 8: 1} tau1 35 kinds
+  oooooo+ size 920 landing ranks {4: 199, 3: 72, 5: 131, 6: 346, 2: 151, 1: 21} moves {3: 106, 2: 187, 5: 40, 1: 298, 6: 127, 11: 84, 8: 29, 9: 7, 10: 4, 7: 4, 4: 33, 13: 1} tau1 52 kinds
+  oooo0oo size 751 landing ranks {4: 377, 6: 128, 5: 121, 2: 30, 3: 80, 1: 15} moves {1: 365, 2: 224, 3: 96, 4: 32, 5: 20, 6: 9, 7: 4, 8: 1} tau1 53 kinds
+  ooo0ooo size 707 landing ranks {2: 46, 5: 156, 3: 249, 6: 138, 4: 100, 1: 18} moves {2: 244, 1: 245, 4: 52, 3: 147, 5: 11, 6: 3, 8: 2, 7: 3} tau1 79 kinds
+  o0ooooo size 459 landing ranks {1: 93, 6: 80, 4: 90, 3: 76, 2: 58, 5: 62} moves {1: 93, 4: 66, 2: 187, 3: 86, 5: 22, 7: 1, 6: 4} tau1 127 kinds
+  oooooo- size 429 landing ranks {6: 395, 4: 11, 5: 16, 3: 5, 1: 1, 2: 1} moves {1: 387, 3: 14, 5: 5, 2: 16, 6: 2, 4: 5} tau1 6 kinds
+  oo0oooo size 415 landing ranks {2: 105, 5: 79, 4: 76, 6: 81, 3: 51, 1: 23} moves {1: 104, 2: 127, 3: 111, 4: 53, 5: 14, 6: 3, 8: 2, 7: 1} tau1 100 kinds
+  ooooo+o size 402 landing ranks {5: 204, 6: 88, 3: 28, 4: 63, 2: 13, 1: 6} moves {1: 198, 3: 50, 8: 1, 2: 124, 4: 20, 6: 2, 5: 7} tau1 42 kinds
+  ooooo-o size 390 landing ranks {5: 343, 4: 10, 3: 7, 6: 25, 1: 1, 2: 4} moves {1: 341, 2: 32, 3: 9, 4: 5, 8: 1, 6: 1, 7: 1} tau1 7 kinds
+  oooo+oo size 319 landing ranks {5: 65, 2: 23, 6: 45, 4: 121, 3: 53, 1: 12} moves {3: 53, 1: 117, 2: 117, 4: 19, 7: 4, 5: 6, 6: 3} tau1 58 kinds
+  oooo-oo size 300 landing ranks {4: 256, 2: 7, 1: 2, 6: 19, 5: 9, 3: 7} moves {1: 255, 5: 1, 4: 8, 2: 22, 3: 14} tau1 9 kinds
