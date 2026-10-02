@@ -1,0 +1,10 @@
+terminals 9651 distinct paths 6705
+length hist [(2, 5), (3, 4), (5, 14), (6, 30), (7, 41), (8, 57), (9, 144), (10, 251), (11, 320), (12, 352), (13, 380), (14, 423), (15, 461), (16, 475), (17, 467), (18, 505), (19, 505), (20, 453), (21, 974), (22, 1437), (23, 1125), (24, 604), (25, 297), (26, 174), (27, 102), (28, 46), (29, 5)]
+prefix-closed nodes 17399
+order 1 contexts 45 mean succ 6.555555555555555
+order 2 contexts 265 mean succ 3.018867924528302
+order 3 contexts 680 mean succ 2.175
+last-moves 47 with >1 distinct successor set 42
+alphabet size 47 max lap 11
+max Rhi 11.966047985513807 min Rlo 1.2857142857142858
+paths where some rank repeats with non-increasing lap: 0
