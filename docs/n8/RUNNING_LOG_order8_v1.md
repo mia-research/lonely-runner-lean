@@ -10836,3 +10836,12 @@ Subagent results (checked by the agent on 131,659 + 20,511 steps from exact samp
 - The samplers (E325) put 0.7% of arrangements in K2b, 8% in K2c, 10% in K2d, and 72% in K0/K1; the tree cells are 99.8% opener-lap >= 2 with two or more moves. Tree cells are a partition by path, not a weighting, so these two sets of numbers are not comparable as frequencies; they show which classes each method reaches.
 - K2s2 (closer is the opener's own reading, opener lap >= 2; 621 in the sampler taxonomy) is absent from the cells with rho_7 <= 9, so that class lives in readings beyond the one-lap window.
 **Consequence:** the classes reached by sampling and by the tree overlap only in K2c/K2d; K0, K1*, K2s2 and K2z are sampler classes, and the long-path, rank-1-setting, R up to 12 region is tree only.
+
+## E329 (2026-10-03) -- where the readings sit at the landing (tree-cell members, rho_7 <= 9)
+
+**Map:** position of each reading (R* rho mod 8, clear range [1,7]) at the landing, for the 9,197 exact cell members. Artifacts: `position_hist_J1_v1.out`, `grid_at_landing_J1_v1.out`.
+- **Pressed against the exit side.** Of 64,379 reading positions, 12,897 lie in [1, 1.25) (just past the lower edge: the reading has just left its zone) and 1,066 in (6.75, 7] (just short of entering its next zone). A uniform spread over [1,7] gives about 2,680 in each band, so the lower band is about 4.8 times uniform and the upper band about 0.4 times.
+- Rank 7: 3,558 of its 9,197 positions fall in [0.67, 1.33) alone. The floor-position pattern (1,1,1,1,6,2,1) is the most common (222 members), 1,639 patterns in all.
+- Mean distance to the nearest integer position is 0.25 for ranks 1-3 (uniform value) and falls to 0.158 for rank 7: the fastest readings sit nearer integer positions at the landing.
+- Caveat: one member per cell; cells are a partition by path, not frequencies, so these are statements about the cells' members.
+**Consequence:** at the landing the cascade has pushed R until the last reader leaves its zone, leaving the others just past their own exits. The isolation window after R* is closed from the upper side by whichever reading is about to enter, and those readings are the rare ones; the window width is therefore set by the few readings away from the exit edge, not by the pressed ones.
