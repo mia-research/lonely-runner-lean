@@ -1,0 +1,9 @@
+family         distinct coarse results after n = 100, 200, 400, 800, 1600 arrangements   |  full results at 1600  |  max moves
+random         [21, 32, 44, 70, 111]                            |  214 | 7
+AP deformed    [14, 20, 30, 36, 42]                             |   42 | 8
+grid+laps      [26, 43, 70, 101, 159]                           |  245 | 9
+clump          [20, 30, 38, 49, 63]                             |  202 | 6
+integers<=40   [34, 50, 77, 125, 193]                           |  312 | 11
+rational       [28, 39, 63, 88, 145]                            |  307 | 13
+scaled AP      [9, 10, 12, 16, 24]                              |   24 | 11
+near-chain     [7, 9, 14, 16, 18]                               |   19 | 5
