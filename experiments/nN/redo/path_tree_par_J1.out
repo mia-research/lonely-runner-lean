@@ -1,0 +1,17 @@
+window rho_7 <= 9: frontier of 15 subtrees (depth 2), 1s
+   subtree [(3, 1), (2, 1)]         nodes      1 terminal     1 depth  2 sup R 1.6531 violations 0 (0s)  | total nodes 1, sup R so far 1.6531
+   subtree [(4, 1), (2, 1)]         nodes      1 terminal     1 depth  2 sup R 1.6531 violations 0 (0s)  | total nodes 2, sup R so far 1.6531
+   subtree [(5, 1), (2, 1)]         nodes      1 terminal     1 depth  2 sup R 1.6531 violations 0 (0s)  | total nodes 3, sup R so far 1.6531
+   subtree [(6, 1), (2, 1)]         nodes      1 terminal     1 depth  2 sup R 1.6531 violations 0 (0s)  | total nodes 4, sup R so far 1.6531
+   subtree [(7, 1), (2, 1)]         nodes      1 terminal     1 depth  2 sup R 1.6531 violations 0 (0s)  | total nodes 5, sup R so far 1.6531
+   subtree [(7, 1), (3, 1)]         nodes      2 terminal     1 depth  3 sup R 2.1254 violations 0 (0s)  | total nodes 7, sup R so far 2.1254
+   subtree [(6, 1), (3, 1)]         nodes     99 terminal    28 depth 16 sup R 5.0184 violations 0 (7s)  | total nodes 106, sup R so far 5.0184
+   subtree [(4, 1), (3, 1)]         nodes    278 terminal    93 depth 17 sup R 4.3990 violations 0 (19s)  | total nodes 384, sup R so far 5.0184
+   subtree [(7, 1), (4, 1)]         nodes    280 terminal    94 depth 18 sup R 5.5398 violations 0 (20s)  | total nodes 664, sup R so far 5.5398
+   subtree [(5, 1), (3, 1)]         nodes    614 terminal   216 depth 23 sup R 6.6381 violations 0 (45s)  | total nodes 1278, sup R so far 6.6381
+   subtree [(5, 1), (4, 1)]         nodes   1342 terminal   469 depth 27 sup R 9.6520 violations 0 (97s)  | total nodes 2620, sup R so far 9.6520
+   subtree [(6, 1), (4, 1)]         nodes   1932 terminal   636 depth 25 sup R 9.4049 violations 0 (146s)  | total nodes 4552, sup R so far 9.6520
+   subtree [(7, 1), (5, 1)]         nodes   2112 terminal   716 depth 28 sup R 10.9801 violations 0 (164s)  | total nodes 6664, sup R so far 10.9801
+   subtree [(6, 1), (5, 1)]         nodes   4962 terminal  1557 depth 29 sup R 10.4286 violations 0 (342s)  | total nodes 11626, sup R so far 10.9801
+   subtree [(7, 1), (6, 1)]         nodes  15891 terminal  5836 depth 29 sup R 11.9660 violations 0 (992s)  | total nodes 27517, sup R so far 11.9660
+DONE window rho_7 <= 9: nodes 27517, terminal 9651, deepest 29, nodes cut at depth 60: 0, SUPREMUM of the landing R* over the window = 11.966048 at path ([(7, 1), (6, 1), (5, 1), (4, 1), (7, 2), (3, 1), (6, 2), (5, 2), (2, 1), (4, 2), (6, 3), (7, 4), (5, 3), (3, 2), (6, 4), (4, 3), (5, 4), (7, 6), (2, 2), (1, 1), (5, 6), (4, 5), (2, 3), (5, 7), (6, 8), (4, 6), (7, 11)], np.float64(11.966047985513807)), violations of the partition/soundness checks: 0, 1001s
