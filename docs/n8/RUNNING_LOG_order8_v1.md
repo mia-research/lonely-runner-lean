@@ -10078,3 +10078,22 @@ These are counts by place on constructed members, not a proof.
 - What the data support: **some cluster flank has a free opening in `c`'s run** (0 of 5,978 members and 0 of 12,000 random clusters without one), with the cascade landing at any rank 1–6. That is the shape C1's cascade landing takes; whether it needs `EightResidual` is open (random clusters have the landing at `c`'s flank in 2,493 of 12,000, which no member has).
 - The persistent classes at a flank are derived and fully accounted for (`(1,−)` below, near-harmonic above, `A mod 8 ∈ {0,1,7}`); what remains unaccounted for is the **hand-off** (mixing) coverage, which is level across ranks. A proof has to say why a run of 6–100+ openings is not covered by hand-offs at *every* cluster flank at once.
 - Next, native: (i) construct `EightResidual` members with ranks 1 and 2 both shadowed (E263's Part 3 method, constraint = both shadowed), which tests whether the rank-2 witness is forced by the fields; (ii) read the hand-offs as sweeps and half-integer structures (E257–E258) per flank to find what a joint cover of all six flanks would need.
+
+## E267 — 2026-10-02 — design: ranks 1 and 2 both shadowed on `EightResidual`; the hand-offs and the joint cover of all six flanks
+
+**Owner:** *"yes, run both"* (E266's two next steps).
+
+**Map:** v3 §9 C1; E266's open items: what forces rank 2's witness; what a joint cover of all six flanks needs.
+
+**Test 1 (E263 Part 3's method, a different constraint).**
+- *Starts:* random clusters (`c ∈ [10⁶, 10⁷)`, cluster `≥ 25c`), half with a forced near-twin pair at ranks 1–2 (`e₂ = e₁ + g·c`, `g ∈ [0.02, 0.30]`), half unforced; a start is kept when `c` is never in the way and **ranks 1 and 2 are both shadowed** (single walker or hand-off), all openings of `c`'s run read exactly (`inway`, Theorem 6.14). About 4 million samples.
+- *Build:* each distinct start scaled to `c' = L·u` (`u ∈ [1, 19]`), cluster `round(ratio·c')`; integer adjustments (E263's moves), climbing on fields passed (16 predicates), **ranks 1 and 2 kept shadowed at every accepted step**; 6 restarts × 400 steps. Control: same starts, constraint removed.
+- *Read on each member:* ranks 1 and 2 states; the landing flank (record's convention); lonely; `study`'s checks.
+- *Checks:* start states satisfy the constraint after scaling; `c` never in the way; lonely at the landing, exact.
+
+**Test 2 (hand-offs, joint cover).** Objects: the line reading `A_j + ε_j u (mod 8)`, `c`'s run, greedy segments of a hand-off (flank's own).
+- (a) Every hand-off flank on the 5,978 members and the random clusters: occupants' `|ε|` weighted by the openings each covers (bins 0–0.05, 0.05–0.15, 0.15–0.35, 0.35–0.45, 0.45–0.5: sweep, mixing, half-integer).
+- (b) The state pattern over the six flanks per member and per random cluster (free / one walker / hand-off), and the number of shadowed flanks.
+- (c) What a **chain** of persistent shadows needs: flanks `2…m` each shadowed by the twin below needs each gap `e_i − e_{i−1} < c/3` (from `|ε|(u_hi − u_lo) < 2`, `|ε| = gap/e`, `u_hi − u_lo = 6e/c`); I test, on clusters built with twin chains of length 1…5 at the top, which flank patterns occur and whether rank 1 is free whenever flanks 2…6 are all chain-shadowed.
+
+**Native check.** Objects as in E266; construction climbs on membership only under a structural constraint, as E263. Nothing is scored for hardness; no rate is offered as an answer.
