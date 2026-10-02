@@ -10584,3 +10584,11 @@ No reason: E297 marked the `D = 1` grid facts "not formalised" and stopped. Form
 - `move_at_grid`: for `S` positive readings, `c ∈ S`, `8 ∣ c`, `c` least multiple of `8` in `S`, `a` odd: `move 8 (S.image cast) (a/8) = a/8 + 1/(8c)`. The cascade's first move is the displacement of `lonely_of_displacement`, with no band hypothesis.
 - `inWay_at_exit_iff`: at `a/8 + 1/(8c)` a reading is in the way iff `∃ z, |x(ac+1) − 8cz| < c`.
 Not coded: the next `move` from that instant and the composition to a certificate `(b, k)`.
+
+## E301 — 2026-10-02 — owner: "code the second move and the composition"
+
+**Map:** the cascade's `move` at a state `K/(8m)`; its start `1/(8·d_min)` is `K = 1`, `m = d_min`.
+- **Second move and composition already exist as general theorems** (read, `Cascade/Iteration.lean`, `Cascade/ScaleCandidates.lean`, `Spec/Doors.lean`): `move` iterated; `move_eq_self_or_opening`; `iterate_mem_openings` (every iterate below a lonely time is the start or an opening); `lonely_iff_run_ends` (lonely iff the iteration from `1/(8m)` reaches a fixed point, and iff a `Run` ends in a lonely time); `lonely_iff_exists_flank`, `lonely_iff_exists_candidate_scale`; `Flanks.lonely_iff_emod_search` (the congruence certificate); `doors_agree`. Recoding them would duplicate.
+- **Correction of E297/E299:** their grid is `D = 1` (instants `a/8`), which is the cascade's own start only when the reading 1 is present (`d_min = 1`, `1/(8·d_min) = 1/8`). For `d_min = m > 1` the ideal gap is `m`, the deviations are `(y mod m)/m`, and the start is `1/(8m)`. `move_at_grid`/`lonely_of_displacement` are exact statements at the states `a/8`; they are on the cascade's path only when `d_min = 1`.
+- **Coded (`IntegerDisplacementN.lean`, built clean, axioms `[propext, Classical.choice, Quot.sound]`, no `sorry`):** `nextOpening_rational` (blocker `x`, `|x·K − 8m·z| < m`: opens at `(8z+1)/(8x)`), `inWay_rational_iff`, `move_rational_le_iff` (`move ≤ s` iff `K/(8m) ≤ s` and every blocker's opening `≤ s`). These cover every state, in particular the start, with `m = d_min`.
+- **What remains of the proof, as a Lean statement:** for every `EightResidual` set, the iteration from `1/(8·d_min)` reaches a fixed point (`lonely_iff_run_ends`, left side).
