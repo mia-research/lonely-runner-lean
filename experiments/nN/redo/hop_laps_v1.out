@@ -1,0 +1,31 @@
+hops examined: 383 ; endpoints not identified: 0
+DEATH of the first component (forward hop)
+   zone end (A, lap 0) meets zone start (B, lap 1) ; A slower : 51
+   zone end (A, lap 0) meets zone start (B, lap 3) ; A slower : 38
+   zone end (A, lap 0) meets zone start (B, lap 2) ; A slower : 19
+   zone end (A, lap 3) meets zone start (B, lap 3) ; A faster : 12
+   zone end (A, lap 1) meets zone start (B, lap 2) ; A slower : 11
+   zone end (A, lap 0) meets zone start (B, lap 4) ; A slower : 7
+   zone end (A, lap 2) meets zone start (B, lap 3) ; A slower : 6
+   zone end (A, lap 2) meets zone start (B, lap 1) ; A faster : 4
+   zone end (A, lap 3) meets zone start (B, lap 4) ; A slower : 4
+   zone end (A, lap 3) meets zone start (B, lap 2) ; A faster : 3
+   zone end (A, lap 1) meets zone start (B, lap 4) ; A slower : 3
+   zone end (A, lap 4) meets zone start (B, lap 4) ; A faster : 3
+   zone end (A, lap 1) meets zone start (B, lap 1) ; A faster : 2
+   zone end (A, lap 0) meets zone start (B, lap 14) ; A slower : 2
+BIRTH of an earlier component (backward hop)
+   zone end (A, lap 0) meets zone start (B, lap 1) ; A slower : 23
+   zone end (A, lap 0) meets zone start (B, lap 3) ; A slower : 21
+   zone end (A, lap 1) meets zone start (B, lap 1) ; A faster : 18
+   zone end (A, lap 1) meets zone start (B, lap 3) ; A slower : 18
+   zone end (A, lap 0) meets zone start (B, lap 2) ; A slower : 15
+   zone end (A, lap 3) meets zone start (B, lap 13) ; A slower : 6
+   zone end (A, lap 0) meets zone start (B, lap 5) ; A slower : 6
+   zone end (A, lap 2) meets zone start (B, lap 2) ; A faster : 6
+   zone end (A, lap 3) meets zone start (B, lap 4) ; A slower : 6
+   zone end (A, lap 0) meets zone start (B, lap 6) ; A slower : 5
+   zone end (A, lap 0) meets zone start (B, lap 11) ; A slower : 5
+   zone end (A, lap 4) meets zone start (B, lap 3) ; A faster : 5
+   zone end (A, lap 2) meets zone start (B, lap 1) ; A faster : 4
+   zone end (A, lap 1) meets zone start (B, lap 2) ; A slower : 3

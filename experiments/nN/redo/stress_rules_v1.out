@@ -1,0 +1,3 @@
+effective-crossing rule on coincidence-rich bases: predictions 270 ; exact: 269 ; not: 1
+   MISMATCH ('rationals', (0, 3, 4), 0.31847706605376236, (0.32786885245901637, (6, 1, 1)), None)
+hop = gap event on the same crossings: {'continuous': 41, 'forward = first component dies': 38, 'backward = earlier component born': 14}
