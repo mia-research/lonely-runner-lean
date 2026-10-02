@@ -10342,3 +10342,19 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 - So the carrying rule at a wall has two cases: a non-tight arrangement (a margin window exists: nothing to prove at the wall) and a tight one (a classification question). The multi-pinch is not an open step of its own.
 
 **What a proof now needs** (not started): the statement **(T): a whole-number arrangement with no positive-width lonely window (tight) has only simple pinches** (equivalently, no tight arrangement has a doubled-edge pinch as its only lonely instants). `[VERIFIED — readings ≤ 24, E113]`. A route to (T): characterise the tight arrangements. The literature report (E276) notes Beck–Everett's theorem is about exactly this object (a tight instance, lon `= 1/(k+1)`, lies on a hyperplane `m·n = 0` with small `‖m‖₁`, the AP among them); the owner has set the literature aside as coverage and density, and the object here, the tight arrangement, is the pinch-only one; whether its statement (not its Fourier proof) is of use is the owner's call.
+
+## E281 — 2026-10-02 — owner: it is not the conjecture itself; existence may not be necessary; do walls and hand-off belong, or are they imported? E279's closing bullets withdrawn
+
+**Owner** (on E279's "What this does and doesn't give", pasted): *"Its not the conjecture itself. I've never been sure existence is necessary, you have argued that either existence or exhibit is necessary. Dos it really need walls and handoff? Or is that imported?"*
+
+**Map:** v4 §4 Q8; E145, E230, E279–E280. **No run.** A reassessment.
+
+**Withdrawn:** E279's "finding one whose type vector is good is the conjecture itself" and "the content is the carrying rule at every wall". The first is true only for an unrestricted search over grids (Theorem 6.15, `doors_agree`: "some opening of some reading is lonely" is the conjecture); with the grid, class and instant determined by the readings it is a construction, which is the owner's picture. The second took "deformation" literally as following the isolation through pinch events.
+
+**On existence.** The statement proved is an existence statement, but a proof need not contain a separate existence step: a total rule from a base case with the invariant preserved at each step (transport) is a third form besides existence and exhibit (E230: *"induction, construction"*). Its weak point is totality: for the cascade's relay (the entering reading's next exit) totality is termination, the conjecture in disguise (F4); for a finite table of local types it is a finite check.
+
+**On walls and hand-off.** Derived in the record from the cascade's own definition (E113–E186, Levels A–C), not imported; not shown necessary. They are the language of following an isolation along a path. In a type-and-cell architecture each cell has its named instant (as `gridT` in `GridNeighbourhoodN`) proved lonely on its own region, and walls are only cell boundaries, relevant to exhaustiveness; E280 found a margin window at every multi-pinch read, so no rule at the wall was needed away from tight arrangements.
+
+**What that architecture needs:** (1) types defined from the speeds alone, not from the landing (E145: types defined by the landing make "every arrangement has a type" the conjecture); (2) a named instant per type, loneliness proved locally; (3) exhaustiveness.
+
+**Proposed test (not run):** at the bound the local type is the residue mod 8 and sign of `ε` of each reading on the grid through the slowest reading (E279). Does that type alone fix the isolation's role (setter rank; bound or not) on the E274 families and the residual members? If it does, a table works without walls; if the isolation depends on ratios beyond the type, the grid through the captured reading is part of the type, and whether that chain is finite without being defined by the outcome has to be examined.
