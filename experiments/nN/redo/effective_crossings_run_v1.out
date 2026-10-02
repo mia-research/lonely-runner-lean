@@ -1,0 +1,4 @@
+predictions: 600 ; equal to the observed next change (or both: no further change): 598 ; not: 2
+by number of movers (total, matching): [(1, [110, 110]), (2, [108, 106]), (3, [118, 118]), (4, [86, 86]), (5, [106, 106]), (6, [72, 72])]
+  MISMATCH ('AP', (1, 4), 0.03427600679524333, 1.0, None, (6, -1, 1))
+  MISMATCH ('AP', (1, 4), 0.5664035175377236, 1.0, None, (6, -1, 1))

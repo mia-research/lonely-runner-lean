@@ -1,0 +1,2 @@
+observed changes of the move sequence: 115 ; explained by a predicted edge crossing: 115 ; unexplained: 0
+types of the first matching crossing: [(('frozen end', 'mover start'), 34), (('mover end', 'mover start'), 32), (('frozen start', 'mover end'), 22), (('frozen start', 'mover start'), 14), (('mover start', 'mover start'), 9), (('mover end', 'mover end'), 2), (('frozen end', 'mover end'), 2)]

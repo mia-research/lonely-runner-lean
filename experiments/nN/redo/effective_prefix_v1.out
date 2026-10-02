@@ -1,0 +1,2 @@
+effective crossings checked: 170 ; common prefix of the move sequence before/after is i or i-1 (the first differing move leaves state i, or state i-1 for a setter swap): 170
+by kind of the crossing edge (start/end, prefix == i): [(('end', 'prefix=i'), 38), (('end', 'prefix=i-1'), 17), (('start', 'prefix=i'), 115)]
