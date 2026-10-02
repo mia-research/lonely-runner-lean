@@ -17,6 +17,9 @@ of `c`.  Every other reading `x` has moved by `x/c` eighths of a lap.
 * `inWay_at_grid_iff`: at the grid instant `a/8`, `a` odd, a reading is in the way exactly when `8 ∣ x`.
 * `inWay_at_exit_iff`: the readings in the way at that next instant, exactly.
 * `nextOpening_at_grid`, `move_at_grid`: the cascade's move from `a/8` is `a/8 + 1/(8c)`, `c` the slowest multiple of `8`.
+* `nextOpening_rational`, `inWay_rational_iff`, `move_rational_le_iff`: the same at every instant `K/(8m)`, in particular
+  the cascade's own start `1/(8 d_min)` (`K = 1`, `m = d_min`): a blocker `x` with `|x·K − 8m·z| < m` opens at
+  `(8z+1)/(8x)`, and `move ≤ s` iff `K/(8m) ≤ s` and every blocker's opening is `≤ s`.
 * `lonely8_example`: the arrangement with readings `1,2,3,4,5,7,8` (speeds 1,2,3,4,5,6,8,9 for subject speed `s = 1`; any `s > 0` gives the same) is lonely at `9/56`,
   the leaving edge of the reading `7`, where the slot-`7` reading `7` was carried by the first displacement.
 
@@ -197,5 +200,61 @@ theorem move_at_grid (S : Finset ℕ) {c : ℕ} (hcS : c ∈ S) (hc8 : 8 ∣ c) 
     have hmem : (c : ℝ) ∈ S.image (fun x : ℕ => (x : ℝ)) := Finset.mem_image.mpr ⟨c, hcS, rfl⟩
     have := nextOpening_le_move hmem hw
     rwa [nextOpening_at_grid hc hc8] at this
+
+open MomentIterationN in
+theorem nextOpening_rational {x m : ℕ} (hx : 0 < x) (hm : 0 < m) {K z : ℤ}
+    (h : |(x : ℤ) * K - 8 * m * z| < m) :
+    nextOpening 8 (x : ℝ) ((K : ℝ) / (8 * m)) = (8 * (z : ℝ) + 1) / (8 * (x : ℝ)) := by
+  letI : Fact (2 ≤ 8) := ⟨by norm_num⟩
+  have hxR : (0 : ℝ) < x := by exact_mod_cast hx
+  have hmR : (0 : ℝ) < m := by exact_mod_cast hm
+  have hh : |(x : ℝ) * K - 8 * m * z| < m := by exact_mod_cast h
+  have hk : |(x : ℝ) * ((K : ℝ) / (8 * m)) - (z : ℝ)| < ((8 : ℕ) : ℝ)⁻¹ := by
+    have e : (x : ℝ) * ((K : ℝ) / (8 * m)) - z = ((x : ℝ) * K - 8 * m * z) / (8 * m) := by
+      field_simp
+    rw [e, abs_div, abs_of_pos (show (0 : ℝ) < 8 * m by positivity),
+      div_lt_iff₀ (show (0 : ℝ) < 8 * m by positivity)]
+    have e2 : ((8 : ℕ) : ℝ)⁻¹ * (8 * (m : ℝ)) = m := by norm_num; field_simp
+    rw [e2]; exact hh
+  rw [nextOpening_eq (n := 8) hxR hk]
+  norm_num
+  field_simp
+
+open MomentIterationN in
+theorem inWay_rational_iff {x m : ℕ} (hm : 0 < m) {K : ℤ} :
+    inWay 8 (x : ℝ) ((K : ℝ) / (8 * m)) ↔ ∃ z : ℤ, |(x : ℤ) * K - 8 * m * z| < m := by
+  unfold inWay
+  have h := clear_rational_iff hm (x : ℤ) K
+  have h8 : (((8 : ℕ) : ℝ))⁻¹ = (8 : ℝ)⁻¹ := by norm_num
+  rw [h8, ← not_le]
+  have e : ((x : ℤ) : ℝ) = (x : ℝ) := by simp
+  rw [e] at h
+  rw [h]
+  push Not
+  rfl
+
+open MomentIterationN in
+theorem move_rational_le_iff (S : Finset ℕ) (hpos : ∀ x ∈ S, 0 < x) {m : ℕ} (hm : 0 < m) {K : ℤ} {s : ℝ} :
+    move 8 (S.image (fun x : ℕ => (x : ℝ))) ((K : ℝ) / (8 * m)) ≤ s ↔
+      (K : ℝ) / (8 * m) ≤ s ∧
+        ∀ x ∈ S, ∀ z : ℤ, |(x : ℤ) * K - 8 * m * z| < m → (8 * (z : ℝ) + 1) / (8 * (x : ℝ)) ≤ s := by
+  classical
+  unfold move
+  rw [Finset.fold_max_le]
+  constructor
+  · rintro ⟨h0, h⟩
+    refine ⟨h0, fun x hx z hz => ?_⟩
+    have hw : inWay 8 (x : ℝ) ((K : ℝ) / (8 * m)) := (inWay_rational_iff hm).mpr ⟨z, hz⟩
+    have := h (x : ℝ) (Finset.mem_image.mpr ⟨x, hx, rfl⟩)
+    rw [if_pos hw, nextOpening_rational (hpos x hx) hm hz] at this
+    exact this
+  · rintro ⟨h0, h⟩
+    refine ⟨h0, fun d hd => ?_⟩
+    obtain ⟨x, hx, rfl⟩ := Finset.mem_image.mp hd
+    split_ifs with hw
+    · obtain ⟨z, hz⟩ := (inWay_rational_iff hm).mp hw
+      rw [nextOpening_rational (hpos x hx) hm hz]
+      exact h x hx z hz
+    · exact h0
 
 end LRC.IntegerDisplacement
