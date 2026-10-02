@@ -10790,3 +10790,14 @@ Artifact: `LonelyRunner/experiments/nN/redo/terminals_J1.pkl`, `language_J1_v1.o
 - Supremum of the landing 11.966048, identical path and vertex to the one-lap window (7,1)...(7,11).
 - Late-state dictionary (nodes, interior included): T=3:25.0, 5:25.0, 7:24.65, 9:24.40, 10:8.70, 11:8.37, 11.5:7.86. States above 10 need rho_7 <= 8.70.
 **Consequence:** over three laps no landing exceeds the one-lap extremum, 11.966048; supremum stable over windows 9, 17, 25. Not shown: landings above 7 confined to rho_7 <= 9 (dictionary is on nodes; terminal-landing version owed, needs par3 on J=3 or J=2). Cells grow ~6x from J=2 to J=3 (747k vs 117k terminal).
+
+## E325 (2026-10-03) -- outcome taxonomy by subagent, spot-checked
+
+**Map:** classes of arrangements by where the cascade lands; objects: readings, zones, laps, setters, landing, closer. Artifacts: `LonelyRunner/experiments/nN/redo/taxo_outcome_classes_v1.md`, `taxo_*.py`, `taxo_*.out`, `taxo_sample_v1.pkl` (52,000 exact arrangements, 50,709 distinct; 8 generators incl. near-8-multiples, geometric ladders, distinct integers).
+- Fourteen classes, mutually exclusive, covering the sample, with an independent labeller (computes the class without iterating the cascade) agreeing with the cascade labeller in all 52,000: K0 (no move, 14,418), K0z (no move, zero-width window, 4,029), K1a/K1b (one move, opener lap 1 / >=2, 11,258 / 9,067), K1s1/K1s2 (one move, closer is the opener's own reading, 93 / 341), K1z (5), K2b/K2c/K2d (two or more moves; 2,482 / 4,198 / 5,394), K2s2 (621), K2z (94); K2a and K2s1 empty.
+- **Landing law:** the landing is the least clear point of {1} union all exits. Subagent: 0 violations in 52,000. My independent recomputation on the 20,000-arrangement survey: 0 violations.
+- **K2a is empty by argument:** with two or more moves the opener's own zone never contains R = 1, so a lap-1 opener would need to be a strip reading, which is a single move. Independent check: 0 of 4,491 (survey), 0 lap-1 strip openers with >= 2 moves.
+- **K2s1 is unreached and unproved:** zero hits in the 52,000, in 120,000 further cascades from three search modes, and in 99,802 cascades from a family built for it. Not proved empty; the lap >= 2 strip blocker case is unclosed by hand.
+- **Exception, exit ties:** opener rule "highest-rank zone with exit R*" mislabelled 7 arrangements; zones with a common exit are nested and the cascade's setter is the one with the earlier entry. Corrected rule: smallest entry, then highest rank (9 of 9 tie rows).
+- **Not verified:** the K1s1/K1s2/K2s1/K2s2 conditions are stated approximately; checked only through the labeller's direct closer computation.
+**Consequence:** the outcome of every arrangement in the sample is one of 12 realised classes by an explicit first-step rule plus the landing law; two named classes remain unreached.
