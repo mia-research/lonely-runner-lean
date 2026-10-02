@@ -1,0 +1,41 @@
+====================================================================================================
+AP, speeds s+1..s+7 movers (readings #6,#7) [6.0, 7.0] -> [6.3, 8.5]
+ frozen runners' lonely set (fixed for the whole path):  [1.000-1.400, 2.250-2.333, 3.000, 3.400-3.500, 4.500-4.600, 5.000, 5.667-5.750, 6.600-7.000, 9.000-9.400]
+   s 0.00-0.00 : landing in frozen component #0  [[1.000-1.400]] (last landing R = 1.0000)
+   s 0.03-0.17 : landing in frozen component #2  [[3.000]] (last landing R = 3.0000)
+   s 0.20-0.62 : landing in frozen component #1  [[2.250-2.333]] (last landing R = 2.2500)
+   s 0.65-1.00 : landing in frozen component #0  [[1.000-1.400]] (last landing R = 1.0588)
+====================================================================================================
+AP movers (readings #5,#7) [5.0, 7.0] -> [5.0, 8.1]
+ frozen runners' lonely set (fixed for the whole path):  [1.000-1.167, 1.500-1.750, 2.250-2.333, 3.000-3.500, 4.500-5.000, 5.667-5.750, 6.250-6.500, 6.833-7.000, 9.000-9.167, 9.500]
+   s 0.00-0.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.0000)
+   s 0.03-0.25 : landing in frozen component #3  [[3.000-3.500]] (last landing R = 3.0000)
+   s 0.28-0.62 : landing in frozen component #2  [[2.250-2.333]] (last landing R = 2.2500)
+   s 0.65-1.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.1111)
+====================================================================================================
+AP movers (readings #4,#7) [4.0, 7.0] -> [4.6, 7.8]
+ frozen runners' lonely set (fixed for the whole path):  [1.000-1.167, 1.800-2.333, 3.000, 3.400-3.500, 4.500-4.600, 5.000, 5.667-6.200, 6.833-7.000, 9.000-9.167]
+   s 0.00-0.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.0000)
+   s 0.03-0.35 : landing in frozen component #2  [[3.000]] (last landing R = 3.0000)
+   s 0.38-0.88 : landing in frozen component #1  [[1.800-2.333]] (last landing R = 2.2078)
+   s 0.90-1.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.1538)
+====================================================================================================
+AP movers (readings #3,#7) [3.0, 7.0] -> [2.7, 7.5]
+ frozen runners' lonely set (fixed for the whole path):  [1.000-1.167, 2.250-2.500, 2.833-3.000, 3.400-3.500, 4.500-4.600, 5.000-5.167, 5.500-5.750, 6.833-7.000, 9.000-9.167]
+   s 0.00-0.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.0000)
+   s 0.03-0.23 : landing in frozen component #5  [[5.000-5.167]] (last landing R = 5.0000)
+   s 0.25-1.00 : landing in frozen component #1  [[2.250-2.500]] (last landing R = 2.2667)
+====================================================================================================
+AP movers (readings #2,#7) [2.0, 7.0] -> [2.0, 8.0]
+ frozen runners' lonely set (fixed for the whole path):  [1.000-1.167, 2.250-2.333, 3.000, 3.400-3.750, 4.250-4.600, 5.000, 5.667-5.750, 6.833-7.000, 9.000-9.167]
+   s 0.00-0.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.0000)
+   s 0.03-0.28 : landing in frozen component #2  [[3.000]] (last landing R = 3.0000)
+   s 0.30-0.70 : landing in frozen component #1  [[2.250-2.333]] (last landing R = 2.2500)
+   s 0.72-1.00 : landing in frozen component #0  [[1.000-1.167]] (last landing R = 1.1250)
+====================================================================================================
+AP movers (readings #1,#7) [1.0, 7.0] -> [1.0, 8.9]
+ frozen runners' lonely set (fixed for the whole path):  [0.500-1.167, 2.250-2.333, 3.000, 3.400-3.500, 4.500-4.600, 5.000, 5.667-5.750, 6.833-7.500, 8.500-9.167]
+   s 0.00-0.00 : landing in frozen component #0  [[0.500-1.167]] (last landing R = 1.0000)
+   s 0.03-0.15 : landing in frozen component #2  [[3.000]] (last landing R = 3.0000)
+   s 0.17-0.38 : landing in frozen component #1  [[2.250-2.333]] (last landing R = 2.2500)
+   s 0.40-1.00 : landing in frozen component #0  [[0.500-1.167]] (last landing R = 1.0112)
