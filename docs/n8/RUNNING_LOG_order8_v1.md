@@ -10262,3 +10262,21 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 - **Open in the literature that touches this programme:** Perarnau–Serra Problem 4 (is the conjecture preserved under `a + V`); Rifford's uniform lap bound (Conjecture 29).
 
 **Consequence.** The finite-cover and deformation work stands as this programme's own; no literature step is available to adopt. Two items are worth reading in full against the map, as data and not as instruction: Beck–Everett's theorem (a finite family of integer hyperplanes constrains where a counterexample can be; compare the wall arrangement of Level C and the relay condition), and Tao's dichotomy (compare "free or locked", E272, now a proxy statement). Neither is started.
+
+## E277 — 2026-10-02 — design: the multi-pinches of E178 read; a first-order criterion derived before the run
+
+**Owner:** *"yes, read the multi-pinches first"* (and: the literature steps are about coverage and density, which do not look for isolation or boundary events, so Beck–Everett and Tao are left aside for now).
+
+**Map:** v4 §2 E, §9 C8; E113–E114, E178–E179. M2 class (d), a map run; the derivation is stated first (M8) and the run checks it.
+
+**Derived (first order at a pinch; no new object).** Take the path `d_i(s) = i + s·e_i`, a pinch at `s₀`, instant `t₀`, the pinching window's lap assignment `k`. Let `Λ` = readings on the leaving edge at `t₀` (position `k_i + 1/8`), `E` = readings on the entering edge (`k_j + 7/8`), and `u_i = e_i/d_i(s₀)` the relative rate of reading `i` along the path. The window's left endpoint is `max_{i∈Λ} (8k_i+1)/(8d_i(s))` and its right endpoint `min_{j∈E} (8k_j+7)/(8d_j(s))`; both have value `t₀` at `s₀`, with derivatives `−t₀u_i`, `−t₀u_j`.
+- The window is non-empty just after `s₀` iff **`min_Λ u ≥ max_E u`** (A). Just before: iff `max_Λ u ≤ min_E u`.
+- **The mirror** (`t ↦ P − t`, `P` a common period at `s₀`, laps `k̃_i = d_i(s₀)P − k_i − 1`, roles swapped: `E` leaving, `Λ` entering) is an exact symmetry only at `s₀`; for `s ≠ s₀` it is shifted by `(d_i(s) − d_i(s₀))P`, which is what breaks the tie. Its window is non-empty just after `s₀` iff **`min_E u ≥ max_Λ u`** (B).
+- **Simple pinch** (`|Λ| = |E| = 1`): (A) says `u_a ≥ u_b`, (B) says `u_b ≥ u_a`: at least one holds. This is E113's "exactly one of `t₀`, `1 − t₀` opens" (`PinchOpenN`, `TwoPinnerN`), now with its reason.
+- **Multi-pinch:** (A) and (B) both fail exactly when the `u`-values of `Λ` and of `E` **interleave** (`min_Λ u < max_E u` and `min_E u < max_Λ u`), which needs `|Λ| + |E| ≥ 3`; e.g. `u_a < u_b < u_{a′}` with `Λ = {a, a′}`, `E = {b}`. In that case neither `t₀` nor its mirror reopens on that side and another lonely instant has to be favourable.
+- A direction `w` that separates the two ranges at every multi-pinch met would make every pinch passable; the interleaving set is open (not a codimension), so it is not avoided by genericity; E114's avoidance is by the choice of path through a generic point, which avoids multi-pinches altogether, and not by orienting the path at them.
+
+**Run (same populations and path as E178; scripts `deform_pinch_v1`/`deform_protect_v1` reused).** For every event with a multi-pinch: `(|Λ|, |E|)`, the reading indices, the `u` values; the exact test of (A) and (B) (the pinching assignment `k` and the mirror assignment `k̃` evaluated by exact `feasible` at `s₀ ± δ`, `δ = 10⁻⁹`) against the criterion; for each interleaving event (neither reopens), the protecting windows (positive width at `τ`): AP-origin (`feasible` for the AP with the same laps), earlier or later than `t₀` in `R = 8·d_min·t`, containing the mirror `P − t₀`, at a recurrence time of a doubled pair (`(τ_p − t₀)·(d_a − d_{a′}) ∈ ℤ`), otherwise. Every protector not in a listed class is read individually (M3).
+
+**Checks (forced):** the criterion agrees with the exact test at every non-tied event (ties listed separately, since first order does not decide them); `c`-in-the-way style checks of E178 (the oracle: cascade landing = first component) carried over; the pinch is single-point at `τ`.
+**Not read:** counts as rates. The multi-pinches are listed by place.
