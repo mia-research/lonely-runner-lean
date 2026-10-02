@@ -65,8 +65,9 @@ has an interior point; the tree branches on the setter and on possible straddler
 ## 4. Wider windows
 
 TWO-LAP WINDOW (`ρ_7 ≤ 17`) [EXHAUSTIVE, same method and caveats as §3]: 343,070 nodes (12.5 × the one-lap window), 117,070 terminal, deepest path 29, 0 branches cut, 0 violations of the partition and soundness checks, 2,832 s on 9 workers.
-**The supremum of the landing over this window is again `26433/2209 = 11.966048`**, attained by the same one-lap cell: the second lap adds cells and no later landing. THREE-LAP WINDOW (`ρ_7 ≤ 25`): running (`path_tree_par2_J3.out`; 12,640 top-level subtrees; expected hours); it also records the largest `ρ_7`
-among cells whose state can exceed `T` for `T = 3, 5, 7, 9, 10, 11, 11.5`, which tests directly whether late landings live only in the one-lap window.
+**The supremum of the landing over this window is again `26433/2209 = 11.966048`**, attained by the same one-lap cell: the second lap adds cells and no later landing. THREE-LAP WINDOW (`ρ_7 ≤ 25`) [EXHAUSTIVE, same method and caveats]: 2,092,661 nodes, 747,487 terminal, deepest path 34, 0 branches cut, 0 violations of the partition and soundness checks, 13,975 s.
+**The supremum of the landing is again `11.966048`**, same one-lap path and vertex: the second and third laps add cells and no later landing.
+The late-state dictionary (largest `ρ_7` among NODES whose state can exceed `T`; interior nodes included, so it is not a landing statement): `T = 3: 25.0, 5: 25.0, 7: 24.65, 9: 24.40, 10: 8.70, 11: 8.37, 11.5: 7.86`. Reading: an intermediate state above 9 can occur at `ρ_7` up to 24.4, but a state above 10 (and so any landing above 10) occurs only with `ρ_7 ≤ 8.70`, inside the one-lap window. The same statement for terminal landings at `T = 7` is NOT established by this dictionary (terminals were stored only for the one-lap run).
 Searches [SEARCH] beyond the one-lap window found no landing above 7 with `ρ_7 > 9` (hard-set search), and hill-climbs from lap-added copies of the extremal arrangement reach only `R* ≈ 6.8–6.9` in windows 17 and 25.
 Number of moves is not bounded by the one-lap window: tight fast clusters give paths of 41 moves with `R* = 2.27` (E320 search), landing small.
 

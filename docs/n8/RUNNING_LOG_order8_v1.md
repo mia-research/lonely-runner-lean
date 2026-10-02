@@ -10782,3 +10782,11 @@ Artifact: `LonelyRunner/experiments/nN/redo/terminals_J1.pkl`, `language_J1_v1.o
 - NOT a Markov language: successor set depends on more than the last letter (42 of 47 last-letters have more than one distinct successor set); mean successors 6.6 / 3.0 / 2.2 for context length 1 / 2 / 3. The words are therefore not a regular grammar on the last move; the cell geometry (the LP) carries the state.
 - Sup landing 11.966048 unchanged; late landings (state able to exceed T) have rho_7 closure at most 9.0 for T = 3..9, and 8.70 / 8.37 / 7.86 for T = 10 / 11 / 11.5.
 **Consequence:** the one-lap map is a finite list of 9,651 cells / 6,705 words, not a grammar; no state-reduction found. Three-lap tree still running (9,975+/12,640 subtrees, 0 violations).
+
+## E324 (2026-10-03) -- three-lap window tree complete
+
+**Map:** same symbolic cascade tree, window `rho_7 <= 25`. Artifact: `LonelyRunner/experiments/nN/redo/path_tree_par2_J3.out`.
+- 2,092,661 nodes, 747,487 terminal, deepest 34, 0 cut, 0 partition/soundness violations, 13,975 s.
+- Supremum of the landing 11.966048, identical path and vertex to the one-lap window (7,1)...(7,11).
+- Late-state dictionary (nodes, interior included): T=3:25.0, 5:25.0, 7:24.65, 9:24.40, 10:8.70, 11:8.37, 11.5:7.86. States above 10 need rho_7 <= 8.70.
+**Consequence:** over three laps no landing exceeds the one-lap extremum, 11.966048; supremum stable over windows 9, 17, 25. Not shown: landings above 7 confined to rho_7 <= 9 (dictionary is on nodes; terminal-landing version owed, needs par3 on J=3 or J=2). Cells grow ~6x from J=2 to J=3 (747k vs 117k terminal).
