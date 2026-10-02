@@ -1,0 +1,28 @@
+E266: (1) the random cluster(s) with ranks 1 and 2 both shadowed (slow_flank_mech_v2 [B]); (2) per exception, the walkers whose shift
+frees rank 1 in >= 6 of 8 shifts (critical set) against the shadowers named in slow_flank_mech_v1.out.
+seed 24: x/c [33.44, 33.51, 42.57, 51.05, 65.3, 66.35]; x/x1 [1.0, 1.002, 1.273, 1.526, 1.953, 1.984]; states ['handoff', 'alone', 'free', 'free', 'free', 'free']; landing flank c, R = 8 c t = 1.0000
+   rank 1 hand-off: n 25, occupants (walker: openings) {5: 8, 3: 7, 4: 7, 6: 16}
+   rank 2 alone: walker 1, A 1, eps -0.0021, ratio 0.9979
+
+critical walkers (shift frees rank 1 in >= 6/8) per exception:
+   seed 118 B base landing 2: critical [1, 3]
+   seed 118 B base landing 6: critical [1, 6]
+   seed 201 A base landing 2: critical [1, 3, 5, 6]
+   seed 202 B base landing 6: critical [1, 6]
+   seed 202 B base landing 4: critical [2, 6]
+   seed 203 B base landing 3: critical [1, 2]
+   seed 204 B base landing 4: critical [1, 2]
+   seed 205 A base landing 3: critical [1, 2, 3, 4, 5, 6]
+   seed 205 B base landing 3: critical [1, 3]
+   seed 206 B base landing 5: critical [1, 6]
+   seed 208 B base landing 5: critical [1, 3, 5]
+   seed 208 B base landing 6: critical [1, 5]
+   seed 209 A base landing 3: critical [1, 3, 5]
+   seed 209 B base landing 4: critical [1, 3, 4, 5, 6]
+   seed 209 B base landing 5: critical [1, 5]
+   seed 209 B base landing 6: critical [1, 4]
+   seed 209 B base landing 3: critical [1, 6]
+   seed 210 B base landing 4: critical [1, 3, 5, 6]
+   seed 210 B base landing 5: critical [1]
+   seed 210 B base landing 3: critical [1, 5]
+   seed 210 B base landing 6: critical [1, 6]

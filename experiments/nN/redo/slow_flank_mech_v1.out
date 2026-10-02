@@ -1,0 +1,128 @@
+E265/E266 (2026-10-02): why the slowest cluster flank clears; the 21 rank-1 exceptions through the cascade.  Design: log E265.
+Reading: rho_j(u) = x_j u / e mod 8 = A_j + eps_j u (mod 8), x_j/e = A_j + eps_j; in the way iff rho_j in (-1, 1) mod 8.
+members: 5978; line reading rho = (A + eps u) mod 8 vs (x u/e) mod 8 mismatches over all openings: 0
+
+[1] single-walker shadows across the whole run, by cluster rank (members): {1: 10, 2: 95, 3: 133, 4: 129, 5: 119, 6: 123}
+   rank 1: 10; (A mod 8, sign eps): {(0, '+'): 3, (7, '+'): 2, (0, '-'): 3, (1, '-'): 2}; min ratio x_j/e = 7.0017; max |eps|*u_lo = 0.169; max |eps|*(u_hi-u_lo) = 0.874
+   rank 2: 95; (A mod 8, sign eps): {(1, '-'): 95}; min ratio x_j/e = 0.9889; max |eps|*u_lo = 0.366; max |eps|*(u_hi-u_lo) = 1.668
+   rank 3: 133; (A mod 8, sign eps): {(1, '-'): 133}; min ratio x_j/e = 0.9899; max |eps|*u_lo = 0.334; max |eps|*(u_hi-u_lo) = 1.692
+   rank 4: 129; (A mod 8, sign eps): {(1, '-'): 129}; min ratio x_j/e = 0.9913; max |eps|*u_lo = 0.328; max |eps|*(u_hi-u_lo) = 1.684
+   rank 5: 119; (A mod 8, sign eps): {(1, '-'): 119}; min ratio x_j/e = 0.9912; max |eps|*u_lo = 0.308; max |eps|*(u_hi-u_lo) = 1.700
+   rank 6: 123; (A mod 8, sign eps): {(1, '-'): 123}; min ratio x_j/e = 0.9930; max |eps|*u_lo = 0.331; max |eps|*(u_hi-u_lo) = 1.690
+   READING 1 at rank 1 (alone => ratio > 7, A mod 8 in {0,1,7} with the block-keeping sign): ratio <= 7 violations: 0; (A mod 8, sign) outside the allowed set: 0
+
+[2] random clusters (c in [1e6,1e7), cluster in [25c, 25c*span), span from 1.5 to 40), flanks with c never in the way: 72000
+   rank 1: flanks 12000; single-walker shadows 22; min ratio of the shadower 7.0004; (A mod 8, sign): {(7, '+'): 12, (0, '+'): 4, (1, '-'): 5, (0, '-'): 1}; max |eps|*(span) 1.564
+   rank 2: flanks 12000; single-walker shadows 418; min ratio of the shadower 0.9887; (A mod 8, sign): {(1, '-'): 417, (7, '+'): 1}; max |eps|*(span) 1.693
+   rank 3: flanks 12000; single-walker shadows 428; min ratio of the shadower 0.9891; (A mod 8, sign): {(1, '-'): 428}; max |eps|*(span) 1.688
+   rank 4: flanks 12000; single-walker shadows 410; min ratio of the shadower 0.9898; (A mod 8, sign): {(1, '-'): 410}; max |eps|*(span) 1.686
+   rank 5: flanks 12000; single-walker shadows 409; min ratio of the shadower 0.9906; (A mod 8, sign): {(1, '-'): 409}; max |eps|*(span) 1.684
+   rank 6: flanks 12000; single-walker shadows 384; min ratio of the shadower 0.9918; (A mod 8, sign): {(1, '-'): 384}; max |eps|*(span) 1.694
+   rank 1 violations of 'alone => ratio > 7': 0; outside allowed (A mod 8, sign): 0
+
+[3] rank-1 exceptions: 21
+
+seed 118 B: base landing rank 2; rank-1 state alone; rank-2 state free; x/x1 [1.0, 4.184, 8.007, 10.977, 13.71, 22.484]
+   shadower(s) at e1 and at e2: [{'j': 3, 'A1': 8, 'eps1': 0.006574632831135446, 'A2': 2, 'eps2': -0.08620286813426065, 'eta': 3.183606767675326, 'pred_eps2': -0.08620286813426065}]
+   rank-2 witness opening u = 81: readings (walker, rho, margin to block edge): [(1, 3.361, 2.361), (3, 3.018, 2.018), (4, 4.525, 2.475), (5, 1.452, 0.452), (6, 3.311, 2.311)]
+   shifts freeing rank 1, by shifted walker (of {1: 1}): {1: 1}; landing ranks by shifted walker: {(1, 3): 1}; CHECKS: 0 failures
+
+seed 118 B: base landing rank 6; rank-1 state alone; rank-2 state free; x/x1 [1.0, 1.071, 3.885, 5.125, 5.424, 7.002]
+   shadower(s) at e1 and at e2: [{'j': 6, 'A1': 7, 'eps1': 0.001720769072089082, 'A2': 7, 'eps2': -0.46160157684692615, 'eta': 0.07086174869343353, 'pred_eps2': -0.46160157684692615}]
+   rank-2 witness opening u = 81: readings (walker, rho, margin to block edge): [(1, 3.64, 2.64), (3, 5.867, 1.133), (4, 3.689, 2.689), (5, 2.235, 1.235), (6, 1.61, 0.61)]
+   shifts freeing rank 1, by shifted walker (of {1: 7, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 7, 2: 2, 6: 8}; landing ranks by shifted walker: {(1, 1): 2, (1, 4): 3, (1, 6): 2, (2, 1): 1, (2, 2): 1, (2, 5): 1, (2, 6): 5, (3, 3): 3, (3, 6): 5, (4, 4): 2, (4, 6): 6, (5, 5): 1, (5, 6): 7, (6, 3): 4, (6, 6): 4}; CHECKS: {' cascade != earliest first-clear': 4}
+
+seed 201 A: base landing rank 2; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.443, 1.977, 2.263, 2.486, 3.498]
+   shadower(s) at e1 and at e2: [{'j': 6, 'openings': 12, 'of': 24, 'A1': 3, 'eps1': 0.4979845385770792, 'A2': 2, 'eps2': 0.4236076173773369}, {'j': 3, 'openings': 10, 'of': 24, 'A1': 2, 'eps1': -0.0233866103949333, 'A2': 1, 'eps2': 0.3695129909309393}, {'j': 5, 'openings': 7, 'of': 24, 'A1': 2, 'eps1': 0.48614358663666896, 'A2': 2, 'eps2': -0.27745478345725066}, {'j': 2, 'openings': 5, 'of': 24, 'A1': 1, 'eps1': 0.44329656067113693, 'A2': 1, 'eps2': 0.0}, {'j': 4, 'openings': 4, 'of': 24, 'A1': 2, 'eps1': 0.26338039499897836, 'A2': 2, 'eps2': -0.4317981094983694}]
+   rank-2 witness opening u = 49: readings (walker, rho, margin to block edge): [(1, 1.95, 0.95), (3, 3.106, 2.106), (4, 4.842, 2.158), (5, 4.405, 2.595), (6, 6.757, 0.243)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 8, 2: 4, 3: 8, 5: 8, 6: 8}; landing ranks by shifted walker: {(1, 1): 1, (1, 2): 7, (2, 1): 4, (2, 2): 2, (2, 6): 2, (3, 2): 7, (3, 3): 1, (4, 2): 7, (4, 6): 1, (5, 2): 7, (5, 6): 1, (6, 2): 5, (6, 6): 3}; CHECKS: 0 failures
+
+seed 202 B: base landing rank 6; rank-1 state alone; rank-2 state free; x/x1 [1.0, 1.442, 2.462, 2.487, 2.75, 7.997]
+   shadower(s) at e1 and at e2: [{'j': 6, 'A1': 8, 'eps1': -0.0033568383976398716, 'A2': 6, 'eps2': -0.4544389257467851, 'eta': 0.44198991851860847, 'pred_eps2': -0.4544389257467851}]
+   rank-2 witness opening u = 73: readings (walker, rho, margin to block edge): [(1, 2.624, 1.624), (3, 4.612, 2.388), (4, 5.928, 1.072), (5, 3.232, 2.232), (6, 4.826, 2.174)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 7, 6: 7}; landing ranks by shifted walker: {(1, 3): 1, (1, 6): 7, (2, 2): 2, (2, 3): 1, (2, 6): 5, (3, 3): 2, (3, 6): 6, (4, 4): 1, (4, 6): 7, (5, 5): 1, (5, 6): 7, (6, 3): 5, (6, 6): 3}; CHECKS: {' cascade != earliest first-clear': 5}
+
+seed 202 B: base landing rank 4; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 3.766, 4.211, 7.077, 15.05, 29.28]
+   shadower(s) at e1 and at e2: [{'j': 5, 'openings': 4, 'of': 6, 'A1': 15, 'eps1': 0.05012390029770056, 'A2': 4, 'eps2': -0.0032327255570226017}, {'j': 4, 'openings': 3, 'of': 6, 'A1': 7, 'eps1': 0.07684524579906203, 'A2': 2, 'eps2': -0.12064646961826174}, {'j': 6, 'openings': 2, 'of': 6, 'A1': 29, 'eps1': 0.27986309032283635, 'A2': 8, 'eps2': -0.22432988759259884}, {'j': 2, 'openings': 2, 'of': 6, 'A1': 4, 'eps1': -0.23442575790325182, 'A2': 1, 'eps2': 0.0}, {'j': 3, 'openings': 1, 'of': 6, 'A1': 4, 'eps1': 0.21065083256627454, 'A2': 1, 'eps2': 0.11819620643615267}]
+   rank-2 witness opening u = 41: readings (walker, rho, margin to block edge): [(1, 2.888, 1.888), (3, 5.846, 1.154), (4, 5.053, 1.947), (5, 3.867, 2.867), (6, 6.802, 0.198)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 203 B: base landing rank 3; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 4.872, 13.238, 16.511, 22.384, 24.806]
+   shadower(s) at e1 and at e2: [{'j': 3, 'openings': 2, 'of': 6, 'A1': 13, 'eps1': 0.23765391339117622, 'A2': 3, 'eps2': -0.28316701237764597}, {'j': 6, 'openings': 2, 'of': 6, 'A1': 25, 'eps1': -0.1938861350576177, 'A2': 5, 'eps2': 0.09108856326996495}, {'j': 4, 'openings': 2, 'of': 6, 'A1': 17, 'eps1': -0.4887622094563652, 'A2': 3, 'eps2': 0.38868773797200307}, {'j': 5, 'openings': 2, 'of': 6, 'A1': 22, 'eps1': 0.3840373727075684, 'A2': 5, 'eps2': -0.406006870384747}, {'j': 2, 'openings': 2, 'of': 6, 'A1': 5, 'eps1': -0.12754226200111196, 'A2': 1, 'eps2': 0.0}]
+   rank-2 witness opening u = 49: readings (walker, rho, margin to block edge): [(1, 2.057, 1.057), (3, 5.125, 1.875), (4, 6.046, 0.954), (5, 1.106, 0.106), (6, 1.463, 0.463)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 204 B: base landing rank 4; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 3.441, 8.959, 14.981, 16.959, 19.648]
+   shadower(s) at e1 and at e2: [{'j': 3, 'openings': 5, 'of': 6, 'A1': 9, 'eps1': -0.04124243062365925, 'A2': 3, 'eps2': -0.3965994202453528}, {'j': 5, 'openings': 5, 'of': 6, 'A1': 17, 'eps1': -0.040960517665042065, 'A2': 5, 'eps2': -0.07173032884443345}, {'j': 6, 'openings': 2, 'of': 6, 'A1': 20, 'eps1': -0.3521279460839261, 'A2': 6, 'eps2': -0.2903598964481067}, {'j': 2, 'openings': 1, 'of': 6, 'A1': 3, 'eps1': 0.44117522253169456, 'A2': 1, 'eps2': 0.0}]
+   rank-2 witness opening u = 41: readings (walker, rho, margin to block edge): [(1, 3.915, 2.915), (3, 2.739, 1.739), (4, 2.496, 1.496), (5, 2.059, 1.059), (6, 2.095, 1.095)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 205 A: base landing rank 3; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.237, 1.462, 1.67, 1.764, 1.802]
+   shadower(s) at e1 and at e2: [{'j': 3, 'openings': 7, 'of': 19, 'A1': 1, 'eps1': 0.46160989026391985, 'A2': 1, 'eps2': 0.1816450713350221}, {'j': 4, 'openings': 7, 'of': 19, 'A1': 2, 'eps1': -0.32974109363490284, 'A2': 1, 'eps2': 0.35032830422580324}, {'j': 2, 'openings': 5, 'of': 19, 'A1': 1, 'eps1': 0.23692801308991507, 'A2': 1, 'eps2': 0.0}, {'j': 5, 'openings': 5, 'of': 19, 'A1': 2, 'eps1': -0.2358991716678279, 'A2': 1, 'eps2': 0.42619522693592327}, {'j': 6, 'openings': 4, 'of': 19, 'A1': 2, 'eps1': -0.19829121428377508, 'A2': 1, 'eps2': 0.45659954876068826}]
+   rank-2 witness opening u = 57: readings (walker, rho, margin to block edge): [(1, 6.082, 0.918), (3, 3.354, 2.354), (4, 4.969, 2.031), (5, 1.293, 0.293), (6, 3.026, 2.026)]
+   shifts freeing rank 1, by shifted walker (of {1: 6, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 6, 2: 6, 3: 8, 4: 7, 5: 8, 6: 6}; landing ranks by shifted walker: {(1, 3): 6, (2, 2): 1, (2, 3): 6, (2, 4): 1, (3, 3): 2, (3, 4): 2, (3, 5): 4, (4, 3): 6, (4, 4): 2, (5, 3): 6, (5, 4): 2, (6, 3): 7, (6, 4): 1}; CHECKS: {' cascade != earliest first-clear': 6}
+
+seed 205 B: base landing rank 3; rank-1 state alone; rank-2 state free; x/x1 [1.0, 4.192, 8.995, 17.214, 20.267, 21.816]
+   shadower(s) at e1 and at e2: [{'j': 3, 'A1': 9, 'eps1': -0.005399938918763099, 'A2': 2, 'eps2': 0.14564121592455284, 'eta': 3.1920335955167976, 'pred_eps2': 0.14564121592455284}]
+   rank-2 witness opening u = 161: readings (walker, rho, margin to block edge): [(1, 6.406, 0.594), (3, 1.448, 0.448), (4, 5.118, 1.882), (5, 2.394, 1.394), (6, 5.854, 1.146)]
+   shifts freeing rank 1, by shifted walker (of {1: 1}): {1: 1}; landing ranks by shifted walker: {(1, 3): 1}; CHECKS: 0 failures
+
+seed 206 B: base landing rank 5; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 2.62, 8.218, 9.374, 12.452, 15.026]
+   shadower(s) at e1 and at e2: [{'j': 6, 'openings': 8, 'of': 9, 'A1': 15, 'eps1': 0.02604907039613733, 'A2': 6, 'eps2': -0.26514281403705753}, {'j': 4, 'openings': 3, 'of': 9, 'A1': 9, 'eps1': 0.37396090541512406, 'A2': 4, 'eps2': -0.42232453737498915}, {'j': 3, 'openings': 3, 'of': 9, 'A1': 8, 'eps1': 0.2184969864207183, 'A2': 3, 'eps2': 0.13667992694416828}, {'j': 5, 'openings': 2, 'of': 9, 'A1': 12, 'eps1': 0.45159293871496997, 'A2': 5, 'eps2': -0.2477123622628753}, {'j': 2, 'openings': 2, 'of': 9, 'A1': 3, 'eps1': -0.37987388645440057, 'A2': 1, 'eps2': 0.0}]
+   rank-2 witness opening u = 57: readings (walker, rho, margin to block edge): [(1, 5.755, 1.245), (3, 2.791, 1.791), (4, 3.928, 2.928), (5, 6.88, 0.12), (6, 6.887, 0.113)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 208 B: base landing rank 5; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.568, 6.006, 7.839, 8.004, 8.626]
+   shadower(s) at e1 and at e2: [{'j': 3, 'openings': 40, 'of': 54, 'A1': 6, 'eps1': 0.005563344087725204, 'A2': 4, 'eps2': -0.16897581524962477}, {'j': 5, 'openings': 26, 'of': 54, 'A1': 8, 'eps1': 0.003627446312880127, 'A2': 5, 'eps2': 0.10561433720324076}, {'j': 6, 'openings': 14, 'of': 54, 'A1': 9, 'eps1': -0.3738565977877753, 'A2': 6, 'eps2': -0.4972749263341733}, {'j': 4, 'openings': 14, 'of': 54, 'A1': 8, 'eps1': -0.16071784443267362, 'A2': 5, 'eps2': 0.0007764148598058167}, {'j': 2, 'openings': 12, 'of': 54, 'A1': 2, 'eps1': -0.4323869924932254, 'A2': 1, 'eps2': 0.0}]
+   rank-2 witness opening u = 129: readings (walker, rho, margin to block edge): [(1, 2.291, 1.291), (3, 6.202, 0.798), (4, 5.1, 1.9), (5, 2.624, 1.624), (6, 5.852, 1.148)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 8, 3: 8, 5: 8}; landing ranks by shifted walker: {(1, 1): 3, (1, 3): 4, (1, 4): 1, (2, 2): 1, (2, 5): 7, (3, 4): 2, (3, 5): 6, (4, 3): 2, (4, 5): 6, (5, 1): 4, (5, 4): 2, (5, 5): 2, (6, 4): 3, (6, 5): 5}; CHECKS: 0 failures
+
+seed 208 B: base landing rank 6; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 3.098, 4.081, 5.419, 6.017, 6.76]
+   shadower(s) at e1 and at e2: [{'j': 5, 'openings': 14, 'of': 18, 'A1': 6, 'eps1': 0.017480558758069555, 'A2': 2, 'eps2': -0.05762018829484439}, {'j': 3, 'openings': 6, 'of': 18, 'A1': 4, 'eps1': 0.08104228549037505, 'A2': 1, 'eps2': 0.3173177825251819}, {'j': 6, 'openings': 5, 'of': 18, 'A1': 7, 'eps1': -0.23969780649526065, 'A2': 2, 'eps2': 0.18215486921319954}, {'j': 2, 'openings': 5, 'of': 18, 'A1': 3, 'eps1': 0.09799377160716477, 'A2': 1, 'eps2': 0.0}, {'j': 4, 'openings': 3, 'of': 18, 'A1': 5, 'eps1': 0.4190926536773912, 'A2': 2, 'eps2': -0.2507735479190147}]
+   rank-2 witness opening u = 89: readings (walker, rho, margin to block edge): [(1, 4.728, 2.272), (3, 5.241, 1.759), (4, 3.681, 2.681), (5, 4.872, 2.128), (6, 2.212, 1.212)]
+   shifts freeing rank 1, by shifted walker (of {1: 5, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 5, 5: 8, 6: 5}; landing ranks by shifted walker: {(1, 4): 1, (1, 6): 4, (2, 2): 2, (2, 3): 5, (2, 6): 1, (3, 5): 6, (3, 6): 2, (4, 4): 1, (4, 5): 2, (4, 6): 5, (5, 4): 1, (5, 5): 1, (5, 6): 6, (6, 2): 5, (6, 4): 1, (6, 6): 2}; CHECKS: 0 failures
+
+seed 209 A: base landing rank 3; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.471, 1.982, 2.038, 2.935, 3.212]
+   shadower(s) at e1 and at e2: [{'j': 3, 'openings': 15, 'of': 20, 'A1': 2, 'eps1': -0.017591999750268695, 'A2': 1, 'eps2': 0.3475420347580422}, {'j': 5, 'openings': 7, 'of': 20, 'A1': 3, 'eps1': -0.06528973094770785, 'A2': 2, 'eps2': -0.00513040358701847}, {'j': 4, 'openings': 7, 'of': 20, 'A1': 2, 'eps1': 0.03779641012064788, 'A2': 1, 'eps2': 0.3851923118604676}, {'j': 2, 'openings': 6, 'of': 20, 'A1': 1, 'eps1': 0.4711288769598066, 'A2': 1, 'eps2': 0.0}, {'j': 6, 'openings': 5, 'of': 20, 'A1': 3, 'eps1': 0.21190176314649373, 'A2': 2, 'eps2': 0.1832905420116008}]
+   rank-2 witness opening u = 49: readings (walker, rho, margin to block edge): [(1, 1.308, 0.308), (3, 2.03, 1.03), (4, 3.874, 2.874), (5, 1.749, 0.749), (6, 2.981, 1.981)]
+   shifts freeing rank 1, by shifted walker (of {1: 7, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 7, 3: 8, 5: 6}; landing ranks by shifted walker: {(1, 3): 6, (1, 5): 1, (2, 2): 1, (2, 3): 6, (2, 5): 1, (3, 3): 6, (3, 4): 2, (4, 3): 7, (4, 4): 1, (5, 3): 7, (5, 5): 1, (6, 3): 7, (6, 6): 1}; CHECKS: 0 failures
+
+seed 209 B: base landing rank 4; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.726, 2.276, 2.719, 12.716, 16.828]
+   shadower(s) at e1 and at e2: [{'j': 5, 'openings': 3, 'of': 9, 'A1': 13, 'eps1': -0.28417540737804053, 'A2': 7, 'eps2': 0.3670003513338822}, {'j': 3, 'openings': 3, 'of': 9, 'A1': 2, 'eps1': 0.2757380272370661, 'A2': 1, 'eps2': 0.31846446324267685}, {'j': 2, 'openings': 2, 'of': 9, 'A1': 2, 'eps1': -0.2739481490156832, 'A2': 1, 'eps2': 0.0}, {'j': 4, 'openings': 2, 'of': 9, 'A1': 3, 'eps1': -0.2810802752585126, 'A2': 2, 'eps2': -0.42477517509629437}, {'j': 6, 'openings': 2, 'of': 9, 'A1': 17, 'eps1': -0.1720031531636874, 'A2': 10, 'eps2': -0.25058439742711136}]
+   rank-2 witness opening u = 33: readings (walker, rho, margin to block edge): [(1, 3.119, 2.119), (3, 3.509, 2.509), (4, 3.982, 2.982), (5, 3.111, 2.111), (6, 1.731, 0.731)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 209 B: base landing rank 5; rank-1 state alone; rank-2 state free; x/x1 [1.0, 6.513, 14.929, 15.637, 24.001, 44.308]
+   shadower(s) at e1 and at e2: [{'j': 5, 'A1': 24, 'eps1': 0.001390211236177284, 'A2': 4, 'eps2': -0.3146101091149114, 'eta': 5.512578294795281, 'pred_eps2': -0.3146101091149114}]
+   rank-2 witness opening u = 225: readings (walker, rho, margin to block edge): [(1, 2.549, 1.549), (3, 3.787, 2.787), (4, 4.236, 2.764), (5, 5.213, 1.787), (6, 2.766, 1.766)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 7, 5: 8}; landing ranks by shifted walker: {(1, 3): 1, (1, 5): 7, (2, 5): 7, (2, 6): 1, (3, 5): 7, (3, 6): 1, (4, 5): 7, (4, 6): 1, (5, 2): 4, (5, 5): 2, (5, 6): 2, (6, 5): 5, (6, 6): 3}; CHECKS: 0 failures
+
+seed 209 B: base landing rank 6; rank-1 state alone; rank-2 state free; x/x1 [1.0, 3.38, 11.951, 15.999, 16.965, 19.401]
+   shadower(s) at e1 and at e2: [{'j': 4, 'A1': 16, 'eps1': -0.0008009979024991546, 'A2': 5, 'eps2': -0.2659320517755398, 'eta': 2.3795879520694445, 'pred_eps2': -0.2659320517755398}]
+   rank-2 witness opening u = 225: readings (walker, rho, margin to block edge): [(1, 2.576, 1.576), (3, 3.635, 2.635), (4, 1.165, 0.165), (5, 1.468, 0.468), (6, 3.661, 2.661)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 8, 4: 8}; landing ranks by shifted walker: {(1, 1): 2, (1, 3): 1, (1, 6): 5, (2, 3): 1, (2, 6): 7, (3, 3): 1, (3, 6): 7, (4, 4): 1, (4, 6): 7, (5, 4): 4, (5, 5): 1, (5, 6): 3, (6, 5): 4, (6, 6): 4}; CHECKS: 0 failures
+
+seed 209 B: base landing rank 3; rank-1 state alone; rank-2 state free; x/x1 [1.0, 2.403, 8.739, 10.915, 13.443, 15.001]
+   shadower(s) at e1 and at e2: [{'j': 6, 'A1': 15, 'eps1': 0.000673397965660285, 'A2': 6, 'eps2': 0.2418599142041079, 'eta': 1.4032377535147516, 'pred_eps2': 0.2418599142041079}]
+   rank-2 witness opening u = 353: readings (walker, rho, margin to block edge): [(1, 2.885, 1.885), (3, 3.675, 2.675), (4, 3.324, 2.324), (5, 6.54, 0.46), (6, 3.377, 2.377)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 8, 6: 8}; landing ranks by shifted walker: {(1, 1): 2, (1, 3): 5, (1, 5): 1, (2, 2): 4, (2, 4): 4, (3, 2): 5, (3, 3): 3, (4, 3): 8, (5, 3): 4, (5, 5): 1, (5, 6): 3, (6, 3): 5, (6, 5): 3}; CHECKS: {' cascade != earliest first-clear': 5}
+
+seed 210 B: base landing rank 4; rank-1 state handoff; rank-2 state free; x/x1 [1.0, 1.96, 1.964, 5.021, 5.491, 6.509]
+   shadower(s) at e1 and at e2: [{'j': 5, 'openings': 14, 'of': 30, 'A1': 5, 'eps1': 0.491030292493117, 'A2': 3, 'eps2': -0.19781478211844866}, {'j': 6, 'openings': 13, 'of': 30, 'A1': 7, 'eps1': -0.49064311691390367, 'A2': 3, 'eps2': 0.3218581330057838}, {'j': 4, 'openings': 12, 'of': 30, 'A1': 5, 'eps1': 0.020782154032867043, 'A2': 3, 'eps2': -0.4377920381410772}, {'j': 2, 'openings': 11, 'of': 30, 'A1': 2, 'eps1': -0.04044705629975118, 'A2': 1, 'eps2': 0.0}, {'j': 3, 'openings': 9, 'of': 30, 'A1': 2, 'eps1': -0.03552651724179936, 'A2': 1, 'eps2': 0.0025110518568895123}]
+   rank-2 witness opening u = 105: readings (walker, rho, margin to block edge): [(1, 5.584, 1.416), (3, 1.264, 0.264), (4, 5.032, 1.968), (5, 6.229, 0.771), (6, 4.795, 2.205)]
+   shifts freeing rank 1, by shifted walker (of {1: 8, 2: 8, 3: 8, 4: 8, 5: 8, 6: 8}): {1: 8, 3: 8, 5: 8, 6: 8}; landing ranks by shifted walker: {(1, 4): 2, (1, 5): 6, (2, 2): 1, (2, 4): 6, (2, 5): 1, (3, 2): 1, (3, 4): 6, (3, 5): 1, (4, 2): 6, (4, 4): 1, (4, 6): 1, (5, 4): 6, (5, 6): 2, (6, 4): 7, (6, 6): 1}; CHECKS: 0 failures
+
+seed 210 B: base landing rank 5; rank-1 state alone; rank-2 state free; x/x1 [1.0, 1.974, 4.83, 8.006, 10.291, 10.851]
+   shadower(s) at e1 and at e2: [{'j': 4, 'A1': 8, 'eps1': 0.0058621458719833805, 'A2': 4, 'eps2': 0.05512670535917288, 'eta': 0.9742569659516678, 'pred_eps2': 0.05512670535917288}]
+   rank-2 witness opening u = 41: readings (walker, rho, margin to block edge): [(1, 4.767, 2.233), (3, 4.308, 2.692), (4, 6.26, 0.74), (5, 5.714, 1.286), (6, 1.352, 0.352)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
+
+seed 210 B: base landing rank 3; rank-1 state alone; rank-2 state free; x/x1 [1.0, 1.369, 5.075, 6.487, 7.994, 9.184]
+   shadower(s) at e1 and at e2: [{'j': 5, 'A1': 8, 'eps1': -0.005508620861981332, 'A2': 6, 'eps2': -0.15967757665542864, 'eta': 0.3688441835305082, 'pred_eps2': -0.15967757665542864}]
+   rank-2 witness opening u = 57: readings (walker, rho, margin to block edge): [(1, 1.641, 0.641), (3, 3.334, 2.334), (4, 6.133, 0.867), (5, 4.898, 2.102), (6, 6.448, 0.552)]
+   shifts freeing rank 1, by shifted walker (of {1: 4}): {1: 4}; landing ranks by shifted walker: {(1, 4): 1, (1, 5): 3}; CHECKS: 0 failures
+
+seed 210 B: base landing rank 6; rank-1 state alone; rank-2 state free; x/x1 [1.0, 2.68, 6.873, 13.861, 14.201, 16.99]
+   shadower(s) at e1 and at e2: [{'j': 6, 'A1': 17, 'eps1': -0.009928362880206234, 'A2': 6, 'eps2': 0.33905838705633756, 'eta': 1.680220089439728, 'pred_eps2': 0.33905838705633756}]
+   rank-2 witness opening u = 49: readings (walker, rho, margin to block edge): [(1, 2.282, 1.282), (3, 5.661, 1.339), (4, 5.405, 1.595), (5, 3.618, 2.618), (6, 6.614, 0.386)]
+   shifts freeing rank 1, by shifted walker (of {}): {}; landing ranks by shifted walker: {}; CHECKS: 0 failures
