@@ -10097,3 +10097,30 @@ These are counts by place on constructed members, not a proof.
 - (c) What a **chain** of persistent shadows needs: flanks `2…m` each shadowed by the twin below needs each gap `e_i − e_{i−1} < c/3` (from `|ε|(u_hi − u_lo) < 2`, `|ε| = gap/e`, `u_hi − u_lo = 6e/c`); I test, on clusters built with twin chains of length 1…5 at the top, which flank patterns occur and whether rank 1 is free whenever flanks 2…6 are all chain-shadowed.
 
 **Native check.** Objects as in E266; construction climbs on membership only under a structural constraint, as E263. Nothing is scored for hardness; no rate is offered as an answer.
+
+## E268 — 2026-10-02 — ranks 1 and 2 both shadowed on `EightResidual`: 287 members; the fields do not force rank 2's witness; the joint cover read
+
+**Map:** v3 §9 C1; E267 run as designed. Scripts in `LonelyRunner/experiments/nN/redo/`: `both_shadowed_v1.{py,out}` (+ `both_shadowed_members_v1.json`), `handoff_joint_v1.{py,out}`.
+
+**Test 1.** 4,000,000 random clusters gave 3,982 with ranks 1 and 2 both shadowed and `c` never in the way (3,974 of them from the forced near-twin pair at ranks 1–2; the 8 unforced ones are the rest). 80 distinct starts scaled to `c' = L·u` and climbed on the 16 predicates; start states violating the constraint after scaling: 0 of 480.
+- **Constrained** (ranks 1 and 2 kept shadowed at every accepted step): **287 of 480 runs reach all 16 predicates; 49 of 80 starts.** Rank-1 / rank-2 states: one walker / one walker 211, hand-off / one walker 70, one walker / hand-off 6. The cascade lands at cluster rank 3: 83, 4: 99, 5: 65, 6: 40. Checks: 0 failures, lonely at the landing, landing at the earliest first-clear cluster flank in all 287.
+- Control (no constraint): 289 of 480, 49 of 80, the same pattern (so the constraint does not cost membership). Starts that did not reach membership stalled on `6,7,9`, `free flank`, `rational N|8`, `thirds/fifths`, `first lap/-7`, the same fields as E263's.
+- **So the fields of `EightResidual` do not force rank 2's witness**, and "rank 1 or rank 2 free" is false on `EightResidual`, with the withdrawal of E266 now confirmed on the open configurations. Every member's shadowed flanks are exactly ranks 1 and 2 (`AAFFFF` 211, `HAFFFF` 70, `AHFFFF` 6); ranks 3–6 free and the landing in them.
+
+**Test 2.**
+- *(a) Hand-off occupants.* By openings covered, `|ε| < 0.05` carries 89.9% (members, 54 hand-off flanks) and 90.8% (random, 191); half-integer (`|ε| ≥ 0.45`) 2.0% and 0.7%. By **segments** (a segment is a stretch with one occupant): members `|ε|` 0–0.05: 68, 0.05–0.15: 21, 0.15–0.35: 56, 0.35–0.45: 11, 0.45–0.50: 30; random 263, 109, 174, 33, 36. So a hand-off is a few long sweeps by near-harmonic or near-twin walkers (the openings) together with many one- and two-opening occupants of larger `|ε|` (the segments), including `ε ≈ ±1/2`.
+- *(b) Patterns.* Shadowed flanks per set: members 0: 5,372, 1: 551, 2: 53, 3: 2; random 0: 10,042, 1: 1,670, 2: 272, 3: 16. Most are one walker (`A`); hand-offs are 54 and 191 flanks in total. No set has more than 3.
+- *(c) Twin chains.* Clusters built with `k` twin links at the top (gaps 0.02c–0.30c, 40,000 each): shadowed flanks reach 5 (k = 4: 561; k = 5: 32,749 sets have flanks 2–6 all shadowed). **Whenever flanks 2–6 are all shadowed (0, 1, 24, 527, 32,749 sets for k = 1…5), rank 1 is free in all of them.** No set with all six shadowed in any population above.
+
+**Derived** (the line reading; no new object). *If the cluster's spread `x₆ − x₁ ≤ 3c` (with `x₁ ≥ 9c`), the slowest flank is free at the first opening of `c`'s run.* At `u*`, the first `8k+1 ≥ e₁/c`, `u* < e₁/c + 8` and `u* ≡ 1 mod 8`, so a walker with `r = x_j/e₁ ≥ 1` reads `ρ = 1 + (r − 1)u* (mod 8)`; `(r − 1)u* ≤ 3 + 24c/e₁ ≤ 3 + 8/3 < 6`, so `ρ ∈ [1, 7]`: clear; `c` is clear in its own run. A chain of five twin links, each gap `< c/3` (the persistence bound of E266), has spread `< 5c/3`, which gives the 100% above.
+
+**What a joint cover would need** `[derived pieces + measured]`.
+- Rank 1 needs a near-harmonic of ratio `> 7` or a hand-off (E266). So the cluster's spread is `> 3c` (by the bound above) and the rank-1 cover cannot come from a tight chain.
+- Each flank `i ≥ 2` needs a twin below with gap `< c/3`, a near-harmonic, or a hand-off. A single walker can be a near-harmonic of two flanks only as a near common multiple of both.
+- Hand-offs are rare and do not combine in the data (≥ 3 shadowed flanks in 2 of 5,978 members).
+
+**Consequence (M7), map §9 C1.**
+- (E266's target) "rank 1 or rank 2 free": `[REFUTED]` on `EightResidual` (287 members).
+- The surviving form is the cascade's own: **some cluster flank has a free opening in `c`'s run**, the landing at ranks 1–6 (members: 864 / 920 / 942 / 1,050 / 1,085 / 1,117; the 287 here at 3–6). Counts: 0 failures in 5,978 + 287 members and 12,000 random clusters.
+- What a proof has to do is exclude a joint cover of all six flanks. Derived: a chain of twins through flanks 2–6 cannot cover (rank 1 is then free by the `3c` bound). Open: covers that mix classes (hand-offs, near-harmonics, twins), and why hand-offs at different flanks do not combine.
+- Not run: a search aimed at six shadowed flanks. Nothing in this entry says one exists or does not.
