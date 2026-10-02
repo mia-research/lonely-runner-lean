@@ -10207,3 +10207,27 @@ These are counts by place on constructed members, not a proof.
 **Checks (forced):** the landing is lonely (exact); the landing equals the least clear opening computed without the cascade for the first 200 of each family (A.9).
 
 **Read, not scored:** the maximum of moves, `K` and `R*` per family and per `(W, ρ, factor)` cell, and every arrangement above any bound that appears, listed. A rise of `K` or the moves with `W`, `ρ` or the factor is the finding; a flat maximum is the finding the owner predicts. No rate, share or coverage is stated.
+
+## E274 — 2026-10-02 — many arrangements through the cascade: moves and `R*` do not grow with laps, deviation or scale ratio; the drift quantity is a coordinate, not a requirement
+
+**Map:** v4 §4 Q8; E273 run as designed. Script `LonelyRunner/experiments/nN/redo/many_arrangements_v1.{py,out}`; exact; 74 cells of 300, about 22,000 arrangements.
+
+**Checks: 0 failures.** Every landing is lonely (exact); for every fourth cell's arrangements with a small enough opening count, the landing equals the least lonely opening computed without the cascade (A.9): 0 mismatches.
+
+**Result (maxima per family; each cell's maximum is in the `.out`).**
+- F1 random speeds: moves ≤ 7, `R* ≤ 2.66`.
+- F2 AP with deviation `ρ` of 0.01, 0.1, 0.3, 0.45 of the step: moves ≤ 11 (at `ρ = 0.01`; 11, 11, 9, 8 down the list), `R* ≤ 5.02`.
+- F3 complete grids with laps `W ∈ {10, 10³, 10⁶}` and `ρ ∈ {0, …, 0.45}`: moves ≤ 8, `R* ≤ 3.00`, with no rise in `W` or `ρ`.
+- F4 clump of 1, 3 or 5 near-even readings with outliers at scale factors 10 to `10⁹`, deviation to 0.3, residues random (including exact multiples of 8): moves ≤ 13 (one case, `(1, 0.1, 10³)`), otherwise ≤ 9; `R* ≤ 2.12`.
+- F5 two and three clump hierarchies at ratios 10 to `10⁶` (scales to `10¹²`): moves ≤ 8, `R* ≤ 1.12`.
+- F6 two to four readings `≡ 0 (mod 8)` in the grid's units, with deviation to 0.3: moves ≤ 9, `R* ≤ 3.13`.
+In every family the isolation lies in the slowest reading's first block (`R* ≤ 7`; the maximum anywhere is 5.02) and takes at most 13 moves. `R*` is about 1.000 in the clump-and-outlier families (the bound or one to a few moves from it).
+
+**A flaw in E273's design, found on reading.** The landing's lap `K` (`8·h·t* = 8K + 1`, `h` the last setter) was meant to test whether the lap matters. It cannot: when `R* ≈ 1`, `K ≈ h/(8·d_min)`, the ratio of the setter to the slowest reading, so `K` grows with the scale ratio by definition (up to `6·10¹²` in F5) and says nothing about complexity. The measures that can test it are the move count and `R*`, and both are flat.
+
+**Reading.**
+- **The drift quantity.** `|ε|L` flows from the infinite grid as a coordinate (a deviation `δ` displaces a reading by about `Kδ` at lap `K`; it is the radius `2ρ(14W + 21) ≤ 1` in `GridNeighbourhoodN`). E272 turned it into a regime split with an open middle; that is the bookkeeping of the per-opening walker view and not what the cascade pays for. The Lean radius shrinking with `W` is a property of the proof's displacement bound; the cascade's work does not shrink or grow with `W`, `ρ` or the ratio in these populations. **It is a coordinate, not a requirement.** Corrected in `ARRANGEMENT_CONDITIONS_v2.md` (v1 retained).
+- **Scope.** These generators are mostly outside `EightResidual` (R6 and the case list close almost every random set at the bound or near it); F6 puts captured readings in but does not satisfy all 22 fields. The residual members are the hard ones: E118's 547 land at `R* ≤ 1.377`; E73's adversarial climbs reached `R ≤ 6.42`; the late band shapes land in the second block (map §9 C11). So the run shows the cascade's work is flat in laps, deviation and ratio over a wide family; it does not by itself show the same for the residual.
+- **Same mechanism.** The cascade is one move rule (Level A); this run did not classify the moves by type, so "the same explanation covers all of them" is not what it tested.
+
+**Consequence (M7).** The remaining content is stated as the relocation along the continuous deviation: from an exact type the isolation moves (hand-off across leaving faces, the entering reading's next exit across entering faces; C.4, C.5) and the sequence reaches every arrangement. The record's deformation route is this (E178–E182; `DeformationN`, `PathRouteN`): local stability is proved for one-runner moves and a simple pinch, and multi-pinches and the bounded-time half are open. The flank-by-flank work (E253–E268) is that relocation seen through the proxy. §5 and §6 of the conditions note are corrected accordingly.
