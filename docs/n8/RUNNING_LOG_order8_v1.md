@@ -10575,3 +10575,12 @@ No reason: E297 marked the `D = 1` grid facts "not formalised" and stopped. Form
 - `clear_at_exit_iff`: every reading, clear iff `∀ z, c ≤ |x(ac+1) − 8cz|`.
 - `lonely8_example`: readings `1,2,3,4,5,7,8` (speeds 1,2,3,4,5,6,8,9 for subject speed 1) lonely at `9/56`, the leaving edge of the reading `7`, which the first displacement (8 leaving at `9/64`) carries into its slot.
 - **Not stated:** the displacement of an entering-edge runner (the `7` here) as a general theorem; only its instance.
+
+## E300 — 2026-10-02 — owner: Lean requires a correct statement and code, not what it "looks like"; code the step
+
+**Map:** the cascade's `move` at the grid instant of an integer arrangement. Added to `IntegerDisplacementN.lean` (nested repo), built clean, axioms `[propext, Classical.choice, Quot.sound]`:
+- `inWay_at_grid_iff`: `a` odd, a reading is in the way at `a/8` iff `8 ∣ x`.
+- `nextOpening_at_grid`: for `8 ∣ x`, `nextOpening 8 x (a/8) = a/8 + 1/(8x)`.
+- `move_at_grid`: for `S` positive readings, `c ∈ S`, `8 ∣ c`, `c` least multiple of `8` in `S`, `a` odd: `move 8 (S.image cast) (a/8) = a/8 + 1/(8c)`. The cascade's first move is the displacement of `lonely_of_displacement`, with no band hypothesis.
+- `inWay_at_exit_iff`: at `a/8 + 1/(8c)` a reading is in the way iff `∃ z, |x(ac+1) − 8cz| < c`.
+Not coded: the next `move` from that instant and the composition to a certificate `(b, k)`.
