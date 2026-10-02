@@ -58,12 +58,15 @@ has an interior point; the tree branches on the setter and on possible straddler
   `7.1 6.1 5.1 4.1 7.2 3.1 6.2 5.2 2.1 4.2 6.3 7.4 5.3 3.2 6.4 4.3 5.4 7.6 2.2 1.1 5.6 4.5 2.3 5.7 6.8 4.6 7.11`. This is a limit; the owner's suspected maximum 12 is not exact in this window (`11.966…`).
 - **Checks against the exact cascade:** 256 exact test arrangements (250 random + six of the hardest known) carried down the tree: 0 violations of the partition (at most one child; none ⇒ the exact cascade lands) and of soundness (each node's path is a prefix of the exact path).
 - **Consequence by closedness:** the lonely condition is closed and the landing is bounded, so every arrangement of the closed window, including tied and integer ones, is lonely at some `R ≤ 11.97`, i.e. `t ≤ 11.97/(8 d_min)`.
-- **Caveats [OPEN]:** (i) the LP is floating point (tolerance `1e-9`): a very thin cell could have been pruned; sensitivity to the threshold is being checked (`TT = 1e-6, 1e-12`); an exact rational Farkas certificate for every pruned branch would close it;
+- **Sensitivity to the cell-thickness threshold [CHECKED]:** the tree built with `TT = 1e-6`, `1e-9` and `1e-12` is identical: 27,517 nodes, 9,651 terminal, deepest 29, supremum `11.966048` in all three. No cell has thickness between `1e-12` and `1e-6`.
+- **Caveats [OPEN]:** (i) the LP is floating point; a cell thinner than `1e-12` would be missed under all three thresholds; an exact rational Farkas certificate for every pruned branch would close it;
   (ii) the supremum is over closures.
 
 ## 4. Wider windows
 
-TWO-LAP WINDOW (`ρ_7 ≤ 17`): see §4a, filled in when the run completes (`path_tree_par_J2.out`).
+TWO-LAP WINDOW (`ρ_7 ≤ 17`) [EXHAUSTIVE, same method and caveats as §3]: 343,070 nodes (12.5 × the one-lap window), 117,070 terminal, deepest path 29, 0 branches cut, 0 violations of the partition and soundness checks, 2,832 s on 9 workers.
+**The supremum of the landing over this window is again `26433/2209 = 11.966048`**, attained by the same one-lap cell: the second lap adds cells and no later landing. THREE-LAP WINDOW (`ρ_7 ≤ 25`): running (`path_tree_par2_J3.out`; 12,640 top-level subtrees; expected hours); it also records the largest `ρ_7`
+among cells whose state can exceed `T` for `T = 3, 5, 7, 9, 10, 11, 11.5`, which tests directly whether late landings live only in the one-lap window.
 Searches [SEARCH] beyond the one-lap window found no landing above 7 with `ρ_7 > 9` (hard-set search), and hill-climbs from lap-added copies of the extremal arrangement reach only `R* ≈ 6.8–6.9` in windows 17 and 25.
 Number of moves is not bounded by the one-lap window: tight fast clusters give paths of 41 moves with `R* = 2.27` (E320 search), landing small.
 
@@ -83,5 +86,5 @@ In the hardest arrangements the first surviving class event is `a = 12` or `14` 
 For a finite list. **For:** (1) the one-lap window is finite (9,651 cells), (2) the landing there is bounded by a rational `< 12`; the path-signature classes of the AP-based families flatten; late landings (`R* > 5`) only found with small spread; (3) the closure argument turns a bounded landing into
 a statement for every arrangement of the window, including the degenerate ones; (4) in Lean, `lonelyRunnerAt8_of_window : WindowBound → LonelyRunnerAt8`, and a universal landing bound would give the window.
 **Against / open:** (1) the windows above one lap (two-lap run in progress; wider ones not attempted); (2) the cluster case (W6) is a statement about six readings at arbitrary scale; (3) the LP is floating point (caveat §3); (4) the number of moves is unbounded across windows (41 found); (5) the lap-compression
-monotonicity is false, so wider windows do not reduce to the one-lap window by peeling laps; (6) no argument is yet known for why a universal bound `R* ≤ 12` should hold; the data show the supremum decreasing with the window in the searches (not a proof).
+monotonicity is false, so wider windows do not reduce to the one-lap window by peeling laps; (6) no argument is yet known for why a universal bound `R* ≤ 12` should hold; the one- and two-lap trees give the same supremum (11.966), so there it does not grow with the window.
 For (b): the cascade's moves from a state are its definition; what is mapped is how the path changes under deformation (§2) and its complete behaviour in the one-lap window (§3). There is no closed-form rule for the landing from the readings.
