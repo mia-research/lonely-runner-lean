@@ -1,0 +1,63 @@
+AP movers #1,2,4,7 -> s=0.20  rho=[0.86, 2.344, 3.0, 4.342, 5.0, 6.0, 6.998]
+   move 1: R=1.1628  blockers ['#7']  setter #7 lap 1 -> R=1.2861 ; blockers after: #6 carried (p0=6.98, shift=0.74)
+   move 2: R=1.2861  blockers ['#6']  setter #6 lap 1 -> R=1.5000 ; blockers after: #5 carried (p0=6.43, shift=1.07)
+   move 3: R=1.5000  blockers ['#5']  setter #5 lap 1 -> R=1.8000 ; blockers after: #4 carried (p0=6.51, shift=1.30)
+   move 4: R=1.8000  blockers ['#4']  setter #4 lap 1 -> R=2.0728 ; blockers after: none (lonely)
+   lonely at R=2.0728
+AP movers #1,2,4,7 -> s=0.40  rho=[0.72, 2.688, 3.0, 4.684, 5.0, 6.0, 6.996]
+   move 1: R=1.3889  blockers ['#6']  setter #6 lap 1 -> R=1.5000 ; blockers after: #4 carried (p0=6.51, shift=0.52), #5 carried (p0=6.94, shift=0.56)
+   move 2: R=1.5000  blockers ['#4', '#5']  setter #4 lap 1 -> R=1.9214 ; blockers after: none (lonely)
+   lonely at R=1.9214
+AP movers #1,2,4,7 -> s=0.80  rho=[0.44, 3.376, 3.0, 5.368, 5.0, 6.0, 6.992]
+   move 1: R=2.2727  blockers ['#2', '#7']  setter #2 lap 1 -> R=2.6659 ; blockers after: #3 carried (p0=6.82, shift=1.18), #6 carried (p0=5.64, shift=2.36)
+   move 2: R=2.6659  blockers ['#3', '#6']  setter #3 lap 1 -> R=3.0000 ; blockers after: #4 carried (p0=6.31, shift=1.79)
+   move 3: R=3.0000  blockers ['#4']  setter #4 lap 2 -> R=3.1669 ; blockers after: #5 carried (p0=7.00, shift=0.83)
+   move 4: R=3.1669  blockers ['#5']  setter #5 lap 2 -> R=3.4000 ; blockers after: #7 carried (p0=6.14, shift=1.63)
+   move 5: R=3.4000  blockers ['#7']  setter #7 lap 3 -> R=3.5755 ; blockers after: none (lonely)
+   lonely at R=3.5755
+AP movers #2,4,6,7 -> s=0.20  rho=[1.0, 2.258, 3.0, 4.16, 5.0, 5.758, 7.348]
+   move 1: R=1.0000  blockers ['#7']  setter #7 lap 1 -> R=1.2248 ; blockers after: #6 carried (p0=5.76, shift=1.29)
+   move 2: R=1.2248  blockers ['#6']  setter #6 lap 1 -> R=1.5630 ; blockers after: #5 carried (p0=6.12, shift=1.69)
+   move 3: R=1.5630  blockers ['#5']  setter #5 lap 1 -> R=1.8000 ; blockers after: #4 carried (p0=6.50, shift=0.99)
+   move 4: R=1.8000  blockers ['#4']  setter #4 lap 1 -> R=2.1635 ; blockers after: #7 carried (p0=5.23, shift=2.67)
+   move 5: R=2.1635  blockers ['#7']  setter #7 lap 2 -> R=2.3136 ; blockers after: none (lonely)
+   lonely at R=2.3136
+AP movers #1,2,6,7 -> s=0.20  rho=[0.948, 1.728, 3.0, 4.0, 5.0, 5.942, 7.286]
+   move 1: R=1.0549  blockers ['#7']  setter #7 lap 1 -> R=1.2352 ; blockers after: #6 carried (p0=6.27, shift=1.07)
+   move 2: R=1.2352  blockers ['#6']  setter #6 lap 1 -> R=1.5146 ; blockers after: #5 carried (p0=6.18, shift=1.40)
+   move 3: R=1.5146  blockers ['#5']  setter #5 lap 1 -> R=1.8000 ; blockers after: #4 carried (p0=6.06, shift=1.14)
+   move 4: R=1.8000  blockers ['#4']  setter #4 lap 1 -> R=2.2500 ; blockers after: #7 carried (p0=5.11, shift=3.28)
+   move 5: R=2.2500  blockers ['#7']  setter #7 lap 2 -> R=2.3332 ; blockers after: none (lonely)
+   lonely at R=2.3332
+AP movers #1,2,6,7 -> s=0.80  rho=[0.792, 0.912, 3.0, 4.0, 5.0, 5.768, 8.144]
+   move 1: R=1.2626  blockers ['#6']  setter #6 lap 1 -> R=1.5603 ; blockers after: #5 carried (p0=6.31, shift=1.49)
+   move 2: R=1.5603  blockers ['#5']  setter #5 lap 1 -> R=1.8000 ; blockers after: #4 carried (p0=6.24, shift=0.96)
+   move 3: R=1.8000  blockers ['#4']  setter #4 lap 1 -> R=2.2500 ; blockers after: none (lonely)
+   lonely at R=2.2500
+AP movers #1,2,6,7 -> s=1.00  rho=[0.74, 0.64, 3.0, 4.0, 5.0, 5.71, 8.43]
+   move 1: R=1.5625  blockers ['#5', '#6']  setter #5 lap 1 -> R=1.8000 ; blockers after: #4 carried (p0=6.25, shift=0.95), #7 carried (p0=5.17, shift=2.00)
+   move 2: R=1.8000  blockers ['#4', '#7']  setter #4 lap 1 -> R=2.2500 ; blockers after: none (lonely)
+   lonely at R=2.2500
+AP movers #2,3,5,6 -> s=0.60  rho=[1.0, 3.11, 3.306, 4.0, 5.762, 7.032, 7.0]
+   move 1: R=1.0000  blockers ['#6']  setter #6 lap 1 -> R=1.2799 ; blockers after: #5 carried (p0=5.76, shift=1.61), #7 carried (p0=7.00, shift=1.96)
+   move 2: R=1.2799  blockers ['#5', '#7']  setter #5 lap 1 -> R=1.5620 ; blockers after: none (lonely)
+   lonely at R=1.5620
+AP movers #2,3,5,6 -> s=0.80  rho=[1.0, 3.48, 3.408, 4.0, 6.016, 7.376, 7.0]
+   move 1: R=1.0000  blockers ['#6']  setter #6 lap 1 -> R=1.2202 ; blockers after: #5 carried (p0=6.02, shift=1.32), #7 carried (p0=7.00, shift=1.54)
+   move 2: R=1.2202  blockers ['#5', '#7']  setter #5 lap 1 -> R=1.4960 ; blockers after: none (lonely)
+   lonely at R=1.4960
+
+runs x steps with 4 movers; number of cascade moves per path: [(0, 1102), (1, 330), (2, 125), (3, 132), (4, 57), (5, 33), (6, 54), (7, 6), (8, 10), (9, 1), (10, 1), (11, 6), (14, 3)]
+moves by index (1,2,3,4+): [(1, 758), (2, 428), (3, 303), (4, 453)]
+ move index 1: setter frozen 291, setter mover 467
+     new blockers carried  : shift<1 116, shift 1-3 338, shift>=3 32
+     new blockers returned : shift<1 0, shift 1-3 0, shift>=3 1
+ move index 2: setter frozen 170, setter mover 258
+     new blockers carried  : shift<1 48, shift 1-3 258, shift>=3 37
+     new blockers returned : shift<1 0, shift 1-3 0, shift>=3 0
+ move index 3: setter frozen 127, setter mover 176
+     new blockers carried  : shift<1 24, shift 1-3 134, shift>=3 17
+     new blockers returned : shift<1 0, shift 1-3 0, shift>=3 1
+ move index 4+: setter frozen 167, setter mover 286
+     new blockers carried  : shift<1 93, shift 1-3 99, shift>=3 119
+     new blockers returned : shift<1 0, shift 1-3 0, shift>=3 2
