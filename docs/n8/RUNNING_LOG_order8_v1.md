@@ -10280,3 +10280,24 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 
 **Checks (forced):** the criterion agrees with the exact test at every non-tied event (ties listed separately, since first order does not decide them); `c`-in-the-way style checks of E178 (the oracle: cascade landing = first component) carried over; the pinch is single-point at `τ`.
 **Not read:** counts as rates. The multi-pinches are listed by place.
+
+## E278 — 2026-10-02 — the shape of Tao's reduction, translated to native objects (no parts imported)
+
+**Owner:** *"Tao's reduction is proved right. I wonder if we can see where the shape my translate without importing any of the parts, or any other infinite reduction"*
+
+**Map:** v4 §4 Q8, Q9; E276 (the literature report). **No run.** A reading of a described shape against native objects. The description of Tao's argument is the subagent's (`LITERATURE_REDUCTION_SEARCH_v1.md`); only the abstract (the reduction to integer speeds of size `n^{O(n²)}`) was checked against arXiv:1701.02048. The proof was not read; nothing of its machinery (additive combinatorics, Freiman homomorphisms, Fourier or Bohr-set estimates) is used.
+
+**The shape (as reported).** (1) Induction on the number of runners. (2) A dichotomy: the speeds lie in one arithmetic progression (rank 1) or not. (3) If not, a projection collapses two readings into one, so the lower order applies with extra margin `1/(n−1) − 1/n`. (4) Stability: un-collapsing moves the clear instant by less than the margin.
+
+**Native counterparts.**
+- Induction on runners: orders 3–7 native; R8 (`FastRunnerN`), `FastPair8`, clumps as lower orders. Proved.
+- Collapse, lower order, step inside the margin: `MergeSixN`, `SteppingN` and order seven at `1/7` (margin `1/56`) in `RealEightN`'s real-to-whole reduction. Proved. So the real-to-whole reduction (N2) already has this shape.
+- Stability for a tight clump: `TrainCollapseN` (`N ≥ 56m`; `56 = 7·8`, the margin's denominator). Stability for separated groups: `SplitChainN`, `SyncBlockN`. Proved.
+- Rank 1: the AP and grid neighbourhoods, the complete grid, R6 at `q = 8`. Proved.
+- **Not available:** a uniform choice of the collapse such that its error is below the margin. E248 found the `f = 6` hole's blocks between `TrainCollapseN`'s regime and nested windows, with no uniform constant for either.
+
+**The statement the shape suggests** `[reasoned; not examined; to prove]`: for every arrangement, either some collapse of two adjacent readings or clumps into one has error below the lower order's margin (so the lower order with slack carries it), or no such collapse exists and the readings are spread evenly at every scale, so the arrangement lies in the AP/grid neighbourhood. This is the owner's "clumps, if too evenly spaced, become AP plus grid to capture the outlier" stated as a dichotomy with a quantitative first branch.
+
+**A difference to keep.** In the reported argument the finite set is integer tuples up to a height bound, obtained by estimates. Here the infinite periodic grid does that job: beyond a clump's own scale only the residue mod 8 and the deviation matter. And in place of an error estimate the isolation is followed as the collapsed pair is turned back on (the deformation); the un-collapsing of a doubled pair is the doubled-slot step of the multi-pinch (E277, running).
+
+**Consequence.** The open region (E248) is where the first branch has no uniform constant; the dichotomy above, with the constants from `TrainCollapseN` (`56m`) and nested windows (E231's `35m/3`), is the candidate statement. Not started. (Numbering: the multi-pinch results will be the next entry; its script header says E278.)
