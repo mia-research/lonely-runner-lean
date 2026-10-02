@@ -10185,3 +10185,25 @@ These are counts by place on constructed members, not a proof.
 - Finite (by the reasoning): clumps, residue and sign per scale, grid class. Not shown finite: the drift quantity `|ε|L` on `(0, 1/4)` and several walkers locking and unlocking in turn (the hand-off), which is E118's C1 statement; E266 derived the locked classes, E268 found at most three of six flanks shadowed in any population read.
 
 **Consequence.** Proposed next (not started): take the speed-only classification of the file's §3 as the object, state the recursion step for two groups at adjacent scales with the residue as the only datum, prove it for a block of one for every `X`, then read the hand-off as a single walker's partial sweep (`|ε|L ∈ (0, 1/4)`) before several walkers. The owner's corrections to the reasoning come first.
+
+## E273 — 2026-10-02 — design: many arrangements through the cascade, to read whether lap and deviation change the mechanism
+
+**Owner:** on E272: *"Wait does the drift quantity actually flow as a requirement? Or are you adding that because it actually needs to be there?"*; and *"You try and make as many different arrangements as you can and you will see they all get simply reduced by the cascade instantly no searching. Its not a different mechanisim for any arrangment, its the same one because there are not true infinite amount of arrangements, just a continuous arrangment which is handled by the deviation."*
+
+**Map:** v4 §4 Q8; E145–E148 (types), E233–E243 (the holes: one structure), `ARRANGEMENT_CONDITIONS_v1.md` §2. M2 class (d), a map run: derivation checks and the oracle check only; output is read, not scored.
+
+**What the question is.** E272's quantity `|ε|·L` (drift per opening times openings in the window) is the deviation read at an instant of lap `K`: at the instant `(8K+1)/(8e)` a reading that deviates from its grid point by `δ` (in grid steps) is displaced by about `K·δ`. It comes from the infinite grid and the deviation (not added), and it is in Lean as the neighbourhood radius `2ρ(14W + 21) ≤ 1`, which shrinks as the laps `W` grow (`GridNeighbourhoodN`). Whether it is a **requirement** of the proof is the owner's question. If the lap is invisible, as the owner holds, the landing's lap `K` should stay low however large `W` is and however large the deviation (up to the neighbour's gap), and the radius shrinkage in the Lean theorem would be an artefact of its bounds. If `K` grows with `W` or with the deviation, the quantity is real.
+
+**Families** (subject = the slowest runner, by `EndRunnerN`; readings are the other speeds minus the slowest; exact integers and fractions; seeded):
+- F1 random speeds (scale `10⁶`).
+- F2 AP at step `g = 10⁶` with deviations `|e| ≤ ρg`, `ρ ∈ {0.01, 0.1, 0.3, 0.45}`.
+- F3 complete grids with laps: residues a permutation of 1…7, `(r + 8N)·g` with `N ∈ [0, W]`, `W ∈ {10, 10³, 10⁶}`, deviations `ρ ∈ {0, 0.01, 0.1, 0.3, 0.45}`.
+- F4 a clump of 1 to 6 near-even readings (AP at scale `g`, deviation `ρ`) and the other readings as outliers at scale factors `10, 10³, 10⁶, 10⁹` above it, residues random, including exact multiples of 8.
+- F5 two and three clumps at ratios `10 … 10⁶`.
+- F6 several readings `≡ 0 (mod 8)` in the grid's units (doubled and captured slots), with and without deviation.
+
+**Recorded per arrangement:** the cascade from the bound (moves, setters), the landing's lap `K` (`8·h·t* = 8K + 1`, `h` the last setter; `K = 0` at the bound) and `R* = 8·d_min·t*`.
+
+**Checks (forced):** the landing is lonely (exact); the landing equals the least clear opening computed without the cascade for the first 200 of each family (A.9).
+
+**Read, not scored:** the maximum of moves, `K` and `R*` per family and per `(W, ρ, factor)` cell, and every arrangement above any bound that appears, listed. A rise of `K` or the moves with `W`, `ρ` or the factor is the finding; a flat maximum is the finding the owner predicts. No rate, share or coverage is stated.
