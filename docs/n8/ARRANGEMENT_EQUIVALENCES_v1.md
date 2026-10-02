@@ -14,3 +14,10 @@ Each entry: what looks different, why it is the same (for the quantity named), t
 | 5 | `ρ` and `ρ + 8` (a whole extra lap) | position `R·ρ mod 8` is unchanged at every integer `R` | ONLY the status of the class events (integer `R`); NOT the path or the landing | E314: fastest runner `(7,9)` has four regimes, `(15,17)`, `(23,25)`, `(31,33)` have none |
 | 6 | a runner anywhere in `(1, 7)` versus at its AP value | at `R = 1` it sits at position `ρ ∈ [1, 7]`: clear | `R = 1` lonely, so result "no move" | E313, E314 (strips); NOT the landing when `R = 1` is blocked (E313 `strip3`: the one-runner catalogue predicts it in 229 of 983) |
 | 7 | different arrangements with the same single move, e.g. rank 5 lap 1 | one runner in the slot band, the rest clear at its exit | RESULT class | E315: 243 arrangements, four families |
+
+## Checks of the entries above (appended)
+
+- **#4 inert readings `[VERIFIED — exact]`** (`LonelyRunner/experiments/nN/redo/inert_equivalence_v1.py`, 2026-10-02): over 1,500 random arrangements (log-uniform, AP deformed,
+  integers `≤ 40`), 7,719 readings are inert (clear at every visited state and at the landing; the smallest excluded), about 5.1 of the 6 non-smallest readings per
+  arrangement; 61,752 replacements of an inert reading by a random value clear at the same states: the sequence of states `R_0 … R_n` was unchanged in all 61,752. So the
+  result depends only on the readings that block somewhere along the path (typically one or two), the others only through being clear at those states.
