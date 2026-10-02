@@ -1,0 +1,106 @@
+E273/E274 (2026-10-02): many arrangements through the cascade.  Design: log E273.
+Subject = the slowest runner; readings are positive integers (exact); cascade from the bound; landing lap K (8 h t* = 8K+1,
+h the last setter, K = 0 at the bound) and R* = 8 d_min t*.  Checks: lonely at t* (exact); for small cells A.9's least opening.
+F1 None                   n=300  max K 99     max moves 7   max R* 2.662       not lonely 0  A.9 mismatches 0
+F2 0.01                   n=300  max K 3      max moves 11  max R* 5.007       not lonely 0  A.9 mismatches 0
+F2 0.1                    n=300  max K 4      max moves 11  max R* 5.021       not lonely 0  A.9 mismatches 0
+F2 0.3                    n=300  max K 3      max moves 9   max R* 3.782       not lonely 0  A.9 mismatches 0
+F2 0.45                   n=300  max K 3      max moves 8   max R* 3.082       not lonely 0  A.9 mismatches 0
+F3 (10, 0)                n=300  max K 5      max moves 8   max R* 2.394       not lonely 0  A.9 mismatches 0
+F3 (10, 0.01)             n=300  max K 11     max moves 6   max R* 2.465       not lonely 0  A.9 mismatches 0
+F3 (10, 0.1)              n=300  max K 14     max moves 8   max R* 2.688       not lonely 0  A.9 mismatches 0
+F3 (10, 0.3)              n=300  max K 15     max moves 6   max R* 2.549       not lonely 0  A.9 mismatches 0
+F3 (10, 0.45)             n=300  max K 18     max moves 6   max R* 2.063       not lonely 0  A.9 mismatches 0
+F3 (1000, 0)              n=300  max K 93     max moves 7   max R* 2.540       not lonely 0  A.9 mismatches 0
+F3 (1000, 0.01)           n=300  max K 38     max moves 7   max R* 2.322       not lonely 0  A.9 mismatches 0
+F3 (1000, 0.1)            n=300  max K 506    max moves 8   max R* 2.997       not lonely 0  A.9 mismatches 0
+F3 (1000, 0.3)            n=300  max K 171    max moves 6   max R* 2.022       not lonely 0  A.9 mismatches 0
+F3 (1000, 0.45)           n=300  max K 261    max moves 6   max R* 2.580       not lonely 0  A.9 mismatches 0
+F3 (1000000, 0)           n=300  max K 251    max moves 6   max R* 2.419       not lonely 0  A.9 mismatches 0
+F3 (1000000, 0.01)        n=300  max K 79     max moves 6   max R* 2.327       not lonely 0  A.9 mismatches 0
+F3 (1000000, 0.1)         n=300  max K 33     max moves 6   max R* 2.312       not lonely 0  A.9 mismatches 0
+F3 (1000000, 0.3)         n=300  max K 124    max moves 6   max R* 1.993       not lonely 0  A.9 mismatches 0
+F3 (1000000, 0.45)        n=300  max K 189    max moves 5   max R* 2.570       not lonely 0  A.9 mismatches 0
+F4 (1, 0, 10)             n=244  max K 14     max moves 7   max R* 1.281       not lonely 0  A.9 mismatches 0
+F4 (1, 0, 1000)           n=240  max K 1127   max moves 8   max R* 1.006       not lonely 0  A.9 mismatches 0
+F4 (1, 0, 1000000)        n=248  max K 1125002 max moves 8   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (1, 0, 1000000000)     n=241  max K 1125000005 max moves 9   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (1, 0.1, 10)           n=300  max K 14     max moves 6   max R* 1.260       not lonely 0  A.9 mismatches 0
+F4 (1, 0.1, 1000)         n=300  max K 1237   max moves 13  max R* 1.005       not lonely 0  A.9 mismatches 0
+F4 (1, 0.1, 1000000)      n=300  max K 1249305 max moves 7   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (1, 0.1, 1000000000)   n=300  max K 1240132679 max moves 7   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (1, 0.3, 10)           n=300  max K 17     max moves 8   max R* 1.336       not lonely 0  A.9 mismatches 0
+F4 (1, 0.3, 1000)         n=300  max K 1585   max moves 6   max R* 1.005       not lonely 0  A.9 mismatches 0
+F4 (1, 0.3, 1000000)      n=300  max K 1571162 max moves 8   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (1, 0.3, 1000000000)   n=300  max K 1579497146 max moves 9   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0, 10)             n=275  max K 13     max moves 3   max R* 1.154       not lonely 0  A.9 mismatches 0
+F4 (3, 0, 1000)           n=281  max K 1127   max moves 4   max R* 1.003       not lonely 0  A.9 mismatches 0
+F4 (3, 0, 1000000)        n=281  max K 1125001 max moves 4   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0, 1000000000)     n=267  max K 1125000004 max moves 5   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0.1, 10)           n=300  max K 15     max moves 4   max R* 1.245       not lonely 0  A.9 mismatches 0
+F4 (3, 0.1, 1000)         n=300  max K 1245   max moves 4   max R* 1.005       not lonely 0  A.9 mismatches 0
+F4 (3, 0.1, 1000000)      n=300  max K 1248907 max moves 6   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0.1, 1000000000)   n=300  max K 1246116271 max moves 4   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0.3, 10)           n=300  max K 19     max moves 5   max R* 1.317       not lonely 0  A.9 mismatches 0
+F4 (3, 0.3, 1000)         n=300  max K 1590   max moves 5   max R* 1.003       not lonely 0  A.9 mismatches 0
+F4 (3, 0.3, 1000000)      n=300  max K 1528492 max moves 4   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (3, 0.3, 1000000000)   n=300  max K 1591122527 max moves 4   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (5, 0, 10)             n=293  max K 13     max moves 2   max R* 1.133       not lonely 0  A.9 mismatches 0
+F4 (5, 0, 1000)           n=298  max K 1126   max moves 2   max R* 1.002       not lonely 0  A.9 mismatches 0
+F4 (5, 0, 1000000)        n=295  max K 1125001 max moves 2   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (5, 0, 1000000000)     n=296  max K 1125000001 max moves 2   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (5, 0.1, 10)           n=300  max K 13     max moves 2   max R* 1.105       not lonely 0  A.9 mismatches 0
+F4 (5, 0.1, 1000)         n=300  max K 1234   max moves 2   max R* 1.003       not lonely 0  A.9 mismatches 0
+F4 (5, 0.1, 1000000)      n=300  max K 1233991 max moves 2   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (5, 0.1, 1000000000)   n=300  max K 1237079394 max moves 2   max R* 1.000       not lonely 0  A.9 mismatches 0
+F4 (5, 0.3, 10)           n=300  max K 23     max moves 6   max R* 2.121       not lonely 0  A.9 mismatches 0
+F4 (5, 0.3, 1000)         n=300  max K 1445   max moves 3   max R* 2.030       not lonely 0  A.9 mismatches 0
+F4 (5, 0.3, 1000000)      n=300  max K 1524488 max moves 3   max R* 2.056       not lonely 0  A.9 mismatches 0
+F4 (5, 0.3, 1000000000)   n=300  max K 2115093022 max moves 3   max R* 1.582       not lonely 0  A.9 mismatches 0
+F5 ((3, 4), 10)           n=300  max K 57     max moves 4   max R* 1.112       not lonely 0  A.9 mismatches 0
+F5 ((3, 4), 1000)         n=300  max K 5976   max moves 4   max R* 1.003       not lonely 0  A.9 mismatches 0
+F5 ((3, 4), 1000000)      n=300  max K 6011844 max moves 4   max R* 1.000       not lonely 0  A.9 mismatches 0
+F5 ((2, 2, 3), 10)        n=300  max K 583    max moves 6   max R* 1.074       not lonely 0  A.9 mismatches 0
+F5 ((2, 2, 3), 1000)      n=300  max K 5876862 max moves 5   max R* 1.002       not lonely 0  A.9 mismatches 0
+F5 ((2, 2, 3), 1000000)   n=300  max K 5955654752274 max moves 5   max R* 1.000       not lonely 0  A.9 mismatches 0
+F5 ((1, 3, 3), 10)        n=300  max K 565    max moves 8   max R* 1.119       not lonely 0  A.9 mismatches 0
+F5 ((1, 3, 3), 1000)      n=300  max K 5971033 max moves 5   max R* 1.003       not lonely 0  A.9 mismatches 0
+F5 ((1, 3, 3), 1000000)   n=300  max K 5947168974737 max moves 5   max R* 1.000       not lonely 0  A.9 mismatches 0
+F6 (2, 0)                 n=284  max K 47     max moves 8   max R* 2.776       not lonely 0  A.9 mismatches 0
+F6 (2, 0.1)               n=300  max K 50     max moves 6   max R* 2.660       not lonely 0  A.9 mismatches 0
+F6 (2, 0.3)               n=300  max K 56     max moves 7   max R* 2.695       not lonely 0  A.9 mismatches 0
+F6 (3, 0)                 n=273  max K 44     max moves 7   max R* 2.804       not lonely 0  A.9 mismatches 0
+F6 (3, 0.1)               n=300  max K 46     max moves 9   max R* 2.890       not lonely 0  A.9 mismatches 0
+F6 (3, 0.3)               n=300  max K 57     max moves 9   max R* 2.559       not lonely 0  A.9 mismatches 0
+F6 (4, 0)                 n=262  max K 16     max moves 7   max R* 2.615       not lonely 0  A.9 mismatches 0
+F6 (4, 0.1)               n=300  max K 20     max moves 7   max R* 3.128       not lonely 0  A.9 mismatches 0
+F6 (4, 0.3)               n=300  max K 23     max moves 8   max R* 2.244       not lonely 0  A.9 mismatches 0
+
+CHECKS: not lonely at the landing: 0; A.9 least-opening mismatches: 0
+
+the 12 arrangements with the largest K:
+  K 5955654752274 moves 3 R* 1.000  F5 ((2, 2, 3), 1000000)  (904026, 1972078, 993692139006, 1921394926894, 40986191092522636137, 42023735156234392431, 43072508368542741739)
+  K 5947168974737 moves 4 R* 1.000  F5 ((1, 3, 3), 1000000)  (903617, 1022982561295, 2068517011950, 3049574512480, 41083724983267716489, 41926322931606334153, 42991692375944053524)
+  K 5745615975853 moves 2 R* 1.000  F5 ((2, 2, 3), 1000000)  (935954, 1910279, 40901420182453, 41961667571732, 40989517578908922559, 42019408419069708825, 43021058040506549160)
+  K 5741334962290 moves 1 R* 1.000  F5 ((1, 3, 3), 1000000)  (934108, 32925450760826, 34098317030444, 34936910897175, 41045113335988855492, 41915288354820994844, 42904215351638670047)
+  K 5726317386791 moves 2 R* 1.000  F5 ((1, 3, 3), 1000000)  (938334, 32972841232540, 34019943867995, 34914748527246, 41058886644907040694, 41995291730779179884, 42985584098308815754)
+  K 5719727476140 moves 2 R* 1.000  F5 ((1, 3, 3), 1000000)  (919500, 32963079755874, 33950920324183, 35096088990615, 41029864047707298196, 42074315314484637212, 43056621593592013156)
+  K 5709099062050 moves 1 R* 1.000  F5 ((1, 3, 3), 1000000)  (920758, 32914109784186, 33904760069668, 34922130386349, 40912172613514087241, 42053589073399484378, 43014406939358107430)
+  K 5699177490190 moves 2 R* 1.000  F5 ((1, 3, 3), 1000000)  (919044, 40920735015254, 42056662909166, 42910027506453, 41013552108595597386, 41902357533342951377, 43041845792190463036)
+  K 5632499466690 moves 1 R* 1.000  F5 ((1, 3, 3), 1000000)  (907902, 1051523545021, 2059428858202, 2915212597205, 40910060246453943441, 42015735269012210676, 42959405995577729098)
+  K 5626545070165 moves 1 R* 1.000  F5 ((2, 2, 3), 1000000)  (956690, 2045808, 41011375194266, 42028759652561, 40976885882734290231, 42097301200664817003, 43062875225409897983)
+  K 5616635763627 moves 1 R* 1.000  F5 ((2, 2, 3), 1000000)  (913392, 2066898, 33098843618583, 34077570423142, 41041521387287106576, 42008012444265155800, 42911257191010171784)
+  K 5611390406567 moves 4 R* 1.000  F5 ((1, 3, 3), 1000000)  (956693, 25040267559457, 25920090998563, 26952510658771, 40946346536176827622, 42091556435907866366, 42947020496429801880)
+the 12 with the most moves:
+  moves 13 K 1075 R* 1.004  F4 (1, 0.1, 1000)  (1050744, 2003961768, 3007049683, 4003070574, 5003092353, 9000098659, 9002029566)
+  moves 11 K 3 R* 4.982  F2 0.01  (996237, 2006036, 2997585, 3994862, 4999507, 5997831, 6999936)
+  moves 11 K 3 R* 4.986  F2 0.01  (997407, 2009472, 2996078, 3993091, 5000805, 5990909, 7002106)
+  moves 11 K 3 R* 4.982  F2 0.01  (997953, 2002352, 2993240, 3990453, 5008257, 6005690, 6995130)
+  moves 11 K 3 R* 4.982  F2 0.01  (996688, 1999121, 2996114, 3993309, 5001189, 6003032, 6992671)
+  moves 11 K 3 R* 4.967  F2 0.01  (994147, 1999539, 3002165, 3993822, 5003616, 6006767, 7009002)
+  moves 11 K 3 R* 4.994  F2 0.01  (999079, 2000301, 2991557, 4005983, 5001183, 6007477, 6999368)
+  moves 11 K 3 R* 4.963  F2 0.01  (994503, 2004359, 2998111, 4006499, 5009439, 6001903, 6994089)
+  moves 11 K 3 R* 4.962  F2 0.01  (993068, 1993824, 2999462, 4007762, 5003431, 6005181, 7005014)
+  moves 11 K 3 R* 4.959  F2 0.01  (992330, 1993486, 3001088, 4002887, 5002628, 6004994, 7002905)
+  moves 11 K 3 R* 4.979  F2 0.01  (996626, 2008386, 2990825, 4006022, 5004423, 5991933, 7002423)
+  moves 11 K 3 R* 4.955  F2 0.01  (992813, 1999523, 2992706, 4003832, 5009451, 6000220, 7001614)
