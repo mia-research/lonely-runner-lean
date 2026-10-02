@@ -9991,3 +9991,35 @@ is read. If none is found, the null is scoped to this construction.
 
 **Native check.** Objects as in E260. The construction climbs on membership only (E118's objective), under a structural
 constraint. Nothing is scored for hardness.
+
+## E264 — 2026-10-02 — the restricted (b) is refuted on `EightResidual`; the fastest flank was not the place, the slowest cluster flank is free in 5,957 of 5,978
+
+**Map:** v3 §9 C1; E263 run as designed. Scripts (all in `LonelyRunner/experiments/nN/redo/`): `restricted_b_v1.{py,out}` (Parts 1–2; its Part 3 hung in the pool and is superseded), `restricted_b_p3_v1.{py,out}` (Part 3, same functions and seeds), `ce6_verify_v1.{py,out}`, `ce6_read_v1.{py,out}`, `free_ranks_v1.{py,out}`, `rank1_exc_v1.{py,out}`.
+
+**Part 1: E118's construction, seeds 201–210, both modes: 5,431 members.**
+- Checks: 0 field failures on re-check (16 predicates); 0 check failures in `study`; landing is the earliest first-clear cluster-flank opening in all 5,431.
+- Fastest-flank state: free 5,313, one walker 112, **hand-off 6** (seeds 206, 207, 208; mode A).
+- **The six, checked independently** (`ce6_verify_v1`, direct `circDist` at every opening of `c`'s run, not the residue test): each is `classify` = "EightResidual, not E60"; `c` is never in the way; the fastest flank is shadowed at all 31–68 openings; the cascade lands lonely at a slower cluster flank (reading index 2–4).
+- **Their structure** (`ce6_read_v1`): the second-fastest reading is a near twin (`A ≡ 1`, `ε` −0.003 to −0.007) in the way for 29–67 openings, then a tail of 1–6 openings by other walkers (hand-off of 2 to 4 occupants). The five slower flanks are free in all six.
+- **So seed 118's 0 of 547 was a small sample of an event of order 0.1% (6 of 5,431).** E260's "547 of 547" and E262's "holds on the open configurations" were statements about that sample.
+
+**Part 2: the 58 shapes of E262 against all 16 predicates** (`restricted_b_v1.out`).
+- Failed by all 58: `rational N|8`, `6,7,9`, `small resolution`, `one free`. Failed by 35: `5,6,7,8`; by 22: `free flank`; by 32: `first lap/-7`; by 51: `thirds/fifths`. 7 distinct failing-field sets.
+- So **no single field, and not the slot-sharer (`5,6,7,8`), accounts for the 58**. E262's "first rule" counts (30 / 19 / 5 / 4) are the order of `classify`'s rules, not a mechanism.
+
+**Part 3: the 58 shapes built toward membership** (`c = L·u`, cluster `K·six` with `K·x₁ ∈ [25c, 175c]`, integer adjustments, climbing on fields passed; 6 restarts × 400 steps per shape).
+- Check: start states violating the constraint 0 of 348.
+- **Constrained** (fastest flank kept a hand-off at every accepted step): **271 of 348 runs reach all 16 predicates; 57 of 58 shapes** (the 58th stalled on `first lap/-7`, a climb result, not a statement about the shape). Every member's fastest flank is a hand-off. Checks on the 271: 0 failures, landing at the earliest first-clear cluster flank, lonely.
+- Control (no constraint): 264 of 348, 57 of 58; the hand-off also persists there. Small integer adjustments change the fields and leave the ratios, so the fields are arithmetic of the integers and the shadow is a fact about the ratios.
+- **The restricted (b) is false:** `EightResidual` members with a hand-off-shadowed fastest flank exist, and the arithmetic of the fields does not exclude them.
+
+**The place that does hold** (`free_ranks_v1`, `rank1_exc_v1`; seed 118's 547 plus seeds 201–210; 5,978 members):
+- every member has a free cluster flank (0 with none);
+- the **slowest** cluster flank (rank 1) is free in 5,957 (A 3,288 of 3,291; B 2,669 of 2,687); in the other 21 (rank 1 shadowed by one walker in 10, by a hand-off in 11) **rank 2 is free in all 21**;
+- the fastest flank is free in 5,849, one walker 123, hand-off 6.
+These are counts by place on constructed members, not a proof.
+
+**Consequence (M7), for map §9 C1.**
+- The fastest-flank line (E259–E262: (b), (c), the chain below the twin) was my choice of flank in E259, taken because the flank reading was run there first; the data now say it is not the place. (c)'s derivation (E261) stands as an implication; (b) restricted is `[REFUTED]` on `EightResidual`.
+- The owed statement: **for a C1-shaped set in `EightResidual`, the slowest cluster flank is free across `c`'s band run, or it is shadowed and the second-slowest is free.** Cascade-side: the landing is at rank 1 or 2 of the cluster in the 5,978 here.
+- What is not yet understood: why the slowest flank clears (what its walkers' ratios `x_j/e₁ ≥ 1` do across `u ∈ [e₁/c, 7e₁/c]`), and the 21 rank-1 exceptions (feature, what forces rank 2's witness, same mechanism or not). These go to map §6 as "not understood" until each has an artifact.
