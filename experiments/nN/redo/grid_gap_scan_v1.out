@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/LonelyRunner/experiments/nN/redo/grid_gap_scan_v1.py", line 5, in <module>
+    exec(open('anatomy_members_v1.py').read().split('if __name__')[0])
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'anatomy_members_v1.py'
