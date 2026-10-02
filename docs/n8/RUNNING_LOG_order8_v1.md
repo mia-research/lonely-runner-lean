@@ -10408,3 +10408,17 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 - **What stands from E283:** the sign-and-residue type decides whether the grid's own instant is lonely (F1, exact); when it is not, the isolation's place depends on the continuous deviations and not on a finite table (a landing rank and move count not fixed by the type, 0 of 18 groups with one reading off). The object is the displacement of the isolation from the grid's ideal instant as a function of the deviations.
 
 **Proposed (not run):** after reading `GridNeighbourhoodN`'s definition of `gridT` (the named instant: the max or min of the two class-1 neighbours' own openings, or the mirror class-7 instant), test on complete grids with whole laps and deviations beyond the proved radius `2ρ(14W + 21) ≤ 1` whether the named instant is still lonely and whether the isolation is still one of the named instants. No moves, setters or termination are used.
+
+## E285 — 2026-10-02 — design: the named instants of the complete grid's neighbourhood, tested beyond the proved radius
+
+**Owner:** *"yes run that test"* (E284).
+
+**Map:** v4 §4 Q8; `GridNeighbourhoodN` (`gridT`, `grid_nbhd_lonely`, `grid_nbhd_exists`); E274. M2 class (d). No moves, setters or termination are used.
+
+**The theorem (read in Lean, not rebuilt).** A complete grid: speeds `v_i = c₀ + u_i + e_i`, `u_i` integers with all residues mod 8 different, `|e_i| ≤ ρ`; `W` bounds `|u_i − u_j|`. For a subject `k`, `A` and `B` the runners with `u_A − u_k ≡ 1` and `u_B − u_k ≡ 7 (mod 8)`; `δ_j = v_j − v_k`, `D_j = u_j − u_k`. If `2ρ(14W + 21) ≤ 1` every runner is lonely at the named instant `gridT(D_A, D_B, δ_A, δ_B)`: with `t_A = D_A/(8δ_A)` (A on its leaving edge), `t_B = D_B/(8δ_B)` (B on its entering edge), for `D_A, D_B > 0` (subject the slowest): `t_A` if `t_A ≤ t_B`, else `7·t_B` (the mirror class). Other sign cases: max, min, or `7·t_A`.
+
+**Run.** Subject = the slowest (`D > 0` throughout). Complete grids: residues of the other seven a permutation of 1…7, `D_i = r_i + 8N_i`, `N_i ∈ [0, N_max]`, `N_max ∈ {10, 10², 10³, 10⁴, 10⁶}`; deviations `ε_i` uniform in `[−ρ, ρ]` of a grid step (exact rationals, scale `10⁶`), `ρ ∈ {0, 0.001, 0.01, 0.1, 0.3, 0.49}`; 400 per cell. Let `q = η(14W + 21)` with `η = max |δ_j − D_j|` and `W = max D`: `q ≤ 1` is inside the proved radius (up to the factor 2 in the theorem's `ρ`), `q > 1` beyond.
+Per arrangement (exact): (i) is `gridT` lonely; (ii) is the cascade's landing `t*` equal to `gridT`, one of the named instants `{t_A, t_B, 7t_A, 7t_B}`, or earlier than `gridT` (it cannot be later: the landing is the first isolation, A.9). Reported by decades of `q`.
+
+**Checks (forced):** inside the radius (`q ≤ 1/2`, i.e. `2ρ(14W+21) ≤ 1` with `η ≤ 2ρ`) `gridT` is lonely in every arrangement (the theorem); the landing is never later than `gridT` when `gridT` is lonely; the landing is lonely (exact).
+**Read, not scored:** where (in `q`) `gridT` first fails to be lonely; what the failures look like (M3); whether the landing, when it is not `gridT`, is a named instant.
