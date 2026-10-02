@@ -9956,3 +9956,38 @@ So a proof of C1 along the fastest-flank recursion cannot stand on the walker th
      other seeds;
   2. for each of the 58 counterexamples, which `EightResidual` field it fails, and whether one field (`eight`, the
      slot-sharer) accounts for the hand-off mechanism.
+
+## E263 — 2026-10-02 — design: the restricted (b) tested three ways, all by the record's own construction
+
+**Owner:** *"yes"* to E262's two next steps.
+
+**Map:** v3 §9 C1; E262's owed statement, **(b) restricted to `EightResidual`**: for a C1-shaped set in `EightResidual`,
+the cluster's fastest flank is not hand-off-shadowed across `c`'s band run.
+
+**Part 1 (E262 step 1).** E118's construction, unchanged, under 10 new seeds (201–210), both modes. On every member:
+- E260's flank reading (`hole_C1_flanks_v1.study`): the fastest flank's state;
+- for a shadowed fastest flank, the near-twin chain to a free flank (E260's chain logic);
+- every member with its fastest flank hand-off-shadowed is a counterexample and is listed.
+
+**Part 2 (E262 step 2).** For each of E262's 58 C1-shaped sets `(1, K·six)`: every `EightResidual` field predicate it
+fails (all 16, not only the first). Is there one field, such as `eight` (8 divides some reading, the slot-sharer), that
+all 58 fail?
+
+**Part 3 (the decisive test, found while designing).** The fields depend on the actual integers; the hand-off shadow
+depends on the ratios, and survives small relative changes across `c`'s finite run. So each of the 58 shapes is built
+toward membership by E118's own method:
+- `c = L·u` (the collider, `L = 8·lcm(1…64)`, `u ∈ [1, 19]`);
+- the cluster is `K·six` with `K·x₁ ∈ [25c, 175c]`;
+- the cluster readings are adjusted by small integers, climbing on the number of fields passed. **The fastest flank must
+  stay hand-off-shadowed across `c`'s run at every accepted step.**
+
+Up to 6 restarts per shape, 400 steps each. A member found is a counterexample to the restricted (b); its cascade landing
+is read. If none is found, the null is scoped to this construction.
+
+**Checks (forced):**
+- every member re-checked against all 16 predicates;
+- `c` never in the way inside its run;
+- the cascade's landing is lonely (exact).
+
+**Native check.** Objects as in E260. The construction climbs on membership only (E118's objective), under a structural
+constraint. Nothing is scored for hardness.
