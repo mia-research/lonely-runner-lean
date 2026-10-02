@@ -10827,3 +10827,12 @@ Subagent results (checked by the agent on 131,659 + 20,511 steps from exact samp
 - **Cells (J=1, 9,652):** 6,706 distinct paths; 4,829 cells in 1,883 shared-path families (sizes 2-22); 1,147 same-path pairs differ by disjoint ranges in at least one rank; 52 pairs have all six ranges disjoint (24 families, all paths of length 21-23, ending (7,9), (4,6), (5,6) or (4,5)); 635,433 pairs inside opener (7,9) have six disjoint ranges and different paths. 79 identical 7-range boxes carry 2+ paths.
 - AP with rho_7 = 7+8m is lonely at R = 1 for m = 0..4 (checked by me; the agent reported 0..3).
 **Consequence:** the arrangement transformations that keep the cascade are those moving a reading inside a component where it is clear at every visited state; all failures are a blocker moving. Look-alike families exist (arrangements with disjoint reading ranges, same path), so path-classes are not boxes in reading space.
+
+## E328 (2026-10-03) -- taxonomy features on the tree cells (rho_7 <= 9)
+
+**Map:** exact members of the one-lap tree cells (`cell_members_v1.py`: LP point jittered at scales 1e-12..1e-4, accepted only if the exact cascade reproduces the cell's path); 9,197 of 9,652 cells have an exact member (455 missed). Artifacts: `cell_members_J1.pkl`, `taxo_on_cells_J1_v1.out`.
+- 9,179 members: two or more moves, non-strip opener, opener lap >= 2 (taxonomy K2d/K2b type); 17: two or more moves with opener lap 1 (K2c type); 1: one move, strip opener, lap 1.
+- No member has the closer equal to the opener's own reading (K1s*, K2s* = 0 here), none is zero-width, and 8 have rank 1 as the opener (opener (1,1), landing R = 9).
+- The samplers (E325) put 0.7% of arrangements in K2b, 8% in K2c, 10% in K2d, and 72% in K0/K1; the tree cells are 99.8% opener-lap >= 2 with two or more moves. Tree cells are a partition by path, not a weighting, so these two sets of numbers are not comparable as frequencies; they show which classes each method reaches.
+- K2s2 (closer is the opener's own reading, opener lap >= 2; 621 in the sampler taxonomy) is absent from the cells with rho_7 <= 9, so that class lives in readings beyond the one-lap window.
+**Consequence:** the classes reached by sampling and by the tree overlap only in K2c/K2d; K0, K1*, K2s2 and K2z are sampler classes, and the long-path, rank-1-setting, R up to 12 region is tree only.
