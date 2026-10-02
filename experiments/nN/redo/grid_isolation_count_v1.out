@@ -1,0 +1,8 @@
+AP 1..7: components 4 isolated points ['1/8', '3/8', '5/8', '7/8'] intervals 0 measure 0
+3*AP: components 12, points 12, intervals 0, measure 0; first points ['1/24', '1/8', '5/24', '7/24', '3/8', '11/24']
+5*AP: components 20, points 20, intervals 0, measure 0; first points ['1/40', '3/40', '1/8', '7/40', '9/40', '11/40']
+7*AP: components 28, points 28, intervals 0, measure 0; first points ['1/56', '3/56', '5/56', '1/8', '9/56', '11/56']
+complete grids (residues 1..7, laps < 4): 16384 sets; the four a/8 (a odd) lonely in all.
+ (isolated points, intervals) -> number of sets: [((4, 0), 1), ((4, 2), 10), ((4, 4), 34), ((4, 6), 126), ((4, 8), 276), ((4, 10), 574), ((4, 12), 977), ((4, 14), 1304), ((4, 16), 1644), ((4, 18), 1608), ((4, 20), 1524), ((4, 22), 1156), ((4, 24), 739), ((4, 26), 388), ((4, 28), 141), ((4, 30), 52), ((4, 32), 8), ((4, 34), 1), ((4, 36), 1), ((6, 2), 3)]
+ sets with some lonely interval (positive length): 16382
+ examples with more than 4 components: [([1, 2, 3, 4, 5, 6, 15], 10, 4, 6), ([1, 2, 3, 4, 5, 6, 23], 10, 4, 6), ([1, 2, 3, 4, 5, 6, 31], 10, 4, 6), ([1, 2, 3, 4, 5, 7, 14], 6, 4, 2), ([1, 2, 3, 4, 5, 14, 15], 8, 6, 2), ([1, 2, 3, 4, 5, 14, 23], 6, 4, 2)]
