@@ -10316,3 +10316,29 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 **What it does not give.** Which grid `(a, n_a)` to read the arrangement on is free, and finding one whose type vector is good is Theorem 6.15 (every opening is the class-1 instant of a grid), the obligation. The content is therefore the carrying across walls: the type vector changes only where a reading crosses an edge or a residue boundary (a pinch); the finite local rules at a wall (hand-off on a leaving face, next exit on an entering face: Levels A–C, C.4, C.5) carry the isolation; a multi-pinch is a wall where several readings change type at once. E278's dichotomy and its evenness branch are withdrawn.
 
 **Consequence.** The work is the carrying rule at every wall including the multi ones (E277, running), not a dichotomy or a bound. To confirm with the owner: that this is the intended sense of "locally arranged in an AP/grid style".
+
+## E280 — 2026-10-02 — the multi-pinches read: the first-order criterion holds exactly; interleaving is common; every such event has a margin window, so the multi-pinch matters only at a tight arrangement
+
+**Map:** v4 §2 E, §9 C8; E277 run as designed. Script `LonelyRunner/experiments/nN/redo/multi_pinch_read_v1.{py,out}` (same path, populations and event location as E178; its header says E278, the number was taken by the entry before it).
+
+**Check: the derived criterion (E277) agrees with the exact test.** The pinching window and the mirror window evaluated by exact `feasible` at `s₀ ± 10⁻⁹` against "(A) `min_Λ u ≥ max_E u`, (B) `min_E u ≥ max_Λ u`" (and the backward forms): Case B 922 comparisons, Case C 270, **0 mismatches**; 6 tied events in each (first order does not decide them; listed in the `.out`'s counts, not read).
+
+**The multi-pinches** (same events as E178):
+| population | events | simple | multi | by `(|Λ|, |E|)` |
+|---|---|---|---|---|
+| Case B, every 100th | 8,900 | 8,668 | 232 | (2,1) 128, (1,2) 74, (2,2) 17, (3,1) 8, (3,2) 3, (2,3) 2 |
+| late band shapes, every 10th | 2,079 | 2,079 | 0 | none |
+| Case C sample | 5,902 | 5,833 | 69 | (2,1) 34, (1,2) 31, (2,2) 2, (3,1) 2 |
+
+**On the lost side** (death: forward; birth: backward):
+- Case B: births, neither the instant nor its mirror reopens 118, the mirror reopens 7; deaths, the mirror reopens 78, neither 29. Case C: births neither 11; deaths mirror 56, neither 2.
+- So **interleaving** (neither reopens, the first-order unfavourable pattern) occurs in 147 of 232 (Case B) and 13 of 69 (Case C) multi-pinch events: it is common, not exceptional. In the others the mirror reopens, as at a simple pinch.
+
+**Every interleaving event has a positive-width window at `τ`:** 0 of 147 and 0 of 13 without one. The protector windows (Case B 2,447; Case C 1,493): later than `t₀` in `R` in all; at a recurrence time `t₀ + j/(d_a − d_b)` of a doubled pair on one edge in 673 and 376 (the rest not); an AP-origin window in 93 (Case B); none earlier than `t₀`; **no single class** (note: a window containing the mirror `P − t₀` cannot appear in this list, because at `s₀` the mirror window is a single point, not positive width).
+
+**What this says** (`[derived criterion; VERIFIED — these samples]`):
+- At a multi-pinch the instant and its mirror can both fail to reopen (the interleaving of the relative rates `u`, only possible when `|Λ| + |E| ≥ 3`), and that happens often; but in no event read is it decisive, because the arrangement at the event is **not tight**: it has a lonely window of positive width elsewhere, and openness there is margin openness (`eventually_lonely_of_margin`), not a pinch rule.
+- This is E113's statement (A) seen from the other side. E113 found 6 of 346,104 sets (readings `≤ 24`) with no lonely interval, the tight instances and their rescalings, all with simple pinches. So the multi-pinch is a problem only at a **tight** arrangement (every lonely instant an isolated pinch), and the known tight arrangements have only simple pinches.
+- So the carrying rule at a wall has two cases: a non-tight arrangement (a margin window exists: nothing to prove at the wall) and a tight one (a classification question). The multi-pinch is not an open step of its own.
+
+**What a proof now needs** (not started): the statement **(T): a whole-number arrangement with no positive-width lonely window (tight) has only simple pinches** (equivalently, no tight arrangement has a doubled-edge pinch as its only lonely instants). `[VERIFIED — readings ≤ 24, E113]`. A route to (T): characterise the tight arrangements. The literature report (E276) notes Beck–Everett's theorem is about exactly this object (a tight instance, lon `= 1/(k+1)`, lies on a hyperplane `m·n = 0` with small `‖m‖₁`, the AP among them); the owner has set the literature aside as coverage and density, and the object here, the tight arrangement, is the pinch-only one; whether its statement (not its Fourier proof) is of use is the owner's call.
