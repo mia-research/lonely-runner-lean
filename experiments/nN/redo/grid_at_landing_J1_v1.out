@@ -1,0 +1,19 @@
+members 9197
+mean distance of reading position (mod 8) to nearest integer at the landing, by rank (uniform would be 0.25):
+  rank 1 0.246 median 0.254
+  rank 2 0.245 median 0.263
+  rank 3 0.232 median 0.248
+  rank 4 0.21 median 0.213
+  rank 5 0.207 median 0.21
+  rank 6 0.175 median 0.156
+  rank 7 0.158 median 0.106
+readings within 0.1 of an integer position at the landing (count: members): [(1, 2498), (2, 3530), (3, 2227), (4, 742), (5, 183), (6, 17)]
+distinct floor-position patterns: 1639
+   (1, 1, 1, 1, 6, 2, 1) 222
+   (1, 1, 1, 2, 6, 2, 1) 200
+   (1, 1, 1, 1, 6, 1, 1) 175
+   (1, 2, 1, 1, 6, 2, 1) 167
+   (1, 2, 1, 1, 6, 1, 1) 155
+   (1, 1, 1, 6, 3, 1, 1) 146
+   (1, 2, 1, 2, 6, 2, 1) 122
+   (2, 1, 3, 5, 2, 1, 3) 94
