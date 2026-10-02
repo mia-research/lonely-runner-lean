@@ -1,0 +1,48 @@
+================================================================================================
+B1 #0  rho: [1.0, 1.528, 2.878, 3.138, 3.781, 8.047, 8.513]  R* = 1.1185
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 6 lap 1  [0.8699, 1.1185]   entered at R=1.0000   overlap 0.1301
+   free at R* = 1.1185 ; the next zone starts at none below
+================================================================================================
+B1 #1  rho: [1.0, 1.13, 5.805, 6.815, 7.234, 7.874, 8.004]  R* = 1.5503
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 5 lap 1  [0.9677, 1.2441]   entered at R=1.0000   overlap 0.0323
+   rank 3 lap 1  [1.2058, 1.5503]   entered at R=1.2441   overlap 0.0384
+   free at R* = 1.5503 ; the next zone starts at none below
+================================================================================================
+B1 #7  rho: [1.0, 1.093, 4.666, 5.963, 6.348, 6.86, 8.117]  R* = 2.0943
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 7 lap 1  [0.8623, 1.1087]   entered at R=1.0000   overlap 0.1377
+   rank 5 lap 1  [1.1027, 1.4177]   entered at R=1.1087   overlap 0.0061
+   rank 4 lap 1  [1.1739, 1.5092]   entered at R=1.4177   overlap 0.2438
+   rank 3 lap 1  [1.5003, 1.9290]   entered at R=1.5092   overlap 0.0090
+   rank 7 lap 2  [1.8479, 2.0943]   entered at R=1.9290   overlap 0.0811
+   free at R* = 2.0943 ; the next zone starts at none below
+================================================================================================
+B1 #3  rho: [1.0, 1.121, 2.609, 5.733, 5.938, 6.662, 8.25]  R* = 1.5698
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 7 lap 1  [0.8485, 1.0909]   entered at R=1.0000   overlap 0.1515
+   rank 6 lap 1  [1.0507, 1.3509]   entered at R=1.0909   overlap 0.0402
+   rank 4 lap 1  [1.2209, 1.5698]   entered at R=1.3509   overlap 0.1300
+   free at R* = 1.5698 ; the next zone starts at none below
+================================================================================================
+B1 #5  rho: [1.0, 1.042, 3.313, 6.733, 7.549, 8.367, 8.808]  R* = 1.3366
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 5 lap 1  [0.9272, 1.1922]   entered at R=1.0000   overlap 0.0728
+   rank 4 lap 1  [1.0396, 1.3366]   entered at R=1.1922   overlap 0.1526
+   free at R* = 1.3366 ; the next zone starts at none below
+================================================================================================
+C1 #0  rho: [1.0, 29.534, 49.042, 56.24, 81.354, 87.791, 96.171]  R* = 1.0138
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 6 lap 11  [0.9910, 1.0138]   entered at R=1.0000   overlap 0.0090
+   free at R* = 1.0138 ; the next zone starts at none below
+================================================================================================
+C1 #1  rho: [1.0, 26.334, 44.02, 72.192, 72.868, 77.239, 79.953]  R* = 1.0131
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 7 lap 10  [0.9881, 1.0131]   entered at R=1.0000   overlap 0.0119
+   free at R* = 1.0131 ; the next zone starts at none below
+================================================================================================
+C1 #2  rho: [1.0, 29.27, 32.87, 37.308, 43.466, 46.46, 48.749]  R* = 1.0052
+ zones containing R during the run, in order (rank, lap) [lo, hi]:   overlap with the previous end
+   rank 7 lap 6  [0.9641, 1.0052]   entered at R=1.0000   overlap 0.0359
+   free at R* = 1.0052 ; the next zone starts at none below

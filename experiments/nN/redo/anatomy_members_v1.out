@@ -1,0 +1,146 @@
+B1 members: 47  C1 members: 547
+====================================================================================================
+B1 #0  readings / d_min: [1.0, 1.5276, 2.8782, 3.1384, 3.7814, 8.0468, 8.5128]
+ d_min mod 8 = 0 ; residues of readings mod 8: [0, 1, 7, 3, 4, 6, 0]
+ cascade moves: 1
+  move 1: R=1.0000 -> 1.1185 ; blockers at start: ranks [6, 7] ; setter rank 6 lap 1
+     rank 1  x/dmin=  1.000  pos   1.000 ->   1.118  (shift   0.118)
+     rank 2  x/dmin=  1.528  pos   1.528 ->   1.709  (shift   0.181)
+     rank 3  x/dmin=  2.878  pos   2.878 ->   3.219  (shift   0.341)
+     rank 4  x/dmin=  3.138  pos   3.138 ->   3.510  (shift   0.372)
+     rank 5  x/dmin=  3.781  pos   3.781 ->   4.229  (shift   0.448)
+     rank 6  x/dmin=  8.047  pos   0.047 ->   1.000  (shift   0.953)
+     rank 7  x/dmin=  8.513  pos   0.513 ->   1.521  (shift   1.008)
+ LANDING t: R=1.1185 ; flank rank 6, lap k=1 ; all (rank,k) representations: [(6, 1)]
+  grid D=b: reading a = b*q + r, eps=r/b; position = q + eps + 8{k eps} (mod 8), in eighths
+     rank 1  q=0  eps=0.1243  {k eps}=0.1243   pos=  1.118  margin beyond edge= 0.118
+     rank 2  q=0  eps=0.1898  {k eps}=0.1898   pos=  1.709  margin beyond edge= 0.709
+     rank 3  q=0  eps=0.3577  {k eps}=0.3577   pos=  3.219  margin beyond edge= 2.219
+     rank 4  q=0  eps=0.3900  {k eps}=0.3900   pos=  3.510  margin beyond edge= 2.510
+     rank 5  q=0  eps=0.4699  {k eps}=0.4699   pos=  4.229  margin beyond edge= 2.771
+     rank 6  q=1  eps=0.0000  {k eps}=0.0000   pos=  1.000  margin beyond edge= 0.000
+     rank 7  q=1  eps=0.0579  {k eps}=0.0579   pos=  1.521  margin beyond edge= 0.521
+====================================================================================================
+B1 #1  readings / d_min: [1.0, 1.1304, 5.8054, 6.8146, 7.234, 7.8739, 8.0045]
+ d_min mod 8 = 0 ; residues of readings mod 8: [0, 3, 3, 3, 0, 4, 0]
+ cascade moves: 2
+  move 1: R=1.0000 -> 1.2441 ; blockers at start: ranks [5, 6, 7] ; setter rank 5 lap 1
+     rank 1  x/dmin=  1.000  pos   1.000 ->   1.244  (shift   0.244)
+     rank 2  x/dmin=  1.130  pos   1.130 ->   1.406  (shift   0.276)
+     rank 3  x/dmin=  5.805  pos   5.805 ->   7.223  (shift   1.417)  *in the way
+     rank 4  x/dmin=  6.815  pos   6.815 ->   0.478  (shift   1.664)  *in the way
+     rank 5  x/dmin=  7.234  pos   7.234 ->   1.000  (shift   1.766)
+     rank 6  x/dmin=  7.874  pos   7.874 ->   1.796  (shift   1.922)
+     rank 7  x/dmin=  8.004  pos   0.004 ->   1.959  (shift   1.954)
+  move 2: R=1.2441 -> 1.5503 ; blockers at start: ranks [3, 4] ; setter rank 3 lap 1
+     rank 1  x/dmin=  1.000  pos   1.244 ->   1.550  (shift   0.306)
+     rank 2  x/dmin=  1.130  pos   1.406 ->   1.752  (shift   0.346)
+     rank 3  x/dmin=  5.805  pos   7.223 ->   1.000  (shift   1.777)
+     rank 4  x/dmin=  6.815  pos   0.478 ->   2.564  (shift   2.086)
+     rank 5  x/dmin=  7.234  pos   1.000 ->   3.215  (shift   2.215)
+     rank 6  x/dmin=  7.874  pos   1.796 ->   4.207  (shift   2.411)
+     rank 7  x/dmin=  8.004  pos   1.959 ->   4.409  (shift   2.451)
+ LANDING t: R=1.5503 ; flank rank 3, lap k=1 ; all (rank,k) representations: [(3, 1)]
+  grid D=b: reading a = b*q + r, eps=r/b; position = q + eps + 8{k eps} (mod 8), in eighths
+     rank 1  q=0  eps=0.1723  {k eps}=0.1723   pos=  1.550  margin beyond edge= 0.550
+     rank 2  q=0  eps=0.1947  {k eps}=0.1947   pos=  1.752  margin beyond edge= 0.752
+     rank 3  q=1  eps=0.0000  {k eps}=0.0000   pos=  1.000  margin beyond edge= 0.000
+     rank 4  q=1  eps=0.1738  {k eps}=0.1738   pos=  2.564  margin beyond edge= 1.564
+     rank 5  q=1  eps=0.2461  {k eps}=0.2461   pos=  3.215  margin beyond edge= 2.215
+     rank 6  q=1  eps=0.3563  {k eps}=0.3563   pos=  4.207  margin beyond edge= 2.793
+     rank 7  q=1  eps=0.3788  {k eps}=0.3788   pos=  4.409  margin beyond edge= 2.591
+====================================================================================================
+B1 #7  readings / d_min: [1.0, 1.0926, 4.6658, 5.9632, 6.3483, 6.86, 8.1174]
+ d_min mod 8 = 0 ; residues of readings mod 8: [0, 1, 5, 3, 6, 1, 0]
+ cascade moves: 5
+  move 1: R=1.0000 -> 1.1087 ; blockers at start: ranks [7] ; setter rank 7 lap 1
+     rank 1  x/dmin=  1.000  pos   1.000 ->   1.109  (shift   0.109)
+     rank 2  x/dmin=  1.093  pos   1.093 ->   1.211  (shift   0.119)
+     rank 3  x/dmin=  4.666  pos   4.666 ->   5.173  (shift   0.507)
+     rank 4  x/dmin=  5.963  pos   5.963 ->   6.612  (shift   0.648)
+     rank 5  x/dmin=  6.348  pos   6.348 ->   7.039  (shift   0.690)  *in the way
+     rank 6  x/dmin=  6.860  pos   6.860 ->   7.606  (shift   0.746)  *in the way
+     rank 7  x/dmin=  8.117  pos   0.117 ->   1.000  (shift   0.883)
+  move 2: R=1.1087 -> 1.4177 ; blockers at start: ranks [5, 6] ; setter rank 5 lap 1
+     rank 1  x/dmin=  1.000  pos   1.109 ->   1.418  (shift   0.309)
+     rank 2  x/dmin=  1.093  pos   1.211 ->   1.549  (shift   0.338)
+     rank 3  x/dmin=  4.666  pos   5.173 ->   6.615  (shift   1.442)
+     rank 4  x/dmin=  5.963  pos   6.612 ->   0.454  (shift   1.842)  *in the way
+     rank 5  x/dmin=  6.348  pos   7.039 ->   1.000  (shift   1.961)
+     rank 6  x/dmin=  6.860  pos   7.606 ->   1.725  (shift   2.119)
+     rank 7  x/dmin=  8.117  pos   1.000 ->   3.508  (shift   2.508)
+  move 3: R=1.4177 -> 1.5092 ; blockers at start: ranks [4] ; setter rank 4 lap 1
+     rank 1  x/dmin=  1.000  pos   1.418 ->   1.509  (shift   0.092)
+     rank 2  x/dmin=  1.093  pos   1.549 ->   1.649  (shift   0.100)
+     rank 3  x/dmin=  4.666  pos   6.615 ->   7.042  (shift   0.427)  *in the way
+     rank 4  x/dmin=  5.963  pos   0.454 ->   1.000  (shift   0.546)
+     rank 5  x/dmin=  6.348  pos   1.000 ->   1.581  (shift   0.581)
+     rank 6  x/dmin=  6.860  pos   1.725 ->   2.353  (shift   0.628)
+     rank 7  x/dmin=  8.117  pos   3.508 ->   4.251  (shift   0.743)
+  move 4: R=1.5092 -> 1.9290 ; blockers at start: ranks [3] ; setter rank 3 lap 1
+     rank 1  x/dmin=  1.000  pos   1.509 ->   1.929  (shift   0.420)
+     rank 2  x/dmin=  1.093  pos   1.649 ->   2.107  (shift   0.459)
+     rank 3  x/dmin=  4.666  pos   7.042 ->   1.000  (shift   1.958)
+     rank 4  x/dmin=  5.963  pos   1.000 ->   3.503  (shift   2.503)
+     rank 5  x/dmin=  6.348  pos   1.581 ->   4.246  (shift   2.664)
+     rank 6  x/dmin=  6.860  pos   2.353 ->   5.233  (shift   2.879)
+     rank 7  x/dmin=  8.117  pos   4.251 ->   7.658  (shift   3.407)  *in the way
+  move 5: R=1.9290 -> 2.0943 ; blockers at start: ranks [7] ; setter rank 7 lap 2
+     rank 1  x/dmin=  1.000  pos   1.929 ->   2.094  (shift   0.165)
+     rank 2  x/dmin=  1.093  pos   2.107 ->   2.288  (shift   0.181)
+     rank 3  x/dmin=  4.666  pos   1.000 ->   1.771  (shift   0.771)
+     rank 4  x/dmin=  5.963  pos   3.503 ->   4.489  (shift   0.986)
+     rank 5  x/dmin=  6.348  pos   4.246 ->   5.295  (shift   1.050)
+     rank 6  x/dmin=  6.860  pos   5.233 ->   6.367  (shift   1.134)
+     rank 7  x/dmin=  8.117  pos   7.658 ->   1.000  (shift   1.342)
+ LANDING t: R=2.0943 ; flank rank 7, lap k=2 ; all (rank,k) representations: [(7, 2)]
+  grid D=b: reading a = b*q + r, eps=r/b; position = q + eps + 8{k eps} (mod 8), in eighths
+     rank 1  q=0  eps=0.1232  {k eps}=0.2464   pos=  2.094  margin beyond edge= 1.094
+     rank 2  q=0  eps=0.1346  {k eps}=0.2692   pos=  2.288  margin beyond edge= 1.288
+     rank 3  q=0  eps=0.5748  {k eps}=0.1496   pos=  1.771  margin beyond edge= 0.771
+     rank 4  q=0  eps=0.7346  {k eps}=0.4693   pos=  4.489  margin beyond edge= 2.511
+     rank 5  q=0  eps=0.7821  {k eps}=0.5641   pos=  5.295  margin beyond edge= 1.705
+     rank 6  q=0  eps=0.8451  {k eps}=0.6902   pos=  6.367  margin beyond edge= 0.633
+     rank 7  q=1  eps=0.0000  {k eps}=0.0000   pos=  1.000  margin beyond edge= 0.000
+====================================================================================================
+C1 #0  readings / d_min: [1.0, 29.534, 49.042, 56.2404, 81.3537, 87.7914, 96.1708]
+ d_min mod 8 = 0 ; residues of readings mod 8: [0, 4, 2, 7, 5, 0, 0]
+ cascade moves: 1
+  move 1: R=1.0000 -> 1.0138 ; blockers at start: ranks [4, 6, 7] ; setter rank 6 lap 11
+     rank 1  x/dmin=  1.000  pos   1.000 ->   1.014  (shift   0.014)
+     rank 2  x/dmin= 29.534  pos   5.534 ->   5.941  (shift   0.407)
+     rank 3  x/dmin= 49.042  pos   1.042 ->   1.717  (shift   0.675)
+     rank 4  x/dmin= 56.240  pos   0.240 ->   1.015  (shift   0.774)
+     rank 5  x/dmin= 81.354  pos   1.354 ->   2.474  (shift   1.120)
+     rank 6  x/dmin= 87.791  pos   7.791 ->   1.000  (shift   1.209)
+     rank 7  x/dmin= 96.171  pos   0.171 ->   1.495  (shift   1.324)
+ LANDING t: R=1.0138 ; flank rank 6, lap k=11 ; all (rank,k) representations: [(6, 11)]
+  grid D=b: reading a = b*q + r, eps=r/b; position = q + eps + 8{k eps} (mod 8), in eighths
+     rank 1  q=0  eps=0.0114  {k eps}=0.1253   pos=  1.014  margin beyond edge= 0.014
+     rank 2  q=0  eps=0.3364  {k eps}=0.7005   pos=  5.941  margin beyond edge= 1.059
+     rank 3  q=0  eps=0.5586  {k eps}=0.1448   pos=  1.717  margin beyond edge= 0.717
+     rank 4  q=0  eps=0.6406  {k eps}=0.0468   pos=  1.015  margin beyond edge= 0.015
+     rank 5  q=0  eps=0.9267  {k eps}=0.1934   pos=  2.474  margin beyond edge= 1.474
+     rank 6  q=1  eps=0.0000  {k eps}=0.0000   pos=  1.000  margin beyond edge= 0.000
+     rank 7  q=1  eps=0.0954  {k eps}=0.0499   pos=  1.495  margin beyond edge= 0.495
+====================================================================================================
+C1 #1  readings / d_min: [1.0, 26.3342, 44.0197, 72.192, 72.868, 77.2394, 79.9525]
+ d_min mod 8 = 0 ; residues of readings mod 8: [0, 5, 4, 5, 0, 1, 4]
+ cascade moves: 1
+  move 1: R=1.0000 -> 1.0131 ; blockers at start: ranks [4, 5, 7] ; setter rank 7 lap 10
+     rank 1  x/dmin=  1.000  pos   1.000 ->   1.013  (shift   0.013)
+     rank 2  x/dmin= 26.334  pos   2.334 ->   2.679  (shift   0.345)
+     rank 3  x/dmin= 44.020  pos   4.020 ->   4.596  (shift   0.577)
+     rank 4  x/dmin= 72.192  pos   0.192 ->   1.138  (shift   0.946)
+     rank 5  x/dmin= 72.868  pos   0.868 ->   1.823  (shift   0.955)
+     rank 6  x/dmin= 77.239  pos   5.239 ->   6.251  (shift   1.012)
+     rank 7  x/dmin= 79.953  pos   7.953 ->   1.000  (shift   1.047)
+ LANDING t: R=1.0131 ; flank rank 7, lap k=10 ; all (rank,k) representations: [(7, 10)]
+  grid D=b: reading a = b*q + r, eps=r/b; position = q + eps + 8{k eps} (mod 8), in eighths
+     rank 1  q=0  eps=0.0125  {k eps}=0.1251   pos=  1.013  margin beyond edge= 0.013
+     rank 2  q=0  eps=0.3294  {k eps}=0.2937   pos=  2.679  margin beyond edge= 1.679
+     rank 3  q=0  eps=0.5506  {k eps}=0.5057   pos=  4.596  margin beyond edge= 2.404
+     rank 4  q=0  eps=0.9029  {k eps}=0.0294   pos=  1.138  margin beyond edge= 0.138
+     rank 5  q=0  eps=0.9114  {k eps}=0.1139   pos=  1.823  margin beyond edge= 0.823
+     rank 6  q=0  eps=0.9661  {k eps}=0.6607   pos=  6.251  margin beyond edge= 0.749
+     rank 7  q=1  eps=0.0000  {k eps}=0.0000   pos=  1.000  margin beyond edge= 0.000
