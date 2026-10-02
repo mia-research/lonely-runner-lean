@@ -10565,3 +10565,13 @@ Per arrangement (exact): (i) is `gridT` lonely; (ii) is the cascade's landing `t
 ## E298 — 2026-10-02 — owner: "Why not in lean?"
 
 No reason: E297 marked the `D = 1` grid facts "not formalised" and stopped. Formalised now: `LonelyRunner/LRC/Spec/IntegerGridN.lean` (nested repo). `clear_rational_iff` (reading `d` clear at `k/(8m)` iff `∀ z, m ≤ |d·k − 8m·z|`), `clear_of_dvd_not_dvd` (`m ∣ d·k`, `8m ∤ d·k`), `clear_two_adic` (`2^e ∣ d`, `2^(e+3) ∤ d`, `k` odd: clear at `k/2^(e+3)`), `lonely8_of_no_multiple_of_eight` (`Lonely8` at `1/8`), `lonely8_two_adic_window` (every valuation in `[e, e+2]`). Built clean; axioms `[propext, Classical.choice, Quot.sound]`. Not formalised: the oracle counts of E297 (script outputs).
+
+## E299 — 2026-10-02 — owner: the cascade shows where the isolation moves and why: the deviation of the speeds from the AP/grid deforms the isolation event; "yes, formalise it"
+
+**Map:** the grid `D = 1` of an integer arrangement; slot residue `ρ = a·x mod 8` at the grid instant `a/8`; the shift `x/c` eighths. **Consequence:** the displacement at an integer arrangement is stated and proved in the deviation's own terms; E297's "rule not obtained" is withdrawn for this displacement (the 2-adic family and the counts are not part of the argument, E297 counts dropped as not needed).
+- `LonelyRunner/LRC/Spec/IntegerDisplacementN.lean` (nested repo), built clean, axioms `[propext, Classical.choice, Quot.sound]`.
+- `lonely_of_displacement`: `8 ∣ c` (slot 0 at `a/8`); every other reading has slot `ρ ≥ 1` and `ρ + x/c ≤ 7`; then every reading is clear at `a/8 + 1/(8c) = (8K+1)/(8c)`, `K = a·c/8`. Built from `SeparationN.lonely_of_separation`.
+- `slower_clear_iff`: for `x < c`: clear at that instant iff `ρ ∈ [1, 6]`; the obstructing slower readings are exactly slot `7` (carried over the entering edge: edge push) and slot `0`.
+- `clear_at_exit_iff`: every reading, clear iff `∀ z, c ≤ |x(ac+1) − 8cz|`.
+- `lonely8_example`: readings `1,2,3,4,5,7,8` (speeds 1,2,3,4,5,6,8,9 for subject speed 1) lonely at `9/56`, the leaving edge of the reading `7`, which the first displacement (8 leaving at `9/64`) carries into its slot.
+- **Not stated:** the displacement of an entering-edge runner (the `7` here) as a general theorem; only its instance.
