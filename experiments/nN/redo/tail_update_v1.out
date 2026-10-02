@@ -1,0 +1,24 @@
+effective crossings examined: 1493
+  crossing end   -> backward hop                 46
+  crossing end   -> continuous (same landing R)  468
+  crossing end   -> forward hop                  8
+  crossing start -> backward hop                 248
+  crossing start -> continuous (same landing R)  387
+  crossing start -> forward hop                  336
+  forward hop: n=344, median |jump| 0.133, 90th pct 0.611, max 6.226, jumps > 1: 11
+  backward hop: n=294, median |jump| 0.116, 90th pct 0.843, max 3.193, jumps > 1: 22
+  rejoin (new path shares a state with the old tail) by outcome: [(('backward hop', False), 293), (('backward hop', True), 1), (('continuous (same landing R)', False), 410), (('continuous (same landing R)', True), 445), (('forward hop', False), 344)]
+   hop example: ('AP', (1, 2, 3, 4), 0.9058, 3, 1.5, 2.0862, 3, 5)
+   hop example: ('AP', (0, 2, 6), 0.17493, 1, 2.8457, 1.1667, 5, 1)
+   hop example: ('AP', (0, 2, 6), 0.2551, 0, 1.1667, 2.8333, 0, 5)
+   hop example: ('AP', (0, 2, 6), 0.27371, 5, 2.8333, 3.4, 5, 7)
+   hop example: ('AP', (3, 6), 0.07512, 5, 3.0, 2.3333, 6, 5)
+   hop example: ('AP', (3, 6), 0.18781, 1, 2.2037, 1.1667, 5, 1)
+   hop example: ('AP', (0, 1, 2, 4), 0.53239, 0, 0.9843, 1.5, 0, 2)
+   hop example: ('AP', (0, 3, 4), 0.08792, 3, 4.9883, 1.7958, 11, 3)
+   hop example: ('AP', (0, 3, 4), 0.7619, 0, 2.1429, 5.8571, 0, 10)
+   hop example: ('AP', (0, 3, 4), 0.80645, 1, 5.8571, 4.8947, 10, 6)
+   hop example: ('AP', (6,), 0.04208, 5, 3.0, 2.3333, 6, 5)
+   hop example: ('AP', (6,), 0.1052, 1, 2.25, 1.1667, 4, 1)
+   hop example: ('AP', (0, 2, 3, 6), 0.06812, 5, 2.9308, 2.2795, 6, 5)
+   hop example: ('AP', (0, 2, 3, 6), 0.10629, 1, 2.2037, 1.1667, 5, 1)
