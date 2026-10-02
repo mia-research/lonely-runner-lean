@@ -10422,3 +10422,21 @@ Per arrangement (exact): (i) is `gridT` lonely; (ii) is the cascade's landing `t
 
 **Checks (forced):** inside the radius (`q ≤ 1/2`, i.e. `2ρ(14W+21) ≤ 1` with `η ≤ 2ρ`) `gridT` is lonely in every arrangement (the theorem); the landing is never later than `gridT` when `gridT` is lonely; the landing is lonely (exact).
 **Read, not scored:** where (in `q`) `gridT` first fails to be lonely; what the failures look like (M3); whether the landing, when it is not `gridT`, is a named instant.
+
+## E286 — 2026-10-02 — the named instant of the complete grid stays lonely about 120 times beyond the proved radius, then fails; the cascade's landing is almost always earlier than it
+
+**Map:** v4 §4 Q8; E284–E285; `GridNeighbourhoodN`. Script `LonelyRunner/experiments/nN/redo/named_instant_v1.{py,out}`; exact; 12,000 complete grids (30 cells of 400: `N_max` ∈ {10, 10², 10³, 10⁴, 10⁶}, `ρ` ∈ {0, 0.001, 0.01, 0.1, 0.3, 0.49} grid steps; subject the slowest). `q = η(14W + 21)`, `η = max|δ_j − D_j|`, `W = max D`; the theorem's hypothesis `2ρ(14W + 21) ≤ 1` is `q ≤ 1/2` here.
+
+**Checks: 0 failures.** The landing is lonely in all 12,000; it is never later than `gridT` when `gridT` is lonely; **inside the proved radius (`q ≤ 0.5`) `gridT` is lonely in 2,008 of 2,008** (the theorem).
+
+**By `q`** (n | `gridT` lonely | landing equals `gridT` | landing a named instant `{t_A, t_B, 7t_A, 7t_B}` | landing earlier than `gridT`):
+- `q ≤ 0.5`: 2,008 | 2,008 | 38 | 38 | 1,970; `(0.5, 1]`: 216 | 216 | 9 | 9 | 207; `(1, 10]`: 699 | 699 | 15 | 15 | 684.
+- `(10, 100]`: 1,126 | 1,090 | 23 | 24 | 1,089; `(10², 10³]`: 2,106 | 1,720 | 16 | 23 | 2,055; `(10³, 10⁴]`: 1,698 | 1,337 | 2 | 2 | 1,694; `(10⁴, 10⁵]`: 1,583 | 1,203 | 0 | 1; `(10⁵, 10⁶]`: 1,279 | 940 | 0 | 0; `(10⁶, 10⁸]`: 1,285 | 883 | 0 | 0.
+- Moves at most 9 throughout.
+
+**Reading.**
+- **The proved radius is conservative.** `gridT` is lonely in every arrangement with `q ≤ 61.7` (2,923 of 2,923 up to `q = 10`, and every one of the first 1,126 to 100 except from `q = 61.7` on); the first failure is at `q = 61.7` (`N_max = 10`, `ρ = 0.1`, one move), about 120 times the proved bound. Failures then grow with `q` (e.g. at `ρ = 0.49`, 171 to 186 of 400 in each `N_max` cell; at `ρ = 0.001`, 1 of 400 at `N_max = 10⁶`); at no `q` is the failing share total (883 of 1,285 still lonely at `q` up to `10⁸`). No threshold at a fixed `q`: the same `q` can be lonely or not.
+- **The named instant is an isolation, not the first.** The landing equals `gridT` in only a few percent even inside the radius (2,008 inside: 38 equal; 1,970 earlier). The cascade's first isolation lies earlier, because the other readings give earlier windows; `gridT` is the class instant of the unit grid, a witness near `1/8` in grid units. So "the isolation is one of the named instants" is true of the named instant as *an* isolation, not of the first.
+- **What it says for the frame.** Where the deviation is small against the grid's step and laps, the global ideal's instant is displaced to a nearby local instant and stays an isolation (E286: out to `q` about 60, against the proved 0.5). Beyond that the unit grid stops being the right description (deviations of order half a step: `ρ = 0.49` is as far from the grid as an arrangement gets) and the isolation is elsewhere; the arrangement is then a small deviation from some other grid (through another reading, another divisor), not from this one.
+
+**Consequence (M7).** The picture "move the speed and the isolation moves from the global ideal to a local event" holds as measured on the named instant over a region about 120 times wider (in `q`) than the Lean theorem proves; the Lean radius's shrinkage with laps is conservative. The question this leaves in the owner's terms: for an arrangement outside this region, which grid (through which reading, at which divisor) is the one it is a small deviation from, and for arrangements whose rounded residues collide (no complete grid) what plays the ideal's role. Not started.
