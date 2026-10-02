@@ -14,6 +14,9 @@ of `c`.  Every other reading `x` has moved by `x/c` eighths of a lap.
 * `slower_clear_iff`: a reading `x < c` is clear at `t₁` exactly when its slot is `1 … 6`: the slower obstruction is
   exactly slot `7` (edge push) or slot `0`.
 * `clear_at_exit_iff`: for every reading, clear at `t₁` iff `∀ z, c ≤ |x·(a·c+1) − 8·c·z|`.
+* `inWay_at_grid_iff`: at the grid instant `a/8`, `a` odd, a reading is in the way exactly when `8 ∣ x`.
+* `inWay_at_exit_iff`: the readings in the way at that next instant, exactly.
+* `nextOpening_at_grid`, `move_at_grid`: the cascade's move from `a/8` is `a/8 + 1/(8c)`, `c` the slowest multiple of `8`.
 * `lonely8_example`: the arrangement with readings `1,2,3,4,5,7,8` (speeds 1,2,3,4,5,6,8,9 for subject speed `s = 1`; any `s > 0` gives the same) is lonely at `9/56`,
   the leaving edge of the reading `7`, where the slot-`7` reading `7` was carried by the first displacement.
 
@@ -118,5 +121,81 @@ theorem lonely8_example : Lonely8 ({1, 2, 3, 4, 5, 7, 8} : Finset ℕ) := by
   simp only [Finset.mem_insert, Finset.mem_singleton] at hd
   rcases hd with rfl | rfl | rfl | rfl | rfl | rfl | rfl <;>
     (rw [le_abs]; push_cast; omega)
+
+open MomentIterationN in
+/-- At `t₁ = a/8 + 1/(8c)` a reading is in the way exactly when `c > |x(ac+1) − 8cz|` for some `z`. -/
+theorem inWay_at_exit_iff {c a x : ℕ} (hc : 0 < c) :
+    inWay 8 (x : ℝ) ((a : ℝ) / 8 + 1 / (8 * (c : ℝ))) ↔
+      ∃ z : ℤ, |(x : ℤ) * ((a : ℤ) * c + 1) - 8 * c * z| < (c : ℤ) := by
+  unfold inWay
+  have h := clear_at_exit_iff (c := c) (a := a) (x := x) hc
+  have h8 : (((8 : ℕ) : ℝ))⁻¹ = (8 : ℝ)⁻¹ := by norm_num
+  rw [h8, ← not_le, h]
+  push Not
+  rfl
+
+open MomentIterationN in
+theorem inWay_at_grid_iff {a x : ℕ} (ha : Odd a) :
+    inWay 8 (x : ℝ) ((a : ℝ) / 8) ↔ 8 ∣ x := by
+  have hcop : Nat.Coprime 8 a := by
+    have := Nat.Coprime.pow_left 3 (Nat.coprime_two_left.mpr ha)
+    simpa using this
+  have e : (x : ℝ) * ((a : ℝ) / 8) = (((a * x : ℕ) : ℤ) : ℝ) / ((8 : ℕ) : ℝ) := by push_cast; ring
+  unfold inWay
+  rw [e]
+  constructor
+  · intro h
+    by_contra hn
+    have hn' : ¬ 8 ∣ a * x := fun hd => hn (hcop.dvd_of_dvd_mul_left hd)
+    have := ConstructionN.circDist_int_div (n := 8) (by norm_num) (c := ((a * x : ℕ) : ℤ))
+      (by exact_mod_cast hn')
+    simp only [Nat.cast_ofNat] at this h
+    linarith
+  · intro h
+    have h' : (8 : ℤ) ∣ ((a * x : ℕ) : ℤ) := by exact_mod_cast Dvd.dvd.mul_left h a
+    have := ConstructionN.circDist_int_div_of_dvd (n := 8) (by norm_num) h'
+    rw [this]; norm_num
+
+open MomentIterationN in
+theorem nextOpening_at_grid {a x : ℕ} (hx : 0 < x) (hx8 : 8 ∣ x) :
+    nextOpening 8 (x : ℝ) ((a : ℝ) / 8) = (a : ℝ) / 8 + 1 / (8 * (x : ℝ)) := by
+  letI : Fact (2 ≤ 8) := ⟨by norm_num⟩
+  obtain ⟨x', hx'⟩ := hx8
+  have hxR : (0 : ℝ) < x := by exact_mod_cast hx
+  have hK : (x : ℝ) * ((a : ℝ) / 8) = (((x' * a : ℕ) : ℤ) : ℝ) := by rw [hx']; push_cast; ring
+  rw [nextOpening_eq (n := 8) hxR (k := ((x' * a : ℕ) : ℤ))]
+  · rw [← hK]; push_cast; field_simp
+  · rw [hK]; simp
+
+open MomentIterationN in
+theorem move_at_grid (S : Finset ℕ) {c : ℕ} (hcS : c ∈ S) (hc8 : 8 ∣ c) (hc : 0 < c)
+    (hmin : ∀ x ∈ S, 8 ∣ x → c ≤ x) (hpos : ∀ x ∈ S, 0 < x) {a : ℕ} (ha : Odd a) :
+    move 8 (S.image (fun x : ℕ => (x : ℝ))) ((a : ℝ) / 8) = (a : ℝ) / 8 + 1 / (8 * (c : ℝ)) := by
+  letI : Fact (2 ≤ 8) := ⟨by norm_num⟩
+  classical
+  have hcR : (0 : ℝ) < c := by exact_mod_cast hc
+  have hle : (a : ℝ) / 8 ≤ (a : ℝ) / 8 + 1 / (8 * (c : ℝ)) := by
+    have : 0 < 1 / (8 * (c : ℝ)) := by positivity
+    linarith
+  apply le_antisymm
+  · unfold move
+    rw [Finset.fold_max_le]
+    refine ⟨hle, ?_⟩
+    intro d hd
+    obtain ⟨x, hxS, rfl⟩ := Finset.mem_image.mp hd
+    split_ifs with h
+    · have hx8 := (inWay_at_grid_iff ha).mp h
+      rw [nextOpening_at_grid (hpos x hxS) hx8]
+      have hxR : (0 : ℝ) < x := by exact_mod_cast hpos x hxS
+      have hcx : (c : ℝ) ≤ x := by exact_mod_cast hmin x hxS hx8
+      have : 1 / (8 * (x : ℝ)) ≤ 1 / (8 * (c : ℝ)) := by
+        apply one_div_le_one_div_of_le (by positivity)
+        linarith
+      linarith
+    · exact hle
+  · have hw : inWay 8 (c : ℝ) ((a : ℝ) / 8) := (inWay_at_grid_iff ha).mpr hc8
+    have hmem : (c : ℝ) ∈ S.image (fun x : ℕ => (x : ℝ)) := Finset.mem_image.mpr ⟨c, hcS, rfl⟩
+    have := nextOpening_le_move hmem hw
+    rwa [nextOpening_at_grid hc hc8] at this
 
 end LRC.IntegerDisplacement
