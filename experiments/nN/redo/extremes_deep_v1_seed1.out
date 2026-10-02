@@ -1,0 +1,10 @@
+== maximise landing R* over the window 7 < rho_7 <= 9 (seed 1); top 4 by float, exact-confirmed:
+   exact: R* =   11.6104, moves =  27, readings [1.0, 2.3594, 3.3086, 4.3152, 5.3594, 5.9672, 7.6655]
+   exact: R* =   11.0468, moves =  26, readings [1.0, 2.3579, 3.2487, 4.2338, 5.2732, 5.8841, 7.5359]
+   exact: R* =   10.8373, moves =  24, readings [1.0, 2.5181, 3.1987, 4.1343, 4.5214, 5.6212, 7.0187]
+   exact: R* =   10.7504, moves =  23, readings [1.0, 2.3858, 3.0697, 4.1054, 5.1122, 5.6557, 7.0233]
+== maximise number of moves over the window 7 < rho_7 <= 9 (seed 1); top 4 by float, exact-confirmed:
+   exact: R* =   11.2165, moves =  28, readings [1.0, 2.4802, 3.3741, 4.4674, 5.5535, 6.1772, 7.9347]
+   exact: R* =   10.0288, moves =  27, readings [1.0, 3.3689, 4.3242, 4.8859, 5.401, 6.0029, 7.7122]
+   exact: R* =    9.8689, moves =  26, readings [1.0, 2.6632, 3.6264, 4.6634, 5.8655, 6.5863, 8.3612]
+   exact: R* =    9.7350, moves =  26, readings [1.0, 2.6786, 3.663, 4.7138, 5.9951, 6.6769, 8.5807]

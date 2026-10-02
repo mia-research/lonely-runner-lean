@@ -1,0 +1,4 @@
+six readings, rho_min = 1, rho_max <= 7  , lonely set scanned on R' in [1, 40]: largest gap found 22.571   readings [1.0, 1.0801, 1.1458, 1.1832, 1.2445, 1.3197]
+six readings, rho_min = 1, rho_max <= 9  , lonely set scanned on R' in [1, 40]: largest gap found 19.198   readings [1.0, 1.0908, 1.1852, 1.8336, 3.1344, 5.0827]
+six readings, rho_min = 1, rho_max <= 25 , lonely set scanned on R' in [1, 60]: largest gap found 33.622   readings [1.0, 1.0506, 1.1023, 1.1483, 1.2009, 1.2715]
+six readings, rho_min = 1, rho_max <= 60 , lonely set scanned on R' in [1, 60]: largest gap found 16.668   readings [1.0, 1.0715, 1.1392, 3.0982, 3.5341, 7.0036]

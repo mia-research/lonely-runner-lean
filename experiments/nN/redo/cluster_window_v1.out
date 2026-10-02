@@ -1,0 +1,6 @@
+cluster min c = 9   spread <= 7   : sup q = (first lonely R' >= c)/c found 1.481  (within [c, 7c])   readings [1.0, 2.1437, 2.7103, 3.075, 3.2507, 5.1015]
+cluster min c = 9   spread <= 25  : sup q = (first lonely R' >= c)/c found 1.351  (within [c, 7c])   readings [1.0, 1.3984, 1.5983, 4.3067, 7.1183, 11.9569]
+cluster min c = 16  spread <= 7   : sup q = (first lonely R' >= c)/c found 1.308  (within [c, 7c])   readings [1.0, 1.1947, 1.2972, 3.1933, 3.67, 5.148]
+cluster min c = 16  spread <= 25  : sup q = (first lonely R' >= c)/c found 1.241  (within [c, 7c])   readings [1.0, 1.3136, 4.1588, 5.7504, 17.3693, 19.0909]
+cluster min c = 30  spread <= 7   : sup q = (first lonely R' >= c)/c found 1.183  (within [c, 7c])   readings [1.0, 1.8411, 2.6404, 4.186, 5.9167, 6.5676]
+cluster min c = 30  spread <= 25  : sup q = (first lonely R' >= c)/c found 1.171  (within [c, 7c])   readings [1.0, 1.1723, 2.0987, 2.4256, 6.8597, 16.7822]
