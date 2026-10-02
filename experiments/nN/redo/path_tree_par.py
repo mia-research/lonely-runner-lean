@@ -6,6 +6,8 @@
 import sys, time, random, pickle
 from fractions import Fraction as F
 from multiprocessing import Pool
+import os
+TT = float(os.environ.get("TT", "1e-9"))
 import numpy as np
 from scipy.optimize import linprog
 J_W = int(sys.argv[1]) if len(sys.argv) > 1 else 1
