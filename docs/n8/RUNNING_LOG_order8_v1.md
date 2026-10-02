@@ -10801,3 +10801,15 @@ Artifact: `LonelyRunner/experiments/nN/redo/terminals_J1.pkl`, `language_J1_v1.o
 - **Exception, exit ties:** opener rule "highest-rank zone with exit R*" mislabelled 7 arrangements; zones with a common exit are nested and the cascade's setter is the one with the earlier entry. Corrected rule: smallest entry, then highest rank (9 of 9 tie rows).
 - **Not verified:** the K1s1/K1s2/K2s1/K2s2 conditions are stated approximately; checked only through the labeller's direct closer computation.
 **Consequence:** the outcome of every arrangement in the sample is one of 12 realised classes by an explicit first-step rule plus the landing law; two named classes remain unreached.
+
+## E326 (2026-10-03) -- step rules by subagent; sampler reach vs the tree
+
+**Map:** how one cascade step is chosen and what it leads to. Artifacts: `LonelyRunner/experiments/nN/redo/pred_step_rules_v1.md`, `pred_*.py/.out`.
+Subagent results (checked by the agent on 131,659 + 20,511 steps from exact samples):
+- Setter = the blocker maximising (8j+1)/rho; pairwise form (8j_a+1) rho_b > (8j_b+1) rho_a. 0 violations. No exit ties among the blockers in the samples.
+- "Lowest-rank blocker sets" holds on every step where all blockers share a lap (about 70,000 steps, 0 failures); it fails on 6-7% of steps, always as a faster blocker on a strictly higher lap with the later exit (0 outside that form). Lowest or second-lowest rank sets in 98.9% of steps.
+- Next state depends only on the previous setter's zone (exit e(Z)): a zone-pointer chain reproduces every (setter,lap) sequence and landing, 0 violations on 80,000.
+- Link rule (slower: lap <= js; faster: lap >= js+1; setter never blocks R2; a reading's lap never decreases; same reading never sets twice in a row): 0 violations on 44,148 + 92,051 instances.
+- Closure criterion for inert readings (zones containing R0, then zones containing active exits): sound, 0 violations on 70,000; over-approximates.
+**Exception found by me (spot check):** the agent reports rank 1 as inert (never blocker or setter in 70,000), largest visited R 5.03 (hill-climb 4.73), longest path 12 moves. Exact perturbations (|eps| 1e-3 to 1e-8, 24,000 arrangements) of the extremal vertex of the one-lap tree give reading 1 as a setter in 3,205, paths up to 28 moves, landing up to 11.966048. So the three statements describe the reach of the samplers (random, AP-deformed, strips, chain, climb), not the cascade. The tree has opener (1,1) in 8 cells, landing exactly R = 9, and this confirms them.
+**Consequence:** random and hill-climb sampling reach R <= ~5 and paths <= 12 moves; the part of arrangement space with long paths, rank-1 setting and R up to 12 is thin and reached only through the tree or a construction at its cells. Survey-based class counts (including the taxonomy's) are counts of what samplers produce; the taxonomy's classes need to be re-run on tree cells to see whether any class is empty or populated there.
