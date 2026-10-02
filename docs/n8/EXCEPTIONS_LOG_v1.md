@@ -1,0 +1,15 @@
+# Exceptions to the cascade map, and why (append-only)
+
+Started 2026-10-02 (owner: "if exceptions arise they are understood why"; "hold the idea loosely"). One entry per exception: what was claimed, what the cascade did,
+the cause, and whether the claim stands, is restricted, or is withdrawn. Scripts under `LonelyRunner/experiments/nN/redo/`.
+
+| # | Claim | What the cascade did | Cause | Status |
+|---|---|---|---|---|
+| X1 | the window fails only if the mover coalesces with another reading (E295) | the window fails to be uniform at the lattice points of a segment (`T ~ P/(4a)`) | the near-resonant mover drifts by `‖αP‖` per period; coalescence is not involved | WITHDRAWN (E296) |
+| X2 | hops land on frozen runners' edges only (E311 guess) | landing flank before/after takes all four combinations (frozen→mover 86, mover→mover 68, frozen→frozen 13, mover→frozen 16) | a hop is the birth or death of a lonely component, whose edges may be either kind of runner's | WITHDRAWN (E313) |
+| X3 | the one-runner catalogue (others at the AP) predicts the landing when one runner is in the band | correct in 229 of 983 with three deformed runners | the other deformed runners remove or replace the pinned readers that set the chain | RESTRICTED to the others frozen (E316) |
+| X4 | effective-crossing rule, first version | 80/90, 173/180, 585/600 | missing: setter's end meeting its own state (D); `j = 0` ends are at most `R_0` by definition; the start state `R_0` may be defined by any smallest runner | FIXED (E312) |
+| X5 | effective-crossing rule predicts every next change | 2 of 600 predicted at `s = 1` exactly | an event on the endpoint cannot be seen by sampling `s < 1` | CONSISTENT (unobservable) |
+| X6 | same, on coincidence-rich bases | 1 of 270: `rationals`, movers `(0, 3, 4)`, `s_0 = 0.3185`, predicted `s* = 0.32787`, no change | at `s*` the smallest runner changes identity (`ρ_0 = ρ_1 = 6/5`) at the same instant as the exact coincidence `ρ_6 = 9 ρ_1` (`ε_{(6,1)} = 9/ρ_6 = 1/ρ_1 = R_0`): `R_0` comes down to `ε_Z` and then stays constant, so it touches the zone's end and never enters it | UNDERSTOOD: the crossing must be transversal; a touch at the instant the definer of `R_0` changes is not a crossing (degenerate: a ratio of exactly 9 between frozen readings) |
+| X7 | landing label `(setter, lap)` identifies the path | at exactly equal readings the label flips between the two equal runners though every state `R_i` is unchanged | ties in the arg max of the exits | UNDERSTOOD: compare the state sequence at ties (`tail_update_v1`, `effective_crossings_v1`) |
+| X8 | "hopping is bounded by the AP's four events" | paths of 27 moves in the one-lap window `ρ ≤ 9` (`1, 2.508, 3.442, 4.474, 5.616, 6.260, 8.033`), landing near `R ≈ 10.4` | the lap-1 chain of lap-1 zones continues through laps 2 to 8 when consecutive ratios stay below `(8j+1)/(8j−1)` for every `j` along the path | NOTED: the one-lap window does not bound the path length; the first-event picture is local |
