@@ -1,0 +1,22 @@
+both clear at every state | n = 6777
+    S equal                                                                6777
+    landing equal                                                          6777
+    identity path equals original path with positions i,j exchanged        6777
+    closer equals original with positions exchanged                        6775
+    sorted-rank (rank,lap) path equal                                      6777
+    sorted outcome (opener,closer) equal                                   6777
+never both blocking | n = 3054
+    S equal                                                                3054
+    landing equal                                                          3054
+    identity path equals original path with positions i,j exchanged        3054
+    closer equals original with positions exchanged                        3054
+    sorted-rank (rank,lap) path equal                                      3054
+    sorted outcome (opener,closer) equal                                   3054
+both block at a common state | n = 669
+    S equal                                                                669
+    landing equal                                                          669
+    identity path equals original path with positions i,j exchanged        669
+    closer equals original with positions exchanged                        669
+    sorted-rank (rank,lap) path equal                                      669
+    sorted outcome (opener,closer) equal                                   669
+example closer [3, 28, 7, 23, 27, 9, 1] swap positions 3 0 | path before () after () | states ['1'] ['1'] | closer (2, 1) (0, 3) entry 1 1

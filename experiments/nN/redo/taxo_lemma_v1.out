@@ -1,0 +1,4 @@
+nm>=2 rows: 12789 | rows whose opener (s,j) is a zone containing R=1 (same lap j = round(rho_s/8)): 0
+nm>=2 with lap-1 strip opener (K2a plus its ties): 0
+rows nm>=1 with opener lap 1 and rho_s>7: 11356 of which nm>=2: 0
+nm>=2 with opener lap 1: 4273 ; min rho_s among them: 2481/1000 ; max: 7

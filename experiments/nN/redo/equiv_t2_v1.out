@@ -1,0 +1,26 @@
+TRANSFORMATION 2: reading y (rank>=2, inert at all states incl. landing) moved inside / just outside its inert component; inert readings examined: 15282
+
+ inside component n = 47391
+   S                                                47391
+   I                                                47391
+   L                                                47391
+   O                                                47391
+   C                                                27183
+   P (rank,lap) equal                               47391
+   rank of y unchanged                              20716
+   closer-rule predicted                            21411
+   closer-rule predicted & identity closer equal    21411
+   closer-rule not met & closer equal               5772
+
+ just outside component n = 15282
+   S                                                293
+   I                                                293
+   L                                                293
+   O                                                293
+   C                                                3462
+
+C (identity closer) fails inside the component, by point type: {'endpoint hi': 11270, 'interior': 8312, 'endpoint lo': 626}
+
+Smallest inside-component counterexample for C : rho = [1, 2, 7, 9, 11, 15, 16] y(rank)=2 -> 49/9; component [1, 49/9]
+  before: states ['1', '17/16', '9/7'] closer (4, 2) entry 15/11
+  after : states ['1', '17/16', '9/7'] closer (1, 1) entry 9/7

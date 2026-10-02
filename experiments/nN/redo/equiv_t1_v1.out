@@ -1,0 +1,42 @@
+TRANSFORMATION 1: rho_y -> rho_y + 8m, y in ranks 2..7; trials 33586 on 3500 arrangements (about 60% with >=1 move)
+block status of y vs y' at R_0=1 (integer R) equal: Counter({True: 33586})
+
+class: y inert, y' clear at all original states | n = 21781
+   states S equal 21781, (rank,lap) path P equal 16644, landing L equal 21781, opener O equal 17082, closer C equal 5078
+   identity-labelled (index,lap) path I equal 21781, identity opener 21781, identity closer 9863
+   closer rule 'S equal, y is not the original closer, y' next entry after R* > closer entry': predicted-preserved 9855, of which identity closer equal 9855; S-equal, rule not met, closer equal anyway (ties/same reading) 8
+
+class: y blocks at some state, y' blocks at some state | n = 7939
+   states S equal 2460, (rank,lap) path P equal 2816, landing L equal 3194, opener O equal 3672, closer C equal 1754
+   identity-labelled (index,lap) path I equal 2458, identity opener 3204, identity closer 2088
+   closer rule 'S equal, y is not the original closer, y' next entry after R* > closer entry': predicted-preserved 390, of which identity closer equal 390; S-equal, rule not met, closer equal anyway (ties/same reading) 1
+
+class: y inert, y' blocks at some original state | n = 2505
+   states S equal 629, (rank,lap) path P equal 95, landing L equal 644, opener O equal 143, closer C equal 316
+   identity-labelled (index,lap) path I equal 629, identity opener 644, identity closer 906
+   closer rule 'S equal, y is not the original closer, y' next entry after R* > closer entry': predicted-preserved 240, of which identity closer equal 240; S-equal, rule not met, closer equal anyway (ties/same reading) 0
+
+class: y blocks at some state, y' clear at all original states | n = 1361
+   states S equal 432, (rank,lap) path P equal 102, landing L equal 460, opener O equal 755, closer C equal 206
+   identity-labelled (index,lap) path I equal 432, identity opener 458, identity closer 265
+   closer rule 'S equal, y is not the original closer, y' next entry after R* > closer entry': predicted-preserved 77, of which identity closer equal 77; S-equal, rule not met, closer equal anyway (ties/same reading) 1
+
+Smallest counterexamples (S fails), by class:
+  y blocks at some state, y' blocks at some state
+   rho = [1, 3, 7, 8, 9, 12, 13]  y(rank)=3  rho_y -> 15
+   states before: ['1', '9/8', '9/7', '17/12'] path ((4, 1), (3, 1), (6, 2))
+   states after : ['1', '9/8', '17/15'] path ((3, 1), (7, 2))
+  y inert, y' blocks at some original state
+   rho = [1, 3, 4, 6, 8, 22, 27]  y(rank)=4  rho_y -> 14
+   states before: ['1', '9/8', '25/22'] path ((5, 1), (6, 3))
+   states after : ['1', '9/8', '17/14', '11/9'] path ((4, 1), (5, 2), (7, 4))
+  y blocks at some state, y' clear at all original states
+   rho = [1, 3, 7, 8, 9, 12, 13]  y(rank)=6  rho_y -> 4
+   states before: ['1', '9/8', '9/7', '17/12'] path ((4, 1), (3, 1), (6, 2))
+   states after : ['1', '9/8', '9/7', '17/13'] path ((5, 1), (4, 1), (7, 2))
+
+AP (1..7): y=7, m=1 (7->15), m=2 (->23), m=3 (->31)
+  m=0 states ['1'] path () opener None closer (7, 1)
+  m=1 states ['1'] path () opener None closer (7, 2)
+  m=2 states ['1'] path () opener None closer (7, 3)
+  m=3 states ['1'] path () opener None closer (7, 4)

@@ -1,0 +1,104 @@
+CELLS: tuples (path, Rlo, Rhi, 7 reading ranges, witness); n = 9652
+witness path vs cell path: equal 6589 | one is a prefix of the other 0 | neither 3063 (the witness is a point of the cell on its boundary, readings at 9.0 and similar; a boundary point can belong to a neighbouring path)
+midpoint of the six ranges as the reading vector: its outcome path equals the cell path in 560 of 9652 (cells need not be boxes, so a midpoint need not lie in its cell)
+
+CELLS by path: distinct paths 6706 ; cells in paths shared by >=2 cells: 4829 ; families of size >=2: 1883 ; size histogram (size:count): [(1, 4823), (2, 1414), (3, 219), (4, 137), (5, 35), (6, 27), (7, 17), (8, 10), (9, 9), (10, 7), (11, 3), (12, 1), (14, 3), (22, 1)]
+CELLS by opener (last step of the path): distinct openers 40 ; largest: [(1821, (7, 9)), (754, (5, 4)), (723, (5, 6)), (688, (6, 8)), (565, (7, 6))]
+
+PAIRS of cells with the same path: total 5659 ; pairs with >=1 reading rank (2..7) range disjoint: 1147 ; pairs with ALL six ranges 2..7 pairwise disjoint: 52
+path-families containing at least one all-ranks-disjoint pair: 24 of 1883
+
+TEN LARGEST path-families (cells sharing a path) containing an all-six-ranges-disjoint pair:
+ path length 21, last step (7, 9): 10 cells, 45 pairs, >=1 disjoint rank 20, all six disjoint 4, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (6, 4), (4, 3), (2, 2), (7, 6), (3, 3), (1, 1), (2, 3), (7, 9))
+     example pair: cell 6240 ranges [(2.556, 2.584), (3.407, 3.444), (4.105, 4.306), (4.652, 4.712), (5.769, 5.918), (7.258, 7.338)] ; cell 6249 ranges [(2.664, 2.679), (3.557, 3.571), (4.369, 4.465), (4.858, 4.885), (6.111, 6.136), (7.578, 7.609)]
+ path length 21, last step (7, 9): 9 cells, 36 pairs, >=1 disjoint rank 21, all six disjoint 2, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (7, 5), (4, 3), (2, 2), (5, 4), (3, 3), (1, 1), (3, 4), (7, 9))
+     example pair: cell 7117 ranges [(2.546, 2.556), (3.444, 3.458), (4.162, 4.259), (4.714, 4.783), (5.786, 5.863), (7.411, 7.462)] ; cell 7123 ranges [(2.664, 2.762), (3.495, 3.571), (4.349, 4.592), (4.928, 5.037), (6.111, 6.245), (7.688, 7.857)]
+ path length 22, last step (7, 9): 8 cells, 28 pairs, >=1 disjoint rank 12, all six disjoint 3, greedy mutually-all-disjoint subset size 1
+     path = ((7, 1), (6, 1), (4, 1), (3, 1), (2, 1), (6, 2), (5, 2), (4, 2), (3, 2), (6, 3), (7, 4), (2, 2), (4, 3), (6, 4), (3, 3), (5, 4), (7, 6), (4, 4), (2, 3), (1, 1), (2, 4), (7, 9))
+     example pair: cell 3858 ranges [(3.491, 3.571), (4.344, 4.449), (4.923, 5.042), (5.392, 5.517), (6.111, 6.252), (7.68, 7.857)] ; cell 3885 ranges [(3.444, 3.485), (4.162, 4.211), (4.714, 4.773), (5.161, 5.222), (5.846, 5.919), (7.411, 7.498)]
+ path length 21, last step (7, 9): 8 cells, 28 pairs, >=1 disjoint rank 13, all six disjoint 1, greedy mutually-all-disjoint subset size 1
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (6, 4), (4, 3), (2, 2), (6, 5), (3, 3), (1, 1), (3, 4), (7, 9))
+     example pair: cell 6678 ranges [(2.546, 2.556), (3.444, 3.458), (4.162, 4.259), (4.714, 4.783), (5.857, 5.943), (7.411, 7.462)] ; cell 6682 ranges [(2.642, 2.728), (3.488, 3.571), (4.34, 4.546), (4.919, 5.037), (6.111, 6.258), (7.673, 7.857)]
+ path length 21, last step (7, 9): 8 cells, 28 pairs, >=1 disjoint rank 13, all six disjoint 1, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (7, 5), (4, 3), (2, 2), (6, 5), (3, 3), (1, 1), (3, 4), (7, 9))
+     example pair: cell 7167 ranges [(2.546, 2.556), (3.444, 3.458), (4.168, 4.259), (4.724, 4.783), (5.857, 5.932), (7.411, 7.462)] ; cell 7170 ranges [(2.647, 2.722), (3.495, 3.571), (4.349, 4.537), (4.928, 5.037), (6.111, 6.245), (7.688, 7.857)]
+ path length 21, last step (7, 9): 8 cells, 28 pairs, >=1 disjoint rank 16, all six disjoint 5, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (7, 5), (4, 3), (2, 2), (7, 6), (3, 3), (1, 1), (2, 3), (7, 9))
+     example pair: cell 7188 ranges [(2.556, 2.584), (3.407, 3.444), (4.076, 4.306), (4.609, 4.704), (5.678, 5.833), (7.258, 7.338)] ; cell 7194 ranges [(2.6, 2.679), (3.466, 3.571), (4.333, 4.465), (4.728, 4.877), (5.863, 6.048), (7.384, 7.609)]
+ path length 23, last step (4, 6): 7 cells, 21 pairs, >=1 disjoint rank 6, all six disjoint 5, greedy mutually-all-disjoint subset size 1
+     path = ((7, 1), (6, 1), (4, 1), (3, 1), (2, 1), (6, 2), (5, 2), (4, 2), (3, 2), (6, 3), (7, 4), (5, 3), (2, 2), (4, 3), (6, 4), (3, 3), (5, 4), (7, 6), (4, 4), (2, 3), (1, 1), (2, 4), (4, 6))
+     example pair: cell 3988 ranges [(3.525, 3.571), (4.462, 4.526), (5.057, 5.124), (5.533, 5.613), (6.271, 6.361), (7.889, 7.994)] ; cell 4015 ranges [(3.444, 3.448), (4.329, 4.333), (4.906, 4.911), (5.367, 5.45), (6.083, 6.111), (7.653, 7.763)]
+ path length 21, last step (5, 6): 7 cells, 21 pairs, >=1 disjoint rank 5, all six disjoint 1, greedy mutually-all-disjoint subset size 1
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (6, 4), (4, 3), (2, 2), (6, 5), (3, 3), (1, 1), (2, 3), (5, 6))
+     example pair: cell 6666 ranges [(2.556, 2.584), (3.407, 3.444), (4.239, 4.306), (4.804, 4.858), (5.958, 6.035), (7.495, 7.578)] ; cell 6672 ranges [(2.6, 2.679), (3.466, 3.571), (4.333, 4.465), (4.888, 5.037), (6.061, 6.258), (7.625, 7.857)]
+ path length 21, last step (5, 6): 7 cells, 21 pairs, >=1 disjoint rank 14, all six disjoint 5, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (7, 5), (4, 3), (2, 2), (5, 4), (3, 3), (1, 1), (2, 3), (5, 6))
+     example pair: cell 7097 ranges [(2.556, 2.584), (3.407, 3.444), (4.239, 4.306), (4.804, 4.858), (5.829, 5.928), (7.495, 7.578)] ; cell 7106 ranges [(2.6, 2.679), (3.466, 3.571), (4.333, 4.465), (4.888, 5.037), (5.931, 6.111), (7.625, 7.857)]
+ path length 21, last step (4, 5): 6 cells, 15 pairs, >=1 disjoint rank 8, all six disjoint 2, greedy mutually-all-disjoint subset size 2
+     path = ((7, 1), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (2, 1), (5, 2), (4, 2), (6, 3), (7, 4), (3, 2), (5, 3), (6, 4), (4, 3), (2, 2), (5, 4), (3, 3), (1, 1), (3, 4), (4, 5))
+     example pair: cell 6561 ranges [(2.548, 2.556), (3.444, 3.458), (4.16, 4.191), (4.714, 4.728), (5.846, 5.863), (7.411, 7.538)] ; cell 6566 ranges [(2.664, 2.693), (3.469, 3.555), (4.286, 4.333), (4.858, 4.911), (6.111, 6.178), (7.631, 7.821)]
+
+TEN LARGEST path-families regardless of disjointness: [(22, 22), (14, 22), (14, 23), (14, 22), (12, 21), (11, 22), (11, 21), (11, 22), (10, 21), (10, 22)] (cells, path length)
+
+CELLS by opener: pairs with same opener but different path, all six ranges disjoint (counted per opener family):
+  opener (7, 9): 1821 cells, 796 distinct paths, pairs 1657110, all-six-ranges-disjoint pairs 635458, of which different path 635433, pairs with different path 1654191
+  opener (5, 4): 754 cells, 615 distinct paths, pairs 283881, all-six-ranges-disjoint pairs 26958, of which different path 26958, pairs with different path 283723
+  opener (5, 6): 723 cells, 475 distinct paths, pairs 261003, all-six-ranges-disjoint pairs 111080, of which different path 111070, pairs with different path 260528
+  opener (6, 8): 688 cells, 472 distinct paths, pairs 236328, all-six-ranges-disjoint pairs 104093, of which different path 104092, pairs with different path 236010
+  opener (7, 6): 565 cells, 454 distinct paths, pairs 159330, all-six-ranges-disjoint pairs 7963, of which different path 7963, pairs with different path 159162
+  opener (4, 4): 486 cells, 350 distinct paths, pairs 117855, all-six-ranges-disjoint pairs 13642, of which different path 13642, pairs with different path 117664
+  opener (6, 4): 435 cells, 366 distinct paths, pairs 94395, all-six-ranges-disjoint pairs 12098, of which different path 12098, pairs with different path 94316
+  opener (4, 3): 368 cells, 277 distinct paths, pairs 67528, all-six-ranges-disjoint pairs 5213, of which different path 5213, pairs with different path 67416
+  opener (3, 2): 308 cells, 250 distinct paths, pairs 47278, all-six-ranges-disjoint pairs 309, of which different path 309, pairs with different path 47200
+  opener (6, 5): 294 cells, 244 distinct paths, pairs 43071, all-six-ranges-disjoint pairs 5514, of which different path 5514, pairs with different path 43021
+
+cells with identical 7-range boxes but different paths: 79 boxes
+
+
+SURVEY: n = 20000
+ classes by path                      :  1413 classes ; singletons 938 ; arrangements in classes of size>=2: 19062 ; largest [7307, 863, 797, 764, 724, 702]
+ classes by opener                    :   109 classes ; singletons 14 ; arrangements in classes of size>=2: 19986 ; largest [7307, 1386, 1282, 1131, 1063, 835]
+ classes by (opener, closer)          :  1083 classes ; singletons 518 ; arrangements in classes of size>=2: 19482 ; largest [4550, 854, 674, 651, 459, 456]
+ classes by lap vector at the landing :  1919 classes ; singletons 1257 ; arrangements in classes of size>=2: 18743 ; largest [2117, 1247, 1170, 1036, 781, 637]
+ families (paths) by 'fam' of members: Counter({1: 1140, 2: 172, 3: 69, 4: 24, 5: 8})
+
+ SURVEY families by path with >=2 members: 475 ; with a pair whose six readings (ranks 2..7) ALL differ by at least 1/4: 356 ; 1/2: 318 ; 1: 275 ; 2: 236
+   TEN LARGEST families by path (members, key, max over pairs of min_y|drho_y|, example pair):
+      7307  key=()  maxmin=69.230  pair rho: ['8781/125', '38883/500', '14867/125', '12387/100', '179963/1000', '3873/20'] | ['509/500', '134/125', '163/125', '361/250', '4807/1000', '52753/1000']
+       863  key=((5, 1),)  maxmin=16.146  pair rho: ['553/500', '319/200', '689/250', '877/100', '9867/1000', '2967/250'] | ['4313/250', '18039/1000', '18989/1000', '3636/125', '14977/500', '30991/1000']
+       797  key=((4, 1),)  maxmin=15.807  pair rho: ['141/125', '1357/250', '8091/1000', '11807/500', '2991/125', '38049/1000'] | ['3387/200', '4117/125', '97/2', '32471/500', '40111/500', '11883/125']
+       764  key=((6, 1),)  maxmin=14.142  pair rho: ['21/20', '224/125', '2859/1000', '1803/500', '1033/125', '4297/500'] | ['1899/125', '17251/1000', '1799/100', '20757/1000', '5569/200', '599/20']
+       724  key=((3, 1),)  maxmin=23.626  pair rho: ['12421/500', '23799/500', '71217/1000', '48487/500', '604/5', '71731/500'] | ['152/125', '1523/200', '1031/125', '15129/1000', '8411/500', '12467/500']
+       702  key=((7, 1),)  maxmin=10.999  pair rho: ['101/100', '1019/1000', '2053/1000', '629/250', '2777/500', '8369/1000'] | ['12009/1000', '12959/1000', '13829/1000', '3811/250', '447/25', '25257/1000']
+       651  key=((2, 1),)  maxmin=34.881  pair rho: ['6113/1000', '703/100', '12007/1000', '3757/200', '3234/125', '5789/200'] | ['20497/500', '39829/500', '23947/200', '159767/1000', '200663/1000', '119853/500']
+       485  key=((6, 2),)  maxmin=15.795  pair rho: ['134/125', '1241/1000', '214/125', '5077/1000', '16963/1000', '30023/1000'] | ['16867/1000', '16017/500', '9457/200', '631/10', '647/8', '2417/25']
+       390  key=((5, 2),)  maxmin=9.439  pair rho: ['12049/1000', '12903/1000', '14079/1000', '2239/125', '2386/125', '909/40'] | ['261/100', '591/200', '382/125', '39391/1000', '80107/1000', '24161/200']
+       363  key=((7, 1), (6, 1))  maxmin=10.158  pair rho: ['1077/1000', '1149/1000', '2811/1000', '2837/1000', '828/125', '1787/250'] | ['2247/200', '13143/1000', '7443/500', '2221/125', '24733/1000', '3787/125']
+
+ SURVEY families by opener with >=2 members: 95 ; with a pair whose six readings (ranks 2..7) ALL differ by at least 1/4: 93 ; 1/2: 91 ; 1: 91 ; 2: 89
+   TEN LARGEST families by opener (members, key, max over pairs of min_y|drho_y|, example pair):
+      7307  key=None  maxmin=69.230  pair rho: ['8781/125', '38883/500', '14867/125', '12387/100', '179963/1000', '3873/20'] | ['509/500', '134/125', '163/125', '361/250', '4807/1000', '52753/1000']
+      1386  key=(5, 1)  maxmin=16.146  pair rho: ['553/500', '319/200', '689/250', '877/100', '9867/1000', '2967/250'] | ['4313/250', '18039/1000', '18989/1000', '3636/125', '14977/500', '30991/1000']
+      1282  key=(4, 1)  maxmin=15.855  pair rho: ['27/25', '3943/1000', '2791/500', '1543/250', '3229/500', '7043/1000'] | ['3387/200', '4117/125', '97/2', '32471/500', '40111/500', '11883/125']
+      1131  key=(6, 1)  maxmin=14.142  pair rho: ['21/20', '224/125', '2859/1000', '1803/500', '1033/125', '4297/500'] | ['1899/125', '17251/1000', '1799/100', '20757/1000', '5569/200', '599/20']
+      1063  key=(3, 1)  maxmin=23.742  pair rho: ['11/10', '5', '5663/1000', '6', '777/125', '3553/500'] | ['12421/500', '23799/500', '71217/1000', '48487/500', '604/5', '71731/500']
+       835  key=(2, 1)  maxmin=37.994  pair rho: ['3', '823/250', '4', '5', '6', '1521/200'] | ['20497/500', '39829/500', '23947/200', '159767/1000', '200663/1000', '119853/500']
+       702  key=(6, 2)  maxmin=15.901  pair rho: ['134/125', '1241/1000', '214/125', '5077/1000', '16963/1000', '30023/1000'] | ['16973/1000', '6249/200', '5919/125', '63821/1000', '39553/500', '95853/1000']
+       702  key=(7, 1)  maxmin=10.999  pair rho: ['101/100', '1019/1000', '2053/1000', '629/250', '2777/500', '8369/1000'] | ['12009/1000', '12959/1000', '13829/1000', '3811/250', '447/25', '25257/1000']
+       595  key=(5, 2)  maxmin=15.698  pair rho: ['1557/1000', '1019/250', '5', '6', '161/25', '3597/500'] | ['3451/200', '21193/1000', '22773/1000', '3351/125', '1411/50', '30191/1000']
+       469  key=(6, 3)  maxmin=23.910  pair rho: ['269/250', '1579/500', '11271/1000', '12581/1000', '23499/1000', '4637/100'] | ['12493/500', '47011/1000', '72579/1000', '47759/500', '15123/125', '143309/1000']
+
+ SURVEY families by (opener, closer) with >=2 members: 565 ; with a pair whose six readings (ranks 2..7) ALL differ by at least 1/4: 507 ; 1/2: 469 ; 1: 414 ; 2: 348
+   TEN LARGEST families by (opener, closer) (members, key, max over pairs of min_y|drho_y|, example pair):
+      4550  key=(None, (7, 1))  maxmin=24.860  pair rho: ['1041/1000', '1129/1000', '1469/1000', '89/50', '1363/500', '1589/500'] | ['25901/1000', '13367/500', '6947/250', '14359/500', '15059/500', '31161/1000']
+       854  key=((6, 1), (5, 1))  maxmin=14.097  pair rho: ['219/200', '1321/1000', '1683/1000', '959/200', '67/8', '8389/1000'] | ['1899/125', '17251/1000', '1799/100', '20757/1000', '5569/200', '599/20']
+       674  key=((5, 1), (4, 1))  maxmin=15.339  pair rho: ['1703/1000', '501/250', '73/20', '579/100', '6743/1000', '1411/200'] | ['4313/250', '18039/1000', '18989/1000', '3636/125', '14977/500', '30991/1000']
+       651  key=((7, 1), (6, 1))  maxmin=10.999  pair rho: ['101/100', '1019/1000', '2053/1000', '629/250', '2777/500', '8369/1000'] | ['12009/1000', '12959/1000', '13829/1000', '3811/250', '447/25', '25257/1000']
+       459  key=((2, 1), (7, 4))  maxmin=5.624  pair rho: ['2199/500', '5397/1000', '8327/1000', '2529/250', '6219/500', '279/20'] | ['5011/500', '5527/500', '1997/100', '10523/500', '14949/500', '31103/1000']
+       456  key=(None, (6, 1))  maxmin=11.704  pair rho: ['53/50', '533/500', '334/125', '457/125', '4717/1000', '1973/200'] | ['3191/250', '1751/125', '8643/500', '18193/1000', '1013/50', '15549/500']
+       326  key=((3, 1), (7, 4))  maxmin=4.403  pair rho: ['6293/1000', '249/25', '4793/250', '21009/1000', '3494/125', '15449/500'] | ['189/100', '5281/1000', '6017/1000', '7059/1000', '3753/500', '4041/250']
+       314  key=(None, (7, 2))  maxmin=19.026  pair rho: ['1101/1000', '1889/1000', '2049/500', '2743/500', '688/125', '11801/1000'] | ['20127/1000', '21743/1000', '24981/1000', '26751/1000', '3641/125', '30923/1000']
+       283  key=((4, 1), (7, 2))  maxmin=12.179  pair rho: ['137/125', '1427/1000', '1469/250', '7211/1000', '1527/200', '203/25'] | ['531/40', '14203/1000', '18949/1000', '24703/1000', '27881/1000', '7771/250']
+       270  key=((4, 1), (7, 4))  maxmin=3.437  pair rho: ['1007/200', '1393/250', '1621/200', '2387/100', '24523/1000', '24997/1000'] | ['163/125', '161/100', '1167/250', '754/125', '3547/500', '7961/500']

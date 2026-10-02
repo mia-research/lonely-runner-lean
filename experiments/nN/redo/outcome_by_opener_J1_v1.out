@@ -1,0 +1,42 @@
+cells 9652
+opener(rank,lap): cells, landing R range [min lo, max hi], moves min-max, lands in d_min window
+  (1, 1)  cells     8  R in [ 9.0000,  9.0000]  moves 21-23  second
+  (2, 1)  cells    10  R in [ 1.0000,  2.1254]  moves 1-3  first
+  (2, 2)  cells   151  R in [ 3.3160,  6.6910]  moves 10-18  first
+  (2, 3)  cells   292  R in [ 4.6601, 10.8663]  moves 15-25  both
+  (2, 4)  cells     1  R in [10.3596, 10.5319]  moves 26-26  second
+  (2, 5)  cells     6  R in [ 9.4543,  9.9295]  moves 24-26  second
+  (3, 2)  cells   308  R in [ 3.1481,  5.4555]  moves 8-14  first
+  (3, 3)  cells   184  R in [ 3.7582,  6.6910]  moves 13-19  first
+  (3, 4)  cells   173  R in [ 6.4882, 10.8663]  moves 19-24  both
+  (3, 5)  cells    45  R in [ 9.0000,  9.9711]  moves 21-25  second
+  (3, 6)  cells    28  R in [ 9.2764, 10.4134]  moves 24-29  second
+  (4, 2)  cells    63  R in [ 1.9044,  5.1616]  moves 5-11  first
+  (4, 3)  cells   368  R in [ 3.3160,  6.5883]  moves 10-18  first
+  (4, 4)  cells   486  R in [ 4.9608,  6.7128]  moves 14-21  first
+  (4, 5)  cells   262  R in [ 6.4882, 10.7941]  moves 19-23  both
+  (4, 6)  cells   246  R in [ 9.0000, 11.6786]  moves 22-28  second
+  (5, 2)  cells    28  R in [ 1.9044,  4.0146]  moves 5-8  first
+  (5, 3)  cells   253  R in [ 3.1481,  5.4762]  moves 8-14  first
+  (5, 4)  cells   754  R in [ 4.0118,  6.7105]  moves 12-20  first
+  (5, 5)  cells    99  R in [ 5.2004,  9.4615]  moves 17-22  both
+  (5, 6)  cells   723  R in [ 9.0000, 10.8723]  moves 18-25  second
+  (5, 7)  cells     8  R in [ 9.4040, 10.6782]  moves 20-23  second
+  (5, 8)  cells     1  R in [10.6863, 10.9801]  moves 28-28  second
+  (6, 2)  cells    14  R in [ 1.9044,  2.7524]  moves 5-8  first
+  (6, 3)  cells   102  R in [ 2.7778,  4.3996]  moves 6-12  first
+  (6, 4)  cells   435  R in [ 3.7582,  6.0612]  moves 10-17  first
+  (6, 5)  cells   294  R in [ 4.6601,  6.6929]  moves 13-21  first
+  (6, 6)  cells    87  R in [ 5.5694,  7.0000]  moves 17-22  first
+  (6, 7)  cells   234  R in [ 9.0000, 10.4694]  moves 19-25  second
+  (6, 8)  cells   688  R in [ 9.2857, 11.2362]  moves 21-28  second
+  (6, 9)  cells   155  R in [ 9.2909, 10.4873]  moves 21-26  second
+  (7, 3)  cells    29  R in [ 2.7778,  3.5714]  moves 6-10  first
+  (7, 4)  cells   137  R in [ 3.6667,  4.7143]  moves 7-15  first
+  (7, 5)  cells   225  R in [ 4.5556,  5.8571]  moves 11-19  first
+  (7, 6)  cells   565  R in [ 5.4444,  7.0000]  moves 13-22  first
+  (7, 7)  cells    82  R in [ 6.3333,  6.5668]  moves 17-21  first
+  (7, 8)  cells   169  R in [ 9.0000,  9.2857]  moves 17-24  second
+  (7, 9)  cells  1821  R in [ 9.0000, 10.4286]  moves 19-27  second
+  (7, 10)  cells    15  R in [ 9.2857, 11.5714]  moves 23-27  second
+  (7, 11)  cells   103  R in [10.4270, 11.9660]  moves 25-29  second

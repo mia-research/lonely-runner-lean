@@ -1,0 +1,2 @@
+rows 52000 label violations (cascade vs conditions, opener rule B): 0
+condition-label sizes [('K0', 14418), ('K0z', 4029), ('K1a', 11258), ('K1b', 9067), ('K1s1', 93), ('K1s2', 341), ('K1z', 5), ('K2b', 2482), ('K2c', 4198), ('K2d', 5394), ('K2s2', 621), ('K2z', 94)]

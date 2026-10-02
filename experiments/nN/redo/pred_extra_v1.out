@@ -1,0 +1,24 @@
+SAMPLE (fresh seeds, all non-climb families):
+  arr                    60000
+  chain_viol             0
+  samelap_steps          55745
+  samelap_LR_viol        0
+  mixedlap_steps         45864
+  window_viol            0
+  rank1_blocker_arr      0
+  maxR_x1000             5000
+  maxvisitedR_x1000      5000
+SURVEY 20,000:
+  arr                    20000
+  chain_viol             0
+  samelap_steps          14094
+  samelap_LR_viol        0
+  mixedlap_steps         6417
+  window_viol            0
+  rank1_blocker_arr      0
+  maxR_x1000             5026
+  maxvisitedR_x1000      5026
+elapsed 50s
+HUNT for reading 1 as a blocker (hill-climb on max visited R, normalised units, chain starts):
+   {'starts': 1818, 'evals': 218160, 'best_x1000': 4734, 'rank1_blocker_found': 0} []
+   {'starts': 1787, 'evals': 214440, 'best_x1000': 3888, 'rank1_blocker_found': 0} []

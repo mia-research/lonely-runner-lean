@@ -1,0 +1,44 @@
+PART A: path(lam*rho) from start 1/min(lam*rho): trials 10000 ; states_i(lam*rho)*lam == states_i(rho) and identity path equal: 10000 ; normalised outcome() path and R* equal: 10000
+
+PART B: fixed start R'=1 on raw lam*rho  == cascade of rho (rho_1=1) started at R=lam; landing in rho units compared with R*; 2500 arrangements per row
+lam           n    L equal lam on chain lonely-at-start    merge,off-chain
+1/4        2500       2500            0              0               2500
+1/2        2500       2500            0              0               2500
+3/4        2500       2500            0              0               2500
+9/10       2500       2500            0              0               2500
+1          2500       2500         2500           1000                  0
+11/10      2500        998            3           1044                995
+5/4        2500        543           12           1069                531
+3/2        2500        179           85           1064                 94
+2          2500         36            1            712                 35
+3          2500         10           10            750                  0
+5          2500          1            1            611                  0
+7          2500          0            0            584                  0
+8          2500          0            0              0                  0
+9          2500          0            0            634                  0
+10         2500          0            0            515                  0
+17/2       2500          0            0              0                  0
+16         2500          0            0              0                  0
+17         2500          0            0            680                  0
+100/7      2500          0            0            427                  0
+
+Smallest counterexamples (landing differs), per lam:
+  lam=11/10 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: [] -> 11/10
+  lam=5/4 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['5/4', '17/13', '11/8', '25/17', '9/5', '25/13'] -> 33/17
+  lam=3/2 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['3/2', '9/5', '25/13'] -> 33/17
+  lam=2 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['2'] -> 49/24
+  lam=3 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['3', '73/24'] -> 17/5
+  lam=5 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['5'] -> 121/24
+  lam=7 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['7', '169/24', '9'] -> 217/24
+  lam=8 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['8', '9'] -> 217/24
+  lam=17/2 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['17/2', '9'] -> 217/24
+  lam=9 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['9'] -> 217/24
+  lam=10 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['10'] -> 241/24
+  lam=100/7 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['100/7', '73/5', '249/17', '353/24'] -> 193/13
+  lam=16 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['16', '17'] -> 409/24
+  lam=17 rho=[1, 2, 5, 10, 13, 17, 24]  chain from R=1: ['1'] -> R*=25/24 ; chain from R=lam: ['17'] -> 409/24
+
+PART C: lam<1 (start R=lam), trials 12000 ; landing differs from R*: 0 ; moves taken by the lam-start chain: [(1, 6720), (2, 3118), (3, 1301), (4, 501), (5, 210), (6, 68), (7, 48), (8, 20), (9, 5), (10, 4), (11, 3), (12, 2)]
+
+PART D: chain landing from start s == independent sweep (first unblocked point >= s): 8400 of 8400
+        (landing equals R*, start s <= R*) counts: {(True, True): 4832, (False, False): 3568}  -> L(s)=R* iff s<=R* has violations: 0

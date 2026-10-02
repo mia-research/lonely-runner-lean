@@ -1,0 +1,116 @@
+SURVEY 20,000 arrangements: steps 20511
+  A1_viol                      0
+  A1b_viol                     0
+  A2_viol                      0
+  A2c_viol                     0
+  A2d_viol                     0
+  pair_viol                    0
+  fail_char_viol               0
+  LR_viol                      0
+  link_viol_slower             0
+  link_viol_faster             0
+  returned_lap_viol            0
+  lap_decrease_viol            0
+  ratio_test_viol              0
+  setter_still_blocks_viol     0
+  markov_viol                  0
+  landing_viol                 0
+  closure_zone_viol            0
+  closure_reading_viol         0
+  closure_over                 0
+  lowest_rank_agrees           19238
+  lowest_rank_fails            1273
+  A2_ties                      0
+  link_new_slower              5999
+  link_new_faster              3858
+  link_slower_lap_same         4913
+  link_slower_lap_lower        1086
+  returned                     340
+  carried                      9517
+  closure_readings             36732
+  readings_in_closure_not_blocker 534
+  readings_not_in_closure      103268
+  blocker_readings             36198
+  setter_readings              20084
+  survey moves: [(0, 7307), (1, 8202), (2, 2634), (3, 1059), (4, 411), (5, 226), (6, 97), (7, 29), (8, 21), (9, 8), (10, 3), (11, 1), (12, 2)]
+
+MAIN 50,000 sample, moves distribution: [(0, 6343), (1, 10351), (2, 9716), (3, 8707), (4, 6794), (5, 4093), (6, 2034), (7, 905), (8, 496), (9, 279), (10, 151), (11, 68), (12, 63)]
+
+== (d) features, MAIN
+ family AP deformed  moves dist [(0, 4321), (1, 566), (2, 635), (3, 295), (4, 57), (5, 64), (6, 45), (7, 3), (8, 14)]
+    >=6 moves                  N=    62 strip0 1.02 nstrip 1.02 first_strip 1.02 distinct 5.31 repeats 1.32 maxlap 2.2 Rend/R0 3.0
+    3-5 moves                  N=   416 strip0 1.06 nstrip 1.06 first_strip 1.06 distinct 3.32 repeats 0.13 maxlap 1.2 Rend/R0 1.8
+    1-2 moves                  N=  1201 strip0 1.20 nstrip 1.20 first_strip 1.20 distinct 1.53 repeats 0.00 maxlap 1.0 Rend/R0 1.2
+ family chain  moves dist [(0, 1), (1, 858), (2, 4097), (3, 6576), (4, 5562), (5, 3066), (6, 1263), (7, 395), (8, 182)]
+    >=6 moves                  N=  1840 strip0 1.90 nstrip 1.90 first_strip 0.54 distinct 5.41 repeats 1.06 maxlap 7.8 Rend/R0 1.5
+    3-5 moves                  N= 15204 strip0 2.08 nstrip 2.08 first_strip 0.73 distinct 3.69 repeats 0.08 maxlap 6.2 Rend/R0 1.4
+    1-2 moves                  N=  4955 strip0 2.74 nstrip 2.74 first_strip 1.06 distinct 1.83 repeats 0.00 maxlap 3.6 Rend/R0 1.2
+ family climb  moves dist [(1, 10), (2, 101), (3, 362), (4, 729), (5, 796), (6, 662), (7, 488), (8, 852)]
+    >=6 moves                  N=  2002 strip0 1.98 nstrip 1.98 first_strip 0.61 distinct 5.59 repeats 2.00 maxlap 6.7 Rend/R0 1.7
+    3-5 moves                  N=  1887 strip0 2.12 nstrip 2.12 first_strip 1.06 distinct 4.11 repeats 0.12 maxlap 5.3 Rend/R0 1.3
+    1-2 moves                  N=   111 strip0 2.14 nstrip 2.14 first_strip 1.26 distinct 1.91 repeats 0.00 maxlap 3.6 Rend/R0 1.2
+ family first_strip  moves dist [(1, 2414), (2, 1327), (3, 225), (4, 33), (5, 1)]
+    >=6 moves                  (none)
+    3-5 moves                  N=   259 strip0 4.27 nstrip 4.27 first_strip 2.93 distinct 3.12 repeats 0.01 maxlap 6.0 Rend/R0 1.3
+    1-2 moves                  N=  3741 strip0 5.14 nstrip 5.14 first_strip 4.37 distinct 1.35 repeats 0.00 maxlap 1.7 Rend/R0 1.2
+ family random  moves dist [(0, 2020), (1, 2314), (2, 1044), (3, 387), (4, 129), (5, 66), (6, 25), (7, 11), (8, 4)]
+    >=6 moves                  N=    40 strip0 1.40 nstrip 1.40 first_strip 0.85 distinct 5.08 repeats 1.43 maxlap 7.0 Rend/R0 2.1
+    3-5 moves                  N=   582 strip0 1.54 nstrip 1.54 first_strip 0.79 distinct 3.35 repeats 0.10 maxlap 7.3 Rend/R0 1.5
+    1-2 moves                  N=  3358 strip0 1.51 nstrip 1.51 first_strip 0.81 distinct 1.31 repeats 0.00 maxlap 3.6 Rend/R0 1.1
+ family strip_multi  moves dist [(0, 1), (1, 4189), (2, 2512), (3, 862), (4, 284), (5, 100), (6, 39), (7, 8), (8, 5)]
+    >=6 moves                  N=    52 strip0 3.19 nstrip 3.19 first_strip 0.79 distinct 5.23 repeats 1.15 maxlap 6.3 Rend/R0 1.6
+    3-5 moves                  N=  1246 strip0 3.75 nstrip 3.75 first_strip 1.35 distinct 3.34 repeats 0.05 maxlap 4.9 Rend/R0 1.3
+    1-2 moves                  N=  6701 strip0 4.39 nstrip 4.39 first_strip 1.59 distinct 1.37 repeats 0.00 maxlap 2.5 Rend/R0 1.2
+ ALL >=6 moves: N=3996
+  distinct setters: [(4, 148), (5, 1723), (6, 2125)]
+  repeats (moves - distinct setters): [(0, 674), (1, 1742), (2, 915), (3, 358), (4, 170), (5, 73), (6, 31), (7, 9), (8, 10), (9, 6), (10, 6), (11, 1), (12, 1)]
+  strip0 (blockers at R0): [(1, 1542), (2, 1482), (3, 716), (4, 199), (5, 48), (6, 9)]
+  first_strip readings in (7,9): [(0, 1842), (1, 1954), (2, 192), (3, 8)]
+  nstrip (readings in any strip): [(1, 1542), (2, 1482), (3, 716), (4, 199), (5, 48), (6, 9)]
+  consecutive setters: faster 12049, slower 12069, same reading 0
+  rank of setters over all steps of >=6-move paths: [(2, 3686), (3, 4184), (4, 4745), (5, 4951), (6, 5209), (7, 5339)]
+  lap of setters (cap 12): [(1, 4384), (2, 4230), (3, 4565), (4, 3746), (5, 3351), (6, 3141), (7, 2241), (8, 1538), (9, 555), (10, 194), (11, 87), (12, 82)]
+  rank of setters over all steps of <6-move paths: [(2, 28672), (3, 18542), (4, 15268), (5, 14152), (6, 13764), (7, 13147)]
+  P(>=6 moves | nstrip): {0: '0/6343', 1: '1542/11289', 2: '1482/11930', 3: '716/8000', 4: '199/4994', 5: '48/4242', 6: '9/3202'}
+  P(>=6 moves | #readings in (7,9)): {0: '1842/18134', 1: '1954/19944', 2: '192/6185', 3: '8/2417', 4: '0/1475', 5: '0/1156', 6: '0/689'}
+  moves by strip0 (blockers at R0): {0: [(0, 6343)], 1: [(1, 1966), (2, 1667), (3, 2413), (4, 2159), (5, 1542), (6, 753), (7, 352), (8, 437)], 2: [(1, 1193), (2, 2274), (3, 2984), (4, 2483), (5, 1514), (6, 775), (7, 339), (8, 368)], 3: [(1, 1103), (2, 2004), (3, 1922), (4, 1500), (5, 755), (6, 382), (7, 154), (8, 180)], 4: [(1, 1464), (2, 1727), (3, 894), (4, 484), (5, 226), (6, 97), (7, 44), (8, 58)], 5: [(1, 2135), (2, 1503), (3, 366), (4, 141), (5, 49), (6, 22), (7, 13), (8, 13)], 6: [(1, 2490), (2, 541), (3, 128), (4, 27), (5, 7), (6, 5), (7, 3), (8, 1)]}
+  strip0 == 0 and n > 0: 0 ; nstrip == 0 and n > 0: 0 ; nstrip>0 and n == 0: 0
+
+== (d) features, SURVEY
+ family survey:AP deformed  moves dist [(0, 2834), (1, 394), (2, 446), (3, 206), (4, 42), (5, 45), (6, 24), (7, 3), (8, 6)]
+    >=6 moves                  N=    33 strip0 1.03 nstrip 1.03 first_strip 1.03 distinct 5.21 repeats 1.36 maxlap 2.0 Rend/R0 2.9
+    3-5 moves                  N=   293 strip0 1.08 nstrip 1.08 first_strip 1.08 distinct 3.32 repeats 0.13 maxlap 1.2 Rend/R0 1.8
+    1-2 moves                  N=   840 strip0 1.18 nstrip 1.18 first_strip 1.18 distinct 1.53 repeats 0.00 maxlap 1.0 Rend/R0 1.3
+ family survey:clump  moves dist [(0, 1035), (1, 2220), (2, 540), (3, 138), (4, 53), (5, 11), (6, 2), (7, 1)]
+    >=6 moves                  N=     3 strip0 1.33 nstrip 1.33 first_strip 0.67 distinct 5.33 repeats 1.00 maxlap 14.7 Rend/R0 1.3
+    3-5 moves                  N=   202 strip0 1.60 nstrip 1.60 first_strip 0.36 distinct 3.35 repeats 0.02 maxlap 8.0 Rend/R0 1.3
+    1-2 moves                  N=  2760 strip0 1.47 nstrip 1.47 first_strip 0.43 distinct 1.20 repeats 0.00 maxlap 3.6 Rend/R0 1.1
+ family survey:grid+laps  moves dist [(0, 2054), (1, 876), (2, 545), (3, 258), (4, 127), (5, 78), (6, 35), (7, 9), (8, 18)]
+    >=6 moves                  N=    62 strip0 1.42 nstrip 1.42 first_strip 0.95 distinct 5.18 repeats 1.84 maxlap 3.6 Rend/R0 2.4
+    3-5 moves                  N=   463 strip0 1.44 nstrip 1.44 first_strip 0.91 distinct 3.50 repeats 0.11 maxlap 2.6 Rend/R0 1.6
+    1-2 moves                  N=  1421 strip0 1.67 nstrip 1.67 first_strip 0.94 distinct 1.38 repeats 0.00 maxlap 1.8 Rend/R0 1.2
+ family survey:random  moves dist [(0, 1380), (1, 1525), (2, 689), (3, 240), (4, 81), (5, 52), (6, 24), (7, 6), (8, 3)]
+    >=6 moves                  N=    33 strip0 1.73 nstrip 1.73 first_strip 0.79 distinct 5.03 repeats 1.33 maxlap 8.3 Rend/R0 1.9
+    3-5 moves                  N=   373 strip0 1.52 nstrip 1.52 first_strip 0.83 distinct 3.39 repeats 0.11 maxlap 6.7 Rend/R0 1.5
+    1-2 moves                  N=  2214 strip0 1.55 nstrip 1.55 first_strip 0.80 distinct 1.31 repeats 0.00 maxlap 3.7 Rend/R0 1.1
+ family survey:strips  moves dist [(0, 4), (1, 3187), (2, 414), (3, 217), (4, 108), (5, 40), (6, 12), (7, 10), (8, 8)]
+    >=6 moves                  N=    30 strip0 3.33 nstrip 3.33 first_strip 0.93 distinct 5.20 repeats 1.77 maxlap 4.9 Rend/R0 2.2
+    3-5 moves                  N=   365 strip0 3.53 nstrip 3.53 first_strip 1.36 distinct 3.42 repeats 0.09 maxlap 3.2 Rend/R0 1.6
+    1-2 moves                  N=  3601 strip0 3.83 nstrip 3.83 first_strip 1.27 distinct 1.11 repeats 0.00 maxlap 1.6 Rend/R0 1.2
+ ALL >=6 moves: N=161
+  distinct setters: [(4, 20), (5, 95), (6, 46)]
+  repeats (moves - distinct setters): [(0, 8), (1, 81), (2, 50), (3, 15), (4, 4), (5, 1), (6, 2)]
+  strip0 (blockers at R0): [(1, 90), (2, 43), (3, 15), (4, 7), (5, 2), (6, 4)]
+  first_strip readings in (7,9): [(0, 41), (1, 93), (2, 25), (3, 2)]
+  nstrip (readings in any strip): [(1, 90), (2, 43), (3, 15), (4, 7), (5, 2), (6, 4)]
+  consecutive setters: faster 325, slower 604, same reading 0
+  rank of setters over all steps of >=6-move paths: [(2, 105), (3, 161), (4, 195), (5, 203), (6, 213), (7, 213)]
+  lap of setters (cap 12): [(1, 516), (2, 256), (3, 107), (4, 78), (5, 51), (6, 24), (7, 17), (8, 8), (9, 8), (10, 3), (11, 2), (12, 20)]
+  rank of setters over all steps of <6-move paths: [(2, 1435), (3, 2316), (4, 3289), (5, 3980), (6, 4365), (7, 4036)]
+  P(>=6 moves | nstrip): {0: '0/7307', 1: '90/5787', 2: '43/2949', 3: '15/1499', 4: '7/1014', 5: '2/841', 6: '4/603'}
+  P(>=6 moves | #readings in (7,9)): {0: '41/11588', 1: '93/5980', 2: '25/1794', 3: '2/526', 4: '0/99', 5: '0/13'}
+  moves by strip0 (blockers at R0): {0: [(0, 7307)], 1: [(1, 3319), (2, 1439), (3, 601), (4, 205), (5, 133), (6, 55), (7, 12), (8, 23)], 2: [(1, 1837), (2, 681), (3, 229), (4, 105), (5, 54), (6, 30), (7, 9), (8, 4)], 3: [(1, 1042), (2, 281), (3, 104), (4, 36), (5, 21), (6, 7), (7, 3), (8, 5)], 4: [(1, 758), (2, 146), (3, 63), (4, 31), (5, 9), (6, 3), (7, 4)], 5: [(1, 683), (2, 77), (3, 44), (4, 26), (5, 9), (8, 2)], 6: [(1, 563), (2, 10), (3, 18), (4, 8), (6, 2), (7, 1), (8, 1)]}
+  strip0 == 0 and n > 0: 0 ; nstrip == 0 and n > 0: 0 ; nstrip>0 and n == 0: 0
+
+inert (never setter) by rank: [(1, 70000), (2, 36172), (3, 45487), (4, 47962), (5, 48398), (6, 48441), (7, 49568)]  readings per rank: 70000
+inert (never blocker) by rank: [(1, 70000), (2, 32774), (3, 29523), (4, 28256), (5, 26849), (6, 25403), (7, 24492)]
