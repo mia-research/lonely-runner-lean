@@ -10470,3 +10470,15 @@ Per arrangement (exact): (i) is `gridT` lonely; (ii) is the cascade's landing `t
 - **Withdrawn:** E288's requirement to bound the number and size of entering-face jumps along the whole path (it came from following every runner through the deformation).
 - **Kept in view, not a bound:** the pair's own window recurs within a bounded time (a three-runner statement); the six others lying outside the arc at that moment is what the grid's slots provide and what the deviation relocates.
 - **To confirm with the owner:** that this is the movement statement: only the neighbours determine the isolation, a non-neighbour matters only by entering the arc, and then it becomes a neighbour.
+
+## E290 — 2026-10-02 — owner: "I think we already proved it in lean"; the ingredients crosswalk (`docs/n8/MOVEMENT_INGREDIENTS_v1.md`)
+
+**Owner:** *"yes, and I think we already proved it in lean. I wonder do we already have the ingredients they just need to be constructed without adding in wrongly concieved additionals?"*
+
+**Map:** v4 §2 E, §9 C8; E113–E116, E280, E289. **No run;** the Lean sources read (headers and statements), nothing rebuilt.
+
+**Finding.** The owner's argument is in Lean, stated as such: `DeformationN`'s header reads *"the arithmetic progression is globally isolated (the φ(n) law), every arrangement is a deformation of it, and a deformation moves each runner's isolation point without destroying it"*. `PathWindowN.lonelyRunnerAt8_of_window : WindowBound → LonelyRunnerAt8` assembles it one runner at a time from the AP, with `EndRunnerN`; its parts are proved: the base (`GridNeighbourhoodN`, `APNeighbourhoodN`, `GridPairLawN`, `GridClassN`, R6 at `q = 8`), the neighbours as the binding runners (`TwoPinnerN`, `readings_clear`), margin or pinch (`PathRouteN`), movement with margin (`lonelyAt_of_close`) and at a simple pinch both sides (`PinchOpenN`), one free runner off the lattice by order seven (`OneFreeN`, `OffLatticeN`), local hand-off (`SeparationN`, `PinchTransportN`, `CascadeTransportN`). **One hypothesis remains, `WindowBound`, used only in `lonelyAt_of_limit`, the closedness step.**
+
+**What is on record about it** (E116, E280): at a whole-number point the lonely set has period 1, so the window is automatic there; the hypothesis concerns arrangements near it, where nearby instants are lonely at bounded times iff the point is lonely (escape like `1/ε` at a non-lonely point), so `WindowBound` on the moves is the whole-number statement; between whole-number points the continuum is lonely natively. Not in Lean: the multi-pinch case of local stability (E114's route and E280's finding that every multi-pinch read had a margin window).
+
+**The question carried to the owner:** the limit step (if `vₙ → v₀` and the subject is lonely at some instant of each `vₙ`, then `v₀` is lonely): does the neighbour structure of E289 give it without a bound on the instants? No argument is on disk. Nothing is to be added to the construction beyond that.
