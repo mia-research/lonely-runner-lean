@@ -10374,3 +10374,25 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 - F2: a bad reading's remaining distance to its exit, in eighths, is `ρ = 1 − ε` (r0), `|ε|` (r1−), `2 − ε` (r7+); its exit is at `t + ρ/(8d)`; the first move's setter is the bad reading maximising `ρ_d/d` (Level A.3).
 
 **Question.** On the E274 families (same seeds) and the 5,978 residual members (`members_5978_v1.json`): does `τ(bound)` fix the first setter's rank, the number of moves, the next type `τ(t₁)`, the landing's setter rank? Groups by `τ(bound)`: purity of each outcome; the mixed groups listed with the data that separates them (M3). **Not read:** counts as rates; a grouping is not offered as a classification (E145: a type defined by the landing is circular).
+
+## E283 — 2026-10-02 — the local type at the bound fixes whether the bound is lonely and, for one bad reading, the first setter; it does not fix where the isolation lands
+
+**Map:** v4 §4 Q8; E279, E281–E282. Script `LonelyRunner/experiments/nN/redo/local_type_v1.{py,out}`; exact; 28,056 arrangements: the E274 families (same cells and sizes; F1 300, F2 1,200, F3 4,500, F4 10,459, F5 2,700, F6 2,619) and the 5,978 residual members.
+
+**Checks: 0 failures.** F1 (a reading is clear at `t` iff its status is ok, so lonely iff `τ(t)` is all ok) on every arrangement; F2 (the first setter is the bad reading maximising `ρ_d/d`, with `ρ = 1 − ε`, `|ε|`, `2 − ε` for r0, r1−, r7+, and its exit time `t + ρ/(8d)` equals the cascade's first instant).
+
+**At the bound (the grid through the slowest reading, class 1):**
+- Lonely at the bound: F1 156 of 300; F2 605 of 1,200; F3 2,348 of 4,500; F4 4,542 of 10,459; F5 615 of 2,700; F6 1,381 of 2,619; **residual 0 of 5,978** (every residual member has 1 to 6 bad readings: 1 in 1,469, 2 in 2,396, 3 in 1,506, 4 in 507, 5 in 90, 6 in 10).
+- The 18,109 arrangements not lonely at the bound fall in 1,240 distinct types `τ(bound)`.
+
+**What the type fixes** (groups of at least 3 members; 561 groups, 17,227 arrangements):
+- **the first setter's rank:** determined in 312 groups; by number of bad readings: `nbad = 1`: 18 of 18 (the single bad reading is the setter); `nbad = 2`: 63 of 135; `nbad = 3`: 193 of 346 (the rest need the magnitudes `ρ_d/d`);
+- **the number of moves:** determined in 30 groups; **the next type `τ(t₁)`:** 21 groups; **the landing's setter rank:** 10 groups (37 arrangements). Even with a single bad reading, the landing rank is pure in 0 of 18 groups and the move count in 0 of 18.
+- The largest mixed groups: `oooooo0` (the fastest reading captured, all others ok; 1,302 arrangements) lands at ranks 1 to 6 (6: 873, 5: 171, 4: 131, 2: 57, 3: 46, 1: 24) in 1 to 11 moves, with 30 distinct next types; `ooooo0o` (1,127): ranks 1 to 6, moves 1 to 8, 35 next types; `oooooo+` (920): 52 next types, moves up to 13.
+
+**Reading.**
+- The signs-and-residues type is exactly the information that decides good or bad at an instant (F1), and with one bad reading it names the first mover. Everything after the first move depends on **magnitudes and ratios**: the next positions are `P′_d = P_d + ρ_c·d/c`, so the next type depends on the comparison of the setter's displacement `ρ_c·d/c` with each other reading's slack to its status boundary. Those comparisons are thresholds in the continuous data: **the walls appear here as thresholds of the transition**, not as an import; they are bundled in the rule "exit the maximiser of `ρ/d`, re-read the type", which is the cascade's step.
+- In the single-bad-reading groups (a captured outlier, the others ok: the `{1…7, X}` family and its relatives) the others' `ε` are often exactly 0 on an edge, so the comparison is of `ε` (0 or tiny) with the outlier's displacement `ρ·d/X`: the deviation's size relative to the ratio enters the route, though not the move count (E274).
+- So a table indexed by the sign-type at the bound does not fix the isolation; the isolation is fixed by iterating the local rule, and its end (an all-ok type) is what remains to be shown for every arrangement. The owner's frame (existence is the grid's global isolation; an arrangement is a deviation) gives the all-ok type for the exact complete grid; what is asked of the deviation is that the relocation reaches an all-ok type.
+
+**Consequence (M7).** Not the answer the table route hoped for (a role fixed by a finite type at the bound). Open items to read: in the single-captured-outlier groups what decides the landing (the comparison of the outlier's displacement with the edge readings' `ε`); whether the thresholds of the transition are finitely many kinds (each a comparison of one reading's slack with the setter's displacement) so that the chain's types are determined by an ordering of such comparisons rather than by the outcome.
