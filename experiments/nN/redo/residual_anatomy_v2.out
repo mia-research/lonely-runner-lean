@@ -1,0 +1,59 @@
+S = [1, 2, 3, 5, 7, 12, 16]  residual: True
+cascade states: ['1/8', '17/128', '9/56', '17/96', '9/40']
+landing t = 9/40 = (8k+1)/(8b) for (b,k) in [(5, 1)]
+all certificates (b,k<b): [(5, 1), (7, 5), (12, 3), (12, 9)]
+
+landing flank b=5, lap k=1.  position(eighths) = q + eps + 8*{k*eps}  (mod 8)
+ a   q=a//b  r=a%b  eps=r/b   {k eps}     q+eps+8{k eps}   mod 8     clear-margin(eighths beyond edge)
+ 1   0       1      1/5      1/5       9/5              1.8       0.8
+ 2   0       2      2/5      2/5       18/5             3.6       2.6
+ 3   0       3      3/5      3/5       27/5             5.4       1.6
+ 5   1       0      0        0         1                1.0       0.0
+ 7   1       2      2/5      2/5       23/5             4.6       2.4
+ 12  2       2      2/5      2/5       28/5             5.6       1.4
+ 16  3       1      1/5      1/5       24/5             4.8       2.2
+
+states visited (b,k) with blockers:
+  t=1/8  blockers=[16]
+     -> opening of 16 lap 2  (8*2+1)/(8*16)
+  t=17/128  blockers=[7]
+     -> opening of 7 lap 1  (8*1+1)/(8*7)
+  t=9/56  blockers=[12]
+     -> opening of 12 lap 2  (8*2+1)/(8*12)
+  t=17/96  blockers=[5]
+     -> opening of 5 lap 1  (8*1+1)/(8*5)
+  t=9/40  blockers=[]
+
+per move: position (eighths mod 8) before, shift 8*x*dt (eighths), position after; * = in the way after
+ move 1/8 -> 17/128  dt=1/128 (0.0078)
+    x=1   before 1.000   shift 0.062   after 1.062   
+    x=2   before 2.000   shift 0.125   after 2.125   
+    x=3   before 3.000   shift 0.188   after 3.188   
+    x=5   before 5.000   shift 0.312   after 5.312   
+    x=7   before 7.000   shift 0.438   after 7.438   *
+    x=12  before 4.000   shift 0.750   after 4.750   
+    x=16  before 0.000   shift 1.000   after 1.000   
+ move 17/128 -> 9/56  dt=25/896 (0.0279)
+    x=1   before 1.062   shift 0.223   after 1.286   
+    x=2   before 2.125   shift 0.446   after 2.571   
+    x=3   before 3.188   shift 0.670   after 3.857   
+    x=5   before 5.312   shift 1.116   after 6.429   
+    x=7   before 7.438   shift 1.562   after 1.000   
+    x=12  before 4.750   shift 2.679   after 7.429   *
+    x=16  before 1.000   shift 3.571   after 4.571   
+ move 9/56 -> 17/96  dt=11/672 (0.0164)
+    x=1   before 1.286   shift 0.131   after 1.417   
+    x=2   before 2.571   shift 0.262   after 2.833   
+    x=3   before 3.857   shift 0.393   after 4.250   
+    x=5   before 6.429   shift 0.655   after 7.083   *
+    x=7   before 1.000   shift 0.917   after 1.917   
+    x=12  before 7.429   shift 1.571   after 1.000   
+    x=16  before 4.571   shift 2.095   after 6.667   
+ move 17/96 -> 9/40  dt=23/480 (0.0479)
+    x=1   before 1.417   shift 0.383   after 1.800   
+    x=2   before 2.833   shift 0.767   after 3.600   
+    x=3   before 4.250   shift 1.150   after 5.400   
+    x=5   before 7.083   shift 1.917   after 1.000   
+    x=7   before 1.917   shift 2.683   after 4.600   
+    x=12  before 1.000   shift 4.600   after 5.600   
+    x=16  before 6.667   shift 6.133   after 4.800   
