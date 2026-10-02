@@ -10772,3 +10772,13 @@ The maximising vertex of the one-lap tree is `ρ = (1, 16715503/7123545, 47/15, 
 - **Cell-thickness threshold `[CHECKED]`:** `path_tree_par.py 1` with `TT = 1e-6`, `1e-9`, `1e-12` (`path_tree_par_J1_TT*.out`): identical in all three: 27,517 nodes, 9,651 terminal, deepest 29, supremum `11.966048`, path the same. No cell has slack between `1e-12` and `1e-6`; a cell below `1e-12` would be missed by all three (exact certificates owed).
 - **Three-lap window `ρ_7 ≤ 25`:** `path_tree_par2.py 3 3 10` running (frontier of 12,640 subtrees at depth 3 built in 104 s; an earlier attempt with 4 levels was stopped: its serial frontier was 45,540 subtrees and took 585 s). `path_tree_par2` also records, per threshold `T`, the largest `ρ_7` over nodes whose state can exceed `T`: if every cell with a state above 7 has `ρ_7 ≤ 9`, late landings are confined to the one-lap window.
 - `CASCADE_ACCOUNT_v1.md` updated for the two-lap result and the threshold check.
+
+## E323 (2026-10-02, 22:4x) -- language of the one-lap tree (window rho_7 <= 9), from stored terminal cells
+
+**Map:** cascade path = word over letters (setter rank, lap); the tree enumerates the words the cascade can produce when rho_7 <= 9.
+Artifact: `LonelyRunner/experiments/nN/redo/terminals_J1.pkl`, `language_J1_v1.out`, `path_tree_par3_J1.out`.
+- 9,651 terminal cells carry 6,705 distinct words (several cells share a word, differing in the landing range); 17,399 prefixes; lengths 2..29 (mode 22); alphabet 47 letters, laps up to 11.
+- Within every word, a rank that recurs always does so on a strictly higher lap (0 exceptions in 9,651), matching the link rule for the repeated setter.
+- NOT a Markov language: successor set depends on more than the last letter (42 of 47 last-letters have more than one distinct successor set); mean successors 6.6 / 3.0 / 2.2 for context length 1 / 2 / 3. The words are therefore not a regular grammar on the last move; the cell geometry (the LP) carries the state.
+- Sup landing 11.966048 unchanged; late landings (state able to exceed T) have rho_7 closure at most 9.0 for T = 3..9, and 8.70 / 8.37 / 7.86 for T = 10 / 11 / 11.5.
+**Consequence:** the one-lap map is a finite list of 9,651 cells / 6,705 words, not a grammar; no state-reduction found. Three-lap tree still running (9,975+/12,640 subtrees, 0 violations).
