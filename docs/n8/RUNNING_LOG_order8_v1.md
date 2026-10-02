@@ -10301,3 +10301,18 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 **A difference to keep.** In the reported argument the finite set is integer tuples up to a height bound, obtained by estimates. Here the infinite periodic grid does that job: beyond a clump's own scale only the residue mod 8 and the deviation matter. And in place of an error estimate the isolation is followed as the collapsed pair is turned back on (the deformation); the un-collapsing of a doubled pair is the doubled-slot step of the multi-pinch (E277, running).
 
 **Consequence.** The open region (E248) is where the first branch has no uniform constant; the dichotomy above, with the constants from `TrainCollapseN` (`56m`) and nested windows (E231's `35m/3`), is the candidate statement. Not started. (Numbering: the multi-pinch results will be the next entry; its script header says E278.)
+
+## E279 — 2026-10-02 — owner: no evenness is needed, only that any arrangement can be locally arranged in an AP/grid style; the local types are finite and the lap never enters
+
+**Owner:** *"No we don't need to show they are even spread, merely that any arrangement can be locally arranged in a ap/grid style"* (on E278's dichotomy, whose second branch asked for evenness at every scale: withdrawn).
+
+**Map:** v4 §4 Q8; E216 (the class instant), E272–E274. **No run;** a derivation from E216's object, `[reasoned]`, not checked beyond the arithmetic below.
+
+**Derived.** Take the grid through a reading `a` with step `s = d_a/n_a`. Every reading is `d = s(n_d + ε_d)`, `n_d` the nearest integer, `|ε_d| ≤ 1/2` (automatic, at any scale). At the class-`c` instant `t = c/(8s)` (`c` a unit mod 8, `c·n_a ≡ 1`, so `a` is on its leaving edge) reading `d` sits at `c·n_d + c·ε_d` in eighths (since `d·t = s(n_d + ε_d)·c/(8s)`). So:
+- the deviation is scaled by `c ≤ 7`, not by `n_a` or the lap; this is why E274 found nothing depending on laps or scale ratios when measured at the grid's own scale;
+- at class 1, reading `d` is clear iff its residue `n_d mod 8 ≠ 0`, and a residue-1 reading has `ε ≥ 0`, a residue-7 reading `ε ≤ 0` (residues 2 to 6 are always clear): **the condition depends only on residue and sign, not on the size of the deviation**. At other classes `c ≤ 7` the size enters up to the factor `c`.
+- So the local types (residue, sign per reading, and the class) are finite, with no height bound and no estimate.
+
+**What it does not give.** Which grid `(a, n_a)` to read the arrangement on is free, and finding one whose type vector is good is Theorem 6.15 (every opening is the class-1 instant of a grid), the obligation. The content is therefore the carrying across walls: the type vector changes only where a reading crosses an edge or a residue boundary (a pinch); the finite local rules at a wall (hand-off on a leaving face, next exit on an entering face: Levels A–C, C.4, C.5) carry the isolation; a multi-pinch is a wall where several readings change type at once. E278's dichotomy and its evenness branch are withdrawn.
+
+**Consequence.** The work is the carrying rule at every wall including the multi ones (E277, running), not a dichotomy or a bound. To confirm with the owner: that this is the intended sense of "locally arranged in an AP/grid style".
