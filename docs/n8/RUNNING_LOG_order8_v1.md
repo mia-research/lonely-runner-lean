@@ -10023,3 +10023,26 @@ These are counts by place on constructed members, not a proof.
 - The fastest-flank line (E259–E262: (b), (c), the chain below the twin) was my choice of flank in E259, taken because the flank reading was run there first; the data now say it is not the place. (c)'s derivation (E261) stands as an implication; (b) restricted is `[REFUTED]` on `EightResidual`.
 - The owed statement: **for a C1-shaped set in `EightResidual`, the slowest cluster flank is free across `c`'s band run, or it is shadowed and the second-slowest is free.** Cascade-side: the landing is at rank 1 or 2 of the cluster in the 5,978 here.
 - What is not yet understood: why the slowest flank clears (what its walkers' ratios `x_j/e₁ ≥ 1` do across `u ∈ [e₁/c, 7e₁/c]`), and the 21 rank-1 exceptions (feature, what forces rank 2's witness, same mechanism or not). These go to map §6 as "not understood" until each has an artifact.
+
+## E265 — 2026-10-02 — design: why the slowest cluster flank clears, and the 21 rank-1 exceptions, read through the cascade
+
+**Owner:** *"We better figure that out"*; *"yes, read both through the cascade"*.
+
+**Map:** v3 §9 C1; E264's owed statement (rank 1 free, or rank 2 free). Two items marked "not understood" in E264: (1) why rank 1 clears; (2) the 21 members whose rank 1 is shadowed: the feature, what forces rank 2's witness, same mechanism or not.
+
+**Objects (Theorem 6.8's position, Theorem 6.14's congruence; no new object).** At flank `e`, opening `u = 8k+1`, a walker `x_j` has reading `ρ_j(u) = x_j·u/e mod 8 = A_j + ε_j·u (mod 8)`, where `x_j/e = A_j + ε_j`, `A_j` an integer, `|ε_j| ≤ 1/2`. It is in the way iff `ρ_j ∈ (−1, 1)` mod 8. Along `c`'s band run `u ∈ [e/c, 7e/c]` each walker's reading is a line in `u` of slope `ε_j`.
+- At the **fastest** flank every walker has `x_j/e < 1`, so `(A, ε)` is `(1, −)` (a near twin below) or `A = 0`.
+- At the **slowest** flank every walker has `x_j/e₁ ≥ 1`, so `A ≥ 1`, and `A = 1` forces `ε ≥ 0`. No `(1, −)` twin below exists.
+
+**Reading to test (stated before running; I derive it, then check the data against it).**
+1. *Single-walker shadow across the whole run.* It needs `|ε|·(u_hi − u_lo) < 2` (the reading crosses a block of width 2 at speed `|ε|`) and a start inside `(−1, 1)` at `u_lo ≥ e/c`. So `|ε|·u_lo` is below 2 and `A mod 8 ∈ {0, 1, 7}` with the sign that keeps the reading in the block (`A ≡ 1`: `ε < 0`; `A ≡ 7`: `ε > 0`; `A ≡ 0`: either). At rank 1 that forces `x_j/e₁ ≳ 6.5`. Check against: every `alone` state by rank on all 5,978 members; also on a population that is not constructed for membership (random clusters), to see whether the reading is about the arrangement and not the construction.
+2. *Hand-offs at rank 1.* Express every occupant as `(A, ε)`; split into sweeps (`|ε|` small: a walker crossing a block) and `ε ≈ ±1/2` (the half-integer structure of E257–E258). Count by type.
+
+**Perturbation through the cascade, the 21 exceptions.** For each exception and each cluster walker `j`, shift `x_j` by `δ·e₁` for `δ ∈ {±0.01, ±0.05, ±0.1, ±0.25}` (rounded to integers; `c` stays the least reading). After each shift: rank-1 state, the cascade's landing rank and lonely check. Reported per exception:
+- the walkers whose shift frees rank 1 (the shadow depends on their `(A, ε)`);
+- whether the landing moves from rank 2 and where;
+- at the rank-2 witness opening: every walker's reading `ρ_j` and its margin to the block edge; the shadower's `(A', ε')` at `e₂` against `ε' ≈ ε − A·η` (`η = e₂/e₁ − 1`), i.e. the displacement of the shadower's ratio by the gap between the flanks.
+
+**Checks (forced).** The exact cascade's landing equals the earliest first-clear cluster-flank opening for every perturbed set; `c` never in the way inside its run; lonely at the landing; the reading `ρ_j = (A_j + ε_j u) mod 8` equals `(x_j u / e) mod 8` exactly on every member opening.
+
+**Native check.** Objects are positions, `(A, ε)`, openings and `c`'s run, all the record's. Nothing is scored for hardness; the counts name places. Perturbation follows owner 2026-09-27 (E102/E111).
