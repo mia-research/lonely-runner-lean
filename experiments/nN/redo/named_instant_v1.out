@@ -1,0 +1,49 @@
+E285/E286 (2026-10-02): the named instants of GridNeighbourhoodN beyond the proved radius.  Design: log E285.
+Complete grids (residues of the other seven = a permutation of 1..7, D = r + 8N), subject = the slowest (D > 0), deviations eps in
+[-rho, rho] grid steps (exact).  gridT = t_A if t_A <= t_B else 7 t_B, t_A = D_A/(8 delta_A), t_B = D_B/(8 delta_B).
+arrangements: 12000
+CHECKS: landing not lonely: 0; landing later than gridT: 0; inside the radius (q <= 0.5) gridT not lonely: 0 of 2008
+
+by q = eta (14 W + 21):  n | gridT lonely | landing == gridT | landing is a named instant | landing earlier than gridT | max moves
+  0: q <= 0.5 (inside the proved radius)     n  2008 |  2008 |    38 |    38 |  1970 | 9
+  1: q in (0.5, 1]                           n   216 |   216 |     9 |     9 |   207 | 7
+  2: q in (1, 10]                            n   699 |   699 |    15 |    15 |   684 | 8
+  3: q in (10, 100]                          n  1126 |  1090 |    23 |    24 |  1089 | 9
+  4: q in (100, 1000]                        n  2106 |  1720 |    16 |    23 |  2055 | 9
+  5: q in (1000, 10000]                      n  1698 |  1337 |     2 |     2 |  1694 | 8
+  6: q in (10000, 100000]                    n  1583 |  1203 |     0 |     1 |  1583 | 7
+  7: q in (100000, 1e+06]                    n  1279 |   940 |     0 |     0 |  1279 | 9
+  8: q in (1e+06, 1e+08]                     n  1285 |   883 |     0 |     0 |  1285 | 8
+
+where gridT is not lonely (beyond the radius): first by (Nmax, rho) cell
+  Nmax      10 rho 0.1   : 48 of 400
+  Nmax      10 rho 0.3   : 147 of 400
+  Nmax      10 rho 0.49  : 180 of 400
+  Nmax     100 rho 0.01  : 4 of 400
+  Nmax     100 rho 0.1   : 44 of 400
+  Nmax     100 rho 0.3   : 139 of 400
+  Nmax     100 rho 0.49  : 171 of 400
+  Nmax    1000 rho 0.01  : 7 of 400
+  Nmax    1000 rho 0.1   : 44 of 400
+  Nmax    1000 rho 0.3   : 154 of 400
+  Nmax    1000 rho 0.49  : 186 of 400
+  Nmax   10000 rho 0.01  : 6 of 400
+  Nmax   10000 rho 0.1   : 39 of 400
+  Nmax   10000 rho 0.3   : 145 of 400
+  Nmax   10000 rho 0.49  : 184 of 400
+  Nmax 1000000 rho 0.001 : 1 of 400
+  Nmax 1000000 rho 0.01  : 4 of 400
+  Nmax 1000000 rho 0.1   : 64 of 400
+  Nmax 1000000 rho 0.3   : 152 of 400
+  Nmax 1000000 rho 0.49  : 185 of 400
+
+smallest q with gridT not lonely: 61.71333
+largest q with gridT lonely: 54422211.920601
+
+the six arrangements with the least q where gridT is not lonely (landing equal gridT? named? moves):
+  q 61.713 Nmax 10 rho 0.1 W 46: landing==gridT False named False moves 1  T (4950108, 7034149, 10092802, 24969452, 35068551, 35936667, 45999633)
+  q 64.978 Nmax 10 rho 0.1 W 54: landing==gridT False named False moves 1  T (3032257, 32920463, 36916373, 47065630, 49929688, 51972171, 53930596)
+  q 65.214 Nmax 10 rho 0.1 W 61: landing==gridT False named False moves 2  T (1963069, 23064626, 26950471, 37925470, 40986159, 59973859, 61053819)
+  q 66.010 Nmax 10 rho 0.1 W 50: landing==gridT False named False moves 1  T (1033488, 3960639, 5091554, 14076760, 19002685, 22945596, 50033817)
+  q 68.433 Nmax 100 rho 0.01 W 654: landing==gridT False named False moves 3  T (23007443, 299992543, 346002518, 489003836, 540992591, 642999834, 654003293)
+  q 68.912 Nmax 10 rho 0.1 W 52: landing==gridT False named False moves 2  T (1092006, 5983796, 11058188, 21053189, 31074451, 49970670, 52087735)
