@@ -10358,3 +10358,19 @@ In every family the isolation lies in the slowest reading's first block (`R* ≤
 **What that architecture needs:** (1) types defined from the speeds alone, not from the landing (E145: types defined by the landing make "every arrangement has a type" the conjecture); (2) a named instant per type, loneliness proved locally; (3) exhaustiveness.
 
 **Proposed test (not run):** at the bound the local type is the residue mod 8 and sign of `ε` of each reading on the grid through the slowest reading (E279). Does that type alone fix the isolation's role (setter rank; bound or not) on the E274 families and the residual members? If it does, a table works without walls; if the isolation depends on ratios beyond the type, the grid through the captured reading is part of the type, and whether that chain is finite without being defined by the outcome has to be examined.
+
+## E282 — 2026-10-02 — owner: existence is the grid's global isolation (φ(8)); an arrangement is a deviation from it; run the local-type test (design)
+
+**Owner:** *"I think existence is already proven by the phi(n) law/grid global isolation. That is already proved, now we are saying any arrangement is just a deviation from that. Move the speed and you move the isolation point from the global ideal to a local isolation event."* And: *"Ok yes"* to the local-type test of E281.
+
+**Map:** v4 §4 Q8; E279, E281; `GridNeighbourhoodN`. M2 class (d), a map run.
+
+**Frame.** The complete grid (residues mod 8 all different) is lonely at the class-1 instant for every runner, laps invisible (`GridNeighbourhoodN`, the φ(8) law, proved). The question is what a deviation does to where the isolation sits. The test reads, at an instant, each reading's rounded position as a grid point plus deviation.
+
+**Definitions (exact).** At instant `t`, `P_d = 8·d·t`, `n_d = ⌊P_d + 1/2⌋`, `ε_d = P_d − n_d ∈ [−1/2, 1/2)`, `r_d = n_d mod 8`. Status of reading `d`: **ok** if `r ∈ {2,…,6}`, or `r = 1` with `ε ≥ 0`, or `r = 7` with `ε ≤ 0`; otherwise bad (**r0**: captured; **r1−**: just inside the leaving edge; **r7+**: just past the entering edge). The type `τ(t)` is the vector of the seven statuses. The bound is `t = 1/(8m)`, `m` the slowest reading, so `P_d = d/m`.
+
+**Forced (derived; checked):**
+- F1: `d` is clear at `t` iff its status is ok (`‖d t‖ ≥ 1/8`), so the set is lonely at `t` iff `τ(t)` is all ok. At the bound this is the grid through the slowest reading at class 1.
+- F2: a bad reading's remaining distance to its exit, in eighths, is `ρ = 1 − ε` (r0), `|ε|` (r1−), `2 − ε` (r7+); its exit is at `t + ρ/(8d)`; the first move's setter is the bad reading maximising `ρ_d/d` (Level A.3).
+
+**Question.** On the E274 families (same seeds) and the 5,978 residual members (`members_5978_v1.json`): does `τ(bound)` fix the first setter's rank, the number of moves, the next type `τ(t₁)`, the landing's setter rank? Groups by `τ(bound)`: purity of each outcome; the mixed groups listed with the data that separates them (M3). **Not read:** counts as rates; a grouping is not offered as a classification (E145: a type defined by the landing is circular).
