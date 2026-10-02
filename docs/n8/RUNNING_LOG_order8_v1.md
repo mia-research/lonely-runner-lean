@@ -10144,3 +10144,21 @@ These are counts by place on constructed members, not a proof.
 - **A caution on "covering".** Register item 4 and F15 record that covering as a question's object has been an imported shape (Q7 withdrawn, E215). A cover-exclusion argument is native only when attached to a place; today no place rule exists (the landing is at ranks 1–6 with no rank rule, E264–E268), which is why exclusion by derivation is the remaining route and not a rank rule.
 
 **Consequence:** map v4 is the start point for the next step (map-first). No step is approved. Open per §4 Q9 and §7: the hand-offs per flank as sweeps and half-integer structures; the 21 rank-1 exceptions' rank-2 witness.
+
+## E270 — 2026-10-02 — owner: stop; complete the finite cover; `1…7, 10¹⁰` is not a new arrangement from `1…7, 17`
+
+**Owner** (in sequence, after E269): *"yes we can read the hand-offs per flank first but I think this is good moment to pause and think about what we are doing. We are trying to prove n=8 by showing there are only finite amounts of arrangements and those arrangements can be view in terms of ap/grid providing that all arrangements achieve individual isolation by moving the isolation points depending on the arrangement of the speeds."* Then, on what finite means: *"while there are continuous ability of speeds to change there are only a finite set of arrangements of runners. This is due to several things, first the conjecture itself means that runner 2's speed can not increase more than runner 3's speed without becoming runner 3. The scale invariance so 0.000001...0.000008 is the same as 1m...8m or 1pi...8pi and then the fact grid goes on forever. When you logically work your way through all the conditions, there aren't an infinite set of arrangments."* Then, asked to look at Lean: *"OK if we haven't then we really need to stop and complete that work. 1...7,10000000000, is not a new arrangement from 1...7,17."*
+
+**Map:** v4 §4 Q8 and Q9; §2 F (`Cover8`), §9 C12–C13. **No run.** Housekeeping: the owner's direction and what the Lean says.
+
+**Read in Lean (E270; sources only, nothing rebuilt):**
+- `ArrangementShapeN.reduction_iff` (untracked, another session's): any arrangement is exactly an affine rescaling of one ordered shape `0 = x₀ < … < x₇ = 7` (labelling, drift, scale removed; six free values; reference grid labels at most 49). It says it makes no claim that finite grid signatures determine every cascade move.
+- `RegimeSkeletonN.lonelyRunnerAt8_of_cover8`: `Cover8 M → LonelyRunnerAt8` for every `M`, no case split; `lonely_of_gridClass8` (1-D Helly on laps). **`Cover8 M` is the one owed statement** (a `Prop`, hypothesis only), checked on populations, none uncovered. Its header carries the owner's three reductions (the lap is free, the scale is a reading's own) and the retired spread split (E166: *"because of scale invariance and infinite grid the spread of 7–24 is irrelevant"*).
+- `Order8SkeletonN`: the scale-free hole is listed with "the finite cover not built".
+- Without a step bound `M` the covering is the conjecture restated (v3 §5); with `M` a uniform step bound is a time bound (E170, §9 C13).
+
+**Correction to E269's reply (F7).** The reply said the record had no statement of the finite list; `Cover8` is that statement. The file was not opened before the reply.
+
+**Owner's example, as the Lean sees it** (`1…7, 17` against `1…7, 10¹⁰`): they fall in different proved cases: `10¹⁰` is a block of one above `7·7`, closed by R8 (`blockRule8_one`); `17` has every consecutive ratio below 9 and is the scale-free hole `ArrBoundedCovered8 9`, with the finite cover not built. The owner's statement is that they are one arrangement. That identification is the content of the owed work.
+
+**Consequence.** The map's active line is the finite cover; Q9 (the C1-shape) is read as a sub-case of it (a cluster flank opening in `c`'s band run is a class-1 grid instant through `e` with step `≥ c/7`; whether `GridClass8`'s certificate form is what a free opening gives is unchecked). The hand-off reading is paused. Next: a design of the work (the equivalence under which `1…7, 17` and `1…7, 10¹⁰` coincide; finiteness of the classes; the certificate per class), for the owner's approval before any run.
