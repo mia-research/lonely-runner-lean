@@ -1,0 +1,9 @@
+seeds 11176 classes {'K2d': 6477, 'K2b': 4681, 'K2z': 18} violations {}
+length of the distinct-setter prefix (count of seeds): {3: 51, 4: 3486, 5: 5985, 6: 1654}
+S slack k=0 : min rho_{7-k}/(7(7/9)^k) = 1.0000665570513598 (>1 required)
+S slack k=1 : min rho_{7-k}/(7(7/9)^k) = 1.0012031042306628 (>1 required)
+S slack k=2 : min rho_{7-k}/(7(7/9)^k) = 1.0194508299417862 (>1 required)
+S slack k=3 : min rho_{7-k}/(7(7/9)^k) = 1.157817052599959 (>1 required)
+S slack k=4 : min rho_{7-k}/(7(7/9)^k) = 1.202330105361274 (>1 required)
+S slack k=5 : min rho_{7-k}/(7(7/9)^k) = 1.2824273537525452 (>1 required)
+max landing among seeds 440706653985595377864088223744/38016583061531177866283066705 11.592484607895878
