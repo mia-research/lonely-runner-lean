@@ -1,0 +1,10 @@
+members 18452
+active readings per member (blocking at some visited state): [(0, 2), (1, 2), (2, 2), (3, 6), (4, 19), (5, 135), (6, 10719), (7, 7567)]
+distinct paths (rank-labelled): 11743 | distinct reduced words (readings renamed by first appearance, laps kept): 11355
+regions per reduced word: [(1, 7456), (2, 2720), (3, 484), (4, 376), (5, 71), (6, 78), (7, 44), (8, 32), (9, 21), (10, 18)] ... max 39
+
+region path words: 12599
+rank maps (all 5040 permutations): words whose image is also a region path -- identity: 12599 | reflection r->8-r: 6 | next largest non-identity: 318 | median over all permutations: 12 | rank of the reflection among permutations: 5005
+lap shift +1 with identity ranks: images in the set: 1
+lap shift -1 with identity ranks: images in the set: 1
+lap shift +2 with identity ranks: images in the set: 1
