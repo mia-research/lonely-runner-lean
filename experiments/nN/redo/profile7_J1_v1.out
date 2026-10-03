@@ -1,0 +1,11 @@
+regions 19679 with exact member 18452 (leaf 9203 , stop 9249 )
+openers (rank,lap): 46 | lap-free classes (opener rank, closer rank, window): 66 | (opener rank, closer rank) pairs: 38 of 49 | max landing 11.5925
+gate-crossing (landing>7): 7567  window A (<=7): 10885  window B: 7567
+classes:
+   K2_lap>=2 17554
+   K2_lap1 890
+   K1_strip_lap1 6
+   K0 (no move) 2
+moves: [(0, 2), (1, 6), (2, 15), (3, 35), (4, 77), (5, 131), (6, 200), (7, 322), (8, 428), (9, 549), (10, 707), (11, 808)] ...
+pairs missing of the 49: [(1, 1), (2, 1), (2, 2), (3, 1), (3, 3), (4, 1), (4, 4), (5, 5), (6, 6), (7, 1), (7, 7)]
+openers new but not in the leaf-only list: [(3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (7, 2)] ; leaf-only openers lost: []

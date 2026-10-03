@@ -1,0 +1,4 @@
+regions 19679 leaf (T) 9652 stop (S) 10027
+distinct paths 12599
+taxonomy-sample arrangements with 1 < rho_7 <= 9: 15400; exact path equals a region's path: 15400; also inside one such region's reading box: 15400; path not among the regions: 0
+missing paths (first 5): []
