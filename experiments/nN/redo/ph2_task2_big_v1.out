@@ -1,0 +1,37 @@
+members with rho_7>9: 102792 (J=2 leaf regions); region-path gate flag vs exact landing>7 on 3500 members (flag, landing>7): [((False, False), 3500)]
+flagged scan covered 102792 of 102792 members; selected 2627 (gate-crossing found + every 40th)
+processed 2627 of 2627 selected members in 212 s
+REMOVAL of rank 7 (6-reading cascade vs 7-reading cascade), classes over processed members:
+   changes gate                                                           59
+   changes landing (gate same)                                            2412
+   no effect (same path) / closer differs                                 31
+   no effect (same path) / closer same                                    80
+   other: path differs, landing same, not a single deleted move           45
+   among gate-crossing (7-reading landing>7) members only:
+   changes gate                                                           59
+RULE A: "the 6-reading word = the 7-reading word with its moves set by rank 7 deleted": holds / fails by (gate-crossing?): [((False, False), 2423), ((False, True), 145), ((True, False), 59)]
+   counterexample to RULE A: readings ['1', '8456490692095743/1125899906842624', '7066297345698643/562949953421312', '3855164874337765/281474976710656', '2028867893080607/140737488355328', '8812504606162369/562949953421312', '17']
+      7-word ((2, 1), (3, 2), (7, 3), (6, 3), (5, 3), (4, 3), (7, 4), (3, 3), (6, 4), (2, 2), (5, 4), (4, 4), (7, 5))
+      6-word ((2, 1), (3, 2))
+   counterexample to RULE A: readings ['1', '7889846794063003/1125899906842624', '5071533555532785/562949953421312', '1559021811453253/140737488355328', '6632173486109959/562949953421312', '1800643003479375/140737488355328', '15']
+      7-word ((2, 1), (5, 2), (4, 2), (7, 3), (3, 2), (6, 3), (5, 3), (4, 3), (2, 2), (6, 4), (3, 3), (5, 4), (4, 4))
+      6-word ((2, 1), (5, 2), (4, 2))
+   counterexample to RULE A: readings ['1', '3946150834413475/562949953421312', '399391064076175/35184372088832', '3616988316487937/281474976710656', '3888092230345171/281474976710656', '15', '4489447144451309/281474976710656']
+      7-word ((2, 1), (4, 2), (3, 2), (7, 3), (6, 3), (5, 3), (4, 3), (7, 4), (3, 3), (2, 2), (4, 4), (7, 5))
+      6-word ((2, 1), (4, 2), (3, 2))
+   counterexample to RULE A: readings ['1', '1112353078430532719972893907027/158456325028528675187087900672', '23438273781238184121235262997/2475880078570760549798248448', '465015351819749023693368479855/39614081257132168796771975168', '129729315497590979773300993303/9903520314283042199192993792', '297105609428497959349246287339/19807040628566084398385987584', '161178846527292679725815723405/9903520314283042199192993792']
+      7-word ((2, 1), (4, 2), (7, 3), (6, 3), (3, 2), (5, 3), (7, 4), (4, 3), (6, 4), (2, 2), (7, 5), (3, 3), (6, 5), (4, 4))
+      6-word ((2, 1), (4, 2))
+REPLACEMENT of rank 7 by rho_6 + d, d in {1/8,1/2,1,2,4,8} (class relative to the 6-reading cascade; a "no effect" here also covers closer changes):
+   changes landing (gate same)                                            4725
+   no effect (same path)                                                  10599
+   other: path differs, landing same, not a single deleted move           438
+SHIFT rho_7 -> rho_7 + 8k/R_i, k in {-2,-1,1,2}, R_i over the visited states and the landing (only rho_7' > 0, distinct):
+   changes gate                                                           5653
+   changes landing                                                        116035
+   identical path, landing, closer                                        1152
+   path differs, landing same                                             7288
+   same path, closer differs                                              1150
+   by (rank 7 blocks at some visited state in the original?, which R_i, unchanged-path?) counts: [((False, 'first', False), 1), ((False, 'first', True), 2), ((False, 'landing', True), 4), ((True, 'first', False), 8528), ((True, 'first', True), 199), ((True, 'landing', False), 10129), ((True, 'landing', True), 375), ((True, 'middle', False), 110318), ((True, 'middle', True), 1722)]
+   exception example (rank 7 never blocks at a visited state, shift changes landing/gate): readings ['1', '4109783601874447/562949953421312', '4306691614622471/281474976710656', '4426287361987141/281474976710656', '4545883109351811/281474976710656', '2332739428358241/140737488355328', '17'] i=0 k=2
+      word ((2, 1),) -> ((2, 1), (7, 5)) ; landing 1.232802033294645 -> 1.2424242424242424

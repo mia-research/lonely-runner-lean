@@ -1,0 +1,93 @@
+== J=1 (rho_7<=9), all outcome regions: members 18452; gate-crossing (landing>7) 7567; (landing>7) xor (reading 1 sets a move) failures 0; members with >1 reading-1 move 0
+   of which members of leaf regions: 4885; of stop regions: 2682
+-- J=1 all regions: 7567 gate-crossing members; distinct phase-2 words 330; distinct phase-1 words 571
+   key [w1 (phase-1 word)]: distinct key values 571; key values carrying >1 phase-2 word 535 (of 571); pairs same key & different w2: 221771; pairs same w2 & different key: 506888; pairs same key & same w2: 8584
+   key [lap vector at 9]: distinct key values 55; key values carrying >1 phase-2 word 37 (of 55); pairs same key & different w2: 4980971; pairs same w2 & different key: 339867; pairs same key & same w2: 175605
+   key [lap vector + blocker set at 9]: distinct key values 214; key values carrying >1 phase-2 word 122 (of 214); pairs same key & different w2: 558100; pairs same w2 & different key: 421779; pairs same key & same w2: 93693
+   key [lap vector + blocker set + order of blockers' exits at 9]: distinct key values 370; key values carrying >1 phase-2 word 207 (of 370); pairs same key & different w2: 393104; pairs same w2 & different key: 427243; pairs same key & same w2: 88229
+   key [endpoint order type of all zones of ranks 2..7 on (9,12]]: distinct key values 5708; key values carrying >1 phase-2 word 37 (of 5708); pairs same key & different w2: 91; pairs same w2 & different key: 512503; pairs same key & same w2: 2969
+-- J=1 all regions catalogue: distinct phase-2 words 330; by length (words): [(0, 1), (1, 14), (2, 56), (3, 79), (4, 73), (5, 52), (6, 28), (7, 18), (8, 8), (9, 1)]; by length (members): [(0, 597), (1, 1293), (2, 2169), (3, 1760), (4, 1115), (5, 425), (6, 135), (7, 56), (8, 16), (9, 1)]
+   words whose parent (word minus last move) is also an occurring word: 233 of 330
+   distinct first phase-2 moves (rank,lap) over words: 19; as list with word count: [((2, 3), 32), ((2, 4), 9), ((2, 5), 3), ((3, 4), 22), ((3, 5), 7), ((3, 6), 1), ((4, 5), 40), ((4, 6), 15), ((4, 7), 1), ((5, 5), 12), ((5, 6), 72), ((5, 7), 6), ((5, 8), 1), ((6, 7), 33), ((6, 8), 9), ((6, 9), 2), ((7, 8), 44), ((7, 9), 19), ((7, 10), 1)]
+   distinct last moves (the opener) over words: 19
+   landing range overall: min 9 = 9.000000, max 440706653985595377864088223744/38016583061531177866283066705 = 11.592485
+   length 0: landing range [9.000000, 9.000000]
+   length 1: landing range [9.000387, 9.761938]
+   length 2: landing range [9.253521, 10.405995]
+   length 3: landing range [9.334419, 10.552586]
+   length 4: landing range [9.850522, 10.991691]
+   length 5: landing range [10.212829, 11.237248]
+   length 6: landing range [10.490564, 11.385170]
+   length 7: landing range [10.663762, 11.592485]
+   length 8: landing range [11.307692, 11.567053]
+   length 9: landing range [11.561741, 11.561741]
+   10 most frequent words (count, landing min..max, word):
+     597  9.00000..9.00000  ()
+     275  9.25352..9.83140  ((3, 4), (7, 9))
+     265  9.00039..9.28510  ((7, 8),)
+     247  9.25352..10.03619  ((2, 3), (7, 9))
+     230  9.00118..9.38210  ((5, 6),)
+     221  9.00423..9.76194  ((2, 3),)
+     189  9.63663..10.04680  ((2, 3), (3, 4), (7, 9))
+     183  9.46154..10.04113  ((2, 3), (4, 5))
+     179  9.00048..9.24931  ((7, 9),)
+     168  9.25352..9.72405  ((4, 5), (7, 9))
+   phase-2 moves examined 18835; setter = lowest-rank blocker in 14534; = highest-rank blocker in 12971; = blocker of largest lap in 12971; blocker-count distribution [(1, 9940), (2, 5580), (3, 2710), (4, 594), (5, 11)]
+   LINK RULE over all consecutive move pairs (phase 1 and 2) of these members: 160024 pairs; consecutive equal setters 0; link-rule violations 0; (reading,lap) setters used twice in one path: 0
+-- J=1 all regions phase-2 move count N2 vs per-arrangement bounds (exact): B1 = sum over ranks 2..7 of #zones with exit in (9,X]; B2 = longest chain of zones (exit increasing, next zone contains the previous exit, consecutive readings differ, first zone contains 9) with exits in (9,X]
+   X = landing R*: violations of N2 <= B2 <= B1: 0 of 7567; max B1 11, max B2 11, max N2 9; slack B2-N2 distribution [(0, 1630), (1, 890), (2, 2672), (3, 2009), (4, 336), (5, 30)]; slack B1-N2 [(0, 1481), (1, 464), (2, 2498), (3, 2410), (4, 659), (5, 55)]
+   X = 12 (uses landing < 12, observed): violations 0; max B1 17, max B2 11; slack B2-N2 distribution [(0, 1630), (1, 890), (2, 2672), (3, 2009), (4, 336), (5, 30)]
+-- J=1 new phase-2 words by window of rho_7 (cumulative, ascending rho_7 windows of width 1; members sorted by window):
+   rho_7 in (1,2]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (2,3]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (3,4]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (4,5]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (5,6]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (6,7]: members 0; words 0; new words 0; cumulative 0
+   rho_7 in (7,8]: members 6392; words 304; new words 304; cumulative 304
+   rho_7 in (8,9]: members 1175; words 63; new words 26; cumulative 330
+== J=2 (rho_7<=17), LEAF REGIONS ONLY (cell_members_J2.pkl; the stop regions of J=2 are not on disk): members 110081; gate-crossing (landing>7) 4939; (landing>7) xor (reading 1 sets a move) failures 0; members with >1 reading-1 move 0
+-- J=2 leaf-only: 4939 gate-crossing members; distinct phase-2 words 289; distinct phase-1 words 602
+   key [w1 (phase-1 word)]: distinct key values 602; key values carrying >1 phase-2 word 446 (of 602); pairs same key & different w2: 81675; pairs same w2 & different key: 159162; pairs same key & same w2: 4331
+   key [lap vector at 9]: distinct key values 58; key values carrying >1 phase-2 word 28 (of 58); pairs same key & different w2: 2152634; pairs same w2 & different key: 85088; pairs same key & same w2: 78405
+   key [lap vector + blocker set at 9]: distinct key values 196; key values carrying >1 phase-2 word 114 (of 196); pairs same key & different w2: 252936; pairs same w2 & different key: 127254; pairs same key & same w2: 36239
+   key [lap vector + blocker set + order of blockers' exits at 9]: distinct key values 340; key values carrying >1 phase-2 word 161 (of 340); pairs same key & different w2: 178452; pairs same w2 & different key: 129920; pairs same key & same w2: 33573
+   key [endpoint order type of all zones of ranks 2..7 on (9,12]]: distinct key values 3700; key values carrying >1 phase-2 word 22 (of 3700); pairs same key & different w2: 37; pairs same w2 & different key: 161539; pairs same key & same w2: 1954
+-- J=2 leaf-only catalogue: distinct phase-2 words 289; by length (words): [(0, 1), (1, 14), (2, 42), (3, 72), (4, 69), (5, 47), (6, 21), (7, 15), (8, 7), (9, 1)]; by length (members): [(0, 8), (1, 666), (2, 1448), (3, 1326), (4, 969), (5, 365), (6, 94), (7, 47), (8, 15), (9, 1)]
+   words whose parent (word minus last move) is also an occurring word: 156 of 289
+   distinct first phase-2 moves (rank,lap) over words: 20; as list with word count: [((2, 3), 31), ((2, 4), 8), ((2, 5), 3), ((3, 4), 21), ((3, 5), 5), ((3, 6), 1), ((4, 5), 35), ((4, 6), 11), ((4, 7), 1), ((5, 5), 11), ((5, 6), 53), ((5, 7), 7), ((5, 8), 1), ((6, 7), 30), ((6, 8), 8), ((6, 9), 2), ((7, 8), 40), ((7, 9), 18), ((7, 10), 1), ((7, 17), 1)]
+   distinct last moves (the opener) over words: 20
+   landing range overall: min 9 = 9.000000, max 9903520314283042199192993792/854305237337811163612999167 = 11.592485
+   length 0: landing range [9.000000, 9.000000]
+   length 1: landing range [9.000387, 9.556077]
+   length 2: landing range [9.253521, 10.405995]
+   length 3: landing range [9.334419, 10.552586]
+   length 4: landing range [9.579302, 10.916818]
+   length 5: landing range [10.217437, 11.237248]
+   length 6: landing range [10.490564, 11.331890]
+   length 7: landing range [10.636364, 11.592485]
+   length 8: landing range [11.307692, 11.567053]
+   length 9: landing range [11.561741, 11.561741]
+   10 most frequent words (count, landing min..max, word):
+     222  9.25352..10.03619  ((2, 3), (7, 9))
+     218  9.25352..9.83140  ((3, 4), (7, 9))
+     168  9.00039..9.28510  ((7, 8),)
+     147  9.63663..10.04680  ((2, 3), (3, 4), (7, 9))
+     136  9.00048..9.24931  ((7, 9),)
+     135  9.00199..9.38210  ((5, 6),)
+     130  9.25352..9.72405  ((4, 5), (7, 9))
+     98  9.46222..9.99636  ((2, 3), (6, 7), (7, 9))
+     85  9.52925..10.04680  ((2, 3), (4, 5), (7, 9))
+     82  9.28651..10.00949  ((2, 3), (6, 8))
+   phase-2 moves examined 14263; setter = lowest-rank blocker in 11128; = highest-rank blocker in 9933; = blocker of largest lap in 9933; blocker-count distribution [(1, 7688), (2, 4209), (3, 1967), (4, 395), (5, 4)]
+   LINK RULE over all consecutive move pairs (phase 1 and 2) of these members: 106721 pairs; consecutive equal setters 0; link-rule violations 0; (reading,lap) setters used twice in one path: 0
+-- J=2 leaf-only phase-2 move count N2 vs per-arrangement bounds (exact): B1 = sum over ranks 2..7 of #zones with exit in (9,X]; B2 = longest chain of zones (exit increasing, next zone contains the previous exit, consecutive readings differ, first zone contains 9) with exits in (9,X]
+   X = landing R*: violations of N2 <= B2 <= B1: 0 of 4939; max B1 11, max B2 11, max N2 9; slack B2-N2 distribution [(0, 698), (1, 668), (2, 1885), (3, 1435), (4, 223), (5, 30)]; slack B1-N2 [(0, 607), (1, 364), (2, 1772), (3, 1679), (4, 467), (5, 50)]
+   X = 12 (uses landing < 12, observed): violations 0; max B1 17, max B2 11; slack B2-N2 distribution [(0, 698), (1, 668), (2, 1885), (3, 1435), (4, 223), (5, 30)]
+-- word-set comparison: J=1 all 330, J=1 leaf-only 284, J=2 leaf-only 289; J=2 leaf words not among J=1 all-region words: 3; not among J=1 leaf-only words: 5; J=1 all words not among J=2 leaf words: 44
+-- J=2 leaf-only: words new relative to J=1 all-region words, by window of rho_7:
+   rho_7 in (9,11]: members 14; words 1; new 1; cumulative incl. J=1 331
+   rho_7 in (11,13]: members 0; words 0; new 0; cumulative incl. J=1 331
+   rho_7 in (13,15]: members 0; words 0; new 0; cumulative incl. J=1 331
+   rho_7 in (15,17]: members 45; words 5; new 2; cumulative incl. J=1 333
+   (J=2 members with rho_7 <= 9: 4880)
