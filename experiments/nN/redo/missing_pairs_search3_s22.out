@@ -1,0 +1,3 @@
+cells for closer-1 search (opener rank 2 or 5, Rhi>=6.9): 1092  opener-1 cells: 8
+evaluations 60000 pairs seen 26 found []
+still not found: [(1, 6), (1, 7), (2, 1), (5, 1)]
