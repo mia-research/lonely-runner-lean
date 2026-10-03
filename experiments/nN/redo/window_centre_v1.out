@@ -1,0 +1,8 @@
+gate-crossing members: 4939
+  landing R*: min 9.0000  median 9.8135  max 11.5925
+  right end of the clear window R*+width: min 9.0074  median 9.9739  max 11.7490
+  centre of the clear window: min 9.0053  median 9.8939  max 11.6708
+  width: min 0.00120 median 0.1524 max 0.4794
+  members with window right end > 12: 0 ; > 15: 0
+  closer (rank,lap) of gate-crossing members: [((5, 6), 2137), ((4, 6), 1071), ((6, 8), 629), ((5, 7), 615), ((5, 8), 94), ((7, 9), 76)]
+near-vertex best: R* 11.966048, width 0.097782, window right end 12.063830, centre 12.014939, 24-R* = 12.033952, closer (5, 8), moves 28
