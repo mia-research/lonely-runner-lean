@@ -1,0 +1,14 @@
+J 1 sigs 8839
+  k=0 rank 7 bound 7.000000: distinct-setter sigs 8839 (violations 0, min 7.0), repeated-setter sigs 0 (violations 0, min None)
+  k=1 rank 6 bound 5.444444: distinct-setter sigs 8838 (violations 0, min 5.444444444444444), repeated-setter sigs 0 (violations 0, min None)
+  k=2 rank 5 bound 4.234568: distinct-setter sigs 8833 (violations 0, min 4.234567901234568), repeated-setter sigs 0 (violations 0, min None)
+  k=3 rank 4 bound 3.293553: distinct-setter sigs 8829 (violations 0, min 3.2935528120713307), repeated-setter sigs 0 (violations 0, min None)
+  k=4 rank 3 bound 2.561652: distinct-setter sigs 5748 (violations 0, min 2.5616521871665907), repeated-setter sigs 3081 (violations 5, min 2.5432525951557095)
+  k=5 rank 2 bound 1.992396: distinct-setter sigs 1452 (violations 0, min 1.9923961455740151), repeated-setter sigs 7363 (violations 141, min 1.5910588235294119)
+J 2 sigs 105286
+  k=0 rank 7 bound 7.000000: distinct-setter sigs 105286 (violations 0, min 7.0), repeated-setter sigs 0 (violations 0, min None)
+  k=1 rank 6 bound 5.444444: distinct-setter sigs 105284 (violations 0, min 5.444444444444444), repeated-setter sigs 0 (violations 0, min None)
+  k=2 rank 5 bound 4.234568: distinct-setter sigs 105272 (violations 0, min 4.234567901234568), repeated-setter sigs 0 (violations 0, min None)
+  k=3 rank 4 bound 3.293553: distinct-setter sigs 94302 (violations 0, min 3.2935528120713307), repeated-setter sigs 10865 (violations 0, min 3.8640000000000003)
+  k=4 rank 3 bound 2.561652: distinct-setter sigs 61830 (violations 0, min 2.5616521871665907), repeated-setter sigs 42769 (violations 5, min 2.5432525951557095)
+  k=5 rank 2 bound 1.992396: distinct-setter sigs 19834 (violations 0, min 1.9923961455740151), repeated-setter sigs 83020 (violations 190, min 1.5910588235294119)

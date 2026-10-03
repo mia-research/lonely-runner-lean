@@ -1,0 +1,8 @@
+seed 3 W 40.0 N 400000
+samples with >=2 moves and rho_5 < 343/81: 2207
+k=0 rank 7 bound 7.00000: min over distinct-setter samples 7.00001, violations 0; repeated-setter samples 0, below bound 0; min ignoring distinctness 7.00001
+k=1 rank 6 bound 5.44444: min over distinct-setter samples 5.46282, violations 0; repeated-setter samples 0, below bound 0; min ignoring distinctness 5.46282
+k=2 rank 5 bound 4.23457: min over distinct-setter samples 4.33961, violations 0; repeated-setter samples 765, below bound 15; min ignoring distinctness 2.14171
+k=3 rank 4 bound 3.29355: min over distinct-setter samples 3.59810, violations 0; repeated-setter samples 2256, below bound 53; min ignoring distinctness 1.36851
+k=4 rank 3 bound 2.56165: min over distinct-setter samples 3.12929, violations 0; repeated-setter samples 4915, below bound 156; min ignoring distinctness 1.06133
+k=5 rank 2 bound 1.99240: min over distinct-setter samples 2.63517, violations 0; repeated-setter samples 4283, below bound 311; min ignoring distinctness 1.00038

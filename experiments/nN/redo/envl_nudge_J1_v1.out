@@ -1,0 +1,6 @@
+J1 rejected-degenerate-candidates-above=6 rank 2 sup 27/5 interior-slack t=1.648e-02 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 5.399999880543213
+J1 rejected-degenerate-candidates-above=6 rank 3 sup 153/23 interior-slack t=1.648e-02 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 6.65217359742621
+J1 rejected-degenerate-candidates-above=6 rank 4 sup 225/31 interior-slack t=6.637e-03 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 7.258064439880403
+J1 rejected-degenerate-candidates-above=12 rank 5 sup 255/31 interior-slack t=1.648e-02 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 8.225806080110374
+J1 rejected-degenerate-candidates-above=6 rank 6 sup 9 interior-slack t=4.009e-02 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 8.999999417643163
+J1 rejected-degenerate-candidates-above=10 rank 7 sup 9 interior-slack t=6.373e-03 interior exact-feasible=True nudge same sig at eps=1e-6; rank value there 8.999999942287058

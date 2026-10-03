@@ -1,0 +1,25 @@
+J 2 members 55040
+  C6 k=0: cases (m>=1): 55040
+  C6 k=0: first k+1 setters distinct: 55040
+  C6 k=1: cases (m>=2): 55039
+  C6 k=1: first k+1 setters distinct: 55039
+  C6 k=2: cases (m>=3): 55032
+  C6 k=2: first k+1 setters distinct: 55032
+  C6 k=3: cases (m>=4): 54975
+  C6 k=3: first k+1 setters distinct: 49280
+  C6 k=4: cases (m>=5): 54688
+  C6 k=4: first k+1 setters distinct: 32524
+  C6 k=5: cases (m>=6): 53780
+  C6 k=5: first k+1 setters distinct: 10499
+  C6 k=5: violations: 22
+  C6 k=5: violations with repeated setters: 22
+  C6 k=6: cases (m>=7): 51795
+  C6 k=6: violations: 51795
+  C6 k=6: violations with repeated setters: 51795
+  C8 missing [4]: 3
+  C8 missing [5]: 5
+  C8 missing [6, 7]: 1
+  C8 missing [6]: 14
+  C8 missing [7]: 27
+  C8 reading (rank>=2) never a blocker: 50
+  maxRlast_x1e6: 11491182

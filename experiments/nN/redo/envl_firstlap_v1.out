@@ -1,0 +1,5 @@
+J1 first-setter lap 1 sigs(>=10 moves) 8547 max per rank 2..7 (closure LP): [5.4, 6.65217, 7.53913, 8.5528, 9.0, 9.0]
+J1 first-lap distribution all sigs Counter({1: 8839})
+J2 first-setter lap 1 sigs(>=10 moves) 44812 max per rank 2..7 (closure LP): [9.0, 12.56522, 14.08918, 16.30256, 17.0, 17.0]
+J2 first-setter lap 2 sigs(>=10 moves) 27756 max per rank 2..7 (closure LP): [12.56522, 13.70968, 15.53763, 16.19763, 17.0, 17.0]
+J2 first-lap distribution all sigs Counter({1: 63484, 2: 41802})
