@@ -1,0 +1,42 @@
+J=1 distinct words 6706; transition types (rank direction, lap change): 16
+    ('faster', 1) 33183
+    ('faster', 2) 7890
+    ('faster', 3) 2429
+    ('faster', 4) 2387
+    ('faster', 5) 1335
+    ('faster', 6) 394
+    ('faster', 7) 393
+    ('faster', 8) 245
+    ('faster', 9) 6
+    ('slower', -6) 196
+    ('slower', -5) 388
+    ('slower', -4) 1219
+    ('slower', -3) 1634
+    ('slower', -2) 8054
+    ('slower', -1) 21138
+    ('slower', 0) 35444
+J=2 distinct words 74049; transition types (rank direction, lap change): 22
+    ('faster', 1) 186716
+    ('faster', 2) 86201
+    ('faster', 3) 60213
+    ('faster', 4) 19336
+    ('faster', 5) 9245
+    ('faster', 6) 2397
+    ('faster', 7) 1233
+    ('faster', 8) 443
+    ('faster', 9) 28
+    ('faster', 10) 28
+    ('faster', 16) 3
+    ('slower', -10) 3
+    ('slower', -9) 34
+    ('slower', -8) 54
+    ('slower', -7) 198
+    ('slower', -6) 756
+    ('slower', -5) 5018
+    ('slower', -4) 8799
+    ('slower', -3) 25540
+    ('slower', -2) 72607
+    ('slower', -1) 159751
+    ('slower', 0) 213317
+J=2 (rank, next rank, lap change): distinct 213
+per-lap rank sequence strictly decreasing: violations 0 of 372642 (lap, word) pairs
