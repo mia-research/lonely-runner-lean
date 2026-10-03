@@ -10949,3 +10949,10 @@ Subagent results (checked by the agent on 131,659 + 20,511 steps from exact samp
 - Zero width in 11 members, all p_7 = 7 exactly (10 with opener (5,4), 1 with (6,4)); 131 members tie at p = 1; 2 tie for closer.
 - Float results withdrawn by the agent: Spearman correlations, k-means clusters, the 1e-6 on-face counts, the moves-versus-ln R* regression, float state-interval lists.
 **Consequence:** the outcome of an arrangement splits first by the d_min gate (G1 versus the rest). Under the gate, G1 is exactly the arrangements whose chain from 1 covers [1,7]; its landings lie in [9, 11.97] by the data; why they stay below 12 is a statement about phase 2 from 9 and is not derived.
+
+## E341 (2026-10-03) -- the R* atoms are a witness artefact, not a property of the cells
+
+**Map:** the atoms of the exact member list (E340: 49/17, 49/15, 41/15, 11/5, 41/17, 25/7; 15,969 members open at an exactly integer reading). Test, exact Fractions (`atoms_cell_level_v1.py/.out`): for 150 sampled members per atom, jitter within the same cell (accept only if the exact path equals the cell's path) and read R*.
+- Each atom's members are in distinct cells (49/17: 3,056 members, 3,056 cells), and the opener's reading is exactly 17, 15 or 7 in all of them (17 = the window cap 8J+1; 15 and 7 are zone-edge values).
+- Within the same cell R* takes more than one exact value in 149/150 (49/17), 149/150 (49/15), 144/150 (41/15), 147/150 (11/5), 145/150 (41/17), 145/150 (25/7).
+**Consequence:** the atoms come from the choice of the max-slack LP point per cell (it sits on the window cap or a zone edge); they are not a property of the cells and are withdrawn as cascade facts. The same caution applies to every statistic taken over one-member-per-cell lists (position histograms, E329; the agent's atoms): they describe the member list.
