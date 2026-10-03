@@ -1,0 +1,67 @@
+======== lat3 windows in [1,23] members 18564
+windows in [1,7] count -> members: {1: 13, 2: 235, 3: 1400, 4: 4243, 5: 6327, 6: 4425, 7: 1539, 8: 336, 9: 45, 10: 1}
+windows in [9,15]: {0: 38, 2: 2070, 3: 41, 4: 7527, 5: 41, 6: 6752, 7: 2, 8: 1917, 10: 172, 12: 4}
+windows in [17,23]: {1: 13, 2: 235, 3: 1400, 4: 4243, 5: 6327, 6: 4425, 7: 1539, 8: 336, 9: 45, 10: 1}
+(nA,nB) joint: {(1, 2): 8, (1, 4): 2, (1, 6): 3, (2, 2): 83, (2, 4): 109, (2, 6): 43, (3, 0): 9, (3, 2): 312, (3, 4): 697, (3, 6): 320, (3, 8): 59, (3, 10): 3, (4, 0): 11, (4, 2): 561, (4, 3): 2, (4, 4): 1870, (4, 5): 1, (4, 6): 1423, (4, 8): 350, (4, 10): 24, (4, 12): 1, (5, 0): 8, (5, 2): 600, (5, 3): 18, (5, 4): 2527, (5, 5): 15, (5, 6): 2382, (5, 7): 1, (5, 8): 703, (5, 10): 73, (6, 0): 8, (6, 2): 404, (6, 3): 15, (6, 4): 1636, (6, 5): 18, (6, 6): 1747, (6, 7): 1, (6, 8): 545, (6, 10): 50, (6, 12): 1, (7, 0): 2, (7, 2): 87, (7, 3): 6, (7, 4): 592, (7, 5): 6, (7, 6): 636, (7, 8): 193, (7, 10): 16, (7, 12): 1, (8, 2): 15, (8, 4): 89, (8, 5): 1, (8, 6): 165, (8, 8): 59, (8, 10): 6, (8, 12): 1, (9, 4): 5, (9, 6): 32, (9, 8): 8, (10, 6): 1}
+windows in [1,15] total: {3: 17, 4: 94, 5: 322, 6: 678, 7: 1304, 8: 2335, 9: 2950, 10: 3095, 11: 3051, 12: 2193, 13: 1349, 14: 734, 15: 298, 16: 111, 17: 24, 18: 7, 19: 1, 20: 1}
+windows in [1,23] total: {4: 8, 6: 94, 8: 435, 10: 1309, 11: 2, 12: 2798, 13: 19, 14: 4415, 15: 30, 16: 4458, 17: 25, 18: 3081, 19: 7, 20: 1344, 21: 1, 22: 413, 24: 108, 26: 16, 28: 1}
+members with nA=0 (first window in [9,15]): 0 ; members with no window in [1,15]: 0 ; no window in [1,23]: 0
+(A nonempty, B nonempty) crosstab: {(True, True): 18526, (True, False): 38}
+first window lies in: {'A': 18564}
+windows containing (4,12,20): {(False, False, False): 13559, (True, False, True): 4921, (True, True, True): 84}
+instants t in 1..23: members whose some window contains t: {1: 18564, 2: 5005, 3: 8008, 4: 5005, 5: 3003, 6: 1716, 7: 3003, 8: 0, 9: 8008, 10: 1716, 11: 8008, 12: 84, 13: 8008, 14: 1716, 15: 8008, 16: 0, 17: 3003, 18: 1716, 19: 3003, 20: 5005, 21: 8008, 22: 5005, 23: 18564}
+odd-instant patterns within 1..15 (top 12): [((1, 11, 13), 3759), ((1, 3, 9, 15), 3759), ((1,), 3353), ((1, 3, 9, 11, 13, 15), 2611), ((1, 7), 833), ((1, 5), 833), ((1, 7, 11, 13), 532), ((1, 3, 7, 9, 15), 532), ((1, 5, 11, 13), 532), ((1, 3, 5, 9, 15), 532), ((1, 5, 7), 532), ((1, 3, 7, 9, 11, 13, 15), 182)] distinct 16
+pair ('S1S2@0', '3&5 both in windows', False) 17640
+pair ('S1S2@0', '3&5 both in windows', True) 924
+pair ('S1S2@0', 'S1 and S2 members: 1&7 both in windows', False) 15561
+pair ('S1S2@0', 'S1 and S2 members: 1&7 both in windows', True) 3003
+pair ('S1S2@0', 'S1 present', True) 18564
+pair ('S1S2@0', 'S2 present', False) 8477
+pair ('S1S2@0', 'S2 present', True) 10087
+pair ('S1S2@0', 'both present (any windows)', False) 8477
+pair ('S1S2@0', 'both present (any windows)', True) 10087
+pair ('S1S2@0', 'one window holds one of S1 and one of S2', False) 18564
+pair ('S1S2@16', '3&5 both in windows', False) 17640
+pair ('S1S2@16', '3&5 both in windows', True) 924
+pair ('S1S2@16', 'S1 and S2 members: 1&7 both in windows', False) 15561
+pair ('S1S2@16', 'S1 and S2 members: 1&7 both in windows', True) 3003
+pair ('S1S2@16', 'S1 present', True) 18564
+pair ('S1S2@16', 'S2 present', False) 8477
+pair ('S1S2@16', 'S2 present', True) 10087
+pair ('S1S2@16', 'both present (any windows)', False) 8477
+pair ('S1S2@16', 'both present (any windows)', True) 10087
+pair ('S1S2@16', 'one window holds one of S1 and one of S2', False) 18564
+pair ('S1S2@8', '3&5 both in windows', False) 10556
+pair ('S1S2@8', '3&5 both in windows', True) 8008
+pair ('S1S2@8', 'S1 and S2 members: 1&7 both in windows', False) 10556
+pair ('S1S2@8', 'S1 and S2 members: 1&7 both in windows', True) 8008
+pair ('S1S2@8', 'S1 present', False) 10556
+pair ('S1S2@8', 'S1 present', True) 8008
+pair ('S1S2@8', 'S2 present', False) 10556
+pair ('S1S2@8', 'S2 present', True) 8008
+pair ('S1S2@8', 'both present (any windows)', False) 15561
+pair ('S1S2@8', 'both present (any windows)', True) 3003
+pair ('S1S2@8', 'one window holds one of S1 and one of S2', False) 18564
+rule ('R1 odd integer instant in 1..15 in a window', True) 18564
+rule ('R2 any integer in 1..15 in a window', True) 18564
+rule ('R3 any integer in 1..7', True) 18564
+rule ('R4 any integer in 9..15', False) 4675
+rule ('R4 any integer in 9..15', True) 13889
+rule ('R5 odd in {1,3,5,7}', True) 18564
+rule ('R5&R6', False) 5551
+rule ('R5&R6', True) 13013
+rule ('R6 odd in {9,11,13,15}', False) 5551
+rule ('R6 odd in {9,11,13,15}', True) 13013
+rule ('R7 any integer 1..23', True) 18564
+COUNTEREXAMPLE to R4 any integer in 9..15 : ('lat3', (4, 5, 6, 7, 8, 11)) [1, 4/3, 5/3, 2, 7/3, 8/3, 11/3] windows [[1,21/11], [27/11,21/8], [123/11,45/4], [51/4,141/11], [171/8,237/11], [243/11,23]]
+COUNTEREXAMPLE to R6 odd in {9,11,13,15} : ('lat3', (4, 5, 6, 7, 8, 11)) [1, 4/3, 5/3, 2, 7/3, 8/3, 11/3] windows [[1,21/11], [27/11,21/8], [123/11,45/4], [51/4,141/11], [171/8,237/11], [243/11,23]]
+COUNTEREXAMPLE to R5&R6 : ('lat3', (4, 5, 6, 7, 8, 11)) [1, 4/3, 5/3, 2, 7/3, 8/3, 11/3] windows [[1,21/11], [27/11,21/8], [123/11,45/4], [51/4,141/11], [171/8,237/11], [243/11,23]]
+degenerate (single-point) windows total: 43638
+FEWEST windows in [1,23]: 4 ('lat3', (4, 5, 6, 7, 8, 9)) [1, 4/3, 5/3, 2, 7/3, 8/3, 3] [[1,7/3], [11,45/4], [51/4,13], [65/3,23]]
+NARROWEST positive-width window: width 3/380 (~0.007895) ('lat3', (5, 6, 7, 9, 19, 20)) [1, 5/3, 2, 7/3, 3, 19/3, 20/3] window [[123/20,117/19]] all [[1,21/20], [27/19,9/4], [3,3], [17/3,117/20], [123/20,117/19], [9,9], [11,213/19], [243/19,13], [15,15], [339/19,357/20], [363/20,55/3], [21,21], [87/4,429/19], [459/20,23]]
+NARROWEST first window: 0 (~0.000000) ('lat3', (4, 5, 6, 7, 8, 21)) [1, 4/3, 5/3, 2, 7/3, 8/3, 7] [[1,1], [9/7,15/7], [17/7,21/8], [75/7,45/4], [51/4,93/7], [171/8,151/7], [153/7,159/7], [23,23]]
+LATEST first window: 1 (~1.000000) ('lat3', (4, 5, 6, 7, 8, 9)) [1, 4/3, 5/3, 2, 7/3, 8/3, 3] [[1,7/3], [11,45/4], [51/4,13], [65/3,23]]
+LATTICE m=3: windows in [1,23] count -> members: {4: 8, 6: 94, 8: 435, 10: 1309, 11: 2, 12: 2798, 13: 19, 14: 4415, 15: 30, 16: 4458, 17: 25, 18: 3081, 19: 7, 20: 1344, 21: 1, 22: 413, 24: 108, 26: 16, 28: 1}
+(count odd, window contains 4m): {(False, False): 18480, (True, True): 84} ; windows containing 4m that are self-mirror (lo+hi=8m): 84 of 84
+first window distinct values: 13 earliest (Fraction(1, 1), Fraction(1, 1)) latest (Fraction(1, 1), Fraction(7, 3))
+first-window lo values (top 10): [('[[1,1]]', 6188), ('[[1,21/20]]', 4368), ('[[1,21/19]]', 3003), ('[[1,7/6]]', 2002), ('[[1,21/17]]', 1287), ('[[1,21/16]]', 792), ('[[1,7/5]]', 462), ('[[1,3/2]]', 252), ('[[1,21/13]]', 126), ('[[1,7/4]]', 56)]

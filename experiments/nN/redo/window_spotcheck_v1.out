@@ -1,0 +1,1 @@
+integer sets: 3000 | mirror-symmetric window list: 3000 | odd count iff a window contains 4: 3000 | one-point windows counted: 6236 | sets with no window in [1,7]: 0 | first window start equals the cascade landing: asserted for every set with a window
