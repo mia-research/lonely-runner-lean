@@ -1,0 +1,32 @@
+start points 192
+initial distinct fine cells 186 max sup 26433/2209
+expanded cells 1066 distinct fine cells with exact sup 1485 sup-failed 0
+top exact cell sups: [('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807)]
+cells with sup > 26433/2209: 0
+frontier left 419  time 540.4640250205994
+no-crossing / loss counts:
+   1303 ('nodir', 2)
+   750 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)',))
+   448 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho5 lap 6) <= R (blocked)'))
+   410 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)',))
+   308 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho3 lap 4) <= R (blocked)'))
+   301 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'entry(rho7 lap 6) <= R (blocked)'))
+   279 ('gate/len lost across', ('entry(rho5 lap 4) <= R (blocked)',))
+   212 ('gate/len lost across', ('R <= entry(rho6 lap 4) (clear before zon', 'entry(rho7 lap 6) <= R (blocked)'))
+   199 ('nodir', 1)
+   173 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'entry(rho5 lap 6) <= R (blocked)'))
+   173 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho6 lap 7) <= R (blocked)'))
+   171 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho4 lap 5) <= R (blocked)'))
+   159 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho4 lap 6) <= R (blocked)'))
+   149 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'entry(rho3 lap 4) <= R (blocked)'))
+   128 ('gate/len lost across', ('entry(rho5 lap 6) <= R (blocked)',))
+   124 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'R <= entry(rho6 lap 4) (clear before zon'))
+   119 ('gate/len lost across', ('entry(rho5 lap 4) <= R (blocked)', 'R <= entry(rho1 lap 1) (clear before zon'))
+   113 ('gate/len lost across', ('entry(rho5 lap 4) <= R (blocked)', 'entry(rho3 lap 4) <= R (blocked)'))
+   113 ('gate/len lost across', ('entry(rho5 lap 4) <= R (blocked)', 'entry(rho7 lap 6) <= R (blocked)'))
+   103 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho6 lap 8) <= R (blocked)'))
+   102 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'entry(rho4 lap 6) <= R (blocked)'))
+   98 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'exit(rho5 lap 6) <= R (clear after zone)'))
+   97 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'R <= entry(rho7 lap 7) (clear before zon'))
+   96 ('gate/len lost across', ('entry(rho7 lap 6) <= R (blocked)', 'entry(rho2 lap 3) <= R (blocked)'))
+   95 ('gate/len lost across', ('entry(rho6 lap 1) <= R (blocked)', 'entry(rho5 lap 4) <= R (blocked)'))

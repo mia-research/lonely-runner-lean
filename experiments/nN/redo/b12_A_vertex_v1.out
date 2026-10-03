@@ -1,0 +1,17 @@
+vertex itself path: 1 1.210049796287913
+witness-rationalised in cell: True
+constraint rows 375 path len 27 R* 11.592484607894491
+x0 feasible exact True
+vertex feasible exact (closure) True
+LP exact vertex == given vertex: True
+rho_7 min = 2209/297  R*sup = 89/rho7 = 26433/2209 11.966047985513807
+number of tight rows at the vertex (exact zero): 7
+distinct tight constraints: 6
+(0, 0, 0, 0, 0, 9, -7) dual 0.0 ('state 1: R=9/rho7; rho6 blocked, lap 1: its entry (8j-1)/rho6 <= R', 'entry', 1, 6, 1)
+(0, 0, 5, 0, -3, 0, 0) dual 0.0 ('clear-high', 'R <= entry of (y,j+1)', 6, 5, 2)
+(0, 0, 0, 0, -47, 0, 33) dual 0.030303030303030304 ('state 17: R=33/rho5; rho7 blocked, lap 6: its entry (8j-1)/rho7 <= R', 'entry', 17, 7, 6)
+(-47, 0, 0, 0, 9, 0, 0) dual 0.15824915824915825 ('state 20: R=9/rho1; rho5 blocked, lap 6: its entry (8j-1)/rho5 <= R', 'entry', 20, 5, 6)
+(0, 41, 0, -23, 0, 0, 0) dual 0.0 ('state 22: R=41/rho4; rho2 blocked, lap 3: its entry (8j-1)/rho2 <= R', 'entry', 22, 2, 3)
+(0, 0, 0, 65, 0, -47, 0) dual 0.0 ('state 25: R=65/rho6; rho4 blocked, lap 6: its entry (8j-1)/rho4 <= R', 'entry', 25, 4, 6)
+rank of tight rows in the 6 free readings: 6
+dual-certificate multipliers (exact): {234: '1/33', 269: '47/297', 23: '0', 86: '0', 290: '0', 336: '0'}

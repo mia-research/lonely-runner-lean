@@ -1,0 +1,6 @@
+distinct exact face vertices 5
+level-1 results {'lost': 67, 'new': 11, 'dup': 27} distinct new cells 11
+fine cells with exact sup 124  top [('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807), ('26433/2209', 11.966047985513807)]
+cells above 26433/2209: 0
+level-1+ results {'lost': 1612, 'new': 123, 'dup': 975, 'nodir': 396}  frontier left 0 time 56.42935609817505
+distinct exact sups > 11.5: ['25839/2209', '26433/2209']
