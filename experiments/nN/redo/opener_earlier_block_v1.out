@@ -1,0 +1,4 @@
+gate-crossing members: 4939 | opener never blocked at an earlier state: 8
+min over earlier blocked states of R_a(8j_o+1)/(8j_a-1): largest over members 11.622896347441332 (member R* 11.5617, earlier state 6.1379 lap 6)
+bound minus R*: min 0.000000 median 0.0242 max 0.4189
+the earlier state achieving the minimum lies in phase 1 (<=7): 4760  in phase 2: 171  | inequality holds with equality in 0 (state,member) pairs
