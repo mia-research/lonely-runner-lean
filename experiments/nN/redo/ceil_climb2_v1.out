@@ -1,0 +1,15 @@
+run 1 start rho6 6.704 end sup rho7 16.483870968 rho6 7.000000 evals 35246
+run 2 start rho6 6.624 end sup rho7 16.483870968 rho6 7.000000 evals 73697
+run 3 start rho6 6.575 end sup rho7 16.483870968 rho6 7.000000 evals 114286
+run 4 start rho6 6.629 end sup rho7 16.483870968 rho6 7.000000 evals 151753
+run 5 start rho6 6.997 end sup rho7 24.400841514 rho6 7.000000 evals 201639
+run 6 start rho6 6.558 end sup rho7 16.483870968 rho6 7.000000 evals 243074
+run 7 start rho6 6.588 end sup rho7 16.483870968 rho6 7.000000 evals 282665
+run 8 start rho6 7.000 end sup rho7 24.400841514 rho6 7.000000 evals 302665
+run 9 start rho6 6.704 end sup rho7 16.483870968 rho6 7.000000 evals 339226
+run 10 start rho6 6.740 end sup rho7 16.483870968 rho6 7.000000 evals 374998
+run 11 start rho6 6.575 end sup rho7 16.483870968 rho6 7.000000 evals 416133
+run 12 start rho6 6.877 end sup rho7 16.483870968 rho6 7.000000 evals 444586
+run 13 start rho6 6.704 end sup rho7 16.483870968 rho6 7.000000 evals 478812
+run 14 start rho6 6.575 end sup rho7 16.483870968 rho6 7.000000 evals 501045
+best float sup 24.400841514470194 ['1.0', '2.837307152845371', '3.8387096773851965', '4.914191170044273', '6.316203253504584', '6.999999999947952']

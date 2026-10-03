@@ -1,0 +1,4 @@
+counts {('seed', 'cross'): 11176, ('rand0', 'no'): 5939, ('rand1', 'no'): 5966, ('rand2', 'no'): 5970}
+violations of L1/L2/W: 0 []
+smallest slack 2/lmax - rho7 among crossers: (Fraction(55848517656663682612612583693, 1652532666238365822196624916480), 7.1457517537993525, 0.278569089430083, 'seed')
+time 125

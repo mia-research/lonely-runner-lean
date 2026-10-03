@@ -1,0 +1,30 @@
+start X7 new
+expanded 6 cells with exact sup 6 lpfail 0 frontier left 0 time 2
+top exact cell sups of rho7: [('511/31', 16.483871), ('511/31', 16.483871), ('511/31', 16.483871), ('34675/2139', 16.210846), ('34675/2139', 16.210846), ('34675/2139', 16.210846)]
+best vertex ['1', '161/55', '161/41', '161/33', '161/25', '7', '511/31'] rows tight:
+   [7, 0, 0, 0, 0, -1, 0] state 0: R <= entry(rho6 lap 1) (clear before zone)
+   [0, -15, 0, 9, 0, 0, 0] state 8: entry(rho4 lap 2) <= R (blocked)
+   [0, 0, 0, 0, 25, -23, 0] state 10: entry(rho5 lap 3) <= R (blocked)
+   [0, 0, 0, 0, 0, 73, -31] state 13: entry(rho6 lap 4) <= R (blocked)
+   [0, 0, 0, 33, 0, -23, 0] state 14: entry(rho4 lap 3) <= R (blocked)
+   [0, 0, 0, 33, -25, 0, 0] state 15: R <= exit(rho5 lap 4)
+   [0, 33, 0, 0, -15, 0, 0] state 16: entry(rho2 lap 2) <= R (blocked)
+   [0, 0, 41, 0, -25, 0, 0] state 19: R <= exit(rho5 lap 5)
+best dual {10: '73/31', 182: '1/31', 111: '0', 140: '0', 191: '0', 259: '0'}
+best cell member ['1', '356251/123750', '7125017/1845000', '14250073/2970000', '570001/90000', '890626/129375', '1040250961/64170000'] landing 9 moves 22
+top stalls:
+   90 nodir
+   6 gate lost: state 8: entry(rho4 lap 2) <= R (blocked)
+   6 gate lost: state 10: entry(rho5 lap 3) <= R (blocked)
+   6 gate lost: state 13: entry(rho6 lap 4) <= R (blocked)
+   6 gate lost: state 16: entry(rho2 lap 2) <= R (blocked)
+   6 gate lost: state 8: entry(rho4 lap 2) <= R (blocked); state 10: entry(rho5 lap 3) <= R (blocked)
+   6 gate lost: state 8: entry(rho4 lap 2) <= R (blocked); state 13: entry(rho6 lap 4) <= R (blocked)
+   6 gate lost: state 8: entry(rho4 lap 2) <= R (blocked); state 15: R <= exit(rho5 lap 4)
+   6 gate lost: state 10: entry(rho5 lap 3) <= R (blocked); state 13: entry(rho6 lap 4) <= R (blocked)
+   6 gate lost: state 10: entry(rho5 lap 3) <= R (blocked); state 16: entry(rho2 lap 2) <= R (blocked)
+   6 gate lost: state 13: entry(rho6 lap 4) <= R (blocked); state 16: entry(rho2 lap 2) <= R (blocked)
+   3 gate lost: state 8: entry(rho4 lap 2) <= R (blocked); state 22: R <= exit(rho5 lap 7)
+   3 gate lost: state 10: entry(rho5 lap 3) <= R (blocked); state 22: R <= exit(rho5 lap 7)
+   3 gate lost: state 13: entry(rho6 lap 4) <= R (blocked); state 22: R <= exit(rho5 lap 7)
+   3 gate lost: state 16: entry(rho2 lap 2) <= R (blocked); state 22: R <= exit(rho5 lap 7)

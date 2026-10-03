@@ -1,0 +1,6 @@
+readings: [1.0, 2.837307, 3.83871, 4.910188, 6.307525, 7.0, 24.380421] strictly increasing: True
+moves 24 landing 26062497843590/2806730537001 = 9.285714 opener (6, 8) closer (7, 29) width 0.189102
+reading 1 sets a move: True | landing > 7: True
+components of the clear set of readings 1..6 on [1,7]: 3 longest 0.075010
+every component lies inside one open zone of reading 7: True | 2/rho_7 = 0.082033
+LRC(7)-type lower bound on the longest component 2/(7 rho_6) = 0.040816

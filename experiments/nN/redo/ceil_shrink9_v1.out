@@ -1,0 +1,8 @@
+restarts 130 evals 5194407
+float total 0.138617 comps 3 rho6 6.9999 | exact (rationalised 1e-12): comps 3 total 0.138617 [1.0, 2.0154, 2.94877, 3.94135, 4.91464, 6.99995]
+float total 0.138650 comps 3 rho6 6.9995 | exact (rationalised 1e-12): comps 3 total 0.138650 [1.0, 1.99266, 2.94868, 3.93423, 4.9145, 6.99951]
+float total 0.138677 comps 4 rho6 6.9998 | exact (rationalised 1e-12): comps 4 total 0.138677 [1.0, 2.00804, 2.94891, 3.92677, 4.91479, 6.99976]
+float total 0.138707 comps 3 rho6 6.9999 | exact (rationalised 1e-12): comps 3 total 0.138707 [1.0, 1.97677, 2.94857, 3.96176, 4.91428, 6.99994]
+float total 0.139524 comps 3 rho6 6.9949 | exact (rationalised 1e-12): comps 3 total 0.139524 [1.0, 1.98918, 2.94647, 3.93902, 4.91077, 6.99491]
+float total 0.167193 comps 5 rho6 6.9731 | exact (rationalised 1e-12): comps 5 total 0.167193 [1.0, 2.93717, 3.82509, 4.15756, 4.89537, 6.97308]
+smallest float total 0.1386168733488755  number of restarts with total < 0.05: 0  with zero comps: 0

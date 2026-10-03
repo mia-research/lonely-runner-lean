@@ -1,0 +1,63 @@
+# ceil_gate_crosser_v1 -- readings of a gate-crossing arrangement: what is proved, what is exact, what does not close
+
+All stated facts are exact (Fractions): arrangements through `path()`/`outcome()`, or inequality derivations with exact Farkas certificates (`b12_cell_lib_v1.min_rho_s_exact` verifies primal feasibility of all rows and the dual in Fractions). Floats only steered searches. Negatives are "not reached by (search)".
+Gate crossing = landing > 7 (then reading 1 blocks (7,9), landing >= 9).
+
+## 0. Result that changes the target
+
+The OBSERVED ceiling (rho_7 = 16.2079, rho_6 = 8.1428) is not a ceiling. Exact gate crossers with larger readings:
+
+* `X24` (rho_7 = 24.380420757194692, rho_6 = 6.999999999997506), exact Fractions in `ceil_x24_v1.py`. `path()`: 24 moves, setter 1 once, landing 26062497843590/2806730537001 = 9.2857142857; `outcome()`: opener (6,8), closer (7,29). Independent check (`clear_components`, no cascade): the clear set of all seven readings on [1,7] is empty. (`ceil_verify24_v1.out`, `ceil_x24_v1.out`.)
+* Its fine cell (b12 sense, 333 rows): coordinate ranges over the closed cell, exact (`ceil_x24_box_v1.out`): rho_2 [1085/387, 2023/713], rho_3 [24955/6579, 119/31], rho_4 [34937/7209, 231/47], rho_5 [4991/801, 297/47], rho_6 [773605/111843, 7], rho_7 [217/9, 86989/3565]. The cell is not thin in any coordinate (rho_7 range 0.29).
+* So the 11,176 seeds, the tree windows (rho_7 <= 25 for J=3, 594,626 of 747,586 leaves processed) and the walks "did not reach" this cell. The statement "no gate crosser with rho_7 > 16.21 reached" no longer holds; "none with rho_7 > 25 reached" still holds.
+
+## 1. Derivation
+
+### Lemma 1 (landing = first clear point) -- proved
+Zones are open intervals. If R is blocked by y, then [R, exit_y) lies in one zone of y, so the jump to the largest exit passes only blocked points. Hence landing R* = min{R >= 1 : R in no zone}. Gate crossing <=> no clear point of the seven readings in [1,7]. (Checked: `ceil_lemmas_v1.out`, path() landing agrees with the clear-set computation on all 11,176 seeds and 17,875 constructed non-crossers, 0 mismatches.)
+
+### Lemma 2 (reduction to the six slower-or-equal readings) -- proved
+Let K6 = clear set of readings 1..6 on [1,7], a finite union of closed intervals and points (components [a,b], a <= b). Zones of reading 7 are pairwise disjoint open intervals of width 2/rho_7 spaced 8/rho_7. Then
+gate crossing <=> every component [a,b] of K6 lies in one open zone ((8j-1)/rho_7, (8j+1)/rho_7), i.e. (8j-1)/a < rho_7 < (8j+1)/b for some j >= 1.
+Consequences (exact):
+* (W) rho_7 < 2/(b-a) for every component; so rho_7 < 2/l_max(K6), l_max the longest component.
+* The set of rho_7 giving a gate crossing for fixed six readings is exactly the intersection over components of the unions of the intervals ((8j-1)/a, (8j+1)/b) (`ceil_allowed7_v1.py`). For the six readings of X7 it is the single interval (16.18391, 16.20805); for X24 it is (8.98344, 9) u (24.35999, 24.40084).
+* Checked on data (`ceil_lemmas_v1.out`): L2 and (W) hold on all 11,176 crossers, 0 violations; smallest slack of 2/l_max - rho_7 among seeds 7.1458. For X24: l_max = 0.07501, 2/l_max = 26.663 versus rho_7 = 24.380; for X7: 0.10775, 18.562 versus 16.208.
+
+K6 of X24 on [1,7] has three components: [1, 1.00000000000036] (inside zone j=3 of reading 7), [25/7, 3.64644] (j=11), [5.23185, 5.28670] (j=16). The first is a near-point at R=1: reading 6 has rho_6 = 7 - 2.5e-12, so its first entry 7/rho_6 sits just above 1.
+
+### Lemma 3 (the same for rho_6) -- proved
+Gate crossing makes every component C of K5 (readings 1..5) on [1,7] lie in Z6 u Z7 (rho_7 > rho_6). Two consecutive zones of reading 6 meeting C would leave their closed gap (length 6/rho_6) inside C but outside Z6, so inside one zone of 7 (width 2/rho_7 < 6/rho_6): impossible. So at most one zone of 6 meets C; C minus that zone is at most two intervals, each inside Z7 alone, hence inside one 7-zone. Therefore length(C) < 2/rho_6 + 4/rho_7 < 6/rho_6, and rho_6 < 6/l_max(K5). Checked on 11,178 crossers: 0 violations, at most one 6-zone meets a component (`ceil_lemmaC_v1.out`). X24: l_max(K5) = 0.27928, 6/l_max = 21.48 (rho_6 = 7.0); X7: 0.37875, 15.84 (rho_6 = 6.88).
+
+### Lemma 4 (a ceiling-free source) -- proved
+If a strictly ordered six-tuple has K6 on [1,7] finite (isolated points p_1..p_N, or empty), then gate crossers exist with rho_7 arbitrarily large. Proof: need rho_7 p_i in (8m_i - 1, 8m_i + 1) for all i, i.e. the point (rho p_i/8 mod 1) in the cube of radius 1/8 round 0 on the torus. The orbit rho -> (rho p_i/8) of a one-parameter subgroup of a compact torus returns to every neighbourhood of 0 at unboundedly large rho (the orbit closure is a compact group, the flow is recurrent); then Lemma 2 applies. Empty K6 is the case that six readings alone cross.
+
+### Lemma 5 (what a ceiling needs, for bounded rho_6) -- proved
+Fix B. Suppose arrangements T_n with rho_6 <= B have gate-crossing rho_7 -> infinity. Pass to a convergent six-tuple T* (weakly ordered, readings in [1,B]). If K6(T*) had a component of positive length, then (zone endpoints are continuous in the readings, the interior of a component meets no closed zone, zones are locally finite) K6(T_n) would keep a component of about that length, and (W) would bound rho_7(T_n). Hence K6(T*) on [1,7] is a finite set of points or empty. So, for rho_6 <= B: a ceiling for rho_7 exists unless some weakly ordered six-tuple has K6 finite; and if a strictly ordered one has, Lemma 4 gives no ceiling. The gap between "weakly" and "strictly" ordered is not closed here, and rho_6 unbounded is not covered.
+
+### Chains of laps (the handles in the task) -- proved as inequalities, per cell
+A tight row "entry of (y,j') <= R" at a state R = (8j+1)/rho_s (setter s, lap j) gives rho_s <= rho_y (8j+1)/(8j'-1); an anchor is a state clear of a reading at lap 1 (R=1: rho_6 <= 7 for X24 cell). Each cell's ceiling is a product of such ratios (Farkas multipliers = the exponents). For the X24 cell:
+rho_7 <= (129/15) rho_2, rho_2 <= (17/23) rho_3, rho_3 <= (17/31) rho_6, rho_6 <= 7, so rho_7 <= 129*17*17*7/(15*23*31) = 86989/3565 = 24.4008 on the whole closed cell. Rows: state 17: exit of (7,16) = 129/rho_7 >= entry of (2,2) = 15/rho_2; state 18: exit of (2,2) = 17/rho_2 >= entry of (3,3) = 23/rho_3; state 13: exit of (3,2) = 17/rho_3 >= entry of (6,4) = 31/rho_6; state 0: R=1 <= entry of (6,1) = 7/rho_6. Farkas multipliers 1/15 on the row at state 17, 43/115 on state 18, 731/3565 on state 13, 12427/3565 on state 0 (verified in Fractions, `ceil_x24_v1.out`).
+
+### What does not close
+(a) Lemmas 2 and 5 turn a ceiling into: the longest component of K6(T) on [1,7] cannot be made shorter than a fixed length while the component positions stay compatible with a zone family of reading 7 -- equivalently, no six-tuple (rho_6 bounded) has K6 on [1,7] finite. I have no proof of that. The chains of laps bound each cell by a product of ratios (8j+1)/(8j'-1) ending at an anchor; I have no argument that the product stays bounded over all cells (each factor tends to 1 for large laps but the number of factors and the laps are free).
+(b) The handles listed in the task (>= 9 moves, step ratios <= 9/7, staircase rho_{7-k} > 7(7/9)^k, link rule) are lower-bound statements on readings. Used on K6: the 7-gaps [(8j+1)/rho_7, (8j+7)/rho_7] (length 6/rho_7) must lie in the union of zones of readings 1..6 (compactness: a finite chain of used zones, each containing the previous exit). A single zone of reading y holds such a gap only if rho_y < rho_7/3; for X24 (rho_7/3 = 8.13, rho_6 = 7) no single zone does, so each gap is crossed by an overlapping chain of >= 2 zones of the slower readings. This is a consequence, not a bound.
+(c) Readings above the cell machinery (rho_6 unbounded) not covered.
+
+## 2. Extremal arrangements, exact cell values, pivot walks
+
+(2a) `X7` (rho_7 = 141630707042209/8738350240737, `ceil_cell_v1.out`): 23 moves, landing 105296159452748/11698651501679 = 9.000709. Fine cell 325 rows. Exact LP maximum of rho_7 over the closed cell = 34675/2139 = 16.210846 (vertex (1, 95/33, 475/123, 475/99, 19/3, 475/69, 34675/2139); closure point, not attained; the vertex arrangement has a clear point at 297/95 = 3.126 because ties are clear points). Exact maximum of rho_6 over that cell = 475/69 = 6.884058. Eight distinct tight rows at the vertex (all the same vertex for both objectives), framework reading:
+1. state 8: 9 rho_4 = 15 rho_2 (entry of (4,2) = 15/rho_4 equals R = 9/rho_2 = exit of (2,1)); 2. state 10: 25 rho_5 = 23 rho_6 (entry of (5,3) = R); 3. state 13: 73 rho_6 = 31 rho_7 (entry of (6,4) = exit of (7,9) = 73/rho_7); 4. state 14: 33 rho_4 = 23 rho_6 (entry of (4,3) = R); 5. state 15: 33 rho_4 = 25 rho_5 (R = exit of (5,4)); 6. state 16: 33 rho_2 = 15 rho_5 (entry of (2,2) = R); 7. state 19: 41 rho_3 = 25 rho_5 (R = exit of (5,5)); 8. state 22: 57 = 9 rho_5 (R = 9 = exit of (1,1) equals exit of (5,7) = 57/rho_5).
+Farkas multipliers for max rho_7: 1/31 on state 13, 73/713 on state 10, 1825/6417 on state 22 (others 0, verified in Fractions): rho_7 <= (73/31) rho_6, rho_6 <= (25/23) rho_5, rho_5 <= 57/9 = 19/3 gives 73*25*19/(31*23*3) = 34675/2139.
+(2b) Pivot walk across tight rows (`ceil_pivot_v1.py`, copy of the b12 C2 method with objective rho_IDX and gate = setter 1 present and landing > 7, all exact): from X7's cell, 6 gate-crossing cells reached, closed (frontier empty, 90 pure-direction failures, crossings that lose the gate listed in `ceil_pivot7_v1.out`). Maximum of rho_7: 511/31 = 16.483871 (3 fine cells), vertex (1, 161/55, 161/41, 161/33, 161/25, 7, 511/31), tight: R=1 <= entry of (6,1) (rho_6 = 7) plus the rows of 2a; chain rho_7 <= (73/31) rho_6 <= 73*7/31 = 511/31. With the X24 cell added: 7 cells, closed, maximum 86989/3565 = 24.400842 (`ceil_pivot7b_v1.out`). Not reached by this walk: any cell beyond these (every crossing from the vertices either loses the gate or has no pure direction).
+(2c) rho_6 objective (`ceil_pivot6_v1.out`, starts: the rho_6 walk extremal 42286623061729/5193118425567 arrangement, X7, X24): 10 cells, closed; maximum rho_6 = 124509/15275 = 8.151162 (vertex (1, 11319/3055, 119/23, 3773/611, 7, 124509/15275, 343/39); rho_5 = 7 is the R=1 tie of reading 5; seven tight rows listed in the file); then 57/7 = 8.142857, 7 (four cells), 475/69.
+(2d) Searches on six readings maximising the largest gate-crossing rho_7 (`ceil_climb_v1.out`, `ceil_climb2_v1.out`, `ceil_anneal_v1.out`; exact set from `ceil_allowed7_v1.py`, floats steer): climb: 17 runs, 2.2 x 10^6 evaluations (cap 60); climb2 (seeded with the 24.40 six): 14 runs, 5.0 x 10^5 (cap 400); anneal with aimed tie moves: 18 runs, 8.6 x 10^5 (cap 400). Run maxima ranged from 7.2 to 24.40; nothing above 24.4009 reached. rho_7 > 25 with gate crossed: not reached by these searches.
+(2e) Seeds: exact maximum of rho_7 over the fine cell of each of 5,097 distinct fine cells of the 11,176 seeds (280 s, ordered by rho_7 descending): top values 34675/2139, 297825/18377 (16.2064), 143/9 (15.8889) (`ceil_multistart7_v1.out`).
+(2f) Test of Lemma 5's source condition (`ceil_shrink9_v1.out`, `ceil_shrink30_v1.out`): Metropolis on the total length of K6 on [1,7] over six readings, rho_6 <= 9 (130 restarts, 5.2 million evaluations) and rho_6 <= 30 (67 restarts, 2.7 million): minimum total length 0.13862 (readings about (1, 2.015, 2.949, 3.941, 4.915, 6.9999)) and 0.15571; no run below 0.05, no run with K6 empty or all components of length zero. Not reached by these searches: a six-tuple with K6 finite.
+
+## 3. Status
+
+* PROVED: Lemmas 1-5, the per-cell chains (exact Farkas), rho_7 < 2/l_max(K6) and rho_6 < 6/l_max(K5) for gate crossers, the exact cell maxima listed (as closure suprema of the stated fine cells).
+* EXACT FACTS FOUND: gate crossers with rho_7 = 24.38 (rho_6 = 6.99999999999750) and cell supremum 86989/3565; with rho_6 up to the cell supremum 124509/15275 = 8.1512 (closure).
+* OBSERVED: no gate crosser with rho_7 > 25 or rho_6 > 25 reached; best exact crossers: rho_7 = 24.3804.
+* OPEN: whether sup rho_7 (or rho_6) over gate crossers is finite. By Lemma 5 for rho_6 <= B this is equivalent (up to weak/strict order) to: no six-tuple has K6 on [1,7] finite. Closing step: either exhibit a strictly ordered six-tuple with K6 finite (exact ties, then Lemma 4 gives arbitrarily large rho_7) or prove a uniform lower bound on l_max(K6) for six-tuples with K6 nonempty, using the lap arithmetic (the tie rows at the extremal vertices all contain the R=1 or R=9 anchor with rho_5 or rho_6 pinned at 7 or 19/3, which is the pattern a proof would have to explain).

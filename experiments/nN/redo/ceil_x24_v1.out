@@ -1,0 +1,21 @@
+readings [1.0, 2.837307152836984, 3.838709677399528, 4.910188001299662, 6.307525030868607, 6.999999999997506, 24.380420757194692] increasing True
+path() landing 26062497843590/2806730537001 9.285714285717594 moves 24 [(7, 3), (6, 1), (5, 1), (4, 1), (3, 1), (6, 2), (5, 2), (2, 1), (4, 2), (6, 3), (7, 11), (5, 3), (3, 2), (6, 4), (4, 3), (5, 4), (7, 16), (2, 2), (3, 3), (4, 4), (6, 6), (1, 1), (5, 7), (6, 8)]
+outcome opener (6, 8) closer (7, 29) width 0.18910168651420678 nmoves 24
+independent: clear components of all 7 readings on [1,7]: []
+K6 components on [1,7]: [(1.0, 1.0000000000003564, 3), (3.571428571429844, 3.6464381651185738, 11), (5.2318460629962145, 5.286702916531863, 16)]
+states ['1', '486285301352566227371742500/474233610200591258564537783', '1202884515858/935576845667'] ... state 9 present: True
+rows 333 x feasible True
+max rho7 over closed fine cell = 86989/3565 = 24.400841515 vertex ['1', '2023/713', '119/31', '608923/124155', '86989/13795', '7', '86989/3565'] exact feasible True
+   tight [7, 0, 0, 0, 0, -1, 0] state 0: R <= entry(rho6 lap 1) (clear before zone)  dual 12427/3565
+   tight [0, 0, 0, 9, -7, 0, 0] state 3: entry(rho4 lap 1) <= R (blocked)  dual 0
+   tight [0, 0, 0, 0, 89, 0, -23] state 11: entry(rho5 lap 3) <= R (blocked)  dual 0
+   tight [0, 0, -31, 0, 0, 17, 0] state 13: entry(rho6 lap 4) <= R (blocked)  dual 731/3565
+   tight [0, 129, 0, 0, 0, 0, -15] state 17: entry(rho2 lap 2) <= R (blocked)  dual 1/15
+   tight [0, -23, 17, 0, 0, 0, 0] state 18: entry(rho3 lap 3) <= R (blocked)  dual 43/115
+max rho6 over closed fine cell = 7 = 7.000000000 vertex ['1', '609/215', '14007/3655', '32683/6675', '14007/2225', '7', '609/25'] exact feasible True
+   tight [7, 0, 0, 0, 0, -1, 0] state 0: R <= entry(rho6 lap 1) (clear before zone)  dual 1
+   tight [0, 0, 0, 9, -7, 0, 0] state 3: entry(rho4 lap 1) <= R (blocked)  dual 0
+   tight [0, 0, 0, 0, 0, -87, 25] state 10: entry(rho7 lap 11) <= R (blocked)  dual 0
+   tight [0, 0, 0, 0, 89, 0, -23] state 11: entry(rho5 lap 3) <= R (blocked)  dual 0
+   tight [0, 129, 0, 0, 0, 0, -15] state 17: entry(rho2 lap 2) <= R (blocked)  dual 0
+   tight [0, -23, 17, 0, 0, 0, 0] state 18: entry(rho3 lap 3) <= R (blocked)  dual 0
