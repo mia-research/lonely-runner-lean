@@ -1,0 +1,10 @@
+members: gate crossed 4939  not crossed 105142
+gate crossed: max-over-readings distance to the nearest integer: min 0.1804, 1%: 0.2779, median 0.4495
+   sum of the six distances: min 0.4246, median 1.7234
+not crossed: max-over-readings distance to the nearest integer: min 0.0515, 1%: 0.1960, median 0.4340
+   sum of the six distances: min 0.1557, median 1.2223
+gate-crossing member with the smallest max-distance: 0.18038870012501196 ['1', '8921152643233279/2251799813685248', '2804783343910309/562949953421312', '6592901610229331/1125899906842624', '6958499061721957/1125899906842624', '985369291861265/140737488355328', '771065453526497/70368744177664'] R* 9.28376479625905
+members with every reading within 0.05 of an integer: 0; gate crossed: 0
+members with every reading within 0.10 of an integer: 9; gate crossed: 0
+members with every reading within 0.20 of an integer: 1154; gate crossed: 5
+members with every reading within 0.25 of an integer: 4170; gate crossed: 25
