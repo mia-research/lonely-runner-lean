@@ -1,0 +1,4 @@
+seeds 0 11176 members 11176 crossers 11176 noncross 0 templates 113 outcome-checked crossers 11176 non-crossers 0 violations 0 sec 43
+J2 0 100000 members 100000 crossers 0 noncross 100000 templates 73560 outcome-checked crossers 0 non-crossers 2000 violations 0 sec 116
+J2 100000 200000 members 100000 crossers 439 noncross 99561 templates 63884 outcome-checked crossers 439 non-crossers 1993 violations 0 sec 100
+J2 200000 271361 members 71361 crossers 7197 noncross 64164 templates 49310 outcome-checked crossers 7197 non-crossers 1284 violations 0 sec 95

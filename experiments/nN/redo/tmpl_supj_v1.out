@@ -1,0 +1,10 @@
+X24: sup R2 == 129*rho_2/15 : True ; == (8*16+1)/b with b = 15/rho_2 (entry e2.2)
+X24 template windows (exact): [('1', '2806730537002/2806730537001'), ('10024037632150/2806730537001', '19109379761935/5240560485773'), ('27417805745385/5240560485773', '14553575690685/2752864293769')] ...
+template [R1,e6.1] [x6.3,e5.3] [x5.4,e2.2] n 355
+   top bound attained as (8j+1)/b at right end e2.2 with j = 6 : tuples 45 sup range [7.22528, 8.96188]
+   top bound attained as (8j+1)/b at right end e2.2 with j = 16 : tuples 1 sup range [24.40084, 24.40084]
+   top bound attained as (8j+1)/b at right end e5.3 with j = 4 : tuples 303 sup range [7.23014, 8.95931]
+   top bound attained as (8j+1)/b at right end e6.1 with j = 1 : tuples 6 sup range [7.90409, 8.99210]
+templates with more than one attaining (label, j) pair: 56 of 115
+pairs (label, j) attaining, over all templates, with j >= 7: [(('R7&e1.1', 7), 213), (('R7&e1.1', 8), 19), (('e2.2', 16), 1), (('e3.3', 12), 4), (('e4.4', 7), 9), (('e4.5', 9), 17), (('e5.3', 7), 21), (('e6.4', 9), 137)]
+largest j (lap of reading 7 whose zone contains the top component): 16
