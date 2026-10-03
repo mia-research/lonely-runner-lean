@@ -1,0 +1,19 @@
+members with landing exactly 9 and opener d_min: 8
+ cell 71134 moves 22 path tail [(7, 6), (3, 4), (5, 5), (1, 1)] rho_7=7.3645 positions at 9: [5.504, 2.488, 6.524, 4.703, 2.507, 2.281] state before the gate 7.0015
+ cell 71136 moves 22 path tail [(7, 6), (3, 4), (5, 5), (1, 1)] rho_7=7.3645 positions at 9: [5.504, 2.488, 6.524, 4.703, 2.528, 2.281] state before the gate 7.0015
+ cell 71138 moves 23 path tail [(7, 6), (3, 4), (5, 5), (1, 1)] rho_7=7.3640 positions at 9: [5.515, 2.485, 6.518, 4.701, 3.709, 2.276] state before the gate 7.0017
+ cell 71204 moves 23 path tail [(7, 6), (3, 4), (5, 5), (1, 1)] rho_7=7.3633 positions at 9: [5.491, 2.49, 6.517, 4.704, 2.487, 2.269] state before the gate 7.0014
+ cell 71206 moves 23 path tail [(7, 6), (3, 4), (5, 5), (1, 1)] rho_7=7.3640 positions at 9: [4.747, 2.485, 6.518, 4.701, 2.496, 2.276] state before the gate 7.0017
+ cell 104611 moves 21 path tail [(7, 6), (4, 4), (6, 5), (1, 1)] rho_7=7.3645 positions at 9: [5.185, 5.504, 2.488, 6.524, 4.703, 2.281] state before the gate 7.0015
+ cell 104915 moves 22 path tail [(7, 6), (4, 4), (6, 5), (1, 1)] rho_7=7.3645 positions at 9: [4.905, 5.504, 2.488, 6.524, 4.703, 2.281] state before the gate 7.0015
+ cell 104944 moves 21 path tail [(7, 6), (4, 4), (6, 5), (1, 1)] rho_7=7.3637 positions at 9: [4.888, 5.457, 2.434, 6.518, 4.703, 2.273] state before the gate 7.0015
+moves in gate-crossing members: 111660
+  relative depth quantile 0.001: 0.0005
+  relative depth quantile 0.010: 0.0018
+  relative depth quantile 0.050: 0.0067
+  relative depth quantile 0.250: 0.0616
+  relative depth quantile 0.500: 0.1878
+  relative depth quantile 0.750: 0.4114
+  relative depth quantile 0.950: 0.7059
+  relative depth quantile 0.990: 0.9308
+  share of moves with relative depth below 0.05: 0.22343722013254522  below 0.01: 0.07599856707863156
