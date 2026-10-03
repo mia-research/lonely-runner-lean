@@ -1,0 +1,2 @@
+cells with last move (2,1)/(1,1): 60
+{'total': 40000, 'distinct': 40000, 'moves2': 14342, 'open_lap1': 15553, 'open_lap1_m2': 6003, 'k2s1': 0, 'caseA': 448, 'caseB': 5555, 'viol': 0}
