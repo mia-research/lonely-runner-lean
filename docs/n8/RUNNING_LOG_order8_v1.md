@@ -10846,3 +10846,13 @@ Subagent results (checked by the agent on 131,659 + 20,511 steps from exact samp
 - Caveat: one member per cell; cells are a partition by path, not frequencies, so these are statements about the cells' members.
 **Consequence:** at the landing the cascade has pushed R until the last reader leaves its zone, leaving the others just past their own exits. The isolation window after R* is closed from the upper side by whichever reading is about to enter, and those readings are the rare ones; the window width is therefore set by the few readings away from the exit edge, not by the pressed ones.
 **Correction to E329's Consequence (same day):** the width of the window after R* is, by definition, min over readings of (7 - p_y)/rho_y with p_y the position at R*. The statement that "the few readings away from the exit edge set the width" is that definition read against the histogram; it was not tested separately and is not a result. The result is the asymmetry itself (12,897 vs 1,066).
+
+## E330 (2026-10-03) -- two-lap window with exact members; late landings with rho_7 > 9 exist
+
+**Map:** full J=2 terminal set (`terminals5_J2.pkl`, 117,084 terminals = the earlier 117,070 + 14 shallow ones the old `frontier()` dropped; sup 11.966048, 0 violations), exact members of 110,081 of them (`cell_members_J2.pkl`; 7,003 cells no member found). Profiles: `cells_profile_J1_v1.out`, `cells_profile_J2_v1.out`, `late_landings_J2_v1.out`.
+- Openers: 40 (J=1) -> 44 (J=2); J=2 adds (6,10), (7,2), (7,12), (7,18), loses none. Opener lap up to 18. Rank-1 opener: 8 members in both windows.
+- Classes of members: 99.8% two or more moves, opener lap >= 2, non-strip; J=2 adds 198 members with the closer equal to the opener's own reading (K2s2 type), 11 zero-width, 58 lap-1 openers.
+- Landing in d_min's second window [9,15]: 4,873 members (J=1) vs 4,939 (J=2); first window [1,7]: 4,324 vs 105,142. Added laps add landings in the first window and 66 in the second.
+- **Correction:** 59 J=2 members land above 7 with rho_7 > 9 (largest rho_7 16.19; R* 9.34-9.58; openers (7,18), (2,3); 20-26 moves). The earlier statement "searches found no landing above 7 with rho_7 > 9" was the samplers' reach. Landing above 10: only with rho_7 <= 8.52 among these members (agrees with the node dictionary: 8.70).
+- Pressed-against-exit asymmetry persists: 154,772 positions in [1,1.25) vs 7,186 in (6.75,7] of 770,567 (J=1: 12,897 vs 1,066). Ratio about 21 (J=1: about 12).
+**Consequence:** the second lap adds 4 outcome (rank,lap) openers and 59 late landings with rho_7 > 9, all landing in 9.3-9.6, none above 10. The outcome set grows slowly: 40 -> 44 openers while the cells grow 12 times.
