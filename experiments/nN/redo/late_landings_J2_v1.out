@@ -1,0 +1,11 @@
+J=2 members with landing > 7: 4939 ; with rho_7 <= 9: 4880 ; with rho_7 > 9: 59
+  R*=9.5793 rho_7=15.137 opener (7, 18) moves 25
+  R*=9.5793 rho_7=15.137 opener (7, 18) moves 26
+  R*=9.5793 rho_7=15.137 opener (7, 18) moves 26
+  R*=9.4152 rho_7=15.401 opener (7, 18) moves 24
+  R*=9.4152 rho_7=15.401 opener (7, 18) moves 25
+  R*=9.4152 rho_7=15.401 opener (7, 18) moves 25
+  R*=9.3411 rho_7=15.005 opener (2, 3) moves 20
+  R*=9.3403 rho_7=15.039 opener (2, 3) moves 20
+largest rho_7 among late members: 16.19195208815132
+late (R>10) members: max rho_7 = 8.51853657531138

@@ -1,0 +1,10 @@
+J 2 members 110081 max landing 11.592484607895447 distinct openers 44 rank-1 openers 8
+   K2_lap>=2 109812
+   K2_lap>=2_closer=opener 198
+   K2_lap1 58
+   K2z_lap>=2 11
+   K1_strip_lap1 1
+   K1_strip_lap>=2 1
+d_min window of the landing: {'[1,7]': 105142, '[9,15]': 4939}
+positions in [1,1.25): 154772  in (6.75,7]: 7186  of 770567 (uniform expectation each: 32107)
+openers with rank>=1 laps up to 18
