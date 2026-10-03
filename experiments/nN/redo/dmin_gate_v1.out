@@ -1,0 +1,3 @@
+J=2 members 110081 | reading 1 sets: 4939 | a state equals 9: 4939 | landing > 7: 4939 | all three: 4939 | members where the three disagree: 0
+reading 1 sets only at lap 1: True | landings in (7,9): 0
+members where reading 1 sets: the state it sets from lies in (7,9): 4939 of 4939

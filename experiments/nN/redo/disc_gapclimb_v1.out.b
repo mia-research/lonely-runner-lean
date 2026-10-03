@@ -1,0 +1,1 @@
+gap (6.66423,6.78001): cells meeting gap with member 638, trials 287100, accepted 190391 ; max R* of witnesses at start 6.78512 ; max R* reached by climb 6.78890 (cell 62250) ; points inside gap 280 (exact verified of first 50: 50)

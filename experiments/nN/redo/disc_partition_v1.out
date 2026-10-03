@@ -1,0 +1,6 @@
+G1 reading 1 sets a move (state 9; R*>=9) : 4939 members ; R* in [9.000000, 11.592485] ; moves in [17,29] ; opener ranks [(1, 8), (2, 295), (3, 253), (4, 500), (5, 751), (6, 1073), (7, 2059)] ; closer ranks [(2, 61), (3, 82), (4, 1094), (5, 2846), (6, 649), (7, 207)] ; members with 2 tied closers 0 ; with a p==1 tie 26 ; with p==7 0
+G2 closer rank < opener rank : 57861 members ; R* in [1.407096, 6.785120] ; moves in [3,25] ; opener ranks [(3, 21), (4, 2772), (5, 8183), (6, 15644), (7, 31241)] ; closer ranks [(1, 4), (2, 5821), (3, 11226), (4, 10843), (5, 13927), (6, 16040)] ; members with 2 tied closers 2 ; with a p==1 tie 56 ; with p==7 0
+G3 closer rank > opener rank : 47083 members ; R* in [1.114915, 6.528229] ; moves in [1,27] ; opener ranks [(2, 2052), (3, 8553), (4, 13720), (5, 13767), (6, 8991)] ; closer ranks [(3, 337), (4, 979), (5, 2497), (6, 8600), (7, 34670)] ; members with 2 tied closers 0 ; with a p==1 tie 49 ; with p==7 11
+G4 closer == opener : 198 members ; R* in [1.392310, 5.933333] ; moves in [2,16] ; opener ranks [(7, 198)] ; closer ranks [(7, 198)] ; members with 2 tied closers 0 ; with a p==1 tie 0 ; with p==7 0
+members whose opener rank k<7 has (7-p_7)/rho_7 >= 6/rho_k (would contradict the inequality): 0
+G1: state after 9 exists (R*>9) in 4931 ; R*==9 in 8

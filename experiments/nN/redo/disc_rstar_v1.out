@@ -1,0 +1,97 @@
+members 110081 distinct cells 110081 (one member per cell)
+R* min 9570149208162304/8583747560173039 (1.114915) max 11.592485; zero-move members 0
+
+== 1a. gaps of R* (consecutive distinct sorted member values, gap > 0.03) in [1,12] ==
+gap above R*=max: (11.59248, 12): empty
+lowest: members start at 1.114915; interval (1,1.114915) empty of members
+gap (1.11492, 1.20733) width 0.0924 | lo=~ opener(2, 2) | hi=~ opener(2, 2) | cells meeting gap: 13, cells fully inside gap: 0
+gap (1.42419, 1.46779) width 0.0436 | lo=~ opener(2, 1) | hi=~ opener(7, 2) | cells meeting gap: 45, cells fully inside gap: 0
+gap (5.79463, 5.83980) width 0.0452 | lo=~ opener(4, 4) | hi=~ opener(4, 4) | cells meeting gap: 2790, cells fully inside gap: 0
+gap (6.38543, 6.44043) width 0.0550 | lo=~ opener(7, 6) | hi=~ opener(6, 6) | cells meeting gap: 1907, cells fully inside gap: 0
+gap (6.62725, 6.66423) width 0.0370 | lo=~ opener(7, 6) | hi=~ opener(7, 6) | cells meeting gap: 936, cells fully inside gap: 0
+gap (6.66423, 6.78001) width 0.1158 | lo=~ opener(7, 6) | hi=~ opener(6, 6) | cells meeting gap: 679, cells fully inside gap: 0
+gap (6.78512, 9.00000) width 2.2149 | lo=~ opener(6, 6) | hi=9 opener(1, 1) | cells meeting gap: 485, cells fully inside gap: 8
+gap (10.82875, 10.90586) width 0.0771 | lo=~ opener(6, 8) | hi=~ opener(6, 8) | cells meeting gap: 200, cells fully inside gap: 0
+gap (11.08715, 11.23725) width 0.1501 | lo=~ opener(4, 6) | hi=~ opener(7, 11) | cells meeting gap: 93, cells fully inside gap: 0
+gap (11.23725, 11.27444) width 0.0372 | lo=~ opener(7, 11) | hi=~ opener(4, 6) | cells meeting gap: 33, cells fully inside gap: 0
+gap (11.33189, 11.52507) width 0.1932 | lo=~ opener(7, 11) | hi=~ opener(7, 11) | cells meeting gap: 39, cells fully inside gap: 0
+gap (11.52507, 11.55633) width 0.0313 | lo=~ opener(7, 11) | hi=~ opener(7, 10) | cells meeting gap: 40, cells fully inside gap: 0
+
+low end: cells meeting (1,1.1149): 2 ; members in those cells: 2
+cells with Rlo<=1.0000001: 2
+
+== exact tests: R* in the zone of reading 1 ==
+members with 7 < R* < 9: 0 ; R*==7: 0 ; R*==9: 8 (openers Counter({(1, 1): 8}))
+cells whose [Rlo,Rhi] meets (7,9): 0 ; cells with Rhi==7.0: 485 ; Rlo==9: 419
+members with a reading exactly (8j+1)/7 (so that an exit can equal 7):  44898
+largest member R* below 7: [(6.785119874637489, 62251, (6, 6)), (6.784343826034356, 62250, (6, 6)), (6.7800129318973354, 62248, (6, 6)), (6.780012931897158, 62249, (6, 6)), (6.664233489370576, 71417, (7, 6)), (6.627251010947621, 105294, (7, 6))]
+members with R* in (6.7,7): 4 ; (6.6,6.7): 9 ; (6.5,6.6): 35
+cells meeting (6.79,7): 485 ; of them with a member: 458 ; their members' max R*: 6.785120
+
+== 1b. atoms: exact repeated R* ==
+distinct R* values 66440 ; values repeated >=2: 7913, covering 51554 members (46.8%); repeated >=10: 612 values covering 27936
+  R*=49/17    2.88235  count  3056  opener (rank,lap,reading): {(7, 6, '17'): 3056}
+  R*=49/15    3.26667  count  2082  opener (rank,lap,reading): {(7, 6, '15'): 1191, (6, 6, '15'): 859, (5, 6, '15'): 32}
+  R*=41/15    2.73333  count  1841  opener (rank,lap,reading): {(7, 5, '15'): 525, (5, 5, '15'): 207, (6, 5, '15'): 1109}
+  R*=11/5     2.20000  count  1388  opener (rank,lap,reading): {(6, 4, '15'): 727, (5, 4, '15'): 382, (7, 4, '15'): 209, (4, 4, '15'): 70}
+  R*=41/17    2.41176  count  1357  opener (rank,lap,reading): {(7, 5, '17'): 1357}
+  R*=25/7     3.57143  count  1260  opener (rank,lap,reading): {(2, 3, '7'): 7, (3, 3, '7'): 152, (4, 3, '7'): 556, (5, 3, '7'): 475, (6, 3, '7'): 70}
+  R*=33/7     4.71429  count   729  opener (rank,lap,reading): {(3, 4, '7'): 22, (4, 4, '7'): 212, (5, 4, '7'): 380, (6, 4, '7'): 115}
+  R*=65/17    3.82353  count   603  opener (rank,lap,reading): {(7, 8, '17'): 603}
+  R*=19/5     3.80000  count   595  opener (rank,lap,reading): {(7, 7, '15'): 407, (6, 7, '15'): 158, (5, 7, '15'): 30}
+  R*=17/7     2.42857  count   548  opener (rank,lap,reading): {(2, 2, '7'): 13, (3, 2, '7'): 186, (4, 2, '7'): 231, (5, 2, '7'): 106, (6, 2, '7'): 12}
+  R*=57/17    3.35294  count   521  opener (rank,lap,reading): {(7, 7, '17'): 521}
+  R*=73/17    4.29412  count   483  opener (rank,lap,reading): {(7, 9, '17'): 483}
+  R*=13/3     4.33333  count   370  opener (rank,lap,reading): {(7, 8, '15'): 293, (5, 8, '15'): 7, (6, 8, '15'): 70}
+  R*=73/15    4.86667  count   279  opener (rank,lap,reading): {(7, 9, '15'): 213, (6, 9, '15'): 66}
+  R*=33/17    1.94118  count   257  opener (rank,lap,reading): {(7, 4, '17'): 257}
+  R*=81/17    4.76471  count   199  opener (rank,lap,reading): {(7, 10, '17'): 199}
+  R*=5/3      1.66667  count   194  opener (rank,lap,reading): {(4, 3, '15'): 40, (7, 3, '15'): 15, (5, 3, '15'): 67, (6, 3, '15'): 65, (3, 3, '15'): 7}
+  R*=11540474045136896/4520156978941711 2.55311  count   192  opener (rank,lap,reading): {(7, 5, 'nonint'): 159, (6, 5, 'nonint'): 33}
+  R*=9570149208162304/3953835878780213 2.42047  count   161  opener (rank,lap,reading): {(2, 2, 'nonint'): 1, (3, 2, 'nonint'): 72, (4, 2, 'nonint'): 64, (5, 2, 'nonint'): 24}
+  R*=1196268651020288/436144103813469 2.74283  count   148  opener (rank,lap,reading): {(2, 2, 'nonint'): 1, (3, 2, 'nonint'): 20, (4, 2, 'nonint'): 98, (5, 2, 'nonint'): 29}
+  R*=13792273858822144/4520156978941711 3.05128  count   133  opener (rank,lap,reading): {(7, 6, 'nonint'): 103, (6, 6, 'nonint'): 30}
+  R*=2392537302040576/826067866433447 2.89630  count   132  opener (rank,lap,reading): {(2, 2, 'nonint'): 9, (3, 2, 'nonint'): 84, (4, 2, 'nonint'): 39}
+  R*=2322168557862912/993952691601235 2.33630  count   131  opener (rank,lap,reading): {(5, 4, 'nonint'): 52, (6, 4, 'nonint'): 73, (4, 4, 'nonint'): 6}
+  R*=27584547717644288/8861197863774497 3.11296  count   112  opener (rank,lap,reading): {(7, 6, 'nonint'): 99, (6, 6, 'nonint'): 13}
+  R*=1548112371908608/750986478098711 2.06144  count   102  opener (rank,lap,reading): {(4, 4, 'nonint'): 1, (5, 4, 'nonint'): 16, (6, 4, 'nonint'): 85}
+members in atoms (mult>=2): 51554 ; with opener reading a non-integer: 35586
+members whose opener reading is an exact integer: 15969 of 110081 (14.51%)
+members with rho_7 == 17 exactly: 21346
+
+== 1c. histogram of R*, bins 0.1 (all) and (atoms removed) ==
+1.0:0/0  1.1:1/1  1.2:10/10  1.3:11/11  1.4:47/36  1.5:282/262  1.6:1163/869  1.7:885/740  1.8:464/408  1.9:1238/836  2.0:1796/1405  2.1:3081/1270  2.2:2876/2585  2.3:2127/1743  2.4:8469/5565  2.5:4442/3470  2.6:4828/3953  2.7:8286/5564  2.8:9194/5242  2.9:5467/4725  3.0:7191/5957  3.1:2817/2278  3.2:4583/2273  3.3:1597/1044  3.4:2030/1750  3.5:5005/3503  3.6:1708/1578  3.7:2229/1352  3.8:3239/2463  3.9:2413/2179  4.0:2228/2055  4.1:1424/1332  4.2:1965/1334  4.3:1674/1227  4.4:474/464  4.5:446/431  4.6:547/505  4.7:2497/1474  4.8:1284/881  4.9:856/728  5.0:636/625  5.1:743/718  5.2:379/379  5.3:465/368  5.4:334/323  5.5:164/154  5.6:74/61  5.7:88/75  5.8:302/229  5.9:208/208  6.0:287/287  6.1:233/233  6.2:128/128  6.3:44/44  6.4:135/135  6.5:35/35  6.6:9/9  6.7:4/4  6.8:0/0  6.9:0/0  7.0:0/0  7.1:0/0  7.2:0/0  7.3:0/0  7.4:0/0  7.5:0/0  7.6:0/0  7.7:0/0  7.8:0/0  7.9:0/0  8.0:0/0  8.1:0/0  8.2:0/0  8.3:0/0  8.4:0/0  8.5:0/0  8.6:0/0  8.7:0/0  8.8:0/0  8.9:8/8  9.0:418/398  9.1:35/35  9.2:292/292  9.3:346/324  9.4:282/239  9.5:315/315  9.6:496/496  9.7:197/159  9.8:449/425  9.9:408/408  10.0:168/168  10.1:176/158  10.2:191/160  10.3:359/336  10.4:277/261  10.5:168/168  10.6:190/123  10.7:45/45  10.8:8/8  10.9:19/19  11.0:27/27  11.1:0/0  11.2:21/21  11.3:21/11  11.4:0/0  11.5:23/23  11.6:0/0  11.7:0/0  11.8:0/0  11.9:0/0  
+members removed as atoms (mult>=10): 27936
+
+== 1d. lower edges of opener bands: (8j+1)/17 ==
+j=2 (8j+1)/17=1.0000  members in [x-.02,x): 0, [x,x+.02): 0
+j=3 (8j+1)/17=1.4706  members in [x-.02,x): 4, [x,x+.02): 34
+j=4 (8j+1)/17=1.9412  members in [x-.02,x): 103, [x,x+.02): 603
+j=5 (8j+1)/17=2.4118  members in [x-.02,x): 721, [x,x+.02): 4476
+j=6 (8j+1)/17=2.8824  members in [x-.02,x): 1108, [x,x+.02): 5778
+j=7 (8j+1)/17=3.3529  members in [x-.02,x): 154, [x,x+.02): 918
+j=8 (8j+1)/17=3.8235  members in [x-.02,x): 408, [x,x+.02): 1566
+j=9 (8j+1)/17=4.2941  members in [x-.02,x): 290, [x,x+.02): 884
+j=10 (8j+1)/17=4.7647  members in [x-.02,x): 213, [x,x+.02): 357
+j=11 (8j+1)/17=5.2353  members in [x-.02,x): 107, [x,x+.02): 106
+j=12 (8j+1)/17=5.7059  members in [x-.02,x): 15, [x,x+.02): 15
+j=13 (8j+1)/17=6.1765  members in [x-.02,x): 19, [x,x+.02): 107
+j=14 (8j+1)/17=6.6471  members in [x-.02,x): 3, [x,x+.02): 1
+
+== width ==
+W min 0.000e+00 max 0.559336 ; exact zero: 11 ; <1e-12: 16 ; <1e-9: 16 ; <1e-6: 16 ; <1e-4: 20 ; <1e-3: 157 ; <1e-2: 1751
+log10 W bins of 0.5 from -17: [0, 0, 1, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 136, 399, 1195, 6707, 40256, 59203, 2164]
+linear W bins 0.02: [4350, 8082, 12141, 12458, 11683, 11292, 10468, 9390, 7392, 6241, 5672, 3382, 2397, 1475, 932, 706, 690, 572, 285, 227, 102, 62, 36, 31, 2, 2, 8, 3]
+repeated exact widths (>=2): 10252 values; top [('2708083832737039/132917967956617455', 112), ('7409147774061137/47233317059639759', 102), ('97513619807175608458792665088/4898241977037654377286097086999', 95), ('2531657631012447/11643563654569615', 83)]
+  zero width: cell 27521 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 27525 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 27539 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 27546 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 48475 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 48478 R*=6192449487634432/1485832449956861 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7429162249784305/562949953421312 ; rho_7=7429162249784305/562949953421312
+  zero width: cell 48484 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 48485 R*=6192449487634432/1485832449956861 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7429162249784305/562949953421312 ; rho_7=7429162249784305/562949953421312
+  zero width: cell 48487 R*=6192449487634432/1485832449956861 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7429162249784305/562949953421312 ; rho_7=7429162249784305/562949953421312
+  zero width: cell 48503 R*=6192449487634432/1484893461303589 rank at p==7: [7] ; opener (5, 4) ; reading of that rank 7424467306517945/562949953421312 ; rho_7=7424467306517945/562949953421312
+  zero width: cell 74648 R*=3096224743817216/719998144180225 rank at p==7: [7] ; opener (6, 4) ; reading of that rank 3599990720901125/281474976710656 ; rho_7=3599990720901125/281474976710656
+closer rank (reading that enters first) counts: [4, 5882, 11645, 12916, 19270, 25289, 35075]

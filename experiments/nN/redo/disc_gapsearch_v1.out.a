@@ -1,0 +1,5 @@
+gap 0 (1.00000,1.11492): cells meeting gap 2 (with member 2), searched 2 cells, 2715 trials, 2697 accepted (path word reproduced), accepted R* range [1.07739, 1.27855], inside gap: 787 (exact-verified of first 50: 50)
+gap 1 (1.11492,1.20733): cells meeting gap 13 (with member 13), searched 13 cells, 17785 trials, 17396 accepted (path word reproduced), accepted R* range [1.09241, 1.39615], inside gap: 6102 (exact-verified of first 50: 50)
+gap 2 (1.42419,1.46779): cells meeting gap 45 (with member 45), searched 45 cells, 62391 trials, 58100 accepted (path word reproduced), accepted R* range [1.21970, 1.89210], inside gap: 10086 (exact-verified of first 50: 50)
+gap 3 (5.79463,5.83980): cells meeting gap 2790 (with member 2617), searched 60 cells, 89915 trials, 57038 accepted (path word reproduced), accepted R* range [4.71429, 5.81604], inside gap: 187 (exact-verified of first 50: 50)
+gap 4 (6.38543,6.44043): cells meeting gap 1907 (with member 1776), searched 60 cells, 89900 trials, 54258 accepted (path word reproduced), accepted R* range [4.96420, 6.49508], inside gap: 25 (exact-verified of first 50: 25)

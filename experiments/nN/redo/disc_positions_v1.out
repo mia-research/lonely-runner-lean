@@ -1,0 +1,72 @@
+members 110081
+
+== 2a. per rank y: range of p_y, fine-bin emptiness in [1,7] (bin 0.02 => 300 bins), non-opener readings ==
+rank 1: n=110073 min 1.000387 max 6.785120 ; empty 0.02-bins 19 ; runs [(np.float64(5.8), np.float64(5.82)), (np.float64(6.4), np.float64(6.44)), (np.float64(6.64), np.float64(6.66)), (np.float64(6.68), np.float64(6.78)), (np.float64(6.8), np.float64(7.0))]
+rank 2: n=107734 min 1.000000 max 6.996375 ; empty 0.02-bins 0 ; runs []
+rank 3: n=101254 min 1.000000 max 6.996317 ; empty 0.02-bins 0 ; runs []
+rank 4: n=93089 min 1.000000 max 6.994955 ; empty 0.02-bins 0 ; runs []
+rank 5: n=87380 min 1.000000 max 7.000000 ; empty 0.02-bins 0 ; runs []
+rank 6: n=84373 min 1.000000 max 6.990299 ; empty 0.02-bins 0 ; runs []
+rank 7: n=76583 min 1.000115 max 7.000000 ; empty 0.02-bins 0 ; runs []
+rank 1 all members: p_1 = R* mod 8; p_1<7 for R*<7 ; for R*>9 p_1=R*-8 in 1.000386980020746 3.5924846078954467 ; p_1 max over members 6.785119874637489
+
+== 2b. coarse histograms (0.5 bins over [1,7]) per rank: all readings / non-opener ==
+rank 1 all [1450, 5897, 19520, 32647, 18287, 14617, 7765, 5630, 2557, 836, 827, 48] | non-opener [1442, 5897, 19520, 32647, 18287, 14617, 7765, 5630, 2557, 836, 827, 48]
+rank 2 all [14998, 11687, 13740, 10512, 7814, 12779, 8237, 9126, 6824, 6575, 5371, 2418] | non-opener [12651, 11687, 13740, 10512, 7814, 12779, 8237, 9126, 6824, 6575, 5371, 2418]
+rank 3 all [24620, 12114, 10801, 9356, 6466, 8948, 4939, 5098, 7251, 7987, 9148, 3353] | non-opener [15793, 12114, 10801, 9356, 6466, 8948, 4939, 5098, 7251, 7987, 9148, 3353]
+rank 4 all [32695, 8035, 10356, 7378, 6349, 8181, 6758, 5208, 8680, 6605, 7924, 1912] | non-opener [15703, 8035, 10356, 7378, 6349, 8181, 6758, 5208, 8680, 6605, 7924, 1912]
+rank 5 all [33356, 6361, 9230, 6729, 6950, 6464, 7520, 5755, 8904, 6742, 8789, 3281] | non-opener [10655, 6361, 9230, 6729, 6950, 6464, 7520, 5755, 8904, 6742, 8789, 3281]
+rank 6 all [33191, 6046, 6930, 6817, 8373, 7754, 6594, 6996, 9928, 6494, 7890, 3068] | non-opener [7483, 6046, 6930, 6817, 8373, 7754, 6594, 6996, 9928, 6494, 7890, 3068]
+rank 7 all [39185, 3827, 3949, 5819, 7891, 9224, 7299, 8564, 7197, 7430, 7568, 2128] | non-opener [5687, 3827, 3949, 5819, 7891, 9224, 7299, 8564, 7197, 7430, 7568, 2128]
+opener is at p == 1 exactly in every member (identity R*=(8j+1)/rho_y); opener rank counts: [8, 2347, 8827, 16992, 22701, 25708, 33498]
+
+== 2c. on-face (witness) positions: |p-1|<1e-6 or |p-7|<1e-6 among NON-opener readings ==
+non-opener readings with |p-1|<1e-6: 10805 (members with >=1: 10410) ; |p-7|<1e-6: 16 (members 16)
+by rank near1: [0, 725, 2460, 3999, 2499, 1122, 0]  near7: [0, 0, 0, 0, 1, 0, 15]
+  non-opener readings with 1e-12<=p-1<1e-08: 4286
+  non-opener readings with 1e-08<=p-1<1e-06: 126
+  non-opener readings with 1e-06<=p-1<0.0001: 48
+  non-opener readings with 0.0001<=p-1<0.01: 729
+  non-opener readings with 0.01<=p-1<0.25: 33109
+  exact-equal pattern: members with 1,2,3 readings at p==1 incl opener: see disc_rstar (exact tie counts below)
+  exact ties at p==1 (readings incl. opener) per member: [(1, 109950), (2, 118), (3, 13)]
+  tied (non-opener) rank counts [(2, 36), (3, 22), (4, 45), (5, 27), (6, 14)]  rank offset from opener [(-5, 9), (-4, 10), (-3, 34), (-2, 46), (-1, 45)]
+  members with every non-opener p-1 > 1e-4: 99624
+
+== 2d. excess of non-opener readings just above p=1 (bin [1,1.25) vs mean of bins 1.25..2.5) per rank, with face-points removed (>1e-4) ==
+rank 1: [1,1.25) 499  vs mean of next 5 bins 5272 (ratio 0.09)
+rank 2: [1,1.25) 6739  vs mean of next 5 bins 6122 (ratio 1.10)
+rank 3: [1,1.25) 8331  vs mean of next 5 bins 5580 (ratio 1.49)
+rank 4: [1,1.25) 7077  vs mean of next 5 bins 4600 (ratio 1.54)
+rank 5: [1,1.25) 4743  vs mean of next 5 bins 3799 (ratio 1.25)
+rank 6: [1,1.25) 3345  vs mean of next 5 bins 3198 (ratio 1.05)
+rank 7: [1,1.25) 3104  vs mean of next 5 bins 2072 (ratio 1.50)
+
+== 2e. which rank sits just above 1 (1<p<1.25, off-face) relative to the opener's rank ==
+offset (rank - opener rank) counts: [(np.int64(-6), 300), (np.int64(-5), 2163), (np.int64(-4), 5466), (np.int64(-3), 6818), (np.int64(-2), 7141), (np.int64(-1), 4262), (np.int64(1), 4080), (np.int64(2), 1860), (np.int64(3), 1330), (np.int64(4), 384), (np.int64(5), 34)] total 33838
+
+== 2f. pairs: Spearman matrix (all members) and empty 0.5-cells of the (p_y,p_z) plane (12x12=144) ==
+[[ 1.    0.17 -0.02  0.04  0.06  0.15 -0.  ]
+ [ 0.17  1.   -0.31  0.19 -0.05  0.05  0.01]
+ [-0.02 -0.31  1.   -0.29 -0.06 -0.1  -0.02]
+ [ 0.04  0.19 -0.29  1.   -0.25 -0.12 -0.1 ]
+ [ 0.06 -0.05 -0.06 -0.25  1.   -0.17 -0.22]
+ [ 0.15  0.05 -0.1  -0.12 -0.17  1.   -0.24]
+ [-0.    0.01 -0.02 -0.1  -0.22 -0.24  1.  ]]
+pairs with empty 0.5-cells: [(1, 2, 9, [(np.float64(5.5), np.float64(6.5)), (np.float64(6.0), np.float64(6.5)), (np.float64(6.5), np.float64(1.0)), (np.float64(6.5), np.float64(1.5)), (np.float64(6.5), np.float64(2.0)), (np.float64(6.5), np.float64(2.5))]), (1, 3, 11, [(np.float64(1.0), np.float64(6.5)), (np.float64(5.5), np.float64(4.0)), (np.float64(6.0), np.float64(4.5)), (np.float64(6.0), np.float64(5.0)), (np.float64(6.0), np.float64(6.5)), (np.float64(6.5), np.float64(4.0))]), (1, 4, 7, [(np.float64(6.5), np.float64(2.5)), (np.float64(6.5), np.float64(3.0)), (np.float64(6.5), np.float64(3.5)), (np.float64(6.5), np.float64(4.5)), (np.float64(6.5), np.float64(5.5)), (np.float64(6.5), np.float64(6.0))]), (1, 5, 2, [(np.float64(6.5), np.float64(1.0)), (np.float64(6.5), np.float64(1.5))]), (1, 6, 9, [(np.float64(6.0), np.float64(1.5)), (np.float64(6.5), np.float64(1.5)), (np.float64(6.5), np.float64(2.0)), (np.float64(6.5), np.float64(2.5)), (np.float64(6.5), np.float64(3.0)), (np.float64(6.5), np.float64(3.5))]), (1, 7, 9, [(np.float64(6.0), np.float64(1.5)), (np.float64(6.5), np.float64(1.5)), (np.float64(6.5), np.float64(2.0)), (np.float64(6.5), np.float64(2.5)), (np.float64(6.5), np.float64(3.5)), (np.float64(6.5), np.float64(5.0))]), (2, 3, 1, [(np.float64(6.5), np.float64(6.5))])]
+pair (2,3) empty 0.25-cells: 13 of 576, min nonzero 1
+pair (3,4) empty 0.25-cells: 1 of 576, min nonzero 2
+pair (4,5) empty 0.25-cells: 5 of 576, min nonzero 1
+pair (5,6) empty 0.25-cells: 2 of 576, min nonzero 4
+pair (6,7) empty 0.25-cells: 4 of 576, min nonzero 1
+
+== 2g. does the vector of positions cluster? k-means inertia: real vs columns independently shuffled ==
+k=2  inertia/total: real 0.8128  shuffled 0.8565
+k=3  inertia/total: real 0.6981  shuffled 0.7671
+k=4  inertia/total: real 0.6025  shuffled 0.7063
+k=6  inertia/total: real 0.4991  shuffled 0.6208
+k=8  inertia/total: real 0.4349  shuffled 0.5548
+k=12  inertia/total: real 0.3566  shuffled 0.4689
+distinct rank-orders of p (permutation of 7): 2957 of 5040 ; top share 0.0046
+distinct lap vectors: 930 ; top 5 shares: [0.0187, 0.0157, 0.014, 0.0114, 0.0114]
+lap vectors among R*>9: 65  among R*<7: 871

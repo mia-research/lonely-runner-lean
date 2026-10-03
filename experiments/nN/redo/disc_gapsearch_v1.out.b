@@ -1,0 +1,3 @@
+gap 5 (6.62725,6.66423): cells meeting gap 936 (with member 880), searched 60 cells, 89967 trials, 54288 accepted (path word reproduced), accepted R* range [5.12664, 6.65377], inside gap: 864 (exact-verified of first 50: 50)
+gap 6 (6.66423,6.78001): cells meeting gap 679 (with member 638), searched 60 cells, 89953 trials, 54227 accepted (path word reproduced), accepted R* range [5.13015, 6.62289], inside gap: 0 (exact-verified of first 50: 0)
+gap 7 (6.78512,7.00000): cells meeting gap 485 (with member 458), searched 60 cells, 89921 trials, 53732 accepted (path word reproduced), accepted R* range [5.44446, 6.66357], inside gap: 0 (exact-verified of first 50: 0)

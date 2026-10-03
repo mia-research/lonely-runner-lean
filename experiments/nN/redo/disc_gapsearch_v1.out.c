@@ -1,0 +1,5 @@
+gap 8 (10.82875,10.90586): cells meeting gap 200 (with member 197), searched 60 cells, 90000 trials, 49677 accepted (path word reproduced), accepted R* range [10.46063, 10.92660], inside gap: 3698 (exact-verified of first 50: 50)
+gap 9 (11.08715,11.23725): cells meeting gap 93 (with member 93), searched 60 cells, 90000 trials, 47986 accepted (path word reproduced), accepted R* range [10.63636, 11.29902], inside gap: 2898 (exact-verified of first 50: 50)
+gap 10 (11.23725,11.27444): cells meeting gap 33 (with member 33), searched 33 cells, 49500 trials, 23735 accepted (path word reproduced), accepted R* range [10.66707, 11.29333], inside gap: 2584 (exact-verified of first 50: 50)
+gap 11 (11.33189,11.52507): cells meeting gap 39 (with member 38), searched 38 cells, 57000 trials, 29651 accepted (path word reproduced), accepted R* range [11.28169, 11.57142], inside gap: 8957 (exact-verified of first 50: 50)
+gap 12 (11.52507,11.55633): cells meeting gap 40 (with member 39), searched 39 cells, 58500 trials, 29651 accepted (path word reproduced), accepted R* range [11.30769, 11.57883], inside gap: 3534 (exact-verified of first 50: 50)

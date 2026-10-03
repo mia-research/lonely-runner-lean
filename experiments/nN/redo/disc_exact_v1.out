@@ -1,0 +1,62 @@
+members 110081
+
+== E1 exact witnesses (arrangements in cells; outside the member list) bracketed by consecutive member values ==
+  62250 climb        R*=7.0000000000  nearest member below 6.785120 above 9.000000 ; gap between them 2.2149
+  62251 climb        R*=6.8755704604  nearest member below 6.785120 above 9.000000 ; gap between them 2.2149
+  gap 0 cell 0       R*=1.1060053058  nearest member below None above 1.114915 ; gap between them None
+  gap 1 cell 0       R*=1.2071180518  nearest member below 1.114915 above 1.207330 ; gap between them 0.0924
+  gap 2 cell 56983   R*=1.4677867447  nearest member below 1.424186 above 1.467787 ; gap between them 0.0436
+  gap 3 cell 57705   R*=5.7947032230  nearest member below 5.794626 above 5.839798 ; gap between them 0.0452
+  gap 4 cell 75602   R*=6.3884647801  nearest member below 6.385431 above 6.440426 ; gap between them 0.0550
+  gap 6 cell 105294  R*=6.6647476940  nearest member below 6.664233 above 6.780013 ; gap between them 0.1158
+  gap 8 cell 108347  R*=10.8289763155  nearest member below 10.828747 above 10.905857 ; gap between them 0.0771
+  gap 9 cell 109796  R*=11.0873866075  nearest member below 11.087152 above 11.237248 ; gap between them 0.1501
+  gap 10 cell 109713 R*=11.2744048441  nearest member below 11.237248 above 11.274441 ; gap between them 0.0372
+  gap 11 cell 109519 R*=11.3318901631  nearest member below 11.331890 above 11.525066 ; gap between them 0.1932
+  gap 12 cell 109521 R*=11.5253373287  nearest member below 11.525066 above 11.556326 ; gap between them 0.0313
+
+== E2 reading 1 (exact) ==
+members with a state exactly 9: 4939 ; with reading 1 as a setter: 4939 ; with R* >= 9: 4939 ; with R* > 7: 4939 ; the three sets equal: True
+members with R* in (7,9): 0 ; R*==7: 0 ; R*==9: 8
+members with a state in the open interval (7,9): 4939 (all with reading 1 setting the next move: True); largest state below 9 over members: 9570149208162304/1245144706329595 = 7.685973 ; smallest state above 7: 7.000025
+min #moves among R*>=9: 17 ; max #moves among R*<7: 27 ; min #moves among R*<7: 1
+
+== E3 ratios exact ==
+moves 1320740 ; ratio > 1+2/(8j-1) (j the exit lap) or >= 9/7: 0
+max ratio per exit lap j and its slack to 1+2/(8j-1): {1: (1.2857097758232594, 4.509891026341758e-06), 2: (1.1333307946753681, 2.538657965244749e-06), 3: (1.0869538721889607, 2.6495501698739156e-06), 4: (1.0645126306802843, 3.498351973733022e-06), 5: (1.0512790280462059, 3.023235845407295e-06)}
+R_1 exact max over members: 1.28570907 (< 9/7: True)
+
+== E4 setter vs other blockers (exact) ==
+moves 1320740 ; blockers-per-state counts [(1, 987279), (2, 291210), (3, 39500), (4, 2737), (5, 14)] ; setter is the lowest-rank blocker in 1264639 moves ; not in 56101 moves (all with >=2 blockers)
+in the exceptions: lowest-rank blocker's signed offset d_low: min -0.7708 max 1.0000 ; d_low > 0 in 39732 of 56101 ; d_low > d_setter in 56101 of 56101 (identity: exit_low < exit_setter forces d_low > d_set when rho_low<rho_set)
+exceptions by (lowest blocker rank -> setter rank), top 10: [((5, 7), 10403), ((6, 7), 7997), ((4, 6), 7573), ((4, 7), 7548), ((5, 6), 5584), ((3, 7), 3216), ((3, 6), 3192), ((4, 5), 2763), ((3, 5), 2307), ((3, 4), 1322)]
+exceptions by number of blockers: [(2, 47016), (3, 8409), (4, 675), (5, 1)]
+
+== E4b zones passed: for reading y and lap j with exit (8j+1)/rho <= R*, 'visited' if some state R_k (k<n) lies in the open zone, else 'skipped' ==
+visited by rank: [(1, 4939), (2, 153572), (3, 218797), (4, 265501), (5, 305875), (6, 356610), (7, 393923)]  skipped by rank: [(2, 835), (3, 1866), (4, 12432), (5, 29893), (6, 63285), (7, 122702)]  skipped zones whose jump was NOT set by a strictly lower rank (or not found): 0 of 231013
+
+== E5 exact ties and closer/opener ==
+members with k readings exactly at p==1 (opener included): [(1, 109950), (2, 118), (3, 13)]  at p==7: [(0, 110070), (1, 11)]
+smallest exact p-1 over non-opener readings with p != 1: 1/18473167996960776 (= 5.413e-17) ; smallest 7-p with p != 7: 2.454e-15
+opener rank (rows 1..7) x closer rank (cols 1..7) counts:
+  opener 1: [0, 0, 0, 5, 3, 0, 0]
+  opener 2: [0, 0, 343, 191, 668, 358, 787]
+  opener 3: [0, 21, 0, 844, 1230, 1947, 4785]
+  opener 4: [0, 1017, 1757, 0, 1495, 3858, 8865]
+  opener 5: [0, 1769, 2974, 3469, 0, 3084, 11405]
+  opener 6: [4, 1190, 3043, 4296, 8140, 0, 9035]
+  opener 7: [0, 1885, 3528, 4111, 7734, 16042, 198]
+{'closer>opener': 48903, 'closer<opener': 60980, 'closer==opener': 198}
+members with two readings tied for closer (exact): 2
+
+== E6 exact binning (floor of exact value) ==
+R* by tenth, index=floor(10R*): [(11, 1), (12, 10), (13, 11), (14, 47), (15, 282), (16, 1163), (17, 885), (18, 464), (19, 1238), (20, 1796), (21, 1688), (22, 4269), (23, 2127), (24, 8469), (25, 4441), (26, 4829), (27, 8286), (28, 9194), (29, 5467), (30, 7191), (31, 2817), (32, 4583), (33, 1597), (34, 2030), (35, 5005), (36, 1708), (37, 1632), (38, 3836), (39, 2413), (40, 2228), (41, 1424), (42, 1965), (43, 1674), (44, 474), (45, 446), (46, 547), (47, 2497), (48, 1284), (49, 856), (50, 636), (51, 743), (52, 379), (53, 386), (54, 413), (55, 164), (56, 74), (57, 88), (58, 302), (59, 208), (60, 287), (61, 233), (62, 128), (63, 44), (64, 135), (65, 35), (66, 9), (67, 4), (90, 426), (91, 35), (92, 292), (93, 346), (94, 282), (95, 315), (96, 496), (97, 197), (98, 449), (99, 408), (100, 168), (101, 176), (102, 191), (103, 359), (104, 277), (105, 168), (106, 190), (107, 45), (108, 8), (109, 19), (110, 27), (112, 21), (113, 21), (115, 23)]
+rank 2 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.0 max 6.996374604685038
+rank 3 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.0 max 6.996317300417661
+rank 4 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.0 max 6.994955153228475
+rank 5 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.0 max 6.999999999999997
+rank 6 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.0 max 6.990299091696535
+rank 7 non-opener p: empty exact 0.02-bins in [1,7): 0 [] ; min 1.000114922965787 max 7.0
+rank 1 p (=R* mod 8): empty exact 0.02-bins: 19 ; runs start/end: (5.8, 6.98)  max p_1 over members 6.785120
+pairs among ranks 2..7 with empty exact 0.5x0.5 cells (of 144): [(2, 3, 1, [(6.5, 6.5)])]
+width: exact zero 11 ; five smallest positive [1.8486783061526443e-16, 1.5812585772315054e-13, 2.3415031838210976e-13, 2.9961031214405107e-13, 6.096875064917039e-13] ; largest 20240668680333120110792822257597930682645223429722079232/36186964982819683812151239232343931614940847114236865603 = 0.559336 ; members with width < 1/10^6: 16 ; < 1/10^3: 157

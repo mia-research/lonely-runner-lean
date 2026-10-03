@@ -1,0 +1,45 @@
+members 110081 ; moves total 1320740
+
+== 3a. ratios R_{k+1}/R_k ==
+ratio min 1.00000264 max 1.28570978  (9/7 = 1.28571429) ; quantiles 1/25/50/75/99%: [1.0026, 1.0484, 1.0819, 1.1307, 1.2828]
+moves with ratio >= 9/7 : 0
+per exit lap j: count, max ratio, bound 1+2/(8j-1), violations (ratio > bound+1e-12):
+  j= 1 n= 340153 max 1.285710 bound 1.285714 viol 0
+  j= 2 n= 382223 max 1.133331 bound 1.133333 viol 0
+  j= 3 n= 256050 max 1.086954 bound 1.086957 viol 0
+  j= 4 n= 176199 max 1.064513 bound 1.064516 viol 0
+  j= 5 n=  80642 max 1.051279 bound 1.051282 viol 0
+  j= 6 n=  55649 max 1.042550 bound 1.042553 viol 0
+  j= 7 n=  12995 max 1.036351 bound 1.036364 viol 0
+  j= 8 n=   8749 max 1.031742 bound 1.031746 viol 0
+  j= 9 n=   6539 max 1.028156 bound 1.028169 viol 0
+  j=10 n=   1201 max 1.025286 bound 1.025316 viol 0
+  j=11 n=    270 max 1.022937 bound 1.022989 viol 0
+  j=12 n=     54 max 1.020007 bound 1.021053 viol 0
+  j=13 n=      7 max 1.014981 bound 1.019417 viol 0
+  j=17 n=      3 max 1.005643 bound 1.014815 viol 0
+  j=18 n=      6 max 1.013494 bound 1.013986 viol 0
+exact: in every move of every member, exit lap j equals round(R_k*rho/8) of the setter at the state it is set from (tautology of the rule): checked on 1320740 moves: lap off by >=1/8 of a lap: 0
+mean ln ratio by move index (1..30): [0.1231, 0.1568, 0.1392, 0.13, 0.1191, 0.1, 0.0881, 0.08, 0.0732, 0.0647, 0.061, 0.0594, 0.0549, 0.0532, 0.053, 0.0514, 0.0472, 0.0559, 0.0732, 0.0719, 0.0586, 0.0454, 0.0395, 0.0336, 0.0298, 0.0257, 0.0273, 0.0272, 0.0242]
+sum of ln ratios = ln R* (identity); nm vs ln R*: fit nm = 10.627 ln R* + -0.488 ; R^2 = 0.767 ; residual sd 2.06 ; nm range among members with R* in [2.9,3.1): (np.int64(6), np.int64(22))
+
+== 3b. exit laps and ranks ==
+(rank,lap) pairs that occur as an exit: 52 ; max lap per rank: {1: 1, 2: 5, 3: 6, 4: 7, 5: 8, 6: 10, 7: 18} ; min lap per rank: {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1}
+exits by rank: [4939, 149321, 202661, 225436, 238917, 248215, 251251]  ; rank 1 (reading 1) exits: all at lap 1, state 9: Counter({1: 4939})
+signed offset d = R_k*rho mod 8 (in (-1,1)) of the setter, histogram 0.2 bins:
+    [505005, 210615, 149840, 118763, 101558, 74231, 53512, 42592, 29711, 34913]  min -1.0000 max 1.0000
+
+== 3c. setter vs the other blockers at the same state ==
+moves 1320740 ; blockers per state: [(1, 987279), (2, 291210), (3, 39500), (4, 2737), (5, 14)] ; setter is lowest-rank blocker: 1264639 (95.8%) ; setter is the blocker closest to its zone centre: 1090978 (82.6%)
+
+== 3d. where states accumulate ==
+states in 0.5 bins from 1: [285227, 247887, 271601, 194900, 112265, 74401, 46135, 25713, 15152, 9697, 7640, 5911, 4928, 81, 0, 0, 10597, 5143, 2657, 651, 131, 23]
+empty 0.01-bins of states in [1,12], runs: [(np.float64(7.55), np.float64(7.56)), (np.float64(7.57), np.float64(7.58)), (np.float64(7.62), np.float64(7.65)), (np.float64(7.67), np.float64(7.68)), (np.float64(7.69), np.float64(8.99)), (np.float64(10.71), np.float64(10.72)), (np.float64(10.79), np.float64(10.81)), (np.float64(10.86), np.float64(10.87)), (np.float64(10.89), np.float64(10.9)), (np.float64(10.95), np.float64(10.96)), (np.float64(11.0), np.float64(11.01)), (np.float64(11.09), np.float64(11.2)), (np.float64(11.21), np.float64(11.22)), (np.float64(11.25), np.float64(11.27)), (np.float64(11.29), np.float64(11.3)), (np.float64(11.31), np.float64(11.32)), (np.float64(11.34), np.float64(11.48)), (np.float64(11.5), np.float64(11.52)), (np.float64(11.53), np.float64(11.55)), (np.float64(11.57), np.float64(11.59)), (np.float64(11.6), np.float64(12.0))]
+state/R* deciles (last bin contains R* itself, 110081 members): [0, 17901, 48704, 111303, 154372, 204222, 179025, 153105, 168229, 283879]
+exact state atoms (state value shared by >=1000 member-paths): [('17/7', 17799), ('9/7', 17002), ('11/5', 11937), ('5/3', 10434), ('33/17', 9397), ('25/7', 9064), ('25/17', 8530), ('17/15', 8084), ('49/17', 7712), ('41/15', 7253), ('41/17', 6975), ('49/15', 5802)]
+first state R_1 range: 1.00000 .. 1.28571 ; ratio R_1/R_0 quantiles [1.002, 1.123, 1.284]
+R_1 histogram 0.1 bins from 1: [41031, 41942, 27108, 0, 0, 0, 0, 0, 0, 0]
+
+== 3e. last move vs landing ==
+last ratio quantiles [1.00001, 1.00073, 1.03854, 1.12926, 1.28547]
+nm by opener rank (median): {2: 13, 3: 10, 4: 11, 5: 11, 6: 11, 7: 12}
