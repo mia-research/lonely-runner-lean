@@ -1,0 +1,29 @@
+J2s members with rho_7<=9: profiles 413  of which in J1 profile set: 410  not in J1: 3
+lat1_24 rho_7<=9: profiles 20 in J1 set 6 in J2s set 2 in taxo set 20
+lat1_24 rho_7<=17: profiles 1504 in J2s set 158
+lat2_24 rho_7<=9: profiles 1360 in J1 set 324 in J2s set 490 in taxo set 914
+lat2_24 rho_7<=17: profiles 6221 in J2s set 2197
+lat3_24 rho_7<=9: profiles 3721 in J1 set 733 in J2s set 990 in taxo set 1857
+lat3_24 rho_7<=17: profiles 3721 in J2s set 990
+singleton profiles (occurring for exactly one member):
+  J1 members 18452 profiles 1914 singletons 674 max multiplicity 1191
+  J2s members 20000 profiles 7512 singletons 4473 max multiplicity 89
+  taxo members 52000 profiles 28228 singletons 23504 max multiplicity 1306
+  lat1_24 members 100947 profiles 10408 singletons 3605 max multiplicity 495
+  lat2_24 members 74151 profiles 6221 singletons 2002 max multiplicity 454
+  lat3_24 members 54257 profiles 3721 singletons 1097 max multiplicity 526
+lattice s=1: cumulative distinct profiles by a_7<=N, and singletons among a_7<=N
+  N=12 sets 462 profiles 166 singletons 88
+  N=16 sets 5005 profiles 1082 singletons 476
+  N=20 sets 27132 profiles 3743 singletons 1416
+  N=24 sets 100947 profiles 10408 singletons 3605
+crossers: J2s crosser prefix profiles (n_2..n_6) vs J1 crosser prefix profiles
+  J1 117 J2s 75 J2s in J1 75 J2s not in J1 0
+J1 crossers n_6<=6: 7567 / 7567 ; non-crossers n_6<=6: 7803 / 10885 ; non-crossers n_6<=6 and W: 1439
+  crossers n_6 in (2,3,4,5,6) ; non-crossers n_6<=3:  258 crossers n_6<=3: 4670
+  prefix profiles occurring only for crossers 40 (members 2752 ) ; only for non-crossers 643
+  longest K6 window times rho_7 / 2 : crossers max 0.9957036112266933  exact < 1 for all: True
+J2s crossers n_6<=6: 568 / 568 ; non-crossers n_6<=6: 2884 / 19432 ; non-crossers n_6<=6 and W: 102
+  crossers n_6 in (2,3,4,5,6) ; non-crossers n_6<=3:  31 crossers n_6<=3: 350
+  prefix profiles occurring only for crossers 27 (members 265 ) ; only for non-crossers 3354
+  longest K6 window times rho_7 / 2 : crossers max 0.9952927796746507  exact < 1 for all: True

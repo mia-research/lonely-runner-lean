@@ -1,0 +1,5 @@
+J1 n 18452 range 0 18451 check failures 0 time 83
+J2s n 20000 range 0 19999 check failures 0 time 86
+taxo n 52000 range 0 51999 check failures 0 time 258
+lat1_24 n 50000 range 0 49999 check failures 0 time 165
+lat1_24 n 50947 range 50000 100946 check failures 0 time 205

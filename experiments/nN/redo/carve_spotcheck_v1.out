@@ -1,0 +1,2 @@
+lattice [1,2,4,5,7,8,9]: windows of K_k for k = 1..7: [1, 2, 4, 6, 6, 4, 6] (agent: (1,2,4,6,6,4,6))
+order independence of the final window set (union of zones is symmetric): 200 of 200
