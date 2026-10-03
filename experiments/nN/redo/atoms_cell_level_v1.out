@@ -1,0 +1,12 @@
+atom R*=49/17 (2.8824): members 3056; distinct cells 3056; opener readings [('17', 3056)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 149
+atom R*=49/15 (3.2667): members 2082; distinct cells 2082; opener readings [('15', 2082)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 149
+atom R*=41/15 (2.7333): members 1841; distinct cells 1841; opener readings [('15', 1841)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 144
+atom R*=11/5 (2.2000): members 1388; distinct cells 1388; opener readings [('15', 1388)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 147
+atom R*=41/17 (2.4118): members 1357; distinct cells 1357; opener readings [('17', 1357)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 145
+atom R*=25/7 (3.5714): members 1260; distinct cells 1260; opener readings [('7', 1260)]
+   cells tested 150: R* takes more than one exact value inside the same cell in 145
