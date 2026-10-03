@@ -1,0 +1,4 @@
+J=1 members: 9197
+best number of readings (of 7) within 0.06 grid steps of a multiple of a common c in [0.7,1.8]: [(2, 79), (3, 5080), (4, 3557), (5, 474), (6, 7)]
+comparison (5000 ordered draws, rank y uniform in its own range over all members): [(2, 8), (3, 2142), (4, 2472), (5, 338), (6, 40)]
+c of the best fit, members with >=6 near: [(0.7, 3), (0.81, 1), (0.82, 1), (0.99, 1), (1.01, 1)]
