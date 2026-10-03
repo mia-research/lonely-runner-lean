@@ -1,0 +1,11 @@
+class | R0 with smallest infimum | inf rho_7 | attained | witness (exact) | single-point window at R0 by windows(): | crit
+r1_exits R0 integer | R0 = 17 | inf rho_7 = 23/17 =1.352941 | attained | exit endpoint 1 entry endpoint 23/17 | witness ['1', '53/51', '55/51', '19/17', '59/51', '61/51', '23/17'] | point window at R0 and verify(): True
+      R0 values attaining the same infimum (first 6): ['17']
+r1_exits R0 non-integer none reached
+r1_enters R0 integer | R0 = 23 | inf rho_7 = 25/23 =1.086957 | not attained | exit endpoint 25/23 entry endpoint 1 | witness ['1', '25/23', '376/345', '377/345', '126/115', '379/345', '76/69'] | point window at R0 and verify(): True
+      R0 values attaining the same infimum (first 6): ['23']
+r1_enters R0 non-integer none reached
+neither R0 integer | R0 = 21 | inf rho_7 = 25/21 =1.190476 | attained | exit endpoint 25/21 entry endpoint 23/21 | witness ['1', '191/189', '193/189', '65/63', '197/189', '23/21', '25/21'] | point window at R0 and verify(): True
+      R0 values attaining the same infimum (first 6): ['21']
+neither R0 non-integer | R0 = 275/12 | inf rho_7 = 12/11 =1.090909 | attained | exit endpoint 12/11 entry endpoint 276/275 | witness ['1', '2476/2475', '2477/2475', '826/825', '2479/2475', '276/275', '12/11'] | point window at R0 and verify(): True
+      R0 values attaining the same infimum (first 6): ['275/12']

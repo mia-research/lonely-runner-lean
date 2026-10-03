@@ -1,0 +1,6 @@
+tuples: 1000 of which drawn with nonempty allowed set above rho_6 (cap 80): 0 after 459601 draws time 330.0
+six-tuples 1000 | with nonempty allowed set: 1 | test points (exact rho_7): 10541 | direct crossing: 6 not crossing: 10535 | mismatches R2 vs direct path(): 0
+sup(A) * L_max / 2 over nonempty tuples: max 26120321894413443964375119147664600799/28542164392891141433675115821346707934 = 0.915149, min 26120321894413443964375119147664600799/28542164392891141433675115821346707934 = 0.915149 (W says < 1 each)
+X24 six: components 3
+X24 allowed: [(8.983444740934077, 8.999999999996794), (24.35999999999132, 24.400841514398063)]
+16.21 vertex six allowed: []

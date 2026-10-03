@@ -1,0 +1,1 @@
+python3 tie_pair_v1.py > tie_pair_v1.out 2>&1  160.23s user 1.05s system 52% cpu 5:09.19 total

@@ -1,0 +1,15 @@
+== A. R0 of every single-point window, by involvement of reading 1 (rank 1) and integrality of R0
+J1 [(('R0 int', 'reading1 enters'), 3610), (('R0 int', 'reading1 exits'), 1561), (('R0 non-int', 'neither'), 379), (('R0=1', 'reading1 exits'), 2)]
+   integer R0 values: [(1, 2), (7, 1521), (9, 773), (15, 1233), (17, 788), (23, 856)]
+lat1 [(('R0 int', 'neither'), 5256), (('R0 int', 'reading1 enters'), 3762), (('R0 int', 'reading1 exits'), 2508), (('R0 non-int', 'neither'), 6300), (('R0=1', 'reading1 exits'), 1254)]
+   integer R0 values: [(1, 1254), (3, 876), (5, 876), (7, 1254), (9, 1254), (11, 876), (13, 876), (15, 1254), (17, 1254), (19, 876), (21, 876), (23, 1254)]
+lat3 [(('R0 int', 'neither'), 8844), (('R0 int', 'reading1 enters'), 13767), (('R0 int', 'reading1 exits'), 7579), (('R0 non-int', 'neither'), 7260), (('R0=1', 'reading1 exits'), 6188)]
+   integer R0 values: [(1, 6188), (3, 2926), (5, 495), (7, 1287), (9, 6292), (11, 1001), (13, 1001), (15, 6292), (17, 1287), (19, 495), (21, 2926), (23, 6188)]
+lat5 [(('R0 int', 'neither'), 776), (('R0 int', 'reading1 enters'), 1343), (('R0 int', 'reading1 exits'), 279), (('R0 non-int', 'neither'), 1923), (('R0=1', 'reading1 exits'), 124)]
+   integer R0 values: [(1, 124), (3, 25), (5, 653), (7, 147), (9, 135), (11, 24), (13, 26), (15, 1052), (17, 144), (19, 24), (21, 24), (23, 144)]
+lat7 [(('R0 int', 'neither'), 738), (('R0 int', 'reading1 enters'), 1355), (('R0 int', 'reading1 exits'), 239), (('R0 non-int', 'neither'), 1504), (('R0=1', 'reading1 exits'), 112)]
+   integer R0 values: [(1, 112), (3, 16), (5, 17), (7, 1118), (9, 108), (11, 12), (13, 12), (15, 118), (17, 131), (19, 13), (21, 668), (23, 119)]
+taxo [(('R0 int', 'neither'), 15758), (('R0 int', 'reading1 enters'), 10784), (('R0 int', 'reading1 exits'), 7371), (('R0 non-int', 'neither'), 14201), (('R0=1', 'reading1 exits'), 4029)]
+   integer R0 values: [(1, 4029), (3, 2526), (5, 2517), (6, 234), (7, 3596), (9, 3661), (10, 269), (11, 2540), (13, 2520), (15, 3554), (17, 3710), (19, 2525), (20, 3), (21, 2394), (22, 230), (23, 3634)]
+== B. integer readings (lat1, exhaustive 5005): odd-integer-instant law
+instants checked 115115 violations 0 ; point windows at non-integer R0: 6300 ; at even integer R0: 0

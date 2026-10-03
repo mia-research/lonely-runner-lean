@@ -1,0 +1,100 @@
+b12 x0 not loaded: argument should be a string or a Rational instance or have the as_integer_ratio() method
+IDX 7 cells processed 7003 time 161s | cells with a row of >2 nonzero entries: 0 (max nonzero entries in any row: 2) | LP not certified: 0
+tight binary rows at the vertex connect all 7 readings: 7003 cells; not connected: 0
+heights R_k of the states carrying a tight row incident to reading 1 (value at the vertex) -> count: [('1', 190), ('7', 2927), ('9', 6492)]
+row types incident to reading 1 (kind, setter is reading 1) -> count: [(('clear-high', False), 452), (('clear-high', True), 4108), (('clear-low', True), 328), (('entry', False), 2475), (('entry', True), 723), (('exit', True), 1523)]
+pinned readings (rank, value) -> count:
+   rho_3 = 31/9 = 3.444444 : 1103
+   rho_3 = 25/7 = 3.571429 : 867
+   rho_4 = 13/3 = 4.333333 : 865
+   rho_6 = 55/9 = 6.111111 : 850
+   rho_2 = 23/9 = 2.555556 : 736
+   rho_2 = 17/7 = 2.428571 : 532
+   rho_7 = 65/9 = 7.222222 : 518
+   rho_7 = 71/9 = 7.888889 : 498
+   rho_5 = 33/7 = 4.714286 : 489
+   rho_4 = 33/7 = 4.714286 : 416
+   rho_2 = 25/9 = 2.777778 : 300
+   rho_6 = 41/7 = 5.857143 : 271
+   rho_5 = 47/9 = 5.222222 : 269
+   rho_7 = 73/9 = 8.111111 : 202
+   rho_5 = 49/9 = 5.444444 : 201
+   rho_6 = 7 = 7.000000 : 195
+   rho_3 = 11/3 = 3.666667 : 169
+   rho_6 = 19/3 = 6.333333 : 150
+   rho_5 = 41/9 = 4.555556 : 120
+   rho_5 = 41/7 = 5.857143 : 114
+   rho_4 = 41/9 = 4.555556 : 103
+   rho_2 = 31/9 = 3.444444 : 102
+   rho_2 = 25/7 = 3.571429 : 85
+   rho_3 = 13/3 = 4.333333 : 76
+   rho_4 = 47/9 = 5.222222 : 70
+   rho_3 = 33/7 = 4.714286 : 61
+   rho_5 = 55/9 = 6.111111 : 53
+   rho_7 = 57/7 = 8.142857 : 52
+   rho_2 = 11/3 = 3.666667 : 35
+   rho_3 = 41/9 = 4.555556 : 24
+   rho_4 = 41/7 = 5.857143 : 10
+   rho_7 = 79/9 = 8.777778 : 10
+   rho_7 = 9 = 9.000000 : 10
+   rho_6 = 65/9 = 7.222222 : 8
+   rho_5 = 19/3 = 6.333333 : 7
+   rho_7 = 65/7 = 9.285714 : 7
+   rho_4 = 55/9 = 6.111111 : 6
+   rho_2 = 13/3 = 4.333333 : 5
+   rho_5 = 7 = 7.000000 : 5
+   rho_4 = 49/9 = 5.444444 : 3
+   rho_5 = 13/3 = 4.333333 : 3
+   rho_6 = 71/9 = 7.888889 : 3
+   rho_6 = 57/7 = 8.142857 : 2
+   rho_7 = 143/9 = 15.888889 : 2
+   rho_2 = 33/7 = 4.714286 : 1
+   rho_6 = 73/9 = 8.111111 : 1
+examples (distinct (rank, value, height, kind, state0)):
+   (5, '19/3', '9', 'exit', False) | state 22: R <= exit(rho5 lap 7)
+   (6, '7', '1', 'clear-high', True) | state 0: R <= entry(rho6 lap 1) (clear before zone)
+   (6, '57/7', '7', 'entry', False) | state 24: entry(rho1 lap 1) <= R (blocked)
+   (2, '11/3', '9', 'exit', False) | state 25: R <= exit(rho2 lap 4)
+   (4, '55/9', '9', 'clear-high', False) | state 25: R <= entry(rho4 lap 7) (clear before zone)
+   (6, '73/9', '9', 'exit', False) | state 25: R <= exit(rho6 lap 9)
+   (2, '33/7', '7', 'entry', False) | state 22: entry(rho1 lap 1) <= R (blocked)
+   (7, '71/9', '9', 'clear-high', False) | state 23: R <= entry(rho7 lap 9) (clear before zone)
+   (7, '73/9', '9', 'exit', False) | state 23: R <= exit(rho7 lap 9)
+   (4, '41/7', '7', 'entry', False) | state 23: entry(rho1 lap 1) <= R (blocked)
+   (7, '65/9', '9', 'exit', False) | state 21: R <= exit(rho7 lap 8)
+   (3, '33/7', '7', 'entry', False) | state 20: entry(rho1 lap 1) <= R (blocked)
+   (5, '41/7', '7', 'entry', False) | state 21: entry(rho1 lap 1) <= R (blocked)
+   (4, '47/9', '9', 'entry', False) | state 21: entry(rho4 lap 6) <= R (blocked)
+   (5, '55/9', '9', 'clear-high', False) | state 22: R <= entry(rho5 lap 7) (clear before zone)
+   (2, '13/3', '9', 'clear-high', False) | state 22: R <= entry(rho2 lap 5) (clear before zone)
+   (6, '7', '7', 'clear-high', False) | state 22: R <= entry(rho1 lap 1) (clear before zone)
+   (2, '13/3', '9', 'entry', False) | state 23: entry(rho2 lap 5) <= R (blocked)
+   (4, '33/7', '7', 'entry', False) | state 17: entry(rho1 lap 1) <= R (blocked)
+   (2, '25/9', '9', 'exit', False) | state 18: R <= exit(rho2 lap 3)
+   (4, '47/9', '9', 'clear-high', False) | state 22: R <= entry(rho4 lap 6) (clear before zone)
+   (3, '13/3', '9', 'entry', False) | state 22: entry(rho3 lap 5) <= R (blocked)
+   (3, '13/3', '9', 'clear-high', False) | state 22: R <= entry(rho3 lap 5) (clear before zone)
+   (2, '25/7', '7', 'entry', False) | state 23: entry(rho1 lap 1) <= R (blocked)
+   (6, '71/9', '9', 'clear-high', False) | state 25: R <= entry(rho6 lap 9) (clear before zone)
+   (7, '79/9', '9', 'clear-high', False) | state 25: R <= entry(rho7 lap 10) (clear before zone)
+   (5, '7', '1', 'clear-high', True) | state 0: R <= entry(rho5 lap 1) (clear before zone)
+   (5, '7', '7', 'clear-high', False) | state 24: R <= entry(rho1 lap 1) (clear before zone)
+   (7, '57/7', '7', 'entry', False) | state 17: entry(rho1 lap 1) <= R (blocked)
+   (2, '23/9', '9', 'clear-high', False) | state 18: R <= entry(rho2 lap 3) (clear before zone)
+   (4, '13/3', '9', 'clear-high', False) | state 18: R <= entry(rho4 lap 5) (clear before zone)
+   (3, '31/9', '9', 'clear-high', False) | state 19: R <= entry(rho3 lap 4) (clear before zone)
+   (2, '25/9', '9', 'clear-low', False) | state 19: exit(rho2 lap 3) <= R (clear after zone)
+   (3, '25/7', '7', 'entry', False) | state 18: entry(rho1 lap 1) <= R (blocked)
+   (2, '23/9', '9', 'entry', False) | state 19: entry(rho2 lap 3) <= R (blocked)
+   (6, '65/9', '9', 'exit', False) | state 19: R <= exit(rho6 lap 8)
+   (6, '7', '1', 'entry', True) | state 0: entry(rho6 lap 1) <= R (blocked)
+   (2, '17/7', '7', 'entry', False) | state 17: entry(rho1 lap 1) <= R (blocked)
+   (4, '13/3', '9', 'entry', False) | state 18: entry(rho4 lap 5) <= R (blocked)
+   (2, '17/7', '7', 'clear-high', False) | state 17: R <= entry(rho1 lap 1) (clear before zone)
+top vertices:
+   86989/3565 24.40084151472651 ['1', '2023/713', '119/31', '608923/124155', '86989/13795', '7', '86989/3565']
+   34675/2139 16.210846189808322 ['1', '95/33', '475/123', '475/99', '19/3', '475/69', '34675/2139']
+   34675/2139 16.210846189808322 ['1', '95/33', '34675/9021', '381425/79143', '19/3', '475/69', '34675/2139']
+   34675/2139 16.210846189808322 ['1', '95/33', '11875/3069', '475/99', '19/3', '475/69', '34675/2139']
+   34675/2139 16.210846189808322 ['1', '95/33', '34675/9021', '475/99', '19/3', '475/69', '34675/2139']
+   297825/18377 16.206399303477173 ['1', '3135/1081', '475/123', '5225/1081', '19/3', '475/69', '297825/18377']

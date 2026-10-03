@@ -1,0 +1,6 @@
+six readings: [1.0, 2.87802, 3.87019, 4.91489, 6.3757, 7.0] strictly increasing: True
+windows of K6 on [1,7]: 8 [('1', '1'), ('37035/26236', '47/33'), ('25/7', '94645/26236'), ('115243/26236', '31/7'), ('135795/26236', '34185/6559'), ('38743/6559', '155917/26236'), ('47/7', '47/7'), ('7', '7')]
+longest component L = 135/3748 = 0.03601921024546425  | 2/(7 rho_6) = 2/49 = 0.04081632653061224  | L < 2/(7 rho_6): True  ratio 0.8824706510138741
+window endpoints and midpoints clear: True | midpoints of the gaps between windows blocked: True
+rho_7 values (step 1/1000 up to 40) with a gate crossing for these six readings: 0 
+sampler example 20982: [(1.0, 5.233621579303228)] | first window contains 1, 3 and 5: True | (1 in {1,7}, 3 and 5 in {3,5})

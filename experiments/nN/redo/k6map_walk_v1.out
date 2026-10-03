@@ -1,0 +1,14 @@
+  new best 7/2 = 3.500000  (cells 1, t=0s, from progression)
+  new best 497/297 = 1.673401  (cells 3, t=0s, from X24 six)
+  new best 217/152 = 1.427632  (cells 8, t=0s, from mix8 min)
+  new best 7/6 = 1.166667  (cells 10, t=0s, from mix8 2nd)
+seed cells: 99 best 1.1666666666666667
+  new best 175/159 = 1.100629  (cells 766, t=42s, from walk)
+  new best 26460/24119 = 1.097060  (cells 767, t=42s, from walk)
+  new best 105/109 = 0.963303  (cells 769, t=42s, from walk)
+  new best 6615/7496 = 0.882471  (cells 788, t=42s, from walk)
+cells visited 6085, expanded 5712, frontier left 373, LP not certified 0, time 420s
+lowest distinct cell minima: [('6615/7496', 0.882471), ('165/184', 0.896739), ('2205/2306', 0.956201), ('105/109', 0.963303), ('39/40', 0.975), ('299460/303337', 0.987219), ('1020/1033', 0.987415), ('65/61', 1.065574), ('497/458', 1.085153), ('336945/309304', 1.089365)]
+BEST exact: 6615/7496 0.8824706510138741 vertex ['1', '6559/2279', '26236/6779', '231/47', '26236/4115', '7'] from walk
+check by exact K6 of the vertex tuple: ratio, L = (Fraction(6615, 7496), Fraction(135, 3748)) strictly increasing: True
+K6 of vertex: [('1', '1'), ('37035/26236', '47/33'), ('25/7', '94645/26236'), ('115243/26236', '31/7'), ('135795/26236', '34185/6559'), ('38743/6559', '155917/26236'), ('47/7', '47/7'), ('7', '7')]

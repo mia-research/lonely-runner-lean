@@ -1,0 +1,4 @@
+six-tuples 2000 (seed sixes 1000, perturbed 1000)
+with nonempty allowed set: 1978 | seed sixes whose own rho_7 lies in the allowed set: 1000
+test points: 40811 | direct crossing: 6955 not crossing: 33856 | mismatches R2 vs direct path(): 0
+sup(A) * L_max / 2: max 0.999988 min 0.343476 (each < 1 by W)

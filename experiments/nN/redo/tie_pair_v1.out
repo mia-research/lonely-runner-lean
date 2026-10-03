@@ -1,0 +1,67 @@
+== 1. stored datasets (windows recomputed here by win_lib_v1.windows, rule vs direct)
+J1                           members  18452 | direct yes & rule yes     0 | direct no & rule no  18452 | MISMATCHES (direct!=rule) 0
+lat1                         members   5005 | direct yes & rule yes     0 | direct no & rule no   5005 | MISMATCHES (direct!=rule) 0
+lat3                         members  18564 | direct yes & rule yes     0 | direct no & rule no  18564 | MISMATCHES (direct!=rule) 0
+lat5                         members   4000 | direct yes & rule yes     0 | direct no & rule no   4000 | MISMATCHES (direct!=rule) 0
+lat7                         members   4000 | direct yes & rule yes     0 | direct no & rule no   4000 | MISMATCHES (direct!=rule) 0
+taxo                         members  52000 | direct yes & rule yes   251 | direct no & rule no  51749 | MISMATCHES (direct!=rule) 0
+      occurs:  ('taxo', 'random', 7533) [1, 253/200, 269/200, 186/125, 367/200, 1029/500, 2209/1000] x in [1]
+      occurs:  ('taxo', 'AP deformed', 8082) [1, 2216/1759, 2405/1759, 2500/1759, 2841/1759, 3000/1759, 3500/1759] x in [1]
+      occurs:  ('taxo', 'AP deformed', 8372) [1, 4000/3063, 4013/3063, 4378/3063, 5000/3063, 2000/1021, 7000/3063] x in [1]
+J1 stored points: largest number of the seven readings inside one I(x), x in X -> number of points: [(1, 14474), (2, 3963), (3, 14), (4, 1)]
+J1 stored points with rho_7 < 3: 0 ; with rho_7 <= 7/3: 0
+== 2. lattice counts: sets {c_1=M, c_2<...<c_7 integers > M} (readings c/M) satisfying the rule, by M and x (exact count C(N-1,6))
+  M=5 x=1: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=6 x=1: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=7 x=1: 10 allowed readings (incl. reading 1) -> 84 sets
+  M=8 x=1: 11 allowed readings (incl. reading 1) -> 210 sets
+  M=9 x=1: 13 allowed readings (incl. reading 1) -> 924 sets
+  M=9 x=9: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=10 x=1: 14 allowed readings (incl. reading 1) -> 1716 sets
+  M=10 x=9: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=11 x=1: 15 allowed readings (incl. reading 1) -> 3003 sets
+  M=11 x=9: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=12 x=1: 17 allowed readings (incl. reading 1) -> 8008 sets
+  M=12 x=9: 8 allowed readings (incl. reading 1) -> 7 sets
+  M=12 x=17: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=12 x=21: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=13 x=1: 18 allowed readings (incl. reading 1) -> 12376 sets
+  M=13 x=9: 8 allowed readings (incl. reading 1) -> 7 sets
+  M=13 x=13: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=13 x=17: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=13 x=21: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=14 x=1: 19 allowed readings (incl. reading 1) -> 18564 sets
+  M=14 x=9: 10 allowed readings (incl. reading 1) -> 84 sets
+  M=14 x=13: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=14 x=17: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=14 x=21: 8 allowed readings (incl. reading 1) -> 7 sets
+  M=15 x=1: 21 allowed readings (incl. reading 1) -> 38760 sets
+  M=15 x=5: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=15 x=9: 10 allowed readings (incl. reading 1) -> 84 sets
+  M=15 x=13: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=15 x=17: 8 allowed readings (incl. reading 1) -> 7 sets
+  M=15 x=21: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=16 x=1: 22 allowed readings (incl. reading 1) -> 54264 sets
+  M=16 x=5: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=16 x=9: 10 allowed readings (incl. reading 1) -> 84 sets
+  M=16 x=13: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=16 x=17: 9 allowed readings (incl. reading 1) -> 28 sets
+  M=16 x=21: 7 allowed readings (incl. reading 1) -> 1 sets
+  M=40 x=1: 54 allowed readings (incl. reading 1) -> 22957480 sets
+  M=40 x=5: 15 allowed readings (incl. reading 1) -> 3003 sets
+  M=40 x=9: 24 allowed readings (incl. reading 1) -> 100947 sets
+  M=40 x=13: 19 allowed readings (incl. reading 1) -> 18564 sets
+  M=40 x=17: 23 allowed readings (incl. reading 1) -> 74613 sets
+  M=40 x=21: 18 allowed readings (incl. reading 1) -> 12376 sets
+  M with at least one set (M<=40): [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+== 3. exact lattice examples
+   M=5 {5..11} rule x: [1] direct: True windows in [1,23]: [('1', '35/11'), ('25/2', '25/2'), ('205/11', '115/6'), ('125/6', '235/11')]
+   M=15 {15,27..32} rule x: [1, 5] direct: True windows in [1,23]: [('1', '105/32'), ('5', '7'), ('85/9', '345/32'), ('125/9', '465/32')]
+   M=7 {7,8,..,13} rule x: [1] direct: True windows in [1,23]: [('1', '49/13'), ('231/13', '161/9'), ('175/9', '217/11')]
+== 4. 20,000 arrangements near progressions (exact rationals, seeds fixed)
+family A (near c,2c,..,7c)   members  10000 | direct yes & rule yes     0 | direct no & rule no  10000 | MISMATCHES (direct!=rule) 0
+family B (near 1+(y-1)d)     members  10000 | direct yes & rule yes  4296 | direct no & rule no   5704 | MISMATCHES (direct!=rule) 0
+      occurs:  ('B near 1+(y-1)d', 0, '1/5') [1, 128768/106171, 149518/106171, 169750/106171, 184854/106171, 208348/106171, 212377/106171] x in [1]
+      occurs:  ('B near 1+(y-1)d', 2, '1/10') [1, 2149649/2059612, 1227531/1029806, 2605593/2059612, 2848181/2059612, 3014287/2059612, 3233397/2059612] x in [1]
+      occurs:  ('B near 1+(y-1)d', 3, '1/50') [1, 10190553/9992083, 10429166/9992083, 10606669/9992083, 10795527/9992083, 10979798/9992083, 11226727/9992083] x in [1, 9, 17]
+   seconds 14

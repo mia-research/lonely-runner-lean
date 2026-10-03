@@ -1,0 +1,19 @@
+  new best 21 = 21.000000  (cells 1, t=0s, from wide seed fam0)
+  new best 77/4 = 19.250000  (cells 2, t=0s, from wide seed fam1)
+  new best 14 = 14.000000  (cells 3, t=0s, from wide seed fam2)
+  new best 161/22 = 7.318182  (cells 4, t=0s, from wide seed fam3)
+  new best 7/2 = 3.500000  (cells 21, t=0s, from wide seed fam2)
+wide seeds 1470 cells 1434 best 3.5
+  new best 56/17 = 3.294118  (cells 2898, t=203s, from walk)
+  new best 89/34 = 2.617647  (cells 2902, t=203s, from walk)
+  new best 87/34 = 2.558824  (cells 2905, t=203s, from walk)
+  new best 80/33 = 2.424242  (cells 2908, t=203s, from walk)
+  new best 193/82 = 2.353659  (cells 2909, t=203s, from walk)
+  new best 52/23 = 2.260870  (cells 2910, t=203s, from walk)
+  new best 273/134 = 2.037313  (cells 2912, t=203s, from walk)
+  new best 84/43 = 1.953488  (cells 2980, t=216s, from walk)
+cells visited 4619, expanded 2887, frontier left 1732, LP not certified 9, time 520s
+lowest distinct cell minima: [('84/43', 1.953488), ('2317/1184', 1.956926), ('34755/17719', 1.961454), ('7133/3586', 1.989124), ('319305/157168', 2.031616), ('273/134', 2.037313), ('567/278', 2.039568), ('11319/5546', 2.04093), ('8575/4194', 2.044588), ('385/188', 2.047872)]
+BEST exact: 84/43 1.9534883720930232 vertex ['1', '453/203', '1963/539', '975/217', '39/7', '1963/301'] from walk
+check by exact K6 of the vertex tuple: ratio, L = (Fraction(84, 43), Fraction(168, 1963)) strictly increasing: True
+K6 of vertex: [('1', '2107/1963'), ('5117/1963', '35/13'), ('119/39', '1421/453'), ('609/151', '8085/1963'), ('9163/1963', '9331/1963'), ('9933/1963', '4991/975'), ('217/39', '217/39'), ('77/13', '903/151'), ('12341/1963', '12397/1963')]

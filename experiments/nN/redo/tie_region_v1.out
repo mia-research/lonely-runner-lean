@@ -1,0 +1,16 @@
+example grid+laps ['1', '10888/10505', '4657/4202', '12392/10505', '13071/10505', '27061/21010', '28101/21010'] | rho_7 = 28101/21010 =1.3375
+path word () | R* = 1 | closer (7, 1) | width 118969/28101
+regions with the same path word AND whose stored reading box (LP ranges, 1e-9 rational rounding of the float bounds; guidance for the box, the path equality is exact) contains the example: [0] [('S', [(1.0, 1.0), (np.float64(1.0), np.float64(7.0)), (np.float64(1.0), np.float64(7.0)), (np.float64(1.0), np.float64(7.0)), (np.float64(1.0), np.float64(7.0)), (np.float64(1.0), np.float64(7.0)), (np.float64(1.0), np.float64(7.0))])]
+regions with path word (): [0, 1] (index 0: box rho_2..rho_7 in [1,7]; index 1: rho_7 = 9 exactly, rho_2..rho_6 in [1,7])
+stored member of region 0 : ['1', '981444729981389/562949953421312', '393321429693737/140737488355328', '2165126707568507/562949953421312', '1378483848181033/281474976710656', '3348808685155625/562949953421312', '7']
+   its windows in [1,23]: [('1', '1'), ('17/7', '985162418487296/393321429693737'), ('25/7', '12947848928690176/3348808685155625'), ('5066549580791808/981444729981389', '17451448556060672/3348808685155625'), ('7', '7')] ... total 14
+   rule x for stored member: [1, 5, 9, 13, 17, 21] readings in I(x) per x: {1: 2, 5: 1, 9: 2, 13: 1, 17: 1, 21: 1}
+example windows in [1,23]: [('1', '147070/28101'), ('9', '105050/9367'), ('17', '483230/28101')]
+window set of the example is stored (label (taxo, grid+laps, 20982)) in: [('win_rec_taxo_17000_v1.pkl', True)]
+J1 pickle win_rec_J1_0_v1.pkl holds label (J1, 0) = the stored member of region 0, not the example.
+--- K1z family: rho_7 = 7+d, rho_6 = 7*rho_7/9, readings 1,2,3,4,5 (landing R* = 9/rho_7)
+  d = 1/10 moves 1 R* 90/71 =9/rho_7? True width 0 first window single point True verify True
+  d = 1/100 moves 1 R* 900/701 =9/rho_7? True width 0 first window single point True verify True
+  d = 1/1000 moves 1 R* 9000/7001 =9/rho_7? True width 0 first window single point True verify True
+  d = 1/1000000 moves 1 R* 9000000/7000001 =9/rho_7? True width 0 first window single point True verify True
+--- near-AP bound (Lean ProgressionPairN hypothesis |d_j - j c| <= c/20): rho_7 = d_7/d_1 >= (7-1/20)/(1+1/20) = 139/21 > 3

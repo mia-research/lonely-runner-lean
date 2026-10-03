@@ -1,0 +1,24 @@
+SAMPLER (52,000): zero-width landings by (moves 0,1,2,3+; integer readings?):
+  moves 0 integer readings count 1672 | smallest rho_7 7 | moves 0 opener None closer (7, 1) R* 1 | family AP deformed
+       readings ['1', '2', '3', '4', '5', '6', '7']
+  moves 0 some non-integer count 2357 | smallest rho_7 7 | moves 0 opener None closer (7, 1) R* 1 | family AP deformed
+       readings ['1', '11/10', '1507/1000', '4', '5', '6', '7']
+  moves 1 integer readings count 5 | smallest rho_7 56 | moves 1 opener (3, 1) closer (7, 8) R* 9/8 | family integers
+       readings ['1', '6', '8', '17', '27', '38', '56']
+  moves 2 integer readings count 3 | smallest rho_7 60 | moves 2 opener (7, 8) closer (4, 5) R* 13/12 | family integers
+       readings ['1', '6', '16', '36', '47', '55', '60']
+  moves 3 integer readings count 63 | smallest rho_7 10 | moves 3 opener (4, 1) closer (7, 2) R* 3/2 | family integers
+       readings ['1', '2', '3', '6', '7', '8', '10']
+  moves 3 some non-integer count 28 | smallest rho_7 3501/500 | moves 6 opener (3, 1) closer (5, 2) R* 3 | family AP deformed
+       readings ['1', '2', '3', '4', '5', '6', '3501/500']
+LAT1 (5,005 integer sets): first window a single point, by (kind, moves): [(('pinch R*>1', 3), 49), (('pinch R*>1', 5), 10), (('pinch R*>1', 7), 2), (('pinch R*>1', 9), 1), (('pinch R*>1', 10), 2), (('start R*=1', 0), 1254)]
+   ('pinch R*>1', 3) smallest rho_7 10 R* 3/2 ['1', '2', '3', '6', '7', '8', '10']
+   ('pinch R*>1', 5) smallest rho_7 15 R* 5/3 ['1', '6', '7', '8', '9', '11', '15']
+   ('pinch R*>1', 7) smallest rho_7 10 R* 5/2 ['1', '4', '5', '6', '7', '8', '10']
+   ('pinch R*>1', 9) smallest rho_7 14 R* 5/2 ['1', '4', '6', '8', '10', '11', '14']
+   ('pinch R*>1', 10) smallest rho_7 11 R* 5/2 ['1', '6', '7', '8', '9', '10', '11']
+   ('start R*=1', 0) smallest rho_7 7 R* 1 ['1', '2', '3', '4', '5', '6', '7']
+CONSTRUCTED:
+   K0z [1..7] R* 1 moves 0 opener None closer (7, 1) width 0 first window (Fraction(1, 1), Fraction(1, 1)) verify True
+   K1z rho_7 = 15/2, rho_6 = 35/6 R* 6/5 moves 1 opener (7, 1) closer (6, 1) width 0 first window (Fraction(6, 5), Fraction(6, 5)) verify True
+   K1z rho_7 = 8, rho_6 = 56/9 R* 9/8 moves 1 opener (7, 1) closer (6, 1) width 0 first window (Fraction(9, 8), Fraction(9, 8)) verify True

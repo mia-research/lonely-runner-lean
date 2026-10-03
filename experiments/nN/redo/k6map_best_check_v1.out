@@ -1,0 +1,11 @@
+vertex tuple ['1', '6559/2279', '26236/6779', '231/47', '26236/4115', '7'] [1.0, 2.87802, 3.87019, 4.91489, 6.3757, 7.0]
+K6 (sweep) == K6 (ceil_k6_lib clear_components): True
+components: [('1', '1', '0'), ('37035/26236', '47/33', '10937/865788'), ('25/7', '94645/26236', '135/3748'), ('115243/26236', '31/7', '135/3748'), ('135795/26236', '34185/6559', '135/3748'), ('38743/6559', '155917/26236', '135/3748'), ('47/7', '47/7', '0'), ('7', '7', '0')]
+L_max = 135/3748 = 0.03601921024546425 | 2/(7 rho_6) = 2/49 0.04081632653061224 | ratio 6615/7496
+endpoints/midpoints clear: True
+points eps outside each component blocked: True
+allowed rho_7 set for the vertex tuple (cap 400): [] count 0
+interior point of the cell found: True
+interior tuple ratio: 0.8824742816324939 components 6
+allowed rho_7 (cap 400): [] count 0
+ratio-of-rho7-to-7rho6 for any allowed value: []
