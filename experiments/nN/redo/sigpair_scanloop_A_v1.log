@@ -1,0 +1,26 @@
+2 2 :: opener 2 closer 2 nodes 13342 done 2538 todo 10804
+this run 10804 nodes 493 s
+2 2 :: opener 2 closer 2 nodes 13342 done 13342 todo 0
+this run 0 nodes 0 s
+4 4 :: opener 4 closer 4 nodes 27813 done 0 todo 27813
+this run 3228 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 3228 todo 24585
+this run 2944 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 6172 todo 21641
+this run 3123 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 9295 todo 18518
+this run 2757 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 12052 todo 15761
+this run 2818 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 14870 todo 12943
+this run 3872 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 18742 todo 9071
+this run 3147 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 21889 todo 5924
+this run 2989 nodes 540 s
+4 4 :: opener 4 closer 4 nodes 27813 done 24878 todo 2935
+this run 2935 nodes 404 s
+4 4 :: opener 4 closer 4 nodes 27813 done 27813 todo 0
+this run 0 nodes 0 s
+6 6 :: opener 6 closer 6 nodes 35667 done 0 todo 35667
+this run 2180 nodes 540 s

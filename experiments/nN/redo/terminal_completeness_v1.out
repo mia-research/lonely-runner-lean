@@ -1,0 +1,7 @@
+(1,6) -> outcome pair (1, 6) width 0.03874 R* 9 moves 20 rho_7 7.260 | path is a terminal path: False | is a proper prefix of a terminal path: True
+(1,7) -> outcome pair (1, 7) width 0.01816 R* 9 moves 23 rho_7 7.873 | path is a terminal path: False | is a proper prefix of a terminal path: True
+(2,1) -> outcome pair (2, 1) width 0.18801 R* 2500/367 moves 18 rho_7 7.817 | path is a terminal path: False | is a proper prefix of a terminal path: True
+(5,1) -> outcome pair (5, 1) width 0.19444 R* 245/36 moves 25 rho_7 13.180 | path is a terminal path: True | is a proper prefix of a terminal path: False
+(1,2) -> outcome pair (1, 2) width 0.06433 R* 9 moves 24 rho_7 8.160 | path is a terminal path: False | is a proper prefix of a terminal path: True
+(1,3) -> outcome pair (1, 3) width 0.24171 R* 9 moves 21 rho_7 7.250 | path is a terminal path: False | is a proper prefix of a terminal path: True
+taxonomy-sample arrangements with rho_7 <= 17: 24022 | path not a terminal path: 23527 (proper prefix of a terminal path: 23527 , not even a prefix: 0 )
