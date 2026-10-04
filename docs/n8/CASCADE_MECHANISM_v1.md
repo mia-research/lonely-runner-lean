@@ -1,4 +1,6 @@
-# How the cascade converts an arrangement into an outcome (v1, 2026-10-04, DRAFT)
+# How the cascade converts an arrangement into an outcome (v1, 2026-10-04, DRAFT) -- PARTIAL: this is NOT the full mechanism
+
+**Status (owner correction, 2026-10-04):** this document describes the conversion of an arrangement into the landing and the structure of the gate-crossed outcomes. It does NOT explain why an unblocked point always exists (why the isolation is forced). The record's own mechanism for that (isolation moves under deformation; it can only die at a pinch, and at a pinch another window is open: E277, E280, `PinchOpenN`, the pair law; statement (T) owed) is not mapped here. Read it as a partial map.
 
 Built from `GATE_LEMMAS_v1.md` (proofs; fresh-context review done) and the findings index v5. Labels: [P] proved by hand in `GATE_LEMMAS_v1.md`; [L] Lean; [T n/N] exact test; [OBS] observed, not derived; [TREE] complete region tree (float-LP, up to rho_7 = 25). Objects: readings 1 = rho_1 < ... < rho_7; zones ((8j-1)/rho, (8j+1)/rho); R = 1 start; states; setters; windows.
 
