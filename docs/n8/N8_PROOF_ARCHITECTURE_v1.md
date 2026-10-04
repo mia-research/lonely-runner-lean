@@ -1,0 +1,26 @@
+# What a proof of n = 8 would consist of, in the cascade's terms: what is in hand and what is not (v1, 2026-10-04, DRAFT)
+
+No verdict words here without a [P] or [L]. Labels: [P] proved by hand in `GATE_LEMMAS_v1.md`; [L] Lean; [TREE] complete region tree up to rho_7 = 25 (float-LP, exact members, no certificates for pruned branches); [OBS] observed; [OWED] not done.
+
+## 1. The statement to prove (cascade objects)
+For every arrangement (readings 1 = rho_1 < ... < rho_7, d_min = 1, all positive and distinct) some R >= 1 is unblocked: R lies in no zone ((8j-1)/rho_y, (8j+1)/rho_y). Equivalently the carved window set is non-empty in some window [8m+1, 8m+7] of d_min. Observed: m = 0 or 1 always (the landing is below 11.97 in the tree).
+
+## 2. What the cascade's mechanism supplies [P]
+Conversion and carving (the landing is the least point of the intersection of seven periodic clear sets); the gate (L1(a)-(c)); one window per zone (L2); reading 7 crosses every window of K_6 and the number of its moves (L3); the closer (L4); the staircase and step ratio (L5); the link rule (L6, Lean); a crossing region is open and bounded only by touches (L7). **None of these says that K_7 is non-empty or that the second carving is non-empty.** They describe how the isolation is reached once it exists, and they constrain what an arrangement with no isolation in the first window must look like (a crosser: all six-reading windows covered by reading 7's zones, a slow-pair ladder, at least 9 moves, readings bounded by the staircase).
+
+## 3. The two halves of an exhaustion proof, and where each stands
+**(a) Finitely many types plus d_min, d_max and scale cover every arrangement.**
+- Normalisation [L, `ArrangementShapeN.reduction_iff`, read, build not rechecked here]: every arrangement is an affine rescaling of one ordered shape (six free values).
+- Gate-crossed outcomes (landing past 7): in the tree they form a family that is closed up to rho_7 = 25 (7,947 regions; the slow pair's chain has 28 variants; 52 zones) [TREE]; closedness for all rho_7 [OWED]: a bound on the laps of the fast reading that take part (the touch alphabet must stay finite, L7).
+- Landing at most 7: the chains grow with the window because sub-clusters of readings at larger scales enter [TREE]; the reduction of a cluster at its own scale to a smaller arrangement [OWED, untested beyond a count].
+**(b) The cascade lands for each type.** Inside the window rho_7 <= 25 the tree gives, for every region (path class), a landing (the sup is 11.966) [TREE]; making this a proof needs exact certificates for the pruned LP branches and for cells thinner than the slack [OWED] (the 7,003 J=2 regions without a member and the thin cells are the places a hole could hide). Beyond rho_7 = 25, only the large-ratio rule R8 (a reading more than 7 times the next: record, Lean `lonely_eight_of_fast`) is available; the case "all consecutive ratios bounded but rho_7 > 25" is the scale-free hole of the record (`ArrBoundedCovered8`) [OWED].
+
+## 4. The step that carries the infinite part: the scale reduction [OWED; precisely stated]
+Let c be the ratio between d_min and the slowest of a group of readings x_2..x_7 (readings c x_y). The cascade from R = 1 sees positions R c x_y mod 8, i.e. the cluster's own cascade at time R' = c R; the window [1,7] of d_min becomes the window [c, 7c] of the cluster's own clock. So the arrangement has an isolation in its first window iff the six-reading cluster has an unblocked point in [c, 7c] (on its own clock), where reading 1 contributes nothing there. For c large this is a long window of the cluster's clear set, and for c bounded the arrangement is inside a finite window of the tree. What a proof needs here is a statement about the cluster alone: its unblocked set (the order-seven problem, margin 1/7 against the 1/8 used here) meets every window of length 6c, with a gap bound that depends only on the cluster's spread (x_max/x_min) and not on c. Whether the record's order-seven slack (cells of length at least 1/(28 x_max) in time, somewhere) can be made into such a recurrence bound is the open question; the cluster's lonely cells recur (the record's `HandoffResonance` and `LapDeadline` modules give the exact ledger) but no gap bound is stated there.
+
+## 5. Order of work toward a proof, each step in the cascade's own objects
+1. Exactness of the tree: Farkas certificates for every pruned branch and a rational treatment of thin cells, so that "every region lands" is a theorem for rho_7 <= 25.
+2. The touch alphabet of the crossing family is finite: bound the laps of reading 7 (and of readings 5, 6) in the touches (L7); then the gate-crossed outcomes are a finite union of cells for all rho_7.
+3. The scale reduction of section 4: a recurrence bound for the six-reading cluster's unblocked set, stated through zones, exits and laps (not lengths of windows).
+4. R8 and the record's other rules cover the large-ratio cases; check that rho_7 > 25 with bounded ratios is exactly the cluster case of step 3.
+Until 1-3 are done the status of n = 8 in this framework is: established by exhaustive tree for every arrangement with rho_7 <= 25 up to the float-LP caveat [TREE]; open beyond.
