@@ -1,0 +1,10 @@
+crossing regions: distinct zones (rank,lap) used on their paths, distinct links (zone -> next zone):
+  J=1: zones 47, links 252
+  J=2: zones 51, links 281
+  J=3: zones 52, links 294
+new links J=1->2: 29 | J=2->3: 13 | links in J=1 not in J=3: 0
+new zones J=2->3: [(7, 16)]
+new links J=2->3: [((4, 2), (7, 12)), ((4, 3), (7, 18)), ((5, 2), (7, 10)), ((5, 4), (7, 16)), ((6, 1), (7, 4)), ((6, 3), (7, 11)), ((7, 3), (6, 1)), ((7, 4), (5, 1)), ((7, 10), (6, 3)), ((7, 11), (5, 3)), ((7, 12), (3, 2)), ((7, 16), (2, 2)), ((7, 18), (5, 4))]
+links by the larger lap of the pair (J=3): [(1, 9), (2, 20), (3, 27), (4, 40), (5, 45), (6, 39), (7, 37), (8, 23), (9, 28), (10, 7), (11, 3), (12, 5), (13, 4), (16, 2), (17, 2), (18, 3)]
+rank pairs (current -> next) with at least one link:  42 of 42 possible (7*7 minus the diagonal, which never occurs)
+rank pairs absent: []
