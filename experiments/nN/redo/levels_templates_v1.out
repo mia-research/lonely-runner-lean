@@ -1,0 +1,8 @@
+crossers 16151 | non-crossers sample 16151
+gate crossers : distinct templates of K_k, k = 2..7: [(2, 7), (3, 29), (4, 87), (5, 137), (6, 115), (7, 1)]
+non-crossers (equal size) : distinct templates of K_k, k = 2..7: [(2, 23), (3, 752), (4, 5618), (5, 12485), (6, 15193), (7, 15426)]
+crossers, K_3 templates, cumulative by random order: [(500, 19), (2000, 24), (5000, 25), (10000, 28), (16151, 29)]
+crossers, K_4 templates, cumulative by random order: [(500, 48), (2000, 65), (5000, 77), (10000, 83), (16151, 87)]
+crossers, K_5 templates, cumulative by random order: [(500, 71), (2000, 101), (5000, 118), (10000, 135), (16151, 137)]
+crossers, K_6 templates, cumulative by random order: [(500, 59), (2000, 80), (5000, 97), (10000, 110), (16151, 115)]
+crossers: distinct vectors (moves by readings 2..7 before the gate): 188 | largest class 806
