@@ -1,0 +1,15 @@
+expanded cells 6826  float LP closure max of rho_7: largest 24.400841514726505  cells above 24: 4 above 20: 5 above 16.5: 5 above 9: 276
+exact (Fraction LP with Farkas certificate) closure maxima of rho_7, 12 largest float cells:
+  86989/3565 = 24.400841515  (cell ea6e5aba; vertex is a gate crosser: False)
+  434231/17825 = 24.360785414  (cell e7bd0191; vertex is a gate crosser: False)
+  217/9 = 24.111111111  (cell de90e418; vertex is a gate crosser: False)
+  217/9 = 24.111111111  (cell 5c9eb86a; vertex is a gate crosser: False)
+  215/9 = 23.888888889  (cell 698cf541; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell eb9c3d86; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell bd8a09b9; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell b4bba663; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell abc637b3; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell 8195f73d; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell 63d3b14b; vertex is a gate crosser: False)
+  511/31 = 16.483870968  (cell 2aa15363; vertex is a gate crosser: False)
+reached cells (expanded + frontier): 14325  largest rho_7 of an entry point 24.380420757194692  entry points with rho_7 > 17: 7

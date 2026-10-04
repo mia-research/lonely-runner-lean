@@ -1,0 +1,7 @@
+cells sampled 120 rows tested 29940
+   -1e-6 < t <= 0 95
+   1e-5 < t <= 1e-3 169
+   lp-infeasible 840
+   t <= -1e-6 (no facet) 27528
+   t > 1e-3 1308
+Chebyshev margin of the cells: min 3.653e-04  median 3.853e-03  max 2.410e-02

@@ -1,0 +1,4 @@
+generic 1 | strictly increasing: True | landing 23567251/2537242 = 9.2885 | rho_7 = 7.8832 | opener (3, 5) closer (4, 6) | moves 23 | reading 1 sets: True | every K6 window inside one reading-7 zone: True
+   K6 template: [(('R1',), ('e6.1',), False), (('x6.3',), ('e5.3',), False), (('x5.4',), ('e4.4',), False), (('x2.3',), ('R7',), False)]
+generic 2 | strictly increasing: True | landing 39893902/4319909 = 9.2349 | rho_7 = 8.1071 | opener (4, 5) closer (2, 3) | moves 20 | reading 1 sets: True | every K6 window inside one reading-7 zone: True
+   K6 template: [(('x4.1',), ('e6.2',), False), (('x4.2',), ('e5.3',), False), (('x5.4',), ('e2.2',), False), (('x2.2',), ('e5.5',), False)]

@@ -1,0 +1,5 @@
+E344 extremal member (b12_A_x0)          gate crosser True  rho7 7.67739  moves 27  cell reached: False  expanded: False
+X7                                       gate crosser True  rho7 16.20795  moves 23  cell reached: True  expanded: True
+rho6 8.1512 walk member                  gate crosser True  rho7 8.78581  moves 27  cell reached: True  expanded: False
+pivot7b best member (rho7 24.40)         gate crosser True  rho7 24.38042  moves 24  cell reached: True  expanded: True
+pivot7 best member (rho7 16.48)          gate crosser True  rho7 16.21086  moves 22  cell reached: True  expanded: True

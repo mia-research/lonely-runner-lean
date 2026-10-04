@@ -1,0 +1,4 @@
+expanded cells 6826 cells where the entry point and the interior centre have different templates: 96
+cells whose centre template is outside the 115: 23  entry template outside: 21
+cells with ntmpl (templates over entry, centre, crossing neighbours) > 1: 5268
+unexpanded reached cells whose entry point template is outside the 115: 20 of 7499

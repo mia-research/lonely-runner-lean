@@ -1,0 +1,21 @@
+MODE unb run 3 expanded this run 704 total expanded 1527 cells seen 4371 queue 2844 elapsed total 1144 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 119 fail 0
+templates seen 121 outside 115: 8 losses 7307 edges 17929
+MODE unb run 4 expanded this run 793 total expanded 2320 cells seen 6444 queue 4124 elapsed total 1714 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 150 fail 0
+templates seen 121 outside 115: 8 losses 10466 edges 27701
+MODE unb run 5 expanded this run 845 total expanded 3165 cells seen 7650 queue 4485 elapsed total 2284 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 184 fail 0
+templates seen 121 outside 115: 8 losses 14807 edges 37599
+MODE unb run 6 expanded this run 882 total expanded 4047 cells seen 9268 queue 5221 elapsed total 2855 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 219 fail 0
+templates seen 121 outside 115: 8 losses 18273 edges 48132
+MODE unb run 7 expanded this run 908 total expanded 4955 cells seen 10863 queue 5908 elapsed total 3430 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 256 fail 0
+templates seen 121 outside 115: 8 losses 21863 edges 59001
+MODE unb run 8 expanded this run 948 total expanded 5903 cells seen 12799 queue 6896 elapsed total 4005 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 294 fail 0
+templates seen 121 outside 115: 8 losses 24834 edges 70653
+MODE unb run 9 expanded this run 923 total expanded 6826 cells seen 14325 queue 7499 elapsed total 4580 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 331 fail 0
+templates seen 121 outside 115: 8 losses 28511 edges 81933

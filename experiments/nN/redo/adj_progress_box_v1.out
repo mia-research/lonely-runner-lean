@@ -1,0 +1,3 @@
+MODE box run 1 expanded this run 895 total expanded 895 cells seen 2944 queue 2049 elapsed total 560 s
+degenerate/unexpanded 0 unresolved facets 0 selfloops 0 center-sig checks 93 fail 0
+templates seen 121 outside 115: 8 losses 4518 edges 10488
