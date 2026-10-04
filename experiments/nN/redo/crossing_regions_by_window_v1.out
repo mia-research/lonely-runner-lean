@@ -1,0 +1,6 @@
+window | regions | regions with landing range reaching above 7 | with the whole range above 7 | distinct paths among those | largest rho_7 upper bound of those regions | kinds
+J=1 (rho_7 <= 9):    19,679 |  8,006 |  7,855 |  4,332 | 9.0000 | {'T': 4983, 'S': 2872}
+J=2 (rho_7 <= 17):   293,333 |  8,099 |  7,940 |  4,395 | 16.4839 | {'T': 5046, 'S': 2894}
+J=3 (rho_7 <= 25): 1,878,060 |  8,106 |  7,947 |  4,402 | 24.4008 | {'T': 5052, 'S': 2895}
+J=3 crossing-region paths not among J=2's: 7 | their rho_7 ranges: min lower bound 23.000, max upper bound 24.4008
+J=3 crossing regions with rho_7 upper bound above 17: 7

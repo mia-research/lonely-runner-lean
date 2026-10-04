@@ -1,0 +1,7 @@
+loaded 1878060 regions in 9 s
+kinds: {'S': 1130474, 'T': 747586}
+distinct paths: 670641
+X24: path of 24 moves is a region path: True | inside a region's reading box: True | region kinds: ['T']
+regions whose landing range reaches above 7: 8106 | with the whole range above 7: 7947
+largest rho_7 upper bound over regions with Rlo > 7: 24.4008
+3000 gate-crossing seeds with rho_7 <= 25: 3000 | path found among J=3 regions and inside a region's box: 3000 | missing: 0
