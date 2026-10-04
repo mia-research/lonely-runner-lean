@@ -1,0 +1,36 @@
+OUTCOME CATALOGUE by region (opener = the zone whose exit is the landing = last move of the path; window A = landing <= 7, B = landing >= 9 (gate crossed), M = the region's marginal landing range straddles 7)
+window | regions | distinct openers (rank,lap) | (opener rank, window) classes | no-move regions | M regions
+J=1 (rho_7<=9):    19,679 |  46 |  14 | 2 | 0
+J=2 (rho_7<=17):   293,333 |  49 |  14 | 13 | 0
+J=3 (rho_7<=25): 1,878,060 |  65 |  14 | 49 | 0
+
+regions per (opener rank, window), J=1 / J=2 / J=3:
+  opener None window A:         2 /        13 /        49
+  opener 1 window B:       618 /       640 /       640
+  opener 2 window A:       996 /    22,219 /   126,401
+  opener 2 window B:       724 /       740 /       740
+  opener 3 window A:     1,787 /    40,903 /   231,787
+  opener 3 window B:       454 /       473 /       476
+  opener 4 window A:     2,322 /    50,805 /   328,211
+  opener 4 window B:     1,064 /     1,064 /     1,064
+  opener 5 window A:     2,305 /    54,076 /   362,513
+  opener 5 window B:       904 /       912 /       913
+  opener 6 window A:     2,052 /    55,068 /   404,919
+  opener 6 window B:     1,473 /     1,487 /     1,490
+  opener 7 window A:     2,361 /    62,310 /   416,234
+  opener 7 window B:     2,617 /     2,623 /     2,623
+
+lap range of the opener per (rank, window) at J=3:
+  opener 1 window B: laps 1..1
+  opener 2 window A: laps 1..7
+  opener 2 window B: laps 3..5
+  opener 3 window A: laps 1..7
+  opener 3 window B: laps 4..6
+  opener 4 window A: laps 1..8
+  opener 4 window B: laps 5..6
+  opener 5 window A: laps 1..10
+  opener 5 window B: laps 5..8
+  opener 6 window A: laps 1..14
+  opener 6 window B: laps 7..9
+  opener 7 window A: laps 1..20
+  opener 7 window B: laps 8..18
