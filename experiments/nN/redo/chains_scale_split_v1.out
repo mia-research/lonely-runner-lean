@@ -1,0 +1,11 @@
+window A (landing <= 7): distinct chains with laps after dropping the top m readings, split by the box of reading 2
+rho_2 <= 9 (reading 2 inside the first strip)
+   top 0 dropped: J=1    8,267 | J=2   133,715 | J=3   611,124
+   top 1 dropped: J=1    1,736 | J=2    20,499 | J=3    73,265
+   top 2 dropped: J=1      433 | J=2     2,876 | J=3     7,486
+   top 3 dropped: J=1       83 | J=2       351 | J=3       753
+rho_2 can exceed 9 (scale separated from d_min)
+   top 0 dropped: J=1        0 | J=2     2,715 | J=3    56,536
+   top 1 dropped: J=1        0 | J=2       638 | J=3    12,649
+   top 2 dropped: J=1        0 | J=2       243 | J=3     3,051
+   top 3 dropped: J=1        0 | J=2        78 | J=3       659

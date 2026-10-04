@@ -1,0 +1,13 @@
+distinct chains after dropping the top m readings (and reading 1); A = landing <= 7, B = past the gate
+with laps:
+  top 0 dropped: A   8,267   136,332   666,239 | B  4,331  4,394  4,401   (J = 1, 2, 3)
+  top 1 dropped: A   1,736    21,053    85,172 | B  1,597  1,615  1,617   (J = 1, 2, 3)
+  top 2 dropped: A     433     3,084    10,315 | B    464    469    469   (J = 1, 2, 3)
+  top 3 dropped: A      83       414     1,339 | B    153    155    155   (J = 1, 2, 3)
+  top 4 dropped: A      25        81       219 | B     28     28     28   (J = 1, 2, 3)
+ranks only (no laps):
+  top 0 dropped: A   8,217   107,634   371,657 | B  3,884  3,947  3,951   (J = 1, 2, 3)
+  top 1 dropped: A   1,725    16,200    45,126 | B  1,402  1,420  1,422   (J = 1, 2, 3)
+  top 2 dropped: A     422     2,006     4,713 | B    378    383    383   (J = 1, 2, 3)
+  top 3 dropped: A      80       219       464 | B    110    111    111   (J = 1, 2, 3)
+  top 4 dropped: A      23        35        64 | B     19     19     19   (J = 1, 2, 3)
