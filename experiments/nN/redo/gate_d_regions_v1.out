@@ -1,0 +1,4 @@
+regions: 1878060 | regions whose whole landing range is above 7: 7947 | of these with NO move by reading 1 in the path: 1 | regions with a range straddling 7: 159
+first: ((7, 1), (6, 1), (5, 1), (4, 1), (7, 2), (6, 2), (3, 1), (5, 2), (2, 1), (4, 2)) (np.float64(7.000000000000001), np.float64(7.000000000000001))
+laps of reading 1's move in crossing regions: {1: 7946} | number of moves after reading 1's move (phase 2 length): [(0, 640), (1, 1395), (2, 2250), (3, 1833), (4, 1182), (5, 434), (6, 137), (7, 57), (8, 17), (9, 1)]
+regions with a reading-1 move and landing range <= 7: 0
