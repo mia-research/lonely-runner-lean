@@ -1,0 +1,16 @@
+# Bounded discovery task: exact cluster transfer reductions
+
+Work only in `/Users/trentpalelei/Desktop/Math Ex/LonelyRunner/experiments/nN/redo/`, with new files prefixed `cluster_transfer_claude_v1`. Do not edit Lean, existing scripts, logs or Git state. Use apply_patch for file edits. No agents, multiprocessing, background jobs, installations or network. One foreground Python process, at most 2,000 arrangements and 60 seconds of computation (enforce with a monotonic deadline); cap any cascade at 300 moves and report unfinished cases separately. Never infer termination from the cap. Keep output below 100 KB. No per-case printing except bounded counterexamples. Do not use Python stdin for multiprocessing. The previous orphan Python process was killed after generating 31 GB of errors; do not repeat it.
+
+Read relevant existing exact cascade code before reusing it; do not import a script with unguarded expensive top-level work. Read `cluster_window_v1.py`, `chains_modulo_cluster_v1.py`, and the main running-log entries E339, E350, E373, E377 if useful. Do not repeat a rejected experiment without explaining the difference.
+
+Goal: identify exact hypotheses under which apparent larger arrangements reduce to a normalized cluster while preserving the actual isolation witness. Not density, frequency or move-budget proof. All arithmetic Fraction/integer, no float LP.
+
+Use R=8*d_min*t, normalized readings rho>=1. Split into slow readings and a cluster rho_i=c*x_i. With R=a+u/c, the cluster phase is phi_i=a*c*x_i modulo 8. Its readings are phi_i+x_i*u modulo 8. Slow readings remain a*s+(s/c)*u. On an interval [A,B] where all slow readings are clear, they are inert. Compare the actual maximum-exit cascade against this phased cluster cascade while its states remain in [A,B]. Preserve strict capture and inclusive clear boundaries, ties and singleton windows. Stop the comparison at interval exit, not silently beyond it.
+
+Deliverables:
+1. Independently implement/check this conjugacy with exact fractions on bounded families, including c large, near-boundary phases and ties. Separate identity checks from substantive discovery.
+2. Find small explicit counterexamples to dropping the phase or restarting the normalized cluster at its own first opening. If already known, cite rather than claim new discovery.
+3. Test a finite-window sufficient reduction: when two phased cluster configurations give the same ordered blocking intervals clipped to an admissible slow-clear interval, their first clear point in that interval agrees. Identify which endpoint/order inequalities are sufficient to certify a common symbolic mechanism even when numerical endpoints differ. Do not mistake equal rank words for equal transfer maps.
+4. Inspect train-collapse applicability: clusters C union (N+E), |C|+|E|<=7, core/offsets <=m, N>=56m, pair i<j in E with no offset midpoint. Suggest how catalogue families can be recognized as this already-proved family, not counted anew for each N.
+5. Report useful candidate parameterized rules and exact failed hypotheses. No claim of universal finite catalogue. Include script, compact output, <=1500-word report and concise final summary with counts/caps. Do not commit or push.

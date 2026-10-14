@@ -1,0 +1,1 @@
+pieces 12600 stack 6 types 520 counter 0 elapsed 111s

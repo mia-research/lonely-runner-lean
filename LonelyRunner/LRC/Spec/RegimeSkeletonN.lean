@@ -79,6 +79,34 @@ theorem lonely_of_gridStep8 {S : Finset ℕ} {m M : ℕ} (hS : S.Nonempty) (hpos
   · exact lonely_of_boundClear8 hm h
   · exact lonely_of_gridClass8 hS hpos hg
 
+/-- A grid with step at least half the nearest reading puts that reading on lap zero or
+one at every permitted class. Thus `GridStep8 S m 2` supplies isolation with nearest reading
+`8*m*t` between 1 and 15. This is a consequence of the proposed covering, not a proof of it. -/
+theorem gridStep8_two_bounded {S : Finset ℕ} {m : ℕ}
+    (hpos : ∀ d ∈ S, 0 < d) (hmS : m ∈ S) (h : GridStep8 S m 2) :
+    ∃ t : ℝ, 0 < t ∧ 1 ≤ 8 * m * t ∧ 8 * m * t ≤ 15 ∧
+      ∀ d ∈ S, (8 : ℝ)⁻¹ ≤ circDist ((d : ℝ) * t) := by
+  have hm : (0 : ℝ) < m := by exact_mod_cast hpos m hmS
+  rcases h with hb | ⟨e, heS, mm, c, _, hstep, hc, k, hgrid, hpair⟩
+  · refine ⟨1 / (8 * m), by positivity, ?_, ?_, hb⟩ <;>
+      field_simp <;> nlinarith
+  · obtain ⟨n, _, hn, _, hkm⟩ := hgrid m hmS
+    have he : 0 < e := hpos e heS
+    have hn2 : n ≤ 2 := by nlinarith
+    have hk : k m ≤ 1 := by
+      rcases hc with rfl | rfl | rfl | rfl <;> omega
+    obtain ⟨t, ht, hblocks⟩ := LRC.TwoBlock.exists_in_assigned_blocks
+      ⟨m, hmS⟩ hpos k hpair
+    have hbm := hblocks m hmS
+    have hkR : (k m : ℝ) ≤ 1 := by exact_mod_cast hk
+    refine ⟨t, ht, ?_, by linarith, ?_⟩
+    · have : (0 : ℝ) ≤ k m := by positivity
+      linarith
+    · intro d hd
+      obtain ⟨h1, h2⟩ := hblocks d hd
+      exact LRC.TwoPinner.clear_of_band (N := k d) (by push_cast; nlinarith)
+        (by push_cast; nlinarith)
+
 /-- **The conjecture at eight runners from the spread-free covering**, for any step bound `M`.  No Case A/B/C split. -/
 theorem lonelyRunnerAt8_of_cover8 (M : ℕ) (h : Cover8 M) : LRC.Spec.LonelyRunnerAt8 :=
   LRC.EndRunner.lonelyRunnerAt8_of_slowest fun v hv _ => by

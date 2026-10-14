@@ -129,4 +129,27 @@ theorem lonely_eight_of_pairwise_laps {S : Finset ℕ} (hS : S.Nonempty) (hpos :
     exact_mod_cast h
   · exact hpair e heS d hd
 
+/-- Pairwise lap compatibility supplies a single instant in every assigned clear block.
+Unlike the loneliness-only wrapper, this retains the lap bounds for subsequent transport. -/
+theorem exists_in_assigned_blocks {S : Finset ℕ} (hS : S.Nonempty)
+    (hpos : ∀ d ∈ S, 0 < d) (k : ℕ → ℕ)
+    (hpair : ∀ d ∈ S, ∀ d' ∈ S,
+      (8 * k d + 1) * d' ≤ (8 * k d' + 7) * d) :
+    ∃ t : ℝ, 0 < t ∧ ∀ d ∈ S,
+      (8 * (k d : ℝ) + 1) ≤ 8 * d * t ∧ 8 * d * t ≤ 8 * k d + 7 := by
+  classical
+  obtain ⟨e, heS, hmax⟩ := S.exists_max_image
+    (fun d : ℕ => (8 * (k d : ℝ) + 1) / (8 * d)) hS
+  have he : (0 : ℝ) < e := by exact_mod_cast hpos e heS
+  refine ⟨(8 * (k e : ℝ) + 1) / (8 * e), by positivity, ?_⟩
+  intro d hd
+  have hd0 : (0 : ℝ) < d := by exact_mod_cast hpos d hd
+  constructor
+  · have h := (div_le_iff₀ (by positivity : (0 : ℝ) < 8 * d)).mp (hmax d hd)
+    nlinarith
+  · have hp : (8 * (k e : ℝ) + 1) * d ≤ (8 * (k d : ℝ) + 7) * e := by
+      exact_mod_cast hpair e heS d hd
+    rw [← mul_div_assoc, div_le_iff₀ (by positivity)]
+    nlinarith
+
 end LRC.TwoBlock

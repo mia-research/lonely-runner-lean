@@ -1,0 +1,676 @@
+theorem end_1_2 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 2) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_1_3 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 3) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_1_4 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 4) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_1_5 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 5) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_1_6 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 6) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_1_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 1 m) := by
+  subst hx
+  rw [homeEndT, if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_2_1 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 1) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_2_3 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 3) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_2_4 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 4) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_2_5 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 5) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 2) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 2) <;> norm_num
+
+theorem end_2_6 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 6) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 2) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 2) <;> norm_num
+
+theorem end_2_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 2 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 3) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 3) <;> norm_num
+
+theorem end_3_1 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 1) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_3_2 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 2) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_3_4 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 4) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_3_5 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 5) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_3_6 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 6) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_3_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 3 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 2) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 2) <;> norm_num
+
+theorem end_4_1 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 1) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_4_2 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 2) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_4_3 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 3) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_4_5 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 5) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_4_6 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 6) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_4_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 4 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (5 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 5) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_5_1 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 1) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_5_2 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 2) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_5_3 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 3) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_5_4 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 4) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_5_6 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 6) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_5_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 5 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  split_ifs with hd
+  · have hmin : (2 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 2) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem end_6_1 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 1) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_6_2 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 2) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_6_3 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 3) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_6_4 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 4) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_6_5 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 5) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 0) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 0) <;> norm_num
+
+theorem end_6_7 (m : ℕ) (hm : 1 ≤ m) (x : ℤ) (hx : x = 7) :
+    (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * homeEndT 6 m) := by
+  subst hx
+  rw [homeEndT, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num)]
+  split_ifs with hd
+  · have hmin : (7 : ℝ) ≤ m := by exact_mod_cast Nat.le_of_dvd (by omega) hd
+    have h0 : (0 : ℝ) ≤ 1 / (64 * (m : ℝ)) := by positivity
+    have h1 : 1 / (64 * (m : ℝ)) ≤ 1 / (64 * 7) :=
+      one_div_le_one_div_of_le (by norm_num) (by linarith)
+    apply LRC.TwoPinner.clear_of_band (N := 1) <;> push_cast <;> linarith
+  · apply LRC.TwoPinner.clear_of_band (N := 1) <;> norm_num
+
+theorem fx_1_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_1_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_1_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_1_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_1_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_1_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_1_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 1) := by
+  subst hx
+  rw [farEx, if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_2_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_2_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_2_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_2_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_2_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_2_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_2_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 2) := by
+  subst hx
+  rw [farEx, if_neg (show (2 : ℕ) ≠ 1 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_3_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_3_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_3_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_3_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_3_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_3_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_3_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 3) := by
+  subst hx
+  rw [farEx, if_neg (show (3 : ℕ) ≠ 1 by norm_num), if_neg (show (3 : ℕ) ≠ 2 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_4_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_4_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_4_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_4_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_4_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_4_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_4_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 4) := by
+  subst hx
+  rw [farEx, if_neg (show (4 : ℕ) ≠ 1 by norm_num), if_neg (show (4 : ℕ) ≠ 2 by norm_num), if_neg (show (4 : ℕ) ≠ 3 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_5_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -3) <;> norm_num
+
+theorem fx_5_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -3) <;> norm_num
+
+theorem fx_5_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_5_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_5_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_5_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_5_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 5) := by
+  subst hx
+  rw [farEx, if_neg (show (5 : ℕ) ≠ 1 by norm_num), if_neg (show (5 : ℕ) ≠ 2 by norm_num), if_neg (show (5 : ℕ) ≠ 3 by norm_num), if_neg (show (5 : ℕ) ≠ 4 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_6_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -4) <;> norm_num
+
+theorem fx_6_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -4) <;> norm_num
+
+theorem fx_6_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -3) <;> norm_num
+
+theorem fx_6_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -3) <;> norm_num
+
+theorem fx_6_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_6_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -2) <;> norm_num
+
+theorem fx_6_1 (x : ℤ) (hx : x = -1) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 6) := by
+  subst hx
+  rw [farEx, if_neg (show (6 : ℕ) ≠ 1 by norm_num), if_neg (show (6 : ℕ) ≠ 2 by norm_num), if_neg (show (6 : ℕ) ≠ 3 by norm_num), if_neg (show (6 : ℕ) ≠ 4 by norm_num), if_neg (show (6 : ℕ) ≠ 5 by norm_num), if_pos rfl]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_8 (x : ℤ) (hx : x = -8) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_7 (x : ℤ) (hx : x = -7) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_6 (x : ℤ) (hx : x = -6) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_5 (x : ℤ) (hx : x = -5) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_4 (x : ℤ) (hx : x = -4) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_3 (x : ℤ) (hx : x = -3) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num
+
+theorem fx_7_2 (x : ℤ) (hx : x = -2) : (8 : ℝ)⁻¹ ≤ circDist ((x : ℝ) * farEx 7) := by
+  subst hx
+  rw [farEx, if_neg (show (7 : ℕ) ≠ 1 by norm_num), if_neg (show (7 : ℕ) ≠ 2 by norm_num), if_neg (show (7 : ℕ) ≠ 3 by norm_num), if_neg (show (7 : ℕ) ≠ 4 by norm_num), if_neg (show (7 : ℕ) ≠ 5 by norm_num), if_neg (show (7 : ℕ) ≠ 6 by norm_num)]
+  apply LRC.TwoPinner.clear_of_band (N := -1) <;> norm_num

@@ -1,0 +1,102 @@
+# `o` by resonance — v2: two retractions of my own, and the limits upgraded to PROVED
+
+2026-09-09. **Supersedes `O_RESONANCE_v1.md`.** Two claims in v1 were mine and both are
+corrected below; separately, v1's central heuristic is replaced by an exact identity, so
+the class limits move from `[DERIVED]` to `[PROVED]`. Full working:
+`reports/n8_o_rate.md`; scripts `experiments/n8/{ob_*,hp_*,rt_*}.py`.
+
+## 1. Retraction — the "speeds ≤ 295" row  `[my error]`
+
+v1 §4 said:
+
+> `| resonant families A and B, speeds ≤ 295 | 3409 | A: 16/35, B: 26/77 | (1,3,5,7), (1,11,5,7) | 0 |`
+
+`hp_reshunt_v1.py` enumerates a **parameter box** `a,b,c ≤ 12` with
+`e = (8a+1, 8b+3, 8c+5, 8d+7)`, not a speed box, and its printed bound `8·3·CAP+7 = 295`
+was simply wrong: `d = b+c−a ≤ 2·CAP`, so the true maximum speed is `8·2·12+7 = 199`.
+Recomputed here with the script's own filters: the box holds **3409** tuples (the count
+is right) with maximum speed **199**. The primitive tuples on either relation with *every*
+speed `≤ 295` number **64 256**, so the row covered **5.3%** of what its label claimed.
+The script has been corrected in place.
+
+The two maxima quoted in the row are unaffected — both are attained at speed `≤ 11`. And
+the row is now superseded by genuinely speed-exhaustive censuses (§4).
+
+**Also a labelling inconsistency in the same table**: the row "exhaustive, all tuples,
+speeds ≤ 71 | 6561" counts *all* unit 4-tuples, while the next row's 5544 is the
+*primitive* non-resonant count. Both numbers are correct; the populations differ and the
+table did not say so. (The all-tuples non-resonant count is 5592; the primitive count at
+speeds ≤ 71 is 6470.)
+
+## 2. Retraction — `65/256`  `[my error; the number is now UNRESOLVED]`
+
+v1 §3 listed "`65/256 ≈ 0.25391`" as the limit for "the next height class". I took that
+figure from an **unlabelled** line of `hp_resonance_limit_v1.py`'s output and supplied
+the label myself. The exhaustive class enumeration (§3 below) produces **no class with
+limit `65/256`**: the rank-1 limits at height `≤ 3` are `1/6, 1/8, 5/48, 11/108, 19/216,
+25/288, 1/12, 7/96, 1/24`, and the rank-2 maximum is `1/4`.
+
+The nearest thing found is `o(41,43,13,15) = 87296/343785 = 0.2539259`, a member of an
+`o_∞ = 1/4` class, agreeing with `65/256 = 0.2539063` to `2×10⁻⁵` but **not equal** to it
+— which is exactly the failure mode already retracted in `O_STRUCTURE_v2.md` (a near-`1/4`
+value read as an exact rational). Recorded as `[UNRESOLVED]`, not refuted: the enumeration
+is exhaustive only over classes generated at height `≤ 3`.
+
+**The use v1 made of it survives.** v1's motivating step was "the limits are all
+`≤ 65/256 < 1/3`"; §3 gives the *stronger* `≤ 1/4` over every class generated at
+height `≤ 3`.
+
+## 3. The upgrade: an exact identity, not an equidistribution assumption  `[PROVED]`
+
+v1 §3 graded the limits `[DERIVED]` under "the geodesic equidistributes on the subtorus
+cut out by its low-height resonances". That assumption is now unnecessary.
+
+- **`o` is exactly a finite character sum over resonances.** `3/32` is not a limit under
+  a hypothesis — it is the `w = 0` term of an identity, and every deviation from it is a
+  resonance sum. There is **no first-order term**.
+- A **parity vanishing rule** leaves 63 live frequencies.
+- The **pair terms** are in closed form, with `|I| ≤ g²/(e_i e_j)`, sharp; they obey
+  exactly the bound originally asked for, at rate **`9/(16R)`**.
+- **Class limits are exact Haar integrals.** Over every class generated at height `≤ 3`:
+  **107 rank-1 classes, maximum `1/6`**; **1795 rank-2 classes, maximum `1/4`**. The
+  rank-1 maximum `1/6` is exhaustive to height `≤ 5` (612 classes).
+- **Low-height resonances of full rank force small speeds**: `rank L_R = 3` implies
+  `max e ≤ 3√3 R³`.
+
+Carried over from v1, unchanged and still proved: exactly two `±1` relations are possible
+(`e₁+e₇ = e₃+e₅` and `e₁+e₃ = e₅+e₇`), all others failing mod 8, and they are mutually
+exclusive since together they force `e₁ = e₅`.
+
+## 4. Speed-exhaustive censuses, replacing v1 §4  `[PROVED — exhaustive]`
+
+| census | count | result |
+|---|---|---|
+| every unit 4-tuple, all speeds `≤ 200` | 385 211 | nothing above `1/3` outside the two exceptions |
+| both relation families, all speeds `≤ 240` | 34 235 | same |
+| the height-`R = 3` finite arm | 665, all speeds `≤ 95` | contained in the census above |
+
+## 5. What (H″) now reduces to
+
+> **(H3u)** `Tail₃(e) ≤ 1/12` whenever the resonances of height `≤ 3` span rank `≤ 2`.
+
+Measured to hold over the whole box `max e_ρ ≤ 200` with **13% margin**
+(`max Tail₃ = 223/3080 = 0.0724 < 1/12`), 0 violations. Given (H3u), (H″) follows — the
+finite arm having already been executed.
+
+**And the shape originally asked for cannot exist.** A speed-only rate `|o − o_∞| ≤ C/H(e)`
+is **impossible** for the full deviation, for a structural reason (the `±1` families), not
+a technical one. What replaces it is a *class-relative* bound, the class being the
+saturated lattice generated by the low-height resonances.
+
+**One further claim refuted, and it was the prover's own**: the uniform split at `R = 2`,
+`Tail₂ ≤ 1/12`, is **false** — 16 explicit violations inside `max e_ρ ≤ 200`. Only the
+`R = 3` form survives.
+
+## 6. Grades
+
+§1, §2: **retractions**, both verified by recomputation here. §3: **PROVED** (identity,
+vanishing rule, pair bound, class limits at height `≤ 3`; rank-1 max `1/6` exhaustive to
+height 5). Rank-2 max `1/4` beyond height 3: **EMPIRICAL** (232 classes sampled). "`1/4`
+is the supremum over all rank-`≤2` classes": **OPEN**, not needed below height 3. §4:
+**PROVED — exhaustive**. (H3u): **EMPIRICAL**, exhaustive over `max e_ρ ≤ 200` only.
+**(H″): OPEN**, reduced to (H3u) alone. `65/256`: **UNRESOLVED**.

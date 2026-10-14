@@ -1,0 +1,3 @@
+import LonelyRunner.LRC.Spec.MaximalWindowTransportN
+#print axioms LRC.MaximalWindowTransport.rational_first_loss
+#print axioms LRC.MaximalWindowTransport.replacement_at_first_loss

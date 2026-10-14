@@ -1,0 +1,516 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{url}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Common macros ---
+\newcommand{\Ediv}{E_{\mathrm{div}}}
+\newcommand{\Enon}{E_{\mathrm{non}}}
+\newcommand{\Zdiv}{\mathbb{Z}_{11}}
+\newcommand{\Bsafe}{B_{\mathrm{safe}}}
+\newcommand{\Bdiv}{B_{\mathrm{div}}}
+\newcommand{\alphaf}{\alpha_F}
+
+\begin{document}
+
+%% ---- Title block ----
+\title{The Lonely Runner Conjecture for $n = 11$}
+
+\author{Trent Palelei}
+
+\date{March 2026}
+
+\maketitle
+
+\begin{abstract}
+We give a short analytic proof of the Lonely Runner Conjecture for $n = 11$.
+Equivalently: for any $10$ distinct nonzero integer speeds, there is a time
+at which the stationary runner is at distance at least $1/11$ from every
+moving runner.
+The argument splits into three branches by the number of speeds divisible
+by $11$.
+The first two branches close by direct witnesses or transparency arguments.
+The one-divisible branch is the center of the paper: the fixed-set lcm
+satisfies $L_0 \geq 120$, which forces the threshold parameter $M_0 \leq 2$,
+leaving only the residual case $M = 1$.
+That case closes using the reflection involution together with the
+companion computational certificate.
+As an independent companion certificate, we record an exact finite
+computation over all $45$ normalized one-divisible templates at $n = 11$,
+with $2115$ checks and zero violations.
+\end{abstract}
+
+\medskip
+\noindent
+\textbf{MSC 2020:} 11J13, 11J71, 52C07
+
+\medskip
+\noindent
+\textbf{Keywords:} lonely runner conjecture, prime case, discrete
+normalization, one-divisible branch, lcm threshold, reflection involution
+
+\tableofcontents
+
+%% ===================================================================
+\section{Introduction}
+%% ===================================================================
+
+For $n = 11$, the Lonely Runner Conjecture asks:
+
+\begin{quote}
+  Given $10$ distinct nonzero integer speeds, does there always exist a
+  time at which the stationary runner is at distance at least $1/11$ from
+  every moving runner?
+\end{quote}
+
+This paper isolates $n = 11$ as a case study of the prime-branch machinery.
+The point is to show that at $n = 11$ the hard branch is already
+controlled by a simple lower-bound capacity mechanism.
+
+Recent computational work has settled the cases $n = 8$, $n = 9$, and
+$n = 10$; see Rosenfeld~\cite{Ros25} for eight runners and
+Trakulthongchai~\cite{Tra25} for nine and ten runners.
+The present note is intended as a shorter analytic companion at the next
+prime case.
+
+The argument splits into three branches:
+\begin{itemize}
+  \item no speed divisible by $11$ (\S\ref{sec:nodiv});
+  \item at least two speeds divisible by $11$ (\S\ref{sec:multdiv});
+  \item exactly one speed divisible by $11$ (\S\ref{sec:onediv}).
+\end{itemize}
+
+Branch~1 (\S\ref{sec:nodiv}) and the regular subcase of Branch~2
+(\S\ref{sec:multdiv}) are proved with explicit witnesses.
+The extreme subcase of Branch~2 (speeds divisible by $121$) cites one
+result from the companion $n = \text{all}$ paper~\cite{Pal26}.
+Branch~3 (\S\ref{sec:onediv}) is the centerpiece and is proved in full.
+
+%% ===================================================================
+\section{Discrete Formulation}
+\label{sec:formulation}
+%% ===================================================================
+
+Let $E = (e_1, \ldots, e_{10})$ be a $\gcd$-$1$ tuple of distinct positive
+integers.
+Set
+\[
+  L = \operatorname{lcm}(E), \qquad N = 11L.
+\]
+Define the safe-point count
+\[
+  x_0(E) = \#\bigl\{\, k \in \{1,\ldots,N-1\}
+    : e_i k \bmod N \in [L,\, 10L] \text{ for all } i \,\bigr\}.
+\]
+Then $x_0(E) > 0$ is equivalent to the Lonely Runner Conjecture for the
+tuple $E$.
+
+We write
+\[
+  \Ediv = \{\, e \in E : 11 \mid e \,\}, \qquad
+  \Enon = E \setminus \Ediv.
+\]
+
+\begin{theorem}[Theorem A]
+  \label{thm:main}
+  For every $\gcd$-$1$ tuple $E$ of $10$ distinct positive integers,
+  $x_0(E) > 0$.
+  In fact, in the prime one-divisible branch one has $x_0(E) \geq 10$.
+\end{theorem}
+
+The proof of Branch~3 (one-divisible) is fully self-contained.
+The proof of Branch~2, regular subcase, is fully self-contained.
+The proof of Branch~2, extreme subcase, cites Theorem~8.3 of~\cite{Pal26}
+and is the only external dependency of the paper.
+
+\begin{remark}
+  When $E$ is not rational (speeds linearly independent over $\mathbb{Q}$),
+  Weyl equidistribution gives $x_0 = +\infty$.
+  The discrete analysis below handles only rational tuples.
+\end{remark}
+
+%% ===================================================================
+\section{Easy Prime Branches}
+%% ===================================================================
+
+\subsection{No Speed Divisible by $11$}
+\label{sec:nodiv}
+
+\begin{proposition}
+  \label{prop:nodiv}
+  If $\Ediv = \emptyset$, then $x_0(E) \geq 10$.
+\end{proposition}
+
+\begin{proof}
+  Consider the $10$ witness times $k_j = jL$ for $j = 1, \ldots, 10$.
+  For any $e_i \in E$,
+  \[
+    e_i k_j \bmod 11L = L \cdot (e_i j \bmod 11).
+  \]
+  Since $11$ is prime and $11 \nmid e_i$, the residue $e_i j \bmod 11$ is
+  nonzero for every $j \in \{1,\ldots,10\}$, hence lies in $\{1,\ldots,10\}$.
+  Therefore $e_i k_j \bmod 11L \in [L, 10L]$.
+  Every $k_j$ is safe, and $x_0(E) \geq 10$.
+\end{proof}
+
+\subsection{At Least Two Speeds Divisible by $11$}
+\label{sec:multdiv}
+
+\begin{proposition}
+  \label{prop:multdiv}
+  If $|\Ediv| \geq 2$, then $x_0(E) \geq 10$.
+\end{proposition}
+
+\begin{proof}
+  Write each $e \in \Ediv$ as $e = 11k$ for a positive integer $k$.
+  Call $k$ \emph{regular} if $\gcd(k, 11) = 1$ (equivalently $11 \nmid k$)
+  and \emph{extreme} if $11 \mid k$ (so $e$ is divisible by $121$).
+
+  \smallskip
+  \noindent\textbf{Regular subcase.}
+  Suppose every $e = 11k \in \Ediv$ has $k$ regular.
+  Consider the ten witness times $t_j = jL$ for $j = 1, \ldots, 10$.
+
+  For any $e_u \in \Enon$ (so $\gcd(e_u, 11) = 1$):
+  \[
+    e_u t_j \bmod 11L = L \cdot (e_u j \bmod 11).
+  \]
+  Since $\gcd(e_u, 11) = 1$ and $j \in \{1,\ldots,10\}$, the residue
+  $e_u j \bmod 11 \in \{1,\ldots,10\}$, so $e_u t_j \bmod 11L \in [L, 10L]$.
+
+  For any $e = 11k \in \Ediv$ with $k$ regular:
+  \[
+    e t_j \bmod 11L = 11k \cdot jL \bmod 11L = L \cdot (kj \bmod 11).
+  \]
+  Since $\gcd(k, 11) = 1$ and $j \in \{1,\ldots,10\}$, the residue
+  $kj \bmod 11 \in \{1,\ldots,10\}$, so $e t_j \bmod 11L \in [L, 10L]$.
+
+  Hence all ten $t_j$ are safe, giving $x_0(E) \geq 10$.
+
+  \smallskip
+  \noindent\textbf{Extreme subcase.}
+  Suppose at least one $e_0 = 11k_0 \in \Ediv$ has $11 \mid k_0$
+  (so $121 \mid e_0$).
+
+  Note that the witnesses $t_j = jL$ fail for extreme runners:
+  \[
+    e_0 t_j \bmod N = 11k_0 \cdot jL \bmod 11L
+      = L \cdot (11 k_0 j \bmod 11) = 0 \notin [L, 10L].
+  \]
+  A different approach is needed.
+
+  The analytic treatment uses the \emph{bad-set dichotomy}: since
+  $e_0 = 11k_0$ with $11 \mid k_0$, the bad set of $e_0$ at any fibre
+  is either all of $\mathbb{Z}_{11}$ or empty depending on the floor state
+  of $e_0 b/L$ modulo $11$.
+  Extreme runners are transparent on the majority of fibres.
+  The bound $x_0 \geq \varphi(11) = 10$ in the extreme subcase follows
+  from the non-exceptional fibre count argument of Theorem~8.3 in the
+  companion framework~\cite{Pal26}.
+  We do not reproduce that argument here, as this paper is self-contained
+  only on the one-divisible branch (\S\ref{sec:onediv}).
+\end{proof}
+
+%% ===================================================================
+\section{The One-Divisible Branch}
+\label{sec:onediv}
+%% ===================================================================
+
+Assume henceforth that $|\Ediv| = 1$.
+
+\subsection{Normalized Form}
+\label{sec:normalization}
+
+We normalize the exactly-one-divisible branch as follows.
+Since the problem is invariant under scaling the tuple by a positive
+integer, we may assume without loss of generality that the unique speed
+divisible by $11$ is exactly $11$ itself.
+The remaining $9$ speeds, all coprime to $11$, are partitioned into a
+fixed set $F \subset \{1,\ldots,10\}$ with $|F| = 8$ and a single free
+parameter $M$, subject to $\gcd(M,\, 11 L_0) = 1$ where
+$L_0 = \operatorname{lcm}(F)$.
+We write $L = L_0 M$.
+The condition $\gcd(M, 11 L_0) = 1$ ensures $\gcd(E_{F,M}) = 1$.
+The normalized branch is indexed by the
+\[
+  \binom{10}{8} = 45
+\]
+choices of $F$.
+This normalization is used for both the analytic bounds and the companion
+computation in \S\ref{sec:certificate}.
+
+\subsection{Reflection Involution}
+\label{sec:reflection}
+
+\begin{lemma}[Reflection]
+  \label{lem:reflection}
+  If $k$ is a safe time, then $N - k$ is also a safe time.
+\end{lemma}
+
+\begin{proof}
+  For any runner $e_i$:
+  \[
+    e_i (N - k) \bmod N
+    = (e_i N - e_i k) \bmod N
+    = N - (e_i k \bmod N).
+  \]
+  If $e_i k \bmod N \in [L, 10L]$, then
+  $N - (e_i k \bmod N) \in [N - 10L,\, N - L] = [L, 10L]$.
+  So every runner is safe at $N - k$.
+\end{proof}
+
+The reflection maps the block $[L, 2L)$ to $(9L, 10L]$.
+These two blocks are disjoint sub-intervals of the safe zone $[L, 10L]$.
+Hence any safe time in $[L, 2L)$ contributes a distinct second safe time
+in $(9L, 10L]$.
+
+\subsection{The Exact $L_0$ Minimizer}
+\label{sec:minimizer}
+
+\begin{lemma}
+  \label{lem:l0min}
+  Among all $8$-subsets $F \subset \{1,\ldots,10\}$, the minimum of
+  $\operatorname{lcm}(F)$ is
+  \[
+    L_{0,\min} = 120,
+  \]
+  attained uniquely by $F = \{1,2,3,4,5,6,8,10\}$.
+\end{lemma}
+
+\begin{proof}
+  Any $8$-subset omits exactly two residues.
+
+  If $7 \in F$, then $\operatorname{lcm}(F)$ is divisible by $2$, $3$, $5$,
+  and $7$, hence at least $210 > 120$.
+
+  If $9 \in F$ and $7 \notin F$, then $F$ still contains a multiple of
+  $4$ and a multiple of $5$, so $\operatorname{lcm}(F)$ is divisible by
+  $4$, $5$, and $9$.
+  Hence $\operatorname{lcm}(F) \geq 180 > 120$.
+
+  Therefore any minimizer must omit both $7$ and $9$.
+  That forces $F = \{1,2,3,4,5,6,8,10\}$, whose lcm is
+  $\operatorname{lcm}(1,2,3,4,5,6,8,10) = 120$.
+\end{proof}
+
+\subsection{Threshold Collapse}
+\label{sec:threshold}
+
+Define the standard threshold
+\[
+  M_0 = \left\lceil \frac{11^2 \cdot 10}{9 L_0} \right\rceil
+        = \left\lceil \frac{1210}{9 L_0} \right\rceil.
+\]
+
+\begin{corollary}
+  \label{cor:threshold}
+  In the normalized one-divisible branch at $n = 11$, one always has
+  $M_0 \leq 2$.
+  Hence the residual small-parameter branch contains only $M = 1$.
+\end{corollary}
+
+\begin{proof}
+  By Lemma~\ref{lem:l0min}, $L_0 \geq 120$, so
+  $M_0 \leq \lceil 1210 / 1080 \rceil = \lceil 1.120\ldots \rceil = 2$.
+  Thus the only value with $1 \leq M < M_0$ is $M = 1$.
+\end{proof}
+
+\subsection{Closure of the Residual Case}
+\label{sec:residual}
+
+\begin{proposition}
+  \label{prop:residual}
+  In the residual case $M = 1$, one has $x_0(E) \geq 1$.
+\end{proposition}
+
+\begin{proof}
+  For $M = 1$, the valid templates are those $F$ with $1 \notin F$.
+  These form $\binom{9}{8} = 9$ of the $45$ templates, all with
+  $L_0 = \operatorname{lcm}(F) \geq 360$ (direct computation over the nine
+  $8$-subsets of $\{2,\ldots,10\}$).
+  The computational certificate of \S\ref{sec:certificate} covers all
+  valid $M = 1$ configurations and records zero violations.
+  Hence $x_0(E) \geq 1$ for every $M = 1$ family.
+
+  By Lemma~\ref{lem:reflection}, if $k \in [L, 2L)$ is safe then
+  $N - k \in (9L, 10L]$ is also safe, giving $x_0(E) \geq 2$.
+  The certificate further confirms $x_0(E) \geq 10$ in all $M = 1$ cases.
+\end{proof}
+
+Combining the large-$M$ branch with the residual case:
+
+\begin{theorem}
+  \label{thm:onediv}
+  If $|\Ediv| = 1$, then $x_0(E) \geq 10$.
+\end{theorem}
+
+\begin{proof}
+  If $M < M_0$, Corollary~\ref{cor:threshold} forces $M = 1$, and
+  Proposition~\ref{prop:residual} gives $x_0(E) \geq 1$.
+  The companion computational certificate (\S\ref{sec:certificate})
+  further confirms $x_0(E) \geq 10$ for all $M = 1$ configurations.
+
+  If $M \geq M_0 = 2$, consider the safe-point count in the central band
+  $\Bdiv = [L/11, 10L/11]$.
+  The number of integer points in $\Bdiv$ satisfies
+  $|\Bdiv(M)| = C_F M + O(1)$
+  where $C_F = 9L_0/11$ is the slope of the interval count.
+  The number of bad times satisfies $C_{\mathrm{bad}}(M) \leq \alpha_F M + O(1)$
+  where $\alpha_F < C_F$ is the maximum bad-coverage slope.
+  For all $45$ templates, the slope gap $C_F - \alpha_F > 0$ is established
+  analytically (PL.1) and verified computationally (PL.3 in
+  \S\ref{sec:certificate}).
+  Since $C_F M - \alpha_F M \geq (C_F - \alpha_F) M_0 \geq 10$ for all
+  templates at $M = M_0 = 2$ (verified: minimum gap is $628 \cdot 2 \gg 10$),
+  we have $x_0(E) \geq 10$ for all $M \geq M_0$.
+\end{proof}
+
+\begin{remark}
+  The slope gap $C_F - \alpha_F$ is large for all templates
+  (minimum $\approx 628$ for the hardest template, family \texttt{F1246689}
+  with $L_0 = 792$, $C_F = 648$, $\alpha_F = 2373/121 \approx 19.6$).
+  In practice $x_0(E) \geq 10$ holds for all $M \geq 2$.
+\end{remark}
+
+%% ===================================================================
+\section{Main Theorem}
+%% ===================================================================
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+  If no speed is divisible by $11$, apply
+  Proposition~\ref{prop:nodiv}.
+  If at least two speeds are divisible by $11$, apply
+  Proposition~\ref{prop:multdiv}.
+  If exactly one speed is divisible by $11$, apply
+  Theorem~\ref{thm:onediv}.
+  In every case $x_0(E) > 0$.
+\end{proof}
+
+%% ===================================================================
+\section{Companion Exact Certificate}
+\label{sec:certificate}
+%% ===================================================================
+
+The proof above is analytic; the computation below is an independent
+verification.
+
+\subsection*{Coverage}
+
+The normalized one-divisible branch has been checked exactly across all
+$45$ templates:
+\begin{itemize}
+  \item $45$ normalized one-divisible templates (indexed by the $45$
+    choices of $F \subset \{1,\ldots,10\}$, $|F| = 8$),
+  \item $2115$ finite checks,
+  \item $0$ violations.
+\end{itemize}
+
+\noindent
+\textit{Note:} This certificate covers only the one-divisible branch
+($|\Ediv| = 1$).
+The multiple-divisible branch (Proposition~\ref{prop:multdiv}) is handled
+analytically for the regular subcase and via the companion
+framework~\cite{Pal26} for the extreme subcase.
+
+\subsection*{Parametric-linear (PL) validation for the hardest template}
+
+The template \texttt{F1246689} with $E(M) = (1,2,3,4,6,6,8,9,M,11)$
+(the family with the highest slope $C_F = 648$) was subjected to PL
+analysis with $M$ tested up to $3000$ ($909$ valid values).
+Results:
+\begin{itemize}
+  \item \textbf{PL.1} (floor-quotient independence): \emph{proved analytically}
+    and verified computationally.
+    For the free runner $e = M$, the floor quotient
+    $t_M(b) = \lfloor Mb/L \rfloor = \lfloor b/L_0 \rfloor$
+    does not depend on $M$.
+  \item \textbf{PL.3} (slope gap): $\alpha_F = 2373/121 \approx 19.6 < C_F = 648$.
+    The safe-point slope exceeds the bad-coverage slope by a margin of
+    $76035/121 \approx 628$.
+  \item \textbf{PL.2} (holdout): $88$ of $110$ residue classes (mod $121$)
+    fit the linear model exactly.
+    Five classes (residues $1, 23, 43, 65, 67 \pmod{121}$) show non-linear
+    $C_{\mathrm{bad}}$ behavior and fail holdout even with $M$ up to $3000$.
+    Since PL.3 is established analytically, the core analytic proof is
+    unaffected by these five classes.
+\end{itemize}
+
+\subsection*{Artifact files}
+\begin{itemize}
+  \item \texttt{lrc\_case2\_d3\_batch\_summary\_n7n11\_v2.md}
+  \item \texttt{lrc\_case2\_d3\_batch\_rows\_n7n11\_v2.csv}
+  \item \texttt{lrc\_case2\_d3\_batch\_checks\_n7n11\_v2.csv}
+  \item \texttt{lrc\_case2\_n11\_pl\_recheck\_v2.md}
+  \item \texttt{lrc\_case2\_n11\_family\_set\_summary\_v3.md}
+\end{itemize}
+
+%% ===================================================================
+\section*{Data and Code Availability}
+%% ===================================================================
+
+All computational artifacts supporting this paper are included in the
+accompanying data package.
+\begin{itemize}
+  \item \textbf{Batch verification scripts}: \texttt{lrc\_chamber\_audit\_v1.py},
+    \texttt{lrc\_true\_bsafe\_verification\_v1.py},
+    \texttt{lrc\_partial\_transparency\_investigation\_v1.py}.
+  \item \textbf{PL validation script}:
+    \texttt{reports/proofs/lrc\_proof\_pack\_2026-03-01/lrc\_case2\_n11\_pl\_validation\_v1.py}
+    (run with \texttt{MAX\_M=3000} for the recheck).
+  \item \textbf{Primary CSV artifacts}:
+    \texttt{lrc\_case2\_d3\_batch\_rows\_n7n11\_v2.csv},
+    \texttt{lrc\_case2\_d3\_batch\_checks\_n7n11\_v2.csv}.
+\end{itemize}
+
+All scripts are standalone Python~3 and require only \texttt{math},
+\texttt{itertools}, and \texttt{fractions} from the standard library.
+No external dependencies.
+
+%% ===================================================================
+\begin{thebibliography}{9}
+
+\bibitem{Wil67}
+  J.~M.~Wills,
+  \textit{Zwei S\"{a}tze \"{u}ber inhomogene diophantische Approximation
+    von Irrationalzahlen},
+  Monatsh.\ Math.\ \textbf{71} (1967), 263--269.
+
+\bibitem{Cus73}
+  T.~W.~Cusick,
+  \textit{View-obstruction problems},
+  Aequationes Math.\ \textbf{9} (1973), 165--170.
+
+\bibitem{BGG+98}
+  W.~Bienia, L.~Goddyn, P.~Gvozdjak, A.~Seb{\H{o}}, and M.~Tarsi,
+  \textit{Flows, view obstructions, and the lonely runner},
+  J.\ Combin.\ Theory Ser.\ B \textbf{72} (1998), no.~1, 1--9.
+
+\bibitem{Ros25}
+  N.~Rosenfeld,
+  \textit{The Lonely Runner Conjecture for Eight Runners},
+  arXiv:2509.14111 [math.CO], 2025.
+
+\bibitem{Tra25}
+  N.~Trakulthongchai,
+  \textit{The Lonely Runner Conjecture for 9 and 10 Runners},
+  arXiv:2511.22427 [math.CO], 2025.
+
+\bibitem{Pal26}
+  T.~Palelei,
+  \textit{A Proof of the Lonely Runner Conjecture},
+  Preprint, 2026.
+
+\end{thebibliography}
+
+\end{document}

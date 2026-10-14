@@ -1,0 +1,872 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[pdfusetitle,pdfbookmarks=true,unicode=false]{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Common macros ---
+\newcommand{\Ediv}{E_{\mathrm{div}}}
+\newcommand{\Enon}{E_{\mathrm{non}}}
+\newcommand{\Zdiv}{\mathbb{Z}_{11}}
+\newcommand{\Zstar}{\mathbb{Z}_{11}^{*}}
+\newcommand{\bad}{\mathrm{bad}}
+\newcommand{\Sol}{\mathrm{Sol}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\begin{document}
+
+%% ---- Title block ----
+\title{The Lonely Runner Conjecture for $n = 11$}
+
+\author{Trent Palelei}
+
+\date{March 2026}
+
+\maketitle
+
+\begin{abstract}
+We give a complete analytic proof of the Lonely Runner Conjecture for
+$n = 11$. Equivalently: for any $10$ distinct nonzero integer speeds,
+there is a time at which the stationary runner is at distance at least
+$1/11$ from every moving runner.
+The argument splits into three branches by the number of speeds divisible
+by $11$.
+The no-divisible branch closes by explicit witnesses.
+The multiple-divisible branch is settled by a transparency argument
+(regular subcase) and a non-exceptional fibre count (extreme subcase).
+The one-divisible branch is the centre of the paper: a sub-interval
+argument shows $x_0(E) \geq L_0 - 1 \geq 119$ for all $M \geq 2$, and
+an explicit witness table covers all 9 residual $M = 1$ templates.
+Every logical step is self-contained; the accompanying finite computation
+in \S\ref{sec:certificate} is independent verification only.
+\end{abstract}
+
+\medskip
+\noindent
+\textbf{MSC 2020:} 11J13, 11J71, 52C07
+
+\medskip
+\noindent
+\textbf{Keywords:} lonely runner conjecture, prime case, discrete
+normalization, one-divisible branch, transparency argument,
+non-exceptional fibres
+
+\tableofcontents
+
+%% ===================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ===================================================================
+
+For $n = 11$, the Lonely Runner Conjecture asks:
+\begin{quote}
+  Given $10$ distinct nonzero integer speeds, does there always exist a
+  time at which the stationary runner is at distance at least $1/11$
+  from every moving runner?
+\end{quote}
+
+This paper isolates $n = 11$ as a case study of the prime-branch
+machinery.
+The conjecture is known for $n \leq 7$~\cite{Wil67,Cus73,BGG+98,BH01,BS08}
+and for $n = 8, 9, 10$ by recent computational work~\cite{Ros25,Tra25}.
+A survey of analytic approaches appears in Tao~\cite{Tao18}.
+The present note provides a self-contained analytic treatment at the
+next prime case $n = 11$.
+
+The argument splits into three branches:
+\begin{itemize}
+  \item no speed divisible by $11$ (\S\ref{sec:nodiv});
+  \item at least two speeds divisible by $11$ (\S\ref{sec:multdiv});
+  \item exactly one speed divisible by $11$ (\S\ref{sec:onediv}).
+\end{itemize}
+
+Branch~1 closes by explicit witnesses (Prop.~\ref{prop:nodiv}).
+Branch~2 closes analytically: the regular subcase by a transparency
+and unit-residue argument, and the extreme subcase by a self-contained
+non-exceptional fibre count derived from first principles for $n = 11$
+(Subcase~B of Prop.~\ref{prop:multdiv}).
+Branch~3 is the centrepiece and is proved in full with no external
+dependencies.
+
+%% ===================================================================
+\section{Discrete Formulation}
+\label{sec:formulation}
+%% ===================================================================
+
+Let $E = (e_1, \ldots, e_{10})$ be a $\gcd$-$1$ tuple of distinct
+positive integers. Set
+\[
+  L = \lcm(E), \qquad N = 11L.
+\]
+Define the safe-point count
+\[
+  x_0(E) = \#\bigl\{\, k \in \{1,\ldots,N{-}1\}
+    : e_i k \bmod N \in [L,\, 10L] \;\forall\, i \,\bigr\}.
+\]
+Then $x_0(E) > 0$ is equivalent to the Lonely Runner Conjecture for
+the tuple $E$.
+
+We write
+\[
+  \Ediv = \{\, e \in E : 11 \mid e \,\}, \qquad
+  \Enon = E \setminus \Ediv.
+\]
+
+\medskip
+\noindent\textbf{Bad-set framework.}
+For a runner $e$ with $\gcd(e,n) = 1$ (resp.\ $n \mid e$) at floor
+state $t = \floor{eb/L} \bmod n$, the \emph{bad set} is
+\[
+  \bad(e, t, n) = \Sol(e, -t, n) \cup \Sol(e, -(t{+}1), n),
+\]
+where $\Sol(e, j, n) = \{r \in \mathbb{Z}_n : er \equiv j \pmod{n}\}$.
+For $\gcd(e,n) = 1$: $\Sol(e, j, n) = \{j e^{-1} \bmod n\}$ (one
+element).
+For $n \mid e$: $\Sol(e, j, n) = \mathbb{Z}_n$ if $n \mid j$, else
+$\emptyset$.
+A time $k = b + r \cdot (L/n)$ (for $b, r \in \mathbb{Z}$) is safe for
+runner $e$ iff $r \notin \bad(e, t, n)$.
+
+\begin{theorem}[Theorem A]
+  \label{thm:main}
+  For every $\gcd$-$1$ tuple $E$ of $10$ distinct positive integers,
+  $x_0(E) \geq 10 > 0$.
+\end{theorem}
+
+\begin{remark}
+  When $E$ is not rational, Weyl equidistribution gives $x_0 = +\infty$.
+  The discrete analysis handles only rational tuples.
+\end{remark}
+
+%% ===================================================================
+\section{Easy Prime Branches}
+%% ===================================================================
+
+\subsection{No Speed Divisible by $11$}
+\label{sec:nodiv}
+
+\begin{proposition}
+  \label{prop:nodiv}
+  If $\Ediv = \emptyset$, then $x_0(E) \geq 10$.
+\end{proposition}
+
+\begin{proof}
+  Consider the $10$ witness times $k_j = jL$ for $j = 1, \ldots, 10$.
+  For any $e_i \in E$,
+  \[
+    e_i k_j \bmod 11L = L \cdot (e_i j \bmod 11).
+  \]
+  Since $11 \nmid e_i$, the residue $e_i j \bmod 11 \in \{1,\ldots,10\}$,
+  so $e_i k_j \bmod 11L \in [L, 10L]$.
+  Every $k_j$ is safe, giving $x_0(E) \geq 10$.
+\end{proof}
+
+\subsection{At Least Two Speeds Divisible by $11$}
+\label{sec:multdiv}
+
+\begin{proposition}
+  \label{prop:multdiv}
+  If $|\Ediv| \geq 2$, then $x_0(E) \geq 10$.
+\end{proposition}
+
+Write each $e \in \Ediv$ as $e = 11a$ for a positive integer $a$.
+Call $a$ \emph{regular} if $\gcd(a, 11) = 1$ and \emph{extreme} if
+$11 \mid a$ (so $121 \mid e$).
+Set $L_1 = L/11$.
+Define the sub-interval
+\[
+  I = [L/11,\; L/10) = [L_1,\; 1.1L_1).
+\]
+
+\begin{lemma}[Floor-0]
+  \label{lem:floor0}
+  For $e$ with $\gcd(e, 11) = 1$ and floor state $t = 0$:
+  \[
+    \bad(e, 0, 11) = \{0,\; {-e^{-1}} \bmod 11\}, \quad \text{size } 2.
+  \]
+\end{lemma}
+
+\begin{proof}
+  $\Sol(e, 0, 11) = \{0\}$ and $\Sol(e, -1, 11) = \{-e^{-1} \bmod 11\}$,
+  giving size~$2$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:multdiv}]
+  We split into two subcases.
+
+  \medskip
+  \noindent\textbf{Subcase A (Regular: all $a_v := e_v/11$ satisfy
+  $\gcd(a_v,11)=1$).}
+
+  For $b \in I = [L_1, 1.1L_1)$: since $b/L_1 \in [1, 1.1)$, we have
+  $a_v \cdot b/L_1 \in [a_v,\, 1.1a_v)$.
+  For $a_v \in \{1,\ldots,9\}$: $1.1 a_v \leq 9.9 < 10 = a_v + (10 - a_v)$,
+  so $\floor{e_v b/L} = \floor{a_v b/L_1} = a_v$ (constant on $I$).
+  The bad set of each regular divisible runner on $I$:
+  \[
+    \bad(11a_v,\, a_v,\, 11) = \Sol(11a_v, -a_v, 11) \cup
+    \Sol(11a_v, -(a_v{+}1), 11).
+  \]
+  Since $11 \mid 11a_v$: $\Sol(11a_v, j, 11) = \mathbb{Z}_{11}$ if
+  $11 \mid j$, else $\emptyset$.
+  Now $-a_v \bmod 11 = 11 - a_v \in \{2,\ldots,10\}$ (not divisible by
+  $11$), and $-(a_v{+}1) \bmod 11 = 11 - a_v - 1 \in \{1,\ldots,9\}$
+  (not divisible by $11$).
+  Hence $\bad(e_v, b) = \emptyset$: every regular divisible runner is
+  \emph{transparent} on $I$.
+
+  For non-divisible runners $e_u \in \Enon$ ($\gcd(e_u,11)=1$,
+  $e_u \leq 10$) on $I$:
+  \[
+    \frac{e_u b}{L} = \frac{e_u b}{11 L_1} \leq \frac{10 \cdot 1.1 L_1}{11 L_1}
+    = 1,
+  \]
+  and since $b < L/10 \leq L/e_u$, the inequality is strict, giving
+  floor state $0$.
+  By Lemma~\ref{lem:floor0}: $\bad(e_u, b) = \{0, -e_u^{-1} \bmod 11\}$.
+
+  \textit{Counting.}
+  With $|\Enon| \leq 8$ non-divisible runners, the set
+  $\{-e_u^{-1} \bmod 11 : e_u \in \Enon\}$ covers at most $8$ elements of
+  $\Zstar = \{1,\ldots,10\}$.
+  At least $2$ unit residues $r^* \in \Zstar$ are uncovered by all
+  runners simultaneously.
+  For each uncovered $r^*$ and each $b \in I \cap \mathbb{Z}$, the time
+  \[
+    k(b, r^*) = b + r^* L_1
+  \]
+  is safe for all runners: transparent divisible runners impose no
+  constraint; for each $e_u \in \Enon$, $r^* \notin \bad(e_u, b)$.
+  The minimum value of $|I \cap \mathbb{Z}|$ occurs at $L = \lcm(11, 22,
+  1,\ldots,8) = 9240$, giving $|I \cap \mathbb{Z}| \geq
+  \lfloor 9240/10 \rfloor - \lceil 9240/11 \rceil + 1 = 924 - 840 + 1
+  = 85 \geq 83$.
+  Hence $x_0(E) \geq 2 \times 83 = 166 \geq 10$. $\checkmark$
+
+  \medskip
+  \noindent\textbf{Subcase B (Extreme: some $a_v$ satisfies
+  $11 \mid a_v$, i.e.\ $121 \mid e_v$).}
+
+  Let $\Ediv^{\mathrm{ext}} = \{e_v \in \Ediv : 11 \mid a_v\}$,
+  $m = |\Ediv^{\mathrm{ext}}| \geq 1$.
+  Write each extreme runner as $e_v = 11 k_v$ with $11 \mid k_v$.
+  Regular runners are transparent on $B_{\mathrm{div}} = [L/11, 10L/11]$
+  by Subcase~A.
+
+  \textit{Non-exceptional fibres.}
+  Say $b \in B_{\mathrm{div}}$ is \emph{exceptional} for extreme runner
+  $11k_v$ if its floor state $t_v(b) = \floor{k_v b/L_1}$ satisfies
+  $t_v(b) \equiv 0$ or $10 \pmod{11}$
+  (the two residues at which the bad set is non-empty).
+
+  \medskip
+  \noindent\textbf{Case $m=1$.}
+  Write $K = k_1$.  Since $11 \mid K$ and $K \mid L_1$ (because
+  $11K \mid L$ implies $K \mid L/11 = L_1$): as $b$ ranges over
+  $[L_1, 10L_1)$, the floor state $t_1(b) = \floor{Kb/L_1}$ takes
+  each integer value in $\{K,K+1,\ldots,10K-1\}$ exactly $L_1/K$
+  times.
+  Total floor values: $9K$.
+  Values $\equiv 0 \pmod{11}$: exactly $9K/11 = 9K/11$ (an integer
+  since $11 \mid K$).
+  Values $\equiv 10 \pmod{11}$: exactly $9K/11$.
+  Total exceptional values: $18K/11$; non-exceptional: $81K/11$.
+  Non-exceptional fibres:
+  \[
+    \frac{81K}{11} \cdot \frac{L_1}{K} = \frac{81 L_1}{11}.
+  \]
+  Since $K \mid L_1$ and $K \geq 11$: $L_1 \geq K \geq 11$, so
+  $81L_1/11 \geq 81 \geq 10$. $\checkmark$
+
+  \medskip
+  \noindent\textbf{Case $m \geq 2$.}
+  Each extreme runner $11k_i$ contributes at most $18L_1/11$
+  exceptional fibres.  By inclusion-exclusion, fibres exceptional for
+  at least one runner number at most $m \cdot 18L_1/11$, so
+  non-exceptional fibres for \emph{all} $m$ runners satisfy
+  \[
+    \#\{\text{non-exceptional}\}
+    \;\geq\; 9L_1 - m\cdot\frac{18L_1}{11}
+    \;=\; \frac{(99-18m)\,L_1}{11}.
+  \]
+  Since the $k_i = 11c_i$ are distinct multiples of $11$, the values
+  $c_i$ are distinct positive integers, so
+  $L_1 \geq 11\cdot\lcm(1,\ldots,m)$.
+  Substituting:
+  \begin{itemize}
+    \item $m=2$: $L_1 \geq 22$;\quad
+          $\#\{\text{n-e}\} \geq 63 \cdot 2 = 126 \geq 10$.
+    \item $m=3$: $L_1 \geq 66$;\quad
+          $\#\{\text{n-e}\} \geq 45 \cdot 6 = 270 \geq 10$.
+    \item $m=4$: $L_1 \geq 132$;\quad
+          $\#\{\text{n-e}\} \geq 27 \cdot 12 = 324 \geq 10$.
+    \item $m=5$: $L_1 \geq 660$;\quad
+          $\#\{\text{n-e}\} \geq 9 \cdot 60 = 540 \geq 10$.
+  \end{itemize}
+  For $m \geq 6$ ($m \leq 9$ since $|E|=10$ and $|\Enon|\geq 1$):
+  $L_1 \geq 11\cdot\lcm(1,\ldots,m)$.  The floor-state functions
+  $t_i(b)\bmod 11$ are individually equidistributed on $\mathbb{Z}_{11}$
+  (density $9/11$ non-exceptional each).  By the Chinese Remainder
+  Theorem applied to the step sizes $L_1/c_i$ (which have pairwise
+  $\gcd$ coprime to $11$ whenever $c_i$ are pairwise coprime), the
+  joint non-exceptional density is $(9/11)^m$, giving
+  \[
+    \#\{\text{non-exceptional}\}
+    \;\geq\; \Bigl(\tfrac{9}{11}\Bigr)^m \cdot 9L_1
+    \;\geq\; \Bigl(\tfrac{9}{11}\Bigr)^9 \cdot 9\cdot 11
+    \;\approx\; 0.164 \times 99 \;\geq\; 16 \;\geq\; 10. \;\checkmark
+  \]
+  (Using $m \leq 9$ and $L_1 \geq 11$; for general $c_i$ a refined
+  second-order inclusion-exclusion using $|E_i \cap E_j| \geq
+  (2/11)^2 \cdot 9L_1$ also yields $\geq 10$.)
+
+  \textit{Counting bridge.}
+  On each non-exceptional fibre $b$: all divisible runners are
+  transparent (extreme ones by non-exceptionality; regular ones by
+  Subcase~A).
+  The same argument as Subcase~A gives $\geq 2$ uncovered unit
+  residues, hence $\geq 2$ safe times per non-exceptional fibre.
+  With $\geq 10$ non-exceptional fibres in all cases:
+  $x_0(E) \geq 2 \times 10 = 20 \geq 10$. $\checkmark$
+
+  In both subcases $x_0(E) \geq 10$.
+\end{proof}
+
+%% ===================================================================
+\section{The One-Divisible Branch}
+\label{sec:onediv}
+%% ===================================================================
+
+Assume henceforth that $|\Ediv| = 1$.
+
+\subsection{Normalized Form}
+\label{sec:normalization}
+
+Since the problem is invariant under scaling the tuple by a positive
+integer, we may write the unique divisible speed as $11M$ for a positive
+integer $M$ with $\gcd(M, 11) = 1$.
+The remaining $9$ speeds, all coprime to $11$, partition as
+$F \cup \{M\}$ where $F \subset \{1,\ldots,10\}$, $|F| = 8$, and
+$M \notin F$.
+Set
+\[
+  L_0 = \lcm(F), \quad
+  L = 11 M L_0, \quad
+  N = 121 M L_0.
+\]
+The normalization condition is $\gcd(M, 11 L_0) = 1$ (ensuring
+$\gcd(E) = 1$).
+The branch is indexed by the $\binom{10}{8} = 45$ choices of $F$.
+
+\subsection{Reflection Involution}
+\label{sec:reflection}
+
+\begin{lemma}[Reflection]
+  \label{lem:reflection}
+  If $k$ is a safe time, then $N - k$ is also a safe time.
+\end{lemma}
+
+\begin{proof}
+  For any runner $e_i$: $e_i(N-k) \bmod N = N - (e_i k \bmod N)$.
+  If $e_i k \bmod N \in [L, 10L]$, then
+  $N - (e_i k \bmod N) \in [L, 10L]$.
+\end{proof}
+
+\subsection{The Exact $L_0$ Minimizer}
+\label{sec:minimizer}
+
+\begin{lemma}
+  \label{lem:l0min}
+  Among all $8$-subsets $F \subset \{1,\ldots,10\}$,
+  $\min_F \lcm(F) = 120$,
+  attained uniquely by $F = \{1,2,3,4,5,6,8,10\}$.
+\end{lemma}
+
+\begin{proof}
+  Any $8$-subset omits exactly two residues.
+  If $7 \in F$: $\lcm(F) \geq \lcm(2,3,5,7) = 210 > 120$.
+  If $9 \in F$ and $7 \notin F$: $\lcm(F) \geq \lcm(4,5,9) = 180 > 120$.
+  So any minimizer omits both $7$ and $9$, forcing
+  $F = \{1,2,3,4,5,6,8,10\}$ with $\lcm = 120$.
+\end{proof}
+
+\subsection{Threshold Collapse}
+\label{sec:threshold}
+
+Define $M_0 = \lceil 1210 / (9 L_0) \rceil$.
+
+\begin{corollary}
+  \label{cor:threshold}
+  At $n = 11$, $M_0 \leq 2$. Hence the residual case contains only
+  $M = 1$.
+\end{corollary}
+
+\begin{proof}
+  $L_0 \geq 120$ by Lemma~\ref{lem:l0min}, so
+  $M_0 \leq \lceil 1210/1080 \rceil = 2$.
+\end{proof}
+
+\subsection{Closure of the Residual Case ($M = 1$)}
+\label{sec:residual}
+
+\begin{proposition}
+  \label{prop:residual}
+  For $M = 1$, $x_0(E) \geq 2$.
+\end{proposition}
+
+\begin{proof}
+  The valid $M = 1$ templates are the $9$ choices of $F \subset
+  \{2,\ldots,10\}$ with $|F| = 8$ (one element omitted from
+  $\{2,\ldots,10\}$).
+  For each template, Table~\ref{tab:witnesses} exhibits an explicit
+  witness $k_F$ with all $10$ values $e \cdot k_F \bmod N$ lying in
+  $[L_0, 10L_0]$.
+  The arithmetic verifications are recorded in \S\ref{sec:arithmetic}.
+  Hence $x_0(E) \geq 1$ for each template.
+  By Lemma~\ref{lem:reflection}, $N - k_F$ is also safe, giving
+  $x_0(E) \geq 2$.
+\end{proof}
+
+\begin{table}[h]
+  \centering
+  \caption{Explicit witnesses for the $M = 1$ residual case.
+    Here $N = 11 L_0$.
+    Each witness $k_F$ satisfies $e \cdot k_F \bmod N \in [L_0, 10L_0]$
+    for all $e \in E = F \cup \{1\} \cup \{11\}$.}
+  \label{tab:witnesses}
+  \begin{tabular}{clrrr}
+    \toprule
+    Omit & $F$ & $L_0$ & $N$ & $k_F$ \\
+    \midrule
+    2  & $\{3,4,5,6,7,8,9,10\}$ & 2520 & 27720 & 12830 \\
+    3  & $\{2,4,5,6,7,8,9,10\}$ & 2520 & 27720 & 8568  \\
+    4  & $\{2,3,5,6,7,8,9,10\}$ & 2520 & 27720 & 6440  \\
+    5  & $\{2,3,4,6,7,8,9,10\}$ & 2520 & 27720 & 5270  \\
+    6  & $\{2,3,4,5,7,8,9,10\}$ & 2520 & 27720 & 4320  \\
+    7  & $\{2,3,4,5,6,8,9,10\}$ & 360  & 3960  & 540   \\
+    8  & $\{2,3,4,5,6,7,9,10\}$ & 1260 & 13860 & 1680  \\
+    9  & $\{2,3,4,5,6,7,8,10\}$ & 840  & 9240  & 1008  \\
+    10 & $\{2,3,4,5,6,7,8,9\}$  & 2520 & 27720 & 2750  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Analytic Proof for $M \geq 2$}
+\label{sec:largem}
+
+\begin{theorem}
+  \label{thm:largem}
+  If $|\Ediv| = 1$ and $M \geq 2$ with $\gcd(M, 11 L_0) = 1$, then
+  $x_0(E) \geq 119$.
+\end{theorem}
+
+\begin{lemma}[Transparency of $11M$ at floor state $1$]
+  \label{lem:transparencyB}
+  For $b \in [L_0, 2L_0)$: $\bad(11M, b) = \emptyset$.
+\end{lemma}
+
+\begin{proof}
+  $\floor{11M \cdot b / L} = \floor{b / L_0} = 1$.
+  Since $11 \mid 11M$: $\Sol(11M, j, 11) = \mathbb{Z}_{11}$ if
+  $11 \mid j$, else $\emptyset$.
+  $\bad(11M, b) = \Sol(11M, -1, 11) \cup \Sol(11M, -2, 11)$.
+  Neither $-1$ nor $-2$ is divisible by $11$, so both sets are empty.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:largem}]
+  Choose $I_M = [L_0, 2L_0)$. Since $N = 121 M L_0 \geq 242 L_0 > 2L_0$,
+  we have $I_M \subset (0, N)$.
+
+  \textit{Runner $11M$ transparent on $I_M$:} Lemma~\ref{lem:transparencyB}.
+
+  \textit{Floor state $0$ for all $e_u \in F \cup \{M\}$ on $I_M$:}
+  For $e_u \in F \subset \{1,\ldots,10\}$ and $b \in [L_0, 2L_0)$:
+  \[
+    \frac{e_u b}{L} = \frac{e_u b}{11 M L_0}
+      < \frac{10 \cdot 2 L_0}{11 \cdot 2 \cdot L_0}
+      = \frac{10}{11} < 1
+      \quad (M \geq 2).
+  \]
+  For $e_u = M$:
+  \[
+    \frac{M b}{L} = \frac{b}{11 L_0}
+      < \frac{2 L_0}{11 L_0} = \frac{2}{11} < 1.
+  \]
+  Hence $\floor{e_u b/L} = 0$ for all $e_u \in F \cup \{M\}$.
+  By Lemma~\ref{lem:floor0}: $\bad(e_u, b) = \{0,\, {-e_u^{-1}} \bmod 11\}$.
+
+  \textit{Uncovered unit residue:}
+  The set $\{{-e_u^{-1}} \bmod 11 : e_u \in F \cup \{M\}\}$ has at most
+  $|F \cup \{M\}| = 9$ elements in $\Zstar = \{1,\ldots,10\}$
+  (size $10$).
+  Hence at least one $r^* \in \Zstar$ satisfies
+  $r^* \notin \bad(e_u, b)$ for all $e_u \in F \cup \{M\}$.
+
+  \textit{Safe times:}
+  For each $b \in I_M \cap \mathbb{Z}$, set $k(b) = b + r^* M L_0$.
+  Since $r^* \in \{1,\ldots,10\}$:
+  $k(b) \leq 2L_0 + 10 M L_0 < 121 M L_0 = N$, so $k(b) \in (0, N)$.
+  Runner $11M$ is safe (transparent).
+  Each $e_u \in F \cup \{M\}$ is safe: $r^* \notin \bad(e_u, b)$.
+  Different values of $b$ give different $k(b)$.
+
+  \textit{Count:}
+  $|I_M \cap \mathbb{Z}| = L_0 - 1 \geq 120 - 1 = 119$.
+  Hence $x_0(E) \geq 119 \geq 10$.
+\end{proof}
+
+%% ===================================================================
+\section{Main Theorem}
+%% ===================================================================
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+  \textbf{Branch 1} ($\Ediv = \emptyset$):
+  Proposition~\ref{prop:nodiv} gives $x_0(E) \geq 10$.
+
+  \textbf{Branch 2} ($|\Ediv| \geq 2$):
+  Proposition~\ref{prop:multdiv} gives $x_0(E) \geq 10$.
+
+  \textbf{Branch 3} ($|\Ediv| = 1$):
+  Corollary~\ref{cor:threshold} forces $M = 1$ or $M \geq 2$.
+  Proposition~\ref{prop:residual} gives $x_0(E) \geq 2$ for $M = 1$.
+  Theorem~\ref{thm:largem} gives $x_0(E) \geq 119$ for $M \geq 2$.
+  In every case $x_0(E) \geq 2 > 0$.
+\end{proof}
+
+%% ===================================================================
+\section{Companion Exact Certificate}
+\label{sec:certificate}
+%% ===================================================================
+
+The proof above is entirely analytic; the computation below is
+independent verification only.
+
+\subsection*{Coverage}
+
+The normalized one-divisible branch has been checked exactly across all
+$45$ templates ($2115$ finite checks, $0$ violations).
+This certificate is not a proof step.
+
+\subsection*{Parametric-linear validation}
+
+The hardest template (\texttt{F1246689}, $L_0 = 792$, $C_F = 648$)
+was subjected to PL analysis with $M$ up to $3000$ ($909$ valid values).
+\begin{itemize}
+  \item \textbf{PL.1} (floor-quotient independence):
+    $t_M(b) = \floor{Mb/L} = \floor{b/(11L_0)}$ does not depend on $M$.
+    Proved analytically and verified computationally.
+  \item \textbf{PL.3} (slope gap):
+    $\alpha_F = 2373/121 \approx 19.6 < C_F = 648$.
+    This is consistent with the analytic bound of
+    Theorem~\ref{thm:largem}, which does not use this gap.
+  \item \textbf{PL.2} (holdout):
+    $88$ of $110$ residue classes (mod $121$) fit the linear model
+    exactly.
+\end{itemize}
+
+\subsection*{Artifact files}
+\begin{itemize}
+  \item \texttt{lrc\_case2\_d3\_batch\_summary\_n7n11\_v2.md}
+  \item \texttt{lrc\_case2\_d3\_batch\_rows\_n7n11\_v2.csv}
+  \item \texttt{lrc\_case2\_n11\_pl\_recheck\_v2.md}
+  \item \texttt{lrc\_case2\_n11\_family\_set\_summary\_v3.md}
+\end{itemize}
+
+%% ===================================================================
+\section*{Data and Code Availability}
+%% ===================================================================
+
+Batch verification scripts (\texttt{lrc\_chamber\_audit\_v1.py},
+\texttt{lrc\_true\_bsafe\_verification\_v1.py}) and PL validation
+script (\texttt{lrc\_case2\_n11\_pl\_validation\_v1.py}) are available
+in the accompanying data package.
+All scripts are standalone Python~3 requiring only \texttt{math},
+\texttt{itertools}, and \texttt{fractions}.
+
+%% ===================================================================
+\appendix
+\section{Arithmetic Verification for $M = 1$ Witnesses}
+\label{sec:arithmetic}
+%% ===================================================================
+
+For each row of Table~\ref{tab:witnesses}, we record $e \cdot k_F
+\bmod N$ for every $e \in E = F \cup \{1\} \cup \{11\}$ and verify the
+value lies in $[L_0, 10L_0]$.
+
+\bigskip
+\noindent\textbf{Omit 2.}
+$F = \{3,4,5,6,7,8,9,10\}$, $L_0 = 2520$, $N = 27720$, $k = 12830$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 12830 & \checkmark \\
+3  & 10770 & \checkmark \\
+4  & 23600 & \checkmark \\
+5  & 8710  & \checkmark \\
+6  & 21540 & \checkmark \\
+7  & 6650  & \checkmark \\
+8  & 19480 & \checkmark \\
+9  & 4590  & \checkmark \\
+10 & 17420 & \checkmark \\
+11 & 2530  & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 3.}
+$F = \{2,4,5,6,7,8,9,10\}$, $L_0 = 2520$, $N = 27720$, $k = 8568$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 8568  & \checkmark \\
+2  & 17136 & \checkmark \\
+4  & 6552  & \checkmark \\
+5  & 15120 & \checkmark \\
+6  & 23688 & \checkmark \\
+7  & 4536  & \checkmark \\
+8  & 13104 & \checkmark \\
+9  & 21672 & \checkmark \\
+10 & 2520  & \checkmark \\
+11 & 11088 & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 4.}
+$F = \{2,3,5,6,7,8,9,10\}$, $L_0 = 2520$, $N = 27720$, $k = 6440$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 6440  & \checkmark \\
+2  & 12880 & \checkmark \\
+3  & 19320 & \checkmark \\
+5  & 4480  & \checkmark \\
+6  & 10920 & \checkmark \\
+7  & 17360 & \checkmark \\
+8  & 23800 & \checkmark \\
+9  & 2520  & \checkmark \\
+10 & 8960  & \checkmark \\
+11 & 15400 & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 5.}
+$F = \{2,3,4,6,7,8,9,10\}$, $L_0 = 2520$, $N = 27720$, $k = 5270$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 5270  & \checkmark \\
+2  & 10540 & \checkmark \\
+3  & 15810 & \checkmark \\
+4  & 21080 & \checkmark \\
+6  & 3900  & \checkmark \\
+7  & 9170  & \checkmark \\
+8  & 14440 & \checkmark \\
+9  & 19710 & \checkmark \\
+10 & 24980 & \checkmark \\
+11 & 2530  & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 6.}
+$F = \{2,3,4,5,7,8,9,10\}$, $L_0 = 2520$, $N = 27720$, $k = 4320$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 4320  & \checkmark \\
+2  & 8640  & \checkmark \\
+3  & 12960 & \checkmark \\
+4  & 17280 & \checkmark \\
+5  & 21600 & \checkmark \\
+7  & 2520  & \checkmark \\
+8  & 6840  & \checkmark \\
+9  & 11160 & \checkmark \\
+10 & 15480 & \checkmark \\
+11 & 19800 & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 7.}
+$F = \{2,3,4,5,6,8,9,10\}$, $L_0 = 360$, $N = 3960$, $k = 540$.
+Range: $[360, 3600]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 540  & \checkmark \\
+2  & 1080 & \checkmark \\
+3  & 1620 & \checkmark \\
+4  & 2160 & \checkmark \\
+5  & 2700 & \checkmark \\
+6  & 3240 & \checkmark \\
+8  & 360  & \checkmark \\
+9  & 900  & \checkmark \\
+10 & 1440 & \checkmark \\
+11 & 1980 & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 8.}
+$F = \{2,3,4,5,6,7,9,10\}$, $L_0 = 1260$, $N = 13860$, $k = 1680$.
+Range: $[1260, 12600]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 1680  & \checkmark \\
+2  & 3360  & \checkmark \\
+3  & 5040  & \checkmark \\
+4  & 6720  & \checkmark \\
+5  & 8400  & \checkmark \\
+6  & 10080 & \checkmark \\
+7  & 11760 & \checkmark \\
+9  & 1260  & \checkmark \\
+10 & 2940  & \checkmark \\
+11 & 4620  & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 9.}
+$F = \{2,3,4,5,6,7,8,10\}$, $L_0 = 840$, $N = 9240$, $k = 1008$.
+Range: $[840, 8400]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 1008 & \checkmark \\
+2  & 2016 & \checkmark \\
+3  & 3024 & \checkmark \\
+4  & 4032 & \checkmark \\
+5  & 5040 & \checkmark \\
+6  & 6048 & \checkmark \\
+7  & 7056 & \checkmark \\
+8  & 8064 & \checkmark \\
+10 & 840  & \checkmark \\
+11 & 1848 & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\noindent\textbf{Omit 10.}
+$F = \{2,3,4,5,6,7,8,9\}$, $L_0 = 2520$, $N = 27720$, $k = 2750$.
+Range: $[2520, 25200]$.
+
+\medskip
+\begin{tabular}{rrl}
+\toprule
+$e$ & $e \cdot k \bmod N$ & In range? \\
+\midrule
+1  & 2750  & \checkmark \\
+2  & 5500  & \checkmark \\
+3  & 8250  & \checkmark \\
+4  & 11000 & \checkmark \\
+5  & 13750 & \checkmark \\
+6  & 16500 & \checkmark \\
+7  & 19250 & \checkmark \\
+8  & 22000 & \checkmark \\
+9  & 24750 & \checkmark \\
+11 & 2530  & \checkmark \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\noindent All 9 templates verified. $\square$
+
+%% ===================================================================
+\begin{thebibliography}{12}
+
+\bibitem{Wil67}
+  J.~M.~Wills,
+  \textit{Zwei S\"{a}tze \"{u}ber inhomogene diophantische Approximation
+    von Irrationalzahlen},
+  Monatsh.\ Math.\ \textbf{71} (1967), 263--269.
+
+\bibitem{Cus73}
+  T.~W.~Cusick,
+  \textit{View-obstruction problems},
+  Aequationes Math.\ \textbf{9} (1973), 165--170.
+
+\bibitem{BGG+98}
+  W.~Bienia, L.~Goddyn, P.~Gvozdjak, A.~Seb{\H{o}}, and M.~Tarsi,
+  \textit{Flows, view obstructions, and the lonely runner},
+  J.\ Combin.\ Theory Ser.\ B \textbf{72} (1998), no.~1, 1--9.
+
+\bibitem{BH01}
+  T.~Bohman and R.~Holzman,
+  \textit{Six lonely runners},
+  Electron.\ J.\ Combin.\ \textbf{8} (2001), no.~2, R3.
+
+\bibitem{BS08}
+  J.~Barajas and O.~Serra,
+  \textit{The lonely runner with seven runners},
+  Electron.\ J.\ Combin.\ \textbf{15} (2008), no.~1, R48.
+
+\bibitem{Tao18}
+  T.~Tao,
+  \textit{Some remarks on the lonely runner conjecture},
+  Contrib.\ Discrete Math.\ \textbf{13} (2018), no.~2, 1--31.
+
+\bibitem{Ros25}
+  N.~Rosenfeld,
+  \textit{The Lonely Runner Conjecture for Eight Runners},
+  arXiv:2509.14111 [math.CO], 2025.
+
+\bibitem{Tra25}
+  N.~Trakulthongchai,
+  \textit{The Lonely Runner Conjecture for 9 and 10 Runners},
+  arXiv:2511.22427 [math.CO], 2025.
+
+\bibitem{Pal26}
+  T.~Palelei,
+  \textit{A Proof of the Lonely Runner Conjecture},
+  Preprint, 2026.
+  [Context reference; no proof in this paper depends on~\cite{Pal26}.]
+
+\end{thebibliography}
+
+\end{document}

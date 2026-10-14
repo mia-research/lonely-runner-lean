@@ -1,0 +1,136 @@
+import LonelyRunner.LRC.Spec.TwoPinnerN
+
+/-!
+# Separation: two runners in one slot, and the instant they part
+
+2026-09-28.  Running record: `RUNNING_LOG_order8_v1.md` E158–E159.
+
+The owner's mechanism (E158): when a runner shares the subject's slot, the isolation waits for the two to separate.  At an
+instant `t₀` a reading `c` sits exactly in the slot (`c·t₀` a whole number); it separates at `t₁ = t₀ + 1/(8c)`, where it
+is exactly on the leaving edge, `1/8` past.  Every other reading `d` moves by `d/(8c)` of a lap on the way.  If each keeps
+its clear band through that shift, every reading is clear at `t₁`.  The mirror separation, `t₀ − 1/(8c)`, has the
+captured reading on the entering edge.
+
+This is one move of the cascade stated as a uniform rule on the data at `t₀` (residues and margins).  It generalises
+`GridNudgeN` (the captured reading the largest, `t₀` the bound) to a captured reading of any rank.  Repeated separations
+from an instant are the cascade itself, so "the separations come to rest" is not a regime; what is owed is that they
+cannot continue for ever (E159).
+
+* `sep_captured`, `sep_captured_back`: the captured reading is on the leaving (entering) edge after the shift.
+* `sep_keeps`, `sep_keeps_back`: a reading that keeps its band through the shift stays clear.
+* `lonely_of_separation`, `lonely_of_separation_back`: the separation regime.
+
+Everything here is proved; no `sorry`, no `native_decide`.
+-/
+
+namespace LRC.Separation
+
+/-- The captured reading, exactly in the slot at `t₀`, is on the leaving edge at `t₀ + 1/(8c)`. -/
+theorem sep_captured {c t0 : ℝ} {K : ℤ} (hc : 0 < c) (hK : c * t0 = K) :
+    (8 : ℝ)⁻¹ ≤ circDist (c * (t0 + 1 / (8 * c))) := by
+  have e : c * (t0 + 1 / (8 * c)) = (K : ℝ) + 1 / 8 := by
+    rw [mul_add, hK]; field_simp
+  rw [e]; exact LRC.TwoPinner.clear_of_band (N := K) le_rfl (by linarith)
+
+/-- The captured reading is on the entering edge at `t₀ − 1/(8c)`. -/
+theorem sep_captured_back {c t0 : ℝ} {K : ℤ} (hc : 0 < c) (hK : c * t0 = K) :
+    (8 : ℝ)⁻¹ ≤ circDist (c * (t0 - 1 / (8 * c))) := by
+  have e : c * (t0 - 1 / (8 * c)) = ((K - 1 : ℤ) : ℝ) + 7 / 8 := by
+    rw [mul_sub, hK]; push_cast; field_simp; ring
+  rw [e]; exact LRC.TwoPinner.clear_of_band (N := K - 1) (by linarith) le_rfl
+
+/-- A reading that keeps its band `[N + 1/8, N + 7/8]` through the forward shift `d/(8c)` stays clear. -/
+theorem sep_keeps {c d t0 : ℝ} {N : ℤ} (hc : 0 < c) (hd : 0 ≤ d) (h1 : (N : ℝ) + 1 / 8 ≤ d * t0)
+    (h2 : d * t0 + d / (8 * c) ≤ (N : ℝ) + 7 / 8) : (8 : ℝ)⁻¹ ≤ circDist (d * (t0 + 1 / (8 * c))) := by
+  have e : d * (t0 + 1 / (8 * c)) = d * t0 + d / (8 * c) := by ring
+  have hs : 0 ≤ d / (8 * c) := by positivity
+  rw [e]; exact LRC.TwoPinner.clear_of_band (N := N) (by linarith) h2
+
+/-- A reading that keeps its band through the backward shift stays clear. -/
+theorem sep_keeps_back {c d t0 : ℝ} {N : ℤ} (hc : 0 < c) (hd : 0 ≤ d) (h1 : (N : ℝ) + 1 / 8 ≤ d * t0 - d / (8 * c))
+    (h2 : d * t0 ≤ (N : ℝ) + 7 / 8) : (8 : ℝ)⁻¹ ≤ circDist (d * (t0 - 1 / (8 * c))) := by
+  have e : d * (t0 - 1 / (8 * c)) = d * t0 - d / (8 * c) := by ring
+  have hs : 0 ≤ d / (8 * c) := by positivity
+  rw [e]; exact LRC.TwoPinner.clear_of_band (N := N) h1 (by linarith)
+
+/-- **The separation regime.**  A reading `c` exactly in the subject's slot at `t₀`; every other reading keeps its band
+through the shift `x i/(8c)`.  Then every reading is clear at `t₀ + 1/(8c)`, the instant the two separate. -/
+theorem lonely_of_separation {ι : Type*} (S : Finset ι) (x : ι → ℝ) {c : ι} {t0 : ℝ} {K : ℤ}
+    (hxc : 0 < x c) (hK : x c * t0 = K) (hpos : ∀ i ∈ S, 0 ≤ x i)
+    (hband : ∀ i ∈ S, i ≠ c → ∃ N : ℤ, (N : ℝ) + 1 / 8 ≤ x i * t0 ∧ x i * t0 + x i / (8 * x c) ≤ (N : ℝ) + 7 / 8) :
+    ∀ i ∈ S, (8 : ℝ)⁻¹ ≤ circDist (x i * (t0 + 1 / (8 * x c))) := by
+  intro i hi
+  by_cases h : i = c
+  · subst h; exact sep_captured hxc hK
+  · obtain ⟨N, h1, h2⟩ := hband i hi h
+    exact sep_keeps hxc (hpos i hi) h1 h2
+
+/-- **The mirror separation.**  The same with the shift taken backwards: clear at `t₀ − 1/(8c)`. -/
+theorem lonely_of_separation_back {ι : Type*} (S : Finset ι) (x : ι → ℝ) {c : ι} {t0 : ℝ} {K : ℤ}
+    (hxc : 0 < x c) (hK : x c * t0 = K) (hpos : ∀ i ∈ S, 0 ≤ x i)
+    (hband : ∀ i ∈ S, i ≠ c → ∃ N : ℤ, (N : ℝ) + 1 / 8 ≤ x i * t0 - x i / (8 * x c) ∧ x i * t0 ≤ (N : ℝ) + 7 / 8) :
+    ∀ i ∈ S, (8 : ℝ)⁻¹ ≤ circDist (x i * (t0 - 1 / (8 * x c))) := by
+  intro i hi
+  by_cases h : i = c
+  · subst h; exact sep_captured_back hxc hK
+  · obtain ⟨N, h1, h2⟩ := hband i hi h
+    exact sep_keeps_back hxc (hpos i hi) h1 h2
+
+/-! ### Transport: who can be in the slot after a separation -/
+
+/-- **Whoever is in the slot after the separation crossed its entering edge during the shift.**  A reading clear at `t₀`
+in its band `[N + 1/8, N + 7/8]` that is in the subject's window at `t₀ + 1/(8c)` was within its shift `d/(8c)` of the
+entering edge `N + 7/8` at `t₀`. -/
+theorem crossed_entering_edge {c d t0 : ℝ} {N : ℤ} (hc : 0 < c) (hd : 0 ≤ d) (h1 : (N : ℝ) + 1 / 8 ≤ d * t0)
+    (hin : circDist (d * (t0 + 1 / (8 * c))) < (8 : ℝ)⁻¹) : (N : ℝ) + 7 / 8 < d * t0 + d / (8 * c) := by
+  by_contra h
+  push Not at h
+  exact absurd (sep_keeps hc hd h1 h) (not_le.mpr hin)
+
+/-- A slower reading moves by less than an eighth of a lap while the captured reading separates. -/
+theorem slower_shift_lt {c d : ℝ} (hc : 0 < c) (hdc : d < c) : d / (8 * c) < 1 / 8 := by
+  rw [div_lt_div_iff₀ (by positivity) (by norm_num)]; nlinarith
+
+/-- **An obstructing slower reading is an edge push.**  A slower reading clear at `t₀` that is in the slot after the
+separation was within an eighth of a lap of its entering edge at `t₀` (it sat in `(N + 3/4, N + 7/8]`). -/
+theorem slower_obstruction_is_edge_push {c d t0 : ℝ} {N : ℤ} (hc : 0 < c) (hd : 0 ≤ d) (hdc : d < c)
+    (h1 : (N : ℝ) + 1 / 8 ≤ d * t0) (hin : circDist (d * (t0 + 1 / (8 * c))) < (8 : ℝ)⁻¹) :
+    (N : ℝ) + 3 / 4 < d * t0 := by
+  have := crossed_entering_edge hc hd h1 hin
+  have := slower_shift_lt hc hdc
+  linarith
+
+/-- **Transport.**  At a separation of the captured reading `c` from the subject's slot, with every other reading clear
+at `t₀`: the captured reading is clear afterwards, and every reading in the slot afterwards crossed its entering edge
+during the shift; a slower one was an edge push (within an eighth of a lap of its entering edge at `t₀`).  The next
+obstruction is not arbitrary: it is made only of readings the shift carried over an entering edge. -/
+theorem transport {ι : Type*} (S : Finset ι) (x : ι → ℝ) {c : ι} {t0 : ℝ} {K : ℤ}
+    (hxc : 0 < x c) (hK : x c * t0 = K) (hpos : ∀ i ∈ S, 0 ≤ x i)
+    (hclear : ∀ i ∈ S, i ≠ c → ∃ N : ℤ, (N : ℝ) + 1 / 8 ≤ x i * t0 ∧ x i * t0 ≤ (N : ℝ) + 7 / 8) :
+    ∀ i ∈ S, circDist (x i * (t0 + 1 / (8 * x c))) < (8 : ℝ)⁻¹ →
+      i ≠ c ∧ ∃ N : ℤ, (N : ℝ) + 7 / 8 < x i * t0 + x i / (8 * x c) ∧ x i * t0 ≤ (N : ℝ) + 7 / 8 ∧
+        (x i < x c → (N : ℝ) + 3 / 4 < x i * t0) := by
+  intro i hi hin
+  have hne : i ≠ c := by
+    rintro rfl; exact absurd (sep_captured hxc hK) (not_le.mpr hin)
+  obtain ⟨N, h1, h2⟩ := hclear i hi hne
+  refine ⟨hne, N, crossed_entering_edge hxc (hpos i hi) h1 hin, h2, fun hlt => ?_⟩
+  exact slower_obstruction_is_edge_push hxc (hpos i hi) hlt h1 hin
+
+/-! ### No return for sweep steps: a pair hands over by a sweep step on finitely many laps -/
+
+/-- **A sweep step on lap `k` bounds the lap.**  If the slower reading `b` is inside its lap-`k` window at the faster
+reading `a`'s lap-`k` exit (`s_a(8k − 1) < s_b(8k + 1)`, `SweepBridgeN.sweep_ratio`), then `8k·(s_a − s_b) < s_a + s_b`.
+So a given pair of distinct speeds hands the isolation down by a sweep step on only finitely many laps; only equal
+speeds could do it on every lap. -/
+theorem sweep_lap_bound {sa sb k : ℝ} (h : sa * (8 * k - 1) < sb * (8 * k + 1)) : 8 * k * (sa - sb) < sa + sb := by
+  nlinarith
+
+/-- The same, as a bound on the lap: for `s_b < s_a`, a sweep step on lap `k` needs `k < (s_a + s_b)/(8(s_a − s_b))`. -/
+theorem sweep_lap_lt {sa sb k : ℝ} (hab : sb < sa) (h : sa * (8 * k - 1) < sb * (8 * k + 1)) :
+    k < (sa + sb) / (8 * (sa - sb)) := by
+  rw [lt_div_iff₀ (by linarith)]
+  have := sweep_lap_bound h
+  linarith
+
+end LRC.Separation

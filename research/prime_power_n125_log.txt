@@ -1,0 +1,37 @@
+# n=125, p=5, k=3, non-units=24, drop pairs=276/276
+  [10/276] drop=(5, 55): C_bad/M=3.4373, |S_drop|=0, partial_max/(L/p^2)=4.3098
+  [20/276] drop=(5, 105): C_bad/M=3.3635, |S_drop|=0, partial_max/(L/p^2)=4.3915
+  [30/276] drop=(10, 45): C_bad/M=3.9532, |S_drop|=0, partial_max/(L/p^2)=4.5142
+  [40/276] drop=(10, 95): C_bad/M=3.2372, |S_drop|=0, partial_max/(L/p^2)=3.6820
+  [50/276] drop=(15, 40): C_bad/M=3.9414, |S_drop|=1, partial_max/(L/p^2)=4.2175
+  [60/276] drop=(15, 90): C_bad/M=4.1098, |S_drop|=1, partial_max/(L/p^2)=4.3670
+  [70/276] drop=(20, 40): C_bad/M=3.8360, |S_drop|=1, partial_max/(L/p^2)=4.2175
+  [80/276] drop=(20, 90): C_bad/M=4.0290, |S_drop|=1, partial_max/(L/p^2)=4.3670
+  [90/276] drop=(25, 45): C_bad/M=4.1620, |S_drop|=0, partial_max/(L/p^2)=4.5142
+  [100/276] drop=(25, 95): C_bad/M=3.3560, |S_drop|=0, partial_max/(L/p^2)=3.4962
+  [110/276] drop=(30, 55): C_bad/M=3.9496, |S_drop|=0, partial_max/(L/p^2)=4.3098
+  [120/276] drop=(30, 105): C_bad/M=4.0252, |S_drop|=0, partial_max/(L/p^2)=4.3915
+  [130/276] drop=(35, 70): C_bad/M=3.1464, |S_drop|=0, partial_max/(L/p^2)=3.3359
+  [140/276] drop=(35, 120): C_bad/M=3.9654, |S_drop|=0, partial_max/(L/p^2)=4.1336
+  [150/276] drop=(40, 90): C_bad/M=4.0364, |S_drop|=1, partial_max/(L/p^2)=3.8064
+  [160/276] drop=(45, 65): C_bad/M=2.9254, |S_drop|=0, partial_max/(L/p^2)=3.1885
+  [170/276] drop=(45, 115): C_bad/M=3.5933, |S_drop|=0, partial_max/(L/p^2)=3.6183
+  [180/276] drop=(50, 95): C_bad/M=3.4907, |S_drop|=0, partial_max/(L/p^2)=3.6820
+  [190/276] drop=(55, 80): C_bad/M=3.5201, |S_drop|=0, partial_max/(L/p^2)=3.8061
+  [200/276] drop=(60, 70): C_bad/M=3.9846, |S_drop|=0, partial_max/(L/p^2)=4.3214
+  [210/276] drop=(60, 120): C_bad/M=4.0998, |S_drop|=0, partial_max/(L/p^2)=4.6992
+  [220/276] drop=(65, 115): C_bad/M=2.6989, |S_drop|=0, partial_max/(L/p^2)=2.8676
+  [230/276] drop=(70, 115): C_bad/M=3.4811, |S_drop|=0, partial_max/(L/p^2)=4.1637
+  [240/276] drop=(75, 120): C_bad/M=4.4491, |S_drop|=0, partial_max/(L/p^2)=4.7335
+  [250/276] drop=(85, 95): C_bad/M=2.4004, |S_drop|=0, partial_max/(L/p^2)=2.6302
+  [260/276] drop=(90, 115): C_bad/M=3.6153, |S_drop|=0, partial_max/(L/p^2)=4.1637
+  [270/276] drop=(100, 120): C_bad/M=4.5243, |S_drop|=0, partial_max/(L/p^2)=4.7335
+
+# ===== Summary for n=125 (p=5, k=3) =====
+#   pairs analysed         = 276
+#   max  C_bad/(L/p)       = 4.608314
+#   mean C_bad/(L/p)       = 3.712760
+#   max  |S_drop|          = 3
+#   max  partial/(L/p^2)   = 4.733452
+#   mean partial/(L/p^2)   = 3.983434
+#   |S_drop| distribution  = {0: 211, 1: 44, 2: 17, 3: 4}

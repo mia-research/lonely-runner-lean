@@ -1,2 +1,19 @@
 /.lake
 logs/
+
+# Local build output and regenerable experiment caches
+LonelyRunnerFresh/build/
+__pycache__/
+*.pyc
+.DS_Store
+experiments/**/*.pkl
+experiments/**/*.npz
+experiments/**/*.jsonl
+experiments/**/*.jsonl.gz
+experiments/**/*.out
+experiments/**/*.err
+experiments/**/*.log
+experiments/**/*.progress
+experiments/**/*.ckpt
+experiments/**/*.stdout
+experiments/**/*.json
