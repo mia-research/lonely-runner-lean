@@ -2,6 +2,7 @@ import LonelyRunner.LRC.Spec.OrderSixSecFiveEN
 import LonelyRunner.LRC.Spec.OrderSixSixN
 import LonelyRunner.LRC.Spec.OrderSixSecSevenCasesN
 import LonelyRunner.LRC.Spec.OrderFiveResidualN
+import LonelyRunner.LRC.Spec.OrderSixSecSevenNativeN
 
 /-!
 # Order six on whole numbers: the four BHK cases, dispatched
@@ -11,7 +12,9 @@ import LonelyRunner.LRC.Spec.OrderFiveResidualN
 * `v₃ ≤ 3v₁`                      — §8, `lonely_8`;
 * `3v₁ < v₃`, `D ∣ v₁`             — §5, `lonely_5` (Proposition 11 at named instants);
 * `3v₁ < v₃`, `D ∣ v₃`, `D ∤ v₁`   — §6, `lonely_6`;
-* `3v₁ < v₃`, `D ∤ v₃`, `D ∤ v₁`   — §7, `lonely_7`.
+* `3v₁ < v₃`, `D ∤ v₃`, `D ∤ v₁`   — §7, `S7Native.lonely_7_native` (2026-10-16; the native route: 2D global
+  isolation on the meeting-time orbit, the two-runner window lemma, `G₄`/`G₇` closed by boxes and windows).
+  BHK's form `S7.lonely_7` is kept and still proved.
 
 These cover every case, so every set of at most five positive whole numbers is lonely at `1/6`
 (`lonely_six_nat`); four or fewer are lonely at `1/5` already (`lonely_five_nat`).  No primitivity.
@@ -35,7 +38,7 @@ theorem lonely6_of_lt {v1 v2 v3 v4 v5 : ℕ} (h0 : 0 < v1) (h12 : v1 < v2) (h23 
   · exact S7.Named.lonely_5 h0 h12 h23 h34 h45 hlarge hD1
   by_cases hD3 : (v3 - v2) ∣ v3
   · exact lonely_6 h0 h12 h23 h34 h45 hlarge hD3 hD1
-  · exact S7.lonely_7 h0 h12 h23 h34 h45 hlarge hD3 hD1
+  · exact LRC.S7Native.lonely_7_native h0 h12 h23 h34 h45 hlarge hD3 hD1
 
 /-- **Order six on whole numbers.**  At most five positive whole numbers are lonely at `1/6`. -/
 theorem lonely_six_nat (S : Finset ℕ) (hpos : ∀ d ∈ S, 0 < d) (hcard : S.card ≤ 5) :
