@@ -1,0 +1,514 @@
+residue_fold_v1 -- straight-line path from the AP to residue-isolation arrangements
+bounds (entries <= B): n=3: B=60, n=4: B=50, n=5: B=40, n=6: B=40, n=7: B=28
+t-window for grid tests: [0, 1];  s-grids: 64 and 256 steps;  naive-test sample: 150 arrangements per order (seeded)
+
+==============================================================================
+ORDER n=3   B=60   arrangements (primitive, AP excluded) = 272   units p = [1, 2]   (arrangement, p) pairs = 544
+-- Task 2 (exact label-cell method; no grid) --
+  forward component from (s=0, t=p/n) reaches s=1           : 179
+     of which contains (1, p/n)                              : 0
+     of which s=1 t-set contains some unit instant q/n       : 1
+     of which s=1 t-set contains no q/n with gcd(q,n)=1      : 178
+     of which s=1 t-set is a single point                    : 1
+  forward component dies before s=1                         : 365
+     of which dies at s=0 (component is the single point)    : 272
+     death s histogram (bin 0 = exactly 0, bin k = [k/10,(k+1)/10)) : {0: 296, 1: 32, 2: 18, 3: 6, 5: 13}
+  per p: [reach, die] = {1: [136, 136], 2: [43, 229]}
+  backward component from (s=1, t=p/n) reaches s=0          : 10
+     AP t-set at s=0 for those, by (p, [L,U]) : {(1, ('2/3', '2/3')): 1, (1, ('5/3', '5/3')): 1, (1, ('8/3', '8/3')): 1, (1, ('11/3', '11/3')): 1, (1, ('14/3', '14/3')): 1, (1, ('17/3', '17/3')): 1, (1, ('20/3', '20/3')): 1, (1, ('23/3', '23/3')): 1, (1, ('26/3', '26/3')): 1, (1, ('29/3', '29/3')): 1}
+  pairs with a speed collision on s in (0,1]                : 236
+  pairs with a collision inside the forward component       : 118
+  pairs with an exact entry-flank handover in the component : 161
+  pairs with an exact exit-flank handover in the component  : 181
+-- Task 2 (naive grid overlap test, sample of 300 pairs, window [0,1]) --
+  grid   64: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 299 (die at first step s=1/64: 289);  reach/die agrees with exact method: 200/300
+  grid  256: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 299 (die at first step s=1/256: 285);  reach/die agrees with exact method: 200/300
+-- Task 3 (slot picture along midpoint path t(s)=(L+U)/2 of the K0 cell, grid 1/64 plus s_hi) --
+  pairs tracked 544: slot vector constant 363, changes 181, two runners share a slot 63, flank runner changes 170, a reading at a half-slot tie 63
+-- Task 4 (one m_i at a time, every order of runners with m_i>0; label kept) --
+  forward (from (AP,p/n)) tried 365 pairs where the straight line dies; orders tried 675; orders that reach d 0; pairs with >=1 connecting order 0
+  forward: deepest vertex reached (ramped runners / runners with m>0) : {'0/1': 55, '0/2': 286, '1/2': 24}
+  backward (from (d,p/n) toward AP) tried 534; pairs with >=1 connecting order 0
+  sample reach_ex: d=(1, 5) p=2 m=[0, 1] K0=(0, 1) s_hi=1 end_t=('1/3', '1/3') s_lo_back=1
+  sample die_ex: d=(1, 8) p=2 m=[0, 2] K0=(0, 1) s_hi=1/2 end_t=('1/3', '1/3') s_lo_back=1
+  sample bw_ex: d=(1, 5) p=1 m=[0, 1] K0=(0, 0) s_hi=0 end_t=('1/3', '1/3') s_lo_back=0 back_t0=('2/3', '2/3') Kd=(0, 1)
+==============================================================================
+ORDER n=4   B=50   arrangements (primitive, AP excluded) = 1936   units p = [1, 3]   (arrangement, p) pairs = 3872
+-- Task 2 (exact label-cell method; no grid) --
+  forward component from (s=0, t=p/n) reaches s=1           : 916
+     of which contains (1, p/n)                              : 0
+     of which s=1 t-set contains some unit instant q/n       : 1
+     of which s=1 t-set contains no q/n with gcd(q,n)=1      : 915
+     of which s=1 t-set is a single point                    : 25
+  forward component dies before s=1                         : 2956
+     of which dies at s=0 (component is the single point)    : 1893
+     death s histogram (bin 0 = exactly 0, bin k = [k/10,(k+1)/10)) : {0: 2262, 1: 254, 2: 185, 3: 85, 4: 53, 5: 39, 6: 40, 7: 17, 8: 21}
+  per p: [reach, die] = {1: [871, 1065], 3: [45, 1891]}
+  backward component from (s=1, t=p/n) reaches s=0          : 4
+     AP t-set at s=0 for those, by (p, [L,U]) : {(1, ('3/4', '3/4')): 1, (1, ('7/4', '7/4')): 1, (1, ('11/4', '11/4')): 1, (1, ('15/4', '15/4')): 1}
+  pairs with a speed collision on s in (0,1]                : 3164
+  pairs with a collision inside the forward component       : 1441
+  pairs with an exact entry-flank handover in the component : 1331
+  pairs with an exact exit-flank handover in the component  : 1476
+-- Task 2 (naive grid overlap test, sample of 300 pairs, window [0,1]) --
+  grid   64: reach s=1 with p/n in set 0, reach s=1 elsewhere 0, die 300 (die at first step s=1/64: 280);  reach/die agrees with exact method: 232/300
+  grid  256: reach s=1 with p/n in set 0, reach s=1 elsewhere 0, die 300 (die at first step s=1/256: 280);  reach/die agrees with exact method: 232/300
+-- Task 3 (slot picture along midpoint path t(s)=(L+U)/2 of the K0 cell, grid 1/64 plus s_hi) --
+  pairs tracked 3872: slot vector constant 1936, changes 1936, two runners share a slot 1933, flank runner changes 1806, a reading at a half-slot tie 852
+-- Task 4 (one m_i at a time, every order of runners with m_i>0; label kept) --
+  forward (from (AP,p/n)) tried 2956 pairs where the straight line dies; orders tried 14263; orders that reach d 0; pairs with >=1 connecting order 0
+  forward: deepest vertex reached (ramped runners / runners with m>0) : {'0/1': 69, '0/2': 760, '0/3': 1987, '1/2': 22, '1/3': 110, '2/3': 8}
+  backward (from (d,p/n) toward AP) tried 3868; pairs with >=1 connecting order 0
+  sample reach_ex: d=(1, 6, 11) p=3 m=[0, 1, 2] K0=(0, 1, 2) s_hi=1 end_t=('1/4', '1/4') s_lo_back=1
+  sample die_ex: d=(1, 2, 7) p=3 m=[0, 0, 1] K0=(0, 1, 2) s_hi=7/20 end_t=('5/8', '5/8') s_lo_back=1
+  sample bw_ex: d=(1, 6, 11) p=1 m=[0, 1, 2] K0=(0, 0, 0) s_hi=0 end_t=('1/4', '1/4') s_lo_back=0 back_t0=('3/4', '3/4') Kd=(0, 1, 2)
+==============================================================================
+ORDER n=5   B=40   arrangements (primitive, AP excluded) = 3786   units p = [1, 2, 3, 4]   (arrangement, p) pairs = 15144
+-- Task 2 (exact label-cell method; no grid) --
+  forward component from (s=0, t=p/n) reaches s=1           : 1795
+     of which contains (1, p/n)                              : 0
+     of which s=1 t-set contains some unit instant q/n       : 3
+     of which s=1 t-set contains no q/n with gcd(q,n)=1      : 1792
+     of which s=1 t-set is a single point                    : 96
+  forward component dies before s=1                         : 13349
+     of which dies at s=0 (component is the single point)    : 7298
+     death s histogram (bin 0 = exactly 0, bin k = [k/10,(k+1)/10)) : {0: 10820, 1: 829, 2: 585, 3: 274, 4: 336, 5: 188, 6: 102, 7: 83, 8: 90, 9: 42}
+  per p: [reach, die] = {1: [1607, 2179], 2: [143, 3643], 3: [36, 3750], 4: [9, 3777]}
+  backward component from (s=1, t=p/n) reaches s=0          : 6
+     AP t-set at s=0 for those, by (p, [L,U]) : {(1, ('2/5', '2/5')): 1, (1, ('3/5', '3/5')): 1, (1, ('4/5', '4/5')): 1, (1, ('7/5', '7/5')): 1, (1, ('8/5', '8/5')): 1, (1, ('9/5', '9/5')): 1}
+  pairs with a speed collision on s in (0,1]                : 13864
+  pairs with a collision inside the forward component       : 4683
+  pairs with an exact entry-flank handover in the component : 5528
+  pairs with an exact exit-flank handover in the component  : 5813
+-- Task 2 (naive grid overlap test, sample of 600 pairs, window [0,1]) --
+  grid   64: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 599 (die at first step s=1/64: 540);  reach/die agrees with exact method: 531/600
+  grid  256: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 599 (die at first step s=1/256: 525);  reach/die agrees with exact method: 531/600
+-- Task 3 (slot picture along midpoint path t(s)=(L+U)/2 of the K0 cell, grid 1/64 plus s_hi) --
+  pairs tracked 15144: slot vector constant 7308, changes 7836, two runners share a slot 7654, flank runner changes 7591, a reading at a half-slot tie 1658
+-- Task 4 (one m_i at a time, every order of runners with m_i>0; label kept) --
+  forward (from (AP,p/n)) tried 13349 pairs where the straight line dies; orders tried 203199; orders that reach d 0; pairs with >=1 connecting order 0
+  forward: deepest vertex reached (ramped runners / runners with m>0) : {'0/1': 111, '0/2': 1092, '0/3': 4902, '0/4': 6875, '1/2': 15, '1/3': 89, '1/4': 164, '2/3': 24, '2/4': 61, '3/4': 16}
+  backward (from (d,p/n) toward AP) tried 15138; pairs with >=1 connecting order 0
+  sample reach_ex: d=(1, 2, 8, 9) p=2 m=[0, 0, 1, 1] K0=(0, 0, 1, 1) s_hi=1 end_t=('1/5', '1/5') s_lo_back=1
+  sample die_ex: d=(1, 2, 3, 9) p=2 m=[0, 0, 0, 1] K0=(0, 0, 1, 1) s_hi=1/10 end_t=('2/5', '2/5') s_lo_back=4/5
+  sample bw_ex: d=(1, 2, 8, 9) p=1 m=[0, 0, 1, 1] K0=(0, 0, 0, 0) s_hi=0 end_t=('1/5', '1/5') s_lo_back=0 back_t0=('2/5', '2/5') Kd=(0, 0, 1, 1)
+==============================================================================
+ORDER n=6   B=40   arrangements (primitive, AP excluded) = 14400   units p = [1, 5]   (arrangement, p) pairs = 28800
+-- Task 2 (exact label-cell method; no grid) --
+  forward component from (s=0, t=p/n) reaches s=1           : 6204
+     of which contains (1, p/n)                              : 0
+     of which s=1 t-set contains some unit instant q/n       : 1
+     of which s=1 t-set contains no q/n with gcd(q,n)=1      : 6203
+     of which s=1 t-set is a single point                    : 321
+  forward component dies before s=1                         : 22596
+     of which dies at s=0 (component is the single point)    : 13716
+     death s histogram (bin 0 = exactly 0, bin k = [k/10,(k+1)/10)) : {0: 16337, 1: 1026, 2: 857, 3: 1231, 4: 580, 5: 1097, 6: 671, 7: 507, 8: 171, 9: 119}
+  per p: [reach, die] = {1: [6203, 8197], 5: [1, 14399]}
+  backward component from (s=1, t=p/n) reaches s=0          : 1
+     AP t-set at s=0 for those, by (p, [L,U]) : {(1, ('5/6', '5/6')): 1}
+  pairs with a speed collision on s in (0,1]                : 28300
+  pairs with a collision inside the forward component       : 12560
+  pairs with an exact entry-flank handover in the component : 10925
+  pairs with an exact exit-flank handover in the component  : 12722
+-- Task 2 (naive grid overlap test, sample of 300 pairs, window [0,1]) --
+  grid   64: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 299 (die at first step s=1/64: 255);  reach/die agrees with exact method: 244/300
+  grid  256: reach s=1 with p/n in set 0, reach s=1 elsewhere 1, die 299 (die at first step s=1/256: 255);  reach/die agrees with exact method: 244/300
+-- Task 3 (slot picture along midpoint path t(s)=(L+U)/2 of the K0 cell, grid 1/64 plus s_hi) --
+  pairs tracked 28800: slot vector constant 13717, changes 15083, two runners share a slot 15081, flank runner changes 14714, a reading at a half-slot tie 5313
+-- Task 4 (one m_i at a time, every order of runners with m_i>0; label kept) --
+  forward (from (AP,p/n)) tried 22596 pairs where the straight line dies; orders tried 1122315; orders that reach d 0; pairs with >=1 connecting order 0
+  forward: deepest vertex reached (ramped runners / runners with m>0) : {'0/1': 57, '0/2': 647, '0/3': 3674, '0/4': 10365, '0/5': 6477, '1/2': 19, '1/3': 134, '1/4': 419, '1/5': 260, '2/3': 53, '2/4': 226, '2/5': 139, '3/4': 70, '3/5': 44, '4/5': 12}
+  backward (from (d,p/n) toward AP) tried 28799; pairs with >=1 connecting order 0
+  sample reach_ex: d=(1, 8, 15, 22, 29) p=5 m=[0, 1, 2, 3, 4] K0=(0, 1, 2, 3, 4) s_hi=1 end_t=('1/6', '1/6') s_lo_back=1
+  sample die_ex: d=(1, 2, 3, 4, 11) p=5 m=[0, 0, 0, 0, 1] K0=(0, 1, 2, 3, 4) s_hi=7/38 end_t=('19/24', '19/24') s_lo_back=1
+  sample bw_ex: d=(1, 8, 15, 22, 29) p=1 m=[0, 1, 2, 3, 4] K0=(0, 0, 0, 0, 0) s_hi=0 end_t=('1/6', '1/6') s_lo_back=0 back_t0=('5/6', '5/6') Kd=(0, 1, 2, 3, 4)
+==============================================================================
+ORDER n=7   B=28   arrangements (primitive, AP excluded) = 4027   units p = [1, 2, 3, 4, 5, 6]   (arrangement, p) pairs = 24162
+-- Task 2 (exact label-cell method; no grid) --
+  forward component from (s=0, t=p/n) reaches s=1           : 1614
+     of which contains (1, p/n)                              : 0
+     of which s=1 t-set contains some unit instant q/n       : 3
+     of which s=1 t-set contains no q/n with gcd(q,n)=1      : 1611
+     of which s=1 t-set is a single point                    : 105
+  forward component dies before s=1                         : 22548
+     of which dies at s=0 (component is the single point)    : 11316
+     death s histogram (bin 0 = exactly 0, bin k = [k/10,(k+1)/10)) : {0: 19240, 1: 1252, 2: 534, 3: 338, 4: 228, 5: 306, 6: 214, 7: 121, 8: 210, 9: 105}
+  per p: [reach, die] = {1: [1567, 2460], 2: [41, 3986], 3: [5, 4022], 4: [1, 4026], 5: [0, 4027], 6: [0, 4027]}
+  backward component from (s=1, t=p/n) reaches s=0          : 3
+     AP t-set at s=0 for those, by (p, [L,U]) : {(1, ('2/7', '2/7')): 1, (1, ('3/7', '3/7')): 1, (1, ('4/7', '4/7')): 1}
+  pairs with a speed collision on s in (0,1]                : 23664
+  pairs with a collision inside the forward component       : 6100
+  pairs with an exact entry-flank handover in the component : 9010
+  pairs with an exact exit-flank handover in the component  : 9915
+-- Task 2 (naive grid overlap test, sample of 900 pairs, window [0,1]) --
+  grid   64: reach s=1 with p/n in set 0, reach s=1 elsewhere 9, die 891 (die at first step s=1/64: 739);  reach/die agrees with exact method: 855/900
+  grid  256: reach s=1 with p/n in set 0, reach s=1 elsewhere 9, die 891 (die at first step s=1/256: 682);  reach/die agrees with exact method: 855/900
+-- Task 3 (slot picture along midpoint path t(s)=(L+U)/2 of the K0 cell, grid 1/64 plus s_hi) --
+  pairs tracked 24162: slot vector constant 11316, changes 12846, two runners share a slot 12750, flank runner changes 12724, a reading at a half-slot tie 4193
+-- Task 4 (one m_i at a time, every order of runners with m_i>0; label kept) --
+  forward (from (AP,p/n)) tried 22548 pairs where the straight line dies; orders tried 3724437; orders that reach d 0; pairs with >=1 connecting order 0
+  forward: deepest vertex reached (ramped runners / runners with m>0) : {'0/1': 107, '0/2': 793, '0/3': 3079, '0/4': 6741, '0/5': 7785, '0/6': 3583, '1/2': 10, '1/3': 36, '1/4': 62, '1/5': 43, '2/3': 31, '2/4': 70, '2/5': 56, '3/4': 54, '3/5': 51, '4/5': 47}
+  backward (from (d,p/n) toward AP) tried 24159; pairs with >=1 connecting order 0
+  sample reach_ex: d=(1, 2, 3, 11, 12, 13) p=2 m=[0, 0, 0, 1, 1, 1] K0=(0, 0, 0, 1, 1, 1) s_hi=1 end_t=('1/7', '1/7') s_lo_back=1
+  sample die_ex: d=(1, 2, 3, 4, 5, 13) p=2 m=[0, 0, 0, 0, 0, 1] K0=(0, 0, 0, 1, 1, 1) s_hi=1/14 end_t=('2/7', '2/7') s_lo_back=5/7
+  sample bw_ex: d=(1, 2, 3, 11, 12, 13) p=1 m=[0, 0, 0, 1, 1, 1] K0=(0, 0, 0, 0, 0, 0) s_hi=0 end_t=('1/7', '1/7') s_lo_back=0 back_t0=('2/7', '2/7') Kd=(0, 0, 0, 1, 1, 1)
+==============================================================================
+CONTROLS
+  global isolation at endpoints: lonely at p/n, readings on slot points, distinct, equal to AP readings: 72522/72522
+  AP lonely at every unit p/n: 16/16
+  forward cell upper bound <= p/n (so window [0,1] holds the tracked component): 72522/72522
+  random points inside forward cell lonely with label K0 (direct check): 38027/38027
+  K0 cell empty at s = s_hi + (1-s_hi)/997: 61814/61814
+  lonely-interval routine vs direct reading check (random t, interval endpoints, midpoints): 44834/44834
+  grid label check (an interval labelled K0 exists at grid s iff s <= s_hi): 6039/6039
+  task-4 legs: exact interval routine vs vertex test: 127157/127157
+==============================================================================
+WORKED EXAMPLES
+------------------------------------------------------------------------------
+n=6  d=(1, 2, 3, 4, 11)  p=1  a=(1, 2, 3, 4, 5)  m=(0, 0, 0, 0, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4, 5+6s
+  readings at s=0, t=p/n: ['1/6', '1/3', '1/2', '2/3', '5/6']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 0, 0, 1)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/6, 1/6]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1/10, 1]
+    s=       0  t=           1/6  readings=['1/6', '1/3', '1/2', '2/3', '5/6']  slots=(1, 2, 3, 4, 5)  entry(a)=[1] exit(a)=[5]
+------------------------------------------------------------------------------
+n=6  d=(1, 2, 3, 4, 11)  p=5  a=(1, 2, 3, 4, 5)  m=(0, 0, 0, 0, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4, 5+6s
+  readings at s=0, t=p/n: ['5/6', '2/3', '1/2', '1/3', '1/6']  -> label K0 = floor(a_i p/n) = (0, 1, 2, 3, 4)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 2, 3, 9)
+  forward component s-interval [0, 7/38]; at s_hi the K0 cell t-set = [19/24, 19/24]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 5), ('5/114', 4)]
+  exit flank by exact envelope: [('0', 1), ('2/15', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           5/6  readings=['5/6', '2/3', '1/2', '1/3', '1/6']  slots=(5, 4, 3, 2, 1)  entry(a)=[5] exit(a)=[1]
+    s=     1/8  t=         13/16  readings=['13/16', '5/8', '7/16', '1/4', '43/64']  slots=(5, 4, 3, 2, 4)  entry(a)=[4] exit(a)=[1]
+    s=    7/38  t=         19/24  readings=['19/24', '7/12', '3/8', '1/6', '5/6']  slots=(5, 4, 2, 1, 5)  entry(a)=[4] exit(a)=[5]
+------------------------------------------------------------------------------
+n=6  d=(1, 2, 3, 4, 35)  p=1  a=(1, 2, 3, 4, 5)  m=(0, 0, 0, 0, 5)  path v(s)=a+s*n*m = 1, 2, 3, 4, 5+30s
+  readings at s=0, t=p/n: ['1/6', '1/3', '1/2', '2/3', '5/6']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 0, 0, 5)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/6, 1/6]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [33/50, 1]
+    s=       0  t=           1/6  readings=['1/6', '1/3', '1/2', '2/3', '5/6']  slots=(1, 2, 3, 4, 5)  entry(a)=[1] exit(a)=[5]
+------------------------------------------------------------------------------
+n=6  d=(1, 2, 3, 4, 35)  p=5  a=(1, 2, 3, 4, 5)  m=(0, 0, 0, 0, 5)  path v(s)=a+s*n*m = 1, 2, 3, 4, 5+30s
+  readings at s=0, t=p/n: ['5/6', '2/3', '1/2', '1/3', '1/6']  -> label K0 = floor(a_i p/n) = (0, 1, 2, 3, 4)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 2, 3, 29)
+  forward component s-interval [0, 7/190]; at s_hi the K0 cell t-set = [19/24, 19/24]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 5), ('1/114', 4)]
+  exit flank by exact envelope: [('0', 1), ('2/75', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           5/6  readings=['5/6', '2/3', '1/2', '1/3', '1/6']  slots=(5, 4, 3, 2, 1)  entry(a)=[5] exit(a)=[1]
+    s=   7/190  t=         19/24  readings=['19/24', '7/12', '3/8', '1/6', '5/6']  slots=(5, 4, 2, 1, 5)  entry(a)=[4] exit(a)=[5]
+------------------------------------------------------------------------------
+n=3  d=(4, 2)  p=1  a=(1, 2)  m=(1, 0)  path v(s)=a+s*n*m = 1+3s, 2
+  readings at s=0, t=p/n: ['1/3', '2/3']  -> label K0 = floor(a_i p/n) = (0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (1, 0)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/6, 1/6]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1), ('1/3', 2)]
+  exit flank by exact envelope: [('0', 2), ('1/3', 1)]
+  collisions (s, a_i, a_j): [('1/3', 1, 2)]
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           1/3  readings=['1/3', '2/3']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     1/8  t=         19/66  readings=['19/48', '19/33']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     1/4  t=         11/42  readings=['11/24', '11/21']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     3/8  t=        49/204  readings=['49/96', '49/102']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     1/2  t=         13/60  readings=['13/24', '13/30']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     5/8  t=        55/276  readings=['55/96', '55/138']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     3/4  t=        29/156  readings=['29/48', '29/78']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     7/8  t=        61/348  readings=['61/96', '61/174']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=       1  t=           1/6  readings=['2/3', '1/3']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+------------------------------------------------------------------------------
+n=3  d=(4, 2)  p=2  a=(1, 2)  m=(1, 0)  path v(s)=a+s*n*m = 1+3s, 2
+  readings at s=0, t=p/n: ['2/3', '1/3']  -> label K0 = floor(a_i p/n) = (0, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (2, 1)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [2/3, 2/3]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 2)]
+  exit flank by exact envelope: [('0', 1)]
+  collisions (s, a_i, a_j): [('1/3', 1, 2)]
+  backward component from (1,p/n): s-interval [3/5, 1]
+    s=       0  t=           2/3  readings=['2/3', '1/3']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+------------------------------------------------------------------------------
+n=4  d=(1, 6, 3)  p=1  a=(1, 2, 3)  m=(0, 1, 0)  path v(s)=a+s*n*m = 1, 2+4s, 3
+  readings at s=0, t=p/n: ['1/4', '1/2', '3/4']  -> label K0 = floor(a_i p/n) = (0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 0)
+  forward component s-interval [0, 1/4]; at s_hi the K0 cell t-set = [1/4, 1/4]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 3), ('1/4', 2)]
+  collisions (s, a_i, a_j): [('1/4', 2, 3)]
+  backward component from (1,p/n): s-interval [3/4, 1]
+    s=       0  t=           1/4  readings=['1/4', '1/2', '3/4']  slots=(1, 2, 3)  entry(a)=[1] exit(a)=[3]
+    s=     1/8  t=           1/4  readings=['1/4', '5/8', '3/4']  slots=(1, 2, 3)  entry(a)=[1] exit(a)=[3]
+    s=     1/4  t=           1/4  readings=['1/4', '3/4', '3/4']  slots=(1, 3, 3)  entry(a)=[1] exit(a)=[2, 3]
+------------------------------------------------------------------------------
+n=4  d=(1, 6, 3)  p=3  a=(1, 2, 3)  m=(0, 1, 0)  path v(s)=a+s*n*m = 1, 2+4s, 3
+  readings at s=0, t=p/n: ['3/4', '1/2', '1/4']  -> label K0 = floor(a_i p/n) = (0, 1, 2)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 4, 2)
+  forward component s-interval [0, 1/12]; at s_hi the K0 cell t-set = [3/4, 3/4]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3)]
+  exit flank by exact envelope: [('0', 1), ('1/12', 2)]
+  collisions (s, a_i, a_j): [('1/4', 2, 3)]
+  backward component from (1,p/n): s-interval [11/12, 1]
+    s=       0  t=           3/4  readings=['3/4', '1/2', '1/4']  slots=(3, 2, 1)  entry(a)=[3] exit(a)=[1]
+    s=    1/12  t=           3/4  readings=['3/4', '3/4', '1/4']  slots=(3, 3, 1)  entry(a)=[3] exit(a)=[1, 2]
+------------------------------------------------------------------------------
+n=5  d=(6, 2, 3, 4)  p=1  a=(1, 2, 3, 4)  m=(1, 0, 0, 0)  path v(s)=a+s*n*m = 1+5s, 2, 3, 4
+  readings at s=0, t=p/n: ['1/5', '2/5', '3/5', '4/5']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (1, 0, 0, 0)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/10, 2/15]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1), ('1/5', 2)]
+  exit flank by exact envelope: [('0', 4), ('3/5', 1)]
+  collisions (s, a_i, a_j): [('1/5', 1, 2), ('2/5', 1, 3), ('3/5', 1, 4)]
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           1/5  readings=['1/5', '2/5', '3/5', '4/5']  slots=(1, 2, 3, 4)  entry(a)=[1] exit(a)=[4]
+    s=     1/8  t=        21/130  readings=['21/80', '21/65', '63/130', '42/65']  slots=(1, 2, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     1/4  t=          3/20  readings=['27/80', '3/10', '9/20', '3/5']  slots=(2, 2, 2, 3)  entry(a)=[2] exit(a)=[4]
+    s=     3/8  t=          3/20  readings=['69/160', '3/10', '9/20', '3/5']  slots=(2, 2, 2, 3)  entry(a)=[2] exit(a)=[4]
+    s=     1/2  t=          3/20  readings=['21/40', '3/10', '9/20', '3/5']  slots=(3, 2, 2, 3)  entry(a)=[2] exit(a)=[4]
+    s=     5/8  t=        97/660  readings=['97/160', '97/330', '97/220', '97/165']  slots=(3, 1, 2, 3)  entry(a)=[2] exit(a)=[1]
+    s=     3/4  t=        51/380  readings=['51/80', '51/190', '153/380', '51/95']  slots=(3, 1, 2, 3)  entry(a)=[2] exit(a)=[1]
+    s=     7/8  t=       107/860  readings=['107/160', '107/430', '321/860', '107/215']  slots=(3, 1, 2, 2)  entry(a)=[2] exit(a)=[1]
+    s=       1  t=          7/60  readings=['7/10', '7/30', '7/20', '7/15']  slots=(4, 1, 2, 2)  entry(a)=[2] exit(a)=[1]
+------------------------------------------------------------------------------
+n=5  d=(6, 2, 3, 4)  p=2  a=(1, 2, 3, 4)  m=(1, 0, 0, 0)  path v(s)=a+s*n*m = 1+5s, 2, 3, 4
+  readings at s=0, t=p/n: ['2/5', '4/5', '1/5', '3/5']  -> label K0 = floor(a_i p/n) = (0, 0, 1, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (2, 0, 1, 1)
+  forward component s-interval [0, 1/5]; at s_hi the K0 cell t-set = [2/5, 2/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3)]
+  exit flank by exact envelope: [('0', 2), ('1/5', 1)]
+  collisions (s, a_i, a_j): [('1/5', 1, 2), ('2/5', 1, 3), ('3/5', 1, 4)]
+  backward component from (1,p/n): s-interval [9/10, 1]
+    s=       0  t=           2/5  readings=['2/5', '4/5', '1/5', '3/5']  slots=(2, 4, 1, 3)  entry(a)=[3] exit(a)=[2]
+    s=     1/8  t=           2/5  readings=['13/20', '4/5', '1/5', '3/5']  slots=(3, 4, 1, 3)  entry(a)=[3] exit(a)=[2]
+    s=     1/5  t=           2/5  readings=['4/5', '4/5', '1/5', '3/5']  slots=(4, 4, 1, 3)  entry(a)=[3] exit(a)=[1, 2]
+------------------------------------------------------------------------------
+n=5  d=(6, 2, 3, 4)  p=3  a=(1, 2, 3, 4)  m=(1, 0, 0, 0)  path v(s)=a+s*n*m = 1+5s, 2, 3, 4
+  readings at s=0, t=p/n: ['3/5', '1/5', '4/5', '2/5']  -> label K0 = floor(a_i p/n) = (0, 1, 1, 2)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (3, 1, 1, 2)
+  forward component s-interval [0, 1/15]; at s_hi the K0 cell t-set = [3/5, 3/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 2)]
+  exit flank by exact envelope: [('0', 3), ('1/15', 1)]
+  collisions (s, a_i, a_j): [('1/5', 1, 2), ('2/5', 1, 3), ('3/5', 1, 4)]
+  backward component from (1,p/n): s-interval [13/15, 1]
+    s=       0  t=           3/5  readings=['3/5', '1/5', '4/5', '2/5']  slots=(3, 1, 4, 2)  entry(a)=[2] exit(a)=[3]
+    s=    1/15  t=           3/5  readings=['4/5', '1/5', '4/5', '2/5']  slots=(4, 1, 4, 2)  entry(a)=[2] exit(a)=[1, 3]
+------------------------------------------------------------------------------
+n=5  d=(6, 2, 3, 4)  p=4  a=(1, 2, 3, 4)  m=(1, 0, 0, 0)  path v(s)=a+s*n*m = 1+5s, 2, 3, 4
+  readings at s=0, t=p/n: ['4/5', '3/5', '2/5', '1/5']  -> label K0 = floor(a_i p/n) = (0, 1, 2, 3)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (4, 1, 2, 3)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [4/5, 4/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 4)]
+  exit flank by exact envelope: [('0', 1)]
+  collisions (s, a_i, a_j): [('1/5', 1, 2), ('2/5', 1, 3), ('3/5', 1, 4)]
+  backward component from (1,p/n): s-interval [11/15, 1]
+    s=       0  t=           4/5  readings=['4/5', '3/5', '2/5', '1/5']  slots=(4, 3, 2, 1)  entry(a)=[4] exit(a)=[1]
+[reach_ex at n=3]
+------------------------------------------------------------------------------
+n=3  d=(1, 5)  p=2  a=(1, 2)  m=(0, 1)  path v(s)=a+s*n*m = 1, 2+3s
+  readings at s=0, t=p/n: ['2/3', '1/3']  -> label K0 = floor(a_i p/n) = (0, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 3)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/3, 1/3]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 2), ('2/3', 1)]
+  exit flank by exact envelope: [('0', 1), ('1/6', 2)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           2/3  readings=['2/3', '1/3']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     1/8  t=         35/57  readings=['35/57', '11/24']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     1/4  t=          6/11  readings=['6/11', '1/2']  slots=(2, 2)  entry(a)=[2] exit(a)=[1]
+    s=     3/8  t=         12/25  readings=['12/25', '1/2']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     1/2  t=           3/7  readings=['3/7', '1/2']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     5/8  t=         12/31  readings=['12/31', '1/2']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     3/4  t=        37/102  readings=['37/102', '13/24']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     7/8  t=        77/222  readings=['77/222', '29/48']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=       1  t=           1/3  readings=['1/3', '2/3']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+[die_ex at n=3]
+------------------------------------------------------------------------------
+n=3  d=(1, 8)  p=2  a=(1, 2)  m=(0, 2)  path v(s)=a+s*n*m = 1, 2+6s
+  readings at s=0, t=p/n: ['2/3', '1/3']  -> label K0 = floor(a_i p/n) = (0, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 5)
+  forward component s-interval [0, 1/2]; at s_hi the K0 cell t-set = [1/3, 1/3]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 2), ('1/3', 1)]
+  exit flank by exact envelope: [('0', 1), ('1/12', 2)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           2/3  readings=['2/3', '1/3']  slots=(2, 1)  entry(a)=[2] exit(a)=[1]
+    s=     1/8  t=          6/11  readings=['6/11', '1/2']  slots=(2, 2)  entry(a)=[2] exit(a)=[1]
+    s=     1/4  t=           3/7  readings=['3/7', '1/2']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     3/8  t=        37/102  readings=['37/102', '13/24']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+    s=     1/2  t=           1/3  readings=['1/3', '2/3']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+[bw_ex at n=3]
+------------------------------------------------------------------------------
+n=3  d=(1, 5)  p=1  a=(1, 2)  m=(0, 1)  path v(s)=a+s*n*m = 1, 2+3s
+  readings at s=0, t=p/n: ['1/3', '2/3']  -> label K0 = floor(a_i p/n) = (0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/3, 1/3]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 2)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [0, 1]; reaches AP at t-set [2/3, 2/3]
+    s=       0  t=           1/3  readings=['1/3', '2/3']  slots=(1, 2)  entry(a)=[1] exit(a)=[2]
+[reach_ex at n=4]
+------------------------------------------------------------------------------
+n=4  d=(1, 6, 11)  p=3  a=(1, 2, 3)  m=(0, 1, 2)  path v(s)=a+s*n*m = 1, 2+4s, 3+8s
+  readings at s=0, t=p/n: ['3/4', '1/2', '1/4']  -> label K0 = floor(a_i p/n) = (0, 1, 2)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 4, 8)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/4, 1/4]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3), ('3/4', 1)]
+  exit flank by exact envelope: [('0', 1), ('1/12', 3)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           3/4  readings=['3/4', '1/2', '1/4']  slots=(3, 2, 1)  entry(a)=[3] exit(a)=[1]
+    s=     1/8  t=           5/8  readings=['5/8', '9/16', '1/2']  slots=(2, 2, 2)  entry(a)=[3] exit(a)=[1]
+    s=     1/4  t=           1/2  readings=['1/2', '1/2', '1/2']  slots=(2, 2, 2)  entry(a)=[1, 2, 3] exit(a)=[1, 2, 3]
+    s=     3/8  t=          5/12  readings=['5/12', '11/24', '1/2']  slots=(2, 2, 2)  entry(a)=[1] exit(a)=[3]
+    s=     1/2  t=          5/14  readings=['5/14', '3/7', '1/2']  slots=(1, 2, 2)  entry(a)=[1] exit(a)=[3]
+    s=     5/8  t=          5/16  readings=['5/16', '13/32', '1/2']  slots=(1, 2, 2)  entry(a)=[1] exit(a)=[3]
+    s=     3/4  t=          5/18  readings=['5/18', '7/18', '1/2']  slots=(1, 2, 2)  entry(a)=[1] exit(a)=[3]
+    s=     7/8  t=         21/80  readings=['21/80', '71/160', '5/8']  slots=(1, 2, 2)  entry(a)=[1] exit(a)=[3]
+    s=       1  t=           1/4  readings=['1/4', '1/2', '3/4']  slots=(1, 2, 3)  entry(a)=[1] exit(a)=[3]
+[die_ex at n=4]
+------------------------------------------------------------------------------
+n=4  d=(1, 2, 7)  p=3  a=(1, 2, 3)  m=(0, 0, 1)  path v(s)=a+s*n*m = 1, 2, 3+4s
+  readings at s=0, t=p/n: ['3/4', '1/2', '1/4']  -> label K0 = floor(a_i p/n) = (0, 1, 2)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 5)
+  forward component s-interval [0, 7/20]; at s_hi the K0 cell t-set = [5/8, 5/8]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3), ('3/20', 2)]
+  exit flank by exact envelope: [('0', 1), ('1/6', 3)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           3/4  readings=['3/4', '1/2', '1/4']  slots=(3, 2, 1)  entry(a)=[3] exit(a)=[1]
+    s=     1/8  t=         39/56  readings=['39/56', '11/28', '7/16']  slots=(3, 2, 2)  entry(a)=[2] exit(a)=[1]
+    s=     1/4  t=         21/32  readings=['21/32', '5/16', '5/8']  slots=(3, 1, 2)  entry(a)=[2] exit(a)=[1]
+    s=    7/20  t=           5/8  readings=['5/8', '1/4', '3/4']  slots=(2, 1, 3)  entry(a)=[2] exit(a)=[3]
+[bw_ex at n=4]
+------------------------------------------------------------------------------
+n=4  d=(1, 6, 11)  p=1  a=(1, 2, 3)  m=(0, 1, 2)  path v(s)=a+s*n*m = 1, 2+4s, 3+8s
+  readings at s=0, t=p/n: ['1/4', '1/2', '3/4']  -> label K0 = floor(a_i p/n) = (0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 2)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/4, 1/4]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 3)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [0, 1]; reaches AP at t-set [3/4, 3/4]
+    s=       0  t=           1/4  readings=['1/4', '1/2', '3/4']  slots=(1, 2, 3)  entry(a)=[1] exit(a)=[3]
+[reach_ex at n=5]
+------------------------------------------------------------------------------
+n=5  d=(1, 2, 8, 9)  p=2  a=(1, 2, 3, 4)  m=(0, 0, 1, 1)  path v(s)=a+s*n*m = 1, 2, 3+5s, 4+5s
+  readings at s=0, t=p/n: ['2/5', '4/5', '1/5', '3/5']  -> label K0 = floor(a_i p/n) = (0, 0, 1, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 3, 3)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/5, 1/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3), ('3/5', 1)]
+  exit flank by exact envelope: [('0', 2), ('1/10', 4)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           2/5  readings=['2/5', '4/5', '1/5', '3/5']  slots=(2, 4, 1, 3)  entry(a)=[3] exit(a)=[2]
+    s=     1/8  t=     1932/5365  readings=['1932/5365', '3864/5365', '113/370', '193/290']  slots=(2, 4, 2, 3)  entry(a)=[3] exit(a)=[2]
+    s=     1/4  t=       186/595  readings=['186/595', '372/595', '23/70', '109/170']  slots=(2, 3, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     3/8  t=      844/3055  readings=['844/3055', '1688/3055', '163/470', '81/130']  slots=(1, 3, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     1/2  t=       177/715  readings=['177/715', '354/715', '47/130', '67/110']  slots=(1, 2, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     5/8  t=        43/190  readings=['43/190', '43/95', '587/1520', '49/80']  slots=(1, 2, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     3/4  t=        67/310  readings=['67/310', '67/155', '569/1240', '27/40']  slots=(1, 2, 2, 3)  entry(a)=[1] exit(a)=[4]
+    s=     7/8  t=       139/670  readings=['139/670', '139/335', '2841/5360', '59/80']  slots=(1, 2, 3, 4)  entry(a)=[1] exit(a)=[4]
+    s=       1  t=           1/5  readings=['1/5', '2/5', '3/5', '4/5']  slots=(1, 2, 3, 4)  entry(a)=[1] exit(a)=[4]
+[die_ex at n=5]
+------------------------------------------------------------------------------
+n=5  d=(1, 2, 3, 9)  p=2  a=(1, 2, 3, 4)  m=(0, 0, 0, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4+5s
+  readings at s=0, t=p/n: ['2/5', '4/5', '1/5', '3/5']  -> label K0 = floor(a_i p/n) = (0, 0, 1, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 1, 3)
+  forward component s-interval [0, 1/10]; at s_hi the K0 cell t-set = [2/5, 2/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 3)]
+  exit flank by exact envelope: [('0', 2), ('1/10', 4)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [4/5, 1]
+    s=       0  t=           2/5  readings=['2/5', '4/5', '1/5', '3/5']  slots=(2, 4, 1, 3)  entry(a)=[3] exit(a)=[2]
+    s=    1/10  t=           2/5  readings=['2/5', '4/5', '1/5', '4/5']  slots=(2, 4, 1, 4)  entry(a)=[3] exit(a)=[2, 4]
+[bw_ex at n=5]
+------------------------------------------------------------------------------
+n=5  d=(1, 2, 8, 9)  p=1  a=(1, 2, 3, 4)  m=(0, 0, 1, 1)  path v(s)=a+s*n*m = 1, 2, 3+5s, 4+5s
+  readings at s=0, t=p/n: ['1/5', '2/5', '3/5', '4/5']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 1, 1)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/5, 1/5]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 4)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [0, 1]; reaches AP at t-set [2/5, 2/5]
+    s=       0  t=           1/5  readings=['1/5', '2/5', '3/5', '4/5']  slots=(1, 2, 3, 4)  entry(a)=[1] exit(a)=[4]
+[reach_ex at n=6]
+------------------------------------------------------------------------------
+n=6  d=(1, 8, 15, 22, 29)  p=5  a=(1, 2, 3, 4, 5)  m=(0, 1, 2, 3, 4)  path v(s)=a+s*n*m = 1, 2+6s, 3+12s, 4+18s, 5+24s
+  readings at s=0, t=p/n: ['5/6', '2/3', '1/2', '1/3', '1/6']  -> label K0 = floor(a_i p/n) = (0, 1, 2, 3, 4)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 6, 12, 18, 24)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/6, 1/6]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 5), ('5/6', 1)]
+  exit flank by exact envelope: [('0', 1), ('1/30', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           5/6  readings=['5/6', '2/3', '1/2', '1/3', '1/6']  slots=(5, 4, 3, 2, 1)  entry(a)=[5] exit(a)=[1]
+    s=     1/8  t=          9/16  readings=['9/16', '35/64', '17/32', '33/64', '1/2']  slots=(3, 3, 3, 3, 3)  entry(a)=[5] exit(a)=[1]
+    s=     1/4  t=          9/22  readings=['9/22', '19/44', '5/11', '21/44', '1/2']  slots=(2, 3, 3, 3, 3)  entry(a)=[1] exit(a)=[5]
+    s=     3/8  t=          9/28  readings=['9/28', '41/112', '23/56', '51/112', '1/2']  slots=(2, 2, 2, 3, 3)  entry(a)=[1] exit(a)=[5]
+    s=     1/2  t=          9/34  readings=['9/34', '11/34', '13/34', '15/34', '1/2']  slots=(2, 2, 2, 3, 3)  entry(a)=[1] exit(a)=[5]
+    s=     5/8  t=          9/40  readings=['9/40', '47/160', '29/80', '69/160', '1/2']  slots=(1, 2, 2, 3, 3)  entry(a)=[1] exit(a)=[5]
+    s=     3/4  t=          9/46  readings=['9/46', '25/92', '8/23', '39/92', '1/2']  slots=(1, 2, 2, 3, 3)  entry(a)=[1] exit(a)=[5]
+    s=     7/8  t=        55/312  readings=['55/312', '347/1248', '79/208', '601/1248', '7/12']  slots=(1, 2, 2, 3, 4)  entry(a)=[1] exit(a)=[5]
+    s=       1  t=           1/6  readings=['1/6', '1/3', '1/2', '2/3', '5/6']  slots=(1, 2, 3, 4, 5)  entry(a)=[1] exit(a)=[5]
+[bw_ex at n=6]
+------------------------------------------------------------------------------
+n=6  d=(1, 8, 15, 22, 29)  p=1  a=(1, 2, 3, 4, 5)  m=(0, 1, 2, 3, 4)  path v(s)=a+s*n*m = 1, 2+6s, 3+12s, 4+18s, 5+24s
+  readings at s=0, t=p/n: ['1/6', '1/3', '1/2', '2/3', '5/6']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 1, 2, 3, 4)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/6, 1/6]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 5)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [0, 1]; reaches AP at t-set [5/6, 5/6]
+    s=       0  t=           1/6  readings=['1/6', '1/3', '1/2', '2/3', '5/6']  slots=(1, 2, 3, 4, 5)  entry(a)=[1] exit(a)=[5]
+[reach_ex at n=7]
+------------------------------------------------------------------------------
+n=7  d=(1, 2, 3, 11, 12, 13)  p=2  a=(1, 2, 3, 4, 5, 6)  m=(0, 0, 0, 1, 1, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4+7s, 5+7s, 6+7s
+  readings at s=0, t=p/n: ['2/7', '4/7', '6/7', '1/7', '3/7', '5/7']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 1, 1, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 0, 3, 3, 3)
+  forward component s-interval [0, 1]; at s_hi the K0 cell t-set = [1/7, 1/7]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 4), ('4/7', 1)]
+  exit flank by exact envelope: [('0', 3), ('1/14', 6)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [1, 1]
+    s=       0  t=           2/7  readings=['2/7', '4/7', '6/7', '1/7', '3/7', '5/7']  slots=(2, 4, 6, 1, 3, 5)  entry(a)=[4] exit(a)=[3]
+    s=     1/8  t=    3788/15015  readings=['3788/15015', '7576/15015', '3788/5005', '177/770', '14479/30030', '401/546']  slots=(2, 4, 5, 2, 3, 5)  entry(a)=[4] exit(a)=[3]
+    s=     1/4  t=     1094/4991  readings=['1094/4991', '2188/4991', '3282/4991', '113/434', '4787/9982', '225/322']  slots=(2, 3, 5, 2, 3, 5)  entry(a)=[1] exit(a)=[6]
+    s=     3/8  t=    4964/25599  readings=['4964/25599', '9928/25599', '4964/8533', '275/966', '24503/51198', '499/742']  slots=(1, 3, 4, 2, 3, 5)  entry(a)=[1] exit(a)=[6]
+    s=     1/2  t=      347/1995  readings=['347/1995', '694/1995', '347/665', '81/266', '1909/3990', '137/210']  slots=(1, 2, 4, 2, 3, 5)  entry(a)=[1] exit(a)=[6]
+    s=     5/8  t=      187/1162  readings=['187/1162', '187/581', '561/1162', '3233/9296', '4729/9296', '75/112']  slots=(1, 2, 3, 2, 4, 5)  entry(a)=[1] exit(a)=[6]
+    s=     3/4  t=        97/630  readings=['97/630', '97/315', '97/210', '1069/2520', '1457/2520', '41/56']  slots=(1, 2, 3, 3, 4, 5)  entry(a)=[1] exit(a)=[6]
+    s=     7/8  t=      201/1358  readings=['201/1358', '201/679', '603/1358', '5417/10864', '7025/10864', '89/112']  slots=(1, 2, 3, 3, 5, 6)  entry(a)=[1] exit(a)=[6]
+    s=       1  t=           1/7  readings=['1/7', '2/7', '3/7', '4/7', '5/7', '6/7']  slots=(1, 2, 3, 4, 5, 6)  entry(a)=[1] exit(a)=[6]
+[die_ex at n=7]
+------------------------------------------------------------------------------
+n=7  d=(1, 2, 3, 4, 5, 13)  p=2  a=(1, 2, 3, 4, 5, 6)  m=(0, 0, 0, 0, 0, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4, 5, 6+7s
+  readings at s=0, t=p/n: ['2/7', '4/7', '6/7', '1/7', '3/7', '5/7']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 1, 1, 1)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 0, 1, 1, 3)
+  forward component s-interval [0, 1/14]; at s_hi the K0 cell t-set = [2/7, 2/7]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 4)]
+  exit flank by exact envelope: [('0', 3), ('1/14', 6)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [5/7, 1]
+    s=       0  t=           2/7  readings=['2/7', '4/7', '6/7', '1/7', '3/7', '5/7']  slots=(2, 4, 6, 1, 3, 5)  entry(a)=[4] exit(a)=[3]
+    s=    1/14  t=           2/7  readings=['2/7', '4/7', '6/7', '1/7', '3/7', '6/7']  slots=(2, 4, 6, 1, 3, 6)  entry(a)=[4] exit(a)=[3, 6]
+[bw_ex at n=7]
+------------------------------------------------------------------------------
+n=7  d=(1, 2, 3, 11, 12, 13)  p=1  a=(1, 2, 3, 4, 5, 6)  m=(0, 0, 0, 1, 1, 1)  path v(s)=a+s*n*m = 1, 2, 3, 4+7s, 5+7s, 6+7s
+  readings at s=0, t=p/n: ['1/7', '2/7', '3/7', '4/7', '5/7', '6/7']  -> label K0 = floor(a_i p/n) = (0, 0, 0, 0, 0, 0)
+  label at s=1, t=p/n: Kd = floor(d_i p/n) = (0, 0, 0, 1, 1, 1)
+  forward component s-interval [0, 0]; at s_hi the K0 cell t-set = [1/7, 1/7]
+  entry flank (runner index i, a_i=i+1) by exact envelope: [('0', 1)]
+  exit flank by exact envelope: [('0', 6)]
+  collisions (s, a_i, a_j): []
+  backward component from (1,p/n): s-interval [0, 1]; reaches AP at t-set [2/7, 2/7]
+    s=       0  t=           1/7  readings=['1/7', '2/7', '3/7', '4/7', '5/7', '6/7']  slots=(1, 2, 3, 4, 5, 6)  entry(a)=[1] exit(a)=[6]

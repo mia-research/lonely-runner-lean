@@ -1565,3 +1565,53 @@ Instrument: at every walk instant t_i (start 1/(6v₁), each move, the lonely en
   to how many runners they fix. It does not show in who sets moves, in where the runners sit at T, or as E45's
   unit / zero-divisor split of blocking. The cascade's own stopping is not explained by this structure: what it
   describes is how one isolation propagates to its sixth-shift family, not why the first one exists.
+
+## E65 — Slots and flanks from the ideal; is residue isolation a deformation of the AP? (2026-10-16)
+
+Owner: *"I wonder if even trying to use divisors and class is importing too much. From the global isolation ideal, get
+slots, from its neighbours we get flanks … shouldn't we really think in those terms?"* and *"Ok lets really explore this,
+spin up agents … Is the residue isolation deformation of the AP"*. Two general-purpose agents, observation only, exact
+Fractions; their artifacts checked here (type counts at T recomputed independently, same top three; label identity below
+recomputed, 32,000 of 32,000). Coordinates: slot of a runner = round(n·reading); entry / exit flank = least / greatest
+reading; no residue classes.
+
+**A. AP (1,2,3,4,5) → each SixResidual set, straight line** (`slot_deform_v1.{py,out}`, all 17,135 sets; events solved
+exactly in s; controls 649,467 of 649,467 direct checks, 1,298,934 of 1,298,934 between-root checks, cascade T
+17,135 of 17,135).
+- Followed isolation = one lap vector m held while its interval I_m = [max (m_i+1/6)/v_i, min (m_i+5/6)/v_i] is
+  non-empty (the lap box); instant = its left endpoint.
+- **Forced first move:** the AP's lonely set is the point 1/6, and every SixResidual set has d₅ > 5d₁ (part of its
+  definition), so the lap-0 isolation dies at s = 0 on every path and the isolation restarts at the mirror 5/6 with
+  laps (0,1,2,3,4), slots reversed [5,4,3,2,1]. This is the known face d₅ = 5d₁ (`grid_tight_pairs`), not new.
+- Types at the cascade instant T: 2,794 distinct; 13 at the ideal type; 148 one runner per slot (30 orderings);
+  runners off their ideal slot: 3 in 4,910 sets, 4 in 6,428. Entry flank rank 4 or 5 in 9,205; exit flank rank 1
+  in 13.
+- Along the paths: after the forced death, 1,105 paths keep one lap vector to the end; others die 1–11 more times.
+  Events: slot change 221,514, shared slot on/off 104,114 / 89,123, entry / exit handover 27,240 / 26,910, deaths
+  49,054. 31,118 distinct type transitions. The followed isolation ends at the cascade's own type in 14,210 of 17,135.
+
+**B. Residue isolation as AP plus windings, orders 3–7** (`residue_fold_v1.{py,out}`; d_i = a_i + n·m_i, a the AP runner
+with the same slot at p/n; 72,522 (arrangement, p) pairs; controls all agree, listed in the .out; one mislabelled
+histogram bin noted by the agent: "bin 0" is [0, 1/10), exact zeros are on the separate line).
+- **The lap vector is the label of an isolation, and it is constant on a continuous family.** At a lonely (v, t) each
+  unwrapped reading v_i·t sits in one block [k_i + 1/n, k_i + 1 − 1/n]; blocks are 2/n apart, so different K are
+  disjoint closed sets. For fixed K the condition is (n k_i + 1) v_j ≤ (n k_j + n − 1) v_i for all i ≠ j: homogeneous
+  linear in the speeds, so each K-cell is a polyhedral cone in speed space (the lap box, `lap_box_lonely`).
+- **The residue isolation sits on a different sheet.** At (d, p/n) the label is K₀ + p·m, with K₀ = ⌊a_i p/n⌋ the AP's
+  label (identity recomputed: 32,000 of 32,000). Any continuous deformation keeping a lonely instant keeps K, along
+  any path, so the AP's isolation at p/n never deforms into the residue arrangement's isolation at p/n
+  (0 of 72,522 on the straight line; the one-winding-at-a-time paths reach nothing more, which the agent shows is forced
+  by the label).
+- What the AP's label does reach: the straight line keeps the K₀-cell to s = 1 in 179 / 916 / 1,795 / 6,204 / 1,614
+  pairs (n = 3..7), almost always at an instant off the unit grid; it dies before s = 1 in the rest, at s = 0 exactly
+  in 272 / 1,893 / 7,298 / 13,716 / 11,316 (the AP's lonely set at p/n is one point). Asymmetric in p: at n = 6, p = 1
+  reaches in 6,203, p = 5 in 1.
+- Worked: (1,2,3,4,11) and (1,2,3,4,35) at n = 6, p = 5 die at the same point t = 19/24 with the same slots
+  (5,4,2,1,5), at s = 7/38 and 7/190: five windings give the same end picture five times sooner in s.
+- **Reading** [observation]. In the ideal's own coordinates, an isolation is a lap vector K, and the arrangements with
+  that isolation form a cone C_K in speed space. The AP is a tight point of C_{K₀}; a residue isolation is the same slot
+  picture on the sheet C_{K₀+p·m}, reached from the AP only through deaths. "Folding" is the passage between sheets:
+  each extra winding adds p laps to that runner's label. The cascade's moves and the deformation deaths are both changes
+  of K. Not yet observed: how the cones C_K meet (which K-cells share faces, and whether the type transitions in A are
+  the face crossings); the statement "the cones cover the positive orthant" is existence itself, i.e. the covering
+  framing the owner set aside in E2.
