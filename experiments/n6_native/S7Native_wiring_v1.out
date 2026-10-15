@@ -3,5 +3,4 @@ lake build LonelyRunner.LRC.Spec.RealSevenN LonelyRunner.LRC.Spec.OrdersThreeFou
 'LRC.OrderSixN.lonely6_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
 'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
 'LRC.OrderSevenN.lonelyRunnerAtN_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
-no such file or directory (error code: 4294967294)
-  file: /private/tmp/claude-501/-Users-trentpalelei-Desktop-Math-Ex/83f6409d-b2f3-46d3-82a1-e41773fae69f/scratchpad/ax3.lean
+uses S7Native: true, uses S7.lonely_7: false
