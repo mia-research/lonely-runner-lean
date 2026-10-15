@@ -1,0 +1,2 @@
+n=6: exhaustive [1,30] max tau = 19/28 = 0.6786 at (3, 10, 12, 14, 16)
+BEST n=6: tau = 19/28 = 0.67857 at (3, 10, 12, 14, 16) (0 moves); tau > 1: False

@@ -1,0 +1,10 @@
+HI=48, K=6: coprime-case sets=11082; least |c| with a good named multiplier c*inv(d):
+   1 8934
+   2 1835
+   3 219
+   4 63
+   5 18
+   6 2
+   >6 10
+   no good m 1
+  examples beyond K: [(1, 6, 15, 16, 25), (2, 18, 20, 22, 25), (3, 12, 15, 27, 47), (5, 12, 14, 19, 35), (5, 12, 14, 28, 35), (5, 12, 20, 28, 35)]

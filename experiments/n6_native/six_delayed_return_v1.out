@@ -1,0 +1,1 @@
+delayed returns x@1 -> y@1 -> z@1 -> x@2: 342; violations of 11 z < 7 x < 13 z: 0

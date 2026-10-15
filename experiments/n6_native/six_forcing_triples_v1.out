@@ -1,0 +1,3 @@
+HI=48: divisible-largest residual sets=5249; caught by some forcing triple: 5239
+  forcing-triple counts (of 216) by residues: {(1, 2, 3): 96, (1, 2, 5): 132, (1, 3, 5): 108, (2, 3, 5): 96, (1, 3, 4): 96, (1, 4, 5): 132, (3, 4, 5): 96}
+  sets caught, by residues of the triple: {(1, 2, 3): 2438, (1, 2, 5): 2410, (2, 3, 5): 2405, (1, 3, 5): 5193, (3, 4, 5): 2661, (1, 4, 5): 2613, (1, 3, 4): 2625}

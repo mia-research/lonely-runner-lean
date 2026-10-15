@@ -1,0 +1,6 @@
+/Users/trentpalelei/Desktop/Math Ex/experiments/n6_native/CascadeReturnLap_v1.lean:22:54: warning: unused variable `hg`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'CascadeReturnLap.return_reading' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CascadeReturnLap.lap_skip_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CascadeReturnLap.move_factor' depends on axioms: [propext, Classical.choice, Quot.sound]

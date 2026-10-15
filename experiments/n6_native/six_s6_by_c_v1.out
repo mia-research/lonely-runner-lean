@@ -1,0 +1,20 @@
+(1) runner 2 clear at runner 3's opening k (k mod c), exact:
+   c=2: usable k mod c = [1]  (1 of 2)
+   c=3: usable k mod c = [1, 2]  (2 of 3)
+   c=4: usable k mod c = [2, 3]  (2 of 4)
+   c=5: usable k mod c = [2, 3, 4]  (3 of 5)
+   c=6: usable k mod c = [2, 3, 4, 5]  (4 of 6)
+   c=7: usable k mod c = [3, 4, 5, 6]  (4 of 7)
+   c=8: usable k mod c = [3, 4, 5, 6, 7]  (5 of 8)
+   c=9: usable k mod c = [3, 4, 5, 6, 7, 8]  (6 of 9)
+   c=10: usable k mod c = [4, 5, 6, 7, 8, 9]  (6 of 10)
+   c=11: usable k mod c = [4, 5, 6, 7, 8, 9, 10]  (7 of 11)
+   c=12: usable k mod c = [4, 5, 6, 7, 8, 9, 10, 11]  (8 of 12)
+(2,3) by c:
+   c=2: sets=239; runner 3 ever a setter 85; ends at runner 3 41; runner 2 in the way at some step 18; blockers at start [((), 86), ((5,), 48), ((3,), 30), ((4, 5), 26)]
+   c=3: sets=287; runner 3 ever a setter 168; ends at runner 3 88; runner 2 in the way at some step 82; blockers at start [((3,), 82), ((5,), 38), ((4,), 37), ((), 37)]
+   c=4: sets=402; runner 3 ever a setter 194; ends at runner 3 24; runner 2 in the way at some step 239; blockers at start [((2,), 98), ((5,), 73), ((3,), 71), ((4, 5), 40)]
+   c=5: sets=123; runner 3 ever a setter 34; ends at runner 3 9; runner 2 in the way at some step 78; blockers at start [((2,), 44), ((4, 5), 23), ((5,), 22), ((), 14)]
+   c=6: sets=403; runner 3 ever a setter 147; ends at runner 3 5; runner 2 in the way at some step 149; blockers at start [((), 134), ((3,), 86), ((4,), 74), ((5,), 40)]
+   c=7: sets=70; runner 3 ever a setter 24; ends at runner 3 4; runner 2 in the way at some step 40; blockers at start [((), 23), ((2,), 15), ((4,), 7), ((5,), 7)]
+   c=>=8: sets=319; runner 3 ever a setter 83; ends at runner 3 5; runner 2 in the way at some step 221; blockers at start [((3,), 45), ((), 45), ((2, 3), 40), ((5,), 34)]

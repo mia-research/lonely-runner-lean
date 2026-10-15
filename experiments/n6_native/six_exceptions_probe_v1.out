@@ -1,0 +1,16 @@
+RESIDUAL failures:
+  (1, 3, 4, 5, 6)  gcd6=[1, 3, 2, 1, 6]  M=1  cert flanks=[4, 5]  second-largest ok=True
+  (2, 6, 8, 10, 11)  gcd6=[2, 6, 2, 2, 1]  M=1  cert flanks=[2, 8, 10]  second-largest ok=True
+  (1, 3, 4, 5, 12)  gcd6=[1, 3, 2, 1, 6]  M=1  cert flanks=[4, 5]  second-largest ok=True
+  (1, 3, 5, 8, 12)  gcd6=[1, 3, 1, 2, 6]  M=1  cert flanks=[3, 5, 8]  second-largest ok=True
+  (1, 4, 5, 9, 12)  gcd6=[1, 2, 1, 3, 6]  M=1  cert flanks=[4, 5, 9]  second-largest ok=True
+  (1, 5, 8, 9, 12)  gcd6=[1, 1, 2, 3, 6]  M=1  cert flanks=[8, 9]  second-largest ok=True
+  (1, 9, 10, 11, 12)  gcd6=[1, 3, 2, 1, 6]  M=1  cert flanks=[10, 11]  second-largest ok=True
+  (2, 5, 7, 9, 12)  gcd6=[2, 1, 1, 3, 6]  M=1  cert flanks=[5, 7, 9]  second-largest ok=True
+  (3, 6, 9, 15, 16)  gcd6=[3, 6, 3, 3, 2]  M=1  cert flanks=[3, 9, 15]  second-largest ok=True
+  (3, 7, 10, 12, 16)  gcd6=[3, 1, 2, 6, 2]  M=1  cert flanks=[7, 10, 12]  second-largest ok=True
+  (1, 4, 5, 9, 18)  gcd6=[1, 2, 1, 3, 6]  M=1  cert flanks=[4, 5, 9]  second-largest ok=True
+  (1, 15, 16, 17, 30)  gcd6=[1, 3, 2, 1, 6]  M=1  cert flanks=[15, 16, 17]  second-largest ok=True
+  (4, 7, 11, 15, 30)  gcd6=[2, 1, 1, 3, 6]  M=1  cert flanks=[4, 7, 11, 15]  second-largest ok=True
+rule-settled failures, by failed field (a set may fail several): {'four': 8, 'shape': 22, 'no_free_flank': 36}
+second-largest flank carries a certificate: {('settled-by-rules', True): 59, ('RESIDUAL', True): 13}

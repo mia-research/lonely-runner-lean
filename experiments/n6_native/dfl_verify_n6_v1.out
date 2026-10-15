@@ -1,0 +1,7 @@
+n=6 S=(103, 246, 300, 395, 518): cascade T = 1/72 (13 moves); earliest lonely opening by enumeration = 1/72; agree: True
+  tau = d_min * T = 103/72 = 1.43056; DoorFirstLap (tau <= 1) holds: False
+  openings checked: 25; gcd = 1
+  in SixResidual: False
+n=8 S=(49, 205, 234, 256, 286, 323, 366): cascade T = 49/1872 (28 moves); earliest lonely opening by enumeration = 49/1872; agree: True
+  tau = d_min * T = 2401/1872 = 1.28259; DoorFirstLap (tau <= 1) holds: False
+  openings checked: 49; gcd = 1

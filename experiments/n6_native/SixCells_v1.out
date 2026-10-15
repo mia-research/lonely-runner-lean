@@ -1,0 +1,2 @@
+'SixCells.all_shifts_blocked_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SixCells.cell_criterion' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,4 @@
+HI=60: split of residual (class, largest flank works) -> count: {('largest=unique mult6', True): 19110, ('other', True): 100449, ('largest=unique mult6', False): 10, ('other', False): 3}
+  s1: classes=2 mixed classes=2 classes with a failure=2
+  s2: classes=1979 mixed classes=10 classes with a failure=10
+  s3: classes=3735 mixed classes=6 classes with a failure=10

@@ -1,0 +1,5 @@
+sets=17135; first-move mismatches between rule and recorded cascade: 0
+  S8: ranks in the way at t0 (count of sets): {4: 994, 5: 2464}
+  S5: ranks in the way at t0 (count of sets): {2: 438, 3: 498, 4: 938, 5: 1266}
+  S6: ranks in the way at t0 (count of sets): {2: 418, 3: 545, 4: 543, 5: 569}
+  S7: ranks in the way at t0 (count of sets): {2: 1138, 3: 2777, 4: 3769, 5: 4095}

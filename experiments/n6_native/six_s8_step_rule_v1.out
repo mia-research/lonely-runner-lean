@@ -1,0 +1,2 @@
+(A) sets with 5v1 < v5 < 7v1: 2288; slow element in the way at 7/(6 v5): 0
+(B) walks starting (1,0)->(5,1): 1741; mismatches with 'moves on to (4,1) iff 7 v4 > 5 v5': 0

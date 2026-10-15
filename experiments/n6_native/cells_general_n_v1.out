@@ -1,0 +1,6 @@
+n=6: cell criterion checked 8190 openings, mismatches 0; phi(n)=2; blockers available n-2=4
+   minimal residue sets blocking every coarse shift: [(1, 2, 3, 5), (1, 3, 4, 5)]; sizes [4]
+n=7: cell criterion checked 11466 openings, mismatches 0; phi(n)=6; blockers available n-2=5
+   minimal residue sets blocking every coarse shift: NONE (some shift always free); sizes []
+n=8: cell criterion checked 15288 openings, mismatches 0; phi(n)=4; blockers available n-2=6
+   minimal residue sets blocking every coarse shift: [(1, 3, 4, 5, 7)]; sizes [5]

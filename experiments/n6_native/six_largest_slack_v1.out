@@ -1,0 +1,6 @@
+HI=50: residual=48115, largest-flank failures=13, successes where blocked counts sum >= e: 48102
+  e in [1,10]: min G/e = 0.100 at (1, 3, 4, 6, 10), G=1, blocked per d=[3, 4, 4, 4]
+  e in [11,20]: min G/e = 0.050 at (1, 6, 15, 17, 20), G=1, blocked per d=[7, 8, 10, 7]
+  e in [21,30]: min G/e = 0.033 at (1, 9, 11, 20, 30), G=1, blocked per d=[10, 12, 10, 10]
+  e in [31,40]: min G/e = 0.028 at (2, 23, 25, 27, 36), G=1, blocked per d=[12, 12, 12, 18]
+  e in [41,50]: min G/e = 0.040 at (3, 12, 15, 27, 50), G=2, blocked per d=[16, 18, 20, 16]

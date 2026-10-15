@@ -1,0 +1,3 @@
+WINDOW: hits 20/46; expected under length-proportional null 9.95; ratio 2.01
+rank (by length) of the component containing j*: {1: 20, 2: 9, 3: 5, 4: 6, 5: 1, 6: 3, 8: 2}
+components of L per set: min 4, median 12, max 32

@@ -1,0 +1,5 @@
+HI=40: primitive residual sets = 17135
+  shape M (multiples of 6): {1: 13526, 2: 3609}
+  certificate at largest flank: 17122; at least: 6896; at some mult of 6: 12401; at some mult of 5: 16411
+  cascade moves: {0: 3008, 1: 7199, 2: 4196, 3: 1555, 4: 734, 5: 285, 6: 111, 7: 28, 8: 13, 9: 5, 10: 1}
+  least q<=30 with a lonely grid instant a/q: {7: 4129, 8: 2853, 9: 4372, 10: 2193, 11: 2879, 12: 222, 13: 279, 14: 95, 15: 83, 16: 24, 17: 5, 21: 1} none: 0

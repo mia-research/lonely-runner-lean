@@ -1,0 +1,9 @@
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 0: grid misses L for e in [5, 7, 13]
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 1: grid misses L for e in [2, 4, 6, 10]
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 2: grid misses L for e in [3]
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 3: grid misses L for e in [4, 5, 7, 8, 11, 16]
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 4: grid misses L for e in [3]
+n=6 P=[1, 2, 3, 5] phase class r = k mod n = 5: grid misses L for e in [2, 4, 6, 10]
+actual k (e > max(kP) = 5 k, gcd(k,e)=1, gcd(kP,e)=1) with failing e:
+   k=1 (r=1): [6, 10]
+   k=3 (r=3): [16]

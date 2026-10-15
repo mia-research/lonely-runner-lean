@@ -1,0 +1,17 @@
+S6 sets: 1843
+  c = v3/D = 2: 239 sets; final flank {1: 86, 2: 5, 3: 41, 4: 56, 5: 51}; top sequences [((), 86), ((4,), 26), ((5,), 19), ((4, 3), 17)]
+  c = v3/D = 3: 287 sets; final flank {1: 37, 2: 22, 3: 88, 4: 64, 5: 76}; top sequences [((), 37), ((3,), 31), ((4,), 27), ((3, 5), 21)]
+  c = v3/D = 4: 402 sets; final flank {1: 14, 2: 46, 3: 24, 4: 184, 5: 134}; top sequences [((4,), 49), ((5,), 35), ((2, 4), 31), ((3, 2), 28)]
+  c = v3/D = 5: 123 sets; final flank {1: 14, 2: 15, 3: 9, 4: 55, 5: 30}; top sequences [((4,), 23), ((2, 4), 15), ((), 14), ((2, 5), 10)]
+  c = v3/D = 6: 403 sets; final flank {1: 134, 2: 60, 3: 5, 4: 124, 5: 80}; top sequences [((), 134), ((4,), 51), ((3, 5), 24), ((5,), 23)]
+  c = v3/D = 7: 70 sets; final flank {1: 23, 2: 16, 3: 4, 4: 17, 5: 10}; top sequences [((), 23), ((2, 5), 7), ((2, 4), 6), ((4,), 5)]
+  c = v3/D = >=8: 319 sets; final flank {1: 45, 2: 117, 3: 5, 4: 88, 5: 64}; top sequences [((2,), 71), ((), 45), ((4,), 35), ((2, 4), 20)]
+  by ranks in the way at t0:
+    blocked (): 353 sets; top sequences [((), 353)]
+    blocked (3,): 318 sets; top sequences [((3, 5), 64), ((3, 4), 58), ((3, 4, 2), 20)]
+    blocked (5,): 262 sets; top sequences [((5,), 93), ((5, 4), 51), ((5, 3, 2), 19)]
+    blocked (2,): 223 sets; top sequences [((2, 4), 51), ((2,), 49), ((2, 5), 34)]
+    blocked (4,): 210 sets; top sequences [((4,), 111), ((4, 5), 27), ((4, 3, 2, 4), 14)]
+    blocked (4, 5): 159 sets; top sequences [((4,), 90), ((4, 3), 20), ((4, 3, 2, 4), 13)]
+    blocked (3, 4): 60 sets; top sequences [((3,), 20), ((3, 2), 9), ((3, 2, 5), 8)]
+    blocked (2, 3): 56 sets; top sequences [((2, 4), 19), ((2,), 19), ((2, 5), 9)]

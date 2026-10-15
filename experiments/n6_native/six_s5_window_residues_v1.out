@@ -1,0 +1,5 @@
+§5 endings at runner 4 or 5: 1333; inside the first meeting window: 668
+  (C1, C23, Cy) at the endpoint: {(True, True, True): 1331, (True, False, True): 2}
+  opening index N: {1: 602, 2: 372, 3: 154, 4: 60, 5: 38, 6: 49, 7: 40, 8: 10, 9: 6, 10: 1, 11: 1}
+  tightest condition: {'C23': 343, 'Cy': 147, 'C1': 843}
+  reduction exact at in-window openings: checked 4708, mismatches 0

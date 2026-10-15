@@ -1,0 +1,4 @@
+HI=48, K=4: coprime-case sets=11082
+  least |c| over ELEM+DIFF+SUM: {1: 10974, 2: 96, 3: 8, '>4': 4}
+  family achieving it first: {'ELEM': 9016, 'DIFF': 1852, 'SUM': 210}
+  examples beyond K: [(1, 4, 6, 20, 25), (2, 6, 8, 10, 11), (3, 12, 15, 27, 35), (3, 12, 27, 30, 35)]

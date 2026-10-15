@@ -1,0 +1,2 @@
+'CascadeStaircase.staircase' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CascadeStaircase.early_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

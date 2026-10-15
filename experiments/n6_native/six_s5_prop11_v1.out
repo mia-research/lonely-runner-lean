@@ -1,0 +1,5 @@
+k=1: sets=1084; final flank rank {1: 197, 2: 242, 3: 15, 4: 375, 5: 255}; top setter sequences [((), 197), ((4,), 158), ((5,), 103), ((3, 2), 74), ((2,), 74)]
+   cascade endpoint inside a Prop 11 window: 174/1084 (0.161); control (share of all lonely openings in a window): 0.112
+k=2: sets=594; final flank rank {1: 117, 2: 149, 4: 184, 5: 144}; top setter sequences [((), 117), ((4,), 102), ((2,), 77), ((5,), 76), ((4, 2), 34)]
+   cascade endpoint inside a Prop 11 window: 22/594 (0.037); control (share of all lonely openings in a window): 0.121
+k=>=3: sets=766; final flank rank {1: 156, 2: 235, 4: 200, 5: 175}; top setter sequences [((), 156), ((4,), 142), ((5,), 123), ((2,), 103), ((4, 2), 46)]

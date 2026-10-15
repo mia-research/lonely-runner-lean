@@ -1,0 +1,3 @@
+late walks: 605; classes: {'HIGH LAP': 486, 'SLOW END': 68, 'BOUNDARY': 51}
+  SLOW END: staircase steps violating 5x < 7y < 7x: 0; number of moves in these walks: {3: 15, 4: 46, 5: 7}
+  HIGH LAP: how lap >= 2 was first reached: {'return': 307, 'first move at lap>=2': 14, 'fresh setter at lap>=2': 165}

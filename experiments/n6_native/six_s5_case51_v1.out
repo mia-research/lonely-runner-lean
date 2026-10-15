@@ -1,0 +1,4 @@
+(A) k >= 3 sets: 766; cascade endpoint just after a 2-3 meeting (frac(D T) in [0,1/6]): 766 (1.000); control (all lonely openings): 0.196
+(B) §5 endings at runner 4 or 5: 1333
+    G >= 2/(3 v4): cascade endpoints 305/1333 (0.229); all lonely openings at 4, 5: 4950/14631 (0.338)
+    G >= 1/(2 v3): cascade endpoints 187/1333 (0.140); all lonely openings at 4, 5: 2759/14631 (0.189)

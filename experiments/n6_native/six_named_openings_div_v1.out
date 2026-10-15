@@ -1,0 +1,4 @@
+HI=48, K=6: divisible-case sets=5249
+  least c naming a good opening: {1: 5144, 2: 69, 3: 18, 4: 4, 5: 4, 'no good opening': 10}
+  family: {'ELEM': 4464, 'DIFF': 625, 'SUM': 150}
+  examples beyond K: []

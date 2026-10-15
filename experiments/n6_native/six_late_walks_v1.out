@@ -1,0 +1,15 @@
+late walks: 605; with some move to k >= 2: 511; that move is the first move from (1,0): 15; its setter had set an earlier move (a return): 321
+  (state before, elements in the way, setter, N) at the first k>=2 move, most common:
+     ((2, 1), (5,), 5, 2) 155
+     ((3, 1), (5,), 5, 2) 138
+     ((2, 1), (4,), 4, 2) 96
+     ((2, 1), (4, 5), 4, 2) 57
+     ((3, 1), (2, 5), 5, 2) 13
+     ((1, 0), (5,), 5, 2) 10
+     ((4, 1), (5,), 5, 2) 9
+     ((3, 1), (4,), 4, 2) 9
+     ((3, 1), (4, 5), 4, 2) 6
+     ((2, 1), (5,), 5, 3) 6
+     ((1, 0), (5,), 5, 3) 4
+     ((2, 1), (4, 5), 5, 4) 2
+  late walks with all moves at k <= 1, by (final flank rank, BHK case): {(2, 'S7'): 21, (2, 'S6'): 12, (2, 'S5'): 37, (3, 'S7'): 19, (3, 'S5'): 3, (3, 'S6'): 1, (2, 'S8'): 1}

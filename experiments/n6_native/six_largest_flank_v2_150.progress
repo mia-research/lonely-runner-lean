@@ -1,0 +1,6 @@
+max<=25: sets=52281 residual=1110 fail=11
+max<=50: sets=2061046 residual=48115 fail=13
+max<=75: sets=16767916 residual=433350 fail=13
+max<=100: sets=72918416 residual=1844743 fail=13
+max<=125: sets=227267351 residual=5895935 fail=13
+max<=150: sets=572113856 residual=15433802 fail=13
