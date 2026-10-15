@@ -1469,3 +1469,52 @@ Owner: *"locate Renault 2004 (Discrete Math 287, 93-101), read its argument firs
   with the rest solved one order down, which is the shape of our order-five residual (`OrderFiveResidualN`: exactly one
   disparity divisible by 5). The residues used are units and zero divisors of ℤ/6 (E45). The moves are a change of
   scale λ ≤ 5 and sixth shifts α/6 applied to an extremal guard-safe time (`Driver.lean`).
+
+## E62 — Renault's order six (from Chen's Lean) against our order-five core and the cascade (2026-10-16)
+
+Owner: *"Give me the link and I will get it while you use chen's lean"*. **Grade of every Renault statement here:
+[SECONDARY — Chen's Lean `Research07/LRC6` docstrings and theorem statements; Renault 2004 not yet read].** Observation
+only. Artifacts: `six_renault_classes_v1.{py,out}` (primitive SixResidual, max ≤ 40, 17,135 sets, exact Fractions).
+
+**Renault's argument as Chen formalised it.** Under `hfail` (no lonely time):
+- §2: Lemma 2.1, every l ∈ {2,…,6} divides some speed (at t = 1/l a non-multiple of l is safe); with gcd 1, at most
+  three multiples of 2 and of 3 (solve four of them at order five, margin 1/5, then shift by 1/l, which leaves the
+  multiples fixed). Lemma 2.2: each speed i has some j with i < 5j. Lemma 2.3: three multiples of 3 → shift by thirds;
+  each non-multiple is bad for at most one of the three shifts. Claim 2.4: every x ∈ (1/6, 5/6) leaves the band under
+  some λ ∈ {2,…,5}.
+- Dispatch by the number of multiples of 3: 2 → Prop 3.1 (third shifts; extremal time on a discrete set; 6w divides a
+  multiple of 3; finish at 1/(6v₁)); 1 → that one is the multiple of 6, the anchor, and the four others are guards with
+  residues ±1 or ±2 mod 6: no ±2 → Prop 5.4, one → Prop 6.6, two → Prop 4.1.
+- Props 5.4, 6.6, 4.1: seed = the four guards lonely at 1/5 (order five); take the guard-safe time maximising the
+  anchor's distance from a lap point; a move s = λ·t + α/6 (λ ≤ 5) leaves the anchor's reading multiplied by λ and
+  shifts each guard by its residue times α/6. Lemmas 5.1, 6.1, 6.4 (interval-covering over three readings) give a (λ, α)
+  keeping every guard safe, which improves the anchor: contradiction.
+
+**Against our order-five core (`OrderFiveN`, `OrderFiveResidualN`).**
+| Renault, order six | Ours, order five |
+|---|---|
+| Lemma 2.1 (≥ 1): t = 1/l, non-multiples safe | M = 0: the instant 1/5 is lonely (R6) |
+| Lemma 2.1 (≤ 3), Lemma 2.3: multiples fixed under 1/l or 1/3 shifts, each non-multiple bad for ≤ 1 shift | M ≥ 2: descent with cost max(2, gcd(e,5)) per non-multiple, total ≤ 4 < 5 |
+| the single multiple of 6 (anchor), four guards solved one order down | the single multiple e of 5, not the largest (the residual) |
+| move α/6: anchor fixed, guards shift by residue·α/6 | `exists_fifth_shift`: e fixed, others shift by k/5, budget |
+| move λ: anchor scaled (Claim 2.4: λ ≤ 5 pushes it out) | `exists_time_coprime`: change of scale m until e is clear |
+| starting time: extremal (maximiser over a finite candidate set) | starting time: a lap point α/F of the fastest runner, α ≡ v₃⁻¹ (units of ℤ/F) |
+Same objects (the divisible runner, shifts by 1/n that fix it, scalings that move it, the shift budget), one difference:
+Renault picks the starting time by maximisation, ours by a unit of ℤ/F.
+
+**Our SixResidual already contains part of Renault §2.** `six_residual_v1.py` (field by field from `OrderSixN.SixResidual`)
+requires a multiple of 4, of 5 and of 6 (Lemma 2.1's ≥ 1 direction for l = 4, 5, 6), and every V ≤ 5s for some
+other s (Lemma 2.2, non-strict). It does not impose the ≤ 3 directions: 974 sets have four multiples of 3 and 1,928 have
+four even speeds.
+
+**Against the cascade (counts, not rules).** Classes on SixResidual: P3.1 8,709; L2.3 2,568; P4.1 1,853; four evens
+1,928; P6.6 998; four multiples of 3 974; P5.4 105.
+- The cascade's instant is not Renault's seed: the four guards are clear at 1/5 at T in 22–422 sets per class (≤ 6%);
+  at some T + a/6 in 33–50%.
+- Lonely instants come in sixth-shift families: T + a/6 (a = 1…5) is also lonely in 77% of P3.1, 76% of P4.1, 59% of
+  P6.6, 44% of P5.4. Scalings λT (λ = 2…5) are lonely in 61–69%.
+- P5.4 (all guards ±1): final flank a unit in 100 of 105; the other classes mix.
+- **Consequence:** Renault's order six has the order-five mechanism one order up (divisible anchor, shifts fixing it,
+  scaling, budget). The cascade's instants do not follow Renault's seed-and-move order, as they did not follow BHK's
+  (E57). Not checked: Renault's own text; whether a unit of ℤ/v₅-style starting time can replace the extremal time in
+  Props 5.4/6.6/4.1 (that is the step that would make order six run on the order-five core).
