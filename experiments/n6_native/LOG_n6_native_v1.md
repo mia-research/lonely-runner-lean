@@ -1645,3 +1645,20 @@ E65's deaths, *"Or is relocated to the next global isolation incident?"*. Observ
   the moment of death; in fold terms the next isolation is the next lift (next unit fold at its own modulus), not a
   return to the order-6 ideal's other event. Not established: why the next isolation is always already alive (E28 and
   summary v6 §4 note this is the handover question, equivalent to existence).
+
+## E67 — "Only 15 types of result": search, and relocation kinds by flank roles (2026-10-16)
+
+Owner: *"When we were mapping the cascade results against types of arrangement we only saw (from memory) 15 different
+types of result. Maybe this is the native classes, arrangements of speed only deform the isolation in these types of
+manners"*.
+- **Search.** No 15-type result found in this log, summary v6, this session's transcript or `experiments/`. Nearest:
+  E64's 15 groups (counts of multiples of 3 and of 2), which are input classes fixed by construction; and order-8
+  E398 (`docs/n8/RUNNING_LOG_order8_v1.md`, "the .out lists 15 types" of walker (q, p mod 8)), a separate project.
+- **Test of the idea at order 6** (`relocation_kinds_v1.{py,out}`; every 4th AP → SixResidual path, 7,812 deaths with
+  single flanks, 176 ties skipped). A relocation described only by roles (I = dying entry flank, J = dying exit flank,
+  O = others; which is faster; the new entry and exit flank's roles; which roles gain laps and by how much): 425
+  distinct kinds; the top 10 cover 0.49, the top 40 cover 0.75. Commonest (1,405, 0.18): J faster, J gains one lap and
+  becomes the new entry flank (the exit runner wraps once and re-enters). Without lap gains the role description has
+  at most 18 values by construction, so a short list there would not be evidence.
+- **Reading** [observation]. At this description, relocations do not reduce to about 15 kinds. Owed: the source of the
+  owner's 15, to test the same description.
