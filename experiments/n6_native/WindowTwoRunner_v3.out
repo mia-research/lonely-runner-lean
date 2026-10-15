@@ -1,0 +1,10 @@
+../experiments/n6_native/WindowTwoRunner_v3.lean:210:5: warning: unused variable `hl0`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'N6Native.window_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.window_two_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.lonely_of_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.g4_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.g7_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.g4_lonely' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.g7_lonely' depends on axioms: [propext, Classical.choice, Quot.sound]

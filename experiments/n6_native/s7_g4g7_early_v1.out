@@ -1,0 +1,4 @@
+G4/G7 sets with W < L/v4: 719; no lonely instant found in windows up to 4/v1: 0 []
+index of the first J123 window with a lonely instant (0 = first after t = 0): {('G4', 0): 668, ('G7', 0): 51}
+its start, in units of 1/v3: {('G4', 0.51): 130, ('G4', 0.52): 198, ('G4', 0.53): 32, ('G4', 0.54): 62, ('G4', 0.56): 155, ('G4', 0.57): 17, ('G4', 0.58): 27, ('G4', 0.59): 17, ('G4', 0.6): 18, ('G4', 0.61): 8, ('G4', 0.62): 3, ('G4', 0.63): 1, ('G7', 0.51): 15, ('G7', 0.52): 7, ('G7', 0.53): 23, ('G7', 0.54): 4, ('G7', 0.55): 2}
+relation to BHK's early window: {('G4', "first lonely window contains BHK's early window"): 668, ('G7', "first lonely window contains BHK's early window"): 51}

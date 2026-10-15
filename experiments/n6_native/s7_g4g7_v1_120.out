@@ -1,0 +1,9 @@
+exceptional sets by orbit group: {'G4': 122361, 'G7': 40622}
+window at BHK's named meeting time equals the formula: {('G4', True): 122361, ('G7', True): 40622}
+criterion vs relaxed (any meeting time):
+   3641 ('G4', 'W < L/v4', 'relaxed fails')
+   118720 ('G4', 'W >= L/v4', 'relaxed works')
+   359 ('G7', 'W < L/v4', 'relaxed fails')
+   40263 ('G7', 'W >= L/v4', 'relaxed works')
+other groups (should be none): {}
+criterion fails but another meeting time works, e.g.: []

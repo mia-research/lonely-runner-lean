@@ -1208,3 +1208,40 @@ Quot.sound]): v1 plus `lonely_of_window`. If runners v₁, v₂, v₃ are clear 
 `window_two`'s thresholds for the fast runners a ≤ b, all five are clear at one instant of the window. This is
 BHK's Corollary 5 with the sharp window in place of Lemma 4 and without requiring a whole 3-gap. It makes "window
 found, therefore lonely" a proved native step; finding the window remains per set for the exceptional orbits.
+
+**E53. BHK's exceptional orbits G₄ and G₇: an exact single-window criterion, the early window, and Lean (2026-10-15).**
+Owner: *"Didn't I ask you to work autonomously? why are you coming back to me with this you could just do bothe"*
+(both: commit E20–E52, done as `97075f1`; and derive the G₄/G₇ window). `s7_exceptional_v2.c`
+(`s7_exceptional_v2_80.out`, `s7_exceptional_v2_120.out`), `s7_g4g7_v1.{py,out}`, `s7_g4g7_v1_120.{py,out}`,
+`s7_g4g7_early_v1.{py,out}`, `s7_g4g7_early_v1_120.{py,out}`, `WindowTwoRunner_v3.lean` (`.out`).
+- **Source** (BHK 2001 §7, Table 10 and the text after it).
+  - G₄ = ⟨(1/2, 1/4)⟩: at the meeting time with {kt₀} = 1/2, {v₁kt₀} = 1/4 the interval I = [kt₀ − x₁/12, kt₀ + 1/3]
+    is a 123-gap. If runners 4, 5 cover it, then 7/16 < x₅ < 1/2 and 7/8 < x₄ < 1, and then [2/3, 35/48] is left
+    uncovered.
+  - G₇ = ⟨(2/7, 1/7)⟩: J = [kt₀ − 5/14, kt₀ + 11/42] at {kt₀} = 4/7, {v₁kt₀} = 2/7, then [2/3, 65/84].
+  - So BHK's treatment is one named window plus the early window after t = 0.
+- **Exact checks, all primitive §7 sets to 80 and to 120** (88,278,879 sets to 120):
+  - every set where BHK's main route fails is on the orbit G₄ or G₇ (to 120: 122,361 and 40,622; no other group);
+  - the J123 window at BHK's named meeting time equals W₄ = 1/(3v₃) + 1/(12v₁) for G₄ and
+    W₇ = 11/(42v₃) + min(17/(42v₃), 5/(42v₁)) for G₇, in every set;
+  - **criterion**: a single meeting-time window closes the set by `window_two` iff W ≥ L(v₅/v₄)/v₄, with no
+    exception in either direction, and no other meeting time ever does better. To 120 it holds in 118,720 (G₄) and
+    40,263 (G₇) and fails in 3,641 and 359;
+  - **in all 4,000 failures**, the first J123 window after t = 0 (every runner starting at 0, no free phase)
+    contains a lonely instant, and that window contains BHK's early window ([2/3, 35/48]/v₃ or [2/3, 65/84]/v₃).
+    It starts at 0.50–0.64 in units of 1/v₃, i.e. at runner 1's first entry 1/(6v₁).
+- **Lean** (`WindowTwoRunner_v3.lean`, all [propext, Classical.choice, Quot.sound]; one unused-hypothesis warning in
+  `g7_window`):
+  - `g4_window`: if runners 2, 3 read 1/2 and runner 1 reads 1/4 at t, with v₁ < v₂ < v₃ < 4v₁, runners 1–3 are
+    clear on [t − 1/(12v₁), t + 1/(3v₃)];
+  - `g7_window`: readings 4/7, 4/7, 2/7, with v₁ < v₂ < v₃; clear on [t − l, t + 11/(42v₃)] for l ≤ 17/(42v₃),
+    l ≤ 5/(42v₁);
+  - `g4_lonely`, `g7_lonely`: composed with `lonely_of_window`, the orbit is lonely whenever that window length
+    meets `window_two`'s thresholds.
+- **Reading** [observation and proof, as marked].
+  - BHK's exceptional orbits are handled natively by one stated inequality on the speeds: W₄ or W₇ against L(ρ)/v₄
+    (proved, given that the named meeting time exists). Where it fails, the first window after the start does it
+    (observed to 120, not derived).
+  - Not yet: (i) the orbit's named point exists at some meeting time (the orbit-membership step; BHK's group
+    computation, ported in `OrderSixSecSevenCasesN.lean`); (ii) the early window as a theorem in the failure region
+    W < L(ρ)/v₄, which forces v₄ < (8/7)v₃ and ρ close to 1 or to 2 (the 719 profile of E51).
