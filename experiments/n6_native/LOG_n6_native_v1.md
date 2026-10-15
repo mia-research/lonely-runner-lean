@@ -1685,3 +1685,18 @@ death (7,812).
   claim "a second knot needs equal speeds" does not hold for the one-step opening (second knots with distinct speeds in
   6,101 deaths); what held is that the chain of knots always ends. Why it always ends is the cascade's termination at
   order six.
+
+## E69 — Does the runner count bound the knots? (2026-10-16)
+
+Owner: *"the more you try and tie a knot to prevent isolation it pushes it along till at some point you run out ability
+to maintain a knot … It can't go on for ever as you only have finite runners"*. Observation only.
+`knot_budget_v1.{py,out}`; the 7,812 deaths of E68, forward chain rule as there.
+- Knots held by one runner in a single push: 1 in 4,563 deaths, 2 in 1,697, 3 in 1,184, 4 in 296, 5 in 64, 6 in 7,
+  7 in 1. Total knots per push 1 to 19. Runners holding more than one knot are mostly the fastest: (rank 5, 2 knots)
+  1,686, (4, 2) 1,478, (5, 3) 1,166. Example: (1,2,5,15,24) at s = 12/19, extra laps (0,0,1,2,3) — the faster the
+  runner, the more knots it holds, in proportion to how far in time the push travels.
+- **Reading** [observation]. A runner can re-tie: the number of knots is not capped by the number of runners. What
+  finiteness gives exactly: at rational speeds the motion is periodic, a period holds finitely many openings, and the
+  push only moves forward, so it either ends or passes a whole period and then repeats for ever. "It cannot go on for
+  ever" is the exclusion of that endless periodic loop, and that exclusion is the existence statement itself
+  (`lonely_iff_run_ends`). The runner count makes the dichotomy; what rules out the loop is still to be found.

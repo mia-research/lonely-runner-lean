@@ -1,0 +1,8 @@
+deaths: 7812
+largest number of knots held by one runner in the chain: {1: 4563, 2: 1697, 3: 1184, 4: 296, 5: 64, 6: 7, 7: 1}
+runners holding at least one knot: {1: 1711, 2: 1374, 3: 1241, 4: 1383, 5: 2103}
+total knots (extra laps) in the chain: {1: 1711, 2: 1366, 3: 957, 4: 765, 5: 313, 6: 630, 7: 432, 8: 541, 9: 156, 10: 300, 11: 404, 12: 82, 13: 90, 14: 50, 15: 5, 16: 8, 17: 1, 19: 1}
+runners holding more than one knot (speed rank, knots): [((5, 2), 1686), ((4, 2), 1478), ((3, 2), 1205), ((5, 3), 1166), ((2, 2), 754), ((4, 3), 656), ((5, 4), 289), ((3, 3), 222), ((4, 4), 119), ((5, 5), 64)]
+  example (set, s, dying laps, extra laps per runner): ((1, 2, 5, 15, 24), Fraction(12, 19), (0, 0, 0, 1, 2), (0, 0, 1, 2, 3))
+  example (set, s, dying laps, extra laps per runner): ((1, 2, 5, 27, 36), Fraction(24, 31), (0, 0, 0, 3, 4), (0, 0, 1, 2, 3))
+  example (set, s, dying laps, extra laps per runner): ((1, 2, 5, 27, 36), Fraction(30, 31), (0, 0, 0, 4, 5), (0, 0, 1, 2, 3))
