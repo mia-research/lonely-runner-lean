@@ -1,0 +1,2 @@
+tag	l	L	L_closing	B	delta	jump	jump_dmin	B_status	B_opening	n_alive_after	thin
+control-face	1/2	(0, 0, 0, 0, 0)	[(1, 5, 0, 0)]	(0, 1, 2, 3, 4)	(0, 1, 2, 3, 4)	2/21	0.6666666666666666	born	[(5, 1, 4, 0)]	3	THIN
