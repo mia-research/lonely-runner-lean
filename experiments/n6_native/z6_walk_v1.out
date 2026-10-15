@@ -1,0 +1,92 @@
+sets: 17135; by zero-divisor content (multiples of 3, of 2): {'m3=1,m2=1': 105, 'm3=1,m2=2': 998, 'm3=1,m2=3': 1853, 'm3=1,m2=4': 1928, 'm3=2,m2=1': 179, 'm3=2,m2=2': 3491, 'm3=2,m2=3': 3505, 'm3=2,m2=4': 1534, 'm3=3,m2=1': 143, 'm3=3,m2=2': 1031, 'm3=3,m2=3': 1087, 'm3=3,m2=4': 307, 'm3=4,m2=1': 79, 'm3=4,m2=2': 505, 'm3=4,m2=3': 390}
+== m3=1,m2=1 (105)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 68, '1 instants before end': 23, '2 instants before end': 12, '5 instants before end': 1, '3 instants before end': 1}
+       free shifts at the final instant (count): {1: 59, 2: 28, 3: 18}  commonest sets: [((0,), 59), ((0, 2), 10), ((0, 4, 5), 9), ((0, 3), 8)]
+   (b) frames with no lonely shift: 111; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('U',), 120), (('M', 'U'), 56), (('M',), 46)]
+   (c) setter classes: {'U': 109, 'M': 51}  in-the-way class sets: [(('U',), 96), (('M',), 48), (('U', 'U'), 13), (('M', 'U'), 3)]
+== m3=1,m2=2 (998)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 553, '1 instants before end': 235, '2 instants before end': 136, '3 instants before end': 40, '4 instants before end': 22, '5 instants before end': 9, '6 instants before end': 2, '7 instants before end': 1}
+       free shifts at the final instant (count): {1: 414, 2: 419, 3: 145, 4: 20}  commonest sets: [((0,), 414), ((0, 3), 157), ((0, 1), 92), ((0, 5), 77)]
+   (b) frames with no lonely shift: 1002; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('U',), 809), (('M',), 358), (('E', 'M', 'U'), 320), (('E', 'U'), 220), (('M', 'U'), 204), (('E',), 75)]
+   (c) setter classes: {'U': 895, 'M': 408, 'E': 344}  in-the-way class sets: [(('U',), 691), (('M',), 340), (('E',), 265), (('E', 'U'), 163), (('U', 'U'), 74)]
+== m3=1,m2=3 (1853)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 970, '1 instants before end': 476, '2 instants before end': 254, '3 instants before end': 93, '4 instants before end': 42, '5 instants before end': 9, '6 instants before end': 5, '8 instants before end': 2, '7 instants before end': 2}
+       free shifts at the final instant (count): {1: 439, 2: 1030, 3: 360, 4: 24}  commonest sets: [((0, 3), 550), ((0,), 439), ((0, 1), 173), ((0, 5), 160)]
+   (b) frames with no lonely shift: 1747; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('U',), 957), (('E', 'U'), 555), (('E',), 496), (('E', 'M', 'U'), 491), (('M',), 487), (('M', 'U'), 324)]
+   (c) setter classes: {'E': 1294, 'U': 1104, 'M': 655}  in-the-way class sets: [(('E',), 966), (('U',), 750), (('M',), 470), (('E', 'U'), 407), (('M', 'U'), 147)]
+== m3=1,m2=4 (1928)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 1037, '1 instants before end': 489, '2 instants before end': 252, '3 instants before end': 86, '4 instants before end': 29, '5 instants before end': 25, '6 instants before end': 7, '9 instants before end': 2, '7 instants before end': 1}
+       free shifts at the final instant (count): {1: 287, 2: 983, 3: 597, 4: 61}  commonest sets: [((0, 3), 769), ((0,), 287), ((0, 5), 162), ((0, 3, 4), 152)]
+   (b) frames with no lonely shift: 1693; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('E',), 1146), (('E', 'U'), 752), (('M',), 469), (('E', 'M'), 429), (('E', 'M', 'U'), 379), (('M', 'U'), 211)]
+   (c) setter classes: {'E': 1819, 'M': 692, 'U': 478}  in-the-way class sets: [(('E',), 1516), (('M',), 479), (('U',), 300), (('E', 'U'), 226), (('E', 'E'), 191)]
+== m3=2,m2=1 (179)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 97, '1 instants before end': 46, '2 instants before end': 26, '3 instants before end': 7, '4 instants before end': 2, '5 instants before end': 1}
+       free shifts at the final instant (count): {1: 59, 2: 81, 3: 31, 4: 7, 5: 1}  commonest sets: [((0,), 59), ((0, 5), 22), ((0, 3), 20), ((0, 4), 17)]
+   (b) frames with no lonely shift: 146; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('U',), 120), (('M', 'T'), 52), (('M', 'T', 'U'), 52), (('T', 'U'), 41), (('M', 'U'), 16), (('T',), 7)]
+   (c) setter classes: {'U': 126, 'T': 75, 'M': 62}  in-the-way class sets: [(('U',), 104), (('T',), 62), (('M',), 57), (('T', 'U'), 21), (('U', 'U'), 11)]
+== m3=2,m2=2 (3491)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 1844, '1 instants before end': 1035, '2 instants before end': 342, '3 instants before end': 182, '4 instants before end': 54, '5 instants before end': 24, '6 instants before end': 6, '7 instants before end': 3, '8 instants before end': 1}
+       free shifts at the final instant (count): {1: 993, 2: 1672, 3: 747, 4: 78, 5: 1}  commonest sets: [((0,), 993), ((0, 3), 508), ((0, 4), 366), ((0, 2), 300)]
+   (b) frames with no lonely shift: 3378; E45 clean split holds in 23
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('M', 'U'), 1075), (('M', 'T'), 840), (('E', 'M', 'T', 'U'), 806), (('M',), 755), (('U',), 741), (('E', 'T', 'U'), 640)]
+   (c) setter classes: {'U': 2197, 'M': 1610, 'E': 953, 'T': 866}  in-the-way class sets: [(('U',), 1600), (('M',), 1338), (('E',), 652), (('T',), 608), (('M', 'U'), 364)]
+== m3=2,m2=3 (3505)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 1805, '1 instants before end': 1028, '2 instants before end': 358, '3 instants before end': 198, '4 instants before end': 82, '5 instants before end': 23, '6 instants before end': 8, '7 instants before end': 2, '8 instants before end': 1}
+       free shifts at the final instant (count): {1: 741, 2: 1526, 3: 1133, 4: 105}  commonest sets: [((0,), 741), ((0, 3), 580), ((0, 4), 289), ((0, 3, 4), 271)]
+   (b) frames with no lonely shift: 2918; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('M',), 935), (('M', 'U'), 860), (('E', 'M'), 635), (('E', 'M', 'U'), 516), (('T',), 465), (('M', 'T'), 450)]
+   (c) setter classes: {'E': 2001, 'M': 1519, 'U': 1194, 'T': 584}  in-the-way class sets: [(('E',), 1597), (('M',), 975), (('U',), 747), (('M', 'U'), 379), (('T',), 376)]
+== m3=2,m2=4 (1534)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 951, '1 instants before end': 361, '2 instants before end': 124, '3 instants before end': 65, '4 instants before end': 24, '5 instants before end': 5, '7 instants before end': 2, '8 instants before end': 1, '6 instants before end': 1}
+       free shifts at the final instant (count): {1: 228, 2: 680, 3: 290, 4: 336}  commonest sets: [((0, 3), 479), ((0,), 228), ((0, 2, 3, 5), 225), ((0, 1, 3, 4), 87)]
+   (b) frames with no lonely shift: 1212; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('E', 'M'), 644), (('M',), 565), (('E',), 510), (('E', 'M', 'U'), 228), (('E', 'T'), 222), (('M', 'U'), 193)]
+   (c) setter classes: {'E': 1052, 'M': 611, 'U': 190, 'T': 172}  in-the-way class sets: [(('E',), 776), (('M',), 362), (('E', 'M'), 223), (('E', 'T'), 121), (('M', 'U'), 98)]
+== m3=3,m2=1 (143)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 62, '1 instants before end': 55, '2 instants before end': 17, '3 instants before end': 4, '4 instants before end': 4, '5 instants before end': 1}
+       free shifts at the final instant (count): {1: 22, 2: 70, 3: 28, 4: 21, 5: 2}  commonest sets: [((0, 4), 24), ((0,), 22), ((0, 5), 20), ((0, 2), 13)]
+   (b) frames with no lonely shift: 48; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('T', 'U'), 26), (('M', 'T', 'U'), 23), (('M', 'T'), 19), (('T',), 12), (('M', 'U'), 9), (('M',), 7)]
+   (c) setter classes: {'U': 73, 'T': 56, 'M': 29}  in-the-way class sets: [(('U',), 55), (('T',), 53), (('M',), 25), (('T', 'U'), 11), (('U', 'U'), 9)]
+== m3=3,m2=2 (1031)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 602, '1 instants before end': 262, '2 instants before end': 122, '3 instants before end': 30, '5 instants before end': 7, '4 instants before end': 6, '6 instants before end': 2}
+       free shifts at the final instant (count): {1: 105, 2: 479, 3: 359, 4: 79, 5: 9}  commonest sets: [((0, 4), 200), ((0, 2), 181), ((0,), 105), ((0, 2, 3), 77)]
+   (b) frames with no lonely shift: 679; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('T',), 255), (('M', 'U'), 206), (('M',), 176), (('M', 'T'), 158), (('T', 'U'), 151), (('M', 'T', 'U'), 134)]
+   (c) setter classes: {'T': 448, 'U': 379, 'M': 257, 'E': 207}  in-the-way class sets: [(('T',), 337), (('U',), 215), (('M',), 164), (('E',), 149), (('M', 'U'), 101)]
+== m3=3,m2=3 (1087)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 704, '1 instants before end': 241, '2 instants before end': 81, '3 instants before end': 42, '4 instants before end': 12, '5 instants before end': 5, '6 instants before end': 2}
+       free shifts at the final instant (count): {1: 107, 2: 471, 3: 272, 4: 237}  commonest sets: [((0, 4), 185), ((0, 2), 160), ((0, 2, 3, 5), 142), ((0,), 107)]
+   (b) frames with no lonely shift: 823; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('M',), 368), (('M', 'T'), 230), (('E', 'T'), 189), (('E', 'M'), 182), (('M', 'U'), 176), (('T',), 165)]
+   (c) setter classes: {'M': 413, 'E': 408, 'T': 362, 'U': 186}  in-the-way class sets: [(('E',), 268), (('M',), 239), (('T',), 230), (('E', 'M'), 105), (('E', 'T'), 104)]
+== m3=3,m2=4 (307)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 204, '1 instants before end': 62, '3 instants before end': 25, '2 instants before end': 11, '5 instants before end': 3, '7 instants before end': 1, '4 instants before end': 1}
+       free shifts at the final instant (count): {1: 25, 2: 187, 3: 9, 4: 86}  commonest sets: [((0, 3), 102), ((0, 4), 48), ((0, 2, 3, 5), 47), ((0, 1, 3, 4), 39)]
+   (b) frames with no lonely shift: 320; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('E', 'M'), 222), (('M',), 194), (('E', 'M', 'T'), 123), (('M', 'T'), 101)]
+   (c) setter classes: {'M': 234, 'E': 153, 'T': 78}  in-the-way class sets: [(('M',), 145), (('E', 'M'), 95), (('E',), 88), (('T',), 46), (('M', 'T'), 28)]
+== m3=4,m2=1 (79)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 52, '1 instants before end': 9, '3 instants before end': 9, '2 instants before end': 5, '4 instants before end': 3, '5 instants before end': 1}
+       free shifts at the final instant (count): {2: 45, 3: 7, 4: 25, 5: 2}  commonest sets: [((0, 4), 25), ((0, 2), 20), ((0, 3, 4, 5), 13), ((0, 1, 2, 5), 11)]
+   (b) frames with no lonely shift: 38; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('T',), 19), (('T', 'U'), 19), (('M', 'T'), 12), (('M',), 11), (('M', 'T', 'U'), 10), (('M', 'U'), 5)]
+   (c) setter classes: {'T': 36, 'U': 24, 'M': 19}  in-the-way class sets: [(('T',), 30), (('U',), 24), (('M',), 11), (('T', 'T'), 6), (('M', 'T'), 5)]
+== m3=4,m2=2 (505)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 359, '1 instants before end': 74, '2 instants before end': 30, '3 instants before end': 23, '4 instants before end': 11, '5 instants before end': 4, '6 instants before end': 3, '7 instants before end': 1}
+       free shifts at the final instant (count): {2: 254, 3: 69, 4: 154, 5: 26, 6: 2}  commonest sets: [((0, 4), 128), ((0, 2), 126), ((0, 2, 4), 69), ((0, 3, 4, 5), 44)]
+   (b) frames with no lonely shift: 452; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('T',), 258), (('M', 'T'), 176), (('M',), 164), (('M', 'T', 'U'), 96), (('T', 'U'), 70), (('M', 'U'), 68)]
+   (c) setter classes: {'T': 300, 'M': 203, 'U': 95, 'E': 54}  in-the-way class sets: [(('T',), 232), (('M',), 134), (('U',), 54), (('E',), 45), (('M', 'T'), 41)]
+== m3=4,m2=3 (390)
+   (a) first walk instant whose sixth-shift frame holds a lonely instant: {'at end': 289, '1 instants before end': 62, '3 instants before end': 16, '2 instants before end': 8, '4 instants before end': 7, '6 instants before end': 4, '5 instants before end': 3, '7 instants before end': 1}
+       free shifts at the final instant (count): {2: 190, 3: 52, 4: 137, 6: 11}  commonest sets: [((0, 4), 107), ((0, 2), 83), ((0, 2, 3, 5), 73), ((0, 1, 3, 4), 64)]
+   (b) frames with no lonely shift: 417; E45 clean split holds in 0
+       classes blocking the event shifts 1/6, 5/6 in those frames: [(('M',), 202), (('M', 'T'), 199), (('T',), 176), (('E', 'M', 'T'), 93), (('E', 'M'), 84), (('E', 'T'), 80)]
+   (c) setter classes: {'M': 243, 'T': 218, 'E': 102}  in-the-way class sets: [(('M',), 181), (('T',), 164), (('E',), 66), (('E', 'M'), 47), (('E', 'T'), 42)]
+all setters: {'U': 7050, 'E': 8387, 'T': 3195, 'M': 7006}

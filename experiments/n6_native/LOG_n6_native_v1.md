@@ -1535,3 +1535,33 @@ the session's two tracks:
   structure seen independently in E43 (ℤ/6 = ℤ/2 × ℤ/3 alignment) and E45–E46 (isolation events are the units; blocking
   splits along units and zero divisors). The cascade-side counts (sixth-shift and scaling families of lonely instants)
   are observations of the cascade, not of Renault.
+
+## E64 — The units / zero-divisor structure of ℤ/6 along the cascade's walk (2026-10-16)
+
+Owner: *"Native track: observe what the units / zero-divisor structure of Z/6 (E43-E46, and Renault's dispatch) does in
+the cascade on SixResidual. Observation only, no Renault proof shape."* `z6_walk_v1.{py,out}`, `z6_walk_v2.{py,out}`;
+primitive SixResidual, max ≤ 40 (17,135 sets), exact Fractions. Classes by d mod 6: U (1, 5), E (2, 4), T (3), M (0).
+Instrument: at every walk instant t_i (start 1/(6v₁), each move, the lonely end T), the six sixth shifts t_i + u/6.
+
+- **The action.** A sixth shift u moves runner d by d·u/6, so d is unmoved exactly when 6 ∣ d·u (checked 428,375 of
+  428,375): M by every u, E by u = 3, T by u = 2, 4, U by none. The zero divisors are the runners some nonzero shift
+  leaves in place, and the stabilisers are the subgroups {0, 3} (for E) and {0, 2, 4} (for T). Renault's dispatch
+  coordinates (multiples of 2, of 3) are the sizes of these two fixed sets.
+- **Lonely instants spread along the stabiliser of the zero divisors** [C]. Share of sets with T + u/6 also lonely,
+  by class counts: three E runners → u = 3 lonely in 0.65–0.69 of sets (u = 1, 2, 4, 5: 0.08–0.32); one E → u = 3 in
+  0.26–0.30. Two T → u = 2, 4 in 0.36–0.65; no T → 0.10–0.14. The shift that moves fewest runners is the one most often
+  lonely; this is what the identity above predicts, with the moved runners' readings deciding.
+- **E45's clean split does not appear in the walk.** Of 14,984 walk frames with no lonely sixth shift, events (u = 1, 5)
+  were blocked only by units and non-events only by zero divisors in 23. Events are blocked by M (which blocks every
+  shift when blocked at all), by E and T cosets (E46), and by units, in every combination.
+- **Setters by class, per runner present:** U 0.289, E 0.306, T 0.243, M 0.338 (in the way: 0.394, 0.413, 0.309, 0.445).
+  Class mod 6 does not pick the setter beyond a mild excess for M and deficit for T.
+- **Where runners sit when the walk stops**, in twelfths: 0.38–0.46 of each class in [1/6, 1/4), the rest spread,
+  almost none in [5/6, 11/12). The same profile for all four classes.
+- **Earlier frames already hold a lonely instant** in 7,538 of 17,135 sets: some t_i + u/6 with i < end is lonely (it
+  is later in time than T, since T is the first lonely instant).
+- **Reading** [observation]. In the cascade, ℤ/6's structure shows as the stabilisers of the zero divisors: once the
+  walk stops, the shifts that leave the zero divisors in place carry the isolation to further instants, in proportion
+  to how many runners they fix. It does not show in who sets moves, in where the runners sit at T, or as E45's
+  unit / zero-divisor split of blocking. The cascade's own stopping is not explained by this structure: what it
+  describes is how one isolation propagates to its sixth-shift family, not why the first one exists.
