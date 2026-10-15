@@ -1,0 +1,18 @@
+deaths (single flanks) on every 4th path: 7812
+    5073  ('forward dead', 'backward dead')
+    1552  ('forward m+e_J alive', 'backward dead')
+    1028  ('forward dead', 'backward m-e_I alive')
+     176  tied flanks (skipped)
+     159  ('forward m+e_J alive', 'backward m-e_I alive')
+in m+e_J, the pair (I,J) itself is satisfied: {True: 6687, False: 1125}
+both sides dead - failing pairs by role (forward ; backward), commonest:
+    1920  ((('J', 'O'),), (('neg',),))
+    1363  ((('J', 'O'),), (('O', 'I'),))
+     922  ((('J', 'I'), ('J', 'O')), (('O', 'I'),))
+     773  ((('J', 'O'),), (('J', 'I'), ('O', 'I')))
+      91  ((('J', 'O'),), (('J', 'I'),))
+       4  ((('J', 'I'),), (('O', 'I'),))
+  example: ((1, 2, 3, 5, 12), Fraction(6, 7), (0, 0, 0, 0, 1), 1, 5, [(4, 3)], [('neg',)])
+  example: ((1, 2, 3, 24, 35), Fraction(11, 195), (0, 1, 2, 3, 4), 3, 5, [(4, 3)], [(3, 2), (4, 2)])
+  example: ((1, 2, 3, 24, 35), Fraction(7, 20), (0, 0, 0, 1, 2), 1, 4, [(3, 4)], [('neg',)])
+  example: ((1, 2, 3, 24, 35), Fraction(3, 5), (0, 0, 0, 2, 3), 1, 5, [(4, 3)], [('neg',)])

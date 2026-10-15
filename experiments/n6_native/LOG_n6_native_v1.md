@@ -1662,3 +1662,26 @@ manners"*.
   at most 18 values by construction, so a short list there would not be evidence.
 - **Reading** [observation]. At this description, relocations do not reduce to about 15 kinds. Owed: the source of the
   owner's 15, to test the same description.
+
+## E68 — Deaths as knots: displacement along a chain (2026-10-16)
+
+Owner: *"Its not a handover but displacement. by tying a knot to remove the isolation point you push it along to the
+next isolation point because the knot in one place is an opening in an other. To have two knots you will need to break
+the conjecture by have the same speed"*. Observation only. `knot_displace_v1.{py,out}`, `knot_chain_v1.{py,out}`;
+every 4th AP → SixResidual path, 7,812 deaths with single flanks (176 tied skipped); speeds pairwise distinct at every
+death (7,812).
+- **The knot.** The dying box m is one point: runner I reads exactly 1/6 (entry flank) and J exactly 5/6 (exit flank),
+  (6m_I+1) v_J = (6m_J+5) v_I. Its two sides: forward, J re-enters on its next lap (box m + e_J); backward, I steps back
+  to its previous exit (box m − e_I).
+- **One step.** m + e_J alive at the death: 1,711 (0.22); m − e_I alive: 1,187; both dead: 5,073 (0.65). Within
+  m + e_J the pair (I, J) itself holds in 6,687. Where the forward side is closed, the failing pair is (J, O): J's new
+  entry falls after another runner O's exit — a second knot, with all speeds distinct.
+- **The chain.** Push forward: from m + e_J, while a pair (i, j) has i entering after j exits, give j one more lap
+  (each step a further knot; this is the cascade's move restarted at the dying instant). Further knots per death:
+  0: 1,711; 1: 2,061; 2: 1,592; 3: 1,210; 4: 620; 5: 388; 6–10: 230. Every chain ended (7,812 of 7,812), at the next
+  isolation's lap vector N in 7,799 (13 differ, where several runners took a lap in one round).
+- **Reading** [observation]. On these paths a death is a displacement: the knot that closes the isolation opens J's
+  next lap, and when that opening is itself knotted the push continues, knot by knot, to the next isolation. The
+  claim "a second knot needs equal speeds" does not hold for the one-step opening (second knots with distinct speeds in
+  6,101 deaths); what held is that the chain of knots always ends. Why it always ends is the cascade's termination at
+  order six.
