@@ -1,0 +1,49 @@
+(a) band of v3, band of v2, first setter, any setter in {2,3}: count
+   ('3v1<v3<5v1', 'v2<5v1', 'first not', 'none') 3501
+   ('3v1<v3<5v1', 'v2<5v1', 'first not', 'some setter in {2,3}') 1827
+   ('v3<=3v1', 'v2<5v1', 'first not', 'none') 3710
+   ('v3<=3v1', 'v2<5v1', 'first not', 'some setter in {2,3}') 6
+   ('v3>=5v1', 'v2<5v1', 'first in {2,3}', 'some setter in {2,3}') 2450
+   ('v3>=5v1', 'v2<5v1', 'first not', 'none') 1469
+   ('v3>=5v1', 'v2<5v1', 'first not', 'some setter in {2,3}') 576
+   ('v3>=5v1', 'v2>=5v1', 'first in {2,3}', 'some setter in {2,3}') 2471
+   ('v3>=5v1', 'v2>=5v1', 'first not', 'none') 675
+   ('v3>=5v1', 'v2>=5v1', 'first not', 'some setter in {2,3}') 450
+(b) final instant at a 2-3 meeting time: 12
+   (3, 12, 30, 31, 33) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '13/18', '5/6']
+   (3, 12, 30, 31, 39) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '13/18', '1/6']
+   (3, 12, 30, 32, 33) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '7/9', '5/6']
+   (3, 12, 30, 32, 39) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '7/9', '1/6']
+   (3, 12, 30, 33, 40) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '5/6', '2/9']
+   (3, 12, 30, 39, 40) open n= 6 T= 1/18 path [] readings ['1/6', '2/3', '2/3', '1/6', '2/9']
+   (5, 6, 36, 37, 38) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '7/30', '4/15']
+   (5, 6, 36, 37, 39) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '7/30', '3/10']
+   (5, 6, 36, 37, 40) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '7/30', '1/3']
+   (5, 6, 36, 38, 39) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '4/15', '3/10']
+   (5, 6, 36, 38, 40) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '4/15', '1/3']
+   (5, 6, 36, 39, 40) open n= 30 T= 1/30 path [] readings ['1/6', '1/5', '1/5', '3/10', '1/3']
+(c) final flank 3 by orbit class and v3 band
+   ('G4', '3v1<v3<5v1', 'ff!=3') 79
+   ('G4', '3v1<v3<5v1', 'ff=3') 31
+   ('G4', 'v3<=3v1', 'ff!=3') 46
+   ('G4', 'v3>=5v1', 'ff!=3') 125
+   ('G4', 'v3>=5v1', 'ff=3') 60
+   ('G7', '3v1<v3<5v1', 'ff!=3') 30
+   ('G7', '3v1<v3<5v1', 'ff=3') 3
+   ('G7', 'v3>=5v1', 'ff!=3') 46
+   ('G7', 'v3>=5v1', 'ff=3') 34
+   ('axis1', '3v1<v3<5v1', 'ff!=3') 1362
+   ('axis1', '3v1<v3<5v1', 'ff=3') 13
+   ('axis1', 'v3<=3v1', 'ff!=3') 1952
+   ('axis1', 'v3>=5v1', 'ff!=3') 1067
+   ('axis1', 'v3>=5v1', 'ff=3') 2
+   ('axis3', '3v1<v3<5v1', 'ff!=3') 736
+   ('axis3', '3v1<v3<5v1', 'ff=3') 61
+   ('axis3', 'v3<=3v1', 'ff!=3') 815
+   ('axis3', 'v3>=5v1', 'ff!=3') 931
+   ('axis3', 'v3>=5v1', 'ff=3') 115
+   ('open', '3v1<v3<5v1', 'ff!=3') 2123
+   ('open', '3v1<v3<5v1', 'ff=3') 890
+   ('open', 'v3<=3v1', 'ff!=3') 903
+   ('open', 'v3>=5v1', 'ff!=3') 3344
+   ('open', 'v3>=5v1', 'ff=3') 2367

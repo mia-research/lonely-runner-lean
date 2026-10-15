@@ -1340,3 +1340,31 @@ new declarations), output `S7Complete_v1.out`: 0 errors, no `sorry`/`native_deci
 - Consequence: §7 is closed natively end to end in Lean on whole-number speeds. What it does not include: the
   reduction of BHK's real-speed statement to these hypotheses (the §7 case split itself), which lives in the
   BHK port, not in this file.
+
+## E57 — Does the cascade split the sets the way BHK do? Orbit shape and rate against the walk (2026-10-16)
+
+**Map:** BHK's dispatch `lonely6_of_lt` (§8: v₃ ≤ 3v₁; §5: D ∣ v₁; §6: D ∣ v₃; §7: otherwise), reread as the shape of
+the meeting-time orbit ⟨(c₃, c₁)⟩ ⊂ (ℤ/n)² (axis1 = n ∣ c₁, axis3 = n ∣ c₃, open, G₄, G₇) plus one rate (v₃ ≤ 3v₁).
+Owner: *"Ok lets check it"* (after E56). Observation only.
+
+**Artifacts:** `six_orbit_shape_v1.{py,out}`, `six_orbit_shape_v2.{py,out}`; primitive SixResidual, max ≤ 40 (17,135
+sets, from `six_cascade_observe_v1.tsv`), exact Fractions.
+
+- The relabelling is exact: orbit shape plus rate reproduces BHK's labels with 0 mismatches. This holds by definition
+  (n ∣ c₁ ⇔ D ∣ v₁), so it is a restatement and not a finding.
+- **The cascade does not visit BHK's instants.** Its final instant is a 2–3 meeting time (a multiple of 1/D) in
+  12 of 17,135 sets. In all 12 the cascade makes no move: 1/(6v₁) is itself a multiple of 1/D
+  ((3,12,30,·,·) with D = 18; (5,6,36,·,·) with D = 30). The orbit shape describes BHK's instant family k/D. On this
+  range the cascade does not use that family, so the orbit-shape split is a split of BHK's instants and not of the walk.
+- **The rate: the cascade's exact line is 5v₁, not 3v₁.** First setter in {2, 3} occurs only when v₃ ≥ 5v₁
+  (0 exceptions across all bands). This is forced: at 1/(6v₁) a runner with v₁ < v < 5v₁ reads v/(6v₁) ∈ (1/6, 5/6),
+  so it is clear (`first_move`, E4). Below 3v₁ and in (3v₁, 5v₁) the first move is the same kind (setter 4 or 5, or
+  none). The line 3v₁ shows only in later setters: some setter in {2, 3} in 6 of 3,716 sets with v₃ ≤ 3v₁
+  (the E4 exceptions) against 1,827 of 5,328 with 3v₁ < v₃ < 5v₁. So 3v₁ is sharp in counts but not exact for the walk.
+- **One trace of orbit shape in the walk (counts, not understood):** final flank = runner 3 in 15 of 2,444 axis1 sets
+  (D ∣ v₁), 176 of 1,843 axis3, 3,257 of 8,724 open, 91 of 295 G₄, 37 of 113 G₇. Why the walk rarely ends at runner 3
+  when runner 1 is at a whole lap at 1/D is not explained.
+- **Consequence:** on this range, BHK's case split is a property of the instants BHK chose to inspect, and the cascade
+  does not inspect them. Reading the split as orbit shape is correct for BHK's route but is not a native split of the
+  cascade. A native division of the order-six sets, if one exists, has to come from the walk's own objects (the 5v₁
+  start line, setters, final flank), not from D.

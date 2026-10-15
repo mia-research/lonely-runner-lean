@@ -1,0 +1,111 @@
+sets: 17135; class by orbit/rate disagrees with tsv BHK label: 0
+class sizes: {'fast1/axis1': 1952, 'slow1/open': 8724, 'slow1/G4': 295, 'slow1/G7': 113, 'slow1/axis1': 2444, 'slow1/axis3': 1843, 'fast1/axis3': 815, 'fast1/open': 903, 'fast1/G4': 46}
+
+== fast1/G4 (46)
+   final_flank: 1:19, 4:18, 5:9
+   first_setter: 0:19, 5:14, 4:13
+   moves: 1:22, 0:19, 2:5
+   early: True:46
+   23_meet_at_T: False:46
+   pairs_meeting_at_T: -:25, ('25',):12, ('35',):4, ('24',):3, ('14', '25'):1, ('24', '35'):1
+   T_multiple_of_1/D: False:46
+   r1_reading_x6: 1:46
+== fast1/axis1 (1952)
+   final_flank: 4:754, 5:752, 1:445, 2:1
+   first_setter: 5:980, 4:527, 0:445
+   moves: 1:1207, 0:445, 2:297, 4:2, 3:1
+   early: True:1950, False:2
+   23_meet_at_T: False:1952
+   pairs_meeting_at_T: -:1743, ('15',):68, ('25',):63, ('14',):26, ('35',):18, ('45',):15, ('24',):12, ('14', '25'):3
+   T_multiple_of_1/D: False:1952
+   r1_reading_x6: 1:1950, 2:2
+== fast1/axis3 (815)
+   final_flank: 4:335, 5:242, 1:238
+   first_setter: 5:370, 0:238, 4:207
+   moves: 1:437, 0:238, 2:136, 3:4
+   early: True:815
+   23_meet_at_T: False:815
+   pairs_meeting_at_T: -:662, ('25',):67, ('15',):31, ('24',):16, ('14',):11, ('45',):10, ('35',):10, ('14', '25'):4
+   T_multiple_of_1/D: False:815
+   r1_reading_x6: 1:815
+== fast1/open (903)
+   final_flank: 4:383, 5:363, 1:157
+   first_setter: 5:514, 4:232, 0:157
+   moves: 1:582, 2:159, 0:157, 4:4, 3:1
+   early: True:899, False:4
+   23_meet_at_T: False:903
+   pairs_meeting_at_T: -:797, ('25',):41, ('15',):26, ('35',):13, ('24',):12, ('45',):5, ('14',):4, ('14', '25'):3
+   T_multiple_of_1/D: False:903
+   r1_reading_x6: 1:899, 2:3, 3:1
+== slow1/G4 (295)
+   final_flank: 3:91, 4:80, 5:76, 1:24, 2:24
+   first_setter: 2:115, 3:64, 4:53, 5:39, 0:24
+   moves: 2:126, 3:63, 1:63, 0:24, 4:19
+   early: True:292, False:3
+   23_meet_at_T: False:295
+   pairs_meeting_at_T: -:276, ('15',):3, ('35',):3, ('14',):3, ('45',):2, ('25',):2, ('34',):2, ('24',):2
+   T_multiple_of_1/D: False:295
+   r1_reading_x6: 1:292, 2:3
+== slow1/G7 (113)
+   final_flank: 3:37, 5:35, 4:25, 1:10, 2:6
+   first_setter: 4:36, 5:33, 3:22, 2:12, 0:10
+   moves: 1:50, 2:25, 4:19, 0:10, 3:9
+   early: True:106, False:7
+   23_meet_at_T: False:113
+   pairs_meeting_at_T: -:110, ('25',):1, ('14',):1, ('35',):1
+   T_multiple_of_1/D: False:113
+   r1_reading_x6: 1:106, 2:7
+== slow1/axis1 (2444)
+   final_flank: 4:759, 2:626, 5:574, 1:470, 3:15
+   first_setter: 4:731, 5:675, 0:470, 2:394, 3:174
+   moves: 1:958, 2:474, 0:470, 4:297, 3:245
+   early: True:2235, False:209
+   23_meet_at_T: False:2444
+   pairs_meeting_at_T: -:2288, ('35',):47, ('15',):46, ('14',):21, ('34',):11, ('25',):9, ('13',):8, ('45',):5
+   T_multiple_of_1/D: False:2444
+   r1_reading_x6: 1:2235, 2:188, 3:21
+== slow1/axis3 (1843)
+   final_flank: 4:588, 5:445, 1:353, 2:281, 3:176
+   first_setter: 3:427, 4:388, 2:377, 0:353, 5:298
+   moves: 1:503, 2:478, 0:353, 3:258, 4:251
+   early: True:1714, False:129
+   23_meet_at_T: False:1843
+   pairs_meeting_at_T: -:1696, ('15',):50, ('25',):37, ('14',):33, ('24',):8, ('45',):7, ('35',):4, ('34',):2
+   T_multiple_of_1/D: False:1843
+   r1_reading_x6: 1:1714, 2:109, 3:17, 4:3
+== slow1/open (8724)
+   final_flank: 3:3257, 4:1991, 5:1779, 1:1292, 2:405
+   first_setter: 3:2384, 4:2275, 5:1821, 0:1292, 2:952
+   moves: 1:3377, 2:2496, 0:1292, 3:974, 4:585
+   early: True:8473, False:251
+   23_meet_at_T: False:8712, True:12
+   pairs_meeting_at_T: -:8026, ('14',):159, ('15',):136, ('25',):124, ('24',):82, ('13',):68, ('35',):51, ('14', '25'):15
+   T_multiple_of_1/D: False:8712, True:12
+   r1_reading_x6: 1:8473, 2:232, 3:19
+
+== converse: class composition for each cascade feature value
+   final_flank=1: fast1/G4:19, fast1/axis1:445, fast1/axis3:238, fast1/open:157, slow1/G4:24, slow1/G7:10, slow1/axis1:470, slow1/axis3:353, slow1/open:1292
+   final_flank=2: fast1/axis1:1, slow1/G4:24, slow1/G7:6, slow1/axis1:626, slow1/axis3:281, slow1/open:405
+   final_flank=3: slow1/G4:91, slow1/G7:37, slow1/axis1:15, slow1/axis3:176, slow1/open:3257
+   final_flank=4: fast1/G4:18, fast1/axis1:754, fast1/axis3:335, fast1/open:383, slow1/G4:80, slow1/G7:25, slow1/axis1:759, slow1/axis3:588, slow1/open:1991
+   final_flank=5: fast1/G4:9, fast1/axis1:752, fast1/axis3:242, fast1/open:363, slow1/G4:76, slow1/G7:35, slow1/axis1:574, slow1/axis3:445, slow1/open:1779
+   first_setter=0: fast1/G4:19, fast1/axis1:445, fast1/axis3:238, fast1/open:157, slow1/G4:24, slow1/G7:10, slow1/axis1:470, slow1/axis3:353, slow1/open:1292
+   first_setter=2: slow1/G4:115, slow1/G7:12, slow1/axis1:394, slow1/axis3:377, slow1/open:952
+   first_setter=3: slow1/G4:64, slow1/G7:22, slow1/axis1:174, slow1/axis3:427, slow1/open:2384
+   first_setter=4: fast1/G4:13, fast1/axis1:527, fast1/axis3:207, fast1/open:232, slow1/G4:53, slow1/G7:36, slow1/axis1:731, slow1/axis3:388, slow1/open:2275
+   first_setter=5: fast1/G4:14, fast1/axis1:980, fast1/axis3:370, fast1/open:514, slow1/G4:39, slow1/G7:33, slow1/axis1:675, slow1/axis3:298, slow1/open:1821
+   moves=0: fast1/G4:19, fast1/axis1:445, fast1/axis3:238, fast1/open:157, slow1/G4:24, slow1/G7:10, slow1/axis1:470, slow1/axis3:353, slow1/open:1292
+   moves=1: fast1/G4:22, fast1/axis1:1207, fast1/axis3:437, fast1/open:582, slow1/G4:63, slow1/G7:50, slow1/axis1:958, slow1/axis3:503, slow1/open:3377
+   moves=2: fast1/G4:5, fast1/axis1:297, fast1/axis3:136, fast1/open:159, slow1/G4:126, slow1/G7:25, slow1/axis1:474, slow1/axis3:478, slow1/open:2496
+   moves=3: fast1/axis1:1, fast1/axis3:4, fast1/open:1, slow1/G4:63, slow1/G7:9, slow1/axis1:245, slow1/axis3:258, slow1/open:974
+   moves=4: fast1/axis1:2, fast1/open:4, slow1/G4:19, slow1/G7:19, slow1/axis1:297, slow1/axis3:251, slow1/open:585
+   early=False: fast1/axis1:2, fast1/open:4, slow1/G4:3, slow1/G7:7, slow1/axis1:209, slow1/axis3:129, slow1/open:251
+   early=True: fast1/G4:46, fast1/axis1:1950, fast1/axis3:815, fast1/open:899, slow1/G4:292, slow1/G7:106, slow1/axis1:2235, slow1/axis3:1714, slow1/open:8473
+   23_meet_at_T=False: fast1/G4:46, fast1/axis1:1952, fast1/axis3:815, fast1/open:903, slow1/G4:295, slow1/G7:113, slow1/axis1:2444, slow1/axis3:1843, slow1/open:8712
+   23_meet_at_T=True: slow1/open:12
+   T_multiple_of_1/D=False: fast1/G4:46, fast1/axis1:1952, fast1/axis3:815, fast1/open:903, slow1/G4:295, slow1/G7:113, slow1/axis1:2444, slow1/axis3:1843, slow1/open:8712
+   T_multiple_of_1/D=True: slow1/open:12
+   r1_reading_x6=1: fast1/G4:46, fast1/axis1:1950, fast1/axis3:815, fast1/open:899, slow1/G4:292, slow1/G7:106, slow1/axis1:2235, slow1/axis3:1714, slow1/open:8473
+   r1_reading_x6=2: fast1/axis1:2, fast1/open:3, slow1/G4:3, slow1/G7:7, slow1/axis1:188, slow1/axis3:109, slow1/open:232
+   r1_reading_x6=3: fast1/open:1, slow1/axis1:21, slow1/axis3:17, slow1/open:19
+   r1_reading_x6=4: slow1/axis3:3
