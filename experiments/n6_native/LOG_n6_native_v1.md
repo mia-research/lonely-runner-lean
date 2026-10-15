@@ -1700,3 +1700,20 @@ to maintain a knot … It can't go on for ever as you only have finite runners"*
   push only moves forward, so it either ends or passes a whole period and then repeats for ever. "It cannot go on for
   ever" is the exclusion of that endless periodic loop, and that exclusion is the existence statement itself
   (`lonely_iff_run_ends`). The runner count makes the dichotomy; what rules out the loop is still to be found.
+
+## E70 — "More isolation points than runners can cover": the count, exactly (2026-10-16)
+
+Owner: *"There are more possible isolation points than runners can possibly cover"*. Observation only.
+`cover_count_v1.{py,out}`; primitive SixResidual ≤ 40. Isolation points: each flank b's b openings (6k+1)/(6b) in one
+period; runner d blocks opening k iff d(6k+1) mod 6b lies outside [b, 5b].
+- By count the runners can cover: the sum of the four other runners' block counts is at least b at 80,748 of 85,675
+  flanks; the ratio sum/b is mostly 1.2–1.4 (each runner blocks about a third of a flank's openings, four runners about
+  4/3).
+- They do not cover: at 64,953 of those 80,748 flanks an opening is still free, because blocks coincide (example
+  (1,2,3,5,12), flank 12: blocks 4, 4, 3, 4, sum 15, union 10, two openings free). 15,795 flanks are fully covered
+  (dead). Every set has some flank with a free opening (17,135 of 17,135), as existence requires.
+- **Reading** [observation]. The count of isolation points against runners does not exceed what the runners could block;
+  at order six the runners have about a third more blocks than a flank has openings. What leaves openings free is that
+  blocks fall on the same openings. A forcing argument along this line needs a reason the blocks must coincide (E43's
+  alignment is one such description at divisible flanks). This is the covering framing E2 set aside; the owner raised it
+  here.
