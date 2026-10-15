@@ -1451,3 +1451,21 @@ above the full gcd G gives a time with all norms ≥ 1/(N−1); orbit size D/G);
 - **The paper.** Neither repository presents one framework: Chen uses five different classical arguments for five
   orders, Cheeks targets n = 4 and general n. A paper whose claim is *one framework reformulating orders 3–7* is not
   pre-empted by either. It must cite both as prior Lean proofs, and cite BHK Lemma 8 for the reduction (E59).
+
+## E61 — Renault 2004: source not yet obtained; statement shapes from Chen's Lean (2026-10-16)
+
+Owner: *"locate Renault 2004 (Discrete Math 287, 93-101), read its argument first, then compare"*. Observation only.
+- **Source:** DOI 10.1016/j.disc.2004.06.008, Elsevier open archive (Crossref licence: open access from 2013-08-22;
+  OpenAlex `is_oa` true). Every automated route failed: ScienceDirect returned 403 to curl and an error page in the
+  built-in browser; Elsevier API needs a key; the Dauphine repository (basepub 123456789/6201) is unreachable, and its
+  Wayback snapshot has no file link; CiteSeerX returned 404/429; web searches found citations only. **The paper has
+  not been read.** By the source-first rule, the comparison waits for it.
+- **Secondary, kernel-checked statements (Chen, `Research07/LRC6`, not Renault's wording):** `hfail D` = every time
+  has an unsafe runner. Dispatch by the number of multiples of 3 (3: `lemma2_3`; 2: `prop3_1`; 1: the multiple of 6,
+  then by the ±2 residues). `prop5_4` and `prop6_6`: a runner `v₁ ≡ 0 (mod 6)`, four guards with residues ±1 mod 6
+  (or one ±2), a seed time where the four guards are lonely at **1/5** (order five), and the hypothesis that every
+  guard-safe time keeps `v₁` within 1/6 of a lap point give a contradiction. `prop4_1`: residues (0, ±2, ±2, ±1, ±1).
+- **Shape match (secondary, to be checked against the paper):** the hard case is one runner divisible by the order
+  with the rest solved one order down, which is the shape of our order-five residual (`OrderFiveResidualN`: exactly one
+  disparity divisible by 5). The residues used are units and zero divisors of ℤ/6 (E45). The moves are a change of
+  scale λ ≤ 5 and sixth shifts α/6 applied to an extremal guard-safe time (`Driver.lean`).
