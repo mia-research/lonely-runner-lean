@@ -1518,3 +1518,20 @@ four even speeds.
   scaling, budget). The cascade's instants do not follow Renault's seed-and-move order, as they did not follow BHK's
   (E57). Not checked: Renault's own text; whether a unit of ℤ/v₅-style starting time can replace the extremal time in
   Props 5.4/6.6/4.1 (that is the step that would make order six run on the order-five core).
+
+## E63 — Correction to E62: placed back in this session's purpose (2026-10-16)
+
+Owner: *"That answers the prompt but not the context of this session"*. E62's consequence line ("a candidate order-six
+core"; "the open step is the starting time … would make order six run on the order-five core") has the same fault as
+E27: it takes a classical proof's shape (Renault's) as the target and asks what framework parts fill it. Placed back in
+the session's two tracks:
+- **Reformulated track (and the one-framework paper):** Renault is a second classical order-six proof to carry into
+  the framework, alongside BHK. Its objects (residues mod 6, shifts fixing multiples, scaling, an order-five
+  instance inside) are ones the framework already uses at order five, so the carried-over proof would share
+  machinery with order five. That is a choice about the reformulated track, and it is the owner's.
+- **Native track:** Renault does not answer the native question. It argues by contradiction from a maximising time and
+  never names an instant, while the native question is what forces the cascade's isolation. What E62 does carry
+  for the native track: Renault's dispatch is by the zero-divisor content of ℤ/6 (multiples of 2, 3, 6), the
+  structure seen independently in E43 (ℤ/6 = ℤ/2 × ℤ/3 alignment) and E45–E46 (isolation events are the units; blocking
+  splits along units and zero divisors). The cascade-side counts (sixth-shift and scaling families of lonely instants)
+  are observations of the cascade, not of Renault.
