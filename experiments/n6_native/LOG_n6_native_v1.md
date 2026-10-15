@@ -1316,3 +1316,27 @@ step E54 left to BHK: *"Lets explore that one step"*. `s7_orbit_R_v1.{py,out}`, 
   exceptional orbits by `g4_nat`, `g7_nat` (E54). Not yet composed into one theorem from speeds to a lonely
   instant: the step "point in P ⇒ full 3-gap that is a 123-gap at that meeting time ⇒ lonely" exists in the
   port (`lonely_of_meeting`, `bhk_s7_witness`) and in `window_two_uniform`, but is not joined here.
+
+## E56 — §7 joined: whole-number speeds to a lonely instant (`s7_lonely`)
+
+**Map:** BHK §7 (meeting times `k/D`, `D = v₃ − v₂`), closing the composition gap stated at the end of E55.
+
+**Artifact:** `S7Complete_v1.lean` (bodies of `WindowTwoRunner_v5` and `S7Orbits_v3` under one header, plus two
+new declarations), output `S7Complete_v1.out`: 0 errors, no `sorry`/`native_decide`/`admit`.
+`#print axioms` for `main_route_lonely`, `s7_main_route`, `g4_nat`, `g7_nat`, `s7_lonely`:
+`[propext, Classical.choice, Quot.sound]` each. [PROVED]
+
+- `main_route_lonely` (reals): at an instant `t` where runners 2 and 3 share the reading `x ∈ [1/6, 5/6]` and
+  runner 1 reads `y` with `1/6 ≤ y − v₁(x−1/6)/v₃` and `y + v₁(5/6−x)/v₃ ≤ 5/6`, some instant is lonely for all
+  five. Proof: `window_two_uniform` on the window of length `2/(3v₃)` opened at `t − (x−1/6)/v₃`, runners 1–3
+  kept clear across it by `clear_shift`.
+- `s7_lonely` (whole numbers): `0 < v₁ < v₂ < v₃ < v₄ < v₅`, `3v₁ < v₃`, `D ∤ v₁`, `D ∤ v₃` ⇒ `∃ s, Lonely5`.
+  With `g = gcd(D, v₃, v₁)`, `n = D/g`, `c₃ = v₃/g`, `c₁ = v₁/g` (coprimality of `n, c₃, c₁` proved from `g`):
+  - off `G₄`/`G₇`: `s7_main_route` gives `k < n` with `(c₃k mod n, c₁k mod n) ∈ P_{1/3}`; at `t = k/D` the
+    integer inequalities become the two real ones above (using `3v₁ < v₃`), and `main_route_lonely` closes;
+  - `G₄` with `v₃ < 4v₁`: `g4_nat`; `G₄` with `v₃ ≥ 4v₁`: the orbit point `(1/2, 1/4)` (`k = 1` or `3`) passes
+    the same test, since `v₁/(3v₃) ≤ 1/12`, so the main route closes it too;
+  - `G₇`: `g7_nat`.
+- Consequence: §7 is closed natively end to end in Lean on whole-number speeds. What it does not include: the
+  reduction of BHK's real-speed statement to these hypotheses (the §7 case split itself), which lives in the
+  BHK port, not in this file.
