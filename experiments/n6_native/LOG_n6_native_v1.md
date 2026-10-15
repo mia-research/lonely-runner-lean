@@ -1615,3 +1615,33 @@ histogram bin noted by the agent: "bin 0" is [0, 1/10), exact zeros are on the s
   of K. Not yet observed: how the cones C_K meet (which K-cells share faces, and whether the type transitions in A are
   the face crossings); the statement "the cones cover the positive orthant" is existence itself, i.e. the covering
   framing the owner set aside in E2.
+
+## E66 — The "scatter" as folding, and deaths as relocation (2026-10-16)
+
+Owner: *"Are we seeing a scatter (unlikely) we are seeing how the origami and folding of the ideal is working"*; and of
+E65's deaths, *"Or is relocated to the next global isolation incident?"*. Observation only.
+
+**Folding** (`fold_grid_v1.{py,out}`, `fold_lift_v1.{py,out}`; primitive SixResidual ≤ 40).
+- Write the cascade instant as T = c/q in lowest terms. Every reading is (d·c mod q)/q, with c a unit of ℤ/q, and
+  q = 6b/g, c = (6k+1)/g, where b is the final flank, k its opening and g = gcd(6k+1, b) (17,135 of 17,135 each). This
+  is an identity for rational instants; its content is that the cascade chooses the modulus and the fold through its
+  flank and opening.
+- So each isolation is the ideal of ℤ/q (one slot per residue) folded by multiplication by the unit c, with the five
+  runners at their residues d mod q, all landing in the middle band. Global isolation is the case q = n. Read at
+  modulus 6 the pictures look scattered (E65: 2,794 types); at their own modulus they are unit foldings. Readings
+  pairwise distinct in 15,623 of 17,135 (in the others two runners are congruent mod q).
+- c mod 6, i.e. which order-6 ideal event the fold lies over: 1 in 16,870, 5 in 265. Largely set by the instrument:
+  cascade instants are entry openings (6k+1)/(6b), so c ≡ g⁻¹ (mod 6).
+
+**Relocation** (`death_relocate_v1.{py,out}`; every 4th path of `slot_deform_v1`, 7,988 deaths after s = 0).
+- At every death, the next lonely instant after the dying one already has its lap vector alive at the death's s:
+  7,988 of 7,988. The isolation can be carried forward to the next isolation with no gap. (Same as E28's "no death
+  without a takeover", there on axis paths; here on the AP → set lines.)
+- slot_deform_v1's restart rule (earliest lonely instant) jumped back to an earlier instant in 4,552 of these deaths;
+  so E65's "restart in another lap pattern" was the instrument's choice, not the geometry's.
+- Lap change to the next isolation: commonest +1 on the fastest runner (1,098), then +1 on the two fastest (791),
+  three fastest (748), four (555).
+- **Reading** [observation]. On these paths a death is a relocation forward to the next isolation, which is present at
+  the moment of death; in fold terms the next isolation is the next lift (next unit fold at its own modulus), not a
+  return to the order-6 ideal's other event. Not established: why the next isolation is always already alive (E28 and
+  summary v6 §4 note this is the handover question, equivalent to existence).

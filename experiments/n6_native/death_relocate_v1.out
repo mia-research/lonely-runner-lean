@@ -1,0 +1,6 @@
+deaths after s=0 on every 4th path: 7988
+restart (earliest lonely instant) vs dying instant: {'restart earlier than dying instant': 4552, 'restart later': 3436}
+restart equals the next lonely instant after the dying one: {False: 4552, True: 3436}
+next lonely instant's lap vector already alive at the death s (no gap): {True: 7988}
+lap change to the next isolation (N - m), commonest: [((0, 0, 0, 0, 1), 1098), ((0, 0, 0, 1, 1), 791), ((0, 0, 1, 1, 1), 748), ((0, 1, 1, 1, 1), 555), ((0, 0, 0, 1, 0), 494), ((0, 0, 1, 0, 1), 437), ((1, 1, 1, 1, 2), 381), ((1, 2, 2, 3, 3), 302), ((1, 1, 2, 2, 2), 296), ((0, 1, 1, 1, 2), 237), ((1, 2, 2, 2, 3), 228), ((0, 1, 0, 1, 1), 200)]
+ideal event (c mod 6) of (dying instant, next isolation's instant at the death s): [((1, 1), 7692), ((1, 5), 296)]
