@@ -1245,3 +1245,37 @@ Owner: *"Didn't I ask you to work autonomously? why are you coming back to me wi
   - Not yet: (i) the orbit's named point exists at some meeting time (the orbit-membership step; BHK's group
     computation, ported in `OrderSixSecSevenCasesN.lean`); (ii) the early window as a theorem in the failure region
     W < L(ρ)/v₄, which forces v₄ < (8/7)v₃ and ρ close to 1 or to 2 (the 719 profile of E51).
+
+**E54. G₄ and G₇ closed natively, end to end, in Lean (2026-10-16).** Owner: *"We better look into that then"* (the two
+owed items of E53: the early window as a theorem, and orbit membership). `s7_g4g7_failbranch_v1.{py,out}`,
+`s7_g4g7_box01_v1.out`, `s7_g4g7_closed_v1.{py,out}`, `s7_g4g7_hyp_v1.out`, `WindowTwoRunner_v4.lean`,
+`WindowTwoRunner_v5.lean` (`.out`).
+- **Source** (port `OrderSixSecSevenCasesN.lean`). `bhk_s7_g4_hard` constructs BHK's named meeting time
+  (k ∈ {1, 3}, τ = k/(4g)) and proves its readings. `bhk_s7_named` finishes with t* = 1/(6v₁) when v₅ ≤ 5v₁, otherwise
+  with a window rule.
+- **What closes the 4,000 short-window sets** (to 120): v₅ ≤ 5v₁ in 3,816, closed by the spread instant 1/(6v₁)
+  (`lonely_six_of_spread`; the grid instant of E23). The other 184 sit at the resonance v₅ ≈ 2v₄ with v₄ just above v₃.
+  All 184 have the lap box with runner 5 on its second lap alive (v₄ ≤ 5v₁, 7v₄ ≤ 5v₅, v₅ ≤ 11v₁), lonely at
+  max(1/(6v₁), 7/(6v₅)).
+- **Three-way closure, without the formula for L(ρ)**:
+  - (i) v₅ ≤ 5v₁: spread instant;
+  - (ii) v₄ ≤ 5v₁, 7v₄ ≤ 5v₅, v₅ ≤ 11v₁: runner 5's second-lap box;
+  - (iii) otherwise: `window_two`'s thresholds hold for the named window. The base threshold needs only v₄ > v₃ and
+    v₅ > 5v₁. Each resonant threshold m ≥ 1 forces v₅ > 2v₄, then ¬(ii) gives v₅ ≥ 8v₁, which is what the
+    threshold needs (G₇ needs v₅ ≥ 7v₁ and uses v₃ > 3v₁).
+
+  Checked on every exceptional set to 120 (G₄: (i) 29,463, (ii) 20,280, (iii) 72,618; G₇: 14,707, 7,868, 18,047; 0
+  failures).
+- **Lean** (all [propext, Classical.choice, Quot.sound]):
+  - `WindowTwoRunner_v4.lean`: `spread_clear`, `box01_slow`, `box01_fast`, `res_of_room`; **`g4_closed`**,
+    **`g7_closed`**: real speeds 0 < v₁ < v₂ < v₃ < v₄ < v₅ with 3v₁ < v₃ (and v₃ < 4v₁ for G₄), and a meeting time
+    at BHK's named point, imply a lonely instant.
+  - `WindowTwoRunner_v5.lean`: **`g4_nat`**, **`g7_nat`**, the orbit-membership link. For whole-number speeds with
+    v₃ − v₂ = 4g (7g), v₃ = g c₃, v₁ = g c₁, c₃ ≡ 2 and c₁ ≡ ±1 (mod 4) for G₄, c₁ ≢ 0 and c₃ ≡ 2c₁ (mod 7)
+    for G₇, the meeting time k/(4g) (k/(7g)) is constructed and the closure applies.
+  - Every exceptional §7 set to 120 satisfies these hypotheses (`s7_g4g7_hyp_v1.out`: 122,361 and 40,622).
+- **Reading.** BHK's exceptional orbits in §7 are now closed natively and proved. The steps are the named meeting
+  time (the orbit point), the window lemma, and two lap boxes: the spread box (all runners on their first lap, the
+  grid instant) and runner 5's second-lap box. Every step is in framework objects, with no case tables. That every
+  §7 set with a failing main route is G₄ or G₇ is BHK's Corollary 6 analysis (ported); here it is checked to 120,
+  not re-derived.
