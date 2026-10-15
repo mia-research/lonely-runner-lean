@@ -1380,3 +1380,32 @@ targets (8,332 jobs), axioms `[propext, Classical.choice, Quot.sound]` for `lone
 `S7.lonely_7`. [PROVED] Nested repo commit in `LonelyRunner/`; not pushed.
 - **Consequence:** the order-six proof of record now takes §7 (and BHK §2) by the native route. §5, §6, §8 and the
   dispatch remain BHK's form.
+
+## E59 — Prior work: three citation-verifier checks (2026-10-16)
+
+Owner: *"Run citation-verifier on the three prior-work questions"*. Three isolated `citation-verifier` runs; key quotes
+spot-checked against the BHK text (`bhk_2001.pdf` via pdftotext) and repository dates via `gh api`.
+
+1. **BHK §2 and §7 against `s7_lonely`.** SUPPORTS-WITH-CAVEAT. §2 (v₁ ≤ 1/4 normalised, i.e. v₃ ≥ 4v₁; {t₀} ≠ 0,
+   {v₁t₀} ≠ 0, i.e. D ∤ v₃, D ∤ v₁) lies inside the hypotheses. §7's heading reads 3 ≤ x₁ < 4, its overview 1/4 < v₁ < 1/3
+   (strict); the point v₃ = 3v₁ (e.g. 3, 5, 9, D = 4) is outside `h13` and goes to §8 in both BHK and `lonely6_of_lt`,
+   so the proof has no gap. Correct wording: "§2 and §7 for 3 < x₁ < 4". BHK give an uncovered interval; the Lean
+   statement gives an instant. §2 has no tables; §7 uses Tables 9, 10 and reuses §2 for (2,0), (1,±1), (2,±2).
+2. **Real-to-integer reduction.** WEAKER. BHK 2001 Lemma 8 (text l.633; Kronecker l.658) already has induction via
+   order n − 1, the proportional / non-proportional split, the rational merge to ≤ n − 2 readings and the margin
+   1/n < δ < 1/(n − 1). Henze–Malikiosis 2017 Lemma 5.3 removes the n − 1 dependence. Both return to a real time by
+   Kronecker. Our `SteppingN.exists_step_near` is a pigeonhole (Dirichlet-returns) proof of the same Kronecker
+   statement: measure-free, not Kronecker-free, and classical. The reduction is not a contribution; cite BHK Lemma 8
+   and Henze–Malikiosis. Do not cite Wills or Cusick (unread; BHK dispute the Wills attribution).
+3. **Prior formalisations.** DOES-NOT-SUPPORT a priority claim. Public Lean 4 repositories (dates confirmed by `gh api`):
+   `chlciallo/lean4-lonely-runner` (created 2026-09-17, release v1.0.0 2026-09-20, README: n = 3, 5, 6, 7 real
+   speeds, n = 4 integer/rational, via BHK Lemma 8, Barajas–Serra, Renault; Zenodo 10.5281/zenodo.22851977) and
+   `Cheeks2184/lonely-runner-formalization` (n = 4 real speeds, 2026-09-06). Neither built here; scope is the authors'
+   README. Our `mia-research/lonely-runner-lean` is private (created 2026-09-24). Computer proofs for n ≥ 8
+   (Rosenfeld; Trakulthongchai; Sungkawichai–Trakulthongchai; Allikvere) cite C++ or other code, no proof assistant
+   seen.
+- **Consequence:** a paper cannot claim the reduction or the first formalisation of orders 3–7. What remains
+  candidate-new and unchecked against literature: the native §7 route (global isolation in two dimensions; exceptional
+  orbits only G₄, G₇ at every order; G₄/G₇ closed by explicit boxes; a sharper two-runner window lemma than BHK
+  Lemma 4), and the order-five core's framework mechanisms. Owed: a citation check on the sharpened Lemma 4 and on
+  whether the G₄/G₇-only statement or the box closures appear after 2001.
