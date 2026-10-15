@@ -1368,3 +1368,15 @@ sets, from `six_cascade_observe_v1.tsv`), exact Fractions.
   does not inspect them. Reading the split as orbit shape is correct for BHK's route but is not a native split of the
   cascade. A native division of the order-six sets, if one exists, has to come from the walk's own objects (the 5v₁
   start line, setters, final flank), not from D.
+
+## E58 — Native §7 wired into the order-six proof (2026-10-16)
+
+Owner: *"Ok yes do that now"*. `LonelyRunner/LRC/Spec/OrderSixSecSevenNativeN.lean` (namespace `LRC.S7Native`) carries
+`S7Complete_v1.lean` into the tree, plus `lonely_7_native`: the hypotheses and conclusion of `S7.lonely_7`, proved from
+`s7_lonely` by adding whole laps to make the instant positive (readings unchanged). `lonely6_of_lt` (`OrderSixWholeN.lean`)
+now calls `lonely_7_native`. `S7.lonely_7` is kept and still compiles. `S7Native_wiring_v1.out`: build of the order 3–7
+targets (8,332 jobs), axioms `[propext, Classical.choice, Quot.sound]` for `lonely_7_native`, `lonely6_of_lt`,
+`lonelyRunnerAtN_six`, `lonelyRunnerAtN_seven`; the dispatch's proof term references `lonely_7_native` and not
+`S7.lonely_7`. [PROVED] Nested repo commit in `LonelyRunner/`; not pushed.
+- **Consequence:** the order-six proof of record now takes §7 (and BHK §2) by the native route. §5, §6, §8 and the
+  dispatch remain BHK's form.
