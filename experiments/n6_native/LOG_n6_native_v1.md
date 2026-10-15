@@ -1279,3 +1279,40 @@ owed items of E53: the early window as a theorem, and orbit membership). `s7_g4g
   grid instant) and runner 5's second-lap box. Every step is in framework objects, with no case tables. That every
   §7 set with a failing main route is G₄ or G₇ is BHK's Corollary 6 analysis (ported); here it is checked to 120,
   not re-derived.
+
+**E55. "The main route fails only on G₄ and G₇" re-derived and proved for every order (2026-10-16).** Owner, of the
+step E54 left to BHK: *"Lets explore that one step"*. `s7_orbit_R_v1.{py,out}`, `s7_orbit_R_v2.c`
+(`s7_orbit_R_v2_400.out`), `s7_shortstep_bounds_v1.out`, `S7Orbits_v1.lean` (`.out`), `S7Orbits_v2.lean` (`.out`),
+`S7Orbits_v3.lean` (`.out`).
+- **One number per orbit.** At a meeting time the point (x, y) = ({kc₃/n}, {kc₁/n}) lies in BHK's P for the
+  ratio ρ = v₁/v₃ iff 1/6 ≤ x ≤ 5/6 and ρ ≤ min((y − 1/6)/(x − 1/6), (5/6 − y)/(5/6 − x)): both conditions are
+  upper bounds on ρ. So the orbit meets P iff ρ ≤ R(G), the best point's bound. The main route fails exactly when
+  ρ > R(G), and since §7 has ρ < 1/3, only orbits with R(G) < 1/3 can fail, i.e. orbits with no point in
+  P_{1/3}.
+  - R predicts the meeting-time data exactly (10,357 checks, 0 mismatches).
+  - Orbits off the axes up to order 400 (121,057, counting unit multiples once): exactly two have R < 1/3, G₄
+    (R = 1/4, failing for v₃ < 4v₁) and G₇ (R = 5/17, failing for 17v₁ > 5v₃).
+- **For every order** (the derivation):
+  - n ≥ 36: the framework's `orbit_isolation_two_bhk` gives a point in BHK's box [1/6, 5/6] × [7/18, 11/18],
+    which lies inside P_{1/3}, or a minimal short step (i, j), 0 ≤ i ≤ 4, |6j| < 9 + 2i, with
+    2/9·i + 2/3·|j| − 2/n·i|j| < 1.
+  - Both i, j nonzero except (1, ±1): that inequality forces n < 36 (largest bound from (2, ±1)).
+  - (0, ±1) and (1, 0): force c₃ ≡ 0 or c₁ ≡ 0, excluded in §7 (an axis).
+  - (1, ±1): the orbit contains (m, ±m); m = ⌊n/2⌋ lies in P_{1/3}.
+  - (i, 0), i = 2, 3, 4: Bézout on c₁ gives an orbit point at height in [n/3, 2n/3], where P_{1/3} contains
+    every x in [n/3, 2n/3]. Stepping by the (i, 0) meeting time changes x by i and keeps the height, so the walk
+    lands there. Minimality is not needed.
+  - n ≤ 35: a finite check.
+- **Lean** (`S7Orbits_v3.lean`; `check_orbits`, `g4_misses`, `g7_misses` use no axioms; `orbit_hits_or_exc`:
+  propext, Quot.sound; the rest propext, Classical.choice, Quot.sound; zero `sorry`):
+  - `check_orbits`: kernel computation, every order 2 ≤ n ≤ 35;
+  - `short_step_bounded`;
+  - `axis_step_c3`, `axis_step_c1`, `diag_step_hits`, `walk`, `horiz_step_hits`, all on the framework's
+    `meetingOrbit` via `mem_meetingOrbit_iff`;
+  - **`s7_main_route`**: for every n ≥ 2, c₃, c₁ ≢ 0 (mod n), gcd(n, c₃, c₁) = 1, not G₄ or G₇ (as residues), some
+    meeting time k < n has its point in P_{1/3}, in the whole-number form n ≤ 6x ≤ 5n,
+    6x + 2n ≤ 18y ≤ 10n + 6x.
+- **§7 natively, now**: main route by `s7_main_route` (framework's 2D global isolation plus the short-step lemmas);
+  exceptional orbits by `g4_nat`, `g7_nat` (E54). Not yet composed into one theorem from speeds to a lonely
+  instant: the step "point in P ⇒ full 3-gap that is a 123-gap at that meeting time ⇒ lonely" exists in the
+  port (`lonely_of_meeting`, `bhk_s7_witness`) and in `window_two_uniform`, but is not joined here.

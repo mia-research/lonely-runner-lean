@@ -1,0 +1,5 @@
+'N6Native.check_orbits' does not depend on any axioms
+'N6Native.orbit_hits_or_exc' depends on axioms: [propext, Quot.sound]
+'N6Native.g4_misses' does not depend on any axioms
+'N6Native.g7_misses' does not depend on any axioms
+'N6Native.short_step_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
