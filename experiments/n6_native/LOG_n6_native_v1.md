@@ -1409,3 +1409,45 @@ spot-checked against the BHK text (`bhk_2001.pdf` via pdftotext) and repository 
   orbits only G₄, G₇ at every order; G₄/G₇ closed by explicit boxes; a sharper two-runner window lemma than BHK
   Lemma 4), and the order-five core's framework mechanisms. Owed: a citation check on the sharpened Lemma 4 and on
   whether the G₄/G₇-only statement or the box closures appear after 2001.
+
+## E60 — The two prior Lean formalisations read for what helps us (2026-10-16)
+
+Owner: *"We need to look at their work to see if what might help us move any of our investigations forward. Also the
+idea of the paper was we had a reformation of the proof under one framework"*. Shallow clones (read only, not built) in
+the session scratchpad: `chlciallo/lean4-lonely-runner` at `e790d70` (63 files, 53,219 lines), `Cheeks2184/
+lonely-runner-formalization` at `3459046` (231 files). Statements below are from their READMEs and module docstrings.
+
+**Chen (n = 3–7).** One classical proof per order, no shared framework:
+- n = 3: Wills-style covering. n = 4 integer: Renault 2004 Appendix A (extremal safe time on a finite set of
+  quarter-boundary times, re-entry by a half shift); n = 4 real is not claimed (rational only).
+- n = 5 integer: Barajas–Serra prime filtering at p = 5 (base-5 digits, multipliers 1 + k·5^{m−j}).
+- **n = 6 integer: Renault 2004** (*View-obstruction: a shorter proof for 6 lonely runners*, Discrete Math. 287,
+  93–101), not BHK. Dispatch by residues: number of multiples of 3 (3 → Lemma 2.3, 2 → Prop 3.1, 1 → the multiple
+  of 6, then the count of ±2-residue speeds → Props 5.4, 6.6, 4.1). Lemma 2.1 caps multiples of 2 or 3 at three
+  by solving the subset at order five and shifting by 1/l. Contradictions come from improving moves
+  s = λ·τ + α/6 (scale λ ≤ 5, sixth shift α) applied to an extremal time.
+- n = 7 integer: Barajas–Serra 2008. Real speeds n = 5, 6, 7: BHK Lemma 8, Kronecker by ergodicity and Fourier
+  (`flow_orbit_dense`); a pigeonhole simultaneous-Dirichlet module also present.
+
+**Cheeks (n = 4 real, and a general-n programme).** `fourRunners` (2026-09-06) via BHK Lemma 8 and an orbit-closure
+helper (Kronecker by characters / averaging). Also: a finite height cutoff choose(N,2)^(N−2) (Tao-type, integer to
+bounded integer); "mixed margins" (fastest runner at 1/(N−1), others at 1/N); a deletion-gcd lemma (a deletion gcd D
+above the full gcd G gives a time with all norms ≥ 1/(N−1); orbit size D/G); the AP family (a, 2a, 3a) witnessed at
+1/(4a). Unrestricted LRC open in their own words.
+
+**What this means for our lines of work:**
+- **Renault's order six is a residue proof in the framework's objects.** The dispatch is ℤ/6 = ℤ/2 × ℤ/3 (E43); the
+  moves are a change of scale λ and a shift by α/6, the two mechanisms of our order-five core (`OrderFiveResidualN`:
+  change of scale, shift budget); Lemma 2.1 is the divisible-flank shift (E45: a shift by 1/l leaves multiples of l
+  fixed) with order five inside order six. BHK's geometry (parallelograms, 45-blocks, covering lengths) is what the
+  native work has been fighting in §5, §6, §8. Renault's route is a candidate order-six core with the same shape as
+  order five. Not yet checked: Renault's text (not on disk; source-first rule applies before any comparison), and
+  whether its extremal-time step can be replaced by the cascade (the cascade constructs the instant; Renault takes a
+  maximiser over a finite candidate set).
+- **Real speeds:** both use Kronecker by analysis (ergodic/Fourier, characters); ours is pigeonhole only
+  (`SteppingN`). A difference in proof, not in the result (E59).
+- **Cheeks' deletion-gcd and mixed-margin results** sit next to our global isolation (instants p/n, orbit size) and
+  the AP-as-global-isolation observation (E49–E50). Order eight is a separate project; recorded as a comparison only.
+- **The paper.** Neither repository presents one framework: Chen uses five different classical arguments for five
+  orders, Cheeks targets n = 4 and general n. A paper whose claim is *one framework reformulating orders 3–7* is not
+  pre-empted by either. It must cite both as prior Lean proofs, and cite BHK Lemma 8 for the reduction (E59).
