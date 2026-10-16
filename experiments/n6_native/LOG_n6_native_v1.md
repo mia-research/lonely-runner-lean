@@ -2722,3 +2722,34 @@ displacement lemmas on the exact-edge planes; then the k = 1 tree and small alph
 - **Plan for α < 1/25** (not done): as E106 — the uniform window at j₀ for large β; the step lemma for large λ (p ≤ 1/3
   now); and for λ ∈ (1, Λ] a tree over (λ, runner-5 parameter) with α ∈ (0, α₁] whose leaves are p-intervals of length
   ≥ α₁ with a y-window (fold of runner 5, or a lap box with runner 5 by λ₅ when v₅/v₂ is near 1).
+
+## E112 — §5, k = 1, α < 1/25: the structure, and why it is a 2D orbit problem (2026-10-17)
+
+Owner: *"Build the k = 1 small-alpha part: uniform cut, step lemma for large lambda, and the (lambda, runner-5) tree with
+p-interval leaves including the runner-5 lap box near lambda = 2, 3."* Observation and design; nothing new in Lean.
+`s5k1_small_v2..v4.{py,out}`, `s5k1_cert_v2_lo1.out`, `s5k1_cert_v2_lo2.out`.
+- **Uniform cut** (derived). `s5_uniform_j0` closes β = (v₄ − v₂)/v₂ ≥ (1/6 + 5α/3)/(1/2 − α): 0.507 at α = 1/25, 0.417
+  at 1/50, 0.35 at 1/100. The step lemma needs runner 4's step β to be shorter than its target arc 2/3 − p (p ≤ 1/3 for
+  κ = 1), so it covers only β < 0.35 (λ ≳ 10 with α ≤ 1/100).
+- **Tree extension** (`s5k1_cert_v2` floats): α ∈ [0.03, 0.04] closes with 1,891 leaves and α ∈ [0.02, 0.03] with 5,036.
+  The leaf count roughly triples per halving of α, so the box tree is not the route to α → 0.
+- **The intermediate-value box lemma** (derived; not yet in Lean). Write v₃ = v₂ + v₁, v₄ = v₂ + λv₁, v₅ = v₂ + λ₅v₁.
+  At every instant runners 2–5 read y, y + P, y + λP, y + λ₅P (P = runner 1's reading, exactly). Suppose for all P in
+  an interval [p_a, p_b] of length ≥ α = v₁/v₂, inside a runner-1 band, with fixed laps, the lower envelope
+  ℓ(P) = max(1/6, m₃ + 1/6 − P, m₄ + 1/6 − λP, m₅ + 1/6 − λ₅P) is at most the upper envelope u(P). Then an exact lonely
+  instant exists: f(t) = v₂t − ℓ(v₁t) is continuous and rises by ≥ 1 over one lap of runner 2 (ℓ is antitone), so
+  f(t) is an integer n for some t, and then runner 2 reads n + ℓ, runner k reads n + ℓ + d_kP. No drift error, any α.
+- **Coverage of the box criterion** (`s5k1_small_v4`, fine P grid). With runner 5 not fast, γ = (v₅ − v₂)/v₂ ≤ 1/2
+  (spread{0, P, λP, λ₅P} ≤ 2/3 on a P-run of length ≥ α), every case closes over α ∈ {0.04 … 0.001} and λ up to the
+  uniform cut. With γ > 1/2 (runner 5 fast; the box criterion cannot work since runner 5's good P-intervals have length
+  about (2/3)/λ₅ < α), a fold of runner 5 with drift margins fails in 316 of the cases, at every α (59–71 per α), for
+  λ ≳ 2–7.
+- **Reading** [observation]. Small α splits by whether runners 4 and 5 are slow or fast relative to runner 2:
+  1. β and γ small (λ and λ₅ bounded): the box lemma on P-intervals — a finite tree in (λ, λ₅).
+  2. β or γ macroscopic: the phases of runners 4 and 5 at runner-2 lap j are βj and γj (mod 1), a 2D orbit as j runs
+     over the laps with runner 1 in band (about 1/(3α) of them). It must enter a region of positive area. Resonant
+     directions (e.g. γ ≈ 2β, β ≈ 1/2) are the exceptions to treat separately.
+
+  This is the shape of §6's near-runner case (E93–E99: generic orbits by a progression lemma, the degenerate
+  directions by certificate). The earlier E111 obstacles λ = 2, 3 belong to regime 1 and are covered there (box with
+  runner 5 by λ₅).
