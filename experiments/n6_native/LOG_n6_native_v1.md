@@ -2331,3 +2331,18 @@ for every theorem) [PROVED].
   gcd(v₁, D) = 1 ⇒ lonely — uniform, or λ from v₄·v₁⁻¹ mod D (representative in (−D/2, D/2]): λ = ±1 by
   `s6_unit_dir`, otherwise `s6_off_unit`.
 - **Left in §6:** D < 15, and gcd(v₁, D) > 1.
+
+## E100 — 2026-10-16 — §6 native branch wired into the order-six dispatch
+
+- **Tree:** new module `LRC/Spec/OrderSixSixNativeN.lean` (namespace `LRC.S6Native`): the content of
+  `S6Branch_v1.lean` plus `lonely_6_native_branch`, which takes §6's hypotheses as the dispatch states them
+  (v₃ − v₂ ∣ v₃, 3v₁ < v₃) and applies `s6_branch` with c = e − 1 where v₃ = e·D.
+- **Dispatch:** `OrderSixWholeN.lean` §6 now splits on `15 ≤ v₃ − v₂ ∧ Coprime v₁ (v₃ − v₂)`: native branch
+  when it holds, BHK's `lonely_6` otherwise.
+- **Check** (`S6Native_wiring_v1.out`): order 3–7 targets build (8334 jobs); `lonely_6_native_branch`,
+  `lonely6_of_lt` and `lonelyRunnerAtN_three` … `_seven` all depend on `[propext, Classical.choice, Quot.sound]`.
+  The proof term of `lonely6_of_lt` references `lonely_6_native_branch`, `lonely_6`, `lonely_7_native` and
+  `lonely_8_native`. No `sorry`, `native_decide` or `admit` in the new module.
+- **Commit:** nested repo `8f77b2d`. Not pushed.
+- **Order six's proof of record now:** §2, §7, §8 native; §6 native for D ≥ 15 with gcd(v₁, D) = 1; §6 with
+  D < 15 or gcd(v₁, D) > 1, and §5, still BHK.
