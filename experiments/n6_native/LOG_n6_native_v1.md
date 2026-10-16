@@ -2486,3 +2486,57 @@ k = 2 part 2, k ≥ 3 Case 5.1 — `OrderSixSecFiveN.lean` header).
   k = 1 (the sum relation) needs windows past the pair windows: runner 3 folded, or runners 2 and 3 one lap apart with
   x₃ = x₁ + x₂. It also has a cluster-box family and a bounded set closed by lap boxes. Not established: none of this
   is a proof; the counts are samples (primitive ≤ 36, random ≤ 2,000).
+
+## E105 — §5, k ≥ 2: the pair-window fold, its exceptions, and the first Lean pieces (2026-10-16)
+
+Owner: *"Prove the k >= 2 part: the uniform pair window at j0, then the near-runner pair-window fold as a 2D
+progression, following the §6 pattern."* Mid-turn: *"Also we should look into the ones it did not close and why.
+Understanding the exception is a standing rule for us."* `s5_pf_v1..v4`, `s5_exc_v1..v2` (`.py`, `.out`);
+`S5Pair_v1.lean` (`.out`; axioms `[propext, Classical.choice, Quot.sound]`) [PROVED for the three theorems below].
+- **Simple pair-window fold** (`s5_pf_v1`): runner 1 clear across all of P_j, runner 4's sweep meets its band in a
+  stretch ≥ μ = v₄/(3v₅), runner 5 folded alone. On k ≥ 2 sets not closed by the uniform window at j₀: primitive ≤ 40,
+  8,076 of 8,335; random ≤ 3,000, 275 of 278.
+- **1D form** (derived; `s5_pf_v2` agrees with the direct computation on all 2,337 primitive sets ≤ 30). At lap j,
+  u = j + 1/6: runner 1 reads p = αu (α = v₁/v₂, the progression), runner 4 reads j + 1/6 + λp with λ = (v₄ − v₂)/v₁.
+  The window length is (2/3 − p/k)/v₃, so runner 1 sweeps ρh and runner 4 sweeps w = qh, with h = 2/3 − p/k,
+  ρ = v₁/v₃, q = v₄/v₃. Fold condition: p − n₁ ∈ [1/6, 5/6 − ρh], w ≥ μ, and λp ∈ [m − w + μ, m + 2/3 − μ]. Everything
+  is a function of k, α, β = (v₄ − v₂)/v₂ = λα and μ.
+- **Continuous map** (`s5_pf_v3`, grid over α, β, μ in the non-uniform domain): failures only at k = 2 (7.5% of grid
+  points) and k = 3 (2.2%); none at k = 4, 6, 10 (k = 100: the whole grid is uniform at j₀). Mostly at α near
+  α_max = k/(3k−1).
+- **The exceptions, understood** (`s5_exc_v1`: all 262 integer exceptions, primitive ≤ 40 plus random ≤ 3,000;
+  `s5_pf_v4`, `s5_exc_v2`: the small-α part).
+  - **(i) Feature.** k ∈ {2, 3}; λ ≈ 0.8–1.5 (v₄ ≈ v₂ + v₁, near a second sum relation x₄ = x₂ + x₁); μ near 1/3
+    (v₅ near v₄) in most. Two regimes:
+    - large α (≥ 0.62 α_max: v₃ just above 3v₁, near the §8 boundary): only 1–3 pair windows have runner 1 clear
+      across them, and at those runner 4's offset z = βu (mod 1) lies just past the arc's upper end 2/3 − μ
+      (z ≈ 0.35–0.64 against ≈ 0.35);
+    - small α (α ≈ 0.12–0.24): z starts just past the arc (≈ 0.34–0.40), drifts away with step β ≈ 0.16, and wraps
+      back into the arc after 4–5 windows, when the pair windows have shrunk so that w < μ.
+
+    In both, runner 4 is in the second half of its lap while runners 1, 2, 3 are clear, and the progression has no
+    room to bring it back.
+  - **(ii) What forces the witness.** Small α (integer examples (10, 83, 88, 97, 98), (14, 117, 124, 136, 137): the
+    region has positive measure in ratio space, so infinitely many sets):
+    - the pair window P₁ with runner 1 only partly clear (it enters its band inside P₁), runners 1–4 on laps
+      (0, 1, 1, 1), runner 5 folded;
+    - or runners 3, 4, 5 on one lap j (laps (0, j, j, j)) with runner 2 folded.
+
+    Large α: four-block folds past the pair windows, with runners 2, 3 one lap apart (laps (0, 1, 2, ·), runner 3
+    folded), runner 1 on lap 1 (laps (1, 3, 4, 5), (1, 4, 5, 6), runner 4 or 5 folded), or runner 2 folded
+    (0, 1, 1, 1).
+  - **(iii) Same mechanism.** The small-α witnesses are the pair-window fold with runner 1 on a sub-window
+    (`s5_pair_fold` covers it), and a cluster window (runners 3, 4, 5 together). The large-α witnesses lie in a bounded
+    ratio region (k ∈ {2, 3}, v₃/v₁ ∈ (3, ~4.5), v₄/v₃ ≤ ~1.3) — §8-type four-block folds, the same windows §5 k = 1
+    and §8 use.
+- **Proved** (`S5Pair_v1.lean`):
+  - `exists_j0`: some j₀ has v₂ ≤ v₁(6j₀+1) < v₂ + 6v₁;
+  - `s5_uniform_j0`: §5 order (v₁ < v₂ < v₃ < v₄ ≤ v₅, 3v₁ < v₃) and |P_{j₀}| ≥ 2/(3v₄) ⇒ lonely; runner 1 is clear across
+    all of P_{j₀} using only 3v₁ < v₃;
+  - `s5_pair_fold`: any sub-window of P_j where runners 1 and 4 read in bands at both ends and of length ≥ 1/(3v₅) ⇒
+    lonely.
+- **Design for the rest (not done).** As for E99/E102:
+  - a certificate over (k ∈ {2, 3} and k ≥ 4, α, β, μ) whose leaves are a lap j with an exact sub-window
+    (`s5_pair_fold`), or an interval of p of length ≥ α (for small α, where the progression must land);
+  - the cluster window as a second closer;
+  - §8-type four-block folds for the bounded large-α region.

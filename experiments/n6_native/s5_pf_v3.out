@@ -1,0 +1,6 @@
+k = 2: non-uniform grid points 23520, fold5 fails at 1756 (0.075); failures by alpha/alpha_max: [(0.3, 10), (0.4, 5), (0.5, 1), (0.6, 47), (0.7, 196), (0.8, 244), (0.9, 913), (1.0, 340)]
+k = 3: non-uniform grid points 12640, fold5 fails at 281 (0.022); failures by alpha/alpha_max: [(0.7, 1), (0.8, 45), (0.9, 131), (1.0, 104)]
+k = 4: non-uniform grid points 8480, fold5 fails at 0 (0.000); failures by alpha/alpha_max: []
+k = 6: non-uniform grid points 5020, fold5 fails at 0 (0.000); failures by alpha/alpha_max: []
+k = 10: non-uniform grid points 2560, fold5 fails at 0 (0.000); failures by alpha/alpha_max: []
+k = 100: non-uniform grid points 0, fold5 fails at 0 (0.000); failures by alpha/alpha_max: []

@@ -1,0 +1,6 @@
+../experiments/n6_native/S5Pair_v1.lean:40:102: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'LRC.S6Native.exists_j0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s5_uniform_j0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s5_pair_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
