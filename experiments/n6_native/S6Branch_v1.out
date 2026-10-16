@@ -1,6 +1,669 @@
 ../experiments/n6_native/S6Branch_v1.lean:236:89: warning: unused variable `hD`
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
+../experiments/n6_native/S6Branch_v1.lean:895:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:895:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:896:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:896:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:898:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:898:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:901:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:902:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:906:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:906:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:908:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:908:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:910:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:910:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:912:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:914:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:918:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:918:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:919:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:919:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:920:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:920:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:921:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:921:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:922:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:922:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:923:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:924:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:925:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:926:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:927:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:928:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:931:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:931:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:935:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:937:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:941:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:944:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:944:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:945:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:945:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:946:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:946:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:947:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:947:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:948:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:948:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:949:74: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:949:143: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:950:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:951:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:952:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:953:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:954:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:955:99: warning: This simp argument is unused:
+  hUv
+
+Hint: Omit it from the simp argument list.
+  simp only [hQv,̵ ̵h̵U̵v̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+../experiments/n6_native/S6Branch_v1.lean:895:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:896:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:898:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:906:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:908:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:910:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:918:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:919:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:920:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:921:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:922:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:931:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:944:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:945:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:946:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:947:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:948:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:949:163: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+../experiments/n6_native/S6Branch_v1.lean:895:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:896:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:898:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:901:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:901:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:902:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:902:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:906:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:908:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:910:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:912:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:912:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:914:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:914:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:918:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:919:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:920:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:921:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:922:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:923:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:923:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:924:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:924:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:925:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:925:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:926:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:926:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:927:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:927:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:928:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:928:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:931:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:935:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:935:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:937:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:937:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:941:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:941:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:944:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:945:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:946:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:947:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:948:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:949:90: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:950:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:950:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:951:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:951:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:952:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:952:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:953:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:953:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:954:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:954:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:955:115: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:955:184: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+../experiments/n6_native/S6Branch_v1.lean:895:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:896:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:898:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:906:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:908:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:910:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:918:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:919:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:920:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:921:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:922:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:931:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:944:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:945:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:946:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:947:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:948:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S6Branch_v1.lean:949:163: warning: 'nlinarith [hMmax, hM0]' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
 'N6Native.s6_window_fold_before' depends on axioms: [propext, Classical.choice, Quot.sound]
 'N6Native.s6_off_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'N6Native.s6_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_unit_dir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_branch' depends on axioms: [propext, Classical.choice, Quot.sound]

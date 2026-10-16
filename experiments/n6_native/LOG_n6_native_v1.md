@@ -2310,3 +2310,24 @@ two-window argument."* `S6Branch_v1.lean` (collects S6Meeting/S6Generic/S6Sum; `
   argument gives every D ≥ 18 there, and D = 15, 16, 17 with c ≤ 2 need a separate look.
 - **Owed for the branch:** the λ = ±1 statement itself in Lean — a certificate over (c, q₄, μ) that the usable set has an
   interval of length ≥ 1/15 (≥ 1/18 for c ≤ 2), like §8's — and the D = 15–17, c ≤ 2, λ = 1 corner.
+
+## E99 — §6 branch D ≥ 15, gcd(v₁, D) = 1: proved, every direction (2026-10-16)
+
+Owner: *"Build the lambda = plus or minus 1 certificate over (c, q4, mu), with a separate check for D = 15 to 17 at c <= 2,
+and wire the branch theorem."* `s6_lam_cert_v1.{py,out}`, `s6_lam_small_v1.{py,out}`, `s6_lam_lean_gen_v1..v3.py`;
+`S6Branch_v1.lean` (`.out`: 0 errors; no `sorry`/`native_decide`/`admit`; axioms `[propext, Classical.choice, Quot.sound]`
+for every theorem) [PROVED].
+- **Certificate** (parameters U = v₃/v₂ = (c+1)/c, Q = v₄/v₃ ∈ [1, 4/(5−U)] in the near-runner case, M = v₄/(3v₅) ≤ 1/3;
+  a cell is closed by the window after or before the meeting time with offset m, or by the sum lemma, on an interval
+  [a, a + L] of runner-1 phases, checked at worst corners). Trees: λ = −1, all c: one leaf (after, m = 0, a = 1/6, L = 1/15);
+  λ = 1, c ≥ 3: one leaf (the same); λ = 1, c = 2: 4 leaves (L = 1/15); λ = 1, c = 1: 12 leaves with L = 1/20 (so D ≥ 20).
+  The c = 1 tree fails at L = 1/15 and 1/18 (the corner Q ≈ 1.2, M → 1/3 of E98).
+- **Small cases.** λ = 1, c = 1, D = 15..19: v₁ < D forces δ = v₁; 37 non-uniform coprime cases, each closed at a
+  grid point j/D at the largest M = v₄/(3(v₄+1)) (the conditions are monotone in M): 15 by the sum lemma, 22 by the
+  window after or before. (The request named D = 15–17 at c ≤ 2; c = 2 needed no small cases, and c = 1 needed D up to 19.)
+- **Lean.** `readings_at` (readings at k/D for k v₁ ≡ j), `exists_j`, `close_after`, `close_before`, `close_sum`;
+  **`s6_unit_dir`** (λ = ±1, the case tree generated from the certificate and the 37 cases, plus `hδ2`: λ = 1 and c ≤ 2
+  force v₄ = v₃ + v₁); **`s6_branch`**: §6 (v₂ = cD, v₃ = (c+1)D, c ≥ 1, 3v₁ < v₃, v₃ < v₄ < v₅) with D ≥ 15 and
+  gcd(v₁, D) = 1 ⇒ lonely — uniform, or λ from v₄·v₁⁻¹ mod D (representative in (−D/2, D/2]): λ = ±1 by
+  `s6_unit_dir`, otherwise `s6_off_unit`.
+- **Left in §6:** D < 15, and gcd(v₁, D) > 1.

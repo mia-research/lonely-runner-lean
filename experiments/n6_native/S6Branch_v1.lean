@@ -575,7 +575,446 @@ theorem s6_sum {v1 v2 v3 v5 c D : ℕ} (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = 
   refine ⟨t, a1, a2, a3, ?_, a5⟩
   push_cast; exact a4
 
+/-! ### E99: the directions λ = ±1 -/
+
+/-- At the meeting time `k/D` for a `k` with `k v₁ ≡ j`, the readings: runners 2, 3 whole, runner 1 `q₁ + j/D`,
+runner 4 `q₄ + l j/D` (when `v₄ ≡ l v₁`). -/
+theorem readings_at {v1 v2 v3 v4 c D j : ℕ} (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hcop : Nat.Coprime v1 D)
+    (hD : 1 < D) (hjD : j < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) :
+    ∃ T : ℝ, ∃ N1 N2 N3 N4 : ℤ, (v1 : ℝ) * T = N1 + (j : ℝ) / D ∧ (v2 : ℝ) * T = N2 ∧ (v3 : ℝ) * T = N3 ∧
+      (v4 : ℝ) * T = N4 + (l : ℝ) * j / D := by
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  obtain ⟨u, -, hu⟩ := Nat.exists_mul_mod_eq_one_of_coprime hcop hD
+  set k := j * u with hk
+  have hv1k : v1 * k % D = j := by
+    rw [hk, show v1 * (j * u) = j * (v1 * u) by ring, Nat.mul_mod, hu, mul_one, Nat.mod_mod, Nat.mod_eq_of_lt hjD]
+  set q1 := v1 * k / D with hq1
+  have hdiv1 : v1 * k = D * q1 + j := by rw [hq1, ← hv1k]; exact (Nat.div_add_mod _ _).symm
+  have hmod4 : (v4 * k : ℤ) ≡ l * j [ZMOD D] := by
+    have a : (v4 * k : ℤ) ≡ l * v1 * k [ZMOD D] := Int.ModEq.mul_right _ hl
+    have b : (l * v1 * k : ℤ) = l * (D * q1) + l * j := by
+      have : ((v1 * k : ℕ) : ℤ) = ((D * q1 + j : ℕ) : ℤ) := by rw [hdiv1]
+      push_cast at this; rw [mul_assoc, this]; ring
+    rw [b] at a
+    refine a.trans ?_
+    have : (l * (D * q1) + l * j : ℤ) ≡ 0 + l * j [ZMOD D] :=
+      Int.ModEq.add_right _ (Int.modEq_zero_iff_dvd.mpr ⟨l * q1, by ring⟩)
+    simpa using this
+  obtain ⟨q4, hq4⟩ := hmod4.symm.dvd
+  refine ⟨(k : ℝ) / D, q1, c * k, (c + 1) * k, q4, ?_, ?_, ?_, ?_⟩
+  · have : ((v1 * k : ℕ) : ℝ) = D * q1 + j := by exact_mod_cast hdiv1
+    push_cast at this ⊢; field_simp; linarith
+  · rw [hv2]; push_cast; field_simp
+  · rw [hv3]; push_cast; field_simp
+  · have h' : (v4 * k : ℤ) = l * j + D * q4 := by linarith [hq4]
+    have : ((v4 * k : ℤ) : ℝ) = ((l * j + D * q4 : ℤ) : ℝ) := by rw [h']
+    push_cast at this; field_simp; linarith
+
+/-- A grid point `j/D` in an interval of length at least `1/D` inside `[0, 1)`. -/
+theorem exists_j (D : ℕ) (hD : 0 < D) {a L : ℝ} (ha : 0 ≤ a) (haL : a + L < 1) (hL : 1 ≤ D * L) :
+    ∃ j : ℕ, j < D ∧ a ≤ (j : ℝ) / D ∧ (j : ℝ) / D ≤ a + L := by
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hD
+  refine ⟨⌈a * D⌉₊, ?_, ?_, ?_⟩
+  · have h1 : (⌈a * D⌉₊ : ℝ) < a * D + 1 := Nat.ceil_lt_add_one (by positivity)
+    have : (⌈a * D⌉₊ : ℝ) < D := by nlinarith
+    exact_mod_cast this
+  · rw [le_div_iff₀ hDR]; exact Nat.le_ceil _
+  · have h1 : (⌈a * D⌉₊ : ℝ) < a * D + 1 := Nat.ceil_lt_add_one (by positivity)
+    rw [div_le_iff₀ hDR]; nlinarith
+
+section closers
+variable {v1 v2 v3 v4 v5 c D : ℕ}
+
+/-- **Closing at a grid point, window after the meeting time.** `q₄ = v₄/v₃`, `u = v₃/v₂`, `μ = v₄/(3v₅)`. -/
+theorem close_after (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3)
+    (h34 : v3 < v4) (h45 : v4 ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
+    (j : ℕ) (hjD : j < D) (m : ℤ) (hp1 : 1 / 6 ≤ (j : ℝ) / D) (hp2 : (j : ℝ) / D ≤ 5 / 9)
+    (hlow : (m : ℝ) + 1 / 6 ≤ l * ((j : ℝ) / D) + 5 / 6 * ((v4 : ℝ) / v3) - (v4 : ℝ) / (3 * v5))
+    (hup : l * ((j : ℝ) / D) + ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 + (v4 : ℝ) / (3 * v5) ≤ m + 5 / 6) :
+    ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+      (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+  obtain ⟨T, N1, N2, N3, N4, hT1, hT2, hT3, hT4⟩ := readings_at hv2 hv3 hcop hD hjD l hl
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  have hcR : (1 : ℝ) ≤ c := by exact_mod_cast hc
+  have hv2R : (v2 : ℝ) = c * D := by rw [hv2]; push_cast; ring
+  have hv3R : (v3 : ℝ) = (c + 1) * D := by rw [hv3]; push_cast; ring
+  have h2p : (0 : ℝ) < v2 := by rw [hv2R]; positivity
+  have h23 : (v2 : ℝ) ≤ v3 := by rw [hv2R, hv3R]; nlinarith
+  have h3p : (0 : ℝ) < v3 := lt_of_lt_of_le h2p h23
+  have h1p : (0 : ℝ) < v1 := by exact_mod_cast h0
+  have h13 : 3 * (v1 : ℝ) < v3 := by exact_mod_cast hsmall
+  have h34R : (v3 : ℝ) ≤ v4 := by exact_mod_cast h34.le
+  have h45R : (v4 : ℝ) ≤ v5 := by exact_mod_cast h45
+  have h4p : (0 : ℝ) < v4 := lt_of_lt_of_le h3p h34R
+  have h5p : (0 : ℝ) < v5 := lt_of_lt_of_le h4p h45R
+  have e1 : (v4 : ℝ) * (5 / (6 * v3)) = 5 / 6 * ((v4 : ℝ) / v3) := by field_simp
+  have e2 : (v4 : ℝ) / (6 * v2) = ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 := by field_simp
+  have e3 : (v4 : ℝ) * (1 / (6 * v2)) = (v4 : ℝ) / (6 * v2) := by ring
+  have hT4' : (v4 : ℝ) * T = N4 + (l * ((j : ℝ) / D)) := by rw [hT4]; ring
+  refine s6_window_fold (m := m) h1p hDR h2p h23 h13 h34R h45R hT2 hT3 hT1 hT4' hp1 hp2 ?_ ?_ ?_
+  · rw [mul_sub, e1, e3, e2]; linarith
+  · rw [e2]; linarith
+  · -- μ ≤ 1/3 ≤ 1/2 ≤ v₄ ℓ
+    have hμ : (v4 : ℝ) / (3 * v5) ≤ 1 / 3 := by rw [div_le_iff₀ (by positivity)]; linarith
+    have hd : (0 : ℝ) ≤ 5 / (6 * v3) - 1 / (6 * v2) := by
+      rw [sub_nonneg, div_le_div_iff₀ (by positivity) (by positivity)]; rw [hv2R, hv3R]; nlinarith
+    have : (v3 : ℝ) * (5 / (6 * v3) - 1 / (6 * v2)) ≤ v4 * (5 / (6 * v3) - 1 / (6 * v2)) :=
+      mul_le_mul_of_nonneg_right h34R hd
+    have e : (v3 : ℝ) * (5 / (6 * v3) - 1 / (6 * v2)) = 5 / 6 - v3 / (6 * v2) := by field_simp
+    have : (v3 : ℝ) / (6 * v2) ≤ 1 / 3 := by rw [div_le_iff₀ (by positivity), hv2R, hv3R]; nlinarith
+    linarith
+
+/-- **Closing at a grid point, window before the meeting time.** -/
+theorem close_before (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3)
+    (h34 : v3 < v4) (h45 : v4 ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
+    (j : ℕ) (hjD : j < D) (m : ℤ) (hp1 : 4 / 9 ≤ (j : ℝ) / D) (hp2 : (j : ℝ) / D ≤ 5 / 6)
+    (hlow : (m : ℝ) + 1 / 6 ≤ 1 - l * ((j : ℝ) / D) + 5 / 6 * ((v4 : ℝ) / v3) - (v4 : ℝ) / (3 * v5))
+    (hup : 1 - l * ((j : ℝ) / D) + ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 + (v4 : ℝ) / (3 * v5) ≤ m + 5 / 6) :
+    ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+      (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+  obtain ⟨T, N1, N2, N3, N4, hT1, hT2, hT3, hT4⟩ := readings_at hv2 hv3 hcop hD hjD l hl
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  have hcR : (1 : ℝ) ≤ c := by exact_mod_cast hc
+  have hv2R : (v2 : ℝ) = c * D := by rw [hv2]; push_cast; ring
+  have hv3R : (v3 : ℝ) = (c + 1) * D := by rw [hv3]; push_cast; ring
+  have h2p : (0 : ℝ) < v2 := by rw [hv2R]; positivity
+  have h23 : (v2 : ℝ) ≤ v3 := by rw [hv2R, hv3R]; nlinarith
+  have h3p : (0 : ℝ) < v3 := lt_of_lt_of_le h2p h23
+  have h1p : (0 : ℝ) < v1 := by exact_mod_cast h0
+  have h13 : 3 * (v1 : ℝ) < v3 := by exact_mod_cast hsmall
+  have h34R : (v3 : ℝ) ≤ v4 := by exact_mod_cast h34.le
+  have h45R : (v4 : ℝ) ≤ v5 := by exact_mod_cast h45
+  have h4p : (0 : ℝ) < v4 := lt_of_lt_of_le h3p h34R
+  have h5p : (0 : ℝ) < v5 := lt_of_lt_of_le h4p h45R
+  have e1 : (v4 : ℝ) * (5 / (6 * v3)) = 5 / 6 * ((v4 : ℝ) / v3) := by field_simp
+  have e2 : (v4 : ℝ) / (6 * v2) = ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 := by field_simp
+  have e3 : (v4 : ℝ) * (1 / (6 * v2)) = (v4 : ℝ) / (6 * v2) := by ring
+  have hT4' : (v4 : ℝ) * T = N4 + (l * ((j : ℝ) / D)) := by rw [hT4]; ring
+  refine s6_window_fold_before (m := m) h1p hDR h2p h23 h13 h34R h45R hT2 hT3 hT1 hT4' hp1 hp2 ?_ ?_ ?_
+  · rw [mul_sub, e1, e3, e2]; linarith
+  · rw [e2]; linarith
+  · have hμ : (v4 : ℝ) / (3 * v5) ≤ 1 / 3 := by rw [div_le_iff₀ (by positivity)]; linarith
+    have hd : (0 : ℝ) ≤ 5 / (6 * v3) - 1 / (6 * v2) := by
+      rw [sub_nonneg, div_le_div_iff₀ (by positivity) (by positivity)]; rw [hv2R, hv3R]; nlinarith
+    have : (v3 : ℝ) * (5 / (6 * v3) - 1 / (6 * v2)) ≤ v4 * (5 / (6 * v3) - 1 / (6 * v2)) :=
+      mul_le_mul_of_nonneg_right h34R hd
+    have e : (v3 : ℝ) * (5 / (6 * v3) - 1 / (6 * v2)) = 5 / 6 - v3 / (6 * v2) := by field_simp
+    have : (v3 : ℝ) / (6 * v2) ≤ 1 / 3 := by rw [div_le_iff₀ (by positivity), hv2R, hv3R]; nlinarith
+    linarith
+
+/-- **Closing at a grid point by the sum lemma** (`v₄ = v₃ + v₁`). -/
+theorem close_sum (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (h5 : 0 < v5)
+    (h4 : v4 = v3 + v1) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (j : ℕ) (hjD : j < D)
+    (hp1 : 1 / 3 + (v3 : ℝ) / (3 * v5) ≤ (j : ℝ) / D) (hp2 : (j : ℝ) / D ≤ 5 / 6 * (1 - (v1 : ℝ) / v3)) :
+    ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+      (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+  have hl : (v4 : ℤ) ≡ 1 * v1 [ZMOD D] := by
+    rw [h4, hv3, one_mul]; push_cast
+    exact (Int.modEq_iff_dvd.mpr ⟨-(c + 1), by ring⟩)
+  obtain ⟨T, N1, N2, N3, N4, hT1, hT2, hT3, -⟩ := readings_at hv2 hv3 hcop hD hjD 1 hl
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  have hcR : (1 : ℝ) ≤ c := by exact_mod_cast hc
+  have hv2R : (v2 : ℝ) = c * D := by rw [hv2]; push_cast; ring
+  have hv3R : (v3 : ℝ) = (c + 1) * D := by rw [hv3]; push_cast; ring
+  have h2p : (0 : ℝ) < v2 := by rw [hv2R]; positivity
+  have h23 : (v2 : ℝ) ≤ v3 := by rw [hv2R, hv3R]; nlinarith
+  have h2half : (v3 : ℝ) ≤ 2 * v2 := by rw [hv2R, hv3R]; nlinarith
+  have h1p : (0 : ℝ) < v1 := by exact_mod_cast h0
+  have h5p : (0 : ℝ) < v5 := by exact_mod_cast h5
+  obtain ⟨t, a1, a2, a3, a4, a5⟩ := s6_sum_window h1p h2p h23 h2half h5p hT1 hT2 hT3 hp1 hp2
+  refine ⟨t, a1, a2, a3, ?_, a5⟩
+  rw [h4]; push_cast; exact a4
+
+end closers
+
+set_option maxHeartbeats 4000000 in
+/-- **§6, D ≥ 15, gcd(v₁, D) = 1, directions λ = ±1** (near-runner case). Case tree from `s6_lam_cert_v1.py`
+(over `U = v₃/v₂`, `Q = v₄/v₃`, `M = v₄/(3v₅)`) and, for `c = 1`, `D = 15..19`, the explicit cases of
+`s6_lam_small_v1.py`. Leaves close by the window after or before the meeting time, or by the sum lemma. -/
+theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 < v5) (hc : 1 ≤ c)
+    (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D)
+    (hnr : (v4 : ℝ) * (5 * v2 - v3) < 4 * v2 * v3) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) (hl1 : l = 1 ∨ l = -1) :
+    ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+      (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+  have hD1 : 1 < D := by omega
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  have hcR : (1 : ℝ) ≤ c := by exact_mod_cast hc
+  have hv2R : (v2 : ℝ) = c * D := by rw [hv2]; push_cast; ring
+  have hv3R : (v3 : ℝ) = (c + 1) * D := by rw [hv3]; push_cast; ring
+  have h2p : (0 : ℝ) < v2 := by rw [hv2R]; positivity
+  have h3p : (0 : ℝ) < v3 := by rw [hv3R]; positivity
+  have h34R : (v3 : ℝ) < v4 := by exact_mod_cast h34
+  have h45R : (v4 : ℝ) < v5 := by exact_mod_cast h45
+  have h4p : (0 : ℝ) < v4 := by linarith
+  have h5p : (0 : ℝ) < v5 := by linarith
+  set Q : ℝ := (v4 : ℝ) / v3 with hQv
+  set U : ℝ := (v3 : ℝ) / v2 with hUv
+  set M : ℝ := (v4 : ℝ) / (3 * v5) with hMv
+  have hUdef : U = ((c : ℝ) + 1) / c := by rw [hUv, hv2R, hv3R]; field_simp
+  have hU1 : 1 ≤ U := by rw [hUdef, le_div_iff₀ (by linarith)]; linarith
+  have hU2 : U ≤ 2 := by rw [hUdef, div_le_iff₀ (by linarith)]; linarith
+  have hU3 : 2 < c → U ≤ 4 / 3 := fun h => by
+    have : (3 : ℝ) ≤ c := by exact_mod_cast h
+    rw [hUdef, div_le_iff₀ (by linarith)]; linarith
+  have hQ1 : 1 ≤ Q := by rw [hQv, le_div_iff₀ h3p]; linarith
+  have hQU : Q * (5 - U) ≤ 4 := by
+    have e : Q * (5 - U) = (v4 : ℝ) * (5 * v2 - v3) / (v2 * v3) := by rw [hQv, hUv]; field_simp
+    rw [e, div_le_iff₀ (by positivity)]; linarith
+  have hQle : Q ≤ 4 / (5 - U) := by rw [le_div_iff₀ (by linarith)]; linarith
+  have hQUb : Q * U ≤ 4 * U / (5 - U) := by
+    have := mul_le_mul_of_nonneg_right hQle (show (0 : ℝ) ≤ U by linarith)
+    calc Q * U ≤ 4 / (5 - U) * U := this
+      _ = 4 * U / (5 - U) := by ring
+  have hM0 : 0 ≤ M := by positivity
+  have hM3 : M ≤ 1 / 3 := by rw [hMv, div_le_iff₀ (by positivity)]; linarith
+  have hMmax : M ≤ (v4 : ℝ) / (3 * (v4 + 1)) := by
+    have : (v4 : ℝ) + 1 ≤ v5 := by exact_mod_cast h45
+    rw [hMv]; exact div_le_div_of_nonneg_left h4p.le (by positivity) (by linarith)
+  have hDL15 : 1 ≤ (D : ℝ) * (1 / 15) := by
+    have : (15 : ℝ) ≤ D := by exact_mod_cast hD
+    linarith
+  -- closers at a grid point
+  have closeAP : ∀ (j : ℕ) (m : ℤ), j < D → 1 / 6 ≤ (j : ℝ) / D → (j : ℝ) / D ≤ 5 / 9 →
+      (m : ℝ) + 1 / 6 ≤ l * ((j : ℝ) / D) + 5 / 6 * Q - M → l * ((j : ℝ) / D) + Q * U / 6 + M ≤ m + 5 / 6 →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) :=
+    fun j m hjD hp1 hp2 hlo hup => close_after h0 hc hv2 hv3 hsmall h34 h45.le hcop hD1 l hl j hjD m hp1 hp2 hlo hup
+  have closeBP : ∀ (j : ℕ) (m : ℤ), j < D → 4 / 9 ≤ (j : ℝ) / D → (j : ℝ) / D ≤ 5 / 6 →
+      (m : ℝ) + 1 / 6 ≤ 1 - l * ((j : ℝ) / D) + 5 / 6 * Q - M → 1 - l * ((j : ℝ) / D) + Q * U / 6 + M ≤ m + 5 / 6 →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) :=
+    fun j m hjD hp1 hp2 hlo hup => close_before h0 hc hv2 hv3 hsmall h34 h45.le hcop hD1 l hl j hjD m hp1 hp2 hlo hup
+  have closeSP : v4 = v3 + v1 → ∀ (j : ℕ), j < D → M ≤ ((j : ℝ) / D - 1 / 3) * Q → (j : ℝ) / D ≤ 5 / 6 * (2 - Q) →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+    intro hδ j hjD h1 h2
+    have hQe : Q = 1 + (v1 : ℝ) / v3 := by
+      rw [hQv, hδ]; push_cast; field_simp
+    refine close_sum h0 hc hv2 hv3 (by omega) hδ hcop hD1 j hjD ?_ ?_
+    · have e : (v3 : ℝ) / (3 * v5) = M / Q := by rw [hMv, hQv]; field_simp
+      rw [e, ← le_sub_iff_add_le', div_le_iff₀ (by linarith)]; linarith
+    · rw [hQe] at h2; linarith
+  -- closers on an interval of length L ≥ 1/D
+  have closeA : ∀ (m : ℤ) (a L : ℝ), 1 / 6 ≤ a → a + L ≤ 5 / 9 → 1 ≤ (D : ℝ) * L →
+      (∀ p : ℝ, a ≤ p → p ≤ a + L → (m : ℝ) + 1 / 6 ≤ l * p + 5 / 6 * Q - M) →
+      (∀ p : ℝ, a ≤ p → p ≤ a + L → l * p + Q * U / 6 + M ≤ m + 5 / 6) →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+    intro m a L ha haL hDL hlo hup
+    obtain ⟨j, hjD, hj1, hj2⟩ := exists_j D (by omega) (a := a) (L := L) (by linarith) (by linarith) hDL
+    exact closeAP j m hjD (by linarith) (by linarith) (hlo _ hj1 hj2) (hup _ hj1 hj2)
+  have closeB : ∀ (m : ℤ) (a L : ℝ), 4 / 9 ≤ a → a + L ≤ 5 / 6 → 1 ≤ (D : ℝ) * L →
+      (∀ p : ℝ, a ≤ p → p ≤ a + L → (m : ℝ) + 1 / 6 ≤ 1 - l * p + 5 / 6 * Q - M) →
+      (∀ p : ℝ, a ≤ p → p ≤ a + L → 1 - l * p + Q * U / 6 + M ≤ m + 5 / 6) →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+    intro m a L ha haL hDL hlo hup
+    obtain ⟨j, hjD, hj1, hj2⟩ := exists_j D (by omega) (a := a) (L := L) (by linarith) (by linarith) hDL
+    exact closeBP j m hjD (by linarith) (by linarith) (hlo _ hj1 hj2) (hup _ hj1 hj2)
+  have closeS : v4 = v3 + v1 → ∀ (a L : ℝ), 0 ≤ a → a + L < 1 → 1 ≤ (D : ℝ) * L →
+      (∀ p : ℝ, a ≤ p → p ≤ a + L → M ≤ (p - 1 / 3) * Q) → (∀ p : ℝ, a ≤ p → p ≤ a + L → p ≤ 5 / 6 * (2 - Q)) →
+      ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+        (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+    intro hδ a L ha haL hDL h1 h2
+    obtain ⟨j, hjD, hj1, hj2⟩ := exists_j D (by omega) ha haL hDL
+    exact closeSP hδ j hjD (h1 _ hj1 hj2) (h2 _ hj1 hj2)
+  -- λ = 1 and c ≤ 2 force the sum relation δ = v₁
+  have hδ2 : c ≤ 2 → l = 1 → v4 = v3 + v1 := by
+    intro hc2 hl1'
+    subst hl1'
+    have hv1D : v1 < D := by
+      have : 3 * v1 < 3 * D := by rw [hv3] at hsmall; nlinarith
+      omega
+    have hδD : v4 - v3 < D := by
+      have h' : (v4 : ℝ) * (4 * c - 1) < 4 * c * (c + 1) * D := by
+        rw [hv2R, hv3R] at hnr; nlinarith
+      have hc2R : (c : ℝ) ≤ 2 := by exact_mod_cast hc2
+      have : (v4 : ℝ) < v3 + D := by
+        rw [hv3R]; nlinarith
+      have : v4 < v3 + D := by exact_mod_cast this
+      omega
+    have hm : ((v4 - v3 : ℕ) : ℤ) ≡ v1 [ZMOD D] := by
+      have h3 : (v3 : ℤ) ≡ 0 [ZMOD D] := Int.modEq_zero_iff_dvd.mpr ⟨c + 1, by rw [hv3]; push_cast; ring⟩
+      have := hl.sub h3
+      rw [Nat.cast_sub h34.le]; simpa using this
+    obtain ⟨t, ht⟩ := hm.symm.dvd
+    have hdist : ((v4 - v3 : ℕ) : ℤ) - v1 = D * t := by linarith
+    have hb1 : ((v4 - v3 : ℕ) : ℤ) < D := by exact_mod_cast hδD
+    have hb2 : (v1 : ℤ) < D := by exact_mod_cast hv1D
+    have hb3 : (0 : ℤ) ≤ ((v4 - v3 : ℕ) : ℤ) := by positivity
+    have hb4 : (0 : ℤ) < v1 := by exact_mod_cast h0
+    have ht0 : t = 0 := by
+      rcases lt_trichotomy t 0 with h | h | h
+      · nlinarith
+      · exact h
+      · nlinarith
+    rw [ht0, mul_zero, sub_eq_zero] at hdist
+    have : v4 - v3 = v1 := by exact_mod_cast hdist
+    omega
+  rcases hl1 with rfl | rfl
+  · rcases lt_or_ge 2 c with hc3 | hc2
+    · have hU43 : U ≤ 4 / 3 := hU3 hc3
+      have hQUb2 : Q * U ≤ 16 / 11 := le_trans hQUb (by rw [div_le_iff₀ (by linarith)]; linarith)
+      exact closeA 0 (1/6 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+    · have hδ : v4 = v3 + v1 := hδ2 hc2 (by rfl)
+      rcases (show c = 1 ∨ c = 2 by omega) with rfl | rfl
+      · have hUe : U = 2 := by rw [hUdef]; norm_num
+        have hQU' : Q * U = 2 * Q := by rw [hUe]; ring
+        have hQ43 : Q ≤ 4 / 3 := by have := hQle; rw [hUe] at this; linarith
+        rcases le_or_gt 20 D with hD20 | hD20
+        · have hDL20 : 1 ≤ (D : ℝ) * (1 / 20) := by
+            have : (20 : ℝ) ≤ D := by exact_mod_cast hD20
+            linarith
+          rcases le_total Q (7/6 : ℝ) with hQ1 | hQ1
+          · rcases le_total M (1/6 : ℝ) with hM2 | hM2
+            · exact closeA 0 (1/6 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+            · rcases le_total Q (13/12 : ℝ) with hQ3 | hQ3
+              · exact closeS hδ (2/3 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+              · exact closeS hδ (25/39 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+          · rcases le_total M (1/6 : ℝ) with hM4 | hM4
+            · exact closeA 0 (1/6 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+            · rcases le_total Q (5/4 : ℝ) with hQ5 | hQ5
+              · rcases le_total M (1/4 : ℝ) with hM6 | hM6
+                · exact closeA 1 (4/9 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                · rcases le_total Q (29/24 : ℝ) with hQ7 | hQ7
+                  · rcases le_total M (7/24 : ℝ) with hM8 | hM8
+                    · exact closeA 1 (35/72 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                    · rcases le_total Q (19/16 : ℝ) with hQ9 | hQ9
+                      · exact closeS hδ (13/21 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                      · rcases le_total M (5/16 : ℝ) with hM10 | hM10
+                        · exact closeA 1 (47/96 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                        · rcases le_total Q (115/96 : ℝ) with hQ11 | hQ11
+                          · exact closeS hδ (35/57 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                          · exact closeA 1 (289/576 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+                  · exact closeA 1 (71/144 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+              · exact closeA 1 (11/24 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+        · subst hv2 hv3 hδ
+          interval_cases D
+          · have hv1b : v1 < 10 := by omega
+            interval_cases v1
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact absurd hcop (by norm_num)
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+          · have hv1b : v1 < 11 := by omega
+            interval_cases v1
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+          · have hv1b : v1 < 12 := by omega
+            interval_cases v1
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+          · have hv1b : v1 < 12 := by omega
+            interval_cases v1
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact absurd hcop (by norm_num)
+            · exact absurd hcop (by norm_num)
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact absurd hcop (by norm_num)
+            · exact absurd hcop (by norm_num)
+            · exact absurd hcop (by norm_num)
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+          · have hv1b : v1 < 13 := by omega
+            interval_cases v1
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+      · have hUe : U = 3 / 2 := by rw [hUdef]; norm_num
+        have hQU' : Q * U = 3 / 2 * Q := by rw [hUe]; ring
+        have hQ87 : Q ≤ 8 / 7 := by have := hQle; rw [hUe] at this; linarith
+        rcases le_total M (1/6 : ℝ) with hM12 | hM12
+        · exact closeA 0 (1/6 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+        · rcases le_total M (1/4 : ℝ) with hM13 | hM13
+          · exact closeA 0 (1/6 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+          · rcases le_total Q (15/14 : ℝ) with hQ14 | hQ14
+            · exact closeS hδ (2/3 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+            · exact closeS hδ (29/45 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+  · have hQUb3 : Q * U ≤ 8 / 3 := le_trans hQUb (by rw [div_le_iff₀ (by linarith)]; linarith)
+    exact closeA 0 (1/6 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
+
+/-- **§6, the branch D ≥ 15 with gcd(v₁, D) = 1, every direction.** -/
+theorem s6_branch {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 < v5) (hc : 1 ≤ c)
+    (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D) :
+    ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
+      (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
+  have hnd : ¬ D ∣ v1 := fun h => by
+    have : D ∣ Nat.gcd v1 D := Nat.dvd_gcd h dvd_rfl
+    rw [hcop] at this; have := Nat.le_of_dvd one_pos this; omega
+  by_cases hw : 4 * (v2 : ℝ) * v3 ≤ v4 * (5 * v2 - v3)
+  · exact s6_meeting_uniform h0 h45.le (by omega) hc hv2 hv3 hsmall hnd hw
+  push Not at hw
+  -- the direction λ: v₄ ≡ λ v₁ (mod D), representative in (−D/2, D/2]
+  obtain ⟨u, -, hu⟩ := Nat.exists_mul_mod_eq_one_of_coprime hcop (show 1 < D by omega)
+  set l0 := v4 * u % D with hl0
+  have hl0D : l0 < D := Nat.mod_lt _ (by omega)
+  have hcong0 : (v4 : ℤ) ≡ (l0 : ℤ) * v1 [ZMOD D] := by
+    have a : ((v1 * u : ℕ) : ℤ) ≡ 1 [ZMOD D] := by
+      unfold Int.ModEq; rw [← Int.natCast_mod, hu]
+      exact (Int.emod_eq_of_lt (by norm_num) (by exact_mod_cast (show 1 < D by omega))).symm
+    have b : ((l0 : ℕ) : ℤ) ≡ ((v4 * u : ℕ) : ℤ) [ZMOD D] := by
+      unfold Int.ModEq; rw [hl0, Int.natCast_mod]; exact Int.emod_emod_of_dvd _ dvd_rfl
+    push_cast at a b
+    calc (v4 : ℤ) = v4 * 1 := by ring
+      _ ≡ v4 * (v1 * u) [ZMOD D] := Int.ModEq.mul_left _ a.symm
+      _ = (v4 * u) * v1 := by ring
+      _ ≡ (l0 : ℤ) * v1 [ZMOD D] := Int.ModEq.mul_right _ b.symm
+  by_cases hhalf : 2 * l0 ≤ D
+  · by_cases h1 : l0 = 1
+    · rw [h1] at hcong0
+      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw 1 (by simpa using hcong0) (Or.inl rfl)
+    · exact s6_off_unit h0 h34 h45.le hc hv2 hv3 hsmall hcop hD (l0 : ℤ) hcong0
+        (by rw [abs_of_nonneg (Int.natCast_nonneg _)]; exact_mod_cast hhalf)
+        (by rw [abs_of_nonneg (Int.natCast_nonneg _)]; intro h; exact h1 (by exact_mod_cast h))
+  · push Not at hhalf
+    have hcong1 : (v4 : ℤ) ≡ ((l0 : ℤ) - D) * v1 [ZMOD D] :=
+      hcong0.trans (Int.modEq_iff_dvd.mpr ⟨-(v1 : ℤ), by ring⟩)
+    have hl0D' : (l0 : ℤ) < D := by exact_mod_cast hl0D
+    have habs : |((l0 : ℤ) - D)| = D - l0 := by rw [abs_of_neg (by linarith)]; ring
+    by_cases h1 : l0 + 1 = D
+    · have hm1 : (l0 : ℤ) - D = -1 := by have h' : (l0 : ℤ) + 1 = D := (by exact_mod_cast h1); linarith
+      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw ((l0 : ℤ) - D) hcong1 (Or.inr hm1)
+    · have hh : (D : ℤ) < 2 * l0 := by exact_mod_cast hhalf
+      exact s6_off_unit h0 h34 h45.le hc hv2 hv3 hsmall hcop hD ((l0 : ℤ) - D) hcong1
+        (by rw [habs]; linarith)
+        (by rw [habs]; intro h; apply h1; omega)
+
 end N6Native
 #print axioms N6Native.s6_window_fold_before
 #print axioms N6Native.s6_off_unit
 #print axioms N6Native.s6_sum
+#print axioms N6Native.s6_unit_dir
+#print axioms N6Native.s6_branch

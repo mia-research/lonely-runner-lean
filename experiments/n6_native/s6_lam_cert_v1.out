@@ -1,0 +1,2 @@
+lam +1, root A (L = 1/15): {'leaf': 1, 'node': 0}
+lam +1, root B (L = 1/18): {'leaf': 4, 'node': 3}
