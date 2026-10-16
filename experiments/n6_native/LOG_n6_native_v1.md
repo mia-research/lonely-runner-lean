@@ -1942,3 +1942,25 @@ window_two_uniform), then prove what holds."*
   shifted laps) and, on these ranges, three lap boxes for the (k, 2k, 3k, ·, ·) family. Turning that into a statement
   about all of §8 means showing the listed windows and boxes cover the remaining region of ratios, which is a covering
   statement (E2's framing; the owner's call). BHK's `lonely_8` stays in the dispatch.
+
+## E83 — §8: later windows and lap boxes proved; the open region of ratios (2026-10-16)
+
+Owner: *"Prove the later-window versions (laps (1,2,3), (0,1,1), (0,0,1)) and the three lap boxes, then check what region
+of ratios is still open."*
+- **Proved** (`S8Windows_v2.lean`, versioned successor of v1; `.out` 0 errors; axioms `[propext, Classical.choice,
+  Quot.sound]`) [PROVED]: `block3_window_laps` (runners 1–3 on any laps clear on [L, U], runners 4, 5 by
+  `lonely_of_window`, i.e. `window_two`'s base and residue conditions); `block4_fold_laps` (runners 1–4 on any laps,
+  runner 5 folded when v₅(U − L) ≥ 1/3); `box5` (the five-runner lap box). The requested laps are instances: windows
+  (1,2,3), (0,1,1), (0,0,1); boxes (0,0,0,1,1), (0,0,1,1,2), (0,1,2,3,4) (and the spread / second-lap boxes are
+  (0,0,0,0,0), (0,0,0,0,1)).
+- **Coverage by this finite list** (`s8_coverage_v2.{py,out}`; primitive §8 sets): H = 40: 293,850 of 293,922 closed,
+  72 open; H = 60: 2,404,883 of 2,405,392, 509 open (0.02%). Contributions at H = 60: window (0,0,0) 1,478,383;
+  four-block fold (0,0,0,0) 531,407; windows (1,2,3) 109,383, (0,1,1) 105,790, (0,0,1) 97,457; boxes 69,455 / 7,135 /
+  4,944 / 660 / 269.
+- **The open region** (ratios to v₁, H = 60): v₂ ∈ [5/3, 23/9], v₃ ∈ [8/3, 3], v₄ ∈ [11/3, 29/5], v₅ ∈ [56/11, 59/5];
+  at H = 40 the ranges are inside these. A bounded region at the edge v₃ ≈ 3v₁ of §8; examples (2,4,6,9,23),
+  (3,5,9,13,34), (3,5,9,16,35). Four-block folds on laps (1,2,3,4), (0,1,2,3), (0,1,1,1), (0,0,1,1) close 198 of the 509.
+- **Consequence.** The finite list closes every §8 set on these ranges outside one bounded region of ratios, and the
+  open count grows with H as a region of positive size does. Closing that region needs more windows or boxes and a
+  statement that they cover it (a covering statement over a bounded polytope; E2's framing, the owner's call).
+  BHK's `lonely_8` stays in the dispatch.
