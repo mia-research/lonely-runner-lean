@@ -2132,3 +2132,32 @@ Owner: *"Look for stronger lemmas that cover larger regions of §8, to shorten a
   the four-runner block still has room when runner 4 is a lap ahead. Together with the box (0,0,0,1,1) they close about
   93% of R in the samples. A hand proof is now the four closed-form cases plus 89 boxes; shorter still would need the
   fold-(0,0,0,1) and box-(0,0,0,1,1) regions written as explicit inequalities and their union shown to cover most of R.
+
+## E91 — Parametric families for §5/§6 (2026-10-16)
+
+Owner: *"Leave §8 here and build the parametric statement families for §5/§6."* Observation only.
+`s56_slices_v1.{py,out}`, `s56_families_v1.{py,out}`, `s56_rest_v1.{py,out}`, `s56_rest_corners_v1.out`.
+- **§5/§6 are integer-indexed slices.** §6: v₃ = cD, v₂ = (c−1)D, so x₂ = x₃(c−1)/c, one slice per c ≥ 2. §5: v₁ = c′D, so
+  x₃ − x₂ = 1/c′, one slice per c′ ≥ 1. By slice (sets ≤ 26), the closing three-block windows follow the index: in §6
+  slice c, block {1,2,3} on laps (0, c−1, c) and (0, c−2, c−1) (c = 4: (0,3,4), (0,2,3); c = 7: (0,6,7), (0,5,6)); in §5,
+  runners 2 and 3 on the same lap (0, j, j).
+- **The two families.**
+  - **M6 (meeting windows):** at each meeting time k/D runners 2 and 3 are both on the subject (laps k(c−1), kc). They
+    are clear together just after it on J⁺ₖ = [k/D + 1/(6v₂), k/D + 5/(6v₃)], of length (4c−5)/(6c(c−1)D) > 0, and just
+    before it on the mirror J⁻ₖ. Runner 1 must be clear on a sub-window (its position there is k v₁ mod D, an orbit point),
+    and runners 4, 5 are folded by `window_two`.
+  - **M5 (pair windows):** runners 2 and 3 (within D ≤ v₁ of each other) on one lap j, clear on
+    [(j + 1/6)/v₂, (j + 5/6)/v₃]; runner 1 on a sub-window; runners 4, 5 by `window_two`.
+- **Coverage.** Primitive §5/§6 ≤ 26 (11,861 sets): family 8,381, else four-block fold 3,447, else cluster box 6, rest 27.
+  Random §5/§6 sets ≤ 400 (1,500): family 1,339, fold 161, rest 0.
+- **The 27 left** are all at small ratios (x₄ ≤ 6, x₅ ≤ 13): patterns (1,3,4,5,X) for X = 8..13, (1,4,5,6,X),
+  (1,5,6,7,8), (1,8,9,10,16/18), (1,9,10,11,18), (1,10,11,12,17), and multiples (2,6,8,10,X), (3,9,12,15,X),
+  (2,5,7,9,14/15), (2,8,10,12,23/25). Each pattern has finitely many X in [.., 300]. They sit near the tight set
+  (1,3,4,5,9) and near clusters; the second-lap box (0,0,0,0,1) closes ten of them and other small boxes most of the
+  rest (`s56_rest_corners_v1.out`).
+- **Reading** [observation]. A native §5/§6 route has three parts: (1) the families M6 and M5 (windows next to the
+  meeting times or with runners 2 and 3 on one lap, runner 1 placed by its orbit residue k v₁ mod D, runners 4, 5 folded),
+  parametric in k or j; (2) the four-block fold; (3) a bounded region of small ratios near the tight set and clusters,
+  where a cell certificate with boxes applies, as in §8, with the corner lemma at the tight point. Owed for a proof:
+  that (1) or (2) applies to every set outside the bounded region — a statement about choosing k (or j) by the orbit of
+  v₁ mod D — and the bounded certificate.
