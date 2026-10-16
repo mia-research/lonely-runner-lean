@@ -2037,3 +2037,27 @@ Owner: *"lets continue on"* (after E85's Lean plan).
   leaf file).
 - **Consequence:** the order-six proof of record now takes §7, §2 and §8 by native routes. §5 and §6 remain BHK's form.
   The §8 route is a covering certificate over a bounded region of ratios (E2's framing; the owner asked for it, E85).
+
+## E87 — §5/§6 tested for windows, folds and boxes; §8 "symbolically" (2026-10-16)
+
+Owner: *"Yes test para5 and 6. And also see if para8 can be resolved symbolically and perhaps it can also use only the
+standard axioms"*. Observation only. `s56_window_v1.{py,out}`, `s56_failures_boxes_v1.out`, `s8_cert_small_v1/v2.{py,out}`.
+- **§5/§6** (primitive 5-sets ≤ 24 with 3v₁ < v₃ and D ∣ v₁ (§5, 4,646) or D ∣ v₃, D ∤ v₁ (§6, 3,354)). Allowing any block
+  (three runners + `window_two` on the other two, or four runners + the fifth folded), laps with t ≤ 3/v₁: 7,984 of 8,000
+  closed. A greedy list needs 72 (statement, block, laps) types at H = 24, led by block {1,2,3} on laps (0,1,1) 2,467 and
+  (0,1,2) 1,927; laps grow with v₂/v₁ ((0,3,4), (0,5,6), (0,7,8), …): in §5/§6 the ratios are unbounded, so no finite
+  list of fixed laps can close the region; a §8-style certificate needs a parametric lemma for large ratios.
+- **The 16 unclosed sets** all have lonely sets of width 0 (isolated instants): the tight set (1,3,4,5,9), (1,4,5,6,·),
+  (2,5,7,9,15), and the run family (1, 3k+2, …, 3k+5) — e.g. (1,8,9,10,11) is lonely exactly at 1/6 with every runner on a
+  slot: residues 1,2,3,4,5 mod 6, a residue-isolation arrangement (E65–E66). These are corners where only degenerate
+  boxes meet (like the AP in §8, `grid_tight_pairs`), and there are infinitely many of them, one per k: a finite cell
+  certificate cannot have them all as corners. What would close them uniformly is a parametric lemma for neighbourhoods
+  of residue-isolation points (the two boxes K₀(p=1)+…, K₀(p=5)+… on either side, E65's sheets), not yet stated.
+- **§8 axioms.** `lonely_8_native` already depends only on `[propext, Classical.choice, Quot.sound]` (E86):
+  `decide +kernel` adds no axiom (unlike `native_decide`).
+- **§8 symbolically.** The first four statements are closed-form case conditions: x₄(5 − x₃) ≥ 4x₃ (first window),
+  x₄ < 5 ∧ x₅(5 − x₄) ≥ 2x₄ (four-block fold), x₅ ≤ 5 (spread box), x₄ ≤ 5 ∧ 7x₄ ≤ 5x₅ ∧ x₅ ≤ 11 (second-lap box);
+  they close 98.3% of §8 sets by count (E82). The remaining bounded region needs the later windows and boxes on cells.
+  Two attempts to shrink the 760-leaf tree with free split points failed at the AP corner (1,2,3,4,5): x₂ = 2, x₃ = 3,
+  x₄ = 4, x₅ = 5 must be cell boundaries, because only the two degenerate boxes (0,0,0,0,0) and (0,1,2,3,4) meet there.
+  A hand-symbolic §8 would be the four closed-form cases plus a hand cover of the bounded remainder; not attempted.
