@@ -69,3 +69,44 @@ then check it on all 36 T6 sets.
 
 Scripts: `o7_map_v1.py`, `o7_exc_v1.py` .. `o7_exc_v5.py`, `o7_prefix_v1.py`. The 4-prefix criterion W4 v4 >= 4/7
 (`o7_prefix_v1.out`) leaves 41,281 of 455,041 prefixes short at every ratio, so it does not separate the exceptions.
+
+## E2 (2026-10-17) Phase 1 extended: map to 60, tight search to 70
+
+`o7_map_v2.py` uses the same window types as `o7_map_v1.py`, run in parallel over (v1, v2). It computes exact
+fractions for every T6 and TIGHT set. It reproduces the <= 30 counts of E1 exactly (`o7_map_v2_30.out`).
+
+| range | sets | T4 | T5 | T5 share | T6 | TIGHT | not lonely |
+|---|---|---|---|---|---|---|---|
+| <= 30 | 588,559 | 582,712 | 5,810 | 0.99% | 36 | 1 | 0 |
+| <= 40 | 3,797,877 | 3,785,588 | 12,249 | 0.32% | 39 | 1 | 0 |
+| <= 50 | 15,705,403 | 15,684,107 | 21,254 | 0.14% | 41 | 1 | 0 |
+| <= 60 | 49,430,584 | 49,397,778 | 32,764 | 0.066% | 41 | 1 | 0 |
+
+**Tight search** (`o7_tight_v2_70.out`): 129,389,133 primitive sets <= 70 were searched. The only tight set is
+(1,2,3,4,5,6), with exact longest length 0. No set is not lonely.
+
+**T6 above 30.** Five new sets appear, all at most 47. Nothing new appears between 50 and 60.
+
+| set | exact longest length | longest AP | relation to the <= 30 families |
+|---|---|---|---|
+| (2,8,10,12,14,31) | 3/392 | 4 | 2(1,4,5,6,7) prefix |
+| (2,12,14,16,18,35) | 1/126 | 4 | 2(1,6,7,8,9) prefix |
+| (3,12,15,18,21,46) | 1/196 | 4 | 3(1,4,5,6,7) prefix |
+| (3,12,15,18,21,47) | 1/196 | 4 | 3(1,4,5,6,7) prefix |
+| (4,12,16,20,29,31) | 25/3248 | 3 | 4(1,3,4,5) prefix |
+
+Each one is a scaled order-six-type prefix plus one or two free speeds. That is the g4 > 1 / g5 > 1 feature of E1.
+At <= 60 the 41 T6 sets split as coprime prefixes 23, g4 > 1 6, g5 > 1 12. Their longest-AP split is 3: 8,
+4: 26, 5: 7, the same as at <= 50.
+
+**T5 at <= 60.**
+- Folded runner: v6 31,077, v5 1,186, v4 437, v3 64.
+- Prefix gcd: coprime 19,148, g4 > 1 5,408, g5 > 1 8,208.
+- The T5 share falls about 15-fold from 30 to 60. The T6 count is flat from 50 to 60.
+
+**Consequence:** in these ranges the T6 exceptions are a finite list of 41 sets with v6 <= 47 (EMPIRICAL to 60).
+The T5 exceptions keep growing in count and fall in share. Phase 2 targets are:
+- (a) a closed form for the 41 T6 sets as two-edge pinches (E1 (ii));
+- (b) the T5 sets as a 5-block with the fastest runner folded, which needs a region description, not a list.
+
+The single tight set holds to 70.
