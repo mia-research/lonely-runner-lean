@@ -1717,3 +1717,25 @@ period; runner d blocks opening k iff d(6k+1) mod 6b lies outside [b, 5b].
   blocks fall on the same openings. A forcing argument along this line needs a reason the blocks must coincide (E43's
   alignment is one such description at divisible flanks). This is the covering framing E2 set aside; the owner raised it
   here.
+
+## E71 — Correction to E70: counting the global-isolation opportunities, grid by grid (2026-10-16)
+
+Owner: *"What are you talking about global isolation has multiple instances and deformation (like residue)
+opportunities"*. E70 counted one flank's openings in one period. Those are the fine opportunities, where each runner
+blocks about a third. The owner's opportunities are the unit-grid instants c/q (gcd(c, q) = 1), the global-isolation
+instances and their residue foldings (E66: every lonely instant is one). At c/q runner d reads (d c mod q)/q.
+Observation only. `grid_opportunities_v1.{py,out}`, `_v2`, `_v3`.
+- **q* = the least q with a lonely unit instant.** Exhaustive, every primitive 5-set: [1, 40] (641,166 sets) max q* 27,
+  at (10,13,23,33,36); [1, 60] (5,302,911 sets) max q* 28, at (11,23,26,34,60). q* ≤ 11 for 5,107,054 of the 5,302,911.
+  Random samples: primitive 5-sets ≤ 1000 (19,232) max 23; SixResidual sets with entries ≤ 80, 160, 320 (400 each)
+  max 17 each. SixResidual ≤ 40: q* from 7 to 21, with 2 to 8 lonely unit instants at q* (mirror pairs).
+- So the lonely instant is found among a small number of coarse opportunities: before q* in SixResidual ≤ 40 there are
+  10–50 blocked grid instants in most sets (Σ φ(q), q < q*). Blocked opportunities are blocked by 1 runner (169,204),
+  2 (128,617), 3 (53,855), 4 (15,837), 5 (1,206).
+- q* is not the cascade's modulus: T's denominator equals q* in 4 of 17,135. The cascade finds the earliest isolation
+  in time; the grid count finds the coarsest fold.
+- **Reading** [observation]. Counted over the coarse grid instants, five runners run out of blocks quickly: across
+  5.3 million sets an isolation appears by q = 28. The largest q* rose from 27 to 28 between [1, 40] and [1, 60], so a
+  uniform bound is not established by these ranges. A statement "every primitive 5-set has a lonely c/q with q ≤ Q₀"
+  depends only on the speeds mod lcm(1..Q₀): a finite residue statement. Literature on lonely instants with small
+  denominators not checked (citation-verifier owed if used).

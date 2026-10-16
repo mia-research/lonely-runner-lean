@@ -1,0 +1,6 @@
+sets 17135
+q* (least grid with a lonely unit instant): [(7, 4129), (8, 2853), (9, 4372), (10, 2193), (11, 2879), (12, 222), (13, 279), (14, 95), (15, 83), (16, 24), (17, 5), (21, 1)]
+lonely unit instants at q*: {2: 13887, 4: 2863, 6: 362, 8: 23}
+blocked opportunities before q* (binned by 10): [(10, 6982), (20, 6565), (30, 2879), (40, 501), (50, 95), (60, 83), (70, 29), (120, 1)]
+how many runners block each blocked opportunity (multiplicity): {1: 169204, 2: 128617, 3: 53855, 4: 15837, 5: 1206}
+q* equals the cascade instant's denominator: {False: 17131, True: 4}
