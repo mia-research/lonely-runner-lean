@@ -193,3 +193,50 @@ with a bound on kappa. The T6 exceptions are explicit edge-instant certificates.
 Still not understood:
 - why these 17 pinch classes and not others: the T4/T5 failure at those sets has no derived explanation;
 - whether the T6 list is finite beyond 60.
+
+## E4 (2026-10-17) Phase 3a: kappa lower bound — 1/21 proved; 3/28 needs a certificate
+
+**Map:** order seven, the v6-fold region of E3; target kappa(P) = v5 W5(P) >= 3/28 for all integer 5-prefixes.
+
+**Proved (Lean, nested repo 89b3faa, `LRC/Spec/OrderSevenKappaN.lean`):**
+- `LRC.O7Kappa.window_of_six`: at most five positive whole numbers bounded by V are all at distance >= 1/7 on a closed
+  interval of half-width 1/(42V).
+- `LRC.O7Kappa.kappa_ge`: as an interval [L, L + 1/(21V)].
+- Proof: the native order-six instant (`lonely_six_nat`, distance >= 1/6), plus `circDist_lipschitz`. Each reading
+  moves at most V/(42V) = 1/42.
+- `#print axioms` for both: [propext, Classical.choice, Quot.sound]. Checked with `lake env lean` on the file. The
+  module is not yet imported by a build target.
+
+**Consequence `[PROVED]`:** kappa >= 1/21 for every 5-prefix, so v6 >= 6 v5 closes every order-seven set by the v6
+fold (E3). The T5 fold step itself is not yet in Lean.
+
+**Why elementary lemmas stop short of 3/28** (`o7_kappa_chain_v1_40.out`):
+- Chain bound: take a block B of k runners; native order k+1 gives a margin of 1/(k+1); fold the rest in worst case
+  with f(l) = clip((l - 2/7)/2, 0, 5/7).
+- This reaches 3/28 on only 38,771 of 641,166 primitive prefixes <= 40 (6.05%).
+- The rest concentrate at small v5/v4 (358,448 in the bin [1, 1.25)). Every run of five consecutive integers sits
+  at 1/21.
+- So worst-case folding loses the structure that gives the true windows (3/28 and above).
+
+**Real-ratio landscape** (`o7_kappa_real_v1.out`, `o7_kappa_real_v2.out`):
+- Random real tuples (v5 = 1, ratios in (0.02, 1), 4,000 each) have min kappa 0.282 at T = 20, 0.354 at T = 100
+  and 0.443 at T = 400. None fall below 3/28.
+- Real perturbations of the minimisers (1,3,4,5,7), (1,4,5,6,7) and (1,2,3,4,5) at relative sizes 1e-2, 3e-3 and
+  1e-3 (400 each) gave min kappa >= 0.130. None fall below 3/28.
+- So small kappa sits at rational points: the 9 prefixes of E3, plus one-parameter families whose 4-subset is a
+  scaled low point. For example c(1,3,4,5) with v5 = 5c forces kappa <= 5 W(1,3,4,5) = 5/28 whatever the fifth speed.
+
+**What a 3/28 proof needs** (design, same pattern as §5/§6 of order six):
+- A box tree over the ratios x_i = v_i/v5 in (0, 1)^4.
+- Window leaves: an explicit lap box [L, U] in units 1/v5 with laps n_i, valid on the box through term-wise linear
+  bounds (the `tlo`/`pairOK` pattern), with T <= 20 enough for generic boxes.
+- The 9 rational points and the 4-subset families: kappa equals 3/28 exactly at two of the points. A real box around
+  them loses the pinch window linearly, and the recovering windows appear only after time ~1/epsilon. This is the
+  tight-point situation of order six §5: integer-exact handling, or a 2D-orbit / resonant-direction treatment as in
+  §6.
+- Relaxed alternative: a target kappa0 < 3/28 (for example 1/10, so rho = 20/7) leaves slack 1/140 at every low
+  point. Then fixed neighbourhoods with bounded-time windows suffice and no tight-point work is needed. The bounded
+  region becomes v5 < v6 < (20/7) v5 instead of (8/3) v5.
+
+**Not understood:** why the minimum is 3/28, attained at (1,3,4,5,7) and (1,4,5,6,7). The exact window structure
+at those two points has not been derived.
