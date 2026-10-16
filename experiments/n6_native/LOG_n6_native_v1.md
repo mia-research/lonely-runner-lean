@@ -2187,3 +2187,21 @@ Quot.sound]` for all three) [PROVED]; `s6_coverage_v1.{py,out}`, `s5_coverage_v1
   2v₁ < v₂ < (5/2)v₁ and short windows go to the sharp conditions or the fold.
 - **Owed:** a proved existence statement for the cases the uniform conditions miss (runner 4 within 0.7D of runner 3 in §6;
   short pair windows in §5), and the bounded small-ratio certificate.
+
+## E93 — The near-runner case: §6 by a meeting-window fold (a 2D orbit); §5 short windows (2026-10-16)
+
+Owner: *"Yes"* (to "the near-runner case or the bounded certificate"; taken as the recommended option, near-runner first).
+Observation only. `s6_near_v1.{py,out}`, `s6_near_v2.{py,out}`, `s5_short_v1.{py,out}`.
+- **§6, runner 4 near runner 3** (the 4,306 primitive §6 sets ≤ 34 where `s6_meeting_uniform`'s condition fails): all
+  4,306 are closed by a **meeting-window four-block fold**: for some k ≤ 2D, on the window just after (or before) k/D,
+  runners 2, 3 are clear (laps ck, (c+1)k), runners 1 and 4 are clear on a common sub-window, runner 5 is folded alone.
+- **As a 2D orbit.** At k/D runner 1's phase is p₁ = (k v₁ mod D)/D and runner 4's is p₄ = (k δ mod D)/D, δ = v₄ − v₃.
+  The fold works when (p₁, p₄) lies in a region fixed by the ratios (runner 1 sweeps less than 5/18 across the window,
+  runner 4 about (4c−1)/(6c) of a lap). Successful k by sixths of (p₁, p₄): (1,1) 564, (3,1) 476, (2,1) 336, (2,2) 312,
+  … — spread over many cells. A product box [1/6, 5/9] × [0, b] is not the region: the orbit misses it for small D
+  (e.g. (1,2,4,5,X), D = 2) and the fold fails at some of its points (b = 1/4: 972 of 4,054). So the proof is the §7 shape:
+  the orbit k ↦ (k v₁, k δ) mod D must meet a ratio-dependent region, as in `s7_main_route` (2D global isolation) — owed.
+- **§5 short pair windows** (7,589 primitive §5 sets ≤ 30 not closed by the uniform pair window): a pair-window four-block
+  fold (runners 2, 3 on one lap j; runners 1 and 4, or 1 and 5, clear on a sub-window; the other folded) closes 6,042; the
+  1,547 left include the bounded small-ratio set (E91) and need other blocks or the sharp conditions (E92 counts).
+- Not started this round: the bounded small-ratio certificate.
