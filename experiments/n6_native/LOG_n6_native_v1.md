@@ -1808,3 +1808,21 @@ Owner: *"Compare your result to where the cascade points the isolation point is"
   as a shape (the cascade's instant is the final flank's entry into the other four's window), with order-five slack in
   that window in 83% of sets; in 17% the four's window at T has no 1/5 instant, so there the window is not order-five
   slack, and what supplies it is not yet described.
+
+## E76 — The 2,989 sets: the same window-and-fold one order down (2026-10-16)
+
+Owner: *"what you are describing is classes of arrangement, so yes look at those 2989 sets but all they will be doing is
+supplying or corroborating the arrangement cascade outcome type we have previously looked into"*. Observation only.
+`noslack_types_v1.{py,out}`, `noslack_lower_v1.{py,out}`.
+- **Against earlier outcome types.** BHK §7 is 0.66 of the 2,989 (0.51 of the rest); one-move walks 0.54 (0.40); final
+  flank fastest 0.39 (0.22); early ending 0.996 (0.958). The final flank's opening is often on a high lap: (rank 5,
+  lap 7) 258, (5, 6) 160, (4, 6) 149, against laps 0–2 dominating the rest.
+- **One order down.** At the cascade instant, a triple of runners has its 1/6-window around T with a 1/4 instant
+  (order-four slack, two runners folding through) in 2,911 of the 2,989; in 77 only a pair has a 1/3 instant (three
+  folding); in 1 neither: (2, 9, 13, 36, 40), T = 7/78, final flank 13. Commonest triples: ranks (2,3,5) 1,782,
+  (2,3,4) 1,641, (2,4,5) 1,532.
+- **Reading** [observation]. The other source is the same mechanism at the next level: a lower-order arrangement
+  isolated with room supplies a window, and the remaining runners fold through it. By depth: four-runner slack 14,146,
+  three-runner slack 2,911, two-runner slack 77, none found 1. The three-runner level is the shape of the §7 native route
+  (E51–E56: runners 1–3 supply the window, `window_two` folds runners 4 and 5) and of §5's two steps (E38), now seen with
+  any triple. The single remaining set is the next thing to look at.

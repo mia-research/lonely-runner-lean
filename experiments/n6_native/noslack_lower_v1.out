@@ -1,0 +1,4 @@
+sets without order-five slack: 2989
+{('some triple with 1/4 slack', 'some pair with 1/3 slack'): 2911, ('no triple', 'some pair with 1/3 slack'): 77, ('no triple', 'no pair'): 1}
+triples (speed ranks) with order-four slack around T, commonest: [((2, 3, 5), 1782), ((2, 3, 4), 1641), ((2, 4, 5), 1532), ((3, 4, 5), 1002), ((1, 2, 5), 513), ((1, 2, 3), 391), ((1, 2, 4), 274), ((1, 3, 5), 224), ((1, 4, 5), 183), ((1, 3, 4), 92)]
+no lower-order slack at all: (2, 9, 13, 36, 40) T = 7/78 final flank 13 readings ['7/39', '21/26', '1/6', '3/13', '23/39']
