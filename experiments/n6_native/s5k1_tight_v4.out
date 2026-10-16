@@ -1,0 +1,36 @@
+(A) a = 0, b = 0, e = d5/c:
+   c    6 d5 -1: e = -0.1667, earliest T = 0.4333, |e| T = 0.0722, window length (T) 0.00063
+   c    6 d5 +1: e = +0.1667, earliest T = 0.4545, |e| T = 0.0758, window length (T) 0.00379
+   c   10 d5 -1: e = -0.1000, earliest T = 0.5417, |e| T = 0.0542, window length (T) 0.00140
+   c   10 d5 +1: e = +0.1000, earliest T = 0.4579, |e| T = 0.0458, window length (T) 0.00046
+   c   10 d5 -3: e = -0.3000, earliest T = 0.4333, |e| T = 0.1300, window length (T) 0.00728
+   c   10 d5 +3: e = +0.3000, earliest T = 0.4480, |e| T = 0.1344, window length (T) 0.01030
+   c   20 d5 -1: e = -0.0500, earliest T = 1.4333, |e| T = 0.0717, window length (T) 0.00056
+   c   20 d5 +1: e = +0.0500, earliest T = 1.4549, |e| T = 0.0727, window length (T) 0.00345
+   c   20 d5 -3: e = -0.1500, earliest T = 0.5417, |e| T = 0.0812, window length (T) 0.00447
+   c   20 d5 +3: e = +0.1500, earliest T = 0.4554, |e| T = 0.0683, window length (T) 0.00296
+   c   40 d5 -1: e = -0.0250, earliest T = 2.5417, |e| T = 0.0635, window length (T) 0.00244
+   c   40 d5 +1: e = +0.0250, earliest T = 2.4561, |e| T = 0.0614, window length (T) 0.00219
+   c   40 d5 -3: e = -0.0750, earliest T = 1.4333, |e| T = 0.1075, window length (T) 0.00458
+   c   40 d5 +3: e = +0.0750, earliest T = 1.4509, |e| T = 0.1088, window length (T) 0.00746
+   c   80 d5 -1: e = -0.0125, earliest T = 3.5417, |e| T = 0.0443, window length (T) 0.00029
+   c   80 d5 +1: e = +0.0125, earliest T = 3.4582, |e| T = 0.0432, window length (T) 0.00017
+   c   80 d5 -3: e = -0.0375, earliest T = 1.5417, |e| T = 0.0578, window length (T) 0.00180
+   c   80 d5 +3: e = +0.0375, earliest T = 1.4569, |e| T = 0.0546, window length (T) 0.00144
+   c  160 d5 -1: e = -0.0063, earliest T = 7.5417, |e| T = 0.0471, window length (T) 0.00061
+   c  160 d5 +1: e = +0.0063, earliest T = 7.4578, |e| T = 0.0466, window length (T) 0.00055
+   c  160 d5 -3: e = -0.0187, earliest T = 2.5417, |e| T = 0.0477, window length (T) 0.00067
+   c  160 d5 +3: e = +0.0187, earliest T = 2.4578, |e| T = 0.0461, window length (T) 0.00049
+(B) b = 0, e = 0 (v5 = v3 + v4), a = d2/c:
+   c    6 d2 -1: a = -0.1667, earliest T = 0.4333, |a| T = 0.0722, window length (T) 0.00063
+   c    6 d2 +1: a = +0.1667, earliest T = 0.5200, |a| T = 0.0867, window length (T) 0.00727
+   c   10 d2 -1: a = -0.1000, earliest T = 0.4682, |a| T = 0.0468, window length (T) 0.00192
+   c   10 d2 +1: a = +0.1000, earliest T = 0.5285, |a| T = 0.0528, window length (T) 0.00268
+   c   20 d2 -1: a = -0.0500, earliest T = 1.4333, |a| T = 0.0717, window length (T) 0.00056
+   c   20 d2 +1: a = +0.0500, earliest T = 1.3661, |a| T = 0.0683, window length (T) 0.00055
+   c   40 d2 -1: a = -0.0250, earliest T = 1.4670, |a| T = 0.0367, window length (T) 0.00047
+   c   40 d2 +1: a = +0.0250, earliest T = 1.5321, |a| T = 0.0383, window length (T) 0.00069
+   c   80 d2 -1: a = -0.0125, earliest T = 3.4678, |a| T = 0.0433, window length (T) 0.00140
+   c   80 d2 +1: a = +0.0125, earliest T = 3.5306, |a| T = 0.0441, window length (T) 0.00150
+   c  160 d2 -1: a = -0.0063, earliest T = 5.4668, |a| T = 0.0342, window length (T) 0.00012
+   c  160 d2 +1: a = +0.0063, earliest T = 5.5330, |a| T = 0.0346, window length (T) 0.00017

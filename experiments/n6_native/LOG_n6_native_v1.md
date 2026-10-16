@@ -2616,3 +2616,35 @@ windows."* Mid-turn: *"Thats been running for 34mins or so are you sure its ok?"
     neighbours are lonely only at later laps, by an amount that grows as the perturbation shrinks. That is a
     displacement-type statement (a small speed perturbation δ accumulates to a band-sized shift after about 1/(6δ)
     of time) rather than a window at bounded laps. Not yet tested.
+
+## E108 — §5, k = 1: the neighbourhood of the tight set (1, 3, 4, 5, 9) (2026-10-17)
+
+Owner: *"Tight neighbourhood and then k=1 cert"*. Observation; `s5k1_tight_v2..v4.{py,out}`.
+- **Coordinates.** Write ratios to v₁ as v₂/v₁ = 3 + a, v₃/v₁ = 4 + a (k = 1), v₄/v₁ = 5 + b, v₅/v₁ = 9 + a + b + e. The
+  tight set is a = b = e = 0. It is the meeting point of three relations besides v₃ = v₁ + v₂: v₂ = 3v₁ (a), v₄ = 5v₁ (b),
+  v₅ = v₃ + v₄ (e). Its lonely instants are T = v₁t ≡ ±1/6 (mod 1), with readings (1/6, 1/2, 2/3, 5/6, 1/2) at T = 1/6:
+  runners 1 and 4 on band edges.
+- **Every integer neighbour checked is lonely** (`s5k1_tight_v3`, all 17,704 sets (c, 3c + d₂, 4c + d₂, 5c + d₄, 9c + d₅),
+  6 ≤ c ≤ 40, |d₂|, |d₄| ≤ 3, |d₅| ≤ 5, primitive, ordered).
+- **b < 0** (v₄ < 5v₁): the earliest lonely interval starts exactly at T = 1/6 in every case (7,699 sets). Runner 4 reads
+  5/6 + b/6 < 5/6 there, and the window is T ∈ [1/6, 5/(6(5 + b))], of length (−b)/(6(5 + b)). Runners 2, 3, 5 are in
+  their bands on it when a and e are small (a ≤ 1 + b, 7 ≤ v₅/v₁, 5v₅ ≤ 11v₄ — conditions of fixed size, not relative
+  to b).
+- **b > 0**: the mirror window T ∈ [25/(6(5 + b)), 5/6] before the tight instant 5/6 (runner 1 at 5/6 from inside, runner 4
+  at 1/6 + 5b/6 on lap 4), of length 5b/(6(5 + b)). Earlier windows (T ≈ 0.21–0.48) also occur in the data.
+- **b = 0** (v₄ = 5v₁): the windows come later, and the time grows as the deviation shrinks (`s5k1_tight_v4`):
+  - a = 0: earliest T ≈ (0.04–0.07)/|e|, e.g. c = 160, d₅ = ±1, T ≈ 7.5;
+  - e = 0: T ≈ (0.03–0.09)/|a|.
+
+  Mechanism: with b = 0 and a = 0, runners 1–4 are exactly (1, 3, 4, 5)·v₁, whose lonely windows recur every period
+  (T ∈ [n + 13/30, n + 11/24] and others). At those windows runner 5 reads 9T + eT with 9T mod 1 ∈ [0.9, 0.125], so
+  runner 5 starts just outside its band. The deviation eT accumulates by e per period, and the first n at which it has
+  carried runner 5 into its band gives the window. This is displacement along a progression (step e per period), the
+  `step_meets_arc` mechanism, at unbounded laps.
+- **Reading** [observation]. A neighbourhood of the tight point has no box certificate at bounded laps. It splits by
+  which relation is broken:
+  - b ≠ 0: an explicit window at the first tight instant (T = 1/6 or 5/6), of length proportional to |b|;
+  - b = 0: a progression in the deviations (a·n, (a + e)·n) over the recurring windows of (1, 3, 4, 5) — a 2D
+    displacement orbit, as in §6's generic orbits.
+
+  Away from the tight point the k = 1 certificate is the E106 tree with κ = 1.
