@@ -1791,3 +1791,20 @@ per lap. The lonely instants found for (1,2,3,4,lcm(1..Q₀)) — 3/16, 4/23, 5/
   across a window of length 1/24, so for X ≥ 8 it cannot stay inside its blocked third for the whole window. The grid
   bound fails because the instant's denominator follows the fifth runner; the AP-plus-residue mechanism does not.
   This is the lower-order slack that the merge-and-stepping reduction and Renault's order-five seed also use.
+
+## E75 — Where the cascade puts the isolation, against the lower-order window (2026-10-16)
+
+Owner: *"Compare your result to where the cascade points the isolation point is"*. Observation only.
+`cascade_vs_window_v1.{py,out}`.
+- **Family (1,2,3,4,L), L = lcm(1..Q₀).** The cascade instant is T = (L+1)/(6L) = 1/6 + 1/(6L) for Q₀ = 6, 12, 20, 28, 40:
+  the fast runner's first entry after the AP window [1/6, 5/24] opens, with L as the final flank. The cascade picks the
+  earliest point of the same AP window that E74's grid instants (3/16, 4/23, 5/29, …) sit inside; T − 1/6 shrinks like
+  1/(6L).
+- **SixResidual ≤ 40.** At T the final flank b reads exactly 1/6 and the other four are lonely on a window W containing
+  T: T inside W in 16,647, at W's left end in 488. The other four are also lonely at 1/5 somewhere in W (order-five slack)
+  in 14,146 of 17,135; not in 2,989. b is the fastest runner in 4,275. W's length × d_min mostly 0.01–0.08.
+- **Reading** [observation]. On the family the cascade does exactly the window-and-fold: it enters the lower-order
+  window at its start and stops at the fold runner's first opening inside it. On SixResidual the same picture holds
+  as a shape (the cascade's instant is the final flank's entry into the other four's window), with order-five slack in
+  that window in 83% of sets; in 17% the four's window at T has no 1/5 instant, so there the window is not order-five
+  slack, and what supplies it is not yet described.

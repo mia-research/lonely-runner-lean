@@ -1,0 +1,11 @@
+(1) family (1,2,3,4,L)
+  Q0=6: cascade T=61/360 (~0.16944), final flank L; AP window 1/6..5/24; T - window start = 2.78e-03
+  Q0=12: cascade T=27721/166320 (~0.16667), final flank L; AP window 1/6..5/24; T - window start = 6.01e-06
+  Q0=20: cascade T=232792561/1396755360 (~0.16667), final flank L; AP window 1/6..5/24; T - window start = 7.16e-10
+  Q0=28: cascade T=80313433201/481880599200 (~0.16667), final flank L; AP window 1/6..5/24; T - window start = 2.08e-12
+  Q0=40: cascade T=5342931457063201/32057588742379200 (~0.16667), final flank L; AP window 1/6..5/24; T - window start = 3.12e-17
+(2) SixResidual sets 17135
+   cascade instant in the other four's 1/6-window: {'T inside the window': 16647, "T at the window's left end": 488}
+   the other four lonely at 1/5 somewhere in that window (order-five slack): {True: 14146, False: 2989}
+   final flank is the fastest runner: {False: 12860, True: 4275}
+   window length x d_min, commonest: [(0.02, 2362), (0.03, 2225), (0.04, 2031), (0.01, 1773), (0.05, 1633), (0.06, 1628), (0.07, 1312), (0.08, 968)]
