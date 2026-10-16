@@ -2436,3 +2436,53 @@ Owner: *"Close the last §6 case (g > 1, g | v4, D/g >= 15) by restating s6_bran
   module.
 - **Order six's proof of record now:** §2, §6, §7, §8 native; §5 (`lonely_5`, Proposition 11 at named instants) is the
   remaining BHK case.
+
+## E104 — §5 natively: observation (pair windows, four-block fold) (2026-10-16)
+
+Owner: *"Start §5 natively: observation first, pair windows and the four-block fold, as for §6."* Observation only.
+`s5_obs_v1..v4.{py,out}`. §5: D = v₃ − v₂ divides v₁, 3v₁ < v₃; k = v₁/D (BHK split: k = 1 Proposition 11 part 1,
+k = 2 part 2, k ≥ 3 Case 5.1 — `OrderSixSecFiveN.lean` header).
+- **The relation.** For integers, x₁ ≡ k(x₃ − x₂) (mod 1) at every instant: runner 1 reads k times the 2–3 gap.
+  k = 1 is the sum relation x₃ = x₁ + x₂ (v₃ = v₁ + v₂).
+- **Pair windows.** Runners 2, 3 on one lap j are clear together on P_j = [(j+1/6)/v₂, (j+5/6)/v₃], nonempty iff
+  6jD ≤ 4v₂ − v₃, so all lie before the first meeting 1/D. Across them runner 1's phase is the progression j·v₁/v₂
+  (step kD/v₂), and runner 4's is j·v₄/v₂.
+- **Coverage** (`s5_obs_v1`; A uniform pair window, B sharp `window_two`, C pair-window four-block fold, D other
+  four-block fold, E cluster box, F none):
+
+  | k | primitive ≤ 36 (32,292) | random ≤ 2,000 (2,000) |
+  |---|---|---|
+  | 1 | A 5,140, B 1,824, C 6,357, D 3,139, E 9, F 34 | A 135, B 37, C 133, D 59 |
+  | 2 | A 4,044, B 1,367, C 1,346, D 123 | A 111, B 31, C 45, D 4 |
+  | ≥ 3 | A 6,520, B 1,695, C 681, D 13 | A 1,344, B 82, C 19 |
+
+  Closing j: for k ≥ 3, in the first quarter of the range with runner 1 in [1/6, 1/3) (mostly); for k = 1, spread over
+  the first three quarters.
+- **The explicit lap** j₀ = ⌈v₂/(6v₁) − 1/6⌉ (`s5_obs_v4`), where runner 1 enters its first band at the start of P_{j₀}:
+  for k ≥ 2 every uniform pair-window closure happens at j₀ (k = 2: 4,044 of 4,044; k ≥ 3: 6,520 of 6,520; random:
+  111 and 1,344). B/C sets have runner 4 near runner 3: v₄/v₃ ≤ 1.25 (k ≥ 3; median 1.07) and ≤ 1.47 (k = 2; median
+  1.12). This is the near-runner case of §6 (E93), here on the pair-window progression. For k = 1, 4,951 at j₀ and 189
+  at another j.
+- **What pair windows miss** (`s5_obs_v2`, first closing four-block fold). k = 1:
+  - runner 3 folded alone (block {1, 2, 4, 5}), runner 1 on its first lap: 1,415;
+  - block {1, 2, 3, 4/5} with runner 3 one lap ahead of runner 2 (m₃ − m₂ = 1) and runner 1 on lap 0: 1,356 (and 102
+    on lap 1);
+  - runner 2 folded: 216.
+
+  k = 2: 123, spread over runner 3 folded (49), runner 4 folded with m₃ − m₂ = 1 and runner 1 on lap 1 (38), and others.
+  k ≥ 3: 13.
+- **Cluster box family** (k = 1): (1, w, w+1, w+2, w+3), w = 8, 11, …, 32 (w ≡ 2 mod 3): no fold up to 3/v₁; the box
+  (0, m, m, m, m) closes them.
+- **The 34 left (F)** (`s5_obs_v3`): every one is closed by a lap box with runner 1 on lap 0 (e.g. (0,0,0,0,1),
+  (0,1,1,1,3), (0,1,1,2,5)). They fall into eleven patterns: (1,3,4,5), (1,4,5,6), (1,5,6,7), (1,8,9,10), (1,9,10,11),
+  (1,10,11,12), (2,5,7,9) and multiples (2,6,8,10), (2,8,10,12), (3,9,12,15), (4,10,14,18), each with finitely many v₅.
+  This is the bounded small-ratio region near the tight set (1,3,4,5,9) seen in E91.
+- **Reading** [observation]. For k ≥ 2, §5 has the shape of §6 with pair windows in place of meeting windows:
+  1. the uniform pair window at the explicit lap j₀;
+  2. the near-runner case (v₄/v₃ small) by a pair-window fold, i.e. a 2D progression of (runner-1, runner-4) phases
+     over j;
+  3. a few folds.
+
+  k = 1 (the sum relation) needs windows past the pair windows: runner 3 folded, or runners 2 and 3 one lap apart with
+  x₃ = x₁ + x₂. It also has a cluster-box family and a bounded set closed by lap boxes. Not established: none of this
+  is a proof; the counts are samples (primitive ≤ 36, random ≤ 2,000).
