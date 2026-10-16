@@ -2086,3 +2086,28 @@ how we got there."* `s56_failures_v2.{py,out}`, `s56_cluster_box_v1.{py,out}`.
   whose laps scale with m, covering a corridor to infinity — rather than more fixed boxes. The cluster box is the first
   such family; the residue-isolation corners (E87, e.g. (1,8,9,10,11)) sit inside this family's corridor. The route
   stands; the statement list needs parametric members.
+
+## E89 — Is §5/§6 at 100%? The corner lemma; hand-symbolic §8 (2026-10-16)
+
+Owner: *"So is that full coverage? We now have a 100%? then move on to corner lemma and hand symbolic"*.
+- **Coverage.** On the 8,000 §5/§6 sets ≤ 24, every set is closed by some statement: windows/folds 7,984; the 16 by lap
+  boxes (the cluster box family, (0,2,2,3,3), and the boxes at their lonely instants). That is 100% of the tested sets,
+  but not a proof: a lap box exists for every lonely set by definition, so coverage only means something for a fixed or
+  parametric list, and the §5/§6 region of ratios is unbounded. No such list is established yet.
+- **Corner lemma** (`corner_lemma_v1.{py,out}`, `_400.out`; `CornerLemma_v1.lean`) [observation + PROVED]. At a
+  residue-isolation arrangement d (residues 1..5 mod 6, one each) the boxes K = ⌊d/6⌋ and K' = ⌊5d/6⌋ each have exactly
+  one equality pair at d (entry runner e of residue 1 against exit runner x of residue 5) and all other pairs strict;
+  the two equalities are the two sides of one hyperplane d_e v_x = d_x v_e (because 5d_x = 6K'_x + 1, 5d_e = 6K'_e + 5).
+  Checked on seven such d (including (1,2,3,4,5), (1,8,9,10,11), (5,7,10,15,20)): 2,000 of 2,000 perturbations in K or K'
+  at relative size slack/400 (at slack/40, 1,983 and 1,997 of 2,000 for two of them, so the neighbourhood is smaller
+  there). `corner_two_boxes` [axioms `propext, Classical.choice, Quot.sound`]: if box K holds except for the pair (e, x),
+  box K' except for (x, e), and (6K_e+1)(6K'_x+1) = (6K_x+5)(6K'_e+5), then one box holds and the arrangement is lonely.
+  This generalises E23's `mirror_opening` from the pair to the whole box, for every residue-isolation corner (and every
+  simple degenerate point, e.g. (1,3,4,5,9)). In a cell certificate it is a split along that hyperplane, which is
+  axis-aligned (x_x = c) when the residue-1 runner is runner 1.
+- **Hand-symbolic §8** (`s8_symbolic_v1.{py,out}`). Of the 760 certificate leaves, 131 lie wholly inside the four
+  closed-form cases (A first window 23, B four-block fold 23, C spread box 10, D second-lap box 75; worst-corner test);
+  629 lie in the remainder and use 18 statements. Merging neighbouring leaves with the same statement leaves 261 boxes.
+  With the present statements a hand proof of the remainder would be 261 cases, so the remainder stays as the
+  kernel-checked certificate (already only the standard axioms, E86). A shorter hand proof needs stronger lemmas that
+  cover larger regions, not more case splitting.
