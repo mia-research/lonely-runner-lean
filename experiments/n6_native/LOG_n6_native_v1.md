@@ -1964,3 +1964,27 @@ of ratios is still open."*
   open count grows with H as a region of positive size does. Closing that region needs more windows or boxes and a
   statement that they cover it (a covering statement over a bounded polytope; E2's framing, the owner's call).
   BHK's `lonely_8` stays in the dispatch.
+
+## E84 — The open §8 region mapped; six lap boxes cover it on every point tested (2026-10-16)
+
+Owner: *"Map the open region exactly: its defining inequalities, which lap boxes or windows close its points, and
+whether a short finite list covers it. Observation first."* `s8_region_v1.py` with `s8_region_v1.out` (v₁ ≤ 14, cover
+tested to 20) and `s8_region_v2.out` (v₁ ≤ 20, tested to 24); `s8_region_boxes_v1.out`.
+- **Definition.** In ratios xᵢ = vᵢ/v₁ (all statements are homogeneous), the open region is the part of §8
+  (1 < x₂ < x₃ ≤ 3 < … , x₃ < x₄ < x₅) where every statement of E83's finite list fails: each of the windows W3 on laps
+  (0,0,0), (1,2,3), (0,1,1), (0,0,1) is empty or fails `window_two`'s base or residue condition; the four-block fold on
+  (0,0,0,0) fails (v₅|W| < 1/3 or W empty); each of the five boxes has a violated pair (6kᵢ+1)xⱼ > (6kⱼ+5)xᵢ.
+- **Extent** (dense enumeration inside the H = 60 bounding box, all primitive points with v₁ ≤ 24: 147,114 open points):
+  x₂ ∈ [37/24, 18/7], x₃ ∈ [60/23, 3], x₄ ∈ [83/23, 143/24], x₅ ∈ [121/24, 287/24]. Every open point has a lonely lap
+  vector with t ≤ 3/v₁ (0 exceptions).
+- **Cover.** Greedy cover of the 65,356 open points with v₁ ≤ 20 by lap boxes: six boxes — (0,0,0,1,2) 44,923,
+  (0,1,2,3,8) 14,646, (1,3,4,5,7) 5,170, (1,2,3,4,6) 514, (0,1,1,2,2) 68, (1,3,4,6,8) 35. Tested on all 147,114 open
+  points with v₁ ≤ 24: 0 uncovered. (The cover built at v₁ ≤ 14 had (1,4,5,7,9) in place of (0,1,1,2,2) and missed 6
+  points at v₁ ≤ 20, all near x₅ ≈ 5, x₃ = 3, e.g. (15,34,45,62,76); the v₁ ≤ 20 cover closes them.) Each box is the
+  cone of its 20 pair conditions (ratio bounds listed in `s8_region_boxes_v1.out`), and each is an instance of `box5`.
+- **Consequence** [observation]. On every point tested, §8 is closed by a finite list: five windows or folds, five boxes
+  (E83) and these six boxes, all instances of proved lemmas. What is not shown is that the six cones cover the whole
+  continuous open region: points of the region at finer rational spacing could fall in thin gaps between cones (the
+  v₁ ≤ 14 cover missed such slivers). An exact certificate would subdivide the bounded region and check, cell by cell,
+  that one statement holds throughout (linear for boxes: check the cell's vertices); that is a covering certificate,
+  E2's framing, the owner's decision.
