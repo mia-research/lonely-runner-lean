@@ -2579,3 +2579,40 @@ Quot.sound]` for `s5_small_alpha`, `tree_ok`, `s5_large_of`, `s5_k2`) [PROVED]. 
   With these the tree closes with no failures.
 - **Order six, current state:** §2, §6, §7, §8 native and in the dispatch. §5 with k ≥ 2 is native in `S5K2_v1.lean`,
   not yet in the tree or the dispatch. §5 with k = 1 (v₃ = v₁ + v₂, BHK Proposition 11 part 1) is still BHK.
+
+## E107 — §5, k = 1 (v₃ = v₁ + v₂): observation (2026-10-17)
+
+Owner: *"Start §5 k = 1 (the sum relation v3 = v1 + v2): observation first, mapping the runner-3-folded and one-lap-apart
+windows."* Mid-turn: *"Thats been running for 34mins or so are you sure its ok?"* — it was not: the first scripts
+(`s5k1_obs_v1`, the first `s5k1_tight_v1`) used exact fractions over all lap or crossing combinations and were stopped;
+`s5k1_obs_v2..v5` and `s5k1_tight_v1` (floats) run in seconds. Observation only.
+- **The geometry.** x₃ = x₁ + x₂ at every instant. Runners 1, 2, 3 are clear exactly when (x₁, {x₂}) lies in one of two
+  triangles: T_same (x₁ + {x₂} ≤ 5/6; runners 2 and 3 on one lap — the pair windows) or T_apart (x₁ + {x₂} ≥ 7/6;
+  runner 3 one lap ahead). The trajectory is a line of slope a = v₂/v₁ > 2.
+- **Coverage** (`s5k1_obs_v2`, closing windows with t ≤ 3/v₁): a window on the block {1, 2, 3} in either triangle, with
+  runners 4, 5 by `window_two` or a fold, closes 66,325 of the 66,508 primitive sets ≤ 50 and all 2,000 random ones.
+  The earliest such window (`s5k1_obs_v3`) has runner 1 on lap 0 in most cases (T_same with fold of 5: 25,490; fold
+  of 4: 16,734; `window_two`: 11,968; T_apart: 9,818). T_apart matters mainly for a < 4: lap 0 apart 8,179 of
+  26,561 there, against 111 of 13,889 for a ≥ 10.
+- **The 183 exceptions** (no 123-triangle window), in three families (`s5k1_obs_v4`, `v5`):
+  1. **AP: v₄ = v₃ + v₁** (84; v₂, v₃, v₄ in arithmetic progression with step v₁, so x₄ = x₂ + 2x₁: runner 4 is tied to
+     the line). Closed by lap boxes (0, 1, 1, 2, ·), (0, 1, 1, 1, ·) at x₁ ≈ 0.29–0.45, or with runner 3 folded (laps
+     (0, 1, 2, 3) …).
+  2. **Cluster at (1, 3, 4, 4, 4)** (99; v₂ = 3v₁, v₃ = 4v₁, v₄ and v₅ just above v₃, e.g. (c, 3c, 4c, 4c+1, 4c+2) for
+     every c). Closed by the lap box (0, 0, 0, 0, 0) on the (1, 3, 4) window t ∈ [1/6, 5/24]/v₁, where runners 4 and
+     5 follow runner 3.
+  3. **The tight set (1, 3, 4, 5, 9)** itself: no window of positive length at any time (lonely only at isolated
+     instants).
+- **Near the tight set** (`s5k1_tight_v1`, integer k = 1 sets within 6% of (1, 3, 4, 5, 9) in ratio, v₁ ≤ 20): every one
+  except the tight set has best gap ≥ 1/6 + 1/18. Examples: (20, 60, 80, 100, 179) and (20, 60, 80, 100, 181), at
+  ratio distance 0.0056; (20, 60, 80, 99, 180), 1/6 + 1/12. The gap does not shrink with the ratio distance, but the
+  instant moves later (runner 1 on about lap 4–8). In ratio space the gap is not continuous at the tight point.
+- **Reading** [observation].
+  - Generic k = 1 works like §5 k ≥ 2 and §6: pair windows (T_same) and the apart triangle on runner 1's first lap, with
+    runners 4, 5 by `window_two` or a fold.
+  - The exceptions are the relation v₄ = v₃ + v₁ (a second AP among runners 2, 3, 4), the cluster (1, 3, 4, 4, 4), and the
+    tight set.
+  - A box certificate in (α, β, ν) like E106's cannot close a neighbourhood of the tight point. Its integer
+    neighbours are lonely only at later laps, by an amount that grows as the perturbation shrinks. That is a
+    displacement-type statement (a small speed perturbation δ accumulates to a band-sized shift after about 1/(6δ)
+    of time) rather than a window at bounded laps. Not yet tested.
