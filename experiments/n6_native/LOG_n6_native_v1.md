@@ -2753,3 +2753,35 @@ p-interval leaves including the runner-5 lap box near lambda = 2, 3."* Observati
   This is the shape of §6's near-runner case (E93–E99: generic orbits by a progression lemma, the degenerate
   directions by certificate). The earlier E111 obstacles λ = 2, 3 belong to regime 1 and are covered there (box with
   runner 5 by λ₅).
+
+## E113 — §5, k = 1, small α: the intermediate-value box lemma proved; the fast regime has slack; the build plan (2026-10-17)
+
+Owner: *"Go ahead: prove the intermediate-value box lemma and the slow regime tree first, then the fast regime as a 2D
+orbit (generic orbits plus resonant directions), as for §6."* `S5IVT_v1.lean` (`.out`; axioms `[propext,
+Classical.choice, Quot.sound]`) [PROVED]; `s5k1_slow_v1`, `s5k1_fast_v1..v3`, `s5k1_cert_v2_lo3/lo4` (`.py`, `.out`).
+- **`ivt_box`** [PROVED]: v_k = v₂ + d_k v₁ (d_k ≥ 0) for k = 3, 4, 5. On an interval [p_a, p_b] of runner-1 readings of
+  length ≥ v₁/v₂, inside one runner-1 band, suppose the lower envelope `envL` (max of 1/6 and m_k + 1/6 − d_kP) is at most
+  the upper envelope `envU` (min of 5/6 and m_k + 5/6 − d_kP). Then some instant is lonely. Proof by
+  `intermediate_value_Icc` on f(t) = v₂t − envL(v₁t), which rises by ≥ 1 over one lap of runner 2.
+- **Slow-regime tree prototype** (`s5k1_slow_v1`, P-intervals of length ≥ 1/25, any α ≤ 1/25):
+  - λ ≤ 4, λ₅ ≤ 8: 17 leaves;
+  - λ ≤ 8, λ₅ ≤ 16: 129 leaves;
+  - λ ≤ 12, λ₅ ≤ 24: fails near λ = 2, λ₅ ≈ 22–24 (runner 5 sweeps almost a lap over an interval of length 1/25);
+  - λ ≤ 16: fails throughout.
+- **The fast regime has slack** (`s5k1_fast_v1`, α = 0.002). Across β ∈ (0, 0.51), γ ∈ (β, 3.1), at least 77% of the
+  runner-2 laps in runner 1's first band contain a lonely instant (over 90% for β ≥ 0.1); no (β, γ) without one.
+  `s5k1_fast_v2`: the good set G of (runner-4, runner-5) phases covers 90–100% of the torus. `s5k1_fast_v3`: the runner-4
+  phases good for every runner-5 phase contain an arc of length 0.38–0.78 (depending on P). That uniform condition is
+  the pair-window fold of runner 5 with μ ≤ 1/3, so in most of the fast regime runner 5 can be ignored and a step lemma
+  on runner 4 (as E106 R3) suffices. The 2D orbit is needed only near λ = 2, 3.
+- **Leaf counts below α = 1/25** (k = 1 tree, floats): [0.03, 0.04] 1,891; [0.02, 0.03] 5,036; [0.015, 0.02] 6,240;
+  [0.01, 0.015] 22,567. Extending the tree to α = 1/50 costs about 7,000 leaves; below that it is not viable.
+- **Plan** (thresholds derived for α ≤ 1/50):
+  1. α ∈ [1/50, 1/25]: the box tree (a second kernel-checked file).
+  2. α ≤ 1/50, β ≥ 0.417: uniform window at j₀.
+  3. α ≤ 1/50, runner-4 leaves and step lemma (κ = 1, μ at worst 1/3; runner 5 folded, any λ₅): λ ≤ 1.78
+     (m = 0), λ ≥ 3.2 (m = 1 leaves, then the step lemma for large λ; the progression stays in p ≤ 2/3 − β).
+  4. α ≤ 1/50, λ ∈ [1.78, 3.2] (the v₄ = v₃ + v₁, v₃ + 2v₁ strip):
+     - λ₅ ≤ Λ₅: the slow tree in (λ, λ₅) with `ivt_box` leaves (intervals ≥ 1/50);
+     - λ₅ > Λ₅, γ ≤ 2/3: runner 5 swept into a 4-runner `ivt_box` interval;
+     - γ > 2/3: the fold of runner 5 with μ ≤ (1 + β)/(3(1 + γ)) ≤ 0.213.

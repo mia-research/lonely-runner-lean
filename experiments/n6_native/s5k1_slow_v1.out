@@ -1,0 +1,23 @@
+A1 0.04, lam <= 4.0, lam5 <= 8.0: {'leaf': 17, 'empty': 2, 'fail': 0}
+fail boxes by (lam, lam5) rounded: []
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n6_native/s5k1_slow_v1.py", line 11, in <module>
+    LAM = float(sys.argv[2]) if len(sys.argv) > 2 else 8
+          ~~~~~^^^^^^^^^^^^^
+ValueError: could not convert string to float: '8 16'
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n6_native/s5k1_slow_v1.py", line 11, in <module>
+    LAM = float(sys.argv[2]) if len(sys.argv) > 2 else 8
+          ~~~~~^^^^^^^^^^^^^
+ValueError: could not convert string to float: '12 24'
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n6_native/s5k1_slow_v1.py", line 11, in <module>
+    LAM = float(sys.argv[2]) if len(sys.argv) > 2 else 8
+          ~~~~~^^^^^^^^^^^^^
+ValueError: could not convert string to float: '16 40'
+A1 0.04, lam <= 8.0, lam5 <= 16.0: {'leaf': 129, 'empty': 6, 'fail': 0}
+fail boxes by (lam, lam5) rounded: []
+A1 0.04, lam <= 12.0, lam5 <= 24.0: {'leaf': 3252, 'empty': 13, 'fail': 613}
+fail boxes by (lam, lam5) rounded: [((2.0, 23.8), 28), ((2.0, 23.3), 25), ((2.0, 23.9), 20), ((2.0, 23.6), 20), ((2.0, 23.4), 20), ((2.0, 23.0), 20), ((2.0, 22.9), 20), ((2.0, 23.1), 19), ((2.0, 23.7), 18), ((2.0, 23.5), 18), ((2.0, 22.8), 18), ((2.0, 21.6), 18), ((2.0, 23.2), 17), ((2.0, 22.6), 17), ((2.0, 22.0), 17)]
+A1 0.04, lam <= 16.0, lam5 <= 40.0: {'leaf': 0, 'empty': 0, 'fail': 6013}
+fail boxes by (lam, lam5) rounded: [((15.9, 39.7), 14), ((15.9, 39.4), 14), ((15.8, 39.7), 14), ((15.8, 39.4), 14), ((15.9, 39.0), 14), ((15.8, 39.0), 14), ((15.7, 39.7), 14), ((15.7, 39.4), 14), ((15.6, 39.7), 14), ((15.5, 39.7), 14), ((15.6, 39.4), 14), ((15.5, 39.4), 14), ((15.7, 39.0), 14), ((15.6, 39.0), 14), ((15.5, 39.0), 14)]
