@@ -1919,3 +1919,26 @@ this can supersede any of it"*.
   `window_two_uniform` (E7: runners 2, 3 inert in 3,710 of 3,716 §8 walks); (2) §5/§6 natively via shifted meeting
   instants (untested); (3) Renault's core in framework form (Chen's Lean is Apache-2.0) — reformulated track, owner's
   decision.
+
+## E82 — §8 by slow-block windows: tested, and the first-window statements proved (2026-10-16)
+
+Owner: *"Start candidate 1: test on the §8 sets which window and lap closes each (slow-block window plus
+window_two_uniform), then prove what holds."*
+- **Test** (`s8_window_v1..v3.{py,out}`; every primitive 5-set ≤ 40 with v₃ ≤ 3v₁: 293,922). Block of runners 1–3,
+  window W(m₁,m₂,m₃) where all three are clear; runners 4, 5 by `window_two_uniform` (|W| ≥ 2/(3v₄)) or `window_two`.
+  First window [1/(6v₁), 5/(6v₃)] passes the uniform test in 136,938, the sharp test in 179,122; a later window (t ≤ 3/v₁;
+  commonest laps (1,2,3), (0,1,1), (0,0,1)) in most of the rest; 42,558 have no passing three-block window. Of those, a
+  block of runners 1–4 with runner 5 folded alone (v₅|W| ≥ 1/3) closes 42,262 (first window 39,907); the spread box closes
+  226 and the runner-5 second-lap box 33; 37 remain, all of the shape (k, 2k, 3k, 4k or 5k, X) with 5k < X < 8k, landing
+  on lap vectors (0,0,0,1,1) (27), (0,0,1,1,2) (8), (0,1,2,3,4) (2).
+- **Proved** (`S8Windows_v1.lean`, `.out`: 0 errors; axioms `[propext, Classical.choice, Quot.sound]`) [PROVED]:
+  `block_clear`, `fold_one` (a runner sweeping a third of a lap across a window meets the band there),
+  `s8_block3_window` (4v₁v₃ ≤ v₄(5v₁ − v₃) ⇒ lonely, via `window_two_uniform`), `s8_block4_fold`
+  (2v₁v₄ ≤ v₅(5v₁ − v₄) ⇒ lonely). Real speeds, ordered, no §8 hypothesis needed beyond the inequality.
+- **Coverage of the proved first-window statements plus the two proved boxes** (`s8_coverage_v1.{py,out}`): H = 40:
+  288,210 of 293,922 (T1 136,938, T3 126,310, spread 21,269, second-lap 3,693), 5,712 left; H = 60: 2,363,415 of
+  2,405,392, 41,977 left (1.7%).
+- **Consequence.** §8 is not yet replaced: the remaining 1.7–1.9% needs later windows (each is the same proof with
+  shifted laps) and, on these ranges, three lap boxes for the (k, 2k, 3k, ·, ·) family. Turning that into a statement
+  about all of §8 means showing the listed windows and boxes cover the remaining region of ratios, which is a covering
+  statement (E2's framing; the owner's call). BHK's `lonely_8` stays in the dispatch.

@@ -1,0 +1,2 @@
+'N6Native.s8_block3_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s8_block4_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
