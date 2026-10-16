@@ -2032,7 +2032,8 @@ Owner: *"lets continue on"* (after E85's Lean plan).
   the order 3–7 targets (8,333 jobs); axioms `[propext, Classical.choice, Quot.sound]` for `lonely_8_native`,
   `lonely6_of_lt` and `lonelyRunnerAtN_3..7`; the dispatch's proof term references `lonely_8_native` and
   `lonely_7_native` and not `lonely_8`. [PROVED]
-- The independent Python re-check of E85's leaves was stopped unfinished (no failure printed before stopping); the
-  kernel check of the Lean tree supersedes it.
+- The independent Python re-check of E85's leaves was stopped unfinished; its output was buffered to the end, so it
+  reported nothing either way. The kernel check of the Lean tree supersedes it (it checks the tree Lean uses, not E85's
+  leaf file).
 - **Consequence:** the order-six proof of record now takes §7, §2 and §8 by native routes. §5 and §6 remain BHK's form.
   The §8 route is a covering certificate over a bounded region of ratios (E2's framing; the owner asked for it, E85).
