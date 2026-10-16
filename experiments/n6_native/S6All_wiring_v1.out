@@ -1,0 +1,14 @@
+lake build LonelyRunner.LRC.Spec.RealSevenN LonelyRunner.LRC.Spec.OrdersThreeFourN: Build completed successfully (8335 jobs)
+'LRC.S6Native.s6_coset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s6_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s6_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s6_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.lonely_6_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely6_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonelyRunnerAtN_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSevenN.lonelyRunnerAtN_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+lonely6_of_lt uses: lonely_6_native true, BHK lonely_6 false, lonely_5 true, lonely_7_native true, lonely_8_native true
+constants: [LRC.OrderSixN.Lonely6, LRC.S8Native.lonely_8_native, LRC.OrderSixN.S7.Named.lonely_5, LRC.S6Native.lonely_6_native, LRC.S7Native.lonely_7_native]

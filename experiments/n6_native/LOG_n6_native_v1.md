@@ -2411,3 +2411,28 @@ Owner: *"Lets continue with coset case and the d <15 cert"*. `S6Coset_v1.lean` (
 - **§6 coverage now proved natively** (none of it wired in yet): D ≥ 15 with gcd(v₁, D) = 1 (`s6_branch`, in the dispatch);
   g ∤ v₄ (`s6_coset`); g | v₄ with D/g < 15 (`s6_small`). **Left:** g > 1, g | v₄, D/g ≥ 15. The readings there are those
   of the coprime branch at modulus D/g (E101), so `s6_branch` restated through `readings_E` is the candidate.
+
+## E103 — §6 fully native and wired into the order-six dispatch (2026-10-16)
+
+Owner: *"Close the last §6 case (g > 1, g | v4, D/g >= 15) by restating s6_branch through readings_E, then wire all of
+§6 in."* `S6All_wiring_v1.out`, `s6_small_cert_v2.{py,out}`. Nested repo commit `aea3db2`; not pushed.
+- **The last case went through scaling rather than through `readings_E`.** At speeds (v₁, …, v₄)/g (whole numbers,
+  gcd(v₁/g, E) = 1) and v₅/g (real), the instant scales by 1/g. `s6_branch` used integrality of v₅ only in its explicit
+  cases at D = 15..19, c = 1 (via M ≤ v₄/(3(v₄+1))). So in `OrderSixSixNativeN.lean` v₅ is now real in
+  `s6_meeting_uniform`, `s6_generic`, `s6_off_unit`, the closers, `s6_unit_dir` and `s6_branch`. The hypothesis
+  `20 ≤ D ∨ v₄ + 1 ≤ v₅` is used only in the D < 20 explicit cases. `lonely_6_native_branch` supplies it from integer v₅.
+- **`s6_scaled`**: g | v₄, D/g ≥ 20 ⇒ `s6_branch` on the reduced speeds with `Or.inl`.
+- **E = 15..19**: the E < 15 certificate extends unchanged in method (`s6_small_cert_v2`: c ≥ 5, 150 one-leaf classes
+  and 39 empty; c ≤ 4, 2,646 window points, 49 sum, the same 10 folds). In Lean `bigAll`/`smallAll` range E < 20,
+  δ, v₁/g < 32; `s6_small` now takes D/g < 20.
+- **Tree:** new `LRC/Spec/OrderSixSixRestN.lean` holds `s6_coset`, `s6_small` (E < 20), `s6_scaled`, `s6_all` (§6 for
+  every D ∤ v₁: g ∤ v₄ coset; g | v₄ small or scaled) and `lonely_6_native` (dispatch form). `OrderSixWholeN.lean`
+  §6 is now one line: `S6Native.lonely_6_native`. BHK's `lonely_6` is kept in the tree but no longer used by
+  `lonely6_of_lt`.
+- **Check** (`S6All_wiring_v1.out`): order 3–7 targets build (8,335 jobs). `s6_coset`, `s6_small`, `s6_scaled`,
+  `s6_all`, `lonely_6_native`, `lonely6_of_lt` and `lonelyRunnerAtN_three` … `_seven` all depend on
+  `[propext, Classical.choice, Quot.sound]`. The `LRC` constants of `lonely6_of_lt` are `Lonely6`, `lonely_8_native`,
+  `S7.Named.lonely_5`, `lonely_6_native` and `lonely_7_native`. No `sorry`/`native_decide`/`admit`/`unsafe` in either §6
+  module.
+- **Order six's proof of record now:** §2, §6, §7, §8 native; §5 (`lonely_5`, Proposition 11 at named instants) is the
+  remaining BHK case.
