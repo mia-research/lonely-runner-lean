@@ -2270,3 +2270,22 @@ Owner: *"Lets check both"* (D < 15 by a finite check; directions 0, ±1). Observ
   v₁ + v₂ = v₃ in §5.
 - **Owed:** the sum-relation lemma (v₄ = v₃ + v₁), λ = −1 and λ = 1 via the two-window region (a progression argument on
   the diagonal), gcd(v₁, D) > 1, and small D with the actual arc positions.
+
+## E97 — The sum-relation lemma (v₄ = v₃ + v₁) (2026-10-16)
+
+Owner: *"word"* (go ahead with the sum-relation lemma). `s6_sum_v1.{py,out}`, `s6_sum_v2.{py,out}`; `S6Sum_v1.lean`
+(`.out`; axioms `[propext, Classical.choice, Quot.sound]`) [PROVED].
+- **Observation.** On the §6 sets ≤ 60 with v₄ = v₃ + v₁ (5,574 not uniform), the working runner-1 phases p at meeting
+  times spread over most of [0, 29/36] (after) and [0, 34/36] (before); no single small interval.
+- **Derived window.** At T = k/D runner 4 reads what runner 1 reads (v₄T = v₃T + v₁T, runner 3 on the subject). After T,
+  where runner 3 reads x₃ ∈ [7/6 − p, 5/6]: runner 4 reads x₃ + p + v₁s, one lap on and inside the band; runner 1 reads
+  p + v₁s ≤ 5/6 if p ≤ (5/6)(1 − v₁/v₃); runner 2 reads x₃·v₂/v₃ ≥ x₃/2 (c ≥ 1); runner 5 is folded if
+  (p − 1/3)/v₃ ≥ 1/(3v₅). So any k with p ∈ I = [1/3 + v₃/(3v₅), (5/6)(1 − v₁/v₃)] works.
+- **`s6_sum_window`** proves exactly this (reals, readings at T given as integers plus p; hypotheses v₂ ≤ v₃ ≤ 2v₂).
+- **Coverage** (all §6 sets ≤ 60 with v₄ = v₃ + v₁: 13,762): some k has p ∈ I in 9,731, and the exact fold works at that k
+  in all 9,731 (0 failures); of the 4,031 without such k, 3,623 are closed by `s6_meeting_uniform`; 408 remain, all with
+  small D (e.g. (1,4,8,9,X), D = 4; (1,5,10,11,12), D = 5) where the orbit k/D is too coarse for I, or with v₃ close to 3v₁
+  and v₅ close to v₄, where I is empty (I's length is (5/6)(1 − r) − 1/3 − v₃/(3v₅), r = v₁/v₃; negative near r = 1/3,
+  v₅ = v₄) — a bounded region of ratios.
+- **Owed:** the choice of k (with gcd(v₁, D) = 1, a j/D in I exists once D·|I| ≥ 1); the λ = ±1 two-window argument in
+  Lean; the 408 go with small D and the bounded region.
