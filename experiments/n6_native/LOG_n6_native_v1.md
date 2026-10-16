@@ -2815,3 +2815,29 @@ Classical.choice, Quot.sound]`) [PROVED]; `s5k1_slow_v1`, `s5k1_fast_v1..v3`, `s
   - k = 1: `s5k1_large` (v₂ < 25v₁, `S5K1Large_v1.lean`, E111), `s5k1_mid` and `s5k1_small` (this entry).
 
   Not yet moved into the tree or wired into the order-six dispatch, where §5 is still BHK's `lonely_5`.
+
+## E115 — §5 wired in: order six fully native (2026-10-17)
+
+Owner: *"Move the §5 proofs (k >= 2 and k = 1, all alpha) into the tree as modules and wire them into the order-six
+dispatch, so order six is fully native; build, axiom check, commit both repos."* `S5Native_wiring_v1.out`.
+- **Tree modules** (`LRC/Spec/`):
+  - `OrderSixSecFiveNativeK2N` (from `S5K2_v1`);
+  - `OrderSixSecFiveNativeK1LargeN` (from `S5K1Large_v1`);
+  - `OrderSixSecFiveNativeK1MidN` (from `S5K1Mid_v1`);
+  - `OrderSixSecFiveNativeK1SmallN` (from `S5K1Small_v1`, importing K2N for the shared pair-window lemmas instead of
+    re-declaring them);
+  - `OrderSixSecFiveNativeN`: `s5_all` (v₁ = kD; k ≥ 2 → `s5_k2`; k = 1 → `s5k1_large` / `s5k1_mid` / `s5k1_small` by
+    v₂ against 25v₁, 50v₁) and `lonely_5_native` (dispatch form, positive-time shift).
+
+  The tree literals are `noncomputable def` (no code generation; the kernel still reduces them for
+  `decide +kernel`).
+- **Dispatch:** `OrderSixWholeN.lean` §5 now calls `S5Native.lonely_5_native`; BHK's `lonely_5` and `lonely_6` stay in
+  the tree, unused by `lonely6_of_lt`.
+- **Check** (`S5Native_wiring_v1.out`): order 3–7 targets build (8,340 jobs). `lonely_5_native`, `s5_k2`, `s5k1_large`,
+  `s5k1_mid`, `s5k1_small`, `lonely6_of_lt`, `lonelyRunnerAtN_three` … `_seven` all depend on
+  `[propext, Classical.choice, Quot.sound]`. No `sorry`/`native_decide`/`admit`/`unsafe` in the five new modules. The `LRC`
+  constants of `lonely6_of_lt` are `Lonely6`, `lonely_8_native`, `lonely_5_native`, `lonely_6_native`,
+  `lonely_7_native`.
+- **Commits:** nested repo (below), outer repo with this entry. Not pushed.
+- **Order six's proof of record is now native in every case** (§2, §5, §6, §7, §8). No BHK case remains in its proof
+  term.

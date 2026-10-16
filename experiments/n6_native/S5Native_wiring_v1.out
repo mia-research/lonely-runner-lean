@@ -1,0 +1,13 @@
+lake build LonelyRunner.LRC.Spec.RealSevenN LonelyRunner.LRC.Spec.OrdersThreeFourN: Build completed successfully (8340 jobs)
+'LRC.S5Native.lonely_5_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S5Large.s5_k2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S5K1Large.s5k1_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S5K1Mid.s5k1_mid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s5k1_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely6_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonelyRunnerAtN_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSevenN.lonelyRunnerAtN_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+constants of lonely6_of_lt in LRC: [LRC.OrderSixN.Lonely6, LRC.S8Native.lonely_8_native, LRC.S5Native.lonely_5_native, LRC.S6Native.lonely_6_native, LRC.S7Native.lonely_7_native]
