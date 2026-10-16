@@ -1,0 +1,4 @@
+§6 <= 34: 18463 §6 sets: {'meeting window, sharp': 2247, 'uniform (proved)': 14157, 'four-block fold': 2059}; rest []
+   (v4 - v3)/D where the uniform condition fails: [(0.1, 897), (0.2, 1414), (0.3, 741), (0.4, 555), (0.5, 360), (0.6, 339)]
+random §6 <= 1000: 2000 §6 sets: {'uniform (proved)': 1810, 'meeting window, sharp': 107, 'four-block fold': 83}; rest []
+   (v4 - v3)/D where the uniform condition fails: [(0.0, 22), (0.1, 45), (0.2, 43), (0.3, 30), (0.4, 22), (0.5, 16), (0.6, 10), (0.7, 2)]

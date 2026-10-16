@@ -1,0 +1,3 @@
+'N6Native.orbit_residue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_meeting_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s5_pair_window' depends on axioms: [propext, Classical.choice, Quot.sound]

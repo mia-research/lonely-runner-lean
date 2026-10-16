@@ -2161,3 +2161,29 @@ Owner: *"Leave §8 here and build the parametric statement families for §5/§6.
   where a cell certificate with boxes applies, as in §8, with the corner lemma at the tight point. Owed for a proof:
   that (1) or (2) applies to every set outside the bounded region — a statement about choosing k (or j) by the orbit of
   v₁ mod D — and the bounded certificate.
+
+## E92 — The §5/§6 window lemmas in Lean; which k (or j) works (2026-10-16)
+
+Owner: *"Prove the M6 and M5 window lemmas in Lean and work on the coverage argument: which k (or j) works, from the
+orbit of v1 mod D, outside the bounded region."* `S6Meeting_v1.lean` (`.out`; axioms `[propext, Classical.choice,
+Quot.sound]` for all three) [PROVED]; `s6_coverage_v1.{py,out}`, `s5_coverage_v1.{py,out}`.
+- **`orbit_residue`**: if D ∤ v₁ there is k with k v₁ mod D ∈ [D/6, 5D/9]. Proof: g = gcd(v₁, D) < D; Bézout gives m with
+  v₁ m ≡ g; if 18g ≤ 7D take k = q m with q = ⌊D/(6g)⌋ + 1 (then qg ∈ (D/6, D/6 + g] ⊆ [D/6, 5D/9]); otherwise g | D forces
+  g = D/2 and k = m gives D/2.
+- **`s6_meeting_uniform`** (M6, whole numbers): v₂ = cD, v₃ = (c+1)D, D ∤ v₁, 3v₁ < v₃ and 4v₂v₃ ≤ v₄(5v₂ − v₃) ⇒ lonely.
+  At k from `orbit_residue`, the window [k/D + 1/(6v₂), k/D + 5/(6v₃)] has runners 2, 3 on laps ck, (c+1)k (clear), runner 1
+  reading r/D + v₁s with r/D ∈ [1/6, 5/9] and v₁s ≤ 5/18 (from 3v₁ < v₃), and runners 4, 5 by `window_two_uniform`.
+  Which k: the one whose orbit residue k v₁ mod D lands in [D/6, 5D/9] — the global-isolation orbit of v₁ mod D.
+- **`s5_pair_window`** (M5): runners 2, 3 on lap j ≥ 0 clear on [(j+1/6)/v₂, (j+5/6)/v₃]; runner 1 on lap m clear on a
+  sub-window [a, b] of length ≥ 2/(3v₄) ⇒ lonely.
+- **§6 coverage** (all primitive §6 sets ≤ 34: 18,463; random §6 ≤ 1000: 2,000): `s6_meeting_uniform` closes 14,157 and
+  1,810; the meeting window with `window_two`'s sharp conditions 2,247 and 107; a four-block fold 2,059 and 83; rest 0.
+  Where the uniform condition fails, runner 4 is close to runner 3: (v₄ − v₃)/D ≤ 0.7 in every case listed.
+- **§5 coverage** (primitive §5 ≤ 30: 13,647; random ≤ 1000: 2,000): uniform pair window with the explicit lap
+  j₀ = ⌊v₂/(2v₁)⌋ (runner 1 near 1/2) 3,258 and 1,353; with another j 2,800 and 225; sharp 2,243 and 167; four-block fold
+  5,310 and 255; cluster box 7 and 0; rest 29 (the bounded small-ratio set of E91) and 0.
+- **Which j for §5** [argued, not formalised]: in runner 1's first band [1/(6v₁), 5/(6v₁)] take j = ⌈v₂/(6v₁) − 1/6⌉; the
+  pair window then lies inside the band when v₂ ≥ (5/2)v₁, with length at least (1/2 − D/v₂)/v₃. The regime
+  2v₁ < v₂ < (5/2)v₁ and short windows go to the sharp conditions or the fold.
+- **Owed:** a proved existence statement for the cases the uniform conditions miss (runner 4 within 0.7D of runner 3 in §6;
+  short pair windows in §5), and the bounded small-ratio certificate.
