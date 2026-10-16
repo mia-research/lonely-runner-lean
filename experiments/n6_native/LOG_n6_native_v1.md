@@ -1826,3 +1826,25 @@ supplying or corroborating the arrangement cascade outcome type we have previous
   three-runner slack 2,911, two-runner slack 77, none found 1. The three-runner level is the shape of the §7 native route
   (E51–E56: runners 1–3 supply the window, `window_two` folds runners 4 and 5) and of §5's two steps (E38), now seen with
   any triple. The single remaining set is the next thing to look at.
+
+## E77 — The finite outcome taxonomy from the order-8 corpus, carried to order 6 (2026-10-16)
+
+Owner: *"check the corpus for the large amount of work that was done on the finite arrangement outcome set we did"*.
+Source found: order-8 E325 (`docs/n8/RUNNING_LOG_order8_v1.md`; `LonelyRunner/experiments/nN/redo/
+taxo_outcome_classes_v1.md`): 14 mutually exclusive outcome classes by number of moves (0 / 1 / ≥ 2), window width zero,
+closer = the opener's own reading, opener lap (1 / ≥ 2), opener a strip reading; 12 realised on 52,000 order-8
+arrangements, K2a empty by argument, K2s1 empty (proved later, E333). Related: `docs/n8/FINITE_ARRANGEMENT_REVIEW_
+2026_10_03.md` (43 of 49 ordered opener/closer pairs; finite outcome classes are not yet a finite mechanism cover).
+Order eight read only, as a comparison. `taxo6_v1.{py,out}`: the same definitions with 8 → 6 (readings ρ = d/d₁,
+R = 6 d₁ t, zone 6j − 1 < Rρ < 6j + 1).
+- **Order 6, primitive SixResidual ≤ 40 (17,135):** 12 classes realised — K0 2,387, K0z 621, K1a 5,539, K1b 1,232,
+  K1s1 251, K1s2 101, K1z 76, K2b 716, K2c 2,447, K2d 3,361, K2s2 249, K2z 155 — and the same two empty, K2a and K2s1.
+  All primitive 5-sets ≤ 30 (139,246): the same 12 classes, the same two empty.
+- **(2, 9, 13, 36, 40)** is K1a: one move, the opener 13 a strip reading on lap 1 (ρ = 13/2 ∈ (5, 7)), closer another
+  reading. An ordinary outcome class; E76's "none" was a property of the slack-depth test, not a new outcome type.
+- **Slack depth against class (E76):** depth four spans all 12 classes; depth three is mostly K1a 935, K2d 1,059,
+  K1b 598, K0z 209; depth two K2d 38, K1b 22, K0z 10, K1a 6, K0 1.
+- **Reading** [observation]. The outcome set found at order 8 is the same finite set at order 6: twelve realised
+  classes, the same two empty, on every set tested. Slack depth is a different cut across those classes, not a new
+  class. Whether each class carries one uniform mechanism (the open item of the finite-arrangement review) is the same
+  question at order 6.
