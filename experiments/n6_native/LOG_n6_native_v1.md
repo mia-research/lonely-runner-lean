@@ -2205,3 +2205,24 @@ Observation only. `s6_near_v1.{py,out}`, `s6_near_v2.{py,out}`, `s5_short_v1.{py
   fold (runners 2, 3 on one lap j; runners 1 and 4, or 1 and 5, clear on a sub-window; the other folded) closes 6,042; the
   1,547 left include the bounded small-ratio set (E91) and need other blocks or the sharp conditions (E92 counts).
 - Not started this round: the bounded small-ratio certificate.
+
+## E94 — The §6 near-runner region, and the orbits that miss it (2026-10-16)
+
+Owner: *"Yes"* (taken as the recommended option: the §6 orbit proof). Observation and derivation. `s6_region_v1.{py,out}`.
+- **Derived region.** Window after k/D: s ∈ [1/(6v₂), 5/(6v₃)], length ℓ; runner 4 sweeps λ₄ = v₄ℓ ∈ [1/2, 2/3) in the
+  near-runner case (λ₄ ≥ 2/3 is exactly `s6_meeting_uniform`'s condition); runner 5 needs a stretch where runner 4 is clear
+  of reading length μ = v₄/(3v₅) < 1/3. So runner 4 works when p₄ lies in an arc A = [1/6 − λ₄ + μ − v₄s₀, 5/6 − μ − v₄s₀]
+  (mod 1) of length 2/3 + λ₄ − 2μ ≥ 1/2 (observed 0.54–0.66+), and runner 1 is clear across the window when
+  p₁ ∈ [1/6, 5/9]; before k/D the mirror arc A′ with p₁ ∈ [4/9, 5/6]. Region: [1/6, 5/9] × A ∪ [4/9, 5/6] × A′, area at least
+  7/36 on each side. A and A′ cover the whole circle in 2,196 of the 4,306 near-runner sets.
+- **Orbit test** (near-runner primitive §6 ≤ 34): the orbit k ↦ (k v₁, k δ) mod D meets the region in 4,131 of 4,306.
+- **The 175 misses** are degenerate orbits: direction λ = δ·v₁⁻¹ ≡ ±1 (mod D) — runner 4's phase equals runner 1's, or its
+  negative, at every meeting time (e.g. (1, w, 2w, 2w+1, X) with v₁ = δ = 1, for w = 3, 4, 5, …) — in 112; gcd(v₁, D) > 1
+  (a coarse orbit for runner 1) in 54; λ = ±2 in 2; others small. All 175 are closed by the meeting-window fold (E93)
+  with runner 1 clear on only part of the window, which the simple region leaves out.
+- **Reading** [observation]. This is the §7 shape again: a generic orbit meets a region of fixed area (here ≥ 7/36), and
+  the exceptions are short-step orbits (direction ±1, ±2) and coarse ones, as `s7_main_route` found G₄ and G₇. Proof plan:
+  (1) for directions other than ±1 (and ±2) and orbit size above a bound, the orbit meets [1/6, 5/9] × A — a 2D
+  global-isolation statement, provable like `s7_main_route`; (2) the degenerate directions, where runners 1 and 4 move
+  together at meeting times, by a direct argument with runner 1 partly clear; (3) small D and coarse orbits by finite or
+  explicit checks. Not yet in Lean.
