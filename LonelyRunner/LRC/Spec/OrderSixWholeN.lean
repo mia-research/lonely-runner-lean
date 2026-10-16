@@ -5,6 +5,7 @@ import LonelyRunner.LRC.Spec.OrderFiveResidualN
 import LonelyRunner.LRC.Spec.OrderSixSecSevenNativeN
 import LonelyRunner.LRC.Spec.OrderSixEightNativeN
 import LonelyRunner.LRC.Spec.OrderSixSixRestN
+import LonelyRunner.LRC.Spec.OrderSixSecFiveNativeN
 
 /-!
 # Order six on whole numbers: the four BHK cases, dispatched
@@ -13,7 +14,9 @@ import LonelyRunner.LRC.Spec.OrderSixSixRestN
 
 * `v₃ ≤ 3v₁`                      — §8, `S8Native.lonely_8_native` (2026-10-16; slow-block windows, the
   four-runner fold and lap boxes, closed by a kernel-checked cell certificate). BHK's form `lonely_8` is kept.
-* `3v₁ < v₃`, `D ∣ v₁`             — §5, `lonely_5` (Proposition 11 at named instants);
+* `3v₁ < v₃`, `D ∣ v₁`             — §5, `S5Native.lonely_5_native` (2026-10-17; pair windows, runner-4 leaves and
+  step lemma, the intermediate-value box lemma, two tight-point lemmas, kernel-checked box trees). BHK's form
+  `lonely_5` (Proposition 11 at named instants) is kept;
 * `3v₁ < v₃`, `D ∣ v₃`, `D ∤ v₁`   — §6, `S6Native.lonely_6_native` (2026-10-16; meeting windows, the orbit of
   `v₁` mod `D`, folds, the sum relation; with `g = gcd(v₁, D)`: `g ∤ v₄` by a coset of runner-4 phases, `g ∣ v₄` by the
   branch on the reduced speeds or a kernel-checked certificate when `D/g < 20`). BHK's form `lonely_6` is kept.
@@ -40,7 +43,7 @@ theorem lonely6_of_lt {v1 v2 v3 v4 v5 : ℕ} (h0 : 0 < v1) (h12 : v1 < v2) (h23 
   · exact LRC.S8Native.lonely_8_native h0 h12 h23 h34 h45 hlarge
   push_neg at hlarge
   by_cases hD1 : (v3 - v2) ∣ v1
-  · exact S7.Named.lonely_5 h0 h12 h23 h34 h45 hlarge hD1
+  · exact LRC.S5Native.lonely_5_native h0 h12 h23 h34 h45 hlarge hD1
   by_cases hD3 : (v3 - v2) ∣ v3
   · exact LRC.S6Native.lonely_6_native h0 h12 h23 h34 h45 hlarge hD3 hD1
   · exact LRC.S7Native.lonely_7_native h0 h12 h23 h34 h45 hlarge hD3 hD1
