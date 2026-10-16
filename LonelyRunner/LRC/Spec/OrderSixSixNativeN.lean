@@ -66,7 +66,7 @@ theorem orbit_residue (v1 D : ℕ) (hD : 0 < D) (hnd : ¬ D ∣ v1) :
 set_option maxHeartbeats 1000000 in
 /-- **§6 by the meeting window, uniform case.** With `v₂ = c D`, `v₃ = (c+1) D` (`c ≥ 1`), `D ∤ v₁`, `3 v₁ < v₃` and
 `4 v₂ v₃ ≤ v₄ (5 v₂ − v₃)` (the window `[k/D + 1/(6v₂), k/D + 5/(6v₃)]` is at least `2/(3v₄)`), some instant is lonely. -/
-theorem s6_meeting_uniform {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h45 : v4 ≤ v5) (hD : 0 < D) (hc : 1 ≤ c)
+theorem s6_meeting_uniform {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ} (h0 : 0 < v1) (h45 : (v4 : ℝ) ≤ v5) (hD : 0 < D) (hc : 1 ≤ c)
     (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hnd : ¬ D ∣ v1)
     (hw : 4 * (v2 : ℝ) * v3 ≤ v4 * (5 * v2 - v3)) :
     ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
@@ -320,7 +320,7 @@ set_option maxHeartbeats 1000000 in
 /-- **§6, generic orbits.** `v₂ = cD`, `v₃ = (c+1)D` (`c ≥ 1`), `3v₁ < v₃`, `v₃ < v₄ ≤ v₅`, `gcd(v₁, D) = 1`, `D ≥ 15`, and
 the orbit direction `λ` (`v₄ ≡ λ v₁ mod D`, equivalently `δ = v₄ − v₃ ≡ λ v₁`) with `2 ≤ |λ|`, `2|λ| ≤ D`: some instant is
 lonely. The meeting time `k/D` is chosen with `k v₁ ≡ j` for the `j ∈ [D/6, 5D/9]` given by `ap_meets_half_arc`. -/
-theorem s6_generic {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 ≤ v5) (hc : 1 ≤ c)
+theorem s6_generic {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : (v4 : ℝ) ≤ v5) (hc : 1 ≤ c)
     (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D)
     (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) (hl1 : 2 ≤ |l|) (hl2 : 2 * |l| ≤ D) :
     ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
@@ -525,7 +525,7 @@ theorem s6_window_fold_before {v1 v2 v3 v4 v5 D T p1 p4 : ℝ} {N2 N3 N1 N4 m : 
     by rw [neg]; exact a5⟩
 
 /-- **§6, D ≥ 15, gcd(v₁, D) = 1, direction λ ≠ ±1.** (`v₄ ≡ λ v₁ mod D`, representative with `2|λ| ≤ D`.) -/
-theorem s6_off_unit {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 ≤ v5) (hc : 1 ≤ c)
+theorem s6_off_unit {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : (v4 : ℝ) ≤ v5) (hc : 1 ≤ c)
     (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D)
     (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) (hl2 : 2 * |l| ≤ D) (hl1 : |l| ≠ 1) :
     ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
@@ -626,11 +626,11 @@ theorem exists_j (D : ℕ) (hD : 0 < D) {a L : ℝ} (ha : 0 ≤ a) (haL : a + L 
     rw [div_le_iff₀ hDR]; nlinarith
 
 section closers
-variable {v1 v2 v3 v4 v5 c D : ℕ}
+variable {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ}
 
 /-- **Closing at a grid point, window after the meeting time.** `q₄ = v₄/v₃`, `u = v₃/v₂`, `μ = v₄/(3v₅)`. -/
 theorem close_after (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3)
-    (h34 : v3 < v4) (h45 : v4 ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
+    (h34 : v3 < v4) (h45 : (v4 : ℝ) ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
     (j : ℕ) (hjD : j < D) (m : ℤ) (hp1 : 1 / 6 ≤ (j : ℝ) / D) (hp2 : (j : ℝ) / D ≤ 5 / 9)
     (hlow : (m : ℝ) + 1 / 6 ≤ l * ((j : ℝ) / D) + 5 / 6 * ((v4 : ℝ) / v3) - (v4 : ℝ) / (3 * v5))
     (hup : l * ((j : ℝ) / D) + ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 + (v4 : ℝ) / (3 * v5) ≤ m + 5 / 6) :
@@ -669,7 +669,7 @@ theorem close_after (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = 
 
 /-- **Closing at a grid point, window before the meeting time.** -/
 theorem close_before (h0 : 0 < v1) (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3)
-    (h34 : v3 < v4) (h45 : v4 ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
+    (h34 : v3 < v4) (h45 : (v4 : ℝ) ≤ v5) (hcop : Nat.Coprime v1 D) (hD : 1 < D) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D])
     (j : ℕ) (hjD : j < D) (m : ℤ) (hp1 : 4 / 9 ≤ (j : ℝ) / D) (hp2 : (j : ℝ) / D ≤ 5 / 6)
     (hlow : (m : ℝ) + 1 / 6 ≤ 1 - l * ((j : ℝ) / D) + 5 / 6 * ((v4 : ℝ) / v3) - (v4 : ℝ) / (3 * v5))
     (hup : 1 - l * ((j : ℝ) / D) + ((v4 : ℝ) / v3) * ((v3 : ℝ) / v2) / 6 + (v4 : ℝ) / (3 * v5) ≤ m + 5 / 6) :
@@ -734,9 +734,10 @@ set_option maxHeartbeats 4000000 in
 /-- **§6, D ≥ 15, gcd(v₁, D) = 1, directions λ = ±1** (near-runner case). Case tree from `s6_lam_cert_v1.py`
 (over `U = v₃/v₂`, `Q = v₄/v₃`, `M = v₄/(3v₅)`) and, for `c = 1`, `D = 15..19`, the explicit cases of
 `s6_lam_small_v1.py`. Leaves close by the window after or before the meeting time, or by the sum lemma. -/
-theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 < v5) (hc : 1 ≤ c)
+theorem s6_unit_dir {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : (v4 : ℝ) < v5) (hc : 1 ≤ c)
     (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D)
-    (hnr : (v4 : ℝ) * (5 * v2 - v3) < 4 * v2 * v3) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) (hl1 : l = 1 ∨ l = -1) :
+    (hnr : (v4 : ℝ) * (5 * v2 - v3) < 4 * v2 * v3) (l : ℤ) (hl : (v4 : ℤ) ≡ l * v1 [ZMOD D]) (hl1 : l = 1 ∨ l = -1)
+    (hint : 20 ≤ D ∨ (v4 : ℝ) + 1 ≤ v5) :
     ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
       (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
   have hD1 : 1 < D := by omega
@@ -770,8 +771,8 @@ theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h4
       _ = 4 * U / (5 - U) := by ring
   have hM0 : 0 ≤ M := by positivity
   have hM3 : M ≤ 1 / 3 := by rw [hMv, div_le_iff₀ (by positivity)]; linarith
-  have hMmax : M ≤ (v4 : ℝ) / (3 * (v4 + 1)) := by
-    have : (v4 : ℝ) + 1 ≤ v5 := by exact_mod_cast h45
+  have hMmax : D < 20 → M ≤ (v4 : ℝ) / (3 * (v4 + 1)) := fun hD20 => by
+    have : (v4 : ℝ) + 1 ≤ v5 := hint.resolve_left (by omega)
     rw [hMv]; exact div_le_div_of_nonneg_left h4p.le (by positivity) (by linarith)
   have hDL15 : 1 ≤ (D : ℝ) * (1 / 15) := by
     have : (15 : ℝ) ≤ D := by exact_mod_cast hD
@@ -793,7 +794,7 @@ theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h4
     intro hδ j hjD h1 h2
     have hQe : Q = 1 + (v1 : ℝ) / v3 := by
       rw [hQv, hδ]; push_cast; field_simp
-    refine close_sum h0 hc hv2 hv3 (by omega) hδ hcop hD1 j hjD ?_ ?_
+    refine close_sum h0 hc hv2 hv3 h5p hδ hcop hD1 j hjD ?_ ?_
     · have e : (v3 : ℝ) / (3 * v5) = M / Q := by rw [hMv, hQv]; field_simp
       rw [e, ← le_sub_iff_add_le', div_le_iff₀ (by linarith)]; linarith
     · rw [hQe] at h2; linarith
@@ -891,71 +892,72 @@ theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h4
                           · exact closeA 1 (289/576 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
                   · exact closeA 1 (71/144 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
               · exact closeA 1 (11/24 : ℝ) (1/20 : ℝ) (by norm_num) (by norm_num) hDL20 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
-        · subst hv2 hv3 hδ
+        · have hMm := hMmax hD20
+          subst hv2 hv3 hδ
           interval_cases D
           · have hv1b : v1 < 10 := by omega
             interval_cases v1
-            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
             · exact absurd hcop (by norm_num)
-            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
           · have hv1b : v1 < 11 := by omega
             interval_cases v1
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 10 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
           · have hv1b : v1 < 12 := by omega
             interval_cases v1
-            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 11 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 7 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
           · have hv1b : v1 < 12 := by omega
             interval_cases v1
-            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
             · exact absurd hcop (by norm_num)
             · exact absurd hcop (by norm_num)
-            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
-            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeBP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
             · exact absurd hcop (by norm_num)
             · exact absurd hcop (by norm_num)
             · exact absurd hcop (by norm_num)
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
           · have hv1b : v1 < 13 := by omega
             interval_cases v1
-            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
-            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMmax, hM0])
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 13 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeSP rfl 12 (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeBP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 9 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
+            · exact closeAP 8 1 (by norm_num) (by norm_num) (by norm_num) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0]) (by (try simp only [hQv, hUv]); norm_num <;> nlinarith [hMm, hM0])
       · have hUe : U = 3 / 2 := by rw [hUdef]; norm_num
         have hQU' : Q * U = 3 / 2 * Q := by rw [hUe]; ring
         have hQ87 : Q ≤ 8 / 7 := by have := hQle; rw [hUe] at this; linarith
@@ -970,8 +972,9 @@ theorem s6_unit_dir {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h4
     exact closeA 0 (1/6 : ℝ) (1/15 : ℝ) (by norm_num) (by norm_num) hDL15 (fun p h1 h2 => by nlinarith) (fun p h1 h2 => by nlinarith)
 
 /-- **§6, the branch D ≥ 15 with gcd(v₁, D) = 1, every direction.** -/
-theorem s6_branch {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : v4 < v5) (hc : 1 ≤ c)
-    (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D) :
+theorem s6_branch {v1 v2 v3 v4 c D : ℕ} {v5 : ℝ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 : (v4 : ℝ) < v5) (hc : 1 ≤ c)
+    (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D) (hsmall : 3 * v1 < v3) (hcop : Nat.Coprime v1 D) (hD : 15 ≤ D)
+    (hint : 20 ≤ D ∨ (v4 : ℝ) + 1 ≤ v5) :
     ∃ t : ℝ, (6 : ℝ)⁻¹ ≤ circDist (v1 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v2 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v3 * t) ∧
       (6 : ℝ)⁻¹ ≤ circDist (v4 * t) ∧ (6 : ℝ)⁻¹ ≤ circDist (v5 * t) := by
   have hnd : ¬ D ∣ v1 := fun h => by
@@ -998,7 +1001,7 @@ theorem s6_branch {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 
   by_cases hhalf : 2 * l0 ≤ D
   · by_cases h1 : l0 = 1
     · rw [h1] at hcong0
-      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw 1 (by simpa using hcong0) (Or.inl rfl)
+      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw 1 (by simpa using hcong0) (Or.inl rfl) hint
     · exact s6_off_unit h0 h34 h45.le hc hv2 hv3 hsmall hcop hD (l0 : ℤ) hcong0
         (by rw [abs_of_nonneg (Int.natCast_nonneg _)]; exact_mod_cast hhalf)
         (by rw [abs_of_nonneg (Int.natCast_nonneg _)]; intro h; exact h1 (by exact_mod_cast h))
@@ -1009,7 +1012,7 @@ theorem s6_branch {v1 v2 v3 v4 v5 c D : ℕ} (h0 : 0 < v1) (h34 : v3 < v4) (h45 
     have habs : |((l0 : ℤ) - D)| = D - l0 := by rw [abs_of_neg (by linarith)]; ring
     by_cases h1 : l0 + 1 = D
     · have hm1 : (l0 : ℤ) - D = -1 := by have h' : (l0 : ℤ) + 1 = D := (by exact_mod_cast h1); linarith
-      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw ((l0 : ℤ) - D) hcong1 (Or.inr hm1)
+      exact s6_unit_dir h0 h34 h45 hc hv2 hv3 hsmall hcop hD hw ((l0 : ℤ) - D) hcong1 (Or.inr hm1) hint
     · have hh : (D : ℤ) < 2 * l0 := by exact_mod_cast hhalf
       exact s6_off_unit h0 h34 h45.le hc hv2 hv3 hsmall hcop hD ((l0 : ℤ) - D) hcong1
         (by rw [habs]; linarith)
@@ -1035,7 +1038,8 @@ theorem lonely_6_native_branch {v1 v2 v3 v4 v5 : ℕ} (h0 : 0 < v1) (h12 : v1 < 
     have : v2 = v3 - D := by omega
     rw [this, hv3]; rw [Nat.add_mul, one_mul]; omega
   obtain ⟨s, a1, a2, a3, a4, a5⟩ :=
-    s6_branch h0 h34 h45 (show 1 ≤ e - 1 by omega) hv2 hv3 hsmall hcop hD
+    s6_branch (v5 := (v5 : ℝ)) h0 h34 (by exact_mod_cast h45) (show 1 ≤ e - 1 by omega) hv2 hv3 hsmall hcop hD
+      (Or.inr (by exact_mod_cast h45))
   obtain ⟨m, hm⟩ := exists_nat_gt (-s)
   have key : ∀ v : ℕ, circDist ((v : ℝ) * (s + ((m + 1 : ℕ) : ℝ))) = circDist ((v : ℝ) * s) := by
     intro v
