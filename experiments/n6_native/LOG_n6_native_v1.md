@@ -1761,3 +1761,21 @@ relaunched on the owner's instruction); its result goes in a later entry.
   the grid, i.e. a runner divisible by the grid; a runner can do that only for the grids that divide it. The grids no
   runner divides are killed instant by instant, with one to three runners near the subject on each. With five runners
   the grids run out by q = 28 on every set to H = 120.
+
+## E73 — The uniform grid bound is false; correction to E71–E72 (2026-10-16)
+
+citation-verifier (relaunched on the owner's instruction): no source states a uniform denominator bound, and the
+statement is false. `grid_qstar_unbounded_v1.{py,out}` reproduces the refutation exactly: D = (1, 2, 3, 4, L), with
+L = lcm(1..Q₀), has the fastest runner on the subject at every c/q with q ≤ Q₀, so the least lonely grid exceeds Q₀:
+Q₀ = 6 → q* = 16; 12 → 16; 20 → 23; 28 → 29; 40 → 41; 60 → 61.
+- E71–E72's "q* ≤ 28" is a property of the search box [1, 120]: no speed there is divisible by every q ≤ 28. Kept as
+  an observation tied to that box. E71's "a uniform bound is not established" stands; any reading of E72 as "runners
+  run out of grids by 28" in general is withdrawn.
+- In E72's terms the refutation is the on-subject kill taken to its limit: one runner divisible by every grid up to Q₀
+  kills them all wholesale. What survives is the conditional form: an isolation appears at the first grid that no
+  runner kills on the subject, unless near blocks kill it instant by instant (precedent: Rosenfeld 2025, Lemma 4 —
+  lcm(2..k+1) divides the product of the speeds of any set without the property — and Lemma 6, as reported by the
+  verifier; not read here).
+- Other reported sources, all with speed-dependent denominators: Perarnau–Serra survey (2024) eq. (4) t₀ = ℓ/(vᵢ+vⱼ);
+  Rifford's timely conjecture bounds laps of the slowest runner (a different quantity); Barajas–Serra N = 7^{m+1};
+  Tao 2018 bounds speed size.
