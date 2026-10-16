@@ -2249,3 +2249,24 @@ for all three) [PROVED]; `s6_coverage_v2.{py,out}`.
 - **Owed for §6:** (2) λ ∈ {0, ±1} (runners 1 and 4 in step at the meeting times), (3) gcd(v₁, D) > 1 (runner 1's orbit
   coarse: it moves on multiples of g/D) and D < 15 (finitely many orbit shapes per D, so a finite check like
   `check_orbits` is available there).
+
+## E96 — §6 open cases checked: small D, and the degenerate directions (2026-10-16)
+
+Owner: *"Lets check both"* (D < 15 by a finite check; directions 0, ±1). Observation only. `s6_small_v1.{py,out}`,
+`s6_degenerate_v1.{py,out}`.
+- **D < 15, worst case over the arc's position.** For each D < 15 and residues (a, b) = (v₁, v₄ mod D), D ∤ a: the runner-4
+  phases at the k with runner 1 in [1/6, 5/9] meet every closed half arc (all circular gaps ≤ 1/2) in 580 of 910 classes;
+  330 classes fail with both the after and the before window (2 at D = 2, 6 at D = 3, …, 62 at D = 14). So for small D the
+  orbit is too sparse for a position-free argument: the arc's actual position (fixed by the ratios v₄/v₂, v₄/v₃, v₄/v₅)
+  must enter, i.e. a ratio-dependent check per residue class, or other statements (for small D and large c, runners 2, 3,
+  4 are within D of each other at speed about cD, a cluster: the cluster-box family of E88 is the candidate).
+- **Directions 0, ±1** (gcd(v₁, D) = 1, not uniform, primitive ≤ 60): λ = −1: 3,529 sets, all meet the region (after or
+  before window); λ = 1: 5,580 meet it, 355 need the exact meeting fold with runner 1 only partly clear; λ = 0: none
+  (outside the uniform case).
+- **The 355 all have v₄ = v₃ + v₁ exactly** (a sum relation, mostly c = 1, i.e. v₃ = 2v₂: e.g. (1,3,6,7,X), (1,4,8,9,X)).
+  Then runner 4 reads runner 3's reading plus runner 1's at every instant, so at a meeting time runner 4 reads exactly what
+  runner 1 reads; on the window after it, x₄ = x₁ + x₃ with x₃ rising from v₃/(6v₂) to 5/6. A dedicated sum-relation
+  lemma (x₁, x₃ and x₁ + x₃ all in the band on a sub-window, runner 5 folded) is the natural closure — like BHK's use of
+  v₁ + v₂ = v₃ in §5.
+- **Owed:** the sum-relation lemma (v₄ = v₃ + v₁), λ = −1 and λ = 1 via the two-window region (a progression argument on
+  the diagonal), gcd(v₁, D) > 1, and small D with the actual arc positions.
