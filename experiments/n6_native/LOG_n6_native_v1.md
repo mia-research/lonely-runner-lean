@@ -2648,3 +2648,30 @@ Owner: *"Tight neighbourhood and then k=1 cert"*. Observation; `s5k1_tight_v2..v
     displacement orbit, as in §6's generic orbits.
 
   Away from the tight point the k = 1 certificate is the E106 tree with κ = 1.
+
+## E109 — §5, k = 1: the box tree away from two tight points; the second tight neighbourhood (2026-10-17)
+
+Observation; `s5k1_cert_v1.{py,out}`, `s5k1_tight2_v1.{py,out}`.
+- **k = 1 tree prototype** (`s5k1_cert_v1`): E106's leaf search with κ = 1 (speeds/v₂ = (α, 1, 1 + α, 1 + β, (1 + β)ν),
+  domain α < 1/2, β > α, ν > 1). Every α-slab from 0.04 to 0.5 closes with no failures except two accumulation points:
+  1. α ≈ 1/3, β ≈ 2/3, ν ≈ 1.8: the tight set (1, 3, 4, 5, 9) (E108);
+  2. α → 1/2, β → 1, ν → 1.25: speeds proportional to (1, 2, 3, 4, 5), the other tight arrangement. It satisfies
+     v₃ = v₁ + v₂ and sits on the boundary v₃ = 3v₁ of §5. Sets such as (c, 2c + 1, 3c + 1, 4c + ·, 5c + ·) approach it
+     from inside §5 with k = 1.
+
+  Leaves per slab: 163–1,569 (window_two, folds, lap boxes).
+- **The neighbourhood of (1, 2, 3, 4, 5)** (`s5k1_tight2_v1`, all 7,656 sets (c, 2c + d₂, 3c + d₂, 4c + d₄, 5c + d₅),
+  6 ≤ c ≤ 60, 1 ≤ d₂ ≤ 3, |d₄|, |d₅| ≤ 3; every one lonely). Tight readings at T = v₁t = 1/6 are
+  (1/6, 1/3, 1/2, 2/3, 5/6): runners 1 and 5 on band edges. d₂ ≥ 1 always (3v₁ < v₃). By runner 5's relation to 5v₁:
+  - d₅ < 0: the earliest window starts at T = 1/6 in all 3,320 cases;
+  - d₅ > 0: windows by T ≤ 0.83 (the mirror tight instant 5/6);
+  - d₅ = 0: drift; the earliest T grows as a = d₂/c shrinks, with aT ≈ 0.03–0.07 (c = 60, a = 1/60: T ≈ 1.7–2.6).
+- **Reading** [observation]. Both tight points have the same structure (E108). The edge relation (v₄ vs 5v₁ at
+  (1, 3, 4, 5, 9); v₅ vs 5v₁ at (1, 2, 3, 4, 5)), when broken, gives a window at the first tight instant of length
+  proportional to the deviation. When it holds exactly, the remaining deviations drift into the bands over periods of
+  the exact sub-arrangement. So a k = 1 proof needs:
+  1. the box tree away from both points;
+  2. for each point, a window lemma for a broken edge relation (explicit instant T = 1/6 or 5/6);
+  3. a displacement lemma on the plane where the edge relation holds (a progression in the remaining deviations
+     over recurring windows, at unbounded laps);
+  4. the small-α part redone for κ = 1 (E106's leaves used κ ≤ 1/2).
