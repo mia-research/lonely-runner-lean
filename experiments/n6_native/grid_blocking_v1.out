@@ -1,0 +1,8 @@
+== primitive SixResidual <= 40: sets 17135; q* [(7, 4129), (8, 2853), (9, 4372), (10, 2193), (11, 2879), (12, 222), (13, 279), (14, 95), (15, 83), (16, 24), (17, 5), (21, 1)]
+   grids before q*: {'whole grid blocked by a runner on the subject (q | d)': 107817, 'blocked by near runners only': 11943}
+   grids blocked on the subject, (q, runner rank) commonest: [((2, 5), 10893), ((2, 2), 10439), ((2, 3), 9473), ((2, 4), 8769), ((2, 1), 8563), ((3, 2), 8448), ((4, 5), 8314), ((3, 1), 7193), ((3, 3), 6949), ((5, 5), 6199), ((3, 5), 5820), ((6, 2), 5733)]
+   near-only grids: runners per unit instant {1: 38578, 2: 20848, 3: 5132, 4: 2} ; sides {'entry': 47839, 'exit': 47839} ; by speed rank {1: 19056, 2: 18092, 3: 18936, 4: 20126, 5: 19468}
+== all primitive 5-sets <= 30: sets 139246; q* [(2, 3002), (3, 15000), (4, 27784), (5, 29580), (6, 17564), (7, 8565), (8, 8469), (9, 13290), (10, 4557), (11, 8942), (12, 882), (13, 772), (14, 254), (15, 255), (16, 158), (17, 138), (18, 13), (19, 6), (20, 3), (21, 6), (22, 4), (23, 2)]
+   grids before q*: {'whole grid blocked by a runner on the subject (q | d)': 526469, 'blocked by near runners only': 35255}
+   grids blocked on the subject, (q, runner rank) commonest: [((2, 5), 74450), ((2, 2), 68566), ((2, 3), 68122), ((2, 4), 67678), ((2, 1), 61794), ((3, 5), 53565), ((3, 2), 45528), ((3, 3), 45302), ((3, 4), 44470), ((3, 1), 37375), ((4, 4), 31026), ((4, 3), 30367)]
+   near-only grids: runners per unit instant {1: 115502, 2: 65022, 3: 15008, 4: 2} ; sides {'entry': 145289, 'exit': 145289} ; by speed rank {1: 60786, 2: 58590, 3: 58512, 4: 58456, 5: 54234}

@@ -1739,3 +1739,25 @@ Observation only. `grid_opportunities_v1.{py,out}`, `_v2`, `_v3`.
   uniform bound is not established by these ranges. A statement "every primitive 5-set has a lonely c/q with q ≤ Q₀"
   depends only on the speeds mod lcm(1..Q₀): a finite residue statement. Literature on lonely instants with small
   denominators not checked (citation-verifier owed if used).
+
+## E72 — Grid opportunities: range pushed to 120, and how the grids get blocked (2026-10-16)
+
+Owner: *"continue the search then continue to push the range and how the grid gets blocked"*. Observation only.
+`grid_qstar_v1.{c,out}` (C, exhaustive; agrees with `grid_opportunities_v3` at H = 60), `grid_blocking_v1.{py,out}`.
+A citation-verifier run on bounded denominators is in progress (the first run was stopped at the owner's question and
+relaunched on the owner's instruction); its result goes in a later entry.
+- **Range.** Every primitive 5-subset of [1, H]: H = 80 (23,312,716 sets), 100 (72,918,416), 120 (184,425,816): max q*
+  = 28 at each, attained by (11,23,26,34,60) and, at 120, also (18,23,41,64,105). The maximum has not moved since
+  H = 60; the tail at q* ≥ 24 grows with H (counts in the .out).
+- **How the grids before q* are blocked.** A runner blocks the unit instant c/q when its reading (d c mod q)/q is
+  within 1/6 of the subject: ON the subject (q | d; it then blocks every instant of that grid) or NEAR it (entry side
+  just past, exit side just before).
+  - SixResidual ≤ 40: 107,817 grids blocked by a runner on the subject, 11,943 by near runners only. Commonest
+    on-subject kills: q = 2 (any rank), q = 3, q = 4 by the fastest, q = 5 by the fastest, q = 6 by rank 2.
+  - Near-only grids: each unit instant blocked by 1 runner (38,578), 2 (20,848), 3 (5,132), 4 (2); entry and exit
+    sides equal (47,839 each; the mirror c ↔ q − c); spread evenly over speed ranks.
+  - All primitive 5-sets ≤ 30 (139,246): the same split, 526,469 on the subject against 35,255 near-only.
+- **Reading** [observation]. Grids are mostly killed wholesale by a runner sitting on the subject at every instant of
+  the grid, i.e. a runner divisible by the grid; a runner can do that only for the grids that divide it. The grids no
+  runner divides are killed instant by instant, with one to three runners near the subject on each. With five runners
+  the grids run out by q = 28 on every set to H = 120.
