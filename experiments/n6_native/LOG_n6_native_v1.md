@@ -1866,3 +1866,24 @@ Owner: *"lets map the arrangement outcomes via cascade in lower orders and see h
   cascade stops within one move; from order 4 the twelve classes are all present, with the same two empty through
   order 8. What complicates with the order is inside the classes: more opener/closer pairs, longer paths, later
   landings. The class structure itself does not grow.
+
+## E79 — What drives the most moves (2026-10-16)
+
+Owner: *"What drives the most moves?"*. Observation only. `long_cascades_v1.{py,out}` (longest cascades, same exhaustive
+ranges as E78), `long_cluster_v1.{py,out}`, `long_cluster_v2.{py,out}` (families).
+- **The longest cascades** are one slow runner plus a run of consecutive or near-consecutive fast speeds ending exactly
+  on a multiple of n times the slow speed: n = 7: (1,17,18,19,20,21) 16 moves (21 = 3·7), (1,10,…,14) 12 (14 = 2·7);
+  n = 6: (1,9,10,11,12) 9 (12 = 2·6); n = 5: (1,23,25,48) 12 (25 = 5·5). The setters go round the run in order, each
+  one lap higher than its previous knot ((6,3),(5,3),(4,3),(3,3),(2,3),(6,4),…), with one runner in the way at almost
+  every move.
+- **Families** (1, nj−k+1, …, nj), k = n − 2, j = 1..40:
+  - ending on nj: n = 7 moves 8, 12, 16 for j = 1, 2, 3, then 5 for every j ≥ 4; n = 6: 5, 9, then 4; n = 5: 4, then 3.
+  - ending on nj − 1: 0 moves for every j (the run's residues are all nonzero mod n, so 1/(n d₁) is a global-isolation
+    instant).
+  - ending on nj + 1: n = 7: 5, 10, then 4; n = 6: 5, then 3; n = 5: 2.
+  - A tight cluster away from a multiple of n does not give long cascades (cluster of 4 at n = 6: 3 moves at w = 100,
+    0 at w = 200).
+- **Reading** [observation]. Length is driven by an AP-like run of fast runners whose residues mod n include 0: a
+  global-isolation arrangement with one runner on the subject. The knot passes down the run residue by residue, one lap
+  per runner per round. The number of rounds is largest when the multiple is small (j ≤ 3 here) and settles at one
+  round for larger j. Moving the run one below the multiple removes the 0 residue and the cascade makes no move at all.
