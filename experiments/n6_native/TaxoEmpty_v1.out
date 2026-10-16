@@ -1,0 +1,3 @@
+'N6Native.k2a_empty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.closer_same_forces_fastest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.fastest_lap_one_first_jump' depends on axioms: [propext, Classical.choice, Quot.sound]

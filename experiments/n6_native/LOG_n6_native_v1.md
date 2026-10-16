@@ -1903,3 +1903,19 @@ Owner: *"Can we formalise any of this?"*. `APFold_v1.lean` (`.out`: 0 errors; no
   the pair's status in m + e_J agrees with 2m_I ≤ 4m_J + 3 in 7,812 of 7,812.
 - Not formalised: the chain of further knots (that is the cascade and its termination); the outcome taxonomy's empty
   classes K2a, K2s1 at every order (E78; order-8 proofs by hand, E325/E333) — candidates.
+
+## E81 — The two empty outcome classes in Lean; rethinking the order-six formal proof (2026-10-16)
+
+Owner: *"Yes k2a and k2s1 then back to order six. Also lets rethink about our proof formalisation and think if any of
+this can supersede any of it"*.
+- `TaxoEmpty_v1.lean` (every order; axioms `[propext, Classical.choice, Quot.sound]` for all three) [PROVED]:
+  `k2a_empty` (with two or more jumps a lap-1 opener is never a strip reading; uses the run's monotonicity R* > R₂ ≥ 1 as
+  hypotheses), `closer_same_forces_fastest` (a faster reading clear at R* re-enters before the opener does, n > 2),
+  `fastest_lap_one_first_jump` (a fastest lap-1 opener is below every slower reading's exit, so it is reached by the
+  first jump). Together: K2a and K2s1 are empty at every order. Data check `taxo_empty_check_v1.{py,out}`: closer =
+  opener ⇒ opener fastest in 11,522 / 8,557 / 1,738 / 303 sets (n = 4..7), K2a/K2s1 occurrences 0.
+- `FORMAL_RETHINK_v1.md`: the proof of record by part. §7 and §2 are native in the dispatch (E58); none of today's
+  results replaces §5, §6 or §8 as it stands. Candidates: (1) §8 by the slow-block window [1/(6v₁), 5/(6v₃)] plus
+  `window_two_uniform` (E7: runners 2, 3 inert in 3,710 of 3,716 §8 walks); (2) §5/§6 natively via shifted meeting
+  instants (untested); (3) Renault's core in framework form (Chen's Lean is Apache-2.0) — reformulated track, owner's
+  decision.
