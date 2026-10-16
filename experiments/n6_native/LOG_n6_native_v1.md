@@ -2346,3 +2346,40 @@ for every theorem) [PROVED].
 - **Commit:** nested repo `8f77b2d`. Not pushed.
 - **Order six's proof of record now:** §2, §7, §8 native; §6 native for D ≥ 15 with gcd(v₁, D) = 1; §6 with
   D < 15 or gcd(v₁, D) > 1, and §5, still BHK.
+
+## E101 — The rest of §6 (D < 15, or gcd(v₁, D) > 1): observation (2026-10-16)
+
+Owner: *"Start the rest of §6: D < 15 and gcd(v1, D) > 1. Observation first."* Observation only; nothing new in Lean.
+`s6_rest_v1..v8.{py,out}`. Region left by the dispatch: §6 with D ∤ v₁ and (D < 15 or g = gcd(v₁, D) > 1).
+- **Every set tested is closed by the four meeting-window statements** (`s6_rest_v1/v2`): primitive ≤ 50 (109,217 sets)
+  uniform 89,874, region 19,019, sum lemma 282, exact meeting fold 42, rest 0; random ≤ 2,000 (2,000) uniform 1,880,
+  region 120, rest 0. `s6_meeting_uniform` already needs only D ∤ v₁, so the uniform part is proved.
+- **gcd > 1, g ∤ v₄** (`s6_rest_v3`, 8,739 random non-uniform sets, g up to 30, D/g up to 79): δ = v₄ − v₃ is not a
+  multiple of g (g | v₃). At the k = k₀ + (D/g)i, i < g, which share one runner-1 phase j/(D/g) ∈ [1/6, 5/9], runner 4's
+  phases kδ/D form a coset of ⟨δ/g⟩ mod 1, of order h = g/gcd(δ, g) ≥ 2, so consecutive points are ≤ 1/2 apart. The
+  after-window arc A has length 2/3 + λ₄ − 2μ ≥ 1/2 (λ₄ ≥ 1/2 from v₃ ≤ 2v₂, μ ≤ 1/3), so the coset meets it: 8,739 of
+  8,739, with h ranging over 2–30. No bound on D is used. This is `s6_window_fold` with a coset in place of an orbit.
+- **gcd > 1, g | v₄**: g divides v₁…v₄, and the meeting-window data at k/D are those of (v₁, …, v₄)/g, v₅/g at D′ = D/g
+  with gcd(v₁/g, D′) = 1; the region test agrees on the set and its reduction (2,522 of 2,522). With D′ ≥ 15 the reduced
+  set is closed by the proved branch's cases (generic 2,019, diagonal 133, sum 6, rest 0). Its v₅/g is rational, so using
+  `s6_branch` here needs v₅ real (or a restatement); D′ < 15 joins the next case.
+- **Coprime, D < 15** (`s6_rest_v4..v6`): the orbit at meeting times is {(j, λj)} mod D, so the class is (D, λ), 104
+  classes. Runner 4's arcs depend on U = (c+1)/c, Q = v₄/v₃ and M = v₄/(3v₅) only. Over a grid (c ∈ {1..8, 20, 100,
+  1000}, 80 Q × 40 M) the region closes every point in 89 classes; the 15 others are λ = 1 for every D, plus (5, 3) and
+  (7, 5), both λ ≡ −2. **With integrality** (δ ≥ 1, Q = 1 + δ/((c+1)D), δ ≡ λv₁): for c ≤ 30, failures occur in only
+  39 cells (D, c, δ, v₁ mod D): c = 1: 27, c = 2: 8, c = 3: 3, c = 4: 1, none for c ≥ 5; λ = 1 in 37 cells, λ = −2 in 2
+  ((7, 1, 2, 6) and (7, 1, 3, 2)). D = 2 has none: its failures need Q − 1 below 1/((c+1)D).
+- **The cells are finite** (`s6_rest_v7/v8`): v₁ < v₃/3 restricts v₁ to finitely many values in its class, and M ≥ M_min
+  bounds v₅. 125 integer sets: sum lemma 113, meeting fold 10, region 2. Since the sum lemma's I = [1/3 + v₃/(3v₅), …]
+  and the meeting fold's condition v₅|W| ≥ 1/3 both get harder as v₅ decreases, v₅ = v₄ is each cell's worst point.
+  There all 41 (cell, v₁) pairs close: sum lemma 31 (v₁ = δ, so v₄ = v₃ + v₁) and meeting fold 10 (v₁ = δ + D, e.g.
+  (8, 21, 28, 29, ·), and the λ = −2 cells (2, 7, 14, 17, ·)). This covers every v₅ > v₄, including the rational v₅/g
+  from the reduction.
+- **Reading** [observation]. The rest of §6 has the same shape as the proved branch, with one new piece:
+  1. uniform: proved;
+  2. g ∤ v₄: a coset of order ≥ 2 meets a half arc (short proof from `s6_window_fold`);
+  3. g | v₄: reduce to D′ = D/g;
+  4. coprime D < 15: 104 direction classes, a region certificate over (c, Q, M) with integer δ, like E99's λ = ±1
+     certificate, plus 41 finite pieces closed by the sum lemma or the meeting fold at M = 1/3.
+- **Not established here:** the region results are grid samples, not a certificate; c was scanned up to 30 and no failing
+  cell appears for c ≥ 5, but large c needs an argument; the g | v₄ reduction needs `s6_branch`'s v₅ to be real.

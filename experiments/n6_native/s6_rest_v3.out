@@ -1,0 +1,2 @@
+C (g not | v4): {'arc >= 1/2': 8739, 'one phase closes': 8739}   h = order of runner 4's coset: {2: 1714, 3: 1668, 4: 695, 5: 1247, 6: 449, 7: 628, 8: 406, 9: 493, 10: 427, 12: 240, 15: 587, 30: 185}  failures []
+B (g | v4): {"D'>=15: generic": 2019, "D'<15": 364, "D'>=15: diagonal": 133, "D'>=15: sum": 6} {'region same on S and reduced': 2522}
