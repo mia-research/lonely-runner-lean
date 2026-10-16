@@ -2061,3 +2061,28 @@ standard axioms"*. Observation only. `s56_window_v1.{py,out}`, `s56_failures_box
   Two attempts to shrink the 760-leaf tree with free split points failed at the AP corner (1,2,3,4,5): x₂ = 2, x₃ = 3,
   x₄ = 4, x₅ = 5 must be cell boundaries, because only the two degenerate boxes (0,0,0,0,0) and (0,1,2,3,4) meet there.
   A hand-symbolic §8 would be the four closed-form cases plus a hand cover of the bounded remainder; not attempted.
+
+## E88 — What the 0.2% of §5/§6 is, why it occurs, and what it changes (2026-10-16)
+
+Owner: *"first we need to understand what this 0.2% is and why it occurs and does why it happens mean we should adjust
+how we got there."* `s56_failures_v2.{py,out}`, `s56_cluster_box_v1.{py,out}`.
+- **Correction to E87.** "All 16 have lonely sets of width 0" is wrong: E87's readout listed only the first three lap
+  vectors found (the tight points 1/6, 5/6). Over a full period (exact) only (1,3,4,5,9) is tight (isolated points,
+  agreeing with E24); the other 15 have positive-width lonely intervals, all narrow.
+- **What they are.** Two kinds:
+  1. the tight set (1,3,4,5,9) (lonely only at 1/6 and 5/6);
+  2. one slow runner plus a cluster of near-equal fast speeds: the run family (1, 3k+2, 3k+3, 3k+4, 3k+5) (E79's
+     long-cascade family), (1,4,5,6,X) and (2,5,7,9,15). Their widest lonely intervals shrink with the cluster's speed:
+     width × v₁ = 5/252, 5/528, 11/936, 11/1428, 17/2052, 17/2760 for k = 1..6.
+- **Why.** Window and fold statements treat runners one or two at a time, with fixed length thresholds (≥ 2/(3a),
+  ≥ 1/(3b)). A cluster of near-equal speeds blocks almost every instant collectively: its readings stay together only
+  while their spread (3t for a run of four) is under 2/3, so with the slow runner needing t ≥ 1/6 the lonely instants
+  sit in short intervals near t ≈ 1/6–2/9. No individual threshold is met there.
+- **The collective statement exists as a parametric lap box.** For the run family, laps (0, m, m, m, m), m = ⌈k/2⌉:
+  the box reduces to v₅ ≤ 6m + 5, 6m + 1 ≤ 5v₂ and v₅/v₂ ≤ (6m+5)/(6m+1) (the cluster's spread). Exact check: holds for
+  k = 2..2,000 (1,999 of 1,999); k = 1 by the box (0,2,2,3,3).
+- **What it changes** [reading]. The finite fixed list (E83–E86) works on a bounded region of ratios. For unbounded
+  directions (§5/§6, where v₂/v₁ is unbounded) the list must contain families indexed by an integer m — a box or window
+  whose laps scale with m, covering a corridor to infinity — rather than more fixed boxes. The cluster box is the first
+  such family; the residue-isolation corners (E87, e.g. (1,8,9,10,11)) sit inside this family's corridor. The route
+  stands; the statement list needs parametric members.
