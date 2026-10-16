@@ -1779,3 +1779,15 @@ Q₀ = 6 → q* = 16; 12 → 16; 20 → 23; 28 → 29; 40 → 41; 60 → 61.
 - Other reported sources, all with speed-dependent denominators: Perarnau–Serra survey (2024) eq. (4) t₀ = ℓ/(vᵢ+vⱼ);
   Rifford's timely conjecture bounds laps of the slowest runner (a different quantity); Barajas–Serra N = 7^{m+1};
   Tao 2018 bounds speed size.
+
+## E74 — The counterexample family is beaten by the AP's window (2026-10-16)
+
+Owner: *"But we have ap and residue"*. Check (inline, exact): the four-runner AP (1,2,3,4) at threshold 1/6 is lonely on
+whole windows, not points: [1/6, 5/24] and [19/24, 5/6] (length 1/24), [7/18, 5/12] and [7/12, 11/18] (length 1/36),
+per lap. The lonely instants found for (1,2,3,4,lcm(1..Q₀)) — 3/16, 4/23, 5/29, 7/41, 24/61 — all lie in these windows.
+- **Reading** [observation]. E73's family kills every small grid but not the AP's window: four runners at threshold
+  1/6 have slack (they are an order-five arrangement, isolated with room at 1/5), so their isolation is an interval,
+  and the fifth runner, whatever its residue, is folded through that interval. A runner of speed X sweeps X/24 laps
+  across a window of length 1/24, so for X ≥ 8 it cannot stay inside its blocked third for the whole window. The grid
+  bound fails because the instant's denominator follows the fifth runner; the AP-plus-residue mechanism does not.
+  This is the lower-order slack that the merge-and-stepping reduction and Renault's order-five seed also use.
