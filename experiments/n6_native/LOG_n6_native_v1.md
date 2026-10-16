@@ -1988,3 +1988,29 @@ tested to 20) and `s8_region_v2.out` (v₁ ≤ 20, tested to 24); `s8_region_box
   v₁ ≤ 14 cover missed such slivers). An exact certificate would subdivide the bounded region and check, cell by cell,
   that one statement holds throughout (linear for boxes: check the cell's vertices); that is a covering certificate,
   E2's framing, the owner's decision.
+
+## E85 — §8: an exact cell certificate closes the whole region (2026-10-16)
+
+Owner: *"Yes: build an exact cell-subdivision certificate that the finite list covers the whole bounded open region of
+section 8, then decide how to put it in Lean."* Scripts `s8_cert_v1..v5.py` (outputs `.out`), leaves
+`s8_cert_v5_leaves.txt`; Lean `S8Cert_v1.lean` (`window_two_simple`, axioms `[propext, Classical.choice, Quot.sound]`).
+- **Domain.** Ratios xᵢ = vᵢ/v₁: 1 ≤ x₂ ≤ x₃ ≤ 3, x₃ ≤ x₄ ≤ x₅. The part x₄ ≥ 6 is closed by `s8_block3_window` (proved,
+  E82). The rest is x₂, x₃ ∈ [1, 3], x₄ ∈ [1, 6], x₅ ∈ [1, 30] or [30, ∞), started on the unit grid (so the tight AP point
+  (1,2,3,4,5) is a corner) and bisected on the widest side; cells clipped by the ordering.
+- **Test per cell (exact, worst corner; every condition is monotone in each variable):** three-block windows in
+  `window_two`'s own form (base and residue conditions; for x₅ ∈ [30, ∞) the closed form 1/(3a) + 2/(3b), proved as
+  `window_two_simple`), the four-block fold, and lap boxes (the 20 pair inequalities).
+- **History.** v1–v2 used the closed form for every window and left large failing regions (v2: 2.87 million failing
+  cells at depth 24); v3 with the exact window_two test left 273 failing cells near x₃ = 3, x₅ ≈ 11.86; v4 added, from the
+  failing cells' centres, five boxes and three windows; then 0 failing cells.
+- **Result (v5)** [certificate computed; independent re-check owed]: 1,226 certified leaves, depth ≤ 22, largest
+  endpoint denominator 32. Final list: windows (0,0,0), (1,2,3), (0,1,1), (0,0,1), (0,1,2), (2,6,7), (1,3,4); fold
+  (0,0,0,0); boxes (0,0,0,0,0), (0,0,0,0,1), (0,0,0,1,1), (0,0,1,1,2), (0,1,2,3,4), (0,0,0,1,2), (0,1,2,3,8),
+  (1,3,4,5,7), (1,2,3,4,6), (0,1,1,2,2), (1,3,4,6,8), (0,1,2,3,9), (2,6,7,10,14), (1,3,4,6,17), (1,3,4,6,18),
+  (0,1,1,2,6). Every statement is an instance of `block3_window_laps`, `block4_fold_laps` or `box5` (E83).
+- **Lean plan (decided, not started).** (1) An integer checker: each leaf's inequalities cross-multiplied to ℕ/ℤ, so the
+  kernel's accelerated Nat arithmetic evaluates them under plain `decide` (no `native_decide`). (2) Soundness lemmas: a
+  leaf whose check passes satisfies the real hypotheses of its statement at every point of the cell (monotonicity).
+  (3) Tree soundness: the bisection tree covers its start cell (induction on the tree). (4) `lonely_8_native` on whole
+  numbers with v₃ ≤ 3v₁, then rewire `lonely6_of_lt` as was done for §7 (E58). Owed first: an independent re-check of the
+  leaves (random rational points located in a leaf and tested exactly).
