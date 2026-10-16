@@ -1,0 +1,15 @@
+n=3 (H=200, 12231 sets): 5 classes realised; empty: ['K1b', 'K1z', 'K2a', 'K2b', 'K2c', 'K2d', 'K2s1', 'K2s2', 'K2z']
+   K0 7392, K0z 67, K1a 1225, K1s1 1833, K1s2 1714
+   (opener rank, closer rank) pairs with a move: 2 of 4; most moves 1; largest R* 396/199 (~1.990)
+n=4 (H=90, 98689 sets): 12 classes realised; empty: ['K2a', 'K2s1']
+   K0 55019, K0z 2895, K1a 13222, K1b 6557, K1s1 4142, K1s2 3169, K1z 248, K2b 3023, K2c 3078, K2d 3077, K2s2 4211, K2z 48
+   (opener rank, closer rank) pairs with a move: 4 of 9; most moves 3; largest R* 261/88 (~2.966)
+n=5 (H=50, 215659 sets): 12 classes realised; empty: ['K2a', 'K2s1']
+   K0 113886, K0z 12371, K1a 29470, K1b 14279, K1s1 2633, K1s2 1980, K1z 1436, K2b 5968, K2c 13012, K2d 15693, K2s2 3944, K2z 987
+   (opener rank, closer rank) pairs with a move: 7 of 16; most moves 12; largest R* 121/37 (~3.270)
+n=6 (H=30, 139246 sets): 12 classes realised; empty: ['K2a', 'K2s1']
+   K0 71416, K0z 13502, K1a 17383, K1b 7056, K1s1 436, K1s2 310, K1z 444, K2b 3246, K2c 10319, K2d 13482, K2s2 992, K2z 660
+   (opener rank, closer rank) pairs with a move: 14 of 25; most moves 11; largest R* 125/27 (~4.630)
+n=7 (H=22, 74144 sets): 12 classes realised; empty: ['K2a', 'K2s1']
+   K0 36238, K0z 8315, K1a 9373, K1b 2690, K1s1 72, K1s2 40, K1z 286, K2b 1439, K2c 6975, K2d 7422, K2s2 191, K2z 1103
+   (opener rank, closer rank) pairs with a move: 21 of 36; most moves 16; largest R* 33/8 (~4.125)

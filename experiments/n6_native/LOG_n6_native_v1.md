@@ -1848,3 +1848,21 @@ R = 6 d₁ t, zone 6j − 1 < Rρ < 6j + 1).
   classes, the same two empty, on every set tested. Slack depth is a different cut across those classes, not a new
   class. Whether each class carries one uniform mechanism (the open item of the finite-arrangement review) is the same
   question at order 6.
+
+## E78 — Digression: the outcome taxonomy at orders 3–7 (2026-10-16)
+
+Owner: *"lets map the arrangement outcomes via cascade in lower orders and see how they develop"*. Observation only.
+`taxo_orders_v1.{py,out}`: E325's classes with 8 → n, exhaustive over primitive (n−1)-subsets of [1, H_n]
+(H = 200, 90, 50, 30, 22 for n = 3..7; ranges differ, so counts are not comparable across orders, class sets are).
+- **n = 3** (12,231 sets): 5 classes — K0 7,392, K0z 67, K1a 1,225, K1s1 1,833, K1s2 1,714. At most one move
+  (as `FewDifferences.two_diffs_stop_within_one_move` proves), so no K2 class; no K1b or K1z: with two runners the
+  one-move landing's closer is the opener itself in 3,547 of 4,772 moving sets.
+- **n = 4** (98,689): all 12 classes, K2a and K2s1 empty; at most 3 moves.
+- **n = 5** (215,659), **n = 6** (139,246), **n = 7** (74,144): the same 12 classes, the same two empty. Order 8
+  (E325, a different sample): the same.
+- What grows: (opener rank, closer rank) pairs among moving cascades 2, 4, 7, 14, 21 of (n−1)² for n = 3..7; most moves
+  1, 3, 12, 11, 16; largest landing R* 1.99, 2.97, 3.27, 4.63, 4.13 (all on these ranges).
+- **Reading** [observation]. The class set is complete from order 4 on: order 3 has five classes because a two-runner
+  cascade stops within one move; from order 4 the twelve classes are all present, with the same two empty through
+  order 8. What complicates with the order is inside the classes: more opener/closer pairs, longer paths, later
+  landings. The class structure itself does not grow.
