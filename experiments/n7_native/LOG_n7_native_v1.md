@@ -110,3 +110,86 @@ The T5 exceptions keep growing in count and fall in share. Phase 2 targets are:
 - (b) the T5 sets as a 5-block with the fastest runner folded, which needs a region description, not a list.
 
 The single tight set holds to 70.
+
+## E3 (2026-10-17) Phase 2: pinch closed form for the 41 T6 sets; the T5 region with v6 folded
+
+**Map:** order seven, exception class T6 (lap box only) and class T5 with v6 folded, from E1–E2.
+
+### Pinch instants (closed form)
+
+A **pinch** is an entering edge (speed a, lap m) and a leaving edge (speed b, lap m'):
+
+- L = (7m+1)/(7a)
+- U = (7m'+6)/(7b)
+- delta = (7m'+6) a - (7m+1) b > 0
+- U - L = delta/(7ab)
+
+Scaling all speeds by c maps the interval [L, U] to [L, U]/c, shifted by k/c for k in 0..c-1. So the invariant is
+the normalised pinch (a/g, m, b/g, m') with g = gcd(a, b); laps are reduced by a common period.
+
+Admissible speeds:
+- A speed x is in band throughout [L, U] iff, with n = floor(xL), we have xL - n >= 1/7 and xU <= n + 6/7.
+- Since x(U - L) <= 5/7, every admissible speed satisfies x <= 5ab/delta, so each pinch's admissible list is finite.
+
+Results (`o7_pinch_v1.out`, `o7_pinch_v2.out`, `o7_pinch_v3.out`):
+- The 41 T6 sets (<= 60) fall into **20 normalised pinches**, or **17 up to time reversal**.
+  - Reversal t -> -t swaps the 1/7 and 6/7 edges: (a, m, b, m') -> (b, b-1-m', a, a-1-m).
+  - The reversal pairs present are (1,0,5,0)~(5,4,1,0), (2,1,3,1)~(3,1,2,0) and (4,2,7,3)~(7,3,4,1).
+- Largest classes:
+
+  | pinch | delta | interval | sets |
+  |---|---|---|---|
+  | (7,3,4,1) | 3 | [22/49, 13/28] | 9 |
+  | (4,2,7,3) | 3 | [15/28, 27/49] | 5 |
+  | (1,0,5,0) | 1 | [1/7, 6/35] | 4 |
+  | (2,1,3,1) | 2 | [4/7, 13/21] | 3 |
+  | (3,1,2,0) | 2 | [8/21, 3/7] | 3 |
+
+  The other 15 pinches hold one or two sets each. Delta ranges over 1..34.
+- Certificate check, exact fractions: all 41 sets are in band on their pinch interval at some shift (41/41).
+  `[VERIFIED-INSTANCE]` for these 41 sets.
+- **Consequence:** every T6 set is lonely at the instant t* = (7M+1)/(7 v_i), where v_i is the entering runner at
+  lap M. One runner sits exactly at 1/7 there. The instant has the form K/(7P) with K ≡ 1 (mod 7) and P a speed of
+  the set. It is reached here by the edge construction, not by a 7-adic argument.
+
+### T5 region with v6 folded
+
+Folding v6 at the 5-prefix window: with W5(P) the longest window where all of P = (v1..v5) are in band at 1/7, any
+v6 >= 2/(7 W5(P)) closes the set, because runner 6 sweeps an arc of length >= 2/7, which meets the closed band.
+W5 scales as 1/c, so the scale-free form is:
+
+- kappa(P) = v5 W5(P), which lies in (0, 5/7];
+- the T5 region is v6/v5 >= rho(P) = 2/(7 kappa(P)).
+
+W5(P) > 0 for every P by native order six: the band [1/6, 5/6] lies inside [1/7, 6/7], and an order-six tight
+point at 1/6 is interior at 1/7.
+
+Results (`o7_t5_v1_30.out`, `o7_t5_v1_60.out`, `o7_t5_v2.out`):
+- Over the 5,302,911 primitive 5-prefixes <= 60, **min kappa = 3/28**, so rho <= 8/3. It is attained only at
+  (1,3,4,5,7) and (1,4,5,6,7). The minimum is the same at <= 30. The value is exact; the search is float.
+- Exactly **9 prefixes have kappa < 5/28**, identical at <= 30 and <= 60 (exact values):
+
+  | prefix | kappa | rho |
+  |---|---|---|
+  | (1,3,4,5,7), (1,4,5,6,7) | 3/28 | 8/3 |
+  | (1,2,3,4,5), (1,2,4,5,6), (1,6,7,8,9) | 1/7 | 2 |
+  | (1,4,10,11,12) | 12/77 | 11/6 |
+  | (1,7,8,9,11), (2,7,8,9,11) | 33/196 | 56/33 |
+  | (1,10,11,12,13) | 6/35 | 5/3 |
+
+- The level 5/28 is attained by a large class: v5 W(1,3,4,5) = 5 · 1/28, the 4-prefix of order six's tight set
+  (1,3,4,5,9). It recurs in its scalings, for example (1,3,9,12,15), (1,4,12,16,20) and (4,5,15,20,25), and also in
+  (1,6,8,9,10) and (1,12,13,14,15).
+
+Grades:
+- **EMPIRICAL (5-prefixes <= 60):** v6 >= (8/3) v5 closes every order-seven set by the v6 fold. Outside the 9
+  prefixes, v6 >= (8/5) v5 suffices.
+- **Not proved:** a lower bound kappa(P) >= 3/28 for all P. It is the quantitative statement that phase 3 would
+  need, an order-six-type window bound at 1/7.
+
+**Consequence:** order seven reduces, through the v6 fold, to the bounded-ratio region v5 < v6 < rho(P) v5 together
+with a bound on kappa. The T6 exceptions are explicit edge-instant certificates.
+
+Still not understood:
+- why these 17 pinch classes and not others: the T4/T5 failure at those sets has no derived explanation;
+- whether the T6 list is finite beyond 60.
