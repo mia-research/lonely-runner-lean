@@ -2785,3 +2785,33 @@ Classical.choice, Quot.sound]`) [PROVED]; `s5k1_slow_v1`, `s5k1_fast_v1..v3`, `s
      - λ₅ ≤ Λ₅: the slow tree in (λ, λ₅) with `ivt_box` leaves (intervals ≥ 1/50);
      - λ₅ > Λ₅, γ ≤ 2/3: runner 5 swept into a 4-runner `ivt_box` interval;
      - γ > 2/3: the fold of runner 5 with μ ≤ (1 + β)/(3(1 + γ)) ≤ 0.213.
+
+## E114 — §5, k = 1 completed: 1/50 ≤ α ≤ 1/25 by tree, α ≤ 1/50 analytically (2026-10-17)
+
+`S5K1Mid_v1.lean` (`.out`; `tree_ok`, `s5k1_mid`), `S5K1Small_v1.lean` (`.out`; `treeS_ok`, `k1_strip`, `s5k1_small`):
+0 errors, no `sorry`/`native_decide`/`admit`, axioms `[propext, Classical.choice, Quot.sound]` [PROVED]. Generators
+`s5k1_cert_v4.py` (tree `s5k1_cert_tree_v2.lean.txt`), `s5k1_small_gen_v1/v2.py`, `s5k1_small_gen_r5.py`,
+`s5k1_strip_v1.py` (prototype), `s5k1_small_treeS_v1.lean.txt`.
+- **`s5k1_mid`** (25v₁ ≤ v₂ ≤ 50v₁): the E111 checker on the root box α ∈ [1/50, 1/25]; 6,939 leaves, 5 empty boxes.
+- **`s5k1_small`** (v₂ ≥ 50v₁), with λ = (v₄ − v₂)/v₁:
+  - **λ ≤ 25/14**: one runner-4 leaf (`k1_leafI`, m = 0, p ∈ [1/6, 14/75]; runner 5 folded at worst μ = 1/3).
+  - **λ ∈ [25/14, 16/5]** (`k1_strip`, the v₄ ≈ v₃ + v₁, v₃ + 2v₁ resonance):
+    - 3v₅ ≥ 5v₂: two runner-4 leaves with μ₀ = 133/625 (μ ≤ (1 + β)/5 there);
+    - λ₅ = (v₅ − v₂)/v₁ ≤ 30: the (λ, λ₅) tree `treeS` (126 leaves, `decide +kernel`) of `ivt_box` leaves (runner 5
+      placed by its own lap; P-intervals ≥ 1/50 ≥ α; 16 pairwise envelope checks per leaf, term-wise bounds,
+      `pairOK_sound`);
+    - λ₅ > 30: `sweep5` — runners 1–4 fit on a P-interval (two 4-runner leaves `r5_ok1`, `r5_ok2`); runner 5's offset
+      λ₅P moves faster than the envelopes (slopes λ₅ − λ and λ₅), so an intermediate-value step picks its lap m₅ and a
+      sub-interval of length 2/(3λ₅) ≥ α (from 3v₅ < 5v₂), then `ivt_box`.
+  - **λ ∈ [16/5, 8] and [20, 45/2]**: 14 runner-4 leaves (m = 1, 2, 4).
+  - **λ ∈ [8, 20]**: `k1_step` — from lap j₀ runner 4's offset λp = βu steps by β per lap and lands in
+    [M + 1/3 − β, M + 1/3] while p ≤ min(1/3, 2/3 − β) (β ≤ λ/50).
+  - **λ ≥ 45/2**: `k1_uniform` if 17v₂ ≤ 12v₄ (the window at j₀, using α ≤ 1/50), else `k1_step` with β < 5/12.
+- **On the "2D orbit" of E112–E113.** It was not needed in that form. With runner 5 folded at worst μ = 1/3, runner 4
+  alone decides everywhere except the strip around λ = 2, 3. There runner 5's phase matters, and the strip's (λ, λ₅)
+  tree and the sweep supply it. The resonant directions are exactly that strip.
+- **§5 is now native in full** (experiment files):
+  - `s5_k2` (k ≥ 2, `S5K2_v1.lean`, E106);
+  - k = 1: `s5k1_large` (v₂ < 25v₁, `S5K1Large_v1.lean`, E111), `s5k1_mid` and `s5k1_small` (this entry).
+
+  Not yet moved into the tree or wired into the order-six dispatch, where §5 is still BHK's `lonely_5`.

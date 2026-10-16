@@ -1,0 +1,4 @@
+(S) lam in [25/14, 16/5], lam5 <= 30.0: {'leaf': 104, 'empty': 0, 'fail': 0} []
+(R5) 4-runner intervals of length 0.0595: {'leaf': 1, 'fail': 0} []
+(S) lam in [25/14, 16/5], lam5 <= 40.0: {'leaf': 547, 'empty': 1, 'fail': 0} []
+(R5) 4-runner intervals of length 0.0438: {'leaf': 1, 'fail': 0} []

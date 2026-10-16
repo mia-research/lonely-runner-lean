@@ -1,0 +1,9 @@
+../experiments/n6_native/S5K1Small_v1.lean:43:102: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/S5K1Small_v1.lean:254:53: warning: unused variable `h12`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'LRC.S6Native.treeS_ok' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.k1_strip' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s5k1_small' depends on axioms: [propext, Classical.choice, Quot.sound]
