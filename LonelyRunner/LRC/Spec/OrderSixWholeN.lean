@@ -4,6 +4,7 @@ import LonelyRunner.LRC.Spec.OrderSixSecSevenCasesN
 import LonelyRunner.LRC.Spec.OrderFiveResidualN
 import LonelyRunner.LRC.Spec.OrderSixSecSevenNativeN
 import LonelyRunner.LRC.Spec.OrderSixEightNativeN
+import LonelyRunner.LRC.Spec.OrderSixSixNativeN
 
 /-!
 # Order six on whole numbers: the four BHK cases, dispatched
@@ -13,7 +14,9 @@ import LonelyRunner.LRC.Spec.OrderSixEightNativeN
 * `v₃ ≤ 3v₁`                      — §8, `S8Native.lonely_8_native` (2026-10-16; slow-block windows, the
   four-runner fold and lap boxes, closed by a kernel-checked cell certificate). BHK's form `lonely_8` is kept.
 * `3v₁ < v₃`, `D ∣ v₁`             — §5, `lonely_5` (Proposition 11 at named instants);
-* `3v₁ < v₃`, `D ∣ v₃`, `D ∤ v₁`   — §6, `lonely_6`;
+* `3v₁ < v₃`, `D ∣ v₃`, `D ∤ v₁`   — §6: when `D ≥ 15` and `gcd(v₁, D) = 1`, `S6Native.lonely_6_native_branch`
+  (2026-10-16; meeting windows, the orbit of `v₁` mod `D`, folds, the sum relation, a small case tree); otherwise
+  BHK's `lonely_6`;
 * `3v₁ < v₃`, `D ∤ v₃`, `D ∤ v₁`   — §7, `S7Native.lonely_7_native` (2026-10-16; the native route: 2D global
   isolation on the meeting-time orbit, the two-runner window lemma, `G₄`/`G₇` closed by boxes and windows).
   BHK's form `S7.lonely_7` is kept and still proved.
@@ -39,7 +42,9 @@ theorem lonely6_of_lt {v1 v2 v3 v4 v5 : ℕ} (h0 : 0 < v1) (h12 : v1 < v2) (h23 
   by_cases hD1 : (v3 - v2) ∣ v1
   · exact S7.Named.lonely_5 h0 h12 h23 h34 h45 hlarge hD1
   by_cases hD3 : (v3 - v2) ∣ v3
-  · exact lonely_6 h0 h12 h23 h34 h45 hlarge hD3 hD1
+  · by_cases hb : 15 ≤ v3 - v2 ∧ Nat.Coprime v1 (v3 - v2)
+    · exact LRC.S6Native.lonely_6_native_branch h0 h12 h23 h34 h45 hlarge hD3 hb.1 hb.2
+    · exact lonely_6 h0 h12 h23 h34 h45 hlarge hD3 hD1
   · exact LRC.S7Native.lonely_7_native h0 h12 h23 h34 h45 hlarge hD3 hD1
 
 /-- **Order six on whole numbers.**  At most five positive whole numbers are lonely at `1/6`. -/
