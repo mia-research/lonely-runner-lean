@@ -1,0 +1,4 @@
+lam with min spread > 1/3 - 0.02 (no p leaves a clear arc of 1/3 + 0.02 for runners 2, 3, 4):
+   lam in [1.89, 2.09], worst min spread 0.3433
+   lam in [2.92, 3.19], worst min spread 0.3334
+max over lam of min spread: 0.34333333333333327

@@ -1,0 +1,4 @@
+'LRC.S6Native.tight_13459' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.tight_12345' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S5K1Large.tree_ok' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S5K1Large.s5k1_large' depends on axioms: [propext, Classical.choice, Quot.sound]

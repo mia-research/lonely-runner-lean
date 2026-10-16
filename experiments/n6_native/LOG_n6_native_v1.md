@@ -2696,3 +2696,29 @@ displacement lemmas on the exact-edge planes; then the k = 1 tree and small alph
 - **Exact check** (`s5k1_tightinst_v1`, fractions, closed bands): every integer k = 1 set with v₁ ≤ 60 in either
   neighbourhood (2,757,566 and 820,354 sets) is lonely at the named instant; 0 failures.
 - These two neighbourhoods become leaves of the k = 1 tree (next).
+
+## E111 — §5, k = 1, α = v₁/v₂ > 1/25: proved; the small-α structure (2026-10-17)
+
+`S5K1Large_v1.lean` (`.out`; 0 errors; no `sorry`/`native_decide`; axioms `[propext, Classical.choice, Quot.sound]` for
+`tight_13459`, `tight_12345`, `tree_ok`, `s5k1_large`; the kernel check of the tree takes about 9 minutes) [PROVED].
+`s5k1_cert_v2.{py,out}` (float prototype), `s5k1_cert_v3.py` (exact generator), `s5k1_cert_tree_v1.lean.txt`,
+`s5k1_small_v1.{py,out}`.
+- **`s5k1_large`**: v₁ < v₂ < v₃ = v₂ + v₁ < v₄ < v₅, 3v₁ < v₃, v₂ < 25v₁ ⇒ lonely.
+- **The tree** (κ fixed at 1, non-strict windows): **6,328 leaves, 34 empty boxes, 6,361 splits**, over α ∈ [1/25, 1/2],
+  β ∈ [0, ∞), ν ∈ [1, ∞). Leaf kinds as in E106, plus kind 6 / 7 for a box inside the neighbourhood of (1, 3, 4, 5, 9) /
+  (1, 2, 3, 4, 5), sound by `tight_13459` / `tight_12345` (`tp1_sound`, `tp2_sound`). The float prototype used
+  18 + 58 such leaves.
+- **Small α < 1/25** (`s5k1_small_v1`, the α → 0 limit; observation). Within one lap of runner 2, runners 2, 3, 4 read
+  y, y + p, y + λp (p = runner 1's reading, λ = (v₄ − v₂)/v₁ > 1), so their common clear arc has length
+  2/3 − spread({0, p, λp}). With κ = 1 the pair-window sweep is w ≥ 2/3 − p, so the fold of runner 5 needs p ≤ 1/3.
+  - Over λ ∈ (1, 40] and p ∈ [1/6, 0.8], the minimal spread exceeds 1/3 − 0.02 only for λ ∈ [1.89, 2.09] (worst 0.343)
+    and λ ∈ [2.92, 3.19] (worst 1/3). These are the relations v₄ = v₃ + v₁ and v₄ = v₃ + 2v₁ (λ = 2, 3; the AP family of
+    E107).
+  - At λ = 2 the clear arc is 1/3 − 2α/3 to first order, and the runner-5 fold needs v₂/(3v₅) ≤ 1/(3(1 + 2α)): equal to
+    first order. The fold alone does not decide it.
+  - There the closing instant is a lap box placing runner 5 by its own phase λ₅p (λ₅ = (v₅ − v₂)/v₁) when v₅/v₂ is close
+    to 1. At p near 5/6 the three points {0, p, 2p} occupy an arc of length about 1/3, and any fourth point keeps the
+    spread ≤ 2/3. When v₅/v₂ is bounded away from 1, the fold works with margin.
+- **Plan for α < 1/25** (not done): as E106 — the uniform window at j₀ for large β; the step lemma for large λ (p ≤ 1/3
+  now); and for λ ∈ (1, Λ] a tree over (λ, runner-5 parameter) with α ∈ (0, α₁] whose leaves are p-intervals of length
+  ≥ α₁ with a y-window (fold of runner 5, or a lap box with runner 5 by λ₅ when v₅/v₂ is near 1).
