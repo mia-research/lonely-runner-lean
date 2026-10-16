@@ -2226,3 +2226,26 @@ Owner: *"Yes"* (taken as the recommended option: the §6 orbit proof). Observati
   global-isolation statement, provable like `s7_main_route`; (2) the degenerate directions, where runners 1 and 4 move
   together at meeting times, by a direct argument with runner 1 partly clear; (3) small D and coarse orbits by finite or
   explicit checks. Not yet in Lean.
+
+## E95 — §6, part (1) proved: generic orbits meet the region (2026-10-16)
+
+Owner: *"Prove part (1): for orbit directions other than plus or minus 1 and 2, and orbit size above a bound, the orbit
+meets the region; follow s7_main_route."* `S6Generic_v1.lean` (`.out`; axioms `[propext, Classical.choice, Quot.sound]`
+for all three) [PROVED]; `s6_coverage_v2.{py,out}`.
+- **`ap_meets_half_arc`**: for D ≥ 15, 2 ≤ |λ|, 2|λ| ≤ D and any x₀, some integer j ∈ [D/6, 5D/9] has λj/D − x₀ in
+  [m, m + 1/2] for an integer m. Proof: if every point were in an upper half-interval, steps of |λ|/D ≤ 1/2 cannot jump
+  between upper halves (`floor_eq_of_upper`), so all lie in one, span < 1/2; but the span is |λ|(j₁ − j₀)/D ≥ 1/2 when
+  D ≥ 15. The orbit is a progression here, so the region argument needs no case table (unlike `s7_main_route`'s parallelogram,
+  whose shape is fixed and was checked by `decide` for n ≤ 35): the runner-4 condition is a half arc in any position.
+- **`s6_window_fold`**: at a meeting time with runners 2, 3 on the subject, runner 1 at phase p₁ ∈ [1/6, 5/9] and runner 4
+  at phase p₄ whose sweep across the window meets its band in a stretch of length ≥ v₄/(3v₅), runner 5 is folded and the
+  arrangement is lonely.
+- **`s6_generic`** (whole numbers): v₂ = cD, v₃ = (c+1)D, 3v₁ < v₃, v₃ < v₄ ≤ v₅, gcd(v₁, D) = 1, D ≥ 15, and λ with
+  v₄ ≡ λv₁ (mod D), 2 ≤ |λ| ≤ D/2 ⇒ lonely. The half arc comes from λ₄ = v₄ℓ ≥ 1/2 and μ = v₄/(3v₅) ≤ 1/3; k = j·v₁⁻¹ mod D.
+  λ = ±2 is included (D ≥ 15 suffices for it).
+- **Coverage of the two proved §6 theorems** (`s6_meeting_uniform` ∪ `s6_generic`): all primitive §6 sets ≤ 40 (40,075):
+  uniform 31,184, generic 497; left: D < 15 5,936, gcd(v₁, D) > 1 2,389, λ = 1 63, λ = −1 6. Random §6 ≤ 3,000 (3,000):
+  uniform 2,747, generic 168; left: gcd > 1 82, D < 15 3.
+- **Owed for §6:** (2) λ ∈ {0, ±1} (runners 1 and 4 in step at the meeting times), (3) gcd(v₁, D) > 1 (runner 1's orbit
+  coarse: it moves on multiples of g/D) and D < 15 (finitely many orbit shapes per D, so a finite check like
+  `check_orbits` is available there).

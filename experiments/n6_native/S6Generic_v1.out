@@ -1,0 +1,6 @@
+../experiments/n6_native/S6Generic_v1.lean:93:89: warning: unused variable `hD`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'N6Native.ap_meets_half_arc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_window_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_generic' depends on axioms: [propext, Classical.choice, Quot.sound]

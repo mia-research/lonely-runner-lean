@@ -1,0 +1,2 @@
+§6 <= 40: 40075 §6 sets: {'uniform (proved)': 31184, 'rest: D < 15': 5936, 'rest: gcd(v1,D) > 1': 2389, 'generic (proved)': 497, 'rest: lam = 1': 63, 'rest: lam = -1': 6}
+random §6 <= 3000: 3000 §6 sets: {'uniform (proved)': 2747, 'generic (proved)': 168, 'rest: gcd(v1,D) > 1': 82, 'rest: D < 15': 3}
