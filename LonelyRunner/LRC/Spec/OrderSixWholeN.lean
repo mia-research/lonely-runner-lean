@@ -3,13 +3,15 @@ import LonelyRunner.LRC.Spec.OrderSixSixN
 import LonelyRunner.LRC.Spec.OrderSixSecSevenCasesN
 import LonelyRunner.LRC.Spec.OrderFiveResidualN
 import LonelyRunner.LRC.Spec.OrderSixSecSevenNativeN
+import LonelyRunner.LRC.Spec.OrderSixEightNativeN
 
 /-!
 # Order six on whole numbers: the four BHK cases, dispatched
 
 2026-09-24.  Five whole-number speeds `v₁ < ⋯ < v₅`, `D = v₃ − v₂`:
 
-* `v₃ ≤ 3v₁`                      — §8, `lonely_8`;
+* `v₃ ≤ 3v₁`                      — §8, `S8Native.lonely_8_native` (2026-10-16; slow-block windows, the
+  four-runner fold and lap boxes, closed by a kernel-checked cell certificate). BHK's form `lonely_8` is kept.
 * `3v₁ < v₃`, `D ∣ v₁`             — §5, `lonely_5` (Proposition 11 at named instants);
 * `3v₁ < v₃`, `D ∣ v₃`, `D ∤ v₁`   — §6, `lonely_6`;
 * `3v₁ < v₃`, `D ∤ v₃`, `D ∤ v₁`   — §7, `S7Native.lonely_7_native` (2026-10-16; the native route: 2D global
@@ -32,7 +34,7 @@ open MomentIterationN LRC.SpecN ConstructionN
 theorem lonely6_of_lt {v1 v2 v3 v4 v5 : ℕ} (h0 : 0 < v1) (h12 : v1 < v2) (h23 : v2 < v3)
     (h34 : v3 < v4) (h45 : v4 < v5) : ∃ t : ℝ, 0 < t ∧ Lonely6 v1 v2 v3 v4 v5 t := by
   by_cases hlarge : v3 ≤ 3 * v1
-  · exact lonely_8 h0 h12 h23 h34 h45 hlarge
+  · exact LRC.S8Native.lonely_8_native h0 h12 h23 h34 h45 hlarge
   push_neg at hlarge
   by_cases hD1 : (v3 - v2) ∣ v1
   · exact S7.Named.lonely_5 h0 h12 h23 h34 h45 hlarge hD1
