@@ -2014,3 +2014,25 @@ section 8, then decide how to put it in Lean."* Scripts `s8_cert_v1..v5.py` (out
   (3) Tree soundness: the bisection tree covers its start cell (induction on the tree). (4) `lonely_8_native` on whole
   numbers with v₃ ≤ 3v₁, then rewire `lonely6_of_lt` as was done for §7 (E58). Owed first: an independent re-check of the
   leaves (random rational points located in a leaf and tested exactly).
+
+## E86 — §8 natively in the order-six proof: the certificate in Lean, kernel-checked (2026-10-16)
+
+Owner: *"lets continue on"* (after E85's Lean plan).
+- **Core** (`S8CertCore_v1.lean`): cells of ratio bounds (`hi 3 = 0` = unbounded), statements (three-block window with
+  endpoints L, U in units of 1/v₀; four-block fold; five-runner lap box), a rational checker (`stmtOK`) and its soundness
+  (`band_sound`, `w3_sound`, `f4_sound`, `box_sound`, `stmt_sound`); clipping by the §8 order (`clip_sound`), empty cells
+  (`empty_sound`), the bisection tree and `tree_sound` (induction on the tree).
+- **Certificate** (`s8_cert_lean_gen_v1.py` builds it with the Lean semantics exactly; `S8CertFull_v1.lean`): root
+  ratios x₂, x₃ ∈ [1, 3], x₄ ∈ [1, 6], x₅ ∈ [1, ∞); 760 leaves, 759 splits, depth ≤ 32, the E85 list of statements.
+  `cert_ok : checkTree certTree root = true` by `decide +kernel` (no `native_decide`; about 45 s). `lonely_8_box`
+  (x₄ ≤ 6), `lonely_8_far` (x₄ ≥ 6, first window), `lonely_8_real` (every ordered real arrangement with v₂ ≤ 3v₀),
+  `lonely_8_native` (whole numbers, the dispatch's form; lap shift for t > 0).
+- **In the tree** (nested repo commit, not pushed): `LonelyRunner/LRC/Spec/OrderSixEightNativeN.lean` (namespace
+  `LRC.S8Native`); `lonely6_of_lt` now calls `lonely_8_native`; BHK's `lonely_8` kept. `S8Native_wiring_v1.out`: build of
+  the order 3–7 targets (8,333 jobs); axioms `[propext, Classical.choice, Quot.sound]` for `lonely_8_native`,
+  `lonely6_of_lt` and `lonelyRunnerAtN_3..7`; the dispatch's proof term references `lonely_8_native` and
+  `lonely_7_native` and not `lonely_8`. [PROVED]
+- The independent Python re-check of E85's leaves was stopped unfinished (no failure printed before stopping); the
+  kernel check of the Lean tree supersedes it.
+- **Consequence:** the order-six proof of record now takes §7, §2 and §8 by native routes. §5 and §6 remain BHK's form.
+  The §8 route is a covering certificate over a bounded region of ratios (E2's framing; the owner asked for it, E85).
