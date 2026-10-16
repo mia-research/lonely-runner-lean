@@ -59,6 +59,52 @@ theorem s6_sum_window {v1 v2 v3 v5 T p : ℝ} {N1 N2 N3 : ℤ} (h1 : 0 < v1) (h2
     · push_cast; linarith
     · push_cast; nlinarith
 
+/-- **λ = 0 is the uniform case.** If `D ∣ v₄` and `v₃ < v₄` (`v₂ = cD`, `v₃ = (c+1)D`, `c ≥ 1`), then `v₄ ≥ (c+2)D` and
+the condition of `s6_meeting_uniform` holds. -/
+theorem lam_zero_uniform {v2 v3 v4 c D : ℕ} (hc : 1 ≤ c) (hv2 : v2 = c * D) (hv3 : v3 = (c + 1) * D)
+    (hd : D ∣ v4) (h34 : v3 < v4) : 4 * (v2 : ℝ) * v3 ≤ v4 * (5 * v2 - v3) := by
+  obtain ⟨e, rfl⟩ := hd
+  have hD : 0 < D := by rcases Nat.eq_zero_or_pos D with h | h <;> [simp_all; exact h]
+  have he : c + 2 ≤ e := by
+    have : (c + 1) * D < D * e := by rw [← hv3]; exact h34
+    have : c + 1 < e := by nlinarith
+    omega
+  rw [hv2, hv3]; push_cast
+  have heR : (c : ℝ) + 2 ≤ e := by exact_mod_cast he
+  have hcR : (1 : ℝ) ≤ c := by exact_mod_cast hc
+  have hDR : (0 : ℝ) < D := by exact_mod_cast hD
+  have h5 : (0 : ℝ) ≤ 5 * (c * D) - (c + 1) * D := by nlinarith
+  have : 4 * ((c : ℝ) * D) * ((c + 1) * D) ≤ ((c + 2) * D) * (5 * (c * D) - (c + 1) * D) := by
+    have e : ((c : ℝ) + 2) * D * (5 * (c * D) - (c + 1) * D) - 4 * (c * D) * ((c + 1) * D) = (3 * c - 2) * D ^ 2 := by ring
+    have : (0 : ℝ) ≤ (3 * c - 2) * D ^ 2 := mul_nonneg (by linarith) (sq_nonneg _)
+    linarith
+  calc 4 * ((c : ℝ) * D) * ((c + 1) * D) ≤ ((c + 2) * D) * (5 * (c * D) - (c + 1) * D) := this
+    _ ≤ (D * e) * (5 * (c * D) - (c + 1) * D) := by
+        apply mul_le_mul_of_nonneg_right _ h5; nlinarith
+
+/-- **A grid point in an interval.** With `gcd(v₁, D) = 1` and an interval `[lo, hi] ⊆ [0, 1)` of length at least `1/D`,
+some `k` puts `(k v₁ mod D)/D` in it. -/
+theorem exists_grid_point (v1 D : ℕ) (hD : 1 < D) (hcop : Nat.Coprime v1 D) {lo hi : ℝ} (hlo : 0 ≤ lo)
+    (hhi : hi < 1) (hlen : 1 ≤ D * (hi - lo)) :
+    ∃ k : ℕ, lo ≤ ((v1 * k % D : ℕ) : ℝ) / D ∧ ((v1 * k % D : ℕ) : ℝ) / D ≤ hi := by
+  have hDR : (0 : ℝ) < D := by exact_mod_cast (show 0 < D by omega)
+  set j := ⌈lo * D⌉₊ with hj
+  have hj1 : lo * D ≤ j := Nat.le_ceil _
+  have hj2 : (j : ℝ) < lo * D + 1 := Nat.ceil_lt_add_one (by positivity)
+  have hjD : j < D := by
+    have : (j : ℝ) < D := by nlinarith
+    exact_mod_cast this
+  obtain ⟨u, -, hu⟩ := Nat.exists_mul_mod_eq_one_of_coprime hcop hD
+  refine ⟨j * u, ?_, ?_⟩ <;>
+  · have e : v1 * (j * u) % D = j := by
+      rw [show v1 * (j * u) = j * (v1 * u) by ring, Nat.mul_mod, hu, mul_one, Nat.mod_mod, Nat.mod_eq_of_lt hjD]
+    rw [e]
+    first
+    | (rw [le_div_iff₀ hDR]; linarith)
+    | (rw [div_le_iff₀ hDR]; nlinarith)
+
 end N6Native
 
 #print axioms N6Native.s6_sum_window
+#print axioms N6Native.lam_zero_uniform
+#print axioms N6Native.exists_grid_point

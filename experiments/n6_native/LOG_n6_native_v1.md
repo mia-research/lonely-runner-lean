@@ -2289,3 +2289,24 @@ Owner: *"word"* (go ahead with the sum-relation lemma). `s6_sum_v1.{py,out}`, `s
   v₅ = v₄) — a bounded region of ratios.
 - **Owed:** the choice of k (with gcd(v₁, D) = 1, a j/D in I exists once D·|I| ≥ 1); the λ = ±1 two-window argument in
   Lean; the 408 go with small D and the bounded region.
+
+## E98 — The D ≥ 15, gcd 1 branch: what is proved, and the λ = ±1 margin (2026-10-16)
+
+Owner: *"Finish the D >= 15, gcd 1 branch in Lean: the choice of k for the sum lemma and the lambda = plus or minus 1
+two-window argument."* `S6Branch_v1.lean` (collects S6Meeting/S6Generic/S6Sum; `.out` 0 errors; axioms
+`[propext, Classical.choice, Quot.sound]` throughout) [PROVED]; `S6Sum_v1.lean` updated; `s6_branch_v1.{py,out}`,
+`s6_diag_margin_v1.{py,out}`, `s6_diag_cont_v1/v2.{py,out}`.
+- **Proved:** `lam_zero_uniform` (λ = 0 ⇒ v₄ ≥ (c+2)D ⇒ the uniform condition); `exists_grid_point` (gcd 1 and an
+  interval of length ≥ 1/D in [0, 1) contain some (k v₁ mod D)/D); `s6_sum` (whole numbers: v₄ = v₃ + v₁, gcd 1, D|I| ≥ 1
+  ⇒ lonely); `s6_window_fold_before` (the window before the meeting time, by reflection t ↦ −t: runner 1 in [4/9, 5/6]);
+  **`s6_off_unit`**: §6 with D ≥ 15, gcd(v₁, D) = 1 and direction λ ≠ ±1 (v₄ ≡ λv₁, 2|λ| ≤ D) ⇒ lonely.
+- **Data** (D ≥ 15, gcd 1, primitive ≤ 60: 19,439 sets): uniform 4,458, generic 13,232, sum lemma 1,182, diagonal region
+  λ = −1 507, λ = 1 60; rest 0. Random ≤ 3,000: uniform 2,656, generic 344.
+- **The λ = ±1 guarantee, over the continuous parameters.** Runner 4's arcs depend only on c, q₄ = v₄/v₃ (near-runner:
+  q₄ < 4c/(4c−1)) and μ = v₄/(3v₅) ∈ (0, 1/3]; a grid point j/D lies in the usable set U if U has an interval of length ≥ 1/D.
+  Grid search (c ≤ 40 and large c; 400 × 200 in (q₄, μ)): λ = −1: smallest longest interval 1/6 (≥ 1/15 with room);
+  λ = 1, c ≥ 3: 0.0909 (≥ 1/15); λ = 1, c ≤ 2: there v₁ < D so δ = v₁ (the sum relation), and the usable set U ∪ I has
+  smallest longest interval 0.0561 at c = 1, q₄ ≈ 1.199, μ → 1/3 — below 1/15 = 0.0667, above 1/18. So the simple union
+  argument gives every D ≥ 18 there, and D = 15, 16, 17 with c ≤ 2 need a separate look.
+- **Owed for the branch:** the λ = ±1 statement itself in Lean — a certificate over (c, q₄, μ) that the usable set has an
+  interval of length ≥ 1/15 (≥ 1/18 for c ≤ 2), like §8's — and the D = 15–17, c ≤ 2, λ = 1 corner.

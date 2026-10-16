@@ -1,0 +1,2 @@
+lam 1, c <= 2 (sum relation): smallest of max(longest U, |I|) = 0.0561 at (1, 1.1992, 0.3333)
+lam 1, c >= 3: smallest longest U = 0.0909 at (3, 1.0909, 0.3333)   (1/15 = 0.0667)

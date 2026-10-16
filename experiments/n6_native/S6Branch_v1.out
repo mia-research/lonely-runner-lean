@@ -1,0 +1,6 @@
+../experiments/n6_native/S6Branch_v1.lean:236:89: warning: unused variable `hD`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'N6Native.s6_window_fold_before' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_off_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.s6_sum' depends on axioms: [propext, Classical.choice, Quot.sound]

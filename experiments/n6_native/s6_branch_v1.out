@@ -1,0 +1,2 @@
+§6, D >= 15, gcd 1, <= 60: 19439 sets: {'generic': 13232, 'uniform': 4458, 'sum lemma': 1182, 'diagonal region, lam -1': 507, 'diagonal region, lam 1': 60} rest examples []
+random, <= 3000: 3000 sets: {'uniform': 2656, 'generic': 344} rest examples []

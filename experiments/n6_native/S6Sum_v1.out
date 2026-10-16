@@ -1,1 +1,3 @@
 'N6Native.s6_sum_window' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.lam_zero_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.exists_grid_point' depends on axioms: [propext, Classical.choice, Quot.sound]
