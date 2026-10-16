@@ -2675,3 +2675,24 @@ Observation; `s5k1_cert_v1.{py,out}`, `s5k1_tight2_v1.{py,out}`.
   3. a displacement lemma on the plane where the edge relation holds (a progression in the remaining deviations
      over recurring windows, at unbounded laps);
   4. the small-α part redone for κ = 1 (E106's leaves used κ ≤ 1/2).
+
+## E110 — §5, k = 1: the tight-point lemmas; correction to E108–E109 (2026-10-17)
+
+Owner: *"Prove the tight-point lemmas first: the broken-edge windows at T = 1/6 and 5/6 for both points, then the
+displacement lemmas on the exact-edge planes; then the k = 1 tree and small alpha."* `S5Tight_v1.lean` (`.out`; axioms
+`[propext, Classical.choice, Quot.sound]`) [PROVED]; `s5k1_tightinst_v1.{py,out}`.
+- **Correction to E108–E109.** The scripts there (`lonely` in `s5k1_tight_v2`) counted only lonely intervals of
+  **positive length** (an EPS margin). The target is non-strict (1/6 ≤ ‖vᵢt‖, `Lonely6`), so a single instant counts.
+  Under the non-strict target the exact-edge planes (v₄ = 5v₁ near (1, 3, 4, 5, 9); v₅ = 5v₁ near (1, 2, 3, 4, 5)) are
+  lonely at the first tight instant, with equality. The drift at unbounded laps measured in E108–E109 (aT, eT ≈ 0.03–0.07)
+  describes where the first **positive-length** window appears; it is real but not needed for the proof. The displacement
+  lemmas asked for are therefore not needed, and were not built.
+- **`tight_13459`** (real speeds, r = v/v₁; v₃ = v₁ + v₂, r₂ ∈ [14/5, 17/5], v₃ ≤ v₄ ≤ 29v₁/5, r₅ ∈ [43/5, 47/5]):
+  - v₄ ≤ 5v₁: lonely at t = 1/(6v₁) (laps (0, 0, 0, 0, 1));
+  - v₄ ≥ 5v₁: lonely at t = 5/(6v₁) (laps (0, 2, 3, 4, 7)).
+- **`tight_12345`** (v₃ = v₁ + v₂, r₂ ∈ [2, 11/5], r₄ ∈ [19/5, 23/5], v₄ ≤ v₅ ≤ 29v₁/5):
+  - v₅ ≤ 5v₁: lonely at t = 1/(6v₁) (all on lap 0);
+  - v₅ ≥ 5v₁: lonely at t = 5/(6v₁) (laps (0, 1, 2, 3, 4)).
+- **Exact check** (`s5k1_tightinst_v1`, fractions, closed bands): every integer k = 1 set with v₁ ≤ 60 in either
+  neighbourhood (2,757,566 and 820,354 sets) is lonely at the named instant; 0 failures.
+- These two neighbourhoods become leaves of the k = 1 tree (next).
