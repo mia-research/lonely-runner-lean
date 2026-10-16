@@ -1887,3 +1887,19 @@ ranges as E78), `long_cluster_v1.{py,out}`, `long_cluster_v2.{py,out}` (families
   global-isolation arrangement with one runner on the subject. The knot passes down the run residue by residue, one lap
   per runner per round. The number of rounds is largest when the multiple is small (j ≤ 3 here) and settles at one
   round for larger j. Moving the run one below the multiple removes the 0 residue and the cascade makes no move at all.
+
+## E80 — Formalised: the AP plus one runner at every order, and the knot's other side (2026-10-16)
+
+Owner: *"Can we formalise any of this?"*. `APFold_v1.lean` (`.out`: 0 errors; no `sorry`/`native_decide`/`admit`).
+`#print axioms`: `[propext, Classical.choice, Quot.sound]` for both. [PROVED]
+- **`ap_plus_one`** (every order n ≥ 3): the runners 1, …, n − 2 and any X > n − 2 are lonely at threshold 1/n. Two
+  instants: X not a multiple of n → the global-isolation instant 1/n (`ap_plus_one_unit`); X = nq → X sits on the
+  subject at 1/n, and 1/n + 1/(nX), where X re-enters, is lonely (`ap_plus_one_fold`; the small runners stay clear
+  because (n − 2)(X + 1) ≤ (n − 1)X). This is E73's family (n = 6, X = lcm(1..Q₀)) with the cascade's own instant (E75),
+  and E79's "run ending on nj − 1 makes no move" in its simplest case.
+- **`knot_other_side`** (every order): when a lap box dies at the knot (n a + 1) v_J = (n b + n − 1) v_I (I on lap a
+  entering as J on lap b exits), in the box where J takes one more lap the knotted pair's first condition always holds
+  and the second holds exactly when 2a ≤ (n − 2) b + n − 3. Checked against E68's deaths (`knot_lemma_check_v1.{py,out}`):
+  the pair's status in m + e_J agrees with 2m_I ≤ 4m_J + 3 in 7,812 of 7,812.
+- Not formalised: the chain of further knots (that is the cascade and its termination); the outcome taxonomy's empty
+  classes K2a, K2s1 at every order (E78; order-8 proofs by hand, E325/E333) — candidates.

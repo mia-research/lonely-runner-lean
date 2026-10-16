@@ -1,0 +1,14 @@
+../experiments/n6_native/APFold_v1.lean:35:6: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/APFold_v1.lean:40:6: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/APFold_v1.lean:79:6: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+../experiments/n6_native/APFold_v1.lean:82:6: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'N6Native.ap_plus_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'N6Native.knot_other_side' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,1 @@
+pair (I,J) in m + e_J holds  <->  2 m_I <= 4 m_J + 3: {True: 7812}
