@@ -2111,3 +2111,24 @@ Owner: *"So is that full coverage? We now have a 100%? then move on to corner le
   With the present statements a hand proof of the remainder would be 261 cases, so the remainder stays as the
   kernel-checked certificate (already only the standard axioms, E86). A shorter hand proof needs stronger lemmas that
   cover larger regions, not more case splitting.
+
+## E90 — Stronger §8 statements: folds on later laps; certificate 760 → 322 leaves (2026-10-16)
+
+Owner: *"Look for stronger lemmas that cover larger regions of §8, to shorten a hand proof."*
+`s8_stronger_v1.py` (`_v1.out`, `_v2.out`), `s8_cert_lean_gen_v2.py`/`_v3.py` (`.out`), `s8_symbolic_v2/v3.{py,out}`,
+`S8CertTree_v3.txt`, `S8Native_wiring_v2.out`.
+- **Wide search on the remainder R** (outside cases A–D): random rational points (denominator 97, x₅ ≤ 13), every
+  three-block window and four-block fold on any laps (t ≤ 3/v₁) and the boxes at each point's lonely instants; greedy
+  list. Samples of 3,000 (two seeds): seven statements each, led by the **four-block fold on laps (0,0,0,1)** (runner 4
+  on its second lap, runner 5 folded) with 2,151 / 2,186, the **box (0,0,0,1,1)** 638 / 613, and the four-block fold on
+  laps (0,1,1,2) 158 / 142; fresh samples of 3,000 not closed: 9 and 0.
+- **Certificate rebuilt** with folds on laps (0,0,0,0), (0,0,0,1), (0,1,1,2) and boxes (0,0,0,1,3), (0,1,1,2,3) added:
+  322 leaves (was 760), depth ≤ 27. Of these, 90 lie wholly in cases A–D; the remainder's 232 leaves merge into 89
+  same-statement boxes (was 261) when folds and boxes are tried before windows.
+- **In the tree** (nested commit `da8d4c1`, not pushed): `OrderSixEightNativeN.certTree` replaced by the 322-leaf tree;
+  build of the order 3–7 targets passes; axioms `[propext, Classical.choice, Quot.sound]`; the dispatch still uses
+  `lonely_8_native` and `lonely_7_native`.
+- **Reading.** The stronger statements are folds of runner 5 through a four-runner window with runner 4 on a later lap:
+  the four-runner block still has room when runner 4 is a lap ahead. Together with the box (0,0,0,1,1) they close about
+  93% of R in the samples. A hand proof is now the four closed-form cases plus 89 boxes; shorter still would need the
+  fold-(0,0,0,1) and box-(0,0,0,1,1) regions written as explicit inequalities and their union shown to cover most of R.

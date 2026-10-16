@@ -1,0 +1,9 @@
+lake build (order 3-7 targets): Build completed successfully (8333 jobs)
+'LRC.S8Native.lonely_8_native' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonely6_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.SpecN.lonelyRunnerAtN_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderFiveN.lonelyRunnerAtN_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSixN.lonelyRunnerAtN_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.OrderSevenN.lonelyRunnerAtN_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+uses S8Native.lonely_8_native: true, uses lonely_8: false, uses S7Native.lonely_7_native: true
