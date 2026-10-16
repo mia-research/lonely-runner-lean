@@ -1,0 +1,6 @@
+../experiments/n6_native/S6Small_v1.lean:245:62: warning: unused variable `hE`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'LRC.S6Native.bigAll' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.smallAll' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LRC.S6Native.s6_small' depends on axioms: [propext, Classical.choice, Quot.sound]

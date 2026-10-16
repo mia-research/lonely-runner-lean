@@ -2383,3 +2383,31 @@ Owner: *"Start the rest of §6: D < 15 and gcd(v1, D) > 1. Observation first."* 
      certificate, plus 41 finite pieces closed by the sum lemma or the meeting fold at M = 1/3.
 - **Not established here:** the region results are grid samples, not a certificate; c was scanned up to 30 and no failing
   cell appears for c ≥ 5, but large c needs an argument; the g | v₄ reduction needs `s6_branch`'s v₅ to be real.
+
+## E102 — The coset case and the E < 15 certificate, proved (2026-10-16)
+
+Owner: *"Lets continue with coset case and the d <15 cert"*. `S6Coset_v1.lean` (`.out`) and `S6Small_v1.lean` (`.out`):
+0 errors, no `sorry`/`native_decide`/`admit`, axioms `[propext, Classical.choice, Quot.sound]` for every theorem below
+[PROVED]. Prototype scripts: `s6_small_cert_v1.{py,out}`, `s6_small_fold_v1.{py,out}`.
+- **`step_meets_half_arc`**: a progression with step σ ∈ (0, 1/2] meets every closed half arc: n = ⌈(⌈x₀⌉ − x₀)/σ⌉.
+- **`s6_coset`** (§6, D ∤ v₁, g = gcd(v₁, D) ∤ v₄, no bound on D): the meeting times k = k₀ + (D/g)·i·n hold runner 1 at
+  the orbit residue of `orbit_residue` (v₁·(D/g) = (v₁/g)·D), while runner 4 advances by i·v₄/g ≡ d/g (mod 1) per step,
+  where v₄ i ≡ d = gcd(v₄, g) (mod g) by Bézout and d < g, so d/g ≤ 1/2. The half arc then comes from
+  `step_meets_half_arc`, and `s6_window_fold` closes.
+- **`s6_small`** (§6, D ∤ v₁, g | v₄, E = D/g < 15; g = 1 is coprime D < 15): uniform → `s6_meeting_uniform`; else
+  near-runner, written as the integer inequality 4cδ < (c+1)E + δ with δ = (v₄ − v₃)/g. `readings_E` gives readings j/E
+  and l·j/E at the meeting times, with l ≡ δ·(v₁/g)⁻¹ (mod E). Every closing condition is an upper bound on
+  M = v₄/(3v₅), so all checks are made at M = 1/3.
+  - **c ≥ 5** (`bigAll`, `decide +kernel`): for each class (E, l), E < 15, either 6E ≤ 19·gcd(l, E) — then
+    gcd(l, E) | δ and the near-runner inequality give c < 5, a contradiction — or one window (after/before, j, lap)
+    closes the whole box Q ≥ 1, QU ≤ 24/19 (QU ≤ 24/19 follows from near-runner with c ≥ 5). This is 28 empty classes
+    and 76 one-leaf classes (prototype count).
+  - **c ≤ 4** (`smallAll`, `decide +kernel`): every point (E, c, δ, a = v₁/g) with the near-runner bound, 3a < (c+1)E and
+    gcd(a, E) = 1 is closed at its exact Q, QU by a window (956 points in the prototype), the sum lemma (31; δ = a means
+    v₄ = v₃ + v₁) or one of ten listed sub-window folds (`closeF`, witnesses from `s6_small_fold_v1.py`; runner 5 folded
+    via v₅ ≥ v₄).
+  - Soundness: `region_sound`, `sum_sound`, `fold_sound` (readings abstracted as `Readings`), with real-speed closers
+    `closeA`, `closeB`, `closeF`.
+- **§6 coverage now proved natively** (none of it wired in yet): D ≥ 15 with gcd(v₁, D) = 1 (`s6_branch`, in the dispatch);
+  g ∤ v₄ (`s6_coset`); g | v₄ with D/g < 15 (`s6_small`). **Left:** g > 1, g | v₄, D/g ≥ 15. The readings there are those
+  of the coprime branch at modulus D/g (E101), so `s6_branch` restated through `readings_E` is the candidate.
