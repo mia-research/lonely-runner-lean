@@ -981,3 +981,37 @@ Quot.sound]; no `sorry`, no `native_decide`.
 
 **Still open:** sets containing a multiple of 343. In E21's terms: five units at level a >= 4, using the reachable
 shifts C(k_lo), and the mixed shapes with one runner of valuation >= 3.
+
+## E23 (2026-10-17) Five units at level 4: exhaustive, no failure; the lap-count form of one level up
+
+**Map:** order seven, residue grids; the open item of E22 (units at level a >= 4).
+
+**Verified (exhaustive, exact):** every five units mod 2401 share a unit instant k/2401.
+- Program: `cascade/seven_level4_exh_v1.c`, with the level set by `-DA=`. It reduces by scaling (u1 = 1) and band
+  symmetry (half representatives u <= 1200), then checks the sorted half tuples (u2 <= u3 <= u4 <= u5).
+- Level 4: 46,987,216,710 tuples (= C(1032, 4)), 0 failures.
+  - A shell bug ran all eight jobs on the full range, so this is eight identical complete runs, all agreeing.
+  - About 60 s per run.
+- Positive controls, same code:
+  - `-DA=2`: 10,626 tuples, 15 failures (= `failH`);
+  - `-DA=3`: 20,260,275 tuples, 0 failures (= certificate A's count).
+- `cascade/seven_level4_ref_v1.py`: 3,000 random half tuples checked in Python, 0 failures. This is weaker than the
+  controls; it is not a bitwise cross-check of the masks.
+- This is a level-4 statement only. It is too large for a kernel certificate in this form (4.7e10 tuples).
+
+**Proved (elementary; not yet in Lean): one level up is a lap-count condition.**
+- For units u, k at level a+1 >= 2: u k is a unit, so "in band" means its top digit is in {1..5}.
+- Write k = k' + 7^a s, with k' a unit mod 7^a and s in Z/7. Then
+  top digit of u k mod 7^(a+1) = (floor(u k' / 7^a) + u0 s) mod 7, where u0 = u mod 7.
+- In the framework's terms, the instants of level a+1 over t' = k'/7^a are the seven folds t = (t' + s)/7.
+  - Runner u is in band at t iff its lap count at t', L_u(t') = floor(u t') mod 7, satisfies L_u + u0 s not in {0, 6}.
+  - The band status at level a plays no part.
+- With u1 = 1, L_1 = 0, so s is in {1..5}. Each other unit forbids the pair {-L_u/u0, (6 - L_u)/u0} mod 7.
+- Level a+1 succeeds iff some unit instant t' of level a has a lap vector whose four pairs do not cover {1..5}.
+- Top digits enter linearly. Write u = r + 7^a e with r < 7^a. Then L_u(t') = floor(r t') + e k'_0 mod 7, where
+  k'_0 = k' mod 7.
+
+**Open, in these terms:** for every r (five units mod 7^a, r1 = 1) and every top-digit vector e, some unit k' has a
+lap vector outside the covering set, after the shift e k'_0. Each residue class k'_0 sees one shift. So it suffices
+that, for some k'_0, the lap vectors of the class k' = k'_0 (mod 7) do not fit inside one translate of the covering
+set.
