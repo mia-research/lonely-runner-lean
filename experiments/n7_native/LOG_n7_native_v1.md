@@ -1015,3 +1015,69 @@ shifts C(k_lo), and the mixed shapes with one runner of valuation >= 3.
 lap vector outside the covering set, after the shift e k'_0. Each residue class k'_0 sees one shift. So it suffices
 that, for some k'_0, the lap vectors of the class k' = k'_0 (mod 7) do not fit inside one translate of the covering
 set.
+
+## E24 (2026-10-17) Every level at once: the depth-2 fold with multipliers c <= 6 is a finite certificate
+
+**Map:** order seven, residue grids; the open item of E22/E23 (sets containing a multiple of 343).
+
+**Frame check, against the source.** The lap-count form of E23 is Barajas–Serra's own setting
+(`sources_barajas_serra_2008.txt`, lines 120-160):
+- their N = 7^(m+1) is our level nu+1;
+- their multipliers λ = 1 + k 7^(m-j) shift the top digit by k r, their eq. (3), which is our fold;
+- their Prime Filtering Lemma 2 is our free-digit descent.
+
+Their uniform-in-m hard case (§6, five units) is a compression argument with carries (Lemmas 4-11). It was not used.
+The mechanism below is different: a fold of depth 2 plus small multipliers, decided by a finite search over
+abstract runner states.
+
+**The abstraction** (proof: elementary, written here; not formalised):
+- Five units, normalised u1 = 1, at level a >= 3. Instants are k = c (1 + 7^(a-2) s), with c in 1..6 and s in Z/49
+  (294 instants, all units).
+- For a runner x (= u, or u k_base): T = floor(x / 7^(a-2)) (top two digits), y = frac(x / 7^(a-2)), rho = x mod 49.
+- Distributivity gives u k = c x + 7^(a-2) s c x. So the top-two-digit cell at the instant is
+  (c T + floor(c y) + s c rho) mod 49.
+- For a unit it is in band iff the cell is in [7, 41]. A unit is never exactly 6·7^(a-1).
+- floor(c y) for c <= 6 depends only on the order-6 Farey cell of y (12 cells), since y = r/7^(a-2) with 7 ∤ r is
+  never a Farey point.
+- Runner 1 = 1 has T 0, y in the first cell, rho 1.
+- So each runner's status at the 294 instants is a mask fixed by (T, cell, rho): 49 · 12 · 42 states, the same at
+  every level a >= 3.
+- Cross-check: `cascade/seven_abstract_xcheck_v1.py`, 823,200 direct comparisons at a = 3..9, 0 mismatches.
+
+**Verified (exact search over all abstract states):**
+1. Five units, every level a >= 3:
+   - `cascade/seven_abstract_v1.py` gives 12,348 distinct masks, 8,014 inclusion-minimal on runner 1's 210 instants;
+   - `cascade/seven_abstract_cover_v1.c` finds no four masks with empty intersection: 85,790,174,908 triples
+     enumerated after a sound pair-level popcount cut, 48 contiguous chunks over all of 0..8014, 0 covers;
+   - positive control (c <= 2): covers found immediately;
+   - hill climbing at a = 5..8 with real tuples agrees: c <= 6 never fails, c <= 2 fails often
+     (`cascade/seven_restricted_v1.py`).
+2. Four units and one runner of valuation 1, every level a >= 4 (P1): runner 1 = 1, with the runner 7m as a fourth
+   mask (rho in 7·units). 252 base sets, 0 covers (`cascade/seven_abstract_mixed_v2.py`,
+   `cascade/seven_abstract_triples_v1.c`).
+3. Four units and one runner z = 7^w m with 2 <= w <= a-2, every level a >= 4 (P2):
+   - with base 1, such a z can have an empty mask (folds do not move it). So the base is chosen with
+     m k_b mod 7^(a-w) / 7^(a-w) in [1/7, 6/35], which exists (8/49 when a - w = 2). Then z is in band for every
+     c <= 5 and every s;
+   - a fold sets T1 = 0, and runner 1's (cell, rho) is left arbitrary: 420 base sets, 0 covers;
+   - positive control for the triple checker (c = 1): 1,066,176 covers.
+
+**The case analysis for nu_max = nu >= 3** (argued, not formalised). Work at level a = nu + 1, where the top class
+is automatic.
+- No units: divide by 7 (nu drops; nu <= 2 is `lonely_nu2`).
+- Every class below nu has <= 3 runners: greedy free digit, class v decided at digit a-1-v. Each runner blocks at most
+  2 of 7 values; digit 0 needs only a unit.
+- A class with >= 4 runners below nu:
+  - five units: item 1;
+  - four units plus z of valuation 1..nu-1: items 2-3;
+  - four units plus a second top runner: item 1 (four units);
+  - four runners of valuation v* >= 1, plus one unit: the four cofactors at level L = nu+1-v*. Use
+    `units_level_two` (L = 2), certificate A (L = 3), item 1 (L >= 4); then a free top digit for the unit.
+- End-to-end hill climb, nu = 3 at level 4, mixed shapes: 300 climbs, 0 failures (`cascade/seven_nu3_endtoend_v1.py`).
+
+**Status:** every set of at most six positive integers is lonely at a 7-adic grid instant.
+- nu <= 2: [L] `lonely_nu2`.
+- nu >= 3: [A] case analysis and abstraction, with the three finite statements [X] by exact search.
+- Lean owed for nu >= 3. The searches are 8.6e10 / 3e10 pair checks, too large for a kernel `decide` in this form.
+  A uniform fractional (weighted pigeonhole) certificate cannot exist: by fold symmetry each instant is missed by
+  exactly 2/7 of the states, so any weighting gives some mask a complement of weight >= 2/7 > 1/4.
