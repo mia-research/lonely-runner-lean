@@ -402,3 +402,95 @@ v5 > 100 v1, and v5 < v6 < (8/3) v5 when v5 <= 100 v1.
 - the bounded-ratio region (a five-dimensional problem);
 - uniform gap bounds for three- and four-runner fast blocks with bounded internal ratios (E7), which the six-runner
   slow-runner lemma also needs.
+
+## E9 (2026-10-17) Gap bounds for three- and four-runner blocks
+
+**Map:** order seven, slow-runner lemma (E7). Gap = `GapProp F G w` of `LRC.O7Split`.
+
+**Three runners: uniform, any real speeds (instant version, w = 0)** — `[PROVED]`
+- `LRC.O7Gap3.gap_three` (`OrderSevenGapThreeN.lean`): for at most three positive speeds,
+  `GapProp F (5 Σ 1/d) 0` holds.
+- Proof by union bound (measure): each speed is out of band on at most dG + 2 open intervals of length 2/(7d).
+  Over three speeds the total is <= 6G/7 + (4/35)G < G.
+- Four speeds would need 8/7 < 1, so the argument stops at three.
+- With a window w > 0, the same count needs w Σ d < 1/7. At the kappa window w = 3/(28 v5) this fails (up to 9/28),
+  so kappa gets nothing from it.
+
+**Four runners: no uniform bound exists** (exact, E7 data):
+- h = v2 G(Q) grows along consecutive runs: 6.23 at (27,28,29,30), 8.21 at (35,36,37,38). G stays near 0.23 there.
+- The gap of a cluster is set by its offsets (beat period ~ 1/offset), not by its speeds.
+
+**Pattern window `[PROVED]`:** `LRC.O7Split.pattern_window` generalises `cluster_window` to speeds d = c Q_d + e_d
+(Q an integer pattern, c real, 0 <= e_d <= kappa Q_d). This covers near-resonant blocks such as (2c, 3c+1, …) as
+well as clusters.
+
+**Joint closure, observation** (`o7_joint_v1.py`, `o7_joint_v2.py`; float search, **every closure re-verified
+exactly**; `o7_joint_v1_s1.out`, `o7_joint_v2.out`):
+- The pattern window combined with the slow block's band, at one time alpha (all conditions linear in t, checked at
+  both ends) closes:
+  - 300/300 random six-runner sets with v5 > 100 v1, v6 < 6 v5;
+  - 1,187/1,187 structured ones: runs (v1, n..n+4d), scaled order-six tight patterns c(1,2,3,4,5)+o and
+    c(1,3,4,5,9)+o, two clusters, random sets with v1 up to 60.
+- The j = 1 split closes almost all of them (293/300).
+- The joint closure is **existential in one time alpha**, unlike the split fold, which needs a universal gap. So a
+  box tree over the slow ratios (S together with the offsets e) can in principle certify it.
+
+**Provable split mechanisms on the six-runner slow region** (`o7_slow6_an_v1.out`, exact, formula-only):
+- Native windows for S; gaps for F from single runner, stretch recursion, `gap_three`, and block recursion.
+- Coverage: 6,912 of 20,000 random sets (34.56%).
+- Every unclosed set has its largest consecutive ratio at j = 1: a slow v1 followed by a five-runner block with
+  bounded internal ratios.
+
+**Reading:** the slow region needs time-localised order six — a lonely instant of a bounded-ratio five-runner block
+inside each band stretch of the slow block. It holds per instance (joint closure). No uniform argument exists here
+yet. A union bound cannot give it (10/7 > 1), and a gap bound cannot either (clusters).
+
+## E10 (2026-10-17) Bounded-ratio region: six-runner box tree, kernel-checked for v6 <= 12 v1
+
+**Map:** order seven, bounded region (complement of the fold, `lonely7_of_fast6`).
+
+**Exact prototype** (`o7_box6_v1.py`; ratios x_i = v_i/v6, x5 >= 1/6; leaves are single instants tau with laps; splits at
+the point k/42 nearest the midpoint):
+
+| x1 >= | leaves | empty | failures | file |
+|---|---|---|---|---|
+| 1/4 | 1 | 0 | 0 | `o7_box6_v1_q4.out` |
+| 1/8 | 2,243 | 129 | 0 | `o7_box6_v1_q8.out` |
+| 1/12 | 7,096 | 476 | 0 | `o7_box6_v1_q12.out` |
+| 1/20 | 22,564 | 1,278 | 0 | `o7_box6_v1_q20.out` |
+| 1/50 | 190,117 | 8,263 | 0 | `o7_box6_v1_q50.out` |
+
+- No failures anywhere, the tight set (1,2,3,4,5,6) included: with k/42 splitting, (1,2,3,4,5)/6 lies on box faces,
+  and each side has its own instant. The T6 pinch sets need no special leaves.
+- Leaf count grows roughly like x1^-2.3.
+
+**Proved (nested repo f0b3341; axioms [propext, Classical.choice, Quot.sound], `o7_lean_axioms_v2.out`):**
+- `OrderSevenBox6CoreN` (`LRC.O7Box6`):
+  - checker, `check_sound`, split trees, `lonely_of_inst`;
+  - split nodes carry their split value p/q, and the kernel checks only that the halves cover the box.
+- `OrderSevenBox6Tree12P0..2N` and `OrderSevenBox6Tree12N`: 7,096 leaves, `LRC.O7Box6T12.lonely`.
+- `OrderSevenSpreadN`: **`LRC.O7Spread.lonely7_spread12`: order seven holds whenever v6 <= 12 v1** (fold for
+  v6 >= 6 v5, tree otherwise).
+
+**Build note:** the first encoding recomputed the k/42 split point in the kernel (41 candidates per split). A part
+was still unfinished after more than 15 minutes, with swap at 12 GB. Storing the split value (`o7_box6_exact_v3.py`,
+`o7_box6_lean_v2.py`) brought a part down to 18 s.
+
+## E11 (2026-10-17) Order seven for v6 <= 50 v1, kernel-checked
+
+- Tree: `o7_box6_exact_v3.py 1 50 1 6 300` gives 190,117 leaves and 8,263 empty boxes, exact, 0 failures, in 655 s.
+- Split into 96 parts by `o7_box6_lean_v2.py`, MAXLEAVES 3000. Built three at a time, about 10 minutes.
+- `LRC.O7Box6T50.lonely` and **`LRC.O7Spread.lonely7_spread50`: order seven holds whenever v6 <= 50 v1**.
+  Axioms [propext, Classical.choice, Quot.sound] (`o7_lean_axioms_v2.out`). Nested repo commit after f0b3341.
+
+**Where order seven stands (proved):**
+- every set with v6 <= 50 v1;
+- every set with v6 >= 6 v5;
+- every set with 3 v6 >= 8 v5 and v5 <= 100 v1.
+
+**Open:** v6 > 50 v1 with v6 < 6 v5. There is always a slow runner block followed by a faster block. It needs the
+time-localised order-six statement of E9. That statement holds per instance by the joint pattern closure; no
+uniform argument exists yet.
+
+The tree boundary moves at a cost of roughly x1^-2.3 leaves, so 1/100 means about 1M leaves (about 330 parts). The
+slow region itself has no lower bound on x1, so trees alone do not finish it.
