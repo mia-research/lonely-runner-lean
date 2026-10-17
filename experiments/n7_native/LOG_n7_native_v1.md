@@ -895,3 +895,42 @@ six positive integers with no speed divisible by 343 is lonely at some instant k
   levels is needed.
 - The level-(a+1) top digit at k + 7^a z is (c_u(k) + (u mod 7) z + x_u (k mod 7)) mod 7. Here c_u(k) is digit a of
   u k and x_u is the lift digit, so the lift condition is a covering of (Z/7)^5 by product boxes over (k, z).
+
+## E21 (2026-10-17) Toward level >= 4: the shifted level-3 claim is false; the transfer must use the reachable shifts
+
+**Map:** order seven, residue grids; the open item of E20 (five units on the unit grid of level a >= 4).
+
+**Reduction (digit blocks):**
+- Write k = k_lo + 7^(a-3) k_hi, with k_hi in Z/343. Then the top three digits of u k mod 7^a are
+  (u mod 343)·k_hi + C_u(k_lo) mod 343, where C_u(k_lo) = floor(u k_lo / 7^(a-3)) mod 343.
+- So level a is a *shifted* level-3 problem. The shift vector C(k_lo) runs over the units' 3-digit positions at the
+  fine-grid times k_lo / 7^a.
+- Equivalently, by one digit at a time: level a holds iff some j in 1..6 and k1 in Z/7^(a-1) satisfy the shifted
+  level-(a-1) problem with shifts floor(u j / 7).
+
+**Claim A (shifted level 3 with arbitrary shifts) is false** (`cascade/seven_claimA_search_v1.py`, exact masks):
+- 20,000 random and 300 greedy-adversarial trials found no failure (`seven_claimA_v1.out`).
+- Hill climbing over (unit, shift) finds counterexamples quickly, e.g. (u, C) = (164, 2), (179, 252), (261, 230),
+  (261, 88), (67, 191): no k in Z/343 puts all five top digits in {1..5}.
+- **One-digit local lemma is false too** (`seven_local_search_v1.out`). With k = k2 + 7y + 49s, the 2,058 runner states
+  (u0, u1, e, D) give 1,029 distinct forbidden masks, and five states can cover the 7x7 grid. Example:
+  (2,5,4,1), (4,3,3,6), (4,5,1,4), (5,1,2,2), (6,5,3,5).
+  - An exhaustive DFS (`seven_local_lemma_v2.c`) was stopped, being unnecessary once coverings were found. Note: that
+    C program was never checked against a bitwise reference.
+
+**Consequence:** the transfer to level >= 4 cannot use arbitrary shifts. It has to use the structured family
+C(k_lo): positions of the five units at the times k_lo / 7^a. Level 4 has 6 shift vectors (k_lo = 1..6), and level a
+has 6·7^(a-4).
+- Open, in these terms: show that the reachable shift vectors cannot all land in the failure set of shifted level 3.
+
+**Proved (nested repo):** `LRC.O7Grid.lonely_of_grid`. If every d k mod 7^a lies in [7^(a-1), 6·7^(a-1)], then
+every reading d k / 7^a is at circular distance >= 1/7. Axioms [propext, Classical.choice, Quot.sound].
+
+**Lean plan for the proved part (nu_max <= 2):**
+- Grid lemma: done.
+- Residue reduction and the scaling symmetry (Grid(cU) via k <-> Grid(U) via c k): direct.
+- The finite checks need structured certificates:
+  - level 2 with r <= 4 units: 42^3 normalised tuples, each with a witness k;
+  - the 48 failing level-2 orbits with their level-3 lifts;
+  - level 3 for five units: 294^4 normalised tuples, too large for one kernel `decide`. It needs a decomposition, for
+    example through the k2 digit and the covering 5-sets of states, if those are few.
