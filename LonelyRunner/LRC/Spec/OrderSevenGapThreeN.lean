@@ -108,7 +108,7 @@ theorem gap_three {F : Finset ℕ} (hpos : ∀ d ∈ F, 0 < d) (hcard : F.card �
 
 /-- Window starts in `[a, a + L]` whose window `[s, s + w]` meets an out-of-band instant of `d` lie in `dL + dw + 2`
 open intervals of length `2/(7d) + w`. -/
-theorem bad_subset_w {d : ℕ} (hd : 0 < d) (a L w : ℝ) (hw : 0 ≤ w) :
+theorem bad_subset_w {d : ℕ} (hd : 0 < d) (a L w : ℝ) (_hw : 0 ≤ w) :
     {s | s ∈ Set.Icc a (a + L) ∧ ∃ τ ∈ Set.Icc s (s + w), circDist ((d : ℝ) * τ) < 1 / 7} ⊆
       ⋃ m ∈ Finset.Icc ⌈(d : ℝ) * a - 1 / 7⌉ ⌊(d : ℝ) * (a + L + w) + 1 / 7⌋,
         Set.Ioo (((m : ℝ) - 1 / 7) / d - w) (((m : ℝ) + 1 / 7) / d) := by
@@ -127,7 +127,7 @@ theorem bad_subset_w {d : ℕ} (hd : 0 < d) (a L w : ℝ) (hw : 0 ≤ w) :
   · have : τ < ((m : ℝ) + 1 / 7) / d := by rw [lt_div_iff₀ hd']; linarith
     linarith [hτ.1]
 
-theorem bad_measure_w {d : ℕ} (hd : 0 < d) (a L w : ℝ) (hL : 0 ≤ L) (_hw : 0 ≤ w) :
+theorem bad_measure_w {d : ℕ} (hd : 0 < d) (a L w : ℝ) (hL : 0 ≤ L) (hw : 0 ≤ w) :
     volume {s | s ∈ Set.Icc a (a + L) ∧ ∃ τ ∈ Set.Icc s (s + w), circDist ((d : ℝ) * τ) < 1 / 7} ≤
       ENNReal.ofReal (2 * L / 7 + d * L * w + 2 * w / 7 + d * w ^ 2 + 4 / (7 * d) + 2 * w) := by
   have hd' : (0 : ℝ) < d := by exact_mod_cast hd
