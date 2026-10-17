@@ -494,3 +494,60 @@ uniform argument exists yet.
 
 The tree boundary moves at a cost of roughly x1^-2.3 leaves, so 1/100 means about 1M leaves (about 330 parts). The
 slow region itself has no lower bound on x1, so trees alone do not finish it.
+
+## E12 (2026-10-17) Toward a uniform slow-region argument: what the closures use; first-stretch localisation
+
+**Map:** order seven, slow region v6 > 50 v1, v6 < 6 v5 (E11 open item).
+
+**What the per-instance closures use** (`o7_joint_mine_v1.py`, 80 random slow-region sets, split j = 1; float search,
+every closure verified exactly; `o7_joint_mine_v1.out`):
+
+| restriction | closed |
+|---|---|
+| R0: 4 best patterns with q1 <= 12, any runner-1 stretch | 80/80 |
+| R1: first stretch only | 80/80 |
+| R2: pattern q1 = 1 only, Q = round(F/v2) | 80/80 |
+| **R3: q1 = 1 and first stretch** | **80/80** |
+| R4: pure cluster form Q = (1,1,1,1,1) | 5/80 |
+
+- Every R0 closure lies in runner 1's first band stretch.
+- The offsets are not small: sigma = e_max/c is 0.1–0.6, so the closure is not a slow-offset argument.
+
+**Claim R (exact, `o7_claimR_v1.out`, `o7_claimR_v2_30.out`):** a five-runner block F has a lonely instant (1/7) in
+[1/(7 v1), 6/(7 v1)].
+- 0 failures on 24,000 random bounded-ratio blocks with v2/v1 in {2, …, 50}, 1,155 runs and 2,137 scaled tight
+  patterns.
+- Real (rational) speeds w = F/v1 with theta in [1/7, 6/7]: 0 failures on 6,400 random tuples and 3,200 resonant ones
+  (c Q + offsets), min w from 1.5 to 1,000.
+- So integrality is not what makes it true.
+
+**First-stretch property, exhaustive and exact** (`o7_firststretch_v1.py`, `o7_firststretch_v2.py`): is every primitive
+six-set lonely in [1/(7 v1), 6/(7 v1)]?
+- <= 30: yes, all 588,559.
+- <= 45: one failure, (7,19,26,32,35,43).
+- <= 60: 11 failures out of 49,430,584. **Every failure has v2/v1 in [2.56, 2.89] and v6/v1 in [6.1, 7.0]**, so all of
+  them lie inside the proved region v6 <= 12 v1 (`lonely7_spread12`).
+- The latest first lonely position is exactly 6/7 of runner 1's lap, at (6,16,22,27,30,37).
+- Caution, not imported: in the n=8 project a first-lap localisation (`DoorFirstLap`) was refuted, so localisation
+  is not automatic across orders.
+
+**Uniform target `[CONJECTURE — EMPIRICAL: exhaustive to 60, real-speed samples]`:**
+- **FS(spread > 7):** for real speeds 1 = w0 < w1 < … < w5 with w5 > 7, some theta in [1/7, 6/7] has every w_k theta in
+  band.
+- Combined with `lonely7_spread50` (v6 <= 50 v1), FS(spread > 50) would finish order seven.
+- Its time domain is compact. Only w -> infinity is non-compact, and that is the multi-scale regime.
+
+**Routes assessed for proving FS** (no proof yet):
+1. *Multi-scale IVT* (`pattern_window` at each scale). With infinitely separated scales it reduces to native order six
+   for an integer direction M u with no zero entry. Finite separation and the unseparated regimes are compact, so box
+   trees can take them. This is the route in progress.
+2. *Fourier positivity on the window [1/7, 6/7]* with a smooth minorant. Main term (5/7)(5/14)^5 ≈ 0.0042 for the
+   triangle minorant, 5.5e-4 for a 5-fold box minorant.
+   - A single relation of height <= 3 already costs 12–42% of the main term, and the tail needs relation heights up to
+     about 17 (5-fold box) or about 1,000 (triangle).
+   - **Not viable** without handling resonances in bulk.
+3. *Union bound:* 10/7 > 1 for five runners. **Not viable.**
+
+**Consequence:** the open part of order seven is now one statement, FS(spread > 50), on a compact time window, true
+on every instance tested. Route 1 is next. Meanwhile the six-runner tree is being pushed to v6 <= 100 v1
+(`o7_box6_exact_v4.py`, float leaf search with exact verification of every leaf; on 1/12 it matches v3's tree shape).
