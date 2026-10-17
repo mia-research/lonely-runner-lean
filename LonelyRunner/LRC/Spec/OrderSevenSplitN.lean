@@ -170,4 +170,58 @@ theorem cluster_window {F : Finset ℕ} (hne : F.Nonempty) {b c w α : ℝ} (hb 
   · push_cast; linarith
   · push_cast; linarith
 
+/-- **Pattern window.**  Speeds `d = c Q d + e d` of a nonempty `F` (`Q d ≥ 1`, `0 ≤ e d`, `e d ≤ κ Q d`), laps `m d`.
+If on `[α, α + 1/c]` the envelopes `max ((m d + 1/7 − e d t)/Q d)` and `min ((m d + 6/7 − e d t)/Q d)` are at least
+`(c + κ) w` apart, `F` has a window of length `w` starting in `[α, α + 1/c]`.  (`Q ≡ 1` is `cluster_window`.) -/
+theorem pattern_window {F : Finset ℕ} (hne : F.Nonempty) {c κ w α : ℝ} (hcp : 0 < c) (hκ : 0 ≤ κ) (hw : 0 ≤ w)
+    (Q : ℕ → ℕ) (e : ℕ → ℝ) (m : ℕ → ℤ) (hQ : ∀ d ∈ F, 1 ≤ Q d) (he : ∀ d ∈ F, (d : ℝ) = c * Q d + e d)
+    (he0 : ∀ d ∈ F, 0 ≤ e d) (heκ : ∀ d ∈ F, e d ≤ κ * Q d)
+    (hgap : ∀ t, α ≤ t → t ≤ α + 1 / c →
+      (c + κ) * w ≤ F.inf' hne (fun d => ((m d : ℝ) + 6 / 7 - e d * t) / Q d)
+        - F.sup' hne (fun d => ((m d : ℝ) + 1 / 7 - e d * t) / Q d)) :
+    ∃ t₀ : ℝ, α ≤ t₀ ∧ t₀ ≤ α + 1 / c ∧ InBandOn F (Set.Icc t₀ (t₀ + w)) := by
+  have hQpos : ∀ d ∈ F, (0 : ℝ) < Q d := fun d hd => by exact_mod_cast (show 0 < Q d by have := hQ d hd; omega)
+  set envL : ℝ → ℝ := fun t => F.sup' hne (fun d => ((m d : ℝ) + 1 / 7 - e d * t) / Q d) with hL
+  set envU : ℝ → ℝ := fun t => F.inf' hne (fun d => ((m d : ℝ) + 6 / 7 - e d * t) / Q d) with hU
+  have hLc : Continuous envL := by
+    rw [hL]
+    exact Continuous.finset_sup'_apply hne
+      (fun d _ => (continuous_const.sub (continuous_const.mul continuous_id)).div_const _)
+  have hLa : Antitone envL := by
+    intro t s hts
+    simp only [hL]
+    apply Finset.sup'_le
+    intro d hd
+    refine le_trans ?_ (Finset.le_sup' (fun d => ((m d : ℝ) + 1 / 7 - e d * t) / Q d) hd)
+    have := he0 d hd
+    exact div_le_div_of_nonneg_right (by nlinarith) (hQpos d hd).le
+  have hUs : ∀ t s, t ≤ s → envU t - κ * (s - t) ≤ envU s := by
+    intro t s hts
+    simp only [hU]
+    apply Finset.le_inf'
+    intro d hd
+    have h1 := Finset.inf'_le (fun d => ((m d : ℝ) + 6 / 7 - e d * t) / Q d) hd
+    simp only at h1
+    have hq := hQpos d hd
+    have h2 : e d * (s - t) ≤ κ * Q d * (s - t) := by
+      have := heκ d hd; nlinarith
+    have h3 : ((m d : ℝ) + 6 / 7 - e d * s) / Q d = ((m d : ℝ) + 6 / 7 - e d * t) / Q d - e d * (s - t) / Q d := by
+      field_simp; ring
+    have h4 : e d * (s - t) / Q d ≤ κ * (s - t) := by
+      rw [div_le_iff₀ hq]; nlinarith
+    linarith
+  obtain ⟨t₀, h0l, h0r, N, hN⟩ := ivt_window hcp hκ hw hLc hLa hUs hgap
+  refine ⟨t₀, h0l, h0r, fun s hs d hd => ?_⟩
+  obtain ⟨hlo, hhi⟩ := hN s hs.1 hs.2
+  have hlo' := le_trans (Finset.le_sup' (fun d => ((m d : ℝ) + 1 / 7 - e d * s) / Q d) hd) hlo
+  have hhi' := le_trans hhi (Finset.inf'_le (fun d => ((m d : ℝ) + 6 / 7 - e d * s) / Q d) hd)
+  simp only at hlo' hhi'
+  have hq := hQpos d hd
+  rw [div_le_iff₀ hq] at hlo'
+  rw [le_div_iff₀ hq] at hhi'
+  have hds : (d : ℝ) * s = (c * s - N) * Q d + e d * s + (N : ℝ) * Q d := by rw [he d hd]; ring
+  apply circDist_ge_of_window (m := N * Q d + m d) _ _ (by norm_num : (0 : ℝ) < 1 / 7)
+  · push_cast; linarith
+  · push_cast; linarith
+
 end LRC.O7Split
