@@ -497,6 +497,8 @@ slow region itself has no lower bound on x1, so trees alone do not finish it.
 
 ## E12 (2026-10-17) Toward a uniform slow-region argument: what the closures use; first-stretch localisation
 
+> **DRIFT (marked 2026-10-17, owner):** this entry follows an imported proof shape, not global isolation. Its targets (first-stretch localisation FS50/FS100 — a `DoorFirstLap`-type cap, set aside at n=6 E19/E20/E26–E27; Fourier/equidistribution; the "Diophantine dichotomy"; measure union bounds — set aside as imported framing, n=6 E2) are **not native routes**. True theorems proved here stay true; the direction is withdrawn. See E17.
+
 **Map:** order seven, slow region v6 > 50 v1, v6 < 6 v5 (E11 open item).
 
 **What the per-instance closures use** (`o7_joint_mine_v1.py`, 80 random slow-region sets, split j = 1; float search,
@@ -554,6 +556,8 @@ on every instance tested. Route 1 is next. Meanwhile the six-runner tree is bein
 
 ## E13 (2026-10-17) The geometric-window form of Claim R; the rational-pattern base case
 
+> **DRIFT (marked 2026-10-17, owner):** this entry follows an imported proof shape, not global isolation. Its targets (first-stretch localisation FS50/FS100 — a `DoorFirstLap`-type cap, set aside at n=6 E19/E20/E26–E27; Fourier/equidistribution; the "Diophantine dichotomy"; measure union bounds — set aside as imported framing, n=6 E2) are **not native routes**. True theorems proved here stay true; the direction is withdrawn. See E17.
+
 **Map:** order seven, slow region; Claim R / FS(spread > 50) of E12, route 1 (multi-scale).
 
 **Restatement:** write the fast block as F = W y (y the speed vector with min 1, W = v2/v1). Claim R says that
@@ -579,6 +583,8 @@ is scale-free, which is the form the multi-scale route works in.
 
 ## E14 (2026-10-17) Order seven for v6 <= 100 v1, kernel-checked; conditional reductions to FS50 / FS100
 
+> **DRIFT (marked 2026-10-17, owner):** this entry follows an imported proof shape, not global isolation. Its targets (first-stretch localisation FS50/FS100 — a `DoorFirstLap`-type cap, set aside at n=6 E19/E20/E26–E27; Fourier/equidistribution; the "Diophantine dichotomy"; measure union bounds — set aside as imported framing, n=6 E2) are **not native routes**. True theorems proved here stay true; the direction is withdrawn. See E17.
+
 **Tree:** `o7_box6_exact_v4.py 1 100 1 6 600`: float leaf search, **every leaf re-verified in exact Fractions** before
 it is written. Result: 944,513 leaves, 33,456 empty, 0 failures, 4,012 s.
 - On 1/12 its tree shape is identical to v3's.
@@ -603,6 +609,8 @@ it is written. Result: 944,513 leaves, 33,456 empty, 0 failures, 4,012 s.
 - Route 1 (multi-scale `pattern_window`, rational-pattern base, compact unseparated regimes) is the proof plan.
 
 ## E15 (2026-10-17) Going after FS100: the terminating parts, the residue, and what a proof needs
+
+> **DRIFT (marked 2026-10-17, owner):** this entry follows an imported proof shape, not global isolation. Its targets (first-stretch localisation FS50/FS100 — a `DoorFirstLap`-type cap, set aside at n=6 E19/E20/E26–E27; Fourier/equidistribution; the "Diophantine dichotomy"; measure union bounds — set aside as imported framing, n=6 E2) are **not native routes**. True theorems proved here stay true; the direction is withdrawn. See E17.
 
 **Map:** order seven, FS100 (the only open statement; `lonely7_of_FS100`).
 
@@ -659,6 +667,8 @@ windowed form is owed in Lean. Items 1 and 3 are concrete engineering on existin
 
 ## E16 (2026-10-17) Windowed union bound; cluster step; correction: small separation is not compact; the dichotomy
 
+> **DRIFT (marked 2026-10-17, owner):** this entry follows an imported proof shape, not global isolation. Its targets (first-stretch localisation FS50/FS100 — a `DoorFirstLap`-type cap, set aside at n=6 E19/E20/E26–E27; Fourier/equidistribution; the "Diophantine dichotomy"; measure union bounds — set aside as imported framing, n=6 E2) are **not native routes**. True theorems proved here stay true; the direction is withdrawn. See E17.
+
 **Map:** order seven, FS100. Owner: build the cluster recursion and small-separation trees, and move on the open piece.
 
 **Proved (nested repo; axioms [propext, Classical.choice, Quot.sound]):** `LRC.O7Gap3.gap_union`.
@@ -700,3 +710,57 @@ scheme covers the recursion yet.
 
 *E16 correction:* nested commit 5726f8b did not build. A parameter rename broke a reference in `bad_measure_w`, and
 the chained shell command still committed. Fixed in 97210d1. `gap_union` now builds and its axiom check is clean.
+
+
+## E17 (2026-10-17) Restart from global isolation: the order-seven cascade, read through flanks and cells
+
+**Map:** order seven, native. Start from global isolation: the cascade is the oracle, and flanks, residues and cells
+explain it, as at n=6 (`SUMMARY_n6_cascade_v5.md`). Observation only; no proof step.
+
+**Cascade** (`cascade/seven_cascade_observe_v1.py`, exact; `seven_cascade_observe_v1_30.out`, `.tsv`): all 588,559
+primitive six-sets <= 30.
+- It always stops (cap 2,000 never reached). Moves: 0 in 348,631 sets (lonely at 1/(7 v1)), then 107,526 / 72,211 /
+  34,516 / …, at most 16.
+- Final flank rank: 1: 348,631; 2: 16,828; 3: 42,193; 4: 61,069; 5: 65,183; 6: 54,655.
+- The final flank is a multiple of 7 in 93,825 sets.
+- When only v6 is a multiple of 7 (51,066 sets), the cascade stops at v6 in 10,540 and at a coarse cell opening
+  j = u E in 5,174. The cascade gives the *first* isolation; existence needs any isolation (n=6, E30).
+
+**Flanks and cells** (`cascade/seven_cells_v1.py`, exact residue criterion d(7j+1) mod 7e in [e, 6e];
+`seven_cells_v1_30.out`):
+- **No multiple of 7:** lonely at t = 1/7, since every reading (v mod 7)/7 lies in [1/7, 6/7]. 228,429 sets.
+- **Some multiple of 7**, by shape (|U| non-multiples, |M| multiples):
+
+  | (|U|, |M|) | lonely opening at a 7-divisible flank (of which a coarse cell opening j = uE) | none |
+  |---|---|---|
+  | (2, 4) | 325 (325) | 0 |
+  | (3, 3) | 10,400 (9,271) | 0 |
+  | (4, 2) | 88,966 (65,118) | 19 |
+  | (5, 1) | 245,711 (144,284) | 14,709 |
+
+- Derivation behind the coarse cells (framework form of the n=6 E1 cell criterion at n=7):
+  - At a flank e = 7E, opening j = u E, a runner d = 7q + s slower than e is clear iff (s u) mod 7 lies in {1..5}.
+  - So if e is the fastest speed and no other speed is a multiple of 7, each of the five others excludes exactly one
+    nonzero shift u. There are 6 nonzero shifts, so one is free and gives a lonely flank opening.
+  - Faster runners shift the residue (a ≠ 0) and can block two shifts each. That is where the exceptions come from.
+  - Correction to my statement to the owner: n=6 E1 records only "n = 7: no coarse blocking pattern"
+    (`cells_general_n_v1.out`). The phi argument (n=6 E45) says blocking is impossible at n = 3, 4, 5, 7, not
+    "possible iff phi(n) <= n − 2".
+
+**Exceptions** (no lonely opening at any 7-divisible flank: 14,728; `seven_cells_exc_v1_30.out`,
+`seven_cells_exc_v2_30.out`):
+- *(i) Feature:* the multiple of 7 is slow: rank 2 in 9,696, rank 3 in 4,150, rank 4 in 797, rank 5 in 66, plus 19
+  with two multiples. Runners faster than it: 4 in 9,696 sets, 3 in 4,158.
+- *(ii) What forces the witness:* the cascade's instant always has 7 in its denominator. It is a flank opening
+  (7j+1)/(7d) or (7j+6)/(7d) of a runner d that is not a multiple of 7. Example: (1,2,3,4,7,12) at 5/28 = 15/84, the
+  entry flank of 12.
+  - **The fastest runner's flank carries a lonely opening in 14,718 of the 14,728.** Runners 5 and 6 carry one in
+    every listed pattern.
+  - The remaining 10, e.g. (1,6,7,8,9,10), (2,6,7,8,15,16), are phase-1 pinch sets (E3), lonely only on short
+    windows.
+- *(iii) Same mechanism:* **not understood yet.** At a flank e coprime to 7, the modulus 7e splits into a mod-7 class
+  of j and a mod-e residue (the coprime-flank form, n=6 `six_crt_coprime_v1`). Whether one residue argument covers all
+  14,718 has not been derived.
+
+**Next:** read the exceptions' v6 flank openings in the coprime-flank form (which j mod 7, which residues mod v6),
+then the 10 pinch sets, then the 19 (4, 2) exceptions.
