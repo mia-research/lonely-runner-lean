@@ -1081,3 +1081,48 @@ is automatic.
 - Lean owed for nu >= 3. The searches are 8.6e10 / 3e10 pair checks, too large for a kernel `decide` in this form.
   A uniform fractional (weighted pigeonhole) certificate cannot exist: by fold symmetry each instant is missed by
   exactly 2/7 of the states, so any weighting gives some mask a complement of weight >= 2/7 > 1/4.
+
+## E25 (2026-10-17) Order seven on the framework's own route, in Lean, modulo three named finite statements
+
+**Map:** order seven, final alignment; the framework track's `existenceAtN_seven` used one non-native input,
+`LRC.OrderSevenN.lonely_seven_nat` (the Barajas–Serra port). This entry replaces it.
+
+**Proved (nested repo ffac252; axioms [propext, Classical.choice, Quot.sound]; no `sorry`, no `native_decide`):**
+- `LRC.OrderSevenGridR.existenceAtN_seven_grid : AbsU5 → AbsP1 → AbsP2 → ExistenceAtN 7`
+- `LRC.OrderSevenGridR.lonelyRunnerAtN_seven_grid : AbsU5 → AbsP1 → AbsP2 → LonelyRunnerAtN 7`
+- `RealSevenGridN.lean` is `RealSevenN`'s route, with the whole-number case taken as a parameter
+  (`existenceAtN_seven_of_nat`): rows, one class scaled, more classes by the exact merge, order six, and stepping. It
+  is supplied by `LRC.O7All.lonely_seven_nat_grid`.
+- `OrderSevenN` is **not** in the import closure of the new tree (script check: no `OrderSevenN`, `IntLRC_7` or BS
+  module among the 131 modules below `OrderSevenAllN`).
+
+**Contents:**
+- `OrderSevenAbsN.lean`:
+  - `gridOK_fold`, the instant formula. At level a >= 2, x is in band at c (1 + 7^(a-2) s) iff
+    `ok (x / 7^(a-2)) (rvec x 7^(a-2)) (x % 49) c s`. Proof: distributivity, plus the split
+    (N Q + r) mod 49N.
+  - `rvec_mem`: the remainder vector is one of the twelve. Floor sub-additivity alone gives exactly the twelve Farey
+    vectors, checked by Python (12 = 12) and in Lean by a kernel `decide` over 720 candidates.
+  - `units_all` (five units, every a >= 3), `units_val1_all` (a >= 4), `units_valw_all` (w >= 2, a >= w + 2,
+    placement j0 = 8 or 8·7^(L-2) + 1).
+- `OrderSevenAllN.lean`:
+  - `digit_block`: each runner blocks at most two of the seven values of a digit, at any level; kernel table over
+    (q mod 7, u mod 7).
+  - `free_digit_gen` and `greedy_ext`: digit-by-digit extension, class v decided at digit a-1-v.
+  - `grid_top`: the nu >= 3 case split, with counting lemmas fixing the shapes.
+  - `grid_below`: induction on the top valuation, base `grid_nu2_of` with certificates A, B, C; no unit means divide
+    by 7.
+  - `gridG_all`, `lonely_seven_nat_grid`.
+
+**Owed in Lean:** the three finite statements `LRC.O7Abs.AbsU5`, `AbsP1`, `AbsP2`, as defined in
+`OrderSevenAbsN.lean`.
+- Checked by exact search: E24, and the one-command driver `cascade/verify_abs_hypotheses_v1.sh`, whose mask rule is
+  Lean's `ok` and whose `fvecs` list is the same.
+- Too large for kernel `decide`: 8.6e10 / 3e10 pair checks.
+- A pruned search tree was measured (`cascade/seven_tree_count_v1.c`): per-c residual counting leaves about 4e10
+  nodes. Each runner blocks exactly 2/7 of every column, so counting cannot prune. A smaller certificate needs a
+  structural argument.
+
+**Status of order seven, framework track:**
+- complete in Lean except for these three named finite statements, which are verified by exact search;
+- the n = 3..6 rows are unchanged.
