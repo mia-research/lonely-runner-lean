@@ -1238,3 +1238,41 @@ with E27's classes).
 
 **Next:** emit the search tree as a certificate (branch instant and child list per node, with depth-3 refutations),
 and build the Lean checker in parts.
+
+## E29 (2026-10-18) Cutting depth 1: dominance brings AbsU5's tree to about 9.2e5 nodes
+
+**Map:** order seven, Lean gap; E28's tree (about 1.3e7 nodes, of which 1.08e7 at depth 2, from about 3,160
+unfiltered children per depth-1 node). Owner: cut depth 1 before building the certificate.
+
+**Devices** (all sound for the existence of a cover):
+1. **Global dominance:** a cover never needs a state whose good set contains another's. Inclusion-minimal masks only
+   (`seven_class_bb_prep_v1.py ... minimal`): 8,014 states, 2,293 root candidates.
+2. **Relative dominance at a node** (`seven_class_bb_v5.c`): drop a candidate whose blocked set within U lies inside
+   another candidate's. The dominator blocks the branching instant as well, and covers more.
+3. **Dominance first** (`seven_class_bb_v6.c`): compute the U-maximal admissible states D once per node (dominance
+   does not depend on the branching instant), then branch on the uncovered instant with fewest members of D.
+
+**Results** (AbsU5, all roots, contiguous; `DOMD=2` = devices 2-3 at depths 1 and 2):
+
+| version | roots | depth 2 | depth 3 | depth 4 | covers | time (8 cores) |
+|---|---|---|---|---|---|---|
+| v4, all masks (E28) | 3,411 | 10,771,540 | 2,630,868 | 0 | 0 | 32 s |
+| v4, minimal masks | 2,293 | about 4.7e6 (slice) | | | | |
+| v5, DOMD=1 (slice, 40 roots) | 40 | 57,851 | 15,298 | 0 | 0 | |
+| **v6, DOMD=2, full** | **2,293** | **847,413** | **73,791** | **0** | **0** | **3 s** |
+
+- Depth-1 children: about 3,160 -> 2,060 (minimal) -> 1,446 (relative dominance) -> about 370 (dominance first).
+- Dominance discarded 14,581,725 candidates at depth 1 and 1,580,803 at depth 2. A certificate must justify each
+  with a dominating witness: one AND and compare on 210-bit sets, about 1.6e7 checks in all, comparable to
+  certificate A's 2e7.
+- Root instant choice is immaterial: 2,241-2,356 blockers per instant.
+- Positive controls (c <= 2 family, the same code at each version): covers found (v5 DOMD=1: 4,811 on 20 roots; v6:
+  87 at DOMD=1 and 69 at DOMD=2). The multiplicity falls because dominance merges equivalent covers; it is never 0.
+
+**Kernel estimate** (not built):
+- about 9.2e5 nodes, each with 42 class extractions and 42 ANDs of admissible-state bitsets;
+- about 1.6e7 dominance witnesses.
+- Of the order of certificate A, so an hour-scale build in parts.
+
+**Next:** emit the v6 tree as a certificate (per node: the branching instant, the kept children, and a witness per
+dropped admissible candidate) and build the Lean checker.

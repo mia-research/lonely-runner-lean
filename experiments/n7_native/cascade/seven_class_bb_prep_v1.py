@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Input for seven_class_bb_v1.c: all distinct unit-state masks (good instants) over the instants allowed by
+"""Input for seven_class_bb_v1.c (third argument `minimal`: keep only inclusion-minimal good sets, complete for covers): all distinct unit-state masks (good instants) over the instants allowed by
 runner 1, plus the class of each instant.  Classes C(c, s0) = {(c, s0 + 7 s1)} (E27).  Usage: out.txt [CMAX]"""
 import sys
 CM = int(sys.argv[2]) if len(sys.argv) > 2 else 6
@@ -15,6 +15,12 @@ for T in range(49):
             m = mask(T, fl, rho)
             full.setdefault(sum(1 << i for i, b in enumerate(R) if m >> b & 1), m)
 ms = sorted(full)
+if len(sys.argv) > 3 and sys.argv[3] == "minimal":
+    byp = sorted(ms, key=lambda m: bin(m).count("1"))
+    keep = []
+    for m in byp:
+        if not any((k & m) == k for k in keep): keep.append(m)
+    ms = sorted(keep)
 sidx = {st: b for b, st in enumerate(strategies)}
 def pairs_of(m):
     out = []
