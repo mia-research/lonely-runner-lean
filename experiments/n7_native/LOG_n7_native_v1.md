@@ -825,3 +825,41 @@ residue-grid sets). Observation and derivation; nothing in Lean yet.
 - The grid statement is `[EMPIRICAL — exact, exhaustive <= 45; high-valuation samples]`.
 - The descent for r <= 3 is `[A]` (argued). It is next for Lean, in residue form.
 - Open: the r in {4, 5} case. Next: its structure at level nu + 1 (which (k0, s) work), and the level nu + 2 sets.
+
+## E19 (2026-10-17) Every primitive six-set with no speed divisible by 49 is lonely on a 7-adic grid (finite certificate)
+
+**Map:** order seven, native: residue grids k / 7^a (E18), with the coarse-cell descent.
+
+**Complete residue enumeration** (`cascade/seven_mod49_v1.py`, `seven_mod343_v1.py`; exact; outputs `.out`,
+`seven_mod49_fail_r{3,4,5}.txt`):
+- At level 2 (instants k/49, 7 not dividing k), a multiple of 7 of valuation 1 is automatically in band. So the
+  condition depends only on the r non-multiples ("units") mod 49.
+- The orbits are the multisets of units mod 49 up to multiplication by a common unit (k -> c^-1 k is a bijection of
+  the grid):
+
+  | r | orbits | failing level 2 |
+  |---|---|---|
+  | 3 | 316 | 0 |
+  | 4 | 3,553 | 0 |
+  | 5 | 32,637 | **48** |
+
+  No failing r = 5 orbit contains a failing r = 4 sub-orbit (there are none).
+- Level 3 for the 48: a unit k mod 343 with every unit lift u (mod 343) satisfying u k mod 343 in [49, 294], and the
+  single multiple m = 7 m' satisfying m' k mod 49 in [7, 42].
+  - Checked over all 7^5 unit lifts of each orbit and all 42 classes of m' mod 49: **0 failures**.
+  - Scaling covers the other members of each orbit: c' mod 343 lifting c maps lifts to lifts and m' classes to m'
+    classes.
+
+**Theorem shape `[VERIFIED — complete finite residue check; not yet in Lean]`:** let S be a primitive set of six
+positive integers, none divisible by 49.
+- If no speed is divisible by 7, S is lonely at t = k/7 for every k = 1..6.
+- If some speed is divisible by 7, S is lonely at some k/49 or k/343 with 7 not dividing k.
+
+Consistent with the exhaustive data <= 45 (E18), where nu_max <= 1 throughout.
+
+**Remaining:** sets with a speed divisible by 49 (nu_max >= 2).
+- The descent (E18) handles r <= 3 units, given the reduced set M/7.
+- For r in {4, 5}, the level-(nu+1) condition depends on the units mod 7^(nu+1).
+- Each unit forbids two values of the top digit s, and the carries c_i(k0) are the coarse cells of the units at the
+  fine-grid instant k0 / 7^(nu+1) in (0, 1/7).
+- Next: whether the level-2 classification (48 orbits) transfers one level up, or a separate argument is needed.
