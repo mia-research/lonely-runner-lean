@@ -551,3 +551,53 @@ six-set lonely in [1/(7 v1), 6/(7 v1)]?
 **Consequence:** the open part of order seven is now one statement, FS(spread > 50), on a compact time window, true
 on every instance tested. Route 1 is next. Meanwhile the six-runner tree is being pushed to v6 <= 100 v1
 (`o7_box6_exact_v4.py`, float leaf search with exact verification of every leaf; on 1/12 it matches v3's tree shape).
+
+## E13 (2026-10-17) The geometric-window form of Claim R; the rational-pattern base case
+
+**Map:** order seven, slow region; Claim R / FS(spread > 50) of E12, route 1 (multi-scale).
+
+**Restatement:** write the fast block as F = W y (y the speed vector with min 1, W = v2/v1). Claim R says that
+L(y), the lonely set at 1/7 of the block y, meets every window [a, 6a] with a >= a0 (a = W/7). This holds iff L(y)
+starts by 6 a0 and every gap between consecutive components after the first has ratio L_{i+1}/U_i < 6. The ratio
+is scale-free, which is the form the multi-scale route works in.
+
+**Exact data** (`o7_geogap_v1.py`, `o7_geogap_v1.out`; `o7_geogap_patterns_v1.out`):
+- Real (rational) blocks, s in [0, 120]: in 400 random and 400 near-resonant blocks the worst ratio is **4.833**, near
+  (2,3,4,5,7)/2. The first lonely instant is at most 0.307.
+- **Every five-runner integer pattern with entries <= 12** (792 patterns; lonely set periodic, exact): **worst ratio
+  64/13 ≈ 4.92 at (3,4,5,7,11)**, then 29/6 at (2,3,4,5,7) and 25/6 at (6,7,8,9,10) and (4,6,7,9,10). Every pattern
+  is lonely at its first edge instant 1/7.
+- **Margin: 64/13 < 6.** The worst cases are small rational patterns, where the multi-scale route bottoms out.
+
+**Route 1 structure** (design; nothing proved here yet):
+- (i) Rational patterns: the lonely set is periodic. The ratio bound is a finite exact computation over one period,
+  and `pattern_window` transfers it to blocks c Q + e with small e.
+- (ii) Near a pattern: L(y) follows L(Q) up to s ~ 1/|y - Q/Q1|. Beyond that, the drift acts as slow offsets, and the
+  gaps are those of a lower-dimensional offset problem with target A_Q (recursion on rank).
+- (iii) Away from all patterns of height <= K: equidistribution makes gaps short relative to s.
+- Each level needs the ratio margin 64/13 < 6, which leaves room for the drift errors.
+
+## E14 (2026-10-17) Order seven for v6 <= 100 v1, kernel-checked; conditional reductions to FS50 / FS100
+
+**Tree:** `o7_box6_exact_v4.py 1 100 1 6 600`: float leaf search, **every leaf re-verified in exact Fractions** before
+it is written. Result: 944,513 leaves, 33,456 empty, 0 failures, 4,012 s.
+- On 1/12 its tree shape is identical to v3's.
+- Split by `o7_box6_lean_v2.py` into 465 parts. Built three at a time (all 465 ok).
+- The assembly's `all_ok` first used one `simp` over 465 lemmas, which failed. It is now an explicit rewrite chain
+  (`List.all_append` per part), and the generator emits that chain.
+
+**Proved (nested repo e3c80b1, f93a0c1; axioms [propext, Classical.choice, Quot.sound], `o7_lean_axioms_v2.out`):**
+- `LRC.O7Box6T100.lonely` and **`LRC.O7Spread.lonely7_spread100`: order seven holds whenever v6 <= 100 v1.**
+- `OrderSevenFirstStretchN`: `FS50 : Prop` (**owed**), `first_stretch_band`, and **`lonely7_of_FS50`: FS50 gives order
+  seven for every six-set of positive whole numbers.**
+- `OrderSevenSpread100N`: `FS100 : Prop` (**owed**, weaker than FS50: `FS100_of_FS50`) and **`lonely7_of_FS100`**.
+- Per the n=8 lesson (a `def … : Prop` is type-checked, never proved): FS50 and FS100 are named owed items. No
+  theorem concludes them, and the module docstrings say so.
+
+**Where order seven stands:**
+- Proved for v6 <= 100 v1 and for v6 >= 6 v5.
+- The rest is exactly **FS100**: a lonely instant of v2..v6 inside the slowest runner's first band stretch when
+  v6 > 100 v1.
+- Evidence (E12–E13): exhaustive to 60 with every failure at v6/v1 <= 7; Claim R on real speeds; worst geometric gap
+  ratio 64/13 < 6 over small patterns.
+- Route 1 (multi-scale `pattern_window`, rational-pattern base, compact unseparated regimes) is the proof plan.

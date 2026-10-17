@@ -71,7 +71,7 @@ end LRC.O7Box6T{tag}P{g}
 ''')
 imports = "\n".join(f"import LonelyRunner.LRC.Spec.OrderSevenBox6Tree{tag}P{g}N" for g in range(len(groups)))
 allexpr = " ++ ".join(f"LRC.O7Box6T{tag}P{g}.subs" for g in range(len(groups)))
-oks = ", ".join(f"LRC.O7Box6T{tag}P{g}.subs_ok" for g in range(len(groups)))
+chain = "\n".join([f"  rw [List.all_append, LRC.O7Box6T{tag}P{g}.subs_ok, Bool.and_true]" for g in range(len(groups) - 1, 0, -1)] + [f"  exact LRC.O7Box6T{tag}P0.subs_ok"])
 open(f"{outdir}/OrderSevenBox6Tree{tag}N.lean", "w").write(f'''{imports}
 
 /-!
@@ -91,7 +91,8 @@ def skel : TS := {sk}
 theorem skel_ok : skelOK skel (root ({xn} / {xd}) ({yn} / {yd})) all = true := by decide +kernel
 
 theorem all_ok : all.all (fun p => check p.1 p.2) = true := by
-  simp only [all, List.all_append, {oks}, Bool.and_self]
+  unfold all
+{chain}
 
 theorem win : ∀ x, Mem (root ({xn} / {xd}) ({yn} / {yd})) x → Inst x := split_sound skel_ok all_ok
 
