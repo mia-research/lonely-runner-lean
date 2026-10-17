@@ -601,3 +601,58 @@ it is written. Result: 944,513 leaves, 33,456 empty, 0 failures, 4,012 s.
 - Evidence (E12–E13): exhaustive to 60 with every failure at v6/v1 <= 7; Claim R on real speeds; worst geometric gap
   ratio 64/13 < 6 over small patterns.
 - Route 1 (multi-scale `pattern_window`, rational-pattern base, compact unseparated regimes) is the proof plan.
+
+## E15 (2026-10-17) Going after FS100: the terminating parts, the residue, and what a proof needs
+
+**Map:** order seven, FS100 (the only open statement; `lonely7_of_FS100`).
+
+**Why a direct pattern recursion is not a finite proof:**
+- One pattern step writes the fast block as c Q + e. The offsets still wind many times across the slow runner's
+  stretch: e times the stretch length is about sigma v2/v1, which is large.
+- So each level is a full problem again, with a composite target, at unboundedly many levels.
+- The parts that terminate are levels whose next speeds are a fixed factor faster (nesting), and blocks of at most 3
+  runners (union bound).
+
+**Proved (nested repo, `OrderSevenNestN.lean`; axioms [propext, Classical.choice, Quot.sound]):**
+- `full_stretch_in` (length >= 12/(7u) contains a full band stretch);
+- `hit_in` (length >= 2/(7u) contains an in-band instant);
+- `nest_step`;
+- **`lonely7_lacunary`**: if 5 v_{k+1} >= 12 v_k for k = 1..4, then some instant in v1's first band stretch has all six
+  in band.
+
+**Provable first-stretch chain** (`o7_fschain_v1.py`, exact, formula-only): single-runner worst-case fold, union bound
+with windows for blocks of at most 3, instant at the last step.
+- Coverage on v6 > 100 v1 (`o7_fschain_v1.out`):
+
+  | family | closed |
+  |---|---|
+  | ratios 1.5–4 | 1,413/1,413 |
+  | log-uniform speeds | 3,785/3,925 (96%) |
+  | uniform middle speeds | 699/3,927 (18%) |
+  | runs | 0/99 |
+
+**Residue** (`o7_fschain_resid_v1.out`, 3,000 unclosed random sets):
+- Terminal non-lacunary block: size 4 in 962 sets, size 5 in 1,621 (together 86%); size 3 in 223, size 1–2 in 194.
+- Clusters (some internal ratio < 1.05): 1,256. Moderate ratios: 1,744.
+- Separation Lambda (block min speed × preceding window): 1–10 in 1,224 sets, 10–100 in 372, 100–1,000 in 1,352,
+  >= 1,000 in 52.
+
+**What a proof of FS100 needs, by residue type:**
+1. *Clusters* (b + small integer offsets): `pattern_window`/`cluster_window` with Q = 1s reduces the block to an
+   offset problem with one runner fewer, shifted bands and integer offsets. The first stretch is early time, where
+   clusters are coherent when the spread D <= 5 v1/6, which helps.
+   - Recursion depth <= 5 -> 4 -> 3, then union bound.
+   - Intermediate offsets (e times the window length in [0.1, 15]) form a compact regime of dimension <= 4 including
+     the band shift, so box trees apply.
+2. *Moderate-ratio blocks:* a **Diophantine dichotomy at the scale of the window**.
+   - Either there are no small near-relations, |h·F| times window >> H for 0 < |h| <= H. Then the orbit
+     equidistributes (Erdős–Turán–Koksma) and hits band^k, which has measure (5/7)^k.
+   - Or F lies near a rational subspace. Then the problem reduces in rank, down to a pattern (rank 1), which is frozen
+     when e times the window is <= 1/42 (order-six margin), or recurses.
+   - Explicit constants are needed. The shifted (arbitrary-phase) version is false in general, so the reduction must
+     keep orbit structure. This is the main new mathematics.
+3. *Small separations* (Lambda 1–10): a compact regime, box trees over the normalised block plus window parameters.
+
+**Status:** FS100 is still `[CONJECTURE — EMPIRICAL]`. Lacunary configurations are now `[PROVED]` in Lean. The rest of
+the chain is formula-checked: union-bound windows for blocks <= 3 are proved only for w = 0 (`gap_three`), so the
+windowed form is owed in Lean. Items 1 and 3 are concrete engineering on existing lemmas. Item 2 is a research step.
