@@ -656,3 +656,44 @@ with windows for blocks of at most 3, instant at the last step.
 **Status:** FS100 is still `[CONJECTURE — EMPIRICAL]`. Lacunary configurations are now `[PROVED]` in Lean. The rest of
 the chain is formula-checked: union-bound windows for blocks <= 3 are proved only for w = 0 (`gap_three`), so the
 windowed form is owed in Lean. Items 1 and 3 are concrete engineering on existing lemmas. Item 2 is a research step.
+
+## E16 (2026-10-17) Windowed union bound; cluster step; correction: small separation is not compact; the dichotomy
+
+**Map:** order seven, FS100. Owner: build the cluster recursion and small-separation trees, and move on the open piece.
+
+**Proved (nested repo; axioms [propext, Classical.choice, Quot.sound]):** `LRC.O7Gap3.gap_union`.
+- If Σ_d (2L/7 + dLw + 2w/7 + dw² + 4/(7d) + 2w) < L, then `GapProp F (L + w) w`.
+- This is the union bound with a window, for any finite set F. It covers the windowed step of the chain, owed in E15.
+
+**Cluster step (product form)** (`o7_fschain_v2.py`, exact; `o7_fschain_v2.out`):
+- A block b + e passes to its offsets in shifted bands fixed in advance (via `cluster_window`).
+- Coverage moved only slightly: runs 0% -> 9/99, uniform 18% -> 21%, log-uniform 96% -> 96.5%.
+- Reason: fixing the base shift y0 in advance turns the free-observer condition (all points within an arc of 5/7)
+  into a product of bands, which loses its strength.
+- Correct formulation, recorded for next time:
+  - a cluster with <= 3 points always fits in an arc <= 2/3 < 5/7 (some gap >= 1/3);
+  - 4- and 5-point clusters fail only near equally spaced configurations (every gap < 2/7).
+  So the cluster recursion is a *near-equispaced avoidance* problem for the offsets.
+
+**Correction (small-separation regime is not compact):** E15 called it compact. It is not.
+- Runner 1's first stretch needs t >= 1/(7 v1). When v2 >> v1, this forces stretch indices m of v2 around
+  v2/(7 v1).
+- There the block's phases r (m + phi) depend on the arithmetic of r m, and fixed-size boxes in r cannot certify
+  that.
+- The prototype `o7_sstree_v1.py` checked the wrong side of runner 1's band (it allowed m <= M with v2 large). Its
+  output is kept as `o7_sstree_v1_WRONGSIDE.out` and **does not stand**.
+- Position arithmetic is the same obstruction as in the moderate-ratio case, so E15's three residue types collapse to
+  one open piece.
+
+**The dichotomy, quantified:**
+- *Equidistribution branch:* on the window, with a 5-fold box minorant, the main term is about 7.7e-4. The tail
+  needs heights H >= 17.
+- Among the 35^5 integer vectors of height <= 17, pigeonhole gives a near-relation |h·y| ≲ 10^-5. So the criterion
+  needs separation about 10^8. **It never applies at realistic scales.**
+- *Resonant branch:* therefore always the operative one. A proof must recurse on the rational-subspace structure of
+  the fast block (F = M z + e, M an integer 5 x r matrix), at the actual stretch positions, one dimension per level.
+- The free-observer (arc) formulation is the target that composes across cluster levels.
+
+**Status:** FS100 is open. The obstruction is a multi-scale Diophantine recursion at the true positions. The tools so
+far (nesting, union bound with windows, `pattern_window`, `cluster_window`) are proved, but no finite certificate
+scheme covers the recursion yet.
