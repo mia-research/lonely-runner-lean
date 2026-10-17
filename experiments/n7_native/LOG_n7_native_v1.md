@@ -1196,3 +1196,45 @@ Hall, LP-dual, exact-cover and branch-and-bound devices.
   shifted level-2 problem), and the measured strength of the claim comes from all six columns at once. Open: a
   class-ordered branch-and-bound over all 42 classes jointly (order 8's "lowest uncovered residue" branching) with
   node counts measured; this is the candidate route to a kernel-size certificate.
+
+## E28 (2026-10-18) Class-ordered branch-and-bound for AbsU5: 0 covers, about 1.3e7 nodes against 8.6e10 triples
+
+**Map:** order seven, Lean gap; the route named in E27 (order 8's "branch on the lowest uncovered residue",
+with E27's classes).
+
+**Search** (`cascade/seven_class_bb_v1..v4.c`, input `cascade/seven_class_bb_prep_v1.py`; exact):
+- State: U = instants still good for runner 1 and every chosen runner (210 instants, 42 classes of 5).
+- Branch: an uncovered instant l; the next runner must block l (complete).
+- Prune and filter, all sound:
+  - (a) with r runners left, every class has at most 2r uncovered members (each runner blocks exactly one pair per
+    class, E27);
+  - (b) pair-type feasibility: some multiset of r types t = rho mod 7 makes every class's uncovered set coverable
+    by pairs of differences (c t)^-1;
+  - (c) candidate filter: a next runner whose pair in class c is P is admissible only if |X_c \ P| <= 2(r-1). This
+    uses a per-(class, pair) index of state bitsets, intersected over all 42 classes.
+- v4 branches on the uncovered instant with the fewest admissible blockers.
+
+**Results** (all 3,411 root candidates, contiguous):
+
+| version | depth 1 | depth 2 | depth 3 | depth 4 | covers | time (8 cores) |
+|---|---|---|---|---|---|---|
+| v3 (fullest class) | 3,411 | 11,050,476 | 28,571,474 | 0 | 0 | 63 s |
+| v4 (fewest candidates) | 3,411 | 10,771,540 | 2,630,868 | 0 | 0 | 32 s |
+
+- Positive control (c <= 2 family, the same code): v2 and v3 find 5,660 covers on the first 20 roots, v4 finds
+  8,115 (branching order changes the multiplicity). The filters do not hide covers.
+- This is an independent confirmation of AbsU5: a different algorithm from E24's triple enumeration, same answer.
+
+**Kernel size, estimated, not built:** about 1.3e7 nodes.
+- The cost is at depth 2: about 3,160 unfiltered children per depth-1 node. With r = 3 left the filter only binds on
+  classes with 5 uncovered.
+- Per depth-2 node: 42 class extractions from a 210-bit U, 42 ANDs of precomputed 11,956-bit admissible-state
+  bitsets, and a short child list.
+- Against certificate A's measured kernel rate (about 2e4 checks/s), this is of order hours of kernel time across
+  some hundreds of modules. That is feasible; E25's 8.6e10 was not.
+- The soundness lemmas needed are finite or elementary:
+  - every unit state blocks exactly one pair per class (24,696 x 42 kernel checks);
+  - admissibility (|X \ P| <= 2(r-1)) is general counting.
+
+**Next:** emit the search tree as a certificate (branch instant and child list per node, with depth-3 refutations),
+and build the Lean checker in parts.
