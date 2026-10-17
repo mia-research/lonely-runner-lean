@@ -285,3 +285,120 @@ at those two points has not been derived.
 - That statement is about where the fast four's windows fall, not about their existence. The analogue in order six
   is §5 small alpha (IVT box lemma, step lemma, strip).
 - **Not understood / open:** the form of that lemma at 1/7.
+
+## E6 (2026-10-17) Exact re-check of E1–E5
+
+Owner: *"You can use float, but you need to know that any result has to them be double checked with exact before its
+committ3ed"*. E1–E5 were committed with float classification and float box trees, so those counts were float-only.
+They are re-checked here in exact arithmetic. `o7_exact.py` scales time by 7 lcm(S), so every band edge is an
+integer and the T4/T5 thresholds are integer comparisons.
+
+| entry | float result | exact re-check | artifact |
+|---|---|---|---|
+| E1/E2 map <= 30, 40, 50, 60 | counts, patterns, T6 list | **identical line for line** (all but the elapsed time) | `o7_map_v3.py`, `o7_map_v3_{30,40,50,60}.out` |
+| E2 tight search <= 70 | only (1,2,3,4,5,6); 0 not lonely | **identical** | `o7_tight_v3_70.out` |
+| E3 kappa over 5-prefixes <= 30, 60 | min 3/28; 9 below 5/28 | **identical**: min 3/28 at (1,3,4,5,7); the same 9 prefixes with exact kappa; 57 (<= 30) and 227 (<= 60) at exactly 5/28 | `o7_t5_v3.py`, `o7_t5_v3_{30,60}.out` |
+| E3 pinch data | already exact Fractions | input list now exact (identical) | `o7_pinch_v1..v3` |
+| E4 chain bound <= 40 | 38,771 / 641,166 | **identical** (formula-only Fractions) | `o7_split_an_v1_40.out` |
+| E4 real-ratio landscape | floats | rational inputs, exact W: none below 3/28; perturbation minima 0.137–0.204 at 1e-3; random min 0.305 (T = 20), 0.477 (T = 100) | `o7_kappa_real_v3.py/.out` |
+| E5 box trees | float leaves | superseded by the exact trees of E8 (0 failures) | `o7_kbox_exact_v2.py` |
+
+No float result changed. The float scripts stay on disk as search tools, and every number cited from E7 on names an
+exact artifact.
+
+## E7 (2026-10-17) Slow-runner lemma: components proved, observation exact
+
+**Map:** order seven, kappa for small x1 = v1/v5; order-six analogue §5 small alpha (`ivt_box`).
+
+**Proved (Lean, `LRC/Spec/OrderSevenSplitN.lean`, namespace `LRC.O7Split`):**
+- `split_fold`: a window of S of length >= G plus `GapProp F G w` give a window of length w for S ∪ F.
+  `GapProp F G w` means every time interval of length G contains a window of length w for F.
+- `gap_empty`.
+- `gap_stretch` (stretch recursion): from `GapProp F G w` with G <= 5/(7u), get
+  `GapProp (insert u F) (2/(7u) + 2G) w`.
+- `ivt_window`: the intermediate-value window with a margin.
+- `cluster_window`: for speeds b + e_d with offsets 0 <= e_d <= c and fixed laps, an envelope gap >= (b + c) w on
+  [alpha, alpha + 1/b] gives a window of length w starting there. This is order six's `ivt_box`, with a window in
+  place of an instant.
+
+**Observation (exact):**
+- Slow lemma alone (j = 1: runner 1's band stretch must contain a full G-interval of the fast four)
+  (`o7_slow_v1_{30,40}.out`):
+  - closes 77.48% of primitive prefixes <= 30 and 75.31% <= 40;
+  - sup h = v2 G(Q) grows along consecutive runs: 6.23 at (27,28,29,30), 8.21 at (35,36,37,38);
+  - G itself stays near 0.23 on those runs.
+- Split fold with exact per-block gaps, every split j (`o7_split_v1_{30,40}.out`):
+  - closes 99.84% (<= 30) and 99.91% (<= 40);
+  - the smallest v1/v5 not closed is 3/23 (<= 30) and 3/31 (<= 40); 3/31 is (3,9,12,15,31), the family
+    3(1,3,4,5) + X;
+  - probes (`o7_split_probe_v1.out`): (v1, n..n+3) and (a, b, n, n+d, n+2d) up to n = 200 are all closed.
+- Provable split chain: native-order windows, single-runner gap and stretch recursion, formula-only.
+  - It closes 6.05% (<= 40) and 6.60% (<= 60) (`o7_split_an_v1_{40,60}.out`).
+  - On 200,000 random primitive prefixes with v5 > 100 v1 it closes 32.03% (`o7_slow_sample_v1.out`).
+  - The prefixes it leaves open have fast blocks with consecutive ratios below about 1.5. The stretch recursion
+    needs G(inner) <= 5/(7u), which fails there.
+
+**Reading:**
+- Every ingredient the split fold uses has a proof except uniform gap bounds for fast blocks of three or four
+  runners with bounded internal ratios.
+- `cluster_window` reduces a cluster block to its offset pattern. Bounding the offset patterns uniformly is the
+  open piece.
+- A measure (union) bound fails for 3+ runners at w = 3/(28 v5): the bad fraction 6/7 + sum v_k w can exceed 1.
+- The cluster-coverage run (`o7_split_an_v2.py`) was stopped: its lap-vector enumeration is too slow. It is owed in
+  a faster form.
+
+**Consequence:** kappa >= 3/28 in the slow region is not needed for the fold.
+- kappa >= 1/21 holds for all prefixes (E4, proved).
+- So v6 >= 6 v5 closes order seven everywhere (E8, `lonely7_of_fast6`), and v6 >= (8/3) v5 closes it wherever the
+  3/28 tree holds.
+- The slow region then sits in the bounded-ratio problem v5 < v6 < 6 v5, which needs the six-runner slow-runner
+  lemma anyway. The components above are stated for arbitrary blocks and carry over.
+
+## E8 (2026-10-17) Lean: kappa >= 3/28 on v5 <= 100 v1, and the fastest-runner fold
+
+**Map:** order seven, the v6 fold (E3) and the kappa bound (E4–E5); tree in place of float prototypes.
+
+**Exact trees** (`o7_kbox_exact_v2.py`): one root box x_i in [X, 1], sevenths splitting, exact rationals, 0 failures.
+
+| X | leaves | empty | trees file |
+|---|---|---|---|
+| 1/4 | 1 | 0 | `o7_tree_q4.txt` |
+| 1/8 | 979 | 44 | `o7_tree_q8.txt` |
+| 1/12 | 1,349 | 60 | `o7_tree_q12.txt` |
+| 1/16 | 1,946 | 94 | `o7_tree_q16.txt` |
+| 1/20 | 3,144 | 156 | `o7_tree_q20.txt` |
+| 1/50 | 12,342 | 573 | `o7_tree_q50.txt` |
+| 1/100 | 48,900 | 1,672 | `o7_tree_q100.txt` |
+
+Using one root box instead of 40 slices cuts the tree by about a factor of 10 against E5.
+
+**Proved (nested repo d26e49b; `#print axioms` = [propext, Classical.choice, Quot.sound] for every theorem listed,
+`o7_lean_axioms_v1.out`; no `sorry` / `native_decide` / `admit` in the new modules):**
+- `LRC/Spec/OrderSevenKappaTreeCoreN.lean` (`LRC.O7KTree`):
+  - the checker `check` (leaf, empty and split rules mirror the generator);
+  - `check_sound`;
+  - split trees: skeleton `TS`, `boxesOf_cover`, `skelOK` and `split_sound`;
+  - `kappa_of_win`, which turns the window on ratio boxes into `InBandOn {v1..v5}` on an interval of length
+    3/(28 v5).
+- `OrderSevenKappaTree100P0N` … `P23N`: 24 parts, each a single `decide +kernel`. Generator:
+  `o7_kbox_lean_v2.py`, MAXLEAVES 3000.
+- `OrderSevenKappaTree100N`: `skel_ok` (`decide +kernel`), `all_ok`, `win`, and `LRC.O7KTree100.kappa`: kappa >= 3/28
+  whenever v5 <= 100 v1.
+- `OrderSevenFoldN` (`LRC.O7Fold`):
+  - `fold_one`;
+  - `lonely7_of_window`;
+  - `lonely7_of_fast6`: **v6 >= 6 v5 closes order seven, any v1 < … < v5**;
+  - `lonely7_of_kappa`.
+- `OrderSevenFold100N`: `lonely7_fold100`: **8 v5 <= 3 v6 and v5 <= 100 v1 close order seven.**
+- `OrderSevenSplitN` (E7): `split_fold`, `gap_stretch`, `ivt_window`, `cluster_window`.
+
+**Build note:** a plain `lake build` of the 24 parts ran ten Lean processes at once and thrashed (80 MB free,
+2% CPU each). Built three at a time instead (`xargs -P 3`): 4 min 8 s in total, 23 s per part, assembly 6 s.
+
+**Consequence `[PROVED]`:** in order seven, the region left for other mechanisms is v5 < v6 < 6 v5 when
+v5 > 100 v1, and v5 < v6 < (8/3) v5 when v5 <= 100 v1.
+
+**Owed:**
+- the bounded-ratio region (a five-dimensional problem);
+- uniform gap bounds for three- and four-runner fast blocks with bounded internal ratios (E7), which the six-runner
+  slow-runner lemma also needs.
