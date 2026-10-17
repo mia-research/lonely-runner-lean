@@ -697,3 +697,6 @@ windowed form is owed in Lean. Items 1 and 3 are concrete engineering on existin
 **Status:** FS100 is open. The obstruction is a multi-scale Diophantine recursion at the true positions. The tools so
 far (nesting, union bound with windows, `pattern_window`, `cluster_window`) are proved, but no finite certificate
 scheme covers the recursion yet.
+
+*E16 correction:* nested commit 5726f8b did not build. A parameter rename broke a reference in `bad_measure_w`, and
+the chained shell command still committed. Fixed in 97210d1. `gap_union` now builds and its axiom check is clean.
