@@ -1,0 +1,9 @@
+import LonelyRunner.LRC.Spec.OrderSevenHalfCoreN
+
+/-! Order seven half-unit certificate A, part 35: 1 pieces, 341376 checks. -/
+
+namespace LRC.O7L3
+
+theorem chunkAH_21_21 : chunkAH 21 21 147 = true := by decide +kernel
+
+end LRC.O7L3
