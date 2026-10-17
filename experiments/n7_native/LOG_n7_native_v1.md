@@ -240,3 +240,48 @@ fold (E3). The T5 fold step itself is not yet in Lean.
 
 **Not understood:** why the minimum is 3/28, attained at (1,3,4,5,7) and (1,4,5,6,7). The exact window structure
 at those two points has not been derived.
+
+## E5 (2026-10-17) Phase 3a: box-tree prototypes for kappa >= 1/10 and kappa >= 3/28, compared
+
+**Map:** order seven, the kappa bound of E4; prototype certificates over real ratios x_i = v_i/v5.
+
+**Leaf** (`o7_kbox_v1.py`, `o7_kbox_v2.py`):
+- A lap box [L, L + K] in time units 1/v5, L <= T, with laps n_i.
+- On the ratio box [a_i, b_i], it needs a_i L >= n_i + 1/7 and b_i (L + K) <= n_i + 6/7. These are the term-wise
+  linear bounds, the same shape as the order-six `tlo` leaves.
+- Otherwise split the widest coordinate. Boxes with no increasing x are dropped.
+- v2 splits at a point k/7 when one lies inside the box, which puts the minimisers on box faces.
+
+**Results** (float, `o7_kbox_v1_K110.out`, `o7_kbox_v1_K328.out`, `o7_kbox_v2.out`, `o7_kbox_v2_slow.out`):
+
+| x1 slice | T | K = 1/10 leaves | K = 3/28 leaves | failures |
+|---|---|---|---|---|
+| [0.2, 0.3] | 40 | 40 | 40 | 0 / 0 |
+| [0.1, 0.2] | 40 | 8,777 | 9,895 | 0 / 0 |
+| [0.05, 0.1] | 40 | 25,045 | 26,270 | 0 / 0 |
+| [0.02, 0.05] | 200 | 120,934 | 126,330 | 0 / 0 |
+| [0.01, 0.02] | 200 | 633,369 | 653,105 | 0 / 0 |
+
+- Above x1 = 2/7 one leaf per slice suffices: at tau ~ 1/2 every ratio in [0.3, 1] reads inside [1/7, 6/7].
+- **v1 midpoint splitting for 3/28** failed in 193 boxes, all within about 0.01 of (1,3,4,5)/7 and (1,4,5,6)/7.
+  **Sevenths splitting removes every failure.** At a minimiser the window that reaches 3/28 has zero margin, and
+  the windows differ on each side of the face, so kappa is a V-shaped minimum there and both one-sided leaves hold
+  on the face.
+- Exact rational check (`o7_kbox_exact_v1.out`): the 3/28 tree with sevenths splitting on x1 in [1/10, 1/5],
+  which contains both minimisers, closes with 9,981 leaves and 0 failures. `[VERIFIED-INSTANCE]` for that slice and
+  that leaf rule, not yet in Lean.
+
+**Comparison.**
+- **3/28 costs 1–13% more leaves than 1/10 on every slice, and needs no tight-point treatment.** The minimisers
+  are handled by face placement.
+- 3/28 gives rho = 8/3. 1/10 gives rho = 20/7.
+- On this evidence 3/28 is the better target.
+
+**Shared obstacle, independent of K:** the slow region x1 -> 0.
+- Leaves grow from about 1.2e5 on [0.02, 0.05] to about 6.3e5 on [0.01, 0.02], and x1 = v1/v5 >= 1/v5 is not
+  bounded below.
+- A box tree cannot close x1 near 0. It needs a slow-runner lemma: for x1 <= epsilon, the fast four (v2..v5) need a
+  K-window inside a band stretch of runner 1, of length 5/(7 x1) in tau.
+- That statement is about where the fast four's windows fall, not about their existence. The analogue in order six
+  is §5 small alpha (IVT box lemma, step lemma, strip).
+- **Not understood / open:** the form of that lemma at 1/7.
