@@ -1126,3 +1126,36 @@ is automatic.
 **Status of order seven, framework track:**
 - complete in Lean except for these three named finite statements, which are verified by exact search;
 - the n = 3..6 rows are unchanged.
+
+## E26 (2026-10-18) The n=11 corpus against the owed finite statements: what transfers, what does not
+
+**Map:** order seven, Lean gap (E25): AbsU5 / AbsP1 / AbsP2 are too large for kernel `decide`.
+Owner: *"check the corpus I feel like we might have done something like that for our n=11 attempt"*.
+
+**n=11 devices** (`eleven_lonely_runners_v33.md` §4-§7; `lrc_blocking_grammar_v6.md` §2, §11.7-§13):
+1. **Complementary pairs** (labels ±j^-1 mod 11; reflection symmetry B(11-a) = B(a)). Our analogue is exact, and
+   already used: the negated state (-T-1, 1-y, -rho) gives cell -(cT + floor(cy) + s c rho) - 1, and [7, 41] is
+   fixed by x -> -x-1. So complementary states have identical masks (24,696 states -> 12,348 masks).
+2. **Shift invariance across pacemaker cycles.** Our analogue is fold re-basing, T_i -> T_i + j rho_i; already used
+   to normalise runner 1 and P2's T1 = 0.
+3. **Coupling principle** (a runner's bad intervals are a rigid AP). Our analogue: A(c) = cT + floor(cy), the same
+   rho in every column. This is what makes the abstraction finite; it is not a further reduction.
+4. **Service-state catalogue / minimal cover templates** (small label set, capacity <= 2-3, seven perfect-matching
+   templates). Transfer tested:
+   - `cascade/seven_trace_search_v1.py`: random instant sets of size 12, 16, 20 are all coverable by four blocked
+     traces (94, 239, 491 maximal traces);
+   - `cascade/seven_trace_hitset_v1.py`: a lazy hitting set grown to 27 instants is still coverable, with 864
+     maximal traces.
+   - Even a cover-free set would carry hundreds of traces, and excluding four-trace covers among them is again an
+     enumeration of order 1e9.
+   - Reason, stated in the objects: n=11's capacity bound came from near-AP speed ranges a_j in (j-1, j+1) on a
+     corridor. Our abstract states are unconstrained, so every instant is blocked by exactly 2/7 of the states for
+     any label set. There is no capacity bound below 2/7·|L|, and no template collapse.
+   - `lrc_n11_slot_economy_theorem_v1.md` is marked INVALID in its own header; not used.
+
+**New fact (exact, partial):** in the lowest-popcount slice (first-runner indices 0..19 of 8,014), no four-tuple
+leaves 4 or fewer instants good (`cascade/seven_hole_hist_v1.c`); the full census (`seven_hole_census_v1.c`)
+finds no four-tuple with exactly one good instant. The claim has slack, but slack in how many instants survive does
+not shrink the enumeration.
+
+**Status:** the Lean gap is unchanged. The n=11 route does not supply the shrinking argument.
