@@ -934,3 +934,50 @@ every reading d k / 7^a is at circular distance >= 1/7. Axioms [propext, Classic
   - the 48 failing level-2 orbits with their level-3 lifts;
   - level 3 for five units: 294^4 normalised tuples, too large for one kernel `decide`. It needs a decomposition, for
     example through the k2 digit and the covering 5-sets of states, if those are few.
+
+## E22 (2026-10-17) Valuation <= 2 complete in Lean: `lonely_nu2`
+
+**Map:** order seven, residue grids; the Lean plan of E21 for nu_max <= 2.
+
+**Proved (nested repo 022530b, cf2ac8a):** `LRC.O7L3.lonely_nu2`. Every set of at most six positive integers, none
+divisible by 343, has an instant t = k/7^a with circDist(d t) >= 1/7 for every d. Axioms [propext, Classical.choice,
+Quot.sound]; no `sorry`, no `native_decide`.
+
+**Case analysis** (`OrderSevenNu2N.lean`, `grid_nu2_of`). U = units, M1 = valuation 1, M2 = valuation 2.
+- No multiple of 7: level 1.
+- M2 empty:
+  - |U| <= 4: level 2 (`units_level_two`; valuation 1 is automatic there).
+  - |U| = 5 with one 7m: certificate C.
+- U empty: divide every speed by 7 and go up one level (`gridOK_succ_seven`: GridOK (a+1) k (7d) <-> GridOK a k d).
+- 1 <= |U| <= 3 with M2 nonempty: the descent. Cofactors of M1 at level 2, then `free_digit` (each unit blocks at most
+  2 of the 7 top digits). M2 is automatic at level 3.
+- |U| >= 4 with M2 nonempty: certificate A if M1 is empty, otherwise B (4 units, one 7m, one 49m).
+- The U-empty case is needed: |U| = 0 with M1 = 5 cofactors cannot go through `units_level_two`.
+
+**Certificates** (`OrderSevenHalf*N`, 112 kernel parts, built 2 at a time, all ok):
+- Band symmetry: `gridOK3_neg`, `gridOK2_neg` (u and 7^a - u are in band at the same instants), so only half-index
+  tuples are checked:
+  - A: 20,260,275 checks;
+  - B: 11,345,754;
+  - C1: level 2 or one of 15 failing half tuples;
+  - C2: 756,315 checks, lifts of the 15 to 343.
+- Semantic theorems (`OrderSevenHalfUnitsN.lean`): `units3_of`, `units3_val1_of`, `units5_val1_of`. Each takes its
+  certificate as a hypothesis.
+  - Normalise by the inverse of one unit, take half representatives, sort the indices (`sorted_cover`), and read off a
+    common mask bit.
+  - C codes (residue index mod 49, top digit) as 7 i + x, so duplicates mod 49 with different lifts stay distinct.
+- Generators:
+  - `cascade/o7_half_lean_v1.py`: parts, plus `o7_half_{A,B}_pieces.txt`;
+  - `cascade/o7_half_assemble_v1.py`: joins by `chunkAH_split`/`chunkBH_split`.
+
+**Probe toward level >= 4** (`cascade/seven_level4_units_v1.py`, exact masks, `seven_level4_units_v1.out`):
+- Five units on the unit grid, with hill climbing on the size of the common good set:
+  - level 3: minimum 14 of 294;
+  - level 4: minimum 98 of 2058 (= 7 x 14), no failure in 2,000 climbs;
+  - level 5: 300 climbs, minimum found 1472 of 16,807.
+- The level-4 minimisers are units congruent to +-1 mod 343 (e.g. 344, 685, 687, 1030). These are lifts of the
+  trivial level-3 tuple.
+- This is a search, not a check: no exhaustive level-4 statement is claimed.
+
+**Still open:** sets containing a multiple of 343. In E21's terms: five units at level a >= 4, using the reachable
+shifts C(k_lo), and the mixed shapes with one runner of valuation >= 3.
