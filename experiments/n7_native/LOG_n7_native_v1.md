@@ -863,3 +863,35 @@ Consistent with the exhaustive data <= 45 (E18), where nu_max <= 1 throughout.
 - Each unit forbids two values of the top digit s, and the carries c_i(k0) are the coarse cells of the units at the
   fine-grid instant k0 / 7^(nu+1) in (0, 1/7).
 - Next: whether the level-2 classification (48 orbits) transfers one level up, or a separate argument is needed.
+
+## E20 (2026-10-17) Valuation 2 complete: every primitive six-set with no speed divisible by 343 is lonely on a 7-adic grid
+
+**Map:** order seven, native residue grids (E18–E19).
+
+**Level 3, complete** (`cascade/seven_level3_units_v1.py`, `seven_level3_mixed_v1.py`; exact boolean/integer
+arithmetic):
+- **Every 5-tuple of units mod 343 is lonely on the level-3 unit grid**: some unit k mod 343 with every u k mod 343 in
+  [49, 294].
+  - Checked up to a common unit scaling (so u1 = 1): all 43,365 pairs (u2 <= u3), each with one integer matrix product
+    over (u4, u5). **0 failures** (335 s).
+  - Fewer units are covered by repeating an entry.
+- Mixed: four units mod 343 together with a valuation-1 runner 7 d' (condition d' k mod 49 in [7, 42]). The
+  valuation-2 runner is automatic at level 3. Checked over all (u2 <= u3, u4, d'): **0 failures** (47 s).
+
+**nu_max = 2, every shape** (r units, |M| = 6 - r multiples of 7):
+- r <= 3: descent (E18). At level 3, a free top digit exists for any k0. M/7 has nu_max = 1 and at most 5 runners.
+  - It is lonely at its level 2: r' <= 4 units never fail mod 49 (E19), and its own multiples are automatic.
+  - Or, with no multiples, it is lonely at level 1.
+- r = 4: valuations (2,2): four units at level 3. Valuations (2,1): the mixed check.
+- r = 5: one multiple of valuation 2: five units at level 3.
+
+**Theorem shape `[VERIFIED — complete finite residue checks + descent [A]; not yet in Lean]`:** every primitive set of
+six positive integers with no speed divisible by 343 is lonely at some instant k / 7^a, 7 not dividing k, a <= 3.
+
+**Remaining:** nu_max >= 3 with one or two multiples of 7.
+- That needs five units (or four units plus one lower-valuation runner) to be lonely on the unit grid of level >= 4.
+- Random samples: always (E18, `seven_grids_v3.out`; `seven_level_transfer_v1.out`).
+- A complete check at level 4 is too large directly (about 3·10^8 orbits). A transfer argument from level 3 to higher
+  levels is needed.
+- The level-(a+1) top digit at k + 7^a z is (c_u(k) + (u mod 7) z + x_u (k mod 7)) mod 7. Here c_u(k) is digit a of
+  u k and x_u is the lift digit, so the lift condition is a covering of (Z/7)^5 by product boxes over (k, z).
