@@ -1276,3 +1276,29 @@ unfiltered children per depth-1 node). Owner: cut depth 1 before building the ce
 
 **Next:** emit the v6 tree as a certificate (per node: the branching instant, the kept children, and a witness per
 dropped admissible candidate) and build the Lean checker.
+
+## E30 (2026-10-18) CORRECTION to E29: v6's dominance-first count is unsound; true dominance-pruned tree is about 3.4e6
+
+**Defect** (found while emitting the certificate). `seven_class_bb_v6.c` initialises the admissible set F to all-ones
+words. At depth 1 no class constraint usually binds, so bit positions >= 8,014 in the last word (phantom states
+8,014..8,063) survive, and their masks are read out of bounds (uninitialised memory). In the dominance-first step a
+phantom can "dominate" real candidates and drop them. Instrumented on root 100, one survivor dominated all 8,063
+others and the subtree vanished.
+- E29's v6 row (2,293 / 847,413 / 73,791 / 0) and the "about 370 per root, dominance first" line are therefore
+  **invalid**. Its "0 covers" is not evidence.
+- v4 (E28) is unaffected: candidates are taken through `blkset`, real states only. v5 (E29's per-candidate
+  dominance) is also unaffected: dominance only among real candidates.
+- AbsU5 itself stands on sound runs: E24 (triple enumeration), E28 v3/v4, and the emitter below.
+
+**Sound dominance-pruned tree** (`cascade/seven_cert_emit_v1.c` / `_v2.c`: the last word is masked to 8,014 states;
+every leaf is closed by "no state blocks all of U"):
+- 2,293 depth-1 nodes, **3,371,110 depth-2 nodes**, 364,955 leaves, all closed (ok = 1 in all 16 ranges).
+- 17 s on 8 cores; certificate text 112 MB.
+- Consistent with v5's slice (about 1,450 children per root).
+- Pair-type infeasibility (v2) fires on **0** depth-1 nodes. v6's apparent type pruning of root 100 was the phantom
+  effect.
+
+**Revised kernel picture:** about 3.4e6 depth-2 nodes, or about 4.7e6 without depth-1 dominance.
+- Depth-1 dominance costs about 250 steps per kept child, which is more than it saves at depth 2.
+- At about 1e2 kernel steps per depth-2 node and a measured 20-30 µs per step, the budget is about 3-4 hours of
+  kernel CPU, plus elaboration of the certificate data. Feasible, but heavier than E29 claimed.

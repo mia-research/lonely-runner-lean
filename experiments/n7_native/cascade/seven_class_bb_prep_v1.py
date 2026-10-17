@@ -13,7 +13,7 @@ for T in range(49):
     for fl in FL:
         for rho in units49:
             m = mask(T, fl, rho)
-            full.setdefault(sum(1 << i for i, b in enumerate(R) if m >> b & 1), m)
+            full.setdefault(sum(1 << i for i, b in enumerate(R) if m >> b & 1), (m, rho % 7))
 ms = sorted(full)
 if len(sys.argv) > 3 and sys.argv[3] == "minimal":
     byp = sorted(ms, key=lambda m: bin(m).count("1"))
@@ -34,5 +34,6 @@ with open(sys.argv[1], "w") as f:
     f.write(" ".join(str(strategies[b][1] // 7) for b in R) + "\n")
     f.write(" ".join(str(strategies[b][0]) for b in R) + "\n")
     for m in ms: f.write(" ".join(str((m >> (64 * w)) & ((1 << 64) - 1)) for w in range(4)) + "\n")
-    for m in ms: f.write(" ".join(map(str, pairs_of(full[m]))) + "\n")
+    for m in ms: f.write(" ".join(map(str, pairs_of(full[m][0]))) + "\n")
+    f.write(" ".join(str(full[m][1]) for m in ms) + "\n")
 print("instants", len(R), "masks", len(ms), "classes", CM * 7)
