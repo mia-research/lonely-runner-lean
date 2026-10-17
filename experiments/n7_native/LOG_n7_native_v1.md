@@ -1159,3 +1159,40 @@ finds no four-tuple with exactly one good instant. The claim has slack, but slac
 not shrink the enumeration.
 
 **Status:** the Lean gap is unchanged. The n=11 route does not supply the shrinking argument.
+
+## E27 (2026-10-18) The rest of the corpus: order 8's dilate-cover analysis is the relative; its block identity transfers exactly
+
+**Map:** order seven, Lean gap (E25-E26). Owner: *"check the rest the corpus maybe it was somewhere else"*.
+
+**Corpus sweep:** grep over all `.md` outside `archive/` for kernel-size, shrink, symmetry-reduction, dominance,
+Hall, LP-dual, exact-cover and branch-and-bound devices.
+- Relevant hits: the order-8 documents `docs/n8/COLLAPSE_Z163_v2.md`, `F_LOWER_BOUND_v2.md`, `P_UNIFORMITY_v1.md`,
+  `docs/HANDOVER_2026_09_07b.md`.
+- Covers of Z/p by dilates of an arc (Rosenfeld's Lemma 7 at p = 163).
+- Devices:
+  - block identity: targets in residue classes, coverage per class fixed by a block index and v mod 8;
+  - 2-adic cap table and disjoint pair types;
+  - a collapse type (8 | v covers a class all or nothing);
+  - sectors by the count of collapse-type speeds, exact best-partial-cover bounds U_min, a completion-set filter
+    |D| >= U_min (227 of 52,326 pairs survive), then an exact check: seconds against a 32-hour search;
+  - branch-and-bound branching on the lowest uncovered residue.
+- Other hits (BTC/secp, Kaprekar) are unrelated objects. `lrc_c4_exact_active_core_theorem_v1.md` is n=11 (E26).
+
+**Transfer, exact** (`cascade/seven_block_identity_v1.py`):
+- Classes C(c, s0) = {(c, s0 + 7 s1)}: 42 classes of 7 instants.
+- Every unit state blocks **exactly two** members of every class: a pair {x, x - d} with d = (c rho)^-1 mod 7.
+  0 violations over all states and classes.
+- So after scaling a class by c, runner i's pair type is rho_i^-1 mod 7 in every column, a global type pattern.
+- The non-unit runners of AbsP1/AbsP2 (rho = 0 mod 7) block 0 or 7 members of a class: order 8's collapse type,
+  present here.
+- Per class, the fraction of position 4-tuples covering Z/7 (runner 1 fixed) is 0.140-0.200 by type pattern.
+
+**Consequences:**
+- AbsP1 has a collapse-type runner, which blocks exactly two of the seven classes in each column (12 of 42). The
+  three units plus runner 1 must cover the other 30 classes, each by four pairs with overlap <= 1. Order 8's
+  sector/completion workflow applies directly. Not yet run.
+- AbsU5 has no collapse type (all rho are units mod 7), so order 8's decisive filter is absent.
+- A column-by-column search does not shrink AbsU5 by itself: one column alone admits too many covers (it is the
+  shifted level-2 problem), and the measured strength of the claim comes from all six columns at once. Open: a
+  class-ordered branch-and-bound over all 42 classes jointly (order 8's "lowest uncovered residue" branching) with
+  node counts measured; this is the candidate route to a kernel-size certificate.
