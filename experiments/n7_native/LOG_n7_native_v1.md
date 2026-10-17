@@ -764,3 +764,64 @@ primitive six-sets <= 30.
 
 **Next:** read the exceptions' v6 flank openings in the coprime-flank form (which j mod 7, which residues mod v6),
 then the 10 pinch sets, then the 19 (4, 2) exceptions.
+
+## E18 (2026-10-17) Order seven on 7-adic residue grids; the cell descent
+
+**Map:** order seven, native: global isolation on residue grids (the framework's own object, as for the AP and
+residue-grid sets). Observation and derivation; nothing in Lean yet.
+
+**Cascade order** (`cascade/seven_core_v1.py`; `seven_core_v1_{30,45}.out`), first closer:
+
+| closer | <= 30 | <= 45 |
+|---|---|---|
+| A: first instant 1/(7 v1), residue form d mod 7v1 in [v1, 6v1] | 348,631 | 4,609,861 |
+| B: t = 1/7 | 68,831 | 1,140,655 |
+| C: 7-divisible flank cell | 163,526 | 2,228,702 |
+| D: core | 7,571 | 86,146 |
+
+- The core is closed by windows and folds (`seven_core_classes_v1_30.out`): T4 7,523, T5 46, T6 2 (the phase-1
+  pinches (1,6,7,8,9,10) and (2,7,9,11,13,15)).
+- The fastest runner's flank carries a lonely opening in all but the 10 pinch-type sets (`seven_core_flank_v1_30.out`).
+- Region v6 > 100 v1 (3,000 random sets, `seven_core_slow_v1.out`): A 744, B 861, C 1,375, D 20. Every D set has
+  v1 = 7.
+  - On 20,000 more (v1 <= 60, `seven_core_slow_v2.out`): 24 D sets, all with v1 a multiple of 7 (not of 49), all closed
+    by the grid k/49.
+
+**Residue grids** (`cascade/seven_grids_v1.py`, `seven_grids_v2.py`, `seven_grids_v3.py`, exact):
+- Grid level a means the instants k / 7^a with 7 not dividing k. Such an instant is lonely iff every d k mod 7^a lies in
+  [7^(a-1), 6·7^(a-1)].
+- **Every primitive six-set <= 45 (8,065,364) is lonely at grid level a = nu_max + 1, or else nu_max + 2**
+  (nu_max = largest 7-adic valuation of the speeds):
+
+  | nu_max | level 1 | level 2 | level 3 |
+  |---|---|---|---|
+  | 0 | 3,233,748 | — | — |
+  | 1 | — | 4,823,767 | 7,849 |
+
+  Nothing else occurs. <= 30: the same with 228,429 / 359,444 / 686.
+- High valuations (1,470 random sets with planted multiples of 7^b, b = 1..4, speeds up to 10^6; `seven_grids_v3.out`):
+  level nu_max + 1 in every case.
+
+**Why, in framework terms (the cell criterion read 7-adically):**
+- At level a = nu + 1 (nu = nu_max), a speed of valuation nu reads (d' k mod 7)/7. That is in band for every unit k,
+  so the top stratum is automatic.
+- Write k = k0 + 7^nu s, with s the top 7-adic digit.
+  - A multiple of 7, d = 7 d'', reads d'' k0 / 7^nu: independent of s. So the multiples M behave as the set M/7 at
+    level nu.
+  - A unit runner's top digit is c_d(k0) + (d mod 7)·s (mod 7). It is blocked for exactly 2 of the 7 values of s.
+    This is the coarse-shift structure of `cell_criterion` (n=6 E1): shift u <-> top digit s, fine index i <-> k0.
+- **Descent.** If M/7 has a lonely grid instant k0/7^nu and the units leave a free top digit, S is lonely at
+  (k0 + 7^nu s)/7^(nu+1).
+  - With r <= 3 units, at most 6 of the 7 values of s are blocked, so a free s exists for every k0. S then reduces to
+    M/7, which has fewer runners: induction on the number of runners, base t = k/7 when no multiple of 7 is present.
+    Consistent with the data: shapes (2,4) and (3,3) close at level 2 without exception.
+  - With r = 4 or 5 units (|M| = 2 or 1), the excluded values can cover all 7 choices of s, and k0 has to be chosen. This
+    is the remaining case, the same shapes as the cell exceptions of E17. Level nu + 2 is needed exactly for some of
+    these (7,849 sets <= 45).
+- For |M| = 1, M/7 is a single runner and is lonely at level nu for every unit k0. So k0 ranges over all units mod
+  7^nu, and the case is a residue problem for the five units at level nu + 1 (or nu + 2).
+
+**Status:**
+- The grid statement is `[EMPIRICAL — exact, exhaustive <= 45; high-valuation samples]`.
+- The descent for r <= 3 is `[A]` (argued). It is next for Lean, in residue form.
+- Open: the r in {4, 5} case. Next: its structure at level nu + 1 (which (k0, s) work), and the level nu + 2 sets.
