@@ -1,0 +1,19 @@
+== lean Fresh/ScaledCoreRealC.lean
+'Fresh.ScaledCoreRealC.real_core_4_28_30_31_32_38' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_6_29_30_31_32_35' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_7_8_15_22_23_30' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_8_33_35_36_37_41' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_8_33_35_36_37_42' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_13_14_15_16_29_36' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_13_14_15_16_29_42' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_13_16_28_29_30_33' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_16_27_29_30_31_35' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealC.real_core_28_29_30_32_35_39' depends on axioms: [propext, Classical.choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/ScaledCoreRealC.lean sorry          0
+  Fresh/ScaledCoreRealC.lean native_decide  0
+  Fresh/ScaledCoreRealC.lean axiom          0
+  Fresh/ScaledCoreRealC.lean admit          0
+  Fresh/ScaledCoreRealC.lean unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  untagged: 0

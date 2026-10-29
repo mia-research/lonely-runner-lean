@@ -1,0 +1,75 @@
+== lean Fresh/ScaledCoreRealA.lean
+'Fresh.ScaledCoreRealA.real_core_1_5_6_7_8_13' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_5_6_7_8_11' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_6_7_8_10_13' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_21_22_23_24_25' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_6_7_8_9_10' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_6_7_13_16_19' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_20_21_22_23_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_2_10_12_14_16_22' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_4_5_7_11_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_5_6_7_11_16' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_7_8_9_11_12' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_6_14_15_16_17' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_7_8_9_10_17' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_7_22_23_24_25' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_14_24_25_26_27' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_2_10_12_13_14_16' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_5_6_7_8_9' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_2_8_10_12_14' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_5_8_9_13_18' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_6_7_13_19_20' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_13_14_15_16_17' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_7_11_12_13_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_8_11_12_13_14' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_15_23_24_25_27' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_1_20_22_24_25_26' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_2_11_14_16_17_18' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealA.real_core_3_15_18_21_24_27' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/ScaledCoreRealB.lean
+'Fresh.ScaledCoreRealB.real_core_1_6_7_8_9_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_2_5_6_7_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_12_13_14_15_16' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_24_25_26_27_28' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_14_16_17_18_20' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_8_18_19_20_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_2_10_12_14_16_18' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_3_5_7_8_12' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_5_7_8_13_18' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_4_21_23_24_25' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_5_7_8_12_13' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_21_23_24_25_26' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_7_15_22_23_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_11_19_20_21_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_18_21_23_24_25' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_2_10_14_16_26_27' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_5_6_7_8_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_4_7_11_15_16' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_6_13_15_16_19' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_9_14_15_16_17' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_7_8_13_15_17' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_7_16_17_18_19' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_15_16_17_18_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_1_16_18_19_20_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_2_9_10_11_12_14' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.ScaledCoreRealB.real_core_3_6_15_18_21_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/ScaledCoreScale.lean
+'Fresh.ScaledCoreScale.scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/ScaledCoreRealA.lean sorry          0
+  Fresh/ScaledCoreRealA.lean native_decide  0
+  Fresh/ScaledCoreRealA.lean axiom          0
+  Fresh/ScaledCoreRealA.lean admit          0
+  Fresh/ScaledCoreRealA.lean unsafe         0
+  Fresh/ScaledCoreRealB.lean sorry          0
+  Fresh/ScaledCoreRealB.lean native_decide  0
+  Fresh/ScaledCoreRealB.lean axiom          0
+  Fresh/ScaledCoreRealB.lean admit          0
+  Fresh/ScaledCoreRealB.lean unsafe         0
+  Fresh/ScaledCoreScale.lean sorry          0
+  Fresh/ScaledCoreScale.lean native_decide  0
+  Fresh/ScaledCoreScale.lean axiom          0
+  Fresh/ScaledCoreScale.lean admit          0
+  Fresh/ScaledCoreScale.lean unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  untagged: 0

@@ -1,0 +1,240 @@
+== lean Fresh/Nv_RealSevenNFree.lean
+== lean Fresh/NativeOrdersFree.lean
+Fresh/NativeOrdersFree.lean:28:36: warning: unused variable `hn`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'Fresh.NativeOrdersFree.clear_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.NativeOrdersFree.clear_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.NativeOrdersFree.clear_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.NativeOrdersFree.clear_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.NativeOrdersFree.sixClear5_proved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.NativeOrdersFree.sevenClear6_proved' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/FreeHelpers.lean
+'Fresh.FreeHelpers.quotient_card_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/Nv_RealEightNFree.lean
+== lean Fresh/Nv_BlockSplitEightNFree.lean
+== lean Fresh/Nv_OneFreeEightNFree.lean
+== lean Fresh/Nv_OrderEightCasesNFree.lean
+Fresh/Nv_OrderEightCasesNFree.lean:323:57: warning: unused variable `heS`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+== lean Fresh/RealFromNatFree.lean
+'Fresh.RealFromNatFree.existence8_of_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.RealFromNatFree.isolation_of_natLonely8' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/EightResidualNativeFree.lean
+'Fresh.EightResidualNative.natLonely8_of_residual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.EightResidualNative.isolation_of_residual' depends on axioms: [propext, Classical.choice, Quot.sound]
+== lean Fresh/NativeClustersFree.lean
+'Fresh.NativeClusters.slow_gate' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.NativeClusters.cluster_chain_isolation' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/ResidualDischargeFree.lean
+'Fresh.ResidualDischarge.chainSet_lonely' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.ResidualDischarge.residualLonely8_of_rest' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/Nv_ParityDescentNFree.lean
+== lean Fresh/Nv_ParityDescentTwoNFree.lean
+== lean Fresh/Nv_ParityMixedTwoTwoNFree.lean
+== lean Fresh/Nv_ParityCoverNFree.lean
+== lean Fresh/Nv_ResidueCasesNFree.lean
+== lean Fresh/Nv_ParityMixedOneThreeNFree.lean
+== lean Fresh/Nv_ResidueCasesTwoNFree.lean
+== lean Fresh/EightResidualOpenFree.lean
+'Fresh.EightResidualOpen.residualLonely8_of_rest2' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.EightResidualOpen.isolation_of_rest2' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/ClusterWindowFree.lean
+'Fresh.ClusterWindow.windowChainSet_lonely' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.ClusterWindow.isolation_of_rest3' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/CoreFamiliesFree.lean
+'Fresh.CoreFamilies.core_single' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.CoreFamilies.core_pair' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.CoreFamilies.core_1_5_6_7_8_13' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/CoreFamiliesGenAFree.lean
+== lean Fresh/CoreFamiliesGenBFree.lean
+== lean Fresh/CoreFamiliesGenCFree.lean
+== lean Fresh/CoreFamiliesGenDFree.lean
+== lean Fresh/CoreCoverFree.lean
+== lean Fresh/ResidualRest4Free.lean
+Fresh/ResidualRest4Free.lean:22:4: warning: The namespace 'ResidualRest4' is duplicated in the declaration 'Fresh.ResidualRest4.ResidualRest4'
+
+Note: This linter can be disabled with `set_option linter.dupNamespace false`
+'Fresh.ResidualRest4.residualRest3_of_rest4' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.ResidualRest4.isolation_of_rest4' depends on axioms: [propext, choice, Quot.sound]
+== lean Fresh/FlankBandFree.lean
+'Fresh.FlankBand.flankBandSet_lonely' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FlankBand.isolation_of_rest5' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FlankBand.flankListSet_lonely' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FlankBand.isolation_of_rest6' depends on axioms: [propext, choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/Nv_RealSevenNFree.lean sorry          0
+  Fresh/Nv_RealSevenNFree.lean native_decide  0
+  Fresh/Nv_RealSevenNFree.lean axiom          0
+  Fresh/Nv_RealSevenNFree.lean admit          0
+  Fresh/Nv_RealSevenNFree.lean unsafe         0
+  Fresh/NativeOrdersFree.lean sorry          0
+  Fresh/NativeOrdersFree.lean native_decide  0
+  Fresh/NativeOrdersFree.lean axiom          0
+  Fresh/NativeOrdersFree.lean admit          0
+  Fresh/NativeOrdersFree.lean unsafe         0
+  Fresh/FreeHelpers.lean     sorry          0
+  Fresh/FreeHelpers.lean     native_decide  0
+  Fresh/FreeHelpers.lean     axiom          0
+  Fresh/FreeHelpers.lean     admit          0
+  Fresh/FreeHelpers.lean     unsafe         0
+  Fresh/Nv_RealEightNFree.lean sorry          0
+  Fresh/Nv_RealEightNFree.lean native_decide  0
+  Fresh/Nv_RealEightNFree.lean axiom          0
+  Fresh/Nv_RealEightNFree.lean admit          0
+  Fresh/Nv_RealEightNFree.lean unsafe         0
+  Fresh/Nv_BlockSplitEightNFree.lean sorry          0
+  Fresh/Nv_BlockSplitEightNFree.lean native_decide  0
+  Fresh/Nv_BlockSplitEightNFree.lean axiom          0
+  Fresh/Nv_BlockSplitEightNFree.lean admit          0
+  Fresh/Nv_BlockSplitEightNFree.lean unsafe         0
+  Fresh/Nv_OneFreeEightNFree.lean sorry          0
+  Fresh/Nv_OneFreeEightNFree.lean native_decide  0
+  Fresh/Nv_OneFreeEightNFree.lean axiom          0
+  Fresh/Nv_OneFreeEightNFree.lean admit          0
+  Fresh/Nv_OneFreeEightNFree.lean unsafe         0
+  Fresh/Nv_OrderEightCasesNFree.lean sorry          0
+  Fresh/Nv_OrderEightCasesNFree.lean native_decide  0
+  Fresh/Nv_OrderEightCasesNFree.lean axiom          0
+  Fresh/Nv_OrderEightCasesNFree.lean admit          0
+  Fresh/Nv_OrderEightCasesNFree.lean unsafe         0
+  Fresh/RealFromNatFree.lean sorry          0
+  Fresh/RealFromNatFree.lean native_decide  0
+  Fresh/RealFromNatFree.lean axiom          0
+  Fresh/RealFromNatFree.lean admit          0
+  Fresh/RealFromNatFree.lean unsafe         0
+  Fresh/EightResidualNativeFree.lean sorry          0
+  Fresh/EightResidualNativeFree.lean native_decide  0
+  Fresh/EightResidualNativeFree.lean axiom          0
+  Fresh/EightResidualNativeFree.lean admit          0
+  Fresh/EightResidualNativeFree.lean unsafe         0
+  Fresh/NativeClustersFree.lean sorry          0
+  Fresh/NativeClustersFree.lean native_decide  0
+  Fresh/NativeClustersFree.lean axiom          0
+  Fresh/NativeClustersFree.lean admit          0
+  Fresh/NativeClustersFree.lean unsafe         0
+  Fresh/ResidualDischargeFree.lean sorry          0
+  Fresh/ResidualDischargeFree.lean native_decide  0
+  Fresh/ResidualDischargeFree.lean axiom          0
+  Fresh/ResidualDischargeFree.lean admit          0
+  Fresh/ResidualDischargeFree.lean unsafe         0
+  Fresh/Nv_ParityDescentNFree.lean sorry          0
+  Fresh/Nv_ParityDescentNFree.lean native_decide  0
+  Fresh/Nv_ParityDescentNFree.lean axiom          0
+  Fresh/Nv_ParityDescentNFree.lean admit          0
+  Fresh/Nv_ParityDescentNFree.lean unsafe         0
+  Fresh/Nv_ParityDescentTwoNFree.lean sorry          0
+  Fresh/Nv_ParityDescentTwoNFree.lean native_decide  0
+  Fresh/Nv_ParityDescentTwoNFree.lean axiom          0
+  Fresh/Nv_ParityDescentTwoNFree.lean admit          0
+  Fresh/Nv_ParityDescentTwoNFree.lean unsafe         0
+  Fresh/Nv_ParityMixedTwoTwoNFree.lean sorry          0
+  Fresh/Nv_ParityMixedTwoTwoNFree.lean native_decide  0
+  Fresh/Nv_ParityMixedTwoTwoNFree.lean axiom          0
+  Fresh/Nv_ParityMixedTwoTwoNFree.lean admit          0
+  Fresh/Nv_ParityMixedTwoTwoNFree.lean unsafe         0
+  Fresh/Nv_ParityCoverNFree.lean sorry          0
+  Fresh/Nv_ParityCoverNFree.lean native_decide  0
+  Fresh/Nv_ParityCoverNFree.lean axiom          0
+  Fresh/Nv_ParityCoverNFree.lean admit          0
+  Fresh/Nv_ParityCoverNFree.lean unsafe         0
+  Fresh/Nv_ResidueCasesNFree.lean sorry          0
+  Fresh/Nv_ResidueCasesNFree.lean native_decide  0
+  Fresh/Nv_ResidueCasesNFree.lean axiom          0
+  Fresh/Nv_ResidueCasesNFree.lean admit          0
+  Fresh/Nv_ResidueCasesNFree.lean unsafe         0
+  Fresh/Nv_ParityMixedOneThreeNFree.lean sorry          0
+  Fresh/Nv_ParityMixedOneThreeNFree.lean native_decide  0
+  Fresh/Nv_ParityMixedOneThreeNFree.lean axiom          0
+  Fresh/Nv_ParityMixedOneThreeNFree.lean admit          0
+  Fresh/Nv_ParityMixedOneThreeNFree.lean unsafe         0
+  Fresh/Nv_ResidueCasesTwoNFree.lean sorry          0
+  Fresh/Nv_ResidueCasesTwoNFree.lean native_decide  0
+  Fresh/Nv_ResidueCasesTwoNFree.lean axiom          0
+  Fresh/Nv_ResidueCasesTwoNFree.lean admit          0
+  Fresh/Nv_ResidueCasesTwoNFree.lean unsafe         0
+  Fresh/EightResidualOpenFree.lean sorry          0
+  Fresh/EightResidualOpenFree.lean native_decide  0
+  Fresh/EightResidualOpenFree.lean axiom          0
+  Fresh/EightResidualOpenFree.lean admit          0
+  Fresh/EightResidualOpenFree.lean unsafe         0
+  Fresh/ClusterWindowFree.lean sorry          0
+  Fresh/ClusterWindowFree.lean native_decide  0
+  Fresh/ClusterWindowFree.lean axiom          0
+  Fresh/ClusterWindowFree.lean admit          0
+  Fresh/ClusterWindowFree.lean unsafe         0
+  Fresh/CoreFamiliesFree.lean sorry          0
+  Fresh/CoreFamiliesFree.lean native_decide  0
+  Fresh/CoreFamiliesFree.lean axiom          0
+  Fresh/CoreFamiliesFree.lean admit          0
+  Fresh/CoreFamiliesFree.lean unsafe         0
+  Fresh/CoreFamiliesGenAFree.lean sorry          0
+  Fresh/CoreFamiliesGenAFree.lean native_decide  0
+  Fresh/CoreFamiliesGenAFree.lean axiom          0
+  Fresh/CoreFamiliesGenAFree.lean admit          0
+  Fresh/CoreFamiliesGenAFree.lean unsafe         0
+  Fresh/CoreFamiliesGenBFree.lean sorry          0
+  Fresh/CoreFamiliesGenBFree.lean native_decide  0
+  Fresh/CoreFamiliesGenBFree.lean axiom          0
+  Fresh/CoreFamiliesGenBFree.lean admit          0
+  Fresh/CoreFamiliesGenBFree.lean unsafe         0
+  Fresh/CoreFamiliesGenCFree.lean sorry          0
+  Fresh/CoreFamiliesGenCFree.lean native_decide  0
+  Fresh/CoreFamiliesGenCFree.lean axiom          0
+  Fresh/CoreFamiliesGenCFree.lean admit          0
+  Fresh/CoreFamiliesGenCFree.lean unsafe         0
+  Fresh/CoreFamiliesGenDFree.lean sorry          0
+  Fresh/CoreFamiliesGenDFree.lean native_decide  0
+  Fresh/CoreFamiliesGenDFree.lean axiom          0
+  Fresh/CoreFamiliesGenDFree.lean admit          0
+  Fresh/CoreFamiliesGenDFree.lean unsafe         0
+  Fresh/CoreCoverFree.lean   sorry          0
+  Fresh/CoreCoverFree.lean   native_decide  0
+  Fresh/CoreCoverFree.lean   axiom          0
+  Fresh/CoreCoverFree.lean   admit          0
+  Fresh/CoreCoverFree.lean   unsafe         0
+  Fresh/ResidualRest4Free.lean sorry          0
+  Fresh/ResidualRest4Free.lean native_decide  0
+  Fresh/ResidualRest4Free.lean axiom          0
+  Fresh/ResidualRest4Free.lean admit          0
+  Fresh/ResidualRest4Free.lean unsafe         0
+  Fresh/FlankBandFree.lean   sorry          0
+  Fresh/FlankBandFree.lean   native_decide  0
+  Fresh/FlankBandFree.lean   axiom          0
+  Fresh/FlankBandFree.lean   admit          0
+  Fresh/FlankBandFree.lean   unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  FreeFlank8                         None       Fresh/Nv_OrderEightCasesNFree.lean:206
+  ClassClear8                        None       Fresh/Nv_OrderEightCasesNFree.lean:417
+  RationalOpening8                   None       Fresh/Nv_OrderEightCasesNFree.lean:425
+  ResolutionClears8                  None       Fresh/Nv_OrderEightCasesNFree.lean:656
+  FastPair8                          None       Fresh/Nv_OrderEightCasesNFree.lean:684
+  BlockSplit8                        None       Fresh/Nv_OrderEightCasesNFree.lean:727
+  ShiftedApplies8                    None       Fresh/Nv_OrderEightCasesNFree.lean:755
+  EightResidual                      None       Fresh/Nv_OrderEightCasesNFree.lean:773
+  NatLonely8                         OWED       Fresh/RealFromNatFree.lean:27
+  ResidualLonely8                    OWED       Fresh/EightResidualNativeFree.lean:22
+  ClusterChainClass                  DEFINITION Fresh/NativeClustersFree.lean:46
+  ChainSet                           DEFINITION Fresh/ResidualDischargeFree.lean:26
+  FixedRSet                          DEFINITION Fresh/ResidualDischargeFree.lean:47
+  ResidualRest                       OWED       Fresh/ResidualDischargeFree.lean:58
+  Blocked                            None       Fresh/Nv_ParityDescentNFree.lean:43
+  ParitySplit8                       None       Fresh/Nv_ParityDescentNFree.lean:107
+  CountSplit8                        None       Fresh/Nv_ResidueCasesNFree.lean:68
+  SettledCounts8                     None       Fresh/Nv_ResidueCasesNFree.lean:243
+  OottCase8                          None       Fresh/Nv_ResidueCasesNFree.lean:256
+  OottCounts8                        None       Fresh/Nv_ResidueCasesNFree.lean:263
+  PatternSettled8                    None       Fresh/Nv_ResidueCasesNFree.lean:437
+  SettledCounts8'                    None       Fresh/Nv_ResidueCasesTwoNFree.lean:55
+  PatternSettled8'                   None       Fresh/Nv_ResidueCasesTwoNFree.lean:134
+  ResidualRest2                      OWED       Fresh/EightResidualOpenFree.lean:22
+  WindowChainSet                     DEFINITION Fresh/ClusterWindowFree.lean:31
+  ResidualRest3                      OWED       Fresh/ClusterWindowFree.lean:52
+  CoversCore                         DEFINITION Fresh/CoreCoverFree.lean:552
+  ResidualRest4                      OWED       Fresh/ResidualRest4Free.lean:22
+  FlankBandSet                       DEFINITION Fresh/FlankBandFree.lean:23
+  ResidualRest5                      OWED       Fresh/FlankBandFree.lean:36
+  FlankListSet                       DEFINITION Fresh/FlankBandFree.lean:58
+  ResidualRest6                      OWED       Fresh/FlankBandFree.lean:75
+  untagged: 17
