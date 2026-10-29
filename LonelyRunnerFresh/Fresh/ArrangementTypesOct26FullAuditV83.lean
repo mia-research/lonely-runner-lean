@@ -1,0 +1,2625 @@
+import Fresh.OpeningClump
+import Fresh.TrainFlank
+import Fresh.TrainFlankPair
+import Fresh.TrainFlankInterplay
+import Fresh.TranslatedSix
+import Fresh.TranslatedSixAll
+import Fresh.TranslatedSixSmall
+import Fresh.TranslatedSixPositive
+import Fresh.TranslatedSixArrangement
+import Fresh.SplitAPBands
+import Fresh.SplitAPPositive
+import Fresh.SplitAPReadingsClass
+import Fresh.SplitAPArrangement
+import Fresh.SplitAPArrangementAll
+import Fresh.TwoMoverSubjectBand
+import Fresh.TwoMoverSubjectEnd
+import Fresh.TwoMoverSubjectAll
+import Fresh.TwoMoverSubjectSeparated
+import Fresh.TwoMoverSubjectTransport
+import Fresh.TwoMoverSubjectClass
+import Fresh.InterleavedGridShift
+import Fresh.SignedSplitAP
+import Fresh.SignedSplitAPAll
+import Fresh.SignedSplitMiddle
+import Fresh.SignedAPReadingsClass
+import Fresh.SignedAPArrangement
+import Fresh.SignedAPArrangementAll
+import Fresh.TwoAPBlockInteger
+import Fresh.GeneralTwoAPArrangement
+import Fresh.APBlockSwap
+import Fresh.APBlockSingleton
+import Fresh.APCoreOpening
+import Fresh.ArrangementFamilyJoinsOct26
+import Fresh.UnequalAPArrangement
+import Fresh.MixedStepFour
+import Fresh.MixedStepFourArrangement
+import Fresh.MixedStepFourParamArrangement
+import Fresh.MixedStepFourLower
+import Fresh.MixedStepFourLowerArrangement
+import Fresh.LargeStepFour
+import Fresh.StepFourAll
+import Fresh.UniformStepFourArrangement
+import Fresh.UniformStepFourArrangementAll
+import Fresh.ArrangementTypesOct26
+import Fresh.APCorePair
+import Fresh.APPhaseOpening
+import Fresh.APPhaseCharts
+import Fresh.APPhaseAll
+import Fresh.FarTwoAPArrangement
+import Fresh.FarTwoAPArrangementAll
+import Fresh.MiddleStepFive
+import Fresh.MiddleStepFiveArrangement
+import Fresh.MiddleStepFiveLarge
+import Fresh.MiddleStepFiveLargeArrangement
+import Fresh.MiddleStepFiveAll
+import Fresh.MiddleStepFiveArrangementAll
+import Fresh.ThreePacketPhase
+import Fresh.FullThreeFiveArrangement
+import Fresh.TwoSixPhase
+import Fresh.TwoSixArrangement
+import Fresh.TwoSixTight
+import Fresh.TwoSixTen
+import Fresh.TwoSixNine
+import Fresh.TwoSixThin
+import Fresh.TwoAPSeparated21
+import Fresh.ThreeBlockCarry
+import Fresh.ThreeBlockCarryBands
+import Fresh.ThreeBlockNearGrid
+import Fresh.ThreeBlockGridTriangle
+import Fresh.ThreeBlockComparableGaps
+import Fresh.ThreeBlockPolynomialGaps
+import Fresh.ThreeBlockIndependentLaps
+import Fresh.ThreeBlockClassJoins
+import Fresh.ThreeBlockPolynomialJoins
+import Fresh.ThreeBlockWideLaps
+import Fresh.ThreeBlockWideJoins
+import Fresh.ThreeBlockReverseLaps
+import Fresh.ThreeBlockReturnJoins
+import Fresh.ThreeBlockEndpointSingleton
+import Fresh.ThreeBlockPartitions
+import Fresh.ThreeBlockReversePartitions
+import Fresh.ThreeBlockMiddlePartitions
+import Fresh.ThreeBlockReverseMiddlePartitions
+import Fresh.TrainFlankPartitionJoins
+import Fresh.TrainFlankReversePartitionJoins
+import Fresh.TrainFlankMiddlePartitionJoins
+import Fresh.TrainFlankReverseMiddlePartitionJoins
+import Fresh.ThreeBlockGridResumption
+import Fresh.ThreeBlockNativeBypass
+import Fresh.ThreeBlockNativePhysical
+import Fresh.ThreeBlockNativeMirror
+import Fresh.ThreeBlockNativeBypassClass
+import Fresh.ThreeBlockBypassOverlap
+import Fresh.ThreeBlockBypassWideOverlap
+import Fresh.ThreeBlockBypassKernel
+import Fresh.ThreeBlockBypassPartitions
+import Fresh.ThreeBlockBypassPartitionMirror
+import Fresh.ThreeBlockPartitionBypassClass
+import Fresh.TwoGapPacketBand
+import Fresh.FourAPPairs
+import Fresh.FourPairPolynomialGaps
+import Fresh.FourAPPairsNative
+import Fresh.FourAPPairsNativePhysical
+import Fresh.FourAPPairsNativeClass
+import Fresh.TrainFlankPacketJoins
+import Fresh.ThreeGapPacketBand
+import Fresh.ThreeGapPacketJoins
+import Fresh.PhaseNeighbour
+import Fresh.ThreeBlockEndpointBounds
+import Fresh.ThreeBlockNeighbour
+import Fresh.ThreeBlockNeighbourJoins
+import Fresh.FourPairStepBounds
+import Fresh.FourPairStepEpisode
+import Fresh.FourPairStepMerge
+import Fresh.FourPairStepPhysical
+import Fresh.FourPairStepNativePhysical
+import Fresh.FourPairStepPerturbedBounds
+import Fresh.FourPairStepPerturbedEpisode
+import Fresh.FourPairStepPerturbedMerge
+import Fresh.FourPairStepPerturbedPhysical
+import Fresh.FourPairStepPerturbedNativePhysical
+import Fresh.FourPairStepPerturbedJoins
+import Fresh.FourPairStepWideClear
+import Fresh.FourPairStepWideCapture
+import Fresh.FourPairStepWideEpisode
+import Fresh.FourPairStepWideMerge
+import Fresh.FourPairStepWidePhysical
+import Fresh.FourPairStepWideNativePhysical
+import Fresh.FourPairStepWideJoins
+import Fresh.FourPairStepIndependentClear
+import Fresh.FourPairStepIndependentCapture
+import Fresh.FourPairStepIndependentEpisode
+import Fresh.FourPairStepIndependentMerge
+import Fresh.FourPairStepIndependentPhysical
+import Fresh.FourPairStepIndependentNativePhysical
+import Fresh.FourPairStepIndependentJoins
+import Fresh.FourBlockNeighbour
+import Fresh.FourBlockNeighbourJoins
+import Fresh.FourBlockEndpoints
+import Fresh.FourBlockArrangement
+import Fresh.FourBlockArrangementJoins
+import Fresh.FourBlockEndpointCapture
+import Fresh.FourBlockEndpointUnitPartner
+import Fresh.EndpointRetainedPacket
+import Fresh.FourBlockEndpointSecondMove
+import Fresh.EndpointRetainedSegment
+import Fresh.FourBlockLongTailBounds
+import Fresh.FourBlockLongTailPhase
+import Fresh.FourBlockLongTailThirdMove
+import Fresh.FourBlockLongTailExit
+import Fresh.FourBlockLongTailEpisode
+import Fresh.FourBlockLongTailArrangement
+import Fresh.FourBlockFourthExit
+import Fresh.FourBlockFourthArrangement
+import Fresh.FourBlockOuterReturnBounds
+import Fresh.FourBlockOuterReturnClear
+import Fresh.FourBlockOuterReturnMove
+import Fresh.FourBlockOuterReturnArrangement
+import Fresh.UnitAPPacketPhase
+import Fresh.FourBlockInnerExit
+import Fresh.FourBlockInnerArrangement
+import Fresh.FourBlockInnerReturnMove
+import Fresh.FourBlockInnerCaptureBounds
+import Fresh.FourBlockInnerMove
+import Fresh.FourBlockInnerCutMove
+import Fresh.FourBlockInnerEpisode
+import Fresh.FourBlockFourReturnExit
+import Fresh.FourBlockFourReturnArrangement
+import Fresh.FourBlockFourReturnMove
+import Fresh.FourBlockFourReturnEpisode
+import Fresh.FourBlockSingletonReturnExit
+import Fresh.FourBlockSingletonReturnArrangement
+import Fresh.FourBlockSingletonReturnMove
+import Fresh.FourBlockSingletonReturnEpisode
+import Fresh.FourBlockReturnJoins
+import Fresh.FourBlockFiveReturnExit
+import Fresh.FourBlockFiveReturnArrangement
+import Fresh.FourBlockFiveReturnMove
+import Fresh.FourBlockLateSingletonMove
+import Fresh.FourBlockOuterLapPhase
+import Fresh.FourBlockOuterLapClear
+import Fresh.FourBlockOuterLapRoles
+import Fresh.FourBlockOuterLapArrangement
+import Fresh.FourBlockOuterLapMove
+import Fresh.FourBlockOuterTailClear
+import Fresh.FourBlockOuterTailRoles
+import Fresh.FourBlockOuterTailArrangement
+import Fresh.FourBlockOuterTailMove
+import Fresh.FourBlockOuterPacketRetention
+import Fresh.FourBlockLeftOpening
+import Fresh.FourBlockDisplacedLeftRoles
+import Fresh.FourBlockLeftExit
+import Fresh.FourBlockLeftExitArrangement
+import Fresh.FourBlockLeftOpeningArrangement
+import Fresh.FourBlockPacketFrame
+import Fresh.FourBlockPacketFrameArrangement
+import Fresh.FourBlockPacketFrameMoves
+import Fresh.UnitAPPacketFourCells
+import Fresh.UnitAPPacketFourLift
+import Fresh.UnitAPPacketFourSymmetry
+import Fresh.FourBlockAPAnchor
+import Fresh.FourBlockAPAnchorArrangement
+import Fresh.FourBlockLeftPacketLift
+import Fresh.FourBlockLeftPacketLiftArrangement
+import Fresh.FourBlockPacketLiftMoves
+import Fresh.UnitAPPacketFourCharts
+import Fresh.FourBlockLeftPacketCharts
+import Fresh.FourBlockLeftPacketChartsArrangement
+import Fresh.FourBlockPacketChartJoins
+import Fresh.NativeOpeningRetention
+import Fresh.UnitAPPacketChartMotion
+import Fresh.FourBlockOutsideTransport
+import Fresh.FourBlockForcedOutsideArrangement
+import Fresh.FourBlockOutsideRebase
+import Fresh.FourBlockTwoOutside
+import Fresh.NativeBoundaryJoins
+import Fresh.UnitAPPacketThreeCharts
+import Fresh.FourBlockShortTail
+import Fresh.FourBlockShortTailArrangement
+import Fresh.FourBlockShortOpening
+import Fresh.UnitAPPacketThreeCells
+import Fresh.FourBlockShortAnchor
+import Fresh.FourBlockShortOpeningArrangement
+import Fresh.FourBlockShortAnchorArrangement
+import Fresh.FourBlockShortOpeningMoves
+import Fresh.NativeOpeningRecovery
+import Fresh.FourBlockOpeningRecovery
+import Fresh.FourBlockOpeningRecoveryArrangement
+import Fresh.FourBlockRecoveryHandoffs
+import Fresh.FourBlockMiddlePacket
+import Fresh.FourBlockMiddlePacketArrangement
+import Fresh.FourBlockMiddlePacketJoins
+import Fresh.FourBlockDoubleSingleton
+import Fresh.FourBlockDoubleSingletonArrangement
+import Fresh.UnitAPPacketThreeMotion
+import Fresh.NativeOpeningFaces
+import Fresh.FourBlockDoubleOpeningRecovery
+import Fresh.FourBlockMiddleOpeningRecovery
+import Fresh.FourBlockReversal
+import Fresh.FourBlockPacketEntryArrangement
+import Fresh.FastestCaptureRetention
+import Fresh.FastestCaptureRecovery
+import Fresh.NativeRelativeCapture
+import Fresh.NativeFirstClosing
+import Fresh.NativeReturnCapture
+import Fresh.NativeReturnJoins
+import Fresh.NativeEntryLabels
+import Fresh.NativeReturnSurvivors
+import Fresh.NativeCanonicalReturn
+import Fresh.NativeReturnHandoff
+import Fresh.NativeReturnHandoffArrangement
+import Fresh.NativeHandoffEntryFaces
+import Fresh.NativeReturnClosingOrder
+import Fresh.NativeSingleReturnRelay
+import Fresh.NativeSingleReturnArrangement
+import Fresh.NativeReturnGroupRelay
+import Fresh.NativeReturnGroupArrangement
+import Fresh.NativeReturnFaceHandoff
+import Fresh.NativeReturnGroupFaces
+import Fresh.NativeRepeatedReturn
+import Fresh.NativeRepeatedReturnArrangement
+import Fresh.NativeRepeatedReturnLabels
+import Fresh.NativeReturnExcursion
+import Fresh.NativeExcursionArrangement
+import Fresh.NativeExcursionOpeningOrder
+import Fresh.NativeSurvivorDominance
+import Fresh.NativeExcursionEntryInvariance
+import Fresh.NativeOpeningFaceExchange
+import Fresh.NativeCapturedPartnerJoin
+import Fresh.NativeCohortReturns
+import Fresh.NativeCohortOutsiderRelay
+import Fresh.NativeCohortReturnOrder
+import Fresh.NativeSelectedLevelClearance
+import Fresh.NativeReturnLevelClearance
+import Fresh.NativeOrderedReturnLevels
+import Fresh.NativeTwoSetterPacket
+import Fresh.NativeOneReaderDeformation
+import Fresh.NativeCoalescedCaptureRelay
+import Fresh.NativeCoalescedCaptureArrangement
+import Fresh.NativeFixedPrefixTransport
+import Fresh.NativeFixedPrefixArrangement
+import Fresh.NativeGroupEndpointRecovery
+import Fresh.NativePacketRestartExchange
+import Fresh.NativePacketUnionCompression
+import Fresh.NativeOpeningReversal
+import Fresh.NativeOpeningReversalArrangement
+import Fresh.NativeThirdReaderRetention
+import Fresh.NativeThirdReaderArrangement
+import Fresh.NativeThirdReaderRebound
+import Fresh.NativeThirdReaderForcedArrangement
+import Fresh.NativeResidualReturn
+import Fresh.NativeResidualReturnBands
+import Fresh.NativeResidualReturnArrangement
+import Fresh.NativeOutsideGroupDisplacement
+import Fresh.NativeOutsideGroupArrangement
+import Fresh.NativeWatcherPacketReturn
+import Fresh.NativeWatcherReturnArrangement
+import Fresh.NativePacketTailRetention
+import Fresh.NativePacketTailArrangement
+import Fresh.NativeRecoveredPacketBands
+import Fresh.NativeRebasedPacketChart
+import Fresh.NativeFinalHandoffBands
+import Fresh.NativeCurrentLabelPacket
+import Fresh.NativePacketHistoryCoalescence
+import Fresh.NativeRecoveredHandoffBands
+import Fresh.NativeRecapturedLabelReset
+import Fresh.NativeWitnessPacketReentry
+import Fresh.NativePacketExtremeRecovery
+import Fresh.NativeNarrowCaptureBlock
+import Fresh.NativeMixedGroupTransport
+import Fresh.NativeLabelBoundaryFrontiers
+import Fresh.NativeOpeningLabelReversal
+import Fresh.NativeQuietReversalFamily
+import Fresh.NativeReversalCellEnvelope
+import Fresh.NativeSuppliedOpeningTriple
+import Fresh.NativeArbitraryThirdReversal
+import Fresh.NativeSuppliedOpeningGroup
+import Fresh.NativeCapturedReversalFamily
+import Fresh.NativeSuppliedRetainedWindow
+import Fresh.NativeSuppliedReversalArrangement
+import Fresh.NativeReversalReadingCoalescence
+import Fresh.NativeReversalBranchFaces
+import Fresh.NativeReversalBranchArrangement
+import Fresh.NativeClearWindowWitness
+import Fresh.NativeClearWitnessArrangement
+import Fresh.NativeClearWindowRebound
+import Fresh.NativeClearReboundArrangement
+import Fresh.NativeReturnedOpeningGeometry
+import Fresh.NativeFiveThirdsBoundary
+import Fresh.NativeClearReboundCore
+import Fresh.NativeReturnedGridArrangement
+import Fresh.NativeDoubleGridRecovery
+import Fresh.NativeDoubleGridArrangement
+import Fresh.NativeUpperGridPacket
+import Fresh.NativeUpperGridArrangement
+import Fresh.NativeUpperPairHandoff
+import Fresh.NativeUpperPairArrangement
+import Fresh.NativeUpperGridHeightTransport
+import Fresh.NativePhaseOriginLevels
+import Fresh.NativeTightReboundCore
+import Fresh.NativePhaseOriginArrangement
+import Fresh.NativeUpperTripleTail
+import Fresh.NativeUpperTripleArrangement
+import Fresh.NativeFourthReturnGeometry
+import Fresh.NativeFourthReturnArrangement
+import Fresh.NativeFourthReboundTail
+import Fresh.NativeFourthReversalArrangement
+import Fresh.NativeRecoveredSecondTail
+import Fresh.NativeRecoveredSecondArrangement
+import Fresh.NativeRecoveredSecondGrid
+import Fresh.NativeHierarchicalFourthTail
+import Fresh.NativeHierarchicalFourthArrangement
+import Fresh.NativeHierarchicalFourthGrid
+import Fresh.NativeComparablePair
+import Fresh.NativeComparableFourthTail
+import Fresh.NativeComparableFourthArrangement
+import Fresh.NativeComparableFourthGrid
+import Fresh.NativeFastSecondResetTail
+import Fresh.NativeFastSecondResetArrangement
+import Fresh.NativeFastSecondReturnArrangement
+import Fresh.NativeFastSecondFourthArrangement
+import Fresh.NativeSmallFourthArrangement
+import Fresh.NativeSmallFourthGrid
+import Fresh.NativeLargeFourthTail
+import Fresh.NativeArbitraryFourthArrangement
+import Fresh.NativeTwoGridFourthArrangement
+import Fresh.NativeArbitraryFourthGrid
+import Fresh.NativeFourUpperArrangement
+import Fresh.NativeFourUpperGrid
+import Fresh.NativeTwoAnchorGridTransport
+import Fresh.NativeTwoAnchorPhysicalTransport
+import Fresh.NativeMixedObserverGridSeeds
+import Fresh.NativeOwnAnchorHeightReduction
+import Fresh.NativePositivePointCanonical
+import Fresh.NativeSeedResidueProduct
+import Fresh.NativeCommonOpeningGridBands
+import Fresh.NativeUniformOpeningCells
+
+#print axioms Fresh.OpeningClump.openingAfter_spec
+#print axioms Fresh.OpeningClump.clump_at_opening
+#print axioms Fresh.OpeningClump.core_clump_opening
+#print axioms Fresh.OpeningClump.single_slow_opening
+#print axioms Fresh.OpeningClump.openingClump_isolation
+#print axioms Fresh.TrainFlank.retained_band
+#print axioms Fresh.TrainFlank.train_band
+#print axioms Fresh.TrainFlank.two_slow_train
+#print axioms Fresh.TrainFlank.near_ap_two_slow_train
+#print axioms Fresh.TrainFlank.twoSlowTrain_isolation
+#print axioms Fresh.TrainFlankPair.clear_in_pair_window
+#print axioms Fresh.TrainFlankPair.pair_train_opening
+#print axioms Fresh.TrainFlankPair.same_wrap_pair_train
+#print axioms Fresh.TrainFlankPair.same_wrap_pair_train_polynomial
+#print axioms Fresh.TrainFlankPair.pairTrainOpening_isolation
+#print axioms Fresh.TrainFlankInterplay.openingClump_imp_pairTrainOpening
+#print axioms Fresh.TrainFlankInterplay.polynomialPairTrain_isolation
+#print axioms Fresh.TrainFlankInterplay.pairLeft_scale
+#print axioms Fresh.TrainFlankInterplay.pairRight_scale
+#print axioms Fresh.TrainFlankInterplay.pair_cover_scale
+#print axioms Fresh.TrainFlankInterplay.pairTrainOpening_scale_of
+#print axioms Fresh.TrainFlankInterplay.pairTrainOpening_smul
+#print axioms Fresh.TrainFlankInterplay.twoSlowTrain_scale_of
+#print axioms Fresh.TrainFlankInterplay.twoSlowTrain_smul
+#print axioms Fresh.TranslatedSix.clear_ratio
+#print axioms Fresh.TranslatedSix.repeated_flank
+#print axioms Fresh.TranslatedSix.repeated_tail
+#print axioms Fresh.TranslatedSix.small_0
+#print axioms Fresh.TranslatedSix.small_1
+#print axioms Fresh.TranslatedSix.small_2
+#print axioms Fresh.TranslatedSix.small_3
+#print axioms Fresh.TranslatedSix.small_4
+#print axioms Fresh.TranslatedSix.translated_six_all
+#print axioms Fresh.TranslatedSix.translatedSix_isolation
+#print axioms Fresh.TranslatedSix.smallTime_spec
+#print axioms Fresh.TranslatedSix.translated_six_small
+#print axioms Fresh.TranslatedSix.translatedSixSmall_isolation
+#print axioms Fresh.TranslatedSix.middle_0
+#print axioms Fresh.TranslatedSix.middle_1
+#print axioms Fresh.TranslatedSix.middle_2
+#print axioms Fresh.TranslatedSix.translated_six_positive
+#print axioms Fresh.TranslatedSix.translatedSixPositive_isolation
+#print axioms Fresh.TranslatedSix.translatedSixClass_imp_positive
+#print axioms Fresh.TranslatedSix.translatedSixPositiveClass_smul
+#print axioms Fresh.TranslatedSixArrangement.speeds_zero
+#print axioms Fresh.TranslatedSixArrangement.speeds_one
+#print axioms Fresh.TranslatedSixArrangement.speeds_train
+#print axioms Fresh.TranslatedSixArrangement.base_subject_zero
+#print axioms Fresh.TranslatedSixArrangement.base_subject_seven
+#print axioms Fresh.TranslatedSixArrangement.base_all
+#print axioms Fresh.TranslatedSixArrangement.speeds_all
+#print axioms Fresh.TranslatedSixArrangement.translatedSixArrangement_isolation
+#print axioms Fresh.SplitAPBands.shift_time_band
+#print axioms Fresh.SplitAPBands.split_train_small
+#print axioms Fresh.SplitAPBands.split_train_tail
+#print axioms Fresh.SplitAPBands.splitTrain_eq_1
+#print axioms Fresh.SplitAPBands.splitTrain_eq_2
+#print axioms Fresh.SplitAPBands.splitTrain_eq_3
+#print axioms Fresh.SplitAPBands.splitTrain_eq_4
+#print axioms Fresh.SplitAPBands.splitTrain_eq_5
+#print axioms Fresh.SplitAPBands.middle_r2_0
+#print axioms Fresh.SplitAPBands.middle_r2_1
+#print axioms Fresh.SplitAPBands.middle_r2_2
+#print axioms Fresh.SplitAPBands.middle_r2_3
+#print axioms Fresh.SplitAPBands.middle_r2_4
+#print axioms Fresh.SplitAPBands.middle_r2_5
+#print axioms Fresh.SplitAPBands.middle_r2_6
+#print axioms Fresh.SplitAPBands.middle_r2_7
+#print axioms Fresh.SplitAPBands.middle_r2_8
+#print axioms Fresh.SplitAPBands.split_train_positive_r2
+#print axioms Fresh.SplitAPBands.middle_r3_0
+#print axioms Fresh.SplitAPBands.middle_r3_1
+#print axioms Fresh.SplitAPBands.middle_r3_2
+#print axioms Fresh.SplitAPBands.middle_r3_3
+#print axioms Fresh.SplitAPBands.middle_r3_4
+#print axioms Fresh.SplitAPBands.split_train_positive_r3
+#print axioms Fresh.SplitAPBands.middle_r4_0
+#print axioms Fresh.SplitAPBands.middle_r4_1
+#print axioms Fresh.SplitAPBands.middle_r4_2
+#print axioms Fresh.SplitAPBands.middle_r4_3
+#print axioms Fresh.SplitAPBands.middle_r4_4
+#print axioms Fresh.SplitAPBands.split_train_positive_r4
+#print axioms Fresh.SplitAPBands.middle_r5_0
+#print axioms Fresh.SplitAPBands.middle_r5_1
+#print axioms Fresh.SplitAPBands.middle_r5_2
+#print axioms Fresh.SplitAPBands.middle_r5_3
+#print axioms Fresh.SplitAPBands.middle_r5_4
+#print axioms Fresh.SplitAPBands.middle_r5_5
+#print axioms Fresh.SplitAPBands.middle_r5_6
+#print axioms Fresh.SplitAPBands.split_train_positive_r5
+#print axioms Fresh.SplitAPBands.split_train_positive
+#print axioms Fresh.SplitAPBands.splitAPReadings_isolation
+#print axioms Fresh.SplitAPBands.translatedSixPositive_imp_splitAP
+#print axioms Fresh.SplitAPBands.splitAPReadingsClass_smul
+#print axioms Fresh.SplitAPArrangement.fixed_mem
+#print axioms Fresh.SplitAPArrangement.translated_mem
+#print axioms Fresh.SplitAPArrangement.two_block_all_of_split
+#print axioms Fresh.SplitAPArrangement.twoAPBlock_isolation_of_split
+#print axioms Fresh.SplitAPArrangement.two_block_all
+#print axioms Fresh.SplitAPArrangement.twoAPBlock_isolation
+#print axioms Fresh.OneMover.subject_nextOpening_lt
+#print axioms Fresh.OneMover.subject_band_first
+#print axioms Fresh.OneMover.subject_end_shape
+#print axioms Fresh.OneMover.subject_end_first
+#print axioms Fresh.OneMover.subject_end_large
+#print axioms Fresh.OneMover.subject_other_end_isolation
+#print axioms Fresh.OneMover.subject_end_all_isolation
+#print axioms Fresh.OneMover.subject_end_all_of_retention
+#print axioms Fresh.OneMover.subject_other_separated_isolation
+#print axioms Fresh.OneMover.subject_end_all_separated
+#print axioms Fresh.OneMover.subject_isolation_affine
+#print axioms Fresh.OneMover.subject_end_affine_all
+#print axioms Fresh.OneMover.subject_end_affine_separated_all
+#print axioms Fresh.OneMover.twoMoverSubjectClass_isolation
+#print axioms Fresh.InterleavedGridShift.integer_grid_clear
+#print axioms Fresh.InterleavedGridShift.packet_positive
+#print axioms Fresh.InterleavedGridShift.packet_negative
+#print axioms Fresh.InterleavedGridShift.signed_packet_grid
+#print axioms Fresh.SplitAPBands.split_train_grid
+#print axioms Fresh.SplitAPBands.split_train_negative
+#print axioms Fresh.SplitAPBands.signed_split_noninteger_of_middle
+#print axioms Fresh.SplitAPBands.signed_split_train_noninteger
+#print axioms Fresh.SplitAPBands.signed_chart_0
+#print axioms Fresh.SplitAPBands.signed_chart_1
+#print axioms Fresh.SplitAPBands.signed_chart_2
+#print axioms Fresh.SplitAPBands.signed_chart_3
+#print axioms Fresh.SplitAPBands.signed_chart_4
+#print axioms Fresh.SplitAPBands.signed_chart_5
+#print axioms Fresh.SplitAPBands.signed_chart_6
+#print axioms Fresh.SplitAPBands.signed_chart_7
+#print axioms Fresh.SplitAPBands.signed_chart_8
+#print axioms Fresh.SplitAPBands.signed_chart_9
+#print axioms Fresh.SplitAPBands.signed_chart_10
+#print axioms Fresh.SplitAPBands.signed_chart_11
+#print axioms Fresh.SplitAPBands.signed_chart_12
+#print axioms Fresh.SplitAPBands.signed_chart_13
+#print axioms Fresh.SplitAPBands.signed_chart_14
+#print axioms Fresh.SplitAPBands.signed_chart_15
+#print axioms Fresh.SplitAPBands.signed_chart_16
+#print axioms Fresh.SplitAPBands.signed_chart_17
+#print axioms Fresh.SplitAPBands.signed_chart_18
+#print axioms Fresh.SplitAPBands.signed_chart_19
+#print axioms Fresh.SplitAPBands.signed_chart_20
+#print axioms Fresh.SplitAPBands.signed_chart_21
+#print axioms Fresh.SplitAPBands.signed_chart_22
+#print axioms Fresh.SplitAPBands.signed_chart_23
+#print axioms Fresh.SplitAPBands.signed_chart_24
+#print axioms Fresh.SplitAPBands.signed_chart_25
+#print axioms Fresh.SplitAPBands.signed_chart_26
+#print axioms Fresh.SplitAPBands.signed_chart_27
+#print axioms Fresh.SplitAPBands.signed_chart_28
+#print axioms Fresh.SplitAPBands.signed_chart_29
+#print axioms Fresh.SplitAPBands.signed_chart_30
+#print axioms Fresh.SplitAPBands.signed_chart_31
+#print axioms Fresh.SplitAPBands.signed_chart_32
+#print axioms Fresh.SplitAPBands.signed_chart_33
+#print axioms Fresh.SplitAPBands.signed_chart_34
+#print axioms Fresh.SplitAPBands.signed_chart_35
+#print axioms Fresh.SplitAPBands.signed_chart_36
+#print axioms Fresh.SplitAPBands.signed_chart_37
+#print axioms Fresh.SplitAPBands.signed_chart_38
+#print axioms Fresh.SplitAPBands.signed_chart_39
+#print axioms Fresh.SplitAPBands.signed_chart_40
+#print axioms Fresh.SplitAPBands.signed_chart_41
+#print axioms Fresh.SplitAPBands.signed_chart_42
+#print axioms Fresh.SplitAPBands.signed_chart_43
+#print axioms Fresh.SplitAPBands.signed_chart_44
+#print axioms Fresh.SplitAPBands.signed_chart_45
+#print axioms Fresh.SplitAPBands.signed_chart_46
+#print axioms Fresh.SplitAPBands.signed_chart_47
+#print axioms Fresh.SplitAPBands.signed_chart_48
+#print axioms Fresh.SplitAPBands.signed_strip_r1_m5
+#print axioms Fresh.SplitAPBands.signed_strip_r1_m4
+#print axioms Fresh.SplitAPBands.signed_strip_r1_m3
+#print axioms Fresh.SplitAPBands.signed_strip_r1_m2
+#print axioms Fresh.SplitAPBands.signed_strip_r1_m1
+#print axioms Fresh.SplitAPBands.signed_strip_r2_m4
+#print axioms Fresh.SplitAPBands.signed_strip_r2_m3
+#print axioms Fresh.SplitAPBands.signed_strip_r2_m2
+#print axioms Fresh.SplitAPBands.signed_strip_r2_m1
+#print axioms Fresh.SplitAPBands.signed_strip_r3_m3
+#print axioms Fresh.SplitAPBands.signed_strip_r3_m2
+#print axioms Fresh.SplitAPBands.signed_strip_r3_m1
+#print axioms Fresh.SplitAPBands.signed_split_middle
+#print axioms Fresh.SplitAPBands.signedAPReadings_isolation
+#print axioms Fresh.SplitAPBands.signedAPReadingsClass_smul
+#print axioms Fresh.SplitAPArrangement.two_block_all_of_signed
+#print axioms Fresh.SplitAPArrangement.nonintegerTwoAPBlock_isolation_of_signed
+#print axioms Fresh.SplitAPArrangement.noninteger_two_block_all
+#print axioms Fresh.SplitAPArrangement.nonintegerTwoAPBlock_isolation
+#print axioms Fresh.SplitAPArrangement.integer_offset_separated
+#print axioms Fresh.SplitAPArrangement.general_two_block_all
+#print axioms Fresh.SplitAPArrangement.two_block_all_sizes
+#print axioms Fresh.SplitAPArrangement.generalTwoAPBlock_isolation
+#print axioms Fresh.SplitAPArrangement.blockSwap_speed
+#print axioms Fresh.SplitAPArrangement.negative_two_block_all
+#print axioms Fresh.SplitAPArrangement.singleton_one_eq
+#print axioms Fresh.SplitAPArrangement.singleton_seven_eq
+#print axioms Fresh.SplitAPArrangement.one_mover_all_of_injective
+#print axioms Fresh.SplitAPArrangement.singleton_one_all
+#print axioms Fresh.SplitAPArrangement.singleton_seven_all
+#print axioms Fresh.APCoreOpening.ap_core_clump_opening
+#print axioms Fresh.APCoreOpening.apCoreOpening_isolation
+#print axioms Fresh.ArrangementFamilyJoinsOct26.base_injective_of_affine_relabel
+#print axioms Fresh.ArrangementFamilyJoinsOct26.separated_imp_general
+#print axioms Fresh.ArrangementFamilyJoinsOct26.noninteger_imp_general
+#print axioms Fresh.ArrangementFamilyJoinsOct26.openingClump_imp_APCore
+#print axioms Fresh.ArrangementFamilyJoinsOct26.polynomialPair_imp_pairOpening
+#print axioms Fresh.UnequalAPArrangement.unequal_two_block_all
+#print axioms Fresh.UnequalAPArrangement.unequalTwoAPBlock_isolation
+#print axioms Fresh.MixedStepFour.mixed_at_upper
+#print axioms Fresh.MixedStepFour.mixed_four_upper_family
+#print axioms Fresh.MixedStepFour.mixed_four_upper_family_readings
+#print axioms Fresh.MixedStepFour.mixed_four_two_repeated
+#print axioms Fresh.MixedStepFour.mixed_four_two_tail
+#print axioms Fresh.MixedStepFour.mixed_four_two_tail_readings
+#print axioms Fresh.MixedStepFourArrangement.high_subject
+#print axioms Fresh.MixedStepFourArrangement.low_subject
+#print axioms Fresh.MixedStepFourArrangement.mixed_four_two_all
+#print axioms Fresh.MixedStepFourArrangement.mixedFourTwoArrangement_isolation
+#print axioms Fresh.MixedStepFourParamArrangement.high_subject_param
+#print axioms Fresh.MixedStepFourParamArrangement.gap_properties
+#print axioms Fresh.MixedStepFourParamArrangement.low_subject_param
+#print axioms Fresh.MixedStepFourParamArrangement.mixed_four_param_all
+#print axioms Fresh.MixedStepFourParamArrangement.mixedFourParamArrangement_isolation
+#print axioms Fresh.MixedStepFourLower.mixed_at_upper_band
+#print axioms Fresh.MixedStepFourLower.mixed_four_lower_family
+#print axioms Fresh.MixedStepFourLower.mixed_four_lower_family_readings
+#print axioms Fresh.MixedStepFourLowerArrangement.high_subject_lower
+#print axioms Fresh.MixedStepFourLowerArrangement.low_subject_lower
+#print axioms Fresh.MixedStepFourLowerArrangement.mixed_four_lower_all
+#print axioms Fresh.MixedStepFourLowerArrangement.mixedFourLowerArrangement_isolation
+#print axioms Fresh.LargeStepFour.upper_cycle_bands
+#print axioms Fresh.LargeStepFour.large_step_four
+#print axioms Fresh.LargeStepFour.large_step_four_readings
+#print axioms Fresh.StepFourAll.short_phase_opening
+#print axioms Fresh.StepFourAll.quarter_cycle_bands
+#print axioms Fresh.StepFourAll.five_twelfths_bands
+#print axioms Fresh.StepFourAll.five_eighths_bands
+#print axioms Fresh.StepFourAll.step_four_all
+#print axioms Fresh.StepFourAll.step_four_all_readings
+#print axioms Fresh.UniformStepFourArrangement.low_subject_uniform_of
+#print axioms Fresh.UniformStepFourArrangement.uniform_four_ge_one_all_of
+#print axioms Fresh.UniformStepFourArrangement.four_reverse_reflect
+#print axioms Fresh.UniformStepFourArrangement.uniform_four_positive_all_of
+#print axioms Fresh.UniformStepFourArrangement.uniformFourArrangement_isolation_of
+#print axioms Fresh.UniformStepFourArrangement.uniform_four_all
+#print axioms Fresh.UniformStepFourArrangement.uniformFourArrangement_isolation
+#print axioms Fresh.ArrangementTypesOct26.fourByFourMixed_isolation
+#print axioms Fresh.ArrangementTypesOct26.threeByFive_isolation
+#print axioms Fresh.ArrangementTypesOct26.newTypes_isolation
+#print axioms Fresh.ArrangementTypesOct26.types_isolation
+#print axioms Fresh.ArrangementTypesOct26.typesUp_isolation
+#print axioms Fresh.ArrangementTypesOct26.typesUp_or_reduced
+#print axioms Fresh.ArrangementTypesOct26.types_imp_up
+#print axioms Fresh.ArrangementTypesOct26.reduced_imp_old_admissible
+#print axioms Fresh.ArrangementTypesOct26.reduced_excludes_new
+#print axioms Fresh.ArrangementTypesOct26.typesUp_smul
+#print axioms Fresh.ArrangementTypesOct26.shortAnchor_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.openingRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.middlePacket_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.doubleSingleton_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.middleEntry_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.doubleEntry_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fourBlock_reversed_newTypes_isolation
+#print axioms Fresh.ArrangementTypesOct26.canonicalReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.noReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.sharpReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.zeroReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.quarterReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.quarterZeroReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.relativeCapture_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fastestRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fastestCapture_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.actualFastest_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.handoffNoReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.handoffRecovered_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleNoReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleRecovered_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.handoffRelative_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleRelative_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.handoffQuarter_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleQuarter_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.handoffSharp_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleSharp_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.selfClosing_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.soleSelfClosing_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupReset_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupCompact_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupCommon_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupAnchor_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.singleReturnRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.singleReturnAnchor_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.singleReturnRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnFaceRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupSharp_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnGroupQuarter_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.repeatedRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.repeatedRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.repeatedRecoveredRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.excursionRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.excursionRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualRelay_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.frontierQuarter_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.capturedPartner_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.compactPartner_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.openingCohort_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.gridCohort_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.openingFace_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recoveredCohort_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.outsiderPartner_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.outsiderRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.cohortReturnPartner_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.cohortReturnRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.cohortReturnFrontier_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.homogeneousReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnLevelRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnPhaseRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.maxReturnLevel_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.orderedReturnRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.generalReturnPhase_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.twoSetterPacket_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.doubleHighRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.cohortPhaseRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.oneReaderDeformation_actual_move
+#print axioms Fresh.ArrangementTypesOct26.coalescedSoleFits_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.delayedRejoinInterval_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fixedPrefixRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fixedPrefixClosing_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.retainedTailInterval_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.terminalTailInterval_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.groupEndpointRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.packetRestartExchange_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.openingPairRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.openingPairGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.thirdReaderRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.thirdReaderSimple_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.thirdReaderGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.forcedThirdReader_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.forcedThirdReaderGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualPhaseRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualPhaseGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualPhaseCompact_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualPhaseEarly_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualPhaseBand_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualSoleClosing_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.residualInverseTriple_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.outsidePacketRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.outsidePacketGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.allOutsideCaptured_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.independentOutsideBand_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.firstOutsideWatcher_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherPacketRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherPacketGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherMultiReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherEarlyPhase_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherBoundaryRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherBoundaryGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.watcherFirstBoundary_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.retainedPacketTail_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.twoPacketTailGuard_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.postWatcherResetTail_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recoveredPacketBox_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.rebasedPacketChart_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.rebasedPacketChart_into_types
+#print axioms Fresh.ArrangementTypesOct26.rebasedPacketChart_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.finalHandoffBands_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.currentLabelRetained_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.currentLabelRecovered_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recoveredHandoffBands_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recapturedRetainedReset_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recapturedRecoveredReset_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.witnessRetained_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.witnessRecovered_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.packetExtremeRecovery_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.narrowBandRetained_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.narrowBandRecovered_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.quietReversal_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.quietReversalScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.quietReversalScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.reversalCell_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.reversalCellScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.reversalCellScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.arbitraryThirdReversal_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.arbitraryThirdReversalScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.arbitraryThirdReversalScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.capturedReversal_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.capturedReversalScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.capturedReversalScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.suppliedReversal_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.suppliedReversalScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.suppliedReversalScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.reversalBranch_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.reversalBranchScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.reversalBranchScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.clearWitness_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.clearWitnessScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.clearWitnessScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.clearRebound_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.clearReboundScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.clearReboundScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.returnedGrid_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.returnedGridScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.returnedGridScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.doubleGrid_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.doubleGridScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.doubleGridScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.upperGrid_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.upperGridScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.upperGridScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.upperPair_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.upperPairScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.upperPairScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.phaseOrigin_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.phaseOriginScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.phaseOriginScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.tightCore_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.tightCoreScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.tightCoreScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.upperTriple_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.upperTripleScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.upperTripleScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.fourthReversal_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fourthReversalScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.fourthReversalScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.recoveredSecond_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.recoveredSecondScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.recoveredSecondScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.hierarchicalFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.hierarchicalFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.hierarchicalFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.comparableFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.comparableFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.comparableFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.fastSecondReset_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fastSecondResetScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.fastSecondResetScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.fastSecondReturn_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fastSecondReturnScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.fastSecondReturnScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.fastSecondFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fastSecondFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.fastSecondFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.smallFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.smallFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.smallFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.arbitraryFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.arbitraryFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.arbitraryFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.twoGridFourth_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.twoGridFourthScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.twoGridFourthScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.fourUpper_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.fourUpperScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.fourUpperScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.mixedObserverGridSeeds_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.mixedObserverGridSeedsScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.mixedObserverGridSeedsScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.seedResidueProduct_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.seedResidueProductScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.seedResidueProductScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.commonOpeningGridBands_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.commonOpeningGridBandsScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.commonOpeningGridBandsScaled_not_reduced
+#print axioms Fresh.ArrangementTypesOct26.uniformOpeningCells_into_newTypes
+#print axioms Fresh.ArrangementTypesOct26.uniformOpeningCellsScaled_into_typesUp
+#print axioms Fresh.ArrangementTypesOct26.uniformOpeningCellsScaled_not_reduced
+#print axioms Fresh.APCorePair.ap_core_pair
+#print axioms Fresh.APCorePair.apCorePair_isolation
+#print axioms Fresh.APPhaseOpening.phase_opening
+#print axioms Fresh.APPhaseOpening.packet_phase_endpoints
+#print axioms Fresh.APPhaseOpening.ap_packet_large
+#print axioms Fresh.APPhaseCharts.packet_chart_0
+#print axioms Fresh.APPhaseCharts.packet_chart_1
+#print axioms Fresh.APPhaseCharts.packet_chart_2
+#print axioms Fresh.APPhaseCharts.packet_chart_3
+#print axioms Fresh.APPhaseCharts.packet_chart_4
+#print axioms Fresh.APPhaseCharts.packet_chart_5
+#print axioms Fresh.APPhaseCharts.packet_chart_6
+#print axioms Fresh.APPhaseCharts.packet_chart_7
+#print axioms Fresh.APPhaseCharts.packet_chart_8
+#print axioms Fresh.APPhaseCharts.packet_chart_9
+#print axioms Fresh.APPhaseCharts.packet_chart_10
+#print axioms Fresh.APPhaseCharts.packet_bounded_r1
+#print axioms Fresh.APPhaseCharts.packet_bounded_r2
+#print axioms Fresh.APPhaseCharts.packet_bounded_r3
+#print axioms Fresh.APPhaseCharts.packet_bounded_r4
+#print axioms Fresh.APPhaseCharts.packet_bounded_r5
+#print axioms Fresh.APPhaseCharts.ap_packet_all
+#print axioms Fresh.FarTwoAPArrangement.low_subject_of
+#print axioms Fresh.FarTwoAPArrangement.high_subject
+#print axioms Fresh.FarTwoAPArrangement.far_ge_one_all_of
+#print axioms Fresh.FarTwoAPArrangement.reverse_reflect
+#print axioms Fresh.FarTwoAPArrangement.far_positive_all_of
+#print axioms Fresh.FarTwoAPArrangement.farTwoAPBlock_isolation_of
+#print axioms Fresh.FarTwoAPArrangement.far_two_ap_all
+#print axioms Fresh.FarTwoAPArrangement.farTwoAPBlock_isolation
+#print axioms Fresh.MiddleStepFive.middle_at_opening
+#print axioms Fresh.MiddleStepFive.middle_five_lower
+#print axioms Fresh.MiddleStepFive.middle_five_upper
+#print axioms Fresh.MiddleStepFive.middle_five_lower_readings
+#print axioms Fresh.MiddleStepFive.middle_five_upper_readings
+#print axioms Fresh.MiddleStepFiveArrangement.high_subject
+#print axioms Fresh.MiddleStepFiveArrangement.low_subject
+#print axioms Fresh.MiddleStepFiveArrangement.middle_five_all
+#print axioms Fresh.MiddleStepFiveArrangement.middleFiveArrangement_isolation
+#print axioms Fresh.MiddleStepFiveLarge.middle_cycle_bands
+#print axioms Fresh.MiddleStepFiveLarge.middle_five_large
+#print axioms Fresh.MiddleStepFiveLarge.middle_five_large_readings
+#print axioms Fresh.MiddleStepFiveLargeArrangement.low_subject_large
+#print axioms Fresh.MiddleStepFiveLargeArrangement.middle_five_large_all
+#print axioms Fresh.MiddleStepFiveLargeArrangement.middleFiveLargeArrangement_isolation
+#print axioms Fresh.MiddleStepFiveAll.middle_second_bands
+#print axioms Fresh.MiddleStepFiveAll.middle_five_second
+#print axioms Fresh.MiddleStepFiveAll.middle_five_all
+#print axioms Fresh.MiddleStepFiveAll.middle_five_all_readings
+#print axioms Fresh.MiddleStepFiveArrangementAll.low_subject_all
+#print axioms Fresh.MiddleStepFiveArrangementAll.middle_five_all_subjects
+#print axioms Fresh.MiddleStepFiveArrangementAll.middleFiveAllArrangement_isolation
+#print axioms Fresh.ThreePacketPhase.phase_opening
+#print axioms Fresh.ThreePacketPhase.zero_chart
+#print axioms Fresh.ThreePacketPhase.one_chart
+#print axioms Fresh.ThreePacketPhase.three_packet_all
+#print axioms Fresh.FullThreeFiveArrangement.low_small
+#print axioms Fresh.FullThreeFiveArrangement.high_small
+#print axioms Fresh.FullThreeFiveArrangement.three_five_all
+#print axioms Fresh.FullThreeFiveArrangement.fullThreeFiveArrangement_isolation
+#print axioms Fresh.TwoSixPhase.two_six_middle
+#print axioms Fresh.TwoSixPhase.two_six_large
+#print axioms Fresh.TwoSixPhase.two_six_all
+#print axioms Fresh.TwoSixPhase.two_six_any
+#print axioms Fresh.TwoSixArrangement.two_six_all_subjects
+#print axioms Fresh.TwoSixTight.two_six_low_tight
+#print axioms Fresh.TwoSixTight.two_six_tight_all_subjects
+#print axioms Fresh.TwoSixTen.ap_core_pair_half
+#print axioms Fresh.TwoSixTen.two_six_ten_all_subjects
+#print axioms Fresh.TwoSixNine.frozen_six
+#print axioms Fresh.TwoSixNine.two_six_nine_all_subjects
+#print axioms Fresh.TwoSixNine.twoSixNine_isolation
+#print axioms Fresh.TwoSixThin.two_six_low_thin
+#print axioms Fresh.TwoSixThin.two_six_thin_all_subjects
+#print axioms Fresh.TwoSixThin.twoSixThin_isolation
+#print axioms Fresh.TwoAPSeparated21.separated_small
+#print axioms Fresh.TwoAPSeparated21.max_reciprocal
+#print axioms Fresh.TwoAPSeparated21.separated_all
+#print axioms Fresh.TwoAPSeparated21.separatedTwoAP21_isolation
+#print axioms Fresh.TwoAPSeparated21.far96_imp_separated21
+#print axioms Fresh.ThreeBlockCarry.all_subjects
+#print axioms Fresh.ThreeBlockCarry.threeBlockCarry_isolation
+#print axioms Fresh.ThreeBlockCarryBands.band_all_subjects
+#print axioms Fresh.ThreeBlockCarryBands.threeBlockCarryBands_isolation
+#print axioms Fresh.ThreeBlockNearGrid.grid_all_subjects
+#print axioms Fresh.ThreeBlockNearGrid.threeBlockNearGrid_isolation
+#print axioms Fresh.ThreeBlockGridTriangle.grid_triangle_all_subjects
+#print axioms Fresh.ThreeBlockGridTriangle.threeBlockGridTriangle_isolation
+#print axioms Fresh.ThreeBlockComparableGaps.canonical_grid
+#print axioms Fresh.ThreeBlockComparableGaps.comparable_all_subjects
+#print axioms Fresh.ThreeBlockComparableGaps.threeBlockComparableGaps_isolation
+#print axioms Fresh.ThreeBlockPolynomialGaps.polynomial_grid
+#print axioms Fresh.ThreeBlockPolynomialGaps.polynomial_all_subjects
+#print axioms Fresh.ThreeBlockPolynomialGaps.threeBlockPolynomialGaps_isolation
+#print axioms Fresh.ThreeBlockPolynomialGaps.comparable_imp_polynomial
+#print axioms Fresh.ThreeBlockIndependentLaps.independent_laps_all_subjects
+#print axioms Fresh.ThreeBlockIndependentLaps.threeBlockIndependentLaps_isolation
+#print axioms Fresh.ThreeBlockClassJoins.triangle_into_independent
+#print axioms Fresh.ThreeBlockClassJoins.comparable_into_triangle
+#print axioms Fresh.ThreeBlockClassJoins.comparable_into_independent
+#print axioms Fresh.ThreeBlockClassJoins.near_grid_into_triangle
+#print axioms Fresh.ThreeBlockPolynomialJoins.polynomial_into_triangle
+#print axioms Fresh.ThreeBlockPolynomialJoins.polynomial_into_independent
+#print axioms Fresh.ThreeBlockWideLaps.wide_laps_all_subjects
+#print axioms Fresh.ThreeBlockWideLaps.threeBlockWideLaps_isolation
+#print axioms Fresh.ThreeBlockWideJoins.independent_into_wide
+#print axioms Fresh.ThreeBlockWideJoins.polynomial_into_wide
+#print axioms Fresh.ThreeBlockReverseLaps.reverse_laps_all_subjects
+#print axioms Fresh.ThreeBlockReverseLaps.threeBlockReverseLaps_isolation
+#print axioms Fresh.ThreeBlockReturnJoins.reverse_bands_return
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_1
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_2
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_3
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_4
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_5
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpoint_all_subjects
+#print axioms Fresh.ThreeBlockEndpointSingleton.endpointSingleton_isolation
+#print axioms Fresh.ThreeBlockPartitions.partition_224
+#print axioms Fresh.ThreeBlockPartitions.partition_233
+#print axioms Fresh.ThreeBlockPartitions.partition_242
+#print axioms Fresh.ThreeBlockPartitions.partition_323
+#print axioms Fresh.ThreeBlockPartitions.partition_332
+#print axioms Fresh.ThreeBlockPartitions.partition_422
+#print axioms Fresh.ThreeBlockPartitions.partitions_all_subjects
+#print axioms Fresh.ThreeBlockPartitions.threeBlockPartitions_isolation
+#print axioms Fresh.ThreeBlockReversePartitions.partition_224
+#print axioms Fresh.ThreeBlockReversePartitions.partition_233
+#print axioms Fresh.ThreeBlockReversePartitions.partition_242
+#print axioms Fresh.ThreeBlockReversePartitions.partition_323
+#print axioms Fresh.ThreeBlockReversePartitions.partition_332
+#print axioms Fresh.ThreeBlockReversePartitions.partition_422
+#print axioms Fresh.ThreeBlockReversePartitions.reverse_partitions_all_subjects
+#print axioms Fresh.ThreeBlockReversePartitions.threeBlockReversePartitions_isolation
+#print axioms Fresh.ThreeBlockMiddlePartitions.partition_215
+#print axioms Fresh.ThreeBlockMiddlePartitions.partition_314
+#print axioms Fresh.ThreeBlockMiddlePartitions.partition_413
+#print axioms Fresh.ThreeBlockMiddlePartitions.partition_512
+#print axioms Fresh.ThreeBlockMiddlePartitions.middle_partitions_all_subjects
+#print axioms Fresh.ThreeBlockMiddlePartitions.threeBlockMiddlePartitions_isolation
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.partition_215
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.partition_314
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.partition_413
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.partition_512
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.reverse_middle_partitions_all_subjects
+#print axioms Fresh.ThreeBlockReverseMiddlePartitions.threeBlockReverseMiddlePartitions_isolation
+#print axioms Fresh.TrainFlankPartitionJoins.wide_into_partitions
+#print axioms Fresh.TrainFlankPartitionJoins.independent_into_partitions
+#print axioms Fresh.TrainFlankPartitionJoins.polynomial_into_partitions
+#print axioms Fresh.TrainFlankReversePartitionJoins.reverse_into_reverse_partitions
+#print axioms Fresh.TrainFlankMiddlePartitionJoins.partitions_into_middle
+#print axioms Fresh.TrainFlankMiddlePartitionJoins.wide_into_middle
+#print axioms Fresh.TrainFlankReverseMiddlePartitionJoins.reverse_partitions_into_middle
+#print axioms Fresh.TrainFlankReverseMiddlePartitionJoins.reverse_into_middle
+#print axioms Fresh.ThreeBlockGridResumption.left_grid_clear
+#print axioms Fresh.ThreeBlockGridResumption.left_native_gate_move
+#print axioms Fresh.ThreeBlockNativeBypass.bypass_output_clear
+#print axioms Fresh.ThreeBlockNativeBypass.native_opposite_pair_bypass
+#print axioms Fresh.ThreeBlockNativePhysical.left_disparity_eq
+#print axioms Fresh.ThreeBlockNativePhysical.physical_native_opposite_pair_bypass
+#print axioms Fresh.ThreeBlockNativeMirror.right_disparity_eq
+#print axioms Fresh.ThreeBlockNativeMirror.physical_native_reflected_bypass
+#print axioms Fresh.ThreeBlockNativeBypassClass.nativeBypass_isolation
+#print axioms Fresh.ThreeBlockBypassOverlap.seed_input_overlap
+#print axioms Fresh.ThreeBlockBypassOverlap.unbounded_native_input
+#print axioms Fresh.ThreeBlockBypassOverlap.unbounded_native_subject_isolation
+#print axioms Fresh.ThreeBlockBypassWideOverlap.unbounded_native_beyond_wide
+#print axioms Fresh.ThreeBlockBypassKernel.shape_output_clear
+#print axioms Fresh.ThreeBlockBypassKernel.native_shape_bypass
+#print axioms Fresh.ThreeBlockBypassPartitions.physical_reading_shape
+#print axioms Fresh.ThreeBlockBypassPartitions.physical_gate_members
+#print axioms Fresh.ThreeBlockBypassPartitions.physical_partition_native_bypass
+#print axioms Fresh.ThreeBlockBypassPartitionMirror.reflected_reading_shape
+#print axioms Fresh.ThreeBlockBypassPartitionMirror.reflected_gate_members
+#print axioms Fresh.ThreeBlockBypassPartitionMirror.reflected_partition_native_bypass
+#print axioms Fresh.ThreeBlockPartitionBypassClass.partitionNativeBypass_isolation
+#print axioms Fresh.ThreeBlockPartitionBypassClass.old_native_into_partition
+#print axioms Fresh.TwoGapPacketBand.clear_packet
+#print axioms Fresh.TwoGapPacketBand.twoGapPacket_isolation
+#print axioms Fresh.FourAPPairs.four_pairs_all_subjects
+#print axioms Fresh.FourAPPairs.fourAPPairs_isolation
+#print axioms Fresh.FourPairPolynomialGaps.polynomial_grid
+#print axioms Fresh.FourPairPolynomialGaps.polynomial_all_subjects
+#print axioms Fresh.FourPairPolynomialGaps.polynomial_into_fourPairs
+#print axioms Fresh.FourPairPolynomialGaps.fourPairPolynomial_isolation
+#print axioms Fresh.FourAPPairsNative.native_output_clear
+#print axioms Fresh.FourAPPairsNative.native_full_bypass
+#print axioms Fresh.FourAPPairsNativePhysical.left_disparity_eq
+#print axioms Fresh.FourAPPairsNativePhysical.right_disparity_eq
+#print axioms Fresh.FourAPPairsNativePhysical.physical_left_native_bypass
+#print axioms Fresh.FourAPPairsNativePhysical.physical_right_native_bypass
+#print axioms Fresh.FourAPPairsNativeClass.fourPairNative_isolation
+#print axioms Fresh.TrainFlankPacketJoins.shape_215
+#print axioms Fresh.TrainFlankPacketJoins.shape_224
+#print axioms Fresh.TrainFlankPacketJoins.shape_233
+#print axioms Fresh.TrainFlankPacketJoins.shape_242
+#print axioms Fresh.TrainFlankPacketJoins.shape_314
+#print axioms Fresh.TrainFlankPacketJoins.shape_323
+#print axioms Fresh.TrainFlankPacketJoins.shape_332
+#print axioms Fresh.TrainFlankPacketJoins.shape_413
+#print axioms Fresh.TrainFlankPacketJoins.shape_422
+#print axioms Fresh.TrainFlankPacketJoins.shape_512
+#print axioms Fresh.TrainFlankPacketJoins.near_shape
+#print axioms Fresh.TrainFlankPacketJoins.affine_near_into_packet
+#print axioms Fresh.TrainFlankPacketJoins.middle_near_into_packet
+#print axioms Fresh.ThreeGapPacketBand.clear_packet
+#print axioms Fresh.ThreeGapPacketBand.threeGapPacket_isolation
+#print axioms Fresh.ThreeGapPacketJoins.two_into_three
+#print axioms Fresh.PhaseNeighbour.phase_separation
+#print axioms Fresh.PhaseNeighbour.phase_neighbour
+#print axioms Fresh.PhaseNeighbour.internal_isolation
+#print axioms Fresh.ThreeBlockEndpointBounds.left_difference_bounds
+#print axioms Fresh.ThreeBlockEndpointBounds.right_difference_bounds
+#print axioms Fresh.ThreeBlockEndpointBounds.left_direct
+#print axioms Fresh.ThreeBlockEndpointBounds.right_direct
+#print axioms Fresh.ThreeBlockNeighbour.adjacent_phase_gap
+#print axioms Fresh.ThreeBlockNeighbour.phase_span
+#print axioms Fresh.ThreeBlockNeighbour.internal_at_reference
+#print axioms Fresh.ThreeBlockNeighbour.threeBlockInternal_isolation
+#print axioms Fresh.ThreeBlockNeighbour.all_subjects
+#print axioms Fresh.ThreeBlockNeighbour.threeBlockNeighbour_isolation
+#print axioms Fresh.ThreeBlockNeighbourJoins.middle_into_neighbour
+#print axioms Fresh.ThreeBlockNeighbourJoins.endpoint_into_neighbour
+#print axioms Fresh.FourPairStepBounds.packet_spec
+#print axioms Fresh.FourPairStepBounds.moved_spec
+#print axioms Fresh.FourPairStepBounds.opening_bounds
+#print axioms Fresh.FourPairStepBounds.core_retained
+#print axioms Fresh.FourPairStepBounds.moved_retained
+#print axioms Fresh.FourPairStepEpisode.at_U
+#print axioms Fresh.FourPairStepEpisode.at_V
+#print axioms Fresh.FourPairStepEpisode.at_W
+#print axioms Fresh.FourPairStepEpisode.native_pair_episode
+#print axioms Fresh.FourPairStepMerge.native_original_episode
+#print axioms Fresh.FourPairStepPhysical.original_gaps_admissible
+#print axioms Fresh.FourPairStepPhysical.original_disparity_eq
+#print axioms Fresh.FourPairStepPhysical.physical_isolation
+#print axioms Fresh.FourPairStepPhysical.fourPairStep_isolation
+#print axioms Fresh.FourPairStepNativePhysical.physical_original_episode
+#print axioms Fresh.FourPairStepPerturbedBounds.pair_spec
+#print axioms Fresh.FourPairStepPerturbedBounds.perturbed_opening_bounds
+#print axioms Fresh.FourPairStepPerturbedBounds.core_retained_extended
+#print axioms Fresh.FourPairStepPerturbedBounds.moved_retained_extended
+#print axioms Fresh.FourPairStepPerturbedEpisode.at_U_perturbed
+#print axioms Fresh.FourPairStepPerturbedEpisode.at_VP
+#print axioms Fresh.FourPairStepPerturbedEpisode.at_WP
+#print axioms Fresh.FourPairStepPerturbedEpisode.perturbed_native_pair_episode
+#print axioms Fresh.FourPairStepPerturbedMerge.native_original_episode
+#print axioms Fresh.FourPairStepPerturbedPhysical.original_gaps_admissible
+#print axioms Fresh.FourPairStepPerturbedPhysical.original_disparity_eq
+#print axioms Fresh.FourPairStepPerturbedPhysical.physical_isolation
+#print axioms Fresh.FourPairStepPerturbedPhysical.fourPairStepPerturbed_isolation
+#print axioms Fresh.FourPairStepPerturbedNativePhysical.physical_original_episode
+#print axioms Fresh.FourPairStepPerturbedJoins.baseline_speeds
+#print axioms Fresh.FourPairStepPerturbedJoins.baseline_class_inclusion
+#print axioms Fresh.FourPairStepWideClear.wide_pair_spec
+#print axioms Fresh.FourPairStepWideClear.wide_wp_bounds
+#print axioms Fresh.FourPairStepWideClear.core_retained_wide
+#print axioms Fresh.FourPairStepWideClear.moved_retained_wide
+#print axioms Fresh.FourPairStepWideClear.wide_clear
+#print axioms Fresh.FourPairStepWideCapture.moved_wide_spec
+#print axioms Fresh.FourPairStepWideCapture.pair_wide_spec
+#print axioms Fresh.FourPairStepWideCapture.wide_opening_order
+#print axioms Fresh.FourPairStepWideCapture.slow_at_VP
+#print axioms Fresh.FourPairStepWideCapture.slow_U_input_face
+#print axioms Fresh.FourPairStepWideCapture.at_U_split
+#print axioms Fresh.FourPairStepWideEpisode.retained_at_VP
+#print axioms Fresh.FourPairStepWideEpisode.native_wide_tail
+#print axioms Fresh.FourPairStepWideMerge.native_original_episode
+#print axioms Fresh.FourPairStepWidePhysical.original_gaps_admissible
+#print axioms Fresh.FourPairStepWidePhysical.original_disparity_eq
+#print axioms Fresh.FourPairStepWidePhysical.physical_isolation
+#print axioms Fresh.FourPairStepWidePhysical.fourPairStepWide_isolation
+#print axioms Fresh.FourPairStepWideNativePhysical.physical_original_episode
+#print axioms Fresh.FourPairStepWideJoins.quarter_speeds
+#print axioms Fresh.FourPairStepWideJoins.quarter_class_inclusion
+#print axioms Fresh.FourPairStepIndependentClear.independent_pair_spec
+#print axioms Fresh.FourPairStepIndependentClear.independent_wp_bounds
+#print axioms Fresh.FourPairStepIndependentClear.core_retained_wide
+#print axioms Fresh.FourPairStepIndependentClear.moved_retained_wide
+#print axioms Fresh.FourPairStepIndependentClear.independent_clear
+#print axioms Fresh.FourPairStepIndependentCapture.moved_wide_spec
+#print axioms Fresh.FourPairStepIndependentCapture.pair_wide_spec
+#print axioms Fresh.FourPairStepIndependentCapture.wide_opening_order
+#print axioms Fresh.FourPairStepIndependentCapture.slow_at_VP
+#print axioms Fresh.FourPairStepIndependentCapture.slow_U_input_face
+#print axioms Fresh.FourPairStepIndependentCapture.fast_U_input_face
+#print axioms Fresh.FourPairStepIndependentCapture.at_U_split
+#print axioms Fresh.FourPairStepIndependentEpisode.retained_at_VP
+#print axioms Fresh.FourPairStepIndependentEpisode.native_independent_tail
+#print axioms Fresh.FourPairStepIndependentMerge.native_original_episode
+#print axioms Fresh.FourPairStepIndependentPhysical.original_gaps_admissible
+#print axioms Fresh.FourPairStepIndependentPhysical.original_disparity_eq
+#print axioms Fresh.FourPairStepIndependentPhysical.physical_isolation
+#print axioms Fresh.FourPairStepIndependentPhysical.fourPairStepIndependent_isolation
+#print axioms Fresh.FourPairStepIndependentNativePhysical.physical_original_episode
+#print axioms Fresh.FourPairStepIndependentJoins.triangle_speeds
+#print axioms Fresh.FourPairStepIndependentJoins.triangle_class_inclusion
+#print axioms Fresh.FourBlockNeighbour.phase_identity
+#print axioms Fresh.FourBlockNeighbour.cut_increment
+#print axioms Fresh.FourBlockNeighbour.adjacent_phase_gap
+#print axioms Fresh.FourBlockNeighbour.phase_span
+#print axioms Fresh.FourBlockNeighbour.internal_at_reference
+#print axioms Fresh.FourBlockNeighbour.fourBlockInternal_isolation
+#print axioms Fresh.FourBlockNeighbourJoins.three_indicator
+#print axioms Fresh.FourBlockNeighbourJoins.refine_left
+#print axioms Fresh.FourBlockNeighbourJoins.refine_middle
+#print axioms Fresh.FourBlockNeighbourJoins.refine_right
+#print axioms Fresh.FourBlockNeighbourJoins.three_into_four
+#print axioms Fresh.FourBlockNeighbourJoins.pair_speeds
+#print axioms Fresh.FourBlockEndpoints.adjacent_speed_gap
+#print axioms Fresh.FourBlockEndpoints.speeds_monotone
+#print axioms Fresh.FourBlockEndpoints.speed_span
+#print axioms Fresh.FourBlockEndpoints.left_direct
+#print axioms Fresh.FourBlockEndpoints.right_direct
+#print axioms Fresh.FourBlockArrangement.all_subjects
+#print axioms Fresh.FourBlockArrangement.fourBlock_isolation
+#print axioms Fresh.FourBlockArrangementJoins.pairs_into_four
+#print axioms Fresh.FourBlockArrangementJoins.three_into_four
+#print axioms Fresh.FourBlockEndpointCapture.reference_inner_clear
+#print axioms Fresh.FourBlockEndpointCapture.left_captured_move
+#print axioms Fresh.FourBlockEndpointCapture.left_reference_choice
+#print axioms Fresh.FourBlockEndpointUnitPartner.outer_opening_bounds
+#print axioms Fresh.FourBlockEndpointUnitPartner.unit_partner_capture
+#print axioms Fresh.EndpointRetainedPacket.earlier_readings_clear
+#print axioms Fresh.FourBlockEndpointSecondMove.unit_partner_next_move
+#print axioms Fresh.EndpointRetainedSegment.earlier_readings_clear
+#print axioms Fresh.FourBlockLongTailBounds.tail_reading
+#print axioms Fresh.FourBlockLongTailBounds.tail_lap
+#print axioms Fresh.FourBlockLongTailBounds.packet_identity
+#print axioms Fresh.FourBlockLongTailBounds.packet_delta
+#print axioms Fresh.FourBlockLongTailBounds.first_partner_bounds
+#print axioms Fresh.FourBlockLongTailBounds.second_partner_bounds
+#print axioms Fresh.FourBlockLongTailBounds.exit_face
+#print axioms Fresh.FourBlockLongTailPhase.native_phase_gaps
+#print axioms Fresh.FourBlockLongTailPhase.native_remainder_band
+#print axioms Fresh.FourBlockLongTailPhase.packet_phase
+#print axioms Fresh.FourBlockLongTailThirdMove.first_partner_eq
+#print axioms Fresh.FourBlockLongTailThirdMove.third_move
+#print axioms Fresh.FourBlockLongTailExit.exit_or_continue
+#print axioms Fresh.FourBlockLongTailEpisode.native_episode
+#print axioms Fresh.FourBlockLongTailArrangement.all_subjects
+#print axioms Fresh.FourBlockLongTailArrangement.longTail_isolation
+#print axioms Fresh.FourBlockLongTailArrangement.fourBlockCovered_isolation
+#print axioms Fresh.FourBlockFourthExit.fourth_bounds
+#print axioms Fresh.FourBlockFourthExit.phase_three
+#print axioms Fresh.FourBlockFourthExit.fourth_clear
+#print axioms Fresh.FourBlockFourthArrangement.all_subjects
+#print axioms Fresh.FourBlockFourthArrangement.native_fourth_episode
+#print axioms Fresh.FourBlockFourthArrangement.fourthClass_isolation
+#print axioms Fresh.FourBlockFourthArrangement.packetCovered_isolation
+#print axioms Fresh.FourBlockOuterReturnBounds.return_identity
+#print axioms Fresh.FourBlockOuterReturnBounds.return_delta
+#print axioms Fresh.FourBlockOuterReturnBounds.return_bounds
+#print axioms Fresh.FourBlockOuterReturnBounds.return_phase
+#print axioms Fresh.FourBlockOuterReturnBounds.capture_bounds
+#print axioms Fresh.FourBlockOuterReturnBounds.closed_join
+#print axioms Fresh.FourBlockOuterReturnClear.return_clear
+#print axioms Fresh.FourBlockOuterReturnMove.return_move
+#print axioms Fresh.FourBlockOuterReturnArrangement.all_subjects
+#print axioms Fresh.FourBlockOuterReturnArrangement.native_return_episode
+#print axioms Fresh.FourBlockOuterReturnArrangement.outerReturnClass_isolation
+#print axioms Fresh.FourBlockOuterReturnArrangement.returnCovered_isolation
+#print axioms Fresh.UnitAPPacketPhase.phase_at_anchor
+#print axioms Fresh.FourBlockInnerExit.inner_identity
+#print axioms Fresh.FourBlockInnerExit.inner_bounds
+#print axioms Fresh.FourBlockInnerExit.inner_phase
+#print axioms Fresh.FourBlockInnerExit.earlier_faces
+#print axioms Fresh.FourBlockInnerExit.inner_clear
+#print axioms Fresh.FourBlockInnerArrangement.all_subjects
+#print axioms Fresh.FourBlockInnerArrangement.innerExitClass_isolation
+#print axioms Fresh.FourBlockInnerArrangement.innerCovered_isolation
+#print axioms Fresh.FourBlockInnerReturnMove.capture_bounds
+#print axioms Fresh.FourBlockInnerReturnMove.return_move
+#print axioms Fresh.FourBlockInnerCaptureBounds.strict_capture_face
+#print axioms Fresh.FourBlockInnerCaptureBounds.inner_capture_bounds
+#print axioms Fresh.FourBlockInnerMove.inner_move
+#print axioms Fresh.FourBlockInnerCutMove.cut_move
+#print axioms Fresh.FourBlockInnerEpisode.inner_prefix
+#print axioms Fresh.FourBlockInnerEpisode.native_inner_episode
+#print axioms Fresh.FourBlockFourReturnExit.four_identity
+#print axioms Fresh.FourBlockFourReturnExit.four_bounds
+#print axioms Fresh.FourBlockFourReturnExit.packet_phase
+#print axioms Fresh.FourBlockFourReturnExit.four_clear
+#print axioms Fresh.FourBlockFourReturnArrangement.all_subjects
+#print axioms Fresh.FourBlockFourReturnArrangement.fourReturnClass_isolation
+#print axioms Fresh.FourBlockFourReturnArrangement.fourReturnCovered_isolation
+#print axioms Fresh.FourBlockFourReturnMove.cut_identity
+#print axioms Fresh.FourBlockFourReturnMove.return_move
+#print axioms Fresh.FourBlockFourReturnEpisode.native_four_return_episode
+#print axioms Fresh.FourBlockSingletonReturnExit.singleton_identity
+#print axioms Fresh.FourBlockSingletonReturnExit.packet_phase
+#print axioms Fresh.FourBlockSingletonReturnExit.singleton_clear
+#print axioms Fresh.FourBlockSingletonReturnArrangement.all_subjects
+#print axioms Fresh.FourBlockSingletonReturnArrangement.singletonReturnClass_isolation
+#print axioms Fresh.FourBlockSingletonReturnArrangement.singletonReturnCovered_isolation
+#print axioms Fresh.FourBlockSingletonReturnMove.singleton_move_from
+#print axioms Fresh.FourBlockSingletonReturnEpisode.native_singleton_return_episode
+#print axioms Fresh.FourBlockReturnJoins.opening_join
+#print axioms Fresh.FourBlockReturnJoins.packet_faces_at_join
+#print axioms Fresh.FourBlockFiveReturnExit.five_identity
+#print axioms Fresh.FourBlockFiveReturnExit.five_bounds
+#print axioms Fresh.FourBlockFiveReturnExit.packet_phase
+#print axioms Fresh.FourBlockFiveReturnExit.five_clear
+#print axioms Fresh.FourBlockFiveReturnArrangement.all_subjects
+#print axioms Fresh.FourBlockFiveReturnArrangement.fiveReturnClass_isolation
+#print axioms Fresh.FourBlockFiveReturnArrangement.fiveReturnCovered_isolation
+#print axioms Fresh.FourBlockFiveReturnMove.return_move
+#print axioms Fresh.FourBlockLateSingletonMove.singleton_move
+#print axioms Fresh.FourBlockOuterLapPhase.opening_identity
+#print axioms Fresh.FourBlockOuterLapPhase.opening_delta
+#print axioms Fresh.FourBlockOuterLapPhase.opening_bounds
+#print axioms Fresh.FourBlockOuterLapPhase.packet_phase
+#print axioms Fresh.FourBlockOuterLapClear.packet_clear
+#print axioms Fresh.FourBlockOuterLapClear.cut_phase
+#print axioms Fresh.FourBlockOuterLapClear.outer_clear
+#print axioms Fresh.FourBlockOuterLapRoles.return_role
+#print axioms Fresh.FourBlockOuterLapRoles.cut_roles
+#print axioms Fresh.FourBlockOuterLapArrangement.all_subjects
+#print axioms Fresh.FourBlockOuterLapArrangement.outerLapClass_isolation
+#print axioms Fresh.FourBlockOuterLapArrangement.finite_normal_form
+#print axioms Fresh.FourBlockOuterLapArrangement.outerLapCovered_isolation
+#print axioms Fresh.FourBlockOuterLapMove.six_identity
+#print axioms Fresh.FourBlockOuterLapMove.six_packet_phase
+#print axioms Fresh.FourBlockOuterLapMove.outer_move_from
+#print axioms Fresh.FourBlockOuterLapMove.six_handoff
+#print axioms Fresh.FourBlockOuterTailClear.tail_phase
+#print axioms Fresh.FourBlockOuterTailClear.outer_clear
+#print axioms Fresh.FourBlockOuterTailClear.partitions
+#print axioms Fresh.FourBlockOuterTailRoles.left_roles
+#print axioms Fresh.FourBlockOuterTailArrangement.all_subjects
+#print axioms Fresh.FourBlockOuterTailArrangement.outerTailClass_isolation
+#print axioms Fresh.FourBlockOuterTailArrangement.finite_normal_form
+#print axioms Fresh.FourBlockOuterTailArrangement.outerLap_into_outerTail
+#print axioms Fresh.FourBlockOuterTailArrangement.outerTailCovered_isolation
+#print axioms Fresh.FourBlockOuterTailArrangement.outerLapCovered_into_outerTailCovered
+#print axioms Fresh.FourBlockOuterTailMove.six_outer_phase
+#print axioms Fresh.FourBlockOuterTailMove.outer_move_from
+#print axioms Fresh.FourBlockOuterTailMove.six_handoff
+#print axioms Fresh.FourBlockOuterPacketRetention.packet_retained
+#print axioms Fresh.FourBlockOuterPacketRetention.displaced_time_bounds
+#print axioms Fresh.FourBlockLeftOpening.reading_pos
+#print axioms Fresh.FourBlockLeftOpening.opening_identity
+#print axioms Fresh.FourBlockLeftOpening.capture_opening
+#print axioms Fresh.FourBlockLeftOpening.bands_at_opening
+#print axioms Fresh.FourBlockLeftOpening.displaced_clear
+#print axioms Fresh.FourBlockLeftOpening.upper_capture_join
+#print axioms Fresh.FourBlockLeftOpening.upper_join_clear
+#print axioms Fresh.FourBlockDisplacedLeftRoles.left_roles_at_time
+#print axioms Fresh.FourBlockLeftExit.left_lonely
+#print axioms Fresh.FourBlockLeftExit.left_move
+#print axioms Fresh.FourBlockLeftExitArrangement.all_subjects
+#print axioms Fresh.FourBlockLeftExitArrangement.leftExitClass_isolation
+#print axioms Fresh.FourBlockLeftExitArrangement.finite_normal_form
+#print axioms Fresh.FourBlockLeftExitArrangement.leftExitCovered_isolation
+#print axioms Fresh.FourBlockLeftOpeningArrangement.all_subjects
+#print axioms Fresh.FourBlockLeftOpeningArrangement.leftOpeningClass_isolation
+#print axioms Fresh.FourBlockLeftOpeningArrangement.finite_normal_form
+#print axioms Fresh.FourBlockLeftOpeningArrangement.leftExit_into_leftOpening
+#print axioms Fresh.FourBlockLeftOpeningArrangement.leftOpeningCovered_isolation
+#print axioms Fresh.FourBlockLeftOpeningArrangement.leftExitCovered_into_leftOpeningCovered
+#print axioms Fresh.FourBlockPacketFrame.frame_upper
+#print axioms Fresh.FourBlockPacketFrame.frame_lower
+#print axioms Fresh.FourBlockPacketFrame.packet_clear
+#print axioms Fresh.FourBlockPacketFrame.time_bounds
+#print axioms Fresh.FourBlockPacketFrame.return_roles
+#print axioms Fresh.FourBlockPacketFrameArrangement.selected_bands
+#print axioms Fresh.FourBlockPacketFrameArrangement.frame_clear
+#print axioms Fresh.FourBlockPacketFrameArrangement.all_subjects
+#print axioms Fresh.FourBlockPacketFrameArrangement.packetFrameClass_isolation
+#print axioms Fresh.FourBlockPacketFrameArrangement.finite_normal_form
+#print axioms Fresh.FourBlockPacketFrameArrangement.outerTail_into_frame
+#print axioms Fresh.FourBlockPacketFrameArrangement.leftOpening_into_frame
+#print axioms Fresh.FourBlockPacketFrameArrangement.packetFrameCovered_isolation
+#print axioms Fresh.FourBlockPacketFrameArrangement.leftOpeningCovered_into_frameCovered
+#print axioms Fresh.FourBlockPacketFrameArrangement.leftExitCovered_into_frameCovered
+#print axioms Fresh.FourBlockPacketFrameMoves.native_readings_positive
+#print axioms Fresh.FourBlockPacketFrameMoves.move_at_supplied_opening
+#print axioms Fresh.FourBlockPacketFrameMoves.left_move
+#print axioms Fresh.FourBlockPacketFrameMoves.outer_move
+#print axioms Fresh.FourBlockPacketFrameMoves.six_handoff
+#print axioms Fresh.UnitAPPacketFourCells.cell0_clear
+#print axioms Fresh.UnitAPPacketFourCells.clear0_cell
+#print axioms Fresh.UnitAPPacketFourCells.cell1_clear
+#print axioms Fresh.UnitAPPacketFourCells.clear1_cell
+#print axioms Fresh.UnitAPPacketFourCells.cell2_clear
+#print axioms Fresh.UnitAPPacketFourCells.clear2_cell
+#print axioms Fresh.UnitAPPacketFourCells.cell3_clear
+#print axioms Fresh.UnitAPPacketFourCells.clear3_cell
+#print axioms Fresh.UnitAPPacketFourLift.cell_iff
+#print axioms Fresh.UnitAPPacketFourLift.integer_lift
+#print axioms Fresh.UnitAPPacketFourLift.lifted_iff
+#print axioms Fresh.UnitAPPacketFourSymmetry.outer_reflection
+#print axioms Fresh.UnitAPPacketFourSymmetry.inner_reflection
+#print axioms Fresh.UnitAPPacketFourSymmetry.canonical_roles
+#print axioms Fresh.FourBlockAPAnchor.opening_identity
+#print axioms Fresh.FourBlockAPAnchor.anchor_phase
+#print axioms Fresh.FourBlockAPAnchor.packet_cell_iff
+#print axioms Fresh.FourBlockAPAnchor.anchor_clear
+#print axioms Fresh.FourBlockAPAnchorArrangement.all_subjects
+#print axioms Fresh.FourBlockAPAnchorArrangement.apAnchorClass_isolation
+#print axioms Fresh.FourBlockAPAnchorArrangement.partition_normal_form
+#print axioms Fresh.FourBlockAPAnchorArrangement.apAnchorCovered_isolation
+#print axioms Fresh.FourBlockLeftPacketLift.packet_phase
+#print axioms Fresh.FourBlockLeftPacketLift.retained_packet
+#print axioms Fresh.FourBlockLeftPacketLift.residual_bounds
+#print axioms Fresh.FourBlockLeftPacketLift.left_clear
+#print axioms Fresh.FourBlockLeftPacketLiftArrangement.all_subjects
+#print axioms Fresh.FourBlockLeftPacketLiftArrangement.leftPacketClass_isolation
+#print axioms Fresh.FourBlockLeftPacketLiftArrangement.packetLiftCovered_isolation
+#print axioms Fresh.FourBlockLeftPacketLiftArrangement.frameCovered_into_packetLiftCovered
+#print axioms Fresh.FourBlockPacketLiftMoves.anchor_capture
+#print axioms Fresh.FourBlockPacketLiftMoves.anchor_move
+#print axioms Fresh.FourBlockPacketLiftMoves.left_move
+#print axioms Fresh.UnitAPPacketFourCharts.chart_windows
+#print axioms Fresh.UnitAPPacketFourCharts.chart_clear
+#print axioms Fresh.UnitAPPacketFourCharts.clear_chart
+#print axioms Fresh.FourBlockLeftPacketCharts.packet_clear
+#print axioms Fresh.FourBlockLeftPacketCharts.packet_charts_iff
+#print axioms Fresh.FourBlockLeftPacketCharts.left_clear
+#print axioms Fresh.FourBlockLeftPacketCharts.left_move
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.all_subjects
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.leftChartsClass_isolation
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.finite_normal_form
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.leftPacket_into_leftCharts
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.chartsCovered_isolation
+#print axioms Fresh.FourBlockLeftPacketChartsArrangement.packetLiftCovered_into_chartsCovered
+#print axioms Fresh.FourBlockPacketChartJoins.chart_residual_bounds
+#print axioms Fresh.FourBlockPacketChartJoins.lower_face_opening
+#print axioms Fresh.FourBlockPacketChartJoins.lower_face_cell
+#print axioms Fresh.NativeOpeningRetention.opening_displacement
+#print axioms Fresh.NativeOpeningRetention.capture_advance
+#print axioms Fresh.NativeOpeningRetention.slower_window
+#print axioms Fresh.NativeOpeningRetention.weighted_window
+#print axioms Fresh.NativeOpeningRetention.weighted_upper
+#print axioms Fresh.UnitAPPacketChartMotion.chart_sector
+#print axioms Fresh.UnitAPPacketChartMotion.from_extrema
+#print axioms Fresh.UnitAPPacketChartMotion.transport
+#print axioms Fresh.UnitAPPacketChartMotion.transport_rebased
+#print axioms Fresh.UnitAPPacketChartMotion.whole_unit_join
+#print axioms Fresh.UnitAPPacketChartMotion.forward_roles
+#print axioms Fresh.FourBlockOutsideTransport.first_phase_advance
+#print axioms Fresh.FourBlockOutsideTransport.packet_transport
+#print axioms Fresh.FourBlockOutsideTransport.earlier_cut_order
+#print axioms Fresh.FourBlockOutsideTransport.fast_other_cuts
+#print axioms Fresh.FourBlockOutsideTransport.forced_fast_clear
+#print axioms Fresh.FourBlockOutsideTransport.forced_fast_move
+#print axioms Fresh.FourBlockForcedOutsideArrangement.forcedOutside_into_leftCharts
+#print axioms Fresh.FourBlockForcedOutsideArrangement.forcedOutside_isolation
+#print axioms Fresh.FourBlockForcedOutsideArrangement.finite_forward_roles
+#print axioms Fresh.FourBlockOutsideRebase.packet_transport_rebased
+#print axioms Fresh.FourBlockTwoOutside.third_cut_at_first
+#print axioms Fresh.FourBlockTwoOutside.middle_cuts_at_first
+#print axioms Fresh.FourBlockTwoOutside.sole_capture_move
+#print axioms Fresh.FourBlockTwoOutside.first_move
+#print axioms Fresh.FourBlockTwoOutside.two_moves
+#print axioms Fresh.NativeBoundaryJoins.opening_tie
+#print axioms Fresh.NativeBoundaryJoins.entering_side
+#print axioms Fresh.NativeBoundaryJoins.leaving_side
+#print axioms Fresh.NativeBoundaryJoins.singleton_between_faces
+#print axioms Fresh.UnitAPPacketThreeCharts.chart_windows
+#print axioms Fresh.UnitAPPacketThreeCharts.chart_clear
+#print axioms Fresh.UnitAPPacketThreeCharts.clear_chart
+#print axioms Fresh.FourBlockShortTail.tail_reading
+#print axioms Fresh.FourBlockShortTail.tail_lap
+#print axioms Fresh.FourBlockShortTail.reading_pos
+#print axioms Fresh.FourBlockShortTail.opening_identity
+#print axioms Fresh.FourBlockShortTail.capture_opening
+#print axioms Fresh.FourBlockShortTail.packet_phase
+#print axioms Fresh.FourBlockShortTail.packet_clear
+#print axioms Fresh.FourBlockShortTail.cut_clear
+#print axioms Fresh.FourBlockShortTail.cut_move
+#print axioms Fresh.FourBlockShortTailArrangement.all_subjects
+#print axioms Fresh.FourBlockShortTailArrangement.shortTailClass_isolation
+#print axioms Fresh.FourBlockShortTailArrangement.finite_normal_form
+#print axioms Fresh.FourBlockShortTailArrangement.shortTailCovered_isolation
+#print axioms Fresh.FourBlockShortTailArrangement.chartsCovered_into_shortTailCovered
+#print axioms Fresh.FourBlockShortOpening.reading_pos
+#print axioms Fresh.FourBlockShortOpening.opening_identity
+#print axioms Fresh.FourBlockShortOpening.all_cut_clear
+#print axioms Fresh.FourBlockShortOpening.opening_clear
+#print axioms Fresh.UnitAPPacketThreeCells.cell0_clear
+#print axioms Fresh.UnitAPPacketThreeCells.clear0_cell
+#print axioms Fresh.UnitAPPacketThreeCells.cell1_clear
+#print axioms Fresh.UnitAPPacketThreeCells.clear1_cell
+#print axioms Fresh.UnitAPPacketThreeCells.cell2_clear
+#print axioms Fresh.UnitAPPacketThreeCells.clear2_cell
+#print axioms Fresh.UnitAPPacketThreeCells.cell_iff
+#print axioms Fresh.UnitAPPacketThreeCells.lifted_iff
+#print axioms Fresh.FourBlockShortAnchor.opening_identity
+#print axioms Fresh.FourBlockShortAnchor.anchor_phase
+#print axioms Fresh.FourBlockShortAnchor.packet_cell_iff
+#print axioms Fresh.FourBlockShortAnchor.packet_bands_of_clear
+#print axioms Fresh.FourBlockShortAnchor.anchor_packet_bands
+#print axioms Fresh.FourBlockShortOpeningArrangement.all_subjects
+#print axioms Fresh.FourBlockShortOpeningArrangement.shortOpeningClass_isolation
+#print axioms Fresh.FourBlockShortOpeningArrangement.finite_normal_form
+#print axioms Fresh.FourBlockShortOpeningArrangement.shortTail_into_shortOpening
+#print axioms Fresh.FourBlockShortOpeningArrangement.shortOpeningCovered_isolation
+#print axioms Fresh.FourBlockShortOpeningArrangement.shortTailCovered_into_shortOpeningCovered
+#print axioms Fresh.FourBlockShortAnchorArrangement.opening_anchor_eq
+#print axioms Fresh.FourBlockShortAnchorArrangement.shortAnchor_into_shortOpening
+#print axioms Fresh.FourBlockShortAnchorArrangement.shortAnchor_isolation
+#print axioms Fresh.FourBlockShortOpeningMoves.capture_opening
+#print axioms Fresh.FourBlockShortOpeningMoves.opening_move
+#print axioms Fresh.NativeOpeningRecovery.opening_order_band
+#print axioms Fresh.NativeOpeningRecovery.opening_order_lower
+#print axioms Fresh.NativeOpeningRecovery.opening_order_upper
+#print axioms Fresh.NativeOpeningRecovery.recovered_window
+#print axioms Fresh.FourBlockOpeningRecovery.recovered_packet
+#print axioms Fresh.FourBlockOpeningRecovery.recovered_cuts
+#print axioms Fresh.FourBlockOpeningRecovery.recovered_clear
+#print axioms Fresh.FourBlockOpeningRecovery.recovered_move
+#print axioms Fresh.FourBlockOpeningRecoveryArrangement.recovery_into_leftCharts
+#print axioms Fresh.FourBlockOpeningRecoveryArrangement.recovery_isolation
+#print axioms Fresh.FourBlockOpeningRecoveryArrangement.finite_normal_form
+#print axioms Fresh.FourBlockRecoveryHandoffs.first_move
+#print axioms Fresh.FourBlockRecoveryHandoffs.two_handoffs
+#print axioms Fresh.FourBlockMiddlePacket.host_cases
+#print axioms Fresh.FourBlockMiddlePacket.packet_steps
+#print axioms Fresh.FourBlockMiddlePacket.packet_phase
+#print axioms Fresh.FourBlockMiddlePacket.packet_clear
+#print axioms Fresh.FourBlockMiddlePacket.opening_clear
+#print axioms Fresh.FourBlockMiddlePacket.opening_move
+#print axioms Fresh.FourBlockMiddlePacketArrangement.all_subjects
+#print axioms Fresh.FourBlockMiddlePacketArrangement.middlePacket_isolation
+#print axioms Fresh.FourBlockMiddlePacketArrangement.finite_normal_form
+#print axioms Fresh.FourBlockMiddlePacketArrangement.middleCovered_isolation
+#print axioms Fresh.FourBlockMiddlePacketArrangement.shortOpeningCovered_into_middleCovered
+#print axioms Fresh.FourBlockMiddlePacketJoins.nonsingleton_into_direct
+#print axioms Fresh.FourBlockMiddlePacketJoins.nondirect_middle_shape
+#print axioms Fresh.FourBlockDoubleSingleton.host_cases
+#print axioms Fresh.FourBlockDoubleSingleton.reading_abs
+#print axioms Fresh.FourBlockDoubleSingleton.opening_reading_pos
+#print axioms Fresh.FourBlockDoubleSingleton.packet_steps
+#print axioms Fresh.FourBlockDoubleSingleton.packet_phase
+#print axioms Fresh.FourBlockDoubleSingleton.endpoint_clear
+#print axioms Fresh.FourBlockDoubleSingleton.opening_move
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.endpoint_isolation
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.all_subjects
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.doubleSingleton_isolation
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.finite_normal_form
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.doubleCovered_isolation
+#print axioms Fresh.FourBlockDoubleSingletonArrangement.middleCovered_into_doubleCovered
+#print axioms Fresh.UnitAPPacketThreeMotion.chart_sector
+#print axioms Fresh.UnitAPPacketThreeMotion.from_extrema
+#print axioms Fresh.UnitAPPacketThreeMotion.transport
+#print axioms Fresh.UnitAPPacketThreeMotion.transport_rebased
+#print axioms Fresh.UnitAPPacketThreeMotion.whole_unit_join
+#print axioms Fresh.UnitAPPacketThreeMotion.forward_roles
+#print axioms Fresh.NativeOpeningFaces.lower_from_entry
+#print axioms Fresh.NativeOpeningFaces.upper_from_deficit
+#print axioms Fresh.FourBlockDoubleOpeningRecovery.opening_identity
+#print axioms Fresh.FourBlockDoubleOpeningRecovery.capture_advance
+#print axioms Fresh.FourBlockDoubleOpeningRecovery.recovered_packet
+#print axioms Fresh.FourBlockDoubleOpeningRecovery.recovered_cuts
+#print axioms Fresh.FourBlockDoubleOpeningRecovery.recovered_move
+#print axioms Fresh.FourBlockMiddleOpeningRecovery.recovered_packet
+#print axioms Fresh.FourBlockMiddleOpeningRecovery.recovered_cuts
+#print axioms Fresh.FourBlockMiddleOpeningRecovery.recovered_move
+#print axioms Fresh.FourBlockReversal.rev_rev
+#print axioms Fresh.FourBlockReversal.cut_complement
+#print axioms Fresh.FourBlockReversal.speed_reversal
+#print axioms Fresh.FourBlockReversal.lap_reversal
+#print axioms Fresh.FourBlockReversal.disparity_reversal
+#print axioms Fresh.FourBlockReversal.isolation_reversal
+#print axioms Fresh.FourBlockReversal.move_reversal
+#print axioms Fresh.FourBlockReversal.size_orientation
+#print axioms Fresh.FourBlockPacketEntryArrangement.endpointData_of_recovery
+#print axioms Fresh.FourBlockPacketEntryArrangement.doubleEntry_into_double
+#print axioms Fresh.FourBlockPacketEntryArrangement.double_into_doubleEntry
+#print axioms Fresh.FourBlockPacketEntryArrangement.doubleEntry_isolation
+#print axioms Fresh.FourBlockPacketEntryArrangement.middleEntry_into_middle
+#print axioms Fresh.FourBlockPacketEntryArrangement.middleEntry_isolation
+#print axioms Fresh.FastestCaptureRetention.terminal_move
+#print axioms Fresh.FastestCaptureRetention.fastestCapture_isolation
+#print axioms Fresh.FastestCaptureRecovery.captured_partner_window
+#print axioms Fresh.FastestCaptureRecovery.terminal_move
+#print axioms Fresh.FastestCaptureRecovery.recovery_isolation
+#print axioms Fresh.FastestCaptureRecovery.retained_into_recovery
+#print axioms Fresh.FastestCaptureRecovery.captured_order_of_move
+#print axioms Fresh.FastestCaptureRecovery.actual_into_recovery
+#print axioms Fresh.FastestCaptureRecovery.actual_isolation
+#print axioms Fresh.NativeRelativeCapture.retained_window
+#print axioms Fresh.NativeRelativeCapture.captured_window
+#print axioms Fresh.NativeRelativeCapture.terminal_clear
+#print axioms Fresh.NativeRelativeCapture.relative_isolation
+#print axioms Fresh.NativeRelativeCapture.fastest_into_relative
+#print axioms Fresh.NativeFirstClosing.propagate_upper
+#print axioms Fresh.NativeFirstClosing.quarter_implies_deficit
+#print axioms Fresh.NativeFirstClosing.deficit_iff_upper
+#print axioms Fresh.NativeFirstClosing.closing_at_opening
+#print axioms Fresh.NativeFirstClosing.exists_first_closing
+#print axioms Fresh.NativeReturnCapture.original_return_lower
+#print axioms Fresh.NativeReturnCapture.terminal_clear
+#print axioms Fresh.NativeReturnCapture.sharp_isolation
+#print axioms Fresh.NativeReturnCapture.quarter_into_sharp
+#print axioms Fresh.NativeReturnCapture.zero_into_sharp
+#print axioms Fresh.NativeReturnCapture.quarter_isolation
+#print axioms Fresh.NativeReturnCapture.zero_isolation
+#print axioms Fresh.NativeReturnCapture.return_roles
+#print axioms Fresh.NativeReturnCapture.return_nonnegative
+#print axioms Fresh.NativeReturnCapture.lifted_add
+#print axioms Fresh.NativeReturnJoins.relative_into_quarterZero
+#print axioms Fresh.NativeReturnJoins.quarterZero_into_quarter
+#print axioms Fresh.NativeReturnJoins.quarterZero_into_zero
+#print axioms Fresh.NativeReturnJoins.relative_into_zero
+#print axioms Fresh.NativeReturnJoins.relative_into_sharp
+#print axioms Fresh.NativeEntryLabels.entry_interval
+#print axioms Fresh.NativeEntryLabels.entry_iff_label
+#print axioms Fresh.NativeEntryLabels.label_entry
+#print axioms Fresh.NativeEntryLabels.entry_unique
+#print axioms Fresh.NativeEntryLabels.label_add_int
+#print axioms Fresh.NativeEntryLabels.label_monotone
+#print axioms Fresh.NativeEntryLabels.advance_identity
+#print axioms Fresh.NativeEntryLabels.advance_add
+#print axioms Fresh.NativeEntryLabels.selected_advance_zero
+#print axioms Fresh.NativeEntryLabels.sharp_labels
+#print axioms Fresh.NativeEntryLabels.sharp_labels_unique
+#print axioms Fresh.NativeReturnSurvivors.nonreturning_clear
+#print axioms Fresh.NativeReturnSurvivors.captured_implies_return
+#print axioms Fresh.NativeReturnSurvivors.inWay_iff_lower_not_passed
+#print axioms Fresh.NativeReturnSurvivors.capture_iff_returned_lower
+#print axioms Fresh.NativeReturnSurvivors.zero_returns_isolated
+#print axioms Fresh.NativeReturnSurvivors.crossproduct_capture
+#print axioms Fresh.NativeCanonicalReturn.returned_isolated
+#print axioms Fresh.NativeCanonicalReturn.canonical_isolation
+#print axioms Fresh.NativeCanonicalReturn.noReturn_into_canonical
+#print axioms Fresh.NativeCanonicalReturn.sharp_into_canonical
+#print axioms Fresh.NativeCanonicalReturn.canonical_into_sharp
+#print axioms Fresh.NativeCanonicalReturn.canonical_iff_sharp
+#print axioms Fresh.NativeCanonicalReturn.noReturn_isolation
+#print axioms Fresh.NativeReturnHandoff.survivor_iff
+#print axioms Fresh.NativeReturnHandoff.capture_at_label
+#print axioms Fresh.NativeReturnHandoff.next_at_label
+#print axioms Fresh.NativeReturnHandoff.forced_handoff
+#print axioms Fresh.NativeReturnHandoff.order_of_move
+#print axioms Fresh.NativeReturnHandoff.handoff_iff
+#print axioms Fresh.NativeReturnHandoff.sole_survivor_order
+#print axioms Fresh.NativeReturnHandoff.sole_survivor_handoff
+#print axioms Fresh.NativeReturnHandoff.tied_openings
+#print axioms Fresh.NativeReturnHandoff.exists_handoff
+#print axioms Fresh.NativeReturnHandoff.selected_not_survivor
+#print axioms Fresh.NativeReturnHandoff.predecessor_strict
+#print axioms Fresh.NativeReturnHandoff.handoff_identity
+#print axioms Fresh.NativeReturnHandoff.handoff_selected_zero
+#print axioms Fresh.NativeReturnHandoff.sole_return_replacement
+#print axioms Fresh.NativeReturnHandoff.equal_readings_order
+#print axioms Fresh.NativeReturnHandoff.equal_readings_handoff
+#print axioms Fresh.NativeReturnHandoff.equal_readings_replacement
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_into_noReturn
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_into_canonical
+#print axioms Fresh.NativeReturnHandoffArrangement.noReturn_into_recovered
+#print axioms Fresh.NativeReturnHandoffArrangement.sole_noReturn_into_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.sole_recovered_into_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_noReturn_isolation
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_recovered_isolation
+#print axioms Fresh.NativeReturnHandoffArrangement.two_moves_noReturn
+#print axioms Fresh.NativeReturnHandoffArrangement.two_moves_recovered
+#print axioms Fresh.NativeReturnHandoffArrangement.relative_entry_bands
+#print axioms Fresh.NativeReturnHandoffArrangement.relative_second_noReturns
+#print axioms Fresh.NativeReturnHandoffArrangement.relative_into_noReturn_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.sole_relative_into_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_relative_isolation
+#print axioms Fresh.NativeReturnHandoffArrangement.quarter_second_noReturns
+#print axioms Fresh.NativeReturnHandoffArrangement.quarter_into_noReturn_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.sole_quarter_into_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.relative_into_quarter_handoff
+#print axioms Fresh.NativeReturnHandoffArrangement.handoff_quarter_isolation
+#print axioms Fresh.NativeHandoffEntryFaces.noReturn_iff_original_upper
+#print axioms Fresh.NativeHandoffEntryFaces.sharp_iff_noReturn
+#print axioms Fresh.NativeHandoffEntryFaces.noReturn_exists_sharp
+#print axioms Fresh.NativeHandoffEntryFaces.sharp_into_noReturn
+#print axioms Fresh.NativeHandoffEntryFaces.noReturn_into_sharp
+#print axioms Fresh.NativeHandoffEntryFaces.quarter_into_sharp
+#print axioms Fresh.NativeHandoffEntryFaces.sole_sharp_into_handoff
+#print axioms Fresh.NativeHandoffEntryFaces.sharp_isolation
+#print axioms Fresh.NativeHandoffEntryFaces.noReturn_iff_closer_zero
+#print axioms Fresh.NativeHandoffEntryFaces.failed_sharp_forces_closer_return
+#print axioms Fresh.NativeReturnClosingOrder.zero_iff_original_upper
+#print axioms Fresh.NativeReturnClosingOrder.positive_iff_original_upper_crossed
+#print axioms Fresh.NativeReturnClosingOrder.positive_iff_closing_passed
+#print axioms Fresh.NativeReturnClosingOrder.earlier_closing_returns
+#print axioms Fresh.NativeReturnClosingOrder.tied_closings_return_together
+#print axioms Fresh.NativeReturnClosingOrder.returned_before_nonreturner
+#print axioms Fresh.NativeReturnClosingOrder.handoff_returner_before_setter
+#print axioms Fresh.NativeReturnClosingOrder.setter_first_closing_noReturn
+#print axioms Fresh.NativeReturnClosingOrder.selfClosing_into_noReturn
+#print axioms Fresh.NativeReturnClosingOrder.soleSelfClosing_into_selfClosing
+#print axioms Fresh.NativeReturnClosingOrder.selfClosing_isolation
+#print axioms Fresh.NativeSingleReturnRelay.entry_iff_single
+#print axioms Fresh.NativeSingleReturnRelay.outsider_zero
+#print axioms Fresh.NativeSingleReturnRelay.outsider_label
+#print axioms Fresh.NativeSingleReturnRelay.single_survivors
+#print axioms Fresh.NativeSingleReturnRelay.single_clear_iff_isolated
+#print axioms Fresh.NativeSingleReturnRelay.single_relay
+#print axioms Fresh.NativeSingleReturnRelay.single_dichotomy
+#print axioms Fresh.NativeSingleReturnRelay.relay_return_iff
+#print axioms Fresh.NativeSingleReturnRelay.relay_zero_iff_fits
+#print axioms Fresh.NativeSingleReturnRelay.relay_fits_isolated
+#print axioms Fresh.NativeSingleReturnArrangement.setter_outside
+#print axioms Fresh.NativeSingleReturnArrangement.exists_outside_first
+#print axioms Fresh.NativeSingleReturnArrangement.fits_iff_anchor
+#print axioms Fresh.NativeSingleReturnArrangement.relay_capture_iff
+#print axioms Fresh.NativeSingleReturnArrangement.outside_anchor_returns
+#print axioms Fresh.NativeSingleReturnArrangement.relay_into_noReturn
+#print axioms Fresh.NativeSingleReturnArrangement.anchor_into_relay
+#print axioms Fresh.NativeSingleReturnArrangement.relay_into_anchor
+#print axioms Fresh.NativeSingleReturnArrangement.recovery_into_recovered
+#print axioms Fresh.NativeSingleReturnArrangement.relay_isolation
+#print axioms Fresh.NativeSingleReturnArrangement.anchor_isolation
+#print axioms Fresh.NativeSingleReturnArrangement.recovery_isolation
+#print axioms Fresh.NativeSingleReturnArrangement.relay_three_moves
+#print axioms Fresh.NativeReturnGroupRelay.reset_move
+#print axioms Fresh.NativeReturnGroupRelay.compact_into_reset
+#print axioms Fresh.NativeReturnGroupRelay.common_returner_captured
+#print axioms Fresh.NativeReturnGroupRelay.common_move
+#print axioms Fresh.NativeReturnGroupRelay.common_into_reset
+#print axioms Fresh.NativeReturnGroupRelay.common_compact_representative
+#print axioms Fresh.NativeReturnGroupRelay.single_into_compact
+#print axioms Fresh.NativeReturnGroupRelay.reset_return_iff
+#print axioms Fresh.NativeReturnGroupRelay.reset_zero_iff_fits
+#print axioms Fresh.NativeReturnGroupRelay.reset_capture_iff
+#print axioms Fresh.NativeReturnGroupArrangement.exists_remaining_first
+#print axioms Fresh.NativeReturnGroupArrangement.fits_iff_remaining
+#print axioms Fresh.NativeReturnGroupArrangement.failed_remaining_returns
+#print axioms Fresh.NativeReturnGroupArrangement.reset_into_noReturn
+#print axioms Fresh.NativeReturnGroupArrangement.compact_into_reset_class
+#print axioms Fresh.NativeReturnGroupArrangement.common_into_compact_class
+#print axioms Fresh.NativeReturnGroupArrangement.anchor_into_compact_class
+#print axioms Fresh.NativeReturnGroupArrangement.compact_into_anchor_class
+#print axioms Fresh.NativeReturnGroupArrangement.single_into_compact_class
+#print axioms Fresh.NativeReturnGroupArrangement.compact_isolation
+#print axioms Fresh.NativeReturnGroupArrangement.common_isolation
+#print axioms Fresh.NativeReturnGroupArrangement.anchor_isolation
+#print axioms Fresh.NativeReturnGroupArrangement.compact_three_moves
+#print axioms Fresh.NativeReturnFaceHandoff.crossed_face_label
+#print axioms Fresh.NativeReturnFaceHandoff.crossed_face_next
+#print axioms Fresh.NativeReturnFaceHandoff.face_return_profile
+#print axioms Fresh.NativeReturnFaceHandoff.face_into_single
+#print axioms Fresh.NativeReturnFaceHandoff.face_survivors
+#print axioms Fresh.NativeReturnFaceHandoff.face_forces_handoff
+#print axioms Fresh.NativeReturnFaceHandoff.face_displaced_opening
+#print axioms Fresh.NativeReturnFaceHandoff.face_into_single_relay_class
+#print axioms Fresh.NativeReturnFaceHandoff.face_relay_isolation
+#print axioms Fresh.NativeReturnGroupFaces.exists_group_first
+#print axioms Fresh.NativeReturnGroupFaces.sharp_iff_group_zero
+#print axioms Fresh.NativeReturnGroupFaces.sharp_into_reset
+#print axioms Fresh.NativeReturnGroupFaces.quarter_into_sharp
+#print axioms Fresh.NativeReturnGroupFaces.compact_exists_quarter
+#print axioms Fresh.NativeReturnGroupFaces.sharp_into_reset_class
+#print axioms Fresh.NativeReturnGroupFaces.reset_class_into_sharp
+#print axioms Fresh.NativeReturnGroupFaces.quarter_into_sharp_class
+#print axioms Fresh.NativeReturnGroupFaces.compact_into_quarter_class
+#print axioms Fresh.NativeReturnGroupFaces.sharp_isolation
+#print axioms Fresh.NativeReturnGroupFaces.quarter_isolation
+#print axioms Fresh.NativeRepeatedReturn.advance_ge_iff_level
+#print axioms Fresh.NativeRepeatedReturn.advance_ge_iff_remaining
+#print axioms Fresh.NativeRepeatedReturn.handoff_level_iff
+#print axioms Fresh.NativeRepeatedReturn.captured_return_ratio
+#print axioms Fresh.NativeRepeatedReturn.captured_repeat_fast
+#print axioms Fresh.NativeRepeatedReturn.captured_repeat_one_if_le_seven
+#print axioms Fresh.NativeRepeatedReturn.failed_group_first_returns
+#print axioms Fresh.NativeRepeatedReturn.failed_group_split
+#print axioms Fresh.NativeRepeatedReturn.recovered_remaining_gap
+#print axioms Fresh.NativeRepeatedReturn.repeated_first_level_iff
+#print axioms Fresh.NativeRepeatedReturn.carried_return_ratio
+#print axioms Fresh.NativeRepeatedReturnArrangement.two_prefixes_return_iff
+#print axioms Fresh.NativeRepeatedReturnArrangement.entry_into_single
+#print axioms Fresh.NativeRepeatedReturnArrangement.single_into_entry
+#print axioms Fresh.NativeRepeatedReturnArrangement.repeated_dichotomy
+#print axioms Fresh.NativeRepeatedReturnArrangement.recovery_into_single
+#print axioms Fresh.NativeRepeatedReturnArrangement.relay_into_single
+#print axioms Fresh.NativeRepeatedReturnArrangement.recovery_isolation
+#print axioms Fresh.NativeRepeatedReturnArrangement.relay_isolation
+#print axioms Fresh.NativeRepeatedReturnArrangement.recoveredRelay_into_handoff
+#print axioms Fresh.NativeRepeatedReturnArrangement.relay_into_recoveredRelay
+#print axioms Fresh.NativeRepeatedReturnArrangement.recoveredRelay_isolation
+#print axioms Fresh.NativeRepeatedReturnLabels.returned_label_positive
+#print axioms Fresh.NativeRepeatedReturnLabels.captured_repeat_label_ladder
+#print axioms Fresh.NativeRepeatedReturnLabels.captured_repeat_label_triple
+#print axioms Fresh.NativeRepeatedReturnLabels.captured_repeat_label_seven
+#print axioms Fresh.NativeRepeatedReturnLabels.carried_repeat_label_ladder
+#print axioms Fresh.NativeRepeatedReturnLabels.carried_repeat_label_four
+#print axioms Fresh.NativeReturnExcursion.excursion_identity
+#print axioms Fresh.NativeReturnExcursion.advance_exact_iff
+#print axioms Fresh.NativeReturnExcursion.capture_iff_excursion
+#print axioms Fresh.NativeReturnExcursion.clear_iff_excursion
+#print axioms Fresh.NativeReturnExcursion.handoff_capture_band
+#print axioms Fresh.NativeExcursionArrangement.bands_force_advances
+#print axioms Fresh.NativeExcursionArrangement.recovered_iff_clear
+#print axioms Fresh.NativeExcursionArrangement.group_survivors
+#print axioms Fresh.NativeExcursionArrangement.group_forces_move
+#print axioms Fresh.NativeExcursionArrangement.retained_into_relative
+#print axioms Fresh.NativeExcursionArrangement.recovery_isolation
+#print axioms Fresh.NativeExcursionArrangement.relay_into_relative
+#print axioms Fresh.NativeExcursionArrangement.relay_isolation
+#print axioms Fresh.NativeExcursionArrangement.recovery_into_recovered
+#print axioms Fresh.NativeExcursionOpeningOrder.residual_identity
+#print axioms Fresh.NativeExcursionOpeningOrder.residual_positive_iff
+#print axioms Fresh.NativeExcursionOpeningOrder.residual_order_iff
+#print axioms Fresh.NativeExcursionOpeningOrder.residual_forces_handoff
+#print axioms Fresh.NativeExcursionOpeningOrder.nextFaces_into_relative
+#print axioms Fresh.NativeExcursionOpeningOrder.relay_into_relative
+#print axioms Fresh.NativeExcursionOpeningOrder.relay_isolation
+#print axioms Fresh.NativeExcursionOpeningOrder.singleGroup_into_residual
+#print axioms Fresh.NativeSurvivorDominance.dominated_opening_strict
+#print axioms Fresh.NativeSurvivorDominance.dominated_not_selected
+#print axioms Fresh.NativeSurvivorDominance.selected_label_record
+#print axioms Fresh.NativeSurvivorDominance.unique_frontier_handoff
+#print axioms Fresh.NativeSurvivorDominance.frontier_into_quarter
+#print axioms Fresh.NativeSurvivorDominance.frontier_isolation
+#print axioms Fresh.NativeSurvivorDominance.entry_selected_label_record
+#print axioms Fresh.NativeExcursionEntryInvariance.excursion_cancel
+#print axioms Fresh.NativeExcursionEntryInvariance.residual_cancel
+#print axioms Fresh.NativeExcursionEntryInvariance.same_labels_excursion
+#print axioms Fresh.NativeExcursionEntryInvariance.same_labels_residual
+#print axioms Fresh.NativeExcursionEntryInvariance.same_labels_opening
+#print axioms Fresh.NativeExcursionEntryInvariance.bands_entry_invariant
+#print axioms Fresh.NativeExcursionEntryInvariance.residual_order_entry_invariant
+#print axioms Fresh.NativeExcursionEntryInvariance.earlier_same_labels_move
+#print axioms Fresh.NativeExcursionEntryInvariance.same_labels_advances
+#print axioms Fresh.NativeOpeningFaceExchange.order_iff_opening_le
+#print axioms Fresh.NativeOpeningFaceExchange.two_candidate_move
+#print axioms Fresh.NativeOpeningFaceExchange.tie_residue_cross
+#print axioms Fresh.NativeOpeningFaceExchange.opening_scale
+#print axioms Fresh.NativeOpeningFaceExchange.face_order_iff
+#print axioms Fresh.NativeOpeningFaceExchange.face_order_strict_iff
+#print axioms Fresh.NativeOpeningFaceExchange.face_order_reverse_iff
+#print axioms Fresh.NativeCapturedPartnerJoin.partner_zero
+#print axioms Fresh.NativeCapturedPartnerJoin.cohort_move
+#print axioms Fresh.NativeCapturedPartnerJoin.cohort_into_partner
+#print axioms Fresh.NativeCapturedPartnerJoin.partner_into_noReturn
+#print axioms Fresh.NativeCapturedPartnerJoin.partner_isolation
+#print axioms Fresh.NativeCapturedPartnerJoin.cohort_isolation
+#print axioms Fresh.NativeCapturedPartnerJoin.cohort_residue_one
+#print axioms Fresh.NativeCapturedPartnerJoin.compact_into_partner
+#print axioms Fresh.NativeCapturedPartnerJoin.partner_into_compact
+#print axioms Fresh.NativeCapturedPartnerJoin.compact_isolation
+#print axioms Fresh.NativeCapturedPartnerJoin.relative_into_compact
+#print axioms Fresh.NativeCapturedPartnerJoin.face_into_partner
+#print axioms Fresh.NativeCapturedPartnerJoin.face_isolation
+#print axioms Fresh.NativeCapturedPartnerJoin.scaled_opening
+#print axioms Fresh.NativeCapturedPartnerJoin.grid_into_cohort
+#print axioms Fresh.NativeCapturedPartnerJoin.cohort_into_grid
+#print axioms Fresh.NativeCohortReturns.cohort_member_zero
+#print axioms Fresh.NativeCohortReturns.cohort_return_iff
+#print axioms Fresh.NativeCohortReturns.cohort_capture_outside
+#print axioms Fresh.NativeCohortReturns.cohort_isolated_iff_outsiders
+#print axioms Fresh.NativeCohortReturns.recovered_into_canonical
+#print axioms Fresh.NativeCohortReturns.retained_into_recovered
+#print axioms Fresh.NativeCohortReturns.recovered_isolation
+#print axioms Fresh.NativeCohortOutsiderRelay.label_at_opening
+#print axioms Fresh.NativeCohortOutsiderRelay.zero_from_opening_iff
+#print axioms Fresh.NativeCohortOutsiderRelay.capture_from_opening_iff
+#print axioms Fresh.NativeCohortOutsiderRelay.cohort_opening_identity
+#print axioms Fresh.NativeCohortOutsiderRelay.clear_from_opening_iff
+#print axioms Fresh.NativeCohortOutsiderRelay.cohort_recovery_iff
+#print axioms Fresh.NativeCohortOutsiderRelay.exists_fastest
+#print axioms Fresh.NativeCohortOutsiderRelay.fastest_retention_iff
+#print axioms Fresh.NativeCohortOutsiderRelay.outsider_forces_move
+#print axioms Fresh.NativeCohortOutsiderRelay.guard_of_ratio
+#print axioms Fresh.NativeCohortOutsiderRelay.returned_cohort_forces_slow_setter
+#print axioms Fresh.NativeCohortOutsiderRelay.partner_iff_outsider_faces
+#print axioms Fresh.NativeCohortOutsiderRelay.outsiderPartner_into_partner
+#print axioms Fresh.NativeCohortOutsiderRelay.outsiderPartner_isolation
+#print axioms Fresh.NativeCohortOutsiderRelay.outsiderRecovery_into_canonical
+#print axioms Fresh.NativeCohortOutsiderRelay.outsiderRecovery_isolation
+#print axioms Fresh.NativeCohortReturnOrder.return_opening
+#print axioms Fresh.NativeCohortReturnOrder.return_order_iff
+#print axioms Fresh.NativeCohortReturnOrder.return_opening_le_iff
+#print axioms Fresh.NativeCohortReturnOrder.same_level_order
+#print axioms Fresh.NativeCohortReturnOrder.recapture_positive
+#print axioms Fresh.NativeCohortReturnOrder.exists_level_frontier
+#print axioms Fresh.NativeCohortReturnOrder.frontier_order_iff
+#print axioms Fresh.NativeCohortReturnOrder.return_order_forces_move
+#print axioms Fresh.NativeCohortReturnOrder.same_level_forces_move
+#print axioms Fresh.NativeCohortReturnOrder.frontier_forces_move
+#print axioms Fresh.NativeCohortReturnOrder.returnPartner_into_partner
+#print axioms Fresh.NativeCohortReturnOrder.returnPartner_isolation
+#print axioms Fresh.NativeCohortReturnOrder.returnRecovery_into_canonical
+#print axioms Fresh.NativeCohortReturnOrder.returnRecovery_isolation
+#print axioms Fresh.NativeCohortReturnOrder.return_closing
+#print axioms Fresh.NativeCohortReturnOrder.exists_closing_frontier
+#print axioms Fresh.NativeCohortReturnOrder.frontier_closing_iff
+#print axioms Fresh.NativeCohortReturnOrder.frontierRetained_into_noReturn
+#print axioms Fresh.NativeCohortReturnOrder.frontierRetained_isolation
+#print axioms Fresh.NativeSelectedLevelClearance.equal_level_compact
+#print axioms Fresh.NativeSelectedLevelClearance.equal_level_sharp
+#print axioms Fresh.NativeSelectedLevelClearance.same_level_compact
+#print axioms Fresh.NativeSelectedLevelClearance.selected_level_zero
+#print axioms Fresh.NativeSelectedLevelClearance.selected_level_clear
+#print axioms Fresh.NativeSelectedLevelClearance.next_capture_sources
+#print axioms Fresh.NativeSelectedLevelClearance.homogeneous_forces_move
+#print axioms Fresh.NativeSelectedLevelClearance.homogeneousRetained_into_noReturn
+#print axioms Fresh.NativeSelectedLevelClearance.homogeneousRetained_isolation
+#print axioms Fresh.NativeReturnLevelClearance.displacement_bounds
+#print axioms Fresh.NativeReturnLevelClearance.early_displacement
+#print axioms Fresh.NativeReturnLevelClearance.two_level_compact
+#print axioms Fresh.NativeReturnLevelClearance.early_level_compact
+#print axioms Fresh.NativeReturnLevelClearance.paired_phase_compact
+#print axioms Fresh.NativeReturnLevelClearance.captured_ratio_zero
+#print axioms Fresh.NativeReturnLevelClearance.paired_phase_zero
+#print axioms Fresh.NativeReturnLevelClearance.equal_recap_forces_pair_face
+#print axioms Fresh.NativeReturnLevelClearance.guarded_compact
+#print axioms Fresh.NativeReturnLevelClearance.guarded_level_zero
+#print axioms Fresh.NativeReturnLevelClearance.equal_level_recap_forces_late_one
+#print axioms Fresh.NativeReturnLevelClearance.levelRecovery_into_canonical
+#print axioms Fresh.NativeReturnLevelClearance.levelRecovery_isolation
+#print axioms Fresh.NativeReturnLevelClearance.phaseRecovery_into_canonical
+#print axioms Fresh.NativeReturnLevelClearance.phaseRecovery_isolation
+#print axioms Fresh.NativeReturnLevelClearance.next_capture_trichotomy
+#print axioms Fresh.NativeOrderedReturnLevels.general_phase_compact
+#print axioms Fresh.NativeOrderedReturnLevels.ordered_guard_face
+#print axioms Fresh.NativeOrderedReturnLevels.general_phase_zero
+#print axioms Fresh.NativeOrderedReturnLevels.ordered_guard_zero
+#print axioms Fresh.NativeOrderedReturnLevels.recapture_pair_face
+#print axioms Fresh.NativeOrderedReturnLevels.recapture_level_order
+#print axioms Fresh.NativeOrderedReturnLevels.next_capture_ordered_trichotomy
+#print axioms Fresh.NativeOrderedReturnLevels.maxLevel_into_noReturn
+#print axioms Fresh.NativeOrderedReturnLevels.maxLevel_isolation
+#print axioms Fresh.NativeOrderedReturnLevels.orderedRecovery_into_canonical
+#print axioms Fresh.NativeOrderedReturnLevels.orderedRecovery_isolation
+#print axioms Fresh.NativeOrderedReturnLevels.generalPhase_into_canonical
+#print axioms Fresh.NativeOrderedReturnLevels.generalPhase_isolation
+#print axioms Fresh.NativeOrderedReturnLevels.coupled_return_levels
+#print axioms Fresh.NativeOrderedReturnLevels.levelRecovery_into_ordered
+#print axioms Fresh.NativeOrderedReturnLevels.orderedRecovery_into_level
+#print axioms Fresh.NativeTwoSetterPacket.two_deficits_upper
+#print axioms Fresh.NativeTwoSetterPacket.two_setter_zero
+#print axioms Fresh.NativeTwoSetterPacket.two_setter_zero_split
+#print axioms Fresh.NativeTwoSetterPacket.entry_speed_face
+#print axioms Fresh.NativeTwoSetterPacket.old_setter_return_late
+#print axioms Fresh.NativeTwoSetterPacket.entry_phase_retains_old_setter
+#print axioms Fresh.NativeTwoSetterPacket.high_packet_compact
+#print axioms Fresh.NativeTwoSetterPacket.new_high_speed
+#print axioms Fresh.NativeTwoSetterPacket.double_high_old_zero
+#print axioms Fresh.NativeTwoSetterPacket.twoSetter_into_partner
+#print axioms Fresh.NativeTwoSetterPacket.twoSetter_isolation
+#print axioms Fresh.NativeTwoSetterPacket.doubleHigh_into_canonical
+#print axioms Fresh.NativeTwoSetterPacket.doubleHigh_isolation
+#print axioms Fresh.NativeTwoSetterPacket.cohort_phase_retains
+#print axioms Fresh.NativeTwoSetterPacket.cohortPhase_into_canonical
+#print axioms Fresh.NativeTwoSetterPacket.cohortPhase_isolation
+#print axioms Fresh.NativeTwoSetterPacket.two_excess_identity
+#print axioms Fresh.NativeTwoSetterPacket.two_excess_zero_iff
+#print axioms Fresh.NativeTwoSetterPacket.two_excess_capture_iff
+#print axioms Fresh.NativeOneReaderDeformation.clear_opening_le
+#print axioms Fresh.NativeOneReaderDeformation.captured_opening
+#print axioms Fresh.NativeOneReaderDeformation.insert_move
+#print axioms Fresh.NativeOneReaderDeformation.insert_step
+#print axioms Fresh.NativeOneReaderDeformation.unchanged_move_iff
+#print axioms Fresh.NativeOneReaderDeformation.displacing_move
+#print axioms Fresh.NativeOneReaderDeformation.move_passes_entry_opening
+#print axioms Fresh.NativeOneReaderDeformation.union_move_iff
+#print axioms Fresh.NativeOneReaderDeformation.others_pos
+#print axioms Fresh.NativeOneReaderDeformation.insert_others
+#print axioms Fresh.NativeOneReaderDeformation.physical_step
+#print axioms Fresh.NativeOneReaderDeformation.same_others
+#print axioms Fresh.NativeOneReaderDeformation.physical_deformation_step
+#print axioms Fresh.NativeOneReaderDeformation.physical_deformation_move_iff
+#print axioms Fresh.NativeOneReaderDeformation.same_label_monotone
+#print axioms Fresh.NativeOneReaderDeformation.positive_entry_label
+#print axioms Fresh.NativeOneReaderDeformation.positive_same_label_monotone
+#print axioms Fresh.NativeOneReaderDeformation.same_comparison_coalesces
+#print axioms Fresh.NativeOneReaderDeformation.inserted_lonely_iff
+#print axioms Fresh.NativeOneReaderDeformation.clear_at_comparison_forces_move
+#print axioms Fresh.NativeOneReaderDeformation.isolating_comparison_iff
+#print axioms Fresh.NativeOneReaderDeformation.paired_face_difference
+#print axioms Fresh.NativeOneReaderDeformation.opening_tie_closing_order
+#print axioms Fresh.NativeOneReaderDeformation.both_ties_same_reading
+#print axioms Fresh.NativeCoalescedCaptureRelay.move_of_opening_record
+#print axioms Fresh.NativeCoalescedCaptureRelay.same_labels_nonfixed_move
+#print axioms Fresh.NativeCoalescedCaptureRelay.own_opening_labelled
+#print axioms Fresh.NativeCoalescedCaptureRelay.own_opening_next_move
+#print axioms Fresh.NativeCoalescedCaptureRelay.own_opening_next_step
+#print axioms Fresh.NativeCoalescedCaptureRelay.two_stage_coalescence
+#print axioms Fresh.NativeCoalescedCaptureRelay.delete_current_capture_move
+#print axioms Fresh.NativeCoalescedCaptureRelay.clear_part_preserves_move
+#print axioms Fresh.NativeCoalescedCaptureRelay.captured_part_sets_next
+#print axioms Fresh.NativeCoalescedCaptureRelay.selected_openings_recoalesce
+#print axioms Fresh.NativeCoalescedCaptureRelay.label_between
+#print axioms Fresh.NativeCoalescedCaptureRelay.speed_interval_label
+#print axioms Fresh.NativeCoalescedCaptureRelay.speed_interval_capture
+#print axioms Fresh.NativeCoalescedCaptureRelay.interval_opening_bounds
+#print axioms Fresh.NativeCoalescedCaptureRelay.delayed_interval_moves
+#print axioms Fresh.NativeCoalescedCaptureRelay.interval_clearance
+#print axioms Fresh.NativeCoalescedCaptureRelay.delayed_interval_isolated
+#print axioms Fresh.NativeCoalescedCaptureRelay.sole_capture_handoff
+#print axioms Fresh.NativeCoalescedCaptureRelay.sole_capture_fits_partner
+#print axioms Fresh.NativeCoalescedCaptureArrangement.soleFits_into_partner
+#print axioms Fresh.NativeCoalescedCaptureArrangement.soleFits_isolation
+#print axioms Fresh.NativeCoalescedCaptureArrangement.soleFits_into_old_sole
+#print axioms Fresh.NativeCoalescedCaptureArrangement.old_sole_into_soleFits
+#print axioms Fresh.NativeCoalescedCaptureArrangement.soleFits_iff_old_sole
+#print axioms Fresh.NativeCoalescedCaptureArrangement.rejoinInterval_isolation
+#print axioms Fresh.NativeCoalescedCaptureArrangement.rejoinInterval_into_canonical
+#print axioms Fresh.NativeFixedPrefixTransport.native_seq_monotone
+#print axioms Fresh.NativeFixedPrefixTransport.prefix_same_iff_faces
+#print axioms Fresh.NativeFixedPrefixTransport.clear_entry_insert_move
+#print axioms Fresh.NativeFixedPrefixTransport.band_at_point
+#print axioms Fresh.NativeFixedPrefixTransport.interval_band_at_point
+#print axioms Fresh.NativeFixedPrefixTransport.band_keeps_supplied_states
+#print axioms Fresh.NativeFixedPrefixTransport.band_implies_faces
+#print axioms Fresh.NativeFixedPrefixTransport.band_prefix_same
+#print axioms Fresh.NativeFixedPrefixTransport.earliest_closing_implies_band
+#print axioms Fresh.NativeFixedPrefixTransport.exists_earliest_added
+#print axioms Fresh.NativeFixedPrefixTransport.earliest_closing_prefix_same
+#print axioms Fresh.NativeFixedPrefixTransport.prefix_recovered_endpoint
+#print axioms Fresh.NativeFixedPrefixTransport.interval_singleton_band
+#print axioms Fresh.NativeFixedPrefixTransport.first_failed_face_changes_next
+#print axioms Fresh.NativeFixedPrefixTransport.interval_prefix_faces
+#print axioms Fresh.NativeFixedPrefixTransport.nonfinal_interval_faces
+#print axioms Fresh.NativeFixedPrefixArrangement.part_pos
+#print axioms Fresh.NativeFixedPrefixArrangement.outside_pos
+#print axioms Fresh.NativeFixedPrefixArrangement.part_union_outside
+#print axioms Fresh.NativeFixedPrefixArrangement.prefix_endpoint_captures_outside
+#print axioms Fresh.NativeFixedPrefixArrangement.canonical_of_isolating_move
+#print axioms Fresh.NativeFixedPrefixArrangement.prefixRecovery_into_canonical
+#print axioms Fresh.NativeFixedPrefixArrangement.prefixRecovery_isolation
+#print axioms Fresh.NativeFixedPrefixArrangement.closingGuard_into_prefixRecovery
+#print axioms Fresh.NativeFixedPrefixArrangement.closingGuard_isolation
+#print axioms Fresh.NativeFixedPrefixArrangement.erased_outside
+#print axioms Fresh.NativeFixedPrefixArrangement.tailInterval_into_prefixRecovery
+#print axioms Fresh.NativeFixedPrefixArrangement.tailInterval_isolation
+#print axioms Fresh.NativeFixedPrefixArrangement.terminalInterval_into_partner
+#print axioms Fresh.NativeFixedPrefixArrangement.terminalInterval_isolation
+#print axioms Fresh.NativeGroupEndpointRecovery.endpoint_clear_preserves_move
+#print axioms Fresh.NativeGroupEndpointRecovery.endpoint_union_lonely
+#print axioms Fresh.NativeGroupEndpointRecovery.subgroup_prefix_lower_bound
+#print axioms Fresh.NativeGroupEndpointRecovery.restart_future_iff
+#print axioms Fresh.NativeGroupEndpointRecovery.restart_isolated_endpoints_equal
+#print axioms Fresh.NativeGroupEndpointRecovery.groupEndpoint_into_canonical
+#print axioms Fresh.NativeGroupEndpointRecovery.groupEndpoint_isolation
+#print axioms Fresh.NativeGroupEndpointRecovery.prefixRecovery_into_groupEndpoint
+#print axioms Fresh.NativeGroupEndpointRecovery.closingGuard_into_groupEndpoint
+#print axioms Fresh.NativeGroupEndpointRecovery.tailInterval_into_groupEndpoint
+#print axioms Fresh.NativeGroupEndpointRecovery.endpoint_capture_outside
+#print axioms Fresh.NativeGroupEndpointRecovery.physical_restart_future_iff
+#print axioms Fresh.NativePacketRestartExchange.captures_subset
+#print axioms Fresh.NativePacketRestartExchange.captures_disjoint_group
+#print axioms Fresh.NativePacketRestartExchange.captures_proper
+#print axioms Fresh.NativePacketRestartExchange.captures_empty_iff
+#print axioms Fresh.NativePacketRestartExchange.packet_restart_future_iff
+#print axioms Fresh.NativePacketRestartExchange.successive_packets_disjoint
+#print axioms Fresh.NativePacketRestartExchange.exchangeEndpoint_into_groupEndpoint
+#print axioms Fresh.NativePacketRestartExchange.exchangeEndpoint_isolation
+#print axioms Fresh.NativePacketRestartExchange.two_group_restart_future_iff
+#print axioms Fresh.NativePacketUnionCompression.fragment_below_isolation
+#print axioms Fresh.NativePacketUnionCompression.fragment_first_union_isolation
+#print axioms Fresh.NativePacketUnionCompression.fragment_start_le
+#print axioms Fresh.NativePacketUnionCompression.fragment_fixed_union_endpoint
+#print axioms Fresh.NativePacketUnionCompression.fragment_exit_outside
+#print axioms Fresh.NativePacketUnionCompression.physical_fragment_first_isolation
+#print axioms Fresh.NativePacketUnionCompression.fragment_recovery_into_canonical
+#print axioms Fresh.NativeOpeningReversal.opening_recapture_positive
+#print axioms Fresh.NativeOpeningReversal.recapture_forces_separation
+#print axioms Fresh.NativeOpeningReversal.recapture_forces_three
+#print axioms Fresh.NativeOpeningReversal.own_opening_retained
+#print axioms Fresh.NativeOpeningReversal.reversal_clears_pair
+#print axioms Fresh.NativeOpeningReversal.labelled_opening_identity
+#print axioms Fresh.NativeOpeningReversal.singleton_captured_move
+#print axioms Fresh.NativeOpeningReversal.pair_first_move
+#print axioms Fresh.NativeOpeningReversal.pair_last_move_and_clear
+#print axioms Fresh.NativeOpeningReversalArrangement.pairRecovery_into_canonical
+#print axioms Fresh.NativeOpeningReversalArrangement.pairRecovery_isolation
+#print axioms Fresh.NativeOpeningReversalArrangement.pairGuard_into_recovery
+#print axioms Fresh.NativeOpeningReversalArrangement.pairGuard_isolation
+#print axioms Fresh.NativeOpeningReversalArrangement.reversal_interval_endpoint
+#print axioms Fresh.NativeOpeningReversalArrangement.pair_endpoint_captures_outside
+#print axioms Fresh.NativeOpeningReversalArrangement.pair_endpoint_dichotomy
+#print axioms Fresh.NativeThirdReaderRetention.captured_labelled_advance
+#print axioms Fresh.NativeThirdReaderRetention.pair_end_after
+#print axioms Fresh.NativeThirdReaderRetention.pair_tail_weighted
+#print axioms Fresh.NativeThirdReaderRetention.composed_displacement
+#print axioms Fresh.NativeThirdReaderRetention.old_opening_retained
+#print axioms Fresh.NativeThirdReaderRetention.triple_clear
+#print axioms Fresh.NativeThirdReaderRetention.simple_seven_three_fit
+#print axioms Fresh.NativeThirdReaderRetention.recaptured_old_forces_slow_third
+#print axioms Fresh.NativeThirdReaderRetention.old_speed_interval_fit
+#print axioms Fresh.NativeThirdReaderArrangement.tripleRecovery_into_canonical
+#print axioms Fresh.NativeThirdReaderArrangement.tripleRecovery_isolation
+#print axioms Fresh.NativeThirdReaderArrangement.simpleTriple_into_recovery
+#print axioms Fresh.NativeThirdReaderArrangement.tripleGuard_into_recovery
+#print axioms Fresh.NativeThirdReaderArrangement.triple_endpoint_captures_outside
+#print axioms Fresh.NativeThirdReaderArrangement.interval_opening_states
+#print axioms Fresh.NativeThirdReaderArrangement.interval_third_clear
+#print axioms Fresh.NativeThirdReaderArrangement.opening_band_third_clear
+#print axioms Fresh.NativeThirdReaderRebound.small_old_fit
+#print axioms Fresh.NativeThirdReaderRebound.three_clear
+#print axioms Fresh.NativeThirdReaderRebound.rebound_resolution
+#print axioms Fresh.NativeThirdReaderRebound.forced_triple_resolution
+#print axioms Fresh.NativeThirdReaderRebound.anchor_rebound_endpoint
+#print axioms Fresh.NativeThirdReaderRebound.changed_anchor_rebound_endpoint
+#print axioms Fresh.NativeThirdReaderForcedArrangement.fitted_forced_end_eq
+#print axioms Fresh.NativeThirdReaderForcedArrangement.forcedTriple_into_canonical
+#print axioms Fresh.NativeThirdReaderForcedArrangement.forcedTriple_isolation
+#print axioms Fresh.NativeThirdReaderForcedArrangement.simpleTriple_into_forced
+#print axioms Fresh.NativeThirdReaderForcedArrangement.forcedTripleGuard_into_forced
+#print axioms Fresh.NativeThirdReaderForcedArrangement.forced_triple_capture_outside
+#print axioms Fresh.NativeResidualReturn.clear_phase_bounds
+#print axioms Fresh.NativeResidualReturn.clear_recapture_positive
+#print axioms Fresh.NativeResidualReturn.residual_displacement
+#print axioms Fresh.NativeResidualReturn.residual_speed_face
+#print axioms Fresh.NativeResidualReturn.multi_return_speed_gap
+#print axioms Fresh.NativeResidualReturn.early_phase_compact
+#print axioms Fresh.NativeResidualReturn.inverse_rebound_late_one
+#print axioms Fresh.NativeResidualReturn.residual_first_move
+#print axioms Fresh.NativeResidualReturn.residual_pair_resolution
+#print axioms Fresh.NativeResidualReturn.compact_residual_landing
+#print axioms Fresh.NativeResidualReturn.inverse_three_reader_resolution
+#print axioms Fresh.NativeResidualReturnBands.recaptured_terminal_landing
+#print axioms Fresh.NativeResidualReturnBands.interval_return_state
+#print axioms Fresh.NativeResidualReturnBands.compact_interval_landing
+#print axioms Fresh.NativeResidualReturnBands.terminal_window_interval_landing
+#print axioms Fresh.NativeResidualReturnArrangement.residualRecovery_into_pair
+#print axioms Fresh.NativeResidualReturnArrangement.residualRecovery_isolation
+#print axioms Fresh.NativeResidualReturnArrangement.residualGuard_into_recovery
+#print axioms Fresh.NativeResidualReturnArrangement.residualCompact_into_recovery
+#print axioms Fresh.NativeResidualReturnArrangement.residualEarly_into_recovery
+#print axioms Fresh.NativeResidualReturnArrangement.residualBand_into_recovery
+#print axioms Fresh.NativeResidualReturnArrangement.residualSoleClosing_into_soleSharp
+#print axioms Fresh.NativeResidualReturnArrangement.residualInverse_into_forcedTriple
+#print axioms Fresh.NativeOutsideGroupDisplacement.own_pair_compact_end
+#print axioms Fresh.NativeOutsideGroupDisplacement.direct_tail_displacement
+#print axioms Fresh.NativeOutsideGroupDisplacement.rebound_tail_displacement
+#print axioms Fresh.NativeOutsideGroupDisplacement.forced_tail_displacement
+#print axioms Fresh.NativeOutsideGroupDisplacement.captured_group_window
+#print axioms Fresh.NativeOutsideGroupDisplacement.captured_group_zero
+#print axioms Fresh.NativeOutsideGroupDisplacement.captured_group_segment
+#print axioms Fresh.NativeOutsideGroupDisplacement.captured_group_interval
+#print axioms Fresh.NativeOutsideGroupArrangement.entry_core_clear
+#print axioms Fresh.NativeOutsideGroupArrangement.packet_core_clear
+#print axioms Fresh.NativeOutsideGroupArrangement.outsideRecovery_into_canonical
+#print axioms Fresh.NativeOutsideGroupArrangement.outsideRecovery_isolation
+#print axioms Fresh.NativeOutsideGroupArrangement.outsideGuard_into_recovery
+#print axioms Fresh.NativeOutsideGroupArrangement.allOutsideCaptured_into_guard
+#print axioms Fresh.NativeOutsideGroupArrangement.allOutsideCaptured_isolation
+#print axioms Fresh.NativeOutsideGroupArrangement.independentBand_into_allCaptured
+#print axioms Fresh.NativeOutsideGroupArrangement.firstWatcher_into_guard
+#print axioms Fresh.NativeOutsideGroupArrangement.new_capture_is_watcher
+#print axioms Fresh.NativeWatcherPacketReturn.two_opening_displacement
+#print axioms Fresh.NativeWatcherPacketReturn.selected_mixed_compact
+#print axioms Fresh.NativeWatcherPacketReturn.packet_window
+#print axioms Fresh.NativeWatcherPacketReturn.packet_segment
+#print axioms Fresh.NativeWatcherPacketReturn.packet_zero
+#print axioms Fresh.NativeWatcherPacketReturn.mixed_residual_endpoint
+#print axioms Fresh.NativeWatcherPacketReturn.multi_return_mixed
+#print axioms Fresh.NativeWatcherPacketReturn.early_phase_mixed
+#print axioms Fresh.NativeWatcherPacketReturn.packet_interval
+#print axioms Fresh.NativeWatcherPacketReturn.boundary_selected_compact
+#print axioms Fresh.NativeWatcherPacketReturn.boundary_packet_window
+#print axioms Fresh.NativeWatcherPacketReturn.boundary_packet_segment
+#print axioms Fresh.NativeWatcherPacketReturn.mixed_into_boundary
+#print axioms Fresh.NativeWatcherReturnArrangement.entry_move
+#print axioms Fresh.NativeWatcherReturnArrangement.packet_retained
+#print axioms Fresh.NativeWatcherReturnArrangement.packet_to_entry
+#print axioms Fresh.NativeWatcherReturnArrangement.recovery_into_residualCompact
+#print axioms Fresh.NativeWatcherReturnArrangement.recovery_isolation
+#print axioms Fresh.NativeWatcherReturnArrangement.guard_into_recovery
+#print axioms Fresh.NativeWatcherReturnArrangement.multiReturn_into_recovery
+#print axioms Fresh.NativeWatcherReturnArrangement.earlyPhase_into_recovery
+#print axioms Fresh.NativeWatcherReturnArrangement.boundary_packet_retained
+#print axioms Fresh.NativeWatcherReturnArrangement.boundaryRecovery_into_residualCompact
+#print axioms Fresh.NativeWatcherReturnArrangement.mixedRecovery_into_boundaryRecovery
+#print axioms Fresh.NativeWatcherReturnArrangement.boundaryGuard_into_boundaryRecovery
+#print axioms Fresh.NativeWatcherReturnArrangement.boundaryRecovery_isolation
+#print axioms Fresh.NativeWatcherReturnArrangement.firstBoundaryGuard_into_guard
+#print axioms Fresh.NativeWatcherReturnArrangement.boundary_new_capture_outside_packet
+#print axioms Fresh.NativePacketTailRetention.retained_pair_tail
+#print axioms Fresh.NativePacketTailRetention.retained_pair_segment
+#print axioms Fresh.NativePacketTailRetention.recapture_excludes_face
+#print axioms Fresh.NativePacketTailRetention.recapture_level_face
+#print axioms Fresh.NativePacketTailRetention.multi_recapture_separation
+#print axioms Fresh.NativePacketTailRetention.first_opening_before_end
+#print axioms Fresh.NativePacketTailRetention.captured_pair_packet
+#print axioms Fresh.NativePacketTailRetention.retained_by_face
+#print axioms Fresh.NativePacketTailRetention.retained_speed_interval
+#print axioms Fresh.NativePacketTailRetention.opening_record_until_opening
+#print axioms Fresh.NativePacketTailRetention.ordered_return_openings_coalesce
+#print axioms Fresh.NativePacketTailArrangement.recovery_into_pair
+#print axioms Fresh.NativePacketTailArrangement.recovery_isolation
+#print axioms Fresh.NativePacketTailArrangement.twoPacketGuard_into_recovery
+#print axioms Fresh.NativePacketTailArrangement.postReset_into_recovery
+#print axioms Fresh.NativeRecoveredPacketBands.box_into_residualBand
+#print axioms Fresh.NativeRecoveredPacketBands.box_isolation
+#print axioms Fresh.NativeRecoveredPacketBands.box_has_first_move
+#print axioms Fresh.NativeRebasedPacketChart.opening_times_positive
+#print axioms Fresh.NativeRebasedPacketChart.terminal_windows
+#print axioms Fresh.NativeRebasedPacketChart.coeff_clear
+#print axioms Fresh.NativeRebasedPacketChart.coeff_positive
+#print axioms Fresh.NativeRebasedPacketChart.resumption_gate
+#print axioms Fresh.NativeRebasedPacketChart.physical_admissible
+#print axioms Fresh.NativeRebasedPacketChart.physical_isolation
+#print axioms Fresh.NativeRebasedPacketChart.chart_named_isolation
+#print axioms Fresh.NativeRebasedPacketChart.chart_into_canonical
+#print axioms Fresh.NativeRebasedPacketChart.chart_isolation
+#print axioms Fresh.NativeRebasedPacketChart.initial_windows
+#print axioms Fresh.NativeRebasedPacketChart.initial_coeff_clear
+#print axioms Fresh.NativeRebasedPacketChart.coeff_minimum
+#print axioms Fresh.NativeRebasedPacketChart.chart_into_unblocked
+#print axioms Fresh.NativeFinalHandoffBands.band_into_partner
+#print axioms Fresh.NativeFinalHandoffBands.band_isolation
+#print axioms Fresh.NativeFinalHandoffBands.initial_capture_of_band
+#print axioms Fresh.NativeCurrentLabelPacket.captured_label_compact
+#print axioms Fresh.NativeCurrentLabelPacket.packet_positive_label
+#print axioms Fresh.NativeCurrentLabelPacket.same_label_packet
+#print axioms Fresh.NativeCurrentLabelPacket.packet_member_zero
+#print axioms Fresh.NativeCurrentLabelPacket.packet_capture_outside
+#print axioms Fresh.NativeCurrentLabelPacket.recaptured_label_floor
+#print axioms Fresh.NativeCurrentLabelPacket.retained_into_partner
+#print axioms Fresh.NativeCurrentLabelPacket.recovered_into_canonical
+#print axioms Fresh.NativeCurrentLabelPacket.retained_isolation
+#print axioms Fresh.NativeCurrentLabelPacket.recovered_isolation
+#print axioms Fresh.NativePacketHistoryCoalescence.history_le_of_whole_lonely
+#print axioms Fresh.NativePacketHistoryCoalescence.isolated_histories_coalesce
+#print axioms Fresh.NativeRecoveredHandoffBands.band_has_isolating_move
+#print axioms Fresh.NativeRecoveredHandoffBands.band_into_canonical
+#print axioms Fresh.NativeRecoveredHandoffBands.band_isolation
+#print axioms Fresh.NativeRecoveredHandoffBands.retainedBands_into_recoveredBands
+#print axioms Fresh.NativeRecapturedLabelReset.capture_label_positive
+#print axioms Fresh.NativeRecapturedLabelReset.capture_positive_after_start
+#print axioms Fresh.NativeRecapturedLabelReset.opening_relative_face
+#print axioms Fresh.NativeRecapturedLabelReset.capture_labels_equal_of_close
+#print axioms Fresh.NativeRecapturedLabelReset.same_label_capture_spread
+#print axioms Fresh.NativeRecapturedLabelReset.recaptured_labels_equal
+#print axioms Fresh.NativeRecapturedLabelReset.handoff_recaptured_labels_equal
+#print axioms Fresh.NativeRecapturedLabelReset.same_label_minimum_move
+#print axioms Fresh.NativeRecapturedLabelReset.recaptured_labels_reflect
+#print axioms Fresh.NativeRecapturedLabelReset.handoff_recaptured_partition
+#print axioms Fresh.NativeRecapturedLabelReset.recaptured_pair_zero
+#print axioms Fresh.NativeRecapturedLabelReset.frame_packet
+#print axioms Fresh.NativeRecapturedLabelReset.frame_next_zero
+#print axioms Fresh.NativeRecapturedLabelReset.continuing_history_labels
+#print axioms Fresh.NativeRecapturedLabelReset.continuing_history_partition
+#print axioms Fresh.NativeRecapturedLabelReset.pure_recapture_frame
+#print axioms Fresh.NativeRecapturedLabelReset.retainedReset_into_current
+#print axioms Fresh.NativeRecapturedLabelReset.recoveredReset_into_current
+#print axioms Fresh.NativeRecapturedLabelReset.retainedReset_isolation
+#print axioms Fresh.NativeRecapturedLabelReset.recoveredReset_isolation
+#print axioms Fresh.NativeWitnessPacketReentry.common_positive_label_sharp
+#print axioms Fresh.NativeWitnessPacketReentry.witness_pair_sharp
+#print axioms Fresh.NativeWitnessPacketReentry.witness_member_zero
+#print axioms Fresh.NativeWitnessPacketReentry.witness_member_clear
+#print axioms Fresh.NativeWitnessPacketReentry.witness_two_face
+#print axioms Fresh.NativeWitnessPacketReentry.witness_two_zero
+#print axioms Fresh.NativeWitnessPacketReentry.witness_two_capture_fresh
+#print axioms Fresh.NativeWitnessPacketReentry.retained_into_partner
+#print axioms Fresh.NativeWitnessPacketReentry.recovered_into_canonical
+#print axioms Fresh.NativeWitnessPacketReentry.retained_isolation
+#print axioms Fresh.NativeWitnessPacketReentry.recovered_isolation
+#print axioms Fresh.NativeWitnessPacketReentry.outside_clear_forces_member
+#print axioms Fresh.NativeWitnessPacketReentry.outside_relay_forces_member
+#print axioms Fresh.NativeWitnessPacketReentry.outside_recovered_relay_forces_member
+#print axioms Fresh.NativeWitnessPacketReentry.forced_retained_witness
+#print axioms Fresh.NativeWitnessPacketReentry.reset_frame_witness
+#print axioms Fresh.NativeWitnessPacketReentry.old_retainedReset_into_witness
+#print axioms Fresh.NativeWitnessPacketReentry.old_recoveredReset_into_witness
+#print axioms Fresh.NativePacketExtremeRecovery.clear_labels_equal_of_close
+#print axioms Fresh.NativePacketExtremeRecovery.extreme_window
+#print axioms Fresh.NativePacketExtremeRecovery.clear_between_close_extremes
+#print axioms Fresh.NativePacketExtremeRecovery.packet_zero_iff_fastest
+#print axioms Fresh.NativePacketExtremeRecovery.fastest_retained_packet
+#print axioms Fresh.NativePacketExtremeRecovery.extreme_opening_window
+#print axioms Fresh.NativePacketExtremeRecovery.extreme_into_canonical
+#print axioms Fresh.NativePacketExtremeRecovery.extreme_isolation
+#print axioms Fresh.NativeNarrowCaptureBlock.separation_in_band
+#print axioms Fresh.NativeNarrowCaptureBlock.band_captured_labels_equal
+#print axioms Fresh.NativeNarrowCaptureBlock.captured_between_same_label
+#print axioms Fresh.NativeNarrowCaptureBlock.captured_block_convex
+#print axioms Fresh.NativeNarrowCaptureBlock.hidden_middle_requires_span
+#print axioms Fresh.NativeNarrowCaptureBlock.capture_pair_dichotomy
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_packet
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_move
+#print axioms Fresh.NativeNarrowCaptureBlock.exists_frame
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_next_capture_fresh
+#print axioms Fresh.NativeNarrowCaptureBlock.later_capture_label_barrier
+#print axioms Fresh.NativeNarrowCaptureBlock.opening_capture_ratio
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_next_member_ratio
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_two_zero
+#print axioms Fresh.NativeNarrowCaptureBlock.frame_two_capture_fresh
+#print axioms Fresh.NativeNarrowCaptureBlock.retained_into_current
+#print axioms Fresh.NativeNarrowCaptureBlock.recovered_into_current
+#print axioms Fresh.NativeNarrowCaptureBlock.retained_isolation
+#print axioms Fresh.NativeNarrowCaptureBlock.recovered_isolation
+#print axioms Fresh.NativeMixedGroupTransport.transported_capture_span
+#print axioms Fresh.NativeMixedGroupTransport.nearby_label_diameter
+#print axioms Fresh.NativeMixedGroupTransport.transported_label_diameter
+#print axioms Fresh.NativeMixedGroupTransport.transported_recapture_segment
+#print axioms Fresh.NativeMixedGroupTransport.transported_clear_extremes
+#print axioms Fresh.NativeMixedGroupTransport.handoff_group_span
+#print axioms Fresh.NativeMixedGroupTransport.transported_frame
+#print axioms Fresh.NativeMixedGroupTransport.clear_gap_capture_label
+#print axioms Fresh.NativeMixedGroupTransport.transported_hidden_label
+#print axioms Fresh.NativeLabelBoundaryFrontiers.positive_phase_label_nonnegative
+#print axioms Fresh.NativeLabelBoundaryFrontiers.common_label_opening_order
+#print axioms Fresh.NativeLabelBoundaryFrontiers.common_label_closing_order
+#print axioms Fresh.NativeLabelBoundaryFrontiers.common_terminal_recovery
+#print axioms Fresh.NativeLabelBoundaryFrontiers.group_opening_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.group_closing_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.group_recovery_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.closing_frontiers_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.opening_frontiers_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.recovery_frontiers_iff
+#print axioms Fresh.NativeLabelBoundaryFrontiers.frontier_selected_move
+#print axioms Fresh.NativeLabelBoundaryFrontiers.frontier_retained_packet
+#print axioms Fresh.NativeLabelBoundaryFrontiers.frontier_recovered_canonical
+#print axioms Fresh.NativeLabelBoundaryFrontiers.transported_label_cases
+#print axioms Fresh.NativeOpeningLabelReversal.opening_label_compact
+#print axioms Fresh.NativeOpeningLabelReversal.label_cone_retained_window
+#print axioms Fresh.NativeOpeningLabelReversal.label_cone_closing_zero
+#print axioms Fresh.NativeOpeningLabelReversal.recapture_label_floor
+#print axioms Fresh.NativeOpeningLabelReversal.recapture_advance_label_face
+#print axioms Fresh.NativeOpeningLabelReversal.selected_anchor_retained
+#print axioms Fresh.NativeOpeningLabelReversal.selected_anchor_recapture_floor
+#print axioms Fresh.NativeOpeningLabelReversal.opening_packet_retained
+#print axioms Fresh.NativeOpeningLabelReversal.boundary_defect_identity
+#print axioms Fresh.NativeOpeningLabelReversal.floor_equal_next_upper
+#print axioms Fresh.NativeOpeningLabelReversal.floor_equal_capture_iff
+#print axioms Fresh.NativeOpeningLabelReversal.equal_label_boundary_closing_zero
+#print axioms Fresh.NativeOpeningLabelReversal.floor_equality_advance_one
+#print axioms Fresh.NativeOpeningLabelReversal.recapture_boundary_alternatives
+#print axioms Fresh.NativeOpeningLabelReversal.label_anchors_into_retained
+#print axioms Fresh.NativeQuietReversalFamily.anchor_positive
+#print axioms Fresh.NativeQuietReversalFamily.partner_capture_bounds
+#print axioms Fresh.NativeQuietReversalFamily.ending_bounds
+#print axioms Fresh.NativeQuietReversalFamily.ending_step_face
+#print axioms Fresh.NativeQuietReversalFamily.residue_window
+#print axioms Fresh.NativeQuietReversalFamily.quiet_window
+#print axioms Fresh.NativeQuietReversalFamily.parameter_openings
+#print axioms Fresh.NativeQuietReversalFamily.partner_entry
+#print axioms Fresh.NativeQuietReversalFamily.partner_endpoint_bounds
+#print axioms Fresh.NativeQuietReversalFamily.interior_partner_endpoint
+#print axioms Fresh.NativeQuietReversalFamily.class_into_recovery
+#print axioms Fresh.NativeQuietReversalFamily.low_band_into_class
+#print axioms Fresh.NativeQuietReversalFamily.class_isolation
+#print axioms Fresh.NativeQuietReversalFamily.scaled_isolation
+#print axioms Fresh.NativeReversalCellEnvelope.cell_window
+#print axioms Fresh.NativeReversalCellEnvelope.cell_label_range
+#print axioms Fresh.NativeReversalCellEnvelope.cell_exists_iff
+#print axioms Fresh.NativeReversalCellEnvelope.cell_upper_iff
+#print axioms Fresh.NativeReversalCellEnvelope.wider_residue_cell
+#print axioms Fresh.NativeReversalCellEnvelope.adjacent_residue_cell
+#print axioms Fresh.NativeReversalCellEnvelope.class_into_recovery
+#print axioms Fresh.NativeReversalCellEnvelope.old_into_class
+#print axioms Fresh.NativeReversalCellEnvelope.class_isolation
+#print axioms Fresh.NativeReversalCellEnvelope.scaled_isolation
+#print axioms Fresh.NativeReversalCellEnvelope.old_scaled_into_class
+#print axioms Fresh.NativeSuppliedOpeningTriple.supplied_displacement
+#print axioms Fresh.NativeSuppliedOpeningTriple.supplied_old_retained
+#print axioms Fresh.NativeSuppliedOpeningTriple.supplied_slow_third
+#print axioms Fresh.NativeSuppliedOpeningTriple.rebound_resolution
+#print axioms Fresh.NativeSuppliedOpeningTriple.forced_triple_resolution
+#print axioms Fresh.NativeSuppliedOpeningTriple.opening_displacement
+#print axioms Fresh.NativeSuppliedOpeningTriple.pair_displacement
+#print axioms Fresh.NativeSuppliedOpeningTriple.exit_displacement
+#print axioms Fresh.NativeSuppliedOpeningTriple.exit_before_quiet_closing
+#print axioms Fresh.NativeArbitraryThirdReversal.parameter_separation
+#print axioms Fresh.NativeArbitraryThirdReversal.incoming_faces
+#print axioms Fresh.NativeArbitraryThirdReversal.third_lower
+#print axioms Fresh.NativeArbitraryThirdReversal.quiet_before_closing
+#print axioms Fresh.NativeArbitraryThirdReversal.anchored_point_into_canonical
+#print axioms Fresh.NativeArbitraryThirdReversal.quiet_triple_point
+#print axioms Fresh.NativeArbitraryThirdReversal.class_into_canonical
+#print axioms Fresh.NativeArbitraryThirdReversal.class_isolation
+#print axioms Fresh.NativeArbitraryThirdReversal.scaled_isolation
+#print axioms Fresh.NativeSuppliedOpeningGroup.rebound_tail_displacement
+#print axioms Fresh.NativeSuppliedOpeningGroup.forced_tail_displacement
+#print axioms Fresh.NativeSuppliedOpeningGroup.captured_group_window
+#print axioms Fresh.NativeSuppliedOpeningGroup.captured_group_zero
+#print axioms Fresh.NativeSuppliedOpeningGroup.captured_group_segment
+#print axioms Fresh.NativeSuppliedOpeningGroup.captured_group_interval
+#print axioms Fresh.NativeCapturedReversalFamily.same_label_group_member
+#print axioms Fresh.NativeCapturedReversalFamily.narrow_group_member
+#print axioms Fresh.NativeCapturedReversalFamily.witness_group_member
+#print axioms Fresh.NativeCapturedReversalFamily.class_into_canonical
+#print axioms Fresh.NativeCapturedReversalFamily.class_isolation
+#print axioms Fresh.NativeCapturedReversalFamily.scaled_isolation
+#print axioms Fresh.NativeSuppliedRetainedWindow.retained_window
+#print axioms Fresh.NativeSuppliedRetainedWindow.retained_segment
+#print axioms Fresh.NativeSuppliedRetainedWindow.retained_zero
+#print axioms Fresh.NativeSuppliedRetainedWindow.face_upper_iff
+#print axioms Fresh.NativeSuppliedRetainedWindow.face_exists_iff
+#print axioms Fresh.NativeSuppliedRetainedWindow.own_opening_face_iff
+#print axioms Fresh.NativeSuppliedRetainedWindow.quiet_face
+#print axioms Fresh.NativeSuppliedReversalArrangement.class_into_canonical
+#print axioms Fresh.NativeSuppliedReversalArrangement.class_isolation
+#print axioms Fresh.NativeSuppliedReversalArrangement.scaled_isolation
+#print axioms Fresh.NativeSuppliedReversalArrangement.old_into_class
+#print axioms Fresh.NativeSuppliedReversalArrangement.old_scaled_into_class
+#print axioms Fresh.NativeReversalReadingCoalescence.class_into_canonical
+#print axioms Fresh.NativeReversalReadingCoalescence.class_isolation
+#print axioms Fresh.NativeReversalReadingCoalescence.scaled_isolation
+#print axioms Fresh.NativeReversalReadingCoalescence.old_into_class
+#print axioms Fresh.NativeReversalReadingCoalescence.old_scaled_into_class
+#print axioms Fresh.NativeReversalBranchFaces.fit_exit
+#print axioms Fresh.NativeReversalBranchFaces.simple_fit_exit
+#print axioms Fresh.NativeReversalBranchFaces.phase_positive
+#print axioms Fresh.NativeReversalBranchFaces.entry_phase
+#print axioms Fresh.NativeReversalBranchFaces.retained_window
+#print axioms Fresh.NativeReversalBranchFaces.captured_window
+#print axioms Fresh.NativeReversalBranchFaces.coarse_face
+#print axioms Fresh.NativeReversalBranchFaces.coarse_strip
+#print axioms Fresh.NativeReversalBranchArrangement.class_into_canonical
+#print axioms Fresh.NativeReversalBranchArrangement.class_isolation
+#print axioms Fresh.NativeReversalBranchArrangement.scaled_isolation
+#print axioms Fresh.NativeReversalBranchArrangement.old_into_class
+#print axioms Fresh.NativeReversalBranchArrangement.old_scaled_into_class
+#print axioms Fresh.NativeReversalBranchArrangement.fitted_into_class
+#print axioms Fresh.NativeClearWindowWitness.clear_window
+#print axioms Fresh.NativeClearWindowWitness.positive_clear_ratio
+#print axioms Fresh.NativeClearWindowWitness.deep_clear_ratio
+#print axioms Fresh.NativeClearWindowWitness.pair_ratio
+#print axioms Fresh.NativeClearWindowWitness.pair_deep_ratio
+#print axioms Fresh.NativeClearWindowWitness.member_zero
+#print axioms Fresh.NativeClearWindowWitness.member_clear
+#print axioms Fresh.NativeClearWindowWitness.two_face
+#print axioms Fresh.NativeClearWindowWitness.two_zero
+#print axioms Fresh.NativeClearWindowWitness.two_capture_fresh
+#print axioms Fresh.NativeClearWitnessArrangement.retained_window
+#print axioms Fresh.NativeClearWitnessArrangement.class_into_canonical
+#print axioms Fresh.NativeClearWitnessArrangement.class_isolation
+#print axioms Fresh.NativeClearWitnessArrangement.scaled_isolation
+#print axioms Fresh.NativeClearWindowRebound.below_selected_face
+#print axioms Fresh.NativeClearWindowRebound.old_two_phase_upper
+#print axioms Fresh.NativeClearWindowRebound.old_return_capture
+#print axioms Fresh.NativeClearWindowRebound.old_return_iff
+#print axioms Fresh.NativeClearWindowRebound.old_return_one
+#print axioms Fresh.NativeClearWindowRebound.recapture_forces_largest
+#print axioms Fresh.NativeClearWindowRebound.recapture_forces_outer_band
+#print axioms Fresh.NativeClearWindowRebound.recapture_forces_reference_one
+#print axioms Fresh.NativeClearWindowRebound.next_capture_split
+#print axioms Fresh.NativeClearWindowRebound.rebound_packet_face
+#print axioms Fresh.NativeClearWindowRebound.own_two_window
+#print axioms Fresh.NativeClearWindowRebound.returned_core_clear
+#print axioms Fresh.NativeClearReboundArrangement.class_into_canonical
+#print axioms Fresh.NativeClearReboundArrangement.class_isolation
+#print axioms Fresh.NativeClearReboundArrangement.scaled_isolation
+#print axioms Fresh.NativeReturnedOpeningGeometry.return_tail
+#print axioms Fresh.NativeReturnedOpeningGeometry.coincident_capture_compact
+#print axioms Fresh.NativeReturnedOpeningGeometry.old_return_tail
+#print axioms Fresh.NativeFiveThirdsBoundary.grid_clear
+#print axioms Fresh.NativeFiveThirdsBoundary.captured_strict_face
+#print axioms Fresh.NativeFiveThirdsBoundary.simultaneous_capture_residue
+#print axioms Fresh.NativeFiveThirdsBoundary.first_grid_retained
+#print axioms Fresh.NativeFiveThirdsBoundary.recapture_strict_ratios
+#print axioms Fresh.NativeClearReboundCore.first_window
+#print axioms Fresh.NativeClearReboundCore.recapture_label_rises
+#print axioms Fresh.NativeClearReboundCore.recapture_fast
+#print axioms Fresh.NativeClearReboundCore.core_clear
+#print axioms Fresh.NativeReturnedGridArrangement.grid_clear
+#print axioms Fresh.NativeReturnedGridArrangement.class_into_canonical
+#print axioms Fresh.NativeReturnedGridArrangement.class_isolation
+#print axioms Fresh.NativeReturnedGridArrangement.scaled_isolation
+#print axioms Fresh.NativeDoubleGridRecovery.integer_step
+#print axioms Fresh.NativeDoubleGridRecovery.recovery_identity
+#print axioms Fresh.NativeDoubleGridRecovery.recovery_window
+#print axioms Fresh.NativeDoubleGridRecovery.recovery_labels
+#print axioms Fresh.NativeDoubleGridRecovery.core_margin
+#print axioms Fresh.NativeDoubleGridRecovery.margin_retained
+#print axioms Fresh.NativeDoubleGridRecovery.quiet_window
+#print axioms Fresh.NativeDoubleGridArrangement.margin_into_retained
+#print axioms Fresh.NativeDoubleGridArrangement.class_into_canonical
+#print axioms Fresh.NativeDoubleGridArrangement.class_isolation
+#print axioms Fresh.NativeDoubleGridArrangement.scaled_isolation
+#print axioms Fresh.NativeDoubleGridArrangement.returned_into_class
+#print axioms Fresh.NativeDoubleGridArrangement.returned_isolation
+#print axioms Fresh.NativeDoubleGridArrangement.returned_scaled_into_scaled
+#print axioms Fresh.NativeDoubleGridArrangement.returned_scaled_isolation
+#print axioms Fresh.NativeUpperGridPacket.phase_capture_label
+#print axioms Fresh.NativeUpperGridPacket.upper_return
+#print axioms Fresh.NativeUpperGridPacket.upper_fast
+#print axioms Fresh.NativeUpperGridPacket.phase_opening
+#print axioms Fresh.NativeUpperGridPacket.packet_order
+#print axioms Fresh.NativeUpperGridPacket.packet_window
+#print axioms Fresh.NativeUpperGridPacket.packet_move
+#print axioms Fresh.NativeUpperGridPacket.slow_margin
+#print axioms Fresh.NativeUpperGridArrangement.class_into_canonical
+#print axioms Fresh.NativeUpperGridArrangement.class_isolation
+#print axioms Fresh.NativeUpperGridArrangement.scaled_isolation
+#print axioms Fresh.NativeUpperGridArrangement.returned_into_class
+#print axioms Fresh.NativeUpperGridArrangement.returned_isolation
+#print axioms Fresh.NativeUpperGridArrangement.returned_scaled_into_scaled
+#print axioms Fresh.NativeUpperGridArrangement.returned_scaled_isolation
+#print axioms Fresh.NativeUpperPairHandoff.recapture_fast
+#print axioms Fresh.NativeUpperPairHandoff.slow_recap_window
+#print axioms Fresh.NativeUpperPairHandoff.processed_clear
+#print axioms Fresh.NativeUpperPairArrangement.class_into_canonical
+#print axioms Fresh.NativeUpperPairArrangement.class_isolation
+#print axioms Fresh.NativeUpperPairArrangement.scaled_isolation
+#print axioms Fresh.NativeUpperPairArrangement.returned_into_class
+#print axioms Fresh.NativeUpperPairArrangement.returned_isolation
+#print axioms Fresh.NativeUpperPairArrangement.returned_scaled_into_scaled
+#print axioms Fresh.NativeUpperPairArrangement.returned_scaled_isolation
+#print axioms Fresh.NativeUpperGridHeightTransport.opening_ratio
+#print axioms Fresh.NativeUpperGridHeightTransport.height_shifts
+#print axioms Fresh.NativeUpperGridHeightTransport.height_labels
+#print axioms Fresh.NativeUpperGridHeightTransport.return_difference
+#print axioms Fresh.NativePhaseOriginLevels.displacement
+#print axioms Fresh.NativePhaseOriginLevels.positive_after_own
+#print axioms Fresh.NativePhaseOriginLevels.later_opening
+#print axioms Fresh.NativePhaseOriginLevels.ordered_four_three
+#print axioms Fresh.NativePhaseOriginLevels.ordered_sharp
+#print axioms Fresh.NativePhaseOriginLevels.ordered_compact
+#print axioms Fresh.NativePhaseOriginLevels.ordered_zero
+#print axioms Fresh.NativePhaseOriginLevels.next_capture_source
+#print axioms Fresh.NativePhaseOriginLevels.triple_level_compact
+#print axioms Fresh.NativePhaseOriginLevels.triple_level_zero
+#print axioms Fresh.NativePhaseOriginLevels.next_capture_triple_source
+#print axioms Fresh.NativePhaseOriginLevels.sharp_compact
+#print axioms Fresh.NativeTightReboundCore.composed_face_failed
+#print axioms Fresh.NativeTightReboundCore.separation
+#print axioms Fresh.NativeTightReboundCore.core_window
+#print axioms Fresh.NativeTightReboundCore.class_into_pair
+#print axioms Fresh.NativeTightReboundCore.class_isolation
+#print axioms Fresh.NativeTightReboundCore.scaled_into_pair
+#print axioms Fresh.NativeTightReboundCore.scaled_isolation
+#print axioms Fresh.NativePhaseOriginArrangement.class_into_canonical
+#print axioms Fresh.NativePhaseOriginArrangement.class_isolation
+#print axioms Fresh.NativePhaseOriginArrangement.scaled_isolation
+#print axioms Fresh.NativeUpperTripleTail.slow_tail_window
+#print axioms Fresh.NativeUpperTripleTail.processed_triple
+#print axioms Fresh.NativeUpperTripleTail.integer_tail_window
+#print axioms Fresh.NativeUpperTripleTail.second_resolution
+#print axioms Fresh.NativeUpperTripleTail.three_resolution
+#print axioms Fresh.NativeUpperTripleArrangement.class_into_canonical
+#print axioms Fresh.NativeUpperTripleArrangement.class_isolation
+#print axioms Fresh.NativeUpperTripleArrangement.scaled_isolation
+#print axioms Fresh.NativeUpperTripleArrangement.returned_into_class
+#print axioms Fresh.NativeUpperTripleArrangement.returned_isolation
+#print axioms Fresh.NativeUpperTripleArrangement.returned_scaled_into_scaled
+#print axioms Fresh.NativeUpperTripleArrangement.returned_scaled_isolation
+#print axioms Fresh.NativeFourthReturnGeometry.own_level_compact
+#print axioms Fresh.NativeFourthReturnGeometry.ordered_reversal_fast
+#print axioms Fresh.NativeFourthReturnGeometry.level_forces_mixed
+#print axioms Fresh.NativeFourthReturnGeometry.returned_three_clear
+#print axioms Fresh.NativeFourthReturnGeometry.old_third_forced_gap
+#print axioms Fresh.NativeFourthReturnGeometry.minimum_window
+#print axioms Fresh.NativeFourthReturnGeometry.local_displacement
+#print axioms Fresh.NativeFourthReturnGeometry.slow_window
+#print axioms Fresh.NativeFourthReturnArrangement.class_into_canonical
+#print axioms Fresh.NativeFourthReturnArrangement.class_isolation
+#print axioms Fresh.NativeFourthReturnArrangement.scaled_isolation
+#print axioms Fresh.NativeFourthReboundTail.rebound_core
+#print axioms Fresh.NativeFourthReboundTail.minimum_window
+#print axioms Fresh.NativeFourthReboundTail.local_displacement
+#print axioms Fresh.NativeFourthReversalArrangement.class_into_canonical
+#print axioms Fresh.NativeFourthReversalArrangement.class_isolation
+#print axioms Fresh.NativeFourthReversalArrangement.scaled_isolation
+#print axioms Fresh.NativeFourthReversalArrangement.level_into_class
+#print axioms Fresh.NativeRecoveredSecondTail.minimum_window
+#print axioms Fresh.NativeRecoveredSecondTail.local_displacement
+#print axioms Fresh.NativeRecoveredSecondArrangement.class_into_canonical
+#print axioms Fresh.NativeRecoveredSecondArrangement.class_isolation
+#print axioms Fresh.NativeRecoveredSecondArrangement.scaled_isolation
+#print axioms Fresh.NativeRecoveredSecondArrangement.simple_into_class
+#print axioms Fresh.NativeRecoveredSecondGrid.height_speed_faces
+#print axioms Fresh.NativeRecoveredSecondGrid.class_into_recovered
+#print axioms Fresh.NativeRecoveredSecondGrid.class_isolation
+#print axioms Fresh.NativeRecoveredSecondGrid.scaled_into_recovered
+#print axioms Fresh.NativeRecoveredSecondGrid.scaled_isolation
+#print axioms Fresh.NativeHierarchicalFourthTail.prefix_displacement
+#print axioms Fresh.NativeHierarchicalFourthTail.minimum_window
+#print axioms Fresh.NativeHierarchicalFourthTail.forced_displacement
+#print axioms Fresh.NativeHierarchicalFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeHierarchicalFourthArrangement.class_isolation
+#print axioms Fresh.NativeHierarchicalFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeHierarchicalFourthArrangement.simple_into_class
+#print axioms Fresh.NativeHierarchicalFourthGrid.height_fast
+#print axioms Fresh.NativeHierarchicalFourthGrid.class_into_hierarchical
+#print axioms Fresh.NativeHierarchicalFourthGrid.class_isolation
+#print axioms Fresh.NativeHierarchicalFourthGrid.scaled_into_hierarchical
+#print axioms Fresh.NativeHierarchicalFourthGrid.scaled_isolation
+#print axioms Fresh.NativeComparablePair.captured_at_selected
+#print axioms Fresh.NativeComparablePair.selected_move
+#print axioms Fresh.NativeComparablePair.selected_resolution
+#print axioms Fresh.NativeComparablePair.resolution
+#print axioms Fresh.NativeComparableFourthTail.prefix_displacement
+#print axioms Fresh.NativeComparableFourthTail.minimum_window
+#print axioms Fresh.NativeComparableFourthTail.local_displacement
+#print axioms Fresh.NativeComparableFourthTail.slow_quarter_window
+#print axioms Fresh.NativeComparableFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeComparableFourthArrangement.class_isolation
+#print axioms Fresh.NativeComparableFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeComparableFourthGrid.height_comparable
+#print axioms Fresh.NativeComparableFourthGrid.class_into_comparable
+#print axioms Fresh.NativeComparableFourthGrid.class_isolation
+#print axioms Fresh.NativeComparableFourthGrid.scaled_into_comparable
+#print axioms Fresh.NativeComparableFourthGrid.scaled_isolation
+#print axioms Fresh.NativeFastSecondResetTail.minimum_window
+#print axioms Fresh.NativeFastSecondResetTail.local_displacement
+#print axioms Fresh.NativeFastSecondResetTail.reset_minimum_window
+#print axioms Fresh.NativeFastSecondResetTail.reset_prefix_displacement
+#print axioms Fresh.NativeFastSecondResetTail.third_prefix_displacement
+#print axioms Fresh.NativeFastSecondResetTail.fourth_prefix_minimum
+#print axioms Fresh.NativeFastSecondResetTail.fourth_prefix_displacement
+#print axioms Fresh.NativeFastSecondResetArrangement.class_into_canonical
+#print axioms Fresh.NativeFastSecondResetArrangement.class_isolation
+#print axioms Fresh.NativeFastSecondResetArrangement.scaled_isolation
+#print axioms Fresh.NativeFastSecondReturnArrangement.class_into_canonical
+#print axioms Fresh.NativeFastSecondReturnArrangement.class_isolation
+#print axioms Fresh.NativeFastSecondReturnArrangement.scaled_isolation
+#print axioms Fresh.NativeFastSecondFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeFastSecondFourthArrangement.class_isolation
+#print axioms Fresh.NativeFastSecondFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeSmallFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeSmallFourthArrangement.class_isolation
+#print axioms Fresh.NativeSmallFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeSmallFourthGrid.class_into_small
+#print axioms Fresh.NativeSmallFourthGrid.class_isolation
+#print axioms Fresh.NativeSmallFourthGrid.scaled_into_small
+#print axioms Fresh.NativeSmallFourthGrid.scaled_isolation
+#print axioms Fresh.NativeLargeFourthTail.returned_second_above_third
+#print axioms Fresh.NativeLargeFourthTail.third_window
+#print axioms Fresh.NativeLargeFourthTail.minimum_window
+#print axioms Fresh.NativeLargeFourthTail.local_displacement
+#print axioms Fresh.NativeArbitraryFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeArbitraryFourthArrangement.class_isolation
+#print axioms Fresh.NativeArbitraryFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeTwoGridFourthArrangement.class_into_canonical
+#print axioms Fresh.NativeTwoGridFourthArrangement.class_isolation
+#print axioms Fresh.NativeTwoGridFourthArrangement.scaled_isolation
+#print axioms Fresh.NativeArbitraryFourthGrid.class_into_arbitrary
+#print axioms Fresh.NativeArbitraryFourthGrid.class_isolation
+#print axioms Fresh.NativeArbitraryFourthGrid.scaled_into_arbitrary
+#print axioms Fresh.NativeArbitraryFourthGrid.scaled_isolation
+#print axioms Fresh.NativeFourUpperArrangement.class_into_canonical
+#print axioms Fresh.NativeFourUpperArrangement.class_isolation
+#print axioms Fresh.NativeFourUpperArrangement.scaled_isolation
+#print axioms Fresh.NativeFourUpperGrid.class_into_four
+#print axioms Fresh.NativeFourUpperGrid.class_isolation
+#print axioms Fresh.NativeFourUpperGrid.scaled_into_four
+#print axioms Fresh.NativeFourUpperGrid.scaled_isolation
+#print axioms Fresh.NativeTwoAnchorGridTransport.own_ratio
+#print axioms Fresh.NativeTwoAnchorGridTransport.two_anchor_shifts
+#print axioms Fresh.NativeTwoAnchorGridTransport.two_anchor_labels
+#print axioms Fresh.NativeTwoAnchorGridTransport.return_difference
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.integer_positions
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.single_reading
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.two_anchor_point
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.two_anchor_isolation
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.independent_points
+#print axioms Fresh.NativeTwoAnchorPhysicalTransport.independent_isolation
+#print axioms Fresh.NativeMixedObserverGridSeeds.parameter_faces
+#print axioms Fresh.NativeMixedObserverGridSeeds.seed_windows
+#print axioms Fresh.NativeMixedObserverGridSeeds.lifted_position
+#print axioms Fresh.NativeMixedObserverGridSeeds.lifted_clear
+#print axioms Fresh.NativeMixedObserverGridSeeds.class_point
+#print axioms Fresh.NativeMixedObserverGridSeeds.class_into_canonical
+#print axioms Fresh.NativeMixedObserverGridSeeds.class_isolation
+#print axioms Fresh.NativeMixedObserverGridSeeds.scaled_isolation
+#print axioms Fresh.NativeOwnAnchorHeightReduction.positions
+#print axioms Fresh.NativeOwnAnchorHeightReduction.height_reduction
+#print axioms Fresh.NativeOwnAnchorHeightReduction.lonely_insert_equiv
+#print axioms Fresh.NativeOwnAnchorHeightReduction.residue_range
+#print axioms Fresh.NativeOwnAnchorHeightReduction.reduced_positive
+#print axioms Fresh.NativePositivePointCanonical.anchored_nonnegative
+#print axioms Fresh.NativePositivePointCanonical.positive_point
+#print axioms Fresh.NativePositivePointCanonical.isolation_iff_canonical
+#print axioms Fresh.NativeSeedResidueProduct.class_into_canonical
+#print axioms Fresh.NativeSeedResidueProduct.class_isolation
+#print axioms Fresh.NativeSeedResidueProduct.scaled_isolation
+#print axioms Fresh.NativeSeedResidueProduct.seed_class_into_product
+#print axioms Fresh.NativeCommonOpeningGridBands.first_displacement
+#print axioms Fresh.NativeCommonOpeningGridBands.quiet_window
+#print axioms Fresh.NativeCommonOpeningGridBands.coset_clear
+#print axioms Fresh.NativeCommonOpeningGridBands.class_into_canonical
+#print axioms Fresh.NativeCommonOpeningGridBands.class_isolation
+#print axioms Fresh.NativeCommonOpeningGridBands.scaled_isolation
+#print axioms Fresh.NativeUniformOpeningCells.numerator_ratio
+#print axioms Fresh.NativeUniformOpeningCells.opening_ratio_bound
+#print axioms Fresh.NativeUniformOpeningCells.entry_window
+#print axioms Fresh.NativeUniformOpeningCells.nonempty_cells
+#print axioms Fresh.NativeUniformOpeningCells.quiet_into_face
+#print axioms Fresh.NativeUniformOpeningCells.coset_clear
+#print axioms Fresh.NativeUniformOpeningCells.coset_entry_clear
+#print axioms Fresh.NativeUniformOpeningCells.class_fragment
+#print axioms Fresh.NativeUniformOpeningCells.class_into_canonical
+#print axioms Fresh.NativeUniformOpeningCells.class_isolation
+#print axioms Fresh.NativeUniformOpeningCells.scaled_isolation
+#print axioms Fresh.NativeUniformOpeningCells.bands_into_cells
+#print axioms Fresh.NativeUniformOpeningCells.scaled_bands_into_cells
