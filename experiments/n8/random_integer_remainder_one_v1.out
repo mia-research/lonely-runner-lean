@@ -1,0 +1,6 @@
+M 50 tested 4000 {'fixed': 2871, 'gate': 314, 'window': 814, 'cores': 1, 'flank': 0} left 0
+[]
+M 100 tested 4000 {'fixed': 2634, 'gate': 341, 'window': 1025, 'cores': 0, 'flank': 0} left 0
+[]
+M 200 tested 3000 {'fixed': 1952, 'gate': 252, 'window': 796, 'cores': 0, 'flank': 0} left 0
+[]

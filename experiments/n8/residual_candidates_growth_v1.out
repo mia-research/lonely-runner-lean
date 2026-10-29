@@ -1,0 +1,6 @@
+N 16 candidates (simple EightResidual fields) 1158 fixed-instant 912 chain only 0 neither 246
+examples [(1, 2, 3, 5, 6, 7, 8), (1, 2, 3, 5, 6, 7, 16), (1, 2, 3, 5, 7, 8, 12), (1, 2, 3, 5, 7, 12, 16), (1, 2, 3, 12, 14, 15, 16), (1, 2, 4, 5, 6, 7, 8)]
+N 20 candidates (simple EightResidual fields) 5007 fixed-instant 4062 chain only 0 neither 945
+examples [(1, 2, 3, 5, 6, 7, 8), (1, 2, 3, 5, 6, 7, 16), (1, 2, 3, 5, 7, 8, 12), (1, 2, 3, 5, 7, 8, 18), (1, 2, 3, 5, 7, 12, 16), (1, 2, 3, 5, 7, 16, 18)]
+N 24 candidates (simple EightResidual fields) 34768 fixed-instant 29690 chain only 0 neither 5078
+examples [(1, 2, 3, 4, 5, 7, 24), (1, 2, 3, 4, 5, 14, 24), (1, 2, 3, 4, 5, 21, 24), (1, 2, 3, 5, 6, 7, 8), (1, 2, 3, 5, 6, 7, 16), (1, 2, 3, 5, 6, 7, 24)]

@@ -1,0 +1,15 @@
+candidates 368 total 52000 remainder 287
+by label {'K2c': 56, 'K2b': 38, 'K2d': 123, 'K2z': 29, 'K1b': 40, 'K2s2': 1}
+by generator {'integers': 287}
+integers K2c moves 4 R* 9/5 ['1', '5', '7', '8', '10', '11', '12']
+integers K2b moves 4 R* 11/8 ['1', '7', '24', '27', '30', '31', '33']
+integers K2d moves 3 R* 7/6 ['1', '15', '23', '36', '40', '42', '60']
+integers K2c moves 4 R* 9/5 ['1', '2', '5', '6', '7', '8', '11']
+integers K2d moves 3 R* 25/18 ['1', '5', '7', '14', '16', '18', '20']
+integers K2d moves 3 R* 17/12 ['1', '7', '12', '14', '20', '27', '32']
+integers K2d moves 2 R* 57/55 ['1', '6', '33', '55', '56', '57', '63']
+integers K2b moves 6 R* 17/8 ['1', '5', '7', '8', '12', '13', '16']
+integers K2d moves 8 R* 49/30 ['1', '12', '13', '16', '21', '22', '30']
+integers K2d moves 6 R* 17/7 ['1', '2', '4', '5', '6', '7', '8']
+integers K2c moves 4 R* 9/5 ['1', '5', '6', '7', '8', '12', '20']
+integers K2b moves 6 R* 17/8 ['1', '3', '5', '7', '8', '9', '12']

@@ -1,0 +1,843 @@
+newtypes_membership_v1: exact-Fraction membership tests for NewTypes (21 disjuncts; 25 columns once 08 and 09 are split)
+status M = member (test is decisive), . = not member, ? = necessary part passes but membership is not decided
+
+=== test strength per class ===
+  01 APCoreOpening               input=readings  exact
+  02 SplitAPReadings             input=readings  exact
+  03 SignedAPReadings            input=readings  exact
+  04 GeneralTwoAPBlock           input=8-pt arrangement  exact
+  05 PairTrainOpening            input=readings  exact
+  06 TwoSlowTrain                input=readings  exact
+  07 UnequalTwoAPBlock           input=8-pt arrangement  exact
+  08a MixedFourTwo               input=8-pt arrangement  exact
+  08b MixedFourParam             input=8-pt arrangement  exact
+  08c MixedFourLower             input=8-pt arrangement  exact
+  08d UniformFour                input=8-pt arrangement  exact
+  09a MiddleFiveAll              input=8-pt arrangement  exact
+  09b FullThreeFive              input=8-pt arrangement  exact
+  10 SeparatedTwoAP21            input=8-pt arrangement  exact
+  11 TwoSixNine                  input=8-pt arrangement  exact
+  12 TwoSixThin                  input=8-pt arrangement  exact
+  13 DoubleCovered               input=8-pt arrangement  necessary (exact leaf FourBlockClass)
+  14 ThreeBlockReverseMiddle     input=8-pt arrangement  exact
+  15 ThreeGapPacket              input=readings  exact on rank-4 branch; rank<4 branches necessary
+  16 FourPairNative              input=8-pt arrangement + subject index  exact
+  17 FourBlockInternal           input=8-pt arrangement + subject index  exact
+  18 PartitionNativeBypass       input=8-pt arrangement + subject index  exact
+  19 FourPairStepIndependent     input=8-pt arrangement + subject index  exact
+  20 TwoMoverSubject             input=8-pt arrangement  exact
+  21 CanonicalReturn             input=readings  exact
+
+=== derivations (each test function states the finite condition it implements) ===
+--- 01 APCoreOpening
+    exists r in 1..6, u,x>0, w>=0, C finite : C in [x,x+w]; 8 r u <= x(7-r); w(1/(8u)+1/x)<=3/4;
+    every reading is j u (1<=j<=r) or lies in C.
+    Reduction: C = readings that are not j*u (enlarging C only widens [x,x+w]); x = min C, w = max C - min C is
+    optimal (both inequalities are monotone in x up and w down).  u is either d/j for a reading d (some reading
+    is j u) or free (no reading is j u), in which case 8ru<=x(7-r) is taken with equality (monotone in u).
+    EXACT.
+--- 02 SplitAPReadings
+    exists r in 1..5, s>0, a>0 with every reading in s*splitTrain r a; splitTrain r a = {1..r} u {a, a+1, .., a+6-r}.
+    Seven distinct readings force |splitTrain|=7 and D = s*splitTrain.  s is a reading (q=1).  Remaining readings/s
+    must be exactly an AP of step 1 (a = its minimum).  EXACT.
+--- 03 SignedAPReadings
+    exists r in 1..5, s>0, B non-integer: every reading in s*|splitTrain r B|.  Seven distinct readings force the
+    seven |q| to be distinct, and 1..r among them.  Rest R (= |B+j|, j=0..6-r) is non-integer and is
+    (i) one AP of step 1 (all B+j same sign), or (ii) split N u P, N = {alpha+i}, P = {(1-alpha)+i}, alpha in (0,1)
+    (B+j negative for the first |N| indices).  EXACT.
+--- 04 GeneralTwoAPBlock
+    v = B + s*speeds c A p (sigma i), 1<=p<=7, s!=0, speeds injective: two AP blocks of the SAME step
+    (p and 8-p elements, any real offset A, interleaving allowed; a singleton imposes no step).
+    Test: partition of the 8 points into two nonempty sets, each an AP with one common step.  EXACT.
+--- 05 PairTrainOpening
+    exists s,a,x,w,C,p,q (p,q naturals): D = {s,a} u C exactly; C in [x,x+w]; pairLeft+1/x<=pairRight;
+    w(pairLeft+1/x)<=3/4, pairLeft=max((p+1/8)/s,(q+1/8)/a), pairRight=min((p+7/8)/s,(q+7/8)/a).
+    s,a are readings (possibly equal), C = D \ {s,a}, x = min C, w = max C - min C (monotone-optimal).
+    Readings are integers, so t -> t+1 shifts (p,q) by (s,a) and leaves window length unchanged while raising
+    pairLeft; the smallest pairLeft is in the first period, p in [0,s), q in [0,a).  EXACT.
+--- 06 TwoSlowTrain
+    exists s,a,x,w,f:Fin 5->R,n,m naturals: D = {s,a} u range f (iff).  Seven distinct readings force s!=a and
+    f a bijection onto the other five readings F.  Conditions on x: x<=sN<=7x; (8m+1)x<=aN<=(8m+7)x; x<=f_i<=x+w;
+    wN<=6x, N=8n+1.  With w=maxF-x these give an interval for x:
+    max(sN/7, aN/(8m+7), maxF*N/(N+6)) <= x <= min(sN, aN/(8m+1), minF).   EXACT (n,m bounded by the interval).
+--- 07 UnequalTwoAPBlock
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 08a MixedFourTwo
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 08b MixedFourParam
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 08c MixedFourLower
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 08d UniformFour
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 09a MiddleFiveAll
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 09b FullThreeFive
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 10 SeparatedTwoAP21
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 11 TwoSixNine
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 12 TwoSixThin
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 13 DoubleCovered
+    DoubleCovered = MiddleCovered v DoubleSingleton; MiddleCovered = ShortOpeningCovered v MiddlePacket, and
+    ShortOpeningCovered descends (ChartsCovered, APAnchorCovered, PacketFrameCovered, FiveReturnCovered,
+    SingletonReturnCovered, FourReturnCovered, InnerCovered, ReturnCovered, PacketCovered) to FourBlockCovered =
+    FourBlockClass v LongTailClass.  EVERY leaf has V = B+z*speeds c g h j p q r (sigma i) (FourBlockNeighbour.speeds:
+    four unit-step AP blocks, gaps g,h,j>0), 1<=m, and 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j,
+    (8m+1)(g+h+j)<=8(a+b+e)+4.  Most leaves add an opening/chart certificate (opening, PacketBands, RemainingBands,
+    EndpointData, FrameBands...) with free integers (rho, unitLap, window, L, role, u) that is NOT decided here.
+    Test:  member  if the pure-inequality leaf FourBlockClass holds (exact: g+h+j<=3, p=1->1<=g, p+q+r=7->1<=j, bands);
+    'N'     if only the necessary part holds (some 4-block split of T with the four band inequalities);
+    False   otherwise (a necessary conjunct fails => not a member, exact).
+--- 14 ThreeBlockReverseMiddle
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 15 ThreeGapPacket
+    exists u,g,h,j>0, m>=1, a,b,c: bands (same four inequalities as FourBlock) and for each reading
+    d = u(D + e g + f h + l j), D<=3, e,f,l in {0,1}, not all zero.  Unknown vector X=(u, ug, uh, uj); each reading
+    gives one linear equation in X.  Depth-first assignment of types (the used variables g,h,j form a prefix, which
+    removes the g,h,j symmetry of the class), incremental Gaussian elimination, prune on inconsistency.
+    Full rank on the used variables: X unique on them -> check positivity and the bands for the used gaps (a gap that
+    no reading uses is a free positive real and takes zero band slack).  EXACT on that branch.
+    Rank deficient on the used variables (free parameters): bands are linear in X for fixed integers but the integers
+    are unbounded; such branches are only recorded and make the answer 'N' (necessary), never a False.
+--- 16 FourPairNative
+    V = B+z*FourAPPairs.speeds c g h j (sigma i); base = pairs (1,2),(g+2,g+3),(g+h+3,g+h+4),(g+h+j+4,g+h+j+5).
+    Sorted T' (orientation z>0): T'1-T'0=T'3-T'2=T'5-T'4=T'7-T'6=z; g=(T'2-T'1)/z, h=(T'4-T'3)/z, j=(T'6-T'5)/z.
+    subject: base index 1 (case 1: 1<(8m+1)g, (8m-1)g<1, 8a<=(8m+1)(g+h)<=8a+5) or base index 6 (case 2: same with j,
+    h+j); both: 8b<=(8m+1)(g+h+j)<=8b+4.  EXACT (m confined to (1/g,1/g+2) resp. j).
+--- 17 FourBlockInternal
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 18 PartitionNativeBypass
+    (two-block family; see run_two_block and the per-class conjunct list)
+--- 19 FourPairStepIndependent
+    base b = [1, 2, g+2, g+3, 3+(8+sg)/G, 4+(7-ka)/G, 8-rho/G, 9-rho/G], G=8m+1, subject = base index 1.
+    Increasing in the index for all admissible parameters, so sorted T' (z>0) matches b with z=T'1-T'0.
+    g=(T'2-T'1)/z ; T'3-T'2=z ; sg=G((T'4-T'3)/z+g)-8 in [0,1] ; ka=G(1-(T'5-T'4)/z)-1-sg in (0,1];
+    rho=G(4-(T'6-T'5)/z)-7+ka in [0,1] ; T'7-T'6=z ; 1<Gg, (G-2)g<1.   EXACT.
+--- 20 TwoMoverSubject
+    v = B+s*twoMover c (c+x) y 0 7 (sigma i): six runners at c+1..c+6 (a 6-term unit AP), runner 0 at c+x, runner 7 at y.
+    x<1/6; 2(1-x)(6-x) <= (1-6x)|y-(c+x)|; (0<=x) or (1-x<=|y-(c+x)| and 4(6-x)<=3|y-(c+x)|).
+    In units of the AP step delta: P0 lies outside the AP at distance rho*delta from an end element (rho=1-x>5/6),
+    W=|P7-P0|/delta.  Test over the 28 six-subsets that are APs, both labellings of the other two points, both ends.
+    Positivity of the base is free (B,c are free reals).  EXACT.
+--- 21 CanonicalReturn
+    exists u != k, Q>0, N integer: N-1/8 < d_u Q < N+1/8 (u in the way at Q); IsMove(D,Q,P) with P = (N+1/8)/d_u
+    (u's next opening is the largest next opening among readings in the way at Q); and for every i with advance>0
+    (advance = max(0, label(d_i P) - label(d_i Q)), label x = ceil(x-7/8)):  d_u(label(d_i P)+1/8) <= d_i(N+1/8).
+    All readings are integers, so every predicate is periodic of period 1 in Q (P shifts by 1, labels by d_i, N by d_u):
+    Q in (0,1] suffices.  Within (0,1] every predicate is constant between the points Q = (j+1/8)/d and (j+7/8)/d;
+    those points and the midpoints of consecutive points are tested.  EXACT.
+--- two-block family (04 handled separately; 07, 08a-d, 09a-b, 10, 11, 12)
+    T sorted splits contiguously into Lo|Up, both APs of >=2 points (steps sL, sU), G = min Up - max Lo > 0.
+    V = B+s*speeds c A u v p (sigma i): s>0 makes block 1 the lower block (p=|Lo|, u=sL, v=sU); s<0 makes block 1 the upper block
+    (p=|Up|, u=sU, v=sL).  G = A-(p-1)u is the gap in base units.  Every Lean inequality is homogeneous in (u,v,G), so the unit-step
+    normalisation u=1 is undone by dividing: b=v/u, A-(p-1)=G/u.  Both orientations are tried.  EXACT.
+--- 21 CanonicalReturn: equivalence note (proof sketch in the comment block of this script)
+    The class holds iff the subject is isolated at some instant.  (=>) Lean canonical_isolation.  (<=) take the first lonely instant P; it is
+    the opening of some reader u (d_u P = N+1/8); at Q = P-eps all readers in the way have next opening <= P and no label advances,
+    so every conjunct holds.  So class 21 restates the conjecture for the arrangement; a non-member would be a counterexample.
+
+=== controls: positive built from the Lean speeds formulas; "structural" negative = a perturbation rejected at the shape conjunct;
+    "near-miss" negative = shape kept (suffix shifted), rejected at an arithmetic conjunct ===
+--- 01 APCoreOpening
+   positive ['1', '2', '3', '40', '41', '42', '43'] -> M  [r=3 u=1 x=40 w=3]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['1', '2', '3', '40', '41', '42', '46'] -> .  [conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=2,w=44)]
+--- 02 SplitAPReadings
+   positive ['2', '4', '7', '9', '11', '13', '15'] -> M  [r=2 s=2 a=7/2]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['2', '4', '7', '9', '11', '13', '16'] -> .  [conjunct "remaining readings/s form an AP of step 1" fails]
+--- 03 SignedAPReadings
+   positive ['1', '3', '4', '5', '7', '8', '11'] -> M  [r=2 s=4 alpha=1/4 (B straddles 0)]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['1', '3', '4', '5', '7', '8', '13'] -> .  [conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails]
+--- 04 GeneralTwoAPBlock
+   positive ['0', '1', '2', '3', '10', '11', '12', '13'] -> M  [blocks ['0', '1', '2', '3'] | ['10', '11', '12', '13']]
+   negative (structural) ['0', '1', '2', '3', '10', '11', '12', '27/2'] -> .  [conjunct "both blocks are APs" fails for every split]
+   negative (near-miss ): none found in the perturbation scan
+--- 05 PairTrainOpening
+   positive ['1', '2', '20', '21', '22', '23', '24'] -> M  [s=1 a=2 p=0 q=0 x=20 w=4]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['1', '2', '20', '21', '22', '23', '25'] -> .  [conjunct w*(pairLeft+1/x) <= 3/4 fails]
+--- 06 TwoSlowTrain
+   positive ['1', '5', '28', '29', '30', '31', '32'] -> M  [s=1 a=5 n=4 m=0 x in [352/13,28]]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['1', '5', '28', '29', '30', '31', '34'] -> .  [conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails]
+--- 07 UnequalTwoAPBlock
+   positive ['0', '1', '41', '42', '43', '44', '45', '46'] -> M  [lower block 2 pts, upper 6 pts, p=2 u=1 v=1 gap G=40]
+   negative (structural) ['0', '1', '41', '42', '43', '44', '45', '93/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '11/2', '91/2', '93/2', '95/2', '97/2', '99/2', '101/2'] -> .  [conjunct (p-1)u(1/(8v)+1/G) <= 3/4 fails (p=2,u=11/2,v=1,G=40)]
+--- 08a MixedFourTwo
+   positive ['0', '1', '2', '3', '16', '18', '20', '22'] -> M  [lower block 4 pts, upper 4 pts, p=4 u=1 v=2 gap G=13]
+   negative (structural) ['0', '1', '2', '3', '16', '18', '20', '45/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '1', '2', '3', '31/2', '35/2', '39/2', '43/2'] -> .  [conjunct 51/4 <= A-3 (G >= 51u/4) fails (p=4,u=1,v=2,G=25/2)]
+--- 08b MixedFourParam
+   positive ['0', '1', '2', '3', '21', '23', '25', '27'] -> M  [lower block 4 pts, upper 4 pts, p=4 u=1 v=2 gap G=18]
+   negative (structural) ['0', '1', '2', '3', '21', '23', '25', '55/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '1', '2', '3', '41/2', '45/2', '49/2', '53/2'] -> .  [conjunct 0<A-3 and 9b^2<=(A-3)(8-3b) (9v^2 <= G(8u-3v)) fails (p=4,u=1,v=2,G=35/2)]
+--- 08c MixedFourLower
+   positive ['0', '2', '4', '6', '33', '36', '39', '42'] -> M  [lower block 4 pts, upper 4 pts, p=4 u=2 v=3 gap G=27]
+   negative (structural) ['0', '2', '4', '6', '33', '36', '39', '85/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '2', '4', '6', '65/2', '71/2', '77/2', '83/2'] -> .  [conjunct 9b<=A-3 (9v<=G) fails (p=4,u=2,v=3,G=53/2)]
+--- 08d UniformFour
+   positive ['0', '1', '2', '3', '66', '69', '72', '75'] -> M  [lower block 4 pts, upper 4 pts, p=4 u=1 v=3 gap G=63]
+   negative (structural) ['0', '1', '2', '3', '66', '69', '72', '151/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '1', '2', '3', '131/2', '137/2', '143/2', '149/2'] -> .  [conjunct 21 max(1,b) <= A-3 (21 max(u,v) <= G) fails (p=4,u=1,v=3,G=125/2)]
+--- 09a MiddleFiveAll
+   positive ['0', '1', '2', '13', '14', '15', '16', '17'] -> M  [lower block 3 pts, upper 5 pts, p=3 u=1 v=1 gap G=11]
+   negative (structural) ['0', '1', '2', '13', '14', '15', '16', '35/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '1', '2', '25/2', '27/2', '29/2', '31/2', '33/2'] -> .  [conjunct 32b<=3(A-2) (32v<=3G) fails (p=3,u=1,v=1,G=21/2)]
+--- 09b FullThreeFive
+   positive ['0', '1', '2', '56', '61', '66', '71', '76'] -> M  [lower block 3 pts, upper 5 pts, p=3 u=1 v=5 gap G=54]
+   negative (structural) ['0', '1', '2', '56', '61', '66', '71', '153/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '1', '2', '55', '60', '65', '70', '75'] -> .  [conjunct 0<b and (32/3)max(1,b)<=A-2 ((32/3)max(u,v)<=G) fails (p=3,u=1,v=5,G=53)]
+--- 10 SeparatedTwoAP21
+   positive ['0', '1', '22', '23', '24', '25', '26', '27'] -> M  [lower block 2 pts, upper 6 pts, p=2 u=1 v=1 gap G=21]
+   negative (structural) ['0', '1', '22', '23', '24', '25', '26', '55/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '3/2', '45/2', '47/2', '49/2', '51/2', '53/2', '55/2'] -> .  [conjunct 21 max(1,b) <= A-(p-1) (21 max(u,v) <= G) fails (p=2,u=3/2,v=1,G=21)]
+--- 11 TwoSixNine
+   positive ['0', '1', '10', '11', '12', '13', '14', '15'] -> M  [lower block 2 pts, upper 6 pts, p=2 u=1 v=1 gap G=9]
+   negative (structural) ['0', '1', '10', '11', '12', '13', '14', '31/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '3/2', '21/2', '23/2', '25/2', '27/2', '29/2', '31/2'] -> .  [conjunct 9 max(1,b) <= A-1 (9 max(u,v) <= G) fails (p=2,u=3/2,v=1,G=9)]
+--- 12 TwoSixThin
+   positive ['0', '2', '14', '15', '16', '17', '18', '19'] -> M  [lower block 2 pts, upper 6 pts, p=2 u=2 v=1 gap G=12]
+   negative (structural) ['0', '2', '14', '15', '16', '17', '18', '39/2'] -> .  [no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)]
+   negative (near-miss ) ['0', '19/2', '43/2', '45/2', '47/2', '49/2', '51/2', '53/2'] -> .  [conjunct 4<=3(A-1) (4u<=3G) fails (p=2,u=19/2,v=1,G=12)]
+--- 13 DoubleCovered
+   positive ['9', '18', '19', '28', '29', '38', '39', '48'] -> M  [FourBlockClass leaf: sizes (2, 2, 2, 2) gaps 1/9,1/9,1/9 m=1]
+   negative (structural) ['9', '18', '19', '28', '29', '38', '39', '97/2'] -> .  [no candidate decomposition of the required shape exists]
+   negative (near-miss ) ['9', '18', '19', '28', '29', '38', '81/2', '99/2'] -> .  [conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1]
+--- 14 ThreeBlockReverseMiddle
+   positive ['20', '40', '41', '42', '62', '82', '102', '122'] -> M  [sizes (2, 1, 5) g=1/20 h=1/20 m=17]
+   negative (structural) ['20', '40', '41', '42', '62', '82', '102', '245/2'] -> .  [conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step]
+   negative (near-miss ) ['20', '40', '41', '85/2', '125/2', '165/2', '205/2', '245/2'] -> .  [conjunct (8m-1)g<=8a-1, (8m-1)h<=8b-1, 8(a+b)-3<=(8m-1)(g+h) fails for every m>=1]
+--- 15 ThreeGapPacket
+   positive ['1', '2', '3', '9', '10', '18', '27'] -> M  [u=9 g=1/9 h=2/9 j=1/9 m=1]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ) ['1', '2', '3', '9', '10', '18', '32'] -> .  [conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['9', '1/9', '2/9', '1/3']]
+--- 16 FourPairNative
+   positive ['15', '30', '32', '47', '50', '65', '66', '81'] subject index 1 -> M  [case sigma k=1, z=15, g=2/15 h=1/5 j=1/15 m=1]
+   negative (structural) ['15', '30', '32', '47', '50', '65', '66', '163/2'] -> .  [conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step]
+   negative (near-miss ) ['15', '30', '65/2', '95/2', '101/2', '131/2', '133/2', '163/2'] -> .  [conjunct 1<(8m+1)x and (8m-1)x<1 (x=g resp. j) has no integer m>=1]
+--- 17 FourBlockInternal
+   positive ['9', '18', '19', '28', '29', '38', '39', '48'] subject index 3 -> M  [sizes (2, 2, 2, 2) z=9 gaps 1/9,1/9,1/9 m=1]
+   negative (structural) ['9', '18', '19', '28', '29', '38', '39', '97/2'] -> .  [conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step]
+   negative (near-miss ) ['9', '18', '19', '28', '29', '38', '81/2', '99/2'] -> .  [conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1]
+--- 18 PartitionNativeBypass
+   positive ['15', '30', '32', '47', '62', '65', '80', '95'] subject index 1 -> M  [sizes (2, 3, 3) case A z=15 g=2/15 h=1/5 m=1]
+   negative (structural) ['15', '30', '32', '47', '62', '65', '80', '191/2'] -> .  [conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step]
+   negative (near-miss ) ['15', '30', '32', '47', '62', '131/2', '161/2', '191/2'] -> .  [conjunct 8n<=(8m+1)(g+h)<=8n+3 fails for the admissible m]
+--- 19 FourPairStepIndependent
+   positive ['1', '2', '32/15', '47/15', '71/18', '85/18', '143/18', '161/18'] subject index 1 -> M  [z=1 g=2/15 m=1 sigma=1/2 kappa=1/2 rho=1/2]
+   negative (structural) ['1', '2', '32/15', '47/15', '71/18', '85/18', '143/18', '85/9'] -> .  [conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal]
+   negative (near-miss ) ['1', '2', '32/15', '47/15', '71/18', '85/18', '76/9', '85/9'] -> .  [conjunct 0<=rho<=1 fails (rho=-4)]
+--- 20 TwoMoverSubject
+   positive ['0', '1', '2', '3', '4', '5', '6', '20'] -> M  [AP ['0', '1', '2', '3', '4', '5'] step 1, x=0, W=14]
+   negative (structural) ['0', '1', '2', '3', '4', '11/2', '13/2', '41/2'] -> .  [conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish]
+   negative (near-miss ) ['0', '1', '2', '3', '4', '5', '11', '25'] -> .  [conjunct "0<=x or (1-x<=|y-(c+x)| and 4(6-x)<=3|y-(c+x)|)" fails (x=-5, W=14)]
+--- 21 CanonicalReturn
+   positive ['3', '4', '5', '8', '9', '13', '19'] -> M  [Q=1/304 u=3 N=0 P=1/24]
+   negative (structural): none found in the perturbation scan
+   negative (near-miss ): none found in the perturbation scan
+
+=== completeness self-test (random parameters drawn from the Lean constraints; every draw must be reported a member) ===
+  01 APCoreOpening                           26 / 26 members
+  02 SplitAPReadings                         40 / 40 members
+  03 SignedAPReadings                        36 / 36 members
+  04 GeneralTwoAPBlock                       35 / 35 members
+  05 PairTrainOpening                        10 / 10 members
+  06 TwoSlowTrain                            40 / 40 members
+  07 UnequalTwoAPBlock                       40 / 40 members
+  08a MixedFourTwo                           40 / 40 members
+  08b MixedFourParam                         40 / 40 members
+  08c MixedFourLower                         40 / 40 members
+  08d UniformFour                            40 / 40 members
+  09a MiddleFiveAll                          40 / 40 members
+  09b FullThreeFive                          40 / 40 members
+  10 SeparatedTwoAP21                        40 / 40 members
+  11 TwoSixNine                              40 / 40 members
+  12 TwoSixThin                              40 / 40 members
+  13 DoubleCovered (leaf FourBlockClass)     40 / 40 members
+  14 ThreeBlockReverseMiddle                 40 / 40 members
+  15 ThreeGapPacket                          24 / 24 members
+  16 FourPairNative                          40 / 40 members
+  17 FourBlockInternal                       40 / 40 members
+  18 PartitionNativeBypass                   40 / 40 members
+  19 FourPairStepIndependent                 40 / 40 members
+  20 TwoMoverSubject                         40 / 40 members
+
+=== TABLE A (literal arrangement {0} u {d}, subject at the bottom): rows = survivors (readings), cols = class number ===
+                             01  02  03  04  05  06  07  08a 08b 08c 08d 09a 09b 10  11  12  13  14  15  16  17  18  19  20  21 
+(1, 4, 28, 30, 31, 32, 38)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 6, 29, 30, 31, 32, 35)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 7, 8, 15, 22, 23, 30)    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M   .   .   .   .   .   M  
+(1, 8, 33, 35, 36, 37, 41)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 8, 33, 35, 36, 37, 42)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 13, 14, 15, 16, 29, 36)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 13, 14, 15, 16, 29, 42)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M   .   .   .   .   .   M  
+(1, 13, 16, 28, 29, 30, 33)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 16, 27, 29, 30, 31, 35)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 28, 29, 30, 32, 35, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 37)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 41)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 12, 14, 16, 18, 30, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 12, 14, 16, 18, 30, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 33, 38)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 33, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 39, 44)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+
+=== TABLE B (supplementary: sign-free arrangement {0} u {eps_i d_i}, any signs; readings-only classes 01,02,03,05,06,15,21 identical to Table A) ===
+                             01  02  03  04  05  06  07  08a 08b 08c 08d 09a 09b 10  11  12  13  14  15  16  17  18  19  20  21 
+(1, 4, 28, 30, 31, 32, 38)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 6, 29, 30, 31, 32, 35)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 7, 8, 15, 22, 23, 30)    .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M   M   M   .   M   .   .   .   M  
+(1, 8, 33, 35, 36, 37, 41)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 8, 33, 35, 36, 37, 42)   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 13, 14, 15, 16, 29, 36)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 13, 14, 15, 16, 29, 42)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M   .   M   .   M   .   .   .   M  
+(1, 13, 16, 28, 29, 30, 33)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 16, 27, 29, 30, 31, 35)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(1, 28, 29, 30, 32, 35, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 37)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 41)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 10, 12, 14, 16, 26, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 12, 14, 16, 18, 30, 39)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(2, 12, 14, 16, 18, 30, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 33, 38)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 33, 43)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+(3, 15, 18, 21, 24, 39, 44)  .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   M  
+
+members found (readings-only classes counted once): 26
+  MEMBER (1, 4, 28, 30, 31, 32, 38)  21 CanonicalReturn  [lit]: Q=1951/14880 u=30 N=4 P=11/80   | independent check of the Lean conjuncts: OK ; subject isolated at P=11/80: True
+  MEMBER (1, 6, 29, 30, 31, 32, 35)  21 CanonicalReturn  [lit]: Q=1649/8120 u=29 N=6 P=49/232   | independent check of the Lean conjuncts: OK ; subject isolated at P=49/232: True
+  MEMBER (1, 7, 8, 15, 22, 23, 30)  13 DoubleCovered  [sf]: signs (1, -1, 1, 1, 1, 1, 1): FourBlockClass leaf: sizes (1, 1, 4, 2) gaps 1,1/7,1/7 m=1   | independent check (rebuild speeds + explicit a,b,e): OK
+  MEMBER (1, 7, 8, 15, 22, 23, 30)  14 ThreeBlockReverseMiddle  [sf]: signs (1, -1, 1, 1, 1, 1, 1): sizes (2, 4, 2) g=1/7 h=1/7 m=6   | independent check (rebuild speeds + explicit a,b): OK
+  MEMBER (1, 7, 8, 15, 22, 23, 30)  15 ThreeGapPacket  [lit]: u=7 g=1/7 h=1 j=1/7 m=1   | independent check (explicit g,h,j; every reading in u(D+eg+fh+lj); explicit a,b,c): OK
+  MEMBER (1, 7, 8, 15, 22, 23, 30)  17 FourBlockInternal  [sf]: signs (1, -1, 1, 1, 1, 1, 1): sizes (1, 1, 4, 2) z=7 gaps 1,1/7,1/7 m=1   | independent check (rebuild speeds + explicit a,b,e): OK
+  MEMBER (1, 7, 8, 15, 22, 23, 30)  21 CanonicalReturn  [lit]: Q=61/480 u=7 N=1 P=9/56   | independent check of the Lean conjuncts: OK ; subject isolated at P=9/56: True
+  MEMBER (1, 8, 33, 35, 36, 37, 41)  21 CanonicalReturn  [lit]: Q=67/451 u=33 N=5 P=41/264   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/264: True
+  MEMBER (1, 8, 33, 35, 36, 37, 42)  21 CanonicalReturn  [lit]: Q=67/480 u=35 N=5 P=41/280   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/280: True
+  MEMBER (1, 13, 14, 15, 16, 29, 36)  21 CanonicalReturn  [lit]: Q=2825/16704 u=29 N=5 P=41/232   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/232: True
+  MEMBER (1, 13, 14, 15, 16, 29, 42)  13 DoubleCovered  [sf]: signs (1, -1, 1, 1, 1, 1, 1): FourBlockClass leaf: sizes (2, 2, 1, 3) gaps 1/13,1/13,1/13 m=2   | independent check (rebuild speeds + explicit a,b,e): OK
+  MEMBER (1, 13, 14, 15, 16, 29, 42)  15 ThreeGapPacket  [lit]: u=13 g=1/13 h=1/13 j=1/13 m=2   | independent check (explicit g,h,j; every reading in u(D+eg+fh+lj); explicit a,b,c): OK
+  MEMBER (1, 13, 14, 15, 16, 29, 42)  17 FourBlockInternal  [sf]: signs (1, -1, 1, 1, 1, 1, 1): sizes (2, 2, 1, 3) z=13 gaps 1/13,1/13,1/13 m=2   | independent check (rebuild speeds + explicit a,b,e): OK
+  MEMBER (1, 13, 14, 15, 16, 29, 42)  21 CanonicalReturn  [lit]: Q=181/1248 u=13 N=2 P=17/104   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/104: True
+  MEMBER (1, 13, 16, 28, 29, 30, 33)  21 CanonicalReturn  [lit]: Q=325/1792 u=16 N=3 P=25/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=25/128: True
+  MEMBER (1, 16, 27, 29, 30, 31, 35)  21 CanonicalReturn  [lit]: Q=137/945 u=27 N=4 P=11/72   | independent check of the Lean conjuncts: OK ; subject isolated at P=11/72: True
+  MEMBER (1, 28, 29, 30, 32, 35, 39)  21 CanonicalReturn  [lit]: Q=311/2240 u=28 N=4 P=33/224   | independent check of the Lean conjuncts: OK ; subject isolated at P=33/224: True
+  MEMBER (2, 10, 12, 14, 16, 26, 37)  21 CanonicalReturn  [lit]: Q=131/832 u=12 N=2 P=17/96   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/96: True
+  MEMBER (2, 10, 12, 14, 16, 26, 39)  21 CanonicalReturn  [lit]: Q=395/3328 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+  MEMBER (2, 10, 12, 14, 16, 26, 41)  21 CanonicalReturn  [lit]: Q=1239/10496 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+  MEMBER (2, 10, 12, 14, 16, 26, 43)  21 CanonicalReturn  [lit]: Q=1301/11008 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+  MEMBER (2, 12, 14, 16, 18, 30, 39)  21 CanonicalReturn  [lit]: Q=61/832 u=12 N=1 P=3/32   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/32: True
+  MEMBER (2, 12, 14, 16, 18, 30, 43)  21 CanonicalReturn  [lit]: Q=1979/20640 u=30 N=3 P=5/48   | independent check of the Lean conjuncts: OK ; subject isolated at P=5/48: True
+  MEMBER (3, 15, 18, 21, 24, 33, 38)  21 CanonicalReturn  [lit]: Q=29/480 u=15 N=1 P=3/40   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/40: True
+  MEMBER (3, 15, 18, 21, 24, 33, 43)  21 CanonicalReturn  [lit]: Q=29/480 u=15 N=1 P=3/40   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/40: True
+  MEMBER (3, 15, 18, 21, 24, 39, 44)  21 CanonicalReturn  [lit]: Q=131/1248 u=18 N=2 P=17/144   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/144: True
+necessary-only passes: 0
+
+=== first failing conjunct per survivor and class (literal mode; sign-free line only when its status differs) ===
+--- (1, 4, 28, 30, 31, 32, 38)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=4,w=34)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['2', '1/2', '2', '14']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=1951/14880 u=30 N=4 P=11/80   | independent check of the Lean conjuncts: OK ; subject isolated at P=11/80: True
+--- (1, 6, 29, 30, 31, 32, 35)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=6,w=29)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['31', '1/31', '6/31', '29/31']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=1649/8120 u=29 N=6 P=49/232   | independent check of the Lean conjuncts: OK ; subject isolated at P=49/232: True
+--- (1, 7, 8, 15, 22, 23, 30)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=7,w=23)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+       sign-free: M signs (1, -1, 1, 1, 1, 1, 1): FourBlockClass leaf: sizes (1, 1, 4, 2) gaps 1,1/7,1/7 m=1   | independent check (rebuild speeds + explicit a,b,e): OK
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+       sign-free: M signs (1, -1, 1, 1, 1, 1, 1): sizes (2, 4, 2) g=1/7 h=1/7 m=6   | independent check (rebuild speeds + explicit a,b): OK
+  15 ThreeGapPacket            MEMBER: u=7 g=1/7 h=1 j=1/7 m=1   | independent check (explicit g,h,j; every reading in u(D+eg+fh+lj); explicit a,b,c): OK
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+       sign-free: M signs (1, -1, 1, 1, 1, 1, 1): sizes (1, 1, 4, 2) z=7 gaps 1,1/7,1/7 m=1   | independent check (rebuild speeds + explicit a,b,e): OK
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=61/480 u=7 N=1 P=9/56   | independent check of the Lean conjuncts: OK ; subject isolated at P=9/56: True
+--- (1, 8, 33, 35, 36, 37, 41)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=8,w=33)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['2', '1/2', '4', '33/2']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=67/451 u=33 N=5 P=41/264   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/264: True
+--- (1, 8, 33, 35, 36, 37, 42)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=8,w=34)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['2', '1/2', '4', '33/2']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=67/480 u=35 N=5 P=41/280   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/280: True
+--- (1, 13, 14, 15, 16, 29, 36)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=13,w=23)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['8', '1/8', '13/8', '7/4']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=2825/16704 u=29 N=5 P=41/232   | independent check of the Lean conjuncts: OK ; subject isolated at P=41/232: True
+--- (1, 13, 14, 15, 16, 29, 42)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=13,w=29)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+       sign-free: M signs (1, -1, 1, 1, 1, 1, 1): FourBlockClass leaf: sizes (2, 2, 1, 3) gaps 1/13,1/13,1/13 m=2   | independent check (rebuild speeds + explicit a,b,e): OK
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            MEMBER: u=13 g=1/13 h=1/13 j=1/13 m=2   | independent check (explicit g,h,j; every reading in u(D+eg+fh+lj); explicit a,b,c): OK
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+       sign-free: M signs (1, -1, 1, 1, 1, 1, 1): sizes (2, 2, 1, 3) z=13 gaps 1/13,1/13,1/13 m=2   | independent check (rebuild speeds + explicit a,b,e): OK
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=181/1248 u=13 N=2 P=17/104   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/104: True
+--- (1, 13, 16, 28, 29, 30, 33)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=13,w=20)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['11', '1/11', '13/11', '16/11']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=325/1792 u=16 N=3 P=25/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=25/128: True
+--- (1, 16, 27, 29, 30, 31, 35)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=16,w=19)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['4', '1/4', '4', '13/2']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=137/945 u=27 N=4 P=11/72   | independent check of the Lean conjuncts: OK ; subject isolated at P=11/72: True
+--- (1, 28, 29, 30, 32, 35, 39)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=1,x=28,w=11)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: no candidate decomposition of the required shape exists
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['3', '1/3', '28/3', '29/3']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct "V = B+z*speeds c g h j p q r (sigma i)": no split into 4 contiguous unit-step AP blocks with common step
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=311/2240 u=28 N=4 P=33/224   | independent check of the Lean conjuncts: OK ; subject isolated at P=33/224: True
+--- (2, 10, 12, 14, 16, 26, 37)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=10,w=27)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['37', '2/37', '10/37', '14/37']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=131/832 u=12 N=2 P=17/96   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/96: True
+--- (2, 10, 12, 14, 16, 26, 39)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=10,w=29)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['39', '2/39', '10/39', '14/39']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=395/3328 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+--- (2, 10, 12, 14, 16, 26, 41)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=10,w=31)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['7', '2/7', '10/7', '10/7']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=1239/10496 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+--- (2, 10, 12, 14, 16, 26, 43)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=10,w=33)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['7', '2/7', '10/7', '12/7']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=1301/11008 u=16 N=2 P=17/128   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/128: True
+--- (2, 12, 14, 16, 18, 30, 39)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=12,w=27)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['9', '2/9', '4/3', '14/9']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=61/832 u=12 N=1 P=3/32   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/32: True
+--- (2, 12, 14, 16, 18, 30, 43)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=2,x=12,w=31)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['9', '2/9', '4/3', '14/9']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=1979/20640 u=30 N=3 P=5/48   | independent check of the Lean conjuncts: OK ; subject isolated at P=5/48: True
+--- (3, 15, 18, 21, 24, 33, 38)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=3,x=15,w=23)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['2', '3/2', '15/2', '9']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=29/480 u=15 N=1 P=3/40   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/40: True
+--- (3, 15, 18, 21, 24, 33, 43)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=3,x=15,w=28)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['7', '3/7', '15/7', '18/7']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=29/480 u=15 N=1 P=3/40   | independent check of the Lean conjuncts: OK ; subject isolated at P=3/40: True
+--- (3, 15, 18, 21, 24, 39, 44)
+  01 APCoreOpening             fails: conjunct w*(1/(8u)+1/x) <= 3/4 fails at best candidate (r=1,u=3,x=15,w=29)
+  02 SplitAPReadings           fails: conjunct "remaining readings/s form an AP of step 1" fails
+  03 SignedAPReadings          fails: conjunct "remaining |B+j| = one AP of step 1, or two AP runs with minima alpha, 1-alpha" fails
+  04 GeneralTwoAPBlock         fails: conjunct "both blocks are APs" fails for every split
+  05 PairTrainOpening          fails: conjunct w*(pairLeft+1/x) <= 3/4 fails
+  06 TwoSlowTrain              fails: conjunct "x<=sN<=7x and (8m+1)x<=aN<=(8m+7)x for some x in the train interval" fails
+  07 UnequalTwoAPBlock         fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08a MixedFourTwo             fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08b MixedFourParam           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08c MixedFourLower           fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  08d UniformFour              fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09a MiddleFiveAll            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  09b FullThreeFive            fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  10 SeparatedTwoAP21          fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  11 TwoSixNine                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  12 TwoSixThin                fails: no contiguous split into two APs each of >=2 points (first conjunct "V = B+s*speeds(sigma i)" fails)
+  13 DoubleCovered             fails: conjunct bands 8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4 fails for every m>=1
+  14 ThreeBlockReverseMiddle   fails: conjunct "V = B+z*speeds c g h p q": no split into 3 unit-step AP blocks with common step
+  15 ThreeGapPacket            fails: conjunct bands (8a+1<=(8m+1)g, ..., (8m+1)(g+h+j)<=8(a+b+c)+4) fails for every m>=1 on the unique solution (u,g,h,j)=['8', '3/8', '15/8', '9/4']
+  16 FourPairNative            fails: conjunct "V = B+z*speeds c g h j (sigma i)": the four consecutive pairs do not have one common step
+  17 FourBlockInternal         fails: conjunct bands (8a+1<=(8m+1)g, 8b+1<=(8m+1)h, 8e+1<=(8m+1)j, (8m+1)(g+h+j)<=8(a+b+e)+4) fails for every m>=1
+  18 PartitionNativeBypass     fails: conjunct "V = B+z*speeds c g h p q (sigma i)": no split into 3 contiguous unit-step AP blocks with common step
+  19 FourPairStepIndependent   fails: conjunct "V = B+z*speeds c g m ka sg rho (tau i)": unit steps T1-T0, T3-T2, T7-T6 are not equal
+  20 TwoMoverSubject           fails: conjunct "v = B+s*twoMover(...)": no six points of T form a unit AP with the other two outside-ish
+  21 CanonicalReturn           MEMBER: Q=131/1248 u=18 N=2 P=17/144   | independent check of the Lean conjuncts: OK ; subject isolated at P=17/144: True

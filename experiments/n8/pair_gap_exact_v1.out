@@ -1,0 +1,2 @@
+D 24 T 60 sup gap (in units of 1/a) 97/200 = 0.485 at r = 25/24 ; bound used in pair_window: 3/4
+D 60 T 120 sup gap (in units of 1/a) 241/488 = 0.49385245901639346 at r = 61/60 ; bound used in pair_window: 3/4

@@ -1,0 +1,9 @@
+D 24 pairs of rates 253 offsets 24
+failures 0 []
+worst least k 9 ['1/24', '23/24', '1/4']
+D 40 pairs of rates 741 offsets 40
+failures 0 []
+worst least k 15 ['1/40', '39/40', '1/4']
+D 56 pairs of rates 1485 offsets 56
+failures 0 []
+worst least k 21 ['1/56', '55/56', '1/4']
