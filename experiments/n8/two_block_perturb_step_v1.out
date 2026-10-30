@@ -1,0 +1,28 @@
+Part A
+  state 1/8 in-way exits [('17/133', 3), ('25/189', 7)] -> setter (7, 3)
+  state 25/189 in-way exits [('1/7', 2), ('1/7', 6)] -> setter (2, 2)
+  state 3/14 in-way exits [('17/76', 4), ('25/108', 0)] -> setter (0, 3)
+  state 25/108 in-way exits [('1/4', 1), ('1/4', 5)] -> setter (5, 2)
+Part B
+  p=2 b=5/12 G=4 k=0 mover=None dv=0 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=2 dv=-1/24 landing R=216/119 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=2 dv=1/24 landing R=216/121 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=3 dv=-1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=3 dv=1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=4 dv=-1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=4 dv=1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=5 dv=-1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=5 dv=1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=6 dv=-1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=6 dv=1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=7 dv=-1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=2 b=5/12 G=4 k=0 mover=7 dv=1/24 landing R=9/5 setters(runner,lap)=[(7, 1), (4, 1), (2, 1)]
+  p=4 b=7/3 G=3 k=0 mover=None dv=0 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=4 dv=-1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=4 dv=1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=5 dv=-1/24 landing R=216/199 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=5 dv=1/24 landing R=72/67 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=6 dv=-1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=6 dv=1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=7 dv=-1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]
+  p=4 b=7/3 G=3 k=0 mover=7 dv=1/24 landing R=27/25 setters(runner,lap)=[(5, 1)]

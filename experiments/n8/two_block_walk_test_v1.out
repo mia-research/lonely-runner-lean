@@ -1,0 +1,54 @@
+paths: 305823  paths with no miss: 264429
+   30797 other: dj=1 dM=1
+   28217 j -> j-1, same lap
+   7989 other: dj=2 dM=1
+   5876 other: dj=3 dM=1
+   4803 other: dj=-2 dM=0
+   4731 other: dj=2 dM=2
+   4704 other: dj=-2 dM=-1
+   3843 0 -> q-1, next lap
+   3770 other: dj=3 dM=2
+   2649 other: dj=-4 dM=-1
+   2210 other: dj=-3 dM=-1
+   2085 other: dj=-3 dM=0
+   1785 other: dj=-3 dM=-2
+   911 other: dj=3 dM=3
+   791 other: dj=4 dM=2
+   773 other: dj=-4 dM=-3
+   740 other: dj=4 dM=3
+   587 involves own block
+   547 other: dj=4 dM=1
+   357 other: dj=-4 dM=0
+   349 other: dj=-5 dM=-4
+   230 other: dj=-5 dM=-2
+   189 other: dj=4 dM=4
+   176 other: dj=5 dM=2
+   130 other: dj=-5 dM=-3
+   122 other: dj=5 dM=3
+   82 other: dj=-4 dM=-2
+   51 other: dj=5 dM=5
+   45 other: dj=-5 dM=-1
+   16 other: dj=3 dM=5
+   14 other: dj=1 dM=2
+   3 other: dj=-2 dM=-3
+   2 other: dj=2 dM=4
+   2 other: dj=3 dM=6
+   2 other: dj=5 dM=8
+   1 other: dj=4 dM=7
+   1 other: dj=-3 dM=-5
+misses (p, b, G, subject, path):
+   (2, Fraction(1, 12), Fraction(3, 8), 5, [('oth', 0, 1), ('oth', 1, 3)])
+   (2, Fraction(1, 12), Fraction(5, 8), 2, [('oth', 0, 1), ('oth', 1, 3)])
+   (2, Fraction(5, 12), Fraction(4, 1), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(5, 12), Fraction(4, 1), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(5, 12), Fraction(33, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(5, 12), Fraction(33, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(5, 12), Fraction(17, 4), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(5, 12), Fraction(17, 4), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(29, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(29, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(15, 4), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(15, 4), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(31, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(31, 8), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])
+   (2, Fraction(1, 2), Fraction(4, 1), 0, [('oth', 5, 1), ('oth', 2, 1), ('oth', 0, 1)])

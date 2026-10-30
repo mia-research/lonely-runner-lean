@@ -1,0 +1,4 @@
+moves from an other-block setter: predicted = cascade: 109273  differ: 2
+   (2, Fraction(7, 4), Fraction(119, 8), 1, 5, Fraction(25, 108), (Fraction(1, 7), 'oth', 4), ('oth', 0))
+   (6, Fraction(7, 12), Fraction(17, 2), 6, 5, Fraction(25, 108), (Fraction(1, 4), 'oth', 4), ('oth', 0))
+steps dj (all consistent with frac(dj*delta) in (3/4,1) by construction): [((-5, 'frac(dj*delta) in (3/4,1)'), 754), ((-4, 'frac(dj*delta) in (3/4,1)'), 3861), ((-3, 'frac(dj*delta) in (3/4,1)'), 6081), ((-2, 'frac(dj*delta) in (3/4,1)'), 9510), ((-1, 'frac(dj*delta) in (3/4,1)'), 28217), ((1, 'frac(dj*delta) in (3/4,1)'), 31046), ((2, 'frac(dj*delta) in (3/4,1)'), 13569), ((3, 'frac(dj*delta) in (3/4,1)'), 11776), ((4, 'frac(dj*delta) in (3/4,1)'), 3489), ((5, 'frac(dj*delta) in (3/4,1)'), 690)]

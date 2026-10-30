@@ -1,0 +1,15 @@
+records: 50976
+   50976 C1 ok
+   38461 ('gap', 'E648 first window: hit')
+   35 ('gap', 'E648 first window: miss')
+   11879 ('interleaved', 'E648 first window: hit')
+   601 ('interleaved', 'E648 first window: miss')
+   14371 ('gap', 'E653 step: agree')
+   1426 ('interleaved', 'E653 step: agree')
+   212 ('interleaved', 'E653 step: differ')
+   22 ('interleaved', 'E653 step: no predicted in-way reading')
+  empty case: (6, 6, '-15/4', 7, 'setter', 0, 'next', 5, 'delta', 39139104375/60878237614-246084525/60878237614*r2, 'in way at ta:', [(5, '21804117325/243512950456-1230422625/60878237614*r2')])
+  empty case: (6, 6, '-13/4', 6, 'setter', 0, 'next', 5, 'delta', 62622567/97412818-17946/48706409*r2, 'in way at ta:', [(5, '34791115/389651272-89730/48706409*r2')])
+  empty case: (6, 10, '-13/4', 6, 'setter', 0, 'next', 5, 'delta', 62622567/97412818-17946/48706409*r2, 'in way at ta:', [(5, '34791115/389651272-89730/48706409*r2')])
+  empty case: (6, 14, '-13/4', 6, 'setter', 0, 'next', 5, 'delta', 62622567/97412818-17946/48706409*r2, 'in way at ta:', [(5, '34791115/389651272-89730/48706409*r2')])
+  empty case: (6, 22, '-13/4', 6, 'setter', 0, 'next', 5, 'delta', 62622567/97412818-17946/48706409*r2, 'in way at ta:', [(5, '34791115/389651272-89730/48706409*r2')])

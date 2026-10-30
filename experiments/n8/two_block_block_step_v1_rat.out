@@ -1,0 +1,7 @@
+rat
+   109697 ('gap', 'other-block setter', 'agree')
+   2 ('gap', 'other-block setter', 'agree (exit tie)')
+   656 ('gap', 'own-block setter', 'agree')
+   6878 ('interleaved', 'other-block setter', 'agree')
+   119 ('interleaved', 'other-block setter', 'agree (exit tie)')
+   6617 ('interleaved', 'own-block setter', 'agree')

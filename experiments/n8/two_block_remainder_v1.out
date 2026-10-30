@@ -1,0 +1,66 @@
+p  b      Gcov (exact)       region attaining it
+2 1/8    4/3                TwoSixThin
+2 1/4    40/19              TwoSixThin
+2 1/2    40/7               TwoSixThin
+2 2/3    9                  TwoSixNine
+2 6/7    9                  TwoSixNine
+2 1      -1000000000        GeneralTwoAP(b=1, all G)
+2 8/7    72/7               TwoSixNine
+2 3/2    27/2               TwoSixNine
+2 2      18                 TwoSixNine
+2 7/3    21                 TwoSixNine
+2 3      27                 TwoSixNine
+2 4      36                 TwoSixNine
+2 8      72                 TwoSixNine
+3 1/8    32/3               FullThreeFive
+3 1/4    32/3               FullThreeFive
+3 1/2    8                  Unequal
+3 2/3    64/9               Unequal
+3 6/7    64/7               MiddleFive
+3 1      -1000000000        GeneralTwoAP(b=1, all G)
+3 8/7    256/21             FullThreeFive
+3 3/2    16                 FullThreeFive
+3 2      64/3               FullThreeFive
+3 7/3    224/9              FullThreeFive
+3 3      32                 FullThreeFive
+3 4      128/3              FullThreeFive
+3 8      256/3              FullThreeFive
+4 1/8    21                 Sep21
+4 1/4    21                 Sep21
+4 1/2    51/8               MixedFourTwo[mirror]
+4 2/3    9                  MixedFourLower[mirror]
+4 6/7    9                  MixedFourLower[mirror]
+4 1      -1000000000        GeneralTwoAP(b=1, all G)
+4 8/7    72/7               MixedFourLower
+4 3/2    27/2               MixedFourLower
+4 2      51/4               MixedFourTwo
+4 7/3    49                 Sep21
+4 3      63                 Sep21
+4 4      84                 Sep21
+4 8      168                Sep21
+5 1/8    32/3               FullThreeFive[mirror]
+5 1/4    32/3               FullThreeFive[mirror]
+5 1/2    32/3               FullThreeFive[mirror]
+5 2/3    32/3               FullThreeFive[mirror]
+5 6/7    32/3               FullThreeFive[mirror]
+5 1      -1000000000        GeneralTwoAP(b=1, all G)
+5 8/7    32/3               MiddleFive[mirror]
+5 3/2    32/3               Unequal
+5 2      16                 Unequal
+5 7/3    224/9              FullThreeFive[mirror]
+5 3      32                 FullThreeFive[mirror]
+5 4      128/3              FullThreeFive[mirror]
+5 8      256/3              FullThreeFive[mirror]
+6 1/8    9                  TwoSixNine[mirror]
+6 1/4    9                  TwoSixNine[mirror]
+6 1/2    9                  TwoSixNine[mirror]
+6 2/3    9                  TwoSixNine[mirror]
+6 6/7    9                  TwoSixNine[mirror]
+6 1      -1000000000        GeneralTwoAP(b=1, all G)
+6 8/7    72/7               TwoSixNine[mirror]
+6 3/2    27/2               TwoSixNine[mirror]
+6 2      80/7               TwoSixThin[mirror]
+6 7/3    280/27             TwoSixThin[mirror]
+6 3      120/13             TwoSixThin[mirror]
+6 4      160/19             TwoSixThin[mirror]
+6 8      32/3               TwoSixThin[mirror]
