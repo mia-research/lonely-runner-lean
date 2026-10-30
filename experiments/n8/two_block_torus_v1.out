@@ -1,0 +1,7 @@
+q=2 dead bands of delta in (0,1) (open intervals): []
+q=3 dead bands of delta in (0,1) (open intervals): []
+q=4 dead bands of delta in (0,1) (open intervals): []
+q=5 dead bands of delta in (0,1) (open intervals): [('3/16', '1/4'), ('3/8', '5/12'), ('7/12', '5/8'), ('3/4', '13/16')]
+q=6 dead bands of delta in (0,1) (open intervals): [('3/20', '1/4'), ('3/8', '5/12'), ('7/12', '5/8'), ('3/4', '17/20')]
+186 ('landing after W', 'delta meets alive set in W')
+305637 ('landing in W', 'delta meets alive set in W')

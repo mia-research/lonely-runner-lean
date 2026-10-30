@@ -1,0 +1,9 @@
+p=2 b=3/2: cells meeting [0,1) (components and gaps, all r): 30 | grid: max |Delta - Delta_lim|/G = 307202494938399/384001592 | off-grid checks beyond 4G: 12 of 28
+p=4 b=3/2: cells meeting [0,1) (components and gaps, all r): 18 | grid: max |Delta - Delta_lim|/G = 67200581/6220854648 | off-grid checks beyond 4G: 0 of 28
+p=4 b=5/3: cells meeting [0,1) (components and gaps, all r): 32 | grid: max |Delta - Delta_lim|/G = 7920022/108000309 | off-grid checks beyond 4G: 0 of 42
+p=6 b=2/3: cells meeting [0,1) (components and gaps, all r): 38 | grid: max |Delta - Delta_lim|/G = 14400125/12 | off-grid checks beyond 4G: 4 of 42
+p=3 b=7/4: cells meeting [0,1) (components and gaps, all r): 64 | grid: max |Delta - Delta_lim|/G = 61932094138930639/45158611344 | off-grid checks beyond 4G: 24 of 56
+p=5 b=4/3: cells meeting [0,1) (components and gaps, all r): 32 | grid: max |Delta - Delta_lim|/G = 50400091/96 | off-grid checks beyond 4G: 2 of 42
+example K(r) components in [0, 2) for p=4, b=3/2:
+  r=0: [('1/8', '1/6'), ('2/9', '1/4'), ('3/8', '7/18'), ('17/24', '5/6'), ('9/8', '7/6'), ('11/8', '23/16'), ('25/16', '19/12'), ('41/24', '31/18'), ('16/9', '11/6')]
+  r=1: [('1/8', '1/6'), ('3/8', '7/16'), ('9/16', '7/12'), ('17/24', '13/18'), ('7/9', '5/6'), ('9/8', '7/6'), ('11/9', '5/4'), ('11/8', '25/18'), ('41/24', '11/6')]

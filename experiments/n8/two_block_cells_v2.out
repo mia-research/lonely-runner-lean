@@ -1,0 +1,6 @@
+p=2 b=3/2: cells meeting [0,1) (all r): 16 | grid: max |Delta - Delta_lim|/G = 188801711/2073619080 | off-grid beyond 4G: 0 of 28
+p=4 b=3/2: cells meeting [0,1) (all r): 18 | grid: max |Delta - Delta_lim|/G = 67200581/6220854648 | off-grid beyond 4G: 0 of 28
+p=4 b=5/3: cells meeting [0,1) (all r): 32 | grid: max |Delta - Delta_lim|/G = 7920022/108000309 | off-grid beyond 4G: 0 of 42
+p=6 b=2/3: cells meeting [0,1) (all r): 34 | grid: max |Delta - Delta_lim|/G = 0 | off-grid beyond 4G: 0 of 42
+p=3 b=7/4: cells meeting [0,1) (all r): 40 | grid: max |Delta - Delta_lim|/G = 12000115/176401701 | off-grid beyond 4G: 0 of 56
+p=5 b=4/3: cells meeting [0,1) (all r): 26 | grid: max |Delta - Delta_lim|/G = 7200059/115200962 | off-grid beyond 4G: 0 of 42

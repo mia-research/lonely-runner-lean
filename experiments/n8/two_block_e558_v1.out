@@ -1,0 +1,6 @@
+p=2 b=3/2 (Q=2): 96 (tau0, r) cells, 288 finite-N cascades (C1 checked), distinct limit Delta: 72, max |Delta(N) - Delta(limit)| = 0.000184
+p=4 b=3/2 (Q=2): 96 (tau0, r) cells, 288 finite-N cascades (C1 checked), distinct limit Delta: 21, max |Delta(N) - Delta(limit)| = 0.000022
+p=4 b=5/3 (Q=3): 144 (tau0, r) cells, 432 finite-N cascades (C1 checked), distinct limit Delta: 91, max |Delta(N) - Delta(limit)| = 0.000101
+p=6 b=2/3 (Q=3): 144 (tau0, r) cells, 432 finite-N cascades (C1 checked), distinct limit Delta: 45, max |Delta(N) - Delta(limit)| = 0.000000
+p=3 b=7/4 (Q=4): 192 (tau0, r) cells, 576 finite-N cascades (C1 checked), distinct limit Delta: 150, max |Delta(N) - Delta(limit)| = 0.000069
+p=5 b=4/3 (Q=3): 144 (tau0, r) cells, 432 finite-N cascades (C1 checked), distinct limit Delta: 49, max |Delta(N) - Delta(limit)| = 0.000084

@@ -1,0 +1,6 @@
+p=2 b=3/2 cells 96 | exact max |Delta(N)-Delta(lim)|: N=30Q: 725936/3945636305  120Q: 9428672/200593845725  480Q: 9394688/797796140765 | cells equal exactly: 25, 25, 25
+p=4 b=3/2 cells 96 | exact max |Delta(N)-Delta(lim)|: N=30Q: 5598320/256120649929  120Q: 5593280/1002623207689  480Q: 5573120/3988633438729 | cells equal exactly: 91, 91, 91
+p=4 b=5/3 cells 144 | exact max |Delta(N)-Delta(lim)|: N=30Q: 39588120/392509123009  120Q: 39552480/1558912460209  480Q: 39409920/6224525809009 | cells equal exactly: 67, 67, 67
+p=6 b=2/3 cells 144 | exact max |Delta(N)-Delta(lim)|: N=30Q: 0  120Q: 0  480Q: 0 | cells equal exactly: 144, 144, 144
+p=3 b=7/4 cells 192 | exact max |Delta(N)-Delta(lim)|: N=30Q: 499850/7282870227  120Q: 499400/28451074347  480Q: 497600/113123890827 | cells equal exactly: 43, 43, 43
+p=5 b=4/3 cells 144 | exact max |Delta(N)-Delta(lim)|: N=30Q: 86374080/1023042143041  120Q: 86296320/4009051078081  480Q: 85985280/15953086818241 | cells equal exactly: 129, 129, 129
