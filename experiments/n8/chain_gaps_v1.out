@@ -1,0 +1,4 @@
+cores 53 gaps 170 fillers needed per gap (count of gaps): [(1, 166), (2, 4)]
+(1, 5, 6, 7, 8, 13) A (Fraction(17, 64), Fraction(15, 56)) y0 156/5 fillers per gap by lap k: [1, 1, 1, 1, 1, 1, 1, 1]
+(1, 6, 7, 8, 9, 15) A (Fraction(3, 16), Fraction(23, 120)) y0 28 fillers per gap by lap k: [1, 1, 1, 1, 1]
+(1, 5, 6, 7, 8, 11) A (Fraction(9, 40), Fraction(15, 64)) y0 132/7 fillers per gap by lap k: [1, 1, 2, 1]

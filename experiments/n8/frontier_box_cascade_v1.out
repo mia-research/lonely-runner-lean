@@ -1,0 +1,10 @@
+(a) control candidates 85 exact carves 85 | cascade window of the landing: [(1, 85)] | largest landing exact 2814749767106560/286276608456687 < 26433/2209: True
+(b) 11 rho7 in (73/2, 367/10): True | exact carve: False | cascade landing window 0 exact R = 6896136929411072/5155032230721255
+(b) 12 rho7 in (73/2, 367/10): False | exact carve: False | cascade landing window 0 exact R = 3518437208883200/985256475861041
+(b) 13 rho7 in (73/2, 367/10): True | exact carve: False | cascade landing window 0 exact R = 3448068464705536/2580975193892231
+(b) 14 rho7 in (73/2, 367/10): True | exact carve: False | cascade landing window 0 exact R = 9570149208162304/2949201139719387
+(b) 15 rho7 in (73/2, 367/10): False | exact carve: False | cascade landing window 0 exact R = 28147497671065600/7848883209017087
+(b) 16 rho7 in (73/2, 367/10): False | exact carve: False | cascade landing window 0 exact R = 1
+(b) 17 rho7 in (73/2, 367/10): True | exact carve: False | cascade landing window 0 exact R = 19140298416324608/5900948891731229
+(b) 18 rho7 in (73/2, 367/10): True | exact carve: False | cascade landing window 0 exact R = 6896136929411072/5147628058824301
+(b) polished first vector: exact carve: False | cascade landing window 0 moves 7 exact R = 9570149208162304/2945732278089691

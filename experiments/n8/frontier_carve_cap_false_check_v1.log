@@ -1,0 +1,12 @@
+== lean Fresh/FrontierCarveCapFalse.lean
+'Fresh.FrontierCarveCapFalse.carve_ce' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.FrontierCarveCapFalse.not_frontierCarveCap' depends on axioms: [propext, Classical.choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/FrontierCarveCapFalse.lean sorry          0
+  Fresh/FrontierCarveCapFalse.lean native_decide  0
+  Fresh/FrontierCarveCapFalse.lean axiom          0
+  Fresh/FrontierCarveCapFalse.lean admit          0
+  Fresh/FrontierCarveCapFalse.lean unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  untagged: 0
+./check.sh Fresh/FrontierCarveCapFalse.lean  11.89s user 2.21s system 97% cpu 14.517 total

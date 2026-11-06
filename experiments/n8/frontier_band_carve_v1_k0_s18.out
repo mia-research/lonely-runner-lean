@@ -1,0 +1,2 @@
+carve rho7 values: [24.035, 24.041]
+lap k = 0 band (17.0, 80.0) restarts 150 steps 12000 carves found (float): 2 least uncovered length (float): 0.0

@@ -1,0 +1,7 @@
+chain length 19 | breaks (clear windows) at chain positions: [7, 12]
+chain (reading rho_{idx+2}, lap): [('r6', 1), ('r7', 6), ('r5', 1), ('r4', 1), ('r3', 1), ('r2', 1), ('r5', 2), ('r7', 15), ('r6', 3), ('r4', 2), ('r3', 2), ('r5', 3), ('r7', 22), ('r2', 2), ('r4', 3), ('r5', 4), ('r3', 3), ('r6', 6), ('r7', 32)]
+LP status 0 largest margin t (float, steering): 1.865174681370263e-14
+readings at the LP optimum (float): [np.float64(3.097928), np.float64(3.705882), np.float64(4.2), np.float64(5.222222), np.float64(7.0), np.float64(36.555556)]
+binding constraints (nonzero dual, float):
+   link 1: r7 lap 6 -> r5 lap 1 dual -0.78125
+   link 11: r5 lap 3 -> r7 lap 22 dual -0.21875

@@ -1,0 +1,11 @@
+lap 2 strip: 6 carves, 5 chain types; LP top r7 (float): 16.483871
+   binding constraints: ['link: r7 lap 9 -> r6 lap 4', 'end 7 r6 < 49']
+   exact solution of the tight system: {'r6': 7, 'r7': 511/31} | r7 float 16.483870967741936
+lap 3 strip: 90 carves, 2 chain types; LP top r7 (float): 24.400842
+   binding constraints: ['link: r3 lap 2 -> r6 lap 4', 'link: r7 lap 16 -> r2 lap 2', 'link: r2 lap 2 -> r3 lap 3', 'end 7 r6 < 49']
+   exact solution of the tight system: {'r2': 2023/713, 'r3': 119/31, 'r6': 7, 'r7': 86989/3565} | r7 float 24.40084151472651
+near-carves above 25: 9 vectors, 4 chain types
+  type chain length 20 | float margin -0.0 | binding links: ['link: r7 lap 6 -> r5 lap 1', 'link: r5 lap 3 -> r7 lap 22'] | exact nullspace of the binding rows (a combination equal to 0): [[25/7, 1]]
+  type chain length 23 | float margin -0.875 | binding links: ['link: r6 lap 3 -> r7 lap 18', 'link: r7 lap 22 -> r6 lap 4'] | exact nullspace of the binding rows (a combination equal to 0): []
+  type chain length 19 | float margin 0.0 | binding links: ['link: r7 lap 6 -> r5 lap 1', 'link: r5 lap 3 -> r7 lap 22'] | exact nullspace of the binding rows (a combination equal to 0): [[25/7, 1]]
+  type chain length 23 | float margin -0.951219512195 | binding links: ['link: r6 lap 3 -> r7 lap 18', 'link: r7 lap 22 -> r6 lap 4'] | exact nullspace of the binding rows (a combination equal to 0): []

@@ -1,0 +1,3 @@
+sets 650 prediction agrees on 650 disagrees on 0
+sets with max hi >= 1/3: 650 ; with max hi < 1/3: 0
+sets with max hi >= 1/3 and no shift-0 chain: 0 ; with max hi < 1/3 and a shift-0 chain: 0

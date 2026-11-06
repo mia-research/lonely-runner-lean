@@ -1,0 +1,8 @@
+sets 970 in the 53: 53
+corr(chain, y0 ) = 0.808
+corr(chain, 1/w ) = 0.808
+corr(chain, smax ) = 0.496
+corr(chain, longest run ) = 0.064
+corr(chain, nwindows ) = 0.264
+53 cores 53 mean chain 7.77 max 17 mean y0 22.9 mean longest run 3.21
+others 917 mean chain 2.65 max 9 mean y0 8.1 mean longest run 2.87

@@ -1,0 +1,3 @@
+restarts 100 steps 8000 | five-reading sets with C5 empty found: 0
+least longest-component m of a nonempty C5 (float): 0.03802613291112955  2/m = 52.59540865420572
+readings [13.401337919884845, 14.39863368657288, 15.3977870268757, 16.3337824840238, 29.85096053650623]

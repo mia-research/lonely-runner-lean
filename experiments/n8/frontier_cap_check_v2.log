@@ -1,0 +1,48 @@
+== lean Fresh/FrontierFamilyCapV2.lean
+'Fresh.FrontierFamilyCapV2.seven_strip_covers_R7' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FrontierFamilyCapV2.strip_covers_R1' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FrontierFamilyCapV2.first_landing_le_lonely' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCapV2.lean:117:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Fresh.FrontierFamilyCapV2.carved_of_landing_ge_nine_eighths' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCapV2.lean:128:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Fresh.FrontierFamilyCapV2.lonely_witness_of_not_carved' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FrontierFamilyCapV2.seam_nogap' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCapV2.lean:157:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Fresh.FrontierFamilyCapV2.frontier_cap' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FrontierFamilyCapV2.five11_lt_17' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCapV2.lean:182:17: warning: unused variable `h₆mem`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Fresh/FrontierFamilyCapV2.lean:182:35: warning: unused variable `h₇mem`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'Fresh.FrontierFamilyCapV2.frontier_family_cap' depends on axioms: [propext, choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/FrontierFamilyCapV2.lean sorry          0
+  Fresh/FrontierFamilyCapV2.lean native_decide  0
+  Fresh/FrontierFamilyCapV2.lean axiom          0
+  Fresh/FrontierFamilyCapV2.lean admit          0
+  Fresh/FrontierFamilyCapV2.lean unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  CarvesOneSeven                     DEFINITION Fresh/FrontierFamilyCapV2.lean:196
+  FrontierCarveCap                   OWED       Fresh/FrontierFamilyCapV2.lean:211
+  untagged: 0
+./check.sh Fresh/FrontierFamilyCapV2.lean  13.36s user 3.42s system 83% cpu 20.040 total

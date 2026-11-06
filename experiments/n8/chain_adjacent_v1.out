@@ -1,0 +1,3 @@
+53 53 chain pieces per period of the first window: min 4096/2125 median 4608/2053 max 512/157 ; A pieces per period: min 512/1581 median 896/939 max 256/157
+others, chain >= 5 51 chain pieces per period of the first window: min 13440/7361 median 26880/10523 max 1600/433 ; A pieces per period: min 832/2349 median 13312/12609 max 640/433
+consecutive chain pairs 1868 from the same (window, shift): 0 ; pieces of length >= 1/lo of their own window: 0 of 2838

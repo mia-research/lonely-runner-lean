@@ -1,0 +1,6 @@
+k4_s31 r7 = 31.878890557457545 | cascade landing R = 1.5370672925923783 | window 0 | moves 3 | landing past 7 (a carve): False | exact R = 6896136929411072/4486554988610957
+k5_s31 r7 = 40.11238854468388 | cascade landing R = 3.5585532613883464 | window 0 | moves 10 | landing past 7 (a carve): False | exact R = 28147497671065600/7909814917336389
+k6_s31 r7 = 48.44991067608712 | cascade landing R = 3.611962411184431 | window 0 | moves 10 | landing past 7 (a carve): False | exact R = 28147497671065600/7792854539102333
+k7_s31 r7 = 55.000000001 | cascade landing R = 1.2840186231446784 | window 0 | moves 1 | landing past 7 (a carve): False | exact R = 10133099161583616/7891707315558037
+k8_s31 r7 = 64.04602973278531 | cascade landing R = 1.4265594335008376 | window 0 | moves 3 | landing past 7 (a carve): False | exact R = 10133099161583616/7103173498153217
+k9_s31 r7 = 71.86133672623734 | cascade landing R = 1.0158452837873098 | window 0 | moves 1 | landing past 7 (a carve): False | exact R = 2568459162484736/2528396010176783

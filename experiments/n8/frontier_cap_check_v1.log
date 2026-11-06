@@ -1,0 +1,83 @@
+== lean Fresh/FrontierFamilyCap.lean
+Fresh/FrontierFamilyCap.lean:71:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a - (?b + ?c)
+in the target expression
+  distInt ((7 * ρ - 48) / 8 + 6) ≤ |(7 * ρ - 48) / 8 + 6 - 6|
+
+ρ : ℝ
+h1 : 47 / 7 < ρ
+h2 : ρ < 49 / 7
+hb1 : 47 < 7 * ρ
+hb2 : 7 * ρ < 49
+e : ρ * (7 / 8) = (7 * ρ - 48) / 8 + 6
+hle : distInt ((7 * ρ - 48) / 8 + 6) ≤ |(7 * ρ - 48) / 8 + 6 - 6|
+⊢ distInt ((7 * ρ - 48) / 8 + 6) < 1 / 8
+'Fresh.FrontierFamilyCap.seven_strip_covers_R7' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:86:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a - (?b + ?c)
+in the target expression
+  distInt ((ρ - 16) / 8 + 2) ≤ |(ρ - 16) / 8 + 2 - 2|
+
+ρ : ℝ
+h1 : 15 < ρ
+h2 : ρ < 17
+e : ρ * (1 / 8) = (ρ - 16) / 8 + 2
+hle : distInt ((ρ - 16) / 8 + 2) ≤ |(ρ - 16) / 8 + 2 - 2|
+⊢ distInt ((ρ - 16) / 8 + 2) < 1 / 8
+'Fresh.FrontierFamilyCap.strip_covers_R1' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:102:38: error: Application type mismatch: The argument
+  cascadeSeq_zero ds (1 / 8)
+has type
+  cascadeSeq ds (1 / 8) 0 = 1 / 8
+but is expected to have type
+  cascadeSeq ds (1 / 8) 0 = 1 / (8 * 1)
+in the application
+  fixed_is_first_isolation hpos hone (cascadeSeq_zero ds (1 / 8))
+'Fresh.FrontierFamilyCap.first_landing_le_lonely' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:115:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Fresh.FrontierFamilyCap.carved_of_landing_ge_nine_eighths' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:126:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'Fresh.FrontierFamilyCap.lonely_witness_of_not_carved' depends on axioms: [propext, choice, Quot.sound]
+'Fresh.FrontierFamilyCap.seam_nogap' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:154:44: error: Application type mismatch: The argument
+  hgt
+has type
+  0 < 73 / ρ₇
+but is expected to have type
+  0 < ρ₇ / 73
+in the application
+  (div_pos_iff_of_pos_right h73).mp hgt
+'Fresh.FrontierFamilyCap.frontier_cap' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+'Fresh.FrontierFamilyCap.five11_lt_17' depends on axioms: [propext, choice, Quot.sound]
+Fresh/FrontierFamilyCap.lean:181:31: error: Application type mismatch: The argument
+  five11_lt_17
+has type
+  (511 : ℝ) / 31 < 17
+but is expected to have type
+  (511 : ℕ) / 31 < 17
+in the application
+  And.intro five11_lt_17
+'Fresh.FrontierFamilyCap.frontier_family_cap' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+  Fresh/FrontierFamilyCap.lean sorry          0
+  Fresh/FrontierFamilyCap.lean native_decide  0
+  Fresh/FrontierFamilyCap.lean axiom          0
+  Fresh/FrontierFamilyCap.lean admit          0
+  Fresh/FrontierFamilyCap.lean unsafe         0
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)
+  CarvesOneSeven                     DEFINITION Fresh/FrontierFamilyCap.lean:191
+  FrontierCarveCap                   OWED       Fresh/FrontierFamilyCap.lean:206
+  untagged: 0
+./check.sh Fresh/FrontierFamilyCap.lean  12.01s user 4.89s system 45% cpu 37.537 total

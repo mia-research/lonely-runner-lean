@@ -1,0 +1,6 @@
+s1 rho7 = 24.279072116530347 | first lonely R = 9.32658462511928 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 36591746972385280/3923381220798959
+s1 rho7 = 23.777912069028865 | first lonely R = 9.516454166353194 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 36591746972385280/3845103053378927
+s2 rho7 = 23.434654593369274 | first lonely R = 9.65714891542293 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 73183493944770560/7578167695839609
+s2 rho7 = 24.367327193109105 | first lonely R = 9.285714287040816 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 18295873486192640/1970324836693117
+s3 rho7 = 23.530895341960868 | first lonely R = 9.612926592766058 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 1143492092887040/118953586283239
+s3 rho7 = 24.191804587653344 | first lonely R = 9.35763321147132 | in W_0 [1,7]: False | in W_1 [9,15]: True | below 17: True | exact R = 73183493944770560/7820726917898053

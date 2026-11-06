@@ -1,0 +1,2 @@
+restarts 200 steps each 10000 best objective 0.0010000001428570595 readings [3.0521356819656456, 3.652975868048414, 4.135450760831879, 5.147888575554871, 6.999999999, 17.917119019092727]
+candidates with objective 0 (a carve with the seam violated by at least 5e-3 on floats): 0

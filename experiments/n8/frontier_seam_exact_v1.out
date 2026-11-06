@@ -1,0 +1,7 @@
+candidates 6
+s1 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 24.279072116530347
+s1 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 23.777912069028865
+s2 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 23.434654593369274
+s2 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 24.367327193109105
+s3 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 23.530895341960868
+s3 exact carve: True  | rho6 < 7: True | rho7 > 511/31: True | 31/r6 - 73/r7 > 0: True | rho7 = 24.191804587653344

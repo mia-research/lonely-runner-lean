@@ -1,0 +1,12 @@
+logy0 coef [-0.42  0.69] train (0.71, 3.5) | N11-12 out (0.78, 3.2) | 53 cores (2.89, 9.9)
+logy0+loglo coef [0.42 0.57 0.25] train (0.55, 2.6) | N11-12 out (0.56, 3.1) | 53 cores (2.84, 9.3)
+log(y0*lo) coef [1.08 0.37] train (0.61, 2.9) | N11-12 out (0.61, 4.4) | 53 cores (3.74, 10.6)
+log(y0*lo/T) coef [1.08 0.37] train (0.61, 2.9) | N11-12 out (0.61, 4.4) | 53 cores (3.61, 10.6)
+(1, 5, 6, 7, 8, 13) chain 17 y0 31.2 lo_min 0.266 T 1.0 nw 8
+(1, 2, 5, 6, 7, 8) chain 12 y0 26.7 lo_min 0.225 T 1.0 nw 8
+(1, 6, 7, 8, 10, 13) chain 12 y0 28.9 lo_min 0.188 T 1.0 nw 12
+(3, 6, 15, 18, 21, 24) chain 12 y0 80.0 lo_min 0.075 T 0.333 nw 8
+(1, 6, 7, 8, 9, 15) chain 11 y0 28.0 lo_min 0.188 T 1.0 nw 16
+(1, 6, 7, 13, 19, 20) chain 11 y0 40.0 lo_min 0.125 T 1.0 nw 16
+lo_min over all: min/median/max 0.017857142857142856 0.125 0.30357142857142855
+53 cores lo_min median 0.15625  others 0.0625

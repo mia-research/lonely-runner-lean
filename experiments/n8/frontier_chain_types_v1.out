@@ -1,0 +1,5 @@
+laps 2,3 carves : 96 vectors, 7 distinct chain types
+  largest r7 over the closed chain types (LP, floats steer): 24.400842 | readings at the optimum: [2.837307, 3.83871, 4.904539, 6.305835, 7.0, 24.400842]
+  binding links of that type: [('link: r3 lap 2 -> r6 lap 4', -0.20505), ('link: r7 lap 16 -> r2 lap 2', -0.06667), ('link: r2 lap 2 -> r3 lap 3', -0.37391), ('end 7 r6 < 49', -0.49798)]
+near-carves above 25 : 9 vectors, 4 distinct chain types
+  largest margin t of each chain type (LP, floats steer): max 1.865174681370263e-14 | number of types with t > 1e-9: 0

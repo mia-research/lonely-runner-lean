@@ -1,0 +1,11 @@
+candidate rho7 = 24.279072116530347 | cascade landing R = 9.32658462511928 | moves 24 | window 1 | exact R = 36591746972385280/3923381220798959
+   rounded to 1/10000: readings ['3529/1250', '7643/2000', '12229/2500', '62889/10000', '69693/10000', '242791/10000'] | exact carve | seam violated | cascade landing R = 50000/5361 (9.326618), window 1, moves 24
+candidate rho7 = 23.777912069028865 | cascade landing R = 9.516454166353194 | moves 24 | window 1 | exact R = 36591746972385280/3845103053378927
+   rounded to 1/1000: readings ['2767/1000', '749/200', '957/200', '123/20', '683/100', '11889/500'] | exact carve | seam violated | cascade landing R = 6500/683 (9.516837), window 1, moves 24
+candidate rho7 = 23.434654593369274 | cascade landing R = 9.65714891542293 | moves 25 | window 1 | exact R = 73183493944770560/7578167695839609
+   rounded to 1/10000: readings ['27251/10000', '3689/1000', '11803/2500', '30317/5000', '16827/2500', '234347/10000'] | exact carve | seam violated | cascade landing R = 162500/16827 (9.657099), window 1, moves 25
+candidate rho7 = 24.367327193109105 | cascade landing R = 9.285714287040816 | moves 24 | window 1 | exact R = 18295873486192640/1970324836693117
+candidate rho7 = 23.530895341960868 | cascade landing R = 9.612926592766058 | moves 25 | window 1 | exact R = 1143492092887040/118953586283239
+   rounded to 1/10000: readings ['27363/10000', '37027/10000', '47403/10000', '15227/2500', '67617/10000', '235309/10000'] | exact carve | seam violated | cascade landing R = 650000/67617 (9.612967), window 1, moves 25
+candidate rho7 = 24.191804587653344 | cascade landing R = 9.35763321147132 | moves 24 | window 1 | exact R = 73183493944770560/7820726917898053
+   rounded to 1/1000: readings ['563/200', '3809/1000', '1219/250', '1567/250', '3473/500', '3024/125'] | exact carve | seam violated | cascade landing R = 32500/3473 (9.357904), window 1, moves 24

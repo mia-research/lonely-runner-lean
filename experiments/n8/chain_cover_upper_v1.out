@@ -1,0 +1,10 @@
+cores 53 explicit cover size minus chain length (counts): [(0, 24), (1, 25), (2, 4)]
+violations of chain <= explicit cover: 0
+cover - chain = 2: (1, 2, 5, 6, 7, 8) chain 12 cover 14 {'A': 7, 'gaps': 6, 'head': 1, 'tail': 0}
+cover - chain = 2: (1, 5, 7, 8, 12, 13) chain 8 cover 10 {'A': 5, 'gaps': 4, 'head': 1, 'tail': 0}
+cover - chain = 2: (1, 5, 6, 7, 8, 9) chain 6 cover 8 {'A': 4, 'gaps': 3, 'head': 1, 'tail': 0}
+cover - chain = 2: (3, 6, 15, 18, 21, 24) chain 12 cover 14 {'A': 7, 'gaps': 6, 'head': 1, 'tail': 0}
+(1, 5, 6, 7, 8, 13) chain 17 cover 18 {'A': 9, 'gaps': 8, 'head': 1, 'tail': 0}
+(1, 6, 7, 8, 9, 15) chain 11 cover 12 {'A': 6, 'gaps': 5, 'head': 1, 'tail': 0}
+(1, 5, 6, 7, 8, 11) chain 10 cover 11 {'A': 5, 'gaps': 5, 'head': 1, 'tail': 0}
+(1, 2, 5, 6, 7, 8) chain 12 cover 14 {'A': 7, 'gaps': 6, 'head': 1, 'tail': 0}

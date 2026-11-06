@@ -1,0 +1,6 @@
+s1 least-uncovered readings, rho7 = 29.97061928364204 | cascade landing R = 1.0 | window 0 | moves 0 | landing below 17: True | exact R = 1
+s2 least-uncovered readings, rho7 = 26.124149312448772 | cascade landing R = 1.7904757478991247 | window 0 | moves 3 | landing below 17: True | exact R = 5066549580791808/2829722539797985
+s3 least-uncovered readings, rho7 = 22.481270388831785 | cascade landing R = 1.0 | window 0 | moves 0 | landing below 17: True | exact R = 1
+s4 least-uncovered readings, rho7 = 24.061741772144135 | cascade landing R = 1.2818946307743349 | window 0 | moves 1 | landing below 17: True | exact R = 10133099161583616/7904783215655305
+s5 least-uncovered readings, rho7 = 17.98453184543001 | cascade landing R = 1.0 | window 0 | moves 0 | landing below 17: True | exact R = 1
+s6 least-uncovered readings, rho7 = 17.988506061360145 | cascade landing R = 1.3897763335500526 | window 0 | moves 2 | landing below 17: True | exact R = 7036874417766400/5063314324680841

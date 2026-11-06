@@ -1,0 +1,4 @@
+violators with the first gap not at 73/r7: 70
+zone that ends at the gap (reading index, lap): [((6, 3), 22), ((5, 1), 20), ((3, 2), 14), ((2, 1), 14)]
+gap width: min 1917110752167220119339008/4758016978108380879171495312681 max 4001889118356777424937549824/16828082847200695241433328712989 ; all below the grid step 1/4000: True
+gap location: min 1.3960007564001309 max 4.311314469680609
