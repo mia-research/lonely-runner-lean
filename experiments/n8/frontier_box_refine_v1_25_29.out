@@ -1,0 +1,7 @@
+level D=1: uncertified boxes 90963
+level D=2: children kept 5821632, certified 5648965, uncertified 172667
+level D=4: children kept 10383996, certified 10359773, uncertified 24223
+level D=8: children kept 1536928, certified 1532498, uncertified 4430
+level D=16: children kept 283520, certified 282763, uncertified 757
+level D=32: children kept 48448, certified 48210, uncertified 238
+level D=64: children kept 15232, certified 15232, uncertified 0

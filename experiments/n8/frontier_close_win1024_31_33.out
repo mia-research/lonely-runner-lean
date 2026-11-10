@@ -1,0 +1,1 @@
+frontier_box_dfs_v1_leaves64_31_33_wleaves_256.txt | input leaves 54 | depth cap 1024 | boxes tested 3510 | certified by depth D: [(512, 3456)] | uncertified leaves at the cap 0

@@ -1,0 +1,6 @@
+29_31.txt leaves 966 | nearest cluster (within 1/40?): [(('21/4', True), 966)] | rho7 centre in [3797/128, 3967/128]
+31_33.txt leaves 1377 | nearest cluster (within 1/40?): [(('21/4', True), 1377)] | rho7 centre in [3969/128, 4223/128]
+33_35.txt leaves 1134 | nearest cluster (within 1/40?): [(('21/4', True), 1134)] | rho7 centre in [4225/128, 4429/128]
+35_37.txt leaves 377 | nearest cluster (within 1/40?): [(('7', True), 377)] | rho7 centre in [4679/128, 4699/128]
+37_39.txt leaves 0 | nearest cluster (within 1/40?): [] 
+39_41.txt leaves 340 | nearest cluster (within 1/40?): [(('25/4', True), 81), (('63/10', True), 259)] | rho7 centre in [4999/128, 5139/128]

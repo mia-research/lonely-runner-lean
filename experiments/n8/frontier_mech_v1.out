@@ -1,0 +1,3 @@
+(1) leaves at D = 64 by the outcome of one window type: [('not certified by one window type', 2786), ('window type holds; common interval nonempty', 1408)]
+    among those with a window type: largest (min Y - max X) = 0 ; smallest = 0
+(2) uncertified leaves of the window-type run in [35,37) at D = 256: 35265 | h1 or h2 takes both signs on the corners: 35265 | neither does: 0

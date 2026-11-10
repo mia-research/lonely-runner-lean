@@ -1,0 +1,3 @@
+29_31 | children at D=128 of 25 leaves each: {'positive width': 1461, 'no single type; straddles h1 or h2: False; plane-split certifies: False': 21, 'single point': 118}
+35_37 | children at D=128 of 25 leaves each: {'positive width': 1187, 'no single type; straddles h1 or h2: True; plane-split certifies: True': 253, 'single point': 160}
+39_41 | children at D=128 of 25 leaves each: {'positive width': 1600}
