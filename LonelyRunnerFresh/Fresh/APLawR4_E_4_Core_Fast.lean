@@ -1,0 +1,5802 @@
+import Mathlib
+import Fresh.Framework
+import Fresh.Localisation
+import Fresh.Cascade
+import Fresh.OneMoverA
+import Fresh.SelfMoverCommon
+import Fresh.SelfMoverAllCommon
+import Fresh.APLaw
+import Fresh.APLawR4_E_4_LeavesA
+import Fresh.APLawR4_E_4_LeavesB
+import Fresh.APLawR4_E_4_LeavesC
+import Fresh.APLawR4_E_4_LeavesD
+import Fresh.APLawR4_E_4_LeavesE
+import Fresh.APLawR4_E_4_LeavesF
+import Fresh.APLawR4_E_4_LeavesG
+import Fresh.APLawR4_E_4_LeavesH
+import Fresh.APLawR4_E_4_LeavesI
+import Fresh.APLawR4_E_4_LeavesJ
+import Fresh.APLawR4_E_4_LeavesK
+import Fresh.APLawR4_E_4_LeavesL
+import Fresh.APLawR4_E_4_LeavesM
+import Fresh.APLawR4_E_4_LeavesN
+import Fresh.APLawR4_E_4_LeavesO
+import Fresh.APLawR4_E_4_LeavesP
+import Fresh.APLawR4_E_4_LeavesQ
+import Fresh.APLawR4_E_4_LeavesR
+import Fresh.APLawR4_E_4_LeavesS
+import Fresh.APLawR4_E_4_LeavesT
+import Fresh.APLawR4_E_4_LeavesU
+import Fresh.APLawR4_E_4_LeavesV
+import Fresh.APLawR4_E_4_LeavesW
+import Fresh.APLawR4_E_4_LeavesX
+import Fresh.APLawR4_E_4_LeavesY
+import Fresh.APLawR4_E_4_LeavesZ
+import Fresh.APLawR4_E_4_LeavesAA
+import Fresh.APLawR4_E_4_LeavesAB
+import Fresh.APLawR4_E_4_LeavesAC
+import Fresh.APLawR4_E_4_LeavesAD
+import Fresh.APLawR4_E_4_LeavesAE
+import Fresh.APLawR4_E_4_LeavesAF
+import Fresh.APLawR4_E_4_LeavesAG
+import Fresh.APLawR4_E_4_LeavesAH
+import Fresh.APLawR4_E_4_LeavesAI
+import Fresh.APLawR4_E_4_LeavesAJ
+import Fresh.APLawR4_E_4_LeavesAK
+import Fresh.APLawR4_E_4_LeavesAL
+import Fresh.APLawR4_E_4_LeavesAM
+import Fresh.APLawR4_E_4_LeavesAN
+import Fresh.APLawR4_E_4_LeavesAO
+import Fresh.APLawR4_E_4_LeavesAP
+import Fresh.APLawR4_E_4_LeavesAQ
+import Fresh.APLawR4_E_4_LeavesAR
+import Fresh.APLawR4_E_4_LeavesAS
+import Fresh.APLawR4_E_4_LeavesAT
+import Fresh.APLawR4_E_4_LeavesAU
+import Fresh.APLawR4_E_4_LeavesAV
+import Fresh.APLawR4_E_4_LeavesAW
+import Fresh.APLawR4_E_4_LeavesAX
+import Fresh.APLawR4_E_4_LeavesAY
+import Fresh.APLawR4_E_4_LeavesAZ
+import Fresh.APLawR4_E_4_LeavesBA
+import Fresh.APLawR4_E_4_LeavesBB
+import Fresh.APLawR4_E_4_LeavesBC
+import Fresh.APLawR4_E_4_LeavesBD
+import Fresh.APLawR4_E_4_LeavesBE
+import Fresh.APLawR4_E_4_LeavesBF
+import Fresh.APLawR4_E_4_LeavesBG
+import Fresh.APLawR4_E_4_LeavesBH
+import Fresh.APLawR4_E_4_LeavesBI
+import Fresh.APLawR4_E_4_LeavesBJ
+import Fresh.APLawR4_E_4_LeavesBK
+import Fresh.APLawR4_E_4_LeavesBL
+import Fresh.APLawR4_E_4_LeavesBM
+import Fresh.APLawR4_E_4_LeavesBN
+import Fresh.APLawR4_E_4_LeavesBO
+import Fresh.APLawR4_E_4_LeavesBP
+import Fresh.APLawR4_E_4_LeavesBQ
+import Fresh.APLawR4_E_4_LeavesBR
+import Fresh.APLawR4_E_4_LeavesBS
+import Fresh.APLawR4_E_4_LeavesBT
+import Fresh.APLawR4_E_4_LeavesBU
+import Fresh.APLawR4_E_4_LeavesBV
+import Fresh.APLawR4_E_4_LeavesBW
+import Fresh.APLawR4_E_4_LeavesBX
+import Fresh.APLawR4_E_4_LeavesBY
+import Fresh.APLawR4_E_4_LeavesBZ
+import Fresh.APLawR4_E_4_LeavesCA
+import Fresh.APLawR4_E_4_LeavesCB
+import Fresh.APLawR4_E_4_LeavesCC
+import Fresh.APLawR4_E_4_LeavesCD
+import Fresh.APLawR4_E_4_LeavesCE
+import Fresh.APLawR4_E_4_LeavesCF
+import Fresh.APLawR4_E_4_LeavesCG
+import Fresh.APLawR4_E_4_LeavesCH
+import Fresh.APLawR4_E_4_LeavesCI
+import Fresh.APLawR4_E_4_LeavesCJ
+import Fresh.APLawR4_E_4_LeavesCK
+import Fresh.APLawR4_E_4_LeavesCL
+import Fresh.APLawR4_E_4_LeavesCM
+import Fresh.APLawR4_E_4_LeavesCN
+import Fresh.APLawR4_E_4_LeavesCO
+import Fresh.APLawR4_E_4_LeavesCP
+import Fresh.APLawR4_E_4_LeavesCQ
+import Fresh.APLawR4_E_4_LeavesCR
+import Fresh.APLawR4_E_4_LeavesCS
+import Fresh.APLawR4_E_4_LeavesCT
+import Fresh.APLawR4_E_4_LeavesCU
+import Fresh.APLawR4_E_4_LeavesCV
+import Fresh.APLawR4_E_4_LeavesCW
+import Fresh.APLawR4_E_4_LeavesCX
+import Fresh.APLawR4_E_4_LeavesCY
+import Fresh.APLawR4_E_4_LeavesCZ
+import Fresh.APLawR4_E_4_LeavesDA
+import Fresh.APLawR4_E_4_LeavesDB
+import Fresh.APLawR4_E_4_LeavesDC
+import Fresh.APLawR4_E_4_LeavesDD
+import Fresh.APLawR4_E_4_LeavesDE
+import Fresh.APLawR4_E_4_LeavesDF
+import Fresh.APLawR4_E_4_LeavesDG
+import Fresh.APLawR4_E_4_LeavesDH
+import Fresh.APLawR4_E_4_LeavesDI
+
+/-!
+# The landing-law case tree (heartbeat-raised rebuild of `Fresh.APLawR4_E_4_Core`)
+
+Written 2026-11-06.  New file: byte-identical rebuild of `Fresh/APLawR4_E_4_Core.lean` (by another session,
+2026-11-02, uncommitted, left untouched) with one change: `set_option maxHeartbeats 16000000 in` in front of
+`apLawR4_E_4_core` (the same per-theorem budget the `APLawR4_E_4_Leaves*` files already use for heavy leaves).
+The original times out at the default 200000 budget inside the deep-tail chambers of the case tree
+(elaboration of the leaf applications with 19-30-deep `Or.inr` rewrapping of the 33-fold disjunction),
+so `apLawR4_E_4_core` there depends on `sorryAx` injected by the errored bullets.  This file supersedes the
+timed-out core; import `Fresh.APLawR4_E_4_Core_Fast` instead of `Fresh.APLawR4_E_4_Core`.
+
+Body below is the original text (GENERATED by `experiments/n8/ap_law_gen_r4_v2.py`, tag E, relative radius
+1/4, nominal readings [1, 2, 3, 4, 5, 6, 7]).  A case tree on 1129 linear inequalities (1130 leaves, 845
+distinct chain types) built by the exact simplex of `ap_r4_chambers_v1.py`; each leaf is a leaf lemma of
+`APLawR4_E_4_Leaves*`.  Boundary ownership: a strict inequality that fails goes to the other side with the
+weak inequality.  Conclusion: the first clear instant `T` exists and equals one of 33 explicit forms
+`(M + 1/8)/x_i`.  Grades: [L].
+-/
+
+open Classical
+
+namespace Fresh.OneMover
+
+open Fresh
+
+set_option maxHeartbeats 16000000 in
+theorem apLawR4_E_4_core (x1 x2 x3 x4 x5 x6 x7 : ℝ) (b1l : -(1/4 : ℝ) ≤ x1 - 1) (b1u : x1 - 1 ≤ (1/4 : ℝ)) (b2l : -(1/4 : ℝ) ≤ x2 - 2) (b2u : x2 - 2 ≤ (1/4 : ℝ)) (b3l : -(1/4 : ℝ) ≤ x3 - 3) (b3u : x3 - 3 ≤ (1/4 : ℝ)) (b4l : -(1/4 : ℝ) ≤ x4 - 4) (b4u : x4 - 4 ≤ (1/4 : ℝ)) (b5l : -(1/4 : ℝ) ≤ x5 - 5) (b5u : x5 - 5 ≤ (1/4 : ℝ)) (b6l : -(1/4 : ℝ) ≤ x6 - 6) (b6u : x6 - 6 ≤ (1/4 : ℝ)) (b7l : -(1/4 : ℝ) ≤ x7 - 7) (b7u : x7 - 7 ≤ (1/4 : ℝ)) :
+    ∃ T : ℝ, 0 < T ∧ Clear7 x1 x2 x3 x4 x5 x6 x7 T ∧ (∀ s : ℝ, 0 < s → s < T → ¬ Clear7 x1 x2 x3 x4 x5 x6 x7 s) ∧
+      (T = ((0 : ℝ) + 1 / 8) / x1 ∨ T = ((2 : ℝ) + 1 / 8) / x7 ∨ T = ((3 : ℝ) + 1 / 8) / x7 ∨ T = ((4 : ℝ) + 1 / 8) / x6 ∨ T = ((4 : ℝ) + 1 / 8) / x7 ∨ T = ((6 : ℝ) + 1 / 8) / x7 ∨ T = ((4 : ℝ) + 1 / 8) / x5 ∨ T = ((5 : ℝ) + 1 / 8) / x6 ∨ T = ((3 : ℝ) + 1 / 8) / x4 ∨ T = ((2 : ℝ) + 1 / 8) / x3 ∨ T = ((3 : ℝ) + 1 / 8) / x5 ∨ T = ((6 : ℝ) + 1 / 8) / x5 ∨ T = ((1 : ℝ) + 1 / 8) / x1 ∨ T = ((9 : ℝ) + 1 / 8) / x6 ∨ T = ((5 : ℝ) + 1 / 8) / x4 ∨ T = ((8 : ℝ) + 1 / 8) / x7 ∨ T = ((2 : ℝ) + 1 / 8) / x2 ∨ T = ((6 : ℝ) + 1 / 8) / x6 ∨ T = ((2 : ℝ) + 1 / 8) / x4 ∨ T = ((1 : ℝ) + 1 / 8) / x2 ∨ T = ((2 : ℝ) + 1 / 8) / x5 ∨ T = ((1 : ℝ) + 1 / 8) / x3 ∨ T = ((1 : ℝ) + 1 / 8) / x4 ∨ T = ((2 : ℝ) + 1 / 8) / x6 ∨ T = ((5 : ℝ) + 1 / 8) / x7 ∨ T = ((3 : ℝ) + 1 / 8) / x6 ∨ T = ((8 : ℝ) + 1 / 8) / x6 ∨ T = ((4 : ℝ) + 1 / 8) / x4 ∨ T = ((9 : ℝ) + 1 / 8) / x7 ∨ T = ((3 : ℝ) + 1 / 8) / x3 ∨ T = ((5 : ℝ) + 1 / 8) / x5 ∨ T = ((1 : ℝ) + 1 / 8) / x5 ∨ T = ((1 : ℝ) + 1 / 8) / x6) := by
+  rcases le_or_gt (x6 * (1/8 : ℝ)) (x1 * (7/8 : ℝ)) with g0 | g0
+  · -- whi6 holds
+    rcases le_or_gt (x7 * (1/8 : ℝ)) (x1 * (7/8 : ℝ)) with g1 | g1
+    · -- whi7 holds
+      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_00 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1
+      exact ⟨T, hT, hc, hf, (Or.inl he)⟩
+    · -- whi7 fails
+      rcases lt_or_ge (x6 * (7/8 : ℝ)) (x5 * (9/8 : ℝ)) with g2 | g2
+      · -- ov3 holds
+        rcases lt_or_ge (x5 * (7/8 : ℝ)) (x4 * (9/8 : ℝ)) with g3 | g3
+        · -- ov4 holds
+          rcases lt_or_ge (x4 * (15/8 : ℝ)) (x7 * (9/8 : ℝ)) with g4 | g4
+          · -- ov5 holds
+            rcases le_or_gt (x3 * (17/8 : ℝ)) (x7 * (7/8 : ℝ)) with g5 | g5
+            · -- whi3 holds
+              rcases le_or_gt (x7 * (9/8 : ℝ)) (x4 * (17/8 : ℝ)) with g6 | g6
+              · -- wlo4 holds
+                rcases le_or_gt (x6 * (17/8 : ℝ)) (x7 * (15/8 : ℝ)) with g7 | g7
+                · -- whi6 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_01 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inl he))⟩
+                · -- whi6 fails
+                  rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g8 | g8
+                  · -- ov9 holds
+                    rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g9 | g9
+                    · -- whi2 holds
+                      rcases le_or_gt (x6 * (25/8 : ℝ)) (x7 * (23/8 : ℝ)) with g10 | g10
+                      · -- whi6 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_02 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                      · -- whi6 fails
+                        rcases lt_or_ge (x6 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g11 | g11
+                        · -- ov11 holds
+                          rcases lt_or_ge (x2 * (31/8 : ℝ)) (x6 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov12 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_03 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                          · -- ov12 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_04 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- ov11 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_05 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                    · -- whi2 fails
+                      rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov11 holds
+                        rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g11 | g11
+                        · -- whi5 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_06 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                        · -- whi5 fails
+                          rcases lt_or_ge (x5 * (31/8 : ℝ)) (x6 * (25/8 : ℝ)) with g12 | g12
+                          · -- ov13 holds
+                            rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g13 | g13
+                            · -- whi3 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_07 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- whi3 fails
+                              rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov15 holds
+                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov16 holds
+                                  rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov17 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_08 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- ov17 fails
+                                    rcases le_or_gt (x5 * (41/8 : ℝ)) (x6 * (33/8 : ℝ)) with g17 | g17
+                                    · -- wlo6 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_09 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- wlo6 fails
+                                      rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g18 | g18
+                                      · -- ov11 holds
+                                        rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_10 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                        · -- ov15 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_11 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                      · -- ov11 fails
+                                        rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g19 | g19
+                                        · -- ov16 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_12 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                        · -- ov16 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_13 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                · -- ov16 fails
+                                  rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (25/8 : ℝ)) with g16 | g16
+                                  · -- wlo3 holds
+                                    rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g17 | g17
+                                    · -- whi6 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_14 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                    · -- whi6 fails
+                                      rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov18 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_15 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov18 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_16 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- wlo3 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_17 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- ov15 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_18 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov13 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_19 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                      · -- ov11 fails
+                        rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          rcases lt_or_ge (x2 * (15/8 : ℝ)) (x4 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x7 * (17/8 : ℝ)) with g13 | g13
+                            · -- ov11 holds
+                              rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g14 | g14
+                              · -- whi5 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_20 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                              · -- whi5 fails
+                                rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g15 | g15
+                                · -- whi3 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_21 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                · -- whi3 fails
+                                  rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g17 | g17
+                                    · -- ov17 holds
+                                      rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g18 | g18
+                                      · -- whi2 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_22 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- whi2 fails
+                                        rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov19 holds
+                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g20 | g20
+                                          · -- ov20 holds
+                                            rcases le_or_gt (x5 * (9/8 : ℝ)) (x1 * (49/8 : ℝ)) with g21 | g21
+                                            · -- wlo1 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_23 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                            · -- wlo1 fails
+                                              rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g22 | g22
+                                              · -- whi4 holds
+                                                rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (71/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_24 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                · -- whi7 fails
+                                                  rcases lt_or_ge (x4 * (23/8 : ℝ)) (x2 * (41/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_25 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_26 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                              · -- whi4 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_27 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                          · -- ov20 fails
+                                            rcases le_or_gt (x1 * (57/8 : ℝ)) (x6 * (9/8 : ℝ)) with g21 | g21
+                                            · -- wlo6 holds
+                                              rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g22 | g22
+                                              · -- wlo7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_28 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                              · -- wlo7 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_29 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                            · -- wlo6 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_30 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                        · -- ov19 fails
+                                          rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g20 | g20
+                                          · -- ov8 holds
+                                            rcases lt_or_ge (x5 * (15/8 : ℝ)) (x2 * (33/8 : ℝ)) with g21 | g21
+                                            · -- ov16 holds
+                                              rcases le_or_gt (x6 * (17/8 : ℝ)) (x2 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi6 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_31 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                              · -- whi6 fails
+                                                rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g23 | g23
+                                                · -- ov18 holds
+                                                  rcases le_or_gt (x5 * (9/8 : ℝ)) (x1 * (49/8 : ℝ)) with g24 | g24
+                                                  · -- wlo1 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_32 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                                  · -- wlo1 fails
+                                                    rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g25 | g25
+                                                    · -- whi4 holds
+                                                      rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (71/8 : ℝ)) with g26 | g26
+                                                      · -- whi7 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_33 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                      · -- whi7 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_34 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- whi4 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_35 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov18 fails
+                                                  rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g24 | g24
+                                                  · -- ov18 holds
+                                                    rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_36 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_37 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                  · -- ov18 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_38 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                            · -- ov16 fails
+                                              rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g22 | g22
+                                              · -- ov19 holds
+                                                rcases le_or_gt (x5 * (9/8 : ℝ)) (x1 * (49/8 : ℝ)) with g23 | g23
+                                                · -- wlo1 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_39 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                                · -- wlo1 fails
+                                                  rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g24 | g24
+                                                  · -- whi4 holds
+                                                    rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (71/8 : ℝ)) with g25 | g25
+                                                    · -- whi7 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_40 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                    · -- whi7 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_41 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- whi4 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_42 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                              · -- ov19 fails
+                                                rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g23 | g23
+                                                · -- ov19 holds
+                                                  rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov21 holds
+                                                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x2 * (73/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_43 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_44 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_45 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov21 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_46 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                · -- ov19 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_47 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                          · -- ov8 fails
+                                            rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g21 | g21
+                                            · -- ov20 holds
+                                              rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g22 | g22
+                                              · -- whi4 holds
+                                                rcases le_or_gt (x1 * (49/8 : ℝ)) (x5 * (9/8 : ℝ)) with g23 | g23
+                                                · -- wlo5 holds
+                                                  rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (71/8 : ℝ)) with g24 | g24
+                                                  · -- whi7 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_48 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                  · -- whi7 fails
+                                                    rcases lt_or_ge (x2 * (55/8 : ℝ)) (x7 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov19 holds
+                                                      rcases lt_or_ge (x4 * (23/8 : ℝ)) (x2 * (41/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_49 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_50 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                    · -- ov19 fails
+                                                      rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov24 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_51 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov24 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_52 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- wlo5 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_53 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                              · -- whi4 fails
+                                                rcases lt_or_ge (x2 * (55/8 : ℝ)) (x7 * (17/8 : ℝ)) with g23 | g23
+                                                · -- ov19 holds
+                                                  rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g24 | g24
+                                                  · -- whi2 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_54 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                  · -- whi2 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_55 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov19 fails
+                                                  rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g24 | g24
+                                                  · -- ov23 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_56 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov23 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_57 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov20 fails
+                                              rcases lt_or_ge (x2 * (55/8 : ℝ)) (x7 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov19 holds
+                                                rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g24 | g24
+                                                  · -- whi2 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_58 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                  · -- whi2 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_59 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_60 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                              · -- ov19 fails
+                                                rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g23 | g23
+                                                · -- ov20 holds
+                                                  rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov25 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_61 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov25 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_62 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_63 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                · -- ov20 fails
+                                                  rcases le_or_gt (x2 * (49/8 : ℝ)) (x6 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- wlo6 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_64 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                                  · -- wlo6 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_65 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                    · -- ov17 fails
+                                      rcases le_or_gt (x2 * (33/8 : ℝ)) (x5 * (15/8 : ℝ)) with g18 | g18
+                                      · -- whi2 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_66 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi2 fails
+                                        rcases le_or_gt (x1 * (17/8 : ℝ)) (x2 * (7/8 : ℝ)) with g19 | g19
+                                        · -- whi1 holds
+                                          rcases le_or_gt (x6 * (17/8 : ℝ)) (x2 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi6 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_67 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                          · -- whi6 fails
+                                            rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g21 | g21
+                                            · -- ov18 holds
+                                              rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g22 | g22
+                                              · -- whi4 holds
+                                                rcases le_or_gt (x1 * (49/8 : ℝ)) (x5 * (9/8 : ℝ)) with g23 | g23
+                                                · -- wlo5 holds
+                                                  rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (71/8 : ℝ)) with g24 | g24
+                                                  · -- whi7 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_68 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                  · -- whi7 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_69 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- wlo5 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_70 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                              · -- whi4 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_71 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov18 fails
+                                              rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g22 | g22
+                                              · -- ov18 holds
+                                                rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (39/8 : ℝ)) with g23 | g23
+                                                · -- whi4 holds
+                                                  rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov20 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_72 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov20 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_73 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                · -- whi4 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_74 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                              · -- ov18 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_75 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                        · -- whi1 fails
+                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g20 | g20
+                                          · -- ov18 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_76 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))⟩
+                                          · -- ov18 fails
+                                            rcases le_or_gt (x1 * (57/8 : ℝ)) (x6 * (9/8 : ℝ)) with g21 | g21
+                                            · -- wlo6 holds
+                                              rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g22 | g22
+                                              · -- wlo7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_77 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                              · -- wlo7 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_78 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                            · -- wlo6 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_79 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                  · -- ov15 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_80 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- ov11 fails
+                              rcases le_or_gt (x4 * (9/8 : ℝ)) (x2 * (17/8 : ℝ)) with g14 | g14
+                              · -- wlo2 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_81 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                              · -- wlo2 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_82 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                          · -- ov10 fails
+                            rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi7 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_83 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                            · -- whi7 fails
+                              rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g14 | g14
+                              · -- whi5 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_84 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                              · -- whi5 fails
+                                rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g15 | g15
+                                · -- whi3 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_85 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                · -- whi3 fails
+                                  rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases le_or_gt (x1 * (17/8 : ℝ)) (x2 * (7/8 : ℝ)) with g17 | g17
+                                    · -- whi1 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_86 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                    · -- whi1 fails
+                                      rcases le_or_gt (x1 * (57/8 : ℝ)) (x6 * (9/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g19 | g19
+                                        · -- wlo7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_87 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                        · -- wlo7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_88 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_89 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                  · -- ov15 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_90 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov9 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_91 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                  · -- ov9 fails
+                    rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g9 | g9
+                    · -- whi2 holds
+                      rcases le_or_gt (x5 * (9/8 : ℝ)) (x3 * (17/8 : ℝ)) with g10 | g10
+                      · -- wlo3 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_92 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                      · -- wlo3 fails
+                        rcases le_or_gt (x2 * (9/8 : ℝ)) (x3 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          rcases le_or_gt (x7 * (9/8 : ℝ)) (x3 * (23/8 : ℝ)) with g12 | g12
+                          · -- whi7 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_93 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+                          · -- whi7 fails
+                            rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g13 | g13
+                            · -- whi2 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_94 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                            · -- whi2 fails
+                              rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov10 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_95 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- ov10 fails
+                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov10 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_96 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                · -- ov10 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_97 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                        · -- whi2 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_98 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                    · -- whi2 fails
+                      rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g10 | g10
+                      · -- wlo4 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_99 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                      · -- wlo4 fails
+                        rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov8 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_100 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                        · -- ov8 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_101 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+              · -- wlo4 fails
+                rcases le_or_gt (x3 * (9/8 : ℝ)) (x4 * (7/8 : ℝ)) with g7 | g7
+                · -- whi3 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_102 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))⟩
+                · -- whi3 fails
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_103 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+            · -- whi3 fails
+              rcases lt_or_ge (x4 * (7/8 : ℝ)) (x3 * (9/8 : ℝ)) with g6 | g6
+              · -- ov5 holds
+                rcases le_or_gt (x3 * (17/8 : ℝ)) (x6 * (9/8 : ℝ)) with g7 | g7
+                · -- wlo6 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_104 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+                · -- wlo6 fails
+                  rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g8 | g8
+                  · -- whi5 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_105 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+                  · -- whi5 fails
+                    rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g9 | g9
+                    · -- ov8 holds
+                      rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g10 | g10
+                      · -- whi2 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_106 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                      · -- whi2 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov10 holds
+                          rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi6 holds
+                            rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g13 | g13
+                            · -- whi7 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_107 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- whi7 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_108 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                          · -- whi6 fails
+                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g13 | g13
+                            · -- ov14 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_109 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov14 fails
+                              rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov13 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_110 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov13 fails
+                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_111 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- wlo6 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_112 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- ov10 fails
+                          rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi6 holds
+                              rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g14 | g14
+                              · -- whi7 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_113 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- whi7 fails
+                                rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g15 | g15
+                                · -- ov15 holds
+                                  rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_114 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- whi7 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_115 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                · -- ov15 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_116 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- whi6 fails
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g14 | g14
+                              · -- ov15 holds
+                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g15 | g15
+                                · -- whi7 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_117 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- whi7 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_118 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                              · -- ov15 fails
+                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_119 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- wlo6 fails
+                                  rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g16 | g16
+                                  · -- whi4 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_120 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                  · -- whi4 fails
+                                    rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_121 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- whi7 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_122 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                          · -- ov10 fails
+                            rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g13 | g13
+                            · -- wlo4 holds
+                              rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g14 | g14
+                              · -- wlo6 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_123 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                              · -- wlo6 fails
+                                rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov11 holds
+                                  rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_124 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov16 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_125 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_126 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov16 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_127 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                  · -- whi6 fails
+                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_128 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g19 | g19
+                                        · -- whi4 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_129 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- whi4 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_130 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_131 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                    · -- whi4 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_132 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_133 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov15 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_134 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov11 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_135 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- wlo4 fails
+                              rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov9 holds
+                                rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov10 holds
+                                  rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_136 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_137 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g20 | g20
+                                          · -- whi2 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_138 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                          · -- whi2 fails
+                                            rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g21 | g21
+                                            · -- ov21 holds
+                                              rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g22 | g22
+                                              · -- ov22 holds
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov23 holds
+                                                  rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g24 | g24
+                                                  · -- ov21 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_139 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov21 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_140 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov23 fails
+                                                  rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_141 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_142 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_143 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_144 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_145 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_146 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_147 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_148 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                              · -- ov22 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_149 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                            · -- ov21 fails
+                                              rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_150 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov22 holds
+                                                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- ov19 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_151 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov19 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_152 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov22 fails
+                                                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- ov19 holds
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_153 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_154 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_155 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_156 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_157 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_158 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_159 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_160 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                  · -- ov19 fails
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_161 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_162 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_163 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_164 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_165 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_166 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_167 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_168 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- ov15 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_169 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                  · -- whi6 fails
+                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_170 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g19 | g19
+                                        · -- whi4 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_171 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- whi4 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_172 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g21 | g21
+                                            · -- whi2 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_173 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                            · -- whi2 fails
+                                              rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g22 | g22
+                                              · -- ov20 holds
+                                                rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_174 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_175 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_176 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_177 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_178 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g27 | g27
+                                                        · -- ov18 holds
+                                                          rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov19 holds
+                                                            rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g29 | g29
+                                                            · -- ov20 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_179 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov20 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_180 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov19 fails
+                                                            rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov19 holds
+                                                              rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_181 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_182 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov19 fails
+                                                              rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- wlo7 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_183 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                              · -- wlo7 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_184 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                        · -- ov18 fails
+                                                          rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_185 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_186 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_187 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                              · -- ov20 fails
+                                                rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g23 | g23
+                                                · -- whi1 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_188 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                · -- whi1 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov21 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_189 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov21 fails
+                                                    rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov18 holds
+                                                      rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g27 | g27
+                                                        · -- ov18 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_190 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov18 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_191 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov19 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_192 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov19 fails
+                                                          rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov19 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_193 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov19 fails
+                                                            rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov19 holds
+                                                              rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g30 | g30
+                                                              · -- ov20 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_194 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov20 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_195 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov19 fails
+                                                              rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- wlo7 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_196 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                              · -- wlo7 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_197 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                    · -- ov18 fails
+                                                      rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g27 | g27
+                                                        · -- ov19 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_198 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov19 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_199 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g27 | g27
+                                                        · -- ov18 holds
+                                                          rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov19 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_200 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov19 fails
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov19 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_201 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov19 fails
+                                                              rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov19 holds
+                                                                rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g31 | g31
+                                                                · -- ov20 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_202 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov20 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_203 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov19 fails
+                                                                rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- wlo7 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_204 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                · -- wlo7 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_205 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                        · -- ov18 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_206 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_207 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g20 | g20
+                                          · -- whi2 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_208 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                          · -- whi2 fails
+                                            rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g21 | g21
+                                            · -- whi1 holds
+                                              rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov18 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_209 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                              · -- ov18 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_210 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                            · -- whi1 fails
+                                              rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov18 holds
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov20 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_211 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov20 fails
+                                                  rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov20 holds
+                                                    rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov18 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_212 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov18 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_213 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov20 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov19 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_214 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov19 fails
+                                                      rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_215 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov19 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_216 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov19 fails
+                                                          rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- wlo7 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_217 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                          · -- wlo7 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_218 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                              · -- ov18 fails
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_219 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov21 holds
+                                                    rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov19 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_220 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov19 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_221 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov21 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_222 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_223 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov19 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_224 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov19 fails
+                                                          rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- wlo7 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_225 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                          · -- wlo7 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_226 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- ov14 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_227 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov10 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_228 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                              · -- ov9 fails
+                                rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov11 holds
+                                  rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_229 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov16 holds
+                                        rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov18 holds
+                                          rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov22 holds
+                                            rcases le_or_gt (x1 * (49/8 : ℝ)) (x6 * (7/8 : ℝ)) with g21 | g21
+                                            · -- whi1 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_230 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                            · -- whi1 fails
+                                              rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov24 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_231 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                              · -- ov24 fails
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov24 holds
+                                                  rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_232 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_233 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov24 fails
+                                                  rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov23 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_234 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov23 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_235 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov22 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_236 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov22 fails
+                                                        rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_237 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- wlo7 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_238 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                          · -- wlo7 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_239 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                          · -- ov22 fails
+                                            rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g21 | g21
+                                            · -- whi1 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_240 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                            · -- whi1 fails
+                                              rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov23 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_241 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                              · -- ov23 fails
+                                                rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov23 holds
+                                                  rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g24 | g24
+                                                  · -- ov21 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_242 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov21 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_243 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov23 fails
+                                                  rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_244 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_245 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_246 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- wlo7 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_247 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                        · -- wlo7 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_248 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                        · -- ov18 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_249 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- ov16 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_250 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                  · -- whi6 fails
+                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_251 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g19 | g19
+                                        · -- whi4 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_252 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- whi4 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_253 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g21 | g21
+                                            · -- ov21 holds
+                                              rcases le_or_gt (x1 * (49/8 : ℝ)) (x6 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_254 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov23 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_255 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov23 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov23 holds
+                                                    rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_256 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_257 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov23 fails
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_258 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_259 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_260 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases lt_or_ge (x4 * (23/8 : ℝ)) (x2 * (41/8 : ℝ)) with g29 | g29
+                                                            · -- ov23 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_261 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov23 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_262 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g29 | g29
+                                                            · -- ov22 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_263 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov22 fails
+                                                              rcases lt_or_ge (x4 * (23/8 : ℝ)) (x2 * (41/8 : ℝ)) with g30 | g30
+                                                              · -- ov23 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_264 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov23 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_265 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_266 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_267 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                            · -- ov21 fails
+                                              rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_268 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov22 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_269 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov22 fails
+                                                  rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_270 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_271 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_272 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_273 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- wlo7 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_274 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                          · -- wlo7 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_275 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_276 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g20 | g20
+                                          · -- whi1 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_277 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                          · -- whi1 fails
+                                            rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov22 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_278 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                            · -- ov22 fails
+                                              rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov22 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_279 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                              · -- ov22 fails
+                                                rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_280 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov20 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_281 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov20 fails
+                                                    rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_282 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- wlo7 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_283 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                      · -- wlo7 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_284 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- ov15 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_285 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov11 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_286 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                    · -- ov8 fails
+                      rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g10 | g10
+                      · -- whi2 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_287 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                      · -- whi2 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_288 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                        · -- ov9 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_289 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+              · -- ov5 fails
+                rcases le_or_gt (x2 * (9/8 : ℝ)) (x3 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  rcases le_or_gt (x5 * (9/8 : ℝ)) (x3 * (15/8 : ℝ)) with g8 | g8
+                  · -- whi5 holds
+                    rcases le_or_gt (x3 * (17/8 : ℝ)) (x6 * (9/8 : ℝ)) with g9 | g9
+                    · -- wlo6 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_290 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+                    · -- wlo6 fails
+                      rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g10 | g10
+                      · -- whi5 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_291 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+                      · -- whi5 fails
+                        rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g12 | g12
+                          · -- whi2 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_292 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                          · -- whi2 fails
+                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov11 holds
+                              rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov12 holds
+                                rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov13 holds
+                                  rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov15 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_293 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov15 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_294 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- ov14 fails
+                                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g17 | g17
+                                    · -- ov15 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_295 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov15 fails
+                                      rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g18 | g18
+                                      · -- ov13 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_296 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_297 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                      · -- ov13 fails
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_298 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_299 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                · -- ov13 fails
+                                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_300 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g17 | g17
+                                    · -- ov14 holds
+                                      rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_301 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- ov15 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_302 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                    · -- ov14 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_303 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov12 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_304 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- ov11 fails
+                              rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov11 holds
+                                rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov13 holds
+                                  rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g17 | g17
+                                    · -- ov15 holds
+                                      rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov16 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_305 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_306 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov16 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_307 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                    · -- ov15 fails
+                                      rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g18 | g18
+                                      · -- ov16 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_308 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- ov16 fails
+                                        rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g20 | g20
+                                          · -- wlo6 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_309 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                          · -- wlo6 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_310 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- ov14 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g20 | g20
+                                          · -- wlo6 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_311 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                          · -- wlo6 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_312 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                  · -- ov14 fails
+                                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_313 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g19 | g19
+                                        · -- ov16 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_314 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_315 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                        · -- ov16 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_316 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                      · -- ov15 fails
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_317 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_318 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                · -- ov13 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_319 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- ov11 fails
+                                rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov11 holds
+                                  rcases le_or_gt (x6 * (9/8 : ℝ)) (x2 * (25/8 : ℝ)) with g16 | g16
+                                  · -- wlo2 holds
+                                    rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_320 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov16 holds
+                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g21 | g21
+                                            · -- ov17 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_321 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g23 | g23
+                                                · -- whi2 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_322 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- whi2 fails
+                                                  rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- ov19 holds
+                                                    rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (65/8 : ℝ)) with g25 | g25
+                                                    · -- wlo1 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_323 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                    · -- wlo1 fails
+                                                      rcases le_or_gt (x3 * (9/8 : ℝ)) (x1 * (31/8 : ℝ)) with g26 | g26
+                                                      · -- whi3 holds
+                                                        rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_324 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            rcases le_or_gt (x7 * (41/8 : ℝ)) (x4 * (73/8 : ℝ)) with g29 | g29
+                                                            · -- wlo4 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_325 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                            · -- wlo4 fails
+                                                              rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g30 | g30
+                                                              · -- whi3 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_326 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                              · -- whi3 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_327 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_328 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g30 | g30
+                                                              · -- ov22 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_329 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov22 fails
+                                                                rcases le_or_gt (x7 * (41/8 : ℝ)) (x4 * (73/8 : ℝ)) with g31 | g31
+                                                                · -- wlo4 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_330 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                · -- wlo4 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_331 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov20 holds
+                                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g30 | g30
+                                                              · -- ov22 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_332 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov22 fails
+                                                                rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g31 | g31
+                                                                · -- wlo7 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_333 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                · -- wlo7 fails
+                                                                  rcases le_or_gt (x3 * (73/8 : ℝ)) (x7 * (31/8 : ℝ)) with g32 | g32
+                                                                  · -- whi3 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_334 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                  · -- whi3 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_335 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov20 fails
+                                                              rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov20 holds
+                                                                rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g31 | g31
+                                                                · -- ov21 holds
+                                                                  rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g32 | g32
+                                                                  · -- ov22 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_336 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov22 fails
+                                                                    rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g33 | g33
+                                                                    · -- wlo7 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_337 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                    · -- wlo7 fails
+                                                                      rcases le_or_gt (x3 * (73/8 : ℝ)) (x7 * (31/8 : ℝ)) with g34 | g34
+                                                                      · -- whi3 holds
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_338 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                      · -- whi3 fails
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_339 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov21 fails
+                                                                  rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g32 | g32
+                                                                  · -- ov22 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_340 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov22 fails
+                                                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g33 | g33
+                                                                    · -- ov23 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_341 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov23 fails
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_342 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                              · -- ov20 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_343 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                      · -- whi3 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_344 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov19 fails
+                                                    rcases lt_or_ge (x3 * (47/8 : ℝ)) (x6 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g26 | g26
+                                                      · -- ov21 holds
+                                                        rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_345 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov22 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_346 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov22 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_347 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_348 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            rcases le_or_gt (x1 * (41/8 : ℝ)) (x4 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo4 holds
+                                                              rcases le_or_gt (x1 * (73/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- wlo7 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_349 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                              · -- wlo7 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_350 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                            · -- wlo4 fails
+                                                              rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g31 | g31
+                                                                · -- whi2 holds
+                                                                  rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g32 | g32
+                                                                  · -- whi3 holds
+                                                                    rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g33 | g33
+                                                                    · -- wlo7 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_351 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                    · -- wlo7 fails
+                                                                      rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g34 | g34
+                                                                      · -- ov21 holds
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_352 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                      · -- ov21 fails
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_353 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                  · -- whi3 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_354 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- whi2 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_355 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_356 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov21 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_357 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g26 | g26
+                                                      · -- whi1 holds
+                                                        rcases le_or_gt (x3 * (33/8 : ℝ)) (x4 * (25/8 : ℝ)) with g27 | g27
+                                                        · -- wlo4 holds
+                                                          rcases le_or_gt (x3 * (41/8 : ℝ)) (x5 * (25/8 : ℝ)) with g28 | g28
+                                                          · -- wlo5 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_358 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                          · -- wlo5 fails
+                                                            rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g29 | g29
+                                                            · -- whi1 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_359 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                            · -- whi1 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_360 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- wlo4 fails
+                                                          rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g29 | g29
+                                                            · -- ov22 holds
+                                                              rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov23 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_361 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov23 fails
+                                                                rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- ov23 holds
+                                                                  rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g32 | g32
+                                                                  · -- ov21 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_362 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov21 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_363 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov23 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_364 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov22 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_365 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g29 | g29
+                                                            · -- whi1 holds
+                                                              rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g30 | g30
+                                                              · -- wlo5 holds
+                                                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g31 | g31
+                                                                · -- ov19 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_366 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                                · -- ov19 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_367 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                              · -- wlo5 fails
+                                                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g31 | g31
+                                                                · -- ov19 holds
+                                                                  rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g32 | g32
+                                                                  · -- whi1 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_368 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                                  · -- whi1 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_369 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov19 fails
+                                                                  rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g32 | g32
+                                                                  · -- whi1 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_370 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                                  · -- whi1 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_371 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- whi1 fails
+                                                              rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov22 holds
+                                                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g31 | g31
+                                                                · -- ov19 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_372 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov19 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_373 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov22 fails
+                                                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g31 | g31
+                                                                · -- ov19 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_374 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov19 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_375 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- whi1 fails
+                                                        rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_376 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g28 | g28
+                                                          · -- ov19 holds
+                                                            rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g29 | g29
+                                                            · -- ov20 holds
+                                                              rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_377 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                rcases le_or_gt (x1 * (41/8 : ℝ)) (x4 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- wlo4 holds
+                                                                  rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g32 | g32
+                                                                  · -- ov22 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_378 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov22 fails
+                                                                    rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (73/8 : ℝ)) with g33 | g33
+                                                                    · -- wlo1 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_379 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                    · -- wlo1 fails
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_380 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                · -- wlo4 fails
+                                                                  rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g32 | g32
+                                                                  · -- ov21 holds
+                                                                    rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g33 | g33
+                                                                    · -- ov22 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_381 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov22 fails
+                                                                      rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (73/8 : ℝ)) with g34 | g34
+                                                                      · -- wlo1 holds
+                                                                        rcases le_or_gt (x7 * (41/8 : ℝ)) (x4 * (73/8 : ℝ)) with g35 | g35
+                                                                        · -- wlo4 holds
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_382 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                        · -- wlo4 fails
+                                                                          rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g36 | g36
+                                                                          · -- whi3 holds
+                                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_383 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35 g36
+                                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                          · -- whi3 fails
+                                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_384 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35 g36
+                                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                      · -- wlo1 fails
+                                                                        rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g35 | g35
+                                                                        · -- whi3 holds
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_385 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                        · -- whi3 fails
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_386 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov21 fails
+                                                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g33 | g33
+                                                                    · -- ov22 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_387 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov22 fails
+                                                                      rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g34 | g34
+                                                                      · -- ov23 holds
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_388 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                      · -- ov23 fails
+                                                                        rcases le_or_gt (x7 * (41/8 : ℝ)) (x4 * (73/8 : ℝ)) with g35 | g35
+                                                                        · -- wlo4 holds
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_389 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                        · -- wlo4 fails
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_390 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                            · -- ov20 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_391 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov19 fails
+                                                            rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_392 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases le_or_gt (x1 * (41/8 : ℝ)) (x4 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- wlo4 holds
+                                                                rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g31 | g31
+                                                                · -- ov22 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_393 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov22 fails
+                                                                  rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (73/8 : ℝ)) with g32 | g32
+                                                                  · -- wlo1 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_394 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                  · -- wlo1 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_395 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                              · -- wlo4 fails
+                                                                rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- ov21 holds
+                                                                  rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g32 | g32
+                                                                  · -- ov22 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_396 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov22 fails
+                                                                    rcases le_or_gt (x7 * (9/8 : ℝ)) (x1 * (73/8 : ℝ)) with g33 | g33
+                                                                    · -- wlo1 holds
+                                                                      rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g34 | g34
+                                                                      · -- whi2 holds
+                                                                        rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g35 | g35
+                                                                        · -- whi3 holds
+                                                                          rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g36 | g36
+                                                                          · -- wlo7 holds
+                                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_397 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35 g36
+                                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                          · -- wlo7 fails
+                                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_398 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35 g36
+                                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                        · -- whi3 fails
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_399 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                      · -- whi2 fails
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_400 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- wlo1 fails
+                                                                      rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g34 | g34
+                                                                      · -- whi2 holds
+                                                                        rcases le_or_gt (x3 * (41/8 : ℝ)) (x4 * (31/8 : ℝ)) with g35 | g35
+                                                                        · -- whi3 holds
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_401 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                        · -- whi3 fails
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_402 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                      · -- whi2 fails
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_403 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov21 fails
+                                                                  rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g32 | g32
+                                                                  · -- ov21 holds
+                                                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g33 | g33
+                                                                    · -- ov22 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_404 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov22 fails
+                                                                      rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g34 | g34
+                                                                      · -- ov23 holds
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_405 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                      · -- ov23 fails
+                                                                        rcases le_or_gt (x7 * (41/8 : ℝ)) (x4 * (73/8 : ℝ)) with g35 | g35
+                                                                        · -- wlo4 holds
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_406 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                                        · -- wlo4 fails
+                                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_407 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g35
+                                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                  · -- ov21 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_408 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                            · -- ov17 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_409 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- ov16 fails
+                                            rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g22 | g22
+                                              · -- whi4 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g23 | g23
+                                                · -- wlo6 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_410 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                                · -- wlo6 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_411 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                              · -- whi4 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_412 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- ov15 fails
+                                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g22 | g22
+                                              · -- ov17 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_413 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- ov17 fails
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g23 | g23
+                                                · -- wlo6 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_414 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                                · -- wlo6 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_415 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- ov15 fails
+                                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_416 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                          · -- whi7 fails
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov16 holds
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov17 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_417 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g24 | g24
+                                                  · -- whi2 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_418 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                  · -- whi2 fails
+                                                    rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov19 holds
+                                                      rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g26 | g26
+                                                      · -- whi1 holds
+                                                        rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_419 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_420 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g28 | g28
+                                                          · -- wlo5 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_421 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                          · -- wlo5 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_422 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                      · -- whi1 fails
+                                                        rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov21 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_423 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov21 fails
+                                                            rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g29 | g29
+                                                            · -- ov19 holds
+                                                              rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov20 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_424 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov20 fails
+                                                                rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- ov20 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_425 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov20 fails
+                                                                  rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g32 | g32
+                                                                  · -- ov20 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_426 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov20 fails
+                                                                    rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g33 | g33
+                                                                    · -- ov20 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_427 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov20 fails
+                                                                      rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g34 | g34
+                                                                      · -- wlo7 holds
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_428 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                      · -- wlo7 fails
+                                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_429 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34
+                                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                            · -- ov19 fails
+                                                              rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_430 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_431 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_432 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov19 fails
+                                                      rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g26 | g26
+                                                      · -- whi1 holds
+                                                        rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g27 | g27
+                                                        · -- wlo5 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_433 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                        · -- wlo5 fails
+                                                          rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g28 | g28
+                                                          · -- whi1 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_434 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                          · -- whi1 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_435 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- whi1 fails
+                                                        rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_436 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g29 | g29
+                                                            · -- ov20 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_437 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov20 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_438 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_439 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_440 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- ov20 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_441 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov20 fails
+                                                                  rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g32 | g32
+                                                                  · -- ov20 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_442 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov20 fails
+                                                                    rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g33 | g33
+                                                                    · -- wlo7 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_443 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                    · -- wlo7 fails
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_444 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                              · -- ov17 fails
+                                                rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g23 | g23
+                                                · -- ov9 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_445 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                                · -- ov9 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_446 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov16 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_447 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g23 | g23
+                                                · -- whi2 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_448 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- whi2 fails
+                                                  rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g24 | g24
+                                                  · -- whi1 holds
+                                                    rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_449 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_450 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                  · -- whi1 fails
+                                                    rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov20 holds
+                                                      rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov22 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_451 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov22 fails
+                                                        rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_452 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g28 | g28
+                                                          · -- ov20 holds
+                                                            rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_453 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_454 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- ov21 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_455 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov21 fails
+                                                                  rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g32 | g32
+                                                                  · -- wlo7 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_456 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                  · -- wlo7 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_457 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                                          · -- ov20 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_458 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov20 fails
+                                                      rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_459 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov23 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_460 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov23 fails
+                                                          rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_461 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_462 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_463 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- wlo7 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_464 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                · -- wlo7 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_465 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- ov14 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_466 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                  · -- wlo2 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_467 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                · -- ov11 fails
+                                  rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g16 | g16
+                                  · -- wlo4 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_468 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                  · -- wlo4 fails
+                                    rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov12 holds
+                                      rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov16 holds
+                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g21 | g21
+                                            · -- ov17 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_469 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g23 | g23
+                                                · -- whi1 holds
+                                                  rcases le_or_gt (x3 * (33/8 : ℝ)) (x4 * (25/8 : ℝ)) with g24 | g24
+                                                  · -- wlo4 holds
+                                                    rcases lt_or_ge (x5 * (7/8 : ℝ)) (x1 * (41/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_470 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases le_or_gt (x3 * (41/8 : ℝ)) (x5 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- wlo5 holds
+                                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x3 * (47/8 : ℝ)) with g27 | g27
+                                                        · -- whi6 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_471 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                        · -- whi6 fails
+                                                          rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov23 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_472 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov23 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_473 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_474 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                      · -- wlo5 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_475 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                  · -- wlo4 fails
+                                                    rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_476 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_477 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x5 * (7/8 : ℝ)) (x1 * (41/8 : ℝ)) with g26 | g26
+                                                      · -- ov22 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_478 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov22 fails
+                                                        rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g27 | g27
+                                                        · -- wlo5 holds
+                                                          rcases le_or_gt (x6 * (33/8 : ℝ)) (x4 * (47/8 : ℝ)) with g28 | g28
+                                                          · -- whi6 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_479 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                          · -- whi6 fails
+                                                            rcases lt_or_ge (x6 * (7/8 : ℝ)) (x1 * (49/8 : ℝ)) with g29 | g29
+                                                            · -- ov23 holds
+                                                              rcases lt_or_ge (x1 * (55/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov24 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_480 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov24 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_481 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov23 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_482 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                        · -- wlo5 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_483 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                · -- whi1 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_484 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_485 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases le_or_gt (x1 * (41/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- wlo4 holds
+                                                        rcases le_or_gt (x1 * (73/8 : ℝ)) (x7 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- wlo7 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_486 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                        · -- wlo7 fails
+                                                          rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g28 | g28
+                                                          · -- ov23 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_487 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov23 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_488 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                      · -- wlo4 fails
+                                                        rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g28 | g28
+                                                          · -- ov23 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_489 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov23 fails
+                                                            rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_490 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov22 holds
+                                                                rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g31 | g31
+                                                                · -- ov23 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_491 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov23 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_492 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                              · -- ov22 fails
+                                                                rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g31 | g31
+                                                                · -- ov24 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_493 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov24 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_494 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g29 | g29
+                                                            · -- ov24 holds
+                                                              rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g30 | g30
+                                                              · -- ov20 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_495 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov20 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_496 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov24 fails
+                                                              rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g30 | g30
+                                                              · -- wlo7 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_497 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                              · -- wlo7 fails
+                                                                rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g31 | g31
+                                                                · -- ov23 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_498 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov23 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_499 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              rcases lt_or_ge (x5 * (39/8 : ℝ)) (x4 * (49/8 : ℝ)) with g30 | g30
+                                                              · -- ov22 holds
+                                                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g31 | g31
+                                                                · -- ov23 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_500 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov23 fails
+                                                                  rcases le_or_gt (x4 * (73/8 : ℝ)) (x7 * (41/8 : ℝ)) with g32 | g32
+                                                                  · -- wlo7 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_501 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                                  · -- wlo7 fails
+                                                                    rcases lt_or_ge (x7 * (31/8 : ℝ)) (x3 * (73/8 : ℝ)) with g33 | g33
+                                                                    · -- ov24 holds
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_502 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                    · -- ov24 fails
+                                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_503 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33
+                                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))⟩
+                                                              · -- ov22 fails
+                                                                rcases lt_or_ge (x6 * (31/8 : ℝ)) (x3 * (57/8 : ℝ)) with g31 | g31
+                                                                · -- ov23 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_504 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                · -- ov23 fails
+                                                                  rcases lt_or_ge (x4 * (31/8 : ℝ)) (x3 * (41/8 : ℝ)) with g32 | g32
+                                                                  · -- ov24 holds
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_505 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                                  · -- ov24 fails
+                                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_506 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31 g32
+                                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- wlo7 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_507 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                              · -- wlo7 fails
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_508 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                            · -- ov17 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_509 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- ov16 fails
+                                            rcases le_or_gt (x6 * (41/8 : ℝ)) (x7 * (33/8 : ℝ)) with g21 | g21
+                                            · -- wlo7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_510 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                            · -- wlo7 fails
+                                              rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov15 holds
+                                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g23 | g23
+                                                · -- ov16 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_511 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- ov16 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_512 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                              · -- ov15 fails
+                                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g23 | g23
+                                                · -- ov17 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_513 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- ov17 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_514 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- ov15 fails
+                                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_515 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                          · -- whi7 fails
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov16 holds
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov17 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_516 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  rcases le_or_gt (x1 * (41/8 : ℝ)) (x5 * (7/8 : ℝ)) with g24 | g24
+                                                  · -- whi1 holds
+                                                    rcases le_or_gt (x5 * (33/8 : ℝ)) (x4 * (41/8 : ℝ)) with g25 | g25
+                                                    · -- wlo4 holds
+                                                      rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g26 | g26
+                                                      · -- wlo5 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_517 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                      · -- wlo5 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_518 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                    · -- wlo4 fails
+                                                      rcases lt_or_ge (x4 * (7/8 : ℝ)) (x1 * (33/8 : ℝ)) with g26 | g26
+                                                      · -- ov22 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_519 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov22 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_520 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                  · -- whi1 fails
+                                                    rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov23 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_521 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov23 fails
+                                                      rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_522 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_523 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_524 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_525 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- ov21 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_526 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                            · -- ov21 fails
+                                                              rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g30 | g30
+                                                              · -- ov21 holds
+                                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_527 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30
+                                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                              · -- ov21 fails
+                                                                rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g31 | g31
+                                                                · -- wlo7 holds
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_528 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                                · -- wlo7 fails
+                                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_529 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29 g30 g31
+                                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                              · -- ov17 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_530 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov16 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_531 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x1 * (33/8 : ℝ)) (x4 * (7/8 : ℝ)) with g23 | g23
+                                                · -- whi1 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_532 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                · -- whi1 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov24 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_533 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                  · -- ov24 fails
+                                                    rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov24 holds
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x1 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov22 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_534 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov22 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_535 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                    · -- ov24 fails
+                                                      rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_536 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        rcases lt_or_ge (x1 * (55/8 : ℝ)) (x6 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov22 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_537 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                        · -- ov22 fails
+                                                          rcases lt_or_ge (x1 * (47/8 : ℝ)) (x5 * (9/8 : ℝ)) with g28 | g28
+                                                          · -- ov22 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_538 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))⟩
+                                                          · -- ov22 fails
+                                                            rcases le_or_gt (x1 * (65/8 : ℝ)) (x7 * (9/8 : ℝ)) with g29 | g29
+                                                            · -- wlo7 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_539 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                            · -- wlo7 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_540 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))⟩
+                                      · -- ov14 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_541 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                    · -- ov12 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_542 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                        · -- ov9 fails
+                          rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g12 | g12
+                          · -- whi2 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_543 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                          · -- whi2 fails
+                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_544 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- ov10 fails
+                              rcases lt_or_ge (x4 * (23/8 : ℝ)) (x6 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov11 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_545 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                              · -- ov11 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_546 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                  · -- whi5 fails
+                    rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g9 | g9
+                    · -- ov8 holds
+                      rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g10 | g10
+                      · -- whi2 holds
+                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x7 * (23/8 : ℝ)) with g11 | g11
+                        · -- whi6 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_547 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                        · -- whi6 fails
+                          rcases lt_or_ge (x6 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x6 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov11 holds
+                              rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g14 | g14
+                              · -- whi3 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_548 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                              · -- whi3 fails
+                                rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov13 holds
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov15 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_549 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov15 fails
+                                      rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g18 | g18
+                                      · -- ov13 holds
+                                        rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_550 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- ov14 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_551 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                      · -- ov13 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_552 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov14 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_553 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- ov13 fails
+                                  rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g16 | g16
+                                  · -- ov11 holds
+                                    rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_554 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi5 holds
+                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_555 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- whi6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_556 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi5 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_557 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov11 fails
+                                    rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_558 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi5 holds
+                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_559 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- whi6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_560 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi5 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_561 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov11 fails
+                              rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g14 | g14
+                              · -- whi3 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_562 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                              · -- whi3 fails
+                                rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov16 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_563 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov16 fails
+                                      rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_564 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- ov15 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_565 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                      · -- ov14 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_566 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov15 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_567 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- ov14 fails
+                                  rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g16 | g16
+                                  · -- whi4 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_568 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- whi4 fails
+                                    rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi5 holds
+                                      rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g18 | g18
+                                      · -- whi6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_569 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                      · -- whi6 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_570 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- whi5 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_571 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                          · -- ov10 fails
+                            rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g13 | g13
+                            · -- whi3 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_572 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- whi3 fails
+                              rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov14 holds
+                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov15 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_573 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov15 fails
+                                  rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g17 | g17
+                                    · -- ov12 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_574 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov12 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_575 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov15 fails
+                                    rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g17 | g17
+                                    · -- ov12 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_576 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                    · -- ov12 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_577 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                              · -- ov14 fails
+                                rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov16 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_578 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov16 fails
+                                      rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g18 | g18
+                                      · -- ov12 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_579 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- ov12 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_580 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov15 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_581 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- ov14 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_582 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                      · -- whi2 fails
+                        rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov10 holds
+                          rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g12 | g12
+                          · -- ov11 holds
+                            rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi6 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_583 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- whi6 fails
+                              rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov13 holds
+                                rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (41/8 : ℝ)) with g16 | g16
+                                  · -- wlo3 holds
+                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_584 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov16 holds
+                                        rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov17 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_585 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                        · -- ov17 fails
+                                          rcases le_or_gt (x5 * (41/8 : ℝ)) (x6 * (33/8 : ℝ)) with g20 | g20
+                                          · -- wlo6 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_586 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- wlo6 fails
+                                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov10 holds
+                                              rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov13 holds
+                                                rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g23 | g23
+                                                · -- ov14 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_587 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- ov14 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_588 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                              · -- ov13 fails
+                                                rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g23 | g23
+                                                · -- ov15 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_589 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- ov15 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_590 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                            · -- ov10 fails
+                                              rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov14 holds
+                                                rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g23 | g23
+                                                · -- ov15 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_591 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- ov15 fails
+                                                  rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g24 | g24
+                                                  · -- whi7 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_592 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                  · -- whi7 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_593 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- ov14 fails
+                                                rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g23 | g23
+                                                · -- ov16 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_594 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- ov16 fails
+                                                  rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g24 | g24
+                                                  · -- whi7 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_595 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                  · -- whi7 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_596 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov16 fails
+                                        rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi6 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_597 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- whi6 fails
+                                            rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g21 | g21
+                                            · -- ov17 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_598 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                            · -- ov17 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_599 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- ov14 fails
+                                          rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi6 holds
+                                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov10 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_600 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov10 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_601 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- whi6 fails
+                                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov10 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_602 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- ov10 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_603 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_604 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- wlo3 fails
+                                    rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_605 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov16 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_606 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                        · -- ov16 fails
+                                          rcases le_or_gt (x6 * (33/8 : ℝ)) (x5 * (41/8 : ℝ)) with g20 | g20
+                                          · -- wlo5 holds
+                                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov10 holds
+                                              rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov14 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_607 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                              · -- ov14 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_608 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                            · -- ov10 fails
+                                              rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov15 holds
+                                                rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_609 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- whi7 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_610 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- ov15 fails
+                                                rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_611 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                                · -- whi7 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_612 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                          · -- wlo5 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_613 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- ov15 fails
+                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_614 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- whi6 fails
+                                          rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov17 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_615 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                          · -- ov17 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_616 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov14 fails
+                                  rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g16 | g16
+                                  · -- ov10 holds
+                                    rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_617 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi5 holds
+                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_618 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- whi6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_619 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi5 fails
+                                        rcases le_or_gt (x6 * (33/8 : ℝ)) (x5 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo5 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_620 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                        · -- wlo5 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_621 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov10 fails
+                                    rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_622 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                    · -- whi4 fails
+                                      rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi5 holds
+                                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_623 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- whi6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_624 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi5 fails
+                                        rcases le_or_gt (x6 * (33/8 : ℝ)) (x5 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo5 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_625 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                        · -- wlo5 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_626 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov13 fails
+                                rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov10 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_627 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                · -- ov10 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_628 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                          · -- ov11 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_629 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                        · -- ov10 fails
+                          rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov8 holds
+                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov9 holds
+                              rcases le_or_gt (x6 * (9/8 : ℝ)) (x2 * (25/8 : ℝ)) with g14 | g14
+                              · -- wlo2 holds
+                                rcases le_or_gt (x6 * (17/8 : ℝ)) (x4 * (25/8 : ℝ)) with g15 | g15
+                                · -- wlo4 holds
+                                  rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_630 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g17 | g17
+                                    · -- ov11 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_631 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                    · -- ov11 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_632 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                · -- wlo4 fails
+                                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_633 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi5 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_634 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                    · -- whi5 fails
+                                      rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_635 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                      · -- whi6 fails
+                                        rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g19 | g19
+                                        · -- wlo7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_636 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                        · -- wlo7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_637 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                              · -- wlo2 fails
+                                rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g15 | g15
+                                · -- wlo4 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_638 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                · -- wlo4 fails
+                                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_639 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi5 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_640 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                    · -- whi5 fails
+                                      rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g18 | g18
+                                      · -- whi6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_641 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                      · -- whi6 fails
+                                        rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov13 holds
+                                          rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g20 | g20
+                                          · -- wlo7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_642 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                          · -- wlo7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_643 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- ov13 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_644 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- ov9 fails
+                              rcases lt_or_ge (x4 * (23/8 : ℝ)) (x6 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov10 holds
+                                rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov11 holds
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov12 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_645 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                  · -- ov12 fails
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x7 * (17/8 : ℝ)) with g17 | g17
+                                    · -- ov10 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_646 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                    · -- ov10 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_647 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                · -- ov11 fails
+                                  rcases le_or_gt (x6 * (17/8 : ℝ)) (x4 * (25/8 : ℝ)) with g16 | g16
+                                  · -- wlo4 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_648 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                  · -- wlo4 fails
+                                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_649 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g18 | g18
+                                      · -- whi5 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_650 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                      · -- whi5 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_651 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- ov10 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_652 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                          · -- ov8 fails
+                            rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g13 | g13
+                            · -- wlo6 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_653 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                            · -- wlo6 fails
+                              rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g14 | g14
+                              · -- whi7 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_654 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                              · -- whi7 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_655 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                    · -- ov8 fails
+                      rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g10 | g10
+                      · -- whi2 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_656 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                      · -- whi2 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          rcases le_or_gt (x6 * (9/8 : ℝ)) (x2 * (25/8 : ℝ)) with g12 | g12
+                          · -- wlo2 holds
+                            rcases le_or_gt (x6 * (17/8 : ℝ)) (x4 * (25/8 : ℝ)) with g13 | g13
+                            · -- wlo4 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_657 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- wlo4 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_658 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                          · -- wlo2 fails
+                            rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g13 | g13
+                            · -- wlo4 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_659 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                            · -- wlo4 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_660 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                        · -- ov9 fails
+                          rcases lt_or_ge (x4 * (23/8 : ℝ)) (x6 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            rcases le_or_gt (x6 * (17/8 : ℝ)) (x4 * (25/8 : ℝ)) with g13 | g13
+                            · -- wlo4 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_661 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- wlo4 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_662 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                          · -- ov10 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_663 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                · -- whi2 fails
+                  rcases lt_or_ge (x2 * (15/8 : ℝ)) (x4 * (9/8 : ℝ)) with g8 | g8
+                  · -- ov8 holds
+                    rcases le_or_gt (x4 * (25/8 : ℝ)) (x6 * (17/8 : ℝ)) with g9 | g9
+                    · -- wlo6 holds
+                      rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g10 | g10
+                      · -- whi7 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_664 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                      · -- whi7 fails
+                        rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g11 | g11
+                        · -- whi5 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_665 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                        · -- whi5 fails
+                          rcases le_or_gt (x3 * (25/8 : ℝ)) (x5 * (15/8 : ℝ)) with g12 | g12
+                          · -- whi3 holds
+                            rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi6 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_666 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- whi6 fails
+                              rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov12 holds
+                                rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- wlo7 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_667 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                · -- wlo7 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_668 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                              · -- ov12 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_669 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                          · -- whi3 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_670 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                    · -- wlo6 fails
+                      rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov8 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_671 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov8 fails
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_672 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                  · -- ov8 fails
+                    rcases le_or_gt (x6 * (9/8 : ℝ)) (x2 * (23/8 : ℝ)) with g9 | g9
+                    · -- whi6 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_673 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                    · -- whi6 fails
+                      rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g10 | g10
+                      · -- whi7 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_674 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                      · -- whi7 fails
+                        rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g11 | g11
+                        · -- whi5 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_675 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                        · -- whi5 fails
+                          rcases le_or_gt (x3 * (25/8 : ℝ)) (x5 * (15/8 : ℝ)) with g12 | g12
+                          · -- whi3 holds
+                            rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi6 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_676 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- whi6 fails
+                              rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov13 holds
+                                rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (41/8 : ℝ)) with g15 | g15
+                                · -- wlo3 holds
+                                  rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g16 | g16
+                                  · -- wlo7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_677 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- wlo7 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_678 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- wlo3 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_679 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- ov13 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_680 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                          · -- whi3 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_681 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+          · -- ov5 fails
+            rcases le_or_gt (x3 * (9/8 : ℝ)) (x4 * (7/8 : ℝ)) with g5 | g5
+            · -- whi3 holds
+              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_682 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5
+              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))⟩
+            · -- whi3 fails
+              rcases le_or_gt (x6 * (9/8 : ℝ)) (x3 * (17/8 : ℝ)) with g6 | g6
+              · -- wlo3 holds
+                rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g7 | g7
+                · -- whi5 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_683 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+                · -- whi5 fails
+                  rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g8 | g8
+                  · -- whi2 holds
+                    rcases le_or_gt (x7 * (17/8 : ℝ)) (x5 * (23/8 : ℝ)) with g9 | g9
+                    · -- whi7 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_684 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                    · -- whi7 fails
+                      rcases lt_or_ge (x7 * (15/8 : ℝ)) (x4 * (25/8 : ℝ)) with g10 | g10
+                      · -- ov9 holds
+                        rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov11 holds
+                          rcases lt_or_ge (x7 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_685 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov9 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_686 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov11 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_687 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov10 fails
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_688 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- ov10 fails
+                              rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g14 | g14
+                              · -- wlo6 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_689 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                              · -- wlo6 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_690 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov9 fails
+                        rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_691 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_692 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov10 fails
+                            rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_693 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- ov10 fails
+                              rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov10 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_694 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- ov10 fails
+                                rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_695 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                · -- wlo6 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_696 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                  · -- whi2 fails
+                    rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g9 | g9
+                    · -- ov9 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_697 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                    · -- ov9 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_698 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+              · -- wlo3 fails
+                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_699 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6
+                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+        · -- ov4 fails
+          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_700 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3
+          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))))⟩
+      · -- ov3 fails
+        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_701 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2
+        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr he))))))))))))))))))))))))))))))))⟩
+  · -- whi6 fails
+    rcases le_or_gt (x5 * (9/8 : ℝ)) (x6 * (7/8 : ℝ)) with g1 | g1
+    · -- whi5 holds
+      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_702 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1
+      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr he))))))))))))))))))))))))))))))))⟩
+    · -- whi5 fails
+      rcases lt_or_ge (x5 * (7/8 : ℝ)) (x4 * (9/8 : ℝ)) with g2 | g2
+      · -- ov3 holds
+        rcases lt_or_ge (x4 * (15/8 : ℝ)) (x7 * (9/8 : ℝ)) with g3 | g3
+        · -- ov4 holds
+          rcases lt_or_ge (x7 * (7/8 : ℝ)) (x3 * (17/8 : ℝ)) with g4 | g4
+          · -- ov5 holds
+            rcases lt_or_ge (x3 * (15/8 : ℝ)) (x5 * (9/8 : ℝ)) with g5 | g5
+            · -- ov6 holds
+              rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g6 | g6
+              · -- ov7 holds
+                rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  rcases le_or_gt (x6 * (25/8 : ℝ)) (x7 * (23/8 : ℝ)) with g8 | g8
+                  · -- whi6 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_703 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                  · -- whi6 fails
+                    rcases lt_or_ge (x6 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g9 | g9
+                    · -- ov9 holds
+                      rcases lt_or_ge (x2 * (31/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov10 holds
+                        rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g11 | g11
+                        · -- whi3 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_704 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- whi3 fails
+                          rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov12 holds
+                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g13 | g13
+                            · -- ov13 holds
+                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov14 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_705 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov14 fails
+                                rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov12 holds
+                                  rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov13 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_706 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov13 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_707 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                · -- ov12 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_708 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov13 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_709 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                          · -- ov12 fails
+                            rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g14 | g14
+                              · -- whi4 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_710 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- whi4 fails
+                                rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g15 | g15
+                                · -- whi5 holds
+                                  rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_711 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- whi6 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_712 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- whi5 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_713 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov10 fails
+                              rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g14 | g14
+                              · -- whi4 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_714 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- whi4 fails
+                                rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g15 | g15
+                                · -- whi5 holds
+                                  rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_715 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- whi6 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_716 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- whi5 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_717 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                      · -- ov10 fails
+                        rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g11 | g11
+                        · -- whi3 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_718 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- whi3 fails
+                          rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov13 holds
+                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g13 | g13
+                            · -- ov14 holds
+                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov15 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_719 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov15 fails
+                                rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov13 holds
+                                  rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_720 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov14 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_721 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                · -- ov13 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_722 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov14 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_723 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                          · -- ov13 fails
+                            rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g13 | g13
+                            · -- whi4 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_724 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- whi4 fails
+                              rcases le_or_gt (x5 * (25/8 : ℝ)) (x4 * (31/8 : ℝ)) with g14 | g14
+                              · -- whi5 holds
+                                rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g15 | g15
+                                · -- whi6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_725 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                · -- whi6 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_726 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- whi5 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_727 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                    · -- ov9 fails
+                      rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g10 | g10
+                      · -- whi3 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_728 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                      · -- whi3 fails
+                        rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g11 | g11
+                        · -- ov13 holds
+                          rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g12 | g12
+                          · -- ov14 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_729 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                          · -- ov14 fails
+                            rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g13 | g13
+                            · -- ov14 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_730 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov14 fails
+                              rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov11 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_731 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                              · -- ov11 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_732 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                        · -- ov13 fails
+                          rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov11 holds
+                            rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g13 | g13
+                            · -- whi7 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_733 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- whi7 fails
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g14 | g14
+                              · -- ov13 holds
+                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_734 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov14 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_735 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov13 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_736 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                          · -- ov11 fails
+                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g13 | g13
+                            · -- ov14 holds
+                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov15 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_737 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov15 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_738 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov14 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_739 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                · -- whi2 fails
+                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g8 | g8
+                  · -- ov9 holds
+                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g9 | g9
+                    · -- ov10 holds
+                      rcases lt_or_ge (x5 * (31/8 : ℝ)) (x6 * (25/8 : ℝ)) with g10 | g10
+                      · -- ov11 holds
+                        rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g11 | g11
+                        · -- ov12 holds
+                          rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov13 holds
+                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g13 | g13
+                            · -- ov14 holds
+                              rcases le_or_gt (x5 * (41/8 : ℝ)) (x6 * (33/8 : ℝ)) with g14 | g14
+                              · -- wlo6 holds
+                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g15 | g15
+                                · -- whi7 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_740 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- whi7 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_741 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                              · -- wlo6 fails
+                                rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov9 holds
+                                  rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov13 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_742 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                  · -- ov13 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_743 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                · -- ov9 fails
+                                  rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_744 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                    · -- whi7 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_745 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- ov14 fails
+                                    rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_746 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                    · -- whi7 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_747 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                            · -- ov14 fails
+                              rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov14 holds
+                                rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g15 | g15
+                                · -- ov16 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_748 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                · -- ov16 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_749 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov14 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_750 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                          · -- ov13 fails
+                            rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g13 | g13
+                            · -- ov13 holds
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g14 | g14
+                              · -- ov14 holds
+                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g15 | g15
+                                · -- ov15 holds
+                                  rcases le_or_gt (x5 * (41/8 : ℝ)) (x6 * (33/8 : ℝ)) with g16 | g16
+                                  · -- wlo6 holds
+                                    rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_751 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- whi7 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_752 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- wlo6 fails
+                                    rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g17 | g17
+                                    · -- ov9 holds
+                                      rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_753 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                      · -- ov14 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_754 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                    · -- ov9 fails
+                                      rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_755 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                      · -- ov15 fails
+                                        rcases le_or_gt (x7 * (41/8 : ℝ)) (x6 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_756 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_757 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                · -- ov15 fails
+                                  rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g16 | g16
+                                  · -- whi6 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_758 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- whi6 fails
+                                    rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g17 | g17
+                                    · -- ov17 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_759 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                    · -- ov17 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_760 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov14 fails
+                                rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (41/8 : ℝ)) with g15 | g15
+                                · -- wlo3 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_761 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- wlo3 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_762 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- ov13 fails
+                              rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g14 | g14
+                              · -- ov9 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_763 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- ov9 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_764 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov12 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_765 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                          · -- ov9 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_766 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                      · -- ov11 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_767 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                        · -- ov9 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_768 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                    · -- ov10 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_769 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                  · -- ov9 fails
+                    rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g9 | g9
+                    · -- wlo4 holds
+                      rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- wlo6 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_770 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                      · -- wlo6 fails
+                        rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g11 | g11
+                        · -- ov7 holds
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov8 holds
+                            rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi7 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_771 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- whi7 fails
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov10 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_772 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- ov10 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_773 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                          · -- ov8 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_774 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                        · -- ov7 fails
+                          rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi7 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_775 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                          · -- whi7 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_776 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                    · -- wlo4 fails
+                      rcases lt_or_ge (x2 * (15/8 : ℝ)) (x4 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov8 holds
+                        rcases le_or_gt (x4 * (25/8 : ℝ)) (x6 * (17/8 : ℝ)) with g11 | g11
+                        · -- wlo6 holds
+                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi7 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_777 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                          · -- whi7 fails
+                            rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g13 | g13
+                            · -- whi5 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_778 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                            · -- whi5 fails
+                              rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g14 | g14
+                              · -- whi6 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_779 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- whi6 fails
+                                rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g15 | g15
+                                · -- ov12 holds
+                                  rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g16 | g16
+                                  · -- wlo7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_780 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- wlo7 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_781 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- ov12 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_782 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- wlo6 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov8 holds
+                            rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g13 | g13
+                            · -- whi7 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_783 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- whi7 fails
+                              rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g14 | g14
+                              · -- whi5 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_784 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                              · -- whi5 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_785 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                          · -- ov8 fails
+                            rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov11 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_786 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- ov11 fails
+                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x7 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov9 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_787 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                                · -- ov9 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_788 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                            · -- ov10 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_789 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov8 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov7 holds
+                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi7 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_790 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                          · -- whi7 fails
+                            rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g13 | g13
+                            · -- whi5 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_791 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                            · -- whi5 fails
+                              rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g14 | g14
+                              · -- whi6 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_792 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                              · -- whi6 fails
+                                rcases lt_or_ge (x6 * (15/8 : ℝ)) (x3 * (33/8 : ℝ)) with g15 | g15
+                                · -- ov12 holds
+                                  rcases le_or_gt (x3 * (41/8 : ℝ)) (x7 * (17/8 : ℝ)) with g16 | g16
+                                  · -- wlo7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_793 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- wlo7 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_794 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                · -- ov12 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_795 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- ov7 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_796 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+              · -- ov7 fails
+                rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_797 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                · -- whi2 fails
+                  rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g8 | g8
+                  · -- wlo4 holds
+                    rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g9 | g9
+                    · -- wlo6 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_798 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                    · -- wlo6 fails
+                      rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov8 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_799 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov8 fails
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_800 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                  · -- wlo4 fails
+                    rcases le_or_gt (x4 * (25/8 : ℝ)) (x6 * (17/8 : ℝ)) with g9 | g9
+                    · -- wlo6 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_801 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                    · -- wlo6 fails
+                      rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov8 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_802 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov8 fails
+                        rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov6 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_803 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                        · -- ov6 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_804 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+            · -- ov6 fails
+              rcases le_or_gt (x2 * (9/8 : ℝ)) (x3 * (7/8 : ℝ)) with g6 | g6
+              · -- whi2 holds
+                rcases le_or_gt (x3 * (17/8 : ℝ)) (x6 * (9/8 : ℝ)) with g7 | g7
+                · -- wlo6 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_805 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+                · -- wlo6 fails
+                  rcases lt_or_ge (x4 * (7/8 : ℝ)) (x3 * (9/8 : ℝ)) with g8 | g8
+                  · -- ov4 holds
+                    rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g9 | g9
+                    · -- whi5 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_806 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+                    · -- whi5 fails
+                      rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g10 | g10
+                      · -- ov7 holds
+                        rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_807 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g13 | g13
+                            · -- ov11 holds
+                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g14 | g14
+                              · -- ov13 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_808 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- ov13 fails
+                                rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g15 | g15
+                                · -- ov12 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_809 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov12 fails
+                                  rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g16 | g16
+                                  · -- wlo6 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_810 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                  · -- wlo6 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_811 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- ov11 fails
+                              rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g14 | g14
+                              · -- whi7 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_812 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                              · -- whi7 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_813 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                          · -- ov9 fails
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov9 holds
+                              rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov12 holds
+                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_814 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- whi7 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_815 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                · -- ov14 fails
+                                  rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g16 | g16
+                                  · -- wlo6 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_816 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                  · -- wlo6 fails
+                                    rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g17 | g17
+                                    · -- whi4 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_817 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                    · -- whi4 fails
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_818 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi7 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_819 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                              · -- ov12 fails
+                                rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g15 | g15
+                                · -- whi7 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_820 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                · -- whi7 fails
+                                  rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov14 holds
+                                    rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_821 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- whi7 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_822 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- ov14 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_823 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- ov9 fails
+                              rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g14 | g14
+                              · -- wlo4 holds
+                                rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_824 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                · -- wlo6 fails
+                                  rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_825 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi6 holds
+                                      rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_826 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                      · -- whi7 fails
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_827 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_828 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                        · -- ov15 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_829 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                    · -- whi6 fails
+                                      rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g18 | g18
+                                      · -- whi4 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_830 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g20 | g20
+                                          · -- whi4 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_831 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                          · -- whi4 fails
+                                            rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g21 | g21
+                                            · -- whi7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_832 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- whi7 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_833 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- whi4 fails
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_834 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_835 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                        · -- ov14 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_836 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- wlo4 fails
+                                rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov8 holds
+                                  rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_837 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi6 holds
+                                      rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_838 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                      · -- whi7 fails
+                                        rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g19 | g19
+                                        · -- whi4 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_839 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- whi4 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_840 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g21 | g21
+                                            · -- whi2 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_841 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                            · -- whi2 fails
+                                              rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g22 | g22
+                                              · -- ov20 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_842 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                              · -- ov20 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_843 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                    · -- whi6 fails
+                                      rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g18 | g18
+                                      · -- whi4 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_844 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g20 | g20
+                                          · -- whi4 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_845 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                          · -- whi4 fails
+                                            rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g21 | g21
+                                            · -- whi7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_846 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- whi7 fails
+                                              rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g22 | g22
+                                              · -- whi2 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_847 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- whi2 fails
+                                                rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g23 | g23
+                                                · -- ov19 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_848 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                · -- ov19 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_849 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                      · -- whi4 fails
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov13 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_850 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g21 | g21
+                                            · -- whi2 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_851 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                            · -- whi2 fails
+                                              rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov17 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_852 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                              · -- ov17 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_853 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                        · -- ov13 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_854 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- ov8 fails
+                                  rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov10 holds
+                                    rcases le_or_gt (x6 * (17/8 : ℝ)) (x3 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi6 holds
+                                      rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_855 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                      · -- whi7 fails
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov15 holds
+                                          rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov17 holds
+                                            rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g21 | g21
+                                            · -- ov21 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_856 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                            · -- ov21 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_857 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                          · -- ov17 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_858 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- ov15 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_859 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                    · -- whi6 fails
+                                      rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g18 | g18
+                                      · -- whi4 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_860 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g20 | g20
+                                          · -- whi4 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_861 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                          · -- whi4 fails
+                                            rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g21 | g21
+                                            · -- whi7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_862 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- whi7 fails
+                                              rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g22 | g22
+                                              · -- ov20 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_863 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                              · -- ov20 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_864 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                      · -- whi4 fails
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_865 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_866 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                        · -- ov14 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_867 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov10 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_868 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov7 fails
+                        rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_869 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov8 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_870 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                          · -- ov8 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_871 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                  · -- ov4 fails
+                    rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g9 | g9
+                    · -- whi5 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_872 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+                    · -- whi5 fails
+                      rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g10 | g10
+                      · -- ov8 holds
+                        rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_873 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov10 holds
+                            rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g13 | g13
+                            · -- ov11 holds
+                              rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov12 holds
+                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_874 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov15 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_875 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                · -- ov14 fails
+                                  rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov13 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_876 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                  · -- ov13 fails
+                                    rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g17 | g17
+                                    · -- ov12 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_877 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_878 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                    · -- ov12 fails
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_879 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_880 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                              · -- ov12 fails
+                                rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g15 | g15
+                                · -- whi7 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_881 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                · -- whi7 fails
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g16 | g16
+                                  · -- ov13 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov14 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_882 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- ov14 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_883 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- ov13 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_884 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                            · -- ov11 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_885 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                          · -- ov10 fails
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g14 | g14
+                              · -- ov12 holds
+                                rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov13 holds
+                                  rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g16 | g16
+                                  · -- ov15 holds
+                                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov16 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_886 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi7 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_887 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                    · -- ov16 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_888 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- ov15 fails
+                                    rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g17 | g17
+                                    · -- ov13 holds
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g18 | g18
+                                      · -- wlo6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_889 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                      · -- wlo6 fails
+                                        rcases le_or_gt (x4 * (33/8 : ℝ)) (x6 * (23/8 : ℝ)) with g19 | g19
+                                        · -- whi4 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_890 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- whi4 fails
+                                          rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_891 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- whi7 fails
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_892 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                    · -- ov13 fails
+                                      rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g18 | g18
+                                      · -- ov14 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_893 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_894 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov14 fails
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g19 | g19
+                                        · -- wlo6 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_895 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- wlo6 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_896 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                · -- ov13 fails
+                                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_897 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g17 | g17
+                                    · -- ov14 holds
+                                      rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov15 holds
+                                        rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_898 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                        · -- whi7 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_899 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov15 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_900 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                    · -- ov14 fails
+                                      rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g18 | g18
+                                      · -- whi7 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_901 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                      · -- whi7 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_902 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                              · -- ov12 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_903 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- ov10 fails
+                              rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g14 | g14
+                              · -- wlo4 holds
+                                rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_904 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                                · -- wlo6 fails
+                                  rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g16 | g16
+                                  · -- ov10 holds
+                                    rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g17 | g17
+                                    · -- whi7 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_905 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                    · -- whi7 fails
+                                      rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g18 | g18
+                                      · -- ov13 holds
+                                        rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov15 holds
+                                            rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g21 | g21
+                                            · -- ov14 holds
+                                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g22 | g22
+                                              · -- ov15 holds
+                                                rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g23 | g23
+                                                · -- ov16 holds
+                                                  rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g24 | g24
+                                                  · -- whi7 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_906 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                  · -- whi7 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_907 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- ov16 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_908 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                              · -- ov15 fails
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_909 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_910 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                            · -- ov14 fails
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov16 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_911 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_912 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- ov16 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_913 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- ov15 fails
+                                            rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g21 | g21
+                                            · -- ov14 holds
+                                              rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g22 | g22
+                                              · -- whi4 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g23 | g23
+                                                · -- wlo6 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_914 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                                · -- wlo6 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_915 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                              · -- whi4 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_916 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- ov14 fails
+                                              rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g22 | g22
+                                              · -- ov16 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_917 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- ov16 fails
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g23 | g23
+                                                · -- wlo6 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_918 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                                · -- wlo6 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_919 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                        · -- ov14 fails
+                                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_920 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                          · -- whi7 fails
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov16 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_921 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_922 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- ov16 fails
+                                                rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g23 | g23
+                                                · -- ov8 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_923 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                                · -- ov8 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_924 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov15 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_925 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_926 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                      · -- ov13 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_927 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                  · -- ov10 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_928 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                              · -- wlo4 fails
+                                rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g15 | g15
+                                · -- ov9 holds
+                                  rcases le_or_gt (x7 * (25/8 : ℝ)) (x6 * (31/8 : ℝ)) with g16 | g16
+                                  · -- whi7 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_929 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                                  · -- whi7 fails
+                                    rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov12 holds
+                                      rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g18 | g18
+                                      · -- ov13 holds
+                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g20 | g20
+                                          · -- ov13 holds
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov14 holds
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov15 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_930 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g24 | g24
+                                                  · -- whi2 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_931 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                  · -- whi2 fails
+                                                    rcases lt_or_ge (x3 * (47/8 : ℝ)) (x6 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov19 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_932 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                    · -- ov19 fails
+                                                      rcases le_or_gt (x3 * (33/8 : ℝ)) (x4 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- wlo4 holds
+                                                        rcases le_or_gt (x3 * (41/8 : ℝ)) (x5 * (25/8 : ℝ)) with g27 | g27
+                                                        · -- wlo5 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_933 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                        · -- wlo5 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_934 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                      · -- wlo4 fails
+                                                        rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g27 | g27
+                                                        · -- wlo5 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_935 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                        · -- wlo5 fails
+                                                          rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g28 | g28
+                                                          · -- ov18 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_936 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                          · -- ov18 fails
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_937 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                              · -- ov15 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_938 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov14 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_939 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g23 | g23
+                                                · -- whi2 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_940 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- whi2 fails
+                                                  rcases lt_or_ge (x3 * (47/8 : ℝ)) (x6 * (25/8 : ℝ)) with g24 | g24
+                                                  · -- ov19 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_941 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                  · -- ov19 fails
+                                                    rcases le_or_gt (x3 * (33/8 : ℝ)) (x4 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- wlo4 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_942 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                    · -- wlo4 fails
+                                                      rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g26 | g26
+                                                      · -- ov20 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_943 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                      · -- ov20 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_944 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                          · -- ov13 fails
+                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_945 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g23 | g23
+                                                · -- whi2 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_946 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- whi2 fails
+                                                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- ov18 holds
+                                                    rcases le_or_gt (x5 * (33/8 : ℝ)) (x4 * (41/8 : ℝ)) with g25 | g25
+                                                    · -- wlo4 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_947 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                    · -- wlo4 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_948 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                  · -- ov18 fails
+                                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- wlo5 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_949 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                    · -- wlo5 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_950 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                            · -- ov15 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_951 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                        · -- ov14 fails
+                                          rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g20 | g20
+                                          · -- ov13 holds
+                                            rcases le_or_gt (x4 * (41/8 : ℝ)) (x7 * (23/8 : ℝ)) with g21 | g21
+                                            · -- whi4 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g22 | g22
+                                              · -- wlo6 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_952 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                              · -- wlo6 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_953 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                            · -- whi4 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_954 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                          · -- ov13 fails
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_955 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- ov15 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x6 * (41/8 : ℝ)) with g22 | g22
+                                              · -- wlo6 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_956 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                              · -- wlo6 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_957 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                      · -- ov13 fails
+                                        rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g19 | g19
+                                        · -- whi7 holds
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_958 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                        · -- whi7 fails
+                                          rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g20 | g20
+                                          · -- ov14 holds
+                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_959 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g23 | g23
+                                                · -- whi2 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_960 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                                · -- whi2 fails
+                                                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g24 | g24
+                                                  · -- ov18 holds
+                                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- wlo5 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_961 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                    · -- wlo5 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_962 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                  · -- ov18 fails
+                                                    rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g25 | g25
+                                                    · -- wlo5 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_963 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                    · -- wlo5 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_964 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                            · -- ov15 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_965 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- ov14 fails
+                                            rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g21 | g21
+                                            · -- whi7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_966 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                            · -- whi7 fails
+                                              rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g22 | g22
+                                              · -- whi2 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_967 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                              · -- whi2 fails
+                                                rcases lt_or_ge (x2 * (31/8 : ℝ)) (x4 * (17/8 : ℝ)) with g23 | g23
+                                                · -- ov19 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_968 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                · -- ov19 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_969 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                    · -- ov12 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_970 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                · -- ov9 fails
+                                  rcases lt_or_ge (x6 * (31/8 : ℝ)) (x7 * (25/8 : ℝ)) with g16 | g16
+                                  · -- ov11 holds
+                                    rcases le_or_gt (x3 * (25/8 : ℝ)) (x5 * (15/8 : ℝ)) with g17 | g17
+                                    · -- whi3 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_971 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                                    · -- whi3 fails
+                                      rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (23/8 : ℝ)) with g18 | g18
+                                      · -- whi4 holds
+                                        rcases lt_or_ge (x3 * (31/8 : ℝ)) (x6 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov14 holds
+                                          rcases lt_or_ge (x6 * (23/8 : ℝ)) (x4 * (33/8 : ℝ)) with g20 | g20
+                                          · -- ov15 holds
+                                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g21 | g21
+                                            · -- ov16 holds
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_972 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                rcases lt_or_ge (x4 * (47/8 : ℝ)) (x6 * (33/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_973 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  rcases le_or_gt (x4 * (25/8 : ℝ)) (x3 * (33/8 : ℝ)) with g24 | g24
+                                                  · -- wlo3 holds
+                                                    rcases le_or_gt (x3 * (33/8 : ℝ)) (x4 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- wlo4 holds
+                                                      rcases le_or_gt (x3 * (41/8 : ℝ)) (x5 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- wlo5 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_974 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                      · -- wlo5 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_975 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                    · -- wlo4 fails
+                                                      rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g26 | g26
+                                                      · -- wlo5 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_976 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                      · -- wlo5 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_977 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                                  · -- wlo3 fails
+                                                    rcases le_or_gt (x3 * (41/8 : ℝ)) (x5 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- wlo5 holds
+                                                      rcases le_or_gt (x6 * (25/8 : ℝ)) (x3 * (47/8 : ℝ)) with g26 | g26
+                                                      · -- whi6 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_978 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                                      · -- whi6 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_979 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                                    · -- wlo5 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_980 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                            · -- ov16 fails
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_981 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                          · -- ov15 fails
+                                            rcases le_or_gt (x6 * (41/8 : ℝ)) (x7 * (33/8 : ℝ)) with g21 | g21
+                                            · -- wlo7 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_982 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                                            · -- wlo7 fails
+                                              rcases lt_or_ge (x3 * (39/8 : ℝ)) (x7 * (17/8 : ℝ)) with g22 | g22
+                                              · -- ov14 holds
+                                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g23 | g23
+                                                · -- ov15 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_983 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- ov15 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_984 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                              · -- ov14 fails
+                                                rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g23 | g23
+                                                · -- ov16 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_985 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- ov16 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_986 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                                        · -- ov14 fails
+                                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x3 * (39/8 : ℝ)) with g20 | g20
+                                          · -- whi7 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_987 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                                          · -- whi7 fails
+                                            rcases lt_or_ge (x7 * (23/8 : ℝ)) (x4 * (41/8 : ℝ)) with g21 | g21
+                                            · -- ov15 holds
+                                              rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g22 | g22
+                                              · -- ov16 holds
+                                                rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g23 | g23
+                                                · -- whi7 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_988 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                                · -- whi7 fails
+                                                  rcases le_or_gt (x4 * (41/8 : ℝ)) (x5 * (33/8 : ℝ)) with g24 | g24
+                                                  · -- wlo5 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_989 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                                  · -- wlo5 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_990 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))))))))⟩
+                                              · -- ov16 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_991 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                            · -- ov15 fails
+                                              rcases le_or_gt (x7 * (33/8 : ℝ)) (x5 * (47/8 : ℝ)) with g22 | g22
+                                              · -- whi7 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_992 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                              · -- whi7 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_993 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))⟩
+                                      · -- whi4 fails
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_994 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                  · -- ov11 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_995 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov8 fails
+                        rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_996 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_997 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                          · -- ov9 fails
+                            rcases lt_or_ge (x4 * (23/8 : ℝ)) (x6 * (17/8 : ℝ)) with g13 | g13
+                            · -- ov10 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_998 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                            · -- ov10 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_999 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+              · -- whi2 fails
+                rcases lt_or_ge (x2 * (15/8 : ℝ)) (x4 * (9/8 : ℝ)) with g7 | g7
+                · -- ov7 holds
+                  rcases lt_or_ge (x4 * (31/8 : ℝ)) (x7 * (17/8 : ℝ)) with g8 | g8
+                  · -- ov8 holds
+                    rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g9 | g9
+                    · -- whi5 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1000 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                    · -- whi5 fails
+                      rcases lt_or_ge (x5 * (15/8 : ℝ)) (x3 * (25/8 : ℝ)) with g10 | g10
+                      · -- ov10 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1001 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                      · -- ov10 fails
+                        rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g11 | g11
+                        · -- whi6 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1002 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                        · -- whi6 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1003 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                  · -- ov8 fails
+                    rcases le_or_gt (x4 * (25/8 : ℝ)) (x6 * (17/8 : ℝ)) with g9 | g9
+                    · -- wlo6 holds
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1004 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                    · -- wlo6 fails
+                      rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov7 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1005 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                      · -- ov7 fails
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1006 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                · -- ov7 fails
+                  rcases le_or_gt (x6 * (9/8 : ℝ)) (x2 * (23/8 : ℝ)) with g8 | g8
+                  · -- whi6 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1007 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                  · -- whi6 fails
+                    rcases lt_or_ge (x4 * (31/8 : ℝ)) (x7 * (17/8 : ℝ)) with g9 | g9
+                    · -- ov9 holds
+                      rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g10 | g10
+                      · -- whi5 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1008 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                      · -- whi5 fails
+                        rcases le_or_gt (x3 * (25/8 : ℝ)) (x5 * (15/8 : ℝ)) with g11 | g11
+                        · -- whi3 holds
+                          rcases le_or_gt (x6 * (25/8 : ℝ)) (x5 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi6 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1009 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                          · -- whi6 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1010 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                        · -- whi3 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1011 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))))⟩
+                    · -- ov9 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1012 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+          · -- ov5 fails
+            rcases lt_or_ge (x7 * (15/8 : ℝ)) (x6 * (17/8 : ℝ)) with g5 | g5
+            · -- ov5 holds
+              rcases lt_or_ge (x5 * (23/8 : ℝ)) (x7 * (17/8 : ℝ)) with g6 | g6
+              · -- ov8 holds
+                rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  rcases le_or_gt (x6 * (25/8 : ℝ)) (x7 * (23/8 : ℝ)) with g8 | g8
+                  · -- whi6 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1013 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                  · -- whi6 fails
+                    rcases lt_or_ge (x6 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g9 | g9
+                    · -- ov10 holds
+                      rcases lt_or_ge (x2 * (31/8 : ℝ)) (x6 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov11 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1014 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                      · -- ov11 fails
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1015 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                    · -- ov10 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1016 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                · -- whi2 fails
+                  rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g8 | g8
+                  · -- ov10 holds
+                    rcases lt_or_ge (x7 * (23/8 : ℝ)) (x5 * (33/8 : ℝ)) with g9 | g9
+                    · -- ov11 holds
+                      rcases lt_or_ge (x5 * (31/8 : ℝ)) (x6 * (25/8 : ℝ)) with g10 | g10
+                      · -- ov12 holds
+                        rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g11 | g11
+                        · -- whi3 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1017 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                        · -- whi3 fails
+                          rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g12 | g12
+                          · -- ov14 holds
+                            rcases lt_or_ge (x4 * (31/8 : ℝ)) (x5 * (25/8 : ℝ)) with g13 | g13
+                            · -- ov15 holds
+                              rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g14 | g14
+                              · -- ov16 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1018 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                              · -- ov16 fails
+                                rcases le_or_gt (x5 * (41/8 : ℝ)) (x6 * (33/8 : ℝ)) with g15 | g15
+                                · -- wlo6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1019 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                · -- wlo6 fails
+                                  rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g16 | g16
+                                  · -- ov10 holds
+                                    rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov14 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1020 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                    · -- ov14 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1021 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                  · -- ov10 fails
+                                    rcases lt_or_ge (x4 * (39/8 : ℝ)) (x6 * (25/8 : ℝ)) with g17 | g17
+                                    · -- ov15 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1022 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                                    · -- ov15 fails
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1023 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))⟩
+                            · -- ov15 fails
+                              rcases le_or_gt (x4 * (17/8 : ℝ)) (x3 * (25/8 : ℝ)) with g14 | g14
+                              · -- wlo3 holds
+                                rcases le_or_gt (x6 * (25/8 : ℝ)) (x4 * (39/8 : ℝ)) with g15 | g15
+                                · -- whi6 holds
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1024 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))⟩
+                                · -- whi6 fails
+                                  rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov17 holds
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1025 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                  · -- ov17 fails
+                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1026 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16
+                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                              · -- wlo3 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1027 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov14 fails
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1028 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                      · -- ov12 fails
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1029 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                    · -- ov11 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1030 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                  · -- ov10 fails
+                    rcases lt_or_ge (x5 * (7/8 : ℝ)) (x2 * (17/8 : ℝ)) with g9 | g9
+                    · -- ov8 holds
+                      rcases lt_or_ge (x2 * (15/8 : ℝ)) (x4 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov9 holds
+                        rcases le_or_gt (x4 * (9/8 : ℝ)) (x2 * (17/8 : ℝ)) with g11 | g11
+                        · -- wlo2 holds
+                          rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g12 | g12
+                          · -- whi7 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1031 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                          · -- whi7 fails
+                            rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g13 | g13
+                            · -- whi5 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1032 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                            · -- whi5 fails
+                              rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g14 | g14
+                              · -- whi3 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1033 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                              · -- whi3 fails
+                                rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g15 | g15
+                                · -- ov14 holds
+                                  rcases lt_or_ge (x5 * (47/8 : ℝ)) (x7 * (33/8 : ℝ)) with g16 | g16
+                                  · -- ov16 holds
+                                    rcases le_or_gt (x2 * (49/8 : ℝ)) (x7 * (15/8 : ℝ)) with g17 | g17
+                                    · -- whi2 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1034 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))⟩
+                                    · -- whi2 fails
+                                      rcases lt_or_ge (x2 * (55/8 : ℝ)) (x7 * (17/8 : ℝ)) with g18 | g18
+                                      · -- ov18 holds
+                                        rcases lt_or_ge (x7 * (31/8 : ℝ)) (x4 * (57/8 : ℝ)) with g19 | g19
+                                        · -- ov19 holds
+                                          rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g20 | g20
+                                          · -- whi1 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1035 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                          · -- whi1 fails
+                                            rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov22 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1036 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov22 fails
+                                              rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov21 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1037 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                              · -- ov21 fails
+                                                rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  rcases le_or_gt (x4 * (9/8 : ℝ)) (x1 * (41/8 : ℝ)) with g24 | g24
+                                                  · -- wlo1 holds
+                                                    rcases le_or_gt (x2 * (41/8 : ℝ)) (x4 * (23/8 : ℝ)) with g25 | g25
+                                                    · -- whi2 holds
+                                                      rcases lt_or_ge (x7 * (23/8 : ℝ)) (x3 * (57/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1038 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1039 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                    · -- whi2 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1040 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- wlo1 fails
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1041 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))⟩
+                                                · -- ov21 fails
+                                                  rcases lt_or_ge (x4 * (23/8 : ℝ)) (x2 * (41/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1042 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24
+                                                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x2 * (7/8 : ℝ)) (x1 * (17/8 : ℝ)) with g25 | g25
+                                                    · -- ov18 holds
+                                                      rcases lt_or_ge (x1 * (71/8 : ℝ)) (x7 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov19 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1043 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                      · -- ov19 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1044 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                                    · -- ov18 fails
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1045 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))⟩
+                                        · -- ov19 fails
+                                          rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g20 | g20
+                                          · -- whi1 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1046 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                          · -- whi1 fails
+                                            rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov22 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1047 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov22 fails
+                                              rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov22 holds
+                                                rcases lt_or_ge (x5 * (7/8 : ℝ)) (x1 * (41/8 : ℝ)) with g23 | g23
+                                                · -- ov20 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1048 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov20 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1049 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                              · -- ov22 fails
+                                                rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov21 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1050 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov21 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1051 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                      · -- ov18 fails
+                                        rcases lt_or_ge (x2 * (47/8 : ℝ)) (x6 * (17/8 : ℝ)) with g19 | g19
+                                        · -- ov18 holds
+                                          rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g20 | g20
+                                          · -- ov19 holds
+                                            rcases lt_or_ge (x7 * (31/8 : ℝ)) (x4 * (57/8 : ℝ)) with g21 | g21
+                                            · -- ov20 holds
+                                              rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1052 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov23 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1053 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov23 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov22 holds
+                                                    rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g25 | g25
+                                                    · -- ov23 holds
+                                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1054 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25
+                                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov23 fails
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov7 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1055 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov7 fails
+                                                        rcases lt_or_ge (x7 * (23/8 : ℝ)) (x3 * (57/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1056 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1057 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov22 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov24 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1058 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov24 fails
+                                                        rcases lt_or_ge (x7 * (7/8 : ℝ)) (x1 * (57/8 : ℝ)) with g27 | g27
+                                                        · -- ov20 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1059 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                        · -- ov20 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1060 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov7 holds
+                                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x2 * (65/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1061 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1062 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov7 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1063 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov20 fails
+                                              rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1064 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov23 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1065 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov23 fails
+                                                  rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g24 | g24
+                                                  · -- ov23 holds
+                                                    rcases lt_or_ge (x5 * (7/8 : ℝ)) (x1 * (41/8 : ℝ)) with g25 | g25
+                                                    · -- ov21 holds
+                                                      rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov23 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1066 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov23 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1067 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov21 fails
+                                                      rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov24 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1068 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov24 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1069 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                  · -- ov23 fails
+                                                    rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g25 | g25
+                                                    · -- ov22 holds
+                                                      rcases lt_or_ge (x2 * (71/8 : ℝ)) (x6 * (25/8 : ℝ)) with g26 | g26
+                                                      · -- ov24 holds
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1070 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov24 fails
+                                                        rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g27 | g27
+                                                        · -- ov7 holds
+                                                          rcases lt_or_ge (x5 * (15/8 : ℝ)) (x2 * (33/8 : ℝ)) with g28 | g28
+                                                          · -- ov15 holds
+                                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1071 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28
+                                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                          · -- ov15 fails
+                                                            rcases lt_or_ge (x7 * (7/8 : ℝ)) (x1 * (57/8 : ℝ)) with g29 | g29
+                                                            · -- ov19 holds
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1072 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                            · -- ov19 fails
+                                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1073 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27 g28 g29
+                                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                        · -- ov7 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1074 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                    · -- ov22 fails
+                                                      rcases lt_or_ge (x3 * (7/8 : ℝ)) (x2 * (9/8 : ℝ)) with g26 | g26
+                                                      · -- ov7 holds
+                                                        rcases lt_or_ge (x6 * (23/8 : ℝ)) (x2 * (65/8 : ℝ)) with g27 | g27
+                                                        · -- ov21 holds
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1075 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                        · -- ov21 fails
+                                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1076 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26 g27
+                                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                      · -- ov7 fails
+                                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1077 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23 g24 g25 g26
+                                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                          · -- ov19 fails
+                                            rcases le_or_gt (x6 * (17/8 : ℝ)) (x2 * (49/8 : ℝ)) with g21 | g21
+                                            · -- wlo2 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1078 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                            · -- wlo2 fails
+                                              rcases le_or_gt (x1 * (17/8 : ℝ)) (x2 * (7/8 : ℝ)) with g22 | g22
+                                              · -- whi1 holds
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1079 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                              · -- whi1 fails
+                                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1080 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22
+                                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                        · -- ov18 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1081 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                  · -- ov16 fails
+                                    rcases le_or_gt (x2 * (33/8 : ℝ)) (x5 * (15/8 : ℝ)) with g17 | g17
+                                    · -- whi2 holds
+                                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1082 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17
+                                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))⟩
+                                    · -- whi2 fails
+                                      rcases le_or_gt (x6 * (17/8 : ℝ)) (x2 * (47/8 : ℝ)) with g18 | g18
+                                      · -- whi6 holds
+                                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1083 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18
+                                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                                      · -- whi6 fails
+                                        rcases lt_or_ge (x6 * (55/8 : ℝ)) (x7 * (49/8 : ℝ)) with g19 | g19
+                                        · -- ov17 holds
+                                          rcases le_or_gt (x1 * (25/8 : ℝ)) (x3 * (7/8 : ℝ)) with g20 | g20
+                                          · -- whi1 holds
+                                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1084 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20
+                                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))⟩
+                                          · -- whi1 fails
+                                            rcases lt_or_ge (x1 * (31/8 : ℝ)) (x3 * (9/8 : ℝ)) with g21 | g21
+                                            · -- ov21 holds
+                                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1085 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21
+                                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                            · -- ov21 fails
+                                              rcases lt_or_ge (x1 * (23/8 : ℝ)) (x2 * (9/8 : ℝ)) with g22 | g22
+                                              · -- ov20 holds
+                                                rcases lt_or_ge (x7 * (7/8 : ℝ)) (x1 * (57/8 : ℝ)) with g23 | g23
+                                                · -- ov18 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1086 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov18 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1087 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                              · -- ov20 fails
+                                                rcases lt_or_ge (x1 * (39/8 : ℝ)) (x4 * (9/8 : ℝ)) with g23 | g23
+                                                · -- ov19 holds
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1088 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                                · -- ov19 fails
+                                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1089 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19 g20 g21 g22 g23
+                                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))⟩
+                                        · -- ov17 fails
+                                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1090 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15 g16 g17 g18 g19
+                                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))⟩
+                                · -- ov14 fails
+                                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1091 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14 g15
+                                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- wlo2 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1092 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                      · -- ov9 fails
+                        rcases le_or_gt (x7 * (17/8 : ℝ)) (x4 * (31/8 : ℝ)) with g11 | g11
+                        · -- whi7 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1093 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+                        · -- whi7 fails
+                          rcases le_or_gt (x5 * (33/8 : ℝ)) (x7 * (23/8 : ℝ)) with g12 | g12
+                          · -- whi5 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1094 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))⟩
+                          · -- whi5 fails
+                            rcases le_or_gt (x3 * (33/8 : ℝ)) (x6 * (15/8 : ℝ)) with g13 | g13
+                            · -- whi3 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1095 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inl he))))⟩
+                            · -- whi3 fails
+                              rcases lt_or_ge (x3 * (23/8 : ℝ)) (x4 * (17/8 : ℝ)) with g14 | g14
+                              · -- ov14 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1096 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))⟩
+                              · -- ov14 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1097 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                    · -- ov8 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1098 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+              · -- ov8 fails
+                rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  rcases le_or_gt (x5 * (9/8 : ℝ)) (x3 * (17/8 : ℝ)) with g8 | g8
+                  · -- wlo3 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1099 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                  · -- wlo3 fails
+                    rcases le_or_gt (x2 * (9/8 : ℝ)) (x3 * (7/8 : ℝ)) with g9 | g9
+                    · -- whi2 holds
+                      rcases le_or_gt (x7 * (9/8 : ℝ)) (x3 * (23/8 : ℝ)) with g10 | g10
+                      · -- whi7 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1100 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+                      · -- whi7 fails
+                        rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g11 | g11
+                        · -- whi2 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1101 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                        · -- whi2 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1102 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                          · -- ov9 fails
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov9 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1103 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))⟩
+                            · -- ov9 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1104 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                    · -- whi2 fails
+                      obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1105 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9
+                      exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                · -- whi2 fails
+                  rcases le_or_gt (x2 * (17/8 : ℝ)) (x4 * (9/8 : ℝ)) with g8 | g8
+                  · -- wlo4 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1106 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                  · -- wlo4 fails
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1107 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))⟩
+            · -- ov5 fails
+              rcases le_or_gt (x7 * (9/8 : ℝ)) (x4 * (17/8 : ℝ)) with g6 | g6
+              · -- wlo4 holds
+                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1108 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6
+                exact ⟨T, hT, hc, hf, (Or.inr (Or.inl he))⟩
+              · -- wlo4 fails
+                rcases le_or_gt (x3 * (9/8 : ℝ)) (x4 * (7/8 : ℝ)) with g7 | g7
+                · -- whi3 holds
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1109 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))⟩
+                · -- whi3 fails
+                  obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1110 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7
+                  exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+        · -- ov4 fails
+          rcases le_or_gt (x3 * (9/8 : ℝ)) (x4 * (7/8 : ℝ)) with g4 | g4
+          · -- whi3 holds
+            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1111 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4
+            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))))⟩
+          · -- whi3 fails
+            rcases le_or_gt (x6 * (9/8 : ℝ)) (x3 * (17/8 : ℝ)) with g5 | g5
+            · -- wlo3 holds
+              rcases le_or_gt (x5 * (17/8 : ℝ)) (x6 * (15/8 : ℝ)) with g6 | g6
+              · -- whi5 holds
+                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1112 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6
+                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))⟩
+              · -- whi5 fails
+                rcases le_or_gt (x2 * (17/8 : ℝ)) (x5 * (7/8 : ℝ)) with g7 | g7
+                · -- whi2 holds
+                  rcases le_or_gt (x7 * (17/8 : ℝ)) (x5 * (23/8 : ℝ)) with g8 | g8
+                  · -- whi7 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1113 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he)))))))))))))))))))))⟩
+                  · -- whi7 fails
+                    rcases lt_or_ge (x7 * (15/8 : ℝ)) (x4 * (25/8 : ℝ)) with g9 | g9
+                    · -- ov8 holds
+                      rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g10 | g10
+                      · -- ov10 holds
+                        rcases lt_or_ge (x7 * (7/8 : ℝ)) (x2 * (25/8 : ℝ)) with g11 | g11
+                        · -- ov8 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1114 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov8 fails
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1115 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                      · -- ov10 fails
+                        rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1116 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov9 fails
+                          rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1117 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov9 fails
+                            rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g13 | g13
+                            · -- wlo6 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1118 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                            · -- wlo6 fails
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1119 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                    · -- ov8 fails
+                      rcases le_or_gt (x2 * (25/8 : ℝ)) (x7 * (7/8 : ℝ)) with g10 | g10
+                      · -- whi2 holds
+                        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1120 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10
+                        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inl he)))⟩
+                      · -- whi2 fails
+                        rcases lt_or_ge (x2 * (15/8 : ℝ)) (x3 * (9/8 : ℝ)) with g11 | g11
+                        · -- ov9 holds
+                          obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1121 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11
+                          exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                        · -- ov9 fails
+                          rcases lt_or_ge (x2 * (23/8 : ℝ)) (x5 * (9/8 : ℝ)) with g12 | g12
+                          · -- ov9 holds
+                            obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1122 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12
+                            exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                          · -- ov9 fails
+                            rcases lt_or_ge (x2 * (31/8 : ℝ)) (x7 * (9/8 : ℝ)) with g13 | g13
+                            · -- ov9 holds
+                              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1123 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+                              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))⟩
+                            · -- ov9 fails
+                              rcases le_or_gt (x2 * (25/8 : ℝ)) (x6 * (9/8 : ℝ)) with g14 | g14
+                              · -- wlo6 holds
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1124 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))⟩
+                              · -- wlo6 fails
+                                obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1125 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13 g14
+                                exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                · -- whi2 fails
+                  rcases lt_or_ge (x2 * (23/8 : ℝ)) (x6 * (9/8 : ℝ)) with g8 | g8
+                  · -- ov8 holds
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1126 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+                  · -- ov8 fails
+                    obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1127 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5 g6 g7 g8
+                    exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))⟩
+            · -- wlo3 fails
+              obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1128 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2 g3 g4 g5
+              exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))⟩
+      · -- ov3 fails
+        obtain ⟨T, hT, hc, hf, he⟩ := apLawR4_E_4_leaf_1129 x1 x2 x3 x4 x5 x6 x7 b1l b1u b2l b2u b3l b3u b4l b4u b5l b5u b6l b6u b7l b7u g0 g1 g2
+        exact ⟨T, hT, hc, hf, (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl he))))))))))))))))))))))))))))))))⟩
+
+#print axioms apLawR4_E_4_core
+
+end Fresh.OneMover
