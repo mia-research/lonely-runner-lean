@@ -1,0 +1,5 @@
+  k=4 50/200 ok=43 cap=0 (0.0s)
+  k=4 100/200 ok=85 cap=0 (0.0s)
+  k=4 150/200 ok=128 cap=0 (0.0s)
+  k=4 200/200 ok=171 cap=0 (0.0s)
+k=4 DONE: ok=171 nomove=29 cap=0 | integer 147/171 | =1modk 147/171 | bad ['nonint:144/101', 'nonint:832/535', 'nonint:144/83', 'nonint:16/11', 'nonint:320/177']
