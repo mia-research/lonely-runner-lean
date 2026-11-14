@@ -61,3 +61,6 @@ The oracle never falters because the duality is decidable at every scale: carve 
 
 ## Session addendum (2026-11-14) — Conjecture T = R2 + R3 + R4, precisely
 `conjT_finite`: the (r,j)-level comb provably cannot decide T (identities I1 [T 600/600], I2 [T 400/400]; 605 exact rows; no pair forces ρ₆ ≤ 49/7). `conjT-covering`: the sketch's three central steps FALSE and replaced; the pin-free front-closure lemma proved [T 96/96]; the covering-side kill instrument (first R3 kill, 72/72 + 93/93); the residue: (T-i) nesting emptiness over (25,50), (T-ii) E852, (T-iii) V3.
+
+## Session addendum (2026-11-14) — the tail composition IN LEAN
+`Fresh/TailComposition.lean` (15 theorems GREEN): `pinnedTail` (the tail proper: self-anchor ⟹ strip j ≥ 4; split j ≤ 6 → chases, j ≥ 7 → ρ₇ ≥ 55 → width), `pinnedTailLocus` (NoCarve ∨ ρ₇ ∈ (15, 511/31] ∨ ρ₇ ∈ (23, 86989/3565]), `pinnedTailCover_of_hyp` (discharges `PinnedTailCover` from the two instruments). The honest deviation: X24 carves exist, so the conclusion is a disjunction. Named OWEDs: `Strip2Cap511`, `Strip3Cap86989` (the chase results as Lean hypotheses), `StripChaseKill46`, `TailAbove50Cover` (needs re-tagging from native_decide). TailSlowWidth deliberately not imported (its `native_decide` violates the axiom discipline; re-verification running in background).
