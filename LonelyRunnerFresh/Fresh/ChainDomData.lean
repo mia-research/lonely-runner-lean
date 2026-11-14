@@ -1497,7 +1497,7 @@ theorem trace_1_3_4_4_5_5_7 {V : UTable} {af : Fin 7} {Af : ℚ}
   exact hrun.1.symm
 
 /-- **The per-chain J-carrier datum for box ([1, 3, 4, 4, 5, 5, 7])**: `ChainDomData` at the attesting chain `steps_1_3_4_4_5_5_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=17/39, (2,6)=51/91; caps: (0,6)=1/7, (1,6)=33/70, (2,6)=825/1457). -/
-theorem chainDom_1_3_4_4_5_5_7 : 
+def chainDom_1_3_4_4_5_5_7 : 
     ChainDomData (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ) compFam_1_3_4_4_5_5_7 where
   steps := steps_1_3_4_4_5_5_7
   dom := by
@@ -2940,7 +2940,7 @@ theorem trace_1_3_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ}
   exact hrun.1.symm
 
 /-- **The per-chain J-carrier datum for box ([1, 3, 4, 5, 6, 6, 7])**: `ChainDomData` at the attesting chain `steps_1_3_4_5_6_6_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=14025/33511, (2,6)=825/1457; caps: (0,6)=1/7, (1,6)=99/235, (2,6)=363/611). -/
-theorem chainDom_1_3_4_5_6_6_7 : 
+def chainDom_1_3_4_5_6_6_7 : 
     ChainDomData (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ) compFam_1_3_4_5_6_6_7 where
   steps := steps_1_3_4_5_6_6_7
   dom := by
@@ -4573,7 +4573,7 @@ theorem trace_1_4_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ}
   exact hrun.1.symm
 
 /-- **The per-chain J-carrier datum for box ([1, 4, 4, 5, 6, 6, 7])**: `ChainDomData` at the attesting chain `steps_1_4_4_5_6_6_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=825/1457; caps: (0,6)=1/7, (1,6)=3179/5499). -/
-theorem chainDom_1_4_4_5_6_6_7 : 
+def chainDom_1_4_4_5_6_6_7 : 
     ChainDomData (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ) compFam_1_4_4_5_6_6_7 where
   steps := steps_1_4_4_5_6_6_7
   dom := by
@@ -4595,16 +4595,11 @@ theorem chainDom_1_4_4_5_6_6_7 :
 def chainDomBoxes : Finset (Fin 7 → ℤ) :=
   {(![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ), (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ), (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)}
 
-/-- **The total over the covered set** (the deliverable totality, over the boxes the
-datum exists for; the 8 residual strict boxes are the documented rule-22 gap). -/
-theorem chainDomTotalData : ∀ b ∈ chainDomBoxes, ChainDomData b (compFamOf b) := by
-  intro b hb
-  simp only [chainDomBoxes, Finset.mem_insert, Finset.mem_singleton] at hb
-  rcases hb with rfl | rfl | rfl
-  · simp [compFamOf, chainDom_1_3_4_4_5_5_7]
-  · simp [compFamOf, chainDom_1_3_4_5_6_6_7]
-  · simp [compFamOf, chainDom_1_4_4_5_6_6_7]
-
-#print axioms chainDomTotalData
+/-- **The total over the covered set** — the per-box instances are the `chainDom_<box>`
+defs above; the dispatch is done in `Fresh/SpineTotalProof.lean`'s `by_cases` walk
+(matching the Type-valued nature of `ChainDomData`). The 8 residual strict boxes are
+the documented rule-22 gap. -/
+-- The three defs above ARE the per-box data; no total theorem needed
+-- (the consumer dispatches via by_cases, not rcases).
 
 end Fresh.ChainDomData
