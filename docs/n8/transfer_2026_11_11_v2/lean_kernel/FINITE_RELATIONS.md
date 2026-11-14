@@ -1,0 +1,171 @@
+# Finite relation types for arbitrary eight-runner arrangements
+
+The [effective classical reduction](../N8_EFFECTIVE_CLASSICAL_REDUCTION.md) gives an explicit Fourier cube
+and height bound. It incorporates the existing integer dispatch so the
+remaining classical obligation is restricted to bounded primitive sets
+that survive the arithmetic rules.
+
+The [classical finite reduction](../N8_CLASSICAL_FINITE_REDUCTION.md) closes the qualitative reduction
+to finitely many positive integer line representatives. Its remaining
+obligation is a closed modular certificate for that finite family.
+The results below also study the stronger two-window problem.
+
+The original entry points in `Fresh/FiniteRelations.lean` are
+`lonelyRunnerEight_iff_exact_types` and `windows_iff_bounded_types`.
+The first reduces unrestricted positive isolation to finitely many
+nonzero integer relation types on the seven disparities of a subject.
+The second applies to any set of normalized times containing
+`[1/8,7/8]`, including the two cascade windows. The six unpinned
+normalized disparities either admit a first-window witness or satisfy
+a relation whose coefficients lie in `[-32,32]` and whose absolute
+evaluation is at most `4*10^9/3`.
+
+The proof expands a finite trigonometric product with a positive
+constant coefficient. If every time in the interval is blocked, the
+product is small throughout the interval. Unless a nonzero mode has
+small frequency, integration leaves too much of the constant term for
+this to happen. Allowing the interval to grow gives an exact relation
+for the unrestricted isolation problem. The catalogue stays the same
+as the interval grows. The separate theorem `projected_integral_error` bounds the error of keeping only a specified subset of Fourier modes when the omitted frequencies are separated from zero.
+
+`Fresh/FiniteKernels.lean` proves the first-window residual types are
+neighborhoods of five-dimensional kernels. It also proves that four
+independent bounded approximate relations give a finite catalogue of
+exact kernels of dimension one or two for five or six fast readings.
+This last theorem takes the four relations as hypotheses. The first
+relation theorem does not supply the other three.
+
+The harmonic proof checker now uses an integer scale derived from the
+input slopes. `Fresh/HarmonicFrontierVerified.lean` checks all 22,939
+mixed five-profiles with maximum 11 through 18 and all 313 listed
+four-profile candidates. It proves actual real-rate clearance for
+the new five-profile range and for all appended maxima from 11 onward
+on each of the three four-reading cores. The appended result uses a
+phase-window proof for large maxima and finite checks below that
+threshold. `Fresh/HarmonicFrontier.lean` also verifies the coprime
+append rule and the phase slicing rule for a two-dilation certificate.
+
+The harmonic profile replay theorems use native computation axioms.
+
+## Four-relation reduction: checked components
+
+The small-rank obstruction has a geometric and an analytic part. The
+geometric part is now checked at the strict (1/8) threshold:
+
+- `RankFour.lean` either extracts four independent rows from a finite
+  set of short frequencies or gives a positive vector annihilating the
+  entire short row span. The latter applies when all rates are large
+  compared with the frequency bound.
+- `CircuitProjection.lean` selects a direction of minimal nonempty
+  coordinate support. Projecting onto its complement drops dimension
+  by exactly one; at codimension (r) the support has at most (r+1)
+  coordinates. The remaining codimension drops by the support size
+  minus one. `LowRankFibres.lean` uses this to clear the complement
+  and then move on the circle of the circuit.
+- For at most three coordinates the union of blocked arcs has measure
+  less than one. For four coordinates, two unequal absolute slopes
+  have strictly overlapping blocked interiors at dilation 1 or 2
+  (`FourCircleGeometry.lean`); each of the four blocked sets has measure
+  (1/4), so any positive overlap suffices. Equal absolute slopes
+  reduce to the single profile ((1,1,1,1)). Reflecting negative slopes
+  finishes the proof. `FourCircleComplete.lean` proves strict clearance
+  on every translated rational fibre of codimension at most three
+  with no fixed coordinate, after one of the two dilations. Its
+  native computation dependency is the existing equal-profile
+  certificate; the unequal case is symbolic for all integer slopes.
+- `FibreMargin.lean` proves a uniform positive margin over all shifts
+  for each fixed direction space, using compactness modulo integer shifts.
+
+`RankFourTransfer.lean` proves the integral comparison for a finite
+trigonometric polynomial. `RankLadder.lean` checks that among four
+transitions of the nested short row spans there is a stable transition
+if the final rank is at most three. At that transition every omitted
+mode in the next test is separated in frequency. The projected lower
+bound is required only for subspaces generated by subsets of the
+**previous** finite mode list. Thus a stage can choose its next
+Fourier cutoff after fixing the finite family of fibres to be tested.
+
+The projected test and the buffered four-row implication now check in
+Lean. `RationalAnnihilator.lean` identifies which integer modes vanish on
+the rational kernel. `TorusAverage.lean` uses an integer parameter torus
+and Haar translation to cancel the other modes. `FibreTest.lean` proves
+strictly positive paired averages of a continuous bump on each admissible
+fibre; compactness supplies a lower bound over all shifts. The finite list
+of spaces at each stage then gives one common positive bound.
+`TorusPolynomial.lean` uses Stone–Weierstrass on the phase torus.
+`ProjectedTest.lean` approximates the bump uniformly and rescales the
+finite coefficient sum before choosing a frequency cutoff. This avoids
+infinite Fourier series and explicit coefficient estimates.
+
+`BufferedFast.lean` proves `buffered_clear_or_four_relations`: with a
+fixed positive lower bound on the length of $J$, sufficiently fast
+arbitrary real readings either clear at a time in $J$ or $2J$, or
+satisfy four independent bounded approximate integer relations. The
+cutoffs are existential and depend only on the number of fast readings
+and the lower bound for the length. Slow readings must already clear on
+both intervals. The explicit numerical real-rate cutoffs and coverage of
+the resulting line and plane types are separate obligations.
+
+`HarmonicCutoff.lean` checks the numerical implication for a positive
+primitive five-reading integer profile: four independent exact rows
+of squared Euclidean lengths at most (28,177,3222,11269) force every
+entry to be at most (424{,}200). The proof bounds the column-deletion
+determinants and uses an integer Bézout certificate for primitivity.
+The lattice transference theorem that supplies rows of those lengths
+from a surviving profile is still outside Lean. `LatticeRounding.lean`
+proves the quarter-sum error term in that argument without probability,
+by choosing between the two neighboring integers for each coefficient.
+
+`BufferedSectors.lean` supplies the required slow-clear intervals inside
+the actual cascade windows for five and six fast readings. It connects
+the four rows to a finite family of positive line or plane kernels at
+bounded distance from the input. `normalized_fast_dispatch` handles the
+speed split: every sorted normalized input either clears, lies near a
+listed line or plane, or has its three smallest readings bounded.
+
+`HarmonicFinite.lean` reuses the same tests on exact harmonic circles
+by taking the frequency cutoff to be zero and averaging over the circle.
+It proves a qualitative finite cutoff for positive primitive five-reading
+harmonic profiles, independent of the numerical 424,200 argument.
+The cutoff is existential; it gives no bound on the work to cover the
+remaining profiles and does not supply a uniform numerical margin.
+
+`PairedSlow.lean` supplies a second proof of the four-fast sector.
+On the pinned reading's paired windows, a single additional slow
+reading covers less than half of the available time. For rates above
+4 a periodic discrepancy bound proves this directly; the remaining
+one-dimensional interval uses 193 exact rational evaluations
+checked by the Lean kernel and an analytic interpolation bound.
+Thus three slow readings admit paired windows with uniform buffer
+when the two unpinned rates are bounded. Four fast readings then
+always clear: the four-row alternative would give a positive
+point in a zero-dimensional kernel. The combined dispatch now
+leaves either a window witness, a finite line or plane type, or a
+sector whose four smallest normalized readings are bounded.
+
+`ThreeFast.lean` proves a one-window argument for every fast block of
+size at most three. On an interval of length $\ell$, a rate $v$ blocks
+at most $\ell/4+3/(16v)$ of its length. The same primitive calculation
+proves a strict first-window witness for four slow readings including
+the pinned reading: each of the other three blocks strictly less than
+one quarter of a unit of time in that window, whose length is $3/4$.
+Thus `normalized_three_fast_dispatch` leaves five bounded smallest
+readings in the residual sector. The shared `fast_append_of_open_window`
+shows that for one or two fast readings it suffices to prove pointwise
+strict clearance of the slow set inside an open allowed window.
+Compactness supplies the uniform buffer on a bounded slow domain.
+
+
+`ExactFourReduction.lean` gives a smaller residual dimension for
+classical positive-time isolation. Apply the buffered four-row theorem
+to the entire scaled input. After a sufficiently large scaling every
+row in the finite table with bounded evaluation must vanish exactly on
+the original input. The resulting kernel has dimension three for
+seven disparities. Its input types still need coverage.
+
+`WindowObstruction.lean` proves that strict slow clearance in the two
+windows is equivalent to admitting every sufficiently fast block of
+one to three readings for a fixed pinned slow prefix. If the slow
+prefix has only touch times, one arbitrarily fast reading can block
+all of them simultaneously. `SlowFiveReduction.lean` reduces the
+five-slow strict first-window question to an existential bounded box.

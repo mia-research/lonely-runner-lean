@@ -1,0 +1,50 @@
+# S-ladder status v1: the AP with one, two and three runners moved to any speed
+
+Written 2026-10-23 (log entries E553 to E565). Lean: `LonelyRunnerFresh/Fresh/` (new files; nothing committed). All statements are about
+the arrangement `oneMover` / `twoMover` / `threeMover` (speeds `c + i` except the movers), a subject `k`, and the cascade statement
+`Lands v k a` (`SelfMoverAllCommon.lean`): a first isolation instant `T > 0` exists, the cascade from `1/(8a)` reaches a fixed point, and every
+fixed point is `T`. `a` is a disparity of the subject (the nearest runner's, or the least frozen reading). Grades: [L] Lean, standard axioms,
+sorry 0; PROV-COV = inherits a [PROVISIONAL: covering] gap cover; PROV-CNT = [PROVISIONAL: counting tool].
+
+## What is proved
+
+| rung | statement | Lean | grade |
+|---|---|---|---|
+| S1, mover not the subject | any `m != k`, any `x != c + k`: `s1_nonsubject` | `OneMoverFinalNS`, `OneMoverLandingAll` (d beyond the least frozen reading), `OneMoverLandingAllC` + `OneMoverBelowLe_*` (d at most it, incl. d = a) | [L], PROV-COV |
+| S1, mover is the subject, nearest-runner window | `selfLanding_<cfg>` for delta <= 1/24, 112 configurations | `SelfMoverCells_<cfg>` (cells assume N0 >= 2, delta <= 1/16; assemblies stop at 1/24) | [L] |
+| S1, subject, 1/24 < delta <= 1/2 | `selfLandingAP_<cfg>` | `SelfMoverCellsN_<cfg>` (N0 = 0, 1, 2) | pilot `k0i1m` [L]; the other 111: batch (see "Running") |
+| S1, subject, 1/2 <= delta <= Dmax | `selfLandingExt_<cfg>`, 28 configurations (Dmax = 1: the next runner is the subject's own old place; Dmax = 7/6: outward) | `SelfMoverCellsExt_<cfg>` | [L] (28 of 28) |
+| S1, subject, delta >= 7/6 or the extreme runner moving outward | `outside_below_k_ne0`, `outside_below_k0`, `outside_above_k_ne7`, `outside_above_k7` | `SelfMoverOutside` | [L] |
+| S1, subject, assembly | `subject_moving_k<k>` for each `k` (every position `x` not another runner's) | `SelfMoverAll_k<k>` (+ `SelfMoverAllLeaves`, `SelfMoverCommon2`) | generated for k = 2 only; compile waits for the `SelfMoverCellsN_*` files |
+| S2, both movers >= D0 | `land2H<set>`, `landing_twoMover2_<set>`, D0 = ceil(1/L) (6 to 112 over 37 frozen sets) | `TwoMoverLarge2_*`, `TwoMoverLandingAll2` | [L], PROV-CNT, PROV-COV |
+| S2, conditional form | `land2C<set>`: the landing is the first common clear instant of the pair in the first wide frozen piece whenever one exists there | `TwoMoverCond_*` (37) | [L] |
+| S3, all three movers >= D | `three_movers_large`, D = ceil(4/L) (13 to 280 over 51 frozen sets) | `ThreeMoverLarge_*`, `ThreeMoverLandingAll`, `ManyClear` (`three_clear_in_all`), `ThreeMoverDefs`, `ThreeMoverCases` | [L], PROV-CNT (measure bound), PROV-COV |
+
+## What the mechanism is
+
+The landing is the first lonely instant of the frozen readings (integers, period 1, a union of pieces per lap) at which the movers are also
+clear. For a mover not the subject the frozen set decides which piece; the mover only selects within it. For the subject moving, every other
+runner's reading is `|o| tau - sigma u` on a torus with `u = delta t`; the landing depends on `tau0 = frac(1/(8 delta))` and, for delta
+above `1/16`, on the integer `N0` (0, 1, 2 handled as fixed numerals; N0 >= 2 symbolic).
+
+## What is NOT proved
+
+* S2 below D0 (and the mixed regime, one mover large, one not): observation only (E561). 25 of the 37 frozen sets have a pair below D0 whose
+  first wide piece fails; the landing then lies in a later piece. Exact failing pairs, e.g. `{1,2,3,5,7}`: `(243/8, 279/8)` against D0 = 70.
+  The cell problem is two-dimensional with ownership of boundary lines; not built.
+* S3 below its threshold and any mixed regime; four or more movers (the measure bound gives nothing at four blocked sets of density 1/4; a
+  lonely-runner time bound would be needed).
+* The cascade's path and intermediate setters (only the zone chain inside each cell proof).
+* The skeleton's five holes (`ArrBlockRule8 3/4/5/6 9`, `ArrBoundedCovered8 9`): these quantify over arbitrary cores; the ladder covers
+  AP cores only, and the thresholds (up to 280) are above `9 * max(F)` (for example `{1,2,3,5}`: 80 against 45).
+
+## Relation to the ratio condition
+
+Any arrangement whose readings satisfy `d_max <= 7 d_min` is lonely at `1/(8 d_min)` (`APNeighbourhoodN`, Thm 4.8). The ladder results above are
+the cases where the movers leave that ratio (mover disparities beyond 7 times the nearest frozen or nearest-runner reading), so they fall in the
+separated or bounded-gap parts of the skeleton, not in the ratio-seven part.
+
+## Running (2026-10-23)
+
+`experiments/n8/batch_n/run_n.sh` compiles `SelfMoverCellsN_<cfg>` for the remaining configurations; `_progress.txt` there is the record.
+After it: `s3_gen_lean_selfall_v1.py <k>` for k = 0..7, compile, then `s1_all_landing` (any runner moved to any position, any subject).

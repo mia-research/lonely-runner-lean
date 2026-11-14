@@ -1,0 +1,5 @@
+Rules: 1–4, 8–20.
+[OWNER] “That's not really working autonomously just working one round and then seeking further instructions?” renews continuing autonomous work beyond checkpoints.
+[AUTOMATION] Existing heartbeat continue-native-n-8-arrangement-proofs updated through the app tool to ACTIVE, preserving its five-minute cadence and current-chat destination; stale research target replaced with V56's reduced guard-forcing target. This supersedes PAUSED status in older handovers. Do not create a duplicate or pause it merely at a checkpoint.
+[BEHAVIOR] Continue substantive native arrangement work after progress checkpoints without waiting for a human “continue.” Preserve handovers and truthful scope. Local scheduled runs require this computer on and app running; activation is confirmed, future run completion is not promised.
+[CURRENT] V56 remains the latest full audit:1739reports/308modules;published d39333f2c48f08b5bc353d4a326de026f84fe863. Current new target: clear-extreme/captured-middle packets with native bounded current spread; derive the current captured block and selected opening, retaining clear-member re-entry duties. No source changes yet at this note.

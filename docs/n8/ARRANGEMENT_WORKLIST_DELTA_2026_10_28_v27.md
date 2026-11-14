@@ -1,0 +1,13 @@
+Rules: 1–4, 8–20.
+# Arrangement worklist delta — 2026-10-28, v27
+[AUTONOMY] Current-chat heartbeat remains ACTIVE every five minutes; continue beyond checkpoints. Old PAUSED passages remain superseded.
+[L FORCED FRONTIER] NativeOpeningLabelReversal: old processed own-opening anchor dB=N+1/8,current setter s captured with M=label(sB). If N<3M, native geometry forces d<3s and the old anchor's closing guard/zero advance/clearance at s's own opening C. No supplied closing comparison.
+[L LOCAL RECURRENCE] Old-anchor recapture implies N≥3M and the stronger independent-advance face(4A−1)(8M−1)<8N+1. No global label descent or advance/move budget.
+[L SHARP BOUNDARY] At N=3M,M>0,F=(24M+7)(sB−(M−1/8));F<1 iff recapture,F≥1 forces closing/zero advance. At F=1 the old anchor is clear at its closed original upper boundary. Recapture here forces A=1. Remaining local branch N≥3M+1 retains arbitrary advances.
+[L JOIN] Moving-subject/packet forms and V59 frontier-retained construction derive guards from strict label cone or sharp equality face; other frontier duties stay explicit. Root21overlappingalternatives unchanged.
+[T WHOLE] All52000originalcontrols/22476consecutiveactualsetterpairs:21750cone-retained,726outsidecone,231recaptured,495outsideconeclear. All328floor-equalityinputs split188retained/140recaptured;all140haveA1/sharpF<1. Strictgap398inputs split91recaptured/307clear;theseareobservations,notnewunresolvedtypes.
+[T GENUINE DEFAULTS]225independentlargeM/A/Ncontrols plus45sharp-edgecontrols=270genuinenoninitialdefaultinputs,threeexactscales. Large advances through100000 tested; sharp45split15recapture/30retention,including15exactclosed-boundaryequalities. Supplied old own-opening anchor at the default start need not be a previous visited move.
+[AUDIT] V60PASS1798reports/312explicitmodules,standardaxiomsonly/sourcehashesmatch;15newmoduleproofs. All310V59non-rootmodules unchanged;ownedrootimportonly. Root21alternatives/fullFreshclosure616. Exactness2immutablepairs/sourcehashes/float-freeASTs/2proofsourcesPASS.
+[NEXT] Push strict-gap exchanges N≥3M+1 and independently advancing recaptured groups toward existing reversal/witness/extreme-recovery families, forcing remaining outsider guards. Do not extrapolate equality branch A1 into a global cap. Check earlier isolation and existing intersections before introducing any new arrangement count.
+[BREADTH/GLOBAL] Saved66/56/8/51/36fronts remain reconciled; recent374/126/4observations are not new unresolved lists. Keep original coupled deviations/ties/mixed-nested groups active. Arbitrary admissible entry, global guard forcing/recurrence resolution, finite exhaustive reduction/fulln8OPEN.
+[REPORT] NATIVE_OPENING_LABEL_REVERSAL_2026_10_28_v1.md.

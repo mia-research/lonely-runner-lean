@@ -1,0 +1,18 @@
+Rules: 1–4, 8–20.
+# Autonomous continuity v7 — 2026-10-26
+
+[OWNER] Latest instruction: auditor is being used too much; root acknowledged overuse and will batch reviews at substantive proof milestones, keeping routine maths/tools moving. Do not resume tiny per-message audits after compaction.
+[CONTINUITY] All completed results and current462/105source audit are in handoverv6 and ARRANGEMENT_WORKLIST_DELTA_2026_10_26_v1; original prompts/rules/extract/worklist/all deltas remain controlling.
+[L] TwoGapPacketBand and FourPairPolynomialGaps compile; complete body/unit reviews clean; root catalogue includes them plus FourAPPairs and both three-/four-block native bypass classes.
+[L] ManifestV3 checks462/462theorems in105modules with only standard axioms and matching SHA256 hashes; preserve historical v1/v2.
+[T2800/2800] Three-gap packet map plus independent jitter passes;148jitter controls outside FixedR/checked obvious layouts,556original-generator-sum-above3 controls pass; no complete old-class exclusion.
+[ACTIVE] Root ThreeGapPacketBand.lean written; initial compiler issue was norm_num at* erasing real-cast inequalities; fixed to goal-only norm_num and raised heartbeats; active compile session19666 must be polled before claiming [L].
+[T21976/21976] phase_neighbour_map_v1 replays original three-block/singleton/four-pair controls; all16482internal-subject controls clear at the same carried reference; all624old singleton reference failures are outer subjects;1360four-pair outside-input-band controls remain recorded in original source.
+[ACTIVE] Agent train_flank owns new PhaseNeighbour.lean: API phase_neighbour(V X:Fin8→ℝ)(N:Fin8→ℤ)(T:ℝ), V_i*T=X_i+N_i, every consecutive X gap≥1/8, X7−X0≤1 ⇒ IsolatedAt V k T for1≤k≤6; positive-time consumer also planned. Root derives uniform three-block original-input theorem in a NEW ThreeBlockNeighbour module; not yet written.
+[PLAN] ThreeBlockNeighbour uses p≥1,q≥1,p+q≤7, positive g/h, independent native bands q_ref*g≥8a+1,q_ref*h≥8b+1,q_ref*(g+h)≤8(a+b)+3. Piecewise whole lap is (i+1)m / im+a / (i−1)m+a+b across the three physical blocks. Adjacent lifted gaps are1/8 or gT−a or hT−b; total span5/8+sum residuals≤1. Thus ALL internal subjects shareT, without an original totalgap cap.
+[PLAN] All8subjects then follow if originalg+h≤2 plus endpoint guards p=1⇒g≥1 and p+q=7⇒h≥1; endpoints clear directly at1/8. This would unify all21size partitions under explicit input conditions rather than finite proof-case copies.
+[T4579/4579] Four-pair one-step deformation map preserves original0<u<1+j ordering;356free-runner5 first setters,921partner ties,3302partner-only; old reference can fail and be skipped.
+[T1944/1944] Agent two_mover_subject mapped resumption family with q_ref=8m+1, κ∈(0,1/4],σ/λ∈[0,1],θ∈(−1,1),g=1/(8m+θ),S=g+h=(8+σ)/q_ref,R=g+h+j=4−λκ/q_ref,u=1−(1+κ+σ)/q_ref. Native paths5→7→6 or0→5→7→6 reach W=(6m+9/8)/(2+R); intermediateU=(2m+9/8)/(1+S+u),V=(7m+9/8)/(3+R).14outsideFixedR; no visit of old comparison assumed.
+[ACTIVE] Subject agent first formalizes λ=0 slice R=4 with arbitrary realg in strict native strip; then extends pair deformation if feasible. First-free iff(1+S+u)/(8g)>2m+7/8; equality is clear at entry and partner-first. σ=0 co-setter alone is insufficient; it must actually be captured at original entry.
+[OWNERS] Root owns catalogue, Polynomial/PacketBand and prospective ThreeBlockNeighbour; train owns PhaseNeighbour/packet joins; subject owns four-pair resumption. New files only, no commits/foreign changes.
+[OWED] Global n=8 and a finite exhaustive residual classification remain open; supplied native indices are not asserted to exist for arbitrary gaps.

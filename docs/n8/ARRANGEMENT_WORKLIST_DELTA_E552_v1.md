@@ -1,0 +1,14 @@
+# Arrangement worklist delta through E552
+
+Rules: v4,8–16,18–21. Earlier versioned worklists remain unchanged.
+
+- E544–E548 [L]: common whole-grid native arrival, independent-index reading/opening relations and two independently advanced or retarded outside readings are proved from original base bands and AP deviations. These are unbounded local transport families, not global existence bounds.
+- E549 [T]: all256retained two-outside arrangements are replayed:198direct group rejoins,58captured comparisons. Among58,38isolate at the first outside separation;16immediately carry one group member;4first hand off between outside readings.
+- E550 [L]: at r-own(k+6), minimum1,q,x,r stay clear for EVERYk>=1. p is clear for1<=k<=15 and captured on whole lapk+5 forEVERYk>=16. The full next move involves only the outside readings before the boundary, and those readings plus p afterwards. No visit to the comparison is required.
+- E551 [L]: PairPivotRejoinN combines a computed original group prefix, native outside-pair continuation and a returned group setter with the proved second group isolation. Original outside whole-reading guards give full native arrival through skipped comparisons. All10retained arrangements whose output is the r reference are instantiated in the kernel; all80prior proof/review manifests are preserved.
+- E552 [T]: original catalogue alignment, with speed ranks and original identities both retained, gives211K2d and45K2b outcomes. The198direct q-group rejoins are K2d; the10certified r-return arrivals are K2b. This explains subfamilies of two outcomes, not either whole catalogue class.
+- E552 [T]: the10continuations beyond the r reference reduce to8low-anchor ordered-quartet episodes and2higher-anchor slow-core/pair episodes. Nine rejoin at the fast-group output; one carries only s, whose next separation clears everyone. All10retain every recorded reduction and the original whole-lap histories.
+- Next: assemble the8low-anchor episodes with the existing ordered-core pair mechanism and GroupReturnBand's actual four-fast-move retention of e; retain minimum1 and s, including the single s return. Do not apply the fast-group scale comparison to the already-clear minimum.
+- Next: assemble the2higher-anchor episodes via p-own13 followed by the native pair(q,x); x14 may bypass the p separation. Retain r, minimum1, e and s from their original reference bands.
+- Next reuse check: the38first-outside isolations need their original band guards assembled with existing transfer. Finite success alone is not a type-wide proof.
+- Wider work remains: independent changes within p/q/x/r, original AP-deviation departures, exact boundary margins, and applicability of the reference mechanisms across allowed arrangements. No exhaustive finite mechanism catalogue or complete n8 theorem is asserted.

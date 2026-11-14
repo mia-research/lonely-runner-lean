@@ -1,0 +1,13 @@
+Rules: 1–4, 8–20.
+# Arrangement worklist delta — 2026-10-28, v20
+
+[COMPLETE SAVED FRONT] All66 noninitial inverse choices reconciled after intersections:34same-entry existing triples,2other-entry existing triples,19label-retained resets,9label-recovered resets,2high-label inputs sharing source19473's recovered-handoff band.50physical controls/51entries; not66new exclusions.
+[L] K<3N for current captured labels forces the packet's compact ratios and zero-advance clearance, without a prior return-level guard or common openings. Recaptured old members requireK≥3N; new captures after such a reset are initially clear outsiders.
+[L] Independent recovered-handoff bands allow captured readers and changed terminal labels at a variable setter opening; derive all terminal windows and the actual full move. Existing sole-setter bands embed formally.
+[T] Three7-coordinate boxes/387noninitial physical controls;192changed entry-capture profiles,384supplied-entry bypasses. Whole-box endpoint/initial-capture faces verified before corner replay.
+[L] Arbitrary supplied histories with changing active packets coalesce when both endpoints isolate the whole arrangement; no global finite-length/termination claim.
+[T] Only originalcaptured-member recaptures among118localmoves:source36100 rows137–139,fastmembers5/6 labels4→5 at setter3label1,then proved positive-label reset at setter5. All66have existing canonical-family witnesses;11K=3Ncontrols rule out naively weakening the label threshold.
+[AUDIT] V54 PASS1688theoremreports/305explicitmodules,standardaxiomsonly,sourcehashesmatch;19newreports(10currentlabel+2history+4recoveredbands+3rootjoins).301oldnon-rootmodulesunchanged;onlyownedrootmodified;21overlappingalternativesunchanged. Sourcesfrozenduringaudit/export;fullFreshclosurecheckedatpublication.
+[RETIRED] Current66choice saved front; prior56latecontinuations and8partialboxes stay retired. Earlier36noninitial choices in the separate earlier_rows population have not been reconciled in this turn; inspect their existing intersections and initial scope before any new counting.
+[NEXT] Develop the structural intersection between higher-label captured-member recapture and the subsequent common-label reset, especially source36100's two-reader packet; test whether fresh initially clear outsiders join before that reset. Do not infer global label growth, a decreasing capture set, or a fixed number of exchanges. The separate36earlier noninitialchoices are another saved input front, not36openarrangements.
+[GLOBAL] Arbitrary admissible forcing, finite exhaustive arrangement reduction and fulln8 OPEN. See NATIVE_INVERSE66_LABEL_PACKET_REDUCTIONS_2026_10_28_v1.md.
