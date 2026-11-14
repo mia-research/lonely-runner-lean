@@ -1105,9 +1105,9 @@ theorem mem_strictClosedShort {L : List TEdge} {w : List TEdge} :
         (show (closedDec w && ((w.map TEdge.strict).any id)) = true from hboth)
     obtain ⟨hlen, hmem⟩ := mem_shortLists.mp hsl
     exact ⟨hlen, hmem, walk_of_closedDec hcd, hst⟩
-  · rintro ⟨hlen, hmem, v, hv, hst⟩
-    refine ⟨mem_shortLists.mpr ⟨hlen, hmem⟩, closedDec_of_walk hv, ?_⟩
-    simp [closedDec_of_walk hv, hst]
+  · rintro ⟨hlen, hmem, ⟨v, hv⟩, hst⟩
+    exact ⟨mem_shortLists.mpr ⟨hlen, hmem⟩,
+      Bool.and_eq_true_iff.mpr ⟨closedDec_of_walk hv, hst⟩⟩
 
 #print axioms mem_strictClosedShort
 
@@ -1155,22 +1155,14 @@ theorem deltaStar_pos (edges : List TEdge) (hneg : NoNegCycle edges) :
   have hall : ∀ x ∈ (strictClosedShort edges).map walkSum, 0 < x := by
     intro x hx
     obtain ⟨w, hw, hwx⟩ := List.mem_map.mp hx
-    have hprobe := mem_strictClosedShort.mp hw
-    obtain ⟨h1, hrest⟩ := hprobe
-    trace_state
-    obtain ⟨hmem, hrest2⟩ := hrest
-    obtain ⟨v, hrest3⟩ := hrest2
-    obtain ⟨hv, hst⟩ := hrest3
-    trace_state
-    clear hprobe h1 hrest hmem hrest2 v hrest3 hv hst
-    obtain ⟨hlen, hmem, v, hv, hst⟩ := mem_strictClosedShort.mp hw
+    obtain ⟨hlen, hmem, ⟨v, hv⟩, hst⟩ := mem_strictClosedShort.mp hw
     have hbad := hneg v w hmem hv
     have hposw : 0 < walkSum w := by
       by_cases hlt : walkSum w < 0
       · exact absurd (Or.inl hlt) hbad
       · by_cases heq : walkSum w = 0
         · exact absurd (Or.inr ⟨heq, hst⟩) hbad
-        · exact lt_of_le_of_ne (le_of_not_gt hlt) heq
+        · exact lt_of_le_of_ne (le_of_not_gt hlt) (Ne.symm heq)
     rw [← hwx]
     exact hposw
   exact listMin_pos 1 (by norm_num) _ hall
