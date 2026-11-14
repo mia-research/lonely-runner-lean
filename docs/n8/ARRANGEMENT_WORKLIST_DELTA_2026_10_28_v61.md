@@ -1,0 +1,17 @@
+Rules: 1–4, 8–20.
+# Native arbitrary-fourth recovery — V79
+
+[L] NativeLargeFourthTail derives the missing large-fourth handoff: outside the small-fourth/reset/hierarchical cases, r≤3q and s>min(q,r) force r≤3s, retaining the third at G=s ownT. A returning second forces r≤s andr<q; the existing pairEnd(s,q,G) clears the pair while q(F−G)<1/3 retains the third. All minimum/integer/initial slow duties follow from d(F−V)<91/384<1/4.
+[L] NativeArbitraryFourthArrangement removes every fourth upper-order and second/third ratio premise, retaining only the native first second/third captures and initial minimum/anchor/slow profiles.
+[L] NativeTwoGridFourthArrangement removes the third-capture premise: choose a current captured third if present; otherwise Y=q ownZ already isolates. NativeArbitraryFourthGrid needs only two independent unbounded grid heights and any two later readings above the minimum. The first second capture remains a hypothesis here.
+[T] Whole19,425 prior inputs plus288 deformations expose56,298 local entry choices;56,178 compatible joins/120 failed initial profiles remain. These overlapping choices occur in18,293 inputs, not distinct arrangement types.
+[T] All1,536 independent current-entry controls pass/13,824 physical versions, including864 both-clear third entries and1,536 closed clear-edge incidences. All1,296 generic-phase inputs pass/11,664 physical versions.
+[T] The original large-fourth survey had no fourth revival;192 inverse controls/1,728 physical versions construct exactly that return, including96 multi-advance cases. All pass the existing pair kernel. Supplied comparison points are skipped in all192 full histories; known original isolations remain recorded.
+[AUDIT] V79 passed2,176 theorem reports across367 explicit modules, standard axioms only and matching source hashes. All362 previous non-root sources remain frozen. Four new modules plus six owned-root joins contribute20 reports;21 catalogue alternatives remain unchanged. Exactness checks6 immutable script/result pairs and5 proof sources.
+[OPEN] Arbitrary admissible entry, global guard forcing, recurrence resolution, exhaustive reduction and full n=8 remain open. No global budget or monotone-speed inference is used.
+
+## Continuity
+
+Finalv61 supersedesv60 NEXT. V78 also passed363modules/2156reports/stdaxioms/hashmatch; V79passed367/2176. Every old audited non-root remains byte-frozen; owned root is the sole old modified source. FinalV79logs: /tmp/n8_large_fourth_tail_v2.log,/tmp/n8_arbitrary_fourth_arrangement_v1.log,/tmp/n8_two_grid_fourth_arrangement_v2.log,/tmp/n8_arbitrary_fourth_grid_v2.log,/tmp/n8_arbitrary_fourth_root_v1.log. Finalaudit/manifest/validator/validationv79. No rules auditor or subagents used. Four newV79modulesnowfrozen.
+
+Work continued beyond this checkpoint: NativeFourUpperArrangement and NativeFourUpperGrid individually compile the full four-common-origin/four-independent-upper-height family, removing the first capture assumption too. These are being integrated/audited as V80; finalhandoverv62 supersedes this interim NEXT. The mixed-observer controls and a new two-own-anchor grid transport source prepare the following front. Fulln8/arbitraryadmissibleentry/exhaustionremainOPEN.

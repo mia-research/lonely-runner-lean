@@ -1,0 +1,52 @@
+# PROOF OBLIGATION DAG — n=8 reduction, 2026-11-13 (v1)
+
+The full proof = one composed theorem plus its obligation closure. Every node: **[DONE]** (Lean, axiom-clean), **[IN FLIGHT]** (agent assigned), **[DATA]** (artifact-verified, instantiation mechanical), **[OPEN]** (named, no owner yet). Terminal node: `LonelyRunnerEight` via `Fresh.FilterAssembly.filterAssembly` (all six hypotheses proved ⇒ DONE — `Fresh/FilterAssembly.lean` compiles, 16+ theorems axiom-clean).
+
+## Layer 0 — foundations [ALL DONE, prior sessions]
+`CascadeForm ⟺ LonelyRunnerEight` · landing = first fixed point · Localisation · duality Lemma 2 (clear point kills every comb-zone cover) · window law (reading 1) · `KTaxonomy` (14 labels, mutual exclusion, K2a/K2s1 empty) · anchor law `landing_is_opener_exit`.
+
+## Layer 1 — the tropical engine [DONE]
+`Fresh/TropicalCycle.lean`: `tropicalCycle_infeasible` — satisfied ratio system ⟹ no bad cycle. Instances: `joinEdge_conflict` (n=1), `composedCap_conflict` (n-hop), `twoCycle_contra` (U-table). Converse: `feasible_of_noGoodCycle` **[IN FLIGHT — TropicalConverse.lean]** — on completion the certificate space is EXACTLY characterized (soundness + completeness), closing the "missing mechanism" question at the systems level.
+
+## Layer 2 — CoverData (the 74,613-box J2 cover)
+- M1 (62,000): C_L closed form ⟹ clear point ⟹ no-carve — **PROVED end-to-end** (O1 chain: `existsGapJ → faceClear → clearPointOfCert → noCarveOfM1`).
+- M4 (12,540): C₃ kill **PROVED** (`UClosureKill`: `kill_sound`, `boxAdmit_of_kill`) — consumes three lemmas now proved in-file. Residual **2,329 fine-ladder trees [DATA]**: dump v2's three witness classes map the key extension ((rank, exit-numerator, value-consistency)); mechanical.
+- Box cover totality **PROVED** (`coverTuple`, `box_totality`, `box_cover_range`, `refine_cover` — third-child `[2k, 2k+2]`).
+
+## Layer 3 — ClearPointOfCert [DONE] (O1 chain).
+
+## Layer 4 — OneSidedSound (68 chain boxes)
+- Engine **DONE** (`JoinFamComposed`: `rationalEdge_conflict`, `ChainReal`, `composedCap_conflict`).
+- Data **DONE [T 68/68]** (`ComposedFamData`: `oneSidedTotalData`).
+- Glue **DONE** (`OneSidedGlue`: `oneSidedSound_of_composedData` — data as theorem argument).
+- Direction (a) **DONE** (`CapChainsOfCarve`: `capChainsRealized_of_chainDom` + dump-shaped `oneSided_of_dumpDom`).
+- Direction (b) **DONE** (`WordCoverSide.lean`: `wordCover_demands` → `composedTotal_of_wordCover` → `oneSidedSound_of_wordCover` — carve(W₁) ⟹ family demand realized, composed with the engine to the conclusion shape; orientation finding recorded: numerator = first zone's reading, matching the census; a single zone provably cannot cover both endpoints 9 and 15). Remaining: two data-side defs — the covering refinement (`NoClearPointWordRealized`) and the dump exhaustiveness instantiation (`FamilyCoversWordEdges`, [T 73/73] mechanical).
+- DumpDom correction **DONE, twice-sharpened** (`DumpDomData.lean`, 1,620 lines, green, 89 axiom-clean): spec v1 (arbitrary-U) FALSE 11/11 (empty-chain trap); spec v2 (U₀-restricted) ALSO FALSE 11/11 — all 52 caps strictly tighter than their U₀ entries (exact #eval vs uMk): **the J-half domination lives on the enumerated chains' closed trace tables, not any box-only table** — a structural fact, not a defect. Correct consumption proved: `capChainsRealized_of_chainDomU0` (chain-start at U₀, J-domination via the consumed chain's closed trace). The dump-side instantiation is now the per-chain carrier (dump v2's `attaining_chain` fields).
+- Residual: 15–59 per-box totality instantiations **[DATA]** (bridge-assisted, mechanical).
+
+## Layer 5 — PairwiseSound (5 two-sided boxes)
+- Engine DONE (O2: 5 boxes pinned with exact conflict data). Totality lift **[DATA]** mechanical.
+
+## Layer 6 — OutsideBelow17 (bands)
+- Schemas 4/4 **DONE** (fixed-R₀, window, seam-plane, pinch — `CarveExclusionCerts` + `PinchCert`).
+- Composition **DONE** (`BandNoCarve`: BandCertData ⟹ OutsideBelow17) + pinch data discharge (`BandPinchData`: 7 window theorems; 509/509 verified).
+- SideWindowCert schema **DONE** (`SideWindowCert.lean`: the SideWindowCertV vertex-form schema + coupled-corner convexity proved + three-region composition; 43 theorems GREEN).
+- 1,018 off-plane instantiations **DONE [T 1018/1018]** (`SideWindowCertData.lean`, 29,905 lines: two shared templates carrying the schema argument once, per-region bbox literals + 12 numeric facts; orientation verified two layers — data-layer exact Fractions + Lean-layer nonemptiness; the reversed side confirmed non-vacuous). Per-leaf closure folding (swc_noCarve_disj → per-leaf via sideRegions_cover_h3) **[named, mechanical]**.
+- Band data to ρ₇ < 113 **[DONE at D=32]**; exact to [25,101) at D=64; [111,113) D=64 completing.
+
+## Layer 7 — TailBelow17 (the analytic close)
+- **TAIL LEMMA CLOSED UNDER THE PIN ρ₆ ≤ 49/7** (tailrest, this campaign): (a) **anchor-classification lemma [T 105/105]** — under the pin the R=1 coverer is ∅ or the forced singleton (ρ₇, m); **corollary: every gap (8m+1, 8m+7) is carve-free under the pin at every m** (E840's named not-done closed); (b) strips 2, 3 by the exact caps (carve locus (15, 511/31) ∪ (23, 86989/3565), both attained); (c) strips 4–6 by complete chases (m=13 KILLED complete, 48.5M types; m=14 0-feasible/incomplete, honestly reported); (d) **ρ₇ ≥ 50 by TailSlowWidth.bandClearPoint_of_slow_cap17 (ρ₆ ≤ 17 ⊇ pin)** — the covering session's theorem, composed; (e) gap-regime covering kills where reached: 150/157 cone-locked (Farkas), 7 open dead system-side (K₆-nesting [T 7/7 + 15/15]; E830 product-1 cycle at band level).
+- **m-cancellation theorem DONE**: monotone shortcut provably absent (edge-blind tail).
+- **Middle-service sharpened**: P1 (immediate kill below J_min) proved ∀ m ≥ 4; P2 (ρ₆ budget → 0); P3 (no scalar kill). **The failing quantity = the joint interval-fixpoint collapse over ≤30 bridge nodes = R1** (E838 item 3's middle-reading bound).
+- OPEN, exactly: **R1** (the all-m analytic lemma — the fixpoint collapse; **no longer load-bearing for the cap half** — it would only serve a chase-free close of strips 4–6); R2 (exhaustive level-7 unpinned gap columns); R3 (unpinned strips 4–6, ρ₆ ∈ (7,17), ρ₇ < 50 — the residual frontier).
+- Pin-removal: the pin holds for all carves per E839's taxonomy (96/96 recorded) — the formal pin-transport (carve ⟹ ρ₆ ≤ 49/7) is a named small lemma (composes E839's anchor taxonomy with the strip arithmetic).
+- **midsvc instruments** (m = 2..2000 verified): P1 margin closed form with the mod-8 obstruction ($r(m) \neq 0$ for every m, period 7, values {2,10,18,26,34,42,50}); $B_6$ closed form $(56-r(m))/(8J_{\min}+1)$; sliver lock + ρ₆-ladder dichotomy; corrected tail map (v1 seam-band error fixed); chase m = 15 KILLED complete (78,261,301 types, 3491.5 s); m = 14 partial (135/149 ends, 0 feasible, SIGKILLed by memory pressure — honestly reported).
+
+## Layer 8 — the alphabet
+`allLabelled_iff_allLandBelow17` + `lonelyRunnerEight_of_allLandBelow17` **DONE** (`FilterSkeleton`); 14-label completeness follows from lands-below-17 unconditionally.
+
+## Session addendum (2026-11-13 late) — the spec-sharpening ladder
+The OneSided data-side spec was falsified TWICE, each time converting a false definition into a structural theorem: v1 (arbitrary-U) died by the empty-chain/diagU counterexample; v2 (U₀-only) died by the 52-entry exact comparison — **the J-half is irreducibly chain-indexed**. The corrected consumption (`capChainsRealized_of_chainDomU0`) consumes per-chain attestation data (dump v2's `attaining_chain` fields — 109,592 caps mechanically attested [T]). This is the no-quarantine discipline operating on specs: each falsification narrowed to the TRUE structure. Per-chain carrier instantiation: IN FLIGHT (ChainDomData.lean).
+
+## The macro statement
+The oracle never falters because the duality is decidable at every scale: carve ⟺ chain ⟺ feasible ratio system ⟺ no bad cycle; not-carve ⟺ clear-point witness. The reduction theorem is the pair-exclusion: carve(W₀) ∧ carve(W₁) has no feasible point — every kill is a cycle instance of Layer 1, every accept a clear-point instance of Layer 0. The remaining obligations are: one analytic lemma (middle-service), one completeness direction (converse), one schema (SideWindowCert), two compositions (direction (b) consumption, tail-half composition), and data-side instantiations that are mechanical with the bridge.

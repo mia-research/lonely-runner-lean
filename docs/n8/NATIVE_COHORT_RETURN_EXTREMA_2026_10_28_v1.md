@@ -1,0 +1,36 @@
+Rules: 1–4, 8–20.
+# Native recaptured cohort return extrema — 2026-10-28, v1
+
+[L] A cohort captured atR shares actual openingT; at any later supplied U≥T, define each independent unbounded m_i=advance(s_i,T,U), retaining all positive distinct physical speeds and the moving subject.
+[L] Every original cohort member has opening O_i(U)=T+m_i/s_i and current closing C_i(U)=T+(m_i+3/4)/s_i; both retain the original common opening and cancel its independent original labels.
+[L] Original-cohort opening order is exactly m_i*s_j≤m_j*s_i; recaptured members have m_i>0, and at an equal return level their slowest disparities give the latest openings.
+[L] LevelFrontier selects slowest currently recaptured old-cohort members at each populated return level; representatives exist and testing only them is equivalent to testing all old-cohort opening comparisons.
+[L] ClosingFrontier selects fastest original-cohort members at each populated level, INCLUDING old members clear atU and level0; representatives exist and testing only them is equivalent to all old-cohort closing comparisons.
+[L] Equal disparities/tied physical identities retain all duties; these reductions concern boundary comparisons, not deletion of physical runners or bounded integer labels.
+[L] ReturnOrder combines exact old-cohort displacement comparisons with the actual original outsiders' opening comparisons and derives the next actual move U→V; the selected setter may belong to either group.
+[L] Same-level pure old-cohort captures force the slowest member's actual opening without separately supplying every opening comparison; arbitrary mixed levels use their exact cross-products.
+[L] ReturnPartnerClass joins PartnerClass; ReturnRecoveryClass joins CanonicalReturnClass with independent old-cohort recovery phases atV and positive-return outsider lower boundaries.
+[L] FrontierRetainedClass uses only the slow opening representatives, fast closing representatives and retained original outsiders; it derives an actual move and zero label advances fromU→V, joining NoReturnClass and isolation without the partner ratio restriction.
+[L] Three catalogue bridges retain21 overlapping top-level alternatives; these are native sufficient input families and equivalent reductions of comparisons, not a proof that every arrangement enters them.
+[T 168758/168758] Complete prior overlapping move populations reproduce all2297 recaptured fronts:626 pure exchanges,1102 shared-opening exchanges involving more outsiders,569 mixed-opening cases.
+[T] All2297 prior recaptured old-cohort groups contain exactly ONE currently recaptured physical member; their equal-level observation cannot by itself support a many-returner theorem.
+[T] Pure fronts have80 immediate retained/recovered joins and546 continuations; extra fronts have206 retained joins,209 recovered-boundary joins and893 continuations; mixed fronts have53 retained joins,55 recovered-boundary joins and514 continuations; families overlap.
+[T] In extra fronts, old-cohort/external setters occur260/866 times with24 cross-group ties; mixed fronts235/335 with1 cross-group tie, so old-cohort precedence is not assumed.
+[T] Every2297 local tail from its actual supplied U replays completely to isolation without a time/move cap; these finite tails do not prove universal occurrence.
+[T 600/600] Exact physical controls now exercise120 pure,360 extra-outsider and120 mixed fronts with several simultaneously recaptured old members at independent return levels;120 pure controls are reused from the multilevel construction,480 are additional physical arrangements.
+[T] Earlier construction versions contain72 six-level controls, then120 controls (72 six-level,24 three-level,24 two-level); these nested versions are not counted as extra independent populations.
+[T] All600 physical controls satisfy retained-frontier and recovered-boundary inputs at their next local opening; only66 satisfy the partner-ratio/tie input, demonstrating534 sufficient retained-frontier inputs beyond that narrower condition.
+[T] Slow-level representative reduction removes648 old-cohort setter comparisons, and fast-level reduction removes648 closing comparisons across those600 checks, preserving the exact selected maximum and minimum; all omitted physical readings retain clearance duties.
+[T] Every600 physical default history is replayed to isolation and under exact speed-order relabelling; none visits the supplied large localR, so these conditional local input controls are not asserted default-path occurrences.
+[T 960/960] Extended physical perturbations preserve all600 earlier controls and add360 proposals;15 change the capture branch and are retained. Actual branches are135 pure,705 extra and120 mixed; all full default histories and complete local tails isolate.
+[T] Expanded physical controls have806 retained-frontier inputs and854 recovered-boundary inputs, including48 recovered returns beyond retention;69 partner inputs leave737 retained-frontier inputs beyond that narrower family.106 next local openings continue (1 pure,105 extra), and all complete local tails are retained.
+[T] Expanded physical controls coalesce1008 setter comparisons and1008 closing comparisons. These are overlapping control uses, not counts of distinct arrangement types.
+[T] All1958 original failures of zero advance (including5 recovered exits) have an outsider first closing; the new physical controls exhibit153 old-cohort first closings,48 recovered exits and105 old-cohort recaptures. This refutes an unrestricted outsider-first conclusion.
+[T] Original continuing captures split1867 outsider-only,70 both groups,16 old-cohort-only; the additional106 physical continuations split105 old-cohort-only and1 outsider-only, retaining both source populations separately.
+[T] At the next actual move after the continuing opening, recovery inputs hold1023/1953 original cases (515 pure,298 extra,210 mixed) and81/106 physical cases;930 original and25 physical continuations remain, with their full uncapped local tails recorded.
+[EXACT] native_cohort_return_order_exactness_v5 PASS twelve script/result pairs with original/inherited hashes and no float literals/calls; rational point controls do not certify the old float-LP tree regions.
+[AUDIT L] FullAuditV39 PASS1300 theorem reports/272 modules, standard propext/Classical.choice/Quot.sound only, matching source hashes;19 module theorems and3 catalogue bridges add22 reports sinceV38.
+[FILES] Fresh/NativeCohortReturnOrder.lean; native_cohort_exchange_fronts_v1; native_cohort_multilevel_physical_v1/v2; native_cohort_three_front_physical_v1/v2; native_cohort_return_order_controls_v1–v5; native_cohort_return_departures_v1/v2; native_cohort_return_order_exactness_v5; oct26_axiom_manifest/validate_v39.
+[NEXT] Follow the930 original and25 physical cases still continuing after the additional actual handoff, using their crossed closing level, new opening representative and competing outsiders; no global event-count bound is asserted.
+[OWED] Universal occurrence of the sufficient input faces, complete finite arrangement reduction and full n=8 remain open; no global decreasing-group, stopping or move-budget claim follows.
+[PROVISIONAL: counting tool] Inherited grid/ceiling selectors; [PROVISIONAL: covering] inherited finite parameter joins; no imported density/coverage introduced.

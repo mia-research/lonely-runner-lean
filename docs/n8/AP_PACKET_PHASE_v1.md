@@ -1,0 +1,14 @@
+# AP packet anchors and uniform phase placement, v1
+
+Rules: 1–4, 8–18. Full physical cascade mapping preceded the phase-selection proofs; no density or assumed future isolation.
+
+- [OBS, exact] `ap_packet_phase_map_v1.py` intersects all signed offset inequalities `(j−h)z∈[Kj,Kj+3/4]` for every packet anchorh andj=0…L, retaining all integer laps. Periodic phase0…1 is sufficient since addingq changes whole laps by(j−h)q, explicitly retained later.
+- [P, exact interval reduction; root formalising charts] Withε=1/96 andx≥96b, only11 selected phase charts join b≥1 to the generic large-step laws across all r=1…5,L=6−r. Selected regions are in `ap_packet_phase_selected_v1.json`; interior anchors are essential to the chosen small-r joins (r2,L4 anchor3 uses phase `[5/12,1/2]`).
+- [L] `Fresh/APPhaseOpening.lean`, `phase_opening`: select anchorX=x+hb and phaseα=max(b/8,lo), then the actual named opening afterα/b. Conditions `lo+ε≤hi`, `8r(lo+ε)≤7b`, `b≤8(hi−ε)`, b≥1, x≥96b retain all core readings1…r and phasebT∈[lo,hi]. No opening lap is supplied as a premise.
+- [L] `packet_phase_endpoints` transfers all packet readings from their exact signed-offset inequalities at both phase interval endpoints, with integer functionsKj. It handles both signs ofj−h and proves each packet reading in whole-lap bandN+Kj.
+- [L] `ap_packet_large` usesq=ceil(b/8) and the lower packet anchor, retaining lapsN+jq. Its polynomial threshold `97r≤12b(7−r)` is sufficient underx≥96b; it is weaker than the initial coarse tail thresholds23/15,19/5,15/2,44/3,35, so the selected finite charts already reach it.
+- [L] Allthree theorem endpoints compile cleanly and print exactly `propext, Classical.choice, Quot.sound`; source scan zero placeholders/native_decide/unsafe. Root owns the11 chart closures, total b≥1 assembly, physical consumer and residual integration.
+- [OBS, exact] Initial `ap_packet_phase_controls_v1.py` passes635 parameter cases/all5080 physical subject cascades before the generic proof. Version2 adds weaker-threshold equality,+1/64 anddouble controls:650 parameter cases/all5200 physical subject cascades pass, no exceptions. The largest115 actual moves is only a measured diagnostic, never an existence cap.
+- [TREE] The resulting intended family is two AP reading blocks with r=1…5 fixed unit readings andL+1 packet readings at an arbitrary stepb≥1; phase-anchor choices and independent whole laps replace accumulating numerical setter words. Reciprocal physical block roles are assembled separately.
+- [PROVISIONAL: counting tool] supports the exact ceiling/opening placement; [PROVISIONAL: covering] supports only the finite STEP-PARAMETER joins in the total assembly. No time-window covering argument appears here.
+- [OWED/complement] This helper file alone does not establish the total11-chart or all-subject physical theorem, nor smaller-gap or arbitrary multiblock completeness; those require their explicitly separate consumers.

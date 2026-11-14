@@ -1,0 +1,12 @@
+# Four fast AP readings across two retained lap bands, v1
+
+Rules: 1–4, 8–18. Worklist G07/G12, H01/H06; actual boundary map replaces the packet reference with its upper reading.
+
+- [OBS, exact] For core1,2,3 and packetx,x+2,x+4,x+6, x=161−1/64 first opens the lower reading then lands at the upper reading on lap21, time1352/10687; x=161+1/64 goes directly to that upper lap, time1352/10689. `openingAfter x(1/8)` fails both, but the distinct first openings merge at the same upper-packet mechanism.
+- [L] `Fresh/MixedStepFour.lean` proves `mixed_at_upper`: if b≥2, T≥1/8 andbT≤1/3, the upper opening `(x+3b)T=N+1/8` clears allseven readings; the upper member is on wrapN, lowerthree on wrapN−1, and fixed1,2,3 on wrap0.
+- [L] `mixed_four_upper_family` selects `openingAfter(x+3b,1/8)` and proves the complete real parameter family x>0, b≥2, `9b²≤x(8−3b)`; width3b≥6 is allowed, while the old one-band width condition cannot hold at any finite x when3b≥6. Its pointwise readings wrapper is available for physical consumers.
+- [L] For b=2, the upper-lap intervals `6n−21/4≤x≤8n−5`, n≥3, overlap; a floor selects n and proves `mixed_four_two_tail` for every realx≥51/4. Its pointwise wrapper supplies fixedj=1…3 and packetj=0…3 directly.
+- [L] Final `check.sh Fresh/MixedStepFour.lean` returns0; allsix printed theorem axiom lists are exactly `propext, Classical.choice, Quot.sound`; no warnings/placeholders/unsafe/native_decide. New files only, no commit.
+- [OBS, exact] Reproducible `experiments/n8/mixed_step_four_v1.py` stores126 complete physical cascade controls at widths6±1/64,6,15/2,8±1/64,8; all126 fail the old sufficient width inequality,82 fail its named base opening, and all15 satisfying the new mixed-family conditions clear at the upper opening. A further31 exact controls exercise both symbolic theorem families. A failed sufficient condition is not an isolation-failure claim.
+- [TREE] This is a packet/retained-band mechanism across a changed reference and lap split, not generic local stability; old `LocalDisplacement`/`LandingGeneral` were checked before the tests. Width6 and8 here are boundaries of the selected band mechanisms, not universal arrangement caps.
+- [OWED/complement] Arbitrary b,x outside these stated inequalities, earliest-landing formulas for the full family, and all unequal-step AP arrangements are not claimed. Root/agentC assemble the positive physical all-subject consumers separately.

@@ -1,0 +1,128 @@
+{
+ "ground_truth_ok": 9,
+ "results": [
+  {
+   "goal": "b1",
+   "found": true,
+   "got": "omega",
+   "expected": "ring",
+   "total_ms": 4392.1,
+   "tried": [
+    "omega"
+   ]
+  },
+  {
+   "goal": "b2",
+   "found": true,
+   "got": "omega",
+   "expected": "omega",
+   "total_ms": 4588.3,
+   "tried": [
+    "omega"
+   ]
+  },
+  {
+   "goal": "b3",
+   "found": true,
+   "got": "linarith",
+   "expected": "linarith",
+   "total_ms": 9076.7,
+   "tried": [
+    "omega",
+    "linarith"
+   ]
+  },
+  {
+   "goal": "b4",
+   "found": true,
+   "got": "omega",
+   "expected": "norm_num",
+   "total_ms": 4579.7,
+   "tried": [
+    "omega"
+   ]
+  },
+  {
+   "goal": "b5",
+   "found": false,
+   "got": null,
+   "expected": "omega",
+   "total_ms": 33446.3,
+   "tried": [
+    "omega",
+    "linarith",
+    "ring",
+    "norm_num",
+    "simp",
+    "nlinarith",
+    "aesop"
+   ]
+  },
+  {
+   "goal": "b6",
+   "found": true,
+   "got": "omega",
+   "expected": "ring",
+   "total_ms": 4719.7,
+   "tried": [
+    "omega"
+   ]
+  },
+  {
+   "goal": "b7",
+   "found": true,
+   "got": "linarith",
+   "expected": "linarith",
+   "total_ms": 8979.2,
+   "tried": [
+    "omega",
+    "linarith"
+   ]
+  },
+  {
+   "goal": "b8",
+   "found": true,
+   "got": "omega",
+   "expected": "omega",
+   "total_ms": 4554.2,
+   "tried": [
+    "omega"
+   ]
+  },
+  {
+   "goal": "b9",
+   "found": true,
+   "got": "nlinarith",
+   "expected": "nlinarith",
+   "total_ms": 40572.1,
+   "tried": [
+    "omega",
+    "linarith",
+    "ring",
+    "norm_num",
+    "simp",
+    "nlinarith"
+   ]
+  },
+  {
+   "goal": "b10",
+   "found": true,
+   "got": "nlinarith",
+   "expected": "nlinarith",
+   "total_ms": 49470.9,
+   "tried": [
+    "omega",
+    "linarith",
+    "ring",
+    "norm_num",
+    "simp",
+    "nlinarith"
+   ]
+  }
+ ],
+ "by_tactic": {
+  "omega": 5,
+  "linarith": 2,
+  "nlinarith": 2
+ }
+}

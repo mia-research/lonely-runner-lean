@@ -1,0 +1,12 @@
+Rules: 1–4, 8–20.
+# GitHub synchronization — 2026-10-28, v1
+
+[SYNC] Published the native n=8 research snapshot to https://github.com/mia-research/lrc-n8-lean on main; payload commits d77f44916f159e7e4ee8a89a4fc8db90f2116008 and511f6bd18a59112dfcfce6af5bdccf3db9928447 were pushed successfully and the latter remote head was verified.
+[SCOPE] Preserved the complete current Fresh source tree, all n8 documents/scripts/evidence, local Spec/Cascade/Construction8 import closure, native n6/n7 controls and additional unpushed arrangement support; unrelated BTC and other workspace material excluded.
+[EXACT] All11442 exported source/evidence files match the live original local hashes; large historical certificates/deposits are deterministic lossless gzip with restore/hash inventories, while the571-module active Fresh import closure remains directly readable.
+[VERIFY] Clone-source V35 verification passed267 modules/1224 theorem reports, standard axioms only, with matching source hashes; this checks preserved evidence against the export and does not claim a new clean Lean compilation during synchronization.
+[TOOLS] Repository scripts/n8/restore_snapshot.py verifies deposits and --restore materializes archives without overwriting changed local files; verify_current_audit.py maps historical absolute manifest paths into the clone; build_fresh.py compiles the571-module audited import closure with matching pinned Lean/Mathlib.
+[INVENTORY] GitHub docs/n8/github_sync_2026_10_28_v1.json and github_native_support_2026_10_28_v1.json preserve original/restored/stored paths and hashes; repository README links latest findings/worklist/handover and clearly retains fulln8 as open.
+[LOCAL] Export prepared from a separate clone at /tmp/lrc-n8-github-sync-20261028; original working branches and frozen proof sources were left intact, so original untracked files can remain visible despite their exact contents now being backed up on GitHub.
+[OTHER REPO] https://github.com/mia-research/lonely-runner-lean branch n7-case-a5-repr-cases already matched remote4fddf44 after fetch; no unpushed commits there. Its additional untracked n8 support and outer native controls are included in the n8 archival supplement.
+[NEXT SYNC] Use a clone of current n8 main as the destination and compare local source hashes with these export inventories; do not push the unrelated outer Math Ex/BTC branch or assume a local untracked status means its contents were omitted from this snapshot.

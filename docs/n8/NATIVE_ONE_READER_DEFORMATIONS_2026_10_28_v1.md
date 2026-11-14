@@ -1,0 +1,28 @@
+Rules: 1–4, 8–20.
+# Native one-reader deformations and intersections — 2026-10-28, v1
+
+[L] At a supplied entry U, hold the other physical readers fixed and let B be their actual next cascade move; inserting positive disparity s gives the full actual next move max(B,(N+1/8)/s), N=label(sU), including a clear inserted reader and repeated disparity magnitudes.
+[L] The insertion retains B exactly when N+1/8≤sB; equality retains B, while the strict reverse comparison makes the inserted reader set a later opening. No current-capture-preservation hypothesis is required.
+[L] The physical deformation theorem keeps seven original physical speeds unchanged, including the positive moving subject; the replacement must still form eight positive distinct speeds. The other-six comparison entry is supplied, not asserted a default-path visit.
+[L] On any fixed canonical entry-label slice at positive U, increasing s makes that next move nonincreasing; all s satisfying the retained-opening comparison coalesce at B, even when their pairwise opening/closing orders differ.
+[L] This is local in the entry and its label: changing either does not imply global monotonicity, a descending setter sequence, or a cascade budget.
+[L] For any finite additional set of positive readings, the full move remains B iff every inserted reading independently satisfies its lower-opening comparison at B; this exact intersection theorem does not assume their future clearance.
+[L] If the fixed readings are clear at B, the full move reaches B and isolates iff the inserted reader is clear there; no lower-order existence theorem supplies that premise.
+[L] OpeningFace=d(N+1/8)−s(K+1/8), ClosingFace=d(N+7/8)−s(K+7/8), and ClosingFace−OpeningFace=3(d−s)/4 exactly.
+[L] At an opening tie, the faster reading closes earlier; simultaneous opening and closing ties force equal disparity magnitudes, which remain possible for two distinct physical runners on opposite sides of the moving subject.
+[L] The catalogue imports the new normal form and exposes its actual physical move; its21 overlapping isolation alternatives are unchanged, with no assertion of exhaustive finite occurrence.
+[T 1122/1122] Every960 previous three-front physical control,120 double-high,6 slow-turn and36 cohort-phase control is used, with all seven nonsubject readers deformed separately:7854 fixed-entry-label charts.
+[T] Each chart includes its exact open/closed label endpoints, entry-capture face, actual move-exchange face, pairwise opening/closing ties, physical collisions/zero speeds, and all comparison-point capture/recovery faces inside that given strip; exact face points and one rational point per intervening interval are retained.
+[T 184986/184986] Proposals retain7854 excluded open-label endpoints and270 inadmissible physical points; all176862 admissible controls verify the actual move formula and replay complete default cascades and sorted/relabelled histories exactly.
+[T] The admissible controls include166945 retained next moves,9917 displaced next moves,6705 exact actual-exchange equalities and15942 comparison recovery-boundary equalities; these count controls, not distinct arrangements or exhaustive types.
+[T] Among retained next moves,22270 checks still capture the changed reader at B; same next move is therefore not asserted to preserve isolation or the subsequent cascade.121900 checks isolate at B.
+[T] All1061172 pair boundary comparisons obey the difference identity, including44724 opening ties;61802 neighbouring interval-control pairs change boundary order while retaining the same next move B.
+[T 71808/71808] For every1122 source, keep one actual setter unchanged and combine every subset of the other six individually coalescing replacements;2160 combinations are inadmissible and retained, while69648 admissible combinations preserve the actual next move and replay complete default/sorted histories.
+[T] Those simultaneous controls give58570 isolated and11078 continuing next entries; no future reader duty is discarded when the next move coalesces.
+[T] Three moving-subject symmetric AP controls at scales1,1/7,1000 give21 charts,132 admissible and78 inadmissible physical controls plus21 excluded label endpoints;21 simultaneous opening/closing ties exercise equal disparities without equal physical speeds.
+[T] None of the176862 main or69648 simultaneous default histories visits its supplied local entry;111 of132 symmetric AP controls do. Local physical inputs and default occurrence remain distinct.
+[EXACT] native_one_reader_exactness_v1 PASS two script/result pairs, original links and twelve inherited two-setter pairs; no floating point literals/calls in new scripts. Old float-LP regions remain uncertified.
+[AUDIT L] FullAuditV43 PASS1394 theorem reports/277 modules, standard axioms only, matching source hashes;24 new module theorems plus one catalogue move theorem. Only the owned catalogue changes among the276 preceding audited sources.
+[NEXT] Follow the retained-but-captured comparison entries: distinguish changed-reader-only captures from fixed-group captures and mixed captures, then use their actual surviving boundary order and independent new labels to force existing relay/recovery joins. Changes of entry label and of the comparison opening remain separate fronts.
+[OWED] Universal forcing, an exhaustive finite admissible-arrangement reduction and full n=8 remain open; fixed-label charts and successful finite controls are not that reduction.
+[FILES] Fresh/NativeOneReaderDeformation.lean; native_one_reader_deformation_v1; native_one_reader_intersections_v1; native_one_reader_exactness_v1; oct26_axiom_manifest/validate_v43.

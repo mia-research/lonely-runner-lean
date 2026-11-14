@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="carbon">
+  <title>Hydro Chat Black</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+
+      /* Pitch-black aesthetic + Carbon surface hierarchy */
+      --background: #000000;
+      --surface-container-low: #08080a;
+      --surface-container: #101014;
+      --surface-container-high: #191920;
+
+      /* Ink */
+      --on-surface: #f4f4f6;
+      --on-surface-variant: #9ca3af;
+
+      /* Borders & Rules */
+      --outline: #3f3f46;
+      --outline-variant: #222229;
+
+      /* Accents & Semantic States */
+      --primary: #f4f4f6;
+      --on-primary: #000000;
+      --primary-container: #1e2430;
+      --on-primary-container: #f4f4f6;
+      --secondary: #71717a;
+      --tertiary: #4ade80;
+      --positive: #4ade80;
+      --positive-bg: #052e16;
+      --positive-border: #166534;
+      --warning: #fbbf24;
+      --warning-bg: #2e1d04;
+      --warning-border: #854d0e;
+      --error: #f87171;
+      --on-error: #000000;
+      --error-bg: #2a0a0a;
+      --error-border: #7f1d1d;
+      --accent-info: #38bdf8;
+      --accent-info-bg: #082f49;
+      --accent-info-border: #075985;
+      --focus: #38bdf8;
+
+      /* Data & Syntax Highlighting */
+      --data-1: #38bdf8;
+      --data-2: #4ade80;
+      --data-3: #fbbf24;
+      --data-4: #c084fc;
+      --data-context: #71717a;
+
+      --syn-keyword: #c084fc;
+      --syn-tactic: #38bdf8;
+      --syn-type: #fbbf24;
+      --syn-string: #4ade80;
+      --syn-number: #fb923c;
+      --syn-comment: #6b7280;
+      --syn-operator: #94a3b8;
+      --syn-attr: #f472b6;
+
+      /* Typography */
+      --font-headline: 'IBM Plex Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-label: 'IBM Plex Mono', monospace;
+
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.5rem;
+      --rounded-full: 9999px;
+
+      /* Spacing Scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Effects */
+      --rule: 1px solid var(--outline-variant);
+      --rule-strong: 1px solid var(--outline);
+      --indicator: 2px solid var(--accent-info);
+      --shadow-1: 0 4px 16px rgb(0 0 0 / 0.65);
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      position: static !important;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* App Shell Layout */
+    .app-shell {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      height: 100dvh;
+      width: 100%;
+      background-color: var(--background);
+      overflow: hidden;
+    }
+
+    .app-shell * {
+      min-width: 0;
+    }
+
+    /* Top Header */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--background);
+      border-bottom: var(--rule);
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .brand-title {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .brand-subtitle {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    /* Bridge Status Pill */
+    .bridge-status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      border: var(--rule);
+      background-color: var(--surface-container);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      letter-spacing: 0.04em;
+      color: var(--on-surface-variant);
+      min-height: 32px;
+      white-space: nowrap;
+    }
+
+    .bridge-status-chip[data-state="online"] {
+      background-color: var(--positive-bg);
+      border-color: var(--positive-border);
+      color: var(--positive);
+    }
+
+    .bridge-status-chip[data-state="offline"] {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+
+    .bridge-status-chip[data-state="checking"] {
+      background-color: var(--accent-info-bg);
+      border-color: var(--accent-info-border);
+      color: var(--accent-info);
+    }
+
+    .bridge-status-chip[data-state="disabled"] {
+      background-color: var(--surface-container);
+      border-color: var(--outline-variant);
+      color: var(--on-surface-variant);
+    }
+
+    .status-square {
+      width: 7px;
+      height: 7px;
+      background-color: currentColor;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Toggle Switch & Header Buttons */
+    .toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background-color: var(--surface-container);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+
+    .toggle-btn:hover {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+      color: var(--on-surface);
+    }
+
+    .toggle-btn[aria-pressed="true"] {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+      color: var(--on-surface);
+    }
+
+    .switch-track {
+      position: relative;
+      width: 28px;
+      height: 16px;
+      background-color: var(--outline);
+      border-radius: var(--rounded-full);
+      transition: background-color var(--dur-micro) var(--ease-in-out);
+      flex-shrink: 0;
+    }
+
+    .switch-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      background-color: var(--on-surface);
+      border-radius: var(--rounded-full);
+      transition: transform var(--dur-micro) var(--ease-out);
+    }
+
+    .toggle-btn[aria-pressed="true"] .switch-track {
+      background-color: var(--positive);
+    }
+
+    .toggle-btn[aria-pressed="true"] .switch-thumb {
+      transform: translateX(12px);
+      background-color: var(--background);
+    }
+
+    .hdr-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background-color: transparent;
+      border: var(--rule);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+
+    .hdr-btn:hover {
+      background-color: var(--surface-container);
+      border-color: var(--outline);
+      color: var(--on-surface);
+    }
+
+    .hdr-btn[aria-expanded="true"] {
+      background-color: var(--surface-container);
+      border-color: var(--accent-info);
+      color: var(--on-surface);
+    }
+
+    .hdr-btn[data-armed="true"] {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+
+    .count-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 var(--space-xs);
+      border-radius: var(--rounded);
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+      font-size: 0.6875rem;
+    }
+
+    .count-badge.has-errors {
+      background-color: var(--error-bg);
+      color: var(--error);
+      border: 1px solid var(--error-border);
+    }
+
+    /* Bridge Configuration Strip (visible when Bridge is enabled or expanded) */
+    .bridge-config-bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--surface-container-low);
+      border-bottom: var(--rule);
+      flex-wrap: wrap;
+    }
+
+    .bridge-config-bar.is-collapsed {
+      display: none;
+    }
+
+    .endpoint-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex: 1 1 280px;
+      max-width: 460px;
+    }
+
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+
+    .endpoint-row {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+
+    .endpoint-input {
+      flex: 1 1 auto;
+      height: 40px;
+      padding: 0 var(--space-md);
+      background-color: var(--background);
+      border: var(--rule);
+      border-bottom: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .endpoint-input:focus {
+      border-color: var(--accent-info);
+    }
+
+    .btn-compact {
+      height: 40px;
+      min-height: 40px;
+      padding: 0 var(--space-md);
+      background-color: var(--surface-container);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-compact:hover {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+    }
+
+    .bridge-meta-note {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      padding-bottom: var(--space-xs);
+    }
+
+    /* Main Workspace (Chat Stream + Optional Diagnostics Side/Split Drawer) */
+    .workspace-frame {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .workspace-frame.drawer-open {
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+    }
+
+    /* Chat Stream */
+    .chat-stream {
+      overflow-y: auto;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      scroll-behavior: smooth;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      flex: 1 0 auto;
+    }
+
+    /* Clean Empty Workspace */
+    .empty-state {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 60ch;
+      margin: auto 0;
+      padding: var(--space-xl) 0;
+    }
+
+    .empty-state.is-hidden {
+      display: none;
+    }
+
+    .empty-mark {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-sm);
+    }
+
+    .empty-heading {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--on-surface);
+      margin: 0 0 var(--space-sm) 0;
+    }
+
+    .empty-heading strong {
+      font-weight: 600;
+    }
+
+    .empty-copy {
+      color: var(--on-surface-variant);
+      margin: 0;
+      max-width: 52ch;
+    }
+
+    /* Messages */
+    .message-entry {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      animation: msgIn var(--dur-short) var(--ease-out) both;
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-entry.role-user {
+      align-items: flex-end;
+    }
+
+    .message-entry.role-system {
+      align-items: flex-start;
+    }
+
+    .message-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .message-bubble {
+      width: fit-content;
+      max-width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--rounded-lg);
+      border: var(--rule);
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .message-entry.role-user .message-bubble {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+      max-width: min(85%, 68ch);
+    }
+
+    .message-entry.role-system .message-bubble {
+      width: 100%;
+      background-color: var(--surface-container-low);
+      border-color: var(--outline-variant);
+    }
+
+    /* Verdict Banner inside Bridge Response */
+    .verdict-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      padding: var(--space-sm) var(--space-md);
+      margin-bottom: var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--rule);
+      background-color: var(--surface-container);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+    }
+
+    .verdict-bar[data-verdict="verified"] {
+      background-color: var(--positive-bg);
+      border-color: var(--positive-border);
+      color: var(--positive);
+    }
+
+    .verdict-bar[data-verdict="failed"] {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+
+    .verdict-bar[data-verdict="warning"] {
+      background-color: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: var(--warning);
+    }
+
+    .verdict-bar[data-verdict="offline"] {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error);
+    }
+
+    .verdict-bar[data-verdict="info"] {
+      background-color: var(--surface-container);
+      border-color: var(--outline-variant);
+      color: var(--on-surface-variant);
+    }
+
+    .verdict-bar[data-verdict="pending"] {
+      background-color: var(--accent-info-bg);
+      border-color: var(--accent-info-border);
+      color: var(--accent-info);
+    }
+
+    .verdict-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .inline-action-btn {
+      padding: var(--space-xs) var(--space-sm);
+      min-height: 28px;
+      background-color: var(--background);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .inline-action-btn:hover {
+      border-color: var(--outline);
+      background-color: var(--surface-container-high);
+    }
+
+    /* Formatted Message Body */
+    .msg-body {
+      max-width: 68ch;
+      overflow-wrap: break-word;
+    }
+
+    .message-entry.role-system .msg-body {
+      max-width: 100%;
+    }
+
+    .msg-body p {
+      margin: 0 0 var(--space-sm) 0;
+    }
+
+    .msg-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .msg-body ul {
+      margin: var(--space-xs) 0 var(--space-sm) var(--space-lg);
+      padding: 0;
+    }
+
+    .msg-body li + li {
+      margin-top: var(--space-xs);
+    }
+
+    .msg-body h3, .msg-body h4 {
+      margin: var(--space-md) 0 var(--space-xs) 0;
+      font-family: var(--font-headline);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .inline-code {
+      font-family: var(--font-label);
+      font-size: 0.875em;
+      padding: 1px 5px;
+      background-color: var(--background);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      color: var(--accent-info);
+    }
+
+    /* Code Blocks & Syntax Highlighting */
+    .code-block {
+      margin: var(--space-sm) 0;
+      border: var(--rule);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      overflow: hidden;
+    }
+
+    .code-block:first-child {
+      margin-top: 0;
+    }
+
+    .code-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      background-color: var(--surface-container);
+      border-bottom: var(--rule);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .code-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .code-pre {
+      margin: 0;
+      padding: var(--space-md);
+      overflow-x: auto;
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+      tab-size: 2;
+    }
+
+    .tok-kw { color: var(--syn-keyword); font-weight: 500; }
+    .tok-tac { color: var(--syn-tactic); }
+    .tok-type { color: var(--syn-type); }
+    .tok-str { color: var(--syn-string); }
+    .tok-num { color: var(--syn-number); }
+    .tok-com { color: var(--syn-comment); font-style: italic; }
+    .tok-op { color: var(--syn-operator); }
+    .tok-attr { color: var(--syn-attr); }
+
+    /* Axiom / Telemetry Readout Strip inside Response */
+    .axiom-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: var(--rule);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .axiom-pill {
+      padding: 2px var(--space-sm);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      color: var(--on-surface);
+    }
+
+    /* Expandable Live Log / Diagnostics Drawer */
+    .diagnostics-drawer {
+      display: none;
+      flex-direction: column;
+      background-color: var(--surface-container-low);
+      border-left: var(--rule);
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .workspace-frame.drawer-open .diagnostics-drawer {
+      display: flex;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: var(--rule);
+      background-color: var(--surface-container);
+    }
+
+    .drawer-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .drawer-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .drawer-tabs {
+      display: flex;
+      border-bottom: var(--rule);
+      background-color: var(--surface-container-low);
+    }
+
+    .drawer-tab {
+      flex: 1 1 0;
+      min-height: 40px;
+      padding: 0 var(--space-sm);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+    }
+
+    .drawer-tab:hover {
+      color: var(--on-surface);
+      background-color: var(--surface-container);
+    }
+
+    .drawer-tab[aria-selected="true"] {
+      color: var(--on-surface);
+      border-bottom-color: var(--accent-info);
+    }
+
+    .drawer-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.8125rem;
+      line-height: 1.5;
+    }
+
+    .log-empty {
+      color: var(--on-surface-variant);
+      padding: var(--space-md) 0;
+    }
+
+    .log-entry {
+      padding: var(--space-sm);
+      border: var(--rule);
+      border-radius: var(--rounded);
+      background-color: var(--background);
+      margin-bottom: var(--space-sm);
+    }
+
+    .log-entry-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .log-tag {
+      padding: 1px 6px;
+      border-radius: var(--rounded);
+      text-transform: uppercase;
+      font-size: 0.6875rem;
+    }
+
+    .log-tag.ok {
+      background-color: var(--positive-bg);
+      color: var(--positive);
+    }
+
+    .log-tag.err {
+      background-color: var(--error-bg);
+      color: var(--error);
+    }
+
+    .log-tag.info {
+      background-color: var(--accent-info-bg);
+      color: var(--accent-info);
+    }
+
+    .log-pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--on-surface);
+    }
+
+    .log-pre.stderr {
+      color: var(--error);
+    }
+
+    .log-pre.stdout {
+      color: var(--positive);
+    }
+
+    /* Composer Area */
+    .composer-region {
+      background-color: var(--background);
+      border-top: var(--rule);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .composer-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .composer-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .composer-box {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-sm);
+      padding: var(--space-sm);
+      background-color: var(--surface-container);
+      border: var(--rule-strong);
+      border-radius: var(--rounded-lg);
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .composer-box:focus-within {
+      border-color: var(--accent-info);
+    }
+
+    .prompt-textarea {
+      flex: 1 1 auto;
+      min-height: 44px;
+      max-height: 220px;
+      padding: var(--space-sm);
+      background: transparent;
+      border: 0;
+      resize: none;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      color: var(--on-surface);
+      overflow-y: auto;
+    }
+
+    .prompt-textarea:focus {
+      outline: none;
+    }
+
+    .composer-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      flex-shrink: 0;
+    }
+
+    .send-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-lg);
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: opacity var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+
+    .send-btn:hover:not(:disabled) {
+      opacity: 0.88;
+    }
+
+    .send-btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .abort-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background-color: var(--error-bg);
+      color: var(--error);
+      border: 1px solid var(--error-border);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .abort-btn.is-visible {
+      display: inline-flex;
+    }
+
+    .composer-footnote {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      flex-wrap: wrap;
+    }
+
+    /* Mobile & Narrow Viewports */
+    @media (max-width: 768px) {
+      .top-bar {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .bridge-config-bar {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .chat-stream {
+        padding: var(--space-md);
+      }
+
+      .composer-region {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .workspace-frame.drawer-open {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) minmax(240px, 48vh);
+      }
+
+      .diagnostics-drawer {
+        border-left: 0;
+        border-top: var(--rule-strong);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-subtitle {
+        display: none;
+      }
+
+      .message-entry.role-user .message-bubble {
+        max-width: 95%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Static Header -->
+    <header class="top-bar">
+      <div class="brand-group">
+        <h1 class="brand-title">Hydro Chat Black</h1>
+        <span class="brand-subtitle">Lean 4 &amp; Local Bridge</span>
+      </div>
+
+      <div class="header-controls">
+        <div id="bridge-status-chip" class="bridge-status-chip" data-state="disabled" role="status" aria-live="polite">
+          <span class="status-square" aria-hidden="true"></span>
+          <span id="bridge-status-text">Bridge Off</span>
+        </div>
+
+        <button
+          type="button"
+          id="btn-bridge-toggle"
+          class="toggle-btn"
+          aria-pressed="false"
+          title="Toggle local compiler bridge endpoint"
+        >
+          <span>Bridge</span>
+          <span class="switch-track" aria-hidden="true">
+            <span class="switch-thumb"></span>
+          </span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-toggle-drawer"
+          class="hdr-btn"
+          aria-expanded="false"
+          aria-controls="diagnostics-drawer"
+        >
+          <span>Diagnostics</span>
+          <span id="diag-count-badge" class="count-badge">0</span>
+        </button>
+
+        <button type="button" id="btn-clear-chat" class="hdr-btn">Clear</button>
+      </div>
+    </header>
+
+    <!-- Collapsible Bridge Endpoint Bar -->
+    <section id="bridge-config-bar" class="bridge-config-bar is-collapsed" aria-label="Compiler bridge endpoint configuration">
+      <div class="endpoint-field">
+        <label for="bridge-endpoint-input" class="field-label">Local Compiler Bridge Endpoint</label>
+        <div class="endpoint-row">
+          <input
+            type="url"
+            id="bridge-endpoint-input"
+            class="endpoint-input"
+            value="http://localhost:8088"
+            spellcheck="false"
+            autocomplete="off"
+          >
+          <button type="button" id="btn-ping-bridge" class="btn-compact">Probe</button>
+        </div>
+      </div>
+      <div id="bridge-probe-detail" class="bridge-meta-note">
+        Expects POST JSON { "code": "..." } &rarr; lake env lean kernel verdict
+      </div>
+    </section>
+
+    <!-- Workspace: Chat Stream + Expandable Live Log / Diagnostics Drawer -->
+    <div id="workspace-frame" class="workspace-frame">
+      <main id="chat-stream" class="chat-stream" aria-label="Chat conversation">
+        <div id="chat-container" class="chat-container">
+          <!-- Clean Empty Chat Workspace -->
+          <div id="empty-state" class="empty-state">
+            <span class="empty-mark">Hydro Workspace</span>
+            <h2 class="empty-heading">Direct-to-kernel <strong>Lean 4 &amp; Chat</strong></h2>
+            <p id="empty-status-line" class="empty-copy">
+              Workspace is empty and ready. Enter Lean 4 source or a message below. Enable the Bridge toggle to elaborate proofs against your local compiler endpoint.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- Expandable Live Log / Diagnostics Drawer -->
+      <aside id="diagnostics-drawer" class="diagnostics-drawer" aria-label="Compilation stdout, stderr, and bridge diagnostics">
+        <div class="drawer-header">
+          <h2 class="drawer-title">Live Compilation Diagnostics</h2>
+          <div class="drawer-actions">
+            <button type="button" id="btn-copy-logs" class="inline-action-btn">Copy</button>
+            <button type="button" id="btn-export-logs" class="inline-action-btn">Export</button>
+            <button type="button" id="btn-clear-logs" class="inline-action-btn">Clear</button>
+            <button type="button" id="btn-close-drawer" class="inline-action-btn" aria-label="Close diagnostics drawer">Close</button>
+          </div>
+        </div>
+
+        <div class="drawer-tabs" role="tablist" aria-label="Diagnostics view">
+          <button type="button" id="tab-all-logs" class="drawer-tab" role="tab" aria-selected="true" data-tab="all">All Events</button>
+          <button type="button" id="tab-stdout" class="drawer-tab" role="tab" aria-selected="false" data-tab="stdout">stdout</button>
+          <button type="button" id="tab-stderr" class="drawer-tab" role="tab" aria-selected="false" data-tab="stderr">stderr</button>
+        </div>
+
+        <div id="drawer-log-list" class="drawer-body" role="log" aria-live="polite">
+          <div class="log-empty">No compilation events recorded yet.</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Auto-Expanding Prompt Input & Send Controls -->
+    <footer class="composer-region">
+      <form id="composer-form" class="composer-inner">
+        <div class="composer-label-row">
+          <label for="prompt-input" class="field-label">Prompt / Lean 4 Source</label>
+          <span id="composer-mode-label" class="field-label">Local Formatting</span>
+        </div>
+
+        <div class="composer-box">
+          <textarea
+            id="prompt-input"
+            class="prompt-textarea"
+            rows="1"
+            placeholder="Write Lean 4 declarations or a message..."
+            spellcheck="false"
+          ></textarea>
+          <div class="composer-actions">
+            <button type="button" id="btn-abort-request" class="abort-btn">Stop</button>
+            <button type="submit" id="btn-send-prompt" class="send-btn" disabled>Send</button>
+          </div>
+        </div>
+
+        <div class="composer-footnote">
+          <span id="footnote-target">Bridge disabled &bull; toggle Bridge to connect to http://localhost:8088</span>
+          <span>Enter to send &bull; Shift+Enter for newline</span>
+        </div>
+      </form>
+    </footer>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    (function () {
+      'use strict';
+
+      var DEFAULT_ENDPOINT = 'http://localhost:8088';
+
+      var appState = {
+        bridgeEnabled: false,
+        bridgeEndpoint: DEFAULT_ENDPOINT,
+        bridgeStatus: 'disabled', // 'disabled' | 'checking' | 'online' | 'offline'
+        bridgeLatencyMs: null,
+        bridgeDetail: '',
+        drawerOpen: false,
+        activeDrawerTab: 'all',
+        messages: [],
+        diagnostics: []
+      };
+
+      var activeAbortController = null;
+      var clearArmTimer = null;
+
+      // -----------------------------------------------------------------------
+      // Utility & Escaping
+      // -----------------------------------------------------------------------
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function nowIsoTime() {
+        var d = new Date();
+        return d.toTimeString().split(' ')[0];
+      }
+
+      function sanitizeEndpoint(raw) {
+        var val = String(raw || '').trim();
+        if (!val) return DEFAULT_ENDPOINT;
+        return val.replace(/\/+$/, '');
+      }
+
+      // -----------------------------------------------------------------------
+      // Syntax Highlighting (Lean 4, Python, JS, JSON, Shell)
+      // -----------------------------------------------------------------------
+      var LEAN_KEYWORDS = new Set([
+        'theorem', 'lemma', 'def', 'structure', 'inductive', 'class', 'instance',
+        'namespace', 'section', 'end', 'open', 'import', 'variable', 'universe',
+        'example', 'axiom', 'opaque', 'private', 'protected', 'noncomputable',
+        'where', 'let', 'in', 'have', 'show', 'from', 'by', 'match', 'with',
+        'if', 'then', 'else', 'fun', 'forall', 'exists', 'do', 'return',
+        'mut', 'for', 'unless', 'deriving', 'extends', 'set_option', 'abbrev',
+        'mutual', 'termination_by', 'decreasing_by'
+      ]);
+
+      var LEAN_TACTICS = new Set([
+        'intro', 'intros', 'apply', 'exact', 'rw', 'rewrite', 'simp', 'dsimp',
+        'linarith', 'nlinarith', 'omega', 'ring', 'ring_nf', 'norm_num', 'positivity',
+        'trivial', 'rfl', 'cases', 'rcases', 'induction', 'constructor', 'left',
+        'right', 'use', 'obtain', 'contradiction', 'exfalso', 'decide',
+        'native_decide', 'calc', 'sorry', 'admit', 'assumption', 'refine',
+        'revert', 'clear', 'subst', 'ext', 'funext', 'congr', 'aesop', 'field_simp',
+        'norm_cast', 'push_cast', 'exact_mod_cast', 'split', 'by_contra', 'by_cases'
+      ]);
+
+      var LEAN_TYPES = new Set([
+        'Prop', 'Type', 'Sort', 'Nat', 'Int', 'Real', 'Rat', 'Bool', 'String',
+        'Char', 'List', 'Array', 'Option', 'Fin', 'Set', 'True', 'False',
+        'Classical', 'Mathlib', 'Eq', 'And', 'Or', 'Not', 'Iff', 'Exists',
+        'propext', 'Quot', 'sorryAx'
+      ]);
+
+      var GENERIC_KEYWORDS = new Set([
+        'def', 'class', 'import', 'from', 'as', 'return', 'yield', 'async',
+        'await', 'function', 'const', 'let', 'var', 'if', 'elif', 'else',
+        'for', 'while', 'try', 'except', 'catch', 'finally', 'raise', 'throw',
+        'with', 'assert', 'pass', 'break', 'continue', 'lambda', 'in', 'is',
+        'not', 'and', 'or', 'True', 'False', 'None', 'true', 'false', 'null',
+        'undefined', 'new', 'typeof', 'export', 'default'
+      ]);
+
+      function detectCodeLanguage(code, explicitLang) {
+        var lang = String(explicitLang || '').trim().toLowerCase();
+        if (lang) return lang;
+        if (/\b(?:theorem|lemma|def|example|inductive|#print\s+axioms|#check)\b/.test(code) || /:=\s*by\b/.test(code)) {
+          return 'lean';
+        }
+        if (/^\s*[\[{]/.test(code) && /"\w+"\s*:/.test(code)) {
+          return 'json';
+        }
+        if (/\b(?:import\s+\w+|def\s+\w+\s*\(|elif\b|print\s*\()/.test(code)) {
+          return 'python';
+        }
+        return 'text';
+      }
+
+      function highlightCode(code, lang) {
+        var text = String(code || '');
+        var isLean = lang === 'lean' || lang === 'lean4';
+        var isPy = lang === 'python' || lang === 'py' || lang === 'bash' || lang === 'sh';
+        var isJson = lang === 'json';
+
+        var out = '';
+        var i = 0;
+        var n = text.length;
+
+        while (i < n) {
+          var ch = text[i];
+          var next = i + 1 < n ? text[i + 1] : '';
+
+          // Lean block comment /- ... -/
+          if (isLean && ch === '/' && next === '-') {
+            var endBlock = text.indexOf('-/', i + 2);
+            var sliceEnd = endBlock === -1 ? n : endBlock + 2;
+            out += '<span class="tok-com">' + escapeHtml(text.slice(i, sliceEnd)) + '</span>';
+            i = sliceEnd;
+            continue;
+          }
+
+          // Lean single-line comment -- ...
+          if (isLean && ch === '-' && next === '-') {
+            var nl = text.indexOf('\n', i);
+            var endLine = nl === -1 ? n : nl;
+            out += '<span class="tok-com">' + escapeHtml(text.slice(i, endLine)) + '</span>';
+            i = endLine;
+            continue;
+          }
+
+          // Python/Bash # comment
+          if (isPy && ch === '#') {
+            var nlPy = text.indexOf('\n', i);
+            var endPy = nlPy === -1 ? n : nlPy;
+            out += '<span class="tok-com">' + escapeHtml(text.slice(i, endPy)) + '</span>';
+            i = endPy;
+            continue;
+          }
+
+          // JS/C // comment
+          if (!isLean && !isPy && ch === '/' && next === '/') {
+            var nlJs = text.indexOf('\n', i);
+            var endJs = nlJs === -1 ? n : nlJs;
+            out += '<span class="tok-com">' + escapeHtml(text.slice(i, endJs)) + '</span>';
+            i = endJs;
+            continue;
+          }
+
+          // Lean command (#print, #check, #eval, #reduce) or @[attr]
+          if (isLean && ch === '#') {
+            var cmdMatch = text.slice(i).match(/^#[a-zA-Z_][a-zA-Z0-9_]*/);
+            if (cmdMatch) {
+              out += '<span class="tok-attr">' + escapeHtml(cmdMatch[0]) + '</span>';
+              i += cmdMatch[0].length;
+              continue;
+            }
+          }
+          if (isLean && ch === '@' && next === '[') {
+            var attrEnd = text.indexOf(']', i);
+            if (attrEnd !== -1) {
+              out += '<span class="tok-attr">' + escapeHtml(text.slice(i, attrEnd + 1)) + '</span>';
+              i = attrEnd + 1;
+              continue;
+            }
+          }
+
+          // Strings
+          if (ch === '"' || (ch === '\'' && !isLean)) {
+            var quote = ch;
+            var j = i + 1;
+            while (j < n) {
+              if (text[j] === '\\') {
+                j += 2;
+                continue;
+              }
+              if (text[j] === quote) {
+                j += 1;
+                break;
+              }
+              j += 1;
+            }
+            var strVal = text.slice(i, j);
+            if (isJson && /^\s*:/.test(text.slice(j))) {
+              out += '<span class="tok-tac">' + escapeHtml(strVal) + '</span>';
+            } else {
+              out += '<span class="tok-str">' + escapeHtml(strVal) + '</span>';
+            }
+            i = j;
+            continue;
+          }
+
+          // Numbers
+          if (/[0-9]/.test(ch) && (i === 0 || !/[a-zA-Z0-9_]/.test(text[i - 1]))) {
+            var numMatch = text.slice(i).match(/^(?:0x[0-9a-fA-F]+|\d+(?:\.\d+)?)/);
+            if (numMatch) {
+              out += '<span class="tok-num">' + escapeHtml(numMatch[0]) + '</span>';
+              i += numMatch[0].length;
+              continue;
+            }
+          }
+
+          // Identifiers & Keywords
+          if (/[a-zA-Z_ℕℝℤℚ]/.test(ch)) {
+            var idMatch = text.slice(i).match(/^[a-zA-Z_ℕℝℤℚ][a-zA-Z0-9_'₀₁₂₃₄₅₆₇₈₉]*/);
+            if (idMatch) {
+              var word = idMatch[0];
+              if (isLean) {
+                if (LEAN_KEYWORDS.has(word)) {
+                  out += '<span class="tok-kw">' + escapeHtml(word) + '</span>';
+                } else if (LEAN_TACTICS.has(word)) {
+                  out += '<span class="tok-tac">' + escapeHtml(word) + '</span>';
+                } else if (LEAN_TYPES.has(word)) {
+                  out += '<span class="tok-type">' + escapeHtml(word) + '</span>';
+                } else {
+                  out += escapeHtml(word);
+                }
+              } else {
+                if (GENERIC_KEYWORDS.has(word)) {
+                  out += '<span class="tok-kw">' + escapeHtml(word) + '</span>';
+                } else {
+                  out += escapeHtml(word);
+                }
+              }
+              i += word.length;
+              continue;
+            }
+          }
+
+          // Lean / Math Operators
+          var opMatch = text.slice(i).match(/^(?::=|=>|->|<-|<->|<=|>=|!=|==|[∀∃→←↔⊢∧∨¬≤≥≠∈⊆∘⟨⟩])/);
+          if (opMatch) {
+            out += '<span class="tok-op">' + escapeHtml(opMatch[0]) + '</span>';
+            i += opMatch[0].length;
+            continue;
+          }
+
+          out += escapeHtml(ch);
+          i += 1;
+        }
+
+        return out;
+      }
+
+      // -----------------------------------------------------------------------
+      // Markdown & Message Formatter
+      // -----------------------------------------------------------------------
+      function formatInlineMarkdown(raw) {
+        var escaped = escapeHtml(raw);
+        // Inline code
+        escaped = escaped.replace(/`([^`\n]+)`/g, function (_, inner) {
+          return '<code class="inline-code">' + inner + '</code>';
+        });
+        // Bold
+        escaped = escaped.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+        // Italic
+        escaped = escaped.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+        return escaped;
+      }
+
+      function renderMarkdownSegment(text) {
+        var lines = String(text || '').split('\n');
+        var html = '';
+        var inList = false;
+
+        for (var idx = 0; idx < lines.length; idx++) {
+          var line = lines[idx];
+          var trimmed = line.trim();
+
+          if (!trimmed) {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            continue;
+          }
+
+          var hMatch = trimmed.match(/^(#{1,3})\s+(.+)$/);
+          if (hMatch) {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            var tag = hMatch[1].length <= 2 ? 'h3' : 'h4';
+            html += '<' + tag + '>' + formatInlineMarkdown(hMatch[2]) + '</' + tag + '>';
+            continue;
+          }
+
+          var liMatch = trimmed.match(/^[-*]\s+(.+)$/);
+          if (liMatch) {
+            if (!inList) {
+              html += '<ul>';
+              inList = true;
+            }
+            html += '<li>' + formatInlineMarkdown(liMatch[1]) + '</li>';
+            continue;
+          }
+
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          html += '<p>' + formatInlineMarkdown(line) + '</p>';
+        }
+
+        if (inList) {
+          html += '</ul>';
+        }
+        return html;
+      }
+
+      function buildCodeBlockElement(code, explicitLang) {
+        var lang = detectCodeLanguage(code, explicitLang);
+        var wrapper = document.createElement('div');
+        wrapper.className = 'code-block';
+
+        var header = document.createElement('div');
+        header.className = 'code-header';
+
+        var langSpan = document.createElement('span');
+        langSpan.textContent = lang;
+        header.appendChild(langSpan);
+
+        var actions = document.createElement('div');
+        actions.className = 'code-header-actions';
+
+        if (lang === 'lean' || lang === 'lean4') {
+          var verifyBtn = document.createElement('button');
+          verifyBtn.type = 'button';
+          verifyBtn.className = 'inline-action-btn';
+          verifyBtn.textContent = 'Run on Bridge';
+          verifyBtn.addEventListener('click', function () {
+            if (!appState.bridgeEnabled) {
+              setBridgeEnabled(true);
+            }
+            dispatchToBridge(code, null);
+          });
+          actions.appendChild(verifyBtn);
+        }
+
+        var copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'inline-action-btn';
+        copyBtn.textContent = 'Copy';
+        copyBtn.addEventListener('click', function () {
+          copyTextWithFeedback(code, copyBtn);
+        });
+        actions.appendChild(copyBtn);
+
+        header.appendChild(actions);
+        wrapper.appendChild(header);
+
+        var pre = document.createElement('pre');
+        pre.className = 'code-pre';
+        var codeEl = document.createElement('code');
+        codeEl.innerHTML = highlightCode(code, lang);
+        pre.appendChild(codeEl);
+        wrapper.appendChild(pre);
+
+        return wrapper;
+      }
+
+      function renderFormattedContent(container, rawText, forceCodeLang) {
+        var text = String(rawText || '');
+
+        // If raw Lean code without markdown fences was submitted, render directly as a highlighted Lean block
+        if (!/```/.test(text) && forceCodeLang) {
+          container.appendChild(buildCodeBlockElement(text, forceCodeLang));
+          return;
+        }
+
+        if (!/```/.test(text) && isLikelyRawLeanSource(text)) {
+          container.appendChild(buildCodeBlockElement(text, 'lean'));
+          return;
+        }
+
+        var fenceRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+        var lastIdx = 0;
+        var match;
+
+        while ((match = fenceRegex.exec(text)) !== null) {
+          if (match.index > lastIdx) {
+            var prose = text.slice(lastIdx, match.index);
+            var proseDiv = document.createElement('div');
+            proseDiv.innerHTML = renderMarkdownSegment(prose);
+            if (proseDiv.innerHTML) {
+              container.appendChild(proseDiv);
+            }
+          }
+
+          container.appendChild(buildCodeBlockElement(match[2].replace(/\n$/, ''), match[1]));
+          lastIdx = fenceRegex.lastIndex;
+        }
+
+        if (lastIdx < text.length) {
+          var tail = text.slice(lastIdx);
+          var tailDiv = document.createElement('div');
+          tailDiv.innerHTML = renderMarkdownSegment(tail);
+          if (tailDiv.innerHTML) {
+            container.appendChild(tailDiv);
+          }
+        }
+      }
+
+      function isLikelyRawLeanSource(text) {
+        var t = String(text || '').trim();
+        if (!t) return false;
+        return /^(?:import|theorem|lemma|def|example|inductive|structure|class|instance|namespace|open|variable|axiom|#check|#print|#eval|set_option)\b/m.test(t) ||
+          /:=\s*by\b/.test(t);
+      }
+
+      function extractLeanSourceFromInput(raw) {
+        var text = String(raw || '').trim();
+        var fenceMatch = text.match(/```(?:lean4?|)\n([\s\S]*?)```/i);
+        if (fenceMatch && fenceMatch[1]) {
+          return fenceMatch[1].trim();
+        }
+        return text;
+      }
+
+      function copyTextWithFeedback(text, btn) {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          navigator.clipboard.writeText(text).then(function () {
+            var prev = btn.textContent;
+            btn.textContent = 'Copied';
+            setTimeout(function () {
+              btn.textContent = prev;
+            }, 1400);
+          }).catch(function () {
+            btn.textContent = 'Copy Failed';
+          });
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // State Persistence (<api-shim>)
+      // -----------------------------------------------------------------------
+      async function persistState() {
+        if (!window.notebookAppApi || typeof window.notebookAppApi.setAppState !== 'function') {
+          return;
+        }
+        try {
+          await window.notebookAppApi.setAppState({
+            bridgeEnabled: appState.bridgeEnabled,
+            bridgeEndpoint: appState.bridgeEndpoint,
+            drawerOpen: appState.drawerOpen,
+            activeDrawerTab: appState.activeDrawerTab,
+            messages: appState.messages.slice(-60),
+            diagnostics: appState.diagnostics.slice(-80)
+          });
+        } catch (err) {
+          // Persistence errors should not interrupt active compilation
+        }
+      }
+
+      async function restoreState() {
+        if (!window.notebookAppApi || typeof window.notebookAppApi.getAppState !== 'function') {
+          return;
+        }
+        try {
+          var saved = await window.notebookAppApi.getAppState();
+          if (!saved || typeof saved !== 'object') return;
+          if (typeof saved.bridgeEnabled === 'boolean') {
+            appState.bridgeEnabled = saved.bridgeEnabled;
+          }
+          if (typeof saved.bridgeEndpoint === 'string' && saved.bridgeEndpoint.trim()) {
+            appState.bridgeEndpoint = sanitizeEndpoint(saved.bridgeEndpoint);
+          }
+          if (typeof saved.drawerOpen === 'boolean') {
+            appState.drawerOpen = saved.drawerOpen;
+          }
+          if (typeof saved.activeDrawerTab === 'string') {
+            appState.activeDrawerTab = saved.activeDrawerTab;
+          }
+          if (Array.isArray(saved.messages)) {
+            appState.messages = saved.messages;
+          }
+          if (Array.isArray(saved.diagnostics)) {
+            appState.diagnostics = saved.diagnostics;
+          }
+        } catch (err) {
+          // Fall back cleanly to fresh empty workspace
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // Diagnostics Log Engine
+      // -----------------------------------------------------------------------
+      function pushDiagnostic(entry) {
+        var record = {
+          id: 'diag_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          time: nowIsoTime(),
+          kind: entry.kind || 'info', // 'info' | 'stdout' | 'stderr'
+          status: entry.status || 'EVENT',
+          isError: Boolean(entry.isError),
+          endpoint: entry.endpoint || appState.bridgeEndpoint,
+          elapsedMs: typeof entry.elapsedMs === 'number' ? entry.elapsedMs : null,
+          stdout: entry.stdout || '',
+          stderr: entry.stderr || '',
+          detail: entry.detail || ''
+        };
+        appState.diagnostics.push(record);
+        if (appState.diagnostics.length > 100) {
+          appState.diagnostics.shift();
+        }
+        renderDiagnosticsDrawer();
+        persistState();
+      }
+
+      function renderDiagnosticsDrawer() {
+        var listEl = document.getElementById('drawer-log-list');
+        var badgeEl = document.getElementById('diag-count-badge');
+        if (!listEl) return;
+
+        var errorCount = appState.diagnostics.filter(function (d) { return d.isError; }).length;
+        if (badgeEl) {
+          badgeEl.textContent = String(appState.diagnostics.length);
+          badgeEl.classList.toggle('has-errors', errorCount > 0);
+        }
+
+        var tab = appState.activeDrawerTab;
+        var filtered = appState.diagnostics.filter(function (d) {
+          if (tab === 'stdout') return Boolean(d.stdout);
+          if (tab === 'stderr') return Boolean(d.stderr || d.isError);
+          return true;
+        });
+
+        listEl.innerHTML = '';
+        if (filtered.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'log-empty';
+          empty.textContent = tab === 'all'
+            ? 'No compilation events recorded yet.'
+            : 'No ' + tab + ' output recorded yet.';
+          listEl.appendChild(empty);
+          return;
+        }
+
+        for (var i = filtered.length - 1; i >= 0; i--) {
+          var item = filtered[i];
+          var card = document.createElement('div');
+          card.className = 'log-entry';
+
+          var head = document.createElement('div');
+          head.className = 'log-entry-head';
+
+          var left = document.createElement('span');
+          left.textContent = item.time + (item.elapsedMs !== null ? ' • ' + item.elapsedMs.toFixed(1) + ' ms' : '');
+
+          var tag = document.createElement('span');
+          tag.className = 'log-tag ' + (item.isError ? 'err' : (item.stdout ? 'ok' : 'info'));
+          tag.textContent = item.status;
+
+          head.appendChild(left);
+          head.appendChild(tag);
+          card.appendChild(head);
+
+          if (item.detail && tab === 'all') {
+            var detPre = document.createElement('pre');
+            detPre.className = 'log-pre';
+            detPre.textContent = item.detail;
+            card.appendChild(detPre);
+          }
+
+          if (item.stdout && (tab === 'all' || tab === 'stdout')) {
+            var outPre = document.createElement('pre');
+            outPre.className = 'log-pre stdout';
+            outPre.textContent = '[stdout]\n' + item.stdout;
+            card.appendChild(outPre);
+          }
+
+          if (item.stderr && (tab === 'all' || tab === 'stderr')) {
+            var errPre = document.createElement('pre');
+            errPre.className = 'log-pre stderr';
+            errPre.textContent = '[stderr]\n' + item.stderr;
+            card.appendChild(errPre);
+          }
+
+          listEl.appendChild(card);
+        }
+      }
+
+      function setDrawerOpen(open) {
+        appState.drawerOpen = Boolean(open);
+        var frame = document.getElementById('workspace-frame');
+        var btn = document.getElementById('btn-toggle-drawer');
+        if (frame) frame.classList.toggle('drawer-open', appState.drawerOpen);
+        if (btn) btn.setAttribute('aria-expanded', appState.drawerOpen ? 'true' : 'false');
+        persistState();
+      }
+
+      // -----------------------------------------------------------------------
+      // Local Compiler Bridge Status & Probing
+      // -----------------------------------------------------------------------
+      function updateBridgeUI() {
+        var chip = document.getElementById('bridge-status-chip');
+        var statusText = document.getElementById('bridge-status-text');
+        var toggleBtn = document.getElementById('btn-bridge-toggle');
+        var configBar = document.getElementById('bridge-config-bar');
+        var endpointInput = document.getElementById('bridge-endpoint-input');
+        var modeLabel = document.getElementById('composer-mode-label');
+        var footnote = document.getElementById('footnote-target');
+        var probeDetail = document.getElementById('bridge-probe-detail');
+
+        if (toggleBtn) {
+          toggleBtn.setAttribute('aria-pressed', appState.bridgeEnabled ? 'true' : 'false');
+        }
+        if (configBar) {
+          configBar.classList.toggle('is-collapsed', !appState.bridgeEnabled);
+        }
+        if (endpointInput && endpointInput.value !== appState.bridgeEndpoint) {
+          endpointInput.value = appState.bridgeEndpoint;
+        }
+
+        var state = appState.bridgeEnabled ? appState.bridgeStatus : 'disabled';
+        if (chip) chip.setAttribute('data-state', state);
+
+        if (statusText) {
+          if (!appState.bridgeEnabled) {
+            statusText.textContent = 'Bridge Off';
+          } else if (state === 'checking') {
+            statusText.textContent = 'Probing…';
+          } else if (state === 'online') {
+            statusText.textContent = appState.bridgeLatencyMs !== null
+              ? 'Bridge Online (' + Math.round(appState.bridgeLatencyMs) + ' ms)'
+              : 'Bridge Online';
+          } else {
+            statusText.textContent = 'Bridge Offline';
+          }
+        }
+
+        if (modeLabel) {
+          modeLabel.textContent = appState.bridgeEnabled
+            ? 'Compiler Bridge (' + appState.bridgeEndpoint + ')'
+            : 'Local Formatting';
+        }
+
+        if (footnote) {
+          footnote.textContent = appState.bridgeEnabled
+            ? 'Target: ' + appState.bridgeEndpoint + ' (' + (state === 'online' ? 'Online' : state === 'checking' ? 'Checking' : 'Offline') + ')'
+            : 'Bridge disabled • toggle Bridge to connect to ' + appState.bridgeEndpoint;
+        }
+
+        if (probeDetail && appState.bridgeDetail) {
+          probeDetail.textContent = appState.bridgeDetail;
+        }
+      }
+
+      function setBridgeEnabled(enabled) {
+        appState.bridgeEnabled = Boolean(enabled);
+        if (!appState.bridgeEnabled) {
+          appState.bridgeStatus = 'disabled';
+          appState.bridgeLatencyMs = null;
+          appState.bridgeDetail = 'Compiler bridge toggle disabled.';
+          updateBridgeUI();
+          persistState();
+        } else {
+          updateBridgeUI();
+          persistState();
+          probeBridgeStatus();
+        }
+      }
+
+      async function probeBridgeStatus() {
+        var input = document.getElementById('bridge-endpoint-input');
+        var endpoint = sanitizeEndpoint(input ? input.value : appState.bridgeEndpoint);
+        appState.bridgeEndpoint = endpoint;
+
+        if (!appState.bridgeEnabled) {
+          appState.bridgeStatus = 'disabled';
+          updateBridgeUI();
+          return false;
+        }
+
+        appState.bridgeStatus = 'checking';
+        appState.bridgeDetail = 'Probing ' + endpoint + '…';
+        updateBridgeUI();
+
+        var controller = new AbortController();
+        var timer = setTimeout(function () {
+          controller.abort();
+        }, 2500);
+
+        var t0 = performance.now();
+        try {
+          // A real HTTP server listening on localhost:8088 (even if POST-only) will respond with an HTTP status;
+          // a closed port or unreachable host rejects with TypeError / AbortError.
+          var res = await fetch(endpoint, {
+            method: 'GET',
+            signal: controller.signal
+          });
+          clearTimeout(timer);
+          var dt = performance.now() - t0;
+          appState.bridgeStatus = 'online';
+          appState.bridgeLatencyMs = dt;
+          appState.bridgeDetail = 'Reachable at ' + endpoint + ' (HTTP ' + res.status + ', ' + dt.toFixed(1) + ' ms)';
+          updateBridgeUI();
+          pushDiagnostic({
+            kind: 'info',
+            status: 'BRIDGE ONLINE',
+            isError: false,
+            elapsedMs: dt,
+            detail: 'GET ' + endpoint + ' -> HTTP ' + res.status + ' (' + dt.toFixed(1) + ' ms)'
+          });
+          return true;
+        } catch (err) {
+          clearTimeout(timer);
+          var errMsg = (err && err.name === 'AbortError')
+            ? 'Connection timed out after 2500 ms'
+            : ((err && err.message) ? err.message : 'Failed to fetch');
+          appState.bridgeStatus = 'offline';
+          appState.bridgeLatencyMs = null;
+          appState.bridgeDetail = 'Offline at ' + endpoint + ' (' + errMsg + ')';
+          updateBridgeUI();
+          pushDiagnostic({
+            kind: 'stderr',
+            status: 'BRIDGE OFFLINE',
+            isError: true,
+            stderr: 'GET ' + endpoint + ' failed: ' + errMsg
+          });
+          return false;
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // Chat Rendering
+      // -----------------------------------------------------------------------
+      function updateEmptyStateVisibility() {
+        var empty = document.getElementById('empty-state');
+        if (!empty) return;
+        empty.classList.toggle('is-hidden', appState.messages.length > 0);
+      }
+
+      function renderMessageEntry(msg, shouldScroll) {
+        var container = document.getElementById('chat-container');
+        var stream = document.getElementById('chat-stream');
+        if (!container) return null;
+
+        var entry = document.createElement('article');
+        entry.id = msg.id;
+        entry.className = 'message-entry ' + (msg.role === 'user' ? 'role-user' : 'role-system');
+
+        var meta = document.createElement('div');
+        meta.className = 'message-meta';
+        var roleSpan = document.createElement('span');
+        roleSpan.textContent = msg.role === 'user' ? 'You' : (msg.sourceLabel || 'Hydro Kernel Bridge');
+        var timeSpan = document.createElement('span');
+        timeSpan.textContent = msg.time || nowIsoTime();
+        meta.appendChild(roleSpan);
+        meta.appendChild(timeSpan);
+        entry.appendChild(meta);
+
+        var bubble = document.createElement('div');
+        bubble.className = 'message-bubble';
+
+        if (msg.role === 'system' && msg.verdict) {
+          var vBar = document.createElement('div');
+          vBar.className = 'verdict-bar';
+          vBar.setAttribute('data-verdict', msg.verdict.type || 'info');
+
+          var vText = document.createElement('span');
+          vText.textContent = msg.verdict.label || '';
+          vBar.appendChild(vText);
+
+          var vActions = document.createElement('div');
+          vActions.className = 'verdict-actions';
+
+          if (msg.hasDiagnostics) {
+            var diagBtn = document.createElement('button');
+            diagBtn.type = 'button';
+            diagBtn.className = 'inline-action-btn';
+            diagBtn.textContent = 'Inspect Output';
+            diagBtn.addEventListener('click', function () {
+              setDrawerOpen(true);
+            });
+            vActions.appendChild(diagBtn);
+          }
+
+          if (msg.retryCode) {
+            var retryBtn = document.createElement('button');
+            retryBtn.type = 'button';
+            retryBtn.className = 'inline-action-btn';
+            retryBtn.textContent = appState.bridgeEnabled ? 'Retry Bridge' : 'Enable & Verify';
+            retryBtn.addEventListener('click', function () {
+              if (!appState.bridgeEnabled) {
+                setBridgeEnabled(true);
+              }
+              dispatchToBridge(msg.retryCode, null);
+            });
+            vActions.appendChild(retryBtn);
+          }
+
+          if (vActions.childNodes.length > 0) {
+            vBar.appendChild(vActions);
+          }
+          bubble.appendChild(vBar);
+        }
+
+        var body = document.createElement('div');
+        body.className = 'msg-body';
+        renderFormattedContent(body, msg.content || '', msg.forceCodeLang || null);
+        bubble.appendChild(body);
+
+        if (Array.isArray(msg.axioms) && msg.axioms.length > 0) {
+          var axStrip = document.createElement('div');
+          axStrip.className = 'axiom-strip';
+          var axTitle = document.createElement('span');
+          axTitle.textContent = 'Axioms:';
+          axStrip.appendChild(axTitle);
+          for (var k = 0; k < msg.axioms.length; k++) {
+            var pill = document.createElement('span');
+            pill.className = 'axiom-pill';
+            pill.textContent = msg.axioms[k];
+            axStrip.appendChild(pill);
+          }
+          bubble.appendChild(axStrip);
+        }
+
+        entry.appendChild(bubble);
+        container.appendChild(entry);
+
+        if (shouldScroll && stream) {
+          stream.scrollTop = stream.scrollHeight;
+        }
+        return entry;
+      }
+
+      function renderAllMessages() {
+        var container = document.getElementById('chat-container');
+        if (!container) return;
+        var existing = container.querySelectorAll('.message-entry');
+        for (var i = 0; i < existing.length; i++) {
+          existing[i].remove();
+        }
+        for (var j = 0; j < appState.messages.length; j++) {
+          renderMessageEntry(appState.messages[j], false);
+        }
+        updateEmptyStateVisibility();
+        var stream = document.getElementById('chat-stream');
+        if (stream) {
+          stream.scrollTop = stream.scrollHeight;
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // Submission & Real Bridge Dispatch
+      // -----------------------------------------------------------------------
+      function setInFlightUI(inFlight) {
+        var sendBtn = document.getElementById('btn-send-prompt');
+        var abortBtn = document.getElementById('btn-abort-request');
+        var input = document.getElementById('prompt-input');
+        if (sendBtn) {
+          sendBtn.disabled = inFlight || !(input && input.value.trim().length > 0);
+        }
+        if (abortBtn) {
+          abortBtn.classList.toggle('is-visible', inFlight);
+        }
+      }
+
+      async function dispatchToBridge(rawSource, originalPromptText) {
+        var inputEl = document.getElementById('bridge-endpoint-input');
+        var endpoint = sanitizeEndpoint(inputEl ? inputEl.value : appState.bridgeEndpoint);
+        appState.bridgeEndpoint = endpoint;
+
+        var leanCode = extractLeanSourceFromInput(rawSource);
+        var pendingMsg = {
+          id: 'msg_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          role: 'system',
+          sourceLabel: 'Lean 4 Bridge (' + endpoint + ')',
+          time: nowIsoTime(),
+          verdict: {
+            type: 'pending',
+            label: 'Running lake env lean elaboration at ' + endpoint + '…'
+          },
+          content: ''
+        };
+        appState.messages.push(pendingMsg);
+        updateEmptyStateVisibility();
+        var pendingDom = renderMessageEntry(pendingMsg, true);
+
+        if (activeAbortController) {
+          activeAbortController.abort();
+        }
+        activeAbortController = new AbortController();
+        setInFlightUI(true);
+
+        var t0 = performance.now();
+        pushDiagnostic({
+          kind: 'info',
+          status: 'POST DISPATCH',
+          isError: false,
+          detail: 'POST ' + endpoint + ' (' + leanCode.length + ' chars)'
+        });
+
+        try {
+          var response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              code: leanCode,
+              prompt: originalPromptText || leanCode
+            }),
+            signal: activeAbortController.signal
+          });
+
+          var wallMs = performance.now() - t0;
+          var rawBodyText = await response.text();
+          var data = null;
+          try {
+            data = JSON.parse(rawBodyText);
+          } catch (parseErr) {
+            data = null;
+          }
+
+          appState.bridgeStatus = 'online';
+          appState.bridgeLatencyMs = wallMs;
+          appState.bridgeDetail = 'Connected to ' + endpoint + ' (' + wallMs.toFixed(1) + ' ms)';
+          updateBridgeUI();
+
+          if (!response.ok) {
+            var httpErr = 'HTTP ' + response.status + ' ' + response.statusText + (rawBodyText ? '\n' + rawBodyText : '');
+            pendingMsg.verdict = {
+              type: 'failed',
+              label: 'Bridge HTTP Error (' + response.status + ') • ' + wallMs.toFixed(1) + ' ms'
+            };
+            pendingMsg.content = 'The compiler bridge returned an HTTP error:\n```text\n' + httpErr + '\n```';
+            pendingMsg.hasDiagnostics = true;
+            pendingMsg.retryCode = leanCode;
+            pushDiagnostic({
+              kind: 'stderr',
+              status: 'HTTP ' + response.status,
+              isError: true,
+              elapsedMs: wallMs,
+              stderr: httpErr
+            });
+          } else if (!data || typeof data !== 'object') {
+            pendingMsg.verdict = {
+              type: 'info',
+              label: 'Bridge Response (' + wallMs.toFixed(1) + ' ms)'
+            };
+            pendingMsg.content = rawBodyText ? '```text\n' + rawBodyText + '\n```' : 'Empty response body returned from bridge.';
+            pendingMsg.hasDiagnostics = true;
+            pushDiagnostic({
+              kind: 'stdout',
+              status: 'RAW RESPONSE',
+              isError: false,
+              elapsedMs: wallMs,
+              stdout: rawBodyText
+            });
+          } else {
+            var errors = Array.isArray(data.errors) ? data.errors : [];
+            var warnings = Array.isArray(data.warnings) ? data.warnings : [];
+            var sorryCount = typeof data.sorryAx === 'number' ? data.sorryAx : 0;
+            var elapsed = typeof data.elapsed_ms === 'number' ? data.elapsed_ms : wallMs;
+            var stdoutStr = typeof data.stdout === 'string' ? data.stdout.trim() : '';
+            var stderrStr = typeof data.stderr === 'string' ? data.stderr.trim() : '';
+            var axiomsList = Array.isArray(data.axioms) ? data.axioms : [];
+            var isVerified = Boolean(data.verified) && errors.length === 0 && sorryCount === 0;
+
+            if (typeof data.response === 'string' && data.verified === undefined) {
+              // Bridge returned a chat/text completion payload
+              pendingMsg.verdict = {
+                type: 'info',
+                label: 'Response (' + elapsed.toFixed(1) + ' ms)'
+              };
+              pendingMsg.content = data.response;
+              pendingMsg.hasDiagnostics = Boolean(stdoutStr || stderrStr);
+              pushDiagnostic({
+                kind: 'stdout',
+                status: '200 OK',
+                isError: false,
+                elapsedMs: elapsed,
+                stdout: stdoutStr || data.response,
+                stderr: stderrStr
+              });
+            } else if (isVerified) {
+              pendingMsg.verdict = {
+                type: 'verified',
+                label: 'Kernel Verified (' + elapsed.toFixed(1) + ' ms) • 0 sorryAx'
+              };
+              var outParts = [];
+              if (stdoutStr) {
+                outParts.push('```lean\n' + stdoutStr + '\n```');
+              } else {
+                outParts.push('`lake env lean` exited with code 0 and zero diagnostics.');
+              }
+              if (warnings.length > 0) {
+                outParts.push('**Warnings:**\n```text\n' + warnings.join('\n') + '\n```');
+              }
+              pendingMsg.content = outParts.join('\n\n');
+              pendingMsg.axioms = axiomsList;
+              pendingMsg.hasDiagnostics = true;
+              pushDiagnostic({
+                kind: 'stdout',
+                status: 'VERIFIED',
+                isError: false,
+                elapsedMs: elapsed,
+                stdout: stdoutStr || 'Elaboration succeeded (exit 0, 0 errors, 0 sorryAx).',
+                stderr: stderrStr
+              });
+            } else if (Boolean(data.verified) && sorryCount > 0) {
+              pendingMsg.verdict = {
+                type: 'warning',
+                label: 'Incomplete Proof (' + sorryCount + ' sorryAx) • ' + elapsed.toFixed(1) + ' ms'
+              };
+              pendingMsg.content = 'Elaboration succeeded only with `sorryAx` axiom dependency.' +
+                (stdoutStr ? '\n\n```text\n' + stdoutStr + '\n```' : '') +
+                (stderrStr ? '\n\n```text\n' + stderrStr + '\n```' : '');
+              pendingMsg.axioms = axiomsList;
+              pendingMsg.hasDiagnostics = true;
+              pushDiagnostic({
+                kind: 'stderr',
+                status: 'SORRY_AX',
+                isError: true,
+                elapsedMs: elapsed,
+                stdout: stdoutStr,
+                stderr: stderrStr || 'Declaration depends on sorryAx.'
+              });
+            } else {
+              var combinedErr = errors.length > 0 ? errors.join('\n') : (stderrStr || stdoutStr || 'Lean elaboration failed without diagnostic text.');
+              pendingMsg.verdict = {
+                type: 'failed',
+                label: 'Compilation Failed (' + Math.max(errors.length, 1) + ' error' + (errors.length === 1 ? '' : 's') + ') • ' + elapsed.toFixed(1) + ' ms'
+              };
+              pendingMsg.content = '```text\n' + combinedErr + '\n```';
+              pendingMsg.hasDiagnostics = true;
+              pendingMsg.retryCode = leanCode;
+              pushDiagnostic({
+                kind: 'stderr',
+                status: 'COMPILE ERROR',
+                isError: true,
+                elapsedMs: elapsed,
+                stdout: stdoutStr,
+                stderr: combinedErr
+              });
+            }
+          }
+        } catch (err) {
+          var failMs = performance.now() - t0;
+          var aborted = err && err.name === 'AbortError';
+          var msgErr = (err && err.message) ? err.message : 'Network error';
+
+          if (aborted) {
+            pendingMsg.verdict = {
+              type: 'info',
+              label: 'Elaboration Aborted (' + failMs.toFixed(1) + ' ms)'
+            };
+            pendingMsg.content = 'Request cancelled before the compiler bridge responded.';
+            pushDiagnostic({
+              kind: 'info',
+              status: 'ABORTED',
+              isError: false,
+              elapsedMs: failMs,
+              detail: 'Aborted POST ' + endpoint
+            });
+          } else {
+            appState.bridgeStatus = 'offline';
+            appState.bridgeLatencyMs = null;
+            appState.bridgeDetail = 'Offline at ' + endpoint + ' (' + msgErr + ')';
+            updateBridgeUI();
+
+            pendingMsg.verdict = {
+              type: 'offline',
+              label: 'Compiler Bridge Offline • Unreachable at ' + endpoint
+            };
+            pendingMsg.content =
+              'No verification was performed because the local compiler bridge at `' + endpoint + '` is unreachable (`' + msgErr + '`).\n\n' +
+              'Start `lean_bridge.py` locally on port `8088` and click **Retry Bridge** above.';
+            pendingMsg.hasDiagnostics = true;
+            pendingMsg.retryCode = leanCode;
+
+            pushDiagnostic({
+              kind: 'stderr',
+              status: 'BRIDGE OFFLINE',
+              isError: true,
+              elapsedMs: failMs,
+              stderr: 'POST ' + endpoint + ' failed: ' + msgErr
+            });
+          }
+        } finally {
+          activeAbortController = null;
+          setInFlightUI(false);
+          if (pendingDom) {
+            pendingDom.remove();
+          }
+          renderMessageEntry(pendingMsg, true);
+          persistState();
+        }
+      }
+
+      function handleUserSubmit(event) {
+        if (event) event.preventDefault();
+        var input = document.getElementById('prompt-input');
+        if (!input) return;
+
+        var text = input.value.trim();
+        if (!text) return;
+
+        var userMsg = {
+          id: 'msg_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          role: 'user',
+          time: nowIsoTime(),
+          content: text
+        };
+
+        appState.messages.push(userMsg);
+        updateEmptyStateVisibility();
+        renderMessageEntry(userMsg, true);
+
+        input.value = '';
+        autoResizeTextarea(input);
+        setInFlightUI(false);
+        persistState();
+
+        if (appState.bridgeEnabled) {
+          dispatchToBridge(text, text);
+          return;
+        }
+
+        // Bridge toggle is OFF: do not fabricate a mock response
+        var containsLean = isLikelyRawLeanSource(text) || /```lean/i.test(text);
+        if (containsLean) {
+          var noticeMsg = {
+            id: 'msg_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+            role: 'system',
+            sourceLabel: 'Bridge Notice',
+            time: nowIsoTime(),
+            verdict: {
+              type: 'info',
+              label: 'Compiler Bridge Disabled — Not Verified'
+            },
+            content: 'Lean 4 input was formatted locally without running `lake env lean`. Toggle **Bridge** on to elaborate against `' + appState.bridgeEndpoint + '`.',
+            retryCode: extractLeanSourceFromInput(text)
+          };
+          appState.messages.push(noticeMsg);
+          renderMessageEntry(noticeMsg, true);
+          persistState();
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // Textarea Auto-Expansion
+      // -----------------------------------------------------------------------
+      function autoResizeTextarea(el) {
+        if (!el) return;
+        el.style.height = 'auto';
+        var nextHeight = Math.min(el.scrollHeight, 220);
+        el.style.height = Math.max(nextHeight, 44) + 'px';
+      }
+
+      // -----------------------------------------------------------------------
+      // Initialization & Event Binding
+      // -----------------------------------------------------------------------
+      async function init() {
+        await restoreState();
+
+        var input = document.getElementById('prompt-input');
+        var sendBtn = document.getElementById('btn-send-prompt');
+        var form = document.getElementById('composer-form');
+        var toggleBtn = document.getElementById('btn-bridge-toggle');
+        var pingBtn = document.getElementById('btn-ping-bridge');
+        var endpointInput = document.getElementById('bridge-endpoint-input');
+        var drawerBtn = document.getElementById('btn-toggle-drawer');
+        var closeDrawerBtn = document.getElementById('btn-close-drawer');
+        var clearChatBtn = document.getElementById('btn-clear-chat');
+        var clearLogsBtn = document.getElementById('btn-clear-logs');
+        var copyLogsBtn = document.getElementById('btn-copy-logs');
+        var exportLogsBtn = document.getElementById('btn-export-logs');
+        var abortBtn = document.getElementById('btn-abort-request');
+
+        if (input) {
+          autoResizeTextarea(input);
+          input.addEventListener('input', function () {
+            autoResizeTextarea(input);
+            if (sendBtn) {
+              sendBtn.disabled = Boolean(activeAbortController) || !input.value.trim();
+            }
+          });
+          input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              if (input.value.trim() && !activeAbortController) {
+                handleUserSubmit(null);
+              }
+            }
+          });
+        }
+
+        if (form) {
+          form.addEventListener('submit', handleUserSubmit);
+        }
+
+        if (abortBtn) {
+          abortBtn.addEventListener('click', function () {
+            if (activeAbortController) {
+              activeAbortController.abort();
+            }
+          });
+        }
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            setBridgeEnabled(!appState.bridgeEnabled);
+          });
+        }
+
+        if (pingBtn) {
+          pingBtn.addEventListener('click', function () {
+            probeBridgeStatus();
+          });
+        }
+
+        if (endpointInput) {
+          endpointInput.addEventListener('change', function () {
+            appState.bridgeEndpoint = sanitizeEndpoint(endpointInput.value);
+            endpointInput.value = appState.bridgeEndpoint;
+            updateBridgeUI();
+            persistState();
+            if (appState.bridgeEnabled) {
+              probeBridgeStatus();
+            }
+          });
+        }
+
+        if (drawerBtn) {
+          drawerBtn.addEventListener('click', function () {
+            setDrawerOpen(!appState.drawerOpen);
+          });
+        }
+
+        if (closeDrawerBtn) {
+          closeDrawerBtn.addEventListener('click', function () {
+            setDrawerOpen(false);
+          });
+        }
+
+        var tabButtons = document.querySelectorAll('.drawer-tab');
+        for (var t = 0; t < tabButtons.length; t++) {
+          tabButtons[t].addEventListener('click', function (e) {
+            var selectedTab = e.currentTarget.getAttribute('data-tab') || 'all';
+            appState.activeDrawerTab = selectedTab;
+            for (var k = 0; k < tabButtons.length; k++) {
+              tabButtons[k].setAttribute('aria-selected', tabButtons[k].getAttribute('data-tab') === selectedTab ? 'true' : 'false');
+            }
+            renderDiagnosticsDrawer();
+            persistState();
+          });
+        }
+
+        if (clearLogsBtn) {
+          clearLogsBtn.addEventListener('click', function () {
+            appState.diagnostics = [];
+            renderDiagnosticsDrawer();
+            persistState();
+          });
+        }
+
+        if (copyLogsBtn) {
+          copyLogsBtn.addEventListener('click', function () {
+            var text = appState.diagnostics.map(function (d) {
+              return '[' + d.time + '] ' + d.status +
+                (d.detail ? '\n' + d.detail : '') +
+                (d.stdout ? '\n[stdout]\n' + d.stdout : '') +
+                (d.stderr ? '\n[stderr]\n' + d.stderr : '');
+            }).join('\n\n');
+            copyTextWithFeedback(text || 'No diagnostics logged.', copyLogsBtn);
+          });
+        }
+
+        if (exportLogsBtn) {
+          exportLogsBtn.addEventListener('click', function () {
+            var text = appState.diagnostics.map(function (d) {
+              return '[' + d.time + '] ' + d.status +
+                (d.detail ? '\n' + d.detail : '') +
+                (d.stdout ? '\n[stdout]\n' + d.stdout : '') +
+                (d.stderr ? '\n[stderr]\n' + d.stderr : '');
+            }).join('\n\n');
+            if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+              window.notebookAppApi.triggerFileDownload({
+                content: text || 'No diagnostics logged.',
+                contentType: 'text/plain',
+                encoding: 'UTF-8',
+                filename: 'hydro-bridge-diagnostics.txt'
+              });
+            }
+          });
+        }
+
+        if (clearChatBtn) {
+          clearChatBtn.addEventListener('click', function () {
+            if (appState.messages.length === 0) return;
+            if (clearChatBtn.getAttribute('data-armed') !== 'true') {
+              clearChatBtn.setAttribute('data-armed', 'true');
+              clearChatBtn.textContent = 'Confirm Clear';
+              clearTimeout(clearArmTimer);
+              clearArmTimer = setTimeout(function () {
+                clearChatBtn.setAttribute('data-armed', 'false');
+                clearChatBtn.textContent = 'Clear';
+              }, 3000);
+              return;
+            }
+            clearTimeout(clearArmTimer);
+            clearChatBtn.setAttribute('data-armed', 'false');
+            clearChatBtn.textContent = 'Clear';
+            appState.messages = [];
+            renderAllMessages();
+            persistState();
+          });
+        }
+
+        // Sync UI with restored state
+        for (var k = 0; k < tabButtons.length; k++) {
+          tabButtons[k].setAttribute('aria-selected', tabButtons[k].getAttribute('data-tab') === appState.activeDrawerTab ? 'true' : 'false');
+        }
+        setDrawerOpen(appState.drawerOpen);
+        renderAllMessages();
+        renderDiagnosticsDrawer();
+        updateBridgeUI();
+
+        if (appState.bridgeEnabled) {
+          probeBridgeStatus();
+        }
+
+        if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+          window.notebookAppApi.notifyAppReady();
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

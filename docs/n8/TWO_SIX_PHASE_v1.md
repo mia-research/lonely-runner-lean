@@ -1,0 +1,13 @@
+# Two-plus-six AP blocks with arbitrary positive step ratio, v1
+
+Rules: 1–4, 8–18. Actual-cascade exceptions guided the sharper middle anchor, followed by exact symbolic proofs and all-subject physical assembly.
+
+- [L] `Fresh/TwoSixPhase.lean`: low pair subjects have fixed reading1 and packetx,x+b,…,x+5b. For8/21≤b≤2 andx≥9b, the middle anchorx+3b opens after1/(4b); phasebT stays `[1/4,1/3]`, fixed reading1 stays in `[1/8,7/8]`, firstthree packet readings retain lapN−1 and lastthree lapN.
+- [L] Forb≥2,x≥9b, the base opening afterq/b, q=ceil(b/8), retains packet lapsN+jq. The exact phase advance is at most1/9, hence the largest residual is1/8+5/9<7/8; fixed reading1 remains clear. `two_six_all` supplies allb≥1 underx≥9b.
+- [L] `two_six_any` supplies every realb>0 underx≥20max(1,b); b<8/21 reuses the already established one-band opening with packet width5b. Allfour theorem endpoints compile cleanly with exactly `propext, Classical.choice, Quot.sound`.
+- [L] `Fresh/TwoSixArrangement.lean`, `two_six_all_subjects(c,A,b)(hb:0<b)(hg:20max(1,b)≤A−1)`: every moving subject of `UnequalAPArrangement.speeds c A 1 b 2` isolates. Both low subjects use the fullb packet law; the upper six retain own AP readingsj*b,j=1…5 and reuse native AP-core-plus-pair clearance of their two cross readingsx,x+1. This old pair family is reused, not counted as a newly discovered type.
+- [L] Physical assembly final check returns0 with exactly standard axioms and no warnings/placeholders/native_decide/unsafe; no existing sources, gates, pins or commits changed.
+- [OBS, exact] `two_six_phase_v1.py` passes260 mapped controls and preserves an explicit outside-family failure: x=6,b=1 selected middle opening25/72 is blocked, while the actual full cascade isolates at5/16 after ten moves. That failure refutes the selected opening, never isolation.
+- [OBS, exact] `two_six_lower_phase_v1.py` passes39 controls at the closed8/21 endpoint and below-cut clump branch. `two_six_physical_v1.py` passes816 all-subject physical cases at original gap20max and its positive enlargements, b from1/1000 through100, cut/ceiling perturbations and two positive scales; no exceptions. All exact histories are retained in JSON.
+- [PROVISIONAL: counting tool] supports named ceiling/opening placement; [PROVISIONAL: covering] supports the finite step-parameter split and inherited pair-window fit. No density or uniform cascade cap is used.
+- [TREE] Positive scaling restores arbitrary physical internal steps; root assembles the reflected6+2 and unified far-separated block classes. Smaller gaps remain outside this sufficient result unless handled by another proved family.

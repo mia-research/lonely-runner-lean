@@ -1,0 +1,11 @@
+Rules: 1–4, 8–20.
+# Arrangement worklist delta — v34
+[L COALESCENCE] NativeReversalReadingCoalescence removes duties for outsider physical runners whose absolute reading is already in the core;positive distinct physical speeds/equal readings/opposite sides retained. Entire V65generic/scaledclass embeds.
+[L BRANCH FORCING] NativeReversalBranchFaces proves composedfit/simple7c≥3b forcesdirectphase1/3;otherwiseweightedreboundphase(ab+ac+2bc)/(4ab)<3/7. The derived local phase widens captured/retained entry faces. No terminal clear guard supplied.
+[L MERGER] NativeReversalBranchArrangement combines core-reading equivalence and branch-specific entry faces. Coalesced old/scaledfamilies embed;fitted_into_class derives direct physical family from entry fit. Class→Canonical/NewTypes;scale→TypesUp/excludesReducedAdmissible.21overlappingalternativesunchanged.
+[T COMPLETE] All10341two-arbitrary/all15714oldgenericnormalizedcontrols reconciled. New972frames/16344normalized/65376physicalchoices include11916fit-forceddirect/522rebound/10833closededges,11664core-equivalentcoordinates,972strip/11340retainedequalities,7548actualtietraces. Earlier/default isolations retained.
+[T INTERSECTIONS] Whole10341:4330directEisolations/3281coalesced-branchjoins/2730outsidecomparison. ALLactualsuccessiveframes:535inputsjoinincluding245of2730atdifferentframe. ALLactualentriesagainstexistingNativeRelativeCapturefaces:2026inputsjoinincluding368oftheremaining2485.2117beyondtheseLOCALtestsareknownisolatedcontrols,notnewunresolvedarrangementsorfiniteexhaustion.
+[AUDIT] V66PASS1902reports/323explicitmodules,stdaxiomsonly/sourcehashesmatch;319oldnonrootsunchanged;22newreports. Exactnessv2PASS5immutablepairs/sourcehashes/float-freeASTs/4proofsources.
+[NEXT] Inspect actual relative-face failures and initially-clear-reader returns in the2117 controls. Preserve entry/current/terminal labels and ties;reusewitness/excursion/current-label/extreme/return-level kernels before new architecture. Avoid just rewriting terminal-clearance duties as speed cells. Known first isolations must stay reconciled.
+[AUTONOMY/GLOBAL] Continue beyond checkpoints;heartbeatACTIVE/every5minutes. Fulln8/arbitraryentry/globalguardforcing/recurrenceresolution/exhaustiveclassificationOPEN.
+[REPORT] NATIVE_REVERSAL_COALESCED_BRANCHES_2026_10_28_v1.md.

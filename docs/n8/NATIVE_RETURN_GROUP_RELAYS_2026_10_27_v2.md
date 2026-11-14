@@ -1,0 +1,39 @@
+Rules: 1–4, 8–20.
+# Native returned-group relays — 2026-10-27, v2
+
+[L] FullAuditV30 passed1151 theorem reports/259 modules, standard axioms only and all source hashes matching; six modules/76 reports sinceV28, with only the owned catalogue changed among its prior253 sources.
+[L] Six new Lean modules prove single-return recovery/relay, compact and common-opening group reset, exact two-front closing criteria, and a one-face forced handoff back into the single-return mechanism.
+[L] For an actual P→R write s_i=|v_i−v_k|, A_i=advance(s_i,P,R), G={i≠k:A_i>0}, H={i≠k:A_i=0}; every captured reading at R lies in G, and labels of H remain unchanged from P.
+[L] If G has one disparity, either that group is clear and R isolates, or all its physical members are captured and force their common opening T; equal disparities do not mean equal physical speeds.
+[L] For a single returned disparity s_c, subsequent positive advance is exactly s_i≠s_c and C_i(P)<T, where C_i(P)=(label(s_i P)+7/8)/s_i; original outsiders' boundaries remain valid through the relay.
+[L] CompactEntry requires a selected captured c, its native maximum-opening comparisons at R, and for every old returner i∈G: capture at R and s_i≤3s_c; existing native capture-window transport proves all G retain their R labels at T.
+[L] Reset is the internal local fact that all old G have zero advance from R to T; concrete compact/common entry inequalities derive it, and no arbitrary-arrangement occurrence is assumed.
+[L] Common displaced openings also reset G; choosing the fastest tied physical returner gives a compact representative at the same T, so this apparent new type coalesces with the compact family.
+[L] Single-return relay inputs embed into compact-group inputs; compact inputs embed into the group quarter face, and the group quarter face embeds into its exact sharp face.
+[L] Following a reset, a new returner is exactly an old outsider i∈H with C_i(P)<T; capture additionally requires s_i T<label(s_i T)+1/8, retaining independent unbounded integer labels.
+[L] GroupFits, T≤C_i(P) for every i∈H, is equivalent to no successor advances after a reset; it reduces to T≤C_a(P) for one first remaining original closer a∈H, with ties and equality retained.
+[L] H is nonempty because the previous selected setter has zero advance; selecting a minimum supplied closing boundary at a given entry is not a global isolation-time selector.
+[L] Mixed captured/recovered returners need not meet the compact ratio input: choose g∈G first-closing at R and write E=label(s_c R)+1/8−s_c R; the exact group face s_g E≤s_c(label(s_g R)+7/8−s_g R) is equivalent to resetting all G.
+[L] The group quarter face replaces s_g E by s_g/4 and is sufficient because the selected native capture gives E<1/4; this local capture width supplies no global time or move bound.
+[L] Thus two independent fronts remain: the returned group's current closing at R and the outsiders' retained original closing at P; sharp group face plus GroupFits joins the prior no-return isolation family.
+[L] Checked inclusions: single relay⊆compact, common opening⊆compact after representative selection, compact⊆group quarter⊆group sharp↔reset representation; all include their stated remaining-boundary fit inputs, and none are disjoint type counts.
+[L] One-face continuation: if an old outsider a passes K+7/8 but stays below K+9/8 at T, while other original outsider closings have not passed, it alone advances exactly one label and is the sole captured runner at T.
+[L] That face forces the next actual opening U=(K+9/8)/s_a; it rejoins the single-return relay framework, with its next remaining-boundary fit yielding a proved isolation family.
+[L] Ten new catalogue input bridges reuse the existing21 overlapping alternatives; physical subject identities, positivity/distinctness, actual move order and unbounded return coordinates remain explicit.
+[T 137597/137597] Complete stored handoff populations pass the new consumers, retaining20763 already-isolated outputs and116834 actual continuing relays rather than testing terminal outputs alone.
+[T] Single-disparity returns occur79979 times:1460 recover immediately and78519 force another relay;6321 relays fit original remaining closings,648 recover after additional returns and71550 continue.
+[T] Compact reset entry holds96873 times;8194 satisfy remaining-boundary fit,791 recover after additional outsider returns and87888 continue; common-opening groups occur78531 times, including12 with distinct disparities and one such fit case.
+[T] Group quarter entry holds107006 times, including10133 beyond compact capture inputs;10277 quarter entries fit the outside front,2083 beyond compact-fit inputs.
+[T] Exact group reset holds108669 times, including1663 beyond quarter;11070 reset relays fit the outside front,793 beyond quarter-fit inputs; these are stored point counts, not new universal occurrence claims.
+[T] Of8165 relays where an old returner advances again,248 nevertheless isolate and7917 continue; these are retained as the next structural front, not discarded by a descending-group assumption.
+[T] Every one of1167 physical compact-fit controls produced three proposed exact face perturbations,3501 total:3452 remain positive/distinct and all their complete default cascades isolate;49 inadmissible proposals are retained as such.
+[T] Stable local prefixes occur2855 times:954 below,958 on and943 above the closing face; the other597 admissible proposals change an earlier local move and are retained with their full recomputed default histories.
+[T] All943 stable above-face cases satisfy the one-return/sole-capture/forced-U law;247 next relays fit original remaining closings,45 recover after additional returns and651 continue; only640 visit T in their default history, and local comparisons are kept distinct from default visits.
+[T] Every3452 admissible deformation retains strict physical speed order; the checker nevertheless records the exact physical-to-ordered permutation and named-subject rank rather than silently ignoring possible rank changes.
+[T 116834/116834] Two-prefix controls recover every new returner from the old G current closing order at R or the old H retained closing order at P, then recover every capture from its new lower face; both return prefixes are nonempty5241 times.
+[T 8165/8165] When the old group fails to reset, its first current closer advances again:1941 are captured at R with s_g>3s_c, and6224 had already recovered at R; either role can clear or become captured again at T.
+[EXACT] All arithmetic is Fraction or Lean real arithmetic; source/result links and inherited exact-state hashes are checked; old float-LP regions are not certified, and closed boundaries are not approximated.
+[NEXT] Prove and follow the fast-captured versus previously-recovered first-closer split when an old group returns again, retaining both ordered prefixes and their independent integer advances; the1941/6224 split is currently exact point evidence, not a new formal type theorem.
+[SCOPE] These are general local native laws and conditional entry families; the conjunction of their boundary inputs has not been forced for every arrangement, so complete reduction and full n=8 remain open.
+[FILES] Lean:NativeSingleReturnRelay,NativeSingleReturnArrangement,NativeReturnGroupRelay,NativeReturnGroupArrangement,NativeReturnFaceHandoff,NativeReturnGroupFaces; controls:native_single_return_relay_v1/v2,native_return_boundary_group_v1/v2,native_return_group_face_deformation_v1,native_return_face_handoff_controls_v1/v2,native_return_group_fronts_v1/v2/v3; exactness:native_return_relay_exactness_v4.
+[PROVISIONAL: counting tool] Inherited grid/ceiling opening selectors; [PROVISIONAL: covering] inherited finite parameter joins; new ceiling labels coordinate given states, with no imported density/coverage argument.

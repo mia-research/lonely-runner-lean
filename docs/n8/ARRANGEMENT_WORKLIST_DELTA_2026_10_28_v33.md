@@ -1,0 +1,11 @@
+Rules: 1–4, 8–20.
+# Arrangement worklist delta — v33
+[L RETAINED WINDOWS] NativeSuppliedRetainedWindow proves entry face qE≥J+1/8,3q≤7c(J+7/8−qE) forces retained clear window/currentlabel/advancezero/convexE..Fsegment. Upper envelope and relative nonempty-label bound proved with closed equality.
+[L SHARED BOUNDARY] At q's own opening qE=J+1/8,the retained face is exactly4q≤7c,the captured strip. Sharp simultaneouscornercE41/14,qE41/8,J5 passes81normalized/324physicalcontrols.
+[L GENERIC MERGER] NativeSuppliedReversalArrangement joins captured groups and retained clear readers in generic supplied-opening entries. No parameter family restriction/quiet cutoff/E≤5/4/c≥1/8 remains. Entire V64capturedfamily/scaledfamily formally embeds. Class→Canonical/NewTypes;scale→TypesUp/excludesReducedAdmissible.21overlappingalternatives unchanged.
+[T COMPLETE] All10341two-arbitrary/all36450oldgroupcontrols reconciled;15714newnormalized/62856physicalcontrols include1782zero-third-label/cC<1/8cases,582E>5C/4,10476closedquarteredges,5352actualtietraces,8424retainedupperfaces. Earlier/default isolations retained. Failedv1pooldesignpreserved;v2densifieswithoutdroppingframes.
+[T NEXT BRANCHES] Whole10341population admits2723branch-refinedfacesvs2627coarsefaces,adding75captured/21retained. Universalbranch-specificclassesnotyetLeanproved. Directfit/simple7c≥3bcanforcec-phase<1/3;reboundweightedphaseW=(ab+ac+2bc)/(4ab)canwidenbothentryfaces.
+[T PRIORITY COALESCENCE] Wholepopulationreconciled:1332equal-core-readingcomparisons,558outsidebranchfacesincluding434changed-labelrecoveries. Opposite-side moving runners can share one absolute reading;disparitySetalreadydeduplicates. Next quotient outsider duties by core-reading membership. Remaining380same-label/1124changed-labelrecoveries/1226actualcapturesbeyondrefinedfacesareknownfinitecomparisons,notnewunresolvedtypes.
+[AUDIT] V65PASS1880reports/320explicitmodules/stdaxiomsonly/sourcehashesmatch;317oldnonrootsunchanged.15newreports. Exactnessv2checks5immutablepairs/float-freeASTs/sourcehashes/3proofsources.
+[GLOBAL/AUTONOMY] Continue beyondcheckpoints;heartbeatACTIVE/every5minutes. Fulln8/arbitraryentry/globalguardforcing/recurrenceresolution/exhaustivefiniteclassificationOPEN.
+[REPORT] NATIVE_SUPPLIED_RETAINED_WINDOWS_2026_10_28_v1.md.
