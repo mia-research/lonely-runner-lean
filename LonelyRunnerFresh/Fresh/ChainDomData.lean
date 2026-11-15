@@ -1,10 +1,10 @@
-import Fresh.ChainDomBase
+import Fresh.ChainDomTrace19
 
 namespace Fresh.ChainDomData
 
-open Fresh.ChainDomBase
+open Fresh.ChainDomBase Fresh.CapChainsOfCarve Fresh.UClosure Fresh.DumpDomData Fresh.OneSidedComposed
 
-def chainDom_1_3_4_4_5_5_7 : 
+def chainDom_1_3_4_4_5_5_7 :
     ChainDomData (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ) compFam_1_3_4_4_5_5_7 where
   steps := steps_1_3_4_4_5_5_7
   dom := by
@@ -1325,129 +1325,110 @@ theorem addEq_37_1_3_4_5_6_6_7 : uAdd T_1_3_4_5_6_6_7_26 (6 : Fin 7) (4 : Fin 7)
 theorem addEq_38_1_3_4_5_6_6_7 : uAdd T_1_3_4_5_6_6_7_27 (4 : Fin 7) (6 : Fin 7) ((41 : ℚ) / (49 : ℚ)) true = some T_1_3_4_5_6_6_7_27 := by simp [uAdd, uKeepCur, uBackCond, uBack, uTighter, uProp, T_1_3_4_5_6_6_7_27] <;> norm_num
 
 /-- Step 1 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_1_1_3_4_5_6_6_7 : uStep (u0Of (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) (0 : Fin 7) (6 : Fin 7) (1 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_2 := 
+theorem stepEq_1_1_3_4_5_6_6_7 : uStep (u0Of (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) (0 : Fin 7) (6 : Fin 7) (1 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_2 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_1_1_3_4_5_6_6_7) (addEq_2_1_3_4_5_6_6_7)
 
 /-- Step 2 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_2_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_2 (6 : Fin 7) (4 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_4 := 
+theorem stepEq_2_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_2 (6 : Fin 7) (4 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_4 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_3_1_3_4_5_6_6_7) (addEq_4_1_3_4_5_6_6_7)
 
 /-- Step 3 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_3_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_4 (4 : Fin 7) (3 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_6 := 
+theorem stepEq_3_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_4 (4 : Fin 7) (3 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_6 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_5_1_3_4_5_6_6_7) (addEq_6_1_3_4_5_6_6_7)
 
 /-- Step 4 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_4_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_6 (3 : Fin 7) (2 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_8 := 
+theorem stepEq_4_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_6 (3 : Fin 7) (2 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_8 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_7_1_3_4_5_6_6_7) (addEq_8_1_3_4_5_6_6_7)
 
 /-- Step 5 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_5_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_8 (2 : Fin 7) (6 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_10 := 
+theorem stepEq_5_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_8 (2 : Fin 7) (6 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_10 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_9_1_3_4_5_6_6_7) (addEq_10_1_3_4_5_6_6_7)
 
 /-- Step 6 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_6_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_10 (6 : Fin 7) (1 : Fin 7) (17 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_12 := 
+theorem stepEq_6_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_10 (6 : Fin 7) (1 : Fin 7) (17 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_3_4_5_6_6_7_12 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_11_1_3_4_5_6_6_7) (addEq_12_1_3_4_5_6_6_7)
 
 /-- Step 7 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_7_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_12 (1 : Fin 7) (3 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_13 := 
+theorem stepEq_7_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_12 (1 : Fin 7) (3 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_13 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_13_1_3_4_5_6_6_7) (addEq_14_1_3_4_5_6_6_7)
 
 /-- Step 8 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_8_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_13 (3 : Fin 7) (6 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_14 := 
+theorem stepEq_8_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_13 (3 : Fin 7) (6 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_14 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_15_1_3_4_5_6_6_7) (addEq_16_1_3_4_5_6_6_7)
 
 /-- Step 9 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_9_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_14 (6 : Fin 7) (5 : Fin 7) (25 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_16 := 
+theorem stepEq_9_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_14 (6 : Fin 7) (5 : Fin 7) (25 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_16 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_17_1_3_4_5_6_6_7) (addEq_18_1_3_4_5_6_6_7)
 
 /-- Step 10 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_10_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_16 (5 : Fin 7) (2 : Fin 7) (25 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_17 := 
+theorem stepEq_10_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_16 (5 : Fin 7) (2 : Fin 7) (25 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_17 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_19_1_3_4_5_6_6_7) (addEq_20_1_3_4_5_6_6_7)
 
 /-- Step 11 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_11_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_17 (2 : Fin 7) (4 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_19 := 
+theorem stepEq_11_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_17 (2 : Fin 7) (4 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_19 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_21_1_3_4_5_6_6_7) (addEq_22_1_3_4_5_6_6_7)
 
 /-- Step 12 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_12_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_19 (4 : Fin 7) (6 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_20 := 
+theorem stepEq_12_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_19 (4 : Fin 7) (6 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_20 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_23_1_3_4_5_6_6_7) (addEq_24_1_3_4_5_6_6_7)
 
 /-- Step 13 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_13_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_20 (6 : Fin 7) (3 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_21 := 
+theorem stepEq_13_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_20 (6 : Fin 7) (3 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_21 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_25_1_3_4_5_6_6_7) (addEq_26_1_3_4_5_6_6_7)
 
 /-- Step 14 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_14_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_21 (3 : Fin 7) (5 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_22 := 
+theorem stepEq_14_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_21 (3 : Fin 7) (5 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_22 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_27_1_3_4_5_6_6_7) (addEq_28_1_3_4_5_6_6_7)
 
 /-- Step 15 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_15_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_22 (5 : Fin 7) (1 : Fin 7) (33 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_23 := 
+theorem stepEq_15_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_22 (5 : Fin 7) (1 : Fin 7) (33 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_3_4_5_6_6_7_23 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_29_1_3_4_5_6_6_7) (addEq_30_1_3_4_5_6_6_7)
 
 /-- Step 16 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_16_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_23 (1 : Fin 7) (2 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_24 := 
+theorem stepEq_16_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_23 (1 : Fin 7) (2 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_3_4_5_6_6_7_24 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_31_1_3_4_5_6_6_7) (addEq_32_1_3_4_5_6_6_7)
 
 /-- Step 17 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_17_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_24 (2 : Fin 7) (3 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_25 := 
+theorem stepEq_17_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_24 (2 : Fin 7) (3 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_5_6_6_7_25 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_33_1_3_4_5_6_6_7) (addEq_34_1_3_4_5_6_6_7)
 
 /-- Step 18 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_18_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_25 (3 : Fin 7) (6 : Fin 7) (33 : ℚ) (47 : ℚ) (49 : ℚ) = some T_1_3_4_5_6_6_7_26 := 
+theorem stepEq_18_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_25 (3 : Fin 7) (6 : Fin 7) (33 : ℚ) (47 : ℚ) (49 : ℚ) = some T_1_3_4_5_6_6_7_26 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_35_1_3_4_5_6_6_7) (addEq_36_1_3_4_5_6_6_7)
 
 /-- Step 19 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_19_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_26 (6 : Fin 7) (4 : Fin 7) (49 : ℚ) (39 : ℚ) (41 : ℚ) = some T_1_3_4_5_6_6_7_27 := 
+theorem stepEq_19_1_3_4_5_6_6_7 : uStep T_1_3_4_5_6_6_7_26 (6 : Fin 7) (4 : Fin 7) (49 : ℚ) (39 : ℚ) (41 : ℚ) = some T_1_3_4_5_6_6_7_27 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_37_1_3_4_5_6_6_7) (addEq_38_1_3_4_5_6_6_7)
 
 /-- The extraction: whatever table the chain run produces from `u0Of`, it IS the last transcribed one (the per-step `stepEq` equations pin every intermediate). -/
-theorem trace_1_3_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ} 
-    (hrun : chainRun (u0Of (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) 0 1 steps_1_3_4_5_6_6_7 = some (V, af, Af)) : 
+theorem trace_1_3_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ}
+    (hrun : chainRun (u0Of (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) 0 1 steps_1_3_4_5_6_6_7 = some (V, af, Af)) :
     V = T_1_3_4_5_6_6_7_27 := by
-  simp only [steps_1_3_4_5_6_6_7, chainRun] at hrun
-  rw [stepEq_1_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_2_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_3_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_4_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_5_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_6_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_7_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_8_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_9_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_10_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_11_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_12_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_13_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_14_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_15_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_16_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_17_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_18_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_19_1_3_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  simp only [Option.some.injEq, Prod.mk.injEq] at hrun
+  simp only [steps_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_1_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_2_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_3_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_4_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_5_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_6_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_7_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_8_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_9_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_10_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_11_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_12_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_13_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_14_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_15_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_16_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_17_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_18_1_3_4_5_6_6_7,
+    chainRun_step_some stepEq_19_1_3_4_5_6_6_7,
+    chainRun_nil, Option.some.injEq, Prod.mk.injEq] at hrun
   exact hrun.1.symm
 
 /-- **The per-chain J-carrier datum for box ([1, 3, 4, 5, 6, 6, 7])**: `ChainDomData` at the attesting chain `steps_1_3_4_5_6_6_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=14025/33511, (2,6)=825/1457; caps: (0,6)=1/7, (1,6)=99/235, (2,6)=363/611). -/
-def chainDom_1_3_4_5_6_6_7 : 
+def chainDom_1_3_4_5_6_6_7 :
     ChainDomData (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ) compFam_1_3_4_5_6_6_7 where
   steps := steps_1_3_4_5_6_6_7
   dom := by
@@ -2952,135 +2933,115 @@ theorem addEq_39_1_4_4_5_6_6_7 : uAdd T_1_4_4_5_6_6_7_30 (6 : Fin 7) (2 : Fin 7)
 theorem addEq_40_1_4_4_5_6_6_7 : uAdd T_1_4_4_5_6_6_7_31 (2 : Fin 7) (6 : Fin 7) ((33 : ℚ) / (49 : ℚ)) true = some T_1_4_4_5_6_6_7_31 := by simp [uAdd, uKeepCur, uBackCond, uBack, uTighter, uProp, T_1_4_4_5_6_6_7_31] <;> norm_num
 
 /-- Step 1 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_1_1_4_4_5_6_6_7 : uStep (u0Of (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) (0 : Fin 7) (6 : Fin 7) (1 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_2 := 
+theorem stepEq_1_1_4_4_5_6_6_7 : uStep (u0Of (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) (0 : Fin 7) (6 : Fin 7) (1 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_2 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_1_1_4_4_5_6_6_7) (addEq_2_1_4_4_5_6_6_7)
 
 /-- Step 2 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_2_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_2 (6 : Fin 7) (4 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_4 := 
+theorem stepEq_2_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_2 (6 : Fin 7) (4 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_4 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_3_1_4_4_5_6_6_7) (addEq_4_1_4_4_5_6_6_7)
 
 /-- Step 3 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_3_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_4 (4 : Fin 7) (2 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_6 := 
+theorem stepEq_3_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_4 (4 : Fin 7) (2 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_6 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_5_1_4_4_5_6_6_7) (addEq_6_1_4_4_5_6_6_7)
 
 /-- Step 4 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_4_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_6 (2 : Fin 7) (1 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_8 := 
+theorem stepEq_4_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_6 (2 : Fin 7) (1 : Fin 7) (9 : ℚ) (7 : ℚ) (9 : ℚ) = some T_1_4_4_5_6_6_7_8 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_7_1_4_4_5_6_6_7) (addEq_8_1_4_4_5_6_6_7)
 
 /-- Step 5 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_5_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_8 (1 : Fin 7) (6 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_10 := 
+theorem stepEq_5_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_8 (1 : Fin 7) (6 : Fin 7) (9 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_10 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_9_1_4_4_5_6_6_7) (addEq_10_1_4_4_5_6_6_7)
 
 /-- Step 6 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_6_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_10 (6 : Fin 7) (5 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_12 := 
+theorem stepEq_6_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_10 (6 : Fin 7) (5 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_12 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_11_1_4_4_5_6_6_7) (addEq_12_1_4_4_5_6_6_7)
 
 /-- Step 7 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_7_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_12 (5 : Fin 7) (4 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_14 := 
+theorem stepEq_7_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_12 (5 : Fin 7) (4 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_14 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_13_1_4_4_5_6_6_7) (addEq_14_1_4_4_5_6_6_7)
 
 /-- Step 8 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_8_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_14 (4 : Fin 7) (3 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_16 := 
+theorem stepEq_8_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_14 (4 : Fin 7) (3 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_16 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_15_1_4_4_5_6_6_7) (addEq_16_1_4_4_5_6_6_7)
 
 /-- Step 9 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_9_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_16 (3 : Fin 7) (2 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_18 := 
+theorem stepEq_9_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_16 (3 : Fin 7) (2 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_18 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_17_1_4_4_5_6_6_7) (addEq_18_1_4_4_5_6_6_7)
 
 /-- Step 10 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_10_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_18 (2 : Fin 7) (1 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_19 := 
+theorem stepEq_10_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_18 (2 : Fin 7) (1 : Fin 7) (17 : ℚ) (15 : ℚ) (17 : ℚ) = some T_1_4_4_5_6_6_7_19 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_19_1_4_4_5_6_6_7) (addEq_20_1_4_4_5_6_6_7)
 
 /-- Step 11 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_11_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_19 (1 : Fin 7) (4 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_20 := 
+theorem stepEq_11_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_19 (1 : Fin 7) (4 : Fin 7) (17 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_20 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_21_1_4_4_5_6_6_7) (addEq_22_1_4_4_5_6_6_7)
 
 /-- Step 12 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_12_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_20 (4 : Fin 7) (6 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_21 := 
+theorem stepEq_12_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_20 (4 : Fin 7) (6 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_21 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_23_1_4_4_5_6_6_7) (addEq_24_1_4_4_5_6_6_7)
 
 /-- Step 13 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_13_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_21 (6 : Fin 7) (3 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_23 := 
+theorem stepEq_13_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_21 (6 : Fin 7) (3 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_23 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_25_1_4_4_5_6_6_7) (addEq_26_1_4_4_5_6_6_7)
 
 /-- Step 14 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_14_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_23 (3 : Fin 7) (5 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_24 := 
+theorem stepEq_14_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_23 (3 : Fin 7) (5 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_24 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_27_1_4_4_5_6_6_7) (addEq_28_1_4_4_5_6_6_7)
 
 /-- Step 15 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_15_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_24 (5 : Fin 7) (2 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_26 := 
+theorem stepEq_15_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_24 (5 : Fin 7) (2 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_26 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_29_1_4_4_5_6_6_7) (addEq_30_1_4_4_5_6_6_7)
 
 /-- Step 16 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_16_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_26 (2 : Fin 7) (4 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_27 := 
+theorem stepEq_16_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_26 (2 : Fin 7) (4 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_27 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_31_1_4_4_5_6_6_7) (addEq_32_1_4_4_5_6_6_7)
 
 /-- Step 17 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_17_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_27 (4 : Fin 7) (1 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_28 := 
+theorem stepEq_17_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_27 (4 : Fin 7) (1 : Fin 7) (33 : ℚ) (23 : ℚ) (25 : ℚ) = some T_1_4_4_5_6_6_7_28 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_33_1_4_4_5_6_6_7) (addEq_34_1_4_4_5_6_6_7)
 
 /-- Step 18 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_18_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_28 (1 : Fin 7) (3 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_29 := 
+theorem stepEq_18_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_28 (1 : Fin 7) (3 : Fin 7) (25 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_29 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_35_1_4_4_5_6_6_7) (addEq_36_1_4_4_5_6_6_7)
 
 /-- Step 19 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_19_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_29 (3 : Fin 7) (6 : Fin 7) (33 : ℚ) (47 : ℚ) (49 : ℚ) = some T_1_4_4_5_6_6_7_30 := 
+theorem stepEq_19_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_29 (3 : Fin 7) (6 : Fin 7) (33 : ℚ) (47 : ℚ) (49 : ℚ) = some T_1_4_4_5_6_6_7_30 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_37_1_4_4_5_6_6_7) (addEq_38_1_4_4_5_6_6_7)
 
 /-- Step 20 of the attesting chain: the two adds compose through `uGt_pos`. -/
-theorem stepEq_20_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_30 (6 : Fin 7) (2 : Fin 7) (49 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_31 := 
+theorem stepEq_20_1_4_4_5_6_6_7 : uStep T_1_4_4_5_6_6_7_30 (6 : Fin 7) (2 : Fin 7) (49 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_4_4_5_6_6_7_31 :=
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_39_1_4_4_5_6_6_7) (addEq_40_1_4_4_5_6_6_7)
 
 /-- The extraction: whatever table the chain run produces from `u0Of`, it IS the last transcribed one (the per-step `stepEq` equations pin every intermediate). -/
-theorem trace_1_4_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ} 
-    (hrun : chainRun (u0Of (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) 0 1 steps_1_4_4_5_6_6_7 = some (V, af, Af)) : 
+theorem trace_1_4_4_5_6_6_7 {V : UTable} {af : Fin 7} {Af : ℚ}
+    (hrun : chainRun (u0Of (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)) 0 1 steps_1_4_4_5_6_6_7 = some (V, af, Af)) :
     V = T_1_4_4_5_6_6_7_31 := by
-  simp only [steps_1_4_4_5_6_6_7, chainRun] at hrun
-  rw [stepEq_1_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_2_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_3_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_4_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_5_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_6_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_7_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_8_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_9_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_10_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_11_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_12_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_13_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_14_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_15_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_16_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_17_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_18_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_19_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_20_1_4_4_5_6_6_7] at hrun
-  simp only [Option.bind_some] at hrun
-  simp only [Option.some.injEq, Prod.mk.injEq] at hrun
+  simp only [steps_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_1_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_2_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_3_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_4_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_5_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_6_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_7_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_8_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_9_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_10_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_11_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_12_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_13_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_14_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_15_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_16_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_17_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_18_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_19_1_4_4_5_6_6_7,
+    chainRun_step_some stepEq_20_1_4_4_5_6_6_7,
+    chainRun_nil, Option.some.injEq, Prod.mk.injEq] at hrun
   exact hrun.1.symm
 
 /-- **The per-chain J-carrier datum for box ([1, 4, 4, 5, 6, 6, 7])**: `ChainDomData` at the attesting chain `steps_1_4_4_5_6_6_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=825/1457; caps: (0,6)=1/7, (1,6)=3179/5499). -/
-def chainDom_1_4_4_5_6_6_7 : 
+def chainDom_1_4_4_5_6_6_7 :
     ChainDomData (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ) compFam_1_4_4_5_6_6_7 where
   steps := steps_1_4_4_5_6_6_7
   dom := by
@@ -3102,12 +3063,11 @@ def chainDom_1_4_4_5_6_6_7 :
 def chainDomBoxes : Finset (Fin 7 → ℤ) :=
   {(![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ), (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ), (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)}
 
-/-- **The total over the covered set** — the per-box instances are the `chainDom_<box>`
+/- **The total over the covered set** — the per-box instances are the `chainDom_<box>`
 defs above; the dispatch is done in `Fresh/SpineTotalProof.lean`'s `by_cases` walk
 (matching the Type-valued nature of `ChainDomData`). The 8 residual strict boxes are
 the documented rule-22 gap. -/
 -- The three defs above ARE the per-box data; no total theorem needed
 -- (the consumer dispatches via by_cases, not rcases).
 
-end Fresh.ChainDomData
 end Fresh.ChainDomData

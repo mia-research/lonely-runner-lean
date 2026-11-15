@@ -1450,51 +1450,5 @@ theorem stepEq_18_1_3_4_4_5_5_7 : uStep T_1_3_4_4_5_5_7_24 (4 : Fin 7) (6 : Fin 
 theorem stepEq_19_1_3_4_4_5_5_7 : uStep T_1_3_4_4_5_5_7_25 (6 : Fin 7) (3 : Fin 7) (49 : ℚ) (31 : ℚ) (33 : ℚ) = some T_1_3_4_4_5_5_7_26 := 
   uStep_eq_some (by norm_num) (by norm_num) (by norm_num) (addEq_37_1_3_4_4_5_5_7) (addEq_38_1_3_4_4_5_5_7)
 
-/-- The extraction: whatever table the chain run produces from `u0Of`, it IS the last transcribed one (the per-step `stepEq` equations pin every intermediate). -/
-theorem trace_1_3_4_4_5_5_7 {V : UTable} {af : Fin 7} {Af : ℚ} 
-    (hrun : chainRun (u0Of (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)) 0 1 steps_1_3_4_4_5_5_7 = some (V, af, Af)) : 
-    V = T_1_3_4_4_5_5_7_26 := by
-  simp only [steps_1_3_4_4_5_5_7, chainRun] at hrun
-  rw [stepEq_1_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_2_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_3_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_4_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_5_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_6_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_7_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_8_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_9_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_10_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_11_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_12_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_13_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_14_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_15_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_16_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_17_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_18_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  rw [stepEq_19_1_3_4_4_5_5_7] at hrun
-  simp only [Option.bind_some] at hrun
-  simp only [Option.some.injEq, Prod.mk.injEq] at hrun
-  exact hrun.1.symm
 
-/-- **The per-chain J-carrier datum for box ([1, 3, 4, 4, 5, 5, 7])**: `ChainDomData` at the attesting chain `steps_1_3_4_4_5_5_7` -- exactly the missing hypothesis of `Fresh.DumpDomData.capChainsRealized_of_chainDomU0` at the fixed start `(a, Aex) = (0, 1)`.  Every record's singleton cap walk is dominated by the attesting chain's closed-trace entry at its pair (final trace values: (0,6)=1/7, (1,6)=17/39, (2,6)=51/91; caps: (0,6)=1/7, (1,6)=33/70, (2,6)=825/1457). -/
 end Fresh.ChainDomBase
