@@ -187,3 +187,24 @@ calculations motivate reusing the M4 replay for cap violations.
 They are data-side checks, with the coverage and cap certificates
 still to be connected in Lean. The second-window selection, V3 and
 band data obligations remain open.
+
+## Direct assembly status
+
+The direct branch of `mia-research/lrc-n8-lean` already bypasses
+the pinned M4 and chain-box obligations in this ledger.
+`ChainBoxChecked.lean` covers the full pinned inside domain and
+`BandBoxChecked.lean` extends the two-window coverage through 51.
+The independent rational interval replay for the 73 chain roots
+again checked all 73 in 380,625 nodes.
+
+The classical target also has a combined direct assembly in
+commit `c82a5ea6ea034d4f5d97ee67b6b1275e9a478716`.
+Its global scale-separation theorem bounds the largest reading
+by 27 times the fifth and 75 times the fourth on any unresolved
+arrangement. `GlobalTailAssembly.lean` applies these bounds with
+the exact rank-four kernel reduction. The capped branch needs
+bounded coverage through 27 times the existential dispatch cap.
+The unbounded kernel branches still need witnesses. This uses
+arbitrary positive witness times on the new branches. The
+independent first-two-window objective still uses its own tail
+obligations.
