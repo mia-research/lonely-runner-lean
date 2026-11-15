@@ -34,11 +34,11 @@ Zones of reading `ρ` at level `j` are the open intervals `((8j−1)/ρ, (8j+1)/
 
 * `clearPoint_of_le_five_thirds`: readings in `[1, 5/3]` always admit the clear point `s = 9`
   (`9ρ/8 ∈ [9/8, 15/8]`, so `distInt ≥ 1/8`); hence `NoClearPointWordRealized` holds **vacuously**
-  there (`wordExtract_of_low`).  The bound is sharp: the exact rational sweep of the session log
+  there (`wordExtract_of_low`).  A nearby failure: the exact rational sweep of the session log
   finds counterexamples with all readings in `(1, 27/16]` (`27/16 > 5/3`), e.g.
   `(37, 35, 41, 45, 49, 54, 50)/32`; there is provably no counterexample with all readings `≤ 5/3`.
-  No uniform reading bound between `5/3` and `7/4` repairs the lemma, and the falsifying regime
-  extends upward (`WordCoverSide`'s own `(1..6, 8)` census scale admits mixed-reading counterexamples
+  This example rules out bounds at or above `27/16`. The falsifying regime
+  also extends upward (`WordCoverSide`'s own `(1..6, 8)` census scale admits mixed-reading counterexamples
   in half-unit face boxes — see the session log sweep; distinct box coordinates do not repair).
 * `domainCarried_refuted`: `¬ (∀ g, (∀ i, 1 ≤ g i) → NoClearPointWordRealized g)` — the
   domain-carried restatement is refuted by `g0`.

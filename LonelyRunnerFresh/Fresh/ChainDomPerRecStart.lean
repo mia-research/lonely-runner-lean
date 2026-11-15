@@ -62,7 +62,7 @@ theorem capChainsRealized_of_chainDomPerRecordFromG (f : ComposedFam)
 machine-computed by the value-verbatim mirror in `perrec8_gen_v1.py` and transcribed
 as literals; identity-diagonal default off the 8 boxes), as a dispatch over the
 residual boxes.  Point-exactness of the transcription is machine-checked data-side
-(all `join`/mirror controls of `perrec8_diag_v1.py`) and cross-checked below against
+(all `join`/mirror controls of `perrec8_diag_v1.py`) and cross-checked by the per-box modules against
 the banked `Fresh.DumpDomData.u0e_*` census facts at every census pair
 (`mkU0_<box>_<i>_<j>`). -/
 /-- transcribed full box closure mk1_3_4_5_5_5_7 (the datum's start table). -/
