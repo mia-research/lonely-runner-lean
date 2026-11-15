@@ -97,3 +97,16 @@ Remaining checks per the review, matching our OWED list: root admissibility + fo
 2. **Truncated file tail (docstring at ~1517 ends mid-sentence "…is do", no def follows)**: the split boundary cut inside the `chainDom_1_3_4_4_5_5_7` docstring — that datum itself LIVES in `Fresh/ChainDomData.lean:7` (moved there correctly); Base's dangling docstring is dead weight, delete it before `end`.
 **Consequence:** ChainDomData.olean + SpineTotalProof.olean are blocked on Base. The compile sequencer exited fail-closed (no olean → nothing downstream fired). Other sessions: do NOT recompile ChainDomBase.lean at HEAD (it will stall silently); apply the BaseFix.lean trace pattern if you need the file green before this session lands it.
 **Also blocked:** `NoClearPointWordRealized` needs the domain-carrying repair (see review round above) before any verbatim OneSidedSound discharge — word-layer consumers carry the universal `∀ g` shape at `WordCoverSide.composedTotal_of_wordCover` + 3 SpineTotalProof sites.
+
+## ZCode handoff (2026-11-15)
+
+The depth-32 survey final summary extends the recorded zero-leaf coverage
+through `[121,123)` (478,753,925 roots and 689,389,101 nodes).
+The ordered root count was independently checked, and the integer-verifying
+survey source is archived. The report is data-side evidence. The band
+still needs the Lean certificate replay.
+
+A separate V3 census draft used only `ρ₂,…,ρ₅` for the retained
+components. A reading above 17 can still block in the first window
+on later laps. For example, `ρ=20` blocks `R=6/5` at lap 3.
+Consequently that census cannot discharge V3.
