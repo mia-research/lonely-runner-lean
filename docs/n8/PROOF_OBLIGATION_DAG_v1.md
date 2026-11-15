@@ -110,3 +110,29 @@ A separate V3 census draft used only `ρ₂,…,ρ₅` for the retained
 components. A reading above 17 can still block in the first window
 on later laps. For example, `ρ=20` blocks `R=6/5` at lap 3.
 Consequently that census cannot discharge V3.
+
+## ZCode handoff continuation (2026-11-15)
+
+The stalled replay above is superseded. `ChainDomTrace19` checks the
+19-hop trace one certified step at a time. `ChainDomData` checks all
+three sparse-start boxes. `ChainDomPerRec8` checks the per-record
+attestations for the other eight strict boxes from their full-closure
+start tables. The aggregate theorem is `chainDomPerRecord8_data`.
+All these checks use Lean 4.29.1 and the standard axioms.
+
+The static attestations show what a chain proves from the specified
+table. To consume them on an input still requires that its first-window
+carve realize the starting table and admit an attesting chain.
+`SpineTotalProof` now uses the box-scoped second-window word hypothesis
+for its three sparse-start instances. Word extraction within those
+boxes and exhaustiveness of their family edges are still premises.
+The family-exhaustiveness draft remains local. The M4 replay,
+band datasheets, and the V3 closure remain separate obligations.
+
+The replay used the existing compiled dependencies. This campaign
+branch shares the older native source tree with
+`mia-research/lrc-n8-lean` at
+`21e2912e93a9e36b51654e695451f7a0b2f80181`. To reconstruct the source
+for these modules in a fresh checkout, populate missing
+`LonelyRunnerFresh/Fresh/*.lean` paths from that revision and retain
+the campaign versions wherever a file exists on both branches.
