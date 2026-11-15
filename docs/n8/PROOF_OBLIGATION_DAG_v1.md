@@ -147,3 +147,43 @@ strictly level-increasing covering word. The six covering zones all
 use lap 2. This example addresses the universal second-window claim.
 It leaves open the word statement for the surviving boxes with
 first-window carve hypotheses.
+
+## Synthesis of the pinned first-window walk and second-window conflict
+
+`PinnedCarveChain` supplies the missing pinned start for the existing
+`UClosure.chainWalk`. If reading zero is 1 and the first window is
+carved, some other reading blocks at 1. Both strict seam inequalities
+hold there, so the first step survives from any fine starting table.
+The existing shrinking-frontier proof supplies the rest of an actual
+walk on the same arrangement. This gives M4 its real starting zone and
+gives the chain branch a walk from `(U, 0, 1)`.
+
+The unrestricted `DfsRootAdm` interface is false for forests whose
+roots are all nonbase readings. It tests even a base-row empty walk
+already beyond the window. `firstWindow_of_pinned_forest` uses the
+existing forest soundness theorem with roots reached by an actual
+pinned opening walk. Its data still need to match those roots and
+justify the soft filters.
+
+`OpeningChainConflict.twoWindows_of_select_opening_record` consumes
+one record on that actual walk. At an opening with `ρₓR = 8j+1`, a
+reading still blocked at lap `k` forces
+`ρₓ/ρᵧ < (8j+1)/(8k−1)`. A banked record with the same reading pair and
+an upper bound at least this ratio can use the demand. The argument
+works with equal laps and reduced rational ratios. The second-window
+obligation on this route is to select a matching opening and a record
+whose cap is certified by the same first-window walk. A full
+strictly lap-increasing word and exhaustiveness for all its edges
+are unnecessary for this consumer.
+
+Exact replay on the eight full-closure boxes used the existing
+`perrec8_diag_v1.py` enumerator. The componentwise-loosest table over
+the completed traces still implies all their banked caps on 2,488
+walks. Merging earlier by only the setter and exit numerator lost
+the required information in seven boxes. Starting from the reverse
+of a required cap and retaining undominated tables at each key
+closed all 16 single-cap violations in the exact replay. Those
+calculations motivate reusing the M4 replay for cap violations.
+They are data-side checks, with the coverage and cap certificates
+still to be connected in Lean. The second-window selection, V3 and
+band data obligations remain open.
