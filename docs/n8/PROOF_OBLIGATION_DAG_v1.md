@@ -136,3 +136,14 @@ branch shares the older native source tree with
 for these modules in a fresh checkout, populate missing
 `LonelyRunnerFresh/Fresh/*.lean` paths from that revision and retain
 the campaign versions wherever a file exists on both branches.
+
+The two prerequisite files whose local sources differed from that
+reference, `ArrangementTypesOct26` and `FastGaps`, also replayed and
+are now recorded on the campaign branch.
+
+`PinnedWordObstruction` checks that pinning the first reading at 1 and
+requiring strict sorting still permits a blocked second window with no
+strictly level-increasing covering word. The six covering zones all
+use lap 2. This example addresses the universal second-window claim.
+It leaves open the word statement for the surviving boxes with
+first-window carve hypotheses.
