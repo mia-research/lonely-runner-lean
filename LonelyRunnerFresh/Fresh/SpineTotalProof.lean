@@ -1,4 +1,4 @@
-import Fresh.WordCoverSide
+import Fresh.WordExtract
 import Fresh.ChainDomData
 
 /-!
@@ -30,7 +30,7 @@ conclusion shape with NO new mathematics — every step is an application of a b
 3. **Direction (b)**: `Fresh.WordCoverSide.wordCover_demands` — a realized `W₁` word's edge
    demand + the realized chains + family exhaustiveness + the banked datum ⟹ False (the
    seam lemma `wordEdge_demand` is its engine), with the two data-side OWEDs it consumes
-   (`NoClearPointWordRealized`, `FamilyCoversWordEdges`) carried as hypotheses, NOT assumed.
+   (`NoClearPointWordRealizedBox`, `FamilyCoversWordEdges`) carried as hypotheses, NOT assumed.
 
 ## The composition (all proved here, each theorem closed)
 
@@ -39,7 +39,7 @@ conclusion shape with NO new mathematics — every step is an application of a b
   `g` in the box realizing `u0Of b` and admitting the attesting chain (the W₀-conditional,
   per-chain form) + no `W₁` clear point + family exhaustiveness ⟹ **False** (route:
   `ChainDomData` ⟹ `capChainsRealized` via `capChainsRealized_of_chainDomU0`; no clear
-  point ⟹ realized word via `NoClearPointWordRealized`; word edges ⟹ family via
+  point ⟹ realized word via `NoClearPointWordRealizedBox`; word edges ⟹ family via
   `FamilyCoversWordEdges`; `wordCover_demands` + `oneSidedTotalData` fire the composed
   conflict);
 * `oneSidedSound_of_chainDom` — the assembly shape: same hypotheses minus the no-clear-point
@@ -47,7 +47,7 @@ conclusion shape with NO new mathematics — every step is an application of a b
   distInt (g i * (s/8))`) — verbatim the conclusion of
   `Fresh.FilterAssembly.OneSidedSound`, in the composed-family form the glue consumes;
 * `crossCheck_of_dom` — the same shape landed verbatim in
-  `Fresh.WordCoverSide.oneSidedSound_of_wordCover` (the banked direction-(b) glue), as a
+  `Fresh.WordExtract.oneSidedSound_of_wordCover_box` (the banked direction-(b) glue), as a
   shape cross-check;
 * `chainDomBoxes_subset_coveredSet` + `chainDomData_of_chainDomBoxes` +
   `spineTotal_of_chainDomBoxes` + the three per-box instances — the totality: for every box
@@ -67,7 +67,7 @@ conclusion shape with NO new mathematics — every step is an application of a b
   `2/13` at `(0,6)` vs the face maximum `3/13`), which is exactly why it enters as part of
   the W₀-conditional rather than as an interval fact — the form the `Fresh.SpineTotalData`
   no-go lemmas demand.
-* `Fresh.WordCoverSide.NoClearPointWordRealized` / `FamilyCoversWordEdges` — direction (b)'s
+* `Fresh.WordExtract.NoClearPointWordRealizedBox` / `FamilyCoversWordEdges` — direction (b)'s
   two data-side OWEDs (the finite closed-interval covering refinement; the per-box family
   exhaustiveness of the dump), consumed as hypotheses of the composition, per the banked
   files' accounting.
@@ -116,15 +116,15 @@ W₀-conditional, per-chain form), admits NO `W₁` clear point, and whose reali
 the family exhausts — cannot exist.  Route (each step a banked lemma):
 `ChainDomData` ⟹ `capChainsRealized` (`capChainsRealized_of_chainDomU0`, through
 `chain_fine_of_realized` + `chainReal_of_capsDom`); no clear point ⟹ realized word
-(`NoClearPointWordRealized`); word edges ⟹ family records (`FamilyCoversWordEdges`);
+(`NoClearPointWordRealizedBox`); word edges ⟹ family records (`FamilyCoversWordEdges`);
 `wordCover_demands` + the banked `oneSidedTotalData b hb` fire the composed conflict
 (`composedFamRefutes` / `composedCap_conflict`). -/
 theorem composedConflict_of_chainDom (b : Fin 7 → ℤ) (hb : b ∈ coveredSet)
-    (d : ChainDomData b (compFamOf b))
+    (d : Fresh.ChainDomBase.ChainDomData b (compFamOf b))
     {g : Fin 7 → ℝ} (hface : ∀ i, FaceLo b i ≤ g i ∧ g i ≤ FaceHi b i)
     (hfine0 : UFine g (u0Of b)) (hchain : ChainRealized g (u0Of b) 0 1 d.steps)
     (hnoclear : ¬ (∃ s, 9 ≤ s ∧ s ≤ 15 ∧ ∀ i, (1 / 8 : ℝ) ≤ distInt (g i * (s / 8))))
-    (hword : NoClearPointWordRealized g)
+    (hword : Fresh.WordExtract.NoClearPointWordRealizedBox b g)
     (hexh : FamilyCoversWordEdges b (compFamOf b)) :
     False := by
   -- step 2: the family's cap records are dominated by the consumed chain's closed trace
@@ -132,7 +132,7 @@ theorem composedConflict_of_chainDom (b : Fin 7 → ℤ) (hb : b ∈ coveredSet)
     capChainsRealized_of_chainDomU0 (compFamOf b) hface 0 1 d.steps hfine0 hchain
       (fun e he V af Af hrun => d.dom e he V af Af hrun)
   -- step 3: no W₁ clear point ⟹ a W₁ word is realized on g
-  obtain ⟨w, hw⟩ := hword hnoclear
+  obtain ⟨w, hw⟩ := hword hface hnoclear
   -- step 4: demand + composed cap-chain with datum ≤ 1 ⟹ the conflict fires
   exact wordCover_demands (oneSidedTotalData b hb) hchains hw (hexh g w hface hw)
 
@@ -148,8 +148,8 @@ with the family the banked `compFamOf b` and the W₀-conditional the per-chain 
 `ChainDomData` carries (the artifact kill IS conditional on a `W₀` chain — the assembly
 hypothesis carries the condition, per `Fresh.FilterAssembly.OneSidedSound`'s docstring). -/
 theorem oneSidedSound_of_chainDom (b : Fin 7 → ℤ) (hb : b ∈ coveredSet)
-    (d : ChainDomData b (compFamOf b))
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (d : Fresh.ChainDomBase.ChainDomData b (compFamOf b))
+    (hword : ∀ g : Fin 7 → ℝ, Fresh.WordExtract.NoClearPointWordRealizedBox b g)
     (hexh : FamilyCoversWordEdges b (compFamOf b))
     {g : Fin 7 → ℝ} (hface : ∀ i, FaceLo b i ≤ g i ∧ g i ≤ FaceHi b i)
     (hfine0 : UFine g (u0Of b)) (hchain : ChainRealized g (u0Of b) 0 1 d.steps)
@@ -161,19 +161,19 @@ theorem oneSidedSound_of_chainDom (b : Fin 7 → ℤ) (hb : b ∈ coveredSet)
 #print axioms oneSidedSound_of_chainDom
 
 /-- **Shape cross-check**: the composition lands verbatim in
-`Fresh.WordCoverSide.oneSidedSound_of_wordCover` — the banked direction-(b) glue — with the
+`Fresh.WordExtract.oneSidedSound_of_wordCover_box` — the banked direction-(b) glue — with the
 bridge supplied by the corrected consumption.  (Same hypotheses, same conclusion; the
 banked file's own proof goes through `Fresh.OneSidedGlue.oneSidedSound_of_composedData`.) -/
 theorem crossCheck_of_dom (b : Fin 7 → ℤ) (hb : b ∈ coveredSet) (steps : List Step)
     (hdom : ∀ e ∈ (compFamOf b).edges, ∀ V : UTable, ∀ af : Fin 7, ∀ Af : ℚ,
       chainRun (u0Of b) 0 1 steps = some (V, af, Af) → CapsDom V e.y e.caps e.x)
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (hword : ∀ g : Fin 7 → ℝ, Fresh.WordExtract.NoClearPointWordRealizedBox b g)
     (hexh : FamilyCoversWordEdges b (compFamOf b))
     {g : Fin 7 → ℝ} (hface : ∀ i, FaceLo b i ≤ g i ∧ g i ≤ FaceHi b i)
     (hfine0 : UFine g (u0Of b)) (hchain : ChainRealized g (u0Of b) 0 1 steps)
     (hcarve : CarvesOneSeven (Finset.image g Finset.univ)) :
     ∃ s, 9 ≤ s ∧ s ≤ 15 ∧ ∀ i, (1 / 8 : ℝ) ≤ distInt (g i * (s / 8)) :=
-  oneSidedSound_of_wordCover b hb hword hexh g hface
+  Fresh.WordExtract.oneSidedSound_of_wordCover_box b hb hword hexh g hface
     (bridge_of_dom b (compFamOf b) steps hdom hface hfine0 hchain) hcarve
 
 #print axioms crossCheck_of_dom
@@ -233,7 +233,7 @@ branch dispatches to the banked per-box record `chainDom_<box>` with the family 
 `compFamOf <literal box> = compFam_<box>`.  (A `def`, not a `theorem`: the dispatch
 produces data.) -/
 def chainDomData_of_chainDomBoxes (b : Fin 7 → ℤ) (hb : b ∈ chainDomBoxes) :
-    ChainDomData b (compFamOf b) := by
+    Fresh.ChainDomBase.ChainDomData b (compFamOf b) := by
   by_cases h1 : b = (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)
   · rw [h1]
     simpa [compFamOf] using chainDom_1_3_4_4_5_5_7
@@ -254,8 +254,8 @@ verbatim by a banked `chainDom_<box>`), the family the banked `compFamOf` dispat
 direction (b) the banked word-cover side.  No new mathematics: this is
 `oneSidedSound_of_chainDom` with the datum and the coveredSet membership discharged. -/
 theorem spineTotal_of_chainDomBoxes (b : Fin 7 → ℤ) (hb : b ∈ chainDomBoxes)
-    (d : ChainDomData b (compFamOf b))
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (d : Fresh.ChainDomBase.ChainDomData b (compFamOf b))
+    (hword : ∀ g : Fin 7 → ℝ, Fresh.WordExtract.NoClearPointWordRealizedBox b g)
     (hexh : FamilyCoversWordEdges b (compFamOf b))
     {g : Fin 7 → ℝ} (hface : ∀ i, FaceLo b i ≤ g i ∧ g i ≤ FaceHi b i)
     (hfine0 : UFine g (u0Of b))
@@ -273,7 +273,8 @@ theorem spineTotal_of_chainDomBoxes (b : Fin 7 → ℤ) (hb : b ∈ chainDomBoxe
 chain `steps_1_3_4_4_5_5_7` — the datum the banked `chainDom_1_3_4_4_5_5_7` record carries
 (dispatched directly, no projection through the tactic-proof totality). -/
 theorem spineTotal_1_3_4_4_5_5_7
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (hword : ∀ g : Fin 7 → ℝ,
+      Fresh.WordExtract.NoClearPointWordRealizedBox (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ) g)
     (hexh : FamilyCoversWordEdges (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)
       (compFamOf (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)))
     {g : Fin 7 → ℝ}
@@ -281,7 +282,7 @@ theorem spineTotal_1_3_4_4_5_5_7
       g i ≤ FaceHi (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ) i)
     (hfine0 : UFine g (u0Of (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)))
     (hchain : ChainRealized g (u0Of (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ)) 0 1
-      steps_1_3_4_4_5_5_7)
+      Fresh.ChainDomBase.steps_1_3_4_4_5_5_7)
     (hcarve : CarvesOneSeven (Finset.image g Finset.univ)) :
     ∃ s, 9 ≤ s ∧ s ≤ 15 ∧ ∀ i, (1 / 8 : ℝ) ≤ distInt (g i * (s / 8)) :=
   oneSidedSound_of_chainDom (![1, 3, 4, 4, 5, 5, 7] : Fin 7 → ℤ) covered_1_3_4_4_5_5_7
@@ -292,7 +293,8 @@ theorem spineTotal_1_3_4_4_5_5_7
 /-- **Per-box instance, box (1,3,4,5,6,6,7)**: the assembly shape at the box's own attesting
 chain `steps_1_3_4_5_6_6_7` — the datum the banked `chainDom_1_3_4_5_6_6_7` record carries. -/
 theorem spineTotal_1_3_4_5_6_6_7
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (hword : ∀ g : Fin 7 → ℝ,
+      Fresh.WordExtract.NoClearPointWordRealizedBox (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ) g)
     (hexh : FamilyCoversWordEdges (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)
       (compFamOf (![1, 3, 4, 5, 6, 6, 7] : Fin 7 → ℤ)))
     {g : Fin 7 → ℝ}
@@ -311,7 +313,8 @@ theorem spineTotal_1_3_4_5_6_6_7
 /-- **Per-box instance, box (1,4,4,5,6,6,7)**: the assembly shape at the box's own attesting
 chain `steps_1_4_4_5_6_6_7` — the datum the banked `chainDom_1_4_4_5_6_6_7` record carries. -/
 theorem spineTotal_1_4_4_5_6_6_7
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (hword : ∀ g : Fin 7 → ℝ,
+      Fresh.WordExtract.NoClearPointWordRealizedBox (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ) g)
     (hexh : FamilyCoversWordEdges (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)
       (compFamOf (![1, 4, 4, 5, 6, 6, 7] : Fin 7 → ℤ)))
     {g : Fin 7 → ℝ}
@@ -349,9 +352,9 @@ direction (b)'s two data-side OWEDs), the assembly shape holds with NO hypothesi
 beyond the box + carve — the OneSided kill exactly as the assembly's soundness hypothesis
 consumes it (modulo the `JoinFam` conversion residual, see the module docstring). -/
 theorem oneSidedSoundAt_of_carveChain (b : Fin 7 → ℤ) (hb : b ∈ chainDomBoxes)
-    (d : ChainDomData b (compFamOf b))
+    (d : Fresh.ChainDomBase.ChainDomData b (compFamOf b))
     (hcarvechain : CarveRealizesChainAt b d.steps)
-    (hword : ∀ g : Fin 7 → ℝ, NoClearPointWordRealized g)
+    (hword : ∀ g : Fin 7 → ℝ, Fresh.WordExtract.NoClearPointWordRealizedBox b g)
     (hexh : FamilyCoversWordEdges b (compFamOf b))
     {g : Fin 7 → ℝ} (hface : ∀ i, FaceLo b i ≤ g i ∧ g i ≤ FaceHi b i)
     (hcarve : CarvesOneSeven (Finset.image g Finset.univ)) :
