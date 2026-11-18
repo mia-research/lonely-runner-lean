@@ -1,0 +1,56 @@
+== 4257/833
+== 231/47
+docs/n8/FRAMEWORK_COMPILATION_v7.md
+docs/n8/FRAMEWORK_COMPILATION_v3.md
+docs/n8/MECHANISM_MAP_v5.md
+docs/n8/FRAMEWORK_COMPILATION_v6.md
+docs/n8/transfer_2026_11_11_v2/slow_window_audit.py
+docs/n8/FRAMEWORK_COMPILATION_v9.md
+docs/n8/CASCADE_FINDINGS_INDEX_v2.md
+docs/n8/FRAMEWORK_COMPILATION_v8.md
+docs/n8/CASCADE_FINDINGS_INDEX_v3.md
+docs/n8/CASCADE_FINDINGS_INDEX_v4.md
+docs/n8/CASCADE_FINDINGS_INDEX_v5.md
+docs/n8/RUNNING_LOG_order8_v1.md
+docs/n8/CASCADE_FINDINGS_INDEX_v1.md
+docs/n8/transfer_2026_11_11/digests/digest_03.md
+docs/n8/FRAMEWORK_COMPILATION_v5.md
+docs/n8/FRAMEWORK_COMPILATION_v4.md
+docs/n8/FRAMEWORK_COMPILATION_v10.md
+experiments/n8/midbound_chase_v1.out
+experiments/n8/native_residual_return_map_v1.json
+experiments/n8/midbound_chase_v1_m2_5.out
+experiments/n8/native_opening_label_reversal_v2.json
+experiments/n8/native_mixed_group_extreme_dispatch_v1.json
+experiments/n8/native_closing_return_map_v1.json
+experiments/n8/packet_outside_return_2026_10_21/map.json
+experiments/n8/native_residue_quiet_reversal_family_v1.json
+experiments/n8/k6_counterexample_why_v1.out
+experiments/n8/k6_counterexample_why_v1.py
+experiments/n8/nstar_rotation_v1.out
+experiments/n8/midbound_tables_v1.out
+experiments/n8/native_narrow_capture_block_survey_v1.json
+experiments/n8/native_supplied_retained_arrangement_v2.json
+experiments/n8/native_delayed_interval_physical_v1.json
+experiments/n8/four_block_outer_lap_map_v3.json
+experiments/n8/native_unbounded_rebound_core_v1.json
+experiments/n8/fastest_capture_retention_v1.json
+experiments/n8/out_full_transit_positions_v2.csv
+experiments/n8/native_original_survey_group_reductions_v1.json
+experiments/n8/native_upper_triple_class_replay_v3.json
+experiments/n8/m4_single_cycles_context_v1.json
+experiments/n8/four_block_outer_lap_map_v2.json
+experiments/n8/onefast_audit/joinedge_perbox_v1.jsonl
+experiments/n8/onefast_audit/joinedge2_perbox_v1.jsonl
+experiments/n8/nstar_cells_v1.out
+== 1863081/394289
+== reach of a table
+docs/n8/RUNNING_LOG_order8_v1.md
+== reach.*V3
+experiments/n8/tailcomp2_lemma_v1.out
+== V3.*reach
+== E873-E876 entries (headings)
+18833:## E873 (2026-11-18): V3 with the zones of ρ₆ and ρ₇ at every lap: no carve of [1,7] with ρ₆ > 17 and 25 ≤ ρ₇ ≤ 30 on 
+18845:## E874 (2026-11-18): the V3 search through ρ₇ ≤ 34 finds no carve; its size by B, and the unexplained jump between B = 30 and B 
+18857:## E875 (2026-11-18): the jump in the V3 search between B = 30 and B = 32 is the opening of the lap-4 anchor class: ρ₇ (and the rea
+18870:## E876 (2026-11-18): the V3 search by first element, B = 28 to 32: the class (ρ₂, lap 3) opens at B = 713/25, the instance of the 
