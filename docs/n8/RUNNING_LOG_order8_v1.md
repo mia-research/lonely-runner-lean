@@ -18895,7 +18895,8 @@ Existence step named (rule 1, displacement frame): none made.
 Existence step named (rule 1, displacement frame): none made. The reach is a description of the chain tables on this box, not a step of the displacement and not an existence argument; why the landing lies where it does is not shown.
 **Consequence (M7) [T exact; PARTIAL; [PROVISIONAL: covering; supports only the statement that no W₀ chain on this box reaches past 4257/833]]:** on V3 with ρ₇ ≤ 34 the landing in W₀ (the first clear point of readings 2 to 7, window A of `CASCADE_MECHANISM_v1.md` §3) is at most the reach 4257/833, a description of the tables on this box in the sense of E819 item 2 and offered as no lemma or cap (rule 7). The same machinery that gave reach on the 56 boxes gives reach on V3; whether the reach is bounded for every B is the open statement and is not answered here. The record's no-carve range is [25, 41) (E833), not 34, and the bands certified to 125 are the two-window statement, a different one.
 
-## E873 (2026-11-15→19) — V3 census closed empirically; box-collapse v1 refuted, chamber design corrected
+## E877 (2026-11-15→19) — V3 census closed empirically (grid, ρ₇ ≤ 130); box-collapse v1 refuted, chamber design corrected
+(NOTE: sibling E873–E876 of 2026-11-18 cover the exact real-box V3 search through ρ₇ ≤ 34 — complementary: this entry is the grid census through ρ₇ ≤ 130.)
 
 **[T 91,390/91,390]** V3 frontier (ρ₆ > 17, ρ₇ ≥ 25) enumerated: 0 alive tuples — 85,368 COMP-DEAD + 6,022 INTERSECT-DIE vs the whole ρ₇-column [25,130); negative control 98/98 recorded carves alive at their own ρ₇. The frontier's empirics are closed; both frontier regions now hang on one question: is the race-death certificate chamber-uniform?
 
