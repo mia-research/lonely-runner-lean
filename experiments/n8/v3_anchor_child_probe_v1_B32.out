@@ -1,0 +1,9 @@
+B 32 child (1, 4) ENTRY True PROGRESS True
+covers at depth 1: False
+subtree nodes 1 max depth 1 covers 0
+B 32 child (2, 4) ENTRY True PROGRESS True
+covers at depth 1: False
+subtree nodes 10 max depth 3 covers 0
+B 32 child (5, 4) ENTRY True PROGRESS True
+covers at depth 1: False
+subtree nodes 111099 max depth 35 covers 0

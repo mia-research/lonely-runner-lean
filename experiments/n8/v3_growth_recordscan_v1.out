@@ -1,0 +1,3 @@
+E873: **2. The instrument [OBS, exact]:** `v3_exact_chain_v1.py` calls `chain_cover_v4.search` (
+E873: **3. Controls [OBS, exact]:** (a) B = 25, no extra constraint: FOUND at 73,974 nodes; witn
+E873: **4. Result [T exact; PARTIAL]:** `v3_exact_chain_v1.py 30 17 25`: DONE with no cover at 1
