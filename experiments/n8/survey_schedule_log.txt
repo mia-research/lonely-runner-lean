@@ -3,3 +3,8 @@
 [2026-11-15 ~11:05] [119,121) D=32 COMPLETE: 441,221,418 roots / 710,449,142 nodes / uncertified leaves 0 (437,141,682 certified at D=1, 260,975,365 at D=2, 7,779,371 at D=4, 307,406 at D=8, 30,822 at D=16, 1,664 at D=32->0 residual). BANDS [25,121) ALL 0 LEAVES at D=32. Next per schedule: [121,123) + [123,125) — beyond composition needs (width handoff at rho7 >= 55), regression-insurance only.
 [2026-11-15 ~11:40] schedule-fire: instructions referenced [117,119)+[119,121) — both ALREADY COMPLETE (0 leaves). No rerun (would waste 5-7h). Live: [121,123) running (hb binary), [123,125) chained behind it. Frontier: [25,121) certified 0 leaves at D=32; running bands extend to 125.
 [2026-11-19] [121,123) COMPLETE 0 leaves (478,753,925 roots / 689,389,101 nodes); [123,125) COMPLETE 0 leaves (518,798,175 / 741,610,099). Frontier: [25,125) certified 0 leaves at D=32. Launching [125,127)+[127,129).
+[2026-11-19 late] schedule-fire (stale bands 117-121: done long ago, not rerun). Live: [125,127) at 759M nodes 0 leaves (n7=126/127 — near done), [127,129) chained. Frontier certified: [25,125). Chamber-collapse v2 in main loop.
+[2026-11-20 ~early] [125,127) COMPLETE 0 leaves (leaf line: uncertified 0; depth histogram ends 1152→0). [127,129) running (870M nodes, 0 leaves). Frontier: [25,127) certified.
+BANDS 125-129 DONE
+[2026-11-20 ~05:00] [127,129) COMPLETE 0 leaves (606,921,952 roots / 902,526,300 nodes). Frontier [25,129). Launching [129,131)+[131,133).
+BANDS 129-133 DONE
