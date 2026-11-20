@@ -104,18 +104,22 @@ def DfsCert.root : DfsCert → DfsNode
 
 /-- The tightened range hi of reading row `b` at table `U`: `min((2n_b+1)/2, U[b][0])`,
 verbatim `tranges` (flags ignored = generous = sound). -/
+-- Fixed 2026-11-20: rows ≥ 1 previously dropped the /2 (code said 2n±1 where the
+-- docstring and the reconstruction's `tranges` say (2n±1)/2); concrete `childEq`
+-- transcription caught it (17/11 ≠ 34/11).  Row 0 keeps [1, 3] unhalved, verbatim.
 def dfsHi (n : Fin 7 → ℤ) (U : UTable) (b : Fin 7) : ℚ :=
   if 0 < b.val then
     match U b 0 with
-    | some (c, _) => min ((2 * n b + 1 : ℤ) : ℚ) c
-    | none => ((2 * n b + 1 : ℤ) : ℚ)
+    | some (c, _) => min (((2 * n b + 1 : ℤ) : ℚ) / 2) c
+    | none => ((2 * n b + 1 : ℤ) : ℚ) / 2
   else ((2 * n 0 + 1 : ℤ) : ℚ)
 
 /-- The tightened range lo of reading row `b` at table `U`: `max((2n_b−1)/2, 1, 1/U[0][b])`,
 verbatim `tranges` (row 0 unused). -/
+-- Fixed 2026-11-20: rows ≥ 1 previously dropped the /2 (see `dfsHi`).
 def dfsLo (n : Fin 7 → ℤ) (U : UTable) (b : Fin 7) : ℚ :=
   if 0 < b.val then
-    let lo := max ((2 * n b - 1 : ℤ) : ℚ) 1
+    let lo := max (((2 * n b - 1 : ℤ) : ℚ) / 2) 1
     match U 0 b with
     | some (c, _) => max lo (1 / c)
     | none => lo
