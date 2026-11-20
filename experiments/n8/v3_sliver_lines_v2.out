@@ -1,0 +1,35 @@
+# conjT3_enum_v1 -- exact (Fractions); started 2026-11-20 08:19:09
+# === P0. negative controls (recorded population) ===
+NEG CONTROL: recorded carve own rho7 feasible on own K6 (own strip window): [T 96/96]
+near systems whole-column (25,130) dead: [T 9/9]
+# === P1. skeleton enumeration (cell partition of (1,17], rho6 > 7) ===
+skeleton count (nondecreasing cell 5-tuples, last != P): 125
+P1 TOTAL: 125 skeletons, 1166 probed tuples, 1166 whole-(25,50)-column dead, 0 ALIVE
+kill-type histogram: [('COMP-DEAD', 934), ('INTERSECT-DIE', 232)]
+killing-component index histogram: [(0, 743), (1, 423)]
+K6-EMPTY (smalls alone cover [1,7]) count: 0
+race certificates (kL,kR,dead_over_[25,inf)) histogram:
+   kL=1 kR=1 dead_inf=True : 2
+   kL=1 kR=2 dead_inf=True : 79
+   kL=1 kR=3 dead_inf=True : 398
+   kL=2 kR=1 dead_inf=True : 2
+   kL=2 kR=2 dead_inf=True : 63
+   kL=2 kR=3 dead_inf=True : 290
+   kL=2 kR=4 dead_inf=True : 8
+   kL=3 kR=1 dead_inf=True : 10
+   kL=3 kR=2 dead_inf=True : 43
+   kL=3 kR=4 dead_inf=True : 27
+P1 elapsed 0.4s
+# === P2. per-strip blocks m in {4,5,6,7}: front-structured populations (exact) ===
+m=4 (C_m=(31,33), rho7 in {31.3,31.9,32.6}): carve-consistent tuples 1483, whole-(25,50)-column dead 1483, ALIVE 0
+   front-closure violations excluded: 0; front at lap >= 3 encountered: 0; kill types: [('COMP-DEAD', 1221), ('INTERSECT-DIE', 262)]
+m=5 (C_m=(39,41), rho7 in {39.3,39.9,40.6}): carve-consistent tuples 1461, whole-(25,50)-column dead 1461, ALIVE 0
+   front-closure violations excluded: 0; front at lap >= 3 encountered: 0; kill types: [('COMP-DEAD', 1199), ('INTERSECT-DIE', 262)]
+m=6 (C_m=(47,49), rho7 in {47.3,47.9,48.6}): carve-consistent tuples 1495, whole-(25,50)-column dead 1495, ALIVE 0
+   front-closure violations excluded: 0; front at lap >= 3 encountered: 0; kill types: [('COMP-DEAD', 1238), ('INTERSECT-DIE', 257)]
+m=7 (C_m=(55,57), rho7 in {55.3,55.9,56.6}): carve-consistent tuples 1488, whole-(25,50)-column dead 1488, ALIVE 0
+   front-closure violations excluded: 0; front at lap >= 3 encountered: 0; kill types: [('COMP-DEAD', 1227), ('INTERSECT-DIE', 261)]
+# note: m=7 block is auxiliary: C_7 = (55,57) is outside (25,50); the (25,50) column
+# test applies to the same smalls space, and E852 kills rho7 >= 50 at rho6 <= 17.
+DONE
+{"status": "BUDGET", "n_s": 881020, "n_e": 0}

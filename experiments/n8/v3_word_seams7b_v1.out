@@ -1,0 +1,21 @@
+rows total: 55
+== (2) slackness at u* (E877 item 6 extremal arrangement):
+  TIGHT(strict)  seam3 up: (rho2,1)->(rho6,5): 39u_{5} < 9u_{1}
+  TIGHT(strict)  seam7 up: (rho6,6)->(rho3,2): 15u_{2} < 49u_{5}
+  TIGHT(strict)  seam10 up: (rho7,10)->(rho5,4): 31u_{4} < 81u_{6}
+  TIGHT(strict)  seam12 up: (rho4,3)->(rho2,2): 15u_{1} < 25u_{3}
+  TIGHT(strict)  seam16 up: (rho4,4)->(rho7,15): 119u_{6} < 33u_{3}
+  TIGHT(strict)  front: (rho4,1) contains 1, entry side: u_{3} < 1/7
+  (6 tight, 49 slack, of 55)
+  rows VIOLATED at u* (must be 0 if u* is the true extremum): 0
+  smallest positive slack: 24/855491
+== (3) cycles: 1904 simple cycles; violations (product too small): 0
+  minimal cycle product: 115425/115103 (with strict row)
+  via: seam10 up: (rho7,10)->(rho5,4): 31u_{4} < 81u_{6} | seam9 up: (rho6,7)->(rho7,10): 79u_{6} < 57u_{5} | seam6 up: (rho5,3)->(rho6,6): 47u_{5} < 25u_{4}
+  smallest six distinct products: ['115425/115103', '2299/2291', '2225/2209', '3969/3937', '833/825', '183825/181937']
+== (4) least-product bound u_6 -> 0: 33/833
+    seam16 up: (rho4,4)->(rho7,15): 119u_{6} < 33u_{3} factor 33/119
+    front: (rho4,1) contains 1, entry side: u_{3} < 1/7 factor 1/7
+   129 * bound = 4257/833  (4257/833 expected)
+   distinct simple least-product chains achieving 33/833: 1
+    * seam16 up | front

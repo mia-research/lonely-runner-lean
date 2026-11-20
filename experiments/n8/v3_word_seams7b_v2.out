@@ -1,0 +1,75 @@
+== word B34: 21 zones, front (rho4,1), last (rho7,16), rows 55
+== extremal arrangement u* (least-product chains):
+   u*_1 = 5/21   via: seam12 | front
+   u*_2 = 7/39   via: seam7 | seam3 | seam12 | front
+   u*_3 = 1/7   via: front
+   u*_4 = 2673/25823   via: seam10 | seam16 | front
+   u*_5 = 5/91   via: seam3 | seam12 | front
+   u*_6 = 33/833   via: seam16 | front
+   last exit (129) * u*_6 = 4257/833
+== tightness at u*: 6 tight, 49 slack, 0 VIOLATED (must be 0)
+   TIGHT(strict) seam3 up (rho2,1)->(rho6,5)
+   TIGHT(strict) seam7 up (rho6,6)->(rho3,2)
+   TIGHT(strict) seam10 up (rho7,10)->(rho5,4)
+   TIGHT(strict) seam12 up (rho4,3)->(rho2,2)
+   TIGHT(strict) seam16 up (rho4,4)->(rho7,15)
+   TIGHT(strict) front up (rho4,1) contains 1
+   smallest positive slack: 24/855491
+== tight-edge arborescence reachable from pin: 1 of 7 nodes (NOT spanning)
+== cycles: 1904 simple; violations: 0; min product: 115425/115103
+== least-product chains for u_6 achieving 33/833: 1
+    * seam16 | front
+----
+== word B833: 19 zones, front (rho4,1), last (rho5,6), rows 51
+== extremal arrangement u* (least-product chains):
+   u*_1 = 5/21   via: seam12 | front
+   u*_2 = 7/39   via: seam8 | seam3 | seam12 | front
+   u*_3 = 1/7   via: front
+   u*_4 = 33/329   via: seam17 | front
+   u*_5 = 5/91   via: seam3 | seam12 | front
+   u*_6 = 275/6909   via: seam6 | seam17 | front
+   last exit (49) * u*_4 = 231/47
+== tightness at u*: 6 tight, 45 slack, 0 VIOLATED (must be 0)
+   TIGHT(strict) seam3 up (rho2,1)->(rho6,5)
+   TIGHT(strict) seam6 up (rho5,3)->(rho7,8)
+   TIGHT(strict) seam8 up (rho6,6)->(rho3,2)
+   TIGHT(strict) seam12 up (rho4,3)->(rho2,2)
+   TIGHT(strict) seam17 up (rho4,4)->(rho5,6)
+   TIGHT(strict) front up (rho4,1) contains 1
+   smallest positive slack: 430/4221399
+== tight-edge arborescence reachable from pin: 1 of 7 nodes (NOT spanning)
+== cycles: 1301 simple; violations: 0; min product: 1089/1081
+== least-product chains for u_4 achieving 33/329: 1
+    * seam17 | front
+----
+== word B25: 19 zones, front (rho6,3), last (rho4,4), rows 51
+== extremal arrangement u* (least-product chains):
+   u*_1 = 3321/13825   via: seam4 | seam12 | region
+   u*_2 = 56457/317975   via: seam16 | seam4 | seam12 | region
+   u*_3 = 56457/394289   via: seam17 | seam16 | seam4 | seam12 | region
+   u*_4 = 319923/4133675   via: seam10 | seam16 | seam4 | seam12 | region
+   u*_5 = 81/1975   via: seam12 | region
+   u*_6 = 1/25   via: region
+   last exit (33) * u*_3 = 1863081/394289
+== tightness at u*: 6 tight, 45 slack, 0 VIOLATED (must be 0)
+   TIGHT(strict) seam4 up (rho6,5)->(rho2,1)
+   TIGHT(strict) seam10 up (rho3,2)->(rho5,5)
+   TIGHT(strict) seam12 up (rho7,10)->(rho6,10)
+   TIGHT(strict) seam16 up (rho2,2)->(rho3,3)
+   TIGHT(strict) seam17 up (rho3,3)->(rho4,4)
+   TIGHT(nonstrict) region u_6<=1/25 (rho_7>=25)
+   smallest positive slack: 38016/285859525
+== tight-edge arborescence reachable from pin: 1 of 7 nodes (NOT spanning)
+== cycles: 1304 simple; violations: 0; min product: 435625/434217
+== least-product chains for u_3 achieving 56457/394289: 1
+    * seam17 | seam16 | seam4 | seam12 | region
+----
+== tightness at u*: 6 tight, 49 slack, 0 VIOLATED (must be 0)
+== tight-edge arborescence reachable from pin: 7 of 7 nodes (SPANNING TREE)
+== least-product chains for u_6 achieving 33/833: 1
+== tightness at u*: 6 tight, 45 slack, 0 VIOLATED (must be 0)
+== tight-edge arborescence reachable from pin: 7 of 7 nodes (SPANNING TREE)
+== least-product chains for u_4 achieving 33/329: 1
+== tightness at u*: 6 tight, 45 slack, 0 VIOLATED (must be 0)
+== tight-edge arborescence reachable from pin: 7 of 7 nodes (SPANNING TREE)
+== least-product chains for u_3 achieving 56457/394289: 1
