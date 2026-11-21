@@ -19625,3 +19625,5 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **Next step (rule 9):** the schema-2 window-type rows (the 471,529 R₀<1 roots + [29,41)'s re-dump — the same compressed-table form applies to WindowCert); the bulk spot-check completion (background). Existence step named (rule 1): none made.
 
 **Consequence (M7) [L per the agent's compiles; spot-check in flight]:** Track B now has THREE schema layers landed (4, 6, 1) — the bands premise's data layer is mechanically scalable to any band given the re-dump instruments, with the schema-2 window layer the next rung.
+
+**E918 verification completion (2026-11-22 01:22):** the two background spot-checks LANDED — `BandRepOffGrand` exit 0 (23 s), `BandReplayBulkCompressed` exit 0 (1,399 s under concurrent load), 0 errors, 0 sorryAx, no nonstandard axioms — E918's [L] claims are independently confirmed; the [L per the agent's compiles; spot-check in flight] tag is discharged.
