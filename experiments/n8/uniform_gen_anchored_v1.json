@@ -1,0 +1,25 @@
+{
+ "stats": {
+  "rejok": 19,
+  "rejtot": 19,
+  "prodok": 145,
+  "prodtot": 145,
+  "irrok": 9,
+  "irrtot": 9,
+  "ncyc": 145,
+  "nshape": 58,
+  "kinds": {
+   "ALL": 60,
+   "FINITE": 6
+  },
+  "occ": {
+   "const": 53,
+   "k25": 2,
+   "k15": 5,
+   "k17": 3
+  },
+  "n_theorems": 63,
+  "n_shapes": 58,
+  "const_shapes": 53
+ }
+}
