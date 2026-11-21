@@ -1,0 +1,25 @@
+1,2,3,5,7,10,12	12	0.2s [T 32/32]	0.1s	86s	PASS	144/144 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,3,5,6,8,10	13	0.1s [T 32/32]	0.0s	100s	PASS	139/139 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,4,4,6,8,13	15	0.1s [T 32/32]	0.0s	97s	PASS	168/168 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,4,5,6,8	17	0.1s [T 32/32]	0.1s	97s	PASS	194/194 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,3,5,7,8,13	19	0.1s [T 32/32]	0.1s	128s	PASS	217/217 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,4,5,7,9,11	20	0.1s [T 32/32]	0.1s	155s	PASS	265/265 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,4,5,5,7	20	0.1s [T 32/32]	0.1s	1849s	PASS	217/217 axioms all in {propext, Classical.choice, Quot.sound}
+1,3,6,8,11,12,14	21	0.1s [T 32/32]	0.1s	187s wall/224s cpu	PASS	277/277 axioms all in {propext, Classical.choice, Quot.sound}
+1,4,4,5,7,9,11	22	0.2s [T 32/32]	0.1s	309s wall/300s cpu	PASS	267/267 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,4,6,7,9	22	0.1s [T 32/32]	0.0s	151s wall/186s cpu	PASS	230/230 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,4,6,6,7	23	0.2s [T 32/32]	0.1s	2847s wall/283s cpu	PASS	258/258 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=283s)
+1,1,3,4,6,7,11	23	0.1s [T 32/32]	0.0s	1163s wall/180s cpu	PASS	284/284 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=179s)
+1,3,4,7,9,11,17	23	0.1s [T 32/32]	0.1s	708s wall/237s cpu	PASS	243/243 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=237s)
+1,2,4,6,6,8,9	23	0.2s [T 32/32]	0.1s	229s wall/225s cpu	PASS	254/254 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,5,6,8,13	23	0.1s [T 32/32]	0.1s	172s wall/213s cpu	PASS	290/290 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,6,8,10,12,14	24	0.1s [T 32/32]	0.1s	266s wall/275s cpu	PASS	288/288 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,4,5,7,9	24	0.2s [T 32/32]	0.1s	298s wall/266s cpu	PASS	254/254 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,4,6,8,9,13	24	0.2s [T 32/32]	0.1s	288s wall/279s cpu	PASS	287/287 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,4,4,5,6,7	25	0.2s [T 32/32]	0.1s	367s wall/319s cpu	PASS	275/275 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,5,7,10,12,14	25	0.1s [T 32/32]	0.1s	174s wall/215s cpu	PASS	288/288 axioms all in {propext, Classical.choice, Quot.sound}
+1,1,3,5,6,7,12	25	0.1s [T 32/32]	0.1s	197s wall/246s cpu	PASS	320/320 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,3,4,6,8,15	26	0.1s [T 32/32]	0.1s	332s wall/250s cpu	PASS	267/267 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,3,4,5,6,16	26	0.2s [T 32/32]	0.1s	208s wall/240s cpu	PASS	339/339 axioms all in {propext, Classical.choice, Quot.sound}
+1,2,3,4,6,6,7	26	0.2s [T 32/32]	0.1s	169s wall/202s cpu	PASS	264/264 axioms all in {propext, Classical.choice, Quot.sound}
+1,3,10,12,13,15,16	27	0.2s [T 32/32]	0.1s	241s wall/276s cpu	PASS	363/363 axioms all in {propext, Classical.choice, Quot.sound}
