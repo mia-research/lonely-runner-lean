@@ -134,7 +134,12 @@ theorem lap0_not_live {a b r : ℝ} (hlive : CompLive a b r 0) (hb1 : (1:ℝ) �
     (hr : (25:ℝ) ≤ r) : False := by
   obtain ⟨_, h2⟩ := hlive
   simp at h2
-  have hle : b⁻¹ ≤ 1 := inv_le_one hb1
+  have hb0 : (0:ℝ) < b := by linarith
+  have hbb : b * b⁻¹ = 1 := mul_inv_cancel₀ (by linarith)
+  have hle : b⁻¹ ≤ (1:ℝ) := by
+    have h1 : (1:ℝ) * b⁻¹ ≤ b * b⁻¹ :=
+      mul_le_mul_of_nonneg_right hb1 (inv_nonneg.2 (le_of_lt hb0))
+    linarith
   linarith
 
 /-- **datasheet_D1** (component-level two-line, first line): `9a ≤ 7b` -- no band of
@@ -146,7 +151,9 @@ theorem datasheet_D1 (a b : ℝ) (ha1 : (1:ℝ) ≤ a) (hab : a ≤ b) (hD1 : (9
   have ha0 : 0 < a := by linarith
   have hb0 : 0 < b := by linarith
   rcases Nat.lt_or_ge j 1 with hj0 | hj1
-  · exact lap0_not_live hlive (by linarith) hr1
+  · have hjz : j = 0 := by omega
+    subst hjz
+    exact lap0_not_live hlive (by linarith) hr1
   · exfalso
     have hnb := band_nonempty_of_live ha0 hb0 hlive
     have hscal : (9:ℝ) * ((8 * (j:ℝ) - 1) * b)
@@ -174,22 +181,25 @@ theorem datasheet_D2 (a b : ℝ) (J : ℕ) (ha1 : (1:ℝ) ≤ a) (hab : a < b)
   have hb0 : 0 < b := by linarith
   have hba : 0 < b - a := by linarith
   rcases Nat.lt_or_ge j 1 with hj0 | hj1
-  · exact lap0_not_live hlive (by linarith) hr1
+  · have hjz : j = 0 := by omega
+    subst hjz
+    exact lap0_not_live hlive (by linarith) hr1
   · exfalso
     have hnb := band_nonempty_of_live ha0 hb0 hlive
     have hstep : (8:ℝ) * (j:ℝ) * (b - a) < a + b := by linarith [hnb]
     have hkey : (8:ℝ) * (b - a) * (j:ℝ) < (8:ℝ) * (b - a) * ((J:ℝ) + 1) := by
       linarith [hstep, hJ1]
-    have hjltJ : (j:ℝ) < (J:ℝ) + 1 := lt_of_mul_lt_mul_left hkey (le_of_lt hba)
+    have hjltJ : (j:ℝ) < (J:ℝ) + 1 :=
+      lt_of_mul_lt_mul_left hkey (by linarith : (0:ℝ) ≤ 8 * (b - a))
     have hjJ : j ≤ J := by
       have h : j < J + 1 := by exact_mod_cast hjltJ
       omega
-    have hp1 : (0:ℝ) ≤ 8 * (j:ℝ) + 1 := by linarith
     have hc : (8:ℝ) * (j:ℝ) + 1 ≤ 8 * (J:ℝ) + 1 := by
       exact_mod_cast (by omega : 8 * j + 1 ≤ 8 * J + 1)
-    have htop1 : r < (8 * (j:ℝ) + 1) / b := hlive.2
-    have htop2 : (8 * (j:ℝ) + 1) / b ≤ (8 * (J:ℝ) + 1) / b := (div_le_div_right hb0).mpr hc
-    have htop3 : (8 * (J:ℝ) + 1) / b ≤ 25 := (div_le_iff₀ hb0).mpr hJ2
+    have htop1 : r * b < 8 * (j:ℝ) + 1 := (lt_div_iff₀ hb0).mp hlive.2
+    have htop3 : r * b < 25 * b := by linarith [htop1, hc, hJ2]
+    have htop : r < 25 :=
+      lt_of_mul_lt_mul_left (show b * r < b * 25 by linarith) (le_of_lt hb0)
     linarith
 
 /-! ## The chamber-window-uniform consumption shape (S1 scope)
@@ -249,7 +259,7 @@ certifying component: band 1 is already empty at `q_min` and band-nonempty is mo
 theorem datasheet_D1_chamber (kL kR : ℕ) (rL rR Llo Rhi r : ℝ)
     (hL1 : Llo ≤ rL) (hR2 : rR ≤ Rhi)
     (hposM : 0 < 8 * (kL:ℝ) + 1) (hposX : 0 < Llo * (8 * (kR:ℝ) - 1))
-    (hkr : 1 ≤ 8 * (kR:ℝ) - 1) (hrhi : Rhi ≤ 17) (hrhi0 : 0 ≤ Rhi)
+    (hkr : 1 ≤ 8 * (kR:ℝ) - 1) (hrhi : Rhi ≤ 17)
     (hD1 : (9:ℝ) * (Rhi * (8 * (kL:ℝ) + 1)) ≤ 7 * (Llo * (8 * (kR:ℝ) - 1))) :
     RaceColDead kL kR rL rR := by
   intro r hr j hlive
@@ -259,11 +269,10 @@ theorem datasheet_D1_chamber (kL kR : ℕ) (rL rR Llo Rhi r : ℝ)
     subst hjz
     obtain ⟨_, h2⟩ := hlive
     simp at h2
-    have hRhiN : Rhi ≤ 17 * (8 * (kR:ℝ) - 1) := by nlinarith [hrhi, hkr, hrhi0]
-    have hup2 : rR / (8 * (kR:ℝ) - 1) ≤ Rhi / (8 * (kR:ℝ) - 1) :=
-      (div_le_div_right (by linarith)).mpr hR2
-    have hRhi17 : Rhi / (8 * (kR:ℝ) - 1) ≤ 17 := (div_le_iff₀ (by linarith)).mpr hRhiN
-    linarith
+    have h2' : r * (8 * (kR:ℝ) - 1) < rR := (lt_div_iff₀ (by linarith)).mp h2
+    have hrN : (25:ℝ) * (8 * (kR:ℝ) - 1) ≤ r * (8 * (kR:ℝ) - 1) := by
+      nlinarith [hr, hkr]
+    linarith [h2', hR2, hrhi, hkr, hr]
   · exfalso
     have hposX' : (0:ℝ) < Llo * (8 * (kR:ℝ) - 1) := hposX
     have hs := race_sandwich hj1 hL1 hR2 hposM (by linarith) hlive
@@ -324,11 +333,10 @@ theorem datasheet_D2_chamber (kL kR : ℕ) (rL rR Llo Rhi r : ℝ) (Jm : ℕ)
     subst hjz
     obtain ⟨_, h2⟩ := hlive
     simp at h2
-    have hRhiN : Rhi ≤ 17 * (8 * (kR:ℝ) - 1) := by nlinarith [hrhi, hkr, hrhi0]
-    have hup2 : rR / (8 * (kR:ℝ) - 1) ≤ Rhi / (8 * (kR:ℝ) - 1) :=
-      (div_le_div_right (by linarith)).mpr hR2
-    have hRhi17 : Rhi / (8 * (kR:ℝ) - 1) ≤ 17 := (div_le_iff₀ (by linarith)).mpr hRhiN
-    linarith
+    have h2' : r * (8 * (kR:ℝ) - 1) < rR := (lt_div_iff₀ (by linarith)).mp h2
+    have hrN : (25:ℝ) * (8 * (kR:ℝ) - 1) ≤ r * (8 * (kR:ℝ) - 1) := by
+      nlinarith [hr, hkr]
+    linarith [h2', hR2, hrhi, hkr, hr]
   · rcases Nat.lt_or_ge j (Jm + 1) with hlow | hhigh
     · exfalso
       have hp1 : (0:ℝ) ≤ 8 * (j:ℝ) + 1 := by linarith
@@ -337,15 +345,16 @@ theorem datasheet_D2_chamber (kL kR : ℕ) (rL rR Llo Rhi r : ℝ) (Jm : ℕ)
       have ht1 : (8 * (j:ℝ) + 1) * rR ≤ (8 * (j:ℝ) + 1) * Rhi :=
         mul_le_mul_of_nonneg_left hR2 hp1
       have ht2 : (8 * (j:ℝ) + 1) * Rhi ≤ (8 * (Jm:ℝ) + 1) * Rhi :=
-        mul_le_mul_of_nonneg_right hc (le_of_lt hrhi0)
-      have htop : r < (25:ℝ) := by
-        have h1 : r < (8 * (j:ℝ) + 1) * rR / (8 * (kR:ℝ) - 1) := hlive.2
-        have h2 : (8 * (j:ℝ) + 1) * rR / (8 * (kR:ℝ) - 1)
-            ≤ (8 * (Jm:ℝ) + 1) * Rhi / (8 * (kR:ℝ) - 1) :=
-          (div_le_div_right (by linarith)).mpr (by linarith [ht1, ht2])
-        have h3 : (8 * (Jm:ℝ) + 1) * Rhi / (8 * (kR:ℝ) - 1) ≤ 25 :=
-          (div_le_iff₀ (by linarith)).mpr hD2
-        linarith
+        mul_le_mul_of_nonneg_right hc hrhi0
+      have hstep2 : r * (8 * (kR:ℝ) - 1) < (8 * (j:ℝ) + 1) * rR :=
+        (lt_div_iff₀ (by linarith)).mp hlive.2
+      have h5 : (8 * (kR:ℝ) - 1) * r < (8 * (kR:ℝ) - 1) * 25 := by
+        calc (8 * (kR:ℝ) - 1) * r = r * (8 * (kR:ℝ) - 1) := by ring
+        _ < (8 * (j:ℝ) + 1) * rR := hstep2
+        _ ≤ (8 * (j:ℝ) + 1) * Rhi := ht1
+        _ ≤ (8 * (Jm:ℝ) + 1) * Rhi := ht2
+        _ ≤ (8 * (kR:ℝ) - 1) * 25 := by linarith [hD2]
+      have htop : r < 25 := lt_of_mul_lt_mul_left h5 (le_of_lt (by linarith))
       linarith [hr]
     · exfalso
       have hs := race_sandwich hj1 hL1 hR2 hposM (by linarith) hlive
@@ -369,13 +378,13 @@ theorem datasheet_E894_start (kR : ℕ) (rR Rhi : ℝ)
     rw [le_div_iff₀ hpos]
     have h1 : (33:ℝ) * rR ≤ (31:ℝ) * (8 * (kR:ℝ) - 1) := by nlinarith [hline, hR2]
     nlinarith [h1]
-  have hup' : r < (8 * (j:ℝ) + 1) * rR / (8 * (kR:ℝ) - 1) := by
-    obtain ⟨hup, _⟩ := hlive
+  have hup' : r < (8 * (j:ℝ) + 1) / ((8 * (kR:ℝ) - 1) / rR) := by
+    obtain ⟨_, hup⟩ := hlive
     have hid : (8 * (j:ℝ) + 1) / ((8 * (kR:ℝ) - 1) / rR)
         = (8 * (j:ℝ) + 1) * rR / (8 * (kR:ℝ) - 1) := by field_simp
     rw [hid]
     exact hup
-  obtain ⟨_, hlow⟩ := hlive
+  obtain ⟨hlow, _⟩ := hlive
   exact Fresh.SliverLines.sliverStart_dead ((8 * (kR:ℝ) - 1) / rR) r hb hr j ⟨hup', hlow⟩
 
 theorem datasheet_E894_end (kL : ℕ) (rL Llo Lhi : ℝ)
@@ -391,7 +400,7 @@ theorem datasheet_E894_end (kL : ℕ) (rL Llo Lhi : ℝ)
     rw [div_le_iff₀ hpos]
     have h1 : (1225:ℝ) * Llo ≤ (1225:ℝ) * rL := by nlinarith [hL1]
     nlinarith [hline, h1]
-  have hlow' : (8 * (j:ℝ) - 1) * rL / (8 * (kL:ℝ) + 1) ≤ r := by
+  have hlow' : (8 * (j:ℝ) - 1) / ((8 * (kL:ℝ) + 1) / rL) ≤ r := by
     obtain ⟨hlow, _⟩ := hlive
     have hid : (8 * (j:ℝ) - 1) / ((8 * (kL:ℝ) + 1) / rL)
         = (8 * (j:ℝ) - 1) * rL / (8 * (kL:ℝ) + 1) := by field_simp
@@ -457,7 +466,12 @@ def main():
     axioms_inst = ''
     if n_emit > 0:
         first = ins[0]['idx']; last = ins[n_emit - 1]['idx']
-        axioms_inst = '#print axioms chds_%d\n#print axioms chds_%d' % (first, last)
+        mids = sorted(set([ins[n_emit // 4]['idx'], ins[n_emit // 2]['idx'],
+                           ins[3 * n_emit // 4]['idx']]))
+        lines = ['#print axioms chds_%d' % first]
+        lines += ['#print axioms chds_%d' % m for m in mids]
+        lines += ['#print axioms chds_%d' % last]
+        axioms_inst = '\n'.join(lines)
     src = ''.join(parts) + TAIL.format(axioms_inst=axioms_inst)
     open(LEAN, 'w').write(src)
     print('wrote %s: %d instances of %d (D1 %d / D2 %d)'
