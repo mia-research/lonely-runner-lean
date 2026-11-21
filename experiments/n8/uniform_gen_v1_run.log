@@ -1,0 +1,16 @@
+== uniform_gen_v1: rebuild + dump the uniform self-family shapes ==
+replay validation: rej 1219/1219, prod 13741/13741, irred-corr 9/9
+self cycles 13596; shapes 1107
+uniform shapes: 907; patterns total 1651 (uniform-shape patterns 1084)
+pattern kinds over ALL shapes: {'ALL': 1220, 'SEGMENTS': 271, 'FINITE': 155, 'ZERO': 5}
+(kind, deg) over uniform shapes: {('ALL', 0): 562, ('ALL', 2): 197, ('ALL', 1): 204, ('SEGMENTS', 1): 71, ('ALL', 5): 21, ('ALL', 3): 164, ('ALL', 4): 71, ('FINITE', 1): 45, ('ZERO', 0): 5, ('FINITE', 2): 44, ('SEGMENTS', 5): 3, ('FINITE', 4): 24, ('SEGMENTS', 3): 87, ('SEGMENTS', 4): 26, ('SEGMENTS', 2): 84, ('FINITE', 3): 36, ('FINITE', 5): 6, ('ALL', 6): 1}
+certificate cases: {'real:mono': 1208, 'real:neg_FAIL': 272, 'real:leadneg_FAIL': 152, 'real:zero': 5, 'real:quad_vertex': 5, 'int:intmono': 1, 'real:lukas': 6, 'real:budget_FAIL': 1, 'real:nocert_FAIL': 1}
+ZERO-kind patterns: 5
+emitted Fresh/UniformShapes_R1.lean: 41 theorems
+emitted Fresh/UniformShapes_R2.lean: 229 theorems
+emitted Fresh/UniformShapes_R3.lean: 281 theorems
+emitted Fresh/UniformShapes_R4.lean: 277 theorems
+emitted Fresh/UniformShapes_R5.lean: 180 theorems
+emitted Fresh/UniformShapes_R6.lean: 76 theorems
+total emitted theorems: 1084 over 907 uniform shapes
+wrote uniform_gen_v1.json
