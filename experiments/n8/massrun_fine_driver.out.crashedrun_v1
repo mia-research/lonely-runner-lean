@@ -1,0 +1,637 @@
+boxes given=200 done(PASS)=25 todo=200
+1_1_4_6_7_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_7_9_12
+1_2_4_6_8_9_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_9_14
+1_4_5_9_11_13_15 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_5_9_11_13_15
+1_2_6_7_8_10_11 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_6_7_8_10_11
+1_2_4_6_13_15_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_13_15_17
+1_2_4_5_6_9_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_6_9_14
+1_2_6_7_8_9_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_6_7_8_9_11
+1_1_4_5_6_8_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_8_11
+1_3_6_8_10_11_14 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_8_10_11_14
+1_3_6_7_8_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_8_11_14
+1_3_4_7_11_13_15 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_7_11_13_15
+1_1_4_5_6_8_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_8_13
+1_1_4_5_6_13_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_13_15
+1_2_4_6_8_9_15 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_9_15
+1_4_5_7_9_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_5_7_9_11_14
+1_2_5_6_8_11_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_11_13
+1_2_4_6_7_11_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_11_13
+1_2_5_7_8_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_8_12_14
+1_2_3_5_7_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_9_12
+1_2_4_6_8_10_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_10_14
+1_2_5_7_9_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_9_10_12
+1_2_4_5_7_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_10_12
+1_2_5_6_8_11_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_11_12
+1_2_5_7_8_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_8_10_12
+1_1_4_6_7_9_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_7_9_10
+1_1_5_6_8_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_5_6_8_11_14
+1_2_3_5_6_7_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_6_7_12
+1_2_5_7_10_12_13 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_10_12_13
+1_2_5_7_10_12_15 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_10_12_15
+1_2_5_7_10_12_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_10_12_17
+1_3_5_8_10_13_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_8_10_13_17
+1_4_7_9_11_13_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_7_9_11_13_17
+1_2_3_5_7_16_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_16_17
+1_2_4_5_5_7_9 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_5_7_9
+1_2_5_6_7_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_7_10_12
+1_2_5_6_8_10_11 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_10_11
+1_2_5_6_8_10_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_10_13
+1_1_4_5_6_8_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_8_14
+1_1_4_6_7_10_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_7_10_13
+1_2_5_6_8_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_11_14
+1_3_4_4_6_8_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_4_6_8_14
+1_1_4_5_7_11_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_7_11_15
+1_2_5_7_8_9_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_8_9_11
+1_3_4_4_6_8_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_4_6_8_13
+1_3_5_7_8_10_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_7_8_10_16
+1_1_4_6_6_7_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_6_7_10
+1_3_6_7_8_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_8_10_12
+1_2_5_7_9_11_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_9_11_12
+1_2_6_8_9_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_6_8_9_11_14
+1_2_4_6_7_11_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_11_14
+1_2_5_6_8_13_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_13_14
+1_1_4_6_7_8_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_7_8_10
+1_2_3_5_7_8_17 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_8_17
+1_2_4_6_8_11_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_11_17
+1_2_5_6_7_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_7_12_14
+1_2_5_6_8_10_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_10_14
+1_2_6_8_9_10_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_6_8_9_10_14
+1_4_5_5_7_9_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_5_5_7_9_11
+1_3_6_8_11_14_14 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_8_11_14_14
+1_2_4_6_6_8_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_6_8_14
+1_2_4_6_13_14_16 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_13_14_16
+1_2_5_6_8_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_12_14
+1_3_6_7_8_10_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_8_10_14
+1_2_5_6_8_9_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_9_10
+1_2_4_4_6_6_7 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_4_6_6_7
+1_2_5_7_9_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_9_12_14
+1_2_3_5_6_8_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_6_8_12
+1_2_3_5_7_8_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_8_12
+1_2_4_6_7_9_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_9_11
+1_1_4_5_6_14_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_14_16
+1_3_6_8_9_10_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_8_9_10_12
+1_4_8_9_11_12_13 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_8_9_11_12_13
+1_1_4_5_7_8_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_7_8_12
+1_2_4_5_7_9_17 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_9_17
+1_2_4_6_7_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_9_12
+1_1_5_6_7_8_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_5_6_7_8_10
+1_2_5_7_9_11_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_9_11_16
+1_1_4_5_7_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_7_9_12
+1_2_4_6_6_7_9 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_6_7_9
+1_3_6_7_8_10_11 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_8_10_11
+1_3_5_7_10_12_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_7_10_12_17
+1_1_4_5_7_12_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_7_12_15
+1_2_5_7_8_11_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_8_11_12
+1_3_6_8_11_13_14 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_8_11_13_14
+1_4_6_6_8_9_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_6_8_9_11
+1_4_6_9_12_14_16 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_9_12_14_16
+1_2_4_6_7_9_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_9_13
+1_2_4_6_13_15_16 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_13_15_16
+1_2_4_4_6_7_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_4_6_7_11
+1_3_6_9_11_14_16 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_9_11_14_16
+1_5_8_10_13_15_17 GEN-FAIL ng2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_5_8_10_13_15_17
+1_2_4_6_7_11_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_11_17
+1_2_4_6_8_10_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_10_13
+1_3_3_5_6_8_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_3_5_6_8_10
+1_2_5_6_7_12_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_7_12_15
+1_3_6_7_9_12_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_9_12_16
+1_2_4_5_7_12_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_12_13
+1_2_3_4_6_7_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_4_6_7_12
+1_2_3_5_6_8_17 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_6_8_17
+1_2_3_5_7_8_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_8_11
+1_2_3_4_5_7_16 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_4_5_7_16
+1_3_5_8_13_15_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_8_13_15_17
+1_3_6_9_12_14_16 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_9_12_14_16
+1_1_5_6_7_8_11 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_5_6_7_8_11
+1_2_3_5_7_12_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_12_16
+1_2_4_5_6_8_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_6_8_13
+1_2_3_5_7_11_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_5_7_11_16
+1_3_4_6_8_9_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_6_8_9_14
+1_3_4_6_9_13_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_6_9_13_14
+1_1_4_5_6_8_15 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_8_15
+1_2_4_6_14_15_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_14_15_17
+1_2_5_6_8_10_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_10_17
+1_2_4_5_6_8_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_6_8_10
+1_2_4_5_6_13_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_6_13_15
+1_2_6_8_9_10_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_6_8_9_10_17
+1_1_5_7_8_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_5_7_8_9_12
+1_2_5_6_8_11_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_11_15
+1_4_6_6_8_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_6_8_9_12
+1_1_4_6_7_13_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_6_7_13_15
+1_3_5_12_14_15_16 GEN-FAIL ng2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_12_14_15_16
+1_3_6_6_7_8_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_6_7_8_14
+1_4_4_6_8_9_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_4_6_8_9_13
+1_2_4_6_7_7_9 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_7_7_9
+1_3_5_7_8_13_16 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_7_8_13_16
+1_2_5_6_7_12_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_7_12_13
+1_4_5_11_13_15_15 GEN-FAIL ng2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_5_11_13_15_15
+1_4_6_8_9_11_12 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_8_9_11_12
+1_4_9_11_12_13_15 GEN-FAIL ng2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_9_11_12_13_15
+1_2_4_6_6_7_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_6_7_14
+1_6_8_11_12_14_14 GEN-FAIL ng2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_6_8_11_12_14_14
+1_2_4_5_5_7_15 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_5_7_15
+1_2_5_7_8_11_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_8_11_15
+1_2_4_4_5_6_8 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_4_5_6_8
+1_2_4_5_7_9_10 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_9_10
+1_1_4_5_6_14_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_4_5_6_14_15
+1_2_4_5_5_6_8 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_5_6_8
+1_2_5_6_8_14_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_6_8_14_15
+1_2_4_6_8_14_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_14_15
+1_2_5_7_12_13_15 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_5_7_12_13_15
+1_3_5_8_11_13_15 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_5_8_11_13_15
+1_4_11_13_14_15_17 GEN-FAIL g2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_11_13_14_15_17
+1_2_3_4_6_7_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_4_6_7_13
+1_3_4_5_8_11_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_5_8_11_13
+1_2_4_6_8_10_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_6_8_10_15
+1_3_3_4_6_8_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_3_4_6_8_13
+1_1_5_6_7_8_9 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_1_5_6_7_8_9
+1_2_4_5_7_12_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_12_15
+1_3_4_6_13_15_17 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_4_6_13_15_17
+1_4_6_7_9_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_7_9_12_14
+1_2_4_5_7_12_17 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_7_12_17
+1_3_3_5_6_8_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_3_5_6_8_12
+1_6_8_9_10_10_13 GEN-FAIL ung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_6_8_9_10_10_13
+1_2_4_5_6_11_15 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_4_5_6_11_15
+1_3_6_7_8_9_12 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_8_9_12
+1_3_6_7_9_12_14 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_6_7_9_12_14
+1_4_5_8_9_11_13 GEN-FAIL rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_5_8_9_11_13
+1_3_3_4_6_8_14 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_3_3_4_6_8_14
+1_4_6_6_8_8_9 GEN-FAIL m4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_4_6_6_8_8_9
+1_2_3_4_5_8_13 GEN-FAIL 4rung2_gen_v1.py", line 1180, in main
+    assert os.path.exists(utcf), 'missing reachutc dump for %s' % boxname
+           ~~~~~~~~~~~~~~^^^^^^
+AssertionError: missing reachutc dump for 1_2_3_4_5_8_13
