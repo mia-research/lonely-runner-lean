@@ -1,0 +1,34 @@
+{
+ "box": [
+  1,
+  1,
+  3,
+  4,
+  7,
+  11,
+  14
+ ],
+ "nstart": 1,
+ "roots": [
+  0
+ ],
+ "nodes": [
+  {
+   "id": 0,
+   "parent": null,
+   "kind": "reach",
+   "step": null,
+   "depth": 1,
+   "a": 4,
+   "Aex": "9/1",
+   "P": "9/7",
+   "children": [],
+   "seen": [
+    [
+     4,
+     "9/1"
+    ]
+   ]
+  }
+ ]
+}

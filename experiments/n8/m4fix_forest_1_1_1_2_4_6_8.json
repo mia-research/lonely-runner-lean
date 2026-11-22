@@ -1,0 +1,61 @@
+{
+ "box": [
+  1,
+  1,
+  1,
+  2,
+  4,
+  6,
+  8
+ ],
+ "nstart": 1,
+ "roots": [
+  0
+ ],
+ "nodes": [
+  {
+   "id": 0,
+   "parent": null,
+   "kind": "internal",
+   "step": null,
+   "depth": 1,
+   "a": 6,
+   "Aex": "9/1",
+   "P": "6/5",
+   "children": [
+    1
+   ],
+   "seen": [
+    [
+     6,
+     "9/1"
+    ]
+   ]
+  },
+  {
+   "id": 1,
+   "parent": 0,
+   "kind": "deadend",
+   "step": [
+    5,
+    7,
+    9
+   ],
+   "depth": 2,
+   "a": 5,
+   "Aex": "9/1",
+   "P": "18/11",
+   "children": [],
+   "seen": [
+    [
+     5,
+     "9/1"
+    ],
+    [
+     6,
+     "9/1"
+    ]
+   ]
+  }
+ ]
+}
