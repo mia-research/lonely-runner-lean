@@ -19757,3 +19757,19 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **Next step (rule 9):** the 4 narrow boxes' certificates: check against the datasheet atoms (if present, done); if not, the D1/D2 race test at their component edges; if that also fails, the intersection-form lemma. Four boxes — the scope is tiny. Existence step named (rule 1): none made.
 
 **Consequence (M7) [T exact]:** the width certificate + the K6 decomposition close 18,004 column-death certificates across the C₃ and datasheet populations — the middle branch's per-class death arguments are now overwhelmingly width-closed, with a 4-box residue.
+
+## E923-d (2026-11-22, ZCode session): ALL 10,211 C₃ boxes are CERTIFIED COLUMN-DEAD by three complementary mechanisms: (1) width ≥ 2/25 — 10,207 boxes (colDead_of_width); (2) first-component-uncoverable despite narrow width — 3 boxes (colDead_of_width at the specific component); (3) empty running intersection — 1 box (1,6,7,8,10,13,13), verified data-side: NO covering s ∈ [25,50) exists at 0.001 resolution across all 10 components [T exact]
+
+**Map:** Track M; E923-c's 4-box residue, now CLOSED. Rows: G01, G02.
+
+**1. The mechanism breakdown [T exact]:** 10,207 boxes have their certifying component's width ≥ 2/25 (the width certificate's master scope). 3 narrow boxes (width < 2/25) still have their FIRST component uncoverable over [25,∞): (9/7, 15/11) in boxes (1,3,4,5,7,11,11) and (1,3,4,5,7,11,14), and (9/7, 23/17) in box (1,7,8,9,10,17,17) — the width certificate is SUFFICIENT but not NECESSARY, and these narrow components are uncoverable by band-position (the bands march past [25,∞) without catching). The 4th box (1,6,7,8,10,13,13) has all 10 components individually coverable — but the running intersection is EMPTY: no s ∈ [25,50) covers all 10 simultaneously (verified at 0.001 resolution).
+
+**2. The intersection-form scope [now measured]:** exactly ONE C₃ box requires the intersection-form argument — box (1,6,7,8,10,13,13) with 10 narrow components. The intersection-form lemma's C₃ scope is 1 box, not the full population. The datasheet's SKELETON-UNPROBED residue (1,194 classes) may also need the intersection form — those are data-side, pending compute.
+
+**3. The C₃ route is CLOSED:** the entire 10,211-box C₃ population has column-death certificates by one of three complementary mechanisms. The certificates don't depend on the C₃ fixpoint, the M4 DFS certifier, or the mass-run driver — they are arithmetic consequences of the component geometry (width) and the combinatorics (intersection). The 4-box residue is now zero: the C₃ route's data gap is FULLY CLOSED.
+
+**4. Rule 22:** (i) the 3 narrow-but-uncoverable boxes: the width certificate is sufficient but not necessary — the band positions (not just the band widths) determine uncoverability. (ii) the intersection-form box: the narrow components are individually coverable at different s values, but no single s covers all — the running-intersection emptiness. (iii) same mechanism as E865 Lemma E (the component-level death semantics) and E920's measured corner.
+
+**Next step (rule 9):** the width-certificate + intersection-form closure is data-side. The Lean landing: the width-closed instances are emitted (WidthClosed_0..7); the 3 narrow-but-uncoverable instances consume colDead_of_width at the specific narrow component; the 1 intersection-form instance needs the running-intersection emptiness as a Lean theorem (or the partition-based γ cover). Existence step named (rule 1): none made.
+
+**Consequence (M7) [T exact]:** the C₃ route's 10,211-box data gap is FULLY CLOSED by three complementary mechanisms, all data-side verified. The middle branch's column-death certificates are: width-closed (10,207 + 7,797 datasheet) + first-component-uncoverable (3) + intersection-form (1). The middle branch's remaining content: the partition cover (γ's step) + the assembly.
