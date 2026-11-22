@@ -19659,3 +19659,19 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **5. Next step (rule 9):** the width-certificate data pass: per datasheet class, the width(A,B) vs 2/25 check (one script, exact Fractions — the classes splitting into width-closed vs race-needed); the Lean emission for the width-closed classes (per-class instances consuming colDead50_of_width + the class's width literal — the BandCertDataExt pattern). Existence step named (rule 1): none made.
 
 **Consequence (M7) [L]:** the width certificate is the master column-death lemma — closed-form, column-universal ([25,∞) at any S), two-line proof — and the middle branch's per-class death arguments reduce to width checks for all wide-component classes.
+
+## E922 (2026-11-22, ZCode session): the width-data pass over the 7,797 chamber classes — ALL 7,797 are WIDTH-CLOSED (recorded component width ≥ 2/25), zero race-needed, zero ext-50-only — the middle branch's per-class death arguments are ENTIRELY width-certificate territory: colDead50_of_width gives the closed-form certificate for every class with no probe-evidence dependency and no race machinery, and the [50,∞) extension applies to all 7,797 (width ≥ 2/25 ≥ 1/25) — the review's column-extension item is fully covered [T exact, widthpass_v1.py, exact Fractions]
+
+**Map:** Track T/V; the width certificate (E921) applied to the datasheet's class population. Rows: G01, G02.
+
+**1. The pass [T exact]:** per class, width(A,B) = B − A vs 2/25: ALL 7,797 classes have width ≥ 2/25 — width-closed. Zero classes in the ext-50 band (1/25 ≤ w < 2/25) and zero race-needed (w < 1/25). The intersection-form lemma's scope for the datasheet classes: ZERO — the race machinery and the running-intersection argument are not needed for any of the 7,797 per-class certificates.
+
+**2. The emission:** `widthemiss_gen_v1.py` generated `Fresh/WidthClosed_0..7.lean` (8 chunk files, 1,000 classes each): per class, `wfact_k : (2:ℚ)/25 ≤ B_k − A_k := by norm_num` — the exact ℚ width comparison as a one-line theorem. Compile in progress (chunks 0-1 first). The composition: `colDead50_of_width A B hA hB wfact_k` gives the class's column death in closed form.
+
+**3. The consequence for the middle branch:** the datasheet's per-class certificates have a NEW, stronger proof layer: the width-closed route (colDead50_of_width + the width fact) is independent of the probe's grid-sampling evidence — the certificates are arithmetic consequences of the component geometry (width ≥ 2/25 ⟹ uncoverable), not inductive inferences from sampled cases. The 1,194 SKELETON-UNPROBED classes are covered by the same width facts (their recorded components are equally wide). The middle branch's remaining proof content: the partition step (γ's cover) + the assembly.
+
+**4. Rule 22:** no exceptions — the width pass is a uniform arithmetic check over all 7,797 classes with zero failures.
+
+**Next step (rule 9):** the width-chunk compiles; then the per-walk hsub_k data (Track C's per-arrangement half); the upstream-cycle instrument. Existence step named (rule 1): none made.
+
+**Consequence (M7) [T exact; L in flight]:** the middle branch's per-class certificates are width-closed universally — the death arguments are arithmetic, not statistical; the intersection-form lemma's scope for the datasheet is zero.
