@@ -19675,3 +19675,53 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **Next step (rule 9):** the width-chunk compiles; then the per-walk hsub_k data (Track C's per-arrangement half); the upstream-cycle instrument. Existence step named (rule 1): none made.
 
 **Consequence (M7) [T exact; L in flight]:** the middle branch's per-class certificates are width-closed universally — the death arguments are arithmetic, not statistical; the intersection-form lemma's scope for the datasheet is zero.
+
+
+## E923 (2026-11-22): the tail premise in existence form — `Fresh/TailExistence.lean` (12 declarations, compiled with `lean` against `build/`, every axiom footprint `[propext, Classical.choice, Quot.sound]`, no `sorry`); the pinned tail is the October block of one; the remaining tail premise is `TailIsolationComparable` [L]
+
+**Map:** the assembly's tail premise. Owner ruling (chat, 2026-11-22), on the question "Should the tail premise be existence only, or keep landing below 17?": *"Existence tail premise"*.
+
+**1. What landed [L]:** `TailIsolation` (OWED; `∃ d, 49m < d` ⟹ `Isolation v k`), weaker than `TailBelow17` (`tailIsolation_of_tailBelow17`). `filterAssembly_of_bandData_tailIsolation`: the terminal assembly with `TailIsolation` in place of `TailBelow17`; M4, chain and band premises unchanged. `nativeLRC_six/five/four` discharge the hypothesis of `CoreWidth.block_rule_one/two/three_27` (2026-10-23) from `NativeOrders.clear_seven/six/five`. `isolation_of_block` / `isolation_of_separated`: a core of disparities at most `c` containing `d_min`, and one, two or three disparities above `c`, each at least `7c`, `12c` or `27c`, give an isolation [PROVISIONAL: covering] (insertion of the block into the core's clear interval, supporting "every separated arrangement is isolated"); [PROVISIONAL: counting tool] (block of three, `three_clear_in_all`). `isolation_of_pinnedTail`: the pin (every other disparity at most `7m`, the largest at least `49m`) is the block of one at `c = 7m`. `TailIsolationComparable` (OWED): tail arrangements with no separated block. `filterAssembly_of_bandData_comparableTail`: the assembly with that as the only tail premise.
+
+**2. Place:** the instant lies in the core's common clear interval of time-width `2(1/(8−f) − 1/8)/c` around a native lonely instant of the core (`core_interval`), at a point clear for the block. Rule 3: the frozen core keeps its point; the fast block is placed inside it.
+
+**3. What this does not give:** the instant's position relative to `W₀ ∪ W₁`, so nothing toward G1/G2's landing catalogue on the tail. The strip chases (m = 2 to 15), anchor classification [T 105/105] and the OWEDs `Strip2Cap511`, `Strip3Cap86989`, `StripChaseKill46`, `TailAbove50Cover` remain the record of where the cascade lands on the pinned tail; they are no longer premises of the existence assembly. `TailIsolationComparable` is not reduced further here: its domain includes four comparable fast disparities, where no block rule applies (a block of four would need a four-reading insertion lemma: four readings at least `x` with a common clear point in every interval of length `L/x`. Search: `grep -nE 'four_clear|clear_in_four|block_rule_four|theorem (four|4)_?[a-z_]*clear' Fresh/*.lean`; its hits `FourBlockFourReturnExit.four_clear` and `FourBlockFourthExit.fourth_clear` are point witnesses under explicit exit inequalities, not interval insertion lemmas; the `ArrangementTypesOct26FullAudit*` hits are `#print axioms` lines for them).
+
+**4. Rule 22:** no exception arose in this step (each case of `isolation_of_block` is a direct instance of a block rule).
+
+**Next step (rule 9):** the open item of `LEAN_SYMBOLIC_REVIEW_2026_11_22_v1.md` B2 (whether the min-width corner lies in the true chamber), then the M4 window-cover check (B4). Existence step named (rule 1): rule 3, frozen runners keep their isolation point.
+
+**Consequence (M7) [L]:** the existence assembly no longer needs landing below 17 on the tail; its tail premise is the comparable-rate tail only. Nothing committed (rule 16).
+
+
+## E924 (2026-11-22): E923 and review item B1 WITHDRAWN — they treated existence as open; owner: *"Something has gone wrong.  We went from existence proved to trying to prove existence"*
+
+**Map:** none; a withdrawal. Owner instruction to apply the correction (chat, 2026-11-22): *"Yes, apply it"*.
+
+**1. What is withdrawn:** E923 in full; `LEAN_SYMBOLIC_REVIEW_2026_11_22_v1.md` items B1 and B7 (v1 kept unchanged; `..._v2.md` carries the withdrawal); `Fresh/TailExistence.lean` and `experiments/n8/pinned_tail_existence_scratch_v1.lean`, moved to `archive/n8_withdrawn_2026_11_22/` with a header giving this reason, not deleted (the `.olean`/`.ilean` build output removed). Before the move: `git status` showed the Lean file untracked (`??`), and `grep -rln 'Fresh.TailExistence' LonelyRunnerFresh/Fresh/*.lean` matched only the file itself, so nothing imported it.
+
+**2. Why (rule 1):** existence of the isolation is proved at the AP/grid; what is to be shown is that the displacement is forced. B1 said the strip chases are not needed for `LonelyRunnerAt8` because `CoreWidth.block_rule_one` gives some lonely instant. That made existence the open question. The chases record where the cascade lands on the pinned tail (G1, G2). The block rule's instant comes from an unnamed native order-seven witness; it names no place given by the readings, so it fails the place test. E923 then restated the conjecture on a domain (`TailIsolation`, `TailIsolationComparable`) and supplied it by the literature's order-reduction argument (a much faster reading inserted near a lower-order lonely instant).
+
+**3. How it entered:** the session put to the owner a choice between two existence statements for the tail premise ("existence only, or keep landing below 17?"). Neither option is the frame. E923's "Existence step named: rule 3" passed the rules-auditor; the frame has no existence step to supply, so naming one did not test the step.
+
+**4. What stands:** review items B2 to B6 are unaffected. `filterAssembly_of_bandData` and its four premises are as before E923.
+
+**Next step (rule 9):** review v2 item B2's open question (whether the min-width corner lies in the true chamber). Existence step named (rule 1): none made.
+
+**Consequence (M7):** the tail's strip chases and the four tail OWEDs keep their standing; nothing in the record changed except the withdrawals listed in item 1.
+
+## E923 (2026-11-22, ZCode session): the C₃ mass-run pilot RECON-FAIL — the 10,211 C₃ boxes lack banked `m4res_<box>` records (the recon step asserts `parse_bank` finds them), and the m4comp checkpoint's 6-element `t` field needs the leading 1 prepended to form 7-tuples; the pipeline gap is NAMED: the C₃ boxes need a data-side m4res construction step (from the checkpoint's own data: nodes=1, leaves=1, fire=True) before the mass-run driver can process them [T exact; the driver's two-pass dump patch and the leading-1 fix both verified]
+
+**Map:** Track M; the review-order item 1 (the mass run unblocked), executed — the pilot exposed the pipeline gap. Rows: G02.
+
+**1. The pilot [T exact]:** all 3 C₃ pilot boxes are present in the j2 M4 checkpoint with 1-node trees (fire=True, kind=closed, nstart=1). The batch-3 driver (daemonized) ran but produced RECON-FAIL on every box: (a) the checkpoint's 6-element `t` field needed the leading 1 prepended (fixed: unconditional prepend + dedup); (b) after the 7-tuple fix, the recon script's `parse_bank` asserts the m4res record exists — and it doesn't for any C₃ box.
+
+**2. The named gap [the deliverable]:** the C₃ boxes need a data-side m4res record construction step — from the m4comp checkpoint's own data (nodes=1, leaves=1, fire=True), the M4Res record is trivially constructible (box tuple, node count, leaf count, the leaf key from `last_zones`). This construction is the pipeline prerequisite for the C₃ mass run; without it, the driver cannot process C₃ boxes.
+
+**3. The scale:** 10,211 boxes, all with checkpoint data; the m4res construction is a mechanical per-box step (parse the checkpoint line, emit the M4Res record). The cost: one construction script + the same driver loop.
+
+**4. Rule 22:** the RECON-FAIL is a pipeline gap, not a math gap — the C₃ boxes' M4 certificates are trivial (1-node trees), but the data-side records don't exist yet.
+
+**Next step (rule 9):** the m4res construction script for C₃ boxes (from the m4comp checkpoint data), then the mass run proceeds over all 10,211. Existence step named (rule 1): none made.
+
+**Consequence (M7) [T exact]:** the C₃ mass-run pipeline gap is NAMED and SCOPED: one construction script (mechanical), then the mass run is unblocked for the full 10,211-box C₃ population.
