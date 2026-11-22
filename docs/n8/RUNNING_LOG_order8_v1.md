@@ -19725,3 +19725,19 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **Next step (rule 9):** the m4res construction script for C₃ boxes (from the m4comp checkpoint data), then the mass run proceeds over all 10,211. Existence step named (rule 1): none made.
 
 **Consequence (M7) [T exact]:** the C₃ mass-run pipeline gap is NAMED and SCOPED: one construction script (mechanical), then the mass run is unblocked for the full 10,211-box C₃ population.
+
+## E923-b (2026-11-22, ZCode session): the C₃ m4res construction script COMPLETED — 10,211/10,211 C₃ boxes now have constructed m4res records (`m4fix_res_v1.jsonl`), AND the critical finding: **ALL 10,211 C₃ boxes have ZERO reach leaves** — the OWED (b) residue (the reach_utc per-leaf discharge) is VACUOUSLY CLOSED for the entire C₃ population. The mass run is unblocked: the same driver pattern + the constructed records + no reach_utc dumps needed. **The C₃ route's data gap is fully closed** [T exact; verified by the construction script's own cross-check]
+
+**Map:** Track M; E923's named pipeline gap, CLOSED. Rows: G02.
+
+**1. The construction [T exact]:** 10,211 C₃-killed boxes from the uclosure checkpoint cross-referenced with the j2 M4 checkpoint (10,211/10,211 found): per box, the M4Res record carries the box tuple, the tree data (nodes, leaves, maxdepth, fire, kind, nstart), the leaf counts (reach_leaves, deadend_leaves, start_infeas), the frontier pinches, and the last_zones — all from the checkpoint's own data, no re-run needed.
+
+**2. The critical finding [T exact]:** ALL 10,211 C₃ boxes have reach_leaves = 0 AND deadend_leaves = 0 — the 1-node trees (the C₃ fixpoint kills at the first state) have no leaf-level structure at all. The OWED (b) residue (the reach_utc per-leaf discharge, E906's instrument) requires per-reach-leaf verdicts — and there are NO reach leaves. The residue is vacuously closed: **zero per-leaf instances needed for any of the 10,211 C₃ boxes.**
+
+**3. The mass-run consequence:** the C₃ mass run needs: (a) the constructed m4res records ✓ (this entry); (b) the driver pattern (proven: batch 1+2, 50/50 PASS); (c) NO reach_utc dumps (zero reach leaves); (d) NO per-leaf zone-form instances (zero reach leaves); (e) the OWED(a) per-root records (the remaining item, per-box transcription). The mass run is unblocked for the full 12,540-box population (2,329 fine-ladder + 10,211 C₃).
+
+**4. Rule 22:** (i) the zero-reach-leaves finding: feature: the C₃ fixpoint kills at nstates=1 (the state graph has one state — the merged fixpoint kills immediately); mechanism: the C₃ closure's key='aA' merge class captures the entire fixpoint at one state. (ii) the OWED(b) vacuity: forced by the absence of reach leaves — there are no per-leaf conditions to discharge. (iii) same mechanism across all 10,211: yes — uniform.
+
+**Next step (rule 9):** the mass run over the C₃ population (the same driver, the constructed records). The fine-ladder mass run continues in parallel. Existence step named (rule 1): none made.
+
+**Consequence (M7) [T exact]:** the C₃ route's data gap is FULLY CLOSED: the m4res records are constructed, the OWED(b) residue is vacuous, and the mass run is compute-only. P1's distance to closure: the mass run + per-root records + assembly.
