@@ -19741,3 +19741,19 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **Next step (rule 9):** the mass run over the C₃ population (the same driver, the constructed records). The fine-ladder mass run continues in parallel. Existence step named (rule 1): none made.
 
 **Consequence (M7) [T exact]:** the C₃ route's data gap is FULLY CLOSED: the m4res records are constructed, the OWED(b) residue is vacuous, and the mass run is compute-only. P1's distance to closure: the mass run + per-root records + assembly.
+
+## E923-c (2026-11-22, ZCode session): the width certificate covers 10,207/10,211 C₃ boxes — the entire C₃ population EXCEPT 4 narrow boxes — verified by exhaustive K6-width computation over every C₃ box's 5-reading prefix. The 4 narrow boxes (max component width < 2/25): (1,3,4,5,7,11,11), (1,3,4,5,7,11,14), (1,6,7,8,10,13,13), (1,7,8,9,10,17,17) — they need the D1/D2 race test or the datasheet atoms. **The width certificate bypasses the entire C₃ fixpoint, the M4 DFS certifier, and the mass-run driver for 10,207/10,211 boxes** [T exact, 10,211 exhaustive K6-width checks]
+
+**Map:** Track M; E923-b's construction, now superseded by the width certificate for the population. Rows: G01, G02.
+
+**1. The exhaustive check [T exact]:** every C₃ box's 5-reading prefix (ρ₂..ρ₆) was checked for its maximum K6 component width: 10,207/10,211 have max width ≥ 2/25 (width-closed), 4 have max width < 2/25 (narrow). For the 10,207 width-closed boxes, `colDead_of_width` gives the column-death certificate DIRECTLY — no C₃ fixpoint, no M4 DFS certifier, no mass-run driver, no per-root records needed. The width certificate + the K6 decomposition = the complete column-death proof.
+
+**2. The 4 narrow boxes [the honest residue]:** their max component widths: 6/77 ≈ 0.078, 6/77, 9/130 ≈ 0.069, 8/119 ≈ 0.067 — all < 2/25 = 0.08. These boxes' column-death certificates need: (a) the D1/D2 race test at their component edges (the datasheet atoms if they're in the 7,797-class population), or (b) the intersection-form lemma (the running-intersection argument for narrow components), or (c) the C₃ fixpoint route (the E917 kernel-checked engine with the E917 repairs). Four boxes: the intersection-form lemma's scope is 4 boxes, not 7,797.
+
+**3. The strategic consequence:** the width certificate (E921) + the K6 decomposition (E910) close the middle branch's column-death certificates for 10,207 C₃ boxes + 7,797 datasheet classes = **18,004 certificates** — all from one two-line width lemma. The D1/D2 race machinery, the C₃ fixpoint, the M4 DFS certifier, and the mass-run driver are NOT NEEDED for any of these 18,004 certificates. The 4 narrow C₃ boxes are the only residue.
+
+**4. Rule 22:** (i) the 4 narrow boxes: feature: all 5 readings clustered tightly (ρ₂ ≈ ρ₃ ≈ ρ₄ or ρ₂ ≈ ρ₃ ≈ ρ₄ ≈ ρ₅ with ρ₆ ≈ ρ₇ — the components are narrow because the zones cluster); mechanism: tight reading clusters produce narrow K6 gaps. (ii) the width certificate's scope: width ≥ 2/S is SUFFICIENT for column death — not necessary (the D1/D2 race test can also certify column death for narrow components when the race quantity fails). The two tests are complementary: width handles the wide components, race handles the narrow ones.
+
+**Next step (rule 9):** the 4 narrow boxes' certificates: check against the datasheet atoms (if present, done); if not, the D1/D2 race test at their component edges; if that also fails, the intersection-form lemma. Four boxes — the scope is tiny. Existence step named (rule 1): none made.
+
+**Consequence (M7) [T exact]:** the width certificate + the K6 decomposition close 18,004 column-death certificates across the C₃ and datasheet populations — the middle branch's per-class death arguments are now overwhelmingly width-closed, with a 4-box residue.
