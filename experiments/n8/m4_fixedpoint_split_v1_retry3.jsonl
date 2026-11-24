@@ -1,0 +1,205 @@
+{"n": [1, 1, 3, 4, 6, 6, 7], "status": "OK", "leaves": 3044, "depth": 38, "nodes": 6087, "reused": true}
+{"n": [1, 1, 3, 4, 5, 7, 7], "status": "OK", "leaves": 5528, "depth": 33, "nodes": 11055, "reused": true}
+{"n": [1, 1, 3, 5, 6, 7, 8], "status": "OK", "leaves": 4017, "depth": 35, "nodes": 8033, "reused": true}
+{"n": [1, 1, 4, 5, 5, 6, 8], "status": "OK", "leaves": 3336, "depth": 35, "nodes": 6671, "reused": true}
+{"n": [1, 1, 4, 5, 6, 7, 7], "status": "OK", "leaves": 13365, "depth": 37, "nodes": 26729, "reused": true}
+{"n": [1, 1, 3, 5, 5, 6, 8], "status": "OK", "leaves": 25152, "depth": 35, "nodes": 50303, "reused": true}
+{"n": [1, 1, 4, 5, 6, 6, 8], "status": "OK", "leaves": 27103, "depth": 35, "nodes": 54205, "reused": true}
+{"n": [1, 1, 4, 5, 6, 7, 8], "status": "OK", "leaves": 13440, "depth": 35, "nodes": 26879, "reused": true}
+{"n": [1, 1, 4, 5, 6, 7, 9], "status": "OK", "leaves": 3908, "depth": 35, "nodes": 7815, "reused": true}
+{"n": [1, 1, 3, 5, 6, 6, 8], "status": "OK", "leaves": 40644, "depth": 35, "nodes": 81287, "reused": true}
+{"n": [1, 2, 3, 3, 4, 6, 7], "status": "OK", "leaves": 2514, "depth": 27, "nodes": 5027, "reused": true}
+{"n": [1, 2, 3, 3, 5, 6, 8], "status": "OK", "leaves": 3465, "depth": 27, "nodes": 6929, "reused": true}
+{"n": [1, 2, 3, 4, 5, 8, 13], "status": "OK", "leaves": 2682, "depth": 34, "nodes": 5363, "reused": true}
+{"n": [1, 2, 3, 4, 5, 7, 13], "status": "OK", "leaves": 2358, "depth": 34, "nodes": 4715, "reused": true}
+{"n": [1, 1, 4, 5, 6, 6, 7], "status": "OK", "leaves": 21443, "depth": 37, "nodes": 42885, "reused": true}
+{"n": [1, 2, 3, 4, 6, 7, 15], "status": "OK", "leaves": 3806, "depth": 48, "nodes": 7611, "reused": true}
+{"n": [1, 2, 3, 4, 5, 7, 12], "status": "OK", "leaves": 7178, "depth": 34, "nodes": 14355, "reused": true}
+{"n": [1, 2, 4, 5, 5, 6, 8], "status": "OK", "leaves": 2019, "depth": 30, "nodes": 4037, "reused": true}
+{"n": [1, 2, 4, 5, 6, 6, 7], "status": "OK", "leaves": 10751, "depth": 35, "nodes": 21501, "reused": true}
+{"n": [1, 2, 4, 5, 6, 7, 16], "status": "OK", "leaves": 2508, "depth": 27, "nodes": 5015, "reused": true}
+{"n": [1, 2, 4, 5, 6, 7, 7], "status": "OK", "leaves": 10929, "depth": 29, "nodes": 21857, "reused": true}
+{"n": [1, 1, 3, 4, 5, 6, 7], "status": "OK", "leaves": 127418, "depth": 38, "nodes": 254835, "reused": true}
+{"n": [1, 2, 5, 5, 6, 7, 8], "status": "OK", "leaves": 3219, "depth": 29, "nodes": 6437, "reused": true}
+{"n": [1, 2, 5, 6, 6, 7, 8], "status": "OK", "leaves": 9514, "depth": 29, "nodes": 19027, "reused": true}
+{"n": [1, 2, 5, 6, 7, 7, 8], "status": "OK", "leaves": 4483, "depth": 28, "nodes": 8965, "reused": true}
+{"n": [1, 2, 5, 6, 7, 8, 8], "status": "OK", "leaves": 8325, "depth": 30, "nodes": 16649, "reused": true}
+{"n": [1, 2, 5, 6, 7, 8, 9], "status": "OK", "leaves": 4278, "depth": 28, "nodes": 8555, "reused": true}
+{"n": [1, 2, 5, 6, 7, 8, 11], "status": "OK", "leaves": 2384, "depth": 30, "nodes": 4767, "reused": true}
+{"n": [1, 2, 5, 6, 7, 8, 13], "status": "OK", "leaves": 2679, "depth": 24, "nodes": 5357, "reused": true}
+{"n": [1, 2, 6, 7, 8, 9, 10], "status": "OK", "leaves": 2730, "depth": 24, "nodes": 5459, "reused": true}
+{"n": [1, 3, 3, 4, 5, 7, 7], "status": "OK", "leaves": 2731, "depth": 29, "nodes": 5461, "reused": true}
+{"n": [1, 3, 3, 4, 6, 8, 16], "status": "OK", "leaves": 7102, "depth": 47, "nodes": 14203, "reused": true}
+{"n": [1, 3, 3, 4, 6, 6, 7], "status": "OK", "leaves": 14970, "depth": 35, "nodes": 29939, "reused": true}
+{"n": [1, 3, 3, 4, 6, 6, 15], "status": "OK", "leaves": 45312, "depth": 47, "nodes": 90623, "reused": true}
+{"n": [1, 3, 3, 5, 6, 8, 11], "status": "OK", "leaves": 16890, "depth": 39, "nodes": 33779, "reused": true}
+{"n": [1, 3, 3, 5, 6, 8, 13], "status": "OK", "leaves": 2141, "depth": 28, "nodes": 4281, "reused": true}
+{"n": [1, 3, 3, 5, 6, 8, 16], "status": "OK", "leaves": 19437, "depth": 47, "nodes": 38873, "reused": true}
+{"n": [1, 3, 4, 4, 6, 6, 7], "status": "OK", "leaves": 2250, "depth": 36, "nodes": 4499, "reused": true}
+{"n": [1, 3, 3, 4, 6, 7, 15], "status": "OK", "leaves": 52574, "depth": 50, "nodes": 105147, "reused": true}
+{"n": [1, 3, 3, 4, 6, 7, 16], "status": "OK", "leaves": 20941, "depth": 48, "nodes": 41881, "reused": true}
+{"n": [1, 3, 4, 4, 5, 7, 8], "status": "OK", "leaves": 1434811, "depth": 67, "nodes": 2869621, "reused": true}
+{"n": [1, 3, 4, 4, 5, 7, 13], "status": "OK", "leaves": 6481, "depth": 39, "nodes": 12961, "reused": true}
+{"n": [1, 3, 4, 4, 5, 7, 12], "status": "OK", "leaves": 9668, "depth": 39, "nodes": 19335, "reused": true}
+{"n": [1, 3, 4, 4, 6, 6, 16], "status": "OK", "leaves": 20804, "depth": 47, "nodes": 41607, "reused": true}
+{"n": [1, 3, 4, 4, 6, 7, 8], "status": "OK", "leaves": 3445, "depth": 30, "nodes": 6889, "reused": true}
+{"n": [1, 3, 4, 4, 6, 7, 16], "status": "OK", "leaves": 12118, "depth": 48, "nodes": 24235, "reused": true}
+{"n": [1, 3, 4, 5, 5, 6, 15], "status": "OK", "leaves": 11307, "depth": 43, "nodes": 22613, "reused": true}
+{"n": [1, 3, 4, 5, 5, 7, 12], "status": "OK", "leaves": 4437, "depth": 38, "nodes": 8873, "reused": true}
+{"n": [1, 3, 4, 5, 5, 7, 13], "status": "OK", "leaves": 6658, "depth": 40, "nodes": 13315, "reused": true}
+{"n": [1, 2, 2, 4, 6, 7, 9], "status": "STALL", "nodes": 219, "leaves": 83, "box": [["1", "1"], ["40959/16384", "5/2"], ["27113/16384", "13557/8192"], ["34513/8192", "17257/4096"], ["23347/4096", "46695/8192"], ["28761/4096", "57523/8192"], ["77823/8192", "19/2"]]}
+{"n": [1, 2, 2, 4, 6, 7, 10], "status": "STALL", "nodes": 1341, "leaves": 651, "box": [["1", "1"], ["39789/16384", "19895/8192"], ["28055/16384", "3507/2048"], ["16579/4096", "33159/8192"], ["12079/2048", "48317/8192"], ["59521/8192", "29761/4096"], ["5033/512", "80529/8192"]]}
+{"n": [1, 2, 3, 4, 6, 7, 9], "status": "STALL", "nodes": 1535, "leaves": 747, "box": [["1", "1"], ["27113/16384", "13557/8192"], ["2625/1024", "42001/16384"], ["34513/8192", "17257/4096"], ["23347/4096", "46695/8192"], ["28761/4096", "57523/8192"], ["77823/8192", "19/2"]]}
+{"n": [1, 2, 4, 4, 5, 6, 7], "status": "STALL", "nodes": 2393, "leaves": 1171, "box": [["1", "1"], ["40959/16384", "5/2"], ["34133/8192", "68267/16384"], ["3649/1024", "29193/8192"], ["39495/8192", "4937/1024"], ["24487/4096", "48975/8192"], ["61439/8192", "15/2"]]}
+{"n": [1, 3, 4, 5, 5, 7, 16], "status": "STALL", "nodes": 942, "leaves": 446, "box": [["1", "1"], ["6249/2048", "49993/16384"], ["67017/16384", "33509/8192"], ["45055/8192", "11/2"], ["10199/2048", "40797/8192"], ["57343/8192", "7"], ["31833/2048", "127333/8192"]]}
+{"n": [1, 3, 4, 5, 5, 7, 15], "status": "STALL", "nodes": 318, "leaves": 130, "box": [["1", "1"], ["6249/2048", "49993/16384"], ["66829/16384", "33415/8192"], ["45055/8192", "11/2"], ["40681/8192", "20341/4096"], ["57343/8192", "7"], ["126975/8192", "31/2"]]}
+{"n": [1, 2, 3, 4, 6, 7, 10], "status": "STALL", "nodes": 4923, "leaves": 2437, "box": [["1", "1"], ["40959/16384", "5/2"], ["25741/8192", "51483/16384"], ["34133/8192", "17067/4096"], ["46939/8192", "11735/2048"], ["14551/2048", "58205/8192"], ["5181/512", "82897/8192"]]}
+{"n": [1, 3, 3, 4, 6, 7, 10], "status": "STALL", "nodes": 5078, "leaves": 2518, "box": [["1", "1"], ["53267/16384", "13317/4096"], ["10861/4096", "43445/16384"], ["36033/8192", "18017/4096"], ["47981/8192", "23991/4096"], ["60055/8192", "7507/1024"], ["85533/8192", "42767/4096"]]}
+{"n": [1, 3, 4, 5, 6, 8, 11], "status": "OK", "leaves": 5743, "depth": 39, "nodes": 11485}
+{"n": [1, 2, 4, 4, 5, 6, 8], "status": "STALL", "nodes": 19418, "leaves": 9684, "box": [["1", "1"], ["40959/16384", "5/2"], ["34133/8192", "68267/16384"], ["29257/8192", "14629/4096"], ["10091/2048", "40365/8192"], ["24487/4096", "48975/8192"], ["62967/8192", "7871/1024"]]}
+{"n": [1, 3, 4, 5, 7, 7, 8], "status": "OK", "leaves": 2909, "depth": 29, "nodes": 5817}
+{"n": [1, 3, 4, 5, 6, 8, 12], "status": "OK", "leaves": 9549, "depth": 36, "nodes": 19097}
+{"n": [1, 3, 4, 5, 6, 8, 13], "status": "OK", "leaves": 5866, "depth": 39, "nodes": 11731}
+{"n": [1, 3, 4, 5, 7, 11, 13], "status": "OK", "leaves": 2588, "depth": 29, "nodes": 5175}
+{"n": [1, 3, 4, 5, 7, 9, 12], "status": "OK", "leaves": 2132, "depth": 30, "nodes": 4263}
+{"n": [1, 3, 4, 5, 7, 7, 17], "status": "OK", "leaves": 4985, "depth": 35, "nodes": 9969}
+{"n": [1, 2, 4, 5, 6, 7, 8], "status": "STALL", "nodes": 37760, "leaves": 18854, "box": [["1", "1"], ["40959/16384", "5/2"], ["58669/16384", "29335/8192"], ["9857/2048", "39429/8192"], ["24445/4096", "48891/8192"], ["27989/4096", "55979/8192"], ["69631/8192", "17/2"]]}
+{"n": [1, 3, 4, 5, 6, 7, 10], "status": "STALL", "nodes": 3676, "leaves": 1819, "box": [["1", "1"], ["6613/2048", "52905/16384"], ["70929/16384", "35465/8192"], ["2663/512", "42609/8192"], ["47981/8192", "23991/4096"], ["15171/2048", "60685/8192"], ["39011/4096", "78023/8192"]]}
+{"n": [1, 3, 4, 5, 6, 6, 16], "status": "OK", "leaves": 4410, "depth": 40, "nodes": 8819}
+{"n": [1, 3, 4, 5, 7, 8, 17], "status": "OK", "leaves": 11810, "depth": 47, "nodes": 23619}
+{"n": [1, 3, 3, 4, 6, 7, 11], "status": "STALL", "nodes": 60489, "leaves": 30221, "box": [["1", "1"], ["53243/16384", "13311/4096"], ["42557/16384", "21279/8192"], ["4433/1024", "35465/8192"], ["47981/8192", "23991/4096"], ["60285/8192", "30143/4096"], ["86129/8192", "43065/4096"]]}
+{"n": [1, 2, 3, 5, 6, 7, 8], "status": "STALL", "nodes": 70201, "leaves": 35071, "box": [["1", "1"], ["40959/16384", "5/2"], ["57343/16384", "7/2"], ["38537/8192", "19269/4096"], ["23893/4096", "47787/8192"], ["55293/8192", "27647/4096"], ["68563/8192", "17141/2048"]]}
+{"n": [1, 3, 4, 5, 6, 8, 16], "status": "OK", "leaves": 9190, "depth": 48, "nodes": 18379}
+{"n": [1, 3, 4, 5, 7, 8, 11], "status": "OK", "leaves": 2006, "depth": 33, "nodes": 4011}
+{"n": [1, 3, 4, 5, 7, 8, 12], "status": "OK", "leaves": 3891, "depth": 36, "nodes": 7781}
+{"n": [1, 3, 4, 5, 7, 7, 11], "status": "OK", "leaves": 4819, "depth": 29, "nodes": 9637}
+{"n": [1, 3, 4, 5, 6, 8, 17], "status": "OK", "leaves": 16209, "depth": 47, "nodes": 32417}
+{"n": [1, 3, 4, 5, 7, 7, 12], "status": "OK", "leaves": 3246, "depth": 29, "nodes": 6491}
+{"n": [1, 3, 4, 5, 6, 7, 12], "status": "OK", "leaves": 26081, "depth": 36, "nodes": 52161}
+{"n": [1, 3, 4, 5, 7, 8, 9], "status": "STALL", "nodes": 39300, "leaves": 19632, "box": [["1", "1"], ["49025/16384", "24513/8192"], ["61609/16384", "30805/8192"], ["41715/8192", "10429/2048"], ["26817/4096", "53635/8192"], ["33885/4096", "67771/8192"], ["19017/2048", "76069/8192"]]}
+{"n": [1, 3, 4, 6, 6, 8, 12], "status": "OK", "leaves": 14345, "depth": 36, "nodes": 28689}
+{"n": [1, 3, 4, 5, 6, 7, 11], "status": "OK", "leaves": 172552, "depth": 38, "nodes": 345103}
+{"n": [1, 2, 4, 5, 6, 7, 9], "status": "BUDGET", "nodes": 5000001, "leaves": 2499984}
+{"n": [1, 3, 4, 5, 6, 7, 17], "status": "OK", "leaves": 7938, "depth": 39, "nodes": 15875}
+{"n": [1, 3, 4, 5, 6, 8, 8], "status": "OK", "leaves": 3722, "depth": 34, "nodes": 7443}
+{"n": [1, 3, 5, 5, 7, 8, 8], "status": "OK", "leaves": 2474, "depth": 22, "nodes": 4947}
+{"n": [1, 3, 5, 5, 6, 8, 8], "status": "OK", "leaves": 10626, "depth": 30, "nodes": 21251}
+{"n": [1, 3, 5, 5, 6, 8, 9], "status": "OK", "leaves": 9462, "depth": 33, "nodes": 18923}
+{"n": [1, 3, 5, 6, 6, 8, 9], "status": "OK", "leaves": 10866, "depth": 30, "nodes": 21731}
+{"n": [1, 3, 4, 6, 6, 7, 8], "status": "BUDGET", "nodes": 5000001, "leaves": 2499982}
+{"n": [1, 3, 5, 6, 6, 8, 11], "status": "OK", "leaves": 2632, "depth": 26, "nodes": 5263}
+{"n": [1, 3, 5, 6, 6, 8, 12], "status": "OK", "leaves": 6974, "depth": 35, "nodes": 13947}
+{"n": [1, 3, 5, 6, 7, 8, 9], "status": "OK", "leaves": 4499, "depth": 30, "nodes": 8997}
+{"n": [1, 3, 4, 5, 6, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499982}
+{"n": [1, 3, 5, 6, 7, 8, 13], "status": "OK", "leaves": 3427, "depth": 23, "nodes": 6853}
+{"n": [1, 4, 4, 5, 6, 7, 8], "status": "OK", "leaves": 14421, "depth": 32, "nodes": 28841}
+{"n": [1, 4, 4, 5, 6, 7, 9], "status": "OK", "leaves": 2466, "depth": 33, "nodes": 4931}
+{"n": [1, 4, 4, 5, 6, 7, 11], "status": "OK", "leaves": 7428, "depth": 42, "nodes": 14855}
+{"n": [1, 4, 4, 5, 6, 8, 12], "status": "OK", "leaves": 3546, "depth": 29, "nodes": 7091}
+{"n": [1, 4, 4, 5, 6, 8, 13], "status": "OK", "leaves": 2202, "depth": 39, "nodes": 4403}
+{"n": [1, 4, 4, 5, 6, 8, 14], "status": "OK", "leaves": 19721, "depth": 39, "nodes": 39441}
+{"n": [1, 4, 4, 5, 6, 8, 8], "status": "OK", "leaves": 10580, "depth": 34, "nodes": 21159}
+{"n": [1, 4, 4, 5, 6, 8, 9], "status": "OK", "leaves": 2067, "depth": 26, "nodes": 4133}
+{"n": [1, 3, 4, 6, 6, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499979}
+{"n": [1, 4, 4, 5, 6, 8, 11], "status": "OK", "leaves": 2569, "depth": 28, "nodes": 5137}
+{"n": [1, 3, 4, 5, 6, 8, 14], "status": "OK", "leaves": 2355424, "depth": 56, "nodes": 4710847}
+{"n": [1, 3, 5, 6, 6, 8, 15], "status": "OK", "leaves": 208698, "depth": 56, "nodes": 417395}
+{"n": [1, 4, 4, 6, 6, 8, 12], "status": "OK", "leaves": 2900, "depth": 30, "nodes": 5799}
+{"n": [1, 4, 4, 6, 7, 8, 10], "status": "OK", "leaves": 4917, "depth": 24, "nodes": 9833}
+{"n": [1, 3, 4, 5, 6, 7, 13], "status": "BUDGET", "nodes": 5000001, "leaves": 2499988}
+{"n": [1, 4, 5, 5, 6, 6, 15], "status": "OK", "leaves": 4559, "depth": 29, "nodes": 9117}
+{"n": [1, 4, 5, 5, 6, 7, 10], "status": "OK", "leaves": 4681, "depth": 33, "nodes": 9361}
+{"n": [1, 4, 5, 5, 6, 7, 12], "status": "OK", "leaves": 2788, "depth": 27, "nodes": 5575}
+{"n": [1, 4, 5, 5, 6, 8, 8], "status": "OK", "leaves": 2384, "depth": 35, "nodes": 4767}
+{"n": [1, 4, 5, 5, 6, 8, 9], "status": "OK", "leaves": 2304, "depth": 34, "nodes": 4607}
+{"n": [1, 4, 5, 5, 6, 8, 10], "status": "OK", "leaves": 2594, "depth": 34, "nodes": 5187}
+{"n": [1, 4, 5, 5, 6, 7, 15], "status": "OK", "leaves": 3658, "depth": 28, "nodes": 7315}
+{"n": [1, 4, 5, 5, 6, 7, 16], "status": "OK", "leaves": 2641, "depth": 27, "nodes": 5281}
+{"n": [1, 3, 4, 6, 6, 8, 15], "status": "OK", "leaves": 2440853, "depth": 56, "nodes": 4881705}
+{"n": [1, 4, 5, 5, 7, 9, 9], "status": "OK", "leaves": 3576, "depth": 27, "nodes": 7151}
+{"n": [1, 4, 5, 6, 6, 6, 7], "status": "OK", "leaves": 51464, "depth": 41, "nodes": 102927}
+{"n": [1, 4, 5, 6, 6, 8, 9], "status": "OK", "leaves": 9154, "depth": 30, "nodes": 18307}
+{"n": [1, 4, 5, 6, 6, 7, 7], "status": "OK", "leaves": 109792, "depth": 40, "nodes": 219583}
+{"n": [1, 4, 5, 6, 6, 8, 11], "status": "OK", "leaves": 2475, "depth": 30, "nodes": 4949}
+{"n": [1, 4, 5, 6, 6, 8, 12], "status": "OK", "leaves": 11350, "depth": 35, "nodes": 22699}
+{"n": [1, 4, 5, 6, 6, 7, 10], "status": "OK", "leaves": 3298, "depth": 28, "nodes": 6595}
+{"n": [1, 4, 5, 6, 6, 7, 12], "status": "OK", "leaves": 3972, "depth": 29, "nodes": 7943}
+{"n": [1, 4, 5, 6, 6, 7, 13], "status": "OK", "leaves": 7062, "depth": 34, "nodes": 14123}
+{"n": [1, 4, 5, 6, 6, 7, 14], "status": "OK", "leaves": 9900, "depth": 34, "nodes": 19799}
+{"n": [1, 3, 4, 5, 6, 7, 14], "status": "BUDGET", "nodes": 5000001, "leaves": 2499988}
+{"n": [1, 4, 5, 6, 6, 7, 15], "status": "OK", "leaves": 4111, "depth": 30, "nodes": 8221}
+{"n": [1, 4, 5, 6, 6, 7, 16], "status": "OK", "leaves": 5443, "depth": 28, "nodes": 10885}
+{"n": [1, 4, 5, 6, 7, 7, 8], "status": "OK", "leaves": 10555, "depth": 33, "nodes": 21109}
+{"n": [1, 3, 5, 6, 6, 8, 10], "status": "OK", "leaves": 571507, "depth": 65, "nodes": 1143013}
+{"n": [1, 4, 5, 6, 7, 7, 11], "status": "OK", "leaves": 8497, "depth": 48, "nodes": 16993}
+{"n": [1, 4, 5, 6, 7, 7, 12], "status": "OK", "leaves": 2442, "depth": 25, "nodes": 4883}
+{"n": [1, 4, 5, 6, 7, 7, 14], "status": "OK", "leaves": 3591, "depth": 24, "nodes": 7181}
+{"n": [1, 4, 4, 6, 6, 8, 15], "status": "OK", "leaves": 627486, "depth": 56, "nodes": 1254971}
+{"n": [1, 4, 5, 6, 7, 8, 11], "status": "OK", "leaves": 6272, "depth": 40, "nodes": 12543}
+{"n": [1, 4, 5, 6, 6, 8, 13], "status": "OK", "leaves": 4439, "depth": 35, "nodes": 8877}
+{"n": [1, 4, 4, 6, 6, 7, 8], "status": "BUDGET", "nodes": 5000001, "leaves": 2499984}
+{"n": [1, 4, 5, 6, 7, 10, 11], "status": "OK", "leaves": 2704, "depth": 30, "nodes": 5407}
+{"n": [1, 4, 5, 6, 7, 9, 11], "status": "OK", "leaves": 23117, "depth": 45, "nodes": 46233}
+{"n": [1, 4, 5, 6, 7, 9, 13], "status": "OK", "leaves": 3491, "depth": 35, "nodes": 6981}
+{"n": [1, 4, 5, 6, 7, 9, 14], "status": "OK", "leaves": 2302, "depth": 30, "nodes": 4603}
+{"n": [1, 4, 5, 6, 7, 10, 15], "status": "OK", "leaves": 2200, "depth": 29, "nodes": 4399}
+{"n": [1, 4, 5, 6, 7, 11, 13], "status": "OK", "leaves": 2054, "depth": 29, "nodes": 4107}
+{"n": [1, 4, 5, 6, 7, 11, 15], "status": "OK", "leaves": 2815, "depth": 29, "nodes": 5629}
+{"n": [1, 4, 5, 6, 7, 11, 16], "status": "OK", "leaves": 5913, "depth": 29, "nodes": 11825}
+{"n": [1, 4, 5, 6, 7, 8, 12], "status": "OK", "leaves": 3955, "depth": 28, "nodes": 7909}
+{"n": [1, 4, 5, 6, 7, 8, 13], "status": "OK", "leaves": 13539, "depth": 35, "nodes": 27077}
+{"n": [1, 4, 5, 6, 7, 8, 14], "status": "OK", "leaves": 2453, "depth": 24, "nodes": 4905}
+{"n": [1, 4, 4, 5, 6, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499985}
+{"n": [1, 4, 4, 6, 6, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499986}
+{"n": [1, 4, 5, 6, 7, 8, 17], "status": "OK", "leaves": 2315, "depth": 30, "nodes": 4629}
+{"n": [1, 4, 5, 6, 7, 8, 16], "status": "OK", "leaves": 3266, "depth": 33, "nodes": 6531}
+{"n": [1, 4, 5, 6, 7, 9, 9], "status": "OK", "leaves": 2841, "depth": 29, "nodes": 5681}
+{"n": [1, 4, 5, 6, 7, 9, 10], "status": "OK", "leaves": 4001, "depth": 30, "nodes": 8001}
+{"n": [1, 4, 5, 6, 7, 9, 16], "status": "OK", "leaves": 3015, "depth": 32, "nodes": 6029}
+{"n": [1, 4, 6, 6, 7, 7, 10], "status": "OK", "leaves": 2517, "depth": 30, "nodes": 5033}
+{"n": [1, 4, 6, 6, 7, 7, 8], "status": "OK", "leaves": 4548, "depth": 33, "nodes": 9095}
+{"n": [1, 4, 6, 6, 7, 8, 10], "status": "OK", "leaves": 3163, "depth": 23, "nodes": 6325}
+{"n": [1, 4, 6, 7, 8, 9, 10], "status": "OK", "leaves": 2947, "depth": 24, "nodes": 5893}
+{"n": [1, 4, 6, 7, 8, 10, 11], "status": "OK", "leaves": 2218, "depth": 30, "nodes": 4435}
+{"n": [1, 5, 5, 6, 7, 7, 12], "status": "OK", "leaves": 7660, "depth": 30, "nodes": 15319}
+{"n": [1, 5, 5, 6, 6, 7, 12], "status": "OK", "leaves": 10334, "depth": 28, "nodes": 20667}
+{"n": [1, 5, 5, 6, 7, 8, 11], "status": "OK", "leaves": 3063, "depth": 28, "nodes": 6125}
+{"n": [1, 5, 5, 6, 7, 8, 12], "status": "OK", "leaves": 2652, "depth": 28, "nodes": 5303}
+{"n": [1, 5, 5, 6, 7, 8, 13], "status": "OK", "leaves": 9359, "depth": 28, "nodes": 18717}
+{"n": [1, 5, 6, 6, 6, 7, 8], "status": "OK", "leaves": 2574, "depth": 24, "nodes": 5147}
+{"n": [1, 5, 6, 6, 7, 7, 8], "status": "OK", "leaves": 25906, "depth": 33, "nodes": 51811}
+{"n": [1, 5, 6, 6, 7, 8, 8], "status": "OK", "leaves": 2940, "depth": 30, "nodes": 5879}
+{"n": [1, 5, 6, 6, 7, 8, 9], "status": "OK", "leaves": 95019, "depth": 66, "nodes": 190037}
+{"n": [1, 5, 6, 6, 7, 8, 11], "status": "OK", "leaves": 3343, "depth": 27, "nodes": 6685}
+{"n": [1, 5, 6, 6, 7, 8, 12], "status": "OK", "leaves": 2997, "depth": 22, "nodes": 5993}
+{"n": [1, 5, 6, 7, 7, 7, 8], "status": "OK", "leaves": 5784, "depth": 29, "nodes": 11567}
+{"n": [1, 5, 6, 7, 7, 8, 8], "status": "OK", "leaves": 11624, "depth": 33, "nodes": 23247}
+{"n": [1, 5, 6, 7, 7, 8, 9], "status": "OK", "leaves": 24468, "depth": 42, "nodes": 48935}
+{"n": [1, 5, 6, 6, 7, 8, 13], "status": "OK", "leaves": 7418, "depth": 28, "nodes": 14835}
+{"n": [1, 5, 6, 6, 7, 8, 14], "status": "OK", "leaves": 5420, "depth": 28, "nodes": 10839}
+{"n": [1, 5, 6, 7, 8, 8, 9], "status": "OK", "leaves": 5356, "depth": 41, "nodes": 10711}
+{"n": [1, 5, 6, 7, 8, 8, 13], "status": "OK", "leaves": 2784, "depth": 21, "nodes": 5567}
+{"n": [1, 5, 6, 7, 7, 8, 11], "status": "OK", "leaves": 3120, "depth": 30, "nodes": 6239}
+{"n": [1, 5, 6, 7, 7, 8, 12], "status": "OK", "leaves": 2515, "depth": 29, "nodes": 5029}
+{"n": [1, 5, 6, 7, 7, 8, 13], "status": "OK", "leaves": 2411, "depth": 22, "nodes": 4821}
+{"n": [1, 5, 6, 7, 7, 8, 14], "status": "OK", "leaves": 3910, "depth": 28, "nodes": 7819}
+{"n": [1, 5, 6, 7, 8, 9, 9], "status": "OK", "leaves": 2227, "depth": 27, "nodes": 4453}
+{"n": [1, 5, 6, 7, 8, 9, 10], "status": "OK", "leaves": 2406, "depth": 30, "nodes": 4811}
+{"n": [1, 5, 6, 7, 8, 9, 11], "status": "OK", "leaves": 2644, "depth": 24, "nodes": 5287}
+{"n": [1, 5, 6, 7, 8, 11, 12], "status": "OK", "leaves": 2029, "depth": 30, "nodes": 4057}
+{"n": [1, 5, 6, 7, 8, 11, 13], "status": "OK", "leaves": 4095, "depth": 26, "nodes": 8189}
+{"n": [1, 5, 6, 7, 8, 12, 13], "status": "OK", "leaves": 2031, "depth": 26, "nodes": 4061}
+{"n": [1, 5, 6, 7, 8, 13, 13], "status": "OK", "leaves": 2408, "depth": 25, "nodes": 4815}
+{"n": [1, 5, 6, 7, 8, 13, 14], "status": "OK", "leaves": 2355, "depth": 23, "nodes": 4709}
+{"n": [1, 6, 6, 7, 8, 9, 10], "status": "OK", "leaves": 4588, "depth": 30, "nodes": 9175}
+{"n": [1, 6, 6, 7, 8, 9, 15], "status": "OK", "leaves": 2342, "depth": 27, "nodes": 4683}
+{"n": [1, 6, 7, 8, 8, 9, 10], "status": "OK", "leaves": 2529, "depth": 24, "nodes": 5057}
+{"n": [1, 6, 7, 8, 9, 9, 10], "status": "OK", "leaves": 2558, "depth": 24, "nodes": 5115}
+{"n": [1, 6, 7, 8, 9, 10, 11], "status": "OK", "leaves": 2310, "depth": 24, "nodes": 4619}
+{"n": [1, 4, 5, 6, 6, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499984}
+{"n": [1, 4, 5, 6, 6, 8, 8], "status": "BUDGET", "nodes": 5000001, "leaves": 2499986}
+{"n": [1, 4, 5, 6, 7, 7, 9], "status": "BUDGET", "nodes": 5000001, "leaves": 2499989}
+{"n": [1, 4, 5, 6, 7, 8, 10], "status": "BUDGET", "nodes": 5000001, "leaves": 2499988}
+{"n": [1, 4, 5, 6, 6, 8, 15], "status": "BUDGET", "nodes": 5000001, "leaves": 2499988}
+{"n": [1, 4, 5, 6, 7, 8, 15], "status": "OK", "leaves": 1206203, "depth": 56, "nodes": 2412405}
+{"n": [1, 5, 5, 6, 7, 8, 9], "status": "BUDGET", "nodes": 5000001, "leaves": 2499984}
