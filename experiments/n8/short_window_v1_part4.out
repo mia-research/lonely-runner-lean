@@ -1,0 +1,10 @@
+2647 at that state only the fastest reading is in the way
+650 largest length under a kept jitter < 10^-9
+1814 largest length under a kept jitter >= 10^-9
+2647 left end is a state of the path
+2647 members
+183 no jitter kept the path
+2464 some jitter kept the path
+94 window did not grow by a factor > 10
+2370 window grew under a kept jitter (by a factor > 10)
+2647 ('left end', 'exit of a six reading')

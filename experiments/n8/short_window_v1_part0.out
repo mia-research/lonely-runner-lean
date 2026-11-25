@@ -1,0 +1,13 @@
+first member: six [1.0, 7.437824, 10.998312, 12.357009, 13.896865, 14.880069] | v 15.0
+   shortest window met before the skip: R (1.545692, 1.545692) | left end = exit of rank 3 lap 2 | right end = entry of rank 6 lap 3
+   length 17592186044416/2593226999252131515354712713825 | left end a path state: True | kept jitters 8 | largest length under them 3286830350205771806788989799628800000000/518645383876147971184888692936413245182027140073 ~ 6.337336554779139e-09
+2723 at that state only the fastest reading is in the way
+660 largest length under a kept jitter < 10^-9
+1866 largest length under a kept jitter >= 10^-9
+2723 left end is a state of the path
+2723 members
+197 no jitter kept the path
+2526 some jitter kept the path
+75 window did not grow by a factor > 10
+2451 window grew under a kept jitter (by a factor > 10)
+2723 ('left end', 'exit of a six reading')

@@ -1,0 +1,6 @@
+3270 ('R*<=7', 'some neighbour ratio > 7, at k = 1')
+21102 ('skipped six', 'R*<=7')
+20603 ('skipped six', 'r_2 <= 7')
+499 ('skipped six', 'r_2 > 7')
+R*<=7 : largest neighbour ratio 8583747560173039/562949953421312 ~ 15.247799 (float steers only) at k = 1
+R*>=9 : largest neighbour ratio 5357275607423737/1125899906842624 ~ 4.758217 (float steers only) at k = 1

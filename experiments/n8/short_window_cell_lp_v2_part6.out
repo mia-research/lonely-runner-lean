@@ -1,0 +1,12 @@
+first of R2 grows > 10 | E340 index 5858 | L0 ~ 1.065e-12 | exact point at lam 999/1000 | length there 349271497800817092003705370962224499026230626931336806400/70119033765446144565356329922630479863864671569853695464491 ~ 4.981e-03
+    readings there (floats, steer only) [1.0, 6.620771048, 8.845820109, 9.615021859, 10.968938837, 12.073170732, 14.999999999]
+first of R3 grows > 10 | E340 index 72317 | L0 ~ 6.699e-08 | exact point at lam 999/1000 | length there 24193046840008447987113/4528822108149577629799096 ~ 5.342e-03
+    readings there (floats, steer only) [1.0, 4.303325764, 6.270485215, 6.53874125, 10.450812984, 14.385230767, 15.000641661]
+first of R0 L0 = 0: positive length | E340 index 86644 | L0 ~ 0.000e+00 | exact point at lam 999/1000 | length there 16540794198873243/993573553251638056 ~ 1.665e-02
+    readings there (floats, steer only) [1.0, 4.338944922, 10.201365925, 11.088414797, 12.434837385, 13.237058826, 15.001972959]
+2 | ('R0', 'no exact point on the path found')
+6 | ('R0', 'over the cell', 'L0 = 0: positive length')
+97 | ('R2', 'over the cell', 'grows > 10')
+97 | ('R2', 'over the cell', 'length >= 10^-9')
+5 | ('R3', 'over the cell', 'grows > 10')
+5 | ('R3', 'over the cell', 'length >= 10^-9')

@@ -1,0 +1,6 @@
+253 | ((('P: lap 3 exit at W end', (5, 55)),), (('A: lap 2 entry at window 1 start', (5, 33)),))
+234 | ((('P: lap 4 exit at W end', (5, 55)),), (('A: lap 2 entry at window 1 start', (5, 25)),))
+27 | ((('P: lap 6 exit at W end', (6, 63)),), (('A: lap 1 entry at window 0 start', (6, 9)),))
+25 | ((('P: lap 3 exit at W end', (5, 55)),), (('A: lap 2 entry at window 2 start', (5, 33)),))
+6 | ((('P: lap 8 entry at W start', (5, 49)),), (('A: lap 1 exit at window 0 end', (5, 7)),))
+545 touching readings

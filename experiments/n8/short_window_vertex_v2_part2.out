@@ -1,0 +1,68 @@
+first of Z R1 | E340 index 1178 | x rank 5 lap 2 | y rank 6 lap 3 | L0/a ~ 1.234e-17 | near-coincidences [(0, 7, '17/8'), (2, 6, '23/8'), (3, 4, '15/8'), (6, 5, '23/8')]
+     raise x closed | length there ~ 1.342e-17 | eps ~ 6.676e-17 | closing (6, 5, '23/8')
+     lower y open | length there ~ 1.697e-07 | eps ~ None | closing None
+first of Z R0 | E340 index 2065 | x rank 2 lap 1 | y rank 5 lap 2 | L0/a ~ 0.000e+00 | near-coincidences [(0, 7, '15/8'), (2, 5, '15/8'), (6, 3, '15/8'), (8, 5, '23/8'), (10, 2, '15/8'), (15, 3, '23/8')]
+     raise x closed | length there ~ 0.000e+00 | eps ~ 0.000e+00 | closing None
+     lower y closed | length there ~ 0.000e+00 | eps ~ 0.000e+00 | closing None
+first of N R1 | E340 index 4884 | x rank 4 lap 2 | y rank 6 lap 3 | L0/a ~ 1.055e-07 | near-coincidences []
+     raise x closed | length there ~ 5.703e-08 | eps ~ 1.750e-07 | closing (9, 4, '23/8')
+     lower y open | length there ~ 2.247e-07 | eps ~ None | closing None
+first of Z R2 | E340 index 8221 | x rank 4 lap 2 | y rank 2 lap 1 | L0/a ~ 1.810e-12 | near-coincidences [(0, 7, '17/8'), (2, 7, '23/8'), (3, 2, '7/8'), (5, 7, '31/8'), (6, 4, '23/8')]
+     raise x closed | length there ~ 5.010e-13 | eps ~ 1.016e-12 | closing (6, 4, '23/8')
+     lower y closed | length there ~ 7.806e-13 | eps ~ 2.593e-12 | closing (5, 7, '31/8')
+first of N R2 | E340 index 13324 | x rank 5 lap 2 | y rank 2 lap 1 | L0/a ~ 1.044e-10 | near-coincidences [(0, 7, '17/8'), (3, 2, '7/8'), (5, 7, '31/8'), (6, 5, '23/8')]
+     raise x closed | length there ~ 6.448e-11 | eps ~ 2.593e-10 | closing (6, 5, '23/8')
+     lower y closed | length there ~ 5.132e-11 | eps ~ 1.851e-10 | closing (5, 7, '31/8')
+first of N R3 | E340 index 18205 | x rank 2 lap 1 | y rank 6 lap 3 | L0/a ~ 7.774e-07 | near-coincidences []
+     raise x open | length there ~ 3.355e-07 | eps ~ None | closing None
+     lower y open | length there ~ 3.355e-07 | eps ~ None | closing None
+46 | ('N', 'R1')
+33 | ('N', 'R1', 'L0/a < 10^-8')
+2 | ('N', 'R1', 'L0/a >= 10^-7')
+11 | ('N', 'R1', 'L0/a in [10^-8, 10^-7)')
+13 | ('N', 'R1', 'lower y', 'closed by a member near-coincidence')
+2 | ('N', 'R1', 'lower y', 'closed by a pair not below 10^-7 in the member')
+15 | ('N', 'R1', 'lower y', 'closing reading is another')
+8 | ('N', 'R1', 'raise x', 'closed by a member near-coincidence')
+1 | ('N', 'R1', 'raise x', 'closed by a pair not below 10^-7 in the member')
+9 | ('N', 'R1', 'raise x', 'closing reading is the moved one')
+30 | ('N', 'R2')
+23 | ('N', 'R2', 'L0/a < 10^-8')
+2 | ('N', 'R2', 'L0/a >= 10^-7')
+5 | ('N', 'R2', 'L0/a in [10^-8, 10^-7)')
+28 | ('N', 'R2', 'lower y', 'closed by a member near-coincidence')
+2 | ('N', 'R2', 'lower y', 'closed by a pair not below 10^-7 in the member')
+26 | ('N', 'R2', 'lower y', 'closing reading is another')
+4 | ('N', 'R2', 'lower y', 'closing reading is the moved one')
+7 | ('N', 'R2', 'raise x', 'closed by a member near-coincidence')
+7 | ('N', 'R2', 'raise x', 'closing reading is the moved one')
+5 | ('N', 'R3')
+5 | ('N', 'R3', 'L0/a >= 10^-7')
+1 | ('N', 'R3', 'raise x', 'closed by a member near-coincidence')
+1 | ('N', 'R3', 'raise x', 'closing reading is the moved one')
+11 | ('Z', 'R0')
+11 | ('Z', 'R0', 'L0/a < 10^-8')
+2 | ('Z', 'R0', 'lower y', 'closed by a member near-coincidence')
+2 | ('Z', 'R0', 'lower y', 'closed, no pair named')
+2 | ('Z', 'R0', 'lower y', 'closing reading is another')
+2 | ('Z', 'R0', 'no move gives positive length')
+1 | ('Z', 'R0', 'raise x', 'closed by a member near-coincidence')
+2 | ('Z', 'R0', 'raise x', 'closed, no pair named')
+1 | ('Z', 'R0', 'raise x', 'closing reading is the moved one')
+9 | ('Z', 'R0', 'some move gives positive length on the path')
+123 | ('Z', 'R1')
+123 | ('Z', 'R1', 'L0/a < 10^-8')
+35 | ('Z', 'R1', 'lower y', 'closed by a member near-coincidence')
+1 | ('Z', 'R1', 'lower y', 'closed, no pair named')
+32 | ('Z', 'R1', 'lower y', 'closing reading is another')
+3 | ('Z', 'R1', 'lower y', 'closing reading is the moved one')
+39 | ('Z', 'R1', 'raise x', 'closed by a member near-coincidence')
+3 | ('Z', 'R1', 'raise x', 'closed, no pair named')
+39 | ('Z', 'R1', 'raise x', 'closing reading is the moved one')
+67 | ('Z', 'R2')
+67 | ('Z', 'R2', 'L0/a < 10^-8')
+67 | ('Z', 'R2', 'lower y', 'closed by a member near-coincidence')
+54 | ('Z', 'R2', 'lower y', 'closing reading is another')
+13 | ('Z', 'R2', 'lower y', 'closing reading is the moved one')
+11 | ('Z', 'R2', 'raise x', 'closed by a member near-coincidence')
+11 | ('Z', 'R2', 'raise x', 'closing reading is the moved one')

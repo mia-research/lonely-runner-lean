@@ -1,0 +1,8 @@
+H 16 | outcomes 21 | not seen at a smaller H 21 [(4, 1, 't0', (1, 0)), (4, 1, 'Fexit', (1, 0)), (4, 2, 'Fexit', (4, 1)), (4, 2, 'Fexit', (3, 1)), (4, 2, 'open', (3, 1)), (4, 2, 'open', (4, 1))] | max F lap 5 | max R* 396/113 = 3.5044 (float steers only)
+H 40 | outcomes 18 | not seen at a smaller H 0 [] | max F lap 13 | max R* 3 = 3.0 (float steers only)
+H 80 | outcomes 15 | not seen at a smaller H 0 [] | max F lap 21 | max R* 204/73 = 2.7945 (float steers only)
+H 160 | outcomes 12 | not seen at a smaller H 0 [] | max F lap 37 | max R* 102/43 = 2.3721 (float steers only)
+H 320 | outcomes 12 | not seen at a smaller H 0 [] | max F lap 75 | max R* 9/4 = 2.25 (float steers only)
+H 640 | outcomes 12 | not seen at a smaller H 0 [] | max F lap 154 | max R* 7212/3349 = 2.1535 (float steers only)
+H 1280 | outcomes 10 | not seen at a smaller H 0 [] | max F lap 283 | max R* 4236/2065 = 2.0513 (float steers only)
+outcomes over all H: 21

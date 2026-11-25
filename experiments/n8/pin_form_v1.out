@@ -1,0 +1,5 @@
+25 | ('q_A/q_P > 1', False, 'q_P signs (num, den)', '+-', 'q_A signs', '+-')
+125 | ('q_A/q_P > 1', False, 'q_P signs (num, den)', '-+', 'q_A signs', '+-')
+2380 | ('q_A/q_P > 1', True, 'q_P signs (num, den)', '+-', 'q_A signs', '-+')
+1 | ('q_A/q_P > 1', True, 'q_P signs (num, den)', '-+', 'q_A signs', '-+')
+2531 rigid-pin escape rows

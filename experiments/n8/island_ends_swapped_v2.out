@@ -1,0 +1,4 @@
+E340 index 101498 | r_4 * t(exit 7, lap 5) = 23/8 ~ 2.875000000000000 | minus nearest m -/+ 1/8: 0
+   end candidate r_6 = 33 r_7/41 ~ 6.276620666789251; gate there False; gate just below True; actual r_6 ~ 6.123873114074299
+E340 index 101457 | r_4 * t(exit 7, lap 5) = 23/8 ~ 2.875000000000000 | minus nearest m -/+ 1/8: 0
+   end candidate r_6 = 33 r_7/41 ~ 5.798622808193704; gate there False; gate just below True; actual r_6 ~ 5.609862390568062

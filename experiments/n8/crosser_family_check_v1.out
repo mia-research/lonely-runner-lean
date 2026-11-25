@@ -1,0 +1,5 @@
+235 pairs
+4 | ('C', 'B_k vs 8 end of the window of the largest landing, resampled', 'equal')
+4 | ('C', 'largest landing <= B_k', True)
+231 | ('N', 'B_k vs 8 end of the window of the largest landing, resampled', 'equal')
+231 | ('N', 'largest landing <= B_k', True)

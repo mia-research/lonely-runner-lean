@@ -1,0 +1,45 @@
+PIN CHANGED 66818 5 1/2
+PIN CHANGED 98451 3 1/2
+PIN CHANGED 98451 3 1/2
+PIN CHANGED 99357 4 1/2
+PIN CHANGED 99637 4 1/2
+PIN CHANGED 99717 4 1/2
+PIN CHANGED 100032 4 1/2
+PIN CHANGED 100683 5 1/2
+PIN CHANGED 100753 4 1/2
+PIN CHANGED 101103 4 1/2
+PIN CHANGED 101103 4 1/2
+PIN CHANGED 101555 6 1/2
+PIN CHANGED 101555 6 1/2
+PIN CHANGED 101665 4 1/2
+PIN CHANGED 101665 4 1/2
+PIN CHANGED 101745 5 1/2
+PIN CHANGED 101745 5 1/2
+PIN CHANGED 101806 4 1/2
+PIN CHANGED 102117 4 1/2
+PIN CHANGED 102420 4 1/2
+PIN CHANGED 102529 5 1/2
+PIN CHANGED 102529 5 1/2
+PIN CHANGED 102704 4 1/2
+PIN CHANGED 102855 4 1/2
+PIN CHANGED 103293 4 1/2
+PIN CHANGED 103293 4 1/2
+PIN CHANGED 103613 5 1/2
+PIN CHANGED 103613 5 1/2
+3 | ('attaining reading at point', 'other', 'class X', 'side same', False, 'P same multiple', False, 'A same multiple', False)
+3 | ('attaining reading at point', 'other', 'class X', 'side same', True, 'P same multiple', False, 'A same multiple', False)
+14 | ('attaining reading at point', 'other', 'class X', 'side same', True, 'P same multiple', False, 'A same multiple', True)
+105 | ('attaining reading at point', 'other', 'class X', 'side same', True, 'P same multiple', True, 'A same multiple', False)
+2425 | ('attaining reading at point', 'other', 'class X', 'side same', True, 'P same multiple', True, 'A same multiple', True)
+16 | ('attaining reading at point', 'other', 'facing None')
+30 | ('attaining reading at point', 'other', 'gap 0 (touch or meet)')
+2 | ('attaining reading at point', 'pin', 'class X', 'side same', False, 'P same multiple', False, 'A same multiple', False)
+4 | ('attaining reading at point', 'pin', 'class X', 'side same', True, 'P same multiple', False, 'A same multiple', True)
+22 | ('attaining reading at point', 'pin', 'class X', 'side same', True, 'P same multiple', True, 'A same multiple', False)
+715 | ('attaining reading at point', 'pin', 'class X', 'side same', True, 'P same multiple', True, 'A same multiple', True)
+4 | ('attaining reading at point', 'pin', 'facing None')
+3 | ('crosser', 'cell points kept', 0)
+5 | ('crosser', 'cell points kept', 1)
+8 | ('crosser', 'cell points kept', 2)
+240 | ('crosser', 'cell points kept', 3)
+715 | ('rigid pin at point', 'gap = |q_A - q_P| r_j exactly', True)

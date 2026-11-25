@@ -1,0 +1,147 @@
+E340 index 44824 | readings (floats, steer only) [1.0, 3.660222, 5.092521, 6.111111, 7.005526, 8.039132, 8.713321] | R* 6896136929411072/716708666853555 | moves 27
+
+k = 2 | segment (1.000000, 5.092521) | actual 3.660222 | cells 13 | W_k R (9.621953, 9.826931)
+   cell  0 [1.006820869, 3.305453704] | moves  5 | R* 2.114656
+        break at 3.310231013047: paths differ at move 5, state R 2.114656 (phase 1) | in the way: () -> (2,) | setter None -> (2, 1)
+   cell  1 [3.312274573, 3.407766739] | moves 13 | R* 4.104921
+        break at 3.409560455018: paths differ at move 6, state R 2.639636 (phase 1) | in the way: (4, 7) -> (4,) | setter (7, 3) -> (4, 2)
+   cell  2 [3.414587608, 3.585109331] | moves 14 | R* 4.104921
+        break at 3.587838125868: paths differ at move 4, state R 1.951036 (phase 1) | in the way: (6,) -> (2, 6) | setter (6, 2) -> (2, 1)
+   cell  3 [3.591930200, 3.653318021] | moves 13 | R* 4.104921
+        break at 3.654151118299: paths differ at move 13, state R 4.104921 (phase 1) | in the way: () -> (2,) | setter None -> (2, 2)
+   cell  4 [3.660138890, 3.660221734] | moves 27 | R* 9.621953 | crosses the gate <- actual
+        break at 3.666666666667: paths differ at move 5, state R 2.454545 (phase 1) | in the way: (4,) -> () | setter (4, 2) -> None
+   cell  5 [3.666959759, 3.707884972] | moves  5 | R* 2.454349
+        break at 3.708808138899: paths differ at move 5, state R 2.426656 (phase 1) | in the way: () -> (5,) | setter None -> (5, 2)
+   cell  6 [3.714705841, 3.960257123] | moves  6 | R* 2.426656
+        break at 3.960849953582: paths differ at move 3, state R 1.767297 (phase 1) | in the way: (7,) -> (2, 7) | setter (7, 2) -> (2, 1)
+   cell  7 [3.967077992, 4.198987537] | moves  5 | R* 2.426656
+        break at 4.203315890752: paths differ at move 4, state R 2.141167 (phase 1) | in the way: (5,) -> () | setter (5, 2) -> None
+   cell  8 [4.205808406, 4.253554488] | moves  4 | R* 2.139898
+        break at 4.256011302489: paths differ at move 4, state R 2.114656 (phase 1) | in the way: () -> (6,) | setter None -> (6, 2)
+   cell  9 [4.260375357, 4.608239674] | moves  5 | R* 2.114656
+        break at 4.612934733259: paths differ at move 3, state R 1.767297 (phase 1) | in the way: (2, 7) -> (2, 7) | setter (2, 1) -> (7, 2)
+   cell 10 [4.615060543, 4.751477921] | moves  5 | R* 2.114656
+        break at 4.753086419753: paths differ at move 2, state R 1.472727 (phase 1) | in the way: (3,) -> (2, 3) | setter (3, 1) -> (2, 1)
+   cell 11 [4.758298790, 4.819686611] | moves  4 | R* 2.114656
+        break at 4.823479476155: paths differ at move 3, state R 1.865873 (phase 1) | in the way: (6, 7) -> (7,) | setter (6, 2) -> (7, 2)
+   cell 12 [4.826507480, 5.085700500] | moves  5 | R* 2.114656
+   gate island: cells 4..4 | landings [9.621953] | inside W_k: True
+
+k = 3 | segment (3.660222, 6.111111) | actual 5.092521 | cells 11 | W_k R (9.327273, 9.826931)
+   cell  0 [3.664306549, 4.750867507] | moves  2 | R* 1.472727
+        break at 4.753086419753: paths differ at move 2, state R 1.472727 (phase 1) | in the way: () -> (3,) | setter None -> (3, 1)
+   cell  1 [4.754952322, 4.820309372] | moves  8 | R* 3.109788
+        break at 4.823479476155: paths differ at move 3, state R 1.865873 (phase 1) | in the way: (6, 7) -> (7,) | setter (6, 2) -> (7, 2)
+   cell  2 [4.824394188, 4.881581607] | moves 15 | R* 4.710567
+        break at 4.882639671076: paths differ at move 15, state R 4.710567 (phase 1) | in the way: () -> (3,) | setter None -> (3, 3)
+   cell  3 [4.885666422, 4.926514579] | moves 20 | R* 6.095185
+        break at 4.928315412186: paths differ at move 16, state R 5.072727 (phase 1) | in the way: (4, 6) -> (6,) | setter (4, 4) -> (6, 5)
+   cell  4 [4.930599394, 4.951023472] | moves 21 | R* 6.095185
+        break at 4.952064698280: paths differ at move 14, state R 4.644527 (phase 1) | in the way: (5, 7) -> (3, 5, 7) | setter (5, 4) -> (3, 3)
+   cell  5 [4.955108288, 5.085822388] | moves 20 | R* 6.095185
+        break at 5.085981760571: paths differ at move 20, state R 6.095185 (phase 1) | in the way: () -> (3,) | setter None -> (3, 4)
+   cell  6 [5.089907204, 5.151179438] | moves 27 | R* 9.626895 | crosses the gate <- actual
+        break at 5.153290038627: paths differ at move 15, state R 4.851270 (phase 1) | in the way: (6,) -> () | setter (6, 5) -> None
+   cell  7 [5.155264254, 5.175688332] | moves 15 | R* 4.849412
+        break at 5.177997836434: paths differ at move 9, state R 3.283122 (phase 1) | in the way: (5,) -> () | setter (5, 3) -> None
+   cell  8 [5.179773148, 5.224706120] | moves  9 | R* 3.281997
+        break at 5.227992697694: paths differ at move 3, state R 1.721502 (phase 1) | in the way: (7,) -> () | setter (7, 2) -> None
+   cell  9 [5.228790935, 5.445286164] | moves  3 | R* 1.721239
+        break at 5.448742821346: paths differ at move 1, state R 1.284700 (phase 1) | in the way: (4,) -> (3, 4) | setter (4, 1) -> (3, 1)
+   cell 10 [5.449370979, 6.107026295] | moves  2 | R* 1.651567
+   gate island: cells 6..6 | landings [9.626895] | inside W_k: True
+
+k = 4 | segment (5.092521, 7.005526) | actual 6.111111 | cells 9 | W_k R (9.621953, 9.826931)
+   cell  0 [5.095709711, 5.446427315] | moves  1 | R* 1.284700
+        break at 5.448742821346: paths differ at move 1, state R 1.284700 (phase 1) | in the way: () -> (4,) | setter None -> (4, 1)
+   cell  1 [5.449615657, 6.100037396] | moves  5 | R* 2.458867
+        break at 6.100369555853: paths differ at move 5, state R 2.458867 (phase 1) | in the way: () -> (4,) | setter None -> (4, 2)
+   cell  2 [6.103225738, 6.111111111] | moves 27 | R* 9.621953 | crosses the gate <- actual
+        break at 6.111111111111: paths differ at move 25, state R 9.000000 (phase 2) | in the way: (2, 5, 6) -> (2, 4, 5, 6) | setter (5, 8) -> (4, 7)
+   cell  3 [6.112790764, 6.115979106] | moves 27 | R* 9.621953 | crosses the gate
+        break at 6.117863795174: paths differ at move 17, state R 5.394040 (phase 1) | in the way: (7,) -> () | setter (7, 6) -> None
+   cell  4 [6.119167448, 6.313656301] | moves 17 | R* 5.392891
+        break at 6.314726497425: paths differ at move 15, state R 4.909160 (phase 1) | in the way: (6,) -> (4, 6) | setter (6, 5) -> (4, 4)
+   cell  5 [6.316844643, 6.438001634] | moves 16 | R* 5.224127
+        break at 6.440280859478: paths differ at move 6, state R 2.639636 (phase 1) | in the way: (7,) -> () | setter (7, 3) -> None
+   cell  6 [6.441189975, 6.546405257] | moves  6 | R* 2.639264
+        break at 6.547527474288: paths differ at move 2, state R 1.374565 (phase 1) | in the way: (3,) -> () | setter (3, 1) -> None
+   cell  7 [6.549593599, 6.999149801] | moves  2 | R* 1.374131
+        break at 7.000000000000: paths differ at move 0, state R 1.000000 (phase 1) | in the way: (5, 6, 7) -> (4, 5, 6, 7) | setter (5, 1) -> (4, 1)
+   cell  8 [7.002338143, 7.002338143] | moves  1 | R* 1.285285
+   gate island: cells 2..3 | landings [9.621953, 9.621953] | inside W_k: True
+
+k = 5 | segment (6.111111, 8.039132) | actual 7.005526 | cells 13 | W_k R (9.621953, 9.826931)
+   cell  0 [6.114324480, 6.252499343] | moves  1 | R* 1.119524
+        break at 6.252658580200: paths differ at move 1, state R 1.119524 (phase 1) | in the way: () -> (5,) | setter None -> (5, 1)
+   cell  1 [6.255712712, 6.544915915] | moves  9 | R* 3.338229
+        break at 6.547527474288: paths differ at move 2, state R 1.374565 (phase 1) | in the way: (3, 4) -> (4,) | setter (3, 1) -> (4, 1)
+   cell  2 [6.548129284, 6.888746389] | moves 10 | R* 3.338229
+        break at 6.889881852029: paths differ at move 10, state R 3.338229 (phase 1) | in the way: () -> (5,) | setter None -> (5, 3)
+   cell  3 [6.891959758, 6.933733553] | moves 19 | R* 5.623573
+        break at 6.935092354084: paths differ at move 19, state R 5.623573 (phase 1) | in the way: () -> (5,) | setter None -> (5, 5)
+   cell  4 [6.936946922, 6.936946922] | moves 28 | R* 9.621953 | crosses the gate
+        break at 6.937881438305: paths differ at move 26, state R 9.080582 (phase 2) | in the way: (4, 7) -> (4, 5, 7) | setter (4, 7) -> (5, 8)
+   cell  5 [6.940160291, 6.965867243] | moves 28 | R* 9.621953 | crosses the gate
+        break at 6.968810916179: paths differ at move 26, state R 9.080582 (phase 2) | in the way: (4, 5, 7) -> (4, 5, 7) | setter (5, 8) -> (4, 7)
+   cell  6 [6.969080611, 6.998000932] | moves 28 | R* 9.621953 | crosses the gate
+        break at 7.000000000000: paths differ at move 0, state R 1.000000 (phase 1) | in the way: (6, 7) -> (5, 6, 7) | setter (6, 1) -> (5, 1)
+   cell  7 [7.001214301, 7.010854407] | moves 27 | R* 9.621953 | crosses the gate <- actual
+        break at 7.012860231289: paths differ at move 19, state R 5.846402 (phase 1) | in the way: (6,) -> () | setter (6, 6) -> None
+   cell  8 [7.014067776, 7.023707883] | moves 19 | R* 5.845395
+        break at 7.026871905502: paths differ at move 10, state R 3.557771 (phase 1) | in the way: (7,) -> () | setter (7, 4) -> None
+   cell  9 [7.026921252, 7.393245308] | moves 10 | R* 3.557746
+        break at 7.396001863437: paths differ at move 8, state R 3.109788 (phase 1) | in the way: (3,) -> (3, 5) | setter (3, 2) -> (5, 3)
+   cell 10 [7.396458677, 7.486433007] | moves  9 | R* 3.379996
+        break at 7.489002013075: paths differ at move 8, state R 3.109788 (phase 1) | in the way: (3, 5) -> (3, 5) | setter (5, 3) -> (3, 2)
+   cell 11 [7.489646376, 7.855970432] | moves  9 | R* 3.338229
+        break at 7.857142857143: paths differ at move 1, state R 1.145455 (phase 1) | in the way: (4,) -> () | setter (4, 1) -> None
+   cell 12 [7.859183801, 8.035919091] | moves  1 | R* 1.145157
+   gate island: cells 4..7 | landings [9.621953, 9.621953, 9.621953, 9.621953] | inside W_k: True
+
+k = 6 | segment (7.005526, 8.713321) | actual 8.039132 | cells 8 | W_k R (9.621953, 9.984712)
+   cell  0 [7.008372809, 8.015971669] | moves  7 | R* 2.869170
+        break at 8.016255469797: paths differ at move 7, state R 2.869170 (phase 1) | in the way: () -> (6,) | setter None -> (6, 3)
+   cell  1 [8.018817994, 8.030203292] | moves 19 | R* 5.852522
+        break at 8.030725482332: paths differ at move 19, state R 5.852522 (phase 1) | in the way: () -> (6,) | setter None -> (6, 6)
+   cell  2 [8.033049616, 8.047281238] | moves 27 | R* 9.621953 | crosses the gate <- actual
+        break at 8.049469260505: paths differ at move 20, state R 6.087358 (phase 1) | in the way: (3,) -> () | setter (3, 4) -> None
+   cell  3 [8.050127563, 8.050127563] | moves 20 | R* 6.086860
+        break at 8.052487813725: paths differ at move 13, state R 4.098112 (phase 1) | in the way: (2,) -> () | setter (2, 2) -> None
+   cell  4 [8.052973887, 8.064359185] | moves 13 | R* 4.097865
+        break at 8.066666666667: paths differ at move 12, state R 4.090909 (phase 1) | in the way: (6,) -> () | setter (6, 4) -> None
+   cell  5 [8.067205510, 8.266448222] | moves 12 | R* 4.090909
+        break at 8.267973856209: paths differ at move 6, state R 2.781818 (phase 1) | in the way: (7,) -> (6, 7) | setter (7, 3) -> (6, 3)
+   cell  6 [8.269294546, 8.485615206] | moves 11 | R* 4.090909
+        break at 8.487535614818: paths differ at move 3, state R 1.767297 (phase 1) | in the way: (7,) -> (6, 7) | setter (7, 2) -> (6, 2)
+   cell  7 [8.488461530, 8.710474838] | moves  7 | R* 2.945174
+   gate island: cells 2..2 | landings [9.621953] | inside W_k: True
+
+k = 7 | segment (8.039132, 17.426642) | actual 8.713321 | cells 13 | W_k R (9.621953, 9.826931)
+   cell  0 [8.054778310, 8.477216254] | moves  3 | R* 1.767297
+        break at 8.487535614818: paths differ at move 3, state R 1.767297 (phase 1) | in the way: () -> (7,) | setter None -> (7, 2)
+   cell  1 [8.492862104, 8.680612301] | moves 10 | R* 3.568611
+        break at 8.686852840888: paths differ at move 10, state R 3.568611 (phase 1) | in the way: () -> (7,) | setter None -> (7, 4)
+   cell  2 [8.696258151, 8.696258151] | moves 17 | R* 5.400000
+        break at 8.703703703704: paths differ at move 17, state R 5.400000 (phase 1) | in the way: () -> (7,) | setter None -> (7, 6)
+   cell  3 [8.708099603, 8.727549850] | moves 27 | R* 9.621953 | crosses the gate <- actual
+        break at 8.738187456802: paths differ at move 7, state R 2.861005 (phase 1) | in the way: (6,) -> () | setter (6, 3) -> None
+   cell  4 [8.743195700, 8.884008348] | moves  7 | R* 2.859366
+        break at 8.889109924242: paths differ at move 4, state R 1.912452 (phase 1) | in the way: (2, 6) -> (6,) | setter (2, 1) -> (6, 2)
+   cell  5 [8.899654198, 8.977883447] | moves  8 | R* 2.809098
+        break at 8.986928104575: paths differ at move 7, state R 2.781818 (phase 1) | in the way: (7,) -> () | setter (7, 3) -> None
+   cell  6 [8.993529297, 9.103050245] | moves  7 | R* 2.781818
+        break at 9.111016788292: paths differ at move 4, state R 1.865873 (phase 1) | in the way: (6,) -> () | setter (6, 2) -> None
+   cell  7 [9.118696095, 9.603717438] | moves  4 | R* 1.864302
+        break at 9.619207030127: paths differ at move 3, state R 1.767297 (phase 1) | in the way: (7,) -> () | setter (7, 2) -> None
+   cell  8 [9.619363288, 12.998866839] | moves  3 | R* 1.767297
+        break at 13.014221276055: paths differ at move 3, state R 1.767297 (phase 1) | in the way: () -> (7,) | setter None -> (7, 3)
+   cell  9 [13.014512689, 13.061450238] | moves  6 | R* 2.781818
+        break at 13.072220476827: paths differ at move 4, state R 1.912452 (phase 1) | in the way: (2, 6) -> (6,) | setter (2, 1) -> (6, 2)
+   cell 10 [13.077096088, 13.390013084] | moves  7 | R* 2.781818
+        break at 13.398554100429: paths differ at move 4, state R 1.865873 (phase 1) | in the way: (6,) -> () | setter (6, 2) -> None
+   cell 11 [13.405658933, 14.141013873] | moves  4 | R* 1.864884
+        break at 14.145892691364: paths differ at move 3, state R 1.767297 (phase 1) | in the way: (7,) -> () | setter (7, 3) -> None
+   cell 12 [14.156659723, 17.410996476] | moves  3 | R* 1.767297
+   gate island: cells 3..3 | landings [9.621953] | inside W_k: True

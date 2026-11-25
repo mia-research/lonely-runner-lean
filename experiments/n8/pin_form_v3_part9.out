@@ -1,0 +1,7 @@
+2 | ('form', 'NON-STANDARD', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+10 | ('form', 'standard', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+225 | ('form', 'standard', 'below', 'P from', 'win:upper', 'A from', 'win:lower')
+12 | ('v3 pin', 'above', 'P end', ('zone edge of the pin reading', 'type right', True), 'A end', ('zone edge of the pin reading', 'type right', True))
+12 | ('v3 pin', 'above', 'q_P = formula', True, 'q_A = formula', True, 'gap sign right', True)
+225 | ('v3 pin', 'below', 'P end', ('zone edge of the pin reading', 'type right', True), 'A end', ('zone edge of the pin reading', 'type right', True))
+225 | ('v3 pin', 'below', 'q_P = formula', True, 'q_A = formula', True, 'gap sign right', True)

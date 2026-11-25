@@ -1,0 +1,3 @@
+1346 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 1)
+8 | ('float Farkas LP: no ray found (closure may be feasible)', 0)
+27 | ('skipped: facing ends not identified',)

@@ -1,0 +1,13 @@
+(a) j2 checkpoint key sets: {('d', 'fire', 'kind', 'leaves', 'maxdepth', 'nodes', 'nstart', 't'): 12613, ('budget', 'd', 'fire', 'kind', 'leaves', 'maxdepth', 'nodes', 'nstart', 't', 'ts'): 2}
+(a) j2 lines carrying reach_leaves: 0
+(a) res records with reach_leaves == 0: 10211 / 10211
+(b) {'found': 10211, 'leaves == reach+deadend+start_infeas': 10211, 'nodes agree j2': 10211, 'leaves agree j2': 10211, 'reach > 0': 9765, 'deadend > 0': 6650}
+(b) nodes buckets: {'2-1000': 9240, '>1000': 722, '1': 249}
+(b) nodes==1 boxes by (reach, deadend, start_infeas): {(1, 0, 0): 249}
+(b) nodes==1 boxes with leaves==0: 0
+(c) {'files': 303, 'reach>0 in ckpt2': 289, 'mentions DfsPruneDomZone': 303} reach>0 but no DfsPruneDomZone: 0 []
+(d) {'files': 303, 'cert found': 303, 'cert prune hyps == ckpt2 reach': 303, 'OWED pruneDom stubs == ckpt2 reach': 303, 'sum ckpt2 reach': 301, 'sum cert prune hyps': 301} mismatches: 0 []
+(d) C3 population total reach leaves (ckpt2): 742648
+(e) (C3 nstates, DFS nodes) pairs: {(3, 'nodes>1'): 470, (1, 'nodes=1'): 249, (2, 'nodes>1'): 409, (4, 'nodes>1'): 482, (6, 'nodes>1'): 663, (5, 'nodes>1'): 643, (8, 'nodes>1'): 600, (7, 'nodes>1'): 678, (9, 'nodes>1'): 508, (14, 'nodes>1'): 292, (11, 'nodes>1'): 362, (12, 'nodes>1'): 324, (10, 'nodes>1'): 397, (16, 'nodes>1'): 290, (15, 'nodes>1'): 322, (13, 'nodes>1'): 350, (19, 'nodes>1'): 240, (17, 'nodes>1'): 299, (21, 'nodes>1'): 207, (20, 'nodes>1'): 278, (22, 'nodes>1'): 189, (24, 'nodes>1'): 183, (25, 'nodes>1'): 160, (28, 'nodes>1'): 105, (29, 'nodes>1'): 85, (18, 'nodes>1'): 267, (32, 'nodes>1'): 71, (23, 'nodes>1'): 216, (26, 'nodes>1'): 143, (31, 'nodes>1'): 77, (30, 'nodes>1'): 74, (27, 'nodes>1'): 91, (34, 'nodes>1'): 52, (33, 'nodes>1'): 49, (35, 'nodes>1'): 53, (36, 'nodes>1'): 47, (40, 'nodes>1'): 25, (37, 'nodes>1'): 31, (38, 'nodes>1'): 50, (41, 'nodes>1'): 18, (39, 'nodes>1'): 44, (43, 'nodes>1'): 23, (45, 'nodes>1'): 13, (42, 'nodes>1'): 25, (44, 'nodes>1'): 13, (46, 'nodes>1'): 10, (47, 'nodes>1'): 11, (48, 'nodes>1'): 5, (51, 'nodes>1'): 5, (53, 'nodes>1'): 4, (58, 'nodes>1'): 2, (50, 'nodes>1'): 2, (49, 'nodes>1'): 3, (52, 'nodes>1'): 2}
+(f) reach=0 boxes: 446 {('deadend>0', 'start_infeas=0', 'closed'): 446}
+(f) reach=0 boxes, nodes min/max: 2 91  leaves == deadend + start_infeas: 446

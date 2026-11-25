@@ -1,0 +1,7 @@
+144 | ('N', 'island meets the pass set of W_k', True)
+57 | ('N', 'would-pass midpoint', 'in the island', 'crosses the gate', 'in A')
+603 | ('N', 'would-pass midpoint', 'outside the island', 'does not cross', 'not in A')
+2517 | ('X', 'island meets the pass set of W_k', False)
+33 | ('X', 'island meets the pass set of W_k', True)
+2 | ('X', 'would-pass midpoint', 'in the island', 'crosses the gate', 'not in A')
+9609 | ('X', 'would-pass midpoint', 'outside the island', 'does not cross', 'not in A')

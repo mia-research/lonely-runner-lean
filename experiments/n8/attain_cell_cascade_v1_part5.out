@@ -1,0 +1,5 @@
+755 | ('cell point (same path)', 'min B_k = 8 end', True)
+3 | ('crosser', 'cell points kept', 0)
+6 | ('crosser', 'cell points kept', 1)
+16 | ('crosser', 'cell points kept', 2)
+239 | ('crosser', 'cell points kept', 3)

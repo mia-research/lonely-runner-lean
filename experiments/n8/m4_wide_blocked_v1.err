@@ -1,0 +1,29 @@
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/m4_wide_blocked_v1.py", line 79, in try_cell
+    p, q = sympy.fraction(sympy.Rational(v))
+                          ~~~~~~~~~~~~~~^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/sympy/core/cache.py", line 72, in wrapper
+    retval = cfunc(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/sympy/core/numbers.py", line 1341, in __new__
+    raise TypeError('invalid input: %s' % p)
+TypeError: invalid input: 3*2**(1/5)*3**(353/510)*5**(247/255)*7**(121/170)/28
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/trentpalelei/Desktop/Math Ex/experiments/n8/m4_wide_blocked_v1.py", line 95, in <module>
+    out = pool.map(try_cell, samp)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py", line 774, in get
+    raise self._value
+TypeError: invalid input: 3*2**(1/5)*3**(353/510)*5**(247/255)*7**(121/170)/28

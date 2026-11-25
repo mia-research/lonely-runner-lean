@@ -1,0 +1,7 @@
+e925_item2_memtest_v1 -- E925 item 2: is memory released between decide +kernel declarations? (E936)
+lean <file> with LEAN_PATH = experiments/lean_review/kernel_cost_v1/cert/leanpath.txt, cwd LonelyRunnerFresh, /usr/bin/time -l; files in e925_item2_memtest_v1/
+Mem_import.lean: rc=0 peak_memory_footprint=835131472 max_rss=5440897024 lean_output_lines=0
+Mem_k1.lean: rc=0 peak_memory_footprint=2468797600 max_rss=6925500416 lean_output_lines=0
+Mem_one2.lean: rc=0 peak_memory_footprint=2471599264 max_rss=6957187072 lean_output_lines=0
+Mem_two.lean: rc=0 peak_memory_footprint=2612272360 max_rss=7119552512 lean_output_lines=0
+Mem_k2.lean: rc=0 peak_memory_footprint=2525043992 max_rss=7087063040 lean_output_lines=0

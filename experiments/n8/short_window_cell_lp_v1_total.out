@@ -1,0 +1,7 @@
+15 | ('R0', 'no exact point on the path found')
+58 | ('R0', 'over the cell', 'L0 = 0: positive length')
+1 | ('R2', 'no exact point on the path found')
+756 | ('R2', 'over the cell', 'grows > 10')
+756 | ('R2', 'over the cell', 'length >= 10^-9')
+56 | ('R3', 'over the cell', 'grows > 10')
+56 | ('R3', 'over the cell', 'length >= 10^-9')

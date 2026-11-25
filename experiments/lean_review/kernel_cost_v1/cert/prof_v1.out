@@ -1,0 +1,95 @@
+/Users/trentpalelei/Desktop/Math Ex/experiments/lean_review/kernel_cost_v1/cert/Prof.lean:25:10: warning: unused variable `args`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+root 1 1 3 23 24: cuts per coordinate [4996, 5369, 5791, 15884, 1527]
+  depth 0: leaf 0 nocell 1 blocked 0
+  depth 1: leaf 0 nocell 2 blocked 0
+  depth 2: leaf 0 nocell 4 blocked 0
+  depth 3: leaf 0 nocell 8 blocked 0
+  depth 4: leaf 0 nocell 16 blocked 0
+  depth 5: leaf 0 nocell 23 blocked 9
+  depth 6: leaf 0 nocell 34 blocked 30
+  depth 7: leaf 0 nocell 64 blocked 64
+  depth 8: leaf 0 nocell 103 blocked 153
+  depth 9: leaf 0 nocell 146 blocked 366
+  depth 10: leaf 0 nocell 256 blocked 768
+  depth 11: leaf 0 nocell 270 blocked 1778
+  depth 12: leaf 7 nocell 100 blocked 3989
+  depth 13: leaf 334 nocell 0 blocked 7844
+  depth 14: leaf 5429 nocell 0 blocked 10259
+  depth 15: leaf 14414 nocell 0 blocked 6104
+  depth 16: leaf 11032 nocell 0 blocked 1176
+  depth 17: leaf 2352 nocell 0 blocked 0
+root 1 1 4 23 24: cuts per coordinate [3075, 3318, 2157, 7220, 2679]
+  depth 0: leaf 0 nocell 0 blocked 1
+  depth 1: leaf 0 nocell 0 blocked 2
+  depth 2: leaf 0 nocell 0 blocked 4
+  depth 3: leaf 0 nocell 0 blocked 8
+  depth 4: leaf 0 nocell 0 blocked 16
+  depth 5: leaf 0 nocell 0 blocked 32
+  depth 6: leaf 0 nocell 0 blocked 64
+  depth 7: leaf 0 nocell 0 blocked 128
+  depth 8: leaf 9 nocell 0 blocked 247
+  depth 9: leaf 54 nocell 0 blocked 440
+  depth 10: leaf 93 nocell 0 blocked 787
+  depth 11: leaf 85 nocell 0 blocked 1489
+  depth 12: leaf 247 nocell 0 blocked 2731
+  depth 13: leaf 547 nocell 0 blocked 4915
+  depth 14: leaf 4409 nocell 0 blocked 5421
+  depth 15: leaf 8678 nocell 0 blocked 2164
+  depth 16: leaf 4328 nocell 0 blocked 0
+root 1 1 3 19 20: cuts per coordinate [2096, 2289, 1895, 5400, 348]
+  depth 0: leaf 0 nocell 1 blocked 0
+  depth 1: leaf 0 nocell 2 blocked 0
+  depth 2: leaf 0 nocell 4 blocked 0
+  depth 3: leaf 0 nocell 8 blocked 0
+  depth 4: leaf 0 nocell 16 blocked 0
+  depth 5: leaf 0 nocell 23 blocked 9
+  depth 6: leaf 0 nocell 34 blocked 30
+  depth 7: leaf 0 nocell 64 blocked 64
+  depth 8: leaf 0 nocell 128 blocked 128
+  depth 9: leaf 1 nocell 256 blocked 255
+  depth 10: leaf 22 nocell 512 blocked 488
+  depth 11: leaf 233 nocell 803 blocked 964
+  depth 12: leaf 647 nocell 1046 blocked 1841
+  depth 13: leaf 2302 nocell 1088 blocked 2384
+  depth 14: leaf 5312 nocell 492 blocked 1140
+  depth 15: leaf 3016 nocell 72 blocked 176
+  depth 16: leaf 496 nocell 0 blocked 0
+root 1 1 8 9 17: cuts per coordinate [547, 608, 1296, 196, 1352]
+  depth 0: leaf 0 nocell 1 blocked 0
+  depth 1: leaf 0 nocell 2 blocked 0
+  depth 2: leaf 0 nocell 4 blocked 0
+  depth 3: leaf 0 nocell 8 blocked 0
+  depth 4: leaf 0 nocell 16 blocked 0
+  depth 5: leaf 0 nocell 32 blocked 0
+  depth 6: leaf 0 nocell 64 blocked 0
+  depth 7: leaf 16 nocell 112 blocked 0
+  depth 8: leaf 64 nocell 151 blocked 9
+  depth 9: leaf 64 nocell 184 blocked 72
+  depth 10: leaf 0 nocell 275 blocked 237
+  depth 11: leaf 128 nocell 386 blocked 510
+  depth 12: leaf 708 nocell 256 blocked 828
+  depth 13: leaf 1464 nocell 0 blocked 704
+  depth 14: leaf 1268 nocell 0 blocked 140
+  depth 15: leaf 272 nocell 0 blocked 8
+  depth 16: leaf 16 nocell 0 blocked 0
+root 1 1 10 11 12: cuts per coordinate [614, 676, 1190, 801, 876]
+  depth 0: leaf 0 nocell 1 blocked 0
+  depth 1: leaf 0 nocell 2 blocked 0
+  depth 2: leaf 0 nocell 4 blocked 0
+  depth 3: leaf 0 nocell 8 blocked 0
+  depth 4: leaf 0 nocell 16 blocked 0
+  depth 5: leaf 0 nocell 32 blocked 0
+  depth 6: leaf 0 nocell 64 blocked 0
+  depth 7: leaf 0 nocell 128 blocked 0
+  depth 8: leaf 1 nocell 254 blocked 1
+  depth 9: leaf 22 nocell 464 blocked 24
+  depth 10: leaf 254 nocell 662 blocked 60
+  depth 11: leaf 749 nocell 600 blocked 95
+  depth 12: leaf 782 nocell 398 blocked 210
+  depth 13: leaf 519 nocell 353 blocked 344
+  depth 14: leaf 981 nocell 88 blocked 325
+  depth 15: leaf 802 nocell 0 blocked 24
+  depth 16: leaf 48 nocell 0 blocked 0
+lean --run "$C/Prof.lean"  80.46s user 0.81s system 94% cpu 1:25.86 total

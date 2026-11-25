@@ -1,0 +1,23 @@
+'Fresh.TailStrip49Kernel.cells_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.TailStrip49Kernel.tailStrip49_clearPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.TailStrip49Kernel.tailStrip49_lands' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.TailStrip49Kernel.tailBelow17_of_above51' depends on axioms: [propext, Classical.choice, Quot.sound]
+       17.23 real         4.48 user         2.84 sys
+          5963202560  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              316944  page reclaims
+              125379  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                7518  voluntary context switches
+               98601  involuntary context switches
+         72845043815  instructions retired
+         24911193080  cycles elapsed
+           988343600  peak memory footprint
+rc=0 17s

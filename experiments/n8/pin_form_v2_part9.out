@@ -1,0 +1,7 @@
+NS 100369 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102282 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102881 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+2 | ('form', 'NON-STANDARD', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+1 | ('form', 'NON-STANDARD', 'below', 'P from', 'win:upper', 'A from', 'win:lower')
+11 | ('form', 'standard', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+233 | ('form', 'standard', 'below', 'P from', 'win:upper', 'A from', 'win:lower')

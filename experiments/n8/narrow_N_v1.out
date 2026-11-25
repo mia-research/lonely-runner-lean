@@ -1,0 +1,8 @@
+E340 103648 reading 4 | width 8.942e-03 | need L 2.857e-03 extent L 8.163e-03 | need R 1.650e-01 extent R 7.794e-04 (floats, steer only) | reaches: L True R False
+E340 100271 reading 6 | width 5.500e-03 | need L 3.738e-03 extent L 4.728e-03 | need R 1.036e-01 extent R 7.722e-04 (floats, steer only) | reaches: L True R False
+E340 69853 reading 4 | width 6.604e-03 | need L 2.857e-03 extent L 5.825e-03 | need R 1.677e-01 extent R 7.794e-04 (floats, steer only) | reaches: L True R False
+E340 102471 reading 7 | width 9.482e-03 | need L 7.388e-03 extent L 8.831e-03 | need R 8.886e-02 extent R 6.503e-04 (floats, steer only) | reaches: L True R False
+E340 66836 reading 6 | width 9.386e-03 | need L 4.730e-03 extent L 9.050e-03 | need R 9.231e-02 extent R 3.359e-04 (floats, steer only) | reaches: L True R False
+5 | ('N narrower than 10^-2', 'reaches', True)
+1 | ('N: island reaches a pass interval on some side', False)
+1303 | ('N: island reaches a pass interval on some side', True)

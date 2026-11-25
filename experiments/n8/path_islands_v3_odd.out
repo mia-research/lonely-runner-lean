@@ -1,0 +1,2 @@
+E340 index 102056 | N reading 7 | segment (6.862827703468618, 17.475670210973313) | actual island (floats, steer only) (8.509906352301087, 8.744160140257318) | pass intervals of W_k 167 | escaping intervals 1
+   escaping interval (floats) (15.098220948, 15.103549333) | index among pass intervals 9 | crosses the gate True | its island (15.098220948, 15.103549333) | same island as the actual: False

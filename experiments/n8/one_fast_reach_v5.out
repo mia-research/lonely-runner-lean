@@ -1,0 +1,8 @@
+S = ['1', '16715503/7123545', '47/15', '726761/173745', '47/9', '15463/2673'] | f = 2209/297 | 89/f = 26433/2209
+B(S) at the vertex = 225/47 ~ 4.787234 (float steers only), window 4
+near points with B >= 26433/2209: 2 of 200 | largest B near the vertex: 1417500000/117500611 ~ 12.063767
+--- why B = 225/47 at the vertex: f = rho_7 against each window up to the blocking one
+window 1 ('1/8', '2673/17672') | f strictly inside a pass interval: False | f on an endpoint: [('7', '2209/297')]
+window 2 ('1563705/5814088', '105/376') | f strictly inside a pass interval: True | f on an endpoint: []
+window 3 ('66825/123704', '207/376') | f strictly inside a pass interval: True | f on an endpoint: []
+window 4 ('225/376', '225/376') | f strictly inside a pass interval: False | f on an endpoint: []

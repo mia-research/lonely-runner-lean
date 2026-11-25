@@ -1,0 +1,18 @@
+84040 ('not skipped', 'R*<=7')
+4939 ('not skipped', 'R*>=9')
+27530 ('not skipped', 'landing: exit of the fastest reading inside a six-window')
+61449 ('not skipped', 'landing: opening of a six-window')
+88979 ('not skipped', 'members')
+88979 ('not skipped', 'v nests every six-window before T')
+21102 ('skipped', 'R*<=7')
+21102 ('skipped', 'deferred B_7 <= 7')
+21102 ('skipped', 'deferred walk: R* <= B_7')
+5920 ('skipped', 'landing: exit of the fastest reading inside a six-window')
+15182 ('skipped', 'landing: opening of a six-window')
+228 ('skipped', 'longest window met before the skip at least 10^-9')
+20874 ('skipped', 'longest window met before the skip below 10^-9')
+21102 ('skipped', 'members')
+21102 ('skipped', 'v nests every six-window before T')
+longest window met before a skip, over the parts: 31838753322517907526058743187277611008/138610928459060690311458027748322231775371971
+
+[exited with code 0]

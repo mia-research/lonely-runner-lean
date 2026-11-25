@@ -1,0 +1,26 @@
+k=5-only crosser: readings [1.0, 2.740735, 3.567203, 4.452401, 4.833325, 6.115337, 7.589749] (floats steer only)
+   R* = 16044073672507392/1721314246342745 ~ 9.320828 | opener rank 6 | closer rank 7 | moves 19
+   B_k: {2: ('52917295621603328/5441840049292963', 9.724155), 3: ('52917295621603328/5441840049292963', 9.724155), 4: ('52917295621603328/5441840049292963', 9.724155), 5: ('79938893385826304/8545297373272513', 9.354723), 6: ('52917295621603328/5441840049292963', 9.724155), 7: ('52917295621603328/5441840049292963', 9.724155)}
+k=5-only crosser: readings [1.0, 2.682165, 3.567203, 4.398751, 4.865224, 6.115337, 7.589749] (floats steer only)
+   R* = 564500657914133405354000646144/60563360925125088043780962167 ~ 9.320828 | opener rank 6 | closer rank 7 | moves 20
+   B_k: {2: ('232732727385651491681035354112/24091420063378973364366922909', 9.660399), 3: ('232732727385651491681035354112/24091420063378973364366922909', 9.660399), 4: ('232732727385651491681035354112/24091420063378973364366922909', 9.660399), 5: ('1406299884628191992285405118464/150330461195473506542134491093', 9.354723), 6: ('232732727385651491681035354112/24091420063378973364366922909', 9.660399), 7: ('232732727385651491681035354112/24091420063378973364366922909', 9.660399)}
+61 ('closer rank', 2, 'NOT in attaining set')
+82 ('closer rank', 3, 'NOT in attaining set')
+1094 ('closer rank', 4, 'NOT in attaining set')
+2846 ('closer rank', 5, 'NOT in attaining set')
+649 ('closer rank', 6, 'NOT in attaining set')
+207 ('closer rank', 7, 'NOT in attaining set')
+24 ('k=5 only', 'closer', 7)
+24 ('k=5 only', 'opener', 6)
+4939 ('min B = 8 * end of the landing window', True)
+8 ('opener rank', 1, 'NOT in attaining set')
+152 ('opener rank', 2, 'NOT in attaining set')
+168 ('opener rank', 2, 'in attaining set')
+253 ('opener rank', 3, 'in attaining set')
+15 ('opener rank', 4, 'NOT in attaining set')
+476 ('opener rank', 4, 'in attaining set')
+751 ('opener rank', 5, 'in attaining set')
+82 ('opener rank', 6, 'NOT in attaining set')
+984 ('opener rank', 6, 'in attaining set')
+347 ('opener rank', 7, 'NOT in attaining set')
+1703 ('opener rank', 7, 'in attaining set')

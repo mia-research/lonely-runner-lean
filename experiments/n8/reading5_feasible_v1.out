@@ -1,0 +1,16 @@
+E340 100073 | side below | P end r_2 x 41/23, A end r_3 x 23/17 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class X; min B_k > 8 end: False
+E340 101555 | side below | P end r_3 x 41/31, A end r_6 x 7/9 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class X; min B_k > 8 end: False
+E340 102875 | side below | P end r_2 x 41/23, A end r_6 x 7/9 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class N; min B_k > 8 end: False
+E340 103255 | side above | P end r_7 x 63/89, A end r_1 x 41/7 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class C; min B_k > 8 end: False
+E340 100696 | side below | P end r_2 x 41/23, A end r_3 x 23/17 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class X; min B_k > 8 end: False
+E340 100670 | side below | P end r_2 x 41/23, A end r_3 x 23/17 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class X; min B_k > 8 end: False
+E340 101195 | side below | P end r_2 x 41/23, A end r_3 x 23/17 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class N; min B_k > 8 end: False
+E340 101279 | side below | P end r_2 x 41/23, A end r_3 x 23/17 | LP status 0
+   lam 1 - 10^-9: same path; reading 5 class X; min B_k > 8 end: False

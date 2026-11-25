@@ -1,0 +1,7 @@
+460 T1 < T
+460 others clear at T1
+460 old f in the way at T1
+460 R1 in [1,7]
+460 cases
+largest reading / d_min among the 92 members: 156219622161941461208683731/19342813113834066795298816 = 8.0764 (float steers only)
+number of readings above 7 d_min among the 92: {1: 92}

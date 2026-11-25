@@ -1,0 +1,3 @@
+FEASIBLE? 100696
+139 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 1)
+1 | ('float Farkas LP: no ray found (closure may be feasible)', 0)

@@ -1,0 +1,11 @@
+E340 index 66783 | r_6 = 7 | reading 6 lap-6 exit R = 7
+E340 index 66784 | r_6 = 7 | reading 6 lap-6 exit R = 7
+E340 index 67106 | r_6 = 7 | reading 6 lap-6 exit R = 7
+E340 index 100406 | R0 = 17/r_2 = 1125899906842624/177054084641967 ~ 6.359073325642
+   reading 1 r = 1 | r R0/8 - nearest integer = -36316596286639/177054084641967 (edge iff +-1/8)
+   reading 2 r = 3009919438913439/1125899906842624 | r R0/8 - nearest integer = 1/8 (edge iff +-1/8)
+   reading 3 r = 4005269087420499/1125899906842624 | r R0/8 - nearest integer = -81342981328903/472144225711912 (edge iff +-1/8)
+   reading 4 r = 4878899596318037/1125899906842624 | r R0/8 - nearest integer = 629601564910829/1416432677135736 (edge iff +-1/8)
+   reading 5 r = 5488676623900977/1125899906842624 | r R0/8 - nearest integer = -1/8 (edge iff +-1/8)
+   reading 6 r = 6831131370059023/1125899906842624 | r R0/8 - nearest integer = -251032015619657/1416432677135736 (edge iff +-1/8)
+   end r_7 = 49 r_2/17 ~ 7.705525237838969; just inside (r_7 = end - 1e-20): at reading 7 exit R ~ 6.359073325641609 in the way [5]; gate True

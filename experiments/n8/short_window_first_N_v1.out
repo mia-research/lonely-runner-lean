@@ -1,0 +1,46 @@
+readings (floats, steer only) [1.0, 7.286501, 9.797063, 11.848485, 13.287149, 16.030303, 17.000001]
+path (rank, lap) ((1, 1), (4, 2), (3, 2), (6, 3), (5, 3), (2, 2), (4, 3), (6, 4), (5, 4), (3, 3), (1, 2), (6, 5), (2, 3), (5, 5)) | R* 774468103190621815046144/302803857510469710912135
+window 1 of the six: exit of rank 4 lap 2 -> entry of rank 6 lap 3 | state index of a: 3
+near-coincidences of path states with zone edges, relative gap below 10^-6:
+   state  0 (R ~ 1.000000) | rank 1 | edge 1/8 | gap ~ 0.000e+00 | on the edge
+   state  1 (R ~ 1.235161) | rank 2 | edge 9/8 | gap ~ 0.000e+00 | on the edge
+   state  2 (R ~ 1.279432) | rank 5 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+   state  3 (R ~ 1.434783) | rank 4 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+   state  4 (R ~ 1.470588) | rank 7 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+   state  5 (R ~ 1.559546) | rank 6 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+   state  6 (R ~ 1.735214) | rank 3 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+   state  7 (R ~ 1.881517) | rank 5 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+   state  8 (R ~ 1.941176) | rank 7 | edge 33/8 | gap ~ 0.000e+00 | on the edge
+   state  9 (R ~ 2.058601) | rank 6 | edge 33/8 | gap ~ 0.000e+00 | on the edge
+   state 10 (R ~ 2.109974) | rank 4 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+   state 11 (R ~ 2.333081) | rank 2 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+   state 12 (R ~ 2.411765) | rank 7 | edge 41/8 | gap ~ 0.000e+00 | on the edge
+   state 13 (R ~ 2.551785) | rank 3 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+   state 14 (R ~ 2.557656) | rank 6 | edge 41/8 | gap ~ 0.000e+00 | on the edge
+   state  9 (R ~ 2.058601) | rank 2 | edge 15/8 | gap ~ 9.119e-09 | clear
+   state 11 (R ~ 2.333081) | rank 5 | edge 31/8 | gap ~ 1.763e-08 | clear
+   state  8 (R ~ 1.941176) | rank 4 | edge 23/8 | gap ~ 2.366e-08 | clear
+   state  3 (R ~ 1.434783) | rank 6 | edge 23/8 | gap ~ 3.197e-08 | clear
+   state  0 (R ~ 1.000000) | rank 7 | edge 17/8 | gap ~ 3.762e-08 | clear
+raise rank 4 : path kept up to eps ~ 2.365916e-08, changes by eps ~ 2.365916e-08
+   window length: member ~ 5.733535e-09 | at the kept limit ~ 9.976754e-09
+   first differing step 8 | kept ((5, 4), (3, 3), (1, 2)) | changed ((3, 3), (1, 2), (6, 5))
+   kept: state R ~ 1.941176398 | in the way (rank, exit R~): [(6, 2.058601171)]
+   changed: state R ~ 1.941176398 | in the way (rank, exit R~): [(4, 2.109974345), (6, 2.058601171)]
+   near-coincidences at the kept limit, relative gap below 10^-9:
+      state  0 | rank 1 | edge 1/8 | gap ~ 0.000e+00 | on the edge
+      state  1 | rank 2 | edge 9/8 | gap ~ 0.000e+00 | on the edge
+      state  2 | rank 5 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+      state  3 | rank 4 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+      state  4 | rank 7 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+      state  5 | rank 6 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+      state  6 | rank 3 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+      state  7 | rank 5 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+      state  8 | rank 7 | edge 33/8 | gap ~ 0.000e+00 | on the edge
+      state  9 | rank 6 | edge 33/8 | gap ~ 0.000e+00 | on the edge
+      state 10 | rank 4 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+      state 11 | rank 2 | edge 17/8 | gap ~ 0.000e+00 | on the edge
+      state 12 | rank 7 | edge 41/8 | gap ~ 0.000e+00 | on the edge
+      state 13 | rank 3 | edge 25/8 | gap ~ 0.000e+00 | on the edge
+      state 14 | rank 6 | edge 41/8 | gap ~ 0.000e+00 | on the edge
+      state  8 | rank 4 | edge 23/8 | gap ~ 7.594e-26 | clear

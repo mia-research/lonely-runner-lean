@@ -1,0 +1,15 @@
+first X lands before W_k | E340 index 51964 | k 2 | position (float, steer only) 1.696932 | R* member 55169095435288576/5887419300540347 | R* moved 10133099161583616/5887419300540347 ~ 1.721144 | W_k R (9.370675438425994, 9.480653092094686) | first earlier window failed 1
+first N lands before W_k | E340 index 66759 | k 2 | position (float, steer only) 1.613364 | R* member 73183493944770560/7425944774003907 | R* moved 10133099161583616/5306279696047001 ~ 1.909643 | W_k R (9.855108834227382, 9.972579406438927) | first earlier window failed 1
+first N lands after W_k | E340 index 98124 | k 2 | position (float, steer only) 3.234929 | R* member 41095346599755776/4190802432971773 | R* moved 55169095435288576/5305447786388639 ~ 10.398575 | W_k R (9.806080638980237, 9.974143135922475) | first earlier window failed None
+38 | ('N', 'first earlier window failed', 'other')
+64 | ('N', 'first earlier window failed', 'the one before W_k')
+636 | ('N', 'first earlier window failed', 'window 1')
+62 | ('N', 'lands after W_k')
+738 | ('N', 'lands before W_k')
+738 | ('N', 'lands in the first window failed', True)
+62 | ('N', 'passes every earlier window')
+1443 | ('X', 'first earlier window failed', 'other')
+324 | ('X', 'first earlier window failed', 'the one before W_k')
+6927 | ('X', 'first earlier window failed', 'window 1')
+8694 | ('X', 'lands before W_k')
+8694 | ('X', 'lands in the first window failed', True)

@@ -1,0 +1,24 @@
+E340 index 101498 reading 6 right end in (6.276620666789251, 6.276620666789251)
+  crossing side: move 12 state R 4.777070195517 set by rank 3 | in the way [5] | exits [(5, '5.062155832190')]
+  crossing side: move 13 state R 5.062155832190 set by rank 5 | in the way [6, 7] | exits [(6, '5.257606242577'), (7, '5.257606242577')]
+  crossing side: move 14 state R 5.257606242577 set by rank 6 | in the way [4] | exits [(4, '5.714789394106')]
+  crossing side: move 15 state R 5.714789394106 set by rank 4 | in the way [2] | exits [(2, '6.368518627593')]
+  crossing side: move 16 state R 6.368518627593 set by rank 2 | in the way [5, 6] | exits [(5, '6.682045698490'), (6, '6.532177452899')]
+  crossing side: R* 9.372254606333, moves 20
+  other side: move 12 state R 4.777070195517 set by rank 3 | in the way [5] | exits [(5, '5.062155832190')]
+  other side: move 13 state R 5.062155832190 set by rank 5 | in the way [6, 7] | exits [(6, '5.257606242577'), (7, '5.257606242577')]
+  other side: move 14 state R 5.257606242577 set by rank 7 | in the way [] | exits []
+  other side: R* 5.257606242577, moves 14
+  laps at move 13 state: reading 6 lap 4 reading 7 lap 5 | exit(6) - exit(7) at the crossing point (float): 9.181829575816315e-38
+E340 index 101457 reading 6 right end in (5.798622808193704, 5.798622808193704)
+  crossing side: move 12 state R 5.173913043478 set by rank 3 | in the way [5] | exits [(5, '5.477764080029')]
+  crossing side: move 13 state R 5.477764080029 set by rank 5 | in the way [6, 7] | exits [(6, '5.691006484052'), (7, '5.691006484052')]
+  crossing side: move 14 state R 5.691006484052 set by rank 6 | in the way [4] | exits [(4, '6.185876613100')]
+  crossing side: move 15 state R 6.185876613100 set by rank 4 | in the way [2] | exits [(2, '6.652173913043')]
+  crossing side: move 16 state R 6.652173913043 set by rank 2 | in the way [7] | exits [(7, '6.801446773623')]
+  crossing side: R* 10.144837645483, moves 22
+  other side: move 12 state R 5.173913043478 set by rank 3 | in the way [5] | exits [(5, '5.477764080029')]
+  other side: move 13 state R 5.477764080029 set by rank 5 | in the way [6, 7] | exits [(6, '5.691006484052'), (7, '5.691006484052')]
+  other side: move 14 state R 5.691006484052 set by rank 7 | in the way [] | exits []
+  other side: R* 5.691006484052, moves 14
+  laps at move 13 state: reading 6 lap 4 reading 7 lap 5 | exit(6) - exit(7) at the crossing point (float): 1.1305879052157123e-37

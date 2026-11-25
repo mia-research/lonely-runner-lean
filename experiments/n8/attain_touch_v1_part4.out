@@ -1,0 +1,6 @@
+4 | ('A empty',)
+1994 | ('disjoint, positive gap',)
+52 | ('touching only', 'common point is a multiple of', 'closer')
+21 | ('touching only', 'ratio', 'closer', '3/5')
+29 | ('touching only', 'ratio', 'closer', '5/11')
+2 | ('touching only', 'ratio', 'closer', '7/9')

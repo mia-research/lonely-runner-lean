@@ -20153,3 +20153,1210 @@ Existence step named (rule 1, displacement frame): none; the entry checks how la
 
 Existence step named (rule 1, displacement frame): none.
 **Consequence (M7) [L]:** part of the decomposition of E929 to E931 is now in Lean [PARTIAL: the window-landing part of E929 item 1, E930 item 1, the non-emptiness criterion of E930 item 2, E931 item 1(b)], in the framework's own objects (`InWay`, `nextOpening`, `IsMove`, `IsFirst`), with the cascade fixing kept as a hypothesis. The setter conditions of a one-move pass and of a link are Lean statements in the readings. They are the objects the displacement step of rule 1 would carry, and that step remains owed. This shortens no route and closes none. Nothing is committed.
+
+## E935 (2026-11-25): E925 item 6, the two `reach_leaves` sources: the zeros in `m4fix_res_v1.jsonl` are a `.get(..., 0)` default, because that file's source checkpoint never records the field; `m4comp_cert_ckpt_v1.jsonl` counts the prune leaves of the same DFS trees; OWED (b) is not vacuous for the C₃ population: 9,765 of its 10,211 boxes carry at least one reach leaf, 742,648 in all; in each of the 303 compiled C₃ files the box theorem takes one open `DfsPruneDomZone` hypothesis per reach leaf [OBS, exact]; E923-b's item 2 and E924's "no OWED(b)" are corrected
+
+**Map:** E925 item 6, owner (2026-11-25): *"move on to work the open items"*. M-track, row G02. The other open items of E925 and of E928 to E933 stand.
+**Record search (rule 13; PARTIAL):** a grep of the running log for `reach_leaves` and `OWED (b)` (E906, E909, E923-b, E924, E925), and of `experiments/n8/*.py` for the writers of `reach_leaves`.
+
+**1. The writers** [OBS, exact; `experiments/n8/e935_reach_source_v1.py`, SHA-256 begins `a607bbdf`, and `.out`].
+- `m4fix_res_v1.py` line 53 sets `'reach_leaves': j2.get('reach_leaves', 0)`, where `j2` is a line of `j2_admit_cert2_checkpoint.jsonl`. That checkpoint has two key sets, `{d, fire, kind, leaves, maxdepth, nodes, nstart, t}` in 12,613 lines and the same keys with `budget` and `ts` added in 2 lines. None of its lines has `reach_leaves`. So all 10,211 zeros are the default. `deadend_leaves`, `start_infeas`, `lf_*` and `last_zones` are filled the same way, as E924 item 2(i) said.
+- `m4comp_cert_v1.py` line 39 sets `reach_leaves=len(lf)`, where `lf` collects one entry per DFS call that `reach_utc` prunes (`compl` false; `m4comp_lib_v1.cert_search_dbg`, lines 187 to 194). That script is an instrumented re-run of the same search.
+
+**2. Do the two sources count the same tree?** [OBS, exact, all 10,211 C₃ boxes]
+- `nodes` and `leaves` agree between the two checkpoints in 10,211 boxes.
+- In `m4comp_cert_ckpt_v1.jsonl`, `leaves = reach_leaves + deadend_leaves + start_infeas` in 10,211 boxes. So the second checkpoint splits the first checkpoint's leaf count by leaf kind.
+- 9,765 boxes have `reach_leaves > 0`, 6,650 have `deadend_leaves > 0`, and the total of `reach_leaves` is 742,648.
+
+**3. E923-b's mechanism checked.** E923-b item 4 says the C₃ fixpoint kills at `nstates = 1`, so the trees are 1-node trees with no leaves.
+- `nstates = 1` holds in 249 of the 10,211 records; `nstates` runs from 1 to 58. The DFS has 1 node in exactly these 249 boxes.
+- Each of the 249 has `(reach, deadend, start_infeas) = (1, 0, 0)`. Its one DFS call is itself a reach leaf, so even these boxes carry one OWED (b) instance.
+
+**4. What the compiled C₃ boxes carry** [OBS, exact, a regex over the Lean source; 303 files `Fresh/M4FixRung2_<box>.lean` whose box is C₃].
+- In every file, the number of `hpruneZone_i : DfsPruneDomZone …` hypotheses of `m4fix_<box>_cert` equals the second checkpoint's `reach_leaves`: 303 of 303 files, 301 hypotheses in all.
+- In every file, the number of `-- STANDING: OWED` stubs `m4fix_<box>_pruneDom_i (h : …) := h` also equals it: 303 of 303.
+- The pipeline (`m4fix_utc_v1.py` line 167, through `m4fix_recon_v1.parse_bank`) fills the placeholders from `m4comp_cert_ckpt_v1.jsonl`. The compiled files therefore use the second source, and OWED (b) stands in them as hypotheses.
+
+**5. Rule 22, E925 item 6.**
+- (i) Feature: one file says 0 for every box and the other says > 0 for 9,765 boxes, while the node counts agree. Artifact: `e935_reach_source_v1.out` (a), (b).
+- (ii) What forces it: the 0 is the default value of `.get`, because the source checkpoint has no such key. The positive values are `len(lf)` from the instrumented re-run. Artifacts: the key-set census in (a), the two script lines, and the leaf-kind identity in (b).
+- (iii) Same mechanism in every box: yes. The key is absent in all 12,615 checkpoint lines, and the identity holds in 10,211 of 10,211 boxes.
+- Status: understood. The two sources count the same DFS trees. The first file never counted reach leaves.
+
+**Corrections.**
+- E923-b items 2 and 4 and its Consequence: "ALL 10,211 C₃ boxes have ZERO reach leaves" and "OWED (b) … VACUOUSLY CLOSED" are false. They read a default value as a count, and they read the C₃ closure's `nstates` as the DFS's node count.
+- E924's Consequence: "the C₃ route now compute-only (no reach dumps, no per-leaf instances, no OWED(b))" is false. Its own item 2(i) had found the placeholders, and its compiled files carry the hypotheses (item 4 above).
+- What OWED (b) needs for the C₃ population is one discharged `DfsPruneDomZone` instance per reach leaf: 742,648 instances over 9,765 boxes. Each instance needs the leaf's relaxed `reach_utc` closure transcribed and passed to `Fresh.ReachUtcProof.no_zone_chain_of_reach_utc` (E909). For the 301 leaves in the compiled files, none of this is done.
+
+**Not done:** the discharge of any per-leaf instance; the non-C₃ (fine-ladder) boxes, which E906 and E924 already treat as carrying OWED (b); a check of the mass-run TSV's PASS rows, which certify compilation with the hypotheses open and not their discharge.
+Existence step named (rule 1, displacement frame): none. This is a data-provenance entry for the M-track's band certificate.
+**Consequence (M7) [OBS, exact]:** OWED (b) stands open for the C₃ population as well as for the fine ladder. A PASS in the C₃ mass run means a box theorem that compiles with its `DfsPruneDomZone` hypotheses open. It is not a box closed. `m4BoxNoCarvePinned_proved` (E925, zone route) does not use these trees, so this changes nothing there; what it changes is the DFS-forest route's ledger. This shortens no route and closes none.
+
+**E935 addendum (2026-11-25), rule 22 on the 446 C₃ boxes with no reach leaf** [OBS, exact; check (f) added to `e935_reach_source_v1.py`, whose SHA-256 now begins `7fbcc374`; `.out` rerun, checks (a) to (e) unchanged].
+- (i) Feature: in all 446, every leaf is a dead end. `leaves = deadend_leaves`, `start_infeas = 0`, `kind = closed`, and the trees have 2 to 91 nodes.
+- (ii) What forces it: in these trees `reach_utc` reports a completing state at every DFS call, and the search ends because no admissible child exists. Why `reach_utc` never prunes in these 446 boxes is **not understood**: no feature of the box that predicts it is given.
+- (iii) Same mechanism as the 6,650 boxes with dead-end leaves among the rest: not tested.
+- These 446 boxes need no OWED (b) instance. The heading's claim covers the other 9,765.
+
+
+## E936 (2026-11-25): E925 items 5(iii) and 2. The fixed-instant checker does not terminate on `(1,3,4,5,5,7,15)` or `(1,2,3,5,6,7,8)`: each box contains a BLOCKED point, a reading vector whose clear instants are isolated points that no dyadic cell around it can share [P, with exact checks]. The wide BUDGET trees are large finite trees, made by near-coincident 3-cycles of closing ratios (`2697/2695` in 3 boxes, `9165/9163` in the 12 depth-60 cells) [OBS, exact]. Memory is released between `decide +kernel` declarations for the two blocks tested, whose single peaks are 2,468,797,600 and 2,471,599,264 bytes [OBS]. E925's counts are corrected (15 BUDGET boxes, 29 capped boxes, 6 of 12 cells without a crossing cut)
+
+**Map:** E925 item 5(iii) and the not-understood memory item in its item 2. Owner (2026-11-25): *"Yes commit it and then move on to work the open items"*, then *"Keep going with the next open item"* and *"Keep going with the next open item while we wait"*. Track M. The checker studied here is the fixed-instant bisection checker, which E925's zone route does not use. Nothing here changes `m4BoxNoCarvePinned_proved`.
+**Record search (rule 13; PARTIAL):** E925 items 4 and 5 and their artifacts (`m4_stall_*`, `m4_budget_*`, `m4_fixedpoint_split_v1_retry3.jsonl`); `m4_stall_cone_v1`, `m4_stall_corner_v1` and `m4_stall_handoff_v1`, which find no point without a clear instant and are reused here, not rebuilt.
+
+**1. The lemma (BLOCKED point)** [P; stated and checked in `experiments/n8/m4_stall_gstar_v1.py`].
+- Object: the fixed-instant bisection checker of E925 item 4 (`m4_fixedpoint_split_v1.py`, retry3). A cell `Q` is a leaf when one instant `R ∈ [1,7]` puts `R·[lo_i, hi_i]` inside a closed gap `[8j+1, 8j+7]` for every reading. Cell faces are dyadic, because the box faces are half-integers and every cut is at a midpoint.
+- Let `g*` be a reading vector in `Q`, and let `C(g*)` be its set of clear instants. If `Q` has a fixed `R`, then `R ∈ C(g*)`.
+- Suppose `C(g*)` is a finite set of points. Take a point `R0` with a lower edge on reading `i` (`R0·g*_i = 8j+1`). Then `R = R0` serves `Q` only if `lo_i(Q) = g*_i`. If `lo_i(Q) < g*_i`, then `R0·[lo_i, hi_i]` contains values just below `8j+1`, which lie in the band `(8j−1, 8j+1)`. Likewise, an upper edge on reading `k` needs `hi_k(Q) = g*_k`.
+- Call `R0` killed in `Q` when one of these equalities fails strictly. If every point of `C(g*)` is killed, `Q` is not a leaf.
+- A strict inequality `lo_i < g*_i` carries into a child that contains `g*`.
+  - A cut at `m ≠ g*_i` leaves one such child, and its `lo_i` is either unchanged or equal to `m < g*_i`.
+  - A cut at `m = g*_i` is possible only when `g*_i` is dyadic. It leaves two such children, and the lower child keeps the inequality.
+  - The upper bound is symmetric.
+- Call `g*` BLOCKED in `Q` when each point of `C(g*)` is killed by some witness, and no dyadic coordinate is a lower witness for one point and an upper witness for another. Then a branch of cells containing `g*`, none of them a leaf, runs from `Q` without end, whatever the order of cuts. The descent from `Q` does not terminate.
+
+**2. The two cells that reach the cap again** [P with exact checks; `m4_stall_gstar_v1.out`; the points were found by `m4_stall_limit_v1.py` to `_v3.py`, from the hyperplanes of the windows at the cell centres].
+- `(1,3,4,5,5,7,15)`: `g*_A = (1, 119/39, 155/38, 11/2, 1023/206, 7, 31/2)`.
+  - `g*_A` lies in the box, in its depth-80 cell and in its depth-140 cell. `C(g*_A) = {114/31, 39/7, 190/31, 206/31, 7}`, all single points.
+  - Witnesses, all lower: readings 6, 1, 2, 4 and 5. Readings 1, 2 and 4 are non-dyadic (`119/39`, `155/38`, `1023/206`).
+  - Readings 6 and 5 are dyadic (`31/2` is the box's upper face, and `7` is a midpoint). Each is used only as a lower witness, and both are strict in the cell.
+- `(1,2,3,5,6,7,8)`: `g*_B = (1, 5/2, 7/2, 875/186, 35/6, 9625/1426, 385/46)`.
+  - `g*_B` lies in the box and in its depth-80 cell. `C(g*_B) = {18/7, 1426/385, 138/35, 30/7, 186/35}`.
+  - Witnesses, all lower: readings 2, 5, 6, 4 and 3. Only reading 2 is dyadic (`7/2`, the box's upper face).
+- Hence the fixed-instant checker does not terminate on either box, whatever the order of cuts [P]. Both `C(g*)` are non-empty, so `g*_A` and `g*_B` are not counterexamples to NoCarve. At each, the clear instants are isolated points, and no single instant serves any cell around `g*`. E925's zone route covers both boxes (`m4_zone_cover_hard28_v1.jsonl`) [PROVISIONAL: covering; the claim it supports is `m4BoxNoCarvePinned_proved` over these two boxes]; a zone is closed and contains its ratio faces, on which these points lie.
+- The windows of `g*_B` include the pair `(2,4)` on the hyperplane `g_4/g_2 = 5/3`, at `18/7` and `30/7 = (5/3)(18/7)` with the roles swapped. This is E925 item 5(ii)'s crossing at its limit point.
+- B's depth-140 cell (`m4_stall_cell_probe_v1.out`) does not contain `g*_B`. On coordinates 5 and 6 it lies more than 1/4 and less than 1/3 of a cell width from it (coordinate 6: exactly 6/23 of a width), and from it the checker terminates in 55 nodes, with leaves at most 8 levels deeper (`m4_stall_nearmiss_v1.out`). The depth-140 STALL was the cap hit beside `g*_B`, not a second limit point.
+
+**3. Rule 22, the 14 STALL boxes: what separates the 2 from the 12.**
+- (i) Feature: the depth-80 cells of the 2 contain a BLOCKED point (item 2).
+- (ii) What forces it: the lemma forces non-termination for the 2. For the 12, the restarted descent terminates (`m4_stall_cell_probe_v1.out`), so by the lemma their depth-80 cells contain no BLOCKED point.
+- (iii) Mechanism: the same as the depth of the 12, as far as tested. In each STALL cell the windows close at the cell, each bounded by one reading pair (E925 item 5(ii)). For the 2, the closing point lies in the cell and is BLOCKED.
+- Not understood: why the 12 come within depth 80 of a closing point without one in the cell. No distance from the cell to its closing point was computed. `m4_stall_limit_v3.py` pins free coordinates at a cell endpoint, and for the 12 its candidates fall outside the cells, so they are not used.
+
+**4. The wide trees: three boxes, not two** [OBS, exact].
+- retry3 has 15 BUDGET boxes, not 14, and 29 capped boxes, not 28 (`m4_fixedpoint_split_v1_retry3.jsonl`: OK 176, BUDGET 15, STALL 14).
+- The depth-60 rerun (`m4_budget_stallcell_v1.jsonl`, 15 lines) gives a depth-60 cell for 12 boxes. Three boxes reach 3,000,000 nodes again: `(1,3,4,5,6,7,13)`, `(1,3,4,5,6,7,14)` and `(1,4,5,6,6,8,15)`. E925 item 5 names the first two only.
+- `m4_zone_cover_hard28_v1.jsonl` holds 28 of the 29 boxes. The missing one, `(1,5,5,6,7,8,9)`, is in the full M4 zone run (`m4_zone_certs_v1.jsonl`, line 56,595, 209 nodes), so `m4BoxNoCarvePinned_proved` is not affected.
+
+**5. The level profile** [OBS, exact; `m4_wide_tree_profile_v1.py`/`.out`, `_v2` for the tally of `(1,4,5,6,6,8,15)`].
+- The checker of retry3 was run breadth-first: pin 0, cut on the widest of coordinates 1 to 6.
+- `(1,4,5,6,6,8,15)` is FINITE: 14,429,119 nodes, depth 56. Its non-leaf count peaks at 962,310 at level 53, and level 56 has no non-leaf cell.
+- `(1,3,4,5,6,7,13)` and `(1,3,4,5,6,7,14)` were stopped by the 2,000,000-cell frontier cap at levels 49 and 48, with 4,886,729 and 5,121,579 nodes so far.
+- Non-leaf cells per round, where round k is levels 6k to 6k+5, over the last two complete rounds: `194013/26898` and `1528317/194013` for `…13`; `306778/40575` and `2199014/306778` for `…14`; `180509/26408` and `1227962/180509` for `…15`, before the round of its peak. Each lies between 6 and 8.
+- These are counts of the checker's dyadic cells, a proxy (rule 8). They track no cascade object and are reported only to place E925 item 5(iii).
+
+**6. The triangle** [OBS for the tally; exact for the algebra; `m4_wide_triangle_v2.out`, `m4_wide_triangle_box_v1.out`].
+- In 200 sampled non-leaf cells at the last level, the most frequent window ends in all three boxes form one 3-cycle on readings `{2, b, 6}`. Here `b = 3`; in `(1,4,5,6,6,8,15)` it is also its twin reading 4, both being 6. Sample counts per window: 183, 161, 120; then 187, 154, 131; then 151, 90, 69 for `b = 3` and 300 in total for `b = 4`.
+- The three windows:
+  - W1 has its lower edge on reading 2 at 25 and its upper edge on `b` at 31. It is open iff `g_b/g_2 ≤ 31/25`.
+  - W2 has its lower edge on 6 at 49 and its upper edge on 2 at 15. It is open iff `g_6/g_2 ≥ 49/15`.
+  - W3 has its lower edge on `b` at 33 and its upper edge on 6 at 87. It is open iff `g_6/g_b ≤ 29/11`.
+- The cycle product is `(31/25)(29/11)/(49/15) = 2697/2695`. It is not 1, so the three closing hyperplanes share no positive point. In the plane of `(log g_b/g_2, log g_6/g_2)` they bound a triangle of ratio size `2/2695`.
+- At each vertex, two of the windows close to a point and the third is open. Each vertex lies inside the faces of each box, with exact `g_2` intervals in `m4_wide_triangle_box_v1.out`.
+- The three windows involve readings 2, `b` and 6 only. The checker cuts readings 1, 4 and 5 as well (for `b = 4` in `…15`, readings 1, 3 and 5). Those cuts double the cells without resolving the triangle, which predicts growth of `2^3 = 8` per round while the cells are wider than the triangle. The observed ratios in item 5 lie between 6 and 8.
+
+**7. Rule 22, the wide trees.**
+- (i) Feature: in all three boxes the sampled non-leaf cells near the last level are dominated by the windows W1 to W3 of one 3-cycle, whose closing ratios multiply to `2697/2695`.
+- (ii) What forces it:
+  - Near the triangle every reading vector has a clear instant, from whichever of W1 to W3 is open there [PROVISIONAL: covering; the claim it supports is the checker's leaf condition near the triangle, not a step of the route; existence step named (rule 1): none]. A cell is a leaf only if one of them is open over the whole cell, so the cells that cross the triangle's sides stay non-leaf until they are about the triangle's size.
+  - The checker cuts all six readings, three of which the triangle does not involve. That gives the growth factor near 8 per round.
+  - Why the size `2/2695` gives `…15` its depth 56 is not derived. A cell `2^{-9}` wide in each of the three readings is of the triangle's scale, but no exact depth formula is given.
+- (iii) Mechanism: the same windows and the same product in all three boxes. Against the STALL boxes:
+  - The window graphs at the 14 STALL cell centres (`m4_stall_cycles_v1.out`) have no cycle in 11 cells. The other 3 have cycles, all with product exactly 1.
+  - So in no STALL cell do the closing hyperplanes fail to meet. In both boxes of item 2 they meet at a BLOCKED point.
+  - In the wide trees they do not meet, by the factor `2697/2695`. Whether "share a point or miss it by a factor near 1" separates deep trees from wide ones in general is not tested beyond these 17 boxes.
+- **Termination** [OBS, exact; `m4_wide_dfs_v1.py`/`.out`: the same checker, split at level 24 into subtrees, each run depth-first to completion with a depth cap of 120 and no node budget].
+  - `(1,3,4,5,6,7,13)`: FINITE, 26,728,079 nodes, 13,364,040 leaves, depth 57, no cell at depth 120.
+  - `(1,3,4,5,6,7,14)`: FINITE, 36,576,523 nodes, 18,288,262 leaves, depth 56, no cell at depth 120.
+  - With `(1,4,5,6,6,8,15)` (FINITE, 14,429,119 nodes, depth 56), the wide trees are large finite trees, not descents without end. This fits item 6, where the closing hyperplanes share no point. The finite trees also show, by the lemma of item 1, that these boxes contain no BLOCKED point. The converse of the lemma, that a tree without a BLOCKED point is finite, is not proved.
+
+**8. The 12 depth-60 BUDGET cells** (E925 item 5(iii): *"the 5 of the 11 tested depth-60 BUDGET cells with no crossing cut and the twelfth, untested"*) [OBS, exact].
+- **Crossing cuts.** `m4_stall_cut_v3.py` was run on all 12 cells of `m4_budget_stallcell_v1.jsonl` (`m4_stall_cut_v3_budget.out`).
+  - 6 cells have a shared crossing cut and 6 have none. The twelfth, `(1,5,5,6,7,8,9)`, is among the 6 with none, so the count is 6 of 12, not 5 of 11.
+  - The feature is not enriched over the control: 6 of the 46 crossing cuts are shared, against 87 of the 439 non-crossing cuts.
+  - So the crossing cut is not what the 12 have in common.
+- **The closing-ratio cycles.** `m4_budget_cycles_v1.py` builds the window graph at each cell centre, as in item 7 (`m4_budget_cycles_v1.out`).
+  - Each of the 12 cells has exactly one cycle. In each it is a 3-cycle with the closing ratios `15/17`, `47/33` and `39/49`: the window ends at 17 and 15, at 33 and 47, and at 49 and 39.
+  - The product is `(15·47·39)/(17·33·49) = 9165/9163`, so `|P−1| = 2/9163`. Call this triangle T1, and call item 6's triangle T2, with `P = 2697/2695`.
+  - The three readings of T1 differ from box to box: `{3,4,5}` in 7 boxes, `{3,4,6}` in 3, and `{4,5,6}` and `{2,3,4}` in 1 each. The ratios are the same in all 12.
+- **Rule 22.**
+  - (i) Feature: each of the 12 cells sits at T1, a 3-cycle whose closing hyperplanes share no point, by `9165/9163`. This holds with or without a crossing cut.
+  - (ii) What forces it: as in item 7(ii). A cell stays non-leaf while it crosses a side of the triangle and is wider than the triangle. From depth 60 the cells terminate in 9 to 23 nodes (`m4_budget_cell_probe_v2.out`). No depth formula is derived.
+  - (iii) Mechanism: the same as the three wide trees, with a different triangle. All 15 BUDGET boxes carry a 3-cycle with `P ≠ 1` and `|P−1|` at most `2/2695`: T1 in 12 boxes, T2 in 3.
+- **Not understood.**
+  - Why these two triangles, and which other 3-cycles of the edges `8j±1` have `|P−1|` this small: no catalogue is made.
+  - Why the T1 boxes have a cell at depth 60 and the T2 boxes do not, within the budgets. T1's triangle is smaller (`2/9163` against `2/2695`), but no depth formula is derived.
+
+**9. E925 item 2, memory between declarations** [OBS, exact; `experiments/n8/e925_item2_memtest_v1.out`, test files in `e925_item2_memtest_v1/`; `B_6_7_9_1` and `B_2_2_4_3` measured singly in `zone_m4_lean_v3.tsv` at 2,492,062,832 and 2,493,176,968 bytes].
+
+| file | peak memory footprint | maximum resident set size |
+|---|---|---|
+| import `Fresh.ZoneBlocks` only | 835,131,472 | 5,440,897,024 |
+| `B_6_7_9_1` alone | 2,468,797,600 | 6,925,500,416 |
+| `B_2_2_4_3` alone | 2,471,599,264 | 6,957,187,072 |
+| both blocks, in one file | 2,612,272,360 | 7,119,552,512 |
+| `B_6_7_9_1` twice, renamed | 2,525,043,992 | 7,087,063,040 |
+
+- (i) Feature: E925 saw files that hold several 1,000-node blocks pass 7,000,000,000 bytes in `top`.
+- (ii) What this test shows:
+  - Two different blocks in one file peak at 2,612,272,360 bytes, against 2,468,797,600 and 2,471,599,264 for each alone. If memory were held across declarations, an additive model (the two single peaks, less the 835,131,472 of the import) gives 4,105,265,392. For these two blocks it is released between declarations.
+  - Maximum RSS is 5,440,897,024 bytes for the import alone and at least 6,925,500,416 for any one block, so an RSS reading above 7,000,000,000 does not by itself show memory held over. Which field `top` displayed in E925 is not recorded.
+- (iii) Not tested: whether the same holds for E925's larger 1,000-node blocks. Two of them in one file need more free memory than was available while the strip49 slices were building, and the test was not run.
+- Status: **not understood** for the 1,000-node files. Release between declarations is shown for the two blocks tested only.
+
+**Corrections to E925.**
+- Item 4: 15 BUDGET and 14 STALL, so 29 boxes passed the caps, not 28. `m4_zone_cover_hard28_v1.jsonl` omits `(1,5,5,6,7,8,9)`, which the full zone run covers.
+- Item 5(i): three BUDGET boxes reach 3,000,000 nodes again, not two. The third is `(1,4,5,6,6,8,15)`.
+- Item 5(ii): the crossing appears in 6 of the 12 depth-60 cells.
+
+**Not done:** the depth of a near-coincident 3-cycle as a formula in `|P−1|`; a catalogue of such cycles; why the 12 STALL boxes that terminate come within depth 80 of a closing point; the memory test on the larger 1,000-node blocks.
+Existence step named (rule 1, displacement frame): none. The checker studied here is not on the proof route. The BLOCKED points are reading vectors with a clear instant at which no fixed instant serves any neighbourhood. In the cascade's terms that is a displacement of the clear instant that a fixed-instant cover cannot follow, stated here as a property of the checker, not derived as the displacement of rule 1.
+**Consequence (M7):** E925 item 5(iii) is placed. The two re-capped boxes are non-terminating for a stated reason [P]. All three wide trees terminate [OBS, exact: each run to completion]. All 15 BUDGET boxes carry a 3-cycle of closing ratios with product near but not equal to 1. A fixed-instant checker of this kind cannot terminate on a box holding a BLOCKED point, whatever its cut order, which is a reason the zone route, with closed zones that contain their ratio faces, is the one used. This shortens no route and closes none.
+
+
+## E937 (2026-11-25): the 49–51 strip without `native_decide`: `Fresh/TailStrip49Kernel.lean` compiles over all 26 kernel-checked slices, and `cells_kernel`, `tailStrip49_clearPoint`, `tailStrip49_lands` and `tailBelow17_of_above51` print `[propext, Classical.choice, Quot.sound]` [L; PROVISIONAL: covering]; E928's 162 large roots: their search trees are carried by BLOCKED boxes, where slow cells exist but every pair is blocked by the fast reading, 690,357 of the 893,117 internal nodes, with the cuts concentrated on the two slow readings nearest the strip [OBS, exact]; why, stated in the readings: **not understood**
+
+**Map:** E928 (the certificate restatement of `stripCheck`, slices 19 to 26 piloted) and E929's scale-up (owner, 2026-11-25: *"Yes, scale up"*); E928's rule-22 item on the 162 large roots. Owner (2026-11-25): *"Keep going with the next open item while we wait"*.
+**Record search (rule 13; PARTIAL):** E927 and E928; `experiments/lean_review/kernel_cost_v1/cert/` (`CertDefs.lean`, `Big.lean`, `large_roots.out`); `Fresh/TailStrip49Cover.lean` lines 1–230 (`BlocksCell`, `CellPairFor`).
+
+**1. The build** [L].
+- Data modules: 5,692 files `Fresh/Strip49/S..{C,R}*.lean`, all rc=0 (`experiments/lean_review/kernel_cost_v1/cert/build_strip49.tsv`).
+- Slices: `Slice02` to `Slice26` rc=0. `Slice01` first ended with rc=134, `Stack overflow detected. Aborting.`, after 869 s at a peak footprint of 6,088,629,600 bytes. Its theorem is the longest `seg_join` chain: 274,751 bytes and 1,973 imports. Run again with no edit, using `ulimit -s 65520` and `lean -s 1048576` (thread stack 1,073,741,824 bytes), it passes: rc=0, 754 s (`build_strip49_retry.tsv`, `build/Fresh/Strip49/Slice01_retry.log`).
+- `Fresh/TailStrip49Kernel.lean` (SHA-256 begins `09cccdb7848282aa`), with the same stack settings: rc=0, 17 s, peak footprint 988,343,600 bytes (`experiments/lean_review/tail_strip49_kernel_v1.log`). Each of `cells_kernel`, `tailStrip49_clearPoint`, `tailStrip49_lands` and `tailBelow17_of_above51` prints `[propext, Classical.choice, Quot.sound]`.
+- A scan that strips `/- -/` and `--` comments, over the kernel file and the 5,718 `Fresh/Strip49/*.lean` files, finds 0 `sorry`, `native_decide`, `admit`, `unsafe`, `implemented_by` and `extern`, and 0 `axiom` declarations. Through `#print axioms`, no dependency uses `native_decide`, which would show as `Lean.ofReduceBool`.
+- Grades: `tailStrip49_clearPoint`, `tailStrip49_lands` and `tailBelow17_of_above51` move from [L, `native_decide`] to [L; PROVISIONAL: covering]. The claim the covering supports is the strip's clear point, as for the originals. The four width checks of E927 still use `native_decide` and are not touched.
+
+**2. E928's 162 large roots** [OBS, exact; `cert/Prof.lean` → `cert/prof_v1.out` (5 roots by depth), `cert/Prof2.lean` → `cert/prof2_v1.out` (all 162 roots); the same recursion as `certOf`, depth cap 32, interpreted with `lean --run`].
+- Each internal node of the search is classed by why the box is not a leaf:
+  - NOCELL: no R-interval is clear for all five slow readings over the box (`cellsJ` is empty).
+  - BLOCKED: cells exist, but for every pair some fast reading `x ∈ [49, 51]` blocks both. `BlocksCell x L U` is `x ∈ ((8j−1)/L, (8j+1)/U)` for some lap `j`, which is E930's one-move pass condition (`one_move_pass_iff`) with the fast reading as `d`.
+- Over the 162 roots: 690,357 BLOCKED and 202,760 NOCELL internal nodes, and 893,279 leaves. BLOCKED outnumbers NOCELL in 140 roots; 45 roots have no NOCELL node and 4 no BLOCKED node.
+- In the 91 roots with `e = 24` (fifth slow reading in `[47, 49]`), 493,178 of the 567,830 internal nodes are BLOCKED. The smallest BLOCKED share among them is `(1,1,11,13,24)`, 1,756 of 5,408. E928's 54 roots with `d = 23` are all among these 91.
+- The most-cut coordinate is `d` in 82 roots, `e` in 67 and `c` in 13. So in 149 of 162 roots it is one of the two slow readings nearest the strip.
+- By depth (`prof_v1.out`, 5 roots), the last NOCELL node and the last BLOCKED node lie at these depths:
+  - `(1,1,4,23,24)`: every internal node is BLOCKED, down to depth 15.
+  - `(1,1,3,19,20)`: depth 15 for both.
+  - `(1,1,8,9,17)`: depths 12 and 15.
+  - `(1,1,10,11,12)`: depths 14 and 15. In `(1,1,3,23,24)` (33,568 leaves) NOCELL nodes stop at depth 12, and depths 13 to 16 hold 25,383 BLOCKED nodes.
+
+**3. Rule 22, the 162 large roots (E928).**
+- (i) Feature: E928's (`a ≤ 3`, `b ≤ 5`; `e = 24` in 91, `d = 23` in 54), and now with this artifact: the internal nodes are mostly BLOCKED, and the cuts fall mostly on `d` or `e`.
+- (ii) What forces the size: in most of these roots, the pair condition against the fast reading, not the existence of slow cells. Why a box must shrink to about depth 15 before two cells escape every `x ∈ [49, 51]`, stated in the readings, is not derived. A candidate is E931's link law, `x/g_d` and `x/g_e` near 1 against the cells `((8k'−1)/(8k+1), (8k'+1)/(8k+1))`. It is named here and not tested. **Not understood.**
+- (iii) Same mechanism as the other roots: not tested, because no small root was profiled. **Not understood.**
+
+- **The outlier groups.** Each is listed with its feature; for each, (ii) what forces it and (iii) whether it is the same mechanism as the BLOCKED-majority roots are **not understood**.
+  - 22 roots where NOCELL is at least BLOCKED. (i) `e = 25` in 5, which are all 5 of the population's `e = 25` roots; `e = 24` in only 2, `(1,1,11,13,24)` and `(1,4,22,23,24)`, against 91 of 162 overall; `e − d = 1` in 17 of the 22. Lists in `prof2_v1.out`. (ii), (iii) **not understood**.
+  - 4 roots with no BLOCKED node: `(1,1,9,11,20)`, `(1,1,12,13,25)`, `(1,1,20,21,22)`, `(1,3,3,24,25)`. (i) Two have `e = 25`; no common feature in the readings is found. (ii), (iii) **not understood**.
+  - 13 roots cut most on `c`: `(1,1,7,8,15)`, `(1,1,9,11,20)`, `(1,1,10,11,12)`, `(1,1,11,12,23)`, `(1,1,11,13,24)`, `(1,1,12,13,25)`, `(1,1,14,15,16)`, `(1,1,15,16,17)`, `(1,1,19,20,21)`, `(1,1,22,23,24)`, `(1,1,23,24,25)`, `(1,2,19,20,21)`, `(1,2,23,24,25)`. (i) `a = 1` and `b ≤ 2` in all 13, `c ≥ 7`, and `d − c = 1` in 11; the two others have `d − c = 2`. (ii), (iii) **not understood**.
+
+**Not done:** the outlier groups of item 3; the four width checks without `native_decide`; the restatements over `cells_kernel` in other files (E928's Consequence; here new copies in `TailStrip49Kernel.lean`, no existing file edited); (ii) and (iii) above.
+Existence step named (rule 1, displacement frame): none. This removes `native_decide` from one step of the route through `TailBelow17` ([PROVISIONAL: covering]) and supplies no step of rules 1 to 4.
+**Consequence (M7) [L]:** `tailBelow17_of_above51 : (above 51 → lands below 17) → TailBelow17` is now kernel-checked end to end, with the standard axioms and the covering tag. With E925's `lonelyRunnerEight_of_band_tail : BandCertData → TailBelow17 → LonelyRunnerEight`, the route stands at the two owed premises of E925, `BandCertData`, and the hypothesis `above` (an arrangement with a reading past 51 lands below 17); neither is touched here. Nothing is committed.
+
+## E938 (2026-11-25): arrangement finiteness (G2) in the wall-window split: with outcomes named by `S` only (the window holding `T`, whether `T` is its opening or an `F` exit, and the opener's rank and lap), the outcomes of arrangements with `R* = 8 d_min T ≤ B` are finitely many for every `B`, and an unbounded `R*` gives infinitely many [P]; the fast readings' laps never enter, and in the populations run they add no outcome (laps up to 283) [OBS, exact]; every member with `R* ≥ 11` found has exactly one reading above `7 d_min`, at most `156219622161941461208683731/19342813113834066795298816 · d_min`, which is below `81/10 · d_min`, and moving that reading by `j/T` lowers `R*` in all 460 cases tried, forced by `displaced_earlier` [L, E754]; why the high landings need one fast reading just above `7 d_min` is **not understood**
+
+**Map:** goal G2 (rules file): catalogue arrangements by how the cascade finds the isolation, to show a finite set, with `d_min` and `d_max` taking the continuous values (M060) and the AP/grid taking scale (M075). The owner's open items on record:
+- M089: *"whether the A outcomes reduce to finitely many once the d_max lap is quotiented out"*;
+- M071: the d_max side, *"How a fast reading can be shifted by 8k/R* without changing the path"*;
+- M062 and M071: why `R*` stays at or below about 12.
+
+Owner (2026-11-25): *"No keep going with moving towards proof that the cascade provide a finite way locating individual isolations for arbitrary arrangements"*, then *"We already have existence from ap and phi(n) so its arrangement finiteness that is what it is really about"*.
+
+**Source test.** Each object used comes from the record:
+- the `S`/`F` split by the ratio wall 7 (E929 item 1 [P]; E930 and E931 [P]; E934 [L]);
+- the view on the grid through the setter (E747, E748 [L]);
+- the landing as a setter's class-1 instant (E754 [L]);
+- the freeze rule for one displaced reading (E754, `displaced_earlier` [L]; rule 3);
+- the outcome classes (E325, E328, E330) and the tree supremum `26433/2209` (E319, E330 [TREE]).
+
+M2 class (d): every run takes the cascade as the oracle.
+**Record search (rule 13; PARTIAL):** read in full this turn: E747, E748, E754, E771, E772, E794, E795, E325, E328, E330, E926, E929 to E934; `MECHANISM_MAP_v5.md` §§4 and 11.2–11.3; owner messages M055, M056, M060 to M064, M071, M075, M080, M086, M088, M089 and M092 in `OWNER_INSTRUCTIONS_EXTRACT_v1.md`. Not read: the bodies of E673 to E923 other than those named.
+
+**1. The view words do not form a finite set** [OBS, exact; `experiments/n8/view_word_v1.py` (SHA-256 begins `81b96cb3`) and `view_word_v2.py` (`c11ae27e`), with `.out` files `view_word_v1_small.out`, `view_word_v1_Z16.out` and `view_word_v2_small.out`; `view_word_v3.py` (`11798aec`) and `.out` list the longest paths].
+- A path letter is the new setter's residue `n mod 8` on the grid through the previous setter, with the sign of its deviation (E747). The first letter is always one of `0+`, `0−`, `00`, `1−` or `7+` [P]. At the start `M = 0`, so a reading is blocked iff `(n mod 8) + ε` lies within 1 of a multiple of 8, and `|ε| ≤ 1/2` leaves only these five.
+- **Windings.** With the winding `j` of the rotated deviation `(8M+1)ε` kept, the largest `|j|` is 2, 4 and 7 in Q, W40 and W80, and the landing lap `M*` reaches 4, 8 and 14. With the winding dropped, the alphabet has 17 letters.
+- **Run-compressed words.** Q has 256, W40 431, W80 528 and W160 531, and W80 and W160 share 210. So the words are not the finite object.
+- **Long paths.** The longest paths come from arrangements near the AP: Q's 15-move case has readings `1, 23/11, 35/11, 47/11, 58/11, 64/11, 81/11`. Each such path runs `1−` letters down the ranks at lap 1 and then repeats at lap 2.
+
+**2. Outcomes named by `S`, and the reduction** [P].
+- **Outcome.** Readings `r_1 ≤ … ≤ r_7`, `d = r_1`, `S` the readings at most `7d`, `T` the landing, `R* = 8dT`. The outcome is `(|S|, i, kind, (rank, m))`:
+  - `i` is the index of the `S` window holding `T`;
+  - `kind` is `t0`, `open` (`T` is the window's opening) or `Fexit` (`T` is an `F` exit inside it);
+  - `(rank, m)` is the opener `(8m+1)/(8r)` of that window, by `r`'s rank in `S`, or `(1, 0)` for window 1.
+
+  By E929 to E931 every landing is of one of the three kinds, and no lap of an `F` reading appears in the outcome.
+- **(A) A bound on `R*` gives finitely many outcomes.** Suppose `R* ≤ B`.
+  - The opening lies at or before `T`, so `8m + 1 ≤ 8rT = R*·r/d ≤ 7B`.
+  - So `m ≤ (7B − 1)/8`, and the rank is at most 7.
+  - Distinct windows have distinct openers, so `i ≤ 1 + 7·((7B − 1)/8 + 1)`.
+  - `|S|` and `kind` take 7 and 3 values.
+- **(B) Unbounded `R*` gives infinitely many outcomes.**
+  - `d ∈ S`, and `T` is clear for `d`, so `R* ∈ [8j+1, 8j+7]` with `j = ⌊R*/8⌋`.
+  - Window 1 is `[t0, 7/(8 max S)]`, so `R* > 7` puts `T` in a window `i ≥ 2`.
+  - That window opens at or after `d`'s exit `(8j+1)/(8d)`. Its opener therefore satisfies `8m + 1 = 8ra ≥ 8da ≥ 8j + 1 ≥ R* − 6`, so `m ≥ (R* − 7)/8`.
+- **Hence**, with outcomes named by `S`, the catalogue is finite iff `R*` is bounded over all arrangements and subjects. The `d_max` side never enters it.
+- **Checked** (`outcome_bound_check_v1.py`, `724d37d2`, and `.out`), with 0 failures:
+  - the bound of (A): 102,960 Z16, 24,000 Q and 110,081 E340 cases;
+  - (B): the 4,939 E340 cases with `R* > 7`;
+  - `R* ∈ [8j+1, 8j+7]`: every case.
+
+**3. The fast readings' laps add no outcome** [OBS, exact; `outcome_split_v1.py` (`170ed45b`) with `outcome_split_v1_W.out` and `outcome_split_v1_all.out`; `outcome_split_v2.py` (`df66cb8d`) with `.out`].
+
+| population | cases | outcomes | largest `F`-setter lap | largest `R*` |
+|---|---|---|---|---|
+| Z16 | 102,960 | 67 | 6 | `33/7` |
+| Q | 24,000 | 88 | 4 | `275/47` |
+| E340 members | 110,081 | 417 | 18 | `9903520314283042199192993792/854305237337811163612999167` |
+
+- **v1, W populations.** W40 to W640 give 26, 16, 10, 8 and 7 outcomes. Each later set lies inside W40's, while the `F` lap grows to 96. This recipe draws all six readings in `(1, H]`, so `S` shrinks as `H` grows. It does not separate the two effects, and v2 does.
+- **v2.** Each arrangement has `d = 1`, three `S` readings in `(1, 7]` and three `F` readings in `(7, H]`, all on the `1/12` grid, with 20,000 per `H`:
+  - `H = 16`: 21 outcomes;
+  - `H = 40` to `1280`: 18, 15, 12, 12, 12 and 10 outcomes, none new;
+  - the `F` lap grows to 283, and the largest `R*` falls from `396/113` to `4236/2065`.
+- **E340's 417 outcomes.** They differ by window index and opener lap. They are the `S` side of item 2, at `R*` up to the value in the table.
+
+**4. Where the high landings are** [OBS, exact; `rstar_dmax_v1.py` (`c40679ee`), `rstar_dmax_v1b.py` (`f07909d1`), with `.out` files].
+- 92 E340 members have `R* ≥ 11`. Each has exactly one reading above `7 d_min`, and the largest is `156219622161941461208683731/19342813113834066795298816 · d_min`, below `81/10 · d_min`.
+- **M071's d_max shift.** Each fast reading `f` was replaced by `f + j/T`, `j = 1..5`, which keeps its position at `T`. In all 460 cases `R*` fell, and the new `R*` is at most 7 in all 460. In each, at the new landing `T₁ < T` every other reading is clear and the old `f` is in the way (460 of 460).
+- **A climb** from the 40 highest members replaced one reading at random: `S` readings on the `1/1024` grid in `(1, 7]`, `F` readings on the `1/64` grid in `(7, 400]`, 1,500 steps each. It found no `R*` above E340's largest. This null is bound to that method: whole-reading replacements, accepted only when `R*` does not fall.
+
+**5. Rule 22.**
+- **The 460 lowered landings.** (i) Feature: moving the one fast reading by `j/T` brings the landing earlier. (ii) What forces it: `displaced_earlier` [L, E754]. A landing before `T` is an instant at which the other readings are clear and the old reading was in the way, which item 4 checks in all 460. (iii) The same freeze mechanism as E754's catalogue. Understood, except that every new landing falls in `d_min`'s first window: why it does is not derived. That part is **not understood**.
+- **The high landings with one fast reading** (92 of 92 with `R* ≥ 11`). (i) Feature: `|F| = 1`, with the fast reading in `(7 d_min, 81/10 · d_min)`. (ii) That reading is in the way at an instant of `d_min`'s first window where the other six are clear, as item 4's shift shows; why a high landing needs this is not derived. (iii) Whether this is E340's gate mechanism (the chain covering `d_min`'s first window) was not tested. Status: **not understood**.
+- **`R*` falling as `H` grows in v2.** (i) Feature: the largest `R*` decreases with the `F` scale while the outcomes stay inside `H = 16`'s set. (ii) Not derived. (iii) Not tested. Status: **not understood**.
+- **The long paths of item 1** (Q's 15-move case and the others listed in `view_word_v3.out`). (i) Feature: readings near the AP `1, …, 7` in units of `d_min`, and a path that runs `1−` letters down the ranks at lap 1 before repeating at lap 2. (ii) What forces the run is not derived. (iii) Whether it is the AP landing law of E566 to E570 was not tested. Status: **not understood**.
+- **The W populations' nesting in v1.** (i) Feature: each later set lies inside the earlier ones. (ii) Forced by the draw: fewer readings fall at or below 7 as `H` grows, so `|S|` falls. (iii) A property of the population, not of the cascade; v2 removes it. Understood.
+
+**6. E844 item 6 probe** [OBS, floats steer only; `e844_item6_phase_block_v2.py` (`e7af147d`) and `.out`].
+- The search looked for integer speeds up to 10 with phases under which every instant has a reading within `1/8` of an integer.
+- 251 sets with `m = 5` and 210 with `m = 6` were searched, and none was found. That bounds the result to this float search; it is not a statement about the supremum.
+
+**Not done:**
+- the bound on `R*` itself, which item 2 makes the whole of G2 for `S`-named outcomes;
+- the items marked not understood in item 5;
+- Lean for item 2.
+
+Existence step named (rule 1, displacement frame): none. Existence is taken from the AP and `φ(n)`, as the owner states; every statement here locates a landing that exists.
+**Consequence (M7) [P for item 2; OBS for items 3 and 4]:** M089's quotient is answered in form. In the split, an outcome is named by `S`, and the `d_max` lap is absent by construction (E929 to E931), and absent in the data. Arrangement finiteness for these outcomes is then exactly one statement in `d_min` units: `R* = 8 d_min T` is bounded. That is M062's and M071's question, *"why R* < 12"*. In the entries read (E319, E330), the largest `R*` recorded is the tree supremum `26433/2209` (`ρ_7 ≤ 25` [TREE]). Every E340 member with `R* ≥ 11` has all its readings below `81/10 · d_min`. Nothing is committed.
+
+## E939 (2026-11-25): the high landings are E340's `d_min` gate, with the covering of `d_min`'s first arc done by a single fast reading, one zone per slow window, first lap 1 [OBS, exact; the one-zone cell is E930 item 1 [P]]; with one fast reading the bound on `R*` is computed exactly per slow set: on E340's 7,644 slow sets and on the 376,992 slow sets with five readings on the `1/6` grid in `(1, 7]`, no fast reading `f > 7 d_min` puts the landing past `d_min`'s second arc, so `R* ≤ 15` there, and the largest per-set bound on E340's sets is `311960889899915829274579304448/26552047723665194922581185897` [P per set, PROVISIONAL: covering; OBS over the sets]; whether that holds for every slow set, and for two or more fast readings, is open
+
+**Map:** goal G2, after E938: with outcomes named by `S`, arrangement finiteness is the statement that `R* = 8 d_min T` is bounded. Owner (2026-11-25): *"Yes test it and then move on to R* bound"*. The test asked is E938 item 5's: whether the high landings (`R* ≥ 11`, one reading above `7 d_min`) are E340's gate mechanism.
+
+**Source test.** Each object used comes from the record:
+- the `d_min` gate (E340): the landing exceeds `7` iff the chain from `1` covers `[1, 7]` and reading `1` sets the move to `9`;
+- the `S`/`F` split by the ratio wall `7`, and the landing in the first `S` window that `F` does not pass (E929 item 1 [P]);
+- the one-move pass cell (E930 item 1, `one_move_pass_iff` [L]): `f` passes the `S` window `[a, b]` in one move iff `f ∈ I_k(a, b) = ((8k − 1)/(8a), (8k + 1)/(8b))` for some `k ≥ 1`, which is non-empty only when `b/a < (8k + 1)/(8k − 1)` (E930 item 2);
+- the outcome reduction (E938 item 2 [P]);
+- the extremal cell and its tight rows (E344).
+
+M2 class (d): every run takes the cascade as the oracle, or a rule proved from it.
+**Record search (rule 13; PARTIAL):** read this turn: E340, E341 to E345 (headings and bodies of E340 and E344), E929 to E938. Not read: the bodies of E346 to E928 other than those named in E938.
+
+Units: `d_min = 1` throughout, so readings are ratios to `d_min` and instants are in units of `1/d_min`.
+
+**1. The gate test** [OBS, exact; `gate_single_fast_v1.py` (SHA-256 begins `44b257c5`) and `.out`].
+- All 92 E340 members with `R* ≥ 11` cross the gate in the same way:
+  - each has `|F| = 1`;
+  - each pass of an `S` window inside `d_min`'s first arc `[1/8, 7/8]` is one move of the single fast reading `f`, one zone per window;
+  - `f`'s lap at window 1 is `k1 = 1`, and `f` lies in E930's cell `7 < f < 9·max S/7` for window 1;
+  - every pass before `T` in the second arc is also one move of `f`.
+- The laps of `f` across the first-arc passes take four patterns: `1-2-4-6` (43), `1-2-4-5-6` (39), `1-3-5` (8) and `1-3` (2).
+- Among the 4,847 members with `9 ≤ R* < 11`:
+  - 4,694 have `|F| = 1`, 149 have `|F| = 2` and 4 have `|F| = 3`;
+  - in 153, some first-arc pass takes two or more moves, and these are exactly the 153 with `|F| ≥ 2` (item 4);
+  - of the 4,694 with `|F| = 1`, `k1 = 1` in 4,649 and `k1 = 2` in 45 (item 4), and all satisfy E930's window-1 cell.
+- **Answer to E938 item 5:** yes. Each high landing is E340's gate crossing: the chain from `1` covers `[1, 7]`, and here the covering is the one fast reading `f` passing each slow window inside one of its zones. The bound `f < 9·max S/7 ≤ 9` is E930's cell [P].
+
+**2. With one fast reading the landing is read off the slow set** [P, from E929 item 1 and E930 items 1 and 2; the window-against-zone steps carry PROVISIONAL: covering where they occur].
+- Every `S` window lies in one of `d_min`'s clear arcs `[(8j + 1)/8, (8j + 7)/8]`, and `T` cannot lie in `d_min`'s zones.
+- Walk the `S` windows in order from `t0 = 1/8`, keeping the set `A` of `f` that pass every window so far: `A` starts as `(7, ∞)`, and at window `[a, b]` it becomes `A ∩ ∪_k I_k(a, b)`.
+- If `A` first becomes empty at window `W = [a, b]`, then no single `f` passes `W` [PROVISIONAL: covering; the claim supported is that `B(S)` bounds `R*` for every single fast reading]. So for every `f > 7` the landing of `S ∪ {f}` is at or before `b`, and `B(S) = 8b` bounds `R*` for every one fast reading.
+- `f` passes `[a, b]` only if `[a, b]` lies inside one of `f`'s zones, of length `1/(4f)`, so `f < 1/(4(b − a))` [PROVISIONAL: covering; the claim supported is that the search over `f ∈ (7, 10^4)` covers every `f > 7`]. If some window at or before `W` has length above `1/40000`, no `f ≥ 10^4` passes, and the search over `f ∈ (7, 10^4)` is complete.
+- So `R* > 7` iff `f` lies in `A_1(S)` (the windows of arc 0), and `R* > 15` iff `f` lies in `A_2(S)` (arcs 0 and 1).
+
+**3. The bound on two populations** [P for each set, PROVISIONAL: covering; OBS over the sets; `one_fast_reach_v1.py` (`632b7f28`), `one_fast_reach_v2.py` (`f74faeef`), `one_fast_reach_v4.py` (`cbfc29fd`), with `.out` files].
+
+| population | slow sets | `B(S)` in arc 0 (`R* ≤ 7` for every `f`) | `B(S)` in arc 1 (`9 ≤ R* ≤ 15` possible) | `B(S)` later | cap removed |
+|---|---|---|---|---|---|
+| E340 members with `|S| = 6` | 7,644 | 2,918 | 4,726 | 0 | 7,644 of 7,644 |
+| five readings on the `1/6` grid in `(1, 7]` | 376,992 | 376,985 | 7 | 0 | 376,992 of 376,992 |
+
+- **The largest `B(S)`**, over E340's slow sets, is `311960889899915829274579304448/26552047723665194922581185897`, below `12`. It is at `W` = window 6, which is the window opened by the slow reading `42801440877601317947796113145/9903520314283042199192993792` at lap 6 and closed by `26552047723665194922581185897/4951760157141521099596496896` at `63/8`. Just before `W`, `A` is one interval of length below `1/20`.
+- **On the grid**, the largest `B(S)` is `21/2`, at `S = {1, 8/3, 7/2, 13/3, 29/6, 6}`, at `W` = window 5 `[147/116, 21/16]`.
+- **Cross-check.** For 90 sampled `(S, f)` with `f ∈ A_1(S)`, the cascade gives `R* > 7` in all 90 (v1).
+- **At E344's vertex** (`one_fast_reach_v5.py` (`d9d0f352`) and `.out`). The vertex has `ρ_7 = 2209/297` as its only reading above `7`.
+  - At the vertex itself, `B(S) = 225/47`. There `f = 2209/297` is the right endpoint of window 1's pass interval `(7, 2209/297)`, and window 4 has zero length (`[225/376, 225/376]`). Both come from E344's tight rows: `9 ρ_6 = 7 ρ_7` puts `f` on the edge. The vertex is the closure of open cells, not a member of them.
+  - At 200 exact points within relative `10^{-4}` of the vertex in the slow readings, the largest `B(S)` is `1417500000/117500611`, which is above `12`. `B(S) ≥ 26433/2209` holds at 2 of the 200 (item 4).
+
+**4. Rule 22.**
+- **Why `A` empties: two kinds** (`one_fast_reach_v3.py` (`1ede441e`) and `.out`, E340's 7,644 sets).
+  - **Alone** (3,849 sets: 1,667 in arc 0, 2,182 in arc 1). (i) Feature: no `f > 7` passes `W` at all. (ii) Forced by E930 item 2: `b/a` is at least the pass ratio `(8k + 1)/(8k − 1)` for every lap `k` that `f > 7` can have at `W` [PROVISIONAL: covering; the claim supported is that no single `f` passes `W`]. (iii) The one-move cell's own bound. Understood.
+  - **Intersection** (3,795 sets: 1,251 in arc 0, 2,544 in arc 1). (i) Feature: each window is passable on its own, but no `f` passes them all. (ii) What forces the empty intersection is not derived. (iii) Not tested. Status: **not understood**.
+- **The vertex value `225/47`.** (i) Feature: `B(S)` at E344's vertex lies far below the supremum. (ii) Forced by the tight row `9 ρ_6 = 7 ρ_7`, which puts `f` on the edge of window 1's open pass interval, and by a zero-length window 4. (iii) A closure effect of the cell, not a different mechanism. Understood.
+- **The 2 near-vertex points with `B(S) ≥ 26433/2209`** (`one_fast_reach_v6.py` (`b5b6e3b6`) and `.out`). (i) Feature: `B(S)` is above E344's supremum, and above `12`. (ii) At each point, `f` at the midpoint of the pass set just before `W` lands inside `W`, at `R* = 528660000000/44180488189` and `176220000000/14727224071`. Both are at most `26433/2209`, and `B(S) − R*` is `10807850992500000/110451794818846457` and `14405391090000000/147277409965648921`. `B(S)` is the right end `8b` of the clear window holding the landing, not the landing; E344 gives that right end as `567/47` at the supremum. (iii) The same pass mechanism; the gap is the window's length beyond `T`. Understood.
+- **`k1 = 2`** (45 members, `9 ≤ R* < 11`; `gate_single_fast_v2.py` (`2f7e80eb`) and `.out`). (i) Feature: `f ∈ (15, 17·max S/7)`, from `74302922787137145587013936209/4951760157141521099596496896` to `320714652865808701556438772903/19807040628566084398385987584`, and `max S > 105/17`, in 45 of 45. (ii) Forced by E930's window-1 cell at lap 2, `((8·2 − 1), (8·2 + 1)·max S/7)`, which is non-empty iff `max S > 105/17`. (iii) The same one-zone pass, at the next lap. Understood.
+- **Two or more fast readings** (153 members, `9 ≤ R* < 11`; `gate_single_fast_v2.py`). (i) Feature: `|F| ≥ 2`, and each has a first-arc pass of two or more moves; every one of the 269 such passes is a chain through two or more distinct fast readings. The 4,786 members with `|F| = 1` pass in one move throughout. (ii) Each multi-move pass is a cascade chain of fast zones, each move set by a fast reading in the way at the state (E931's link law). What keeps these members below `R* = 11` is not derived. (iii) A different pass mechanism, a chain of zones rather than one zone, at the same gate. Status: **not understood** for (ii).
+- **`|F| = 1` in the high landings** (92 of 92). (i) Feature: every member with `R* ≥ 11` has one fast reading. (ii) Item 1 shows how a single fast reading crosses the gate. What excludes two or more fast readings at `R* ≥ 11` is not derived. (iii) Not tested. Status: **not understood**.
+- From E938 item 5, each still **not understood**, with (i) as recorded there and (ii), (iii) not derived: why shifted landings drop into window 1; why `R*` falls as `H` grows in v2; the long paths near the AP.
+
+**Not done:**
+- `B(S) ≤ 15` for every slow set with `|S| = 6`; it is shown here on two populations only;
+- slow sets with `|S| < 6`, where two or more readings are fast;
+- the not-understood items of item 4.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved (the owner: existence from the AP and `φ(n)`). No displacement step is supplied; every statement here locates a landing that exists. The bound of item 2 rests on E929 item 1 [P] and on the window-against-zone steps tagged [PROVISIONAL: covering].
+**Consequence (M7) [P for item 2, PROVISIONAL: covering; OBS for items 1 and 3]:** with one fast reading, the bound on `R*` is a computable function of the slow set, `B(S)`. It is exact for each set, and it covers every fast reading at once. On the populations run, `B(S) ≤ 15`, so by E938 item 2 these arrangements have finitely many `S`-named outcomes. G2 for `|F| = 1` is now one statement about slow sets: for every `S` of six readings in `[1, 7]`, the walk of item 2 empties `A` within `d_min`'s first two arcs. Nothing is committed.
+
+## E940 (2026-11-25): owner: the cascade sorts every arrangement tried into a few resolutions, and runners are bound by their neighbours' speed. Record: E939's bound is E389's S6 under another name. Tests: with each reading held between its neighbours as the one mover, every one of E340's 110,081 members gets a bound on `R*` inside the arc where the cascade lands it: `d_min`'s first arc for all 105,142 landings at most 7, and the second arc for all 4,939 gate crossers. The largest bound is `311960889899915829274579304448/26552047723665194922581185897`, below 12 [P per member, PROVISIONAL: covering; OBS over the population]. Every gate crosser has all neighbour ratios below `24/5` [OBS, exact]
+
+**Owner (2026-11-25), verbatim:**
+- *"Existence is proved, the next step is the cascade is a way to view/sort arbitrary arrangements to a finite set. Once we have that we will show how each of the finite set displaces the existence. Have have proved some of a rule for finite set, but lets look at experiments to derive the rest, once we have finite set proved we can move on to displacement proof"*
+- *"Why do I think the cascade can provide us with mechanisim that forces a finite set, because we tried to find any arrangement that was sorted by the cascade into one of a few types of resolution. We just couldn't find one. If the cascade which is not a complicated mechanisim can sort everything we try, I believe there must be mechanisim we can why."*
+- *"I feel like we might have already done work towards this? The arrangement itself bounds some thing because runners are bound by their neighbours speed otherwise it is just restatement of other arrangements"*
+
+**Map:** goal G2. E938 item 2 [P]: with outcomes named by `S`, the catalogue is finite iff `R* = 8 d_min T` is bounded. The owner's order of work is (1) the finite set, then (2) the displacement of existence for each member of it.
+
+**Source test.** Each object used comes from the record:
+- the landing is the first lonely instant at or after `t0`;
+- a window of the frozen readings' clear set has no point clear of one more reading iff it lies inside one zone of that reading (E354 R1, E366 / L3, E389) [PROVISIONAL: covering; the claim supported is that the walk's bound holds for every position of the moved reading];
+- freezing (rule 3);
+- the order of the readings (rule 4: no two at the same speed).
+
+M2 class (d): every run takes the cascade as the oracle.
+**Record search (rule 13; PARTIAL):** read this turn: E340 to E345, E354, E358, E366, E369 to E372, E377, E387 to E391, E394; the headers of `Spec/TwoBlockN.lean` and the memory note on Fresh's cluster classes; a grep of `LonelyRunner/LonelyRunner` and `LonelyRunnerFresh/Fresh` for gap, cluster and fast-runner theorems, which found `FastRunnerN.lonely_of_fast_runner` (`Spec/FastRunnerN.lean`), `TwoBlock.exists_big_gap`, `TwoBlock.b1_remainder` and `NativeClusters.cluster_chain_isolation`. Not read: E346 to E353, E355 to E365, E373 to E376, E378 to E386, E392, E393, E395 to E928, except those named in E938 and E939.
+
+Units: `d_min = 1`.
+
+**1. Correction: E939 items 2 and 3 restate E389's S6** (rule 10).
+- E354 (R1, R2) and E389 already state the same objects:
+  - a gate crossing holds iff every window of the six slower readings lies inside one zone of reading 7;
+  - the set of reading-7 speeds that cross is the intersection over windows of `∪_j ((8j−1)/a, (8j+1)/b)`;
+  - S6: no reading 7 nests the windows of both `[1, 7]` and `[9, 15]`.
+- E939's walk is S6 with the fast range `(7 d_min, ∞)`, tested on two new populations, so E939's `B(S) ≤ 15` is S6 on those populations.
+- E366 (L3) already states E939 item 1's "one zone per window".
+- E390 and E391 record the owner's ruling that S6 and the windows are diagnostics, not the owner's route to existence. Here they are used only for E938's finiteness reduction, not as an existence step.
+
+**2. The fastest reading as the one mover, over every six** [P per six, PROVISIONAL: covering, the claim supported is that `B*` bounds `R*` for every fastest reading; OBS over the sets; `one_mover_bound_v1.py` (SHA-256 begins `bfff0d9b`), `.out` files `_e340`, `_climb1`, `_climb2`].
+- **The object.** Take any arrangement, with `six` its six slowest readings and `v` the fastest.
+  - `T` is the first point at or after `1/8` of `clear(six)` that `v` leaves clear.
+  - Walking `six`'s windows in order gives `B*(six)`, which bounds `R*` for every `v > max six`.
+  - The range of `v` is capped by the longest window met: `v < 1/(4L)`.
+- **E340's distinct six-slowest sets** (108,858; `|F|` any):
+  - `B*` at most 7 in 82,925, in `[9, 15]` in 4,879, later in 0;
+  - 21,054 skipped, because their longest window's pass set exceeds `2·10^5` laps;
+  - `R* ≤ B*` for all 89,027 members whose six was computed.
+- **How the set of `v` empties** (87,804 bounded sixes):
+  - alone in 55,646;
+  - by a pair of windows in 27,544, whose earlier window is window 1 in 17,379, the previous window in 7,105 and another in 3,060;
+  - by three or more windows in 4,614.
+- **Two exact climbs** (seeds 1 and 2; 25 starts, 1,500 steps each):
+  - The largest `B*` found is `5238860534105373/435332880620882`, above 12.
+  - At that six, a `v` inside the set before the blocking window lands at `R* = 4421485588415616/380948936185291`, which is below `26433/2209`. This is E939 item 4's case: `B*` is the right end of the clear window that holds the landing.
+
+**3. Each reading held between its neighbours as the one mover** [P per member, PROVISIONAL: covering, the claim supported is that `B_k` bounds `R*` for every position of reading `k` between its neighbours; OBS over the population; `neighbour_mover_v1.py` (`6652247d`), `.out` files `_part0` to `_part7`].
+- **The object (owner: runners are bound by their neighbours' speed).** In `r_1 = 1 < r_2 < … < r_7`, reading `k` (for `k = 2..7`) moves in `(r_{k−1}, r_{k+1})`, with `(r_6, ∞)` for `k = 7`. The other six are frozen (rule 3).
+  - A position beyond a neighbour reorders the readings, so it is another arrangement (rule 4).
+  - The walk of item 2, with `v` restricted to that segment, gives `B_k`. Then `R* ≤ min_k B_k`.
+- **All 110,081 members of E340:**
+
+| members | `min_k B_k` at most 7 | `min_k B_k` in `[9, 15]` | later |
+|---|---|---|---|
+| `R* ≤ 7`: 105,142 | 105,142 | 0 | 0 |
+| `R* ≥ 9`: 4,939 | 0 | 4,939 | 0 |
+
+- `R* ≤ B_k` held for every `B_k` computed: no failure line in the eight `.out` files.
+- `B_7` was skipped in 21,102 members (the fastest reading has no upper neighbour). An interior reading bounds every one of these members.
+- The largest `min_k B_k` is `311960889899915829274579304448/26552047723665194922581185897`, at the member with `R* = 9903520314283042199192993792/854305237337811163612999167` (E938's largest `R*`). It is attained by `k = 2, 3, 4, 6, 7`.
+- **Which reading attains the minimum** (a member counts once for each `k` that attains it):
+
+| `k` | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|
+| `R* ≤ 7` | 85,354 | 81,124 | 79,160 | 74,349 | 68,932 | 46,618 |
+| `R* ≥ 9` | 4,158 | 4,810 | 3,789 | 2,093 | 4,206 | 4,335 |
+
+- **What this means for each member.** Some reading can be moved anywhere between its two neighbours, with the other six frozen, without moving the landing out of the arc it is in. For a landing at most 7, every position keeps it at most 7. For a crosser, no position takes it past `15`.
+
+**4. Neighbour ratios** [OBS, exact; `neighbour_ratio_v1.py` (`1e77c43d`) and `.out`].
+- Gate crossers (4,939): every neighbour ratio `r_{k+1}/r_k` is below `24/5`. The largest is at `k = 1`, the exact `r_2/r_1 = 5357275607423737/1125899906842624` of one member (E340's readings are stored as dyadic fractions).
+- Landings at most 7: the largest neighbour ratio is `8583747560173039/562949953421312`. 3,270 members have a ratio above 7, all at `k = 1` (`r_2 > 7 d_min`, so `S = {d_min}`).
+- The 21,102 members whose `B_7` was skipped all land at most 7; in 499 of them `r_2 > 7`.
+
+**5. The neighbour-speed results already in the record** (rule 13; read, not re-run):
+- R8, `FastRunnerN.lonely_of_fast_runner` [L]: one reading more than 7 times every other.
+- `TwoBlock.exists_big_gap` [L]: seven readings spanning more than a factor 7 have two consecutive ones in ratio at least `9/7`.
+- `TwoBlock.b1_remainder` [L].
+- E354 R3: `ρ_6 < 6/(longest K5 window)`, and E354's route of bounding each neighbour ratio one order down.
+- E358: `ρ_7 ≤ 7 ρ_6` for crossers.
+- E387 [TREE]: crossers' middle readings lie in a bounded box.
+- E377: the growth below the gate comes from the arrangement's own larger scales.
+- Fresh's cluster classes, per the memory note (`ClusterTransfer`, `FarClusters`, `FastGaps`, `NativeClusters.cluster_chain_isolation` [L, PROVISIONAL: covering]): the separations needed for a slow cluster of size 1 to 6 against a near-periodic block.
+
+**6. Rule 22.**
+- **The fastest reading's walk skipped** (21,054 sixes in item 2, and `B_7` in 21,102 members in item 3; the same walk). (i) Feature: all land at most 7 (`neighbour_ratio_v1.out`). (ii) The fastest reading has no upper neighbour, so its range is capped only by the longest window, and the pass set over that range exceeded the lap limit. Why the longest window is short in these sixes is not derived. (iii) A limit of the computation, not a cascade mechanism; an interior mover bounds every one. Status: **not understood** for (ii).
+- **`min_k B_k = R*` exactly** (11 members; `neighbour_mover_ties_v1.py` (`176186a9`) and `.out`). (i) Feature: the landing is the right end of the blocking window. (ii) In all 11, a zone opens and another closes at `T`: reading 7 enters its lap-7 zone, while reading 5 leaves its lap-4 zone (10 members) or reading 6 leaves its lap-4 zone (1 member). The landing is a single clear point, an exit = entry coincidence of two zones. (iii) These are E340's 11 zero-width members (10 with opener `(5, 4)`, 1 with `(6, 4)`), the same mechanism. Understood.
+- **Crossers bounded by reading 5 alone** (24 members). (i) Feature: the minimum is attained only by `k = 5`. (ii) Not derived. (iii) Not tested. Status: **not understood**.
+- E939's items stay **not understood**:
+  - the intersection kind;
+  - why the high landings have one fast reading;
+  - the chain crossings below 11;
+  - and from E938, the window-1 drop, the fall of `R*` with `H`, and the long paths near the AP.
+
+**Not done:**
+- a derivation that every arrangement has a reading whose neighbour segment keeps `B_k` within `d_min`'s second arc;
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [P per member, PROVISIONAL: covering; OBS over the population]:** in E340's population each arrangement carries a certificate of its arc from one reading held between its neighbours. Because a position beyond a neighbour is another arrangement, the certificate covers the whole segment. E938's finiteness then needs one statement: every arrangement has such a reading with `B_k ≤ 15`. That statement is equivalent to `R* ≤ 15` for all arrangements, so it is a reformulation, not a reduction. Its use is that one certificate covers a whole segment of arrangements. Nothing is committed.
+
+## E941 (2026-11-25): owner: "Take the first exception, run it through the cascade and the cascade tells you what happens". Through the cascade, E940's first two exceptions are not exceptions. The 21,102 skipped members land like every other member: at the opening of a window of the six slower readings or at an exit of the fastest reading, which nests every earlier window. The skip was the walk listing laps for windows shorter than `1/(4·10^6)`, and with those windows deferred the bound is at most 7 for all 21,102 [OBS, exact; PROVISIONAL: covering]. For every reading `k`, `B_k ≥ 8 ×` the end of the clear window holding the landing, and the reading that closes that window never attains the minimum [P]. In all 4,939 gate crossers the minimum is exactly that end, and the 24 crossers bounded only by reading 5 follow the same rule [OBS, exact]
+
+**Owner (2026-11-25), verbatim:** *"Yes go on to try and understand the exceptions.   I think you will find they are not exceptions.  Take the first exception, run it through the cascade and the cascade tells you what happens"*
+
+**Map:** E940 item 6, in order. The cascade is the oracle (the owner's instruction): each exception is run through `cascade()` and read off its path and landing.
+
+**Source test.** Each object used comes from the record:
+- the landing as the first lonely instant at or after `t0`, and its three kinds (E929 item 1 [P]);
+- one zone per window (E366 / L3);
+- the neighbour-held mover and `B_k` (E940 item 3) [PROVISIONAL: covering; the claim supported is that `B_k` bounds `R*` over the segment].
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E929, E940, E341, E366 and E369, all read in full this session (E366 and E369 for E940). Nothing further was read for it.
+
+Units: `d_min = 1`.
+
+**1. The first exception: the 21,102 members whose fastest-reading walk was skipped** (`skipped_through_cascade_v1.py` (SHA-256 begins `8b96e147`), `.out` files `_part0` to `_part7`, totals in `skipped_through_cascade_v1_total.out`).
+- **The first member, through the cascade** (E340 index 46).
+  - Readings, as floats (steer only): `1, 7.014772, 11.921938, 13.6907, 14.859378, 16.12968, 17.0`.
+  - The cascade takes 11 moves and lands at `R* = 203022166442802365083456372736/79870307901561320422063065577`.
+  - The fastest reading `17` sets two of the moves (lap 3 and lap 4). It nests the six slower readings' windows 1 and 2, and it is clear at the opening of window 3, where the cascade lands.
+  - Window 1 has length `113469229609147948999320728372126199496835072/37720877715803609756179398249859904579469307534384631714797`. On its own it admits every lap of the fastest reading up to `1/(4L)`, and the walk listed those laps before reaching window 2, which caps the range.
+- **All 21,102, through the cascade** [OBS, exact].
+
+| | skipped (21,102) | not skipped (88,979) |
+|---|---|---|
+| landing at the opening of a six-window | 15,182 | 61,449 |
+| landing at an exit of the fastest reading inside a six-window | 5,920 | 27,530 |
+| fastest reading nests every six-window before `T` | 21,102 | 88,979 |
+| `R* ≤ 7` | 21,102 | 84,040 |
+
+- **The windows met before the skip.**
+  - In 20,874 members the longest is below `10^{-9}`.
+  - In the other 228, it is below `1/(4·10^6)`. The largest is `31838753322517907526058743187277611008/138610928459060690311458027748322231775371971`.
+- **The walk with deferral** [PROVISIONAL: covering; the claim supported is that `B_7` bounds `R*` for every fastest reading].
+  - A window whose pass set exceeds the lap limit is held aside until a longer window caps `v`, and then applied. The intersection does not depend on order.
+  - `B_7 ≤ 7` in all 21,102, and `R* ≤ B_7` in all 21,102.
+- **Rule 22.**
+  - (i) Feature: every window met before the skip is shorter than `1/(4·10^6)`.
+  - (ii) What forces the skip: a window of length `L` starting at `a` admits about `a/(4L)` laps of `v`, which exceeds the limit of `2·10^5` laps. The cascade does not list laps. It moves, and `v` nests these windows like any other.
+  - (iii) The same landing kinds and the same nesting as the 88,979 others.
+  - Understood as a property of the walk, not of the cascade. Why these sixes have such short windows is not derived. That they are close to the `10^{-9}` slack of the float-LP members (E341, E369) is a reading, not a test, so that part is **not understood**.
+
+**2. The second exception: the 24 crossers bounded only by reading 5** (`reading5_crossers_v1.py` (`cd428f14`) and `.out`; all 4,939 crossers).
+- **The first of them, through the cascade.**
+  - Readings, as floats (steer only): `1, 2.740735, 3.567203, 4.452401, 4.833325, 6.115337, 7.589749`.
+  - The cascade takes 19 moves and lands at `R* = 16044073672507392/1721314246342745`.
+  - The window holding `T` opens at reading 6's exit and closes at reading 7's next entry.
+  - `B_5 = 79938893385826304/8545297373272513`, and `B_k = 52917295621603328/5441840049292963` for `k = 2, 3, 4, 6, 7`.
+- **A lower bound [P].** For any `k`, let `W` be the window of the six frozen readings that holds `T`.
+  - The actual position of reading `k` passes every six-window before `W` and does not pass `W`. So the first window that no position passes is `W` or a later one, and `B_k ≥ 8·end(W)`.
+  - `W` contains the clear window of all seven readings that holds `T`. So `B_k ≥ 8·end` of the landing window, for every `k`.
+- **The closer never attains the bound [P, when no other reading enters at the same instant].** When `k` is the reading that closes the landing window, removing it extends `W` past that end. So `B_k > 8·end`, and whenever the minimum equals the end, the closer is not among the readings that attain it. In the data the closer is outside the attaining set in all 4,939 crossers.
+- **Equality [OBS, exact].** `min_k B_k = 8·end` of the landing window in 4,939 of 4,939 crossers.
+  - So the readings that attain the minimum are the non-closers whose whole segment fails to nest `W`.
+  - In the 24, reading 5 is the only such reading. Every other reading has a position in its segment that nests `W`, which pushes the landing to the next window, at `52917295621603328/5441840049292963` in the first case.
+  - In all 24, the opener is reading 6 and the closer is reading 7.
+- **Rule 22.**
+  - (i) Feature: one reading attains the bound.
+  - (ii) Forced by the lower bound, the equality and the walk: the minimum is the landing window's end, and reading 5's segment is the only one with no position that nests `W`.
+  - (iii) The same rule as all 4,939 crossers.
+  - Understood, except why equality holds in every crosser, which is not derived. That part is **not understood**.
+
+**3. The rest of E940's item 6, still not understood:** the intersection kind (E939), why the high landings have one fast reading, the chain crossings below 11, and from E938 the drop into window 1, the fall of `R*` with `H` and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [P for item 2's lower bound and closer rule; OBS for the rest]:**
+- Both exceptions resolve into the cascade's own objects. In the first, the skip belonged to the walk. In the second, `min_k B_k` is a cascade quantity: the end of the clear window that holds the landing.
+- So in E340's crossers, a neighbour-held reading certifies the landing window exactly. Some reading other than the closer can move through its whole segment without the landing leaving that window.
+- Nothing is committed.
+
+## E942 (2026-11-25): E939's intersection kind through the cascade. In all 3,795 slow sets, every position of the fast reading tried among those that pass the blocking window `W` on its own (45,061 positions) lands before `W`, in the first slow window that position does not pass. The landing is at that window's opening or at an exit of the fast reading [OBS, exact]. So the intersection kind is the same mechanism as the alone kind: the landing is the first slow window the fast reading does not pass (E929 item 1). The window failed is window 1 in 38,939 of the 45,061 positions
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E941, whose next step was the intersection kind of E939 through the cascade. The earlier instruction stands: *"Take the first exception, run it through the cascade and the cascade tells you what happens"*.
+
+**Map:** E940 item 6 and E941 item 3, the next item in order. The cascade is the oracle.
+
+**Source test.** Each object used comes from the record:
+- E929 item 1 [P]: the landing lies in the first `S` window that `F` does not pass;
+- E930 item 1 (`one_move_pass_iff` [L]): one fast reading passes `[a, b]` iff it lies in some `((8k − 1)/(8a), (8k + 1)/(8b))` [PROVISIONAL: covering; the claim supported is the list of positions that pass `W` alone];
+- E939's walk and its intersection kind (`one_fast_reach_v2.py`, `v3.py`).
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E929, E930, E939, E940 and E941, all read this session.
+
+Units: `d_min = 1`; slow sets `S` with `|S| = 6` and one fast reading `f > 7`.
+
+**1. The first set of the intersection kind, through the cascade** (E340 index 63734).
+- Readings, as floats (steer only): `1, 4.031673, 5.142715, 5.790491, 6.474091, 7.0, 7.404052`.
+- `S` has three windows up to `W`: window 1 (a single point at `R = 1`, since `S` contains `7` exactly), window 2 and `W` = window 3.
+- Exactly one interval of `f` passes `W` on its own. It lies inside `(7.6512, 7.6584)` (floats, steer only).
+- The member's own `f` passes windows 1 and 2. The cascade takes 15 moves and lands at the opening of `W`, at `R* = 4644337115725824/911147286467089`.
+- At the midpoint of the interval that passes `W`, `f` fails window 2, and the cascade lands at the opening of window 2, before `W`.
+
+**2. All 3,795 sets** [OBS, exact; `intersection_through_cascade_v1.py` (SHA-256 begins `1a4857c3`) and `.out`].
+- Positions: the midpoint of each interval of `f` in `(7, 10^4)` that passes `W` alone, up to 60 intervals per set, giving 45,061 positions.
+- Through the cascade:
+  - the landing is before `W` in 45,061 of 45,061;
+  - it lies in the first `S` window that `f` does not pass in 45,061 of 45,061;
+  - it is at that window's opening in 35,906 and at an exit of `f` inside it in 9,155.
+- The window that `f` fails is window 1 in 38,939, the window just before `W` in 1,892, and another window in 4,230.
+
+**3. Rule 22.**
+- (i) Feature: `W` can be passed by some `f` on its own, while no `f` passes every window up to `W`.
+- (ii) What forces the landing: by E929 item 1, the cascade lands in the first slow window that `f` does not pass. Every position that passes `W` fails an earlier window, and the cascade lands there in all 45,061 positions tried. No `f` reaches `W`, so `B(S)` holds [PROVISIONAL: covering; the claim supported is that `B(S)` bounds `R*` for every single fast reading].
+- (iii) The same mechanism as the alone kind. The two kinds differ only in whether some `f` could pass `W` on its own.
+- Understood, with one part left. In 38,939 of the positions, the window failed is window 1, whose pass set is E930's cell `(8k − 1, (8k + 1)·max S/7)`. Why the positions that pass `W` mostly fall outside every such cell is not derived, so that part is **not understood**. The cap of 60 intervals per set leaves the remaining intervals untried.
+
+**Still not understood (rule 22), in order:**
+- why the skipped sixes of E941 have such short windows;
+- why `min_k B_k` equals the end of the landing window in every crosser (E941);
+- the part of item 3 above;
+- why the high landings have one fast reading (E939);
+- the chain crossings below 11 (E939);
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS]:**
+- E939's two kinds are one cascade fact: the fast reading's landing is the first slow window it does not pass. That holds whether `W` cannot be passed at all or can be passed only by positions that fail earlier.
+- So the bound `B(S)` reads, in the cascade's terms, as the first slow window that no position of the fast reading gets past.
+- Nothing is committed.
+
+## E943 (2026-11-25): E941's short windows through the cascade. In all 21,102 skipped members, the short window of the six slower readings opens at a slower reading's zone exit. In 21,101 that exit is a state of the cascade's path at which only the fastest reading is in the way, and in the remaining one the cascade jumps over it by the maximum-exit rule [OBS, exact]. The path does not force the window to be short: under jitter that keeps the path, it lengthens by more than a factor 10 in 18,851 of the 19,577 members where some jitter kept the path. For those 18,851 the shortness belongs to where the member sits in its cell, and the cascade passes the window with the fastest reading like any other [OBS, exact; PARTIAL: 18,851 of 21,102; the 726 that did not lengthen and the 1,525 where no draw kept the path are not understood]
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E942, whose next step was the first not-understood item, E941's short windows, through the cascade.
+
+**Map:** E942's not-understood list, item 1. The cascade is the oracle. Jitter that keeps the path is rule 12.
+
+**Source test.** Each object used comes from the record:
+- the cascade's path and its maximum-exit move;
+- one zone per window (E366 / L3);
+- E941 item 1, the skipped members and their windows.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E341, E366, E369, E941 and E942, all read this session.
+
+Units: `d_min = 1`.
+
+**1. The first skipped member, through the cascade** (E340 index 46; `short_window_v1.py` (SHA-256 begins `c1490ec3`)).
+- The six slower readings' window 1 runs from rank 3's lap-2 exit, `17/(8 ρ_3)`, to rank 6's lap-3 entry, `23/(8 ρ_6)`.
+- Its left end is a state of the path, at which only the fastest reading (`17.0000000000000` as a float, steer only; lap 3) is in the way. The cascade moves from there to that reading's exit.
+- The window is short because `ρ_6/ρ_3 − 23/17 = −183319427449248331/8028702255148386488959845427637`, below `10^{-13}` in size (`short_window_m46_ratio_v1.py` (`bf9ebbe3`) and `.out`, exact).
+
+**2. All 21,102** [OBS, exact; `short_window_v1.py` with `.out` files `_part0` to `_part7`, totals in `short_window_v1_total.out`].
+- **Ends.** In 21,102 of 21,102, the shortest window met before the skip opens at the exit of one of the six readings and closes at another's entry.
+- **Through the cascade.** In 21,101, the opening is a state of the cascade's path, and at it only the fastest reading is in the way.
+- **Jitter keeping the path (rule 12).** Readings 2 to 7 were each moved by a relative amount of at most `10^{-s}`, with `s` in `{7, 8, 9, 10}`, in 24 draws per member. The draws are seeded by the part number, so the run is reproducible; the cascade on each jittered arrangement is exact. A draw was kept only if the setter ranks and laps of the path were unchanged.
+  - Some draw was kept in 19,577 members.
+  - In 18,851 of them the same window lengthened by more than a factor 10, and in 14,495 it reached at least `10^{-9}`.
+  - In 726 it did not lengthen by a factor 10 under the kept draws.
+  - In 1,525 members no draw kept the path.
+
+**3. The one member whose window opening is not a path state** (E340 index 24514; `short_window_odd_v1.py` (`dea6d46d`) and `.out` files).
+- At the state before the window, readings 6 (lap 3) and 7 (lap 4) are both in the way.
+- Reading 6's exit is `247588007857076054979824844800/127658609391387676396872645847` in `R`. Reading 7's exit is `2614529362970723140586950361088/1346878762742487384504876251363`, which is later.
+- The move goes to the later exit, so the cascade jumps over reading 6's exit, and the window lies inside the zone of reading 7 that was used.
+
+**4. Rule 22.**
+- **The short windows.**
+  - (i) Feature: each is the gap between a slower reading's zone exit and another's entry, which nearly coincide.
+  - (ii) Within the same path the gap can open: it lengthens by more than a factor 10 in 18,851 of 19,577. So the path does not force it, and the shortness comes from where the member sits in its cell. The cascade still has the fastest reading in the way at the gap, and that reading nests it.
+  - (iii) The same nesting as every other window (L3).
+  - Understood for the 18,851. For the 726 that did not lengthen and the 1,525 where no draw kept the path, (ii) is not shown, so these are **not understood**.
+- **The jump in member 24514.** (i) Feature: the window opening is not a path state. (ii) Forced by the maximum-exit rule: reading 7's exit is later than reading 6's. (iii) The same rule as every move. Understood.
+
+**Still not understood (rule 22), in order:**
+- the 726 and the 1,525 of item 4;
+- why `min_k B_k` equals the end of the landing window in every crosser (E941);
+- why the positions that pass `W` mostly fail window 1 (E942);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS; PARTIAL: 18,851 of 21,102]:** each of E941's 21,102 short windows is a nearly closed gap between two zones of slower readings. In 21,101 the fastest reading is in the way across it, and in the remaining one the window lies inside the zone of reading 7 used as a move. In 18,851 members the gap opens by more than a factor of 10 within the member's own path, so for them the shortness is a property of the member, not of the cascade. For the 726 and the 1,525 this is not shown. Nothing is committed.
+
+## E944 (2026-11-25): E943's 726 and 1,525 through the cascade. In 2,244 of the 2,251, the short window opens within the member's own path: by more than a factor 10, or from a single point to positive length. The checks are exact cascade runs; a float LP only steered where to look. In the remaining 7 the path forces the window to a single point: one ratio `r_y/r_x = 5/3` makes two zone-edge coincidences at once, in opposite directions [OBS, exact]. So all 21,102 short windows of E941 are understood: 21,095 are the member's position in its path cell, and 7 are a forced point window
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E943, whose next step was its first not-understood item: the 726 and the 1,525.
+
+**Map:** E943's not-understood list, item 1. The cascade is the oracle. Jitter and targeted moves are rule 12.
+
+**Source test.** Each object used comes from the record:
+- the cascade's path, with its states, the readings in the way and the maximum-exit move;
+- E943's window: the gap from reading x's zone exit to reading y's zone entry;
+- E943's jitter test and its classes.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E341, E941, E942 and E943, all read this session.
+
+Units: `d_min = 1`. The members are the 21,102 of E941 and E943.
+- Class G (18,851): grew more than tenfold under E943's jitter.
+- Class N (726): a draw kept the path, but the window did not grow tenfold.
+- Class Z (1,525): no draw kept the path.
+
+A **near-coincidence** is a pair (path state `t_i`, reading `q`) with `q t_i` within a relative `10^{-7}` of a zone edge `m ± 1/8`, excluding the setter of that state.
+
+**1. Replay** [OBS, exact; `short_window_classes_v1.py` (SHA-256 begins `48eb22b7`), `_part0` to `_part7`, `short_window_classes_v1_total.out`]. With the same seeded draws, the classes reproduce exactly: G 18,851, N 726, Z 1,525.
+
+**2. The first of the 726, through the cascade** (E340 index 1072; `short_window_first_N_v1.py` (`9264e34c`) and `.out`).
+- Window 1 of the six runs from rank 4's lap-2 exit to rank 6's lap-3 entry. Its relative length is about `3.2·10^{-8}` (float, steer only).
+- The path has five near-coincidences. Their relative gaps run from about `9·10^{-9}` to `4·10^{-8}` (floats, steer only), and the window is one of them.
+- **Raising reading 4 alone** lengthens the window. It also brings reading 4's lap-3 entry `23/(8 r_4)` back to state 8, which is reading 7's lap-4 exit.
+  - The path is kept up to a relative `2.366·10^{-8}` (float, steer only). Beyond that, reading 4 is in the way at state 8, and the next move changes from `(5, 4)` to `(3, 3)`.
+  - Inside the path, the window's length stays below `2 L0` under this move. At the last kept point it exceeds `(3/2) L0` (exact; `short_window_closing_v1.py` (`aef01107`) and `.out`, part (a)).
+- **Lowering reading 6 alone** is closed at state 9 by reading 2's lap-2 entry `15/8`.
+
+**3. Single-reading moves, all 2,251** [OBS, exact; `short_window_vertex_v1.py` (`ee5006dd`) and `short_window_vertex_v2.py` (`6bddfc61`), with `.out` files and `_total.out`].
+- Each member had two moves: raise x (unless x is reading 1, which is `d_min` and is never moved) and lower y. Each was bisected exactly, 80 halvings in `[0, 10^{-6}]`, to the largest move that keeps the path.
+- **R1, 1,365 members (N 395, Z 970).** One move lengthens the window more than tenfold inside the path. In Z, every one of the 24 draws left the path cell. All 1,525 Z members have `L0/a < 10^{-8}`.
+- **R2, 757 members (N 275, Z 482).** Both moves are closed. Each of the 893 closed moves is closed by a (path state, zone edge) pair of the member (`short_window_closing_v1.py`, parts (b) to (e)):
+  - in 862, the pair is one of the member's near-coincidences;
+  - in 28, it is a zone-edge pair whose relative gap in the member lies in `[10^{-7}, 10^{-6})`, just above the near-coincidence threshold;
+  - in 3, the path changes under any move (E340 indices 51121, 65340, 76449). The member holds an exact tie (gap 0) at the state where the path changes, and the closing-pair search left gap-0 pairs out by design.
+- **R3, 56 members (all N).** `L0/a ≥ 10^{-7}` in all 56, so a move of at most `10^{-6}` cannot lengthen the window tenfold.
+- **R0, 73 members (all Z).** The window is a single point, `L0 = 0`.
+
+**4. The whole path cell** [OBS, exact; `short_window_cell_lp_v1.py` (`988c48af`), `short_window_cell_lp_v2.py` (`00ad163b`), `.out` files and `_total.out`].
+- **The cell is linear.** With reading 1 at 1, the arrangements that have the member's path are cut out by inequalities that are linear in `r_2, ..., r_7`. Write `t_i = (l_i + 1/8)/r_{k_i}`. Then:
+  - a reading `q` in the way at `t_i` with lap `m` satisfies `(m − 1/8) r_{k_i} < (l_i + 1/8) r_q < (m + 1/8) r_{k_i}`;
+  - a reading `q` that is clear there satisfies `(m + 1/8) r_{k_i} ≤ (l_i + 1/8) r_q ≤ (m + 7/8) r_{k_i}`;
+  - the maximum-exit move requires `(l_q + 1/8) r_{k_{i+1}} ≤ (l_{i+1} + 1/8) r_q`.
+- **The search.** A float LP (steer only, rule 15) maximises the window's numerator `(8j' − 1) r_x − (8j + 1) r_y` over the cell. In v2, every row is tightened by `10^{-9}` times its norm, so the optimum lies strictly inside the cell.
+- **The check.** Points `member + λ(opt − member)` are built in exact Fractions. A point is kept only if the exact cascade gives the member's path, and the window's length there is exact.
+- **Results (v2).**
+  - R2: 757 of 757 grow more than tenfold inside the path, and each reaches at least `10^{-9}`.
+  - R3: 56 of 56, the same.
+  - R0: 66 of 73 reach positive length inside the path.
+  - In v1 (no tightening), 1 of R2 and 15 of R0 had no exact point. Those members hold an exact tie, where the slack is zero.
+
+**5. The 7 forced point windows** (E340 indices 2055, 2065, 4592, 4606, 20309, 70642, 79949; `short_window_point7_v1.py` (`d3e740de`) and `.out`).
+- **The feature.** In all 7, `r_y/r_x = 5/3` exactly. The window's opening is a path state where only the fastest reading is in the way.
+- **What forces it.** The same ratio makes two ties on the path:
+  - x's lap-1 exit `9/(8 r_x)` equals y's lap-2 entry `15/(8 r_y)`;
+  - a later state, y's lap-3 exit `25/(8 r_y)`, equals x's lap-2 entry `15/(8 r_x)`.
+  - Since `9/15 = 15/25 = 3/5`, both hold together.
+  - Opening the window needs `r_y/r_x < 5/3`. Then x's lap-2 entry falls before y's lap-3 exit, so x is in the way at that later state, and the path changes there. This happened in all 7 under each move of relative `10^{-30}`.
+  - `r_y/r_x > 5/3` closes the window. So the path forces the point.
+- **The landing.** Under those smallest moves, `R*` is unchanged in 7 of 7 [OBS, exact]: the path changes and the landing does not.
+- **Other ties.** All 7 also hold an exact tie at `t0`: the fastest reading is the integer 15 or 17 (or, in one member, rank 5 is exactly 7).
+
+**6. Rule 22.**
+- **R1 (1,365).** (i) The window opens under one reading's move, but not under E943's jitter. (ii) A single targeted move inside the path lengthens the window more than tenfold (exact). Which draws the jitter kept is a property of the test: in Z every draw moved six readings and left the path cell, and in N the kept draws fell short of tenfold. (iii) The same as the 18,851. Understood.
+- **R2 and R3 (813).** (i) Every single-reading move is closed (R2), or the window is long relative to the move (R3). (ii) Each closing pair is a (path state, zone edge) pair of the member with relative gap below `10^{-6}`, an exact tie in 3. These pairs bound one reading's move, but not the cell: over the cell, a joint move lengthens the window more than tenfold in 813 of 813. (iii) The same as the 18,851. Understood.
+- **R0 opened (66).** (i) A point window. (ii) Inside the cell it reaches positive length, so the point is the member's position. (iii) The same as the rest. Understood.
+- **The 7.** (i) `r_y/r_x = 5/3`. (ii) Forced by the double coincidence `9/15 = 15/25`: the path requires `r_y/r_x ≥ 5/3`, and a window needs `r_y/r_x ≤ 5/3`. (iii) A different mechanism from the rest: the window is forced to a point by the path, not by the member's position. Understood.
+
+**Still not understood (rule 22), in order:**
+- why `min_k B_k` equals the end of the landing window in every crosser (E941);
+- why the positions that pass `W` mostly fail window 1 (E942);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS, exact]:**
+- All 21,102 of E941's short windows are now understood.
+- In 21,095, the window opens within the member's own path cell, so its shortness is the member's position: E340's members sit near several path constraints at once.
+- In 7, the path itself forces a single-point window through the identity `9/15 = 15/25`, and moving off it changes the path but not the landing.
+- The path cell is cut out by inequalities linear in the speeds. Nothing is committed.
+
+## E945 (2026-11-25): E941's equality through the cascade. `min_k B_k = 8 ×` the end of the landing window iff some reading other than the closer has no position in its segment that gets past the six-window holding `T` [P, from E941 item 2 and the definition of `B_k`; matched in 4,939 of 4,939, exact]. Through the cascade, each position tried (the midpoint of each interval that would pass that window on its own, up to 20 intervals per reading) that fails an earlier window lands in the first earlier window it fails: 75,065 of 75,065 [OBS, exact; PARTIAL: midpoints of at most 20 intervals per reading]. So the equality is E942's rule applied one reading at a time. Why every crosser has such a reading is not derived
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E944, whose next step was the first not-understood item: why `min_k B_k` equals the end of the landing window in every crosser.
+
+**Map:** E944's not-understood list, item 1. The cascade is the oracle.
+
+**Source test.** Each object used comes from the record:
+- E929 item 1 [P], in its one-mover form (E939, E940): the landing lies in the first window of the frozen readings that the moved reading does not pass;
+- E930 item 1 (`one_move_pass_iff` [L]): one reading passes `[a, b]` iff it lies in some `((8m − 1)/(8a), (8m + 1)/(8b))` [PROVISIONAL: covering; the claim supported is the list of positions that pass a window];
+- E940's neighbour-held `B_k`, and E941 item 2 [P]: `B_k ≥ 8·end(W_k) ≥ 8·end` of the landing window, where `W_k` is the window of the six other readings that holds `T`.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E929, E930, E940, E941, E942 and E944, all read this session.
+
+Units: `d_min = 1`. The population is E340's gate crossers (`R* ≥ 9`, 4,939). Reading `k` (`k = 2..7`) moves in `(r_{k−1}, r_{k+1})`, with `k = 7` open above, and the other six are frozen.
+
+**1. The reduction** [P, given E941 item 2's proviso that no other reading enters at the same instant].
+- By E941 item 2, `B_k = 8·end` of the landing window holds iff two things are true:
+  - `end(W_k)` equals that end, so `k` is not the closer;
+  - the set `A` of positions that pass every six-window before `W_k` has no position that passes `W_k`.
+- So `min_k B_k = 8·end` iff some non-closer `k` satisfies the second condition.
+- Each `k` is sorted by the first reason that holds (`crosser_equality_v1.py` (SHA-256 begins `2fd621f4`), `.out` files, `crosser_equality_v1_total.out`):
+  - **C:** `k` is the closer;
+  - **L:** `|W_k| ≥ 1/(4 r_{k−1})`, so no zone of any position of `k` contains `W_k` [PROVISIONAL: covering; the claim supported is that class L readings attain the minimum];
+  - **P:** `W_k`'s own pass set in the segment is empty;
+  - **X:** the pass set is non-empty, but none of it lies in `A`;
+  - **N:** some position lies in both.
+- The attaining set equals the set of readings of class L, P or X in 4,939 of 4,939 [OBS, exact, against `bmove`].
+
+**2. The first crosser, through the cascade** (E340 index 44824).
+- Readings, as floats (steer only): `1, 3.660222, 5.092521, 6.111111, 7.005526, 8.039132, 8.713321`.
+- The cascade takes 27 moves and lands at `R* = 6896136929411072/716708666853555`. The landing window ends at `R = 44473046320283648/4525629244049771`, where rank 6 enters.
+- Classes: `k = 2, 4, 5, 7` are X, `k = 3` is P, and `k = 6` is C. The attaining set is `{2, 3, 4, 5, 7}`.
+
+**3. The positions, through the cascade** [OBS, exact; `crosser_equality_cascade_v1.py` (`985cd503`), `.out` files, `_total.out`].
+- For every reading of class X or N, the midpoint of each interval of its segment that passes `W_k` on its own was tried, up to 20 intervals per reading. The cascade was run with that reading moved there.
+- Class X, 69,578 positions: each fails an earlier window, and each lands in the first earlier window it fails, before `W_k`.
+- Class N, 5,992 positions:
+  - 5,487 fail an earlier window and land in the first one they fail;
+  - 505 pass every earlier window and land after `W_k`.
+- The first window failed is window 1 in 60,413 of the 75,065 that fail one, the window just before `W_k` in 3,165, and another window in 11,487.
+
+**4. Window 1's cells** [OBS, exact; `crosser_window1_v2.py` (`bf73c336`), `.out` files, `_total.out`].
+- Window 1 is `[a_1, b_1]`; `a_1 > 1/8` when a frozen reading is in the way at `t0`.
+- Its cells are `((8m − 1)/(8 a_1), (8m + 1)/(8 b_1))`, non-empty iff `8m(b_1 − a_1) < a_1 + b_1` (E930) [PROVISIONAL: covering; the claim supported is the sorting of window-1 failures by cell].
+- Of the 60,413 positions that fail window 1:
+  - 19,452 lie below the lowest cell (`v ≤ 7/(8 a_1)`: the position's first zone starts after `a_1`);
+  - 22,896 lie above the last cell;
+  - 18,065 lie between cells.
+  - In 33,928 of them, window 1 starts after `t0`.
+- `crosser_window1_v1.py` (`3fd232fb`) assumed that window 1 starts at `t0`, and is superseded by v2.
+
+**5. Readings of class N** [OBS, exact].
+- 3,835 crossers have no reading of class N. In those, every reading other than the closer attains the minimum.
+- 1,104 crossers have between 1 and 4 readings of class N. None has all five non-closers in class N.
+- Reading 5 is never of class N: C 2,846, L 694, P 18, X 1,381.
+
+**6. Rule 22.**
+- **The equality.**
+  - (i) Feature: in each crosser, some non-closer reading has no position that gets past `W_k`.
+  - (ii) Forced by E929 item 1, applied to that reading: each position tried that passes `W_k` on its own fails an earlier window and lands there (75,065 of 75,065 tried; PARTIAL: midpoints of at most 20 intervals per reading).
+  - (iii) The same mechanism as E942.
+  - Why every crosser has such a reading is not derived. It is **not understood**.
+- **The 505 class-N positions.** (i) They pass every earlier window and `W_k`. (ii) By E929 item 1, the landing moves past `W_k`, so `B_k > 8·end`. (iii) The same rule. Understood.
+- **Reading 5 is never of class N.** A count, with no mechanism. It is **not understood**.
+- **Window 1 failed by most positions** (here and in E942). Section 4 sorts each failure by where the position lies against window 1's cells. Why the positions fall in those places is not derived, so this is **not understood**.
+
+**Still not understood (rule 22), in order:**
+- why every crosser has a non-closer reading that cannot get past `W_k`, and why reading 5 is never of class N;
+- why the positions that pass `W_k` (here) or `W` (E942) mostly fail window 1;
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [P for item 1; OBS for the rest]:**
+- E941's equality is not a separate fact. `min_k B_k` is the end of the landing window exactly when one reading, held between its neighbours, cannot get past the landing's six-window from any position.
+- Through the cascade, each such reading's positions land in the first window they fail, as in E942.
+- What is left is why such a reading exists in every crosser. Nothing is committed.
+
+## E946 (2026-11-25): owner: did the cascade fail, or our description of the mechanism. In E939 to E945, the cascade landed in every arrangement it was run on. Every item marked not understood belongs to our description: windows, pass sets, lap lists, jitter, LP slack, and `B_k`. `B_k` is a statement about the family of arrangements in which one reading moves between its neighbours, not about the arrangement. Through the cascade, that family is a finite run of path cells, each with its own landing. `B_k` is `8 ×` the end of the six-window that holds the family's latest landing (29,634 of 29,634 reading-crosser pairs, sampled) [OBS, exact; PARTIAL: sampled positions]
+
+**Owner (2026-11-25), verbatim:** *"Yes go on, but does the cascade fail or our description of the mechanisim.  The cascade points directly to the isolation of each runner for any arrangement.  We need to understand why our description failed because the cascade did not"*
+
+**Map:** E945's not-understood list, item 1, read as the owner asks: as a failure of the description, not of the cascade. The cascade is the oracle.
+
+**Source test.** Each object used comes from the record:
+- the cascade's path (setter rank and lap at each move), its states, and the readings in the way;
+- E944 item 4: the arrangements with one path form a cell cut out by inequalities linear in the speeds;
+- E940's `B_k` and E945's classes C, L, P, X, N [PROVISIONAL: covering; the claim supported is the reading of `B_k` as a family quantity].
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E340, E341, E938 to E945, all read this session.
+
+Units: `d_min = 1`. The population is E340's gate crossers (`R* ≥ 9`, 4,939).
+
+**1. Where the cascade and the description stood, E939 to E945** (from those entries' own artifacts).
+
+| entry | item marked not understood | where it lived |
+|---|---|---|
+| E941 | 21,102 skipped members | the walk's lap list (more than `2·10^5` laps); the cascade landed every one |
+| E943, E944 | short windows, the 726 and the 1,525 | the jitter test and the population's LP slack; the cascade landed every one |
+| E942, E945 | positions failing window 1 | the pass sets of the windows; every position tried landed in the first window it failed |
+| E945 | `min_k B_k` = end of the landing window | `B_k`, a bound over a reading's whole segment |
+
+In every run in those entries, the cascade gave the arrangement's landing, and `R* ≤ B_k` held with no failures (E940, E941).
+
+**2. The first crosser with a class-N reading, through the cascade** (E340 index 66758; `crosser_N_first_v1.py` (SHA-256 begins `109bad0a`) and `.out`).
+- Readings, as floats (steer only): `1, 4.160279, 4.712923, 5.227017, 5.869108, 6.598118, 7.44691`. The cascade lands at `R* = 23080948090273792/2342028736416617`, at reading 2's lap-5 exit, inside the six-window holding `T`. The closer is reading 3.
+- Reading 2 moved to `4.100931953` (float, steer only), inside its segment `(1, r_3)`. That arrangement has another path from state 9 onward.
+  - At state 23, reading 2 again sets the move. Being slower, it now exits past reading 3's entry.
+  - The cascade moves on to reading 3's exit and lands at the opening of the next six-window, `R* = 7881299347898368/758039956578143`.
+- So class N means that another arrangement in the reading's family lands later. The arrangement itself lands at `T`.
+- A class-N reading is the last setter in 596 of the 1,304 class-N readings, and not in 708 (`crosser_N_setter_v1.py` (`03878fd2`) and `.out`).
+
+**3. The neighbour family of that crosser, reading by reading** (`crosser_N_sweep_v2.py` (`92d38146`) and `.out`; v1 (`49a87a30`) used an equal grid alone and missed the actual position's cell at `k = 7`).
+- Each reading was moved across its segment at 600 exact points, plus its actual position and the midpoint of every interval that passes a six-window up to the one after `W_k`.
+- The cascade met 6 to 14 path cells per reading. Landings over a segment ran from `1` to `7881299347898368/758039956578143`.
+- For readings 3, 4, 5 and 7, the largest landing over the segment is the arrangement's own `R*`.
+- For all six readings, `B_k = 8 ×` the end of the six-window holding the largest landing.
+
+**4. All 4,939 crossers** [OBS, exact; PARTIAL: 150 equally spaced points plus the actual position and pass-interval midpoints per reading; `crosser_family_v1.py` (`a56a777c`), `.out` files, `crosser_family_v1_total.out`; `crosser_family_check_v1.py` (`07395f11`) and `.out`].
+- `B_k = 8 ×` the end of the six-window holding the largest sampled landing, in 29,399 of 29,634 (crosser, reading) pairs.
+- In the other 235 (231 class N, 4 class C), the samples missed narrow escaping cells. With the positions of the walk's own set `A` added, equality holds in 235 of 235, and the largest landing is at most `B_k` in all 235.
+- In every crosser, some reading other than the closer has every gate-crossing sampled neighbour arrangement landing in `W_k`: 4,939 of 4,939.
+- In 3,279 crossers, some reading other than the closer has the actual path cell as its only sampled cell that crosses the gate. In the other 1,660 it does not.
+- E340's members are one max-slack LP point per tree cell (E341). They were not chosen for large landings.
+
+**5. Rule 22.**
+- **Class N.**
+  - (i) Feature: some position of the reading between its neighbours passes every six-window up to `W_k`.
+  - (ii) Through the cascade, that position is another arrangement with another path, and it lands later. In section 2, the slower setter's exit falls past the closer's entry.
+  - (iii) The same cascade. Class N is a property of the family, not of the arrangement. Understood.
+- **`B_k`.**
+  - (i) Feature: `B_k` is a bound over a family.
+  - (ii) It is the end of the six-window holding the family's latest landing, in 29,634 of 29,634 sampled pairs.
+  - (iii) A family quantity. Understood, PARTIAL on sampling.
+- **The 235 pairs.**
+  - (i) Feature: the first samples missed narrow escaping cells.
+  - (ii) Forced by the sampling: once the walk's set `A` is sampled, equality holds in 235 of 235 (`crosser_family_check_v1.py`).
+  - (iii) The same family quantity as the other 29,399. A property of the samples, not of the cascade. Understood.
+- **Why every crosser has a reading whose latest neighbour landing stays in `W_k`.** This is a statement about families, and it is not derived. It is **not understood**.
+- **Why reading 5 is never class N** (E945). Not derived, so it is **not understood**.
+
+**Still not understood (rule 22), in order:**
+- why, in every crosser, some reading's neighbour family lands no later than `W_k`, and why reading 5 is never class N;
+- why the positions that pass `W_k` or `W` mostly fail window 1 (E942, E945);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS]:**
+- The cascade did not fail. Our descriptions asked how far a family of arrangements reaches, using covering objects: windows, pass sets and bounds over a segment. The cascade answers one arrangement at a time, by its path.
+- In the cascade's own terms, a reading moved between its neighbours runs through a finite sequence of path cells, each with its own landing. `B_k` is the latest of those landings, rounded up to its six-window's end.
+- So in the cascade's own objects, the unit for G2's catalogue is the path: the setter ranks and laps. Its arrangements form one linear cell (E944), and finitely many paths is E938's bounded `R*`.
+- Nothing is committed.
+
+## E947 (2026-11-25): the crossers' neighbour families as path cells. Moving one reading between its neighbours, the arrangements that still cross the gate form islands of path cells around the actual position. Inside an island, phase 1 reaches the state `R = 9`, so the landing comes from phase 2 alone. A position that would cover the landing's six-window but lies outside every gate island does not cross the gate: 83,499 of 83,499 [OBS, exact; PARTIAL: sampled positions]. A reading escapes (class N) iff one of its gate islands meets that window's pass set inside the walk's set `A`: 1,304 of 1,304 [OBS, exact; PARTIAL: up to 40 pass intervals per reading, sampled positions]. Class-N islands are wide, at least `10^{-2}` relative in 1,299 of 1,304
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E946, whose next step was the first not-understood item stated in paths: the path cells along each reading's segment, starting with the first crosser.
+
+**Map:** E946's not-understood list, item 1. The cascade is the oracle. The owner's earlier point stands: the cascade does not fail, and what is open is our description.
+
+**Source test.** Each object used comes from the record:
+- E340's d_min gate [P]: a landing above 7 iff reading 1 sets a move, at lap 1, to exactly `R = 9`;
+- the cascade's path and its states;
+- E930's pass set of a window [PROVISIONAL: covering; the claim supported is the list of positions that cover `W_k`];
+- E945's classes and E946's families.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E340, E341, E929, E930 and E941 to E946, all read this session.
+
+Units: `d_min = 1`. The population is E340's 4,939 gate crossers. Reading `k` moves in `(r_{k−1}, r_{k+1})`, with `k = 7` taken in `(r_6, 2 r_7)`, and the other six are frozen. An **island** is the run of gate-crossing positions (`R* ≥ 9`) around a given position, with its ends found by bisection on the gate.
+
+**1. The first crosser, cell by cell** (E340 index 44824; `path_cells_first_v1.py` (SHA-256 begins `d1803a5c`) and `.out`; 600 equal points plus the actual position and pass-interval midpoints, each path change bisected 90 times).
+- Along each reading's segment, the cascade meets 8 to 13 path cells.
+- The gate-crossing cells form one island around the actual position, from 1 cell (`k = 2, 3, 6, 7`) to 4 cells (`k = 5`).
+- In floats (steer only), the islands run from about `8·10^{-5}` wide (`k = 2`) to about `9·10^{-2}` (`k = 5`).
+- Inside the islands, the path changes only in phase 2, for `k = 4` at `R = 9` and for `k = 5` at a state near `R = 9.08` (float, steer only). Every island cell lands in the same six-window.
+- Outside the islands, every cell lands below 7.
+
+**2. In paths, island ends are phase 1** [P, from E340]. A position fails the gate iff its path differs from a crossing path before the state 9. So an island ends where phase 1 breaks. Inside an island, phase 1 ends at exactly `R = 9`, and the landing is the cascade from `R = 9`.
+- `path_islands_v1.py` (`7c9e5af7`) counted island ends as phase 1 or phase 2. That count is true by definition. Its "lands in `W_k`" test should have been "lands no later than `end(W_k)`". It is superseded by v2.
+
+**3. Island width, all crossers** [OBS, exact; PARTIAL: 150 equal points plus the actual position and pass-interval midpoints; `path_islands_v2.py` (`6fe61479`), `.out` files, `_total.out`].
+- Class-N islands have relative width at least `10^{-2}` in 1,299 of 1,304, and at least `10^{-3}` in the other 5.
+- Class L, P and X islands run down to `10^{-5}`. No island sample of class L, P or X lands after `end(W_k)`: 23,391 of 23,391.
+- In 4,730 of 4,939 crossers, the non-closer reading with the narrowest island attains `min_k B_k`. In the other 209, it is a class-N reading: reading 7 in 183, reading 6 in 25, and reading 3 in 1.
+
+**4. The island against `W_k`'s pass set** [OBS, exact; PARTIAL: up to 40 pass intervals per reading; `path_islands_v3.py` (`a0102eae`), `.out` files, `_total.out`].
+- **Outside the island.** All 83,499 pass-interval midpoints there (class X 77,868, class N 5,631) fail to cross the gate and lie outside `A`.
+- **Inside the island.** Class N: 505 cross the gate and lie in `A`, the escapes; 4 cross the gate but are not in `A`. Class X: 17 cross the gate and are not in `A`.
+- **Overlap.** The island meets `W_k`'s pass set for 1,303 of 1,304 class-N readings and for 263 of 20,356 class-X readings.
+- **The remaining class-N reading** (E340 index 102056, reading 7; `path_islands_v3_odd.py` (`6a37bf42`) and `.out`). Its one escaping interval, near `15.10` (float, steer only), lies in a second gate island of the segment, apart from the actual island near `8.5` to `8.74` (floats, steer only).
+
+**5. Rule 22.**
+- **The 83,499 outside the island.**
+  - (i) Feature: they would cover `W_k`, but they do not cross the gate.
+  - (ii) Forced by E340's gate: outside an island, phase 1 breaks before 9, so the cascade lands in phase 1 and the position fails a six-window before `R = 9`. This is E942's and E945's "fails an earlier window".
+  - (iii) The same cascade. Understood.
+  - Which phase-1 window they fail, mostly window 1, is not derived. It is **not understood**.
+- **The 21 inside the island, not in `A`** (17 X, 4 N), and the 263 class-X islands that meet the pass set.
+  - (i) Feature: they cross the gate, but some position fails a window before `W_k`.
+  - (ii) Crossing the gate means that no instant before `R = 9` is clear for the seven readings. So every six-window before it is blocked by the moved reading [PROVISIONAL: covering; the claim supported is that the failed window lies in phase 2]. The window failed lies in phase 2, before `W_k`, and by E929 item 1 the landing is there.
+  - (iii) The same rule. Understood, PROVISIONAL on covering.
+- **E340 index 102056.** (i) The escape lies in a second gate island. (ii) That position crosses the gate and covers `W_k`. (iii) The same rule: a gate island meets the pass set inside `A`. Understood.
+- **The 5 class-N islands between `10^{-3}` and `10^{-2}`.** (i) Narrower than the other 1,299. (ii) They escape by the same rule: the island meets the pass set inside `A` (section 4). (iii) The same mechanism. Why escaping islands sit at or above about `10^{-2}` is not derived: **not understood**.
+- **The 209 crossers** where the narrowest-island reading is class N. (i) The narrowest island is still wide enough to meet the pass set. (ii) and (iii) are not derived. **Not understood.**
+- **Why every crosser has a reading whose gate islands miss `W_k`'s pass set inside `A`.** Not derived. **Not understood.**
+
+**Still not understood (rule 22), in order:**
+- why every crosser has a non-closer reading whose gate islands miss the landing window's pass set inside `A`; the 209 crossers where the narrowest island is class N; why escaping islands are at least about `10^{-2}` wide; and why reading 5 is never class N;
+- which phase-1 window the would-pass positions fail (mostly window 1; E942, E945);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [P for item 2; OBS for the rest]:**
+- In the cascade's own terms, a crosser's neighbour family splits into gate islands, where phase 1 reaches `R = 9`, and the rest, where the cascade lands in phase 1.
+- A reading can carry the landing past its window only through a gate island that meets the window's pass set.
+- So the question left from E941 is a phase-1 question: how tightly the chain to the gate holds each reading, against how far its zone must move to cover the landing's window [PROVISIONAL: covering; the claim supported is the restatement of the open question].
+- Nothing is committed.
+
+## E948 (2026-11-25): the gate islands' ends are E312 crossings. Each end is one zone-edge equality between the moved reading and one frozen reading: an exit of one meets an entry of the other, `(8m+1)/r_x = (8m'−1)/r_y` in units `R = 8t`. All 59,268 ends solve exactly inside their bisection brackets, from 150 relations (80 ratios) [OBS, exact; PARTIAL: islands located on sampled positions as in E947]
+
+**Owner (2026-11-25):** *"Yes, go on"*, after E947, whose next step was the first not-understood item through the cascade, starting with how phase 1 sets each island's ends in the first crosser. Later the same day the owner asked for an autonomous run toward a finite set of arrangement types through the cascade, before the displacement step.
+
+**Map:** E947's not-understood list, item 1. The cascade is the oracle; what is open is our description of it.
+
+**Source test.** Each object used comes from the record:
+- E312's rule [VERIFIED there]: the move sequence changes only at start–end or end–end crossings of zone edges `σ = (8j−1)/ρ`, `ε = (8j+1)/ρ`, of the listed types;
+- E340's d_min gate [P]: a landing above 7 iff reading 1 sets a move, at lap 1, to exactly `R = 9`; no landing lies in `(7, 9)`;
+- E341: E340's members are one max-slack LP point per tree cell, so exact coincidences among frozen readings occur in the member list;
+- E947's gate islands.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E312, E313, E317 to E324, E340, E341 and E941 to E947, all read this session. The bodies of the other entries were not read this session.
+
+Units: `d_min = 1`, `R = 8t`. The population is E340's 4,939 gate crossers. Reading `k` moves in `(r_{k−1}, r_{k+1})`, with `k = 7` taken in `(r_6, 2 r_7)`, and the other six are frozen. Each island end is found as in E947 (bisection on the gate, 90 steps). With `a` the last crossing point and `b` the first non-crossing point, `p` is the first move at which the two paths differ.
+
+**1. The first crosser** (E340 index 44824; `island_ends_v1.py` (SHA-256 begins `1fb85fc0`), `island_ends_v1_first.out`).
+- All 12 ends are breaks: on the crossing side one reading is in the way at the state of move `p`; on the other side none is, and the cascade lands there.
+- The 6 left ends are type A: the state is a frozen reading's exit and the moved reading enters at it. The 6 right ends are type B: the state is the moved reading's own exit and a frozen reading enters at it.
+- Two of the exact relations (`island_ends_v6.py`, below): reading 2's right end is `r_2 = (9/15) r_4 = (3/5) r_4` (its lap-1 exit at reading 4's lap-2 entry); reading 7's left end is `r_7 = (47/33) r_4` (reading 4's lap-4 exit at reading 7's lap-6 entry).
+
+**2. Why the ends have this form** [P, from the cascade's definition; E312's rule is the same statement tested over deformations].
+- The state at move `p` is a zone end, `R_p = (8m+1)/r_s` of the setter `s` (or `R = 1`, which is `(8·0+1)/r_1`, reading 1's lap-0 exit).
+- Each decision of the cascade at that state compares two zone edges: `blocked(r_c, t_p)` compares `R_p` with an edge `(8m'±1)/r_c`, and the max-exit choice compares two exits.
+- With only `r_k` moving, a decision changes only where an edge of reading `k` equals an edge of one frozen reading. Solving that equality gives `r_k` as a fixed ratio times one frozen reading.
+
+**3. All crossers, solved exactly** [OBS, exact; PARTIAL: the islands are those found by E947's sampling; `island_ends_v6.py` (`e41b48cb`), `_part*.out`, `island_ends_v6_total.out`].
+- For each end, v6 writes the equality from the cascade's data at move `p` and solves it for `r_k`. All 59,268 solutions lie inside the bracket `[a, b]`. At the solved point itself the gate fails in all 59,268, because zone edges are strict.
+- The forms:
+  - B 31,762: the moved reading's exit at lap `m` meets a frozen reading's entry at lap `m'`, `r_k = r_j (8m+1)/(8m'−1)`;
+  - A 27,371: a frozen reading's exit meets the moved reading's entry (27,370 with an entry, `σ = −1`; 1 with an exit, `σ = +1`, item 5);
+  - A0 133: the moved reading enters at `R = 1`, `r_k = 8m' − 1`;
+  - T 2: two exits tie (item 5).
+- **The gate entry.** 1,264 of the form-B ends are `j = 1`, `m' = 1`: the moved reading's exit at exactly `R = 7`, reading 1's zone entry, `r_k = (8m+1)/7`. On the crossing side the state lies just above 7, reading 1 is in the way, and it sets the move to 9; on the other side the cascade lands at 7.
+- The catalogue has 150 distinct `(form, j, m, m', σ)` and 80 distinct ratios, with laps `m ≤ 12` and `m' ≤ 9`. The commonest ratios are `25/31` (B, 6,142), `3/5` (B, 4,262), `17/23` (B, 4,179), `7/9` (A, 3,778) and `31/25` (A, 3,544).
+
+**4. What happens on the other side** (`island_ends_v2.py` (`4c661b4b`), `island_ends_v4.py` (`f1d751d5`), `island_ends_v4_total.out`).
+- **break, 53,757:** the other side has no reading in the way at the state and lands there. This is E312's landing crossing `σ_Z = R_n`.
+- **added, 5,509:** the other side has one more reading in the way at the state. In all 5,509 that reading sets the move, and its exit lies beyond the crossing side's next state. The other side does not land at the diverted state; it makes 4 or more moves from the divergence (counting the diverted move) and lands at `R* ≤ 7` in all 5,509. This is E312's type A (a zone that outlasts the setter).
+- **swapped, 2:** the same readings are in the way on both sides; the setter differs (item 5).
+
+**5. Rule 22.**
+- **The 5,509 added ends.**
+  - (i) Feature: the other side gains a blocker at the state instead of losing one.
+  - (ii) Forced: the end is still one exit = entry equality (item 3). On the other side the extra blocker's exit is the largest, so the path diverts. The diverted side does not cross the gate, so by E340 [P] it lands at `R* ≤ 7`.
+  - (iii) The same mechanism as the breaks; only the tail after the end differs. Understood.
+- **The 2 swapped ends** (E340 index 101457 and 101498, reading 6 moved; `island_ends_v3.py` (`039e774a`), `island_ends_swapped_v1.py` (`7d2fc526`), `island_ends_swapped_v2.py` (`c73cc3e3`) and `.out`).
+  - (i) Feature: the setter changes between readings 6 and 7, whose exits tie at the end.
+  - (ii) Forced by a frozen coincidence in both members: `41 r_4 = 23 r_7`, so reading 7's lap-5 exit is reading 4's lap-3 entry. The end is `r_6 = 33 r_7/41 = 33 r_4/23`. On the crossing side reading 6's exit is the larger, and reading 4 is in the way there. On the other side reading 7's exit is the larger, reading 4 sits on its edge, and the cascade lands.
+  - (iii) The same mechanism: the effective equality is form B with `j = 4`, `m = 4`, `m' = 3`. Understood.
+- **The 1 end with `σ = +1`** (E340 index 100406, reading 7 moved; `island_ends_v7.py` (`a8785ab9`), `island_ends_v7_rare.out`, `island_ends_rare_v1.py` (`f9090028`) and `.out`).
+  - (i) Feature: the moved reading leaves its zone at the state, reading 2's lap-2 exit `R_0 = 17/r_2`.
+  - (ii) Forced by a frozen coincidence: reading 5 enters exactly at `R_0` (`17 r_5 = 31 r_2`). On the crossing side reading 7 is still in the way, the move goes to its exit, and reading 5 is in the way there. On the other side nobody is in the way and the cascade lands.
+  - (iii) The same mechanism: the effective equality is reading 7's lap-6 exit at reading 5's lap-4 entry, `r_7 = 49 r_5/31`, form B. Understood.
+- **The 3 ends at state exactly `R = 7`** that are not the gate entry (E340 index 66783, 66784, 67106).
+  - (i) Feature: the state is exactly 7.
+  - (ii) Forced by `r_6 = 7` exactly in these members, so reading 6's lap-6 exit is `49/7 = 7`. Each is a direct form-A equality (reading 6's exit meets the moved reading's lap-4 entry, `r_k = 31/7`).
+  - (iii) The same mechanism. Understood.
+- The frozen coincidences in the last three items come from E341's choice of one max-slack LP point per cell. They are properties of the member list, not of the cells.
+
+**Still not understood (rule 22), in order:**
+- why every crosser has a non-closer reading whose gate islands miss the landing window's pass set inside `A`; the 209 crossers where the narrowest island is class N; why escaping (class-N) islands have relative width at least `10^{-2}` in 1,299 of 1,304 (E947); and why reading 5 is never class N;
+- which phase-1 window the would-pass positions fail (mostly window 1; E942, E945);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [P for item 2; OBS for the rest]:**
+- A reading's gate island is an interval whose ends are `r_k = ρ r_j` for one frozen reading `r_j` and one ratio `ρ = (8m+1)/(8m'−1)` or its inverse (or `r_k = 8m'−1` at `R = 1`).
+- The pass set of a six-window has ends of the same kind, because the window's ends are an exit and an entry of frozen readings (E930).
+- So E941's question, whether some reading's islands miss the landing window's pass set inside `A`, is a comparison between two such ratio products against frozen readings. This restates the open item; it does not settle it [PROVISIONAL: covering; the claim supported is the restatement of the open item in exit–entry ratios].
+- Nothing is committed.
+
+## E949 (2026-11-25): why some reading always attains `min_k B_k`. Every crosser has an exact reason: a length or empty-pass reading at the member (1,956 crossers), a touching or empty earlier-window reading at the member (376), or, for the other 2,607, an exact Farkas certificate that the seven's own path cell (closed) admits no arrangement in which the attaining readings escape [P for each of the 2,607 certificates, scope in item 6; OBS, exact, for the member-level reasons; PARTIAL: cell-wide for 2,607 of 4,939]
+
+**Owner (2026-11-25):** *"Ok I would like you to run autonomously on this for a while … we are trying to prove the there a finite arrangement types via the cascade, when we do we can move on to proving those types show where the global isolation is displaced to."* The step is E948's next one: the first not-understood item, why every crosser has a non-closer reading whose islands miss the landing window's pass set inside `A`.
+
+**Map:** E948's not-understood list, item 1. The cascade is the oracle; what is open is our description of it.
+
+**Source test.** Each object used comes from the record:
+- E940/E941's bound `B_k` and E945's classes C, L, P, X, N (`crosser_equality_v1.py`);
+- E930's pass set: one reading passes `[a, b]` iff it lies in some `((8m−1)/(8a), (8m+1)/(8b))` [PROVISIONAL: covering; the claim supported is the list of positions that cover `W_k`];
+- E944's path cell: all arrangements with the member's path, cut out by inequalities linear in the speeds (`short_window_cell_lp_v2.cell`);
+- E947's gate islands and E948's exit–entry form of their ends.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E312, E313, E317 to E324, E340, E341 and E930 to E948, all read this session. The bodies of the other entries were not read this session.
+
+Units: `d_min = 1`, `R = 8t`. The population is E340's 4,939 gate crossers. Reading `k` moves in `(r_{k−1}, r_{k+1})`, with `k = 7` taken as in `crosser_equality_v1`. `W_k` is the six-window holding the landing; `P` is its pass set inside the neighbours; `A` is the set of positions passing every earlier six-window. Class X means `P` and `A` are disjoint.
+
+**1. The window an attaining reading must cover** [PROVISIONAL: covering; the claim supported is that a reading escapes only if one of its zones covers `W_k`] [P for the identity; OBS, exact for the counts; `attain_roles_v1.py` (SHA-256 begins `1d6ff1bc`) and `.out`].
+- For a reading that is neither the opener (whose exit is `R*`) nor the closer (whose entry ends the landing window at `e`), removing it leaves the opener blocking up to `R*` and the closer entering at `e`. So `W_k = [R*, e]`, the seven's landing window: 19,764 of 19,764.
+- Some non-opener reading attains in 4,939 of 4,939.
+- **Openers.** For the opener, `W_k` starts earlier in 4,905. In 26 it starts at `R*`: in each, another frozen reading exits at exactly `R*` (`attain_odd_v1.py` (`004de400`) and `.out`). In 8 crossers the opener is reading 1, which does not move (item 5).
+
+**2. What escape needs** [P for the identity; OBS, exact for the counts; `island_vs_pass_v1.py` (`21e17077`), `island_vs_pass_v1_read.py` (`37edb0ca`), `.out` and `_total.out`; PARTIAL: islands located as in E947].
+- The pass interval nearest on the slow side has upper end `(8m+1)/(8b)`, with `m` the lap of the reading's last exit `x_k` before `W_k = [a, b]`. So the relative slowing needed to reach it is exactly `(b − x_k)/b`: the last exit must be carried to the window's end.
+- Class L (2,604) and class P (431) have no pass interval inside the neighbours.
+- Class N islands reach a pass interval in 1,303 of 1,304: 1,286 on the slow side at the lap of the last exit, 17 on the fast side at the next lap. The remaining one (E340 index 102056, reading 7): (i) its escaping interval lies in a second gate island of the segment; (ii) a position there crosses the gate and covers `W_k` (E947, `path_islands_v3_odd.py` (`6a37bf42`) and `.out`); (iii) the same rule. Understood.
+- Class X islands miss every pass interval in 20,093 of 20,356; the other 263 meet the pass set outside `A`: (i) they cross the gate, but some position fails a six-window before `W_k`; (ii) crossing the gate means every six-window before `R = 9` is blocked by the moved reading, so the failed window lies in phase 2, before `W_k` [PROVISIONAL: covering; the claim supported is that the failed window lies in phase 2] (E947 item 5, `path_islands_v3.py` (`a0102eae`)); (iii) the same rule. Understood, PROVISIONAL on covering.
+
+**3. The 24 crossers with one attaining reading** [P, given the two relations; `single_attainer_pin_v1.py` (`99540871`) and `.out`].
+- In all 24 the closer is reading 7, the opener is reading 6, and the attaining reading is reading 5, class X.
+- The island's fast end is `r_5 = (25/31) r_6`: reading 5's lap-3 exit meets reading 6's lap-4 entry.
+- `R* = 57/r_6` (reading 6's lap-7 exit), so covering the window with reading 5's lap-6 zone needs `r_5 ≥ (47/57) r_6` [PROVISIONAL: covering; the claim supported is that reading 5 cannot carry the landing past the window].
+- Both are multiples of `r_6`, and `25/31 < 47/57` (`1425 < 1457`). The pass set lies beyond the island at the fixed ratio `1457/1425`, whatever the other readings are.
+
+**4. The facing ends of every class-X reading** [P for the form; OBS, exact for the counts; `attain_pin_v2.py` (`e1d842a6`) and `_total.out`; `attain_touch_v1.py` (`2a732f5c`), `attain_touch_v2.py` (`34ca070a`) and `.out`].
+- Of the 20,356 class-X readings: 19,780 have `P` and `A` disjoint with a positive gap; 545 touch at one point; 31 have `A` empty. None overlaps with positive length.
+- The facing end of `P` is `(8m+1)/(8b)` or `(8m−1)/(8a)`, so it is a ratio times the reading whose edge is `W_k`'s end (the closer) or start (the opener, for a non-opener `k`). The facing end of `A` is a ratio times some frozen reading.
+- Both facing ends are multiples of the same reading in 3,338 (a fixed-ratio pin, as in item 3; 72 distinct ratios, the commonest `697/705` in 1,546). They are multiples of different readings in 16,442; there the gap's sign is an inequality between two frozen readings.
+- In 36 the identifier's first match was the moved reading or a reading other than the edge's (20 and 26 labels). In all 36 the end is also a small multiple of the edge's reading (`attain_odd_v1.py` (`004de400`) and `.out`): (i) a second reading matches first; (ii) forced by a frozen coincidence of the member point (E341); (iii) the same mechanism as the rest: the end is a multiple of the edge's reading. Understood.
+
+**5. Rule 22.**
+- **The 545 touching readings.**
+  - (i) Feature: the facing ends of `P` and `A` are the same number.
+  - (ii) Forced by a number identity: the moved reading's exit at one lap and its entry at another lap meet two zone edges of the same frozen reading, and the two ratios agree: `25/55 = 15/33` (278), `33/55 = 15/25` (234), `49/63 = 7/9` (27), `63/49 = 9/7` (6). The zones are open, so the common point is excluded.
+  - (iii) The same mechanism as item 3's fixed-ratio pin, with ratio exactly 1. Understood.
+- **The 31 with `A` empty.** (i) No position between the neighbours passes every earlier six-window. (ii) Forced at the member: `passes_in` returns the empty set before `W_k`. (iii) The same rule; the earlier windows bind before the landing window does. Understood at the member. Why the earlier windows bind is not derived: **not understood**.
+- **The 26 openers whose window starts at `R*`.** (i) Removing the opener does not extend the window. (ii) Forced by a second frozen reading exiting at exactly `R*` (`attain_odd_v1.out`; readings 4, 6 or 7). (iii) The same rule for the window's start; the tie is E341's. Understood.
+- **The 8 crossers whose opener is reading 1.** (i) The last move is set by reading 1, which does not move. (ii) Reading 1 sets a move only at lap 1, to `R = 9` (E340 [P]), so these land at the gate state itself: `R* = 9` exactly in 8 of 8 (`attain_cell_cascade_v1.py` (`5ab5612c`), `_total.out`). (iii) The same mechanism as E340's exact-9 landings. Understood.
+
+**6. Is attaining a property of the path cell?** [P for each certificate, in exact rational arithmetic, scope below; the float LP steers only; `attain_lp_v2.py` (`0a208c9b`) and `_total.out` (float, steers only), `attain_lp_cert_v1.py` (`74292995`) and `_total.out` (exact)].
+- Population: the 2,983 crossers whose attaining set is all class X. In 2,607 every attaining reading has a positive gap; the other 376 contain a touching or `A`-empty reading (item 5).
+- For each of the 2,607, the system is: the seven's path cell, closed (all rows non-strict), with the ordering and `r_q ≥ 1`, plus one escape row per attaining reading (its two facing ends crossed). Every row is linear in `r_2 … r_7` with exact rational coefficients.
+- A float LP finds the support of a Farkas ray; the ray is then solved exactly on that support and checked: `y ≥ 0`, `yᵀA = 0`, `yᵀb < 0`. All 2,607 certificates verify. 1,629 use one escape row (one reading pinned by the cell alone) and 978 use two.
+- Control: the closed cell is not empty, because the member lies in it [P]. The float LP also finds the tightened cell feasible in all 2,607 (`attain_lp_v2`; floats, steer only).
+- **Scope.** The certificate holds the facing pair of each attaining reading to its identity at the member. Inside the cell another interval of `P` or `A` could become the facing one; that case is not tested. The L and P reasons (1,956 crossers) and the touch and `A`-empty reasons (376) are exact at the member, not over the cell.
+- **Through the cascade (rule 8)** [OBS, exact; PARTIAL: up to 3 points per cell] (`attain_cell_cascade_v1.py` (`5ab5612c`) and `_total.out`). The float LP proposes up to three vertices of each tightened cell (floats, steer only). Points between the member and each vertex are kept only if the exact cascade gives the member's path. At every kept point `min_k B_k = 8 end` holds exactly: 7,529 of 7,529 points, in 2,576 crossers. In 31 crossers no tried point kept the path.
+- **Which rows the certificates use** (`attain_lp_cert_v2.py` (`708875f0`) and `_total.out`; the same 2,607 certificates):
+  - number of cell rows: 0 in 266, 1 in 727, 2 in 925, 3 in 509, 4 in 164, 5 in 14, 6 in 2;
+  - the 266 with none use only escape rows, the ordering and `r_q ≥ 1`: the escape rows contradict each other directly, as same-reading pins do (item 4);
+  - the states of the rows used: phase 1 and phase 2 in 1,327, phase 1 only in 399, phase 2 only in 615;
+  - the commonest supports of one or two cell rows are rows at the two states reading 1 sets, `R = 1` (the start) and `R = 9` (the gate). There a row involves one other reading only, because `r_1 = 1`, so it bounds that reading's speed by a fixed number. Examples: reading 4 in the way at `R = 9` alone (197); reading 5 against reading 7 at a phase-1 state with reading 7 in the way at `R = 9` (199); reading 5 clear at `R = 1` alone (123).
+
+**7. A search for an arrangement where every reading escapes** [search, seeded, steers only; `all_escape_search_v1.py` (`8e2c83e8`), `_s*.out`].
+- From the 24 crossers of item 3, 3,000 steps each, one reading moved at a time by a relative step between `2^{-20}` and `2^{-8}`, keeping the gate crossed. No arrangement with every non-closer reading escaping was found.
+- All 24 runs stop with one attaining reading at a relative gap of about `0.01793` (float, steers only). At one end state the binding facing ends are `(47/41) r_4` (the pass set, through reading 4's lap-5 exit, now the window's start) and `(25/31) r_6` (the earlier-window set): two different readings, where the other readings' escape conditions also bind.
+
+**Still not understood (rule 22), in order:**
+- which rows each certificate uses, as a rule in the cascade's objects (item 6 gives them per cell, not as a rule); why the earlier windows bind in the 31 `A`-empty readings; the 209 crossers where the narrowest island is class N; why escaping (class-N) islands have relative width at least `10^{-2}` in 1,299 of 1,304 (E947); and why reading 5 is never class N;
+- which phase-1 window the would-pass positions fail (mostly window 1; E942, E945);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS, exact, at the member; P for the certificates, scope as item 6; PARTIAL: cell-wide for 2,607 of 4,939]:**
+- For each of E340's 4,939 crosser members, some non-closer reading cannot be moved between its neighbours to carry the landing past the landing window's end, with an exact reason at the member.
+- In 2,607 of the 4,939 this is shown for the whole closed path cell, by an exact combination of the cascade's own inequalities, with the facing pairs held to their identities at the member. Through the cascade it holds at 7,529 of 7,529 other points of those cells (item 6).
+- So for those 2,607 crossers, the equality `min_k B_k = 8 end` of E941 follows from the path the cascade takes, not from E340's choice of point (contrast E341's atoms). For the other 2,332 it is shown at the member only.
+- Nothing is committed.
+
+## E950 (2026-11-25): E949's open items through the cascade. "Reading 5 is never class N" is a property of E340's member list: exact arrangements in three of the same path cells have reading 5 class N. The narrow class-N islands and the 209 narrowest-island crossers follow E949's escape condition. The 31 empty earlier-window sets are classes P and X one window earlier. The certificates' rows follow a pattern through the closer and reading 1, not yet a rule [OBS, exact; PARTIAL as tagged]
+
+**Owner (2026-11-25):** the autonomous run toward a finite set of arrangement types through the cascade (E949). The step is E949's not-understood list, item 1, in order.
+
+**Map:** E949's not-understood list, item 1. The cascade is the oracle; what is open is our description of it.
+
+**Source test.** Each object used comes from the record: E945's classes; E949's facing ends, escape rows and exact certificates; E944's path cell; E341's caution that statistics over one-member-per-cell lists describe the member list.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E312, E313, E317 to E324, E340, E341 and E930 to E949, all read this session. The bodies of the other entries were not read this session.
+
+Units and population as E949: `d_min = 1`, `R = 8t`, E340's 4,939 gate crossers.
+
+**1. Which rows the certificates use, in roles** [OBS, exact; the 2,607 certificates of E949; `attain_lp_cert_v4.py` (SHA-256 begins `1875937a`), `_total.out`; `attain_lp_cert_v4_agg.py` (`1e5e859a`) and `.out`].
+- Each row's readings are named by role: the attaining readings, the closer, the opener, reading 1, others. Each cell row's state is named `R = 1`, `R = 9`, phase 1 or phase 2.
+- Every escape row involves the closer in 2,476 of 2,607. In the other 131 the pass set lies above `A`, and its facing end is a multiple of the opener.
+- The cell rows include a row at the gate state `R = 9` in 1,902 of 2,607. Every cell row used involves reading 1 or the closer in 1,796.
+- The cell rows used do not involve the attaining reading in most certificates, because the facing ends are functions of the six frozen readings.
+- **Reading.** The usual certificate runs from the closer, through at most two links, to reading 1 at `R = 1` or `R = 9`, where `r_1 = 1` turns a link into a fixed number. This is a pattern over the 2,607 certificates, not a derived rule: **not understood** as a rule.
+
+**2. "Reading 5 is never class N" (E945: C 2,846, L 694, P 18, X 1,381, N 0)** [OBS, exact; P for each certificate; PARTIAL as item 2 states; `reading5_never_N_v1.py` (`d6b00391`) and `.out`; `reading5_cert_v1.py` (`6e26a073`) and `_total.out`; `reading5_feasible_v1.py` (`5c94eedf`) and `.out`; `reading5_N_witness_v1.py` (`6bbf2fb0`) and `.out`].
+- At the member, reading 5's facing ends spread over many pairs of readings. Its status at the gate state `R = 9` does not decide its class.
+- With one escape row (reading 5's alone) on the closed path cell: an exact certificate in 1,346 of the 1,354 cells where reading 5 is class X with a positive gap. The other 27 class-X readings touch: (i) their facing ends are equal; (ii) forced by E949 item 5's number identity (`49/63 = 7/9` in all 27, `attain_touch_v2.py` (`34ca070a`) and `.out`), with the common point excluded by open zones; (iii) the same ratio-1 pin. Understood.
+- In the other 8 cells the float LP finds the escape feasible (floats, steer only). A point is then built at `λ = 1 − 10^{-9}` toward the LP point and tested exactly through the cascade. Every one keeps the member's path. Reading 5 is class N at 2 points (the cells of E340 102875 and 101195), class X at 5, and the closer at 1. At 52 more points per cell in the other 6 (12 LP directions, 4 values of `λ`; `reading5_open_cells_v1.py` (`8108f6b5`) and `.out`), reading 5 is class N at 3 points of the cell of E340 100073. In the other 5 cells it stays class X or becomes the closer at every kept point [PARTIAL: 52 points per cell].
+- At the 2 class-N points of the first test, `min_k B_k = 8 end` still holds: another reading attains. At the 3 points of the cell of E340 100073 this was not checked.
+- **Rule 22.** (i) Feature: reading 5 never escapes in E340's members. (ii) Forced, in 1,346 cells, by the certificate. The exact arrangements show it is not forced in three cells: the absence of class N comes from E340's choice of one max-slack point per cell (E341). (iii) Not a cascade mechanism; a property of the member list. Understood. The other 5 open cells are not settled: at every kept point reading 5 stays class X or becomes the closer.
+
+**3. The 5 class-N islands narrower than `10^{-2}` (E947)** [OBS, exact for the tests, floats steer only for the printed values; `narrow_N_v1.py` (`d5a52aea`) and `.out`].
+- (i) Feature: their island's relative width lies between `5.5·10^{-3}` and `9.5·10^{-3}` (floats, steer only).
+- (ii) Forced by E949 item 2's escape condition: the slowing needed is `(b − x_k)/b`, and theirs is small, between `2.9·10^{-3}` and `7.4·10^{-3}` (floats, steer only), because each reading's last exit lies close to the window's end. Each one's slow-side island extent covers that need: 5 of 5 [PROVISIONAL: covering; the claim supported is that these 5 escape on the slow side].
+- (iii) The same mechanism as the other 1,299 escapes; 1,303 of 1,304 class-N islands reach a pass interval. The other (E340 index 102056, reading 7): (i) its escaping interval lies in a second gate island; (ii) a position there crosses the gate and covers `W_k` (E947, `path_islands_v3_odd.py` (`6a37bf42`) and `.out`); (iii) the same rule. Understood.
+- So E947's "at least `10^{-2}` in 1,299 of 1,304" is a distribution over the member list, not a bound. Escape needs extent at least `(b − x_k)/b`, and nothing more [PROVISIONAL: covering; the claim supported is the escape condition of E949 item 2].
+
+**4. The 209 crossers whose narrowest island is class N (E947)** [OBS, exact; `narrow_209_v1.py` (`50068e38`) and `.out`].
+- (i) Feature: the reading with the narrowest island escapes.
+- (ii) Forced by the same condition: in all 209 the narrowest-island reading (reading 7 in 183, reading 6 in 25, reading 3 in 1) has an island that reaches a pass interval, so its need `(b − x_k)/b` is within its extent. In all 209 the slowest attaining reading is class X: attaining is decided by the gap between the pass set and the earlier-window set (E949 items 4 and 6), not by island width.
+- (iii) The same mechanism; the narrowest-island test was a proxy (rule 8). Understood.
+
+**5. The 31 class-X readings with `A` empty (E949 item 5)** [OBS, exact; `A_empty_v1.py` (`73a2cc3f`) and `.out`].
+- (i) Feature: all 31 are reading 7, the fastest reading, moved in its range above `r_6`.
+- (ii) Forced at a phase-1 six-window (states `R` about 1.4 to 6.5, floats, steer only), where `A` becomes empty. In 13 that window's own pass set inside reading 7's range is empty. In 18 it misses the positions that passed the windows before it.
+- (iii) The same mechanism as classes P and X, applied to an earlier window. It is E942's fact that the would-pass positions fail an earlier window, which E949 left open as "which phase-1 window". Understood at the member; which window, as a rule, stays open (next item).
+
+**Still not understood (rule 22), in order:**
+- the certificates' rows as a rule (item 1);
+- the 5 open cells of item 2;
+- which phase-1 window the would-pass positions fail (mostly window 1; E942, E945; item 5);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [OBS, exact]:**
+- Three of E949's open items are statistics of E340's member list, not cascade facts: reading 5's missing class N, the `10^{-2}` width, and the 209 narrowest-island crossers. Each now reduces to E949's escape condition or to E341's choice of point.
+- The open items left are the certificates' rows as a rule and the phase-1 window the would-pass positions fail.
+- Nothing is committed.
+
+## E951 (2026-11-25): E950 item 1, the certificates as a rule. Every row of the closed path cell and every escape row bounds the ratio of two readings, so an exact certificate is a cycle of ratio bounds with product below 1. In each of the 2,607 crossers one attaining reading is blocked on its own: by a rigid pin (1,982 crossers: both facing ends are multiples of one frozen reading, from two of that reading's own zone edges) or by a short cycle (625). Through the cascade, the pin reading does not escape at any of 7,283 cell points [T, exact; P for each cycle; PARTIAL as tagged]
+
+**Owner (2026-11-25):** the autonomous run toward a finite set of arrangement types through the cascade (E949). The step is E950's not-understood list, item 1, in order.
+
+**Map:** E950's not-understood list, item 1 (the certificates' rows as a rule). The cascade is the oracle; what is open is our description of it.
+
+**Source test.** Each object used comes from the record: E949's facing ends, escape rows and path cell (`attain_lp_cert_v4.cell_exact`); E945's classes; the pass formula of `one_mover_bound_v1.passes` (E930 item 1, E389); E341's caution on the member list.
+
+M2 class (d).
+**Record search (rule 13; PARTIAL):** this entry uses E312, E313, E340, E341, E389 and E930 to E950, all read this session. The bodies of the other entries were not read this session.
+
+Units and population as E949 and E950: `d_min = 1`, `R = 8t`, E340's 4,939 gate crossers. The 2,607 are those of E949 item 6 (every attaining reading class X, facing ends identified).
+
+**1. Every row is a ratio bound** [T 773,845/773,845 cell, order and lower-bound rows; P for the certificate; `cert_cycle_v1.py` (SHA-256 begins `aff6f35d`), `cert_cycle_v2.py` (`2a121104`) and `_total.out`].
+- Written homogeneously in `(r_1, …, r_7)`, every row of the closed path cell, every order row and every lower bound (`r_q ≥ r_1`) has exactly one positive and one negative coefficient: `a r_i ≤ b r_j`, a bound on `r_i / r_j`. This was tested row by row, not assumed.
+- Escape rows: 2,907 are ratio bounds. 2,552 have one variable only, `c r_j ≤ 0` with `c > 0`: the two facing ends are multiples of the same reading (item 3).
+- [P] Multiplying the bounds round a cycle gives `r_i ≤ w r_i`; with `w < 1` and `r_i ≥ 1` this is a contradiction. A cycle with product below 1 is therefore an exact certificate. Every simple cycle of the 7-node graph is enumerated in exact Fractions. The converse is not used.
+- In the 615 crossers tested by cycles, the cell alone has no cycle with product below 1 and none with product 1.
+
+**2. One attaining reading is blocked on its own** [T 2,607/2,607; `cert_cycle_v2.py` and `_total.out`; `cycle_rigid_v1.py` (`6e47d6d5`) and `_total.out`].
+- In 1,992 crossers an attaining reading's escape row is a same-reading pin (first identification).
+- In the other 615, the shortest cycle uses one escape row and one cell row (609) or two (6).
+- E949's joint system is not needed: in every crosser some single attaining reading cannot escape inside the closed cell.
+- **Rule 22 on E950 item 1.** (i) Feature: E950's certificates ran from the closer through reading 1 at `R = 1` or `R = 9`. (ii) Forced by the float LP: it returns a basic support, which is not the shortest cycle. (iii) Not a cascade mechanism. Understood.
+
+**3. The pins, checked for identification artefacts** [T, exact; `pin_ident_v1.py` (`f8659c26`) and `_total.out`; `cycle_rigid_v1.py` and `_total.out`].
+- `ident` returns the first reading with a small ratio. Every identification of each facing end was listed. 11,621 facing-end pairs have one identification each; 164 have two or three.
+- A pin is **rigid** if both facing ends have exactly one identification, and it is the same reading: 1,982 crossers.
+- **Rule 22 on the 10 crossers with first-identification pins only.** (i) Feature: a facing end has two identifications, because two frozen readings stand in a small rational ratio at the member (E341). (ii) Forced by E341's one max-slack point per cell. (iii) Tested under every combination of identifications with the cell's ratio graph: blocked in 10 of 10. The same mechanism. Understood.
+- The 615 + 10 = 625 crossers with no rigid pin: some attaining reading is blocked under every combination of identifications in 625 of 625. For blocked readings with one identification, the shortest cycle has 2 bounds in 1,624 readings, 3 in 983, 4 in 92 and 5 in 20. For 33 readings with two or more identifications at a facing end, every combination is blocked.
+
+**4. The pin as a number fact** [P from the pass formula, PROVISIONAL: covering; the claim supported is that the moved reading blocks a window `[a, b]` at lap `m` exactly when `x ∈ ((8m−1)/(8a), (8m+1)/(8b))` (E930 item 1); T 2,531/2,531 rigid-pin rows; `pin_form_v1.py` (`2005ca59`) and `.out`; `pin_form_v2.py` (`a2929d8f`) and `_total.out`; `pin_form_v3.py` (`971dc46d`) and `_total.out`].
+- Below side, 2,381 rows, the pin reading `j` is the closer in all. `x_P` is the upper end of a pass interval of `W_k` at lap `m_P`. `W_k` ends at reading `j`'s entry to zone `u` (`8 r_j b = 8u − 1`). So `x_P = q_P r_j` with `q_P = (8m_P + 1)/(8u − 1)`.
+- `x_A` is the lower end of a pass interval of an earlier window at lap `m_A`. That window starts at reading `j`'s exit from zone `w` (`8 r_j a = 8w + 1`). So `x_A = q_A r_j` with `q_A = (8m_A − 1)/(8w + 1)`.
+- The pin is the number inequality `q_P < q_A`. The moved reading cannot pass both windows at those laps, whatever the other readings are, while those two windows keep those ends.
+- Above side, 150 rows, the pin reading is the opener in all. The pin is the mirror: `x_P` is a lower end at `W_k`'s start, and `x_A` an upper end at an earlier window's end.
+- Checked in 2,531 of 2,531: both window ends are zone edges of the pin reading itself, of the type the formula needs, the `q` values equal the formula, and the gap has the right sign.
+- The commonest pin is `q_P = 41/47`, `q_A = 15/17` (1,480 rows). There are 36 distinct pairs in E340's member list (`pin_ident_v1_total.out`).
+- The earlier window that gives `x_A` is window 0 in 140 rows, 1 in 1,617, 2 in 542, 3 in 222 and 4 in 10 [OBS].
+- **Rule 22 on the 26 rows outside the printed sign form.** (i) Feature: `pin_form_v1` prints `q` in a sign pattern other than the above. (ii) Forced by `pm8`: it reduces the fraction before scaling it, and `55/65 = 11/13` is printed as `33/39`. (iii) The provenance (`pin_form_v2`) and the formula check (`pin_form_v3`) give the standard ends in all 26. The same mechanism. Understood.
+
+**5. Rule 8: the pins through the cascade at other points of the path cell** [T, exact; points as E949's `attain_cell_cascade_v1`; `pin_cascade_v1.py` (`d0ba62b9`), `pin_changed_v1.py` (`6dca6cda`), `pin_changed_v2.py` (`acea8eae`), `pin_changed_v3.py` (`c438e5bc`), `pin_changed_v4.py` (`eee7f128`), each with `_total.out`].
+- 7,283 instances of a rigid-pin reading at a cell point (the member's seven-path). At 6,891 the facing ends are the same multiples, and the gap equals `|q_A − q_P| r_j` exactly.
+- At 392 the facing ends change while the seven-path is the same. The seven-path cell is therefore a proxy for the facing ends, which come from the six-windows of the moved reading. E949 item 6 was stated with the facing pairs held fixed.
+- **Rule 22 on the 392.**
+  - (i) Feature: in 348 the six-windows up to `W_k` are the same; in 44 they change (in 11, `W_k`'s index changes).
+  - (ii) Forced by which pass constraint binds. A's end is the binding one of several pass constraints: in 292, P is unchanged and A's end moves to another reading's constraint. In 317 of the 335 with a facing pair, the gap is still at least the pin gap. In the other 18, P's end moved (14) or the windows changed (4). In 48, P is empty; in 2, A is empty; in 7, P and A touch without overlap.
+  - (iii) In 392 of 392 the pin reading still does not escape at the point (gap above 0, P or A empty, or touching without overlap). At 389 of 389 such points some member-attaining reading is blocked by a pin or a cycle with the point's own identifications and `cell_exact` at the point. The same mechanism. Understood.
+
+**Still not understood (rule 22), in order:**
+- the 5 open cells of E950 item 2;
+- for the 625 cycle crossers, what the blocking cell rows are as zone memberships (item 3 counts them; it does not read them);
+- which phase-1 window the would-pass positions fail: for the 2,531 pin rows it is the window that starts at the pin reading's exit (item 4); for the rest it is not shown (E942, E945; E950 item 5);
+- from E939: the single fast reading and the chain crossings below 11;
+- from E938: the drop into window 1, the fall of `R*` with `H`, and the long paths near the AP.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7) [T as counted]:**
+- E949's certificates reduce to one reading at a time. In 1,982 of the 2,607 crossers, the attaining reading's block is a fact about two readings: the pin reading's two zone edges and the moved reading's laps.
+- In the other 625, the block is one ratio of two frozen readings that one to four of the path's zone memberships fix.
+- The pins' numbers form a list of 36 pairs in E340's member list. That list is not shown to be finite beyond the member list.
+- Nothing is committed.

@@ -1,0 +1,3 @@
+blocking window kinds: {'alone': 3849, 'intersection': 3795}
+by arc: {('alone', 'arc0'): 1667, ('intersection', 'arc0'): 1251, ('intersection', 'arc1'): 2544, ('alone', 'arc1'): 2182}
+largest bound among intersection kind: 116366363692825745840517677056/9998661360271315459075704411 ~ 11.638194 (float steers only), window index 6

@@ -1,0 +1,25 @@
+0 member |F| = 1
+0 member |F| = 2
+0 member |F| = 3
+0 member |F| = 4
+0 member |F| = 5
+0 member |F| = 6
+48 member: B* not computed
+88979 member: R* <= B*
+82925 six: B* <= 7
+4879 six: B* in [9, 15]
+87804 six: cap removed
+21054 six: skipped
+4097 ('obstruction', '3+', 'arc0')
+517 ('obstruction', '3+', 'arc1')
+53680 ('obstruction', 'alone', 'arc0')
+1966 ('obstruction', 'alone', 'arc1')
+25148 ('obstruction', 'pair', 'arc0')
+2396 ('obstruction', 'pair', 'arc1')
+2118 ('pair: earlier window', 'other', 'arc0')
+942 ('pair: earlier window', 'other', 'arc1')
+6276 ('pair: earlier window', 'previous', 'arc0')
+829 ('pair: earlier window', 'previous', 'arc1')
+16754 ('pair: earlier window', 'window 1', 'arc0')
+625 ('pair: earlier window', 'window 1', 'arc1')
+largest B* = 311960889899915829274579304448/26552047723665194922581185897 ~ 11.749033 (floats steer only) | six = ['1', '96129520318855920038233599917/39614081257132168796771975168', '1038180318503818635223484223915/316912650057057350374175801344', '42801440877601317947796113145/9903520314283042199192993792', '26552047723665194922581185897/4951760157141521099596496896', '59161010797087480443252469831/9903520314283042199192993792'] | W = window 6 ('60659061924983633470057086976/42801440877601317947796113145', '38995111237489478659322413056/26552047723665194922581185897')

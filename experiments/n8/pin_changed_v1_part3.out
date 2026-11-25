@@ -1,0 +1,8 @@
+2 | ('changed pin reading', 'W_k index same', False, 'window ends same', False)
+3 | ('changed pin reading', 'W_k index same', True, 'window ends same', False)
+27 | ('changed pin reading', 'W_k index same', True, 'window ends same', True)
+21 | ('changed pin reading', 'now', 'cycle')
+4 | ('changed pin reading', 'now', 'free')
+4 | ('changed pin reading', 'now', 'no facing pair')
+3 | ('changed pin reading', 'now', 'rigid pin')
+32 | ('point with a changed pin', 'some member-attaining reading blocked', True)

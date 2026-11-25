@@ -1,0 +1,6 @@
+741 | ('cell point (same path)', 'min B_k = 8 end', True)
+3 | ('crosser', 'cell points kept', 0)
+5 | ('crosser', 'cell points kept', 1)
+8 | ('crosser', 'cell points kept', 2)
+240 | ('crosser', 'cell points kept', 3)
+1 | ('opener is reading 1', 'R* = 9 exactly', True)

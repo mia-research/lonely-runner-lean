@@ -1,0 +1,15 @@
+N not the last setter: E340 index 66759 | N reading 2 | last setter 6 | actual R* 9.855108834227382 | moved R* 10.396944487563987 | moved reading in the way at the actual T: True | moved last setter rank 3
+N not the last setter: E340 index 66770 | N reading 2 | last setter 6 | actual R* 9.81024508961481 | moved R* 10.398574758727685 | moved reading in the way at the actual T: True | moved last setter rank 3
+N not the last setter: E340 index 66771 | N reading 2 | last setter 7 | actual R* 9.806080638980237 | moved R* 10.398574758727685 | moved reading in the way at the actual T: True | moved last setter rank 3
+708 | ('N not the last setter', 'landing at the actual T is cut by the moved reading', True)
+707 | ('N not the last setter', 'moved last setter is the moved reading', False)
+1 | ('N not the last setter', 'moved last setter is the moved reading', True)
+708 | ('N reading is the last setter', False)
+596 | ('N reading is the last setter', True)
+508 | ('crossers with N', 'last setter is N', False)
+596 | ('crossers with N', 'last setter is N', True)
+1704 | ('last setter class', 'L')
+596 | ('last setter class', 'N')
+231 | ('last setter class', 'P')
+2400 | ('last setter class', 'X')
+8 | ('last setter class', 'reading 1')

@@ -1,0 +1,4 @@
+SWAPPED | E340 index 101498 | moved reading 6 right end at (float, steer only) 6.276620666789 | move 13 | state R ~ 5.062155832 | set by rank 5 | in the way crossing side (6, 7) next setter 6 | other side (6, 7) next setter 7 | other side R* 5.257606242577163
+        exits (R, floats steer only): crossing side [(6, 5.257606242577163), (7, 5.257606242577163)] | other side [(6, 5.257606242577163), (7, 5.257606242577163)]
+SWAPPED | E340 index 101457 | moved reading 6 right end at (float, steer only) 5.798622808194 | move 13 | state R ~ 5.477764080 | set by rank 5 | in the way crossing side (6, 7) next setter 6 | other side (6, 7) next setter 7 | other side R* 5.6910064840516235
+        exits (R, floats steer only): crossing side [(6, 5.6910064840516235), (7, 5.6910064840516235)] | other side [(6, 5.6910064840516235), (7, 5.6910064840516235)]

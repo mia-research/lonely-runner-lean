@@ -1,0 +1,55 @@
+25 | ('form', 'NON-STANDARD', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+26 | ('form', 'NON-STANDARD', 'below', 'P from', 'win:upper', 'A from', 'win:lower')
+128 | ('form', 'standard', 'above', 'P from', 'win:lower', 'A from', 'win:upper')
+2494 | ('form', 'standard', 'below', 'P from', 'win:upper', 'A from', 'win:lower')
+NS 67097 k 5 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 1, 'upper', 3, ((5, 31),)) n 3
+NS 100019 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 100670 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101221 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 102319 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102625 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 99992 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 100331 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102971 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 100067 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100752 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101564 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 102332 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102663 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102724 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 101555 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101874 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102276 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102287 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102714 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102775 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102785 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102825 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 102875 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 100684 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101195 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101825 k 7 below qP 13/11 -+ ('win', 3, 'upper', 8, ((5, 55),)) qA 31/25 -+ ('win', 1, 'lower', 4, ((5, 25),)) n 3
+NS 102313 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102726 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102294 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102335 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102346 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100005 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100786 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 101598 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102325 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102647 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100006 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100052 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100077 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102819 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 102859 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 100007 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 101209 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 101279 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3
+NS 102307 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102338 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 102639 k 2 below qP 5/11 -+ ('win', 3, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 2, 'lower', 3, ((3, 49),)) n 3
+NS 100369 k 6 above qP 11/13 +- ('win', 4, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 4
+NS 102282 k 2 below qP 5/11 -+ ('win', 4, 'upper', 3, ((3, 55),)) qA 23/49 -+ ('win', 3, 'lower', 3, ((3, 49),)) n 4
+NS 102881 k 6 above qP 11/13 +- ('win', 3, 'lower', 7, ((5, 65),)) qA 25/31 +- ('win', 2, 'upper', 3, ((5, 31),)) n 3

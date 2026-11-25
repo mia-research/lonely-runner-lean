@@ -1,0 +1,8 @@
+4 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 1)
+7 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 3)
+58 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 4)
+101 | ('EXACT certificate', True, 'escape rows used', 1, 'of', 5)
+3 | ('EXACT certificate', True, 'escape rows used', 2, 'of', 3)
+33 | ('EXACT certificate', True, 'escape rows used', 2, 'of', 4)
+58 | ('EXACT certificate', True, 'escape rows used', 2, 'of', 5)
+42 | ('skipped: facing ends not identified',)
