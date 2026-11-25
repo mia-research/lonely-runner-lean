@@ -1,0 +1,21 @@
+Wed Nov 25 12:45:25 AEST 2026
+'Fresh.WallWindow.window_landing_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.distInt_lt_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.inWay_iff_zone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.one_move_pass_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.move_passes_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.passCell_nonempty_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Fresh.WallWindow.inWay_at_opening_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+lean rc=0
+scan sorry 0
+scan native_decide 0
+scan axiom 0
+scan admit 0
+scan unsafe 0
+f97f0e6b4bf12641996ce200f01ad16161fc80f089c0a755483e1abc07202a69  Fresh/WallWindowLaw.lean
+== lines of the lean output above matching warning|error (case-insensitive): 0
+== the scan above strips /- -/ and -- comments before counting (same code as check.sh)
+== ./check.sh Fresh/WallWindowLaw.lean, Wed Nov 25 12:48:34 AEST 2026:
+CYCLE M4CertRung2_1_1_3_4_5_5_7
+== scan for sorry / native_decide / axiom / admit / unsafe (code lines, comments stripped)
+== Prop registry: every 'def/structure ... : Prop' needs a '-- STANDING:' tag directly above (after any docstring)

@@ -1,0 +1,6 @@
+203 ('Q', 'pair cannot fail', 'best approx', '')
+7 ('W40', 'pair can fail', 'best approx', 'x >= midpoint')
+15 ('W40', 'pair can fail', 'failed', 'x < midpoint')
+48 ('W40', 'pair cannot fail', 'best approx', '')
+16 ('Z16', 'pair can fail', 'best approx', 'x >= midpoint')
+1088 ('Z16', 'pair cannot fail', 'best approx', '')

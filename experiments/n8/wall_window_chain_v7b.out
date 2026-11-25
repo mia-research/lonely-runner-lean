@@ -1,0 +1,2 @@
+766 ('length < 5', 'distinct')
+38 ('length >= 5', 'repeat')

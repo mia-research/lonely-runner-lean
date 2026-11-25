@@ -19823,3 +19823,333 @@ Existence step named (rule 1, displacement frame): none made. The reach is a des
 **4. Next step (rule 9):** the leaf-only compile calibration (the 722-box prerequisite); then the mass run proceeds batch-by-batch. The fine-ladder population (2,329 boxes) and the C₃ population (10,211 boxes) converge: the mass run covers all 12,540 boxes. Existence step named (rule 1): none made.
 
 **Consequence (M7) [L 53/53]:** P1's mass-run pipeline is operational for both populations — fine-ladder and C₃ — with the C₃ route now compute-only (no reach dumps, no per-leaf instances, no OWED(b)). The distance to P1 closure: the mass run + the per-root records + the classification assembly.
+
+## E926 (2026-11-24): the rule 4 step resumed: the phase law of an escape [L, three theorems, `Fresh/EscapePhase.lean`]; the coalescing pair in an escape is runner `i` of the approximant and runner `i` of the limit; no touch-only arrangement with speeds up to 24 has an approach that kills every touch [OBS, exact]; the mirror pair law says why [P]
+
+**Map:** E794 item 3 (the owed step: unbounded relocation forces two runners at one speed); E771 (`LeftClosed` alone is the conjecture); E295, E296 (on a one-mover segment isolation can fail only where every reading is a whole multiple of `1/P`); Agent AF (log line 12320, owed: *"whether a touch-only arrangement can host an escape"*); E627 (`alive_iff_rho`, `pair_law_general`); E795 (`TouchTheory.fo_iff`); rule 4 and its source M005 (*"No matter how close two speeds are, they can never be the same speed. As one is always by definition faster, sucessive revolutions we increasing separate them."*). Owner (2026-11-24): *"Resume the rule 4 step"*. No runner is stationary: readings are differences of positive speeds from a subject of positive speed.
+
+**1. The phase law** [L: `LonelyRunnerFresh/Fresh/EscapePhase.lean`, 122 lines, new; SHA-256 `bdff071c…a8f585`; `experiments/lean_review/escape_phase_v1.out`: exit 0, all three `[propext, Classical.choice, Quot.sound]`, scan 0].
+- `phase_of_isolated`: if reading `i` of `w` is within `1/8 − δ` of the subject's slot at `t` and `g` is isolated at `t`, then `δ ≤ |Δᵢ|·|t|`, where `Δᵢ` is reading `i` of `g` minus reading `i` of `w`.
+- `uniform_gap`: if every reading of `w` is a whole multiple of `1/P` and `w` has no isolation for `k`, one `δ > 0` serves every instant: some reading is within `1/8 − δ` of the slot. The step is Bolzano on `[0, P]` (`tendsto_subseq_of_bounded`), as in `PathLaws.isoSet_closed_of_bdd`; no counting or covering.
+- `escape_phase`: one `δ > 0` with `δ ≤ |Δᵢ|·t` for some `i`, at every isolation `t > 0` of every `g`.
+
+**2. What it says for the rule 4 step** [P from item 1 and E296].
+- At a point where approximants `g_n → w` have lonely instants `t_n → ∞` and `w` (rational) has none, `t_n ≥ δ(w)/max_i |Δᵢ(n)|`. The two runners at nearly one speed are runner `i` of `g_n` and runner `i` of `w`: their reading difference `Δᵢ(n) → 0`, and the approximant is isolated only once their phase `Δᵢ·t` has reached `δ(w)`. This is M005's separation with the pair taken across the approach. It asks nothing of two runners of `w`. The bound describes an escape at a limit with no isolation; it is not offered as an existence argument, and no step rests on it (rule 7).
+- E296 places every such point at a rational `w` on one-mover segments (off the lattice every point is isolated, `OneFreeN.lonely_of_one_free_eight`, nested repo). So item 1 covers the points E296 leaves.
+- The owed step of E794, in `LeftClosed` form, is therefore: every injective rational `w` is isolated. Item 1 does not supply it [OWED].
+
+**3. The strong form, tested: can an approach diverge at an isolated `w`?** (`experiments/n8/touch_kill_v1.py`; outputs `touch_kill_v1_H16.out`, `touch_kill_v1_H24.out`) [OBS, exact Fractions].
+- Population: every arrangement of eight distinct integer speeds in `[1, H]`, every subject; readings `|v_i − v_k|` divided by their gcd, kept as seven runners (two readings of equal size from opposite sides stay two runners; a disparity Finset would merge them).
+- An approach `x_i = r_i(1 + ε ρ_i)` keeps a single-point lonely piece `a` iff `max_{entry j} ρ_j ≤ min_{exit i} ρ_i` (E627 `alive_iff_rho`; E795 item 3, equality exact). A KILL is a strict ordering of the seven `ρ` under which every lonely point of the period dies. Under a kill, every bounded run of approximant isolations would converge to a surviving lonely point of `w`, and there is none, so the approximants' first isolations diverge at an `w` that is isolated and injective.
+- Counts (what each counts: (arrangement, subject) cases):
+
+| `H` | cases | a lonely piece of positive length | touch-only | no lonely point | touch-only with a kill |
+|---|---|---|---|---|---|
+| 16 | 102,960 | 102,406 | 554 | 0 | 0 |
+| 24 | 5,883,768 | 5,880,948 | 2,820 | 0 | 0 |
+
+- The touch-only cases fall into the reading multisets `(1,…,7)`, `(1,2,3,4,5,7,12)`, `(1,4,5,6,7,11,13)` at `H = 16` (AF's three; no multiset with two equal readings), and the same three at `H = 24` (1,664, 830 and 326 cases).
+
+**4. Why no kill: the mirror pair law** [P]. For integer readings, `frac(r(1 − a)) = 1 − frac(r a)`, so `1 − a` is lonely with exits and entries swapped. If the lonely point `a` has one exit `i` and one entry `j`, then `a` survives iff `ρ_j ≤ ρ_i` and `1 − a` survives iff `ρ_i ≤ ρ_j`: one of the pair survives every approach. This is E627's `pair_law_general` at `a' = 1 − a`. A kill therefore needs every mirror pair to carry two or more runners on one side. Rule 22 on the touch-only cases:
+- (i) Feature: every lonely point is a single point; in all three multisets the pair `1/8, 7/8` has exit `{1}` and entry `{7}` (`touch_kill_v1_H16.out`).
+- (ii) What forces survival: the mirror pair law at `1/8, 7/8`. In `(1,4,5,6,7,11,13)` the pair `3/8, 5/8` has exit `{11}` and entries `{5, 13}`, and the ordering `ρ_5 > ρ_11 > ρ_13` kills both; the pair `1/8, 7/8` survives it. The killed pair, rule 22 [P, derivation from `alive_iff_rho`; clusters in `touch_kill_v1_H24.out`]: (i) feature: it is not a singleton pair; `3/8` has one exit `{11}` and two entries `{5, 13}`, and `5/8` the reverse; (ii) what forces it: `3/8` dies when either entry outranks the exit (`ρ_5 > ρ_11`), and `5/8` dies when its entry `11` outranks one of its exits `5, 13` (`ρ_11 > ρ_13`), and the ordering gives both; (iii) same mechanism as every survival: the single-point condition of E627 and E795. With two runners on one side, the two conditions of a mirror pair can fail together, so the pair law no longer forces a survivor.
+- (iii) Same mechanism in every touch-only case found: a singleton mirror pair.
+
+**Not done:** the owed step (`w` isolated for every injective rational `w`), untouched; a touch-only arrangement with every mirror pair multi-runner, searched to `H = 24` only; arrangements whose readings are not all whole multiples of one `1/P` (outside item 1's hypothesis; E296 covers them on one-mover segments only).
+
+**Consequence (M7):** rule 4's separation is present in every escape at a rational limit, as a pair across the approach: runner `i` of the approximant against runner `i` of the limit, with phase `Δᵢ·t ≥ δ(w)` [L]. A divergence at an isolated injective limit needs a touch-only arrangement with no singleton mirror pair [P], and none occurs to `H = 24` [OBS]. What `LeftClosed` still owes is that every injective rational `w` is isolated.
+
+## E927 (2026-11-25): the five `native_decide` tail checks under the kernel: the a=26 and a=24 slices of `stripCheck` pass `decide +kernel` [L, `[propext]`]; the a=22 slice ran 715 CPU-seconds without finishing; the estimated kernel cost of `stripCheck` alone is 10 to 13 CPU-days [OBS, timings]; no kernel proof of any of the five checks exists yet
+
+**Map:** E925 (`lonelyRunnerEight_of_band_tail` takes `TailBelow17` as a hypothesis); the 2026-11-24 rebuild axiom check, `experiments/lean_review/tail_axioms_2026_11_24_v1.out`: five tail results rest on five `native_decide` checks: `stripCheck` (`TailStrip49Checked.lean:9`), `smallSlowWidthCheck` and `slowCap51WidthCheck` (`TailSlowWidth.lean:10, 23`), `twoFastWidthCheck` and `threeFastWidthCheck` (`TailTwoFast.lean:40, 66`). **Correction:** the 2026-11-24 reply called them four checks; the axiom output lists five. Owner (2026-11-25): *"Yes, try kernel"*.
+
+**What the checks compute** (`Fresh/TailStrip49Compute.lean`, read in full): `Nat` arithmetic, structural recursion on `Nat` (`coverWith … 32`) and `List` (`findPair`), boxes as closures `Fin 5 → Nat`. No well-founded recursion, so the kernel can reduce them. Each check is `(List.range' 1 26).all (checkFirstWith accept)`: C(30,5) = 142,506 roots, each subdivided up to depth 32.
+
+**Measured** (`experiments/lean_review/kernel_cost_v1/`, same machine):
+- Kernel, `checkFirst a = true` by `decide +kernel`: a=26 passes in 0.17 s, a=24 in 0.31 s [L, kernel: `#print axioms k` = `[propext]` for both, `kernel_slices_axioms.out`]. a=22 stopped unfinished at 51 min wall, 715 CPU-s, resident memory up to 2.9 GB, the machine at 17.7 of 18.4 GB swap.
+- `native_decide` on the same slices: a=24 0.13 s user, a=22 4.18 s, a=20 2.06 s. Kernel to native at a=22: above 171.
+- Boxes visited by `coverWith cellCover` (what it counts: nodes of the subdivision tree, from an instrumented copy, `box_count_v1.lean`), for the slices measured only: a=26 1, a=24 15, a=22 4,810, a=20 4,214, a=16 15,359, a=12 76,160, a=8 301,511, a=4 1,604,988, a=1 5,651,403. Sum 7,658,461. Seventeen slices were not counted, and the other four checks' `accept` functions were not counted.
+- A depth test (`walk n` of `right`, n = 10, 14, 18) gave no growth in kernel time with closure depth, so the cost is volume, not nesting.
+
+**Estimate** [OBS, extrapolated, two routes]: at the a=22 rate (more than 0.148 CPU-s per box: 714.94 CPU-s over 4,810 boxes, unfinished) the counted slices need about 1.1 million CPU-s, 13 CPU-days (7,658,461 × 0.148); at a ratio above 171 against the 5,035 s module build, `stripCheck` needs at least 860,000 CPU-s, 10 CPU-days. Per-box cost varies between slices, so neither figure is a bound. Each kernel process held up to 2.9 GB, so parallel runs are limited by memory on this machine.
+
+**Dependency search** (`dependency_search.out`: whole-word search for eight tail theorem names across every `.lean` file in `LonelyRunnerFresh/` and `LonelyRunner/LRC/`, `.lake` excluded): each name occurs only in `TailStrip49Checked`, `TailSlowWidth` and `TailTwoFast`, except `bandClearPoint_of_slow_cap17` in `BandTailCover.lean` at lines 43, 270 and 271, all doc comments; that file imports only `Fresh.FilterAssembly`.
+
+**Grades:** unchanged. The five tail results stay [L, `native_decide`]. No kernel proof of any check was produced; the passing slices a=26 and a=24 are 16 of 142,506 roots.
+
+**Not done:** the remaining slices; the other four checks; a kernel-oriented restatement of the compute (a different box representation, with a theorem that it agrees with `checkFirstWith`), whose speed-up was not measured. No file in `LonelyRunnerFresh/` or `LonelyRunner/` was edited; nothing committed.
+
+**Consequence (M7):** the tail results E925 consumes through `TailBelow17` remain [L, `native_decide`]. The kernel route as the checks stand costs an estimated 10 to 13 CPU-days for `stripCheck` alone.
+
+## E928 (2026-11-25): a certificate restatement of `stripCheck`: soundness proved [L, `Fresh/TailStrip49Cert.lean`, standard axioms]; slices a = 19..26 (792 of 142,506 roots) kernel-checked from certificates [L, `[propext]`, `Fresh/TailStrip49CertPilot.lean`]; the full check is estimated at 11 CPU-hours and about 1 GB of certificate source [OBS, extrapolated]
+
+**Map:** E927 (the five `native_decide` checks; kernel cost of the checks as written estimated at 10 to 13 CPU-days for `stripCheck`). Owner (2026-11-25): *"Try a faster restatement"*.
+
+**What the soundness chain needs** (read: `Fresh/TailStrip49Cover.lean` lines 1–380). `of_checkFirstWith` is generic in the box test `accept`; for `cellCover` the only fact used is `pair_sound`: two cells `c d` with `pairCheck box c d = true`, for any cells. The search that finds them (`cells`, `findPair`) is never used in a proof. So the search can run outside the kernel and hand over its answer.
+
+**The restatement** [L: `LonelyRunnerFresh/Fresh/TailStrip49Cert.lean`, new; SHA-256 `f356c39c77cb8a59…`; `experiments/lean_review/tail_strip49_cert_v1.out`: rc 0; the four soundness theorems `[propext, Classical.choice, Quot.sound]`, the two chunk lemmas `[propext, Quot.sound]`; scan for `sorry`, `admit`, `native_decide`, `axiom`, `unsafe`: three hits, all doc comments].
+- `CertL`: the subdivision tree of `coverWith`, with two cells as explicit numbers at each leaf. `certCheckL` re-checks the split (`widest`, `left`, `right`, as in `coverWith`) and, at each leaf, `pairCheckN`: `pairCheck` with the blocker scan over the lap range `blockers` computes, in place of all laps `1..95`.
+- `blockers_mem` [PROVISIONAL: covering, a step of `cells_of_certs`]: the narrower range contains every blocking lap. It is `blocked_mem` (private in `TailStrip49Cover`) with two lap bounds added: `(lo·n/d − 1)/8 ≤ k` from the low end of the cell, `k ≤ (maxTop·n/d + 1)/8` from the high end.
+- `pairN_sound`, `certCheckL_sound`: a passing leaf, and a passing certificate, give `CellPairFor g` on the box.
+- `cells_of_certs` [PROVISIONAL: covering; the root boxes cover the strip and each leaf's two cells cannot both be blocked; the claim it supports is the strip's clear point, `tailStrip49_clearPoint` / `tailStrip49_lands`]: if every root tuple `1 ≤ a ≤ b ≤ c ≤ d ≤ e ≤ 26` has a certificate that passes, every `g` with `g 0 = 1`, `Monotone g`, `g 5 ≤ 51` has `CellPairFor g`. This is the conclusion of `cells_of_check`, with no `native_decide`.
+- `chunkOK`, `chunkOK_split`, `allRoots_of_slices`: the bookkeeping that lets the certificates be checked in separate declarations.
+- No agreement theorem with `checkFirstWith` is needed: any certificate that passes gives the conclusion, so the native search is untrusted.
+
+**Frame.** This restates a check inside the existing route of E925 (`TailBelow17`, [PROVISIONAL: covering]); it supplies no step of the displacement frame (rules 1–4) and changes no existence argument. It removes `native_decide` from the route, nothing else.
+
+**Pilot** [L: `LonelyRunnerFresh/Fresh/TailStrip49CertPilot.lean`, 1,163,266 bytes, generated; SHA-256 `441c68bad59142dee962…`]. `slice19` to `slice26`, each `chunkOK (rootTuples a) certs_a = true` by `decide +kernel`, all `[propext]`. 792 roots, 11,001 leaves. 54.9 s user, peak 9.7 GB. The certificates come from a native extractor run on `checkFirst`'s own search (`experiments/lean_review/kernel_cost_v1/cert/`).
+
+**Measured** (`kernel_cost_v1/cert/timings.out`, a = 22 slice, 2,440 leaves): cells by lap index and full scan 106.5 s user and 293 s system, 10.3 GB; narrow scan 20.3 s; cells as literals and narrow scan 11.3 s including 1.6 s elaboration, 3.0 GB. The profile put about 7 s of the 16 s on rebuilding cells from laps (lazy `max`/`min` chains). Over five slices, kernel time is about 4.3 ms per leaf and memory about 0.9 MB per leaf in one declaration, plus 0.4 GB.
+
+**Size of the full check** (`node_counts.out`, `max_leaves_per_root.out`; what they count: nodes and leaves of the subdivision tree `checkFirst`'s search builds): 18,265,426 nodes, 9,203,966 leaves over all 26 slices. 162 roots need more than 3,000 leaves (the largest 33,568). Rule 22 (`large_roots.out`, from `Big.lean`): (i) feature: all 162 have `a ≤ 3` and `b ≤ 5` (slices 1–3, slow readings near the pinned reading); 91 have `e = 24` (fifth slow reading in `[47, 49]`, next to the strip) and 54 have `d = 23`; 117 have no cell at the root box, 34 one, 11 two; (ii) what forces a deep tree: not understood; (iii) same mechanism as the other roots or a different one: not understood.
+
+**Estimate** [OBS, extrapolated from the pilot rates, not a bound]: 9.2 million leaves at 4.3 ms is about 11 CPU-hours; at 106 bytes per leaf the certificate source is about 1 GB. With about 0.9 MB per leaf per declaration, the work splits into at least about 3,100 declarations of 3,000 leaves or fewer, and the 162 large roots need their trees cut into subtrees, each checked in its own declaration. That cutting is not written.
+
+**Not done:** slices 1–18 of `stripCheck`; subtree cutting for the 162 large roots; a compact encoding of the certificate (not measured); the four width checks, whose box test `widthCover` needs one cell per leaf and its own soundness lemma (not written). Grades of the five tail results are unchanged, [L, `native_decide`]. No existing file edited; nothing committed.
+
+**Consequence (M7):** `stripCheck` has a kernel route whose soundness is proved [L] and whose cost is measured: about 11 CPU-hours and 1 GB of certificate, against 10 to 13 CPU-days for the kernel on the check as written. In `TailStrip49Cover.lean` lines 528–596 the hypothesis `checked` enters only through `cells_of_check` (grep), so `bandClearPoint_of_check`, `bandClearPoint_of_check_unsorted` and `tailStrip49_lands_of_check` can be restated over `cells_of_certs` once all 26 slices are checked, with the same [PROVISIONAL: covering] tag and no step of rules 1–4 added; those restatements are not written.
+
+## E929 (2026-11-25): the wall-window split: with `S` the readings at most `7 d_min` and `F` the rest, the landing is `F`'s cascade started at the opening of one of `S`'s windows [P]; in three populations every landing is at most `7/(8 d_min)`, which E340's gate-crossing members exceed, and under that observed cap `S`'s laps in play are at most 6 [P, conditional]; which window holds the landing is **not understood** [OBS, exact; PARTIAL: three populations]
+
+**Map:** `MECHANISM_MAP_v5.md` §4 (the central open statement: where the readings sit at the last separation); E670's Consequence (the window-A classes of E369 modulo the fast reading's lap, with the laps symbolic, as in E558 and E662/E663); E781's law (one group's cascade inside the other group's window); M2 class (d), a map run whose pass condition is the oracle check. Nearest §6 class: F14-like, a place chosen from a representation; this split is named from the readings by the ratio wall 7 before the landing is computed, and its forced parts are stated in item 1. Owner (2026-11-25): *"What I seem to understand we need a rule.  Lets do experiments to try and derive that rule"*. Not-understood items found in the entries read (E925 items 2, 5 (iii) and 6; E928's 162 roots; E844 item 6) stand ahead of new runs under rule 22; the list is not shown complete (E673 to E923 not read in full); this run is owner-directed.
+**Record search (rule 13; PARTIAL):** read in full this turn: E340 (its opening sections), E433, E667 to E672, E754, E757, E777 to E781, E784 to E788, E794, E795, E924 to E928; headings of E640 to E679 and E768 to E799. Not read: the bodies of the other entries from E673 to E923.
+
+**1. The split and what the definitions force** [P]. Readings `r_1 ≤ … ≤ r_7` of a subject, `d = r_1`, `t0 = 1/(8d)`. `S` = the readings `r ≤ 7d`; `F` = the rest. Every reading of `S` sits at `r/(8d) ∈ [1/8, 7/8]` at `t0`, so `S` is clear at `t0`, and `S`'s clear set from `t0` is a union of windows whose ends are zone edges `(8m ± 1)/(8r)`, `r ∈ S`; the first is `[t0, 7/(8 max S)]`. Forced: each cascade move skips only instants blocked by the setter, so the cascade from any start `s` gives the first lonely instant `≥ s`. `F` empty gives `T = t0`, since `S` is then every reading. Otherwise `T` is lonely, so it lies in some window `[a, b]` of `S`; `F`'s cascade from `a` gives the first `F`-clear instant `≥ a`, which is at most `T`, lies in `[a, T]` where `S` is clear, is therefore lonely, and so equals `T` (the inside-a-piece form of `ChainCarried.chain_landing`, E757 [L]). Conditional on `T ≤ 7/(8d)` (observed in item 2, not derived, and false for E340's 4,939 gate-crossing members, whose landing in the units `8 d_min t` is at least 9): every window opening before `T` is `(8m+1)/(8r)` with `8m + 1 ≤ 8rT ≤ 49`, so `m ≤ 6`.
+
+**2. Run** [OBS, exact Fractions; the cascade from `t0` is the oracle, and `F`'s cascade from the window's left end equals it in every case (asserted)]. Scripts `experiments/n8/wall_window_law_v1.py` to `_v4.py`, `_v4b.py`; outputs `wall_window_law_v2_QW.out`, `_v3_QW.out`, `_v4.out`, `_v4b.out`; SHA-256 of `_v4.py` begins `8462a891`, of `_v4b.py` `8fd625c2`. Populations: Z16, every 8-subset of `{1,…,16}` and every subject (102,960 cases, E926's); Q, seeded consecutive gaps `a/12`, `6 ≤ a ≤ 24`, 3,000 arrangements, every subject (24,000, E669's H4); W40, `1` and six readings on the `1/12` grid in `(1, 40]`, seed 6 (2,900, E672's W). Readings are `|v_i − v_k|`; equal readings from opposite sides stay two runners. Q's arrangements in v1 to v4b start at position 0, one runner at speed 0 (rule 5); `_v4c.py` (SHA-256 begins `4c016625`) starts them at 1, and `_v4c.out` equals `_v4b.out` line for line (readings are differences).
+
+| | Z16 | Q | W40 |
+|---|---|---|---|
+| cases | 102,960 | 24,000 | 2,900 |
+| `T ≤ 7/(8d)` | 102,960 | 24,000 | 2,900 |
+| `F` empty (`T = t0`) | 39,600 | 13,211 | 0 |
+| `T` in window 1, at its opening / at an `F` exit | 30,096 / 17,624 | 1,217 / 4,922 | 668 / 2,001 |
+| window 2, at its opening / `F` exit | 11,836 / 2,994 | 3,576 / 825 | 90 / 138 |
+| window 3 or later, at its opening / `F` exit | 592 / 218 | 163 / 86 | 2 / 1 |
+| largest lap `m` of an `S` opening before `T` | 4 | 4 | 1 |
+
+What each row counts: (arrangement, subject) cases; "at its opening" means `T` equals the window's left end, so `F` is clear there and the place is the instant `(8m+1)/(8r)` of an `S` reading (or `t0`).
+- The opener of the window holding `T`, when it is not window 1, is an `S` reading at lap 1 in 14,432 of 15,640 Z16 cases, 4,486 of 4,650 Q cases and 231 of 231 W40 cases, at laps 2 to 4 in the rest; the opener's rank in `S` runs from 2 to the fastest (counts by rank and lap in `_v4.out`). `d` opens none: its first zone begins at `7/(8d)`. At the instant where `F`'s cascade from `t0` passes window 1, the only `S` reading in the way is `S`'s fastest reading in 4,420 of the 4,650 Q cases and 218 of the 231 W40 cases (`_v3_QW.out`; Z16 was not run in v3).
+- v1's statement "the landing lies in window 1" fails in 15,640 Z16, 4,650 Q and 231 W40 cases; v2 to v4 locate those landings (item 3).
+
+**3a. Rule 22, the 17 Q and 3 W40 cases with `T = TF` and no `S` reading in the way.** (i) Feature: `F`'s cascade from `t0` already fixes at `T`, past window 1, at an instant where `S` is clear. (ii) Forced: by item 1's argument from `t0`, `F`'s first clear instant `≥ t0` is `S`-clear, so it is the first lonely instant. (iii) Same mechanism as the window-1 landings at an `F` exit, with window index above 1. Understood.
+**3b. Rule 22, the other 213 Q and 10 W40 cases of v3** (at the instant `F`'s cascade from `t0` passes window 1, two or more `S` readings in the way, for example ranks 5 and 6 of 6, in 212 Q and 9 W40; one `S` reading that is not the fastest in 1 Q and 1 W40). (i) Feature: as stated. (ii) Not derived. (iii) Item 1 holds for them (`_v4.py` asserts it in every case). Status: **not understood**.
+**3. Rule 22, the landings in a later window.** (i) Feature: `F`'s cascade from `t0` passes `7/(8 max S)`, the entry of `S`'s fastest reading. (ii) What forces the landing there: inside the later window, item 1 (`F`'s cascade from its opening, E757 [L]); what forces `F` past the earlier windows is not derived. (iii) Same mechanism in every case found: `F`'s cascade inside an `S` window, one or more windows later. Status: which window holds `T` is **not understood**; it is the next step (rule 9).
+
+**Not done:** a rule for the window index from the readings; irrational readings; populations with `T > 7/(8d)` (none here; E340's members that cross the gate, and §6.7's 28-move case with `d_min·τ > 1`, are outside the cap); the recursion of the split inside `F`; Lean.
+Existence step named (rule 1, displacement frame): none; item 1 locates a landing that exists and asserts nothing about existence.
+**Consequence (M7) [P for item 1; OBS for item 2]:** the landing is `t0`, the opening `(8m+1)/(8r)` of an `S` window (`r ≤ 7 d_min`), or an `F` exit inside an `S` window [P]. The lap `m` of an opening before `T` satisfies `8m + 1 ≤ 8rT ≤ 56 d_min T`, so it is bounded by `d_min T`, not by a constant: `m ≤ 6` holds only under the observed cap `T ≤ 7/(8 d_min)` (register item 15 in the units `u = d_min t`), which E340's gate crossers break. The finiteness of `S`'s openings is therefore a statement about `d_min T`, the same unbounded quantity as `F`'s lap. This bears on E670's open reduction (window-A classes modulo the fast reading's lap) and on E672's level letters; it shortens no route and closes none. The open object is the window index.
+**Addendum (same day, from the reply audit):**
+- `_v3.py` and `_v4.py` were re-run with Q started at position 1 (`wall_window_law_v3_pos1.py/.out`, `wall_window_law_v4_pos1.py`, `_v4_pos1_Q.out`). Every count equals the position-0 run, so item 2's v3 and v4 figures do not rest on a runner at speed 0.
+- Rule 22, the openers at laps 2 to 4 (1,208 Z16 and 164 Q cases). (i) Feature: the window holding `T` is opened by an `S` reading's second to fourth zone. (ii) Not derived. (iii) Item 1 holds for them. Status: **not understood**.
+- Rule 22, the cap's failures (E340's 4,939 gate crossers, and §6.7's 28-move case). (i) Feature, from E340: the chain from the first instant covers d_min's first window. (ii) Forced by E340's proved gate: a zone of a reading other than d_min is too narrow to span d_min's zone, so the landing in units `8 d_min t` is at least 9. (iii) Different mechanism: phase 2, from d_min's second window. Why the chain covers the first window is not derived there, and E929's split was not run on those members.
+
+## E930 (2026-11-25): the window index: E331's step-0 law, taken at the opening of each `S` window, decides whether `F`'s cascade passes that window in one move: it does exactly when some `F` reading lies in `((8k−1)/(8a), (8k+1)/(8b))` [P], which can happen only when `b/a < (8k+1)/(8k−1) ≤ 9/7` [P, E305's criterion]; one-move passes are 15,720 of 16,524 passed windows in Z16, 4,763 of 4,930 in Q and 174 of 234 in W40 [OBS, exact]; the passes of two or more moves are **not understood** [PARTIAL: three populations]
+
+**Map:** E929's open object (which window holds `T`); `MECHANISM_MAP_v5.md` §4. Sources in the record, not new here:
+- E305's zones `((8j−1)/ρ, (8j+1)/ρ)` and its overlap criterion `ρ_y/ρ_x ≤ (8j+1)/(8j−1)`;
+- E331's step-0 law: a move happens iff some reading lies in a strip, and the first setter is the strip reading with the largest exit;
+- the move ratio under `9/7` `[PROVED — from Thm 6.25]` (log line 3156), restated in E340.
+
+Item 1 is the step-0 law taken at an `S` window's opening `a` with the window's end `b`, in place of `R = 1`. M2 class (d): a map run whose pass condition is the oracle check. Owner (2026-11-25): *"Yes, run it"*. The not-understood items listed in E929 still stand ahead of new runs; this run is owner-directed.
+**Record search (rule 13; PARTIAL):** as E929, plus E305, E331 and line 3156 (located by the rules-auditor and read).
+
+**1. One-move passes** [P]. Let `W = [a, b]` be a window of `S` (E929), with `a ≥ t0 = 1/(8d)`. Each move of the cascade goes to the largest exit among the readings blocked at the current state; `W` is passed when the state exceeds `b`.
+- `F` reading `f` is blocked at `a` at lap `k ≥ 1` and exits past `b` iff `f ∈ I_k(a, b) = ((8k−1)/(8a), (8k+1)/(8b))`. Lap 0 is excluded because `f·a > 7/8`.
+- If some `f ∈ F` lies in some `I_k`, the largest exit at `a` is at least `(8k+1)/(8f) > b`, so the first move passes `W`.
+- Conversely, if the first move passes `W`, its setter is blocked at `a` and exits past `b`, so it lies in some `I_k`.
+- Written in the window's bounding readings, with `a = (8m+1)/(8r)` the opening (or `t0`, `m = 0`, `r = d`) and `b = (8m'−1)/(8r')` the next entry, the condition is `(8k−1)/(8m+1) < f/r` and `f/r' < (8k+1)/(8m'−1)`.
+- For `W_1 = [1/(8d), 7/(8 max S)]`, it reads `(8k−1) d < f < (8k+1) max S / 7`.
+
+The setter is named, by rank and by its lap `k`.
+
+**2. Window ratio** [P]. `I_k(a, b)` is non-empty iff `b/a < (8k+1)/(8k−1)`; this is E305's criterion with the window's two ends in place of two zones. The largest value is `9/7` at `k = 1`. Each move multiplies the state by less than `9/7` (line 3156), so a window passed in `n` moves has `b/a < (9/7)^n`. For `W_1`, `b/a = 7d / max S`, so a one-move pass of `W_1` needs `max S > 49d/9`.
+
+**3. Run** [OBS, exact Fractions; cascade as oracle]. Populations are E929's, with Q started at position 1 (rule 5). Scripts in `experiments/n8/`, each with `.out`:
+- `wall_window_index_v5.py` (SHA-256 begins `4507c400`) records `F`'s cascade from each window's opening, up to the window holding `T`.
+- `_v6.py` (`48a46c13`) checks item 1's predicate in every such window.
+- `_v6b.py` (`aa7a4334`) splits the `W_1` passes by first setter.
+
+| one-move / two-or-more-move passes, mismatches of item 1's predicate | Z16 | Q | W40 |
+|---|---|---|---|
+| `W_1` | 14,952 / 688, 0 | 4,522 / 128, 0 | 172 / 59, 0 |
+| `W_2` | 732 / 78, 0 | 216 / 33, 0 | 2 / 1, 0 |
+| `W_3` or later | 36 / 38, 0 | 25 / 6, 0 | 0 / 0, 0 |
+
+What each cell counts: windows that `F`'s cascade from the window's opening passes, with one move or with more. A mismatch is a window where the predicate and the one-move pass disagree; landing windows are included.
+- The `W_1` passes sum to E929's later-window counts (15,640, 4,650 and 231).
+- `b/a < (9/7)^{moves}` holds in all 16,524 Z16, 4,930 Q and 234 W40 passed windows (item 2, checked).
+- `W_1` was passed with `max S ≤ 49d/9` in 40 Z16, 40 Q and 6 W40 cases, all in two or more moves (item 2 forces this).
+- Lap `k` of the predicate's hit at `W_1`: lap 1 in all 14,952 Z16 cases, in 4,440 of 4,522 Q cases, and in 80 of 172 W40 cases. The rest are at lap 2 or more (the bin is capped at 4).
+
+**4. Rule 22, the `W_1` passes whose first setter is not `F`'s slowest reading** (0 Z16; 108 of 4,650 Q; 94 of 231 W40; `_v6b.out`). (i) Feature: either `F`'s slowest reading is not blocked at `t0` (84 Q, 89 W40), or it is blocked but a faster `F` reading has the larger exit (24 Q, 5 W40). (ii) What forces it: the largest-exit choice of item 1, which is E331's step-0 law. (iii) Same mechanism. Understood.
+
+**5. Rule 22, the passes of two or more moves** (804 Z16, 167 Q and 60 W40 windows). (i) Feature: no single `F` reading lies in an `I_k(a, b)`, and `F`'s cascade from `a` still passes `b`. (ii) What forces it: the last move is a one-move pass from the state `e` it starts at, by item 1 with `e` in place of `a`. Which readings set the earlier moves, and where `e` sits, is not derived. (iii) Not established. Status: **not understood**; this is the next step.
+
+**Not done:** item 5; irrational readings; populations crossing E340's gate (E929's cap); the recursion of the split inside `F`; Lean.
+Existence step named (rule 1, displacement frame): none; item 1 names the setter of a landing that exists, and asserts nothing about existence.
+**Consequence (M7) [P for items 1 and 2; OBS for item 3]:** combined with E929, `T` is the opening `a_i` of the first `S` window from which `F`'s cascade does not pass, or an `F` exit inside it. A one-move pass names its setter and lap from two ratio conditions between an `F` reading and the window's two bounding `S` readings, with lap fractions `(8k±1)/(8m±1)` as bounds. This bears on E670, where the fast reading's lap enters here only through `(8k ± 1)`, and on E305's overlap criterion, which the window form generalises from two zones to a window's two ends. The open object is item 5. This entry shortens no route and closes none.
+
+## E931 (2026-11-25): multi-move passes: every move is a one-move pass of the sub-window `[e_{i−1}, e_i)` between consecutive states, with `e_0 = a` (an `S` opening or `t0`) and `e_i = (8k_i+1)/(8f_i)` an `F` exit, and consecutive setters satisfy `(8k'−1)/(8k+1) < f'/f < (8k'+1)/(8k+1)` [P]; so E930's law extends by recursion on `F`'s own exits, not on `S`-named instants, because `S` is clear across the window and names no instant inside it [P]; checked with 0 failures, of which the interval-merge check (c) is independent of the cascade [OBS, exact; PARTIAL: three populations]
+
+**Map:** E930 item 5 (the passes of two or more moves); owner (2026-11-25): *"take the multi-move passes and test whether each earlier move is also a one-move pass of a sub-window bounded by named instants … If not we need to understand why not"*. Sources in the record:
+- E305's consecutive-zone condition, and its reading "the isolation moves while the next zone overlaps the last";
+- E331's setter relation;
+- E95's repeats (log line 3159);
+- E754's landing as the setter's exit [L].
+
+M2 class (d): a map run whose pass condition is the oracle check. The not-understood items listed in E929 and E930 still stand ahead of new runs; this run is owner-directed.
+**Record search (rule 13; PARTIAL):** as E930, plus E95 (the repeat paragraph only).
+
+**1. Derivation** [P]. Let `W = [a, b]` be an `S` window, and `F`'s cascade from `a` have states `a = e_0 < e_1 < …`, with setter `f_i` at lap `k_i` for the move from `e_{i−1}`.
+- (a) Each `e_i` is the setter's exit `(8k_i+1)/(8f_i)`. So move `i` is a one-move pass, in E930's sense, of the sub-window `[e_{i−1}, e_i)`, whose ends are both named by readings and laps.
+- (b) The next setter `f'` at lap `k'` is blocked at the exit `(8k+1)/(8f)` iff `(8k'−1)/(8k+1) < f'/f < (8k'+1)/(8k+1)`. This is E305's consecutive-zone condition, read at the exit.
+- (c) `F` passes `W` iff `[a, b]` lies in the union of `F`'s open zones `[PROVISIONAL: covering]`. The cascade gives the first `F`-clear instant `≥ a`, so any gapless run of `F` zones from `a` past `b` forces a pass, whichever readings form it.
+- (d) Why the recursion is not on `S`-named instants: `S` is clear on all of `W`, so no `S` zone edge lies inside `W`, and the only `S`-named instants in `W` are `a` and `b`. Every intermediate state is an `F` exit.
+
+Written in readings, an `n`-move pass is a word `(f_1, k_1), …, (f_n, k_n)` with these conditions:
+- `(8k_1−1)/(8a) < f_1 < (8k_1+1)/(8a)` (blocked at `a`);
+- (b) at each link, the generalisation of E305's same-lap criterion to different laps;
+- `e_i ≤ b` for `i < n`, and `f_n < (8k_n+1)/(8b)` (only the last exit passes `b`);
+- each `f_i` is the largest-exit blocker at `e_{i−1}`.
+
+With `a = (8m+1)/(8r)` and `b = (8m'−1)/(8r')`, every condition is a ratio of two readings against a fraction `(8k±1)/(8j±1)`.
+
+**2. Run** [OBS, exact Fractions]. `experiments/n8/wall_window_chain_v7.py` (SHA-256 begins `7b36b3e3`) and `.out`, on E929's populations with Q started at position 1 (rule 5). All passed and landing windows were checked, up to the window holding `T`. `grep -c False` on the output gives 0. Check (a) holds by construction (the script's exit formula is `(8k+1)/(8f)`), and check (b) evaluates item 1(b)'s algebra; only (c) is independent of the cascade.
+
+| check (what it counts) | Z16 | Q | W40 |
+|---|---|---|---|
+| (a) moves whose state equals `(8k+1)/(8f)` | 41,848 | 11,583 | 4,394 |
+| (b) links satisfying the ratio condition | 4,488 | 820 | 2,020 |
+| (c) windows where pass = interval-merge cover | 79,884 | 15,719 | 3,134 |
+| multi-move passes | 804 | 167 | 60 |
+| of those, length 2 / 3 / 4 / 5 or more | 658 / 68 / 40 / 38 | 137 / 25 / 4 / 1 | 52 / 6 / 2 / 0 |
+| setters distinct / a setter repeats | 766 / 38 | 167 / 0 | 60 / 0 |
+| every setter the lowest-rank blocker | 804 | 163 | 54 |
+| lap word `1-2` | 648 | 90 | 5 |
+| distinct (rank, lap) words | 19 | 23 | 43 |
+
+The most common words are `(1,1),(4,2)` and `(1,1),(3,2)`: `F`'s slowest reading at lap 1, then a faster `F` reading at lap 2. These account for 540 of 804 in Z16 and 90 of 167 in Q.
+
+**3. Rule 22.**
+- **The 38 Z16 passes with a repeated setter.** They are exactly the Z16 passes of length 5 or more (cross-tabulation `wall_window_chain_v7b.py/.out`: 38 of length at least 5, all with a repeat; 766 shorter, all distinct). (i) Feature: a reading sets again at the next lap; for example `(4,2),(3,2),(2,2),(1,2),(4,3)` on readings `1,6,7,8,9,10,11`. (ii) What forces it: link (b), with the returning reading's next lap. (iii) Same link law; E95 records repeats as what takes a chain past the distinct-setter budget, and finds that, as operationalised there, they are not caused by slot-sharing. Understood at the link level.
+- **The setters that are not the lowest-rank blocker** (0 Z16, 4 Q, 6 W40 passes). (i) Feature: at that move a faster blocker has the larger exit (the flag in `_v7.py`). (ii) Forced by the largest-exit choice. (iii) Same mechanism as E930 item 4. Understood.
+
+**Not done:** which words occur for which readings, beyond the link conditions; whether the word set stays finite past these populations (Z16 has 19 words; W40, with readings up to 40, has 43); irrational readings; populations past E929's cap; Lean.
+Existence step named (rule 1, displacement frame): none; item 1 describes how a landing that exists is reached, and asserts nothing about existence.
+**Consequence (M7) [P for item 1; OBS for item 2]:** with E929 and E930, the landing is a named instant `(8k+1)/(8x)` for some reading `x` and lap `k`, or `t0`, as E754 has [L]. Its setter is one of two things:
+- the `S` reading that opens the first window `F` does not pass;
+- the last `F` setter of a ratio word from that opening.
+
+Each link of the word is a ratio between consecutive setters, bounded by lap fractions. The owner's recursion holds, with `F`'s exits as the sub-window ends. The open object is the word, meaning which ratio words the readings admit; it carries the covering tag of item 1(c). This entry shortens no route and closes none.
+
+## E932 (2026-11-25): the words in lap-ratio form: each link's setters are in reading ratio inside `((8k'−1)/(8k+1), (8k'+1)/(8k+1))`, whose centre `8k'/(8k+1)` lies below `k'/k` [P]; written as the first lap and the successive lap ratios `k_{i+1}/k_i`, the words number 11 in Z16, 15 in Q and 25 in W40, and 8 of the 42 occur in more than one population [OBS, exact]; in these populations the word set grows with the readings' scale, so a fixed finite set is **not shown** [PARTIAL: three populations]
+
+**Map:** E931's open object (which ratio words the readings admit); owner (2026-11-25): *"Yes, run it"*, on the proposal to tabulate words against the readings' ratios to test whether a fixed set of ratio cells, named by lap fractions, determines the word. The link condition is E931 item 1(b) and E305. M2 class (d). Rule 8: a cell partition of reading space is a proxy, so this run records words, the cascade's own object, and the cell fractions only as the link conditions they are. The not-understood items listed in E929 to E931 stand ahead of new runs; this run is owner-directed.
+**Record search (rule 13; PARTIAL):** as E931.
+
+**1. The link in lap terms** [P]. From E931 item 1(b), a link `(f, k) → (f', k')` has `f'/f ∈ ((8k'−1)/(8k+1), (8k'+1)/(8k+1))`.
+- The cell's centre is `8k'/(8k+1) = (k'/k)(1 − 1/(8k+1))`, below `k'/k`.
+- Its lower end lies below `k'/k` by `(k + k')/(k(8k+1))`. Its upper end differs from `k'/k` by `(k − k')/(k(8k+1))`: it is below `k'/k` when `k' > k`, and above it when `k' < k`.
+
+When `k' = k` the open upper end equals `k'/k`. So two consecutive setters have readings in ratio close to their laps' ratio, displaced downwards. The centre's offset `(k'/k)/(8k+1)` depends on both `k'/k` and `k`.
+
+That the word is determined by the readings and the opening `a` is E931 item 1. This entry asks what the words are.
+
+**2. Run** [OBS, exact Fractions; cascade as oracle]. `experiments/n8/wall_window_word_v8.py` (SHA-256 begins `d846f42f`) and `.out`, and `_v8b.py` (`77debe94`) and `.out`. Populations are E929's, with Q started at position 1 (rule 5). The links and words counted are those of the multi-move passes of the windows before the one holding `T`: E931's 804 Z16, 167 Q and 60 W40. This gives 1,104, 203 and 70 links. E931's check (b) counted every link of every `F` cascade in every window, landing windows included, which gives 4,488, 820 and 2,020.
+
+**Links.** `k'/k` is the closest fraction to `f'/f` with denominator at most `k` in all 1,104 Z16 links and all 203 Q links, and in 55 of 70 W40 links. The lap pairs are listed in `.out`: Z16 has `(1,2)` 688, `(2,2)` 238, `(2,3)` 104 and five others; W40 has 22 pairs, up to `(1,6)` and `(6,6)`.
+
+**Fraction words.** A fraction word is the first lap followed by the successive lap ratios.
+
+| | Z16 | Q | W40 |
+|---|---|---|---|
+| rank-and-lap words (E931) | 19 | 23 | 43 |
+| fraction words | 11 | 15 | 25 |
+| commonest | `(1, 2)`: 648 of 804 | `(1, 2)`: 90 of 167 | `(1, 4)`: 8 of 60 |
+
+- 8 of the 42 fraction words occur in more than one population. Only `(1, 2)` occurs in all three (648 Z16, 90 Q, 5 W40).
+- W40, with readings up to 40, has first laps up to 5 and lap ratios up to 6. Z16 has first laps up to 4 and lap ratios up to 2.
+
+**3. Rule 22, the 15 W40 links where `k'/k` is not the closest fraction** (`_v8b.out`).
+- (i) Feature: in all 15, `f'/f` lies below `k'/k`, and the closest fraction `p/q` also lies below `k'/k`. The lap pairs are `(1,4)` 6, `(1,5)` 2, `(1,6)` 1, `(3,5)` 2, `(4,3)` 1, `(5,2)` 1 and `(5,4)` 2.
+- (ii) Forced [P], with `_v8c.py` (SHA-256 begins `e8c12c1b`) and `.out`. Let `p/q` be the largest fraction below `k'/k` with `q ≤ k`. A ratio in the link cell is closer to `p/q` than to `k'/k` iff it lies below the midpoint of `p/q` and `k'/k`. So a pair can fail iff the cell's lower end `(8k'−1)/(8k+1)` lies below that midpoint; the lower end's offset is `(k+k')/(k(8k+1))`. Fractions above `k'/k` cannot be closer when `2k(k−k') ≤ 8k+1`, which holds for every pair observed. Checked: all 15 failing links lie in pairs that can fail and lie below the midpoint. The other links in such pairs (7 W40, 16 Z16) all lie at or above it. No Q link lies in such a pair. For `k = 1` the pairs that can fail are those with `k' ≥ 4`, matching `(1,4)`, `(1,5)` and `(1,6)`.
+- (iii) Same link law. These links are no exception to it; `k'/k` as a best approximation is the wrong object, and the cell fractions `(8k'±1)/(8k+1)` are the right one.
+- Status: understood.
+
+**Not done:** whether the word set is finite over all arrangements (here it grows from Z16 to W40); a rule that gives the word from the readings without running the chain; irrational readings; Lean.
+Existence step named (rule 1, displacement frame): none; the entry tabulates the words of passes and asserts nothing about existence.
+**Consequence (M7) [P for item 1; OBS for item 2]:** the words are written in lap fractions, and their link cells are fixed by `(8k'±1)/(8k+1)`. In these populations the words do not form a fixed set: they grow with the readings' scale (first laps and lap ratios grow from Z16 to W40), and only `(1, 2)` is common to all three. The finite part found so far is the link law; the word, which sequence of links occurs, remains open. This bears on E670 (the fast reading's lap): the laps in a word grow with `f/d`. It shortens no route and closes none.
+
+## E933 (2026-11-25): the wall-window split on E340's 110,081 members: E929 item 1, E930's one-move predicate and E931's cover and link conditions hold with 0 failures, gate crossers included; in each of the 4,939 crossers, `F` passes every `S` window inside `d_min`'s first window, and of those 16,964 passes, 16,695 take one move [OBS, exact; E340's member list, one witness per tree cell]; this places E929's cap-failure item under the E930/E931 law; which readings set the crossers' landings, stated in the readings, is still **not understood**
+
+**Map:** E929's addendum, rule 22 item "the cap's failures (E340's 4,939 gate crossers …)". There, (ii) and (iii) come from E340's gate, and "why the chain covers the first window is not derived". Owner (2026-11-25): *"Yes, run it"*, on the proposal to run the split on those members. M2 class (d): a map run whose pass condition is the oracle check. The not-understood items listed in E929 to E932 stand; this run works on one of them.
+**Record search (rule 13; PARTIAL):** as E932. E340's population description was read in `LonelyRunner/experiments/nN/redo/disc_outcome_structure_v1.md` (line 3) and the record layout in `disc_exact_v1.py`.
+
+**1. Run** [OBS, exact Fractions; cascade as oracle]. `experiments/n8/wall_window_gate_v9.py` (SHA-256 begins `f6ea2d87`) and `.out`, on `disc_records_v1.pkl`. Readings are `r[1]`, with `d_min = 1`; a crosser is a member with `R* ≥ 9`. As E340 records, the members are one stored witness per tree cell, so every count below is about these 110,081 arrangements only. `grep -c False` on the output gives 0.
+
+| check (what it counts) | crossers | rest |
+|---|---|---|
+| members | 4,939 | 105,142 |
+| (0) this cascade's `T` equals the stored `R*/8` | 4,939 | 105,142 |
+| (1) `T` equals `F`'s cascade from the opening of the `S` window holding it (E929 item 1) | 4,939 | 105,142 |
+| (2) windows where E930's one-move predicate agrees with the run | 22,618 | 396,273 |
+| (2) windows where pass equals the interval-merge cover (E931 item 1(c)) | 22,618 | 396,273 |
+| (2) links satisfying E931's ratio condition | 273 | 387,230 |
+| `T` beyond `7/8` | 4,939 | 0 |
+
+- **Every crosser.** `T > 7/8`, which agrees with E340's gate, and `F` passes every `S` window inside `[1/8, 7/8]`.
+  - The number of such windows is 2 in 547 crossers, 3 in 2,386, 4 in 1,509, 5 in 364, and 6 to 9 in 133.
+  - Of the 16,964 passes inside `[1/8, 7/8]`, 16,695 take one move and 269 take two or more.
+  - Beyond `7/8`, all 715 passes take one move.
+- **Every other member.** `T` lies in `[1/8, 7/8]`. Of their 291,131 passes, 155,626 take one move and 135,505 take two or more.
+- **The window holding `T` in a crosser.** Its index is 3 or more. It is opened by `d` at lap 1, at `9/8`, in 263 crossers; in the rest by an `S` reading of rank 2 to 6 at laps 3 to 9 (by rank and lap in `.out`). `T` is the opening in 2,762 crossers and an `F` exit in 2,177.
+- **Laps.** Openers in crossers reach lap 9. This agrees with E929: the bound `m ≤ 6` needs the cap, and the crossers break it. In the rest, openers reach lap 5.
+
+**2. Rule 22, the cap's failures (E929's addendum), revisited.**
+- (i) Feature, now with this artifact: in every crosser, `F` passes all 2 to 9 `S` windows inside `d_min`'s first window. This is E340's gate (`R* ≥ 9`) read in the split; it is a by-product of the place, not the place.
+- (ii) What forces it: each pass is E930's one-move condition (an `F` reading in `((8k−1)/(8a), (8k+1)/(8b))`) or E931's ratio word, checked in every window. Why one set of readings meets the condition in every window of `[1/8, 7/8]` at once is not derived.
+- (iii) Same mechanism as the passes in Z16, Q and W40.
+- Status: each pass is placed under the E930/E931 law. The place is the landing `T`: an `S` opening past `9/8`, or an `F` exit inside that window. Which readings set it, stated in the readings without running the chain, is **not understood**. This is E932's word question; no window, coverage or share is the object.
+
+**Not done:** the setter of the crossers' landings stated in the readings; the one-move counts in the crossers and the rest are recorded as counts about the member list, not as a feature or a rate; the windows beyond `9/8` as a phase of their own (E340's phase 2); Lean.
+Existence step named (rule 1, displacement frame): none; the entry checks how landings that exist are reached, and asserts nothing about existence.
+**Consequence (M7) [OBS for item 1]:** the split's law holds past E929's cap on E340's members. Item 1 of E929, E930's one-move law and E931's link law were each checked in every window, gate crossers included, with 0 failures. In the split's terms, E340's gate is a by-product of the place: in a crosser, `F` passes every `S` window inside `d_min`'s first window, each pass by one of the two laws. The open object is unchanged: the setter of the landing, stated in the readings (E932's word). This shortens no route and closes none.
+
+## E934 (2026-11-25): the wall-window laws in Lean: `Fresh/WallWindowLaw.lean` proves the window-landing part of E929 item 1 (with the free cascade fixing as a hypothesis), E930 item 1, the non-emptiness criterion of E930 item 2, and E931's link law (item 1(b)), each with `#print axioms` = `[propext, Classical.choice, Quot.sound]`, no `sorry` [L]; no existence step and no tag-bearing step [PARTIAL: see What it does not contain]
+
+**Map:** E929 to E932, item 1 of the owner's choice (2026-11-25): *"Formalise the proved part"*. New file in `LonelyRunnerFresh/Fresh/`; nothing existing is edited (rule 16). Built on `Fresh.Framework` (`InWay`, `nextOpening`, `IsMove`), `Fresh.Cascade` (`exists_near_int`, `nextOpening_eq`, `distInt_le`, `start_le_seq`) and `Fresh.ChainCarried` (E757: `chain_landing`, `chain_lower`; `IsFirst` comes from `Fresh.CascadeLanding` through it).
+**Record search (rule 13; PARTIAL):** a name grep of `LonelyRunnerFresh` and `LonelyRunner` for `chain_landing`, `chain_next_piece` and `sweep_lap_bound`. The first two are in `Fresh/ChainCarried.lean`; `sweep_lap_bound` is in `LonelyRunner/LonelyRunner/LRC/Spec/SeparationN.lean` (E305's same-lap criterion; not used here).
+
+**1. The theorems** (`namespace Fresh.WallWindow`), all [L]:
+- `distInt_lt_iff`: `distInt x < c ↔ ∃ k : ℤ, |x − k| < c`.
+- `inWay_iff_zone`: for `d > 0`, `InWay d t ↔ ∃ k, (8k−1)/(8d) < t < (8k+1)/(8d)`.
+- `one_move_pass_iff` (E930 item 1, one reading): for `d > 0`, `0 < a ≤ b`, `InWay d a ∧ b < nextOpening d a ↔ ∃ k, (8k−1)/(8a) < d < (8k+1)/(8b)`.
+- `move_passes_iff` (E930 item 1): for a finite set `F` of positive readings, `0 < a ≤ b` and `IsMove F a t'`, `b < t' ↔ ∃ d ∈ F, ∃ k, (8k−1)/(8a) < d < (8k+1)/(8b)`.
+- `passCell_nonempty_iff` (E930 item 2): for `a, b > 0`, the interval `((8k−1)/(8a), (8k+1)/(8b))` is non-empty iff `(8k−1) b < (8k+1) a`.
+- `inWay_at_opening_iff` (E931 item 1(b), the link law): for `f, f' > 0` and `k ≥ 0`, `InWay f' ((8k+1)/(8f)) ↔ ∃ k', (8k'−1)/(8k+1) < f'/f < (8k'+1)/(8k+1)`.
+- `window_landing_eq` (E929 item 1, the window-landing part), with these hypotheses:
+  - the readings of `F` are positive;
+  - `T > 0` is the first lonely instant of `F ∪ S` (`IsFirst`, with `0 < T` a separate hypothesis);
+  - `S` is lonely on `[a, T]`;
+  - every `S`-lonely instant before `a` has an `F` reading in the way;
+  - `seq` is a cascade sequence of `F` alone from `seq 0 = a > 0`, and it fixes at `seq K`.
+
+  Under these, `seq K = T`. It is `chain_landing` and `chain_lower` (E757) read from the landing's side. E929 item 1's other parts (`F` empty gives `T = t0`; `S` clear at `t0`; the conditional `m ≤ 6`) are not stated in Lean.
+
+**2. Check** (`experiments/n8/wall_window_lean_v1.out`).
+- `lean Fresh/WallWindowLaw.lean` returns 0, with 0 lines of its output matching `warning` or `error` (recorded in the `.out`).
+- Each of the seven theorems prints `[propext, Classical.choice, Quot.sound]`.
+- A scan that strips `/- -/` and `--` comments (check.sh's code) finds 0 `sorry`, `native_decide`, `admit` and `unsafe`, and 0 `axiom` declarations.
+- The file's SHA-256 begins `f97f0e6b`.
+- The type-check used `check.sh`'s `LEAN_PATH` directly. `./check.sh Fresh/WallWindowLaw.lean` stops before compiling with `CYCLE M4CertRung2_1_1_3_4_5_5_7`, an import cycle in a modified, uncommitted generated certificate file that this file does not import. That cycle is recorded in the `.out` and is not investigated here.
+
+**What it does not contain:**
+- The cascade's termination. `window_landing_eq` takes "the free cascade fixes" as a hypothesis, so no counting-tool step is used. `exists_fixed_of_lonely` (in `Fresh.Cascade`, which is imported) carries [PROVISIONAL: counting tool] and is used by no proof in this file.
+- Any covering step. E931 item 1(c), the pass-equals-cover statement, is not formalised; nor are E931 items 1(a) (each state is the setter's exit, already `chain_class` in E757) and 1(d).
+- E930 item 2's move-ratio part (`9/7`, `b/a < (9/7)^n`).
+- E932's cell offset, which is algebra on the link bounds and has no Lean statement here.
+- The multi-move word, and any existence step.
+
+Existence step named (rule 1, displacement frame): none.
+**Consequence (M7) [L]:** part of the decomposition of E929 to E931 is now in Lean [PARTIAL: the window-landing part of E929 item 1, E930 item 1, the non-emptiness criterion of E930 item 2, E931 item 1(b)], in the framework's own objects (`InWay`, `nextOpening`, `IsMove`, `IsFirst`), with the cascade fixing kept as a hypothesis. The setter conditions of a one-move pass and of a link are Lean statements in the readings. They are the objects the displacement step of rule 1 would carry, and that step remains owed. This shortens no route and closes none. Nothing is committed.
