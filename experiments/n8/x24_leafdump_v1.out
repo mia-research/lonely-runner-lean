@@ -1,0 +1,51 @@
+# x24_leafdump_v1.out — X24 leaf decomposition artifacts (2026-11-28)
+
+## DFS regression (verbatim frontier_box_dfs_v1.c, compiled cc -O2; args: 23 25 32)
+## target = E832 item 2a's recorded frontier_box_dfs_v1_23_25.out (bit-for-bit)
+top reading lower corner in [23,25), depth cap D=32: root boxes 179010, nodes tested 9533510, uncertified leaves at the cap 7200
+certified at depth (D=1,2,4,...): 141990 2275862 5472639 1004941 284384 192480 0 0 0 0 0
+
+## DFS main run (args: 23 26 64; leaves -> x24_dfs_leaves64.txt) — the audit universe
+## of obligation_audit_2026_11_11/x24.out (TOTAL 297765 ...)
+top reading lower corner in [23,26), depth cap D=64: root boxes 297765, nodes tested 13691801, uncertified leaves at the cap 27349
+certified at depth (D=1,2,4,...): 243293 3358236 7529026 1341459 343335 196128 433451 0 0 0 0
+
+## x24_leafdump_v1.py full classification (Dcap 256, budget 20000, fork Pool(4))
+# x24_leafdump_v1: input DFS-resistant leaves 27349 Dcap 256 budget 20000
+carves loaded: 96
+in-band carves (rho7 in [23,25)): 90  out-of-band: 6 (rho7 in (15.1673, 16.4372): the lap-2 strip, band [15,17), outside X24)
+in-band carves re-verified (exact carve of [1,7] AND W1-clear component below 17): 90 / 90 | fails: []
+exact nodes total: 27349 | final leaves: 27349
+final leaf types: {'fixedR0': 6323, 'w1': 21026}
+by (type, D): {('fixedR0', 64): 6323, ('w1', 64): 21026}
+boundary flags: {}
+SOUNDNESS: carves inside W0-certified leaves: 0 (must be 0) | carve-containing w1 leaves: 78 | carve-containing resistant leaves: 0
+carve containment: uncovered 0 [] | in >1 final leaf 0 []
+carve-leaf census: w1 leaves total 21026 | w1 leaves containing >=1 of the 90 in-band carves: 78
+independent certificate re-verification: 27349 / 27349 pass | failures: []
+wrote x24_leafdump_v1.jsonl
+density: input resistant leaves 27349 / 297765 roots = 9.18% (sibling [17,23): 2539/241746 = 1.05%; [25,29): 0/632548 = 0%)
+final leaves / roots = 9.18%
+smallest 20 leaves (D, n, type, carves, boundary):
+
+## pilot selection lines (the generator's input; full per-leaf lines in the run log)
+   64 [171, 231, 295, 380, 421, 1472] w1 [] None
+   64 [171, 231, 295, 380, 421, 1473] w1 [] None
+   64 [171, 231, 295, 380, 421, 1474] w1 [] None
+   64 [171, 231, 295, 380, 422, 1472] w1 [] None
+   64 [171, 231, 295, 380, 422, 1473] w1 [] None
+   64 [171, 231, 295, 380, 422, 1474] w1 [] None
+   64 [171, 231, 295, 380, 423, 1472] w1 [] None
+   64 [171, 231, 295, 380, 423, 1473] w1 [] None
+   64 [171, 231, 295, 380, 423, 1474] w1 [] None
+   64 [171, 231, 296, 380, 421, 1472] w1 [] None
+   64 [171, 231, 296, 380, 421, 1473] w1 [] None
+   64 [171, 231, 296, 380, 421, 1474] w1 [] None
+   64 [171, 231, 296, 380, 422, 1472] w1 [] None
+   64 [171, 231, 296, 380, 422, 1473] w1 [] None
+   64 [171, 231, 296, 380, 422, 1474] w1 [] None
+   64 [171, 231, 296, 380, 423, 1472] w1 [] None
+   64 [171, 231, 296, 380, 423, 1473] w1 [] None
+   64 [171, 231, 296, 380, 423, 1474] w1 [] None
+   64 [171, 231, 296, 381, 421, 1472] w1 [] None
+   64 [171, 231, 296, 381, 421, 1473] w1 [] None
