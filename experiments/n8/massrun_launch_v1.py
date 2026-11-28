@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def sel_args(tag):
-    sel = json.load(open(os.path.join(HERE, 'massrun_%s_selection.json' % tag)))
+    sel = json.load(open(os.path.join(HERE, 'massrun_%s_selection_b2.json' % tag)))
     return ['%s' % ','.join(str(x) for x in b) for b in sel['selection']], len(sel['selection'])
 
 

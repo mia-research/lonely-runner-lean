@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FRESH = os.path.normpath(os.path.join(HERE, '..', '..', 'LonelyRunnerFresh'))
 REPO = os.path.normpath(os.path.join(FRESH, '..', 'LonelyRunner'))
 ALLOWED = {'propext', 'Classical.choice', 'Quot.sound'}
-TSV = os.path.join(HERE, 'm4fix_results.tsv')
+TSV = os.environ.get('M4FIX_TSV', os.path.join(HERE, 'm4fix_results.tsv'))
 BANK = os.path.join(FRESH, 'Fresh', 'M4FixResBank_v1.lean')
 BANKHASHF = os.path.join(HERE, 'm4fix_bank_hash.txt')
 
@@ -87,7 +87,18 @@ def compile_one(fname, LP, timeout=3000):
 
 def bank(rows_todo, LP):
     """Emit + (hash-skip) compile + axiom-check the mini-bank for the union of the boxes
-    needed (todo) and the boxes already PASS-banked (so old rows stay recompilable)."""
+    needed (todo) and the boxes already PASS-banked (so old rows stay recompilable).
+    Serialized by flock (multi-worker safe)."""
+    lockf = open(os.path.join(HERE, 'm4fix_bank.lock'), 'w')
+    try:
+        import fcntl
+        fcntl.flock(lockf, fcntl.LOCK_EX)
+        return _bank_unlocked(rows_todo, LP)
+    finally:
+        lockf.close()
+
+
+def _bank_unlocked(rows_todo, LP):
     need = set(rows_todo)
     if os.path.exists(TSV):
         for l in open(TSV):

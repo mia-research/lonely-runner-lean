@@ -21360,3 +21360,1483 @@ Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken
 - In the other 625, the block is one ratio of two frozen readings that one to four of the path's zone memberships fix.
 - The pins' numbers form a list of 36 pairs in E340's member list. That list is not shown to be finite beyond the member list.
 - Nothing is committed.
+
+## E953 (2026-11-26): second-arc landings against first-arc landings of the same arc-relative type. They do not match: every second-arc landing tested starts its arc in a state no first-arc landing can start in. At `t0` the slow readings are all clear and reach their zones fastest first, for every arrangement; at the start of `d_min`'s second arc, 43,631 of 49,025 cases have a slow reading in the way and the other 5,394 reach their zones in another order [P for the first-arc start; OBS, exact, for the 49,025; PARTIAL: populations in item 1]
+
+**Owner (2026-11-26):** *"Yes, run it"*, on testing whether a landing in `d_min`'s second clear arc resolves the way a first-arc landing of the same arc-relative type resolves. Background: M065 quotes an earlier session's *"I have not yet tested whether the second phase can be matched to a first-phase outcome of another arrangement"*, with the owner's *"we should look at these see if we can figure it what the cascade does and then see if we can figure out why"*; M064: *"some of the arrangements are actually an arrangement plus dmin in a different scale"*. E952 is the recovered draft in `docs/n8/recovered_2026_11_26/`, not entered; this entry does not use it.
+
+**Map:** G2 (finitely many types). The step tests the arc-relative quotient proposed this session: count the opener's lap and the window index from the start of `d_min`'s arc `j`, `A_j = (8j+1)/(8 d_min)`, instead of from `t = 0` (E929 Consequence, E938 item 2). The cascade is the oracle; what is tested is that description.
+
+**Source test.** Objects from the record: `S` = readings `≤ 7 d_min`, `F` = the rest, windows of `S`, kind `open`/`Fexit` (E929, E931, E938); the gate at `R = 9` (E340); the cascade step of `outcome_bound_check_v1`.
+
+**Record search (rule 13; PARTIAL):** E340, E341, E351, E920 to E951 read this session; M060 to M075, M089. Other entry bodies not read this session.
+
+Units: `d = d_min`, `R = 8 d t`; arc `j` is `R ∈ [8j+1, 8j+7]`. Arc-relative type: `(|S|, i, kind, opener)` with `i` the index of the `S` window holding the landing counted from `A_j`, and opener `(rank, m − m0)`, `m0` the opener's least lap whose exit is `≥ A_j`. Word: the cascade's moves from `A_j` to the landing, an `S` setter as `(rank, lap − m0)`, an `F` setter by rank in `F` only.
+
+**1. The run** [T, exact; `experiments/n8/arc_type_compare_v1.py` (SHA-256 begins `b50b4412`), `.out`, `.pkl`].
+- Arc-0 landings: Z16 (every 8-subset of 1..16, every subject; 102,960), Q (seed 1, 3,000 arrangements × 8 subjects; 24,000), RND8/10/12/17 (`d = 1`, six readings on the 1/1000 grid in `(1, H]`; 15,000 each), and E340's members with `R* ≤ 7` (105,142). Arc 0 gives 367 types and 62,354 distinct (type, word) pairs.
+- Arc-1 landings: E340's 4,939 crossers; `stress_seeds_v1` (6,245 distinct); MOV, each crosser with one reading 2..7 moved by a relative step `±c·10^-e` (`c` in 1..9, `e` in 2..5, 12 draws, seed 77), kept when ordered and still crossing (37,841 distinct). 49,025 distinct cases, all with `j = 1`. No assertion failed: in every case the cascade from `A_1` lands where the cascade from `t0` lands.
+- Result: 40,544 have a type no arc-0 landing has (23 types); 4,907 share a type but not the word (84 pairs); 3,574 share both.
+
+**2. The first-arc start is one fixed pattern** [P].
+- At `t0 = 1/(8d)` a reading `r` with `d < r ≤ 7d` sits at phase `r/(8d) ∈ (1/8, 7/8]`, so no `S` reading other than `d` is in the way.
+- Its next zone entry comes `7/(8r) − 1/(8d)` after `t0`, which decreases as `r` increases. So at the start of arc 0 the `S` readings reach their zones fastest first, for every arrangement, with equal readings reaching them together.
+- Checked on the 62,354 arc-0 examples (one per (type, word) pair): every one has `S` clear at `t0`; 62,335 have the order fastest first [T; `arc_type_compare_v3.py` (`805e7340`) and `.out`].
+- **Rule 22 on the 19 out of order.** (i) Feature: a repeated reading (Z16, e.g. readings `1,1,2,2,8,10,12`; Q, 1). (ii) Forced by item 2: equal readings have equal entry times, and the sort breaks the tie arbitrarily. (iii) The same order up to ties. Understood (`arc_type_ties_v1.py` (`e298a4aa`) and `.out`: 19 of 19 have a repeated reading).
+
+**3. The second-arc start is never that pattern in these populations** [OBS, exact; `arc_type_compare_v2.py` (`435d90f6`) and `.out`; `arc_type_compare_v3.py` and `.out`].
+- At `A_j` a reading sits at phase `r/(8d) + j·r/d` (mod 1), so its phase is shifted by `j·r/d` laps from its arc-0 phase.
+- 43,631 of 49,025 have some `S` reading in the way at `A_1` (27 distinct in-the-way sets; commonest: rank 5 alone, 8,145; rank 2 alone, 6,856; ranks 2 and 3, 4,968). Of these, 40,112 have a type absent from arc 0, 3,381 share the type but not the word, 138 share both.
+- The other 5,394 have `S` clear at `A_1` but reach their zones in an order other than fastest first. Of these, 432 have a type absent from arc 0, 1,526 share the type but not the word, 3,436 share both.
+- None of the 49,025 starts with `S` clear and fastest first.
+- [P] A crosser cannot start arc `j` with every reading at its arc-0 phase: that needs `j·r/d` an integer for every reading; then the cascade from `A_j` is the cascade from `t0` shifted by `A_j − t0`, so the two land `A_j − t0 > 0` apart, while item 1 checks that they land at the same instant. This covers the full phase vector only; that the `S` part alone always differs is not shown.
+
+**4. Rule 22 on the mismatches.**
+- (i) Feature: the state at the arc's start. Every mismatch, and every case, has an `S` start other than arc 0's (item 3).
+- (ii) Forced by the phase shift `j·r/d` (item 3) against arc 0's fixed start (item 2).
+- (iii) The same cascade, from a different start. The 3,574 shared (type, word) pairs come from different starts, so they are agreements of outcome, not of start.
+- Understood as to why the types differ. Not understood: whether the in-arc outcome is fixed by a finite description of the start. The `S` start alone does not fix it: arc 0 has one `S` start pattern and 367 types.
+
+**Still not understood (rule 22), in order:**
+- a finite description of the state at `A_j` that fixes the in-arc outcome, and whether such a description exists (the `F` readings' phases and the speed ratios enter);
+- whether every crosser's `S` start at `A_1` differs from arc 0's (item 3 shows it for the full phase vector only);
+- the items carried from E951.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. No displacement step is supplied.
+**Consequence (M7):**
+- The arc-relative quotient makes the types finite by construction, but it does not make the second arc a copy of the first: no second-arc start in these populations is a first-arc start, and 45,451 of 49,025 second-arc landings have a (type, word) no first-arc landing has. M065's earlier-session sentence *"the second phase is the same arrangement seen from R = 9"* holds for the arrangement and not for its start state.
+- The description evolves: the object for G2 is the pair (state at the start of `d_min`'s arc, cascade inside the arc). Arc 0 is the single start pattern of item 2; later arcs supply other starts. G2's finiteness question moves to the starts: which start states occur, and which in-arc outcome each forces.
+- On M064: the second-arc case is the same arrangement with `d_min`'s lap added, and the added lap shows up as a phase shift of `j·r/d` on every reading, not as a change of scale.
+- Nothing is committed.
+
+## E954 (2026-11-26): the landing as a relay. On 248,980 distinct arrangements, every landing is capped by a path of at most 6 facts the cascade's own path states, from a fixed start (the zone over `R = 1`, or `d_min`'s exit at `R = 9`); the cap is at most `1.1085…` times the landing in the second stretch and `2.0160…` in the first (steer), and lies inside the landing's own stretch in all 248,980; 29,406 of the 49,025 second-stretch caps use a fact about the first stretch's blocking chain [P for cap ≥ landing; OBS, exact, for the rest; PARTIAL: populations in item 1]. Also a correction to E953
+
+**Owner (2026-11-26):** *"Yes try that"*, on the step proposed after reading E805 to E820: for each arrangement, find which links between readings set how far the landing can be, check that against the actual landing, and sort by shape. Also: *"Remember what we are trying to do explain why arbitrary arrangements can be filtered into a finite set of cascade resolutions to always show where the isolation moved to"*; and, on restatements, *"arbitrary does not equal all possible ... often arrangements are just restatements of other"*.
+
+**Map:** G2, with G1's question of where the isolation goes. The object is E819 item 3's: a least-product path of ratio bounds sets the reach of a table. Here the path is read on single arrangements, from the facts of each arrangement's own cascade path, not from box tables. The cascade is the oracle; the cap is a description of its landing.
+
+**Source test.** Each fact is a link of the cascade's path: E931's link law (next zone enters before the current one exits, and exits after it), E930's one-zone condition, and the start condition at `R = 1`. The graph over readings is E809 item 3's ratio-bound form. The telescoping is E840's ladder law in the form of one path.
+
+**Record search (rule 13; PARTIAL):** read this session: E340, E341, E351, E802, E803, E805 to E820, E836, E838 to E840, E920 to E953, E924's withdrawal and the memory note on it. Other entry bodies were not read this session.
+
+**0. Correction to E953.** E953 item 3's phase shift `j·r/d` at the start of arc `j` is E805 item 2's rotation `p_y(R+8) = p_y(R) + 8 frac(ρ_y)` and `CASCADE_MECHANISM_v1.md` §3. E953 did not cite it, and its record search missed E805 to E820. E953's counts stand; its item 3 restates a known fact, and its Consequence on "the object for G2" is superseded by E805 to E807, which already state the two carvings as the object.
+
+**1. Populations** [T, exact; `experiments/n8/cap_path_v1.py` (SHA-256 begins `12a7e1eb`), `.pkl`, `.log`]. Every arrangement is scaled to `d_min = 1`, and restatements under shift and scale are merged (`arc0_restatements_v1.py` (`5005f1a0`), `.out`: Z16's 102,960 cases are 10,813 arrangements; Q and E340 have none). The second-stretch set is E953's 49,025 (gate crossers, stress seeds, crossers with one reading moved). The first-stretch set is 199,955: Z16, Q, RND8/10/12/17 and E340's members, as in E953. 248,980 in all. No assertion failed.
+
+**2. The cap** [P for cap ≥ landing; `cap_path_v1.py`].
+- The cascade path from `R = 1` is a chain of zones `(reading, lap)`. Its facts, each a ratio bound: START, the first zone holds `R = 1`, so `r > 8k − 1`; ENTRY, the next zone enters before this one exits, `r_b > r_a (8k_b − 1)/(8k_a + 1)`; EXIT, the next zone exits after this one, `r_a > r_b (8k_a + 1)/(8k_b + 1)`.
+- One node per reading, so facts about different laps of one reading join. The cap is `(8k_o + 1)/lb(r_o)`, with `lb` the largest product of fact constants on a path from `d = 1` (exact Bellman–Ford over 7 nodes). Every fact holds, so cap ≥ landing [P]; checked by assertion on all 248,980.
+
+**3. What the caps look like** [T 248,980/248,980; `cap_path_read_v1.py` (`678c7fc7`), `.out`].
+- First stretch, 199,955: no move 38,600; a cap path of 1 to 6 facts otherwise (52,363 / 47,668 / 34,766 / 18,881 / 6,383 / 1,294). Cap over landing at most `2.0160…` (steer). Cap at most 7 in all 199,955.
+- Second stretch, 49,025: rank 1 opens at exactly 9 in 246 (the gate, cap equal to the landing); a path of 1 to 6 facts otherwise. Cap over landing at most `1.1085…` (steer). Cap at most 15 in all 49,025.
+- Shapes, as (kind, from rank, to rank) with the landing rank: 1,619 in the first stretch, 240 in the second. With the zones' numerators: 9,870 and 340. A cap path is a simple path over 7 readings, so the shapes without numerators are finitely many by construction; that is not a finding about the cascade (map M4).
+- The commonest second-stretch shapes start at `d_min`'s exit at 9: reading 2 enters before 9 and reading 7 enters before reading 2 exits, landing at reading 7's exit (6,254); reading 7 alone from the zone over `R = 1` (3,674); reading 3 then 7 from 9 (2,462); 6 from 9 (1,770); 5 from 9 (1,649).
+
+**4. The relay form** [P, regrouping; T 206,679/206,679; `cap_path_v2.py` (`a4ecf01b`), `cap_path_v3.py` (`87a36cd3`), each with `.out`].
+- 158,308 first-stretch and 48,371 second-stretch caps are relays: START or `d_min`'s exit, then ENTRY facts only. For these, cap `= E0 · Π (8k_out + 1)/(8k_in − 1)` over the relay readings, with `E0 = 1` or `9`, `k_in` the lap of the zone through which the relay reaches a reading and `k_out` the lap through which it leaves. Checked exactly on all 206,679.
+- `k_out = k_in` (one zone's exit over its own entry) at every relay reading in 55,705 and 16,719 caps. Per relay reading, `k_out − k_in` runs from −5 to 10 in the first stretch and from −8 to 16 in the second.
+- Relay laps: up to 11 in the first stretch, up to 18 in the second.
+
+**5. What the first stretch's blocking adds** [T 49,025/49,025; `cap_path_v4.py` (`90a48849`), `.out`]. A first-stretch fact is one whose two zones both end by `R = 9`, `d_min`'s own zone `(7, 9)` aside. 29,406 second-stretch caps use one, 19,373 do not, 246 are the gate. With first-stretch facts removed, the cap is larger in 25,097 of the 29,406 and equal in 4,309. It is never missing, never past 15, and at most `1.1491…` (steer) times the landing.
+
+**Rule 22.**
+- **The 3,455 caps that use an EXIT fact** (3,047 first stretch, 408 second; `cap_path_v2.out` lists them by kind sequence). (i) Feature: some reading's lower bound comes from its zone outlasting the previous setter's. (ii) What forces it on these, and (iii) whether it is the relay with one link read the other way: **not understood**.
+- **Negative `k_out − k_in`.** (i) Feature: the relay leaves a reading through an earlier zone than the one through which it reached it. In the second stretch this is the first-stretch fact of item 5 at one reading, E819 item 3's largest reach being one instance (reading 5 reached at lap 6 by holding 9, left at lap 4 by the first stretch's seam to reading 7). (ii) Forced by the one-node-per-reading graph: an earlier lap's fact bounds the same ratio. (iii) Same relay, read through the same reading's other zone. Understood for the form; which first-stretch seams occur, and why, is **not understood**.
+- **Every cap inside its own stretch** (248,980 of 248,980). No exception to list. Why the facts alone never carry a cap past 7 in the first stretch, or past 15 in the second, is **not understood**; it is the "first stretch blocked, second stretch open" question restated on the relay.
+
+**Still not understood, in order:** the EXIT caps; why caps stay inside their stretch; which first-stretch seams set second-stretch caps; whether the relays with numerators are finitely many beyond these populations (relay laps grow with fast readings, E938 item 3).
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- Every landing read here is a start point carried by at most six hand-offs of zones, each stretching the reach by a numerator ratio of the cascade's own zones, and the cap is at most `1.1085…` (steer) times the landing in the second stretch.
+- The first stretch's blocking enters the second stretch's landing through one reading seen at two laps: 29,406 of 49,025 caps use such a fact, and without it the caps loosen but stay below 15 in these populations.
+- The open question moves onto the relay: why a relay of the cascade's own facts never reaches past its stretch.
+- Nothing is committed.
+
+## E955 (2026-11-26): E954's open items. (a) The EXIT caps are the relay with a link read backwards: the cascade moves forward, so a later zone bounds the earlier setter, and the relay then leaves that setter by another of its zones. (b) Each relay factor is a ratio of two zone positions of one reading, so the relay restates where the landing's zones lie and does not carry why it stays inside its stretch. (c) On the 49,025 second-stretch landings, E805's rotation from the first stretch towards the second keeps the first stretch blocked only up to `t+ ≤ 0.1766…` (steer) of the way; the chain breaks at a seam whose overlap at `t = 0` has median `0.0271…` (steer) of a zone's width; other covered parts all end below `t = 1/4` [P for (a) and (b); T, exact, for counts; PARTIAL: E954's populations]
+
+**Owner (2026-11-26):** *"Yes, do that"*, on why a relay never reaches past its stretch (E954's first open item); then, quoting the two items left not understood (relays reaching past their stretch; the roughly 3,500 relays with one link read the other way round), *"Ok lets try and understand these"*.
+
+**Map:** E954's rule 22 items: the EXIT caps, and why caps stay inside their stretch. Place: the relay of E954 item 4 read reading by reading; E805 to E807's two carvings, `c(t)`, on E954's 49,025 second-stretch cases.
+
+**Source test.** Every object is E954's (relay readings, `k_in`, `k_out`, the start `E0`, START/ENTRY/EXIT facts) or E805 to E807's (`c(t)`: `[1, 7]` carved by readings 2 to 7, each reading's zones shifted by `8 t g_y`, `g_y` the signed fractional part of `ρ_y`; `t = 0` the first stretch, `t = 1` the second carried back by 8). The scan is E807's `j2_rot_scan_v1.scan`, reused unchanged. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E954, plus E954 itself.
+
+**1. What a factor is** [P, one line]. A relay reading `r` contributes `(8k_out + 1)/(8k_in − 1)`. That is `R_out/R_in`, with `R_in = (8k_in − 1)/r` the entry of the zone the relay reaches `r` through and `R_out = (8k_out + 1)/r` the exit of the zone it leaves by. So the cap is `E0` times a product of ratios of zone positions along the relay, and a factor above 1 is the relay moving forward along one reading's zones. The relay restates where the landing's zones lie; that every cap lies inside its stretch (E954 item 3) is not explained by the factors alone.
+
+**2. Factor kinds** [T 206,679/206,679; `experiments/n8/relay_factors_v1.py` (SHA-256 begins `2bd49372`), `.out`, `.pkl`]. Per relay reading: same zone (`k_out = k_in`), up (`k_out > k_in`), down (`k_out < k_in`).
+- First stretch, 158,308 relays: 207,837 same, 137,866 up, 12,994 down, every jump with both zones in the first stretch. Largest cap over `E0`: `7` with one relay reading, and from `24373393/3610425` to `1683/245` with 2 to 6.
+- Second stretch, 48,371 relays: 42,655 same, 36,350 up, 31,495 down. The commonest jump pattern (13,345) is a down from a zone in the second stretch to one in the first, then an up from the first to the second.
+
+**3. Three ways a second-stretch relay runs** [T 48,371/48,371; `relay_factors_v1b.py` (SHA-256 begins `468388f8`) and `.out`; split by start and by whether any jump has a zone in the first stretch].
+- From `R = 9`, passing through the first stretch: 22,139. Largest cap over 9 is `2937/2209`, so the cap is `26433/2209`, equal to E819 item 2's largest reach on the 56 boxes. That member's relay is reading 5 reached at lap 6 (holding 9) and left at lap 4, then reading 7 reached at lap 6 and left at lap 11: `9 · (33/47) · (89/47)`, E819 item 3's pair of bounds read as a relay.
+- From `R = 9`, staying in the second stretch: 19,373. Largest cap over 9 is `4361/3393`: reading 4 at laps 5 to 6, then reading 7 at lap 11.
+- From `R = 1`: 6,859, all passing through the first stretch. Largest cap is `81/7`: one reading in `(7, 9)` holding `R = 1` at lap 1, landing at lap 10.
+
+**4. The EXIT caps** [P for the reading; T 3,469 EXIT facts on 3,455 caps; `exit_links_v1.py` (SHA-256 begins `e0d5923c`) and `.out`].
+- An EXIT fact comes from two consecutive cascade moves `(a, k_a)` then `(b, k_b)`. The cascade moves forward, so the later zone exits after the earlier one, and that bounds the earlier setter `a` from the later one `b`. On a cap path the relay steps from `b` back to `a`.
+- What the path does at `a`: lands there on another lap (2,082 first stretch, 400 second); leaves by another lap (975, 8); leaves by the same lap (4, first stretch only).
+- Every EXIT fact has both zones in the first stretch (3,061 in first-stretch cases, 408 in second-stretch cases).
+- With EXIT facts removed, the cap is equal in 810 and 316, larger in 2,237 and 92; it is never missing, and the largest loosening is `1377/1127` (`1.2218…`, steer).
+
+**5. The rotation on the 49,025** [T 49,025/49,025, exact; `shift_scan_v1.py` (SHA-256 begins `c76a89f9`), `.out`, `.pkl`].
+- `c(0)` (the first stretch) is covered in all 49,025, and `c(1)` in none. Both restate the landing: these cases are the ones whose first stretch is blocked and that land in the second. The information is in how far the cover reaches.
+- The covered part of `t` around 0 ends at `t+ ≤ 3032501715884486221/18804831352654864496` (`0.1612…`, steer) with `g` = frac, and `t+ ≤ 114678567072593094059246165443/649245830423019986210353504304` (`0.1766…`, steer) with the signed lift. E807 had steer `0.174` on 7,636 earlier members.
+- Another covered part of `[−1/2, 1]` appears in 358 (frac) and 351 (signed).
+
+**6. Where the first stretch's chain breaks** [T 49,025/49,025, exact; `shift_break_v1.py` (SHA-256 begins `323ae77e`) and `.out`; signed lift]. The chain is the greedy blocking chain of `[1, 7]` at `t = 0` (`j2_rot_scan_v1.covered`), 16 to 28 zones. Each seam's overlap and each end margin is linear in `t`; the chain breaks at the least positive `t` where one reaches 0.
+- That `t` is `t+` in 46,519; in 2,506 it is below `t+` and another chain takes over (item 7).
+- The breaking seam's overlap at `t = 0`, as a share of the earlier zone's width `2/r`: median `0.0271…`, 90th percentile `0.1238…`, largest `0.4126…` (steer).
+- Commonest breaking items (seam, earlier rank, later rank): (7, 6) 6,000; (6, 7) 5,428; (7, 3) 3,901; (4, 2) 3,897; (6, 5) 3,892; (5, 7) 3,727; (7, 5) 3,617; (3, 5) 3,163; the end margin at 7 by rank 2, 1,628.
+
+**7. The other covered parts and the take-overs** [T, exact; `shift_other_v1.py` (SHA-256 begins `b9a416fa`) and `.out`]. Each is compared with the `t = 0` chain as a set of zones (reading, lap).
+- Other covered parts, 351: 12 reach `t = −1/2`, where `c(t)` meets its mirror `c(−1 − t)`; 137 lie in `(−1/2, 0)`; 202 lie above 0. All 351 end below `t = 1/4` (largest end `0.2355…`, steer). The 339 not at `−1/2` drop 0 to 3 of the `t = 0` zones and add 0 to 3; the 12 at `−1/2` each drop 5 and add 4. The changed readings are 7 alone (158), 5 alone (58), or a few of 5, 6, 7 together (most of the rest); the 12 at `−1/2` all change readings 2, 4, 5, 6, 7.
+- Take-overs, 2,506: just past the first break the cover holds in all 2,506. The new chain drops 0 to 4 zones and adds 0 to 2 (1,838 add one). The changed readings are most often 7 alone (911), 6 and 7 (478), 3 alone (426). In 268 one reading, always 7, swaps one lap for another (by −4 to 3).
+
+**Rule 22.**
+- **EXIT caps** (E954's item). (i) Feature: a reading's bound comes from the zone after it in the cascade. (ii) Forced by the cascade moving forward: the exit-order half of E931's link law. (iii) The same relay, one link read backwards: the path steps back to an earlier setter and leaves it by one of its zones, as at an ENTRY relay reading. **Understood.** The 4 that leave by the same lap (all E340, first stretch; `exit_same_lap_v1.py` (SHA-256 begins `b2c397ae`) and `.out`): two EXIT facts in a row through one zone (e.g. cascade zones `(rank 4, lap 1) → (rank 7, lap 3) → (rank 6, lap 3)`, read back from rank 6 to rank 4 through rank 7's lap 3), so the zone is both the later setter of one link and the earlier setter of the next. Same mechanism, twice.
+- **Caps inside their stretch** (E954's item). Item 1 shows the relay does not carry the reason. Items 5 and 6 give where the first stretch's blocking stops under the rotation: a chain broken by `t+ ≤ 0.1766…` (steer) in every case, at a seam whose overlap at `t = 0` has median `0.0271…` of a zone's width (90th percentile `0.1238…`, largest `0.4126…`; steer). Why no chain of readings 2 to 7 covers `c(t)` for `t` near 1 is **not understood**: E818's search found none on the 56 boxes [PROVISIONAL: covering — the claim that no first-stretch table on the 56 boxes admits a second-stretch chain], and here it is observed on 49,025 cases only.
+- **Take-overs.** (i) Feature: the `t = 0` greedy chain includes zones another zone can replace. (ii) Forced: when a seam's overlap reaches 0, a zone already present at `t = 0` covers the gap; the counts of item 7 show 0 to 2 zones added. (iii) The same blocking chain with up to two zones added and up to four dropped. Which zones take over, and why those are present at `t = 0`, is not read: **not understood** as to (ii).
+- **Other covered parts, the 339 not at `−1/2`.** (i) Feature: a chain that differs from the `t = 0` chain in 0 to 3 zones dropped and 0 to 3 added, mostly of readings 5, 6, 7. (ii) Forced: each zone edge moves linearly in `t` at its own rate `8 g_y/ρ_y`, so a gap that opened can close again; which gap closes, and by which zone, is not read. (iii) A blocking chain at another `t`. **Not understood** as to (ii), and as to why all end below `t = 1/4`.
+- **Other covered parts, the 12 at `−1/2`.** (i) Feature: the part reaches `t = −1/2`, where `c(t)` meets its mirror `c(−1 − t)`, and its chain drops 5 of the `t = 0` zones and adds 4, changing readings 2, 4, 5, 6, 7, with reading 6 swapping lap by 3 and reading 7 by 2 (`shift_other_v1.out`). (ii) What forces this chain: **not understood**. (iii) Whether it is the mirror of a chain near `t = −1/2 + s` or another mechanism: **not understood**.
+- **The three ways of item 3.** A classification by start and by use of a first-stretch zone; forced by E954 item 2's facts; the same relay. Understood as a classification.
+
+**Still not understood, in order:** why the blocking chains of `c(t)` stop before `t = 1/4` in these populations, and why none forms near `t = 1`; which zones take over in the 2,506 take-overs; in the 339 other covered parts not at `−1/2`, which gap closes and by which zone; for the 12 at `−1/2`, what forces their chain and whether it is a mirror image or another mechanism; whether the relays with numerators are finitely many (E954).
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- The relay is a bookkeeping of zone positions. It shows which readings' zones place the landing and how the first stretch's blocking enters (a step back to an earlier zone of a reading in the way at 9), and it recovers E819's largest reach on the 56 boxes exactly. The EXIT caps are the same relay.
+- On E805's rotation (the second stretch is the first with each reading's zones shifted), the first stretch's blocking chain on the 49,025 survives under a fifth of that shift (`t+ ≤ 0.1766…`, steer) and breaks at a seam, the two commonest being between readings 6 and 7 (11,428 of 49,025). The next object is the chain of `c(t)` and its seams as `t` runs from 0 to 1, read on these cases; it is a description of where the cascade lands, not a covering argument for it.
+- Nothing is committed.
+
+## E956 (2026-11-26): following E805's rotation `c(t)` from `t = 0` to `t = 1` on E954's 49,025 second-stretch cases, and a correction: `c(t)` for `0 < t < 1` is not the state of any arrangement, so E955 items 5 to 7 describe that construction, not arrangements. On the arrangements themselves (`t = 0` and `t = 1`): all 49,025 are admissible, and each one's second stretch has between 2 and 10 open clear gaps, the landing at the left end of the first in 49,007 and at a single clear point (a gap of length 0) in the other 18 [T, exact; PARTIAL: E954's populations]
+
+**Owner (2026-11-26):** *"Yes, run it"*, on following the blocking chain across the rotation; then *"Everyone of those cases should represent a real arrangement and not be testing impossible or inadmissible arrnagments"*.
+
+**Map:** E955's first not-understood item (why no blocking chain of `c(t)` forms near `t = 1`). Place: `c(t)` of E805 to E807 (signed lift, `j2_rot_scan_v1`), and the second stretch `[9, 15]` of each case.
+
+**Source test.** Objects from E805 to E807 (`c(t)`), E954 (the cases, the landing `L`) and E931 (zones). No object is new.
+
+**Record search (rule 13; PARTIAL):** as E955, plus E955.
+
+**0. Correction to E955** [P, one line]. In an arrangement every runner starts at 0, so at `R + 8u` reading `y`'s phase is its phase at `R` plus `u ρ_y` (mod 1). `c(t)` gives reading `y` the extra phase `t g_y` instead. For integer `t` the two agree up to whole laps; for `0 < t < 1` they differ, so `c(t)` is not a time window of the arrangement and not the first stretch of any arrangement with the same readings. Only `c(0)` (the first stretch) and `c(1)` (the second, carried back by 8) belong to the arrangement. E955 items 5 to 7 and its Consequence's "survives under a fifth of that shift" describe the interpolation; their counts stand as statements about `c(t)`, and they are withdrawn as statements about arrangements. The same holds for E807's intermediate `t`.
+
+**1. Admissibility** [T 49,025/49,025, exact; `experiments/n8/shift_admissible_v1.py` (SHA-256 begins `adf41d44`) and `.out`]. Each case is 7 readings scaled to least reading 1. A list of readings is an arrangement's exactly when each is positive and no value occurs more than twice (subject at any speed `s` above the largest reading; the others at `s + r`, or `s − r` and `s + r` for a repeated value; all speeds positive and distinct). All 49,025 have 7 positive readings, no repeated value, and no two are the same after scaling. Sources: 4,939 E340 crossers, 6,245 stress seeds, 37,841 crossers with one reading moved.
+
+**2. The run** [T 49,025/49,025, exact; `shift_follow_v1.py` (SHA-256 begins `0a1bc61b`) and `.pkl`; read by `shift_follow_read_v1.py` (`81a375f8`) and `.out`]. Between consecutive breakpoints of `c(t)` each open gap keeps its bounding edges, and gaps in neighbouring segments are joined when their closed intervals meet at the shared breakpoint. The script's own print step stopped on the 6 cases of item 4; the pickle is complete and is read by `shift_follow_read_v1.py`.
+
+**3. On the arrangements (`t = 0` and `t = 1`).**
+- `c(1)` has between 2 and 10 open gaps in every case: 2 in 31, 3 in 515, 4 in 5,523, 5 in 12,383, 6 in 17,600, 7 in 10,745, 8 in 2,061, 9 in 141, 10 in 26. So the second stretch `[9, 15]` of every case has at least two separate open clear intervals.
+- The landing point `L − 8` equals the left end of `c(1)`'s first open gap in 49,007 (`shift_follow_read_v1.out` line 2). In the other 18 (all stress seeds) it lies in no open gap: it is a single clear point where one zone's exit equals another zone's entry (14 with one zone exiting there, 4 with two; one zone entering; none holding it inside).
+
+**4. On the interpolation (`0 < t < 1`; not arrangements, item 0).** For the record only: the gap that opens first is the landing's gap in 2,004 cases; otherwise the landing's gap opens later (47,015; median `t` `0.7249…`, steer); 6 landing gaps are single points with no open component. Per case, 0 to 13 gap components open and close again before `t = 1`.
+
+**Rule 22.**
+- **The 18 single-point landings.** (i) Feature: the landing is an exit meeting an entry exactly, a clear gap of length 0. (ii) That a single clear point is a clear instant follows from the zones being open; why these 18 seeds sit exactly at touching positions is not read. The seeds are stored cell members (J1, J2) and rationalised J3 witnesses (`LonelyRunner/experiments/nN/redo/stress_seeds_v1.py`); how those were found is not read this session. (iii) The same landing, the first clear instant of the second stretch, with a gap of length 0. **Understood** as a landing; **not understood** as to what places these seeds at touching positions.
+- **The 66 cases with one more component reaching `t = 1` than `c(1)` has open gaps** [`shift_follow_point_v1.py` (`7f6a81ef`) and `.out`]. (i) Feature: each has exactly one single-point clear gap at `t = 1` (66 of 66: 9 E340, 45 MOV, 12 seeds). (ii) Forced: a component whose gap shrinks to a point exactly at `t = 1` reaches `t = 1` but is not an open gap there. (iii) The same gaps, counted two ways. **Understood** as to the count. A further 45 cases have one single-point gap at `t = 1` and no extra component (`.out`), the same point counted on one side only. What forces an exit to meet an entry exactly in these 111 (66 + 45; E340, MOV and seeds alike) is **not understood**.
+- **At least two open gaps in `[9, 15]`.** (i) Feature: no case has a second stretch with one open gap or none. (ii) What forces it: **not understood**. (iii) Whether it is one mechanism across the 2 to 10: **not understood**. These populations come from crossers, seeds and one-reading moves, so the floor of 2 is observed on them only.
+
+**Still not understood, in order:** what places the 18 seeds, and the 111 cases with a single-point gap at `t = 1`, at touching positions; what forces at least two open gaps in the second stretch of every case whose first stretch is blocked; the items of E955 that concern arrangements (the relays with numerators).
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- The rotation's intermediate `t` is a device and its states are not arrangements; work that describes arrangements uses `t = 0` and `t = 1` only, or paths through real arrangements (for example moving one reading, as MOV does).
+- On these cases a blocked first stretch comes with a second stretch holding at least two open clear intervals. The cascade object is the clear intervals of `[9, 15]`: the cascade lands at the left end of the first. The next step is the open items above on these same cases: for each open gap of the second stretch, which zones bound it, and whether the same readings bound the first stretch's thinnest seams; and the touching cases. No new population before those are read.
+- Nothing is committed.
+
+## E957 (2026-11-26): the second stretch's clear gaps read against the first stretch's blocking, on the arrangements' own instants only. A gap's bounding pair of readings is not concentrated on the first stretch's thinnest seams. Carried zone by zone into the second stretch, the first stretch's chain opens at 6 to 14 seams or ends in every case, but only 11,340 of the 284,446 gaps are such an opening; 173,435 lie between two carried chain zones that were not neighbours in the chain [T, exact; PARTIAL: E954's populations]
+
+**Owner (2026-11-26):** *"Yes, read them"*, on reading, for each clear gap of the second stretch, which readings' zones bound it, and checking them against the readings whose zones only just overlap in the first stretch's blocking.
+
+**Map:** E956's open item: what forces at least two open gaps in `[9, 15]` when `[1, 7]` is blocked. Place: the first stretch's greedy blocking chain (E806, E955 item 6) and the second stretch's gaps, both at the arrangement's own instants; no intermediate `t` (E956 item 0).
+
+**Source test.** Zones are E931's. The carrying is E805 item 2's rotation at whole laps only: at `R + 8` reading `y`'s phase is its phase at `R` plus `ρ_y` (mod 1), so zone `(y, j)` corresponds to `(y, j + n_y)`, `n_y` the nearest integer to `ρ_y`, displaced by `−8 g_y/ρ_y` in `R`. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E956, plus E956.
+
+**1. Gap bounds against seams by reading pair** [T 49,025/49,025, exact; `experiments/n8/gap_bounds_v1.py` (SHA-256 begins `68299f75`), `.out`, `.pkl`].
+- Computed directly on `[9, 15]`, the gap counts are E956's (2 to 10; same distribution), and the landing equals the left end of the first gap in 49,007, as in E956. The first gap starts at 9 in 246 (E954's gate cases); the last ends at 15 in 10,382.
+- 284,446 gaps in all; 10,628 have `d` as a bound. Of the other 273,818, the ordered pair (left reading, right reading) is also a seam of the first stretch's chain in 171,617, and the pair in either order in 245,930 (`gap_bounds_pairs_v1.py` (SHA-256 begins `9cb7a594`) and `.out`). Control: the share of the 30 ordered pairs of readings 2 to 7 that are first-stretch seams, averaged over cases, is `0.5565…` (steer; not weighted by how often each pair bounds gaps).
+- Where the pair is a seam, that seam's thinness rank (1 = thinnest overlap share) is spread evenly: ranks 1 to 15 each hold between 8,779 and 12,666.
+
+**2. The first stretch's chain carried zone by zone** [T 49,025/49,025, exact; `gap_carry_v1.py` (SHA-256 begins `fcdae846`), `.out`, `.pkl`].
+- Carried seams and ends that open in the second stretch, per case: 6 in 462, 7 in 1,611, 8 in 5,366, 9 in 9,526, 10 in 14,389, 11 in 11,632, 12 in 5,227, 13 in 771, 14 in 41. None has fewer than 6.
+- Of the 487,874 openings, 476,534 are not a gap of the second stretch (some zone lies across them there; which zone is not recorded) and 11,340 are.
+- The 284,446 gaps by their two bounds: both carried chain zones but not an opened seam, 197,596; left carried and right not, 36,476; right carried and left not, 30,791; an opened carried seam, 11,340; neither carried, 8,243.
+- The landing's gap is an opened carried seam in 1,378 cases and not in 47,647.
+- The 204,117 gaps bounded by two carried chain zones (no `d` bound), by how far apart the two zones were in the first stretch's chain (`gap_carry_v1`'s 11,340 and 197,596 above count a `d` bound as carried; these do not, hence 11,149 and 192,968) [`gap_carry_nb_v1.py` (SHA-256 begins `43a10f14`) and `.out`]: neighbours in chain order (an opened seam) 11,149; neighbours in reverse order (the later zone's exit, then the earlier zone's entry) 19,533; not neighbours 173,435, of which 148,870 have the right zone later in the chain (2 places 40,389; 3, 29,356; 4, 34,066; more, 45,059) and 24,565 earlier.
+
+**3. The 31 cases with two gaps** [T 31/31; `gap_two_v1.py` (SHA-256 begins `a1526bb4`) and `.out`]. 5 E340 crossers and 26 one-reading moves of them, in two close groups of readings (about `2.425, 3.187, 3.976, 4.317, 5.46, 7.003` and about `2.42, 3.22 to 3.24, 4.32 to 4.35, 5.36 to 5.39, 5.97 to 6.01, 7.68 to 7.72`; steer). Four bound patterns: (6, 5)+(4, 6) in 9, (7, 5)+(7, 7) in 8, (7, 5)+(2, 7) in 8, (7, 5)+(4, 6) in 6. In the second group one gap lies between two consecutive zones of reading 7 (pattern (7, 7)) or between reading 2's exit and reading 7's entry at nearly the same place.
+
+**Rule 22.**
+- **Gaps not at the thinnest seams.** The description tested (a second-stretch gap opens where the first stretch's seam was thinnest) does not fit these populations: the thinness ranks of item 1 are spread evenly. Nor are the gaps the chain's carried openings: in 38,522 of the 49,025 cases no gap is one (`gap_carry_v1.out` line 4, hits 0). The description evolves: the carried chain zones move by different amounts (`−8 g_y/ρ_y`), so their order changes: in at least 44,098 gaps (19,533 reverse-order neighbours and 24,565 whose right zone was earlier in the chain) the two bounding zones lie in the opposite order to the first stretch's chain. Most gaps (173,435 of 284,446) lie between two carried chain zones that were not neighbours in the first stretch; another 19,533 lie between neighbours in reverse order. What decides which two carried zones end up bounding each gap is **not understood**.
+- **At least 6 openings per case.** (i) Feature: every carried chain opens in 6 or more places. (ii) What forces it: **not understood**. A candidate, not tested: a seam from reading `a` to reading `b` changes overlap by `8(g_b/ρ_b − g_a/ρ_a)` and one from `b` to `a` by the negative of that, so if a chain has both, one of them loses overlap. (iii) Not read.
+- **Gaps with a bound outside the carried chain** (36,476 + 30,791 + 8,243): (i) feature: a bound is a zone of the second stretch that is not a carried chain zone; (ii), (iii): **not understood**.
+- **The 31 two-gap cases.** (i) Feature: two close groups of readings, one E340 neighbourhood each, with wide gaps (in the second group about the whole space between two consecutive zones of reading 7, steer). (ii) What forces two gaps there: **not understood**. (iii) Not read. The floor of 2 in E956 rests on these two neighbourhoods; the populations are E340 crossers, seeds and small moves of the crossers, so it is observed on them only.
+- **The 18 touching seeds and 111 touching cases** (E956): not read in this step; **not understood**.
+
+**Still not understood, in order:** what decides which carried chain zones bound each second-stretch gap; the gaps with a bound outside the carried chain; what forces at least 6 openings; the two-gap neighbourhoods; the touching cases (E956).
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- On these cases the second stretch's gaps do not sit where the first stretch's blocking was thinnest, and most are not the chain's carried openings either. Most (173,435 of 284,446) lie between two zones of the first stretch's own chain, carried to the second stretch, that were not neighbours there: the phase shift moves each reading's zones by its own amount and reorders the chain (at least 44,098 gaps are bounded by two carried zones in reverse chain order).
+- The object for the next step is the carried chain's order on each arrangement: which carried zones become neighbours in the second stretch, and which of those pairs leave a gap, read on these same cases first.
+- Nothing is committed.
+
+## E958 (2026-11-26): the carried chain's order in the second stretch. Carrying moves reading `y`'s zones by `D_y = −8 g_y/ρ_y`, so a first-stretch seam from reading `a` to reading `b` gains `D_a − D_b` of overlap: a seam towards a reading with larger `D` ("up") loses overlap, one towards smaller `D` ("down") gains it [P]. On the 49,025 cases no down seam opens, 446,934 of 458,360 up seams open, and every case has 6 to 13 up seams. In the second stretch the carried chain is reordered (262,125 of 988,151 new neighbour pairs were neighbours before), and on its own it leaves 3 to 11 gaps of `[9, 15]` per case [P for the seam rule; T, exact, for counts; PARTIAL: E954's populations]
+
+**Owner (2026-11-26):** *"Yes, read it"*, on reading the order of the carried chain in the second stretch (which zones become neighbours, and which new neighbours leave a gap), The step as proposed in the reply to E957 included an idea to test (E957's untested candidate): if two readings' zones meet in both orders, the move tightens one overlap and loosens the other.
+
+**Map:** E957's open items: what decides which carried zones bound each gap, and what forces at least 6 openings. Place: the first stretch's greedy chain carried by whole laps to the second stretch (E957's carrying), both stretches at the arrangement's own instants.
+
+**Source test.** Zones are E931's; the carrying is E957's (E805 item 2's rotation at whole laps). `D_y` is the carried zone's displacement in `R − 8`. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E957, plus E957.
+
+**1. The seam rule** [P, one line; asserted on every seam of all 49,025; `experiments/n8/carry_order_v1.py` (SHA-256 begins `afcdd9a1`), `.out`, `.pkl`]. Zone `(y, j)` carries to `(y, j + n_y)`, whose edges are the old ones plus `8 n_y/ρ_y = 8 − 8 g_y/ρ_y`; in `R − 8` that is a move by `D_y`. A seam `A → B` (readings `a`, `b`) with overlap `o0` has carried overlap `o0 + D_a − D_b`, so it opens exactly when `D_b − D_a ≥ o0`. A down seam (`D_b < D_a`) cannot open. For two readings whose zones meet in both orders in the chain, one direction is up and the other down (or both level, if `D_a = D_b`): E957's candidate holds, as this identity.
+
+**2. Seams by direction** [T 49,025/49,025, exact; `carry_order_v1.out`].
+- Down seams 529,791, none opened. Up seams 458,360: 446,934 open, 11,426 keep a positive overlap. No seam is level.
+- Up seams per case: 6 in 64, 7 in 1,388, 8 in 9,622, 9 in 16,465, 10 in 13,858, 11 in 7,035, 12 in 575, 13 in 18.
+- Up seams that do not open, per case: 0 in 39,607, 1 in 7,729, 2 in 1,394, 3 in 271, 4 in 24.
+- Seam openings per case: 5 to 12 (E957's 6 to 14 also counts the chain's two ends).
+
+**3. The new order** [T, exact; `carry_order_v1.out`]. Sorted by entry in the second stretch, the 1,037,176 carried chain zones make 988,151 neighbour pairs, of which 262,125 were neighbours in the first stretch. Inversions against the chain order: 943,012 in all, from 2 upward per case (the `.out` lists the 30 smallest values, 2 to 31).
+
+**4. Gaps of the carried chain on its own** [T, exact; `carry_order_v1.out`; `carry_order_read_v1.py` (SHA-256 begins `60ff8d20`) and `.out`].
+- 306,799 in all, 3 to 11 per case. Bounded by (new-order neighbours, direction in `D` from left zone to right zone): down and not neighbours before, 153,276; up and not neighbours before, 65,975; up and neighbours before (an opened seam), 50,227; a bound at 9 or 15, 36,224; equal `D`, 1,097, all two consecutive zones of one reading.
+- Zones outside the chain cover 32,136 of them fully and 65,564 in part. Per case, the carried-chain gaps not fully covered number 2 in 31, 3 in 1,000, 4 in 7,000, 5 in 13,982, 6 in 17,135, 7 in 8,270, 8 in 1,498, 9 in 83, 10 in 26.
+- Every open gap of the second stretch lies inside a gap of the carried chain (284,446 of 284,446). That holds by construction: the carried chain's zones are among all zones.
+
+**Rule 22.**
+- **Up seams that do not open** (11,426). (i) Feature: overlap at least the gain `D_b − D_a`. (ii) Forced by item 1. (iii) The same rule. **Understood.**
+- **Equal-`D` bounds** (1,097). (i) Two consecutive zones of one reading bound the gap. (ii) Forced: one reading has one `D`. (iii) The space between a reading's zones, as in E957 item 3's pattern (7, 7). **Understood.**
+- **At least 6 up seams per case.** (i) Feature: the chain steps up in `D` at least 6 times. (ii) What forces it: **not understood**. (iii) Not read. By item 1 the seam openings are the up seams whose gain is at least their overlap; on these cases that is 446,934 of 458,360 up seams, and seam openings per case run from 5 (277 cases) to 12. E957's floor of 6 counts the chain's two ends as well; what forces it is **not understood**.
+- **Carried-chain gaps between zones that were not neighbours** (219,251 of 306,799). (i) Feature: carrying reorders the chain, and two zones from different places in it end up adjacent with space between them. (ii) Which pairs become adjacent, and why most of them are down in `D`: **not understood**. (iii) Not read.
+- **Carried-chain gaps that zones outside the chain cover fully** (32,136). (ii), (iii): **not understood**.
+
+**Still not understood, in order:** what forces at least 6 up seams, and at least 6 openings with the ends; which carried zones become adjacent with a gap between them, and why most such pairs are down in `D`; which carried-chain gaps the zones outside the chain cover; the items of E956 and E957 (two-gap neighbourhoods, touching cases, gaps bounded outside the chain).
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- The move from the first stretch to the second acts on the blocking chain by one number per reading, `D_y`. Every seam stepping up in `D` loses overlap by the step and every seam stepping down gains it [P]; on these cases 446,934 of 458,360 up seams open (whether the gain exceeds the overlap is measured seam by seam, not inferred from overlap sizes).
+- The second stretch's gaps lie inside the gaps the carried chain leaves on its own, 3 to 11 per case here. Most of those are between zones that the move has brought together from different places in the chain, not between old neighbours.
+- The next object is the sequence of `D` values along the first stretch's chain: how many times it steps up, and which zones the move brings together. Read on these same cases first.
+- Nothing is committed.
+
+## E959 (2026-11-26): the sequence of shifts `D` along the first stretch's blocking chain. Up steps (E958's up seams) are between `7/22` and `12/19` of the chain's seams, and chains have 15 to 27 seams; the fewest up steps for a given number of seams is 6 at 15 to 17 seams and 10 at 27, not rising steadily between (8 at 21, 7 at 22), and none of this is explained. Where the carried chain leaves a gap between two zones that were not neighbours, the chain zones that lay between them have moved out past one bound or the other (550,763 of 594,611) [P for the bounds stated; T, exact, for counts; PARTIAL: E954's populations]
+
+**Owner (2026-11-26):** *"Yes, read it"*, on reading the sequence of shifts along each first-stretch chain: how often it steps up, and which zones the reshuffle places next to each other.
+
+**Map:** E958's open items: what forces at least 6 up seams; which carried zones become adjacent with a gap between them. Place: the first stretch's greedy chain and its carrying (E957, E958), at the arrangement's own instants.
+
+**Source test.** `D_y = −8 g_y/ρ_y` and up/down seams are E958's; the chain is E957's. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E958, plus E958.
+
+**1. Two bounds** [P].
+- `|D_y| = 8|g_y|/ρ_y ≤ 4/ρ_y`, since `|g_y| ≤ 1/2`. So the slower readings can have the larger shifts.
+- Every seam into a zone of the reading with the largest `D` is up, and so is every seam out of a zone of the reading with the smallest `D`. So the up steps number at least (seams into the top reading) + (seams out of the bottom reading) − (seams from bottom to top). Asserted on all 49,025.
+
+**2. Up steps against seams** [T 49,025/49,025, exact; `experiments/n8/shift_seq_v1.py` (SHA-256 begins `2e2d2bde`) and `.out`; `shift_seq_read_v1.py` (`ca37f284`) and `.out`].
+- Up steps per case are E958's (6 to 13). The share of seams that are up runs from `7/22` to `12/19`, median `8/17`. Seams per chain run from 15 (6 cases) to 27 (70). The fewest up steps for each seam count: 6 for 15 to 17 seams, 7 for 18 to 20 and for 22, 8 for 21, 9 for 23 to 26, 10 for 27.
+- The bound of item 1 gives 3 to 9 per case (3 in 128, 4 in 18,332, 5 in 9,159, 6 in 13,121, 7 in 5,572, 8 in 2,345, 9 in 368), so it does not reach 6 on its own. Up steps exceed it by 1 to 8.
+
+**3. Which readings have the extreme shifts** [T; `shift_seq_v1.out`]. The largest `D` belongs to reading 2 in 23,235 cases and reading 3 in 10,534; the smallest to reading 3 in 17,335 and reading 2 in 11,668. Reading 2 has rank 1 or 6 in `D` in 34,903 of 49,025. Chain zones by `D` rank (1 smallest): 147,408 / 180,914 / 192,631 / 190,187 / 179,735 / 146,301.
+
+**4. What lay between the bounds of a reshuffled gap** [T, exact; `shift_seq_v1.out`]. For each gap of the carried chain between two zones that were not chain neighbours, the chain zones between them in the first stretch, by where they sit in the second stretch's order: before the left bound 278,822; after the right bound 271,941; still between 43,848.
+
+**Rule 22.**
+- **Reading 2 at the extremes of `D`.** (i) Feature: the slowest reading after `d` most often has the largest or smallest shift. (ii) Item 1's `|D_y| ≤ 4/ρ_y` allows the slow readings the larger shifts; why reading 2's `g_y` is large in these populations is not read. (iii) **Not understood** as to `g_2`.
+- **Zones still between** (43,848). (i) Feature: a chain zone that stays between the gap's bounds in order yet does not lie across the gap. (ii), (iii): **not understood**.
+- **At least 6 up steps.** Item 2 gives it seam count by seam count (6 at 15 to 17 seams, rising to 10 at 27); at least 15 seams together with a share of at least `7/22` gives only 5 (`15 · 7/22 = 105/22`), so the floor is not the product of the two extremes. What forces it is **not understood**. (Item 1's bound reaches 3 at least; a run of down steps passes through distinct `D` values, so it is at most 5 long, which gives at least 2 up steps for 15 seams. Neither reaches 6.)
+
+**Still not understood, in order:** what forces the fewest up steps for each seam count (6 at 15 to 17 seams); what forces at least 15 seams; why reading 2's shift is so often the largest or smallest; the 43,848 zones still between; the items of E956 to E958.
+
+Existence step named (rule 1): step 1, isolation proved at the AP/grid, is taken as proved, as the owner states. This entry describes where the cascade lands; it supplies no displacement step.
+
+**Consequence (M7):**
+- Along the first stretch's chain the shift goes up and down, between about a third and two thirds of the time up (`7/22` to `12/19`). Each up step is an overlap that the move to the second stretch shrinks (E958).
+- At a reshuffled gap, 550,763 of the 594,611 chain zones that lay between its two bounds in the first stretch have moved off to one side or the other in the second; 43,848 stay between them in order (not understood).
+- The next object is the fewest up steps for each chain length: why a chain of 15 to 17 seams here always has at least 6 up steps, read on the cases that reach that floor (64 cases with 6 up steps) and on these same cases first.
+- Nothing is committed.
+
+## E960 (2026-11-26): the landing followed from the AP to each of the 49,025 second-stretch cases along a straight line of real arrangements. Every path starts by the AP's clear point at `R = 1` giving way to its clear point at 3 (47,458) or 5 (1,567), and crosses into the second stretch by an upward jump (once in 48,720, twice with one return in 305); no landing on any path exceeds 15. Of the 283,680 zones that set the landing somewhere on a path, 260,292 are zones the cascade moves out of at the arrangement [T, exact at every event found; events found by a float grid of 2,400 steps, so a piece shorter than one step can be missed; PARTIAL: E954's populations and one path per case]. Also E959's open items and E957 to E959 recast (item 0)
+
+**Owner (2026-11-26):** *"Yes, run it"*, on following the landing from the AP to each case through real arrangements; *"LEtws understand why and what for for those 2 missed"*; *"please do a full run"*; and, on method: *"It directs any speed arrangement to an isolation of each runner without an exception we can find. So whenever there is an exceptions, the first thing we need to look at is, does the cascade have trouble finding (unlikely) or is it just our description of how it is doing it (more likely)"*, *"The cascade isn't a search algorithim, you give it the speeds of the arrangement and it instantly shows the isolation"*, *"any arrangement is merely distorition/displacement of global isolation. That's why it starts from those "ideal" isolations and show you where the displace is forced to"*.
+
+**Map:** rule 1's displacement step: existence at the AP is proved; the object is how the AP's isolation is carried to the cascade's landing. Place: the straight line `r(λ) = (1 − λ)(1, …, 7) + λ r`, `λ ∈ [0, 1]`.
+
+**Source test.** Zones and the landing (first clear instant `R ≥ 1`, equal to the cascade's landing; E956 item 3) are E931's and E954's; the cascade is `arc_type_compare_v1.cascade`. Following the landing along a one-parameter family is in the record: E313 (landing as a function of one moved reading) and E556 (runs of constant move count for the subject moving). The straight line from the AP to the whole arrangement is new here; each point on it is an arrangement (item 1).
+
+**Record search (rule 13; PARTIAL):** as E959; memory notes on E553 to E573 (one and two movers), which prove landing instants in restricted regimes; E313 and E556, which follow the landing along one moved reading.
+
+**0. E957 to E959 recast.** Their question, why the second stretch is open when the first is blocked, asks why a clear instant exists before 15: existence restated, not a displacement step. Their counts stand as descriptions of the 49,025 cases, and their open items stay open.
+
+**1. The paths are arrangements** [P]. Both ends are strictly increasing with least reading 1, so every `r(λ)` is 7 distinct positive readings with least 1: an arrangement (E956 item 1), with `d_min = 1` throughout.
+
+**2. The method** [`experiments/n8/ap_path_v2.py` (SHA-256 begins `001378b1`), `.pkl`, `.log`]. Between events the landing is one zone's exit (its setter) or 1. A float grid of 2,400 steps (steering only) finds steps where the setter changes; inside each, every crossing of a setter's edge with another zone edge or with `R = 1` is solved exactly, the exact setter is evaluated just inside both ends and at the middle of each gap between neighbouring crossings, and new setters are added until stable. Kinds: up (landing jumps up), down (a clear point opens below it), hand (setter changes, landing continuous). At the arrangement (`λ = 1`) the landing equals the cascade's in all 49,025 (asserted). No gap between neighbouring crossings had a non-constant setter. A piece that starts and ends inside one grid step would be missed.
+
+**3. The two misses of v1** [`ap_path_missed_v1.py` (`a356555a`) and `.out`]. v1 at 600 steps checked only the middle of each gap. In two smoke cases it lost a piece just before the jump past 9: setter (6, 6), landing about 6.12, lasting `λ` width about `1.7e-4`, in a clear gap about `8.4e-5` wide closed by the entry of (3, 4); and setter (4, 3), landing about 5.45, width about `8.1e-5`, gap about `3.2e-5`, closed by the entry of (2, 2) (steer). v1 recorded each as one jump from below to above 9. The cascade's landing at `λ = 1` was right in both: the misses were the description's. v2's end checks recover both at 600 steps (64 of 64 smoke cases agree with v1 at 4,800).
+
+**4. What the paths show** [T 49,025/49,025; each event found is exact, and the event lists are complete only up to what the 2,400-step grid can see (item 2); `ap_path_read_v1.py` (`eef57c9d`) and `.out`].
+- Events per path: 3 to 17. In all: 192,288 up, 79,707 hand, 34,550 down.
+- At `λ = 0` the AP's landing `R = 1` is a single clear point; for `λ > 0` it gives way at once to the AP's clear point 3 (setter reading 3, lap 1; 47,458) or 5 (reading 5, lap 3; 1,567).
+- Into the second stretch: every path crosses by an up jump, once in 48,720; in 305 it crosses, returns once, and crosses again.
+- The last crossing: it leaves a first-stretch landing between 1 and 7 (median about 4.36, steer), set most often by (6, 3) 7,978, (5, 2) 7,928, (4, 3) 5,957, (5, 3) 5,093, (7, 6) 4,646. That point is met by one zone's entry in 48,956 (by rank: 7, 12,638; 4, 12,043; 2, 11,004; 3, 6,258; 5, 3,757; 6, 2,966; `d`, 290), and in 69 by `d`'s exit at 1 together with an entry. It lands between 9 and about 11.57 (steer), at `λ` from about 0.706 to 1. The piece before it lasts from about `2.4e-6` to 0.756 in `λ` (steer).
+- The largest landing on any path is about 11.60 (steer); none exceeds 15.
+
+**5. The 44 paths whose setter chain does not join** [`ap_path_chain_v1.py` (`d67287de`), `ap_path_end_v1.py` (`1a94c3df`), each with `.out`]. All 44 break at `λ = 1` itself, which the method's open intervals exclude.
+- 26: at `λ = 1` two zones exit at the landing point (for example (4, 5) and (7, 9)). The landing does not change; the label is a tie.
+- 18: at `λ = 1` an exit meets an entry below the old landing, so a single clear point is born exactly at the arrangement and the landing drops to it. These are E956's 18 single-point landings (all seeds): each arrangement sits exactly on an event of its path.
+
+**6. The path's setters against the cascade's zones** [T 49,025/49,025; exact for the setters found, which are complete only up to the grid (item 2); `cascade_vs_path_v4.py` (`a2c68ccf`) and `.out`; smoke versions `cascade_vs_path_v2.py` (`5d27da39`), `v3.py` (`da4de188`)]. The cascade at the arrangement moves out of a list of zones. Of the 283,680 setters along the paths, 260,292 are among them. All of a path's setters are in 29,287 paths; the shared setters come in the cascade's order in 26,486. The other 23,388: in the cascade's way at the stop before and passed over for a larger exit, 18,429; beyond the landing, 3,736; wholly inside one move, 720; with exit at or below `R = 1`, 503.
+
+**Rule 22.**
+- **The two v1 misses.** (i) A setter piece just before the jump past 9, too short to contain a midpoint. (ii) In both, the last first-stretch clear point is a gap that opens and closes within a `λ` width of about `1.7e-4` and `8.1e-5` (steer), shorter than v1's step and with no midpoint inside it. Why these two cases have so short a last piece is not read. (iii) The same landing; the description's sampling. **Understood** as to the miss, fixed in v2; **not understood** as to why the piece is so short.
+- **The 26 ties at `λ = 1`.** (i) Two exits at one point. (ii) The label is a tie: the landing is one point that two zones share, so no event of the landing is lost. What forces two zone exits to coincide exactly at these 26 arrangements (12 seeds, 13 MOV, 1 E340) is **not understood**, the same kind of exact touching as E956's. (iii) Not an event of the landing.
+- **The 18 births at `λ = 1`.** (i) A single clear point appears exactly at the arrangement. (ii) **Not understood**: that an exit meets an entry exactly at `λ = 1` is the touching itself, restated as an event; why the seeds sit there is not read. (iii) A down event at `λ = 1`. E956's item on the 18 and 111 touching cases stays open.
+- **The 305 double crossings.** (i)–(iii): **not understood**.
+- **Setters the cascade passes over (18,429), beyond the landing (3,736), inside one move (720), behind the start (503), and the paths whose shared setters are out of the cascade's order (22,539).** **Not understood**. On the owner's ruling they are read first as the description's, not the cascade's.
+
+**Still not understood, in order:** the 22,539 paths whose shared setters are out of the cascade's order; the 23,388 setters not among the cascade's zones, by class; the 305 double crossings; the exact touchings (E956's 18 and 111, and the 26 ties here); why the two v1 pieces were so short; the open items of E957 to E959, which item 0 keeps open.
+
+Existence step named (rule 1): existence at the AP, isolation at `R = 1` and at the other odd `R`, is taken as proved, as the owner states. This entry describes the displacement from the AP to the landing along one path per case; it does not show the displacement is forced.
+
+**Consequence (M7):**
+- Along a straight line of real arrangements from the AP, the landing starts at the AP's clear point 3 (or 5), moves by up, down and hand events, and enters the second stretch by an upward jump (once in 48,720 paths; in 305 it crosses, returns once and crosses again), staying at or below about 11.60 (steer) on these paths.
+- Of the 283,680 zones that carry the landing along the paths, 260,292 are zones the cascade itself moves out of at the arrangement; the shared ones keep the cascade's order in 26,486 of 49,025 paths. The two are different objects (setters at intermediate arrangements; the cascade's moves at the arrangement), and the shared labels are a correlate, not an identity. Where they differ is where the description is next to be read.
+- The next object is the 22,539 paths whose shared setters are out of the cascade's order and the 23,388 setters outside its zones.
+- Nothing is committed.
+
+## E961 (2026-11-26): E960's order mismatch occurs only on paths with a down event. Every one of the 22,539 paths whose shared setters leave the cascade's order has a down event; every one of the 23,578 paths with no down event keeps the cascade's order; 2,908 paths have a down event and keep it. The mismatch is not at the down-entered setters themselves: leaving them out restores the order in only 423 paths. The setters outside the cascade's zones are mostly entered by hand-overs (14,441 of 23,388), not down events [T 49,025/49,025, exact for the events found; complete up to ap_path_v2's grid; PARTIAL: E954's populations and one path per case]
+
+**Owner (2026-11-26):** *"Yes read them. But the fact the cascade directs you immediately to the isolation event for any runner for any arrangement hints we are missing something"*.
+
+**Map:** E960's open items: the 22,539 paths out of the cascade's order and the 23,388 setters outside its zones. Place: the path events of E960 and the cascade at the arrangement.
+
+**Source test.** Objects from E960 (path events, kinds up / down / hand, setters) and the cascade (`arc_type_compare_v1.cascade`). No object is new.
+
+**Record search (rule 13; PARTIAL):** as E960, plus E960.
+
+**1. The split** [T 49,025/49,025; `experiments/n8/path_down_v1.py` (SHA-256 begins `04bd1cd3`) and `.out`].
+- (down event on the path, shared setters in the cascade's order): (yes, no) 22,539; (no, yes) 23,578; (yes, yes) 2,908; (no, no) 0.
+- Leaving out the setters of pieces entered by a down event, the order is kept in 3,331 of the 25,447 paths with a down event (423 more than with them).
+- The 23,388 setters outside the cascade's zones, by the event that entered their piece: hand-over 14,441; up 7,886; down 1,061.
+
+**Rule 22.**
+- **Out of order implies a down event** (22,539 of 22,539). (i) Feature: the path's landing jumps back. (ii) The cascade moves only forward in time (each move goes to the largest exit among the readings in the way); a down event sends the path's landing back to an earlier point, and the later events then pass zones in another order. That this forces the order to break is not shown. (iii) **Not understood** beyond the count.
+- **Down events with the order kept** (2,908). (i)–(iii): **not understood**.
+- **Setters entered by hand-overs and outside the cascade's zones** (14,441). (i) Feature: the landing passes continuously from one zone's exit to another's. (ii), (iii): **not understood**.
+
+**Still not understood, in order:** what a down event is in the cascade's own terms; where on a path with a down event the order breaks; the 2,908; the hand-over setters; E960's other items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry describes the displacement along one path per case; it does not show it is forced.
+
+**Consequence (M7):**
+- On these paths the cascade's order is broken only on paths whose landing jumps back at some point, though not at the setters the jump enters (22,116 stay out of order without them). The cascade never moves back in time; the straight-line path does. On the owner's ruling the backward moves are read as the description's.
+- The next object is on these same paths: what a down event is in the cascade's terms, where on a path with a down event the order breaks, the 2,908 with the order kept, and the 14,441 hand-over setters.
+- Nothing is committed.
+
+## E962 (2026-11-26): the landing's events read in the cascade's own terms, as changes of its chain of stops. The chain can change only where a zone edge meets one of its stops, and nothing before that stop changes [P]. Along the 49,025 paths, 412,098 chain changes inside `0 < λ < 1` are found (257,520 at ap_path_v2's landing events, 154,578 between them; of the latter, 154,523 leave the landing's setter and the chain's end unchanged and 55 are landing changes ap_path_v2 did not record); all but one are read at their stop, and 411,942 are one crossing (rank 1). Of the 34,550 down events, 33,604 are cuts: at one of the cascade's stops a single reading is in the way, its zone's entry passes that stop, and the cascade stops there (33,604 of 33,604); the other 946 are swaps (item 3). E960's order test compares the history of the chain's last zone with the chain at the arrangement [T 49,025/49,025, exact for the events and changes found; complete up to ap_path_v2's grid and to `2^-30` of path_internal_v2's candidate gaps; PARTIAL: E954's populations and one path per case]
+
+**Owner (2026-11-26):** *"Yes read them"*, on reading the down events in the cascade's own terms on the same paths; before it, *"the fact the cascade directs you immediately to the isolation event for any runner for any arrangement hints we are missing something"*.
+
+**Map:** E961's open items: what a down event is in the cascade's terms, where the order breaks, the 2,908, the hand-over setters. Place: the cascade's chain at each point of E960's paths.
+
+**Source test.** The chain is the cascade's own run (`arc_type_compare_v1.cascade`): stops `R_0 = 1`, and from each stop the move to the largest exit among the readings in the way. Path events are E960's. No object is new: E960 used only the chain's last stop; here the whole chain is computed along each path.
+
+**Record search (rule 13; PARTIAL):** as E961.
+
+**1. Where the chain can change** [P]. At an arrangement the chain is `R_0 = 1`, `R_{i+1}` = the largest exit among the zones (open) containing `R_i`, until `R_m` is in no zone; `R_m` is the landing. Along the path every edge `(8k ∓ 1)/r_y(λ)` moves continuously. The set of zones containing `R_i` stays the same near `λ*` unless some zone's entry or exit equals `R_i` at `λ*`; the largest of their exits stays with the same zone unless another exit equals `R_{i+1}`. By induction on `i`, if neither happens at any stop up to `R_{p-1}`, the first `p` zones of the chain stay the same. So a chain change at `λ*` has a first changed zone `p`, and at `λ*` either an edge meets `R_p` (the readings in the way at `R_p` change) or an exit meets `R_{p+1}` (the largest exit there passes to another zone). Nothing before `R_p` changes.
+
+**2. The landing events as chain changes** [T 306,545 events; `experiments/n8/path_chain_v1.py` (SHA-256 begins `f2f454de`), `.pkl`, `.log`; `path_chain_read_v1.py` (`810eab77`) and `.out`]. The chain is computed exactly just before and just after each event (at `2^-20` of the distance to the nearest other event). Change kinds: cut (the chain after is the chain before stopped at `R_p`), extend (the chain after continues the chain before), swap (both differ after `p`).
+- Up: 185,355 extend (the chain grows by 1 to 26 zones at once), 6,933 swap.
+- Hand: 75,100 extend (by one zone), 3,174 swap (the last zone replaced), 1,433 cut.
+- Down: 33,604 cut, 946 swap.
+- **Down cuts** (33,604 of 33,604): just before, exactly one reading is in the way at `R_p`; at `λ*` its zone's entry equals `R_p`; just after, no reading is in the way there, and the landing is `R_p`. The cascade, as at every arrangement, moves forward stop by stop, and it stops at `R_p` because that stop's only reading in the way has left it.
+- **Hand cuts** (1,433 of 1,433): the same through the zone's exit: the last zone's exit falls to the stop before it, so the landing is continuous.
+- One event (path 5170, a stress seed) has a chain end different from ap_path_v2's setter: item 7.
+
+**3. Every change read at its stop** [T; `path_internal_v2.py` (`edca6bd8`), `.pkl`, `.out`, with `path_internal_v1.py` (`0e67d0b1`; its functions; its own summary lines are superseded by v2); `path_event_join_v1.py` (`9ab16519`) and `.out`]. Between landing events path_internal_v2 takes as candidates every `λ` where an edge of a zone in a known chain meets an edge of another reading or `R = 1`, evaluates the chain at both ends and the middle of each gap between neighbouring candidates (ends at `2^-30` of the gap), and adds the zones of new chains until stable. No gap between neighbouring candidates had a non-constant chain. At every change it lists the edges meeting the stops of the chain before, and the rank of all edge equalities holding at `λ*` (d's own exit at `R = 1` left out).
+- Away from the landing: 154,578 changes in 47,224 paths. At the first changed stop: an entry meets `R_p`, 140,860; an exit meets `R_{p+1}`, 13,700; an exit meets `R_p`, 13; both, 5.
+- At landing events (257,520 inside `0 < λ < 1`): up 143,258 entry at `R_p`; hand 75,100 exit at `R_p` (extend), 3,174 exit at `R_{p+1}` (swap), 1,433 both (cut); down 34,535 entry at `R_p`, 15 exit at `R_{p+1}`; up 4 entry and exit; 1 with no edge at its first changed stop (item 6).
+- Down swaps (946): 931 are one crossing (rank 1) whose edge meets `R_p` and, by the same ratio, a later stop: the readings in the way at `R_p` change, and the chain from there ends at an earlier stop. 14 have rank 2 or 3 (item 5); 1 is item 6's kind (item 6).
+- Up swaps (6,933): 6,931 the same with the chain ending later.
+- Rank 1 in 411,942 of the 412,098; the 156 others in item 5.
+- Of the 154,578 changes between landing events, 154,523 leave the landing's setter and the chain's last zone the same just before and after, and 55 (19 paths) change both [`path_endchange_v3.py` (`2942f463`), `.pkl`, `.out`; `path_endchange_v2.py` (`881555b4`) and `path_endchange_v1.py` (`6456a2da`), each with `.out`, checked the 8,541 at the chain's last zone first]. The 55 are landing events ap_path_v2 did not record: item 7a.
+
+**4. The order mismatch read through the chain** [T; `path_chain_order_v1.py` (`670715ba`) and `.out`; `path_kept37_v1.py` (`1da829c1`) and `.out`; `path_downkept_v1.py` (`9ed2ccc7`) and `.out`]. The path's setters are the chain's last zone over `λ`; a zone can be inside the chain long before it is the last one.
+- Of the 22,539 out-of-order paths, 322 have no chain change away from the landing (path_chain_v1: the chain after each event equals the chain before the next, and after the last equals the cascade's at `λ = 1`). In all 322, every inverted pair (898) has `b` already inside the chain, ahead of `a`, when `a` was first the setter.
+- The other 22,217 all have chain changes away from the landing. Of their inverted pairs, 26,159 have `b` not in the chain when `a` was first the setter.
+- Ordering zones by first appearance anywhere in the chain keeps the final chain's order in 7,824 paths, against 26,486 for the setter order: a zone's place in the chain is not fixed along the path.
+- Of the 2,908 paths with a down event and the order kept, 2,871 have chain changes away from the landing. In the other 37, every down event's new setter has no earlier setter after it in the final chain (35 in the final chain, 2 not).
+
+**5. The 156 changes with rank 2 or 3** [`path_rank2_v1.py` (`57b54e8c`), `.pkl`, `.out`; `path_rank2_read_v1.py` (`78776496`) and `.out`]. In each, three or more zone edges meet at one point. In all 156, a combination of the equalities is a linear relation among the readings that holds exactly at `λ = 0` and at `λ = 1`, so it holds along the whole path: the AP and the case share it. Examples: `r_1 − 2r_2 + r_3 = 0` (three readings equally spaced, as in the AP), `2r_2 − 3r_3 + r_5 = 0`, `7r_1 − 20r_3 + 11r_5 = 0` (readings indexed 0 to 6). On the path, the meeting is one crossing. 120 of the 156 are within `10^-12` of `λ = 1` (steer); 36 lie between about 0.45 and 0.74 (steer), at six values of `λ`, on cases that share readings (21 at one `λ`).
+
+**6. The two changes read at a neighbour** [`path_nomain_v1.py` (`6656d812`) and `.out`; `path_odd_swaps_v1.py` (`fcf460a4`) and `.out`]. Path 7724 (up, no edge at the first changed stop) and path 7696 (up swap, entry at its stop only): in each a chain change away from the landing lies about `4.6e-12` and `3.6e-10` before the event (steer), inside the window the chains were compared over. At `2^-40` the event is an extension at the last stop. Path 5170's down swap with only an exit at `R_{p+1}` is item 7's merged pair.
+
+**7. The one chain end that differs from the setter** [`path_miss5170_v1.py` (`7e353115`) and `.out`]. Path 5170: ap_path_v2 recorded one down event at `λ = 1 − 1.5e-16` (steer), from (4, 6) to (5, 7). Bisection finds the setter (2, 4) between them: a down event to (2, 4) at about `1 − 4.2e-16` (steer; path_internal_v2 finds it as a change at `R_p` by an entry), then a change from (2, 4) to (5, 7). The landing at `λ = 1` is unaffected.
+
+**7a. The 55 unrecorded landing changes** [`path_missed_excursions_v1.py` (`91118ebc`) and `.out`]. In 18 paths they are 18 excursions of three changes each: the landing leaves its setter, passes through two others, and returns to the first (for example (4, 6), (1, 3), (5, 7), (4, 6)), within a `λ` span of about `4.7e-5` to `3.2e-4` (steer) containing no point of ap_path_v2's 2,400-step grid. Several are one excursion seen in related cases (seven at one `λ`). The 55th is path 5170's (item 7). E960's and E961's counts omit these 55 events; they are not recomputed here.
+
+**8. The hand-over setters outside the final chain** [`path_hand_left_v1.py` (`4fb84675`) and `.out`]. Of the 14,441: 13,602 leave the chain between landing events (9,689 between two events, 3,913 after the last), 518 at a down cut, 314 at a hand swap, 7 at a hand cut.
+
+**Rule 22.**
+- **Down events.** (i) A stop of the cascade with one reading in the way (cuts) or whose readings in the way change by an edge at the stop (swaps). (ii) Forced by item 1: an entry passes the stop; for a cut no reading is left in the way there, so the cascade stops there. (iii) The cascade's own move at one stop. **Understood** as to what a down event is: 33,604 cuts and 931 swaps directly, 14 by item 5, 1 by item 7.
+- **Hand cuts** (1,433). Same through the exit. **Understood** likewise.
+- **The 156 changes with rank above 1.** (i) Three or more edges at one point. (ii) Forced by a linear relation the AP and the case share, holding along the path (156 of 156). (iii) Each is still an edge at a stop. **Understood** as to the coincidence; why these cases share such relations with the AP is a property of how E340, MOV and the seeds were built, not read here.
+- **Paths 7724 and 7696.** (i) Another chain change within about `4e-10` of the event (steer). (ii) The comparison window. (iii) Same mechanism. **Understood** as to the reading; why the two lie so close is not read.
+- **The 18 excursions.** (i) Three landing changes returning to the first setter. (ii) Forced to be missed: the span holds no grid point (steer: a float test), so the grid sees one setter at both ends, which is ap_path_v2's stated limit. (iii) Same mechanism: each is read at its stop (item 3). **Understood** as to the miss.
+- **Path 5170.** (i) Two events about `2.7e-16` apart (steer). (ii) The seed lies within about `4.2e-16` of the down event (steer). (iii) The same events; ap_path_v2's resolve merged them. **Understood.**
+- **The 322 out-of-order paths with no chain change away from the landing.** (i) Every inversion is a zone already inside the chain, ahead. (ii) Forced: the setter list records only the chain's end, so a zone inside is listed when it becomes the end, after zones that ended the chain earlier. (iii) The same chain; the order test's. **Understood.**
+- **The 37 paths with a down event, the order kept, and no chain change away from the landing.** Why the zones cut off do not come back into the final chain: **not understood**.
+- **The other 22,217 out-of-order paths, the other 2,871 kept paths with a down event, and the 14,441 hand-over setters.** They involve chain changes away from the landing; the changes themselves are read at their stop (item 3), but what each does to the order: **not understood**.
+
+**Still not understood, in order:** what the chain changes away from the landing do to the order, and to the hand-over setters; the 37; E960's items (the 305 double crossings, the 26 ties and 18 births at `λ = 1`); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry reads how the cascade's chain changes along one path per case; it does not show the displacement is forced.
+
+**Consequence (M7):**
+- In the cascade's own terms, a "backward jump" is not a move back. The cascade still goes forward from `R = 1` stop by stop; its chain now ends at a stop it already passed through, because the only reading in the way there has left.
+- The chain changes only where one zone edge meets one of its stops, and nothing before that stop changes [P]. Along these paths each change found is a single crossing at one stop, except the 156 that lie on a relation the AP and the case share. The landing is the last stop; 154,523 of the 412,098 changes are away from it (they leave the landing as it was), and ap_path_v2 did not follow them; 55 more are landing changes it missed. E960's order test compares the history of the chain's last zone with the chain at the arrangement; in 322 paths item 4 shows that is the whole of the mismatch.
+- The next object is the displacement described as the chain itself, from the AP's chain just after `λ = 0` to the cascade's chain at the arrangement, with the changes away from the landing read for what they do.
+- Nothing is committed.
+
+## E963 (2026-11-26): the cascade's whole chain followed from the AP to each of the 49,025 second-stretch cases. Just after `λ = 0` the chain is the AP's own: `1 → 9/7 → 3/2 → 9/5 → 9/4 → 17/7 → 3` (47,458), continuing `→ 17/5 → 25/7 → 9/2 → 33/7 → 5` (1,567). Every arrangement's chain begins with a piece of it that no change on the path ever touches, and the stop where it leaves that chain is read off the cascade at the arrangement alone (49,025/49,025). On the 47,458, the departure stop is fixed by ratio thresholds taken in order along the AP chain, mostly a lower reading's lap-1 zone coming into the way once its ratio to the stop's reading exceeds `7/9` (47,458/47,458). Behind the departure, 154,523 of the 154,578 changes between landing events are detours that rejoin the old chain within five zones; the other 55 are E962's unrecorded landing changes [T 49,025/49,025, exact; changes complete up to ap_path_v2's grid and path_internal_v2's candidates; PARTIAL: E954's populations and one path per case]
+
+**Owner (2026-11-26):** *"Yes, follow the chain"*; and earlier, *"any arrangement is merely distorition/displacement of global isolation. That's why it starts from those "ideal" isolations and show you where the displace is forced to"*.
+
+**Map:** E962's next object: the displacement described as the chain itself, from the AP's chain just after `λ = 0` to the cascade's chain at the arrangement, with the changes away from the landing read for what they do. Place: the cascade's chain along E960's paths.
+
+**Source test.** Chain and zones as E962 (the cascade's own run, `arc_type_compare_v1.cascade`). Readings `r_1 = d = 1 < r_2 < … < r_7`; lap-`k` zone of `r` is `((8k − 1)/r, (8k + 1)/r)`. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E962.
+
+**1. The run** [`experiments/n8/path_follow_v1.py` (SHA-256 begins `73696989`), `.pkl`, `.log`; `path_follow_read_v1.py` (`73ec1822`) and `.out`]. Every chain change on each path (412,098: ap_path_v2's landing events and path_internal_v2's changes between them, located the same way), in `λ` order. At the first changed stop `R_p` it reads which zones are in the way just before and after (at `λ* ∓ 2^-90`): a zone joins and has the new largest exit (join); the largest leaves (leave); the same zones, the largest exit passing to another (cross); the last one leaves (clear); one comes into the way at a stop that had none (block). Also where the two chains rejoin after `p` (the first zone of the new chain that is in the old one after `p`).
+
+**2. The AP's chain** [T 49,025/49,025]. Just after `λ = 0` the chain is, with zones (reading, lap) and stops at the AP: (7, 1) to `9/7`, (6, 1) to `3/2`, (5, 1) to `9/5`, (4, 1) to `9/4`, (7, 2) to `17/7`, (3, 1) to `3`: 47,458 paths. The other 1,567 continue: (5, 2) to `17/5`, (7, 3) to `25/7`, (2, 1) to `9/2`, (7, 4) to `33/7`, (5, 3) to `5`. At `λ = 0` itself `R = 1` is clear (r7's lap-1 zone starts exactly at 1); just after, that zone covers 1 in every path and the cascade runs this chain to the AP's clear point 3 (or 5).
+
+**3. The untouched prefix** [T 49,025/49,025; `path_follow_depart_v1.py` (`037295de`) and `.out`]. The cascade's chain at the arrangement agrees with the AP's chain in its first `pre` zones: `pre` = 0 (1,960), 1 (1,106), 2 (4,341), 3 (306), 4 (30,329), 5 (369), 6 (10,600), 7 (14). In every path the positions of the final chain never changed along the path are exactly these `pre` (49,025/49,025), and no change on any path is in front of `R_pre` (412,098/412,098). The `pre` found by following the path equals the common prefix of the cascade's chain at `λ = 1` with the AP's chain, computed with no path (49,025/49,025).
+
+**4. Where the chain leaves the AP's chain, on the 47,458** [T 47,458/47,458; `depart_ratio_v1.py` (`1213326f`), `depart_start_v1.py` (`a3256e2c`), `depart_at3_v1.py` (`bc2b6caa`), `depart_d4_v1.py` (`532332fe`), each with `.out`]. At a stop `9/r_k`, the lap-1 zone of a reading `r_j < r_k` holds the stop iff `7/r_j < 9/r_k`, that is `r_j / r_k > 7/9`, and its exit `9/r_j` is then larger than the exit `9/r_i` of every reading `r_j < r_i`: it is the cascade's next zone unless another zone holding the stop has a larger exit. Taken in order along the AP chain:
+- **At `R = 1`** (783): the zones holding 1 are not r7's lap-1 zone alone. r6's lap-1 zone also holds 1 (`r_6 > 7`), 191, or with r5's too, 36; r7's lap-2 zone alone (`r_7 ∈ (15, 17)`), 424; r6's lap-1 zone alone, 132. In each the first zone is the one with the largest exit. Otherwise (r7's lap-1 zone alone holds 1: `7 < r_7 < 9`, `r_6, r_5 ≤ 7`) the chain takes (7, 1).
+- **At `9/r_7`** (1,106): `r_5 / r_7 > 7/9` (D1): r5's zone comes into the way; the chain skips r6.
+- **At `9/r_6`** (4,341): not D1, `r_4 / r_6 > 7/9` (D2): skips r5.
+- **At `9/r_5`** (306): not D1, D2, `r_3 / r_5 > 7/9` (D3): skips r4.
+- **At `9/r_4`** (30,329): not D1 to D3, `r_3 / r_4 > 7/9` (D4): r3's zone comes into the way; its exit is larger than r7's lap-2 exit in 29,857, and in the other 472 r7's lap-2 zone does not hold the stop (`r_7 / r_4 ≤ 15/9`). The chain skips r7's lap 2.
+- **At `9/r_3`, the AP's landing 3** (10,593): none of D1 to D4. The stop is held by r6's lap-2 zone (`r_6 / r_3 ∈ (15/9, 17/9)`), 8,471, or by r2's lap-1 zone (`r_2 / r_3 > 7/9`), 2,122 (with r6's too in 2,120, r2's exit being larger). The chain continues past 3 with that zone.
+The 1,567 on the AP chain to 5: 1,177 leave at `R = 1` (r6's and r7's lap-1 zones both hold 1); 369 at position 5, 7 at 6, 14 at 7; those 390 are not read by threshold here.
+
+**5. What the changes behind the departure do** [T 412,098].
+- Landing events: up = block at the last stop (136,331); hand = block (75,100), cross at the last zone (3,174), clear (1,433); down = clear (33,604). Up events other than blocks: a leave (6,830) or a join (102) at `R_p`, with the chain's end changing; down events other than clears: a join (931) or a cross (15).
+- Between landing events (154,578): join 83,848, leave 56,975, cross 13,700; 31 block and 24 clear are E962's 55 unrecorded landing changes. Every one of the 154,523 others rejoins the old chain. As (zones removed, zones added): join (1, 0) 77,901, (1, 1) 4,825, (2, 1) 838, (2, 2) 283, (3, 2) 1; leave (0, 1) 41,307, (1, 1) 11,746, (1, 2) 3,699, (2, 2) 223; cross (1, 1) 13,690, (1, 2) 10. At most five zones in all.
+- The chain's lengths at the arrangement: 17 to 29 zones.
+- The `λ` after which the first `i + 1` zones of the final chain no longer change, median over the paths (steer): 0 for `i ≤ 3`, about 0.48 for `i = 4`, 0.80 at 6, above 0.96 from 8 on.
+
+**Rule 22.**
+- **The departures on the 47,458.** (i) Each is the first stop of the AP chain where the arrangement's zones give a different largest exit. (ii) Forced by one ratio passing its threshold (`7/9` for a lower reading's lap 1, `15/9` to `17/9` for a lap-2 zone, or a reading above 7 at `R = 1`), the conditions taken in order along the AP chain (item 4). (iii) One mechanism: the cascade's own move at a stop, with a different zone having the largest exit. **Understood** as to which stop and which zone; the statement is [T 47,458/47,458], not proved for all arrangements (the in-way condition for a lower reading's lap-1 zone is derived; that no other zone interferes at these stops is checked, not derived).
+- **The 390 on the AP chain to 5 that leave at positions 5 to 7.** Zones listed in `path_follow_depart_v1.out`; thresholds **not read**.
+- **The 55 changes between landing events with no rejoin.** E962's unrecorded landing changes. **Understood** there.
+
+**Still not understood, in order:** the 390; why a path's chain just after `λ = 0` goes to 3 or to 5; what the detours behind the departure follow (which zone joins or leaves, in terms of ratios); E962's items (the 37; the order beyond the 322); E960's items (the 305 double crossings, the 26 ties and 18 births at `λ = 1`); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. The AP's isolation at 3 (or 5) is reached by the cascade's own chain just off the AP; this entry reads where each arrangement's chain leaves that chain. It does not show the displacement is forced for all arrangements.
+
+**Consequence (M7):**
+- The cascade at an arrangement follows the AP's own chain of isolation, `1 → 9/7 → 3/2 → 9/5 → 9/4 → 17/7 → 3`, until the first stop where one ratio of the arrangement has passed its threshold, and leaves it there (47,458 of 47,458 on this chain). That stop and the zone taken are read off the arrangement's speeds; no path is needed.
+- In front of the departure nothing ever changes. Behind it, the chain is rebuilt by detours that rejoin within five zones and by changes at its end.
+- The next object is behind the departure: which ratios set the detours and the end, read the same way as item 4.
+- Nothing is committed.
+
+
+## E964 (2026-11-26): every decision of the cascade is a speed ratio against a fraction `(8a ∓ 1)/(8b + 1)` [P]. Read at the arrangement, the 49,025 chains are 3,941 distinct words over 750 distinct stop decisions, and the landings are 21 stops in 106 configurations. Along the paths, of the 412,098 chain changes, 411,976 are one ratio passing one such fraction, 121 are two or three at once (all on paths with E962 item 5's coincidences) and 1 has none found (path 7724); 99 distinct fractions, and in all 412,223 crossings the AP's value and the arrangement's value lie on opposite sides. Whether the AP's chain runs to 3 or 5 is `r_5 / r_3` against `5/3` (49,025/49,025) [T 49,025/49,025, exact; PARTIAL: E954's populations and one path per case]
+
+**Owner (2026-11-26):** *"Yes, read them"*, on reading what decides the detours and the landing behind the departure stop.
+
+**Map:** E963's open items: the ratios setting the detours behind the departure and the landing; the 390 late departures; why the AP's chain runs to 3 or to 5. Place: the cascade's stops, at the arrangement and along E960's paths.
+
+**Source test.** Zones and the cascade as E962 and E963. Readings `r_1 = d = 1 < … < r_7`. No object is new.
+
+**Record search (rule 13; PARTIAL):** as E963.
+
+**1. A decision is a ratio** [P]. A stop is `c_s / r_s` with `c_s = 8k_s + 1` (the exit of the zone exited there; `R = 1` is d's `1/r_1`). The lap-`k` zone of `r_y` holds it iff `(8k − 1)/c_s < r_y / r_s < (8k + 1)/c_s`. Among the zones holding it the cascade takes the largest exit, and `(y, k)` beats `(y', k')` iff `r_{y'} / r_y > (8k' + 1)/(8k + 1)`. The landing is a stop held by no zone: each `r_y / r_s` lies in a closed gap `[(8k + 1)/c_s, (8k + 7)/c_s]` (zones are open, so an edge may sit at the stop). So every decision is one speed ratio against a fraction `(8a ∓ 1)/(8b + 1)`.
+
+**2. The chains as words of decisions** [T 49,025/49,025; `experiments/n8/chain_decisions_v1.py` (SHA-256 begins `249ecdc4`) and `.out`]. At each stop the decision is (stop reading and `c_s`, zone taken, other zones holding the stop); each was checked to hold the stop and have the largest exit, and each landing to be held by no zone. Distinct chains: 3,941 (most common, 262 arrangements; 396 used once). Distinct decisions: 750 (747 behind the departure; 17 used once), with 169 distinct window fractions. The commonest are the AP chain's own: (`R = 1`, r7 lap 1) 47,065; (`9/r_7`, r6 lap 1) 45,959; (`9/r_6`, r5 lap 1) 43,436; (`9/r_5`, r4 lap 1) 43,235.
+
+**3. The landing** [T 49,025/49,025; `landing_decision_v1.py` (`e72bbfdc`) and `.out`]. 21 distinct landing stops; the commonest is r7's lap-9 exit `73/r_7` (17,613), then `65/r_6` (6,550), `49/r_5` (6,503). With each reading's gap index, 106 distinct configurations (the commonest holds 16,088). In 224 arrangements a zone edge lies exactly at the landing without holding it (zones are open) [T; `late390_v1.py` (`2f75d174`) and `.out`]: an exit only in 206 (E340 26, SEED 43, MOV 137); an exit and an entry in 4 (SEED); an entry only in 14 (SEED). So 18 have an entry, all seeds.
+
+**4. The AP chain to 3 or to 5** [T 49,025/49,025; `chain_decisions_v1.out`]. At the AP, r5's lap-2 entry `15/5` equals r3's exit `9/3`. The chain just after `λ = 0` runs to 5 exactly when `r_5 / r_3 > 5/3` at the arrangement (1,567), and to 3 otherwise (47,458). Along the path `r_5 / r_3` is monotone (item 6), so it is above `5/3` from the start iff it is above at the arrangement.
+
+**5. The 390 late departures on the chain to 5** [T 390/390; `chain_decisions_v1.out`; `late390_v1.py` (`2f75d174`) and `.out`]. Each is item 1's decision at one stop of the AP's chain to 5, with its thresholds tested exactly:
+- 369 at `17/r_7`: r6's lap-2 zone holds it, since `r_6 / r_7 > 15/17` (369/369), and the AP chain's zone there, r3's lap 1, does not (`r_3 / r_7` outside `(7/17, 9/17)`, 369/369).
+- 14 at `17/r_5`: r2's lap-1 zone holds it, since `r_2 / r_5 > 7/17` (14/14), and the AP chain's zone there, r7's lap 3, does not (`r_7 / r_5` outside `(23/17, 25/17)`, 14/14).
+- 7 at `9/r_3`: r2's lap-1 zone holds it, since `r_2 / r_3 > 7/9` (7/7), and beats r5's and r6's lap-2 zones, since `r_5 / r_2 > 17/9` and `r_6 / r_2 > 17/9` (7/7).
+
+**6. The changes along the paths** [T 412,098; `path_follow_v2.py` (`9693e50e`), `.pkl`, `.log`; `path_follow_v2_read_v1.py` (`9f902985`) and `.out`; `path_multi_cross_v1.py` (`00c3faf3`) and `.out`]. On the path `r(λ) = AP + λ(r − AP)`, each `r_y(λ) / r_s(λ)` is a ratio of two linear functions of `λ`, so it is monotone [P] and passes a value at most once. At each change the edges meeting its stop were named as (stop reading, `c_s`, crossing reading, `c`): the ratio `r_y / r_s` passing `c / c_s`.
+- One crossing in 411,976 changes; two or three in 121, all on paths holding E962's rank-above-1 changes and within `10^-12` of `λ = 1` in 117 (steer); none in 1 (path 7724, E962 item 6).
+- In all 412,223 crossings the AP's ratio and the arrangement's ratio lie on opposite sides of the fraction.
+- 99 distinct fractions; 234 distinct (stop reading, crossing reading, fraction). The commonest: `r_6 / r_3` past `17/9` (46,705: r6's lap-2 exit passes r3's exit), `r_2 / r_6` past `7/17` (36,936), `r_3 / r_4` past `7/9` (36,465: E963's D4), `r_4 / r_2` past `5/3` (32,861), `r_7 / r_6` past `31/25` (20,682).
+
+**Rule 22.**
+- **The AP chain to 3 or 5.** (i) The chain just after `λ = 0` passes 3 or stops there. (ii) Forced by `r_5 / r_3` against `5/3`, the AP's own tie at 3 (item 4). (iii) Item 1's decision at the stop 3. **Understood** [T 49,025/49,025]; that no other zone touches 3 at the AP is checked on these cases, not derived here.
+- **The 390 late departures.** (i) The chain to 5 leaves the AP's chain at `17/r_7` (369), `17/r_5` (14) or `9/r_3` (7). (ii) Forced by the ratios of item 5: `r_6 / r_7 > 15/17` with r3's lap 1 out; `r_2 / r_5 > 7/17` with r7's lap 3 out; `r_2 / r_3 > 7/9` with `r_5 / r_2, r_6 / r_2 > 17/9`. (iii) Item 1's decision, the same mechanism as E963's departures. **Understood** [T 390/390, exact, these cases].
+- **The 121 changes with two or three crossings and the one with none.** E962 items 5 and 6. **Understood** there.
+- **The 224 arrangements with an edge exactly at the landing** (206 exit only, 4 both, 14 entry only). (i) A ratio exactly at a fraction. (ii) The arrangement sits on a threshold. (iii) Item 1. Why these populations sit on thresholds: **not understood** (as E962 item 5's relations).
+
+**Still not understood, in order:** why E340, MOV and the seeds sit on thresholds and on relations shared with the AP; E962's items (the 37; the order beyond the 322); E960's items (the 305 double crossings); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry reads the cascade's decisions at the arrangement and along one path per case; it does not show the displacement is forced for all arrangements, and the counts of distinct decisions, chains and landings are counts on these populations, not a bound.
+
+**Consequence (M7):**
+- Every decision of the cascade, at any stop, is one speed ratio against a fraction `(8a ∓ 1)/(8b + 1)` [P]. An arrangement's chain is a word of such decisions; on these 49,025 arrangements, 750 decisions make 3,941 chains, and the landings are 21 stops in 106 configurations.
+- On one straight path per arrangement from the AP, each chain change found is a crossing of such a fraction by a ratio moving monotonically from its AP value to its arrangement value (one crossing in 411,976 changes, two or three in 121, none found in 1; AP and arrangement on opposite sides in 412,223 of 412,223 crossings). These are counts on these populations.
+- The next object is the not-understood item: why E340, MOV and the seeds sit on these thresholds and on relations shared with the AP (rule 22), before any catalogue is read.
+- Nothing is committed.
+
+
+## E965 (2026-11-26): E964 item 1 stress-tested and proved. Each decision of the cascade at a stop is a comparison of a reading ratio with a fraction `(8a ∓ 1)/(8b + 1)`, and the cascade's chain, move for move, is fixed by the comparisons it consults at its own stops: if another arrangement reads those the same way, its cascade passes through the same stops (`Fresh.RatioDecisions.cascade_locally_determined`, axiom-clean) [L]. The consulted comparisons are finitely many per stop [L], and they hold for 60,579 perturbed arrangements that are not rescalings, all with the same chain [T]. A cascade written with ratio comparisons only agrees with the time cascade on all 286,985 arrangements of 13 populations, and three broken variants fail [T 286,985/286,985, exact]. E964's 224 exact edges at the landing and E962's 156 relations shared with the AP are traced to how E340, the seeds and MOV were built [T, exact, from source; P for the linear algebra; PARTIAL: rounding and which cells bind, items 5 and 6]
+
+**Owner (2026-11-26):** *"This is interesting, we need to stress test it and then see if we can prove it."* On E964 item 1. Then: *"Yes then move on to this"*, on E964's 224 arrangements with a zone edge exactly at the landing.
+
+**Map:** E964 item 1 (each decision a ratio against a fraction) and E964's open item (why E340, MOV and the seeds sit on thresholds; E962 item 5's relations shared with the AP). Place: the cascade's stops `c_s / r_s`, and the construction of E954's test sets.
+
+**Source test.** Zones, stops and the cascade as E962 to E964; in Lean, `Fresh/Framework.lean`'s `InWay`, `nextOpening`, `IsMove` and `Fresh/Cascade.lean`'s `step`, `cascadeSeq`, used unchanged. The test sets' construction is read from source: `LonelyRunner/experiments/nN/redo/symbolic_cells_v1.py` (`feasible`), `cell_members_v1.py`, `cell_members7_v1.py`, `stress_seeds_v1.py`, `disc_records_v1.py`, and `arc_type_compare_v1.gen_arc1`. E341 read the same cell-member lists (its landing atoms were withdrawn as a property of the max-slack LP point).
+
+**Record search (rule 13; PARTIAL):** E340, E341 and E954 read for the populations; `grep` of `LonelyRunnerFresh` and `LonelyRunner/LRC` for cascade definitions (found in `Fresh/Framework.lean`, `Fresh/Cascade.lean`; reused).
+
+**1. Stress test** [T 286,985/286,985, exact; `experiments/n8/stress_ratio_v1.py` (SHA-256 begins `2db7ed04`), `.out`, `.log`]. RATIO runs the cascade without forming an instant: a stop is `(s, c)`, reading `y` holds it iff `(8k − 1)/c < r_y / r_s < (8k + 1)/c`, and the holder with the largest exit is chosen by `r_x / r_y` against `(8k_x + 1)/(8k_y + 1)`, equal exits to the smaller reading (`r_x / r_y` against `1/1`). Every comparison it made was recorded and had the form `(8a ∓ 1)/(8b + 1)` (0 of any other form, in every population). Compared with `arc_type_compare_v1.cascade` (instants) on chain and landing:
+- Z16 (every 8-subset of 1..16, every subject; integer speeds) 102,960;
+- GRID (d = 1, six readings on the 1/1000 grid up to H = 8, 17, 40, 100) 10,000 each;
+- BIG (denominators about `10^30`, H = 8, 30, 300) 5,000 each;
+- EDGE (each reading built ON a threshold, `r_y = r_x (8a ± 1)/(8b + 1)`) 20,000; EDGEP (EDGE moved by `±10^-40`) 20,000;
+- SCALE (GRID17 and Z16 multiplied by a rational `a`; the time cascade started at `1/(8 a d)`) 20,000 each;
+- E954's 49,025.
+Identical chain and landing in every one.
+
+**2. Firing control** [T; `stress_ratio_control_v1.py` (`4ab984c0`) and `.out`]. On Z16, EDGE, EDGEP (20,000 each) and GRID17 (10,000):
+- closed zones disagree in 11,617 (Z16), 4,416 (EDGE) and 3 (GRID17);
+- equal exits to the larger reading disagree in 123 (EDGE);
+- windows `(8k ∓ 2)/c` (twice the width) disagree in all.
+The correct RATIO met a reading's edge exactly at a stop (the stop's own reading not counted) in 13,606 Z16 and 7,623 EDGE arrangements, and an exact exit tie in 425 and 136; none in EDGEP; 9 in GRID17.
+
+**3. The proof** [L; `LonelyRunnerFresh/Fresh/RatioDecisions.lean` (`e1eba224`, new file, uncommitted); `experiments/n8/ratio_decisions_lean_v2.out`]. Readings `r : Fin n → ℝ`, all positive; the cascade on `univ.image r`.
+- `inWay_at_stop_iff`: `InWay (r y) (c/(8 r s)) ↔ ∃ k, (8k − 1)/c < r y / r s < (8k + 1)/c`.
+- `nextOpening_at_stop`: then `nextOpening = (8k + 1)/(8 r y)`, again a stop; `lap_nonneg`: `k ≥ 0`; `inLap_unique`.
+- `exit_le_iff`: `(8k + 1)/(8 r y) ≤ (8j + 1)/(8 r x) ↔ r x / r y ≤ (8j + 1)/(8k + 1)`.
+- `LocalAgree r r' s b`: at the stop `(8b + 1)/(8 r s)`, every reading's lap window reads the same through `r y / r s` and `r' y / r' s`, and for every two readings in the way (laps `k`, `j`) `r x / r y ≤ (8j + 1)/(8k + 1)` iff the same for `r'`.
+- `cascade_locally_determined`: if `LocalAgree r r' s b` holds at every stop `(8b + 1)/(8 r s)` that the cascade of `r` from `1/(8 r s₀)` reaches, then for every move `m` the cascades from `1/(8 r s₀)` and `1/(8 r' s₀)` stand at `(8b + 1)/(8 r s)` and `(8b + 1)/(8 r' s)`, same `s`, same `b`.
+- `inLap_agree_of_bracket`, `not_inLap_of_gap`: the window part of `LocalAgree` holds once each ratio pair lies in the same window or the same closed gap `[(8k + 1)/c, (8k + 7)/c]`: two comparisons per reading. So the hypothesis at a stop is finitely many comparisons with fractions `(8a ∓ 1)/(8b + 1)`.
+- `localAgree_smul`: rescalings satisfy it.
+Each of the 11 `#print axioms` is `[propext, Classical.choice, Quot.sound]`; no `sorry`, `native_decide`, `admit`, `axiom` or `unsafe`. Type-checked with plain `lean` in `check.sh`'s environment, for this file only; `check.sh` itself stopped with `CYCLE M4CertRung2_1_1_3_4_5_5_7` (an uncommitted file of another session, left untouched, rule 16). No existence statement is made or used: the theorem says where the cascade stands after `m` moves, not that it stops.
+- **Correction within this entry.** The first version (`25bc3431`, `ratio_decisions_lean_v1.out`) proved the same conclusion under agreement against EVERY fraction `(8a ∓ 1)/(8b + 1)`. Those fractions are dense, so that hypothesis forces `r'` to be a rescaling of `r` (rules-auditor). It was replaced in place by the local hypothesis; the v1 `.out` is kept.
+
+**4. The cells are not rays** [T, exact; `cell_local_v1.py` (`4c1aa10f`) and `.out`; `cell_local_flip_v2.py` (`63256173`), `cell_local_flip_v3.py` (`a11ad16c`) and `.out`; `cell_local_flip_v1.py` (`95b7b81d`, its prediction failed, superseded by v2)]. Each reading `y ≥ 1` of `r` multiplied independently by `1 ± c·10^-p` (`c ≤ 9`, `4 ≤ p ≤ 14`); d stays 1, so `r'` is never a rescaling (0 counted). On GRID17, GRID100 (10,000 each), BIG30 (5,000), EDGE (20,000), E954 (49,025), excluding 33 where the order of readings changed:
+- `LocalAgree` along `r`'s chain and the same chain: 60,579 (GRID17 9,967; GRID100 9,858; BIG30 4,969; EDGE 15,549; E954 20,236);
+- `LocalAgree` with a different chain: 0 (the theorem forbids it);
+- `LocalAgree` fails, chain different: 28,445; `LocalAgree` fails, chain the same: 4,968.
+The 4,968: every failing comparison is one the move does not depend on. A reading other than the zone taken enters or leaves the way, or changes lap, with its exit below the one taken (4,195 arrangements); two readings in the way, neither the one taken, change order (691); an exact tie with the zone taken in `r` is broken towards it (165); a strict flip with the zone taken (7), where the other reading has left the way in `r'` (7/7, v3). No bracket change of the zone taken, and none at the landing. So `LocalAgree` is sufficient, not necessary.
+
+**5. The 224 edges at the landing** [T, exact; `threshold_ties_v1.py` (`21901eb4`) and `.out`]. No tied reading is an integer (the only integer reading is d in all 224). The tied pairs repeat: in 17 of the 26 E340 arrangements `r_s : r_y = 25 : 41` with the same two values; the other E340 ties are `25 : 57` (8), `25 : 73` (8), `33 : 57` (1), `41 : 73` (1).
+- Source (read): E340, and the seeds from `cell_members7_J1` and `cell_members_J2`, are cell members: the cell's LP point taken exactly, or jittered at `10^-12` to `10^-4` when its path does not match. `feasible` maximises the slack `t` of the STRICT rows only. The cell's clear-at-landing rows `(8J + 1) ρ_y − (8j + 1) ρ_x ≥ 0` and `(8j + 7) ρ_x − (8J + 1) ρ_y ≥ 0` are non-strict (a closed gap, since zones are open), so the LP point may sit on them. The J3 seeds are J3 LP points rounded by `limit_denominator(10^6)` or `(10^9)`. MOV is an E340 crosser with one reading moved.
+- SEED by source: `cell_members7_J1` 35, `J3w10^6` 15, `J3w10^9` 11. The 18 with an entry at the landing are all `cell_members7_J1` (the `(8j + 7)` row; `threshold_relations_v2.out`).
+- MOV (137): the parent crosser is found in all, and the tied pair avoids the moved reading in all 137, so the exact ratio is the parent's. 108 have the parent's landing and ties. Of the other 29: 16 land at another stop than the parent (in 10 the parent's chain passes that stop and lands later; in 6 it does not and lands earlier); 13 land at the parent's stop with a different list of ties (`threshold_relations_v2.py` (`1db70ad9`) and `.out`).
+
+**6. Against controls** [T, exact buckets; `threshold_slack_v1.py` (`fefb0b37`) and `.out`]. `m` = least relative distance from the landing to another reading's zone edge. Arrangements with `m` exactly 0 / below `10^-15` / below `10^-12` / below `10^-9`:
+- E340 (4,939): 26 / 99 / 246 / 263;
+- SEED `cell_members7_J1` (4,813): 35 / 327 / 1,266 / 1,428;
+- SEED `J3w10^6` (716): 15 / 15 / 58 / 67; `J3w10^9` (716): 11 / 67 / 67 / 67;
+- MOV (37,841): 137 / 535 / 1,342 / 1,443;
+- FLOAT17 (10,000 doubles taken exactly, as the LP point is): 0 / 0 / 0 / 0;
+- GRID17 (10,000): 3 / 3 / 3 / 3.
+So within `10^-9` of a landing edge: 263 of 4,939 E340 members and 1,428 of 4,813 `cell_members7_J1` seeds, against none of 10,000 doubles not built by the LP. The other 4,676 E340 members are not within `10^-9`.
+
+**7. E962 item 5's relations shared with the AP** [P for the linear algebra; T 156/156, exact; `threshold_relations_v1.py` (`7d9a8884`, superseded: exact pairwise rows at `λ = 1` in 32 items only) and `threshold_relations_v2.py` (`1db70ad9`) and `.out`].
+- [P] If the rows `c_x r_y − c_y r_x = 0` holding at an arrangement have rank `k ≥ 2`, their span contains a nonzero relation that also vanishes at the AP (`r_i = i + 1`): vanishing there is one linear condition, so it leaves rank `≥ k − 1 ≥ 1`. A relation holding at the AP and at the arrangement holds on the whole straight path.
+- [T 156/156] For each of the 156, the rows near the arrangement (each pairwise ratio on the relation's support within `10^-12` of a fraction of denominator at most `10^4`; steer, for finding only; then taken as exact) have rank 2 (144) or 3 (12), and every permanent relation lies exactly in their span. Of the 501 rows found: 70 of cascade form exact at `λ = 1`, 321 of cascade form within `10^-12` only, 29 of other form exact, 81 of other form within `10^-12` only. Example, path 684: `r_2 / r_3 − 33/41 = 2.9e-17` (steer), while `2 r_2 − 3 r_3 + r_5 = 0` holds exactly, and `2·3 − 3·4 + 6 = 0` at the AP.
+
+**Rule 22.**
+- **The 4,968 perturbed arrangements where `LocalAgree` fails and the chain is unchanged.** (i) A comparison in the hypothesis flips. (ii) Each flipped comparison is one the move does not use (item 4: below the exit taken, between two others, a tie broken towards the zone taken, or a reading that left the way). (iii) The same decision as item 3. **Understood** [T 4,968/4,968].
+- **The 224 edges at the landing.** (i) A reading's zone edge exactly at the landing: an exit (206), an entry (14), both (4). (ii) The construction: cell LP points, which may sit on the non-strict clear-gap rows (E340, `cell_members7_J1`); LP points rounded by `limit_denominator` (J3 seeds); a parent's exact ratio kept by moving another reading (MOV, 137/137). (iii) Item 3's comparison, at equality. **Understood** as to where each comes from [T, items 5 and 6, from source]. Not understood: why the doubles keep some rows exactly and not others (26 of the 99 E340 members within `10^-15` are exact).
+- **The 29 MOV ties with a landing or tie list other than the parent's.** (i) The parent's exact ratio sits at the MOV arrangement's landing, while the parent landed at another stop (16) or had a different tie list (13). (ii) The ratio is the parent's (29/29). Why the moved chain ends at that stop: **not understood** (not read case by case). (iii) Item 3's decision.
+- **E962's 156 relations shared with the AP.** (i) Three or more edges meeting at one point along the path. (ii) The arrangement on or within `10^-12` of rows of rank 2 or 3 (156/156), which by the linear algebra span a relation the AP satisfies. (iii) The same rows as item 5. **Understood** [P and T 156/156]. Not understood: why the relation holds exactly in doubles where its rows do not (path 684).
+- **The 4,676 E340 members not within `10^-9` of a landing edge.** (i) The LP point off every landing row. (ii) Which cells' LP optimum binds a non-strict row: **not understood.**
+
+**Still not understood, in order:** why the doubles keep some rows and combinations exactly (items 5 and 7); which cells' LP points bind a landing row (item 6); why the 29 moved chains end at the parent's tied stop (item 5); E962's items (the 37; the order beyond the 322); E960's items (the 305 double crossings); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. Item 3 proves where the cascade stands after each move from the comparisons it consults; it does not prove that the cascade stops or where, and adds nothing to existence. Items 5 to 7 are about how E954's test sets were built.
+
+**Consequence (M7):**
+- Each decision of the cascade is one reading ratio against one fraction `(8a ∓ 1)/(8b + 1)` [L], and the chain for the first `m` moves is the same for every arrangement that reads the comparisons consulted along it the same way [L]: finitely many comparisons per stop [L]. These sets contain arrangements that are not rescalings (60,579 tested) [T].
+- These sets are proved to carry one chain each. Whether they give G2 a finite catalogue is not shown. That needs the number of distinct consulted sets up to the landing, which is not bounded here.
+- The exact ties and AP-shared relations in E954's test sets come from their construction (maximum-slack LP points, rounded witnesses, one-reading moves), as E341 found for the landing atoms.
+- Map §9: E964 item 1 is now [L], in the local form.
+- Nothing is committed.
+
+
+## E966 (2026-11-26): counting E965's route sets up to the landing. On 200,000 sampled arrangements per range, neither the `LocalAgree` cells nor the chains level off for `d_max > 7`; among short prefixes only some level off (all of 1 to 4 moves at H = 9; 1 move at H = 12 and 17) [T, exact, these samples]. The exhaustive counts are already in the record and are re-derived here: 12,599 / 140,727 / 670,641 distinct chains for `ρ_7 ≤ 9 / 17 / 25` (E348, E357, E368) [VERIFIED — floating-point LP with exact checks]. Every sampled chain is a tree path in each of the three samples (636, 1,110, 3,593; 0 misses). E377 already relates the windows: past the gate the chains are nearly fixed, below it they grow with the cluster scales, and that quotient is still undefined. `LocalAgree` cells are finer than chains
+
+**Owner (2026-11-26):** *"Yes, count them"*, on counting the distinct route sets of E965 up to the landing.
+
+**Map:** E965 items 3 and 4 (the sets `LocalAgree` fixes, one chain each) and its Consequence (whether they give G2 a finite catalogue). Place: the cascade's chain from `R = 1` to the landing, by window `ρ_7 ≤ H`.
+
+**Source test.** `LocalAgree` as `Fresh/RatioDecisions.lean`; chains as `stress_ratio_v1.ratio_chain` (E965 item 1). The tree: `LonelyRunner/experiments/nN/redo/path_tree_par7.py` and `terminals7_J{1,2,3}.pkl` (one row per outcome region, leaf `T` or stop region `S`, with its path). No object is new.
+
+**Record search (rule 13; PARTIAL):** E319 to E322 (the tree; float-LP caveat), E347 and E348 (all outcome regions, J = 1), E357 (J = 2), E368 (J = 3), E369 (outcome catalogue by opener and window), E377 (chains modulo the fast readings, by window), E441 (`landing_lap0_iff`), E448 (quotient reduction and scale hierarchy). Found after the first draft (rules-auditor); the counts in item 4 re-derive E348, E357 and E368.
+
+**1. `d_max ≤ 7`: one chain, no move** [L: `Fresh.LandingExceptions.landing_lap0_iff`, `clear_lap0_iff` (E441): `1/(8 d_min)` is the landing iff `|d − 8j·d_min| ≥ d_min` for every reading `d` and integer `j`]. With d = 1 and every reading in `(1, 7]`, `j = 0` and `j = 1` give `d ≥ 1` and `8 − d ≥ 1`, and other `j` are further away, so the cascade lands at `R = 1` with no move. The sample agrees (H = 7: 1 cell, 1 chain, 200,000 of 200,000).
+
+**2. The sampled count** [T, exact; `cell_count_v1.py` (SHA-256 begins `e730efbe`), `.out`, `.log`]. d = 1, six readings on the `1/10^6` grid in `(1, H]`, 200,000 per H (fixed seeds). A cell is the record `LocalAgree` reads along the chain: at each stop, each reading's lap if in the way (else `out`), and for each ordered pair in the way whether `r_x / r_y ≤ (8j + 1)/(8k + 1)`. Distinct cells / distinct chains after 200,000 (seen once in brackets):
+- H = 9: 1,025 (451) / 636 (235);
+- H = 12: 2,593 (1,312) / 1,110 (476);
+- H = 17: 10,210 (5,797) / 3,593 (1,788);
+- H = 40: 47,382 (36,562) / 13,523 (8,778).
+Both counts still rise at every checkpoint (1k to 200k) for every `H > 7`. Cells per chain: at most 12, 41, 96, 559. Cells outnumber chains because `LocalAgree` asks more than the move uses (E965 item 4).
+- **Rule 21 breach, recorded.** `cell_count_v1.py` was edited in place after a smoke run and before its full run. The first signature kept which gap an out-of-the-way reading lies in (finer than `LocalAgree`, where part (1) is false on both sides for every `k`) and a three-valued pair sign. It is preserved as `cell_count_gapsig_v1.py` (`59aa03a5`), with its smoke output `cell_count_gapsig_v1_smoke.out`: 138 cells for the no-move chain at H = 40 (2,000 arrangements).
+
+**3. Where the sample grows** [T, exact; `cell_count_read_v1.py` (`c7c9117d`) and `.out`]. By number of moves, the chains seen once start at 5 moves (H = 9), 2 (H = 12) and 1 (H = 17); at H = 9, 43 of the 47 chains of 12 or more moves are seen once. Distinct prefixes of `m` moves after 50k / 100k / 200k:
+- H = 9: `m = 1, 2, 3, 4`: 7, 22, 42, 72 at all three checkpoints; `m = 5`: 132, 134, 138; `m = 6`: 220, 232, 242; `m = 7`: 296, 335, 365; `m = 8`: 352, 426, 493;
+- H = 12: `m = 1`: 7, 7, 7; `m = 2`: 32, 33, 33; `m = 3`: 91, 96, 99; `m = 4`: 185, 203, 209; `m = 8`: 582, 777, 1,020;
+- H = 17: `m = 1`: 12, 13, 13; `m = 2`: 70, 71, 72; `m = 3`: 258, 266, 278; `m = 8`: 1,791, 2,543, 3,538.
+So at H = 9 every prefix of up to 4 moves levels off on this sample; at H = 12 and 17 only the 1-move prefixes do (and the 2-move prefixes at H = 12 from 100k).
+
+**4. The exhaustive count, re-derived** [VERIFIED — floating-point LP with slack `1e-9` and exact checks on members (E322 caveat (i), E331); `tree_count_v1.py` (`76e220fb`) and `.out`; `tree_count_J3_v1.py` (`927bde31`) and `.out`]. 0 branches cut at depth 60 in each window (`path_tree_par7_J{1,2,3}.out`).
+
+| window | regions (leaf + stop) | distinct chains | longest chain in the file (moves) | first in |
+|---|---|---|---|---|
+| `ρ_7 ≤ 9` | 19,679 (9,652 + 10,027) | 12,599 | 29 | E348 |
+| `ρ_7 ≤ 17` | 293,333 (117,084 + 176,249) | 140,727 | 29 | E357 |
+| `ρ_7 ≤ 25` | 1,878,060 (747,586 + 1,130,474) | 670,641 | 34 | E368 |
+
+Chains by number of moves (`ρ_7 ≤ 9`): 1, 6, 15, 20, 30 for 0 to 4 moves, the same as the H = 9 sample's (item 3); the most common length is 22 moves (1,006 chains). Window to window: `140,727/12,599` (about 11.2, steer) and `670,641/140,727` (about 4.8, steer).
+
+**5. The sample against the tree** [T, exact on the sample side; `tree_count_v1.out`]. H = 9 against `ρ_7 ≤ 9`: 636 of 636 sampled chains are tree paths. H = 12 against `ρ_7 ≤ 17`: 1,110 of 1,110. H = 17 against `ρ_7 ≤ 17`: 3,593 of 3,593. 0 misses in each. The H = 9 sample reaches 636 of 12,599 chains; the H = 17 sample 3,593 of 140,727.
+
+**6. What the record already has on the windows** (E369, E377; read, not re-run). Past d_min's gate (landing above 7) the chains are 4,332 / 4,395 / 4,402 for J = 1 / 2 / 3, and with the four fastest readings dropped they are 28 chains of the slow pair at every J (E377). Below the gate they grow at every level of dropping (with the top four dropped: 25 / 81 / 219), and E377 traces that growth to the arrangement's own larger scales (clusters of readings large relative to the slower ones). E377: "The quotient by each cluster's own scale was not defined here." E448's quotient reduction (`QuotientReduction.lean`) and scale hierarchy (`ScaleHierarchy.lean`) are the nearest later work on scale.
+
+**Rule 22.** No exception arose: 0 sampled chains outside the tree in each sample; H = 7 is item 1. The tree's own caveat (thin cells under the LP slack) is unchanged; the sample reaches about 5 per cent of the chains of `ρ_7 ≤ 9` (636 of 12,599) and does not test it further.
+
+**Still not understood, in order:** E965's list (the doubles keeping rows exactly; which cells' LP points bind; the 29 moved chains); E962's items; E960's items; E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. The tree's finiteness per window (no branch cut at depth 60, float LP) is about the cascade on each of those three windows; it is not used to argue existence, and nothing here makes existence open.
+
+**Consequence (M7):**
+- On the three windows run, `ρ_7 ≤ 9, 17, 25`, the cascade's chains are finitely many: 12,599, 140,727, 670,641 [VERIFIED — float LP; E348, E357, E368]. A uniform sample of 200,000 does not show this: its count still rises, because the long chains are rare in it.
+- The counts rise with the window. E377 already splits that growth: past the gate it nearly stops (28 slow-pair chains with the fast readings dropped, at every J); below the gate it continues, from the clusters' own scales.
+- Next, by rule 22: the not-understood items first, in the order listed (E965's: the doubles keeping rows exactly; which cells' LP points bind a landing row; the 29 moved chains). After them, for G2: E377's undefined quotient, the below-gate chains read modulo each cluster's own scale, tested on `terminals7_J{1,2,3}` for whether the count stops growing from J = 1 to J = 3.
+- `LocalAgree` cells are finer than chains (up to 559 per chain at H = 40); the chain is the unit the tree counts and the unit E377 quotients.
+- Nothing is committed.
+
+## E967 (2026-11-26): owner asks to step back on G2. Reading recorded: the chain count's growth with the window sits below the gate (E377), from the fast readings' laps (E369) and the cluster scales (E377); proposed object for G2 is the move type read through the grid quotient, to be tested on the complete trees after the rule 22 items. No run
+
+**Owner (2026-11-26):** *"Lets think about what we are trying to do and how"*, after E966.
+
+**Map:** G2 as stated in `RULES_n8_v5.md`: catalogue by how the cascade finds the isolation, a finite set; d_min and d_max for the continuous values; scale by the AP/grid (M060, M075). Also the owner's 2026-11-26 framing: an arrangement is a displacement of the AP's isolation, and the cascade shows where it is forced to. Place: the cascade's chain from `R = 1` to the landing, move by move.
+
+**Record read for this entry (rule 13):**
+- E332 (`link_types_v1.out`: 16 types at J = 1, 22 at J = 2; "(direction, lap change) is not a finite local type"; computed on the leaf-only `terminals5_J2.pkl`, corrected by E347);
+- E377 (B chains 4,332 / 4,395 / 4,402, constant at 28 for m = 4; A growing with cluster scales; "The quotient by each cluster's own scale was not defined here");
+- E378 (scale reduction named as the step carrying the infinite part);
+- E441 (`landing_lap0_iff`);
+- E448 (`QuotientReduction.lean`: `lonelyR_agree_int`; landings differ off the integers; `landing_family`);
+- E960 and E962 (Still-not-understood lists; owner's ruling at log line 21707);
+- E964 to E966.
+
+**Reading (no new computation):**
+1. **What is in hand:**
+   - no move unless some reading is within d_min of a multiple of `8·d_min` (E441) [L];
+   - each decision is one ratio against `(8a ∓ 1)/(8b + 1)`, and the chain is fixed by those comparisons (`Fresh/RatioDecisions.lean`, E965) [L; T 286,985 and 60,579 non-rescaled];
+   - the L6 sign pattern of the lap change [L];
+   - `lonelyR_agree_int` (E448) [L].
+2. **Where the growth sits.**
+   - The lap of the next setter `y` at stop `R = (8b + 1)/r_s` is the unique integer `j` with `|R·r_y − 8j| < 1`, the nearest integer to `R·r_y/8`, so `j ≈ b·r_y/r_s` [P]. This is the growth E332 found in the magnitude of the lap change.
+   - Past the gate the laps do not force growth: the B chains, with laps, are 4,332 / 4,395 / 4,402 for J = 1 / 2 / 3 (E377), with the opener's lap confined per rank to a short range (E369). The growth (E966: 12,599 / 140,727 / 670,641) is in A. E369 traces it to the fast readings' laps ("a fast reading supplies a new landing at each lap"), and E377 to the cluster scales as well ("not only reading 7's laps").
+3. **Proposed object.**
+   - The move type with the lap read through the grid quotient: E448's `idx` (rounded ratio), `ridx = (idx − 1) mod 8 + 1` and the sign of `e`, for each ratio. Plus the start (the first threshold crossed from the AP) and the end (the stop no zone holds).
+   - Proposed test, to follow the rule 22 items and not run here: on the complete trees `terminals7_J{1,2,3}`, (a) whether the set of move types stops growing from J = 1 to J = 3; (b) whether the type with the current position fixes the next move. If (a) fails, the growth names the part of scale the quotient leaves in.
+   - E332's count is to be redone on the complete trees in the same run.
+4. **Rule 22 order.** It is unchanged, and the item 3 test comes after it.
+   - E965's three come first. Two concern the construction of the test sets: the doubles keeping rows exactly, and which LP points bind a landing row. The third, the 29 moved chains, is a cascade decision not read case by case.
+   - E962's items (the 37; the other out-of-order paths) fall under the owner's E960 ruling (read first as the description's, not the cascade's).
+   - E960's other items do not: the 305 double crossings, and the 26 ties and 18 births at `λ = 1`. The ties and births are exact touchings of the kind E965 traced to construction, but these ones are not checked.
+
+**Process (rule 13):** E966 re-derived E348, E357 and E368 before reading them; E377's split was found after the first draft. The first draft of this entry stated the growth as forced by laps, and the second as not from laps; E377's B counts and E369's A reading correct both (rules-auditor).
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. Nothing here makes existence open; the proposed test is about the description of the displacement, not whether it ends.
+
+**Consequence (M7):**
+- For G2, the unit to catalogue is the move with scale removed. The chain count's growth is located below the gate, from the fast readings' laps and the cluster scales (E369, E377); both are scale.
+- Next: E965's three items, then E962's and E960's, then the item 3 test. Nothing run, nothing committed.
+
+## E968 (2026-11-26): E965's three not-understood items read. (1) Of the 80 landing edges within `1e-12` whose row value from the stored setter is a double, 79 are exact (an exact edge needs one); 63 of the 79 share one setter value, `float(23/9)`, whose odd mantissa is divisible by 25; the permanent relations shared with the AP vanish at the stored point by construction and exist because every item's conditions meet at one point of the path (156/156) [P, T exact]. (2) The landing rows never limit the LP's slack (0 of 4,939), and at the 1,414 reproduced LP points a landing row is tight only where the strict rows leave the point free (rank below 7; 0 of the 200 at rank 7) [T, float LP, steer]; which cells' optimal faces reach a landing row is not read. (3) The 29 moved chains: the parent's exact three-way exit tie at its last decision (19), or the moved reading the only one in the way at a stop the parent passes (10) [T 29/29, exact]. Correction to E965 item 5: the 6 "lands earlier" land at the same instant. Remaining: item 2's forcing, one 1-ulp seed, the 3,525 E340 members the rebuilt cell does not reproduce, and two mid-path items' rounding
+
+**Owner (2026-11-26):** *"Yes, start there"*, on E967's order: E965's three not-understood items first, then the move-type test.
+
+**Map:** E965's Still-not-understood list, items 1 to 3, in order. Place: the construction of E954's test sets (cell LP points, `limit_denominator` seeds, MOV) and the cascade's last decision at the stored points.
+
+**Source test.** Cells and LP as `LonelyRunner/experiments/nN/redo/symbolic_cells_v1.py` (`feasible`: maximise the slack `t` of the strict rows only; clear rows `W_j` non-strict, blocker rows strict, setter-order rows strict or not by index); members as `cell_members_v1.py`, `cell_members7_v1.py` (the float LP point taken exactly at jitter 0). Chains as `stress_ratio_v1.ratio_chain`. Edges as `threshold_slack_v1.mslack` and `threshold_ties_v1`. Relations as `threshold_relations_v2.perm_relations`. No object is new.
+
+**Record search (rule 13):** E340, E341, E347, E954, E962, E965 (items 5 to 7 and the Rule 22 block).
+
+**1. Why the stored doubles keep some rows exactly.**
+- **Pairwise landing edges** [T, exact; `threshold_exact_v2.py` (`3c06c36b`) to `threshold_exact_v6.py` (`c5c577ce`), each with `.out`; `threshold_exact_v1.py` (`843753d7`) superseded, its "predicted" column is a tautology]. Edges within `1e-12` (steer, for finding only) of the landing in E340 (4,939) and the `cell_members7_J1` seeds (4,813): 79 exact, 1,784 not.
+  - Of the 80 edges whose row value (`e·r_s/c_s` or `c_s·r_y/e`) is a double, 79 are exact. The other 1,783 have a row value that is not a double, so none of them can be exact.
+  - A row value is a double only if `g = c_s/gcd(c_s, e)` divides the odd mantissa `m_s` of `r_s` and the product fits in 53 bits. Over distinct `(r_s, c_s, e)`, `g | m_s` holds in 9 of 210 (E340) and 54 of 1,406 (seeds), against 4.8 and 38.4 expected if `m_s` were uniform mod `g` (steer). All 42 that divide but are not doubles overflow 53 bits (42/42).
+  - 63 of the 79 exact edges (33 of 35 E340, 30 of 44 seeds) have `r_s = float(23/9)`. Its odd mantissa `1438649880965575` is divisible by 25, so `e·r_s/25` is a double for each `e` listed (41, 55, 57, 71, 73), and the stored `r_y` equals it. One value, repeated across the cells whose LP point has `r_1 = 23/9`.
+  - Near edges miss by more than one ulp in 1,397 of 1,784 (`threshold_exact_v2.out`, block A). That is the LP's float error, not rounding of the row value.
+- **The one exception** (`threshold_exact_v6.out`): seed cell 13432 (`cell_members7_J1`). (i) `r_1 = float(23/9)` and `71·r_1/25` is a double, but the stored `r_6` is one ulp below it. Six neighbouring cells with the same `r_1` have the edge exact. (ii) The stored seed is the tree's LP witness, unjittered (7/7 cells checked). In this cell `r_5` is also on a row from `r_1` (`57/25`, exact), and its last move is reading 6's lap 7. None of six simple float expressions reproduces the stored `r_6`; HiGHS's operation sequence was not read. (iii) The same construction as the rest. **Not understood** as to (ii).
+- **E962's 156 relations shared with the AP** [P; T 156/156, exact; `threshold_relations_v3.py` (`e251b31a`), `_v4` (`8c7507b3`), `_v5` (`6846fe9a`), `threshold_relations_baseline_v1.py` (`4e0060b8`), each with `.out`].
+  - By its definition (`perm_relations`), a permanent relation is `nᵀM` with `n` in the null space of `V`, whose two rows are the conditions' values at the AP and at the stored point, both exact. So it vanishes at the stored point by construction; path 684's exactness is not a property of the doubles.
+  - [P] If every condition holds at one point `(1 − λ*)·AP + λ*·r`, then `l(r) = −((1 − λ*)/λ*)·l(AP)` for each, so `V` has rank at most 1 and a relation exists for 2 or more conditions. One common ratio for all conditions: 156/156; rank `V` = 1 in all.
+  - Where they meet: `|1 − λ*| < 1e-15` in 120 (λ* below 1 in all; the rows bind at the stored point in exact arithmetic and are missed in doubles, as above); `|1 − λ*| ≥ 1/10` in 36. Of the 36:
+    - 25 have an implied condition: a ratio triangle on three readings, where two conditions force the third at the same point.
+    - 6 are J3 seeds, rationals rounded by `limit_denominator` from a float LP witness (`LonelyRunner/experiments/nN/redo/stress_seeds_v1.py` line 21), not doubles (`threshold_exact_v6.out`). The readings in each relation are small rationals (`31/9`, `341/69`; `355/99`, `14555/3267`, `6745/1089`; `threshold_relations_v5.out`), and the relation holds on them exactly. The witnesses are located (`threshold_relations_v6.py` (`5b770584`) and `.out`; `terminals5_J3.pkl`, `w = it[-1]`; 6 of 6). Each float witness reading in a relation's support lies within 0.51 ulp of the stored rational (0.25 to 0.51). The relation fails on the floats (by `5.3e-15` and `−8.9e-15`, steer) and holds exactly on the rationals. So the float LP point sits at these small rationals up to float error, and `limit_denominator` returns them.
+    - 3 are E340 path 2584 and two MOV copies of it: doubles, each the correctly rounded `n/567`, keeping the 4-term relation `−13 r_1 + 36 r_2 − 28 r_3 + 5 r_5 = 0` exactly. Baseline: 284 of 16,855 random `n` with the same denominator and binades do so (about 1 in 60, steer). These items were selected for meeting at one point.
+    - 2 are seeds 8192 and 8268 (doubles, `cell_members7_J1`), keeping `−47 r_1 + 99 r_2 − 77 r_3 + 15 r_6 = 0` exactly. The same kind as 2584; their baseline was not run.
+
+**2. Which LP points bind a landing row** [T, float LP (steer), with exact statuses and exact near/far split; `lp_landing_bind_v1.py` (`a7fea152`) to `_v4` (`104a5e0f`), each with `.out`; `_v2` to `_v4` import `_v1`, which reruns and rewrites its own `.out` with the same counts].
+- Each E340 member's cell was rebuilt from its own exact statuses (window 9 if `ρ_7 ≤ 9`, else 17).
+- **Prediction failed** (v1): that the landing rows cut the optimum, i.e. `t*` rises without them. In 0 of 4,939 do they cut it, near (263) and far (4,676) alike.
+- The re-solved LP reproduces the member (within `1e-12`) in 1,414 (59 near, 1,355 far). In these (v2):
+  - where the strict rows tight at `t*` have rank 7, the point is fixed by them, and no non-strict row is tight (200, all far);
+  - where the rank is 2 to 6, other rows fix the point: earlier non-strict rows in all 1,214, a landing row in 59 (all near).
+- v4: minimising each landing row over the optimal face (`t ≥ t*(1 − 1e-9)`), a landing row touches the face in 61 (59 near, 2 far). That it touches for every near point holds by definition: a tight row at an optimal point meets the face. The content is the 2 far faces, which have vertices on and off a landing row, where HiGHS returned one off it.
+- So, at the reproduced points: a landing row is tight only when the strict rows leave the point free, and only when the optimal face reaches that row. What makes a cell's optimal face reach a landing row (E965's question) is **not understood**.
+- The 3,525 not reproduced (v3): 1,445 are other optimal points of the rebuilt LP; 2,080 lie below its `t*`, so the original cell (`terminals5`, before E347) had other rows. **Not understood:** the original cells were not rebuilt.
+
+**3. The 29 moved chains** [T 29/29, exact; `mov29_v1.py` (`5b4ddfd3`), `mov29_v2.py` (`229067e5`), each with `.out`].
+- **(i)** In the 19 below, the parent's last decision is an exact three-way exit tie, readings 1 and two of 3, 5, 6 (`25/r_1 = 41/r_3 = 57/r_5 = 73/r_6`, the `float(23/9)` family of item 1). The cascade lands at the common exit, ties going to the smaller reading, 1.
+- **(ii)** By the moved reading:
+  - **a tied reading other than 1 (13)**: it leaves the tie, so the landing is the same and the tie list loses it (13/13);
+  - **reading 1, the tie's winner (6)**: the other two keep their common exit, and the tie goes to the next smaller of them, so the landing is the same instant under another label (6/6);
+  - **reading 6, not in the tie (10)**: the parent's chain passes the stop `(1, 25)`, where reading 6 is the only one in the way (10/10); moved, it no longer is, and MOV lands there. The exact tie there is the parent's exit tie between 1 and 3, met at an earlier decision.
+- **(iii)** The cascade's own decision (largest exit; equal exits to the smaller reading) on ratios inherited from the parent.
+- **Correction to E965 item 5:** "in 6 it does not and lands earlier" is wrong. In those 6 the landing instant is the parent's (`mov29_v2.out`: same instant 6/6); the label changes because the moved reading was the tie's winner. E965's test compared instants with `>` and read "not later" as "earlier".
+
+**Rule 22.**
+- **Understood:**
+  - item 1's exact pairwise edges, 79/79 (representability, mostly the `float(23/9)` value);
+  - the 156 AP-shared relations (by construction, one meeting point), except as below;
+  - the 29 moved chains, 29/29.
+- **Not understood:**
+  - item 2, as to (ii): what makes a cell's max-slack optimal face reach a landing row (the 2 far touching faces are understood as HiGHS's vertex choice);
+  - seed cell 13432's one-ulp `r_6`, as to (ii);
+  - the 3,525 E340 members their rebuilt cell does not reproduce (original cells not rebuilt);
+  - seeds 8192/8268 keeping their 4-term relation, as to (ii) (baseline not run);
+  - item 1's divisibility counts are above the uniform expectation (9 against 4.8; 54 against 38.4, steer); no test was made of whether that excess is more than chance.
+
+**Still not understood, in order:** the items just listed; E962's items (the 37; the other out-of-order paths); E960's items (the 305 double crossings; the 26 ties and 18 births at `λ = 1`); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. Items 1 and 2 are about how E954's test sets were built; item 3 reads the cascade's decision at those sets' points. Nothing here bears on existence.
+
+**Consequence (M7):**
+- The exact ties in E954's test sets come mostly from one LP coordinate, `float(23/9)`, whose mantissa is divisible by 25. That one value gives exact three-way exit ties, and those ties are E965's 29 moved chains.
+- The landing rows never limit the LP's slack (0 of 4,939). At the reproduced points a landing row is tight only where the strict rows leave the point free; which cells' optimal faces reach a landing row is open.
+- The AP-shared relations are a property of how they were computed (a null space over exact values) together with the conditions meeting at one point, not of the arrangements.
+- Next: the items above, then E962's and E960's, then E967's move-type test. Nothing is committed.
+
+## E969 (2026-11-26): E968's five not-understood items read. A landing row at an E340 point is the same linear form as the last decision's order row for the same reading [P]; within `1e-12` they are tight together at all 239 points with either (261 rows, 35 of them exactly 0) [T], so item 2's landing rows are last-decision exit ties. The divisibility excess is the `float(23/9)` value plus divisibility carried by exact products; the rest matches the uniform expectation [T, exact counts; tails steer]. The relations at 8192, 8268 and 2584 hold on a ray of four readings with equal zone edges and survive rounding at about 4.5 and 24 per cent [T, steer]. Remaining: which decisions' tie rows the optimal face reaches; cell 13432's one ulp; 24 near points with no tight landing row; why the rebuild misses 3,525 members
+
+**Owner (2026-11-26):** *"Yes, continue"*, on E968's remaining items.
+
+**Map:** E968's Still-not-understood list, in order. Place: the construction of E954's test sets (cell LP points), and the cascade's decisions at those points.
+
+**Source test.** As E968: cells from statuses (`lp_landing_bind_v1.statuses`), the max-slack LP (`lp_landing_bind_v1.lp`), edges (`threshold_slack_v1.mslack`), exact Fractions throughout except where marked. `lp_landing_bind_v5` to `_v8` and `ray_check_v1` import `_v1`, which reruns and rewrites its `.out` with the same counts. "Tight" means `|value| ≤ 1e-12·norm` (exact value, tolerance steer) unless "exactly 0" is said.
+
+**Record search (rule 13):** E965 items 5 to 7, E968.
+
+**1. Item 2: which LP points sit on a landing row.**
+- **Read at the stored point, all 4,939** [T; `lp_landing_bind_v5.py` (`b7878fd9`) and `.out`], without rebuilding the original cell:
+  - strict rows at the point's own slack of rank 7: 390, all far, with no non-strict row tight in any;
+  - the 263 near points all have rank below 7; 239 have a landing row tight;
+  - so v2's pattern holds at all 4,939: a landing row is tight only where the strict rows leave the point free.
+- **A share null, failed** [T, counts exact, comparison steer; `lp_landing_bind_v6.py` (`b6bb0976`) and `.out`]. In proportion to each state's rows, the tight landing rows would be 491.9; they are 261 (chains of 11 to 20 moves: 58 against 21.9; over 20: 203 against 470.0).
+- **Where the tight rows sit** [T; `lp_landing_bind_v7.py` (`51aad392`) and `.out`], counted from the end of the chain:
+  - landing: clear 261;
+  - last decision: clear 509, order 261;
+  - two from the end: clear 1,631, order 503;
+  - three from the end: clear 961, order 282;
+  - further back: order 108, 108 and 434 (six or more).
+- **[P] Same form, both ways.**
+  - At the landing `(s, c_s)`, the exit-type landing row of reading `y` is `c_s r_y − (8j + 1) r_s ≥ 0`. If `y` was in the way at the last decision on lap `j`, the order row there between `y` and the setter taken is the same form up to a positive multiple, so the two have the same value.
+  - Conversely, an order row at the last decision compares the setter taken with a reading `z` in the way. Equality puts `z`'s exit at the landing, at the left end of its clear gap, which is `z`'s landing row in the same form.
+  - The identity needs `y` in the way at the last decision. That is the tested part.
+- **Tested** [T; `lp_landing_bind_v8.py` (`e45a3da4`) and `.out`]. At every E340 point with a tight landing row or a tight last-decision order row, the two sets coincide: one row at 219 points, two at 18, three at 2. No entry-type landing row is tight.
+- **Exactness** [T, exact; `ray_check_v1.py` (`fc2cb9ab`) and `.out`]. Of the 261 tight exit-type landing rows, 35 are exactly 0 and 226 are within `1e-12` but not 0. Exactness of an edge needs its row value to be a double (E968 item 1); these 35 were not matched to E968's 35 exact E340 edges row by row, and the two counts were built differently (E968: 270 edges within `1e-12`; here 261 exit-type rows at `1e-12·norm`).
+- **So.** Item 2's landing rows are the last decision's exit ties, within `1e-12`. The LP sits on exit-tie order rows at every depth of the chain (the counts above), and the 29 moved chains (E968 item 3) are this tie, inherited.
+- **Not understood:**
+  - **Which decisions' tie rows the optimal face reaches.** The counts are by depth, not by cause.
+  - **The 24 near points with no landing row tight.** (i) Within `1e-9` of a landing edge but not within `1e-12` (`lp_landing_bind_v5.out`). (ii) 22 of them have no non-strict row tight at all, as a jittered point would; 2 have earlier rows tight. Not checked against `cell_members_v1`'s jitter. (iii) Unknown.
+  - **Why the rebuilt LP misses 3,525 members** (E968: 2,080 lie below the rebuilt `t*`, so their original cells had other rows). They follow item 2's pattern at the stored point, but the rebuild's miss itself is not read.
+
+**2. The divisibility excess** [T, exact counts; Poisson tails steer; `threshold_divis_v1.py` (`76725ab3`), `threshold_divis_v2.py` (`2677da28`), each with `.out`].
+- With the `float(23/9)` triples removed: E340 6 against 4.7 (tail 0.34), seeds 49 against 38.0 (tail 0.049).
+- In 2 of the 6 E340 cases and 11 of the 49 seed cases, `r_s` is an exact product `(p/q)·r_t` of another stored reading with `g | p`.
+- With both sources removed: E340 4 against 4.6 (tail 0.68), seeds 38 against 37.1 (tail 0.46).
+- (i) More divisible mantissas than uniform. (ii) One value, `float(23/9)`, and products carrying the factor. (iii) The same representability as E968 item 1. **Understood.**
+
+**3. The relations at 8192, 8268 and 2584** [T, exact on the stored points; magnitudes and rates steer; `ray_check_v1.py` (`fc2cb9ab`), `threshold_relations_baseline_v2.py` (`0b10fce8`), each with `.out`].
+- Readings 1, 2, 3, 6 of 8192 and of 8268 (equal on these four readings; the arrangements differ elsewhere) are close to the ray `u·(25, 33, 41, 71)`: all six pairwise ratios differ from the ray's fractions by at most `2.9e-16` (steer). Readings 1, 2, 3, 5 of 2584 are close to `u·(25, 33, 41, 57)`, within `7.9e-17` (steer).
+- `25, 33, 41, 57` are exits (`8k + 1`); `71` is an entry (`8·9 − 1`). Each kept relation vanishes on its ray (`−47·25 + 99·33 − 77·41 + 15·71 = 0`, `−13·25 + 36·33 − 28·41 + 5·57 = 0`) and holds exactly at the stored point.
+- Baseline: with `u` within 1 per cent of the stored value and the readings the correctly rounded `c_i·u`, the relation stays exact in 4,519 of 100,000 (8192), 4,493 of 100,000 (8268) and 23,891 of 100,000 (2584).
+- This supersedes `threshold_relations_baseline_v1`'s model for 2584 (independent `n/567`, 284 of 16,855); the ray is the structure the stored point has.
+- (i) A relation exact in doubles off its rows. (ii) Four readings on one ray of equal zone edges, the relation surviving rounding at about 1 in 22 (8192, 8268) and 1 in 4 (2584) (steer); the items were selected for meeting at one point. (iii) The same as the other AP-shared relations. **Understood.**
+- These rays are not the `float(23/9)` family: `r_1 ≈ 2.699` and `2.690` (steer).
+
+**4. Cell 13432's one-ulp `r_6`** [T; `cell13432_v1.py` (`58b44edb`), `cell13432_v2.py` (`eb3aa3ad`), each with `.out`].
+- Re-solving the rebuilt LP reproduces only 1 of the 7 witnesses (v1), so the rows were read at the stored points (v2).
+- In all 7, the tight non-strict rows fix `r_1 = 23/9` and `r_6 = 1633/225` exactly. The row through `r_6` is:
+  - `71 r_1 = 25 r_6`, in 3 cells;
+  - `71 r_3 = 41 r_6` with `r_3 = 943/225`, in 3 cells;
+  - `71 r_5 = 57 r_6` with `r_5 = 437/75`, in 13432.
+- The `r_3` and `r_5` routes are both two row steps from `r_1`, so the route does not set 13432 apart. Its stored `r_6` is one ulp off; the `r_3` cells' are exact.
+- (i) The LP's float `r_6` is one ulp off a row whose value is a double. (ii) **Not understood.** HiGHS's operation sequence is not reproduced (E968's six expressions; the rebuilt LP does not return this witness). (iii) The same construction.
+
+**Rule 22.**
+- **Understood:**
+  - landing-row tightness, which is the last decision's exit tie within `1e-12` (239/239, both ways);
+  - the divisibility excess;
+  - the relations at 8192, 8268 and 2584.
+- **Not understood:**
+  - which decisions' tie rows the optimal face reaches;
+  - the 24 near points with no landing row tight;
+  - why the rebuilt LP misses 3,525 members;
+  - cell 13432's one ulp.
+
+**Still not understood, in order:** the four items just listed; E962's items (the 37; the other out-of-order paths); E960's items (the 305 double crossings; the 26 ties and 18 births at `λ = 1`); E956's and E959's items.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. These items are about how E954's test sets were built and the cascade's tie rule at their points; nothing here bears on existence.
+
+**Consequence (M7):**
+- The edges at the landing of E340 points are the last decision's exit ties (within `1e-12`), and E968's 29 moved chains inherit such ties. Exactness, where it holds, needs E968 item 1's representability.
+- The AP-shared relations come from conditions meeting at one point (E968), including rays of four readings with equal zone edges.
+- The four items left are about the LP solver and the test-set construction (which tie rows its optimum reaches; jitter; the rebuild; one bit-level result), not about the cascade's decisions.
+- Next: the four items left, then E962's and E960's, then E967's move-type test. Nothing is committed.
+
+## E970 (2026-11-26): owner asks whether the work moves towards G2 or a proxy. Answer recorded: E965 items 5 to 7, E968 items 1 and 2 and E969 studied the test-set construction (HiGHS's max-slack points, double rounding), a proxy; E968 item 3 read the cascade's chain changes, of the two kinds E962 item 1 already proved. Correction: the label for equal exits (the smaller reading) is a tested convention of the ratio chain, not the cascade's decision. The full open list sorted by object: tool, description, arrangement. No run
+
+**Owner (2026-11-26):** *"OK keep going, but are we moving towards our real goal or some proxy?"*, after E969.
+
+**Map:** G2 (`RULES_n8_v5.md`: catalogue by how the cascade finds the isolation, finite set; d_min and d_max for the continuous values; scale by the AP/grid). Rule 8 (proxy against cascade before every new test). Place: E964 to E969 and the open lists of E955 to E969.
+
+**Proxy check (rule 8), made after E968 and E969 rather than before.** Objects tracked:
+- **E964, E965 items 1 to 4:** the cascade's decisions in ratio form and local determination [L]. Cascade.
+- **E966:** chain counts per window against the tree. Cascade, counted as words; E967 found the counts grow with scale.
+- **E965 items 5 to 7, E968 items 1 and 2, E969:** the construction of E954's test sets: HiGHS's max-slack points (`symbolic_cells_v1.feasible`), double rounding, `limit_denominator`, jitter. Tool. E969 item 1's 239/239 is about where the LP point sits; it does not test the cascade's decisions.
+- **E968 item 3:** the cascade's chain at the 29 moved arrangements. Cascade, of the two kinds E962 item 1 [P] gives (an edge meeting the stop `R_p`; an exit meeting `R_{p+1}`):
+  - 10 by an edge: reading 6 left the way at `(1, 25)`;
+  - 19 at exit ties, where the landing instant is unchanged (13 the same stop, 6 the same instant under another label).
+  - Away from the landing, the record's counts of the two kinds: E962 item 3 has 140,860 entries meeting `R_p` against 13,700 exits meeting `R_{p+1}`; E963 item 5 has 83,848 joins and 56,975 leaves against 13,700 crosses. Nothing in E968 or E969 adds to E962 item 1 for G2.
+
+**Correction (rule 18).** E968 item 3 (i) and (iii) wrote the smaller-reading label as the cascade's: "ties going to the smaller reading", "The cascade's own decision (largest exit; equal exits to the smaller reading)"; E968's reply and E969's existence line called it the cascade's tie rule. That is wrong in one part.
+- `Fresh/Cascade.lean`'s `step` takes the largest next opening, an instant. Equal exits give the same stop in time whatever the label, so the cascade's decision has no tie rule.
+- The smaller-reading label is `stress_ratio_v1.ratio_chain`'s convention, tested against the time cascade (E965 item 1: 286,985 agree; item 2: the larger-reading variant disagrees in 123 EDGE arrangements, in the chain's labels).
+- E968 item 3's 6 "same instant, other label" cases are this convention. Its 13 and 10 stand.
+
+**The open list, sorted by object** (rule 8; every item in the lists of E955 to E969 that no later entry marks understood):
+- **Tool (test-set construction).**
+  - E969's four items: which decisions' tie rows the optimal face reaches; the 24 near points (jitter not checked); the 3,525 members the rebuild misses; cell 13432's one ulp.
+  - E960's 26 ties and 18 births at `λ = 1`, exact touchings at the stored arrangements. E964 item 3 and E965 item 5 traced the 18 entry edges to the LP's non-strict rows; the 26 ties were not matched individually.
+  - E956's 18 seeds and 111 single-point gaps at `t = 1` (the same touchings), carried in E957's list.
+- **Description (paths and constructions of ours).**
+  - Paths from the AP (E960, E962): the 305 double crossings; the two v1 pieces too short for the grid; the setters not among the cascade's zones (23,388, of which 14,441 are hand-overs, E961); E962's 37 and what the chain changes away from the landing do to the order, including the other out-of-order paths. The owner's E960 ruling covers the out-of-order paths.
+  - E805's rotation `c(t)` (E955; E956: `c(t)` for `0 < t < 1` is no arrangement's state): why its blocking chains stop before `t = 1/4` and none forms near `t = 1`; the 2,506 take-overs; the 339 other covered parts; the 12 at `−1/2`. E955's relays with numerators, carried in E956's list.
+  - The first stretch's chain carried into the second (E957 to E959; recast by E960 item 0 as descriptions of the 49,025 cases):
+    - E957: which carried zones bound each second-stretch gap; the gaps with a bound outside the carried chain; at least 6 openings; the two-gap neighbourhoods.
+    - E958: at least 6 up seams; which carried zones become adjacent with a gap between them, and why most such pairs are down in `D`; the carried-chain gaps that zones outside the chain cover.
+    - E959: the fewest up steps for each seam count; at least 15 seams; reading 2's shift at the extremes; the 43,848 zones still between.
+- **Arrangement (closest to the cascade).** E956's at least two open gaps in `[9, 15]` in every case whose first stretch is blocked. A property of the arrangements, observed only on E954's populations (E340 crossers, seeds, moves of the crossers).
+
+**Proposed to the owner:** rule, for each of the three groups, whether it still holds the work under rule 22 or is recorded as such.
+- If all three are recorded, next is E967's move-type test on `terminals7_J{1,2,3}`. Its caveat is the float-LP one (E322, E331); the chains inside the trees are checked exactly.
+- If the arrangement item stands, it is read before the move-type test.
+
+Rule 22's order stands until the owner rules.
+
+**Process (rule 8):** the check was not made before E968's and E969's runs. Rule 22 was applied to exceptions of the test sets without first asking whether they were exceptions of the cascade.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. Nothing here bears on existence.
+
+**Consequence (M7):**
+- E965 items 5 to 7, E968 items 1 and 2 and E969 tracked the test-set construction. E968 item 3 is the cascade's chain change, of the kinds E962 item 1 already has.
+- The equal-exit label is a tested convention of the ratio chain; the cascade's decision is by instant.
+- Next: the owner's ruling on the three groups, then the arrangement item or E967's move-type test as ruled. Nothing run, nothing committed.
+
+## E971 (2026-11-27): E956's arrangement item (at least two open gaps in `[9, 15]` whenever `[1, 7]` is blocked), read first on the owner's ruling. Exact single-reading walks from all 49,025 cases reach two gaps 181 times and never fewer. An LP that keeps the covering chains and asks for one gap to close, with up to two bridging zones, takes 53 three-gap cases to two and closes no gap of any of 219 two-gap arrangements, 188 of them new. What forces the second gap: not understood. The second gap is not on the cascade's path [T, exact for every arrangement reported; the LP's "no" is float, steer; PARTIAL: E954's populations and moves of at most `0.26` (steer) from them]
+
+**Owner (2026-11-27):** *"Arrangement item first"*, on E970's ask. Read as: the arrangement item stands under rule 22 and is read first. The tool and description groups were not ruled on and stay on the open list.
+
+**Map:** E970's arrangement group: E956 item 3 and its rule 22 line (feature known; forcing and mechanism not understood). Place: the clear set of the second stretch `[9, 15]` at arrangements whose first stretch `[1, 7]` has no clear point.
+
+**Place test (rule 8).**
+- The cascade lands at the left end of the first open gap of `[9, 15]` (E956 item 3: 49,007 of 49,025; the other 18 at a single clear point).
+- The second gap is a later clear interval of the same arrangement, which the cascade's path does not reach. The item is a property of the arrangement's clear set, not of the cascade's moves.
+- That the first gap exists is E960 item 0's question (why the second stretch is open), so the item read here is the second gap.
+- Rule 7: *"if the cascade does not need the floor, the floor idea is wrong (M091)"*. The cascade does not use the second gap. This bears on whether the item should hold the work, and it is put to the owner.
+
+**Source test.** Objects from E931 (zones), E956 (the cases, the count of open gaps), E958 (the carried chain). Zone edges compared with one another or with 1, 7, 9, 15 are linear in the readings, as in E964's ratio form. No object is new.
+
+**1. Exact walks** [T 49,025/49,025, exact; `experiments/n8/gap_floor_search_v2.py` (SHA-256 begins `93a1ba3f`) and `.out`, `.pkl`; ends read by `gap_close_check_v1.py` (`6a9ea001`) and `.out`]. From each case, 300 moves of one reading by `±m/2^(k+6)` (`m < 64`, `0 ≤ k ≤ 30`), seeded per case. A move is kept only if the readings stay admissible (E956 item 1), `[1, 7]` keeps no clear point, and the number of open gaps of `[9, 15]` does not rise (ties broken towards one long gap).
+- Start counts are E956's (2 in 31, 3 in 515, …, 10 in 26).
+- Least counts reached: 2 in 181, 3 in 10,666, 4 in 17,981, 5 in 12,865, 6 in 5,877, 7 in 1,378, 8 in 73, 9 in 4. None below 2.
+- The 181 two-gap ends: 145 from MOV, 21 from E340, 15 from seeds; they started at 2 (31), 3 (45), 4 (32), 5 (39), 6 (25) or 7 (9) gaps. The largest single-reading change from the start is `0.0017` to `0.2596`, median `0.0682` (steer).
+- `gap_floor_search_v1.py` (`0f348deb`) is the same search before its step range was widened and keeps no `.out`; v2 is the run of record.
+
+**2. Closing a gap with the chains kept** [`gap_close_lp_v1.py` (`393fe410`), `gap_close_lp_v2.py` (`44bfade2`), `gap_close_lp_v3.py` (`27d0442b`) and their `.out`].
+- Rows: the greedy chain covering `[1, 7]`; the greedy chain of each covered piece of `[9, 15]`, reaching past 9 and 15 at the ends; and, for the gap to close, the pieces on its two sides joined, directly or through one or two bridging zones of readings 1 to 6 near `[8, 16]`. Each row is strict and linear in `x_1, …, x_6`.
+- [PROVISIONAL: covering — the claim that a point satisfying the rows has at most the gaps they leave] A chain of open zones with consecutive overlaps, the first entering below `L` and the last leaving above `U`, covers `[L, U]` [P]. Zones outside the rows only cover more.
+- Max-slack LP (HiGHS, float). A positive optimum is rationalised and checked exactly (admissible, `[1, 7]` blocked, gaps of `[9, 15]` counted).
+- Three gaps to two: 53 of 1,545 (case, gap) attempts close [T 53/53, exact], all with no bridge. Four to three: 1,766 of 22,080 attempts (v1, `gap_close_lp_v1_4.out`); 3 further cases have no greedy chain (item 4).
+- Two gaps: 0 of 62 on E954's 31, and 0 of 376 on the 188 new two-gap arrangements (the walk ends and the 53 closures; 46 duplicates removed), with up to two bridges. Each new arrangement was checked exactly before the LP (188/188).
+
+**3. What the LP's "no" consists of** [`gap_close_dual_v1.py` (`c228be2d`) and `.out`; float duals, steer; pair crossings exact]. On the 219 two-gap arrangements, 438 (arrangement, gap) certificates with no bridge:
+- supports of 2 to 6 rows; 161 contain a row of the `[1, 7]` chain, 277 only rows of `[9, 15]`;
+- 335 contain two seam rows on the same two readings whose fractions cross. Example, E954 case 4368, gap 0: the first stretch's seam `(4,4) → (6,6)` needs `r_6/r_4 > 47/33`, and joining `(6,11)` to `(4,8)` needs `r_6/r_4 < 89/63 < 47/33`;
+- 30 contain a seam between two zones of one reading, which never overlap. That row is of the LP's making, from joining the pieces directly.
+These certificates say why the chains as kept cannot close the gap. They do not say why no other choice of chains can.
+
+**4. Exact check of the rows at the cases themselves** [T 49,025/49,025, exact; `gap_close_check_v1.py` (`6a9ea001`), `gap_close_check_v2.py` (`cb4e7a04`), `gap_close_check_v3.py` (`cf887269`), `gap_close_check_v4.py` (`b45b99af`) and their `.out`].
+- 48,372 cases satisfy every row strictly; 581 have one or two rows exactly 0 and none positive; 72 have no greedy chain.
+- The rows exactly 0 are a chain zone's entry at 9 (572) or exit at 15 (130).
+  - At 9, the 572 zero rows: the point is covered strictly by another zone in all 572 (`gap_close_check_v4.py` (`b45b99af`) and `.out`). The zero comes from the script's greedy, which accepts an entry equal to the piece's start.
+  - At 15, the 130 zero rows: in 91 another zone covers 15 strictly (the greedy stops on reaching 15). In 39 (31 seeds, 6 MOV, 2 E340), 15 is a single clear point: a zone of readings 1 to 6 exits at 15, where reading 0's zone `(15, 17)` enters. `gap_close_check_v3.py` (`cf887269`) counted every case with an edge at 9 or 15, a wider set (713 and 291); v4 is the count of record for the zero rows.
+- The 72 with no greedy chain: inside a covered piece of `[9, 15]` an exit equals an entry, a single clear point the greedy cannot pass. Their open-gap counts are 4 to 7, so none is among the two-gap or three-gap cases of item 2.
+  - 18 in the first piece, all seeds: the first clear point of `[9, 15]` lies in no open gap (18/18, v4). That is the property E956 item 3 gives its 18 single-point landings, all seeds; the two sets are not matched case by case.
+  - 54 in a middle piece (45 MOV, 9 E340): the first clear point lies in an open gap (54/54), and the single clear point comes later.
+
+**Rule 22.**
+- **At least two open gaps in `[9, 15]`.** (i) Feature: no arrangement with `[1, 7]` blocked has one open gap or none in `[9, 15]`. This holds on E954's 49,025, on the 181 walk ends and on the 53 closures. (ii) What forces it: **not understood**. Item 3's certificates give ratio crossings in E964's form for the chains as kept, not for all chains. (iii) Whether it is one mechanism: **not understood**. The populations are E954's and moves of at most `0.26` (steer) from them, so the floor is observed there only.
+- **The 572 zero rows at 9 and the 91 at 15 covered by another zone.** (i) A zero row. (ii) Forced by the script's greedy choice (item 4). (iii) Not this item. **Understood.**
+- **The 39 single clear points at 15 and the 72 interior single clear points.** (i) An exit exactly at an entry (reading 0's at 15, or another reading's inside `[9, 15]`). (ii) What places them there: **not understood**. (iii) The 18 first-piece cases share the defining property of E956's 18 single-point landings; none of the 39 and 72 is matched against E956's 18 and 111 case by case, so whether they are the same touchings is **not understood**. None changes a count of open gaps.
+
+**Still not understood, in order:** what forces the second open gap of `[9, 15]`; whether one mechanism covers 2 to 10 gaps; the 39 and the 72 single clear points; E970's tool and description groups, not yet ruled on.
+
+**Proposed to the owner:**
+- whether the second gap still holds the work, given that the cascade does not use it (rule 7, M091);
+- if it does, read it through E958's carried chain (`D_y = −8 g_y/ρ_y`, [P]): whether every arrangement here has two up seams whose loss of overlap no zone outside the chain can make good [PROVISIONAL: covering — the claim that those two openings stay uncovered], exactly, on the 219 two-gap arrangements and the 49,025;
+- a ruling on E970's tool and description groups before the move-type test.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. The first open gap of `[9, 15]` is E960 item 0's question. This entry reads the second gap and supplies no displacement step; item 2 and the proposal use a covering form, tagged.
+
+**Consequence (M7):**
+- On these populations and moves of them, the floor of two gaps survives an exact search and an LP closure aimed at breaking it. What forces it is not understood.
+- The second gap is not on the cascade's path. It is a property of the arrangement's clear set, and rule 7's M091 test applies to it.
+- Next: the owner's ruling on the second gap and on E970's other two groups. Nothing committed.
+
+## E972 (2026-11-27): the second gap, read further. E971's proposal is already answered by the record: most second-stretch gaps are not opened seams of the carried chain (E957 item 2), so it is withdrawn. On the tree members whose first stretch is blocked (7,567 for J1, 7,636 for J2, of which 590 and 4,623 are not E954 cases), every one has 2 to 10 open gaps in `[9, 15]`. On every population read, the first gap ends before 12 (largest end `11.749…`; `11.854…` at the walk ends). In all but 14 arrangements, the last gap starts after 12. In the 14, every gap lies below 12. What forces the second gap: not understood [T, exact; PARTIAL: cells with a stored member (J1: 18,452 of 19,679; J2: 271,361 of 293,333), the trees' cells fixed by float LP, E954's populations and moves of them]
+
+**Owner (2026-11-27):** *"Keep reading it"*, on E971's ask whether the second gap still holds the work.
+
+**Map:** E971's open item, what forces the second open gap of `[9, 15]`. Place: the clear set of `[9, 15]` at arrangements whose `[1, 7]` has no clear point, against E342/E343's mirror centre 12.
+
+**Note on E971's numbering (rule 18).** E971 numbers readings from 0, with `d` as reading 0 and readings 1 to 6 carving, as E962 item 5, E965, E968 and `stress_seeds_v1.py` do. Other entries, E964 among them, number `d` as reading 1. In E964's numbering:
+- E971 item 3's example is the first stretch's seam `(5,4) → (7,6)`, which needs `r_7/r_5 > 47/33`, while joining `(7,11)` to `(5,8)` needs `r_7/r_5 < 89/63`;
+- "reading 0's zone `(15, 17)`" is `d`'s zone.
+The figures are unchanged. This entry uses E971's numbering.
+
+**0. E971's proposal, against the record (rule 13).** E971 proposed testing whether every arrangement has two up seams that open and that no zone outside the chain covers. E957 item 2 already has the answer:
+- only 11,340 of the 284,446 second-stretch gaps are an opened seam of the carried chain;
+- in 38,522 of the 49,025 cases no gap is one (`gap_carry_v1.out`);
+- most gaps lie between carried zones that were not neighbours (173,435; E957, E958 item 4).
+As the account of the second gap, the proposal fails in at least 38,522 cases, and it is withdrawn. It was made without reading E957 item 2.
+
+**1. The trees' members** [T, exact; `experiments/n8/gap_floor_trees_v1.py` (SHA-256 begins `4dc41736`) and `.out`, `.pkl`; cell counts `tree_cell_counts_v1.py` (`e44c27cd`) and `.out`].
+- The members are `cell_members7_J1.pkl` (18,452 of `terminals7_J1`'s 19,679 cells, E966's region count) and `cell_members7_J2.pkl` (271,361 of 293,333 cells). `cell_members7_v1.py` made them: the LP point, jittered, kept only if the exact cascade reproduces the cell's path. E351 calls the 18,452 "J=1 all regions"; against the 19,679 cells, 1,227 have no member.
+- J1: 7,567 members have `[1, 7]` blocked, all admissible; 6,977 of them are E954 cases. Open gaps of `[9, 15]`: 2 in 5, 3 in 64, 4 in 720, 5 in 1,683, 6 in 2,871, 7 in 1,816, 8 in 384, 9 in 24.
+- J2: 7,636 blocked, all admissible; 3,013 are E954 cases. Open gaps: 2 in 5, 3 in 63, 4 in 725, 5 in 1,682, 6 in 2,872, 7 in 1,847, 8 in 401, 9 in 37, 10 in 4.
+- None has fewer than 2. The 7,567 matches E351's J=1 count in its move-count line. The 1,227 J1 cells and 21,972 J2 cells with no member are not read.
+
+**2. The two gaps against 12** [T, exact; `gap_halves_v1.py` (`5409e81b`), `gap_halves_v2.py` (`5fe8e5cd`) and their `.out`; positions and readings as floats, steer].
+- **First gap.** It ends at or before 12 in every arrangement of every population: E954's 49,025, J1's 7,567, J2's 7,636, and E971's 188 new two-gap arrangements. The largest end is `11.749033…` in E954 and both trees, the same value as E343's window right end `11.7490`. Among the 188 it is `11.854290…` at the walk ends and `11.778408…` at the LP closures.
+- **Last gap.** It starts at or after 12 in all but 14: E954 case 23930, 12 walk ends and 1 LP closure. The trees have no exception; there the least start is `12.487348…`.
+- **The 14** (listed in `gap_halves_v2.out`).
+  - No gap contains 12 in any of them, so `[12, 15]` has no open gap and every gap lies below 12.
+  - Case 23930 has 4 gaps, the last ending at `11.7867`. The other 13 have 2, the second `0.025` to `0.053` long and ending between `11.7566` and `11.8405`.
+  - All 14 have readings 1 to 6 (E964's 2 to 7) within about `0.04` of `2.42, 3.19, 3.98, 4.32, 5.51, 7.00`, except case 23930's `4.4328`. This is near the first of E957 item 3's two groups.
+- E342 calls 12 the mirror centre of `[9, 15]` and records the window staying below 12 for generic arrangements, not derived. E343's extremal arrangement is a near-vertex perturbation, not an E954 case. Its window straddles 12, with right end `12.0638`, and its gap count is not read.
+
+**Rule 22.**
+- **At least two open gaps in `[9, 15]`.**
+  - (i) Feature: it now holds also on all 15,203 blocked tree members.
+  - (ii) What forces it: **not understood**. Item 2 splits it in all but 14 arrangements: the cascade's gap lies below 12, and another gap above. Why the first gap ends before 12 is E342's open item, not derived. Why there is a gap above 12 is not understood.
+  - (iii) Whether one mechanism covers it: **not understood**. The 14 show that the split at 12 is not the whole account.
+- **The 14 with `[12, 15]` covered.**
+  - (i) Feature: every open gap lies below 12, with readings near one group.
+  - (ii) What covers `[12, 15]` there: not read, **not understood**.
+  - (iii) Same mechanism as the other cases or not: **not understood**.
+- **E343's extremal arrangement.** Its window straddles 12, so it is the case where the first gap would cross 12. Its gap count is not read: **not understood**.
+
+**Still not understood, in order:**
+- what forces a second open gap;
+- why the first gap ends before 12 (E342);
+- why a gap lies above 12 in all but the 14;
+- what covers `[12, 15]` in the 14;
+- E343's extremal arrangement's gaps;
+- the 39 and 72 single clear points (E971);
+- E970's tool and description groups, not yet ruled on.
+
+**Proposed:** read the 14 and E343's extremal arrangement first, since they are the exceptions to the split: which zones cover `[12, 15]` in the 14, and how many gaps the extremal arrangement has.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry reads the second gap, which is not on the cascade's path, and supplies no displacement step.
+
+**Consequence (M7):**
+- The floor of two gaps holds on every blocked member stored for the trees. Apart from 14 arrangements, it splits at 12: the cascade's gap below and another gap above.
+- E971's carried-chain proposal is withdrawn against E957 item 2.
+- Next: the 14 and E343's extremal arrangement. Nothing committed.
+
+## E973 (2026-11-27): E970's tool and description groups, tested instead of ruled. Exact zone-edge coincidences are the tool group's common object; 2,047 of E954's 49,025 arrangements have one. At 1,776 a nearby point has the same exact route and no coincidence, so the route does not need them. At the other 271, every `±2^-40` move of one reading in a coincidence (`d` not moved) changes the route, and in all 271 some such reading is held on both sides by the arrangement's own zero route rows. Every zero route row at the 2,047 is a non-strict row, and every coincidence of the 1,137 MOV arrangements among them is its parent's, or the parent's with the moved reading's edge removed. E971's 39 and 72 single clear points are E956's 111 by count. In the description group, E957's floor of 6 openings and E958's of 6 up seams belong to the sweep chain: carried the same way, the cascade's own chain over `[1, 7]` has as few as 4 openings and 5 up seams [T, exact; PARTIAL: E954's populations, and moves as stated in items 2 and 3]
+
+**Owner (2026-11-27):** *"Rule on the groups first. Except can't we test to find out the actual rather than a judgment call?"*, on E972's ask.
+
+**Map:** E970's tool and description groups (rule 22, rule 8). Place: for the tool group, the exact positions of E954's arrangements against the cascade's route; for the description group, our constructions (chains, paths, `c(t)`) against the cascade's own objects.
+
+**The tests.**
+- **Tool item.** It belongs to the tool if it is absent at a nearby point where the cascade takes the same route: the same exact `outcome(...)['path']` of `outcome_classes_v2`, the time cascade.
+- **Description item.** It belongs to the description if it changes when only our construction changes, with the arrangements and the cascade fixed.
+
+Numbering: `d` is reading 0, readings 1 to 6 carve, as in E971 and E972. Route rows are `coincide_cause_v1.labelled`: at each stop, block rows (strict), clear rows (non-strict) and order rows against the winner (strict iff the reading is larger than the winner's); each requires its value `≥ 0`, or `> 0` if strict.
+
+**1. Census** [T 49,025/49,025, exact; `experiments/n8/coincide_census_v1.py` (SHA-256 begins `77afefe9`) and `.out`]. A coincidence is two zone edges of different readings (`d` included) equal at a value in `(0, 16]`.
+- 2,047 arrangements have at least one: 215 E340, 1,137 MOV, 695 seeds.
+- By kind: exit = entry 2,724 (111 of them uncovered, a single clear point); exit = exit 461 (213 uncovered); entry = entry 35.
+
+**2. Moving off them, same route** [T, exact; `coincide_walk_v1.py` (`615b75f1`) and `.out`]. 400 independent tries per arrangement, each a single move from the stored point: one reading by `±m/2^k`, or all six carving readings at once (`m < 64`, `20 ≤ k ≤ 50`). A try counts only if the readings stay ordered and distinct, the exact route is unchanged, and no coincidence is left.
+- 1,773 of 2,047 have such a try: 175 E340, 933 MOV, 665 seeds.
+- 274 have none.
+
+**3. The 274** [T, exact; `coincide_stuck_v1.py` (`4130f5a9`), `coincide_boundary_v1.py` (`05daaa9c`), `coincide_boundary_v2.py` (`fef6c79c`), `coincide_three_v1.py` (`77d895fd`), `_v2` (`e8ee189d`), `_v3` (`1c8b3ba6`), each with `.out`].
+- Their 798 coincidences: exit = entry at a stop of the cascade's path 658, above the landing 126, at the landing 14 (one an exit tie).
+- **The boundary test.** For each coincidence, each reading in it other than `d` was moved alone by `+2^-40` and by `−2^-40`. In 271 arrangements (E340 39, MOV 204, seeds 28) some coincidence changes the route on every such move. These lie on a boundary between routes, in the sense of these moves only. 21 arrangements hold a coincidence that changes the route on one side only: 18 of them among the 271, and the remaining 3 (cases 2552, 6548, 7114).
+- **The 3, moved off by directed moves.**
+  - 2552: a move of two readings together reaches the same route with no coincidence.
+  - 6548 and 7114: a three-way coincidence, entry of `(6, 9)` = exit of `(1, 3)` = exit of `(3, 5)`, at `2^49/57545995238623 = 25/r_1` with `r_1 = float(23/9)`. Moves of readings 3 and 6 together, by `2^-a` and `2^-b` with `a ≠ b`, reach the same route with no coincidence (78 such moves).
+  - So the 3 are of the first kind: 1,776 in all, and 271 on a boundary.
+- **Example, case 399** (E340) [`coincide_cause_v1.py` (`0d691f5d`) and `.out`]. `r_1 = float(23/9)` exactly and `r_5/r_1 = 11/5` exactly. The entry of `(1, 2)` equals the exit of `(5, 4)` at the stop `15/r_1`, and the entry of `(5, 7)` equals the exit of `(1, 3)` at the stop `25/r_1`. Both are zero clear rows of its route: `15 r_5 − 33 r_1` at move 14 and `55 r_1 − 25 r_5` at move 21. The first requires `r_5/r_1 ≥ 11/5`, the second `r_5/r_1 ≤ 11/5`.
+
+**4. What places them there** [T, exact; `coincide_cause_v1.py` (`0d691f5d`), `coincide_pin_v1.py` (`40e9978a`), `coincide_pin_v2.py` (`67109a00`), `coincide_pin_v3.py` (`811d7abd`), `coincide_54_v1.py` (`c7689a2c`), `_v2` (`07b28993`), `_v3` (`939152c6`), each with `.out`].
+- **Zero route rows.** 1,993 of the 2,047 have a route row exactly 0: 1,719 of the 1,773 the walk moved off, and all 274 it did not (the 271 and the 3). Every such row is non-strict: clear rows 2,058 and order rows 468 among the 1,773, 692 and 4 among the 274. These are the faces the cell LP leaves free, since it maximises slack on the strict rows only (E969).
+- **The 271 are held by their own rows.** In all 271 some reading of a coincidence is held on both sides: its `+2^-40` move and its `−2^-40` move each make some zero route row negative (`coincide_pin_v3`). In 270 one ratio is fixed by two zero rows bounding it from opposite sides, as in case 399 (`coincide_pin_v1`). The other, case 9716 (seed), has three zero clear rows on three ratios (`coincide_pin_v2`): `23 r_0 − 9 r_1` (so `r_1 ≤ 23/9`), `55 r_1 − 17 r_6` (`r_6 ≤ (55/17) r_1`) and `31 r_6 − 57 r_3`. With `r_1 = 23/9` and `r_6 = 1265/153 = (55/17)(23/9)`, reading 1 is held between the first two rows and reading 6 between the second and third.
+- **MOV coincidences come from the parent** [`coincide_mov_v1.py` (`384824c8`) and `.out`]. Every MOV arrangement with a coincidence has an E340 parent equal to it in all but the moved reading (933 + 204), and no zero route row involves the moved reading (1,311 + 512 rows; `coincide_cause_v1`). Of the 1,766 coincidences of the 1,137, none involves the moved reading: 1,672 are the parent's own, and 94 are a parent coincidence with the moved reading's edge removed (1,043 arrangements hold only the first kind, 86 only the second, 8 both).
+- **The 54 with no zero route row** (all among the 1,773): 52 MOV and 2 seeds.
+  - In the 52 MOV, no coincidence involves the moved reading. 19 coincidences are the parent's own; in the other 35, the parent had the same edges and the moved reading's edge as well, and the move took that edge away.
+  - The 2 seeds, cases 10086 and 10662 [`coincide_seed2_v1.py` (`57264afe`) and `.out`], each have one coincidence: exits of `(2, 4)` and `(4, 7)` (`r_4/r_2 = 19/11`), and entry of `(2, 3)` with exit of `(6, 5)` (`r_6/r_2 = 41/23`). Both are J3 LP witnesses rationalised by `limit_denominator(10^6)` in `stress_seeds_v1.py`. Whether the J3 cell had the relation as a row is not read.
+
+**5. The listed items** [T, exact; `coincide_items_v1.py` (`ada6348a`), `coincide_items_v2.py` (`4d5bf7e2`), each with `.out`]. Uncovered coincidences, by the tests above (A: a nearby same-route point with no coincidence; B: on a boundary):
+- E971's 39 single clear points at 15 (a zone's exit at `d`'s entry): A 26, B 13.
+- E971's 72 single clear points inside `[9, 15]`: A 54 away from the landing. At the landing, A 5, B 11, and 2 that item 3's directed moves resolve as A (6548, 7114): A 7, B 11. These 18 are E956's 18 single-point landings.
+- 39 + 72 = 111, E956's single-point gaps at `t = 1`, by count, not matched case by case.
+- Exit ties at the landing: A 205, and 1 that item 3 resolves as A (2552).
+- Other: an exit tie at `25/r_1 = 2^49/57545995238623` (`r_1 = float(23/9)`), A 7, all MOV, landing at 9.
+- E960's 26 ties and 18 births at `λ = 1` are coincidences at the arrangements; they are not matched to these counts individually.
+
+**6. The description test on the carried chain** [T 49,025/49,025, exact; `chain_choice_v1.py` (`cbf848a2`), `chain_choice_v2.py` (`435e1656`), each with `.out`].
+- E957 and E958 carried the sweep chain (`gap_carry_v1.chain_z`: every zone, in entry order, that extends the covered reach). The cascade's own chain over `[1, 7]` is its path up to the first stop past 7. The two are the same in 1,940 cases.
+- With the same carrying (E958 item 1, [P]):
+  - sweep chain: up seams 6 to 13; openings counting the ends 6 to 14 (E957's figure, reproduced);
+  - cascade's chain: up seams 5 to 12 (74 cases with 5); openings counting the ends 4 (1 case), 5 (279), 6 (1,200) up to 13 (400).
+- So E957's "at least 6 openings" and E958's "at least 6 up seams" are floors of the sweep chain, a construction of ours. They are not floors of the cascade's chain.
+
+**Rule 22.**
+- **Exact coincidences at the arrangements** (the tool group's touchings and ties).
+  - (i) Feature: two zone edges of different readings equal (item 1).
+  - (ii) What forces it: the arrangement lies on non-strict zero route rows (1,993 of 2,047, item 4), which the cell LP does not push away from; MOV coincidences are the parent's (item 4); the 2 seeds without a zero row are the next item. At the 1,776 the route does not need the coincidence (items 2, 3). At the 271 the arrangement is held on both sides by its own zero rows (item 4).
+  - (iii) Mechanism: for 2,045, the test sets' positions on faces of their route cells (2,045 = the 1,993 with a zero route row and the 52 MOV that carry their parent's). The boundary is E962 item 1's [P] kind, a zone edge meeting a stop. **Understood**, with the artifacts above.
+- **The 2 seeds with no zero route row** (10086, 10662). (i) A coincidence on no row of the exact route. (ii) Both come from J3 witnesses rounded by `limit_denominator(10^6)`; why the rounding lands on an exact relation is **not understood**. (iii) Whether it is the same face mechanism, through the J3 cell's rows: **not understood**.
+- **E957's floor of 6 openings and E958's of 6 up seams.** (i) Floors of the sweep chain. (ii) The chain choice: the cascade's chain gives 4 and 5 (item 6). (iii) A construction of ours. **Understood** as such.
+
+**Not tested here.**
+- E969's four LP items: which decisions' tie rows the optimal face reaches; the 24 near points (jitter not checked); the 3,525 members the rebuild misses; cell 13432's one ulp. `cell_members7_v1.py` accepts a member only if the exact cascade reproduces the cell's path, so no stored route depends on them. Each is not tested individually: (i) stated in E969, (ii) and (iii) not understood.
+- E960's 26 ties and 18 births, individually (item 5).
+- E955's `c(t)` items (E970's description list): E956 item 0 [P] shows `c(t)` for `0 < t < 1` is no arrangement's state, so they describe the construction. (i) stated in E955 and E956; the description test (change the construction, hold the arrangements) is not run, so (ii) and (iii) are not understood.
+- The path items of E960 to E962: the 305 double crossings, the out-of-order paths and E962's 37, the 23,388 setters outside the cascade's zones, the two short v1 pieces. The description test for them is the same endpoints joined by another path; not run.
+- E957 to E959's other carried-chain counts (E970's list): the chain test of item 6 applies to each; not run on each.
+
+**Still not understood, in order:**
+- the 2 seeds 10086 and 10662;
+- E969's four LP items;
+- E960's 26 ties and 18 births, matched individually;
+- E955's `c(t)` items under a change of construction;
+- the path items under a change of path;
+- the remaining carried-chain counts under the cascade's chain;
+- the arrangement group (E972's list: what forces a second gap, the split at 12, the 14, E343's extremal arrangement).
+
+**Proposed:** the list in that order. The first three are about the test sets, and item 4's zero-row reading may settle them; the fourth and fifth are description tests (another construction, another path), with the arrangements and the cascade held fixed.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. Nothing here bears on existence.
+
+**Consequence (M7):**
+- The tool group's touchings and ties are positions of the test sets on non-strict faces of their route cells: 1,776 have a same-route point nearby with no coincidence, and the 271 on a boundary are held there by their own zero route rows. E971's 39 and 72 make up E956's 111 by count.
+- E957's and E958's floors of 6 belong to the sweep chain; the cascade's chain gives 4 openings and 5 up seams.
+- Next: the list above, in order. Nothing committed.
+
+## E974 (2026-11-27): owner asks where G2 stands, then to move it forward. Standing: by E938 item 2 [P], `S`-named outcomes are finitely many iff the landing `R*` is bounded, and below `d_min`'s gate `R* ≤ 7`, so G2 is the bound on `R*` for gate crossers; E939 computes it per slow set for one fast reading (`≤ 15` on the sets run) and leaves every slow set and two or more fast readings open. Two tests here. (1) The gate crossers are not grid copies: raising the fastest reading by `8k` (`k` = 1 to 12, 20, 50, 100, 1,000) takes every one of the 7,567 exact J1 crossers below the gate, and each lands at a point of `[1, 7]` that only that reading blocked; lowering the far islands of the J2 and J3 trees by `8q` takes all 77 tries below the gate. (2) With two or three fast readings (156 of the 7,567), 259 of the slow set's clear windows in `[1, 7]` are covered only by zones of two or more fast readings together, so E939's one-zone rule does not carry over [T, exact; PARTIAL: J1's exact members, and the far islands' members]
+
+**Owner (2026-11-27):** *"How are we on our goal? then move forward on that"*, after E973.
+
+**Map:** G2 (`RULES_n8_v5.md`: catalogue by how the cascade finds the isolation, a finite set; `d_min` and `d_max` for the continuous values; scale by the AP/grid). Owner, 2026-11-25 (E938): *"We already have existence from ap and phi(n) so its arrangement finiteness that is what it is really about"*. Place: the gate crossers' landing, `R*`, against the fast readings (above `7 d_min`), in the wall-window split (E929).
+
+**Record read (rule 13):** E369, E377, E938 to E940, E954 to E973 (headlines and Consequences; E954, E955, E966, E967, E970 to E973 in full).
+
+**0. Where G2 stands** (record, no run).
+- **The reduction.** E938 item 2 [P]: with outcomes named by `S` (the readings at most `7 d_min`), the catalogue is finite iff `R*` is bounded over all arrangements; the fast readings' laps never enter.
+- **Below the gate** `R* ≤ 7` by definition. So G2 is the bound on `R*` for the gate crossers.
+- **One fast reading.** E939: `B(S)`, an exact bound per slow set [P per set, PROVISIONAL: covering]; at most 15 on E340's 7,644 slow sets and on 376,992 grid slow sets [OBS]. E940: a bound below 12 for each of E340's 110,081 members [P per member, PROVISIONAL: covering].
+- **The trees.** Supremum `26433/2209` for `ρ_7 ≤ 25` (E938, from E319 and E330) [TREE]. Past the gate the chains with reading 1 and the four fastest readings dropped are 28 at `J = 1, 2, 3` (E377).
+- **Open** (E939): every slow set, not only the sets run; and two or more fast readings.
+- **Since E940.** E954 capped each second-stretch landing inside its own stretch, on its populations [P for cap ≥ landing; OBS for the rest], and E955 item (b) found that the relay restates where the landing's zones lie and does not carry why the cap stays inside the stretch. E956 to E973 added no bound on `R*` beyond the trees (E960 observed no landing above 15 on its 49,025 paths [OBS]): they read the rotation `c(t)`, the second stretch's gaps, the paths from the AP, the cascade's decisions in ratio form (E964, E965 [L]), the chain counts per window (E966), the test sets and our descriptions (E970, E973). E967's proposed move-type test was not run.
+
+**1. Raising the fastest reading by `8k`** [T, exact; `experiments/n8/lift_test_v1.py` (SHA-256 begins `c5e632ae`), `.out`, `.pkl`]. E967 proposed reading the move through the grid quotient; this tests whether a crosser's outcome survives the quotient's own move, `r_7 → r_7 + 8k` (`d = 1`).
+- Population: every exact J1 member (`cell_members7_J1`) whose exact landing is above 7: 7,567. Readings above 7: one in 7,411, two in 152, three in 4.
+- For `k = 1` to 12, 20, 50, 100 and 1,000, all 7,567 land at most 7. None keeps its landing, and none keeps its path with reading 7's moves removed.
+- **Where they land** [`lift_test_v3.py` (`ab84dd51`) and `.out`]. In all 7,567 × 16 cases, the original arrangement at the lifted landing `R'` is blocked by reading 7 alone (lap 1 in most: 6,831 of 7,567 at `k = 1`; laps 2 to 4 in the rest). So the lifted reading leaves open a point of `[1, 7]` that it alone covered.
+
+**2. Lowering the far islands** [T, exact; `lift_test_v2.py` (`160c73a2`) and `.out`, `.pkl`; island listing `far_islands_v1.py` (`668da44b`) and `.out`, float boxes, steer].
+- The crossing regions whose `r_7` box reaches past the previous window: 85 in J2 (past 9), 7 in J3 (past 17). Their `r_7` boxes lie in `[9, 9.29]`, `[10.75, 10.97]` and `[15, 16.49]` (J2), and `[23, 24.41]` (J3) (steer).
+- Members: 77 of the 85 J2 regions have one in `cell_members7_J2`; all 7 J3 witnesses reproduce their path exactly.
+- Lowering `r_7` by `8q` for every `q ≥ 1` that keeps `r_7 > 7` (63 J2 members with one such `q`, 7 J3 members with two; the other 14 J2 members have `r_7` below 15 and no such `q`, and are not tested): all 77 tries land at most 7, and none keeps the path with reading 7 removed.
+- So the islands near `15` and `23` are not shifted copies of J1's crossers with `r_7` just above 7, in either direction.
+
+**3. How the fast readings cover the first stretch** [T, exact; PROVISIONAL: covering, a windows-against-zones statement, supporting only the description of how these crossers block `[1, 7]`, no existence claim; `fast_cover_v1.py` (`65cbbeae`) and `.out`]. For each of the 7,567, `S` = readings at most 7 (`d` included), `F` = the rest. `S`'s clear windows in `[1, 7]` are the maximal closed intervals (points allowed) outside every open `S` zone. Each is covered by `F`'s open zones (no window is left uncovered, as the exact blocking requires).
+- `|F| = 1` (7,411): every window, 24,715 in all, lies inside one zone of the fast reading. This is E939's one-zone rule, on J1's members.
+- `|F| = 2` (152): 696 windows inside one zone, 243 covered only by zones of both fast readings together.
+- `|F| = 3` (4): 16 and 16.
+- Every one of the 156 has at least one jointly covered window.
+
+**Rule 22.**
+- **No crosser survives the lift** (item 1). (i) Feature: uniform, 7,567 of 7,567 at each `k`. (ii) Where: the lifted landing is a point the original blocked by reading 7 alone, which the lifted reading no longer covers (`lift_test_v3`); why the lifted zones miss it is not derived. (iii) Not settled: with `|F| = 1` (7,411) each window is held by one zone of the fast reading; the other 156 have jointly covered windows (item 3). **Not understood.**
+- **The far islands** (item 2). (i) Feature: `r_7` in `[15, 16.49]` or `[23, 24.41]`, or in `[9, 10.97]` (steer, float boxes). (ii) What lets them cross with so fast a reading: not read. (iii) Not shifted copies (item 2); whether the same covering as item 3: not read. **Not understood.**
+- **Joint covering with `|F| ≥ 2`** (item 3). (i) Feature: windows covered only by two or more fast readings' zones together (259 windows in 156 arrangements). (ii) What forces it: not read. (iii) A different covering from E939's one-zone rule; whether the landing bound follows the same walk: not read. **Not understood.**
+
+**Still not understood, in order:**
+- E973's list, as it stands (first: the 2 seeds 10086 and 10662; last: E972's arrangement group, which E970 places closest to the cascade);
+- this entry's: the joint covering with `|F| ≥ 2` ((ii) and (iii)); the far islands of J2 and J3 ((ii) and (iii)); why the lifted reading's zones miss the point (item 1 (ii)).
+
+**Proposed:** the owner's message puts G2 first, and rule 22 puts the open items first. Both lists are open items, so the order between them is put to the owner. Within this entry's list the first step is to read the 156 jointly covered crossers: which two fast readings' zones meet over each window, and where. No new population is proposed before these.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry is about where gate crossers land (`R*`), the bound E938 makes G2; nothing here makes existence open.
+
+**Consequence (M7):**
+- G2 is the bound on `R*` for gate crossers (E938 item 2). It is computed per slow set for one fast reading (E939) and is open for every slow set and for two or more fast readings.
+- Gate crossing is not kept by the grid move `r_7 → r_7 + 8k` at any of the 16 values of `k` tried, on J1's 7,567 exact crossers, and the far islands of the wider trees are not shifted copies [PARTIAL]. In each lift the new landing is a point that only reading 7 blocked [T]. So on these crossers the grid move does not carry the fastest reading's scale; why the lifted zones miss the point is not derived.
+- With one fast reading every clear window of `[1, 7]` lies in one fast zone; with two or three, some lie only in zones of two or more fast readings together [T; PROVISIONAL: covering, description only, no existence claim]. Next: the order of the two open lists, put to the owner. Nothing committed.
+
+## E975 (2026-11-27): E974's three bound items, then the first of E973's. (1) A jointly covered window is crossed by two or three moves of the cascade among the fast readings: same lap, the faster reading's zone first (156), or the slower at lap `j` and the faster at `j + 1` (99), and all 263 links lie inside E931's link interval; 33 of the 259 windows are longer than any single fast zone. (2) The far islands are E974's two kinds: with `r_7 ≥ 15` one fast reading holds every slow window in one zone (70), and the 14 with `r_7 < 15` have a second fast reading near 7 and joint windows. (3) The raised reading moves by exactly `8kR` (E448 [L]); the raised arrangement never lands at an integer instant (121,072 of 121,072), and in 115,104 cases it fails the slow set's first window `[1, b]`, whose single-zone interval for the raised reading is `8k(1 − 1/b)` shorter than the original's [P]. (4) Seeds 10086 and 10662: the J3 witness lies on the coincidence's relation to rounding, and rounding put the two readings on a common denominator; for 10086 the witness's own route has the relation as a row, for 10662 it does not [T, exact; PARTIAL: J1's exact crossers, the far islands' members, the shifts tried]
+
+**Owner (2026-11-27):** *"Bound first then last list"*, on E974's ask which open list first.
+
+**Map:** G2's bound on `R*` for gate crossers (E938 item 2, E939), through E974's not-understood items in order, then E973's list. Place: the slow set's clear windows of `[1, 7]` and the fast readings' zones over them (E929 to E931, E939, E942).
+
+**Record read (rule 13):** E929 to E934, E939, E942, E448, E974.
+
+**1. The jointly covered windows** [T, exact; PROVISIONAL: covering, windows against zones, description of the passes only, no existence claim; `experiments/n8/joint_cover_v1.py` (SHA-256 begins `80b6ea7c`), `joint_cover_v2.py` (`281897f8`), each with `.out`]. For each of the 259 windows of E974 item 3, the covering chain is built from the window's opening `a`: at each point, the zone that contains it and reaches furthest. Inside an `S` window no `S` zone contains a point, so this is the cascade's own max-exit move [P, by definition].
+- Chains: two zones in 255, three in 4. Readings: 6 and 7 in 247; 5 and 7 in 4; 5 and 6 in 4; 5, 6 and 7 in 4.
+- Two-zone chains: same lap `(j, j)` with the faster reading's zone first in 156; lap `j` of the slower reading then lap `j + 1` of the faster in 99.
+- Each link is chosen as a zone containing the current zone's exit, so it satisfies E931 item 1(b)'s link interval `(8k'−1)/(8k+1) < f'/f < (8k'+1)/(8k+1)` [P, E931]. Checked exactly on all 263 links (`joint_cover_v3.py` (`30e7b46e`) and `.out`): lap change 0 in 156, +1 in 103, −1 in 4, all inside the interval. For the 156 same-lap links, `f_hi/f_lo < (8j+1)/(8j−1)` also holds (`joint_cover_v2`).
+- What forces a joint cover: in 33 windows the window is at least `2/f` long for the slowest fast reading, so no single fast zone can hold it; in 226 a single zone of that length exists, but no fast zone sits over the window.
+
+**2. The far islands** [T, exact; PROVISIONAL: covering, as item 1; `far_cover_v1.py` (`3bc9e54f`) and `.out`]. On the 77 J2 members and 7 J3 witnesses of E974 item 2:
+- `r_7 ≥ 15` (63 J2, 7 J3): one reading above 7, and every slow window lies in one zone of it (200 and 22 windows). Every slow window is shorter than `2/r_7`. In the J3 examples the slow set leaves 3 or 4 windows, of lengths below `0.087` (steer).
+- `r_7 < 15` (14 J2): two readings above 7 (`joint_cover_v3.out`, steer): about `7.00` and `10.76` to `10.96` in 8, about `7.19` to `7.20` and `9.28` in 6. Windows are covered by one zone of either, or by both together (28 windows).
+
+**3. Why the raised reading misses** [T, exact; PROVISIONAL: covering, the pass condition of one window, supporting only this description; `lift_why_v1.py` (`75b41f40`), `lift_why_v2.py` (`430c308d`), `lift_why_v3.py` (`5c47b827`), each with `.out`]. On all 121,072 pairs (crosser, `k`) of E974 item 1:
+- The raised reading's position at `R` is the original plus exactly `8kR` (121,072 of 121,072; E448 `reading_diff` [L]).
+- The raised landing `R'` is never an integer (0 of 121,072). This follows from E448's `lonelyR_agree_int` [L]: at an integer instant the raised and original arrangements have the same lonely set, and the original has no lonely instant in `[1, 7]`.
+- At `R'` the original reading 7 is in a zone and the raised one is not (121,072). The shift `8{kR'}` carries it forward out of the zone in 118,868 and back in 2,204.
+- `R'` lies in the first slow window the raised fast readings do not cover (121,072), E942's rule for the raised arrangement.
+- That window is `[1, b]` in 115,104 cases, all with one fast reading. There the original holds `[1, b]` with its lap-1 zone, which needs `7 < f < 9/b`. The raised reading `f + 8k` lies in `(8k + 7, 8k + 9/b)`, so only its lap `k + 1` zone can hold `[1, b]`, which needs `f + 8k < (8k + 9)/b`, that is `f < 9/b − 8k(1 − 1/b)` [P]. The interval shrinks by `8k(1 − 1/b)`, and in all 115,104 it no longer contains `f`.
+- In the other 5,968 the first failing window starts above 1.
+- `lift_why_v1`'s check (c) compared distances without direction and is withdrawn; `_v2` replaces it.
+
+**4. Seeds 10086 and 10662** (E973's first item) [T; `coincide_seed2_v3.py` (`55e67e7d`) and `.out`; `coincide_seed2_v2.py` (`24b571be`) indexed the readings from 1 by mistake and is superseded].
+- Each comes from one J3 region's float witness in `terminals5_J3.pkl` (regions 456,914 and 579,724), rounded reading by reading with `limit_denominator(10^6)`.
+- At those doubles the coincidence's linear form, `11 r_4 − 19 r_2` and `23 r_6 − 41 r_2` (0-based, `d = r_0`), is `3.6e-15` and `−1.7e-14`, relative `6e-16` and `2e-15` (steer): the witness lies on the relation to rounding.
+- The rounding gave both readings of each relation the same denominator (`430558`; `889660`; readings in `coincide_mov_v1.out`), so the relation holds exactly at the seed.
+- Route rows at the witness (`joint_cover_v3.out`, `coincide_cause_v1.labelled` on the exact doubles). For 10086, the order row at move 22 and the clear row at move 23 are `33 r_4 − 57 r_2` (ratio `19/11`), value `1.1e-14` (steer): the relation is a row of the witness's own route. For 10662, none of the 15 route rows on readings 2 and 6 has ratio `41/23`; the nearest in value is `41 r_6 − 73 r_2`, `0.38` (steer).
+
+**Rule 22.**
+- **Joint covering with `|F| ≥ 2`** (E974). (i) Windows crossed by two or three fast zones (item 1). (ii) Forced by length in 33 windows and by position in 226; each link is E931's link interval [P]. (iii) The same mechanism as E931's multi-move pass: the cascade's own moves among the fast readings across one slow window. **Understood** as a pass. Whether E939's bound `B(S)` extends to it is not read.
+- **The far islands** (E974). (i) `r_7 ≥ 15` with short slow windows, or a second fast reading near 7 (item 2). (ii) Each slow window lies in one zone of the fast reading, or is passed jointly as in item 1. (iii) The same two mechanisms as J1's crossers. **Understood** as such; why these slow sets leave only short windows is not read.
+- **The raised reading's miss** (E974). (i) `R'` in the first window not covered (item 3). (ii) For the 115,104 at `[1, b]`: the interval for `f` shrinks by `8k(1 − 1/b)` [P]; that it then excludes `f` is observed, not derived. For the 5,968: the shift `8{kR'}` [L], window not read. (iii) E942's rule. **Not understood** for the 5,968 and for why the shrunk interval always excludes `f`.
+- **Seeds 10086 and 10662** (E973). (i) A coincidence on no route row at the seed. (ii) The J3 witness lies on the relation to rounding, and rounding gave a common denominator (item 4). (iii) 10086: the relation is a row of the witness's own route, so the same face mechanism as E973 item 4, carried into the seed by rounding; **understood**. 10662: the relation is not a route row at the witness, so what put the witness on it is **not understood**.
+
+**Still not understood, in order:**
+- seed 10662: what puts its J3 witness on `23 r_6 = 41 r_2`;
+- the raised reading's miss: the 5,968 windows above 1, and why the shrunk interval always excludes `f`;
+- whether E939's `B(S)` extends to joint passes (two or more fast readings);
+- E973's list from its second item: E969's four LP items; E960's 26 ties and 18 births; E955's `c(t)` items; the path items; the remaining carried-chain counts; the arrangement group.
+
+**Proposed:** the seed, then the two bound items. For the second, E939's walk with each jointly passed window entered as its two-move pass interval, on the 156 slow sets and the 14 far ones.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry is about where gate crossers land; nothing here makes existence open.
+
+**Consequence (M7):**
+- With two or three fast readings, a jointly covered window is crossed by the cascade's own moves among them, links of E931's law. The one-zone rule is the one-move case of the same pass.
+- The far islands of J2 and J3 use the same two kinds of pass as J1's crossers.
+- Raising the fastest reading by `8k` keeps integer instants (E448) and shrinks the first window's interval for it by `8k(1 − 1/b)` [P]; in 115,104 of the 121,072 cases tried the raised reading then fails that window, and the other 5,968 fail a later window [PARTIAL].
+- Seeds 10086 and 10662 sit on their J3 witness's relation, restored by rounding; for 10086 it is a route row, for 10662 not. Nothing committed.
+
+## E976 (2026-11-27): seed 10662, then the bound items. (1) Seed 10662's J3 tree path has the chain stop `(7, 5)` (1-based), which the max-exit route skips because `(6, 4)`'s exit is later; the relation `23 r_6 = 41 r_2` (0-based) is that stop's clear row for reading 3 (1-based), and the J3 witness is on it to rounding. (2) The raised reading's miss: a window `[a, b]` held by one zone of `g` maps under `g → g + 8k` to `[ag + 8ka, bg + 8kb]`, shifted by `8{ka}` and lengthened by `8k(b − a)` [P]; 116,590 of the 121,072 lifted cases fail their first failing window by LENGTH, the rest by POSITION, and the 3,472 one-fast-reading cases that fail a later window all still hold the first window `[1, b]`. (3) E939's walk with two fast readings `g < h ≤ 25`: on all 58,905 grid slow sets of five readings `B2(S) ≤ 7`; on all 152 J1 slow sets with two fast readings, on E340's 149 two-fast crossers and on the 14 far J2 members, the bound `B2(S)` lies in `(7, 15]`, at most `52917295621603328/4860435319760077` (about `10.887`, steer), and every own pair and 1,452 sampled pairs land at or before it [P per set, PROVISIONAL: covering; T, exact, for the checks]. (4) `joint_bound_v1` compared seven-reading landings with E939's six-reading bound and is withdrawn [T, exact; PARTIAL as tagged]
+
+**Owner (2026-11-27):** *"Yes carry on and then bound items"*, on E975's ask.
+
+**Map:** E975's Still-not-understood list, in order: seed 10662; the raised reading's miss; whether E939's `B(S)` extends to joint passes. G2's bound on `R*` (E938 item 2, E939). Place: tree cells and their witnesses; the slow set's clear windows and the fast readings' zones over them.
+
+**Record read (rule 13):** E939 in full (item 4 included), E930, E931, E942, E448, E973 to E975.
+
+**0. Process (rule 13).** E975 item 1 did not cite E939 item 4, which already found the joint passes on E340's members: 153 members with `|F| ≥ 2`, 269 first-arc passes of two or more moves, each a chain through two or more fast readings (E931's link law), with "What keeps these members below `R* = 11` is not derived". E975's 156 J1 crossers and 259 windows are the same kind on another population. E939 graded (iii) "a different pass mechanism, a chain of zones rather than one zone"; E975 called the one-zone pass the one-move case of the same chain. The two readings agree on the facts; item 3 below takes up E939's (ii).
+
+**1. Seed 10662** [T, exact; `experiments/n8/coincide_seed2_v4.py` (SHA-256 begins `80b4212d`) and `.out`].
+- The J3 region's tree path (`terminals5_J3.pkl`, region 579,724, 1-based readings) has the stop `(7, 5)` between `(4, 3)` and `(6, 4)`. The seed's exact route and the witness's exact route both omit it; otherwise the three agree.
+- **Why the routes omit it** [`coincide_seed2_v5.py` (`42fe61fe`) and `.out`]. At the stop `(4, 3)` both `(6, 4)` and `(7, 5)` are in the way, at the seed and at the witness's doubles. The cascade takes the larger exit: `41/r_7 − 33/r_6` is exactly `−5719794401/46299372665` at the seed (about `−0.124`, steer), so it moves to `(6, 4)` and skips `(7, 5)`. The tree path lists `(7, 5)` as a link of its chain (each zone containing the previous exit) before `(6, 4)`; the max-exit route does not stop there.
+- At the stop `(7, 5)`, `R = 41/r_7` (1-based). Reading 3 (1-based) is then between its lap-2 exit and lap-3 entry, so its clear row (`coincide_cause_v1.labelled`'s form `((x, 8j + 7), (y, −(8J + 1)))`, `J = 5`, `j = 2`) is `23 r_7 − 41 r_3 ≥ 0`, which is E975's `23 r_6 − 41 r_2` in 0-based names [P, from the row definition].
+- The witness's value on it is `−1.7e-14`, relative `2e-15` (E975 item 4, steer): the witness is on this non-strict row of its own tree path to rounding. Whether the LP point is exactly on it is undecided from the doubles.
+- Seed 10086 likewise: its J3 tree path has `(5, 7)` where the seed's route has none and the witness's route has `(3, 4)`. Its relation was already a route row (E975).
+- (i) A coincidence on no route row at the seed. (ii) The J3 tree path has a chain stop the max-exit route skips (`coincide_seed2_v5`), whose clear row is the relation; the witness is on that row to rounding, and rounding to fractions restored it exactly (E975). (iii) The same face mechanism as E973 item 4, on a row of the tree path rather than of the route. **Understood**, with the witness's position on the row known to rounding only.
+
+**2. The raised reading's miss** [T, exact; PROVISIONAL: covering, the pass condition of a window, describing these lifts only; `lift_why_v4.py` (`c713c622`) and `.out`].
+- **The map** [P]. A window `[a, b]` lies in one zone of `g` iff `[ag, bg] ⊂ (8j − 1, 8j + 1)` for some `j`. Under `g → g + 8k` the interval becomes `[ag + 8ka, bg + 8kb]`: shifted by `8ka`, which is `8{ka}` modulo 8, and lengthened by `8k(b − a)`. For `a = 1` the shift is a multiple of 8, so only the lengthening acts; this is E975 item 3's `8k(1 − 1/b)`.
+- **By kind**, at the first window not covered after the lift: LENGTH (`(b − a)(g + 8k) ≥ 2`, no single zone of the raised reading can hold it) 111,643 at `[1, b]` and 4,947 above 1; POSITION 3,461 and 1,021.
+- **The 5,968 above 1.** One fast reading: 3,472, and in all 3,472 the first window `[1, b]` is still held after the lift; so the lift fails at window 2 (5,828 of the 5,968) or 3 (140). Two or three fast readings: 2,496.
+- (i) The first uncovered window after the lift. (ii) The map above [P]: the window outgrows the raised zone (116,590), or the shift `8{ka}` and the lengthening move it off every zone (4,482), each checked exactly. (iii) The one-zone pass condition (E930 item 1). **Understood** for each case. E975's "why the shrunk interval always excludes `f`" is not a separate fact: the 115,104 are the cases whose first failing window is `[1, b]`, so the interval excludes `f` there by selection.
+
+**3. E939's walk with two fast readings** [P per set, PROVISIONAL: covering, the claim supported being that `B2(S)` bounds `R*` over the domain; T, exact, for the checks; `two_fast_reach_v1.py` (`92176c48`) and `.out`].
+- **The walk.** Domain `7 < g < h ≤ 25` (the trees' window). Walk the slow set's clear windows of `[1, 15]` in order, keeping the set `A` of pairs `(g, h)` whose zones cover every window so far. A window is covered by one zone of `g` or `h`, or by a chain of two zones `X(p) → Y(q)`, or three `X(p) → Y(q) → X(p')`, each next zone containing the previous exit (E931's link). Every condition is linear in `(g, h)`, so `A` is a finite union of convex polygons, computed in Fractions. If `A` empties at `[a, b]`, every pair in the domain leaves some point at or before `b` uncovered (in `[a, b]`, or in an earlier window where the pair was dropped), and the landing is at or before the first such point (E929 item 1, E942): `B2(S) = b`.
+- **Limits.** Places where the walk could miss a pass, so the bound could be too low: chains of at most three zones; polygons of zero area dropped; `h ≤ 25`. The polygons are clipped as closed sets, which can only enlarge `A`, so the edges cannot make the bound too low. The script's other stops (more than 4,000 pieces; `A` non-empty through 15) did not fire in any run.
+- **On J1's crossers with two fast readings** (152 slow sets of five readings): `B2(S)` lies in `(7, 15]` for all 152. The largest is `52917295621603328/4860435319760077` (about `10.887`, steer), at window 7 of crosser 8391's slow set.
+- **Checks** [T, exact]: each crosser's own pair lies in `A` just before the bounding window and lands at or before `B2(S)` (152 of 152); 1,452 pairs taken from the last non-empty `A` (centroids of its polygons and points between) land at or before `B2(S)` (1,452 of 1,452).
+- **On E340's members and the far J2 members** [`two_fast_reach_v3.py` (`7c2ee887`) and `.out`]. E340's members that cross the gate with exactly two readings above 7: 149 (the two-fast part of E939 item 4's 153; the other 4 have three fast readings), and the 14 far J2 members of E975 item 2; 152 distinct slow sets walked. `B2(S)` lies in `(7, 15]` for all 163; each own pair lies in `A` before the bounding window and lands at or before `B2(S)` (163 of 163). Largest: the same `52917295621603328/4860435319760077` for E340 (member 74,441), and `871509787656907713528983453696/92717352381053749873784474443` (about `9.400`, steer) for the far members.
+- **On a grid** [`two_fast_reach_v2.py` (`8c4625cb`) and `.out`]. Every slow set of four readings on the `1/6` grid in `(1, 7]` with `d = 1`, 58,905 sets: `B2(S) ≤ 7` in all 58,905, so on this grid no pair `7 < g < h ≤ 25` takes a slow set across the gate. The largest is `7`, at `S = {1, 11/6, 19/6, 13/3, 11/2}`, window `[6, 7]`. (E939's one-reading grid run, with five slow readings, had 7 of 376,992 sets bounded in the second arc.)
+- `joint_bound_v1.py` (`0177bb10`) and `.out` compared these crossers' landings with E939's one-reading `B(S)` of the same slow set (five readings, or four for the `|F| = 3` crossers). That `B(S)` bounds one reading fewer than the arrangement has, so `R* > B(S)` in all 170 says nothing about the joint passes. **Withdrawn.**
+
+**Rule 22.**
+- **Seed 10662:** understood (item 1).
+- **The raised reading's miss:** understood case by case (item 2).
+- **Joint passes and the bound** (E975; E939 item 4 (ii)). (i) Two fast readings crossing some windows jointly. (ii) On the slow sets run (J1's 152, E340's 149, the 14 far) the two-reading walk bounds `R*` inside `d_min`'s second arc (item 3), within the walk's limits. This answers E939 item 4 (ii) on those populations. (iii) The same walk as E939 with E931's chains added. **Understood on the populations run**, within the limits listed; three fast readings (4 J1 crossers, 4 E340 members) are not run.
+
+**Still not understood, in order:**
+- the two-reading walk's limits: chains of four or more zones, zero-area pass sets, and `h > 25`;
+- three fast readings;
+- every slow set, beyond the populations run (E939's open item, now for one and two fast readings);
+- E973's list from E969's four LP items on.
+
+**Proposed:** the walk's limits in the order listed (a four-zone chain test first, since it decides whether the bound is ever too low on these sets).
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry bounds where gate crossers land; nothing here makes existence open.
+
+**Consequence (M7):**
+- Seed 10662 is on a clear row of its J3 tree path to rounding, at a chain stop that the max-exit route skips, at the seed and at the witness alike.
+- The lift's failures are the map `[ag, bg] → [ag + 8ka, bg + 8kb]` [P]: the window outgrows the raised zone in 116,590 of 121,072, and in the rest the shift and lengthening move it off every zone.
+- With two fast readings up to 25, E939's walk extended by E931's chains bounds `R*` inside the second arc on all 152 J1 slow sets, E340's 149 two-fast crossers and the 14 far J2 members, at most about `10.887`, and inside the first arc on all 58,905 grid slow sets [P per set, PROVISIONAL: covering; within the walk's limits]. Nothing committed.
+
+## E977 (2026-11-27): the two-reading walk's limits, then three fast readings. (1) With two fast readings no covering chain has four zones [P, PROVISIONAL: covering]: a revisit `X(p) → Y(q) → X(p')` needs `x > 3y`, and a four-zone chain needs that and `y > 3x`; re-walked with chains of up to 8 zones, `B2(S)` is unchanged on all 230 slow sets of E976's populations, `B2(S) ≤ 7` on all 58,905 grid sets as at 3 zones, and no passing chain is longer than 3 [T, exact]. (2) Dropping pass sets of zero area loses no pair [P, PROVISIONAL: covering]: every covering condition is strict with a non-zero linear part. (3) E939's walk with three fast readings `7 < x1 < x2 < x3 ≤ 25`: on the 4 slow sets of the 8 three-fast crossers (J1's 4, E340's 4), `B3(S)` lies in `(7, 15]`, at most `17732923532771328/1720124857676231` (about `10.309`, steer); on all 7,140 slow sets of three readings on the `1/6` grid, `B3(S) ≤ 7`; on every one of these sets no chain reached the cap of 6 zones, so the cap changed nothing there [P per set, PROVISIONAL: covering; T, exact, for the checks]. (4) The 45,844 passing chains of four and five zones with three readings are revisits bridged as in (1): the bridge condition holds at 51,365 of their 51,365 revisits [T, exact]; and the slowest of three fast readings never comes back [P, PROVISIONAL: covering]
+
+**Owner (2026-11-27):** *"Yes test cahin and then three fast speeds"*, on E976's ask "Test chains of four or more moves next?".
+
+**Map:** E976's Still-not-understood list, in order: the two-reading walk's limits (chains of four or more zones, zero-area pass sets, `h > 25`); three fast readings. G2's bound on `R*` for gate crossers (E938 item 2, E939). Place: the slow set's clear windows of `[1, 15]` and the fast readings' zones over them (E929 to E931, E939, E942).
+
+**Record read (rule 13):** E939 in full, E929 to E931, E942, E976.
+
+**0. The walk for any number of fast readings** [`experiments/n8/chain_walk_v1.py` (SHA-256 begins `fcc533e4`), `chain_walk_v2.py` (`1ad81831`), `chain_walk_v3.py` (`b615d3ac`)].
+- `chain_walk_v1` is E976's walk for `m` fast readings and chains of up to `L` zones. A window `[a, b]` is covered iff a chain of open zones runs from `a` past `b`, each next zone containing the previous exit (E931's link), consecutive zones of different readings (one reading's zones are disjoint). `A` is a finite union of convex polytopes in the fast readings, in Fractions.
+- `chain_walk_v2` is the same walk with two prunings that leave the union unchanged: a point is kept only if its tight rows have rank `m` (a vertex), and a piece is dropped when it lies inside another piece of the same step. Checks [T, exact; `chain_walk_check_v1.py` (`73a4fafd`) and `.out`]: v1 and v2 give the same `B2` on 300 grid sets with chains up to 8 zones (300 of 300) and on 22 J1 slow sets with chains up to 3 (22 of 22); v2 and v3 agree on the 300 grid sets (300 of 300).
+- `chain_walk_v3` is v2 with two counts added: `cut`, the chains that reach the cap `L` with their exit still before `b` and a non-empty piece; and the reading pattern of each passing chain of four or more zones, with a bridge check at each revisit (item 4). If `cut = 0`, no chain was stopped by the cap, so a larger cap adds no piece and `B` is the walk's bound with no chain limit [P, from the walk's definition].
+- `three_fast_reach_v1.py` (`e9fa5989`), `_v2` (`13d54098`) and `_v4` (`abef949a`) were stopped before finishing (too slow) and give no result; each `.out` says so. They are superseded by `_v3`, `_v5` and `_v6`.
+
+**1. Chains of four or more zones, two fast readings** [P, PROVISIONAL: covering, for the derivation, the claim supported being that capping two-reading chains at three zones (E976's walk) loses no covering pair; T, exact, for the runs; `two_fast_reach_v4.py` (`55692ffc`), `two_fast_reach_v5.py` (`051b5798`), each with `.out`].
+- **Derivation.** Let `X(p) → Y(q) → X(p')` be links of a chain, so `Y(q)` contains `X(p)`'s exit and `X(p')` contains `Y(q)`'s exit, all zones open. Then `(8q − 1)/y < (8p + 1)/x` and `(8p' − 1)/x < (8q + 1)/y`, and `p' > p` since `Y(q)`'s exit lies beyond `X(p)`'s. Subtracting, `6/x ≤ (8(p' − p) − 2)/x < 2/y`, so `x > 3y`. With two readings consecutive zones alternate, so a four-zone chain contains `X → Y → X` and `Y → X → Y`, which needs `x > 3y` and `y > 3x` at once. No chain of two readings has four zones.
+- **Runs.** On the 230 distinct slow sets of E976's populations (J1's 152 two-fast crossers, E340's 149, the 14 far J2 members), `B2(S)` from `two_fast_reach_v1`, from `chain_walk_v1` with `L = 3`, and with `L = 8` agree on 230 of 230. Every member's own pair lies in `A` before the bounding window and lands at or before `B2(S)` (152, 149 and 14). Passing pieces by chain length at `L = 8`: 6,086 of one zone, 6,214 of two, 72 of three, none longer. On the 58,905 grid sets with `L = 8`: `B2(S) ≤ 7` in all 58,905, as in E976 at `L = 3` (the values were not compared set by set); passing pieces 398,558, 507,981 and 9,315 of one, two and three zones, none longer.
+
+**2. Pass sets of zero area** [P, PROVISIONAL: covering; the claim supported is that dropping pieces with no interior loses no covering pair]. Each covering condition is strict in the cascade: zones are open and windows closed, so `a` lies inside the first zone, each exit lies inside the next zone, and the last exit lies beyond `b`. Each has a non-zero linear part in the fast readings. For a finite system of such strict inequalities, with the cap `x_m ≤ 25` closed, the solution set is non-empty exactly when the closed system has interior: a solution has a ball of solutions around it, part of which meets the cap's side. So a piece whose closure has zero area (or volume) has no pairs, and dropping it loses none. This holds for E976's walk and for `chain_walk_v1` to `_v3`.
+
+**3. Three fast readings: the crossers** [P per set, PROVISIONAL: covering, the claim supported being that `B3(S)` bounds `R*` over the domain `7 < x1 < x2 < x3 ≤ 25`; T, exact, for the checks; `three_fast_reach_v3.py` (`1a93a724`) and `three_fast_reach_v6.py` (`362b17f4`), each with `.out`].
+- **Population.** E340's gate crossers (`R* ≥ 9`) by readings above 7: 4,786 with one, 149 with two, 4 with three, none with more, which agrees with E939 item 1 (4,694 + 92 = 4,786). Each of the 4 also has `R* > 7` by `outcome_classes_v2`. With J1's 4 three-fast crossers these are 8 members on 4 distinct slow sets (J1 1472, 1475 and E340 47923 share one; J1 1473 and E340 47921; J1 1474 and E340 47922; E340 47920 alone).
+- **The bound.** `B3(S)` lies in `(7, 15]` on all 4 sets, at window 9 each time: `17732923532771328/1742791081414927` (about `10.175`, steer) on two sets, `5910974510923776/577393347022865` (about `10.237`, steer) and `17732923532771328/1720124857676231` (about `10.309`, steer). It is the same at chain caps `L = 3, 4, 6, 8` (v3), and at `L = 6` no chain was cut (v6), so it is the walk's bound with no chain limit on these sets.
+- **Checks** [T, exact]: each member's own triple lies in `A` before the bounding window, and its landing (about `9.41` to `9.62`, steer) is at or before `B3(S)`: 8 of 8. 8 triples sampled from the last non-empty `A` (centroids and midpoints) land at or before `B3(S)`: 8 of 8.
+- **Chain lengths** at `L = 8`: passing pieces 490 of one zone, 1,412 of two, 892 of three, 12 of four, none of five or more.
+
+**4. Three fast readings: the grid** [P per set, PROVISIONAL: covering, the same claim; `three_fast_reach_v5.py` (`f31d6de0`) and `three_fast_reach_v6.py`, each with `.out`]. Every slow set of three readings on the `1/6` grid in `(1, 7]` with `d = 1`, 7,140 sets.
+- `B3(S) ≤ 7` in all 7,140: on this grid no triple `7 < x1 < x2 < x3 ≤ 25` takes a slow set across the gate. The largest is `7`, at `S = {1, 19/6, 25/6, 16/3}`.
+- At `L = 6` no chain was cut in any of the 7,140 sets (v6), so these bounds have no chain limit.
+- Passing pieces by chain length: 157,798 of one zone, 352,471 of two, 316,815 of three, 40,311 of four, 5,521 of five, none of six.
+
+**Rule 22.**
+- **Chains of four and five zones with three readings** (items 3 and 4; `three_fast_chain4_v1.py` (`4561cec7`) and `.out`; `three_fast_reach_v6.out`; `slowest_no_return_v1.py` (`ef3023ab`) and `.out`). Fast readings named `x < y < z` (slowest, middle, fastest).
+  - (i) Feature: a reading comes back after the cascade has crossed one or two zones of the others. Patterns among the crossers: `z x y z` (7) and `z x z y` (5). On the grid: nine four-zone patterns (largest `z y x z`, 16,072) and three five-zone patterns, `z y x z y` (3,325), `y z x z y` (1,656) and `y z x y z` (540). `x` is never the reading that comes back. Among the crossers all twelve are at window 4 of their slow set, with `z` coming back at its next lap.
+  - (ii) Forced by item 1's revisit condition: the zones between two zones of a reading `w` must reach across its gap of at least `6/w`. Checked exactly at every vertex of each passing piece: at every revisit the lengths of the zones between sum to at least `6/w`, 12 of 12 revisits among the crossers and 51,353 of 51,353 on the grid (45,844 passing chains of four or five zones in all; a five-zone chain has two revisits).
+  - (ii) for `x` [P, PROVISIONAL: covering; the claim supported is that `x` never comes back]. Between consecutive zones of `x` lie only zones of `y` and `z`, whose lengths must sum to more than `6/x`. That part is a chain of two readings, so by item 1 it has at most three zones, and three only as `z y z` with `z > 3y`. One zone gives less than `2/x`; two give `2/y + 2/z < 4/x`; `z y z` gives `4/z + 2/y < 4/(3x) + 2/x = 10/(3x)`, using `z > 3y > 3x`. None reaches `6/x`. The script checks the three bounds exactly on the `1/8` grid of `7 < x < y < z ≤ 25` (487,344 triples; `z y z` possible in 450, below `6/x` in all 450), as a guard on the algebra.
+  - (iii) The same mechanism as the two-reading three-zone chains, E931's links, with a third reading available to bridge. They do not move `B3` on the crossers (the same with chains capped at 3). **Understood.**
+
+**Still not understood, in order:**
+- fast readings above 25 (the trees' window), for two and three fast readings;
+- every slow set beyond the populations and grids run, for one, two and three fast readings (E939's open item); the chain cap is shown not to bind only on the sets run;
+- E939 item 4's "what excludes two or more fast readings at `R* ≥ 11`": on the slow sets run, `B2 ≤ 52917295621603328/4860435319760077` and `B3 ≤ 17732923532771328/1720124857676231`, both below 11 [P per set, PROVISIONAL: covering]; not derived for every slow set;
+- E973's list from E969's four LP items on.
+
+**Proposed:** fast readings above 25 next, since the bound covers only the trees' window.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry bounds where gate crossers land; nothing here makes existence open.
+
+**Consequence (M7):**
+- Of E976's three limits, two are removed by derivation [P, PROVISIONAL: covering]: with two fast readings no covering chain has four zones, and dropping zero-area pieces loses nothing. The runs agree: with chains up to 8, `B2(S)` is unchanged on all 230 slow sets, and `B2(S) ≤ 7` on all 58,905 grid sets as at 3.
+- With three fast readings the slowest never comes back in a covering chain [P, PROVISIONAL: covering].
+- With three fast readings up to 25, the walk bounds `R*` inside the second arc on the 4 slow sets of the 8 three-fast crossers, at most about `10.309` (steer), and inside the first arc on all 7,140 grid slow sets, with no chain limit on any of them [P per set, PROVISIONAL: covering].
+- The walk's open limit for two and three fast readings is the cap 25 (E939's one-reading walk has no such cap). Nothing committed.
+
+## E978 (2026-11-27 to 28): fast readings above 25. (1) With two fast readings `g < h` and `h > Z`, a covered slow window either is shorter than `2/Z` or lies, up to `2/Z` at each end, in one zone of `g` [P, PROVISIONAL: covering]; so a one-reading walk in `g`, uncapped, bounds every pair with `h > Z`. (2) With `Z = 25`, the bound with no cap on either fast reading equals E976's capped `B2(S)` on all 230 slow sets of E977's populations, at most `52917295621603328/4860435319760077` (about `10.887`, steer); on the 58,905 grid sets it is at most 7 in 58,811 at `Z = 25` and in the other 94 at `Z = 50` [P per set, PROVISIONAL: covering; T, exact, for the checks]. (3) Three fast readings `x < y < z`, split by which readings exceed 25: on the 4 slow sets of the 8 three-fast crossers the bound with no cap equals E977's `B3(S)`, at most `17732923532771328/1720124857676231` (about `10.309`, steer); on the 7,140 grid sets it is at most 7 on 6,065 at cutoff 25 and on the other 1,075 at cutoff 50 or 100 (1,074 at 50; `S = {1, 3, 4, 5}` at 100) [P per set, PROVISIONAL: covering]; 26,167 real triples sampled from the relaxed sets at 25 all land by 7 [T, exact]. (4) On E829's near-carve slow set the tail bound is above 7, so that set stays open [P, PROVISIONAL: covering]
+
+**Owner (2026-11-27):** *"Yes, above 25"*, on E977's ask "Test fast speeds above 25 next?".
+
+**Map:** E977's Still-not-understood list, first item: fast readings above 25 (the trees' window), for two and three fast readings. G2's bound on `R*` for gate crossers (E938 item 2, E939). Place: the slow set's clear windows of `[1, 15]` and the fast readings' zones over them (E929 to E931, E939, E942, E977).
+
+**Record read (rule 13):** E939 in full, E929 to E931, E942, E976, E977. Reuse search: a grep of `docs/n8/*.md` and the running log for "above 25", "uncapped", "no cap", "cutoff" and "cap 25" finds E372's remark (running log line 17805) (a `StrongGate` violation needs four readings above 256) and E829 to E831 (carves of `[1, 7]` with `ρ₇` above 25: near-carves, no carve, E829 items 3 to 6 **not understood**). Read: E829 in full, E830 item 4, the E372 Consequence line. Nothing there bounds the walk with no cap; E829's near-carve is taken up in item 5. A keyword grep is not a reading of every entry: PARTIAL.
+
+**1. Two fast readings, `h > Z`** [P, PROVISIONAL: covering; the claim supported is that the relaxed condition below is necessary for `(g, h)` with `h > Z` to cover a window; `experiments/n8/two_fast_tail_v1.py` (SHA-256 begins `be160b6b`)].
+- **Derivation.** With two readings a covering chain has at most three zones and alternates (E977 item 1), and `g → h → g` needs `g > 3h`, impossible for `g < h`. So the chain is `g`, `h`, `g h`, `h g` or `h g h`. Each `h` zone is shorter than `e = 2/Z`. Hence a covered window `[a, b]` either has `b − a < e` (`h` alone) or lies in one `g` zone up to `e` at each end: entry below `a + e`, exit above `b − e`. This holds for every `g < h`, with no cap on `g`.
+- **The tail walk.** The set of `g` meeting this condition at every window so far is a finite union of open intervals, computed exactly; where it empties at `[a, b]`, every pair with `h > Z` lands at or before `b` (E929 item 1, E942): `Bt(S, Z) = b`. A window longer than `2e` admits finitely many laps of `g`, so the set is bounded after the first such window. Two shortcuts return a superset (so the bound stays valid): a window that would admit more than `10^4` laps while `g` is unbounded passes every `g`, and a bound on `g` above `10^4` is treated as unbounded (`two_fast_tail_v4.py` (`1fc5526a`); `_v2` (`d5aaec28`) and `_v3` (`9ea1a71c`) are earlier engines, used only for steering, and v4 agrees with v3 on all 155 J1 two- and three-fast slow sets at `e = 2/25` and `6/25`: `tail_engine_check_v1.py` (`da2192a2`) and `.out`).
+- **Checks** [T, exact; `two_fast_tail_check_v2.py` (`ca37d991`) and `.out`]. With `e = 0` the walk gives E939's one-reading bound (`one_fast_reach_v2.bound`) on all 152 J1 two-fast slow sets (152 of 152). With `e = 2·10^-30` it differs on 21; in all 21 the `e`-walk's set, at the window where the exact walk empties, has length below `10^-20`: the exact pass intervals touch at a point there (open intervals), and the slack opens the touching point. `two_fast_tail_check_v1.py` (`1987afa5`) attributed the 21 to point windows, which explains 2; its `.out` says so and v2 supersedes it.
+
+**2. The two-reading bound with no cap** [P per set, PROVISIONAL: covering; the claim supported is that `Bfull(S) = max(B2(S), Bt(S, 25))` bounds `R*` over all `7 < g < h`; `two_fast_nocap_v1.py` (`2c719bad`) and `.out`].
+- **Populations** (E977's 230 slow sets): `Bt(S, 25) ≤ B2(S)` on all 230, so `Bfull = B2`, in `(7, 15]` on all 230, largest `52917295621603328/4860435319760077` (about `10.887`, steer). Checks [T, exact]: 2,134 pairs with `h ∈ {26, 31, 50, 97, 200, 1001}` and `g` at midpoints of the tail set before it empties all land at or before `Bfull` (2,134 of 2,134).
+- **Grid** (58,905 sets; `B2 ≤ 7` on all, E976): `Bt(S, 25) ≤ 7` on 58,811; in `(7, 15]` on 91; no tail bound by 15 on 3.
+
+**3. Three fast readings with no cap** [P per set, PROVISIONAL: covering; the claim supported is that `Bfull(S)` bounds `R*` over all `7 < x < y < z`; `chain_relax_v1.py` (`98f89912`), `three_fast_nocap_v1.py` (`e86bb2c4`), each with `.out`]. Four cases, each a derivation:
+- **(a) `z ≤ 25`:** E977's walk, `B3(S)`.
+- **(b) `y ≤ 25 < z`:** drop `z`. Each `z` zone is shorter than `e = 2/25` and two `z` zones never link, so a covered window has `b − a < e`, or a chain of `x`, `y` zones with gaps below `e` between consecutive zones and below `e` at each end. The gap condition `entry(W') < exit(W) + e` is `(8q − 1) w < (8p + 1) w' + e w w'`; with `w' ≤ 25` it implies the linear `(8q − 1 − 25e) w < (8p + 1) w'`, which the walk uses (weaker, so still necessary). Consecutive zones are of different readings, since one reading's zones are `6/w ≥ 6/25 > e` apart. `chain_relax_v1.walk(S, 2, 2/25, 25, L = 8)`: `Bb(S)`.
+- **(c) `x ≤ 25 < y`:** drop `y` and `z`. A part of a window outside every `x` zone is covered by a chain of `y`, `z` zones alone: `y`, `z`, `y z`, `z y` or `z y z` (E977 item 1), of total length below `2/y + 4/z < 6/25`; two `x` zones are `6/x ≥ 6/25` apart, so they never link through such a part. So a covered window is shorter than `6/25` or lies, up to `6/25` at each end, in one `x` zone: the tail walk with `e = 6/25`, `Bc(S)`.
+- **(d) `25 < x`:** every zone is shorter than `2/25`. In a covering chain `x` occurs at most once (E977: the slowest never comes back). Between two `y` zones lie only `x` and `z` zones, and one `z` zone is too short (`2/z < 6/y`), so each repeat of `y` uses the one `x`: `y` occurs at most twice. Between two `z` zones lies at least one of the at most three `x`, `y` zones, so `z` occurs at most four times. A chain has at most 7 zones, of total length below `14/25`, so a window of length at least `14/25` is never covered: `Bd(S)` is the end of the first such window.
+- `Bfull(S) = max(B3, Bb, Bc, Bd)`.
+- **Check of the relaxed walk** [T, exact; `chain_relax_check_v1.py` (`de27f18e`) and `.out`]: with `e = 0` its rows are the exact walk's, and on 101 grid slow sets with two readings it gives `chain_walk_v3`'s bound (101 of 101).
+- **Crossers** (4 slow sets): `Bb = Bc = B3` on all 4, `Bd ≤ 7` on all 4, no chain cut at `L = 8` in (b); so `Bfull = B3`, at most `17732923532771328/1720124857676231` (about `10.309`, steer).
+- **Grid** (7,140 sets; `B3 ≤ 7` on all, E977): `Bfull ≤ 7` on 6,065; in `(7, 15]` on 1,022; no bound by 15 on 53. By case: (b) above 7 or none on 650, (c) on 682, (d) on 322. No chain cut at `L = 8` in (b) on any of the 7,140.
+
+**4. The grid exceptions** [T, exact, for the cascade samples; P per set, PROVISIONAL: covering, for the bounds].
+- **Two readings** (`two_fast_nocap_exc_v2.py` (`449d1ca8`) and `.out`). For the 94 sets with `Bt(S, 25) > 7` or none: at `Z = 50` (the exact walk on `7 < g < h ≤ 50` with chains up to 3 zones, which loses nothing by E977 item 1, and the tail with `e = 2/50`), `Bfull ≤ 7` on all 94. 863 pairs sampled from the tail sets at `Z = 25` (`h ∈ {26, 27, 29, 31, 37, 50, 75}`): none crosses the gate (0 of 863 with `R* > 7`). `two_fast_nocap_exc_v1.py` (`4fad8528`) was stopped after 79 sets (it computed every cutoff); its `.out` says so.
+- **Three readings** (`three_fast_nocap_exc_v2.py` (`531caf43`) and `.out`; `chain_relax_v2.py` (`8639aaba`); `chain_walk_v4.py` (`582b46d5`), which adds a domain with `z` restricted to `[25, Y]`). For the 1,075 sets: the same split at cutoffs `Y = 50, 100, 200` in turn, with the exact walk on the band `25 ≤ z ≤ Y` (chain cap raised from 6 while chains are cut, up to 14), case (b) by `chain_relax_v2`, which linearises the link with `Wmax`, the largest `w'` at the current piece's vertices, in place of `K` (the piece is convex, so `w' ≤ Wmax` on it and the row is still implied). All 1,075 are settled: `Bfull ≤ 7` at `Y = 50` on 1,074 (band chain cap 6, no chain cut) and at `Y = 100` on `S = {1, 3, 4, 5}` (band cap 8, no chain cut); no case-(b) chain cut at `L = 8` on any of the 1,075. None is left unsettled (0 of 1,075). The run's wall times include the Mac sleeping overnight (power log), so they are not compute times.
+- **Why v2 for case (b).** With `K = Y` and `e = 2/Y`, v1's slack `eK` is 2 at every cutoff, so a set that fails (b) at 50 fails at every `Y`; for `S = {1, 3, 4, 5}` v1 gives `63/5` at `Y = 100` and `200`, v2 gives `23/5` at 100. Check [T, exact; `chain_relax_check_v2.py` (`39aa94d1`) and `.out`]: at `e = 0` v2 gives the exact walk's bound on the 101 sets of `chain_relax_check_v1` (101 of 101); at `e = 2/25` its bound is no later than v1's on 101 of 101, earlier on 59. `three_fast_nocap_exc_v1.py` (`42ec9f0b`) used v1 and printed only unsettled sets; it was stopped after about 2 h 50 min with one set reported, and its `.out` says so.
+- **Cascade samples** [T, exact; `three_fast_nocap_samples_v1.py` (`4a8c35b1`) and `.out`]: from the relaxed sets at cutoff 25 where they stop, centroids of up to 6 case-(b) pieces with `z ∈ {26, 30, 40, 60, 100}` (21,435 triples) and midpoints of up to 4 case-(c) tail intervals with `(y, z) ∈ {(26, 27), (30, 41), (50, 77)}` (4,732 triples), on all 1,075 sets: none crosses the gate (0 of 26,167 with `R* > 7`); the largest landing is `2816/607` (about `4.64`, steer).
+
+**5. E829's near-carve under the tail walk** [P for the bound, PROVISIONAL: covering; T, exact, for the cascade; `frontier_tail_v1.py` (`121ac1dc`) and `.out`]. The polished vector of E829 (`frontier_polish_v1_first.pkl`, Fractions of the stored floats) has slow set `S = {1, ρ₂, ρ₃, ρ₄, ρ₅}` and fast pair `g = ρ₆` (about `7.0035`, steer), `h = ρ₇` (about `36.63`, steer), so `h > 25`. The cascade lands it at `9570149208162304/2945732278089691` (E829). `Bt(S, 25) = Bt(S, 36) = 69805794224242688/6998746435818345` (about `9.974`, steer), above 7, and `g = ρ₆` lies in the tail set at each of the 4 windows it passes. So item 1's bound does not exclude a gate crosser with `h > 25` on this slow set; it is not on the grid.
+
+**Rule 22.**
+- **The 21 tail-check differences** (item 1). (i) The tail walk with `e = 2·10^-30` bounds higher than E939's walk. (ii) Forced by touching pass intervals: at the window where the exact walk empties, the slack set has length below `10^-20` (21 of 21; `two_fast_tail_check_v2`). (iii) A property of the relaxation, not of the cascade. **Understood.**
+- **The 94 two-reading grid exceptions** (item 4). (i) `Bt(S, 25) > 7` or none, though `B2 ≤ 7`. (ii) Forced by the relaxation's slack at `Z = 25`: at `Z = 50` all 94 are at most 7, and no sampled pair crosses (item 4). (iii) A property of the bound method, not of the cascade. **Understood.**
+- **`S = {1, 3, 4, 5}`, the one set settled at cutoff 100** (item 4) [`three_fast_exc_1345_v2.py` (`0a489f58`) and `.out`; `_v1` (`7a648248`) stopped at its part (4) on a parse error, its `.out` says so]. (i) It is the only one of the 1,075 whose case-(b) bound by v2 at cutoff 50 is above 7 (`47/5`; part (4) finds no other); it is not set apart by integer readings (13 of the 1,075 are integer sets, the other 12 settle at 50). At cutoff 50 a single piece survives to the window before the stop, with `x` in `(6271910300/894632739, 1225/174)` and `y` in `(4700/429, 2554603975/232194126)` (about `7.011` to `7.040` and `10.956` to `11.000`, steer). (ii) Forced by the slack of the first window's link row: there the piece is the whole case-(b) domain, `y` up to 50, so `e·Wmax = 2`. At the piece's centroid the window `(1, 7/5)` has an uncovered part (no zone of `x` or `y`) of length `231384346804987600653/2657780836797802062125` (about `0.087`, steer), longer than `2/50`, so no `z > 50` covers it; the piece passes only through the slack. The bound falls as `e` shrinks: `47/5` at cutoffs 50 and 60, `7` at 70 and 80, `23/5` at 90 and 100. 24 real triples from the piece's centroid and vertices with `z ∈ {51, 60, 80, 100, 200, 1000}` land by `129/100` (0 of 24 cross). (iii) The same mechanism as the other 1,074 (relaxation slack, not the cascade), needing a smaller `e`. **Understood.**
+- **The 1,075 three-reading grid exceptions** (item 4). (i) The bound at cutoff 25 is above 7 or missing, though `B3 ≤ 7`. (ii) Forced by the relaxation's slack at cutoff 25 (and, for case (b) in v1, by the constant slack `eK = 2`): at cutoff 50 or 100 all 1,075 are at most 7, and no sampled triple crosses (item 4). (iii) A property of the bound method, not of the cascade. **Understood.**
+
+**Still not understood, in order:**
+- E829's near-carve (items 3 to 6 there): item 5 gives `Bt = 69805794224242688/6998746435818345` on its slow set, so the bound leaves it open; why its two clear components do not close together is still **not understood**;
+- every slow set beyond the populations and grids run, for one, two and three fast readings (E939's open item); four or more fast readings are not run;
+- E939 item 4's "what excludes two or more fast readings at `R* ≥ 11`": on the slow sets run, with no cap, `Bfull ≤ 52917295621603328/4860435319760077` (two readings) and `≤ 17732923532771328/1720124857676231` (three), both below 11 [P per set, PROVISIONAL: covering]; not derived for every slow set;
+- E973's list from E969's four LP items on.
+
+**Proposed:** E829's near-carve slow set with the bound of item 2 in full (the exact walk on `7 < g < h ≤ Z` and the tail at `Z` for `Z = 50, 100`), to see whether the walk empties by 7 there or keeps a region with `g` near `ρ₆`.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry bounds where gate crossers land; nothing here makes existence open.
+
+**Consequence (M7):**
+- A fast reading above a cutoff `Z` enters the bound only through slack of `2/Z` per window end, so the walks need no cap: the tail is a one-reading walk (two readings) or a fixed split into four cases (three readings) [P, PROVISIONAL: covering].
+- With no cap on the fast readings, the bound on every crosser slow set run is unchanged: at most about `10.887` (steer) with two fast readings and `10.309` (steer) with three [P per set, PROVISIONAL: covering].
+- On the grid, with two fast readings and no cap, no pair crosses the gate on any of the 58,905 sets [P per set, PROVISIONAL: covering]; with three, no triple crosses on any of the 7,140 [P per set, PROVISIONAL: covering]. Nothing committed.
+
+## E979 (2026-11-28): E829's near-carves under the full fast-reading bound. (1) On the slow set of E829's polished near-carve, the bound over every fast pair `7 < g < h` is `7` at cutoff 50 [P, PROVISIONAL: covering]: no pair of fast readings carves `[1, 7]` there. (2) On all nine near-carve vectors of E829 and E830 the bound is at most 7: on the seven with `ρ₆ > 7` over every fast pair at cutoff 50, on the two with `ρ₆ < 7` over every single fast reading [P per set, PROVISIONAL: covering]. (3) Each vector fails by one of two two-link cycles: type A, E830 item 4's identity (`ρ₇ < 7ρ₅` against `ρ₇ > 7ρ₅`), on seven vectors; type B, on two, where `31·(25ρ₇ − 143ρ₆) + 25·(177ρ₆ − 31ρ₇) = −8ρ₆ < 0`, so its two links never both hold [P]. This corrects E830 item 5, which left type B **not understood**, and my E978, which called the polished vector's two clear components not understood although E830 item 4 had derived them
+
+**Owner (2026-11-28):** *"Yes, run it"*, on E978's proposal (E829's near-carve slow set under the full two-reading bound).
+
+**Map:** E978's Proposed line and its Still-not-understood item on E829; E829 items 3 to 6 and E830 items 4 to 7 (the near-carves above 25 and the lap-4 strip). Place: the near-carve slow sets' clear windows of `[1, 15]` and the fast readings' zones over them (E929 to E931, E939, E942, E977, E978).
+
+**Record read (rule 13):** E829 in full, E830 in full, E978, `frontier_chain_exact_v1.py` and `.out` (E830's reader of the nine vectors and their four chain types). Reuse: E978's walks (`chain_walk_v3`, `two_fast_tail_v4`) and E830's link convention, `p → q`: `(8j_p + 1) ρ_q − (8j_q − 1) ρ_p > 0`.
+
+**Correction to E978.** E978's Still-not-understood list says of E829's near-carve that "why its two clear components do not close together is still **not understood**". E830 item 4 had already derived it for the polished vector's chain type (a two-link cycle of product 1), and E978 lists E830 item 4 as read. That line was wrong when written; item 3 below gives it with an artifact on all nine vectors.
+
+**1. The polished vector's slow set** [P per cutoff, PROVISIONAL: covering; the claim supported is that `Bfull(S, Z) = max(Bc, Bz)` bounds `R*` over all `7 < g < h`, as in E978 items 1 and 2; `frontier_twofast_v1.py` (SHA-256 begins `d561ac51`) and `.out`]. `S = {1, ρ₂, ρ₃, ρ₄, ρ₅}` from `frontier_polish_v1_first.pkl` (Fractions of the stored floats). At `Z = 25`: the exact walk on `7 < g < h ≤ 25` empties at the window ending at `7`, and the tail is `69805794224242688/6998746435818345` (about `9.974`, steer; E978 item 5). At `Z = 50`: the exact walk on `7 < g < h ≤ 50` empties at the same window, ending at `7`, and the tail with `e = 2/50` empties at the first window, so `Bfull = 7`. The tail's slack at 25 is what left the set open in E978. 17 cascade samples from the surviving pieces and tail intervals [T, exact]: none crosses (0 of 17); the largest landing is `2157111631519783321600/312823548131038302877` (about `6.896`, steer), at a pair with `g` about `7.106`, `h` about `18.23` (steer), from the piece that survives to the window ending at 7.
+
+**2. All nine near-carve vectors** [P per set, PROVISIONAL: covering, as in item 1; `frontier_twofast_all_v2.py` (`428cdd32`) and `.out`]. These are the vectors E830 uses: the first line of each of `frontier_box_carve_v1_hi2_s11.out` to `_s18.out` and the polished one, with the readings sorted.
+- **Seven with `ρ₆ > 7`** (s11, s12, s13, s14, s17, s18, polished): slow set `{1, ρ₂, …, ρ₅}`, fast pair `(ρ₆, ρ₇)`. `Bfull` at cutoff 25 is above 7 on all seven and at cutoff 50 is at most 7 on all seven; it equals 7 on s13, s17 and the polished vector and lies in `(5, 6)` on s11, s12, s14 and s18 (exact values in the `.out`).
+- **Two with `ρ₆ < 7`** (s15 at about `6.9712`, s16 at about `6.9720`, steer): there `ρ₆` is a slow reading, so the slow set is `{1, ρ₂, …, ρ₆}` with one fast reading `ρ₇`. E939's one-reading walk, uncapped, gives `25895697857380352/7121710596729177` (about `3.636`, steer) on s15 and `33776997205278720/6995624631157919` (about `4.828`, steer) on s16.
+- `frontier_twofast_all_v1.py` (`2ae1f519`) treated `ρ₆` as fast on all nine; its `.out` says so and v2 supersedes it. v1 read each file's "best near-carve" line, which is the same vector as the first line on all eight files (checked).
+- So on these nine slow sets, no fast pair (seven sets) and no single fast reading (two sets) carves `[1, 7]` [P per set, PROVISIONAL: covering]. This is per slow set; whether some carve of `[1, 7]` has `ρ₇ ≥ 25` over all slow sets (E829's Consequence) is not settled here.
+
+**3. The two cycles** [P for the identities; T, exact, for the values; `frontier_cycle_rows_v1.py` (`66f2b122`) and `.out`]. Links in E830's convention:
+- **Type A**, `L_A1` (`ρ₇` lap 6 `→ ρ₅` lap 1) `= 49ρ₅ − 7ρ₇` and `L_A2` (`ρ₅` lap 3 `→ ρ₇` lap 22) `= 25ρ₇ − 175ρ₅`. The coefficient check gives `25 L_A1 + 7 L_A2 = 0`, so at most one is positive. On s11, s13, s14, s16, s17, s18 and the polished vector exactly one holds (7 of 7). The other link is the vector's failure: `L_A1 = −7(ρ₇ − 7ρ₅)` and `L_A2 = 25(ρ₇ − 7ρ₅)`, so it fails by `7|ρ₇ − 7ρ₅|` or `25|ρ₇ − 7ρ₅|`, from about `4.4·10⁻¹⁴` (polished, `L_A2`) to `2.4·10⁻²` (s16, `L_A1`) (steer).
+- **Type B**, `L_B1` (`ρ₆` lap 3 `→ ρ₇` lap 18) `= 25ρ₇ − 143ρ₆` and `L_B2` (`ρ₇` lap 22 `→ ρ₆` lap 4) `= 177ρ₆ − 31ρ₇`. The coefficient check gives `31 L_B1 + 25 L_B2 = −8ρ₆`, so both positive would need `ρ₆ < 0`, and every reading is positive. Equivalently `ρ₇/ρ₆ > 143/25` against `ρ₇/ρ₆ < 177/31`, and `143·31 = 4433 > 4425 = 25·177`. Both fail on s12 and s15 (2 of 2).
+- **In the walk** (`frontier_twofast_trace_v1.py` (`7214213b`), `frontier_twofast_touch_v1.py` (`75a64434`), `frontier_twofast_all_v2`, each with `.out`).
+  - For the type-A vectors with `ρ₆ > 7`, the rows binding at the vector are `h`-only: window 0, which ends at `7/ρ₅`, needs `h` lap 6's exit `49/h` beyond it (`L_A1`); windows 1 and 2, which begin at `17/ρ₅` and `25/ρ₅`, need `h` lap 15's entry `119/h` and lap 22's entry `175/h` before them (`17ρ₇ − 119ρ₅ > 0` and `L_A2`, both positive multiples of `ρ₇ − 7ρ₅`).
+  - Each vector lies on one side of `ρ₇ = 7ρ₅` and fails the windows on the other.
+  - For the polished vector, window 0's pass set and window 1's touch at it: each alone holds it within `2⁻⁴⁹` (scaled) of its closure, and their intersection's nearest piece is about `11.96` away (steer). Its clear parts at windows 1 and 2 have exact lengths `2392537302040576/15185342644814090368692351309669` and `3518437208883200/15185342644814090368692351309669`: these are E829's two clear components.
+  - For s12 the rows binding at the vector are `L_B1` (window 3) and `L_B2` (window 4).
+
+**Rule 22.**
+- **Type A (seven vectors).** (i) `ρ₇` within about `3.5·10⁻³` of `7ρ₅` (steer; s16 the farthest), `ρ₅` about `5.20` to `5.24`, `ρ₆` within `0.03` of 7 (steer). (ii) Forced by `25 L_A1 + 7 L_A2 = 0`: closing the windows at `7/ρ₅` and at `17/ρ₅`, `25/ρ₅` needs `ρ₇ < 7ρ₅` and `ρ₇ > 7ρ₅` at once (item 3; E830 item 4). The polished vector sits at the tie, within `10⁻¹⁴`, so its two clear components are of length about `1.6·10⁻¹⁶` and `2.3·10⁻¹⁶` (steer; exact in item 3) and cannot both close. (iii) One mechanism: a two-link cycle of product 1. **Understood.**
+- **Type B (s12, s15).** (i) `ρ₅` about `6.33` to `6.36`, `ρ₇` about `39.8` to `40.0`, `ρ₆` within `0.03` of 7 (steer). E830's `frontier_chain_exact_v1.out` records float LP margins of about `−0.875` and `−0.951` for this type (steer). (ii) Forced by `31 L_B1 + 25 L_B2 = −8ρ₆ < 0`: the two links exclude each other for every positive `ρ₆` (item 3). E830 item 5's "the exact nullspace of the two binding link rows is empty, so no pair of links is a cycle, and the conflict involves further constraints" is corrected: the combination is not 0 but `−8ρ₆`, a cycle of product `4425/4433`, and the only further fact used is `ρ₆ > 0`. (iii) A two-link cycle like type A, but of product other than 1: a fixed gap, not a tie, so these vectors stay a fixed distance from closing. **Understood.**
+- **s16** lands at `R* = 1` (E830's vectors as read; `frontier_twofast_all_v2.out`). (i) Its `ρ₆` is below 7, and at window 0, `(1, 1.004011)` (steer), `ρ₇` is about `2.59` (steer) from the nearest pass interval of the one-reading walk, `(39, 40.8362)` (steer). (ii) `ρ₇` is not in window 0's pass set, so that window is not closed and the cascade lands at its start. (iii) By its links it is type A (item 3), and it is not near closing window 0. **Understood** as far as stated: it is not a near-carve of the same order as the five of E829 item 3 with uncovered length below `10⁻⁴`, which are s11, s13, s14, s17 and s18.
+
+**Still not understood, in order:**
+- E830 items 6 and 7 (E829 item 5): whether any chain type with `ρ₇` in the lap-4 strip `(31, 33)` carves `[1, 7]`; the record's tree answers it for `ρ₇ ≤ 25` only, and items 1 and 2 here are per slow set;
+- every slow set beyond the populations, grids and nine near-carve sets run, for one, two and three fast readings; four or more fast readings are not run;
+- E939 item 4's "what excludes two or more fast readings at `R* ≥ 11`" for every slow set (E978);
+- E973's list from E969's four LP items on.
+
+**Proposed:** E830 item 6, the lap-4 strip: the exact two-reading walk with `h` restricted to `(31, 33)` and `g` uncapped below it, over E829's box of slow sets on a grid, to find whether any slow set keeps a pass set by 7.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry bounds where arrangements with these slow sets land; nothing here makes existence open.
+
+**Consequence (M7):**
+- E829's near-carves above 25 are understood: each is held open by one of two two-link cycles. Type A has product 1, a tie at `ρ₇ = 7ρ₅`; type B has product `4425/4433`, a fixed gap [P].
+- On their slow sets no fast reading or pair carves `[1, 7]` [P per set, PROVISIONAL: covering].
+- E830 item 5 and E978's line on the polished vector are corrected. The lap-4 strip stays open. Nothing committed.
+
+## E980 (2026-11-28): E830 item 6, the lap-4 strip. On the grid of step `1/12` over E829's box of readings, with the top reading `ρ₇` anywhere in `(31, 33)` and every other reading above 7 left free, the walk empties by 7 on all 3,527,268 slow sets [P per set, PROVISIONAL: covering]: no arrangement with those slow readings and `ρ₇` in the strip carves `[1, 7]`. The same walks, moved to a band around known crossers, keep a pass set past 7 on all 85 of E829's carves and all 155 distinct J1 crossers tested [T, exact]. Between the grid points and outside the box the strip is not settled
+
+**Owner (2026-11-28):** *"Yes, run it"*, on E979's proposal (the lap-4 strip over E829's box of slow sets on a grid).
+
+**Map:** E979's Proposed line and its first Still-not-understood item: E830 items 6 and 7 (E829 item 5), whether any chain type with `ρ₇` in the lap-4 strip `(31, 33)` carves `[1, 7]`. Place: the slow sets' clear windows of `[1, 15]` and the fast readings' zones over them, with the top reading confined to the strip (E929 to E931, E939, E942, E977 to E979).
+
+**Record read (rule 13):** E829 item 2 (the box), E830 items 3, 6 and 7, E977 to E979. Reuse: `chain_walk_v4.band_domain` (E978), E939's one-reading condition as `two_fast_tail_v4.pass_set` with `e = 0` (checked against E939 in E978 item 1), E829's 85 carves (`frontier_box_carve_v1_23_25_s*.pkl`) and the J1 crossers of `lift_test_v1.pkl` as firing controls.
+
+**1. The walks** [P, PROVISIONAL: covering; the claim supported is that `B` bounds `R*` for every arrangement with slow set `S` and top reading in `(31, 33)`; `strip_lap4_v1.py` (SHA-256 begins `877e50d4`)]. With the top reading in `(31, 33)`, every fast reading lies in `(7, 33)`, so the walks need no cap and no relaxation.
+- **One fast reading:** the pass set in `h` starts as `(31, 33)` and is intersected with each clear window's exact pass set.
+- **Two or three fast readings:** `chain_walk_v4.walk` on `band_domain(m, 31, 33)`, with chains of up to 3 zones for two readings (which loses nothing, E977 item 1). For three readings the chain cap starts at 6 and is raised by 2 while chains are cut, up to 12.
+- `B` is the end of the window where the pass set empties (E929 item 1, E942).
+
+**2. The grid** [P per set, PROVISIONAL: covering; `strip_lap4_grid_v1.py` (`bdf5ecc1`) and `.out`].
+- **What is gridded.** E829's box is `ρ₂ ∈ [21/10, 49/10]`, `ρ₃ ∈ [14/5, 27/5]`, `ρ₄ ∈ [37/10, 63/10]`, `ρ₅ ∈ [21/5, 36/5]`, `ρ₆ ∈ [27/5, 41/5]`. The readings at most 7 run over multiples of `1/12` in the box, strictly increasing. The readings above 7 are not gridded: each walk covers every value in `(7, ρ₇)` and every `ρ₇` in `(31, 33)`.
+- **Cases.** `ρ₄ ≤ 63/10 < 7` always, so there are three cases:
+  - **III**, `ρ₅ > 7`: slow set `{1, ρ₂, ρ₃, ρ₄}` with three fast readings; 15,268 sets.
+  - **I**, `ρ₅ ≤ 7 < ρ₆`: slow set `{1, ρ₂, …, ρ₅}` with two fast readings; 310,412 sets.
+  - **II**, `ρ₆ ≤ 7`: slow set `{1, ρ₂, …, ρ₆}` with one fast reading; 3,201,588 sets.
+- **Results.** `B ≤ 7` on all 3,527,268 (15,268 of 15,268; 310,412 of 310,412; 3,201,588 of 3,201,588), and in cases I and III no chain was cut at the final cap (case II has no chains: one reading). Largest `B`:
+  - III: `468/67` (about `6.985`, steer), at `{1, 37/12, 25/6, 67/12}`;
+  - I: `47/7` (about `6.714`, steer), at `{1, 37/12, 25/6, 67/12, 7}`;
+  - II: `372/59` (about `6.305`, steer), at `{1, 35/12, 25/6, 59/12, 67/12, 7}`.
+
+**3. Checks** [T, exact; `strip_lap4_check_v1.py` (`741265bd`) and `.out`].
+- **(A) Firing control, one fast reading.** All 85 of E829's carves with `ρ₇` in `(23, 25)` have exactly one reading above 7. With the strip moved to `(23, 25)`, the walk on each carve's slow set keeps a pass set past 7 (85 of 85), and its `B` is at least the carve's `R*` by the cascade (85 of 85); every carve has `R* > 7` (85 of 85).
+- **(B) Firing control, two and three fast readings.** These are the J1 crossers of `lift_test_v1.pkl`: 152 distinct with two readings above 7, and 4 with three, which share 3 distinct (slow set, top reading) pairs, each tested once. With the band moved to `(h − 1, h + 1)` around each one's top reading `h` (lower end at least 7), the walk gives `B > 7` and `B ≥ R*` on 152 of 152 and on 3 of 3.
+- **(C) Soundness on the strip grid.** For 400 slow sets drawn at random (seed 7) from each case, 3 random exact fast tuples each (denominators 1000, top in `(31, 33)`, the others in `(7, top)`): the cascade's `R*` is at most the set's `B` in 3,600 of 3,600. The largest `R*` is `54/23` (III), `204/71` (I) and `204/59` (II) (about `2.348`, `2.873`, `3.458`, steer).
+
+**Rule 22.** No exception: every set of the grid has `B ≤ 7`, every control fires, and every soundness sample holds (items 2 and 3). The largest `B` in each case lies below 7, at `468/67`, `47/7` and `372/59`.
+
+**Still not understood, in order:**
+- the lap-4 strip between the grid points of E829's box and outside the box: items 2 and 3 are per slow set on the grid, and E829's Consequence ("no carve of `[1, 7]` for `ρ₇ ≥ 25`") is not proved;
+- every slow set beyond the populations, grids and near-carve sets run, for one, two and three fast readings; four or more fast readings are not run (E978, E979);
+- E939 item 4's "what excludes two or more fast readings at `R* ≥ 11`" for every slow set (E978);
+- E973's list from E969's four LP items on.
+
+**Proposed:** E830 item 6 for the whole box rather than its grid: the strip walk with the slow readings as variables too, cell by cell over the box (in a cell where the order of the slow zones' ends is fixed, each link `(8p ± 1)/w` against `(8k ± 1)/s` is linear in all readings together), to settle the strip between grid points.
+
+Existence step named (rule 1): existence at the AP is taken as proved, as the owner states. This entry bounds where arrangements with these slow sets land; nothing here makes existence open.
+
+**Consequence (M7):**
+- On the `1/12` grid of E829's box, no arrangement with the top reading in the lap-4 strip `(31, 33)` crosses the gate, with any other fast readings [P per set, PROVISIONAL: covering].
+- The walks find the known carves and crossers when moved onto them [T, exact], so the empty strip is not the method failing to fire.
+- E830 item 6 is answered on the grid only. Nothing committed.
+
+## E981 (2026-11-28): the mass-run pipeline at scale — 553 boxes banked axiom-clean, 8-worker relaunch. (1) The two 200-box tranches both finished PASS: fine-ladder 200/200 (the two-pass utc pipeline: provision dump tolerating the lean-pending check, post-compile dump re-verifying the zone-form stubs at [T 34/34]; the dump's stub regex patched for the E909 zone form `DfsPruneDomZone (boxN ...) tree<nid>`), C₃ 200/200 (303 C₃ boxes now banked) [L; every PASS row's axiom scan inside {propext, Classical.choice, Quot.sound}]. (2) The remaining populations re-censused against all banked TSVs: 11,981 boxes (2,073 fine + 9,908 C₃); split 4-way each and relaunched as 8 daemonized workers (per-worker C₃ TSVs + flock-serialized mini-bank rebuild; machine 10 cores, load ~5) [L]. Projection at observed rates: fine ~29-86 h, C₃ ~7-20 h. (3) Driver fixes landed: selection-file parametrization, launch helper, crashed-run TSV pollution cleaned (PASS-only, backups kept) [L]
+## E982 (2026-11-28): `Fresh/WidthCover.lean` landed — variable-edge width certificates [L; 4 theorems, all `[propext, Classical.choice, Quot.sound]`]. (1) `gap_width_bound`: the certifying component's width `w(rL,rR) = (8kR+7)/rR − (8kL+9)/rL` is increasing in `rL` and decreasing in `rR`, so a corner fact `2/S ≤ w(lL,uR)` gives `2/S ≤ w` at every interior pair (general S ≥ 25). (2) `colDead_of_width_mem` (the width lemma in β's `ColDead` shape), `tuple_dead_of_width` (a wide component kills the tuple's column — no datasheet atom, no exact-edge match), `tuple_dead_of_width_box` (the per-class form, all `s ≥ S`). Worked instance: `rhoEx`'s `(3/2, 7/4)` column dead by width alone. (3) **The corner-width measurement corrects E923-e's framing** [T exact, `chamber_corner_width_v2.py`/`.out`]: the FIXED certifying pair's width is NOT uniform over any chamber — 0/7,797 classes have window-box corner width ≥ 2/25 (minimum 2/16905), and at K=8 sub-windows the width test adds zero beyond the D1/D2 race test (`v3_chamber_subcell_width_v1.out`: width-only 0, neither 22.5%). E923-e's "every corner tuple has a wide component" is true because the certifying pair MOVES within the chamber — a displacement fact, not a per-class width fact. The tuple-level width route (this entry's theorems) is the correct landing; the per-class uniform version is false as stated

@@ -52,7 +52,12 @@ def main():
     for a in sys.argv[1:]:
         if a.startswith('--deadline-min'):
             deadline_min = float(a.split('=')[1])
-    sel = json.load(open(os.path.join(HERE, 'massrun_fine_selection.json')))
+    selfile = os.path.join(HERE, 'massrun_fine_selection.json')
+    pos = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if pos:
+        selfile = os.path.join(HERE, pos[0] if pos[0].endswith('.json')
+                               else 'massrun_fine_selection_%s.json' % pos[0])
+    sel = json.load(open(selfile))
     boxes = [tuple(b) for b in sel['selection']]
     nodes_of = {tuple(b): n for b, n in zip(sel['selection'], sel.get('nodes', []))}
     done = set()
