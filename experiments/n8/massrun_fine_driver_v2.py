@@ -34,6 +34,19 @@ def axscan(log, nprints):
     return ok, len(sets), [list(b) for b in bad], len(errs), sorry
 
 
+def passed_boxes(lines):
+    done = set()
+    for line in lines:
+        if not line.endswith('\n'):
+            continue  # A live writer may not have finished the final record.
+        fields = line.rstrip('\n').split('\t')
+        # Timing columns have changed between versions. The status and
+        # diagnostic are the final two fields of a completed PASS record.
+        if len(fields) >= 3 and fields[-2] == 'PASS':
+            done.add(tuple(int(x) for x in fields[0].split(',')))
+    return done
+
+
 def main():
     deadline_min = None
     for a in sys.argv[1:]:
@@ -44,10 +57,8 @@ def main():
     nodes_of = {tuple(b): n for b, n in zip(sel['selection'], sel.get('nodes', []))}
     done = set()
     if os.path.exists(TSV):
-        for l in open(TSV):
-            f = l.rstrip('\n').split('\t')
-            if len(f) > 5 and f[5] == 'PASS':
-                done.add(tuple(int(x) for x in f[0].split(',')))
+        with open(TSV) as results:
+            done = passed_boxes(results)
     todo = [b for b in boxes if b not in done]
     print('boxes given=%d done(PASS)=%d todo=%d' % (len(boxes), len(done), len(todo)),
           flush=True)
@@ -200,7 +211,7 @@ def main():
                         % (nd, nprints, bad, nerr, sorr)]
         with open(TSV, 'a') as f:
             f.write('\t'.join(row) + '\n'); f.flush()
-        print('%s %s (nodes=%s compile=%s)' % (box, row[5], nodes, row[4]), flush=True)
+        print('%s %s (nodes=%s compile=%s)' % (box, row[-2], nodes, row[5]), flush=True)
 
 
 if __name__ == '__main__':
