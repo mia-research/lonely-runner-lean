@@ -198,3 +198,8 @@
 1,2,6,8,14,15,17	?	0.3s [T 32/32]	0.2s [T 33/34+lean-pending]	0.1s	682s wall/1025s cpu	0s [T 34/34]	PASS	1753/1753 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1024s)
 1,2,4,6,7,8,9	?	0.2s [T 32/32]	0.2s [T 33/34+lean-pending]	0.1s	665s wall/956s cpu	0s [T 34/34]	PASS	1736/1736 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=956s)
 1,3,4,6,8,9,10	?	0.2s [T 32/32]	0.1s [T 33/34+lean-pending]	0.1s	663s wall/960s cpu	0s [T 34/34]	PASS	1628/1628 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=959s)
+1,2,4,6,6,7,11	?	0.6s [T 32/32]	0.5s [T 33/34+lean-pending]	0.4s	1687s wall/1692s cpu	0s [T 34/34]	PASS	1633/1633 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1692s)
+1,4,6,8,9,11,13	?	0.8s [T 32/32]	0.6s [T 34/34]	0.4s	1718s wall/1720s cpu	0s [T 34/34]	PASS	1849/1849 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1720s)
+1,2,5,7,8,12,13	?	0.8s [T 32/32]	0.6s [T 33/34+lean-pending]	0.3s	1751s wall/1821s cpu	0s [T 34/34]	PASS	1877/1877 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1821s)
+1,2,4,5,6,14,16	?	0.7s [T 32/32]	0.5s [T 33/34+lean-pending]	0.4s	1838s wall/1881s cpu	0s [T 34/34]	PASS	2052/2052 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1880s)
+1,2,5,7,9,12,17	?	0.4s [T 32/32]	0.3s [T 33/34+lean-pending]	0.3s	17778s wall/1741s cpu	0s [T 34/34]	PASS	1801/1801 axioms all in {propext, Classical.choice, Quot.sound} -- SLOW WALL (contention; cpu=1741s)

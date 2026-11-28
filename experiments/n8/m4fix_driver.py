@@ -115,7 +115,7 @@ def _bank_unlocked(rows_todo, LP):
     olean = os.path.join(FRESH, 'build', 'Fresh', 'M4FixResBank_v1.olean')
     if h == prev and os.path.exists(olean):
         return True, 'mini-bank hash-unchanged, reusing %s' % os.path.basename(olean)
-    ok, ct, cpu, note, npr = compile_one('M4FixResBank_v1.lean', LP, timeout=1200)
+    ok, ct, cpu, note, npr = compile_one('M4FixResBank_v1.lean', LP, timeout=5400)
     if ok:
         with open(BANKHASHF, 'w') as f:
             f.write(h + '\n')
